@@ -3,7 +3,7 @@ import { getAwakenerIdentityKey } from '../../domain/awakener-identity'
 import { DEFAULT_TEAM_RULES_CONFIG, exceedsFactionLimitForTeam } from '../../domain/team-rules'
 import type { TeamSlot } from './types'
 
-export type TeamStateViolationCode = 'TOO_MANY_FACTIONS_IN_TEAM'
+export type TeamStateViolationCode = 'TOO_MANY_FACTIONS_IN_TEAM' | 'INVALID_BUILD_RULES'
 
 export type TeamStateUpdateResult = {
   nextSlots: TeamSlot[]
@@ -55,6 +55,7 @@ export function assignAwakenerToSlot(
         awakenerName,
         faction: awakener.faction,
         level: slot.level ?? 60,
+        isSupport: slot.isSupport,
         wheels: [null, null] as [null, null],
         covenantId: undefined,
       }
@@ -66,6 +67,7 @@ export function assignAwakenerToSlot(
         awakenerName: undefined,
         faction: undefined,
         level: undefined,
+        isSupport: undefined,
         wheels: [null, null] as [null, null],
         covenantId: undefined,
       }
@@ -130,6 +132,7 @@ export function swapSlotAssignments(
         awakenerName: targetSlot.awakenerName,
         faction: targetSlot.faction,
         level: targetSlot.level,
+        isSupport: targetSlot.isSupport,
         wheels: [...targetSlot.wheels] as [string | null, string | null],
         covenantId: targetSlot.covenantId,
       }
@@ -141,6 +144,7 @@ export function swapSlotAssignments(
         awakenerName: sourceSlot.awakenerName,
         faction: sourceSlot.faction,
         level: sourceSlot.level,
+        isSupport: sourceSlot.isSupport,
         wheels: [...sourceSlot.wheels] as [string | null, string | null],
         covenantId: sourceSlot.covenantId,
       }
@@ -233,6 +237,7 @@ export function clearSlotAssignment(currentSlots: TeamSlot[], slotId: string): T
       awakenerName: undefined,
       faction: undefined,
       level: undefined,
+      isSupport: undefined,
       wheels: [null, null] as [null, null],
       covenantId: undefined,
     }

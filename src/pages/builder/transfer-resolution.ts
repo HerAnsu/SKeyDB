@@ -9,6 +9,7 @@ import {
   type TeamStateViolationCode,
   swapSlotAssignments,
 } from './team-state'
+import { validateBuilderTeams } from './team-validation'
 import type { Team } from './types'
 import type { PendingTransfer } from './useTransferConfirm'
 
@@ -20,6 +21,31 @@ function asFactionMembers(slots: Team['slots']) {
 
 function violatesFactionCap(slots: Team['slots']) {
   return exceedsFactionLimitForTeam(asFactionMembers(slots), DEFAULT_TEAM_RULES_CONFIG.maxFactionsPerTeam)
+}
+
+function withSupportSlot(slots: Team['slots'], supportSlotId: string): Team['slots'] {
+  return slots.map((slot) => ({
+    ...slot,
+    isSupport: slot.slotId === supportSlotId ? true : undefined,
+  }))
+}
+
+function findAssignedAwakenerSlotId(
+  previousSlots: Team['slots'],
+  nextSlots: Team['slots'],
+  awakenerName: string,
+): string | null {
+  const previousById = new Map(previousSlots.map((slot) => [slot.slotId, slot]))
+  for (const slot of nextSlots) {
+    if (slot.awakenerName !== awakenerName) {
+      continue
+    }
+    const previousSlot = previousById.get(slot.slotId)
+    if (previousSlot?.awakenerName !== awakenerName) {
+      return slot.slotId
+    }
+  }
+  return nextSlots.find((slot) => slot.awakenerName === awakenerName)?.slotId ?? null
 }
 
 export function applyPendingTransfer(teams: Team[], pendingTransfer: PendingTransfer): Team[] {
@@ -115,12 +141,63 @@ export function applyPendingTransfer(teams: Team[], pendingTransfer: PendingTran
   })
 }
 
+export function applySupportTransfer(teams: Team[], pendingTransfer: PendingTransfer): Team[] {
+  if (pendingTransfer.kind !== 'awakener') {
+    return teams
+  }
+
+  const toTeam = teams.find((team) => team.id === pendingTransfer.toTeamId)
+  if (!toTeam) {
+    return teams
+  }
+
+  const assignResult = pendingTransfer.targetSlotId
+    ? assignAwakenerToSlot(
+        toTeam.slots,
+        pendingTransfer.awakenerName,
+        pendingTransfer.targetSlotId,
+        awakenerByName,
+        { allowDuplicateIdentity: true },
+      )
+    : assignAwakenerToFirstEmptySlot(toTeam.slots, pendingTransfer.awakenerName, awakenerByName, {
+        allowDuplicateIdentity: true,
+      })
+  if (assignResult.violation || assignResult.nextSlots === toTeam.slots) {
+    return teams
+  }
+
+  const supportSlotId =
+    pendingTransfer.targetSlotId ??
+    findAssignedAwakenerSlotId(toTeam.slots, assignResult.nextSlots, pendingTransfer.awakenerName)
+  if (!supportSlotId) {
+    return teams
+  }
+
+  const nextSupportSlots = withSupportSlot(assignResult.nextSlots, supportSlotId).map((slot) =>
+    slot.slotId === supportSlotId ? { ...slot, level: 90 } : slot,
+  )
+
+  if (violatesFactionCap(nextSupportSlots)) {
+    return teams
+  }
+
+  return teams.map((team) =>
+    team.id === toTeam.id
+      ? {
+          ...team,
+          slots: nextSupportSlots,
+        }
+      : team,
+  )
+}
+
 export function swapTeamSlotTransfer(
   teams: Team[],
   sourceTeamId: string,
   sourceSlotId: string,
   targetTeamId: string,
   targetSlotId: string,
+  options?: { allowDupes?: boolean },
 ): { nextTeams: Team[]; violation?: TeamStateViolationCode } {
   const sourceTeam = teams.find((team) => team.id === sourceTeamId)
   const targetTeam = teams.find((team) => team.id === targetTeamId)
@@ -149,6 +226,7 @@ export function swapTeamSlotTransfer(
           awakenerName: targetSlot.awakenerName,
           faction: targetSlot.faction,
           level: targetSlot.level,
+          isSupport: targetSlot.isSupport,
           wheels: [...targetSlot.wheels] as [string | null, string | null],
           covenantId: targetSlot.covenantId,
         }
@@ -161,6 +239,7 @@ export function swapTeamSlotTransfer(
           awakenerName: sourceSlot.awakenerName,
           faction: sourceSlot.faction,
           level: sourceSlot.level,
+          isSupport: sourceSlot.isSupport,
           wheels: [...sourceSlot.wheels] as [string | null, string | null],
           covenantId: sourceSlot.covenantId,
         }
@@ -174,8 +253,7 @@ export function swapTeamSlotTransfer(
     }
   }
 
-  return {
-    nextTeams: teams.map((team) => {
+  const nextTeams = teams.map((team) => {
       if (team.id === sourceTeamId) {
         return { ...team, slots: nextSourceSlots }
       }
@@ -183,7 +261,20 @@ export function swapTeamSlotTransfer(
         return { ...team, slots: nextTargetSlots }
       }
       return team
-    }),
+    })
+
+  if (!options?.allowDupes) {
+    const validation = validateBuilderTeams(nextTeams, { allowDupes: false })
+    if (!validation.isValid) {
+      return {
+        nextTeams: teams,
+        violation: 'INVALID_BUILD_RULES',
+      }
+    }
+  }
+
+  return {
+    nextTeams,
   }
 }
 

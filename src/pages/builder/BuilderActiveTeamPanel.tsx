@@ -89,13 +89,19 @@ export function BuilderActiveTeamPanel({
             onCovenantSlotClick={onCovenantSlotClick}
             onRemoveActiveSelection={() => onRemoveActiveSelection(slot.slotId)}
             onWheelSlotClick={onWheelSlotClick}
-            awakenerLevel={slot.awakenerName ? (awakenerLevelByName.get(slot.awakenerName) ?? 60) : 60}
+            awakenerLevel={
+              slot.awakenerName
+                ? slot.isSupport
+                  ? 90
+                  : (awakenerLevelByName.get(slot.awakenerName) ?? 60)
+                : 60
+            }
             awakenerOwnedLevel={
-              slot.awakenerName ? (ownedAwakenerLevelByName.get(slot.awakenerName) ?? null) : null
+              slot.awakenerName ? (slot.isSupport ? 15 : (ownedAwakenerLevelByName.get(slot.awakenerName) ?? null)) : null
             }
             wheelOwnedLevels={[
-              slot.wheels[0] ? (ownedWheelLevelById.get(slot.wheels[0]) ?? null) : null,
-              slot.wheels[1] ? (ownedWheelLevelById.get(slot.wheels[1]) ?? null) : null,
+              slot.wheels[0] ? (slot.isSupport ? 15 : (ownedWheelLevelById.get(slot.wheels[0]) ?? null)) : null,
+              slot.wheels[1] ? (slot.isSupport ? 15 : (ownedWheelLevelById.get(slot.wheels[1]) ?? null)) : null,
             ]}
             predictedDropHover={predictedDropHover}
             slot={slot}

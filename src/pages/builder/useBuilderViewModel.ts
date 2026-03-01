@@ -350,7 +350,7 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
     const identityMap = new Map<string, string>()
     teams.forEach((team) => {
       team.slots.forEach((slot) => {
-        if (!slot.awakenerName) {
+        if (!slot.awakenerName || slot.isSupport) {
           return
         }
         const identityKey = getAwakenerIdentityKey(slot.awakenerName)
@@ -376,6 +376,9 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
     const wheelMap = new Map<string, WheelUsageLocation>()
     teams.forEach((team, teamOrder) => {
       team.slots.forEach((slot) => {
+        if (slot.isSupport) {
+          return
+        }
         slot.wheels.forEach((wheelId, wheelIndex) => {
           if (!wheelId || wheelMap.has(wheelId)) {
             return
@@ -386,6 +389,10 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
     })
     return wheelMap
   }, [teams])
+  const hasSupportAwakener = useMemo(
+    () => teams.some((team) => team.slots.some((slot) => slot.isSupport)),
+    [teams],
+  )
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
@@ -562,6 +569,7 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
     teamFactionSet,
     usedAwakenerByIdentityKey,
     usedAwakenerIdentityKeys,
+    hasSupportAwakener,
     usedPosseByTeamOrder,
     usedWheelByTeamOrder,
     resolvedActiveSelection,

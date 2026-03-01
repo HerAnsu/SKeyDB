@@ -10,6 +10,7 @@ export function toTeamPlan(teams: Team[]) {
       .map((slot) => ({
         awakenerId: getAwakenerIdentityKey(slot.awakenerName!),
         faction: slot.faction!,
+        isSupport: slot.isSupport === true,
         wheelIds: slot.wheels.filter((wheelId): wheelId is string => Boolean(wheelId)),
       })),
   }))

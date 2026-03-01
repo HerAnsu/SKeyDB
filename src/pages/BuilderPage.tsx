@@ -101,6 +101,7 @@ export function BuilderPage() {
     teamFactionSet,
     usedAwakenerByIdentityKey,
     usedAwakenerIdentityKeys,
+    hasSupportAwakener,
     usedPosseByTeamOrder,
     usedWheelByTeamOrder,
     resolvedActiveSelection,
@@ -142,6 +143,9 @@ export function BuilderPage() {
 
   function notifyViolation(violation: TeamStateViolationCode | undefined) {
     if (violation !== 'TOO_MANY_FACTIONS_IN_TEAM') {
+      if (violation === 'INVALID_BUILD_RULES') {
+        showToast('Invalid move: this would break duplicate or support team rules.')
+      }
       return
     }
     showToast('Invalid move: a team can only contain up to 2 factions.')
@@ -163,6 +167,7 @@ export function BuilderPage() {
     setActiveTeamSlots,
     teamSlots,
     usedAwakenerByIdentityKey,
+    hasSupportAwakener,
   })
 
   const {
@@ -374,6 +379,7 @@ export function BuilderPage() {
           sourceSlotId,
           previewTarget.teamId,
           previewTarget.slotId,
+          { allowDupes },
         )
         if (result.violation) {
           notifyViolation(result.violation)

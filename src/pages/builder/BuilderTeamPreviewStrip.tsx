@@ -76,6 +76,11 @@ function BuilderTeamSlotPreview({
                 className="pointer-events-none absolute inset-0 z-10 border"
                 style={{ borderColor: getFactionTint(slot.faction) }}
               />
+              {slot.isSupport ? (
+                <span className="builder-team-preview-support-overlay">
+                  <span className="builder-team-preview-support-chip builder-team-preview-support-chip-compact">Support</span>
+                </span>
+              ) : null}
               {!isAwakenerOwned ? <span className="builder-team-preview-unowned-chip">Unowned</span> : null}
             </>
           ) : (
@@ -112,6 +117,7 @@ function BuilderTeamSlotPreview({
               className="pointer-events-none absolute inset-0 z-10 border"
               style={{ borderColor: getFactionTint(slot.faction) }}
             />
+            {slot.isSupport ? <span className="builder-team-preview-support-chip builder-team-preview-support-chip-expanded">Support</span> : null}
             {!isAwakenerOwned ? <span className="builder-team-preview-unowned-chip">Unowned</span> : null}
           </>
         ) : (

@@ -52,7 +52,7 @@ Why next:
 - both are easier to reason about once phase 1 polish is out of the way.
 
 ### Phase 3: Rule/interaction-heavy feature
-5. Support-style duplicate allowance.
+5. Support-style duplicate allowance. [done]
 
 Why later:
 - this is a real rule-contract change, not simple UI.
@@ -142,13 +142,51 @@ Allow direct cross-team replacement interaction instead of forcing remove-then-a
 ### Intent
 Mirror in-game “support”-style exception behavior for one duplicate unit.
 
-### Open design questions
-- Is the duplicate slot global-per-team, global-per-builder, or role-bound?
-- Does it apply only to awakeners, or other identity blockers too?
-- How should import/export represent or reject it before explicit codec support exists?
+### Locked rule contract
+- Support is a slot-level flag on exactly one awakener slot across the entire multi-team build.
+- Support only applies to the awakener slot itself.
+- A support awakener may duplicate an awakener already used in another team.
+- The support slot may also use duplicated wheels from other teams.
+- Normal same-team duplicate rules still apply inside the support team:
+  - the support awakener cannot duplicate an awakener already used in that same team
+  - support wheels cannot duplicate wheels already used elsewhere in that same team
+- Outside the one support slot, normal global duplicate rules stay strict.
+- Removing or unflagging the support slot must return the build to strict legality.
 
-### Recommendation
-- Do not implement until the UX contract is written down in concrete rules first.
+### Locked UX direction
+- Do not fold this into the existing `Allow Dupes` sandbox toggle.
+- When a duplicate awakener placement is blocked under strict rules, and no support slot is currently used, offer a third placement resolution path:
+  - `Use as Support`
+- Choosing that path should:
+  - place the duplicate awakener in the target slot
+  - mark that slot as support
+  - default the slot to high/maxed investment display
+  - leave wheel slots empty by default
+- Support needs a distinct badge:
+  - full builder card: blue support badge
+  - compact/expanded team list previews: shorter `Support` chip/badge
+
+### Data / ownership
+- Model support as `isSupport?: boolean` on `TeamSlot`.
+- Do not create a fake second unit/entity type.
+- “Whaled out” support investment should be derived display behavior, not stored as separate fake ownership state.
+- Domain rule checks must own support legality.
+- Builder UI should only surface the support placement decision and badge state.
+
+### Import / export direction
+- Internal multi-team export preserves support state in `mt1.` by storing the support flag in the slot level byte high bit.
+- Old `mt1.` payloads remain backward-compatible because historical builder levels never used that bit.
+- Do not bump versioning yet unless future slot metadata can no longer fit without making decode ambiguous.
+- Single-team export does not need support metadata.
+- In-game export cannot represent support metadata and should remain unchanged.
+
+### Caveat
+- This is still a real rule-contract change.
+- It touches:
+  - duplicate validation
+  - move/placement resolution UI
+  - builder card/list rendering
+  - internal multi-team codec only if we decide support must persist through export/import now
 
 ## 6) Quick Team Planner Mode
 ### Intent

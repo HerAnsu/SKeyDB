@@ -69,6 +69,7 @@ export function useBuilderWheelActions({
         return
       }
 
+      const targetSlot = teamSlots.find((entry) => entry.slotId === targetSlotId)
       const wheelOwner = allowDupes ? undefined : usedWheelByTeamOrder.get(wheelId)
       if (
         wheelOwner &&
@@ -89,7 +90,7 @@ export function useBuilderWheelActions({
         return
       }
 
-      if (wheelOwner && wheelOwner.teamId !== effectiveActiveTeamId) {
+      if (wheelOwner && wheelOwner.teamId !== effectiveActiveTeamId && !targetSlot?.isSupport) {
         requestWheelTransfer({
           wheelId,
           fromTeamId: wheelOwner.teamId,

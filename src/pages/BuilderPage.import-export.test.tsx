@@ -2,7 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
 import './builder-page.integration-mocks'
 import { BuilderPage } from './BuilderPage'
-import { encodeMultiTeamCode, encodeSingleTeamCode } from '../domain/import-export'
+import { decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode } from '../domain/import-export'
 import type { Team } from './builder/types'
 import { saveBuilderDraft } from './builder/builder-persistence'
 
@@ -201,5 +201,34 @@ describe('BuilderPage import-export', () => {
     fireEvent.click(screen.getByRole('button', { name: /export all/i }))
     const exportDialog = screen.getByRole('dialog', { name: /export all teams/i })
     expect(within(exportDialog).getByText(/reuse units, wheels, or posses/i)).toBeInTheDocument()
+  })
+
+  it('preserves support awakeners in standard multi-team export', () => {
+    saveBuilderDraft(window.localStorage, {
+      teams: [
+        makeImportTeam('Alpha', 'goliath'),
+        {
+          ...makeImportTeam('Beta', 'goliath'),
+          slots: [
+            { slotId: 'slot-1', awakenerName: 'goliath', faction: 'AEQUOR', level: 90, isSupport: true, wheels: [null, null] },
+            { slotId: 'slot-2', wheels: [null, null] },
+            { slotId: 'slot-3', wheels: [null, null] },
+            { slotId: 'slot-4', wheels: [null, null] },
+          ],
+        },
+      ],
+      activeTeamId: 'Alpha-id',
+    })
+    render(<BuilderPage />)
+
+    fireEvent.click(screen.getByRole('button', { name: /export all/i }))
+    const exportDialog = screen.getByRole('dialog', { name: /export all teams/i })
+    const exportCode = within(exportDialog).getByRole('textbox', { name: /export code/i }) as HTMLTextAreaElement
+
+    const parsed = decodeImportCode(exportCode.value)
+    expect(parsed.kind).toBe('multi')
+    if (parsed.kind !== 'multi') return
+    expect(parsed.teams[1].slots[0].isSupport).toBe(true)
+    expect(parsed.teams[1].slots[0].level).toBe(90)
   })
 })

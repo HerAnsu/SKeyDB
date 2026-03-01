@@ -21,6 +21,7 @@ function createHook(options?: {
   resolvedActiveSelection?: ActiveSelection
   usedAwakenerByIdentityKey?: Map<string, string>
   allowDupes?: boolean
+  hasSupportAwakener?: boolean
 }) {
   const setActiveTeamSlots = vi.fn()
   const setActiveSelection = vi.fn()
@@ -43,6 +44,7 @@ function createHook(options?: {
       clearTransfer,
       notifyViolation,
       allowDupes: options?.allowDupes ?? false,
+      hasSupportAwakener: options?.hasSupportAwakener ?? false,
     }),
   )
 
@@ -87,6 +89,24 @@ describe('useBuilderAwakenerActions', () => {
     expect(setActiveTeamSlots).not.toHaveBeenCalled()
     expect(requestAwakenerTransfer).toHaveBeenCalledWith({
       awakenerName: 'Ramona',
+      canUseSupport: true,
+      fromTeamId: 'team-2',
+      toTeamId: 'team-1',
+      targetSlotId: 'slot-2',
+    })
+  })
+
+  it('does not offer support when a support awakener is already used elsewhere in the build', () => {
+    const { actions, requestAwakenerTransfer } = createHook({
+      usedAwakenerByIdentityKey: new Map([['ramona', 'team-2']]),
+      hasSupportAwakener: true,
+    })
+
+    actions.handleDropPickerAwakener('Ramona', 'slot-2')
+
+    expect(requestAwakenerTransfer).toHaveBeenCalledWith({
+      awakenerName: 'Ramona',
+      canUseSupport: false,
       fromTeamId: 'team-2',
       toTeamId: 'team-1',
       targetSlotId: 'slot-2',

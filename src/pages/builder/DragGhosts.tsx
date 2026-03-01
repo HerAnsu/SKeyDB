@@ -70,6 +70,7 @@ export function TeamCardGhost({
       ) : null}
       <div className="builder-card-name-wrap pointer-events-none absolute inset-x-0 top-0 px-2 pt-1 pb-[18%]">
         <p className="builder-card-name builder-card-name-ghost ui-title text-slate-100">{displayName}</p>
+        {slot.isSupport ? <span className="builder-support-badge">Support Awakener</span> : null}
         {awakenerOwnedLevel === null ? <span className="builder-unowned-badge">Unowned</span> : null}
       </div>
       {!removeIntent ? (

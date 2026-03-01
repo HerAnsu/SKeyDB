@@ -1,10 +1,9 @@
 import { getAwakenerIdentityKey } from '../../domain/awakener-identity'
-import { validateTeamPlan } from '../../domain/team-rules'
 import { MAX_TEAMS } from './team-collection'
 import { createEmptyTeamSlots } from './constants'
 import type { Team } from './types'
 import type { DecodedImport } from '../../domain/import-export'
-import { toTeamPlan } from './team-plan'
+import { getNonDuplicateRuleViolations, validateBuilderTeams, validateBuilderTeamsStrict } from './team-validation'
 
 export type ImportConflict = {
   kind: 'awakener' | 'wheel' | 'posse'
@@ -123,14 +122,9 @@ function normalizeImportedTeamName(currentTeams: Team[], preferredName: string):
 }
 
 function validateOrError(teams: Team[], options?: PrepareImportOptions): PreparedImport | null {
-  const strictValidation = validateTeamPlan(toTeamPlan(teams))
+  const strictValidation = validateBuilderTeamsStrict(teams)
   if (!strictValidation.isValid) {
-    const nonDuplicateViolations = strictValidation.violations.filter(
-      (violation) =>
-        violation.code !== 'DUPLICATE_AWAKENER' &&
-        violation.code !== 'DUPLICATE_WHEEL' &&
-        violation.code !== 'DUPLICATE_POSSE',
-    )
+    const nonDuplicateViolations = getNonDuplicateRuleViolations(strictValidation.violations)
     if (nonDuplicateViolations.length > 0) {
       return {
         status: 'error',
@@ -142,11 +136,7 @@ function validateOrError(teams: Team[], options?: PrepareImportOptions): Prepare
     }
   }
 
-  const validation = validateTeamPlan(toTeamPlan(teams), {
-    enforceUniqueAwakeners: !options?.allowDupes,
-    enforceUniqueWheels: !options?.allowDupes,
-    enforceUniquePosses: !options?.allowDupes,
-  })
+  const validation = validateBuilderTeams(teams, { allowDupes: options?.allowDupes })
   if (validation.isValid) {
     return null
   }

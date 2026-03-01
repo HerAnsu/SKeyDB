@@ -1,7 +1,6 @@
 import { useMemo, useState, type Dispatch, type SetStateAction } from 'react'
 import { decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode } from '../../domain/import-export'
 import { encodeIngameTeamCode } from '../../domain/ingame-codec'
-import { validateTeamPlan } from '../../domain/team-rules'
 import {
   applySingleImportStrategy,
   prepareImport,
@@ -9,7 +8,7 @@ import {
   type PreparedImport,
   type SingleImportStrategy,
 } from './import-planner'
-import { toTeamPlan } from './team-plan'
+import { hasDuplicateRuleViolation, validateBuilderTeamsStrict } from './team-validation'
 import type { DecodedImport } from '../../domain/import-export'
 import type { Team, TeamSlot } from './types'
 
@@ -244,13 +243,8 @@ export function useBuilderImportExport({
   }
 
   function getDuplicateExportWarning(exportTeams: Team[]): string | undefined {
-    const validation = validateTeamPlan(toTeamPlan(exportTeams))
-    const hasDuplicateViolation = validation.violations.some(
-      (violation) =>
-        violation.code === 'DUPLICATE_AWAKENER' ||
-        violation.code === 'DUPLICATE_WHEEL' ||
-        violation.code === 'DUPLICATE_POSSE',
-    )
+    const validation = validateBuilderTeamsStrict(exportTeams)
+    const hasDuplicateViolation = hasDuplicateRuleViolation(validation.violations)
     if (!hasDuplicateViolation) {
       return undefined
     }

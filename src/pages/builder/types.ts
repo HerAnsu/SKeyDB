@@ -5,6 +5,7 @@ export type TeamSlot = {
   awakenerName?: string
   faction?: Awakener['faction']
   level?: number
+  isSupport?: boolean
   wheels: [string | null, string | null]
   covenantId?: string
 }
