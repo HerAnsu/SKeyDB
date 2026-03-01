@@ -1,15 +1,31 @@
 [
   {
-    "name": "24",
-    "faction": "CHAOS",
     "id": 1,
-    "rarity": "SSR",
+    "name": "24",
     "aliases": [
       "24",
       "twenty-four"
     ],
-    "tags": [],
+    "faction": "Hybrid",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Arithmetica",
+      "Bleed",
+      "Counter",
+      "Crit",
+      "Embryo Fusion",
+      "Fixed DMG",
+      "Hand Limit",
+      "Keyflare",
+      "Pierce DMG",
+      "Poison",
+      "STR Down",
+      "Tentacles",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "149",
       "ATK": "189",
@@ -90,15 +106,21 @@
     }
   },
   {
-    "name": "agrippa",
-    "faction": "CARO",
     "id": 2,
-    "rarity": "SSR",
+    "name": "agrippa",
     "aliases": [
       "agrippa"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Draw",
+      "Embryo Fusion",
+      "Poison",
+      "STR Up"
+    ],
     "stats": {
       "CON": "132",
       "ATK": "112",
@@ -179,15 +201,22 @@
     }
   },
   {
-    "name": "aigis",
-    "faction": "CARO",
     "id": 3,
-    "rarity": "SSR",
+    "name": "aigis",
     "aliases": [
       "aigis"
     ],
-    "tags": [],
+    "faction": "Hybrid",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Draw",
+      "Embryo Fusion",
+      "Keyflare",
+      "Stun",
+      "Vulnerability"
+    ],
     "stats": {
       "CON": "100",
       "ATK": "120",
@@ -268,15 +297,25 @@
     }
   },
   {
-    "name": "alva",
-    "faction": "CHAOS",
     "id": 4,
-    "rarity": "SSR",
+    "name": "alva",
     "aliases": [
       "alva"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Crit",
+      "Death Resistance",
+      "Discard",
+      "Dispel",
+      "Draw",
+      "Sealed",
+      "Strike",
+      "Vulnerability"
+    ],
     "stats": {
       "CON": "120",
       "ATK": "128",
@@ -320,7 +359,7 @@
     "exalts": {
       "exalt": {
         "name": "Endless Justice",
-        "description": "Gain (50/60/70/80/90/100% {DEF}) Shield. Discard all State and Symptom cards from hand, then draw cards equal to the amount discarded.Inflict 1 stack of {Vulnerable} to all enemies."
+        "description": "Gain (50/60/70/80/90/100% {DEF}) Shield. Discard all State and Symptom cards from hand, then draw cards equal to the amount discarded. Inflict 1 stack of {Vulnerable} to all enemies."
       },
       "over_exalt": {
         "name": "Justice and Truth",
@@ -357,15 +396,21 @@
     }
   },
   {
-    "name": "aurita",
-    "faction": "AEQUOR",
     "id": 5,
-    "rarity": "SSR",
+    "name": "aurita",
     "aliases": [
       "aurita"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Aftershock",
+      "Discard",
+      "Draw",
+      "Pierce DMG"
+    ],
     "stats": {
       "CON": "96",
       "ATK": "104",
@@ -446,15 +491,23 @@
     }
   },
   {
-    "name": "caecus",
-    "faction": "AEQUOR",
     "id": 6,
-    "rarity": "SSR",
+    "name": "caecus",
     "aliases": [
       "caecus"
     ],
-    "tags": [],
+    "faction": "Hybrid",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Counter",
+      "Dispel",
+      "Heal",
+      "Strike",
+      "Tentacles",
+      "Vulnerability"
+    ],
     "stats": {
       "CON": "156",
       "ATK": "124",
@@ -535,15 +588,23 @@
     }
   },
   {
-    "name": "casiah",
-    "faction": "ULTRA",
     "id": 7,
-    "rarity": "SSR",
+    "name": "casiah",
     "aliases": [
       "casiah"
     ],
-    "tags": [],
+    "faction": "The Unknowable",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Aftershock",
+      "Arithmetica",
+      "Discard",
+      "Draw",
+      "Strike",
+      "STR Up"
+    ],
     "stats": {
       "CON": "108",
       "ATK": "112",
@@ -587,7 +648,7 @@
     "exalts": {
       "exalt": {
         "name": "Magic Carnival",
-        "description": "Deal (45/54/63/72/81/90% {ATK}) DMG to all enemies.Draw 3 cards. For each Casiah Command Card drawn this way, deal (45/54/63/72/81/90% {ATK}) DMG to a random enemy."
+        "description": "Deal (45/54/63/72/81/90% {ATK}) DMG to all enemies. Draw 3 cards. For each Casiah Command Card drawn this way, deal (45/54/63/72/81/90% {ATK}) DMG to a random enemy."
       },
       "over_exalt": {
         "name": "Unfettered Mirth",
@@ -624,15 +685,21 @@
     }
   },
   {
-    "name": "castor",
-    "faction": "ULTRA",
     "id": 8,
-    "rarity": "SSR",
+    "name": "castor",
     "aliases": [
       "castor"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Crit",
+      "Draw",
+      "Quasar",
+      "Weakness"
+    ],
     "stats": {
       "CON": "149",
       "ATK": "135",
@@ -685,7 +752,7 @@
       },
       "over_exalt": {
         "name": "Over the Sea of Thorns",
-        "description": "Add 3 additional {Onyx Plume} to your hand. For the rest of this turn, increase the amount of Shield retained by \"Onyx Plume\" by 10% of Castor's {DEF}, and each time you play an {Onyx Plume} card, additionally inflict 140% of Castor's {ATK} as stacks of {Corrosion}."
+        "description": "Add 3 additional {Onyx Plume} to your hand. For the rest of this turn, increase the amount of Shield retained by {Onyx Plume} by 10% of Castor's {DEF}, and each time you play an {Onyx Plume} card, additionally inflict 140% of Castor's {ATK} as stacks of {Corrosion}."
       }
     },
     "talents": {
@@ -718,15 +785,24 @@
     }
   },
   {
-    "name": "celeste",
-    "faction": "AEQUOR",
     "id": 9,
-    "rarity": "SSR",
+    "name": "celeste",
     "aliases": [
       "celeste"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Dispel",
+      "Heal",
+      "Stagnation",
+      "Tentacles",
+      "Weakness",
+      "Blighten"
+    ],
     "stats": {
       "CON": "80",
       "ATK": "76",
@@ -770,7 +846,7 @@
     "exalts": {
       "exalt": {
         "name": "Undying Bird of Paradise",
-        "description": "Dispel Blighten from self. Heal (50/60/70/80/90/100% {CON}) HP.Gain 1 Arithmetica.Upon recieving lethal DMG during this battle, instead restore (20/21/22/23/24/25%) HP. This effect can only be activated once per battle."
+        "description": "Dispel {Blighten} from self. Heal (50/60/70/80/90/100% {CON}) HP. Gain 1 Arithmetica.Upon recieving lethal DMG during this battle, instead restore (20/21/22/23/24/25%) HP. This effect can only be activated once per battle."
       },
       "over_exalt": {
         "name": "Divine Vigil",
@@ -807,15 +883,24 @@
     }
   },
   {
-    "name": "clementine",
-    "faction": "ULTRA",
     "id": 10,
-    "rarity": "SSR",
+    "name": "clementine",
     "aliases": [
       "clementine"
     ],
-    "tags": [],
+    "faction": "The Unknowable",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Bleed",
+      "Crit",
+      "Dispel",
+      "Keyflare",
+      "Quasar",
+      "STR Down",
+      "STR Up"
+    ],
     "stats": {
       "CON": "129",
       "ATK": "152",
@@ -896,15 +981,27 @@
     }
   },
   {
-    "name": "corposant",
-    "faction": "AEQUOR",
     "id": 11,
-    "rarity": "SSR",
+    "name": "corposant",
     "aliases": [
       "corposant"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Aftershock",
+      "Crit",
+      "Death Resistance",
+      "Discard",
+      "Draw",
+      "STR Up",
+      "Strike",
+      "Tentacles",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "144*",
       "ATK": "126*",
@@ -990,15 +1087,30 @@
     }
   },
   {
-    "name": "daffodil",
-    "faction": "ULTRA",
     "id": 12,
-    "rarity": "SSR",
+    "name": "daffodil",
     "aliases": [
       "daffodil"
     ],
-    "tags": [],
+    "faction": "The Unknowable",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Arithmetica",
+      "Counter",
+      "Crit",
+      "Draw",
+      "Fragile",
+      "Keyflare",
+      "Pierce DMG",
+      "Poison",
+      "STR Down",
+      "STR Up",
+      "Strike",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "140",
       "ATK": "176",
@@ -1079,15 +1191,21 @@
     }
   },
   {
-    "name": "doll",
-    "faction": "CHAOS",
     "id": 13,
-    "rarity": "SR",
+    "name": "doll",
     "aliases": [
       "doll"
     ],
-    "tags": [],
+    "faction": "Among the Stars",
+    "realm": "CHAOS",
+    "rarity": "SR",
     "type": "ASSIST",
+    "tags": [
+      "Discard",
+      "Dispel",
+      "Heal",
+      "Weakness"
+    ],
     "stats": {
       "CON": "88",
       "ATK": "72",
@@ -1168,16 +1286,29 @@
     }
   },
   {
-    "name": "doll: inferno",
-    "faction": "CHAOS",
     "id": 18,
-    "rarity": "Genesis",
+    "name": "doll: inferno",
     "aliases": [
       "doll: inferno",
       "g-doll"
     ],
-    "tags": [],
+    "faction": "Among the Stars",
+    "realm": "CHAOS",
+    "rarity": "Genesis",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Counter",
+      "Draw",
+      "Fixed DMG",
+      "Heal",
+      "Max HP DMG",
+      "Poison",
+      "STR Down",
+      "Self-Harm",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "99",
       "ATK": "81",
@@ -1263,15 +1394,22 @@
     }
   },
   {
-    "name": "doresain",
-    "faction": "CARO",
     "id": 14,
-    "rarity": "SSR",
+    "name": "doresain",
     "aliases": [
       "doresain"
     ],
-    "tags": [],
+    "faction": "Out of the Aeons",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Crit",
+      "Pierce DMG",
+      "STR Up",
+      "Self-Harm",
+      "Vulnerability"
+    ],
     "stats": {
       "CON": "149",
       "ATK": "158",
@@ -1361,15 +1499,24 @@
     }
   },
   {
-    "name": "erica",
-    "faction": "ULTRA",
     "id": 15,
-    "rarity": "SSR",
+    "name": "erica",
     "aliases": [
       "erica"
     ],
-    "tags": [],
+    "faction": "Hybrid",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Crit",
+      "Dispel",
+      "Fragile",
+      "Keyflare",
+      "STR Up",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "148",
       "ATK": "144",
@@ -1455,15 +1602,25 @@
     }
   },
   {
-    "name": "faint",
-    "faction": "CARO",
     "id": 16,
-    "rarity": "SSR",
+    "name": "faint",
     "aliases": [
       "faint"
     ],
-    "tags": [],
+    "faction": "Among the Stars",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Counter",
+      "Death Resistance",
+      "Dispel",
+      "Fixed DMG",
+      "Fragile",
+      "Heal",
+      "STR Down",
+      "Weakness"
+    ],
     "stats": {
       "CON": "104",
       "ATK": "80",
@@ -1544,15 +1701,23 @@
     }
   },
   {
-    "name": "faros",
-    "faction": "AEQUOR",
     "id": 17,
-    "rarity": "SSR",
+    "name": "faros",
     "aliases": [
       "faros"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Dispel",
+      "Draw",
+      "Hand Limit",
+      "Poison",
+      "Tentacles"
+    ],
     "stats": {
       "CON": "96",
       "ATK": "104",
@@ -1633,15 +1798,20 @@
     }
   },
   {
-    "name": "goliath",
-    "faction": "AEQUOR",
     "id": 21,
-    "rarity": "SSR",
+    "name": "goliath",
     "aliases": [
       "goliath"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Crit",
+      "STR Up",
+      "Strike"
+    ],
     "stats": {
       "CON": "164",
       "ATK": "160",
@@ -1727,15 +1897,22 @@
     }
   },
   {
-    "name": "hameln",
-    "faction": "CHAOS",
     "id": 22,
-    "rarity": "SSR",
+    "name": "hameln",
     "aliases": [
       "hameln"
     ],
-    "tags": [],
+    "faction": "The Unknowable",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Pierce DMG",
+      "STR Down",
+      "STR Up"
+    ],
     "stats": {
       "CON": "135",
       "ATK": "140",
@@ -1821,15 +1998,25 @@
     }
   },
   {
-    "name": "helot",
-    "faction": "CARO",
     "id": 23,
-    "rarity": "SSR",
+    "name": "helot",
     "aliases": [
       "helot"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Bleed",
+      "Crit",
+      "Discard",
+      "Draw",
+      "Hand Limit",
+      "STR Up",
+      "Self-Harm",
+      "Strike"
+    ],
     "stats": {
       "CON": "140",
       "ATK": "136",
@@ -1910,16 +2097,25 @@
     }
   },
   {
-    "name": "helot: catena",
-    "faction": "CARO",
     "id": 19,
-    "rarity": "Genesis",
+    "name": "helot: catena",
     "aliases": [
       "helot: catena",
       "g-helot"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "CARO",
+    "rarity": "Genesis",
     "type": "ATTACK",
+    "tags": [
+      "Bleed",
+      "Crit",
+      "Draw",
+      "Hand Limit",
+      "Heal",
+      "Self-Harm",
+      "Strike"
+    ],
     "stats": {
       "CON": "158",
       "ATK": "153",
@@ -2010,15 +2206,26 @@
     }
   },
   {
-    "name": "horla",
-    "faction": "ULTRA",
     "id": 24,
-    "rarity": "SSR",
+    "name": "horla",
     "aliases": [
       "horla"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Counter",
+      "Crit",
+      "Death Resistance",
+      "Heal",
+      "Poison",
+      "STR Down",
+      "STR Up",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "104",
       "ATK": "108",
@@ -2099,15 +2306,20 @@
     }
   },
   {
-    "name": "jenkins",
-    "faction": "ULTRA",
     "id": 25,
-    "rarity": "SSR",
+    "name": "jenkins",
     "aliases": [
       "jenkins"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Crit",
+      "Draw",
+      "Strike"
+    ],
     "stats": {
       "CON": "100",
       "ATK": "140",
@@ -2193,15 +2405,26 @@
     }
   },
   {
-    "name": "karen",
-    "faction": "CHAOS",
     "id": 26,
-    "rarity": "SSR",
+    "name": "karen",
     "aliases": [
       "karen"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Dispel",
+      "Draw",
+      "Heal",
+      "Keyflare",
+      "Poison",
+      "Stagnation",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "112",
       "ATK": "96",
@@ -2287,16 +2510,24 @@
     }
   },
   {
-    "name": "kathigu-ra",
-    "faction": "CHAOS",
     "id": 27,
-    "rarity": "SSR",
+    "name": "kathigu-ra",
     "aliases": [
       "kathigu-ra",
       "kathigura"
     ],
-    "tags": [],
+    "faction": "Among the Stars",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Discard",
+      "Dispel",
+      "Draw",
+      "Pierce DMG",
+      "STR Up",
+      "Strike"
+    ],
     "stats": {
       "CON": "140",
       "ATK": "167",
@@ -2382,15 +2613,24 @@
     }
   },
   {
-    "name": "leigh",
-    "faction": "CARO",
     "id": 28,
-    "rarity": "SSR",
+    "name": "leigh",
     "aliases": [
       "leigh"
     ],
-    "tags": [],
+    "faction": "Hybrid",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Crit",
+      "Dispel",
+      "Embryo Fusion",
+      "Heal",
+      "Pierce DMG",
+      "STR Up",
+      "Self-Harm"
+    ],
     "stats": {
       "CON": "72",
       "ATK": "72",
@@ -2471,15 +2711,22 @@
     }
   },
   {
-    "name": "lily",
-    "faction": "CHAOS",
     "id": 29,
-    "rarity": "SSR",
+    "name": "lily",
     "aliases": [
       "lily"
     ],
-    "tags": [],
+    "faction": "Hybrid",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Crit",
+      "Death Resistance",
+      "Heal",
+      "Poison",
+      "Strike"
+    ],
     "stats": {
       "CON": "162",
       "ATK": "117",
@@ -2560,15 +2807,22 @@
     }
   },
   {
-    "name": "liz",
-    "faction": "ULTRA",
     "id": 30,
-    "rarity": "SSR",
+    "name": "liz",
     "aliases": [
       "liz"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Discard",
+      "Draw",
+      "Pierce DMG",
+      "Poison",
+      "STR Up"
+    ],
     "stats": {
       "CON": "108",
       "ATK": "148",
@@ -2659,15 +2913,21 @@
     }
   },
   {
-    "name": "lotan",
-    "faction": "CHAOS",
     "id": 31,
-    "rarity": "SR",
+    "name": "lotan",
     "aliases": [
       "lotan"
     ],
-    "tags": [],
+    "faction": "Out of the Aeons",
+    "realm": "CHAOS",
+    "rarity": "SR",
     "type": "ATTACK",
+    "tags": [
+      "Dispel",
+      "Fixed DMG",
+      "Max HP DMG",
+      "Strike"
+    ],
     "stats": {
       "CON": "128",
       "ATK": "132",
@@ -2748,15 +3008,27 @@
     }
   },
   {
-    "name": "miryam",
-    "faction": "AEQUOR",
     "id": 32,
-    "rarity": "SSR",
+    "name": "miryam",
     "aliases": [
       "miryam"
     ],
-    "tags": [],
+    "faction": "Out of the Aeons",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Draw",
+      "Heal",
+      "Pierce DMG",
+      "Poison",
+      "STR Up",
+      "Tentacles",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "95",
       "ATK": "149",
@@ -2857,15 +3129,21 @@
     }
   },
   {
-    "name": "mouchette",
-    "faction": "CHAOS",
     "id": 33,
-    "rarity": "SSR",
+    "name": "mouchette",
     "aliases": [
       "mouchette"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Crit",
+      "Death Resistance",
+      "Strike",
+      "Stun"
+    ],
     "stats": {
       "CON": "126",
       "ATK": "149",
@@ -2946,15 +3224,24 @@
     }
   },
   {
-    "name": "murphy",
-    "faction": "AEQUOR",
     "id": 34,
-    "rarity": "SSR",
+    "name": "murphy",
     "aliases": [
       "murphy"
     ],
-    "tags": [],
+    "faction": "Hybrid",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Arithmetica",
+      "Aftershock",
+      "Keyflare",
+      "Strike",
+      "Tentacles",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "131",
       "ATK": "140",
@@ -3035,16 +3322,25 @@
     }
   },
   {
-    "name": "murphy: fauxborn",
-    "faction": "AEQUOR",
     "id": 35,
-    "rarity": "Genesis",
+    "name": "murphy: fauxborn",
     "aliases": [
       "murphy: fauxborn",
       "g-murphy"
     ],
-    "tags": [],
+    "faction": "Out of the Aeons",
+    "realm": "AEQUOR",
+    "rarity": "Genesis",
     "type": "ASSIST",
+    "tags": [
+      "Aftershock",
+      "Arithmetica",
+      "Crit",
+      "Draw",
+      "Keyflare",
+      "Strike",
+      "Tentacles"
+    ],
     "stats": {
       "CON": "99",
       "ATK": "122",
@@ -3125,15 +3421,21 @@
     }
   },
   {
-    "name": "nautila",
-    "faction": "CHAOS",
     "id": 36,
-    "rarity": "SSR",
+    "name": "nautila",
     "aliases": [
       "nautila"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Dispel",
+      "Counter",
+      "Fixed DMG",
+      "Fragile"
+    ],
     "stats": {
       "CON": "152",
       "ATK": "92",
@@ -3214,15 +3516,20 @@
     }
   },
   {
-    "name": "nymphaea",
-    "faction": "CHAOS",
     "id": 37,
-    "rarity": "SSR",
+    "name": "nymphaea",
     "aliases": [
       "nymphaea"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Poison",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "76",
       "ATK": "120",
@@ -3303,15 +3610,23 @@
     }
   },
   {
-    "name": "ogier",
-    "faction": "CHAOS",
     "id": 38,
-    "rarity": "SR",
+    "name": "ogier",
     "aliases": [
       "ogier"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "CHAOS",
+    "rarity": "SR",
     "type": "DEFENSE",
+    "tags": [
+      "Dispel",
+      "Fragile",
+      "Pierce DMG",
+      "STR Up",
+      "Strike",
+      "Vulnerability"
+    ],
     "stats": {
       "CON": "136",
       "ATK": "116",
@@ -3392,15 +3707,20 @@
     }
   },
   {
-    "name": "pandia",
-    "faction": "CHAOS",
     "id": 39,
-    "rarity": "SSR",
+    "name": "pandia",
     "aliases": [
       "pandia"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Counter",
+      "Crit",
+      "Vulnerability"
+    ],
     "stats": {
       "CON": "120",
       "ATK": "140",
@@ -3481,15 +3801,23 @@
     }
   },
   {
-    "name": "pickman",
-    "faction": "CARO",
     "id": 40,
-    "rarity": "SSR",
+    "name": "pickman",
     "aliases": [
       "pickman"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Draw",
+      "Embryo Fusion",
+      "STR Down",
+      "STR Up"
+    ],
     "stats": {
       "CON": "144",
       "ATK": "131",
@@ -3570,15 +3898,20 @@
     }
   },
   {
-    "name": "pollux",
-    "faction": "ULTRA",
     "id": 41,
-    "rarity": "SSR",
+    "name": "pollux",
     "aliases": [
       "pollux"
     ],
-    "tags": [],
+    "faction": "Hybrid",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Bleed",
+      "Discard",
+      "Draw"
+    ],
     "stats": {
       "CON": "140",
       "ATK": "158",
@@ -3664,15 +3997,24 @@
     }
   },
   {
-    "name": "ramona",
-    "faction": "CHAOS",
     "id": 42,
-    "rarity": "SR",
+    "name": "ramona",
     "aliases": [
       "ramona"
     ],
-    "tags": [],
+    "faction": "The Unknowable",
+    "realm": "CHAOS",
+    "rarity": "SR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Discard",
+      "Draw",
+      "Keyflare",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "120",
       "ATK": "120",
@@ -3716,7 +4058,7 @@
     "exalts": {
       "exalt": {
         "name": "Mundus Decree",
-        "description": "Gain (100/120/140/160/180/200) {Keyflare}.Choose a card from the Draw Pile or Discard Pile and add it to your hand, reducing its Arithmetica Cost to 0."
+        "description": "Gain (100/120/140/160/180/200) {Keyflare}. Choose a card from the Draw Pile or Discard Pile and add it to your hand, reducing its Arithmetica Cost to 0."
       },
       "over_exalt": {
         "name": "Labyrinth of Thought",
@@ -3753,16 +4095,22 @@
     }
   },
   {
-    "name": "ramona: timeworn",
-    "faction": "CHAOS",
     "id": 20,
-    "rarity": "Genesis",
+    "name": "ramona: timeworn",
     "aliases": [
       "ramona: timeworn",
       "g-ramona"
     ],
-    "tags": [],
+    "faction": "The Unknowable",
+    "realm": "CHAOS",
+    "rarity": "Genesis",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Draw",
+      "Keyflare"
+    ],
     "stats": {
       "CON": "120",
       "ATK": "120",
@@ -3843,15 +4191,24 @@
     }
   },
   {
-    "name": "ryker",
-    "faction": "CHAOS",
     "id": 43,
-    "rarity": "SSR",
+    "name": "ryker",
     "aliases": [
       "ryker"
     ],
-    "tags": [],
+    "faction": "The Fools",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Draw",
+      "Keyflare",
+      "STR Up",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "180",
       "ATK": "149",
@@ -3932,15 +4289,25 @@
     }
   },
   {
-    "name": "salvador",
-    "faction": "CARO",
     "id": 44,
-    "rarity": "SSR",
+    "name": "salvador",
     "aliases": [
       "salvador"
     ],
-    "tags": [],
+    "faction": "Out of the Aeons",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Crit",
+      "Embryo Fusion",
+      "Heal",
+      "STR Up",
+      "Self-Harm",
+      "Strike",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "189",
       "ATK": "122",
@@ -4021,15 +4388,23 @@
     }
   },
   {
-    "name": "sanga",
-    "faction": "AEQUOR",
     "id": 45,
-    "rarity": "SSR",
+    "name": "sanga",
     "aliases": [
       "sanga"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Aftershock",
+      "Crit",
+      "Death Resistance",
+      "Dispel",
+      "Fragile",
+      "Tentacles"
+    ],
     "stats": {
       "CON": "128",
       "ATK": "100",
@@ -4110,15 +4485,23 @@
     }
   },
   {
-    "name": "sorel",
-    "faction": "CARO",
     "id": 46,
-    "rarity": "SSR",
+    "name": "sorel",
     "aliases": [
       "sorel"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Crit",
+      "Death Resistance",
+      "Embryo Fusion",
+      "Heal",
+      "STR Up",
+      "Self-Harm"
+    ],
     "stats": {
       "CON": "131",
       "ATK": "185",
@@ -4199,15 +4582,27 @@
     }
   },
   {
-    "name": "tawil",
-    "faction": "CHAOS",
     "id": 47,
-    "rarity": "SSR",
+    "name": "tawil",
     "aliases": [
       "tawil"
     ],
-    "tags": [],
+    "faction": "Gateway",
+    "realm": "CHAOS",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Discard",
+      "Draw",
+      "Fixed DMG",
+      "Heal",
+      "Keyflare",
+      "Max HP DMG",
+      "Pierce DMG",
+      "STR Down"
+    ],
     "stats": {
       "CON": "135",
       "ATK": "135",
@@ -4303,15 +4698,26 @@
     }
   },
   {
-    "name": "thais",
-    "faction": "CARO",
     "id": 48,
-    "rarity": "SSR",
+    "name": "thais",
     "aliases": [
       "thais"
     ],
-    "tags": [],
+    "faction": "Out of the Aeons",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Bleed",
+      "Counter",
+      "Embryo Fusion",
+      "Keyflare",
+      "Poison",
+      "STR Up",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "140",
       "ATK": "135",
@@ -4392,15 +4798,26 @@
     }
   },
   {
-    "name": "tinct",
-    "faction": "ULTRA",
     "id": 49,
-    "rarity": "SSR",
+    "name": "tinct",
     "aliases": [
       "tinct"
     ],
-    "tags": [],
+    "faction": "Among the Stars",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Dispel",
+      "Draw",
+      "Fragile",
+      "STR Down",
+      "Strike",
+      "Vulnerability",
+      "Weakness"
+    ],
     "stats": {
       "CON": "104",
       "ATK": "96",
@@ -4481,15 +4898,24 @@
     }
   },
   {
-    "name": "tulu",
-    "faction": "AEQUOR",
     "id": 50,
-    "rarity": "SSR",
+    "name": "tulu",
     "aliases": [
       "tulu"
     ],
-    "tags": [],
+    "faction": "Out of the Aeons",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Aftershock",
+      "Crit",
+      "Dispel",
+      "Pierce DMG",
+      "STR Down",
+      "STR Up",
+      "Tentacles"
+    ],
     "stats": {
       "CON": "153",
       "ATK": "171",
@@ -4570,15 +4996,21 @@
     }
   },
   {
-    "name": "uvhash",
-    "faction": "CARO",
     "id": 51,
-    "rarity": "SSR",
+    "name": "uvhash",
     "aliases": [
       "uvhash"
     ],
-    "tags": [],
+    "faction": "Outlanders",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ATTACK",
+    "tags": [
+      "Crit",
+      "STR Up",
+      "Sealed",
+      "Self-Harm"
+    ],
     "stats": {
       "CON": "144",
       "ATK": "136",
@@ -4659,15 +5091,21 @@
     }
   },
   {
-    "name": "wanda",
-    "faction": "ULTRA",
     "id": 52,
-    "rarity": "SSR",
+    "name": "wanda",
     "aliases": [
       "wanda"
     ],
-    "tags": [],
+    "faction": "Among the Stars",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "DEFENSE",
+    "tags": [
+      "Counter",
+      "Crit",
+      "STR Down",
+      "STR Up"
+    ],
     "stats": {
       "CON": "158",
       "ATK": "99",
@@ -4748,15 +5186,24 @@
     }
   },
   {
-    "name": "winkle",
-    "faction": "ULTRA",
     "id": 53,
-    "rarity": "SSR",
+    "name": "winkle",
     "aliases": [
       "winkle"
     ],
-    "tags": [],
+    "faction": "Among the Stars",
+    "realm": "ULTRA",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Counter",
+      "Discard",
+      "Dispel",
+      "Draw",
+      "Fragile",
+      "Keyflare",
+      "Weakness"
+    ],
     "stats": {
       "CON": "112",
       "ATK": "100",
@@ -4837,15 +5284,24 @@
     }
   },
   {
-    "name": "xu",
-    "faction": "CARO",
     "id": 54,
-    "rarity": "SSR",
+    "name": "xu",
     "aliases": [
       "xu"
     ],
-    "tags": [],
+    "faction": "The Unknowable",
+    "realm": "CARO",
+    "rarity": "SSR",
     "type": "ASSIST",
+    "tags": [
+      "Arithmetica",
+      "Crit",
+      "Embryo Fusion",
+      "Max HP DMG",
+      "Poison",
+      "Resonance",
+      "STR Down"
+    ],
     "stats": {
       "CON": "203",
       "ATK": "122",
