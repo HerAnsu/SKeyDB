@@ -1926,7 +1926,7 @@ a {
 }
 
 .builder-team-preview-grid-expanded {
-  display: inline-flex;
+  display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
   gap: 0.375rem;
@@ -1940,9 +1940,8 @@ a {
 }
 
 .builder-team-slot-preview-expanded {
-  width: min(100%, 80px);
   max-width: 80px;
-  flex: 0 1 80px;
+  flex: 1 1 0;
 }
 
 .builder-team-slot-preview-drop-over {
@@ -2044,7 +2043,7 @@ a {
 
 .builder-team-preview-ghost-strip .builder-team-slot-preview-expanded {
   max-width: 68px;
-  flex-basis: 68px;
+  flex-basis: 0;
 }
 
 .builder-team-preview-ghost-strip .builder-team-slot-preview-card {
