@@ -134,3 +134,62 @@ When the implementation is done, review must explicitly check:
 - persistence compatibility for existing local drafts
 - no leftover mixed `realm` / old-realm-as-`faction` logic
 - no partial migration where awakeners differ from wheels/posses in concept ownership
+
+## Temporary Fallbacks
+
+Added: March 2, 2026
+
+These fallbacks are intentional compatibility bridges. They should be re-evaluated after existing local state and older exports have had time to age out.
+
+Suggested review window:
+
+- Re-evaluate after April 2, 2026
+
+Current temporary fallbacks:
+
+1. Builder draft persistence accepts legacy slot `faction` as `realm`
+- File:
+  - `src/pages/builder/builder-persistence.ts`
+- Why:
+  - Older local builder drafts persisted the old realm concept under `faction`.
+  - Removing this now would make existing saved drafts fail validation or load incorrectly.
+- Removal condition:
+  - Safe to remove once we are comfortable dropping compatibility for pre-migration local builder drafts.
+
+2. Collection/export sort config accepts legacy `groupByFaction`
+- Files:
+  - `src/pages/collection/useCollectionViewModel.ts`
+  - `src/pages/collection/OwnedAssetBoxExport.tsx`
+- Why:
+  - Older stored sort/grouping preferences used `groupByFaction` for what is now `groupByRealm`.
+  - This prevents existing local UI preferences from being silently lost.
+- Removal condition:
+  - Safe to remove once older collection/export localStorage payloads are no longer worth supporting.
+
+3. Builder awakener sort grouping keeps the old storage key string
+- File:
+  - `src/pages/builder/useBuilderViewModel.ts`
+- Why:
+  - The runtime meaning has migrated to realm, but the localStorage key string still uses `groupByFaction` to preserve existing persisted builder sorting preferences.
+- Removal condition:
+  - Safe to remove once we are ready to intentionally migrate or reset existing builder sort preferences.
+
+4. Awakeners still expose `faction` in the domain contract
+- File:
+  - `src/domain/awakeners.ts`
+- Why:
+  - The new data model uses `faction` for DB-facing grouping metadata.
+  - This remains in the domain contract for data correctness and backward compatibility, even though runtime/UI behavior should not rely on it.
+- Removal condition:
+  - Not a short-term cleanup target.
+  - Only revisit if the DB/runtime contract changes again and `faction` no longer needs to exist outside raw data boundaries.
+
+5. Standard and in-game decode paths normalize into canonical `realm`
+- Files:
+  - `src/domain/import-export.ts`
+  - `src/domain/ingame-codec.ts`
+- Why:
+  - Import/export boundaries must continue producing canonical runtime slot state even while legacy persisted/runtime assumptions still exist elsewhere.
+- Removal condition:
+  - These are boundary normalizations, not debt by themselves.
+  - Revisit only if a future persistence/versioning change makes them redundant.

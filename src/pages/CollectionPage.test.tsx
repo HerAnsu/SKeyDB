@@ -159,11 +159,11 @@ describe('CollectionPage global search capture', () => {
     expect(screen.getByText('Ogier')).toBeInTheDocument()
   })
 
-  it('uses compact sort ear and keeps group-by-faction in navigation', () => {
+  it('uses compact sort ear and keeps group-by-realm in navigation', () => {
     render(<CollectionPage />)
 
     expect(screen.queryByText(/^Sort$/i)).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /toggle grouping awakeners by faction/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /toggle grouping awakeners by realm/i })).toBeInTheDocument()
   })
 
   it('sorts unowned awakeners last when display unowned is enabled', () => {

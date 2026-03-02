@@ -252,7 +252,7 @@ export function BuilderSelectionPanel({
         onChange={(event) => onSearchChange(event.target.value)}
         placeholder={
           pickerTab === 'awakeners'
-            ? 'Search awakeners (name, realm, faction, aliases)'
+            ? 'Search awakeners (name, realm, aliases)'
             : pickerTab === 'posses'
               ? 'Search posses (name, realm, awakener)'
               : pickerTab === 'wheels'

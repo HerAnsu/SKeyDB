@@ -56,28 +56,28 @@ export function ActiveTeamHeader({
   const tintB = activeRealms[1]?.tint ?? tintA
   const badgeStateClass =
     activeRealms.length === 1
-      ? 'builder-team-faction-badge-single'
+      ? 'builder-team-realm-badge-single'
       : activeRealms.length === 2
-        ? 'builder-team-faction-badge-split'
-        : 'builder-team-faction-badge-empty'
+        ? 'builder-team-realm-badge-split'
+        : 'builder-team-realm-badge-empty'
   const badgeStyle = {
-    '--team-faction-tint-a': tintA,
-    '--team-faction-tint-b': tintB,
+    '--team-realm-tint-a': tintA,
+    '--team-realm-tint-b': tintB,
   } as CSSProperties
   const displayedPosseAsset = activePosseAsset ?? tempPosseIcon
   return (
     <div className="builder-team-header border-b border-slate-500/50 pb-3">
-      <div className={`builder-team-faction-badge ${badgeStateClass}`} style={badgeStyle}>
+      <div className={`builder-team-realm-badge ${badgeStateClass}`} style={badgeStyle}>
         {activeRealms.length === 0 ? (
           <span className="sigil-placeholder" />
         ) : (
-          <div className={`builder-team-faction-stack ${hasSingleRealm ? 'builder-team-faction-stack-single' : ''}`}>
-            <div className={`builder-team-faction-icons ${hasSingleRealm ? 'builder-team-faction-icons-single' : ''}`}>
+          <div className={`builder-team-realm-stack ${hasSingleRealm ? 'builder-team-realm-stack-single' : ''}`}>
+            <div className={`builder-team-realm-icons ${hasSingleRealm ? 'builder-team-realm-icons-single' : ''}`}>
               {activeRealms.map((realm) => (
-                <span className="builder-team-faction-icon-wrap" key={realm.label}>
+                <span className="builder-team-realm-icon-wrap" key={realm.label}>
                   <img
                     alt={`${realm.label} realm`}
-                    className="builder-team-faction-icon"
+                    className="builder-team-realm-icon"
                     draggable={false}
                     src={realm.icon}
                   />
@@ -88,7 +88,7 @@ export function ActiveTeamHeader({
         )}
       </div>
 
-      <div className="builder-team-faction-copy">
+      <div className="builder-team-realm-copy">
         <TeamNameInlineEditor
           draftName={editingTeamName}
           isEditing={isEditingTeamName}
@@ -104,7 +104,7 @@ export function ActiveTeamHeader({
             <>
               {activeRealms.map((realm, index) => (
                 <span key={realm.label}>
-                  <span className="builder-team-faction-label-segment" style={{ color: realm.tint }}>
+                  <span className="builder-team-realm-label-segment" style={{ color: realm.tint }}>
                     {realm.label}
                   </span>
                   {index < activeRealms.length - 1 ? <span className="text-slate-400"> / </span> : null}

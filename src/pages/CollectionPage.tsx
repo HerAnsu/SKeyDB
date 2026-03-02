@@ -290,7 +290,7 @@ export function CollectionPage() {
             <div className="mt-2 flex items-center justify-between gap-3 text-xs text-slate-300">
               <span>Group By Realm</span>
               <TogglePill
-                ariaLabel="Toggle grouping awakeners by faction"
+                ariaLabel="Toggle grouping awakeners by realm"
                 checked={model.awakenerSortGroupByRealm}
                 className="ownership-pill-builder"
                 offLabel="Off"
@@ -306,7 +306,7 @@ export function CollectionPage() {
             onChange={(event) => model.setQuery(event.target.value)}
             placeholder={
               model.tab === 'awakeners'
-                ? 'Search awakeners (name, realm, faction, aliases)'
+                ? 'Search awakeners (name, realm, aliases)'
                 : model.tab === 'wheels'
                   ? 'Search wheels (name, rarity, realm, awakener, main stat)'
                   : 'Search posses (name, realm, awakener)'
