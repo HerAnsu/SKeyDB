@@ -1,4 +1,4 @@
-import { DEFAULT_FACTION_TINT, getFactionIcon, getFactionLabel, getFactionTint, normalizeFactionId } from '../../domain/factions'
+import { DEFAULT_REALM_TINT, getRealmIcon, getRealmLabel, getRealmTint, normalizeRealmId } from '../../domain/factions'
 import tempPosseIcon from '../../assets/posse/00-temposse.png'
 import type { CSSProperties } from 'react'
 import { TeamNameInlineEditor } from './TeamNameInlineEditor'
@@ -11,7 +11,7 @@ type ActiveTeamHeaderProps = {
   activePosseAsset?: string
   activePosseName?: string
   isActivePosseOwned: boolean
-  teamFactions: string[]
+  teamRealms: string[]
   onBeginTeamRename: (teamId: string, currentName: string, surface?: 'header' | 'list') => void
   onCommitTeamRename: (teamId: string) => void
   onCancelTeamRename: () => void
@@ -19,17 +19,17 @@ type ActiveTeamHeaderProps = {
   onOpenPossePicker: () => void
 }
 
-type FactionMeta = {
+type RealmMeta = {
   label: string
   icon: string
   tint: string
 }
 
-const factionMetaById: Record<string, FactionMeta> = {
-  AEQUOR: { label: getFactionLabel('AEQUOR'), icon: getFactionIcon('AEQUOR')!, tint: getFactionTint('AEQUOR') },
-  CARO: { label: getFactionLabel('CARO'), icon: getFactionIcon('CARO')!, tint: getFactionTint('CARO') },
-  CHAOS: { label: getFactionLabel('CHAOS'), icon: getFactionIcon('CHAOS')!, tint: getFactionTint('CHAOS') },
-  ULTRA: { label: getFactionLabel('ULTRA'), icon: getFactionIcon('ULTRA')!, tint: getFactionTint('ULTRA') },
+const realmMetaById: Record<string, RealmMeta> = {
+  AEQUOR: { label: getRealmLabel('AEQUOR'), icon: getRealmIcon('AEQUOR')!, tint: getRealmTint('AEQUOR') },
+  CARO: { label: getRealmLabel('CARO'), icon: getRealmIcon('CARO')!, tint: getRealmTint('CARO') },
+  CHAOS: { label: getRealmLabel('CHAOS'), icon: getRealmIcon('CHAOS')!, tint: getRealmTint('CHAOS') },
+  ULTRA: { label: getRealmLabel('ULTRA'), icon: getRealmIcon('ULTRA')!, tint: getRealmTint('ULTRA') },
 }
 
 export function ActiveTeamHeader({
@@ -40,46 +40,46 @@ export function ActiveTeamHeader({
   activePosseAsset,
   activePosseName,
   isActivePosseOwned,
-  teamFactions,
+  teamRealms,
   onBeginTeamRename,
   onCommitTeamRename,
   onCancelTeamRename,
   onEditingTeamNameChange,
   onOpenPossePicker,
 }: ActiveTeamHeaderProps) {
-  const normalizedFactions = Array.from(new Set(teamFactions.map(normalizeFactionId))).slice(0, 2)
-  const activeFactions = normalizedFactions
-    .map((factionId) => factionMetaById[factionId])
-    .filter((meta): meta is FactionMeta => Boolean(meta))
-  const hasSingleFaction = activeFactions.length === 1
-  const tintA = activeFactions[0]?.tint ?? DEFAULT_FACTION_TINT
-  const tintB = activeFactions[1]?.tint ?? tintA
+  const normalizedRealms = Array.from(new Set(teamRealms.map(normalizeRealmId))).slice(0, 2)
+  const activeRealms = normalizedRealms
+    .map((realmId) => realmMetaById[realmId])
+    .filter((meta): meta is RealmMeta => Boolean(meta))
+  const hasSingleRealm = activeRealms.length === 1
+  const tintA = activeRealms[0]?.tint ?? DEFAULT_REALM_TINT
+  const tintB = activeRealms[1]?.tint ?? tintA
   const badgeStateClass =
-    activeFactions.length === 1
-      ? 'builder-team-faction-badge-single'
-      : activeFactions.length === 2
-        ? 'builder-team-faction-badge-split'
-        : 'builder-team-faction-badge-empty'
+    activeRealms.length === 1
+      ? 'builder-team-realm-badge-single'
+      : activeRealms.length === 2
+        ? 'builder-team-realm-badge-split'
+        : 'builder-team-realm-badge-empty'
   const badgeStyle = {
-    '--team-faction-tint-a': tintA,
-    '--team-faction-tint-b': tintB,
+    '--team-realm-tint-a': tintA,
+    '--team-realm-tint-b': tintB,
   } as CSSProperties
   const displayedPosseAsset = activePosseAsset ?? tempPosseIcon
   return (
     <div className="builder-team-header border-b border-slate-500/50 pb-3">
-      <div className={`builder-team-faction-badge ${badgeStateClass}`} style={badgeStyle}>
-        {activeFactions.length === 0 ? (
+      <div className={`builder-team-realm-badge ${badgeStateClass}`} style={badgeStyle}>
+        {activeRealms.length === 0 ? (
           <span className="sigil-placeholder" />
         ) : (
-          <div className={`builder-team-faction-stack ${hasSingleFaction ? 'builder-team-faction-stack-single' : ''}`}>
-            <div className={`builder-team-faction-icons ${hasSingleFaction ? 'builder-team-faction-icons-single' : ''}`}>
-              {activeFactions.map((faction) => (
-                <span className="builder-team-faction-icon-wrap" key={faction.label}>
+          <div className={`builder-team-realm-stack ${hasSingleRealm ? 'builder-team-realm-stack-single' : ''}`}>
+            <div className={`builder-team-realm-icons ${hasSingleRealm ? 'builder-team-realm-icons-single' : ''}`}>
+              {activeRealms.map((realm) => (
+                <span className="builder-team-realm-icon-wrap" key={realm.label}>
                   <img
-                    alt={`${faction.label} faction`}
-                    className="builder-team-faction-icon"
+                    alt={`${realm.label} realm`}
+                    className="builder-team-realm-icon"
                     draggable={false}
-                    src={faction.icon}
+                    src={realm.icon}
                   />
                 </span>
               ))}
@@ -88,7 +88,7 @@ export function ActiveTeamHeader({
         )}
       </div>
 
-      <div className="builder-team-faction-copy">
+      <div className="builder-team-realm-copy">
         <TeamNameInlineEditor
           draftName={editingTeamName}
           isEditing={isEditingTeamName}
@@ -100,19 +100,19 @@ export function ActiveTeamHeader({
           variant="header"
         />
         <p className="text-xs tracking-wide text-slate-300">
-          {activeFactions.length > 0 ? (
+          {activeRealms.length > 0 ? (
             <>
-              {activeFactions.map((faction, index) => (
-                <span key={faction.label}>
-                  <span className="builder-team-faction-label-segment" style={{ color: faction.tint }}>
-                    {faction.label}
+              {activeRealms.map((realm, index) => (
+                <span key={realm.label}>
+                  <span className="builder-team-realm-label-segment" style={{ color: realm.tint }}>
+                    {realm.label}
                   </span>
-                  {index < activeFactions.length - 1 ? <span className="text-slate-400"> / </span> : null}
+                  {index < activeRealms.length - 1 ? <span className="text-slate-400"> / </span> : null}
                 </span>
               ))}
             </>
           ) : (
-            'No Faction'
+            'No Realm'
           )}
         </p>
       </div>

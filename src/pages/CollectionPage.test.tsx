@@ -4,8 +4,8 @@ import { CollectionPage } from './CollectionPage'
 
 vi.mock('../domain/awakeners', () => ({
   getAwakeners: () => [
-    { id: 1, name: 'ramona', faction: 'CHAOS', aliases: ['ram'] },
-    { id: 2, name: 'ogier', faction: 'CHAOS', aliases: ['ogi'] },
+    { id: 1, name: 'ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['ram'] },
+    { id: 2, name: 'ogier', faction: 'Outlanders', realm: 'CHAOS', aliases: ['ogi'] },
   ],
 }))
 
@@ -16,7 +16,7 @@ vi.mock('../domain/wheels', () => ({
       assetId: 'Weapon_Full_C01',
       name: 'Birth of a Soul',
       rarity: 'SSR',
-      faction: 'CHAOS',
+      realm: 'CHAOS',
       awakener: 'ramona',
       mainstatKey: 'CRIT_RATE',
     },
@@ -25,7 +25,7 @@ vi.mock('../domain/wheels', () => ({
       assetId: 'Weapon_Full_C02',
       name: 'Call of the Deep',
       rarity: 'SSR',
-      faction: 'CHAOS',
+      realm: 'CHAOS',
       awakener: 'ogier',
       mainstatKey: 'ATK',
     },
@@ -34,7 +34,7 @@ vi.mock('../domain/wheels', () => ({
       assetId: 'Weapon_Full_SR01',
       name: 'Practice Wheel',
       rarity: 'SR',
-      faction: 'NEUTRAL',
+      realm: 'NEUTRAL',
       awakener: '',
       mainstatKey: 'ATK',
     },
@@ -44,8 +44,8 @@ vi.mock('../domain/wheels', () => ({
 
 vi.mock('../domain/posses', () => ({
   getPosses: () => [
-    { id: '01', index: 1, name: 'Manor Echoes', faction: 'CHAOS', isFadedLegacy: false, awakenerName: 'ramona' },
-    { id: '02', index: 2, name: 'Faded Legacy', faction: 'NEUTRAL', isFadedLegacy: true },
+    { id: '01', index: 1, name: 'Manor Echoes', realm: 'CHAOS', isFadedLegacy: false, awakenerName: 'ramona' },
+    { id: '02', index: 2, name: 'Faded Legacy', realm: 'NEUTRAL', isFadedLegacy: true },
   ],
 }))
 
@@ -159,11 +159,11 @@ describe('CollectionPage global search capture', () => {
     expect(screen.getByText('Ogier')).toBeInTheDocument()
   })
 
-  it('uses compact sort ear and keeps group-by-faction in navigation', () => {
+  it('uses compact sort ear and keeps group-by-realm in navigation', () => {
     render(<CollectionPage />)
 
     expect(screen.queryByText(/^Sort$/i)).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /toggle grouping awakeners by faction/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /toggle grouping awakeners by realm/i })).toBeInTheDocument()
   })
 
   it('sorts unowned awakeners last when display unowned is enabled', () => {
@@ -507,4 +507,6 @@ describe('CollectionPage global search capture', () => {
     expect(screen.queryByRole('button', { name: /edit awakener level for ramona/i })).not.toBeInTheDocument()
   })
 })
+
+
 

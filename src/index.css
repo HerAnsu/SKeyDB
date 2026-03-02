@@ -1623,7 +1623,7 @@ a {
   align-items: center;
 }
 
-.builder-team-faction-badge {
+.builder-team-realm-badge {
   grid-column: 1;
   grid-row: 1;
   position: relative;
@@ -1634,7 +1634,7 @@ a {
   overflow: visible;
 }
 
-.builder-team-faction-badge::before {
+.builder-team-realm-badge::before {
   content: "";
   position: absolute;
   inset: 8px;
@@ -1642,7 +1642,7 @@ a {
   border: 1px solid rgba(148, 163, 184, 0.22);
 }
 
-.builder-team-faction-badge::after {
+.builder-team-realm-badge::after {
   content: "";
   position: absolute;
   top: 10px;
@@ -1653,28 +1653,28 @@ a {
   transform: translateX(-50%);
 }
 
-.builder-team-faction-badge-single::before {
+.builder-team-realm-badge-single::before {
   border-color: rgba(148, 163, 184, 0.28);
 }
 
-.builder-team-faction-badge-single::after {
+.builder-team-realm-badge-single::after {
   content: none;
 }
 
-.builder-team-faction-stack {
+.builder-team-realm-stack {
   position: absolute;
   inset: 0;
   isolation: isolate;
 }
 
-.builder-team-faction-stack::before {
+.builder-team-realm-stack::before {
   content: "";
   position: absolute;
   inset: 2px;
   border-radius: 999px;
   background:
-    radial-gradient(circle at 28% 48%, var(--team-faction-tint-a, #7a8da8) 0%, rgba(0, 0, 0, 0) 56%),
-    radial-gradient(circle at 72% 52%, var(--team-faction-tint-b, #7a8da8) 0%, rgba(0, 0, 0, 0) 56%);
+    radial-gradient(circle at 28% 48%, var(--team-realm-tint-a, #7a8da8) 0%, rgba(0, 0, 0, 0) 56%),
+    radial-gradient(circle at 72% 52%, var(--team-realm-tint-b, #7a8da8) 0%, rgba(0, 0, 0, 0) 56%);
   opacity: 0.28;
   filter: blur(6px);
   mix-blend-mode: screen;
@@ -1682,7 +1682,7 @@ a {
   pointer-events: none;
 }
 
-.builder-team-faction-icons {
+.builder-team-realm-icons {
   position: absolute;
   inset: -2px;
   display: flex;
@@ -1692,11 +1692,11 @@ a {
   z-index: 2;
 }
 
-.builder-team-faction-icons-single {
+.builder-team-realm-icons-single {
   gap: 0;
 }
 
-.builder-team-faction-icon-wrap {
+.builder-team-realm-icon-wrap {
   position: relative;
   width: 64px;
   aspect-ratio: 1 / 1;
@@ -1705,11 +1705,11 @@ a {
   overflow: visible;
 }
 
-.builder-team-faction-icons-single .builder-team-faction-icon-wrap {
+.builder-team-realm-icons-single .builder-team-realm-icon-wrap {
   width: 64px;
 }
 
-.builder-team-faction-icon {
+.builder-team-realm-icon {
   position: relative;
   z-index: 1;
   width: 95%;
@@ -1724,11 +1724,11 @@ a {
     drop-shadow(0 0 7px rgba(2, 6, 12, 0.55));
 }
 
-.builder-team-faction-stack-single .builder-team-faction-icon {
+.builder-team-realm-stack-single .builder-team-realm-icon {
   width: 78%;
 }
 
-.builder-team-faction-copy {
+.builder-team-realm-copy {
   grid-column: 2;
   grid-row: 1;
   justify-self: start;
@@ -1738,7 +1738,7 @@ a {
   gap: 0.1rem;
 }
 
-.builder-team-faction-label-segment {
+.builder-team-realm-label-segment {
   text-shadow: 0 1px 5px rgba(15, 23, 42, 0.55);
 }
 
@@ -2179,7 +2179,7 @@ a {
     grid-template-rows: auto auto;
   }
 
-  .builder-team-faction-copy {
+  .builder-team-realm-copy {
     grid-column: 2;
     grid-row: 1;
   }
