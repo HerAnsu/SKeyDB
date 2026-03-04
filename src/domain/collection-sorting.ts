@@ -1,5 +1,5 @@
 export type CollectionSortDirection = 'ASC' | 'DESC'
-export type AwakenerSortKey = 'LEVEL' | 'RARITY' | 'ENLIGHTEN' | 'ALPHABETICAL'
+export type AwakenerSortKey = 'LEVEL' | 'RARITY' | 'ENLIGHTEN' | 'ALPHABETICAL' | 'ATK' | 'DEF' | 'CON'
 
 export type SortableCollectionEntry = {
   label: string
