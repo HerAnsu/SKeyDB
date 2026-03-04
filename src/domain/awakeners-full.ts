@@ -1,0 +1,82 @@
+import { z } from 'zod'
+
+const cardSchema = z.object({
+  name: z.string(),
+  cost: z.string(),
+  description: z.string(),
+})
+
+const exaltSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+})
+
+const talentSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+})
+
+const enlightenSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+})
+
+const fullStatsSchema = z.object({
+  CON: z.string(),
+  ATK: z.string(),
+  DEF: z.string(),
+  CritRate: z.string(),
+  CritDamage: z.string(),
+  AliemusRegen: z.string(),
+  KeyflareRegen: z.string(),
+  RealmMastery: z.string(),
+  SigilYield: z.string(),
+  DamageAmplification: z.string(),
+  DeathResistance: z.string(),
+})
+
+const awakenerFullSchema = z.array(
+  z.object({
+    id: z.number().int().positive(),
+    name: z.string(),
+    aliases: z.array(z.string()),
+    faction: z.string(),
+    realm: z.string(),
+    rarity: z.string(),
+    type: z.string(),
+    tags: z.array(z.string()),
+    stats: fullStatsSchema,
+    cards: z.record(z.string(), cardSchema),
+    exalts: z.object({
+      exalt: exaltSchema,
+      over_exalt: exaltSchema,
+    }),
+    talents: z.record(z.string(), talentSchema),
+    enlightens: z.record(z.string(), enlightenSchema),
+  }),
+)
+
+export type AwakenerCard = z.infer<typeof cardSchema>
+export type AwakenerExalt = z.infer<typeof exaltSchema>
+export type AwakenerTalent = z.infer<typeof talentSchema>
+export type AwakenerEnlighten = z.infer<typeof enlightenSchema>
+export type AwakenerFullStats = z.infer<typeof fullStatsSchema>
+export type AwakenerFull = z.infer<typeof awakenerFullSchema>[number]
+
+let fullDataCache: AwakenerFull[] | null = null
+
+export async function loadAwakenersFull(): Promise<AwakenerFull[]> {
+  if (fullDataCache) {
+    return fullDataCache
+  }
+  const module = await import('../data/awakeners-full.json')
+  fullDataCache = awakenerFullSchema.parse(module.default)
+  return fullDataCache
+}
+
+export function getAwakenerFullById(
+  id: number,
+  data: AwakenerFull[],
+): AwakenerFull | undefined {
+  return data.find((entry) => entry.id === id)
+}

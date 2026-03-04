@@ -4,7 +4,7 @@
         "name": "24",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Hybrid",
         "aliases": [
             "24",
@@ -37,7 +37,7 @@
         "name": "agrippa",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Outlanders",
         "aliases": [
             "agrippa"
@@ -59,7 +59,7 @@
         "name": "aigis",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Hybrid",
         "aliases": [
             "aigis"
@@ -82,7 +82,7 @@
         "name": "alva",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Outlanders",
         "aliases": [
             "alva"
@@ -108,7 +108,7 @@
         "name": "aurita",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "The Fools",
         "aliases": [
             "aurita"
@@ -130,7 +130,7 @@
         "name": "caecus",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Hybrid",
         "aliases": [
             "caecus"
@@ -154,7 +154,7 @@
         "name": "casiah",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Unknowable",
         "aliases": [
             "casiah"
@@ -178,7 +178,7 @@
         "name": "castor",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "The Fools",
         "aliases": [
             "castor"
@@ -200,7 +200,7 @@
         "name": "celeste",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Outlanders",
         "aliases": [
             "celeste"
@@ -225,7 +225,7 @@
         "name": "clementine",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Unknowable",
         "aliases": [
             "clementine"
@@ -250,7 +250,7 @@
         "name": "corposant",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "The Fools",
         "aliases": [
             "corposant"
@@ -278,7 +278,7 @@
         "name": "daffodil",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "The Unknowable",
         "aliases": [
             "daffodil"
@@ -309,7 +309,7 @@
         "name": "doll",
         "rarity": "SR",
         "realm": "CHAOS",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Among the Stars",
         "aliases": [
             "doll"
@@ -331,7 +331,7 @@
         "name": "doll: inferno",
         "rarity": "Genesis",
         "realm": "CHAOS",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Among the Stars",
         "aliases": [
             "doll: inferno",
@@ -361,7 +361,7 @@
         "name": "doresain",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Out of the Aeons",
         "aliases": [
             "doresain"
@@ -384,7 +384,7 @@
         "name": "erica",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Hybrid",
         "aliases": [
             "erica"
@@ -409,7 +409,7 @@
         "name": "faint",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Among the Stars",
         "aliases": [
             "faint"
@@ -435,7 +435,7 @@
         "name": "faros",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Fools",
         "aliases": [
             "faros"
@@ -459,7 +459,7 @@
         "name": "goliath",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "The Fools",
         "aliases": [
             "goliath"
@@ -480,7 +480,7 @@
         "name": "hameln",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Unknowable",
         "aliases": [
             "hameln"
@@ -503,7 +503,7 @@
         "name": "helot",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "The Fools",
         "aliases": [
             "helot"
@@ -529,7 +529,7 @@
         "name": "helot: catena",
         "rarity": "Genesis",
         "realm": "CARO",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "The Fools",
         "aliases": [
             "helot: catena",
@@ -555,7 +555,7 @@
         "name": "horla",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Outlanders",
         "aliases": [
             "horla"
@@ -582,7 +582,7 @@
         "name": "jenkins",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "The Fools",
         "aliases": [
             "jenkins"
@@ -603,7 +603,7 @@
         "name": "karen",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Outlanders",
         "aliases": [
             "karen"
@@ -630,7 +630,7 @@
         "name": "kathigu-ra",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Among the Stars",
         "aliases": [
             "kathigu-ra",
@@ -655,7 +655,7 @@
         "name": "leigh",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Hybrid",
         "aliases": [
             "leigh"
@@ -680,7 +680,7 @@
         "name": "lily",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Hybrid",
         "aliases": [
             "lily"
@@ -703,7 +703,7 @@
         "name": "liz",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "The Fools",
         "aliases": [
             "liz"
@@ -726,7 +726,7 @@
         "name": "lotan",
         "rarity": "SR",
         "realm": "CHAOS",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Out of the Aeons",
         "aliases": [
             "lotan"
@@ -748,7 +748,7 @@
         "name": "miryam",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Out of the Aeons",
         "aliases": [
             "miryam"
@@ -776,7 +776,7 @@
         "name": "mouchette",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Outlanders",
         "aliases": [
             "mouchette"
@@ -798,7 +798,7 @@
         "name": "murphy",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Hybrid",
         "aliases": [
             "murphy"
@@ -823,7 +823,7 @@
         "name": "murphy: fauxborn",
         "rarity": "Genesis",
         "realm": "AEQUOR",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Out of the Aeons",
         "aliases": [
             "murphy: fauxborn",
@@ -849,7 +849,7 @@
         "name": "nautila",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "The Fools",
         "aliases": [
             "nautila"
@@ -871,7 +871,7 @@
         "name": "nymphaea",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Outlanders",
         "aliases": [
             "nymphaea"
@@ -892,7 +892,7 @@
         "name": "ogier",
         "rarity": "SR",
         "realm": "CHAOS",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "The Fools",
         "aliases": [
             "ogier"
@@ -916,7 +916,7 @@
         "name": "pandia",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Outlanders",
         "aliases": [
             "pandia"
@@ -937,7 +937,7 @@
         "name": "pickman",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Fools",
         "aliases": [
             "pickman"
@@ -961,7 +961,7 @@
         "name": "pollux",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Hybrid",
         "aliases": [
             "pollux"
@@ -982,7 +982,7 @@
         "name": "ramona",
         "rarity": "SR",
         "realm": "CHAOS",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Unknowable",
         "aliases": [
             "ramona"
@@ -1007,7 +1007,7 @@
         "name": "ramona: timeworn",
         "rarity": "Genesis",
         "realm": "CHAOS",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Unknowable",
         "aliases": [
             "ramona: timeworn",
@@ -1030,7 +1030,7 @@
         "name": "ryker",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Fools",
         "aliases": [
             "ryker"
@@ -1055,7 +1055,7 @@
         "name": "salvador",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Out of the Aeons",
         "aliases": [
             "salvador"
@@ -1081,7 +1081,7 @@
         "name": "sanga",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Outlanders",
         "aliases": [
             "sanga"
@@ -1105,7 +1105,7 @@
         "name": "sorel",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Outlanders",
         "aliases": [
             "sorel"
@@ -1129,7 +1129,7 @@
         "name": "tawil",
         "rarity": "SSR",
         "realm": "CHAOS",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Gateway",
         "aliases": [
             "tawil"
@@ -1156,7 +1156,7 @@
         "name": "thais",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Out of the Aeons",
         "aliases": [
             "thais"
@@ -1183,7 +1183,7 @@
         "name": "tinct",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Among the Stars",
         "aliases": [
             "tinct"
@@ -1210,7 +1210,7 @@
         "name": "tulu",
         "rarity": "SSR",
         "realm": "AEQUOR",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Out of the Aeons",
         "aliases": [
             "tulu"
@@ -1235,7 +1235,7 @@
         "name": "uvhash",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ATTACK",
+        "type": "ASSAULT",
         "faction": "Outlanders",
         "aliases": [
             "uvhash"
@@ -1257,7 +1257,7 @@
         "name": "wanda",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "DEFENSE",
+        "type": "WARDEN",
         "faction": "Among the Stars",
         "aliases": [
             "wanda"
@@ -1279,7 +1279,7 @@
         "name": "winkle",
         "rarity": "SSR",
         "realm": "ULTRA",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "Among the Stars",
         "aliases": [
             "winkle"
@@ -1304,7 +1304,7 @@
         "name": "xu",
         "rarity": "SSR",
         "realm": "CARO",
-        "type": "ASSIST",
+        "type": "CHORUS",
         "faction": "The Unknowable",
         "aliases": [
             "xu"

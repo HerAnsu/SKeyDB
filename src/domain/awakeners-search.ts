@@ -6,7 +6,11 @@ function normalizeForSearch(value: string): string {
 }
 
 function getSearchableFields(awakener: Awakener): string[] {
-  return [awakener.name, awakener.realm, ...awakener.aliases]
+  const fields = [awakener.name, awakener.realm, ...awakener.aliases]
+  if (awakener.tags) {
+    fields.push(...awakener.tags)
+  }
+  return fields
 }
 
 export function searchAwakeners(awakeners: Awakener[], query: string): Awakener[] {
@@ -28,8 +32,9 @@ export function searchAwakeners(awakeners: Awakener[], query: string): Awakener[
     ignoreLocation: true,
     includeScore: true,
     keys: [
-      { name: 'name', weight: 0.8 },
+      { name: 'name', weight: 0.6 },
       { name: 'aliases', weight: 0.2 },
+      { name: 'tags', weight: 0.2 },
     ],
   })
   const cutoff = /\s/.test(trimmedQuery) ? 0.55 : 0.3
