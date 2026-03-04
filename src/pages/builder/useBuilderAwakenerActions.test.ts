@@ -5,8 +5,8 @@ import type { Awakener } from '../../domain/awakeners'
 import type { ActiveSelection, TeamSlot } from './types'
 
 const awakenerByName = new Map<string, Awakener>([
-  ['Goliath', { id: 1, name: 'Goliath', faction: 'Among the Stars', realm: 'AEQUOR', aliases: ['Goliath'] }],
-  ['Ramona', { id: 2, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'] }],
+  ['Goliath', { id: 1, name: 'Goliath', faction: 'Among the Stars', realm: 'AEQUOR', aliases: ['Goliath'], tags: [] }],
+  ['Ramona', { id: 2, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'], tags: [] }],
 ])
 
 function buildSlots(): TeamSlot[] {

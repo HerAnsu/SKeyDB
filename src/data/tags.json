@@ -1,0 +1,188 @@
+[
+  {
+    "key": "AFTERSHOCK",
+    "label": "Aftershock",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "ARITHMETICA",
+    "label": "Arithmetica",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "BLEED",
+    "label": "Bleed",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "BLIGHTEN",
+    "label": "Blighten",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "COUNTER",
+    "label": "Counter",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "CRIT",
+    "label": "Crit",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "DEATH_RESISTANCE",
+    "label": "Death Resistance",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "DISCARD",
+    "label": "Discard",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "DISPEL",
+    "label": "Dispel",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "DRAW",
+    "label": "Draw",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "EMBRYO_FUSION",
+    "label": "Embryo Fusion",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "FIXED_DMG",
+    "label": "Fixed DMG",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "FRAGILE",
+    "label": "Fragile",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "HAND_LIMIT",
+    "label": "Hand Limit",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "HEAL",
+    "label": "Heal",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "KEYFLARE",
+    "label": "Keyflare",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "MAX_HP_DMG",
+    "label": "Max HP DMG",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "PIERCE_DMG",
+    "label": "Pierce DMG",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "POISON",
+    "label": "Poison",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "QUASAR",
+    "label": "Quasar",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "RESONANCE",
+    "label": "Resonance",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "STR_DOWN",
+    "label": "STR Down",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "STR_UP",
+    "label": "STR Up",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "SEALED",
+    "label": "Sealed",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "SELF_HARM",
+    "label": "Self-Harm",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "STAGNATION",
+    "label": "Stagnation",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "STRIKE",
+    "label": "Strike",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "STUN",
+    "label": "Stun",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "TENTACLES",
+    "label": "Tentacles",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "VULNERABILITY",
+    "label": "Vulnerability",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "WEAKNESS",
+    "label": "Weakness",
+    "iconId": "",
+    "aliases": []
+  }
+]

@@ -9,7 +9,7 @@
     "faction": "Hybrid",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Arithmetica",
       "Bleed",
@@ -114,7 +114,7 @@
     "faction": "Outlanders",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Draw",
       "Embryo Fusion",
@@ -209,7 +209,7 @@
     "faction": "Hybrid",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Draw",
       "Embryo Fusion",
@@ -305,7 +305,7 @@
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Crit",
       "Death Resistance",
@@ -404,7 +404,7 @@
     "faction": "The Fools",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Aftershock",
       "Discard",
@@ -499,7 +499,7 @@
     "faction": "Hybrid",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Counter",
       "Dispel",
@@ -596,7 +596,7 @@
     "faction": "The Unknowable",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Aftershock",
       "Arithmetica",
@@ -693,7 +693,7 @@
     "faction": "The Fools",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Crit",
       "Draw",
@@ -793,7 +793,7 @@
     "faction": "Outlanders",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Dispel",
@@ -891,7 +891,7 @@
     "faction": "The Unknowable",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Bleed",
       "Crit",
@@ -989,7 +989,7 @@
     "faction": "The Fools",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Aftershock",
       "Crit",
@@ -1095,7 +1095,7 @@
     "faction": "The Unknowable",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Arithmetica",
       "Counter",
@@ -1199,7 +1199,7 @@
     "faction": "Among the Stars",
     "realm": "CHAOS",
     "rarity": "SR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Discard",
       "Dispel",
@@ -1295,7 +1295,7 @@
     "faction": "Among the Stars",
     "realm": "CHAOS",
     "rarity": "Genesis",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Counter",
@@ -1402,7 +1402,7 @@
     "faction": "Out of the Aeons",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Crit",
       "Pierce DMG",
@@ -1507,7 +1507,7 @@
     "faction": "Hybrid",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Crit",
       "Dispel",
@@ -1610,7 +1610,7 @@
     "faction": "Among the Stars",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Counter",
       "Death Resistance",
@@ -1709,7 +1709,7 @@
     "faction": "The Fools",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Dispel",
@@ -1806,7 +1806,7 @@
     "faction": "The Fools",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Crit",
       "STR Up",
@@ -1905,7 +1905,7 @@
     "faction": "The Unknowable",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",
@@ -2006,7 +2006,7 @@
     "faction": "The Fools",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Bleed",
       "Crit",
@@ -2106,7 +2106,7 @@
     "faction": "The Fools",
     "realm": "CARO",
     "rarity": "Genesis",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Bleed",
       "Crit",
@@ -2214,7 +2214,7 @@
     "faction": "Outlanders",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Counter",
       "Crit",
@@ -2314,7 +2314,7 @@
     "faction": "The Fools",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Crit",
       "Draw",
@@ -2413,7 +2413,7 @@
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Dispel",
@@ -2519,7 +2519,7 @@
     "faction": "Among the Stars",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Discard",
       "Dispel",
@@ -2621,7 +2621,7 @@
     "faction": "Hybrid",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Crit",
       "Dispel",
@@ -2719,7 +2719,7 @@
     "faction": "Hybrid",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Crit",
       "Death Resistance",
@@ -2815,7 +2815,7 @@
     "faction": "The Fools",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Discard",
       "Draw",
@@ -2921,7 +2921,7 @@
     "faction": "Out of the Aeons",
     "realm": "CHAOS",
     "rarity": "SR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Dispel",
       "Fixed DMG",
@@ -3016,7 +3016,7 @@
     "faction": "Out of the Aeons",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",
@@ -3137,7 +3137,7 @@
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Crit",
       "Death Resistance",
@@ -3232,7 +3232,7 @@
     "faction": "Hybrid",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Arithmetica",
       "Aftershock",
@@ -3331,7 +3331,7 @@
     "faction": "Out of the Aeons",
     "realm": "AEQUOR",
     "rarity": "Genesis",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Aftershock",
       "Arithmetica",
@@ -3429,7 +3429,7 @@
     "faction": "The Fools",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Dispel",
       "Counter",
@@ -3524,7 +3524,7 @@
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Poison",
       "Vulnerability",
@@ -3618,7 +3618,7 @@
     "faction": "The Fools",
     "realm": "CHAOS",
     "rarity": "SR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Dispel",
       "Fragile",
@@ -3715,7 +3715,7 @@
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Counter",
       "Crit",
@@ -3809,7 +3809,7 @@
     "faction": "The Fools",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",
@@ -3906,7 +3906,7 @@
     "faction": "Hybrid",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Bleed",
       "Discard",
@@ -4005,7 +4005,7 @@
     "faction": "The Unknowable",
     "realm": "CHAOS",
     "rarity": "SR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",
@@ -4104,7 +4104,7 @@
     "faction": "The Unknowable",
     "realm": "CHAOS",
     "rarity": "Genesis",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",
@@ -4199,7 +4199,7 @@
     "faction": "The Fools",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",
@@ -4297,7 +4297,7 @@
     "faction": "Out of the Aeons",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Crit",
       "Embryo Fusion",
@@ -4396,7 +4396,7 @@
     "faction": "Outlanders",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Aftershock",
       "Crit",
@@ -4493,7 +4493,7 @@
     "faction": "Outlanders",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Crit",
       "Death Resistance",
@@ -4590,7 +4590,7 @@
     "faction": "Gateway",
     "realm": "CHAOS",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",
@@ -4705,7 +4705,7 @@
     "faction": "Out of the Aeons",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Bleed",
@@ -4805,7 +4805,7 @@
     "faction": "Among the Stars",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",
@@ -4905,7 +4905,7 @@
     "faction": "Out of the Aeons",
     "realm": "AEQUOR",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Aftershock",
       "Crit",
@@ -5003,7 +5003,7 @@
     "faction": "Outlanders",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ATTACK",
+    "type": "ASSAULT",
     "tags": [
       "Crit",
       "STR Up",
@@ -5098,7 +5098,7 @@
     "faction": "Among the Stars",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "DEFENSE",
+    "type": "WARDEN",
     "tags": [
       "Counter",
       "Crit",
@@ -5193,7 +5193,7 @@
     "faction": "Among the Stars",
     "realm": "ULTRA",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Counter",
       "Discard",
@@ -5291,7 +5291,7 @@
     "faction": "The Unknowable",
     "realm": "CARO",
     "rarity": "SSR",
-    "type": "ASSIST",
+    "type": "CHORUS",
     "tags": [
       "Arithmetica",
       "Crit",

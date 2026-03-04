@@ -2,12 +2,12 @@ import type { Awakener } from '../../domain/awakeners'
 import type { TeamSlot } from './types'
 
 export const awakenersByNameForTests = new Map<string, Awakener>([
-  ['Goliath', { id: 1, name: 'Goliath', faction: 'Hybrid', realm: 'AEQUOR', aliases: ['Goliath'] }],
-  ['Miryam', { id: 2, name: 'Miryam', faction: 'Hybrid', realm: 'AEQUOR', aliases: ['Miryam'] }],
-  ['Ramona', { id: 3, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'] }],
-  ['Ramona: Timeworn', { id: 4, name: 'Ramona: Timeworn', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona: Timeworn'] }],
-  ['Castor', { id: 5, name: 'Castor', faction: 'Outlanders', realm: 'CARO', aliases: ['Castor'] }],
-  ['Helot', { id: 6, name: 'Helot', faction: 'Among the Stars', realm: 'CHAOS', aliases: ['Helot'] }],
+  ['Goliath', { id: 1, name: 'Goliath', faction: 'Hybrid', realm: 'AEQUOR', aliases: ['Goliath'], tags: [] }],
+  ['Miryam', { id: 2, name: 'Miryam', faction: 'Hybrid', realm: 'AEQUOR', aliases: ['Miryam'], tags: [] }],
+  ['Ramona', { id: 3, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'], tags: [] }],
+  ['Ramona: Timeworn', { id: 4, name: 'Ramona: Timeworn', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona: Timeworn'], tags: [] }],
+  ['Castor', { id: 5, name: 'Castor', faction: 'Outlanders', realm: 'CARO', aliases: ['Castor'], tags: [] }],
+  ['Helot', { id: 6, name: 'Helot', faction: 'Among the Stars', realm: 'CHAOS', aliases: ['Helot'], tags: [] }],
 ])
 
 export function teamSlotsForTests(): TeamSlot[] {
