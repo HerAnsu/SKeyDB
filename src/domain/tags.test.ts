@@ -44,4 +44,12 @@ describe('tags', () => {
     expect(tag).not.toBeNull()
     expect(tag!.label).toBe('Vulnerability')
   })
+
+  it('resolves temporary mechanic aliases to their base tag', () => {
+    expect(resolveTag('Temporary Counter')?.label).toBe('Counter')
+    expect(resolveTag('Temporary Barrier')?.label).toBe('Barrier')
+    expect(resolveTag('Temporary Hand Limit')?.label).toBe('Hand Limit')
+    expect(resolveTag('Temporary Tentacle DMG')?.label).toBe('Tentacle DMG')
+    expect(resolveTag('Temporary STR')?.label).toBe('STR')
+  })
 })

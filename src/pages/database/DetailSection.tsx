@@ -1,5 +1,9 @@
 import type { ReactNode } from 'react'
 import { scaledFontStyle } from './font-scale'
+import {
+  DATABASE_ITEM_NAME_CLASS,
+  DATABASE_SECTION_TITLE_CLASS,
+} from './text-styles'
 
 export type DetailSectionItem = {
   key: string
@@ -20,7 +24,7 @@ export function DetailSection({ title, items, emptyMessage, children, renderDesc
   return (
     <div className="border border-slate-600/30 bg-slate-900/30">
       <h4
-        className="ui-title px-4 pt-3 pb-2 text-amber-100"
+        className={DATABASE_SECTION_TITLE_CLASS}
         style={scaledFontStyle(14)}
       >{title}</h4>
 
@@ -40,7 +44,7 @@ export function DetailSection({ title, items, emptyMessage, children, renderDesc
                 >
                   <span className="text-slate-500">{item.label}</span>
                   <span className="mx-1.5 text-slate-600">·</span>
-                  <span className="text-amber-100/85">{item.name}</span>
+                  <span className={DATABASE_ITEM_NAME_CLASS}>{item.name}</span>
                 </p>
                 <p
                   className="mt-1 leading-relaxed text-slate-400"

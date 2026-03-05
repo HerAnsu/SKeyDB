@@ -1,28 +1,24 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useId, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
   parseRichDescription,
-  type RichSegment,
-  type ScalingSegment,
 } from '../../domain/rich-text'
-import type { AwakenerFull, AwakenerCard, AwakenerFullStats } from '../../domain/awakeners-full'
-import { DEFAULT_REALM_TINT, REALM_TINT_BY_LABEL } from '../../domain/factions'
-import { buildScalingHover, computeStatValue, fmtNum } from '../../domain/scaling'
-import { resolveTag, type Tag } from '../../domain/tags'
-import { renderTextWithBreaks } from './font-scale'
+import type { AwakenerFull, AwakenerCard } from '../../domain/awakeners-full'
+import { type Tag } from '../../domain/tags'
+import { PopoverTrailPanel } from './PopoverTrailPanel'
+import { RichSegmentRenderer } from './RichSegmentRenderer'
 import { SkillPopover } from './SkillPopover'
 import { TagPopover } from './TagPopover'
-
-type PopoverData = {
-  card: AwakenerCard
-  label: string
-  rect: DOMRect
-}
-
-type TagPopoverData = {
-  tag: Tag
-  rect: DOMRect
-}
+import {
+  closeTrailFromIndex,
+  closeTrailTop as closeTrailTopEntry,
+  isSameTrailRoot,
+  openTrailRoot,
+  pushTrailEntry,
+  type SkillTrailEntry,
+  type TagTrailEntry,
+  type TrailEntry,
+} from './popover-trail'
 
 type RichDescriptionProps = {
   text: string
@@ -32,18 +28,12 @@ type RichDescriptionProps = {
   onNavigateToCards?: () => void
 }
 
-type SegmentRendererProps = {
-  segment: RichSegment
-  skillLevel: number
-  stats: AwakenerFullStats | null
-  onSkillClick: (name: string, e: React.MouseEvent) => void
-  onMechanicClick: (tag: Tag, e: React.MouseEvent) => void
-}
-
 type CardInfo = {
   card: AwakenerCard
   label: string
 }
+
+const TRAIL_OPENED_EVENT = 'database:trail-opened'
 
 export function RichDescription({
   text,
@@ -56,68 +46,155 @@ export function RichDescription({
     ? new Set([...cardNames, 'Rouse'])
     : cardNames
   const segments = parseRichDescription(text, rouseAwareCards)
-  const [popover, setPopover] = useState<PopoverData | null>(null)
-  const [tagPopover, setTagPopover] = useState<TagPopoverData | null>(null)
+  const [trail, setTrail] = useState<TrailEntry[]>([])
+  const [trailAnchorRect, setTrailAnchorRect] = useState<DOMRect | null>(null)
+  const [trailAnchorElement, setTrailAnchorElement] = useState<HTMLElement | null>(null)
+  const ownerId = useId()
+
+  const clearTrail = useCallback(() => {
+    setTrail([])
+    setTrailAnchorRect(null)
+    setTrailAnchorElement(null)
+  }, [])
+
+  useEffect(() => {
+    function handleTrailOpened(event: Event) {
+      const detail = (event as CustomEvent<{ ownerId?: string }>).detail
+      if (detail?.ownerId === ownerId) {
+        return
+      }
+      clearTrail()
+    }
+
+    window.addEventListener(TRAIL_OPENED_EVENT, handleTrailOpened as EventListener)
+    return () => window.removeEventListener(TRAIL_OPENED_EVENT, handleTrailOpened as EventListener)
+  }, [clearTrail, ownerId])
+
+  const announceTrailOpened = useCallback(() => {
+    window.dispatchEvent(new CustomEvent(TRAIL_OPENED_EVENT, { detail: { ownerId } }))
+  }, [ownerId])
 
   const handleSkillClick = useCallback(
     (name: string, e: React.MouseEvent) => {
       if (!fullData) return
       const result = resolveCardInfo(fullData, name)
       if (!result) return
-      const rect = (e.target as HTMLElement).getBoundingClientRect()
-      setTagPopover(null)
-      setPopover({ card: result.card, label: result.label, rect })
+      const entry = buildSkillTrailEntry(result.card, result.label)
+      if (isSameTrailRoot(trail, entry.key)) return
+      const anchorElement = e.currentTarget as HTMLElement
+      const rect = anchorElement.getBoundingClientRect()
+      announceTrailOpened()
+      setTrailAnchorElement(anchorElement)
+      setTrailAnchorRect(rect)
+      setTrail((prev) => openTrailRoot(prev, entry))
     },
-    [fullData],
+    [announceTrailOpened, fullData, trail],
   )
 
   const handleMechanicClick = useCallback(
     (tag: Tag, e: React.MouseEvent) => {
-      const rect = (e.target as HTMLElement).getBoundingClientRect()
-      setPopover(null)
-      setTagPopover({ tag, rect })
+      const entry = buildTagTrailEntry(tag)
+      if (isSameTrailRoot(trail, entry.key)) return
+      const anchorElement = e.currentTarget as HTMLElement
+      const rect = anchorElement.getBoundingClientRect()
+      announceTrailOpened()
+      setTrailAnchorElement(anchorElement)
+      setTrailAnchorRect(rect)
+      setTrail((prev) => openTrailRoot(prev, entry))
     },
-    [],
+    [announceTrailOpened, trail],
   )
 
-  const closePopover = useCallback(() => { setPopover(null); setTagPopover(null) }, [])
+  const openNestedSkill = useCallback(
+    (name: string) => {
+      if (!fullData) return
+      const result = resolveCardInfo(fullData, name)
+      if (!result) return
+      const entry = buildSkillTrailEntry(result.card, result.label)
+      setTrail((prev) => pushTrailEntry(prev, entry))
+    },
+    [fullData],
+  )
+
+  const openNestedTag = useCallback((tag: Tag) => {
+    const entry = buildTagTrailEntry(tag)
+    setTrail((prev) => pushTrailEntry(prev, entry))
+  }, [])
+
+  const closeTrailTop = useCallback(() => {
+    setTrail((prev) => {
+      const next = closeTrailTopEntry(prev)
+      if (next.length === 0) {
+        setTrailAnchorRect(null)
+      }
+      return next
+    })
+  }, [])
+
+  const closeTrailFrom = useCallback((index: number) => {
+    setTrail((prev) => {
+      const next = closeTrailFromIndex(prev, index)
+      if (next.length === 0) {
+        setTrailAnchorRect(null)
+      }
+      return next
+    })
+  }, [])
+
+  const handleNavigateToCards = useCallback(() => {
+    clearTrail()
+    onNavigateToCards?.()
+  }, [clearTrail, onNavigateToCards])
 
   return (
     <>
       <span>
         {segments.map((seg, i) => (
-          <SegmentRenderer
+          <RichSegmentRenderer
             key={i}
             onMechanicClick={handleMechanicClick}
             onSkillClick={handleSkillClick}
             segment={seg}
             skillLevel={skillLevel}
             stats={fullData?.stats ?? null}
+            variant="inline"
           />
         ))}
       </span>
-      {popover
+      {trailAnchorRect && trail.length > 0
         ? createPortal(
-            <SkillPopover
-              anchorRect={popover.rect}
-              cardNames={rouseAwareCards}
-              description={popover.card.description}
-              label={popover.label}
-              name={popover.card.name}
-              onClose={closePopover}
-              onNavigateToCards={onNavigateToCards}
-              stats={fullData?.stats ?? null}
-            />,
-            document.body,
-          )
-        : null}
-      {tagPopover
-        ? createPortal(
-            <TagPopover
-              anchorRect={tagPopover.rect}
-              onClose={closePopover}
-              tag={tagPopover.tag}
-            />,
+            <PopoverTrailPanel
+              anchorElement={trailAnchorElement}
+              anchorRect={trailAnchorRect}
+              itemCount={trail.length}
+              onCloseTop={closeTrailTop}
+            >
+              {trail.map((entry, index) =>
+                entry.kind === 'skill' ? (
+                  <SkillPopover
+                    cardNames={rouseAwareCards}
+                    description={entry.description}
+                    key={entry.key}
+                    label={entry.label}
+                    name={entry.name}
+                    onClose={() => closeTrailFrom(index)}
+                    onMechanicTokenClick={openNestedTag}
+                    onNavigateToCards={onNavigateToCards ? handleNavigateToCards : undefined}
+                    onSkillTokenClick={openNestedSkill}
+                    stats={fullData?.stats ?? null}
+                  />
+                ) : (
+                  <TagPopover
+                    cardNames={rouseAwareCards}
+                    key={entry.key}
+                    onClose={() => closeTrailFrom(index)}
+                    onMechanicTokenClick={openNestedTag}
+                    onSkillTokenClick={openNestedSkill}
+                    tag={entry.tag}
+                  />
+                ),
+              )}
+            </PopoverTrailPanel>,
             document.body,
           )
         : null}
@@ -125,89 +202,22 @@ export function RichDescription({
   )
 }
 
-function SegmentRenderer({ segment, skillLevel, stats, onSkillClick, onMechanicClick }: SegmentRendererProps) {
-  switch (segment.type) {
-    case 'text':
-      return <>{renderTextWithBreaks(segment.value)}</>
-
-    case 'skill':
-      return (
-        <button
-          className="cursor-pointer border-b border-amber-200/40 text-amber-200/90 transition-colors hover:border-amber-200/70 hover:text-amber-100"
-          onClick={(e) => onSkillClick(segment.name, e)}
-          style={{ fontSize: 'inherit' }}
-          type="button"
-        >
-          {segment.name}
-        </button>
-      )
-
-    case 'stat':
-      return (
-        <span className="text-sky-300/90">{segment.name}</span>
-      )
-
-    case 'mechanic': {
-      const tag = resolveTag(segment.name)
-      const desc = tag?.description || null
-      if (tag && desc) {
-        return (
-          <button
-            className="cursor-pointer border-b border-dotted border-slate-500/50 text-slate-300/90 transition-colors hover:border-slate-400/70 hover:text-slate-200"
-            onClick={(e) => onMechanicClick(tag, e)}
-            style={{ fontSize: 'inherit' }}
-            type="button"
-          >
-            {segment.name}
-          </button>
-        )
-      }
-      return (
-        <span
-          className="border-b border-dotted border-slate-500/50 text-slate-300/90"
-          title="Details coming soon"
-        >
-          {segment.name}
-        </span>
-      )
-    }
-
-    case 'realm':
-      return <span style={{ color: REALM_TINT_BY_LABEL[segment.name] ?? DEFAULT_REALM_TINT }}>{segment.name}</span>
-
-    case 'scaling':
-      return <ScalingRenderer segment={segment} skillLevel={skillLevel} stats={stats} />
+function buildSkillTrailEntry(card: AwakenerCard, label: string): SkillTrailEntry {
+  return {
+    kind: 'skill',
+    key: `skill:${card.name.toLowerCase()}`,
+    name: card.name,
+    label,
+    description: card.description,
   }
 }
 
-function ScalingRenderer({ segment, skillLevel, stats }: { segment: ScalingSegment; skillLevel: number; stats: AwakenerFullStats | null }) {
-  const idx = Math.max(0, Math.min(skillLevel - 1, segment.values.length - 1))
-  const value = segment.values[idx]
-  const displayValue = fmtNum(value)
-  const computed = computeStatValue(value, segment.suffix, segment.stat, stats)
-  const hoverText = buildScalingHover(segment.values, segment.suffix, segment.stat, stats)
-
-  if (computed !== null) {
-    return (
-      <span className="cursor-help" title={hoverText}>
-        <span className="text-amber-100/90">{computed}</span>
-        <span className="text-slate-500"> ({displayValue}{segment.suffix}{segment.stat ? ` ${segment.stat}` : ''})</span>
-      </span>
-    )
+function buildTagTrailEntry(tag: Tag): TagTrailEntry {
+  return {
+    kind: 'tag',
+    key: `tag:${tag.key.toLowerCase()}`,
+    tag,
   }
-
-  return (
-    <span className="cursor-help text-amber-100/90" title={hoverText}>
-      {displayValue}
-      {segment.suffix}
-      {segment.stat ? (
-        <>
-          {' '}
-          <span className="text-sky-300/90">{segment.stat}</span>
-        </>
-      ) : null}
-    </span>
-  )
 }
 
 function resolveCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {

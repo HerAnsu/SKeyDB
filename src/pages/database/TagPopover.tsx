@@ -1,32 +1,38 @@
-import { useRef } from 'react'
 import { FaXmark } from 'react-icons/fa6'
-import type { Tag } from '../../domain/tags'
-import { renderTextWithBreaks, scaledFontStyle } from './font-scale'
-import { usePopoverDismiss, usePopoverPosition } from './usePopoverDismiss'
+import { parseRichDescription } from '../../domain/rich-text'
+import { type Tag } from '../../domain/tags'
+import { scaledFontStyle } from './font-scale'
+import { RichSegmentRenderer } from './RichSegmentRenderer'
+import {
+  DATABASE_ENTRY_TITLE_CLASS,
+} from './text-styles'
 
 type TagPopoverProps = {
   tag: Tag
-  anchorRect: DOMRect
+  cardNames: Set<string>
   onClose: () => void
+  onSkillTokenClick: (name: string) => void
+  onMechanicTokenClick: (tag: Tag) => void
 }
 
-export function TagPopover({ tag, anchorRect, onClose }: TagPopoverProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  usePopoverDismiss(ref, onClose)
-  usePopoverPosition(ref, anchorRect)
+export function TagPopover({
+  tag,
+  cardNames,
+  onClose,
+  onSkillTokenClick,
+  onMechanicTokenClick,
+}: TagPopoverProps) {
+  const segments = parseRichDescription(tag.description, cardNames)
 
   return (
     <div
-      className="fixed z-[950] w-64 border border-slate-600/50 bg-slate-950/[.97] shadow-[0_8px_24px_rgba(2,6,23,0.7)]"
-      data-skill-popover=""
+      className="w-full border border-slate-600/50 bg-slate-950/[.97] shadow-[0_8px_24px_rgba(2,6,23,0.7)]"
       onClick={(e) => e.stopPropagation()}
       onMouseDown={(e) => e.stopPropagation()}
-      ref={ref}
-      style={{ top: 0, left: -9999 }}
     >
       <div className="flex items-start justify-between px-3 pt-2.5 pb-1.5">
         <p
-          className="ui-title text-amber-100"
+          className={DATABASE_ENTRY_TITLE_CLASS}
           style={scaledFontStyle(12)}
         >{tag.label}</p>
         <button
@@ -43,7 +49,17 @@ export function TagPopover({ tag, anchorRect, onClose }: TagPopoverProps) {
           className="leading-relaxed text-slate-400"
           style={scaledFontStyle(11)}
         >
-          {renderTextWithBreaks(tag.description)}
+          {segments.map((seg, i) => (
+            <RichSegmentRenderer
+              key={i}
+              onMechanicClick={(tag) => onMechanicTokenClick(tag)}
+              onSkillClick={(name) => onSkillTokenClick(name)}
+              segment={seg}
+              skillLevel={1}
+              stats={null}
+              variant="popover"
+            />
+          ))}
         </p>
       </div>
     </div>

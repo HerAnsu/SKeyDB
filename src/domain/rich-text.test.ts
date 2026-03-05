@@ -38,6 +38,15 @@ describe('parseRichDescription', () => {
     ])
   })
 
+  it('parses a skill token case-insensitively and preserves canonical card name', () => {
+    const cards = new Set(['Vortex! Shell!'])
+    const result = parseRichDescription('{vortex! shell!} triggers.', cards)
+    expect(result).toEqual([
+      { type: 'skill', name: 'Vortex! Shell!' },
+      { type: 'text', value: ' triggers.' },
+    ])
+  })
+
   it('classifies unknown tokens as mechanic', () => {
     const result = parseRichDescription('Inflict {Vulnerable} on all enemies.', EMPTY_CARDS)
     expect(result).toEqual([
@@ -118,6 +127,17 @@ describe('parseRichDescription', () => {
       { type: 'text', value: 'Gain ' },
       { type: 'stat', name: 'STR' },
       { type: 'text', value: ' equal to 8%.' },
+    ])
+  })
+
+  it('parses temporary stat-prefixed tokens as stats', () => {
+    const result = parseRichDescription('Gain {Temporary Crit Rate} and {Temporary STR}.', EMPTY_CARDS)
+    expect(result).toEqual([
+      { type: 'text', value: 'Gain ' },
+      { type: 'stat', name: 'Temporary Crit Rate' },
+      { type: 'text', value: ' and ' },
+      { type: 'stat', name: 'Temporary STR' },
+      { type: 'text', value: '.' },
     ])
   })
 

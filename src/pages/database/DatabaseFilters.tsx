@@ -1,5 +1,6 @@
 import type { RefObject } from 'react'
-import type { AwakenerSortKey, CollectionSortDirection } from '../../domain/collection-sorting'
+import type { CollectionSortDirection } from '../../domain/collection-sorting'
+import type { DatabaseSortKey } from '../../domain/database-sorting'
 import { getRealmIcon, getRealmLabel, getRealmTint } from '../../domain/factions'
 import { CollectionSortControls } from '../../components/ui/CollectionSortControls'
 import { TogglePill } from '../../components/ui/TogglePill'
@@ -15,7 +16,7 @@ type DatabaseFiltersProps = {
   realmFilter: RealmFilterId
   rarityFilter: RarityFilterId
   typeFilter: TypeFilterId
-  sortKey: AwakenerSortKey
+  sortKey: DatabaseSortKey
   sortDirection: CollectionSortDirection
   groupByRealm: boolean
   totalCount: number
@@ -25,7 +26,7 @@ type DatabaseFiltersProps = {
   onRealmFilterChange: (filter: RealmFilterId) => void
   onRarityFilterChange: (filter: RarityFilterId) => void
   onTypeFilterChange: (filter: TypeFilterId) => void
-  onSortKeyChange: (key: AwakenerSortKey) => void
+  onSortKeyChange: (key: DatabaseSortKey) => void
   onSortDirectionToggle: () => void
   onGroupByRealmChange: (next: boolean) => void
 }
@@ -157,7 +158,7 @@ export function DatabaseFilters({
           layout="compact"
           onGroupByRealmChange={onGroupByRealmChange}
           onSortDirectionToggle={onSortDirectionToggle}
-          onSortKeyChange={onSortKeyChange}
+          onSortKeyChange={(nextKey) => onSortKeyChange(nextKey as DatabaseSortKey)}
           showGroupByRealm={false}
           sortDirection={sortDirection}
           sortKey={sortKey}

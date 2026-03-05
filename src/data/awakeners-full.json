@@ -260,7 +260,7 @@
     "exalts": {
       "exalt": {
         "name": "Eye of Eternity",
-        "description": "{Devour}: Inflicts {Petrify} on all enemies for 1 turn. If the target has Petrification Resistance, Final DMG is increased by 200%.Deal (75/90/105/120/135/150% {ATK}) DMG to all enemies and inflict 2 stacks of {Vulnerable}. Base DMG +50% each time this Exalt is used this battle."
+        "description": "{Devour}: Inflicts {Petrify} on all enemies for 1 turn. \n If the target has Petrification Resistance, Final DMG is increased by 200%. Deal (75/90/105/120/135/150% {ATK}) DMG to all enemies and inflict 2 stacks of {Vulnerable}. Base DMG +50% each time this Exalt is used this battle."
       },
       "over_exalt": {
         "name": "Gaze Out of the Aeons",
@@ -602,8 +602,8 @@
       "Arithmetica",
       "Discard",
       "Draw",
-      "Strike",
-      "STR Up"
+      "STR Up",
+      "Strike"
     ],
     "stats": {
       "CON": "108",
@@ -622,7 +622,7 @@
       "C1": {
         "name": "Opening Act",
         "cost": "2",
-        "description": "Casiah gains (25/30/35/40/45/50) Aliemus. Gain (8/9.6/11.2/12.8/14.4/16% {ATK}) Temporary {STR} for each card played this turn."
+        "description": "Casiah gains (25/30/35/40/45/50) Aliemus. Gain (8/9.6/11.2/12.8/14.4/16% {ATK}) {Temporary STR} for each card played this turn."
       },
       "C2": {
         "name": "Strike",
@@ -637,7 +637,7 @@
       "C4": {
         "name": "Telekinesis",
         "cost": "0",
-        "description": "Considered a {Strike} Card. Choose any card in {Ultra Space}; remove it from {Ultra Space} and add it to your hand with -2 Arithmetica Cost. Deal (15/18/21/24/27/30% {ATK}) DMG to random targets 3 times. Gain (8/9.6/11.2/12.8/14.4/16% {ATK}) Temporary {STR}."
+        "description": "Considered a {Strike} Card. Choose any card in {Ultra Space}; remove it from {Ultra Space} and add it to your hand with -2 Arithmetica Cost. Deal (15/18/21/24/27/30% {ATK}) DMG to random targets 3 times. Gain (8/9.6/11.2/12.8/14.4/16% {ATK}) {Temporary STR}."
       },
       "C5": {
         "name": "Poof!",
@@ -725,7 +725,7 @@
         "description": "Deal (10/12/14/16/18/20% {ATK}) DMG. Gain (5/6/7/8/9/10) Aliemus. {Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile and gain (15/18/21/24/27/30% {DEF}) Shield."
       },
       "C3": {
-        "name": "Defence",
+        "name": "Defense",
         "cost": "1",
         "description": "Gain (10/12/14/16/18/20% {DEF}). Gain (5/6/7/8/9/10) Aliemus. {Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile and gain (15/18/21/24/27/30% {DEF}) Shield."
       },
@@ -796,12 +796,12 @@
     "type": "CHORUS",
     "tags": [
       "Arithmetica",
+      "Blighten",
       "Dispel",
       "Heal",
       "Stagnation",
       "Tentacles",
-      "Weakness",
-      "Blighten"
+      "Weakness"
     ],
     "stats": {
       "CON": "80",
@@ -820,7 +820,7 @@
       "C1": {
         "name": "Power of Blessing",
         "cost": "1",
-        "description": "Celeste gains (25/30/35/40/45/50) Aliemus. Gain 1 Tentacle. Celeste's healing increased by 10%. When HP Recovery occurs, gain (10/12/14/16/18/20% {ATK}) Temporary {Tentacle DMG}. {Retain}."
+        "description": "Celeste gains (25/30/35/40/45/50) Aliemus. Gain 1 Tentacle. Celeste's healing increased by 10%. When HP Recovery occurs, gain (10/12/14/16/18/20% {ATK}) {Temporary Tentacle DMG}. {Retain}."
       },
       "C2": {
         "name": "Strike",
@@ -840,7 +840,7 @@
       "C5": {
         "name": "Everlasting Phantasm",
         "cost": "3",
-        "description": "Heal (25/30/35/40/45/50% {CON}) HP. Gain (25/30/35/40/45/50% {ATK}) Temporary {Tentacle DMG}. Inflict 1 stack of {Weakness} to all enemies."
+        "description": "Heal (25/30/35/40/45/50% {CON}) HP. Gain (25/30/35/40/45/50% {ATK}) {Temporary Tentacle DMG}. Inflict 1 stack of {Weakness} to all enemies."
       }
     },
     "exalts": {
@@ -1003,9 +1003,9 @@
       "Weakness"
     ],
     "stats": {
-      "CON": "144*",
-      "ATK": "126*",
-      "DEF": "149*",
+      "CON": "144",
+      "ATK": "126",
+      "DEF": "149",
       "CritRate": "9.8% (+0.8%)*",
       "CritDamage": "50%",
       "AliemusRegen": "0",
@@ -1082,7 +1082,7 @@
       },
       "E3": {
         "name": "Willing Sacrifice",
-        "description": "{To Sail the Sundered Tides}: Inflicts 1 turn of {Vulnerable} to all enemies. Team gains Temporary {Crit DMG} +20%. This amount increases by 10% each time {Death Resistance} is triggered this battle."
+        "description": "{To Sail the Sundered Tides}: Inflicts 1 turn of {Vulnerable} to all enemies. Team gains {Temporary Crit DMG} +20%. This amount increases by 10% each time {Death Resistance} is triggered this battle."
       }
     }
   },
@@ -1148,13 +1148,13 @@
       "C5": {
         "name": "Heterogenous Tides",
         "cost": "1",
-        "description": "Gain (2/2.4/2.8/3.2/3.6/4% {ATK}) {STR}. Inflict 1 turn of {Vulnerable} to the front-row enemy. {Leap}: Instead, gain (10/12/14/16/18/20% {ATK}) Temporary {STR}."
+        "description": "Gain (2/2.4/2.8/3.2/3.6/4% {ATK}) {STR}. Inflict 1 turn of {Vulnerable} to the front-row enemy. {Leap}: Instead, gain (10/12/14/16/18/20% {ATK}) {Temporary STR}."
       }
     },
     "exalts": {
       "exalt": {
         "name": "Sea of Primordial Essence",
-        "description": "Deal (50/60/70/80/90/100% {ATK}) DMG to all enemies. {STR} has 3 times effectiveness on this DMG. Create a customized {Thousand Mirage} card and add it to your hand. If it is not {Ultra Round} and a {Thousand Mirage} doesn't exist in {Ultra Space}, place a copy of the created card into it. Otherwise, add 1 {Insight} card to your hand. Creating a {Thousand Mirage} card: Choose one from the three costs (0, 2, 4). Follow its subcategory(ies). 0-cost: Deal (X%? {ATK}) DMG. {STR} has 3 times effectiveness on this card. Inflict {Poison} equal to 50% DMG dealt. {Exhaust}. {Retain}. Choose one from three randomly chosen from the list: Inflict 1 stack of {Vulnerable} to all enemies. Inflict 1 stack of {Weakness} to all enemies. Gain 1 Arithmetica. Draw 1 card. Gain 10 Aliemus. Other awakers gain 5 Aliemus. Add 1 {Insight} to Draw Pile. 2-cost: Deal (X%? {ATK}) DMG. {STR} has 4 times effectiveness on this card. Gain Temporary {Counter} equal to 50% DMG dealt. {Exhaust}. {Retain}. Choose one from three randomly chosen from the list: Inflict 1 stack of {Vulnerable} to all enemies. Inflict 1 stack of {Weakness} to all enemies. Gain 1 Arithmetica. Draw 1 card. Gain 10 Aliemus. Other awakers gain 5 Aliemus. Add 1 {Insight} to Draw Pile.Choose one from three randomly chosen from the list: {STR} has an additional 2 times effectiveness on this card. Gain (2.5/3/3.5/4/4.5/5% {ATK}) {STR}. Select an Awakaner to gain 15 Aliemus. Gain 250 {Keyflare} and gain (15/18/21/24/27/30% {DEF}) Shield. Select one card from the Draw Pile and add it to your hand. Deal {Pierce DMG}, then reduce the Arithmetica Cost of the highest cost Command Card in your hand by 1. 4-cost: Deal (X%? {ATK}) DMG. {STR} has 5 times effectiveness on this card. {Exhaust}. {Retain}. Choose one from three randomly chosen from the list: Inflict 2 stack of {Vulnerable} to all enemies. Inflict 2 stack of {Weakness} to all enemies. Gain 2 Arithmetica. Draw 2 card. Gain 20 Aliemus. Other awakers gain 10 Aliemus. Add 2 {Insight} to Draw Pile. Choose one from three randomly chosen from the list: {STR} has an additional 4 times effectiveness on this card. Gain (5/6/7/8/9/10% {ATK}) {STR}. Select an Awakaner to gain 30 Aliemus. This card's {Crit Rate} and {Crit DMG} is increased by 50%. Now deals {Pierce DMG}. Gain 500 {Keyflare}. Base DMG of {Skull Reaver} and {Thousand Mirage} is increased by 10%. Reduce all enemies {STR} by ?. Enemies gain 50% less Shield and {STR} until the start of the next turn. Become immune to {Weakness}, {Fragile}, and {Vulnerable} for 1 turn. Gain (30/36/42/48/54/60% {DEF}) Shield."
+        "description": "Deal (50/60/70/80/90/100% {ATK}) DMG to all enemies. {STR} has 3 times effectiveness on this DMG. Create a customized {Thousand Mirage} card and add it to your hand. If it is not {Ultra Round} and a {Thousand Mirage} doesn't exist in {Ultra Space}, place a copy of the created card into it. Otherwise, add 1 {Insight} card to your hand. Creating a {Thousand Mirage} card: Choose one from the three costs (0, 2, 4). Follow its subcategory(ies). 0-cost: Deal (X%? {ATK}) DMG. {STR} has 3 times effectiveness on this card. Inflict {Poison} equal to 50% DMG dealt. {Exhaust}. {Retain}. Choose one from three randomly chosen from the list: Inflict 1 stack of {Vulnerable} to all enemies. Inflict 1 stack of {Weakness} to all enemies. Gain 1 Arithmetica. Draw 1 card. Gain 10 Aliemus. Other awakers gain 5 Aliemus. Add 1 {Insight} to Draw Pile. 2-cost: Deal (X%? {ATK}) DMG. {STR} has 4 times effectiveness on this card. Gain {Temporary Counter} equal to 50% DMG dealt. {Exhaust}. {Retain}. Choose one from three randomly chosen from the list: Inflict 1 stack of {Vulnerable} to all enemies. Inflict 1 stack of {Weakness} to all enemies. Gain 1 Arithmetica. Draw 1 card. Gain 10 Aliemus. Other awakers gain 5 Aliemus. Add 1 {Insight} to Draw Pile.Choose one from three randomly chosen from the list: {STR} has an additional 2 times effectiveness on this card. Gain (2.5/3/3.5/4/4.5/5% {ATK}) {STR}. Select an Awakaner to gain 15 Aliemus. Gain 250 {Keyflare} and gain (15/18/21/24/27/30% {DEF}) Shield. Select one card from the Draw Pile and add it to your hand. Deal {Pierce DMG}, then reduce the Arithmetica Cost of the highest cost Command Card in your hand by 1. 4-cost: Deal (X%? {ATK}) DMG. {STR} has 5 times effectiveness on this card. {Exhaust}. {Retain}. Choose one from three randomly chosen from the list: Inflict 2 stack of {Vulnerable} to all enemies. Inflict 2 stack of {Weakness} to all enemies. Gain 2 Arithmetica. Draw 2 card. Gain 20 Aliemus. Other awakers gain 10 Aliemus. Add 2 {Insight} to Draw Pile. Choose one from three randomly chosen from the list: {STR} has an additional 4 times effectiveness on this card. Gain (5/6/7/8/9/10% {ATK}) {STR}. Select an Awakaner to gain 30 Aliemus. This card's {Crit Rate} and {Crit DMG} is increased by 50%. Now deals {Pierce DMG}. Gain 500 {Keyflare}. Base DMG of {Skull Reaver} and {Thousand Mirage} is increased by 10%. Reduce all enemies {STR} by ?. Enemies gain 50% less Shield and {STR} until the start of the next turn. Become immune to {Weakness}, {Fragile}, and {Vulnerable} for 1 turn. Gain (30/36/42/48/54/60% {DEF}) Shield."
       },
       "over_exalt": {
         "name": "Phantasmal Haze",
@@ -1534,7 +1534,7 @@
       "C1": {
         "name": "Parameter Fitting",
         "cost": "2",
-        "description": "Erica gains (25/30/35/40/45/50) Aliemus. Every time Erica deals damage, gain (5/6/7/8/9/10% {ATK}) Temporary {STR}. When Erica applies a Shield, gain (1.25/1.5/1.75/2/2.25/2.5% {DEF}) Temporary {Alert}."
+        "description": "Erica gains (25/30/35/40/45/50) Aliemus. Every time Erica deals damage, gain (5/6/7/8/9/10% {ATK}) {Temporary STR}. When Erica applies a Shield, gain (1.25/1.5/1.75/2/2.25/2.5% {DEF}) {Temporary Alert}."
       },
       "C2": {
         "name": "Strike",
@@ -1549,12 +1549,12 @@
       "C4": {
         "name": "Unleash: Mecha",
         "cost": "0",
-        "description": "Gain (10/12/14/16/18/20% {ATK}) Temporary {STR}. Gain 100% {Keyflare} equal to Erica's {Keyflare}. Dispel {Weakness} state from self. Whenever a card enters {Ultra Space}, transform this card into {Retract: Mecha}."
+        "description": "Gain (10/12/14/16/18/20% {ATK}) {Temporary STR}. Gain 100% {Keyflare} equal to Erica's {Keyflare}. Dispel {Weakness} state from self. Whenever a card enters {Ultra Space}, transform this card into {Retract: Mecha}."
       },
       "C5": {
         "name": "Retract: Mecha",
         "cost": "0",
-        "description": "Gain (2.5/3/3.5/4/4.5/5% {DEF}) Temporary {Alert}. Gain 100% {Keyflare} equal to Erica's {Keyflare}. Dispel {Fragile} state from self. Whenever a card enters {Ultra Space}, transform this card into {Unleash: Mecha}."
+        "description": "Gain (2.5/3/3.5/4/4.5/5% {DEF}) {Temporary Alert}. Gain 100% {Keyflare} equal to Erica's {Keyflare}. Dispel {Fragile} state from self. Whenever a card enters {Ultra Space}, transform this card into {Unleash: Mecha}."
       },
       "C6": {
         "name": "Function Overload",
@@ -1575,7 +1575,7 @@
     "talents": {
       "T1": {
         "name": "External Power Source",
-        "description": "For every 1 point of {Keyflare Regen} Erica and her equipped Wheel Of Destiny & Covenant have, {Electromagnetic Blast} grants Erica 0.5% Temporary {Crit Rate} and {Crit DMG}."
+        "description": "For every 1 point of {Keyflare Regen} Erica and her equipped Wheel Of Destiny & Covenant have, {Electromagnetic Blast} grants Erica 0.5% {Temporary Crit Rate} and {Crit DMG}."
       },
       "T2": {
         "name": "Madness Omen",
@@ -1638,7 +1638,7 @@
       "C1": {
         "name": "Blinding Color",
         "cost": "2",
-        "description": "Faint gains (25/30/35/40/45/50) Aliemus. Gain (60/72/84/96/108/120% {ATK}) stacks of {Counter}. {Death Resistance} decay rate is reduced from 50% to 45% this battle. When you play a Faint Command Card, {Steal} (5/6/7/8/9/10% {ATK}) Temporary {STR} from all enemies. At the end of the turn, deal Fixed DMG equal to 50% of {Counter}. {Retain}."
+        "description": "Faint gains (25/30/35/40/45/50) Aliemus. Gain (60/72/84/96/108/120% {ATK}) stacks of {Counter}. {Death Resistance} decay rate is reduced from 50% to 45% this battle. When you play a Faint Command Card, {Steal} (5/6/7/8/9/10% {ATK}) {Temporary STR} from all enemies. At the end of the turn, deal Fixed DMG equal to 50% of {Counter}. {Retain}."
       },
       "C2": {
         "name": "Strike",
@@ -1688,7 +1688,7 @@
     "enlightens": {
       "E1": {
         "name": "Binary Stars",
-        "description": "{Strike} deals DMG twice and gain Temporary {Counter} equal to 50% of the damage dealt."
+        "description": "{Strike} deals DMG twice and gain {Temporary Counter} equal to 50% of the damage dealt."
       },
       "E2": {
         "name": "Withering Hymn",
@@ -1765,7 +1765,7 @@
       },
       "over_exalt": {
         "name": "Light of the Lost",
-        "description": "Temporary {Hand Limit} +2. At the end of the turn, choose one card in hand to {Retain} and reduces its Arithmetica Cost by 1. This effect lasts 3 turns."
+        "description": "{Temporary Hand Limit} +2. At the end of the turn, choose one card in hand to {Retain} and reduces its Arithmetica Cost by 1. This effect lasts 3 turns."
       }
     },
     "talents": {
@@ -1860,7 +1860,7 @@
     "exalts": {
       "exalt": {
         "name": "Abyssal Depths' Power",
-        "description": "Choose Usurp or Dormancy. Place 3 {Blade's Dominion} into hand. {Usurp}: Gain Temporary {STR} equal to (40/44/48/52/56/60)% of Tentacle Damage. Goliath gains 25% Temporary {Crit Rate}. {Dormancy}: Increase the base damage of {Decapitation Damage} and {Great Sword's Might} by 25% for this battle. {Prepare}. {Retain}. {Exhaust}."
+        "description": "Choose Usurp or Dormancy. Place 3 {Blade's Dominion} into hand. {Usurp}: Gain {Temporary STR} equal to (40/44/48/52/56/60)% of Tentacle Damage. Goliath gains 25% {Temporary Crit Rate}. {Dormancy}: Increase the base damage of {Decapitation Damage} and {Great Sword's Might} by 25% for this battle. {Prepare}. {Retain}. {Exhaust}."
       },
       "over_exalt": {
         "name": "Giant's Grip",
@@ -1892,7 +1892,7 @@
       },
       "E3": {
         "name": "Boundless Ambition",
-        "description": "{Abyssal Depths' Power} grants Goliath 25% Temporary {Crit Rate} when choosing {Usurp}, or 25 Aliemus when choosing {Dormancy}."
+        "description": "{Abyssal Depths' Power} grants Goliath 25% {Temporary Crit Rate} when choosing {Usurp}, or 25 Aliemus when choosing {Dormancy}."
       }
     }
   },
@@ -1961,7 +1961,7 @@
     "exalts": {
       "exalt": {
         "name": "Primal Chord",
-        "description": "Randomly deals (25/30/35/40/45/50% {ATK}) {Pierce DMG} 3 times. {Steal} (5/6/7/8/9/10%) Temporary {STR} per hit. Select 1 non-Derived Command Card in the hand that does not have {Exhaust}, {Rondino} or {Crescendo}, and add {Rondino} to it. If there are no valid targets for this effect, deal an additional 3 instances of DMG. {Rondino}: When played, this card's effects are activated twice. After playing, change {Rondino} to {Crescendo}. {Crescendo}: When played, grant Hameln 3 Aliemus."
+        "description": "Randomly deals (25/30/35/40/45/50% {ATK}) {Pierce DMG} 3 times. {Steal} (5/6/7/8/9/10%) {Temporary STR} per hit. Select 1 non-Derived Command Card in the hand that does not have {Exhaust}, {Rondino} or {Crescendo}, and add {Rondino} to it. If there are no valid targets for this effect, deal an additional 3 instances of DMG. {Rondino}: When played, this card's effects are activated twice. After playing, change {Rondino} to {Crescendo}. {Crescendo}: When played, grant Hameln 3 Aliemus."
       },
       "over_exalt": {
         "name": "The Final Sonata",
@@ -1979,13 +1979,13 @@
       },
       "T3": {
         "name": "Soulforge Aptitude",
-        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. Hameln's {CON}, {ATK}, and {DEF} stats increase by (3% per talent level). After using Hameln's {Rouse}, gain (50 per talent level) {Keyflare}. After Playing {Insight}, gain Temporary {STR} equal to 5% (+0.5% per talent level) of {ATK}, and trigger {Crescendo} once. This effect can trigger up to 5 times per turn"
+        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. Hameln's {CON}, {ATK}, and {DEF} stats increase by (3% per talent level). After using Hameln's {Rouse}, gain (50 per talent level) {Keyflare}. After Playing {Insight}, gain {Temporary STR} equal to 5% (+0.5% per talent level) of {ATK}, and trigger {Crescendo} once. This effect can trigger up to 5 times per turn"
       }
     },
     "enlightens": {
       "E1": {
         "name": "Mind Concerto",
-        "description": "Hameln's {Strike} and {Defend} cards grant Temporary {STR} equal to 10% of {ATK}. If the card triggers one of Hameln's {Melody} effects, the Temporary {STR} gained is doubled."
+        "description": "Hameln's {Strike} and {Defend} cards grant {Temporary STR} equal to 10% of {ATK}. If the card triggers one of Hameln's {Melody} effects, the {Temporary STR} gained is doubled."
       },
       "E2": {
         "name": "Oneiric Waltz",
@@ -2060,7 +2060,7 @@
     "exalts": {
       "exalt": {
         "name": "Surviving Impasse",
-        "description": "{Devour}: Draw 3 {Strike} cards. Increase Temporary {Hand Limit} by 2. Helot's Base DMG is increased by 10% for this battle. Dispels {Weakness} and Temporary {STR} debuffs. For this turn, {Strike} card DMG increases by (80/84/88/92/96/100)%. Helot's DMG output +3%."
+        "description": "{Devour}: Draw 3 {Strike} cards. Increase {Temporary Hand Limit} by 2. Helot's Base DMG is increased by 10% for this battle. Dispels {Weakness} and {Temporary STR} debuffs. For this turn, {Strike} card DMG increases by (80/84/88/92/96/100)%. Helot's DMG output +3%."
       },
       "over_exalt": {
         "name": "Blood for Blood",
@@ -2088,7 +2088,7 @@
       },
       "E2": {
         "name": "Sacred Half",
-        "description": "Playing Helot's {Defense} grants her 25% Temporary {Crit Rate}."
+        "description": "Playing Helot's {Defense} grants her 25% {Temporary Crit Rate}."
       },
       "E3": {
         "name": "The Chainbreaker",
@@ -2248,7 +2248,7 @@
       "C2": {
         "name": "Threnody of Delirium",
         "cost": "1",
-        "description": "Deal (10/12/14/16/18/20% {ATK}) DMG. Gain (5/6/7/8/9/10) Aliemus. {Leap}: Switches emotion to {Anger}. For every stack of {Anger} {Metaphor} consumed, this deals an additional 2 instances of DMG.. {Anger}: Final DMG dealt by all Awakeners is increased by 20%. Increases the Temporary {Crit Rate} and {Crit DMG} gained by {Resplendent Chapters}."
+        "description": "Deal (10/12/14/16/18/20% {ATK}) DMG. Gain (5/6/7/8/9/10) Aliemus. {Leap}: Switches emotion to {Anger}. For every stack of {Anger} {Metaphor} consumed, this deals an additional 2 instances of DMG.. {Anger}: Final DMG dealt by all Awakeners is increased by 20%. Increases the {Temporary Crit Rate} and {Crit DMG} gained by {Resplendent Chapters}."
       },
       "C3": {
         "name": "Threnody of Sorrow",
@@ -2269,7 +2269,7 @@
     "exalts": {
       "exalt": {
         "name": "Resplendent Chapters",
-        "description": "Restore (15/18/21/24/27/30% {CON}) HP. Gain (4/4.8/5.6/6.4/7.2/8% {ATK}) {STR}. Other Awakers gain 5 Aliemus. Temporary {Crit Rate} and {Crit DMG} +8%. Depending on Horla's current Emotion, the effects of {Resplendent Chapters} are increased by 150%. {Anger}: Increases Temporary {Crit Rate} and {Crit DMG} by the % amount. {Grief}: Restores additional HP by the % amount. {Happiness}: Gains additional Aliemus by the % amount. {Fear}: Gain additional {STR} by the % amount."
+        "description": "Restore (15/18/21/24/27/30% {CON}) HP. Gain (4/4.8/5.6/6.4/7.2/8% {ATK}) {STR}. Other Awakers gain 5 Aliemus. {Temporary Crit Rate} and {Crit DMG} +8%. Depending on Horla's current Emotion, the effects of {Resplendent Chapters} are increased by 150%. {Anger}: Increases {Temporary Crit Rate} and {Crit DMG} by the % amount. {Grief}: Restores additional HP by the % amount. {Happiness}: Gains additional Aliemus by the % amount. {Fear}: Gain additional {STR} by the % amount."
       },
       "over_exalt": {
         "name": "Ink-Stained Sonnet",
@@ -2337,7 +2337,7 @@
       "C1": {
         "name": "Spatial Fold",
         "cost": "2",
-        "description": "Jenkins gains (25/30/35/40/45/50) Aliemus. The Team Critical Rate is increased by 25%. For every damage instance Jenkins deals, Temporary {Crit DMG} +15%, stacking up to 5 times per turn. {Retain}."
+        "description": "Jenkins gains (25/30/35/40/45/50) Aliemus. The Team Critical Rate is increased by 25%. For every damage instance Jenkins deals, {Temporary Crit DMG} +15%, stacking up to 5 times per turn. {Retain}."
       },
       "C2": {
         "name": "Strike",
@@ -2368,7 +2368,7 @@
     "exalts": {
       "exalt": {
         "name": "Mistborn Street Urchin",
-        "description": "Add 3 {Get 'em! Brown!} cards to your hand with 0 Arithmetica Cost and {Exhaust}. Gain Temporary {Crit DMG} +(50/54/58/62/66/70)%."
+        "description": "Add 3 {Get 'em! Brown!} cards to your hand with 0 Arithmetica Cost and {Exhaust}. Gain {Temporary Crit DMG} +(50/54/58/62/66/70)%."
       },
       "over_exalt": {
         "name": "Gotcha!",
@@ -2663,7 +2663,7 @@
       "C4": {
         "name": "Pain of Unfulfilled Desires",
         "cost": "0",
-        "description": "Lose 10% Current HP. {Embryo Fusion} +(20/22/24/26/28/30)%. Gain (15/18/21/24/27/30% {ATK}) Temporary {STR}."
+        "description": "Lose 10% Current HP. {Embryo Fusion} +(20/22/24/26/28/30)%. Gain (15/18/21/24/27/30% {ATK}) {Temporary STR}."
       },
       "C5": {
         "name": "Pain and Pleasure",
@@ -2876,7 +2876,7 @@
     "exalts": {
       "exalt": {
         "name": "Dance to Destruction",
-        "description": "Gain (10/12/14/16/18/20% {ATK}) Temporary {STR}. Discard all Liz cards from your hand and trigger their effects."
+        "description": "Gain (10/12/14/16/18/20% {ATK}) {Temporary STR}. Discard all Liz cards from your hand and trigger their effects."
       },
       "over_exalt": {
         "name": "Omen's Descent",
@@ -3169,7 +3169,7 @@
         "description": "Deal (10/12/14/16/18/20% {ATK}) DMG. Gain (5/6/7/8/9/10) Aliemus."
       },
       "C3": {
-        "name": "Defence",
+        "name": "Defense",
         "cost": "1",
         "description": "Gain (10/12/14/16/18/20% {DEF}) Shield. Gain (5/6/7/8/9/10) Aliemus."
       },
@@ -3234,8 +3234,8 @@
     "rarity": "SSR",
     "type": "WARDEN",
     "tags": [
-      "Arithmetica",
       "Aftershock",
+      "Arithmetica",
       "Keyflare",
       "Strike",
       "Tentacles",
@@ -3431,8 +3431,8 @@
     "rarity": "SSR",
     "type": "WARDEN",
     "tags": [
-      "Dispel",
       "Counter",
+      "Dispel",
       "Fixed DMG",
       "Fragile"
     ],
@@ -3468,7 +3468,7 @@
       "C4": {
         "name": "No Trespassing",
         "cost": "3",
-        "description": "Gain (20/24/28/32/36/40% {DEF}) Shield and (80/96/112/128/144/160% {ATK}) stacks of Temporary {Counter}. Temporary {Counter} gained is increased 3 times in Boss Battles. {Retain}."
+        "description": "Gain (20/24/28/32/36/40% {DEF}) Shield and (80/96/112/128/144/160% {ATK}) stacks of {Temporary Counter}. {Temporary Counter} gained is increased 3 times in Boss Battles. {Retain}."
       },
       "C5": {
         "name": "Short-term Memory",
@@ -3497,7 +3497,7 @@
       },
       "T3": {
         "name": "Soulforge Aptitude",
-        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. Nautila's {CON}, {ATK}, and {DEF} stats increase by (3% per talent level). After the first time using Nautila's {Rouse}, gain (50 per talent level) {Keyflare}. The {Counter} generated by Nautila is increased by 15%~(+1.5% per talent level). Gain Temporary {Counter} equal to 20%~(+3% per talent level) of permanent {Counter} before unleashing {Ready and Set}"
+        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. Nautila's {CON}, {ATK}, and {DEF} stats increase by (3% per talent level). After the first time using Nautila's {Rouse}, gain (50 per talent level) {Keyflare}. The {Counter} generated by Nautila is increased by 15%~(+1.5% per talent level). Gain {Temporary Counter} equal to 20%~(+3% per talent level) of permanent {Counter} before unleashing {Ready and Set}"
       }
     },
     "enlightens": {
@@ -3680,7 +3680,7 @@
     "talents": {
       "T1": {
         "name": "Formless Refinement",
-        "description": "For every 1% {Sigil Yield} Ogier has, the Temporary {STR} gained from {Seven Arts and Virtues} increases by 3%."
+        "description": "For every 1% {Sigil Yield} Ogier has, the {Temporary STR} gained from {Seven Arts and Virtues} increases by 3%."
       },
       "T2": {
         "name": "Madness Omen",
@@ -3753,7 +3753,7 @@
       "C4": {
         "name": "Whip of Madness",
         "cost": "3",
-        "description": "Randomly deal (15/18/21/24/27/30% {ATK}) DMG three times. Gain Temporary {Counter} equal to 50% of the damage dealt."
+        "description": "Randomly deal (15/18/21/24/27/30% {ATK}) DMG three times. Gain {Temporary Counter} equal to 50% of the damage dealt."
       },
       "C5": {
         "name": "Wax-Hot Desire",
@@ -3788,7 +3788,7 @@
     "enlightens": {
       "E1": {
         "name": "Embrace the Pain",
-        "description": "{Strike} gains Temporary {Counter} equal to 50% of the damage. {Defend} gains {Counter} equal to (7.5/9/10.5/12/13.5/15)% of {ATK} (effect scales with level of {Defense})."
+        "description": "{Strike} gains {Temporary Counter} equal to 50% of the damage. {Defend} gains {Counter} equal to (7.5/9/10.5/12/13.5/15)% of {ATK} (effect scales with level of {Defense})."
       },
       "E2": {
         "name": "Blazing Desire",
@@ -4090,7 +4090,7 @@
       },
       "E3": {
         "name": "Precious Ties",
-        "description": "After releasing Posse, Ramona's Temporary {Crit Rate} increases by 50%. {Mundus Deduction} shuffles 1 {Inspiration} into the Draw Pile."
+        "description": "After releasing Posse, Ramona's {Temporary Crit Rate} increases by 50%. {Mundus Deduction} shuffles 1 {Inspiration} into the Draw Pile."
       }
     }
   },
@@ -4182,7 +4182,7 @@
       },
       "E2": {
         "name": "Klein Bottle Voyager",
-        "description": "Each time you use a Posse, Ramona: Timeworn gains 25% Temporary {Crit Rate} and {Crit DMG}."
+        "description": "Each time you use a Posse, Ramona: Timeworn gains 25% {Temporary Crit Rate} and {Crit DMG}."
       },
       "E3": {
         "name": "Mobius Captive",
@@ -4226,7 +4226,7 @@
       "C1": {
         "name": "Exceptional Luck",
         "cost": "2",
-        "description": "Ryker gains (25/30/35/40/45/50) Aliemus. Gain (6/7.2/8.4/9.6/10.8/12% {ATK}) {STR}. In this battle, obtain a selected {Chaos Legacy} or upgrade an already owned {Chaos Legacy}. {Retain}. {Gifts of Chaos}: {Lucky Windcoat}: Increases all Awakener's {Crit Rate} by 10%. All dice roll effects will never roll the minimum value. {Upgraded Version}: Gain 15% {Crit Rate} instead. The maximum value of all dice roll effects increases by 1 instead. {Quack Dice}: Each time a Posse is activated, add 1 {Octahedron Dice} to your hand. {Upgraded Version}: Add 1 {Shining Octahedron Dice} to your hand instead. {Octahedron Dice} (Cost: 0) - Roll a dice, then gain Temporary {STR} equal to the result times X. If the result is 4 or higher, apply 1 {Vulnerable} to all enemies. If the result is 6 or higher, double the Temporary {STR} gained. {Shining Octahedron Dice} (Cost: 0) - Roll a dice, then gain Temporary {STR} equal to the result times 2. If the result is 4 or higher, apply 1 {Weakness} and 1 {Vulnerable} to all enemies. If the result is 6 or higher, double the Temporary {STR} gained and gain 1 Arithmetica. {Big Mouth Button}: At the start of the turn and when a dice is rolled, gain 50 {Keyflare} and 2% {Crit DMG}, up to a maximum of 30% {Crit DMG}. {Upgraded Version}: Gain 100 {Keyflare} and 4% {Crit DMG}, up to a maximum of 50% {Crit DMG}, instead."
+        "description": "Ryker gains (25/30/35/40/45/50) Aliemus. Gain (6/7.2/8.4/9.6/10.8/12% {ATK}) {STR}. In this battle, obtain a selected {Chaos Legacy} or upgrade an already owned {Chaos Legacy}. {Retain}. {Gifts of Chaos}: {Lucky Windcoat}: Increases all Awakener's {Crit Rate} by 10%. All dice roll effects will never roll the minimum value. {Upgraded Version}: Gain 15% {Crit Rate} instead. The maximum value of all dice roll effects increases by 1 instead. {Quack Dice}: Each time a Posse is activated, add 1 {Octahedron Dice} to your hand. {Upgraded Version}: Add 1 {Shining Octahedron Dice} to your hand instead. {Octahedron Dice} (Cost: 0) - Roll a dice, then gain {Temporary STR} equal to the result times X. If the result is 4 or higher, apply 1 {Vulnerable} to all enemies. If the result is 6 or higher, double the {Temporary STR} gained. {Shining Octahedron Dice} (Cost: 0) - Roll a dice, then gain {Temporary STR} equal to the result times 2. If the result is 4 or higher, apply 1 {Weakness} and 1 {Vulnerable} to all enemies. If the result is 6 or higher, double the {Temporary STR} gained and gain 1 Arithmetica. {Big Mouth Button}: At the start of the turn and when a dice is rolled, gain 50 {Keyflare} and 2% {Crit DMG}, up to a maximum of 30% {Crit DMG}. {Upgraded Version}: Gain 100 {Keyflare} and 4% {Crit DMG}, up to a maximum of 50% {Crit DMG}, instead."
       },
       "C2": {
         "name": "Strike",
@@ -4325,7 +4325,7 @@
       "C1": {
         "name": "Benediction",
         "cost": "3",
-        "description": "Salvador gains (25/30/35/40/45/50) Aliemus. Puts 1 {Sanctuary of Mercy} into your hand. At the end of the turn, gain (2.5/3/3.5/4/4.5/5% {ATK}) {STR}. {Sanctuary of Mercy} (Cost:0): Gain 1 Temporary {Barrier}. {Embryo Fusion} +100%."
+        "description": "Salvador gains (25/30/35/40/45/50) Aliemus. Puts 1 {Sanctuary of Mercy} into your hand. At the end of the turn, gain (2.5/3/3.5/4/4.5/5% {ATK}) {STR}. {Sanctuary of Mercy} (Cost:0): Gain 1 {Temporary Barrier}. {Embryo Fusion} +100%."
       },
       "C2": {
         "name": "Strike",
@@ -4351,7 +4351,7 @@
     "exalts": {
       "exalt": {
         "name": "Creator's Blessing",
-        "description": "{Devour}: Gain (20/24/28/32/36/40% {ATK}) Temporary {STR} and 25% Temporary {Crit Rate}. Gain (15/18/21/24/27/30 {DEF}) Shield. Apply 1 {Vulnerable} to all enemies for 1 turn. Until the start of your next turn, convert (5/6/7/8/9/10)% of the damage taken into {Crimson Furnace} healing."
+        "description": "{Devour}: Gain (20/24/28/32/36/40% {ATK}) {Temporary STR} and 25% {Temporary Crit Rate}. Gain (15/18/21/24/27/30 {DEF}) Shield. Apply 1 {Vulnerable} to all enemies for 1 turn. Until the start of your next turn, convert (5/6/7/8/9/10)% of the damage taken into {Crimson Furnace} healing."
       },
       "over_exalt": {
         "name": "Rite of Creation",
@@ -4383,7 +4383,7 @@
       },
       "E3": {
         "name": "Salvation's Hand",
-        "description": "At the start of the turn, accumulate {Crimson Furnace} healing equal to 6% of {CON}. {Creator's Blessing} grants Salvador a 35% Temporary {Crit DMG} increase for 1 turn."
+        "description": "At the start of the turn, accumulate {Crimson Furnace} healing equal to 6% of {CON}. {Creator's Blessing} grants Salvador a 35% {Temporary Crit DMG} increase for 1 turn."
       }
     }
   },
@@ -4563,7 +4563,7 @@
       },
       "T3": {
         "name": "Soulforge Aptitude",
-        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. Sorel's {CON}, {ATK}, and {DEF} stats increase by (3% per talent level). After the first time using Sorel's {Rouse}, gain (50 per talent level) {Keyflare}. After Sorel Devours, gain 15% (+1.5% per talent level) of {ATK} as Temporary {STR}, triggering up to 5 times per turn"
+        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. Sorel's {CON}, {ATK}, and {DEF} stats increase by (3% per talent level). After the first time using Sorel's {Rouse}, gain (50 per talent level) {Keyflare}. After Sorel Devours, gain 15% (+1.5% per talent level) of {ATK} as {Temporary STR}, triggering up to 5 times per turn"
       }
     },
     "enlightens": {
@@ -4573,7 +4573,7 @@
       },
       "E2": {
         "name": "Vintage Nectar",
-        "description": "{Elegance of Rose} DMG is increased by 25%. For each instance of damage dealt, increase Temporary {Crit Rate} by 5%."
+        "description": "{Elegance of Rose} DMG is increased by 25%. For each instance of damage dealt, increase {Temporary Crit Rate} by 5%."
       },
       "E3": {
         "name": "Lustrous Pearl",
@@ -4649,12 +4649,12 @@
       "C7": {
         "name": "Tetrad Wings Revealed",
         "cost": "2",
-        "description": "Can be played by consuming 500 {Keyflare} when Arithmetica is insufficient. Deal 4 instances of (25/30/35/40/45/50% {ATK}) DMG. Draw 1 card. For each hit, {Steal} (5/6/7/8/9/10% {ATK}) Temporary {STR} for 1 turn. Shuffle 1 {Hexad Wings in Glory} into the Draw Pile. {Exhaust}."
+        "description": "Can be played by consuming 500 {Keyflare} when Arithmetica is insufficient. Deal 4 instances of (25/30/35/40/45/50% {ATK}) DMG. Draw 1 card. For each hit, {Steal} (5/6/7/8/9/10% {ATK}) {Temporary STR} for 1 turn. Shuffle 1 {Hexad Wings in Glory} into the Draw Pile. {Exhaust}."
       },
       "C8": {
         "name": "Hexad Wings in Glory",
         "cost": "2",
-        "description": "Can be played by consuming 500 {Keyflare} when Arithmetica is insufficient. Deal 6 instances of (30/36/42/48/54/60% {ATK}) {Pierce DMG}. You can choose one out of six {Memories} to trigger its effect; this {Memory} cannot be used again during this exploration. {Exhaust}. Memories: {Innocent Return Gift}: Choose an Awaker to gain 60 Aliemus. {Mutated Heart}: Discard all cards in hand and draw a number of cards equal to that quantity +3. {Honey Mead}: Gain 1 Temporary {Barrier} that lasts 1 turn. {Executor's Verdict}: Deal 15% of the target's max HP Fixed DMG to the enemy in the last row. The damage cannot be less than 300% of your own Max HP. {Utopian Veil}: View 3 random unlocked Posses and choose 1 to activate immediately. {Polar Dusklight}: Choose 1 card from the Draw Pile or Discard Pile and add it to your hand, reducing its Arithmetica Cost to 0."
+        "description": "Can be played by consuming 500 {Keyflare} when Arithmetica is insufficient. Deal 6 instances of (30/36/42/48/54/60% {ATK}) {Pierce DMG}. You can choose one out of six {Memories} to trigger its effect; this {Memory} cannot be used again during this exploration. {Exhaust}. Memories: {Innocent Return Gift}: Choose an Awaker to gain 60 Aliemus. {Mutated Heart}: Discard all cards in hand and draw a number of cards equal to that quantity +3. {Honey Mead}: Gain 1 {Temporary Barrier} that lasts 1 turn. {Executor's Verdict}: Deal 15% of the target's max HP Fixed DMG to the enemy in the last row. The damage cannot be less than 300% of your own Max HP. {Utopian Veil}: View 3 random unlocked Posses and choose 1 to activate immediately. {Polar Dusklight}: Choose 1 card from the Draw Pile or Discard Pile and add it to your hand, reducing its Arithmetica Cost to 0."
       }
     },
     "exalts": {
@@ -4849,18 +4849,18 @@
       "C4": {
         "name": "Requiem",
         "cost": "2",
-        "description": "Dispel {Fragile}, {Weakness}, and {Vulnerable} from self. {Steal} (7.5/9/10.5/12/13.5/15% {ATK}) Temporary {STR} from all enemies. The next card played with a {Leap} effect will activate its {Leap} effect. {Leap}: {Steal} (15/19/23/27/31/35% {ATK}) Temporary {STR} from the front-row enemy instead."
+        "description": "Dispel {Fragile}, {Weakness}, and {Vulnerable} from self. {Steal} (7.5/9/10.5/12/13.5/15% {ATK}) {Temporary STR} from all enemies. The next card played with a {Leap} effect will activate its {Leap} effect. {Leap}: {Steal} (15/19/23/27/31/35% {ATK}) {Temporary STR} from the front-row enemy instead."
       },
       "C5": {
         "name": "Distant Melody",
         "cost": "3",
-        "description": "Gain (50/60/70/80/90/100% {DEF}) Shield. Gain 15% Temporary {Crit Rate} next turn. {Leap}: Change the effect to: {Gain (30/36/42/48/54/60% {DEF}) Shield and gain 4% Temporary {Crit Rate} next turn.}"
+        "description": "Gain (50/60/70/80/90/100% {DEF}) Shield. Gain 15% {Temporary Crit Rate} next turn. {Leap}: Change the effect to: {Gain (30/36/42/48/54/60% {DEF}) Shield and gain 4% {Temporary Crit Rate} next turn.}"
       }
     },
     "exalts": {
       "exalt": {
         "name": "Aurora",
-        "description": "Gain (7.5/9/10.5/12/13.5/15% {ATK}) {STR}. Gains 15% Temporary {Crit Rate}. For this battle, Tinct's {Strike} Base DMG is increased by 50%. Reduce the Arithmetica cost of 5 random cards in hand by 1 until the end of the turn."
+        "description": "Gain (7.5/9/10.5/12/13.5/15% {ATK}) {STR}. Gains 15% {Temporary Crit Rate}. For this battle, Tinct's {Strike} Base DMG is increased by 50%. Reduce the Arithmetica cost of 5 random cards in hand by 1 until the end of the turn."
       },
       "over_exalt": {
         "name": "Cosmic Symphony",
@@ -4870,7 +4870,7 @@
     "talents": {
       "T1": {
         "name": "Planetary Traveler",
-        "description": "For each 1% of {Sigil Yield} Tinct and her equipped Whell Of Destiny & Covenant have, {Aurora} gains an additional 0.15% Temporary {Crit Rate}."
+        "description": "For each 1% of {Sigil Yield} Tinct and her equipped Whell Of Destiny & Covenant have, {Aurora} gains an additional 0.15% {Temporary Crit Rate}."
       },
       "T2": {
         "name": "Madness Omen",
@@ -4952,13 +4952,13 @@
       "C5": {
         "name": "When Lemuria Returns",
         "cost": "3",
-        "description": "Dispel {Weakness} from self. Temporarily gain (15/18/21/24/27/30% {ATK}) {Tentacle DMG} and {STR}. Gain 15% Temporary {Crit Rate}. If the current pose is {Tranquil Sea}, reduce all enemies {STR} by (20/24/28/32/36/40% {DEF}) for 1 turn. {Aftershock}: Command 1 Tentacle to attack the enemy once."
+        "description": "Dispel {Weakness} from self. Temporarily gain (15/18/21/24/27/30% {ATK}) {Tentacle DMG} and {STR}. Gain 15% {Temporary Crit Rate}. If the current pose is {Tranquil Sea}, reduce all enemies {STR} by (20/24/28/32/36/40% {DEF}) for 1 turn. {Aftershock}: Command 1 Tentacle to attack the enemy once."
       }
     },
     "exalts": {
       "exalt": {
         "name": "When the Stars are Right",
-        "description": "Gain 1 Tentacle. Temporary gain (20/24/28/32/36/40% {ATK}) {Tentacle DMG} and {STR}. Gain 25% Temporary {Crit Rate}."
+        "description": "Gain 1 Tentacle. Temporary gain (20/24/28/32/36/40% {ATK}) {Tentacle DMG} and {STR}. Gain 25% {Temporary Crit Rate}."
       },
       "over_exalt": {
         "name": "The Promised Day",
@@ -4976,7 +4976,7 @@
       },
       "T3": {
         "name": "Soulforge Aptitude",
-        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. Tulu's {CON}, {ATK}, and {DEF} stats increase by (3% per talent level). After the first time using Tulu's {Rouse}, gain (50 per talent level) {Keyflare}. Every Tentacle's attack increases Temporary {Tentacle DMG} by 2.5% of Tulu's {ATK}, up to 15 (+1 per talent level) times per turn. When there are 1/2/3 other {Lemurian} Awakeners in the team, all enemies receive 10%/25%/50% more {Tentacle DMG}"
+        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. Tulu's {CON}, {ATK}, and {DEF} stats increase by (3% per talent level). After the first time using Tulu's {Rouse}, gain (50 per talent level) {Keyflare}. Every Tentacle's attack increases {Temporary Tentacle DMG} by 2.5% of Tulu's {ATK}, up to 15 (+1 per talent level) times per turn. When there are 1/2/3 other {Lemurian} Awakeners in the team, all enemies receive 10%/25%/50% more {Tentacle DMG}"
       }
     },
     "enlightens": {
@@ -4986,7 +4986,7 @@
       },
       "E2": {
         "name": "Touch of Revival",
-        "description": "{Strike} and {Defense} gains Temporary {STR} and Temporary {Tentacle DMG} equal to (4/4.8/5.6/6.4/7.2/8)% of Tulu's {ATK} (effects scale with the levels of {Strike} and {Defense})."
+        "description": "{Strike} and {Defense} gains {Temporary STR} and {Temporary Tentacle DMG} equal to (4/4.8/5.6/6.4/7.2/8)% of Tulu's {ATK} (effects scale with the levels of {Strike} and {Defense})."
       },
       "E3": {
         "name": "The Stars Are Right",
@@ -5148,7 +5148,7 @@
     "exalts": {
       "exalt": {
         "name": "Necropolis of Dreams",
-        "description": "Gain (25/30/35/40/45/50% {DEF}) Shield. Gain (30/36/42/48/54/60% {ATK}) stacks of {Counter}. The next card played this turn with a {Leap} effect has it's {Leap} Effects forcibly activated.You can choose to consume {Dreamlure} stacks to trigger Slumber {Counter} or Echoes of Whispers. If you have less than 5 stacks of {Dreamlure}, activate Hypnotic Veins automatically. {Hypnotic Veins}: Consumes 0 stacks of {Dreamlure}. Gain 1 stack of {Dreamlure}. {Slumber Counter}: Consume 5 stacks of {Dreamlure}. Gain (10/11/12/13/14/15) Aliemus. Gain Temporary {Counter} equal to (35/38/41/44/47/50)% of permanent {Counter}. {Echoes of Whispers}: Consume 10 stacks of {Dreamlure}. Apply {Murmur} state to all enemies for 1 round. {Murmur}: Reduces damage dealt by 60%, but number of attacks is doubled."
+        "description": "Gain (25/30/35/40/45/50% {DEF}) Shield. Gain (30/36/42/48/54/60% {ATK}) stacks of {Counter}. The next card played this turn with a {Leap} effect has it's {Leap} Effects forcibly activated.You can choose to consume {Dreamlure} stacks to trigger Slumber {Counter} or Echoes of Whispers. If you have less than 5 stacks of {Dreamlure}, activate Hypnotic Veins automatically. {Hypnotic Veins}: Consumes 0 stacks of {Dreamlure}. Gain 1 stack of {Dreamlure}. {Slumber Counter}: Consume 5 stacks of {Dreamlure}. Gain (10/11/12/13/14/15) Aliemus. Gain {Temporary Counter} equal to (35/38/41/44/47/50)% of permanent {Counter}. {Echoes of Whispers}: Consume 10 stacks of {Dreamlure}. Apply {Murmur} state to all enemies for 1 round. {Murmur}: Reduces damage dealt by 60%, but number of attacks is doubled."
       },
       "over_exalt": {
         "name": "Lost Dream's Guide",
@@ -5228,7 +5228,7 @@
         "description": "Deal (10/12/14/16/18/20% {ATK}) DMG. Gain (5/6/7/8/9/10) Aliemus."
       },
       "C3": {
-        "name": "Defence",
+        "name": "Defense",
         "cost": "1",
         "description": "Gain (10/12/14/16/18/20% {DEF}) Shield. Gain (5/6/7/8/9/10) Aliemus."
       },
@@ -5377,6 +5377,105 @@
       "E3": {
         "name": "Nirvana’s Kiss",
         "description": "Max {Spellbound} stacks increase from 5 to 10. {Mist-Bound Vow} doubles the {Resonance} effect for Xu’s next card."
+      }
+    }
+  },
+  {
+    "id": 55,
+    "name": "vortice",
+    "aliases": [
+      "vortice"
+    ],
+    "faction": "TBD",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "TBD",
+    "tags": [
+      "Fish",
+      "Friend",
+      "Shork"
+    ],
+    "stats": {
+      "CON": "149",
+      "ATK": "180",
+      "DEF": "122",
+      "CritRate": "0%",
+      "CritDamage": "50%",
+      "AliemusRegen": "0",
+      "KeyflareRegen": "22.2",
+      "RealmMastery": "24",
+      "SigilYield": "0%",
+      "DamageAmplification": "0%",
+      "DeathResistance": "0%"
+    },
+    "cards": {
+      "C1": {
+        "name": "HERE IT GOES!",
+        "cost": "2",
+        "description": "Vortice gains 50 Aliemus (scaling TBD). Draw 1 {Reload!}. After Vortice unleashes {Pursuit}, her next {Exalt} gains an additional 150% {Tentacle DMG} Bonus, stacking up to 5 times."
+      },
+      "C2": {
+        "name": "Strike",
+        "cost": "1",
+        "description": "Deal 36 DMG (scaling TBD). Gain (5/6/7/8/9/10) Aliemus."
+      },
+      "C3": {
+        "name": "Defense",
+        "cost": "1",
+        "description": "Gain 25 (Scaling TBD) Shield. Gain (5/6/7/8/9/10) Aliemus."
+      },
+      "C4": {
+        "name": "Charge!",
+        "cost": "3",
+        "description": "Vortice gains 75 Aliemus, Vortice's next {Exalt} {Crit Rate} + 35%. {Aftershock}: Other Awakeners gain 5 Aliemus"
+      },
+      "C5": {
+        "name": "Reload!",
+        "cost": "2",
+        "description": "Gain 1 stack of {Vortex Reload}, Usable 3 Times. {Retain}."
+      },
+      "C6": {
+        "name": "Vortex! Shell!",
+        "cost": "none?",
+        "description": "Deal 5400 {Fixed DMG} to the enemy with the highest HP, {Tentacle DMG} +27 (scaling TBD)"
+      }
+    },
+    "exalts": {
+      "exalt": {
+        "name": "Abyssal! Vortex! Cannon!",
+        "description": "{Dispel} {Burn} from all cards in hand. Deal DMG equal to 750% {Tentacle DMG} Bonus to all enemies 1 time, dealing 2x DMG to the enemy with the highest HP. Sacrifice up to 3 additional Permanent Tentacles, each increasing this Exalt's {Crit DMG} by +50%"
+      },
+      "over_exalt": {
+        "name": "Moskstraumen! BOOM!",
+        "description": "The {Crit DMG} gained per Tentacle Sacrificed is doubled. The next 5 {Vortex! Shell!} unleashes trigger 2 times."
+      }
+    },
+    "talents": {
+      "T1": {
+        "name": "Lightless Bottom",
+        "description": "When Vortice is in the team, the {Aequor Realm} transforms into {Divine Realm: Aequor}"
+      },
+      "T2": {
+        "name": "Madness Omen",
+        "description": "(Max level: 12) Gain (5 per talent level) Aliemus at the start of exploration."
+      },
+      "T3": {
+        "name": "Soulforge Aptitude",
+        "description": "(Max level: 10) This talent is only effective in {Astral Reign} stages. {Vortex! Shell!} Base {Fixed DMG} +80~200% (scaling TBD). \n Vortice removes the target's {Fortress} and {Temporary Fortress} effect before unleashing {Exalt}; if successfully removed, this {Exalt}'s {Crit DMG} +20%~50% (scaling TBD)."
+      }
+    },
+    "enlightens": {
+      "E1": {
+        "name": "Endless Tide",
+        "description": "{Vortex! Shell!} additionally deals {Fixed DMG} equal to 0.5% Target's Max HP. {Realm Mastery} + 50 after using {Abyssal! Vortex! Cannon!}. \n For each point of {Realm Mastery} that Vortice, her WoDs, and Covenants have, {Vortex! Shell!} deals extra {Fixed DMG} equal to 0.005% Target's Max HP. {Realm Mastery} +0.5 after using {Abyssal! Vortex! Cannon!}."
+      },
+      "E2": {
+        "name": "Roaring Abyss",
+        "description": "Vortice's {Strike} and {Defense} increase the next Vortice {Exalt}'s {Crit Rate} by 10%, and reduce the next {Reload!} {Arithmetica} Cost by 1."
+      },
+      "E3": {
+        "name": "Shackled Impulse",
+        "description": "{Abyssal! Vortex! Cannon!} now deals 3x DMG to the enemy with the highest HP instead of 2x. For every 20 Aliemus spent, other Awakeners gain 1 Aliemus"
       }
     }
   }

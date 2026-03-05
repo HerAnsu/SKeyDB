@@ -33,18 +33,21 @@ const TABS = [
 ] as const
 
 type TabId = (typeof TABS)[number]['id']
+const MOBILE_TAG_ROWS_HEIGHT = 46
 
 export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalProps) {
   const [activeTab, setActiveTab] = useState<TabId>('overview')
   const [fullData, setFullData] = useState<AwakenerFull | null>(null)
-  const [loadedId, setLoadedId] = useState<number | null>(null)
   const [skillLevel, setSkillLevel] = useState(1)
   const [fontScale, setFontScaleRaw] = useState<FontScale>(readFontScale)
+  const [showAllTags, setShowAllTags] = useState(false)
+  const [canExpandTags, setCanExpandTags] = useState(false)
   const setFontScale = useCallback((fs: FontScale) => {
     setFontScaleRaw(fs)
     writeFontScale(fs)
   }, [])
   const panelRef = useRef<HTMLDivElement>(null)
+  const tagsRef = useRef<HTMLDivElement>(null)
 
   const cardNames = useMemo(
     () => (fullData ? getCardNamesFromFull(fullData) : new Set<string>()),
@@ -52,12 +55,6 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
   )
 
   const navigateToCards = useCallback(() => setActiveTab('cards'), [])
-
-  if (loadedId !== awakener.id) {
-    setLoadedId(awakener.id)
-    setActiveTab('overview')
-    setFullData(null)
-  }
 
   useEffect(() => {
     let cancelled = false
@@ -97,6 +94,21 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
     return () => { document.documentElement.style.removeProperty('--desc-font-scale') }
   }, [fontScale])
 
+  useEffect(() => {
+    function refreshTagsOverflow() {
+      const el = tagsRef.current
+      if (!el) {
+        setCanExpandTags(false)
+        return
+      }
+      setCanExpandTags(el.scrollHeight > MOBILE_TAG_ROWS_HEIGHT + 1)
+    }
+
+    refreshTagsOverflow()
+    window.addEventListener('resize', refreshTagsOverflow)
+    return () => window.removeEventListener('resize', refreshTagsOverflow)
+  }, [awakener.id, awakener.tags])
+
   const displayName = formatAwakenerNameForUi(awakener.name)
   const realmTint = getRealmTint(awakener.realm)
   const realmIcon = getRealmIcon(awakener.realm)
@@ -131,6 +143,13 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
 
           <div className="flex min-h-0 min-w-0 flex-1 flex-col">
             <div className="shrink-0 px-5 pt-4 pb-0">
+              {awakener.unreleased ? (
+                <div className="mb-3 max-w-2xl border border-amber-500/30 bg-amber-950/20 px-3 py-2.5">
+                  <p className="text-[11px] leading-relaxed text-amber-100/75">
+                    <strong className="font-semibold text-amber-200/90">Pre-release data:</strong> Values and content are based on pre-release information and may change before or after release.
+                  </p>
+                </div>
+              ) : null}
               <div className="flex items-center gap-2.5 pr-6">
                 <div className="md:hidden w-11 h-11 shrink-0 overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900">
                   {portrait ? (
@@ -152,37 +171,73 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
                     <span>{awakener.faction}</span>
                   </p>
                   {awakener.tags.length > 0 ? (
-                    <div className="mt-1.5 flex flex-wrap gap-1">
-                      {awakener.tags.map((tag) => (
-                        <span
-                          className="border border-slate-600/40 bg-slate-800/50 px-1.5 py-0.5 text-[10px] text-slate-400"
-                          key={tag}
+                    <div className="max-w-xl mt-1.5">
+                      <div
+                        className={`flex flex-wrap gap-1 overflow-hidden md:overflow-visible ${
+                          showAllTags ? 'max-h-[18rem] md:max-h-none' : 'max-h-[46px] md:max-h-none'
+                        }`}
+                        ref={tagsRef}
+                      >
+                        {awakener.tags.map((tag) => (
+                          <span
+                            className="border border-slate-600/40 bg-slate-800/50 px-1.5 py-0.5 text-[10px] text-slate-400"
+                            key={tag}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      {canExpandTags ? (
+                        <button
+                          aria-expanded={showAllTags}
+                          className="mt-1 text-[10px] text-slate-500 transition-colors hover:text-slate-300 md:hidden"
+                          onClick={() => setShowAllTags((prev) => !prev)}
+                          type="button"
                         >
-                          {tag}
-                        </span>
-                      ))}
+                          {showAllTags ? 'Show fewer tags' : 'Show all tags'}
+                        </button>
+                      ) : null}
                     </div>
                   ) : null}
                 </div>
               </div>
-              <div className="mt-3 flex max-w-2xl items-center justify-between">
-                <nav className="flex gap-0.5">
-                  {TABS.map((tab) => (
-                    <button
-                      className={`px-3.5 py-2 text-[11px] uppercase tracking-wide transition-colors ${
-                        activeTab === tab.id
-                          ? 'border-b-2 border-amber-200/70 text-amber-100'
-                          : 'border-b-2 border-transparent text-slate-400 hover:text-slate-200'
-                      }`}
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      type="button"
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
-                </nav>
-                <div className="flex items-center gap-0.5 pr-1">
+              <div className="mt-3 max-w-2xl">
+                <div className="flex items-center justify-between">
+                  <nav className="flex min-w-0 flex-wrap gap-0.5">
+                    {TABS.map((tab) => (
+                      <button
+                        className={`px-3.5 py-2 text-[11px] uppercase tracking-wide transition-colors ${
+                          activeTab === tab.id
+                            ? 'border-b-2 border-amber-200/70 text-amber-100'
+                            : 'border-b-2 border-transparent text-slate-400 hover:text-slate-200'
+                        }`}
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        type="button"
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </nav>
+                  <div className="hidden items-center gap-0.5 pr-1 md:flex">
+                    {FONT_SCALE_OPTIONS.map((fs) => (
+                      <button
+                        className={`px-1.5 py-0.5 text-[10px] transition-colors ${
+                          fontScale === fs.id
+                            ? 'text-amber-100 bg-slate-700/50'
+                            : 'text-slate-500 hover:text-slate-300'
+                        }`}
+                        key={fs.id}
+                        onClick={() => setFontScale(fs.id)}
+                        title={`Font size: ${fs.id}`}
+                        type="button"
+                      >
+                        {fs.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-1 flex items-center gap-0.5 pr-1 md:hidden">
                   {FONT_SCALE_OPTIONS.map((fs) => (
                     <button
                       className={`px-1.5 py-0.5 text-[10px] transition-colors ${
@@ -210,12 +265,13 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
 
               <div className="max-w-2xl">
                 {activeTab === 'cards' && fullData ? (
-                  <div className="mb-4">
+                  <div className="sticky top-[-1.25rem] z-20 mb-4 border-b border-slate-700/35 bg-slate-950/90 pb-2 backdrop-blur-sm">
                     <SkillLevelSlider level={skillLevel} onChange={setSkillLevel} />
                   </div>
                 ) : null}
                 {activeTab === 'overview' && (
                   <AwakenerDetailOverview
+                    awakener={awakener}
                     cardNames={cardNames}
                     fullData={fullData}
                     onNavigateToCards={navigateToCards}

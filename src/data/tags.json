@@ -7,11 +7,21 @@
     "aliases": []
   },
   {
+    "key": "AEQUOR_REALM",
+    "label": "Aequor Realm",
+    "description": "",
+    "iconId": "",
+    "aliases": [],
+    "source": "vortice"
+  },
+  {
     "key": "ALERT",
     "label": "Alert",
     "description": "",
     "iconId": "",
-    "aliases": [],
+    "aliases": [
+      "Temporary Alert"
+    ],
     "source": "agrippa, alva, erica"
   },
   {
@@ -81,7 +91,9 @@
     "label": "Barrier",
     "description": "",
     "iconId": "",
-    "aliases": [],
+    "aliases": [
+      "Temporary Barrier"
+    ],
     "source": "salvador, tawil, winkle"
   },
   {
@@ -296,7 +308,9 @@
     "label": "Counter",
     "description": "",
     "iconId": "",
-    "aliases": []
+    "aliases": [
+      "Temporary Counter"
+    ]
   },
   {
     "key": "CREATIVITY",
@@ -383,6 +397,14 @@
     "description": "",
     "iconId": "",
     "aliases": []
+  },
+  {
+    "key": "DIVINE_REALM_AEQUOR",
+    "label": "Divine Realm: Aequor",
+    "description": "",
+    "iconId": "",
+    "aliases": [],
+    "source": "vortice"
   },
   {
     "key": "DISCARD",
@@ -532,6 +554,13 @@
     "source": "tawil"
   },
   {
+    "key": "EXALT",
+    "label": "Exalt",
+    "description": "",
+    "iconId": "",
+    "aliases": []
+  },
+  {
     "key": "EXHAUST",
     "label": "Exhaust",
     "description": "",
@@ -601,6 +630,16 @@
     "aliases": []
   },
   {
+    "key": "FORTRESS",
+    "label": "Fortress",
+    "description": "",
+    "iconId": "",
+    "aliases": [
+      "Temporary Fortress"
+    ],
+    "source": "vortice"
+  },
+  {
     "key": "GIFTS_OF_CHAOS",
     "label": "Gifts of Chaos",
     "description": "",
@@ -653,7 +692,9 @@
     "label": "Hand Limit",
     "description": "",
     "iconId": "",
-    "aliases": []
+    "aliases": [
+      "Temporary Hand Limit"
+    ]
   },
   {
     "key": "HAPPINESS",
@@ -1007,6 +1048,14 @@
     "aliases": []
   },
   {
+    "key": "PURSUIT",
+    "label": "Pursuit",
+    "description": "",
+    "iconId": "",
+    "aliases": [],
+    "source": "vortice"
+  },
+  {
     "key": "PSYCHIC_TRAUMA",
     "label": "Psychic Trauma",
     "description": "",
@@ -1243,6 +1292,15 @@
     "aliases": []
   },
   {
+    "key": "STR",
+    "label": "STR",
+    "description": "",
+    "iconId": "",
+    "aliases": [
+      "Temporary STR"
+    ]
+  },
+  {
     "key": "STR_DOWN",
     "label": "STR Down",
     "description": "",
@@ -1290,12 +1348,13 @@
     "source": "clementine"
   },
   {
-    "key": "TEMPORARY_STR",
-    "label": "Temporary STR",
+    "key": "TENTACLE_DMG",
+    "label": "Tentacle DMG",
     "description": "",
     "iconId": "",
-    "aliases": [],
-    "source": "ramona"
+    "aliases": [
+      "Temporary Tentacle DMG"
+    ]
   },
   {
     "key": "TENTACLES",
@@ -1371,6 +1430,13 @@
     "key": "VOID",
     "label": "Void",
     "description": "",
+    "iconId": "",
+    "aliases": []
+  },
+  {
+    "key": "VORTEX_RELOAD",
+    "label": "Vortex Reload",
+    "description": "After other Awakeners unleash {Exalt}, consume 1 stack, and Vortice unleashes {Vortex! Shell!} as a {Pursuit}",
     "iconId": "",
     "aliases": []
   },

@@ -11,6 +11,7 @@ const rawAwakenersSchema = z.array(
   z.object({
     id: z.number().int().positive(),
     name: z.string().trim().min(1),
+    ingameId: z.string().trim().min(1).optional(),
     faction: z.string().trim().min(1),
     realm: z.string().trim().min(1),
     rarity: z.string().trim().min(1).optional(),
@@ -18,6 +19,7 @@ const rawAwakenersSchema = z.array(
     aliases: z.array(z.string().trim().min(1)).optional(),
     stats: liteStatsSchema.optional(),
     tags: z.array(z.string().trim().min(1)).optional(),
+    unreleased: z.boolean().optional(),
   }),
 )
 
@@ -30,6 +32,7 @@ export type AwakenerLiteStats = {
 export type Awakener = {
   id: number
   name: string
+  ingameId?: string
   faction: string
   realm: string
   rarity?: string
@@ -37,6 +40,23 @@ export type Awakener = {
   aliases: string[]
   stats?: AwakenerLiteStats
   tags: string[]
+  unreleased?: boolean
+}
+
+function assertUniqueIngameIds(awakeners: Awakener[]) {
+  const awakenerNameByIngameId = new Map<string, string>()
+  for (const awakener of awakeners) {
+    if (!awakener.ingameId) {
+      continue
+    }
+    const existingName = awakenerNameByIngameId.get(awakener.ingameId)
+    if (existingName) {
+      throw new Error(
+        `Duplicate awakener ingameId "${awakener.ingameId}" for "${existingName}" and "${awakener.name}".`,
+      )
+    }
+    awakenerNameByIngameId.set(awakener.ingameId, awakener.name)
+  }
 }
 
 const parsedAwakeners = rawAwakenersSchema.parse(awakenersLite).map((awakener): Awakener => {
@@ -45,6 +65,7 @@ const parsedAwakeners = rawAwakenersSchema.parse(awakenersLite).map((awakener): 
   return {
     id: awakener.id,
     name: awakener.name,
+    ingameId: awakener.ingameId?.toUpperCase(),
     faction: awakener.faction,
     realm: awakener.realm,
     rarity: awakener.rarity,
@@ -52,8 +73,10 @@ const parsedAwakeners = rawAwakenersSchema.parse(awakenersLite).map((awakener): 
     aliases,
     stats: awakener.stats,
     tags: awakener.tags ?? [],
+    unreleased: awakener.unreleased,
   }
 })
+assertUniqueIngameIds(parsedAwakeners)
 
 export function getAwakeners(): Awakener[] {
   return parsedAwakeners
