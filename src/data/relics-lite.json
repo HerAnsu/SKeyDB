@@ -1,0 +1,442 @@
+[
+  {
+    "id": "portrait-b01",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B01",
+    "assetId": "Icon_Creation_Unique_B01",
+    "name": "Dimensional Image: Thais",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b02",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B02",
+    "assetId": "Icon_Creation_Unique_B02",
+    "name": "Dimensional Image: Salvador",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b03",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B03",
+    "assetId": "Icon_Creation_Unique_B03",
+    "name": "Dimensional Image: Aigis",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b04",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B04",
+    "assetId": "Icon_Creation_Unique_B04",
+    "name": "Dimensional Image: Sorel",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b05",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B05",
+    "assetId": "Icon_Creation_Unique_B05",
+    "name": "Dimensional Image: Helot",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b05ex",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B05EX",
+    "assetId": "Icon_Creation_Unique_B05EX",
+    "name": "Dimensional Image: Helot: Catena",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b06",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B06",
+    "assetId": "Icon_Creation_Unique_B06",
+    "name": "Dimensional Image: Agrippa",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b07",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B07",
+    "assetId": "Icon_Creation_Unique_B07",
+    "name": "Dimensional Image: Uvhash",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b08",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B08",
+    "assetId": "Icon_Creation_Unique_B08",
+    "name": "Dimensional Image: Leigh",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b09",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B09",
+    "assetId": "Icon_Creation_Unique_B09",
+    "name": "Dimensional Image: Faint",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b10",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B10",
+    "assetId": "Icon_Creation_Unique_B10",
+    "name": "Dimensional Image: Doresain",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b12",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B12",
+    "assetId": "Icon_Creation_Unique_B12",
+    "name": "Dimensional Image: Pickman",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-b14",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "B14",
+    "assetId": "Icon_Creation_Unique_B14",
+    "name": "Dimensional Image: Xu",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c01",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C01",
+    "assetId": "Icon_Creation_Unique_C01",
+    "name": "Dimensional Image: Ramona",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c01ex",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C01EX",
+    "assetId": "Icon_Creation_Unique_C01EX",
+    "name": "Dimensional Image: Ramona: Timeworn",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c02",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C02",
+    "assetId": "Icon_Creation_Unique_C02",
+    "name": "Dimensional Image: Doll",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c02ex",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C02EX",
+    "assetId": "Icon_Creation_Unique_C02EX",
+    "name": "Dimensional Image: Doll: Inferno",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c03",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C03",
+    "assetId": "Icon_Creation_Unique_C03",
+    "name": "Dimensional Image: Ogier",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c04",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C04",
+    "assetId": "Icon_Creation_Unique_C04",
+    "name": "Dimensional Image: Lotan",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c05",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C05",
+    "assetId": "Icon_Creation_Unique_C05",
+    "name": "Dimensional Image: Ryker",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c06",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C06",
+    "assetId": "Icon_Creation_Unique_C06",
+    "name": "Dimensional Image: 24",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c07",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C07",
+    "assetId": "Icon_Creation_Unique_C07",
+    "name": "Dimensional Image: Nautila",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c08",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C08",
+    "assetId": "Icon_Creation_Unique_C08",
+    "name": "Dimensional Image: Nymphaea",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c09",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C09",
+    "assetId": "Icon_Creation_Unique_C09",
+    "name": "Dimensional Image: Pandia",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c10",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C10",
+    "assetId": "Icon_Creation_Unique_C10",
+    "name": "Dimensional Image: Lily",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c11",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C11",
+    "assetId": "Icon_Creation_Unique_C11",
+    "name": "Dimensional Image: Alva",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c12",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C12",
+    "assetId": "Icon_Creation_Unique_C12",
+    "name": "Dimensional Image: Karen",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c15",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C15",
+    "assetId": "Icon_Creation_Unique_C15",
+    "name": "Dimensional Image: Tawil",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c16",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C16",
+    "assetId": "Icon_Creation_Unique_C16",
+    "name": "Dimensional Image: Kathigu-Ra",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-c17",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "C17",
+    "assetId": "Icon_Creation_Unique_C17",
+    "name": "Dimensional Image: Mouchette",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d01",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D01",
+    "assetId": "Icon_Creation_Unique_D01",
+    "name": "Dimensional Image: Liz",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d02",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D02",
+    "assetId": "Icon_Creation_Unique_D02",
+    "name": "Dimensional Image: Daffodil",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d03",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D03",
+    "assetId": "Icon_Creation_Unique_D03",
+    "name": "Dimensional Image: Tinct",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d04",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D04",
+    "assetId": "Icon_Creation_Unique_D04",
+    "name": "Dimensional Image: Wanda",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d05",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D05",
+    "assetId": "Icon_Creation_Unique_D05",
+    "name": "Dimensional Image: Winkle",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d06",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D06",
+    "assetId": "Icon_Creation_Unique_D06",
+    "name": "Dimensional Image: Horla",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d07",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D07",
+    "assetId": "Icon_Creation_Unique_D07",
+    "name": "Dimensional Image: Jenkins",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d08",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D08",
+    "assetId": "Icon_Creation_Unique_D08",
+    "name": "Dimensional Image: Erica",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d09",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D09",
+    "assetId": "Icon_Creation_Unique_D09",
+    "name": "Dimensional Image: Casiah",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d11",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D11",
+    "assetId": "Icon_Creation_Unique_D11",
+    "name": "Dimensional Image: Castor",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d12",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D12",
+    "assetId": "Icon_Creation_Unique_D12",
+    "name": "Dimensional Image: Hameln",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d13",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D13",
+    "assetId": "Icon_Creation_Unique_D13",
+    "name": "Dimensional Image: Clementine",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-d14",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "D14",
+    "assetId": "Icon_Creation_Unique_D14",
+    "name": "Dimensional Image: Pollux",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o01",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O01",
+    "assetId": "Icon_Creation_Unique_O01",
+    "name": "Dimensional Image: Tulu",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o02",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O02",
+    "assetId": "Icon_Creation_Unique_O02",
+    "name": "Dimensional Image: Murphy",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o02ex",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O02EX",
+    "assetId": "Icon_Creation_Unique_O02EX",
+    "name": "Dimensional Image: Murphy: Fauxborn",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o03",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O03",
+    "assetId": "Icon_Creation_Unique_O03",
+    "name": "Dimensional Image: Faros",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o04",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O04",
+    "assetId": "Icon_Creation_Unique_O04",
+    "name": "Dimensional Image: Caecus",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o05",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O05",
+    "assetId": "Icon_Creation_Unique_O05",
+    "name": "Dimensional Image: Aurita",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o06",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O06",
+    "assetId": "Icon_Creation_Unique_O06",
+    "name": "Dimensional Image: Goliath",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o07",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O07",
+    "assetId": "Icon_Creation_Unique_O07",
+    "name": "Dimensional Image: Miryam",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o08",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O08",
+    "assetId": "Icon_Creation_Unique_O08",
+    "name": "Dimensional Image: Sanga",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o09",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O09",
+    "assetId": "Icon_Creation_Unique_O09",
+    "name": "Dimensional Image: Celeste",
+    "description": "Description coming soon..?"
+  },
+  {
+    "id": "portrait-o10",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "O10",
+    "assetId": "Icon_Creation_Unique_O10",
+    "name": "Dimensional Image: Corposant",
+    "description": "Description coming soon..?"
+  },
+  {
+      "id": "portrait-temp-vortice",
+    "kind": "PORTRAIT",
+    "awakenerIngameId": "TEMP_VORTICE",
+    "assetId": "Icon_Creation_Unique_TEMP_VORTICE",
+    "name": "Dimensional Image: Vortice",
+    "description": "Description coming soon..?"
+  }
+]

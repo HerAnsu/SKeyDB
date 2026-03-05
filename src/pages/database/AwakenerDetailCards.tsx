@@ -3,6 +3,10 @@ import type { AwakenerFull } from '../../domain/awakeners-full'
 import { DetailSection } from './DetailSection'
 import { scaledFontStyle } from './font-scale'
 import { RichDescription } from './RichDescription'
+import {
+  DATABASE_ITEM_NAME_CLASS,
+  DATABASE_SECTION_TITLE_CLASS,
+} from './text-styles'
 
 type AwakenerDetailCardsProps = {
   fullData: AwakenerFull | null
@@ -47,7 +51,7 @@ export function AwakenerDetailCards({ fullData, cardNames, skillLevel }: Awakene
 
       <div className="border border-slate-600/30 bg-slate-900/30">
         <h4
-          className="ui-title px-4 pt-3 pb-2 text-amber-100"
+          className={DATABASE_SECTION_TITLE_CLASS}
           style={scaledFontStyle(14)}
         >Command Cards</h4>
         <div>
@@ -64,7 +68,7 @@ export function AwakenerDetailCards({ fullData, cardNames, skillLevel }: Awakene
                   >
                     <span className="text-slate-500">{key === 'C1' ? 'Rouse' : key}</span>
                     <span className="mx-1.5 text-slate-600">·</span>
-                    <span className="text-amber-100/85">{card.name}</span>
+                    <span className={DATABASE_ITEM_NAME_CLASS}>{card.name}</span>
                   </p>
                   <span
                     className="text-slate-500"

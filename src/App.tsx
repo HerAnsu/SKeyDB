@@ -12,12 +12,12 @@ function App() {
   return (
     <div className="min-h-dvh bg-[radial-gradient(circle_at_top,_#1f3148,_#0c121c_60%)] text-slate-100">
       <header className="border-b border-amber-200/30 bg-slate-950/35 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 md:px-6">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-3 px-4 py-4 md:flex-row md:items-center md:justify-between md:px-6">
           <div>
             <h1 className="ui-title text-2xl text-amber-100 md:text-3xl">SKeyDB</h1>
             <p className="text-sm text-slate-300">Morimens Database and Team Planner</p>
           </div>
-          <nav className="flex items-center gap-2 text-sm md:text-base">
+          <nav className="flex w-full flex-wrap items-center gap-2 text-sm md:w-auto md:text-base">
             <NavLink className={navClassName} to="/">
               Overview
             </NavLink>

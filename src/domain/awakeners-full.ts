@@ -39,6 +39,7 @@ const awakenerFullSchema = z.array(
   z.object({
     id: z.number().int().positive(),
     name: z.string(),
+    ingameId: z.string().trim().min(1).optional(),
     aliases: z.array(z.string()),
     faction: z.string(),
     realm: z.string(),

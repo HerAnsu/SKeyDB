@@ -15,4 +15,20 @@ describe('App shell', () => {
     expect(screen.getByRole('link', { name: /builder/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /collection/i })).toBeInTheDocument()
   })
+
+  it('uses a mobile-safe header layout that allows nav wrapping', () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    )
+
+    const nav = screen.getByRole('navigation')
+    const headerRow = nav.parentElement
+
+    expect(headerRow).toHaveClass('flex-col')
+    expect(headerRow).toHaveClass('md:flex-row')
+    expect(nav).toHaveClass('flex-wrap')
+    expect(nav).toHaveClass('w-full')
+  })
 })

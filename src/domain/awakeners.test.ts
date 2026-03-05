@@ -6,7 +6,7 @@ describe('getAwakeners', () => {
     const awakeners = getAwakeners()
 
     expect(awakeners.length).toBeGreaterThan(0)
-    expect(awakeners[0]).toEqual({
+    expect(awakeners[0]).toEqual(expect.objectContaining({
       id: expect.any(Number),
       name: expect.any(String),
       faction: expect.any(String),
@@ -16,7 +16,7 @@ describe('getAwakeners', () => {
       type: expect.any(String),
       stats: expect.objectContaining({ CON: expect.any(Number), ATK: expect.any(Number), DEF: expect.any(Number) }),
       tags: expect.any(Array),
-    })
+    }))
     expect(awakeners.every((a) => Number.isInteger(a.id) && a.id > 0)).toBe(true)
     expect(awakeners.every((a) => a.name.trim().length > 0)).toBe(true)
     expect(awakeners.every((a) => a.faction.trim().length > 0)).toBe(true)
@@ -44,7 +44,7 @@ describe('getAwakeners', () => {
 
   it('assigns valid type to every awakener', () => {
     const awakeners = getAwakeners()
-    const validTypes = new Set(['ASSAULT', 'WARDEN', 'CHORUS'])
+    const validTypes = new Set(['ASSAULT', 'WARDEN', 'CHORUS', 'TBD'])
 
     expect(awakeners.every((a) => a.type && validTypes.has(a.type))).toBe(true)
   })
@@ -68,5 +68,24 @@ describe('getAwakeners', () => {
 
     expect(awakeners.every((a) => Array.isArray(a.tags))).toBe(true)
     expect(awakeners.some((a) => a.tags.length > 0)).toBe(true)
+  })
+
+  it('supports optional unreleased flag', () => {
+    const awakeners = getAwakeners()
+
+    expect(awakeners.every((a) => a.unreleased === undefined || typeof a.unreleased === 'boolean')).toBe(true)
+  })
+
+  it('supports optional in-game id linkage', () => {
+    const awakeners = getAwakeners()
+    expect(awakeners.every((a) => a.ingameId === undefined || typeof a.ingameId === 'string')).toBe(true)
+  })
+
+  it('keeps in-game id linkage unique when present', () => {
+    const awakeners = getAwakeners()
+    const ingameIds = awakeners
+      .map((awakener) => awakener.ingameId)
+      .filter((ingameId): ingameId is string => Boolean(ingameId))
+    expect(new Set(ingameIds).size).toBe(ingameIds.length)
   })
 })

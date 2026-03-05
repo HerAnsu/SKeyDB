@@ -58,6 +58,7 @@ export function DatabasePage() {
       {vm.selectedAwakener ? (
         <AwakenerDetailModal
           awakener={vm.selectedAwakener}
+          key={vm.selectedAwakener.id}
           onClose={vm.closeDetail}
         />
       ) : null}

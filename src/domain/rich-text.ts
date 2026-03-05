@@ -35,7 +35,14 @@ function ensureStatsLoaded() {
 
 function isStatToken(token: string): boolean {
   ensureStatsLoaded()
-  return KNOWN_STAT_LABELS.has(token)
+  if (KNOWN_STAT_LABELS.has(token)) {
+    return true
+  }
+  if (token.startsWith('Temporary ')) {
+    const baseToken = token.slice('Temporary '.length).trim()
+    return KNOWN_STAT_LABELS.has(baseToken)
+  }
+  return false
 }
 
 const KNOWN_REALMS = new Set(['Chaos', 'Aequor', 'Caro', 'Ultra'])
@@ -58,6 +65,10 @@ export function parseRichDescription(
   cardNames: Set<string>,
 ): RichSegment[] {
   const segments: RichSegment[] = []
+  const cardNameByLower = new Map<string, string>()
+  for (const cardName of cardNames) {
+    cardNameByLower.set(cardName.toLowerCase(), cardName)
+  }
 
   let remaining = text
   while (remaining.length > 0) {
@@ -112,8 +123,9 @@ export function parseRichDescription(
       continue
     }
 
-    if (cardNames.has(token)) {
-      segments.push({ type: 'skill', name: token })
+    const canonicalCardName = cardNameByLower.get(token.toLowerCase())
+    if (canonicalCardName) {
+      segments.push({ type: 'skill', name: canonicalCardName })
     } else if (isStatToken(token)) {
       segments.push({ type: 'stat', name: token })
     } else if (KNOWN_REALMS.has(token)) {

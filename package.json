@@ -17,6 +17,7 @@
     "test:quick": "vitest run --run src/pages/CollectionPage.test.tsx src/pages/collection/OwnedWheelBoxExport.test.tsx src/components/ui/DupeLevelDisplay.test.tsx",
     "test:watch": "vitest",
     "verify": "npm run lint && npm run test -- --run && npm run build",
+    "data:sync-awakener-full": "node scripts/sync-awakener-full.mjs",
     "data:sync-awakener-ids": "node scripts/sync-awakener-ids.mjs",
     "data:sync-posse-indices": "node scripts/sync-posse-indices.mjs",
     "data:sync-wheel-data": "node scripts/sync-wheel-data.mjs",

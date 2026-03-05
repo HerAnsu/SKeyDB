@@ -39,6 +39,26 @@ describe('import-export codec', () => {
     expect(parsed.team.slots[0].covenantId).toBe('001')
   })
 
+  it('round-trips Vortice in standard t1 export codes even without in-game @@ token support', () => {
+    const team = makeTeam('Vortice Team')
+    team.slots[0] = {
+      slotId: 'slot-1',
+      awakenerName: 'vortice',
+      realm: 'AEQUOR',
+      level: 60,
+      wheels: [null, null],
+    }
+
+    const code = encodeSingleTeamCode(team)
+    const parsed = decodeImportCode(code)
+
+    expect(parsed.kind).toBe('single')
+    if (parsed.kind !== 'single') return
+    expect(parsed.team.slots[0].awakenerName).toBe('vortice')
+    expect(parsed.team.slots[0].realm).toBe('AEQUOR')
+    expect(parsed.team.slots[0].wheels).toEqual([null, null])
+  })
+
   it('encodes multi-team with mt1 prefix and round-trips', () => {
     const teams = [makeTeam('Team 1'), makeTeam('Team 2')]
     const code = encodeMultiTeamCode(teams, teams[1].id)
