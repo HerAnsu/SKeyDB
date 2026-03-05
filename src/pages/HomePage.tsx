@@ -15,13 +15,14 @@ const builderTasks: TaskItem[] = [
   { label: "Local storage persistence", status: "done" },
   { label: "Collection (owned/unowned)", status: "done" },
   { label: "Mobile-first builder layout", status: "planned" },
-  { label: "Quick Select flow for faster selection", status: "planned" },
+  { label: "Quick Team Lineup flow for faster selection", status: "done" },
   { label: "General QoL and things", status: "forever_in_progress" },
 ];
 
 const databaseTasks: TaskItem[] = [
-  { label: "UI structure for data browsing", status: "planned" },
-  { label: "Data integration from the legacy database", status: "planned" },
+  { label: "UI structure for data browsing", status: "done" },
+  { label: "Data integration from the legacy database", status: "in_progress" },
+  { label: "Usable awakener detail modal pass", status: "done" },
   { label: "Schema and data coverage expansion", status: "in_progress" },
 ];
 
@@ -98,7 +99,7 @@ export function HomePage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <InfoCard
-          description="Database for Morimens with awakeners, wheels, and related data. Deep filtering and richer details are still being built."
+          description="Database for Morimens now has a usable awakener pass with search, filters, sorting, and a richer detail modal. Deep filtering and broader data coverage are still in progress."
           title="Database (In Progress)"
         />
         <InfoCard

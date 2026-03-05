@@ -5,6 +5,11 @@ export type ChangelogItem = {
 
 export const changelogItems: ChangelogItem[] = [
   {
+    date: "2026-03-05",
+    summary:
+      "Database now has a usable awakener pass: search/filter/sort in the grid plus a much richer detail modal with Overview/Cards content, scaling-aware text, and interactive skill/tag popovers."
+  },
+  {
     date: "2026-03-01",
     summary:
       "Quick Team Lineup is live in the builder, putting together a team has (hopefully) never been smoother. This feature took a lot of tinkering to feel right, please let me know if you have any feedback!"
