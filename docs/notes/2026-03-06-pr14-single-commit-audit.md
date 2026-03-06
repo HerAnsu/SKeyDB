@@ -38,32 +38,73 @@ Last updated: 2026-03-06
   - `src/pages/BuilderPage.awakeners-teams.test.tsx`
   - `src/pages/BuilderPage.wheels-covenants.test.tsx`
 - The unresolved review surface still spans `ui`, `domain`, `builder`, `collection`, `page_shells`, and remaining tooling files.
-- Reviewed low-delta batch findings:
-  - Mechanical-only or behavior-equivalent so far:
-    - `src/pages/builder/wheel-mainstats.ts`
-    - `src/pages/collection/OwnershipLevelDisplay.tsx`
-    - `src/domain/covenant-assets.ts`
-    - `src/domain/posse-assets.ts`
-    - `src/domain/wheel-assets.ts`
-    - `src/pages/builder/PickerDropZone.tsx`
-    - `src/domain/covenants.ts`
-    - `src/domain/wheel-sort.ts`
-    - `src/components/ui/PageToolkitBar.tsx`
-    - `src/pages/collection/CollectionLevelControls.tsx`
-    - `src/pages/builder/team-validation.ts`
-    - `src/pages/collection/useOwnedAwakenerBoxEntries.ts`
-    - `src/pages/collection/useOwnedWheelBoxEntries.ts`
-    - `src/components/ui/SegmentedControl.tsx`
-    - `src/domain/wheels.ts`
-    - `src/domain/posses-search.ts`
-    - `src/pages/builder/usePendingResetTeamDialog.ts`
-    - `src/pages/collection/useGlobalCollectionSearchCapture.ts`
-  - Intentional current-branch divergences rather than missed salvage:
-    - `vite.config.ts` uses the explicit `@` alias wiring instead of the PR's `vite-tsconfig-paths` plugin.
-    - `src/main.tsx` is simplified around the required root mount point and does not indicate unsalvaged PR behavior by itself.
-    - `src/domain/wheel-mainstat-filters.ts` is intentionally consolidated around `MAINSTAT_ICON_BY_ID` from `mainstats.ts` instead of duplicating icon imports locally.
-    - `src/domain/awakeners-search.ts` is intentionally stronger on the current branch because it searches tags and uses different Fuse weighting, so it should be reviewed as a current-branch divergence rather than blindly backported from PR #14.
-    - `src/pages/home/changelog.ts` has newer branch-local entries and should not be treated as a missed PR salvage item.
+  - Reviewed low-delta batch findings:
+    - Mechanical-only or behavior-equivalent so far:
+      - `src/pages/builder/wheel-mainstats.ts`
+      - `src/pages/collection/OwnershipLevelDisplay.tsx`
+      - `src/domain/covenant-assets.ts`
+      - `src/domain/posse-assets.ts`
+      - `src/domain/wheel-assets.ts`
+      - `src/pages/builder/PickerDropZone.tsx`
+      - `src/domain/covenants.ts`
+      - `src/domain/wheel-sort.ts`
+      - `src/components/ui/PageToolkitBar.tsx`
+      - `src/pages/collection/CollectionLevelControls.tsx`
+      - `src/pages/builder/team-validation.ts`
+      - `src/pages/collection/useOwnedAwakenerBoxEntries.ts`
+      - `src/pages/collection/useOwnedWheelBoxEntries.ts`
+      - `src/components/ui/SegmentedControl.tsx`
+      - `src/domain/wheels.ts`
+      - `src/domain/posses-search.ts`
+      - `src/pages/builder/usePendingResetTeamDialog.ts`
+      - `src/pages/collection/useGlobalCollectionSearchCapture.ts`
+      - `src/components/ui/OwnedTogglePill.tsx`
+      - `src/components/ui/Toast.tsx`
+      - `src/pages/builder/constants.ts`
+      - `src/components/ui/ModalFrame.tsx`
+      - `src/components/ui/PanelSection.tsx`
+      - `src/components/ui/Button.tsx`
+      - `src/components/ui/ImportStrategyDialog.tsx`
+      - `src/pages/builder/useGlobalPickerSearchCapture.ts`
+      - `src/components/ui/ExportCodeDialog.tsx`
+      - `src/components/ui/ConfirmDialog.tsx`
+      - `src/components/ui/CollectionSortControls.tsx`
+      - `src/components/ui/TogglePill.tsx`
+      - `src/domain/posses.ts`
+      - `src/pages/collection/CollectionLevelStepButton.tsx`
+      - `src/components/ui/DupeLevelDisplay.tsx`
+      - `src/components/ui/ImportCodeDialog.tsx`
+      - `src/components/ui/TabbedContainer.tsx`
+      - `src/components/ui/useTimedToast.ts`
+      - `src/pages/builder/BuilderTransferConfirmDialog.tsx`
+      - `src/domain/collection-sorting.ts`
+      - `src/domain/team-rules.ts`
+      - `src/domain/collection-ownership.ts`
+    - Intentional current-branch divergences rather than missed salvage:
+      - `vite.config.ts` uses the explicit `@` alias wiring instead of the PR's `vite-tsconfig-paths` plugin.
+      - `src/main.tsx` is simplified around the required root mount point and does not indicate unsalvaged PR behavior by itself.
+      - `src/domain/wheel-mainstat-filters.ts` is intentionally consolidated around `MAINSTAT_ICON_BY_ID` from `mainstats.ts` instead of duplicating icon imports locally.
+      - `src/domain/awakeners-search.ts` is intentionally stronger on the current branch because it searches tags and uses different Fuse weighting, so it should be reviewed as a current-branch divergence rather than blindly backported from PR #14.
+      - `src/domain/awakener-assets.ts` is intentionally stronger on the current branch because it trims repeated leading and trailing slug hyphens in one step.
+      - `src/domain/factions.ts` is intentionally stronger on the current branch because it adds `REALM_TINT_BY_LABEL` and keeps the realm/faction compatibility helpers centralized.
+      - `src/domain/mainstats.ts` is intentionally stronger on the current branch because it centralizes mainstat icon lookup and exports `getMainstatIcon` and `MAINSTAT_ICON_BY_ID`.
+      - `src/pages/home/changelog.ts` has newer branch-local entries and should not be treated as a missed PR salvage item.
+  - Core builder import/export cluster findings:
+    - Behavior-equivalent or refactor-only:
+      - `src/pages/builder/team-collection.ts`
+      - `src/pages/builder/transfer-resolution.ts`
+      - `src/pages/builder/import-planner.ts`
+    - Intentional current-branch strictness or safety improvements:
+      - `src/domain/import-export.ts` adds explicit multi-team active-index bounds checking and verifies trailing-data exhaustion after multi-team decode instead of relying only on computed length checks.
+      - `src/pages/builder/useBuilderImportExport.ts` safely falls back when `pendingReplaceImport.activeTeamIndex` is out of range instead of assuming the index is always valid.
+  - Core domain and builder-state cluster findings:
+    - Behavior-equivalent or refactor-only:
+      - `src/domain/ingame-token-dictionaries.ts`
+      - `src/pages/builder/team-state.ts`
+    - Intentional current-branch strictness or capability improvements:
+      - `src/domain/awakeners.ts` is intentionally stronger on the current branch because it validates unique `ingameId` values and carries richer lite metadata (`type`, `stats`, `tags`, `unreleased`) used by newer features.
+      - `src/domain/ingame-codec.ts` is intentionally stronger on the current branch because it throws when the posse token is missing and uses slightly more defensive wheel-token handling during decode.
+      - `src/pages/builder/useBuilderViewModel.ts` is intentionally safer on the current branch because it guards `startQuickLineup` against a missing active team and removes the unreachable `-1` quick-lineup step branch.
 
 ## Implications
 
