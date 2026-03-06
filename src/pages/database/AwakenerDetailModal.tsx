@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FaXmark } from 'react-icons/fa6'
+import { clampAwakenerDatabaseLevel, resolveAwakenerStatsForLevel } from '../../domain/awakener-level-scaling'
 import type { Awakener } from '../../domain/awakeners'
 import { loadAwakenersFull, getAwakenerFullById, type AwakenerFull } from '../../domain/awakeners-full'
 import { getAwakenerPortraitAsset } from '../../domain/awakener-assets'
@@ -38,6 +39,7 @@ const MOBILE_TAG_ROWS_HEIGHT = 46
 export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalProps) {
   const [activeTab, setActiveTab] = useState<TabId>('overview')
   const [fullData, setFullData] = useState<AwakenerFull | null>(null)
+  const [awakenerLevel, setAwakenerLevel] = useState(60)
   const [skillLevel, setSkillLevel] = useState(1)
   const [fontScale, setFontScaleRaw] = useState<FontScale>(readFontScale)
   const [showAllTags, setShowAllTags] = useState(false)
@@ -53,8 +55,16 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
     () => (fullData ? getCardNamesFromFull(fullData) : new Set<string>()),
     [fullData],
   )
+  const resolvedStats = useMemo(
+    () => (fullData ? resolveAwakenerStatsForLevel(fullData, awakenerLevel) : null),
+    [awakenerLevel, fullData],
+  )
 
   const navigateToCards = useCallback(() => setActiveTab('cards'), [])
+  const handleAwakenerLevelChange = useCallback(
+    (level: number) => setAwakenerLevel(clampAwakenerDatabaseLevel(level)),
+    [],
+  )
 
   useEffect(() => {
     let cancelled = false
@@ -138,7 +148,13 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
 
         <div className="flex min-h-0 flex-1">
           <aside className="hidden w-56 shrink-0 overflow-y-auto border-r border-slate-700/40 p-4 md:block lg:w-64">
-            <AwakenerDetailSidebar awakener={awakener} fullData={fullData} />
+            <AwakenerDetailSidebar
+              awakener={awakener}
+              level={awakenerLevel}
+              onLevelChange={handleAwakenerLevelChange}
+              stats={resolvedStats}
+              substatScaling={fullData?.substatScaling ?? null}
+            />
           </aside>
 
           <div className="flex min-h-0 min-w-0 flex-1 flex-col">
@@ -260,7 +276,14 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
 
             <div className="flex-1 overflow-y-auto p-5 pr-8 lg:pr-16">
               <div className="md:hidden mb-4">
-                <AwakenerDetailSidebar awakener={awakener} compact fullData={fullData} />
+                <AwakenerDetailSidebar
+                  awakener={awakener}
+                  compact
+                  level={awakenerLevel}
+                  onLevelChange={handleAwakenerLevelChange}
+                  stats={resolvedStats}
+                  substatScaling={fullData?.substatScaling ?? null}
+                />
               </div>
 
               <div className="max-w-2xl">
@@ -276,6 +299,7 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
                     fullData={fullData}
                     onNavigateToCards={navigateToCards}
                     skillLevel={skillLevel}
+                    stats={resolvedStats}
                   />
                 )}
                 {activeTab === 'cards' && (
@@ -283,6 +307,7 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
                     cardNames={cardNames}
                     fullData={fullData}
                     skillLevel={skillLevel}
+                    stats={resolvedStats}
                   />
                 )}
                 {activeTab === 'guide' && (

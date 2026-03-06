@@ -21,6 +21,25 @@ const enlightenSchema = z.object({
   description: z.string(),
 })
 
+const statScalingSchema = z.object({
+  CON: z.number(),
+  ATK: z.number(),
+  DEF: z.number(),
+})
+
+const SUBSTAT_SCALING_KEYS = [
+  'CritRate',
+  'CritDamage',
+  'AliemusRegen',
+  'KeyflareRegen',
+  'RealmMastery',
+  'SigilYield',
+  'DamageAmplification',
+  'DeathResistance',
+] as const
+
+const substatScalingSchema = z.partialRecord(z.enum(SUBSTAT_SCALING_KEYS), z.string())
+
 const fullStatsSchema = z.object({
   CON: z.string(),
   ATK: z.string(),
@@ -47,6 +66,8 @@ const awakenerFullSchema = z.array(
     type: z.string(),
     tags: z.array(z.string()),
     stats: fullStatsSchema,
+    statScaling: statScalingSchema,
+    substatScaling: substatScalingSchema,
     cards: z.record(z.string(), cardSchema),
     exalts: z.object({
       exalt: exaltSchema,
@@ -62,6 +83,9 @@ export type AwakenerExalt = z.infer<typeof exaltSchema>
 export type AwakenerTalent = z.infer<typeof talentSchema>
 export type AwakenerEnlighten = z.infer<typeof enlightenSchema>
 export type AwakenerFullStats = z.infer<typeof fullStatsSchema>
+export type AwakenerStatScaling = z.infer<typeof statScalingSchema>
+export type AwakenerSubstatScalingKey = (typeof SUBSTAT_SCALING_KEYS)[number]
+export type AwakenerSubstatScaling = z.infer<typeof substatScalingSchema>
 export type AwakenerFull = z.infer<typeof awakenerFullSchema>[number]
 
 let fullDataCache: AwakenerFull[] | null = null

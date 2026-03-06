@@ -7,6 +7,27 @@ vi.mock('../../domain/awakeners-full', () => ({
   loadAwakenersFull: async () => [
     {
       id: 1,
+      stats: {
+        CON: '140',
+        ATK: '135',
+        DEF: '126',
+        CritRate: '14.6%',
+        CritDamage: '50%',
+        AliemusRegen: '0',
+        KeyflareRegen: '15',
+        RealmMastery: '0',
+        SigilYield: '0%',
+        DamageAmplification: '0%',
+        DeathResistance: '0%',
+      },
+      statScaling: {
+        CON: 1.55,
+        ATK: 1.5,
+        DEF: 1.4,
+      },
+      substatScaling: {
+        CritRate: '1.6%',
+      },
       cards: {},
       exalts: { exalt: { name: 'Exalt', description: 'x' }, over_exalt: { name: 'Over Exalt', description: 'x' } },
       talents: {},
@@ -14,6 +35,25 @@ vi.mock('../../domain/awakeners-full', () => ({
     },
     {
       id: 2,
+      stats: {
+        CON: '149',
+        ATK: '204',
+        DEF: '160',
+        CritRate: '5%',
+        CritDamage: '50%',
+        AliemusRegen: '0',
+        KeyflareRegen: '15',
+        RealmMastery: '0',
+        SigilYield: '0%',
+        DamageAmplification: '0%',
+        DeathResistance: '0%',
+      },
+      statScaling: {
+        CON: 1.35,
+        ATK: 1.85,
+        DEF: 1.45,
+      },
+      substatScaling: {},
       cards: {},
       exalts: { exalt: { name: 'Exalt', description: 'x' }, over_exalt: { name: 'Over Exalt', description: 'x' } },
       talents: {},
@@ -42,11 +82,35 @@ vi.mock('../../domain/factions', () => ({
 }))
 
 vi.mock('./AwakenerDetailSidebar', () => ({
-  AwakenerDetailSidebar: () => <div>Sidebar</div>,
+  AwakenerDetailSidebar: ({
+    level,
+    onLevelChange,
+    stats,
+  }: {
+    level: number
+    onLevelChange: (level: number) => void
+    stats: { CON: string } | null
+  }) => (
+    <div>
+      <button onClick={() => onLevelChange(90)} type="button">
+        Set level 90
+      </button>
+      <div>Sidebar Level {level}</div>
+      <div>Sidebar CON {stats?.CON ?? 'none'}</div>
+    </div>
+  ),
 }))
 
 vi.mock('./AwakenerDetailOverview', () => ({
-  AwakenerDetailOverview: () => <div>Overview Tab</div>,
+  AwakenerDetailOverview: ({
+    stats,
+  }: {
+    stats: { CON: string } | null
+  }) => (
+    <div>
+      <div>Overview CON {stats?.CON ?? 'none'}</div>
+    </div>
+  ),
 }))
 
 vi.mock('./AwakenerDetailCards', () => ({
@@ -94,5 +158,24 @@ describe('AwakenerDetailModal', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Overview' }).className).toContain('border-amber-200/70')
     })
+  })
+
+  it('updates resolved awakener stats when the database level changes', async () => {
+    const onClose = vi.fn()
+    const awakener = makeAwakener(1, 'thais')
+
+    render(<AwakenerDetailModal awakener={awakener} onClose={onClose} />)
+
+    await waitFor(() => {
+      expect(screen.getAllByText('Sidebar Level 60')).toHaveLength(2)
+      expect(screen.getAllByText('Sidebar CON 140')).toHaveLength(2)
+      expect(screen.getByText('Overview CON 140')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getAllByRole('button', { name: 'Set level 90' })[0])
+
+    expect(screen.getAllByText('Sidebar Level 90')).toHaveLength(2)
+    expect(screen.getAllByText('Sidebar CON 186')).toHaveLength(2)
+    expect(screen.getByText('Overview CON 186')).toBeInTheDocument()
   })
 })

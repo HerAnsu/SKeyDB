@@ -50,6 +50,14 @@ function createPlaceholderEntries(keys) {
   )
 }
 
+function createDefaultStatScaling() {
+  return {
+    CON: 0,
+    ATK: 0,
+    DEF: 0,
+  }
+}
+
 function mergeSectionWithTemplate(existingSection, templateSection) {
   return {
     ...templateSection,
@@ -85,6 +93,8 @@ function createSkeletonFromLite(liteAwakener) {
       DamageAmplification: '0%',
       DeathResistance: '0%',
     },
+    statScaling: createDefaultStatScaling(),
+    substatScaling: {},
     cards: cardsTemplate,
     exalts: {
       exalt: {
@@ -129,6 +139,8 @@ function mergeLiteIntoFull(liteAwakener, fullAwakener) {
   }
 
   next.stats = mergedStats
+  next.statScaling = fullAwakener.statScaling ?? createDefaultStatScaling()
+  next.substatScaling = fullAwakener.substatScaling ?? {}
   next.cards = mergeSectionWithTemplate(fullAwakener.cards, cardsTemplate)
   next.exalts = fullAwakener.exalts ?? {
     exalt: { name: 'TBD', description: 'TBD' },
