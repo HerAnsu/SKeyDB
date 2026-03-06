@@ -35,11 +35,32 @@ This matches confirmed in-game and CN wiki breakpoint tables, including the prev
 Substat growth is modeled separately in `substatScaling`.
 
 Rules:
-- Substats increase once per 10 levels
-- Growth stops after Lv. 60
-- The database does not currently model Psyche Surge duplicate bonuses
+- Secondary stat baselines start from the canonical Lv. 1 defaults
+- Each `substatScaling` value is applied once at Lv. 10, 20, 30, 40, 50, and 60
+- Growth stops after Lv. 60 for normal level scaling
+- Psyche Surge duplicate bonuses add the same `substatScaling` step again for each `E3+N` level
 
-That means the database slider reflects normal level growth only.
+The resolver is:
+
+```ts
+levelSteps = min(floor(level / 10), 6)
+substat(level, psycheSurgeOffset) =
+  levelOneBaseline + levelSteps * scaling + psycheSurgeOffset * scaling
+```
+
+Equivalent Lv. 60 anchored form used by the resolver:
+
+```ts
+substat(level, psycheSurgeOffset) =
+  statAt60 - (6 - levelSteps) * scaling + psycheSurgeOffset * scaling
+```
+
+Example:
+- Kathigu-Ra `CritRate` baseline is `5%`, `substatScaling.CritRate` is `0.8%`
+- Lv. 60: `5 + (6 * 0.8) = 9.8%`
+- Lv. 60 at `E3+2`: `9.8 + (2 * 0.8) = 11.4%`
+
+So the database stores canonical Lv. 60 substat values in `stats`, then rewinds or advances from there.
 
 ## Why The Old Note Was Wrong
 
@@ -88,10 +109,10 @@ The database detail modal now:
 - recalculates displayed CON / ATK / DEF from the exact formula
 - feeds those leveled stats into the existing rich-text damage math
 - shows level-scaling substats without embedding noisy growth text directly in the value string
+- models Psyche Surge duplicate bonuses through the `E3+N` stepper in the attributes panel
 
 ## Remaining Scope
 
 The core level-scaling work is done. Future follow-up, if wanted:
 - add explicit database share links for specific level states
-- model Psyche Surge stat bonuses separately
 - extend the same pattern to future database branches if wheels or other units need level-aware displays

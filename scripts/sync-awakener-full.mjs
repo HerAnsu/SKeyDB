@@ -23,8 +23,18 @@ const FULL_STAT_KEYS = [
   'DeathResistance',
 ]
 const CARD_KEYS = ['C1', 'C2', 'C3', 'C4', 'C5']
-const TALENT_KEYS = ['T1', 'T2', 'T3']
+const TALENT_KEYS = ['T1', 'T2', 'T3', 'T4']
 const ENLIGHTEN_KEYS = ['E1', 'E2', 'E3']
+const DEFAULT_SECONDARY_STATS = {
+  CritRate: '5%',
+  CritDamage: '50%',
+  AliemusRegen: '0',
+  KeyflareRegen: '15',
+  RealmMastery: '0',
+  SigilYield: '0%',
+  DamageAmplification: '0%',
+  DeathResistance: '0%',
+}
 
 function toStringStat(value, fallback = '0') {
   if (value === null || value === undefined) {
@@ -88,14 +98,7 @@ function createSkeletonFromLite(liteAwakener) {
       CON: toStringStat(liteAwakener.stats?.CON),
       ATK: toStringStat(liteAwakener.stats?.ATK),
       DEF: toStringStat(liteAwakener.stats?.DEF),
-      CritRate: '0%',
-      CritDamage: '50%',
-      AliemusRegen: '0',
-      KeyflareRegen: '0',
-      RealmMastery: '0',
-      SigilYield: '0%',
-      DamageAmplification: '0%',
-      DeathResistance: '0%',
+      ...DEFAULT_SECONDARY_STATS,
     },
     primaryScalingBase: createDefaultPrimaryScalingBase(),
     statScaling: createDefaultStatScaling(),
@@ -139,7 +142,7 @@ function mergeLiteIntoFull(liteAwakener, fullAwakener) {
     if (key === 'CON' || key === 'ATK' || key === 'DEF') {
       mergedStats[key] = toStringStat(liteAwakener.stats?.[key], mergedStats[key] ?? '0')
     } else if (mergedStats[key] === undefined) {
-      mergedStats[key] = key === 'CritDamage' ? '50%' : key.includes('Rate') || key.includes('Yield') || key.includes('Amplification') || key.includes('Resistance') ? '0%' : '0'
+      mergedStats[key] = DEFAULT_SECONDARY_STATS[key]
     }
   }
 

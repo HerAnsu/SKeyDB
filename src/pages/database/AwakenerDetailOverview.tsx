@@ -18,7 +18,7 @@ type AwakenerDetailOverviewProps = {
 }
 
 const ENLIGHTEN_ORDER = ['E1', 'E2', 'E3'] as const
-const TALENT_ORDER = ['T1', 'T2', 'T3'] as const
+const TALENT_ORDER = ['T1', 'T2', 'T3', 'T4'] as const
 
 export function AwakenerDetailOverview({
   awakener,

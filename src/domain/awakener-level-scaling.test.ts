@@ -2,8 +2,34 @@ import { describe, expect, it } from 'vitest'
 import { loadAwakenersFull, type AwakenerFull } from './awakeners-full'
 import {
   clampAwakenerDatabaseLevel,
+  clampAwakenerDatabasePsycheSurgeOffset,
   resolveAwakenerStatsForLevel,
 } from './awakener-level-scaling'
+
+const CANONICAL_LEVEL_ONE_SUBSTATS = {
+  CritRate: '5%',
+  CritDamage: '50%',
+  AliemusRegen: '0',
+  KeyflareRegen: '15',
+  RealmMastery: '0',
+  SigilYield: '0%',
+  DamageAmplification: '0%',
+  DeathResistance: '0%',
+} as const
+
+const CANONICAL_SUBSTAT_SUFFIXES = {
+  CritRate: '%',
+  CritDamage: '%',
+  AliemusRegen: '',
+  KeyflareRegen: '',
+  RealmMastery: '',
+  SigilYield: '%',
+  DamageAmplification: '%',
+  DeathResistance: '%',
+} as const
+
+const CANONICAL_MADNESS_OMEN_DESCRIPTION =
+  '(Max level: 12) Obtain (5 per talent level) Aliemus after the start of exploration.'
 
 function makeAwakener(overrides?: Partial<AwakenerFull>): AwakenerFull {
   return {
@@ -55,6 +81,16 @@ describe('clampAwakenerDatabaseLevel', () => {
     expect(clampAwakenerDatabaseLevel(60)).toBe(60)
     expect(clampAwakenerDatabaseLevel(90)).toBe(90)
     expect(clampAwakenerDatabaseLevel(999)).toBe(90)
+  })
+})
+
+describe('clampAwakenerDatabasePsycheSurgeOffset', () => {
+  it('clamps database Psyche Surge offsets to the E3+0 to E3+12 range', () => {
+    expect(clampAwakenerDatabasePsycheSurgeOffset(-3)).toBe(0)
+    expect(clampAwakenerDatabasePsycheSurgeOffset(0)).toBe(0)
+    expect(clampAwakenerDatabasePsycheSurgeOffset(7)).toBe(7)
+    expect(clampAwakenerDatabasePsycheSurgeOffset(12)).toBe(12)
+    expect(clampAwakenerDatabasePsycheSurgeOffset(99)).toBe(12)
   })
 })
 
@@ -114,6 +150,15 @@ describe('resolveAwakenerStatsForLevel', () => {
     expect(resolveAwakenerStatsForLevel(awakener, 60).AliemusRegen).toBe('2.4')
     expect(resolveAwakenerStatsForLevel(awakener, 90).AliemusRegen).toBe('2.4')
     expect(resolveAwakenerStatsForLevel(awakener, 1).AliemusRegen).toBe('0')
+  })
+
+  it('applies Psyche Surge offsets on top of the level-based substat steps', () => {
+    const awakener = makeAwakener()
+
+    expect(resolveAwakenerStatsForLevel(awakener, 60, 0).CritRate).toBe('14.6%')
+    expect(resolveAwakenerStatsForLevel(awakener, 60, 12).CritRate).toBe('33.8%')
+    expect(resolveAwakenerStatsForLevel(awakener, 1, 12).CritRate).toBe('24.2%')
+    expect(resolveAwakenerStatsForLevel(awakener, 60, 12).CON).toBe('140')
   })
 })
 
@@ -245,5 +290,90 @@ describe('awakeners full data', () => {
     expect(
       [1, 10, 20, 30, 40, 50, 60, 70, 80, 90].map((level) => resolveAwakenerStatsForLevel(wanda!, level).ATK),
     ).toEqual(['35', '44', '55', '66', '77', '88', '99', '110', '121', '132'])
+  })
+
+  it('rewinds every secondary stat back to the canonical Lv. 1 defaults', async () => {
+    const data = await loadAwakenersFull()
+    const mismatches: string[] = []
+
+    for (const awakener of data) {
+      const resolvedAtLevelOne = resolveAwakenerStatsForLevel(awakener, 1)
+
+      for (const [key, expectedValue] of Object.entries(CANONICAL_LEVEL_ONE_SUBSTATS)) {
+        const statKey = key as keyof typeof CANONICAL_LEVEL_ONE_SUBSTATS
+        if (resolvedAtLevelOne[statKey] !== expectedValue) {
+          mismatches.push(`${awakener.name}.${statKey}: ${resolvedAtLevelOne[statKey]} != ${expectedValue}`)
+        }
+      }
+    }
+
+    expect(mismatches).toEqual([])
+  })
+
+  it('keeps stored substat values and growth metadata aligned with their canonical units', async () => {
+    const data = await loadAwakenersFull()
+    const mismatches: string[] = []
+
+    for (const awakener of data) {
+      for (const [key, expectedSuffix] of Object.entries(CANONICAL_SUBSTAT_SUFFIXES)) {
+        const statKey = key as keyof typeof CANONICAL_SUBSTAT_SUFFIXES
+        const statValue = awakener.stats[statKey]
+        const growthValue = awakener.substatScaling[statKey]
+
+        if (!statValue.endsWith(expectedSuffix)) {
+          mismatches.push(`${awakener.name}.stats.${statKey}: ${statValue}`)
+        }
+        if (growthValue && !growthValue.endsWith(expectedSuffix)) {
+          mismatches.push(`${awakener.name}.substatScaling.${statKey}: ${growthValue}`)
+        }
+      }
+    }
+
+    expect(mismatches).toEqual([])
+  })
+
+  it('keeps Salvador talent data and Madness Omen descriptions aligned with the canon text', async () => {
+    const data = await loadAwakenersFull()
+    const salvador = data.find((awakener) => awakener.name === 'salvador')
+    const mismatches: string[] = []
+
+    expect(salvador?.talents.T4).toEqual(
+      expect.objectContaining({
+        name: expect.any(String),
+        description: expect.any(String),
+      }),
+    )
+
+    for (const awakener of data) {
+      for (const [key, talent] of Object.entries(awakener.talents)) {
+        if (talent.name !== 'Madness Omen') {
+          continue
+        }
+        if (talent.description !== CANONICAL_MADNESS_OMEN_DESCRIPTION) {
+          mismatches.push(`${awakener.name}.${key}: ${talent.description}`)
+        }
+      }
+    }
+
+    expect(mismatches).toEqual([])
+  })
+
+  it('strips redundant innate prefixes from talent descriptions', async () => {
+    const data = await loadAwakenersFull()
+    const mismatches: string[] = []
+
+    for (const awakener of data) {
+      for (const [key, talent] of Object.entries(awakener.talents)) {
+        if (talent.description.startsWith('(Max level: 1)')) {
+          mismatches.push(`${awakener.name}.${key}: ${talent.description}`)
+          continue
+        }
+        if (talent.description.startsWith('Innate:')) {
+          mismatches.push(`${awakener.name}.${key}: ${talent.description}`)
+        }
+      }
+    }
+
+    expect(mismatches).toEqual([])
   })
 })

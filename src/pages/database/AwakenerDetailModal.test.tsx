@@ -85,20 +85,34 @@ vi.mock('../../domain/factions', () => ({
 
 vi.mock('./AwakenerDetailSidebar', () => ({
   AwakenerDetailSidebar: ({
+    enlightenOffset,
     level,
+    onDecreaseEnlighten,
+    onIncreaseEnlighten,
     onLevelChange,
     stats,
   }: {
+    enlightenOffset: number
     level: number
+    onDecreaseEnlighten: () => void
+    onIncreaseEnlighten: () => void
     onLevelChange: (level: number) => void
-    stats: { CON: string } | null
+    stats: { CON: string; CritRate: string } | null
   }) => (
     <div>
       <button onClick={() => onLevelChange(90)} type="button">
         Set level 90
       </button>
+      <button onClick={onIncreaseEnlighten} type="button">
+        Increase Psyche Surge
+      </button>
+      <button onClick={onDecreaseEnlighten} type="button">
+        Decrease Psyche Surge
+      </button>
       <div>Sidebar Level {level}</div>
+      <div>Sidebar E3+{enlightenOffset}</div>
       <div>Sidebar CON {stats?.CON ?? 'none'}</div>
+      <div>Sidebar Crit Rate {stats?.CritRate ?? 'none'}</div>
     </div>
   ),
 }))
@@ -107,10 +121,11 @@ vi.mock('./AwakenerDetailOverview', () => ({
   AwakenerDetailOverview: ({
     stats,
   }: {
-    stats: { CON: string } | null
+    stats: { CON: string; CritRate: string } | null
   }) => (
     <div>
       <div>Overview CON {stats?.CON ?? 'none'}</div>
+      <div>Overview Crit Rate {stats?.CritRate ?? 'none'}</div>
     </div>
   ),
 }))
@@ -170,8 +185,11 @@ describe('AwakenerDetailModal', () => {
 
     await waitFor(() => {
       expect(screen.getAllByText('Sidebar Level 60')).toHaveLength(2)
+      expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar CON 140')).toHaveLength(2)
+      expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(2)
       expect(screen.getByText('Overview CON 140')).toBeInTheDocument()
+      expect(screen.getByText('Overview Crit Rate 14.6%')).toBeInTheDocument()
     })
 
     fireEvent.click(screen.getAllByRole('button', { name: 'Set level 90' })[0])
@@ -179,5 +197,24 @@ describe('AwakenerDetailModal', () => {
     expect(screen.getAllByText('Sidebar Level 90')).toHaveLength(2)
     expect(screen.getAllByText('Sidebar CON 186')).toHaveLength(2)
     expect(screen.getByText('Overview CON 186')).toBeInTheDocument()
+  })
+
+  it('updates resolved substats when the Psyche Surge offset changes', async () => {
+    const onClose = vi.fn()
+    const awakener = makeAwakener(1, 'thais')
+
+    render(<AwakenerDetailModal awakener={awakener} onClose={onClose} />)
+
+    await waitFor(() => {
+      expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(2)
+      expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(2)
+      expect(screen.getByText('Overview Crit Rate 14.6%')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getAllByRole('button', { name: 'Increase Psyche Surge' })[0])
+
+    expect(screen.getAllByText('Sidebar E3+1')).toHaveLength(2)
+    expect(screen.getAllByText('Sidebar Crit Rate 16.2%')).toHaveLength(2)
+    expect(screen.getByText('Overview Crit Rate 16.2%')).toBeInTheDocument()
   })
 })

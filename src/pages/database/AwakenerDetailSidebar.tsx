@@ -4,6 +4,7 @@ import { formatAwakenerNameForUi } from '../../domain/name-format'
 import { getMainstatIcon, type MainstatKey } from '../../domain/mainstats'
 import type { Awakener } from '../../domain/awakeners'
 import type { AwakenerFullStats, AwakenerSubstatScaling } from '../../domain/awakeners-full'
+import { AwakenerEnlightenStepper } from './AwakenerEnlightenStepper'
 import { AwakenerLevelSlider } from './AwakenerLevelSlider'
 
 const STAT_DISPLAY_ORDER = [
@@ -54,7 +55,10 @@ const SIDEBAR_SCALING_VALUE_CLASS =
 
 type AwakenerDetailSidebarProps = {
   awakener: Awakener
+  enlightenOffset: number
   level: number
+  onDecreaseEnlighten: () => void
+  onIncreaseEnlighten: () => void
   onLevelChange: (level: number) => void
   stats: AwakenerFullStats | null
   substatScaling: AwakenerSubstatScaling | null
@@ -63,7 +67,10 @@ type AwakenerDetailSidebarProps = {
 
 export function AwakenerDetailSidebar({
   awakener,
+  enlightenOffset,
   level,
+  onDecreaseEnlighten,
+  onIncreaseEnlighten,
   onLevelChange,
   stats,
   substatScaling,
@@ -92,7 +99,16 @@ export function AwakenerDetailSidebar({
 
       <div className="border border-slate-600/30 bg-slate-900/30 px-3 py-2.5">
         <div className="mb-2.5 space-y-2">
-          <h4 className="ui-title text-[11px] uppercase tracking-wide text-slate-400">Attributes</h4>
+          <div className="flex items-center justify-between gap-3">
+            <h4 className="ui-title text-[11px] uppercase tracking-wide text-slate-400">Attributes</h4>
+            {hasSubstatScaling ? (
+              <AwakenerEnlightenStepper
+                offset={enlightenOffset}
+                onDecrease={onDecreaseEnlighten}
+                onIncrease={onIncreaseEnlighten}
+              />
+            ) : null}
+          </div>
           <AwakenerLevelSlider level={level} onChange={onLevelChange} />
         </div>
 
@@ -127,7 +143,7 @@ export function AwakenerDetailSidebar({
         )}
         {hasSubstatScaling ? (
           <p className="mt-2 text-[10px] leading-relaxed text-slate-500">
-            Secondary stat bonuses increase every 10 levels (1-60). Psyche Surge bonuses (E3+) not included.
+            Secondary stat bonuses increase every 10 levels (1-60). Psyche Surge bonuses shown from E3+0 to E3+12.
           </p>
         ) : null}
       </div>

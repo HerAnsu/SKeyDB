@@ -50,11 +50,14 @@ const TEST_SUBSTAT_SCALING: AwakenerSubstatScaling = {
 }
 
 describe('AwakenerDetailSidebar', () => {
-  it('keeps the level label in the slider, unifies stat value color, and exposes substat scaling on hover', () => {
+  it('keeps the level label in the slider, shows the Psyche Surge stepper, and exposes substat scaling on hover', () => {
     render(
       <AwakenerDetailSidebar
         awakener={TEST_AWAKENER}
+        enlightenOffset={0}
         level={60}
+        onDecreaseEnlighten={vi.fn()}
+        onIncreaseEnlighten={vi.fn()}
         onLevelChange={vi.fn()}
         stats={TEST_STATS}
         substatScaling={TEST_SUBSTAT_SCALING}
@@ -63,9 +66,11 @@ describe('AwakenerDetailSidebar', () => {
 
     expect(screen.getByRole('heading', { name: 'Attributes' })).toBeInTheDocument()
     expect(screen.queryByText('(Lv. 60)')).not.toBeInTheDocument()
+    expect(screen.getByText('E3+0')).toBeInTheDocument()
 
     expect(screen.getByText('140')).toHaveClass('text-slate-200')
     expect(screen.getByText('14.6%')).toHaveClass('text-slate-200')
     expect(screen.getByTitle('Level scaling: +1.6% per 10 levels to Lv. 60')).toHaveTextContent('14.6%')
+    expect(screen.getByText(/psyche surge bonuses shown from e3\+0 to e3\+12/i)).toBeInTheDocument()
   })
 })

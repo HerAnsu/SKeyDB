@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FaXmark } from 'react-icons/fa6'
-import { clampAwakenerDatabaseLevel, resolveAwakenerStatsForLevel } from '../../domain/awakener-level-scaling'
+import {
+  clampAwakenerDatabaseLevel,
+  clampAwakenerDatabasePsycheSurgeOffset,
+  resolveAwakenerStatsForLevel,
+} from '../../domain/awakener-level-scaling'
 import type { Awakener } from '../../domain/awakeners'
 import { loadAwakenersFull, getAwakenerFullById, type AwakenerFull } from '../../domain/awakeners-full'
 import { getAwakenerPortraitAsset } from '../../domain/awakener-assets'
@@ -40,6 +44,7 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
   const [activeTab, setActiveTab] = useState<TabId>('overview')
   const [fullData, setFullData] = useState<AwakenerFull | null>(null)
   const [awakenerLevel, setAwakenerLevel] = useState(60)
+  const [psycheSurgeOffset, setPsycheSurgeOffset] = useState(0)
   const [skillLevel, setSkillLevel] = useState(1)
   const [fontScale, setFontScaleRaw] = useState<FontScale>(readFontScale)
   const [showAllTags, setShowAllTags] = useState(false)
@@ -56,13 +61,21 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
     [fullData],
   )
   const resolvedStats = useMemo(
-    () => (fullData ? resolveAwakenerStatsForLevel(fullData, awakenerLevel) : null),
-    [awakenerLevel, fullData],
+    () => (fullData ? resolveAwakenerStatsForLevel(fullData, awakenerLevel, psycheSurgeOffset) : null),
+    [awakenerLevel, fullData, psycheSurgeOffset],
   )
 
   const navigateToCards = useCallback(() => setActiveTab('cards'), [])
   const handleAwakenerLevelChange = useCallback(
     (level: number) => setAwakenerLevel(clampAwakenerDatabaseLevel(level)),
+    [],
+  )
+  const handleIncreasePsycheSurge = useCallback(
+    () => setPsycheSurgeOffset((prev) => clampAwakenerDatabasePsycheSurgeOffset(prev + 1)),
+    [],
+  )
+  const handleDecreasePsycheSurge = useCallback(
+    () => setPsycheSurgeOffset((prev) => clampAwakenerDatabasePsycheSurgeOffset(prev - 1)),
     [],
   )
 
@@ -150,7 +163,10 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
           <aside className="hidden w-56 shrink-0 overflow-y-auto border-r border-slate-700/40 p-4 md:block lg:w-64">
             <AwakenerDetailSidebar
               awakener={awakener}
+              enlightenOffset={psycheSurgeOffset}
               level={awakenerLevel}
+              onDecreaseEnlighten={handleDecreasePsycheSurge}
+              onIncreaseEnlighten={handleIncreasePsycheSurge}
               onLevelChange={handleAwakenerLevelChange}
               stats={resolvedStats}
               substatScaling={fullData?.substatScaling ?? null}
@@ -279,7 +295,10 @@ export function AwakenerDetailModal({ awakener, onClose }: AwakenerDetailModalPr
                 <AwakenerDetailSidebar
                   awakener={awakener}
                   compact
+                  enlightenOffset={psycheSurgeOffset}
                   level={awakenerLevel}
+                  onDecreaseEnlighten={handleDecreasePsycheSurge}
+                  onIncreaseEnlighten={handleIncreasePsycheSurge}
                   onLevelChange={handleAwakenerLevelChange}
                   stats={resolvedStats}
                   substatScaling={fullData?.substatScaling ?? null}

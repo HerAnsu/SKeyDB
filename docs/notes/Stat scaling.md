@@ -1,9 +1,7 @@
 Data courtesy of Jynn
 https://docs.google.com/spreadsheets/d/1bIICnH-ZDbsOmIj9PPFFaW355z-NKrPIc3_3pRVSGg4/
 
-Local corrections confirmed from in-game data and CN wiki:
-- Wanda ATK scaling is `1.1`, and Wanda Lv. 60 ATK is `99`
-- Pollux ATK scaling is `1.75`, and Pollux Lv. 60 ATK is `158`
+PRIMARY STAT SCALINGS:
 
 |    Name    | CON/Lv | ATK/Lv | DEF/Lv |
 |------------|--------|--------|--------|
@@ -66,6 +64,8 @@ Local corrections confirmed from in-game data and CN wiki:
 | Castor     | 1.65   | 1.5    | 1.75   |
 | Pollux     | 1.55   | 1.75   | 1.5    |
 
+LEVEL 60 STATS PER CHARACTER
+
 Name        | Limited | CON | ATK | DEF
 |------------|--------|--------|--------|
 | Ramona     | No     | 120  | 120 | 120
@@ -126,3 +126,64 @@ Name        | Limited | CON | ATK | DEF
 | Clementine | Yes    | 126  | 149 | 122
 | Castor     | Yes    | 149  | 135 | 158
 | Pollux     | Yes    | 140  | 158 | 135
+
+SUBSTAT SCALING RULES, AND BASELINE VALUES
+
+Baseline (Level 1)
+CritRate: 5%,
+CritDamage: 50%,
+AliemusRegen: 0,
+KeyflareRegen" 15, 
+RealmMastery: 0, 
+SigilYield: 0%, 
+DamageAmplification: 0%,
+DeathResistance: 0%
+
+When a character has substat scaling, eg
+"substatScaling": {
+    "CritRate": "0.8%",
+    "CritDamage": "2.4%"
+},
+
+This means the baseline value is bumped by X, every Y (Edify) level (10,20,30,40,50,60), 
+as well as every Z (Psyche Surge, (Enlighten 3+Z)) level (0-12) 
+
+Example;
+Kathigu-ra
+
+Baseline 
+CritRate: 5%,
+CritDamage: 50%,
+AliemusRegen: 0,
+KeyflareRegen: 15, 
+RealmMastery: 0, 
+SigilYield: 0%, 
+DamageAmplification: 0%,
+DeathResistance: 0%
+
+Scales by
+"substatScaling": {
+    "CritRate": "0.8%",
+    "CritDamage": "2.4%"
+},
+
+Lvl 60 values:
+CritRate: 9.8%,
+CritDamage: 64.4%,
+AliemusRegen: 0,
+KeyflareRegen" 15, 
+RealmMastery: 0, 
+SigilYield: 0%, 
+DamageAmplification: 0%,
+DeathResistance: 0%
+
+Lvl 60 psyche surge 2 values
+CritRate: 11.4%, (9.8 + 0.8 * 2)
+CritDamage: 69.2%, (64.4 + 2.4 * 2)
+AliemusRegen: 0,
+KeyflareRegen: 15, 
+RealmMastery: 0, 
+SigilYield: 0%, 
+DamageAmplification: 0%,
+DeathResistance: 0%
+
