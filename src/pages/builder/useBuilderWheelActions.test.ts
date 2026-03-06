@@ -1,7 +1,11 @@
-import { renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { useBuilderWheelActions } from './useBuilderWheelActions'
-import type { ActiveSelection, TeamSlot, WheelUsageLocation } from './types'
+import type {
+  ActiveSelection,
+  TeamSlot,
+  WheelUsageLocation,
+} from '@/pages/builder/types';
+import {useBuilderWheelActions} from '@/pages/builder/useBuilderWheelActions';
+import {renderHook} from '@testing-library/react';
+import {describe, expect, it, vi} from 'vitest';
 
 function buildSlots(): TeamSlot[] {
   return [
@@ -19,23 +23,23 @@ function buildSlots(): TeamSlot[] {
       level: 60,
       wheels: [null, null],
     },
-  ]
+  ];
 }
 
 function createHook(options?: {
-  teamSlots?: TeamSlot[]
-  resolvedActiveSelection?: ActiveSelection
-  usedWheelByTeamOrder?: Map<string, WheelUsageLocation>
-  allowDupes?: boolean
+  teamSlots?: TeamSlot[];
+  resolvedActiveSelection?: ActiveSelection;
+  usedWheelByTeamOrder?: Map<string, WheelUsageLocation>;
+  allowDupes?: boolean;
 }) {
-  const setActiveTeamSlots = vi.fn()
-  const setActiveSelection = vi.fn()
-  const requestWheelTransfer = vi.fn()
-  const clearPendingDelete = vi.fn()
-  const clearTransfer = vi.fn()
-  const showToast = vi.fn()
+  const setActiveTeamSlots = vi.fn();
+  const setActiveSelection = vi.fn();
+  const requestWheelTransfer = vi.fn();
+  const clearPendingDelete = vi.fn();
+  const clearTransfer = vi.fn();
+  const showToast = vi.fn();
 
-  const teamSlots = options?.teamSlots ?? buildSlots()
+  const teamSlots = options?.teamSlots ?? buildSlots();
   const usedWheelByTeamOrder =
     options?.usedWheelByTeamOrder ??
     new Map([
@@ -48,9 +52,9 @@ function createHook(options?: {
           wheelIndex: 0,
         },
       ],
-    ])
+    ]);
 
-  const { result } = renderHook(() =>
+  const {result} = renderHook(() =>
     useBuilderWheelActions({
       clearPendingDelete,
       clearTransfer,
@@ -64,7 +68,7 @@ function createHook(options?: {
       usedWheelByTeamOrder,
       allowDupes: options?.allowDupes ?? false,
     }),
-  )
+  );
 
   return {
     actions: result.current,
@@ -74,22 +78,26 @@ function createHook(options?: {
     setActiveSelection,
     setActiveTeamSlots,
     showToast,
-  }
+  };
 }
 
 describe('useBuilderWheelActions', () => {
   it('swaps wheel ownership within the active team when picker wheel is already used', () => {
-    const { actions, setActiveSelection, setActiveTeamSlots } = createHook()
+    const {actions, setActiveSelection, setActiveTeamSlots} = createHook();
 
-    actions.handleDropPickerWheel('B01', 'slot-2', 1)
+    actions.handleDropPickerWheel('B01', 'slot-2', 1);
 
-    expect(setActiveTeamSlots).toHaveBeenCalledTimes(1)
+    expect(setActiveTeamSlots).toHaveBeenCalledTimes(1);
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: [null, null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: [null, 'B01'] }),
-    ])
-    expect(setActiveSelection).toHaveBeenCalledWith({ kind: 'wheel', slotId: 'slot-2', wheelIndex: 1 })
-  })
+      expect.objectContaining({slotId: 'slot-1', wheels: [null, null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: [null, 'B01']}),
+    ]);
+    expect(setActiveSelection).toHaveBeenCalledWith({
+      kind: 'wheel',
+      slotId: 'slot-2',
+      wheelIndex: 1,
+    });
+  });
 
   it('requests transfer when wheel belongs to another team', () => {
     const usedWheelByTeamOrder = new Map([
@@ -102,12 +110,14 @@ describe('useBuilderWheelActions', () => {
           wheelIndex: 0,
         },
       ],
-    ])
-    const { actions, requestWheelTransfer, setActiveTeamSlots } = createHook({ usedWheelByTeamOrder })
+    ]);
+    const {actions, requestWheelTransfer, setActiveTeamSlots} = createHook({
+      usedWheelByTeamOrder,
+    });
 
-    actions.handleDropPickerWheel('B01', 'slot-2', 0)
+    actions.handleDropPickerWheel('B01', 'slot-2', 0);
 
-    expect(setActiveTeamSlots).not.toHaveBeenCalled()
+    expect(setActiveTeamSlots).not.toHaveBeenCalled();
     expect(requestWheelTransfer).toHaveBeenCalledWith({
       wheelId: 'B01',
       fromTeamId: 'team-2',
@@ -116,23 +126,23 @@ describe('useBuilderWheelActions', () => {
       toTeamId: 'team-1',
       targetSlotId: 'slot-2',
       targetWheelIndex: 0,
-    })
-  })
+    });
+  });
 
   it('fills first empty wheel when awakener card is active and picker wheel is clicked', () => {
-    const { actions, setActiveSelection, setActiveTeamSlots } = createHook({
-      resolvedActiveSelection: { kind: 'awakener', slotId: 'slot-2' },
+    const {actions, setActiveSelection, setActiveTeamSlots} = createHook({
+      resolvedActiveSelection: {kind: 'awakener', slotId: 'slot-2'},
       usedWheelByTeamOrder: new Map(),
-    })
+    });
 
-    actions.handlePickerWheelClick('B02')
+    actions.handlePickerWheelClick('B02');
 
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: ['B01', null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: ['B02', null] }),
-    ])
-    expect(setActiveSelection).not.toHaveBeenCalled()
-  })
+      expect.objectContaining({slotId: 'slot-1', wheels: ['B01', null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: ['B02', null]}),
+    ]);
+    expect(setActiveSelection).not.toHaveBeenCalled();
+  });
 
   it('assigns duplicate wheel directly when dupes are enabled', () => {
     const usedWheelByTeamOrder = new Map([
@@ -145,21 +155,21 @@ describe('useBuilderWheelActions', () => {
           wheelIndex: 0,
         },
       ],
-    ])
-    const { actions, requestWheelTransfer, setActiveTeamSlots } = createHook({
-      resolvedActiveSelection: { kind: 'wheel', slotId: 'slot-2', wheelIndex: 0 },
+    ]);
+    const {actions, requestWheelTransfer, setActiveTeamSlots} = createHook({
+      resolvedActiveSelection: {kind: 'wheel', slotId: 'slot-2', wheelIndex: 0},
       usedWheelByTeamOrder,
       allowDupes: true,
-    })
+    });
 
-    actions.handlePickerWheelClick('B01')
+    actions.handlePickerWheelClick('B01');
 
-    expect(requestWheelTransfer).not.toHaveBeenCalled()
+    expect(requestWheelTransfer).not.toHaveBeenCalled();
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: ['B01', null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: ['B01', null] }),
-    ])
-  })
+      expect.objectContaining({slotId: 'slot-1', wheels: ['B01', null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: ['B01', null]}),
+    ]);
+  });
 
   it('assigns duplicate wheel directly when target slot is support', () => {
     const usedWheelByTeamOrder = new Map([
@@ -172,8 +182,8 @@ describe('useBuilderWheelActions', () => {
           wheelIndex: 0,
         },
       ],
-    ])
-    const { actions, requestWheelTransfer, setActiveTeamSlots } = createHook({
+    ]);
+    const {actions, requestWheelTransfer, setActiveTeamSlots} = createHook({
       teamSlots: [
         {
           slotId: 'slot-1',
@@ -191,21 +201,25 @@ describe('useBuilderWheelActions', () => {
           wheels: [null, null],
         },
       ],
-      resolvedActiveSelection: { kind: 'wheel', slotId: 'slot-2', wheelIndex: 0 },
+      resolvedActiveSelection: {kind: 'wheel', slotId: 'slot-2', wheelIndex: 0},
       usedWheelByTeamOrder,
-    })
+    });
 
-    actions.handlePickerWheelClick('B01')
+    actions.handlePickerWheelClick('B01');
 
-    expect(requestWheelTransfer).not.toHaveBeenCalled()
+    expect(requestWheelTransfer).not.toHaveBeenCalled();
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: ['B01', null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: ['B01', null], isSupport: true }),
-    ])
-  })
+      expect.objectContaining({slotId: 'slot-1', wheels: ['B01', null]}),
+      expect.objectContaining({
+        slotId: 'slot-2',
+        wheels: ['B01', null],
+        isSupport: true,
+      }),
+    ]);
+  });
 
   it('swaps wheel assignments between active-team slots when dragging between wheel sockets', () => {
-    const { actions, setActiveSelection, setActiveTeamSlots } = createHook({
+    const {actions, setActiveSelection, setActiveTeamSlots} = createHook({
       teamSlots: [
         {
           slotId: 'slot-1',
@@ -222,14 +236,18 @@ describe('useBuilderWheelActions', () => {
           wheels: [null, 'B02'],
         },
       ],
-    })
+    });
 
-    actions.handleDropTeamWheel('slot-1', 0, 'slot-2', 1)
+    actions.handleDropTeamWheel('slot-1', 0, 'slot-2', 1);
 
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: ['B02', null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: [null, 'B01'] }),
-    ])
-    expect(setActiveSelection).toHaveBeenCalledWith({ kind: 'wheel', slotId: 'slot-2', wheelIndex: 1 })
-  })
-})
+      expect.objectContaining({slotId: 'slot-1', wheels: ['B02', null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: [null, 'B01']}),
+    ]);
+    expect(setActiveSelection).toHaveBeenCalledWith({
+      kind: 'wheel',
+      slotId: 'slot-2',
+      wheelIndex: 1,
+    });
+  });
+});

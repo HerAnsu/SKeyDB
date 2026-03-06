@@ -1,28 +1,44 @@
-import type { ActiveSelection } from './types'
+import type {ActiveSelection} from '@/pages/builder/types';
 
-export function toggleAwakenerSelection(previous: ActiveSelection, slotId: string): ActiveSelection {
+export function toggleAwakenerSelection(
+  previous: ActiveSelection,
+  slotId: string,
+): ActiveSelection {
   if (previous?.kind === 'awakener' && previous.slotId === slotId) {
-    return null
+    return null;
   }
-  return { kind: 'awakener', slotId }
+  return {kind: 'awakener', slotId};
 }
 
-export function toggleWheelSelection(previous: ActiveSelection, slotId: string, wheelIndex: number): ActiveSelection {
-  if (previous?.kind === 'wheel' && previous.slotId === slotId && previous.wheelIndex === wheelIndex) {
-    return null
+export function toggleWheelSelection(
+  previous: ActiveSelection,
+  slotId: string,
+  wheelIndex: number,
+): ActiveSelection {
+  if (
+    previous?.kind === 'wheel' &&
+    previous.slotId === slotId &&
+    previous.wheelIndex === wheelIndex
+  ) {
+    return null;
   }
-  return { kind: 'wheel', slotId, wheelIndex }
+  return {kind: 'wheel', slotId, wheelIndex};
 }
 
-export function toggleCovenantSelection(previous: ActiveSelection, slotId: string): ActiveSelection {
+export function toggleCovenantSelection(
+  previous: ActiveSelection,
+  slotId: string,
+): ActiveSelection {
   if (previous?.kind === 'covenant' && previous.slotId === slotId) {
-    return null
+    return null;
   }
-  return { kind: 'covenant', slotId }
+  return {kind: 'covenant', slotId};
 }
 
-export function shouldSetActiveWheelOnPickerAssign(activeSelection: ActiveSelection): boolean {
-  return activeSelection?.kind === 'wheel'
+export function shouldSetActiveWheelOnPickerAssign(
+  activeSelection: ActiveSelection,
+): boolean {
+  return activeSelection?.kind === 'wheel';
 }
 
 export function nextSelectionAfterWheelSwap(
@@ -33,21 +49,21 @@ export function nextSelectionAfterWheelSwap(
   targetWheelIndex: number,
 ): ActiveSelection {
   if (currentSelection?.kind !== 'wheel') {
-    return currentSelection
+    return currentSelection;
   }
   const isActiveSource =
     currentSelection.slotId === sourceSlotId &&
-    currentSelection.wheelIndex === sourceWheelIndex
+    currentSelection.wheelIndex === sourceWheelIndex;
   if (isActiveSource) {
-    return { kind: 'wheel', slotId: targetSlotId, wheelIndex: targetWheelIndex }
+    return {kind: 'wheel', slotId: targetSlotId, wheelIndex: targetWheelIndex};
   }
   const isActiveTarget =
     currentSelection.slotId === targetSlotId &&
-    currentSelection.wheelIndex === targetWheelIndex
+    currentSelection.wheelIndex === targetWheelIndex;
   if (isActiveTarget) {
-    return { kind: 'wheel', slotId: sourceSlotId, wheelIndex: sourceWheelIndex }
+    return {kind: 'wheel', slotId: sourceSlotId, wheelIndex: sourceWheelIndex};
   }
-  return currentSelection
+  return currentSelection;
 }
 
 export function nextSelectionAfterWheelRemoved(
@@ -60,9 +76,9 @@ export function nextSelectionAfterWheelRemoved(
     currentSelection.slotId === sourceSlotId &&
     currentSelection.wheelIndex === sourceWheelIndex
   ) {
-    return null
+    return null;
   }
-  return currentSelection
+  return currentSelection;
 }
 
 export function nextSelectionAfterCovenantSwap(
@@ -71,26 +87,29 @@ export function nextSelectionAfterCovenantSwap(
   targetSlotId: string,
 ): ActiveSelection {
   if (currentSelection?.kind !== 'covenant') {
-    return currentSelection
+    return currentSelection;
   }
 
   if (currentSelection.slotId === sourceSlotId) {
-    return { kind: 'covenant', slotId: targetSlotId }
+    return {kind: 'covenant', slotId: targetSlotId};
   }
 
   if (currentSelection.slotId === targetSlotId) {
-    return { kind: 'covenant', slotId: sourceSlotId }
+    return {kind: 'covenant', slotId: sourceSlotId};
   }
 
-  return currentSelection
+  return currentSelection;
 }
 
 export function nextSelectionAfterCovenantRemoved(
   currentSelection: ActiveSelection,
   sourceSlotId: string,
 ): ActiveSelection {
-  if (currentSelection?.kind === 'covenant' && currentSelection.slotId === sourceSlotId) {
-    return null
+  if (
+    currentSelection?.kind === 'covenant' &&
+    currentSelection.slotId === sourceSlotId
+  ) {
+    return null;
   }
-  return currentSelection
+  return currentSelection;
 }

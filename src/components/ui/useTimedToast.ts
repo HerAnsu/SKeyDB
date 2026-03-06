@@ -1,49 +1,61 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react';
 
-type UseTimedToastOptions = {
-  defaultDurationMs?: number
+interface UseTimedToastOptions {
+  readonly defaultDurationMs?: number;
 }
 
-export function useTimedToast({ defaultDurationMs = 3200 }: UseTimedToastOptions = {}) {
-  const [toastEntries, setToastEntries] = useState<Array<{ id: number; message: string }>>([])
-  const nextToastIdRef = useRef(0)
-  const timeoutRefs = useRef<Map<number, number>>(new Map())
+export function useTimedToast({
+  defaultDurationMs = 3200,
+}: UseTimedToastOptions = {}) {
+  const [toastEntries, setToastEntries] = useState<
+    {readonly id: number; readonly message: string}[]
+  >([]);
+  const nextToastIdRef = useRef(0);
+  const timeoutRefs = useRef<Map<number, number>>(new Map());
 
   const clearToast = useCallback(() => {
     for (const timeoutId of timeoutRefs.current.values()) {
-      window.clearTimeout(timeoutId)
+      window.clearTimeout(timeoutId);
     }
-    timeoutRefs.current.clear()
-    setToastEntries([])
-  }, [])
+    timeoutRefs.current.clear();
+    setToastEntries([]);
+  }, []);
+
+  const removeToastById = useCallback((toastId: number) => {
+    timeoutRefs.current.delete(toastId);
+    setToastEntries((previous) =>
+      previous.filter((entry) => entry.id !== toastId),
+    );
+  }, []);
 
   const showToast = useCallback(
     (message: string, durationMs = defaultDurationMs) => {
-      const toastId = nextToastIdRef.current
-      nextToastIdRef.current += 1
+      const toastId = nextToastIdRef.current;
+      nextToastIdRef.current += 1;
 
-      setToastEntries((previous) => [...previous, { id: toastId, message }])
+      setToastEntries((previous) => [...previous, {id: toastId, message}]);
+
       const timeoutId = window.setTimeout(() => {
-        timeoutRefs.current.delete(toastId)
-        setToastEntries((previous) => previous.filter((entry) => entry.id !== toastId))
-      }, durationMs)
-      timeoutRefs.current.set(toastId, timeoutId)
+        removeToastById(toastId);
+      }, durationMs);
+
+      timeoutRefs.current.set(toastId, timeoutId);
     },
-    [defaultDurationMs],
-  )
+    [defaultDurationMs, removeToastById],
+  );
 
   useEffect(
     () => () => {
       for (const timeoutId of timeoutRefs.current.values()) {
-        window.clearTimeout(timeoutId)
+        window.clearTimeout(timeoutId);
       }
-      timeoutRefs.current.clear()
+      timeoutRefs.current.clear();
     },
     [],
-  )
+  );
 
-  const toastMessages = toastEntries.map((entry) => entry.message)
-  const toastMessage = toastMessages.at(-1) ?? null
+  const toastMessages = toastEntries.map((entry) => entry.message);
+  const toastMessage = toastMessages.at(-1) ?? null;
 
-  return { toastEntries, toastMessage, toastMessages, showToast, clearToast }
+  return {toastEntries, toastMessage, toastMessages, showToast, clearToast};
 }

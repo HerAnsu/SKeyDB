@@ -1,144 +1,188 @@
 # SKeyDB Agent Guide
 
-This file is for coding agents working in this repo.
-Its job is to reduce churn, keep logic in the right layer, and preserve repo-specific behavior.
+This file is for coding agents working in this repo. Its job is to reduce churn,
+keep logic in the right layer, and preserve repo-specific behavior.
 
 ## 1) Instruction Order
 
 1. Highest priority:
+
 - system, developer, runtime, and tool constraints
 
 2. Repo policy:
+
 - this `AGENTS.md` is the repo-level instruction source
 
 3. Context+ workflow:
-- if a local `INSTRUCTIONS.md` file is present, treat it as supplemental guidance for Context+ MCP usage
+
+- if a local `INSTRUCTIONS.md` file is present, treat it as supplemental
+  guidance for Context+ MCP usage
 - use it only when Context+ is available and relevant to the task
-- do not assume other maintainers have that file or the same local MCP and Ollama setup
-- apply its principles where they fit this repo; do not import server-specific formatting rules blindly
+- do not assume other maintainers have that file or the same local MCP and
+  Ollama setup
+- apply its principles where they fit this repo; do not import server-specific
+  formatting rules blindly
 
 4. Task direction:
+
 - user requests define the task
 - they do not override higher-priority safety or runtime constraints
 
 5. Fallback:
-- if Context+ is unavailable or bound to the wrong root, fall back to repo-safe local tooling
-- if `INSTRUCTIONS.md` is absent, ignore it and continue with this file plus the active runtime rules
+
+- if Context+ is unavailable or bound to the wrong root, fall back to repo-safe
+  local tooling
+- if `INSTRUCTIONS.md` is absent, ignore it and continue with this file plus the
+  active runtime rules
 - verify MCP state before trusting Context+ output again
 
 ## 2) Repo Priorities
 
 1. Correctness first:
+
 - this is a data-heavy React + TypeScript app
-- domain correctness, deterministic codecs, and maintainability matter more than rapid UI churn
+- domain correctness, deterministic codecs, and maintainability matter more than
+  rapid UI churn
 
 2. Domain-first ownership:
+
 - fix domain problems in `src/domain/*`, not with UI patches
 - UI should consume domain outputs, not recreate business rules
 
 3. Low-churn execution:
+
 - make the smallest safe change that satisfies the task
 - avoid unrelated rewrites, cleanup sprees, or speculative abstractions
 
 4. Visual consistency:
+
 - preserve the sharp, squared, Morimens-inspired visual language
 - do not introduce a new visual pattern without a clear reason
 
 ## 3) Ownership Boundaries
 
 1. File ownership:
+
 - `src/domain/*`: business rules, codecs, normalization, validation, comparators
-- `src/pages/builder/*`: orchestration, page-level state, builder view-model logic
+- `src/pages/builder/*`: orchestration, page-level state, builder view-model
+  logic
 - `src/components/ui/*`: reusable UI primitives
 - `src/data/*`: canonical static data with stable IDs
 
 2. State rules:
+
 - derive instead of duplicating state
 - keep state minimal
 - store stable IDs or tokens, then derive labels and display metadata
 
 3. Effect rules:
+
 - use effects for external synchronization only
 - do not use effects for pure data transforms that can be derived during render
 
 4. Interaction ownership:
-- DnD, move, swap, clear, and validity rules belong in domain helpers where possible
+
+- DnD, move, swap, clear, and validity rules belong in domain helpers where
+  possible
 - reusable interaction semantics should not be reimplemented page-by-page
 
 5. Sorting ownership:
+
 - shared ordering policy belongs in domain comparators
-- page code may assemble sortable fields, but should not duplicate comparator policy
+- page code may assemble sortable fields, but should not duplicate comparator
+  policy
 
 ## 4) Agent Workflow
 
 1. Before non-trivial behavior changes:
-- define the intended behavior in a short list of inputs, outputs, invariants, and edge cases
+
+- define the intended behavior in a short list of inputs, outputs, invariants,
+  and edge cases
 - decide file ownership before coding
 
 2. Prefer test-first changes:
-- add or update a failing test before implementation for behavior changes and bug fixes
+
+- add or update a failing test before implementation for behavior changes and
+  bug fixes
 - keep tests close to the owning layer
 
 3. Implement in thin slices:
+
 - write the smallest passing change first
 - refactor only after behavior is green
 - no "while I am here" rewrites unless required for the task
 
 4. For cleanup or QC passes:
+
 - scan the whole requested scope before editing
 - produce a compact findings list mentally or explicitly
 - fix the batch, then verify the batch
 
 5. For large UI reworks:
+
 - phase A: extract reusable shells or primitives without behavior changes
 - phase B: migrate layout into those shells with handlers and state unchanged
 - phase C: add new behavior
 
 6. Styling-only passes:
+
 - keep them styling-only
-- if interaction semantics, accessibility, or state flow changes, treat it as behavior work and add regression coverage
+- if interaction semantics, accessibility, or state flow changes, treat it as
+  behavior work and add regression coverage
 
 ## 5) Code-Shape Preferences
 
 1. Keep logic easy to scan:
+
 - inline tiny single-use logic
 - extract repeated or conceptually meaningful logic
 - split files or components before they become god objects
 
 2. Keep structure shallow:
+
 - avoid deep nesting
 - prefer straightforward control flow over layered indirection
 
 3. Comments:
+
 - use comments sparingly
 - add a short comment only when intent is not obvious from the code
 - do not mass-introduce mandatory file header comments across the repo
-- for a new non-trivial module, a short top-of-file summary is acceptable if it materially improves navigation and does not conflict with local file conventions
+- for a new non-trivial module, a short top-of-file summary is acceptable if it
+  materially improves navigation and does not conflict with local file
+  conventions
 
 4. Hygiene:
+
 - remove unused imports, dead variables, and dead branches in touched code
 - do not leave debug-only code behind
 
 ## 6) Data and Codec Rules
 
 1. Stable identity:
+
 - never rely on array order as identity
 - IDs and schema contracts are stable boundaries
 
 2. Boundary normalization:
+
 - normalize invalid states at the boundary
 - example: an empty awakener slot must not retain wheels
 
 3. Import/export safety:
+
 - treat codec changes as high-risk
 - preserve deterministic output
 - keep strict decode validation and explicit errors
 - add round-trip tests and size-sensitive assertions when relevant
 
 4. Versioning:
-- preserve the prefix strategy such as `t1.` and `mt1.` unless the task explicitly changes versioning
+
+- preserve the prefix strategy such as `t1.` and `mt1.` unless the task
+  explicitly changes versioning
 
 5. Canonical data maintenance:
+
 - use the packaged sync commands when changing canonical IDs or exported tables
 - `npm run data:sync-awakener-ids`
 - `npm run data:sync-posse-indices`
@@ -147,43 +191,58 @@ Its job is to reduce churn, keep logic in the right layer, and preserve repo-spe
 ## 7) Testing and Verification
 
 1. Test behavior, not implementation details:
+
 - prefer user-visible assertions and domain outputs
 
 2. Regression coverage:
+
 - every bug fix should add or update a regression test
 
 3. Scope-matched verification:
+
 - unit or domain work: `npm run lint` and `npm run test:unit`
 - builder interaction work: `npm run lint` and `npm run test:integration`
-- collection or smaller UI regression work: `npm run lint` and `npm run test:quick`
+- collection or smaller UI regression work: `npm run lint` and
+  `npm run test:quick`
 
 4. Final gate:
+
 - run `npm run verify` before claiming substantial work is complete
 
 ## 8) Context+ Usage
 
 1. Default behavior:
-- if present, use local `INSTRUCTIONS.md` as the primary guide for Context+ tool choice and ordering
+
+- if present, use local `INSTRUCTIONS.md` as the primary guide for Context+ tool
+  choice and ordering
 - prefer structural discovery over broad file reads
 
 2. High-value Context+ usage:
+
 - use context tree or file skeleton views to scope work
 - use blast radius before deleting or heavily reshaping shared symbols
 - run static analysis after edits when the tool is available and appropriate
 
 3. Editing:
-- prefer `propose_commit` when it is available and compatible with the active environment
-- if the environment requires a different edit mechanism, follow the environment without treating that as a repo policy violation
+
+- prefer `propose_commit` when it is available and compatible with the active
+  environment
+- if the environment requires a different edit mechanism, follow the environment
+  without treating that as a repo policy violation
 
 ## 9) Agent-Specific Non-Goals
 
 1. This file is not a human maintainer handbook:
-- keep human process prose, long checklists, and broad contributor policy elsewhere
+
+- keep human process prose, long checklists, and broad contributor policy
+  elsewhere
 
 2. Do not preserve historical process bloat just because it already exists:
+
 - keep this file lean, repo-specific, and useful during execution
 
 3. When in doubt:
+
 - prefer simpler state
 - prefer domain-first fixes
 - prefer tests before expansion

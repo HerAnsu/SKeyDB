@@ -1,26 +1,29 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { SegmentedControl } from './SegmentedControl'
+import {SegmentedControl} from '@/components/ui/SegmentedControl';
+import {fireEvent, render, screen} from '@testing-library/react';
+import {describe, expect, it, vi} from 'vitest';
 
 describe('SegmentedControl', () => {
   it('renders options and changes the selected value', () => {
-    const onChange = vi.fn()
+    const onChange = vi.fn();
 
     render(
       <SegmentedControl
-        ariaLabel="Preview mode"
+        ariaLabel='Preview mode'
         onChange={onChange}
         options={[
-          { value: 'compact', label: 'Compact' },
-          { value: 'expanded', label: 'Expanded' },
+          {value: 'compact', label: 'Compact'},
+          {value: 'expanded', label: 'Expanded'},
         ]}
-        value="compact"
+        value='compact'
       />,
-    )
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: 'Expanded' }))
+    fireEvent.click(screen.getByRole('button', {name: 'Expanded'}));
 
-    expect(onChange).toHaveBeenCalledWith('expanded')
-    expect(screen.getByRole('button', { name: 'Compact' })).toHaveAttribute('aria-pressed', 'true')
-  })
-})
+    expect(onChange).toHaveBeenCalledWith('expanded');
+    expect(screen.getByRole('button', {name: 'Compact'})).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+  });
+});

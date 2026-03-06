@@ -1,13 +1,17 @@
-import { OwnershipLevelDisplay } from './OwnershipLevelDisplay'
-import { CollectionLevelStepButton } from './CollectionLevelStepButton'
+import {CollectionLevelStepButton} from '@/pages/collection/CollectionLevelStepButton';
+import {OwnershipLevelDisplay} from '@/pages/collection/OwnershipLevelDisplay';
 
-type CollectionLevelControlsProps = {
-  ownedLevel: number | null
-  onIncrease: () => void
-  onDecrease: () => void
+export interface CollectionLevelControlsProps {
+  readonly ownedLevel: number | null;
+  readonly onIncrease: () => void;
+  readonly onDecrease: () => void;
 }
 
-export function CollectionLevelControls({ ownedLevel, onIncrease, onDecrease }: CollectionLevelControlsProps) {
+export function CollectionLevelControls({
+  ownedLevel,
+  onIncrease,
+  onDecrease,
+}: CollectionLevelControlsProps) {
   return (
     <div
       className={`collection-card-level-controls ${
@@ -15,20 +19,24 @@ export function CollectionLevelControls({ ownedLevel, onIncrease, onDecrease }: 
       }`}
     >
       <OwnershipLevelDisplay ownedLevel={ownedLevel} />
-      <div className="collection-step-group">
+      <div className='collection-step-group'>
         <CollectionLevelStepButton
-          ariaLabel="Increase enlighten level"
-          direction="up"
+          ariaLabel='Increase enlighten level'
+          direction='up'
           disabled={ownedLevel === null || ownedLevel >= 15}
-          onStep={onIncrease}
+          onStep={() => {
+            onIncrease();
+          }}
         />
         <CollectionLevelStepButton
-          ariaLabel="Decrease enlighten level"
-          direction="down"
+          ariaLabel='Decrease enlighten level'
+          direction='down'
           disabled={ownedLevel === null || ownedLevel <= 0}
-          onStep={onDecrease}
+          onStep={() => {
+            onDecrease();
+          }}
         />
       </div>
     </div>
-  )
+  );
 }

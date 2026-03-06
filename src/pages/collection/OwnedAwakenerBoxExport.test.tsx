@@ -1,11 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { OwnedAwakenerBoxExport } from './OwnedAwakenerBoxExport'
+import {OwnedAwakenerBoxExport} from '@/pages/collection/OwnedAwakenerBoxExport';
+import {fireEvent, render, screen} from '@testing-library/react';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 
 describe('OwnedAwakenerBoxExport', () => {
   beforeEach(() => {
-    window.localStorage.clear()
-  })
+    window.localStorage.clear();
+  });
 
   it('shows card levels by default and allows disabling them', () => {
     render(
@@ -23,15 +23,19 @@ describe('OwnedAwakenerBoxExport', () => {
         ]}
         onStatusMessage={vi.fn()}
       />,
-    )
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /export box as png/i }))
+    fireEvent.click(screen.getByRole('button', {name: /export box as png/i}));
 
-    expect(screen.getByText((_, element) => element?.textContent === 'Lv.72')).toBeInTheDocument()
+    expect(
+      screen.getByText((_, element) => element?.textContent === 'Lv.72'),
+    ).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: /hide levels on card/i }))
-    expect(screen.queryByText((_, element) => element?.textContent === 'Lv.72')).not.toBeInTheDocument()
-  })
+    fireEvent.click(screen.getByRole('button', {name: /hide levels on card/i}));
+    expect(
+      screen.queryByText((_, element) => element?.textContent === 'Lv.72'),
+    ).not.toBeInTheDocument();
+  });
 
   it('supports level sorting with faction grouping and enlighten/index tie-breakers', () => {
     render(
@@ -67,21 +71,23 @@ describe('OwnedAwakenerBoxExport', () => {
         ]}
         onStatusMessage={vi.fn()}
       />,
-    )
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /export box as png/i }))
+    fireEvent.click(screen.getByRole('button', {name: /export box as png/i}));
 
-    fireEvent.change(screen.getByLabelText(/sort by/i), { target: { value: 'LEVEL' } })
-    fireEvent.click(screen.getByLabelText(/Group By Realm/i))
+    fireEvent.change(screen.getByLabelText(/sort by/i), {
+      target: {value: 'LEVEL'},
+    });
+    fireEvent.click(screen.getByLabelText(/Group By Realm/i));
 
-    const sortSelect = screen.getByLabelText(/sort by/i)
-    expect(sortSelect.textContent).toContain('Rarity')
+    const sortSelect = screen.getByLabelText(/sort by/i);
+    expect(sortSelect.textContent).toContain('Rarity');
 
-    const labels = screen.getAllByTestId('export-preview-card-label')
-    expect(labels[0]).toHaveTextContent('Ogier')
-    expect(labels[1]).toHaveTextContent('Ramona')
-    expect(labels[2]).toHaveTextContent('Aurita')
-  })
+    const labels = screen.getAllByTestId('export-preview-card-label');
+    expect(labels[0]).toHaveTextContent('Ogier');
+    expect(labels[1]).toHaveTextContent('Ramona');
+    expect(labels[2]).toHaveTextContent('Aurita');
+  });
 
   it('uses alphabetical as primary key when selected', () => {
     render(
@@ -108,16 +114,18 @@ describe('OwnedAwakenerBoxExport', () => {
         ]}
         onStatusMessage={vi.fn()}
       />,
-    )
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /export box as png/i }))
-    fireEvent.change(screen.getByLabelText(/sort by/i), { target: { value: 'ALPHABETICAL' } })
-    fireEvent.click(screen.getByLabelText(/toggle sort direction/i))
+    fireEvent.click(screen.getByRole('button', {name: /export box as png/i}));
+    fireEvent.change(screen.getByLabelText(/sort by/i), {
+      target: {value: 'ALPHABETICAL'},
+    });
+    fireEvent.click(screen.getByLabelText(/toggle sort direction/i));
 
-    const labels = screen.getAllByTestId('export-preview-card-label')
-    expect(labels[0]).toHaveTextContent('Aurita')
-    expect(labels[1]).toHaveTextContent('Ramona')
-  })
+    const labels = screen.getAllByTestId('export-preview-card-label');
+    expect(labels[0]).toHaveTextContent('Aurita');
+    expect(labels[1]).toHaveTextContent('Ramona');
+  });
 
   it('supports rarity sort with Genesis above SSR and SR', () => {
     render(
@@ -156,20 +164,24 @@ describe('OwnedAwakenerBoxExport', () => {
         ]}
         onStatusMessage={vi.fn()}
       />,
-    )
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /export box as png/i }))
-    fireEvent.change(screen.getByLabelText(/sort by/i), { target: { value: 'RARITY' } })
-    const directionButton = screen.getByRole('button', { name: /toggle sort direction/i })
-    if (directionButton.textContent?.includes('Low')) {
-      fireEvent.click(directionButton)
+    fireEvent.click(screen.getByRole('button', {name: /export box as png/i}));
+    fireEvent.change(screen.getByLabelText(/sort by/i), {
+      target: {value: 'RARITY'},
+    });
+    const directionButton = screen.getByRole('button', {
+      name: /toggle sort direction/i,
+    });
+    if (directionButton.textContent.includes('Low')) {
+      fireEvent.click(directionButton);
     }
 
-    const labels = screen.getAllByTestId('export-preview-card-label')
-    expect(labels[0]).toHaveTextContent('Genesis Unit')
-    expect(labels[1]).toHaveTextContent('SSR Unit')
-    expect(labels[2]).toHaveTextContent('SR Unit')
-  })
+    const labels = screen.getAllByTestId('export-preview-card-label');
+    expect(labels[0]).toHaveTextContent('Genesis Unit');
+    expect(labels[1]).toHaveTextContent('SSR Unit');
+    expect(labels[2]).toHaveTextContent('SR Unit');
+  });
 
   it('rehydrates persisted rarity sort config from local storage', () => {
     window.localStorage.setItem(
@@ -179,7 +191,7 @@ describe('OwnedAwakenerBoxExport', () => {
         direction: 'ASC',
         groupByRealm: true,
       }),
-    )
+    );
 
     render(
       <OwnedAwakenerBoxExport
@@ -197,14 +209,16 @@ describe('OwnedAwakenerBoxExport', () => {
         ]}
         onStatusMessage={vi.fn()}
       />,
-    )
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /export box as png/i }))
+    fireEvent.click(screen.getByRole('button', {name: /export box as png/i}));
 
-    expect(screen.getByRole('combobox', { name: /sort by/i })).toHaveValue('RARITY')
-    expect(screen.getByRole('button', { name: /toggle sort direction/i })).toHaveTextContent('Low')
-    expect(screen.getByLabelText(/Group By Realm/i)).toHaveTextContent('On')
-  })
-})
-
-
+    expect(screen.getByRole('combobox', {name: /sort by/i})).toHaveValue(
+      'RARITY',
+    );
+    expect(
+      screen.getByRole('button', {name: /toggle sort direction/i}),
+    ).toHaveTextContent('Low');
+    expect(screen.getByLabelText(/Group By Realm/i)).toHaveTextContent('On');
+  });
+});

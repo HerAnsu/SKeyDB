@@ -1,32 +1,38 @@
-import { useCallback } from 'react'
-import type { Awakener } from '../../domain/awakeners'
-import { getAwakenerIdentityKey } from '../../domain/awakener-identity'
-import { assignAwakenerToFirstEmptySlot, assignAwakenerToSlot, type TeamStateViolationCode } from './team-state'
-import type { ActiveSelection, TeamSlot } from './types'
+import {getAwakenerIdentityKey} from '@/domain/awakener-identity';
+import type {Awakener} from '@/domain/awakeners';
+import {
+  assignAwakenerToFirstEmptySlot,
+  assignAwakenerToSlot,
+  type TeamStateViolationCode,
+} from '@/pages/builder/team-state';
+import type {ActiveSelection, TeamSlot} from '@/pages/builder/types';
+import {useCallback} from 'react';
 
-type AwakenerTransferRequest = {
-  awakenerName: string
-  canUseSupport?: boolean
-  fromTeamId: string
-  toTeamId: string
-  targetSlotId?: string
+interface AwakenerTransferRequest {
+  awakenerName: string;
+  canUseSupport?: boolean;
+  fromTeamId: string;
+  toTeamId: string;
+  targetSlotId?: string;
 }
 
-type UseBuilderAwakenerActionsOptions = {
-  teamSlots: TeamSlot[]
-  awakenerByName: Map<string, Awakener>
-  effectiveActiveTeamId: string
-  usedAwakenerByIdentityKey: Map<string, string>
-  resolvedActiveSelection: ActiveSelection
-  setActiveTeamSlots: (nextSlots: TeamSlot[]) => void
-  setActiveSelection: (nextSelection: ActiveSelection) => void
-  requestAwakenerTransfer: (request: AwakenerTransferRequest) => void
-  clearPendingDelete: () => void
-  clearTransfer: () => void
-  notifyViolation: (violation: TeamStateViolationCode | undefined) => void
-  allowDupes: boolean
-  hasSupportAwakener: boolean
-  onPickerAssignSuccess?: (nextSlots: TeamSlot[]) => void
+interface UseBuilderAwakenerActionsOptions {
+  readonly teamSlots: readonly TeamSlot[];
+  readonly awakenerByName: Map<string, Awakener>;
+  readonly effectiveActiveTeamId: string;
+  readonly usedAwakenerByIdentityKey: Map<string, string>;
+  readonly resolvedActiveSelection: ActiveSelection;
+  readonly setActiveTeamSlots: (nextSlots: readonly TeamSlot[]) => void;
+  readonly setActiveSelection: (nextSelection: ActiveSelection) => void;
+  readonly requestAwakenerTransfer: (request: AwakenerTransferRequest) => void;
+  readonly clearPendingDelete: () => void;
+  readonly clearTransfer: () => void;
+  readonly notifyViolation: (
+    violation: TeamStateViolationCode | undefined,
+  ) => void;
+  readonly allowDupes: boolean;
+  readonly hasSupportAwakener: boolean;
+  readonly onPickerAssignSuccess?: (nextSlots: readonly TeamSlot[]) => void;
 }
 
 export function useBuilderAwakenerActions({
@@ -47,33 +53,45 @@ export function useBuilderAwakenerActions({
 }: UseBuilderAwakenerActionsOptions) {
   const handleDropPickerAwakener = useCallback(
     (awakenerName: string, targetSlotId: string) => {
-      const result = assignAwakenerToSlot(teamSlots, awakenerName, targetSlotId, awakenerByName, {
-        allowDuplicateIdentity: allowDupes,
-      })
-      notifyViolation(result.violation)
+      const result = assignAwakenerToSlot(
+        teamSlots,
+        awakenerName,
+        targetSlotId,
+        awakenerByName,
+        {
+          allowDuplicateIdentity: allowDupes,
+        },
+      );
+      notifyViolation(result.violation);
       if (result.nextSlots === teamSlots) {
-        return
+        return;
       }
 
-      const identityKey = getAwakenerIdentityKey(awakenerName)
-      const owningTeamId = allowDupes ? undefined : usedAwakenerByIdentityKey.get(identityKey)
-      const targetSlot = teamSlots.find((slot) => slot.slotId === targetSlotId)
-      if (owningTeamId && owningTeamId !== effectiveActiveTeamId && !targetSlot?.isSupport) {
-        clearPendingDelete()
+      const identityKey = getAwakenerIdentityKey(awakenerName);
+      const owningTeamId = allowDupes
+        ? undefined
+        : usedAwakenerByIdentityKey.get(identityKey);
+      const targetSlot = teamSlots.find((slot) => slot.slotId === targetSlotId);
+      if (
+        owningTeamId &&
+        owningTeamId !== effectiveActiveTeamId &&
+        !targetSlot?.isSupport
+      ) {
+        clearPendingDelete();
         requestAwakenerTransfer({
           awakenerName,
           canUseSupport: !hasSupportAwakener,
           fromTeamId: owningTeamId,
           toTeamId: effectiveActiveTeamId,
           targetSlotId,
-        })
-        return
+        });
+        return;
       }
 
-      clearTransfer()
-      setActiveTeamSlots(result.nextSlots)
-      setActiveSelection({ kind: 'awakener', slotId: targetSlotId })
-      onPickerAssignSuccess?.(result.nextSlots)
+      clearTransfer();
+      setActiveTeamSlots(result.nextSlots);
+      setActiveSelection({kind: 'awakener', slotId: targetSlotId});
+      onPickerAssignSuccess?.(result.nextSlots);
     },
     [
       awakenerByName,
@@ -90,44 +108,66 @@ export function useBuilderAwakenerActions({
       hasSupportAwakener,
       onPickerAssignSuccess,
     ],
-  )
+  );
 
   const handlePickerAwakenerClick = useCallback(
     (awakenerName: string) => {
-      clearPendingDelete()
-      clearTransfer()
+      clearPendingDelete();
+      clearTransfer();
 
-      const targetSlotId = resolvedActiveSelection?.kind === 'awakener' ? resolvedActiveSelection.slotId : undefined
+      const targetSlotId =
+        resolvedActiveSelection?.kind === 'awakener'
+          ? resolvedActiveSelection.slotId
+          : undefined;
       const result = targetSlotId
-        ? assignAwakenerToSlot(teamSlots, awakenerName, targetSlotId, awakenerByName, {
-            allowDuplicateIdentity: allowDupes,
-          })
-        : assignAwakenerToFirstEmptySlot(teamSlots, awakenerName, awakenerByName, {
-            allowDuplicateIdentity: allowDupes,
-          })
+        ? assignAwakenerToSlot(
+            teamSlots,
+            awakenerName,
+            targetSlotId,
+            awakenerByName,
+            {
+              allowDuplicateIdentity: allowDupes,
+            },
+          )
+        : assignAwakenerToFirstEmptySlot(
+            teamSlots,
+            awakenerName,
+            awakenerByName,
+            {
+              allowDuplicateIdentity: allowDupes,
+            },
+          );
 
-      notifyViolation(result.violation)
+      notifyViolation(result.violation);
       if (result.nextSlots === teamSlots) {
-        return
+        return;
       }
 
-      const identityKey = getAwakenerIdentityKey(awakenerName)
-      const owningTeamId = allowDupes ? undefined : usedAwakenerByIdentityKey.get(identityKey)
-      const targetSlot = targetSlotId ? teamSlots.find((slot) => slot.slotId === targetSlotId) : undefined
-      if (owningTeamId && owningTeamId !== effectiveActiveTeamId && !targetSlot?.isSupport) {
+      const identityKey = getAwakenerIdentityKey(awakenerName);
+      const owningTeamId = allowDupes
+        ? undefined
+        : usedAwakenerByIdentityKey.get(identityKey);
+      const targetSlot = targetSlotId
+        ? teamSlots.find((slot) => slot.slotId === targetSlotId)
+        : undefined;
+      if (
+        owningTeamId &&
+        owningTeamId !== effectiveActiveTeamId &&
+        !targetSlot?.isSupport
+      ) {
         requestAwakenerTransfer({
           awakenerName,
           canUseSupport: !hasSupportAwakener,
           fromTeamId: owningTeamId,
           toTeamId: effectiveActiveTeamId,
           targetSlotId,
-        })
-        return
+        });
+        return;
       }
 
-      setActiveTeamSlots(result.nextSlots)
-      clearTransfer()
-      onPickerAssignSuccess?.(result.nextSlots)
+      setActiveTeamSlots(result.nextSlots);
+      clearTransfer();
+      onPickerAssignSuccess?.(result.nextSlots);
     },
     [
       awakenerByName,
@@ -144,11 +184,10 @@ export function useBuilderAwakenerActions({
       hasSupportAwakener,
       onPickerAssignSuccess,
     ],
-  )
+  );
 
   return {
     handleDropPickerAwakener,
     handlePickerAwakenerClick,
-  }
+  };
 }
-

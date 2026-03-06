@@ -1,16 +1,16 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { BuilderTeamsPanel } from './BuilderTeamsPanel'
+import {BuilderTeamsPanel} from '@/pages/builder/BuilderTeamsPanel';
+import {fireEvent, render, screen} from '@testing-library/react';
+import {describe, expect, it, vi} from 'vitest';
 
 describe('BuilderTeamsPanel', () => {
   it('renders team preview mode toggle and switches from compact to expanded', () => {
-    const onTeamPreviewModeChange = vi.fn()
+    const onTeamPreviewModeChange = vi.fn();
 
     render(
       <BuilderTeamsPanel
-        activeTeamId="team-1"
+        activeTeamId='team-1'
         editingTeamId={null}
-        editingTeamName=""
+        editingTeamName=''
         editingTeamSurface={null}
         onAddTeam={vi.fn()}
         onApplyTeamTemplate={vi.fn()}
@@ -25,33 +25,33 @@ describe('BuilderTeamsPanel', () => {
         onTeamPreviewModeChange={onTeamPreviewModeChange}
         ownedWheelLevelById={new Map()}
         posses={[]}
-        teamPreviewMode="compact"
+        teamPreviewMode='compact'
         teams={[
           {
             id: 'team-1',
             name: 'Team 1',
             slots: [
-              { slotId: 'slot-1', wheels: [null, null] },
-              { slotId: 'slot-2', wheels: [null, null] },
-              { slotId: 'slot-3', wheels: [null, null] },
-              { slotId: 'slot-4', wheels: [null, null] },
+              {slotId: 'slot-1', wheels: [null, null]},
+              {slotId: 'slot-2', wheels: [null, null]},
+              {slotId: 'slot-3', wheels: [null, null]},
+              {slotId: 'slot-4', wheels: [null, null]},
             ],
           },
         ]}
       />,
-    )
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: 'Expanded' }))
+    fireEvent.click(screen.getByRole('button', {name: 'Expanded'}));
 
-    expect(onTeamPreviewModeChange).toHaveBeenCalledWith('expanded')
-  })
+    expect(onTeamPreviewModeChange).toHaveBeenCalledWith('expanded');
+  });
 
   it('renders expanded slot previews when team preview mode is expanded', () => {
     render(
       <BuilderTeamsPanel
-        activeTeamId="team-1"
+        activeTeamId='team-1'
         editingTeamId={null}
-        editingTeamName=""
+        editingTeamName=''
         editingTeamSurface={null}
         onAddTeam={vi.fn()}
         onApplyTeamTemplate={vi.fn()}
@@ -66,32 +66,42 @@ describe('BuilderTeamsPanel', () => {
         onTeamPreviewModeChange={vi.fn()}
         ownedWheelLevelById={new Map([['SR19', 3]])}
         posses={[]}
-        teamPreviewMode="expanded"
+        teamPreviewMode='expanded'
         teams={[
           {
             id: 'team-1',
             name: 'Team 1',
             slots: [
-              { slotId: 'slot-1', awakenerName: 'Ramona', realm: 'CHAOS', wheels: ['SR19', null], covenantId: '001' },
-              { slotId: 'slot-2', wheels: [null, null] },
-              { slotId: 'slot-3', wheels: [null, null] },
-              { slotId: 'slot-4', wheels: [null, null] },
+              {
+                slotId: 'slot-1',
+                awakenerName: 'Ramona',
+                realm: 'CHAOS',
+                wheels: ['SR19', null],
+                covenantId: '001',
+              },
+              {slotId: 'slot-2', wheels: [null, null]},
+              {slotId: 'slot-3', wheels: [null, null]},
+              {slotId: 'slot-4', wheels: [null, null]},
             ],
           },
         ]}
       />,
-    )
+    );
 
-    expect(screen.getByAltText(/expanded team preview card/i)).toBeInTheDocument()
-    expect(document.querySelectorAll('.builder-team-slot-preview-expanded')).toHaveLength(4)
-  })
+    expect(
+      screen.getByAltText(/expanded team preview card/i),
+    ).toBeInTheDocument();
+    expect(
+      document.querySelectorAll('.builder-team-slot-preview-expanded'),
+    ).toHaveLength(4);
+  });
 
   it('shows a support chip on team previews for support slots', () => {
     render(
       <BuilderTeamsPanel
-        activeTeamId="team-1"
+        activeTeamId='team-1'
         editingTeamId={null}
-        editingTeamName=""
+        editingTeamName=''
         editingTeamSurface={null}
         onAddTeam={vi.fn()}
         onApplyTeamTemplate={vi.fn()}
@@ -106,22 +116,29 @@ describe('BuilderTeamsPanel', () => {
         onTeamPreviewModeChange={vi.fn()}
         ownedWheelLevelById={new Map()}
         posses={[]}
-        teamPreviewMode="compact"
+        teamPreviewMode='compact'
         teams={[
           {
             id: 'team-1',
             name: 'Team 1',
             slots: [
-              { slotId: 'slot-1', awakenerName: 'Ramona', realm: 'CHAOS', level: 90, isSupport: true, wheels: [null, null] },
-              { slotId: 'slot-2', wheels: [null, null] },
-              { slotId: 'slot-3', wheels: [null, null] },
-              { slotId: 'slot-4', wheels: [null, null] },
+              {
+                slotId: 'slot-1',
+                awakenerName: 'Ramona',
+                realm: 'CHAOS',
+                level: 90,
+                isSupport: true,
+                wheels: [null, null],
+              },
+              {slotId: 'slot-2', wheels: [null, null]},
+              {slotId: 'slot-3', wheels: [null, null]},
+              {slotId: 'slot-4', wheels: [null, null]},
             ],
           },
         ]}
       />,
-    )
+    );
 
-    expect(screen.getByText('Support')).toBeInTheDocument()
-  })
-})
+    expect(screen.getByText('Support')).toBeInTheDocument();
+  });
+});

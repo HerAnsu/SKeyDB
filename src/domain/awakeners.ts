@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import awakenersLite from '../data/awakeners-lite.json'
+import awakenersLite from '@/data/awakeners-lite.json';
+import {z} from 'zod';
 
 const rawAwakenersSchema = z.array(
   z.object({
@@ -10,30 +10,34 @@ const rawAwakenersSchema = z.array(
     rarity: z.string().trim().min(1).optional(),
     aliases: z.array(z.string().trim().min(1)).optional(),
   }),
-)
+);
 
-export type Awakener = {
-  id: number
-  name: string
-  faction: string
-  realm: string
-  rarity?: string
-  aliases: string[]
+export interface Awakener {
+  readonly id: number;
+  readonly name: string;
+  readonly faction: string;
+  readonly realm: string;
+  readonly rarity?: string;
+  readonly aliases: readonly string[];
 }
 
-const parsedAwakeners = rawAwakenersSchema.parse(awakenersLite).map((awakener): Awakener => {
-  const aliases = Array.from(new Set([awakener.name, ...(awakener.aliases ?? [])]))
+const parsedAwakeners = rawAwakenersSchema
+  .parse(awakenersLite)
+  .map((awakener): Awakener => {
+    const aliases = Array.from(
+      new Set([awakener.name, ...(awakener.aliases ?? [])]),
+    );
 
-  return {
-    id: awakener.id,
-    name: awakener.name,
-    faction: awakener.faction,
-    realm: awakener.realm,
-    rarity: awakener.rarity,
-    aliases,
-  }
-})
+    return {
+      id: awakener.id,
+      name: awakener.name,
+      faction: awakener.faction,
+      realm: awakener.realm,
+      rarity: awakener.rarity,
+      aliases,
+    };
+  });
 
 export function getAwakeners(): Awakener[] {
-  return parsedAwakeners
+  return parsedAwakeners;
 }

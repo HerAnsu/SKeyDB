@@ -1,16 +1,20 @@
-type SegmentedControlOption<T extends string> = {
-  value: T
-  label: string
+interface SegmentedControlOption<T extends string> {
+  readonly value: T;
+  readonly label: string;
 }
 
-type SegmentedControlProps<T extends string> = {
-  value: T
-  options: readonly SegmentedControlOption<T>[]
-  onChange: (nextValue: T) => void
-  ariaLabel: string
-  className?: string
-  buttonClassName?: string
-  activeButtonClassName?: string
+interface SegmentedControlProps<T extends string> {
+  readonly value: T;
+  readonly options: readonly SegmentedControlOption<T>[];
+  readonly onChange: (nextValue: T) => void;
+  readonly ariaLabel: string;
+  readonly className?: string;
+  readonly buttonClassName?: string;
+  readonly activeButtonClassName?: string;
+}
+
+function joinClasses(...classes: (string | undefined | false | null)[]) {
+  return classes.filter(Boolean).join(' ');
 }
 
 export function SegmentedControl<T extends string>({
@@ -26,24 +30,30 @@ export function SegmentedControl<T extends string>({
     <div
       aria-label={ariaLabel}
       className={`segmented-control ${className}`.trim()}
-      role="group"
+      role='group'
     >
       {options.map((option, index) => {
-        const isActive = option.value === value
+        const isActive = option.value === value;
         return (
           <button
             aria-pressed={isActive}
-            className={`segmented-control__button ${index === 0 ? 'segmented-control__button-first' : ''} ${buttonClassName} ${
-              isActive ? `segmented-control__button-active ${activeButtonClassName}` : ''
-            }`.trim()}
+            className={joinClasses(
+              'segmented-control__button',
+              index === 0 && 'segmented-control__button-first',
+              buttonClassName,
+              isActive && 'segmented-control__button-active',
+              isActive && activeButtonClassName,
+            ).trim()}
             key={option.value}
-            onClick={() => onChange(option.value)}
-            type="button"
+            onClick={() => {
+              onChange(option.value);
+            }}
+            type='button'
           >
             {option.label}
           </button>
-        )
+        );
       })}
     </div>
-  )
+  );
 }

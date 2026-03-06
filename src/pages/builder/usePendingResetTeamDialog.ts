@@ -1,17 +1,17 @@
-import { useState, type Dispatch, type SetStateAction } from 'react'
-import { isTeamEmpty, resetTeam } from './team-collection'
-import type { Team } from './types'
+import {isTeamEmpty, resetTeam} from '@/pages/builder/team-collection';
+import type {Team} from '@/pages/builder/types';
+import {useState, type Dispatch, type SetStateAction} from 'react';
 
-type PendingResetTeam = {
-  id: string
-  name: string
+interface PendingResetTeam {
+  readonly id: string;
+  readonly name: string;
 }
 
-type UsePendingResetTeamDialogOptions = {
-  teams: Team[]
-  setTeams: Dispatch<SetStateAction<Team[]>>
-  effectiveActiveTeamId: string
-  clearActiveSelection: () => void
+interface UsePendingResetTeamDialogOptions {
+  readonly teams: readonly Team[];
+  readonly setTeams: Dispatch<SetStateAction<readonly Team[]>>;
+  readonly effectiveActiveTeamId: string;
+  readonly clearActiveSelection: () => void;
 }
 
 export function usePendingResetTeamDialog({
@@ -20,34 +20,35 @@ export function usePendingResetTeamDialog({
   effectiveActiveTeamId,
   clearActiveSelection,
 }: UsePendingResetTeamDialogOptions) {
-  const [pendingResetTeam, setPendingResetTeam] = useState<PendingResetTeam | null>(null)
+  const [pendingResetTeam, setPendingResetTeam] =
+    useState<PendingResetTeam | null>(null);
 
   function clearPendingResetTeam() {
-    setPendingResetTeam(null)
+    setPendingResetTeam(null);
   }
 
   function applyResetTeam(teamId: string) {
-    setTeams((prev) => resetTeam(prev, teamId))
+    setTeams((prev) => resetTeam(prev, teamId));
     if (teamId === effectiveActiveTeamId) {
-      clearActiveSelection()
+      clearActiveSelection();
     }
   }
 
   function requestResetTeam(teamId: string, teamName: string) {
-    const team = teams.find((entry) => entry.id === teamId)
+    const team = teams.find((entry) => entry.id === teamId);
     if (isTeamEmpty(team)) {
-      applyResetTeam(teamId)
-      return
+      applyResetTeam(teamId);
+      return;
     }
-    setPendingResetTeam({ id: teamId, name: teamName })
+    setPendingResetTeam({id: teamId, name: teamName});
   }
 
   function confirmResetTeam() {
     if (!pendingResetTeam) {
-      return
+      return;
     }
-    applyResetTeam(pendingResetTeam.id)
-    clearPendingResetTeam()
+    applyResetTeam(pendingResetTeam.id);
+    clearPendingResetTeam();
   }
 
   const pendingResetTeamDialog = pendingResetTeam
@@ -56,11 +57,11 @@ export function usePendingResetTeamDialog({
         message: `Reset ${pendingResetTeam.name}? This clears assigned awakeners, wheels, covenant, and posse.`,
         onConfirm: confirmResetTeam,
       }
-    : null
+    : null;
 
   return {
     clearPendingResetTeam,
     requestResetTeam,
     pendingResetTeamDialog,
-  }
+  };
 }

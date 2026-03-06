@@ -1,51 +1,61 @@
-export type StorageLike = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>
+export type StorageLike = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
 
 export function getBrowserLocalStorage(): StorageLike | null {
   if (typeof window === 'undefined') {
-    return null
+    return null;
   }
 
   try {
-    return window.localStorage
+    return window.localStorage;
   } catch {
-    return null
+    return null;
   }
 }
 
-export function safeStorageRead(storage: StorageLike | null, key: string): string | null {
+export function safeStorageRead(
+  storage: StorageLike | null,
+  key: string,
+): string | null {
   if (!storage) {
-    return null
+    return null;
   }
 
   try {
-    return storage.getItem(key)
+    return storage.getItem(key);
   } catch {
-    return null
+    return null;
   }
 }
 
-export function safeStorageWrite(storage: StorageLike | null, key: string, value: string): boolean {
+export function safeStorageWrite(
+  storage: StorageLike | null,
+  key: string,
+  value: string,
+): boolean {
   if (!storage) {
-    return false
+    return false;
   }
 
   try {
-    storage.setItem(key, value)
-    return true
+    storage.setItem(key, value);
+    return true;
   } catch {
-    return false
+    return false;
   }
 }
 
-export function safeStorageRemove(storage: StorageLike | null, key: string): boolean {
+export function safeStorageRemove(
+  storage: StorageLike | null,
+  key: string,
+): boolean {
   if (!storage) {
-    return false
+    return false;
   }
 
   try {
-    storage.removeItem(key)
-    return true
+    storage.removeItem(key);
+    return true;
   } catch {
-    return false
+    return false;
   }
 }

@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import covenantsLite from '../data/covenants-lite.json'
+import covenantsLite from '@/data/covenants-lite.json';
+import {z} from 'zod';
 
 const rawCovenantsSchema = z.array(
   z.object({
@@ -7,16 +7,16 @@ const rawCovenantsSchema = z.array(
     assetId: z.string().trim().min(1),
     name: z.string().trim().min(1),
   }),
-)
+);
 
-export type Covenant = {
-  id: string
-  assetId: string
-  name: string
+export interface Covenant {
+  readonly id: string;
+  readonly assetId: string;
+  readonly name: string;
 }
 
-const parsedCovenants = rawCovenantsSchema.parse(covenantsLite)
+const parsedCovenants = rawCovenantsSchema.parse(covenantsLite);
 
 export function getCovenants(): Covenant[] {
-  return parsedCovenants
+  return parsedCovenants;
 }

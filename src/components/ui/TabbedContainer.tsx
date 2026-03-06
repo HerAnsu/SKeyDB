@@ -1,30 +1,30 @@
-import { useId, type ReactNode } from 'react'
-import { FaXmark } from 'react-icons/fa6'
+import {useId, type ReactNode} from 'react';
+import {FaXmark} from 'react-icons/fa6';
 
-type TabbedContainerTab = {
-  id: string
-  label: string
+interface TabbedContainerTab {
+  readonly id: string;
+  readonly label: string;
 }
 
-type TabbedContainerProps = {
-  tabs: TabbedContainerTab[]
-  activeTabId: string
-  onTabChange: (tabId: string) => void
-  leftTrailingAction?: ReactNode
-  onTabClose?: (tabId: string) => void
-  getTabCloseAriaLabel?: (tab: TabbedContainerTab) => string
-  canCloseTab?: (tab: TabbedContainerTab) => boolean
-  rightActions?: ReactNode
-  tone?: 'default' | 'amber'
-  tabSizing?: 'fill' | 'content'
-  leftEarMaxWidth?: string
-  className?: string
-  bodyClassName?: string
-  children: ReactNode
+interface TabbedContainerProps {
+  readonly tabs: readonly TabbedContainerTab[];
+  readonly activeTabId: string;
+  readonly onTabChange: (tabId: string) => void;
+  readonly leftTrailingAction?: ReactNode;
+  readonly onTabClose?: (tabId: string) => void;
+  readonly getTabCloseAriaLabel?: (tab: TabbedContainerTab) => string;
+  readonly canCloseTab?: (tab: TabbedContainerTab) => boolean;
+  readonly rightActions?: ReactNode;
+  readonly tone?: 'default' | 'amber';
+  readonly tabSizing?: 'fill' | 'content';
+  readonly leftEarMaxWidth?: string;
+  readonly className?: string;
+  readonly bodyClassName?: string;
+  readonly children: ReactNode;
 }
 
-function joinClasses(...classes: Array<string | undefined | false | null>) {
-  return classes.filter(Boolean).join(' ')
+function joinClasses(...classes: (string | undefined | false | null)[]) {
+  return classes.filter(Boolean).join(' ');
 }
 
 export function TabbedContainer({
@@ -43,79 +43,117 @@ export function TabbedContainer({
   bodyClassName,
   children,
 }: TabbedContainerProps) {
-  const isContentTabs = tabSizing === 'content'
-  const toneClass = tone === 'amber' ? 'tabbed-container-amber' : undefined
-  const tabbedContainerId = useId()
-  const panelId = `${tabbedContainerId}-panel`
-  const tabIdPrefix = `${tabbedContainerId}-tab`
+  const isContentTabs = tabSizing === 'content';
+  const toneClass = tone === 'amber' ? 'tabbed-container-amber' : undefined;
+  const tabbedContainerId = useId();
+  const panelId = `${tabbedContainerId}-panel`;
+  const tabIdPrefix = `${tabbedContainerId}-tab`;
 
   return (
-    <section className={joinClasses('tabbed-container space-y-0', toneClass, className)}>
-      <div className="tabbed-container-ears flex items-stretch justify-between">
+    <section
+      className={joinClasses(
+        'tabbed-container space-y-0',
+        toneClass,
+        className,
+      )}
+    >
+      <div className='tabbed-container-ears flex items-stretch justify-between'>
         <div
           className={joinClasses(
             'tabbed-container-ear tabbed-container-ear-left',
-            isContentTabs ? 'tabbed-container-ear-left-content' : 'tabbed-container-ear-left-fill',
+            isContentTabs
+              ? 'tabbed-container-ear-left-content'
+              : 'tabbed-container-ear-left-fill',
           )}
-          style={leftEarMaxWidth ? { maxWidth: leftEarMaxWidth } : undefined}
+          style={leftEarMaxWidth ? {maxWidth: leftEarMaxWidth} : undefined}
         >
-          <div aria-orientation="horizontal" className="flex min-w-0 flex-1 items-stretch" role="tablist">
+          <div
+            aria-orientation='horizontal'
+            className='flex min-w-0 flex-1 items-stretch'
+            role='tablist'
+          >
             {tabs.map((tab) => {
-              const tabId = `${tabIdPrefix}-${tab.id}`
-              const isSelected = activeTabId === tab.id
+              const tabId = `${tabIdPrefix}-${tab.id}`;
+              const isSelected = activeTabId === tab.id;
+              const isClosable =
+                onTabClose && (canCloseTab ? canCloseTab(tab) : true);
+
               return (
-                <div className="tabbed-container-tab-shell" key={tab.id}>
+                <div className='tabbed-container-tab-shell' key={tab.id}>
                   <button
                     aria-controls={panelId}
                     aria-selected={isSelected}
                     className={joinClasses(
                       'tabbed-container-tab h-full px-3.5 text-[11px] tracking-wide transition-colors',
-                      onTabClose && (canCloseTab ? canCloseTab(tab) : true) ? 'pr-6' : undefined,
-                      isContentTabs ? 'tabbed-container-tab-content' : 'tabbed-container-tab-fill',
-                      isSelected
-                        ? 'tabbed-container-tab-active tabbed-container-tab-priority-active text-amber-100'
-                        : 'tabbed-container-tab-inactive tabbed-container-tab-priority-inactive text-slate-300',
+                      isClosable ? 'pr-6' : undefined,
+                      isContentTabs
+                        ? 'tabbed-container-tab-content'
+                        : 'tabbed-container-tab-fill',
+                      isSelected &&
+                        'tabbed-container-tab-active tabbed-container-tab-priority-active text-amber-100',
+                      !isSelected &&
+                        'tabbed-container-tab-inactive tabbed-container-tab-priority-inactive text-slate-300',
                     )}
                     id={tabId}
-                    onClick={() => onTabChange(tab.id)}
-                    role="tab"
+                    onClick={() => {
+                      onTabChange(tab.id);
+                    }}
+                    role='tab'
                     tabIndex={isSelected ? 0 : -1}
-                    type="button"
+                    type='button'
                   >
                     {tab.label}
                   </button>
-                  {onTabClose && (canCloseTab ? canCloseTab(tab) : true) ? (
-                    <span className="tabbed-container-tab-close-wrap">
+                  {isClosable ? (
+                    <span className='tabbed-container-tab-close-wrap'>
                       <button
-                        aria-label={getTabCloseAriaLabel ? getTabCloseAriaLabel(tab) : `Close ${tab.label}`}
-                        className="tabbed-container-tab-close"
+                        aria-label={
+                          getTabCloseAriaLabel
+                            ? getTabCloseAriaLabel(tab)
+                            : `Close ${tab.label}`
+                        }
+                        className='tabbed-container-tab-close'
                         onClick={(event) => {
-                          event.stopPropagation()
-                          onTabClose(tab.id)
+                          event.stopPropagation();
+                          onTabClose(tab.id);
                         }}
-                        type="button"
+                        type='button'
                       >
-                        <FaXmark aria-hidden className="tabbed-container-tab-close-icon" />
+                        <FaXmark
+                          aria-hidden
+                          className='tabbed-container-tab-close-icon'
+                        />
                       </button>
                     </span>
                   ) : null}
                 </div>
-              )
+              );
             })}
           </div>
-          {leftTrailingAction ? <div className="tabbed-container-ear-left-action shrink-0">{leftTrailingAction}</div> : null}
+          {leftTrailingAction ? (
+            <div className='tabbed-container-ear-left-action shrink-0'>
+              {leftTrailingAction}
+            </div>
+          ) : null}
         </div>
-        <div aria-hidden className="tabbed-container-ear-gap-fill" />
-        {rightActions ? <div className="tabbed-container-ear tabbed-container-ear-right shrink-0">{rightActions}</div> : null}
+        <div aria-hidden className='tabbed-container-ear-gap-fill' />
+        {rightActions ? (
+          <div className='tabbed-container-ear tabbed-container-ear-right shrink-0'>
+            {rightActions}
+          </div>
+        ) : null}
       </div>
       <div
         aria-labelledby={`${tabIdPrefix}-${activeTabId}`}
-        className={joinClasses('tabbed-container-panel border p-2', bodyClassName)}
+        className={joinClasses(
+          'tabbed-container-panel border p-2',
+          bodyClassName,
+        )}
         id={panelId}
-        role="tabpanel"
+        role='tabpanel'
       >
         {children}
       </div>
     </section>
-  )
+  );
 }

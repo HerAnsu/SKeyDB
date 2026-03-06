@@ -1,27 +1,27 @@
-export type CollectionSortDirection = 'ASC' | 'DESC'
-export type AwakenerSortKey = 'LEVEL' | 'RARITY' | 'ENLIGHTEN' | 'ALPHABETICAL'
+export type CollectionSortDirection = 'ASC' | 'DESC';
+export type AwakenerSortKey = 'LEVEL' | 'RARITY' | 'ENLIGHTEN' | 'ALPHABETICAL';
 
-export type SortableCollectionEntry = {
-  label: string
-  index: number
-  owned?: boolean
-  enlighten: number
-  level?: number
-  rarity?: string
-  realm?: string
+export interface SortableCollectionEntry {
+  readonly label: string;
+  readonly index: number;
+  readonly owned?: boolean;
+  readonly enlighten: number;
+  readonly level?: number;
+  readonly rarity?: string;
+  readonly realm?: string;
 }
 
-export type AwakenerSortConfig = {
-  key: AwakenerSortKey
-  direction: CollectionSortDirection
-  groupByRealm: boolean
+export interface AwakenerSortConfig {
+  readonly key: AwakenerSortKey;
+  readonly direction: CollectionSortDirection;
+  readonly groupByRealm: boolean;
 }
 
 export const DEFAULT_AWAKENER_SORT_CONFIG: AwakenerSortConfig = {
   key: 'LEVEL',
   direction: 'DESC',
   groupByRealm: false,
-}
+};
 
 const realmPriorityByName: Record<string, number> = {
   CHAOS: 0,
@@ -30,66 +30,97 @@ const realmPriorityByName: Record<string, number> = {
   ULTRA: 3,
   NEUTRAL: 4,
   OTHER: 5,
-}
+};
 
 const rarityPriorityByName: Record<string, number> = {
   GENESIS: 0,
   SSR: 1,
   SR: 2,
   R: 3,
-}
+};
 
-function compareNumber(left: number, right: number, direction: CollectionSortDirection): number {
+function compareNumber(
+  left: number,
+  right: number,
+  direction: CollectionSortDirection,
+): number {
   if (left === right) {
-    return 0
+    return 0;
   }
-  return direction === 'ASC' ? left - right : right - left
+  return direction === 'ASC' ? left - right : right - left;
 }
 
-function compareText(left: string, right: string, direction: CollectionSortDirection): number {
-  const normalizedLeft = left.trim().toLowerCase()
-  const normalizedRight = right.trim().toLowerCase()
-  const comparison = normalizedLeft.localeCompare(normalizedRight)
-  return direction === 'ASC' ? comparison : -comparison
+function compareText(
+  left: string,
+  right: string,
+  direction: CollectionSortDirection,
+): number {
+  const normalizedLeft = left.trim().toLowerCase();
+  const normalizedRight = right.trim().toLowerCase();
+  const comparison = normalizedLeft.localeCompare(normalizedRight);
+  return direction === 'ASC' ? comparison : -comparison;
 }
 
-function compareRarity(left: SortableCollectionEntry, right: SortableCollectionEntry): number {
-  const leftRank = rarityPriorityByName[left.rarity?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
-  const rightRank = rarityPriorityByName[right.rarity?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
-  return leftRank - rightRank
+function compareRarity(
+  left: SortableCollectionEntry,
+  right: SortableCollectionEntry,
+): number {
+  const leftRank =
+    rarityPriorityByName[left.rarity?.trim().toUpperCase() ?? ''] ??
+    Number.MAX_SAFE_INTEGER;
+  const rightRank =
+    rarityPriorityByName[right.rarity?.trim().toUpperCase() ?? ''] ??
+    Number.MAX_SAFE_INTEGER;
+  return leftRank - rightRank;
 }
 
-function compareRealm(left: SortableCollectionEntry, right: SortableCollectionEntry): number {
-  const leftRank = realmPriorityByName[left.realm?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
-  const rightRank = realmPriorityByName[right.realm?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
-  return leftRank - rightRank
+function compareRealm(
+  left: SortableCollectionEntry,
+  right: SortableCollectionEntry,
+): number {
+  const leftRank =
+    realmPriorityByName[left.realm?.trim().toUpperCase() ?? ''] ??
+    Number.MAX_SAFE_INTEGER;
+  const rightRank =
+    realmPriorityByName[right.realm?.trim().toUpperCase() ?? ''] ??
+    Number.MAX_SAFE_INTEGER;
+  return leftRank - rightRank;
 }
 
-function compareIndex(left: SortableCollectionEntry, right: SortableCollectionEntry): number {
-  return left.index - right.index
+function compareIndex(
+  left: SortableCollectionEntry,
+  right: SortableCollectionEntry,
+): number {
+  return left.index - right.index;
 }
 
-function compareOwnedFirst(left: SortableCollectionEntry, right: SortableCollectionEntry): number {
-  const leftOwned = left.owned !== false
-  const rightOwned = right.owned !== false
+function compareOwnedFirst(
+  left: SortableCollectionEntry,
+  right: SortableCollectionEntry,
+): number {
+  const leftOwned = left.owned !== false;
+  const rightOwned = right.owned !== false;
   if (leftOwned === rightOwned) {
-    return 0
+    return 0;
   }
-  return leftOwned ? -1 : 1
+  return leftOwned ? -1 : 1;
 }
 
 function compareByPriority(
   left: SortableCollectionEntry,
   right: SortableCollectionEntry,
-  comparators: Array<(left: SortableCollectionEntry, right: SortableCollectionEntry) => number>,
+  comparators: ((
+    left: SortableCollectionEntry,
+    right: SortableCollectionEntry,
+  ) => number)[],
 ): number {
   for (const comparator of comparators) {
-    const result = comparator(left, right)
+    const result = comparator(left, right);
     if (result !== 0) {
-      return result
+      return result;
     }
   }
-  return 0
+  return 0;
 }
 
 export function compareAwakenersForCollectionSort(
@@ -98,8 +129,11 @@ export function compareAwakenersForCollectionSort(
   config: AwakenerSortConfig,
 ): number {
   const withOptionalRealm = (
-    comparators: Array<(left: SortableCollectionEntry, right: SortableCollectionEntry) => number>,
-  ) => (config.groupByRealm ? [...comparators, compareRealm] : comparators)
+    comparators: ((
+      left: SortableCollectionEntry,
+      right: SortableCollectionEntry,
+    ) => number)[],
+  ) => (config.groupByRealm ? [...comparators, compareRealm] : comparators);
 
   if (config.key === 'ENLIGHTEN') {
     return compareByPriority(left, right, [
@@ -110,19 +144,20 @@ export function compareAwakenersForCollectionSort(
       ...withOptionalRealm([]),
       compareIndex,
       (l, r) => compareText(l.label, r.label, 'ASC'),
-    ])
+    ]);
   }
 
   if (config.key === 'RARITY') {
     return compareByPriority(left, right, [
       compareOwnedFirst,
-      (l, r) => (config.direction === 'DESC' ? compareRarity(l, r) : compareRarity(r, l)),
+      (l, r) =>
+        config.direction === 'DESC' ? compareRarity(l, r) : compareRarity(r, l),
       (l, r) => compareNumber(l.level ?? 0, r.level ?? 0, 'DESC'),
       ...withOptionalRealm([]),
       (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
       compareIndex,
       (l, r) => compareText(l.label, r.label, 'ASC'),
-    ])
+    ]);
   }
 
   if (config.key === 'ALPHABETICAL') {
@@ -134,7 +169,7 @@ export function compareAwakenersForCollectionSort(
       ...withOptionalRealm([]),
       (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
       compareIndex,
-    ])
+    ]);
   }
 
   return compareByPriority(left, right, [
@@ -145,7 +180,7 @@ export function compareAwakenersForCollectionSort(
     (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
     compareIndex,
     (l, r) => compareText(l.label, r.label, 'ASC'),
-  ])
+  ]);
 }
 
 export function compareWheelsForCollectionDefaultSort(
@@ -159,7 +194,7 @@ export function compareWheelsForCollectionDefaultSort(
     (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
     compareIndex,
     (l, r) => compareText(l.label, r.label, 'ASC'),
-  ])
+  ]);
 }
 
 export function comparePossesForCollectionDefaultSort(
@@ -170,7 +205,5 @@ export function comparePossesForCollectionDefaultSort(
     compareOwnedFirst,
     compareIndex,
     (l, r) => compareText(l.label, r.label, 'ASC'),
-  ])
+  ]);
 }
-
-

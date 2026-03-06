@@ -1,41 +1,66 @@
-import { renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { useBuilderAwakenerActions } from './useBuilderAwakenerActions'
-import type { Awakener } from '../../domain/awakeners'
-import type { ActiveSelection, TeamSlot } from './types'
+import type {Awakener} from '@/domain/awakeners';
+import type {ActiveSelection, TeamSlot} from '@/pages/builder/types';
+import {useBuilderAwakenerActions} from '@/pages/builder/useBuilderAwakenerActions';
+import {renderHook} from '@testing-library/react';
+import {describe, expect, it, vi} from 'vitest';
 
 const awakenerByName = new Map<string, Awakener>([
-  ['Goliath', { id: 1, name: 'Goliath', faction: 'Among the Stars', realm: 'AEQUOR', aliases: ['Goliath'] }],
-  ['Ramona', { id: 2, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'] }],
-])
+  [
+    'Goliath',
+    {
+      id: 1,
+      name: 'Goliath',
+      faction: 'Among the Stars',
+      realm: 'AEQUOR',
+      aliases: ['Goliath'],
+    },
+  ],
+  [
+    'Ramona',
+    {
+      id: 2,
+      name: 'Ramona',
+      faction: 'The Fools',
+      realm: 'CHAOS',
+      aliases: ['Ramona'],
+    },
+  ],
+]);
 
 function buildSlots(): TeamSlot[] {
   return [
-    { slotId: 'slot-1', awakenerName: 'Goliath', realm: 'AEQUOR', level: 60, wheels: [null, null] },
-    { slotId: 'slot-2', wheels: [null, null] },
-  ]
+    {
+      slotId: 'slot-1',
+      awakenerName: 'Goliath',
+      realm: 'AEQUOR',
+      level: 60,
+      wheels: [null, null],
+    },
+    {slotId: 'slot-2', wheels: [null, null]},
+  ];
 }
 
 function createHook(options?: {
-  teamSlots?: TeamSlot[]
-  resolvedActiveSelection?: ActiveSelection
-  usedAwakenerByIdentityKey?: Map<string, string>
-  allowDupes?: boolean
-  hasSupportAwakener?: boolean
+  teamSlots?: TeamSlot[];
+  resolvedActiveSelection?: ActiveSelection;
+  usedAwakenerByIdentityKey?: Map<string, string>;
+  allowDupes?: boolean;
+  hasSupportAwakener?: boolean;
 }) {
-  const setActiveTeamSlots = vi.fn()
-  const setActiveSelection = vi.fn()
-  const requestAwakenerTransfer = vi.fn()
-  const clearPendingDelete = vi.fn()
-  const clearTransfer = vi.fn()
-  const notifyViolation = vi.fn()
+  const setActiveTeamSlots = vi.fn();
+  const setActiveSelection = vi.fn();
+  const requestAwakenerTransfer = vi.fn();
+  const clearPendingDelete = vi.fn();
+  const clearTransfer = vi.fn();
+  const notifyViolation = vi.fn();
 
-  const { result } = renderHook(() =>
+  const {result} = renderHook(() =>
     useBuilderAwakenerActions({
       teamSlots: options?.teamSlots ?? buildSlots(),
       awakenerByName,
       effectiveActiveTeamId: 'team-1',
-      usedAwakenerByIdentityKey: options?.usedAwakenerByIdentityKey ?? new Map(),
+      usedAwakenerByIdentityKey:
+        options?.usedAwakenerByIdentityKey ?? new Map(),
       resolvedActiveSelection: options?.resolvedActiveSelection ?? null,
       setActiveTeamSlots,
       setActiveSelection,
@@ -46,7 +71,7 @@ function createHook(options?: {
       allowDupes: options?.allowDupes ?? false,
       hasSupportAwakener: options?.hasSupportAwakener ?? false,
     }),
-  )
+  );
 
   return {
     actions: result.current,
@@ -56,53 +81,56 @@ function createHook(options?: {
     clearPendingDelete,
     clearTransfer,
     notifyViolation,
-  }
+  };
 }
 
 describe('useBuilderAwakenerActions', () => {
   it('handles drop assignment and activates dropped slot', () => {
-    const { actions, setActiveTeamSlots, setActiveSelection } = createHook({
+    const {actions, setActiveTeamSlots, setActiveSelection} = createHook({
       teamSlots: [
-        { slotId: 'slot-1', wheels: [null, null] },
-        { slotId: 'slot-2', wheels: [null, null] },
+        {slotId: 'slot-1', wheels: [null, null]},
+        {slotId: 'slot-2', wheels: [null, null]},
       ],
-    })
+    });
 
-    actions.handleDropPickerAwakener('Goliath', 'slot-2')
+    actions.handleDropPickerAwakener('Goliath', 'slot-2');
 
     expect(setActiveTeamSlots).toHaveBeenCalledWith(
       expect.arrayContaining([
-        expect.objectContaining({ slotId: 'slot-1' }),
-        expect.objectContaining({ slotId: 'slot-2', awakenerName: 'Goliath' }),
+        expect.objectContaining({slotId: 'slot-1'}),
+        expect.objectContaining({slotId: 'slot-2', awakenerName: 'Goliath'}),
       ]),
-    )
-    expect(setActiveSelection).toHaveBeenCalledWith({ kind: 'awakener', slotId: 'slot-2' })
-  })
+    );
+    expect(setActiveSelection).toHaveBeenCalledWith({
+      kind: 'awakener',
+      slotId: 'slot-2',
+    });
+  });
 
   it('requests transfer for owning team instead of applying state update', () => {
-    const { actions, requestAwakenerTransfer, setActiveTeamSlots } = createHook({
+    const {actions, requestAwakenerTransfer, setActiveTeamSlots} = createHook({
       usedAwakenerByIdentityKey: new Map([['ramona', 'team-2']]),
-    })
+    });
 
-    actions.handleDropPickerAwakener('Ramona', 'slot-2')
+    actions.handleDropPickerAwakener('Ramona', 'slot-2');
 
-    expect(setActiveTeamSlots).not.toHaveBeenCalled()
+    expect(setActiveTeamSlots).not.toHaveBeenCalled();
     expect(requestAwakenerTransfer).toHaveBeenCalledWith({
       awakenerName: 'Ramona',
       canUseSupport: true,
       fromTeamId: 'team-2',
       toTeamId: 'team-1',
       targetSlotId: 'slot-2',
-    })
-  })
+    });
+  });
 
   it('does not offer support when a support awakener is already used elsewhere in the build', () => {
-    const { actions, requestAwakenerTransfer } = createHook({
+    const {actions, requestAwakenerTransfer} = createHook({
       usedAwakenerByIdentityKey: new Map([['ramona', 'team-2']]),
       hasSupportAwakener: true,
-    })
+    });
 
-    actions.handleDropPickerAwakener('Ramona', 'slot-2')
+    actions.handleDropPickerAwakener('Ramona', 'slot-2');
 
     expect(requestAwakenerTransfer).toHaveBeenCalledWith({
       awakenerName: 'Ramona',
@@ -110,42 +138,54 @@ describe('useBuilderAwakenerActions', () => {
       fromTeamId: 'team-2',
       toTeamId: 'team-1',
       targetSlotId: 'slot-2',
-    })
-  })
+    });
+  });
 
   it('click assignment respects active awakener target slot', () => {
-    const { actions, setActiveTeamSlots } = createHook({
+    const {actions, setActiveTeamSlots} = createHook({
       teamSlots: [
-        { slotId: 'slot-1', awakenerName: 'Goliath', realm: 'AEQUOR', level: 60, wheels: [null, null] },
-        { slotId: 'slot-2', wheels: [null, null] },
+        {
+          slotId: 'slot-1',
+          awakenerName: 'Goliath',
+          realm: 'AEQUOR',
+          level: 60,
+          wheels: [null, null],
+        },
+        {slotId: 'slot-2', wheels: [null, null]},
       ],
-      resolvedActiveSelection: { kind: 'awakener', slotId: 'slot-2' },
-    })
+      resolvedActiveSelection: {kind: 'awakener', slotId: 'slot-2'},
+    });
 
-    actions.handlePickerAwakenerClick('Ramona')
+    actions.handlePickerAwakenerClick('Ramona');
 
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', awakenerName: 'Goliath' }),
-      expect.objectContaining({ slotId: 'slot-2', awakenerName: 'Ramona' }),
-    ])
-  })
+      expect.objectContaining({slotId: 'slot-1', awakenerName: 'Goliath'}),
+      expect.objectContaining({slotId: 'slot-2', awakenerName: 'Ramona'}),
+    ]);
+  });
 
   it('allows same-identity assignment without transfer when dupes are enabled', () => {
-    const { actions, requestAwakenerTransfer, setActiveTeamSlots } = createHook({
+    const {actions, requestAwakenerTransfer, setActiveTeamSlots} = createHook({
       teamSlots: [
-        { slotId: 'slot-1', awakenerName: 'Goliath', realm: 'AEQUOR', level: 60, wheels: [null, null] },
-        { slotId: 'slot-2', wheels: [null, null] },
+        {
+          slotId: 'slot-1',
+          awakenerName: 'Goliath',
+          realm: 'AEQUOR',
+          level: 60,
+          wheels: [null, null],
+        },
+        {slotId: 'slot-2', wheels: [null, null]},
       ],
       usedAwakenerByIdentityKey: new Map([['goliath', 'team-2']]),
       allowDupes: true,
-    })
+    });
 
-    actions.handleDropPickerAwakener('Goliath', 'slot-2')
+    actions.handleDropPickerAwakener('Goliath', 'slot-2');
 
-    expect(requestAwakenerTransfer).not.toHaveBeenCalled()
+    expect(requestAwakenerTransfer).not.toHaveBeenCalled();
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', awakenerName: 'Goliath' }),
-      expect.objectContaining({ slotId: 'slot-2', awakenerName: 'Goliath' }),
-    ])
-  })
-})
+      expect.objectContaining({slotId: 'slot-1', awakenerName: 'Goliath'}),
+      expect.objectContaining({slotId: 'slot-2', awakenerName: 'Goliath'}),
+    ]);
+  });
+});

@@ -1,12 +1,12 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { CollectionSortControls } from './CollectionSortControls'
+import {CollectionSortControls} from '@/components/ui/CollectionSortControls';
+import {fireEvent, render, screen} from '@testing-library/react';
+import {describe, expect, it, vi} from 'vitest';
 
 describe('CollectionSortControls', () => {
   it('renders high/low direction labels and fires callbacks', () => {
-    const onSortKeyChange = vi.fn()
-    const onSortDirectionToggle = vi.fn()
-    const onGroupByRealmChange = vi.fn()
+    const onSortKeyChange = vi.fn();
+    const onSortDirectionToggle = vi.fn();
+    const onGroupByRealmChange = vi.fn();
 
     render(
       <CollectionSortControls
@@ -14,24 +14,30 @@ describe('CollectionSortControls', () => {
         onGroupByRealmChange={onGroupByRealmChange}
         onSortDirectionToggle={onSortDirectionToggle}
         onSortKeyChange={onSortKeyChange}
-        sortDirection="DESC"
-        sortKey="LEVEL"
+        sortDirection='DESC'
+        sortKey='LEVEL'
       />,
-    )
+    );
 
-    expect(screen.getByRole('button', { name: /toggle sort direction/i })).toHaveTextContent('High')
+    expect(
+      screen.getByRole('button', {name: /toggle sort direction/i}),
+    ).toHaveTextContent('High');
 
-    fireEvent.change(screen.getByRole('combobox', { name: /sort by/i }), {
-      target: { value: 'ALPHABETICAL' },
-    })
-    expect(onSortKeyChange).toHaveBeenCalledWith('ALPHABETICAL')
+    fireEvent.change(screen.getByRole('combobox', {name: /sort by/i}), {
+      target: {value: 'ALPHABETICAL'},
+    });
+    expect(onSortKeyChange).toHaveBeenCalledWith('ALPHABETICAL');
 
-    fireEvent.click(screen.getByRole('button', { name: /toggle sort direction/i }))
-    expect(onSortDirectionToggle).toHaveBeenCalledTimes(1)
+    fireEvent.click(
+      screen.getByRole('button', {name: /toggle sort direction/i}),
+    );
+    expect(onSortDirectionToggle).toHaveBeenCalledTimes(1);
 
-    fireEvent.click(screen.getByRole('button', { name: /toggle Grouping by realm/i }))
-    expect(onGroupByRealmChange).toHaveBeenCalledWith(true)
-  })
+    fireEvent.click(
+      screen.getByRole('button', {name: /toggle Grouping by realm/i}),
+    );
+    expect(onGroupByRealmChange).toHaveBeenCalledWith(true);
+  });
 
   it('renders low direction label when ascending', () => {
     render(
@@ -40,13 +46,15 @@ describe('CollectionSortControls', () => {
         onGroupByRealmChange={vi.fn()}
         onSortDirectionToggle={vi.fn()}
         onSortKeyChange={vi.fn()}
-        sortDirection="ASC"
-        sortKey="LEVEL"
+        sortDirection='ASC'
+        sortKey='LEVEL'
       />,
-    )
+    );
 
-    expect(screen.getByRole('button', { name: /toggle sort direction/i })).toHaveTextContent('Low')
-  })
+    expect(
+      screen.getByRole('button', {name: /toggle sort direction/i}),
+    ).toHaveTextContent('Low');
+  });
 
   it('can hide Group By Realm toggle', () => {
     render(
@@ -56,32 +64,35 @@ describe('CollectionSortControls', () => {
         onSortDirectionToggle={vi.fn()}
         onSortKeyChange={vi.fn()}
         showGroupByRealm={false}
-        sortDirection="DESC"
-        sortKey="LEVEL"
+        sortDirection='DESC'
+        sortKey='LEVEL'
       />,
-    )
+    );
 
-    expect(screen.queryByRole('button', { name: /toggle Grouping by realm/i })).not.toBeInTheDocument()
-  })
+    expect(
+      screen.queryByRole('button', {name: /toggle Grouping by realm/i}),
+    ).not.toBeInTheDocument();
+  });
 
   it('supports compact mode without heading text', () => {
     render(
       <CollectionSortControls
         groupByRealm={false}
-        layout="compact"
+        layout='compact'
         onGroupByRealmChange={vi.fn()}
         onSortDirectionToggle={vi.fn()}
         onSortKeyChange={vi.fn()}
-        sortDirection="DESC"
-        sortKey="LEVEL"
+        sortDirection='DESC'
+        sortKey='LEVEL'
       />,
-    )
+    );
 
-    expect(screen.queryByText(/^sort$/i)).not.toBeInTheDocument()
-    expect(screen.getByRole('combobox', { name: /sort by/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /toggle sort direction/i })).toHaveTextContent('High')
-  })
-})
-
-
-
+    expect(screen.queryByText(/^sort$/i)).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('combobox', {name: /sort by/i}),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', {name: /toggle sort direction/i}),
+    ).toHaveTextContent('High');
+  });
+});

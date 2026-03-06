@@ -1,64 +1,68 @@
-import { useState } from 'react'
+import {useState} from 'react';
 
-export type PendingAwakenerTransfer = {
-  kind: 'awakener'
-  itemName: string
-  awakenerName: string
-  canUseSupport?: boolean
-  fromTeamId: string
-  toTeamId: string
-  targetSlotId?: string
+export interface PendingAwakenerTransfer {
+  readonly kind: 'awakener';
+  readonly itemName: string;
+  readonly awakenerName: string;
+  readonly canUseSupport?: boolean;
+  readonly fromTeamId: string;
+  readonly toTeamId: string;
+  readonly targetSlotId?: string;
 }
 
-export type PendingPosseTransfer = {
-  kind: 'posse'
-  itemName: string
-  posseId: string
-  fromTeamId: string
-  toTeamId: string
+export interface PendingPosseTransfer {
+  readonly kind: 'posse';
+  readonly itemName: string;
+  readonly posseId: string;
+  readonly fromTeamId: string;
+  readonly toTeamId: string;
 }
 
-export type PendingWheelTransfer = {
-  kind: 'wheel'
-  itemName: string
-  wheelId: string
-  fromTeamId: string
-  fromSlotId: string
-  fromWheelIndex: number
-  toTeamId: string
-  targetSlotId: string
-  targetWheelIndex: number
+export interface PendingWheelTransfer {
+  readonly kind: 'wheel';
+  readonly itemName: string;
+  readonly wheelId: string;
+  readonly fromTeamId: string;
+  readonly fromSlotId: string;
+  readonly fromWheelIndex: number;
+  readonly toTeamId: string;
+  readonly targetSlotId: string;
+  readonly targetWheelIndex: number;
 }
 
-export type PendingTransfer = PendingAwakenerTransfer | PendingPosseTransfer | PendingWheelTransfer
+export type PendingTransfer =
+  | PendingAwakenerTransfer
+  | PendingPosseTransfer
+  | PendingWheelTransfer;
 
-type RequestAwakenerTransfer = {
-  awakenerName: string
-  canUseSupport?: boolean
-  fromTeamId: string
-  toTeamId: string
-  targetSlotId?: string
+interface RequestAwakenerTransfer {
+  readonly awakenerName: string;
+  readonly canUseSupport?: boolean;
+  readonly fromTeamId: string;
+  readonly toTeamId: string;
+  readonly targetSlotId?: string;
 }
 
-type RequestPosseTransfer = {
-  posseId: string
-  posseName: string
-  fromTeamId: string
-  toTeamId: string
+interface RequestPosseTransfer {
+  readonly posseId: string;
+  readonly posseName: string;
+  readonly fromTeamId: string;
+  readonly toTeamId: string;
 }
 
-type RequestWheelTransfer = {
-  wheelId: string
-  fromTeamId: string
-  fromSlotId: string
-  fromWheelIndex: number
-  toTeamId: string
-  targetSlotId: string
-  targetWheelIndex: number
+interface RequestWheelTransfer {
+  readonly wheelId: string;
+  readonly fromTeamId: string;
+  readonly fromSlotId: string;
+  readonly fromWheelIndex: number;
+  readonly toTeamId: string;
+  readonly targetSlotId: string;
+  readonly targetWheelIndex: number;
 }
 
 export function useTransferConfirm() {
-  const [pendingTransfer, setPendingTransfer] = useState<PendingTransfer | null>(null)
+  const [pendingTransfer, setPendingTransfer] =
+    useState<PendingTransfer | null>(null);
 
   function requestAwakenerTransfer({
     awakenerName,
@@ -75,17 +79,22 @@ export function useTransferConfirm() {
       fromTeamId,
       toTeamId,
       targetSlotId,
-    })
+    });
   }
 
-  function requestPosseTransfer({ posseId, posseName, fromTeamId, toTeamId }: RequestPosseTransfer) {
+  function requestPosseTransfer({
+    posseId,
+    posseName,
+    fromTeamId,
+    toTeamId,
+  }: RequestPosseTransfer) {
     setPendingTransfer({
       kind: 'posse',
       itemName: posseName,
       posseId,
       fromTeamId,
       toTeamId,
-    })
+    });
   }
 
   function requestWheelTransfer({
@@ -107,11 +116,11 @@ export function useTransferConfirm() {
       toTeamId,
       targetSlotId,
       targetWheelIndex,
-    })
+    });
   }
 
   function clearTransfer() {
-    setPendingTransfer(null)
+    setPendingTransfer(null);
   }
 
   return {
@@ -120,5 +129,5 @@ export function useTransferConfirm() {
     requestPosseTransfer,
     requestWheelTransfer,
     clearTransfer,
-  }
+  };
 }

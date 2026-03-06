@@ -1,11 +1,14 @@
 # SKeyDB
 
-Unofficial Morimens database and team planner web app (community project, running name: SKeyDB).
+Unofficial Morimens database and team planner web app (community project,
+running name: SKeyDB).
 
 Live site (stable beta, actively developed):
+
 - https://dansa.github.io/SKeyDB/#/builder
 
 ## Tech Stack
+
 - React 19 + TypeScript
 - Vite 7
 - Tailwind CSS 4
@@ -16,6 +19,7 @@ Live site (stable beta, actively developed):
 - Vitest + Testing Library
 
 ## Quick Start
+
 ```bash
 npm install
 npm run dev
@@ -24,6 +28,7 @@ npm run dev
 App runs on `http://127.0.0.1:5173`.
 
 ## Scripts
+
 - `npm run dev` - start local dev server
 - `npm run build` - type-check + production build
 - `npm run preview` - preview built app
@@ -32,6 +37,7 @@ App runs on `http://127.0.0.1:5173`.
 - `npm run lint` - run ESLint
 
 ## Project Structure
+
 - `src/pages/BuilderPage.tsx` - main builder page
 - `src/pages/builder/` - builder UI components + DnD logic
 - `src/domain/` - domain logic (search, rules, formatting, assets)
@@ -40,9 +46,11 @@ App runs on `http://127.0.0.1:5173`.
 - `untracked/` - local scratch space (ignored by git)
 
 ## Deployment Notes (GitHub Pages)
+
 This project can be deployed to GitHub Pages as a static site.
 
-Routing is configured with `HashRouter`, so client-side routes work on GitHub Pages without server rewrites.
+Routing is configured with `HashRouter`, so client-side routes work on GitHub
+Pages without server rewrites.
 
 Set the repo base path at build time with `VITE_BASE_PATH`:
 
@@ -52,29 +60,40 @@ $env:VITE_BASE_PATH='/SKeyDB/'
 npm run build
 ```
 
-If deploying to a user/org root page (`https://<user>.github.io/`), you can keep the default `/` base.
+If deploying to a user/org root page (`https://<user>.github.io/`), you can keep
+the default `/` base.
 
 ## Attribution & Other contributions
-- Awakener avatars/cards and posse images used in this repo are currently sourced from Morimens HuijiWiki community pages:
+
+- Awakener avatars/cards and posse images used in this repo are currently
+  sourced from Morimens HuijiWiki community pages:
   - https://morimens.huijiwiki.com/p/1
 - HuijiWiki content for these assets is credited under CC BY-NC-SA:
   - https://creativecommons.org/licenses/by-nc-sa/4.0/
-- Big thanks to the Huiji contributors for putting those resources together, it helped us get going a lot quicker than we would have otherwise
+- Big thanks to the Huiji contributors for putting those resources together, it
+  helped us get going a lot quicker than we would have otherwise
 - Favicon logo was created and provided by community member `lavenderjun0`.
 
 ## Asset & IP Notice
+
 - SKeyDB is an unofficial, non-commercial fan project.
-- `Morimens`, related logos, character art, portraits, card art, and other in-game assets are owned by Qookka Games and/or their licensors.
+- `Morimens`, related logos, character art, portraits, card art, and other
+  in-game assets are owned by Qookka Games and/or their licensors.
 - No endorsement or affiliation with Qookka Games is implied.
-- If you plan to reuse game assets in another project (especially commercial use), obtain permission from the rights holder first.
-- If a rights holder requests removal of any asset or content in this repo, it should be removed promptly.
+- If you plan to reuse game assets in another project (especially commercial
+  use), obtain permission from the rights holder first.
+- If a rights holder requests removal of any asset or content in this repo, it
+  should be removed promptly.
 
 Reference legal pages:
+
 - https://account.qookkagames.com/service.en-US.html
 - https://agreement.qookkagames.com/qookka/webshop-user-agreement/en/agreement.html
 
 ## Current Scope
+
 Current implementation is an MVP focused on:
+
 - awakener picker/search
 - team card interactions and drag/drop
 - wheel picker/search + assignment flows
@@ -88,4 +107,5 @@ Current implementation is an MVP focused on:
 - collection save/load snapshot (`.json`)
 
 For roadmap/todo details, see:
+
 - `docs/plans/2026-02-20-project-roadmap.md`

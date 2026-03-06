@@ -1,18 +1,18 @@
-import { useState, type Dispatch, type SetStateAction } from 'react'
-import { deleteTeam } from './team-collection'
-import type { Team } from './types'
+import {deleteTeam} from '@/pages/builder/team-collection';
+import type {Team} from '@/pages/builder/types';
+import {useState, type Dispatch, type SetStateAction} from 'react';
 
-type PendingDeleteTeam = {
-  id: string
-  name: string
+interface PendingDeleteTeam {
+  readonly id: string;
+  readonly name: string;
 }
 
-type UsePendingDeleteDialogOptions = {
-  teams: Team[]
-  setTeams: Dispatch<SetStateAction<Team[]>>
-  effectiveActiveTeamId: string
-  setActiveTeamId: (teamId: string) => void
-  clearActiveSelection: () => void
+interface UsePendingDeleteDialogOptions {
+  readonly teams: readonly Team[];
+  readonly setTeams: Dispatch<SetStateAction<readonly Team[]>>;
+  readonly effectiveActiveTeamId: string;
+  readonly setActiveTeamId: (teamId: string) => void;
+  readonly clearActiveSelection: () => void;
 }
 
 export function usePendingDeleteDialog({
@@ -22,37 +22,38 @@ export function usePendingDeleteDialog({
   setActiveTeamId,
   clearActiveSelection,
 }: UsePendingDeleteDialogOptions) {
-  const [pendingDeleteTeam, setPendingDeleteTeam] = useState<PendingDeleteTeam | null>(null)
+  const [pendingDeleteTeam, setPendingDeleteTeam] =
+    useState<PendingDeleteTeam | null>(null);
 
   function clearPendingDelete() {
-    setPendingDeleteTeam(null)
+    setPendingDeleteTeam(null);
   }
 
   function applyDeleteTeam(teamId: string) {
-    const result = deleteTeam(teams, teamId, effectiveActiveTeamId)
-    setTeams(result.nextTeams)
-    setActiveTeamId(result.nextActiveTeamId)
+    const result = deleteTeam(teams, teamId, effectiveActiveTeamId);
+    setTeams(result.nextTeams);
+    setActiveTeamId(result.nextActiveTeamId);
     if (teamId === effectiveActiveTeamId) {
-      clearActiveSelection()
+      clearActiveSelection();
     }
   }
 
   function requestDeleteTeam(teamId: string, teamName: string) {
-    const team = teams.find((entry) => entry.id === teamId)
-    const hasAnyAwakener = team?.slots.some((slot) => slot.awakenerName)
+    const team = teams.find((entry) => entry.id === teamId);
+    const hasAnyAwakener = team?.slots.some((slot) => slot.awakenerName);
     if (!hasAnyAwakener) {
-      applyDeleteTeam(teamId)
-      return
+      applyDeleteTeam(teamId);
+      return;
     }
-    setPendingDeleteTeam({ id: teamId, name: teamName })
+    setPendingDeleteTeam({id: teamId, name: teamName});
   }
 
   function confirmDeleteTeam() {
     if (!pendingDeleteTeam) {
-      return
+      return;
     }
-    applyDeleteTeam(pendingDeleteTeam.id)
-    clearPendingDelete()
+    applyDeleteTeam(pendingDeleteTeam.id);
+    clearPendingDelete();
   }
 
   const pendingDeleteDialog = pendingDeleteTeam
@@ -61,11 +62,11 @@ export function usePendingDeleteDialog({
         message: `Remove ${pendingDeleteTeam.name}? This cannot be undone.`,
         onConfirm: confirmDeleteTeam,
       }
-    : null
+    : null;
 
   return {
     clearPendingDelete,
     requestDeleteTeam,
     pendingDeleteDialog,
-  }
+  };
 }

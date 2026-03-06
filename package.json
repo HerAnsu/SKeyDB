@@ -1,26 +1,33 @@
 {
   "name": "skeydb",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
-  },
   "scripts": {
-    "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "test:unit": "vitest run --run --exclude src/pages/BuilderPage*.test.tsx",
-    "test:integration": "vitest run --run src/pages/BuilderPage.awakeners-teams.test.tsx src/pages/BuilderPage.import-export.test.tsx src/pages/BuilderPage.wheels-covenants.test.tsx src/pages/BuilderPage.selection.test.tsx",
-    "test:quick": "vitest run --run src/pages/CollectionPage.test.tsx src/pages/collection/OwnedWheelBoxExport.test.tsx src/components/ui/DupeLevelDisplay.test.tsx",
-    "test:watch": "vitest",
-    "verify": "npm run lint && npm run test -- --run && npm run build",
     "data:sync-awakener-ids": "node scripts/sync-awakener-ids.mjs",
     "data:sync-posse-indices": "node scripts/sync-posse-indices.mjs",
     "data:sync-wheel-data": "node scripts/sync-wheel-data.mjs",
-    "prepare": "node scripts/install-git-hooks.mjs"
+    "dev": "vite",
+    "fix": "npm run lint:fix && npm run format",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepare": "node scripts/install-git-hooks.mjs",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:integration": "vitest run --run src/pages/BuilderPage.awakeners-teams.test.tsx src/pages/BuilderPage.import-export.test.tsx src/pages/BuilderPage.wheels-covenants.test.tsx src/pages/BuilderPage.selection.test.tsx",
+    "test:quick": "vitest run --run src/pages/CollectionPage.test.tsx src/pages/collection/OwnedWheelBoxExport.test.tsx src/components/ui/DupeLevelDisplay.test.tsx",
+    "test:unit": "vitest run --run --exclude src/pages/BuilderPage*.test.tsx",
+    "test:watch": "vitest",
+    "verify": "npm run format:check && npm run lint && npm run test -- --run && npm run build"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run verify"
+  },
+  "overrides": {
+    "rollup": "^4.59.0"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -37,7 +44,8 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.21.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@tailwindcss/vite": "^4.2.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -46,22 +54,31 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^10.0.2",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.1",
+    "eslint-plugin-no-relative-import-paths": "^1.6.1",
+    "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "7.1.0-canary-e0cc7202-20260227",
     "eslint-plugin-react-refresh": "^0.5.2",
+    "eslint-plugin-sonarjs": "^3.0.2",
+    "eslint-plugin-unused-imports": "^4.4.1",
     "globals": "^17.4.0",
     "jsdom": "^28.1.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-organize-attributes": "^1.0.0",
+    "prettier-plugin-packagejson": "^3.0.2",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.2.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.56.1",
     "vite": "^7.3.1",
+    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.0.18"
   },
-  "overrides": {
-    "rollup": "^4.59.0"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npm run verify"
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
   }
 }

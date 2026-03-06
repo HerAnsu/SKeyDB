@@ -1,19 +1,19 @@
-import type { MouseEvent } from 'react'
+import type {MouseEvent} from 'react';
 
-type TeamNameInlineEditorProps = {
-  teamName: string
-  isEditing: boolean
-  draftName: string
-  variant: 'compact' | 'header'
-  onBeginEdit: () => void
-  onDisplayClick?: (event: MouseEvent<HTMLButtonElement>) => void
-  onDraftChange: (nextName: string) => void
-  onCommit: () => void
-  onCancel: () => void
+export interface TeamNameInlineEditorProps {
+  readonly teamName: string;
+  readonly isEditing: boolean;
+  readonly draftName: string;
+  readonly variant: 'compact' | 'header';
+  readonly onBeginEdit: () => void;
+  readonly onDisplayClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  readonly onDraftChange: (nextName: string) => void;
+  readonly onCommit: () => void;
+  readonly onCancel: () => void;
 }
 
-function joinClasses(...classes: Array<string | false | null | undefined>) {
-  return classes.filter(Boolean).join(' ')
+function joinClasses(...classes: (string | false | null | undefined)[]) {
+  return classes.filter(Boolean).join(' ');
 }
 
 export function TeamNameInlineEditor({
@@ -27,37 +27,37 @@ export function TeamNameInlineEditor({
   onCommit,
   onCancel,
 }: TeamNameInlineEditorProps) {
-  const isHeader = variant === 'header'
+  const isHeader = variant === 'header';
 
   if (!isEditing) {
     return (
       <button
         aria-label={`Rename ${teamName}`}
         className={joinClasses(
-          'min-w-0 truncate border border-transparent text-left outline-none transition-colors',
+          'min-w-0 truncate border border-transparent text-left transition-colors outline-none',
           isHeader
             ? 'ui-title h-9 w-full cursor-text px-1.5 !text-2xl !leading-none text-amber-100 hover:border-amber-200/35 hover:bg-slate-900/30 hover:text-amber-50 focus-visible:border-amber-200/45 focus-visible:text-amber-50'
-            : 'h-6 w-full cursor-text select-none px-1 !text-xs !leading-none text-slate-100 hover:border-slate-300/35 hover:bg-slate-900/30 hover:text-amber-100 focus-visible:border-slate-300/45 focus-visible:text-amber-100',
+            : 'h-6 w-full cursor-text px-1 !text-xs !leading-none text-slate-100 select-none hover:border-slate-300/35 hover:bg-slate-900/30 hover:text-amber-100 focus-visible:border-slate-300/45 focus-visible:text-amber-100',
         )}
         onClick={(event) => {
-          onDisplayClick?.(event)
+          onDisplayClick?.(event);
           if (event.defaultPrevented) {
-            return
+            return;
           }
-          event.stopPropagation()
-          onBeginEdit()
+          event.stopPropagation();
+          onBeginEdit();
         }}
-        title="Click to Rename"
-        type="button"
+        title='Click to Rename'
+        type='button'
       >
         {teamName}
       </button>
-    )
+    );
   }
 
   return (
     <input
-      aria-label="Team name"
+      aria-label='Team name'
       autoFocus
       className={joinClasses(
         'w-full border bg-slate-950/90 text-slate-100 outline-none',
@@ -65,22 +65,28 @@ export function TeamNameInlineEditor({
           ? 'ui-title h-9 border-amber-200/60 px-1.5 !text-2xl !leading-none focus:border-amber-200/80'
           : 'h-6 border-amber-200/55 px-1 !text-xs !leading-none focus:border-amber-200/75',
       )}
-      onBlur={onCommit}
-      onChange={(event) => onDraftChange(event.target.value)}
-      onClick={(event) => event.stopPropagation()}
+      onBlur={() => {
+        onCommit();
+      }}
+      onChange={(event) => {
+        onDraftChange(event.target.value);
+      }}
+      onClick={(event) => {
+        event.stopPropagation();
+      }}
       onKeyDown={(event) => {
         if (event.key === 'Enter') {
-          event.preventDefault()
-          onCommit()
-          return
+          event.preventDefault();
+          onCommit();
+          return;
         }
         if (event.key === 'Escape') {
-          event.preventDefault()
-          onCancel()
+          event.preventDefault();
+          onCancel();
         }
       }}
-      type="text"
+      type='text'
       value={draftName}
     />
-  )
+  );
 }

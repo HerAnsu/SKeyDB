@@ -1,12 +1,14 @@
-import icon001 from '../assets/icons/UI_Battle_White_Buff_001.png'
-import icon002 from '../assets/icons/UI_Battle_White_Buff_002.png'
-import icon003 from '../assets/icons/UI_Battle_White_Buff_003.png'
-import icon004 from '../assets/icons/UI_Battle_White_Buff_004.png'
-import icon005 from '../assets/icons/UI_Battle_White_Buff_005.png'
-import icon006 from '../assets/icons/UI_Battle_White_Buff_006.png'
-import icon007 from '../assets/icons/UI_Battle_White_Buff_007.png'
-import icon008 from '../assets/icons/UI_Battle_White_Buff_008.png'
-import { getWheelFilterMainstats } from './mainstats'
+import icon001 from '@/assets/icons/UI_Battle_White_Buff_001.png';
+import icon002 from '@/assets/icons/UI_Battle_White_Buff_002.png';
+import icon003 from '@/assets/icons/UI_Battle_White_Buff_003.png';
+import icon004 from '@/assets/icons/UI_Battle_White_Buff_004.png';
+import icon005 from '@/assets/icons/UI_Battle_White_Buff_005.png';
+import icon006 from '@/assets/icons/UI_Battle_White_Buff_006.png';
+import icon007 from '@/assets/icons/UI_Battle_White_Buff_007.png';
+import icon008 from '@/assets/icons/UI_Battle_White_Buff_008.png';
+import {getWheelFilterMainstats} from '@/domain/mainstats';
+
+export type StorageLike = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
 
 export type WheelMainstatFilter =
   | 'ALL'
@@ -17,12 +19,12 @@ export type WheelMainstatFilter =
   | 'ALIEMUS_REGEN'
   | 'KEYFLARE_REGEN'
   | 'SIGIL_YIELD'
-  | 'DEATH_RESISTANCE'
+  | 'DEATH_RESISTANCE';
 
-export type WheelMainstatFilterOption = {
-  id: WheelMainstatFilter
-  label: string
-  iconAsset?: string
+export interface WheelMainstatFilterOption {
+  readonly id: WheelMainstatFilter;
+  readonly label: string;
+  readonly iconAsset?: string;
 }
 
 const MAINSTAT_ICON_BY_ID: Record<string, string> = {
@@ -34,20 +36,24 @@ const MAINSTAT_ICON_BY_ID: Record<string, string> = {
   '006': icon006,
   '007': icon007,
   '008': icon008,
-}
+};
 
-export const wheelMainstatFilterOptions: WheelMainstatFilterOption[] = [
-  { id: 'ALL', label: 'All Mainstats' },
-  ...getWheelFilterMainstats().map((mainstat) => ({
-    id: mainstat.key,
-    label: mainstat.label,
-    iconAsset: MAINSTAT_ICON_BY_ID[mainstat.iconId],
-  })),
-]
+export const wheelMainstatFilterOptions: readonly WheelMainstatFilterOption[] =
+  [
+    {id: 'ALL', label: 'All Mainstats'},
+    ...getWheelFilterMainstats().map((mainstat) => ({
+      id: mainstat.key as WheelMainstatFilter,
+      label: mainstat.label,
+      iconAsset: MAINSTAT_ICON_BY_ID[mainstat.iconId],
+    })),
+  ];
 
-export function matchesWheelMainstat(mainstatKey: string, filter: WheelMainstatFilter): boolean {
+export function matchesWheelMainstat(
+  mainstatKey: string,
+  filter: WheelMainstatFilter,
+): boolean {
   if (filter === 'ALL') {
-    return true
+    return true;
   }
-  return mainstatKey === filter
+  return mainstatKey === filter;
 }

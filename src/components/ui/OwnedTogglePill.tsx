@@ -1,12 +1,12 @@
-import { TogglePill } from './TogglePill'
+import {TogglePill} from '@/components/ui/TogglePill';
 
-type OwnedTogglePillProps = {
-  owned: boolean
-  onToggle: () => void
-  className?: string
-  variant?: 'default' | 'flat'
-  onLabel?: string
-  offLabel?: string
+interface OwnedTogglePillProps {
+  readonly owned: boolean;
+  readonly onToggle: () => void;
+  readonly className?: string;
+  readonly variant?: 'default' | 'flat';
+  readonly onLabel?: string;
+  readonly offLabel?: string;
 }
 
 export function OwnedTogglePill({
@@ -23,9 +23,11 @@ export function OwnedTogglePill({
       checked={owned}
       className={className}
       offLabel={offLabel}
-      onChange={() => onToggle()}
+      onChange={() => {
+        onToggle();
+      }}
       onLabel={onLabel}
       variant={variant}
     />
-  )
+  );
 }

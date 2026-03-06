@@ -3,11 +3,14 @@
 Last updated: 2026-02-23
 
 ## Project Goal
-Ship an open-source Morimens team builder that is easy to use and easy to maintain.
+
+Ship an open-source Morimens team builder that is easy to use and easy to
+maintain.
 
 ## Current Scope Snapshot
 
 ### In (implemented now)
+
 - Builder page with Morimens-inspired card layout.
 - Team editor with 4-slot active team view.
 - Multi-team planner foundation (up to 10 teams):
@@ -51,7 +54,8 @@ Ship an open-source Morimens team builder that is easy to use and easy to mainta
   - versioned compact codes (`t1.` / `mt1.`),
   - single-team and multi-team export actions,
   - import dialogs with replace and duplicate strategy handling,
-  - in-game `@@...@@` single-team import/export support with current covenant/posse WIP fallback behavior.
+  - in-game `@@...@@` single-team import/export support with current
+    covenant/posse WIP fallback behavior.
 - Local persistence:
   - builder draft autosave/restore,
   - builder reset + undo flow.
@@ -62,20 +66,25 @@ Ship an open-source Morimens team builder that is easy to use and easy to mainta
   - save/load collection snapshot (`.json`).
 
 ### Partially in (scaffolded / placeholder)
-- Some wheel metadata fields are intentionally unfinished for future data enrichment:
+
+- Some wheel metadata fields are intentionally unfinished for future data
+  enrichment:
   - `awakener`,
   - `mainstatKey` descriptions/display metadata linkage.
 - Covenant metadata quality (naming/details) is still an ongoing data pass.
 
 ### Out (not implemented yet)
+
 - Expanded ownership features (bulk tooling polish, future sync UX).
 - Exalt / Over-Exalt progression controls.
 - Shareable URL encoding.
-- Character/wheel/covenant deep database (stats, skills, tag taxonomy, recommendations).
+- Character/wheel/covenant deep database (stats, skills, tag taxonomy,
+  recommendations).
 
 ## Near-Term Milestones
 
 ### Milestone 1: Complete Core Builder Loop
+
 - Completed:
   - wheel selection/assignment in active team cards,
   - wheel uniqueness + move confirmation behavior,
@@ -84,34 +93,48 @@ Ship an open-source Morimens team builder that is easy to use and easy to mainta
   - metadata enrichment for wheels/covenants (mainstat/awakener link quality).
 
 ### Milestone 2: Multi-Team Iteration 2
-- Continue conflict/move UX polish for reassignment flows and future mobile builder layout work.
-- Explore URL-safe share flow and additional persistence polish once the current builder interaction model settles.
+
+- Continue conflict/move UX polish for reassignment flows and future mobile
+  builder layout work.
+- Explore URL-safe share flow and additional persistence polish once the current
+  builder interaction model settles.
 - Detailed plan: `docs/plans/2026-02-20-multi-team-builder-plan.md`
 
 ### Milestone 3: Share + Persistence
-- Expand compact export/import coverage (future schema versions, compatibility policy).
+
+- Expand compact export/import coverage (future schema versions, compatibility
+  policy).
 - Add URL-safe share format (or alternative share string flow).
 - Completed: baseline in-game `@@...@@` team import/export support.
 - Pending: covenant and posse coverage for the in-game codec.
 - Completed: local persistence for builder drafts.
-- Completed: owned/unowned collection persistence (awakeners, wheels, posses) on dedicated collection UI.
+- Completed: owned/unowned collection persistence (awakeners, wheels, posses) on
+  dedicated collection UI.
 - Pending: migration scaffolding for future persistence schema versions.
 - Detailed plan: `docs/plans/2026-02-22-persistence-plan.md`
 
 ## Milestone 4: Actual database
-- Add character/wheel/covenant data with stats, skills, tag taxonomy, recommendations.
+
+- Add character/wheel/covenant data with stats, skills, tag taxonomy,
+  recommendations.
 - Let users browse the database through filters and search.
-- Look into "in builder" popups for characters/wheels/covenants/etc. with descriptions and other relevant info based on DB data.
+- Look into "in builder" popups for characters/wheels/covenants/etc. with
+  descriptions and other relevant info based on DB data.
 - Add contribution docs for “how to add awakeners/wheels/posses safely”.
 
 ## UX Rules (Agreed Baseline)
+
 - In-use entries remain visible in pickers.
 - Blocked entries are still selectable/draggable, with clear feedback.
 - Reassignments should be atomic (remove old + apply new in one action).
-- Visual style remains sharp/squared and Morimens-inspired, with responsive ratios.
+- Visual style remains sharp/squared and Morimens-inspired, with responsive
+  ratios.
 
 ## Notes
+
 - README is intentionally short/public-facing.
 - This file is the internal working roadmap and can be detailed.
-- Add an in-app legal footer/credits block for asset ownership attribution (Qookka Games + licensors).
-- Future churn (UI consistency): migrate remaining builder action buttons (non-modal) to shared `Button` variants.
+- Add an in-app legal footer/credits block for asset ownership attribution
+  (Qookka Games + licensors).
+- Future churn (UI consistency): migrate remaining builder action buttons
+  (non-modal) to shared `Button` variants.

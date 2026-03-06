@@ -1,6 +1,10 @@
-import { describe, expect, it } from 'vitest'
-import type { Team } from './types'
-import { BUILDER_PERSISTENCE_KEY, loadBuilderDraft, saveBuilderDraft } from './builder-persistence'
+import {
+  BUILDER_PERSISTENCE_KEY,
+  loadBuilderDraft,
+  saveBuilderDraft,
+} from '@/pages/builder/builder-persistence';
+import type {Team} from '@/pages/builder/types';
+import {describe, expect, it} from 'vitest';
 
 function createTeamFixture(): Team {
   return {
@@ -8,18 +12,24 @@ function createTeamFixture(): Team {
     name: 'Team Alpha',
     posseId: '01-encounter-in-pure-white',
     slots: [
-      { slotId: 'slot-1', awakenerName: 'Goliath', realm: 'AEQUOR', level: 60, wheels: ['B01', 'C01'] },
-      { slotId: 'slot-2', wheels: [null, null] },
-      { slotId: 'slot-3', wheels: [null, null] },
-      { slotId: 'slot-4', wheels: [null, null] },
+      {
+        slotId: 'slot-1',
+        awakenerName: 'Goliath',
+        realm: 'AEQUOR',
+        level: 60,
+        wheels: ['B01', 'C01'],
+      },
+      {slotId: 'slot-2', wheels: [null, null]},
+      {slotId: 'slot-3', wheels: [null, null]},
+      {slotId: 'slot-4', wheels: [null, null]},
     ],
-  }
+  };
 }
 
 describe('builder-persistence', () => {
   it('saves and loads draft payload with versioned envelope', () => {
-    const storage = new Map<string, string>()
-    const teams = [createTeamFixture()]
+    const storage = new Map<string, string>();
+    const teams = [createTeamFixture()];
 
     saveBuilderDraft(
       {
@@ -27,33 +37,36 @@ describe('builder-persistence', () => {
         setItem: (key, value) => storage.set(key, value),
         removeItem: (key) => storage.delete(key),
       },
-      { teams, activeTeamId: 'team-alpha' },
-    )
+      {teams, activeTeamId: 'team-alpha'},
+    );
 
-    const raw = storage.get(BUILDER_PERSISTENCE_KEY)
-    expect(raw).toBeTruthy()
-    expect(raw).toContain('"version":1')
+    const raw = storage.get(BUILDER_PERSISTENCE_KEY);
+    expect(raw).toBeTruthy();
+    expect(raw).toContain('"version":1');
 
     const loaded = loadBuilderDraft({
       getItem: (key) => storage.get(key) ?? null,
       setItem: (key, value) => storage.set(key, value),
       removeItem: (key) => storage.delete(key),
-    })
-    expect(loaded).toEqual({ teams, activeTeamId: 'team-alpha' })
-  })
+    });
+    expect(loaded).toEqual({teams, activeTeamId: 'team-alpha'});
+  });
 
   it('returns null for malformed or unsupported payloads', () => {
     const storage = new Map<string, string>([
-      [BUILDER_PERSISTENCE_KEY, '{"version":999,"payload":{"teams":[],"activeTeamId":""}}'],
-    ])
+      [
+        BUILDER_PERSISTENCE_KEY,
+        '{"version":999,"payload":{"teams":[],"activeTeamId":""}}',
+      ],
+    ]);
 
     const loaded = loadBuilderDraft({
       getItem: (key) => storage.get(key) ?? null,
       setItem: (key, value) => storage.set(key, value),
       removeItem: (key) => storage.delete(key),
-    })
-    expect(loaded).toBeNull()
-  })
+    });
+    expect(loaded).toBeNull();
+  });
 
   it('rejects malformed slot payloads during load', () => {
     const storage = new Map<string, string>([
@@ -68,28 +81,28 @@ describe('builder-persistence', () => {
                 id: 'team-alpha',
                 name: 'Team Alpha',
                 slots: [
-                  { slotId: 'slot-1', wheels: ['SR19', null] },
-                  { slotId: 'slot-2', wheels: [null, null] },
-                  { slotId: 'slot-3', wheels: [null, null] },
-                  { slotId: 'slot-4', wheels: [null, null] },
+                  {slotId: 'slot-1', wheels: ['SR19', null]},
+                  {slotId: 'slot-2', wheels: [null, null]},
+                  {slotId: 'slot-3', wheels: [null, null]},
+                  {slotId: 'slot-4', wheels: [null, null]},
                 ],
               },
             ],
           },
         }),
       ],
-    ])
+    ]);
 
     const loaded = loadBuilderDraft({
       getItem: (key) => storage.get(key) ?? null,
       setItem: (key, value) => storage.set(key, value),
       removeItem: (key) => storage.delete(key),
-    })
-    expect(loaded).toBeNull()
-  })
+    });
+    expect(loaded).toBeNull();
+  });
 
   it('round-trips support slot state in builder draft storage', () => {
-    const storage = new Map<string, string>()
+    const storage = new Map<string, string>();
     const teams = [
       {
         ...createTeamFixture(),
@@ -102,12 +115,12 @@ describe('builder-persistence', () => {
             isSupport: true,
             wheels: ['B01', 'C01'] as [string, string],
           },
-          { slotId: 'slot-2', wheels: [null, null] as [null, null] },
-          { slotId: 'slot-3', wheels: [null, null] as [null, null] },
-          { slotId: 'slot-4', wheels: [null, null] as [null, null] },
+          {slotId: 'slot-2', wheels: [null, null] as [null, null]},
+          {slotId: 'slot-3', wheels: [null, null] as [null, null]},
+          {slotId: 'slot-4', wheels: [null, null] as [null, null]},
         ],
       },
-    ]
+    ];
 
     saveBuilderDraft(
       {
@@ -115,15 +128,15 @@ describe('builder-persistence', () => {
         setItem: (key, value) => storage.set(key, value),
         removeItem: (key) => storage.delete(key),
       },
-      { teams, activeTeamId: 'team-alpha' },
-    )
+      {teams, activeTeamId: 'team-alpha'},
+    );
 
     const loaded = loadBuilderDraft({
       getItem: (key) => storage.get(key) ?? null,
       setItem: (key, value) => storage.set(key, value),
       removeItem: (key) => storage.delete(key),
-    })
+    });
 
-    expect(loaded?.teams[0]?.slots[0]?.isSupport).toBe(true)
-  })
-})
+    expect(loaded?.teams[0]?.slots[0]?.isSupport).toBe(true);
+  });
+});

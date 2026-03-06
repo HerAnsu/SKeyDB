@@ -1,9 +1,9 @@
-import Fuse from 'fuse.js'
-import { getAwakeners } from './awakeners'
-import type { Posse } from './posses'
+import {getAwakeners} from '@/domain/awakeners';
+import type {Posse} from '@/domain/posses';
+import Fuse from 'fuse.js';
 
 function normalizeForSearch(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, '')
+  return value.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
 const realmLabelById: Record<string, string> = {
@@ -13,21 +13,25 @@ const realmLabelById: Record<string, string> = {
   ULTRA: 'Ultra',
   NEUTRAL: 'Neutral',
   OTHER: 'Other',
-}
+};
 
-const awakeners = getAwakeners()
-const awakenerByName = new Map(awakeners.map((awakener) => [awakener.name, awakener]))
+const awakeners = getAwakeners();
+const awakenerByName = new Map(
+  awakeners.map((awakener) => [awakener.name, awakener]),
+);
 
 function getRealmLabels(posse: Posse): string[] {
   if (posse.isFadedLegacy) {
-    return ['Faded Legacy']
+    return ['Faded Legacy'];
   }
-  const normalizedRealm = posse.realm.trim().toUpperCase()
-  return [realmLabelById[normalizedRealm] ?? posse.realm]
+  const normalizedRealm = posse.realm.trim().toUpperCase();
+  return [realmLabelById[normalizedRealm] ?? posse.realm];
 }
 
 function getSearchableFields(posse: Posse): string[] {
-  const linkedAwakener = posse.awakenerName ? awakenerByName.get(posse.awakenerName) : undefined
+  const linkedAwakener = posse.awakenerName
+    ? awakenerByName.get(posse.awakenerName)
+    : undefined;
   return [
     posse.name,
     posse.id,
@@ -35,21 +39,23 @@ function getSearchableFields(posse: Posse): string[] {
     ...getRealmLabels(posse),
     ...(posse.awakenerName ? [posse.awakenerName] : []),
     ...(linkedAwakener?.aliases ?? []),
-  ]
+  ];
 }
 
 export function searchPosses(posses: Posse[], query: string): Posse[] {
-  const trimmedQuery = query.trim()
+  const trimmedQuery = query.trim();
   if (trimmedQuery.length === 0) {
-    return posses
+    return posses;
   }
 
-  const normalizedQuery = normalizeForSearch(trimmedQuery)
+  const normalizedQuery = normalizeForSearch(trimmedQuery);
   const exactMatches = posses.filter((posse) =>
-    getSearchableFields(posse).some((field) => normalizeForSearch(field).includes(normalizedQuery)),
-  )
+    getSearchableFields(posse).some((field) =>
+      normalizeForSearch(field).includes(normalizedQuery),
+    ),
+  );
   if (exactMatches.length > 0) {
-    return exactMatches
+    return exactMatches;
   }
 
   const fuse = new Fuse(posses, {
@@ -57,16 +63,15 @@ export function searchPosses(posses: Posse[], query: string): Posse[] {
     ignoreLocation: true,
     includeScore: true,
     keys: [
-      { name: 'name', weight: 0.55 },
-      { name: 'id', weight: 0.15 },
-      { name: 'awakenerName', weight: 0.3 },
+      {name: 'name', weight: 0.55},
+      {name: 'id', weight: 0.15},
+      {name: 'awakenerName', weight: 0.3},
     ],
-  })
+  });
 
-  const cutoff = /\s/.test(trimmedQuery) ? 0.55 : 0.3
+  const cutoff = /\s/.test(trimmedQuery) ? 0.55 : 0.3;
   return fuse
     .search(trimmedQuery)
     .filter((result) => (result.score ?? 1) <= cutoff)
-    .map((result) => result.item)
+    .map((result) => result.item);
 }
-

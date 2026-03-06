@@ -1,722 +1,955 @@
-import { OwnedTogglePill } from '../components/ui/OwnedTogglePill'
-import { TogglePill } from '../components/ui/TogglePill'
-import { Button } from '../components/ui/Button'
-import { CollectionSortControls } from '../components/ui/CollectionSortControls'
-import { TabbedContainer } from '../components/ui/TabbedContainer'
-import { PageToolkitBar } from '../components/ui/PageToolkitBar'
-import { PanelSection } from '../components/ui/PanelSection'
-import { Toast } from '../components/ui/Toast'
-import { useRef } from 'react'
-import type { ChangeEvent, WheelEvent } from 'react'
-import { FaDownload, FaRotateRight, FaUpload } from 'react-icons/fa6'
-import { getAwakenerCardAsset } from '../domain/awakener-assets'
-import { getRealmTint } from '../domain/factions'
-import { formatAwakenerNameForUi } from '../domain/name-format'
-import { getPosseAssetById } from '../domain/posse-assets'
-import { getWheelAssetById } from '../domain/wheel-assets'
-import { wheelMainstatFilterOptions } from '../domain/wheel-mainstat-filters'
-import { CollectionLevelControls } from './collection/CollectionLevelControls'
-import { AwakenerLevelControl } from './collection/AwakenerLevelControl'
-import { OwnedAwakenerBoxExport } from './collection/OwnedAwakenerBoxExport'
-import { OwnedWheelBoxExport } from './collection/OwnedWheelBoxExport'
-import { useOwnedAwakenerBoxEntries } from './collection/useOwnedAwakenerBoxEntries'
-import { useOwnedWheelBoxEntries } from './collection/useOwnedWheelBoxEntries'
-import { useGlobalCollectionSearchCapture } from './collection/useGlobalCollectionSearchCapture'
-import { useCollectionViewModel } from './collection/useCollectionViewModel'
-import { useTimedToast } from '../components/ui/useTimedToast'
+import {Button} from '@/components/ui/Button';
+import {CollectionSortControls} from '@/components/ui/CollectionSortControls';
+import {OwnedTogglePill} from '@/components/ui/OwnedTogglePill';
+import {PageToolkitBar} from '@/components/ui/PageToolkitBar';
+import {PanelSection} from '@/components/ui/PanelSection';
+import {TabbedContainer} from '@/components/ui/TabbedContainer';
+import {Toast} from '@/components/ui/Toast';
+import {TogglePill} from '@/components/ui/TogglePill';
+import {useTimedToast} from '@/components/ui/useTimedToast';
+import {getAwakenerCardAsset} from '@/domain/awakener-assets';
+import {getRealmTint} from '@/domain/factions';
+import {formatAwakenerNameForUi} from '@/domain/name-format';
+import {getPosseAssetById} from '@/domain/posse-assets';
+import {getWheelAssetById} from '@/domain/wheel-assets';
+import {wheelMainstatFilterOptions} from '@/domain/wheel-mainstat-filters';
+import {AwakenerLevelControl} from '@/pages/collection/AwakenerLevelControl';
+import {CollectionLevelControls} from '@/pages/collection/CollectionLevelControls';
+import {OwnedAwakenerBoxExport} from '@/pages/collection/OwnedAwakenerBoxExport';
+import {OwnedWheelBoxExport} from '@/pages/collection/OwnedWheelBoxExport';
+import {useCollectionViewModel} from '@/pages/collection/useCollectionViewModel';
+import {useGlobalCollectionSearchCapture} from '@/pages/collection/useGlobalCollectionSearchCapture';
+import {useOwnedAwakenerBoxEntries} from '@/pages/collection/useOwnedAwakenerBoxEntries';
+import {useOwnedWheelBoxEntries} from '@/pages/collection/useOwnedWheelBoxEntries';
+import {
+  useRef,
+  type ChangeEvent,
+  type ReactElement,
+  type RefObject,
+  type WheelEvent,
+} from 'react';
+import {FaDownload, FaRotateRight, FaUpload} from 'react-icons/fa6';
 
 const collectionTabs = [
-  { id: 'awakeners', label: 'Awakeners' },
-  { id: 'wheels', label: 'Wheels' },
-  { id: 'posses', label: 'Posses' },
-] as const
+  {id: 'awakeners', label: 'Awakeners'},
+  {id: 'wheels', label: 'Wheels'},
+  {id: 'posses', label: 'Posses'},
+] as const;
 
 const awakenerFilterTabs = [
-  { id: 'ALL', label: 'All' },
-  { id: 'AEQUOR', label: 'Aequor' },
-  { id: 'CARO', label: 'Caro' },
-  { id: 'CHAOS', label: 'Chaos' },
-  { id: 'ULTRA', label: 'Ultra' },
-] as const
+  {id: 'ALL', label: 'All'},
+  {id: 'AEQUOR', label: 'Aequor'},
+  {id: 'CARO', label: 'Caro'},
+  {id: 'CHAOS', label: 'Chaos'},
+  {id: 'ULTRA', label: 'Ultra'},
+] as const;
 
 const wheelRarityFilterTabs = [
-  { id: 'ALL', label: 'All' },
-  { id: 'SSR', label: 'SSR' },
-  { id: 'SR', label: 'SR' },
-  { id: 'R', label: 'R' },
-] as const
+  {id: 'ALL', label: 'All'},
+  {id: 'SSR', label: 'SSR'},
+  {id: 'SR', label: 'SR'},
+  {id: 'R', label: 'R'},
+] as const;
 
 const posseFilterTabs = [
-  { id: 'ALL', label: 'All' },
-  { id: 'FADED_LEGACY', label: 'Faded Legacy' },
-  { id: 'AEQUOR', label: 'Aequor' },
-  { id: 'CARO', label: 'Caro' },
-  { id: 'CHAOS', label: 'Chaos' },
-  { id: 'ULTRA', label: 'Ultra' },
-] as const
+  {id: 'ALL', label: 'All'},
+  {id: 'FADED_LEGACY', label: 'Faded Legacy'},
+  {id: 'AEQUOR', label: 'Aequor'},
+  {id: 'CARO', label: 'Caro'},
+  {id: 'CHAOS', label: 'Chaos'},
+  {id: 'ULTRA', label: 'Ultra'},
+] as const;
 
 const collectionLabelByTab = {
   awakeners: 'awakeners',
   wheels: 'wheels',
   posses: 'posses',
-} as const
+} as const;
 
-export function CollectionPage() {
-  const model = useCollectionViewModel()
-  const searchInputRef = useRef<HTMLInputElement | null>(null)
-  const importFileInputRef = useRef<HTMLInputElement | null>(null)
-  const { toastEntries, showToast } = useTimedToast({ defaultDurationMs: 3200 })
-  const ownedAwakenersForBoxExport = useOwnedAwakenerBoxEntries(model.getAwakenerOwnedLevel, model.getAwakenerLevel)
-  const ownedWheelsForBoxExport = useOwnedWheelBoxEntries(model.getWheelOwnedLevel)
-  const activeCollectionLabel = collectionLabelByTab[model.tab]
-  const activeFilteredCount =
-    model.tab === 'awakeners'
-      ? model.filteredAwakeners.length
-      : model.tab === 'wheels'
-        ? model.filteredWheels.length
-        : model.filteredPosses.length
-
-  useGlobalCollectionSearchCapture({
-    searchInputRef,
-    onAppendCharacter: model.appendSearchCharacter,
-    onClearSearch: model.clearActiveQuery,
-  })
-
-  function swallowOutsideLevelClickIfCardInteraction(event: MouseEvent | PointerEvent) {
-    const target = event.target
-    if (!(target instanceof Element)) {
-      return
-    }
-
-    const interactionFrame = target.closest('.collection-card-frame')
-    if (!interactionFrame) {
-      return
-    }
-
-    // Clicking outside level editor but within an awakener card interaction area
-    // should commit level edits without also toggling ownership.
-    event.preventDefault()
-    event.stopPropagation()
-
-    const swallowNextClick = (clickEvent: MouseEvent) => {
-      const clickTarget = clickEvent.target
-      if (!(clickTarget instanceof Node)) {
-        return
-      }
-      if (!interactionFrame.contains(clickTarget)) {
-        return
-      }
-      clickEvent.preventDefault()
-      clickEvent.stopPropagation()
-    }
-
-    document.addEventListener('click', swallowNextClick, { capture: true, once: true })
+function swallowOutsideLevelClickIfCardInteraction(
+  event: MouseEvent | PointerEvent,
+) {
+  const target = event.target;
+  if (!(target instanceof Element)) {
+    return;
   }
 
-  function handleCollectionCardWheel(
-    event: WheelEvent<HTMLElement>,
-    kind: 'awakeners' | 'wheels',
-    id: string,
-    ownedLevel: number | null,
-    awakenerName?: string,
-  ) {
-    if (!event.shiftKey || event.deltaY === 0 || ownedLevel === null) {
-      return
-    }
-
-    const wheelDirection = event.deltaY < 0 ? 1 : -1
-    const cardElement = event.currentTarget
-    const hasActiveLevelEditor = cardElement.querySelector('.collection-awakener-level-editor') !== null
-    if (kind === 'awakeners' && awakenerName && hasActiveLevelEditor) {
-      event.preventDefault()
-      const currentLevel = model.getAwakenerLevel(awakenerName)
-      const nextLevel = Math.min(90, Math.max(1, currentLevel + wheelDirection))
-      if (nextLevel !== currentLevel) {
-        model.setAwakenerLevel(awakenerName, nextLevel)
-      }
-      return
-    }
-
-    const target = event.target
-    if (target instanceof Element && target.closest('input, textarea, select')) {
-      return
-    }
-
-    event.preventDefault()
-    if (wheelDirection > 0) {
-      model.increaseLevel(kind, id)
-      return
-    }
-    model.decreaseLevel(kind, id)
+  const interactionFrame = target.closest('.collection-card-frame');
+  if (!interactionFrame) {
+    return;
   }
 
-  function handleSaveToFile() {
-    const rawSnapshot = model.exportOwnershipSnapshot()
-    const filename = `skeydb-collection-${new Date().toISOString().slice(0, 10)}.json`
-    const blob = new Blob([rawSnapshot], { type: 'application/json;charset=utf-8' })
-    const objectUrl = URL.createObjectURL(blob)
+  event.preventDefault();
+  event.stopPropagation();
 
-    const anchor = document.createElement('a')
-    anchor.href = objectUrl
-    anchor.download = filename
-    document.body.appendChild(anchor)
-    anchor.click()
-    document.body.removeChild(anchor)
-    URL.revokeObjectURL(objectUrl)
-
-    showToast(`Saved ${filename}`)
-  }
-
-  function handleOpenLoadFilePicker() {
-    importFileInputRef.current?.click()
-  }
-
-  async function handleLoadFromFile(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0]
-    if (!file) {
-      return
+  const swallowNextClick = (clickEvent: MouseEvent) => {
+    const clickTarget = clickEvent.target;
+    if (!(clickTarget instanceof Node)) {
+      return;
     }
-
-    try {
-      const rawSnapshot = await file.text()
-      const parsed = model.importOwnershipSnapshot(rawSnapshot)
-      if (!parsed.ok) {
-        const errorMessage =
-          parsed.error === 'invalid_json'
-            ? 'Load failed: file is not valid JSON.'
-            : parsed.error === 'unsupported_version'
-              ? 'Load failed: snapshot version is unsupported.'
-              : 'Load failed: file does not match collection snapshot format.'
-        showToast(errorMessage)
-      } else {
-        showToast(`Loaded ${file.name}`)
-      }
-    } catch {
-      showToast('Load failed: could not read file.')
-    } finally {
-      event.target.value = ''
+    if (!interactionFrame.contains(clickTarget)) {
+      return;
     }
+    clickEvent.preventDefault();
+    clickEvent.stopPropagation();
+  };
+
+  document.addEventListener('click', swallowNextClick, {
+    capture: true,
+    once: true,
+  });
+}
+
+function handleCollectionCardWheel(
+  model: ReturnType<typeof useCollectionViewModel>,
+  event: WheelEvent<HTMLElement>,
+  kind: 'awakeners' | 'wheels',
+  id: string,
+  ownedLevel: number | null,
+  awakenerName?: string,
+) {
+  if (!event.shiftKey || event.deltaY === 0 || ownedLevel === null) {
+    return;
   }
 
-  const tabbedContainerRightActions =
-    model.tab === 'awakeners' ? (
+  const wheelDirection = event.deltaY < 0 ? 1 : -1;
+  const cardElement = event.currentTarget;
+  const hasActiveLevelEditor =
+    cardElement.querySelector('.collection-awakener-level-editor') !== null;
+  if (kind === 'awakeners' && awakenerName && hasActiveLevelEditor) {
+    event.preventDefault();
+    const currentLevel = model.getAwakenerLevel(awakenerName);
+    const nextLevel = Math.min(90, Math.max(1, currentLevel + wheelDirection));
+    if (nextLevel !== currentLevel) {
+      model.setAwakenerLevel(awakenerName, nextLevel);
+    }
+    return;
+  }
+
+  const target = event.target;
+  if (target instanceof Element && target.closest('input, textarea, select')) {
+    return;
+  }
+
+  event.preventDefault();
+  if (wheelDirection > 0) {
+    model.increaseLevel(kind, id);
+    return;
+  }
+  model.decreaseLevel(kind, id);
+}
+
+function handleSaveToFile(
+  model: ReturnType<typeof useCollectionViewModel>,
+  showToast: (msg: string) => void,
+) {
+  const rawSnapshot = model.exportOwnershipSnapshot();
+  const filename = `skeydb-collection-${new Date().toISOString().slice(0, 10)}.json`;
+  const blob = new Blob([rawSnapshot], {
+    type: 'application/json;charset=utf-8',
+  });
+  const objectUrl = URL.createObjectURL(blob);
+
+  const anchor = document.createElement('a');
+  anchor.href = objectUrl;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  document.body.removeChild(anchor);
+  URL.revokeObjectURL(objectUrl);
+
+  showToast(`Saved ${filename}`);
+}
+
+function getLoadErrorMessage(error: string): string {
+  switch (error) {
+    case 'invalid_json':
+      return 'Load failed: file is not valid JSON.';
+    case 'unsupported_version':
+      return 'Load failed: snapshot version is unsupported.';
+    default:
+      return 'Load failed: file does not match collection snapshot format.';
+  }
+}
+
+async function handleLoadFromFile(
+  model: ReturnType<typeof useCollectionViewModel>,
+  showToast: (msg: string) => void,
+  event: ChangeEvent<HTMLInputElement>,
+) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  try {
+    const rawSnapshot = await file.text();
+    const parsed = model.importOwnershipSnapshot(rawSnapshot);
+    if (!parsed.ok) {
+      showToast(getLoadErrorMessage(parsed.error as string));
+    } else {
+      showToast(`Loaded ${file.name}`);
+    }
+  } catch {
+    showToast('Load failed: could not read file.');
+  } finally {
+    event.target.value = '';
+  }
+}
+
+function getTabbedContainerRightActions(
+  model: ReturnType<typeof useCollectionViewModel>,
+): ReactElement | null {
+  if (model.tab === 'awakeners') {
+    return (
       <div>
         <CollectionSortControls
           compactTrailingAction={
             model.awakenerSortHasPendingChanges ? (
               <Button
-                aria-label="Apply changes"
-                className="h-6 px-2 text-[11px] leading-none"
+                aria-label='Apply changes'
+                className='h-6 px-2 text-[11px] leading-none'
                 onClick={model.applyAwakenerSortChanges}
-                type="button"
+                type='button'
               >
-                <span className="inline-flex items-center gap-1">
-                  <FaRotateRight aria-hidden className="text-[10px]" />
-                  <span className="max-sm:hidden">Refresh</span>
+                <span className='inline-flex items-center gap-1'>
+                  <FaRotateRight aria-hidden className='text-[10px]' />
+                  <span className='max-sm:hidden'>Refresh</span>
                 </span>
               </Button>
             ) : null
           }
           groupByRealm={model.awakenerSortGroupByRealm}
-          layout="compact"
+          layout='compact'
           onGroupByRealmChange={model.setAwakenerSortGroupByRealm}
           onSortDirectionToggle={model.toggleAwakenerSortDirection}
           onSortKeyChange={model.setAwakenerSortKey}
           showGroupByRealm={false}
           sortDirection={model.awakenerSortDirection}
           sortKey={model.awakenerSortKey}
-          sortDirectionAriaLabel="Toggle collection awakener sort direction"
-          sortSelectAriaLabel="Collection awakener sort key"
+          sortDirectionAriaLabel='Toggle collection awakener sort direction'
+          sortSelectAriaLabel='Collection awakener sort key'
         />
       </div>
-    ) : model.tab === 'wheels' && model.wheelSortHasPendingChanges ? (
-      <Button className="px-2 py-1 text-[10px] uppercase tracking-wide" onClick={model.applyWheelSortChanges} type="button">
+    );
+  }
+
+  if (model.tab === 'wheels' && model.wheelSortHasPendingChanges) {
+    return (
+      <Button
+        className='px-2 py-1 text-[10px] tracking-wide uppercase'
+        onClick={model.applyWheelSortChanges}
+        type='button'
+      >
         Apply Changes
       </Button>
-    ) : null
+    );
+  }
 
+  return null;
+}
+
+function getSearchPlaceholder(tab: string): string {
+  if (tab === 'awakeners') {
+    return 'Search awakeners (name, realm, aliases)';
+  }
+  if (tab === 'wheels') {
+    return 'Search wheels (name, rarity, realm, awakener, main stat)';
+  }
+  return 'Search posses (name, realm, awakener)';
+}
+
+function AwakenersTabGrid({
+  model,
+  onCommitOutsideClick,
+  onWheel,
+}: Readonly<{
+  model: ReturnType<typeof useCollectionViewModel>;
+  onCommitOutsideClick: (event: MouseEvent | PointerEvent) => void;
+  onWheel: (
+    event: WheelEvent<HTMLElement>,
+    kind: 'awakeners',
+    id: string,
+    ownedLevel: number | null,
+    awakenerName?: string,
+  ) => void;
+}>) {
   return (
-    <section className="space-y-3">
+    <div className='grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'>
+      {model.filteredAwakeners.map((awakener) => {
+        const awakenerId = model.awakenerIdByName.get(awakener.name);
+        if (!awakenerId) {
+          return null;
+        }
+        const ownedLevel = model.getAwakenerOwnedLevel(awakener.name);
+        const cardAsset = getAwakenerCardAsset(awakener.name);
+
+        return (
+          <article
+            className='collection-item-card group/collection p-1'
+            key={awakener.name}
+          >
+            <div
+              className={`collection-card-frame relative aspect-[25/56] overflow-hidden border border-slate-400/35 bg-slate-900/75 transition-[border-color,box-shadow] duration-150 group-hover/collection:border-amber-200/45 group-hover/collection:shadow-[0_0_0_1px_rgba(251,191,36,0.15)] ${
+                ownedLevel === null ? 'collection-card-frame-unowned' : ''
+              }`}
+              onWheel={(event) => {
+                onWheel(
+                  event,
+                  'awakeners',
+                  awakenerId,
+                  ownedLevel,
+                  awakener.name,
+                );
+              }}
+            >
+              <button
+                aria-label={`Toggle ownership for ${formatAwakenerNameForUi(awakener.name)}`}
+                className='absolute inset-0 z-[13]'
+                onClick={(event) => {
+                  if (event.defaultPrevented) {
+                    return;
+                  }
+                  model.toggleOwned('awakeners', awakenerId);
+                }}
+                type='button'
+              />
+              {cardAsset ? (
+                <img
+                  alt={`${formatAwakenerNameForUi(awakener.name)} card`}
+                  className={`collection-card-art h-full w-full object-cover object-top ${
+                    ownedLevel === null ? 'builder-picker-art-unowned' : ''
+                  }`}
+                  draggable={false}
+                  src={cardAsset}
+                />
+              ) : (
+                <span className='sigil-placeholder sigil-placeholder-card' />
+              )}
+              <span
+                className='pointer-events-none absolute inset-0 z-10 border'
+                style={{borderColor: getRealmTint(awakener.realm)}}
+              />
+              <p className='collection-card-title ui-title'>
+                {formatAwakenerNameForUi(awakener.name)}
+              </p>
+              <div className='collection-card-controls'>
+                {ownedLevel !== null ? (
+                  <AwakenerLevelControl
+                    disabled={false}
+                    level={model.getAwakenerLevel(awakener.name)}
+                    name={formatAwakenerNameForUi(awakener.name)}
+                    onCommitOutsideClick={onCommitOutsideClick}
+                    onLevelChange={(nextLevel) => {
+                      model.setAwakenerLevel(awakener.name, nextLevel);
+                    }}
+                  />
+                ) : null}
+                <CollectionLevelControls
+                  onDecrease={() => {
+                    model.decreaseLevel('awakeners', awakenerId);
+                  }}
+                  onIncrease={() => {
+                    model.increaseLevel('awakeners', awakenerId);
+                  }}
+                  ownedLevel={ownedLevel}
+                />
+                <OwnedTogglePill
+                  className='ownership-pill-full'
+                  onToggle={() => {
+                    model.toggleOwned('awakeners', awakenerId);
+                  }}
+                  owned={ownedLevel !== null}
+                />
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function WheelsTabGrid({
+  model,
+  onWheel,
+}: Readonly<{
+  model: ReturnType<typeof useCollectionViewModel>;
+  onWheel: (
+    event: WheelEvent<HTMLElement>,
+    kind: 'wheels',
+    id: string,
+    ownedLevel: number | null,
+  ) => void;
+}>) {
+  return (
+    <div className='grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'>
+      {model.filteredWheels.map((wheel) => {
+        const ownedLevel = model.getWheelOwnedLevel(wheel.id);
+        const wheelAsset = getWheelAssetById(wheel.id);
+
+        return (
+          <article
+            className='collection-item-card group/collection p-1'
+            key={wheel.id}
+          >
+            <div
+              className={`collection-card-frame relative aspect-[75/113] overflow-hidden border border-slate-400/35 bg-slate-900/75 transition-[border-color,box-shadow] duration-150 group-hover/collection:border-amber-200/45 group-hover/collection:shadow-[0_0_0_1px_rgba(251,191,36,0.15)] ${
+                ownedLevel === null ? 'collection-card-frame-unowned' : ''
+              }`}
+              onWheel={(event) => {
+                onWheel(event, 'wheels', wheel.id, ownedLevel);
+              }}
+            >
+              <button
+                aria-label={`Toggle ownership for ${wheel.name}`}
+                className='absolute inset-0 z-[13]'
+                onClick={(event) => {
+                  if (event.defaultPrevented) {
+                    return;
+                  }
+                  model.toggleOwned('wheels', wheel.id);
+                }}
+                type='button'
+              />
+              {wheelAsset ? (
+                <img
+                  alt={`${wheel.name} wheel`}
+                  className={`collection-card-art builder-picker-wheel-image h-full w-full object-cover ${
+                    ownedLevel === null ? 'builder-picker-art-unowned' : ''
+                  }`}
+                  draggable={false}
+                  src={wheelAsset}
+                />
+              ) : (
+                <span className='sigil-placeholder sigil-placeholder-wheel' />
+              )}
+              <p className='collection-card-title collection-card-title-compact'>
+                {wheel.name}
+              </p>
+              <div className='collection-card-controls'>
+                <CollectionLevelControls
+                  onDecrease={() => {
+                    model.decreaseLevel('wheels', wheel.id);
+                  }}
+                  onIncrease={() => {
+                    model.increaseLevel('wheels', wheel.id);
+                  }}
+                  ownedLevel={ownedLevel}
+                />
+                <OwnedTogglePill
+                  className='ownership-pill-full'
+                  onToggle={() => {
+                    model.toggleOwned('wheels', wheel.id);
+                  }}
+                  owned={ownedLevel !== null}
+                />
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function PossesTabGrid({
+  model,
+}: Readonly<{model: ReturnType<typeof useCollectionViewModel>}>) {
+  return (
+    <div className='grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'>
+      {model.filteredPosses.map((posse) => {
+        const ownedLevel = model.getPosseOwnedLevel(posse.id);
+        const asset = getPosseAssetById(posse.id);
+
+        return (
+          <article
+            className='collection-item-card group/collection p-1'
+            key={posse.id}
+          >
+            <div
+              className={`collection-card-frame relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/75 transition-[border-color,box-shadow] duration-150 group-hover/collection:border-amber-200/45 group-hover/collection:shadow-[0_0_0_1px_rgba(251,191,36,0.15)] ${
+                ownedLevel === null ? 'collection-card-frame-unowned' : ''
+              }`}
+            >
+              <button
+                aria-label={`Toggle ownership for ${posse.name}`}
+                className='absolute inset-0 z-[13]'
+                onClick={(event) => {
+                  if (event.defaultPrevented) {
+                    return;
+                  }
+                  model.toggleOwned('posses', posse.id);
+                }}
+                type='button'
+              />
+              {asset ? (
+                <img
+                  alt={`${posse.name} posse`}
+                  className={`collection-card-art h-full w-full object-cover ${
+                    ownedLevel === null ? 'builder-picker-art-unowned' : ''
+                  }`}
+                  draggable={false}
+                  src={asset}
+                />
+              ) : (
+                <span className='sigil-placeholder' />
+              )}
+              <p className='collection-card-title collection-card-title-compact'>
+                {posse.name}
+              </p>
+            </div>
+            <div className='collection-card-toolbar'>
+              <OwnedTogglePill
+                className='ownership-pill-full'
+                onToggle={() => {
+                  model.toggleOwned('posses', posse.id);
+                }}
+                owned={ownedLevel !== null}
+              />
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function CollectionNavigationPanel({
+  model,
+  searchInputRef,
+  searchPlaceholder,
+}: Readonly<{
+  model: ReturnType<typeof useCollectionViewModel>;
+  searchInputRef: RefObject<HTMLInputElement | null>;
+  searchPlaceholder: string;
+}>) {
+  return (
+    <PanelSection
+      description='Search, filters and display toggles for the active collection tab.'
+      title='Navigation'
+    >
+      <div className='mt-2 flex items-center justify-between gap-3 text-xs text-slate-300'>
+        <span>Display Unowned</span>
+        <TogglePill
+          ariaLabel='Toggle display unowned'
+          checked={model.displayUnowned}
+          className='ownership-pill-builder'
+          offLabel='Off'
+          onChange={(checked) => {
+            model.setDisplayUnowned(checked);
+          }}
+          onLabel='On'
+          variant='flat'
+        />
+      </div>
+
+      {model.tab === 'awakeners' ? (
+        <div className='mt-2 flex items-center justify-between gap-3 text-xs text-slate-300'>
+          <span>Group By Realm</span>
+          <TogglePill
+            ariaLabel='Toggle grouping awakeners by realm'
+            checked={model.awakenerSortGroupByRealm}
+            className='ownership-pill-builder'
+            offLabel='Off'
+            onChange={(checked) => {
+              model.setAwakenerSortGroupByRealm(checked);
+            }}
+            onLabel='On'
+            variant='flat'
+          />
+        </div>
+      ) : null}
+
       <input
-        accept="application/json,.json"
-        className="hidden"
+        className='mt-2 w-full border border-slate-800/95 bg-slate-950/90 px-3 py-2 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-amber-300/65 focus:bg-slate-950'
         onChange={(event) => {
-          void handleLoadFromFile(event)
+          model.setQuery(event.target.value);
         }}
-        ref={importFileInputRef}
-        type="file"
+        placeholder={searchPlaceholder}
+        ref={searchInputRef}
+        type='search'
+        value={model.activeQuery}
       />
 
-      <PageToolkitBar className="collection-toolkit-drawer">
+      {model.tab === 'awakeners' ? (
+        <div className='mt-2 grid grid-cols-5 gap-1'>
+          {awakenerFilterTabs.map((entry) => (
+            <button
+              className={`compact-filter-chip border transition-colors ${
+                model.awakenerFilter === entry.id
+                  ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
+                  : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
+              }`}
+              key={entry.id}
+              onClick={() => {
+                model.setAwakenerFilter(entry.id);
+              }}
+              type='button'
+            >
+              {entry.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
+
+      {model.tab === 'wheels' ? (
+        <>
+          <div className='mt-2 grid grid-cols-4 gap-1'>
+            {wheelRarityFilterTabs.map((entry) => (
+              <button
+                className={`compact-filter-chip border transition-colors ${
+                  model.wheelRarityFilter === entry.id
+                    ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
+                    : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
+                }`}
+                key={entry.id}
+                onClick={() => {
+                  model.setWheelRarityFilter(entry.id);
+                }}
+                type='button'
+              >
+                {entry.label}
+              </button>
+            ))}
+          </div>
+          <div className='mt-1.5 grid grid-cols-9 gap-1'>
+            {wheelMainstatFilterOptions.map((entry) => (
+              <button
+                aria-label={`Filter wheels by ${entry.label}`}
+                className={`flex h-7 items-center justify-center border transition-colors ${
+                  model.wheelMainstatFilter === entry.id
+                    ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
+                    : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
+                }`}
+                key={entry.id}
+                onClick={() => {
+                  model.setWheelMainstatFilter(entry.id);
+                }}
+                title={entry.label}
+                type='button'
+              >
+                {entry.iconAsset ? (
+                  <img
+                    alt={entry.label}
+                    className='h-[17px] w-[17px] object-contain opacity-95'
+                    draggable={false}
+                    src={entry.iconAsset}
+                  />
+                ) : (
+                  <span className='text-[10px] tracking-wide uppercase'>
+                    All
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </>
+      ) : null}
+
+      {model.tab === 'posses' ? (
+        <div className='mt-2 grid grid-cols-3 gap-1'>
+          {posseFilterTabs.map((entry) => (
+            <button
+              className={`compact-filter-chip border transition-colors ${
+                model.posseFilter === entry.id
+                  ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
+                  : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
+              }`}
+              key={entry.id}
+              onClick={() => {
+                model.setPosseFilter(entry.id);
+              }}
+              type='button'
+            >
+              {entry.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </PanelSection>
+  );
+}
+
+function CollectionBatchActionsPanel({
+  model,
+  activeFilteredCount,
+  activeCollectionLabel,
+}: Readonly<{
+  model: ReturnType<typeof useCollectionViewModel>;
+  activeFilteredCount: number;
+  activeCollectionLabel: string;
+}>) {
+  return (
+    <PanelSection
+      className='mt-auto border-t border-slate-500/45 pt-2'
+      description={`These actions apply ALL of the currently filtered and displayed ${activeCollectionLabel} (${String(activeFilteredCount)}).`}
+      title='Batch Actions'
+    >
+      <div className='space-y-2'>
+        <div className='grid grid-cols-2 gap-1'>
+          <Button
+            className='h-7 w-full px-2 py-1 text-[10px] tracking-wide uppercase hover:border-emerald-300/55 hover:text-emerald-200'
+            disabled={activeFilteredCount === 0}
+            onClick={() => {
+              model.markFilteredOwned();
+            }}
+            type='button'
+          >
+            Set Owned
+          </Button>
+          <Button
+            className='h-7 w-full px-2 py-1 text-[10px] tracking-wide uppercase hover:border-rose-300/55 hover:text-rose-200'
+            disabled={activeFilteredCount === 0}
+            onClick={() => {
+              model.markFilteredUnowned();
+            }}
+            type='button'
+          >
+            Set Unowned
+          </Button>
+        </div>
+
+        {model.tab === 'awakeners' || model.tab === 'wheels' ? (
+          <div className='grid grid-cols-[84px_repeat(4,minmax(0,1fr))] items-center gap-1'>
+            <span className='justify-self-end text-[10px] tracking-wide text-slate-400 uppercase'>
+              Enlightens:
+            </span>
+            <Button
+              className='h-7 w-full min-w-0 px-2 py-1 text-[10px] tracking-wide uppercase'
+              disabled={activeFilteredCount === 0}
+              onClick={() => {
+                model.setFilteredEnlightenPreset(0);
+              }}
+              type='button'
+            >
+              0
+            </Button>
+            <Button
+              className='h-7 w-full min-w-0 px-2 py-1 text-[10px] tracking-wide uppercase'
+              disabled={activeFilteredCount === 0}
+              onClick={() => {
+                model.setFilteredEnlightenPreset(3);
+              }}
+              type='button'
+            >
+              3
+            </Button>
+            <Button
+              className='h-7 w-full min-w-0 px-2 py-1 text-[10px] tracking-wide uppercase'
+              disabled={activeFilteredCount === 0}
+              onClick={() => {
+                model.setFilteredEnlightenPreset(7);
+              }}
+              type='button'
+            >
+              +4
+            </Button>
+            <Button
+              className='h-7 w-full min-w-0 px-2 py-1 text-[10px] tracking-wide uppercase'
+              disabled={activeFilteredCount === 0}
+              onClick={() => {
+                model.setFilteredEnlightenPreset(15);
+              }}
+              type='button'
+            >
+              +12
+            </Button>
+          </div>
+        ) : null}
+
         {model.tab === 'awakeners' ? (
-          <OwnedAwakenerBoxExport entries={ownedAwakenersForBoxExport} onStatusMessage={showToast} />
+          <div className='grid grid-cols-[84px_repeat(4,minmax(0,1fr))] items-center gap-1'>
+            <span className='justify-self-end text-[10px] tracking-wide text-slate-400 uppercase'>
+              Levels:
+            </span>
+            <Button
+              className='h-7 w-full min-w-0 px-2 py-1 text-[10px] tracking-wide uppercase'
+              disabled={activeFilteredCount === 0}
+              onClick={() => {
+                model.setFilteredAwakenerLevelsPreset('0');
+              }}
+              type='button'
+            >
+              1
+            </Button>
+            <Button
+              className='h-7 w-full min-w-0 px-2 py-1 text-[10px] tracking-wide uppercase'
+              disabled={activeFilteredCount === 0}
+              onClick={() => {
+                model.setFilteredAwakenerLevelsPreset('60');
+              }}
+              type='button'
+            >
+              60
+            </Button>
+            <Button
+              className='h-7 w-full min-w-0 px-2 py-1 text-[10px] tracking-wide uppercase'
+              disabled={activeFilteredCount === 0}
+              onClick={() => {
+                model.setFilteredAwakenerLevelsPreset('-10');
+              }}
+              type='button'
+            >
+              -10
+            </Button>
+            <Button
+              className='h-7 w-full min-w-0 px-2 py-1 text-[10px] tracking-wide uppercase'
+              disabled={activeFilteredCount === 0}
+              onClick={() => {
+                model.setFilteredAwakenerLevelsPreset('+10');
+              }}
+              type='button'
+            >
+              +10
+            </Button>
+          </div>
+        ) : null}
+      </div>
+    </PanelSection>
+  );
+}
+
+export function CollectionPage() {
+  const model = useCollectionViewModel();
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const importFileInputRef = useRef<HTMLInputElement | null>(null);
+  const {toastEntries, showToast} = useTimedToast({defaultDurationMs: 3200});
+  const ownedAwakenersForBoxExport = useOwnedAwakenerBoxEntries(
+    model.getAwakenerOwnedLevel,
+    model.getAwakenerLevel,
+  );
+  const ownedWheelsForBoxExport = useOwnedWheelBoxEntries(
+    model.getWheelOwnedLevel,
+  );
+  const activeCollectionLabel = collectionLabelByTab[model.tab];
+
+  const filteredCounts = {
+    awakeners: model.filteredAwakeners.length,
+    wheels: model.filteredWheels.length,
+    posses: model.filteredPosses.length,
+  };
+
+  const activeFilteredCount = filteredCounts[model.tab];
+
+  useGlobalCollectionSearchCapture({
+    searchInputRef,
+    onAppendCharacter: model.appendSearchCharacter,
+    onClearSearch: model.clearActiveQuery,
+  });
+
+  const searchPlaceholder = getSearchPlaceholder(model.tab);
+  const tabbedContainerRightActions = getTabbedContainerRightActions(model);
+
+  return (
+    <section className='space-y-3'>
+      <input
+        accept='application/json,.json'
+        className='hidden'
+        onChange={(event) => {
+          void handleLoadFromFile(model, showToast, event);
+        }}
+        ref={importFileInputRef}
+        type='file'
+      />
+
+      <PageToolkitBar className='collection-toolkit-drawer'>
+        {model.tab === 'awakeners' ? (
+          <OwnedAwakenerBoxExport
+            entries={ownedAwakenersForBoxExport}
+            onStatusMessage={showToast}
+          />
         ) : null}
         {model.tab === 'wheels' ? (
-          <OwnedWheelBoxExport entries={ownedWheelsForBoxExport} onStatusMessage={showToast} />
+          <OwnedWheelBoxExport
+            entries={ownedWheelsForBoxExport}
+            onStatusMessage={showToast}
+          />
         ) : null}
-        <Button className="px-2 py-1 text-[10px] uppercase tracking-wide" onClick={handleSaveToFile} type="button">
-          <span className="inline-flex items-center gap-1">
-            <FaDownload aria-hidden className="text-[9px]" />
+        <Button
+          className='px-2 py-1 text-[10px] tracking-wide uppercase'
+          onClick={() => {
+            handleSaveToFile(model, showToast);
+          }}
+          type='button'
+        >
+          <span className='inline-flex items-center gap-1'>
+            <FaDownload aria-hidden className='text-[9px]' />
             <span>Save to File</span>
           </span>
         </Button>
-        <Button className="px-2 py-1 text-[10px] uppercase tracking-wide" onClick={handleOpenLoadFilePicker} type="button">
-          <span className="inline-flex items-center gap-1">
-            <FaUpload aria-hidden className="text-[9px]" />
+        <Button
+          className='px-2 py-1 text-[10px] tracking-wide uppercase'
+          onClick={() => {
+            importFileInputRef.current?.click();
+          }}
+          type='button'
+        >
+          <span className='inline-flex items-center gap-1'>
+            <FaUpload aria-hidden className='text-[9px]' />
             <span>Load from File</span>
           </span>
         </Button>
       </PageToolkitBar>
 
-      <div className="grid items-start gap-4 lg:grid-cols-[280px_1fr]">
-        <aside className="flex min-h-[560px] flex-col border border-slate-500/45 bg-slate-900/45 p-3">
-          <PanelSection
-            description="Search, filters and display toggles for the active collection tab."
-            title="Navigation"
-          >
-
-          <div className="mt-2 flex items-center justify-between gap-3 text-xs text-slate-300">
-            <span>Display Unowned</span>
-            <TogglePill
-              ariaLabel="Toggle display unowned"
-              checked={model.displayUnowned}
-              className="ownership-pill-builder"
-              offLabel="Off"
-              onChange={model.setDisplayUnowned}
-              onLabel="On"
-              variant="flat"
-            />
-          </div>
-
-          {model.tab === 'awakeners' ? (
-            <div className="mt-2 flex items-center justify-between gap-3 text-xs text-slate-300">
-              <span>Group By Realm</span>
-              <TogglePill
-                ariaLabel="Toggle grouping awakeners by realm"
-                checked={model.awakenerSortGroupByRealm}
-                className="ownership-pill-builder"
-                offLabel="Off"
-                onChange={model.setAwakenerSortGroupByRealm}
-                onLabel="On"
-                variant="flat"
-              />
-            </div>
-          ) : null}
-
-          <input
-            className="mt-2 w-full border border-slate-800/95 bg-slate-950/90 px-3 py-2 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-amber-300/65 focus:bg-slate-950"
-            onChange={(event) => model.setQuery(event.target.value)}
-            placeholder={
-              model.tab === 'awakeners'
-                ? 'Search awakeners (name, realm, aliases)'
-                : model.tab === 'wheels'
-                  ? 'Search wheels (name, rarity, realm, awakener, main stat)'
-                  : 'Search posses (name, realm, awakener)'
-            }
-            ref={searchInputRef}
-            type="search"
-            value={model.activeQuery}
+      <div className='grid items-start gap-4 lg:grid-cols-[280px_1fr]'>
+        <aside className='flex min-h-[560px] flex-col border border-slate-500/45 bg-slate-900/45 p-3'>
+          <CollectionNavigationPanel
+            model={model}
+            searchInputRef={searchInputRef}
+            searchPlaceholder={searchPlaceholder}
           />
-
-          {model.tab === 'awakeners' ? (
-            <div className="mt-2 grid grid-cols-5 gap-1">
-              {awakenerFilterTabs.map((entry) => (
-                <button
-                  className={`border compact-filter-chip transition-colors ${
-                    model.awakenerFilter === entry.id
-                      ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
-                      : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
-                  }`}
-                  key={entry.id}
-                  onClick={() => model.setAwakenerFilter(entry.id)}
-                  type="button"
-                >
-                  {entry.label}
-                </button>
-              ))}
-            </div>
-          ) : null}
-
-          {model.tab === 'wheels' ? (
-            <>
-              <div className="mt-2 grid grid-cols-4 gap-1">
-                {wheelRarityFilterTabs.map((entry) => (
-                  <button
-                    className={`border compact-filter-chip transition-colors ${
-                      model.wheelRarityFilter === entry.id
-                        ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
-                        : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
-                    }`}
-                    key={entry.id}
-                    onClick={() => model.setWheelRarityFilter(entry.id)}
-                    type="button"
-                  >
-                    {entry.label}
-                  </button>
-                ))}
-              </div>
-              <div className="mt-1.5 grid grid-cols-9 gap-1">
-                {wheelMainstatFilterOptions.map((entry) => (
-                  <button
-                    aria-label={`Filter wheels by ${entry.label}`}
-                    className={`flex h-7 items-center justify-center border transition-colors ${
-                      model.wheelMainstatFilter === entry.id
-                        ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
-                        : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
-                    }`}
-                    key={entry.id}
-                    onClick={() => model.setWheelMainstatFilter(entry.id)}
-                    title={entry.label}
-                    type="button"
-                  >
-                    {entry.iconAsset ? (
-                      <img
-                        alt={entry.label}
-                        className="h-[17px] w-[17px] object-contain opacity-95"
-                        draggable={false}
-                        src={entry.iconAsset}
-                      />
-                    ) : (
-                      <span className="text-[10px] uppercase tracking-wide">All</span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </>
-          ) : null}
-
-          {model.tab === 'posses' ? (
-            <div className="mt-2 grid grid-cols-3 gap-1">
-              {posseFilterTabs.map((entry) => (
-                <button
-                  className={`border compact-filter-chip transition-colors ${
-                    model.posseFilter === entry.id
-                      ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
-                      : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
-                  }`}
-                  key={entry.id}
-                  onClick={() => model.setPosseFilter(entry.id)}
-                  type="button"
-                >
-                  {entry.label}
-                </button>
-              ))}
-            </div>
-          ) : null}
-
-          </PanelSection>
-
-          <PanelSection
-            className="mt-auto border-t border-slate-500/45 pt-2"
-            description={`These actions apply ALL of the currently filtered and displayed ${activeCollectionLabel} (${activeFilteredCount}).`}
-            title="Batch Actions"
-          >
-            <div className="space-y-2">
-              <div className="grid grid-cols-2 gap-1">
-                <Button
-                  className="h-7 w-full px-2 py-1 text-[10px] uppercase tracking-wide hover:border-emerald-300/55 hover:text-emerald-200"
-                  disabled={activeFilteredCount === 0}
-                  onClick={model.markFilteredOwned}
-                  type="button"
-                >
-                  Set Owned
-                </Button>
-                <Button
-                  className="h-7 w-full px-2 py-1 text-[10px] uppercase tracking-wide hover:border-rose-300/55 hover:text-rose-200"
-                  disabled={activeFilteredCount === 0}
-                  onClick={model.markFilteredUnowned}
-                  type="button"
-                >
-                  Set Unowned
-                </Button>
-              </div>
-
-              {model.tab === 'awakeners' || model.tab === 'wheels' ? (
-                <div className="grid grid-cols-[84px_repeat(4,minmax(0,1fr))] items-center gap-1">
-                  <span className="justify-self-end text-[10px] uppercase tracking-wide text-slate-400">Enlightens:</span>
-                  <Button
-                    className="h-7 w-full min-w-0 px-2 py-1 text-[10px] uppercase tracking-wide"
-                    disabled={activeFilteredCount === 0}
-                    onClick={() => model.setFilteredEnlightenPreset(0)}
-                    type="button"
-                  >
-                    0
-                  </Button>
-                  <Button
-                    className="h-7 w-full min-w-0 px-2 py-1 text-[10px] uppercase tracking-wide"
-                    disabled={activeFilteredCount === 0}
-                    onClick={() => model.setFilteredEnlightenPreset(3)}
-                    type="button"
-                  >
-                    3
-                  </Button>
-                  <Button
-                    className="h-7 w-full min-w-0 px-2 py-1 text-[10px] uppercase tracking-wide"
-                    disabled={activeFilteredCount === 0}
-                    onClick={() => model.setFilteredEnlightenPreset(7)}
-                    type="button"
-                  >
-                    +4
-                  </Button>
-                  <Button
-                    className="h-7 w-full min-w-0 px-2 py-1 text-[10px] uppercase tracking-wide"
-                    disabled={activeFilteredCount === 0}
-                    onClick={() => model.setFilteredEnlightenPreset(15)}
-                    type="button"
-                  >
-                    +12
-                  </Button>
-                </div>
-              ) : null}
-
-              {model.tab === 'awakeners' ? (
-                <div className="grid grid-cols-[84px_repeat(4,minmax(0,1fr))] items-center gap-1">
-                  <span className="justify-self-end text-[10px] uppercase tracking-wide text-slate-400">Levels:</span>
-                  <Button
-                    className="h-7 w-full min-w-0 px-2 py-1 text-[10px] uppercase tracking-wide"
-                    disabled={activeFilteredCount === 0}
-                    onClick={() => model.setFilteredAwakenerLevelsPreset('0')}
-                    type="button"
-                  >
-                    1
-                  </Button>
-                  <Button
-                    className="h-7 w-full min-w-0 px-2 py-1 text-[10px] uppercase tracking-wide"
-                    disabled={activeFilteredCount === 0}
-                    onClick={() => model.setFilteredAwakenerLevelsPreset('60')}
-                    type="button"
-                  >
-                    60
-                  </Button>
-                  <Button
-                    className="h-7 w-full min-w-0 px-2 py-1 text-[10px] uppercase tracking-wide"
-                    disabled={activeFilteredCount === 0}
-                    onClick={() => model.setFilteredAwakenerLevelsPreset('-10')}
-                    type="button"
-                  >
-                    -10
-                  </Button>
-                  <Button
-                    className="h-7 w-full min-w-0 px-2 py-1 text-[10px] uppercase tracking-wide"
-                    disabled={activeFilteredCount === 0}
-                    onClick={() => model.setFilteredAwakenerLevelsPreset('+10')}
-                    type="button"
-                  >
-                    +10
-                  </Button>
-                </div>
-              ) : null}
-            </div>
-          </PanelSection>
-
+          <CollectionBatchActionsPanel
+            activeCollectionLabel={activeCollectionLabel}
+            activeFilteredCount={activeFilteredCount}
+            model={model}
+          />
         </aside>
 
         <TabbedContainer
           activeTabId={model.tab}
-          bodyClassName="p-2"
-          className="max-h-[calc(100dvh-11.5rem)] overflow-hidden"
-          onTabChange={(tabId) => model.setTab(tabId as (typeof collectionTabs)[number]['id'])}
+          bodyClassName='p-2'
+          className='max-h-[calc(100dvh-11.5rem)] overflow-hidden'
+          onTabChange={(tabId) => {
+            model.setTab(tabId as (typeof collectionTabs)[number]['id']);
+          }}
           rightActions={tabbedContainerRightActions}
-          tabs={collectionTabs.map((tab) => ({ id: tab.id, label: tab.label }))}
+          tabs={collectionTabs.map((tab) => ({id: tab.id, label: tab.label}))}
         >
-          <div className="collection-scrollbar max-h-[calc(100dvh-15rem)] min-h-[560px] overflow-auto pr-1">
-          {model.tab === 'awakeners' ? (
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-              {model.filteredAwakeners.map((awakener) => {
-                const awakenerId = model.awakenerIdByName.get(awakener.name)
-                if (!awakenerId) {
-                  return null
-                }
-                const ownedLevel = model.getAwakenerOwnedLevel(awakener.name)
-                const cardAsset = getAwakenerCardAsset(awakener.name)
+          <div className='collection-scrollbar max-h-[calc(100dvh-15rem)] min-h-[560px] overflow-auto pr-1'>
+            {model.tab === 'awakeners' ? (
+              <AwakenersTabGrid
+                model={model}
+                onCommitOutsideClick={swallowOutsideLevelClickIfCardInteraction}
+                onWheel={(event, kind, id, ownedLevel, awakenerName) => {
+                  handleCollectionCardWheel(
+                    model,
+                    event,
+                    kind,
+                    id,
+                    ownedLevel,
+                    awakenerName,
+                  );
+                }}
+              />
+            ) : null}
 
-                return (
-                  <article
-                    className="collection-item-card group/collection p-1"
-                    key={awakener.name}
-                  >
-                    <div
-                      className={`collection-card-frame relative aspect-[25/56] overflow-hidden border border-slate-400/35 bg-slate-900/75 transition-[border-color,box-shadow] duration-150 group-hover/collection:border-amber-200/45 group-hover/collection:shadow-[0_0_0_1px_rgba(251,191,36,0.15)] ${
-                        ownedLevel === null ? 'collection-card-frame-unowned' : ''
-                      }`}
-                      onWheel={(event) =>
-                        handleCollectionCardWheel(event, 'awakeners', awakenerId, ownedLevel, awakener.name)
-                      }
-                    >
-                      <button
-                        aria-label={`Toggle ownership for ${formatAwakenerNameForUi(awakener.name)}`}
-                        className="absolute inset-0 z-[13]"
-                        onClick={(event) => {
-                          if (event.defaultPrevented) {
-                            return
-                          }
-                          model.toggleOwned('awakeners', awakenerId)
-                        }}
-                        type="button"
-                      />
-                      {cardAsset ? (
-                        <img
-                          alt={`${formatAwakenerNameForUi(awakener.name)} card`}
-                          className={`collection-card-art h-full w-full object-cover object-top ${ownedLevel === null ? 'builder-picker-art-unowned' : ''}`}
-                          draggable={false}
-                          src={cardAsset}
-                        />
-                      ) : (
-                        <span className="sigil-placeholder sigil-placeholder-card" />
-                      )}
-                      <span
-                        className="pointer-events-none absolute inset-0 z-10 border"
-                        style={{ borderColor: getRealmTint(awakener.realm) }}
-                      />
-                      <p className="collection-card-title ui-title">
-                        {formatAwakenerNameForUi(awakener.name)}
-                      </p>
-                      <div className="collection-card-controls">
-                        {ownedLevel !== null ? (
-                          <AwakenerLevelControl
-                            disabled={ownedLevel === null}
-                            level={model.getAwakenerLevel(awakener.name)}
-                            name={formatAwakenerNameForUi(awakener.name)}
-                            onCommitOutsideClick={swallowOutsideLevelClickIfCardInteraction}
-                            onLevelChange={(nextLevel) => model.setAwakenerLevel(awakener.name, nextLevel)}
-                          />
-                        ) : null}
-                        <CollectionLevelControls
-                          onDecrease={() => model.decreaseLevel('awakeners', awakenerId)}
-                          onIncrease={() => model.increaseLevel('awakeners', awakenerId)}
-                          ownedLevel={ownedLevel}
-                        />
-                        <OwnedTogglePill
-                          className="ownership-pill-full"
-                          owned={ownedLevel !== null}
-                          onToggle={() => model.toggleOwned('awakeners', awakenerId)}
-                        />
-                      </div>
-                    </div>
-                  </article>
-                )
-              })}
-            </div>
-          ) : null}
+            {model.tab === 'wheels' ? (
+              <WheelsTabGrid
+                model={model}
+                onWheel={(event, kind, id, ownedLevel) => {
+                  handleCollectionCardWheel(model, event, kind, id, ownedLevel);
+                }}
+              />
+            ) : null}
 
-          {model.tab === 'wheels' ? (
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-              {model.filteredWheels.map((wheel) => {
-                const ownedLevel = model.getWheelOwnedLevel(wheel.id)
-                const wheelAsset = getWheelAssetById(wheel.id)
-
-                return (
-                  <article
-                    className="collection-item-card group/collection p-1"
-                    key={wheel.id}
-                  >
-                    <div
-                      className={`collection-card-frame relative aspect-[75/113] overflow-hidden border border-slate-400/35 bg-slate-900/75 transition-[border-color,box-shadow] duration-150 group-hover/collection:border-amber-200/45 group-hover/collection:shadow-[0_0_0_1px_rgba(251,191,36,0.15)] ${
-                        ownedLevel === null ? 'collection-card-frame-unowned' : ''
-                      }`}
-                      onWheel={(event) => handleCollectionCardWheel(event, 'wheels', wheel.id, ownedLevel)}
-                    >
-                      <button
-                        aria-label={`Toggle ownership for ${wheel.name}`}
-                        className="absolute inset-0 z-[13]"
-                        onClick={(event) => {
-                          if (event.defaultPrevented) {
-                            return
-                          }
-                          model.toggleOwned('wheels', wheel.id)
-                        }}
-                        type="button"
-                      />
-                      {wheelAsset ? (
-                        <img
-                          alt={`${wheel.name} wheel`}
-                          className={`collection-card-art builder-picker-wheel-image h-full w-full object-cover ${ownedLevel === null ? 'builder-picker-art-unowned' : ''}`}
-                          draggable={false}
-                          src={wheelAsset}
-                        />
-                      ) : (
-                        <span className="sigil-placeholder sigil-placeholder-wheel" />
-                      )}
-                      <p className="collection-card-title collection-card-title-compact">{wheel.name}</p>
-                      <div className="collection-card-controls">
-                        <CollectionLevelControls
-                          onDecrease={() => model.decreaseLevel('wheels', wheel.id)}
-                          onIncrease={() => model.increaseLevel('wheels', wheel.id)}
-                          ownedLevel={ownedLevel}
-                        />
-                        <OwnedTogglePill
-                          className="ownership-pill-full"
-                          owned={ownedLevel !== null}
-                          onToggle={() => model.toggleOwned('wheels', wheel.id)}
-                        />
-                      </div>
-                    </div>
-                  </article>
-                )
-              })}
-            </div>
-          ) : null}
-
-          {model.tab === 'posses' ? (
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-              {model.filteredPosses.map((posse) => {
-                const ownedLevel = model.getPosseOwnedLevel(posse.id)
-                const asset = getPosseAssetById(posse.id)
-
-                return (
-                  <article
-                    className="collection-item-card group/collection p-1"
-                    key={posse.id}
-                  >
-                    <div
-                      className={`collection-card-frame relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/75 transition-[border-color,box-shadow] duration-150 group-hover/collection:border-amber-200/45 group-hover/collection:shadow-[0_0_0_1px_rgba(251,191,36,0.15)] ${
-                        ownedLevel === null ? 'collection-card-frame-unowned' : ''
-                      }`}
-                    >
-                      <button
-                        aria-label={`Toggle ownership for ${posse.name}`}
-                        className="absolute inset-0 z-[13]"
-                        onClick={(event) => {
-                          if (event.defaultPrevented) {
-                            return
-                          }
-                          model.toggleOwned('posses', posse.id)
-                        }}
-                        type="button"
-                      />
-                      {asset ? (
-                        <img
-                          alt={`${posse.name} posse`}
-                          className={`collection-card-art h-full w-full object-cover ${ownedLevel === null ? 'builder-picker-art-unowned' : ''}`}
-                          draggable={false}
-                          src={asset}
-                        />
-                      ) : (
-                        <span className="sigil-placeholder" />
-                      )}
-                      <p className="collection-card-title collection-card-title-compact">{posse.name}</p>
-                    </div>
-                    <div className="collection-card-toolbar">
-                      <OwnedTogglePill className="ownership-pill-full" owned={ownedLevel !== null} onToggle={() => model.toggleOwned('posses', posse.id)} />
-                    </div>
-                  </article>
-                )
-              })}
-            </div>
-          ) : null}
+            {model.tab === 'posses' ? <PossesTabGrid model={model} /> : null}
           </div>
         </TabbedContainer>
       </div>
       <Toast
-        className="pointer-events-none fixed right-4 bottom-4 z-[950] border border-amber-200/50 bg-slate-950/92 px-3 py-2 text-sm text-amber-100 shadow-[0_6px_20px_rgba(2,6,23,0.55)]"
-        containerClassName="pointer-events-none fixed right-4 bottom-4 z-[950] flex flex-col items-end gap-2"
+        className='pointer-events-none fixed right-4 bottom-4 z-[950] border border-amber-200/50 bg-slate-950/92 px-3 py-2 text-sm text-amber-100 shadow-[0_6px_20px_rgba(2,6,23,0.55)]'
+        containerClassName='pointer-events-none fixed right-4 bottom-4 z-[950] flex flex-col items-end gap-2'
         entries={toastEntries}
       />
     </section>
-  )
+  );
 }
-
-
-
-
-

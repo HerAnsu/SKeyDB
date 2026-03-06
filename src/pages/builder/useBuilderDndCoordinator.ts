@@ -1,19 +1,31 @@
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
-import { getDragKind } from './utils'
+import {getDragKind} from '@/pages/builder/utils';
+import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core';
 
-type UseBuilderDndCoordinatorOptions = {
-  onTeamRowDragStart: (teamId: string) => void
-  onTeamRowDragEnd: () => void
-  onTeamRowDragCancel: () => void
-  onTeamPreviewSlotDragStart: (teamId: string, slotId: string) => void
-  onTeamPreviewSlotDragOver: (overId: string | null) => void
-  onTeamPreviewSlotDragEnd: (teamId: string, slotId: string, overId: string | null) => void
-  onTeamPreviewSlotDragCancel: () => void
-  onTeamRowReorder: (sourceTeamId: string, targetTeamId: string) => void
-  onDragStart: (event: DragStartEvent) => void
-  onDragOver: (event: DragOverEvent) => void
-  onDragEnd: (event: DragEndEvent) => void
-  onDragCancel: () => void
+interface UseBuilderDndCoordinatorOptions {
+  onTeamRowDragStart: (teamId: string) => void;
+  onTeamRowDragEnd: () => void;
+  onTeamRowDragCancel: () => void;
+  onTeamPreviewSlotDragStart: (teamId: string, slotId: string) => void;
+  onTeamPreviewSlotDragOver: (overId: string | null) => void;
+  onTeamPreviewSlotDragEnd: (
+    teamId: string,
+    slotId: string,
+    overId: string | null,
+  ) => void;
+  onTeamPreviewSlotDragCancel: () => void;
+  onTeamRowReorder: (sourceTeamId: string, targetTeamId: string) => void;
+  onDragStart: (event: DragStartEvent) => void;
+  onDragOver: (event: DragOverEvent) => void;
+  onDragEnd: (event: DragEndEvent) => void;
+  onDragCancel: () => void;
+}
+
+function extractStringPayload(data: unknown, key: string): string | undefined {
+  if (typeof data === 'object' && data !== null && key in data) {
+    const value = (data as Record<string, unknown>)[key];
+    return typeof value === 'string' ? value : undefined;
+  }
+  return undefined;
 }
 
 export function useBuilderDndCoordinator({
@@ -31,77 +43,76 @@ export function useBuilderDndCoordinator({
   onDragCancel,
 }: UseBuilderDndCoordinatorOptions) {
   function handleDragStart(event: DragStartEvent) {
-    const dragData = event.active.data.current
-    if (getDragKind(dragData) === 'team-row') {
-      const teamId =
-        typeof dragData === 'object' && dragData && 'teamId' in dragData
-          ? (dragData as { teamId?: unknown }).teamId
-          : undefined
-      if (typeof teamId === 'string') {
-        onTeamRowDragStart(teamId)
+    const dragData = event.active.data.current;
+    const dragKind = getDragKind(dragData);
+
+    if (dragKind === 'team-row') {
+      const teamId = extractStringPayload(dragData, 'teamId');
+      if (teamId !== undefined) {
+        onTeamRowDragStart(teamId);
       }
-      return
+      return;
     }
-    if (getDragKind(dragData) === 'team-preview-slot') {
-      const teamId =
-        typeof dragData === 'object' && dragData && 'teamId' in dragData
-          ? (dragData as { teamId?: unknown }).teamId
-          : undefined
-      const slotId =
-        typeof dragData === 'object' && dragData && 'slotId' in dragData
-          ? (dragData as { slotId?: unknown }).slotId
-          : undefined
-      if (typeof teamId === 'string' && typeof slotId === 'string') {
-        onTeamPreviewSlotDragStart(teamId, slotId)
+
+    if (dragKind === 'team-preview-slot') {
+      const teamId = extractStringPayload(dragData, 'teamId');
+      const slotId = extractStringPayload(dragData, 'slotId');
+      if (teamId !== undefined && slotId !== undefined) {
+        onTeamPreviewSlotDragStart(teamId, slotId);
       }
-      return
+      return;
     }
-    onDragStart(event)
+
+    onDragStart(event);
   }
 
   function handleDragOver(event: DragOverEvent) {
-    const dragData = event.active.data.current
-    if (getDragKind(dragData) === 'team-row') {
-      return
+    const dragData = event.active.data.current;
+    const dragKind = getDragKind(dragData);
+
+    if (dragKind === 'team-row') {
+      return;
     }
-    if (getDragKind(dragData) === 'team-preview-slot') {
-      onTeamPreviewSlotDragOver(typeof event.over?.id === 'string' ? event.over.id : null)
-      return
+
+    if (dragKind === 'team-preview-slot') {
+      const overId = typeof event.over?.id === 'string' ? event.over.id : null;
+      onTeamPreviewSlotDragOver(overId);
+      return;
     }
-    onDragOver(event)
+
+    onDragOver(event);
   }
 
   function handleDragEnd(event: DragEndEvent) {
-    const dragData = event.active.data.current
-    if (getDragKind(dragData) === 'team-row') {
-      const sourceTeamId =
-        typeof dragData === 'object' && dragData && 'teamId' in dragData
-          ? (dragData as { teamId?: unknown }).teamId
-          : undefined
-      const targetTeamId = typeof event.over?.id === 'string' ? event.over.id : undefined
-      if (typeof sourceTeamId === 'string' && typeof targetTeamId === 'string') {
-        onTeamRowReorder(sourceTeamId, targetTeamId)
+    const dragData = event.active.data.current;
+    const dragKind = getDragKind(dragData);
+
+    if (dragKind === 'team-row') {
+      const sourceTeamId = extractStringPayload(dragData, 'teamId');
+      const targetTeamId =
+        typeof event.over?.id === 'string' ? event.over.id : undefined;
+
+      if (sourceTeamId !== undefined && targetTeamId !== undefined) {
+        onTeamRowReorder(sourceTeamId, targetTeamId);
       }
-      onTeamRowDragEnd()
-      return
+      onTeamRowDragEnd();
+      return;
     }
-    if (getDragKind(dragData) === 'team-preview-slot') {
-      const teamId =
-        typeof dragData === 'object' && dragData && 'teamId' in dragData
-          ? (dragData as { teamId?: unknown }).teamId
-          : undefined
-      const slotId =
-        typeof dragData === 'object' && dragData && 'slotId' in dragData
-          ? (dragData as { slotId?: unknown }).slotId
-          : undefined
-      if (typeof teamId === 'string' && typeof slotId === 'string') {
-        onTeamPreviewSlotDragEnd(teamId, slotId, typeof event.over?.id === 'string' ? event.over.id : null)
+
+    if (dragKind === 'team-preview-slot') {
+      const teamId = extractStringPayload(dragData, 'teamId');
+      const slotId = extractStringPayload(dragData, 'slotId');
+      const overId = typeof event.over?.id === 'string' ? event.over.id : null;
+
+      if (teamId !== undefined && slotId !== undefined) {
+        onTeamPreviewSlotDragEnd(teamId, slotId, overId);
       } else {
-        onTeamPreviewSlotDragEnd('', '', null)
+        onTeamPreviewSlotDragEnd('', '', null);
       }
-      return
+      return;
     }
-    onDragEnd(event)
+
+    onDragEnd(event);
   }
 
   return {
@@ -109,9 +120,9 @@ export function useBuilderDndCoordinator({
     handleDragOver,
     handleDragEnd,
     handleDragCancel: () => {
-      onTeamPreviewSlotDragCancel()
-      onTeamRowDragCancel()
-      onDragCancel()
+      onTeamPreviewSlotDragCancel();
+      onTeamRowDragCancel();
+      onDragCancel();
     },
-  }
+  };
 }

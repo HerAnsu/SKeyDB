@@ -1,22 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
-import { CollectionLevelStepButton } from './CollectionLevelStepButton'
+import {CollectionLevelStepButton} from '@/pages/collection/CollectionLevelStepButton';
+import {useEffect, useRef, useState} from 'react';
 
-type AwakenerLevelControlProps = {
-  name: string
-  level: number
-  disabled: boolean
-  onLevelChange: (nextLevel: number) => void
-  onCommitOutsideClick?: (event: MouseEvent | PointerEvent) => void
+export interface AwakenerLevelControlProps {
+  readonly disabled?: boolean;
+  readonly level: number;
+  readonly name: string;
+  readonly onCommitOutsideClick?: (event: MouseEvent | PointerEvent) => void;
+  readonly onLevelChange: (nextLevel: number) => void;
 }
 
 function parseNumericLevel(rawValue: string): number | null {
   if (!rawValue.trim()) {
-    return null
+    return null;
   }
   if (!/^\d+$/.test(rawValue)) {
-    return null
+    return null;
   }
-  return Number.parseInt(rawValue, 10)
+  return Number.parseInt(rawValue, 10);
 }
 
 export function AwakenerLevelControl({
@@ -26,157 +26,164 @@ export function AwakenerLevelControl({
   onLevelChange,
   onCommitOutsideClick,
 }: AwakenerLevelControlProps) {
-  const [isEditing, setIsEditing] = useState(false)
-  const [draftLevel, setDraftLevel] = useState('')
-  const [isDraftDirty, setIsDraftDirty] = useState(false)
-  const inputRef = useRef<HTMLInputElement | null>(null)
-  const rootRef = useRef<HTMLDivElement | null>(null)
-  const draftLevelRef = useRef('')
-  const isDraftDirtyRef = useRef(false)
-  const levelRef = useRef(level)
+  const [isEditing, setIsEditing] = useState(false);
+  const [draftLevel, setDraftLevel] = useState('');
+  const [isDraftDirty, setIsDraftDirty] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const draftLevelRef = useRef('');
+  const isDraftDirtyRef = useRef(false);
+  const levelRef = useRef(level);
 
   useEffect(() => {
     if (isEditing) {
-      inputRef.current?.focus()
-      inputRef.current?.select()
+      inputRef.current?.focus();
+      inputRef.current?.select();
     }
-  }, [isEditing])
+  }, [isEditing]);
 
   useEffect(() => {
-    draftLevelRef.current = draftLevel
-  }, [draftLevel])
+    draftLevelRef.current = draftLevel;
+  }, [draftLevel]);
 
   useEffect(() => {
-    isDraftDirtyRef.current = isDraftDirty
-  }, [isDraftDirty])
+    isDraftDirtyRef.current = isDraftDirty;
+  }, [isDraftDirty]);
 
   useEffect(() => {
-    levelRef.current = level
-  }, [level])
+    levelRef.current = level;
+  }, [level]);
 
   useEffect(() => {
     if (!isEditing) {
-      return
+      return;
     }
 
-    let swallowSyntheticMouseDown = false
+    let swallowSyntheticMouseDown = false;
 
     function handleOutsidePointerLikeDown(event: MouseEvent | PointerEvent) {
       if (event.type === 'mousedown' && swallowSyntheticMouseDown) {
-        swallowSyntheticMouseDown = false
-        return
+        swallowSyntheticMouseDown = false;
+        return;
       }
       if (event.type === 'pointerdown') {
-        swallowSyntheticMouseDown = true
+        swallowSyntheticMouseDown = true;
       }
 
-      const target = event.target as Node | null
+      const target = event.target as Node | null;
       if (target && rootRef.current?.contains(target)) {
-        return
+        return;
       }
 
       // Outside click commits current draft. Ownership-hitbox suppression is handled
       // by the parent card, scoped to this awakener only.
-      const rawDraft = isDraftDirtyRef.current ? draftLevelRef.current : String(levelRef.current)
-      const parsed = parseNumericLevel(rawDraft)
+      const rawDraft = isDraftDirtyRef.current
+        ? draftLevelRef.current
+        : String(levelRef.current);
+      const parsed = parseNumericLevel(rawDraft);
       if (parsed !== null) {
-        onLevelChange(parsed)
+        onLevelChange(parsed);
       }
-      setIsEditing(false)
-      onCommitOutsideClick?.(event)
+      setIsEditing(false);
+      onCommitOutsideClick?.(event);
     }
 
-    document.addEventListener('pointerdown', handleOutsidePointerLikeDown, true)
-    document.addEventListener('mousedown', handleOutsidePointerLikeDown, true)
+    document.addEventListener(
+      'pointerdown',
+      handleOutsidePointerLikeDown,
+      true,
+    );
+    document.addEventListener('mousedown', handleOutsidePointerLikeDown, true);
     return () => {
-      document.removeEventListener('pointerdown', handleOutsidePointerLikeDown, true)
-      document.removeEventListener('mousedown', handleOutsidePointerLikeDown, true)
-    }
-  }, [isEditing, onLevelChange, onCommitOutsideClick])
+      document.removeEventListener(
+        'pointerdown',
+        handleOutsidePointerLikeDown,
+        true,
+      );
+      document.removeEventListener(
+        'mousedown',
+        handleOutsidePointerLikeDown,
+        true,
+      );
+    };
+  }, [isEditing, onLevelChange, onCommitOutsideClick]);
 
   function commitDraft() {
-    const rawDraft = isDraftDirty ? draftLevel : String(level)
-    const parsed = parseNumericLevel(rawDraft)
+    const rawDraft = isDraftDirty ? draftLevel : String(level);
+    const parsed = parseNumericLevel(rawDraft);
     if (parsed !== null) {
-      onLevelChange(parsed)
+      onLevelChange(parsed);
     }
-    setIsEditing(false)
-    setIsDraftDirty(false)
-  }
-
-  function handleStep(delta: -1 | 1) {
-    const parsedDraft = parseNumericLevel(draftLevelRef.current)
-    const baseLevel = parsedDraft ?? levelRef.current
-    const nextLevel = Math.min(90, Math.max(1, baseLevel + delta))
-    const nextText = String(nextLevel)
-    draftLevelRef.current = nextText
-    setDraftLevel(nextText)
-    setIsDraftDirty(true)
-    onLevelChange(nextLevel)
+    setIsEditing(false);
+    setIsDraftDirty(false);
   }
 
   if (!isEditing) {
     return (
       <button
         aria-label={`Edit awakener level for ${name}`}
-        className="collection-awakener-level-trigger"
+        className='collection-awakener-level-trigger'
         disabled={disabled}
         onClick={() => {
-          setDraftLevel(String(level))
-          setIsDraftDirty(false)
-          setIsEditing(true)
+          setDraftLevel(String(level));
+          setIsDraftDirty(false);
+          setIsEditing(true);
         }}
-        type="button"
+        type='button'
       >
-        <span className="collection-awakener-level-prefix">Lv.</span>
-        <span className="collection-awakener-level-value">{level}</span>
+        <span className='collection-awakener-level-prefix'>Lv.</span>
+        <span className='collection-awakener-level-value'>{level}</span>
       </button>
-    )
+    );
   }
 
   return (
-    <div className="collection-awakener-level-editor" ref={rootRef}>
-      <label className="collection-awakener-level-input-row">
-        <span className="collection-awakener-level-prefix">Lv.</span>
+    <div className='collection-awakener-level-editor' ref={rootRef}>
+      <label className='collection-awakener-level-input-row'>
+        <span className='collection-awakener-level-prefix'>Lv.</span>
         <input
           aria-label={`Awakener level for ${name}`}
-          className="collection-awakener-level-input"
-          inputMode="numeric"
+          className='collection-awakener-level-input'
+          inputMode='numeric'
           onChange={(event) => {
-            setDraftLevel(event.target.value.replace(/[^\d]/g, ''))
-            setIsDraftDirty(true)
+            setDraftLevel(event.target.value.replace(/[^\d]/g, ''));
+            setIsDraftDirty(true);
           }}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
-              commitDraft()
+              commitDraft();
             }
             if (event.key === 'Escape') {
-              setIsEditing(false)
+              setIsEditing(false);
             }
           }}
           ref={inputRef}
-          type="text"
+          type='text'
           value={isDraftDirty ? draftLevel : String(level)}
         />
-        <div className="collection-step-group collection-step-group-compact collection-level-inline-steps">
+        <div className='collection-step-group collection-step-group-compact collection-level-inline-steps'>
           <CollectionLevelStepButton
             ariaLabel={`Increase awakener level for ${name}`}
-            className="collection-step-btn collection-step-btn-compact"
-            direction="up"
+            className='collection-step-btn collection-step-btn-compact'
+            direction='up'
             disabled={level >= 90}
-            glyphClassName="collection-step-glyph collection-step-glyph-compact"
-            onStep={() => handleStep(1)}
+            glyphClassName='collection-step-glyph collection-step-glyph-compact'
+            onStep={() => {
+              onLevelChange(Math.min(90, level + 1));
+            }}
           />
           <CollectionLevelStepButton
             ariaLabel={`Decrease awakener level for ${name}`}
-            className="collection-step-btn collection-step-btn-compact"
-            direction="down"
+            className='collection-step-btn collection-step-btn-compact'
+            direction='down'
             disabled={level <= 1}
-            glyphClassName="collection-step-glyph collection-step-glyph-compact"
-            onStep={() => handleStep(-1)}
+            glyphClassName='collection-step-glyph collection-step-glyph-compact'
+            onStep={() => {
+              onLevelChange(Math.max(1, level - 1));
+            }}
           />
         </div>
       </label>
     </div>
-  )
+  );
 }

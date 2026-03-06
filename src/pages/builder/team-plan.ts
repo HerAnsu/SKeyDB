@@ -1,17 +1,19 @@
-import { getAwakenerIdentityKey } from '../../domain/awakener-identity'
-import type { Team } from './types'
+import {getAwakenerIdentityKey} from '@/domain/awakener-identity';
+import type {Team} from '@/pages/builder/types';
 
-export function toTeamPlan(teams: Team[]) {
+export function toTeamPlan(teams: readonly Team[]) {
   return teams.map((team) => ({
     id: team.id,
     posseId: team.posseId,
     members: team.slots
       .filter((slot) => slot.awakenerName && slot.realm)
       .map((slot) => ({
-        awakenerId: getAwakenerIdentityKey(slot.awakenerName!),
-        realm: slot.realm!,
+        awakenerId: getAwakenerIdentityKey(slot.awakenerName ?? ''),
+        realm: slot.realm ?? '',
         isSupport: slot.isSupport === true,
-        wheelIds: slot.wheels.filter((wheelId): wheelId is string => Boolean(wheelId)),
+        wheelIds: slot.wheels.filter((wheelId): wheelId is string =>
+          Boolean(wheelId),
+        ),
       })),
-  }))
+  }));
 }

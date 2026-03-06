@@ -1,74 +1,92 @@
-import { getAwakenerIdentityKey } from '../../domain/awakener-identity'
-import { DEFAULT_TEAM_RULES_CONFIG, exceedsRealmLimitForTeam } from '../../domain/team-rules'
-import { awakenerByName } from './constants'
+import {getAwakenerIdentityKey} from '@/domain/awakener-identity';
+import {
+  DEFAULT_TEAM_RULES_CONFIG,
+  exceedsRealmLimitForTeam,
+} from '@/domain/team-rules';
+import {awakenerByName} from '@/pages/builder/constants';
 import {
   assignAwakenerToFirstEmptySlot,
   assignAwakenerToSlot,
   assignWheelToSlot,
   clearSlotAssignment,
-  type TeamStateViolationCode,
   swapSlotAssignments,
-} from './team-state'
-import { validateBuilderTeams } from './team-validation'
-import type { Team } from './types'
-import type { PendingTransfer } from './useTransferConfirm'
+  type TeamStateViolationCode,
+} from '@/pages/builder/team-state';
+import {validateBuilderTeams} from '@/pages/builder/team-validation';
+import type {Team, TeamSlot} from '@/pages/builder/types';
+import type {PendingTransfer} from '@/pages/builder/useTransferConfirm';
 
-function asRealmMembers(slots: Team['slots']) {
+function asRealmMembers(slots: readonly TeamSlot[]) {
   return slots
     .filter((slot) => slot.awakenerName && slot.realm)
-    .map((slot) => ({ realm: slot.realm! }))
+    .map((slot) => ({realm: slot.realm ?? ''}));
 }
 
-function violatesRealmCap(slots: Team['slots']) {
-  return exceedsRealmLimitForTeam(asRealmMembers(slots), DEFAULT_TEAM_RULES_CONFIG.maxRealmsPerTeam)
+function violatesRealmCap(slots: readonly TeamSlot[]) {
+  return exceedsRealmLimitForTeam(
+    asRealmMembers(slots),
+    DEFAULT_TEAM_RULES_CONFIG.maxRealmsPerTeam,
+  );
 }
 
-function withSupportSlot(slots: Team['slots'], supportSlotId: string): Team['slots'] {
+function withSupportSlot(
+  slots: readonly TeamSlot[],
+  supportSlotId: string,
+): readonly TeamSlot[] {
   return slots.map((slot) => ({
     ...slot,
     isSupport: slot.slotId === supportSlotId ? true : undefined,
-  }))
+  }));
 }
 
 function findAssignedAwakenerSlotId(
-  previousSlots: Team['slots'],
-  nextSlots: Team['slots'],
+  previousSlots: readonly TeamSlot[],
+  nextSlots: readonly TeamSlot[],
   awakenerName: string,
 ): string | null {
-  const previousById = new Map(previousSlots.map((slot) => [slot.slotId, slot]))
+  const previousById = new Map(
+    previousSlots.map((slot) => [slot.slotId, slot]),
+  );
   for (const slot of nextSlots) {
     if (slot.awakenerName !== awakenerName) {
-      continue
+      continue;
     }
-    const previousSlot = previousById.get(slot.slotId)
+    const previousSlot = previousById.get(slot.slotId);
     if (previousSlot?.awakenerName !== awakenerName) {
-      return slot.slotId
+      return slot.slotId;
     }
   }
-  return nextSlots.find((slot) => slot.awakenerName === awakenerName)?.slotId ?? null
+  return (
+    nextSlots.find((slot) => slot.awakenerName === awakenerName)?.slotId ?? null
+  );
 }
 
-export function applyPendingTransfer(teams: Team[], pendingTransfer: PendingTransfer): Team[] {
+export function applyPendingTransfer(
+  teams: readonly Team[],
+  pendingTransfer: PendingTransfer,
+): readonly Team[] {
   if (pendingTransfer.kind === 'posse') {
     return teams.map((team) => {
       if (team.id === pendingTransfer.fromTeamId) {
-        return { ...team, posseId: undefined }
+        return {...team, posseId: undefined};
       }
       if (team.id === pendingTransfer.toTeamId) {
-        return { ...team, posseId: pendingTransfer.posseId }
+        return {...team, posseId: pendingTransfer.posseId};
       }
-      return team
-    })
+      return team;
+    });
   }
 
   if (pendingTransfer.kind === 'wheel') {
-    const fromTeam = teams.find((team) => team.id === pendingTransfer.fromTeamId)
-    const toTeam = teams.find((team) => team.id === pendingTransfer.toTeamId)
+    const fromTeam = teams.find(
+      (team) => team.id === pendingTransfer.fromTeamId,
+    );
+    const toTeam = teams.find((team) => team.id === pendingTransfer.toTeamId);
     if (!fromTeam || !toTeam) {
-      return teams
+      return teams;
     }
     if (fromTeam.id === toTeam.id) {
-      return teams
+      return teams;
     }
 
     const targetResult = assignWheelToSlot(
@@ -76,9 +94,9 @@ export function applyPendingTransfer(teams: Team[], pendingTransfer: PendingTran
       pendingTransfer.targetSlotId,
       pendingTransfer.targetWheelIndex,
       pendingTransfer.wheelId,
-    )
+    );
     if (targetResult.nextSlots === toTeam.slots) {
-      return teams
+      return teams;
     }
 
     const sourceResult = assignWheelToSlot(
@@ -86,69 +104,85 @@ export function applyPendingTransfer(teams: Team[], pendingTransfer: PendingTran
       pendingTransfer.fromSlotId,
       pendingTransfer.fromWheelIndex,
       null,
-    )
+    );
 
     return teams.map((team) => {
       if (team.id === fromTeam.id) {
         return {
           ...team,
           slots: sourceResult.nextSlots,
-        }
+        };
       }
       if (team.id === toTeam.id) {
         return {
           ...team,
           slots: targetResult.nextSlots,
-        }
+        };
       }
-      return team
-    })
+      return team;
+    });
   }
 
-  const fromTeam = teams.find((team) => team.id === pendingTransfer.fromTeamId)
-  const toTeam = teams.find((team) => team.id === pendingTransfer.toTeamId)
+  const fromTeam = teams.find((team) => team.id === pendingTransfer.fromTeamId);
+  const toTeam = teams.find((team) => team.id === pendingTransfer.toTeamId);
   if (!fromTeam || !toTeam) {
-    return teams
+    return teams;
   }
 
   const moveResult = pendingTransfer.targetSlotId
-    ? assignAwakenerToSlot(toTeam.slots, pendingTransfer.awakenerName, pendingTransfer.targetSlotId, awakenerByName)
-    : assignAwakenerToFirstEmptySlot(toTeam.slots, pendingTransfer.awakenerName, awakenerByName)
+    ? assignAwakenerToSlot(
+        toTeam.slots,
+        pendingTransfer.awakenerName,
+        pendingTransfer.targetSlotId,
+        awakenerByName,
+      )
+    : assignAwakenerToFirstEmptySlot(
+        toTeam.slots,
+        pendingTransfer.awakenerName,
+        awakenerByName,
+      );
   if (moveResult.violation || moveResult.nextSlots === toTeam.slots) {
-    return teams
+    return teams;
   }
 
-  const identityKey = getAwakenerIdentityKey(pendingTransfer.awakenerName)
+  const identityKey = getAwakenerIdentityKey(pendingTransfer.awakenerName);
   const sourceSlot = fromTeam.slots.find(
-    (slot) => slot.awakenerName && getAwakenerIdentityKey(slot.awakenerName) === identityKey,
-  )
-  const clearedFromSlots = sourceSlot ? clearSlotAssignment(fromTeam.slots, sourceSlot.slotId).nextSlots : fromTeam.slots
+    (slot) =>
+      slot.awakenerName &&
+      getAwakenerIdentityKey(slot.awakenerName) === identityKey,
+  );
+  const clearedFromSlots = sourceSlot
+    ? clearSlotAssignment(fromTeam.slots, sourceSlot.slotId).nextSlots
+    : fromTeam.slots;
 
   return teams.map((team) => {
     if (team.id === fromTeam.id) {
       return {
         ...team,
         slots: clearedFromSlots,
-      }
+      };
     }
     if (team.id === toTeam.id) {
       return {
         ...team,
         slots: moveResult.nextSlots,
-      }
+      };
     }
-    return team
-  })
+    return team;
+  });
 }
 
-export function applySupportTransfer(teams: Team[], pendingTransfer: PendingTransfer): Team[] {
+export function applySupportTransfer(
+  teams: readonly Team[],
+  pendingTransfer: PendingTransfer,
+): readonly Team[] {
   if (pendingTransfer.kind !== 'awakener') {
-    return teams
+    return teams;
   }
 
-  const toTeam = teams.find((team) => team.id === pendingTransfer.toTeamId)
+  const toTeam = teams.find((team) => team.id === pendingTransfer.toTeamId);
   if (!toTeam) {
-    return teams
+    return teams;
   }
 
   const assignResult = pendingTransfer.targetSlotId
@@ -157,28 +191,40 @@ export function applySupportTransfer(teams: Team[], pendingTransfer: PendingTran
         pendingTransfer.awakenerName,
         pendingTransfer.targetSlotId,
         awakenerByName,
-        { allowDuplicateIdentity: true },
+        {allowDuplicateIdentity: true},
       )
-    : assignAwakenerToFirstEmptySlot(toTeam.slots, pendingTransfer.awakenerName, awakenerByName, {
-        allowDuplicateIdentity: true,
-      })
+    : assignAwakenerToFirstEmptySlot(
+        toTeam.slots,
+        pendingTransfer.awakenerName,
+        awakenerByName,
+        {
+          allowDuplicateIdentity: true,
+        },
+      );
   if (assignResult.violation || assignResult.nextSlots === toTeam.slots) {
-    return teams
+    return teams;
   }
 
   const supportSlotId =
     pendingTransfer.targetSlotId ??
-    findAssignedAwakenerSlotId(toTeam.slots, assignResult.nextSlots, pendingTransfer.awakenerName)
+    findAssignedAwakenerSlotId(
+      toTeam.slots,
+      assignResult.nextSlots,
+      pendingTransfer.awakenerName,
+    );
   if (!supportSlotId) {
-    return teams
+    return teams;
   }
 
-  const nextSupportSlots = withSupportSlot(assignResult.nextSlots, supportSlotId).map((slot) =>
-    slot.slotId === supportSlotId ? { ...slot, level: 90 } : slot,
-  )
+  const nextSupportSlots = withSupportSlot(
+    assignResult.nextSlots,
+    supportSlotId,
+  ).map((slot) =>
+    slot.slotId === supportSlotId ? {...slot, level: 90} : slot,
+  );
 
   if (violatesRealmCap(nextSupportSlots)) {
-    return teams
+    return teams;
   }
 
   return teams.map((team) =>
@@ -188,35 +234,48 @@ export function applySupportTransfer(teams: Team[], pendingTransfer: PendingTran
           slots: nextSupportSlots,
         }
       : team,
-  )
+  );
 }
 
 export function swapTeamSlotTransfer(
-  teams: Team[],
+  teams: readonly Team[],
   sourceTeamId: string,
   sourceSlotId: string,
   targetTeamId: string,
   targetSlotId: string,
-  options?: { allowDupes?: boolean },
-): { nextTeams: Team[]; violation?: TeamStateViolationCode } {
-  const sourceTeam = teams.find((team) => team.id === sourceTeamId)
-  const targetTeam = teams.find((team) => team.id === targetTeamId)
+  options?: {allowDupes?: boolean},
+): {
+  readonly nextTeams: readonly Team[];
+  readonly violation?: TeamStateViolationCode;
+} {
+  const sourceTeam = teams.find((team) => team.id === sourceTeamId);
+  const targetTeam = teams.find((team) => team.id === targetTeamId);
   if (!sourceTeam || !targetTeam) {
-    return { nextTeams: teams }
+    return {nextTeams: teams};
   }
 
   if (sourceTeamId === targetTeamId) {
-    const result = swapSlotAssignments(sourceTeam.slots, sourceSlotId, targetSlotId)
+    const result = swapSlotAssignments(
+      sourceTeam.slots,
+      sourceSlotId,
+      targetSlotId,
+    );
     return {
-      nextTeams: teams.map((team) => (team.id === sourceTeamId ? { ...team, slots: result.nextSlots } : team)),
+      nextTeams: teams.map((team) =>
+        team.id === sourceTeamId ? {...team, slots: result.nextSlots} : team,
+      ),
       violation: result.violation,
-    }
+    };
   }
 
-  const sourceSlot = sourceTeam.slots.find((slot) => slot.slotId === sourceSlotId)
-  const targetSlot = targetTeam.slots.find((slot) => slot.slotId === targetSlotId)
+  const sourceSlot = sourceTeam.slots.find(
+    (slot) => slot.slotId === sourceSlotId,
+  );
+  const targetSlot = targetTeam.slots.find(
+    (slot) => slot.slotId === targetSlotId,
+  );
   if (!sourceSlot || !targetSlot) {
-    return { nextTeams: teams }
+    return {nextTeams: teams};
   }
 
   const nextSourceSlots = sourceTeam.slots.map((slot) =>
@@ -231,7 +290,7 @@ export function swapTeamSlotTransfer(
           covenantId: targetSlot.covenantId,
         }
       : slot,
-  )
+  );
   const nextTargetSlots = targetTeam.slots.map((slot) =>
     slot.slotId === targetSlotId
       ? {
@@ -244,48 +303,52 @@ export function swapTeamSlotTransfer(
           covenantId: sourceSlot.covenantId,
         }
       : slot,
-  )
+  );
 
   if (violatesRealmCap(nextSourceSlots) || violatesRealmCap(nextTargetSlots)) {
     return {
       nextTeams: teams,
       violation: 'TOO_MANY_REALMS_IN_TEAM',
-    }
+    };
   }
 
   const nextTeams = teams.map((team) => {
-      if (team.id === sourceTeamId) {
-        return { ...team, slots: nextSourceSlots }
-      }
-      if (team.id === targetTeamId) {
-        return { ...team, slots: nextTargetSlots }
-      }
-      return team
-    })
+    if (team.id === sourceTeamId) {
+      return {...team, slots: nextSourceSlots};
+    }
+    if (team.id === targetTeamId) {
+      return {...team, slots: nextTargetSlots};
+    }
+    return team;
+  });
 
   if (!options?.allowDupes) {
-    const validation = validateBuilderTeams(nextTeams, { allowDupes: false })
+    const validation = validateBuilderTeams(nextTeams, {allowDupes: false});
     if (!validation.isValid) {
       return {
         nextTeams: teams,
         violation: 'INVALID_BUILD_RULES',
-      }
+      };
     }
   }
 
   return {
     nextTeams,
-  }
+  };
 }
 
-export function clearTeamSlotTransfer(teams: Team[], teamId: string, slotId: string): Team[] {
+export function clearTeamSlotTransfer(
+  teams: readonly Team[],
+  teamId: string,
+  slotId: string,
+): readonly Team[] {
   return teams.map((team) => {
     if (team.id !== teamId) {
-      return team
+      return team;
     }
     return {
       ...team,
       slots: clearSlotAssignment(team.slots, slotId).nextSlots,
-    }
-  })
+    };
+  });
 }

@@ -1,6 +1,10 @@
-import { z } from 'zod'
-import wheelsLite from '../data/wheels-lite.json'
-import { getMainstatByKey, type WheelMainstatKey, WHEEL_MAINSTAT_KEYS } from './mainstats'
+import wheelsLite from '@/data/wheels-lite.json';
+import {
+  getMainstatByKey,
+  WHEEL_MAINSTAT_KEYS,
+  type WheelMainstatKey,
+} from '@/domain/mainstats';
+import {z} from 'zod';
 
 const rawWheelsSchema = z.array(
   z.object({
@@ -12,33 +16,32 @@ const rawWheelsSchema = z.array(
     awakener: z.string(),
     mainstatKey: z.enum(WHEEL_MAINSTAT_KEYS),
   }),
-)
+);
 
-export type WheelRarity = 'SSR' | 'SR' | 'R'
-export type WheelRealm = 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA' | 'NEUTRAL'
+export type WheelRarity = 'SSR' | 'SR' | 'R';
+export type WheelRealm = 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA' | 'NEUTRAL';
 
-export type Wheel = {
-  id: string
-  assetId: string
-  name: string
-  rarity: WheelRarity
-  realm: WheelRealm
-  awakener: string
-  mainstatKey: WheelMainstatKey
+export interface Wheel {
+  readonly id: string;
+  readonly assetId: string;
+  readonly name: string;
+  readonly rarity: WheelRarity;
+  readonly realm: WheelRealm;
+  readonly awakener: string;
+  readonly mainstatKey: WheelMainstatKey;
 }
 
-const parsedWheels = rawWheelsSchema.parse(wheelsLite)
-const wheelById = new Map(parsedWheels.map((wheel) => [wheel.id, wheel]))
+const parsedWheels = rawWheelsSchema.parse(wheelsLite);
+const wheelById = new Map(parsedWheels.map((wheel) => [wheel.id, wheel]));
 
 export function getWheels(): Wheel[] {
-  return parsedWheels
+  return parsedWheels;
 }
 
 export function getWheelById(wheelId: string): Wheel | undefined {
-  return wheelById.get(wheelId)
+  return wheelById.get(wheelId);
 }
 
 export function getWheelMainstatLabel(wheel: Wheel): string {
-  return getMainstatByKey(wheel.mainstatKey)?.label ?? ''
+  return getMainstatByKey(wheel.mainstatKey)?.label ?? '';
 }
-

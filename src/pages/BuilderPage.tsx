@@ -1,53 +1,336 @@
-import { DndContext, DragOverlay } from '@dnd-kit/core'
-import { useEffect, useRef, useState } from 'react'
-import type { BuilderDraftPayload } from './builder/builder-persistence'
-import { awakenerByName } from './builder/constants'
-import { BuilderActiveTeamPanel } from './builder/BuilderActiveTeamPanel'
-import { BuilderSelectionPanel } from './builder/BuilderSelectionPanel'
-import { BuilderTeamsPanel } from './builder/BuilderTeamsPanel'
-import { BuilderImportExportDialogs } from './builder/BuilderImportExportDialogs'
-import { BuilderConfirmDialogs } from './builder/BuilderConfirmDialogs'
-import { PickerAwakenerGhost, PickerWheelGhost, TeamCardGhost, TeamPreviewGhost, TeamWheelGhost } from './builder/DragGhosts'
-import { Toast } from '../components/ui/Toast'
-import { useTimedToast } from '../components/ui/useTimedToast'
-import { PageToolkitBar } from '../components/ui/PageToolkitBar'
-import { Button } from '../components/ui/Button'
-import { TabbedContainer } from '../components/ui/TabbedContainer'
-import { FaDownload, FaRotateLeft, FaUpload, FaXmark } from 'react-icons/fa6'
-import { PICKER_DROP_ZONE_ID, parseTeamPreviewSlotDropZoneId } from './builder/dnd-ids'
+import {Button} from '@/components/ui/Button';
+import {PageToolkitBar} from '@/components/ui/PageToolkitBar';
+import {TabbedContainer} from '@/components/ui/TabbedContainer';
+import {Toast} from '@/components/ui/Toast';
+import {useTimedToast} from '@/components/ui/useTimedToast';
+import type {BuilderDraftPayload} from '@/pages/builder/builder-persistence';
+import {BuilderActiveTeamPanel} from '@/pages/builder/BuilderActiveTeamPanel';
+import {BuilderConfirmDialogs} from '@/pages/builder/BuilderConfirmDialogs';
+import {BuilderImportExportDialogs} from '@/pages/builder/BuilderImportExportDialogs';
+import {BuilderSelectionPanel} from '@/pages/builder/BuilderSelectionPanel';
+import {BuilderTeamsPanel} from '@/pages/builder/BuilderTeamsPanel';
+import {awakenerByName} from '@/pages/builder/constants';
 import {
-  type TeamStateViolationCode,
-} from './builder/team-state'
-import { useBuilderDnd } from './builder/useBuilderDnd'
-import { useBuilderDndCoordinator } from './builder/useBuilderDndCoordinator'
-import { useTransferConfirm } from './builder/useTransferConfirm'
-import { useBuilderViewModel } from './builder/useBuilderViewModel'
-import { useBuilderImportExport } from './builder/useBuilderImportExport'
-import { usePendingTransferDialog } from './builder/usePendingTransferDialog'
-import { usePendingDeleteDialog } from './builder/usePendingDeleteDialog'
-import { usePendingResetTeamDialog } from './builder/usePendingResetTeamDialog'
-import { useBuilderWheelActions } from './builder/useBuilderWheelActions'
-import { useBuilderCovenantActions } from './builder/useBuilderCovenantActions'
-import { useBuilderAwakenerActions } from './builder/useBuilderAwakenerActions'
-import { resolvePredictedDropHover } from './builder/predicted-drop-hover'
-import { clearTeamSlotTransfer, swapTeamSlotTransfer } from './builder/transfer-resolution'
-import { MAX_TEAMS, addTeam, applyTeamTemplate, reorderTeams, type TeamTemplateId } from './builder/team-collection'
-import type { PredictedDropHover } from './builder/types'
-import type { DragData } from './builder/types'
+  parseTeamPreviewSlotDropZoneId,
+  PICKER_DROP_ZONE_ID,
+} from '@/pages/builder/dnd-ids';
+import {
+  PickerAwakenerGhost,
+  PickerWheelGhost,
+  TeamCardGhost,
+  TeamPreviewGhost,
+  TeamWheelGhost,
+} from '@/pages/builder/DragGhosts';
+import {resolvePredictedDropHover} from '@/pages/builder/predicted-drop-hover';
+import {
+  addTeam,
+  applyTeamTemplate,
+  MAX_TEAMS,
+  reorderTeams,
+  type TeamTemplateId,
+} from '@/pages/builder/team-collection';
+import {type TeamStateViolationCode} from '@/pages/builder/team-state';
+import {
+  clearTeamSlotTransfer,
+  swapTeamSlotTransfer,
+} from '@/pages/builder/transfer-resolution';
+import type {
+  DragData,
+  PredictedDropHover,
+  Team,
+  TeamSlot,
+} from '@/pages/builder/types';
+import {useBuilderAwakenerActions} from '@/pages/builder/useBuilderAwakenerActions';
+import {useBuilderCovenantActions} from '@/pages/builder/useBuilderCovenantActions';
+import {useBuilderDnd} from '@/pages/builder/useBuilderDnd';
+import {useBuilderDndCoordinator} from '@/pages/builder/useBuilderDndCoordinator';
+import {useBuilderImportExport} from '@/pages/builder/useBuilderImportExport';
+import {useBuilderViewModel} from '@/pages/builder/useBuilderViewModel';
+import {useBuilderWheelActions} from '@/pages/builder/useBuilderWheelActions';
+import {usePendingDeleteDialog} from '@/pages/builder/usePendingDeleteDialog';
+import {usePendingResetTeamDialog} from '@/pages/builder/usePendingResetTeamDialog';
+import {usePendingTransferDialog} from '@/pages/builder/usePendingTransferDialog';
+import {useTransferConfirm} from '@/pages/builder/useTransferConfirm';
+import {DndContext, DragOverlay} from '@dnd-kit/core';
+import {useCallback, useEffect, useRef, useState} from 'react';
+import {FaDownload, FaRotateLeft, FaUpload, FaXmark} from 'react-icons/fa6';
+
+function useGlobalPointerDown(
+  quickLineupSession: unknown,
+  restoreQuickLineupFocus: () => void,
+  setActiveSelection: (val: null) => void,
+) {
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest('[data-picker-zone="true"]')) return;
+      if (target.closest('[data-card-remove]')) return;
+      if (target.closest('[data-selection-owner="true"]')) return;
+      if (quickLineupSession) {
+        restoreQuickLineupFocus();
+        return;
+      }
+      setActiveSelection(null);
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown, true);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown, true);
+    };
+  }, [quickLineupSession, restoreQuickLineupFocus, setActiveSelection]);
+}
+
+function useTeamEditSuppression() {
+  const suppressTeamEditRef = useRef(false);
+  const suppressTeamEditTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (suppressTeamEditTimeoutRef.current) {
+        window.clearTimeout(suppressTeamEditTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const clearTeamEditSuppressionSoon = useCallback(() => {
+    if (suppressTeamEditTimeoutRef.current) {
+      window.clearTimeout(suppressTeamEditTimeoutRef.current);
+    }
+    suppressTeamEditTimeoutRef.current = window.setTimeout(() => {
+      suppressTeamEditRef.current = false;
+      suppressTeamEditTimeoutRef.current = null;
+    }, 0);
+  }, []);
+
+  return {suppressTeamEditRef, clearTeamEditSuppressionSoon};
+}
+
+function useTeamPreviewDrag(teams: readonly Team[]) {
+  const [activeTeamPreviewSlotDrag, setActiveTeamPreviewSlotDrag] = useState<{
+    teamId: string;
+    slotId: string;
+  } | null>(null);
+  const [isTeamPreviewRemoveIntent, setIsTeamPreviewRemoveIntent] =
+    useState(false);
+
+  const activePreviewDraggedTeam = activeTeamPreviewSlotDrag
+    ? (teams.find((team) => team.id === activeTeamPreviewSlotDrag.teamId) ??
+      null)
+    : null;
+  const activePreviewDraggedSlot = activeTeamPreviewSlotDrag
+    ? activePreviewDraggedTeam?.slots.find(
+        (slot) => slot.slotId === activeTeamPreviewSlotDrag.slotId,
+      )
+    : undefined;
+
+  const clearPreviewSlotDragState = useCallback(() => {
+    setActiveTeamPreviewSlotDrag(null);
+    setIsTeamPreviewRemoveIntent(false);
+  }, []);
+
+  return {
+    activeTeamPreviewSlotDrag,
+    setActiveTeamPreviewSlotDrag,
+    isTeamPreviewRemoveIntent,
+    setIsTeamPreviewRemoveIntent,
+    activePreviewDraggedTeam,
+    activePreviewDraggedSlot,
+    clearPreviewSlotDragState,
+  };
+}
+
+interface BuilderToolkitBarProps {
+  readonly teamsCount: number;
+  readonly activeTeamId: string;
+  readonly canUndoReset: boolean;
+  readonly onImport: () => void;
+  readonly onExportAll: () => void;
+  readonly onExportInGame: (id: string) => void;
+  readonly onUndoReset: () => void;
+  readonly onResetBuilder: () => void;
+}
+
+function BuilderToolkitBar({
+  teamsCount,
+  activeTeamId,
+  canUndoReset,
+  onImport,
+  onExportAll,
+  onExportInGame,
+  onUndoReset,
+  onResetBuilder,
+}: BuilderToolkitBarProps) {
+  return (
+    <PageToolkitBar className='collection-toolkit-drawer' sticky>
+      <Button
+        className='px-2 py-1 text-[10px] tracking-wide uppercase'
+        onClick={onImport}
+        type='button'
+      >
+        <span className='inline-flex items-center gap-1'>
+          <FaUpload aria-hidden className='text-[9px]' />
+          <span>Import</span>
+        </span>
+      </Button>
+      <Button
+        className='px-2 py-1 text-[10px] tracking-wide uppercase'
+        disabled={teamsCount === 0}
+        onClick={onExportAll}
+        type='button'
+      >
+        <span className='inline-flex items-center gap-1'>
+          <FaDownload aria-hidden className='text-[9px]' />
+          <span>Export All</span>
+        </span>
+      </Button>
+      <Button
+        className='px-2 py-1 text-[10px] tracking-wide uppercase'
+        onClick={() => {
+          onExportInGame(activeTeamId);
+        }}
+        type='button'
+      >
+        <span className='inline-flex items-center gap-1'>
+          <FaDownload aria-hidden className='text-[9px]' />
+          <span>Export In-Game</span>
+        </span>
+      </Button>
+      <Button
+        className={`px-2 py-1 text-[10px] tracking-wide uppercase ${
+          canUndoReset
+            ? 'border-amber-300/65 bg-amber-500/15 text-amber-100 hover:border-amber-200/85'
+            : 'border-rose-300/70 bg-rose-500/14 text-rose-100 hover:border-rose-200/85'
+        }`}
+        onClick={canUndoReset ? onUndoReset : onResetBuilder}
+        type='button'
+      >
+        <span className='inline-flex items-center gap-1'>
+          {canUndoReset ? (
+            <FaRotateLeft aria-hidden className='text-[9px]' />
+          ) : (
+            <FaXmark aria-hidden className='text-[9px]' />
+          )}
+          <span>{canUndoReset ? 'Undo Reset' : 'Reset Builder'}</span>
+        </span>
+      </Button>
+    </PageToolkitBar>
+  );
+}
+
+interface BuilderDragOverlayWrapperProps {
+  readonly activeDrag: DragData | null;
+  readonly activePreviewDraggedSlot?: TeamSlot;
+  readonly activePreviewDraggedTeam?: Team | null;
+  readonly teamPreviewMode: string;
+  readonly ownedAwakenerLevelByName: Map<string, number | null>;
+  readonly ownedWheelLevelById: Map<string, number | null>;
+  readonly isTeamPreviewRemoveIntent: boolean;
+  readonly isRemoveIntent: boolean;
+  readonly slotById: Map<string, TeamSlot>;
+}
+
+function BuilderDragOverlayWrapper({
+  activeDrag,
+  activePreviewDraggedSlot,
+  activePreviewDraggedTeam,
+  teamPreviewMode,
+  ownedAwakenerLevelByName,
+  ownedWheelLevelById,
+  isTeamPreviewRemoveIntent,
+  isRemoveIntent,
+  slotById,
+}: BuilderDragOverlayWrapperProps) {
+  if (activePreviewDraggedSlot && activePreviewDraggedTeam) {
+    return (
+      <TeamPreviewGhost
+        mode={teamPreviewMode as 'compact' | 'expanded'}
+        ownedAwakenerLevelByName={ownedAwakenerLevelByName}
+        ownedWheelLevelById={ownedWheelLevelById}
+        removeIntent={isTeamPreviewRemoveIntent}
+        team={{
+          ...activePreviewDraggedTeam,
+          slots: [activePreviewDraggedSlot],
+        }}
+      />
+    );
+  }
+
+  if (!activeDrag) {
+    return null;
+  }
+
+  switch (activeDrag.kind) {
+    case 'picker-awakener':
+      return <PickerAwakenerGhost awakenerName={activeDrag.awakenerName} />;
+    case 'picker-wheel':
+      return <PickerWheelGhost wheelId={activeDrag.wheelId} />;
+    case 'picker-covenant':
+      return <PickerWheelGhost wheelId={activeDrag.covenantId} isCovenant />;
+    case 'team-slot': {
+      const slot = slotById.get(activeDrag.slotId);
+      const awakenerLevel = slot?.awakenerName
+        ? (ownedAwakenerLevelByName.get(slot.awakenerName) ?? null)
+        : null;
+      const w0 = slot?.wheels[0]
+        ? (ownedWheelLevelById.get(slot.wheels[0]) ?? null)
+        : null;
+      const w1 = slot?.wheels[1]
+        ? (ownedWheelLevelById.get(slot.wheels[1]) ?? null)
+        : null;
+
+      return (
+        <TeamCardGhost
+          removeIntent={isRemoveIntent}
+          slot={slot}
+          awakenerOwnedLevel={awakenerLevel}
+          wheelOwnedLevels={[w0, w1]}
+        />
+      );
+    }
+    case 'team-wheel':
+      return (
+        <TeamWheelGhost
+          removeIntent={isRemoveIntent}
+          wheelId={activeDrag.wheelId}
+          ownedLevel={ownedWheelLevelById.get(activeDrag.wheelId) ?? null}
+        />
+      );
+    case 'team-covenant':
+      return (
+        <TeamWheelGhost
+          removeIntent={isRemoveIntent}
+          wheelId={activeDrag.covenantId}
+          isCovenant
+        />
+      );
+    default:
+      return null;
+  }
+}
+
+// --- Main Component ---
 
 export function BuilderPage() {
-  const [predictedDropHover, setPredictedDropHover] = useState<PredictedDropHover>(null)
-  const [activeTeamPreviewSlotDrag, setActiveTeamPreviewSlotDrag] = useState<{ teamId: string; slotId: string } | null>(null)
-  const [isTeamPreviewRemoveIntent, setIsTeamPreviewRemoveIntent] = useState(false)
-  const [pendingResetBuilder, setPendingResetBuilder] = useState(false)
-  const [undoResetSnapshot, setUndoResetSnapshot] = useState<BuilderDraftPayload | null>(null)
-  const { toastEntries, showToast } = useTimedToast({ defaultDurationMs: 3200 })
-  const suppressTeamEditRef = useRef(false)
-  const suppressTeamEditTimeoutRef = useRef<number | null>(null)
-  const resetUndoTimeoutRef = useRef<number | null>(null)
-  const searchInputRef = useRef<HTMLInputElement | null>(null)
-  const { pendingTransfer, requestAwakenerTransfer, requestPosseTransfer, requestWheelTransfer, clearTransfer } =
-    useTransferConfirm()
+  const [predictedDropHover, setPredictedDropHover] =
+    useState<PredictedDropHover>(null);
+  const [pendingResetBuilder, setPendingResetBuilder] = useState(false);
+  const [undoResetSnapshot, setUndoResetSnapshot] =
+    useState<BuilderDraftPayload | null>(null);
+  const resetUndoTimeoutRef = useRef<number | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+
+  const {toastEntries, showToast} = useTimedToast({defaultDurationMs: 3200});
+  const {suppressTeamEditRef, clearTeamEditSuppressionSoon} =
+    useTeamEditSuppression();
+  const {
+    pendingTransfer,
+    requestAwakenerTransfer,
+    requestPosseTransfer,
+    requestWheelTransfer,
+    clearTransfer,
+  } = useTransferConfirm();
+
   const {
     displayUnowned,
     setDisplayUnowned,
@@ -127,59 +410,73 @@ export function BuilderPage() {
     restoreQuickLineupFocus,
     clearTeamWheel,
     clearTeamCovenant,
-  } = useBuilderViewModel({ searchInputRef })
+  } = useBuilderViewModel({searchInputRef});
 
   const {
-    clearPendingDelete,
-    requestDeleteTeam,
-    pendingDeleteDialog,
-  } = usePendingDeleteDialog({
-    teams,
-    setTeams,
-    effectiveActiveTeamId,
-    setActiveTeamId,
-    clearActiveSelection: () => setActiveSelection(null),
-  })
-  const {
-    clearPendingResetTeam,
-    requestResetTeam,
-    pendingResetTeamDialog,
-  } = usePendingResetTeamDialog({
-    teams,
-    setTeams,
-    effectiveActiveTeamId,
-    clearActiveSelection: () => setActiveSelection(null),
-  })
+    setActiveTeamPreviewSlotDrag,
+    isTeamPreviewRemoveIntent,
+    setIsTeamPreviewRemoveIntent,
+    activePreviewDraggedTeam,
+    activePreviewDraggedSlot,
+    clearPreviewSlotDragState,
+  } = useTeamPreviewDrag(teams);
+
+  useGlobalPointerDown(quickLineupSession, restoreQuickLineupFocus, () => {
+    setActiveSelection(null);
+  });
+
+  const {clearPendingDelete, requestDeleteTeam, pendingDeleteDialog} =
+    usePendingDeleteDialog({
+      teams,
+      setTeams,
+      effectiveActiveTeamId,
+      setActiveTeamId,
+      clearActiveSelection: () => {
+        setActiveSelection(null);
+      },
+    });
+
+  const {clearPendingResetTeam, requestResetTeam, pendingResetTeamDialog} =
+    usePendingResetTeamDialog({
+      teams,
+      setTeams,
+      effectiveActiveTeamId,
+      clearActiveSelection: () => {
+        setActiveSelection(null);
+      },
+    });
 
   function notifyViolation(violation: TeamStateViolationCode | undefined) {
     if (violation !== 'TOO_MANY_REALMS_IN_TEAM') {
       if (violation === 'INVALID_BUILD_RULES') {
-        showToast('Invalid move: this would break duplicate or support team rules.')
+        showToast(
+          'Invalid move: this would break duplicate or support team rules.',
+        );
       }
-      return
+      return;
     }
-    showToast('Invalid move: a team can only contain up to 2 realms.')
+    showToast('Invalid move: a team can only contain up to 2 realms.');
   }
 
-  const {
-    handleDropPickerAwakener,
-    handlePickerAwakenerClick,
-  } = useBuilderAwakenerActions({
-    allowDupes,
-    awakenerByName,
-    clearPendingDelete,
-    clearTransfer,
-    effectiveActiveTeamId,
-    notifyViolation,
-    requestAwakenerTransfer,
-    resolvedActiveSelection,
-    setActiveSelection,
-    setActiveTeamSlots,
-    teamSlots,
-    usedAwakenerByIdentityKey,
-    hasSupportAwakener,
-    onPickerAssignSuccess: quickLineupSession ? (nextSlots) => advanceQuickLineupStep(nextSlots) : undefined,
-  })
+  const {handleDropPickerAwakener, handlePickerAwakenerClick} =
+    useBuilderAwakenerActions({
+      allowDupes,
+      awakenerByName,
+      clearPendingDelete,
+      clearTransfer,
+      effectiveActiveTeamId,
+      notifyViolation,
+      requestAwakenerTransfer,
+      resolvedActiveSelection,
+      setActiveSelection,
+      setActiveTeamSlots,
+      teamSlots,
+      usedAwakenerByIdentityKey,
+      hasSupportAwakener,
+      onPickerAssignSuccess: quickLineupSession
+        ? advanceQuickLineupStep
+        : undefined,
+    });
 
   const {
     handleDropPickerWheel,
@@ -198,8 +495,10 @@ export function BuilderPage() {
     showToast,
     teamSlots,
     usedWheelByTeamOrder,
-    onPickerAssignSuccess: quickLineupSession ? (nextSlots) => advanceQuickLineupStep(nextSlots) : undefined,
-  })
+    onPickerAssignSuccess: quickLineupSession
+      ? advanceQuickLineupStep
+      : undefined,
+  });
 
   const {
     handleDropPickerCovenant,
@@ -214,132 +513,83 @@ export function BuilderPage() {
     setActiveTeamSlots,
     showToast,
     teamSlots,
-    onPickerAssignSuccess: quickLineupSession ? (nextSlots) => advanceQuickLineupStep(nextSlots) : undefined,
-  })
-
-  useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
-      const target = event.target as HTMLElement | null
-      if (!target) {
-        return
-      }
-      if (target.closest('[data-picker-zone="true"]')) {
-        return
-      }
-      if (target.closest('[data-card-remove]')) {
-        return
-      }
-      if (target.closest('[data-selection-owner="true"]')) {
-        return
-      }
-      if (quickLineupSession) {
-        restoreQuickLineupFocus()
-        return
-      }
-      setActiveSelection(null)
-    }
-
-    document.addEventListener('pointerdown', handlePointerDown, true)
-    return () => {
-      document.removeEventListener('pointerdown', handlePointerDown, true)
-    }
-  }, [quickLineupSession, restoreQuickLineupFocus, setActiveSelection])
+    onPickerAssignSuccess: quickLineupSession
+      ? advanceQuickLineupStep
+      : undefined,
+  });
 
   useEffect(() => {
     return () => {
-      if (suppressTeamEditTimeoutRef.current) {
-        window.clearTimeout(suppressTeamEditTimeoutRef.current)
-      }
-      if (resetUndoTimeoutRef.current) {
-        window.clearTimeout(resetUndoTimeoutRef.current)
-      }
-    }
-  }, [])
+      if (resetUndoTimeoutRef.current)
+        window.clearTimeout(resetUndoTimeoutRef.current);
+    };
+  }, []);
 
   function requestResetBuilder() {
-    clearPendingDelete()
-    clearPendingResetTeam()
-    clearTransfer()
-    cancelTeamRename()
-    setPendingResetBuilder(true)
+    clearPendingDelete();
+    clearPendingResetTeam();
+    clearTransfer();
+    cancelTeamRename();
+    setPendingResetBuilder(true);
   }
 
   function cancelResetBuilder() {
-    setPendingResetBuilder(false)
+    setPendingResetBuilder(false);
   }
 
   function confirmResetBuilder() {
     const snapshot: BuilderDraftPayload = {
       teams,
       activeTeamId: effectiveActiveTeamId,
-    }
+    };
+    resetBuilderDraft();
+    setActiveSelection(null);
+    setPendingResetBuilder(false);
+    setUndoResetSnapshot(snapshot);
+    showToast('Builder reset. Undo is available for 15 seconds.');
 
-    resetBuilderDraft()
-    setActiveSelection(null)
-    setPendingResetBuilder(false)
-    setUndoResetSnapshot(snapshot)
-    showToast('Builder reset. Undo is available for 15 seconds.')
-
-    if (resetUndoTimeoutRef.current) {
-      window.clearTimeout(resetUndoTimeoutRef.current)
-    }
+    if (resetUndoTimeoutRef.current)
+      window.clearTimeout(resetUndoTimeoutRef.current);
     resetUndoTimeoutRef.current = window.setTimeout(() => {
-      setUndoResetSnapshot(null)
-      resetUndoTimeoutRef.current = null
-    }, 15_000)
+      setUndoResetSnapshot(null);
+      resetUndoTimeoutRef.current = null;
+    }, 15_000);
   }
 
   function undoResetBuilder() {
-    if (!undoResetSnapshot) {
-      return
-    }
-
-    replaceBuilderDraft(undoResetSnapshot)
-    setActiveSelection(null)
-    setUndoResetSnapshot(null)
-    showToast('Builder reset has been undone.')
+    if (!undoResetSnapshot) return;
+    replaceBuilderDraft(undoResetSnapshot);
+    setActiveSelection(null);
+    setUndoResetSnapshot(null);
+    showToast('Builder reset has been undone.');
 
     if (resetUndoTimeoutRef.current) {
-      window.clearTimeout(resetUndoTimeoutRef.current)
-      resetUndoTimeoutRef.current = null
+      window.clearTimeout(resetUndoTimeoutRef.current);
+      resetUndoTimeoutRef.current = null;
     }
   }
 
-  const { activeDrag, isRemoveIntent, sensors, handleDragCancel, handleDragEnd, handleDragOver, handleDragStart } = useBuilderDnd({
-    onDropPickerAwakener: (awakenerName, targetSlotId) => {
-      handleDropPickerAwakener(awakenerName, targetSlotId)
-    },
-    onDropPickerWheel: (wheelId, targetSlotId, targetWheelIndex) => {
-      handleDropPickerWheel(wheelId, targetSlotId, targetWheelIndex)
-    },
-    onDropPickerCovenant: (covenantId, targetSlotId) => {
-      handleDropPickerCovenant(covenantId, targetSlotId)
-    },
-    onDropTeamSlot: (sourceSlotId, targetSlotId) => {
-      swapActiveTeamSlots(sourceSlotId, targetSlotId)
-    },
-    onDropTeamSlotToPicker: (sourceSlotId) => {
-      clearTeamSlot(sourceSlotId)
-    },
-    onDropTeamWheel: (sourceSlotId, sourceWheelIndex, targetSlotId, targetWheelIndex) => {
-      handleDropTeamWheel(sourceSlotId, sourceWheelIndex, targetSlotId, targetWheelIndex)
-    },
-    onDropTeamWheelToSlot: (sourceSlotId, sourceWheelIndex, targetSlotId) => {
-      handleDropTeamWheelToSlot(sourceSlotId, sourceWheelIndex, targetSlotId)
-    },
-    onDropTeamWheelToPicker: (sourceSlotId, sourceWheelIndex) => {
-      clearTeamWheel(sourceSlotId, sourceWheelIndex)
-    },
-    onDropTeamCovenant: (sourceSlotId, targetSlotId) => {
-      handleDropTeamCovenant(sourceSlotId, targetSlotId)
-    },
-    onDropTeamCovenantToSlot: (sourceSlotId, targetSlotId) => {
-      handleDropTeamCovenantToSlot(sourceSlotId, targetSlotId)
-    },
-    onDropTeamCovenantToPicker: (sourceSlotId) => {
-      clearTeamCovenant(sourceSlotId)
-    },
-  })
+  const {
+    activeDrag,
+    isRemoveIntent,
+    sensors,
+    handleDragCancel,
+    handleDragEnd,
+    handleDragOver,
+    handleDragStart,
+  } = useBuilderDnd({
+    onDropPickerAwakener: handleDropPickerAwakener,
+    onDropPickerWheel: handleDropPickerWheel,
+    onDropPickerCovenant: handleDropPickerCovenant,
+    onDropTeamSlot: swapActiveTeamSlots,
+    onDropTeamSlotToPicker: clearTeamSlot,
+    onDropTeamWheel: handleDropTeamWheel,
+    onDropTeamWheelToSlot: handleDropTeamWheelToSlot,
+    onDropTeamWheelToPicker: clearTeamWheel,
+    onDropTeamCovenant: handleDropTeamCovenant,
+    onDropTeamCovenantToSlot: handleDropTeamCovenantToSlot,
+    onDropTeamCovenantToPicker: clearTeamCovenant,
+  });
 
   const {
     handleDragCancel: handleCoordinatedDragCancel,
@@ -348,40 +598,47 @@ export function BuilderPage() {
     handleDragStart: handleCoordinatedDragStart,
   } = useBuilderDndCoordinator({
     onTeamRowDragStart: () => {
-      clearPendingDelete()
-      clearPendingResetTeam()
-      clearTransfer()
-      cancelTeamRename()
+      clearPendingDelete();
+      clearPendingResetTeam();
+      clearTransfer();
+      cancelTeamRename();
     },
-    onTeamRowDragEnd: () => {},
-    onTeamRowDragCancel: () => {},
+    onTeamRowDragEnd: () => {
+      /* noop */
+    },
+    onTeamRowDragCancel: () => {
+      /* noop */
+    },
     onTeamPreviewSlotDragStart: (teamId, slotId) => {
-      setActiveTeamPreviewSlotDrag({ teamId, slotId })
-      setIsTeamPreviewRemoveIntent(false)
-      clearPendingDelete()
-      clearPendingResetTeam()
-      clearTransfer()
-      cancelTeamRename()
+      setActiveTeamPreviewSlotDrag({teamId, slotId});
+      setIsTeamPreviewRemoveIntent(false);
+      clearPendingDelete();
+      clearPendingResetTeam();
+      clearTransfer();
+      cancelTeamRename();
     },
     onTeamPreviewSlotDragOver: (overId) => {
-      setIsTeamPreviewRemoveIntent(overId === PICKER_DROP_ZONE_ID)
+      setIsTeamPreviewRemoveIntent(overId === PICKER_DROP_ZONE_ID);
     },
     onTeamPreviewSlotDragEnd: (sourceTeamId, sourceSlotId, overId) => {
       if (!sourceTeamId || !sourceSlotId) {
-        clearPreviewSlotDragState()
-        return
+        clearPreviewSlotDragState();
+        return;
       }
-
       if (overId === PICKER_DROP_ZONE_ID) {
-        setTeams((prev) => clearTeamSlotTransfer(prev, sourceTeamId, sourceSlotId))
-        clearPreviewSlotDragState()
-        return
+        setTeams((prev) =>
+          clearTeamSlotTransfer(prev, sourceTeamId, sourceSlotId),
+        );
+        clearPreviewSlotDragState();
+        return;
       }
 
-      const previewTarget = overId ? parseTeamPreviewSlotDropZoneId(overId) : null
+      const previewTarget = overId
+        ? parseTeamPreviewSlotDropZoneId(overId)
+        : null;
       if (!previewTarget) {
-        clearPreviewSlotDragState()
-        return
+        clearPreviewSlotDragState();
+        return;
       }
 
       setTeams((prev) => {
@@ -391,24 +648,22 @@ export function BuilderPage() {
           sourceSlotId,
           previewTarget.teamId,
           previewTarget.slotId,
-          { allowDupes },
-        )
-        if (result.violation) {
-          notifyViolation(result.violation)
-        }
-        return result.nextTeams
-      })
-      clearPreviewSlotDragState()
+          {allowDupes},
+        );
+        if (result.violation) notifyViolation(result.violation);
+        return result.nextTeams;
+      });
+      clearPreviewSlotDragState();
     },
     onTeamPreviewSlotDragCancel: clearPreviewSlotDragState,
     onTeamRowReorder: (sourceTeamId, targetTeamId) => {
-      setTeams((prev) => reorderTeams(prev, sourceTeamId, targetTeamId))
+      setTeams((prev) => reorderTeams(prev, sourceTeamId, targetTeamId));
     },
     onDragStart: handleDragStart,
     onDragOver: handleDragOver,
     onDragEnd: handleDragEnd,
     onDragCancel: handleDragCancel,
-  })
+  });
 
   const {
     isImportDialogOpen,
@@ -440,74 +695,153 @@ export function BuilderPage() {
     allowDupes,
     setAllowDupes,
     setActiveTeamId,
-    setActiveSelection: () => setActiveSelection(null),
+    setActiveSelection: () => {
+      setActiveSelection(null);
+    },
     clearTransfer,
     clearPendingDelete,
     showToast,
-  })
+  });
 
-  const activePreviewDraggedTeam = activeTeamPreviewSlotDrag
-    ? teams.find((team) => team.id === activeTeamPreviewSlotDrag.teamId) ?? null
-    : null
-  const activePreviewDraggedSlot = activeTeamPreviewSlotDrag
-    ? activePreviewDraggedTeam?.slots.find((slot) => slot.slotId === activeTeamPreviewSlotDrag.slotId)
-    : undefined
+  const handleSetActivePosse = useCallback(
+    (posseId: string | undefined) => {
+      clearPendingDelete();
+      clearTransfer();
+      if (!posseId) {
+        updateActiveTeam((team) => ({...team, posseId: undefined}));
+        clearTransfer();
+        if (quickLineupSession?.currentStep.kind === 'posse')
+          advanceQuickLineupStep();
+        return;
+      }
+
+      const usedByTeamOrder = allowDupes
+        ? undefined
+        : usedPosseByTeamOrder.get(posseId);
+      const usedByTeam =
+        usedByTeamOrder === undefined ? undefined : teams[usedByTeamOrder];
+      const isUsedByOtherTeam =
+        usedByTeam && usedByTeam.id !== effectiveActiveTeamId;
+
+      if (isUsedByOtherTeam) {
+        const posse = pickerPosses.find((entry) => entry.id === posseId);
+        requestPosseTransfer({
+          posseId,
+          posseName: posse?.name ?? 'Posse',
+          fromTeamId: usedByTeam.id,
+          toTeamId: effectiveActiveTeamId,
+        });
+        return;
+      }
+
+      updateActiveTeam((team) => ({...team, posseId}));
+      clearTransfer();
+      if (quickLineupSession?.currentStep.kind === 'posse')
+        advanceQuickLineupStep();
+    },
+    [
+      clearPendingDelete,
+      clearTransfer,
+      updateActiveTeam,
+      quickLineupSession,
+      advanceQuickLineupStep,
+      allowDupes,
+      usedPosseByTeamOrder,
+      teams,
+      effectiveActiveTeamId,
+      pickerPosses,
+      requestPosseTransfer,
+    ],
+  );
+
+  const handleTabChange = useCallback(
+    (teamId: string) => {
+      if (suppressTeamEditRef.current) return;
+      clearPendingDelete();
+      clearTransfer();
+      cancelTeamRename();
+      setActiveTeamId(teamId);
+      setActiveSelection(null);
+    },
+    [
+      clearPendingDelete,
+      clearTransfer,
+      cancelTeamRename,
+      setActiveTeamId,
+      setActiveSelection,
+      suppressTeamEditRef,
+    ],
+  );
+
+  const handleTabClose = useCallback(
+    (teamId: string) => {
+      const team = teams.find((entry) => entry.id === teamId);
+      if (!team) return;
+      clearTransfer();
+      cancelTeamRename();
+      requestDeleteTeam(team.id, team.name);
+    },
+    [teams, clearTransfer, cancelTeamRename, requestDeleteTeam],
+  );
+
+  const handleAppTeamTab = useCallback(() => {
+    clearPendingDelete();
+    clearPendingResetTeam();
+    clearTransfer();
+    cancelTeamRename();
+    const result = addTeam(teams);
+    setTeams(result.nextTeams);
+  }, [
+    clearPendingDelete,
+    clearPendingResetTeam,
+    clearTransfer,
+    cancelTeamRename,
+    teams,
+    setTeams,
+  ]);
 
   const pendingTransferDialog = usePendingTransferDialog({
     pendingTransfer,
     teams,
     setTeams,
     clearTransfer,
-  })
+  });
 
-  function clearPreviewSlotDragState() {
-    setActiveTeamPreviewSlotDrag(null)
-    setIsTeamPreviewRemoveIntent(false)
+  function handleDndDragStart(
+    event: Parameters<typeof handleCoordinatedDragStart>[0],
+  ) {
+    suppressTeamEditRef.current = true;
+    setPredictedDropHover(null);
+    handleCoordinatedDragStart(event);
   }
 
-  function clearTeamEditSuppressionSoon() {
-    if (suppressTeamEditTimeoutRef.current) {
-      window.clearTimeout(suppressTeamEditTimeoutRef.current)
-    }
-    suppressTeamEditTimeoutRef.current = window.setTimeout(() => {
-      suppressTeamEditRef.current = false
-      suppressTeamEditTimeoutRef.current = null
-    }, 0)
+  function handleDndDragOver(
+    event: Parameters<typeof handleCoordinatedDragOver>[0],
+  ) {
+    const overId =
+      typeof event.over?.id === 'string' ? event.over.id : undefined;
+    const dragData = event.active.data.current as DragData | undefined;
+    setPredictedDropHover(
+      resolvePredictedDropHover(dragData, overId, slotById),
+    );
+    handleCoordinatedDragOver(event);
   }
 
-  function handleDndDragStart(event: Parameters<typeof handleCoordinatedDragStart>[0]) {
-    suppressTeamEditRef.current = true
-    setPredictedDropHover(null)
-    handleCoordinatedDragStart(event)
-  }
-
-  function handleDndDragOver(event: Parameters<typeof handleCoordinatedDragOver>[0]) {
-    const overId = typeof event.over?.id === 'string' ? event.over.id : undefined
-    const dragData = event.active.data.current as DragData | undefined
-    setPredictedDropHover(resolvePredictedDropHover(dragData, overId, slotById))
-    handleCoordinatedDragOver(event)
-  }
-
-  function handleDndDragEnd(event: Parameters<typeof handleCoordinatedDragEnd>[0]) {
-    setPredictedDropHover(null)
-    handleCoordinatedDragEnd(event)
-    clearTeamEditSuppressionSoon()
+  function handleDndDragEnd(
+    event: Parameters<typeof handleCoordinatedDragEnd>[0],
+  ) {
+    setPredictedDropHover(null);
+    handleCoordinatedDragEnd(event);
+    clearTeamEditSuppressionSoon();
   }
 
   function handleDndDragCancel() {
-    setPredictedDropHover(null)
-    handleCoordinatedDragCancel()
-    clearTeamEditSuppressionSoon()
+    setPredictedDropHover(null);
+    handleCoordinatedDragCancel();
+    clearTeamEditSuppressionSoon();
   }
 
-  const activeDraggedSlot = activeDrag?.kind === 'team-slot' ? slotById.get(activeDrag.slotId) : undefined
-  const activeDraggedAwakenerOwnedLevel =
-    activeDraggedSlot?.awakenerName ? (ownedAwakenerLevelByName.get(activeDraggedSlot.awakenerName) ?? null) : null
-  const activeDraggedWheelOwnedLevels: [number | null, number | null] = [
-    activeDraggedSlot?.wheels[0] ? (ownedWheelLevelById.get(activeDraggedSlot.wheels[0]) ?? null) : null,
-    activeDraggedSlot?.wheels[1] ? (ownedWheelLevelById.get(activeDraggedSlot.wheels[1]) ?? null) : null,
-  ]
-  const canUndoReset = Boolean(undoResetSnapshot)
+  const canUndoReset = Boolean(undoResetSnapshot);
 
   return (
     <DndContext
@@ -517,151 +851,87 @@ export function BuilderPage() {
       onDragStart={handleDndDragStart}
       sensors={sensors}
     >
-      <section className="space-y-4">
-        <PageToolkitBar className="collection-toolkit-drawer" sticky>
-          <Button
-            className="px-2 py-1 text-[10px] uppercase tracking-wide"
-            onClick={() => {
-              clearPendingDelete()
-              clearTransfer()
-              cancelTeamRename()
-              openImportDialog()
-            }}
-            type="button"
-          >
-            <span className="inline-flex items-center gap-1">
-              <FaUpload aria-hidden className="text-[9px]" />
-              <span>Import</span>
-            </span>
-          </Button>
-          <Button
-            className="px-2 py-1 text-[10px] uppercase tracking-wide"
-            disabled={teams.length === 0}
-            onClick={() => {
-              openExportAllDialog()
-            }}
-            type="button"
-          >
-            <span className="inline-flex items-center gap-1">
-              <FaDownload aria-hidden className="text-[9px]" />
-              <span>Export All</span>
-            </span>
-          </Button>
-          <Button
-            className="px-2 py-1 text-[10px] uppercase tracking-wide"
-            disabled={!activeTeam}
-            onClick={() => {
-              if (!activeTeam) {
-                return
-              }
-              openTeamIngameExportDialog(activeTeam.id)
-            }}
-            type="button"
-          >
-            <span className="inline-flex items-center gap-1">
-              <FaDownload aria-hidden className="text-[9px]" />
-              <span>Export In-Game</span>
-            </span>
-          </Button>
-          <Button
-            className={`px-2 py-1 text-[10px] uppercase tracking-wide ${
-              canUndoReset
-                ? 'border-amber-300/65 bg-amber-500/15 text-amber-100 hover:border-amber-200/85'
-                : 'border-rose-300/70 bg-rose-500/14 text-rose-100 hover:border-rose-200/85'
-            }`}
-            onClick={canUndoReset ? undoResetBuilder : requestResetBuilder}
-            type="button"
-          >
-            <span className="inline-flex items-center gap-1">
-              {canUndoReset ? (
-                <FaRotateLeft aria-hidden className="text-[9px]" />
-              ) : (
-                <FaXmark aria-hidden className="text-[9px]" />
-              )}
-              <span>{canUndoReset ? 'Undo Reset' : 'Reset Builder'}</span>
-            </span>
-          </Button>
-        </PageToolkitBar>
+      <section className='space-y-4'>
+        <BuilderToolkitBar
+          activeTeamId={activeTeam.id}
+          canUndoReset={canUndoReset}
+          onExportAll={openExportAllDialog}
+          onExportInGame={openTeamIngameExportDialog}
+          onImport={() => {
+            clearPendingDelete();
+            clearTransfer();
+            cancelTeamRename();
+            openImportDialog();
+          }}
+          onResetBuilder={requestResetBuilder}
+          onUndoReset={undoResetBuilder}
+          teamsCount={teams.length}
+        />
 
-        <div className="grid items-start gap-4 lg:grid-cols-[2fr_1fr]">
-          <div className="min-w-0 space-y-3">
+        <div className='grid items-start gap-4 lg:grid-cols-[2fr_1fr]'>
+          <div className='min-w-0 space-y-3'>
             <TabbedContainer
               activeTabId={effectiveActiveTeamId}
-              bodyClassName="p-0"
+              bodyClassName='p-0'
               canCloseTab={() => teams.length > 1}
-              className="overflow-hidden"
+              className='overflow-hidden'
               getTabCloseAriaLabel={(tab) => `Close ${tab.label}`}
-              leftEarMaxWidth="100%"
+              leftEarMaxWidth='100%'
               leftTrailingAction={
                 teams.length < MAX_TEAMS ? (
                   <button
-                    aria-label="Add team tab"
-                    className="tabbed-container-tab tabbed-container-tab-inactive h-full px-3 text-[11px] tracking-wide text-slate-300 transition-colors"
-                    onClick={() => {
-                      clearPendingDelete()
-                      clearPendingResetTeam()
-                      clearTransfer()
-                      cancelTeamRename()
-                      const result = addTeam(teams)
-                      setTeams(result.nextTeams)
-                    }}
-                    type="button"
+                    aria-label='Add team tab'
+                    className='tabbed-container-tab tabbed-container-tab-inactive h-full px-3 text-[11px] tracking-wide text-slate-300 transition-colors'
+                    onClick={handleAppTeamTab}
+                    type='button'
                   >
                     +
                   </button>
                 ) : null
               }
-              onTabChange={(teamId) => {
-                if (suppressTeamEditRef.current) {
-                  return
-                }
-                clearPendingDelete()
-                clearTransfer()
-                cancelTeamRename()
-                setActiveTeamId(teamId)
-                setActiveSelection(null)
-              }}
-              onTabClose={(teamId) => {
-                const team = teams.find((entry) => entry.id === teamId)
-                if (!team) {
-                  return
-                }
-                clearTransfer()
-                cancelTeamRename()
-                requestDeleteTeam(team.id, team.name)
-              }}
-              tone="amber"
-              tabSizing="content"
-              tabs={teams.map((team) => ({ id: team.id, label: team.name }))}
+              onTabChange={handleTabChange}
+              onTabClose={handleTabClose}
+              tabSizing='content'
+              tabs={teams.map((team) => ({id: team.id, label: team.name}))}
+              tone='amber'
             >
               <BuilderActiveTeamPanel
-                activeTeamId={effectiveActiveTeamId}
-                activeTeamName={activeTeam?.name ?? 'Team'}
-                isEditingTeamName={editingTeamId === effectiveActiveTeamId && editingTeamSurface === 'header'}
-                editingTeamName={editingTeamName}
+                activeDragKind={activeDrag?.kind ?? null}
                 activePosseAsset={activePosseAsset}
                 activePosseName={activePosse?.name}
-                isActivePosseOwned={activePosseId ? (ownedPosseLevelById.get(activePosseId) ?? null) !== null : true}
-                quickLineupSession={quickLineupSession}
-                activeDragKind={activeDrag?.kind ?? null}
+                activeTeamId={effectiveActiveTeamId}
+                activeTeamName={activeTeam.name}
+                awakenerLevelByName={awakenerLevelByName}
+                editingTeamName={editingTeamName}
+                isActivePosseOwned={
+                  activePosseId
+                    ? (ownedPosseLevelById.get(activePosseId) ?? null) !== null
+                    : true
+                }
+                isEditingTeamName={
+                  editingTeamId === effectiveActiveTeamId &&
+                  editingTeamSurface === 'header'
+                }
                 onBackQuickLineupStep={goBackQuickLineupStep}
                 onBeginTeamRename={beginTeamRename}
                 onCancelQuickLineup={cancelQuickLineup}
-                onCommitTeamRename={commitTeamRename}
                 onCancelTeamRename={cancelTeamRename}
+                onCardClick={handleCardClick}
+                onCommitTeamRename={commitTeamRename}
+                onCovenantSlotClick={handleCovenantSlotClick}
                 onEditingTeamNameChange={setEditingTeamName}
                 onFinishQuickLineup={finishQuickLineup}
-                onOpenPossePicker={() => setPickerTab('posses')}
-                onStartQuickLineup={startQuickLineup}
-                onCardClick={handleCardClick}
+                onOpenPossePicker={() => {
+                  setPickerTab('posses');
+                }}
                 onRemoveActiveSelection={handleRemoveActiveSelection}
-                onCovenantSlotClick={handleCovenantSlotClick}
                 onSkipQuickLineupStep={skipQuickLineupStep}
+                onStartQuickLineup={startQuickLineup}
                 onWheelSlotClick={handleWheelSlotClick}
-                awakenerLevelByName={awakenerLevelByName}
                 ownedAwakenerLevelByName={ownedAwakenerLevelByName}
                 ownedWheelLevelById={ownedWheelLevelById}
                 predictedDropHover={predictedDropHover}
+                quickLineupSession={quickLineupSession}
                 resolvedActiveSelection={resolvedActiveSelection}
                 teamRealms={teamRealmSet}
                 teamSlots={teamSlots}
@@ -674,57 +944,59 @@ export function BuilderPage() {
               editingTeamName={editingTeamName}
               editingTeamSurface={editingTeamSurface}
               onAddTeam={() => {
-                const result = addTeam(teams)
-                setTeams(result.nextTeams)
+                setTeams(addTeam(teams).nextTeams);
               }}
               onApplyTeamTemplate={(templateId: TeamTemplateId) => {
-                clearPendingDelete()
-                clearPendingResetTeam()
-                clearTransfer()
-                cancelTeamRename()
-                const result = applyTeamTemplate(teams, templateId)
-                setTeams(result.nextTeams)
-                const templateLabel = templateId === 'DTIDE_10' ? 'D-Tide (10)' : 'D-Tide (5)'
-                if (result.createdCount === 0 && result.renamedCount === 0 && result.removedCount === 0) {
-                  showToast(`${templateLabel} already matches current team layout.`)
-                  return
+                clearPendingDelete();
+                clearPendingResetTeam();
+                clearTransfer();
+                cancelTeamRename();
+                const result = applyTeamTemplate(teams, templateId);
+                setTeams(result.nextTeams);
+                const templateLabel =
+                  templateId === 'DTIDE_10' ? 'D-Tide (10)' : 'D-Tide (5)';
+                if (
+                  result.createdCount === 0 &&
+                  result.renamedCount === 0 &&
+                  result.removedCount === 0
+                ) {
+                  showToast(
+                    `${templateLabel} already matches current team layout.`,
+                  );
+                  return;
                 }
                 showToast(
-                  `Applied ${templateLabel}: renamed ${result.renamedCount}, created ${result.createdCount}, removed ${result.removedCount}.`,
-                )
-              }}
-              onExportTeam={(teamId) => {
-                openTeamExportDialog(teamId)
+                  `Applied ${templateLabel}: renamed ${String(result.renamedCount)}, created ${String(result.createdCount)}, removed ${String(result.removedCount)}.`,
+                );
               }}
               onBeginTeamRename={(teamId, currentName, surface) => {
-                clearPendingDelete()
-                clearTransfer()
-                beginTeamRename(teamId, currentName, surface)
+                clearPendingDelete();
+                clearTransfer();
+                beginTeamRename(teamId, currentName, surface);
               }}
               onCancelTeamRename={cancelTeamRename}
               onCommitTeamRename={commitTeamRename}
               onDeleteTeam={(teamId, teamName) => {
-                clearTransfer()
-                cancelTeamRename()
-                requestDeleteTeam(teamId, teamName)
-              }}
-              onResetTeam={(teamId, teamName) => {
-                clearTransfer()
-                cancelTeamRename()
-                requestResetTeam(teamId, teamName)
+                clearTransfer();
+                cancelTeamRename();
+                requestDeleteTeam(teamId, teamName);
               }}
               onEditTeam={(teamId) => {
-                if (suppressTeamEditRef.current) {
-                  return
-                }
-                clearPendingDelete()
-                clearPendingResetTeam()
-                clearTransfer()
-                cancelTeamRename()
-                setActiveTeamId(teamId)
-                setActiveSelection(null)
+                if (suppressTeamEditRef.current) return;
+                clearPendingDelete();
+                clearPendingResetTeam();
+                clearTransfer();
+                cancelTeamRename();
+                setActiveTeamId(teamId);
+                setActiveSelection(null);
               }}
               onEditingTeamNameChange={setEditingTeamName}
+              onExportTeam={openTeamExportDialog}
+              onResetTeam={(teamId, teamName) => {
+                clearTransfer();
+                cancelTeamRename();
+                requestResetTeam(teamId, teamName);
+              }}
               onTeamPreviewModeChange={setTeamPreviewMode}
               ownedAwakenerLevelByName={ownedAwakenerLevelByName}
               ownedPosseLevelById={ownedPosseLevelById}
@@ -738,125 +1010,66 @@ export function BuilderPage() {
           <BuilderSelectionPanel
             activePosseId={activePosseId}
             activeSearchQuery={activeSearchQuery}
+            allowDupes={allowDupes}
             awakenerFilter={awakenerFilter}
             awakenerSortDirection={awakenerSortDirection}
             awakenerSortGroupByRealm={awakenerSortGroupByRealm}
             awakenerSortKey={awakenerSortKey}
-            allowDupes={allowDupes}
             displayUnowned={displayUnowned}
             effectiveActiveTeamId={effectiveActiveTeamId}
             filteredAwakeners={filteredAwakeners}
+            filteredCovenants={filteredCovenants}
             filteredPosses={filteredPosses}
-            ownedAwakenerLevelByName={ownedAwakenerLevelByName}
-            ownedPosseLevelById={ownedPosseLevelById}
-            ownedWheelLevelById={ownedWheelLevelById}
-            onDisplayUnownedChange={setDisplayUnowned}
-            onAwakenerClick={(awakenerName) => {
-              handlePickerAwakenerClick(awakenerName)
-            }}
+            filteredWheels={filteredWheels}
+            onAllowDupesChange={setAllowDupes}
+            onAwakenerClick={handlePickerAwakenerClick}
             onAwakenerFilterChange={setAwakenerFilter}
             onAwakenerSortDirectionToggle={toggleAwakenerSortDirection}
             onAwakenerSortGroupByRealmChange={setAwakenerSortGroupByRealm}
             onAwakenerSortKeyChange={setAwakenerSortKey}
-            onAllowDupesChange={setAllowDupes}
+            onDisplayUnownedChange={setDisplayUnowned}
             onPickerTabChange={setPickerTab}
             onPosseFilterChange={setPosseFilter}
-            onWheelRarityFilterChange={setWheelRarityFilter}
-            onWheelMainstatFilterChange={setWheelMainstatFilter}
-            onSearchChange={(nextValue) =>
+            onSearchChange={(nextValue) => {
               setPickerSearchByTab((prev) => ({
                 ...prev,
                 [pickerTab]: nextValue,
-              }))
-            }
-            onSetActivePosse={(posseId) => {
-              clearPendingDelete()
-              clearTransfer()
-              if (!posseId) {
-                updateActiveTeam((team) => ({ ...team, posseId: undefined }))
-                clearTransfer()
-                if (quickLineupSession?.currentStep.kind === 'posse') {
-                  advanceQuickLineupStep()
-                }
-                return
-              }
-
-              const usedByTeamOrder = allowDupes ? undefined : usedPosseByTeamOrder.get(posseId)
-              const usedByTeam = usedByTeamOrder === undefined ? undefined : teams[usedByTeamOrder]
-              const isUsedByOtherTeam = usedByTeam && usedByTeam.id !== effectiveActiveTeamId
-              if (isUsedByOtherTeam) {
-                const posse = pickerPosses.find((entry) => entry.id === posseId)
-                requestPosseTransfer({
-                  posseId,
-                  posseName: posse?.name ?? 'Posse',
-                  fromTeamId: usedByTeam.id,
-                  toTeamId: effectiveActiveTeamId,
-                })
-                return
-              }
-
-              updateActiveTeam((team) => ({ ...team, posseId }))
-              clearTransfer()
-              if (quickLineupSession?.currentStep.kind === 'posse') {
-                advanceQuickLineupStep()
-              }
+              }));
             }}
-            onSetActiveWheel={(wheelId) => {
-              handlePickerWheelClick(wheelId)
-            }}
-            onSetActiveCovenant={(covenantId) => {
-              handlePickerCovenantClick(covenantId)
-            }}
+            onSetActiveCovenant={handlePickerCovenantClick}
+            onSetActivePosse={handleSetActivePosse}
+            onSetActiveWheel={handlePickerWheelClick}
+            onWheelMainstatFilterChange={setWheelMainstatFilter}
+            onWheelRarityFilterChange={setWheelRarityFilter}
+            ownedAwakenerLevelByName={ownedAwakenerLevelByName}
+            ownedPosseLevelById={ownedPosseLevelById}
+            ownedWheelLevelById={ownedWheelLevelById}
             pickerTab={pickerTab}
             posseFilter={posseFilter}
-            wheelRarityFilter={wheelRarityFilter}
-            wheelMainstatFilter={wheelMainstatFilter}
             searchInputRef={searchInputRef}
             teamRealmSet={teamRealmSet}
             teams={teams}
             usedAwakenerIdentityKeys={usedAwakenerIdentityKeys}
             usedPosseByTeamOrder={usedPosseByTeamOrder}
             usedWheelByTeamOrder={usedWheelByTeamOrder}
-            filteredWheels={filteredWheels}
-            filteredCovenants={filteredCovenants}
+            wheelMainstatFilter={wheelMainstatFilter}
+            wheelRarityFilter={wheelRarityFilter}
           />
         </div>
       </section>
 
       <DragOverlay dropAnimation={null}>
-        {activePreviewDraggedSlot && activePreviewDraggedTeam ? (
-          <TeamPreviewGhost
-            mode={teamPreviewMode}
-            ownedAwakenerLevelByName={ownedAwakenerLevelByName}
-            ownedWheelLevelById={ownedWheelLevelById}
-            removeIntent={isTeamPreviewRemoveIntent}
-            team={{
-              ...activePreviewDraggedTeam,
-              slots: [activePreviewDraggedSlot],
-            }}
-          />
-        ) : null}
-        {activeDrag?.kind === 'picker-awakener' ? <PickerAwakenerGhost awakenerName={activeDrag.awakenerName} /> : null}
-        {activeDrag?.kind === 'picker-wheel' ? <PickerWheelGhost wheelId={activeDrag.wheelId} /> : null}
-        {activeDrag?.kind === 'picker-covenant' ? <PickerWheelGhost wheelId={activeDrag.covenantId} isCovenant /> : null}
-        {activeDrag?.kind === 'team-slot' ? (
-          <TeamCardGhost
-            removeIntent={isRemoveIntent}
-            slot={activeDraggedSlot}
-            awakenerOwnedLevel={activeDraggedAwakenerOwnedLevel}
-            wheelOwnedLevels={activeDraggedWheelOwnedLevels}
-          />
-        ) : null}
-        {activeDrag?.kind === 'team-wheel' ? (
-          <TeamWheelGhost
-            removeIntent={isRemoveIntent}
-            wheelId={activeDrag.wheelId}
-            ownedLevel={ownedWheelLevelById.get(activeDrag.wheelId) ?? null}
-          />
-        ) : null}
-        {activeDrag?.kind === 'team-covenant' ? (
-          <TeamWheelGhost removeIntent={isRemoveIntent} wheelId={activeDrag.covenantId} isCovenant />
-        ) : null}
+        <BuilderDragOverlayWrapper
+          activeDrag={activeDrag}
+          activePreviewDraggedSlot={activePreviewDraggedSlot}
+          activePreviewDraggedTeam={activePreviewDraggedTeam}
+          isRemoveIntent={isRemoveIntent}
+          isTeamPreviewRemoveIntent={isTeamPreviewRemoveIntent}
+          ownedAwakenerLevelByName={ownedAwakenerLevelByName}
+          ownedWheelLevelById={ownedWheelLevelById}
+          slotById={slotById}
+          teamPreviewMode={teamPreviewMode}
+        />
       </DragOverlay>
 
       <BuilderConfirmDialogs
@@ -881,8 +1094,8 @@ export function BuilderPage() {
       <BuilderImportExportDialogs
         exportDialog={exportDialog}
         isImportDialogOpen={isImportDialogOpen}
-        onCancelImport={closeImportFlow}
         onCancelDuplicateOverrideImport={cancelDuplicateOverrideImport}
+        onCancelImport={closeImportFlow}
         onCancelReplaceImport={cancelReplaceImport}
         onCancelStrategyImport={cancelStrategyImport}
         onCloseExportDialog={closeExportDialog}
@@ -899,8 +1112,5 @@ export function BuilderPage() {
 
       <Toast entries={toastEntries} />
     </DndContext>
-  )
+  );
 }
-
-
-

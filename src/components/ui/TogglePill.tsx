@@ -1,12 +1,12 @@
-type TogglePillProps = {
-  checked: boolean
-  onChange: (nextChecked: boolean) => void
-  className?: string
-  variant?: 'default' | 'flat'
-  onLabel?: string
-  offLabel?: string
-  ariaLabel?: string
-  disabled?: boolean
+interface TogglePillProps {
+  readonly checked: boolean;
+  readonly onChange: (nextChecked: boolean) => void;
+  readonly className?: string;
+  readonly variant?: 'default' | 'flat';
+  readonly onLabel?: string;
+  readonly offLabel?: string;
+  readonly ariaLabel?: string;
+  readonly disabled?: boolean;
 }
 
 export function TogglePill({
@@ -26,14 +26,20 @@ export function TogglePill({
       data-checked={checked ? 'true' : 'false'}
       data-owned={checked ? 'true' : 'false'}
       disabled={disabled}
-      onClick={() => onChange(!checked)}
-      type="button"
+      onClick={() => {
+        onChange(!checked);
+      }}
+      type='button'
     >
-      <span className="ownership-pill__track" />
-      <span className="ownership-pill__thumb">
-        <span className="ownership-pill__label ownership-pill__label-unowned">{offLabel}</span>
-        <span className="ownership-pill__label ownership-pill__label-owned">{onLabel}</span>
+      <span className='ownership-pill__track' />
+      <span className='ownership-pill__thumb'>
+        <span className='ownership-pill__label ownership-pill__label-unowned'>
+          {offLabel}
+        </span>
+        <span className='ownership-pill__label ownership-pill__label-owned'>
+          {onLabel}
+        </span>
       </span>
     </button>
-  )
+  );
 }

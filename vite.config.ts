@@ -1,20 +1,24 @@
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'vitest/config'
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import {defineConfig} from 'vitest/config';
 
 function getBasePath(): string {
-  const configured = process.env.VITE_BASE_PATH?.trim()
+  const configured = process.env.VITE_BASE_PATH?.trim();
   if (!configured) {
-    return '/'
+    return '/';
   }
-  const withLeadingSlash = configured.startsWith('/') ? configured : `/${configured}`
-  return withLeadingSlash.endsWith('/') ? withLeadingSlash : `${withLeadingSlash}/`
+  const withLeadingSlash = configured.startsWith('/')
+    ? configured
+    : `/${configured}`;
+  return withLeadingSlash.endsWith('/')
+    ? withLeadingSlash
+    : `${withLeadingSlash}/`;
 }
 
-// https://vite.dev/config/
 export default defineConfig({
   base: getBasePath(),
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), tsconfigPaths()],
   server: {
     host: '127.0.0.1',
     port: 5173,
@@ -30,4 +34,4 @@ export default defineConfig({
     globals: true,
     setupFiles: './src/test/setup.ts',
   },
-})
+});

@@ -1,10 +1,10 @@
-import type { Wheel } from './wheels'
+import type {Wheel} from '@/domain/wheels';
 
 const WHEEL_RARITY_ORDER: Record<Wheel['rarity'], number> = {
   SSR: 0,
   SR: 1,
   R: 2,
-}
+};
 
 const WHEEL_REALM_ORDER: Record<Wheel['realm'], number> = {
   CHAOS: 0,
@@ -12,18 +12,23 @@ const WHEEL_REALM_ORDER: Record<Wheel['realm'], number> = {
   CARO: 2,
   ULTRA: 3,
   NEUTRAL: 4,
-}
+};
 
 export function compareWheelsForUi(left: Wheel, right: Wheel): number {
-  const rarityOrderDiff = WHEEL_RARITY_ORDER[left.rarity] - WHEEL_RARITY_ORDER[right.rarity]
+  const rarityOrderDiff =
+    WHEEL_RARITY_ORDER[left.rarity] - WHEEL_RARITY_ORDER[right.rarity];
   if (rarityOrderDiff !== 0) {
-    return rarityOrderDiff
+    return rarityOrderDiff;
   }
 
-  const realmOrderDiff = WHEEL_REALM_ORDER[left.realm] - WHEEL_REALM_ORDER[right.realm]
+  const realmOrderDiff =
+    WHEEL_REALM_ORDER[left.realm] - WHEEL_REALM_ORDER[right.realm];
   if (realmOrderDiff !== 0) {
-    return realmOrderDiff
+    return realmOrderDiff;
   }
 
-  return left.id.localeCompare(right.id, undefined, { numeric: true, sensitivity: 'base' })
+  return left.id.localeCompare(right.id, undefined, {
+    numeric: true,
+    sensitivity: 'base',
+  });
 }

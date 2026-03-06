@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import rawMainstats from '../data/mainstats.json'
+import rawMainstats from '@/data/mainstats.json';
+import {z} from 'zod';
 
 export const MAINSTAT_KEYS = [
   'CRIT_RATE',
@@ -13,7 +13,7 @@ export const MAINSTAT_KEYS = [
   'ATK',
   'DEF',
   'CON',
-] as const
+] as const;
 
 export const WHEEL_MAINSTAT_KEYS = [
   'CRIT_RATE',
@@ -24,7 +24,7 @@ export const WHEEL_MAINSTAT_KEYS = [
   'KEYFLARE_REGEN',
   'SIGIL_YIELD',
   'DEATH_RESISTANCE',
-] as const
+] as const;
 
 const mainstatSchema = z.object({
   key: z.enum(MAINSTAT_KEYS),
@@ -32,45 +32,52 @@ const mainstatSchema = z.object({
   iconId: z.string().regex(/^\d{3}$/),
   aliases: z.array(z.string().trim().min(1)),
   wheelFilter: z.boolean(),
-})
+});
 
-const parsedMainstats = z.array(mainstatSchema).parse(rawMainstats)
+const parsedMainstats = z.array(mainstatSchema).parse(rawMainstats);
 
-export type Mainstat = (typeof parsedMainstats)[number]
-export type MainstatKey = (typeof MAINSTAT_KEYS)[number]
-export type WheelMainstatKey = (typeof WHEEL_MAINSTAT_KEYS)[number]
-type WheelMainstat = Mainstat & { key: WheelMainstatKey }
+export type Mainstat = (typeof parsedMainstats)[number];
+export type MainstatKey = (typeof MAINSTAT_KEYS)[number];
+export type WheelMainstatKey = (typeof WHEEL_MAINSTAT_KEYS)[number];
+type WheelMainstat = Mainstat & {key: WheelMainstatKey};
 
-const mainstatByKey = new Map(parsedMainstats.map((mainstat) => [mainstat.key, mainstat]))
+const mainstatByKey = new Map(
+  parsedMainstats.map((mainstat) => [mainstat.key, mainstat]),
+);
 function normalizeValue(value: string): string {
-  return value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '')
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
 }
 
-const mainstatByNormalizedAlias = new Map<string, Mainstat>()
+const mainstatByNormalizedAlias = new Map<string, Mainstat>();
 for (const mainstat of parsedMainstats) {
-  mainstatByNormalizedAlias.set(normalizeValue(mainstat.label), mainstat)
+  mainstatByNormalizedAlias.set(normalizeValue(mainstat.label), mainstat);
   for (const alias of mainstat.aliases) {
-    mainstatByNormalizedAlias.set(normalizeValue(alias), mainstat)
+    mainstatByNormalizedAlias.set(normalizeValue(alias), mainstat);
   }
 }
 
 export function getMainstats(): Mainstat[] {
-  return parsedMainstats
+  return parsedMainstats;
 }
 
 export function getWheelFilterMainstats(): WheelMainstat[] {
-  const wheelKeySet = new Set<string>(WHEEL_MAINSTAT_KEYS)
-  return parsedMainstats.filter((mainstat): mainstat is WheelMainstat => wheelKeySet.has(mainstat.key))
+  const wheelKeySet = new Set<string>(WHEEL_MAINSTAT_KEYS);
+  return parsedMainstats.filter((mainstat): mainstat is WheelMainstat =>
+    wheelKeySet.has(mainstat.key),
+  );
 }
 
 export function getMainstatByKey(key: MainstatKey): Mainstat | undefined {
-  return mainstatByKey.get(key)
+  return mainstatByKey.get(key);
 }
 
 export function normalizeMainstatLabel(value: string): string | null {
-  const normalized = normalizeValue(value)
+  const normalized = normalizeValue(value);
   if (!normalized) {
-    return null
+    return null;
   }
-  return mainstatByNormalizedAlias.get(normalized)?.label ?? null
+  return mainstatByNormalizedAlias.get(normalized)?.label ?? null;
 }

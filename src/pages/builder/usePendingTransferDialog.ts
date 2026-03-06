@@ -1,15 +1,18 @@
-import { useCallback, useMemo, type Dispatch, type SetStateAction } from 'react'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import { getWheelById } from '../../domain/wheels'
-import type { Team } from './types'
-import type { PendingTransfer } from './useTransferConfirm'
-import { applyPendingTransfer, applySupportTransfer } from './transfer-resolution'
+import {formatAwakenerNameForUi} from '@/domain/name-format';
+import {getWheelById} from '@/domain/wheels';
+import {
+  applyPendingTransfer,
+  applySupportTransfer,
+} from '@/pages/builder/transfer-resolution';
+import type {Team} from '@/pages/builder/types';
+import type {PendingTransfer} from '@/pages/builder/useTransferConfirm';
+import {useCallback, useMemo, type Dispatch, type SetStateAction} from 'react';
 
-type UsePendingTransferDialogOptions = {
-  pendingTransfer: PendingTransfer | null
-  teams: Team[]
-  setTeams: Dispatch<SetStateAction<Team[]>>
-  clearTransfer: () => void
+interface UsePendingTransferDialogOptions {
+  readonly pendingTransfer: PendingTransfer | null;
+  readonly teams: readonly Team[];
+  readonly setTeams: Dispatch<SetStateAction<readonly Team[]>>;
+  readonly clearTransfer: () => void;
 }
 
 export function usePendingTransferDialog({
@@ -20,56 +23,73 @@ export function usePendingTransferDialog({
 }: UsePendingTransferDialogOptions) {
   const fromTeamName = useMemo(() => {
     if (!pendingTransfer) {
-      return 'another team'
+      return 'another team';
     }
-    return teams.find((team) => team.id === pendingTransfer.fromTeamId)?.name ?? 'another team'
-  }, [pendingTransfer, teams])
+    return (
+      teams.find((team) => team.id === pendingTransfer.fromTeamId)?.name ??
+      'another team'
+    );
+  }, [pendingTransfer, teams]);
 
   const toTeamName = useMemo(() => {
     if (!pendingTransfer) {
-      return 'active team'
+      return 'active team';
     }
-    return teams.find((team) => team.id === pendingTransfer.toTeamId)?.name ?? 'active team'
-  }, [pendingTransfer, teams])
+    return (
+      teams.find((team) => team.id === pendingTransfer.toTeamId)?.name ??
+      'active team'
+    );
+  }, [pendingTransfer, teams]);
 
   const displayName = useMemo(() => {
     if (!pendingTransfer) {
-      return ''
+      return '';
     }
     if (pendingTransfer.kind === 'awakener') {
-      return formatAwakenerNameForUi(pendingTransfer.itemName)
+      return formatAwakenerNameForUi(pendingTransfer.itemName);
     }
     if (pendingTransfer.kind === 'wheel') {
-      return getWheelById(pendingTransfer.wheelId)?.name ?? pendingTransfer.itemName
+      return (
+        getWheelById(pendingTransfer.wheelId)?.name ?? pendingTransfer.itemName
+      );
     }
-    return pendingTransfer.itemName
-  }, [pendingTransfer])
+    return pendingTransfer.itemName;
+  }, [pendingTransfer]);
 
   const confirmTransfer = useCallback(() => {
     if (!pendingTransfer) {
-      return
+      return;
     }
-    setTeams((prev) => applyPendingTransfer(prev, pendingTransfer))
-    clearTransfer()
-  }, [pendingTransfer, setTeams, clearTransfer])
+    setTeams((prev) => applyPendingTransfer(prev, pendingTransfer));
+    clearTransfer();
+  }, [pendingTransfer, setTeams, clearTransfer]);
 
   const useSupportTransfer = useCallback(() => {
-    if (!pendingTransfer || pendingTransfer.kind !== 'awakener' || !pendingTransfer.canUseSupport) {
-      return
+    if (
+      pendingTransfer?.kind !== 'awakener' ||
+      !pendingTransfer.canUseSupport
+    ) {
+      return;
     }
-    setTeams((prev) => applySupportTransfer(prev, pendingTransfer))
-    clearTransfer()
-  }, [pendingTransfer, setTeams, clearTransfer])
+    setTeams((prev) => applySupportTransfer(prev, pendingTransfer));
+    clearTransfer();
+  }, [pendingTransfer, setTeams, clearTransfer]);
 
   if (!pendingTransfer) {
-    return null
+    return null;
   }
 
   return {
     title: `Move ${displayName}`,
     message: `${displayName} is already used in ${fromTeamName}. Move to ${toTeamName}?`,
-    supportLabel: pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport ? 'Use as Support' : undefined,
-    onSupport: pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport ? useSupportTransfer : undefined,
+    supportLabel:
+      pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport
+        ? 'Use as Support'
+        : undefined,
+    onSupport:
+      pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport
+        ? useSupportTransfer
+        : undefined,
     onConfirm: confirmTransfer,
-  }
+  };
 }

@@ -2,10 +2,7 @@
   {
     "id": 1,
     "name": "24",
-    "aliases": [
-      "24",
-      "twenty-four"
-    ],
+    "aliases": ["24", "twenty-four"],
     "faction": "Hybrid",
     "realm": "CHAOS",
     "rarity": "SSR",
@@ -108,19 +105,12 @@
   {
     "id": 2,
     "name": "agrippa",
-    "aliases": [
-      "agrippa"
-    ],
+    "aliases": ["agrippa"],
     "faction": "Outlanders",
     "realm": "CARO",
     "rarity": "SSR",
     "type": "DEFENSE",
-    "tags": [
-      "Draw",
-      "Embryo Fusion",
-      "Poison",
-      "STR Up"
-    ],
+    "tags": ["Draw", "Embryo Fusion", "Poison", "STR Up"],
     "stats": {
       "CON": "132",
       "ATK": "112",
@@ -203,20 +193,12 @@
   {
     "id": 3,
     "name": "aigis",
-    "aliases": [
-      "aigis"
-    ],
+    "aliases": ["aigis"],
     "faction": "Hybrid",
     "realm": "CARO",
     "rarity": "SSR",
     "type": "ASSIST",
-    "tags": [
-      "Draw",
-      "Embryo Fusion",
-      "Keyflare",
-      "Stun",
-      "Vulnerability"
-    ],
+    "tags": ["Draw", "Embryo Fusion", "Keyflare", "Stun", "Vulnerability"],
     "stats": {
       "CON": "100",
       "ATK": "120",
@@ -299,9 +281,7 @@
   {
     "id": 4,
     "name": "alva",
-    "aliases": [
-      "alva"
-    ],
+    "aliases": ["alva"],
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
@@ -398,19 +378,12 @@
   {
     "id": 5,
     "name": "aurita",
-    "aliases": [
-      "aurita"
-    ],
+    "aliases": ["aurita"],
     "faction": "The Fools",
     "realm": "AEQUOR",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Aftershock",
-      "Discard",
-      "Draw",
-      "Pierce DMG"
-    ],
+    "tags": ["Aftershock", "Discard", "Draw", "Pierce DMG"],
     "stats": {
       "CON": "96",
       "ATK": "104",
@@ -493,9 +466,7 @@
   {
     "id": 6,
     "name": "caecus",
-    "aliases": [
-      "caecus"
-    ],
+    "aliases": ["caecus"],
     "faction": "Hybrid",
     "realm": "AEQUOR",
     "rarity": "SSR",
@@ -590,9 +561,7 @@
   {
     "id": 7,
     "name": "casiah",
-    "aliases": [
-      "casiah"
-    ],
+    "aliases": ["casiah"],
     "faction": "The Unknowable",
     "realm": "ULTRA",
     "rarity": "SSR",
@@ -687,19 +656,12 @@
   {
     "id": 8,
     "name": "castor",
-    "aliases": [
-      "castor"
-    ],
+    "aliases": ["castor"],
     "faction": "The Fools",
     "realm": "ULTRA",
     "rarity": "SSR",
     "type": "DEFENSE",
-    "tags": [
-      "Crit",
-      "Draw",
-      "Quasar",
-      "Weakness"
-    ],
+    "tags": ["Crit", "Draw", "Quasar", "Weakness"],
     "stats": {
       "CON": "149",
       "ATK": "135",
@@ -787,9 +749,7 @@
   {
     "id": 9,
     "name": "celeste",
-    "aliases": [
-      "celeste"
-    ],
+    "aliases": ["celeste"],
     "faction": "Outlanders",
     "realm": "AEQUOR",
     "rarity": "SSR",
@@ -885,9 +845,7 @@
   {
     "id": 10,
     "name": "clementine",
-    "aliases": [
-      "clementine"
-    ],
+    "aliases": ["clementine"],
     "faction": "The Unknowable",
     "realm": "ULTRA",
     "rarity": "SSR",
@@ -983,9 +941,7 @@
   {
     "id": 11,
     "name": "corposant",
-    "aliases": [
-      "corposant"
-    ],
+    "aliases": ["corposant"],
     "faction": "The Fools",
     "realm": "AEQUOR",
     "rarity": "SSR",
@@ -1089,9 +1045,7 @@
   {
     "id": 12,
     "name": "daffodil",
-    "aliases": [
-      "daffodil"
-    ],
+    "aliases": ["daffodil"],
     "faction": "The Unknowable",
     "realm": "ULTRA",
     "rarity": "SSR",
@@ -1193,19 +1147,12 @@
   {
     "id": 13,
     "name": "doll",
-    "aliases": [
-      "doll"
-    ],
+    "aliases": ["doll"],
     "faction": "Among the Stars",
     "realm": "CHAOS",
     "rarity": "SR",
     "type": "ASSIST",
-    "tags": [
-      "Discard",
-      "Dispel",
-      "Heal",
-      "Weakness"
-    ],
+    "tags": ["Discard", "Dispel", "Heal", "Weakness"],
     "stats": {
       "CON": "88",
       "ATK": "72",
@@ -1288,10 +1235,7 @@
   {
     "id": 18,
     "name": "doll: inferno",
-    "aliases": [
-      "doll: inferno",
-      "g-doll"
-    ],
+    "aliases": ["doll: inferno", "g-doll"],
     "faction": "Among the Stars",
     "realm": "CHAOS",
     "rarity": "Genesis",
@@ -1396,20 +1340,12 @@
   {
     "id": 14,
     "name": "doresain",
-    "aliases": [
-      "doresain"
-    ],
+    "aliases": ["doresain"],
     "faction": "Out of the Aeons",
     "realm": "CARO",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Crit",
-      "Pierce DMG",
-      "STR Up",
-      "Self-Harm",
-      "Vulnerability"
-    ],
+    "tags": ["Crit", "Pierce DMG", "STR Up", "Self-Harm", "Vulnerability"],
     "stats": {
       "CON": "149",
       "ATK": "158",
@@ -1501,9 +1437,7 @@
   {
     "id": 15,
     "name": "erica",
-    "aliases": [
-      "erica"
-    ],
+    "aliases": ["erica"],
     "faction": "Hybrid",
     "realm": "ULTRA",
     "rarity": "SSR",
@@ -1604,9 +1538,7 @@
   {
     "id": 16,
     "name": "faint",
-    "aliases": [
-      "faint"
-    ],
+    "aliases": ["faint"],
     "faction": "Among the Stars",
     "realm": "CARO",
     "rarity": "SSR",
@@ -1703,9 +1635,7 @@
   {
     "id": 17,
     "name": "faros",
-    "aliases": [
-      "faros"
-    ],
+    "aliases": ["faros"],
     "faction": "The Fools",
     "realm": "AEQUOR",
     "rarity": "SSR",
@@ -1800,18 +1730,12 @@
   {
     "id": 21,
     "name": "goliath",
-    "aliases": [
-      "goliath"
-    ],
+    "aliases": ["goliath"],
     "faction": "The Fools",
     "realm": "AEQUOR",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Crit",
-      "STR Up",
-      "Strike"
-    ],
+    "tags": ["Crit", "STR Up", "Strike"],
     "stats": {
       "CON": "164",
       "ATK": "160",
@@ -1899,20 +1823,12 @@
   {
     "id": 22,
     "name": "hameln",
-    "aliases": [
-      "hameln"
-    ],
+    "aliases": ["hameln"],
     "faction": "The Unknowable",
     "realm": "CHAOS",
     "rarity": "SSR",
     "type": "ASSIST",
-    "tags": [
-      "Arithmetica",
-      "Crit",
-      "Pierce DMG",
-      "STR Down",
-      "STR Up"
-    ],
+    "tags": ["Arithmetica", "Crit", "Pierce DMG", "STR Down", "STR Up"],
     "stats": {
       "CON": "135",
       "ATK": "140",
@@ -2000,9 +1916,7 @@
   {
     "id": 23,
     "name": "helot",
-    "aliases": [
-      "helot"
-    ],
+    "aliases": ["helot"],
     "faction": "The Fools",
     "realm": "CARO",
     "rarity": "SSR",
@@ -2099,10 +2013,7 @@
   {
     "id": 19,
     "name": "helot: catena",
-    "aliases": [
-      "helot: catena",
-      "g-helot"
-    ],
+    "aliases": ["helot: catena", "g-helot"],
     "faction": "The Fools",
     "realm": "CARO",
     "rarity": "Genesis",
@@ -2208,9 +2119,7 @@
   {
     "id": 24,
     "name": "horla",
-    "aliases": [
-      "horla"
-    ],
+    "aliases": ["horla"],
     "faction": "Outlanders",
     "realm": "ULTRA",
     "rarity": "SSR",
@@ -2308,18 +2217,12 @@
   {
     "id": 25,
     "name": "jenkins",
-    "aliases": [
-      "jenkins"
-    ],
+    "aliases": ["jenkins"],
     "faction": "The Fools",
     "realm": "ULTRA",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Crit",
-      "Draw",
-      "Strike"
-    ],
+    "tags": ["Crit", "Draw", "Strike"],
     "stats": {
       "CON": "100",
       "ATK": "140",
@@ -2407,9 +2310,7 @@
   {
     "id": 26,
     "name": "karen",
-    "aliases": [
-      "karen"
-    ],
+    "aliases": ["karen"],
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
@@ -2512,22 +2413,12 @@
   {
     "id": 27,
     "name": "kathigu-ra",
-    "aliases": [
-      "kathigu-ra",
-      "kathigura"
-    ],
+    "aliases": ["kathigu-ra", "kathigura"],
     "faction": "Among the Stars",
     "realm": "CHAOS",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Discard",
-      "Dispel",
-      "Draw",
-      "Pierce DMG",
-      "STR Up",
-      "Strike"
-    ],
+    "tags": ["Discard", "Dispel", "Draw", "Pierce DMG", "STR Up", "Strike"],
     "stats": {
       "CON": "140",
       "ATK": "167",
@@ -2615,9 +2506,7 @@
   {
     "id": 28,
     "name": "leigh",
-    "aliases": [
-      "leigh"
-    ],
+    "aliases": ["leigh"],
     "faction": "Hybrid",
     "realm": "CARO",
     "rarity": "SSR",
@@ -2713,20 +2602,12 @@
   {
     "id": 29,
     "name": "lily",
-    "aliases": [
-      "lily"
-    ],
+    "aliases": ["lily"],
     "faction": "Hybrid",
     "realm": "CHAOS",
     "rarity": "SSR",
     "type": "DEFENSE",
-    "tags": [
-      "Crit",
-      "Death Resistance",
-      "Heal",
-      "Poison",
-      "Strike"
-    ],
+    "tags": ["Crit", "Death Resistance", "Heal", "Poison", "Strike"],
     "stats": {
       "CON": "162",
       "ATK": "117",
@@ -2809,20 +2690,12 @@
   {
     "id": 30,
     "name": "liz",
-    "aliases": [
-      "liz"
-    ],
+    "aliases": ["liz"],
     "faction": "The Fools",
     "realm": "ULTRA",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Discard",
-      "Draw",
-      "Pierce DMG",
-      "Poison",
-      "STR Up"
-    ],
+    "tags": ["Discard", "Draw", "Pierce DMG", "Poison", "STR Up"],
     "stats": {
       "CON": "108",
       "ATK": "148",
@@ -2915,19 +2788,12 @@
   {
     "id": 31,
     "name": "lotan",
-    "aliases": [
-      "lotan"
-    ],
+    "aliases": ["lotan"],
     "faction": "Out of the Aeons",
     "realm": "CHAOS",
     "rarity": "SR",
     "type": "ATTACK",
-    "tags": [
-      "Dispel",
-      "Fixed DMG",
-      "Max HP DMG",
-      "Strike"
-    ],
+    "tags": ["Dispel", "Fixed DMG", "Max HP DMG", "Strike"],
     "stats": {
       "CON": "128",
       "ATK": "132",
@@ -3010,9 +2876,7 @@
   {
     "id": 32,
     "name": "miryam",
-    "aliases": [
-      "miryam"
-    ],
+    "aliases": ["miryam"],
     "faction": "Out of the Aeons",
     "realm": "AEQUOR",
     "rarity": "SSR",
@@ -3131,19 +2995,12 @@
   {
     "id": 33,
     "name": "mouchette",
-    "aliases": [
-      "mouchette"
-    ],
+    "aliases": ["mouchette"],
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Crit",
-      "Death Resistance",
-      "Strike",
-      "Stun"
-    ],
+    "tags": ["Crit", "Death Resistance", "Strike", "Stun"],
     "stats": {
       "CON": "126",
       "ATK": "149",
@@ -3226,9 +3083,7 @@
   {
     "id": 34,
     "name": "murphy",
-    "aliases": [
-      "murphy"
-    ],
+    "aliases": ["murphy"],
     "faction": "Hybrid",
     "realm": "AEQUOR",
     "rarity": "SSR",
@@ -3324,10 +3179,7 @@
   {
     "id": 35,
     "name": "murphy: fauxborn",
-    "aliases": [
-      "murphy: fauxborn",
-      "g-murphy"
-    ],
+    "aliases": ["murphy: fauxborn", "g-murphy"],
     "faction": "Out of the Aeons",
     "realm": "AEQUOR",
     "rarity": "Genesis",
@@ -3423,19 +3275,12 @@
   {
     "id": 36,
     "name": "nautila",
-    "aliases": [
-      "nautila"
-    ],
+    "aliases": ["nautila"],
     "faction": "The Fools",
     "realm": "CHAOS",
     "rarity": "SSR",
     "type": "DEFENSE",
-    "tags": [
-      "Dispel",
-      "Counter",
-      "Fixed DMG",
-      "Fragile"
-    ],
+    "tags": ["Dispel", "Counter", "Fixed DMG", "Fragile"],
     "stats": {
       "CON": "152",
       "ATK": "92",
@@ -3518,18 +3363,12 @@
   {
     "id": 37,
     "name": "nymphaea",
-    "aliases": [
-      "nymphaea"
-    ],
+    "aliases": ["nymphaea"],
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Poison",
-      "Vulnerability",
-      "Weakness"
-    ],
+    "tags": ["Poison", "Vulnerability", "Weakness"],
     "stats": {
       "CON": "76",
       "ATK": "120",
@@ -3612,9 +3451,7 @@
   {
     "id": 38,
     "name": "ogier",
-    "aliases": [
-      "ogier"
-    ],
+    "aliases": ["ogier"],
     "faction": "The Fools",
     "realm": "CHAOS",
     "rarity": "SR",
@@ -3709,18 +3546,12 @@
   {
     "id": 39,
     "name": "pandia",
-    "aliases": [
-      "pandia"
-    ],
+    "aliases": ["pandia"],
     "faction": "Outlanders",
     "realm": "CHAOS",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Counter",
-      "Crit",
-      "Vulnerability"
-    ],
+    "tags": ["Counter", "Crit", "Vulnerability"],
     "stats": {
       "CON": "120",
       "ATK": "140",
@@ -3803,9 +3634,7 @@
   {
     "id": 40,
     "name": "pickman",
-    "aliases": [
-      "pickman"
-    ],
+    "aliases": ["pickman"],
     "faction": "The Fools",
     "realm": "CARO",
     "rarity": "SSR",
@@ -3900,18 +3729,12 @@
   {
     "id": 41,
     "name": "pollux",
-    "aliases": [
-      "pollux"
-    ],
+    "aliases": ["pollux"],
     "faction": "Hybrid",
     "realm": "ULTRA",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Bleed",
-      "Discard",
-      "Draw"
-    ],
+    "tags": ["Bleed", "Discard", "Draw"],
     "stats": {
       "CON": "140",
       "ATK": "158",
@@ -3999,9 +3822,7 @@
   {
     "id": 42,
     "name": "ramona",
-    "aliases": [
-      "ramona"
-    ],
+    "aliases": ["ramona"],
     "faction": "The Unknowable",
     "realm": "CHAOS",
     "rarity": "SR",
@@ -4097,20 +3918,12 @@
   {
     "id": 20,
     "name": "ramona: timeworn",
-    "aliases": [
-      "ramona: timeworn",
-      "g-ramona"
-    ],
+    "aliases": ["ramona: timeworn", "g-ramona"],
     "faction": "The Unknowable",
     "realm": "CHAOS",
     "rarity": "Genesis",
     "type": "ASSIST",
-    "tags": [
-      "Arithmetica",
-      "Crit",
-      "Draw",
-      "Keyflare"
-    ],
+    "tags": ["Arithmetica", "Crit", "Draw", "Keyflare"],
     "stats": {
       "CON": "120",
       "ATK": "120",
@@ -4193,9 +4006,7 @@
   {
     "id": 43,
     "name": "ryker",
-    "aliases": [
-      "ryker"
-    ],
+    "aliases": ["ryker"],
     "faction": "The Fools",
     "realm": "CHAOS",
     "rarity": "SSR",
@@ -4291,9 +4102,7 @@
   {
     "id": 44,
     "name": "salvador",
-    "aliases": [
-      "salvador"
-    ],
+    "aliases": ["salvador"],
     "faction": "Out of the Aeons",
     "realm": "CARO",
     "rarity": "SSR",
@@ -4390,9 +4199,7 @@
   {
     "id": 45,
     "name": "sanga",
-    "aliases": [
-      "sanga"
-    ],
+    "aliases": ["sanga"],
     "faction": "Outlanders",
     "realm": "AEQUOR",
     "rarity": "SSR",
@@ -4487,9 +4294,7 @@
   {
     "id": 46,
     "name": "sorel",
-    "aliases": [
-      "sorel"
-    ],
+    "aliases": ["sorel"],
     "faction": "Outlanders",
     "realm": "CARO",
     "rarity": "SSR",
@@ -4584,9 +4389,7 @@
   {
     "id": 47,
     "name": "tawil",
-    "aliases": [
-      "tawil"
-    ],
+    "aliases": ["tawil"],
     "faction": "Gateway",
     "realm": "CHAOS",
     "rarity": "SSR",
@@ -4699,9 +4502,7 @@
   {
     "id": 48,
     "name": "thais",
-    "aliases": [
-      "thais"
-    ],
+    "aliases": ["thais"],
     "faction": "Out of the Aeons",
     "realm": "CARO",
     "rarity": "SSR",
@@ -4799,9 +4600,7 @@
   {
     "id": 49,
     "name": "tinct",
-    "aliases": [
-      "tinct"
-    ],
+    "aliases": ["tinct"],
     "faction": "Among the Stars",
     "realm": "ULTRA",
     "rarity": "SSR",
@@ -4899,9 +4698,7 @@
   {
     "id": 50,
     "name": "tulu",
-    "aliases": [
-      "tulu"
-    ],
+    "aliases": ["tulu"],
     "faction": "Out of the Aeons",
     "realm": "AEQUOR",
     "rarity": "SSR",
@@ -4997,19 +4794,12 @@
   {
     "id": 51,
     "name": "uvhash",
-    "aliases": [
-      "uvhash"
-    ],
+    "aliases": ["uvhash"],
     "faction": "Outlanders",
     "realm": "CARO",
     "rarity": "SSR",
     "type": "ATTACK",
-    "tags": [
-      "Crit",
-      "STR Up",
-      "Sealed",
-      "Self-Harm"
-    ],
+    "tags": ["Crit", "STR Up", "Sealed", "Self-Harm"],
     "stats": {
       "CON": "144",
       "ATK": "136",
@@ -5092,19 +4882,12 @@
   {
     "id": 52,
     "name": "wanda",
-    "aliases": [
-      "wanda"
-    ],
+    "aliases": ["wanda"],
     "faction": "Among the Stars",
     "realm": "ULTRA",
     "rarity": "SSR",
     "type": "DEFENSE",
-    "tags": [
-      "Counter",
-      "Crit",
-      "STR Down",
-      "STR Up"
-    ],
+    "tags": ["Counter", "Crit", "STR Down", "STR Up"],
     "stats": {
       "CON": "158",
       "ATK": "99",
@@ -5187,9 +4970,7 @@
   {
     "id": 53,
     "name": "winkle",
-    "aliases": [
-      "winkle"
-    ],
+    "aliases": ["winkle"],
     "faction": "Among the Stars",
     "realm": "ULTRA",
     "rarity": "SSR",
@@ -5285,9 +5066,7 @@
   {
     "id": 54,
     "name": "xu",
-    "aliases": [
-      "xu"
-    ],
+    "aliases": ["xu"],
     "faction": "The Unknowable",
     "realm": "CARO",
     "rarity": "SSR",

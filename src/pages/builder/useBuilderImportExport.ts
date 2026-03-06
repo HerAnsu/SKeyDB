@@ -1,80 +1,87 @@
-import { useMemo, useState, type Dispatch, type SetStateAction } from 'react'
-import { decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode } from '../../domain/import-export'
-import { encodeIngameTeamCode } from '../../domain/ingame-codec'
+import {
+  decodeImportCode,
+  encodeMultiTeamCode,
+  encodeSingleTeamCode,
+  type DecodedImport,
+} from '@/domain/import-export';
+import {encodeIngameTeamCode} from '@/domain/ingame-codec';
 import {
   applySingleImportStrategy,
   prepareImport,
   type ImportConflict,
   type PreparedImport,
   type SingleImportStrategy,
-} from './import-planner'
-import { hasDuplicateRuleViolation, validateBuilderTeamsStrict } from './team-validation'
-import type { DecodedImport } from '../../domain/import-export'
-import type { Team, TeamSlot } from './types'
+} from '@/pages/builder/import-planner';
+import {
+  hasDuplicateRuleViolation,
+  validateBuilderTeamsStrict,
+} from '@/pages/builder/team-validation';
+import type {Team, TeamSlot} from '@/pages/builder/types';
+import {useMemo, useState, type Dispatch, type SetStateAction} from 'react';
 
-type ReplaceTargetTeam = {
-  id: string
-  name: string
+interface ReplaceTargetTeam {
+  readonly id: string;
+  readonly name: string;
 }
 
-type PendingReplaceImport = {
-  teams: Team[]
-  activeTeamIndex: number
-  importWarningMessage?: string
+interface PendingReplaceImport {
+  readonly teams: readonly Team[];
+  readonly activeTeamIndex: number;
+  readonly importWarningMessage?: string;
 }
 
-type PendingStrategyImport = {
-  team: Team
-  conflicts: ImportConflict[]
-  plannerBaseTeams: Team[]
-  replaceIntoTeam?: ReplaceTargetTeam
-  importWarningMessage?: string
+interface PendingStrategyImport {
+  readonly team: Team;
+  readonly conflicts: readonly ImportConflict[];
+  readonly plannerBaseTeams: readonly Team[];
+  readonly replaceIntoTeam?: ReplaceTargetTeam;
+  readonly importWarningMessage?: string;
 }
 
 type PendingDuplicateOverrideImport =
   | {
-      kind: 'decoded'
-      decoded: DecodedImport
-      plannerBaseTeams: Team[]
-      replaceIntoTeam?: ReplaceTargetTeam
-      importWarningMessage?: string
+      readonly kind: 'decoded';
+      readonly decoded: DecodedImport;
+      readonly plannerBaseTeams: readonly Team[];
+      readonly replaceIntoTeam?: ReplaceTargetTeam;
+      readonly importWarningMessage?: string;
     }
   | {
-      kind: 'strategy'
-      plannerBaseTeams: Team[]
-      importedTeam: Team
-      strategy: Exclude<SingleImportStrategy, 'cancel'>
-      replaceIntoTeam?: ReplaceTargetTeam
-      importWarningMessage?: string
-    }
+      readonly kind: 'strategy';
+      readonly plannerBaseTeams: readonly Team[];
+      readonly importedTeam: Team;
+      readonly strategy: Exclude<SingleImportStrategy, 'cancel'>;
+      readonly replaceIntoTeam?: ReplaceTargetTeam;
+      readonly importWarningMessage?: string;
+    };
 
-type ExportDialogState = {
-  title: string
-  code: string
-  kind: 'standard' | 'ingame'
-  duplicateWarning?: string
+interface ExportDialogState {
+  readonly title: string;
+  readonly code: string;
+  readonly kind: 'standard' | 'ingame';
+  readonly duplicateWarning?: string;
 }
 
-type HandlePreparedImportOptions = {
-  decoded: DecodedImport
-  plannerBaseTeams?: Team[]
-  replaceIntoTeam?: ReplaceTargetTeam
-  importWarningMessage?: string
+interface HandlePreparedImportOptions {
+  readonly decoded: DecodedImport;
+  readonly plannerBaseTeams?: readonly Team[];
+  readonly replaceIntoTeam?: ReplaceTargetTeam;
+  readonly importWarningMessage?: string;
 }
 
-type UseBuilderImportExportOptions = {
-  teams: Team[]
-  setTeams: Dispatch<SetStateAction<Team[]>>
-  effectiveActiveTeamId: string
-  activeTeam: Team | undefined
-  teamSlots: TeamSlot[]
-  allowDupes: boolean
-  setAllowDupes: (allowDupes: boolean) => void
-  setActiveTeamId: (teamId: string) => void
-  setActiveSelection: (selection: null) => void
-  clearTransfer: () => void
-  clearPendingDelete: () => void
-  showToast: (message: string) => void
+interface UseBuilderImportExportOptions {
+  readonly teams: readonly Team[];
+  readonly setTeams: Dispatch<SetStateAction<readonly Team[]>>;
+  readonly effectiveActiveTeamId: string;
+  readonly activeTeam: Team | undefined;
+  readonly teamSlots: readonly TeamSlot[];
+  readonly allowDupes: boolean;
+  readonly setAllowDupes: (allowDupes: boolean) => void;
+  readonly setActiveTeamId: (teamId: string) => void;
+  readonly setActiveSelection: (selection: null) => void;
+  readonly clearTransfer: () => void;
+  readonly clearPendingDelete: () => void;
+  readonly showToast: (message: string) => void;
 }
 
 export function useBuilderImportExport({
@@ -91,195 +98,254 @@ export function useBuilderImportExport({
   clearPendingDelete,
   showToast,
 }: UseBuilderImportExportOptions) {
-  const [isImportDialogOpen, setImportDialogOpen] = useState(false)
-  const [exportDialog, setExportDialog] = useState<ExportDialogState | null>(null)
-  const [pendingReplaceImport, setPendingReplaceImport] = useState<PendingReplaceImport | null>(null)
-  const [pendingStrategyImport, setPendingStrategyImport] = useState<PendingStrategyImport | null>(null)
+  const [isImportDialogOpen, setImportDialogOpen] = useState(false);
+  const [exportDialog, setExportDialog] = useState<ExportDialogState | null>(
+    null,
+  );
+  const [pendingReplaceImport, setPendingReplaceImport] =
+    useState<PendingReplaceImport | null>(null);
+  const [pendingStrategyImport, setPendingStrategyImport] =
+    useState<PendingStrategyImport | null>(null);
   const [pendingDuplicateOverrideImport, setPendingDuplicateOverrideImport] =
-    useState<PendingDuplicateOverrideImport | null>(null)
+    useState<PendingDuplicateOverrideImport | null>(null);
 
   const pendingStrategyConflictSummary = useMemo(() => {
     if (!pendingStrategyImport) {
-      return ''
+      return '';
     }
-    const teamNames = Array.from(new Set(pendingStrategyImport.conflicts.map((entry) => entry.fromTeamName)))
-    return `Import conflicts with ${teamNames.join(', ')}. Choose how to handle duplicates.`
-  }, [pendingStrategyImport])
+    const teamNames = Array.from(
+      new Set(
+        pendingStrategyImport.conflicts.map((entry) => entry.fromTeamName),
+      ),
+    );
+    return `Import conflicts with ${teamNames.join(', ')}. Choose how to handle duplicates.`;
+  }, [pendingStrategyImport]);
 
   function clearImportFlow() {
-    setImportDialogOpen(false)
-    setPendingReplaceImport(null)
-    setPendingStrategyImport(null)
-    setPendingDuplicateOverrideImport(null)
+    setImportDialogOpen(false);
+    setPendingReplaceImport(null);
+    setPendingStrategyImport(null);
+    setPendingDuplicateOverrideImport(null);
   }
 
-  function applyImportedTeams(nextTeams: Team[], nextActiveTeamId: string) {
-    setTeams(nextTeams)
-    setActiveTeamId(nextActiveTeamId)
-    setActiveSelection(null)
+  function applyImportedTeams(
+    nextTeams: readonly Team[],
+    nextActiveTeamId: string,
+  ) {
+    setTeams(nextTeams);
+    setActiveTeamId(nextActiveTeamId);
+    setActiveSelection(null);
   }
 
-  function finalizePreparedImport(nextTeams: Team[], importWarningMessage?: string) {
-    const importedTeam = nextTeams.at(-1)
-    const nextActiveTeamId = importedTeam?.id ?? effectiveActiveTeamId
-    applyImportedTeams(nextTeams, nextActiveTeamId)
-    clearTransfer()
-    clearPendingDelete()
-    clearImportFlow()
-    showToast(importWarningMessage ? `Team imported. ${importWarningMessage}` : 'Team imported.')
+  function finalizePreparedImport(
+    nextTeams: readonly Team[],
+    importWarningMessage?: string,
+  ) {
+    const importedTeam = nextTeams.at(-1);
+    const nextActiveTeamId = importedTeam?.id ?? effectiveActiveTeamId;
+    applyImportedTeams(nextTeams, nextActiveTeamId);
+    clearTransfer();
+    clearPendingDelete();
+    clearImportFlow();
+    showToast(
+      importWarningMessage
+        ? `Team imported. ${importWarningMessage}`
+        : 'Team imported.',
+    );
   }
 
   function mergeImportedIntoExistingTeam(
-    plannerResultTeams: Team[],
-    plannerBaseTeams: Team[],
+    plannerResultTeams: readonly Team[],
+    plannerBaseTeams: readonly Team[],
     targetTeam: ReplaceTargetTeam,
-  ): Team[] {
-    const importedTeam = plannerResultTeams.at(-1)
+  ): readonly Team[] {
+    const importedTeam = plannerResultTeams.at(-1);
     if (!importedTeam) {
-      return teams
+      return teams;
     }
 
     const transformedImported: Team = {
       ...importedTeam,
       id: targetTeam.id,
       name: targetTeam.name,
-    }
+    };
 
     const updatedBaseTeamsById = new Map(
       plannerResultTeams
-        .filter((team) => plannerBaseTeams.some((baseTeam) => baseTeam.id === team.id))
+        .filter((team) =>
+          plannerBaseTeams.some((baseTeam) => baseTeam.id === team.id),
+        )
         .map((team) => [team.id, team]),
-    )
+    );
 
     return teams.map((team) => {
       if (team.id === targetTeam.id) {
-        return transformedImported
+        return transformedImported;
       }
-      return updatedBaseTeamsById.get(team.id) ?? team
-    })
+      return updatedBaseTeamsById.get(team.id) ?? team;
+    });
   }
 
-  function handlePreparedImport(result: PreparedImport, options: HandlePreparedImportOptions) {
+  function handlePreparedImport(
+    result: PreparedImport,
+    options: HandlePreparedImportOptions,
+  ) {
     if (result.status === 'error') {
-      showToast(result.message)
-      clearImportFlow()
-      return
+      showToast(result.message);
+      clearImportFlow();
+      return;
     }
 
     if (result.status === 'requires_duplicate_override') {
-      setImportDialogOpen(false)
+      setImportDialogOpen(false);
       setPendingDuplicateOverrideImport({
         kind: 'decoded',
         decoded: options.decoded,
         plannerBaseTeams: options.plannerBaseTeams ?? teams,
         replaceIntoTeam: options.replaceIntoTeam,
         importWarningMessage: options.importWarningMessage,
-      })
-      return
+      });
+      return;
     }
 
     if (result.status === 'requires_replace') {
-      setImportDialogOpen(false)
+      setImportDialogOpen(false);
       setPendingReplaceImport({
         teams: result.teams,
         activeTeamIndex: result.activeTeamIndex,
         importWarningMessage: options.importWarningMessage,
-      })
-      return
+      });
+      return;
     }
 
     if (result.status === 'requires_strategy') {
-      setImportDialogOpen(false)
+      setImportDialogOpen(false);
       setPendingStrategyImport({
         team: result.team,
         conflicts: result.conflicts,
         plannerBaseTeams: options.plannerBaseTeams ?? teams,
         replaceIntoTeam: options.replaceIntoTeam,
         importWarningMessage: options.importWarningMessage,
-      })
-      return
+      });
+      return;
     }
 
     if (options.replaceIntoTeam && options.plannerBaseTeams) {
-      const nextTeams = mergeImportedIntoExistingTeam(result.teams, options.plannerBaseTeams, options.replaceIntoTeam)
-      applyImportedTeams(nextTeams, options.replaceIntoTeam.id)
-      clearTransfer()
-      clearPendingDelete()
-      clearImportFlow()
-      showToast(options.importWarningMessage ? `Team imported. ${options.importWarningMessage}` : 'Team imported.')
-      return
+      const nextTeams = mergeImportedIntoExistingTeam(
+        result.teams,
+        options.plannerBaseTeams,
+        options.replaceIntoTeam,
+      );
+      applyImportedTeams(nextTeams, options.replaceIntoTeam.id);
+      clearTransfer();
+      clearPendingDelete();
+      clearImportFlow();
+      showToast(
+        options.importWarningMessage
+          ? `Team imported. ${options.importWarningMessage}`
+          : 'Team imported.',
+      );
+      return;
     }
 
-    finalizePreparedImport(result.teams, options.importWarningMessage)
+    finalizePreparedImport(result.teams, options.importWarningMessage);
   }
 
-  function getIngameImportWarningMessage(warnings: Exclude<ReturnType<typeof decodeImportCode>, { kind: 'multi' }>['warnings']) {
+  function getIngameImportWarningMessage(
+    warnings: Exclude<
+      ReturnType<typeof decodeImportCode>,
+      {kind: 'multi'}
+    >['warnings'],
+  ) {
     if (!warnings || warnings.length === 0) {
-      return undefined
+      return undefined;
     }
 
     const surfaced = warnings.filter(
       (warning) =>
         warning.reason === 'unknown_token' &&
         (warning.section === 'awakener' || warning.section === 'wheel'),
-    )
+    );
     if (surfaced.length === 0) {
-      return undefined
+      return undefined;
     }
 
     const detailParts = surfaced.slice(0, 2).map((warning) => {
-      const slotLabel = warning.slotIndex === undefined ? 'unknown slot' : `slot ${warning.slotIndex + 1}`
+      const slotLabel =
+        warning.slotIndex === undefined
+          ? 'unknown slot'
+          : `slot ${String(warning.slotIndex + 1)}`;
       if (warning.section === 'awakener') {
-        return `${slotLabel} awakener`
+        return `${slotLabel} awakener`;
       }
-      const wheelLabel = warning.field === 'wheelTwo' ? 'wheel 2' : 'wheel 1'
-      return `${slotLabel} ${wheelLabel}`
-    })
-    const suffix = surfaced.length > 2 ? '; ...' : ''
-    const details = detailParts.join('; ')
-    const tokenLabel = surfaced.length === 1 ? 'token' : 'tokens'
+      const wheelLabel = warning.field === 'wheelTwo' ? 'wheel 2' : 'wheel 1';
+      return `${slotLabel} ${wheelLabel}`;
+    });
+    const suffix = surfaced.length > 2 ? '; ...' : '';
+    const details = detailParts.join('; ');
+    const tokenLabel = surfaced.length === 1 ? 'token' : 'tokens';
 
-    return `In-game note: ${surfaced.length} unsupported awakener/wheel ${tokenLabel} imported as empty (${details}${suffix}).`
+    return `In-game note: ${String(surfaced.length)} unsupported awakener/wheel ${tokenLabel} imported as empty (${details}${suffix}).`;
   }
 
-  function getDuplicateExportWarning(exportTeams: Team[]): string | undefined {
-    const validation = validateBuilderTeamsStrict(exportTeams)
-    const hasDuplicateViolation = hasDuplicateRuleViolation(validation.violations)
+  function getDuplicateExportWarning(
+    exportTeams: readonly Team[],
+  ): string | undefined {
+    const validation = validateBuilderTeamsStrict(exportTeams);
+    const hasDuplicateViolation = hasDuplicateRuleViolation(
+      validation.violations,
+    );
     if (!hasDuplicateViolation) {
-      return undefined
+      return undefined;
     }
     return exportTeams.length > 1
       ? 'These teams reuse units, wheels, or posses across teams and are not in-game legal together.'
-      : 'This team reuses units or wheels and is not in-game legal.'
+      : 'This team reuses units or wheels and is not in-game legal.';
   }
 
   function submitImportCode(code: string) {
-    let decoded
+    let decoded;
     try {
-      decoded = decodeImportCode(code)
+      decoded = decodeImportCode(code);
     } catch (error) {
-      showToast(error instanceof Error ? error.message : 'Failed to decode import code.')
-      return
+      showToast(
+        error instanceof Error
+          ? error.message
+          : 'Failed to decode import code.',
+      );
+      return;
     }
 
-    const ingameImportWarningMessage = decoded.kind === 'single' ? getIngameImportWarningMessage(decoded.warnings) : undefined
+    let ingameImportWarningMessage: string | undefined;
+    if (decoded.kind === 'single') {
+      ingameImportWarningMessage = getIngameImportWarningMessage(
+        decoded.warnings,
+      );
+    }
 
-    const shouldImportIntoActiveEmptyTeam = decoded.kind === 'single' && teamSlots.every((slot) => !slot.awakenerName)
+    const shouldImportIntoActiveEmptyTeam =
+      decoded.kind === 'single' &&
+      teamSlots.every((slot) => !slot.awakenerName);
     if (shouldImportIntoActiveEmptyTeam && activeTeam) {
-      const plannerBaseTeams = teams.filter((team) => team.id !== activeTeam.id)
-      handlePreparedImport(prepareImport(decoded, plannerBaseTeams, { allowDupes }), {
-        decoded,
-        plannerBaseTeams,
-        replaceIntoTeam: { id: activeTeam.id, name: activeTeam.name },
-        importWarningMessage: ingameImportWarningMessage,
-      })
-      return
+      const plannerBaseTeams = teams.filter(
+        (team) => team.id !== activeTeam.id,
+      );
+      handlePreparedImport(
+        prepareImport(decoded, plannerBaseTeams, {allowDupes}),
+        {
+          decoded,
+          plannerBaseTeams,
+          replaceIntoTeam: {id: activeTeam.id, name: activeTeam.name},
+          importWarningMessage: ingameImportWarningMessage,
+        },
+      );
+      return;
     }
 
-    handlePreparedImport(prepareImport(decoded, teams, { allowDupes }), {
+    handlePreparedImport(prepareImport(decoded, teams, {allowDupes}), {
       decoded,
       importWarningMessage: ingameImportWarningMessage,
-    })
+    });
   }
 
   function openExportAllDialog() {
@@ -288,67 +354,72 @@ export function useBuilderImportExport({
       code: encodeMultiTeamCode(teams, effectiveActiveTeamId),
       kind: 'standard',
       duplicateWarning: getDuplicateExportWarning(teams),
-    })
+    });
   }
 
   function openTeamExportDialog(teamId: string) {
-    const team = teams.find((entry) => entry.id === teamId)
+    const team = teams.find((entry) => entry.id === teamId);
     if (!team) {
-      showToast('Unable to export: team not found.')
-      return
+      showToast('Unable to export: team not found.');
+      return;
     }
     setExportDialog({
       title: `Export ${team.name}`,
       code: encodeSingleTeamCode(team),
       kind: 'standard',
       duplicateWarning: getDuplicateExportWarning([team]),
-    })
+    });
   }
 
   function openTeamIngameExportDialog(teamId: string) {
-    const team = teams.find((entry) => entry.id === teamId)
+    const team = teams.find((entry) => entry.id === teamId);
     if (!team) {
-      showToast('Unable to export: team not found.')
-      return
+      showToast('Unable to export: team not found.');
+      return;
     }
     setExportDialog({
       title: `Export In-Game ${team.name}`,
       code: encodeIngameTeamCode(team),
       kind: 'ingame',
       duplicateWarning: getDuplicateExportWarning([team]),
-    })
+    });
   }
 
   function confirmDuplicateOverrideImport() {
     if (!pendingDuplicateOverrideImport) {
-      return
+      return;
     }
 
-    setAllowDupes(true)
+    setAllowDupes(true);
     if (pendingDuplicateOverrideImport.kind === 'decoded') {
-      const result = prepareImport(pendingDuplicateOverrideImport.decoded, pendingDuplicateOverrideImport.plannerBaseTeams, {
-        allowDupes: true,
-      })
+      const result = prepareImport(
+        pendingDuplicateOverrideImport.decoded,
+        pendingDuplicateOverrideImport.plannerBaseTeams,
+        {
+          allowDupes: true,
+        },
+      );
       handlePreparedImport(result, {
         decoded: pendingDuplicateOverrideImport.decoded,
         plannerBaseTeams: pendingDuplicateOverrideImport.plannerBaseTeams,
         replaceIntoTeam: pendingDuplicateOverrideImport.replaceIntoTeam,
-        importWarningMessage: pendingDuplicateOverrideImport.importWarningMessage,
-      })
-      return
+        importWarningMessage:
+          pendingDuplicateOverrideImport.importWarningMessage,
+      });
+      return;
     }
 
     const result = applySingleImportStrategy(
       pendingDuplicateOverrideImport.plannerBaseTeams,
       pendingDuplicateOverrideImport.importedTeam,
       pendingDuplicateOverrideImport.strategy,
-      { allowDupes: true },
-    )
+      {allowDupes: true},
+    );
 
     if (result.status !== 'ready') {
-      showToast('Import strategy failed validation.')
-      clearImportFlow()
-      return
+      showToast('Import strategy failed validation.');
+      clearImportFlow();
+      return;
     }
 
     if (pendingDuplicateOverrideImport.replaceIntoTeam) {
@@ -356,56 +427,63 @@ export function useBuilderImportExport({
         result.teams,
         pendingDuplicateOverrideImport.plannerBaseTeams,
         pendingDuplicateOverrideImport.replaceIntoTeam,
-      )
-      applyImportedTeams(nextTeams, pendingDuplicateOverrideImport.replaceIntoTeam.id)
-      clearTransfer()
-      clearPendingDelete()
-      clearImportFlow()
+      );
+      applyImportedTeams(
+        nextTeams,
+        pendingDuplicateOverrideImport.replaceIntoTeam.id,
+      );
+      clearTransfer();
+      clearPendingDelete();
+      clearImportFlow();
       showToast(
         pendingDuplicateOverrideImport.importWarningMessage
           ? `Team imported. ${pendingDuplicateOverrideImport.importWarningMessage}`
           : 'Team imported.',
-      )
-      return
+      );
+      return;
     }
 
-    finalizePreparedImport(result.teams, pendingDuplicateOverrideImport.importWarningMessage)
+    finalizePreparedImport(
+      result.teams,
+      pendingDuplicateOverrideImport.importWarningMessage,
+    );
   }
 
   function confirmReplaceImport() {
     if (!pendingReplaceImport) {
-      return
+      return;
     }
-    const nextActive = pendingReplaceImport.teams[pendingReplaceImport.activeTeamIndex]
-    const nextActiveTeamId = nextActive?.id ?? pendingReplaceImport.teams[0]?.id ?? ''
-    applyImportedTeams(pendingReplaceImport.teams, nextActiveTeamId)
-    clearImportFlow()
-    clearTransfer()
-    clearPendingDelete()
+    const nextActive =
+      pendingReplaceImport.teams[pendingReplaceImport.activeTeamIndex];
+    const nextActiveTeamId = nextActive.id;
+    applyImportedTeams(pendingReplaceImport.teams, nextActiveTeamId);
+    clearImportFlow();
+    clearTransfer();
+    clearPendingDelete();
     showToast(
       pendingReplaceImport.importWarningMessage
         ? `All teams imported. ${pendingReplaceImport.importWarningMessage}`
         : 'All teams imported.',
-    )
+    );
   }
 
   function applyStrategy(strategy: Exclude<SingleImportStrategy, 'cancel'>) {
     if (!pendingStrategyImport) {
-      return
+      return;
     }
     const result = applySingleImportStrategy(
       pendingStrategyImport.plannerBaseTeams,
       pendingStrategyImport.team,
       strategy,
-      { allowDupes },
-    )
+      {allowDupes},
+    );
     if (result.status === 'error') {
-      showToast(result.message)
-      clearImportFlow()
-      return
+      showToast(result.message);
+      clearImportFlow();
+      return;
     }
     if (result.status === 'requires_duplicate_override') {
-      setPendingStrategyImport(null)
+      setPendingStrategyImport(null);
       setPendingDuplicateOverrideImport({
         kind: 'strategy',
         plannerBaseTeams: pendingStrategyImport.plannerBaseTeams,
@@ -413,13 +491,13 @@ export function useBuilderImportExport({
         strategy,
         replaceIntoTeam: pendingStrategyImport.replaceIntoTeam,
         importWarningMessage: pendingStrategyImport.importWarningMessage,
-      })
-      return
+      });
+      return;
     }
     if (result.status !== 'ready') {
-      showToast('Import strategy failed validation.')
-      clearImportFlow()
-      return
+      showToast('Import strategy failed validation.');
+      clearImportFlow();
+      return;
     }
 
     if (pendingStrategyImport.replaceIntoTeam) {
@@ -427,29 +505,36 @@ export function useBuilderImportExport({
         result.teams,
         pendingStrategyImport.plannerBaseTeams,
         pendingStrategyImport.replaceIntoTeam,
-      )
-      applyImportedTeams(nextTeams, pendingStrategyImport.replaceIntoTeam.id)
-      clearTransfer()
-      clearPendingDelete()
-      clearImportFlow()
+      );
+      applyImportedTeams(nextTeams, pendingStrategyImport.replaceIntoTeam.id);
+      clearTransfer();
+      clearPendingDelete();
+      clearImportFlow();
       showToast(
         pendingStrategyImport.importWarningMessage
           ? `Team imported. ${pendingStrategyImport.importWarningMessage}`
           : 'Team imported.',
-      )
-      return
+      );
+      return;
     }
 
-    finalizePreparedImport(result.teams, pendingStrategyImport.importWarningMessage)
+    finalizePreparedImport(
+      result.teams,
+      pendingStrategyImport.importWarningMessage,
+    );
   }
 
   return {
     isImportDialogOpen,
-    openImportDialog: () => setImportDialogOpen(true),
+    openImportDialog: () => {
+      setImportDialogOpen(true);
+    },
     submitImportCode,
     closeImportFlow: clearImportFlow,
     exportDialog,
-    closeExportDialog: () => setExportDialog(null),
+    closeExportDialog: () => {
+      setExportDialog(null);
+    },
     openExportAllDialog,
     openTeamExportDialog,
     openTeamIngameExportDialog,
@@ -457,12 +542,18 @@ export function useBuilderImportExport({
     cancelDuplicateOverrideImport: clearImportFlow,
     confirmDuplicateOverrideImport,
     pendingReplaceImport,
-    cancelReplaceImport: () => setPendingReplaceImport(null),
+    cancelReplaceImport: () => {
+      setPendingReplaceImport(null);
+    },
     confirmReplaceImport,
     pendingStrategyImport,
     pendingStrategyConflictSummary,
     cancelStrategyImport: clearImportFlow,
-    applyMoveStrategyImport: () => applyStrategy('move'),
-    applySkipStrategyImport: () => applyStrategy('skip'),
-  }
+    applyMoveStrategyImport: () => {
+      applyStrategy('move');
+    },
+    applySkipStrategyImport: () => {
+      applyStrategy('skip');
+    },
+  };
 }

@@ -2,7 +2,8 @@
 
 ## Goal
 
-Capture the current findings for the upcoming database work so we do not have to re-argue the same data-loading boundaries later.
+Capture the current findings for the upcoming database work so we do not have to
+re-argue the same data-loading boundaries later.
 
 Date:
 
@@ -10,7 +11,8 @@ Date:
 
 ## Current Observation
 
-- `src/data/awakeners-lite.json` is already large enough that it should stop being treated as the future home for every detail field.
+- `src/data/awakeners-lite.json` is already large enough that it should stop
+  being treated as the future home for every detail field.
 - The upcoming DB page UX has a clear two-stage interaction model:
   - overview page with filters/sorting/search
   - click-through modal with richer detail content
@@ -21,7 +23,8 @@ That makes this a usage-boundary split, not just a file-size split.
 
 ### 1. Keep a true `lite` dataset
 
-`lite` should contain only the fields required to render overview/list/filter/sort/search surfaces without an extra fetch.
+`lite` should contain only the fields required to render
+overview/list/filter/sort/search surfaces without an extra fetch.
 
 For awakeners, that currently means:
 
@@ -88,7 +91,8 @@ Add:
 - rich descriptions
 - future modal-tab content
 
-The recommended first step is one aggregated `awakeners-full.json`, not per-awakener files.
+The recommended first step is one aggregated `awakeners-full.json`, not
+per-awakener files.
 
 Reason:
 
@@ -109,20 +113,23 @@ Recommended split:
 
 ### In `lite`
 
-Only keep normalized stats that are actually useful for overview sorting/filtering.
+Only keep normalized stats that are actually useful for overview
+sorting/filtering.
 
 Likely examples:
 
 - `ATK`
 - `DEF`
 - `CON`
-- optionally `CritRate` / `CritDamage` if the DB page really plans to sort/filter by them
+- optionally `CritRate` / `CritDamage` if the DB page really plans to
+  sort/filter by them
 
 These should ideally be numeric operational values, not rich display strings.
 
 ### In `full`
 
-Keep the complete display-oriented stat block, including annotations, percentages, growth markers, and anything else needed by the modal.
+Keep the complete display-oriented stat block, including annotations,
+percentages, growth markers, and anything else needed by the modal.
 
 This avoids turning `lite` back into a disguised full DB payload.
 
@@ -148,7 +155,8 @@ Recommended direction:
 - `wheels-full.json`
   - future detail text, recommendations, extended descriptions, etc.
 
-This is not fully specified yet, but the architectural direction should match awakeners.
+This is not fully specified yet, but the architectural direction should match
+awakeners.
 
 ## Posse and Covenant Notes
 
@@ -159,13 +167,15 @@ Current expectation:
 
 Working assumption for now:
 
-- keep posses and covenants as `lite` only unless the actual detail payload grows enough to justify a second file
+- keep posses and covenants as `lite` only unless the actual detail payload
+  grows enough to justify a second file
 
 This is intentionally a provisional call, not a hard rule.
 
 ## Automation Recommendation
 
-When `full` datasets are introduced, maintainers should not hand-build new rich objects from scratch.
+When `full` datasets are introduced, maintainers should not hand-build new rich
+objects from scratch.
 
 Recommended workflow:
 
@@ -200,14 +210,17 @@ Those belong to the actual DB implementation plan.
 ## Current Recommendation Summary
 
 1. Split awakeners into:
+
 - `lite`
 - one aggregated `full`
 
 2. Likely do the same for wheels.
 
-3. Keep posses and covenants as `lite` only unless real content proves otherwise.
+3. Keep posses and covenants as `lite` only unless real content proves
+   otherwise.
 
 4. Keep `lite` focused on:
+
 - overview rendering
 - sorting
 - filtering
@@ -215,6 +228,7 @@ Those belong to the actual DB implementation plan.
 - operational app behavior
 
 5. Keep `full` focused on:
+
 - click-through modal detail content
 
 6. Add sync automation for generating missing `full` skeletons from `lite`.

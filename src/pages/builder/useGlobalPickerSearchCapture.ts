@@ -1,11 +1,11 @@
-import { useEffect, type RefObject } from 'react'
-import type { PickerTab } from './types'
-import { isTypingTarget } from './utils'
+import type {PickerTab} from '@/pages/builder/types';
+import {isTypingTarget} from '@/pages/builder/utils';
+import {useEffect, type RefObject} from 'react';
 
-type UseGlobalPickerSearchCaptureOptions = {
-  pickerTab: PickerTab
-  searchInputRef: RefObject<HTMLInputElement | null>
-  onAppendCharacter: (pickerTab: PickerTab, key: string) => void
+interface UseGlobalPickerSearchCaptureOptions {
+  pickerTab: PickerTab;
+  searchInputRef: RefObject<HTMLInputElement | null>;
+  onAppendCharacter: (pickerTab: PickerTab, key: string) => void;
 }
 
 export function useGlobalPickerSearchCapture({
@@ -16,26 +16,26 @@ export function useGlobalPickerSearchCapture({
   useEffect(() => {
     function onGlobalKeyDown(event: KeyboardEvent) {
       if (event.defaultPrevented || event.isComposing) {
-        return
+        return;
       }
       if (event.metaKey || event.ctrlKey || event.altKey) {
-        return
+        return;
       }
       if (isTypingTarget(event.target)) {
-        return
+        return;
       }
       if (event.key.length !== 1) {
-        return
+        return;
       }
 
-      onAppendCharacter(pickerTab, event.key)
-      searchInputRef.current?.focus()
-      event.preventDefault()
+      onAppendCharacter(pickerTab, event.key);
+      searchInputRef.current?.focus();
+      event.preventDefault();
     }
 
-    window.addEventListener('keydown', onGlobalKeyDown)
+    window.addEventListener('keydown', onGlobalKeyDown);
     return () => {
-      window.removeEventListener('keydown', onGlobalKeyDown)
-    }
-  }, [pickerTab, searchInputRef, onAppendCharacter])
+      window.removeEventListener('keydown', onGlobalKeyDown);
+    };
+  }, [pickerTab, searchInputRef, onAppendCharacter]);
 }

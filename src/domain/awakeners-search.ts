@@ -1,26 +1,35 @@
-import Fuse from 'fuse.js'
-import type { Awakener } from './awakeners'
+import type {Awakener} from '@/domain/awakeners';
+import Fuse from 'fuse.js';
 
 function normalizeForSearch(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, '')
+  return value.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
 function getSearchableFields(awakener: Awakener): string[] {
-  return [awakener.name, awakener.realm, ...awakener.aliases]
+  const aliases = (awakener as unknown as {aliases: string[] | undefined})
+    .aliases;
+  const safeAliases = Array.isArray(aliases) ? aliases : [];
+
+  return [awakener.name, awakener.realm, ...safeAliases];
 }
 
-export function searchAwakeners(awakeners: Awakener[], query: string): Awakener[] {
-  const trimmedQuery = query.trim()
+export function searchAwakeners(
+  awakeners: Awakener[],
+  query: string,
+): Awakener[] {
+  const trimmedQuery = query.trim();
   if (trimmedQuery.length === 0) {
-    return awakeners
+    return awakeners;
   }
 
-  const normalizedQuery = normalizeForSearch(trimmedQuery)
+  const normalizedQuery = normalizeForSearch(trimmedQuery);
   const exactMatches = awakeners.filter((awakener) =>
-    getSearchableFields(awakener).some((field) => normalizeForSearch(field).includes(normalizedQuery)),
-  )
+    getSearchableFields(awakener).some((field) =>
+      normalizeForSearch(field).includes(normalizedQuery),
+    ),
+  );
   if (exactMatches.length > 0) {
-    return exactMatches
+    return exactMatches;
   }
 
   const fuse = new Fuse(awakeners, {
@@ -28,13 +37,13 @@ export function searchAwakeners(awakeners: Awakener[], query: string): Awakener[
     ignoreLocation: true,
     includeScore: true,
     keys: [
-      { name: 'name', weight: 0.8 },
-      { name: 'aliases', weight: 0.2 },
+      {name: 'name', weight: 0.8},
+      {name: 'aliases', weight: 0.2},
     ],
-  })
-  const cutoff = /\s/.test(trimmedQuery) ? 0.55 : 0.3
+  });
+  const cutoff = /\s/.test(trimmedQuery) ? 0.55 : 0.3;
   return fuse
     .search(trimmedQuery)
     .filter((result) => (result.score ?? 1) <= cutoff)
-    .map((result) => result.item)
+    .map((result) => result.item);
 }

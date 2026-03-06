@@ -1,22 +1,31 @@
-import { renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { useOwnedAwakenerBoxEntries } from './useOwnedAwakenerBoxEntries'
+import {useOwnedAwakenerBoxEntries} from '@/pages/collection/useOwnedAwakenerBoxEntries';
+import {renderHook} from '@testing-library/react';
+import {describe, expect, it, vi} from 'vitest';
 
 vi.mock('../../domain/awakeners', () => ({
   getAwakeners: () => [
-    { id: 1, name: 'ramona', faction: 'The Fools', realm: 'CHAOS', aliases: [], rarity: 'SSR' },
+    {
+      id: 1,
+      name: 'ramona',
+      faction: 'The Fools',
+      realm: 'CHAOS',
+      aliases: [],
+      rarity: 'SSR',
+    },
   ],
-}))
+}));
 
 vi.mock('../../domain/awakener-assets', () => ({
   getAwakenerCardAsset: () => null,
-}))
+}));
 
 describe('useOwnedAwakenerBoxEntries', () => {
   it('falls back to level 60 when getAwakenerLevel is omitted', () => {
-    const { result } = renderHook(() =>
-      useOwnedAwakenerBoxEntries((awakenerName) => (awakenerName === 'ramona' ? 4 : null)),
-    )
+    const {result} = renderHook(() =>
+      useOwnedAwakenerBoxEntries((awakenerName) =>
+        awakenerName === 'ramona' ? 4 : null,
+      ),
+    );
 
     expect(result.current).toEqual([
       {
@@ -29,20 +38,20 @@ describe('useOwnedAwakenerBoxEntries', () => {
         awakenerLevel: 60,
         cardAsset: null,
       },
-    ])
-  })
+    ]);
+  });
 
   it('uses provided awakeners levels when getAwakenerLevel is passed', () => {
-    const { result } = renderHook(() =>
+    const {result} = renderHook(() =>
       useOwnedAwakenerBoxEntries(
         (awakenerName) => (awakenerName === 'ramona' ? 4 : null),
         () => 77,
       ),
-    )
+    );
 
-    expect(result.current[0]?.awakenerLevel).toBe(77)
-    expect(result.current[0]?.realm).toBe('CHAOS')
-    expect(result.current[0]?.rarity).toBe('SSR')
-    expect(result.current[0]?.index).toBe(1)
-  })
-})
+    expect(result.current[0]?.awakenerLevel).toBe(77);
+    expect(result.current[0]?.realm).toBe('CHAOS');
+    expect(result.current[0]?.rarity).toBe('SSR');
+    expect(result.current[0]?.index).toBe(1);
+  });
+});

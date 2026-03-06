@@ -1,21 +1,21 @@
-import { useMemo } from 'react'
-import { getAwakeners } from '../../domain/awakeners'
-import { getAwakenerCardAsset } from '../../domain/awakener-assets'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import type { OwnedAwakenerBoxEntry } from './OwnedAwakenerBoxExport'
+import {getAwakenerCardAsset} from '@/domain/awakener-assets';
+import {getAwakeners} from '@/domain/awakeners';
+import {formatAwakenerNameForUi} from '@/domain/name-format';
+import type {OwnedAwakenerBoxEntry} from '@/pages/collection/OwnedAwakenerBoxExport';
+import {useMemo} from 'react';
 
 export function useOwnedAwakenerBoxEntries(
   getAwakenerOwnedLevel: (awakenerName: string) => number | null,
   getAwakenerLevel?: (awakenerName: string) => number,
-): OwnedAwakenerBoxEntry[] {
+): readonly OwnedAwakenerBoxEntry[] {
   return useMemo(() => {
-    const resolveAwakenerLevel = getAwakenerLevel ?? (() => 60)
+    const resolveAwakenerLevel = getAwakenerLevel ?? (() => 60);
 
     return getAwakeners()
       .flatMap((awakener) => {
-        const level = getAwakenerOwnedLevel(awakener.name)
+        const level = getAwakenerOwnedLevel(awakener.name);
         if (level === null) {
-          return []
+          return [];
         }
         return [
           {
@@ -28,9 +28,8 @@ export function useOwnedAwakenerBoxEntries(
             awakenerLevel: resolveAwakenerLevel(awakener.name),
             cardAsset: getAwakenerCardAsset(awakener.name) ?? null,
           },
-        ]
+        ];
       })
-      .sort((left, right) => left.displayName.localeCompare(right.displayName))
-  }, [getAwakenerOwnedLevel, getAwakenerLevel])
+      .sort((left, right) => left.displayName.localeCompare(right.displayName));
+  }, [getAwakenerOwnedLevel, getAwakenerLevel]);
 }
-

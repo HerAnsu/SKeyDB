@@ -1,37 +1,37 @@
-import { createEmptyTeamSlots } from './constants'
-import type { Team } from './types'
+import {createEmptyTeamSlots} from '@/pages/builder/constants';
+import type {Team} from '@/pages/builder/types';
 
-export const MAX_TEAMS = 10
+export const MAX_TEAMS = 10;
 
-type AddTeamResult = {
-  nextTeams: Team[]
-  addedTeamId?: string
+export interface AddTeamResult {
+  readonly nextTeams: readonly Team[];
+  readonly addedTeamId?: string;
 }
 
-type DeleteTeamResult = {
-  nextTeams: Team[]
-  nextActiveTeamId: string
+export interface DeleteTeamResult {
+  readonly nextTeams: readonly Team[];
+  readonly nextActiveTeamId: string;
 }
 
-export type TeamTemplateId = 'DTIDE_5' | 'DTIDE_10'
+export type TeamTemplateId = 'DTIDE_5' | 'DTIDE_10';
 
-type ApplyTeamTemplateResult = {
-  nextTeams: Team[]
-  createdCount: number
-  renamedCount: number
-  targetCount: number
-  removedCount: number
+export interface ApplyTeamTemplateResult {
+  readonly nextTeams: readonly Team[];
+  readonly createdCount: number;
+  readonly renamedCount: number;
+  readonly targetCount: number;
+  readonly removedCount: number;
 }
 
-function getHighestTeamNumber(teams: Team[]) {
+function getHighestTeamNumber(teams: readonly Team[]) {
   return teams.reduce((maxValue, team) => {
-    const match = team.name.match(/^Team\s+(\d+)$/i)
+    const match = /^Team\s+(\d+)$/i.exec(team.name);
     if (!match) {
-      return maxValue
+      return maxValue;
     }
-    const parsed = Number.parseInt(match[1], 10)
-    return Number.isFinite(parsed) ? Math.max(maxValue, parsed) : maxValue
-  }, 0)
+    const parsed = Number.parseInt(match[1], 10);
+    return Number.isFinite(parsed) ? Math.max(maxValue, parsed) : maxValue;
+  }, 0);
 }
 
 function createTeam(name: string): Team {
@@ -39,30 +39,34 @@ function createTeam(name: string): Team {
     id: `team-${crypto.randomUUID()}`,
     name,
     slots: createEmptyTeamSlots(),
-  }
+  };
 }
 
-export function createInitialTeams(): Team[] {
-  return [createTeam('Team 1')]
+export function createInitialTeams(): readonly Team[] {
+  return [createTeam('Team 1')];
 }
 
-export function addTeam(currentTeams: Team[]): AddTeamResult {
+export function addTeam(currentTeams: readonly Team[]): AddTeamResult {
   if (currentTeams.length >= MAX_TEAMS) {
-    return { nextTeams: currentTeams }
+    return {nextTeams: currentTeams};
   }
 
-  const nextTeamNumber = getHighestTeamNumber(currentTeams) + 1
-  const nextTeam = createTeam(`Team ${nextTeamNumber}`)
+  const nextTeamNumber = getHighestTeamNumber(currentTeams) + 1;
+  const nextTeam = createTeam(`Team ${String(nextTeamNumber)}`);
   return {
     nextTeams: [...currentTeams, nextTeam],
     addedTeamId: nextTeam.id,
-  }
+  };
 }
 
-export function renameTeam(currentTeams: Team[], teamId: string, nextName: string): Team[] {
-  const trimmedName = nextName.trim()
+export function renameTeam(
+  currentTeams: readonly Team[],
+  teamId: string,
+  nextName: string,
+): readonly Team[] {
+  const trimmedName = nextName.trim();
   if (!trimmedName) {
-    return currentTeams
+    return currentTeams;
   }
   return currentTeams.map((team) =>
     team.id === teamId
@@ -71,52 +75,65 @@ export function renameTeam(currentTeams: Team[], teamId: string, nextName: strin
           name: trimmedName,
         }
       : team,
-  )
+  );
 }
 
-export function deleteTeam(currentTeams: Team[], teamId: string, activeTeamId: string): DeleteTeamResult {
+export function deleteTeam(
+  currentTeams: readonly Team[],
+  teamId: string,
+  activeTeamId: string,
+): DeleteTeamResult {
   if (currentTeams.length <= 1) {
     return {
       nextTeams: currentTeams,
       nextActiveTeamId: activeTeamId,
-    }
+    };
   }
 
-  const nextTeams = currentTeams.filter((team) => team.id !== teamId)
+  const nextTeams = currentTeams.filter((team) => team.id !== teamId);
   if (nextTeams.length === currentTeams.length) {
     return {
       nextTeams: currentTeams,
       nextActiveTeamId: activeTeamId,
-    }
+    };
   }
 
-  const nextActiveTeamId = activeTeamId === teamId ? nextTeams[0].id : activeTeamId
+  const nextActiveTeamId =
+    activeTeamId === teamId ? nextTeams[0].id : activeTeamId;
   return {
     nextTeams,
     nextActiveTeamId,
-  }
+  };
 }
 
-export function reorderTeams(currentTeams: Team[], sourceTeamId: string, targetTeamId: string): Team[] {
+export function reorderTeams(
+  currentTeams: readonly Team[],
+  sourceTeamId: string,
+  targetTeamId: string,
+): readonly Team[] {
   if (sourceTeamId === targetTeamId) {
-    return currentTeams
+    return currentTeams;
   }
 
-  const sourceIndex = currentTeams.findIndex((team) => team.id === sourceTeamId)
-  const targetIndex = currentTeams.findIndex((team) => team.id === targetTeamId)
+  const sourceIndex = currentTeams.findIndex(
+    (team) => team.id === sourceTeamId,
+  );
+  const targetIndex = currentTeams.findIndex(
+    (team) => team.id === targetTeamId,
+  );
   if (sourceIndex === -1 || targetIndex === -1) {
-    return currentTeams
+    return currentTeams;
   }
 
-  const nextTeams = [...currentTeams]
-  const [movedTeam] = nextTeams.splice(sourceIndex, 1)
-  nextTeams.splice(targetIndex, 0, movedTeam)
-  return nextTeams
+  const nextTeams = [...currentTeams];
+  const [movedTeam] = nextTeams.splice(sourceIndex, 1);
+  nextTeams.splice(targetIndex, 0, movedTeam);
+  return nextTeams;
 }
 
 function getTemplateNames(templateId: TeamTemplateId): string[] {
   if (templateId === 'DTIDE_5') {
-    return ['Wave 1', 'Wave 2', 'Wave 3', 'Wave 4', 'Wave 5']
+    return ['Wave 1', 'Wave 2', 'Wave 3', 'Wave 4', 'Wave 5'];
   }
   return [
     'Wave 1',
@@ -129,15 +146,15 @@ function getTemplateNames(templateId: TeamTemplateId): string[] {
     'Wave 4 Extra',
     'Wave 5',
     'Wave 5 Extra',
-  ]
+  ];
 }
 
 export function isTeamEmpty(team: Team | undefined): boolean {
   if (!team) {
-    return true
+    return true;
   }
   if (team.posseId) {
-    return false
+    return false;
   }
   return team.slots.every(
     (slot) =>
@@ -147,10 +164,13 @@ export function isTeamEmpty(team: Team | undefined): boolean {
       !slot.covenantId &&
       slot.wheels[0] === null &&
       slot.wheels[1] === null,
-  )
+  );
 }
 
-export function resetTeam(currentTeams: Team[], teamId: string): Team[] {
+export function resetTeam(
+  currentTeams: readonly Team[],
+  teamId: string,
+): readonly Team[] {
   return currentTeams.map((team) =>
     team.id === teamId
       ? {
@@ -159,42 +179,51 @@ export function resetTeam(currentTeams: Team[], teamId: string): Team[] {
           slots: createEmptyTeamSlots(),
         }
       : team,
-  )
+  );
 }
 
-export function applyTeamTemplate(currentTeams: Team[], templateId: TeamTemplateId): ApplyTeamTemplateResult {
-  const templateNames = getTemplateNames(templateId)
-  const targetCount = Math.min(templateNames.length, MAX_TEAMS)
-  let nextTeams = [...currentTeams]
-  const originalLength = nextTeams.length
-  const neededTeams = Math.max(0, targetCount - originalLength)
+export function applyTeamTemplate(
+  currentTeams: readonly Team[],
+  templateId: TeamTemplateId,
+): ApplyTeamTemplateResult {
+  const templateNames = getTemplateNames(templateId);
+  const targetCount = Math.min(templateNames.length, MAX_TEAMS);
+  let nextTeams = [...currentTeams];
+  const originalLength = nextTeams.length;
+  const neededTeams = Math.max(0, targetCount - originalLength);
 
   for (let index = originalLength; index < targetCount; index += 1) {
-    nextTeams.push(createTeam(templateNames[index]))
+    nextTeams.push(createTeam(templateNames[index]));
   }
 
-  let renamedCount = 0
+  let renamedCount = 0;
   for (let index = 0; index < targetCount; index += 1) {
-    const team = nextTeams[index]
-    const nextName = templateNames[index]
+    const team = nextTeams[index];
+    const nextName = templateNames[index];
     if (team.name === nextName) {
-      continue
+      continue;
     }
-    nextTeams[index] = { ...team, name: nextName }
-    renamedCount += 1
+    nextTeams[index] = {...team, name: nextName};
+    renamedCount += 1;
   }
 
-  let removedCount = 0
+  let removedCount = 0;
   if (templateId === 'DTIDE_5' && nextTeams.length > targetCount) {
-    const kept = nextTeams.slice(0, targetCount)
-    const tail = nextTeams.slice(targetCount)
-    const retainedTail = tail.filter((team) => !isTeamEmpty(team))
-    removedCount = tail.length - retainedTail.length
-    nextTeams = [...kept, ...retainedTail]
+    const kept = nextTeams.slice(0, targetCount);
+    const tail = nextTeams.slice(targetCount);
+    const retainedTail = tail.filter((team) => !isTeamEmpty(team));
+    removedCount = tail.length - retainedTail.length;
+    nextTeams = [...kept, ...retainedTail];
   }
 
   if (neededTeams === 0 && renamedCount === 0 && removedCount === 0) {
-    return { nextTeams: currentTeams, createdCount: 0, renamedCount: 0, removedCount: 0, targetCount }
+    return {
+      nextTeams: currentTeams,
+      createdCount: 0,
+      renamedCount: 0,
+      removedCount: 0,
+      targetCount,
+    };
   }
 
   return {
@@ -203,5 +232,5 @@ export function applyTeamTemplate(currentTeams: Team[], templateId: TeamTemplate
     renamedCount,
     removedCount,
     targetCount,
-  }
+  };
 }

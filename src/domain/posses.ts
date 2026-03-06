@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import possesLite from '../data/posses-lite.json'
+import possesLite from '@/data/posses-lite.json';
+import {z} from 'zod';
 
 const rawPossesSchema = z.array(
   z.object({
@@ -10,19 +10,19 @@ const rawPossesSchema = z.array(
     isFadedLegacy: z.boolean(),
     awakenerName: z.string().trim().min(1).optional(),
   }),
-)
+);
 
-export type Posse = {
-  id: string
-  index: number
-  name: string
-  realm: string
-  isFadedLegacy: boolean
-  awakenerName?: string
+export interface Posse {
+  readonly id: string;
+  readonly index: number;
+  readonly name: string;
+  readonly realm: string;
+  readonly isFadedLegacy: boolean;
+  readonly awakenerName?: string;
 }
 
-const parsedPosses = rawPossesSchema.parse(possesLite)
+const parsedPosses = rawPossesSchema.parse(possesLite);
 
-export function getPosses(): Posse[] {
-  return parsedPosses
+export function getPosses(): readonly Posse[] {
+  return parsedPosses;
 }

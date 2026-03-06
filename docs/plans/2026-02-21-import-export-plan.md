@@ -3,9 +3,12 @@
 Last updated: 2026-02-22
 
 ## Goal
-Add import/export for builder teams using compact versioned codes, with safe validation and clear UX.
+
+Add import/export for builder teams using compact versioned codes, with safe
+validation and clear UX.
 
 ## Locked Decisions
+
 - Prefixes:
   - Single team export: `t1.`
   - Multi-team export: `mt1.`
@@ -23,6 +26,7 @@ Add import/export for builder teams using compact versioned codes, with safe val
   - `Cancel`
 
 ## Validation Rules
+
 - Reject unknown/missing prefix.
 - Reject unsupported version.
 - Reject malformed/corrupted code.
@@ -32,7 +36,9 @@ Add import/export for builder teams using compact versioned codes, with safe val
 - Import applies atomically (all-or-nothing).
 
 ## Scope Note (Wheel UI)
-- For this import/export phase, wheel picker UI wiring in Builder is intentionally deferred.
+
+- For this import/export phase, wheel picker UI wiring in Builder is
+  intentionally deferred.
 - Required for this phase:
   - wheel IDs must be serialized/deserialized in codes,
   - wheel IDs must be validated against `wheels-lite.json` on import.
@@ -40,8 +46,11 @@ Add import/export for builder teams using compact versioned codes, with safe val
   - full wheel picker rendering/assignment UX in builder sidebar.
 
 ## Implementation Steps
-1. [x] Add domain codec module (`encode/decode`) for `t1.` and `mt1.` with schema validation.
-2. [x] Add import planner utility (replace vs append, duplicate detection, strategy application).
+
+1. [x] Add domain codec module (`encode/decode`) for `t1.` and `mt1.` with
+       schema validation.
+2. [x] Add import planner utility (replace vs append, duplicate detection,
+       strategy application).
 3. [x] Add UI dialogs:
    - Import code modal (paste + submit)
    - Export code modal (auto-select text)
@@ -59,6 +68,7 @@ Add import/export for builder teams using compact versioned codes, with safe val
 8. [x] Doc update in README + roadmap once feature lands.
 
 ## Edge Cases
+
 - Empty import input.
 - `t1.` import when already at 10 teams.
 - `mt1.` payload with >10 teams.
@@ -67,6 +77,7 @@ Add import/export for builder teams using compact versioned codes, with safe val
 - Future format evolution path (`t2.` / `mt2.`).
 
 ## Current Status
+
 - Done:
   - Planning and requirements alignment.
   - `t1.`/`mt1.` codec + validation.
@@ -77,6 +88,7 @@ Add import/export for builder teams using compact versioned codes, with safe val
   - Wheel and covenant IDs included in compact payloads.
   - Import UX polish (autofocus + Enter submit in import dialog).
   - Merged to `main`.
-  - Follow-up: separate in-game `@@...@@` single-team import/export support was added under `docs/plans/2026-02-27-ingame-team-codec-plan.md`.
+  - Follow-up: separate in-game `@@...@@` single-team import/export support was
+    added under `docs/plans/2026-02-27-ingame-team-codec-plan.md`.
 - Pending:
   - None for this phase.

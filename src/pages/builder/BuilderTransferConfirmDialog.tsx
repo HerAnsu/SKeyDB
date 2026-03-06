@@ -1,24 +1,27 @@
-import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
+import {ConfirmDialog} from '@/components/ui/ConfirmDialog';
 
-type BuilderTransferConfirmDialogProps = {
-  dialog: {
-    title: string
-    message: string
-    supportLabel?: string
-    onSupport?: () => void
-    onConfirm: () => void
-  } | null
-  onCancel: () => void
+export interface BuilderTransferConfirmDialogProps {
+  readonly dialog: {
+    readonly title: string;
+    readonly message: string;
+    readonly supportLabel?: string;
+    readonly onSupport?: () => void;
+    readonly onConfirm: () => void;
+  } | null;
+  readonly onCancel: () => void;
 }
 
-export function BuilderTransferConfirmDialog({ dialog, onCancel }: BuilderTransferConfirmDialogProps) {
+export function BuilderTransferConfirmDialog({
+  dialog,
+  onCancel,
+}: BuilderTransferConfirmDialogProps) {
   if (!dialog) {
-    return null
+    return null;
   }
 
   return (
     <ConfirmDialog
-      cancelLabel="Cancel"
+      cancelLabel='Cancel'
       confirmLabel={dialog.supportLabel ? 'Move Instead' : 'Move'}
       message={dialog.message}
       onCancel={onCancel}
@@ -27,5 +30,5 @@ export function BuilderTransferConfirmDialog({ dialog, onCancel }: BuilderTransf
       secondaryLabel={dialog.supportLabel}
       title={dialog.title}
     />
-  )
+  );
 }

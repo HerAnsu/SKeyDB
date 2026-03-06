@@ -1,19 +1,18 @@
-import { ModalFrame } from './ModalFrame'
-import { Button } from './Button'
-import type { ButtonVariant } from './Button'
+import {Button, type ButtonVariant} from '@/components/ui/Button';
+import {ModalFrame} from '@/components/ui/ModalFrame';
 
-type ConfirmDialogProps = {
-  title: string
-  message: string
-  confirmLabel?: string
-  cancelLabel?: string
-  secondaryLabel?: string
-  onConfirm: () => void
-  onCancel: () => void
-  onSecondary?: () => void
-  overlayClassName?: string
-  dialogClassName?: string
-  confirmVariant?: ButtonVariant
+interface ConfirmDialogProps {
+  readonly title: string;
+  readonly message: string;
+  readonly confirmLabel?: string;
+  readonly cancelLabel?: string;
+  readonly secondaryLabel?: string;
+  readonly onConfirm: () => void;
+  readonly onCancel: () => void;
+  readonly onSecondary?: () => void;
+  readonly overlayClassName?: string;
+  readonly dialogClassName?: string;
+  readonly confirmVariant?: ButtonVariant;
 }
 
 export function ConfirmDialog({
@@ -30,14 +29,18 @@ export function ConfirmDialog({
   confirmVariant = 'primary',
 }: ConfirmDialogProps) {
   return (
-    <ModalFrame overlayClassName={overlayClassName} panelClassName={dialogClassName} title={title}>
-      <p className="mt-2 text-sm text-slate-200">{message}</p>
-      <div className="mt-4 flex justify-end gap-2">
-        <Button onClick={onCancel} variant="secondary">
+    <ModalFrame
+      overlayClassName={overlayClassName}
+      panelClassName={dialogClassName}
+      title={title}
+    >
+      <p className='mt-2 text-sm text-slate-200'>{message}</p>
+      <div className='mt-4 flex justify-end gap-2'>
+        <Button onClick={onCancel} variant='secondary'>
           {cancelLabel}
         </Button>
         {secondaryLabel && onSecondary ? (
-          <Button onClick={onSecondary} variant="secondary">
+          <Button onClick={onSecondary} variant='secondary'>
             {secondaryLabel}
           </Button>
         ) : null}
@@ -46,5 +49,5 @@ export function ConfirmDialog({
         </Button>
       </div>
     </ModalFrame>
-  )
+  );
 }

@@ -1,53 +1,57 @@
-import { useCallback, useEffect, useMemo, useState, type RefObject } from 'react'
-import { getAwakenerIdentityKey } from '../../domain/awakener-identity'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import { getCovenants } from '../../domain/covenants'
-import { getPosses } from '../../domain/posses'
-import { getWheelMainstatLabel, getWheels } from '../../domain/wheels'
-import { compareWheelsForUi } from '../../domain/wheel-sort'
-import { getBrowserLocalStorage, safeStorageRead, safeStorageWrite } from '../../domain/storage'
-import { getPosseAssetById } from '../../domain/posse-assets'
+import {getAwakenerIdentityKey} from '@/domain/awakener-identity';
+import {searchAwakeners} from '@/domain/awakeners-search';
+import {loadCollectionOwnership} from '@/domain/collection-ownership';
 import {
   compareAwakenersForCollectionSort,
   type AwakenerSortKey,
   type CollectionSortDirection,
-} from '../../domain/collection-sorting'
+} from '@/domain/collection-sorting';
+import {getCovenants} from '@/domain/covenants';
+import {formatAwakenerNameForUi} from '@/domain/name-format';
+import {getPosseAssetById} from '@/domain/posse-assets';
+import {getPosses} from '@/domain/posses';
+import {searchPosses} from '@/domain/posses-search';
 import {
-  loadCollectionOwnership,
-} from '../../domain/collection-ownership'
-import { searchAwakeners } from '../../domain/awakeners-search'
-import { searchPosses } from '../../domain/posses-search'
-import { allAwakeners, createEmptyTeamSlots } from './constants'
+  getBrowserLocalStorage,
+  safeStorageRead,
+  safeStorageWrite,
+} from '@/domain/storage';
+import {compareWheelsForUi} from '@/domain/wheel-sort';
+import {getWheelMainstatLabel, getWheels} from '@/domain/wheels';
 import {
-  clearCovenantAssignment,
-  clearSlotAssignment,
-  clearWheelAssignment,
-  getTeamRealmSet,
-  swapSlotAssignments,
-} from './team-state'
-import { createInitialTeams, renameTeam } from './team-collection'
+  loadBuilderDraft,
+  saveBuilderDraft,
+  type BuilderDraftPayload,
+} from '@/pages/builder/builder-persistence';
+import {allAwakeners, createEmptyTeamSlots} from '@/pages/builder/constants';
 import {
   createQuickLineupSession,
   findNextQuickLineupStepIndex,
   findQuickLineupStepIndex,
-  goBackQuickLineupHistory,
-  goToQuickLineupStep,
   getPublicQuickLineupSession,
   getQuickLineupStepAtIndex,
   getQuickLineupStepPickerTab,
   getQuickLineupStepSelection,
+  goBackQuickLineupHistory,
+  goToQuickLineupStep,
   reconcileQuickLineupSessionAfterSlotsChange,
   type InternalQuickLineupSession,
-} from './quick-lineup'
+} from '@/pages/builder/quick-lineup';
 import {
   nextSelectionAfterCovenantRemoved,
   nextSelectionAfterWheelRemoved,
   toggleAwakenerSelection,
   toggleCovenantSelection,
   toggleWheelSelection,
-} from './selection-state'
-import { matchesWheelMainstat } from './wheel-mainstats'
-import { loadBuilderDraft, saveBuilderDraft, type BuilderDraftPayload } from './builder-persistence'
+} from '@/pages/builder/selection-state';
+import {createInitialTeams, renameTeam} from '@/pages/builder/team-collection';
+import {
+  clearCovenantAssignment,
+  clearSlotAssignment,
+  clearWheelAssignment,
+  getTeamRealmSet,
+  swapSlotAssignments,
+} from '@/pages/builder/team-state';
 import type {
   ActiveSelection,
   AwakenerFilter,
@@ -58,200 +62,288 @@ import type {
   TeamPreviewMode,
   TeamSlot,
   WheelMainstatFilter,
-  WheelUsageLocation,
   WheelRarityFilter,
-} from './types'
-import { useGlobalPickerSearchCapture } from './useGlobalPickerSearchCapture'
+  WheelUsageLocation,
+} from '@/pages/builder/types';
+import {useGlobalPickerSearchCapture} from '@/pages/builder/useGlobalPickerSearchCapture';
+import {matchesWheelMainstat} from '@/pages/builder/wheel-mainstats';
+import {useCallback, useEffect, useMemo, useState, type RefObject} from 'react';
 
-const EMPTY_TEAM_SLOTS: TeamSlot[] = []
 function normalizeForSearch(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, '')
+  return value.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
-type UseBuilderViewModelOptions = {
-  searchInputRef: RefObject<HTMLInputElement | null>
+export interface UseBuilderViewModelOptions {
+  searchInputRef: RefObject<HTMLInputElement | null>;
 }
-type TeamRenameSurface = 'header' | 'list'
 
-const BUILDER_AUTOSAVE_DEBOUNCE_MS = 300
-const BUILDER_AWAKENER_SORT_KEY_KEY = 'skeydb.builder.awakenerSortKey.v1'
-const BUILDER_AWAKENER_SORT_DIRECTION_KEY = 'skeydb.builder.awakenerSortDirection.v1'
-const BUILDER_AWAKENER_SORT_GROUP_BY_REALM_KEY = 'skeydb.builder.awakenerSortGroupByFaction.v1'
-const BUILDER_DISPLAY_UNOWNED_KEY = 'skeydb.builder.displayUnowned.v1'
-const BUILDER_ALLOW_DUPES_KEY = 'skeydb.builder.allowDupes.v1'
-const BUILDER_TEAM_PREVIEW_MODE_KEY = 'skeydb.builder.teamPreviewMode.v1'
+type TeamRenameSurface = 'header' | 'list';
+
+const BUILDER_AUTOSAVE_DEBOUNCE_MS = 300;
+const BUILDER_AWAKENER_SORT_KEY_KEY = 'skeydb.builder.awakenerSortKey.v1';
+const BUILDER_AWAKENER_SORT_DIRECTION_KEY =
+  'skeydb.builder.awakenerSortDirection.v1';
+const BUILDER_AWAKENER_SORT_GROUP_BY_REALM_KEY =
+  'skeydb.builder.awakenerSortGroupByFaction.v1';
+const BUILDER_DISPLAY_UNOWNED_KEY = 'skeydb.builder.displayUnowned.v1';
+const BUILDER_ALLOW_DUPES_KEY = 'skeydb.builder.allowDupes.v1';
+const BUILDER_TEAM_PREVIEW_MODE_KEY = 'skeydb.builder.teamPreviewMode.v1';
 
 function createDefaultBuilderState() {
-  const teams = createInitialTeams()
+  const teams = createInitialTeams();
   return {
     teams,
     activeTeamId: teams[0]?.id ?? '',
-  }
+  };
 }
 
-export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptions) {
-  const storage = useMemo(() => getBrowserLocalStorage(), [])
+export function useBuilderViewModel({
+  searchInputRef,
+}: UseBuilderViewModelOptions) {
+  const storage = useMemo(() => getBrowserLocalStorage(), []);
   const initialBuilderState = useMemo(() => {
-    const persisted = loadBuilderDraft(storage)
-    return persisted ?? createDefaultBuilderState()
-  }, [storage])
-  const [teams, setTeams] = useState<Team[]>(initialBuilderState.teams)
-  const [activeTeamId, setActiveTeamId] = useState<string>(initialBuilderState.activeTeamId)
-  const [collectionOwnership] = useState(() => loadCollectionOwnership(storage))
-  const [editingTeamId, setEditingTeamId] = useState<string | null>(null)
-  const [editingTeamName, setEditingTeamName] = useState('')
-  const [editingTeamSurface, setEditingTeamSurface] = useState<TeamRenameSurface | null>(null)
-  const [pickerTab, setPickerTab] = useState<PickerTab>('awakeners')
-  const [awakenerFilter, setAwakenerFilter] = useState<AwakenerFilter>('ALL')
-  const [posseFilter, setPosseFilter] = useState<PosseFilter>('ALL')
-  const [wheelRarityFilter, setWheelRarityFilter] = useState<WheelRarityFilter>('ALL')
-  const [wheelMainstatFilter, setWheelMainstatFilter] = useState<WheelMainstatFilter>('ALL')
-  const [awakenerSortKey, setAwakenerSortKey] = useState<AwakenerSortKey>(() => {
-    const stored = safeStorageRead(storage, BUILDER_AWAKENER_SORT_KEY_KEY)
-    if (stored === 'LEVEL' || stored === 'RARITY' || stored === 'ENLIGHTEN' || stored === 'ALPHABETICAL') {
-      return stored
-    }
-    return 'LEVEL'
-  })
-  const [awakenerSortDirection, setAwakenerSortDirection] = useState<CollectionSortDirection>(() => {
-    return safeStorageRead(storage, BUILDER_AWAKENER_SORT_DIRECTION_KEY) === 'ASC' ? 'ASC' : 'DESC'
-  })
-  const [awakenerSortGroupByRealm, setAwakenerSortGroupByRealm] = useState(() => {
-    const stored = safeStorageRead(storage, BUILDER_AWAKENER_SORT_GROUP_BY_REALM_KEY)
-    if (stored === '1') {
-      return true
-    }
-    if (stored === '0') {
-      return false
-    }
-    return true
-  })
-  const [pickerSearchByTab, setPickerSearchByTab] = useState<Record<PickerTab, string>>({
+    const persisted = loadBuilderDraft(storage);
+    return persisted ?? createDefaultBuilderState();
+  }, [storage]);
+  const [teams, setTeams] = useState<readonly Team[]>(
+    initialBuilderState.teams,
+  );
+  const [activeTeamId, setActiveTeamId] = useState<string>(
+    initialBuilderState.activeTeamId,
+  );
+  const [collectionOwnership] = useState(() =>
+    loadCollectionOwnership(storage),
+  );
+  const [editingTeamId, setEditingTeamId] = useState<string | null>(null);
+  const [editingTeamName, setEditingTeamName] = useState('');
+  const [editingTeamSurface, setEditingTeamSurface] =
+    useState<TeamRenameSurface | null>(null);
+  const [pickerTab, setPickerTab] = useState<PickerTab>('awakeners');
+  const [awakenerFilter, setAwakenerFilter] = useState<AwakenerFilter>('ALL');
+  const [posseFilter, setPosseFilter] = useState<PosseFilter>('ALL');
+  const [wheelRarityFilter, setWheelRarityFilter] =
+    useState<WheelRarityFilter>('ALL');
+  const [wheelMainstatFilter, setWheelMainstatFilter] =
+    useState<WheelMainstatFilter>('ALL');
+  const [awakenerSortKey, setAwakenerSortKey] = useState<AwakenerSortKey>(
+    () => {
+      const stored = safeStorageRead(storage, BUILDER_AWAKENER_SORT_KEY_KEY);
+      if (
+        stored === 'LEVEL' ||
+        stored === 'RARITY' ||
+        stored === 'ENLIGHTEN' ||
+        stored === 'ALPHABETICAL'
+      ) {
+        return stored;
+      }
+      return 'LEVEL';
+    },
+  );
+  const [awakenerSortDirection, setAwakenerSortDirection] =
+    useState<CollectionSortDirection>(() => {
+      return safeStorageRead(storage, BUILDER_AWAKENER_SORT_DIRECTION_KEY) ===
+        'ASC'
+        ? 'ASC'
+        : 'DESC';
+    });
+  const [awakenerSortGroupByRealm, setAwakenerSortGroupByRealm] = useState(
+    () => {
+      const stored = safeStorageRead(
+        storage,
+        BUILDER_AWAKENER_SORT_GROUP_BY_REALM_KEY,
+      );
+      if (stored === '1') {
+        return true;
+      }
+      if (stored === '0') {
+        return false;
+      }
+      return true;
+    },
+  );
+  const [pickerSearchByTab, setPickerSearchByTab] = useState<
+    Record<PickerTab, string>
+  >({
     awakeners: '',
     wheels: '',
     posses: '',
     covenants: '',
-  })
-  const [activeSelection, setActiveSelection] = useState<ActiveSelection>(null)
+  });
+  const [activeSelection, setActiveSelection] = useState<ActiveSelection>(null);
   const [displayUnowned, setDisplayUnowned] = useState(() => {
-    const stored = safeStorageRead(storage, BUILDER_DISPLAY_UNOWNED_KEY)
+    const stored = safeStorageRead(storage, BUILDER_DISPLAY_UNOWNED_KEY);
     if (stored === '1') {
-      return true
+      return true;
     }
     if (stored === '0') {
-      return false
+      return false;
     }
-    return true
-  })
+    return true;
+  });
   const [allowDupes, setAllowDupes] = useState(() => {
-    const stored = safeStorageRead(storage, BUILDER_ALLOW_DUPES_KEY)
+    const stored = safeStorageRead(storage, BUILDER_ALLOW_DUPES_KEY);
     if (stored === '1') {
-      return true
+      return true;
     }
     if (stored === '0') {
-      return false
+      return false;
     }
-    return false
-  })
-  const [teamPreviewMode, setTeamPreviewMode] = useState<TeamPreviewMode>(() => {
-    const stored = safeStorageRead(storage, BUILDER_TEAM_PREVIEW_MODE_KEY)
-    if (stored === 'compact' || stored === 'expanded') {
-      return stored
-    }
-    return 'compact'
-  })
-  const [quickLineupState, setQuickLineupState] = useState<InternalQuickLineupSession | null>(null)
+    return false;
+  });
+  const [teamPreviewMode, setTeamPreviewMode] = useState<TeamPreviewMode>(
+    () => {
+      const stored = safeStorageRead(storage, BUILDER_TEAM_PREVIEW_MODE_KEY);
+      if (stored === 'compact' || stored === 'expanded') {
+        return stored;
+      }
+      return 'compact';
+    },
+  );
+  const [quickLineupState, setQuickLineupState] =
+    useState<InternalQuickLineupSession | null>(null);
 
   const effectiveActiveTeamId = useMemo(
-    () => (teams.some((team) => team.id === activeTeamId) ? activeTeamId : (teams[0]?.id ?? '')),
+    () =>
+      teams.some((team) => team.id === activeTeamId)
+        ? activeTeamId
+        : (teams[0]?.id ?? ''),
     [teams, activeTeamId],
-  )
+  );
   const activeTeam = useMemo(
     () => teams.find((team) => team.id === effectiveActiveTeamId) ?? teams[0],
     [teams, effectiveActiveTeamId],
-  )
-  const teamSlots = activeTeam?.slots ?? EMPTY_TEAM_SLOTS
-  const activePosseId = activeTeam?.posseId
+  );
+  const teamSlots = activeTeam.slots;
+  const activePosseId = activeTeam.posseId;
 
   function updateActiveTeam(mutator: (team: Team) => Team) {
-    if (!activeTeam) {
-      return
-    }
-    setTeams((prev) => prev.map((team) => (team.id === activeTeam.id ? mutator(team) : team)))
+    setTeams((prev) =>
+      prev.map((team) => (team.id === activeTeam.id ? mutator(team) : team)),
+    );
   }
 
-  function setActiveTeamSlots(nextSlots: TeamSlot[]) {
-    updateActiveTeam((team) => ({ ...team, slots: nextSlots }))
+  function setActiveTeamSlots(nextSlots: readonly TeamSlot[]) {
+    updateActiveTeam((team) => ({...team, slots: nextSlots}));
   }
 
   const pickerAwakeners = useMemo(
-    () => [...allAwakeners].sort((left, right) => formatAwakenerNameForUi(left.name).localeCompare(formatAwakenerNameForUi(right.name))),
+    () =>
+      [...allAwakeners].sort((left, right) =>
+        formatAwakenerNameForUi(left.name).localeCompare(
+          formatAwakenerNameForUi(right.name),
+        ),
+      ),
     [],
-  )
-  const pickerPosses = useMemo(() => [...getPosses()].sort((left, right) => left.name.localeCompare(right.name)), [])
-  const pickerCovenants = useMemo(() => [...getCovenants()].sort((left, right) => left.id.localeCompare(right.id)), [])
-  const pickerWheels = useMemo(() => [...getWheels()], [])
+  );
+  const pickerPosses = useMemo(
+    () =>
+      [...getPosses()].sort((left, right) =>
+        left.name.localeCompare(right.name),
+      ),
+    [],
+  );
+  const pickerCovenants = useMemo(
+    () =>
+      [...getCovenants()].sort((left, right) =>
+        left.id.localeCompare(right.id),
+      ),
+    [],
+  );
+  const pickerWheels = useMemo(() => [...getWheels()], []);
   const awakenerIdByName = useMemo(
-    () => new Map(pickerAwakeners.map((awakener) => [awakener.name, String(awakener.id)])),
+    () =>
+      new Map(
+        pickerAwakeners.map((awakener) => [awakener.name, String(awakener.id)]),
+      ),
     [pickerAwakeners],
-  )
+  );
   const ownedAwakenerLevelByName = useMemo(
     () =>
       new Map(
         pickerAwakeners.map((awakener) => {
-          const awakenerId = awakenerIdByName.get(awakener.name)
+          const awakenerId = awakenerIdByName.get(awakener.name);
           const level =
-            typeof awakenerId === 'string' ? (collectionOwnership.ownedAwakeners[awakenerId] ?? null) : null
-          return [awakener.name, level]
+            typeof awakenerId === 'string'
+              ? (collectionOwnership.ownedAwakeners[awakenerId] ?? null)
+              : null;
+          return [awakener.name, level];
         }),
       ),
     [pickerAwakeners, awakenerIdByName, collectionOwnership.ownedAwakeners],
-  )
+  );
   const awakenerLevelByName = useMemo(
     () =>
       new Map(
         pickerAwakeners.map((awakener) => {
-          const awakenerId = awakenerIdByName.get(awakener.name)
+          const awakenerId = awakenerIdByName.get(awakener.name);
           const level =
-            typeof awakenerId === 'string' ? (collectionOwnership.awakenerLevels[awakenerId] ?? 60) : 60
-          return [awakener.name, level]
+            typeof awakenerId === 'string'
+              ? (collectionOwnership.awakenerLevels[awakenerId] ?? 60)
+              : 60;
+          return [awakener.name, level];
         }),
       ),
     [pickerAwakeners, awakenerIdByName, collectionOwnership.awakenerLevels],
-  )
+  );
   const ownedWheelLevelById = useMemo(
-    () => new Map(pickerWheels.map((wheel) => [wheel.id, collectionOwnership.ownedWheels[wheel.id] ?? null])),
+    () =>
+      new Map(
+        pickerWheels.map((wheel) => [
+          wheel.id,
+          collectionOwnership.ownedWheels[wheel.id] ?? null,
+        ]),
+      ),
     [pickerWheels, collectionOwnership.ownedWheels],
-  )
+  );
   const ownedPosseLevelById = useMemo(
-    () => new Map(pickerPosses.map((posse) => [posse.id, collectionOwnership.ownedPosses[posse.id] ?? null])),
+    () =>
+      new Map(
+        pickerPosses.map((posse) => [
+          posse.id,
+          collectionOwnership.ownedPosses[posse.id] ?? null,
+        ]),
+      ),
     [pickerPosses, collectionOwnership.ownedPosses],
-  )
+  );
 
   const isAwakenerOwnedByName = useCallback(
-    (awakenerName: string) => ownedAwakenerLevelByName.get(awakenerName) !== null,
+    (awakenerName: string) =>
+      typeof ownedAwakenerLevelByName.get(awakenerName) === 'number',
     [ownedAwakenerLevelByName],
-  )
-  const isWheelOwnedById = useCallback((wheelId: string) => ownedWheelLevelById.get(wheelId) !== null, [ownedWheelLevelById])
-  const isPosseOwnedById = useCallback((posseId: string) => ownedPosseLevelById.get(posseId) !== null, [ownedPosseLevelById])
+  );
+  const isWheelOwnedById = useCallback(
+    (wheelId: string) => typeof ownedWheelLevelById.get(wheelId) === 'number',
+    [ownedWheelLevelById],
+  );
+  const isPosseOwnedById = useCallback(
+    (posseId: string) => typeof ownedPosseLevelById.get(posseId) === 'number',
+    [ownedPosseLevelById],
+  );
 
   const activePosse = useMemo(
     () => pickerPosses.find((posse) => posse.id === activePosseId),
     [activePosseId, pickerPosses],
-  )
-  const activePosseAsset = activePosse ? getPosseAssetById(activePosse.id) : undefined
-  const activeSearchQuery = pickerSearchByTab[pickerTab]
+  );
+  const activePosseAsset = activePosse
+    ? getPosseAssetById(activePosse.id)
+    : undefined;
+  const activeSearchQuery = pickerSearchByTab[pickerTab];
 
   const searchedAwakeners = useMemo(
     () => searchAwakeners(pickerAwakeners, pickerSearchByTab.awakeners),
     [pickerAwakeners, pickerSearchByTab.awakeners],
-  )
+  );
   const filteredAwakeners = useMemo(() => {
     const byRealm =
       awakenerFilter === 'ALL'
         ? searchedAwakeners
-        : searchedAwakeners.filter((awakener) => awakener.realm.trim().toUpperCase() === awakenerFilter)
-    const byOwnership = displayUnowned ? byRealm : byRealm.filter((awakener) => isAwakenerOwnedByName(awakener.name))
+        : searchedAwakeners.filter(
+            (awakener) =>
+              awakener.realm.trim().toUpperCase() === awakenerFilter,
+          );
+    const byOwnership = displayUnowned
+      ? byRealm
+      : byRealm.filter((awakener) => isAwakenerOwnedByName(awakener.name));
 
     return [...byOwnership].sort((left, right) =>
       compareAwakenersForCollectionSort(
@@ -279,7 +371,7 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
           groupByRealm: awakenerSortGroupByRealm,
         },
       ),
-    )
+    );
   }, [
     awakenerFilter,
     searchedAwakeners,
@@ -290,29 +382,35 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
     awakenerSortKey,
     awakenerSortDirection,
     awakenerSortGroupByRealm,
-  ])
+  ]);
 
   const searchedPosses = useMemo(
     () => searchPosses(pickerPosses, pickerSearchByTab.posses),
     [pickerPosses, pickerSearchByTab.posses],
-  )
+  );
   const filteredPosses = useMemo(() => {
     if (posseFilter === 'ALL') {
-      return displayUnowned ? searchedPosses : searchedPosses.filter((posse) => isPosseOwnedById(posse.id))
+      return displayUnowned
+        ? searchedPosses
+        : searchedPosses.filter((posse) => isPosseOwnedById(posse.id));
     }
     if (posseFilter === 'FADED_LEGACY') {
-      return searchedPosses.filter((posse) => posse.isFadedLegacy && (displayUnowned || isPosseOwnedById(posse.id)))
+      return searchedPosses.filter(
+        (posse) =>
+          posse.isFadedLegacy && (displayUnowned || isPosseOwnedById(posse.id)),
+      );
     }
     return searchedPosses.filter(
       (posse) =>
         !posse.isFadedLegacy &&
         posse.realm.trim().toUpperCase() === posseFilter &&
         (displayUnowned || isPosseOwnedById(posse.id)),
-    )
-  }, [posseFilter, searchedPosses, displayUnowned, isPosseOwnedById])
+    );
+  }, [posseFilter, searchedPosses, displayUnowned, isPosseOwnedById]);
+
   const filteredWheels = useMemo(() => {
-    const query = pickerSearchByTab.wheels.trim().toLowerCase()
-    const normalizedQuery = normalizeForSearch(query)
+    const query = pickerSearchByTab.wheels.trim().toLowerCase();
+    const normalizedQuery = normalizeForSearch(query);
     const matchedAwakenerNames =
       normalizedQuery.length > 0
         ? new Set(
@@ -324,35 +422,45 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
               )
               .map((awakener) => awakener.name.toLowerCase()),
           )
-        : null
+        : null;
     const wheelsByRarity =
-      wheelRarityFilter === 'ALL' ? pickerWheels : pickerWheels.filter((wheel) => wheel.rarity === wheelRarityFilter)
+      wheelRarityFilter === 'ALL'
+        ? pickerWheels
+        : pickerWheels.filter((wheel) => wheel.rarity === wheelRarityFilter);
     const wheelsByMainstat =
       wheelMainstatFilter === 'ALL'
         ? wheelsByRarity
-        : wheelsByRarity.filter((wheel) => matchesWheelMainstat(wheel.mainstatKey, wheelMainstatFilter))
+        : wheelsByRarity.filter((wheel) =>
+            matchesWheelMainstat(wheel.mainstatKey, wheelMainstatFilter),
+          );
 
-    const queryFiltered = !query
-      ? displayUnowned
-        ? wheelsByMainstat
-        : wheelsByMainstat.filter((wheel) => isWheelOwnedById(wheel.id))
-      : wheelsByMainstat.filter((wheel) => {
-      if (!displayUnowned && !isWheelOwnedById(wheel.id)) {
-        return false
+    let queryFiltered = wheelsByMainstat;
+    if (!query) {
+      if (!displayUnowned) {
+        queryFiltered = wheelsByMainstat.filter((wheel) =>
+          isWheelOwnedById(wheel.id),
+        );
       }
-      return (
-        wheel.name.toLowerCase().includes(query) ||
-        wheel.rarity.toLowerCase().includes(query) ||
-        wheel.realm.toLowerCase().includes(query) ||
-        wheel.awakener.toLowerCase().includes(query) ||
-        getWheelMainstatLabel(wheel).toLowerCase().includes(query) ||
-        wheel.mainstatKey.toLowerCase().includes(query) ||
-        Boolean(matchedAwakenerNames?.has(wheel.awakener.toLowerCase()))
-      )
-    })
+    } else {
+      queryFiltered = wheelsByMainstat.filter((wheel) => {
+        if (!displayUnowned && !isWheelOwnedById(wheel.id)) {
+          return false;
+        }
+        return (
+          wheel.name.toLowerCase().includes(query) ||
+          wheel.rarity.toLowerCase().includes(query) ||
+          wheel.realm.toLowerCase().includes(query) ||
+          wheel.awakener.toLowerCase().includes(query) ||
+          getWheelMainstatLabel(wheel).toLowerCase().includes(query) ||
+          wheel.mainstatKey.toLowerCase().includes(query) ||
+          Boolean(matchedAwakenerNames?.has(wheel.awakener.toLowerCase()))
+        );
+      });
+    }
+
     return [...queryFiltered].sort((left, right) =>
       compareWheelsForUi(left, right),
-    )
+    );
   }, [
     pickerAwakeners,
     pickerWheels,
@@ -361,229 +469,297 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
     wheelRarityFilter,
     displayUnowned,
     isWheelOwnedById,
-  ])
+  ]);
+
   const filteredCovenants = useMemo(() => {
-    const query = pickerSearchByTab.covenants.trim().toLowerCase()
+    const query = pickerSearchByTab.covenants.trim().toLowerCase();
     if (!query) {
-      return pickerCovenants
+      return pickerCovenants;
     }
     return pickerCovenants.filter(
-      (covenant) => covenant.name.toLowerCase().includes(query) || covenant.id.toLowerCase().includes(query),
-    )
-  }, [pickerCovenants, pickerSearchByTab.covenants])
+      (covenant) =>
+        covenant.name.toLowerCase().includes(query) ||
+        covenant.id.toLowerCase().includes(query),
+    );
+  }, [pickerCovenants, pickerSearchByTab.covenants]);
 
-  const teamRealmSet = useMemo(() => getTeamRealmSet(teamSlots), [teamSlots])
+  const teamRealmSet = useMemo(() => getTeamRealmSet(teamSlots), [teamSlots]);
+
   const usedAwakenerByIdentityKey = useMemo(() => {
-    const identityMap = new Map<string, string>()
-    teams.forEach((team) => {
-      team.slots.forEach((slot) => {
+    const identityMap = new Map<string, string>();
+    for (const team of teams) {
+      for (const slot of team.slots) {
         if (!slot.awakenerName || slot.isSupport) {
-          return
+          continue;
         }
-        const identityKey = getAwakenerIdentityKey(slot.awakenerName)
+        const identityKey = getAwakenerIdentityKey(slot.awakenerName);
         if (!identityMap.has(identityKey)) {
-          identityMap.set(identityKey, team.id)
+          identityMap.set(identityKey, team.id);
         }
-      })
-    })
-    return identityMap
-  }, [teams])
-  const usedAwakenerIdentityKeys = useMemo(() => new Set(usedAwakenerByIdentityKey.keys()), [usedAwakenerByIdentityKey])
+      }
+    }
+    return identityMap;
+  }, [teams]);
+
+  const usedAwakenerIdentityKeys = useMemo(
+    () => new Set(usedAwakenerByIdentityKey.keys()),
+    [usedAwakenerByIdentityKey],
+  );
+
   const usedPosseByTeamOrder = useMemo(() => {
-    const posseMap = new Map<string, number>()
+    const posseMap = new Map<string, number>();
     teams.forEach((team, index) => {
       if (!team.posseId || posseMap.has(team.posseId)) {
-        return
+        return;
       }
-      posseMap.set(team.posseId, index)
-    })
-    return posseMap
-  }, [teams])
+      posseMap.set(team.posseId, index);
+    });
+    return posseMap;
+  }, [teams]);
+
   const usedWheelByTeamOrder = useMemo(() => {
-    const wheelMap = new Map<string, WheelUsageLocation>()
-    teams.forEach((team, teamOrder) => {
-      team.slots.forEach((slot) => {
+    const wheelMap = new Map<string, WheelUsageLocation>();
+    for (let teamOrder = 0; teamOrder < teams.length; teamOrder++) {
+      const team = teams[teamOrder];
+      for (const slot of team.slots) {
         if (slot.isSupport) {
-          return
+          continue;
         }
-        slot.wheels.forEach((wheelId, wheelIndex) => {
+        for (
+          let wheelIndex = 0;
+          wheelIndex < slot.wheels.length;
+          wheelIndex++
+        ) {
+          const wheelId = slot.wheels[wheelIndex];
           if (!wheelId || wheelMap.has(wheelId)) {
-            return
+            continue;
           }
-          wheelMap.set(wheelId, { teamOrder, teamId: team.id, slotId: slot.slotId, wheelIndex })
-        })
-      })
-    })
-    return wheelMap
-  }, [teams])
+          wheelMap.set(wheelId, {
+            teamOrder,
+            teamId: team.id,
+            slotId: slot.slotId,
+            wheelIndex,
+          });
+        }
+      }
+    }
+    return wheelMap;
+  }, [teams]);
+
   const hasSupportAwakener = useMemo(
     () => teams.some((team) => team.slots.some((slot) => slot.isSupport)),
     [teams],
-  )
+  );
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
-      saveBuilderDraft(storage, { teams, activeTeamId: effectiveActiveTeamId })
-    }, BUILDER_AUTOSAVE_DEBOUNCE_MS)
+      saveBuilderDraft(storage, {teams, activeTeamId: effectiveActiveTeamId});
+    }, BUILDER_AUTOSAVE_DEBOUNCE_MS);
 
     return () => {
-      window.clearTimeout(timeoutId)
-    }
-  }, [storage, teams, effectiveActiveTeamId])
+      window.clearTimeout(timeoutId);
+    };
+  }, [storage, teams, effectiveActiveTeamId]);
 
   useEffect(() => {
-    safeStorageWrite(storage, BUILDER_AWAKENER_SORT_GROUP_BY_REALM_KEY, awakenerSortGroupByRealm ? '1' : '0')
-  }, [storage, awakenerSortGroupByRealm])
+    safeStorageWrite(
+      storage,
+      BUILDER_AWAKENER_SORT_GROUP_BY_REALM_KEY,
+      awakenerSortGroupByRealm ? '1' : '0',
+    );
+  }, [storage, awakenerSortGroupByRealm]);
 
   useEffect(() => {
-    safeStorageWrite(storage, BUILDER_AWAKENER_SORT_KEY_KEY, awakenerSortKey)
-  }, [storage, awakenerSortKey])
+    safeStorageWrite(storage, BUILDER_AWAKENER_SORT_KEY_KEY, awakenerSortKey);
+  }, [storage, awakenerSortKey]);
 
   useEffect(() => {
-    safeStorageWrite(storage, BUILDER_AWAKENER_SORT_DIRECTION_KEY, awakenerSortDirection)
-  }, [storage, awakenerSortDirection])
+    safeStorageWrite(
+      storage,
+      BUILDER_AWAKENER_SORT_DIRECTION_KEY,
+      awakenerSortDirection,
+    );
+  }, [storage, awakenerSortDirection]);
 
   useEffect(() => {
-    safeStorageWrite(storage, BUILDER_DISPLAY_UNOWNED_KEY, displayUnowned ? '1' : '0')
-  }, [storage, displayUnowned])
+    safeStorageWrite(
+      storage,
+      BUILDER_DISPLAY_UNOWNED_KEY,
+      displayUnowned ? '1' : '0',
+    );
+  }, [storage, displayUnowned]);
 
   useEffect(() => {
-    safeStorageWrite(storage, BUILDER_ALLOW_DUPES_KEY, allowDupes ? '1' : '0')
-  }, [storage, allowDupes])
+    safeStorageWrite(storage, BUILDER_ALLOW_DUPES_KEY, allowDupes ? '1' : '0');
+  }, [storage, allowDupes]);
 
   useEffect(() => {
-    safeStorageWrite(storage, BUILDER_TEAM_PREVIEW_MODE_KEY, teamPreviewMode)
-  }, [storage, teamPreviewMode])
+    safeStorageWrite(storage, BUILDER_TEAM_PREVIEW_MODE_KEY, teamPreviewMode);
+  }, [storage, teamPreviewMode]);
 
-  const appendSearchCharacter = useCallback((targetPickerTab: PickerTab, key: string) => {
-    setPickerSearchByTab((prev) => ({
-      ...prev,
-      [targetPickerTab]: `${prev[targetPickerTab]}${key}`,
-    }))
-  }, [])
-  useGlobalPickerSearchCapture({ pickerTab, searchInputRef, onAppendCharacter: appendSearchCharacter })
+  const appendSearchCharacter = useCallback(
+    (targetPickerTab: PickerTab, key: string) => {
+      setPickerSearchByTab((prev) => ({
+        ...prev,
+        [targetPickerTab]: `${prev[targetPickerTab]}${key}`,
+      }));
+    },
+    [],
+  );
+  useGlobalPickerSearchCapture({
+    pickerTab,
+    searchInputRef,
+    onAppendCharacter: appendSearchCharacter,
+  });
 
   const resolvedActiveSelection = useMemo(() => {
     if (!activeSelection) {
-      return null
+      return null;
     }
-    return teamSlots.some((slot) => slot.slotId === activeSelection.slotId) ? activeSelection : null
-  }, [activeSelection, teamSlots])
+    return teamSlots.some((slot) => slot.slotId === activeSelection.slotId)
+      ? activeSelection
+      : null;
+  }, [activeSelection, teamSlots]);
 
-  const slotById = useMemo(() => new Map(teamSlots.map((slot) => [slot.slotId, slot])), [teamSlots])
+  const slotById = useMemo(
+    () => new Map(teamSlots.map((slot) => [slot.slotId, slot])),
+    [teamSlots],
+  );
 
-  function beginTeamRename(teamId: string, currentName: string, surface: TeamRenameSurface = 'list') {
-    setEditingTeamId(teamId)
-    setEditingTeamName(currentName)
-    setEditingTeamSurface(surface)
+  function beginTeamRename(
+    teamId: string,
+    currentName: string,
+    surface: TeamRenameSurface = 'list',
+  ) {
+    setEditingTeamId(teamId);
+    setEditingTeamName(currentName);
+    setEditingTeamSurface(surface);
   }
 
   function cancelTeamRename() {
-    setEditingTeamId(null)
-    setEditingTeamName('')
-    setEditingTeamSurface(null)
+    setEditingTeamId(null);
+    setEditingTeamName('');
+    setEditingTeamSurface(null);
   }
 
   function commitTeamRename(teamId: string) {
-    const trimmed = editingTeamName.trim()
+    const trimmed = editingTeamName.trim();
     if (trimmed) {
-      setTeams((prev) => renameTeam(prev, teamId, trimmed))
+      setTeams((prev) => renameTeam(prev, teamId, trimmed));
     }
-    cancelTeamRename()
+    cancelTeamRename();
   }
 
   function handleCardClick(slotId: string) {
     if (quickLineupState) {
-      jumpToQuickLineupStep({ kind: 'awakener', slotId })
-      return
+      jumpToQuickLineupStep({kind: 'awakener', slotId});
+      return;
     }
-    setPickerTab('awakeners')
-    setActiveSelection((prev) => toggleAwakenerSelection(prev, slotId))
+    setPickerTab('awakeners');
+    setActiveSelection((prev) => toggleAwakenerSelection(prev, slotId));
   }
 
   function handleWheelSlotClick(slotId: string, wheelIndex: number) {
     if (quickLineupState) {
-      jumpToQuickLineupStep({ kind: 'wheel', slotId, wheelIndex })
-      return
+      jumpToQuickLineupStep({kind: 'wheel', slotId, wheelIndex});
+      return;
     }
-    setPickerTab('wheels')
-    setActiveSelection((prev) => toggleWheelSelection(prev, slotId, wheelIndex))
+    setPickerTab('wheels');
+    setActiveSelection((prev) =>
+      toggleWheelSelection(prev, slotId, wheelIndex),
+    );
   }
 
   function handleCovenantSlotClick(slotId: string) {
     if (quickLineupState) {
-      jumpToQuickLineupStep({ kind: 'covenant', slotId })
-      return
+      jumpToQuickLineupStep({kind: 'covenant', slotId});
+      return;
     }
-    setPickerTab('covenants')
-    setActiveSelection((prev) => toggleCovenantSelection(prev, slotId))
+    setPickerTab('covenants');
+    setActiveSelection((prev) => toggleCovenantSelection(prev, slotId));
   }
 
   function handleRemoveActiveSelection(slotId: string) {
-    if (!resolvedActiveSelection || resolvedActiveSelection.slotId !== slotId) {
-      return
+    if (resolvedActiveSelection?.slotId !== slotId) {
+      return;
     }
     if (resolvedActiveSelection.kind === 'awakener') {
-      clearTeamSlot(slotId)
-      return
+      clearTeamSlot(slotId);
+      return;
     }
     if (resolvedActiveSelection.kind === 'covenant') {
-      clearTeamCovenant(slotId)
-      return
+      clearTeamCovenant(slotId);
+      return;
     }
-    clearTeamWheel(slotId, resolvedActiveSelection.wheelIndex)
+    clearTeamWheel(slotId, resolvedActiveSelection.wheelIndex);
   }
 
   function replaceBuilderDraft(nextDraft: BuilderDraftPayload) {
-    setTeams(nextDraft.teams)
-    setActiveTeamId(nextDraft.activeTeamId)
-    saveBuilderDraft(storage, nextDraft)
+    setTeams(nextDraft.teams);
+    setActiveTeamId(nextDraft.activeTeamId);
+    saveBuilderDraft(storage, nextDraft);
   }
 
   function resetBuilderDraft() {
-    const nextDraft = createDefaultBuilderState()
-    replaceBuilderDraft(nextDraft)
-    return nextDraft
+    const nextDraft = createDefaultBuilderState();
+    replaceBuilderDraft(nextDraft);
+    return nextDraft;
   }
 
   function applyActiveTeamSlotMutation(
-    nextSlots: TeamSlot[],
-    preferredStep: Exclude<ActiveSelection, null> | { kind: 'posse' } | null = null,
+    nextSlots: readonly TeamSlot[],
+    preferredStep:
+      | Exclude<ActiveSelection, null>
+      | {kind: 'posse'}
+      | null = null,
     nextSelection: ActiveSelection = null,
   ) {
-    setActiveTeamSlots(nextSlots)
+    setActiveTeamSlots(nextSlots);
     if (quickLineupState) {
-      const nextSession = reconcileQuickLineupSessionAfterSlotsChange(quickLineupState, nextSlots, preferredStep)
-      setQuickLineupState(nextSession)
-      syncQuickLineupFocus(nextSession)
-      return
+      const nextSession = reconcileQuickLineupSessionAfterSlotsChange(
+        quickLineupState,
+        nextSlots,
+        preferredStep,
+      );
+      setQuickLineupState(nextSession);
+      syncQuickLineupFocus(nextSession);
+      return;
     }
-    setActiveSelection(nextSelection)
+    setActiveSelection(nextSelection);
   }
 
-  function syncQuickLineupFocus(nextSession: InternalQuickLineupSession | null) {
+  function syncQuickLineupFocus(
+    nextSession: InternalQuickLineupSession | null,
+  ) {
     if (!nextSession) {
-      setActiveSelection(null)
-      return
+      setActiveSelection(null);
+      return;
     }
 
-    const currentStep = getQuickLineupStepAtIndex(nextSession, nextSession.currentStepIndex)
+    const currentStep = getQuickLineupStepAtIndex(
+      nextSession,
+      nextSession.currentStepIndex,
+    );
     if (!currentStep) {
-      setActiveSelection(null)
-      return
+      setActiveSelection(null);
+      return;
     }
 
-    setPickerTab(getQuickLineupStepPickerTab(currentStep))
-    setActiveSelection(getQuickLineupStepSelection(currentStep))
+    setPickerTab(getQuickLineupStepPickerTab(currentStep));
+    setActiveSelection(getQuickLineupStepSelection(currentStep));
   }
 
   function clearTeamSlot(slotId: string) {
-    const result = clearSlotAssignment(teamSlots, slotId)
-    applyActiveTeamSlotMutation(result.nextSlots, { kind: 'awakener', slotId }, null)
+    const result = clearSlotAssignment(teamSlots, slotId);
+    applyActiveTeamSlotMutation(
+      result.nextSlots,
+      {kind: 'awakener', slotId},
+      null,
+    );
   }
 
   function clearTeamWheel(slotId: string, wheelIndex: number) {
-    const result = clearWheelAssignment(teamSlots, slotId, wheelIndex)
+    const result = clearWheelAssignment(teamSlots, slotId, wheelIndex);
     applyActiveTeamSlotMutation(
       result.nextSlots,
       {
@@ -591,126 +767,134 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
         slotId,
         wheelIndex,
       },
-      nextSelectionAfterWheelRemoved(resolvedActiveSelection, slotId, wheelIndex),
-    )
+      nextSelectionAfterWheelRemoved(
+        resolvedActiveSelection,
+        slotId,
+        wheelIndex,
+      ),
+    );
   }
 
   function clearTeamCovenant(slotId: string) {
-    const result = clearCovenantAssignment(teamSlots, slotId)
+    const result = clearCovenantAssignment(teamSlots, slotId);
     applyActiveTeamSlotMutation(
       result.nextSlots,
-      { kind: 'covenant', slotId },
+      {kind: 'covenant', slotId},
       nextSelectionAfterCovenantRemoved(resolvedActiveSelection, slotId),
-    )
+    );
   }
 
   function swapActiveTeamSlots(sourceSlotId: string, targetSlotId: string) {
-    const result = swapSlotAssignments(teamSlots, sourceSlotId, targetSlotId)
+    const result = swapSlotAssignments(teamSlots, sourceSlotId, targetSlotId);
     applyActiveTeamSlotMutation(
       result.nextSlots,
-      { kind: 'awakener', slotId: targetSlotId },
-      { kind: 'awakener', slotId: targetSlotId },
-    )
+      {kind: 'awakener', slotId: targetSlotId},
+      {kind: 'awakener', slotId: targetSlotId},
+    );
   }
 
   function restoreQuickLineupFocus() {
-    syncQuickLineupFocus(quickLineupState)
+    syncQuickLineupFocus(quickLineupState);
   }
 
   function startQuickLineup() {
-    if (!activeTeam) {
-      return
-    }
-
-    const nextSession = createQuickLineupSession(activeTeam)
+    const nextSession = createQuickLineupSession(activeTeam);
     updateActiveTeam((team) => ({
       ...team,
       posseId: undefined,
       slots: createEmptyTeamSlots(),
-    }))
-    setQuickLineupState(nextSession)
-    syncQuickLineupFocus(nextSession)
+    }));
+    setQuickLineupState(nextSession);
+    syncQuickLineupFocus(nextSession);
   }
 
-  function advanceQuickLineupStep(nextSlotsOverride?: TeamSlot[]) {
+  function advanceQuickLineupStep(nextSlotsOverride?: readonly TeamSlot[]) {
     if (!quickLineupState) {
-      return
+      return;
     }
 
-    const nextStepIndex = findNextQuickLineupStepIndex(quickLineupState, nextSlotsOverride ?? teamSlots)
-    if (nextStepIndex === null) {
-      setQuickLineupState(null)
-      setActiveSelection(null)
-      return
+    const nextStepIndex = findNextQuickLineupStepIndex(
+      quickLineupState,
+      nextSlotsOverride ?? teamSlots,
+    );
+    if (nextStepIndex === null || nextStepIndex === -1) {
+      setQuickLineupState(null);
+      setActiveSelection(null);
+      return;
     }
 
-    const nextSession = goToQuickLineupStep(quickLineupState, nextStepIndex)
+    const nextSession = goToQuickLineupStep(quickLineupState, nextStepIndex);
     if (!nextSession) {
-      setQuickLineupState(null)
-      setActiveSelection(null)
-      return
+      setQuickLineupState(null);
+      setActiveSelection(null);
+      return;
     }
 
-    setQuickLineupState(nextSession)
-    syncQuickLineupFocus(nextSession)
+    setQuickLineupState(nextSession);
+    syncQuickLineupFocus(nextSession);
   }
 
   function skipQuickLineupStep() {
-    advanceQuickLineupStep()
+    advanceQuickLineupStep();
   }
 
   function goBackQuickLineupStep() {
     if (!quickLineupState) {
-      return
+      return;
     }
 
-    const nextSession = goBackQuickLineupHistory(quickLineupState)
+    const nextSession = goBackQuickLineupHistory(quickLineupState);
     if (!nextSession) {
-      return
+      return;
     }
 
-    setQuickLineupState(nextSession)
-    syncQuickLineupFocus(nextSession)
+    setQuickLineupState(nextSession);
+    syncQuickLineupFocus(nextSession);
   }
 
   function finishQuickLineup() {
-    setQuickLineupState(null)
+    setQuickLineupState(null);
   }
 
   function cancelQuickLineup() {
     if (!quickLineupState) {
-      return
+      return;
     }
 
-    const { originalTeam, teamId } = quickLineupState
-    setTeams((prev) => prev.map((team) => (team.id === teamId ? originalTeam : team)))
-    setQuickLineupState(null)
-    setActiveSelection(null)
+    const {originalTeam, teamId} = quickLineupState;
+    setTeams((prev) =>
+      prev.map((team) => (team.id === teamId ? originalTeam : team)),
+    );
+    setQuickLineupState(null);
+    setActiveSelection(null);
   }
 
-  function jumpToQuickLineupStep(step: Exclude<ActiveSelection, null> | { kind: 'posse' }) {
+  function jumpToQuickLineupStep(
+    step: Exclude<ActiveSelection, null> | {kind: 'posse'},
+  ) {
     if (!quickLineupState) {
-      return
+      return;
     }
 
-    const nextStepIndex = findQuickLineupStepIndex(quickLineupState, step)
+    const nextStepIndex = findQuickLineupStepIndex(quickLineupState, step);
     if (nextStepIndex === -1) {
-      return
+      return;
     }
 
-    const nextSession = goToQuickLineupStep(quickLineupState, nextStepIndex)
+    const nextSession = goToQuickLineupStep(quickLineupState, nextStepIndex);
     if (!nextSession) {
-      return
+      return;
     }
 
-    setQuickLineupState(nextSession)
-    syncQuickLineupFocus(nextSession)
+    setQuickLineupState(nextSession);
+    syncQuickLineupFocus(nextSession);
   }
 
   const quickLineupSession: QuickLineupSession | null = useMemo(
-    () => (quickLineupState ? getPublicQuickLineupSession(quickLineupState) : null),
+    () =>
+      quickLineupState ? getPublicQuickLineupSession(quickLineupState) : null,
     [quickLineupState],
-  )
+  );
 
   return {
     collectionOwnership,
@@ -746,8 +930,11 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
     awakenerSortKey,
     setAwakenerSortKey,
     awakenerSortDirection,
-    toggleAwakenerSortDirection: () =>
-      setAwakenerSortDirection((current) => (current === 'DESC' ? 'ASC' : 'DESC')),
+    toggleAwakenerSortDirection: () => {
+      setAwakenerSortDirection((current) =>
+        current === 'DESC' ? 'ASC' : 'DESC',
+      );
+    },
     awakenerSortGroupByRealm,
     setAwakenerSortGroupByRealm,
     pickerSearchByTab,
@@ -797,8 +984,5 @@ export function useBuilderViewModel({ searchInputRef }: UseBuilderViewModelOptio
     cancelQuickLineup,
     restoreQuickLineupFocus,
     jumpToQuickLineupStep,
-  }
+  };
 }
-
-
-
