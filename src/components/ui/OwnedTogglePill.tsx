@@ -1,4 +1,4 @@
-import { TogglePill } from './TogglePill'
+import {TogglePill} from './TogglePill'
 
 type OwnedTogglePillProps = {
   owned: boolean

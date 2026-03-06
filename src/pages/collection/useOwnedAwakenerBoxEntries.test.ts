@@ -1,10 +1,11 @@
-import { renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { useOwnedAwakenerBoxEntries } from './useOwnedAwakenerBoxEntries'
+import {renderHook} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
+
+import {useOwnedAwakenerBoxEntries} from './useOwnedAwakenerBoxEntries'
 
 vi.mock('../../domain/awakeners', () => ({
   getAwakeners: () => [
-    { id: 1, name: 'ramona', faction: 'The Fools', realm: 'CHAOS', aliases: [], rarity: 'SSR' },
+    {id: 1, name: 'ramona', faction: 'The Fools', realm: 'CHAOS', aliases: [], rarity: 'SSR'},
   ],
 }))
 
@@ -14,7 +15,7 @@ vi.mock('../../domain/awakener-assets', () => ({
 
 describe('useOwnedAwakenerBoxEntries', () => {
   it('falls back to level 60 when getAwakenerLevel is omitted', () => {
-    const { result } = renderHook(() =>
+    const {result} = renderHook(() =>
       useOwnedAwakenerBoxEntries((awakenerName) => (awakenerName === 'ramona' ? 4 : null)),
     )
 
@@ -33,7 +34,7 @@ describe('useOwnedAwakenerBoxEntries', () => {
   })
 
   it('uses provided awakeners levels when getAwakenerLevel is passed', () => {
-    const { result } = renderHook(() =>
+    const {result} = renderHook(() =>
       useOwnedAwakenerBoxEntries(
         (awakenerName) => (awakenerName === 'ramona' ? 4 : null),
         () => 77,

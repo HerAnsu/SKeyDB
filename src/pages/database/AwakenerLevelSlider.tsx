@@ -1,11 +1,11 @@
-import { DetailLevelSlider } from './DetailLevelSlider'
+import {DetailLevelSlider} from './DetailLevelSlider'
 
 type AwakenerLevelSliderProps = {
   level: number
   onChange: (level: number) => void
 }
 
-export function AwakenerLevelSlider({ level, onChange }: AwakenerLevelSliderProps) {
+export function AwakenerLevelSlider({level, onChange}: AwakenerLevelSliderProps) {
   return (
     <DetailLevelSlider
       compact

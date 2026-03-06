@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { CollectionSortControls } from './CollectionSortControls'
+import {fireEvent, render, screen} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
+
+import {CollectionSortControls} from './CollectionSortControls'
 
 describe('CollectionSortControls', () => {
   it('renders high/low direction labels and fires callbacks', () => {
@@ -19,17 +20,17 @@ describe('CollectionSortControls', () => {
       />,
     )
 
-    expect(screen.getByRole('button', { name: /toggle sort direction/i })).toHaveTextContent('High')
+    expect(screen.getByRole('button', {name: /toggle sort direction/i})).toHaveTextContent('High')
 
-    fireEvent.change(screen.getByRole('combobox', { name: /sort by/i }), {
-      target: { value: 'ALPHABETICAL' },
+    fireEvent.change(screen.getByRole('combobox', {name: /sort by/i}), {
+      target: {value: 'ALPHABETICAL'},
     })
     expect(onSortKeyChange).toHaveBeenCalledWith('ALPHABETICAL')
 
-    fireEvent.click(screen.getByRole('button', { name: /toggle sort direction/i }))
+    fireEvent.click(screen.getByRole('button', {name: /toggle sort direction/i}))
     expect(onSortDirectionToggle).toHaveBeenCalledTimes(1)
 
-    fireEvent.click(screen.getByRole('button', { name: /toggle Grouping by realm/i }))
+    fireEvent.click(screen.getByRole('button', {name: /toggle Grouping by realm/i}))
     expect(onGroupByRealmChange).toHaveBeenCalledWith(true)
   })
 
@@ -45,7 +46,7 @@ describe('CollectionSortControls', () => {
       />,
     )
 
-    expect(screen.getByRole('button', { name: /toggle sort direction/i })).toHaveTextContent('Low')
+    expect(screen.getByRole('button', {name: /toggle sort direction/i})).toHaveTextContent('Low')
   })
 
   it('can hide Group By Realm toggle', () => {
@@ -61,7 +62,9 @@ describe('CollectionSortControls', () => {
       />,
     )
 
-    expect(screen.queryByRole('button', { name: /toggle Grouping by realm/i })).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('button', {name: /toggle Grouping by realm/i}),
+    ).not.toBeInTheDocument()
   })
 
   it('supports compact mode without heading text', () => {
@@ -78,10 +81,7 @@ describe('CollectionSortControls', () => {
     )
 
     expect(screen.queryByText(/^sort$/i)).not.toBeInTheDocument()
-    expect(screen.getByRole('combobox', { name: /sort by/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /toggle sort direction/i })).toHaveTextContent('High')
+    expect(screen.getByRole('combobox', {name: /sort by/i})).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /toggle sort direction/i})).toHaveTextContent('High')
   })
 })
-
-
-

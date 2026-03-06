@@ -1,11 +1,17 @@
-import { lazy, Suspense } from 'react'
-import { NavLink, Navigate, Route, Routes } from 'react-router-dom'
-import { HomePage } from './pages/HomePage'
+import {lazy, Suspense} from 'react'
 
-const DatabasePage = lazy(() => import('./pages/DatabasePage').then((module) => ({ default: module.DatabasePage })))
-const BuilderPage = lazy(() => import('./pages/BuilderPage').then((module) => ({ default: module.BuilderPage })))
+import {Navigate, NavLink, Route, Routes} from 'react-router-dom'
+
+import {HomePage} from './pages/HomePage'
+
+const DatabasePage = lazy(() =>
+  import('./pages/DatabasePage').then((module) => ({default: module.DatabasePage})),
+)
+const BuilderPage = lazy(() =>
+  import('./pages/BuilderPage').then((module) => ({default: module.BuilderPage})),
+)
 const CollectionPage = lazy(() =>
-  import('./pages/CollectionPage').then((module) => ({ default: module.CollectionPage })),
+  import('./pages/CollectionPage').then((module) => ({default: module.CollectionPage})),
 )
 
 function App() {
@@ -35,7 +41,9 @@ function App() {
       </header>
 
       <main className="mx-auto w-full max-w-6xl px-4 py-4 md:px-6 md:py-5">
-        <Suspense fallback={<div className="px-2 py-6 text-sm text-slate-300">Loading page...</div>}>
+        <Suspense
+          fallback={<div className="px-2 py-6 text-sm text-slate-300">Loading page...</div>}
+        >
           <Routes>
             <Route element={<HomePage />} path="/" />
             <Route element={<DatabasePage />} path="/database" />
@@ -50,7 +58,7 @@ function App() {
   )
 }
 
-function navClassName({ isActive }: { isActive: boolean }) {
+function navClassName({isActive}: {isActive: boolean}) {
   const base =
     'border px-3 py-1.5 transition-colors duration-150 border-slate-500/40 hover:border-amber-200/50 hover:bg-slate-900/45'
   return isActive

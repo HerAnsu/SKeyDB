@@ -1,4 +1,4 @@
-import { OwnedAssetBoxExport, type OwnedAssetBoxEntry } from './OwnedAssetBoxExport'
+import {OwnedAssetBoxExport, type OwnedAssetBoxEntry} from './OwnedAssetBoxExport'
 
 export type OwnedWheelBoxEntry = {
   id: string
@@ -16,9 +16,9 @@ type OwnedWheelBoxExportProps = {
 }
 
 const wheelRarityOptions = [
-  { value: 'SSR', label: 'SSR' },
-  { value: 'SR', label: 'SR' },
-  { value: 'R', label: 'R' },
+  {value: 'SSR', label: 'SSR'},
+  {value: 'SR', label: 'SR'},
+  {value: 'R', label: 'R'},
 ] as const
 
 const defaultIncludedRarities: Record<(typeof wheelRarityOptions)[number]['value'], boolean> = {
@@ -27,9 +27,9 @@ const defaultIncludedRarities: Record<(typeof wheelRarityOptions)[number]['value
   R: false,
 }
 
-export function OwnedWheelBoxExport({ entries, onStatusMessage }: OwnedWheelBoxExportProps) {
-  const normalizedEntries: OwnedAssetBoxEntry<(typeof wheelRarityOptions)[number]['value']>[] = entries.map(
-    (entry) => ({
+export function OwnedWheelBoxExport({entries, onStatusMessage}: OwnedWheelBoxExportProps) {
+  const normalizedEntries: OwnedAssetBoxEntry<(typeof wheelRarityOptions)[number]['value']>[] =
+    entries.map((entry) => ({
       id: entry.id,
       label: entry.name,
       level: entry.level,
@@ -37,8 +37,7 @@ export function OwnedWheelBoxExport({ entries, onStatusMessage }: OwnedWheelBoxE
       rarity: entry.rarity,
       realm: entry.realm,
       sortIndex: entry.index,
-    }),
-  )
+    }))
 
   return (
     <OwnedAssetBoxExport

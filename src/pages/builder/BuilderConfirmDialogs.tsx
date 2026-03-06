@@ -1,5 +1,6 @@
-import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
-import { BuilderTransferConfirmDialog } from './BuilderTransferConfirmDialog'
+import {ConfirmDialog} from '@/components/ui/ConfirmDialog'
+
+import {BuilderTransferConfirmDialog} from './BuilderTransferConfirmDialog'
 
 type BuilderConfirmDialogsProps = {
   deleteDialog: {

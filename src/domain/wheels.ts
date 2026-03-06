@@ -1,6 +1,8 @@
-import { z } from 'zod'
-import wheelsLite from '../data/wheels-lite.json'
-import { getMainstatByKey, type WheelMainstatKey, WHEEL_MAINSTAT_KEYS } from './mainstats'
+import {z} from 'zod'
+
+import wheelsLite from '@/data/wheels-lite.json'
+
+import {getMainstatByKey, WHEEL_MAINSTAT_KEYS, type WheelMainstatKey} from './mainstats'
 
 const rawWheelsSchema = z.array(
   z.object({
@@ -41,4 +43,3 @@ export function getWheelById(wheelId: string): Wheel | undefined {
 export function getWheelMainstatLabel(wheel: Wheel): string {
   return getMainstatByKey(wheel.mainstatKey)?.label ?? ''
 }
-

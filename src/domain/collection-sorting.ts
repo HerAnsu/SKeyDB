@@ -1,5 +1,12 @@
 export type CollectionSortDirection = 'ASC' | 'DESC'
-export type AwakenerSortKey = 'LEVEL' | 'RARITY' | 'ENLIGHTEN' | 'ALPHABETICAL' | 'ATK' | 'DEF' | 'CON'
+export type AwakenerSortKey =
+  | 'LEVEL'
+  | 'RARITY'
+  | 'ENLIGHTEN'
+  | 'ALPHABETICAL'
+  | 'ATK'
+  | 'DEF'
+  | 'CON'
 
 export type SortableCollectionEntry = {
   label: string
@@ -54,14 +61,18 @@ function compareText(left: string, right: string, direction: CollectionSortDirec
 }
 
 function compareRarity(left: SortableCollectionEntry, right: SortableCollectionEntry): number {
-  const leftRank = rarityPriorityByName[left.rarity?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
-  const rightRank = rarityPriorityByName[right.rarity?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
+  const leftRank =
+    rarityPriorityByName[left.rarity?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
+  const rightRank =
+    rarityPriorityByName[right.rarity?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
   return leftRank - rightRank
 }
 
 function compareRealm(left: SortableCollectionEntry, right: SortableCollectionEntry): number {
-  const leftRank = realmPriorityByName[left.realm?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
-  const rightRank = realmPriorityByName[right.realm?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
+  const leftRank =
+    realmPriorityByName[left.realm?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
+  const rightRank =
+    realmPriorityByName[right.realm?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
   return leftRank - rightRank
 }
 
@@ -172,5 +183,3 @@ export function comparePossesForCollectionDefaultSort(
     (l, r) => compareText(l.label, r.label, 'ASC'),
   ])
 }
-
-

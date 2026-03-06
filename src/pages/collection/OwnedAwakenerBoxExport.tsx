@@ -1,4 +1,4 @@
-import { OwnedAssetBoxExport, type OwnedAssetBoxEntry } from './OwnedAssetBoxExport'
+import {OwnedAssetBoxExport, type OwnedAssetBoxEntry} from './OwnedAssetBoxExport'
 
 export type OwnedAwakenerBoxEntry = {
   name: string
@@ -16,7 +16,7 @@ type OwnedAwakenerBoxExportProps = {
   onStatusMessage: (message: string) => void
 }
 
-export function OwnedAwakenerBoxExport({ entries, onStatusMessage }: OwnedAwakenerBoxExportProps) {
+export function OwnedAwakenerBoxExport({entries, onStatusMessage}: OwnedAwakenerBoxExportProps) {
   const normalizedEntries: OwnedAssetBoxEntry<string>[] = entries.map((entry) => ({
     id: entry.name,
     label: entry.displayName,

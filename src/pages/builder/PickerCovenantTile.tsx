@@ -1,5 +1,6 @@
-import { useDraggable } from '@dnd-kit/core'
-import type { DragData } from './types'
+import {useDraggable} from '@dnd-kit/core'
+
+import type {DragData} from './types'
 
 type PickerCovenantTileProps = {
   covenantId?: string
@@ -17,20 +18,20 @@ export function PickerCovenantTile({
   onClick,
 }: PickerCovenantTileProps) {
   const draggableEnabled = !isNotSet && Boolean(covenantId)
-  const { attributes, listeners, isDragging, setNodeRef } = useDraggable({
+  const {attributes, listeners, isDragging, setNodeRef} = useDraggable({
     id: draggableEnabled ? `picker-covenant:${covenantId}` : 'picker-covenant:not-set',
     data: draggableEnabled
-      ? ({ kind: 'picker-covenant', covenantId: covenantId! } satisfies DragData)
+      ? ({kind: 'picker-covenant', covenantId: covenantId!} satisfies DragData)
       : undefined,
     disabled: !draggableEnabled,
   })
-  const dragAttributes = { ...attributes } as Record<string, unknown>
+  const dragAttributes = {...attributes} as Record<string, unknown>
   delete dragAttributes['aria-disabled']
 
   return (
     <button
       aria-label={isNotSet ? 'Not set covenant' : `${covenantName ?? covenantId} covenant`}
-      className={`border p-1 text-left transition-colors border-slate-500/45 bg-slate-900/55 hover:border-amber-200/45 ${
+      className={`border border-slate-500/45 bg-slate-900/55 p-1 text-left transition-colors hover:border-amber-200/45 ${
         isDragging ? 'scale-[0.98] opacity-60' : ''
       }`}
       onClick={onClick}
@@ -57,7 +58,9 @@ export function PickerCovenantTile({
           </span>
         )}
       </div>
-      <p className="mt-1 truncate text-[11px] text-slate-200">{isNotSet ? 'Not Set' : covenantName ?? covenantId}</p>
+      <p className="mt-1 truncate text-[11px] text-slate-200">
+        {isNotSet ? 'Not Set' : (covenantName ?? covenantId)}
+      </p>
     </button>
   )
 }

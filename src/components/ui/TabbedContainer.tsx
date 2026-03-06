@@ -1,5 +1,6 @@
-import { useId, type ReactNode } from 'react'
-import { FaXmark } from 'react-icons/fa6'
+import {useId, type ReactNode} from 'react'
+
+import {FaXmark} from 'react-icons/fa6'
 
 type TabbedContainerTab = {
   id: string
@@ -57,9 +58,13 @@ export function TabbedContainer({
             'tabbed-container-ear tabbed-container-ear-left',
             isContentTabs ? 'tabbed-container-ear-left-content' : 'tabbed-container-ear-left-fill',
           )}
-          style={leftEarMaxWidth ? { maxWidth: leftEarMaxWidth } : undefined}
+          style={leftEarMaxWidth ? {maxWidth: leftEarMaxWidth} : undefined}
         >
-          <div aria-orientation="horizontal" className="flex min-w-0 flex-1 items-stretch" role="tablist">
+          <div
+            aria-orientation="horizontal"
+            className="flex min-w-0 flex-1 items-stretch"
+            role="tablist"
+          >
             {tabs.map((tab) => {
               const tabId = `${tabIdPrefix}-${tab.id}`
               const isSelected = activeTabId === tab.id
@@ -87,7 +92,9 @@ export function TabbedContainer({
                   {onTabClose && (canCloseTab ? canCloseTab(tab) : true) ? (
                     <span className="tabbed-container-tab-close-wrap">
                       <button
-                        aria-label={getTabCloseAriaLabel ? getTabCloseAriaLabel(tab) : `Close ${tab.label}`}
+                        aria-label={
+                          getTabCloseAriaLabel ? getTabCloseAriaLabel(tab) : `Close ${tab.label}`
+                        }
                         className="tabbed-container-tab-close"
                         onClick={(event) => {
                           event.stopPropagation()
@@ -103,10 +110,16 @@ export function TabbedContainer({
               )
             })}
           </div>
-          {leftTrailingAction ? <div className="tabbed-container-ear-left-action shrink-0">{leftTrailingAction}</div> : null}
+          {leftTrailingAction ? (
+            <div className="tabbed-container-ear-left-action shrink-0">{leftTrailingAction}</div>
+          ) : null}
         </div>
         <div aria-hidden className="tabbed-container-ear-gap-fill" />
-        {rightActions ? <div className="tabbed-container-ear tabbed-container-ear-right shrink-0">{rightActions}</div> : null}
+        {rightActions ? (
+          <div className="tabbed-container-ear tabbed-container-ear-right shrink-0">
+            {rightActions}
+          </div>
+        ) : null}
       </div>
       <div
         aria-labelledby={`${tabIdPrefix}-${activeTabId}`}

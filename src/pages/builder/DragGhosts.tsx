@@ -1,12 +1,13 @@
-import { getAwakenerCardAsset, getAwakenerPortraitAsset } from '../../domain/awakener-assets'
-import { getCovenantAssetById } from '../../domain/covenant-assets'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import { getWheelAssetById } from '../../domain/wheel-assets'
-import { BuilderTeamPreviewStrip } from './BuilderTeamPreviewStrip'
-import { CardWheelZone } from './CardWheelZone'
-import type { Team, TeamPreviewMode, TeamSlot } from './types'
+import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-assets'
+import {getCovenantAssetById} from '@/domain/covenant-assets'
+import {formatAwakenerNameForUi} from '@/domain/name-format'
+import {getWheelAssetById} from '@/domain/wheel-assets'
 
-export function PickerAwakenerGhost({ awakenerName }: { awakenerName: string }) {
+import {BuilderTeamPreviewStrip} from './BuilderTeamPreviewStrip'
+import {CardWheelZone} from './CardWheelZone'
+import type {Team, TeamPreviewMode, TeamSlot} from './types'
+
+export function PickerAwakenerGhost({awakenerName}: {awakenerName: string}) {
   const displayName = formatAwakenerNameForUi(awakenerName)
   const portraitAsset = getAwakenerPortraitAsset(awakenerName)
 
@@ -14,7 +15,11 @@ export function PickerAwakenerGhost({ awakenerName }: { awakenerName: string }) 
     <div className="w-[72px] border border-slate-400/65 bg-slate-900/90 p-0.5 text-left shadow-[0_6px_20px_rgba(2,6,23,0.45)]">
       <div className="aspect-square overflow-hidden border border-slate-300/45 bg-slate-900/70">
         {portraitAsset ? (
-          <img alt={`${displayName} portrait`} className="h-full w-full object-cover" src={portraitAsset} />
+          <img
+            alt={`${displayName} portrait`}
+            className="h-full w-full object-cover"
+            src={portraitAsset}
+          />
         ) : (
           <span className="relative block h-full w-full">
             <span className="sigil-placeholder" />
@@ -69,9 +74,13 @@ export function TeamCardGhost({
         </div>
       ) : null}
       <div className="builder-card-name-wrap pointer-events-none absolute inset-x-0 top-0 px-2 pt-1 pb-[18%]">
-        <p className="builder-card-name builder-card-name-ghost ui-title text-slate-100">{displayName}</p>
+        <p className="builder-card-name builder-card-name-ghost ui-title text-slate-100">
+          {displayName}
+        </p>
         {slot.isSupport ? <span className="builder-support-badge">Support Awakener</span> : null}
-        {awakenerOwnedLevel === null ? <span className="builder-unowned-badge">Unowned</span> : null}
+        {awakenerOwnedLevel === null ? (
+          <span className="builder-unowned-badge">Unowned</span>
+        ) : null}
       </div>
       {!removeIntent ? (
         <CardWheelZone
@@ -103,7 +112,9 @@ export function TeamPreviewGhost({
   removeIntent?: boolean
 }) {
   return (
-    <div className={`builder-team-preview-ghost builder-drag-ghost ${removeIntent ? 'builder-team-preview-ghost-remove' : ''}`}>
+    <div
+      className={`builder-team-preview-ghost builder-drag-ghost ${removeIntent ? 'builder-team-preview-ghost-remove' : ''}`}
+    >
       <BuilderTeamPreviewStrip
         className="builder-team-preview-ghost-strip"
         mode={mode}
@@ -116,16 +127,20 @@ export function TeamPreviewGhost({
   )
 }
 
-export function PickerWheelGhost({ wheelId, isCovenant = false }: { wheelId: string; isCovenant?: boolean }) {
+export function PickerWheelGhost({
+  wheelId,
+  isCovenant = false,
+}: {
+  wheelId: string
+  isCovenant?: boolean
+}) {
   const wheelAsset = isCovenant ? getCovenantAssetById(wheelId) : getWheelAssetById(wheelId)
 
   return (
     <div
       className={`w-[62px] border border-slate-400/65 bg-slate-900/90 p-0.5 shadow-[0_6px_20px_rgba(2,6,23,0.45)] ${
         isCovenant ? 'rounded-full' : ''
-      } ${
-        isCovenant ? 'w-[54px] border-0 bg-transparent p-0' : ''
-      }`}
+      } ${isCovenant ? 'w-[54px] border-0 bg-transparent p-0' : ''}`}
     >
       <div
         className={`relative overflow-hidden border border-slate-300/45 bg-slate-900/70 ${
@@ -136,7 +151,9 @@ export function PickerWheelGhost({ wheelId, isCovenant = false }: { wheelId: str
           <img
             alt={isCovenant ? '' : `${wheelId} wheel`}
             className={`${
-              isCovenant ? 'builder-card-covenant-image h-full w-full object-cover' : 'builder-card-wheel-image h-full w-full object-cover'
+              isCovenant
+                ? 'builder-card-covenant-image h-full w-full object-cover'
+                : 'builder-card-wheel-image h-full w-full object-cover'
             }`}
             src={wheelAsset}
           />
@@ -181,10 +198,10 @@ export function TeamWheelGhost({
           <img
             alt={isCovenant ? '' : `${wheelId} wheel`}
             className={`${
-              isCovenant ? 'builder-card-covenant-image h-full w-full object-cover' : 'builder-card-wheel-image h-full w-full object-cover'
-            } ${
-              !isCovenant && !isOwned ? 'wheel-tile-unowned' : ''
-            } ${
+              isCovenant
+                ? 'builder-card-covenant-image h-full w-full object-cover'
+                : 'builder-card-wheel-image h-full w-full object-cover'
+            } ${!isCovenant && !isOwned ? 'wheel-tile-unowned' : ''} ${
               removeIntent ? 'brightness-[0.55] saturate-[0.45]' : ''
             }`}
             src={wheelAsset}
@@ -195,7 +212,9 @@ export function TeamWheelGhost({
           </span>
         )}
         {removeIntent ? (
-          <span className={`pointer-events-none absolute inset-0 z-20 bg-slate-950/58 ${isCovenant ? 'rounded-full' : ''}`}>
+          <span
+            className={`pointer-events-none absolute inset-0 z-20 bg-slate-950/58 ${isCovenant ? 'rounded-full' : ''}`}
+          >
             <span
               className={`sigil-placeholder sigil-placeholder-wheel sigil-placeholder-no-plus sigil-placeholder-remove ${
                 isCovenant ? 'rounded-full' : ''

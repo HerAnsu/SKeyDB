@@ -1,5 +1,5 @@
-import { parseCovenantDropZoneId, parseWheelDropZoneId, PICKER_DROP_ZONE_ID } from './dnd-ids'
-import type { DragData, PredictedDropHover, TeamSlot } from './types'
+import {parseCovenantDropZoneId, parseWheelDropZoneId, PICKER_DROP_ZONE_ID} from './dnd-ids'
+import type {DragData, PredictedDropHover, TeamSlot} from './types'
 
 function findFirstEmptyWheelIndex(slot: TeamSlot | undefined): number | null {
   if (!slot?.awakenerName) {
@@ -23,7 +23,7 @@ export function resolvePredictedDropHover(
 
   if (dragData.kind === 'picker-wheel' || dragData.kind === 'team-wheel') {
     if (overWheelZone) {
-      return { kind: 'wheel', slotId: overWheelZone.slotId, wheelIndex: overWheelZone.wheelIndex }
+      return {kind: 'wheel', slotId: overWheelZone.slotId, wheelIndex: overWheelZone.wheelIndex}
     }
     const targetSlotId = overCovenantZone?.slotId ?? (overId.startsWith('slot-') ? overId : null)
     if (!targetSlotId) {
@@ -33,11 +33,14 @@ export function resolvePredictedDropHover(
     if (wheelIndex === null) {
       return null
     }
-    return { kind: 'wheel', slotId: targetSlotId, wheelIndex }
+    return {kind: 'wheel', slotId: targetSlotId, wheelIndex}
   }
 
   if (dragData.kind === 'picker-covenant' || dragData.kind === 'team-covenant') {
-    const targetSlotId = overCovenantZone?.slotId ?? overWheelZone?.slotId ?? (overId.startsWith('slot-') ? overId : null)
+    const targetSlotId =
+      overCovenantZone?.slotId ??
+      overWheelZone?.slotId ??
+      (overId.startsWith('slot-') ? overId : null)
     if (!targetSlotId) {
       return null
     }
@@ -45,9 +48,8 @@ export function resolvePredictedDropHover(
     if (!slot?.awakenerName) {
       return null
     }
-    return { kind: 'covenant', slotId: targetSlotId }
+    return {kind: 'covenant', slotId: targetSlotId}
   }
 
   return null
 }
-

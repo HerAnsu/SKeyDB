@@ -1,71 +1,70 @@
-import { useState } from "react";
-import { FaDiscord, FaGithub } from "react-icons/fa6";
-import emojiAel from "../assets/emoji/Emoji_AEL_E_05.png";
-import emojiPdyM09 from "../assets/emoji/Emoji_PDY_M_09.png";
-import { changelogItems } from "./home/changelog";
+import {useState} from 'react'
 
-type TaskStatus = "planned" | "in_progress" | "done" | "forever_in_progress";
+import {FaDiscord, FaGithub} from 'react-icons/fa6'
+
+import emojiAel from '@/assets/emoji/Emoji_AEL_E_05.png'
+import emojiPdyM09 from '@/assets/emoji/Emoji_PDY_M_09.png'
+
+import {changelogItems} from './home/changelog'
+
+type TaskStatus = 'planned' | 'in_progress' | 'done' | 'forever_in_progress'
 
 type TaskItem = {
-  label: string;
-  status: TaskStatus;
-};
+  label: string
+  status: TaskStatus
+}
 
 const builderTasks: TaskItem[] = [
-  { label: "Local storage persistence", status: "done" },
-  { label: "Collection (owned/unowned)", status: "done" },
-  { label: "Mobile-first builder layout", status: "planned" },
-  { label: "Quick Team Lineup flow for faster selection", status: "done" },
-  { label: "General QoL and things", status: "forever_in_progress" },
-];
+  {label: 'Local storage persistence', status: 'done'},
+  {label: 'Collection (owned/unowned)', status: 'done'},
+  {label: 'Mobile-first builder layout', status: 'planned'},
+  {label: 'Quick Team Lineup flow for faster selection', status: 'done'},
+  {label: 'General QoL and things', status: 'forever_in_progress'},
+]
 
 const databaseTasks: TaskItem[] = [
-  { label: "Data integration from the legacy database", status: "done" },
-  { label: "Search and filtering improvements", status: "in_progress" },
-  { label: "Detail content expansion (tags, guide, teams)", status: "in_progress" },
-  { label: "Schema and data coverage expansion", status: "planned" },
-];
+  {label: 'Data integration from the legacy database', status: 'done'},
+  {label: 'Search and filtering improvements', status: 'in_progress'},
+  {label: 'Detail content expansion (tags, guide, teams)', status: 'in_progress'},
+  {label: 'Schema and data coverage expansion', status: 'planned'},
+]
 
-const resourceTasks: TaskItem[] = [
-  { label: "Useful links and tools page", status: "planned" },
-];
+const resourceTasks: TaskItem[] = [{label: 'Useful links and tools page', status: 'planned'}]
 
 const statusLabel: Record<TaskStatus, string> = {
-  planned: "Planned",
-  in_progress: "In Progress",
-  done: "Done",
-  forever_in_progress: "Forever In Progress",
-};
+  planned: 'Planned',
+  in_progress: 'In Progress',
+  done: 'Done',
+  forever_in_progress: 'Forever In Progress',
+}
 
 const statusClassName: Record<TaskStatus, string> = {
-  planned: "border-slate-400/40 text-slate-200",
-  in_progress: "border-sky-300/45 text-sky-200",
-  done: "border-emerald-300/45 text-emerald-200",
-  forever_in_progress: "border-violet-300/45 text-violet-200",
-};
+  planned: 'border-slate-400/40 text-slate-200',
+  in_progress: 'border-sky-300/45 text-sky-200',
+  done: 'border-emerald-300/45 text-emerald-200',
+  forever_in_progress: 'border-violet-300/45 text-violet-200',
+}
 
 export function HomePage() {
-  const [showAllChangelog, setShowAllChangelog] = useState(false);
-  const visibleChangelogItems = showAllChangelog
-    ? changelogItems
-    : changelogItems.slice(0, 5);
+  const [showAllChangelog, setShowAllChangelog] = useState(false)
+  const visibleChangelogItems = showAllChangelog ? changelogItems : changelogItems.slice(0, 5)
 
   return (
     <section className="space-y-4">
       <header className="flex flex-wrap items-center gap-3 border border-amber-200/35 bg-slate-900/40 p-4 shadow-[0_0_0_1px_rgba(251,191,36,0.08)]">
-        <img
-          alt="Morimens emoji"
-          className="h-12 w-12 self-start object-cover"
-          src={emojiAel}
-        />
+        <img alt="Morimens emoji" className="h-12 w-12 self-start object-cover" src={emojiAel} />
         <div className="min-w-0">
           <div className="space-y-1 text-sm text-slate-300">
-            <h3 className="ui-title text-lg text-amber-100">Community project for Morimens data and team planning tools.</h3>
+            <h3 className="ui-title text-lg text-amber-100">
+              Community project for Morimens data and team planning tools.
+            </h3>
             <p>
-              Hello friends, I am just a guy.. and old.. and running out of codex credits.. but I have a lot of free time ~
+              Hello friends, I am just a guy.. and old.. and running out of codex credits.. but I
+              have a lot of free time ~
             </p>
             <p>
-              I am trying to make something useful for the community with the help of a few people over in Mythag University!
+              I am trying to make something useful for the community with the help of a few people
+              over in Mythag University!
             </p>
             <a
               className="text-link inline-flex items-center gap-1.5"
@@ -117,8 +116,7 @@ export function HomePage() {
       <article className="border border-slate-500/45 bg-slate-900/55 p-4">
         <h3 className="ui-title text-lg text-amber-100">Recent Changelog</h3>
         <p className="mt-1 text-xs text-slate-400">
-          Showing {visibleChangelogItems.length} of {changelogItems.length}{" "}
-          entries
+          Showing {visibleChangelogItems.length} of {changelogItems.length} entries
         </p>
         <ul className="mt-2 space-y-2 text-sm text-slate-200">
           {visibleChangelogItems.map((item, index) => (
@@ -145,7 +143,7 @@ export function HomePage() {
             onClick={() => setShowAllChangelog((current) => !current)}
             type="button"
           >
-            {showAllChangelog ? "Show Recent Only" : "Show Full Timeline"}
+            {showAllChangelog ? 'Show Recent Only' : 'Show Full Timeline'}
           </button>
         ) : null}
       </article>
@@ -154,19 +152,22 @@ export function HomePage() {
         <h3 className="ui-title text-lg text-amber-100">Attribution and Legal</h3>
         <ul className="mt-2 space-y-2 text-sm text-slate-200">
           <li>
-            Awakener avatars/cards and posse images used in this project are currently sourced from{" "}
+            Awakener avatars/cards and posse images used in this project are currently sourced from{' '}
             <a className="text-link" href="https://morimens.huijiwiki.com/p/1">
               Morimens HuijiWiki
             </a>
             .
           </li>
           <li>
-            HuijiWiki content for these assets is credited under{" "}
+            HuijiWiki content for these assets is credited under{' '}
             <a className="text-link" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
               CC BY-NC-SA
             </a>
           </li>
-          <li>Big thanks to the Huiji contributors for putting those resources together, it helped us get going a lot quicker than we would have otherwise</li>
+          <li>
+            Big thanks to the Huiji contributors for putting those resources together, it helped us
+            get going a lot quicker than we would have otherwise
+          </li>
           <li>
             And apologies for not adding this contribution notice sooner~
             <img
@@ -181,40 +182,34 @@ export function HomePage() {
           </li>
           <li>SKeyDB is an unofficial fan project and is not affiliated with Qookka Games.</li>
           <li>
-            Morimens names, images, icons, and related game assets belong to Qookka Games and/or their licensors.
+            Morimens names, images, icons, and related game assets belong to Qookka Games and/or
+            their licensors.
           </li>
-          <li>If you are a rights holder and want anything adjusted or removed, please reach out.</li>
+          <li>
+            If you are a rights holder and want anything adjusted or removed, please reach out.
+          </li>
         </ul>
       </article>
     </section>
-  );
+  )
 }
 
-function InfoCard({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+function InfoCard({title, description}: {title: string; description: string}) {
   return (
     <article className="border border-amber-200/35 bg-slate-900/40 p-4 shadow-[0_0_0_1px_rgba(251,191,36,0.08)]">
       <h3 className="ui-title text-lg text-amber-100">{title}</h3>
       <p className="mt-2 text-sm text-slate-200">{description}</p>
     </article>
-  );
+  )
 }
 
-function RoadmapCard({ title, items }: { title: string; items: TaskItem[] }) {
+function RoadmapCard({title, items}: {title: string; items: TaskItem[]}) {
   return (
     <article className="border border-slate-500/45 bg-slate-900/55 p-4">
       <h3 className="ui-title text-lg text-amber-100">{title}</h3>
       <ul className="mt-2 space-y-2 text-sm text-slate-200">
         {items.map((item) => (
-          <li
-            className="flex items-start justify-between gap-3"
-            key={item.label}
-          >
+          <li className="flex items-start justify-between gap-3" key={item.label}>
             <span>{item.label}</span>
             <span
               className={`shrink-0 rounded border bg-slate-900/70 px-2 py-0.5 text-xs ${statusClassName[item.status]}`}
@@ -225,5 +220,5 @@ function RoadmapCard({ title, items }: { title: string; items: TaskItem[] }) {
         ))}
       </ul>
     </article>
-  );
+  )
 }

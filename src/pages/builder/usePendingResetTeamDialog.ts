@@ -1,6 +1,7 @@
-import { useState, type Dispatch, type SetStateAction } from 'react'
-import { isTeamEmpty, resetTeam } from './team-collection'
-import type { Team } from './types'
+import {useState, type Dispatch, type SetStateAction} from 'react'
+
+import {isTeamEmpty, resetTeam} from './team-collection'
+import type {Team} from './types'
 
 type PendingResetTeam = {
   id: string
@@ -39,7 +40,7 @@ export function usePendingResetTeamDialog({
       applyResetTeam(teamId)
       return
     }
-    setPendingResetTeam({ id: teamId, name: teamName })
+    setPendingResetTeam({id: teamId, name: teamName})
   }
 
   function confirmResetTeam() {

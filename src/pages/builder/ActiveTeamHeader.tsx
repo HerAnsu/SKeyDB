@@ -1,7 +1,15 @@
-import { DEFAULT_REALM_TINT, getRealmIcon, getRealmLabel, getRealmTint, normalizeRealmId } from '../../domain/factions'
-import tempPosseIcon from '../../assets/posse/00-temposse.png'
-import type { CSSProperties } from 'react'
-import { TeamNameInlineEditor } from './TeamNameInlineEditor'
+import type {CSSProperties} from 'react'
+
+import tempPosseIcon from '@/assets/posse/00-temposse.png'
+import {
+  DEFAULT_REALM_TINT,
+  getRealmIcon,
+  getRealmLabel,
+  getRealmTint,
+  normalizeRealmId,
+} from '@/domain/factions'
+
+import {TeamNameInlineEditor} from './TeamNameInlineEditor'
 
 type ActiveTeamHeaderProps = {
   activeTeamId: string
@@ -26,10 +34,14 @@ type RealmMeta = {
 }
 
 const realmMetaById: Record<string, RealmMeta> = {
-  AEQUOR: { label: getRealmLabel('AEQUOR'), icon: getRealmIcon('AEQUOR')!, tint: getRealmTint('AEQUOR') },
-  CARO: { label: getRealmLabel('CARO'), icon: getRealmIcon('CARO')!, tint: getRealmTint('CARO') },
-  CHAOS: { label: getRealmLabel('CHAOS'), icon: getRealmIcon('CHAOS')!, tint: getRealmTint('CHAOS') },
-  ULTRA: { label: getRealmLabel('ULTRA'), icon: getRealmIcon('ULTRA')!, tint: getRealmTint('ULTRA') },
+  AEQUOR: {
+    label: getRealmLabel('AEQUOR'),
+    icon: getRealmIcon('AEQUOR')!,
+    tint: getRealmTint('AEQUOR'),
+  },
+  CARO: {label: getRealmLabel('CARO'), icon: getRealmIcon('CARO')!, tint: getRealmTint('CARO')},
+  CHAOS: {label: getRealmLabel('CHAOS'), icon: getRealmIcon('CHAOS')!, tint: getRealmTint('CHAOS')},
+  ULTRA: {label: getRealmLabel('ULTRA'), icon: getRealmIcon('ULTRA')!, tint: getRealmTint('ULTRA')},
 }
 
 export function ActiveTeamHeader({
@@ -71,8 +83,12 @@ export function ActiveTeamHeader({
         {activeRealms.length === 0 ? (
           <span className="sigil-placeholder" />
         ) : (
-          <div className={`builder-team-realm-stack ${hasSingleRealm ? 'builder-team-realm-stack-single' : ''}`}>
-            <div className={`builder-team-realm-icons ${hasSingleRealm ? 'builder-team-realm-icons-single' : ''}`}>
+          <div
+            className={`builder-team-realm-stack ${hasSingleRealm ? 'builder-team-realm-stack-single' : ''}`}
+          >
+            <div
+              className={`builder-team-realm-icons ${hasSingleRealm ? 'builder-team-realm-icons-single' : ''}`}
+            >
               {activeRealms.map((realm) => (
                 <span className="builder-team-realm-icon-wrap" key={realm.label}>
                   <img
@@ -104,10 +120,12 @@ export function ActiveTeamHeader({
             <>
               {activeRealms.map((realm, index) => (
                 <span key={realm.label}>
-                  <span className="builder-team-realm-label-segment" style={{ color: realm.tint }}>
+                  <span className="builder-team-realm-label-segment" style={{color: realm.tint}}>
                     {realm.label}
                   </span>
-                  {index < activeRealms.length - 1 ? <span className="text-slate-400"> / </span> : null}
+                  {index < activeRealms.length - 1 ? (
+                    <span className="text-slate-400"> / </span>
+                  ) : null}
                 </span>
               ))}
             </>

@@ -1,15 +1,16 @@
-import { describe, expect, it } from 'vitest'
-import { getAwakeners } from './awakeners'
-import { getCovenants } from './covenants'
-import { getPosses } from './posses'
-import { getWheels } from './wheels'
+import {describe, expect, it} from 'vitest'
+
+import {getAwakeners} from './awakeners'
+import {getCovenants} from './covenants'
 import frozenContract from './persistence-contract.v1.json'
+import {getPosses} from './posses'
+import {getWheels} from './wheels'
 
 type PersistenceContract = {
   version: number
-  awakeners: Array<{ name: string; id: number }>
+  awakeners: Array<{name: string; id: number}>
   wheels: string[]
-  posses: Array<{ id: string; index: number }>
+  posses: Array<{id: string; index: number}>
   covenants: string[]
 }
 
@@ -17,11 +18,11 @@ function buildCurrentContract(): PersistenceContract {
   return {
     version: 1,
     awakeners: getAwakeners()
-      .map((awakener) => ({ name: awakener.name, id: awakener.id }))
+      .map((awakener) => ({name: awakener.name, id: awakener.id}))
       .sort((left, right) => left.name.localeCompare(right.name)),
     wheels: getWheels().map((wheel) => wheel.id),
     posses: getPosses()
-      .map((posse) => ({ id: posse.id, index: posse.index }))
+      .map((posse) => ({id: posse.id, index: posse.index}))
       .sort((left, right) => left.id.localeCompare(right.id)),
     covenants: getCovenants().map((covenant) => covenant.id),
   }

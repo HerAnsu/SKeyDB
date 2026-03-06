@@ -1,4 +1,4 @@
-import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
+import {ConfirmDialog} from '@/components/ui/ConfirmDialog'
 
 type BuilderTransferConfirmDialogProps = {
   dialog: {
@@ -11,7 +11,10 @@ type BuilderTransferConfirmDialogProps = {
   onCancel: () => void
 }
 
-export function BuilderTransferConfirmDialog({ dialog, onCancel }: BuilderTransferConfirmDialogProps) {
+export function BuilderTransferConfirmDialog({
+  dialog,
+  onCancel,
+}: BuilderTransferConfirmDialogProps) {
   if (!dialog) {
     return null
   }

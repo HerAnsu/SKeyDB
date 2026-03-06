@@ -1,5 +1,6 @@
-import { z } from 'zod'
-import possesLite from '../data/posses-lite.json'
+import {z} from 'zod'
+
+import possesLite from '@/data/posses-lite.json'
 
 const rawPossesSchema = z.array(
   z.object({

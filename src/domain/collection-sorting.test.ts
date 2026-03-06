@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest'
+import {describe, expect, it} from 'vitest'
+
 import {
   compareAwakenersForCollectionSort,
   comparePossesForCollectionDefaultSort,
@@ -17,9 +18,9 @@ const baseAwakener = (overrides: Partial<SortableCollectionEntry>): SortableColl
 describe('compareAwakenersForCollectionSort', () => {
   it('sorts by level with configured direction and tie-breakers', () => {
     const entries = [
-      baseAwakener({ label: 'B', level: 70, enlighten: 2, index: 2 }),
-      baseAwakener({ label: 'A', level: 70, enlighten: 5, index: 1 }),
-      baseAwakener({ label: 'C', level: 80, enlighten: 0, index: 3 }),
+      baseAwakener({label: 'B', level: 70, enlighten: 2, index: 2}),
+      baseAwakener({label: 'A', level: 70, enlighten: 5, index: 1}),
+      baseAwakener({label: 'C', level: 80, enlighten: 0, index: 3}),
     ]
 
     const sorted = [...entries].sort((l, r) =>
@@ -34,7 +35,11 @@ describe('compareAwakenersForCollectionSort', () => {
   })
 
   it('sorts by alphabetical and respects direction', () => {
-    const entries = [baseAwakener({ label: 'C' }), baseAwakener({ label: 'A' }), baseAwakener({ label: 'B' })]
+    const entries = [
+      baseAwakener({label: 'C'}),
+      baseAwakener({label: 'A'}),
+      baseAwakener({label: 'B'}),
+    ]
     const asc = [...entries].sort((l, r) =>
       compareAwakenersForCollectionSort(l, r, {
         key: 'ALPHABETICAL',
@@ -56,9 +61,9 @@ describe('compareAwakenersForCollectionSort', () => {
 
   it('always sorts unowned awakeners after owned awakeners', () => {
     const entries = [
-      baseAwakener({ label: 'Owned Low', owned: true, level: 1 }),
-      baseAwakener({ label: 'Unowned High', owned: false, level: 90, enlighten: 15 }),
-      baseAwakener({ label: 'Owned High', owned: true, level: 80 }),
+      baseAwakener({label: 'Owned Low', owned: true, level: 1}),
+      baseAwakener({label: 'Unowned High', owned: false, level: 90, enlighten: 15}),
+      baseAwakener({label: 'Owned High', owned: true, level: 80}),
     ]
     const sorted = [...entries].sort((l, r) =>
       compareAwakenersForCollectionSort(l, r, {
@@ -72,9 +77,9 @@ describe('compareAwakenersForCollectionSort', () => {
 
   it('sorts by rarity using Genesis > SSR > SR and respects direction', () => {
     const entries = [
-      baseAwakener({ label: 'SSR', rarity: 'SSR' }),
-      baseAwakener({ label: 'Genesis', rarity: 'Genesis' }),
-      baseAwakener({ label: 'SR', rarity: 'SR' }),
+      baseAwakener({label: 'SSR', rarity: 'SSR'}),
+      baseAwakener({label: 'Genesis', rarity: 'Genesis'}),
+      baseAwakener({label: 'SR', rarity: 'SR'}),
     ]
 
     const highFirst = [...entries].sort((l, r) =>
@@ -98,9 +103,9 @@ describe('compareAwakenersForCollectionSort', () => {
 
   it('uses rarity tie-breakers as level first, then realm, then enlighten when grouping is enabled', () => {
     const entries = [
-      baseAwakener({ label: 'Aequor High', rarity: 'SSR', realm: 'AEQUOR', level: 90, enlighten: 1 }),
-      baseAwakener({ label: 'Chaos Mid', rarity: 'SSR', realm: 'CHAOS', level: 80, enlighten: 0 }),
-      baseAwakener({ label: 'Chaos Low', rarity: 'SSR', realm: 'CHAOS', level: 60, enlighten: 12 }),
+      baseAwakener({label: 'Aequor High', rarity: 'SSR', realm: 'AEQUOR', level: 90, enlighten: 1}),
+      baseAwakener({label: 'Chaos Mid', rarity: 'SSR', realm: 'CHAOS', level: 80, enlighten: 0}),
+      baseAwakener({label: 'Chaos Low', rarity: 'SSR', realm: 'CHAOS', level: 60, enlighten: 12}),
     ]
 
     const sorted = [...entries].sort((l, r) =>
@@ -118,9 +123,9 @@ describe('compareAwakenersForCollectionSort', () => {
 describe('compareWheelsForCollectionDefaultSort', () => {
   it('sorts by rarity then realm then enlighten', () => {
     const entries: SortableCollectionEntry[] = [
-      { label: 'SR A', index: 2, enlighten: 12, rarity: 'SR', realm: 'CHAOS' },
-      { label: 'SSR B', index: 1, enlighten: 1, rarity: 'SSR', realm: 'AEQUOR' },
-      { label: 'SSR A', index: 3, enlighten: 5, rarity: 'SSR', realm: 'CHAOS' },
+      {label: 'SR A', index: 2, enlighten: 12, rarity: 'SR', realm: 'CHAOS'},
+      {label: 'SSR B', index: 1, enlighten: 1, rarity: 'SSR', realm: 'AEQUOR'},
+      {label: 'SSR A', index: 3, enlighten: 5, rarity: 'SSR', realm: 'CHAOS'},
     ]
     const sorted = [...entries].sort(compareWheelsForCollectionDefaultSort)
     expect(sorted.map((entry) => entry.label)).toEqual(['SSR A', 'SSR B', 'SR A'])
@@ -128,8 +133,8 @@ describe('compareWheelsForCollectionDefaultSort', () => {
 
   it('always sorts unowned wheels after owned wheels', () => {
     const entries: SortableCollectionEntry[] = [
-      { label: 'Owned SR', index: 2, owned: true, enlighten: 0, rarity: 'SR', realm: 'CHAOS' },
-      { label: 'Unowned SSR', index: 1, owned: false, enlighten: 15, rarity: 'SSR', realm: 'AEQUOR' },
+      {label: 'Owned SR', index: 2, owned: true, enlighten: 0, rarity: 'SR', realm: 'CHAOS'},
+      {label: 'Unowned SSR', index: 1, owned: false, enlighten: 15, rarity: 'SSR', realm: 'AEQUOR'},
     ]
     const sorted = [...entries].sort(compareWheelsForCollectionDefaultSort)
     expect(sorted.map((entry) => entry.label)).toEqual(['Owned SR', 'Unowned SSR'])
@@ -139,13 +144,12 @@ describe('compareWheelsForCollectionDefaultSort', () => {
 describe('comparePossesForCollectionDefaultSort', () => {
   it('sorts by owned first then index then label', () => {
     const entries: SortableCollectionEntry[] = [
-      { label: 'B', index: 2, owned: true, enlighten: 0 },
-      { label: 'A', index: 2, owned: true, enlighten: 0 },
-      { label: 'Owned First', index: 1, owned: true, enlighten: 0 },
-      { label: 'Unowned Early', index: 0, owned: false, enlighten: 0 },
+      {label: 'B', index: 2, owned: true, enlighten: 0},
+      {label: 'A', index: 2, owned: true, enlighten: 0},
+      {label: 'Owned First', index: 1, owned: true, enlighten: 0},
+      {label: 'Unowned Early', index: 0, owned: false, enlighten: 0},
     ]
     const sorted = [...entries].sort(comparePossesForCollectionDefaultSort)
     expect(sorted.map((entry) => entry.label)).toEqual(['Owned First', 'A', 'B', 'Unowned Early'])
   })
 })
-

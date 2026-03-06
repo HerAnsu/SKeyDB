@@ -1,6 +1,7 @@
-import { useEffect, type RefObject } from 'react'
-import type { PickerTab } from './types'
-import { isTypingTarget } from './utils'
+import {useEffect, type RefObject} from 'react'
+
+import type {PickerTab} from './types'
+import {isTypingTarget} from './utils'
 
 type UseGlobalPickerSearchCaptureOptions = {
   pickerTab: PickerTab

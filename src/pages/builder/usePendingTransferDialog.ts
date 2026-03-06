@@ -1,9 +1,11 @@
-import { useCallback, useMemo, type Dispatch, type SetStateAction } from 'react'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import { getWheelById } from '../../domain/wheels'
-import type { Team } from './types'
-import type { PendingTransfer } from './useTransferConfirm'
-import { applyPendingTransfer, applySupportTransfer } from './transfer-resolution'
+import {useCallback, useMemo, type Dispatch, type SetStateAction} from 'react'
+
+import {formatAwakenerNameForUi} from '@/domain/name-format'
+import {getWheelById} from '@/domain/wheels'
+
+import {applyPendingTransfer, applySupportTransfer} from './transfer-resolution'
+import type {Team} from './types'
+import type {PendingTransfer} from './useTransferConfirm'
 
 type UsePendingTransferDialogOptions = {
   pendingTransfer: PendingTransfer | null
@@ -68,8 +70,14 @@ export function usePendingTransferDialog({
   return {
     title: `Move ${displayName}`,
     message: `${displayName} is already used in ${fromTeamName}. Move to ${toTeamName}?`,
-    supportLabel: pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport ? 'Use as Support' : undefined,
-    onSupport: pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport ? useSupportTransfer : undefined,
+    supportLabel:
+      pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport
+        ? 'Use as Support'
+        : undefined,
+    onSupport:
+      pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport
+        ? useSupportTransfer
+        : undefined,
     onConfirm: confirmTransfer,
   }
 }

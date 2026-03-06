@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type {ReactNode} from 'react'
 
 type PanelSectionProps = {
   title: string
@@ -11,7 +11,7 @@ function joinClasses(...classes: Array<string | undefined | false | null>) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function PanelSection({ title, description, className, children }: PanelSectionProps) {
+export function PanelSection({title, description, className, children}: PanelSectionProps) {
   return (
     <section className={joinClasses('space-y-2', className)}>
       <header className="space-y-0.5">
@@ -22,4 +22,3 @@ export function PanelSection({ title, description, className, children }: PanelS
     </section>
   )
 }
-

@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react'
-import { getAwakenerCardAsset } from '../domain/awakener-assets'
-import { getAwakeners } from '../domain/awakeners'
-import { searchAwakeners } from '../domain/awakeners-search'
-import { formatAwakenerNameForUi } from '../domain/name-format'
+import {useMemo, useState} from 'react'
+
+import {getAwakenerCardAsset} from '@/domain/awakener-assets'
+import {getAwakeners} from '@/domain/awakeners'
+import {searchAwakeners} from '@/domain/awakeners-search'
+import {formatAwakenerNameForUi} from '@/domain/name-format'
 
 const awakeners = getAwakeners()
 
@@ -51,8 +52,8 @@ export function CharactersPage() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(125,165,215,0.18),rgba(6,12,24,0.92)_70%)]" />
                 )}
               </div>
-              <h3 className="mt-3 ui-title text-lg text-amber-100">{displayName}</h3>
-              <p className="text-[11px] uppercase tracking-wide text-slate-400">{awakener.realm}</p>
+              <h3 className="ui-title mt-3 text-lg text-amber-100">{displayName}</h3>
+              <p className="text-[11px] tracking-wide text-slate-400 uppercase">{awakener.realm}</p>
             </article>
           )
         })}

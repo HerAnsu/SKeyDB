@@ -1,4 +1,4 @@
-import { useHoldRepeatAction } from './useHoldRepeatAction'
+import {useHoldRepeatAction} from './useHoldRepeatAction'
 
 type CollectionLevelStepButtonProps = {
   ariaLabel: string
@@ -17,7 +17,7 @@ export function CollectionLevelStepButton({
   className,
   glyphClassName,
 }: CollectionLevelStepButtonProps) {
-  const hold = useHoldRepeatAction({ onStep, disabled })
+  const hold = useHoldRepeatAction({onStep, disabled})
   const glyphPath = direction === 'up' ? 'M3.2 10.2 8 5.5l4.8 4.7' : 'M3.2 5.8 8 10.5l4.8-4.7'
 
   return (
@@ -33,7 +33,11 @@ export function CollectionLevelStepButton({
       onPointerUp={hold.onPointerUp}
       type="button"
     >
-      <svg aria-hidden="true" className={glyphClassName ?? 'collection-step-glyph'} viewBox="0 0 16 16">
+      <svg
+        aria-hidden="true"
+        className={glyphClassName ?? 'collection-step-glyph'}
+        viewBox="0 0 16 16"
+      >
         <path
           d={glyphPath}
           fill="none"

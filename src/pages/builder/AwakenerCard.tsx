@@ -1,9 +1,12 @@
-import { useDraggable, useDroppable } from '@dnd-kit/core'
-import { useState } from 'react'
-import { getAwakenerCardAsset } from '../../domain/awakener-assets'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import { CardWheelZone } from './CardWheelZone'
-import type { DragData, PredictedDropHover, TeamSlot } from './types'
+import {useState} from 'react'
+
+import {useDraggable, useDroppable} from '@dnd-kit/core'
+
+import {getAwakenerCardAsset} from '@/domain/awakener-assets'
+import {formatAwakenerNameForUi} from '@/domain/name-format'
+
+import {CardWheelZone} from './CardWheelZone'
+import type {DragData, PredictedDropHover, TeamSlot} from './types'
 
 const loadedCardAssets = new Set<string>()
 
@@ -48,7 +51,7 @@ export function AwakenerCard({
   )
   const cardImageLoaded = !cardAsset || loadedCardAsset === cardAsset
 
-  const { isOver, setNodeRef: setDroppableRef } = useDroppable({ id: slot.slotId })
+  const {isOver, setNodeRef: setDroppableRef} = useDroppable({id: slot.slotId})
   const {
     attributes: dragAttributes,
     listeners: dragListeners,
@@ -58,10 +61,15 @@ export function AwakenerCard({
     id: `team:${slot.slotId}`,
     disabled: !hasAwakener,
     data: hasAwakener
-      ? ({ kind: 'team-slot', slotId: slot.slotId, awakenerName: slot.awakenerName! } satisfies DragData)
+      ? ({
+          kind: 'team-slot',
+          slotId: slot.slotId,
+          awakenerName: slot.awakenerName!,
+        } satisfies DragData)
       : undefined,
   })
-  const hasRemovableAwakenerSelection = allowActiveRemoval && activeKind === 'awakener' && isActive && hasAwakener
+  const hasRemovableAwakenerSelection =
+    allowActiveRemoval && activeKind === 'awakener' && isActive && hasAwakener
   const isPredictedForThisCard =
     predictedDropHover !== null && predictedDropHover.slotId === slot.slotId
   const showCardOver =
@@ -76,12 +84,18 @@ export function AwakenerCard({
   return (
     <article
       className={`builder-card group relative aspect-[25/56] w-full border bg-slate-900/80 text-left ${
-        showCardOver ? 'border-amber-200/80 shadow-[0_0_0_1px_rgba(251,191,36,0.24)]' : 'border-slate-500/60'
+        showCardOver
+          ? 'border-amber-200/80 shadow-[0_0_0_1px_rgba(251,191,36,0.24)]'
+          : 'border-slate-500/60'
       } ${isDragging ? 'opacity-60' : ''} ${isActive ? 'builder-card-active' : ''}`}
       data-selection-owner="true"
       onClick={(event) => {
         const target = event.target as HTMLElement
-        if (target.closest('[data-card-remove]') || target.closest('.wheel-tile') || target.closest('.covenant-tile')) {
+        if (
+          target.closest('[data-card-remove]') ||
+          target.closest('.wheel-tile') ||
+          target.closest('.covenant-tile')
+        ) {
           return
         }
         onCardClick?.(slot.slotId)
@@ -125,7 +139,9 @@ export function AwakenerCard({
               src={cardAsset}
             />
           ) : null}
-          {cardImageLoaded ? <div className="builder-card-bottom-shade pointer-events-none absolute inset-0 z-10" /> : null}
+          {cardImageLoaded ? (
+            <div className="builder-card-bottom-shade pointer-events-none absolute inset-0 z-10" />
+          ) : null}
           {cardAsset && !cardImageLoaded ? (
             <div className="absolute inset-0 z-30 bg-slate-700/15">
               <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(125,165,215,0.16),rgba(6,12,24,0)_62%)]" />
@@ -136,7 +152,9 @@ export function AwakenerCard({
 
           <div className="builder-card-name-wrap pointer-events-none absolute inset-x-0 top-0 z-20 px-2 pt-1 pb-[18%]">
             <p className="builder-card-name ui-title text-slate-100">{displayName}</p>
-            {slot.isSupport ? <span className="builder-support-badge">Support Awakener</span> : null}
+            {slot.isSupport ? (
+              <span className="builder-support-badge">Support Awakener</span>
+            ) : null}
             {awakenerOwnedLevel === null ? (
               <span className="builder-unowned-badge">Unowned</span>
             ) : null}

@@ -3,14 +3,19 @@ export function isTypingTarget(target: EventTarget | null): boolean {
     return false
   }
   const tagName = target.tagName
-  return tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT' || target.isContentEditable
+  return (
+    tagName === 'INPUT' ||
+    tagName === 'TEXTAREA' ||
+    tagName === 'SELECT' ||
+    target.isContentEditable
+  )
 }
 
 export function getDragKind(data: unknown): string | undefined {
   if (!data || typeof data !== 'object') {
     return undefined
   }
-  const maybeKind = (data as { kind?: unknown }).kind
+  const maybeKind = (data as {kind?: unknown}).kind
   return typeof maybeKind === 'string' ? maybeKind : undefined
 }
 

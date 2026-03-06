@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState} from 'react'
 
 export type PendingAwakenerTransfer = {
   kind: 'awakener'
@@ -78,7 +78,7 @@ export function useTransferConfirm() {
     })
   }
 
-  function requestPosseTransfer({ posseId, posseName, fromTeamId, toTeamId }: RequestPosseTransfer) {
+  function requestPosseTransfer({posseId, posseName, fromTeamId, toTeamId}: RequestPosseTransfer) {
     setPendingTransfer({
       kind: 'posse',
       itemName: posseName,

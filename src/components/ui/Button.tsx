@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type {ButtonHTMLAttributes, ReactNode} from 'react'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success'
 type ButtonSize = 'xs' | 'sm'
@@ -13,7 +13,8 @@ const variantClassMap: Record<ButtonVariant, string> = {
   primary:
     'border border-amber-300/70 bg-amber-500/15 text-amber-100 hover:border-amber-200/80 hover:bg-amber-500/22',
   secondary: 'border border-slate-500/60 bg-slate-900/70 text-slate-200 hover:border-amber-200/45',
-  danger: 'border border-rose-300/70 bg-rose-500/12 text-rose-100 hover:border-rose-200/85 hover:bg-rose-500/18',
+  danger:
+    'border border-rose-300/70 bg-rose-500/12 text-rose-100 hover:border-rose-200/85 hover:bg-rose-500/18',
   success:
     'border border-emerald-300/70 bg-emerald-500/14 text-emerald-100 hover:border-emerald-200/85 hover:bg-emerald-500/22',
 }
@@ -27,7 +28,14 @@ function joinClasses(...classes: Array<string | undefined | false | null>) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function Button({ variant = 'secondary', size = 'xs', className, type = 'button', children, ...props }: ButtonProps) {
+export function Button({
+  variant = 'secondary',
+  size = 'xs',
+  className,
+  type = 'button',
+  children,
+  ...props
+}: ButtonProps) {
   return (
     <button
       className={joinClasses(

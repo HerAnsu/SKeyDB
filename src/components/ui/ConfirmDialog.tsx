@@ -1,6 +1,5 @@
-import { ModalFrame } from './ModalFrame'
-import { Button } from './Button'
-import type { ButtonVariant } from './Button'
+import {Button, type ButtonVariant} from './Button'
+import {ModalFrame} from './ModalFrame'
 
 type ConfirmDialogProps = {
   title: string

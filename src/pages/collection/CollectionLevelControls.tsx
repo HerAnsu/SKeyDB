@@ -1,5 +1,5 @@
-import { OwnershipLevelDisplay } from './OwnershipLevelDisplay'
-import { CollectionLevelStepButton } from './CollectionLevelStepButton'
+import {CollectionLevelStepButton} from './CollectionLevelStepButton'
+import {OwnershipLevelDisplay} from './OwnershipLevelDisplay'
 
 type CollectionLevelControlsProps = {
   ownedLevel: number | null
@@ -7,7 +7,11 @@ type CollectionLevelControlsProps = {
   onDecrease: () => void
 }
 
-export function CollectionLevelControls({ ownedLevel, onIncrease, onDecrease }: CollectionLevelControlsProps) {
+export function CollectionLevelControls({
+  ownedLevel,
+  onIncrease,
+  onDecrease,
+}: CollectionLevelControlsProps) {
   return (
     <div
       className={`collection-card-level-controls ${

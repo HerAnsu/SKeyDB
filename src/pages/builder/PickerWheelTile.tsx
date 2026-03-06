@@ -1,5 +1,6 @@
-import { useDraggable } from '@dnd-kit/core'
-import type { DragData } from './types'
+import {useDraggable} from '@dnd-kit/core'
+
+import type {DragData} from './types'
 
 type PickerWheelTileProps = {
   wheelId?: string
@@ -27,12 +28,14 @@ export function PickerWheelTile({
   const isDimmed = isBlocked || isInUse || (!isOwned && !isNotSet)
   const isSoftDimmed = !isBlocked && (isInUse || (!isOwned && !isNotSet))
   const draggableEnabled = !isNotSet && Boolean(wheelId)
-  const { attributes, listeners, isDragging, setNodeRef } = useDraggable({
+  const {attributes, listeners, isDragging, setNodeRef} = useDraggable({
     id: draggableEnabled ? `picker-wheel:${wheelId}` : `picker-wheel:not-set`,
-    data: draggableEnabled ? ({ kind: 'picker-wheel', wheelId: wheelId! } satisfies DragData) : undefined,
+    data: draggableEnabled
+      ? ({kind: 'picker-wheel', wheelId: wheelId!} satisfies DragData)
+      : undefined,
     disabled: !draggableEnabled,
   })
-  const dragAttributes = { ...attributes } as Record<string, unknown>
+  const dragAttributes = {...attributes} as Record<string, unknown>
   delete dragAttributes['aria-disabled']
 
   return (
@@ -70,14 +73,14 @@ export function PickerWheelTile({
             {blockedText}
           </span>
         ) : !isNotSet && !isOwned ? (
-          <span
-            className="pointer-events-none absolute inset-x-0 top-0 truncate border-y border-rose-300/25 bg-slate-950/70 px-1 py-0.5 text-center text-[9px] tracking-wide text-rose-100/95"
-          >
+          <span className="pointer-events-none absolute inset-x-0 top-0 truncate border-y border-rose-300/25 bg-slate-950/70 px-1 py-0.5 text-center text-[9px] tracking-wide text-rose-100/95">
             Unowned
           </span>
         ) : null}
       </div>
-      <p className="mt-1 truncate text-[11px] text-slate-200">{isNotSet ? 'Not Set' : wheelName ?? wheelId}</p>
+      <p className="mt-1 truncate text-[11px] text-slate-200">
+        {isNotSet ? 'Not Set' : (wheelName ?? wheelId)}
+      </p>
     </button>
   )
 }

@@ -1,7 +1,9 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import type { Awakener } from '../../domain/awakeners'
-import { AwakenerDetailModal } from './AwakenerDetailModal'
+import {fireEvent, render, screen, waitFor} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
+
+import type {Awakener} from '@/domain/awakeners'
+
+import {AwakenerDetailModal} from './AwakenerDetailModal'
 
 vi.mock('../../domain/awakeners-full', () => ({
   loadAwakenersFull: async () => [
@@ -30,7 +32,10 @@ vi.mock('../../domain/awakeners-full', () => ({
         CritRate: '1.6%',
       },
       cards: {},
-      exalts: { exalt: { name: 'Exalt', description: 'x' }, over_exalt: { name: 'Over Exalt', description: 'x' } },
+      exalts: {
+        exalt: {name: 'Exalt', description: 'x'},
+        over_exalt: {name: 'Over Exalt', description: 'x'},
+      },
       talents: {},
       enlightens: {},
     },
@@ -57,12 +62,16 @@ vi.mock('../../domain/awakeners-full', () => ({
       },
       substatScaling: {},
       cards: {},
-      exalts: { exalt: { name: 'Exalt', description: 'x' }, over_exalt: { name: 'Over Exalt', description: 'x' } },
+      exalts: {
+        exalt: {name: 'Exalt', description: 'x'},
+        over_exalt: {name: 'Over Exalt', description: 'x'},
+      },
       talents: {},
       enlightens: {},
     },
   ],
-  getAwakenerFullById: (id: number, data: Array<{ id: number }>) => data.find((entry) => entry.id === id) ?? null,
+  getAwakenerFullById: (id: number, data: Array<{id: number}>) =>
+    data.find((entry) => entry.id === id) ?? null,
 }))
 
 vi.mock('../../domain/awakener-assets', () => ({
@@ -97,7 +106,7 @@ vi.mock('./AwakenerDetailSidebar', () => ({
     onDecreaseEnlighten: () => void
     onIncreaseEnlighten: () => void
     onLevelChange: (level: number) => void
-    stats: { CON: string; CritRate: string } | null
+    stats: {CON: string; CritRate: string} | null
   }) => (
     <div>
       <button onClick={() => onLevelChange(90)} type="button">
@@ -118,11 +127,7 @@ vi.mock('./AwakenerDetailSidebar', () => ({
 }))
 
 vi.mock('./AwakenerDetailOverview', () => ({
-  AwakenerDetailOverview: ({
-    stats,
-  }: {
-    stats: { CON: string; CritRate: string } | null
-  }) => (
+  AwakenerDetailOverview: ({stats}: {stats: {CON: string; CritRate: string} | null}) => (
     <div>
       <div>Overview CON {stats?.CON ?? 'none'}</div>
       <div>Overview Crit Rate {stats?.CritRate ?? 'none'}</div>
@@ -165,15 +170,19 @@ describe('AwakenerDetailModal', () => {
     const first = makeAwakener(1, 'alpha')
     const second = makeAwakener(2, 'beta')
 
-    const { rerender } = render(<AwakenerDetailModal awakener={first} key={first.id} onClose={onClose} />)
+    const {rerender} = render(
+      <AwakenerDetailModal awakener={first} key={first.id} onClose={onClose} />,
+    )
 
-    fireEvent.click(screen.getByRole('button', { name: 'Cards' }))
-    expect(screen.getByRole('button', { name: 'Cards' }).className).toContain('border-amber-200/70')
+    fireEvent.click(screen.getByRole('button', {name: 'Cards'}))
+    expect(screen.getByRole('button', {name: 'Cards'}).className).toContain('border-amber-200/70')
 
     rerender(<AwakenerDetailModal awakener={second} key={second.id} onClose={onClose} />)
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Overview' }).className).toContain('border-amber-200/70')
+      expect(screen.getByRole('button', {name: 'Overview'}).className).toContain(
+        'border-amber-200/70',
+      )
     })
   })
 
@@ -192,7 +201,7 @@ describe('AwakenerDetailModal', () => {
       expect(screen.getByText('Overview Crit Rate 14.6%')).toBeInTheDocument()
     })
 
-    fireEvent.click(screen.getAllByRole('button', { name: 'Set level 90' })[0])
+    fireEvent.click(screen.getAllByRole('button', {name: 'Set level 90'})[0])
 
     expect(screen.getAllByText('Sidebar Level 90')).toHaveLength(2)
     expect(screen.getAllByText('Sidebar CON 186')).toHaveLength(2)
@@ -211,7 +220,7 @@ describe('AwakenerDetailModal', () => {
       expect(screen.getByText('Overview Crit Rate 14.6%')).toBeInTheDocument()
     })
 
-    fireEvent.click(screen.getAllByRole('button', { name: 'Increase Psyche Surge' })[0])
+    fireEvent.click(screen.getAllByRole('button', {name: 'Increase Psyche Surge'})[0])
 
     expect(screen.getAllByText('Sidebar E3+1')).toHaveLength(2)
     expect(screen.getAllByText('Sidebar Crit Rate 16.2%')).toHaveLength(2)

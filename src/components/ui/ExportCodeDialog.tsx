@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
-import { ModalFrame } from './ModalFrame'
-import { Button } from './Button'
-import type { ReactNode } from 'react'
+import {useEffect, useRef, type ReactNode} from 'react'
+
+import {Button} from './Button'
+import {ModalFrame} from './ModalFrame'
 
 type ExportCodeDialogProps = {
   title: string
@@ -11,7 +11,13 @@ type ExportCodeDialogProps = {
   helperText?: string
 }
 
-export function ExportCodeDialog({ title, code, onClose, warning, helperText }: ExportCodeDialogProps) {
+export function ExportCodeDialog({
+  title,
+  code,
+  onClose,
+  warning,
+  helperText,
+}: ExportCodeDialogProps) {
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
 
   useEffect(() => {
@@ -21,7 +27,9 @@ export function ExportCodeDialog({ title, code, onClose, warning, helperText }: 
 
   return (
     <ModalFrame title={title}>
-      <p className="mt-2 text-sm text-slate-200">{helperText ?? 'Copy this code to share/import later.'}</p>
+      <p className="mt-2 text-sm text-slate-200">
+        {helperText ?? 'Copy this code to share/import later.'}
+      </p>
       {warning ? <div className="mt-2">{warning}</div> : null}
       <textarea
         aria-label="Export code"

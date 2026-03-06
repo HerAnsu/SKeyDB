@@ -1,11 +1,12 @@
-import { getAwakenerCardAsset } from '../../domain/awakener-assets'
-import { hasAwakenerSubstatScaling } from '../../domain/awakener-level-scaling'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import { getMainstatIcon, type MainstatKey } from '../../domain/mainstats'
-import type { Awakener } from '../../domain/awakeners'
-import type { AwakenerFullStats, AwakenerSubstatScaling } from '../../domain/awakeners-full'
-import { AwakenerEnlightenStepper } from './AwakenerEnlightenStepper'
-import { AwakenerLevelSlider } from './AwakenerLevelSlider'
+import {getAwakenerCardAsset} from '@/domain/awakener-assets'
+import {hasAwakenerSubstatScaling} from '@/domain/awakener-level-scaling'
+import type {Awakener} from '@/domain/awakeners'
+import type {AwakenerFullStats, AwakenerSubstatScaling} from '@/domain/awakeners-full'
+import {getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
+import {formatAwakenerNameForUi} from '@/domain/name-format'
+
+import {AwakenerEnlightenStepper} from './AwakenerEnlightenStepper'
+import {AwakenerLevelSlider} from './AwakenerLevelSlider'
 
 const STAT_DISPLAY_ORDER = [
   'CON',
@@ -100,7 +101,9 @@ export function AwakenerDetailSidebar({
       <div className="border border-slate-600/30 bg-slate-900/30 px-3 py-2.5">
         <div className="mb-2.5 space-y-2">
           <div className="flex items-center justify-between gap-3">
-            <h4 className="ui-title text-[11px] uppercase tracking-wide text-slate-400">Attributes</h4>
+            <h4 className="ui-title text-[11px] tracking-wide text-slate-400 uppercase">
+              Attributes
+            </h4>
             {hasSubstatScaling ? (
               <AwakenerEnlightenStepper
                 offset={enlightenOffset}
@@ -123,15 +126,24 @@ export function AwakenerDetailSidebar({
                 ? `Level scaling: +${scaledSubstat} per 10 levels to Lv. 60`
                 : undefined
               return (
-                <div
-                  className="flex items-center justify-between text-[11px]"
-                  key={key}
-                >
+                <div className="flex items-center justify-between text-[11px]" key={key}>
                   <span className="flex items-center gap-1.5 text-slate-500">
-                    {icon ? <img alt="" className="object-contain h-3.5 w-3.5 opacity-60" draggable={false} src={icon} /> : null}
+                    {icon ? (
+                      <img
+                        alt=""
+                        className="h-3.5 w-3.5 object-contain opacity-60"
+                        draggable={false}
+                        src={icon}
+                      />
+                    ) : null}
                     {STAT_LABELS[key]}
                   </span>
-                  <span className={scaledSubstat ? SIDEBAR_SCALING_VALUE_CLASS : SIDEBAR_STAT_VALUE_CLASS} title={statTitle}>
+                  <span
+                    className={
+                      scaledSubstat ? SIDEBAR_SCALING_VALUE_CLASS : SIDEBAR_STAT_VALUE_CLASS
+                    }
+                    title={statTitle}
+                  >
                     {value}
                   </span>
                 </div>
@@ -143,7 +155,8 @@ export function AwakenerDetailSidebar({
         )}
         {hasSubstatScaling ? (
           <p className="mt-2 text-[10px] leading-relaxed text-slate-500">
-            Secondary stat bonuses increase every 10 levels (1-60). Psyche Surge bonuses shown from E3+0 to E3+12.
+            Secondary stat bonuses increase every 10 levels (1-60). Psyche Surge bonuses shown from
+            E3+0 to E3+12.
           </p>
         ) : null}
       </div>

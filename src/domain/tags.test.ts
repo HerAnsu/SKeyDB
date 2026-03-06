@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest'
-import { getTags, resolveTag } from './tags'
+import {describe, expect, it} from 'vitest'
+
+import {getTags, resolveTag} from './tags'
 
 describe('tags', () => {
   it('loads all tags from data file', () => {

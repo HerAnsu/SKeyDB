@@ -1,10 +1,11 @@
-import awakenersCanonical from '../data/ingame-tokens/awakeners.json'
-import possesCanonical from '../data/ingame-tokens/posses.json'
-import wheelsCanonical from '../data/ingame-tokens/wheels.json'
-import { getAwakeners } from './awakeners'
-import { getCovenants } from './covenants'
-import { getPosses } from './posses'
-import { getWheels } from './wheels'
+import awakenersCanonical from '@/data/ingame-tokens/awakeners.json'
+import possesCanonical from '@/data/ingame-tokens/posses.json'
+import wheelsCanonical from '@/data/ingame-tokens/wheels.json'
+
+import {getAwakeners} from './awakeners'
+import {getCovenants} from './covenants'
+import {getPosses} from './posses'
+import {getWheels} from './wheels'
 
 export type IngameTokenCategory = 'awakeners' | 'wheels' | 'covenants' | 'posses'
 
@@ -52,7 +53,7 @@ export function buildTokenDictionaryFromEntries({
     }
 
     if (!allowedIds.has(entry.id)) {
-      issues.push({ category, kind: 'unknown_source_id', id: entry.id, token: entry.token })
+      issues.push({category, kind: 'unknown_source_id', id: entry.id, token: entry.token})
       continue
     }
 
@@ -67,7 +68,7 @@ export function buildTokenDictionaryFromEntries({
 
   for (const [token, mappedIds] of provisionalByTokenIds) {
     if (mappedIds.length > 1) {
-      issues.push({ category, kind: 'duplicate_token', token })
+      issues.push({category, kind: 'duplicate_token', token})
       continue
     }
     byTokenId.set(token, mappedIds[0])
@@ -75,7 +76,7 @@ export function buildTokenDictionaryFromEntries({
 
   for (const id of ids) {
     if (!byIdToken.has(id)) {
-      issues.push({ category, kind: 'missing_token_for_id', id })
+      issues.push({category, kind: 'missing_token_for_id', id})
     }
   }
 

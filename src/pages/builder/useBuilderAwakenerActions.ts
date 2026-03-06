@@ -1,8 +1,14 @@
-import { useCallback } from 'react'
-import type { Awakener } from '../../domain/awakeners'
-import { getAwakenerIdentityKey } from '../../domain/awakener-identity'
-import { assignAwakenerToFirstEmptySlot, assignAwakenerToSlot, type TeamStateViolationCode } from './team-state'
-import type { ActiveSelection, TeamSlot } from './types'
+import {useCallback} from 'react'
+
+import {getAwakenerIdentityKey} from '@/domain/awakener-identity'
+import type {Awakener} from '@/domain/awakeners'
+
+import {
+  assignAwakenerToFirstEmptySlot,
+  assignAwakenerToSlot,
+  type TeamStateViolationCode,
+} from './team-state'
+import type {ActiveSelection, TeamSlot} from './types'
 
 type AwakenerTransferRequest = {
   awakenerName: string
@@ -72,7 +78,7 @@ export function useBuilderAwakenerActions({
 
       clearTransfer()
       setActiveTeamSlots(result.nextSlots)
-      setActiveSelection({ kind: 'awakener', slotId: targetSlotId })
+      setActiveSelection({kind: 'awakener', slotId: targetSlotId})
       onPickerAssignSuccess?.(result.nextSlots)
     },
     [
@@ -97,7 +103,8 @@ export function useBuilderAwakenerActions({
       clearPendingDelete()
       clearTransfer()
 
-      const targetSlotId = resolvedActiveSelection?.kind === 'awakener' ? resolvedActiveSelection.slotId : undefined
+      const targetSlotId =
+        resolvedActiveSelection?.kind === 'awakener' ? resolvedActiveSelection.slotId : undefined
       const result = targetSlotId
         ? assignAwakenerToSlot(teamSlots, awakenerName, targetSlotId, awakenerByName, {
             allowDuplicateIdentity: allowDupes,
@@ -113,7 +120,9 @@ export function useBuilderAwakenerActions({
 
       const identityKey = getAwakenerIdentityKey(awakenerName)
       const owningTeamId = allowDupes ? undefined : usedAwakenerByIdentityKey.get(identityKey)
-      const targetSlot = targetSlotId ? teamSlots.find((slot) => slot.slotId === targetSlotId) : undefined
+      const targetSlot = targetSlotId
+        ? teamSlots.find((slot) => slot.slotId === targetSlotId)
+        : undefined
       if (owningTeamId && owningTeamId !== effectiveActiveTeamId && !targetSlot?.isSupport) {
         requestAwakenerTransfer({
           awakenerName,
@@ -151,4 +160,3 @@ export function useBuilderAwakenerActions({
     handlePickerAwakenerClick,
   }
 }
-

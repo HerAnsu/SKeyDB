@@ -1,5 +1,6 @@
-import { z } from 'zod'
-import awakenersLite from '../data/awakeners-lite.json'
+import {z} from 'zod'
+
+import awakenersLite from '@/data/awakeners-lite.json'
 
 const liteStatsSchema = z.object({
   CON: z.number(),

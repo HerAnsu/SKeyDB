@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { TabbedContainer } from './TabbedContainer'
+import {fireEvent, render, screen} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
+
+import {TabbedContainer} from './TabbedContainer'
 
 describe('TabbedContainer', () => {
   it('renders tabs and calls on change', () => {
@@ -10,8 +11,8 @@ describe('TabbedContainer', () => {
         activeTabId="a"
         onTabChange={onTabChange}
         tabs={[
-          { id: 'a', label: 'Tab A' },
-          { id: 'b', label: 'Tab B' },
+          {id: 'a', label: 'Tab A'},
+          {id: 'b', label: 'Tab B'},
         ]}
       >
         <div>Body</div>
@@ -19,8 +20,8 @@ describe('TabbedContainer', () => {
     )
 
     expect(screen.getByRole('tablist')).toBeInTheDocument()
-    const tabA = screen.getByRole('tab', { name: 'Tab A' })
-    const tabB = screen.getByRole('tab', { name: 'Tab B' })
+    const tabA = screen.getByRole('tab', {name: 'Tab A'})
+    const tabB = screen.getByRole('tab', {name: 'Tab B'})
     expect(tabA).toBeInTheDocument()
     expect(tabB).toBeInTheDocument()
     expect(tabA).toHaveAttribute('aria-selected', 'true')
@@ -47,18 +48,17 @@ describe('TabbedContainer', () => {
         onTabChange={onTabChange}
         onTabClose={onTabClose}
         tabs={[
-          { id: 'a', label: 'Tab A' },
-          { id: 'b', label: 'Tab B' },
+          {id: 'a', label: 'Tab A'},
+          {id: 'b', label: 'Tab B'},
         ]}
       >
         <div>Body</div>
       </TabbedContainer>,
     )
 
-    expect(screen.queryByRole('button', { name: /close tab a/i })).not.toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: /close tab b/i }))
+    expect(screen.queryByRole('button', {name: /close tab a/i})).not.toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', {name: /close tab b/i}))
     expect(onTabClose).toHaveBeenCalledWith('b')
     expect(onTabChange).not.toHaveBeenCalled()
   })
 })
-

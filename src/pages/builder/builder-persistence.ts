@@ -1,6 +1,11 @@
-import type { Team, TeamSlot } from './types'
-import type { StorageLike } from '../../domain/storage'
-import { safeStorageRead, safeStorageRemove, safeStorageWrite } from '../../domain/storage'
+import {
+  safeStorageRead,
+  safeStorageRemove,
+  safeStorageWrite,
+  type StorageLike,
+} from '@/domain/storage'
+
+import type {Team, TeamSlot} from './types'
 
 const BUILDER_PERSISTENCE_VERSION = 1
 
@@ -11,7 +16,7 @@ type BuilderDraftPayload = {
   activeTeamId: string
 }
 
-export type { BuilderDraftPayload }
+export type {BuilderDraftPayload}
 
 type PersistedBuilderEnvelope = {
   version: number
@@ -30,7 +35,10 @@ function isOptionalString(value: unknown): boolean {
 }
 
 function isOptionalFiniteInteger(value: unknown): boolean {
-  return value === undefined || (typeof value === 'number' && Number.isFinite(value) && Number.isInteger(value))
+  return (
+    value === undefined ||
+    (typeof value === 'number' && Number.isFinite(value) && Number.isInteger(value))
+  )
 }
 
 function isOptionalBoolean(value: unknown): boolean {
@@ -50,7 +58,9 @@ function isSlot(value: unknown): value is TeamSlot {
   if (!Array.isArray(record.wheels) || record.wheels.length !== 2) {
     return false
   }
-  const hasValidWheels = record.wheels.every((wheelId) => wheelId === null || typeof wheelId === 'string')
+  const hasValidWheels = record.wheels.every(
+    (wheelId) => wheelId === null || typeof wheelId === 'string',
+  )
   if (!hasValidWheels) {
     return false
   }
@@ -75,7 +85,8 @@ function isSlot(value: unknown): value is TeamSlot {
     return false
   }
 
-  const hasAwakener = typeof record.awakenerName === 'string' && record.awakenerName.trim().length > 0
+  const hasAwakener =
+    typeof record.awakenerName === 'string' && record.awakenerName.trim().length > 0
   if (!hasAwakener) {
     const hasMetadata =
       record.realm !== undefined ||
@@ -102,7 +113,12 @@ function isTeam(value: unknown): value is Team {
   }
 
   const record = value as Record<string, unknown>
-  if (typeof record.id !== 'string' || !record.id.trim() || typeof record.name !== 'string' || !record.name.trim()) {
+  if (
+    typeof record.id !== 'string' ||
+    !record.id.trim() ||
+    typeof record.name !== 'string' ||
+    !record.name.trim()
+  ) {
     return false
   }
   if (record.posseId !== undefined && typeof record.posseId !== 'string') {
@@ -151,7 +167,8 @@ function normalizeDraft(payload: BuilderDraftPayload): BuilderDraftPayload | nul
     teams: payload.teams.map((team) => ({
       ...team,
       slots: team.slots.map((slot) => {
-        const legacyFaction = 'faction' in slot && typeof slot.faction === 'string' ? slot.faction : undefined
+        const legacyFaction =
+          'faction' in slot && typeof slot.faction === 'string' ? slot.faction : undefined
         const realm = slot.realm ?? legacyFaction
         if (slot.awakenerName) {
           return {
@@ -193,7 +210,10 @@ export function loadBuilderDraft(storage: StorageLike | null): BuilderDraftPaylo
   }
 }
 
-export function saveBuilderDraft(storage: StorageLike | null, payload: BuilderDraftPayload): boolean {
+export function saveBuilderDraft(
+  storage: StorageLike | null,
+  payload: BuilderDraftPayload,
+): boolean {
   const normalized = normalizeDraft(payload)
   if (!normalized) {
     return false

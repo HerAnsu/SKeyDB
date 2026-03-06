@@ -1,7 +1,8 @@
-import { renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { useBuilderWheelActions } from './useBuilderWheelActions'
-import type { ActiveSelection, TeamSlot, WheelUsageLocation } from './types'
+import {renderHook} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
+
+import type {ActiveSelection, TeamSlot, WheelUsageLocation} from './types'
+import {useBuilderWheelActions} from './useBuilderWheelActions'
 
 function buildSlots(): TeamSlot[] {
   return [
@@ -50,7 +51,7 @@ function createHook(options?: {
       ],
     ])
 
-  const { result } = renderHook(() =>
+  const {result} = renderHook(() =>
     useBuilderWheelActions({
       clearPendingDelete,
       clearTransfer,
@@ -79,16 +80,20 @@ function createHook(options?: {
 
 describe('useBuilderWheelActions', () => {
   it('swaps wheel ownership within the active team when picker wheel is already used', () => {
-    const { actions, setActiveSelection, setActiveTeamSlots } = createHook()
+    const {actions, setActiveSelection, setActiveTeamSlots} = createHook()
 
     actions.handleDropPickerWheel('B01', 'slot-2', 1)
 
     expect(setActiveTeamSlots).toHaveBeenCalledTimes(1)
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: [null, null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: [null, 'B01'] }),
+      expect.objectContaining({slotId: 'slot-1', wheels: [null, null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: [null, 'B01']}),
     ])
-    expect(setActiveSelection).toHaveBeenCalledWith({ kind: 'wheel', slotId: 'slot-2', wheelIndex: 1 })
+    expect(setActiveSelection).toHaveBeenCalledWith({
+      kind: 'wheel',
+      slotId: 'slot-2',
+      wheelIndex: 1,
+    })
   })
 
   it('requests transfer when wheel belongs to another team', () => {
@@ -103,7 +108,7 @@ describe('useBuilderWheelActions', () => {
         },
       ],
     ])
-    const { actions, requestWheelTransfer, setActiveTeamSlots } = createHook({ usedWheelByTeamOrder })
+    const {actions, requestWheelTransfer, setActiveTeamSlots} = createHook({usedWheelByTeamOrder})
 
     actions.handleDropPickerWheel('B01', 'slot-2', 0)
 
@@ -120,16 +125,16 @@ describe('useBuilderWheelActions', () => {
   })
 
   it('fills first empty wheel when awakener card is active and picker wheel is clicked', () => {
-    const { actions, setActiveSelection, setActiveTeamSlots } = createHook({
-      resolvedActiveSelection: { kind: 'awakener', slotId: 'slot-2' },
+    const {actions, setActiveSelection, setActiveTeamSlots} = createHook({
+      resolvedActiveSelection: {kind: 'awakener', slotId: 'slot-2'},
       usedWheelByTeamOrder: new Map(),
     })
 
     actions.handlePickerWheelClick('B02')
 
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: ['B01', null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: ['B02', null] }),
+      expect.objectContaining({slotId: 'slot-1', wheels: ['B01', null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: ['B02', null]}),
     ])
     expect(setActiveSelection).not.toHaveBeenCalled()
   })
@@ -146,8 +151,8 @@ describe('useBuilderWheelActions', () => {
         },
       ],
     ])
-    const { actions, requestWheelTransfer, setActiveTeamSlots } = createHook({
-      resolvedActiveSelection: { kind: 'wheel', slotId: 'slot-2', wheelIndex: 0 },
+    const {actions, requestWheelTransfer, setActiveTeamSlots} = createHook({
+      resolvedActiveSelection: {kind: 'wheel', slotId: 'slot-2', wheelIndex: 0},
       usedWheelByTeamOrder,
       allowDupes: true,
     })
@@ -156,8 +161,8 @@ describe('useBuilderWheelActions', () => {
 
     expect(requestWheelTransfer).not.toHaveBeenCalled()
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: ['B01', null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: ['B01', null] }),
+      expect.objectContaining({slotId: 'slot-1', wheels: ['B01', null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: ['B01', null]}),
     ])
   })
 
@@ -173,7 +178,7 @@ describe('useBuilderWheelActions', () => {
         },
       ],
     ])
-    const { actions, requestWheelTransfer, setActiveTeamSlots } = createHook({
+    const {actions, requestWheelTransfer, setActiveTeamSlots} = createHook({
       teamSlots: [
         {
           slotId: 'slot-1',
@@ -191,7 +196,7 @@ describe('useBuilderWheelActions', () => {
           wheels: [null, null],
         },
       ],
-      resolvedActiveSelection: { kind: 'wheel', slotId: 'slot-2', wheelIndex: 0 },
+      resolvedActiveSelection: {kind: 'wheel', slotId: 'slot-2', wheelIndex: 0},
       usedWheelByTeamOrder,
     })
 
@@ -199,13 +204,13 @@ describe('useBuilderWheelActions', () => {
 
     expect(requestWheelTransfer).not.toHaveBeenCalled()
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: ['B01', null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: ['B01', null], isSupport: true }),
+      expect.objectContaining({slotId: 'slot-1', wheels: ['B01', null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: ['B01', null], isSupport: true}),
     ])
   })
 
   it('swaps wheel assignments between active-team slots when dragging between wheel sockets', () => {
-    const { actions, setActiveSelection, setActiveTeamSlots } = createHook({
+    const {actions, setActiveSelection, setActiveTeamSlots} = createHook({
       teamSlots: [
         {
           slotId: 'slot-1',
@@ -227,9 +232,13 @@ describe('useBuilderWheelActions', () => {
     actions.handleDropTeamWheel('slot-1', 0, 'slot-2', 1)
 
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', wheels: ['B02', null] }),
-      expect.objectContaining({ slotId: 'slot-2', wheels: [null, 'B01'] }),
+      expect.objectContaining({slotId: 'slot-1', wheels: ['B02', null]}),
+      expect.objectContaining({slotId: 'slot-2', wheels: [null, 'B01']}),
     ])
-    expect(setActiveSelection).toHaveBeenCalledWith({ kind: 'wheel', slotId: 'slot-2', wheelIndex: 1 })
+    expect(setActiveSelection).toHaveBeenCalledWith({
+      kind: 'wheel',
+      slotId: 'slot-2',
+      wheelIndex: 1,
+    })
   })
 })

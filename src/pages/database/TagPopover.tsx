@@ -1,11 +1,11 @@
-import { FaXmark } from 'react-icons/fa6'
-import { parseRichDescription } from '../../domain/rich-text'
-import { type Tag } from '../../domain/tags'
-import { scaledFontStyle } from './font-scale'
-import { RichSegmentRenderer } from './RichSegmentRenderer'
-import {
-  DATABASE_ENTRY_TITLE_CLASS,
-} from './text-styles'
+import {FaXmark} from 'react-icons/fa6'
+
+import {parseRichDescription} from '@/domain/rich-text'
+import {type Tag} from '@/domain/tags'
+
+import {scaledFontStyle} from './font-scale'
+import {RichSegmentRenderer} from './RichSegmentRenderer'
+import {DATABASE_ENTRY_TITLE_CLASS} from './text-styles'
 
 type TagPopoverProps = {
   tag: Tag
@@ -31,10 +31,9 @@ export function TagPopover({
       onMouseDown={(e) => e.stopPropagation()}
     >
       <div className="flex items-start justify-between px-3 pt-2.5 pb-1.5">
-        <p
-          className={DATABASE_ENTRY_TITLE_CLASS}
-          style={scaledFontStyle(12)}
-        >{tag.label}</p>
+        <p className={DATABASE_ENTRY_TITLE_CLASS} style={scaledFontStyle(12)}>
+          {tag.label}
+        </p>
         <button
           aria-label="Close tag popover"
           className="ml-2 shrink-0 text-slate-500 transition-colors hover:text-amber-100"
@@ -45,10 +44,7 @@ export function TagPopover({
         </button>
       </div>
       <div className="px-3 pb-3">
-        <p
-          className="leading-relaxed text-slate-400"
-          style={scaledFontStyle(11)}
-        >
+        <p className="leading-relaxed text-slate-400" style={scaledFontStyle(11)}>
           {segments.map((seg, i) => (
             <RichSegmentRenderer
               key={i}

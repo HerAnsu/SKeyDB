@@ -1,5 +1,6 @@
-import { z } from 'zod'
-import covenantsLite from '../data/covenants-lite.json'
+import {z} from 'zod'
+
+import covenantsLite from '@/data/covenants-lite.json'
 
 const rawCovenantsSchema = z.array(
   z.object({

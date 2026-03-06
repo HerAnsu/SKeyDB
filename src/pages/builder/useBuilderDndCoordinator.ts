@@ -1,5 +1,6 @@
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
-import { getDragKind } from './utils'
+import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
+
+import {getDragKind} from './utils'
 
 type UseBuilderDndCoordinatorOptions = {
   onTeamRowDragStart: (teamId: string) => void
@@ -35,7 +36,7 @@ export function useBuilderDndCoordinator({
     if (getDragKind(dragData) === 'team-row') {
       const teamId =
         typeof dragData === 'object' && dragData && 'teamId' in dragData
-          ? (dragData as { teamId?: unknown }).teamId
+          ? (dragData as {teamId?: unknown}).teamId
           : undefined
       if (typeof teamId === 'string') {
         onTeamRowDragStart(teamId)
@@ -45,11 +46,11 @@ export function useBuilderDndCoordinator({
     if (getDragKind(dragData) === 'team-preview-slot') {
       const teamId =
         typeof dragData === 'object' && dragData && 'teamId' in dragData
-          ? (dragData as { teamId?: unknown }).teamId
+          ? (dragData as {teamId?: unknown}).teamId
           : undefined
       const slotId =
         typeof dragData === 'object' && dragData && 'slotId' in dragData
-          ? (dragData as { slotId?: unknown }).slotId
+          ? (dragData as {slotId?: unknown}).slotId
           : undefined
       if (typeof teamId === 'string' && typeof slotId === 'string') {
         onTeamPreviewSlotDragStart(teamId, slotId)
@@ -76,7 +77,7 @@ export function useBuilderDndCoordinator({
     if (getDragKind(dragData) === 'team-row') {
       const sourceTeamId =
         typeof dragData === 'object' && dragData && 'teamId' in dragData
-          ? (dragData as { teamId?: unknown }).teamId
+          ? (dragData as {teamId?: unknown}).teamId
           : undefined
       const targetTeamId = typeof event.over?.id === 'string' ? event.over.id : undefined
       if (typeof sourceTeamId === 'string' && typeof targetTeamId === 'string') {
@@ -88,14 +89,18 @@ export function useBuilderDndCoordinator({
     if (getDragKind(dragData) === 'team-preview-slot') {
       const teamId =
         typeof dragData === 'object' && dragData && 'teamId' in dragData
-          ? (dragData as { teamId?: unknown }).teamId
+          ? (dragData as {teamId?: unknown}).teamId
           : undefined
       const slotId =
         typeof dragData === 'object' && dragData && 'slotId' in dragData
-          ? (dragData as { slotId?: unknown }).slotId
+          ? (dragData as {slotId?: unknown}).slotId
           : undefined
       if (typeof teamId === 'string' && typeof slotId === 'string') {
-        onTeamPreviewSlotDragEnd(teamId, slotId, typeof event.over?.id === 'string' ? event.over.id : null)
+        onTeamPreviewSlotDragEnd(
+          teamId,
+          slotId,
+          typeof event.over?.id === 'string' ? event.over.id : null,
+        )
       } else {
         onTeamPreviewSlotDragEnd('', '', null)
       }

@@ -1,9 +1,17 @@
-import { Button } from '../../components/ui/Button'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import { FaCheck, FaChevronLeft, FaChevronRight, FaXmark } from 'react-icons/fa6'
-import type { ActiveSelection, DragData, PredictedDropHover, QuickLineupSession, TeamSlot } from './types'
-import { ActiveTeamHeader } from './ActiveTeamHeader'
-import { AwakenerCard } from './AwakenerCard'
+import {FaCheck, FaChevronLeft, FaChevronRight, FaXmark} from 'react-icons/fa6'
+
+import {Button} from '@/components/ui/Button'
+import {formatAwakenerNameForUi} from '@/domain/name-format'
+
+import {ActiveTeamHeader} from './ActiveTeamHeader'
+import {AwakenerCard} from './AwakenerCard'
+import type {
+  ActiveSelection,
+  DragData,
+  PredictedDropHover,
+  QuickLineupSession,
+  TeamSlot,
+} from './types'
 
 type BuilderActiveTeamPanelProps = {
   activeTeamId: string
@@ -81,7 +89,9 @@ export function BuilderActiveTeamPanel({
 
     const slot = teamSlots.find((entry) => entry.slotId === step.slotId)
     const slotLabel = `Awakener ${step.slotId.replace('slot-', '')}`
-    const awakenerLabel = slot?.awakenerName ? formatAwakenerNameForUi(slot.awakenerName) : `Empty Slot ${step.slotId.replace('slot-', '')}`
+    const awakenerLabel = slot?.awakenerName
+      ? formatAwakenerNameForUi(slot.awakenerName)
+      : `Empty Slot ${step.slotId.replace('slot-', '')}`
 
     if (step.kind === 'awakener') {
       return slotLabel
@@ -114,14 +124,20 @@ export function BuilderActiveTeamPanel({
         {teamSlots.map((slot) => (
           <AwakenerCard
             key={`${slot.slotId}:${slot.awakenerName ?? 'empty'}`}
-            activeKind={resolvedActiveSelection?.slotId === slot.slotId ? resolvedActiveSelection.kind : null}
+            activeKind={
+              resolvedActiveSelection?.slotId === slot.slotId ? resolvedActiveSelection.kind : null
+            }
             activeWheelIndex={
-              resolvedActiveSelection?.slotId === slot.slotId && resolvedActiveSelection.kind === 'wheel'
+              resolvedActiveSelection?.slotId === slot.slotId &&
+              resolvedActiveSelection.kind === 'wheel'
                 ? resolvedActiveSelection.wheelIndex
                 : null
             }
             activeDragKind={activeDragKind}
-            isActive={resolvedActiveSelection?.slotId === slot.slotId && resolvedActiveSelection.kind === 'awakener'}
+            isActive={
+              resolvedActiveSelection?.slotId === slot.slotId &&
+              resolvedActiveSelection.kind === 'awakener'
+            }
             onCardClick={onCardClick}
             onCovenantSlotClick={onCovenantSlotClick}
             onRemoveActiveSelection={() => onRemoveActiveSelection(slot.slotId)}
@@ -134,11 +150,23 @@ export function BuilderActiveTeamPanel({
                 : 60
             }
             awakenerOwnedLevel={
-              slot.awakenerName ? (slot.isSupport ? 15 : (ownedAwakenerLevelByName.get(slot.awakenerName) ?? null)) : null
+              slot.awakenerName
+                ? slot.isSupport
+                  ? 15
+                  : (ownedAwakenerLevelByName.get(slot.awakenerName) ?? null)
+                : null
             }
             wheelOwnedLevels={[
-              slot.wheels[0] ? (slot.isSupport ? 15 : (ownedWheelLevelById.get(slot.wheels[0]) ?? null)) : null,
-              slot.wheels[1] ? (slot.isSupport ? 15 : (ownedWheelLevelById.get(slot.wheels[1]) ?? null)) : null,
+              slot.wheels[0]
+                ? slot.isSupport
+                  ? 15
+                  : (ownedWheelLevelById.get(slot.wheels[0]) ?? null)
+                : null,
+              slot.wheels[1]
+                ? slot.isSupport
+                  ? 15
+                  : (ownedWheelLevelById.get(slot.wheels[1]) ?? null)
+                : null,
             ]}
             predictedDropHover={predictedDropHover}
             slot={slot}
@@ -153,7 +181,7 @@ export function BuilderActiveTeamPanel({
             {quickLineupSession ? (
               <>
                 <Button
-                  className="h-[26px] px-2 py-1 text-[10px] uppercase tracking-wide"
+                  className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
                   disabled={!quickLineupSession.canGoBack}
                   onClick={onBackQuickLineupStep}
                   type="button"
@@ -164,7 +192,7 @@ export function BuilderActiveTeamPanel({
                   </span>
                 </Button>
                 <Button
-                  className="h-[26px] px-2 py-1 text-[10px] uppercase tracking-wide"
+                  className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
                   onClick={onSkipQuickLineupStep}
                   type="button"
                 >
@@ -175,7 +203,7 @@ export function BuilderActiveTeamPanel({
                 </Button>
                 <Button
                   aria-label="Cancel quick team lineup"
-                  className="h-[26px] px-2 py-1 text-[10px] uppercase tracking-wide"
+                  className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
                   onClick={onCancelQuickLineup}
                   title="Cancel quick team lineup"
                   type="button"
@@ -188,7 +216,7 @@ export function BuilderActiveTeamPanel({
                 </Button>
                 <Button
                   aria-label="Finish quick team lineup"
-                  className="h-[26px] px-2 py-1 text-[10px] uppercase tracking-wide"
+                  className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
                   onClick={onFinishQuickLineup}
                   title="Finish quick team lineup"
                   type="button"
@@ -202,7 +230,7 @@ export function BuilderActiveTeamPanel({
               </>
             ) : (
               <Button
-                className="h-[26px] px-2 py-1 text-[10px] uppercase tracking-wide"
+                className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
                 onClick={onStartQuickLineup}
                 type="button"
               >

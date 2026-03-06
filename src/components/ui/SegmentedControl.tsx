@@ -23,11 +23,7 @@ export function SegmentedControl<T extends string>({
   activeButtonClassName = '',
 }: SegmentedControlProps<T>) {
   return (
-    <div
-      aria-label={ariaLabel}
-      className={`segmented-control ${className}`.trim()}
-      role="group"
-    >
+    <div aria-label={ariaLabel} className={`segmented-control ${className}`.trim()} role="group">
       {options.map((option, index) => {
         const isActive = option.value === value
         return (

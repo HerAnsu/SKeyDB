@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
-import { ModalFrame } from './ModalFrame'
-import { Button } from './Button'
-import type { ReactNode } from 'react'
+import {useEffect, useRef, useState, type ReactNode} from 'react'
+
+import {Button} from './Button'
+import {ModalFrame} from './ModalFrame'
 
 type ImportCodeDialogProps = {
   initialValue?: string
@@ -10,7 +10,12 @@ type ImportCodeDialogProps = {
   warning?: ReactNode
 }
 
-export function ImportCodeDialog({ initialValue = '', onCancel, onSubmit, warning }: ImportCodeDialogProps) {
+export function ImportCodeDialog({
+  initialValue = '',
+  onCancel,
+  onSubmit,
+  warning,
+}: ImportCodeDialogProps) {
   const [value, setValue] = useState(initialValue)
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -20,7 +25,9 @@ export function ImportCodeDialog({ initialValue = '', onCancel, onSubmit, warnin
 
   return (
     <ModalFrame ariaLabel="Import teams" title="Import Teams">
-      <p className="mt-2 text-sm text-slate-200">Paste a `t1.`, `mt1.` or `@@...@@` code to import.</p>
+      <p className="mt-2 text-sm text-slate-200">
+        Paste a `t1.`, `mt1.` or `@@...@@` code to import.
+      </p>
       {warning ? <div className="mt-2">{warning}</div> : null}
       <textarea
         aria-label="Import code"
@@ -47,7 +54,11 @@ export function ImportCodeDialog({ initialValue = '', onCancel, onSubmit, warnin
         <Button onClick={onCancel} variant="secondary">
           Cancel
         </Button>
-        <Button disabled={value.trim().length === 0} onClick={() => onSubmit(value.trim())} variant="primary">
+        <Button
+          disabled={value.trim().length === 0}
+          onClick={() => onSubmit(value.trim())}
+          variant="primary"
+        >
           Import
         </Button>
       </div>

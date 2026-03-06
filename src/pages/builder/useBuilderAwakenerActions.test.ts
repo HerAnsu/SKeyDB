@@ -1,18 +1,33 @@
-import { renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { useBuilderAwakenerActions } from './useBuilderAwakenerActions'
-import type { Awakener } from '../../domain/awakeners'
-import type { ActiveSelection, TeamSlot } from './types'
+import {renderHook} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
+
+import type {Awakener} from '@/domain/awakeners'
+
+import type {ActiveSelection, TeamSlot} from './types'
+import {useBuilderAwakenerActions} from './useBuilderAwakenerActions'
 
 const awakenerByName = new Map<string, Awakener>([
-  ['Goliath', { id: 1, name: 'Goliath', faction: 'Among the Stars', realm: 'AEQUOR', aliases: ['Goliath'], tags: [] }],
-  ['Ramona', { id: 2, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'], tags: [] }],
+  [
+    'Goliath',
+    {
+      id: 1,
+      name: 'Goliath',
+      faction: 'Among the Stars',
+      realm: 'AEQUOR',
+      aliases: ['Goliath'],
+      tags: [],
+    },
+  ],
+  [
+    'Ramona',
+    {id: 2, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'], tags: []},
+  ],
 ])
 
 function buildSlots(): TeamSlot[] {
   return [
-    { slotId: 'slot-1', awakenerName: 'Goliath', realm: 'AEQUOR', level: 60, wheels: [null, null] },
-    { slotId: 'slot-2', wheels: [null, null] },
+    {slotId: 'slot-1', awakenerName: 'Goliath', realm: 'AEQUOR', level: 60, wheels: [null, null]},
+    {slotId: 'slot-2', wheels: [null, null]},
   ]
 }
 
@@ -30,7 +45,7 @@ function createHook(options?: {
   const clearTransfer = vi.fn()
   const notifyViolation = vi.fn()
 
-  const { result } = renderHook(() =>
+  const {result} = renderHook(() =>
     useBuilderAwakenerActions({
       teamSlots: options?.teamSlots ?? buildSlots(),
       awakenerByName,
@@ -61,10 +76,10 @@ function createHook(options?: {
 
 describe('useBuilderAwakenerActions', () => {
   it('handles drop assignment and activates dropped slot', () => {
-    const { actions, setActiveTeamSlots, setActiveSelection } = createHook({
+    const {actions, setActiveTeamSlots, setActiveSelection} = createHook({
       teamSlots: [
-        { slotId: 'slot-1', wheels: [null, null] },
-        { slotId: 'slot-2', wheels: [null, null] },
+        {slotId: 'slot-1', wheels: [null, null]},
+        {slotId: 'slot-2', wheels: [null, null]},
       ],
     })
 
@@ -72,15 +87,15 @@ describe('useBuilderAwakenerActions', () => {
 
     expect(setActiveTeamSlots).toHaveBeenCalledWith(
       expect.arrayContaining([
-        expect.objectContaining({ slotId: 'slot-1' }),
-        expect.objectContaining({ slotId: 'slot-2', awakenerName: 'Goliath' }),
+        expect.objectContaining({slotId: 'slot-1'}),
+        expect.objectContaining({slotId: 'slot-2', awakenerName: 'Goliath'}),
       ]),
     )
-    expect(setActiveSelection).toHaveBeenCalledWith({ kind: 'awakener', slotId: 'slot-2' })
+    expect(setActiveSelection).toHaveBeenCalledWith({kind: 'awakener', slotId: 'slot-2'})
   })
 
   it('requests transfer for owning team instead of applying state update', () => {
-    const { actions, requestAwakenerTransfer, setActiveTeamSlots } = createHook({
+    const {actions, requestAwakenerTransfer, setActiveTeamSlots} = createHook({
       usedAwakenerByIdentityKey: new Map([['ramona', 'team-2']]),
     })
 
@@ -97,7 +112,7 @@ describe('useBuilderAwakenerActions', () => {
   })
 
   it('does not offer support when a support awakener is already used elsewhere in the build', () => {
-    const { actions, requestAwakenerTransfer } = createHook({
+    const {actions, requestAwakenerTransfer} = createHook({
       usedAwakenerByIdentityKey: new Map([['ramona', 'team-2']]),
       hasSupportAwakener: true,
     })
@@ -114,27 +129,39 @@ describe('useBuilderAwakenerActions', () => {
   })
 
   it('click assignment respects active awakener target slot', () => {
-    const { actions, setActiveTeamSlots } = createHook({
+    const {actions, setActiveTeamSlots} = createHook({
       teamSlots: [
-        { slotId: 'slot-1', awakenerName: 'Goliath', realm: 'AEQUOR', level: 60, wheels: [null, null] },
-        { slotId: 'slot-2', wheels: [null, null] },
+        {
+          slotId: 'slot-1',
+          awakenerName: 'Goliath',
+          realm: 'AEQUOR',
+          level: 60,
+          wheels: [null, null],
+        },
+        {slotId: 'slot-2', wheels: [null, null]},
       ],
-      resolvedActiveSelection: { kind: 'awakener', slotId: 'slot-2' },
+      resolvedActiveSelection: {kind: 'awakener', slotId: 'slot-2'},
     })
 
     actions.handlePickerAwakenerClick('Ramona')
 
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', awakenerName: 'Goliath' }),
-      expect.objectContaining({ slotId: 'slot-2', awakenerName: 'Ramona' }),
+      expect.objectContaining({slotId: 'slot-1', awakenerName: 'Goliath'}),
+      expect.objectContaining({slotId: 'slot-2', awakenerName: 'Ramona'}),
     ])
   })
 
   it('allows same-identity assignment without transfer when dupes are enabled', () => {
-    const { actions, requestAwakenerTransfer, setActiveTeamSlots } = createHook({
+    const {actions, requestAwakenerTransfer, setActiveTeamSlots} = createHook({
       teamSlots: [
-        { slotId: 'slot-1', awakenerName: 'Goliath', realm: 'AEQUOR', level: 60, wheels: [null, null] },
-        { slotId: 'slot-2', wheels: [null, null] },
+        {
+          slotId: 'slot-1',
+          awakenerName: 'Goliath',
+          realm: 'AEQUOR',
+          level: 60,
+          wheels: [null, null],
+        },
+        {slotId: 'slot-2', wheels: [null, null]},
       ],
       usedAwakenerByIdentityKey: new Map([['goliath', 'team-2']]),
       allowDupes: true,
@@ -144,8 +171,8 @@ describe('useBuilderAwakenerActions', () => {
 
     expect(requestAwakenerTransfer).not.toHaveBeenCalled()
     expect(setActiveTeamSlots).toHaveBeenCalledWith([
-      expect.objectContaining({ slotId: 'slot-1', awakenerName: 'Goliath' }),
-      expect.objectContaining({ slotId: 'slot-2', awakenerName: 'Goliath' }),
+      expect.objectContaining({slotId: 'slot-1', awakenerName: 'Goliath'}),
+      expect.objectContaining({slotId: 'slot-2', awakenerName: 'Goliath'}),
     ])
   })
 })

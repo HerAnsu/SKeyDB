@@ -1,4 +1,4 @@
-import type { MouseEvent } from 'react'
+import type {MouseEvent} from 'react'
 
 type TeamNameInlineEditorProps = {
   teamName: string
@@ -34,10 +34,10 @@ export function TeamNameInlineEditor({
       <button
         aria-label={`Rename ${teamName}`}
         className={joinClasses(
-          'min-w-0 truncate border border-transparent text-left outline-none transition-colors',
+          'min-w-0 truncate border border-transparent text-left transition-colors outline-none',
           isHeader
             ? 'ui-title h-9 w-full cursor-text px-1.5 !text-2xl !leading-none text-amber-100 hover:border-amber-200/35 hover:bg-slate-900/30 hover:text-amber-50 focus-visible:border-amber-200/45 focus-visible:text-amber-50'
-            : 'h-6 w-full cursor-text select-none px-1 !text-xs !leading-none text-slate-100 hover:border-slate-300/35 hover:bg-slate-900/30 hover:text-amber-100 focus-visible:border-slate-300/45 focus-visible:text-amber-100',
+            : 'h-6 w-full cursor-text px-1 !text-xs !leading-none text-slate-100 select-none hover:border-slate-300/35 hover:bg-slate-900/30 hover:text-amber-100 focus-visible:border-slate-300/45 focus-visible:text-amber-100',
         )}
         onClick={(event) => {
           onDisplayClick?.(event)

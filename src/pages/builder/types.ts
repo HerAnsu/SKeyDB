@@ -1,4 +1,4 @@
-import type { Awakener } from '../../domain/awakeners'
+import type {Awakener} from '@/domain/awakeners'
 
 export type TeamSlot = {
   slotId: string
@@ -46,10 +46,10 @@ export type WheelMainstatFilter =
   | 'DEATH_RESISTANCE'
 export type TeamPreviewMode = 'compact' | 'expanded'
 export type QuickLineupStep =
-  | { kind: 'awakener'; slotId: string }
-  | { kind: 'wheel'; slotId: string; wheelIndex: number }
-  | { kind: 'covenant'; slotId: string }
-  | { kind: 'posse' }
+  | {kind: 'awakener'; slotId: string}
+  | {kind: 'wheel'; slotId: string; wheelIndex: number}
+  | {kind: 'covenant'; slotId: string}
+  | {kind: 'posse'}
 
 export type QuickLineupSession = {
   isActive: true
@@ -60,22 +60,22 @@ export type QuickLineupSession = {
 }
 
 export type ActiveSelection =
-  | { kind: 'awakener'; slotId: string }
-  | { kind: 'wheel'; slotId: string; wheelIndex: number }
-  | { kind: 'covenant'; slotId: string }
+  | {kind: 'awakener'; slotId: string}
+  | {kind: 'wheel'; slotId: string; wheelIndex: number}
+  | {kind: 'covenant'; slotId: string}
   | null
 
 export type PredictedDropHover =
-  | { kind: 'wheel'; slotId: string; wheelIndex: number }
-  | { kind: 'covenant'; slotId: string }
+  | {kind: 'wheel'; slotId: string; wheelIndex: number}
+  | {kind: 'covenant'; slotId: string}
   | null
 
 export type DragData =
-  | { kind: 'picker-awakener'; awakenerName: string }
-  | { kind: 'picker-wheel'; wheelId: string }
-  | { kind: 'picker-covenant'; covenantId: string }
-  | { kind: 'team-slot'; slotId: string; awakenerName: string }
-  | { kind: 'team-preview-slot'; teamId: string; slotId: string }
-  | { kind: 'team-wheel'; slotId: string; wheelIndex: number; wheelId: string }
-  | { kind: 'team-covenant'; slotId: string; covenantId: string }
-  | { kind: 'team-row'; teamId: string }
+  | {kind: 'picker-awakener'; awakenerName: string}
+  | {kind: 'picker-wheel'; wheelId: string}
+  | {kind: 'picker-covenant'; covenantId: string}
+  | {kind: 'team-slot'; slotId: string; awakenerName: string}
+  | {kind: 'team-preview-slot'; teamId: string; slotId: string}
+  | {kind: 'team-wheel'; slotId: string; wheelIndex: number; wheelId: string}
+  | {kind: 'team-covenant'; slotId: string; covenantId: string}
+  | {kind: 'team-row'; teamId: string}

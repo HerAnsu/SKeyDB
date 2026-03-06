@@ -42,9 +42,7 @@ export const DEFAULT_TEAM_RULES_CONFIG: TeamRulesConfig = {
   enforceUniquePosses: true,
 }
 
-export function getDistinctRealmsForTeam(
-  members: Array<Pick<TeamMember, 'realm'>>,
-): Set<string> {
+export function getDistinctRealmsForTeam(members: Array<Pick<TeamMember, 'realm'>>): Set<string> {
   return new Set(members.map((member) => member.realm.trim().toUpperCase()).filter(Boolean))
 }
 
@@ -58,8 +56,8 @@ export function exceedsRealmLimitForTeam(
 export function validateTeamPlan(
   teamPlan: TeamPlan[],
   config: Partial<TeamRulesConfig> = {},
-): { isValid: boolean; violations: RuleViolation[] } {
-  const settings = { ...DEFAULT_TEAM_RULES_CONFIG, ...config }
+): {isValid: boolean; violations: RuleViolation[]} {
+  const settings = {...DEFAULT_TEAM_RULES_CONFIG, ...config}
   const violations: RuleViolation[] = []
 
   if (teamPlan.length > settings.maxTeams) {
@@ -112,7 +110,11 @@ export function validateTeamPlan(
           teamId: team.id,
           value: member.awakenerId,
         })
-      } else if (settings.enforceUniqueAwakeners && !member.isSupport && seenAwakeners.has(member.awakenerId)) {
+      } else if (
+        settings.enforceUniqueAwakeners &&
+        !member.isSupport &&
+        seenAwakeners.has(member.awakenerId)
+      ) {
         violations.push({
           code: 'DUPLICATE_AWAKENER',
           message: `Awakener ${member.awakenerId} is used more than once across teams.`,

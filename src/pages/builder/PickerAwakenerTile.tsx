@@ -1,9 +1,11 @@
-import { useDraggable } from '@dnd-kit/core'
-import { getAwakenerPortraitAsset } from '../../domain/awakener-assets'
-import { getRealmTint } from '../../domain/factions'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import { SHOW_PICKER_TILE_STATUS_LABELS } from './constants'
-import type { DragData } from './types'
+import {useDraggable} from '@dnd-kit/core'
+
+import {getAwakenerPortraitAsset} from '@/domain/awakener-assets'
+import {getRealmTint} from '@/domain/factions'
+import {formatAwakenerNameForUi} from '@/domain/name-format'
+
+import {SHOW_PICKER_TILE_STATUS_LABELS} from './constants'
+import type {DragData} from './types'
 
 type PickerAwakenerTileProps = {
   awakenerName: string
@@ -34,15 +36,15 @@ export function PickerAwakenerTile({
       ? 'Wrong Realm'
       : null
   const tileStatusText = SHOW_PICKER_TILE_STATUS_LABELS ? statusText : null
-  const { attributes, listeners, isDragging, setNodeRef } = useDraggable({
+  const {attributes, listeners, isDragging, setNodeRef} = useDraggable({
     id: `picker:${awakenerName}`,
-    data: { kind: 'picker-awakener', awakenerName } satisfies DragData,
+    data: {kind: 'picker-awakener', awakenerName} satisfies DragData,
   })
 
   return (
     <button
       className={`builder-picker-tile relative border border-slate-500/50 bg-slate-900/40 p-0.5 text-left transition-colors hover:border-amber-200/45 ${
-        isDragging ? 'opacity-55 scale-[0.98]' : ''
+        isDragging ? 'scale-[0.98] opacity-55' : ''
       } ${isDimmed ? 'opacity-55' : ''}`}
       data-realm-blocked={isRealmBlocked ? 'true' : 'false'}
       data-in-use={isInUse ? 'true' : 'false'}
@@ -52,9 +54,7 @@ export function PickerAwakenerTile({
       {...attributes}
       {...listeners}
     >
-      <div
-        className="relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70"
-      >
+      <div className="relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70">
         {portraitAsset ? (
           <img
             alt={`${displayName} portrait`}
@@ -66,9 +66,9 @@ export function PickerAwakenerTile({
             <span className="sigil-placeholder" />
           </span>
         )}
-          <span
-            className="pointer-events-none absolute inset-0 z-10 border"
-          style={{ borderColor: realmTint }}
+        <span
+          className="pointer-events-none absolute inset-0 z-10 border"
+          style={{borderColor: realmTint}}
         />
         {tileStatusText ? (
           <span className="pointer-events-none absolute inset-x-0 top-0 truncate border-y border-slate-300/30 bg-slate-950/62 px-1 py-0.5 text-center text-[9px] tracking-wide text-slate-100/90">
@@ -76,9 +76,7 @@ export function PickerAwakenerTile({
           </span>
         ) : null}
         {tileStatusText || isOwned ? null : (
-          <span
-            className="pointer-events-none absolute inset-x-0 top-0 truncate border-y border-rose-300/25 bg-slate-950/70 px-1 py-0.5 text-center text-[9px] tracking-wide text-rose-100/95"
-          >
+          <span className="pointer-events-none absolute inset-x-0 top-0 truncate border-y border-rose-300/25 bg-slate-950/70 px-1 py-0.5 text-center text-[9px] tracking-wide text-rose-100/95">
             Unowned
           </span>
         )}

@@ -18,11 +18,8 @@ export function DupeLevelDisplay({
 
   return (
     <span className={className}>
-      <span
-        aria-hidden
-        className="collection-dupe-svg collection-dupe-svg-overflow"
-      >
-        {Array.from({ length: filledSlotCount }, (_, index) => (
+      <span aria-hidden className="collection-dupe-svg collection-dupe-svg-overflow">
+        {Array.from({length: filledSlotCount}, (_, index) => (
           <span className="collection-dupe-svg-slot" key={index}>
             <svg className="collection-dupe-slot-svg-art" viewBox="0 0 24 24">
               <rect

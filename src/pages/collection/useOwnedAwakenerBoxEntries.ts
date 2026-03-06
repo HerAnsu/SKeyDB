@@ -1,8 +1,10 @@
-import { useMemo } from 'react'
-import { getAwakeners } from '../../domain/awakeners'
-import { getAwakenerCardAsset } from '../../domain/awakener-assets'
-import { formatAwakenerNameForUi } from '../../domain/name-format'
-import type { OwnedAwakenerBoxEntry } from './OwnedAwakenerBoxExport'
+import {useMemo} from 'react'
+
+import {getAwakenerCardAsset} from '@/domain/awakener-assets'
+import {getAwakeners} from '@/domain/awakeners'
+import {formatAwakenerNameForUi} from '@/domain/name-format'
+
+import type {OwnedAwakenerBoxEntry} from './OwnedAwakenerBoxExport'
 
 export function useOwnedAwakenerBoxEntries(
   getAwakenerOwnedLevel: (awakenerName: string) => number | null,
@@ -33,4 +35,3 @@ export function useOwnedAwakenerBoxEntries(
       .sort((left, right) => left.displayName.localeCompare(right.displayName))
   }, [getAwakenerOwnedLevel, getAwakenerLevel])
 }
-

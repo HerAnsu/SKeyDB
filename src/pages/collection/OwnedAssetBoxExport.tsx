@@ -1,10 +1,16 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { FaImage } from 'react-icons/fa6'
-import { Button } from '../../components/ui/Button'
-import { CollectionSortControls } from '../../components/ui/CollectionSortControls'
-import { DupeLevelDisplay } from '../../components/ui/DupeLevelDisplay'
-import { ModalFrame } from '../../components/ui/ModalFrame'
-import { TogglePill } from '../../components/ui/TogglePill'
+import {useEffect, useMemo, useRef, useState} from 'react'
+
+import {FaImage} from 'react-icons/fa6'
+
+import droidSerifBoldWoff2Url from '@/assets/fonts/droid-serif/DroidSerif-Bold.woff2'
+import droidSerifBoldItalicWoff2Url from '@/assets/fonts/droid-serif/DroidSerif-BoldItalic.woff2'
+import droidSerifItalicWoff2Url from '@/assets/fonts/droid-serif/DroidSerif-Italic.woff2'
+import droidSerifRegularWoff2Url from '@/assets/fonts/droid-serif/DroidSerif.woff2'
+import {Button} from '@/components/ui/Button'
+import {CollectionSortControls} from '@/components/ui/CollectionSortControls'
+import {DupeLevelDisplay} from '@/components/ui/DupeLevelDisplay'
+import {ModalFrame} from '@/components/ui/ModalFrame'
+import {TogglePill} from '@/components/ui/TogglePill'
 import {
   compareAwakenersForCollectionSort,
   compareWheelsForCollectionDefaultSort,
@@ -12,11 +18,7 @@ import {
   type AwakenerSortKey,
   type CollectionSortDirection,
   type SortableCollectionEntry,
-} from '../../domain/collection-sorting'
-import droidSerifRegularWoff2Url from '../../assets/fonts/droid-serif/DroidSerif.woff2'
-import droidSerifItalicWoff2Url from '../../assets/fonts/droid-serif/DroidSerif-Italic.woff2'
-import droidSerifBoldWoff2Url from '../../assets/fonts/droid-serif/DroidSerif-Bold.woff2'
-import droidSerifBoldItalicWoff2Url from '../../assets/fonts/droid-serif/DroidSerif-BoldItalic.woff2'
+} from '@/domain/collection-sorting'
 
 type ExportBoxConfig = {
   columns: number
@@ -175,7 +177,7 @@ function getExportFontEmbedCss(): Promise<ExportFontEmbedResult> {
     .catch(() => {
       // Allow retry on a future export when a transient fetch/read failure occurs.
       exportFontEmbedCssPromise = null
-      return { css: '', hasCustomFont: false }
+      return {css: '', hasCustomFont: false}
     })
 
   return exportFontEmbedCssPromise
@@ -266,16 +268,20 @@ function loadStoredSortConfig(storageKeyPrefix: string): ExportSortConfig {
   try {
     const raw = window.localStorage.getItem(`${storageKeyPrefix}.sort.v1`)
     if (!raw) return DEFAULT_EXPORT_SORT_CONFIG
-    const parsed = JSON.parse(raw) as Partial<ExportSortConfig> & { groupByFaction?: boolean }
+    const parsed = JSON.parse(raw) as Partial<ExportSortConfig> & {groupByFaction?: boolean}
     const key = parsed.key ?? DEFAULT_EXPORT_SORT_CONFIG.key
     const direction = parsed.direction ?? DEFAULT_EXPORT_SORT_CONFIG.direction
-    const legacyGroupByRealm = typeof parsed.groupByFaction === 'boolean' ? parsed.groupByFaction : undefined
+    const legacyGroupByRealm =
+      typeof parsed.groupByFaction === 'boolean' ? parsed.groupByFaction : undefined
     return {
       key:
         key === 'ALPHABETICAL' || key === 'LEVEL' || key === 'RARITY' || key === 'ENLIGHTEN'
           ? key
           : DEFAULT_EXPORT_SORT_CONFIG.key,
-      direction: direction === 'ASC' || direction === 'DESC' ? direction : DEFAULT_EXPORT_SORT_CONFIG.direction,
+      direction:
+        direction === 'ASC' || direction === 'DESC'
+          ? direction
+          : DEFAULT_EXPORT_SORT_CONFIG.direction,
       groupByRealm:
         typeof parsed.groupByRealm === 'boolean'
           ? parsed.groupByRealm
@@ -292,17 +298,17 @@ function loadStoredIncludedRarities<R extends string>(
   storageKeyPrefix: string,
   defaultIncludedRarities: Record<R, boolean>,
 ): Record<R, boolean> {
-  if (typeof window === 'undefined') return { ...defaultIncludedRarities }
+  if (typeof window === 'undefined') return {...defaultIncludedRarities}
   try {
     const raw = window.localStorage.getItem(`${storageKeyPrefix}.rarities.v1`)
-    if (!raw) return { ...defaultIncludedRarities }
+    if (!raw) return {...defaultIncludedRarities}
     const parsed = JSON.parse(raw) as Partial<Record<R, boolean>>
     return {
       ...defaultIncludedRarities,
       ...parsed,
     }
   } catch {
-    return { ...defaultIncludedRarities }
+    return {...defaultIncludedRarities}
   }
 }
 
@@ -329,9 +335,9 @@ function ExportSliderField({
 
   return (
     <label className="grid gap-1.5">
-      <span className="flex items-center justify-between gap-2 uppercase tracking-wide text-slate-400">
+      <span className="flex items-center justify-between gap-2 tracking-wide text-slate-400 uppercase">
         <span>{label}</span>
-        <span className="rounded border border-slate-500/55 bg-slate-950/80 px-1.5 py-0.5 font-mono text-[11px] text-slate-200 normal-case tracking-normal">
+        <span className="rounded border border-slate-500/55 bg-slate-950/80 px-1.5 py-0.5 font-mono text-[11px] tracking-normal text-slate-200 normal-case">
           {displayValue}
         </span>
       </span>
@@ -394,7 +400,10 @@ function ExportPreview<R extends string>({
     >
       <header className="mb-1 p-1">
         <div className="flex items-center gap-2">
-          <p className="ui-title tracking-wide text-amber-100" style={{ fontSize: `${titleSizePx}px` }}>
+          <p
+            className="ui-title tracking-wide text-amber-100"
+            style={{fontSize: `${titleSizePx}px`}}
+          >
             Made with SkeyDB
           </p>
           {!visuals.disableEmoji && emojiAsset ? (
@@ -403,7 +412,7 @@ function ExportPreview<R extends string>({
               aria-hidden
               className="object-scale-down"
               src={emojiAsset}
-              style={{ height: `${titleEmojiSizePx}px`, width: `${titleEmojiSizePx}px` }}
+              style={{height: `${titleEmojiSizePx}px`, width: `${titleEmojiSizePx}px`}}
             />
           ) : null}
         </div>
@@ -417,9 +426,15 @@ function ExportPreview<R extends string>({
       >
         {entries.map((entry) => (
           <article className="border border-slate-500/45 bg-slate-900/65 p-1" key={entry.id}>
-            <div className={`relative overflow-hidden border border-slate-400/35 bg-slate-900 ${cardAspectClassName}`}>
+            <div
+              className={`relative overflow-hidden border border-slate-400/35 bg-slate-900 ${cardAspectClassName}`}
+            >
               {entry.asset ? (
-                <img alt={`${entry.label} ${assetAltNoun}`} className={imageClassName} src={entry.asset} />
+                <img
+                  alt={`${entry.label} ${assetAltNoun}`}
+                  className={imageClassName}
+                  src={entry.asset}
+                />
               ) : (
                 <span className={`sigil-placeholder ${placeholderClassName}`} />
               )}
@@ -445,8 +460,8 @@ function ExportPreview<R extends string>({
 
                 return (
                   <div
-                    className="pointer-events-none absolute right-1 left-1 bottom-1 z-11 flex flex-col items-center"
-                    style={{ gap: `${stackGapPx}px` }}
+                    className="pointer-events-none absolute right-1 bottom-1 left-1 z-11 flex flex-col items-center"
+                    style={{gap: `${stackGapPx}px`}}
                   >
                     {hasBottomLevel ? (
                       <p
@@ -456,7 +471,7 @@ function ExportPreview<R extends string>({
                           textShadow: '0 1px 2px rgba(2, 6, 12, 0.9), 0 0 6px rgba(2, 6, 12, 0.65)',
                         }}
                       >
-                        <span style={{ fontSize: `${levelPrefixSizePx}px` }}>Lv.</span>
+                        <span style={{fontSize: `${levelPrefixSizePx}px`}}>Lv.</span>
                         <span>{entry.cardLevel}</span>
                       </p>
                     ) : null}
@@ -518,9 +533,15 @@ export function OwnedAssetBoxExport<R extends string>({
 }: OwnedAssetBoxExportProps<R>) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [isExporting, setIsExporting] = useState(false)
-  const [draftConfig, setDraftConfig] = useState<ExportBoxConfig>(() => loadStoredLayoutConfig(storageKeyPrefix))
-  const [visuals, setVisuals] = useState<ExportVisualConfig>(() => loadStoredVisualConfig(storageKeyPrefix))
-  const [sortConfig, setSortConfig] = useState<ExportSortConfig>(() => loadStoredSortConfig(storageKeyPrefix))
+  const [draftConfig, setDraftConfig] = useState<ExportBoxConfig>(() =>
+    loadStoredLayoutConfig(storageKeyPrefix),
+  )
+  const [visuals, setVisuals] = useState<ExportVisualConfig>(() =>
+    loadStoredVisualConfig(storageKeyPrefix),
+  )
+  const [sortConfig, setSortConfig] = useState<ExportSortConfig>(() =>
+    loadStoredSortConfig(storageKeyPrefix),
+  )
   const [includedRarities, setIncludedRarities] = useState<Record<R, boolean> | null>(() => {
     if (!rarityOptions || !defaultIncludedRarities) {
       return null
@@ -535,7 +556,10 @@ export function OwnedAssetBoxExport<R extends string>({
   const sanitizedDraftConfig = useMemo(() => sanitizeConfig(draftConfig), [draftConfig])
   const areNamesEnabled = !visuals.disableNames
   const isEmojiInTitleEnabled = !visuals.disableEmoji
-  const supportsLevels = useMemo(() => entries.some((entry) => typeof entry.cardLevel === 'number'), [entries])
+  const supportsLevels = useMemo(
+    () => entries.some((entry) => typeof entry.cardLevel === 'number'),
+    [entries],
+  )
   const filteredEntries = useMemo(() => {
     if (!includedRarities) {
       return entries
@@ -543,7 +567,9 @@ export function OwnedAssetBoxExport<R extends string>({
     return entries.filter((entry) => (entry.rarity ? includedRarities[entry.rarity] : true))
   }, [entries, includedRarities])
   const sortedEntries = useMemo(() => {
-    const activeSortKey = sortOptions.includes(sortConfig.key) ? sortConfig.key : sortOptions[0] ?? 'LEVEL'
+    const activeSortKey = sortOptions.includes(sortConfig.key)
+      ? sortConfig.key
+      : (sortOptions[0] ?? 'LEVEL')
     const toSortableEntry = (entry: OwnedAssetBoxEntry<R>): SortableCollectionEntry => ({
       label: entry.label,
       index: entry.sortIndex ?? Number.MAX_SAFE_INTEGER,
@@ -567,11 +593,25 @@ export function OwnedAssetBoxExport<R extends string>({
         groupByRealm: sortConfig.groupByRealm,
       })
     })
-  }, [filteredEntries, sortBehavior, sortConfig.direction, sortConfig.groupByRealm, sortConfig.key, sortOptions])
-  const supportsRealmGrouping = useMemo(() => entries.some((entry) => Boolean(entry.realm?.trim())), [entries])
+  }, [
+    filteredEntries,
+    sortBehavior,
+    sortConfig.direction,
+    sortConfig.groupByRealm,
+    sortConfig.key,
+    sortOptions,
+  ])
+  const supportsRealmGrouping = useMemo(
+    () => entries.some((entry) => Boolean(entry.realm?.trim())),
+    [entries],
+  )
   const hasSortControls = sortBehavior === 'CONFIGURABLE' && sortOptions.length > 0
-  const selectedSortKey = sortOptions.includes(sortConfig.key) ? sortConfig.key : sortOptions[0] ?? 'LEVEL'
-  const hasAtLeastOneRarity = includedRarities ? Object.values(includedRarities).some(Boolean) : true
+  const selectedSortKey = sortOptions.includes(sortConfig.key)
+    ? sortConfig.key
+    : (sortOptions[0] ?? 'LEVEL')
+  const hasAtLeastOneRarity = includedRarities
+    ? Object.values(includedRarities).some(Boolean)
+    : true
   const exportUnavailableReason = !hasAtLeastOneRarity
     ? 'Enable at least one rarity to export.'
     : sortedEntries.length === 0
@@ -580,7 +620,10 @@ export function OwnedAssetBoxExport<R extends string>({
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    window.localStorage.setItem(`${storageKeyPrefix}.layout.v1`, JSON.stringify(sanitizedDraftConfig))
+    window.localStorage.setItem(
+      `${storageKeyPrefix}.layout.v1`,
+      JSON.stringify(sanitizedDraftConfig),
+    )
   }, [storageKeyPrefix, sanitizedDraftConfig])
 
   useEffect(() => {
@@ -620,10 +663,10 @@ export function OwnedAssetBoxExport<R extends string>({
     setIsExporting(true)
     onStatusMessage('Rendering PNG...')
     try {
-      const { toPng } = await import('html-to-image')
+      const {toPng} = await import('html-to-image')
       const exportLayoutWidth = getExportLayoutWidth(sanitizedDraftConfig)
       onStatusMessage('Preparing export fonts...')
-      const { css: fontEmbedCSS, hasCustomFont } = await getExportFontEmbedCss()
+      const {css: fontEmbedCSS, hasCustomFont} = await getExportFontEmbedCss()
       if (!hasCustomFont) {
         onStatusMessage('Custom export font unavailable; using fallback font.')
       }
@@ -633,12 +676,16 @@ export function OwnedAssetBoxExport<R extends string>({
         canvasWidth: exportLayoutWidth,
         backgroundColor: '#040a16',
         preferredFontFormat: 'woff2' as const,
-        ...(fontEmbedCSS ? { fontEmbedCSS } : {}),
+        ...(fontEmbedCSS ? {fontEmbedCSS} : {}),
       }
 
       let dataUrl: string
       try {
-        dataUrl = await withTimeout(toPng(previewRef.current, baseRenderOptions), 20000, 'PNG render')
+        dataUrl = await withTimeout(
+          toPng(previewRef.current, baseRenderOptions),
+          20000,
+          'PNG render',
+        )
       } catch (error) {
         const detail = error instanceof Error ? error.message : String(error)
         const isFontEmbedError = /font is undefined|trim/i.test(detail)
@@ -692,7 +739,7 @@ export function OwnedAssetBoxExport<R extends string>({
   return (
     <>
       <Button
-        className="col-span-2 px-2 py-1 text-[10px] uppercase tracking-wide"
+        className="col-span-2 px-2 py-1 text-[10px] tracking-wide uppercase"
         disabled={entries.length === 0}
         onClick={() => setIsSettingsOpen(true)}
         type="button"
@@ -712,10 +759,12 @@ export function OwnedAssetBoxExport<R extends string>({
             <div className="collection-scrollbar space-y-2 overflow-auto border border-slate-500/45 bg-slate-900/50 p-3 text-xs text-slate-300">
               {rarityOptions && includedRarities ? (
                 <div className="space-y-2 border border-slate-700/60 bg-slate-950/50 p-2">
-                  <p className="text-[11px] uppercase tracking-wide text-slate-300">Rarities</p>
+                  <p className="text-[11px] tracking-wide text-slate-300 uppercase">Rarities</p>
                   {rarityOptions.map((option) => (
                     <div className="flex items-center justify-between gap-2" key={option.value}>
-                      <span className="text-[11px] uppercase tracking-wide text-slate-300">{option.label}</span>
+                      <span className="text-[11px] tracking-wide text-slate-300 uppercase">
+                        {option.label}
+                      </span>
                       <TogglePill
                         ariaLabel={`Include ${option.label} wheels`}
                         checked={includedRarities[option.value]}
@@ -765,9 +814,15 @@ export function OwnedAssetBoxExport<R extends string>({
 
               <div className="space-y-2 border border-slate-700/60 bg-slate-950/50 p-2">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] uppercase tracking-wide text-slate-300">{nameToggleLabel}</span>
+                  <span className="text-[11px] tracking-wide text-slate-300 uppercase">
+                    {nameToggleLabel}
+                  </span>
                   <TogglePill
-                    ariaLabel={areNamesEnabled ? `Disable ${nameToggleLabel.toLowerCase()}` : `Enable ${nameToggleLabel.toLowerCase()}`}
+                    ariaLabel={
+                      areNamesEnabled
+                        ? `Disable ${nameToggleLabel.toLowerCase()}`
+                        : `Enable ${nameToggleLabel.toLowerCase()}`
+                    }
                     checked={areNamesEnabled}
                     className="ownership-pill-builder"
                     offLabel="Off"
@@ -781,9 +836,11 @@ export function OwnedAssetBoxExport<R extends string>({
                     variant="flat"
                   />
                 </div>
-              {areNamesEnabled ? (
+                {areNamesEnabled ? (
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] uppercase tracking-wide text-slate-300">Name On Top</span>
+                    <span className="text-[11px] tracking-wide text-slate-300 uppercase">
+                      Name On Top
+                    </span>
                     <TogglePill
                       ariaLabel={visuals.nameOnTop ? 'Set names to bottom' : 'Set names to top'}
                       checked={visuals.nameOnTop}
@@ -798,31 +855,39 @@ export function OwnedAssetBoxExport<R extends string>({
                       onLabel="On"
                       variant="flat"
                     />
-                </div>
-              ) : null}
-              {supportsLevels ? (
+                  </div>
+                ) : null}
+                {supportsLevels ? (
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[11px] tracking-wide text-slate-300 uppercase">
+                      Show Levels
+                    </span>
+                    <TogglePill
+                      ariaLabel={visuals.showLevels ? 'Hide levels on card' : 'Show levels on card'}
+                      checked={visuals.showLevels}
+                      className="ownership-pill-builder"
+                      offLabel="Off"
+                      onChange={(showLevels) =>
+                        setVisuals((current) => ({
+                          ...current,
+                          showLevels,
+                        }))
+                      }
+                      onLabel="On"
+                      variant="flat"
+                    />
+                  </div>
+                ) : null}
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] uppercase tracking-wide text-slate-300">Show Levels</span>
+                  <span className="text-[11px] tracking-wide text-slate-300 uppercase">
+                    Enlightens On Card
+                  </span>
                   <TogglePill
-                    ariaLabel={visuals.showLevels ? 'Hide levels on card' : 'Show levels on card'}
-                    checked={visuals.showLevels}
-                    className="ownership-pill-builder"
-                    offLabel="Off"
-                    onChange={(showLevels) =>
-                      setVisuals((current) => ({
-                        ...current,
-                        showLevels,
-                      }))
+                    ariaLabel={
+                      visuals.enlightensOnCard
+                        ? 'Move enlightens below card'
+                        : 'Move enlightens onto card'
                     }
-                    onLabel="On"
-                    variant="flat"
-                  />
-                </div>
-              ) : null}
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] uppercase tracking-wide text-slate-300">Enlightens On Card</span>
-                <TogglePill
-                    ariaLabel={visuals.enlightensOnCard ? 'Move enlightens below card' : 'Move enlightens onto card'}
                     checked={visuals.enlightensOnCard}
                     className="ownership-pill-builder"
                     offLabel="Off"
@@ -837,9 +902,13 @@ export function OwnedAssetBoxExport<R extends string>({
                   />
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] uppercase tracking-wide text-slate-300">Emoji In Title</span>
+                  <span className="text-[11px] tracking-wide text-slate-300 uppercase">
+                    Emoji In Title
+                  </span>
                   <TogglePill
-                    ariaLabel={isEmojiInTitleEnabled ? 'Disable emoji in title' : 'Enable emoji in title'}
+                    ariaLabel={
+                      isEmojiInTitleEnabled ? 'Disable emoji in title' : 'Enable emoji in title'
+                    }
                     checked={isEmojiInTitleEnabled}
                     className="ownership-pill-builder"
                     offLabel="Off"
@@ -950,7 +1019,8 @@ export function OwnedAssetBoxExport<R extends string>({
                 value={draftConfig.pixelRatio}
               />
               <p className="text-[11px] text-slate-400">
-                Pixel ratio controls render density. Higher values look sharper, but increase file size quite a bit.
+                Pixel ratio controls render density. Higher values look sharper, but increase file
+                size quite a bit.
               </p>
               <div className="pt-1 text-[11px] text-slate-400">
                 Width: {getExportLayoutWidth(sanitizedDraftConfig)} px
@@ -974,7 +1044,9 @@ export function OwnedAssetBoxExport<R extends string>({
 
           <div className="mt-3 flex justify-end gap-2">
             {exportUnavailableReason ? (
-              <p className="mr-auto self-center text-[11px] text-slate-400">{exportUnavailableReason}</p>
+              <p className="mr-auto self-center text-[11px] text-slate-400">
+                {exportUnavailableReason}
+              </p>
             ) : null}
             <Button
               onClick={() => {
@@ -982,7 +1054,7 @@ export function OwnedAssetBoxExport<R extends string>({
                 setVisuals(DEFAULT_EXPORT_VISUAL_CONFIG)
                 setSortConfig(DEFAULT_EXPORT_SORT_CONFIG)
                 if (defaultIncludedRarities) {
-                  setIncludedRarities({ ...defaultIncludedRarities })
+                  setIncludedRarities({...defaultIncludedRarities})
                 }
                 rerollEmoji()
               }}
@@ -1014,7 +1086,3 @@ export function OwnedAssetBoxExport<R extends string>({
     </>
   )
 }
-
-
-
-

@@ -1,8 +1,11 @@
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa6'
-import type { ReactNode } from 'react'
-import { type AwakenerSortKey, type CollectionSortDirection } from '../../domain/collection-sorting'
-import { Button } from './Button'
-import { TogglePill } from './TogglePill'
+import type {ReactNode} from 'react'
+
+import {FaCaretDown, FaCaretUp} from 'react-icons/fa6'
+
+import {type AwakenerSortKey, type CollectionSortDirection} from '@/domain/collection-sorting'
+
+import {Button} from './Button'
+import {TogglePill} from './TogglePill'
 
 type CollectionSortControlsProps = {
   sortKey: AwakenerSortKey
@@ -22,7 +25,12 @@ type CollectionSortControlsProps = {
   className?: string
 }
 
-const defaultSortOptions: readonly AwakenerSortKey[] = ['LEVEL', 'RARITY', 'ENLIGHTEN', 'ALPHABETICAL']
+const defaultSortOptions: readonly AwakenerSortKey[] = [
+  'LEVEL',
+  'RARITY',
+  'ENLIGHTEN',
+  'ALPHABETICAL',
+]
 
 function getSortLabel(sortKey: AwakenerSortKey): string {
   if (sortKey === 'LEVEL') {
@@ -63,7 +71,7 @@ export function CollectionSortControls({
   compactTrailingAction,
   className,
 }: CollectionSortControlsProps) {
-  const activeSortKey = sortOptions.includes(sortKey) ? sortKey : sortOptions[0] ?? 'LEVEL'
+  const activeSortKey = sortOptions.includes(sortKey) ? sortKey : (sortOptions[0] ?? 'LEVEL')
   const isCompact = layout === 'compact'
   const controlClassName =
     'h-6 min-w-0 border border-slate-500/55 bg-slate-950/90 px-2 text-[10px] leading-none text-slate-200 outline-none focus:border-amber-300/65'
@@ -72,7 +80,9 @@ export function CollectionSortControls({
   return (
     <div className={className}>
       <div className={isCompact ? 'space-y-0' : 'space-y-1'}>
-        {!isCompact ? <div className="text-[10px] uppercase tracking-wide text-slate-400">{headingText}</div> : null}
+        {!isCompact ? (
+          <div className="text-[10px] tracking-wide text-slate-400 uppercase">{headingText}</div>
+        ) : null}
         <div className="flex items-center gap-1">
           <select
             aria-label={sortSelectAriaLabel}
@@ -106,7 +116,9 @@ export function CollectionSortControls({
         </div>
         {showGroupByRealm ? (
           <div className="flex items-center justify-between gap-2">
-            <span className="text-[10px] uppercase tracking-wide text-slate-400">Group By Realm</span>
+            <span className="text-[10px] tracking-wide text-slate-400 uppercase">
+              Group By Realm
+            </span>
             <TogglePill
               ariaLabel={groupByRealmAriaLabel}
               checked={groupByRealm}
@@ -122,7 +134,3 @@ export function CollectionSortControls({
     </div>
   )
 }
-
-
-
-

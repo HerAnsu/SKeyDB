@@ -1,8 +1,9 @@
-import { getAwakeners } from './awakeners'
-import { buildIngameTokenDictionaries } from './ingame-token-dictionaries'
-import { getWheels } from './wheels'
-import type { Team, TeamSlot } from '../pages/builder/types'
-import { createEmptyTeamSlots } from '../pages/builder/constants'
+import {createEmptyTeamSlots} from '@/pages/builder/constants'
+import type {Team, TeamSlot} from '@/pages/builder/types'
+
+import {getAwakeners} from './awakeners'
+import {buildIngameTokenDictionaries} from './ingame-token-dictionaries'
+import {getWheels} from './wheels'
 
 const INGAME_WRAPPER = '@@'
 const TEAM_SLOT_COUNT = 4
@@ -67,18 +68,18 @@ function getWheelCandidatesAt(
 ): WheelCandidate[] {
   const candidates: WheelCandidate[] = []
   if (payload[cursor] === 'a') {
-    candidates.push({ token: 'a' })
+    candidates.push({token: 'a'})
   }
 
   for (const token of sortedWheelTokens) {
     if (!payload.startsWith(token, cursor)) {
       continue
     }
-    candidates.push({ token, wheelId: wheelTokensByToken.get(token) })
+    candidates.push({token, wheelId: wheelTokensByToken.get(token)})
   }
 
   if (candidates.length === 0 && cursor < payload.length) {
-    candidates.push({ token: payload[cursor], unknown: true })
+    candidates.push({token: payload[cursor], unknown: true})
   }
 
   return candidates
@@ -89,12 +90,12 @@ function parseWheelToken(
   cursor: number,
   wheelTokensByToken: Map<string, string>,
   sortedWheelTokens: string[],
-): { candidate: WheelCandidate; nextCursor: number } {
+): {candidate: WheelCandidate; nextCursor: number} {
   const candidates = getWheelCandidatesAt(payload, cursor, wheelTokensByToken, sortedWheelTokens)
   const [candidate] = candidates
   if (!candidate) {
     return {
-      candidate: { token: payload[cursor] ?? 'a', unknown: true },
+      candidate: {token: payload[cursor] ?? 'a', unknown: true},
       nextCursor: cursor + 1,
     }
   }
@@ -119,7 +120,7 @@ export function decodeIngameTeamCode(code: string): DecodedIngameTeamCode {
   const wheelTokenList = buildLongestTokenList(dictionaries.wheels.byTokenId.keys())
 
   let cursor = 0
-  const slots: TeamSlot[] = emptySlots.map((slot) => ({ ...slot, wheels: [null, null] }))
+  const slots: TeamSlot[] = emptySlots.map((slot) => ({...slot, wheels: [null, null]}))
 
   for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
     if (cursor >= payload.length) {
@@ -165,7 +166,12 @@ export function decodeIngameTeamCode(code: string): DecodedIngameTeamCode {
     if (cursor >= payload.length - POSSE_TOKEN_LENGTH) {
       throw new Error('Corrupted in-game code: missing wheel token block.')
     }
-    const { candidate, nextCursor } = parseWheelToken(payload, cursor, dictionaries.wheels.byTokenId, wheelTokenList)
+    const {candidate, nextCursor} = parseWheelToken(
+      payload,
+      cursor,
+      dictionaries.wheels.byTokenId,
+      wheelTokenList,
+    )
     wheelCandidates.push(candidate)
     cursor = nextCursor
   }
@@ -209,7 +215,10 @@ export function decodeIngameTeamCode(code: string): DecodedIngameTeamCode {
     }
 
     const covenantStart = slotIndex * COVENANT_SLICES_PER_SLOT
-    const covenantToken = covenantBlock.slice(covenantStart, covenantStart + COVENANT_SLICES_PER_SLOT)
+    const covenantToken = covenantBlock.slice(
+      covenantStart,
+      covenantStart + COVENANT_SLICES_PER_SLOT,
+    )
     if (covenantToken && /[^a]/.test(covenantToken)) {
       warnings.push({
         section: 'covenant',
@@ -247,7 +256,11 @@ export function decodeIngameTeamCode(code: string): DecodedIngameTeamCode {
   }
 }
 
-function encodeAwakenerToken(slot: TeamSlot, awakenersByNameId: Map<string, string>, byIdToken: Map<string, string>): string {
+function encodeAwakenerToken(
+  slot: TeamSlot,
+  awakenersByNameId: Map<string, string>,
+  byIdToken: Map<string, string>,
+): string {
   if (!slot.awakenerName) {
     return 'a'
   }
@@ -267,13 +280,17 @@ function encodeWheelToken(wheelId: string | null, byIdToken: Map<string, string>
 
 export function encodeIngameTeamCode(team: Team): string {
   const dictionaries = buildIngameTokenDictionaries()
-  const awakenersByNameId = new Map(getAwakeners().map((awakener) => [awakener.name, String(awakener.id)]))
+  const awakenersByNameId = new Map(
+    getAwakeners().map((awakener) => [awakener.name, String(awakener.id)]),
+  )
   const payloadTokens: string[] = []
   const fallbackSlots = createEmptyTeamSlots()
 
   for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
     const slot = team.slots[slotIndex] ?? fallbackSlots[slotIndex]
-    payloadTokens.push(encodeAwakenerToken(slot, awakenersByNameId, dictionaries.awakeners.byIdToken))
+    payloadTokens.push(
+      encodeAwakenerToken(slot, awakenersByNameId, dictionaries.awakeners.byIdToken),
+    )
   }
 
   for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
@@ -288,7 +305,7 @@ export function encodeIngameTeamCode(team: Team): string {
     }
   }
 
-  const posseToken = team.posseId ? dictionaries.posses.byIdToken.get(team.posseId) ?? 'a' : 'a'
+  const posseToken = team.posseId ? (dictionaries.posses.byIdToken.get(team.posseId) ?? 'a') : 'a'
   payloadTokens.push(posseToken)
   return `${INGAME_WRAPPER}${payloadTokens.join('')}${INGAME_WRAPPER}`
 }

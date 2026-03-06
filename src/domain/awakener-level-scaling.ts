@@ -1,4 +1,3 @@
-import { fmtNum } from './scaling'
 import type {
   AwakenerFull,
   AwakenerFullStats,
@@ -6,6 +5,7 @@ import type {
   AwakenerSubstatScaling,
   AwakenerSubstatScalingKey,
 } from './awakeners-full'
+import {fmtNum} from './scaling'
 
 const DATABASE_MIN_LEVEL = 1
 const DATABASE_DEFAULT_LEVEL = 60
@@ -52,7 +52,7 @@ export function resolveAwakenerStatsForLevel(
 ): AwakenerFullStats {
   const clampedLevel = clampAwakenerDatabaseLevel(level)
   const clampedPsycheSurgeOffset = clampAwakenerDatabasePsycheSurgeOffset(psycheSurgeOffset)
-  const nextStats = { ...awakener.stats }
+  const nextStats = {...awakener.stats}
 
   for (const key of PRIMARY_STAT_KEYS) {
     nextStats[key] = resolvePrimaryStatValue(
@@ -79,7 +79,9 @@ export function resolveAwakenerStatsForLevel(
   return nextStats
 }
 
-export function hasAwakenerSubstatScaling(substatScaling: AwakenerSubstatScaling | null | undefined): boolean {
+export function hasAwakenerSubstatScaling(
+  substatScaling: AwakenerSubstatScaling | null | undefined,
+): boolean {
   if (!substatScaling) {
     return false
   }
@@ -92,14 +94,23 @@ function resolvePrimaryStatValue(
   growthPerLevel: number,
   level: number,
 ): string {
-  if (scalingBase === undefined || Number.isNaN(Number(baseValue)) || !Number.isFinite(growthPerLevel)) {
+  if (
+    scalingBase === undefined ||
+    Number.isNaN(Number(baseValue)) ||
+    !Number.isFinite(growthPerLevel)
+  ) {
     return baseValue
   }
   const nextValue = Math.ceil((scalingBase + level) * growthPerLevel - PRIMARY_STAT_FORMULA_EPSILON)
   return String(nextValue)
 }
 
-function resolveSubstatValue(baseValue: string, growthPerTenLevels: string, level: number, psycheSurgeOffset: number): string {
+function resolveSubstatValue(
+  baseValue: string,
+  growthPerTenLevels: string,
+  level: number,
+  psycheSurgeOffset: number,
+): string {
   const parsedBase = parseStatValue(baseValue)
   const parsedGrowth = parseStatValue(growthPerTenLevels)
   if (!parsedBase || !parsedGrowth) {
@@ -109,12 +120,17 @@ function resolveSubstatValue(baseValue: string, growthPerTenLevels: string, leve
   const appliedSteps = getAppliedSubstatScalingSteps(level)
   const missingStepsFromLevel60 = SUBSTAT_SCALING_MAX_STEPS - appliedSteps
   const nextValue =
-    parsedBase.value - missingStepsFromLevel60 * parsedGrowth.value + psycheSurgeOffset * parsedGrowth.value
+    parsedBase.value -
+    missingStepsFromLevel60 * parsedGrowth.value +
+    psycheSurgeOffset * parsedGrowth.value
   return formatStatValue(nextValue, parsedBase.suffix || parsedGrowth.suffix)
 }
 
 function getAppliedSubstatScalingSteps(level: number): number {
-  return Math.min(Math.floor(clampAwakenerDatabaseLevel(level) / SUBSTAT_SCALING_STEP_LEVEL), SUBSTAT_SCALING_MAX_STEPS)
+  return Math.min(
+    Math.floor(clampAwakenerDatabaseLevel(level) / SUBSTAT_SCALING_STEP_LEVEL),
+    SUBSTAT_SCALING_MAX_STEPS,
+  )
 }
 
 function parseStatValue(rawValue: string): ParsedStatValue | null {

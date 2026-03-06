@@ -1,5 +1,6 @@
-import { getAwakenerIdentityKey } from '../../domain/awakener-identity'
-import type { Team } from './types'
+import {getAwakenerIdentityKey} from '@/domain/awakener-identity'
+
+import type {Team} from './types'
 
 export function toTeamPlan(teams: Team[]) {
   return teams.map((team) => ({

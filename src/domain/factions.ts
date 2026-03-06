@@ -1,7 +1,7 @@
-import aequorIcon from '../assets/factions/aequor.png'
-import caroIcon from '../assets/factions/caro.png'
-import chaosIcon from '../assets/factions/chaos.png'
-import ultraIcon from '../assets/factions/ultra.png'
+import aequorIcon from '@/assets/factions/aequor.png'
+import caroIcon from '@/assets/factions/caro.png'
+import chaosIcon from '@/assets/factions/chaos.png'
+import ultraIcon from '@/assets/factions/ultra.png'
 
 export const DEFAULT_REALM_TINT = '#7a8da8'
 

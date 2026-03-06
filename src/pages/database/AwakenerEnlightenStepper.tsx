@@ -1,5 +1,6 @@
-import { FaMinus, FaPlus } from 'react-icons/fa6'
-import { useHoldRepeatAction } from '../../components/ui/useHoldRepeatAction'
+import {FaMinus, FaPlus} from 'react-icons/fa6'
+
+import {useHoldRepeatAction} from '@/components/ui/useHoldRepeatAction'
 
 type AwakenerEnlightenStepperProps = {
   offset: number
@@ -18,7 +19,7 @@ function StepButton({
   onStep: () => void
   children: React.ReactNode
 }) {
-  const hold = useHoldRepeatAction({ onStep, disabled })
+  const hold = useHoldRepeatAction({onStep, disabled})
 
   return (
     <button

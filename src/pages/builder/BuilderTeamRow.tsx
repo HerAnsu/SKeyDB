@@ -1,9 +1,11 @@
-import { useSortable } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import tempPosseIcon from '../../assets/posse/00-temposse.png'
-import { TeamNameInlineEditor } from './TeamNameInlineEditor'
-import { BuilderTeamPreviewStrip } from './BuilderTeamPreviewStrip'
-import type { Team, TeamPreviewMode } from './types'
+import {useSortable} from '@dnd-kit/sortable'
+import {CSS} from '@dnd-kit/utilities'
+
+import tempPosseIcon from '@/assets/posse/00-temposse.png'
+
+import {BuilderTeamPreviewStrip} from './BuilderTeamPreviewStrip'
+import {TeamNameInlineEditor} from './TeamNameInlineEditor'
+import type {Team, TeamPreviewMode} from './types'
 
 type BuilderTeamRowProps = {
   team: Team
@@ -48,9 +50,9 @@ export function BuilderTeamRow({
   onDeleteTeam,
   deleteDisabled,
 }: BuilderTeamRowProps) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const {attributes, listeners, setNodeRef, transform, transition, isDragging} = useSortable({
     id: team.id,
-    data: { kind: 'team-row', teamId: team.id },
+    data: {kind: 'team-row', teamId: team.id},
   })
   const hasMeaningfulTransform =
     !!transform &&
@@ -77,9 +79,7 @@ export function BuilderTeamRow({
         aria-label={`Reorder ${team.name}`}
         data-active={isActive ? 'true' : 'false'}
         className={`builder-team-row-drag-handle border ${
-          isActive
-            ? 'border-amber-200/80 bg-slate-800/70'
-            : 'border-slate-500/45 bg-slate-900/50'
+          isActive ? 'border-amber-200/80 bg-slate-800/70' : 'border-slate-500/45 bg-slate-900/50'
         }`}
         type="button"
         {...attributes}
@@ -90,8 +90,8 @@ export function BuilderTeamRow({
       <div
         className={`grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 border pr-2 ${
           isActive
-            ? 'border-amber-200/80 border-l-0 bg-slate-800/70'
-            : 'border-slate-500/45 border-l-0 bg-slate-900/50'
+            ? 'border-l-0 border-amber-200/80 bg-slate-800/70'
+            : 'border-l-0 border-slate-500/45 bg-slate-900/50'
         }`}
         onClick={() => onEditTeam(team.id)}
       >
@@ -127,7 +127,11 @@ export function BuilderTeamRow({
             draggable={false}
             src={posseAsset ?? tempPosseIcon}
           />
-          {!isPosseOwned ? <span className="builder-team-preview-unowned-chip builder-team-preview-unowned-chip-posse">Unowned</span> : null}
+          {!isPosseOwned ? (
+            <span className="builder-team-preview-unowned-chip builder-team-preview-unowned-chip-posse">
+              Unowned
+            </span>
+          ) : null}
         </span>
         <div className="py-1.5">
           <button

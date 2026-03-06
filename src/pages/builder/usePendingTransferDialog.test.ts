@@ -1,8 +1,10 @@
-import { renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { getWheelById } from '../../domain/wheels'
-import { usePendingTransferDialog } from './usePendingTransferDialog'
-import type { Team } from './types'
+import {renderHook} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
+
+import {getWheelById} from '@/domain/wheels'
+
+import type {Team} from './types'
+import {usePendingTransferDialog} from './usePendingTransferDialog'
 
 function buildTeams(): Team[] {
   return [
@@ -10,20 +12,20 @@ function buildTeams(): Team[] {
       id: 'team-1',
       name: 'Team 1',
       slots: [
-        { slotId: 'slot-1', wheels: [null, null] },
-        { slotId: 'slot-2', wheels: [null, null] },
-        { slotId: 'slot-3', wheels: [null, null] },
-        { slotId: 'slot-4', wheels: [null, null] },
+        {slotId: 'slot-1', wheels: [null, null]},
+        {slotId: 'slot-2', wheels: [null, null]},
+        {slotId: 'slot-3', wheels: [null, null]},
+        {slotId: 'slot-4', wheels: [null, null]},
       ],
     },
     {
       id: 'team-2',
       name: 'Team 2',
       slots: [
-        { slotId: 'slot-1', wheels: [null, null] },
-        { slotId: 'slot-2', wheels: [null, null] },
-        { slotId: 'slot-3', wheels: [null, null] },
-        { slotId: 'slot-4', wheels: [null, null] },
+        {slotId: 'slot-1', wheels: [null, null]},
+        {slotId: 'slot-2', wheels: [null, null]},
+        {slotId: 'slot-3', wheels: [null, null]},
+        {slotId: 'slot-4', wheels: [null, null]},
       ],
     },
   ]
@@ -35,7 +37,7 @@ describe('usePendingTransferDialog', () => {
     const wheelName = getWheelById(wheelId)?.name
     expect(wheelName).toBeTruthy()
 
-    const { result } = renderHook(() =>
+    const {result} = renderHook(() =>
       usePendingTransferDialog({
         pendingTransfer: {
           kind: 'wheel',
@@ -62,7 +64,7 @@ describe('usePendingTransferDialog', () => {
   it('exposes a support action for duplicate awakener moves when support is available', () => {
     const setTeams = vi.fn()
     const clearTransfer = vi.fn()
-    const { result } = renderHook(() =>
+    const {result} = renderHook(() =>
       usePendingTransferDialog({
         pendingTransfer: {
           kind: 'awakener',
@@ -83,4 +85,3 @@ describe('usePendingTransferDialog', () => {
     expect(result.current?.supportLabel).toBe('Use as Support')
   })
 })
-

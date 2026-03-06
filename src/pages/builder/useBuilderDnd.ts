@@ -1,14 +1,16 @@
+import {useState} from 'react'
+
 import {
-  type DragOverEvent,
-  type DragEndEvent,
-  type DragStartEvent,
   PointerSensor,
   useSensor,
   useSensors,
+  type DragEndEvent,
+  type DragOverEvent,
+  type DragStartEvent,
 } from '@dnd-kit/core'
-import { useState } from 'react'
-import { parseCovenantDropZoneId, parseWheelDropZoneId, PICKER_DROP_ZONE_ID } from './dnd-ids'
-import type { DragData } from './types'
+
+import {parseCovenantDropZoneId, parseWheelDropZoneId, PICKER_DROP_ZONE_ID} from './dnd-ids'
+import type {DragData} from './types'
 
 type UseBuilderDndOptions = {
   onDropPickerAwakener: (awakenerName: string, targetSlotId: string) => void
@@ -21,7 +23,11 @@ type UseBuilderDndOptions = {
     targetSlotId: string,
     targetWheelIndex: number,
   ) => void
-  onDropTeamWheelToSlot: (sourceSlotId: string, sourceWheelIndex: number, targetSlotId: string) => void
+  onDropTeamWheelToSlot: (
+    sourceSlotId: string,
+    sourceWheelIndex: number,
+    targetSlotId: string,
+  ) => void
   onDropTeamCovenant: (sourceSlotId: string, targetSlotId: string) => void
   onDropTeamCovenantToSlot: (sourceSlotId: string, targetSlotId: string) => void
   onDropTeamSlotToPicker: (sourceSlotId: string) => void
@@ -46,7 +52,7 @@ export function useBuilderDnd({
   const [isRemoveIntent, setIsRemoveIntent] = useState(false)
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { distance: 4 },
+      activationConstraint: {distance: 4},
     }),
   )
 
@@ -64,7 +70,11 @@ export function useBuilderDnd({
   }
 
   function handleDragOver(event: DragOverEvent) {
-    if (activeDrag?.kind !== 'team-slot' && activeDrag?.kind !== 'team-wheel' && activeDrag?.kind !== 'team-covenant') {
+    if (
+      activeDrag?.kind !== 'team-slot' &&
+      activeDrag?.kind !== 'team-wheel' &&
+      activeDrag?.kind !== 'team-covenant'
+    ) {
       if (isRemoveIntent) {
         setIsRemoveIntent(false)
       }
@@ -92,7 +102,8 @@ export function useBuilderDnd({
     const overCovenantZone = parseCovenantDropZoneId(overId)
 
     if (data.kind === 'picker-awakener') {
-      const targetSlotId = overWheelZone?.slotId ?? overCovenantZone?.slotId ?? (isTeamSlotId(overId) ? overId : null)
+      const targetSlotId =
+        overWheelZone?.slotId ?? overCovenantZone?.slotId ?? (isTeamSlotId(overId) ? overId : null)
       if (!targetSlotId) {
         return
       }

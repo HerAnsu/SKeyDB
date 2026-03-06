@@ -1,4 +1,4 @@
-import type { Awakener } from './awakeners'
+import type {Awakener} from './awakeners'
 
 export function toDatabaseAwakenerSlug(name: string): string {
   return name
@@ -20,5 +20,7 @@ export function findAwakenerByDatabaseSlug(
     return null
   }
   const normalizedSlug = slug.trim().toLowerCase()
-  return awakeners.find((awakener) => toDatabaseAwakenerSlug(awakener.name) === normalizedSlug) ?? null
+  return (
+    awakeners.find((awakener) => toDatabaseAwakenerSlug(awakener.name) === normalizedSlug) ?? null
+  )
 }

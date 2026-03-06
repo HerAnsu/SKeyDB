@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type {ReactNode} from 'react'
 
 type ModalFrameProps = {
   title: string
@@ -19,7 +19,12 @@ export function ModalFrame({
 }: ModalFrameProps) {
   return (
     <div className={overlayClassName}>
-      <div aria-label={ariaLabel ?? title} aria-modal="true" className={panelClassName} role="dialog">
+      <div
+        aria-label={ariaLabel ?? title}
+        aria-modal="true"
+        className={panelClassName}
+        role="dialog"
+      >
         <h4 className="ui-title text-xl text-amber-100">{title}</h4>
         {children}
         {footer}

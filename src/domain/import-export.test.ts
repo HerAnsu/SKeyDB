@@ -1,6 +1,8 @@
-import { describe, expect, it } from 'vitest'
-import { encodeMultiTeamCode, encodeSingleTeamCode, decodeImportCode } from './import-export'
-import type { Team } from '../pages/builder/types'
+import {describe, expect, it} from 'vitest'
+
+import type {Team} from '@/pages/builder/types'
+
+import {decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode} from './import-export'
 
 function makeTeam(name: string): Team {
   return {
@@ -16,9 +18,9 @@ function makeTeam(name: string): Team {
         wheels: ['SR19', 'SR20'],
         covenantId: '001',
       },
-      { slotId: 'slot-2', awakenerName: 'ramona', realm: 'CHAOS', level: 60, wheels: [null, null] },
-      { slotId: 'slot-3', wheels: [null, null] },
-      { slotId: 'slot-4', wheels: [null, null] },
+      {slotId: 'slot-2', awakenerName: 'ramona', realm: 'CHAOS', level: 60, wheels: [null, null]},
+      {slotId: 'slot-3', wheels: [null, null]},
+      {slotId: 'slot-4', wheels: [null, null]},
     ],
   }
 }
@@ -103,7 +105,7 @@ describe('import-export codec', () => {
 
   it('keeps export strings compact for single and 10-team payloads', () => {
     const singleCode = encodeSingleTeamCode(makeTeam('Team 9'))
-    const tenTeams = Array.from({ length: 10 }, (_, index) => makeTeam(`Team ${index + 1}`))
+    const tenTeams = Array.from({length: 10}, (_, index) => makeTeam(`Team ${index + 1}`))
     const multiCode = encodeMultiTeamCode(tenTeams, tenTeams[8].id)
 
     expect(singleCode.length).toBeLessThan(35)
@@ -112,7 +114,7 @@ describe('import-export codec', () => {
 
   it('strips wheel assignments from slots without awakeners during roundtrip', () => {
     const team = makeTeam('Team Dirty')
-    team.slots[2] = { slotId: 'slot-3', wheels: ['SR19', 'SR20'], covenantId: '001' }
+    team.slots[2] = {slotId: 'slot-3', wheels: ['SR19', 'SR20'], covenantId: '001'}
 
     const code = encodeSingleTeamCode(team)
     const parsed = decodeImportCode(code)

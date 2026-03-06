@@ -1,6 +1,7 @@
-import { act, render, waitFor } from '@testing-library/react'
-import { afterEach, describe, expect, it, vi } from 'vitest'
-import { PopoverTrailPanel } from './PopoverTrailPanel'
+import {act, render, waitFor} from '@testing-library/react'
+import {afterEach, describe, expect, it, vi} from 'vitest'
+
+import {PopoverTrailPanel} from './PopoverTrailPanel'
 
 function makeRect(overrides: Partial<DOMRect> = {}): DOMRect {
   return {
@@ -52,7 +53,9 @@ describe('PopoverTrailPanel', () => {
       bottom: 80,
     })
 
-    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function (this: HTMLElement) {
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function (
+      this: HTMLElement,
+    ) {
       if (this === anchorElement) {
         return anchorRect
       }

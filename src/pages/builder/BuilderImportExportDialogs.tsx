@@ -1,9 +1,10 @@
-import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
-import { ExportCodeDialog } from '../../components/ui/ExportCodeDialog'
-import { ImportCodeDialog } from '../../components/ui/ImportCodeDialog'
-import { ImportStrategyDialog } from '../../components/ui/ImportStrategyDialog'
-import type { ImportConflict } from './import-planner'
-import type { Team } from './types'
+import {ConfirmDialog} from '@/components/ui/ConfirmDialog'
+import {ExportCodeDialog} from '@/components/ui/ExportCodeDialog'
+import {ImportCodeDialog} from '@/components/ui/ImportCodeDialog'
+import {ImportStrategyDialog} from '@/components/ui/ImportStrategyDialog'
+
+import type {ImportConflict} from './import-planner'
+import type {Team} from './types'
 
 type BuilderImportExportDialogsProps = {
   isImportDialogOpen: boolean
@@ -12,15 +13,20 @@ type BuilderImportExportDialogsProps = {
   pendingDuplicateOverrideImport: object | null
   onCancelDuplicateOverrideImport: () => void
   onConfirmDuplicateOverrideImport: () => void
-  pendingReplaceImport: { teams: Team[]; activeTeamIndex: number } | null
+  pendingReplaceImport: {teams: Team[]; activeTeamIndex: number} | null
   onCancelReplaceImport: () => void
   onConfirmReplaceImport: () => void
-  pendingStrategyImport: { team: Team; conflicts: ImportConflict[] } | null
+  pendingStrategyImport: {team: Team; conflicts: ImportConflict[]} | null
   pendingStrategyConflictSummary: string
   onCancelStrategyImport: () => void
   onMoveStrategyImport: () => void
   onSkipStrategyImport: () => void
-  exportDialog: { title: string; code: string; kind: 'standard' | 'ingame'; duplicateWarning?: string } | null
+  exportDialog: {
+    title: string
+    code: string
+    kind: 'standard' | 'ingame'
+    duplicateWarning?: string
+  } | null
   onCloseExportDialog: () => void
 }
 
@@ -35,8 +41,8 @@ const ingameSupportContactNote = (
 function renderIngameImportWarning() {
   return (
     <p className="text-xs text-rose-300">
-      In-game `@@...@@` import is work in progress. Covenants and posse slots are NOT supported yet and will import as
-      empty when using import codes from the game.
+      In-game `@@...@@` import is work in progress. Covenants and posse slots are NOT supported yet
+      and will import as empty when using import codes from the game.
       <br />
       <br />
       {ingameSupportContactNote}

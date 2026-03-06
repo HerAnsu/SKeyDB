@@ -1,4 +1,4 @@
-import type { AwakenerFullStats } from './awakeners-full'
+import type {AwakenerFullStats} from './awakeners-full'
 
 export const COMPUTABLE_STATS = new Set(['ATK', 'DEF', 'CON'])
 
@@ -57,10 +57,12 @@ export function formatScalingRange(values: number[], suffix: string): string {
   if (values.length <= 1) return `${fmtNum(values[0] ?? 0)}${suffix}`
 
   const step = values[1] - values[0]
-  const isEvenlySpaced = step !== 0 && values.every((v, i) => {
-    if (i === 0) return true
-    return Math.abs((v - values[i - 1]) - step) < 0.001
-  })
+  const isEvenlySpaced =
+    step !== 0 &&
+    values.every((v, i) => {
+      if (i === 0) return true
+      return Math.abs(v - values[i - 1] - step) < 0.001
+    })
 
   if (isEvenlySpaced) {
     const sign = step > 0 ? '+' : ''

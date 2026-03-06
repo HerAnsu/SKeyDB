@@ -1,10 +1,8 @@
-import { useCallback } from 'react'
-import { assignWheelToSlot, swapWheelAssignments } from './team-state'
-import {
-  nextSelectionAfterWheelSwap,
-  shouldSetActiveWheelOnPickerAssign,
-} from './selection-state'
-import type { ActiveSelection, TeamSlot, WheelUsageLocation } from './types'
+import {useCallback} from 'react'
+
+import {nextSelectionAfterWheelSwap, shouldSetActiveWheelOnPickerAssign} from './selection-state'
+import {assignWheelToSlot, swapWheelAssignments} from './team-state'
+import type {ActiveSelection, TeamSlot, WheelUsageLocation} from './types'
 
 type WheelTransferRequest = {
   wheelId: string
@@ -62,7 +60,7 @@ export function useBuilderWheelActions({
       wheelId: string,
       targetSlotId: string,
       targetWheelIndex?: number,
-      options?: { setActiveOnAssign?: boolean },
+      options?: {setActiveOnAssign?: boolean},
     ) => {
       const setActiveOnAssign = options?.setActiveOnAssign ?? true
       const resolvedWheelIndex = targetWheelIndex ?? getFirstEmptyWheelIndex(targetSlotId)
@@ -86,7 +84,7 @@ export function useBuilderWheelActions({
         )
         setActiveTeamSlots(result.nextSlots)
         if (setActiveOnAssign) {
-          setActiveSelection({ kind: 'wheel', slotId: targetSlotId, wheelIndex: resolvedWheelIndex })
+          setActiveSelection({kind: 'wheel', slotId: targetSlotId, wheelIndex: resolvedWheelIndex})
         }
         onPickerAssignSuccess?.(result.nextSlots)
         return
@@ -108,7 +106,7 @@ export function useBuilderWheelActions({
       const result = assignWheelToSlot(teamSlots, targetSlotId, resolvedWheelIndex, wheelId)
       setActiveTeamSlots(result.nextSlots)
       if (setActiveOnAssign) {
-        setActiveSelection({ kind: 'wheel', slotId: targetSlotId, wheelIndex: resolvedWheelIndex })
+        setActiveSelection({kind: 'wheel', slotId: targetSlotId, wheelIndex: resolvedWheelIndex})
       }
       onPickerAssignSuccess?.(result.nextSlots)
     },
@@ -129,13 +127,18 @@ export function useBuilderWheelActions({
     (wheelId: string, targetSlotId: string, targetWheelIndex?: number) => {
       clearPendingDelete()
       clearTransfer()
-      assignPickerWheelToTarget(wheelId, targetSlotId, targetWheelIndex, { setActiveOnAssign: true })
+      assignPickerWheelToTarget(wheelId, targetSlotId, targetWheelIndex, {setActiveOnAssign: true})
     },
     [assignPickerWheelToTarget, clearPendingDelete, clearTransfer],
   )
 
   const handleDropTeamWheel = useCallback(
-    (sourceSlotId: string, sourceWheelIndex: number, targetSlotId: string, targetWheelIndex: number) => {
+    (
+      sourceSlotId: string,
+      sourceWheelIndex: number,
+      targetSlotId: string,
+      targetWheelIndex: number,
+    ) => {
       if (sourceSlotId === targetSlotId && sourceWheelIndex === targetWheelIndex) {
         return
       }
@@ -149,7 +152,7 @@ export function useBuilderWheelActions({
       setActiveTeamSlots(result.nextSlots)
 
       if (sourceSlotId !== targetSlotId) {
-        setActiveSelection({ kind: 'wheel', slotId: targetSlotId, wheelIndex: targetWheelIndex })
+        setActiveSelection({kind: 'wheel', slotId: targetSlotId, wheelIndex: targetWheelIndex})
         return
       }
 
@@ -181,7 +184,7 @@ export function useBuilderWheelActions({
         targetWheelIndex,
       )
       setActiveTeamSlots(result.nextSlots)
-      setActiveSelection({ kind: 'wheel', slotId: targetSlotId, wheelIndex: targetWheelIndex })
+      setActiveSelection({kind: 'wheel', slotId: targetSlotId, wheelIndex: targetWheelIndex})
     },
     [getFirstEmptyWheelIndex, setActiveSelection, setActiveTeamSlots, teamSlots],
   )
@@ -190,7 +193,10 @@ export function useBuilderWheelActions({
     (wheelId?: string) => {
       clearPendingDelete()
       clearTransfer()
-      if (resolvedActiveSelection?.kind !== 'wheel' && resolvedActiveSelection?.kind !== 'awakener') {
+      if (
+        resolvedActiveSelection?.kind !== 'wheel' &&
+        resolvedActiveSelection?.kind !== 'awakener'
+      ) {
         showToast('Select a wheel slot on a unit card first.')
         return
       }

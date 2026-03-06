@@ -1,14 +1,12 @@
-import { FaXmark } from 'react-icons/fa6'
-import {
-  parseRichDescription,
-} from '../../domain/rich-text'
-import type { AwakenerFullStats } from '../../domain/awakeners-full'
-import { type Tag } from '../../domain/tags'
-import { scaledFontStyle } from './font-scale'
-import { RichSegmentRenderer } from './RichSegmentRenderer'
-import {
-  DATABASE_ENTRY_TITLE_CLASS,
-} from './text-styles'
+import {FaXmark} from 'react-icons/fa6'
+
+import type {AwakenerFullStats} from '@/domain/awakeners-full'
+import {parseRichDescription} from '@/domain/rich-text'
+import {type Tag} from '@/domain/tags'
+
+import {scaledFontStyle} from './font-scale'
+import {RichSegmentRenderer} from './RichSegmentRenderer'
+import {DATABASE_ENTRY_TITLE_CLASS} from './text-styles'
 
 type SkillPopoverProps = {
   name: string
@@ -46,7 +44,10 @@ export function SkillPopover({
           {onNavigateToCards ? (
             <button
               className={`${DATABASE_ENTRY_TITLE_CLASS} transition-colors hover:text-amber-100`}
-              onClick={() => { onClose(); onNavigateToCards() }}
+              onClick={() => {
+                onClose()
+                onNavigateToCards()
+              }}
               style={scaledFontStyle(12)}
               title="View in Cards tab"
               type="button"
@@ -54,15 +55,13 @@ export function SkillPopover({
               {name} ↗
             </button>
           ) : (
-            <p
-              className={DATABASE_ENTRY_TITLE_CLASS}
-              style={scaledFontStyle(12)}
-            >{name}</p>
+            <p className={DATABASE_ENTRY_TITLE_CLASS} style={scaledFontStyle(12)}>
+              {name}
+            </p>
           )}
-          <p
-            className="text-slate-500"
-            style={scaledFontStyle(10)}
-          >{label}</p>
+          <p className="text-slate-500" style={scaledFontStyle(10)}>
+            {label}
+          </p>
         </div>
         <button
           aria-label="Close skill popover"
@@ -74,10 +73,7 @@ export function SkillPopover({
         </button>
       </div>
       <div className="px-3 pb-3">
-        <p
-          className="leading-relaxed text-slate-400"
-          style={scaledFontStyle(11)}
-        >
+        <p className="leading-relaxed text-slate-400" style={scaledFontStyle(11)}>
           {segments.map((seg, i) => (
             <RichSegmentRenderer
               key={i}

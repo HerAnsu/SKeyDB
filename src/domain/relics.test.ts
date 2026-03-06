@@ -1,10 +1,7 @@
-import { describe, expect, it } from 'vitest'
-import {
-  getPortraitRelicByAwakenerIngameId,
-  getPortraitRelics,
-  getRelics,
-} from './relics'
-import { getAwakeners } from './awakeners'
+import {describe, expect, it} from 'vitest'
+
+import {getAwakeners} from './awakeners'
+import {getPortraitRelicByAwakenerIngameId, getPortraitRelics, getRelics} from './relics'
 
 describe('getRelics', () => {
   it('returns parsed relics with stable ids', () => {
@@ -42,7 +39,9 @@ describe('getPortraitRelics', () => {
         .filter((ingameId): ingameId is string => Boolean(ingameId)),
     )
     const portraits = getPortraitRelics()
-    expect(portraits.every((relic) => knownAwakenerIngameIds.has(relic.awakenerIngameId))).toBe(true)
+    expect(portraits.every((relic) => knownAwakenerIngameIds.has(relic.awakenerIngameId))).toBe(
+      true,
+    )
   })
 })
 

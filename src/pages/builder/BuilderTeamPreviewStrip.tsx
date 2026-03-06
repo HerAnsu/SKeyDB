@@ -1,10 +1,12 @@
-import { useDraggable, useDroppable } from '@dnd-kit/core'
-import { getAwakenerCardAsset, getAwakenerPortraitAsset } from '../../domain/awakener-assets'
-import { getCovenantAssetById } from '../../domain/covenant-assets'
-import { getRealmTint } from '../../domain/factions'
-import { getWheelAssetById } from '../../domain/wheel-assets'
-import { makeTeamPreviewSlotDropZoneId } from './dnd-ids'
-import type { DragData, TeamPreviewMode, TeamSlot } from './types'
+import {useDraggable, useDroppable} from '@dnd-kit/core'
+
+import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-assets'
+import {getCovenantAssetById} from '@/domain/covenant-assets'
+import {getRealmTint} from '@/domain/factions'
+import {getWheelAssetById} from '@/domain/wheel-assets'
+
+import {makeTeamPreviewSlotDropZoneId} from './dnd-ids'
+import type {DragData, TeamPreviewMode, TeamSlot} from './types'
 
 type BuilderTeamSlotPreviewProps = {
   slot: TeamSlot
@@ -33,13 +35,18 @@ function BuilderTeamSlotPreview({
   const awakenerCardAsset = slot.awakenerName ? getAwakenerCardAsset(slot.awakenerName) : undefined
   const dropZoneId = makeTeamPreviewSlotDropZoneId(teamId, slot.slotId)
   const dragData = slot.awakenerName
-    ? ({ kind: 'team-preview-slot', teamId, slotId: slot.slotId } satisfies DragData)
+    ? ({kind: 'team-preview-slot', teamId, slotId: slot.slotId} satisfies DragData)
     : undefined
-  const { isOver, setNodeRef: setDroppableRef } = useDroppable({
+  const {isOver, setNodeRef: setDroppableRef} = useDroppable({
     id: dropZoneId,
     disabled: !enableDragAndDrop,
   })
-  const { attributes, listeners, setNodeRef: setDraggableRef, isDragging } = useDraggable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef: setDraggableRef,
+    isDragging,
+  } = useDraggable({
     id: `${dropZoneId}:drag`,
     data: dragData,
     disabled: !enableDragAndDrop || !slot.awakenerName,
@@ -74,14 +81,18 @@ function BuilderTeamSlotPreview({
               />
               <span
                 className="pointer-events-none absolute inset-0 z-10 border"
-                style={{ borderColor: getRealmTint(slot.realm) }}
+                style={{borderColor: getRealmTint(slot.realm)}}
               />
               {slot.isSupport ? (
                 <span className="builder-team-preview-support-overlay">
-                  <span className="builder-team-preview-support-chip builder-team-preview-support-chip-compact">Support</span>
+                  <span className="builder-team-preview-support-chip builder-team-preview-support-chip-compact">
+                    Support
+                  </span>
                 </span>
               ) : null}
-              {!isAwakenerOwned ? <span className="builder-team-preview-unowned-chip">Unowned</span> : null}
+              {!isAwakenerOwned ? (
+                <span className="builder-team-preview-unowned-chip">Unowned</span>
+              ) : null}
             </>
           ) : (
             <span className="relative block h-full w-full">
@@ -115,10 +126,16 @@ function BuilderTeamSlotPreview({
             />
             <span
               className="pointer-events-none absolute inset-0 z-10 border"
-              style={{ borderColor: getRealmTint(slot.realm) }}
+              style={{borderColor: getRealmTint(slot.realm)}}
             />
-            {slot.isSupport ? <span className="builder-team-preview-support-chip builder-team-preview-support-chip-expanded">Support</span> : null}
-            {!isAwakenerOwned ? <span className="builder-team-preview-unowned-chip">Unowned</span> : null}
+            {slot.isSupport ? (
+              <span className="builder-team-preview-support-chip builder-team-preview-support-chip-expanded">
+                Support
+              </span>
+            ) : null}
+            {!isAwakenerOwned ? (
+              <span className="builder-team-preview-unowned-chip">Unowned</span>
+            ) : null}
           </>
         ) : (
           <span className="relative block h-full w-full">
@@ -127,7 +144,12 @@ function BuilderTeamSlotPreview({
         )}
         <span className="builder-team-slot-preview-covenant">
           {covenantAsset ? (
-            <img alt="" className="h-full w-full object-cover" draggable={false} src={covenantAsset} />
+            <img
+              alt=""
+              className="h-full w-full object-cover"
+              draggable={false}
+              src={covenantAsset}
+            />
           ) : (
             <span className="builder-team-slot-preview-covenant-empty" />
           )}
@@ -137,7 +159,10 @@ function BuilderTeamSlotPreview({
             const wheelAsset = wheelId ? getWheelAssetById(wheelId) : undefined
             const isWheelOwned = !wheelId || (ownedWheelLevelById.get(wheelId) ?? null) !== null
             return (
-              <span className="builder-team-slot-preview-wheel" key={`${slot.slotId}-wheel-${index}`}>
+              <span
+                className="builder-team-slot-preview-wheel"
+                key={`${slot.slotId}-wheel-${index}`}
+              >
                 {wheelAsset ? (
                   <img
                     alt=""
@@ -175,7 +200,9 @@ export function BuilderTeamPreviewStrip({
   enableDragAndDrop?: boolean
 }) {
   return (
-    <div className={`${mode === 'expanded' ? 'builder-team-preview-grid-expanded' : 'flex gap-1.5'} ${className}`.trim()}>
+    <div
+      className={`${mode === 'expanded' ? 'builder-team-preview-grid-expanded' : 'flex gap-1.5'} ${className}`.trim()}
+    >
       {slots.map((slot, index) => (
         <BuilderTeamSlotPreview
           key={`${teamId}-${slot.slotId}`}

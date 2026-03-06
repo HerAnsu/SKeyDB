@@ -1,9 +1,17 @@
-import type { MouseEvent } from 'react'
-import type { RichSegment, ScalingSegment } from '../../domain/rich-text'
-import type { AwakenerFullStats } from '../../domain/awakeners-full'
-import { buildScalingHover, computeStatRange, computeStatValue, fmtNum, formatScalingRange } from '../../domain/scaling'
-import { resolveTag, type Tag } from '../../domain/tags'
-import { renderTextWithBreaks } from './font-scale'
+import type {MouseEvent} from 'react'
+
+import type {AwakenerFullStats} from '@/domain/awakeners-full'
+import type {RichSegment, ScalingSegment} from '@/domain/rich-text'
+import {
+  buildScalingHover,
+  computeStatRange,
+  computeStatValue,
+  fmtNum,
+  formatScalingRange,
+} from '@/domain/scaling'
+import {resolveTag, type Tag} from '@/domain/tags'
+
+import {renderTextWithBreaks} from './font-scale'
 import {
   DATABASE_INTERACTIVE_TOKEN_CLASS,
   DATABASE_POPOVER_SCALING_TOKEN_CLASS,
@@ -45,7 +53,7 @@ export function RichSegmentRenderer({
         <button
           className={DATABASE_INTERACTIVE_TOKEN_CLASS}
           onClick={(event) => onSkillClick(segment.name, event)}
-          style={{ fontSize: 'inherit' }}
+          style={{fontSize: 'inherit'}}
           type="button"
         >
           {segment.name}
@@ -54,7 +62,11 @@ export function RichSegmentRenderer({
 
     case 'stat':
       return (
-        <span className={variant === 'popover' ? DATABASE_POPOVER_STAT_TOKEN_CLASS : DATABASE_STAT_TOKEN_CLASS}>
+        <span
+          className={
+            variant === 'popover' ? DATABASE_POPOVER_STAT_TOKEN_CLASS : DATABASE_STAT_TOKEN_CLASS
+          }
+        >
           {segment.name}
         </span>
       )
@@ -67,7 +79,7 @@ export function RichSegmentRenderer({
           <button
             className={DATABASE_INTERACTIVE_TOKEN_CLASS}
             onClick={(event) => onMechanicClick(tag, event)}
-            style={{ fontSize: 'inherit' }}
+            style={{fontSize: 'inherit'}}
             type="button"
           >
             {segment.name}
@@ -75,17 +87,14 @@ export function RichSegmentRenderer({
         )
       }
       return (
-        <span
-          className={DATABASE_UNIMPLEMENTED_TOKEN_CLASS}
-          title="Details coming soon"
-        >
+        <span className={DATABASE_UNIMPLEMENTED_TOKEN_CLASS} title="Details coming soon">
           {segment.name}
         </span>
       )
     }
 
     case 'realm':
-      return <span style={{ color: getDatabaseRealmTint(segment.name) }}>{segment.name}</span>
+      return <span style={{color: getDatabaseRealmTint(segment.name)}}>{segment.name}</span>
 
     case 'scaling':
       return (
@@ -111,14 +120,18 @@ function RichScalingSegment({
   variant: RichSegmentRendererVariant
 }) {
   if (variant === 'popover') {
-    const { values, suffix, stat } = segment
+    const {values, suffix, stat} = segment
     const display = formatScalingRange(values, suffix)
     const computed = computeStatRange(values, suffix, stat, stats)
     if (computed) {
       return (
         <span>
           <span className={DATABASE_POPOVER_SCALING_TOKEN_CLASS}>{computed}</span>
-          <span className="text-slate-500"> ({display}{stat ? ` ${stat}` : ''})</span>
+          <span className="text-slate-500">
+            {' '}
+            ({display}
+            {stat ? ` ${stat}` : ''})
+          </span>
         </span>
       )
     }
@@ -143,21 +156,20 @@ function RichScalingSegment({
 
   if (computed !== null) {
     return (
-      <span
-        className={DATABASE_SCALING_TOKEN_CLASS}
-        title={hoverText}
-      >
+      <span className={DATABASE_SCALING_TOKEN_CLASS} title={hoverText}>
         <span>{computed}</span>
-        <span className="text-slate-500"> ({displayValue}{segment.suffix}{segment.stat ? ` ${segment.stat}` : ''})</span>
+        <span className="text-slate-500">
+          {' '}
+          ({displayValue}
+          {segment.suffix}
+          {segment.stat ? ` ${segment.stat}` : ''})
+        </span>
       </span>
     )
   }
 
   return (
-    <span
-      className={DATABASE_SCALING_TOKEN_CLASS}
-      title={hoverText}
-    >
+    <span className={DATABASE_SCALING_TOKEN_CLASS} title={hoverText}>
       {displayValue}
       {segment.suffix}
       {segment.stat ? (

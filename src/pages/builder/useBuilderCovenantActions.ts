@@ -1,6 +1,7 @@
-import { useCallback } from 'react'
-import { assignCovenantToSlot, swapCovenantAssignments } from './team-state'
-import type { ActiveSelection, TeamSlot } from './types'
+import {useCallback} from 'react'
+
+import {assignCovenantToSlot, swapCovenantAssignments} from './team-state'
+import type {ActiveSelection, TeamSlot} from './types'
 
 type UseBuilderCovenantActionsOptions = {
   teamSlots: TeamSlot[]
@@ -30,13 +31,17 @@ export function useBuilderCovenantActions({
       }
       const result = swapCovenantAssignments(teamSlots, sourceSlotId, targetSlotId)
       setActiveTeamSlots(result.nextSlots)
-      setActiveSelection({ kind: 'covenant', slotId: targetSlotId })
+      setActiveSelection({kind: 'covenant', slotId: targetSlotId})
     },
     [setActiveSelection, setActiveTeamSlots, teamSlots],
   )
 
   const assignPickerCovenantToTarget = useCallback(
-    (covenantId: string | undefined, targetSlotId: string, options?: { setActiveOnAssign?: boolean }) => {
+    (
+      covenantId: string | undefined,
+      targetSlotId: string,
+      options?: {setActiveOnAssign?: boolean},
+    ) => {
       const targetSlot = teamSlots.find((slot) => slot.slotId === targetSlotId)
       if (!targetSlot?.awakenerName) {
         return
@@ -45,7 +50,7 @@ export function useBuilderCovenantActions({
       const result = assignCovenantToSlot(teamSlots, targetSlotId, covenantId)
       setActiveTeamSlots(result.nextSlots)
       if (options?.setActiveOnAssign ?? true) {
-        setActiveSelection({ kind: 'covenant', slotId: targetSlotId })
+        setActiveSelection({kind: 'covenant', slotId: targetSlotId})
       }
       onPickerAssignSuccess?.(result.nextSlots)
     },
@@ -56,7 +61,7 @@ export function useBuilderCovenantActions({
     (covenantId: string, targetSlotId: string) => {
       clearPendingDelete()
       clearTransfer()
-      assignPickerCovenantToTarget(covenantId, targetSlotId, { setActiveOnAssign: true })
+      assignPickerCovenantToTarget(covenantId, targetSlotId, {setActiveOnAssign: true})
     },
     [assignPickerCovenantToTarget, clearPendingDelete, clearTransfer],
   )
@@ -79,7 +84,10 @@ export function useBuilderCovenantActions({
     (covenantId?: string) => {
       clearPendingDelete()
       clearTransfer()
-      if (resolvedActiveSelection?.kind !== 'covenant' && resolvedActiveSelection?.kind !== 'awakener') {
+      if (
+        resolvedActiveSelection?.kind !== 'covenant' &&
+        resolvedActiveSelection?.kind !== 'awakener'
+      ) {
         showToast('Select a covenant slot on a unit card first.')
         return
       }
@@ -89,7 +97,13 @@ export function useBuilderCovenantActions({
         setActiveOnAssign: resolvedActiveSelection.kind === 'covenant',
       })
     },
-    [assignPickerCovenantToTarget, clearPendingDelete, clearTransfer, resolvedActiveSelection, showToast],
+    [
+      assignPickerCovenantToTarget,
+      clearPendingDelete,
+      clearTransfer,
+      resolvedActiveSelection,
+      showToast,
+    ],
   )
 
   return {

@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
-import { CollectionLevelStepButton } from './CollectionLevelStepButton'
+import {useEffect, useRef, useState} from 'react'
+
+import {CollectionLevelStepButton} from './CollectionLevelStepButton'
 
 type AwakenerLevelControlProps = {
   name: string

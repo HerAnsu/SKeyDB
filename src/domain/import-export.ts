@@ -1,10 +1,11 @@
-import { getAwakeners } from './awakeners'
-import { getCovenants } from './covenants'
-import { decodeIngameTeamCode, type IngameImportWarning } from './ingame-codec'
-import { getPosses } from './posses'
-import { getWheels } from './wheels'
-import { createEmptyTeamSlots } from '../pages/builder/constants'
-import type { Team, TeamSlot } from '../pages/builder/types'
+import {createEmptyTeamSlots} from '@/pages/builder/constants'
+import type {Team, TeamSlot} from '@/pages/builder/types'
+
+import {getAwakeners} from './awakeners'
+import {getCovenants} from './covenants'
+import {decodeIngameTeamCode, type IngameImportWarning} from './ingame-codec'
+import {getPosses} from './posses'
+import {getWheels} from './wheels'
 
 const singlePrefix = 't1.'
 const multiPrefix = 'mt1.'
@@ -31,8 +32,8 @@ const covenantIndexById = new Map(covenants.map((covenant, index) => [covenant.i
 const covenantIdByIndex = new Map(covenants.map((covenant, index) => [index + 1, covenant.id]))
 
 export type DecodedImport =
-  | { kind: 'single'; team: Team; warnings?: IngameImportWarning[] }
-  | { kind: 'multi'; teams: Team[]; activeTeamIndex: number }
+  | {kind: 'single'; team: Team; warnings?: IngameImportWarning[]}
+  | {kind: 'multi'; teams: Team[]; activeTeamIndex: number}
 
 function extractImportCodeCandidate(rawValue: string): string {
   const trimmed = rawValue.trim()
@@ -76,19 +77,20 @@ function base64UrlToBytes(value: string): Uint8Array {
   return Uint8Array.from(binary, (char) => char.charCodeAt(0))
 }
 
-function pushSlotBytes(buffer: number[], slot: TeamSlot, options?: { includeSupport?: boolean }) {
-  const awakenerId = slot.awakenerName ? awakenerIdByName.get(slot.awakenerName) ?? 0 : 0
+function pushSlotBytes(buffer: number[], slot: TeamSlot, options?: {includeSupport?: boolean}) {
+  const awakenerId = slot.awakenerName ? (awakenerIdByName.get(slot.awakenerName) ?? 0) : 0
   if (awakenerId > 255) {
     throw new Error('Awakener ID exceeds export format limits.')
   }
-  const rawLevel = awakenerId ? slot.level ?? 0 : 0
+  const rawLevel = awakenerId ? (slot.level ?? 0) : 0
   if (rawLevel < 0 || rawLevel > levelValueMask) {
     throw new Error('Awakener level exceeds export format limits.')
   }
-  const level = options?.includeSupport && awakenerId && slot.isSupport ? rawLevel | supportLevelFlag : rawLevel
-  const wheelOne = awakenerId && slot.wheels[0] ? wheelIndexById.get(slot.wheels[0]) ?? 0 : 0
-  const wheelTwo = awakenerId && slot.wheels[1] ? wheelIndexById.get(slot.wheels[1]) ?? 0 : 0
-  const covenant = awakenerId && slot.covenantId ? covenantIndexById.get(slot.covenantId) ?? 0 : 0
+  const level =
+    options?.includeSupport && awakenerId && slot.isSupport ? rawLevel | supportLevelFlag : rawLevel
+  const wheelOne = awakenerId && slot.wheels[0] ? (wheelIndexById.get(slot.wheels[0]) ?? 0) : 0
+  const wheelTwo = awakenerId && slot.wheels[1] ? (wheelIndexById.get(slot.wheels[1]) ?? 0) : 0
+  const covenant = awakenerId && slot.covenantId ? (covenantIndexById.get(slot.covenantId) ?? 0) : 0
   if (wheelOne > 255 || wheelTwo > 255) {
     throw new Error('Equipment index exceeds export format limits.')
   }
@@ -99,8 +101,8 @@ function pushSlotBytes(buffer: number[], slot: TeamSlot, options?: { includeSupp
   buffer.push(awakenerId, level, wheelOne, wheelTwo, covenant)
 }
 
-function pushTeamBytes(buffer: number[], team: Team, options?: { includeSupport?: boolean }) {
-  const posseIndex = team.posseId ? posseIndexById.get(team.posseId) ?? 0 : 0
+function pushTeamBytes(buffer: number[], team: Team, options?: {includeSupport?: boolean}) {
+  const posseIndex = team.posseId ? (posseIndexById.get(team.posseId) ?? 0) : 0
   if (posseIndex > 255) {
     throw new Error('Posse index exceeds export format limits.')
   }
@@ -111,7 +113,12 @@ function pushTeamBytes(buffer: number[], team: Team, options?: { includeSupport?
   }
 }
 
-function decodeSlot(bytes: Uint8Array, offset: number, slotId: string, options?: { includeSupport?: boolean }): TeamSlot {
+function decodeSlot(
+  bytes: Uint8Array,
+  offset: number,
+  slotId: string,
+  options?: {includeSupport?: boolean},
+): TeamSlot {
   const awakenerId = bytes[offset]
   const encodedLevel = bytes[offset + 1]
   const wheelOne = bytes[offset + 2]
@@ -141,7 +148,10 @@ function decodeSlot(bytes: Uint8Array, offset: number, slotId: string, options?:
     level: awakener ? level || 60 : undefined,
     isSupport: awakener && isSupport ? true : undefined,
     wheels: awakener
-      ? [wheelOne ? wheelIdByIndex.get(wheelOne)! : null, wheelTwo ? wheelIdByIndex.get(wheelTwo)! : null]
+      ? [
+          wheelOne ? wheelIdByIndex.get(wheelOne)! : null,
+          wheelTwo ? wheelIdByIndex.get(wheelTwo)! : null,
+        ]
       : [null, null],
     covenantId: awakener && covenant ? covenantIdByIndex.get(covenant) : undefined,
   }
@@ -151,8 +161,8 @@ function decodeTeam(
   bytes: Uint8Array,
   offset: number,
   teamIndex: number,
-  options?: { includeSupport?: boolean },
-): { team: Team; nextOffset: number } {
+  options?: {includeSupport?: boolean},
+): {team: Team; nextOffset: number} {
   if (offset + 1 > bytes.length) {
     throw new Error('Corrupted import code: missing team header.')
   }
@@ -195,13 +205,16 @@ export function encodeMultiTeamCode(teams: Team[], activeTeamId: string): string
   if (teams.length > 255) {
     throw new Error('Too many teams to export.')
   }
-  const activeTeamIndex = Math.max(0, teams.findIndex((team) => team.id === activeTeamId))
+  const activeTeamIndex = Math.max(
+    0,
+    teams.findIndex((team) => team.id === activeTeamId),
+  )
   if (activeTeamIndex > 255) {
     throw new Error('Active team index exceeds export format limits.')
   }
 
   const buffer: number[] = [activeTeamIndex, teams.length]
-  teams.forEach((team) => pushTeamBytes(buffer, team, { includeSupport: true }))
+  teams.forEach((team) => pushTeamBytes(buffer, team, {includeSupport: true}))
   return `${multiPrefix}${bytesToBase64Url(Uint8Array.from(buffer))}`
 }
 
@@ -220,7 +233,7 @@ export function decodeImportCode(code: string): DecodedImport {
     if (decoded.nextOffset !== bytes.length) {
       throw new Error('Corrupted import code: trailing data in single-team payload.')
     }
-    return { kind: 'single', team: decoded.team }
+    return {kind: 'single', team: decoded.team}
   }
 
   if (trimmed.startsWith(multiPrefix)) {
@@ -240,7 +253,7 @@ export function decodeImportCode(code: string): DecodedImport {
 
     const teams: Team[] = []
     for (let teamIndex = 0; teamIndex < teamCount; teamIndex += 1) {
-      const decoded = decodeTeam(bytes, offset, teamIndex, { includeSupport: true })
+      const decoded = decodeTeam(bytes, offset, teamIndex, {includeSupport: true})
       teams.push(decoded.team)
       offset = decoded.nextOffset
     }

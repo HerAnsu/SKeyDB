@@ -1,6 +1,7 @@
-import { useState, type Dispatch, type SetStateAction } from 'react'
-import { deleteTeam } from './team-collection'
-import type { Team } from './types'
+import {useState, type Dispatch, type SetStateAction} from 'react'
+
+import {deleteTeam} from './team-collection'
+import type {Team} from './types'
 
 type PendingDeleteTeam = {
   id: string
@@ -44,7 +45,7 @@ export function usePendingDeleteDialog({
       applyDeleteTeam(teamId)
       return
     }
-    setPendingDeleteTeam({ id: teamId, name: teamName })
+    setPendingDeleteTeam({id: teamId, name: teamName})
   }
 
   function confirmDeleteTeam() {

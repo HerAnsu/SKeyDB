@@ -1,12 +1,14 @@
-import { useCallback } from 'react'
-import type { Awakener } from '../../domain/awakeners'
-import type { AwakenerFull, AwakenerFullStats } from '../../domain/awakeners-full'
-import { getRelicPortraitAssetByAssetId } from '../../domain/relic-assets'
-import { getPortraitRelicByAwakenerIngameId } from '../../domain/relics'
-import { DetailSection, type DetailSectionItem } from './DetailSection'
-import { scaledFontStyle } from './font-scale'
-import { RichDescription } from './RichDescription'
-import { DATABASE_SECTION_TITLE_CLASS } from './text-styles'
+import {useCallback} from 'react'
+
+import type {Awakener} from '@/domain/awakeners'
+import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
+import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
+import {getPortraitRelicByAwakenerIngameId} from '@/domain/relics'
+
+import {DetailSection, type DetailSectionItem} from './DetailSection'
+import {scaledFontStyle} from './font-scale'
+import {RichDescription} from './RichDescription'
+import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
 type AwakenerDetailOverviewProps = {
   awakener: Awakener
@@ -49,7 +51,8 @@ export function AwakenerDetailOverview({
   const enlightenItems: DetailSectionItem[] = []
   for (const key of ENLIGHTEN_ORDER) {
     const entry = fullData.enlightens[key]
-    if (entry) enlightenItems.push({ key, label: key, name: entry.name, description: entry.description })
+    if (entry)
+      enlightenItems.push({key, label: key, name: entry.name, description: entry.description})
   }
   const absoluteAxiom = fullData.enlightens['AbsoluteAxiom'] ?? fullData.enlightens['E4']
   if (absoluteAxiom) {
@@ -64,7 +67,7 @@ export function AwakenerDetailOverview({
   const talentItems: DetailSectionItem[] = []
   for (const key of TALENT_ORDER) {
     const entry = fullData.talents[key]
-    if (entry) talentItems.push({ key, label: key, name: entry.name, description: entry.description })
+    if (entry) talentItems.push({key, label: key, name: entry.name, description: entry.description})
   }
 
   const portraitRelic = getPortraitRelicByAwakenerIngameId(awakener.ingameId)
@@ -75,10 +78,9 @@ export function AwakenerDetailOverview({
   return (
     <div className="space-y-4">
       <div className="border border-slate-600/30 bg-slate-900/30">
-        <h4
-          className={DATABASE_SECTION_TITLE_CLASS}
-          style={scaledFontStyle(14)}
-        >Dimensional Image</h4>
+        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
+          Dimensional Image
+        </h4>
         {portraitRelic ? (
           <div className="px-4 py-3">
             <div className="flex items-start gap-3">
@@ -95,10 +97,7 @@ export function AwakenerDetailOverview({
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <p
-                  className="leading-relaxed text-slate-400"
-                  style={scaledFontStyle(12)}
-                >
+                <p className="leading-relaxed text-slate-400" style={scaledFontStyle(12)}>
                   {renderDescription(portraitRelic.description)}
                 </p>
               </div>

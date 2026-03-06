@@ -1,11 +1,12 @@
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { SegmentedControl } from '../../components/ui/SegmentedControl'
-import { getPosseAssetById } from '../../domain/posse-assets'
-import type { Posse } from '../../domain/posses'
-import type { TeamTemplateId } from './team-collection'
-import { MAX_TEAMS } from './team-collection'
-import { BuilderTeamRow } from './BuilderTeamRow'
-import type { Team, TeamPreviewMode } from './types'
+import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable'
+
+import {SegmentedControl} from '@/components/ui/SegmentedControl'
+import {getPosseAssetById} from '@/domain/posse-assets'
+import type {Posse} from '@/domain/posses'
+
+import {BuilderTeamRow} from './BuilderTeamRow'
+import {MAX_TEAMS, type TeamTemplateId} from './team-collection'
+import type {Team, TeamPreviewMode} from './types'
 
 type BuilderTeamsPanelProps = {
   teams: Team[]
@@ -33,8 +34,8 @@ type BuilderTeamsPanelProps = {
 
 const EMPTY_OWNERSHIP_MAP = new Map<string, number | null>()
 const teamPreviewModeOptions = [
-  { value: 'compact', label: 'Compact' },
-  { value: 'expanded', label: 'Expanded' },
+  {value: 'compact', label: 'Compact'},
+  {value: 'expanded', label: 'Expanded'},
 ] as const
 
 export function BuilderTeamsPanel({
@@ -63,10 +64,12 @@ export function BuilderTeamsPanel({
   return (
     <div className="border border-slate-500/45 bg-slate-900/45 p-3">
       <div className="flex items-center justify-between">
-        <p className="text-xs uppercase tracking-wide text-slate-300">Teams ({teams.length}/{MAX_TEAMS})</p>
+        <p className="text-xs tracking-wide text-slate-300 uppercase">
+          Teams ({teams.length}/{MAX_TEAMS})
+        </p>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] uppercase tracking-wide text-slate-400">View:</span>
+            <span className="text-[10px] tracking-wide text-slate-400 uppercase">View:</span>
             <SegmentedControl
               activeButtonClassName="builder-team-preview-mode-button-active"
               ariaLabel="Team preview mode"
@@ -79,7 +82,7 @@ export function BuilderTeamsPanel({
           </div>
           <span aria-hidden className="h-5 w-px bg-slate-500/45" />
           <div className="flex items-center gap-1">
-            <span className="text-[10px] uppercase tracking-wide text-slate-400">Templates:</span>
+            <span className="text-[10px] tracking-wide text-slate-400 uppercase">Templates:</span>
             <button
               className="border border-slate-500/45 bg-slate-900/55 px-2 py-1 text-[11px] text-slate-200 transition-colors hover:border-amber-200/45 disabled:opacity-40"
               onClick={() => onApplyTeamTemplate('DTIDE_5')}
@@ -110,7 +113,9 @@ export function BuilderTeamsPanel({
         <div className="mt-2 space-y-2">
           {teams.map((team) => {
             const isEditingTeamName = editingTeamId === team.id && editingTeamSurface === 'list'
-            const posse = team.posseId ? posses.find((entry) => entry.id === team.posseId) : undefined
+            const posse = team.posseId
+              ? posses.find((entry) => entry.id === team.posseId)
+              : undefined
             const posseAsset = posse ? getPosseAssetById(posse.id) : undefined
             return (
               <BuilderTeamRow

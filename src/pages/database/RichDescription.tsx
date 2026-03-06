@@ -1,15 +1,11 @@
-import { useCallback, useEffect, useId, useState } from 'react'
-import { createPortal } from 'react-dom'
-import {
-  parseRichDescription,
-} from '../../domain/rich-text'
-import type { AwakenerFull, AwakenerCard } from '../../domain/awakeners-full'
-import type { AwakenerFullStats } from '../../domain/awakeners-full'
-import { type Tag } from '../../domain/tags'
-import { PopoverTrailPanel } from './PopoverTrailPanel'
-import { RichSegmentRenderer } from './RichSegmentRenderer'
-import { SkillPopover } from './SkillPopover'
-import { TagPopover } from './TagPopover'
+import {useCallback, useEffect, useId, useState} from 'react'
+
+import {createPortal} from 'react-dom'
+
+import type {AwakenerCard, AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
+import {parseRichDescription} from '@/domain/rich-text'
+import {type Tag} from '@/domain/tags'
+
 import {
   closeTrailFromIndex,
   closeTrailTop as closeTrailTopEntry,
@@ -20,6 +16,10 @@ import {
   type TagTrailEntry,
   type TrailEntry,
 } from './popover-trail'
+import {PopoverTrailPanel} from './PopoverTrailPanel'
+import {RichSegmentRenderer} from './RichSegmentRenderer'
+import {SkillPopover} from './SkillPopover'
+import {TagPopover} from './TagPopover'
 
 type RichDescriptionProps = {
   text: string
@@ -45,9 +45,10 @@ export function RichDescription({
   skillLevel,
   onNavigateToCards,
 }: RichDescriptionProps) {
-  const rouseAwareCards = (fullData && fullData.cards['C1'] && !cardNames.has('Rouse'))
-    ? new Set([...cardNames, 'Rouse'])
-    : cardNames
+  const rouseAwareCards =
+    fullData && fullData.cards['C1'] && !cardNames.has('Rouse')
+      ? new Set([...cardNames, 'Rouse'])
+      : cardNames
   const segments = parseRichDescription(text, rouseAwareCards)
   const [trail, setTrail] = useState<TrailEntry[]>([])
   const [trailAnchorRect, setTrailAnchorRect] = useState<DOMRect | null>(null)
@@ -62,7 +63,7 @@ export function RichDescription({
 
   useEffect(() => {
     function handleTrailOpened(event: Event) {
-      const detail = (event as CustomEvent<{ ownerId?: string }>).detail
+      const detail = (event as CustomEvent<{ownerId?: string}>).detail
       if (detail?.ownerId === ownerId) {
         return
       }
@@ -74,7 +75,7 @@ export function RichDescription({
   }, [clearTrail, ownerId])
 
   const announceTrailOpened = useCallback(() => {
-    window.dispatchEvent(new CustomEvent(TRAIL_OPENED_EVENT, { detail: { ownerId } }))
+    window.dispatchEvent(new CustomEvent(TRAIL_OPENED_EVENT, {detail: {ownerId}}))
   }, [ownerId])
 
   const handleSkillClick = useCallback(
@@ -226,28 +227,34 @@ function buildTagTrailEntry(tag: Tag): TagTrailEntry {
 function resolveCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
   if (name === 'Rouse') {
     const c1 = fullData.cards['C1']
-    if (c1) return { card: c1, label: `Rouse · Cost ${c1.cost}` }
+    if (c1) return {card: c1, label: `Rouse · Cost ${c1.cost}`}
   }
   for (const [key, card] of Object.entries(fullData.cards)) {
     if (card.name === name) {
       const slotLabel = key === 'C1' ? 'Rouse' : key
-      return { card, label: `${slotLabel} · Cost ${card.cost}` }
+      return {card, label: `${slotLabel} · Cost ${card.cost}`}
     }
   }
   if (fullData.exalts.exalt.name === name) {
-    return { card: { name, cost: '—', description: fullData.exalts.exalt.description }, label: 'Exalt' }
+    return {card: {name, cost: '—', description: fullData.exalts.exalt.description}, label: 'Exalt'}
   }
   if (fullData.exalts.over_exalt.name === name) {
-    return { card: { name, cost: '—', description: fullData.exalts.over_exalt.description }, label: 'Over Exalt' }
+    return {
+      card: {name, cost: '—', description: fullData.exalts.over_exalt.description},
+      label: 'Over Exalt',
+    }
   }
   for (const [key, talent] of Object.entries(fullData.talents)) {
     if (talent.name === name) {
-      return { card: { name, cost: '—', description: talent.description }, label: `Talent · ${key}` }
+      return {card: {name, cost: '—', description: talent.description}, label: `Talent · ${key}`}
     }
   }
   for (const [key, enlighten] of Object.entries(fullData.enlightens)) {
     if (enlighten.name === name) {
-      return { card: { name, cost: '—', description: enlighten.description }, label: `Enlighten · ${key}` }
+      return {
+        card: {name, cost: '—', description: enlighten.description},
+        label: `Enlighten · ${key}`,
+      }
     }
   }
   return null

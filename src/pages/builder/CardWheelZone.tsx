@@ -1,10 +1,11 @@
-import { useDraggable, useDroppable } from '@dnd-kit/core'
-import { DupeLevelDisplay } from '../../components/ui/DupeLevelDisplay'
-import { getCovenantAssetById } from '../../domain/covenant-assets'
-import { getWheelAssetById } from '../../domain/wheel-assets'
-import { makeCovenantDropZoneId, makeWheelDropZoneId } from './dnd-ids'
-import type { DragData } from './types'
-import type { PredictedDropHover, TeamSlot } from './types'
+import {useDraggable, useDroppable} from '@dnd-kit/core'
+
+import {DupeLevelDisplay} from '@/components/ui/DupeLevelDisplay'
+import {getCovenantAssetById} from '@/domain/covenant-assets'
+import {getWheelAssetById} from '@/domain/wheel-assets'
+
+import {makeCovenantDropZoneId, makeWheelDropZoneId} from './dnd-ids'
+import type {DragData, PredictedDropHover, TeamSlot} from './types'
 
 type CardWheelZoneProps = {
   slot: TeamSlot
@@ -115,12 +116,21 @@ function renderCovenantTileVisual(covenantId: string | undefined) {
 
   const asset = getCovenantAssetById(covenantId)
   if (!asset) {
-    return <span className={`${contentClassName} bg-[linear-gradient(180deg,#1e3a5f_0%,#0b1220_100%)]`} />
+    return (
+      <span
+        className={`${contentClassName} bg-[linear-gradient(180deg,#1e3a5f_0%,#0b1220_100%)]`}
+      />
+    )
   }
 
   return (
     <span className={`${contentClassName} bg-slate-950/85`}>
-      <img alt="" className="builder-card-covenant-image h-full w-full object-cover" draggable={false} src={asset} />
+      <img
+        alt=""
+        className="builder-card-covenant-image h-full w-full object-cover"
+        draggable={false}
+        src={asset}
+      />
     </span>
   )
 }
@@ -136,12 +146,19 @@ function renderWheelTileVisual(wheelId: string | null) {
 
   const asset = getWheelAssetById(wheelId)
   if (!asset) {
-    return <span className="wheel-tile-content absolute inset-[2px] border border-slate-200/20 bg-[linear-gradient(180deg,#1e3a5f_0%,#0b1220_100%)]" />
+    return (
+      <span className="wheel-tile-content absolute inset-[2px] border border-slate-200/20 bg-[linear-gradient(180deg,#1e3a5f_0%,#0b1220_100%)]" />
+    )
   }
 
   return (
     <span className="wheel-tile-content absolute inset-[2px] overflow-hidden border border-slate-200/20">
-      <img alt={`${wheelId} wheel`} className="builder-card-wheel-image h-full w-full object-cover" draggable={false} src={asset} />
+      <img
+        alt={`${wheelId} wheel`}
+        className="builder-card-wheel-image h-full w-full object-cover"
+        draggable={false}
+        src={asset}
+      />
     </span>
   )
 }
@@ -156,17 +173,24 @@ function CardCovenantTile({
   onClick,
 }: CardCovenantTileProps) {
   const dropZoneId = makeCovenantDropZoneId(slotId)
-  const { isOver, setNodeRef: setDroppableRef } = useDroppable({ id: dropZoneId })
+  const {isOver, setNodeRef: setDroppableRef} = useDroppable({id: dropZoneId})
   const draggableEnabled = interactive && Boolean(covenantId)
-  const { attributes, listeners, isDragging, setNodeRef: setDraggableRef } = useDraggable({
+  const {
+    attributes,
+    listeners,
+    isDragging,
+    setNodeRef: setDraggableRef,
+  } = useDraggable({
     id: `team-covenant:${slotId}`,
     data: draggableEnabled
-      ? ({ kind: 'team-covenant', slotId, covenantId: covenantId! } satisfies DragData)
+      ? ({kind: 'team-covenant', slotId, covenantId: covenantId!} satisfies DragData)
       : undefined,
     disabled: !draggableEnabled,
   })
-  const canShowDirectOver = activeDragKind === 'picker-covenant' || activeDragKind === 'team-covenant'
-  const isPredictedOver = predictedDropHover?.kind === 'covenant' && predictedDropHover.slotId === slotId
+  const canShowDirectOver =
+    activeDragKind === 'picker-covenant' || activeDragKind === 'team-covenant'
+  const isPredictedOver =
+    predictedDropHover?.kind === 'covenant' && predictedDropHover.slotId === slotId
   const showOver = isPredictedOver || (isOver && canShowDirectOver)
 
   const tileClassName = `covenant-tile group/covenant relative z-20 aspect-square ${
@@ -209,12 +233,17 @@ function CardWheelTile({
   onClick,
 }: CardWheelTileProps) {
   const dropZoneId = makeWheelDropZoneId(slotId, wheelIndex)
-  const { isOver, setNodeRef: setDroppableRef } = useDroppable({ id: dropZoneId })
+  const {isOver, setNodeRef: setDroppableRef} = useDroppable({id: dropZoneId})
   const draggableEnabled = interactive && Boolean(wheelId)
-  const { attributes, listeners, isDragging, setNodeRef: setDraggableRef } = useDraggable({
+  const {
+    attributes,
+    listeners,
+    isDragging,
+    setNodeRef: setDraggableRef,
+  } = useDraggable({
     id: `team-wheel:${slotId}:${wheelIndex}`,
     data: draggableEnabled
-      ? ({ kind: 'team-wheel', slotId, wheelIndex, wheelId: wheelId! } satisfies DragData)
+      ? ({kind: 'team-wheel', slotId, wheelIndex, wheelId: wheelId!} satisfies DragData)
       : undefined,
     disabled: !draggableEnabled,
   })
@@ -270,7 +299,7 @@ function CardWheelTile({
       {showOwnership && wheelId ? (
         isOwned ? (
           <DupeLevelDisplay
-            className="pb-1 builder-wheel-dupe builder-wheel-dupe-stacked builder-dupe-owned"
+            className="builder-wheel-dupe builder-wheel-dupe-stacked builder-dupe-owned pb-1"
             level={ownedLevel}
           />
         ) : (
@@ -338,11 +367,11 @@ export function CardWheelZone({
         {slot.wheels.map((wheelId, index) => (
           <CardWheelTile
             activeDragKind={activeDragKind}
-          interactive={interactive}
-          isActive={activeWheelIndex === index}
-          key={`${wheelKeyPrefix}-wheel-${index}`}
-          allowActiveRemoval={allowActiveRemoval}
-          onClick={onWheelSlotClick}
+            interactive={interactive}
+            isActive={activeWheelIndex === index}
+            key={`${wheelKeyPrefix}-wheel-${index}`}
+            allowActiveRemoval={allowActiveRemoval}
+            onClick={onWheelSlotClick}
             ownedLevel={wheelOwnedLevels[index] ?? null}
             showOwnership={showOwnership}
             onRemove={allowActiveRemoval ? onRemoveActiveWheel : undefined}
