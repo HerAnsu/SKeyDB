@@ -2,8 +2,8 @@ import {describe, expect, it, vi} from 'vitest'
 
 import type {Awakener} from '@/domain/awakeners'
 
-import type {ActiveSelection, TeamSlot} from './types'
 import {createBuilderAwakenerActions} from './createBuilderAwakenerActions'
+import type {ActiveSelection, TeamSlot} from './types'
 
 const awakenerByName = new Map<string, Awakener>([
   [

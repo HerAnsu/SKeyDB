@@ -1,11 +1,11 @@
-export type TeamMember = {
+export interface TeamMember {
   awakenerId: string
   realm: string
   wheelIds: string[]
   isSupport?: boolean
 }
 
-export type TeamPlan = {
+export interface TeamPlan {
   id: string
   posseId?: string
   members: TeamMember[]
@@ -19,14 +19,14 @@ export type RuleViolationCode =
   | 'DUPLICATE_POSSE'
   | 'MULTIPLE_SUPPORT_AWAKENERS'
 
-export type RuleViolation = {
+export interface RuleViolation {
   code: RuleViolationCode
   message: string
   teamId?: string
   value?: string
 }
 
-export type TeamRulesConfig = {
+export interface TeamRulesConfig {
   maxTeams: number
   maxRealmsPerTeam: number
   enforceUniqueAwakeners: boolean
@@ -34,13 +34,13 @@ export type TeamRulesConfig = {
   enforceUniquePosses: boolean
 }
 
-type SharedSeenState = {
+interface SharedSeenState {
   awakeners: Set<string>
   wheels: Set<string>
   posses: Set<string>
 }
 
-type TeamSeenState = {
+interface TeamSeenState {
   awakeners: Set<string>
   wheels: Set<string>
 }
@@ -53,12 +53,12 @@ export const DEFAULT_TEAM_RULES_CONFIG: TeamRulesConfig = {
   enforceUniquePosses: true,
 }
 
-export function getDistinctRealmsForTeam(members: Array<Pick<TeamMember, 'realm'>>): Set<string> {
+export function getDistinctRealmsForTeam(members: Pick<TeamMember, 'realm'>[]): Set<string> {
   return new Set(members.map((member) => member.realm.trim().toUpperCase()).filter(Boolean))
 }
 
 export function exceedsRealmLimitForTeam(
-  members: Array<Pick<TeamMember, 'realm'>>,
+  members: Pick<TeamMember, 'realm'>[],
   maxRealmsPerTeam: number,
 ): boolean {
   return getDistinctRealmsForTeam(members).size > maxRealmsPerTeam
@@ -67,7 +67,7 @@ export function exceedsRealmLimitForTeam(
 function pushTeamCountViolation(violations: RuleViolation[], maxTeams: number) {
   violations.push({
     code: 'TEAM_COUNT_EXCEEDED',
-    message: `A maximum of ${maxTeams} teams is allowed.`,
+    message: `A maximum of ${String(maxTeams)} teams is allowed.`,
   })
 }
 
@@ -106,7 +106,7 @@ function validateTeamRealmLimit(
 
   violations.push({
     code: 'TOO_MANY_REALMS_IN_TEAM',
-    message: `Team ${team.id} has ${realmsInTeam.size} realms, max is ${settings.maxRealmsPerTeam}.`,
+    message: `Team ${team.id} has ${String(realmsInTeam.size)} realms, max is ${String(settings.maxRealmsPerTeam)}.`,
     teamId: team.id,
   })
 }
@@ -177,7 +177,11 @@ function validateMemberWheels(
   }
 }
 
-function recordMemberUsage(member: TeamMember, sharedSeen: SharedSeenState, teamSeen: TeamSeenState) {
+function recordMemberUsage(
+  member: TeamMember,
+  sharedSeen: SharedSeenState,
+  teamSeen: TeamSeenState,
+) {
   teamSeen.awakeners.add(member.awakenerId)
   if (!member.isSupport) {
     sharedSeen.awakeners.add(member.awakenerId)

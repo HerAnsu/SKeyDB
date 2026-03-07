@@ -1,5 +1,6 @@
-import js from '@eslint/js'
 import {fileURLToPath} from 'node:url'
+
+import js from '@eslint/js'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import sonarjs from 'eslint-plugin-sonarjs'
@@ -74,7 +75,11 @@ export default defineConfig([
   },
   {
     files: ['vite.config.ts'],
-    extends: [js.configs.recommended, tseslint.configs.strictTypeChecked, tseslint.configs.stylisticTypeChecked],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+    ],
     languageOptions: {
       globals: globals.node,
       parserOptions: {

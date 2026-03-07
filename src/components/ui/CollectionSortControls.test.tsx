@@ -15,8 +15,8 @@ describe('CollectionSortControls', () => {
         onGroupByRealmChange={onGroupByRealmChange}
         onSortDirectionToggle={onSortDirectionToggle}
         onSortKeyChange={onSortKeyChange}
-        sortDirection="DESC"
-        sortKey="LEVEL"
+        sortDirection='DESC'
+        sortKey='LEVEL'
       />,
     )
 
@@ -41,8 +41,8 @@ describe('CollectionSortControls', () => {
         onGroupByRealmChange={vi.fn()}
         onSortDirectionToggle={vi.fn()}
         onSortKeyChange={vi.fn()}
-        sortDirection="ASC"
-        sortKey="LEVEL"
+        sortDirection='ASC'
+        sortKey='LEVEL'
       />,
     )
 
@@ -57,8 +57,8 @@ describe('CollectionSortControls', () => {
         onSortDirectionToggle={vi.fn()}
         onSortKeyChange={vi.fn()}
         showGroupByRealm={false}
-        sortDirection="DESC"
-        sortKey="LEVEL"
+        sortDirection='DESC'
+        sortKey='LEVEL'
       />,
     )
 
@@ -71,12 +71,12 @@ describe('CollectionSortControls', () => {
     render(
       <CollectionSortControls
         groupByRealm={false}
-        layout="compact"
+        layout='compact'
         onGroupByRealmChange={vi.fn()}
         onSortDirectionToggle={vi.fn()}
         onSortKeyChange={vi.fn()}
-        sortDirection="DESC"
-        sortKey="LEVEL"
+        sortDirection='DESC'
+        sortKey='LEVEL'
       />,
     )
 

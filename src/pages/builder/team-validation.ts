@@ -3,7 +3,7 @@ import {validateTeamPlan, type RuleViolation} from '@/domain/team-rules'
 import {toTeamPlan} from './team-plan'
 import type {Team} from './types'
 
-type ValidateBuilderTeamsOptions = {
+interface ValidateBuilderTeamsOptions {
   allowDupes?: boolean
 }
 

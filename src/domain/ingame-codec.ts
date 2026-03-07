@@ -11,7 +11,7 @@ const POSSE_TOKEN_LENGTH = 1
 const WHEEL_TOKENS_PER_SLOT = 2
 const COVENANT_SLICES_PER_SLOT = 6
 
-export type IngameImportWarning = {
+export interface IngameImportWarning {
   section: 'awakener' | 'wheel' | 'covenant' | 'posse'
   slotIndex?: number
   field?: 'wheelOne' | 'wheelTwo'
@@ -19,12 +19,12 @@ export type IngameImportWarning = {
   reason: 'unknown_token' | 'unsupported_wip_block' | 'ambiguous_parse'
 }
 
-export type DecodedIngameTeamCode = {
+export interface DecodedIngameTeamCode {
   team: Team
   warnings: IngameImportWarning[]
 }
 
-type WheelCandidate = {
+interface WheelCandidate {
   token: string
   wheelId?: string
   unknown?: boolean
@@ -94,13 +94,7 @@ function parseWheelToken(
   sortedWheelTokens: string[],
 ): {candidate: WheelCandidate; nextCursor: number} {
   const candidates = getWheelCandidatesAt(payload, cursor, wheelTokensByToken, sortedWheelTokens)
-  const [candidate] = candidates
-  if (!candidate) {
-    return {
-      candidate: {token: payload[cursor] ?? 'a', unknown: true},
-      nextCursor: cursor + 1,
-    }
-  }
+  const candidate = candidates[0] ?? {token: payload[cursor] ?? 'a', unknown: true}
   return {
     candidate,
     nextCursor: cursor + candidate.token.length,

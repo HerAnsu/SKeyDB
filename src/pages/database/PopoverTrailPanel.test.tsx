@@ -65,18 +65,23 @@ describe('PopoverTrailPanel', () => {
       return makeRect()
     })
 
+    const onCloseTop = vi.fn()
+
     render(
       <PopoverTrailPanel
         anchorElement={anchorElement}
         anchorRect={anchorRect}
         itemCount={1}
-        onCloseTop={() => {}}
+        onCloseTop={onCloseTop}
       >
         <div>Popover content</div>
       </PopoverTrailPanel>,
     )
 
-    const panel = document.querySelector('[data-skill-popover]') as HTMLDivElement
+    const panel = document.querySelector<HTMLDivElement>('[data-skill-popover]')
+    if (!panel) {
+      throw new Error('Expected popover trail panel to render')
+    }
 
     await waitFor(() => {
       expect(panel.style.top).toBe('126px')

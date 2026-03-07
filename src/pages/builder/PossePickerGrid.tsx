@@ -4,7 +4,11 @@ import type {Posse} from '@/domain/posses'
 import type {Team} from './types'
 import {toOrdinal} from './utils'
 
-function getPosseTileClassName(isActive: boolean, isUsedByOtherTeam: boolean, ownedLevel: number | null) {
+function getPosseTileClassName(
+  isActive: boolean,
+  isUsedByOtherTeam: boolean,
+  ownedLevel: number | null,
+) {
   if (isActive) {
     return 'border-amber-200/60 bg-slate-800/80'
   }
@@ -35,7 +39,7 @@ function getPosseTopLabel(blockedText: string | null, ownedLevel: number | null)
   return null
 }
 
-type PossePickerTileProps = {
+interface PossePickerTileProps {
   posse: Posse
   posseAsset?: string
   isActive: boolean
@@ -67,15 +71,22 @@ function PossePickerTile({
         isUsedByOtherTeam,
         ownedLevel,
       )}`}
-      onClick={onClick}
-      type="button"
+      onClick={() => {
+        onClick()
+      }}
+      type='button'
     >
-      <div className="relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70">
+      <div className='relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70'>
         {posseAsset ? (
-          <img alt={`${posse.name} posse`} className={imageClassName} draggable={false} src={posseAsset} />
+          <img
+            alt={`${posse.name} posse`}
+            className={imageClassName}
+            draggable={false}
+            src={posseAsset}
+          />
         ) : (
-          <span className="relative block h-full w-full">
-            <span className="sigil-placeholder" />
+          <span className='relative block h-full w-full'>
+            <span className='sigil-placeholder' />
           </span>
         )}
         {topLabel ? <span className={topLabel.className}>{topLabel.text}</span> : null}
@@ -87,7 +98,7 @@ function PossePickerTile({
   )
 }
 
-type PossePickerGridProps = {
+interface PossePickerGridProps {
   filteredPosses: Posse[]
   activePosseId?: string
   teams: Team[]
@@ -109,22 +120,24 @@ export function PossePickerGrid({
   onSetActivePosse,
 }: PossePickerGridProps) {
   return (
-    <div className="grid grid-cols-4 gap-2">
+    <div className='grid grid-cols-4 gap-2'>
       <button
         className={`border p-1 text-left transition-colors ${
           !activePosseId
             ? 'border-amber-200/60 bg-slate-800/80 text-amber-100'
             : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
         }`}
-        onClick={() => onSetActivePosse(undefined)}
-        type="button"
+        onClick={() => {
+          onSetActivePosse(undefined)
+        }}
+        type='button'
       >
-        <div className="aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70">
-          <span className="builder-disabled-icon">
-            <span className="builder-disabled-icon__glyph" />
+        <div className='aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70'>
+          <span className='builder-disabled-icon'>
+            <span className='builder-disabled-icon__glyph' />
           </span>
         </div>
-        <p className="mt-1 truncate text-[11px] text-slate-200">Not Set</p>
+        <p className='mt-1 truncate text-[11px] text-slate-200'>Not Set</p>
       </button>
 
       {filteredPosses.map((posse) => {
@@ -132,8 +145,11 @@ export function PossePickerGrid({
         const isActive = activePosseId === posse.id
         const usedByTeamOrder = allowDupes ? undefined : usedPosseByTeamOrder.get(posse.id)
         const usedByTeam = usedByTeamOrder === undefined ? undefined : teams[usedByTeamOrder]
-        const isUsedByOtherTeam = usedByTeamOrder !== undefined && usedByTeam?.id !== effectiveActiveTeamId
-        const blockedText = isUsedByOtherTeam ? `Used in ${toOrdinal(usedByTeamOrder + 1)} team` : null
+        const isUsedByOtherTeam =
+          usedByTeamOrder !== undefined && usedByTeam?.id !== effectiveActiveTeamId
+        const blockedText = isUsedByOtherTeam
+          ? `Used in ${toOrdinal(usedByTeamOrder + 1)} team`
+          : null
         const ownedLevel = ownedPosseLevelById.get(posse.id) ?? null
 
         return (
@@ -142,7 +158,9 @@ export function PossePickerGrid({
             isActive={isActive}
             isUsedByOtherTeam={isUsedByOtherTeam}
             key={posse.id}
-            onClick={() => onSetActivePosse(posse.id)}
+            onClick={() => {
+              onSetActivePosse(posse.id)
+            }}
             ownedLevel={ownedLevel}
             posse={posse}
             posseAsset={posseAsset}

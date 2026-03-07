@@ -2,7 +2,7 @@ import {useDraggable} from '@dnd-kit/core'
 
 import type {DragData} from './types'
 
-type PickerCovenantTileProps = {
+interface PickerCovenantTileProps {
   covenantId?: string
   covenantName?: string
   covenantAsset?: string
@@ -18,10 +18,7 @@ function getCovenantDisplayName(
   return isNotSet ? 'Not Set' : (covenantName ?? covenantId)
 }
 
-function getCovenantDragData(
-  draggableEnabled: boolean,
-  covenantId?: string,
-): DragData | undefined {
+function getCovenantDragData(draggableEnabled: boolean, covenantId?: string): DragData | undefined {
   if (!draggableEnabled || !covenantId) {
     return undefined
   }
@@ -29,22 +26,33 @@ function getCovenantDragData(
   return {kind: 'picker-covenant', covenantId}
 }
 
-function renderCovenantPreview(covenantAsset: string | undefined, isNotSet: boolean, altText: string) {
+function renderCovenantPreview(
+  covenantAsset: string | undefined,
+  isNotSet: boolean,
+  altText: string,
+) {
   if (covenantAsset) {
-    return <img alt={altText} className="h-full w-full object-cover" draggable={false} src={covenantAsset} />
+    return (
+      <img
+        alt={altText}
+        className='h-full w-full object-cover'
+        draggable={false}
+        src={covenantAsset}
+      />
+    )
   }
 
   if (isNotSet) {
     return (
-      <span className="builder-disabled-icon">
-        <span className="builder-disabled-icon__glyph" />
+      <span className='builder-disabled-icon'>
+        <span className='builder-disabled-icon__glyph' />
       </span>
     )
   }
 
   return (
-    <span className="relative block h-full w-full">
-      <span className="sigil-placeholder" />
+    <span className='relative block h-full w-full'>
+      <span className='sigil-placeholder' />
     </span>
   )
 }
@@ -56,13 +64,14 @@ export function PickerCovenantTile({
   isNotSet = false,
   onClick,
 }: PickerCovenantTileProps) {
-  const draggableEnabled = !isNotSet && Boolean(covenantId)
-  const covenantDisplayName = getCovenantDisplayName(isNotSet, covenantName, covenantId)
+  const draggableCovenantId = !isNotSet && covenantId ? covenantId : undefined
+  const covenantDisplayName =
+    getCovenantDisplayName(isNotSet, covenantName, covenantId) ?? 'Covenant'
   const altText = `${covenantDisplayName} covenant`
   const {attributes, listeners, isDragging, setNodeRef} = useDraggable({
-    id: draggableEnabled ? `picker-covenant:${covenantId}` : 'picker-covenant:not-set',
-    data: getCovenantDragData(draggableEnabled, covenantId),
-    disabled: !draggableEnabled,
+    id: draggableCovenantId ? `picker-covenant:${draggableCovenantId}` : 'picker-covenant:not-set',
+    data: getCovenantDragData(Boolean(draggableCovenantId), draggableCovenantId),
+    disabled: !draggableCovenantId,
   })
   const dragAttributes = {...attributes} as Record<string, unknown>
   delete dragAttributes['aria-disabled']
@@ -75,14 +84,14 @@ export function PickerCovenantTile({
       }`}
       onClick={onClick}
       ref={setNodeRef}
-      type="button"
-      {...(draggableEnabled ? dragAttributes : {})}
-      {...(draggableEnabled ? listeners : {})}
+      type='button'
+      {...(draggableCovenantId ? dragAttributes : {})}
+      {...(draggableCovenantId ? listeners : {})}
     >
-      <div className="relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70">
+      <div className='relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70'>
         {renderCovenantPreview(covenantAsset, isNotSet, altText)}
       </div>
-      <p className="mt-1 truncate text-[11px] text-slate-200">{covenantDisplayName}</p>
+      <p className='mt-1 truncate text-[11px] text-slate-200'>{covenantDisplayName}</p>
     </button>
   )
 }

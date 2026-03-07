@@ -20,7 +20,7 @@ function getWheelBlockedText(
   return 'Already used'
 }
 
-type WheelPickerGridProps = {
+interface WheelPickerGridProps {
   filteredWheels: Wheel[]
   allowDupes: boolean
   effectiveActiveTeamId: string
@@ -38,8 +38,13 @@ export function WheelPickerGrid({
   onSetActiveWheel,
 }: WheelPickerGridProps) {
   return (
-    <div className="grid grid-cols-4 gap-2">
-      <PickerWheelTile isNotSet onClick={() => onSetActiveWheel(undefined)} />
+    <div className='grid grid-cols-4 gap-2'>
+      <PickerWheelTile
+        isNotSet
+        onClick={() => {
+          onSetActiveWheel(undefined)
+        }}
+      />
 
       {filteredWheels.map((wheel) => {
         const wheelAsset = getWheelAssetById(wheel.id)
@@ -54,7 +59,9 @@ export function WheelPickerGrid({
             isInUse={Boolean(usedByTeam)}
             isOwned={(ownedWheelLevelById.get(wheel.id) ?? null) !== null}
             key={wheel.id}
-            onClick={() => onSetActiveWheel(wheel.id)}
+            onClick={() => {
+              onSetActiveWheel(wheel.id)
+            }}
             wheelAsset={wheelAsset}
             wheelId={wheel.id}
             wheelName={wheel.name}

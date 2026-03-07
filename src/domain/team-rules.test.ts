@@ -34,7 +34,7 @@ describe('validateTeamPlan', () => {
 
   it('rejects plans with more than 10 teams', () => {
     const teams: TeamPlan[] = Array.from({length: 11}, (_, index) => ({
-      id: `team-${index + 1}`,
+      id: `team-${String(index + 1)}`,
       members: [],
     }))
     const result = validateTeamPlan(teams)

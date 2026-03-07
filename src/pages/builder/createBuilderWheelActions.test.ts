@@ -1,7 +1,7 @@
 import {describe, expect, it, vi} from 'vitest'
 
-import type {ActiveSelection, TeamSlot, WheelUsageLocation} from './types'
 import {createBuilderWheelActions} from './createBuilderWheelActions'
+import type {ActiveSelection, TeamSlot, WheelUsageLocation} from './types'
 
 function buildSlots(): TeamSlot[] {
   return [
@@ -103,7 +103,9 @@ describe('createBuilderWheelActions', () => {
         },
       ],
     ])
-    const {actions, requestWheelTransfer, setActiveTeamSlots} = createActions({usedWheelByTeamOrder})
+    const {actions, requestWheelTransfer, setActiveTeamSlots} = createActions({
+      usedWheelByTeamOrder,
+    })
 
     actions.handleDropPickerWheel('B01', 'slot-2', 0)
 

@@ -24,7 +24,7 @@ const sizeClassMap: Record<ButtonSize, string> = {
   sm: 'px-3 py-2 text-sm',
 }
 
-function joinClasses(...classes: Array<string | undefined | false | null>) {
+function joinClasses(...classes: (string | undefined | false | null)[]) {
   return classes.filter(Boolean).join(' ')
 }
 

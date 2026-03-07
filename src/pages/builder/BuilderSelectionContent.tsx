@@ -8,14 +8,10 @@ import {CovenantPickerGrid} from './CovenantPickerGrid'
 import {PICKER_DROP_ZONE_ID} from './dnd-ids'
 import {PickerDropZone} from './PickerDropZone'
 import {PossePickerGrid} from './PossePickerGrid'
+import type {PickerTab, Team, WheelUsageLocation} from './types'
 import {WheelPickerGrid} from './WheelPickerGrid'
-import type {
-  PickerTab,
-  Team,
-  WheelUsageLocation,
-} from './types'
 
-type BuilderSelectionContentProps = {
+interface BuilderSelectionContentProps {
   pickerTab: PickerTab
   allowDupes: boolean
   effectiveActiveTeamId: string
@@ -62,13 +58,13 @@ export function BuilderSelectionContent({
 }: BuilderSelectionContentProps) {
   return (
     <>
-      <p className="mt-2 text-xs text-slate-200">
+      <p className='mt-2 text-xs text-slate-200'>
         Drag and drop from the list to deploy or replace, clicking replaces the active slot, or
         fills an empty one if available.{' '}
       </p>
 
       <PickerDropZone
-        className="builder-picker-scrollbar mt-3 min-h-0 flex-1 overflow-auto pr-1"
+        className='builder-picker-scrollbar mt-3 min-h-0 flex-1 overflow-auto pr-1'
         id={PICKER_DROP_ZONE_ID}
       >
         {pickerTab === 'awakeners' ? (

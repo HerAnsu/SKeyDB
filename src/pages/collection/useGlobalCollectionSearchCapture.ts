@@ -13,7 +13,7 @@ function isTypingTarget(target: EventTarget | null): boolean {
   )
 }
 
-type UseGlobalCollectionSearchCaptureOptions = {
+interface UseGlobalCollectionSearchCaptureOptions {
   searchInputRef: RefObject<HTMLInputElement | null>
   onAppendCharacter: (key: string) => void
   onClearSearch: () => void

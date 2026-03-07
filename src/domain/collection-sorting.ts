@@ -8,7 +8,7 @@ export type AwakenerSortKey =
   | 'DEF'
   | 'CON'
 
-export type SortableCollectionEntry = {
+export interface SortableCollectionEntry {
   label: string
   index: number
   owned?: boolean
@@ -18,7 +18,7 @@ export type SortableCollectionEntry = {
   realm?: string
 }
 
-export type AwakenerSortConfig = {
+export interface AwakenerSortConfig {
   key: AwakenerSortKey
   direction: CollectionSortDirection
   groupByRealm: boolean
@@ -92,7 +92,7 @@ function compareOwnedFirst(left: SortableCollectionEntry, right: SortableCollect
 function compareByPriority(
   left: SortableCollectionEntry,
   right: SortableCollectionEntry,
-  comparators: Array<(left: SortableCollectionEntry, right: SortableCollectionEntry) => number>,
+  comparators: ((left: SortableCollectionEntry, right: SortableCollectionEntry) => number)[],
 ): number {
   for (const comparator of comparators) {
     const result = comparator(left, right)
@@ -109,7 +109,7 @@ export function compareAwakenersForCollectionSort(
   config: AwakenerSortConfig,
 ): number {
   const withOptionalRealm = (
-    comparators: Array<(left: SortableCollectionEntry, right: SortableCollectionEntry) => number>,
+    comparators: ((left: SortableCollectionEntry, right: SortableCollectionEntry) => number)[],
   ) => (config.groupByRealm ? [...comparators, compareRealm] : comparators)
 
   if (config.key === 'ENLIGHTEN') {

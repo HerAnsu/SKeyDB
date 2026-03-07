@@ -12,7 +12,7 @@ import {
 import {parseCovenantDropZoneId, parseWheelDropZoneId, PICKER_DROP_ZONE_ID} from './dnd-ids'
 import type {DragData} from './types'
 
-type UseBuilderDndOptions = {
+interface UseBuilderDndOptions {
   onDropPickerAwakener: (awakenerName: string, targetSlotId: string) => void
   onDropPickerWheel: (wheelId: string, targetSlotId: string, targetWheelIndex?: number) => void
   onDropPickerCovenant: (covenantId: string, targetSlotId: string) => void
@@ -65,7 +65,9 @@ export function useBuilderDnd({
     overWheelZone: ReturnType<typeof parseWheelDropZoneId>,
     overCovenantZone: ReturnType<typeof parseCovenantDropZoneId>,
   ): string | null {
-    return overWheelZone?.slotId ?? overCovenantZone?.slotId ?? (isTeamSlotId(overId) ? overId : null)
+    return (
+      overWheelZone?.slotId ?? overCovenantZone?.slotId ?? (isTeamSlotId(overId) ? overId : null)
+    )
   }
 
   function handlePickerAwakenerDrop(

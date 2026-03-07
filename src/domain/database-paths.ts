@@ -13,7 +13,12 @@ function trimEdgeDashes(value: string): string {
 }
 
 export function toDatabaseAwakenerSlug(name: string): string {
-  return trimEdgeDashes(name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-'))
+  return trimEdgeDashes(
+    name
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-'),
+  )
 }
 
 export function buildDatabaseAwakenerPath(awakener: Pick<Awakener, 'name'>): string {

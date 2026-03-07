@@ -11,7 +11,7 @@ export type WheelMainstatFilter =
   | 'SIGIL_YIELD'
   | 'DEATH_RESISTANCE'
 
-export type WheelMainstatFilterOption = {
+export interface WheelMainstatFilterOption {
   id: WheelMainstatFilter
   label: string
   iconAsset?: string

@@ -1,12 +1,12 @@
 import type {ReactNode} from 'react'
 
-type PageToolkitBarProps = {
+interface PageToolkitBarProps {
   children: ReactNode
   className?: string
   sticky?: boolean
 }
 
-function joinClasses(...classes: Array<string | undefined | false | null>) {
+function joinClasses(...classes: (string | undefined | false | null)[]) {
   return classes.filter(Boolean).join(' ')
 }
 

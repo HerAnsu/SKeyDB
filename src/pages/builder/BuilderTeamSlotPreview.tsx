@@ -8,7 +8,7 @@ import {getWheelAssetById} from '@/domain/wheel-assets'
 import {makeTeamPreviewSlotDropZoneId} from './dnd-ids'
 import type {DragData, TeamPreviewMode, TeamSlot} from './types'
 
-export type BuilderTeamSlotPreviewProps = {
+export interface BuilderTeamSlotPreviewProps {
   slot: TeamSlot
   teamId: string
   slotIndex: number
@@ -29,8 +29,8 @@ function getTeamPreviewDragData(slot: TeamSlot, teamId: string): DragData | unde
 function renderCompactSlotPreview(slot: TeamSlot, isAwakenerOwned: boolean) {
   if (!slot.awakenerName) {
     return (
-      <span className="relative block h-full w-full">
-        <span className="sigil-placeholder sigil-placeholder-no-plus" />
+      <span className='relative block h-full w-full'>
+        <span className='sigil-placeholder sigil-placeholder-no-plus' />
       </span>
     )
   }
@@ -44,17 +44,17 @@ function renderCompactSlotPreview(slot: TeamSlot, isAwakenerOwned: boolean) {
         src={getAwakenerPortraitAsset(slot.awakenerName)}
       />
       <span
-        className="pointer-events-none absolute inset-0 z-10 border"
+        className='pointer-events-none absolute inset-0 z-10 border'
         style={{borderColor: getRealmTint(slot.realm)}}
       />
       {slot.isSupport ? (
-        <span className="builder-team-preview-support-overlay">
-          <span className="builder-team-preview-support-chip builder-team-preview-support-chip-compact">
+        <span className='builder-team-preview-support-overlay'>
+          <span className='builder-team-preview-support-chip builder-team-preview-support-chip-compact'>
             Support
           </span>
         </span>
       ) : null}
-      {!isAwakenerOwned ? <span className="builder-team-preview-unowned-chip">Unowned</span> : null}
+      {!isAwakenerOwned ? <span className='builder-team-preview-unowned-chip'>Unowned</span> : null}
     </>
   )
 }
@@ -67,16 +67,19 @@ function renderExpandedPreviewWheels(
     const wheelAsset = wheelId ? getWheelAssetById(wheelId) : undefined
     const isWheelOwned = !wheelId || (ownedWheelLevelById.get(wheelId) ?? null) !== null
     return (
-      <span className="builder-team-slot-preview-wheel" key={`${slot.slotId}-wheel-${index}`}>
+      <span
+        className='builder-team-slot-preview-wheel'
+        key={`${slot.slotId}-wheel-${String(index)}`}
+      >
         {wheelAsset ? (
           <img
-            alt=""
+            alt=''
             className={`h-full w-full object-cover ${!isWheelOwned ? 'builder-picker-art-unowned' : ''}`}
             draggable={false}
             src={wheelAsset}
           />
         ) : (
-          <span className="sigil-placeholder sigil-placeholder-wheel" />
+          <span className='sigil-placeholder sigil-placeholder-wheel' />
         )}
       </span>
     )
@@ -101,29 +104,36 @@ function renderExpandedSlotPreview(
             src={awakenerCardAsset ?? getAwakenerPortraitAsset(slot.awakenerName)}
           />
           <span
-            className="pointer-events-none absolute inset-0 z-10 border"
+            className='pointer-events-none absolute inset-0 z-10 border'
             style={{borderColor: getRealmTint(slot.realm)}}
           />
           {slot.isSupport ? (
-            <span className="builder-team-preview-support-chip builder-team-preview-support-chip-expanded">
+            <span className='builder-team-preview-support-chip builder-team-preview-support-chip-expanded'>
               Support
             </span>
           ) : null}
-          {!isAwakenerOwned ? <span className="builder-team-preview-unowned-chip">Unowned</span> : null}
+          {!isAwakenerOwned ? (
+            <span className='builder-team-preview-unowned-chip'>Unowned</span>
+          ) : null}
         </>
       ) : (
-        <span className="relative block h-full w-full">
-          <span className="sigil-placeholder sigil-placeholder-no-plus" />
+        <span className='relative block h-full w-full'>
+          <span className='sigil-placeholder sigil-placeholder-no-plus' />
         </span>
       )}
-      <span className="builder-team-slot-preview-covenant">
+      <span className='builder-team-slot-preview-covenant'>
         {covenantAsset ? (
-          <img alt="" className="h-full w-full object-cover" draggable={false} src={covenantAsset} />
+          <img
+            alt=''
+            className='h-full w-full object-cover'
+            draggable={false}
+            src={covenantAsset}
+          />
         ) : (
-          <span className="builder-team-slot-preview-covenant-empty" />
+          <span className='builder-team-slot-preview-covenant-empty' />
         )}
       </span>
-      <div className="builder-team-slot-preview-wheel-strip builder-team-slot-preview-wheel-strip-embedded">
+      <div className='builder-team-slot-preview-wheel-strip builder-team-slot-preview-wheel-strip-embedded'>
         {renderExpandedPreviewWheels(slot, ownedWheelLevelById)}
       </div>
     </>
@@ -159,7 +169,7 @@ export function BuilderTeamSlotPreview({
     data: dragData,
     disabled: !enableDragAndDrop || !slot.awakenerName,
   })
-  const previewAriaLabel = `Team preview slot ${slotIndex + 1}`
+  const previewAriaLabel = `Team preview slot ${String(slotIndex + 1)}`
 
   function setPreviewRef(node: HTMLDivElement | null) {
     setDroppableRef(node)
@@ -177,7 +187,7 @@ export function BuilderTeamSlotPreview({
         {...attributes}
         {...listeners}
       >
-        <div className="builder-team-slot-preview-compact-surface relative h-full w-full overflow-hidden border border-slate-400/35 bg-slate-900/70">
+        <div className='builder-team-slot-preview-compact-surface relative h-full w-full overflow-hidden border border-slate-400/35 bg-slate-900/70'>
           {renderCompactSlotPreview(slot, isAwakenerOwned)}
         </div>
       </div>
@@ -194,7 +204,7 @@ export function BuilderTeamSlotPreview({
       {...attributes}
       {...listeners}
     >
-      <div className="builder-team-slot-preview-card">
+      <div className='builder-team-slot-preview-card'>
         {renderExpandedSlotPreview(
           slot,
           isAwakenerOwned,

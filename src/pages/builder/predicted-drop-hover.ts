@@ -14,7 +14,11 @@ function resolveSlotLevelTarget(
   overWheelZone: ReturnType<typeof parseWheelDropZoneId>,
   overCovenantZone: ReturnType<typeof parseCovenantDropZoneId>,
 ): string | null {
-  return overCovenantZone?.slotId ?? overWheelZone?.slotId ?? (overId.startsWith('slot-') ? overId : null)
+  return (
+    overCovenantZone?.slotId ??
+    overWheelZone?.slotId ??
+    (overId.startsWith('slot-') ? overId : null)
+  )
 }
 
 function resolveWheelDropHover(

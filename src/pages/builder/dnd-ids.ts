@@ -5,7 +5,7 @@ const COVENANT_DROP_ZONE_PREFIX = 'dropzone:covenant:'
 const TEAM_PREVIEW_SLOT_DROP_ZONE_PREFIX = 'dropzone:team-preview-slot:'
 
 export function makeWheelDropZoneId(slotId: string, wheelIndex: number): string {
-  return `${WHEEL_DROP_ZONE_PREFIX}${slotId}:${wheelIndex}`
+  return `${WHEEL_DROP_ZONE_PREFIX}${slotId}:${String(wheelIndex)}`
 }
 
 export function parseWheelDropZoneId(id: string): {slotId: string; wheelIndex: number} | null {

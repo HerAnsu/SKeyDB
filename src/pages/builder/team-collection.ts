@@ -3,19 +3,19 @@ import type {Team} from './types'
 
 export const MAX_TEAMS = 10
 
-type AddTeamResult = {
+interface AddTeamResult {
   nextTeams: Team[]
   addedTeamId?: string
 }
 
-type DeleteTeamResult = {
+interface DeleteTeamResult {
   nextTeams: Team[]
   nextActiveTeamId: string
 }
 
 export type TeamTemplateId = 'DTIDE_5' | 'DTIDE_10'
 
-type ApplyTeamTemplateResult = {
+interface ApplyTeamTemplateResult {
   nextTeams: Team[]
   createdCount: number
   renamedCount: number
@@ -54,7 +54,7 @@ export function addTeam(currentTeams: Team[]): AddTeamResult {
   }
 
   const nextTeamNumber = getHighestTeamNumber(currentTeams) + 1
-  const nextTeam = createTeam(`Team ${nextTeamNumber}`)
+  const nextTeam = createTeam(`Team ${String(nextTeamNumber)}`)
   return {
     nextTeams: [...currentTeams, nextTeam],
     addedTeamId: nextTeam.id,

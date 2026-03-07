@@ -5,14 +5,14 @@ import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
 import {resolvePredictedDropHover} from './predicted-drop-hover'
 import type {DragData, PredictedDropHover, TeamSlot} from './types'
 
-type CoordinatedHandlers = {
+interface CoordinatedHandlers {
   handleDragStart: (event: DragStartEvent) => void
   handleDragOver: (event: DragOverEvent) => void
   handleDragEnd: (event: DragEndEvent) => void
   handleDragCancel: () => void
 }
 
-type UseBuilderDndWrappersArgs = {
+interface UseBuilderDndWrappersArgs {
   coordinated: CoordinatedHandlers
   slotById: Map<string, TeamSlot>
 }

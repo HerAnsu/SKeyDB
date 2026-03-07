@@ -11,7 +11,7 @@ import type {PickerTab} from './types'
 
 const BUILDER_AWAKENER_SORT_EXPANDED_KEY = 'skeydb.builder.awakenerSortExpanded.v1'
 
-type BuilderSelectionControlsProps = {
+interface BuilderSelectionControlsProps {
   pickerTab: PickerTab
   awakenerSortKey: AwakenerSortKey
   awakenerSortDirection: CollectionSortDirection
@@ -61,20 +61,22 @@ export function BuilderSelectionControls({
   }, [isAwakenerSortExpanded])
 
   return (
-    <div className="mt-2">
+    <div className='mt-2'>
       <Button
         aria-expanded={isAwakenerSortExpanded}
-        className="w-full px-2 py-1.5 text-[11px] tracking-wide"
-        onClick={() => setIsAwakenerSortExpanded((current) => !current)}
-        type="button"
-        variant="secondary"
+        className='w-full px-2 py-1.5 text-[11px] tracking-wide'
+        onClick={() => {
+          setIsAwakenerSortExpanded((current) => !current)
+        }}
+        type='button'
+        variant='secondary'
       >
-        <span className="inline-flex w-full items-center justify-between gap-2">
-          <span className="uppercase">Sorting & Toggles</span>
+        <span className='inline-flex w-full items-center justify-between gap-2'>
+          <span className='uppercase'>Sorting & Toggles</span>
           {isAwakenerSortExpanded ? (
-            <FaChevronDown aria-hidden className="text-[13px]" />
+            <FaChevronDown aria-hidden className='text-[13px]' />
           ) : (
-            <FaChevronRight aria-hidden className="text-[13px]" />
+            <FaChevronRight aria-hidden className='text-[13px]' />
           )}
         </span>
       </Button>
@@ -88,36 +90,40 @@ export function BuilderSelectionControls({
         {pickerTab === 'awakeners' ? (
           <CollectionSortControls
             groupByRealm={awakenerSortGroupByRealm}
-            layout="stacked"
+            layout='stacked'
             onGroupByRealmChange={onAwakenerSortGroupByRealmChange}
             onSortDirectionToggle={onAwakenerSortDirectionToggle}
             onSortKeyChange={onAwakenerSortKeyChange}
             sortDirection={awakenerSortDirection}
-            sortDirectionAriaLabel="Toggle builder awakener sort direction"
+            sortDirectionAriaLabel='Toggle builder awakener sort direction'
             sortKey={awakenerSortKey}
-            sortSelectAriaLabel="Builder awakener sort key"
+            sortSelectAriaLabel='Builder awakener sort key'
           />
         ) : null}
-        <div className="flex items-center justify-between gap-3 text-xs text-slate-300">
+        <div className='flex items-center justify-between gap-3 text-xs text-slate-300'>
           <span>Display Unowned</span>
           <OwnedTogglePill
-            className="ownership-pill-builder"
-            offLabel="Off"
-            onLabel="On"
-            onToggle={() => onDisplayUnownedChange(!displayUnowned)}
+            className='ownership-pill-builder'
+            offLabel='Off'
+            onLabel='On'
+            onToggle={() => {
+              onDisplayUnownedChange(!displayUnowned)
+            }}
             owned={displayUnowned}
-            variant="flat"
+            variant='flat'
           />
         </div>
-        <div className="flex items-center justify-between gap-3 text-xs text-slate-300">
+        <div className='flex items-center justify-between gap-3 text-xs text-slate-300'>
           <span>Allow Dupes</span>
           <OwnedTogglePill
-            className="ownership-pill-builder"
-            offLabel="Off"
-            onLabel="On"
-            onToggle={() => onAllowDupesChange(!allowDupes)}
+            className='ownership-pill-builder'
+            offLabel='Off'
+            onLabel='On'
+            onToggle={() => {
+              onAllowDupesChange(!allowDupes)
+            }}
             owned={allowDupes}
-            variant="flat"
+            variant='flat'
           />
         </div>
       </div>

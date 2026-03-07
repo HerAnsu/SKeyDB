@@ -1,11 +1,16 @@
 import {useCallback, useEffect, useRef, useState} from 'react'
 
-type UseTimedToastOptions = {
+interface UseTimedToastOptions {
   defaultDurationMs?: number
 }
 
+interface TimedToastEntry {
+  id: number
+  message: string
+}
+
 export function useTimedToast({defaultDurationMs = 3200}: UseTimedToastOptions = {}) {
-  const [toastEntries, setToastEntries] = useState<Array<{id: number; message: string}>>([])
+  const [toastEntries, setToastEntries] = useState<TimedToastEntry[]>([])
   const nextToastIdRef = useRef(0)
   const timeoutRefs = useRef<Map<number, number>>(new Map())
 
@@ -28,7 +33,9 @@ export function useTimedToast({defaultDurationMs = 3200}: UseTimedToastOptions =
       nextToastIdRef.current += 1
 
       setToastEntries((previous) => [...previous, {id: toastId, message}])
-      const timeoutId = window.setTimeout(() => dismissToast(toastId), durationMs)
+      const timeoutId = window.setTimeout(() => {
+        dismissToast(toastId)
+      }, durationMs)
       timeoutRefs.current.set(toastId, timeoutId)
     },
     [defaultDurationMs, dismissToast],

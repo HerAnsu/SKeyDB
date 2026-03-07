@@ -18,7 +18,7 @@ const SUBSTAT_SCALING_MAX_STEPS = SUBSTAT_SCALING_CAP_LEVEL / SUBSTAT_SCALING_ST
 const PRIMARY_STAT_KEYS = ['CON', 'ATK', 'DEF'] as const
 const PRIMARY_STAT_FORMULA_EPSILON = 1e-9
 
-type ParsedStatValue = {
+interface ParsedStatValue {
   value: number
   suffix: string
 }
@@ -139,9 +139,10 @@ function parseStatValue(rawValue: string): ParsedStatValue | null {
   if (!match) {
     return null
   }
+  const [, numericValue, suffix = ''] = match
   return {
-    value: Number(match[1]),
-    suffix: match[2] ?? '',
+    value: Number(numericValue),
+    suffix,
   }
 }
 

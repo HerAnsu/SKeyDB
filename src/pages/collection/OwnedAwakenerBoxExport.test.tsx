@@ -164,7 +164,7 @@ describe('OwnedAwakenerBoxExport', () => {
     fireEvent.click(screen.getByRole('button', {name: /export box as png/i}))
     fireEvent.change(screen.getByLabelText(/sort by/i), {target: {value: 'RARITY'}})
     const directionButton = screen.getByRole('button', {name: /toggle sort direction/i})
-    if (directionButton.textContent?.includes('Low')) {
+    if (directionButton.textContent.includes('Low')) {
       fireEvent.click(directionButton)
     }
 

@@ -5,7 +5,7 @@ import {getCovenantAssetById} from '@/domain/covenant-assets'
 import {makeCovenantDropZoneId} from './dnd-ids'
 import type {DragData, PredictedDropHover} from './types'
 
-export type CardCovenantTileProps = {
+export interface CardCovenantTileProps {
   slotId: string
   covenantId: string | undefined
   interactive: boolean
@@ -19,50 +19,50 @@ function CovenantPlaceholderSvg() {
   return (
     <svg
       aria-hidden
-      className="builder-covenant-placeholder-svg"
-      preserveAspectRatio="xMidYMid meet"
-      shapeRendering="geometricPrecision"
-      viewBox="0 0 15 15"
+      className='builder-covenant-placeholder-svg'
+      preserveAspectRatio='xMidYMid meet'
+      shapeRendering='geometricPrecision'
+      viewBox='0 0 15 15'
     >
       <circle
-        className="builder-covenant-placeholder-ring"
-        cx="7.5"
-        cy="7.5"
-        r="9.5"
-        stroke="#eff0de33"
-        strokeWidth="0.65"
-        fill="none"
+        className='builder-covenant-placeholder-ring'
+        cx='7.5'
+        cy='7.5'
+        r='9.5'
+        stroke='#eff0de33'
+        strokeWidth='0.65'
+        fill='none'
       />
       <path
-        d="M14 4.213 7.5.42 1 4.213v6.574l6.5 3.792 6.5-3.792z"
-        stroke="#eff0de33"
-        strokeWidth="0.65"
-        fill="none"
+        d='M14 4.213 7.5.42 1 4.213v6.574l6.5 3.792 6.5-3.792z'
+        stroke='#eff0de33'
+        strokeWidth='0.65'
+        fill='none'
       />
       <rect
-        className="builder-covenant-placeholder-diamond"
-        stroke="#080e18"
-        strokeWidth="0.4"
-        fill="none"
-        width="72%"
-        height="72%"
-        y="14%"
-        x="14%"
-        transform="rotate(45 7.5 7.5)"
+        className='builder-covenant-placeholder-diamond'
+        stroke='#080e18'
+        strokeWidth='0.4'
+        fill='none'
+        width='72%'
+        height='72%'
+        y='14%'
+        x='14%'
+        transform='rotate(45 7.5 7.5)'
       />
       <rect
-        className="builder-covenant-placeholder-diamond-accent"
-        stroke="#e6d6a67a"
-        strokeWidth="0.65"
-        fill="none"
-        width="64%"
-        height="64%"
-        y="18%"
-        x="18%"
-        transform="rotate(45 7.5 7.5)"
+        className='builder-covenant-placeholder-diamond-accent'
+        stroke='#e6d6a67a'
+        strokeWidth='0.65'
+        fill='none'
+        width='64%'
+        height='64%'
+        y='18%'
+        x='18%'
+        transform='rotate(45 7.5 7.5)'
       />
-      <line className="builder-covenant-placeholder-plus" x1="4" x2="11" y1="7.5" y2="7.5" />
-      <line className="builder-covenant-placeholder-plus" x1="7.5" x2="7.5" y1="4" y2="11" />
+      <line className='builder-covenant-placeholder-plus' x1='4' x2='11' y1='7.5' y2='7.5' />
+      <line className='builder-covenant-placeholder-plus' x1='7.5' x2='7.5' y1='4' y2='11' />
     </svg>
   )
 }
@@ -90,8 +90,8 @@ function renderCovenantTileVisual(covenantId: string | undefined) {
   return (
     <span className={`${contentClassName} bg-slate-950/85`}>
       <img
-        alt=""
-        className="builder-card-covenant-image h-full w-full object-cover"
+        alt=''
+        className='builder-card-covenant-image h-full w-full object-cover'
         draggable={false}
         src={asset}
       />
@@ -110,7 +110,7 @@ export function CardCovenantTile({
 }: CardCovenantTileProps) {
   const dropZoneId = makeCovenantDropZoneId(slotId)
   const {isOver, setNodeRef: setDroppableRef} = useDroppable({id: dropZoneId})
-  const draggableEnabled = interactive && Boolean(covenantId)
+  const draggableCovenantId = interactive && covenantId ? covenantId : undefined
   const {
     attributes,
     listeners,
@@ -118,10 +118,10 @@ export function CardCovenantTile({
     setNodeRef: setDraggableRef,
   } = useDraggable({
     id: `team-covenant:${slotId}`,
-    data: draggableEnabled
-      ? ({kind: 'team-covenant', slotId, covenantId: covenantId!} satisfies DragData)
+    data: draggableCovenantId
+      ? ({kind: 'team-covenant', slotId, covenantId: draggableCovenantId} satisfies DragData)
       : undefined,
-    disabled: !draggableEnabled,
+    disabled: !draggableCovenantId,
   })
   const canShowDirectOver =
     activeDragKind === 'picker-covenant' || activeDragKind === 'team-covenant'
@@ -142,12 +142,12 @@ export function CardCovenantTile({
     <div className={tileClassName} ref={setDroppableRef}>
       <button
         aria-label={covenantId ? 'Edit covenant' : 'Set covenant'}
-        className="absolute inset-0 z-20"
+        className='absolute inset-0 z-20'
         onClick={onClick}
-        ref={draggableEnabled ? setDraggableRef : undefined}
-        type="button"
-        {...(draggableEnabled ? attributes : {})}
-        {...(draggableEnabled ? listeners : {})}
+        ref={draggableCovenantId ? setDraggableRef : undefined}
+        type='button'
+        {...(draggableCovenantId ? attributes : {})}
+        {...(draggableCovenantId ? listeners : {})}
       />
       {tileVisual}
     </div>

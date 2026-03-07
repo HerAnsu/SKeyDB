@@ -20,7 +20,7 @@ const BUILDER_DISPLAY_UNOWNED_KEY = 'skeydb.builder.displayUnowned.v1'
 const BUILDER_ALLOW_DUPES_KEY = 'skeydb.builder.allowDupes.v1'
 const BUILDER_TEAM_PREVIEW_MODE_KEY = 'skeydb.builder.teamPreviewMode.v1'
 
-type UseBuilderPreferencesOptions = {
+interface UseBuilderPreferencesOptions {
   searchInputRef: RefObject<HTMLInputElement | null>
   storage: StorageLike | null
 }
@@ -43,9 +43,13 @@ export function useBuilderPreferences({searchInputRef, storage}: UseBuilderPrefe
     }
     return 'LEVEL'
   })
-  const [awakenerSortDirection, setAwakenerSortDirection] = useState<CollectionSortDirection>(() => {
-    return safeStorageRead(storage, BUILDER_AWAKENER_SORT_DIRECTION_KEY) === 'ASC' ? 'ASC' : 'DESC'
-  })
+  const [awakenerSortDirection, setAwakenerSortDirection] = useState<CollectionSortDirection>(
+    () => {
+      return safeStorageRead(storage, BUILDER_AWAKENER_SORT_DIRECTION_KEY) === 'ASC'
+        ? 'ASC'
+        : 'DESC'
+    },
+  )
   const [awakenerSortGroupByRealm, setAwakenerSortGroupByRealm] = useState(() => {
     const stored = safeStorageRead(storage, BUILDER_AWAKENER_SORT_GROUP_BY_REALM_KEY)
     if (stored === '1') {
@@ -145,8 +149,9 @@ export function useBuilderPreferences({searchInputRef, storage}: UseBuilderPrefe
     awakenerSortKey,
     setAwakenerSortKey,
     awakenerSortDirection,
-    toggleAwakenerSortDirection: () =>
-      setAwakenerSortDirection((current) => (current === 'DESC' ? 'ASC' : 'DESC')),
+    toggleAwakenerSortDirection: () => {
+      setAwakenerSortDirection((current) => (current === 'DESC' ? 'ASC' : 'DESC'))
+    },
     awakenerSortGroupByRealm,
     setAwakenerSortGroupByRealm,
     pickerSearchByTab,

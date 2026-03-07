@@ -2,16 +2,16 @@ import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
 
 import {getDragKind} from './utils'
 
-type TeamRowDragPayload = {
+interface TeamRowDragPayload {
   teamId: string
 }
 
-type TeamPreviewSlotDragPayload = {
+interface TeamPreviewSlotDragPayload {
   teamId: string
   slotId: string
 }
 
-type BuilderDndCoordinatorOptions = {
+interface BuilderDndCoordinatorOptions {
   onTeamRowDragStart: (teamId: string) => void
   onTeamRowDragEnd?: () => void
   onTeamRowDragCancel?: () => void
@@ -114,7 +114,11 @@ export function createBuilderDndCoordinator({
   function handlePreviewSlotDragEnd(event: DragEndEvent) {
     const previewSlotDrag = readTeamPreviewSlotDragPayload(event.active.data.current)
     if (previewSlotDrag) {
-      onTeamPreviewSlotDragEnd(previewSlotDrag.teamId, previewSlotDrag.slotId, readOverId(event.over?.id))
+      onTeamPreviewSlotDragEnd(
+        previewSlotDrag.teamId,
+        previewSlotDrag.slotId,
+        readOverId(event.over?.id),
+      )
       return
     }
 

@@ -28,7 +28,7 @@ export function computeStatRange(
   if (first === null) return null
   if (values.length <= 1) return String(first)
   const last = computeStatValue(values[values.length - 1], suffix, stat, stats)
-  return `${first}~${last}`
+  return `${String(first)}~${String(last)}`
 }
 
 export function buildScalingHover(
@@ -41,15 +41,15 @@ export function buildScalingHover(
     const v = values[0]
     const fv = fmtNum(v)
     const computed = computeStatValue(v, suffix, stat, stats)
-    if (computed !== null) return `${fv}${suffix} ${stat} = ${computed}`
+    if (computed !== null) return `${fv}${suffix} ${String(stat)} = ${String(computed)}`
     const statLabel = stat ? ` ${stat}` : ''
     return `${fv}${suffix}${statLabel}`
   }
   const lines = values.map((v, i) => {
     const fv = fmtNum(v)
     const computed = computeStatValue(v, suffix, stat, stats)
-    const base = `Lv${i + 1}: ${fv}${suffix}`
-    return computed !== null ? `${base} = ${computed}` : base
+    const base = `Lv${String(i + 1)}: ${fv}${suffix}`
+    return computed !== null ? `${base} = ${String(computed)}` : base
   })
   return lines.join('\n')
 }

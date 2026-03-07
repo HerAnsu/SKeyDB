@@ -24,13 +24,13 @@ const rawAwakenersSchema = z.array(
   }),
 )
 
-export type AwakenerLiteStats = {
+export interface AwakenerLiteStats {
   CON: number
   ATK: number
   DEF: number
 }
 
-export type Awakener = {
+export interface Awakener {
   id: number
   name: string
   ingameId?: string

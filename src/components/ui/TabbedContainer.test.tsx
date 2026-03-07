@@ -8,7 +8,7 @@ describe('TabbedContainer', () => {
     const onTabChange = vi.fn()
     render(
       <TabbedContainer
-        activeTabId="a"
+        activeTabId='a'
         onTabChange={onTabChange}
         tabs={[
           {id: 'a', label: 'Tab A'},
@@ -43,7 +43,7 @@ describe('TabbedContainer', () => {
 
     render(
       <TabbedContainer
-        activeTabId="a"
+        activeTabId='a'
         canCloseTab={(tab) => tab.id !== 'a'}
         onTabChange={onTabChange}
         onTabClose={onTabClose}

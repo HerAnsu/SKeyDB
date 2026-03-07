@@ -113,7 +113,7 @@ describe('import-export codec', () => {
 
   it('keeps export strings compact for single and 10-team payloads', () => {
     const singleCode = encodeSingleTeamCode(makeTeam('Team 9'))
-    const tenTeams = Array.from({length: 10}, (_, index) => makeTeam(`Team ${index + 1}`))
+    const tenTeams = Array.from({length: 10}, (_, index) => makeTeam(`Team ${String(index + 1)}`))
     const multiCode = encodeMultiTeamCode(tenTeams, tenTeams[8].id)
 
     expect(singleCode.length).toBeLessThan(35)
@@ -177,8 +177,8 @@ The Lone Seed
     const bytes = Uint8Array.from(atob(padded), (char) => char.charCodeAt(0))
     bytes[0] = 1
     let binary = ''
-    for (let index = 0; index < bytes.length; index += 1) {
-      binary += String.fromCharCode(bytes[index])
+    for (const byte of bytes) {
+      binary += String.fromCharCode(byte)
     }
     const mutated = `mt1.${trimTrailingPadding(btoa(binary).replace(/\+/g, '-').replace(/\//g, '_'))}`
 

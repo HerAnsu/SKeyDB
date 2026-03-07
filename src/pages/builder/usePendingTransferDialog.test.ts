@@ -36,6 +36,9 @@ describe('usePendingTransferDialog', () => {
     const wheelId = 'SR19'
     const wheelName = getWheelById(wheelId)?.name
     expect(wheelName).toBeTruthy()
+    if (!wheelName) {
+      throw new Error(`Missing wheel fixture for ${wheelId}`)
+    }
 
     const {result} = renderHook(() =>
       usePendingTransferDialog({

@@ -1,6 +1,6 @@
 import type {ActiveSelection, PickerTab, QuickLineupStep, Team, TeamSlot} from './types'
 
-type InternalQuickLineupSession = {
+interface InternalQuickLineupSession {
   teamId: string
   originalTeam: Team
   currentStepIndex: number

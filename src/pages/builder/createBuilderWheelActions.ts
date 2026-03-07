@@ -2,7 +2,7 @@ import {nextSelectionAfterWheelSwap, shouldSetActiveWheelOnPickerAssign} from '.
 import {assignWheelToSlot, swapWheelAssignments} from './team-state'
 import type {ActiveSelection, TeamSlot, WheelUsageLocation} from './types'
 
-type WheelTransferRequest = {
+interface WheelTransferRequest {
   wheelId: string
   fromTeamId: string
   fromSlotId: string
@@ -12,7 +12,7 @@ type WheelTransferRequest = {
   targetWheelIndex: number
 }
 
-type BuilderWheelActionsOptions = {
+interface BuilderWheelActionsOptions {
   teamSlots: TeamSlot[]
   effectiveActiveTeamId: string
   usedWheelByTeamOrder: Map<string, WheelUsageLocation>
@@ -65,8 +65,7 @@ export function createBuilderWheelActions({
     const targetSlot = teamSlots.find((entry) => entry.slotId === targetSlotId)
     const wheelOwner = allowDupes ? undefined : usedWheelByTeamOrder.get(wheelId)
     if (
-      wheelOwner &&
-      wheelOwner.teamId === effectiveActiveTeamId &&
+      wheelOwner?.teamId === effectiveActiveTeamId &&
       (wheelOwner.slotId !== targetSlotId || wheelOwner.wheelIndex !== resolvedWheelIndex)
     ) {
       const result = swapWheelAssignments(
@@ -169,10 +168,7 @@ export function createBuilderWheelActions({
   function handlePickerWheelClick(wheelId?: string) {
     clearPendingDelete()
     clearTransfer()
-    if (
-      resolvedActiveSelection?.kind !== 'wheel' &&
-      resolvedActiveSelection?.kind !== 'awakener'
-    ) {
+    if (resolvedActiveSelection?.kind !== 'wheel' && resolvedActiveSelection?.kind !== 'awakener') {
       showToast('Select a wheel slot on a unit card first.')
       return
     }

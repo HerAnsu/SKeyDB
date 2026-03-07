@@ -6,11 +6,11 @@ import {getWheels} from './wheels'
 
 const COLLECTION_OWNERSHIP_VERSION = 1
 
-export const COLLECTION_OWNERSHIP_KEY = `skeydb.collection.v${COLLECTION_OWNERSHIP_VERSION}`
+export const COLLECTION_OWNERSHIP_KEY = `skeydb.collection.v${String(COLLECTION_OWNERSHIP_VERSION)}`
 
 export type CollectionOwnershipKind = 'awakeners' | 'wheels' | 'posses'
 
-export type CollectionOwnershipState = {
+export interface CollectionOwnershipState {
   ownedAwakeners: Record<string, number>
   awakenerLevels: Record<string, number>
   ownedWheels: Record<string, number>
@@ -18,14 +18,14 @@ export type CollectionOwnershipState = {
   displayUnowned: boolean
 }
 
-export type CollectionOwnershipCatalog = {
+export interface CollectionOwnershipCatalog {
   awakenerIds: Iterable<string>
   wheelIds: Iterable<string>
   posseIds: Iterable<string>
   linkedAwakenerGroups?: string[][]
 }
 
-type CollectionOwnershipEnvelope = {
+interface CollectionOwnershipEnvelope {
   version: number
   updatedAt: string
   payload: CollectionOwnershipState
@@ -254,6 +254,16 @@ function getOwnershipMap(
   return state.ownedPosses
 }
 
+function omitOwnershipIds(
+  map: Record<string, number>,
+  ids: Iterable<string>,
+): Record<string, number> {
+  const omittedIds = new Set(ids)
+  return Object.fromEntries(
+    Object.entries(map).filter(([entryId]) => !omittedIds.has(entryId)),
+  ) as Record<string, number>
+}
+
 export function createDefaultCollectionOwnershipCatalog(): CollectionOwnershipCatalog {
   const awakeners = getAwakeners()
   const linkedAwakenerIdsByIdentity = new Map<string, string[]>()
@@ -417,11 +427,7 @@ function withoutLinkedAwakenerEntries(
     return map
   }
 
-  const next = {...map}
-  for (const linkedId of matchingGroup) {
-    delete next[linkedId]
-  }
-  return next
+  return omitOwnershipIds(map, matchingGroup)
 }
 
 export function setOwnedLevel(
@@ -436,26 +442,34 @@ export function setOwnedLevel(
   const nextMap = {...currentMap}
   if (nextLevel !== null) {
     nextMap[id] = nextLevel
-  } else {
-    delete nextMap[id]
   }
+  const normalizedNextMap = nextLevel !== null ? nextMap : omitOwnershipIds(nextMap, [id])
 
   if (kind === 'awakeners') {
     if (nextLevel === null) {
       return {
         ...state,
-        ownedAwakeners: withoutLinkedAwakenerEntries(nextMap, id, catalog.linkedAwakenerGroups),
+        ownedAwakeners: withoutLinkedAwakenerEntries(
+          normalizedNextMap,
+          id,
+          catalog.linkedAwakenerGroups,
+        ),
       }
     }
     return {
       ...state,
-      ownedAwakeners: withLinkedAwakenerLevel(nextMap, id, nextLevel, catalog.linkedAwakenerGroups),
+      ownedAwakeners: withLinkedAwakenerLevel(
+        normalizedNextMap,
+        id,
+        nextLevel,
+        catalog.linkedAwakenerGroups,
+      ),
     }
   }
   if (kind === 'wheels') {
-    return {...state, ownedWheels: nextMap}
+    return {...state, ownedWheels: normalizedNextMap}
   }
-  return {...state, ownedPosses: nextMap}
+  return {...state, ownedPosses: normalizedNextMap}
 }
 
 export function clearOwnedEntry(
@@ -469,8 +483,7 @@ export function clearOwnedEntry(
     return state
   }
 
-  const nextMap = {...currentMap}
-  delete nextMap[id]
+  const nextMap = omitOwnershipIds(currentMap, [id])
 
   if (kind === 'awakeners') {
     return {

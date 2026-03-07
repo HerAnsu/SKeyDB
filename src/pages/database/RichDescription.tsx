@@ -21,7 +21,7 @@ import {RichSegmentRenderer} from './RichSegmentRenderer'
 import {SkillPopover} from './SkillPopover'
 import {TagPopover} from './TagPopover'
 
-type RichDescriptionProps = {
+interface RichDescriptionProps {
   text: string
   cardNames: Set<string>
   fullData: AwakenerFull | null
@@ -30,7 +30,7 @@ type RichDescriptionProps = {
   onNavigateToCards?: () => void
 }
 
-type CardInfo = {
+interface CardInfo {
   card: AwakenerCard
   label: string
 }
@@ -46,7 +46,7 @@ export function RichDescription({
   onNavigateToCards,
 }: RichDescriptionProps) {
   const rouseAwareCards =
-    fullData && fullData.cards['C1'] && !cardNames.has('Rouse')
+    fullData && hasRouseCard(fullData) && !cardNames.has('Rouse')
       ? new Set([...cardNames, 'Rouse'])
       : cardNames
   const segments = parseRichDescription(text, rouseAwareCards)
@@ -64,14 +64,16 @@ export function RichDescription({
   useEffect(() => {
     function handleTrailOpened(event: Event) {
       const detail = (event as CustomEvent<{ownerId?: string}>).detail
-      if (detail?.ownerId === ownerId) {
+      if (detail.ownerId === ownerId) {
         return
       }
       clearTrail()
     }
 
     window.addEventListener(TRAIL_OPENED_EVENT, handleTrailOpened as EventListener)
-    return () => window.removeEventListener(TRAIL_OPENED_EVENT, handleTrailOpened as EventListener)
+    return () => {
+      window.removeEventListener(TRAIL_OPENED_EVENT, handleTrailOpened as EventListener)
+    }
   }, [clearTrail, ownerId])
 
   const announceTrailOpened = useCallback(() => {
@@ -161,7 +163,7 @@ export function RichDescription({
             segment={seg}
             skillLevel={skillLevel}
             stats={stats}
-            variant="inline"
+            variant='inline'
           />
         ))}
       </span>
@@ -181,7 +183,9 @@ export function RichDescription({
                     key={entry.key}
                     label={entry.label}
                     name={entry.name}
-                    onClose={() => closeTrailFrom(index)}
+                    onClose={() => {
+                      closeTrailFrom(index)
+                    }}
                     onMechanicTokenClick={openNestedTag}
                     onNavigateToCards={onNavigateToCards ? handleNavigateToCards : undefined}
                     onSkillTokenClick={openNestedSkill}
@@ -191,7 +195,9 @@ export function RichDescription({
                   <TagPopover
                     cardNames={rouseAwareCards}
                     key={entry.key}
-                    onClose={() => closeTrailFrom(index)}
+                    onClose={() => {
+                      closeTrailFrom(index)
+                    }}
                     onMechanicTokenClick={openNestedTag}
                     onSkillTokenClick={openNestedSkill}
                     tag={entry.tag}
@@ -231,15 +237,15 @@ function createDescriptionCardInfo(name: string, description: string, label: str
   }
 }
 
-function findRouseCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
-  if (name !== 'Rouse') {
-    return null
-  }
+function hasRouseCard(fullData: AwakenerFull): boolean {
+  return Object.hasOwn(fullData.cards, 'C1')
+}
 
-  const rouseCard = fullData.cards['C1']
-  if (!rouseCard) {
+function findRouseCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
+  if (name !== 'Rouse' || !hasRouseCard(fullData)) {
     return null
   }
+  const rouseCard = fullData.cards.C1
 
   return {card: rouseCard, label: `Rouse · Cost ${rouseCard.cost}`}
 }

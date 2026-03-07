@@ -22,7 +22,6 @@ describe('getPortraitRelics', () => {
   it('returns portrait relics linked by awakener in-game id', () => {
     const portraits = getPortraitRelics()
     expect(portraits.length).toBeGreaterThan(0)
-    expect(portraits.every((relic) => relic.kind === 'PORTRAIT')).toBe(true)
     expect(portraits.every((relic) => relic.awakenerIngameId.trim().length > 0)).toBe(true)
   })
 

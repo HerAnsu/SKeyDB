@@ -15,9 +15,13 @@ import type {Team} from './types'
 import type {PendingTransfer} from './useTransferConfirm'
 
 function asRealmMembers(slots: Team['slots']) {
-  return slots
-    .filter((slot) => slot.awakenerName && slot.realm)
-    .map((slot) => ({realm: slot.realm!}))
+  return slots.flatMap((slot) => {
+    if (!slot.awakenerName || !slot.realm) {
+      return []
+    }
+
+    return [{realm: slot.realm}]
+  })
 }
 
 function violatesRealmCap(slots: Team['slots']) {

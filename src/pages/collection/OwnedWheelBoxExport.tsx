@@ -1,6 +1,6 @@
 import {OwnedAssetBoxExport, type OwnedAssetBoxEntry} from './OwnedAssetBoxExport'
 
-export type OwnedWheelBoxEntry = {
+export interface OwnedWheelBoxEntry {
   id: string
   name: string
   rarity: 'SSR' | 'SR' | 'R'
@@ -10,7 +10,7 @@ export type OwnedWheelBoxEntry = {
   wheelAsset: string | null
 }
 
-type OwnedWheelBoxExportProps = {
+interface OwnedWheelBoxExportProps {
   entries: OwnedWheelBoxEntry[]
   onStatusMessage: (message: string) => void
 }
@@ -41,21 +41,21 @@ export function OwnedWheelBoxExport({entries, onStatusMessage}: OwnedWheelBoxExp
 
   return (
     <OwnedAssetBoxExport
-      assetAltNoun="wheel"
-      buttonLabel="Export wheels as PNG (owned only)"
-      cardAspectClassName="aspect-[75/113]"
+      assetAltNoun='wheel'
+      buttonLabel='Export wheels as PNG (owned only)'
+      cardAspectClassName='aspect-[75/113]'
       defaultIncludedRarities={defaultIncludedRarities}
       entries={normalizedEntries}
-      filenamePrefix="skeydb-wheel-box"
-      imageClassName="h-full w-full object-cover object-center scale-[1.2]"
-      modalTitle="Export Owned Wheel Box"
-      nameToggleLabel="Wheel Names"
+      filenamePrefix='skeydb-wheel-box'
+      imageClassName='h-full w-full object-cover object-center scale-[1.2]'
+      modalTitle='Export Owned Wheel Box'
+      nameToggleLabel='Wheel Names'
       onStatusMessage={onStatusMessage}
-      placeholderClassName="sigil-placeholder-wheel"
+      placeholderClassName='sigil-placeholder-wheel'
       rarityOptions={wheelRarityOptions}
-      sortBehavior="WHEEL_DEFAULT"
+      sortBehavior='WHEEL_DEFAULT'
       sortOptions={[]}
-      storageKeyPrefix="skeydb.ownedWheelBoxExport"
+      storageKeyPrefix='skeydb.ownedWheelBoxExport'
     />
   )
 }

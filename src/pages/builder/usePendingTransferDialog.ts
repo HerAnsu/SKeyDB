@@ -7,7 +7,7 @@ import {applyPendingTransfer, applySupportTransfer} from './transfer-resolution'
 import type {Team} from './types'
 import type {PendingTransfer} from './useTransferConfirm'
 
-type UsePendingTransferDialogOptions = {
+interface UsePendingTransferDialogOptions {
   pendingTransfer: PendingTransfer | null
   teams: Team[]
   setTeams: Dispatch<SetStateAction<Team[]>>
@@ -56,7 +56,7 @@ export function usePendingTransferDialog({
   }, [pendingTransfer, setTeams, clearTransfer])
 
   const useSupportTransfer = useCallback(() => {
-    if (!pendingTransfer || pendingTransfer.kind !== 'awakener' || !pendingTransfer.canUseSupport) {
+    if (pendingTransfer?.kind !== 'awakener' || !pendingTransfer.canUseSupport) {
       return
     }
     setTeams((prev) => applySupportTransfer(prev, pendingTransfer))

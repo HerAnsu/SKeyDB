@@ -9,7 +9,7 @@ import {
 } from './DragGhosts'
 import type {DragData, Team, TeamPreviewMode, TeamSlot} from './types'
 
-type BuilderDragOverlayProps = {
+interface BuilderDragOverlayProps {
   activeDrag: DragData | null
   isRemoveIntent: boolean
   teamPreviewMode: TeamPreviewMode
@@ -85,11 +85,7 @@ export function BuilderDragOverlay({
         />
       ) : null}
       {activeDrag?.kind === 'team-covenant' ? (
-        <TeamWheelGhost
-          removeIntent={isRemoveIntent}
-          wheelId={activeDrag.covenantId}
-          isCovenant
-        />
+        <TeamWheelGhost removeIntent={isRemoveIntent} wheelId={activeDrag.covenantId} isCovenant />
       ) : null}
     </DragOverlay>
   )

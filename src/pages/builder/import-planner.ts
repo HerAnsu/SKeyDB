@@ -10,7 +10,7 @@ import {
 } from './team-validation'
 import type {Team} from './types'
 
-export type ImportConflict = {
+export interface ImportConflict {
   kind: 'awakener' | 'wheel' | 'posse'
   value: string
   fromTeamId: string
@@ -26,11 +26,11 @@ export type PreparedImport =
   | {status: 'requires_strategy'; team: Team; conflicts: ImportConflict[]}
   | {status: 'ready'; teams: Team[]}
 
-type PrepareImportOptions = {
+interface PrepareImportOptions {
   allowDupes?: boolean
 }
 
-type TeamUsageSnapshot = {
+interface TeamUsageSnapshot {
   awakenerKeys: Set<string>
   wheelIds: Set<string>
   posseIds: Set<string>
@@ -116,16 +116,16 @@ function normalizeImportedTeamName(currentTeams: Team[], preferredName: string):
       }
       nextDefaultIndex = Math.max(nextDefaultIndex, Number(match[1]) + 1)
     }
-    return `Team ${nextDefaultIndex}`
+    return `Team ${String(nextDefaultIndex)}`
   }
   if (!names.has(base)) {
     return base
   }
   let suffix = 2
-  while (names.has(`${base} (${suffix})`)) {
+  while (names.has(`${base} (${String(suffix)})`)) {
     suffix += 1
   }
-  return `${base} (${suffix})`
+  return `${base} (${String(suffix)})`
 }
 
 function validateOrError(teams: Team[], options?: PrepareImportOptions): PreparedImport | null {
@@ -225,7 +225,11 @@ function collectAwakenerAndWheelConflicts(
   }
 }
 
-function collectPosseConflict(currentTeams: Team[], importedTeam: Team, conflicts: ImportConflict[]) {
+function collectPosseConflict(
+  currentTeams: Team[],
+  importedTeam: Team,
+  conflicts: ImportConflict[],
+) {
   if (!importedTeam.posseId) {
     return
   }
@@ -333,7 +337,7 @@ export function prepareImport(
 ): PreparedImport {
   if (decoded.kind === 'multi') {
     if (decoded.teams.length > MAX_TEAMS) {
-      return {status: 'error', message: `A maximum of ${MAX_TEAMS} teams is allowed.`}
+      return {status: 'error', message: `A maximum of ${String(MAX_TEAMS)} teams is allowed.`}
     }
     const importedTeams: Team[] = []
     decoded.teams.forEach((team) => {
@@ -351,7 +355,7 @@ export function prepareImport(
   }
 
   if (currentTeams.length >= MAX_TEAMS) {
-    return {status: 'error', message: `Cannot import: team limit (${MAX_TEAMS}) reached.`}
+    return {status: 'error', message: `Cannot import: team limit (${String(MAX_TEAMS)}) reached.`}
   }
   const importedTeam = withFreshImportedTeam(currentTeams, decoded.team)
   const conflicts = findSingleTeamConflicts(currentTeams, importedTeam, options)

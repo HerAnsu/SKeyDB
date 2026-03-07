@@ -4,10 +4,9 @@ import {getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import {getRealmTint} from '@/domain/factions'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 
-import {SHOW_PICKER_TILE_STATUS_LABELS} from './constants'
 import type {DragData} from './types'
 
-type PickerAwakenerTileProps = {
+interface PickerAwakenerTileProps {
   awakenerName: string
   realm: string
   isRealmBlocked: boolean
@@ -42,7 +41,7 @@ export function PickerAwakenerTile({
   const isDimmed = isRealmBlocked || isInUse
   const realmTint = getRealmTint(realm)
   const statusText = getAwakenerStatusText(isRealmBlocked, isInUse)
-  const tileStatusText = SHOW_PICKER_TILE_STATUS_LABELS ? statusText : null
+  const tileStatusText = statusText
   const topLabel = tileStatusText ?? (!isOwned ? 'Unowned' : null)
   const topLabelClassName = tileStatusText
     ? 'pointer-events-none absolute inset-x-0 top-0 truncate border-y border-slate-300/30 bg-slate-950/62 px-1 py-0.5 text-center text-[9px] tracking-wide text-slate-100/90'
@@ -61,11 +60,11 @@ export function PickerAwakenerTile({
       data-in-use={isInUse ? 'true' : 'false'}
       onClick={onClick}
       ref={setNodeRef}
-      type="button"
+      type='button'
       {...attributes}
       {...listeners}
     >
-      <div className="relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70">
+      <div className='relative aspect-square overflow-hidden border border-slate-400/35 bg-slate-900/70'>
         {portraitAsset ? (
           <img
             alt={`${displayName} portrait`}
@@ -73,17 +72,17 @@ export function PickerAwakenerTile({
             src={portraitAsset}
           />
         ) : (
-          <span className="relative block h-full w-full">
-            <span className="sigil-placeholder" />
+          <span className='relative block h-full w-full'>
+            <span className='sigil-placeholder' />
           </span>
         )}
         <span
-          className="pointer-events-none absolute inset-0 z-10 border"
+          className='pointer-events-none absolute inset-0 z-10 border'
           style={{borderColor: realmTint}}
         />
         {topLabel ? <span className={topLabelClassName}>{topLabel}</span> : null}
       </div>
-      <p className="mt-0.5 truncate text-[10px] text-slate-100">{displayName}</p>
+      <p className='mt-0.5 truncate text-[10px] text-slate-100'>{displayName}</p>
     </button>
   )
 }

@@ -5,7 +5,7 @@ import type {Team} from './types'
 
 const UNDO_TIMEOUT_MS = 15_000
 
-type UseBuilderResetUndoArgs = {
+interface UseBuilderResetUndoArgs {
   teams: Team[]
   effectiveActiveTeamId: string
   resetBuilderDraft: () => void

@@ -13,7 +13,7 @@ import type {
   TeamSlot,
 } from './types'
 
-type BuilderActiveTeamPanelProps = {
+interface BuilderActiveTeamPanelProps {
   activeTeamId: string
   activeTeamName: string
   isEditingTeamName: boolean
@@ -69,7 +69,7 @@ function getQuickLineupStepLabel(
     return slotLabel
   }
   if (step.kind === 'wheel') {
-    return `${awakenerLabel} - Wheel ${step.wheelIndex + 1}`
+    return `${awakenerLabel} - Wheel ${String(step.wheelIndex + 1)}`
   }
   return `${awakenerLabel} - Covenant`
 }
@@ -147,7 +147,7 @@ export function BuilderActiveTeamPanel({
   const currentQuickLineupLabel = getQuickLineupStepLabel(quickLineupSession, teamSlots)
 
   return (
-    <div className="px-4 pt-4 pb-1">
+    <div className='px-4 pt-4 pb-1'>
       <ActiveTeamHeader
         activeTeamId={activeTeamId}
         activeTeamName={activeTeamName}
@@ -164,7 +164,7 @@ export function BuilderActiveTeamPanel({
         teamRealms={Array.from(teamRealms)}
       />
 
-      <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className='mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4'>
         {teamSlots.map((slot) => (
           <AwakenerCard
             key={`${slot.slotId}:${slot.awakenerName ?? 'empty'}`}
@@ -184,7 +184,9 @@ export function BuilderActiveTeamPanel({
             }
             onCardClick={onCardClick}
             onCovenantSlotClick={onCovenantSlotClick}
-            onRemoveActiveSelection={() => onRemoveActiveSelection(slot.slotId)}
+            onRemoveActiveSelection={() => {
+              onRemoveActiveSelection(slot.slotId)
+            }}
             onWheelSlotClick={onWheelSlotClick}
             awakenerLevel={getSlotAwakenerLevel(slot, awakenerLevelByName)}
             awakenerOwnedLevel={getSlotAwakenerOwnedLevel(slot, ownedAwakenerLevelByName)}
@@ -196,72 +198,72 @@ export function BuilderActiveTeamPanel({
         ))}
       </div>
 
-      <div className="mt-4 flex justify-end border-t border-slate-500/40 pt-3">
-        <div className="flex max-w-full flex-col items-end gap-1.5 text-right">
-          <div className="flex flex-wrap items-center justify-end gap-1.5">
+      <div className='mt-4 flex justify-end border-t border-slate-500/40 pt-3'>
+        <div className='flex max-w-full flex-col items-end gap-1.5 text-right'>
+          <div className='flex flex-wrap items-center justify-end gap-1.5'>
             {quickLineupSession ? (
               <>
                 <Button
-                  className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
+                  className='h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase'
                   disabled={!quickLineupSession.canGoBack}
                   onClick={onBackQuickLineupStep}
-                  type="button"
+                  type='button'
                 >
-                  <span className="inline-flex items-center gap-1">
-                    <FaChevronLeft aria-hidden className="text-[9px]" />
+                  <span className='inline-flex items-center gap-1'>
+                    <FaChevronLeft aria-hidden className='text-[9px]' />
                     <span>Back</span>
                   </span>
                 </Button>
                 <Button
-                  className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
+                  className='h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase'
                   onClick={onSkipQuickLineupStep}
-                  type="button"
+                  type='button'
                 >
-                  <span className="inline-flex items-center gap-1">
+                  <span className='inline-flex items-center gap-1'>
                     <span>Next</span>
-                    <FaChevronRight aria-hidden className="text-[9px]" />
+                    <FaChevronRight aria-hidden className='text-[9px]' />
                   </span>
                 </Button>
                 <Button
-                  aria-label="Cancel quick team lineup"
-                  className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
+                  aria-label='Cancel quick team lineup'
+                  className='h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase'
                   onClick={onCancelQuickLineup}
-                  title="Cancel quick team lineup"
-                  type="button"
-                  variant="danger"
+                  title='Cancel quick team lineup'
+                  type='button'
+                  variant='danger'
                 >
-                  <span className="inline-flex items-center gap-1">
-                    <FaXmark aria-hidden className="text-[9px]" />
+                  <span className='inline-flex items-center gap-1'>
+                    <FaXmark aria-hidden className='text-[9px]' />
                     <span>Cancel</span>
                   </span>
                 </Button>
                 <Button
-                  aria-label="Finish quick team lineup"
-                  className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
+                  aria-label='Finish quick team lineup'
+                  className='h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase'
                   onClick={onFinishQuickLineup}
-                  title="Finish quick team lineup"
-                  type="button"
-                  variant="success"
+                  title='Finish quick team lineup'
+                  type='button'
+                  variant='success'
                 >
-                  <span className="inline-flex items-center gap-1">
-                    <FaCheck aria-hidden className="text-[9px]" />
+                  <span className='inline-flex items-center gap-1'>
+                    <FaCheck aria-hidden className='text-[9px]' />
                     <span>Finish</span>
                   </span>
                 </Button>
               </>
             ) : (
               <Button
-                className="h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase"
+                className='h-[26px] px-2 py-1 text-[10px] tracking-wide uppercase'
                 onClick={onStartQuickLineup}
-                type="button"
+                type='button'
               >
                 Quick Team Lineup
               </Button>
             )}
           </div>
-          <p className="min-h-[1rem] text-[11px] tracking-wide text-slate-300">
+          <p className='min-h-[1rem] text-[11px] tracking-wide text-slate-300'>
             {quickLineupSession
-              ? `Step ${quickLineupSession.currentStepIndex + 1} / ${quickLineupSession.totalSteps}: ${currentQuickLineupLabel}`
+              ? `Step ${String(quickLineupSession.currentStepIndex + 1)} / ${String(quickLineupSession.totalSteps)}: ${currentQuickLineupLabel ?? 'Current step'}`
               : null}
           </p>
         </div>

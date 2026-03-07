@@ -3,7 +3,7 @@ import type {Covenant} from '@/domain/covenants'
 
 import {PickerCovenantTile} from './PickerCovenantTile'
 
-type CovenantPickerGridProps = {
+interface CovenantPickerGridProps {
   filteredCovenants: Covenant[]
   onSetActiveCovenant: (covenantId?: string) => void
 }
@@ -13,8 +13,13 @@ export function CovenantPickerGrid({
   onSetActiveCovenant,
 }: CovenantPickerGridProps) {
   return (
-    <div className="grid grid-cols-4 gap-2">
-      <PickerCovenantTile isNotSet onClick={() => onSetActiveCovenant(undefined)} />
+    <div className='grid grid-cols-4 gap-2'>
+      <PickerCovenantTile
+        isNotSet
+        onClick={() => {
+          onSetActiveCovenant(undefined)
+        }}
+      />
       {filteredCovenants.map((covenant) => {
         const covenantAsset = getCovenantAssetById(covenant.id)
 
@@ -24,7 +29,9 @@ export function CovenantPickerGrid({
             covenantId={covenant.id}
             covenantName={covenant.name}
             key={covenant.id}
-            onClick={() => onSetActiveCovenant(covenant.id)}
+            onClick={() => {
+              onSetActiveCovenant(covenant.id)
+            }}
           />
         )
       })}

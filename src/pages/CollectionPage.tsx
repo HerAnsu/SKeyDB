@@ -6,12 +6,14 @@ import {useTimedToast} from '@/components/ui/useTimedToast'
 import {CollectionPageResults} from './collection/CollectionPageResults'
 import {CollectionPageSidebar} from './collection/CollectionPageSidebar'
 import {CollectionPageToolbar} from './collection/CollectionPageToolbar'
-import {createOwnedAwakenerBoxEntries} from './collection/useOwnedAwakenerBoxEntries'
-import {createOwnedWheelBoxEntries} from './collection/useOwnedWheelBoxEntries'
 import {useCollectionViewModel} from './collection/useCollectionViewModel'
 import {useGlobalCollectionSearchCapture} from './collection/useGlobalCollectionSearchCapture'
+import {createOwnedAwakenerBoxEntries} from './collection/useOwnedAwakenerBoxEntries'
+import {createOwnedWheelBoxEntries} from './collection/useOwnedWheelBoxEntries'
 
-function getCollectionLoadErrorMessage(error: 'invalid_json' | 'unsupported_version' | 'invalid_payload') {
+function getCollectionLoadErrorMessage(
+  error: 'invalid_json' | 'unsupported_version' | 'invalid_payload',
+) {
   if (error === 'invalid_json') {
     return 'Load failed: file is not valid JSON.'
   }
@@ -155,7 +157,7 @@ export function CollectionPage() {
   }
 
   return (
-    <section className="space-y-3">
+    <section className='space-y-3'>
       <CollectionPageToolbar
         importFileInputRef={importFileInputRef}
         model={model}
@@ -167,7 +169,7 @@ export function CollectionPage() {
         ownedWheelsForBoxExport={ownedWheelsForBoxExport}
       />
 
-      <div className="grid items-start gap-4 lg:grid-cols-[280px_1fr]">
+      <div className='grid items-start gap-4 lg:grid-cols-[280px_1fr]'>
         <CollectionPageSidebar model={model} searchInputRef={searchInputRef} />
 
         <CollectionPageResults
@@ -177,8 +179,8 @@ export function CollectionPage() {
         />
       </div>
       <Toast
-        className="pointer-events-none fixed right-4 bottom-4 z-[950] border border-amber-200/50 bg-slate-950/92 px-3 py-2 text-sm text-amber-100 shadow-[0_6px_20px_rgba(2,6,23,0.55)]"
-        containerClassName="pointer-events-none fixed right-4 bottom-4 z-[950] flex flex-col items-end gap-2"
+        className='pointer-events-none fixed right-4 bottom-4 z-[950] border border-amber-200/50 bg-slate-950/92 px-3 py-2 text-sm text-amber-100 shadow-[0_6px_20px_rgba(2,6,23,0.55)]'
+        containerClassName='pointer-events-none fixed right-4 bottom-4 z-[950] flex flex-col items-end gap-2'
         entries={toastEntries}
       />
     </section>

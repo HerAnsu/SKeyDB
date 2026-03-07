@@ -1,13 +1,15 @@
 import {ConfirmDialog} from '@/components/ui/ConfirmDialog'
 
-type BuilderTransferConfirmDialogProps = {
-  dialog: {
-    title: string
-    message: string
-    supportLabel?: string
-    onSupport?: () => void
-    onConfirm: () => void
-  } | null
+interface BuilderTransferDialogState {
+  title: string
+  message: string
+  supportLabel?: string
+  onSupport?: () => void
+  onConfirm: () => void
+}
+
+interface BuilderTransferConfirmDialogProps {
+  dialog: BuilderTransferDialogState | null
   onCancel: () => void
 }
 
@@ -21,7 +23,7 @@ export function BuilderTransferConfirmDialog({
 
   return (
     <ConfirmDialog
-      cancelLabel="Cancel"
+      cancelLabel='Cancel'
       confirmLabel={dialog.supportLabel ? 'Move Instead' : 'Move'}
       message={dialog.message}
       onCancel={onCancel}

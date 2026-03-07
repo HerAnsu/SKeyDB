@@ -1,4 +1,4 @@
-export type ChangelogItem = {
+export interface ChangelogItem {
   date: string
   summary: string
 }

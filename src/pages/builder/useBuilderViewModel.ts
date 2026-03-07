@@ -43,22 +43,15 @@ import {
   getTeamRealmSet,
   swapSlotAssignments,
 } from './team-state'
-import type {
-  ActiveSelection,
-  QuickLineupSession,
-  Team,
-  TeamSlot,
-  WheelUsageLocation,
-} from './types'
+import type {ActiveSelection, QuickLineupSession, Team, TeamSlot, WheelUsageLocation} from './types'
 import {useBuilderPreferences} from './useBuilderPreferences'
 import {matchesWheelMainstat} from './wheel-mainstats'
 
-const EMPTY_TEAM_SLOTS: TeamSlot[] = []
 function normalizeForSearch(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]/g, '')
 }
 
-type UseBuilderViewModelOptions = {
+interface UseBuilderViewModelOptions {
   searchInputRef: RefObject<HTMLInputElement | null>
 }
 type TeamRenameSurface = 'header' | 'list'
@@ -144,13 +137,10 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
     () => teams.find((team) => team.id === effectiveActiveTeamId) ?? teams[0],
     [teams, effectiveActiveTeamId],
   )
-  const teamSlots = activeTeam?.slots ?? EMPTY_TEAM_SLOTS
-  const activePosseId = activeTeam?.posseId
+  const teamSlots = activeTeam.slots
+  const activePosseId = activeTeam.posseId
 
   function updateActiveTeam(mutator: (team: Team) => Team) {
-    if (!activeTeam) {
-      return
-    }
     setTeams((prev) => prev.map((team) => (team.id === activeTeam.id ? mutator(team) : team)))
   }
 
@@ -226,11 +216,11 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
     [ownedAwakenerLevelByName],
   )
   const isWheelOwnedById = useCallback(
-    (wheelId: string) => ownedWheelLevelById.get(wheelId) != null,
+    (wheelId: string) => (ownedWheelLevelById.get(wheelId) ?? null) !== null,
     [ownedWheelLevelById],
   )
   const isPosseOwnedById = useCallback(
-    (posseId: string) => ownedPosseLevelById.get(posseId) != null,
+    (posseId: string) => (ownedPosseLevelById.get(posseId) ?? null) !== null,
     [ownedPosseLevelById],
   )
 
@@ -490,7 +480,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
   }
 
   function handleRemoveActiveSelection(slotId: string) {
-    if (!resolvedActiveSelection || resolvedActiveSelection.slotId !== slotId) {
+    if (resolvedActiveSelection?.slotId !== slotId) {
       return
     }
     if (resolvedActiveSelection.kind === 'awakener') {
@@ -592,10 +582,6 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
   }
 
   function startQuickLineup() {
-    if (!activeTeam) {
-      return
-    }
-
     const nextSession = createQuickLineupSession(activeTeam)
     updateActiveTeam((team) => ({
       ...team,

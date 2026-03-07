@@ -126,9 +126,17 @@ describe('BuilderPage awakener basics', () => {
 
     fireEvent.click(screen.getByRole('button', {name: /\+ add team/i}))
     const team2Row = container.querySelector('[data-team-name="Team 2"]')
-    expect(team2Row).not.toBeNull()
+    expect(team2Row).toBeInstanceOf(HTMLElement)
+    if (!(team2Row instanceof HTMLElement)) {
+      throw new Error('Expected Team 2 row element')
+    }
+    const team2Tile = team2Row.querySelector('.builder-picker-tile')
+    expect(team2Tile).toBeInstanceOf(HTMLElement)
+    if (!(team2Tile instanceof HTMLElement)) {
+      throw new Error('Expected Team 2 picker tile element')
+    }
 
-    fireEvent.click((team2Row as HTMLElement).querySelector('.builder-picker-tile') as HTMLElement)
+    fireEvent.click(team2Tile)
     expect(screen.queryByRole('button', {name: /change goliath/i})).not.toBeInTheDocument()
   })
 
@@ -140,10 +148,11 @@ describe('BuilderPage awakener basics', () => {
     expect(screen.getByRole('button', {name: /change goliath/i})).toBeInTheDocument()
 
     const builderTabbedContainer = container.querySelector('.tabbed-container')
-    expect(builderTabbedContainer).not.toBeNull()
-    fireEvent.click(
-      within(builderTabbedContainer as HTMLElement).getByRole('tab', {name: /team 2/i}),
-    )
+    expect(builderTabbedContainer).toBeInstanceOf(HTMLElement)
+    if (!(builderTabbedContainer instanceof HTMLElement)) {
+      throw new Error('Expected builder tabbed container element')
+    }
+    fireEvent.click(within(builderTabbedContainer).getByRole('tab', {name: /team 2/i}))
 
     expect(screen.queryByRole('button', {name: /change goliath/i})).not.toBeInTheDocument()
   })

@@ -20,7 +20,7 @@ import {
   type SortableCollectionEntry,
 } from '@/domain/collection-sorting'
 
-type ExportBoxConfig = {
+interface ExportBoxConfig {
   columns: number
   cardWidthPx: number
   cardGapPx: number
@@ -30,7 +30,7 @@ type ExportBoxConfig = {
   pixelRatio: number
 }
 
-type ExportVisualConfig = {
+interface ExportVisualConfig {
   disableNames: boolean
   nameOnTop: boolean
   enlightensOnCard: boolean
@@ -38,7 +38,7 @@ type ExportVisualConfig = {
   disableEmoji: boolean
 }
 
-export type OwnedAssetBoxEntry<R extends string = never> = {
+export interface OwnedAssetBoxEntry<R extends string = never> {
   id: string
   label: string
   level: number
@@ -51,18 +51,18 @@ export type OwnedAssetBoxEntry<R extends string = never> = {
 
 type ExportSortBehavior = 'CONFIGURABLE' | 'WHEEL_DEFAULT'
 
-type ExportSortConfig = {
+interface ExportSortConfig {
   key: AwakenerSortKey
   direction: CollectionSortDirection
   groupByRealm: boolean
 }
 
-type RarityOption<R extends string> = {
+interface RarityOption<R extends string> {
   value: R
   label: string
 }
 
-type OwnedAssetBoxExportProps<R extends string = never> = {
+interface OwnedAssetBoxExportProps<R extends string = never> {
   entries: OwnedAssetBoxEntry<R>[]
   onStatusMessage: (message: string) => void
   storageKeyPrefix: string
@@ -74,7 +74,7 @@ type OwnedAssetBoxExportProps<R extends string = never> = {
   cardAspectClassName: string
   imageClassName: string
   placeholderClassName: string
-  rarityOptions?: ReadonlyArray<RarityOption<R>>
+  rarityOptions?: readonly RarityOption<R>[]
   defaultIncludedRarities?: Record<R, boolean>
   sortBehavior?: ExportSortBehavior
   sortOptions?: readonly AwakenerSortKey[]
@@ -102,7 +102,7 @@ const DEFAULT_EXPORT_SORT_CONFIG: ExportSortConfig = {
   ...DEFAULT_AWAKENER_SORT_CONFIG,
 }
 
-type ExportFontEmbedResult = {
+interface ExportFontEmbedResult {
   css: string
   hasCustomFont: boolean
 }
@@ -137,7 +137,7 @@ function resolveExportSortGroupByRealm(
 
 function getInitialIncludedRarities<R extends string>(
   storageKeyPrefix: string,
-  rarityOptions: ReadonlyArray<RarityOption<R>> | undefined,
+  rarityOptions: readonly RarityOption<R>[] | undefined,
   defaultIncludedRarities: Record<R, boolean> | undefined,
 ): Record<R, boolean> | null {
   if (!rarityOptions || !defaultIncludedRarities) {
@@ -155,10 +155,10 @@ function pickRandomEmojiAsset(): string | null {
   if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
     const randomValues = new Uint32Array(1)
     crypto.getRandomValues(randomValues)
-    return emojiAssets[randomValues[0] % emojiAssets.length] ?? emojiAssets[0] ?? null
+    return emojiAssets[randomValues[0] % emojiAssets.length]
   }
 
-  return emojiAssets[0] ?? null
+  return emojiAssets[0]
 }
 
 function resolveActiveSortKey(
@@ -215,7 +215,9 @@ function fetchAssetAsDataUrl(url: string): Promise<string> {
             }
             resolve(reader.result)
           }
-          reader.onerror = () => reject(new Error(`Failed to read font blob: ${url}`))
+          reader.onerror = () => {
+            reject(new Error(`Failed to read font blob: ${url}`))
+          }
           reader.readAsDataURL(blob)
         }),
     )
@@ -304,7 +306,7 @@ function getExportLayoutWidth(config: ExportBoxConfig) {
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const timeoutId = window.setTimeout(() => {
-      reject(new Error(`${label} timed out after ${timeoutMs}ms`))
+      reject(new Error(`${label} timed out after ${String(timeoutMs)}ms`))
     }, timeoutMs)
 
     promise.then(
@@ -312,7 +314,7 @@ function withTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): 
         window.clearTimeout(timeoutId)
         resolve(value)
       },
-      (error) => {
+      (error: unknown) => {
         window.clearTimeout(timeoutId)
         reject(error instanceof Error ? error : new Error(String(error)))
       },
@@ -384,7 +386,7 @@ function loadStoredIncludedRarities<R extends string>(
   }
 }
 
-type ExportSliderFieldProps = {
+interface ExportSliderFieldProps {
   label: string
   min: number
   max: number
@@ -403,30 +405,32 @@ function ExportSliderField({
   valueSuffix,
   onChange,
 }: ExportSliderFieldProps) {
-  const displayValue = valueSuffix ? `${value}${valueSuffix}` : String(value)
+  const displayValue = valueSuffix ? `${String(value)}${valueSuffix}` : String(value)
 
   return (
-    <label className="grid gap-1.5">
-      <span className="flex items-center justify-between gap-2 tracking-wide text-slate-400 uppercase">
+    <label className='grid gap-1.5'>
+      <span className='flex items-center justify-between gap-2 tracking-wide text-slate-400 uppercase'>
         <span>{label}</span>
-        <span className="rounded border border-slate-500/55 bg-slate-950/80 px-1.5 py-0.5 font-mono text-[11px] tracking-normal text-slate-200 normal-case">
+        <span className='rounded border border-slate-500/55 bg-slate-950/80 px-1.5 py-0.5 font-mono text-[11px] tracking-normal text-slate-200 normal-case'>
           {displayValue}
         </span>
       </span>
       <input
-        className="export-box-slider"
+        className='export-box-slider'
         max={max}
         min={min}
-        onChange={(event) => onChange(Number(event.target.value))}
+        onChange={(event) => {
+          onChange(Number(event.target.value))
+        }}
         step={step}
-        type="range"
+        type='range'
         value={value}
       />
     </label>
   )
 }
 
-type ExportPreviewProps<R extends string> = {
+interface ExportPreviewProps<R extends string> {
   config: ExportBoxConfig
   visuals: ExportVisualConfig
   emojiAsset: string | null
@@ -460,44 +464,47 @@ function ExportPreview<R extends string>({
 
   return (
     <div
-      className="bg-[#040a16] text-slate-100"
+      className='bg-[#040a16] text-slate-100'
       ref={previewRef}
       style={{
-        width: `${exportLayoutWidth}px`,
-        paddingLeft: `${config.outerPaddingXPx}px`,
-        paddingRight: `${config.outerPaddingXPx}px`,
-        paddingTop: `${config.outerPaddingYPx}px`,
-        paddingBottom: `${config.outerPaddingYPx}px`,
+        width: `${String(exportLayoutWidth)}px`,
+        paddingLeft: `${String(config.outerPaddingXPx)}px`,
+        paddingRight: `${String(config.outerPaddingXPx)}px`,
+        paddingTop: `${String(config.outerPaddingYPx)}px`,
+        paddingBottom: `${String(config.outerPaddingYPx)}px`,
       }}
     >
-      <header className="mb-1 p-1">
-        <div className="flex items-center gap-2">
+      <header className='mb-1 p-1'>
+        <div className='flex items-center gap-2'>
           <p
-            className="ui-title tracking-wide text-amber-100"
-            style={{fontSize: `${titleSizePx}px`}}
+            className='ui-title tracking-wide text-amber-100'
+            style={{fontSize: `${String(titleSizePx)}px`}}
           >
             Made with SkeyDB
           </p>
           {!visuals.disableEmoji && emojiAsset ? (
             <img
-              alt=""
+              alt=''
               aria-hidden
-              className="object-scale-down"
+              className='object-scale-down'
               src={emojiAsset}
-              style={{height: `${titleEmojiSizePx}px`, width: `${titleEmojiSizePx}px`}}
+              style={{
+                height: `${String(titleEmojiSizePx)}px`,
+                width: `${String(titleEmojiSizePx)}px`,
+              }}
             />
           ) : null}
         </div>
       </header>
       <div
-        className="grid justify-center"
+        className='grid justify-center'
         style={{
-          gap: `${config.cardGapPx}px`,
-          gridTemplateColumns: `repeat(${config.columns}, ${config.cardWidthPx}px)`,
+          gap: `${String(config.cardGapPx)}px`,
+          gridTemplateColumns: `repeat(${String(config.columns)}, ${String(config.cardWidthPx)}px)`,
         }}
       >
         {entries.map((entry) => (
-          <article className="border border-slate-500/45 bg-slate-900/65 p-1" key={entry.id}>
+          <article className='border border-slate-500/45 bg-slate-900/65 p-1' key={entry.id}>
             <div
               className={`relative overflow-hidden border border-slate-400/35 bg-slate-900 ${cardAspectClassName}`}
             >
@@ -512,10 +519,10 @@ function ExportPreview<R extends string>({
               )}
               {!visuals.disableNames && visuals.nameOnTop ? (
                 <p
-                  data-testid="export-preview-card-label"
-                  className="absolute top-1 right-1 left-1 z-11 truncate bg-slate-950/75 px-1 py-1 text-center leading-none text-slate-100"
+                  data-testid='export-preview-card-label'
+                  className='absolute top-1 right-1 left-1 z-11 truncate bg-slate-950/75 px-1 py-1 text-center leading-none text-slate-100'
                   style={{
-                    fontSize: `${nameSizePx}px`,
+                    fontSize: `${String(nameSizePx)}px`,
                     textShadow: '0 1px 2px rgba(2, 6, 12, 0.9)',
                   }}
                 >
@@ -532,35 +539,35 @@ function ExportPreview<R extends string>({
 
                 return (
                   <div
-                    className="pointer-events-none absolute right-1 bottom-1 left-1 z-11 flex flex-col items-center"
-                    style={{gap: `${stackGapPx}px`}}
+                    className='pointer-events-none absolute right-1 bottom-1 left-1 z-11 flex flex-col items-center'
+                    style={{gap: `${String(stackGapPx)}px`}}
                   >
                     {hasBottomLevel ? (
                       <p
-                        className="ui-title w-full text-left leading-none text-slate-100"
+                        className='ui-title w-full text-left leading-none text-slate-100'
                         style={{
-                          fontSize: `${levelSizePx}px`,
+                          fontSize: `${String(levelSizePx)}px`,
                           textShadow: '0 1px 2px rgba(2, 6, 12, 0.9), 0 0 6px rgba(2, 6, 12, 0.65)',
                         }}
                       >
-                        <span style={{fontSize: `${levelPrefixSizePx}px`}}>Lv.</span>
+                        <span style={{fontSize: `${String(levelPrefixSizePx)}px`}}>Lv.</span>
                         <span>{entry.cardLevel}</span>
                       </p>
                     ) : null}
                     {hasBottomDupe ? (
-                      <div className="flex w-full justify-center">
+                      <div className='flex w-full justify-center'>
                         <DupeLevelDisplay
-                          className="inline-flex items-center justify-center text-[rgba(244,234,196,0.96)]"
+                          className='inline-flex items-center justify-center text-[rgba(244,234,196,0.96)]'
                           level={entry.level}
                         />
                       </div>
                     ) : null}
                     {hasBottomName ? (
                       <p
-                        data-testid="export-preview-card-label"
-                        className="w-full truncate bg-slate-950/75 px-1 py-1 text-center leading-none text-slate-100"
+                        data-testid='export-preview-card-label'
+                        className='w-full truncate bg-slate-950/75 px-1 py-1 text-center leading-none text-slate-100'
                         style={{
-                          fontSize: `${nameSizePx}px`,
+                          fontSize: `${String(nameSizePx)}px`,
                           textShadow: '0 1px 2px rgba(2, 6, 12, 0.9)',
                         }}
                       >
@@ -572,9 +579,9 @@ function ExportPreview<R extends string>({
               })()}
             </div>
             {!visuals.enlightensOnCard ? (
-              <div className="mt-1 flex justify-center">
+              <div className='mt-1 flex justify-center'>
                 <DupeLevelDisplay
-                  className="inline-flex items-center justify-center text-[rgba(244,234,196,0.96)]"
+                  className='inline-flex items-center justify-center text-[rgba(244,234,196,0.96)]'
                   level={entry.level}
                 />
               </div>
@@ -586,10 +593,7 @@ function ExportPreview<R extends string>({
   )
 }
 
-function createExportRenderOptions(
-  sanitizedDraftConfig: ExportBoxConfig,
-  fontEmbedCSS: string,
-) {
+function createExportRenderOptions(sanitizedDraftConfig: ExportBoxConfig, fontEmbedCSS: string) {
   return {
     cacheBust: false,
     pixelRatio: sanitizedDraftConfig.pixelRatio,
@@ -698,9 +702,9 @@ async function exportOwnedAssetBoxPreview<R extends string>({
   }
 }
 
-type OwnedAssetBoxExportModalProps<R extends string> = {
+interface OwnedAssetBoxExportModalProps<R extends string> {
   modalTitle: string
-  rarityOptions?: ReadonlyArray<RarityOption<R>>
+  rarityOptions?: readonly RarityOption<R>[]
   includedRarities: Record<R, boolean> | null
   handleRarityToggle: (rarity: R, checked: boolean) => void
   sortedEntries: OwnedAssetBoxEntry<R>[]
@@ -725,11 +729,18 @@ type OwnedAssetBoxExportModalProps<R extends string> = {
   placeholderClassName: string
   previewRef: React.RefObject<HTMLDivElement | null>
   exportUnavailableReason: string | null
-  defaultIncludedRarities?: Record<R, boolean>
   onReset: () => void
   onClose: () => void
   onExport: () => void
   isExporting: boolean
+}
+
+interface OwnedAssetBoxVisualSettingsProps {
+  nameToggleLabel: string
+  areNamesEnabled: boolean
+  visuals: ExportVisualConfig
+  onVisualsChange: (updater: (current: ExportVisualConfig) => ExportVisualConfig) => void
+  supportsLevels: boolean
 }
 
 function OwnedAssetBoxVisualSettings({
@@ -738,19 +749,15 @@ function OwnedAssetBoxVisualSettings({
   visuals,
   onVisualsChange,
   supportsLevels,
-}: {
-  nameToggleLabel: string
-  areNamesEnabled: boolean
-  visuals: ExportVisualConfig
-  onVisualsChange: (updater: (current: ExportVisualConfig) => ExportVisualConfig) => void
-  supportsLevels: boolean
-}) {
+}: OwnedAssetBoxVisualSettingsProps) {
   const isEmojiInTitleEnabled = !visuals.disableEmoji
 
   return (
-    <div className="space-y-2 border border-slate-700/60 bg-slate-950/50 p-2">
-      <div className="flex items-center justify-between gap-2">
-        <span className="text-[11px] tracking-wide text-slate-300 uppercase">{nameToggleLabel}</span>
+    <div className='space-y-2 border border-slate-700/60 bg-slate-950/50 p-2'>
+      <div className='flex items-center justify-between gap-2'>
+        <span className='text-[11px] tracking-wide text-slate-300 uppercase'>
+          {nameToggleLabel}
+        </span>
         <TogglePill
           ariaLabel={
             areNamesEnabled
@@ -758,90 +765,92 @@ function OwnedAssetBoxVisualSettings({
               : `Enable ${nameToggleLabel.toLowerCase()}`
           }
           checked={areNamesEnabled}
-          className="ownership-pill-builder"
-          offLabel="Off"
-          onChange={(namesEnabled) =>
+          className='ownership-pill-builder'
+          offLabel='Off'
+          onChange={(namesEnabled) => {
             onVisualsChange((current) => ({
               ...current,
               disableNames: !namesEnabled,
             }))
-          }
-          onLabel="On"
-          variant="flat"
+          }}
+          onLabel='On'
+          variant='flat'
         />
       </div>
       {areNamesEnabled ? (
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-[11px] tracking-wide text-slate-300 uppercase">Name On Top</span>
+        <div className='flex items-center justify-between gap-2'>
+          <span className='text-[11px] tracking-wide text-slate-300 uppercase'>Name On Top</span>
           <TogglePill
             ariaLabel={visuals.nameOnTop ? 'Set names to bottom' : 'Set names to top'}
             checked={visuals.nameOnTop}
-            className="ownership-pill-builder"
-            offLabel="Off"
-            onChange={(nameOnTop) =>
+            className='ownership-pill-builder'
+            offLabel='Off'
+            onChange={(nameOnTop) => {
               onVisualsChange((current) => ({
                 ...current,
                 nameOnTop,
               }))
-            }
-            onLabel="On"
-            variant="flat"
+            }}
+            onLabel='On'
+            variant='flat'
           />
         </div>
       ) : null}
       {supportsLevels ? (
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-[11px] tracking-wide text-slate-300 uppercase">Show Levels</span>
+        <div className='flex items-center justify-between gap-2'>
+          <span className='text-[11px] tracking-wide text-slate-300 uppercase'>Show Levels</span>
           <TogglePill
             ariaLabel={visuals.showLevels ? 'Hide levels on card' : 'Show levels on card'}
             checked={visuals.showLevels}
-            className="ownership-pill-builder"
-            offLabel="Off"
-            onChange={(showLevels) =>
+            className='ownership-pill-builder'
+            offLabel='Off'
+            onChange={(showLevels) => {
               onVisualsChange((current) => ({
                 ...current,
                 showLevels,
               }))
-            }
-            onLabel="On"
-            variant="flat"
+            }}
+            onLabel='On'
+            variant='flat'
           />
         </div>
       ) : null}
-      <div className="flex items-center justify-between gap-2">
-        <span className="text-[11px] tracking-wide text-slate-300 uppercase">Enlightens On Card</span>
+      <div className='flex items-center justify-between gap-2'>
+        <span className='text-[11px] tracking-wide text-slate-300 uppercase'>
+          Enlightens On Card
+        </span>
         <TogglePill
           ariaLabel={
             visuals.enlightensOnCard ? 'Move enlightens below card' : 'Move enlightens onto card'
           }
           checked={visuals.enlightensOnCard}
-          className="ownership-pill-builder"
-          offLabel="Off"
-          onChange={(enlightensOnCard) =>
+          className='ownership-pill-builder'
+          offLabel='Off'
+          onChange={(enlightensOnCard) => {
             onVisualsChange((current) => ({
               ...current,
               enlightensOnCard,
             }))
-          }
-          onLabel="On"
-          variant="flat"
+          }}
+          onLabel='On'
+          variant='flat'
         />
       </div>
-      <div className="flex items-center justify-between gap-2">
-        <span className="text-[11px] tracking-wide text-slate-300 uppercase">Emoji In Title</span>
+      <div className='flex items-center justify-between gap-2'>
+        <span className='text-[11px] tracking-wide text-slate-300 uppercase'>Emoji In Title</span>
         <TogglePill
           ariaLabel={isEmojiInTitleEnabled ? 'Disable emoji in title' : 'Enable emoji in title'}
           checked={isEmojiInTitleEnabled}
-          className="ownership-pill-builder"
-          offLabel="Off"
-          onChange={(emojiInTitleEnabled) =>
+          className='ownership-pill-builder'
+          offLabel='Off'
+          onChange={(emojiInTitleEnabled) => {
             onVisualsChange((current) => ({
               ...current,
               disableEmoji: !emojiInTitleEnabled,
             }))
-          }
-          onLabel="On"
-          variant="flat"
+          }}
+          onLabel='On'
+          variant='flat'
         />
       </div>
     </div>
@@ -882,58 +891,60 @@ function OwnedAssetBoxExportModal<R extends string>({
 }: OwnedAssetBoxExportModalProps<R>) {
   return (
     <ModalFrame
-      panelClassName="flex h-[88vh] w-full max-w-[92vw] flex-col border border-amber-200/55 bg-slate-950/96 p-4 shadow-[0_18px_50px_rgba(2,6,23,0.72)]"
+      panelClassName='flex h-[88vh] w-full max-w-[92vw] flex-col border border-amber-200/55 bg-slate-950/96 p-4 shadow-[0_18px_50px_rgba(2,6,23,0.72)]'
       title={modalTitle}
     >
-      <div className="mt-3 grid min-h-0 flex-1 gap-3 lg:grid-cols-[340px_1fr]">
-        <div className="collection-scrollbar space-y-2 overflow-auto border border-slate-500/45 bg-slate-900/50 p-3 text-xs text-slate-300">
+      <div className='mt-3 grid min-h-0 flex-1 gap-3 lg:grid-cols-[340px_1fr]'>
+        <div className='collection-scrollbar space-y-2 overflow-auto border border-slate-500/45 bg-slate-900/50 p-3 text-xs text-slate-300'>
           {rarityOptions && includedRarities ? (
-            <div className="space-y-2 border border-slate-700/60 bg-slate-950/50 p-2">
-              <p className="text-[11px] tracking-wide text-slate-300 uppercase">Rarities</p>
+            <div className='space-y-2 border border-slate-700/60 bg-slate-950/50 p-2'>
+              <p className='text-[11px] tracking-wide text-slate-300 uppercase'>Rarities</p>
               {rarityOptions.map((option) => (
-                <div className="flex items-center justify-between gap-2" key={option.value}>
-                  <span className="text-[11px] tracking-wide text-slate-300 uppercase">
+                <div className='flex items-center justify-between gap-2' key={option.value}>
+                  <span className='text-[11px] tracking-wide text-slate-300 uppercase'>
                     {option.label}
                   </span>
                   <TogglePill
                     ariaLabel={`Include ${option.label} wheels`}
                     checked={includedRarities[option.value]}
-                    className="ownership-pill-builder"
-                    offLabel="Off"
-                    onChange={(checked) => handleRarityToggle(option.value, checked)}
-                    onLabel="On"
-                    variant="flat"
+                    className='ownership-pill-builder'
+                    offLabel='Off'
+                    onChange={(checked) => {
+                      handleRarityToggle(option.value, checked)
+                    }}
+                    onLabel='On'
+                    variant='flat'
                   />
                 </div>
               ))}
-              <p className="text-[11px] text-slate-400">Included: {sortedEntries.length}</p>
+              <p className='text-[11px] text-slate-400'>Included: {sortedEntries.length}</p>
             </div>
           ) : null}
 
           {hasSortControls ? (
-            <div className="space-y-2 border border-slate-700/60 bg-slate-950/50 p-2">
+            <div className='space-y-2 border border-slate-700/60 bg-slate-950/50 p-2'>
               <CollectionSortControls
                 groupByRealm={sortConfig.groupByRealm}
-                groupByRealmAriaLabel="Group by realm"
-                headingText="Sort By"
-                onGroupByRealmChange={(checked) =>
+                groupByRealmAriaLabel='Group by realm'
+                headingText='Sort By'
+                onGroupByRealmChange={(checked) => {
                   onSortConfigChange((current) => ({
                     ...current,
                     groupByRealm: checked,
                   }))
-                }
-                onSortDirectionToggle={() =>
+                }}
+                onSortDirectionToggle={() => {
                   onSortConfigChange((current) => ({
                     ...current,
                     direction: current.direction === 'DESC' ? 'ASC' : 'DESC',
                   }))
-                }
-                onSortKeyChange={(nextKey) =>
+                }}
+                onSortKeyChange={(nextKey) => {
                   onSortConfigChange((current) => ({
                     ...current,
                     key: nextKey,
                   }))
-                }
+                }}
                 showGroupByRealm={supportsRealmGrouping}
                 sortDirection={sortConfig.direction}
                 sortKey={activeSortKey}
@@ -951,107 +962,108 @@ function OwnedAssetBoxExportModal<R extends string>({
           />
 
           <ExportSliderField
-            label="Columns"
+            label='Columns'
             max={10}
             min={4}
-            onChange={(columns) =>
+            onChange={(columns) => {
               onDraftConfigChange((current) => ({
                 ...current,
                 columns,
               }))
-            }
+            }}
             value={draftConfig.columns}
           />
           <ExportSliderField
-            label="Card Width"
+            label='Card Width'
             max={150}
             min={52}
-            onChange={(cardWidthPx) =>
+            onChange={(cardWidthPx) => {
               onDraftConfigChange((current) => ({
                 ...current,
                 cardWidthPx,
               }))
-            }
+            }}
             value={draftConfig.cardWidthPx}
-            valueSuffix="px"
+            valueSuffix='px'
           />
           <ExportSliderField
-            label="Card Gap"
+            label='Card Gap'
             max={16}
             min={2}
-            onChange={(cardGapPx) =>
+            onChange={(cardGapPx) => {
               onDraftConfigChange((current) => ({
                 ...current,
                 cardGapPx,
               }))
-            }
+            }}
             value={draftConfig.cardGapPx}
-            valueSuffix="px"
+            valueSuffix='px'
           />
           {supportsLevels ? (
             <ExportSliderField
-              label="Level Text Scale"
+              label='Level Text Scale'
               max={200}
               min={60}
-              onChange={(levelTextScalePct) =>
+              onChange={(levelTextScalePct) => {
                 onDraftConfigChange((current) => ({
                   ...current,
                   levelTextScalePct,
                 }))
-              }
+              }}
               step={5}
               value={draftConfig.levelTextScalePct}
-              valueSuffix="%"
+              valueSuffix='%'
             />
           ) : null}
           <ExportSliderField
-            label="Left/Right Padding"
+            label='Left/Right Padding'
             max={32}
             min={0}
-            onChange={(outerPaddingXPx) =>
+            onChange={(outerPaddingXPx) => {
               onDraftConfigChange((current) => ({
                 ...current,
                 outerPaddingXPx,
               }))
-            }
+            }}
             value={draftConfig.outerPaddingXPx}
-            valueSuffix="px"
+            valueSuffix='px'
           />
           <ExportSliderField
-            label="Top/Bottom Padding"
+            label='Top/Bottom Padding'
             max={24}
             min={0}
-            onChange={(outerPaddingYPx) =>
+            onChange={(outerPaddingYPx) => {
               onDraftConfigChange((current) => ({
                 ...current,
                 outerPaddingYPx,
               }))
-            }
+            }}
             value={draftConfig.outerPaddingYPx}
-            valueSuffix="px"
+            valueSuffix='px'
           />
           <ExportSliderField
-            label="Pixel Ratio"
+            label='Pixel Ratio'
             max={2}
             min={0.5}
-            onChange={(pixelRatio) =>
+            onChange={(pixelRatio) => {
               onDraftConfigChange((current) => ({
                 ...current,
                 pixelRatio,
               }))
-            }
+            }}
             step={0.1}
             value={draftConfig.pixelRatio}
           />
-          <p className="text-[11px] text-slate-400">
-            Pixel ratio controls render density. Higher values look sharper, but increase file size quite a bit.
+          <p className='text-[11px] text-slate-400'>
+            Pixel ratio controls render density. Higher values look sharper, but increase file size
+            quite a bit.
           </p>
-          <div className="pt-1 text-[11px] text-slate-400">
+          <div className='pt-1 text-[11px] text-slate-400'>
             Width: {getExportLayoutWidth(sanitizedDraftConfig)} px
           </div>
         </div>
 
-        <div className="collection-scrollbar min-h-0 overflow-auto border border-slate-500/45 bg-slate-900/45 p-2">
+        <div className='collection-scrollbar min-h-0 overflow-auto border border-slate-500/45 bg-slate-900/45 p-2'>
           <ExportPreview
             assetAltNoun={assetAltNoun}
             cardAspectClassName={cardAspectClassName}
@@ -1066,22 +1078,24 @@ function OwnedAssetBoxExportModal<R extends string>({
         </div>
       </div>
 
-      <div className="mt-3 flex justify-end gap-2">
+      <div className='mt-3 flex justify-end gap-2'>
         {exportUnavailableReason ? (
-          <p className="mr-auto self-center text-[11px] text-slate-400">{exportUnavailableReason}</p>
+          <p className='mr-auto self-center text-[11px] text-slate-400'>
+            {exportUnavailableReason}
+          </p>
         ) : null}
-        <Button onClick={onReset} type="button" variant="secondary">
+        <Button onClick={onReset} type='button' variant='secondary'>
           Reset
         </Button>
-        <Button onClick={onClose} type="button" variant="secondary">
+        <Button onClick={onClose} type='button' variant='secondary'>
           Close
         </Button>
         <Button
           aria-disabled={isExporting}
           className={isExporting ? 'opacity-50' : undefined}
           onClick={onExport}
-          type="button"
-          variant="primary"
+          type='button'
+          variant='primary'
         >
           {isExporting ? 'Exporting...' : 'Export PNG'}
         </Button>
@@ -1152,13 +1166,7 @@ export function OwnedAssetBoxExport<R extends string>({
         groupByRealm: sortConfig.groupByRealm,
       })
     })
-  }, [
-    filteredEntries,
-    activeSortKey,
-    sortBehavior,
-    sortConfig.direction,
-    sortConfig.groupByRealm,
-  ])
+  }, [filteredEntries, activeSortKey, sortBehavior, sortConfig.direction, sortConfig.groupByRealm])
   const supportsRealmGrouping = useMemo(
     () => entries.some((entry) => Boolean(entry.realm?.trim())),
     [entries],
@@ -1167,15 +1175,20 @@ export function OwnedAssetBoxExport<R extends string>({
   const hasAtLeastOneRarity = includedRarities
     ? Object.values(includedRarities).some(Boolean)
     : true
-  const exportUnavailableReason = getExportUnavailableReason(hasAtLeastOneRarity, sortedEntries.length)
-  const updateDraftConfig = (updater: (current: ExportBoxConfig) => ExportBoxConfig) =>
+  const exportUnavailableReason = getExportUnavailableReason(
+    hasAtLeastOneRarity,
+    sortedEntries.length,
+  )
+  const updateDraftConfig = (updater: (current: ExportBoxConfig) => ExportBoxConfig) => {
     setDraftConfig(updater)
+  }
   const updateVisuals = (updater: (current: ExportVisualConfig) => ExportVisualConfig) => {
     setVisuals(updater)
     setEmojiAsset(pickRandomEmojiAsset())
   }
-  const updateSortConfig = (updater: (current: ExportSortConfig) => ExportSortConfig) =>
+  const updateSortConfig = (updater: (current: ExportSortConfig) => ExportSortConfig) => {
     setSortConfig(updater)
+  }
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -1230,13 +1243,15 @@ export function OwnedAssetBoxExport<R extends string>({
   return (
     <>
       <Button
-        className="col-span-2 px-2 py-1 text-[10px] tracking-wide uppercase"
+        className='col-span-2 px-2 py-1 text-[10px] tracking-wide uppercase'
         disabled={entries.length === 0}
-        onClick={() => setIsSettingsOpen(true)}
-        type="button"
+        onClick={() => {
+          setIsSettingsOpen(true)
+        }}
+        type='button'
       >
-        <span className="inline-flex items-center gap-1">
-          <FaImage aria-hidden className="text-[10px]" />
+        <span className='inline-flex items-center gap-1'>
+          <FaImage aria-hidden className='text-[10px]' />
           <span>{buttonLabel}</span>
         </span>
       </Button>
@@ -1247,7 +1262,6 @@ export function OwnedAssetBoxExport<R extends string>({
           areNamesEnabled={areNamesEnabled}
           assetAltNoun={assetAltNoun}
           cardAspectClassName={cardAspectClassName}
-          defaultIncludedRarities={defaultIncludedRarities}
           draftConfig={draftConfig}
           emojiAsset={emojiAsset}
           exportUnavailableReason={exportUnavailableReason}
@@ -1258,7 +1272,9 @@ export function OwnedAssetBoxExport<R extends string>({
           isExporting={isExporting}
           modalTitle={modalTitle}
           nameToggleLabel={nameToggleLabel}
-          onClose={() => setIsSettingsOpen(false)}
+          onClose={() => {
+            setIsSettingsOpen(false)
+          }}
           onDraftConfigChange={updateDraftConfig}
           onExport={() => {
             if (isExporting) {

@@ -2,7 +2,7 @@ import {useDraggable} from '@dnd-kit/core'
 
 import type {DragData} from './types'
 
-type PickerWheelTileProps = {
+interface PickerWheelTileProps {
   wheelId?: string
   wheelName?: string
   wheelAsset?: string
@@ -66,7 +66,7 @@ function getWheelDragData(draggableEnabled: boolean, wheelId?: string): DragData
 
 function renderWheelPreview(
   wheelAsset: string | undefined,
-  wheelDisplayName: string | undefined,
+  wheelDisplayName: string,
   isOwned: boolean,
   isNotSet: boolean,
   isDimmed: boolean,
@@ -83,9 +83,9 @@ function renderWheelPreview(
   }
 
   return (
-    <span className="relative block h-full w-full">
-      <span className="sigil-placeholder sigil-placeholder-wheel sigil-placeholder-no-plus sigil-placeholder-remove" />
-      <span className="sigil-remove-x" />
+    <span className='relative block h-full w-full'>
+      <span className='sigil-placeholder sigil-placeholder-wheel sigil-placeholder-no-plus sigil-placeholder-remove' />
+      <span className='sigil-remove-x' />
     </span>
   )
 }
@@ -103,14 +103,14 @@ export function PickerWheelTile({
 }: PickerWheelTileProps) {
   const isDimmed = isBlocked || isInUse || (!isOwned && !isNotSet)
   const isSoftDimmed = !isBlocked && (isInUse || (!isOwned && !isNotSet))
-  const draggableEnabled = !isNotSet && Boolean(wheelId)
-  const wheelDisplayName = getWheelDisplayName(isNotSet, wheelName, wheelId)
+  const draggableWheelId = !isNotSet && wheelId ? wheelId : undefined
+  const wheelDisplayName = getWheelDisplayName(isNotSet, wheelName, wheelId) ?? 'Wheel'
   const topLabel = getWheelTopLabel(blockedText, isNotSet, isOwned)
   const buttonStateClassName = getWheelTileClassName(isBlocked, isSoftDimmed)
   const {attributes, listeners, isDragging, setNodeRef} = useDraggable({
-    id: draggableEnabled ? `picker-wheel:${wheelId}` : `picker-wheel:not-set`,
-    data: getWheelDragData(draggableEnabled, wheelId),
-    disabled: !draggableEnabled,
+    id: draggableWheelId ? `picker-wheel:${draggableWheelId}` : `picker-wheel:not-set`,
+    data: getWheelDragData(Boolean(draggableWheelId), draggableWheelId),
+    disabled: !draggableWheelId,
   })
   const dragAttributes = {...attributes} as Record<string, unknown>
   delete dragAttributes['aria-disabled']
@@ -123,15 +123,15 @@ export function PickerWheelTile({
       }`}
       onClick={onClick}
       ref={setNodeRef}
-      type="button"
-      {...(draggableEnabled ? dragAttributes : {})}
-      {...(draggableEnabled ? listeners : {})}
+      type='button'
+      {...(draggableWheelId ? dragAttributes : {})}
+      {...(draggableWheelId ? listeners : {})}
     >
-      <div className="relative aspect-[75/113] overflow-hidden border border-slate-400/35 bg-slate-900/70">
+      <div className='relative aspect-[75/113] overflow-hidden border border-slate-400/35 bg-slate-900/70'>
         {renderWheelPreview(wheelAsset, wheelDisplayName, isOwned, isNotSet, isDimmed)}
         {topLabel ? <span className={topLabel.className}>{topLabel.text}</span> : null}
       </div>
-      <p className="mt-1 truncate text-[11px] text-slate-200">{wheelDisplayName}</p>
+      <p className='mt-1 truncate text-[11px] text-slate-200'>{wheelDisplayName}</p>
     </button>
   )
 }

@@ -9,7 +9,7 @@ import {OwnedAwakenerBoxExport} from './OwnedAwakenerBoxExport'
 import {OwnedWheelBoxExport} from './OwnedWheelBoxExport'
 import type {CollectionViewModel} from './useCollectionViewModel'
 
-type CollectionPageToolbarProps = {
+interface CollectionPageToolbarProps {
   model: CollectionViewModel
   importFileInputRef: {current: HTMLInputElement | null}
   onLoadFromFile: (event: ChangeEvent<HTMLInputElement>) => Promise<void>
@@ -30,11 +30,18 @@ function renderTabExportAction({
   'model' | 'onStatusMessage' | 'ownedAwakenersForBoxExport' | 'ownedWheelsForBoxExport'
 >) {
   if (model.tab === 'awakeners') {
-    return <OwnedAwakenerBoxExport entries={ownedAwakenersForBoxExport} onStatusMessage={onStatusMessage} />
+    return (
+      <OwnedAwakenerBoxExport
+        entries={ownedAwakenersForBoxExport}
+        onStatusMessage={onStatusMessage}
+      />
+    )
   }
 
   if (model.tab === 'wheels') {
-    return <OwnedWheelBoxExport entries={ownedWheelsForBoxExport} onStatusMessage={onStatusMessage} />
+    return (
+      <OwnedWheelBoxExport entries={ownedWheelsForBoxExport} onStatusMessage={onStatusMessage} />
+    )
   }
 
   return null
@@ -53,16 +60,16 @@ export function CollectionPageToolbar({
   return (
     <>
       <input
-        accept="application/json,.json"
-        className="hidden"
+        accept='application/json,.json'
+        className='hidden'
         onChange={(event) => {
           void onLoadFromFile(event)
         }}
         ref={importFileInputRef}
-        type="file"
+        type='file'
       />
 
-      <PageToolkitBar className="collection-toolkit-drawer">
+      <PageToolkitBar className='collection-toolkit-drawer'>
         {renderTabExportAction({
           model,
           onStatusMessage,
@@ -70,22 +77,22 @@ export function CollectionPageToolbar({
           ownedWheelsForBoxExport,
         })}
         <Button
-          className="px-2 py-1 text-[10px] tracking-wide uppercase"
+          className='px-2 py-1 text-[10px] tracking-wide uppercase'
           onClick={onSaveToFile}
-          type="button"
+          type='button'
         >
-          <span className="inline-flex items-center gap-1">
-            <FaDownload aria-hidden className="text-[9px]" />
+          <span className='inline-flex items-center gap-1'>
+            <FaDownload aria-hidden className='text-[9px]' />
             <span>Save to File</span>
           </span>
         </Button>
         <Button
-          className="px-2 py-1 text-[10px] tracking-wide uppercase"
+          className='px-2 py-1 text-[10px] tracking-wide uppercase'
           onClick={onOpenLoadFilePicker}
-          type="button"
+          type='button'
         >
-          <span className="inline-flex items-center gap-1">
-            <FaUpload aria-hidden className="text-[9px]" />
+          <span className='inline-flex items-center gap-1'>
+            <FaUpload aria-hidden className='text-[9px]' />
             <span>Load from File</span>
           </span>
         </Button>

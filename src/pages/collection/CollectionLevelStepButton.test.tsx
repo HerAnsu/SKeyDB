@@ -10,8 +10,8 @@ describe('CollectionLevelStepButton', () => {
 
     render(
       <CollectionLevelStepButton
-        ariaLabel="Increase enlighten level"
-        direction="up"
+        ariaLabel='Increase enlighten level'
+        direction='up'
         disabled={false}
         onStep={onStep}
       />,

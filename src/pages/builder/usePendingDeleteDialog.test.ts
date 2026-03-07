@@ -37,7 +37,9 @@ describe('usePendingDeleteDialog', () => {
         setTeams,
         effectiveActiveTeamId: activeTeamId,
         setActiveTeamId,
-        clearActiveSelection: () => setSelectionCleared(true),
+        clearActiveSelection: () => {
+          setSelectionCleared(true)
+        },
       })
       return {...hook, teams, activeTeamId, selectionCleared}
     })
@@ -63,7 +65,9 @@ describe('usePendingDeleteDialog', () => {
         setTeams,
         effectiveActiveTeamId: activeTeamId,
         setActiveTeamId,
-        clearActiveSelection: () => setSelectionCleared(true),
+        clearActiveSelection: () => {
+          setSelectionCleared(true)
+        },
       })
       return {...hook, teams, activeTeamId, selectionCleared}
     })

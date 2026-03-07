@@ -29,7 +29,7 @@ describe('RichSegmentRenderer', () => {
         segment={{type: 'skill', name: 'Strike'}}
         skillLevel={1}
         stats={null}
-        variant="inline"
+        variant='inline'
       />,
     )
 
@@ -43,7 +43,7 @@ describe('RichSegmentRenderer', () => {
         segment={{type: 'scaling', values: [10, 20], suffix: '%', stat: 'ATK'}}
         skillLevel={2}
         stats={BASE_STATS}
-        variant="inline"
+        variant='inline'
       />,
     )
 
@@ -58,7 +58,7 @@ describe('RichSegmentRenderer', () => {
         segment={{type: 'scaling', values: [10, 20], suffix: '%', stat: 'ATK'}}
         skillLevel={1}
         stats={BASE_STATS}
-        variant="popover"
+        variant='popover'
       />,
     )
 

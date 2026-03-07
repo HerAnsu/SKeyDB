@@ -6,11 +6,21 @@ import frozenContract from './persistence-contract.v1.json'
 import {getPosses} from './posses'
 import {getWheels} from './wheels'
 
-type PersistenceContract = {
+interface PersistenceContractAwakenerEntry {
+  name: string
+  id: number
+}
+
+interface PersistenceContractPosseEntry {
+  id: string
+  index: number
+}
+
+interface PersistenceContract {
   version: number
-  awakeners: Array<{name: string; id: number}>
+  awakeners: PersistenceContractAwakenerEntry[]
   wheels: string[]
-  posses: Array<{id: string; index: number}>
+  posses: PersistenceContractPosseEntry[]
   covenants: string[]
 }
 

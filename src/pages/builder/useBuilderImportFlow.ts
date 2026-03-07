@@ -11,18 +11,18 @@ import {
 } from './import-planner'
 import type {Team, TeamSlot} from './types'
 
-type ReplaceTargetTeam = {
+interface ReplaceTargetTeam {
   id: string
   name: string
 }
 
-type PendingReplaceImport = {
+interface PendingReplaceImport {
   teams: Team[]
   activeTeamIndex: number
   importWarningMessage?: string
 }
 
-type PendingStrategyImport = {
+interface PendingStrategyImport {
   team: Team
   conflicts: ImportConflict[]
   plannerBaseTeams: Team[]
@@ -47,14 +47,14 @@ type PendingDuplicateOverrideImport =
       importWarningMessage?: string
     }
 
-type HandlePreparedImportOptions = {
+interface HandlePreparedImportOptions {
   decoded: DecodedImport
   plannerBaseTeams?: Team[]
   replaceIntoTeam?: ReplaceTargetTeam
   importWarningMessage?: string
 }
 
-type UseBuilderImportFlowOptions = {
+interface UseBuilderImportFlowOptions {
   teams: Team[]
   setTeams: Dispatch<SetStateAction<Team[]>>
   effectiveActiveTeamId: string
@@ -84,8 +84,12 @@ export function useBuilderImportFlow({
   showToast,
 }: UseBuilderImportFlowOptions) {
   const [isImportDialogOpen, setImportDialogOpen] = useState(false)
-  const [pendingReplaceImport, setPendingReplaceImport] = useState<PendingReplaceImport | null>(null)
-  const [pendingStrategyImport, setPendingStrategyImport] = useState<PendingStrategyImport | null>(null)
+  const [pendingReplaceImport, setPendingReplaceImport] = useState<PendingReplaceImport | null>(
+    null,
+  )
+  const [pendingStrategyImport, setPendingStrategyImport] = useState<PendingStrategyImport | null>(
+    null,
+  )
   const [pendingDuplicateOverrideImport, setPendingDuplicateOverrideImport] =
     useState<PendingDuplicateOverrideImport | null>(null)
 
@@ -93,7 +97,9 @@ export function useBuilderImportFlow({
     if (!pendingStrategyImport) {
       return ''
     }
-    const teamNames = Array.from(new Set(pendingStrategyImport.conflicts.map((entry) => entry.fromTeamName)))
+    const teamNames = Array.from(
+      new Set(pendingStrategyImport.conflicts.map((entry) => entry.fromTeamName)),
+    )
     return `Import conflicts with ${teamNames.join(', ')}. Choose how to handle duplicates.`
   }, [pendingStrategyImport])
 
@@ -229,7 +235,8 @@ export function useBuilderImportFlow({
     }
 
     const detailParts = surfaced.slice(0, 2).map((warning) => {
-      const slotLabel = warning.slotIndex === undefined ? 'unknown slot' : `slot ${warning.slotIndex + 1}`
+      const slotLabel =
+        warning.slotIndex === undefined ? 'unknown slot' : `slot ${String(warning.slotIndex + 1)}`
       if (warning.section === 'awakener') {
         return `${slotLabel} awakener`
       }
@@ -240,7 +247,7 @@ export function useBuilderImportFlow({
     const details = detailParts.join('; ')
     const tokenLabel = surfaced.length === 1 ? 'token' : 'tokens'
 
-    return `In-game note: ${surfaced.length} unsupported awakener/wheel ${tokenLabel} imported as empty (${details}${suffix}).`
+    return `In-game note: ${String(surfaced.length)} unsupported awakener/wheel ${tokenLabel} imported as empty (${details}${suffix}).`
   }
 
   function submitImportCode(code: string) {
@@ -336,7 +343,7 @@ export function useBuilderImportFlow({
       return
     }
     const nextActive = pendingReplaceImport.teams[pendingReplaceImport.activeTeamIndex]
-    const nextActiveTeamId = nextActive?.id ?? pendingReplaceImport.teams[0]?.id ?? ''
+    const nextActiveTeamId = nextActive.id
     applyImportedTeams(pendingReplaceImport.teams, nextActiveTeamId)
     clearImportFlow()
     clearTransfer()
@@ -403,7 +410,9 @@ export function useBuilderImportFlow({
   }
 
   return {
-    openImportDialog: () => setImportDialogOpen(true),
+    openImportDialog: () => {
+      setImportDialogOpen(true)
+    },
     importDialogProps: {
       isImportDialogOpen,
       onCancelImport: clearImportFlow,
@@ -412,13 +421,19 @@ export function useBuilderImportFlow({
       onCancelDuplicateOverrideImport: clearImportFlow,
       onConfirmDuplicateOverrideImport: confirmDuplicateOverrideImport,
       pendingReplaceImport,
-      onCancelReplaceImport: () => setPendingReplaceImport(null),
+      onCancelReplaceImport: () => {
+        setPendingReplaceImport(null)
+      },
       onConfirmReplaceImport: confirmReplaceImport,
       pendingStrategyImport,
       pendingStrategyConflictSummary,
       onCancelStrategyImport: clearImportFlow,
-      onMoveStrategyImport: () => applyStrategy('move'),
-      onSkipStrategyImport: () => applyStrategy('skip'),
+      onMoveStrategyImport: () => {
+        applyStrategy('move')
+      },
+      onSkipStrategyImport: () => {
+        applyStrategy('skip')
+      },
     },
   }
 }

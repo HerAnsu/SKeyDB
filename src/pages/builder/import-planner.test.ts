@@ -97,7 +97,10 @@ describe('import planner', () => {
     const result = applySingleImportStrategy(current, imported, 'skip')
     expect(result.status).toBe('ready')
     if (result.status !== 'ready') return
-    const importedTeam = result.teams.at(-1)!
+    const importedTeam = result.teams.at(-1)
+    if (!importedTeam) {
+      throw new Error('Expected imported team in ready strategy result')
+    }
     expect(importedTeam.posseId).toBeUndefined()
     expect(importedTeam.slots[0].awakenerName).toBeUndefined()
     expect(importedTeam.slots[0].wheels).toEqual([null, null])

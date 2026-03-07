@@ -1,6 +1,6 @@
 import type {Awakener} from '@/domain/awakeners'
 
-export type TeamSlot = {
+export interface TeamSlot {
   slotId: string
   awakenerName?: string
   realm?: Awakener['realm']
@@ -10,21 +10,21 @@ export type TeamSlot = {
   covenantId?: string
 }
 
-export type Team = {
+export interface Team {
   id: string
   name: string
   slots: TeamSlot[]
   posseId?: string
 }
 
-export type WheelUsageLocation = {
+export interface WheelUsageLocation {
   teamOrder: number
   teamId: string
   slotId: string
   wheelIndex: number
 }
 
-export type CovenantUsageLocation = {
+export interface CovenantUsageLocation {
   teamOrder: number
   teamId: string
   slotId: string
@@ -51,7 +51,7 @@ export type QuickLineupStep =
   | {kind: 'covenant'; slotId: string}
   | {kind: 'posse'}
 
-export type QuickLineupSession = {
+export interface QuickLineupSession {
   isActive: true
   currentStepIndex: number
   currentStep: QuickLineupStep

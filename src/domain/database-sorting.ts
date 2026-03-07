@@ -6,7 +6,7 @@ export type DatabaseSortKey = Extract<
   'ALPHABETICAL' | 'RARITY' | 'ATK' | 'DEF' | 'CON'
 >
 
-export type DatabaseSortConfig = {
+export interface DatabaseSortConfig {
   key: DatabaseSortKey
   direction: CollectionSortDirection
   groupByRealm: boolean
@@ -67,7 +67,7 @@ function compareStat(
 function compareByPriority(
   left: Awakener,
   right: Awakener,
-  comparators: Array<(left: Awakener, right: Awakener) => number>,
+  comparators: ((left: Awakener, right: Awakener) => number)[],
 ): number {
   for (const comparator of comparators) {
     const result = comparator(left, right)
@@ -83,7 +83,7 @@ export function compareAwakenersForDatabaseSort(
   right: Awakener,
   config: DatabaseSortConfig,
 ): number {
-  const comparators: Array<(left: Awakener, right: Awakener) => number> = []
+  const comparators: ((left: Awakener, right: Awakener) => number)[] = []
 
   if (config.groupByRealm) {
     comparators.push(compareRealm)

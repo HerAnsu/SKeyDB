@@ -2,12 +2,12 @@ import {useId, type ReactNode} from 'react'
 
 import {FaXmark} from 'react-icons/fa6'
 
-type TabbedContainerTab = {
+interface TabbedContainerTab {
   id: string
   label: string
 }
 
-type TabbedContainerProps = {
+interface TabbedContainerProps {
   tabs: TabbedContainerTab[]
   activeTabId: string
   onTabChange: (tabId: string) => void
@@ -24,7 +24,7 @@ type TabbedContainerProps = {
   children: ReactNode
 }
 
-function joinClasses(...classes: Array<string | undefined | false | null>) {
+function joinClasses(...classes: (string | undefined | false | null)[]) {
   return classes.filter(Boolean).join(' ')
 }
 
@@ -52,7 +52,7 @@ export function TabbedContainer({
 
   return (
     <section className={joinClasses('tabbed-container space-y-0', toneClass, className)}>
-      <div className="tabbed-container-ears flex items-stretch justify-between">
+      <div className='tabbed-container-ears flex items-stretch justify-between'>
         <div
           className={joinClasses(
             'tabbed-container-ear tabbed-container-ear-left',
@@ -61,16 +61,16 @@ export function TabbedContainer({
           style={leftEarMaxWidth ? {maxWidth: leftEarMaxWidth} : undefined}
         >
           <div
-            aria-orientation="horizontal"
-            className="flex min-w-0 flex-1 items-stretch"
-            role="tablist"
+            aria-orientation='horizontal'
+            className='flex min-w-0 flex-1 items-stretch'
+            role='tablist'
           >
             {tabs.map((tab) => {
               const tabId = `${tabIdPrefix}-${tab.id}`
               const isSelected = activeTabId === tab.id
               const isClosable = Boolean(onTabClose && (canCloseTab ? canCloseTab(tab) : true))
               return (
-                <div className="tabbed-container-tab-shell" key={tab.id}>
+                <div className='tabbed-container-tab-shell' key={tab.id}>
                   <button
                     aria-controls={panelId}
                     aria-selected={isSelected}
@@ -83,27 +83,29 @@ export function TabbedContainer({
                         : 'tabbed-container-tab-inactive tabbed-container-tab-priority-inactive text-slate-300',
                     )}
                     id={tabId}
-                    onClick={() => onTabChange(tab.id)}
-                    role="tab"
+                    onClick={() => {
+                      onTabChange(tab.id)
+                    }}
+                    role='tab'
                     tabIndex={isSelected ? 0 : -1}
-                    type="button"
+                    type='button'
                   >
                     {tab.label}
                   </button>
                   {isClosable ? (
-                    <span className="tabbed-container-tab-close-wrap">
+                    <span className='tabbed-container-tab-close-wrap'>
                       <button
                         aria-label={
                           getTabCloseAriaLabel ? getTabCloseAriaLabel(tab) : `Close ${tab.label}`
                         }
-                        className="tabbed-container-tab-close"
+                        className='tabbed-container-tab-close'
                         onClick={(event) => {
                           event.stopPropagation()
                           onTabClose?.(tab.id)
                         }}
-                        type="button"
+                        type='button'
                       >
-                        <FaXmark aria-hidden className="tabbed-container-tab-close-icon" />
+                        <FaXmark aria-hidden className='tabbed-container-tab-close-icon' />
                       </button>
                     </span>
                   ) : null}
@@ -112,12 +114,12 @@ export function TabbedContainer({
             })}
           </div>
           {leftTrailingAction ? (
-            <div className="tabbed-container-ear-left-action shrink-0">{leftTrailingAction}</div>
+            <div className='tabbed-container-ear-left-action shrink-0'>{leftTrailingAction}</div>
           ) : null}
         </div>
-        <div aria-hidden className="tabbed-container-ear-gap-fill" />
+        <div aria-hidden className='tabbed-container-ear-gap-fill' />
         {rightActions ? (
-          <div className="tabbed-container-ear tabbed-container-ear-right shrink-0">
+          <div className='tabbed-container-ear tabbed-container-ear-right shrink-0'>
             {rightActions}
           </div>
         ) : null}
@@ -126,7 +128,7 @@ export function TabbedContainer({
         aria-labelledby={`${tabIdPrefix}-${activeTabId}`}
         className={joinClasses('tabbed-container-panel border p-2', bodyClassName)}
         id={panelId}
-        role="tabpanel"
+        role='tabpanel'
       >
         {children}
       </div>

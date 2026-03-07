@@ -54,7 +54,7 @@ const SIDEBAR_STAT_VALUE_CLASS = 'text-slate-200'
 const SIDEBAR_SCALING_VALUE_CLASS =
   'cursor-help border-b border-dotted border-slate-500/45 text-slate-200 transition-colors hover:border-slate-300/65 hover:text-slate-100'
 
-type AwakenerDetailSidebarProps = {
+interface AwakenerDetailSidebarProps {
   awakener: Awakener
   enlightenOffset: number
   level: number
@@ -82,26 +82,26 @@ export function AwakenerDetailSidebar({
   const hasSubstatScaling = hasAwakenerSubstatScaling(substatScaling)
 
   return (
-    <div className="flex shrink-0 flex-col gap-3">
+    <div className='flex shrink-0 flex-col gap-3'>
       {!compact ? (
-        <div className="aspect-[2/3] w-full overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900">
+        <div className='aspect-[2/3] w-full overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900'>
           {cardAsset ? (
             <img
               alt={`${displayName} card`}
-              className="h-full w-full object-cover object-top"
+              className='h-full w-full object-cover object-top'
               draggable={false}
               src={cardAsset}
             />
           ) : (
-            <div className="h-full w-full bg-[radial-gradient(circle_at_50%_28%,rgba(125,165,215,0.18),rgba(6,12,24,0.92)_70%)]" />
+            <div className='h-full w-full bg-[radial-gradient(circle_at_50%_28%,rgba(125,165,215,0.18),rgba(6,12,24,0.92)_70%)]' />
           )}
         </div>
       ) : null}
 
-      <div className="border border-slate-600/30 bg-slate-900/30 px-3 py-2.5">
-        <div className="mb-2.5 space-y-2">
-          <div className="flex items-center justify-between gap-3">
-            <h4 className="ui-title text-[11px] tracking-wide text-slate-400 uppercase">
+      <div className='border border-slate-600/30 bg-slate-900/30 px-3 py-2.5'>
+        <div className='mb-2.5 space-y-2'>
+          <div className='flex items-center justify-between gap-3'>
+            <h4 className='ui-title text-[11px] tracking-wide text-slate-400 uppercase'>
               Attributes
             </h4>
             {hasSubstatScaling ? (
@@ -121,17 +121,17 @@ export function AwakenerDetailSidebar({
               const value = stats[key]
               const scaledSubstat = substatScaling?.[key as keyof AwakenerSubstatScaling]
               const mainstatKey = STAT_TO_MAINSTAT_KEY[key]
-              const icon = mainstatKey ? getMainstatIcon(mainstatKey) : undefined
+              const icon = getMainstatIcon(mainstatKey)
               const statTitle = scaledSubstat
                 ? `Level scaling: +${scaledSubstat} per 10 levels to Lv. 60`
                 : undefined
               return (
-                <div className="flex items-center justify-between text-[11px]" key={key}>
-                  <span className="flex items-center gap-1.5 text-slate-500">
+                <div className='flex items-center justify-between text-[11px]' key={key}>
+                  <span className='flex items-center gap-1.5 text-slate-500'>
                     {icon ? (
                       <img
-                        alt=""
-                        className="h-3.5 w-3.5 object-contain opacity-60"
+                        alt=''
+                        className='h-3.5 w-3.5 object-contain opacity-60'
                         draggable={false}
                         src={icon}
                       />
@@ -151,10 +151,10 @@ export function AwakenerDetailSidebar({
             })}
           </div>
         ) : (
-          <p className="text-[11px] text-slate-500">Loading...</p>
+          <p className='text-[11px] text-slate-500'>Loading...</p>
         )}
         {hasSubstatScaling ? (
-          <p className="mt-2 text-[10px] leading-relaxed text-slate-500">
+          <p className='mt-2 text-[10px] leading-relaxed text-slate-500'>
             Secondary stat bonuses increase every 10 levels (1-60). Psyche Surge bonuses shown from
             E3+0 to E3+12.
           </p>

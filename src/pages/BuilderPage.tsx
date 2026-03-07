@@ -1,6 +1,7 @@
 import {useRef} from 'react'
 
 import {DndContext} from '@dnd-kit/core'
+
 import {TabbedContainer} from '@/components/ui/TabbedContainer'
 import {Toast} from '@/components/ui/Toast'
 import {useTimedToast} from '@/components/ui/useTimedToast'
@@ -13,8 +14,12 @@ import {BuilderSelectionPanel} from './builder/BuilderSelectionPanel'
 import {BuilderTeamsPanel} from './builder/BuilderTeamsPanel'
 import {BuilderToolbar} from './builder/BuilderToolbar'
 import {awakenerByName} from './builder/constants'
+import {createBuilderAwakenerActions} from './builder/createBuilderAwakenerActions'
+import {createBuilderCovenantActions} from './builder/createBuilderCovenantActions'
+import {createBuilderDndCoordinator} from './builder/createBuilderDndCoordinator'
+import {createBuilderPosseActions} from './builder/createBuilderPosseActions'
+import {createBuilderWheelActions} from './builder/createBuilderWheelActions'
 import {parseTeamPreviewSlotDropZoneId, PICKER_DROP_ZONE_ID} from './builder/dnd-ids'
-import {clearTeamSlotTransfer, swapTeamSlotTransfer} from './builder/transfer-resolution'
 import {
   addTeam,
   applyTeamTemplate,
@@ -23,17 +28,13 @@ import {
   type TeamTemplateId,
 } from './builder/team-collection'
 import {type TeamStateViolationCode} from './builder/team-state'
+import {clearTeamSlotTransfer, swapTeamSlotTransfer} from './builder/transfer-resolution'
 import type {TeamSlot} from './builder/types'
-import {createBuilderAwakenerActions} from './builder/createBuilderAwakenerActions'
-import {createBuilderCovenantActions} from './builder/createBuilderCovenantActions'
 import {useBuilderDnd} from './builder/useBuilderDnd'
-import {createBuilderDndCoordinator} from './builder/createBuilderDndCoordinator'
 import {useBuilderDndWrappers} from './builder/useBuilderDndWrappers'
 import {useBuilderImportExport} from './builder/useBuilderImportExport'
-import {createBuilderPosseActions} from './builder/createBuilderPosseActions'
 import {useBuilderResetUndo} from './builder/useBuilderResetUndo'
 import {useBuilderViewModel} from './builder/useBuilderViewModel'
-import {createBuilderWheelActions} from './builder/createBuilderWheelActions'
 import {usePendingDeleteDialog} from './builder/usePendingDeleteDialog'
 import {usePendingResetTeamDialog} from './builder/usePendingResetTeamDialog'
 import {usePendingTransferDialog} from './builder/usePendingTransferDialog'
@@ -132,7 +133,9 @@ export function BuilderPage() {
     clearTeamCovenant,
   } = useBuilderViewModel({searchInputRef})
 
-  const clearActiveSelection = () => setActiveSelection(null)
+  const clearActiveSelection = () => {
+    setActiveSelection(null)
+  }
 
   const {clearPendingDelete, requestDeleteTeam, pendingDeleteDialog} = usePendingDeleteDialog({
     teams,
@@ -181,7 +184,9 @@ export function BuilderPage() {
   })
 
   const onPickerAssignSuccess: ((nextSlots: TeamSlot[]) => void) | undefined = quickLineupSession
-    ? (nextSlots) => advanceQuickLineupStep(nextSlots)
+    ? (nextSlots) => {
+        advanceQuickLineupStep(nextSlots)
+      }
     : undefined
 
   function clearAllTransientState() {
@@ -386,9 +391,6 @@ export function BuilderPage() {
   }
 
   function handleExportIngameClick() {
-    if (!activeTeam) {
-      return
-    }
     openTeamIngameExportDialog(activeTeam.id)
   }
 
@@ -429,7 +431,7 @@ export function BuilderPage() {
       return
     }
     showToast(
-      `Applied ${templateLabel}: renamed ${result.renamedCount}, created ${result.createdCount}, removed ${result.removedCount}.`,
+      `Applied ${templateLabel}: renamed ${String(result.renamedCount)}, created ${String(result.createdCount)}, removed ${String(result.removedCount)}.`,
     )
   }
 
@@ -468,7 +470,7 @@ export function BuilderPage() {
       onDragStart={dndWrappers.handleDndDragStart}
       sensors={sensors}
     >
-      <section className="space-y-4">
+      <section className='space-y-4'>
         <BuilderToolbar
           hasTeams={teams.length > 0}
           hasActiveTeam={Boolean(activeTeam)}
@@ -483,22 +485,22 @@ export function BuilderPage() {
           }}
         />
 
-        <div className="grid items-start gap-4 lg:grid-cols-[2fr_1fr]">
-          <div className="min-w-0 space-y-3">
+        <div className='grid items-start gap-4 lg:grid-cols-[2fr_1fr]'>
+          <div className='min-w-0 space-y-3'>
             <TabbedContainer
               activeTabId={effectiveActiveTeamId}
-              bodyClassName="p-0"
+              bodyClassName='p-0'
               canCloseTab={() => teams.length > 1}
-              className="overflow-hidden"
+              className='overflow-hidden'
               getTabCloseAriaLabel={(tab) => `Close ${tab.label}`}
-              leftEarMaxWidth="100%"
+              leftEarMaxWidth='100%'
               leftTrailingAction={
                 teams.length < MAX_TEAMS ? (
                   <button
-                    aria-label="Add team tab"
-                    className="tabbed-container-tab tabbed-container-tab-inactive h-full px-3 text-[11px] tracking-wide text-slate-300 transition-colors"
+                    aria-label='Add team tab'
+                    className='tabbed-container-tab tabbed-container-tab-inactive h-full px-3 text-[11px] tracking-wide text-slate-300 transition-colors'
                     onClick={handleAddTeamTab}
-                    type="button"
+                    type='button'
                   >
                     +
                   </button>
@@ -506,13 +508,13 @@ export function BuilderPage() {
               }
               onTabChange={handleTabChange}
               onTabClose={handleTabClose}
-              tone="amber"
-              tabSizing="content"
+              tone='amber'
+              tabSizing='content'
               tabs={teams.map((team) => ({id: team.id, label: team.name}))}
             >
               <BuilderActiveTeamPanel
                 activeTeamId={effectiveActiveTeamId}
-                activeTeamName={activeTeam?.name ?? 'Team'}
+                activeTeamName={activeTeam.name}
                 isEditingTeamName={
                   editingTeamId === effectiveActiveTeamId && editingTeamSurface === 'header'
                 }
@@ -531,7 +533,9 @@ export function BuilderPage() {
                 onCancelTeamRename={cancelTeamRename}
                 onEditingTeamNameChange={setEditingTeamName}
                 onFinishQuickLineup={finishQuickLineup}
-                onOpenPossePicker={() => setPickerTab('posses')}
+                onOpenPossePicker={() => {
+                  setPickerTab('posses')
+                }}
                 onStartQuickLineup={startQuickLineup}
                 onCardClick={handleCardClick}
                 onRemoveActiveSelection={handleRemoveActiveSelection}
@@ -599,12 +603,12 @@ export function BuilderPage() {
             onPosseFilterChange={setPosseFilter}
             onWheelRarityFilterChange={setWheelRarityFilter}
             onWheelMainstatFilterChange={setWheelMainstatFilter}
-            onSearchChange={(nextValue) =>
+            onSearchChange={(nextValue) => {
               setPickerSearchByTab((prev) => ({
                 ...prev,
                 [pickerTab]: nextValue,
               }))
-            }
+            }}
             onSetActivePosse={handleSetActivePosse}
             onSetActiveWheel={handlePickerWheelClick}
             onSetActiveCovenant={handlePickerCovenantClick}

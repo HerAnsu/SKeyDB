@@ -1,7 +1,7 @@
 import {describe, expect, it, vi} from 'vitest'
 
-import type {ActiveSelection, TeamSlot} from './types'
 import {createBuilderCovenantActions} from './createBuilderCovenantActions'
+import type {ActiveSelection, TeamSlot} from './types'
 
 function buildSlots(): TeamSlot[] {
   return [
@@ -23,7 +23,10 @@ function buildSlots(): TeamSlot[] {
   ]
 }
 
-function createActions(options?: {teamSlots?: TeamSlot[]; resolvedActiveSelection?: ActiveSelection}) {
+function createActions(options?: {
+  teamSlots?: TeamSlot[]
+  resolvedActiveSelection?: ActiveSelection
+}) {
   const setActiveTeamSlots = vi.fn()
   const setActiveSelection = vi.fn()
   const clearPendingDelete = vi.fn()

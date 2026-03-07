@@ -24,13 +24,20 @@ import {
 
 type RichSegmentRendererVariant = 'inline' | 'popover'
 
-type RichSegmentRendererProps = {
+interface RichSegmentRendererProps {
   segment: RichSegment
   variant: RichSegmentRendererVariant
   skillLevel: number
   stats: AwakenerFullStats | null
   onSkillClick?: (name: string, event: MouseEvent<HTMLButtonElement>) => void
   onMechanicClick?: (tag: Tag, event: MouseEvent<HTMLButtonElement>) => void
+}
+
+interface RichScalingSegmentProps {
+  segment: ScalingSegment
+  skillLevel: number
+  stats: AwakenerFullStats | null
+  variant: RichSegmentRendererVariant
 }
 
 export function RichSegmentRenderer({
@@ -52,9 +59,11 @@ export function RichSegmentRenderer({
       return (
         <button
           className={DATABASE_INTERACTIVE_TOKEN_CLASS}
-          onClick={(event) => onSkillClick(segment.name, event)}
+          onClick={(event) => {
+            onSkillClick(segment.name, event)
+          }}
           style={{fontSize: 'inherit'}}
-          type="button"
+          type='button'
         >
           {segment.name}
         </button>
@@ -73,21 +82,23 @@ export function RichSegmentRenderer({
 
     case 'mechanic': {
       const tag = resolveTag(segment.name)
-      const desc = tag?.description || null
+      const desc = tag?.description
       if (tag && desc && onMechanicClick) {
         return (
           <button
             className={DATABASE_INTERACTIVE_TOKEN_CLASS}
-            onClick={(event) => onMechanicClick(tag, event)}
+            onClick={(event) => {
+              onMechanicClick(tag, event)
+            }}
             style={{fontSize: 'inherit'}}
-            type="button"
+            type='button'
           >
             {segment.name}
           </button>
         )
       }
       return (
-        <span className={DATABASE_UNIMPLEMENTED_TOKEN_CLASS} title="Details coming soon">
+        <span className={DATABASE_UNIMPLEMENTED_TOKEN_CLASS} title='Details coming soon'>
           {segment.name}
         </span>
       )
@@ -108,17 +119,7 @@ export function RichSegmentRenderer({
   }
 }
 
-function RichScalingSegment({
-  segment,
-  skillLevel,
-  stats,
-  variant,
-}: {
-  segment: ScalingSegment
-  skillLevel: number
-  stats: AwakenerFullStats | null
-  variant: RichSegmentRendererVariant
-}) {
+function RichScalingSegment({segment, skillLevel, stats, variant}: RichScalingSegmentProps) {
   if (variant === 'popover') {
     const {values, suffix, stat} = segment
     const display = formatScalingRange(values, suffix)
@@ -127,7 +128,7 @@ function RichScalingSegment({
       return (
         <span>
           <span className={DATABASE_POPOVER_SCALING_TOKEN_CLASS}>{computed}</span>
-          <span className="text-slate-500">
+          <span className='text-slate-500'>
             {' '}
             ({display}
             {stat ? ` ${stat}` : ''})
@@ -158,7 +159,7 @@ function RichScalingSegment({
     return (
       <span className={DATABASE_SCALING_TOKEN_CLASS} title={hoverText}>
         <span>{computed}</span>
-        <span className="text-slate-500">
+        <span className='text-slate-500'>
           {' '}
           ({displayValue}
           {segment.suffix}

@@ -48,7 +48,7 @@ describe('TeamPreviewGhost', () => {
 
     const {container} = render(
       <TeamPreviewGhost
-        mode="expanded"
+        mode='expanded'
         ownedAwakenerLevelByName={new Map([['ramona', 1]])}
         ownedWheelLevelById={new Map([['SR19', 3]])}
         team={team}

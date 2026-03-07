@@ -1,7 +1,12 @@
-type ToastProps = {
+interface ToastEntry {
+  id: number
+  message: string
+}
+
+interface ToastProps {
   message?: string | null
   messages?: string[]
-  entries?: Array<{id: number; message: string}>
+  entries?: ToastEntry[]
   className?: string
   containerClassName?: string
 }
@@ -22,9 +27,9 @@ export function Toast({
   }
 
   return (
-    <div aria-live="polite" className={containerClassName}>
+    <div aria-live='polite' className={containerClassName}>
       {resolvedEntries.map((entry) => (
-        <div className={className} key={entry.id} role="status">
+        <div className={className} key={entry.id} role='status'>
           {entry.message}
         </div>
       ))}

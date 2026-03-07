@@ -9,13 +9,13 @@ describe('SegmentedControl', () => {
 
     render(
       <SegmentedControl
-        ariaLabel="Preview mode"
+        ariaLabel='Preview mode'
         onChange={onChange}
         options={[
           {value: 'compact', label: 'Compact'},
           {value: 'expanded', label: 'Expanded'},
         ]}
-        value="compact"
+        value='compact'
       />,
     )
 

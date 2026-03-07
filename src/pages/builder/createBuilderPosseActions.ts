@@ -2,14 +2,14 @@ import type {Posse} from '@/domain/posses'
 
 import type {Team, TeamSlot} from './types'
 
-type PosseTransferRequest = {
+interface PosseTransferRequest {
   posseId: string
   posseName: string
   fromTeamId: string
   toTeamId: string
 }
 
-type BuilderPosseActionsOptions = {
+interface BuilderPosseActionsOptions {
   allowDupes: boolean
   effectiveActiveTeamId: string
   teams: Team[]

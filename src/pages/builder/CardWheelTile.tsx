@@ -6,7 +6,7 @@ import {getWheelAssetById} from '@/domain/wheel-assets'
 import {makeWheelDropZoneId} from './dnd-ids'
 import type {DragData, PredictedDropHover} from './types'
 
-export type CardWheelTileProps = {
+export interface CardWheelTileProps {
   slotId: string
   wheelId: string | null
   wheelIndex: number
@@ -24,8 +24,8 @@ export type CardWheelTileProps = {
 function renderWheelTileVisual(wheelId: string | null) {
   if (!wheelId) {
     return (
-      <span className="wheel-tile-content absolute inset-[2px] border border-slate-700/70 bg-slate-900/60">
-        <span className="sigil-placeholder sigil-placeholder-wheel" />
+      <span className='wheel-tile-content absolute inset-[2px] border border-slate-700/70 bg-slate-900/60'>
+        <span className='sigil-placeholder sigil-placeholder-wheel' />
       </span>
     )
   }
@@ -33,15 +33,15 @@ function renderWheelTileVisual(wheelId: string | null) {
   const asset = getWheelAssetById(wheelId)
   if (!asset) {
     return (
-      <span className="wheel-tile-content absolute inset-[2px] border border-slate-200/20 bg-[linear-gradient(180deg,#1e3a5f_0%,#0b1220_100%)]" />
+      <span className='wheel-tile-content absolute inset-[2px] border border-slate-200/20 bg-[linear-gradient(180deg,#1e3a5f_0%,#0b1220_100%)]' />
     )
   }
 
   return (
-    <span className="wheel-tile-content absolute inset-[2px] overflow-hidden border border-slate-200/20">
+    <span className='wheel-tile-content absolute inset-[2px] overflow-hidden border border-slate-200/20'>
       <img
         alt={`${wheelId} wheel`}
-        className="builder-card-wheel-image h-full w-full object-cover"
+        className='builder-card-wheel-image h-full w-full object-cover'
         draggable={false}
         src={asset}
       />
@@ -87,13 +87,13 @@ function renderWheelOwnership(
   if (isOwned) {
     return (
       <DupeLevelDisplay
-        className="builder-wheel-dupe builder-wheel-dupe-stacked builder-dupe-owned pb-1"
+        className='builder-wheel-dupe builder-wheel-dupe-stacked builder-dupe-owned pb-1'
         level={ownedLevel}
       />
     )
   }
 
-  return <span className="builder-unowned-chip">Unowned</span>
+  return <span className='builder-unowned-chip'>Unowned</span>
 }
 
 export function CardWheelTile({
@@ -119,7 +119,7 @@ export function CardWheelTile({
     isDragging,
     setNodeRef: setDraggableRef,
   } = useDraggable({
-    id: `team-wheel:${slotId}:${wheelIndex}`,
+    id: `team-wheel:${slotId}:${String(wheelIndex)}`,
     data: getTeamWheelDragData(draggableEnabled, slotId, wheelIndex, wheelId),
     disabled: !draggableEnabled,
   })
@@ -134,7 +134,7 @@ export function CardWheelTile({
   const tileClassName = getWheelTileClassName(isActive, showOver, isDragging, isOwned, wheelId)
   const tileVisual = (
     <>
-      <span className="wheel-tile-frame absolute inset-0 border border-slate-200/45" />
+      <span className='wheel-tile-frame absolute inset-0 border border-slate-200/45' />
       {renderWheelTileVisual(wheelId)}
     </>
   )
@@ -147,27 +147,27 @@ export function CardWheelTile({
     <div className={tileClassName} ref={setDroppableRef}>
       <button
         aria-label={wheelId ? 'Edit wheel' : 'Set wheel'}
-        className="absolute inset-0 z-20"
+        className='absolute inset-0 z-20'
         onClick={() => onClick?.(wheelIndex)}
         ref={draggableEnabled ? setDraggableRef : undefined}
-        type="button"
+        type='button'
         {...(draggableEnabled ? attributes : {})}
         {...(draggableEnabled ? listeners : {})}
       />
       {allowActiveRemoval && isActive && wheelId ? (
         <button
-          aria-label="Remove active wheel"
-          className="builder-card-remove-button absolute -top-0.5 -right-0.5 z-40 h-7 w-7"
-          data-card-remove="true"
+          aria-label='Remove active wheel'
+          className='builder-card-remove-button absolute -top-0.5 -right-0.5 z-40 h-7 w-7'
+          data-card-remove='true'
           onClick={(event) => {
             event.preventDefault()
             event.stopPropagation()
             onRemove?.()
           }}
-          type="button"
+          type='button'
         >
-          <span className="sigil-placeholder sigil-placeholder-no-plus sigil-placeholder-remove builder-card-remove-sigil builder-card-remove-sigil-wheel" />
-          <span className="sigil-remove-x builder-card-remove-x" />
+          <span className='sigil-placeholder sigil-placeholder-no-plus sigil-placeholder-remove builder-card-remove-sigil builder-card-remove-sigil-wheel' />
+          <span className='sigil-remove-x builder-card-remove-x' />
         </button>
       ) : null}
       {renderWheelOwnership(showOwnership, wheelId, isOwned, ownedLevel)}

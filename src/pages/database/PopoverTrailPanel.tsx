@@ -2,7 +2,7 @@ import {useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNod
 
 import {decideTrailDirection, isTrailMobileLayout} from './popover-trail'
 
-type PopoverTrailPanelProps = {
+interface PopoverTrailPanelProps {
   anchorRect: DOMRect
   anchorElement?: HTMLElement | null
   itemCount: number
@@ -57,8 +57,8 @@ export function PopoverTrailPanel({
       top = margin
     }
 
-    el.style.top = `${top}px`
-    el.style.left = `${left}px`
+    el.style.top = `${String(top)}px`
+    el.style.left = `${String(left)}px`
   }, [anchorElement, anchorRect, direction, isMobile])
 
   useLayoutEffect(() => {
@@ -103,9 +103,13 @@ export function PopoverTrailPanel({
           ? 'inset-x-3 bottom-3 max-h-[min(72vh,34rem)]'
           : 'max-h-[calc(100vh-24px)] w-[min(22rem,calc(100vw-24px))]'
       }`}
-      data-skill-popover=""
-      onClick={(e) => e.stopPropagation()}
-      onMouseDown={(e) => e.stopPropagation()}
+      data-skill-popover=''
+      onClick={(e) => {
+        e.stopPropagation()
+      }}
+      onMouseDown={(e) => {
+        e.stopPropagation()
+      }}
       ref={ref}
       style={isMobile ? undefined : {top: 0, left: -9999}}
     >

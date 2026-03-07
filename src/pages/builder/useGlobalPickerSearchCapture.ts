@@ -3,7 +3,7 @@ import {useEffect, type RefObject} from 'react'
 import type {PickerTab} from './types'
 import {isTypingTarget} from './utils'
 
-type UseGlobalPickerSearchCaptureOptions = {
+interface UseGlobalPickerSearchCaptureOptions {
   pickerTab: PickerTab
   searchInputRef: RefObject<HTMLInputElement | null>
   onAppendCharacter: (pickerTab: PickerTab, key: string) => void

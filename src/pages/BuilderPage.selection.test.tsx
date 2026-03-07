@@ -20,7 +20,7 @@ describe('BuilderPage selection behavior', () => {
   it('clears active selection when clicking completely outside builder section', () => {
     render(
       <div>
-        <button type="button">Outside Click Target</button>
+        <button type='button'>Outside Click Target</button>
         <BuilderPage />
       </div>,
     )

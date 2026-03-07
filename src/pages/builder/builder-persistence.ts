@@ -9,16 +9,14 @@ import type {Team, TeamSlot} from './types'
 
 const BUILDER_PERSISTENCE_VERSION = 1
 
-export const BUILDER_PERSISTENCE_KEY = `skeydb.builder.v${BUILDER_PERSISTENCE_VERSION}`
+export const BUILDER_PERSISTENCE_KEY = `skeydb.builder.v${String(BUILDER_PERSISTENCE_VERSION)}`
 
-type BuilderDraftPayload = {
+export interface BuilderDraftPayload {
   teams: Team[]
   activeTeamId: string
 }
 
-export type {BuilderDraftPayload}
-
-type PersistedBuilderEnvelope = {
+interface PersistedBuilderEnvelope {
   version: number
   updatedAt: string
   payload: BuilderDraftPayload
@@ -89,7 +87,8 @@ function hasInvalidEmptySlotData(record: Record<string, unknown>): boolean {
     record.level !== undefined ||
     record.covenantId !== undefined ||
     record.isSupport !== undefined
-  const hasWheelData = Array.isArray(record.wheels) && record.wheels.some((wheelId) => wheelId !== null)
+  const hasWheelData =
+    Array.isArray(record.wheels) && record.wheels.some((wheelId) => wheelId !== null)
   return hasMetadata || hasWheelData
 }
 
@@ -99,7 +98,11 @@ function isSlot(value: unknown): value is TeamSlot {
   }
 
   const record = value as Record<string, unknown>
-  if (!hasValidSlotIdentity(record) || !hasValidSlotWheels(record) || !hasValidSlotMetadata(record)) {
+  if (
+    !hasValidSlotIdentity(record) ||
+    !hasValidSlotWheels(record) ||
+    !hasValidSlotMetadata(record)
+  ) {
     return false
   }
 

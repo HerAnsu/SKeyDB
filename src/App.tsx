@@ -16,41 +16,41 @@ const CollectionPage = lazy(() =>
 
 function App() {
   return (
-    <div className="min-h-dvh bg-[radial-gradient(circle_at_top,_#1f3148,_#0c121c_60%)] text-slate-100">
-      <header className="border-b border-amber-200/30 bg-slate-950/35 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-3 px-4 py-4 md:flex-row md:items-center md:justify-between md:px-6">
+    <div className='min-h-dvh bg-[radial-gradient(circle_at_top,_#1f3148,_#0c121c_60%)] text-slate-100'>
+      <header className='border-b border-amber-200/30 bg-slate-950/35 backdrop-blur'>
+        <div className='mx-auto flex w-full max-w-6xl flex-col items-start gap-3 px-4 py-4 md:flex-row md:items-center md:justify-between md:px-6'>
           <div>
-            <h1 className="ui-title text-2xl text-amber-100 md:text-3xl">SKeyDB</h1>
-            <p className="text-sm text-slate-300">Morimens Database and Team Planner</p>
+            <h1 className='ui-title text-2xl text-amber-100 md:text-3xl'>SKeyDB</h1>
+            <p className='text-sm text-slate-300'>Morimens Database and Team Planner</p>
           </div>
-          <nav className="flex w-full flex-wrap items-center gap-2 text-sm md:w-auto md:text-base">
-            <NavLink className={navClassName} to="/">
+          <nav className='flex w-full flex-wrap items-center gap-2 text-sm md:w-auto md:text-base'>
+            <NavLink className={navClassName} to='/'>
               Overview
             </NavLink>
-            <NavLink className={navClassName} to="/database">
+            <NavLink className={navClassName} to='/database'>
               Database
             </NavLink>
-            <NavLink className={navClassName} to="/builder">
+            <NavLink className={navClassName} to='/builder'>
               Builder
             </NavLink>
-            <NavLink className={navClassName} to="/collection">
+            <NavLink className={navClassName} to='/collection'>
               Collection
             </NavLink>
           </nav>
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl px-4 py-4 md:px-6 md:py-5">
+      <main className='mx-auto w-full max-w-6xl px-4 py-4 md:px-6 md:py-5'>
         <Suspense
-          fallback={<div className="px-2 py-6 text-sm text-slate-300">Loading page...</div>}
+          fallback={<div className='px-2 py-6 text-sm text-slate-300'>Loading page...</div>}
         >
           <Routes>
-            <Route element={<HomePage />} path="/" />
-            <Route element={<DatabasePage />} path="/database" />
-            <Route element={<DatabasePage />} path="/database/awk/:awakenerSlug" />
-            <Route element={<BuilderPage />} path="/builder" />
-            <Route element={<CollectionPage />} path="/collection" />
-            <Route element={<Navigate replace to="/" />} path="*" />
+            <Route element={<HomePage />} path='/' />
+            <Route element={<DatabasePage />} path='/database' />
+            <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug' />
+            <Route element={<BuilderPage />} path='/builder' />
+            <Route element={<CollectionPage />} path='/collection' />
+            <Route element={<Navigate replace to='/' />} path='*' />
           </Routes>
         </Suspense>
       </main>

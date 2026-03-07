@@ -6,15 +6,19 @@ import type {TeamSlot} from './types'
 
 export type TeamStateViolationCode = 'TOO_MANY_REALMS_IN_TEAM' | 'INVALID_BUILD_RULES'
 
-export type TeamStateUpdateResult = {
+export interface TeamStateUpdateResult {
   nextSlots: TeamSlot[]
   violation?: TeamStateViolationCode
 }
 
 function asRealmMembers(slots: TeamSlot[]) {
-  return slots
-    .filter((slot) => slot.awakenerName && slot.realm)
-    .map((slot) => ({realm: slot.realm!}))
+  return slots.flatMap((slot) => {
+    if (!slot.awakenerName || !slot.realm) {
+      return []
+    }
+
+    return [{realm: slot.realm}]
+  })
 }
 
 export function getTeamRealmSet(slots: TeamSlot[]): Set<string> {
@@ -176,7 +180,7 @@ export function swapWheelAssignments(
 
   const sourceSlot = currentSlots.find((slot) => slot.slotId === sourceSlotId)
   const targetSlot = currentSlots.find((slot) => slot.slotId === targetSlotId)
-  if (!sourceSlot || !targetSlot || !targetSlot.awakenerName) {
+  if (!sourceSlot || !targetSlot?.awakenerName) {
     return {nextSlots: currentSlots}
   }
 
@@ -355,7 +359,7 @@ export function swapCovenantAssignments(
 
   const sourceSlot = currentSlots.find((slot) => slot.slotId === sourceSlotId)
   const targetSlot = currentSlots.find((slot) => slot.slotId === targetSlotId)
-  if (!sourceSlot || !targetSlot || !targetSlot.awakenerName) {
+  if (!sourceSlot || !targetSlot?.awakenerName) {
     return {nextSlots: currentSlots}
   }
 

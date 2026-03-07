@@ -9,7 +9,7 @@ import type {
 } from './types'
 import {wheelMainstatFilterOptions} from './wheel-mainstats'
 
-const awakenerFilterTabs: Array<{id: AwakenerFilter; label: string}> = [
+const awakenerFilterTabs: {id: AwakenerFilter; label: string}[] = [
   {id: 'ALL', label: 'All'},
   {id: 'AEQUOR', label: 'Aequor'},
   {id: 'CARO', label: 'Caro'},
@@ -17,7 +17,7 @@ const awakenerFilterTabs: Array<{id: AwakenerFilter; label: string}> = [
   {id: 'ULTRA', label: 'Ultra'},
 ]
 
-const posseFilterTabs: Array<{id: PosseFilter; label: string}> = [
+const posseFilterTabs: {id: PosseFilter; label: string}[] = [
   {id: 'ALL', label: 'All'},
   {id: 'FADED_LEGACY', label: 'Faded Legacy'},
   {id: 'AEQUOR', label: 'Aequor'},
@@ -26,7 +26,7 @@ const posseFilterTabs: Array<{id: PosseFilter; label: string}> = [
   {id: 'ULTRA', label: 'Ultra'},
 ]
 
-const wheelRarityFilterTabs: Array<{id: WheelRarityFilter; label: string}> = [
+const wheelRarityFilterTabs: {id: WheelRarityFilter; label: string}[] = [
   {id: 'ALL', label: 'All'},
   {id: 'SSR', label: 'SSR'},
   {id: 'SR', label: 'SR'},
@@ -54,7 +54,7 @@ function getCompactFilterChipClassName(isActive: boolean): string {
   }`
 }
 
-type BuilderSelectionFiltersProps = {
+interface BuilderSelectionFiltersProps {
   searchInputRef: RefObject<HTMLInputElement | null>
   pickerTab: PickerTab
   activeSearchQuery: string
@@ -86,22 +86,26 @@ export function BuilderSelectionFilters({
   return (
     <>
       <input
-        className="mt-3 w-full border border-slate-800/95 bg-slate-950/90 px-3 py-2 text-sm text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] outline-none placeholder:text-slate-500 focus:border-amber-300/65 focus:bg-slate-950"
-        onChange={(event) => onSearchChange(event.target.value)}
+        className='mt-3 w-full border border-slate-800/95 bg-slate-950/90 px-3 py-2 text-sm text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] outline-none placeholder:text-slate-500 focus:border-amber-300/65 focus:bg-slate-950'
+        onChange={(event) => {
+          onSearchChange(event.target.value)
+        }}
         placeholder={getPickerSearchPlaceholder(pickerTab)}
         ref={searchInputRef}
-        type="search"
+        type='search'
         value={activeSearchQuery}
       />
 
       {pickerTab === 'awakeners' ? (
-        <div className="mt-2 grid grid-cols-5 gap-1">
+        <div className='mt-2 grid grid-cols-5 gap-1'>
           {awakenerFilterTabs.map((filterTab) => (
             <button
               className={getCompactFilterChipClassName(awakenerFilter === filterTab.id)}
               key={filterTab.id}
-              onClick={() => onAwakenerFilterChange(filterTab.id)}
-              type="button"
+              onClick={() => {
+                onAwakenerFilterChange(filterTab.id)
+              }}
+              type='button'
             >
               {filterTab.label}
             </button>
@@ -110,13 +114,15 @@ export function BuilderSelectionFilters({
       ) : null}
 
       {pickerTab === 'posses' ? (
-        <div className="mt-2 grid grid-cols-3 gap-1">
+        <div className='mt-2 grid grid-cols-3 gap-1'>
           {posseFilterTabs.map((filterTab) => (
             <button
               className={getCompactFilterChipClassName(posseFilter === filterTab.id)}
               key={filterTab.id}
-              onClick={() => onPosseFilterChange(filterTab.id)}
-              type="button"
+              onClick={() => {
+                onPosseFilterChange(filterTab.id)
+              }}
+              type='button'
             >
               {filterTab.label}
             </button>
@@ -126,20 +132,22 @@ export function BuilderSelectionFilters({
 
       {pickerTab === 'wheels' ? (
         <>
-          <div className="mt-2 grid grid-cols-4 gap-1">
+          <div className='mt-2 grid grid-cols-4 gap-1'>
             {wheelRarityFilterTabs.map((filterTab) => (
               <button
                 aria-pressed={wheelRarityFilter === filterTab.id}
                 className={getCompactFilterChipClassName(wheelRarityFilter === filterTab.id)}
                 key={filterTab.id}
-                onClick={() => onWheelRarityFilterChange(filterTab.id)}
-                type="button"
+                onClick={() => {
+                  onWheelRarityFilterChange(filterTab.id)
+                }}
+                type='button'
               >
                 {filterTab.label}
               </button>
             ))}
           </div>
-          <div className="mt-1.5 grid grid-cols-9 gap-1">
+          <div className='mt-1.5 grid grid-cols-9 gap-1'>
             {wheelMainstatFilterOptions.map((filterTab) => (
               <button
                 aria-label={`Filter wheels by ${filterTab.label}`}
@@ -150,19 +158,21 @@ export function BuilderSelectionFilters({
                     : 'border-slate-500/45 bg-slate-900/55 text-slate-300 hover:border-amber-200/45'
                 }`}
                 key={filterTab.id}
-                onClick={() => onWheelMainstatFilterChange(filterTab.id)}
+                onClick={() => {
+                  onWheelMainstatFilterChange(filterTab.id)
+                }}
                 title={filterTab.label}
-                type="button"
+                type='button'
               >
                 {filterTab.iconAsset ? (
                   <img
                     alt={filterTab.label}
-                    className="h-[17px] w-[17px] object-contain opacity-95"
+                    className='h-[17px] w-[17px] object-contain opacity-95'
                     draggable={false}
                     src={filterTab.iconAsset}
                   />
                 ) : (
-                  <span className="text-[10px] tracking-wide uppercase">All</span>
+                  <span className='text-[10px] tracking-wide uppercase'>All</span>
                 )}
               </button>
             ))}

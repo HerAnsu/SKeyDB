@@ -27,7 +27,7 @@ export function writeFontScale(scale: FontScale): void {
 }
 
 export function scaledFontStyle(basePx: number): CSSProperties {
-  return {fontSize: `calc(var(--desc-font-scale, 1) * ${basePx}px)`}
+  return {fontSize: `calc(var(--desc-font-scale, 1) * ${String(basePx)}px)`}
 }
 
 export function renderTextWithBreaks(text: string): ReactNode {
@@ -37,8 +37,11 @@ export function renderTextWithBreaks(text: string): ReactNode {
     null,
     ...parts.flatMap((part, i) =>
       i === 0
-        ? [createElement('span', {key: i}, part)]
-        : [createElement('br', {key: `br${i}`}), createElement('span', {key: i}, part)],
+        ? [createElement('span', {key: String(i)}, part)]
+        : [
+            createElement('br', {key: `br${String(i)}`}),
+            createElement('span', {key: String(i)}, part),
+          ],
     ),
   )
 }

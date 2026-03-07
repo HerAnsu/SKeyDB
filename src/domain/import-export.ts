@@ -74,8 +74,8 @@ function trimTrailingPadding(value: string): string {
 
 function bytesToBase64Url(bytes: Uint8Array): string {
   let binary = ''
-  for (let i = 0; i < bytes.length; i += 1) {
-    binary += String.fromCharCode(bytes[i])
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte)
   }
   return trimTrailingPadding(btoa(binary).replace(/\+/g, '-').replace(/\//g, '_'))
 }
@@ -130,7 +130,7 @@ function getDecodedAwakener(awakenerId: number) {
 
   const awakener = awakenerById.get(awakenerId)
   if (!awakener) {
-    throw new Error(`Unknown awakener id: ${awakenerId}`)
+    throw new Error(`Unknown awakener id: ${String(awakenerId)}`)
   }
   return awakener
 }
@@ -142,7 +142,7 @@ function getDecodedWheelId(wheelIndex: number): string | null {
 
   const wheelId = wheelIdByIndex.get(wheelIndex)
   if (!wheelId) {
-    throw new Error(`Unknown wheel index: ${wheelIndex}`)
+    throw new Error(`Unknown wheel index: ${String(wheelIndex)}`)
   }
   return wheelId
 }
@@ -154,7 +154,7 @@ function getDecodedCovenantId(covenantIndex: number): string | undefined {
 
   const covenantId = covenantIdByIndex.get(covenantIndex)
   if (!covenantId) {
-    throw new Error(`Unknown covenant index: ${covenantIndex}`)
+    throw new Error(`Unknown covenant index: ${String(covenantIndex)}`)
   }
   return covenantId
 }
@@ -203,7 +203,7 @@ function decodeTeam(
   let cursor = offset + 1
 
   if (posseIndex && !posseIdByIndex.has(posseIndex)) {
-    throw new Error(`Unknown posse index: ${posseIndex}`)
+    throw new Error(`Unknown posse index: ${String(posseIndex)}`)
   }
 
   if (cursor + slotsPerTeam * bytesPerSlot > bytes.length) {
@@ -212,15 +212,15 @@ function decodeTeam(
 
   const emptySlots = createEmptyTeamSlots()
   const slots: TeamSlot[] = []
-  for (let slotIndex = 0; slotIndex < slotsPerTeam; slotIndex += 1) {
-    slots.push(decodeSlot(bytes, cursor, emptySlots[slotIndex].slotId, options))
+  for (const slot of emptySlots) {
+    slots.push(decodeSlot(bytes, cursor, slot.slotId, options))
     cursor += bytesPerSlot
   }
 
   return {
     team: {
-      id: `imported-team-${teamIndex}-${crypto.randomUUID()}`,
-      name: `Team ${teamIndex + 1}`,
+      id: `imported-team-${String(teamIndex)}-${crypto.randomUUID()}`,
+      name: `Team ${String(teamIndex + 1)}`,
       slots,
       posseId: posseIndex ? posseIdByIndex.get(posseIndex) : undefined,
     },
@@ -247,7 +247,9 @@ export function encodeMultiTeamCode(teams: Team[], activeTeamId: string): string
   }
 
   const buffer: number[] = [activeTeamIndex, teams.length]
-  teams.forEach((team) => pushTeamBytes(buffer, team, {includeSupport: true}))
+  for (const team of teams) {
+    pushTeamBytes(buffer, team, {includeSupport: true})
+  }
   return `${multiPrefix}${bytesToBase64Url(Uint8Array.from(buffer))}`
 }
 

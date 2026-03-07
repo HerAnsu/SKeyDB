@@ -9,25 +9,25 @@ import {getWheels} from './wheels'
 
 export type IngameTokenCategory = 'awakeners' | 'wheels' | 'covenants' | 'posses'
 
-export type CanonicalTokenEntry = {
+export interface CanonicalTokenEntry {
   id: string
   token: string
 }
 
-export type IngameDictionaryIssue = {
+export interface IngameDictionaryIssue {
   category: IngameTokenCategory
   kind: 'duplicate_token' | 'missing_token_for_id' | 'unknown_source_id'
   id?: string
   token?: string
 }
 
-export type IngameTokenDictionaryBuildResult = {
+export interface IngameTokenDictionaryBuildResult {
   byIdToken: Map<string, string>
   byTokenId: Map<string, string>
   issues: IngameDictionaryIssue[]
 }
 
-type BuildTokenDictionaryInput = {
+interface BuildTokenDictionaryInput {
   category: IngameTokenCategory
   ids: string[]
   sourceEntries: CanonicalTokenEntry[]
@@ -87,7 +87,7 @@ export function buildTokenDictionaryFromEntries({
   }
 }
 
-export type IngameTokenDictionaries = {
+export interface IngameTokenDictionaries {
   awakeners: IngameTokenDictionaryBuildResult
   wheels: IngameTokenDictionaryBuildResult
   covenants: IngameTokenDictionaryBuildResult

@@ -70,11 +70,11 @@ vi.mock('../domain/posse-assets', () => ({
 }))
 
 vi.mock('./collection/OwnedAwakenerBoxExport', () => ({
-  OwnedAwakenerBoxExport: () => <button type="button">Export box as PNG (owned only)</button>,
+  OwnedAwakenerBoxExport: () => <button type='button'>Export box as PNG (owned only)</button>,
 }))
 
 vi.mock('./collection/OwnedWheelBoxExport', () => ({
-  OwnedWheelBoxExport: () => <button type="button">Export wheels as PNG (owned only)</button>,
+  OwnedWheelBoxExport: () => <button type='button'>Export wheels as PNG (owned only)</button>,
 }))
 
 afterEach(() => {
@@ -87,6 +87,12 @@ function getRequiredFileInput(container: HTMLElement): HTMLInputElement {
     throw new Error('Expected collection file input')
   }
   return input
+}
+
+function getCollectionCardTitles(): string[] {
+  return Array.from(document.querySelectorAll('.collection-card-title')).map((element) =>
+    element.textContent.trim(),
+  )
 }
 
 describe('CollectionPage global search capture', () => {
@@ -116,8 +122,10 @@ describe('CollectionPage global search capture', () => {
 
   it('saves ownership snapshot to file and shows status', () => {
     const createObjectUrlSpy = vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:mock')
-    const revokeObjectUrlSpy = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {})
-    const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {})
+    const revokeObjectUrlSpy = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined)
+    const clickSpy = vi
+      .spyOn(HTMLAnchorElement.prototype, 'click')
+      .mockImplementation(() => undefined)
 
     render(<CollectionPage />)
 
@@ -187,9 +195,7 @@ describe('CollectionPage global search capture', () => {
     fireEvent.click(screen.getByRole('button', {name: /toggle ownership for ramona/i}))
     fireEvent.click(screen.getByRole('button', {name: /apply changes/i}))
 
-    const titles = Array.from(document.querySelectorAll('.collection-card-title')).map((element) =>
-      element.textContent?.trim(),
-    )
+    const titles = getCollectionCardTitles()
     expect(titles[0]).toBe('Ogier')
     expect(titles[1]).toBe('Ramona')
   })
@@ -212,17 +218,13 @@ describe('CollectionPage global search capture', () => {
     render(<CollectionPage />)
     fireEvent.click(screen.getByRole('tab', {name: 'Posses'}))
 
-    const initialTitles = Array.from(document.querySelectorAll('.collection-card-title')).map(
-      (element) => element.textContent?.trim(),
-    )
+    const initialTitles = getCollectionCardTitles()
     expect(initialTitles[0]).toBe('Manor Echoes')
     expect(initialTitles[1]).toBe('Faded Legacy')
 
     fireEvent.click(screen.getByRole('button', {name: /toggle ownership for manor echoes/i}))
 
-    const afterToggleTitles = Array.from(document.querySelectorAll('.collection-card-title')).map(
-      (element) => element.textContent?.trim(),
-    )
+    const afterToggleTitles = getCollectionCardTitles()
     expect(afterToggleTitles[0]).toBe('Faded Legacy')
     expect(afterToggleTitles[1]).toBe('Manor Echoes')
   })
@@ -239,17 +241,13 @@ describe('CollectionPage global search capture', () => {
 
     expect(screen.getByRole('button', {name: /apply changes/i})).toBeInTheDocument()
 
-    const titlesBeforeApply = Array.from(document.querySelectorAll('.collection-card-title')).map(
-      (element) => element.textContent?.trim(),
-    )
+    const titlesBeforeApply = getCollectionCardTitles()
     expect(titlesBeforeApply[0]).toBe('Ramona')
     expect(titlesBeforeApply[1]).toBe('Ogier')
 
     fireEvent.click(screen.getByRole('button', {name: /apply changes/i}))
 
-    const titlesAfterApply = Array.from(document.querySelectorAll('.collection-card-title')).map(
-      (element) => element.textContent?.trim(),
-    )
+    const titlesAfterApply = getCollectionCardTitles()
     expect(titlesAfterApply[0]).toBe('Ogier')
     expect(titlesAfterApply[1]).toBe('Ramona')
   })
@@ -271,17 +269,13 @@ describe('CollectionPage global search capture', () => {
 
     expect(screen.getByRole('button', {name: /apply changes/i})).toBeInTheDocument()
 
-    const titlesBeforeApply = Array.from(document.querySelectorAll('.collection-card-title')).map(
-      (element) => element.textContent?.trim(),
-    )
+    const titlesBeforeApply = getCollectionCardTitles()
     expect(titlesBeforeApply[0]).toBe('Birth of a Soul')
     expect(titlesBeforeApply[1]).toBe('Call of the Deep')
 
     fireEvent.click(screen.getByRole('button', {name: /apply changes/i}))
 
-    const titlesAfterApply = Array.from(document.querySelectorAll('.collection-card-title')).map(
-      (element) => element.textContent?.trim(),
-    )
+    const titlesAfterApply = getCollectionCardTitles()
     expect(titlesAfterApply[0]).toBe('Call of the Deep')
     expect(titlesAfterApply[1]).toBe('Birth of a Soul')
   })

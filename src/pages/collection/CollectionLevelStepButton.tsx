@@ -1,6 +1,6 @@
 import {useHoldRepeatAction} from './useHoldRepeatAction'
 
-type CollectionLevelStepButtonProps = {
+interface CollectionLevelStepButtonProps {
   ariaLabel: string
   disabled: boolean
   direction: 'up' | 'down'
@@ -31,20 +31,20 @@ export function CollectionLevelStepButton({
       onPointerDown={hold.onPointerDown}
       onPointerLeave={hold.onPointerLeave}
       onPointerUp={hold.onPointerUp}
-      type="button"
+      type='button'
     >
       <svg
-        aria-hidden="true"
+        aria-hidden='true'
         className={glyphClassName ?? 'collection-step-glyph'}
-        viewBox="0 0 16 16"
+        viewBox='0 0 16 16'
       >
         <path
           d={glyphPath}
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.8"
+          fill='none'
+          stroke='currentColor'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          strokeWidth='1.8'
         />
       </svg>
     </button>

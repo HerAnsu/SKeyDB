@@ -3,7 +3,7 @@ import {FaDownload, FaRotateLeft, FaUpload, FaXmark} from 'react-icons/fa6'
 import {Button} from '@/components/ui/Button'
 import {PageToolkitBar} from '@/components/ui/PageToolkitBar'
 
-type BuilderToolbarProps = {
+interface BuilderToolbarProps {
   hasTeams: boolean
   hasActiveTeam: boolean
   canUndoReset: boolean
@@ -25,36 +25,36 @@ export function BuilderToolbar({
   onRequestReset,
 }: BuilderToolbarProps) {
   return (
-    <PageToolkitBar className="collection-toolkit-drawer" sticky>
+    <PageToolkitBar className='collection-toolkit-drawer' sticky>
       <Button
-        className="px-2 py-1 text-[10px] tracking-wide uppercase"
+        className='px-2 py-1 text-[10px] tracking-wide uppercase'
         onClick={onImport}
-        type="button"
+        type='button'
       >
-        <span className="inline-flex items-center gap-1">
-          <FaUpload aria-hidden className="text-[9px]" />
+        <span className='inline-flex items-center gap-1'>
+          <FaUpload aria-hidden className='text-[9px]' />
           <span>Import</span>
         </span>
       </Button>
       <Button
-        className="px-2 py-1 text-[10px] tracking-wide uppercase"
+        className='px-2 py-1 text-[10px] tracking-wide uppercase'
         disabled={!hasTeams}
         onClick={onExportAll}
-        type="button"
+        type='button'
       >
-        <span className="inline-flex items-center gap-1">
-          <FaDownload aria-hidden className="text-[9px]" />
+        <span className='inline-flex items-center gap-1'>
+          <FaDownload aria-hidden className='text-[9px]' />
           <span>Export All</span>
         </span>
       </Button>
       <Button
-        className="px-2 py-1 text-[10px] tracking-wide uppercase"
+        className='px-2 py-1 text-[10px] tracking-wide uppercase'
         disabled={!hasActiveTeam}
         onClick={onExportIngame}
-        type="button"
+        type='button'
       >
-        <span className="inline-flex items-center gap-1">
-          <FaDownload aria-hidden className="text-[9px]" />
+        <span className='inline-flex items-center gap-1'>
+          <FaDownload aria-hidden className='text-[9px]' />
           <span>Export In-Game</span>
         </span>
       </Button>
@@ -65,13 +65,13 @@ export function BuilderToolbar({
             : 'border-rose-300/70 bg-rose-500/14 text-rose-100 hover:border-rose-200/85'
         }`}
         onClick={canUndoReset ? onUndoReset : onRequestReset}
-        type="button"
+        type='button'
       >
-        <span className="inline-flex items-center gap-1">
+        <span className='inline-flex items-center gap-1'>
           {canUndoReset ? (
-            <FaRotateLeft aria-hidden className="text-[9px]" />
+            <FaRotateLeft aria-hidden className='text-[9px]' />
           ) : (
-            <FaXmark aria-hidden className="text-[9px]" />
+            <FaXmark aria-hidden className='text-[9px]' />
           )}
           <span>{canUndoReset ? 'Undo Reset' : 'Reset Builder'}</span>
         </span>

@@ -7,7 +7,8 @@ export function useAwakenerCardImage(cardAsset: string | undefined) {
     cardAsset && loadedCardAssets.has(cardAsset) ? cardAsset : undefined,
   )
 
-  const cardImageLoaded = !cardAsset || loadedCardAsset === cardAsset || loadedCardAssets.has(cardAsset)
+  const cardImageLoaded =
+    !cardAsset || loadedCardAsset === cardAsset || loadedCardAssets.has(cardAsset)
 
   function handleCardImageError() {
     setLoadedCardAsset(cardAsset)

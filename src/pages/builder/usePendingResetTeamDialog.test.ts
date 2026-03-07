@@ -36,7 +36,9 @@ describe('usePendingResetTeamDialog', () => {
         teams,
         setTeams,
         effectiveActiveTeamId: 'team-1',
-        clearActiveSelection: () => setSelectionCleared(true),
+        clearActiveSelection: () => {
+          setSelectionCleared(true)
+        },
       })
       return {...hook, teams, selectionCleared}
     })
@@ -59,7 +61,9 @@ describe('usePendingResetTeamDialog', () => {
         teams,
         setTeams,
         effectiveActiveTeamId: 'team-1',
-        clearActiveSelection: () => setSelectionCleared(true),
+        clearActiveSelection: () => {
+          setSelectionCleared(true)
+        },
       })
       return {...hook, teams, selectionCleared}
     })

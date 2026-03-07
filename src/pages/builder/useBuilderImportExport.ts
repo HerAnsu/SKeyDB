@@ -7,14 +7,14 @@ import {hasDuplicateRuleViolation, validateBuilderTeamsStrict} from './team-vali
 import type {Team, TeamSlot} from './types'
 import {useBuilderImportFlow} from './useBuilderImportFlow'
 
-type ExportDialogState = {
+interface ExportDialogState {
   title: string
   code: string
   kind: 'standard' | 'ingame'
   duplicateWarning?: string
 }
 
-type UseBuilderImportExportOptions = {
+interface UseBuilderImportExportOptions {
   teams: Team[]
   setTeams: Dispatch<SetStateAction<Team[]>>
   effectiveActiveTeamId: string
@@ -115,7 +115,9 @@ export function useBuilderImportExport({
     importExportDialogProps: {
       ...importDialogProps,
       exportDialog,
-      onCloseExportDialog: () => setExportDialog(null),
+      onCloseExportDialog: () => {
+        setExportDialog(null)
+      },
     },
   }
 }

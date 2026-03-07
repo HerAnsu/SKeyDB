@@ -3,7 +3,7 @@ import type {Awakener} from '@/domain/awakeners'
 
 import {PickerAwakenerTile} from './PickerAwakenerTile'
 
-type AwakenerPickerGridProps = {
+interface AwakenerPickerGridProps {
   filteredAwakeners: Awakener[]
   teamRealmSet: Set<string>
   usedAwakenerIdentityKeys: Set<string>
@@ -21,15 +21,21 @@ export function AwakenerPickerGrid({
   onAwakenerClick,
 }: AwakenerPickerGridProps) {
   return (
-    <div className="grid grid-cols-4 gap-1.5">
+    <div className='grid grid-cols-4 gap-1.5'>
       {filteredAwakeners.map((awakener) => (
         <PickerAwakenerTile
           awakenerName={awakener.name}
-          isInUse={!allowDupes && usedAwakenerIdentityKeys.has(getAwakenerIdentityKey(awakener.name))}
+          isInUse={
+            !allowDupes && usedAwakenerIdentityKeys.has(getAwakenerIdentityKey(awakener.name))
+          }
           isOwned={(ownedAwakenerLevelByName.get(awakener.name) ?? null) !== null}
-          isRealmBlocked={teamRealmSet.size >= 2 && !teamRealmSet.has(awakener.realm.trim().toUpperCase())}
+          isRealmBlocked={
+            teamRealmSet.size >= 2 && !teamRealmSet.has(awakener.realm.trim().toUpperCase())
+          }
           key={awakener.name}
-          onClick={() => onAwakenerClick(awakener.name)}
+          onClick={() => {
+            onAwakenerClick(awakener.name)
+          }}
           realm={awakener.realm}
         />
       ))}

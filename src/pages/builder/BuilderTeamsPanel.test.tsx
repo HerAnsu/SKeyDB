@@ -9,9 +9,9 @@ describe('BuilderTeamsPanel', () => {
 
     render(
       <BuilderTeamsPanel
-        activeTeamId="team-1"
+        activeTeamId='team-1'
         editingTeamId={null}
-        editingTeamName=""
+        editingTeamName=''
         editingTeamSurface={null}
         onAddTeam={vi.fn()}
         onApplyTeamTemplate={vi.fn()}
@@ -26,7 +26,7 @@ describe('BuilderTeamsPanel', () => {
         onTeamPreviewModeChange={onTeamPreviewModeChange}
         ownedWheelLevelById={new Map()}
         posses={[]}
-        teamPreviewMode="compact"
+        teamPreviewMode='compact'
         teams={[
           {
             id: 'team-1',
@@ -50,9 +50,9 @@ describe('BuilderTeamsPanel', () => {
   it('renders expanded slot previews when team preview mode is expanded', () => {
     render(
       <BuilderTeamsPanel
-        activeTeamId="team-1"
+        activeTeamId='team-1'
         editingTeamId={null}
-        editingTeamName=""
+        editingTeamName=''
         editingTeamSurface={null}
         onAddTeam={vi.fn()}
         onApplyTeamTemplate={vi.fn()}
@@ -67,7 +67,7 @@ describe('BuilderTeamsPanel', () => {
         onTeamPreviewModeChange={vi.fn()}
         ownedWheelLevelById={new Map([['SR19', 3]])}
         posses={[]}
-        teamPreviewMode="expanded"
+        teamPreviewMode='expanded'
         teams={[
           {
             id: 'team-1',
@@ -96,9 +96,9 @@ describe('BuilderTeamsPanel', () => {
   it('shows a support chip on team previews for support slots', () => {
     render(
       <BuilderTeamsPanel
-        activeTeamId="team-1"
+        activeTeamId='team-1'
         editingTeamId={null}
-        editingTeamName=""
+        editingTeamName=''
         editingTeamSurface={null}
         onAddTeam={vi.fn()}
         onApplyTeamTemplate={vi.fn()}
@@ -113,7 +113,7 @@ describe('BuilderTeamsPanel', () => {
         onTeamPreviewModeChange={vi.fn()}
         ownedWheelLevelById={new Map()}
         posses={[]}
-        teamPreviewMode="compact"
+        teamPreviewMode='compact'
         teams={[
           {
             id: 'team-1',

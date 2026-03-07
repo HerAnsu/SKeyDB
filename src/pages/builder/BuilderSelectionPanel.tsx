@@ -1,15 +1,15 @@
-import type { RefObject } from 'react'
+import type {RefObject} from 'react'
 
-import { TabbedContainer } from '@/components/ui/TabbedContainer'
-import type { Awakener } from '@/domain/awakeners'
-import type { AwakenerSortKey, CollectionSortDirection } from '@/domain/collection-sorting'
-import type { Covenant } from '@/domain/covenants'
-import type { Posse } from '@/domain/posses'
-import type { Wheel } from '@/domain/wheels'
+import {TabbedContainer} from '@/components/ui/TabbedContainer'
+import type {Awakener} from '@/domain/awakeners'
+import type {AwakenerSortKey, CollectionSortDirection} from '@/domain/collection-sorting'
+import type {Covenant} from '@/domain/covenants'
+import type {Posse} from '@/domain/posses'
+import type {Wheel} from '@/domain/wheels'
 
-import { BuilderSelectionContent } from './BuilderSelectionContent'
-import { BuilderSelectionControls } from './BuilderSelectionControls'
-import { BuilderSelectionFilters } from './BuilderSelectionFilters'
+import {BuilderSelectionContent} from './BuilderSelectionContent'
+import {BuilderSelectionControls} from './BuilderSelectionControls'
+import {BuilderSelectionFilters} from './BuilderSelectionFilters'
 import type {
   AwakenerFilter,
   PickerTab,
@@ -20,14 +20,14 @@ import type {
   WheelUsageLocation,
 } from './types'
 
-const pickerTabs: Array<{ id: PickerTab; label: string }> = [
-  { id: 'awakeners', label: 'Awakeners' },
-  { id: 'wheels', label: 'Wheels' },
-  { id: 'covenants', label: 'Covenants' },
-  { id: 'posses', label: 'Posses' },
+const pickerTabs: {id: PickerTab; label: string}[] = [
+  {id: 'awakeners', label: 'Awakeners'},
+  {id: 'wheels', label: 'Wheels'},
+  {id: 'covenants', label: 'Covenants'},
+  {id: 'posses', label: 'Posses'},
 ]
 
-type BuilderSelectionPanelProps = {
+interface BuilderSelectionPanelProps {
   searchInputRef: RefObject<HTMLInputElement | null>
   pickerTab: PickerTab
   activeSearchQuery: string
@@ -115,13 +115,15 @@ export function BuilderSelectionPanel({
   onSetActivePosse,
 }: BuilderSelectionPanelProps) {
   return (
-    <aside className="flex max-h-[calc(100dvh-11.5rem)] min-h-0 flex-col" data-picker-zone="true">
+    <aside className='flex max-h-[calc(100dvh-11.5rem)] min-h-0 flex-col' data-picker-zone='true'>
       <TabbedContainer
         activeTabId={pickerTab}
-        bodyClassName="flex min-h-0 flex-1 flex-col p-2"
-        className="flex min-h-0 flex-1 flex-col"
-        leftEarMaxWidth="100%"
-        onTabChange={(tabId) => onPickerTabChange(tabId as PickerTab)}
+        bodyClassName='flex min-h-0 flex-1 flex-col p-2'
+        className='flex min-h-0 flex-1 flex-col'
+        leftEarMaxWidth='100%'
+        onTabChange={(tabId) => {
+          onPickerTabChange(tabId as PickerTab)
+        }}
         tabs={pickerTabs}
       >
         <BuilderSelectionControls

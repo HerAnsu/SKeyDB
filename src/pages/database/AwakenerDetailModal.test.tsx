@@ -70,7 +70,7 @@ vi.mock('../../domain/awakeners-full', () => ({
       enlightens: {},
     },
   ],
-  getAwakenerFullById: (id: number, data: Array<{id: number}>) =>
+  getAwakenerFullById: (id: number, data: {id: number}[]) =>
     data.find((entry) => entry.id === id) ?? null,
 }))
 
@@ -109,13 +109,28 @@ vi.mock('./AwakenerDetailSidebar', () => ({
     stats: {CON: string; CritRate: string} | null
   }) => (
     <div>
-      <button onClick={() => onLevelChange(90)} type="button">
+      <button
+        onClick={() => {
+          onLevelChange(90)
+        }}
+        type='button'
+      >
         Set level 90
       </button>
-      <button onClick={onIncreaseEnlighten} type="button">
+      <button
+        onClick={() => {
+          onIncreaseEnlighten()
+        }}
+        type='button'
+      >
         Increase Psyche Surge
       </button>
-      <button onClick={onDecreaseEnlighten} type="button">
+      <button
+        onClick={() => {
+          onDecreaseEnlighten()
+        }}
+        type='button'
+      >
         Decrease Psyche Surge
       </button>
       <div>Sidebar Level {level}</div>

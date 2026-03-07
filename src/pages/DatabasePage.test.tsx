@@ -59,8 +59,8 @@ vi.mock('../domain/mainstats', () => ({
 
 vi.mock('./database/AwakenerDetailModal', () => ({
   AwakenerDetailModal: ({awakener, onClose}: {awakener: {name: string}; onClose: () => void}) => (
-    <div aria-label={`${awakener.name} details`} role="dialog">
-      <button aria-label="Close detail" onClick={onClose} type="button">
+    <div aria-label={`${awakener.name} details`} role='dialog'>
+      <button aria-label='Close detail' onClick={onClose} type='button'>
         Close
       </button>
     </div>
@@ -74,14 +74,14 @@ afterEach(() => {
 function renderDatabasePage(initialEntry = '/database') {
   function LocationProbe() {
     const location = useLocation()
-    return <div data-testid="location-path">{location.pathname}</div>
+    return <div data-testid='location-path'>{location.pathname}</div>
   }
 
   return render(
     <MemoryRouter initialEntries={[initialEntry]}>
       <Routes>
-        <Route element={<DatabasePage />} path="/database" />
-        <Route element={<DatabasePage />} path="/database/awk/:awakenerSlug" />
+        <Route element={<DatabasePage />} path='/database' />
+        <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug' />
       </Routes>
       <LocationProbe />
     </MemoryRouter>,

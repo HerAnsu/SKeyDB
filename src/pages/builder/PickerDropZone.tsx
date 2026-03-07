@@ -2,7 +2,7 @@ import type {ReactNode} from 'react'
 
 import {useDroppable} from '@dnd-kit/core'
 
-type PickerDropZoneProps = {
+interface PickerDropZoneProps {
   id: string
   className: string
   children: ReactNode

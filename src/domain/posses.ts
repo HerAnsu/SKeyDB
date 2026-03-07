@@ -13,7 +13,7 @@ const rawPossesSchema = z.array(
   }),
 )
 
-export type Posse = {
+export interface Posse {
   id: string
   index: number
   name: string

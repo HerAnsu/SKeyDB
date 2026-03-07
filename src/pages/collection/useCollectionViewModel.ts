@@ -42,6 +42,7 @@ type PosseFilter = 'ALL' | 'FADED_LEGACY' | 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA
 type WheelRarityFilter = 'ALL' | 'SSR' | 'R' | 'SR'
 type CollectionOwnershipState = Parameters<typeof getOwnedLevel>[0]
 type CollectionOwnershipCatalog = ReturnType<typeof createDefaultCollectionOwnershipCatalog>
+type RememberedOwnershipLevels = Partial<Record<string, number>>
 
 const OWNERSHIP_AUTOSAVE_DEBOUNCE_MS = 220
 const COLLECTION_AWAKENER_SORT_KEY = 'skeydb.collection.awakenerSort.v1'
@@ -166,10 +167,7 @@ function resolveAwakenerSortGroupByRealm(
   return DEFAULT_AWAKENER_SORT_CONFIG.groupByRealm
 }
 
-function filterPossesByCategory(
-  posses: ReturnType<typeof searchPosses>,
-  posseFilter: PosseFilter,
-) {
+function filterPossesByCategory(posses: ReturnType<typeof searchPosses>, posseFilter: PosseFilter) {
   if (posseFilter === 'ALL') {
     return posses
   }
@@ -202,7 +200,7 @@ function clearFilteredAwakenerOwnership(
   ownership: CollectionOwnershipState,
   filteredAwakeners: ReturnType<typeof searchAwakeners>,
   awakenerIdByName: Map<string, string>,
-  rememberedAwakenerLevels: Record<string, number>,
+  rememberedAwakenerLevels: RememberedOwnershipLevels,
   ownershipCatalog: CollectionOwnershipCatalog,
 ): CollectionOwnershipState {
   let next = ownership
@@ -226,7 +224,7 @@ function clearFilteredAwakenerOwnership(
 function clearFilteredWheelOwnership(
   ownership: CollectionOwnershipState,
   filteredWheels: ReturnType<typeof getWheels>,
-  rememberedWheelLevels: Record<string, number>,
+  rememberedWheelLevels: RememberedOwnershipLevels,
   ownershipCatalog: CollectionOwnershipCatalog,
 ): CollectionOwnershipState {
   let next = ownership
@@ -245,7 +243,7 @@ function clearFilteredWheelOwnership(
 function clearFilteredPosseOwnership(
   ownership: CollectionOwnershipState,
   filteredPosses: ReturnType<typeof searchPosses>,
-  rememberedPosseLevels: Record<string, number>,
+  rememberedPosseLevels: RememberedOwnershipLevels,
   ownershipCatalog: CollectionOwnershipCatalog,
 ): CollectionOwnershipState {
   let next = ownership
@@ -401,7 +399,7 @@ export function useCollectionViewModel() {
     persistedAwakenerSortConfig.groupByRealm,
   )
   const rememberedLevelsRef = useRef<
-    Record<'awakeners' | 'wheels' | 'posses', Record<string, number>>
+    Record<'awakeners' | 'wheels' | 'posses', RememberedOwnershipLevels>
   >({
     awakeners: {},
     wheels: {},
@@ -666,9 +664,7 @@ export function useCollectionViewModel() {
       setAwakenerSortHasPendingChanges(true)
       return
     }
-    if (kind === 'wheels') {
-      setWheelSortHasPendingChanges(true)
-    }
+    setWheelSortHasPendingChanges(true)
   }
 
   function increaseLevel(kind: 'awakeners' | 'wheels', id: string) {
@@ -683,9 +679,7 @@ export function useCollectionViewModel() {
       setAwakenerSortHasPendingChanges(true)
       return
     }
-    if (kind === 'wheels') {
-      setWheelSortHasPendingChanges(true)
-    }
+    setWheelSortHasPendingChanges(true)
   }
 
   function decreaseLevel(kind: 'awakeners' | 'wheels', id: string) {
@@ -700,9 +694,7 @@ export function useCollectionViewModel() {
       setAwakenerSortHasPendingChanges(true)
       return
     }
-    if (kind === 'wheels') {
-      setWheelSortHasPendingChanges(true)
-    }
+    setWheelSortHasPendingChanges(true)
   }
 
   function markFilteredOwned() {
@@ -913,8 +905,9 @@ export function useCollectionViewModel() {
     awakenerSortKey,
     setAwakenerSortKey,
     awakenerSortDirection,
-    toggleAwakenerSortDirection: () =>
-      setAwakenerSortDirection((current) => (current === 'DESC' ? 'ASC' : 'DESC')),
+    toggleAwakenerSortDirection: () => {
+      setAwakenerSortDirection((current) => (current === 'DESC' ? 'ASC' : 'DESC'))
+    },
     awakenerSortGroupByRealm,
     setAwakenerSortGroupByRealm,
     filteredPosses,

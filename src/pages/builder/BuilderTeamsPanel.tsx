@@ -8,7 +8,7 @@ import {BuilderTeamRow} from './BuilderTeamRow'
 import {MAX_TEAMS, type TeamTemplateId} from './team-collection'
 import type {Team, TeamPreviewMode} from './types'
 
-type BuilderTeamsPanelProps = {
+interface BuilderTeamsPanelProps {
   teams: Team[]
   activeTeamId: string
   editingTeamId: string | null
@@ -62,55 +62,59 @@ export function BuilderTeamsPanel({
   onDeleteTeam,
 }: BuilderTeamsPanelProps) {
   return (
-    <div className="border border-slate-500/45 bg-slate-900/45 p-3">
-      <div className="flex items-center justify-between">
-        <p className="text-xs tracking-wide text-slate-300 uppercase">
+    <div className='border border-slate-500/45 bg-slate-900/45 p-3'>
+      <div className='flex items-center justify-between'>
+        <p className='text-xs tracking-wide text-slate-300 uppercase'>
           Teams ({teams.length}/{MAX_TEAMS})
         </p>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
-            <span className="text-[10px] tracking-wide text-slate-400 uppercase">View:</span>
+        <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1.5'>
+            <span className='text-[10px] tracking-wide text-slate-400 uppercase'>View:</span>
             <SegmentedControl
-              activeButtonClassName="builder-team-preview-mode-button-active"
-              ariaLabel="Team preview mode"
-              buttonClassName="builder-team-preview-mode-button"
-              className="builder-team-preview-mode-toggle"
+              activeButtonClassName='builder-team-preview-mode-button-active'
+              ariaLabel='Team preview mode'
+              buttonClassName='builder-team-preview-mode-button'
+              className='builder-team-preview-mode-toggle'
               onChange={onTeamPreviewModeChange}
               options={teamPreviewModeOptions}
               value={teamPreviewMode}
             />
           </div>
-          <span aria-hidden className="h-5 w-px bg-slate-500/45" />
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] tracking-wide text-slate-400 uppercase">Templates:</span>
+          <span aria-hidden className='h-5 w-px bg-slate-500/45' />
+          <div className='flex items-center gap-1'>
+            <span className='text-[10px] tracking-wide text-slate-400 uppercase'>Templates:</span>
             <button
-              className="border border-slate-500/45 bg-slate-900/55 px-2 py-1 text-[11px] text-slate-200 transition-colors hover:border-amber-200/45 disabled:opacity-40"
-              onClick={() => onApplyTeamTemplate('DTIDE_5')}
-              type="button"
+              className='border border-slate-500/45 bg-slate-900/55 px-2 py-1 text-[11px] text-slate-200 transition-colors hover:border-amber-200/45 disabled:opacity-40'
+              onClick={() => {
+                onApplyTeamTemplate('DTIDE_5')
+              }}
+              type='button'
             >
               D-Tide 5
             </button>
             <button
-              className="border border-slate-500/45 bg-slate-900/55 px-2 py-1 text-[11px] text-slate-200 transition-colors hover:border-amber-200/45 disabled:opacity-40"
-              onClick={() => onApplyTeamTemplate('DTIDE_10')}
-              type="button"
+              className='border border-slate-500/45 bg-slate-900/55 px-2 py-1 text-[11px] text-slate-200 transition-colors hover:border-amber-200/45 disabled:opacity-40'
+              onClick={() => {
+                onApplyTeamTemplate('DTIDE_10')
+              }}
+              type='button'
             >
               D-Tide 10
             </button>
           </div>
-          <span aria-hidden className="h-5 w-px bg-slate-500/45" />
+          <span aria-hidden className='h-5 w-px bg-slate-500/45' />
           <button
-            className="border border-slate-500/45 bg-slate-900/55 px-2 py-1 text-[11px] text-slate-200 transition-colors hover:border-amber-200/45 disabled:opacity-40"
+            className='border border-slate-500/45 bg-slate-900/55 px-2 py-1 text-[11px] text-slate-200 transition-colors hover:border-amber-200/45 disabled:opacity-40'
             disabled={teams.length >= MAX_TEAMS}
             onClick={onAddTeam}
-            type="button"
+            type='button'
           >
             + Add Team
           </button>
         </div>
       </div>
       <SortableContext items={teams.map((team) => team.id)} strategy={verticalListSortingStrategy}>
-        <div className="mt-2 space-y-2">
+        <div className='mt-2 space-y-2'>
           {teams.map((team) => {
             const isEditingTeamName = editingTeamId === team.id && editingTeamSurface === 'list'
             const posse = team.posseId

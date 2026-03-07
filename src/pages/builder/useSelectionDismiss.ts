@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 
 import type {ActiveSelection, QuickLineupSession} from './types'
 
-type UseSelectionDismissOptions = {
+interface UseSelectionDismissOptions {
   quickLineupSession: QuickLineupSession | null
   restoreQuickLineupFocus: () => void
   setActiveSelection: (next: ActiveSelection) => void

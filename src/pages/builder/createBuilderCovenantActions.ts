@@ -1,7 +1,7 @@
 import {assignCovenantToSlot, swapCovenantAssignments} from './team-state'
 import type {ActiveSelection, TeamSlot} from './types'
 
-type BuilderCovenantActionsOptions = {
+interface BuilderCovenantActionsOptions {
   teamSlots: TeamSlot[]
   resolvedActiveSelection: ActiveSelection
   setActiveTeamSlots: (nextSlots: TeamSlot[]) => void

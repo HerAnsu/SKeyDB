@@ -6,7 +6,7 @@ import {DetailLevelSlider} from './DetailLevelSlider'
 describe('DetailLevelSlider', () => {
   it('renders the standard slider without the compact modifier by default', () => {
     render(
-      <DetailLevelSlider label="Awakener Level" level={60} max={90} min={1} onChange={vi.fn()} />,
+      <DetailLevelSlider label='Awakener Level' level={60} max={90} min={1} onChange={vi.fn()} />,
     )
 
     expect(screen.getByRole('slider')).toHaveClass('export-box-slider')
@@ -19,7 +19,7 @@ describe('DetailLevelSlider', () => {
     render(
       <DetailLevelSlider
         compact
-        label="Awakener Level"
+        label='Awakener Level'
         level={60}
         max={90}
         min={1}

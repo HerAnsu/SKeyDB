@@ -4,7 +4,7 @@ import {CardCovenantTile} from './CardCovenantTile'
 import {CardWheelTile} from './CardWheelTile'
 import type {DragData, PredictedDropHover, TeamSlot} from './types'
 
-type CardWheelZoneProps = {
+interface CardWheelZoneProps {
   slot: TeamSlot
   interactive: boolean
   wheelKeyPrefix: string
@@ -47,22 +47,22 @@ export function CardWheelZone({
         compactCovenant ? 'builder-card-wheel-zone-ghost' : ''
       }`}
     >
-      <div className="builder-card-meta-row flex items-end gap-2 pb-2">
-        <div className="builder-card-meta-left pointer-events-none min-w-0 flex-1 pb-1">
+      <div className='builder-card-meta-row flex items-end gap-2 pb-2'>
+        <div className='builder-card-meta-left pointer-events-none min-w-0 flex-1 pb-1'>
           {showOwnership && slot.awakenerName && awakenerOwnedLevel !== null ? (
-            <p className="builder-awakener-level">
-              <span className="builder-awakener-level-prefix">Lv.</span>
-              <span className="builder-awakener-level-value">{awakenerLevel}</span>
+            <p className='builder-awakener-level'>
+              <span className='builder-awakener-level-prefix'>Lv.</span>
+              <span className='builder-awakener-level-value'>{awakenerLevel}</span>
             </p>
           ) : null}
           {showOwnership && awakenerOwnedLevel !== null ? (
             <DupeLevelDisplay
-              className="builder-awakener-dupe builder-awakener-dupe-meta builder-dupe-owned"
+              className='builder-awakener-dupe builder-awakener-dupe-meta builder-dupe-owned'
               level={awakenerOwnedLevel}
             />
           ) : null}
         </div>
-        <div className="builder-card-covenant-wrap shrink-0 self-end">
+        <div className='builder-card-covenant-wrap shrink-0 self-end'>
           <CardCovenantTile
             activeDragKind={activeDragKind}
             covenantId={slot.covenantId}
@@ -75,13 +75,13 @@ export function CardWheelZone({
         </div>
       </div>
 
-      <div className="builder-card-wheel-grid mt-1.5 grid grid-cols-2 gap-1.5">
+      <div className='builder-card-wheel-grid mt-1.5 grid grid-cols-2 gap-1.5'>
         {slot.wheels.map((wheelId, index) => (
           <CardWheelTile
             activeDragKind={activeDragKind}
             interactive={interactive}
             isActive={activeWheelIndex === index}
-            key={`${wheelKeyPrefix}-wheel-${index}`}
+            key={`${wheelKeyPrefix}-wheel-${String(index)}`}
             allowActiveRemoval={allowActiveRemoval}
             onClick={onWheelSlotClick}
             ownedLevel={wheelOwnedLevels[index] ?? null}

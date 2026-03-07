@@ -11,8 +11,12 @@ function TestHarness({initialOffset}: {initialOffset: number}) {
   return (
     <AwakenerEnlightenStepper
       offset={offset}
-      onDecrease={() => setOffset((prev) => Math.max(prev - 1, 0))}
-      onIncrease={() => setOffset((prev) => Math.min(prev + 1, 12))}
+      onDecrease={() => {
+        setOffset((prev) => Math.max(prev - 1, 0))
+      }}
+      onIncrease={() => {
+        setOffset((prev) => Math.min(prev + 1, 12))
+      }}
     />
   )
 }

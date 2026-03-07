@@ -19,7 +19,7 @@ const rawWheelsSchema = z.array(
 export type WheelRarity = 'SSR' | 'SR' | 'R'
 export type WheelRealm = 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA' | 'NEUTRAL'
 
-export type Wheel = {
+export interface Wheel {
   id: string
   assetId: string
   name: string

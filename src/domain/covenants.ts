@@ -10,7 +10,7 @@ const rawCovenantsSchema = z.array(
   }),
 )
 
-export type Covenant = {
+export interface Covenant {
   id: string
   assetId: string
   name: string

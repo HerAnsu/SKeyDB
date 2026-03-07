@@ -1,6 +1,6 @@
 import {DupeLevelDisplay} from '@/components/ui/DupeLevelDisplay'
 
-type OwnershipLevelDisplayProps = {
+interface OwnershipLevelDisplayProps {
   ownedLevel: number | null
 }
 

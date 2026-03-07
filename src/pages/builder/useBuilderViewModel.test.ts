@@ -480,7 +480,7 @@ describe('useBuilderViewModel', () => {
       {slotId: 'slot-3', wheels: [null, null]},
       {slotId: 'slot-4', wheels: [null, null]},
     ])
-    expect(result.current.activeTeam?.posseId).toBeUndefined()
+    expect(result.current.activeTeam.posseId).toBeUndefined()
   })
 
   it('skips and backs through quick lineup steps using picker-tab-aware selection targets', () => {
@@ -858,7 +858,7 @@ describe('useBuilderViewModel', () => {
       wheels: ['wheel-a', 'wheel-b'],
       covenantId: 'covenant-a',
     })
-    expect(result.current.activeTeam?.posseId).toBe('manor-echoes')
+    expect(result.current.activeTeam.posseId).toBe('manor-echoes')
   })
 
   it('finishes quick lineup by keeping the partially built team state', () => {
@@ -887,7 +887,7 @@ describe('useBuilderViewModel', () => {
 
     expect(result.current.quickLineupSession).toBeNull()
     expect(result.current.teamSlots[0]?.awakenerName).toBe('Goliath')
-    expect(result.current.activeTeam?.posseId).toBeUndefined()
+    expect(result.current.activeTeam.posseId).toBeUndefined()
   })
 
   it('exposes awakener sort controls for picker sorting', () => {

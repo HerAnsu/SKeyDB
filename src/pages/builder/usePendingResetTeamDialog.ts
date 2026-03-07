@@ -3,12 +3,12 @@ import {useState, type Dispatch, type SetStateAction} from 'react'
 import {isTeamEmpty, resetTeam} from './team-collection'
 import type {Team} from './types'
 
-type PendingResetTeam = {
+interface PendingResetTeam {
   id: string
   name: string
 }
 
-type UsePendingResetTeamDialogOptions = {
+interface UsePendingResetTeamDialogOptions {
   teams: Team[]
   setTeams: Dispatch<SetStateAction<Team[]>>
   effectiveActiveTeamId: string

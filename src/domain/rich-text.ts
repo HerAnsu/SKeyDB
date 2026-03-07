@@ -1,12 +1,27 @@
 import {getMainstats} from './mainstats'
 import {COMPUTABLE_STATS} from './scaling'
 
-export type TextSegment = {type: 'text'; value: string}
-export type SkillSegment = {type: 'skill'; name: string}
-export type StatSegment = {type: 'stat'; name: string}
-export type MechanicSegment = {type: 'mechanic'; name: string}
-export type RealmSegment = {type: 'realm'; name: string}
-export type ScalingSegment = {
+export interface TextSegment {
+  type: 'text'
+  value: string
+}
+export interface SkillSegment {
+  type: 'skill'
+  name: string
+}
+export interface StatSegment {
+  type: 'stat'
+  name: string
+}
+export interface MechanicSegment {
+  type: 'mechanic'
+  name: string
+}
+export interface RealmSegment {
+  type: 'realm'
+  name: string
+}
+export interface ScalingSegment {
   type: 'scaling'
   values: number[]
   suffix: string
@@ -48,7 +63,6 @@ function isStatToken(token: string): boolean {
 const KNOWN_REALMS = new Set(['Chaos', 'Aequor', 'Caro', 'Ultra'])
 
 const SCALING_RE = /\((\d[\d./]*(?:\/\d[\d./]*)+)(%)?\s*(?:\{([^}]+)\})?\)/
-// eslint-disable-next-line sonarjs/slow-regex -- bounded card description input
 const PROSE_SCALING_RE = /(\d+(?:\.\d+)?)(%)\s+of\s+\{([^}]+)\}/
 
 type NextRichMatch =
@@ -62,8 +76,8 @@ function parseScaling(raw: string): ScalingSegment | null {
   if (!m) return null
   const nums = m[1].split('/').map(Number)
   if (nums.some(Number.isNaN)) return null
-  const pct = m[2] ?? ''
-  const stat = m[3] ?? null
+  const pct = m.at(2) ?? ''
+  const stat = m.at(3) ?? null
   return {type: 'scaling', values: nums, suffix: pct, stat}
 }
 

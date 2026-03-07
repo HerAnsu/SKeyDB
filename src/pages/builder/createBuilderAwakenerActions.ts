@@ -8,7 +8,7 @@ import {
 } from './team-state'
 import type {ActiveSelection, TeamSlot} from './types'
 
-type AwakenerTransferRequest = {
+interface AwakenerTransferRequest {
   awakenerName: string
   canUseSupport?: boolean
   fromTeamId: string
@@ -16,7 +16,7 @@ type AwakenerTransferRequest = {
   targetSlotId?: string
 }
 
-type BuilderAwakenerActionsOptions = {
+interface BuilderAwakenerActionsOptions {
   teamSlots: TeamSlot[]
   awakenerByName: Map<string, Awakener>
   effectiveActiveTeamId: string

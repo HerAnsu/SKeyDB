@@ -45,16 +45,16 @@ export function DatabasePage() {
   }
 
   return (
-    <section className="space-y-3">
-      <div className="flex items-center gap-2.5 border border-amber-500/30 bg-amber-950/20 px-3 py-2.5">
+    <section className='space-y-3'>
+      <div className='flex items-center gap-2.5 border border-amber-500/30 bg-amber-950/20 px-3 py-2.5'>
         <img
-          alt=""
+          alt=''
           aria-hidden
-          className="h-12 w-12 shrink-0 -scale-x-100 object-contain"
+          className='h-12 w-12 shrink-0 -scale-x-100 object-contain'
           src={emojiWke}
         />
-        <p className="text-[11px] leading-relaxed text-amber-100/75">
-          <strong className="font-semibold text-amber-200/90">Work in Progress:</strong> This
+        <p className='text-[11px] leading-relaxed text-amber-100/75'>
+          <strong className='font-semibold text-amber-200/90'>Work in Progress:</strong> This
           database is still being built! Expect improvements to functionality, styling and Yes(!)
           the popup is very ugly and needs big work. Thanks for your patience!
         </p>
