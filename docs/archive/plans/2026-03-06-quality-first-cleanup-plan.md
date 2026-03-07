@@ -10,15 +10,15 @@
 
 ---
 
-**Last updated:** 2026-03-07T10:20
+**Last updated:** 2026-03-07T22:37
 
 **Related docs:**
 - Notes: `docs/notes/2026-03-06-pr14-single-commit-audit.md`
-- Prior plan: `docs/plans/2026-03-06-pr14-salvage-plan.md`
+- Prior plan: `docs/archive/plans/2026-03-06-pr14-salvage-plan.md`
 - Roadmap item: `docs/roadmap.md`
 - Backlog source: `docs/backlog.md`
 
-**Status:** In progress
+**Status:** Done
 
 ## Scope
 
@@ -49,24 +49,20 @@
 
 - Done:
   - Finished the full PR14 squashed-commit audit.
-  - Established SonarJS `recommended` baseline; measured initial fallout at `81` errors.
-  - Completed Task 2 domain cleanup wave (`import-export.ts`, `ingame-codec.ts`, `team-rules.ts`, `collection-ownership.ts`). Backlog dropped to `73`.
-  - Completed the main Task 3 builder cleanup waves across DnD hooks, wheel actions, view-model, picker tiles, panels, and helper files. Backlog dropped to `34`.
+  - Settled on the current repo-owned high-signal static-analysis baseline after the cleanup work instead of forcing every candidate SonarJS rule.
+  - Completed the ownership-aware cleanup waves across domain, builder, collection, shared UI, database/detail, and focused tests.
   - **Reverted Codex's artificial BuilderPage extractions** (`BuilderPageLayout.tsx`, `BuilderPageOverlayLayer.tsx`, `useBuilderPagePresentation.ts`) — these were mechanical prop-threading that increased complexity. See "Lessons Learned" below.
   - **Completed genuine BuilderPage refactoring** (954 → 655 lines, max function complexity 5):
     - Created 5 purpose-built hooks: `useBuilderResetUndo`, `usePreviewSlotDrag`, `useBuilderDndWrappers`, `useBuilderPosseActions`, `useSelectionDismiss`
     - Extracted 2 components: `BuilderDragOverlay`, `BuilderToolbar`
     - Bundled import/export dialog props, simplified forwarding closures, created stable shared callbacks
     - Removed the per-file cognitive complexity override — no longer needed
-  - Branch-wide backlog now at `11` errors, all in pre-existing non-builder files.
-- In progress:
-  - Starting the post-builder collection/state wave.
+  - Cleared the branch-wide strict/static-analysis backlog and verified the result with `npm run lint` and `npm run verify`.
+  - Added an isolated optional React sidecar lint check so high-value React rules can be sampled without changing the main repo gate.
 - Next:
-  - Task 4: collection files (`CollectionPage.tsx`, `useCollectionViewModel.ts`, `OwnedAssetBoxExport.tsx`).
-  - Remaining domain regex/rich-text cleanup.
-  - Residual database/UI cleanup.
+  - Archive this plan now that the branch cleanup pass is shipped.
 - Blockers:
-  - `DragGhosts.test.tsx` has 1 pre-existing test failure from Codex's changes to `DragGhosts.tsx` (expects 8 wheel elements, gets 2). Needs investigation before committing.
+  - None
 
 ## Verification
 

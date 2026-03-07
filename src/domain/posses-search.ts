@@ -2,10 +2,7 @@ import Fuse from 'fuse.js'
 
 import {getAwakeners} from './awakeners'
 import type {Posse} from './posses'
-
-function normalizeForSearch(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, '')
-}
+import {normalizeForSearch} from './search-utils'
 
 const realmLabelById: Record<string, string> = {
   AEQUOR: 'Aequor',

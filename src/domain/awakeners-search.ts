@@ -1,16 +1,13 @@
 import Fuse from 'fuse.js'
 
 import type {Awakener} from './awakeners'
+import {normalizeForSearch} from './search-utils'
 
 interface SearchableAwakener {
   name: string
   realm: string
   aliases: string[]
   tags?: string[]
-}
-
-function normalizeForSearch(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, '')
 }
 
 function getSearchableFields(awakener: SearchableAwakener): string[] {

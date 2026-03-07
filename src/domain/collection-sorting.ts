@@ -30,6 +30,47 @@ export const DEFAULT_AWAKENER_SORT_CONFIG: AwakenerSortConfig = {
   groupByRealm: false,
 }
 
+const VALID_SORT_KEYS: ReadonlySet<string> = new Set<AwakenerSortKey>([
+  'LEVEL',
+  'RARITY',
+  'ENLIGHTEN',
+  'ALPHABETICAL',
+  'ATK',
+  'DEF',
+  'CON',
+])
+
+export function resolveAwakenerSortKey(
+  key: unknown,
+  defaults: AwakenerSortConfig = DEFAULT_AWAKENER_SORT_CONFIG,
+): AwakenerSortKey {
+  return typeof key === 'string' && VALID_SORT_KEYS.has(key)
+    ? (key as AwakenerSortKey)
+    : defaults.key
+}
+
+export function resolveSortDirection(
+  direction: unknown,
+  defaults: AwakenerSortConfig = DEFAULT_AWAKENER_SORT_CONFIG,
+): CollectionSortDirection {
+  return direction === 'ASC' || direction === 'DESC' ? direction : defaults.direction
+}
+
+export function resolveGroupByRealm(
+  parsed: Partial<AwakenerSortConfig> & {groupByFaction?: boolean},
+  defaults: AwakenerSortConfig = DEFAULT_AWAKENER_SORT_CONFIG,
+): boolean {
+  if (typeof parsed.groupByRealm === 'boolean') {
+    return parsed.groupByRealm
+  }
+
+  if (typeof parsed.groupByFaction === 'boolean') {
+    return parsed.groupByFaction
+  }
+
+  return defaults.groupByRealm
+}
+
 const realmPriorityByName: Record<string, number> = {
   CHAOS: 0,
   AEQUOR: 1,

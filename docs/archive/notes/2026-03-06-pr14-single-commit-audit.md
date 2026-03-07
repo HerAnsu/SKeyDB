@@ -305,6 +305,6 @@ Last updated: 2026-03-06
 
 ## Follow-up links
 
-- Plan: `docs/plans/2026-03-06-pr14-salvage-plan.md`
+- Plan: `docs/archive/plans/2026-03-06-pr14-salvage-plan.md`
 - Roadmap: `docs/roadmap.md`
 - Related note: `docs/notes/2026-03-06-pr14-single-commit-audit.md`

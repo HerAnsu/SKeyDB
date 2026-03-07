@@ -10,9 +10,9 @@
 
 ---
 
-**Status:** In progress
+**Status:** Done
 
-**Last updated:** 2026-03-07
+**Last updated:** 2026-03-07T22:37
 
 **Related docs:**
 - Notes: None
@@ -40,10 +40,11 @@
 
 - Done:
   - Enabled strict/stylistic type-checked ESLint presets and fixed `tsconfigRootDir` ambiguity.
-- In progress:
-  - Triage and fix the first `src/pages/database/*` lint batch.
+  - Cleared the repo-wide strict/stylistic TypeScript ESLint backlog in ownership-based batches across database, domain, builder, collection, shared UI, and focused tests.
+  - Verified the finished adoption pass with targeted `npx eslint` runs, `npm run lint`, and `npm run verify`.
+  - Committed the shipped cleanup as `c8feb90` (`Make repo strict ESLint compliant`).
 - Next:
-  - Clean remaining domain and test violations, then run full lint.
+  - Archive this plan now that the strict ESLint adoption work is shipped.
 - Blockers:
   - None
 

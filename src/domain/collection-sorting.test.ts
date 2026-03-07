@@ -4,6 +4,11 @@ import {
   compareAwakenersForCollectionSort,
   comparePossesForCollectionDefaultSort,
   compareWheelsForCollectionDefaultSort,
+  DEFAULT_AWAKENER_SORT_CONFIG,
+  resolveAwakenerSortKey,
+  resolveGroupByRealm,
+  resolveSortDirection,
+  type AwakenerSortConfig,
   type SortableCollectionEntry,
 } from './collection-sorting'
 
@@ -151,5 +156,72 @@ describe('comparePossesForCollectionDefaultSort', () => {
     ]
     const sorted = [...entries].sort(comparePossesForCollectionDefaultSort)
     expect(sorted.map((entry) => entry.label)).toEqual(['Owned First', 'A', 'B', 'Unowned Early'])
+  })
+})
+
+describe('resolveAwakenerSortKey', () => {
+  it('returns valid sort keys unchanged', () => {
+    expect(resolveAwakenerSortKey('LEVEL')).toBe('LEVEL')
+    expect(resolveAwakenerSortKey('RARITY')).toBe('RARITY')
+    expect(resolveAwakenerSortKey('ENLIGHTEN')).toBe('ENLIGHTEN')
+    expect(resolveAwakenerSortKey('ALPHABETICAL')).toBe('ALPHABETICAL')
+    expect(resolveAwakenerSortKey('ATK')).toBe('ATK')
+    expect(resolveAwakenerSortKey('DEF')).toBe('DEF')
+    expect(resolveAwakenerSortKey('CON')).toBe('CON')
+  })
+
+  it('returns default key for invalid input', () => {
+    expect(resolveAwakenerSortKey('INVALID')).toBe(DEFAULT_AWAKENER_SORT_CONFIG.key)
+    expect(resolveAwakenerSortKey(null)).toBe(DEFAULT_AWAKENER_SORT_CONFIG.key)
+    expect(resolveAwakenerSortKey(undefined)).toBe(DEFAULT_AWAKENER_SORT_CONFIG.key)
+    expect(resolveAwakenerSortKey(42)).toBe(DEFAULT_AWAKENER_SORT_CONFIG.key)
+  })
+
+  it('uses custom defaults when provided', () => {
+    const custom: AwakenerSortConfig = {key: 'RARITY', direction: 'ASC', groupByRealm: true}
+    expect(resolveAwakenerSortKey('UNKNOWN', custom)).toBe('RARITY')
+  })
+})
+
+describe('resolveSortDirection', () => {
+  it('returns valid directions unchanged', () => {
+    expect(resolveSortDirection('ASC')).toBe('ASC')
+    expect(resolveSortDirection('DESC')).toBe('DESC')
+  })
+
+  it('returns default direction for invalid input', () => {
+    expect(resolveSortDirection('INVALID')).toBe(DEFAULT_AWAKENER_SORT_CONFIG.direction)
+    expect(resolveSortDirection(null)).toBe(DEFAULT_AWAKENER_SORT_CONFIG.direction)
+    expect(resolveSortDirection(undefined)).toBe(DEFAULT_AWAKENER_SORT_CONFIG.direction)
+  })
+
+  it('uses custom defaults when provided', () => {
+    const custom: AwakenerSortConfig = {key: 'LEVEL', direction: 'ASC', groupByRealm: false}
+    expect(resolveSortDirection('UNKNOWN', custom)).toBe('ASC')
+  })
+})
+
+describe('resolveGroupByRealm', () => {
+  it('returns groupByRealm when present', () => {
+    expect(resolveGroupByRealm({groupByRealm: true})).toBe(true)
+    expect(resolveGroupByRealm({groupByRealm: false})).toBe(false)
+  })
+
+  it('falls back to legacy groupByFaction', () => {
+    expect(resolveGroupByRealm({groupByFaction: true})).toBe(true)
+    expect(resolveGroupByRealm({groupByFaction: false})).toBe(false)
+  })
+
+  it('prefers groupByRealm over groupByFaction', () => {
+    expect(resolveGroupByRealm({groupByRealm: false, groupByFaction: true})).toBe(false)
+  })
+
+  it('returns default when neither is present', () => {
+    expect(resolveGroupByRealm({})).toBe(DEFAULT_AWAKENER_SORT_CONFIG.groupByRealm)
+  })
+
+  it('uses custom defaults when provided', () => {
+    const custom: AwakenerSortConfig = {key: 'LEVEL', direction: 'DESC', groupByRealm: true}
+    expect(resolveGroupByRealm({}, custom)).toBe(true)
   })
 })

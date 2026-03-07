@@ -150,50 +150,18 @@ function normalizePosseOwnedMap(rawMap: unknown, allowedIds: Set<string>): Recor
   return output
 }
 
-function normalizeAwakenerLinks(
-  ownedAwakeners: Record<string, number>,
-  allowedAwakenerIds: Set<string>,
-  linkedAwakenerGroups: string[][] | undefined,
+function unifyLinkedGroupLevels(
+  map: Record<string, number>,
+  allowedIds: Set<string>,
+  linkedGroups: string[][] | undefined,
 ): Record<string, number> {
-  if (!linkedAwakenerGroups?.length) {
-    return ownedAwakeners
+  if (!linkedGroups?.length) {
+    return map
   }
 
-  const next = {...ownedAwakeners}
-  for (const group of linkedAwakenerGroups) {
-    const validGroup = group.filter((id) => allowedAwakenerIds.has(id))
-    if (validGroup.length < 2) {
-      continue
-    }
-
-    const groupLevels = validGroup
-      .map((id) => next[id])
-      .filter((value): value is number => typeof value === 'number')
-    if (!groupLevels.length) {
-      continue
-    }
-
-    const unifiedLevel = Math.max(...groupLevels)
-    for (const id of validGroup) {
-      next[id] = unifiedLevel
-    }
-  }
-
-  return next
-}
-
-function normalizeLinkedAwakenerLevels(
-  awakenerLevels: Record<string, number>,
-  allowedAwakenerIds: Set<string>,
-  linkedAwakenerGroups: string[][] | undefined,
-): Record<string, number> {
-  if (!linkedAwakenerGroups?.length) {
-    return awakenerLevels
-  }
-
-  const next = {...awakenerLevels}
-  for (const group of linkedAwakenerGroups) {
-    const validGroup = group.filter((id) => allowedAwakenerIds.has(id))
+  const next = {...map}
+  for (const group of linkedGroups) {
+    const validGroup = group.filter((id) => allowedIds.has(id))
     if (validGroup.length < 2) {
       continue
     }
@@ -225,12 +193,12 @@ function normalizeOwnershipState(
   const state = rawState as Record<string, unknown>
   const awakenerIdSet = toAllowedSet(catalog.awakenerIds)
   return {
-    ownedAwakeners: normalizeAwakenerLinks(
+    ownedAwakeners: unifyLinkedGroupLevels(
       normalizeOwnedMap(state.ownedAwakeners, awakenerIdSet),
       awakenerIdSet,
       catalog.linkedAwakenerGroups,
     ),
-    awakenerLevels: normalizeLinkedAwakenerLevels(
+    awakenerLevels: unifyLinkedGroupLevels(
       normalizeAwakenerLevelMap(state.awakenerLevels, catalog.awakenerIds),
       awakenerIdSet,
       catalog.linkedAwakenerGroups,

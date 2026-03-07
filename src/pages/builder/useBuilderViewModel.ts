@@ -9,6 +9,7 @@ import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getPosseAssetById} from '@/domain/posse-assets'
 import {getPosses} from '@/domain/posses'
 import {searchPosses} from '@/domain/posses-search'
+import {normalizeForSearch} from '@/domain/search-utils'
 import {getBrowserLocalStorage} from '@/domain/storage'
 import {compareWheelsForUi} from '@/domain/wheel-sort'
 import {getWheelMainstatLabel, getWheels} from '@/domain/wheels'
@@ -46,10 +47,6 @@ import {
 import type {ActiveSelection, QuickLineupSession, Team, TeamSlot, WheelUsageLocation} from './types'
 import {useBuilderPreferences} from './useBuilderPreferences'
 import {matchesWheelMainstat} from './wheel-mainstats'
-
-function normalizeForSearch(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, '')
-}
 
 interface UseBuilderViewModelOptions {
   searchInputRef: RefObject<HTMLInputElement | null>

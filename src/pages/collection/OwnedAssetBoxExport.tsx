@@ -2,10 +2,6 @@ import {useEffect, useMemo, useRef, useState} from 'react'
 
 import {FaImage} from 'react-icons/fa6'
 
-import droidSerifBoldWoff2Url from '@/assets/fonts/droid-serif/DroidSerif-Bold.woff2'
-import droidSerifBoldItalicWoff2Url from '@/assets/fonts/droid-serif/DroidSerif-BoldItalic.woff2'
-import droidSerifItalicWoff2Url from '@/assets/fonts/droid-serif/DroidSerif-Italic.woff2'
-import droidSerifRegularWoff2Url from '@/assets/fonts/droid-serif/DroidSerif.woff2'
 import {Button} from '@/components/ui/Button'
 import {CollectionSortControls} from '@/components/ui/CollectionSortControls'
 import {DupeLevelDisplay} from '@/components/ui/DupeLevelDisplay'
@@ -14,53 +10,33 @@ import {TogglePill} from '@/components/ui/TogglePill'
 import {
   compareAwakenersForCollectionSort,
   compareWheelsForCollectionDefaultSort,
-  DEFAULT_AWAKENER_SORT_CONFIG,
   type AwakenerSortKey,
-  type CollectionSortDirection,
   type SortableCollectionEntry,
 } from '@/domain/collection-sorting'
+import {getBrowserLocalStorage, safeStorageWrite, type StorageLike} from '@/domain/storage'
 
-interface ExportBoxConfig {
-  columns: number
-  cardWidthPx: number
-  cardGapPx: number
-  levelTextScalePct: number
-  outerPaddingXPx: number
-  outerPaddingYPx: number
-  pixelRatio: number
-}
+import {
+  clamp,
+  DEFAULT_EXPORT_BOX_CONFIG,
+  DEFAULT_EXPORT_SORT_CONFIG,
+  DEFAULT_EXPORT_VISUAL_CONFIG,
+  getExportLayoutWidth,
+  loadStoredIncludedRarities,
+  loadStoredLayoutConfig,
+  loadStoredSortConfig,
+  loadStoredVisualConfig,
+  sanitizeConfig,
+  type ExportBoxConfig,
+  type ExportSortConfig,
+  type ExportVisualConfig,
+  type OwnedAssetBoxEntry,
+  type RarityOption,
+} from './export-config'
+import {exportOwnedAssetBoxPreview} from './export-rendering'
 
-interface ExportVisualConfig {
-  disableNames: boolean
-  nameOnTop: boolean
-  enlightensOnCard: boolean
-  showLevels: boolean
-  disableEmoji: boolean
-}
-
-export interface OwnedAssetBoxEntry<R extends string = never> {
-  id: string
-  label: string
-  level: number
-  cardLevel?: number
-  asset: string | null
-  rarity?: R
-  realm?: string
-  sortIndex?: number
-}
+export type {OwnedAssetBoxEntry} from './export-config'
 
 type ExportSortBehavior = 'CONFIGURABLE' | 'WHEEL_DEFAULT'
-
-interface ExportSortConfig {
-  key: AwakenerSortKey
-  direction: CollectionSortDirection
-  groupByRealm: boolean
-}
-
-interface RarityOption<R extends string> {
-  value: R
-  label: string
-}
 
 interface OwnedAssetBoxExportProps<R extends string = never> {
   entries: OwnedAssetBoxEntry<R>[]
@@ -80,62 +56,8 @@ interface OwnedAssetBoxExportProps<R extends string = never> {
   sortOptions?: readonly AwakenerSortKey[]
 }
 
-const DEFAULT_EXPORT_BOX_CONFIG: ExportBoxConfig = {
-  columns: 8,
-  cardWidthPx: 96,
-  cardGapPx: 6,
-  levelTextScalePct: 100,
-  outerPaddingXPx: 8,
-  outerPaddingYPx: 4,
-  pixelRatio: 1,
-}
-
-const DEFAULT_EXPORT_VISUAL_CONFIG: ExportVisualConfig = {
-  disableNames: false,
-  nameOnTop: false,
-  enlightensOnCard: false,
-  showLevels: true,
-  disableEmoji: false,
-}
-
-const DEFAULT_EXPORT_SORT_CONFIG: ExportSortConfig = {
-  ...DEFAULT_AWAKENER_SORT_CONFIG,
-}
-
-interface ExportFontEmbedResult {
-  css: string
-  hasCustomFont: boolean
-}
-
-let exportFontEmbedCssPromise: Promise<ExportFontEmbedResult> | null = null
-
-function resolveExportSortKey(key: unknown): AwakenerSortKey {
-  return key === 'ALPHABETICAL' || key === 'LEVEL' || key === 'RARITY' || key === 'ENLIGHTEN'
-    ? key
-    : DEFAULT_EXPORT_SORT_CONFIG.key
-}
-
-function resolveExportSortDirection(direction: unknown): CollectionSortDirection {
-  return direction === 'ASC' || direction === 'DESC'
-    ? direction
-    : DEFAULT_EXPORT_SORT_CONFIG.direction
-}
-
-function resolveExportSortGroupByRealm(
-  parsed: Partial<ExportSortConfig> & {groupByFaction?: boolean},
-): boolean {
-  if (typeof parsed.groupByRealm === 'boolean') {
-    return parsed.groupByRealm
-  }
-
-  if (typeof parsed.groupByFaction === 'boolean') {
-    return parsed.groupByFaction
-  }
-
-  return DEFAULT_EXPORT_SORT_CONFIG.groupByRealm
-}
-
 function getInitialIncludedRarities<R extends string>(
+  storage: StorageLike | null,
   storageKeyPrefix: string,
   rarityOptions: readonly RarityOption<R>[] | undefined,
   defaultIncludedRarities: Record<R, boolean> | undefined,
@@ -144,7 +66,7 @@ function getInitialIncludedRarities<R extends string>(
     return null
   }
 
-  return loadStoredIncludedRarities(storageKeyPrefix, defaultIncludedRarities)
+  return loadStoredIncludedRarities(storage, storageKeyPrefix, defaultIncludedRarities)
 }
 
 function pickRandomEmojiAsset(): string | null {
@@ -196,195 +118,12 @@ function getExportUnavailableReason(
   return null
 }
 
-function fetchAssetAsDataUrl(url: string): Promise<string> {
-  return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Failed to fetch font asset: ${url}`)
-      }
-      return response.blob()
-    })
-    .then(
-      (blob) =>
-        new Promise<string>((resolve, reject) => {
-          const reader = new FileReader()
-          reader.onload = () => {
-            if (typeof reader.result !== 'string') {
-              reject(new Error(`Unexpected font data format: ${url}`))
-              return
-            }
-            resolve(reader.result)
-          }
-          reader.onerror = () => {
-            reject(new Error(`Failed to read font blob: ${url}`))
-          }
-          reader.readAsDataURL(blob)
-        }),
-    )
-}
-
-function getExportFontEmbedCss(): Promise<ExportFontEmbedResult> {
-  if (exportFontEmbedCssPromise) {
-    return exportFontEmbedCssPromise
-  }
-
-  exportFontEmbedCssPromise = Promise.all([
-    fetchAssetAsDataUrl(droidSerifRegularWoff2Url),
-    fetchAssetAsDataUrl(droidSerifItalicWoff2Url),
-    fetchAssetAsDataUrl(droidSerifBoldWoff2Url),
-    fetchAssetAsDataUrl(droidSerifBoldItalicWoff2Url),
-  ])
-    .then(([regular, italic, bold, boldItalic]) => ({
-      css: `
-@font-face {
-  font-family: 'Droid Serif';
-  src: url('${regular}') format('woff2');
-  font-style: normal;
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'Droid Serif';
-  src: url('${italic}') format('woff2');
-  font-style: italic;
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'Droid Serif';
-  src: url('${bold}') format('woff2');
-  font-style: normal;
-  font-weight: 700;
-}
-@font-face {
-  font-family: 'Droid Serif';
-  src: url('${boldItalic}') format('woff2');
-  font-style: italic;
-  font-weight: 700;
-}
-`.trim(),
-      hasCustomFont: true,
-    }))
-    .catch(() => {
-      // Allow retry on a future export when a transient fetch/read failure occurs.
-      exportFontEmbedCssPromise = null
-      return {css: '', hasCustomFont: false}
-    })
-
-  return exportFontEmbedCssPromise
-}
-
 const emojiAssets = Object.values(
   import.meta.glob<string>('../../assets/emoji/*.png', {
     eager: true,
     import: 'default',
   }),
 )
-
-function clamp(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value))
-}
-
-function sanitizeConfig(config: ExportBoxConfig): ExportBoxConfig {
-  return {
-    columns: clamp(Math.round(config.columns), 3, 10),
-    cardWidthPx: clamp(Math.round(config.cardWidthPx), 52, 150),
-    cardGapPx: clamp(Math.round(config.cardGapPx), 2, 16),
-    levelTextScalePct: clamp(Math.round(config.levelTextScalePct), 60, 200),
-    outerPaddingXPx: clamp(Math.round(config.outerPaddingXPx), 0, 32),
-    outerPaddingYPx: clamp(Math.round(config.outerPaddingYPx), 0, 24),
-    pixelRatio: clamp(Number(config.pixelRatio.toFixed(2)), 0.5, 2),
-  }
-}
-
-function getExportLayoutWidth(config: ExportBoxConfig) {
-  return (
-    config.outerPaddingXPx * 2 +
-    config.columns * config.cardWidthPx +
-    (config.columns - 1) * config.cardGapPx
-  )
-}
-
-function withTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {
-  return new Promise<T>((resolve, reject) => {
-    const timeoutId = window.setTimeout(() => {
-      reject(new Error(`${label} timed out after ${String(timeoutMs)}ms`))
-    }, timeoutMs)
-
-    promise.then(
-      (value) => {
-        window.clearTimeout(timeoutId)
-        resolve(value)
-      },
-      (error: unknown) => {
-        window.clearTimeout(timeoutId)
-        reject(error instanceof Error ? error : new Error(String(error)))
-      },
-    )
-  })
-}
-
-function loadStoredLayoutConfig(storageKeyPrefix: string): ExportBoxConfig {
-  if (typeof window === 'undefined') return DEFAULT_EXPORT_BOX_CONFIG
-  try {
-    const raw = window.localStorage.getItem(`${storageKeyPrefix}.layout.v1`)
-    if (!raw) return DEFAULT_EXPORT_BOX_CONFIG
-    const parsed = JSON.parse(raw) as Partial<ExportBoxConfig>
-    return sanitizeConfig({
-      ...DEFAULT_EXPORT_BOX_CONFIG,
-      ...parsed,
-    })
-  } catch {
-    return DEFAULT_EXPORT_BOX_CONFIG
-  }
-}
-
-function loadStoredVisualConfig(storageKeyPrefix: string): ExportVisualConfig {
-  if (typeof window === 'undefined') return DEFAULT_EXPORT_VISUAL_CONFIG
-  try {
-    const raw = window.localStorage.getItem(`${storageKeyPrefix}.visuals.v1`)
-    if (!raw) return DEFAULT_EXPORT_VISUAL_CONFIG
-    const parsed = JSON.parse(raw) as Partial<ExportVisualConfig>
-    return {
-      ...DEFAULT_EXPORT_VISUAL_CONFIG,
-      ...parsed,
-    }
-  } catch {
-    return DEFAULT_EXPORT_VISUAL_CONFIG
-  }
-}
-
-function loadStoredSortConfig(storageKeyPrefix: string): ExportSortConfig {
-  if (typeof window === 'undefined') return DEFAULT_EXPORT_SORT_CONFIG
-  try {
-    const raw = window.localStorage.getItem(`${storageKeyPrefix}.sort.v1`)
-    if (!raw) return DEFAULT_EXPORT_SORT_CONFIG
-    const parsed = JSON.parse(raw) as Partial<ExportSortConfig> & {groupByFaction?: boolean}
-    return {
-      key: resolveExportSortKey(parsed.key),
-      direction: resolveExportSortDirection(parsed.direction),
-      groupByRealm: resolveExportSortGroupByRealm(parsed),
-    }
-  } catch {
-    return DEFAULT_EXPORT_SORT_CONFIG
-  }
-}
-
-function loadStoredIncludedRarities<R extends string>(
-  storageKeyPrefix: string,
-  defaultIncludedRarities: Record<R, boolean>,
-): Record<R, boolean> {
-  if (typeof window === 'undefined') return {...defaultIncludedRarities}
-  try {
-    const raw = window.localStorage.getItem(`${storageKeyPrefix}.rarities.v1`)
-    if (!raw) return {...defaultIncludedRarities}
-    const parsed = JSON.parse(raw) as Partial<Record<R, boolean>>
-    return {
-      ...defaultIncludedRarities,
-      ...parsed,
-    }
-  } catch {
-    return {...defaultIncludedRarities}
-  }
-}
 
 interface ExportSliderFieldProps {
   label: string
@@ -591,115 +330,6 @@ function ExportPreview<R extends string>({
       </div>
     </div>
   )
-}
-
-function createExportRenderOptions(sanitizedDraftConfig: ExportBoxConfig, fontEmbedCSS: string) {
-  return {
-    cacheBust: false,
-    pixelRatio: sanitizedDraftConfig.pixelRatio,
-    canvasWidth: getExportLayoutWidth(sanitizedDraftConfig),
-    backgroundColor: '#040a16',
-    preferredFontFormat: 'woff2' as const,
-    ...(fontEmbedCSS ? {fontEmbedCSS} : {}),
-  }
-}
-
-async function renderOwnedAssetPreviewToDataUrl({
-  previewElement,
-  baseRenderOptions,
-  onStatusMessage,
-}: {
-  previewElement: HTMLDivElement
-  baseRenderOptions: ReturnType<typeof createExportRenderOptions>
-  onStatusMessage: (message: string) => void
-}) {
-  const {toPng} = await import('html-to-image')
-
-  try {
-    return await withTimeout(toPng(previewElement, baseRenderOptions), 20000, 'PNG render')
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error)
-    const isFontEmbedError = /font is undefined|trim/i.test(detail)
-    if (!isFontEmbedError) {
-      throw error
-    }
-
-    onStatusMessage('Rendering PNG (font fallback for Firefox)...')
-    return withTimeout(
-      toPng(previewElement, {
-        ...baseRenderOptions,
-        skipFonts: true,
-      }),
-      20000,
-      'PNG render (font fallback)',
-    )
-  }
-}
-
-function downloadOwnedAssetExport(dataUrl: string, filenamePrefix: string) {
-  const filename = `${filenamePrefix}-${new Date().toISOString().slice(0, 10)}.png`
-  const anchor = document.createElement('a')
-  anchor.href = dataUrl
-  anchor.download = filename
-  document.body.appendChild(anchor)
-  anchor.click()
-  document.body.removeChild(anchor)
-  return filename
-}
-
-async function exportOwnedAssetBoxPreview<R extends string>({
-  previewElement,
-  sortedEntries,
-  filenamePrefix,
-  sanitizedDraftConfig,
-  onStatusMessage,
-  setIsExporting,
-}: {
-  previewElement: HTMLDivElement | null
-  sortedEntries: OwnedAssetBoxEntry<R>[]
-  filenamePrefix: string
-  sanitizedDraftConfig: ExportBoxConfig
-  onStatusMessage: (message: string) => void
-  setIsExporting: (next: boolean) => void
-}) {
-  if (!previewElement) {
-    onStatusMessage('PNG export failed: render target missing.')
-    return
-  }
-
-  if (sortedEntries.length === 0) {
-    onStatusMessage('PNG export skipped: nothing to export with current filters.')
-    return
-  }
-
-  setIsExporting(true)
-  onStatusMessage('Rendering PNG...')
-  try {
-    onStatusMessage('Preparing export fonts...')
-    const {css: fontEmbedCSS, hasCustomFont} = await getExportFontEmbedCss()
-    if (!hasCustomFont) {
-      onStatusMessage('Custom export font unavailable; using fallback font.')
-    }
-    const baseRenderOptions = createExportRenderOptions(sanitizedDraftConfig, fontEmbedCSS)
-    const dataUrl = await renderOwnedAssetPreviewToDataUrl({
-      previewElement,
-      baseRenderOptions,
-      onStatusMessage,
-    })
-
-    if (!dataUrl) {
-      onStatusMessage('PNG export failed: renderer returned empty image data.')
-      return
-    }
-
-    const filename = downloadOwnedAssetExport(dataUrl, filenamePrefix)
-    onStatusMessage(`Saved ${filename}`)
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error)
-    onStatusMessage(`PNG export failed: ${detail || 'could not render image.'}`)
-  } finally {
-    setIsExporting(false)
-  }
 }
 
 interface OwnedAssetBoxExportModalProps<R extends string> {
@@ -1121,19 +751,20 @@ export function OwnedAssetBoxExport<R extends string>({
   sortBehavior = 'CONFIGURABLE',
   sortOptions = ['LEVEL', 'ENLIGHTEN', 'ALPHABETICAL'],
 }: OwnedAssetBoxExportProps<R>) {
+  const storage = useMemo(() => getBrowserLocalStorage(), [])
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [isExporting, setIsExporting] = useState(false)
   const [draftConfig, setDraftConfig] = useState<ExportBoxConfig>(() =>
-    loadStoredLayoutConfig(storageKeyPrefix),
+    loadStoredLayoutConfig(storage, storageKeyPrefix),
   )
   const [visuals, setVisuals] = useState<ExportVisualConfig>(() =>
-    loadStoredVisualConfig(storageKeyPrefix),
+    loadStoredVisualConfig(storage, storageKeyPrefix),
   )
   const [sortConfig, setSortConfig] = useState<ExportSortConfig>(() =>
-    loadStoredSortConfig(storageKeyPrefix),
+    loadStoredSortConfig(storage, storageKeyPrefix),
   )
   const [includedRarities, setIncludedRarities] = useState<Record<R, boolean> | null>(() =>
-    getInitialIncludedRarities(storageKeyPrefix, rarityOptions, defaultIncludedRarities),
+    getInitialIncludedRarities(storage, storageKeyPrefix, rarityOptions, defaultIncludedRarities),
   )
   const [emojiAsset, setEmojiAsset] = useState<string | null>(() => pickRandomEmojiAsset())
   const previewRef = useRef<HTMLDivElement | null>(null)
@@ -1191,27 +822,21 @@ export function OwnedAssetBoxExport<R extends string>({
   }
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    window.localStorage.setItem(
-      `${storageKeyPrefix}.layout.v1`,
-      JSON.stringify(sanitizedDraftConfig),
-    )
-  }, [storageKeyPrefix, sanitizedDraftConfig])
+    safeStorageWrite(storage, `${storageKeyPrefix}.layout.v1`, JSON.stringify(sanitizedDraftConfig))
+  }, [storage, storageKeyPrefix, sanitizedDraftConfig])
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    window.localStorage.setItem(`${storageKeyPrefix}.visuals.v1`, JSON.stringify(visuals))
-  }, [storageKeyPrefix, visuals])
+    safeStorageWrite(storage, `${storageKeyPrefix}.visuals.v1`, JSON.stringify(visuals))
+  }, [storage, storageKeyPrefix, visuals])
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    window.localStorage.setItem(`${storageKeyPrefix}.sort.v1`, JSON.stringify(sortConfig))
-  }, [storageKeyPrefix, sortConfig])
+    safeStorageWrite(storage, `${storageKeyPrefix}.sort.v1`, JSON.stringify(sortConfig))
+  }, [storage, storageKeyPrefix, sortConfig])
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !includedRarities) return
-    window.localStorage.setItem(`${storageKeyPrefix}.rarities.v1`, JSON.stringify(includedRarities))
-  }, [storageKeyPrefix, includedRarities])
+    if (!includedRarities) return
+    safeStorageWrite(storage, `${storageKeyPrefix}.rarities.v1`, JSON.stringify(includedRarities))
+  }, [storage, storageKeyPrefix, includedRarities])
 
   function rerollEmoji() {
     setEmojiAsset(pickRandomEmojiAsset())

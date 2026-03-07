@@ -12,7 +12,7 @@
 
 **Status:** Done
 
-**Last updated:** 2026-03-06
+**Last updated:** 2026-03-07T22:37
 
 **Related docs:**
 - Notes: `docs/notes/2026-03-06-pr14-single-commit-audit.md`
@@ -64,7 +64,7 @@
   - Confirmed that, aside from the already-salvaged collection behavior slice and intentionally retained current-branch strictness/capability improvements, the remaining PR diff is mechanical churn, branch-local evolution, or newer current-branch additions.
   - Closed the loop on the plan/audit documentation so the branch no longer implies an unfinished broad PR14 review sweep.
 - Next:
-  - Archive or supersede this plan if later branch cleanup or wrap-up work needs a historical handoff.
+  - Keep this plan archived as historical context; any future salvage follow-up should start from fresh evidence instead of reopening this broad sweep.
 - Blockers:
   - None for the audit itself; any new salvage work now requires fresh evidence rather than more generic PR14 diff burn-down.
 
