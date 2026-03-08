@@ -1,4 +1,4 @@
-import type {RefObject} from 'react'
+import type {CSSProperties, RefObject} from 'react'
 
 import {TabbedContainer} from '@/components/ui/TabbedContainer'
 import type {AwakenerBuild} from '@/domain/awakener-builds'
@@ -30,6 +30,7 @@ const pickerTabs: {id: PickerTab; label: string}[] = [
 
 interface BuilderSelectionPanelProps {
   searchInputRef: RefObject<HTMLInputElement | null>
+  pickerZoneRef: RefObject<HTMLElement | null>
   pickerTab: PickerTab
   activeSearchQuery: string
   awakenerFilter: AwakenerFilter
@@ -50,6 +51,8 @@ interface BuilderSelectionPanelProps {
   filteredPosses: Posse[]
   filteredWheels: Wheel[]
   filteredCovenants: Covenant[]
+  mainBuilderZoneHeight: number | null
+  pickerShellHeight: number | null
   ownedAwakenerLevelByName: Map<string, number | null>
   ownedWheelLevelById: Map<string, number | null>
   ownedPosseLevelById: Map<string, number | null>
@@ -82,6 +85,7 @@ interface BuilderSelectionPanelProps {
 
 export function BuilderSelectionPanel({
   searchInputRef,
+  pickerZoneRef,
   pickerTab,
   activeSearchQuery,
   awakenerFilter,
@@ -102,6 +106,8 @@ export function BuilderSelectionPanel({
   filteredPosses,
   filteredWheels,
   filteredCovenants,
+  mainBuilderZoneHeight,
+  pickerShellHeight,
   ownedAwakenerLevelByName,
   ownedWheelLevelById,
   ownedPosseLevelById,
@@ -131,8 +137,21 @@ export function BuilderSelectionPanel({
   onSetActiveCovenant,
   onSetActivePosse,
 }: BuilderSelectionPanelProps) {
+  const pickerHeightStyle =
+    mainBuilderZoneHeight && pickerShellHeight
+      ? ({
+          '--builder-main-zone-height': `${String(mainBuilderZoneHeight)}px`,
+          '--builder-picker-shell-height': `${String(pickerShellHeight)}px`,
+        } as CSSProperties)
+      : undefined
+
   return (
-    <aside className='flex max-h-[calc(100dvh-11.5rem)] min-h-0 flex-col' data-picker-zone='true'>
+    <aside
+      className='flex min-h-0 flex-col lg:h-[var(--builder-picker-shell-height)] lg:max-h-[var(--builder-picker-shell-height)] lg:min-h-[var(--builder-main-zone-height)] lg:overflow-hidden'
+      data-picker-zone='true'
+      ref={pickerZoneRef}
+      style={pickerHeightStyle}
+    >
       <TabbedContainer
         activeTabId={pickerTab}
         bodyClassName='flex min-h-0 flex-1 flex-col p-2'

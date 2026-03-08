@@ -351,15 +351,15 @@ export function CollectionPageResults(props: CollectionPageResultsProps) {
   return (
     <TabbedContainer
       activeTabId={model.tab}
-      bodyClassName='p-2'
-      className='max-h-[calc(100dvh-11.5rem)] overflow-hidden'
+      bodyClassName='flex min-h-0 flex-1 flex-col p-2'
+      className='flex h-[max(560px,calc(100dvh-11.5rem))] flex-col overflow-hidden'
       onTabChange={(tabId) => {
         model.setTab(tabId as (typeof collectionTabs)[number]['id'])
       }}
       rightActions={renderCollectionRightActions(model)}
       tabs={collectionTabs.map((tab) => ({id: tab.id, label: tab.label}))}
     >
-      <div className='collection-scrollbar max-h-[calc(100dvh-15rem)] min-h-[560px] overflow-auto pr-1'>
+      <div className='collection-scrollbar min-h-0 flex-1 overflow-auto pr-1'>
         {renderCollectionTabContent(props)}
       </div>
     </TabbedContainer>

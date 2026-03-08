@@ -1,20 +1,129 @@
 import {fireEvent, render, screen, waitFor, within} from '@testing-library/react'
-import {describe, expect, it} from 'vitest'
+import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import './builder-page.integration-mocks'
 
 import {BuilderPage} from './BuilderPage'
 
+afterEach(() => {
+  vi.unstubAllGlobals()
+})
+
 describe('BuilderPage wheels', () => {
-  it('uses a shared constrained scroll container for every picker tab', () => {
+  it('uses the larger of the builder zone height and available viewport height for the picker shell', () => {
+    class ResizeObserverMock {
+      private readonly callback: ResizeObserverCallback
+
+      constructor(callback: ResizeObserverCallback) {
+        this.callback = callback
+      }
+
+      disconnect() {
+        return undefined
+      }
+
+      observe(target: Element) {
+        if (target instanceof HTMLElement && target.dataset.builderMainZone === 'true') {
+          this.callback(
+            [
+              {
+                borderBoxSize: [],
+                contentBoxSize: [],
+                contentRect: {
+                  bottom: 0,
+                  height: 604,
+                  left: 0,
+                  right: 0,
+                  toJSON() {
+                    return {}
+                  },
+                  top: 0,
+                  width: 0,
+                  x: 0,
+                  y: 0,
+                },
+                devicePixelContentBoxSize: [],
+                target,
+              } as ResizeObserverEntry,
+            ],
+            this as unknown as ResizeObserver,
+          )
+        }
+      }
+
+      unobserve() {
+        return undefined
+      }
+    }
+
+    vi.stubGlobal('ResizeObserver', ResizeObserverMock)
+    vi.stubGlobal('innerHeight', 950)
+    const getBoundingClientRectSpy = vi
+      .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
+      .mockImplementation(function mockGetBoundingClientRect(this: HTMLElement) {
+        if (this instanceof HTMLElement && this.dataset.builderMainZone === 'true') {
+          return {
+            bottom: 760,
+            height: 604,
+            left: 0,
+            right: 0,
+            toJSON() {
+              return {}
+            },
+            top: 156,
+            width: 0,
+            x: 0,
+            y: 156,
+          }
+        }
+
+        if (this instanceof HTMLElement && this.dataset.pickerZone === 'true') {
+          return {
+            bottom: 760,
+            height: 0,
+            left: 0,
+            right: 0,
+            toJSON() {
+              return {}
+            },
+            top: 157,
+            width: 0,
+            x: 0,
+            y: 157,
+          }
+        }
+
+        return {
+          bottom: 0,
+          height: 0,
+          left: 0,
+          right: 0,
+          toJSON() {
+            return {}
+          },
+          top: 0,
+          width: 0,
+          x: 0,
+          y: 0,
+        }
+      })
+
     render(<BuilderPage />)
 
     const pickerPanel = document.querySelector('[data-picker-zone="true"]')
     expect(pickerPanel).not.toBeNull()
+    const layout = pickerPanel?.parentElement
+    expect(layout?.classList.contains('items-start')).toBe(true)
     const pickerPanelClasses = Array.from(pickerPanel?.classList ?? [])
+    expect(pickerPanelClasses.includes('lg:h-[var(--builder-picker-shell-height)]')).toBe(true)
+    expect(pickerPanelClasses.includes('lg:min-h-[var(--builder-main-zone-height)]')).toBe(true)
+    expect(pickerPanelClasses.includes('lg:max-h-[var(--builder-picker-shell-height)]')).toBe(true)
     expect(
-      pickerPanelClasses.some((className) => className.startsWith('max-h-[calc(100dvh-')),
-    ).toBe(true)
+      (pickerPanel as HTMLElement | null)?.style.getPropertyValue('--builder-main-zone-height'),
+    ).toBe('604px')
+    expect(
+      (pickerPanel as HTMLElement | null)?.style.getPropertyValue('--builder-picker-shell-height'),
+    ).toBe('793px')
 
     const tabNames = [/^awakeners$/i, /^wheels$/i, /^covenants$/i, /^posses$/i] as const
     for (const tabName of tabNames) {
@@ -24,6 +133,8 @@ describe('BuilderPage wheels', () => {
       expect(scrollContainer?.classList.contains('flex-1')).toBe(true)
       expect(scrollContainer?.classList.contains('min-h-0')).toBe(true)
     }
+
+    getBoundingClientRectSpy.mockRestore()
   })
 
   it('treats both active slot sockets as wheel slots', () => {
