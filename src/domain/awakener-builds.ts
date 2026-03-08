@@ -1,12 +1,15 @@
 import {z} from 'zod'
 
-import type {Covenant} from './covenants'
-import {getCovenants} from './covenants'
-import {MAINSTAT_KEYS, WHEEL_MAINSTAT_KEYS, type MainstatKey, type WheelMainstatKey} from './mainstats'
-import {getPosses} from './posses'
-import type {Wheel} from './wheels'
-import {getWheels} from './wheels'
 import {getAwakeners} from './awakeners'
+import {getCovenants, type Covenant} from './covenants'
+import {
+  MAINSTAT_KEYS,
+  WHEEL_MAINSTAT_KEYS,
+  type MainstatKey,
+  type WheelMainstatKey,
+} from './mainstats'
+import {getPosses} from './posses'
+import {getWheels, type Wheel} from './wheels'
 
 export const AWAKENER_BUILD_WHEEL_TIERS = ['BIS_SSR', 'ALT_SSR', 'BIS_SR', 'GOOD'] as const
 
@@ -87,7 +90,14 @@ const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine
             ctx.addIssue({
               code: 'custom',
               message: `Duplicate substat priority "${key}".`,
-              path: [entryIndex, 'builds', buildIndex, 'substatPriorityGroups', groupIndex, keyIndex],
+              path: [
+                entryIndex,
+                'builds',
+                buildIndex,
+                'substatPriorityGroups',
+                groupIndex,
+                keyIndex,
+              ],
             })
           }
           seenSubstats.add(key)
@@ -305,7 +315,9 @@ function getWheelRecommendationBucket(
   if (mainstatIndex >= 0) {
     return AWAKENER_BUILD_WHEEL_TIERS.length + mainstatIndex
   }
-  return AWAKENER_BUILD_WHEEL_TIERS.length + (options.build?.recommendedWheelMainstats?.length ?? 0) + 1
+  return (
+    AWAKENER_BUILD_WHEEL_TIERS.length + (options.build?.recommendedWheelMainstats?.length ?? 0) + 1
+  )
 }
 
 export function compareWheelsForBuildRecommendation(

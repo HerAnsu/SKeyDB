@@ -27,7 +27,11 @@ function PickerDragGhostShell({
     <div className={PICKER_GHOST_CLASS}>
       <div className={`${PICKER_GHOST_FRAME_CLASS} ${aspectClassName}`}>
         {asset ? (
-          <img alt={altText} className={`h-full w-full object-cover ${imageClassName ?? ''}`} src={asset} />
+          <img
+            alt={altText}
+            className={`h-full w-full object-cover ${imageClassName ?? ''}`}
+            src={asset}
+          />
         ) : (
           <span className='relative block h-full w-full'>
             <span className='sigil-placeholder' />

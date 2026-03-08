@@ -1,4 +1,8 @@
-import {getWheelRecommendationTier, isWheelMainstatRecommended, type AwakenerBuild} from '@/domain/awakener-builds'
+import {
+  getWheelRecommendationTier,
+  isWheelMainstatRecommended,
+  type AwakenerBuild,
+} from '@/domain/awakener-builds'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import type {Wheel} from '@/domain/wheels'
 

@@ -25,16 +25,18 @@ export function CompactArtTile({
 }: CompactArtTileProps) {
   return (
     <div className={`compact-art-tile flex w-full min-w-0 flex-col ${containerClassName}`.trim()}>
-      <div className={`compact-art-tile-preview relative w-full overflow-hidden ${previewClassName}`.trim()}>
+      <div
+        className={`compact-art-tile-preview relative w-full overflow-hidden ${previewClassName}`.trim()}
+      >
         {preview}
         {overlay ?? null}
         {statusBar ? (
-          <div className='pointer-events-none absolute inset-x-0 top-0 z-30'>
-            {statusBar}
-          </div>
+          <div className='pointer-events-none absolute inset-x-0 top-0 z-30'>{statusBar}</div>
         ) : null}
         {chips ? (
-          <div className={`pointer-events-none absolute left-1 z-20 flex flex-col gap-1 ${statusBar ? 'top-5' : 'top-1'}`}>
+          <div
+            className={`pointer-events-none absolute left-1 z-20 flex flex-col gap-1 ${statusBar ? 'top-5' : 'top-1'}`}
+          >
             {chips}
           </div>
         ) : null}

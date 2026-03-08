@@ -1,8 +1,8 @@
+import {useDraggable} from '@dnd-kit/core'
+
 import {CompactArtTile} from '@/components/ui/CompactArtTile'
 import {getPosseAssetById} from '@/domain/posse-assets'
 import type {Posse} from '@/domain/posses'
-
-import {useDraggable} from '@dnd-kit/core'
 
 import {PICKER_STATUS_CLASS, PICKER_UNOWNED_CLASS} from './picker-status-labels'
 import type {DragData, Team} from './types'
@@ -117,9 +117,7 @@ function PossePickerTile({
         }
         previewClassName='aspect-square border border-slate-400/35 bg-slate-900/70'
         statusBar={
-          topLabel ? (
-            <span className={topLabel.className}>{topLabel.text}</span>
-          ) : undefined
+          topLabel ? <span className={topLabel.className}>{topLabel.text}</span> : undefined
         }
       />
     </button>
@@ -181,9 +179,7 @@ export function PossePickerGrid({
         const usedByTeam = usedByTeamOrder === undefined ? undefined : teams[usedByTeamOrder]
         const isUsedByOtherTeam =
           usedByTeamOrder !== undefined && usedByTeam?.id !== effectiveActiveTeamId
-        const blockedText = isUsedByOtherTeam
-          ? `Team ${String(usedByTeamOrder + 1)}`
-          : null
+        const blockedText = isUsedByOtherTeam ? `Team ${String(usedByTeamOrder + 1)}` : null
         const ownedLevel = ownedPosseLevelById.get(posse.id) ?? null
 
         return (

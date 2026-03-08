@@ -1137,10 +1137,7 @@
     "recommendedWheelGroup": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "tier",
-        "wheelIds"
-      ],
+      "required": ["tier", "wheelIds"],
       "properties": {
         "tier": {
           "$ref": "#/$defs/wheelTier"
@@ -1158,13 +1155,7 @@
     "build": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "id",
-        "label",
-        "substatPriorityGroups",
-        "recommendedWheels",
-        "recommendedCovenantIds"
-      ],
+      "required": ["id", "label", "substatPriorityGroups", "recommendedWheels", "recommendedCovenantIds"],
       "properties": {
         "id": {
           "$ref": "#/$defs/buildId"
@@ -1211,10 +1202,7 @@
     "entry": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "awakenerId",
-        "builds"
-      ],
+      "required": ["awakenerId", "builds"],
       "properties": {
         "awakenerId": {
           "$ref": "#/$defs/awakenerId"

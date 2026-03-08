@@ -1,10 +1,10 @@
 import {useCallback, useEffect, useMemo, useState, type RefObject} from 'react'
 
-import {getAwakenerIdentityKey} from '@/domain/awakener-identity'
 import {
   compareCovenantsForBuildRecommendation,
   compareWheelsForBuildRecommendation,
 } from '@/domain/awakener-builds'
+import {getAwakenerIdentityKey} from '@/domain/awakener-identity'
 import {searchAwakeners} from '@/domain/awakeners-search'
 import {loadCollectionOwnership} from '@/domain/collection-ownership'
 import {compareAwakenersForCollectionSort} from '@/domain/collection-sorting'
@@ -424,9 +424,10 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
     const queryFiltered = !query
       ? pickerCovenants
       : pickerCovenants.filter(
-      (covenant) =>
-        covenant.name.toLowerCase().includes(query) || covenant.id.toLowerCase().includes(query),
-    )
+          (covenant) =>
+            covenant.name.toLowerCase().includes(query) ||
+            covenant.id.toLowerCase().includes(query),
+        )
     return [...queryFiltered].sort((left, right) =>
       promoteRecommendedGear
         ? compareCovenantsForBuildRecommendation(left, right, activeBuild, {

@@ -1,7 +1,7 @@
+import {useDraggable} from '@dnd-kit/core'
+
 import {CompactArtTile} from '@/components/ui/CompactArtTile'
 import {getMainstatByKey, getMainstatIcon, type WheelMainstatKey} from '@/domain/mainstats'
-
-import {useDraggable} from '@dnd-kit/core'
 
 import {PICKER_STATUS_CLASS, PICKER_UNOWNED_CLASS} from './picker-status-labels'
 import type {DragData} from './types'
@@ -152,9 +152,7 @@ export function PickerWheelTile({
         preview={renderWheelPreview(wheelAsset, wheelDisplayName, isOwned, isNotSet, isDimmed)}
         previewClassName='aspect-[75/113] border border-slate-400/35 bg-slate-900/70'
         statusBar={
-          topLabel ? (
-            <span className={topLabel.className}>{topLabel.text}</span>
-          ) : undefined
+          topLabel ? <span className={topLabel.className}>{topLabel.text}</span> : undefined
         }
       />
     </button>

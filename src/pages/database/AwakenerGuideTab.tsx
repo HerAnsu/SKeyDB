@@ -6,14 +6,19 @@ import {
   type AwakenerBuild,
   type AwakenerBuildWheelTier,
 } from '@/domain/awakener-builds'
-import {useAwakenerBuildEntries} from '@/domain/useAwakenerBuildEntries'
 import {getCovenantAssetById} from '@/domain/covenant-assets'
 import {getCovenants} from '@/domain/covenants'
 import {getMainstatByKey, getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
+import {useAwakenerBuildEntries} from '@/domain/useAwakenerBuildEntries'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelById} from '@/domain/wheels'
 
-import {DatabaseTab, DatabaseTabRow, DatabaseTabSection, DatabaseTabSubsection} from './DatabaseTabSection'
+import {
+  DatabaseTab,
+  DatabaseTabRow,
+  DatabaseTabSection,
+  DatabaseTabSubsection,
+} from './DatabaseTabSection'
 import {scaledFontStyle} from './font-scale'
 
 interface AwakenerGuideTabProps {
@@ -57,15 +62,18 @@ function RecommendationTile({
 }) {
   return (
     <CompactArtTile
-      chips={
-        <span className='builder-picker-recommendation-chip text-amber-100/95'>{chip}</span>
-      }
+      chips={<span className='builder-picker-recommendation-chip text-amber-100/95'>{chip}</span>}
       containerClassName={tileClassName}
       name={label}
       nameClassName='compact-art-tile-name-multiline mt-1.5 text-slate-200'
       preview={
         asset ? (
-          <img alt={altText} className={`h-full w-full object-cover ${imageClassName}`.trim()} draggable={false} src={asset} />
+          <img
+            alt={altText}
+            className={`h-full w-full object-cover ${imageClassName}`.trim()}
+            draggable={false}
+            src={asset}
+          />
         ) : (
           <div className='h-full w-full bg-[radial-gradient(circle_at_50%_30%,rgba(148,163,184,0.18),rgba(2,8,23,0.94)_72%)]' />
         )
@@ -105,9 +113,16 @@ function SubstatIconChip({mainstatKey}: {mainstatKey: MainstatKey}) {
       title={label}
     >
       {icon ? (
-        <img alt={label} className='h-4 w-4 object-contain opacity-90' draggable={false} src={icon} />
+        <img
+          alt={label}
+          className='h-4 w-4 object-contain opacity-90'
+          draggable={false}
+          src={icon}
+        />
       ) : (
-        <span className='text-[9px] uppercase tracking-wide text-slate-300'>{label.slice(0, 2)}</span>
+        <span className='text-[9px] tracking-wide text-slate-300 uppercase'>
+          {label.slice(0, 2)}
+        </span>
       )}
     </span>
   )
@@ -199,7 +214,15 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
   )
 }
 
-function BuildCard({build, showLabel, collapsible = false}: {build: AwakenerBuild; showLabel: boolean; collapsible?: boolean}) {
+function BuildCard({
+  build,
+  showLabel,
+  collapsible = false,
+}: {
+  build: AwakenerBuild
+  showLabel: boolean
+  collapsible?: boolean
+}) {
   const hasSummary = Boolean(build.summary)
   const sectionTitle = showLabel ? build.label : undefined
 
@@ -250,7 +273,12 @@ export function AwakenerGuideTab({awakenerId}: AwakenerGuideTabProps) {
   return (
     <DatabaseTab>
       {entry.builds.map((build) => (
-        <BuildCard build={build} collapsible={showBuildLabels} key={build.id} showLabel={showBuildLabels} />
+        <BuildCard
+          build={build}
+          collapsible={showBuildLabels}
+          key={build.id}
+          showLabel={showBuildLabels}
+        />
       ))}
     </DatabaseTab>
   )

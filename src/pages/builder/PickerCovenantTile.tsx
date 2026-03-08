@@ -1,6 +1,6 @@
-import {CompactArtTile} from '@/components/ui/CompactArtTile'
-
 import {useDraggable} from '@dnd-kit/core'
+
+import {CompactArtTile} from '@/components/ui/CompactArtTile'
 
 import type {DragData} from './types'
 

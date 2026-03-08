@@ -3,8 +3,15 @@ import {createRef} from 'react'
 import {act, renderHook, waitFor} from '@testing-library/react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
+import {
+  getAwakenerBuildEntryById,
+  getPrimaryAwakenerBuild,
+  loadAwakenerBuildEntries,
+} from '@/domain/awakener-builds'
 import {getAwakenerIdentityKey} from '@/domain/awakener-identity'
 import {COLLECTION_OWNERSHIP_KEY, saveCollectionOwnership} from '@/domain/collection-ownership'
+import {compareWheelsForUi} from '@/domain/wheel-sort'
+import {getWheels} from '@/domain/wheels'
 
 import {
   BUILDER_PERSISTENCE_KEY,
@@ -32,6 +39,11 @@ function requireDefined<T>(value: T | null | undefined): T {
     throw new Error('Expected value to be defined')
   }
   return value
+}
+
+async function getPrimaryBuild(awakenerId: number) {
+  const entries = await loadAwakenerBuildEntries()
+  return requireDefined(getPrimaryAwakenerBuild(getAwakenerBuildEntryById(awakenerId, entries)))
 }
 
 describe('useBuilderViewModel', () => {
@@ -268,6 +280,7 @@ describe('useBuilderViewModel', () => {
   })
 
   it('promotes recommended wheels when the active awakener slot is used as the assignment target', async () => {
+    const build = await getPrimaryBuild(27)
     const {result} = renderHook(() =>
       useBuilderViewModel({
         searchInputRef: createRef<HTMLInputElement>(),
@@ -293,16 +306,18 @@ describe('useBuilderViewModel', () => {
     })
 
     await waitFor(() => {
-      expect(result.current.filteredWheels.slice(0, 3).map((wheel) => wheel.id)).toEqual([
-        'C16',
-        'ZL02',
-        'SR43',
-      ])
+      expect(result.current.filteredWheels.slice(0, 3).map((wheel) => wheel.id)).toEqual(
+        build.recommendedWheels.flatMap((group) => group.wheelIds).slice(0, 3),
+      )
     })
   })
 
   it('keeps fallback wheel ordering when recommendation promotion is disabled', async () => {
     window.localStorage.setItem(BUILDER_PROMOTE_RECOMMENDED_GEAR_KEY, '0')
+    const fallbackTopIds = [...getWheels()]
+      .sort(compareWheelsForUi)
+      .slice(0, 10)
+      .map((wheel) => wheel.id)
 
     const {result} = renderHook(() =>
       useBuilderViewModel({
@@ -329,12 +344,15 @@ describe('useBuilderViewModel', () => {
     })
 
     await waitFor(() => {
-      const ids = result.current.filteredWheels.map((wheel) => wheel.id)
-      expect(ids.indexOf('B04')).toBeLessThan(ids.indexOf('ZL02'))
+      expect(result.current.filteredWheels.slice(0, 10).map((wheel) => wheel.id)).toEqual(
+        fallbackTopIds,
+      )
     })
   })
 
   it('promotes matching wheel mainstats ahead of non-matching fallback wheels when enabled', async () => {
+    const build = await getPrimaryBuild(27)
+    const recommendedWheelIds = new Set(build.recommendedWheels.flatMap((group) => group.wheelIds))
     const {result} = renderHook(() =>
       useBuilderViewModel({
         searchInputRef: createRef<HTMLInputElement>(),
@@ -361,12 +379,27 @@ describe('useBuilderViewModel', () => {
     })
 
     await waitFor(() => {
-      const ids = result.current.filteredWheels.map((wheel) => wheel.id)
-      expect(ids.indexOf('B07')).toBeLessThan(ids.indexOf('B04'))
+      const matchingWheel = result.current.filteredWheels.find(
+        (wheel) =>
+          !recommendedWheelIds.has(wheel.id) &&
+          build.recommendedWheelMainstats?.includes(wheel.mainstatKey),
+      )
+      const nonMatchingWheel = result.current.filteredWheels.find(
+        (wheel) =>
+          !recommendedWheelIds.has(wheel.id) &&
+          !build.recommendedWheelMainstats?.includes(wheel.mainstatKey),
+      )
+
+      expect(matchingWheel).toBeDefined()
+      expect(nonMatchingWheel).toBeDefined()
+      expect(result.current.filteredWheels.indexOf(requireDefined(matchingWheel))).toBeLessThan(
+        result.current.filteredWheels.indexOf(requireDefined(nonMatchingWheel)),
+      )
     })
   })
 
   it('promotes recommended covenants in configured order for the active slot awakener', async () => {
+    const build = await getPrimaryBuild(27)
     const {result} = renderHook(() =>
       useBuilderViewModel({
         searchInputRef: createRef<HTMLInputElement>(),
@@ -392,10 +425,9 @@ describe('useBuilderViewModel', () => {
     })
 
     await waitFor(() => {
-      expect(result.current.filteredCovenants.slice(0, 2).map((covenant) => covenant.id)).toEqual([
-        '005',
-        '010',
-      ])
+      expect(result.current.filteredCovenants.slice(0, 2).map((covenant) => covenant.id)).toEqual(
+        build.recommendedCovenantIds.slice(0, 2),
+      )
     })
   })
 

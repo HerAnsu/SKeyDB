@@ -1,7 +1,6 @@
-import {CompactArtTile} from '@/components/ui/CompactArtTile'
-
 import {useDraggable} from '@dnd-kit/core'
 
+import {CompactArtTile} from '@/components/ui/CompactArtTile'
 import {getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import {getRealmTint} from '@/domain/factions'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
@@ -109,9 +108,7 @@ export function PickerAwakenerTile({
         }
         previewClassName='aspect-square border border-slate-400/35 bg-slate-900/70'
         statusBar={
-          topLabel ? (
-            <span className={topLabel.className}>{topLabel.text}</span>
-          ) : undefined
+          topLabel ? <span className={topLabel.className}>{topLabel.text}</span> : undefined
         }
       />
     </button>

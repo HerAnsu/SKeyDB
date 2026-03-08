@@ -2,8 +2,6 @@ import {describe, expect, it} from 'vitest'
 
 // @ts-expect-error Build script is a typed runtime module imported for schema-generation verification.
 import {buildAwakenerBuildsSchema} from '../../scripts/generate-awakener-builds-schema.mjs'
-import {getCovenants} from './covenants'
-import {getMainstatByKey} from './mainstats'
 import {
   compareCovenantsForBuildRecommendation,
   compareWheelsForBuildRecommendation,
@@ -12,6 +10,8 @@ import {
   loadAwakenerBuildEntries,
   type AwakenerBuild,
 } from './awakener-builds'
+import {getCovenants} from './covenants'
+import {getMainstatByKey} from './mainstats'
 import {compareWheelsForUi} from './wheel-sort'
 import {getWheels} from './wheels'
 
@@ -56,14 +56,13 @@ describe('awakener builds', () => {
 
   it('resolves the primary build and preserves grouped substat priorities', async () => {
     const entries = await loadAwakenerBuildEntries()
-    const kathiguRa = getAwakenerBuildEntryById(27, entries)
-    const primaryBuild = getPrimaryAwakenerBuild(kathiguRa)
+    const ramona = getAwakenerBuildEntryById(42, entries)
+    const primaryBuild = getPrimaryAwakenerBuild(ramona)
 
-    expect(primaryBuild?.id).toBe('dps')
+    expect(primaryBuild?.id).toBe('standard')
     expect(primaryBuild?.substatPriorityGroups).toEqual([
-      ['CRIT_DMG'],
-      ['DMG_AMP', 'CRIT_RATE'],
-      ['ATK'],
+      ['KEYFLARE_REGEN'],
+      ['DMG_AMP', 'ALIEMUS_REGEN'],
     ])
   })
 

@@ -83,11 +83,7 @@ export function DatabaseTabSubsection({children}: DatabaseTabSubsectionProps) {
   )
 }
 
-export function DatabaseTabRow({
-  label,
-  children,
-  showDivider = false,
-}: DatabaseTabRowProps) {
+export function DatabaseTabRow({label, children, showDivider = false}: DatabaseTabRowProps) {
   return (
     <div>
       {showDivider ? (
