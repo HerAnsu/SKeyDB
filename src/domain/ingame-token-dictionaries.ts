@@ -1,4 +1,5 @@
 import awakenersCanonical from '@/data/ingame-tokens/awakeners.json'
+import covenantsCanonical from '@/data/ingame-tokens/covenants.json'
 import possesCanonical from '@/data/ingame-tokens/posses.json'
 import wheelsCanonical from '@/data/ingame-tokens/wheels.json'
 
@@ -14,6 +15,11 @@ export interface CanonicalTokenEntry {
   token: string
 }
 
+export interface CanonicalCovenantBlockEntry {
+  id: string
+  pieces: [string, string, string, string, string, string]
+}
+
 export interface IngameDictionaryIssue {
   category: IngameTokenCategory
   kind: 'duplicate_token' | 'missing_token_for_id' | 'unknown_source_id'
@@ -27,13 +33,33 @@ export interface IngameTokenDictionaryBuildResult {
   issues: IngameDictionaryIssue[]
 }
 
+export interface IngameCovenantBlockDictionaryBuildResult {
+  byIdBlock: Map<string, string>
+  byIdPieces: Map<string, [string, string, string, string, string, string]>
+  pieceTokensByPosition: [string[], string[], string[], string[], string[], string[]]
+  issues: IngameDictionaryIssue[]
+}
+
 interface BuildTokenDictionaryInput {
   category: IngameTokenCategory
   ids: string[]
   sourceEntries: CanonicalTokenEntry[]
 }
 
+function normalizeCovenantPieces(
+  pieces: string[],
+): [string, string, string, string, string, string] {
+  if (pieces.length !== 6) {
+    throw new Error('Invalid covenant block data: expected exactly 6 pieces per covenant.')
+  }
+  return [...pieces] as [string, string, string, string, string, string]
+}
+
 const canonicalAwakenerEntries: CanonicalTokenEntry[] = awakenersCanonical
+const canonicalCovenantEntries: CanonicalCovenantBlockEntry[] = covenantsCanonical.map((entry) => ({
+  id: entry.id,
+  pieces: normalizeCovenantPieces(entry.pieces),
+}))
 const canonicalPosseEntries: CanonicalTokenEntry[] = possesCanonical
 const canonicalWheelEntries: CanonicalTokenEntry[] = wheelsCanonical
 
@@ -87,10 +113,72 @@ export function buildTokenDictionaryFromEntries({
   }
 }
 
+export function buildCovenantBlockDictionaryFromEntries(
+  ids: string[],
+  sourceEntries: CanonicalCovenantBlockEntry[],
+): IngameCovenantBlockDictionaryBuildResult {
+  const issues: IngameDictionaryIssue[] = []
+  const allowedIds = new Set(ids)
+  const byIdBlock = new Map<string, string>()
+  const byIdPieces = new Map<string, [string, string, string, string, string, string]>()
+  const blockIds = new Map<string, string[]>()
+  const pieceTokensByPosition = [
+    new Set<string>(),
+    new Set<string>(),
+    new Set<string>(),
+    new Set<string>(),
+    new Set<string>(),
+    new Set<string>(),
+  ] as const
+
+  for (const entry of sourceEntries) {
+    if (!allowedIds.has(entry.id)) {
+      issues.push({category: 'covenants', kind: 'unknown_source_id', id: entry.id})
+      continue
+    }
+
+    byIdBlock.set(entry.id, entry.pieces.join(''))
+    byIdPieces.set(entry.id, entry.pieces)
+    const existingIds = blockIds.get(entry.pieces.join('')) ?? []
+    existingIds.push(entry.id)
+    blockIds.set(entry.pieces.join(''), existingIds)
+
+    for (const [index, token] of entry.pieces.entries()) {
+      pieceTokensByPosition[index].add(token)
+    }
+  }
+
+  for (const [block, mappedIds] of blockIds) {
+    if (mappedIds.length > 1) {
+      issues.push({category: 'covenants', kind: 'duplicate_token', token: block})
+    }
+  }
+
+  for (const id of ids) {
+    if (!byIdBlock.has(id)) {
+      issues.push({category: 'covenants', kind: 'missing_token_for_id', id})
+    }
+  }
+
+  return {
+    byIdBlock,
+    byIdPieces,
+    pieceTokensByPosition: pieceTokensByPosition.map((tokens) => Array.from(tokens)) as [
+      string[],
+      string[],
+      string[],
+      string[],
+      string[],
+      string[],
+    ],
+    issues,
+  }
+}
+
 export interface IngameTokenDictionaries {
   awakeners: IngameTokenDictionaryBuildResult
   wheels: IngameTokenDictionaryBuildResult
-  covenants: IngameTokenDictionaryBuildResult
+  covenants: IngameCovenantBlockDictionaryBuildResult
   posses: IngameTokenDictionaryBuildResult
   issues: IngameDictionaryIssue[]
 }
@@ -113,11 +201,10 @@ export function buildIngameTokenDictionaries(): IngameTokenDictionaries {
     sourceEntries: canonicalWheelEntries,
   })
 
-  const covenantDictionary = buildTokenDictionaryFromEntries({
-    category: 'covenants',
-    ids: covenants.map((covenant) => covenant.id),
-    sourceEntries: [],
-  })
+  const covenantDictionary = buildCovenantBlockDictionaryFromEntries(
+    covenants.map((covenant) => covenant.id),
+    canonicalCovenantEntries,
+  )
 
   const posseDictionary = buildTokenDictionaryFromEntries({
     category: 'posses',

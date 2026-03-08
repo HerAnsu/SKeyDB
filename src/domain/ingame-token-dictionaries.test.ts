@@ -1,10 +1,15 @@
 import {describe, expect, it} from 'vitest'
 
+import possesCanonical from '@/data/ingame-tokens/posses.json'
+
 import {
+  buildCovenantBlockDictionaryFromEntries,
   buildIngameTokenDictionaries,
   buildTokenDictionaryFromEntries,
+  type CanonicalCovenantBlockEntry,
   type CanonicalTokenEntry,
 } from './ingame-token-dictionaries'
+import {getPosses} from './posses'
 
 describe('buildTokenDictionaryFromEntries', () => {
   it('maps ids and tokens when entries are unique', () => {
@@ -78,12 +83,57 @@ describe('buildIngameTokenDictionaries', () => {
     const result = buildIngameTokenDictionaries()
 
     expect(result.posses.byIdToken.get('manor-echoes')).toBe('3')
+    expect(result.posses.byIdToken.get('voices-in-your-head')).toBe('h')
     expect(result.posses.byIdToken.has('Manor Echoes')).toBe(false)
     expect(
       result.issues.some(
         (issue) => issue.category === 'posses' && issue.kind === 'unknown_source_id',
       ),
     ).toBe(false)
+  })
+
+  it('tracks every posse id in the canonical token file and leaves unresolved tokens blank', () => {
+    const posseIds = getPosses().map((posse) => posse.id)
+    const canonicalPosseEntryById = new Map(possesCanonical.map((entry) => [entry.id, entry.token]))
+
+    expect(canonicalPosseEntryById.size).toBe(posseIds.length)
+    expect(canonicalPosseEntryById.get('manor-echoes')).toBe('3')
+    expect(canonicalPosseEntryById.get('voices-in-your-head')).toBe('h')
+    expect(canonicalPosseEntryById.get('auritas-treasure')).toBe('')
+  })
+
+  it('preserves the discovered posse token mappings from the RE notes', () => {
+    const canonicalPosseEntryById = new Map(possesCanonical.map((entry) => [entry.id, entry.token]))
+
+    expect(canonicalPosseEntryById.get('manor-echoes')).toBe('3')
+    expect(canonicalPosseEntryById.get('from-the-mist-realm')).toBe('Z')
+    expect(canonicalPosseEntryById.get('reunions-wish')).toBe('Y')
+    expect(canonicalPosseEntryById.get('wayward-ship')).toBe('X')
+    expect(canonicalPosseEntryById.get('cruel-homage')).toBe('S')
+    expect(canonicalPosseEntryById.get('sacred-mending')).toBe('M')
+    expect(canonicalPosseEntryById.get('plague-of-illusions')).toBe('J')
+    expect(canonicalPosseEntryById.get('the-gated-answer')).toBe('H')
+    expect(canonicalPosseEntryById.get('symphony-fourth')).toBe('I')
+    expect(canonicalPosseEntryById.get('festival-of-tides')).toBe('C')
+    expect(canonicalPosseEntryById.get('the-lone-seed')).toBe('G')
+    expect(canonicalPosseEntryById.get('truth-behind-grey-mist')).toBe('v')
+    expect(canonicalPosseEntryById.get('gateway-of-retrospection')).toBe('p')
+    expect(canonicalPosseEntryById.get('the-final-vow')).toBe('l')
+    expect(canonicalPosseEntryById.get('funus-aeternum')).toBe('f')
+    expect(canonicalPosseEntryById.get('obsession-eternal')).toBe('g')
+    expect(canonicalPosseEntryById.get('warded-injection')).toBe('b')
+    expect(canonicalPosseEntryById.get('encounter-in-pure-white')).toBe('d')
+    expect(canonicalPosseEntryById.get('a-mouses-wisdom')).toBe('c')
+    expect(canonicalPosseEntryById.get('tiny-wish')).toBe('i')
+    expect(canonicalPosseEntryById.get('voices-in-your-head')).toBe('h')
+  })
+
+  it('builds non-empty covenant block dictionaries from raw data', () => {
+    const result = buildIngameTokenDictionaries()
+
+    expect(result.covenants.byIdBlock.size).toBe(21)
+    expect(result.covenants.byIdBlock.get('022')).toBe('xfhQuExR')
+    expect(result.covenants.pieceTokensByPosition[0]).toContain('xf')
   })
 
   it('produces issue metadata for unresolved mappings', () => {
@@ -97,5 +147,27 @@ describe('raw token data type guard', () => {
     const entry: CanonicalTokenEntry = {id: 'a', token: 'x1'}
     expect(entry.id).toBe('a')
     expect(entry.token).toBe('x1')
+  })
+
+  it('accepts covenant block entry shape', () => {
+    const entry: CanonicalCovenantBlockEntry = {
+      id: '001',
+      pieces: ['xB', 'yn', 'yh', 'xF', 'xM', 'yA'],
+    }
+    expect(entry.id).toBe('001')
+    expect(entry.pieces[5]).toBe('yA')
+  })
+})
+
+describe('buildCovenantBlockDictionaryFromEntries', () => {
+  it('tracks block strings and positional piece tokens', () => {
+    const result = buildCovenantBlockDictionaryFromEntries(
+      ['001'],
+      [{id: '001', pieces: ['a1', 'b2', 'c3', 'd4', 'e5', 'f6']}],
+    )
+
+    expect(result.byIdBlock.get('001')).toBe('a1b2c3d4e5f6')
+    expect(result.byIdPieces.get('001')).toEqual(['a1', 'b2', 'c3', 'd4', 'e5', 'f6'])
+    expect(result.pieceTokensByPosition[3]).toEqual(['d4'])
   })
 })

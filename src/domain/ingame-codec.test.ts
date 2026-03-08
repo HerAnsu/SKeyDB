@@ -4,6 +4,16 @@ import type {Team} from '@/pages/builder/types'
 
 import {decodeIngameTeamCode, encodeIngameTeamCode} from './ingame-codec'
 
+function buildCodeWithCovenantBlocks(slotBlocks: string[], posseToken = 'd'): string {
+  const filledBlocks = [
+    slotBlocks[0] ?? 'aaaaaa',
+    slotBlocks[1] ?? 'aaaaaa',
+    slotBlocks[2] ?? 'aaaaaa',
+    slotBlocks[3] ?? 'aaaaaa',
+  ]
+  return `@@NDklaaaaaaaa${filledBlocks.join('')}${posseToken}@@`
+}
+
 describe('decodeIngameTeamCode', () => {
   it('decodes in-game wrapper and consumes the 4 awakener prefix tokens in slot order', () => {
     const code = '@@NDklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad@@'
@@ -26,13 +36,12 @@ describe('decodeIngameTeamCode', () => {
     expect(decoded.team.slots[3].wheels).toEqual([null, null])
   })
 
-  it('keeps import recoverable and reports warnings for unsupported covenant/posse blocks', () => {
-    const code = '@@NDklZ1OxFcxEB5ytkysyDHxmxAxXIWxwxbxlSx5xZxT7xlSx5xZxT7d@@'
+  it('decodes known covenant blocks into canonical covenant ids', () => {
+    const code = '@@Oir7xbxSxYxHmJyUyTxfhQuExRxp6gNKxCxfhQuExRxfhQuEyAG@@'
     const decoded = decodeIngameTeamCode(code)
 
-    expect(decoded.team.slots.every((slot) => Boolean(slot.awakenerName))).toBe(true)
-    expect(decoded.warnings.some((warning) => warning.section === 'covenant')).toBe(true)
-    expect(decoded.warnings.some((warning) => warning.section === 'covenant')).toBe(true)
+    expect(decoded.team.slots.map((slot) => slot.covenantId)).toEqual(['022', '016', '022', '022'])
+    expect(decoded.warnings.some((warning) => warning.section === 'covenant')).toBe(false)
   })
 
   it('matches observed in-game sample token order for laaI prefix', () => {
@@ -72,11 +81,11 @@ describe('decodeIngameTeamCode', () => {
     expect(decoded.team.slots[0].wheels[1]).toBe('C01')
   })
 
-  it('normalizes unsupported covenant slices to empty placeholders when re-encoding', () => {
-    const source = '@@Sir7Z5aaaaJxnaxm1aaaaaaaaaxaaaaaaaaaaaaaa@@'
+  it('re-encodes decoded covenant blocks canonically', () => {
+    const source = '@@UliXxW5aaxY1xVxDxfhQuExRxp6gNKxCxfhQuExRxfhQuExR3@@'
     const decoded = decodeIngameTeamCode(source)
     const reEncoded = encodeIngameTeamCode(decoded.team)
-    expect(reEncoded).toBe('@@Sir7Z5aaaaJxnaaaaaaaaaaaaaaaaaaaaaaaaa@@')
+    expect(reEncoded).toBe(source)
   })
 
   it('matches observed in-game export layout for no-covenant team with posse token', () => {
@@ -113,8 +122,108 @@ describe('decodeIngameTeamCode', () => {
     expect(encodeIngameTeamCode(team)).toBe('@@UliXxW5aaxY1xVxDaaaaaaaaaaaaaaaaaaaaaaaa3@@')
   })
 
+  it('encodes canonical covenant blocks into the covenant payload zone', () => {
+    const team: Team = {
+      id: 'team-2b',
+      name: 'Team 2b',
+      posseId: 'manor-echoes',
+      slots: [
+        {
+          slotId: 'slot-1',
+          awakenerName: 'doll: inferno',
+          realm: 'CHAOS',
+          level: 60,
+          wheels: ['C02EX', 'SR01'],
+          covenantId: '022',
+        },
+        {slotId: 'slot-2', awakenerName: 'doll', realm: 'CHAOS', level: 60, wheels: [null, null]},
+        {
+          slotId: 'slot-3',
+          awakenerName: 'helot: catena',
+          realm: 'CARO',
+          level: 60,
+          wheels: ['B05EX', 'O06'],
+        },
+        {
+          slotId: 'slot-4',
+          awakenerName: 'tawil',
+          realm: 'CHAOS',
+          level: 60,
+          wheels: ['C15', 'SR02'],
+        },
+      ],
+    }
+
+    expect(encodeIngameTeamCode(team)).toBe('@@UliXxW5aaxY1xVxDxfhQuExRaaaaaaaaaaaaaaaaaa3@@')
+  })
+
+  it('encodes feast from afar using the observed fifth covenant piece token', () => {
+    const team: Team = {
+      id: 'team-investigation',
+      name: 'ASDFTEST',
+      slots: [
+        {
+          slotId: 'slot-1',
+          awakenerName: 'goliath',
+          realm: 'AEQUOR',
+          level: 60,
+          wheels: [null, null],
+          covenantId: '020',
+        },
+        {slotId: 'slot-2', wheels: [null, null]},
+        {slotId: 'slot-3', wheels: [null, null]},
+        {slotId: 'slot-4', wheels: [null, null]},
+      ],
+    }
+
+    expect(encodeIngameTeamCode(team)).toContain('ymxhyEx6TxD')
+  })
+
+  it('encodes chrysalis of the maiden without inserting an extra h into the second piece', () => {
+    const team: Team = {
+      id: 'team-chrysalis',
+      name: 'Team Chrysalis',
+      slots: [
+        {
+          slotId: 'slot-1',
+          awakenerName: 'goliath',
+          realm: 'AEQUOR',
+          level: 60,
+          wheels: [null, null],
+          covenantId: '023',
+        },
+        {slotId: 'slot-2', wheels: [null, null]},
+        {slotId: 'slot-3', wheels: [null, null]},
+        {slotId: 'slot-4', wheels: [null, null]},
+      ],
+    }
+
+    expect(encodeIngameTeamCode(team)).toContain('ywXypyoxux7')
+  })
+
+  it('resolves mixed covenant blocks to the covenant with the most matching pieces', () => {
+    const decoded = decodeIngameTeamCode(buildCodeWithCovenantBlocks(['xfhQuKxC']))
+
+    expect(decoded.team.slots[0].covenantId).toBe('022')
+    expect(decoded.warnings.some((warning) => warning.section === 'covenant')).toBe(false)
+  })
+
+  it('leaves covenant unset and warns when a mixed covenant block ties for best match', () => {
+    const decoded = decodeIngameTeamCode(buildCodeWithCovenantBlocks(['xfhQNKxC']))
+
+    expect(decoded.team.slots[0].covenantId).toBeUndefined()
+    expect(
+      decoded.warnings.some(
+        (warning) =>
+          warning.section === 'covenant' &&
+          warning.slotIndex === 0 &&
+          warning.reason === 'ambiguous_parse',
+      ),
+    ).toBe(true)
+  })
+
   it('decodes covenant slice noise without shifting wheel or posse parsing', () => {
-    const code = '@@UliXxW5aaxY1xVxDaaaaaaaaaxKaaaaaaaaaaaaaa3@@'
+    const code = '@@UliXxW5aaxY1xVxDaaaaaaaaax1aaaaaaaaaaaaaa3@@'
     const decoded = decodeIngameTeamCode(code)
 
     expect(decoded.team.slots[0].awakenerName).toBe('doll: inferno')
@@ -126,6 +235,10 @@ describe('decodeIngameTeamCode', () => {
     expect(decoded.team.slots[3].awakenerName).toBe('tawil')
     expect(decoded.team.slots[3].wheels).toEqual(['C15', 'SR02'])
     expect(decoded.team.posseId).toBe('manor-echoes')
-    expect(decoded.warnings.some((warning) => warning.section === 'covenant')).toBe(true)
+    expect(
+      decoded.warnings.some(
+        (warning) => warning.section === 'covenant' && warning.reason === 'unknown_token',
+      ),
+    ).toBe(true)
   })
 })

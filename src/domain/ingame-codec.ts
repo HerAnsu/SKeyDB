@@ -7,9 +7,10 @@ import {getWheels} from './wheels'
 
 const INGAME_WRAPPER = '@@'
 const TEAM_SLOT_COUNT = 4
+const EMPTY_COVENANT_BLOCK = 'aaaaaa'
 const POSSE_TOKEN_LENGTH = 1
 const WHEEL_TOKENS_PER_SLOT = 2
-const COVENANT_SLICES_PER_SLOT = 6
+const COVENANT_PIECES_PER_SLOT = 6
 
 export interface IngameImportWarning {
   section: 'awakener' | 'wheel' | 'covenant' | 'posse'
@@ -27,6 +28,11 @@ export interface DecodedIngameTeamCode {
 interface WheelCandidate {
   token: string
   wheelId?: string
+  unknown?: boolean
+}
+
+interface ParsedCovenantPiece {
+  token: string
   unknown?: boolean
 }
 
@@ -207,26 +213,14 @@ function normalizeDecodedEquipment(
   slots: TeamSlot[],
   wheelCandidates: WheelCandidate[],
   covenantBlock: string,
+  dictionaries: IngameTokenDictionaries,
   wheelById: Map<string, Awaited<ReturnType<typeof getWheels>>[number]>,
   warnings: IngameImportWarning[],
 ): TeamSlot[] {
+  const covenantPiecesBySlot = decodeCovenantPieces(covenantBlock, dictionaries, warnings)
   const nextSlots = [...slots]
 
   for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
-    const covenantStart = slotIndex * COVENANT_SLICES_PER_SLOT
-    const covenantToken = covenantBlock.slice(
-      covenantStart,
-      covenantStart + COVENANT_SLICES_PER_SLOT,
-    )
-    if (covenantToken && /[^a]/.test(covenantToken)) {
-      warnings.push({
-        section: 'covenant',
-        slotIndex,
-        token: covenantToken,
-        reason: 'unsupported_wip_block',
-      })
-    }
-
     nextSlots[slotIndex] = {
       ...nextSlots[slotIndex],
       wheels: [
@@ -245,11 +239,144 @@ function normalizeDecodedEquipment(
           warnings,
         ),
       ],
-      covenantId: undefined,
+      covenantId: resolveDecodedCovenantId(
+        covenantPiecesBySlot[slotIndex],
+        slotIndex,
+        dictionaries,
+        warnings,
+      ),
     }
   }
 
   return nextSlots
+}
+
+function parseCovenantPiece(
+  covenantBlock: string,
+  cursor: number,
+  tokenList: string[],
+): {piece: ParsedCovenantPiece; nextCursor: number} {
+  if (covenantBlock[cursor] === 'a') {
+    return {
+      piece: {token: 'a'},
+      nextCursor: cursor + 1,
+    }
+  }
+
+  const token = findLongestTokenAt(covenantBlock, cursor, tokenList)
+  if (token) {
+    return {
+      piece: {token},
+      nextCursor: cursor + token.length,
+    }
+  }
+
+  const unknownLength =
+    (covenantBlock[cursor] === 'x' ||
+      covenantBlock[cursor] === 'X' ||
+      covenantBlock[cursor] === 'y') &&
+    cursor + 1 < covenantBlock.length
+      ? 2
+      : 1
+
+  return {
+    piece: {
+      token: covenantBlock.slice(cursor, cursor + unknownLength),
+      unknown: true,
+    },
+    nextCursor: cursor + unknownLength,
+  }
+}
+
+function decodeCovenantPieces(
+  covenantBlock: string,
+  dictionaries: IngameTokenDictionaries,
+  warnings: IngameImportWarning[],
+): ParsedCovenantPiece[][] {
+  const sortedTokensByPosition = dictionaries.covenants.pieceTokensByPosition.map((tokens) =>
+    buildLongestTokenList(tokens),
+  )
+  const piecesBySlot: ParsedCovenantPiece[][] = []
+  let cursor = 0
+
+  for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
+    const slotPieces: ParsedCovenantPiece[] = []
+    for (let pieceIndex = 0; pieceIndex < COVENANT_PIECES_PER_SLOT; pieceIndex += 1) {
+      if (cursor >= covenantBlock.length) {
+        throw new Error('Corrupted in-game code: incomplete covenant block.')
+      }
+      const parsed = parseCovenantPiece(covenantBlock, cursor, sortedTokensByPosition[pieceIndex])
+      slotPieces.push(parsed.piece)
+      cursor = parsed.nextCursor
+    }
+    piecesBySlot.push(slotPieces)
+  }
+
+  if (cursor < covenantBlock.length) {
+    warnings.push({
+      section: 'covenant',
+      slotIndex: TEAM_SLOT_COUNT - 1,
+      token: covenantBlock.slice(cursor),
+      reason: 'unknown_token',
+    })
+  }
+
+  return piecesBySlot
+}
+
+function resolveDecodedCovenantId(
+  pieces: ParsedCovenantPiece[] | undefined,
+  slotIndex: number,
+  dictionaries: IngameTokenDictionaries,
+  warnings: IngameImportWarning[],
+): string | undefined {
+  if (!pieces || pieces.every((piece) => piece.token === 'a')) {
+    return undefined
+  }
+
+  for (const piece of pieces) {
+    if (!piece.unknown) {
+      continue
+    }
+    warnings.push({
+      section: 'covenant',
+      slotIndex,
+      token: piece.token,
+      reason: 'unknown_token',
+    })
+  }
+
+  const scores = Array.from(dictionaries.covenants.byIdPieces, ([covenantId, covenantPieces]) => ({
+    covenantId,
+    matches: covenantPieces.reduce((matchCount, covenantPiece, pieceIndex) => {
+      const piece = pieces[pieceIndex]
+      if (piece.unknown || piece.token === 'a' || piece.token !== covenantPiece) {
+        return matchCount
+      }
+      return matchCount + 1
+    }, 0),
+  }))
+  const maxMatches = scores.reduce(
+    (highestMatchCount, score) => Math.max(highestMatchCount, score.matches),
+    0,
+  )
+
+  if (maxMatches === 0) {
+    return undefined
+  }
+
+  const winners = scores.filter((score) => score.matches === maxMatches)
+  if (winners.length > 1) {
+    warnings.push({
+      section: 'covenant',
+      slotIndex,
+      token: pieces.map((piece) => piece.token).join(''),
+      reason: 'ambiguous_parse',
+    })
+    return undefined
+  }
+
+  return winners[0]?.covenantId
 }
 
 function decodePosseId(
@@ -299,6 +426,7 @@ export function decodeIngameTeamCode(code: string): DecodedIngameTeamCode {
     decodedAwakeners.slots,
     decodedWheels.wheelCandidates,
     covenantBlock,
+    dictionaries,
     wheelById,
     warnings,
   )
@@ -337,6 +465,13 @@ function encodeWheelToken(wheelId: string | null, byIdToken: Map<string, string>
   return byIdToken.get(wheelId) ?? 'a'
 }
 
+function encodeCovenantBlock(slot: TeamSlot, dictionaries: IngameTokenDictionaries): string {
+  if (!slot.awakenerName || !slot.covenantId) {
+    return EMPTY_COVENANT_BLOCK
+  }
+  return dictionaries.covenants.byIdBlock.get(slot.covenantId) ?? EMPTY_COVENANT_BLOCK
+}
+
 export function encodeIngameTeamCode(team: Team): string {
   const dictionaries = buildIngameTokenDictionaries()
   const awakenersByNameId = new Map(
@@ -359,9 +494,8 @@ export function encodeIngameTeamCode(team: Team): string {
   }
 
   for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
-    for (let slice = 0; slice < COVENANT_SLICES_PER_SLOT; slice += 1) {
-      payloadTokens.push('a')
-    }
+    const slot = team.slots[slotIndex] ?? fallbackSlots[slotIndex]
+    payloadTokens.push(encodeCovenantBlock(slot, dictionaries))
   }
 
   const posseToken = team.posseId ? (dictionaries.posses.byIdToken.get(team.posseId) ?? 'a') : 'a'
