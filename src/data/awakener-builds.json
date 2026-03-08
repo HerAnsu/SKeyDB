@@ -1,0 +1,55 @@
+[
+  {
+    "awakenerId": 18,
+    "primaryBuildId": "standard",
+    "builds": [
+      {
+        "id": "standard",
+        "label": "Core",
+        "summary": "Baseline sustain setup for Inferno Doll.",
+        "substatPriorityGroups": [["ALIEMUS_REGEN"], ["KEYFLARE_REGEN", "DEATH_RESISTANCE"], ["ATK"]],
+        "recommendedWheelMainstats": ["ALIEMUS_REGEN", "KEYFLARE_REGEN"],
+        "recommendedWheels": [
+          {"tier": "BIS_SSR", "wheelIds": ["C02EX"]},
+          {"tier": "BIS_SR", "wheelIds": ["SR30"]},
+          {"tier": "GOOD", "wheelIds": ["ZL06", "SR10"]}
+        ],
+        "recommendedCovenantIds": ["001", "010"]
+      }
+    ]
+  },
+  {
+    "awakenerId": 27,
+    "primaryBuildId": "dps",
+    "builds": [
+      {
+        "id": "dps",
+        "label": "DPS",
+        "summary": "Default strike-focused damage build.",
+        "substatPriorityGroups": [["CRIT_DMG"], ["DMG_AMP", "CRIT_RATE"], ["ATK"]],
+        "recommendedWheelMainstats": ["CRIT_DMG", "DMG_AMP"],
+        "recommendedWheels": [
+          {"tier": "BIS_SSR", "wheelIds": ["C16"]},
+          {"tier": "ALT_SSR", "wheelIds": ["ZL02"]},
+          {"tier": "BIS_SR", "wheelIds": ["SR43"]},
+          {"tier": "GOOD", "wheelIds": ["SR11", "SR04"]}
+        ],
+        "recommendedCovenantIds": ["005", "010"]
+      },
+      {
+        "id": "tank",
+        "label": "Tank",
+        "summary": "Defensive frontline variant with higher sustain bias.",
+        "substatPriorityGroups": [["DEATH_RESISTANCE"], ["CON", "DEF"], ["ALIEMUS_REGEN"]],
+        "recommendedWheelMainstats": ["DEATH_RESISTANCE"],
+        "recommendedWheels": [
+          {"tier": "BIS_SSR", "wheelIds": ["ZL04"]},
+          {"tier": "ALT_SSR", "wheelIds": ["C11"]},
+          {"tier": "BIS_SR", "wheelIds": ["SR05"]},
+          {"tier": "GOOD", "wheelIds": ["P06", "SR09"]}
+        ],
+        "recommendedCovenantIds": ["001", "006"]
+      }
+    ]
+  }
+]
