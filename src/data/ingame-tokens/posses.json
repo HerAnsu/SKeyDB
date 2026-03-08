@@ -1,6 +1,194 @@
 [
   {
+    "id": "encounter-in-pure-white",
+    "token": "d"
+  },
+  {
+    "id": "voices-in-your-head",
+    "token": "h"
+  },
+  {
+    "id": "warded-injection",
+    "token": "b"
+  },
+  {
+    "id": "a-mouses-wisdom",
+    "token": "c"
+  },
+  {
+    "id": "tiny-wish",
+    "token": "i"
+  },
+  {
+    "id": "obsession-eternal",
+    "token": "g"
+  },
+  {
+    "id": "unequal-exchange",
+    "token": ""
+  },
+  {
+    "id": "funus-aeternum",
+    "token": "f"
+  },
+  {
+    "id": "the-final-vow",
+    "token": "l"
+  },
+  {
+    "id": "auritas-treasure",
+    "token": ""
+  },
+  {
+    "id": "roaring-blood-and-sand",
+    "token": ""
+  },
+  {
+    "id": "ephemeral-eternity",
+    "token": ""
+  },
+  {
+    "id": "feast-of-decay",
+    "token": ""
+  },
+  {
+    "id": "bone-chilling-embrace",
+    "token": ""
+  },
+  {
+    "id": "lakeside-glimpse",
+    "token": ""
+  },
+  {
+    "id": "gateway-of-retrospection",
+    "token": "p"
+  },
+  {
+    "id": "truth-behind-grey-mist",
+    "token": "v"
+  },
+  {
+    "id": "midsummer-vision",
+    "token": ""
+  },
+  {
+    "id": "victory-of-roses",
+    "token": ""
+  },
+  {
+    "id": "miracles-dawn",
+    "token": ""
+  },
+  {
+    "id": "giants-reign",
+    "token": ""
+  },
+  {
+    "id": "24-all-of-her",
+    "token": ""
+  },
+  {
+    "id": "the-lone-seed",
+    "token": "G"
+  },
+  {
+    "id": "the-mountains-resolve",
+    "token": ""
+  },
+  {
+    "id": "festival-of-tides",
+    "token": "C"
+  },
+  {
+    "id": "springs-verse",
+    "token": ""
+  },
+  {
+    "id": "a-guns-cry",
+    "token": ""
+  },
+  {
+    "id": "symphony-fourth",
+    "token": "I"
+  },
+  {
+    "id": "the-gated-answer",
+    "token": "H"
+  },
+  {
+    "id": "plague-of-illusions",
+    "token": "J"
+  },
+  {
+    "id": "blessing-of-the-stars",
+    "token": ""
+  },
+  {
+    "id": "black-swans-dance",
+    "token": ""
+  },
+  {
+    "id": "taverns-opening",
+    "token": ""
+  },
+  {
+    "id": "sacred-mending",
+    "token": "M"
+  },
+  {
+    "id": "undying-thunder",
+    "token": ""
+  },
+  {
+    "id": "derision-of-destiny",
+    "token": ""
+  },
+  {
+    "id": "cruel-homage",
+    "token": "S"
+  },
+  {
+    "id": "undying-sun",
+    "token": ""
+  },
+  {
+    "id": "sacred-bleeding-heart",
+    "token": ""
+  },
+  {
+    "id": "voracious-resolve",
+    "token": ""
+  },
+  {
+    "id": "beachside-memento",
+    "token": ""
+  },
+  {
+    "id": "void-hues",
+    "token": ""
+  },
+  {
+    "id": "a-fleeting-dream",
+    "token": ""
+  },
+  {
+    "id": "wayward-ship",
+    "token": "X"
+  },
+  {
+    "id": "reunions-wish",
+    "token": "Y"
+  },
+  {
+    "id": "from-the-mist-realm",
+    "token": "Z"
+  },
+  {
     "id": "manor-echoes",
     "token": "3"
+  },
+  {
+    "id": "new-years-eve-fireworks",
+    "token": ""
   }
 ]

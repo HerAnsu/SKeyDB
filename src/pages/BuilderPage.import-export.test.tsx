@@ -149,7 +149,7 @@ describe('BuilderPage import-export', () => {
     fireEvent.click(screen.getByRole('button', {name: /import/i}))
     const importDialog = screen.getByRole('dialog', {name: /import teams/i})
     fireEvent.change(within(importDialog).getByRole('textbox', {name: /import code/i}), {
-      target: {value: '@@#aaaaaaaaaaaa@@'},
+      target: {value: '@@#Dklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad@@'},
     })
     fireEvent.click(within(importDialog).getByRole('button', {name: /^import$/i}))
 

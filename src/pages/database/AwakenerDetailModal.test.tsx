@@ -154,8 +154,8 @@ vi.mock('./AwakenerDetailCards', () => ({
   AwakenerDetailCards: () => <div>Cards Tab</div>,
 }))
 
-vi.mock('./AwakenerGuideTab', () => ({
-  AwakenerGuideTab: () => <div>Guide Tab</div>,
+vi.mock('./AwakenerBuildsTab', () => ({
+  AwakenerBuildsTab: ({awakenerId}: {awakenerId: number}) => <div>Builds Tab {awakenerId}</div>,
 }))
 
 vi.mock('./AwakenerTeamsTab', () => ({
@@ -240,5 +240,16 @@ describe('AwakenerDetailModal', () => {
     expect(screen.getAllByText('Sidebar E3+1')).toHaveLength(2)
     expect(screen.getAllByText('Sidebar Crit Rate 16.2%')).toHaveLength(2)
     expect(screen.getByText('Overview Crit Rate 16.2%')).toBeInTheDocument()
+  })
+
+  it('passes the active awakener id to the builds tab', async () => {
+    const onClose = vi.fn()
+    const awakener = makeAwakener(1, 'thais')
+
+    render(<AwakenerDetailModal awakener={awakener} onClose={onClose} />)
+
+    fireEvent.click(screen.getByRole('button', {name: 'Builds'}))
+
+    expect(await screen.findByText('Builds Tab 1')).toBeInTheDocument()
   })
 })

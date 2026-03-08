@@ -2,7 +2,7 @@ import {fileURLToPath, URL} from 'node:url'
 
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
-import {defineConfig} from 'vitest/config'
+import {configDefaults, defineConfig} from 'vitest/config'
 
 function getBasePath(): string {
   const configured = process.env.VITE_BASE_PATH?.trim()
@@ -36,5 +36,6 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/test/setup.ts',
+    exclude: [...configDefaults.exclude, '.worktrees/**', 'untracked/**'],
   },
 })

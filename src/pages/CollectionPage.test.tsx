@@ -189,6 +189,35 @@ describe('CollectionPage global search capture', () => {
     ).toBeInTheDocument()
   })
 
+  it('keeps the results column viewport-constrained with the sidebar height as a floor', () => {
+    render(<CollectionPage />)
+
+    const sidebar = screen.getByRole('complementary')
+    const layout = sidebar.parentElement
+    const resultsPanel = screen.getByRole('tabpanel')
+    const resultsContainer = resultsPanel.parentElement
+
+    expect(sidebar.classList.contains('min-h-[560px]')).toBe(true)
+    expect(layout?.classList.contains('items-start')).toBe(true)
+    expect(resultsContainer?.classList.contains('flex')).toBe(true)
+    expect(resultsContainer?.classList.contains('flex-col')).toBe(true)
+    expect(resultsContainer?.classList.contains('h-[max(560px,calc(100dvh-11.5rem))]')).toBe(true)
+
+    const resultsContainerClasses = Array.from(resultsContainer?.classList ?? [])
+    expect(
+      resultsContainerClasses.some((className) => className.startsWith('max-h-[calc(100dvh-')),
+    ).toBe(false)
+
+    const scrollContainer = document.querySelector('.collection-scrollbar')
+    expect(scrollContainer).not.toBeNull()
+    const scrollClasses = Array.from(scrollContainer?.classList ?? [])
+    expect(scrollClasses.includes('flex-1')).toBe(true)
+    expect(scrollClasses.includes('min-h-0')).toBe(true)
+    expect(scrollClasses.some((className) => className.startsWith('max-h-[calc(100dvh-'))).toBe(
+      false,
+    )
+  })
+
   it('sorts unowned awakeners last when display unowned is enabled', () => {
     render(<CollectionPage />)
 

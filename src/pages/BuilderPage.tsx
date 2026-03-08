@@ -1,4 +1,4 @@
-import {useRef} from 'react'
+import {useLayoutEffect, useRef, useState, type Dispatch, type SetStateAction} from 'react'
 
 import {DndContext} from '@dnd-kit/core'
 
@@ -45,6 +45,11 @@ import {useTransferConfirm} from './builder/useTransferConfirm'
 export function BuilderPage() {
   const {toastEntries, showToast} = useTimedToast({defaultDurationMs: 3200})
   const searchInputRef = useRef<HTMLInputElement | null>(null)
+  const builderSectionRef = useRef<HTMLElement | null>(null)
+  const mainBuilderZoneRef = useRef<HTMLDivElement | null>(null)
+  const pickerZoneRef = useRef<HTMLElement | null>(null)
+  const [mainBuilderZoneHeight, setMainBuilderZoneHeight] = useState<number | null>(null)
+  const [pickerShellHeight, setPickerShellHeight] = useState<number | null>(null)
   const {
     pendingTransfer,
     requestAwakenerTransfer,
@@ -55,8 +60,14 @@ export function BuilderPage() {
   const {
     displayUnowned,
     setDisplayUnowned,
+    sinkUnownedToBottom,
+    setSinkUnownedToBottom,
     allowDupes,
     setAllowDupes,
+    promoteRecommendedGear,
+    setPromoteRecommendedGear,
+    promoteMatchingWheelMainstats,
+    setPromoteMatchingWheelMainstats,
     teamPreviewMode,
     setTeamPreviewMode,
     quickLineupSession,
@@ -97,6 +108,8 @@ export function BuilderPage() {
     activePosse,
     activePosseAsset,
     activeSearchQuery,
+    activeBuild,
+    teamRecommendedPosseIds,
     filteredAwakeners,
     filteredPosses,
     filteredWheels,
@@ -182,6 +195,59 @@ export function BuilderPage() {
     restoreQuickLineupFocus,
     setActiveSelection,
   })
+
+  useLayoutEffect(() => {
+    const builderSection = builderSectionRef.current
+    const mainBuilderZone = mainBuilderZoneRef.current
+    const pickerZone = pickerZoneRef.current
+    if (!builderSection || !mainBuilderZone || !pickerZone) {
+      return
+    }
+    const pageMain = pickerZone.closest('main')
+
+    const syncMetric = (setMetric: Dispatch<SetStateAction<number | null>>, nextMetric: number) => {
+      setMetric((previousMetric) => (previousMetric === nextMetric ? previousMetric : nextMetric))
+    }
+
+    const measureLayout = () => {
+      const nextMainBuilderZoneHeight = Math.round(mainBuilderZone.getBoundingClientRect().height)
+      const mainPaddingBottom =
+        pageMain instanceof HTMLElement
+          ? Number.parseFloat(window.getComputedStyle(pageMain).paddingBottom) || 0
+          : 0
+      const availableViewportHeight = Math.max(
+        0,
+        Math.round(window.innerHeight - pickerZone.getBoundingClientRect().top - mainPaddingBottom),
+      )
+
+      syncMetric(setMainBuilderZoneHeight, nextMainBuilderZoneHeight)
+      syncMetric(setPickerShellHeight, Math.max(nextMainBuilderZoneHeight, availableViewportHeight))
+    }
+
+    measureLayout()
+    window.addEventListener('resize', measureLayout)
+
+    if (!('ResizeObserver' in window)) {
+      return () => {
+        window.removeEventListener('resize', measureLayout)
+      }
+    }
+
+    const observer = new ResizeObserver(() => {
+      measureLayout()
+    })
+
+    observer.observe(builderSection)
+    observer.observe(mainBuilderZone)
+    if (pageMain instanceof HTMLElement) {
+      observer.observe(pageMain)
+    }
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', measureLayout)
+    }
+  }, [])
 
   const onPickerAssignSuccess: ((nextSlots: TeamSlot[]) => void) | undefined = quickLineupSession
     ? (nextSlots) => {
@@ -271,6 +337,7 @@ export function BuilderPage() {
     onDropPickerAwakener: handleDropPickerAwakener,
     onDropPickerWheel: handleDropPickerWheel,
     onDropPickerCovenant: handleDropPickerCovenant,
+    onDropPickerPosse: handleSetActivePosse,
     onDropTeamSlot: swapActiveTeamSlots,
     onDropTeamSlotToPicker: clearTeamSlot,
     onDropTeamWheel: handleDropTeamWheel,
@@ -470,7 +537,7 @@ export function BuilderPage() {
       onDragStart={dndWrappers.handleDndDragStart}
       sensors={sensors}
     >
-      <section className='space-y-4'>
+      <section className='space-y-4' ref={builderSectionRef}>
         <BuilderToolbar
           hasTeams={teams.length > 0}
           hasActiveTeam={Boolean(activeTeam)}
@@ -487,70 +554,72 @@ export function BuilderPage() {
 
         <div className='grid items-start gap-4 lg:grid-cols-[2fr_1fr]'>
           <div className='min-w-0 space-y-3'>
-            <TabbedContainer
-              activeTabId={effectiveActiveTeamId}
-              bodyClassName='p-0'
-              canCloseTab={() => teams.length > 1}
-              className='overflow-hidden'
-              getTabCloseAriaLabel={(tab) => `Close ${tab.label}`}
-              leftEarMaxWidth='100%'
-              leftTrailingAction={
-                teams.length < MAX_TEAMS ? (
-                  <button
-                    aria-label='Add team tab'
-                    className='tabbed-container-tab tabbed-container-tab-inactive h-full px-3 text-[11px] tracking-wide text-slate-300 transition-colors'
-                    onClick={handleAddTeamTab}
-                    type='button'
-                  >
-                    +
-                  </button>
-                ) : null
-              }
-              onTabChange={handleTabChange}
-              onTabClose={handleTabClose}
-              tone='amber'
-              tabSizing='content'
-              tabs={teams.map((team) => ({id: team.id, label: team.name}))}
-            >
-              <BuilderActiveTeamPanel
-                activeTeamId={effectiveActiveTeamId}
-                activeTeamName={activeTeam.name}
-                isEditingTeamName={
-                  editingTeamId === effectiveActiveTeamId && editingTeamSurface === 'header'
+            <div data-builder-main-zone='true' ref={mainBuilderZoneRef}>
+              <TabbedContainer
+                activeTabId={effectiveActiveTeamId}
+                bodyClassName='p-0'
+                canCloseTab={() => teams.length > 1}
+                className='overflow-hidden'
+                getTabCloseAriaLabel={(tab) => `Close ${tab.label}`}
+                leftEarMaxWidth='100%'
+                leftTrailingAction={
+                  teams.length < MAX_TEAMS ? (
+                    <button
+                      aria-label='Add team tab'
+                      className='tabbed-container-tab tabbed-container-tab-inactive h-full px-3 text-[11px] tracking-wide text-slate-300 transition-colors'
+                      onClick={handleAddTeamTab}
+                      type='button'
+                    >
+                      +
+                    </button>
+                  ) : null
                 }
-                editingTeamName={editingTeamName}
-                activePosseAsset={activePosseAsset}
-                activePosseName={activePosse?.name}
-                isActivePosseOwned={
-                  activePosseId ? (ownedPosseLevelById.get(activePosseId) ?? null) !== null : true
-                }
-                quickLineupSession={quickLineupSession}
-                activeDragKind={activeDrag?.kind ?? null}
-                onBackQuickLineupStep={goBackQuickLineupStep}
-                onBeginTeamRename={beginTeamRename}
-                onCancelQuickLineup={cancelQuickLineup}
-                onCommitTeamRename={commitTeamRename}
-                onCancelTeamRename={cancelTeamRename}
-                onEditingTeamNameChange={setEditingTeamName}
-                onFinishQuickLineup={finishQuickLineup}
-                onOpenPossePicker={() => {
-                  setPickerTab('posses')
-                }}
-                onStartQuickLineup={startQuickLineup}
-                onCardClick={handleCardClick}
-                onRemoveActiveSelection={handleRemoveActiveSelection}
-                onCovenantSlotClick={handleCovenantSlotClick}
-                onSkipQuickLineupStep={skipQuickLineupStep}
-                onWheelSlotClick={handleWheelSlotClick}
-                awakenerLevelByName={awakenerLevelByName}
-                ownedAwakenerLevelByName={ownedAwakenerLevelByName}
-                ownedWheelLevelById={ownedWheelLevelById}
-                predictedDropHover={dndWrappers.predictedDropHover}
-                resolvedActiveSelection={resolvedActiveSelection}
-                teamRealms={teamRealmSet}
-                teamSlots={teamSlots}
-              />
-            </TabbedContainer>
+                onTabChange={handleTabChange}
+                onTabClose={handleTabClose}
+                tone='amber'
+                tabSizing='content'
+                tabs={teams.map((team) => ({id: team.id, label: team.name}))}
+              >
+                <BuilderActiveTeamPanel
+                  activeTeamId={effectiveActiveTeamId}
+                  activeTeamName={activeTeam.name}
+                  isEditingTeamName={
+                    editingTeamId === effectiveActiveTeamId && editingTeamSurface === 'header'
+                  }
+                  editingTeamName={editingTeamName}
+                  activePosseAsset={activePosseAsset}
+                  activePosseName={activePosse?.name}
+                  isActivePosseOwned={
+                    activePosseId ? (ownedPosseLevelById.get(activePosseId) ?? null) !== null : true
+                  }
+                  quickLineupSession={quickLineupSession}
+                  activeDragKind={activeDrag?.kind ?? null}
+                  onBackQuickLineupStep={goBackQuickLineupStep}
+                  onBeginTeamRename={beginTeamRename}
+                  onCancelQuickLineup={cancelQuickLineup}
+                  onCommitTeamRename={commitTeamRename}
+                  onCancelTeamRename={cancelTeamRename}
+                  onEditingTeamNameChange={setEditingTeamName}
+                  onFinishQuickLineup={finishQuickLineup}
+                  onOpenPossePicker={() => {
+                    setPickerTab('posses')
+                  }}
+                  onStartQuickLineup={startQuickLineup}
+                  onCardClick={handleCardClick}
+                  onRemoveActiveSelection={handleRemoveActiveSelection}
+                  onCovenantSlotClick={handleCovenantSlotClick}
+                  onSkipQuickLineupStep={skipQuickLineupStep}
+                  onWheelSlotClick={handleWheelSlotClick}
+                  awakenerLevelByName={awakenerLevelByName}
+                  ownedAwakenerLevelByName={ownedAwakenerLevelByName}
+                  ownedWheelLevelById={ownedWheelLevelById}
+                  predictedDropHover={dndWrappers.predictedDropHover}
+                  resolvedActiveSelection={resolvedActiveSelection}
+                  teamRealms={teamRealmSet}
+                  teamSlots={teamSlots}
+                />
+              </TabbedContainer>
+            </div>
 
             <BuilderTeamsPanel
               activeTeamId={effectiveActiveTeamId}
@@ -585,14 +654,22 @@ export function BuilderPage() {
             awakenerSortGroupByRealm={awakenerSortGroupByRealm}
             awakenerSortKey={awakenerSortKey}
             allowDupes={allowDupes}
+            activeBuild={activeBuild}
+            teamRecommendedPosseIds={teamRecommendedPosseIds}
             displayUnowned={displayUnowned}
+            sinkUnownedToBottom={sinkUnownedToBottom}
             effectiveActiveTeamId={effectiveActiveTeamId}
             filteredAwakeners={filteredAwakeners}
+            filteredCovenants={filteredCovenants}
             filteredPosses={filteredPosses}
+            filteredWheels={filteredWheels}
+            mainBuilderZoneHeight={mainBuilderZoneHeight}
+            pickerShellHeight={pickerShellHeight}
             ownedAwakenerLevelByName={ownedAwakenerLevelByName}
             ownedPosseLevelById={ownedPosseLevelById}
             ownedWheelLevelById={ownedWheelLevelById}
             onDisplayUnownedChange={setDisplayUnowned}
+            onSinkUnownedToBottomChange={setSinkUnownedToBottom}
             onAwakenerClick={handlePickerAwakenerClick}
             onAwakenerFilterChange={setAwakenerFilter}
             onAwakenerSortDirectionToggle={toggleAwakenerSortDirection}
@@ -601,6 +678,8 @@ export function BuilderPage() {
             onAllowDupesChange={setAllowDupes}
             onPickerTabChange={setPickerTab}
             onPosseFilterChange={setPosseFilter}
+            onPromoteMatchingWheelMainstatsChange={setPromoteMatchingWheelMainstats}
+            onPromoteRecommendedGearChange={setPromoteRecommendedGear}
             onWheelRarityFilterChange={setWheelRarityFilter}
             onWheelMainstatFilterChange={setWheelMainstatFilter}
             onSearchChange={(nextValue) => {
@@ -614,6 +693,8 @@ export function BuilderPage() {
             onSetActiveCovenant={handlePickerCovenantClick}
             pickerTab={pickerTab}
             posseFilter={posseFilter}
+            promoteMatchingWheelMainstats={promoteMatchingWheelMainstats}
+            promoteRecommendedGear={promoteRecommendedGear}
             wheelRarityFilter={wheelRarityFilter}
             wheelMainstatFilter={wheelMainstatFilter}
             searchInputRef={searchInputRef}
@@ -622,8 +703,7 @@ export function BuilderPage() {
             usedAwakenerIdentityKeys={usedAwakenerIdentityKeys}
             usedPosseByTeamOrder={usedPosseByTeamOrder}
             usedWheelByTeamOrder={usedWheelByTeamOrder}
-            filteredWheels={filteredWheels}
-            filteredCovenants={filteredCovenants}
+            pickerZoneRef={pickerZoneRef}
           />
         </div>
       </section>
