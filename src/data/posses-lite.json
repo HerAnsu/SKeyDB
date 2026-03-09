@@ -372,5 +372,12 @@
     "realm": "OTHER",
     "isFadedLegacy": false,
     "index": 50
+  },
+  {
+    "id": "drowned-innocence",
+    "name": "Drowned Innocence",
+    "realm": "AEQUOR",
+    "isFadedLegacy": false,
+    "index": 51
   }
 ]

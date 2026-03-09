@@ -111,7 +111,7 @@ export function HomePage() {
               </li>
             </ul>
             <div className='mt-2'>
-              <p className='text-xs tracking-wide text-slate-400 uppercase'>Play Morimens on:</p>
+              <p className='text-xs tracking-wide text-slate-400 uppercase'>Download Morimens!!:</p>
               <div className='mt-1.5 flex flex-wrap gap-2'>
                 {morimensPlayLinks.map((link) => {
                   const LinkIcon = link.icon

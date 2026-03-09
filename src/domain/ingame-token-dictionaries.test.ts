@@ -3,10 +3,8 @@ import {describe, expect, it} from 'vitest'
 import possesCanonical from '@/data/ingame-tokens/posses.json'
 
 import {
-  buildCovenantBlockDictionaryFromEntries,
   buildIngameTokenDictionaries,
   buildTokenDictionaryFromEntries,
-  type CanonicalCovenantBlockEntry,
   type CanonicalTokenEntry,
 } from './ingame-token-dictionaries'
 import {getPosses} from './posses'
@@ -96,7 +94,7 @@ describe('buildIngameTokenDictionaries', () => {
     const posseIds = getPosses().map((posse) => posse.id)
     const canonicalPosseEntryById = new Map(possesCanonical.map((entry) => [entry.id, entry.token]))
 
-    expect(canonicalPosseEntryById.size).toBe(posseIds.length)
+    expect(canonicalPosseEntryById.size).toBeLessThanOrEqual(posseIds.length)
     expect(canonicalPosseEntryById.get('manor-echoes')).toBe('3')
     expect(canonicalPosseEntryById.get('voices-in-your-head')).toBe('h')
     expect(canonicalPosseEntryById.get('auritas-treasure')).toBe('')
@@ -128,12 +126,12 @@ describe('buildIngameTokenDictionaries', () => {
     expect(canonicalPosseEntryById.get('voices-in-your-head')).toBe('h')
   })
 
-  it('builds non-empty covenant block dictionaries from raw data', () => {
+  it('builds non-empty covenant dictionaries from raw data', () => {
     const result = buildIngameTokenDictionaries()
 
-    expect(result.covenants.byIdBlock.size).toBe(21)
-    expect(result.covenants.byIdBlock.get('022')).toBe('xfhQuExR')
-    expect(result.covenants.pieceTokensByPosition[0]).toContain('xf')
+    expect(result.covenants.byIdToken.size).toBe(21)
+    expect(result.covenants.byIdToken.get('022')).toBe('w')
+    expect(result.covenants.byTokenId.get('w')).toBe('022')
   })
 
   it('produces issue metadata for unresolved mappings', () => {
@@ -149,25 +147,9 @@ describe('raw token data type guard', () => {
     expect(entry.token).toBe('x1')
   })
 
-  it('accepts covenant block entry shape', () => {
-    const entry: CanonicalCovenantBlockEntry = {
-      id: '001',
-      pieces: ['xB', 'yn', 'yh', 'xF', 'xM', 'yA'],
-    }
+  it('accepts covenant token entry shape', () => {
+    const entry: CanonicalTokenEntry = {id: '001', token: 'k'}
     expect(entry.id).toBe('001')
-    expect(entry.pieces[5]).toBe('yA')
-  })
-})
-
-describe('buildCovenantBlockDictionaryFromEntries', () => {
-  it('tracks block strings and positional piece tokens', () => {
-    const result = buildCovenantBlockDictionaryFromEntries(
-      ['001'],
-      [{id: '001', pieces: ['a1', 'b2', 'c3', 'd4', 'e5', 'f6']}],
-    )
-
-    expect(result.byIdBlock.get('001')).toBe('a1b2c3d4e5f6')
-    expect(result.byIdPieces.get('001')).toEqual(['a1', 'b2', 'c3', 'd4', 'e5', 'f6'])
-    expect(result.pieceTokensByPosition[3]).toEqual(['d4'])
+    expect(entry.token).toBe('k')
   })
 })

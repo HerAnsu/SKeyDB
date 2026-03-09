@@ -90,12 +90,6 @@ function createSkeletonFromLite(liteAwakener) {
     id: liteAwakener.id,
     name: liteAwakener.name,
     ingameId: liteAwakener.ingameId,
-    aliases: liteAwakener.aliases ?? [liteAwakener.name],
-    faction: liteAwakener.faction,
-    realm: liteAwakener.realm,
-    rarity: liteAwakener.rarity ?? 'TBD',
-    type: liteAwakener.type ?? 'TBD',
-    tags: liteAwakener.tags ?? [],
     stats: {
       CON: toStringStat(liteAwakener.stats?.CON),
       ATK: toStringStat(liteAwakener.stats?.ATK),
@@ -126,17 +120,19 @@ function mergeLiteIntoFull(liteAwakener, fullAwakener) {
   const talentsTemplate = createPlaceholderEntries(TALENT_KEYS)
   const enlightensTemplate = createPlaceholderEntries(ENLIGHTEN_KEYS)
 
+  const fullAwakenerWithoutLiteOwnedFields = {...fullAwakener}
+  delete fullAwakenerWithoutLiteOwnedFields.aliases
+  delete fullAwakenerWithoutLiteOwnedFields.faction
+  delete fullAwakenerWithoutLiteOwnedFields.realm
+  delete fullAwakenerWithoutLiteOwnedFields.rarity
+  delete fullAwakenerWithoutLiteOwnedFields.type
+  delete fullAwakenerWithoutLiteOwnedFields.tags
+
   const next = {
-    ...fullAwakener,
+    ...fullAwakenerWithoutLiteOwnedFields,
     id: liteAwakener.id,
     name: liteAwakener.name,
     ingameId: liteAwakener.ingameId ?? fullAwakener.ingameId,
-    aliases: liteAwakener.aliases ?? [liteAwakener.name],
-    faction: liteAwakener.faction,
-    realm: liteAwakener.realm,
-    rarity: liteAwakener.rarity ?? fullAwakener.rarity ?? 'TBD',
-    type: liteAwakener.type ?? fullAwakener.type ?? 'TBD',
-    tags: liteAwakener.tags ?? fullAwakener.tags ?? [],
   }
 
   const mergedStats = {...(fullAwakener.stats ?? {})}
