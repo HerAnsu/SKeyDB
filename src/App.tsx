@@ -54,6 +54,7 @@ function App() {
             <Route element={<HomePage />} path='/' />
             <Route element={<DatabasePage />} path='/database' />
             <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug' />
+            <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug/:tabSlug' />
             <Route element={<TimelinePage />} path='/timeline' />
             <Route element={<BuilderPage />} path='/builder' />
             <Route element={<CollectionPage />} path='/collection' />
