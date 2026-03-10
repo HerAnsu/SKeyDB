@@ -28,7 +28,7 @@ export function AwakenerGridCard({awakener, onSelect}: AwakenerGridCardProps) {
         style={
           {
             '--realm-color': realmTint,
-            background: `linear-gradient(to bottom, #475569, var(--realm-color), #475569)`,
+            background: `linear-gradient(to bottom, var(--realm-color), #475569)`,
           } as React.CSSProperties
         }
       >
