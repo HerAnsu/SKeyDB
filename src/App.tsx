@@ -13,6 +13,9 @@ const BuilderPage = lazy(() =>
 const CollectionPage = lazy(() =>
   import('./pages/CollectionPage').then((module) => ({default: module.CollectionPage})),
 )
+const TimelinePage = lazy(() =>
+  import('./pages/TimelinePage').then((module) => ({default: module.TimelinePage})),
+)
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
             </NavLink>
             <NavLink className={navClassName} to='/database'>
               Database
+            </NavLink>
+            <NavLink className={navClassName} to='/timeline'>
+              Timeline
             </NavLink>
             <NavLink className={navClassName} to='/builder'>
               Builder
@@ -49,6 +55,7 @@ function App() {
             <Route element={<DatabasePage />} path='/database' />
             <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug' />
             <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug/:tabSlug' />
+            <Route element={<TimelinePage />} path='/timeline' />
             <Route element={<BuilderPage />} path='/builder' />
             <Route element={<CollectionPage />} path='/collection' />
             <Route element={<Navigate replace to='/' />} path='*' />

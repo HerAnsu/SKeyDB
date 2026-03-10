@@ -167,9 +167,9 @@
     "faction": "The Unknowable",
     "aliases": ["clementine"],
     "stats": {
-      "CON": 129,
-      "ATK": 152,
-      "DEF": 125
+      "CON": 126,
+      "ATK": 149,
+      "DEF": 122
     },
     "tags": ["Bleed", "Crit", "Dispel", "Keyflare", "Quasar", "STR Down", "STR Up"],
     "ingameId": "D13"
@@ -951,16 +951,15 @@
     "name": "vortice",
     "rarity": "SSR",
     "realm": "AEQUOR",
-    "type": "TBD",
-    "faction": "TBD",
-    "unreleased": true,
+    "type": "ASSAULT",
+    "faction": "The Fools",
     "aliases": ["vortice"],
     "stats": {
       "CON": 149,
       "ATK": 180,
       "DEF": 122
     },
-    "tags": ["Fish", "Friend", "Shork"],
-    "ingameId": "TEMP_VORTICE"
+    "tags": ["Fortress", "Pursuit", "Dispel", "Tentacles"],
+    "ingameId": "O11"
   }
 ]

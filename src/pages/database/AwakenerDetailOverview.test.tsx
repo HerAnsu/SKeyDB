@@ -32,12 +32,6 @@ const TEST_AWAKENER: Awakener = {
 const TEST_FULL_DATA: AwakenerFull = {
   id: 1,
   name: 'salvador',
-  aliases: ['salvador'],
-  faction: 'Test',
-  realm: 'CHAOS',
-  rarity: 'SSR',
-  type: 'ASSAULT',
-  tags: [],
   stats: {
     CON: '100',
     ATK: '100',

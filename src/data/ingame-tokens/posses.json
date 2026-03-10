@@ -25,7 +25,7 @@
   },
   {
     "id": "unequal-exchange",
-    "token": ""
+    "token": "e"
   },
   {
     "id": "funus-aeternum",
@@ -37,27 +37,27 @@
   },
   {
     "id": "auritas-treasure",
-    "token": ""
+    "token": "j"
   },
   {
     "id": "roaring-blood-and-sand",
-    "token": ""
+    "token": "k"
   },
   {
     "id": "ephemeral-eternity",
-    "token": ""
+    "token": "m"
   },
   {
     "id": "feast-of-decay",
-    "token": ""
+    "token": "q"
   },
   {
     "id": "bone-chilling-embrace",
-    "token": ""
+    "token": "n"
   },
   {
     "id": "lakeside-glimpse",
-    "token": ""
+    "token": "o"
   },
   {
     "id": "gateway-of-retrospection",
@@ -69,23 +69,23 @@
   },
   {
     "id": "midsummer-vision",
-    "token": ""
+    "token": "w"
   },
   {
     "id": "victory-of-roses",
-    "token": ""
+    "token": "u"
   },
   {
     "id": "miracles-dawn",
-    "token": ""
+    "token": "r"
   },
   {
     "id": "giants-reign",
-    "token": ""
+    "token": "s"
   },
   {
     "id": "24-all-of-her",
-    "token": ""
+    "token": "t"
   },
   {
     "id": "the-lone-seed",
@@ -93,7 +93,7 @@
   },
   {
     "id": "the-mountains-resolve",
-    "token": ""
+    "token": "E"
   },
   {
     "id": "festival-of-tides",
@@ -101,11 +101,11 @@
   },
   {
     "id": "springs-verse",
-    "token": ""
+    "token": "A"
   },
   {
     "id": "a-guns-cry",
-    "token": ""
+    "token": "D"
   },
   {
     "id": "symphony-fourth",
@@ -121,11 +121,11 @@
   },
   {
     "id": "blessing-of-the-stars",
-    "token": ""
+    "token": "K"
   },
   {
     "id": "black-swans-dance",
-    "token": ""
+    "token": "B"
   },
   {
     "id": "taverns-opening",
@@ -137,11 +137,11 @@
   },
   {
     "id": "undying-thunder",
-    "token": ""
+    "token": "N"
   },
   {
     "id": "derision-of-destiny",
-    "token": ""
+    "token": "O"
   },
   {
     "id": "cruel-homage",
@@ -149,27 +149,27 @@
   },
   {
     "id": "undying-sun",
-    "token": ""
+    "token": "R"
   },
   {
     "id": "sacred-bleeding-heart",
-    "token": ""
+    "token": "V"
   },
   {
     "id": "voracious-resolve",
-    "token": ""
+    "token": "Q"
   },
   {
     "id": "beachside-memento",
-    "token": ""
+    "token": "T"
   },
   {
     "id": "void-hues",
-    "token": ""
+    "token": "U"
   },
   {
     "id": "a-fleeting-dream",
-    "token": ""
+    "token": "W"
   },
   {
     "id": "wayward-ship",
@@ -185,10 +185,14 @@
   },
   {
     "id": "manor-echoes",
-    "token": "3"
+    "token": "2"
   },
   {
     "id": "new-years-eve-fireworks",
+    "token": "3"
+  },
+  {
+    "id": "drowned-innocence",
     "token": ""
   }
 ]

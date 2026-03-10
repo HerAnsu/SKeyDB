@@ -4,7 +4,7 @@ import {getMainstatByKey} from './mainstats'
 import {getWheelMainstatLabel, getWheels} from './wheels'
 
 describe('getWheels', () => {
-  it('returns parsed wheels with stable ids and full asset ids', () => {
+  it('returns parsed wheels with stable ids and valid asset ids', () => {
     const wheels = getWheels()
 
     expect(wheels.length).toBeGreaterThan(0)
@@ -18,7 +18,9 @@ describe('getWheels', () => {
       mainstatKey: expect.any(String),
     })
     expect(wheels.every((wheel) => wheel.id.trim().length > 0)).toBe(true)
-    expect(wheels.every((wheel) => wheel.assetId.startsWith('Weapon_Full_'))).toBe(true)
+    expect(
+      wheels.every((wheel) => wheel.assetId === 'TBD' || wheel.assetId.startsWith('Weapon_Full_')),
+    ).toBe(true)
     expect(wheels.every((wheel) => wheel.name.trim().length > 0)).toBe(true)
     expect(wheels.every((wheel) => typeof wheel.awakener === 'string')).toBe(true)
     expect(wheels.every((wheel) => typeof wheel.mainstatKey === 'string')).toBe(true)

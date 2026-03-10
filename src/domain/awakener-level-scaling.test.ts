@@ -5,6 +5,7 @@ import {
   clampAwakenerDatabasePsycheSurgeOffset,
   resolveAwakenerStatsForLevel,
 } from './awakener-level-scaling'
+import {getAwakeners} from './awakeners'
 import {loadAwakenersFull, type AwakenerFull} from './awakeners-full'
 
 const CANONICAL_LEVEL_ONE_SUBSTATS = {
@@ -36,12 +37,6 @@ function makeAwakener(overrides?: Partial<AwakenerFull>): AwakenerFull {
   return {
     id: 999,
     name: 'test awakener',
-    aliases: ['test awakener'],
-    faction: 'Test',
-    realm: 'CHAOS',
-    rarity: 'SSR',
-    type: 'ASSAULT',
-    tags: [],
     stats: {
       CON: '140',
       ATK: '135',
@@ -196,6 +191,61 @@ describe('awakeners full data', () => {
       expect(resolvedAt60.ATK).toBe(awakener.stats.ATK)
       expect(resolvedAt60.DEF).toBe(awakener.stats.DEF)
     }
+  })
+
+  it('keeps lite and full awakener identity aligned by id and name', async () => {
+    const fullData = await loadAwakenersFull()
+    const liteData = getAwakeners()
+    const liteById = new Map(liteData.map((awakener) => [awakener.id, awakener]))
+    const mismatches: string[] = []
+
+    for (const fullAwakener of fullData) {
+      const liteAwakener = liteById.get(fullAwakener.id)
+      if (!liteAwakener) {
+        mismatches.push(`${String(fullAwakener.id)}:${fullAwakener.name} missing in lite`)
+        continue
+      }
+      if (liteAwakener.name !== fullAwakener.name) {
+        mismatches.push(
+          `${String(fullAwakener.id)} name mismatch ${fullAwakener.name} != ${liteAwakener.name}`,
+        )
+      }
+    }
+
+    expect(mismatches).toEqual([])
+  })
+
+  it('keeps lite and full primary CON/ATK/DEF stats aligned by awakener id', async () => {
+    const fullData = await loadAwakenersFull()
+    const liteData = getAwakeners()
+    const liteById = new Map(liteData.map((awakener) => [awakener.id, awakener]))
+    const mismatches: string[] = []
+
+    for (const fullAwakener of fullData) {
+      const liteAwakener = liteById.get(fullAwakener.id)
+      if (!liteAwakener?.stats) {
+        mismatches.push(`${String(fullAwakener.id)}:${fullAwakener.name} missing lite stats`)
+        continue
+      }
+
+      if (fullAwakener.stats.CON !== String(liteAwakener.stats.CON)) {
+        mismatches.push(
+          `${String(fullAwakener.id)}:${fullAwakener.name} CON ${fullAwakener.stats.CON} != ${String(liteAwakener.stats.CON)}`,
+        )
+      }
+      if (fullAwakener.stats.ATK !== String(liteAwakener.stats.ATK)) {
+        mismatches.push(
+          `${String(fullAwakener.id)}:${fullAwakener.name} ATK ${fullAwakener.stats.ATK} != ${String(liteAwakener.stats.ATK)}`,
+        )
+      }
+      if (fullAwakener.stats.DEF !== String(liteAwakener.stats.DEF)) {
+        mismatches.push(
+          `${String(fullAwakener.id)}:${fullAwakener.name} DEF ${fullAwakener.stats.DEF} != ${String(liteAwakener.stats.DEF)}`,
+        )
+      }
+    }
+
+    expect(mismatches).toEqual([])
   })
 
   it('fills the remaining mouchette and vortice substat scaling gaps with sane Lv. 1 values', async () => {

@@ -414,6 +414,15 @@
     "mainstatKey": "KEYFLARE_REGEN"
   },
   {
+    "id": "JP06",
+    "assetId": "Weapon_Full_JP06",
+    "name": "Stakes of Wisdom",
+    "rarity": "SSR",
+    "realm": "NEUTRAL",
+    "awakener": "",
+    "mainstatKey": "CRIT_DMG"
+  },
+  {
     "id": "N01",
     "assetId": "Weapon_Full_N01",
     "name": "Unsent Flowers",
@@ -529,6 +538,15 @@
     "realm": "AEQUOR",
     "awakener": "murphy: fauxborn",
     "mainstatKey": "KEYFLARE_REGEN"
+  },
+  {
+    "id": "O112",
+    "assetId": "Weapon_Full_O112",
+    "name": "The Faraway Eden",
+    "rarity": "SSR",
+    "realm": "AEQUOR",
+    "awakener": "vortice",
+    "mainstatKey": "REALM_MASTERY"
   },
   {
     "id": "P01",
@@ -1051,6 +1069,15 @@
     "realm": "NEUTRAL",
     "awakener": "Xu",
     "mainstatKey": "DMG_AMP"
+  },
+  {
+    "id": "SR46",
+    "assetId": "Weapon_Full_SR46",
+    "name": "Imprisoned Madness",
+    "rarity": "SR",
+    "realm": "NEUTRAL",
+    "awakener": "vortice",
+    "mainstatKey": "REALM_MASTERY"
   },
   {
     "id": "ZL01",
