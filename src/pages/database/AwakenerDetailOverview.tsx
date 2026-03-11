@@ -1,6 +1,6 @@
 import {useCallback, useMemo} from 'react'
 
-import enlightensStars from '@/assets/icons/battle_card_buff_045.png'
+import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.png'
 import type {Awakener} from '@/domain/awakeners'
 import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
 import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
