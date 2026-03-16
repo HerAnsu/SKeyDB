@@ -17,7 +17,7 @@
     "startDate": "2026/03/16 09:00",
     "endDate": "2026/03/30 09:00",
     "pinned": true,
-    "customArt": "/events/dtide-aequor.webp"
+    "customArt": "/events/dtide-caro.webp"
   },
   {
     "id": "event-curriculum-03",
@@ -71,15 +71,6 @@
     "customArt": "/events/gifts-from-mythag.webp"
   },
   {
-    "id": "event-story-rerun-24",
-    "title": "Manifold Healing: Rerun",
-    "category": "gameplay-event",
-    "description": "RERUN: Gameplay and story event featuring 24. \n Obtain SR-Wheel \"Silver Cod's Determination\", Posse \"All of Her\" and more.",
-    "startDate": "2026/02/23 09:00",
-    "endDate": "2026/03/09 09:00",
-    "featured": "24"
-  },
-  {
     "id": "event-story-rerun-wanda",
     "title": "Feast of Flames: Rerun",
     "category": "gameplay-event",
@@ -88,5 +79,14 @@
     "endDate": "2026/04/06 09:00",
     "featured": "Wanda",
     "customArt": "/events/wanda-event.webp"
+  },
+  {
+    "id": "phase-reversal",
+    "title": "Phase Reversal",
+    "category": "gameplay-event",
+    "description": "RERUN: PVP (Traphase) event. Participate in PVP matches to earn rewards including Posse \"Tavern's Opening\", emotes, silver, upgrade materials and more.",
+    "startDate": "2026/03/16 09:00",
+    "endDate": "2026/03/30 09:00",
+    "customArt": "/events/phase-reversal.webp"
   }
 ]
