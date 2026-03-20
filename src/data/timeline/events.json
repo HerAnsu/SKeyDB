@@ -5,7 +5,7 @@
     "category": "gameplay-event",
     "description": "Gameplay and story event featuring the new awakener Vortice. \n Obtain SR-Wheel \"Imprisoned Madness\", Posse \"Drowned Innocence\" and more.",
     "startDate": "2026/03/09 09:00",
-    "endDate": "2026/03/23 09:00",
+    "endDate": "2026/04/06 09:00",
     "pinned": true,
     "featured": "Vortice"
   },
@@ -88,5 +88,33 @@
     "startDate": "2026/03/16 09:00",
     "endDate": "2026/03/30 09:00",
     "customArt": "/events/phase-reversal.webp"
+  },
+  {
+    "id": "event-story-tulu",
+    "title": "The Sovereign's Return",
+    "category": "gameplay-event",
+    "description": "RERUN: Gameplay and story event featuring Tulu. \n Obtain limited SR-Wheel \"Blue Stone Throne\", limited avatar \"By the Silver Key: Tulu\" and more.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/05/04 09:00",
+    "featured": "Tulu"
+  },
+  {
+    "id": "event-login-april",
+    "title": "Gifts from Mythag",
+    "category": "login",
+    "description": "Login rewards: 10 Luminous Cores for 7 cumulative logins. Additional rewards available through up to 14 cumulative logins.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/04/20 09:00",
+    "customArt": "/events/gifts-from-mythag.webp"
+  },
+  {
+    "id": "event-curriculum-04",
+    "title": "Curriculum Honor",
+    "category": "curriculum",
+    "description": "Complete daily and weekly tasks to earn various rewards. \n T1: 680 Silver Prime - SSR wheel, 2500 Silver, 12 Luminous Cores and more. \n T2: 1280 Silver Prime - T1 + Exclusive Avatars, increased daily rewards and more.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/04/20 09:00",
+    "customArt": "/events/curriculum.webp",
+    "pricing": "680-1280 Silver Prime"
   }
 ]
