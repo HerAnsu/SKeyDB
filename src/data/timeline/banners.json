@@ -44,5 +44,23 @@
     "startDate": "2026/03/23 09:00",
     "endDate": "2026/04/20 09:00",
     "featured": ["Queen's Edict", "Tablet of Scriptures", "Amber-Tinted Death"]
+  },
+  {
+    "id": "banner-triune-verdant-apr",
+    "title": "Triune Verdant",
+    "type": "rerun",
+    "description": "Three rerun banners, featuring the awakeners Tulu, Sorel and Doll: Inferno.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/05/04 09:00",
+    "featured": ["Tulu", "Sorel", "Doll: Inferno"]
+  },
+  {
+    "id": "banner-sylvan-omen-apr",
+    "title": "Sylvan Omen",
+    "type": "rerun",
+    "description": "Three rerun banners, featuring the Wheels Hymn of the Sovereign, By Rose Alone and Manikin of Oblivion.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/05/04 09:00",
+    "featured": ["Hymn of the Sovereign", "By Rose Alone", "Manikin of Oblivion"]
   }
 ]
