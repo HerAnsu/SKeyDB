@@ -13,9 +13,9 @@
     "id": "event-dtide",
     "title": "Regional D-Effect Zone",
     "category": "d-tide",
-    "description": "Bi-weekly D-Tide raids. \n Complete to earn Silver, Black Offerings, Gnosis materials and more. \n Current Realm relic: Aequor Ring.",
-    "startDate": "2026/03/02 09:00",
-    "endDate": "2026/03/16 09:00",
+    "description": "Bi-weekly D-Tide raids. \n Complete to earn Silver, Black Offerings, Gnosis materials and more. \n Current Realm relic: Caro Ring.",
+    "startDate": "2026/03/16 09:00",
+    "endDate": "2026/03/30 09:00",
     "pinned": true,
     "customArt": "/events/dtide-aequor.webp"
   },
