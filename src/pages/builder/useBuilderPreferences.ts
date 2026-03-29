@@ -64,12 +64,12 @@ export function useBuilderPreferences({searchInputRef, storage}: UseBuilderPrefe
     }
     return true
   })
-  const [pickerSearchByTab, setPickerSearchByTab] = useState<Record<PickerTab, string>>({
+  const [pickerSearchByTab, setPickerSearchByTab] = useState({
     awakeners: '',
     wheels: '',
     posses: '',
     covenants: '',
-  })
+  } satisfies Record<PickerTab, string>)
   const [displayUnowned, setDisplayUnowned] = useState(() => {
     const stored = safeStorageRead(storage, BUILDER_DISPLAY_UNOWNED_KEY)
     if (stored === '1') {
