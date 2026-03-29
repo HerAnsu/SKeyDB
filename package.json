@@ -74,6 +74,8 @@
     "vitest": "^4.1.2"
   },
   "overrides": {
+    "brace-expansion": "5.0.5",
+    "flatted": "3.4.2",
     "rollup": "^4.59.0"
   },
   "simple-git-hooks": {
