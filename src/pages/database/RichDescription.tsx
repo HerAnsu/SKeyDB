@@ -12,12 +12,14 @@ import {
   isSameTrailRoot,
   openTrailRoot,
   pushTrailEntry,
+  type ScalingTrailEntry,
   type SkillTrailEntry,
   type TagTrailEntry,
   type TrailEntry,
 } from './popover-trail'
 import {PopoverTrailPanel} from './PopoverTrailPanel'
 import {RichSegmentRenderer} from './RichSegmentRenderer'
+import {ScalingPopover} from './ScalingPopover'
 import {SkillPopover} from './SkillPopover'
 import {TagPopover} from './TagPopover'
 
@@ -111,6 +113,20 @@ export function RichDescription({
     [announceTrailOpened, trail],
   )
 
+  const handleScalingClick = useCallback(
+    (values: number[], suffix: string, stat: string | null, e: React.MouseEvent) => {
+      const entry = buildScalingTrailEntry(values, suffix, stat, skillLevel)
+      if (isSameTrailRoot(trail, entry.key)) return
+      const anchorElement = e.currentTarget as HTMLElement
+      const rect = anchorElement.getBoundingClientRect()
+      announceTrailOpened()
+      setTrailAnchorElement(anchorElement)
+      setTrailAnchorRect(rect)
+      setTrail((prev) => openTrailRoot(prev, entry))
+    },
+    [announceTrailOpened, skillLevel, trail],
+  )
+
   const openNestedSkill = useCallback(
     (name: string) => {
       if (!fullData) return
@@ -126,6 +142,14 @@ export function RichDescription({
     const entry = buildTagTrailEntry(tag)
     setTrail((prev) => pushTrailEntry(prev, entry))
   }, [])
+
+  const openNestedScaling = useCallback(
+    (values: number[], suffix: string, stat: string | null) => {
+      const entry = buildScalingTrailEntry(values, suffix, stat, skillLevel)
+      setTrail((prev) => pushTrailEntry(prev, entry))
+    },
+    [skillLevel],
+  )
 
   const closeTrailTop = useCallback(() => {
     setTrail((prev) => {
@@ -160,6 +184,7 @@ export function RichDescription({
             key={i}
             onMechanicClick={handleMechanicClick}
             onSkillClick={handleSkillClick}
+            onScalingClick={handleScalingClick}
             segment={seg}
             skillLevel={skillLevel}
             stats={stats}
@@ -188,10 +213,11 @@ export function RichDescription({
                     }}
                     onMechanicTokenClick={openNestedTag}
                     onNavigateToCards={onNavigateToCards ? handleNavigateToCards : undefined}
+                    onScalingTokenClick={openNestedScaling}
                     onSkillTokenClick={openNestedSkill}
                     stats={stats}
                   />
-                ) : (
+                ) : entry.kind === 'tag' ? (
                   <TagPopover
                     cardNames={rouseAwareCards}
                     key={entry.key}
@@ -199,8 +225,21 @@ export function RichDescription({
                       closeTrailFrom(index)
                     }}
                     onMechanicTokenClick={openNestedTag}
+                    onScalingTokenClick={openNestedScaling}
                     onSkillTokenClick={openNestedSkill}
                     tag={entry.tag}
+                  />
+                ) : (
+                  <ScalingPopover
+                    currentLevel={skillLevel}
+                    key={entry.key}
+                    onClose={() => {
+                      closeTrailFrom(index)
+                    }}
+                    stat={entry.stat}
+                    stats={stats}
+                    suffix={entry.suffix}
+                    values={entry.values}
                   />
                 ),
               )}
@@ -227,6 +266,22 @@ function buildTagTrailEntry(tag: Tag): TagTrailEntry {
     kind: 'tag',
     key: `tag:${tag.key.toLowerCase()}`,
     tag,
+  }
+}
+
+function buildScalingTrailEntry(
+  values: number[],
+  suffix: string,
+  stat: string | null,
+  currentLevel?: number,
+): ScalingTrailEntry {
+  return {
+    kind: 'scaling',
+    key: `scaling:${stat ?? 'unnamed'}:${values.join(',')}`,
+    values,
+    suffix,
+    stat,
+    currentLevel,
   }
 }
 

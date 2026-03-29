@@ -98,7 +98,7 @@ export function PopoverTrailPanel({
 
   return (
     <div
-      className={`fixed z-[950] overflow-y-auto ${
+      className={`fixed z-[950] ${
         isMobile
           ? 'inset-x-3 bottom-3 max-h-[min(72vh,34rem)]'
           : 'max-h-[calc(100vh-24px)] w-[min(22rem,calc(100vw-24px))]'

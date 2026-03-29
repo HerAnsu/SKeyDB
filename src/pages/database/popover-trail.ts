@@ -18,7 +18,15 @@ export interface TagTrailEntry extends KeyedTrailEntry {
   tag: Tag
 }
 
-export type TrailEntry = SkillTrailEntry | TagTrailEntry
+export interface ScalingTrailEntry extends KeyedTrailEntry {
+  kind: 'scaling'
+  values: number[]
+  suffix: string
+  stat: string | null
+  currentLevel?: number
+}
+
+export type TrailEntry = SkillTrailEntry | TagTrailEntry | ScalingTrailEntry
 
 const TRAIL_MIN_BELOW_SPACE = 260
 export const TRAIL_MOBILE_MAX_WIDTH = 767

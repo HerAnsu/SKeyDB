@@ -9,7 +9,7 @@ import {
   fmtNum,
   formatScalingRange,
 } from '@/domain/scaling'
-import {resolveTag, type Tag} from '@/domain/tags'
+import {getTagColor, getTagIcon, resolveTag, type Tag} from '@/domain/tags'
 
 import {renderTextWithBreaks} from './font-scale'
 import {
@@ -31,6 +31,12 @@ interface RichSegmentRendererProps {
   stats: AwakenerFullStats | null
   onSkillClick?: (name: string, event: MouseEvent<HTMLButtonElement>) => void
   onMechanicClick?: (tag: Tag, event: MouseEvent<HTMLButtonElement>) => void
+  onScalingClick?: (
+    values: number[],
+    suffix: string,
+    stat: string | null,
+    event: MouseEvent<HTMLButtonElement>,
+  ) => void
 }
 
 interface RichScalingSegmentProps {
@@ -47,6 +53,7 @@ export function RichSegmentRenderer({
   stats,
   onSkillClick,
   onMechanicClick,
+  onScalingClick,
 }: RichSegmentRendererProps) {
   switch (segment.type) {
     case 'text':
@@ -82,24 +89,47 @@ export function RichSegmentRenderer({
 
     case 'mechanic': {
       const tag = resolveTag(segment.name)
-      const desc = tag?.description
-      if (tag && desc && onMechanicClick) {
+      if (tag?.description && onMechanicClick) {
+        const color = getTagColor(tag)
         return (
           <button
-            className={DATABASE_INTERACTIVE_TOKEN_CLASS}
+            className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} m-0 inline-flex items-baseline gap-0.5 p-0`}
             onClick={(event) => {
               onMechanicClick(tag, event)
             }}
-            style={{fontSize: 'inherit'}}
+            style={{fontSize: 'inherit', color, background: 'transparent'}}
             type='button'
           >
-            {segment.name}
+            {tag.iconId && getTagIcon(tag.iconId) ? (
+              <img
+                alt=''
+                className='h-[0.9em] w-[0.9em] self-center opacity-90'
+                src={getTagIcon(tag.iconId)}
+              />
+            ) : null}
+            <span>{segment.name}</span>
           </button>
         )
       }
+      const color = tag ? getTagColor(tag) : undefined
+      const hasIcon = tag?.iconId && getTagIcon(tag.iconId)
+
       return (
-        <span className={DATABASE_UNIMPLEMENTED_TOKEN_CLASS} title='Details coming soon'>
-          {segment.name}
+        <span
+          className={`${DATABASE_UNIMPLEMENTED_TOKEN_CLASS} ${
+            hasIcon ? 'inline-flex items-baseline gap-0.5' : 'inline'
+          }`}
+          style={{color}}
+          title='Details coming soon'
+        >
+          {hasIcon ? (
+            <img
+              alt=''
+              className='h-[0.85em] w-[0.85em] self-center opacity-80'
+              src={getTagIcon(tag.iconId)}
+            />
+          ) : null}
+          <span>{segment.name}</span>
         </span>
       )
     }
@@ -110,6 +140,7 @@ export function RichSegmentRenderer({
     case 'scaling':
       return (
         <RichScalingSegment
+          onScalingClick={onScalingClick}
           segment={segment}
           skillLevel={skillLevel}
           stats={stats}
@@ -119,7 +150,22 @@ export function RichSegmentRenderer({
   }
 }
 
-function RichScalingSegment({segment, skillLevel, stats, variant}: RichScalingSegmentProps) {
+interface RichScalingSegmentWrapperProps extends RichScalingSegmentProps {
+  onScalingClick?: (
+    values: number[],
+    suffix: string,
+    stat: string | null,
+    event: MouseEvent<HTMLButtonElement>,
+  ) => void
+}
+
+function RichScalingSegment({
+  segment,
+  skillLevel,
+  stats,
+  variant,
+  onScalingClick,
+}: RichScalingSegmentWrapperProps) {
   if (variant === 'popover') {
     const {values, suffix, stat} = segment
     const display = formatScalingRange(values, suffix)
@@ -153,14 +199,42 @@ function RichScalingSegment({segment, skillLevel, stats, variant}: RichScalingSe
   const value = segment.values[idx]
   const displayValue = fmtNum(value)
   const computed = computeStatValue(value, segment.suffix, segment.stat, stats)
+
+  if (onScalingClick) {
+    return (
+      <button
+        className={`${DATABASE_SCALING_TOKEN_CLASS} m-0 inline-block p-0 align-baseline`}
+        onClick={(event) => {
+          onScalingClick(segment.values, segment.suffix, segment.stat, event)
+        }}
+        style={{
+          fontSize: 'inherit',
+          fontFamily: 'inherit',
+          fontWeight: 'inherit',
+          background: 'transparent',
+          lineHeight: '1.2',
+        }}
+        type='button'
+      >
+        {computed !== null ? (
+          <span>{computed}</span>
+        ) : (
+          <span>
+            {displayValue}
+            {segment.suffix}
+          </span>
+        )}
+      </button>
+    )
+  }
+
   const hoverText = buildScalingHover(segment.values, segment.suffix, segment.stat, stats)
 
   if (computed !== null) {
     return (
       <span className={DATABASE_SCALING_TOKEN_CLASS} title={hoverText}>
         <span>{computed}</span>
-        <span className='text-slate-500'>
-          {' '}
+        <span className='ml-1 text-slate-500'>
           ({displayValue}
           {segment.suffix}
           {segment.stat ? ` ${segment.stat}` : ''})
@@ -173,12 +247,6 @@ function RichScalingSegment({segment, skillLevel, stats, variant}: RichScalingSe
     <span className={DATABASE_SCALING_TOKEN_CLASS} title={hoverText}>
       {displayValue}
       {segment.suffix}
-      {segment.stat ? (
-        <>
-          {' '}
-          <span className={DATABASE_STAT_TOKEN_CLASS}>{segment.stat}</span>
-        </>
-      ) : null}
     </span>
   )
 }
