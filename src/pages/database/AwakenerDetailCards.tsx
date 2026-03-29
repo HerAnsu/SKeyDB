@@ -88,9 +88,9 @@ export function AwakenerDetailCards({
                     Cost {card.cost}
                   </span>
                 </div>
-                <p className='mt-1 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+                <div className='mt-1 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
                   {renderDescription(card.description)}
-                </p>
+                </div>
               </div>
             </div>
           ))}

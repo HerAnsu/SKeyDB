@@ -2,7 +2,7 @@ import {useCallback, useEffect, useId, useState} from 'react'
 
 import {createPortal} from 'react-dom'
 
-import type {AwakenerCard, AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
+import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
 import {parseRichDescription} from '@/domain/rich-text'
 import {type Tag} from '@/domain/tags'
 
@@ -33,7 +33,7 @@ interface RichDescriptionProps {
 }
 
 interface CardInfo {
-  card: AwakenerCard
+  card: {name: string; description: string}
   label: string
 }
 
@@ -115,7 +115,7 @@ export function RichDescription({
 
   const handleScalingClick = useCallback(
     (values: number[], suffix: string, stat: string | null, e: React.MouseEvent) => {
-      const entry = buildScalingTrailEntry(values, suffix, stat, skillLevel)
+      const entry = buildScalingTrailEntry(values, suffix, stat)
       if (isSameTrailRoot(trail, entry.key)) return
       const anchorElement = e.currentTarget as HTMLElement
       const rect = anchorElement.getBoundingClientRect()
@@ -124,31 +124,40 @@ export function RichDescription({
       setTrailAnchorRect(rect)
       setTrail((prev) => openTrailRoot(prev, entry))
     },
-    [announceTrailOpened, skillLevel, trail],
+    [announceTrailOpened, trail],
   )
 
   const openNestedSkill = useCallback(
-    (name: string) => {
+    (name: string, sourceIndex: number, e: React.MouseEvent) => {
       if (!fullData) return
       const result = resolveCardInfo(fullData, name)
       if (!result) return
-      const entry = buildSkillTrailEntry(result.card, result.label)
-      setTrail((prev) => pushTrailEntry(prev, entry))
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+      const entry = buildSkillTrailEntry(result.card, result.label, rect)
+      setTrail((prev) => pushTrailEntry(prev.slice(0, sourceIndex + 1), entry))
     },
     [fullData],
   )
 
-  const openNestedTag = useCallback((tag: Tag) => {
-    const entry = buildTagTrailEntry(tag)
-    setTrail((prev) => pushTrailEntry(prev, entry))
+  const openNestedTag = useCallback((tag: Tag, sourceIndex: number, e: React.MouseEvent) => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+    const entry = buildTagTrailEntry(tag, rect)
+    setTrail((prev) => pushTrailEntry(prev.slice(0, sourceIndex + 1), entry))
   }, [])
 
   const openNestedScaling = useCallback(
-    (values: number[], suffix: string, stat: string | null) => {
-      const entry = buildScalingTrailEntry(values, suffix, stat, skillLevel)
-      setTrail((prev) => pushTrailEntry(prev, entry))
+    (
+      values: number[],
+      suffix: string,
+      stat: string | null,
+      sourceIndex: number,
+      e: React.MouseEvent,
+    ) => {
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+      const entry = buildScalingTrailEntry(values, suffix, stat, rect)
+      setTrail((prev) => pushTrailEntry(prev.slice(0, sourceIndex + 1), entry))
     },
-    [skillLevel],
+    [],
   )
 
   const closeTrailTop = useCallback(() => {
@@ -172,31 +181,32 @@ export function RichDescription({
   }, [])
 
   const handleNavigateToCards = useCallback(() => {
-    clearTrail()
-    onNavigateToCards?.()
+    if (onNavigateToCards) {
+      clearTrail()
+      onNavigateToCards()
+    }
   }, [clearTrail, onNavigateToCards])
 
   return (
     <>
-      <span>
-        {segments.map((seg, i) => (
-          <RichSegmentRenderer
-            key={i}
-            onMechanicClick={handleMechanicClick}
-            onSkillClick={handleSkillClick}
-            onScalingClick={handleScalingClick}
-            segment={seg}
-            skillLevel={skillLevel}
-            stats={stats}
-            variant='inline'
-          />
-        ))}
-      </span>
-      {trailAnchorRect && trail.length > 0
+      {segments.map((seg, i) => (
+        <RichSegmentRenderer
+          key={i}
+          onMechanicClick={handleMechanicClick}
+          onScalingClick={handleScalingClick}
+          onSkillClick={handleSkillClick}
+          segment={seg}
+          skillLevel={skillLevel}
+          stats={stats}
+          variant='inline'
+        />
+      ))}
+      {trail.length > 0 && trailAnchorRect && trailAnchorElement
         ? createPortal(
             <PopoverTrailPanel
               anchorElement={trailAnchorElement}
               anchorRect={trailAnchorRect}
+              entryRects={trail.map((e) => e.rect)}
               itemCount={trail.length}
               onCloseTop={closeTrailTop}
             >
@@ -211,10 +221,17 @@ export function RichDescription({
                     onClose={() => {
                       closeTrailFrom(index)
                     }}
-                    onMechanicTokenClick={openNestedTag}
+                    onMechanicTokenClick={(tag, e) => {
+                      openNestedTag(tag, index, e)
+                    }}
                     onNavigateToCards={onNavigateToCards ? handleNavigateToCards : undefined}
-                    onScalingTokenClick={openNestedScaling}
-                    onSkillTokenClick={openNestedSkill}
+                    onScalingTokenClick={(v, suf, st, e) => {
+                      openNestedScaling(v, suf, st, index, e)
+                    }}
+                    onSkillTokenClick={(name, e) => {
+                      openNestedSkill(name, index, e)
+                    }}
+                    skillLevel={skillLevel}
                     stats={stats}
                   />
                 ) : entry.kind === 'tag' ? (
@@ -224,14 +241,22 @@ export function RichDescription({
                     onClose={() => {
                       closeTrailFrom(index)
                     }}
-                    onMechanicTokenClick={openNestedTag}
-                    onScalingTokenClick={openNestedScaling}
-                    onSkillTokenClick={openNestedSkill}
+                    onMechanicTokenClick={(tag, e) => {
+                      openNestedTag(tag, index, e)
+                    }}
+                    onScalingTokenClick={(v, suf, st, e) => {
+                      openNestedScaling(v, suf, st, index, e)
+                    }}
+                    onSkillTokenClick={(name, e) => {
+                      openNestedSkill(name, index, e)
+                    }}
+                    skillLevel={skillLevel}
+                    stats={stats}
                     tag={entry.tag}
                   />
                 ) : (
                   <ScalingPopover
-                    currentLevel={skillLevel}
+                    currentLevel={index === 0 ? skillLevel : 0}
                     key={entry.key}
                     onClose={() => {
                       closeTrailFrom(index)
@@ -251,21 +276,43 @@ export function RichDescription({
   )
 }
 
-function buildSkillTrailEntry(card: AwakenerCard, label: string): SkillTrailEntry {
+function resolveCardInfo(awakener: AwakenerFull, name: string): CardInfo | null {
+  for (const [key, card] of Object.entries(awakener.cards)) {
+    if (card.name === name) return {card, label: key.toUpperCase()}
+  }
+  if (awakener.exalts.exalt.name === name) return {card: awakener.exalts.exalt, label: 'EXALT'}
+  if (awakener.exalts.over_exalt.name === name)
+    return {card: awakener.exalts.over_exalt, label: 'OVER-EXALT'}
+  for (const [key, talent] of Object.entries(awakener.talents)) {
+    if (talent.name === name) return {card: talent, label: `TALENT ${key}`}
+  }
+  for (const [key, enlighten] of Object.entries(awakener.enlightens)) {
+    if (enlighten.name === name) return {card: enlighten, label: `ENLIGHTEN ${key}`}
+  }
+  return null
+}
+
+function buildSkillTrailEntry(
+  card: {name: string; description: string},
+  label: string,
+  rect?: DOMRect,
+): SkillTrailEntry {
   return {
     kind: 'skill',
-    key: `skill:${card.name.toLowerCase()}`,
+    key: `skill:${card.name}`,
     name: card.name,
     label,
     description: card.description,
+    rect,
   }
 }
 
-function buildTagTrailEntry(tag: Tag): TagTrailEntry {
+function buildTagTrailEntry(tag: Tag, rect?: DOMRect): TagTrailEntry {
   return {
     kind: 'tag',
-    key: `tag:${tag.key.toLowerCase()}`,
+    key: `tag:${tag.key}`,
     tag,
+    rect,
   }
 }
 
@@ -273,7 +320,7 @@ function buildScalingTrailEntry(
   values: number[],
   suffix: string,
   stat: string | null,
-  currentLevel?: number,
+  rect?: DOMRect,
 ): ScalingTrailEntry {
   return {
     kind: 'scaling',
@@ -281,81 +328,10 @@ function buildScalingTrailEntry(
     values,
     suffix,
     stat,
-    currentLevel,
+    rect,
   }
 }
 
-function createDescriptionCardInfo(name: string, description: string, label: string): CardInfo {
-  return {
-    card: {name, cost: '—', description},
-    label,
-  }
-}
-
-function hasRouseCard(fullData: AwakenerFull): boolean {
-  return Object.hasOwn(fullData.cards, 'C1')
-}
-
-function findRouseCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
-  if (name !== 'Rouse' || !hasRouseCard(fullData)) {
-    return null
-  }
-  const rouseCard = fullData.cards.C1
-
-  return {card: rouseCard, label: `Rouse · Cost ${rouseCard.cost}`}
-}
-
-function findStandardCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
-  for (const [key, card] of Object.entries(fullData.cards)) {
-    if (card.name !== name) {
-      continue
-    }
-
-    const slotLabel = key === 'C1' ? 'Rouse' : key
-    return {card, label: `${slotLabel} · Cost ${card.cost}`}
-  }
-
-  return null
-}
-
-function findExaltCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
-  if (fullData.exalts.exalt.name === name) {
-    return createDescriptionCardInfo(name, fullData.exalts.exalt.description, 'Exalt')
-  }
-
-  if (fullData.exalts.over_exalt.name === name) {
-    return createDescriptionCardInfo(name, fullData.exalts.over_exalt.description, 'Over Exalt')
-  }
-
-  return null
-}
-
-function findTalentCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
-  for (const [key, talent] of Object.entries(fullData.talents)) {
-    if (talent.name === name) {
-      return createDescriptionCardInfo(name, talent.description, `Talent · ${key}`)
-    }
-  }
-
-  return null
-}
-
-function findEnlightenCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
-  for (const [key, enlighten] of Object.entries(fullData.enlightens)) {
-    if (enlighten.name === name) {
-      return createDescriptionCardInfo(name, enlighten.description, `Enlighten · ${key}`)
-    }
-  }
-
-  return null
-}
-
-function resolveCardInfo(fullData: AwakenerFull, name: string): CardInfo | null {
-  return (
-    findRouseCardInfo(fullData, name) ??
-    findStandardCardInfo(fullData, name) ??
-    findExaltCardInfo(fullData, name) ??
-    findTalentCardInfo(fullData, name) ??
-    findEnlightenCardInfo(fullData, name)
-  )
+function hasRouseCard(awakener: AwakenerFull): boolean {
+  return Object.values(awakener.cards).some((c) => c.name === 'Rouse')
 }

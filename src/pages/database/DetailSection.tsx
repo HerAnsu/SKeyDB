@@ -46,9 +46,9 @@ export function DetailSection({
                   <span className='mx-1.5 text-slate-600'>·</span>
                   <span className={DATABASE_ITEM_NAME_CLASS}>{item.name}</span>
                 </p>
-                <p className='mt-1 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+                <div className='mt-1 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
                   {renderDescription ? renderDescription(item.description) : item.description}
-                </p>
+                </div>
               </div>
             </div>
           ))}

@@ -143,9 +143,9 @@ export function AwakenerDetailOverview({
                 )}
               </div>
               <div className='min-w-0 flex-1'>
-                <p className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+                <div className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
                   {renderDescription(portraitRelic.description)}
-                </p>
+                </div>
               </div>
             </div>
           </div>

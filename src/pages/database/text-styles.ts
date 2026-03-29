@@ -5,13 +5,13 @@ export const DATABASE_ITEM_NAME_CLASS = 'text-amber-200/90'
 export const DATABASE_ENTRY_TITLE_CLASS = 'ui-title text-sm text-amber-200/90'
 
 export const DATABASE_INTERACTIVE_TOKEN_CLASS =
-  'cursor-pointer border-b border-dotted border-amber-200/35 pb-[1px] text-amber-100/85 transition-colors hover:border-amber-100/60 hover:text-amber-50'
+  'cursor-pointer border-b border-dotted border-amber-200/35 text-amber-100/85 transition-colors hover:border-amber-100/60 hover:text-amber-50 outline-none'
 
 export const DATABASE_UNIMPLEMENTED_TOKEN_CLASS =
   'border-b border-dotted border-slate-500/50 text-slate-300/85'
 
 export const DATABASE_SCALING_TOKEN_CLASS =
-  'cursor-help border-b border-dotted border-amber-200/35 pb-[1px] text-amber-100/85 transition-colors hover:border-amber-100/60 hover:text-amber-50'
+  'cursor-help border-b border-dotted border-amber-200/35 text-amber-100/85 transition-colors hover:border-amber-100/60 hover:text-amber-50 outline-none'
 
 export const DATABASE_STAT_TOKEN_CLASS = 'text-sky-300/90'
 export const DATABASE_POPOVER_STAT_TOKEN_CLASS = 'text-sky-300/80'

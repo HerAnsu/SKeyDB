@@ -1,5 +1,6 @@
 import {FaXmark} from 'react-icons/fa6'
 
+import type {AwakenerFullStats} from '@/domain/awakeners-full'
 import {parseRichDescription} from '@/domain/rich-text'
 import {getTagColor, getTagIcon, type Tag} from '@/domain/tags'
 
@@ -10,9 +11,16 @@ interface TagPopoverProps {
   tag: Tag
   cardNames: Set<string>
   onClose: () => void
-  onSkillTokenClick: (name: string) => void
-  onMechanicTokenClick: (tag: Tag) => void
-  onScalingTokenClick: (values: number[], suffix: string, stat: string | null) => void
+  onSkillTokenClick: (name: string, e: React.MouseEvent) => void
+  onMechanicTokenClick: (tag: Tag, e: React.MouseEvent) => void
+  onScalingTokenClick: (
+    values: number[],
+    suffix: string,
+    stat: string | null,
+    e: React.MouseEvent,
+  ) => void
+  skillLevel: number
+  stats: AwakenerFullStats | null
 }
 
 export function TagPopover({
@@ -22,6 +30,8 @@ export function TagPopover({
   onSkillTokenClick,
   onMechanicTokenClick,
   onScalingTokenClick,
+  skillLevel,
+  stats,
 }: TagPopoverProps) {
   const segments = parseRichDescription(tag.description, cardNames)
   const color = getTagColor(tag)
@@ -40,11 +50,11 @@ export function TagPopover({
       }}
     >
       <div className='mb-2 flex items-start justify-between gap-6'>
-        <div className='flex items-center gap-1.5'>
+        <div className='flex items-center gap-1'>
           {tag.iconId && getTagIcon(tag.iconId) ? (
             <img
               alt=''
-              className='h-4 w-4 object-contain opacity-90'
+              className='h-[1.1em] w-[1.1em] shrink-0 object-contain'
               src={getTagIcon(tag.iconId)}
             />
           ) : null}
@@ -63,26 +73,26 @@ export function TagPopover({
         </button>
       </div>
       <div>
-        <p className='leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
+        <div className='leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
           {segments.map((seg, i) => (
             <RichSegmentRenderer
               key={i}
-              onMechanicClick={(tag) => {
-                onMechanicTokenClick(tag)
+              onMechanicClick={(tag, e) => {
+                onMechanicTokenClick(tag, e)
               }}
-              onSkillClick={(name) => {
-                onSkillTokenClick(name)
+              onSkillClick={(name, e) => {
+                onSkillTokenClick(name, e)
               }}
-              onScalingClick={(values, suffix, stat) => {
-                onScalingTokenClick(values, suffix, stat)
+              onScalingClick={(values, suffix, stat, e) => {
+                onScalingTokenClick(values, suffix, stat, e)
               }}
               segment={seg}
-              skillLevel={1}
-              stats={null}
+              skillLevel={skillLevel}
+              stats={stats}
               variant='popover'
             />
           ))}
-        </p>
+        </div>
       </div>
     </div>
   )

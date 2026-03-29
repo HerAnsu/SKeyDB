@@ -14,10 +14,16 @@ interface SkillPopoverProps {
   cardNames: Set<string>
   stats: AwakenerFullStats | null
   onClose: () => void
-  onSkillTokenClick: (name: string) => void
-  onMechanicTokenClick: (tag: Tag) => void
-  onScalingTokenClick: (values: number[], suffix: string, stat: string | null) => void
+  onSkillTokenClick: (name: string, e: React.MouseEvent) => void
+  onMechanicTokenClick: (tag: Tag, e: React.MouseEvent) => void
+  onScalingTokenClick: (
+    values: number[],
+    suffix: string,
+    stat: string | null,
+    e: React.MouseEvent,
+  ) => void
   onNavigateToCards?: () => void
+  skillLevel: number
 }
 
 export function SkillPopover({
@@ -31,6 +37,7 @@ export function SkillPopover({
   onMechanicTokenClick,
   onScalingTokenClick,
   onNavigateToCards,
+  skillLevel,
 }: SkillPopoverProps) {
   const segments = parseRichDescription(description, cardNames)
 
@@ -51,7 +58,7 @@ export function SkillPopover({
         <div>
           {onNavigateToCards ? (
             <button
-              className={`${DATABASE_ENTRY_TITLE_CLASS} transition-colors hover:text-amber-100`}
+              className={`${DATABASE_ENTRY_TITLE_CLASS} flex items-center gap-2 transition-colors hover:text-amber-100`}
               onClick={() => {
                 onClose()
                 onNavigateToCards()
@@ -60,16 +67,22 @@ export function SkillPopover({
               title='View in Cards tab'
               type='button'
             >
-              {name} ↗
+              <span className='font-medium text-amber-500/80' style={{fontSize: '0.85em'}}>
+                {label}
+              </span>
+              <span>{name} ↗</span>
             </button>
           ) : (
-            <p className={DATABASE_ENTRY_TITLE_CLASS} style={{fontSize: '1.15em'}}>
-              {name}
+            <p
+              className={`${DATABASE_ENTRY_TITLE_CLASS} flex items-center gap-2`}
+              style={{fontSize: '1.15em'}}
+            >
+              <span className='font-medium text-amber-500/80' style={{fontSize: '0.85em'}}>
+                {label}
+              </span>
+              <span>{name}</span>
             </p>
           )}
-          <p className='text-slate-500' style={{fontSize: '0.95em'}}>
-            {label}
-          </p>
         </div>
         <button
           aria-label='Close skill popover'
@@ -83,26 +96,26 @@ export function SkillPopover({
         </button>
       </div>
       <div>
-        <p className='leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
+        <div className='leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
           {segments.map((seg, i) => (
             <RichSegmentRenderer
               key={i}
-              onMechanicClick={(tag) => {
-                onMechanicTokenClick(tag)
+              onMechanicClick={(tag, e) => {
+                onMechanicTokenClick(tag, e)
               }}
-              onSkillClick={(name) => {
-                onSkillTokenClick(name)
+              onSkillClick={(name, e) => {
+                onSkillTokenClick(name, e)
               }}
-              onScalingClick={(values, suffix, stat) => {
-                onScalingTokenClick(values, suffix, stat)
+              onScalingClick={(values, suffix, stat, e) => {
+                onScalingTokenClick(values, suffix, stat, e)
               }}
               segment={seg}
-              skillLevel={1}
+              skillLevel={skillLevel}
               stats={stats}
               variant='popover'
             />
           ))}
-        </p>
+        </div>
       </div>
     </div>
   )

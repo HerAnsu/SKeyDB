@@ -78,10 +78,12 @@ describe('PopoverTrailPanel', () => {
       </PopoverTrailPanel>,
     )
 
-    const panel = document.querySelector<HTMLDivElement>('[data-skill-popover]')
-    if (!panel) {
+    const container = document.querySelector<HTMLDivElement>('[data-skill-popover]')
+    if (!container) {
       throw new Error('Expected popover trail panel to render')
     }
+    // The actual positioned element is the first child (SinglePopover)
+    const panel = container.firstElementChild as HTMLDivElement
 
     await waitFor(() => {
       expect(panel.style.top).toBe('126px')

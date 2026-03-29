@@ -53,7 +53,7 @@ export function ScalingPopover({
               <span className={getStatColor(stat)}>{stat}</span> Scaling
             </>
           ) : (
-            'Scaling'
+            'Lvl Scaling'
           )}
         </h3>
         <button
@@ -88,7 +88,7 @@ export function ScalingPopover({
                     </span>
 
                     <div className='flex items-center justify-end gap-x-1.5'>
-                      <span className='text-[1.1em] font-bold text-amber-100/85'>
+                      <span className='text-[1.1em] text-amber-100/85'>
                         {computed ?? fmtNum(v)}
                       </span>
 

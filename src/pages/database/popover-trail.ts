@@ -4,6 +4,7 @@ export type TrailDirection = 'up' | 'down'
 
 interface KeyedTrailEntry {
   key: string
+  rect?: DOMRect
 }
 
 export interface SkillTrailEntry extends KeyedTrailEntry {

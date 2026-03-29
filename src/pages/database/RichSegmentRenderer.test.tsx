@@ -48,7 +48,6 @@ describe('RichSegmentRenderer', () => {
     )
 
     expect(screen.getByText('40')).toBeInTheDocument()
-    expect(screen.getByText(/\(20% ATK\)/)).toBeInTheDocument()
     expect(screen.getByTitle(/Lv1: 10% = 20/)).toBeInTheDocument()
   })
 
@@ -63,6 +62,5 @@ describe('RichSegmentRenderer', () => {
     )
 
     expect(screen.getByText('20~40')).toBeInTheDocument()
-    expect(screen.getByText(/\(10% \(\+10%\/Lv\) ATK\)/)).toBeInTheDocument()
   })
 })

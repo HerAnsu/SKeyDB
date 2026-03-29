@@ -177,14 +177,19 @@ function consumeBracketToken(
   return bracketContent.slice(closeIdx + 1)
 }
 
-export function parseRichDescription(text: string, cardNames: Set<string>): RichSegment[] {
+export function parseRichDescription(
+  text: string | undefined | null,
+  cardNames: Set<string>,
+): RichSegment[] {
+  if (!text) return []
+  const cleaned = text.replace(/\s*\(\s*([+-]?\d[\d.]*\/Lv)\s*\)/g, ' $1')
   const segments: RichSegment[] = []
   const cardNameByLower = new Map<string, string>()
   for (const cardName of cardNames) {
     cardNameByLower.set(cardName.toLowerCase(), cardName)
   }
 
-  let remaining = text
+  let remaining = cleaned
   while (remaining.length > 0) {
     const nextMatch = findNextRichMatch(remaining)
     if (nextMatch.kind === 'none') {

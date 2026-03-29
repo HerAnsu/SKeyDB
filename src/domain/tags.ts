@@ -28,7 +28,11 @@ for (const tag of parsedTags) {
 }
 
 const tagIconsRaw = import.meta.glob<string>(
-  ['@/assets/icons/tags/*.png', '@/assets/icons/UI_Battle_White_Buff_*.png'],
+  [
+    '@/assets/icons/tags/*.png',
+    '@/assets/icons/UI_Battle_White_Buff_*.png',
+    '@/assets/icons/Battle_Card_Buff_*.png',
+  ],
   {
     eager: true,
     import: 'default',
@@ -51,7 +55,10 @@ export function getTagColor(tag: Tag): string | undefined {
 export function getTagIcon(iconId: string): string | undefined {
   if (!iconId) return undefined
   if (/^\d{3}$/.test(iconId)) {
-    return TAG_ICONS_BY_ID[`UI_Battle_White_Buff_${iconId}`]
+    return (
+      TAG_ICONS_BY_ID[`UI_Battle_White_Buff_${iconId}`] ??
+      TAG_ICONS_BY_ID[`Battle_Card_Buff_${iconId}`]
+    )
   }
   return TAG_ICONS_BY_ID[iconId]
 }
