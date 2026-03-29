@@ -1,8 +1,10 @@
+import {useState} from 'react'
+
 import {getAwakenerCardAsset} from '@/domain/awakener-assets'
 import {
-  formatCountdown,
-  getTimelineCountdown,
+  getTimelineCountdownDisplay,
   getTimelineStatus,
+  shouldDisplayEndedEventInArchive,
   type BannerFeaturedUnit,
   type EventCategory,
   type EventEntry,
@@ -10,6 +12,8 @@ import {
 } from '@/domain/timeline'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheels} from '@/domain/wheels'
+
+import {TimelineArchiveSection} from './TimelineArchiveSection'
 
 const STATUS_CLASS: Record<TimelineStatus, string> = {
   active: 'border-emerald-500 bg-slate-950 text-emerald-400',
@@ -74,6 +78,8 @@ const CATEGORY_BORDER_LEFT: Record<EventCategory, string> = {
   other: 'border-l-slate-400',
 }
 
+const RERUN_TINT = 'border-violet-500/30 bg-slate-950/40 text-violet-400/90'
+
 interface EventArt {
   url: string | undefined
   isWheel: boolean
@@ -114,7 +120,7 @@ interface EventRowProps {
 
 function EventRow({event, now}: EventRowProps) {
   const status = getTimelineStatus(event.startDate, event.endDate, now)
-  const countdown = getTimelineCountdown(event.startDate, event.endDate, now)
+  const countdownDisplay = getTimelineCountdownDisplay(event.startDate, event.endDate, now)
   const isEnded = status === 'ended'
   const isPinned = event.pinned === true
   const cat = event.category ?? 'other'
@@ -147,15 +153,18 @@ function EventRow({event, now}: EventRowProps) {
             >
               {event.title}
             </h4>
-            <div className='ml-auto flex shrink-0 flex-col items-end justify-center gap-0.5'>
+            <div
+              className='ml-auto flex shrink-0 flex-col items-end justify-center gap-0.5'
+              title={countdownDisplay?.title}
+            >
               <span
                 className={`rounded-[2px] border px-1.5 py-0.5 text-[9px] font-medium tracking-wider ${STATUS_CLASS[status]}`}
               >
                 {STATUS_LABEL[status]}
               </span>
-              {countdown ? (
+              {countdownDisplay ? (
                 <span className='text-[10px] font-medium whitespace-nowrap text-slate-400 drop-shadow-sm'>
-                  {formatCountdown(countdown)}
+                  {countdownDisplay.text}
                 </span>
               ) : null}
             </div>
@@ -166,6 +175,13 @@ function EventRow({event, now}: EventRowProps) {
             >
               {CATEGORY_LABEL[cat]}
             </span>
+            {event.rerun ? (
+              <span
+                className={`rounded-[2px] border px-1.5 py-0.5 text-[9px] font-bold tracking-wider ${isEnded ? 'border-slate-500/20 bg-slate-600/10 text-slate-400' : RERUN_TINT}`}
+              >
+                Rerun
+              </span>
+            ) : null}
             {event.pricing ? (
               <span className='rounded-[2px] border border-slate-600/50 bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 px-1.5 py-0.5 text-[9px] font-bold tracking-wider text-slate-200 shadow-inner'>
                 {event.pricing}
@@ -199,6 +215,8 @@ interface EventListProps {
 }
 
 export function EventList({events, now}: EventListProps) {
+  const [showEnded, setShowEnded] = useState(false)
+
   if (events.length === 0) {
     return <p className='px-3 py-4 text-sm text-slate-400'>No events to display.</p>
   }
@@ -207,7 +225,11 @@ export function EventList({events, now}: EventListProps) {
   const upcoming = events.filter(
     (e) => getTimelineStatus(e.startDate, e.endDate, now) === 'upcoming',
   )
-  const ended = events.filter((e) => getTimelineStatus(e.startDate, e.endDate, now) === 'ended')
+  const ended = events.filter(
+    (e) =>
+      getTimelineStatus(e.startDate, e.endDate, now) === 'ended' &&
+      shouldDisplayEndedEventInArchive(e),
+  )
 
   return (
     <div className='space-y-6'>
@@ -233,19 +255,21 @@ export function EventList({events, now}: EventListProps) {
         </div>
       )}
 
-      {ended.length > 0 && (
-        <div className='mt-4 space-y-3'>
-          <div className='flex items-center gap-3'>
-            <h4 className='ui-title text-sm text-slate-500'>Ended</h4>
-            <div className='h-px flex-1 bg-gradient-to-r from-slate-700/20 to-transparent' />
-          </div>
-          <ul className='grid gap-2 sm:grid-cols-2'>
-            {ended.map((event) => (
-              <EventRow event={event} key={event.id} now={now} />
-            ))}
-          </ul>
-        </div>
-      )}
+      {ended.length > 0 ? (
+        <TimelineArchiveSection
+          contentClassName='grid gap-2 sm:grid-cols-2'
+          expanded={showEnded}
+          itemCount={ended.length}
+          onToggle={() => {
+            setShowEnded((current) => !current)
+          }}
+          title='Ended'
+        >
+          {ended.map((event) => (
+            <EventRow event={event} key={event.id} now={now} />
+          ))}
+        </TimelineArchiveSection>
+      ) : null}
     </div>
   )
 }

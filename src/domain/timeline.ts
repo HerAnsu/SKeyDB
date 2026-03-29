@@ -57,6 +57,8 @@ export const EVENT_CATEGORY_PRIORITY: Record<EventCategory, number> = {
   other: 999,
 }
 
+const HIDDEN_ENDED_EVENT_CATEGORIES = new Set<EventCategory>(['d-tide', 'curriculum', 'login'])
+
 export interface EventEntry {
   id: string
   title: string
@@ -68,6 +70,7 @@ export interface EventEntry {
   customArt?: string
   featured?: BannerFeaturedUnit[]
   pricing?: string
+  rerun?: boolean
   artAlign?: string
 }
 
@@ -77,6 +80,10 @@ export function normalizeEventCategory(category: string | undefined): EventCateg
   if (!category) return undefined
   if (eventCategorySet.has(category as EventCategory)) return category as EventCategory
   return 'other'
+}
+
+export function shouldDisplayEndedEventInArchive(event: EventEntry): boolean {
+  return !HIDDEN_ENDED_EVENT_CATEGORIES.has(event.category ?? 'other')
 }
 
 export type TimelineStatus = 'active' | 'upcoming' | 'ended'
@@ -110,6 +117,37 @@ export interface TimelineCountdown {
   minutes: number
   label: string
   totalMs: number
+}
+
+export interface TimelineCountdownDisplay {
+  text: string
+  title: string
+}
+
+const TIMELINE_DATE_DISPLAY_THRESHOLD_MS = 14 * 24 * 60 * 60 * 1000
+
+function formatTimelineDate(dateStr: string): string {
+  return new Intl.DateTimeFormat('en-US', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(new Date(dateStr))
+}
+
+function formatTimelineDisplayDate(dateStr: string, now?: Date): string {
+  const date = new Date(dateStr)
+  const reference = now ?? new Date()
+  if (date.getUTCFullYear() === reference.getUTCFullYear()) {
+    return new Intl.DateTimeFormat('en-US', {
+      day: 'numeric',
+      month: 'short',
+    }).format(date)
+  }
+  return formatTimelineDate(dateStr)
+}
+
+function formatTimelineDateRange(startDate: string, endDate: string): string {
+  return `${formatTimelineDate(startDate)} - ${formatTimelineDate(endDate)}`
 }
 
 export function getTimelineCountdown(
@@ -176,6 +214,30 @@ export function formatCountdown(countdown: TimelineCountdown): string {
   return `${countdown.label} ${parts.join(' ')}`
 }
 
+export function getTimelineCountdownDisplay(
+  startDate: string,
+  endDate: string,
+  now?: Date,
+): TimelineCountdownDisplay | null {
+  const countdown = getTimelineCountdown(startDate, endDate, now)
+  if (!countdown) return null
+
+  const status = getTimelineStatus(startDate, endDate, now)
+  const title = formatTimelineDateRange(startDate, endDate)
+
+  if (Math.abs(countdown.totalMs) > TIMELINE_DATE_DISPLAY_THRESHOLD_MS) {
+    if (status === 'upcoming') {
+      return {text: `Starts ${formatTimelineDisplayDate(startDate, now)}`, title}
+    }
+    if (status === 'active') {
+      return {text: `Ends ${formatTimelineDisplayDate(endDate, now)}`, title}
+    }
+    return {text: `Ended ${formatTimelineDisplayDate(endDate, now)}`, title}
+  }
+
+  return {text: formatCountdown(countdown), title}
+}
+
 export function sortBannersByRelevance(banners: BannerEntry[], now?: Date): BannerEntry[] {
   const reference = now ?? new Date()
   return [...banners].sort((a, b) => {
@@ -214,6 +276,9 @@ export function sortEventsByRelevance(events: EventEntry[], now?: Date): EventEn
     if (order[statusA] !== order[statusB]) {
       return order[statusA] - order[statusB]
     }
+    if (statusA === 'ended') {
+      return new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
+    }
     const catPriorityA = EVENT_CATEGORY_PRIORITY[a.category ?? 'other']
     const catPriorityB = EVENT_CATEGORY_PRIORITY[b.category ?? 'other']
     if (catPriorityA !== catPriorityB) {
@@ -221,9 +286,6 @@ export function sortEventsByRelevance(events: EventEntry[], now?: Date): EventEn
     }
     if (statusA === 'upcoming') {
       return new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-    }
-    if (statusA === 'ended') {
-      return new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
     }
     return new Date(a.endDate).getTime() - new Date(b.endDate).getTime()
   })

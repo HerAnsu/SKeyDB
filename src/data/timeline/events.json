@@ -25,7 +25,7 @@
     "category": "curriculum",
     "description": "Complete daily and weekly tasks to earn various rewards. \n T1: 680 Silver Prime - SSR wheel, 2500 Silver, 12 Luminous Cores and more. \n T2: 1280 Silver Prime - T1 + Exclusive Avatars, increased daily rewards and more.",
     "startDate": "2026/03/01 09:00",
-    "endDate": "2026/03/31 09:00",
+    "endDate": "2026/04/06 09:00",
     "customArt": "/events/curriculum.webp",
     "pricing": "680-1280 Silver Prime"
   },
@@ -76,7 +76,7 @@
     "category": "gameplay-event",
     "description": "RERUN: Gameplay and story event featuring Wanda. \n Obtain SR-Wheel \"The Gaze of Isarawu\" and more.",
     "startDate": "2026/03/23 09:00",
-    "endDate": "2026/04/06 09:00",
+    "endDate": "2026/04/20 09:00",
     "featured": "Wanda",
     "customArt": "/events/wanda-event.webp"
   },
@@ -116,5 +116,15 @@
     "endDate": "2026/04/20 09:00",
     "customArt": "/events/curriculum.webp",
     "pricing": "680-1280 Silver Prime"
+  },
+  {
+    "id": "event-skin-wanda",
+    "title": "With Spikenard And Myrrh",
+    "category": "skin",
+    "description": "Complete tasks to unlock the \"With Spikenard And Myrrh\" skin for Wanda, along with 10 Pure Cores.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/04/20 09:00",
+    "customArt": "/events/wanda-skin.webp",
+    "pricing": "Free"
   }
 ]

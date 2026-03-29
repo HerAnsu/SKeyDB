@@ -3,6 +3,7 @@ import {describe, expect, it} from 'vitest'
 import {
   formatCountdown,
   getTimelineCountdown,
+  getTimelineCountdownDisplay,
   getTimelineStatus,
   normalizeEventCategory,
   parseGameDate,
@@ -43,6 +44,36 @@ describe('timeline date and status helpers', () => {
     expect(countdown).not.toBeNull()
     expect(countdown ? formatCountdown(countdown) : '').toBe('Ended 2d ago')
   })
+
+  it('returns relative countdown text with a date hover label for nearby timeline targets', () => {
+    expect(
+      getTimelineCountdownDisplay(
+        '2026-03-09T01:00:00.000Z',
+        '2026-03-10T01:00:00.000Z',
+        new Date('2026-03-12T01:00:00.000Z'),
+      ),
+    ).toEqual({text: 'Ended 2d ago', title: 'Mar 9, 2026 - Mar 10, 2026'})
+  })
+
+  it('switches long-range timeline text to a date instead of a day-hour countdown', () => {
+    expect(
+      getTimelineCountdownDisplay(
+        '2026-03-30T01:00:00.000Z',
+        '2026-04-10T01:00:00.000Z',
+        new Date('2026-03-10T01:00:00.000Z'),
+      ),
+    ).toEqual({text: 'Starts Mar 30', title: 'Mar 30, 2026 - Apr 10, 2026'})
+  })
+
+  it('keeps the year in long-range visible dates outside the current year', () => {
+    expect(
+      getTimelineCountdownDisplay(
+        '2027-01-15T01:00:00.000Z',
+        '2027-01-30T01:00:00.000Z',
+        new Date('2026-12-20T01:00:00.000Z'),
+      ),
+    ).toEqual({text: 'Starts Jan 15, 2027', title: 'Jan 15, 2027 - Jan 30, 2027'})
+  })
 })
 
 describe('sortEventsByRelevance', () => {
@@ -78,5 +109,28 @@ describe('sortEventsByRelevance', () => {
 
     const sortedIds = sortEventsByRelevance(events, now).map((event) => event.id)
     expect(sortedIds).toEqual(['pinned-upcoming', 'active', 'upcoming', 'ended'])
+  })
+
+  it('sorts ended events by most recent end date before category priority', () => {
+    const now = new Date('2026-03-10T00:00:00.000Z')
+    const events: EventEntry[] = [
+      {
+        id: 'older-story',
+        title: 'Older Story',
+        startDate: '2026-03-01T00:00:00.000Z',
+        endDate: '2026-03-04T00:00:00.000Z',
+        category: 'story',
+      },
+      {
+        id: 'recent-maintenance',
+        title: 'Recent Maintenance',
+        startDate: '2026-03-01T00:00:00.000Z',
+        endDate: '2026-03-08T00:00:00.000Z',
+        category: 'maintenance',
+      },
+    ]
+
+    const sortedIds = sortEventsByRelevance(events, now).map((event) => event.id)
+    expect(sortedIds).toEqual(['recent-maintenance', 'older-story'])
   })
 })
