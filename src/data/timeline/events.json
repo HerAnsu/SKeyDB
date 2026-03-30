@@ -13,11 +13,11 @@
     "id": "event-dtide",
     "title": "Regional D-Effect Zone",
     "category": "d-tide",
-    "description": "Bi-weekly D-Tide raids. \n Complete to earn Silver, Black Offerings, Gnosis materials and more. \n Current Realm relic: Caro Ring.",
-    "startDate": "2026/03/16 09:00",
-    "endDate": "2026/03/30 09:00",
+    "description": "Bi-weekly D-Tide raids. \n Complete to earn Silver, Black Offerings, Gnosis materials and more. \n Current Realm relic: Ultra Ring.",
+    "startDate": "2026/03/30 09:00",
+    "endDate": "2026/04/13 09:00",
     "pinned": true,
-    "customArt": "/events/dtide-caro.webp"
+    "customArt": "/events/dtide-ultra.webp"
   },
   {
     "id": "event-curriculum-03",
@@ -72,31 +72,34 @@
   },
   {
     "id": "event-story-rerun-wanda",
-    "title": "Feast of Flames: Rerun",
+    "title": "Feast of Flames",
     "category": "gameplay-event",
-    "description": "RERUN: Gameplay and story event featuring Wanda. \n Obtain SR-Wheel \"The Gaze of Isarawu\" and more.",
+    "description": "Gameplay and story event featuring Wanda. \n Obtain SR-Wheel \"The Gaze of Isarawu\" and more.",
     "startDate": "2026/03/23 09:00",
     "endDate": "2026/04/20 09:00",
     "featured": "Wanda",
-    "customArt": "/events/wanda-event.webp"
+    "customArt": "/events/wanda-event.webp",
+    "rerun": true
   },
   {
     "id": "phase-reversal",
     "title": "Phase Reversal",
     "category": "gameplay-event",
-    "description": "RERUN: PVP (Traphase) event. Participate in PVP matches to earn rewards including Posse \"Tavern's Opening\", emotes, silver, upgrade materials and more.",
+    "description": "PVP Traphase event. Participate in PVP matches to earn rewards including Posse \"Tavern's Opening\", emotes, silver, upgrade materials and more.",
     "startDate": "2026/03/16 09:00",
     "endDate": "2026/03/30 09:00",
-    "customArt": "/events/phase-reversal.webp"
+    "customArt": "/events/phase-reversal.webp",
+    "rerun": true
   },
   {
     "id": "event-story-tulu",
     "title": "The Sovereign's Return",
     "category": "gameplay-event",
-    "description": "RERUN: Gameplay and story event featuring Tulu. \n Obtain limited SR-Wheel \"Blue Stone Throne\", limited avatar \"By the Silver Key: Tulu\" and more.",
+    "description": "Gameplay and story event featuring Tulu. \n Obtain limited SR-Wheel \"Blue Stone Throne\", limited avatar \"By the Silver Key: Tulu\" and more.",
     "startDate": "2026/04/06 09:00",
     "endDate": "2026/05/04 09:00",
-    "featured": "Tulu"
+    "featured": "Tulu",
+    "rerun": true
   },
   {
     "id": "event-login-april",
