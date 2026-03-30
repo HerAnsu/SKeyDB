@@ -50,13 +50,9 @@ export function TagPopover({
       }}
     >
       <div className='mb-2 flex items-start justify-between gap-6'>
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1.5'>
           {tag.iconId && getTagIcon(tag.iconId) ? (
-            <img
-              alt=''
-              className='h-[1.1em] w-[1.1em] shrink-0 object-contain'
-              src={getTagIcon(tag.iconId)}
-            />
+            <img alt='' className='h-[0.9em] w-auto shrink-0' src={getTagIcon(tag.iconId)} />
           ) : null}
           <p
             className={`${DATABASE_ENTRY_TITLE_CLASS} text-[1.15em] font-medium tracking-wide`}

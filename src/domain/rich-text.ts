@@ -17,6 +17,12 @@ export interface MechanicSegment {
   type: 'mechanic'
   name: string
 }
+export interface NewlineSegment {
+  type: 'newline'
+}
+export interface IndentSegment {
+  type: 'indent'
+}
 export interface RealmSegment {
   type: 'realm'
   name: string
@@ -35,6 +41,8 @@ export type RichSegment =
   | MechanicSegment
   | RealmSegment
   | ScalingSegment
+  | NewlineSegment
+  | IndentSegment
 
 const KNOWN_STAT_LABELS = new Set<string>()
 
@@ -44,8 +52,6 @@ function ensureStatsLoaded() {
     KNOWN_STAT_LABELS.add(m.label)
     for (const a of m.aliases) KNOWN_STAT_LABELS.add(a)
   }
-  KNOWN_STAT_LABELS.add('STR')
-  KNOWN_STAT_LABELS.add('Temporary STR')
 }
 
 function isStatToken(token: string): boolean {
@@ -70,6 +76,8 @@ type NextRichMatch =
   | {kind: 'scaling'; index: number; match: RegExpExecArray}
   | {kind: 'prose'; index: number; match: RegExpExecArray}
   | {kind: 'bracket'; index: number}
+  | {kind: 'newline'; index: number}
+  | {kind: 'indent'; index: number}
 
 function parseScaling(raw: string): ScalingSegment | null {
   const m = SCALING_RE.exec(raw)
@@ -90,10 +98,24 @@ function findNextRichMatch(remaining: string): NextRichMatch {
   const nextProseIdx =
     proseMatch && COMPUTABLE_STATS.has(proseMatch[3]) ? proseMatch.index : Infinity
   const nextBracketIdx = bracketIdx >= 0 ? bracketIdx : Infinity
+  const nextNewlineIdx = remaining.indexOf('\n')
+  const nextIndentIdx = remaining.indexOf('>')
 
-  if (nextScalingIdx === Infinity && nextProseIdx === Infinity && nextBracketIdx === Infinity) {
+  const earliest = Math.min(
+    nextScalingIdx,
+    nextProseIdx,
+    nextBracketIdx,
+    nextNewlineIdx >= 0 ? nextNewlineIdx : Infinity,
+    nextIndentIdx >= 0 ? nextIndentIdx : Infinity,
+  )
+
+  if (earliest === Infinity) {
     return {kind: 'none'}
   }
+
+  if (earliest === nextNewlineIdx) return {kind: 'newline', index: nextNewlineIdx}
+  if (earliest === nextIndentIdx) return {kind: 'indent', index: nextIndentIdx}
+  if (earliest === nextBracketIdx) return {kind: 'bracket', index: nextBracketIdx}
 
   const earliestScaling = Math.min(nextScalingIdx, nextProseIdx)
   if (earliestScaling <= nextBracketIdx) {
@@ -195,6 +217,24 @@ export function parseRichDescription(
     if (nextMatch.kind === 'none') {
       segments.push({type: 'text', value: remaining})
       break
+    }
+
+    if (nextMatch.kind === 'newline') {
+      if (nextMatch.index > 0) {
+        segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
+      }
+      segments.push({type: 'newline'})
+      remaining = remaining.slice(nextMatch.index + 1)
+      continue
+    }
+
+    if (nextMatch.kind === 'indent') {
+      if (nextMatch.index > 0) {
+        segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
+      }
+      segments.push({type: 'indent'})
+      remaining = remaining.slice(nextMatch.index + 1)
+      continue
     }
 
     remaining =

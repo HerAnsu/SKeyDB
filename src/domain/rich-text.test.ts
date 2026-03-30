@@ -132,7 +132,7 @@ describe('parseRichDescription', () => {
     const result = parseRichDescription('Gain {STR} equal to 8%.', EMPTY_CARDS)
     expect(result).toEqual([
       {type: 'text', value: 'Gain '},
-      {type: 'stat', name: 'STR'},
+      {type: 'mechanic', name: 'STR'},
       {type: 'text', value: ' equal to 8%.'},
     ])
   })
@@ -146,7 +146,7 @@ describe('parseRichDescription', () => {
       {type: 'text', value: 'Gain '},
       {type: 'stat', name: 'Temporary Crit Rate'},
       {type: 'text', value: ' and '},
-      {type: 'stat', name: 'Temporary STR'},
+      {type: 'mechanic', name: 'Temporary STR'},
       {type: 'text', value: '.'},
     ])
   })
@@ -218,7 +218,7 @@ describe('parseRichDescription', () => {
       stat: 'ATK',
     })
     expect(result[6]).toEqual({type: 'text', value: ' Temporary '})
-    expect(result[7]).toEqual({type: 'stat', name: 'STR'})
+    expect(result[7]).toEqual({type: 'mechanic', name: 'STR'})
     expect(result[8]).toEqual({type: 'text', value: ' for each card played this turn.'})
   })
 })

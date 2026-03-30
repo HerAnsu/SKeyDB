@@ -56,6 +56,12 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
     case 'scaling':
       return <RichScalingSegment {...props} segment={segment} />
 
+    case 'newline':
+      return <br />
+
+    case 'indent':
+      return <span className='mr-1.5 ml-1 inline-block font-medium select-none'>›</span>
+
     default:
       return null
   }
@@ -70,7 +76,7 @@ function RichSkillSegment({segment, onSkillClick}: RichSkillSegmentProps) {
   if (onSkillClick) {
     return (
       <span
-        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} m-0 p-0`}
+        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} font-medium`}
         onClick={(event) => {
           onSkillClick(segment.name, event)
         }}
@@ -101,7 +107,7 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
     const color = getTagColor(tag)
     return (
       <span
-        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} m-0 inline p-0`}
+        className={DATABASE_INTERACTIVE_TOKEN_CLASS}
         onClick={(event) => {
           onMechanicClick(tag, event)
         }}
@@ -112,7 +118,7 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
         {hasIcon ? (
           <img
             alt=''
-            className='mr-[3px] inline-block h-[1.1em] w-[1.1em] shrink-0 align-[-0.15em]'
+            className='mr-[2px] !inline-block h-[0.9em] w-auto shrink-0 align-[-0.1em]'
             src={getTagIcon(tag.iconId)}
           />
         ) : null}
@@ -132,7 +138,7 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
       {hasIcon ? (
         <img
           alt=''
-          className='mr-[3px] inline-block h-[1.1em] w-[1.1em] shrink-0 align-[-0.15em]'
+          className='mr-[2px] !inline-block h-[0.9em] w-auto shrink-0 align-[-0.12em]'
           src={getTagIcon(tag.iconId)}
         />
       ) : null}
@@ -225,7 +231,7 @@ function RichScalingSegment({
     )
   }
 
-  return <span>{buildContent()}</span>
+  return <>{buildContent()}</>
 }
 
 function buildScalingHover(
