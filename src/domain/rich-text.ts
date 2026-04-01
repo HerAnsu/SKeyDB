@@ -20,6 +20,14 @@ export interface MechanicSegment {
 export interface NewlineSegment {
   type: 'newline'
 }
+export interface ParagraphSegment {
+  type: 'paragraph'
+}
+export interface LineSegment {
+  type: 'line'
+  indented: boolean
+  segments: RichSegment[]
+}
 export interface IndentSegment {
   type: 'indent'
 }
@@ -42,6 +50,8 @@ export type RichSegment =
   | RealmSegment
   | ScalingSegment
   | NewlineSegment
+  | ParagraphSegment
+  | LineSegment
   | IndentSegment
 
 const KNOWN_STAT_LABELS = new Set<string>()
@@ -68,7 +78,7 @@ function isStatToken(token: string): boolean {
 
 const KNOWN_REALMS = new Set(['Chaos', 'Aequor', 'Caro', 'Ultra'])
 
-const SCALING_RE = /\((\d[\d./]*(?:\/\d[\d./]*)+)(%)?\s*(?:\{([^}]+)\})?\)/
+const SCALING_RE = /\((\d[\d./]*(?:\/\d[\d./]*)*)(%)?\s*(?:\{([^}]+)\}|([A-Z]{2,}))?\)(%)?/
 const PROSE_SCALING_RE = /(\d+(?:\.\d+)?)(%)\s+of\s+\{([^}]+)\}/
 
 type NextRichMatch =
@@ -84,8 +94,8 @@ function parseScaling(raw: string): ScalingSegment | null {
   if (!m) return null
   const nums = m[1].split('/').map(Number)
   if (nums.some(Number.isNaN)) return null
-  const pct = m.at(2) ?? ''
-  const stat = m.at(3) ?? null
+  const pct = m[2] || m[5] || ''
+  const stat = m[3] || m[4] || null
   return {type: 'scaling', values: nums, suffix: pct, stat}
 }
 
@@ -151,8 +161,9 @@ function consumeScalingMatch(
 
   const scaling = parseScaling(remaining.slice(nextMatch.index))
   if (!scaling) {
-    segments.push({type: 'text', value: remaining})
-    return ''
+    // Если парсинг не удался, потребляем только текущий символ и продолжаем
+    segments.push({type: 'text', value: remaining.slice(0, 1)})
+    return remaining.slice(1)
   }
   segments.push(scaling)
   return remaining.slice(nextMatch.index + nextMatch.match[0].length)
@@ -211,36 +222,63 @@ export function parseRichDescription(
     cardNameByLower.set(cardName.toLowerCase(), cardName)
   }
 
-  let remaining = cleaned
-  while (remaining.length > 0) {
-    const nextMatch = findNextRichMatch(remaining)
-    if (nextMatch.kind === 'none') {
-      segments.push({type: 'text', value: remaining})
-      break
-    }
+  const rawLines = cleaned.split('\n')
+  for (let i = 0; i < rawLines.length; i++) {
+    const line = rawLines[i]
 
-    if (nextMatch.kind === 'newline') {
-      if (nextMatch.index > 0) {
-        segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
-      }
-      segments.push({type: 'newline'})
-      remaining = remaining.slice(nextMatch.index + 1)
+    if (line.trim() === '' && i > 0 && i < rawLines.length - 1) {
+      segments.push({type: 'paragraph'})
       continue
     }
 
-    if (nextMatch.kind === 'indent') {
-      if (nextMatch.index > 0) {
-        segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
-      }
-      segments.push({type: 'indent'})
-      remaining = remaining.slice(nextMatch.index + 1)
-      continue
+    if (line.trim() === '') continue
+
+    let indented = false
+    let lineText = line
+    if (lineText.startsWith('>')) {
+      indented = true
+      lineText = lineText.slice(1)
+      if (lineText.startsWith(' ')) lineText = lineText.slice(1)
     }
 
-    remaining =
-      nextMatch.kind === 'bracket'
-        ? consumeBracketToken(remaining, segments, nextMatch.index, cardNameByLower)
-        : consumeScalingMatch(remaining, segments, nextMatch)
+    const lineSegments: RichSegment[] = []
+    let remaining = lineText
+    while (remaining.length > 0) {
+      const nextMatch = findNextRichMatch(remaining)
+      if (nextMatch.kind === 'none') {
+        lineSegments.push({type: 'text', value: remaining})
+        break
+      }
+
+      if (nextMatch.kind === 'newline') {
+        if (nextMatch.index > 0) {
+          lineSegments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
+        }
+        lineSegments.push({type: 'newline'})
+        remaining = remaining.slice(nextMatch.index + 1)
+        continue
+      }
+
+      if (nextMatch.kind === 'indent') {
+        if (nextMatch.index > 0) {
+          lineSegments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
+        }
+        lineSegments.push({type: 'indent'})
+        remaining = remaining.slice(nextMatch.index + 1)
+        continue
+      }
+
+      remaining =
+        nextMatch.kind === 'bracket'
+          ? consumeBracketToken(remaining, lineSegments, nextMatch.index, cardNameByLower)
+          : consumeScalingMatch(remaining, lineSegments, nextMatch)
+    }
+
+    segments.push({
+      type: 'line',
+      indented,
+      segments: lineSegments,
+    })
   }
 
   return segments

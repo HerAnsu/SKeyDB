@@ -71,13 +71,10 @@ export function AwakenerDetailCards({
         <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
           Command Cards
         </h4>
-        <div>
+        <div className='py-1'>
           {cardEntries.map(({key, card}, index) => (
-            <div key={key}>
-              {index > 0 ? (
-                <div className='mx-4 h-px bg-gradient-to-r from-slate-600/50 via-slate-600/20 to-transparent' />
-              ) : null}
-              <div className='px-4 py-2.5'>
+            <div className={index > 0 ? 'mt-5' : ''} key={key}>
+              <div className='px-4 py-1.5'>
                 <div className='flex items-baseline justify-between'>
                   <p className='text-slate-300' style={scaledFontStyle(12)}>
                     <span className='text-slate-500'>{key === 'C1' ? 'Rouse' : key}</span>
@@ -88,7 +85,11 @@ export function AwakenerDetailCards({
                     Cost {card.cost}
                   </span>
                 </div>
-                <div className='mt-1 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+                <div className='my-1.5 h-px w-full bg-gradient-to-r from-slate-600/60 via-slate-600/20 to-transparent' />
+                <div
+                  className='mt-1 pl-1.5 leading-relaxed text-slate-400'
+                  style={scaledFontStyle(12)}
+                >
                   {renderDescription(card.description)}
                 </div>
               </div>

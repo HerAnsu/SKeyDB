@@ -34,19 +34,20 @@ export function DetailSection({
       {items.length === 0 && !children ? (
         <p className='px-4 pb-3 text-xs text-slate-400'>{emptyMessage ?? 'No data available.'}</p>
       ) : (
-        <div>
+        <div className='py-1'>
           {items.map((item, index) => (
-            <div key={item.key}>
-              {index > 0 ? (
-                <div className='mx-4 h-px bg-gradient-to-r from-slate-600/50 via-slate-600/20 to-transparent' />
-              ) : null}
-              <div className='px-4 py-2.5'>
+            <div className={index > 0 ? 'mt-5' : ''} key={item.key}>
+              <div className='px-4 py-1.5'>
                 <p className='text-slate-300' style={scaledFontStyle(12)}>
                   <span className='text-slate-500'>{item.label}</span>
                   <span className='mx-1.5 text-slate-600'>·</span>
                   <span className={DATABASE_ITEM_NAME_CLASS}>{item.name}</span>
                 </p>
-                <div className='mt-1 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+                <div className='my-1.5 h-px w-full bg-gradient-to-r from-slate-600/60 via-slate-600/20 to-transparent' />
+                <div
+                  className='mt-1 pl-1.5 leading-relaxed text-slate-400'
+                  style={scaledFontStyle(12)}
+                >
                   {renderDescription ? renderDescription(item.description) : item.description}
                 </div>
               </div>

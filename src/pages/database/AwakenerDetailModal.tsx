@@ -226,7 +226,7 @@ export function AwakenerDetailModal({
           <div className='flex min-h-0 min-w-0 flex-1 flex-col'>
             <div className='shrink-0 px-5 pt-4 pb-0'>
               {awakener.unreleased ? (
-                <div className='mb-3 max-w-2xl border border-amber-500/30 bg-amber-950/20 px-3 py-2.5'>
+                <div className='mb-3 border border-amber-500/30 bg-amber-950/20 px-3 py-2.5'>
                   <p className='text-[11px] leading-relaxed text-amber-100/75'>
                     <strong className='font-semibold text-amber-200/90'>Pre-release data:</strong>{' '}
                     Values and content are based on pre-release information and may change before or
@@ -301,7 +301,7 @@ export function AwakenerDetailModal({
                   ) : null}
                 </div>
               </div>
-              <div className='mt-3 max-w-2xl'>
+              <div className='mt-3'>
                 <div className='flex items-center justify-between'>
                   <nav className='flex min-w-0 flex-wrap gap-0.5'>
                     {TABS.map((tab) => (
@@ -361,10 +361,10 @@ export function AwakenerDetailModal({
                   ))}
                 </div>
               </div>
-              <div className='mt-0 h-px w-3/4 bg-slate-700/50' />
+              <div className='mt-0 h-px w-full bg-slate-700/50' />
             </div>
 
-            <div className='flex-1 overflow-y-auto p-5 pr-8 lg:pr-16'>
+            <div className='flex-1 overflow-y-auto p-5 pr-5 lg:pr-8'>
               <div className='mb-4 md:hidden'>
                 <AwakenerDetailSidebar
                   awakener={awakener}
@@ -379,7 +379,7 @@ export function AwakenerDetailModal({
                 />
               </div>
 
-              <div className='max-w-2xl'>
+              <div className='w-full'>
                 {activeTab === 'cards' && fullData ? (
                   <div className='sticky top-[-1.25rem] z-20 mb-4 border-b border-slate-700/35 bg-slate-950/90 pb-2 backdrop-blur-sm'>
                     <SkillLevelSlider level={skillLevel} onChange={setSkillLevel} />

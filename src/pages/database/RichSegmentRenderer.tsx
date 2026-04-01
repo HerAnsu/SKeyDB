@@ -1,5 +1,3 @@
-import type {ReactNode} from 'react'
-
 import type {AwakenerFullStats} from '@/domain/awakeners-full'
 import type {
   MechanicSegment,
@@ -17,6 +15,7 @@ import {
   DATABASE_SCALING_TOKEN_CLASS,
   DATABASE_STAT_TOKEN_CLASS,
   DATABASE_UNIMPLEMENTED_TOKEN_CLASS,
+  getDatabaseRealmTint,
 } from './text-styles'
 
 interface RichSegmentRendererProps {
@@ -50,17 +49,41 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
     case 'mechanic':
       return <RichMechanicSegment {...props} segment={segment} />
 
-    case 'realm':
-      return <span className='font-medium text-amber-500'>{segment.name}</span>
-
+    case 'realm': {
+      const tint = getDatabaseRealmTint(segment.name)
+      return (
+        <span className='inline font-semibold whitespace-nowrap' style={{color: tint}}>
+          {segment.name}
+        </span>
+      )
+    }
     case 'scaling':
       return <RichScalingSegment {...props} segment={segment} />
 
     case 'newline':
       return <br />
 
+    case 'paragraph':
+      return <span className='block h-1' aria-hidden='true' />
+
+    case 'line':
+      return (
+        <div className={`${segment.indented ? 'relative pl-5' : ''} leading-normal`}>
+          {segment.indented && (
+            <span className='absolute top-0 left-1 text-[1.2em] text-slate-500/60 select-none'>
+              ·
+            </span>
+          )}
+          {segment.segments.map((s, idx) => (
+            <RichSegmentRenderer key={idx} {...props} segment={s} />
+          ))}
+        </div>
+      )
+
     case 'indent':
-      return <span className='mr-1.5 ml-1 inline-block font-medium select-none'>›</span>
+      return (
+        <span className='mr-1.5 ml-1 inline text-[1.2em] text-slate-500/60 select-none'>·</span>
+      )
 
     default:
       return null
@@ -76,7 +99,7 @@ function RichSkillSegment({segment, onSkillClick}: RichSkillSegmentProps) {
   if (onSkillClick) {
     return (
       <span
-        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} font-medium`}
+        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}
         onClick={(event) => {
           onSkillClick(segment.name, event)
         }}
@@ -87,11 +110,17 @@ function RichSkillSegment({segment, onSkillClick}: RichSkillSegmentProps) {
       </span>
     )
   }
-  return <span className='font-medium text-amber-100/85'>{segment.name}</span>
+  return (
+    <span className='inline font-semibold whitespace-nowrap text-amber-100/85'>{segment.name}</span>
+  )
 }
 
 function RichStatSegment({segment}: {segment: StatSegment}) {
-  return <span className={DATABASE_STAT_TOKEN_CLASS}>{segment.name}</span>
+  return (
+    <span className={`${DATABASE_STAT_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}>
+      {segment.name}
+    </span>
+  )
 }
 
 interface RichMechanicSegmentProps {
@@ -107,7 +136,7 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
     const color = getTagColor(tag)
     return (
       <span
-        className={DATABASE_INTERACTIVE_TOKEN_CLASS}
+        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}
         onClick={(event) => {
           onMechanicClick(tag, event)
         }}
@@ -131,7 +160,7 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
 
   return (
     <span
-      className={`${DATABASE_UNIMPLEMENTED_TOKEN_CLASS} inline`}
+      className={`${DATABASE_UNIMPLEMENTED_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}
       style={{color}}
       title='Details coming soon'
     >
@@ -177,61 +206,58 @@ function RichScalingSegment({
   const {values, suffix, stat} = segment
   const isInteractive = !!onScalingClick
 
-  const buildContent = (): ReactNode => {
-    if (variant === 'popover') {
-      const display = formatScalingRange(values, suffix)
-      const computed = computeStatRange(values, suffix, stat, stats)
-
-      if (computed) {
-        return <span className={DATABASE_POPOVER_SCALING_TOKEN_CLASS}>{computed}</span>
-      }
-
-      return (
-        <span className={DATABASE_POPOVER_SCALING_TOKEN_CLASS}>
-          {display}
-          {stat ? ` ${stat}` : ''}
-        </span>
-      )
-    }
-
-    const idx = Math.max(0, Math.min(skillLevel - 1, values.length - 1))
-    const value = values[idx]
-    const displayValue = fmtNum(value)
-    const computedValue = computeStatValue(value, suffix, stat, stats)
-    const hoverText = buildScalingHover(values, suffix, stat, stats)
-
-    if (computedValue !== null) {
-      return (
-        <span className={DATABASE_SCALING_TOKEN_CLASS} title={hoverText}>
-          {computedValue}
-        </span>
-      )
-    }
+  if (variant === 'popover') {
+    const display = formatScalingRange(values, suffix)
+    const computed = computeStatRange(values, suffix, stat, stats)
 
     return (
-      <span className={DATABASE_SCALING_TOKEN_CLASS} title={hoverText}>
-        {displayValue}
-        {suffix}
+      <span
+        className={`${DATABASE_POPOVER_SCALING_TOKEN_CLASS} inline font-semibold whitespace-nowrap text-amber-100`}
+      >
+        {computed ?? (
+          <>
+            {display}
+            {stat ? ` ${stat}` : ''}
+          </>
+        )}
       </span>
     )
   }
 
+  const idx = Math.max(0, Math.min(skillLevel - 1, values.length - 1))
+  const value = values[idx]
+  const displayValue = fmtNum(value)
+  const computedValue = computeStatValue(value, suffix, stat, stats)
+  const hoverText = buildScalingHover(values, suffix, stat, stats)
+
+  const content = <>{computedValue ?? `${displayValue}${suffix}`}</>
+
   if (isInteractive) {
     return (
       <span
-        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} m-0 inline cursor-help p-0`}
+        className={`${DATABASE_SCALING_TOKEN_CLASS} m-0 inline cursor-help p-0 font-semibold whitespace-nowrap`}
         onClick={(e) => {
           onScalingClick(values, suffix, stat, e)
         }}
         role='button'
         tabIndex={0}
+        title={hoverText}
       >
-        {buildContent()}
+        {content}
+        {stat && computedValue === null ? ` ${stat}` : ''}
       </span>
     )
   }
 
-  return <>{buildContent()}</>
+  return (
+    <span
+      className={`${DATABASE_SCALING_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}
+      title={hoverText}
+    >
+      {content}
+      {stat && computedValue === null ? ` ${stat}` : ''}
+    </span>
+  )
 }
 
 function buildScalingHover(
