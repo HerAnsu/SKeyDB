@@ -55,7 +55,7 @@
     "exalts": {
       "exalt": {
         "name": "Twisted Carrion Revel",
-        "description": "Deal (75/90/105/120/135/150% {ATK}) {Pierce DMG}. Each time this Exalt is used, increase its Base DMG by 20% this battle. Switch 24 between Depressed and Manic Personas. Gain additional effects based on the current Realm and Persona. {Chaos} Depressed Persona: Gain (750/800/850/900/950/1000) {Keyflare}. Next Posse takes effect 2 times. Manic Persona: Deals 3 instances of DMG. Increase the damage dealt by 24 by ((20/24/28/32/36/40% {ATK}) for the rest of this battle. {Aequor} Depressed Persona: Inflict 2 turns of {Weakness} and {Vulnerable}. Gain 1 Tentacle. Increase {Tentacle DMG} by (6.5/7.8/9.1/10.4/11.7/13% {ATK}). Manic Persona: Deals (600/660/720/780/840/900)% {Tentacle DMG} additional DMG. Inflict 30% of DMG dealt as {Poison} to all enemies. {Caro} Depressed Persona: +(75/80/85/90/95/100)% {Embryo Fusion}. Accumulate (40/48/56/64/72/80% {CON}) {Crimson Furnace} Healing. Manic Persona: {STR} has 5 times the effect this DMG. Inflict 200% of DMG dealt as {Bleed} to the target. Gain (6.5/7.8/9.1/10.4/11.7/13% {ATK}) {STR}. {Ultra} Depressed Persona: Add 2 {Insight} cards to hand. Reduce target's {STR} by (30/36/42/48/54/60% {DEF}) for 1 turn. Manic Persona: Gain 15% of DMG dealt as {Counter}, then inflict the same amount as {Fixed DMG} to other enemies. For each {Insight} played this turn, increase that DMG by (75/90/105/120/135/150% {ATK}). This effect can stack up to 5 times."
+        "description": "Deal (75/90/105/120/135/150% {ATK}) {Pierce DMG}. Each time this Exalt is used, increase its Base DMG by 20% this battle. Switch 24 between Depressed and Manic Personas. Gain additional effects based on the current Realm and Persona.\n\n{Chaos}: \n>{Depressed Persona}: Gain (750/800/850/900/950/1000) {Keyflare}. Next Posse takes effect 2 times.\n>{Manic Persona}: Deals 3 instances of DMG. Increase the damage dealt by 24 by (20/24/28/32/36/40% {ATK}) for the rest of this battle.\n\n{Aequor}:\n>{Depressed Persona}: Inflict 2 turns of {Weakness} and {Vulnerable}. Gain 1 Tentacle. Increase {Tentacle DMG} by (6.5/7.8/9.1/10.4/11.7/13% {ATK}).\n>{Manic Persona}: Deals (600/660/720/780/840/900)% {Tentacle DMG} additional DMG. Inflict 30% of DMG dealt as {Poison} to all enemies.\n\n{Caro}:\n>{Depressed Persona}: +(75/80/85/90/95/100)% {Embryo Fusion}. Accumulate (40/48/56/64/72/80% {CON}) {Crimson Furnace} Healing.\n>{Manic Persona}: {STR} has 5 times the effect this DMG. Inflict 200% of DMG dealt as {Bleed} to the target. Gain (6.5/7.8/9.1/10.4/11.7/13% {ATK}) {STR}.\n\n{Ultra}:\n>{Depressed Persona}: Add 2 {Insight} cards to hand. Target's {STR Down} by (30/36/42/48/54/60% {DEF}) for 1 turn.\n>{Manic Persona}: Gain 15% of DMG dealt as {Counter}, then inflict the same amount as {Fixed DMG} to other enemies. For each {Insight} played this turn, increase that DMG by (75/90/105/120/135/150% {ATK}). This effect can stack up to 5 times."
       },
       "over_exalt": {
         "name": "Aberrant Vivisection",
@@ -2863,42 +2863,42 @@
       "C1": {
         "name": "Testament of Faith",
         "cost": "3",
-        "description": "Miryam gains (25/30/35/40/45/50) Aliemus. Tentacle Limit and Tentacle Count +1. {Strike} and {Exalted Pyre} {Crit Rate} increased by 100%. Add 1 {Heretical Faith} into your hand. {Prepare} 3."
+        "description": "Miryam gains (25/30/35/40/45/50) Aliemus.\nTentacle Limit and Tentacle Count +1.\nAdd 1 {Heretical Faith} into your hand. \nApply 1 stack of {Weakness} and {Vulnerable} to all enemies.\n\n{Strike} and {Exalted Pyre} {Crit Rate} increased by 100%.\n\n{Prepare} 3. {Retain}."
       },
       "C2": {
-        "name": "Rouse-Derivative: Heretical Faith",
+        "name": "Heretical Faith",
         "cost": "6",
-        "description": "Miryam gains (25/30/35/40/45/50) Aliemus. {Rouse}: Tentacle Limit and Tentacle Count +1. Apply 1 stack of {Weakness} and {Vulnerable} to all enemies. Choose {Iron Resolve} or {Revelate Devotion}. {Iron Resolve}: Gain X {STR} and {Tentacle DMG} at the start of every turn. {Revelate Devotion}: Gain (?% {DEF}) shield at the start of every turn. Add 1 {The End of Belief} into your hand. {Prepare} 3. {Retain}."
+        "description": "Miryam gains (25/30/35/40/45/50) Aliemus.\nTentacle Limit and Tentacle Count +1.\nAdd 1 {The End of Belief} into your hand.\nApply 1 stack of {Weakness} and {Vulnerable} to all enemies.\n\n{Rouse}: Choose {Iron Resolve} or {Revelate Devotion}.\n\n{Prepare} 3. {Retain}."
       },
       "C3": {
-        "name": "Rouse-Derivative: The End of Belief",
+        "name": "The End of Belief",
         "cost": "9",
-        "description": "Miryam gains (25/30/35/40/45/50) Aliemus. {Rouse}: Tentacle Limit and Tentacle Count +1. Apply 1 stack of {Weakness} and {Vulnerable} to all enemies. At the end of your turn, add 1 random {God's Realm Phantasm} card into your hand. God's Realm Phantasm Cards: {Call of the God's Realm}: Choose 1 Awakener to gain 25 Aliemus. Draw 2 cards. {Retain}. {Exhaust}. {Arrival of the God's Realm}: Choose 1 Awakener to gain 25 Aliemus. Gain 2 Arithmetica. {Retain}. {Exhaust}. {Devotion to the God's Realm}: Choose 1 Awakener to gain 25 Aliemus. Apply 1 {Vulnerable} and {Weakness} to all enemies. {Retain}. {Exhaust}. {Prepare} 3. {Retain}."
+        "description": "Miryam gains (25/30/35/40/45/50) Aliemus.\nTentacle Limit and Tentacle Count +1.\nApply 1 stack of {Weakness} and {Vulnerable} to all enemies.\n\n{Rouse}: At the end of your turn, add 1 random {God's Realm Phantasm} card into your hand.\n\n{Prepare} 3. {Retain}."
       },
       "C4": {
         "name": "Strike",
         "cost": "1",
-        "description": "Deal (10/12/14/16/18/20% {ATK}) DMG. Gain (5/6/7/8/9/10) Aliemus. {Ritual}: Final DMG increased by 100%/250%/500%."
+        "description": "Deal (10/12/14/16/18/20% {ATK}) DMG. Gain (5/6/7/8/9/10) Aliemus.\n{Ritual}: Final DMG this card increased by 100% / 250% / 500%."
       },
       "C5": {
         "name": "Defend",
         "cost": "1",
-        "description": "Gain (10/12/14/16/18/20% {DEF}) Shield. Gain (5/6/7/8/9/10) Aliemus. {Ritual}: Reduce all enemies Power by (5/6/7/8/9/10% {ATK}) / (12.5/15/17.5/20/22.5/25% {ATK}) / (25/30/35/40/45/50% {ATK}) for 1 turn."
+        "description": "Gain (10/12/14/16/18/20% {DEF}) Shield. Gain (5/6/7/8/9/10) Aliemus.\n{Ritual}: All enemies {STR Down} by (5/6/7/8/9/10% {ATK}) / (12.5/15/17.5/20/22.5/25% {ATK}) / (25/30/35/40/45/50% {ATK}) for 1 turn."
       },
       "C6": {
         "name": "Exalted Pyre",
         "cost": "2",
-        "description": "Deal (45/54/63/72/81/90% {ATK}) {Pierce DMG} and apply stacks of {Poison} equal to the damage dealt. {Ritual}: {STR} and {Tentacle DMG} +(1/1.2/1.4/1.6/1.8/2% {ATK}) / (2.5/3/3.5/4/4.5/5% {ATK}) / (5/6/7/8/9/10% {ATK})."
+        "description": "Deal (45/54/63/72/81/90% {ATK}) {Pierce DMG} and apply stacks of {Poison} equal to the damage dealt.\n{Ritual}: {STR} and {Tentacle DMG} +(1/1.2/1.4/1.6/1.8/2% {ATK}) / (2.5/3/3.5/4/4.5/5% {ATK}) / (5/6/7/8/9/10% {ATK})."
       },
       "C7": {
         "name": "The Chosen One",
         "cost": "3",
-        "description": "Choose 1 other Awakener to gain (35/38/41/44/47/50) Aliemus. {Ritual}: Chosen Awakener gains an additional (10/25/50) Aliemus."
+        "description": "Choose 1 other Awakener to gain (35/38/41/44/47/50) Aliemus.\n{Ritual}: Chosen Awakener gains an additional 10 / 25 / 50 Aliemus."
       },
       "C8": {
         "name": "Sacrament",
         "cost": "0",
-        "description": "Recover 10% of lost HP. Can be transformed into {Obsession} through the {Ritual} effect, enhancing the Command Card effect. {Retain}. {Exhaust}. {Ritual}: When a Command Card with {Ritual} is played, convert up to 3 {Sacrament} in hand into {Obsession}, gaining additional effects based on the number of conversions."
+        "description": "Recover 10% of lost HP. Can be transformed into {Obsession} through the {Ritual} effect, enhancing the Command Card effect. {Retain}. {Exhaust}."
       },
       "C9": {
         "name": "Obsession",
@@ -2909,11 +2909,11 @@
     "exalts": {
       "exalt": {
         "name": "Pray to the Abyss",
-        "description": "Add 1 {Sacrament} to your hand and apply (30/36/42/48/54/60% {ATK}) stacks of {Poison} to all enemies. Gain additional effects based on Tentacle stance: {Surging Tides}: {STR} and {Tentacle DMG} +(5/6/7/8/9/10% {ATK}). {Tranquil Sea}: Other Awakers gain (10/11/12/13/14/15) Aliemus. {Raging Waves}: Trigger (75/80/85/90/95/100)% of {Poison} on all enemies."
+        "description": "Add 1 {Sacrament} to your hand and apply (30/36/42/48/54/60% {ATK}) stacks of {Poison} to all enemies.\nGain additional effects based on Tentacle stance: \n>{Surging Tides}: {STR} and {Tentacle DMG} +(5/6/7/8/9/10% {ATK}). \n>{Tranquil Sea}: Other Awakers gain (10/11/12/13/14/15) Aliemus.\n>{Raging Waves}: Trigger (75/80/85/90/95/100)% of {Poison} on all enemies."
       },
       "over_exalt": {
         "name": "Unacquainted Pain",
-        "description": "Places 2 additional copies of {Sacrament} into your hand. Tentacle Limit and Tentacle Count +1."
+        "description": "Places 2 additional copies of {Sacrament} into your hand.\nTentacle Limit and Tentacle Count +1."
       }
     },
     "talents": {
