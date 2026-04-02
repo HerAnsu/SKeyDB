@@ -10,6 +10,7 @@ import {computeStatRange, computeStatValue, fmtNum, formatScalingRange} from '@/
 import {getTagIcon, resolveTag, type Tag} from '@/domain/tags'
 
 import {
+  DATABASE_INLINE_TOKEN_BUTTON_STYLE,
   DATABASE_INTERACTIVE_TOKEN_CLASS,
   DATABASE_POPOVER_SCALING_TOKEN_CLASS,
   DATABASE_SCALING_TOKEN_CLASS,
@@ -56,6 +57,8 @@ type RichScalingSegmentProps = Readonly<{
   ) => void
 }>
 
+const INDENT_MARKER = '\u2022'
+
 export function RichSegmentRenderer(props: RichSegmentRendererProps) {
   const {segment} = props
 
@@ -97,7 +100,7 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
         <div className={lineClassName}>
           {segment.indented ? (
             <span className='absolute top-0 left-1 text-[1.2em] text-slate-500/60 select-none'>
-              В·
+              {INDENT_MARKER}
             </span>
           ) : null}
           {segment.segments.map((childSegment) => (
@@ -112,7 +115,9 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
     }
     case 'indent':
       return (
-        <span className='mr-1.5 ml-1 inline text-[1.2em] text-slate-500/60 select-none'>В·</span>
+        <span className='mr-1.5 ml-1 inline text-[1.2em] text-slate-500/60 select-none'>
+          {INDENT_MARKER}
+        </span>
       )
     default:
       return null
@@ -122,18 +127,17 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
 function RichSkillSegment({segment, onSkillClick}: RichSkillSegmentProps) {
   if (onSkillClick === undefined) {
     return (
-      <span className='inline font-semibold whitespace-nowrap text-amber-100/85'>
-        {segment.name}
-      </span>
+      <span className='inline font-bold whitespace-nowrap text-amber-100/85'>{segment.name}</span>
     )
   }
 
   return (
     <button
-      className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} appearance-none border-0 bg-transparent p-0 font-semibold whitespace-nowrap`}
+      className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap`}
       onClick={(event) => {
         onSkillClick(segment.name, event)
       }}
+      style={DATABASE_INLINE_TOKEN_BUTTON_STYLE}
       type='button'
     >
       {segment.name}
@@ -143,7 +147,7 @@ function RichSkillSegment({segment, onSkillClick}: RichSkillSegmentProps) {
 
 function RichStatSegment({segment}: Readonly<{segment: StatSegment}>) {
   return (
-    <span className={`${DATABASE_STAT_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}>
+    <span className={`${DATABASE_STAT_TOKEN_CLASS} inline font-bold whitespace-nowrap`}>
       {segment.name}
     </span>
   )
@@ -154,10 +158,10 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
   const hasIcon = tag?.iconId && getTagIcon(tag.iconId)
   const color = tag ? getTagColor(tag) : undefined
 
-  if (tag?.description === undefined || onMechanicClick === undefined) {
+  if (!hasTagDescription(tag) || onMechanicClick === undefined) {
     return (
       <span
-        className={`${DATABASE_UNIMPLEMENTED_TOKEN_CLASS} font-semibold whitespace-nowrap`}
+        className={`${DATABASE_UNIMPLEMENTED_TOKEN_CLASS} font-bold whitespace-nowrap`}
         style={{color}}
         title='Details coming soon'
       >
@@ -175,11 +179,11 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
 
   return (
     <button
-      className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} appearance-none border-0 bg-transparent p-0 font-semibold whitespace-nowrap`}
+      className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap`}
       onClick={(event) => {
         onMechanicClick(tag, event)
       }}
-      style={{color: color ?? undefined}}
+      style={{...DATABASE_INLINE_TOKEN_BUTTON_STYLE, color: color ?? undefined}}
       type='button'
     >
       {hasIcon ? (
@@ -196,6 +200,10 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
 
 function getTagColor(tag: Tag): string | undefined {
   return tag.tint
+}
+
+function hasTagDescription(tag: Tag | null): tag is Tag {
+  return typeof tag?.description === 'string' && tag.description.trim().length > 0
 }
 
 function RichScalingSegment({
@@ -221,7 +229,7 @@ function RichScalingSegment({
     if (!isInteractive) {
       return (
         <span
-          className={`${DATABASE_POPOVER_SCALING_TOKEN_CLASS} inline font-semibold whitespace-nowrap text-amber-100`}
+          className={`${DATABASE_POPOVER_SCALING_TOKEN_CLASS} inline font-bold whitespace-nowrap text-amber-100`}
         >
           {popoverContent}
         </span>
@@ -230,10 +238,11 @@ function RichScalingSegment({
 
     return (
       <button
-        className={`${DATABASE_SCALING_TOKEN_CLASS} cursor-help appearance-none border-0 bg-transparent p-0 font-semibold whitespace-nowrap text-amber-100`}
+        className={`${DATABASE_SCALING_TOKEN_CLASS} cursor-help appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap text-amber-100`}
         onClick={(event) => {
           onScalingClick(values, suffix, stat, event)
         }}
+        style={DATABASE_INLINE_TOKEN_BUTTON_STYLE}
         title={buildScalingHover(values, suffix, stat, stats)}
         type='button'
       >
@@ -254,7 +263,7 @@ function RichScalingSegment({
   if (!isInteractive) {
     return (
       <span
-        className={`${DATABASE_SCALING_TOKEN_CLASS} font-semibold whitespace-nowrap`}
+        className={`${DATABASE_SCALING_TOKEN_CLASS} font-bold whitespace-nowrap`}
         title={hoverText}
       >
         {content}
@@ -265,10 +274,11 @@ function RichScalingSegment({
 
   return (
     <button
-      className={`${DATABASE_SCALING_TOKEN_CLASS} m-0 cursor-help appearance-none border-0 bg-transparent p-0 font-semibold whitespace-nowrap`}
+      className={`${DATABASE_SCALING_TOKEN_CLASS} m-0 cursor-help appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap`}
       onClick={(event) => {
         onScalingClick(values, suffix, stat, event)
       }}
+      style={DATABASE_INLINE_TOKEN_BUTTON_STYLE}
       title={hoverText}
       type='button'
     >

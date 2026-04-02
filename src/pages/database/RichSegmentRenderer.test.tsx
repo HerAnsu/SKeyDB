@@ -2,6 +2,7 @@ import {fireEvent, render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 
 import type {AwakenerFullStats} from '@/domain/awakeners-full'
+import * as tagsModule from '@/domain/tags'
 
 import {RichSegmentRenderer} from './RichSegmentRenderer'
 
@@ -33,7 +34,15 @@ describe('RichSegmentRenderer', () => {
       />,
     )
 
-    fireEvent.click(screen.getByRole('button', {name: 'Strike'}))
+    const button = screen.getByRole('button', {name: 'Strike'})
+    expect(button).toHaveStyle({
+      fontFamily: 'inherit',
+      fontSize: 'inherit',
+      lineHeight: 'inherit',
+      letterSpacing: 'inherit',
+    })
+    expect(button).toHaveClass('font-bold')
+    fireEvent.click(button)
     expect(onSkillClick).toHaveBeenCalledWith('Strike', expect.any(Object))
   })
 
@@ -77,7 +86,55 @@ describe('RichSegmentRenderer', () => {
       />,
     )
 
-    fireEvent.click(screen.getByRole('button', {name: '20~40'}))
+    const button = screen.getByRole('button', {name: '20~40'})
+    expect(button).toHaveStyle({
+      fontFamily: 'inherit',
+      fontSize: 'inherit',
+      lineHeight: 'inherit',
+      letterSpacing: 'inherit',
+    })
+    expect(button).toHaveClass('font-bold')
+    fireEvent.click(button)
     expect(onScalingClick).toHaveBeenCalledWith([10, 20], '%', 'ATK', expect.any(Object))
+  })
+
+  it('keeps mechanics without description non-interactive', () => {
+    vi.spyOn(tagsModule, 'resolveTag').mockReturnValueOnce({
+      key: 'empty-desc',
+      label: 'Empty Desc',
+      description: '   ',
+      iconId: '',
+      aliases: [],
+    })
+
+    render(
+      <RichSegmentRenderer
+        onMechanicClick={vi.fn()}
+        segment={{type: 'mechanic', name: 'Empty Desc'}}
+        skillLevel={1}
+        stats={null}
+        variant='inline'
+      />,
+    )
+
+    expect(screen.queryByRole('button', {name: 'Empty Desc'})).toBeNull()
+    expect(screen.getByText('Empty Desc').closest('[title]')).toHaveAttribute(
+      'title',
+      'Details coming soon',
+    )
+  })
+
+  it('renders indentation marker with the expected bullet sign', () => {
+    const {container} = render(
+      <RichSegmentRenderer
+        segment={{type: 'line', indented: true, segments: [{type: 'text', value: 'Indented text'}]}}
+        skillLevel={1}
+        stats={null}
+        variant='inline'
+      />,
+    )
+
+    expect(container).toHaveTextContent('\u2022Indented text')
+    expect(container).not.toHaveTextContent('В·')
   })
 })
