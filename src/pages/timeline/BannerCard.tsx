@@ -7,8 +7,7 @@ import {getAwakeners} from '@/domain/awakeners'
 import {buildDatabaseAwakenerPath} from '@/domain/database-paths'
 import {getRealmIcon, getRealmTint} from '@/domain/factions'
 import {
-  formatCountdown,
-  getTimelineCountdown,
+  getTimelineCountdownDisplay,
   getTimelineStatus,
   type BannerEntry,
   type BannerFeaturedUnit,
@@ -167,19 +166,21 @@ function BannerSlice({unit, index, total}: BannerSliceProps) {
 
   const inner = (
     <>
-      {asset.url ? (
-        <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
-      ) : (
-        <div className='flex h-full w-full items-center justify-center bg-slate-800/80'>
-          <span className='sigil-placeholder sigil-placeholder-card' />
-        </div>
-      )}
+      <div className='h-full w-full transition-transform duration-300 ease-out group-hover/slice:-translate-y-1 group-hover/slice:scale-[1.03]'>
+        {asset.url ? (
+          <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
+        ) : (
+          <div className='flex h-full w-full items-center justify-center bg-slate-800/80'>
+            <span className='sigil-placeholder sigil-placeholder-card' />
+          </div>
+        )}
+      </div>
       <SliceLabel asset={asset} total={total} />
     </>
   )
 
   const sharedClassName =
-    'relative block h-full shrink-0 overflow-hidden transition-[filter] duration-150 hover:brightness-110 focus-visible:brightness-110'
+    'group/slice relative block h-full shrink-0 overflow-hidden transition-[filter] duration-150 hover:brightness-110 focus-visible:brightness-110'
   const sharedStyle = {flex: '1 1 0', minWidth: 0, clipPath, marginLeft}
 
   if (asset.linkTo) {
@@ -349,13 +350,15 @@ function PoolSliceLayer({asset, total}: {asset: SliceAsset; total: number}) {
 
   return (
     <>
-      {asset.url ? (
-        <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
-      ) : (
-        <div className='flex h-full w-full items-center justify-center bg-slate-800/80'>
-          <span className='sigil-placeholder sigil-placeholder-card' />
-        </div>
-      )}
+      <div className='absolute inset-0 transition-transform duration-300 ease-out group-hover/slice:-translate-y-1 group-hover/slice:scale-[1.03]'>
+        {asset.url ? (
+          <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
+        ) : (
+          <div className='flex h-full w-full items-center justify-center bg-slate-800/80'>
+            <span className='sigil-placeholder sigil-placeholder-card' />
+          </div>
+        )}
+      </div>
       <SliceLabel asset={asset} total={total} />
     </>
   )
@@ -389,7 +392,7 @@ function PoolBannerSlice({assets, frame, index, total}: PoolBannerSliceProps) {
 
   return (
     <div
-      className={`relative block h-full shrink-0 overflow-hidden ${hasLink ? 'transition-[filter] duration-150 hover:brightness-110' : ''}`}
+      className={`relative block h-full shrink-0 overflow-hidden ${hasLink ? 'group/slice transition-[filter] duration-150 hover:brightness-110' : ''}`}
       style={{flex: '1 1 0', minWidth: 0, clipPath, marginLeft}}
     >
       <div
@@ -442,7 +445,7 @@ interface BannerCardProps {
 
 export function BannerCard({banner, now}: BannerCardProps) {
   const status = getTimelineStatus(banner.startDate, banner.endDate, now)
-  const countdown = getTimelineCountdown(banner.startDate, banner.endDate, now)
+  const countdownDisplay = getTimelineCountdownDisplay(banner.startDate, banner.endDate, now)
   const displaySlices = useMemo(() => expandFeatured(banner.featured ?? []), [banner.featured])
   const visualSlots = useMemo(
     () => (banner.poolSlots ? resolvePoolSlots(banner.poolSlots) : null),
@@ -505,15 +508,18 @@ export function BannerCard({banner, now}: BannerCardProps) {
               {BANNER_TYPE_LABEL[banner.type]}
             </span>
           </div>
-          <div className='flex shrink-0 flex-col items-end gap-0.5 pt-0.5'>
+          <div
+            className='flex shrink-0 flex-col items-end gap-0.5 pt-0.5'
+            title={countdownDisplay?.title}
+          >
             <span
               className={`rounded-[2px] border px-1.5 py-0.5 text-[9px] font-medium tracking-wider ${STATUS_CLASS[status]}`}
             >
               {status === 'active' ? 'Live' : status === 'upcoming' ? 'Soon' : 'Ended'}
             </span>
-            {countdown && status !== 'ended' ? (
+            {countdownDisplay ? (
               <span className='text-[10px] font-medium whitespace-nowrap text-slate-400 tabular-nums'>
-                {formatCountdown(countdown)}
+                {countdownDisplay.text}
               </span>
             ) : null}
           </div>

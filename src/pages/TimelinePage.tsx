@@ -5,11 +5,13 @@ import {timelineBanners, timelineEvents} from '@/domain/timeline-data'
 
 import {BannerCard} from './timeline/BannerCard'
 import {EventList} from './timeline/EventList'
+import {TimelineArchiveSection} from './timeline/TimelineArchiveSection'
 
 const TICK_INTERVAL_MS = 60_000
 
 export function TimelinePage() {
   const [now, setNow] = useState(() => new Date())
+  const [showEndedBanners, setShowEndedBanners] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -66,19 +68,22 @@ export function TimelinePage() {
             </div>
           )}
 
-          {endedBanners.length > 0 && (
-            <div className='mt-4 space-y-3'>
-              <div className='flex items-center gap-3'>
-                <h4 className='ui-title text-sm text-slate-500'>Ended</h4>
-                <div className='h-px flex-1 bg-gradient-to-r from-slate-500/20 to-transparent' />
-              </div>
-              <div className='grid gap-3 sm:grid-cols-2'>
-                {endedBanners.map((banner) => (
-                  <BannerCard banner={banner} key={banner.id} now={now} />
-                ))}
-              </div>
-            </div>
-          )}
+          {endedBanners.length > 0 ? (
+            <TimelineArchiveSection
+              contentClassName='grid gap-3 sm:grid-cols-2'
+              dividerClassName='bg-gradient-to-r from-slate-500/20 to-transparent'
+              expanded={showEndedBanners}
+              itemCount={endedBanners.length}
+              onToggle={() => {
+                setShowEndedBanners((current) => !current)
+              }}
+              title='Ended'
+            >
+              {endedBanners.map((banner) => (
+                <BannerCard banner={banner} key={banner.id} now={now} />
+              ))}
+            </TimelineArchiveSection>
+          ) : null}
         </div>
       </div>
     </section>

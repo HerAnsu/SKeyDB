@@ -5,7 +5,7 @@
     "category": "gameplay-event",
     "description": "Gameplay and story event featuring the new awakener Vortice. \n Obtain SR-Wheel \"Imprisoned Madness\", Posse \"Drowned Innocence\" and more.",
     "startDate": "2026/03/09 09:00",
-    "endDate": "2026/03/23 09:00",
+    "endDate": "2026/04/06 09:00",
     "pinned": true,
     "featured": "Vortice"
   },
@@ -13,11 +13,11 @@
     "id": "event-dtide",
     "title": "Regional D-Effect Zone",
     "category": "d-tide",
-    "description": "Bi-weekly D-Tide raids. \n Complete to earn Silver, Black Offerings, Gnosis materials and more. \n Current Realm relic: Caro Ring.",
-    "startDate": "2026/03/16 09:00",
-    "endDate": "2026/03/30 09:00",
+    "description": "Bi-weekly D-Tide raids. \n Complete to earn Silver, Black Offerings, Gnosis materials and more. \n Current Realm relic: Ultra Ring.",
+    "startDate": "2026/03/30 09:00",
+    "endDate": "2026/04/13 09:00",
     "pinned": true,
-    "customArt": "/events/dtide-aequor.webp"
+    "customArt": "/events/dtide-ultra.webp"
   },
   {
     "id": "event-curriculum-03",
@@ -25,7 +25,7 @@
     "category": "curriculum",
     "description": "Complete daily and weekly tasks to earn various rewards. \n T1: 680 Silver Prime - SSR wheel, 2500 Silver, 12 Luminous Cores and more. \n T2: 1280 Silver Prime - T1 + Exclusive Avatars, increased daily rewards and more.",
     "startDate": "2026/03/01 09:00",
-    "endDate": "2026/03/31 09:00",
+    "endDate": "2026/04/06 09:00",
     "customArt": "/events/curriculum.webp",
     "pricing": "680-1280 Silver Prime"
   },
@@ -71,22 +71,63 @@
     "customArt": "/events/gifts-from-mythag.webp"
   },
   {
-    "id": "event-story-rerun-24",
-    "title": "Manifold Healing: Rerun",
+    "id": "event-story-rerun-wanda",
+    "title": "Feast of Flames",
     "category": "gameplay-event",
-    "description": "RERUN: Gameplay and story event featuring 24. \n Obtain SR-Wheel \"Silver Cod's Determination\", Posse \"All of Her\" and more.",
-    "startDate": "2026/02/23 09:00",
-    "endDate": "2026/03/09 09:00",
-    "featured": "24"
+    "description": "Gameplay and story event featuring Wanda. \n Obtain SR-Wheel \"The Gaze of Isarawu\" and more.",
+    "startDate": "2026/03/23 09:00",
+    "endDate": "2026/04/20 09:00",
+    "featured": "Wanda",
+    "customArt": "/events/wanda-event.webp",
+    "rerun": true
   },
   {
-    "id": "event-story-rerun-wanda",
-    "title": "Feast of Flames: Rerun",
+    "id": "phase-reversal",
+    "title": "Phase Reversal",
     "category": "gameplay-event",
-    "description": "RERUN: Gameplay and story event featuring Wanda. \n Obtain SR-Wheel \"The Gaze of Isarawu\" and more.",
-    "startDate": "2026/03/23 09:00",
-    "endDate": "2026/04/06 09:00",
-    "featured": "Wanda",
-    "customArt": "/events/wanda-event.webp"
+    "description": "PVP Traphase event. Participate in PVP matches to earn rewards including Posse \"Tavern's Opening\", emotes, silver, upgrade materials and more.",
+    "startDate": "2026/03/16 09:00",
+    "endDate": "2026/03/30 09:00",
+    "customArt": "/events/phase-reversal.webp",
+    "rerun": true
+  },
+  {
+    "id": "event-story-tulu",
+    "title": "The Sovereign's Return",
+    "category": "gameplay-event",
+    "description": "Gameplay and story event featuring Tulu. \n Obtain limited SR-Wheel \"Blue Stone Throne\", limited avatar \"By the Silver Key: Tulu\" and more.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/05/04 09:00",
+    "featured": "Tulu",
+    "rerun": true
+  },
+  {
+    "id": "event-login-april",
+    "title": "Gifts from Mythag",
+    "category": "login",
+    "description": "Login rewards: 10 Luminous Cores for 7 cumulative logins. Additional rewards available through up to 14 cumulative logins.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/04/20 09:00",
+    "customArt": "/events/gifts-from-mythag.webp"
+  },
+  {
+    "id": "event-curriculum-04",
+    "title": "Curriculum Honor",
+    "category": "curriculum",
+    "description": "Complete daily and weekly tasks to earn various rewards. \n T1: 680 Silver Prime - SSR wheel, 2500 Silver, 12 Luminous Cores and more. \n T2: 1280 Silver Prime - T1 + Exclusive Avatars, increased daily rewards and more.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/04/20 09:00",
+    "customArt": "/events/curriculum.webp",
+    "pricing": "680-1280 Silver Prime"
+  },
+  {
+    "id": "event-skin-wanda",
+    "title": "With Spikenard And Myrrh",
+    "category": "skin",
+    "description": "Complete tasks to unlock the \"With Spikenard And Myrrh\" skin for Wanda, along with 10 Pure Cores.",
+    "startDate": "2026/04/06 09:00",
+    "endDate": "2026/04/20 09:00",
+    "customArt": "/events/wanda-skin.webp",
+    "pricing": "Free"
   }
 ]
