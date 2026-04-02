@@ -1,4 +1,4 @@
-import {useCallback, useMemo} from 'react'
+﻿import {useCallback, useMemo} from 'react'
 
 import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.png'
 import type {Awakener} from '@/domain/awakeners'
@@ -11,7 +11,7 @@ import {getStarSize, scaledFontStyle, type FontScale} from './font-scale'
 import {RichDescription} from './RichDescription'
 import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
-interface AwakenerDetailOverviewProps {
+type AwakenerDetailOverviewProps = Readonly<{
   awakener: Awakener
   fullData: AwakenerFull | null
   stats: AwakenerFullStats | null
@@ -19,7 +19,7 @@ interface AwakenerDetailOverviewProps {
   skillLevel: number
   fontScale: FontScale
   onNavigateToCards?: () => void
-}
+}>
 
 const ENLIGHTEN_ORDER = ['E1', 'E2', 'E3'] as const
 const TALENT_ORDER = ['T1', 'T2', 'T3', 'T4'] as const
@@ -30,6 +30,14 @@ function hasEnlightenEntry(fullData: AwakenerFull, key: string): boolean {
 
 function hasTalentEntry(fullData: AwakenerFull, key: string): boolean {
   return Object.hasOwn(fullData.talents, key)
+}
+
+function buildStarKeys(prefix: string, count: number): string[] {
+  const keys: string[] = []
+  for (let starNumber = 1; starNumber <= count; starNumber += 1) {
+    keys.push(`${prefix}-star-${String(starNumber)}`)
+  }
+  return keys
 }
 
 export function AwakenerDetailOverview({
@@ -57,26 +65,27 @@ export function AwakenerDetailOverview({
 
   const enlightenItems = useMemo(() => {
     if (!fullData) return []
-    const items = []
+    const items: DetailSectionItem[] = []
     const starStyle = getStarSize(fontScale)
 
     for (const key of ENLIGHTEN_ORDER) {
       if (!hasEnlightenEntry(fullData, key)) continue
 
       const entry = fullData.enlightens[key]
-      const starCount = parseInt(key.replace('E', ''))
+      const starCount = Number.parseInt(key.replace('E', ''), 10)
+      const starKeys = buildStarKeys(key, starCount)
 
       items.push({
         key,
         label: (
-          <span className={`relative inline-flex items-center ${starStyle.space}`}>
-            {Array.from({length: starCount}).map((_, i) => (
+          <span className={`relative inline-flex h-[1em] items-center ${starStyle.space}`}>
+            {starKeys.map((starKey, index) => (
               <img
-                key={i}
+                key={starKey}
                 src={enlightensStars}
-                alt={`E${(i + 1).toString()}`}
+                alt={`E${String(index + 1)}`}
                 className='relative'
-                style={{width: starStyle.width, height: starStyle.height, top: starStyle.top}}
+                style={{width: starStyle.width, height: starStyle.height}}
               />
             ))}
           </span>
@@ -86,23 +95,24 @@ export function AwakenerDetailOverview({
       })
     }
 
-    const absoluteAxiom = hasEnlightenEntry(fullData, 'AbsoluteAxiom')
-      ? fullData.enlightens.AbsoluteAxiom
-      : hasEnlightenEntry(fullData, 'E4')
-        ? fullData.enlightens.E4
-        : null
+    let absoluteAxiom = null
+    if (hasEnlightenEntry(fullData, 'AbsoluteAxiom')) {
+      absoluteAxiom = fullData.enlightens.AbsoluteAxiom
+    } else if (hasEnlightenEntry(fullData, 'E4')) {
+      absoluteAxiom = fullData.enlightens.E4
+    }
 
     if (absoluteAxiom) {
       items.push({
         key: 'AbsoluteAxiom',
-        label: 'Е15',
+        label: 'Р•15',
         name: absoluteAxiom.name,
         description: absoluteAxiom.description,
       })
     }
 
     return items
-  }, [fullData, fontScale])
+  }, [fontScale, fullData])
 
   if (!fullData) {
     return <p className='py-4 text-xs text-slate-400'>Loading...</p>
@@ -123,13 +133,13 @@ export function AwakenerDetailOverview({
 
   return (
     <div className='space-y-4'>
-      <div className='border border-slate-600/30 bg-slate-900/30'>
-        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
+      <div>
+        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
           Dimensional Image
         </h4>
         {portraitRelic ? (
-          <div className='px-4 py-3'>
-            <div className='flex items-start gap-3'>
+          <div className='pt-1 pb-2'>
+            <div className='flex items-start gap-3 border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'>
               <div className='h-16 w-16 shrink-0 overflow-hidden'>
                 {portraitRelicAsset ? (
                   <img

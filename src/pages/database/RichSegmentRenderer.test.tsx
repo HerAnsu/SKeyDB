@@ -63,4 +63,21 @@ describe('RichSegmentRenderer', () => {
 
     expect(screen.getByText('20~40')).toBeInTheDocument()
   })
+
+  it('allows popover scaling tokens to open nested scaling details', () => {
+    const onScalingClick = vi.fn()
+
+    render(
+      <RichSegmentRenderer
+        onScalingClick={onScalingClick}
+        segment={{type: 'scaling', values: [10, 20], suffix: '%', stat: 'ATK'}}
+        skillLevel={1}
+        stats={BASE_STATS}
+        variant='popover'
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: '20~40'}))
+    expect(onScalingClick).toHaveBeenCalledWith([10, 20], '%', 'ATK', expect.any(Object))
+  })
 })

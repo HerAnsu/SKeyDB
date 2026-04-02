@@ -1,5 +1,6 @@
 import {useCallback} from 'react'
 
+import costIcon from '@/assets/icons/UI_Battel_White_Buff_094.png'
 import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
 
 import {DetailSection} from './DetailSection'
@@ -7,12 +8,12 @@ import {scaledFontStyle} from './font-scale'
 import {RichDescription} from './RichDescription'
 import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
-interface AwakenerDetailCardsProps {
+type AwakenerDetailCardsProps = Readonly<{
   fullData: AwakenerFull | null
   stats: AwakenerFullStats | null
   cardNames: Set<string>
   skillLevel: number
-}
+}>
 
 const CARD_KEYS = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'] as const
 
@@ -67,31 +68,49 @@ export function AwakenerDetailCards({
     <div className='space-y-4'>
       <DetailSection items={exaltItems} renderDescription={renderDescription} title='Exalts' />
 
-      <div className='border border-slate-600/30 bg-slate-900/30'>
-        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
+      <div>
+        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
           Command Cards
         </h4>
-        <div className='py-1'>
-          {cardEntries.map(({key, card}, index) => (
-            <div className={index > 0 ? 'mt-5' : ''} key={key}>
-              <div className='px-4 py-1.5'>
-                <div className='flex items-baseline justify-between'>
-                  <p className='text-slate-300' style={scaledFontStyle(12)}>
-                    <span className='text-slate-500'>{key === 'C1' ? 'Rouse' : key}</span>
-                    <span className='mx-1.5 text-slate-600'>·</span>
-                    <span className={DATABASE_ITEM_NAME_CLASS}>{card.name}</span>
-                  </p>
-                  <span className='text-slate-500' style={scaledFontStyle(10)}>
-                    Cost {card.cost}
+        <div className='flex flex-col gap-y-3 pt-0 pb-2'>
+          {cardEntries.map(({key, card}) => (
+            <div
+              className='border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'
+              key={key}
+            >
+              <div className='flex items-center justify-between gap-3'>
+                <div className='flex min-w-0 items-center gap-2.5'>
+                  <span
+                    className='inline-flex shrink-0 items-center gap-1.5 text-slate-300'
+                    style={scaledFontStyle(12)}
+                  >
+                    <img
+                      alt=''
+                      aria-hidden='true'
+                      className='h-[1.3em] w-[1.3em] object-contain opacity-90'
+                      draggable={false}
+                      src={costIcon}
+                    />
+                    <span className='font-medium text-amber-100/90'>{card.cost}</span>
                   </span>
+                  <span className='shrink-0 text-slate-600'>·</span>
+                  <p
+                    className={`m-0 min-w-0 ${DATABASE_ITEM_NAME_CLASS}`}
+                    style={scaledFontStyle(12)}
+                  >
+                    {card.name}
+                  </p>
                 </div>
-                <div className='my-1.5 h-px w-full bg-gradient-to-r from-slate-600/60 via-slate-600/20 to-transparent' />
-                <div
-                  className='mt-1 pl-1.5 leading-relaxed text-slate-400'
-                  style={scaledFontStyle(12)}
-                >
-                  {renderDescription(card.description)}
-                </div>
+                <span className='shrink-0 text-slate-500' style={scaledFontStyle(10)}>
+                  {key === 'C1' ? 'Rouse' : key}
+                </span>
+              </div>
+              <div className='my-2 h-px w-full bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent' />
+              <div
+                className='mt-1.5 pl-2 leading-relaxed text-slate-400'
+                style={scaledFontStyle(12)}
+              >
+                {renderDescription(card.description)}
               </div>
             </div>
           ))}

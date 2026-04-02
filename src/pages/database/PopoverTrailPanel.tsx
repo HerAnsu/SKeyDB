@@ -1,4 +1,5 @@
-import React, {
+﻿import React, {
+  isValidElement,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -9,25 +10,23 @@ import React, {
 
 import {decideTrailDirection, isTrailMobileLayout} from './popover-trail'
 
-interface PopoverTrailPanelProps {
-  /** The root anchor rect (element that started the entire trail) */
+type PopoverTrailPanelProps = Readonly<{
   anchorRect: DOMRect
   anchorElement?: HTMLElement | null
-  /** Per-entry rects for subsequent popovers (index 0 = root, index 1+ = nested) */
   entryRects?: (DOMRect | undefined)[]
   itemCount: number
   onCloseTop: () => void
   children: ReactNode
-}
+}>
 
-interface SinglePopoverProps {
+type SinglePopoverProps = Readonly<{
   anchorRect: DOMRect
   direction: 'up' | 'down'
   zIndex: number
   children: ReactNode
   mountRef: React.RefObject<HTMLDivElement | null>
   onPosition: () => void
-}
+}>
 
 function SinglePopover({
   anchorRect,
@@ -43,8 +42,8 @@ function SinglePopover({
     if (!ref.current) return
     const el = ref.current
     const rect = el.getBoundingClientRect()
-    const vw = window.innerWidth
-    const vh = window.innerHeight
+    const vw = globalThis.innerWidth
+    const vh = globalThis.innerHeight
     const margin = 12
     const gap = 6
 
@@ -68,14 +67,12 @@ function SinglePopover({
     el.style.top = `${String(top)}px`
     el.style.left = `${String(left)}px`
     onPosition()
-    // Assign to parent ref for click-outside detection
     mountRef.current ??= el
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [anchorRect, direction])
+  }, [anchorRect, direction, mountRef, onPosition])
 
   return (
     <div
-      className='fixed max-h-[calc(100vh-24px)] w-[min(22rem,calc(100vw-24px))] rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.7)]'
+      className='fixed max-h-[calc(100vh-24px)] w-[min(22rem,calc(100vw-24px))] bg-transparent shadow-none'
       ref={ref}
       style={{top: 0, left: -9999, zIndex: 950 + zIndex}}
     >
@@ -93,98 +90,87 @@ export function PopoverTrailPanel({
   children,
 }: PopoverTrailPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [, forceUpdate] = useState(0)
-  const isMobile = isTrailMobileLayout(window.innerWidth)
+  const [, setViewportVersion] = useState(0)
+  const isMobile = isTrailMobileLayout(globalThis.innerWidth)
   const currentAnchorRect = anchorElement?.isConnected
     ? anchorElement.getBoundingClientRect()
     : anchorRect
-  const direction = isMobile ? 'down' : decideTrailDirection(currentAnchorRect, window.innerHeight)
+  const direction = isMobile
+    ? 'down'
+    : decideTrailDirection(currentAnchorRect, globalThis.innerHeight)
 
   useEffect(() => {
     function handleViewportChange() {
-      forceUpdate((v) => v + 1)
+      setViewportVersion((value) => value + 1)
     }
-    window.addEventListener('resize', handleViewportChange)
-    window.addEventListener('scroll', handleViewportChange, true)
+    globalThis.addEventListener('resize', handleViewportChange)
+    globalThis.addEventListener('scroll', handleViewportChange, true)
     return () => {
-      window.removeEventListener('resize', handleViewportChange)
-      window.removeEventListener('scroll', handleViewportChange, true)
+      globalThis.removeEventListener('resize', handleViewportChange)
+      globalThis.removeEventListener('scroll', handleViewportChange, true)
     }
   }, [])
 
   useEffect(() => {
-    function handleMouseDown(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+    function handleMouseDown(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         onCloseTop()
       }
     }
-    function handleEscape(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
         onCloseTop()
       }
     }
-    window.addEventListener('mousedown', handleMouseDown)
-    window.addEventListener('keydown', handleEscape)
+    globalThis.addEventListener('mousedown', handleMouseDown)
+    globalThis.addEventListener('keydown', handleEscape)
     return () => {
-      window.removeEventListener('mousedown', handleMouseDown)
-      window.removeEventListener('keydown', handleEscape)
+      globalThis.removeEventListener('mousedown', handleMouseDown)
+      globalThis.removeEventListener('keydown', handleEscape)
     }
   }, [onCloseTop])
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const positionNoop = useCallback(() => {}, [])
+  const positionNoop = useCallback(() => undefined, [])
+  const childArray = React.Children.toArray(children)
 
   if (isMobile) {
     return (
       <div
         className='fixed bottom-4 left-1/2 z-[950] flex w-[min(22rem,calc(100vw-24px))] -translate-x-1/2 flex-col items-center'
         data-skill-popover=''
-        onClick={(e) => {
-          e.stopPropagation()
-        }}
-        onMouseDown={(e) => {
-          e.stopPropagation()
-        }}
         ref={containerRef}
       >
         {itemCount > 1 && (
           <button
             className='mb-1.5 flex items-center gap-1.5 border border-slate-700/60 bg-slate-950/[.98] px-3 py-1.5 text-xs font-semibold text-amber-200/80 shadow-lg backdrop-blur transition-colors hover:border-amber-500/60 hover:text-amber-100'
-            onClick={() => {
-              onCloseTop()
-            }}
+            onClick={onCloseTop}
             type='button'
           >
             <span className='text-amber-400'>&#8592;</span>
             <span>Back</span>
           </button>
         )}
-        <div className='w-max max-w-full'>{React.Children.toArray(children)[itemCount - 1]}</div>
+        <div className='w-max max-w-full'>{childArray[itemCount - 1]}</div>
       </div>
     )
   }
 
-  const childArray = React.Children.toArray(children)
-
   return (
-    <div
-      data-skill-popover=''
-      onClick={(e) => {
-        e.stopPropagation()
-      }}
-      onMouseDown={(e) => {
-        e.stopPropagation()
-      }}
-      ref={containerRef}
-    >
+    <div data-skill-popover='' ref={containerRef}>
       {childArray.map((child, index) => {
         const entryRect = entryRects?.[index]
         const rect = index === 0 ? currentAnchorRect : (entryRect ?? currentAnchorRect)
+        const childKey =
+          isValidElement(child) && child.key !== null
+            ? child.key
+            : `popover-${String(rect.left)}-${String(rect.top)}-${String(rect.width)}-${String(
+                rect.height,
+              )}`
         return (
           <SinglePopover
             anchorRect={rect}
             direction={direction}
-            key={index}
+            key={childKey}
             mountRef={containerRef}
             onPosition={positionNoop}
             zIndex={index}

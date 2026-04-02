@@ -1,4 +1,4 @@
-import type {AwakenerFullStats} from '@/domain/awakeners-full'
+﻿import type {AwakenerFullStats} from '@/domain/awakeners-full'
 import type {
   MechanicSegment,
   RichSegment,
@@ -18,7 +18,7 @@ import {
   getDatabaseRealmTint,
 } from './text-styles'
 
-interface RichSegmentRendererProps {
+type RichSegmentRendererProps = Readonly<{
   segment: RichSegment
   skillLevel: number
   stats: AwakenerFullStats | null
@@ -31,7 +31,30 @@ interface RichSegmentRendererProps {
     stat: string | null,
     event: React.MouseEvent,
   ) => void
-}
+}>
+
+type RichSkillSegmentProps = Readonly<{
+  segment: SkillSegment
+  onSkillClick?: (name: string, event: React.MouseEvent) => void
+}>
+
+type RichMechanicSegmentProps = Readonly<{
+  segment: MechanicSegment
+  onMechanicClick?: (tag: Tag, event: React.MouseEvent) => void
+}>
+
+type RichScalingSegmentProps = Readonly<{
+  segment: ScalingSegment
+  skillLevel: number
+  stats: AwakenerFullStats | null
+  variant: 'inline' | 'popover'
+  onScalingClick?: (
+    values: number[],
+    suffix: string,
+    stat: string | null,
+    event: React.MouseEvent,
+  ) => void
+}>
 
 export function RichSegmentRenderer(props: RichSegmentRendererProps) {
   const {segment} = props
@@ -39,16 +62,12 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
   switch (segment.type) {
     case 'text':
       return <>{segment.value}</>
-
     case 'skill':
-      return <RichSkillSegment {...props} segment={segment} />
-
+      return <RichSkillSegment onSkillClick={props.onSkillClick} segment={segment} />
     case 'stat':
       return <RichStatSegment segment={segment} />
-
     case 'mechanic':
-      return <RichMechanicSegment {...props} segment={segment} />
-
+      return <RichMechanicSegment onMechanicClick={props.onMechanicClick} segment={segment} />
     case 'realm': {
       const tint = getDatabaseRealmTint(segment.name)
       return (
@@ -58,64 +77,71 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
       )
     }
     case 'scaling':
-      return <RichScalingSegment {...props} segment={segment} />
-
+      return (
+        <RichScalingSegment
+          onScalingClick={props.onScalingClick}
+          segment={segment}
+          skillLevel={props.skillLevel}
+          stats={props.stats}
+          variant={props.variant}
+        />
+      )
     case 'newline':
       return <br />
-
     case 'paragraph':
       return <span className='block h-1' aria-hidden='true' />
-
-    case 'line':
+    case 'line': {
+      const lineClassName = segment.indented ? 'relative pl-5 leading-normal' : 'leading-normal'
+      const keyCounts = new Map<string, number>()
       return (
-        <div className={`${segment.indented ? 'relative pl-5' : ''} leading-normal`}>
-          {segment.indented && (
+        <div className={lineClassName}>
+          {segment.indented ? (
             <span className='absolute top-0 left-1 text-[1.2em] text-slate-500/60 select-none'>
-              ·
+              В·
             </span>
-          )}
-          {segment.segments.map((s, idx) => (
-            <RichSegmentRenderer key={idx} {...props} segment={s} />
+          ) : null}
+          {segment.segments.map((childSegment) => (
+            <RichSegmentRenderer
+              key={nextSegmentKey(keyCounts, childSegment)}
+              {...props}
+              segment={childSegment}
+            />
           ))}
         </div>
       )
-
+    }
     case 'indent':
       return (
-        <span className='mr-1.5 ml-1 inline text-[1.2em] text-slate-500/60 select-none'>·</span>
+        <span className='mr-1.5 ml-1 inline text-[1.2em] text-slate-500/60 select-none'>В·</span>
       )
-
     default:
       return null
   }
 }
 
-interface RichSkillSegmentProps {
-  segment: SkillSegment
-  onSkillClick?: (name: string, event: React.MouseEvent) => void
-}
-
 function RichSkillSegment({segment, onSkillClick}: RichSkillSegmentProps) {
-  if (onSkillClick) {
+  if (onSkillClick === undefined) {
     return (
-      <span
-        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}
-        onClick={(event) => {
-          onSkillClick(segment.name, event)
-        }}
-        role='button'
-        tabIndex={0}
-      >
+      <span className='inline font-semibold whitespace-nowrap text-amber-100/85'>
         {segment.name}
       </span>
     )
   }
+
   return (
-    <span className='inline font-semibold whitespace-nowrap text-amber-100/85'>{segment.name}</span>
+    <button
+      className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} appearance-none border-0 bg-transparent p-0 font-semibold whitespace-nowrap`}
+      onClick={(event) => {
+        onSkillClick(segment.name, event)
+      }}
+      type='button'
+    >
+      {segment.name}
+    </button>
   )
 }
 
-function RichStatSegment({segment}: {segment: StatSegment}) {
+function RichStatSegment({segment}: Readonly<{segment: StatSegment}>) {
   return (
     <span className={`${DATABASE_STAT_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}>
       {segment.name}
@@ -123,31 +149,22 @@ function RichStatSegment({segment}: {segment: StatSegment}) {
   )
 }
 
-interface RichMechanicSegmentProps {
-  segment: MechanicSegment
-  onMechanicClick?: (tag: Tag, event: React.MouseEvent) => void
-}
-
 function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProps) {
   const tag = resolveTag(segment.name)
   const hasIcon = tag?.iconId && getTagIcon(tag.iconId)
+  const color = tag ? getTagColor(tag) : undefined
 
-  if (tag?.description && onMechanicClick) {
-    const color = getTagColor(tag)
+  if (tag?.description === undefined || onMechanicClick === undefined) {
     return (
       <span
-        className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}
-        onClick={(event) => {
-          onMechanicClick(tag, event)
-        }}
-        role='button'
-        style={{color: color ?? undefined}}
-        tabIndex={0}
+        className={`${DATABASE_UNIMPLEMENTED_TOKEN_CLASS} font-semibold whitespace-nowrap`}
+        style={{color}}
+        title='Details coming soon'
       >
         {hasIcon ? (
           <img
             alt=''
-            className='mr-[2px] !inline-block h-[0.9em] w-auto shrink-0 align-[-0.1em]'
+            className='mr-[2px] !inline-block h-[0.9em] w-auto shrink-0 align-[-0.12em]'
             src={getTagIcon(tag.iconId)}
           />
         ) : null}
@@ -156,44 +173,29 @@ function RichMechanicSegment({segment, onMechanicClick}: RichMechanicSegmentProp
     )
   }
 
-  const color = tag ? getTagColor(tag) : undefined
-
   return (
-    <span
-      className={`${DATABASE_UNIMPLEMENTED_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}
-      style={{color}}
-      title='Details coming soon'
+    <button
+      className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} appearance-none border-0 bg-transparent p-0 font-semibold whitespace-nowrap`}
+      onClick={(event) => {
+        onMechanicClick(tag, event)
+      }}
+      style={{color: color ?? undefined}}
+      type='button'
     >
       {hasIcon ? (
         <img
           alt=''
-          className='mr-[2px] !inline-block h-[0.9em] w-auto shrink-0 align-[-0.12em]'
+          className='mr-[2px] !inline-block h-[0.9em] w-auto shrink-0 align-[-0.1em]'
           src={getTagIcon(tag.iconId)}
         />
       ) : null}
       <span className='inline'>{segment.name}</span>
-    </span>
+    </button>
   )
 }
 
 function getTagColor(tag: Tag): string | undefined {
   return tag.tint
-}
-
-interface RichScalingSegmentProps {
-  segment: ScalingSegment
-  skillLevel: number
-  stats: AwakenerFullStats | null
-  variant: 'inline' | 'popover'
-}
-
-interface RichScalingSegmentWrapperProps extends RichScalingSegmentProps {
-  onScalingClick?: (
-    values: number[],
-    suffix: string,
-    stat: string | null,
-    event: React.MouseEvent,
-  ) => void
 }
 
 function RichScalingSegment({
@@ -202,25 +204,41 @@ function RichScalingSegment({
   stats,
   variant,
   onScalingClick,
-}: RichScalingSegmentWrapperProps) {
+}: RichScalingSegmentProps) {
   const {values, suffix, stat} = segment
-  const isInteractive = !!onScalingClick
+  const isInteractive = onScalingClick !== undefined
 
   if (variant === 'popover') {
     const display = formatScalingRange(values, suffix)
     const computed = computeStatRange(values, suffix, stat, stats)
+    const popoverContent = computed ?? (
+      <>
+        {display}
+        {stat ? ` ${stat}` : ''}
+      </>
+    )
+
+    if (!isInteractive) {
+      return (
+        <span
+          className={`${DATABASE_POPOVER_SCALING_TOKEN_CLASS} inline font-semibold whitespace-nowrap text-amber-100`}
+        >
+          {popoverContent}
+        </span>
+      )
+    }
 
     return (
-      <span
-        className={`${DATABASE_POPOVER_SCALING_TOKEN_CLASS} inline font-semibold whitespace-nowrap text-amber-100`}
+      <button
+        className={`${DATABASE_SCALING_TOKEN_CLASS} cursor-help appearance-none border-0 bg-transparent p-0 font-semibold whitespace-nowrap text-amber-100`}
+        onClick={(event) => {
+          onScalingClick(values, suffix, stat, event)
+        }}
+        title={buildScalingHover(values, suffix, stat, stats)}
+        type='button'
       >
-        {computed ?? (
-          <>
-            {display}
-            {stat ? ` ${stat}` : ''}
-          </>
-        )}
-      </span>
+        {popoverContent}
+      </button>
     )
   }
 
@@ -229,34 +247,34 @@ function RichScalingSegment({
   const displayValue = fmtNum(value)
   const computedValue = computeStatValue(value, suffix, stat, stats)
   const hoverText = buildScalingHover(values, suffix, stat, stats)
+  const fallbackValue = `${displayValue}${suffix}`
+  const content = computedValue ?? fallbackValue
+  const statSuffix = stat && computedValue === null ? ` ${stat}` : ''
 
-  const content = <>{computedValue ?? `${displayValue}${suffix}`}</>
-
-  if (isInteractive) {
+  if (!isInteractive) {
     return (
       <span
-        className={`${DATABASE_SCALING_TOKEN_CLASS} m-0 inline cursor-help p-0 font-semibold whitespace-nowrap`}
-        onClick={(e) => {
-          onScalingClick(values, suffix, stat, e)
-        }}
-        role='button'
-        tabIndex={0}
+        className={`${DATABASE_SCALING_TOKEN_CLASS} font-semibold whitespace-nowrap`}
         title={hoverText}
       >
         {content}
-        {stat && computedValue === null ? ` ${stat}` : ''}
+        {statSuffix}
       </span>
     )
   }
 
   return (
-    <span
-      className={`${DATABASE_SCALING_TOKEN_CLASS} inline font-semibold whitespace-nowrap`}
+    <button
+      className={`${DATABASE_SCALING_TOKEN_CLASS} m-0 cursor-help appearance-none border-0 bg-transparent p-0 font-semibold whitespace-nowrap`}
+      onClick={(event) => {
+        onScalingClick(values, suffix, stat, event)
+      }}
       title={hoverText}
+      type='button'
     >
       {content}
-      {stat && computedValue === null ? ` ${stat}` : ''}
-    </span>
+      {statSuffix}
+    </button>
   )
 }
 
@@ -268,10 +286,45 @@ function buildScalingHover(
 ): string {
   if (values.length <= 1) return ''
   return values
-    .map((v, i) => {
-      const computed = computeStatValue(v, suffix, stat, stats)
-      const base = `${String(v)}${suffix}`
-      return `Lv${String(i + 1)}: ${base}${computed !== null ? ` = ${String(computed)}` : ''}`
+    .map((value, index) => {
+      const computed = computeStatValue(value, suffix, stat, stats)
+      const base = `${String(value)}${suffix}`
+      const resolvedValue = computed === null ? '' : ` = ${String(computed)}`
+      return `Lv${String(index + 1)}: ${base}${resolvedValue}`
     })
     .join('\n')
+}
+
+function nextSegmentKey(keyCounts: Map<string, number>, segment: RichSegment): string {
+  const baseKey = segmentKeyBase(segment)
+  const occurrence = keyCounts.get(baseKey) ?? 0
+  keyCounts.set(baseKey, occurrence + 1)
+  return `${baseKey}:${String(occurrence)}`
+}
+
+function segmentKeyBase(segment: RichSegment): string {
+  switch (segment.type) {
+    case 'text':
+      return `text:${segment.value}`
+    case 'skill':
+      return `skill:${segment.name}`
+    case 'stat':
+      return `stat:${segment.name}`
+    case 'mechanic':
+      return `mechanic:${segment.name}`
+    case 'realm':
+      return `realm:${segment.name}`
+    case 'scaling':
+      return `scaling:${segment.stat ?? 'none'}:${segment.suffix}:${segment.values.join(',')}`
+    case 'newline':
+      return 'newline'
+    case 'paragraph':
+      return 'paragraph'
+    case 'indent':
+      return 'indent'
+    case 'line':
+      return `line:${segment.indented ? 'indented' : 'plain'}:${segment.segments.map(segmentKeyBase).join('|')}`
+    default:
+      return 'unknown'
+  }
 }

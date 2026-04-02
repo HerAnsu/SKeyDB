@@ -1,13 +1,19 @@
-import {FaXmark} from 'react-icons/fa6'
+﻿import {FaXmark} from 'react-icons/fa6'
 
 import type {AwakenerFullStats} from '@/domain/awakeners-full'
 import {parseRichDescription} from '@/domain/rich-text'
 import {getTagColor, getTagIcon, type Tag} from '@/domain/tags'
 
 import {RichSegmentRenderer} from './RichSegmentRenderer'
-import {DATABASE_ENTRY_TITLE_CLASS} from './text-styles'
+import {
+  DATABASE_ENTRY_TITLE_CLASS,
+  DATABASE_POPOVER_DIVIDER_CLASS,
+  DATABASE_POPOVER_HEADER_CLASS,
+  DATABASE_POPOVER_SHELL_CLASS,
+  DATABASE_POPOVER_SURFACE_STYLE,
+} from './text-styles'
 
-interface TagPopoverProps {
+type TagPopoverProps = Readonly<{
   tag: Tag
   cardNames: Set<string>
   onClose: () => void
@@ -21,7 +27,7 @@ interface TagPopoverProps {
   ) => void
   skillLevel: number
   stats: AwakenerFullStats | null
-}
+}>
 
 export function TagPopover({
   tag,
@@ -35,27 +41,23 @@ export function TagPopover({
 }: TagPopoverProps) {
   const segments = parseRichDescription(tag.description, cardNames)
   const color = getTagColor(tag)
+  const segmentKeyCounts = new Map<string, number>()
 
   return (
     <div
-      className='w-max max-w-[320px] border border-slate-700/60 bg-slate-950/[.98] p-3 shadow-[0_12px_32px_rgba(0,0,0,0.8)]'
-      onClick={(e) => {
-        e.stopPropagation()
-      }}
-      onMouseDown={(e) => {
-        e.stopPropagation()
-      }}
+      className={`${DATABASE_POPOVER_SHELL_CLASS} p-3`}
       style={{
         fontSize: 'calc(var(--desc-font-scale, 1) * 10px)',
+        ...DATABASE_POPOVER_SURFACE_STYLE,
       }}
     >
-      <div className='mb-2 flex items-start justify-between gap-6'>
-        <div className='flex items-center gap-1.5'>
+      <div className={DATABASE_POPOVER_HEADER_CLASS}>
+        <div className='flex items-center gap-1'>
           {tag.iconId && getTagIcon(tag.iconId) ? (
-            <img alt='' className='h-[0.9em] w-auto shrink-0' src={getTagIcon(tag.iconId)} />
+            <img alt='' className='h-[1.15em] w-auto shrink-0' src={getTagIcon(tag.iconId)} />
           ) : null}
           <p
-            className={`${DATABASE_ENTRY_TITLE_CLASS} text-[1.15em] font-medium tracking-wide`}
+            className={`${DATABASE_ENTRY_TITLE_CLASS} text-[1.3em] font-semibold tracking-wide`}
             style={{color: color ?? undefined}}
           >
             {tag.label}
@@ -64,25 +66,27 @@ export function TagPopover({
         <button
           className='-mt-0.5 -mr-1 text-slate-400 transition-colors hover:text-white'
           onClick={onClose}
+          type='button'
         >
           <FaXmark size={14} />
         </button>
       </div>
+      <div className={DATABASE_POPOVER_DIVIDER_CLASS} />
       <div>
-        <div className='leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
-          {segments.map((seg, i) => (
+        <div className='pl-1.5 leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
+          {segments.map((segment) => (
             <RichSegmentRenderer
-              key={i}
-              onMechanicClick={(tag, e) => {
-                onMechanicTokenClick(tag, e)
+              key={nextSegmentKey(segmentKeyCounts, segment)}
+              onMechanicClick={(nextTag, event) => {
+                onMechanicTokenClick(nextTag, event)
               }}
-              onSkillClick={(name, e) => {
-                onSkillTokenClick(name, e)
+              onSkillClick={(name, event) => {
+                onSkillTokenClick(name, event)
               }}
-              onScalingClick={(values, suffix, stat, e) => {
-                onScalingTokenClick(values, suffix, stat, e)
+              onScalingClick={(values, suffix, stat, event) => {
+                onScalingTokenClick(values, suffix, stat, event)
               }}
-              segment={seg}
+              segment={segment}
               skillLevel={skillLevel}
               stats={stats}
               variant='popover'
@@ -92,4 +96,41 @@ export function TagPopover({
       </div>
     </div>
   )
+}
+
+function nextSegmentKey(
+  keyCounts: Map<string, number>,
+  segment: ReturnType<typeof parseRichDescription>[number],
+): string {
+  const baseKey = segmentKeyBase(segment)
+  const occurrence = keyCounts.get(baseKey) ?? 0
+  keyCounts.set(baseKey, occurrence + 1)
+  return `${baseKey}:${String(occurrence)}`
+}
+
+function segmentKeyBase(segment: ReturnType<typeof parseRichDescription>[number]): string {
+  switch (segment.type) {
+    case 'text':
+      return `text:${segment.value}`
+    case 'skill':
+      return `skill:${segment.name}`
+    case 'stat':
+      return `stat:${segment.name}`
+    case 'mechanic':
+      return `mechanic:${segment.name}`
+    case 'realm':
+      return `realm:${segment.name}`
+    case 'scaling':
+      return `scaling:${segment.stat ?? 'none'}:${segment.suffix}:${segment.values.join(',')}`
+    case 'newline':
+      return 'newline'
+    case 'paragraph':
+      return 'paragraph'
+    case 'indent':
+      return 'indent'
+    case 'line':
+      return `line:${segment.indented ? 'indented' : 'plain'}:${segment.segments.map(segmentKeyBase).join('|')}`
+    default:
+      return 'unknown'
+  }
 }

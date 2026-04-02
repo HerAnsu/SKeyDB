@@ -10,13 +10,13 @@ export interface DetailSectionItem {
   description: string
 }
 
-interface DetailSectionProps {
+type DetailSectionProps = Readonly<{
   title: string
   items: DetailSectionItem[]
   emptyMessage?: string
   children?: ReactNode
   renderDescription?: (description: string) => ReactNode
-}
+}>
 
 export function DetailSection({
   title,
@@ -26,30 +26,28 @@ export function DetailSection({
   renderDescription,
 }: DetailSectionProps) {
   return (
-    <div className='border border-slate-600/30 bg-slate-900/30'>
-      <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
+    <div>
+      <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
         {title}
       </h4>
 
       {items.length === 0 && !children ? (
         <p className='px-4 pb-3 text-xs text-slate-400'>{emptyMessage ?? 'No data available.'}</p>
       ) : (
-        <div className='py-1'>
-          {items.map((item, index) => (
-            <div className={index > 0 ? 'mt-5' : ''} key={item.key}>
-              <div className='px-4 py-1.5'>
-                <p className='text-slate-300' style={scaledFontStyle(12)}>
-                  <span className='text-slate-500'>{item.label}</span>
-                  <span className='mx-1.5 text-slate-600'>·</span>
-                  <span className={DATABASE_ITEM_NAME_CLASS}>{item.name}</span>
-                </p>
-                <div className='my-1.5 h-px w-full bg-gradient-to-r from-slate-600/60 via-slate-600/20 to-transparent' />
-                <div
-                  className='mt-1 pl-1.5 leading-relaxed text-slate-400'
-                  style={scaledFontStyle(12)}
-                >
-                  {renderDescription ? renderDescription(item.description) : item.description}
-                </div>
+        <div className='flex flex-col gap-y-3 pt-0 pb-2'>
+          {items.map((item) => (
+            <div
+              className='border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'
+              key={item.key}
+            >
+              <div className='m-0 flex items-center text-slate-300' style={scaledFontStyle(12)}>
+                <span className='flex items-center text-slate-500'>{item.label}</span>
+                <span className='mx-1.5 self-center text-slate-600'>·</span>
+                <span className={`${DATABASE_ITEM_NAME_CLASS} self-center`}>{item.name}</span>
+              </div>
+              <div className='my-2 h-px w-full bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent' />
+              <div className='mt-1 pl-2 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+                {renderDescription ? renderDescription(item.description) : item.description}
               </div>
             </div>
           ))}

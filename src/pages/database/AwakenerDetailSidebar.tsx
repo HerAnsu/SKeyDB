@@ -7,6 +7,7 @@ import {formatAwakenerNameForUi} from '@/domain/name-format'
 
 import {AwakenerEnlightenStepper} from './AwakenerEnlightenStepper'
 import {AwakenerLevelSlider} from './AwakenerLevelSlider'
+import {SkillLevelSlider} from './SkillLevelSlider'
 
 const STAT_DISPLAY_ORDER = [
   'CON',
@@ -52,19 +53,21 @@ const STAT_TO_MAINSTAT_KEY: Record<string, MainstatKey> = {
 
 const SIDEBAR_STAT_VALUE_CLASS = 'text-slate-200'
 const SIDEBAR_SCALING_VALUE_CLASS =
-  'cursor-help border-b border-dotted border-slate-500/45 text-slate-200 transition-colors hover:border-slate-300/65 hover:text-slate-100'
+  'db-dash-underline db-dash-underline-hover cursor-help text-slate-200 [--db-dash-strength:24%] [--db-dash-hover-strength:36%] hover:text-slate-100'
 
-interface AwakenerDetailSidebarProps {
+type AwakenerDetailSidebarProps = Readonly<{
   awakener: Awakener
   enlightenOffset: number
   level: number
   onDecreaseEnlighten: () => void
   onIncreaseEnlighten: () => void
   onLevelChange: (level: number) => void
+  onSkillLevelChange: (level: number) => void
+  skillLevel: number
   stats: AwakenerFullStats | null
   substatScaling: AwakenerSubstatScaling | null
   compact?: boolean
-}
+}>
 
 export function AwakenerDetailSidebar({
   awakener,
@@ -73,6 +76,8 @@ export function AwakenerDetailSidebar({
   onDecreaseEnlighten,
   onIncreaseEnlighten,
   onLevelChange,
+  onSkillLevelChange,
+  skillLevel,
   stats,
   substatScaling,
   compact,
@@ -80,10 +85,11 @@ export function AwakenerDetailSidebar({
   const displayName = formatAwakenerNameForUi(awakener.name)
   const cardAsset = getAwakenerCardAsset(awakener.name)
   const hasSubstatScaling = hasAwakenerSubstatScaling(substatScaling)
+  const shouldShowPortrait = compact !== true
 
   return (
     <div className='flex shrink-0 flex-col gap-3'>
-      {!compact ? (
+      {shouldShowPortrait ? (
         <div className='aspect-[2/3] w-full overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900'>
           {cardAsset ? (
             <img
@@ -98,8 +104,12 @@ export function AwakenerDetailSidebar({
         </div>
       ) : null}
 
-      <div className='border border-slate-600/30 bg-slate-900/30 px-3 py-2.5'>
-        <div className='mb-2.5 space-y-2'>
+      <div
+        className={`border border-slate-600/30 bg-slate-900/30 ${
+          compact ? 'px-3 py-3' : 'px-3.5 py-3'
+        }`}
+      >
+        <div className={`mb-3 ${compact ? 'space-y-2.5' : 'space-y-3'}`}>
           <div className='flex items-center justify-between gap-3'>
             <h4 className='ui-title text-[11px] tracking-wide text-slate-400 uppercase'>
               Attributes
@@ -112,11 +122,14 @@ export function AwakenerDetailSidebar({
               />
             ) : null}
           </div>
-          <AwakenerLevelSlider level={level} onChange={onLevelChange} />
+          <div className={compact ? 'space-y-2.5' : 'space-y-2'}>
+            <AwakenerLevelSlider level={level} onChange={onLevelChange} />
+            <SkillLevelSlider level={skillLevel} onChange={onSkillLevelChange} />
+          </div>
         </div>
 
         {stats ? (
-          <div className={compact ? 'grid grid-cols-2 gap-x-4 gap-y-0.5' : 'space-y-0.5'}>
+          <div className={compact ? 'grid grid-cols-2 gap-x-4 gap-y-1' : 'space-y-1'}>
             {STAT_DISPLAY_ORDER.map((key) => {
               const value = stats[key]
               const scaledSubstat = substatScaling?.[key as keyof AwakenerSubstatScaling]
@@ -126,7 +139,7 @@ export function AwakenerDetailSidebar({
                 ? `Level scaling: +${scaledSubstat} per 10 levels to Lv. 60`
                 : undefined
               return (
-                <div className='flex items-center justify-between text-[11px]' key={key}>
+                <div className='flex items-center justify-between gap-3 text-[11px]' key={key}>
                   <span className='flex items-center gap-1.5 text-slate-500'>
                     {icon ? (
                       <img
@@ -154,7 +167,7 @@ export function AwakenerDetailSidebar({
           <p className='text-[11px] text-slate-500'>Loading...</p>
         )}
         {hasSubstatScaling ? (
-          <p className='mt-2 text-[10px] leading-relaxed text-slate-500'>
+          <p className='mt-2.5 text-[10px] leading-relaxed text-slate-500'>
             Secondary stat bonuses increase every 10 levels (1-60). Psyche Surge bonuses shown from
             E3+0 to E3+12.
           </p>

@@ -1,13 +1,20 @@
-import {FaXmark} from 'react-icons/fa6'
+﻿import {FaXmark} from 'react-icons/fa6'
 
+import costIcon from '@/assets/icons/UI_Battel_White_Buff_094.png'
 import type {AwakenerFullStats} from '@/domain/awakeners-full'
 import {parseRichDescription} from '@/domain/rich-text'
 import {type Tag} from '@/domain/tags'
 
 import {RichSegmentRenderer} from './RichSegmentRenderer'
-import {DATABASE_ENTRY_TITLE_CLASS} from './text-styles'
+import {
+  DATABASE_ENTRY_TITLE_CLASS,
+  DATABASE_POPOVER_DIVIDER_CLASS,
+  DATABASE_POPOVER_HEADER_CLASS,
+  DATABASE_POPOVER_SHELL_CLASS,
+  DATABASE_POPOVER_SURFACE_STYLE,
+} from './text-styles'
 
-interface SkillPopoverProps {
+type SkillPopoverProps = Readonly<{
   name: string
   label: string
   description: string
@@ -24,7 +31,7 @@ interface SkillPopoverProps {
   ) => void
   onNavigateToCards?: () => void
   skillLevel: number
-}
+}>
 
 export function SkillPopover({
   name,
@@ -40,76 +47,94 @@ export function SkillPopover({
   skillLevel,
 }: SkillPopoverProps) {
   const segments = parseRichDescription(description, cardNames)
+  const isCostLabel = label.startsWith('Cost ')
+  const costValue = isCostLabel ? label.slice('Cost '.length) : null
+  const displayLabel = isCostLabel ? null : formatBubbleLabel(label)
+  const separatorNode = isCostLabel ? null : <span className='text-slate-600'>&#9671;?</span>
+  const segmentKeyCounts = new Map<string, number>()
+
+  const labelNode =
+    isCostLabel && costValue ? (
+      <span
+        className='inline-flex items-center gap-1 text-amber-100/88'
+        style={{fontSize: '0.9em'}}
+      >
+        <img
+          alt=''
+          aria-hidden='true'
+          className='h-[1.1em] w-[1.1em] object-contain opacity-90'
+          draggable={false}
+          src={costIcon}
+        />
+        <span>{costValue}</span>
+      </span>
+    ) : (
+      <span className='font-normal tracking-[0.02em] text-slate-500' style={{fontSize: '0.72em'}}>
+        {displayLabel}
+      </span>
+    )
+
+  const titleNode = onNavigateToCards ? (
+    <button
+      className={`${DATABASE_ENTRY_TITLE_CLASS} flex items-center gap-2 transition-colors hover:text-amber-100`}
+      onClick={() => {
+        onClose()
+        onNavigateToCards()
+      }}
+      style={{fontSize: '1.3em'}}
+      title='View in Cards tab'
+      type='button'
+    >
+      {labelNode}
+      {separatorNode}
+      <span>{name} &rarr;</span>
+    </button>
+  ) : (
+    <p
+      className={`${DATABASE_ENTRY_TITLE_CLASS} flex items-center gap-2`}
+      style={{fontSize: '1.3em'}}
+    >
+      {labelNode}
+      {separatorNode}
+      <span>{name}</span>
+    </p>
+  )
 
   return (
     <div
-      className='w-max max-w-[320px] border border-slate-700/60 bg-slate-950/[.98] p-3 shadow-[0_12px_32px_rgba(0,0,0,0.8)]'
-      onClick={(e) => {
-        e.stopPropagation()
-      }}
-      onMouseDown={(e) => {
-        e.stopPropagation()
-      }}
+      className={`${DATABASE_POPOVER_SHELL_CLASS} p-3`}
       style={{
         fontSize: 'calc(var(--desc-font-scale, 1) * 10px)',
+        ...DATABASE_POPOVER_SURFACE_STYLE,
       }}
     >
-      <div className='mb-2 flex items-start justify-between gap-6'>
-        <div>
-          {onNavigateToCards ? (
-            <button
-              className={`${DATABASE_ENTRY_TITLE_CLASS} flex items-center gap-2 transition-colors hover:text-amber-100`}
-              onClick={() => {
-                onClose()
-                onNavigateToCards()
-              }}
-              style={{fontSize: '1.15em'}}
-              title='View in Cards tab'
-              type='button'
-            >
-              <span className='font-medium text-amber-500/80' style={{fontSize: '0.85em'}}>
-                {label}
-              </span>
-              <span>{name} ↗</span>
-            </button>
-          ) : (
-            <p
-              className={`${DATABASE_ENTRY_TITLE_CLASS} flex items-center gap-2`}
-              style={{fontSize: '1.15em'}}
-            >
-              <span className='font-medium text-amber-500/80' style={{fontSize: '0.85em'}}>
-                {label}
-              </span>
-              <span>{name}</span>
-            </p>
-          )}
-        </div>
+      <div className={DATABASE_POPOVER_HEADER_CLASS}>
+        <div>{titleNode}</div>
         <button
           aria-label='Close skill popover'
           className='-mt-0.5 -mr-1 text-slate-400 transition-colors hover:text-white'
-          onClick={() => {
-            onClose()
-          }}
+          onClick={onClose}
           type='button'
         >
           <FaXmark size={14} />
         </button>
       </div>
+      <div className={DATABASE_POPOVER_DIVIDER_CLASS} />
       <div>
-        <div className='leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
-          {segments.map((seg, i) => (
+        <div className='pl-1.5 leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
+          {segments.map((segment) => (
             <RichSegmentRenderer
-              key={i}
-              onMechanicClick={(tag, e) => {
-                onMechanicTokenClick(tag, e)
+              key={nextSegmentKey(segmentKeyCounts, segment)}
+              onMechanicClick={(tag, event) => {
+                onMechanicTokenClick(tag, event)
               }}
-              onSkillClick={(name, e) => {
-                onSkillTokenClick(name, e)
+              onSkillClick={(nextName, event) => {
+                onSkillTokenClick(nextName, event)
               }}
-              onScalingClick={(values, suffix, stat, e) => {
-                onScalingTokenClick(values, suffix, stat, e)
+              onScalingClick={(values, suffix, stat, event) => {
+                onScalingTokenClick(values, suffix, stat, event)
               }}
-              segment={seg}
+              segment={segment}
               skillLevel={skillLevel}
               stats={stats}
               variant='popover'
@@ -119,4 +144,48 @@ export function SkillPopover({
       </div>
     </div>
   )
+}
+
+function formatBubbleLabel(label: string): string {
+  return label
+    .replaceAll('-', ' ')
+    .toLowerCase()
+    .replaceAll(/\b([a-z])/g, (match) => match.toUpperCase())
+}
+
+function nextSegmentKey(
+  keyCounts: Map<string, number>,
+  segment: ReturnType<typeof parseRichDescription>[number],
+): string {
+  const baseKey = segmentKeyBase(segment)
+  const occurrence = keyCounts.get(baseKey) ?? 0
+  keyCounts.set(baseKey, occurrence + 1)
+  return `${baseKey}:${String(occurrence)}`
+}
+
+function segmentKeyBase(segment: ReturnType<typeof parseRichDescription>[number]): string {
+  switch (segment.type) {
+    case 'text':
+      return `text:${segment.value}`
+    case 'skill':
+      return `skill:${segment.name}`
+    case 'stat':
+      return `stat:${segment.name}`
+    case 'mechanic':
+      return `mechanic:${segment.name}`
+    case 'realm':
+      return `realm:${segment.name}`
+    case 'scaling':
+      return `scaling:${segment.stat ?? 'none'}:${segment.suffix}:${segment.values.join(',')}`
+    case 'newline':
+      return 'newline'
+    case 'paragraph':
+      return 'paragraph'
+    case 'indent':
+      return 'indent'
+    case 'line':
+      return `line:${segment.indented ? 'indented' : 'plain'}:${segment.segments.map(segmentKeyBase).join('|')}`
+    default:
+      return 'unknown'
+  }
 }

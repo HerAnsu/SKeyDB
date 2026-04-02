@@ -99,6 +99,8 @@ vi.mock('./AwakenerDetailSidebar', () => ({
     onDecreaseEnlighten,
     onIncreaseEnlighten,
     onLevelChange,
+    onSkillLevelChange,
+    skillLevel,
     stats,
   }: {
     enlightenOffset: number
@@ -106,6 +108,8 @@ vi.mock('./AwakenerDetailSidebar', () => ({
     onDecreaseEnlighten: () => void
     onIncreaseEnlighten: () => void
     onLevelChange: (level: number) => void
+    onSkillLevelChange: (level: number) => void
+    skillLevel: number
     stats: {CON: string; CritRate: string} | null
   }) => (
     <div>
@@ -116,6 +120,14 @@ vi.mock('./AwakenerDetailSidebar', () => ({
         type='button'
       >
         Set level 90
+      </button>
+      <button
+        onClick={() => {
+          onSkillLevelChange(6)
+        }}
+        type='button'
+      >
+        Set skill level 6
       </button>
       <button
         onClick={() => {
@@ -134,6 +146,7 @@ vi.mock('./AwakenerDetailSidebar', () => ({
         Decrease Psyche Surge
       </button>
       <div>Sidebar Level {level}</div>
+      <div>Sidebar Skill Level {skillLevel}</div>
       <div>Sidebar E3+{enlightenOffset}</div>
       <div>Sidebar CON {stats?.CON ?? 'none'}</div>
       <div>Sidebar Crit Rate {stats?.CritRate ?? 'none'}</div>
@@ -162,10 +175,6 @@ vi.mock('./AwakenerTeamsTab', () => ({
   AwakenerTeamsTab: () => <div>Teams Tab</div>,
 }))
 
-vi.mock('./SkillLevelSlider', () => ({
-  SkillLevelSlider: () => <div>Skill Slider</div>,
-}))
-
 function makeAwakener(id: number, name: string): Awakener {
   return {
     id,
@@ -190,14 +199,12 @@ describe('AwakenerDetailModal', () => {
     )
 
     fireEvent.click(screen.getByRole('button', {name: 'Cards'}))
-    expect(screen.getByRole('button', {name: 'Cards'}).className).toContain('border-amber-200/70')
+    expect(screen.getByRole('button', {name: 'Cards'}).className).toContain('text-amber-100')
 
     rerender(<AwakenerDetailModal awakener={second} key={second.id} onClose={onClose} />)
 
     await waitFor(() => {
-      expect(screen.getByRole('button', {name: 'Overview'}).className).toContain(
-        'border-amber-200/70',
-      )
+      expect(screen.getByRole('button', {name: 'Overview'}).className).toContain('text-amber-100')
     })
   })
 
@@ -209,6 +216,7 @@ describe('AwakenerDetailModal', () => {
 
     await waitFor(() => {
       expect(screen.getAllByText('Sidebar Level 60')).toHaveLength(2)
+      expect(screen.getAllByText('Sidebar Skill Level 1')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar CON 140')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(2)
@@ -251,5 +259,20 @@ describe('AwakenerDetailModal', () => {
     fireEvent.click(screen.getByRole('button', {name: 'Builds'}))
 
     expect(await screen.findByText('Builds Tab 1')).toBeInTheDocument()
+  })
+
+  it('keeps skill level state in the sidebar block', async () => {
+    const onClose = vi.fn()
+    const awakener = makeAwakener(1, 'thais')
+
+    render(<AwakenerDetailModal awakener={awakener} onClose={onClose} />)
+
+    await waitFor(() => {
+      expect(screen.getAllByText('Sidebar Skill Level 1')).toHaveLength(2)
+    })
+
+    fireEvent.click(screen.getAllByRole('button', {name: 'Set skill level 6'})[0])
+
+    expect(screen.getAllByText('Sidebar Skill Level 6')).toHaveLength(2)
   })
 })

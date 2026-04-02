@@ -33,26 +33,28 @@ export function scaledFontStyle(basePx: number): CSSProperties {
 export const getStarSize = (scale: string) => {
   switch (scale) {
     case 'small':
-      return {width: '20px', height: '20px', space: '-space-x-2.5', top: '5px'}
+      return {width: '24px', height: '24px', space: '-space-x-2.5'}
     case 'large':
-      return {width: '28px', height: '28px', space: '-space-x-3.5', top: '7px'}
+      return {width: '32px', height: '32px', space: '-space-x-4'}
     case 'medium':
     default:
-      return {width: '24px', height: '24px', space: '-space-x-3', top: '6px'}
+      return {width: '28px', height: '28px', space: '-space-x-3.5'}
   }
 }
 
 export function renderTextWithBreaks(text: string): ReactNode {
   const parts = text.split('\n')
+  let keyCounter = 0
+  const nextKey = (prefix: string) => `${prefix}-${String(keyCounter++)}`
   return createElement(
     Fragment,
     null,
     ...parts.flatMap((part, i) =>
       i === 0
-        ? [createElement('span', {key: String(i)}, part)]
+        ? [createElement('span', {key: nextKey('text')}, part)]
         : [
-            createElement('br', {key: `br${String(i)}`}),
-            createElement('span', {key: String(i)}, part),
+            createElement('br', {key: nextKey('br')}),
+            createElement('span', {key: nextKey('text')}, part),
           ],
     ),
   )

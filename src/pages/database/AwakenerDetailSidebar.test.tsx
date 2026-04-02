@@ -22,6 +22,10 @@ vi.mock('./AwakenerLevelSlider', () => ({
   AwakenerLevelSlider: ({level}: {level: number}) => <div>Level slider {level}</div>,
 }))
 
+vi.mock('./SkillLevelSlider', () => ({
+  SkillLevelSlider: ({level}: {level: number}) => <div>Skill slider {level}</div>,
+}))
+
 const TEST_AWAKENER: Awakener = {
   id: 1,
   name: 'thais',
@@ -61,6 +65,8 @@ describe('AwakenerDetailSidebar', () => {
         onDecreaseEnlighten={vi.fn()}
         onIncreaseEnlighten={vi.fn()}
         onLevelChange={vi.fn()}
+        onSkillLevelChange={vi.fn()}
+        skillLevel={4}
         stats={TEST_STATS}
         substatScaling={TEST_SUBSTAT_SCALING}
       />,
@@ -69,6 +75,8 @@ describe('AwakenerDetailSidebar', () => {
     expect(screen.getByRole('heading', {name: 'Attributes'})).toBeInTheDocument()
     expect(screen.queryByText('(Lv. 60)')).not.toBeInTheDocument()
     expect(screen.getByText('E3+0')).toBeInTheDocument()
+    expect(screen.getByText('Level slider 60')).toBeInTheDocument()
+    expect(screen.getByText('Skill slider 4')).toBeInTheDocument()
 
     expect(screen.getByText('140')).toHaveClass('text-slate-200')
     expect(screen.getByText('14.6%')).toHaveClass('text-slate-200')
