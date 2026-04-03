@@ -9,9 +9,9 @@ export const FONT_SCALE_VALUES: Record<FontScale, number> = {
 }
 
 export const FONT_SCALE_OPTIONS: {id: FontScale; label: string}[] = [
-  {id: 'small', label: 'S'},
-  {id: 'medium', label: 'M'},
-  {id: 'large', label: 'L'},
+  {id: 'small', label: 'Small'},
+  {id: 'medium', label: 'Medium'},
+  {id: 'large', label: 'Large'},
 ]
 
 const STORAGE_KEY = 'modal-font-scale'

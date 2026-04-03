@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
-import {FaXmark} from 'react-icons/fa6'
+import {FaBars, FaTag, FaXmark} from 'react-icons/fa6'
 
 import {getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import {
@@ -148,6 +148,28 @@ export function AwakenerDetailModal({
   const [psycheSurgeOffset, setPsycheSurgeOffset] = useState(0)
   const [skillLevel, setSkillLevel] = useState(1)
   const [fontScale, setFontScale] = useState<FontScale>(readFontScale)
+  const [isScalingMenuOpen, setIsScalingMenuOpen] = useState(false)
+  const [isTagsMenuOpen, setIsTagsMenuOpen] = useState(false)
+  const scalingMenuRef = useRef<HTMLDivElement>(null)
+  const tagsMenuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (scalingMenuRef.current && !scalingMenuRef.current.contains(event.target as Node)) {
+        setIsScalingMenuOpen(false)
+      }
+      if (tagsMenuRef.current && !tagsMenuRef.current.contains(event.target as Node)) {
+        setIsTagsMenuOpen(false)
+      }
+    }
+    if (isScalingMenuOpen || isTagsMenuOpen) {
+      globalThis.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      globalThis.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isScalingMenuOpen, isTagsMenuOpen])
+
   const backgroundVariant = useMemo(() => getModalBackgroundVariantIndex(awakener), [awakener])
   const handleFontScaleChange = useCallback((fs: FontScale) => {
     setFontScale(fs)
@@ -273,7 +295,7 @@ export function AwakenerDetailModal({
   )
 
   return (
-    <div className='fixed inset-0 z-[900] flex items-center justify-center bg-slate-950/65 p-4 md:p-6 lg:p-10'>
+    <div className='fixed inset-0 z-900 flex items-center justify-center bg-slate-950/65 p-4 md:p-6 lg:p-10'>
       <button
         aria-label='Close detail overlay'
         className='absolute inset-0'
@@ -282,19 +304,103 @@ export function AwakenerDetailModal({
       />
       <dialog
         aria-label={`${displayName} details`}
-        className='relative z-[901] flex h-full max-h-[90vh] w-full max-w-6xl flex-col overflow-hidden border bg-slate-950/[.97]'
+        className='relative z-901 flex h-full max-h-[90vh] w-full max-w-6xl flex-col overflow-hidden border bg-slate-950/97'
         open
         ref={panelRef}
         style={modalChromeStyle}
       >
-        <button
-          aria-label='Close detail'
-          className='absolute top-3 right-3 z-10 text-slate-400 transition-colors hover:text-amber-100'
-          onClick={onClose}
-          type='button'
-        >
-          <FaXmark className='h-4 w-4' />
-        </button>
+        <div className='absolute top-3 right-3 z-20 flex items-center gap-4'>
+          {awakener.tags.length > 0 && (
+            <div className='relative flex items-center' ref={tagsMenuRef}>
+              <button
+                aria-label='Tags menu'
+                className={`flex h-8 items-center gap-2.5 transition-all ${
+                  isTagsMenuOpen ? 'text-amber-100' : 'text-slate-400 hover:text-slate-200'
+                }`}
+                onClick={() => {
+                  setIsTagsMenuOpen((prev) => !prev)
+                }}
+                type='button'
+              >
+                <span className='hidden text-[10px] font-bold tracking-widest uppercase lg:block'>
+                  Tags
+                </span>
+                <FaTag className='h-4 w-4 shrink-0' />
+              </button>
+
+              {isTagsMenuOpen && (
+                <div className='absolute top-full right-0 mt-2 w-48 origin-top-right border border-white/10 bg-slate-950/90 p-1 shadow-2xl backdrop-blur-md'>
+                  <div className='flex flex-col gap-0.5'>
+                    {awakener.tags.map((tag) => (
+                      <button
+                        className='w-full px-3 py-2 text-center text-[11px] font-medium text-slate-400 uppercase transition-colors hover:bg-white/5 hover:text-amber-100'
+                        key={tag}
+                        onClick={() => {
+                          // Placeholder for future sorting/filtering
+                          setIsTagsMenuOpen(false)
+                        }}
+                        type='button'
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className='relative flex items-center' ref={scalingMenuRef}>
+            <button
+              aria-label='Interface settings'
+              className={`flex h-8 items-center gap-2.5 transition-all ${
+                isScalingMenuOpen ? 'text-amber-100' : 'text-slate-400 hover:text-slate-200'
+              }`}
+              onClick={() => {
+                setIsScalingMenuOpen((prev) => !prev)
+              }}
+              type='button'
+            >
+              <span className='hidden text-[10px] font-bold tracking-widest uppercase lg:block'>
+                Interface
+              </span>
+              <FaBars className='h-4 w-4 shrink-0' />
+            </button>
+
+            {isScalingMenuOpen && (
+              <div className='absolute top-full right-0 mt-2 w-32 origin-top-right border border-white/10 bg-slate-950/90 p-1 shadow-2xl backdrop-blur-md'>
+                <div className='flex flex-col gap-0.5'>
+                  {FONT_SCALE_OPTIONS.map((fs) => (
+                    <button
+                      className={`flex w-full items-center justify-center px-3 py-2 text-center text-[11px] transition-colors ${
+                        fontScale === fs.id
+                          ? 'bg-amber-500/10 text-amber-100'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
+                      }`}
+                      key={fs.id}
+                      onClick={() => {
+                        handleFontScaleChange(fs.id)
+                        setIsScalingMenuOpen(false)
+                      }}
+                      type='button'
+                    >
+                      <span className='font-medium capitalize'>{fs.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <button
+            aria-label='Close detail'
+            className='flex h-8 w-8 items-center justify-center text-slate-400 transition-colors hover:text-amber-100'
+            onClick={onClose}
+            type='button'
+          >
+            <FaXmark className='h-4 w-4' />
+          </button>
+        </div>
 
         <div className='flex min-h-0 flex-1'>
           <aside className='database-scrollbar hidden w-56 shrink-0 overflow-y-auto py-4 pr-2 pl-4 md:block lg:w-64'>
@@ -323,9 +429,10 @@ export function AwakenerDetailModal({
                   </p>
                 </div>
               ) : null}
-              <div className='flex flex-col gap-2 pr-6 md:relative'>
-                <div className='flex min-w-0 items-start gap-3 self-start'>
-                  <div className='h-11 w-11 shrink-0 overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900 md:hidden'>
+
+              <div className='flex flex-col lg:flex-row lg:items-end lg:justify-between'>
+                <div className='flex min-w-0 flex-1 items-start gap-3'>
+                  <div className='h-11 w-11 shrink-0 overflow-hidden border border-slate-500/40 bg-linear-to-b from-slate-800 to-slate-900 lg:hidden'>
                     {portrait ? (
                       <img
                         alt=''
@@ -337,59 +444,47 @@ export function AwakenerDetailModal({
                       <div className='h-full w-full bg-[radial-gradient(circle_at_50%_28%,rgba(125,165,215,0.18),rgba(6,12,24,0.92)_70%)]' />
                     )}
                   </div>
-                  {realmIcon ? (
-                    <img
-                      alt=''
-                      className='hidden h-12 w-12 shrink-0 md:block'
-                      draggable={false}
-                      src={realmIcon}
-                    />
-                  ) : null}
-                  <div className='min-w-0 self-start pt-0'>
-                    <h3 className='ui-title text-[1.75rem] leading-none text-amber-100 md:text-[2.1rem]'>
-                      {displayName}
-                    </h3>
-                    <p className='mt-1.5 text-[12px] tracking-[0.07em] text-slate-300 md:pr-[29.5rem] md:text-[13px]'>
+
+                  <div className='min-w-0 flex-1 pb-2 lg:pb-2'>
+                    <div className='flex items-center gap-2'>
+                      <h3 className='ui-title text-[1.85rem] leading-none text-amber-100 md:text-[2.5rem] lg:text-[2.8rem]'>
+                        {displayName}
+                      </h3>
+                    </div>
+                    <p className='mt-1 flex items-center text-[11px] tracking-[0.07em] text-slate-300 md:text-[14px] lg:mt-1.5 lg:text-[13px]'>
+                      {realmIcon ? (
+                        <img
+                          alt=''
+                          className='mr-2 h-5 w-5 shrink-0 md:mr-1.5 md:h-6 md:w-6 lg:h-7 lg:w-7'
+                          draggable={false}
+                          src={realmIcon}
+                        />
+                      ) : null}
                       <span className='font-semibold uppercase' style={{color: realmTint}}>
                         {realmLabel}
                       </span>
-                      <span className='mx-2 text-slate-600'>·</span>
+                      <span className='mx-1.5 text-slate-600 md:mx-2'>·</span>
                       <span className='font-medium text-slate-200/90 uppercase'>
                         {awakener.type
                           ? awakener.type.charAt(0) + awakener.type.slice(1).toLowerCase()
                           : '—'}
                       </span>
-                      <span className='mx-2 text-slate-600'>·</span>
+                      <span className='mx-1.5 text-slate-600 md:mx-2'>·</span>
                       <span className='font-medium text-slate-200/80 uppercase'>
                         {awakener.faction}
                       </span>
                     </p>
                   </div>
                 </div>
-                {awakener.tags.length > 0 ? (
-                  <div className='min-w-0 md:absolute md:right-6 md:bottom-0 md:w-[28rem]'>
-                    <div className='database-tag-scroll flex flex-wrap content-start justify-center gap-1.5 overflow-x-hidden overflow-y-auto pr-1 md:h-[3.25rem] md:max-h-[3.25rem] md:justify-center'>
-                      {awakener.tags.map((tag) => (
-                        <span
-                          className='border border-slate-600/35 bg-slate-800/42 px-1.5 py-0.5 text-[10px] tracking-[0.04em] text-slate-300/82 uppercase'
-                          key={tag}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-              <div className='mt-1'>
-                <div className='flex items-center justify-between'>
-                  <nav className='flex min-w-0 flex-wrap gap-0.5'>
+
+                <div className='relative mt-2 flex w-full justify-center lg:mt-0 lg:-mb-px lg:w-auto lg:justify-end'>
+                  <nav className='flex w-full min-w-0 flex-row justify-center gap-0.5 lg:w-auto lg:flex-none'>
                     {TABS.map((tab) => (
                       <button
-                        className={`px-3.5 py-2 text-[11px] tracking-wide uppercase transition-colors ${
+                        className={`flex-1 border-b-2 px-2 py-2 text-center text-[10px] font-semibold tracking-wide uppercase transition-colors sm:px-3.5 sm:text-[11px] lg:px-6 lg:py-2.5 lg:text-[13px] ${
                           activeTab === tab.id
-                            ? 'border-b-2 text-amber-100'
-                            : 'border-b-2 border-transparent text-slate-400 hover:text-slate-200'
+                            ? 'text-amber-100'
+                            : 'border-transparent text-slate-400 hover:text-slate-200'
                         }`}
                         key={tab.id}
                         onClick={() => {
@@ -404,48 +499,11 @@ export function AwakenerDetailModal({
                       </button>
                     ))}
                   </nav>
-                  <div className='hidden items-center gap-0.5 pr-1 md:flex'>
-                    {FONT_SCALE_OPTIONS.map((fs) => (
-                      <button
-                        className={`px-1.5 py-0.5 text-[10px] transition-colors ${
-                          fontScale === fs.id
-                            ? 'bg-slate-700/50 text-amber-100'
-                            : 'text-slate-500 hover:text-slate-300'
-                        }`}
-                        key={fs.id}
-                        onClick={() => {
-                          handleFontScaleChange(fs.id)
-                        }}
-                        title={`Font size: ${fs.id}`}
-                        type='button'
-                      >
-                        {fs.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div className='mt-1 flex items-center gap-0.5 pr-1 md:hidden'>
-                  {FONT_SCALE_OPTIONS.map((fs) => (
-                    <button
-                      className={`px-1.5 py-0.5 text-[10px] transition-colors ${
-                        fontScale === fs.id
-                          ? 'bg-slate-700/50 text-amber-100'
-                          : 'text-slate-500 hover:text-slate-300'
-                      }`}
-                      key={fs.id}
-                      onClick={() => {
-                        handleFontScaleChange(fs.id)
-                      }}
-                      title={`Font size: ${fs.id}`}
-                      type='button'
-                    >
-                      {fs.label}
-                    </button>
-                  ))}
                 </div>
               </div>
+
               <div
-                className='mt-0 h-px w-full'
+                className='mt-1 h-px w-full lg:mt-0'
                 style={{
                   background:
                     'linear-gradient(90deg, rgba(100, 116, 139, 0.18) 0%, rgba(100, 116, 139, 0.1) 52%, transparent 100%)',
@@ -470,7 +528,7 @@ export function AwakenerDetailModal({
                 />
               </div>
 
-              <div className='database-tab-content w-full'>
+              <div className='database-tab-content w-full transition-all duration-200 ease-in-out'>
                 {activeTab === 'overview' && (
                   <AwakenerDetailOverview
                     awakener={awakener}
