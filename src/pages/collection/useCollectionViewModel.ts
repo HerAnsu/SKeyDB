@@ -56,6 +56,19 @@ import {
 type AwakenerFilter = 'ALL' | 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA'
 type PosseFilter = 'ALL' | 'FADED_LEGACY' | 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA'
 type WheelRarityFilter = 'ALL' | 'SSR' | 'R' | 'SR'
+const INITIAL_QUERY_BY_TAB: Record<CollectionTab, string> = {
+  awakeners: '',
+  wheels: '',
+  posses: '',
+}
+const INITIAL_REMEMBERED_LEVELS: Record<
+  'awakeners' | 'wheels' | 'posses',
+  RememberedOwnershipLevels
+> = {
+  awakeners: {},
+  wheels: {},
+  posses: {},
+}
 const OWNERSHIP_AUTOSAVE_DEBOUNCE_MS = 220
 const COLLECTION_AWAKENER_SORT_KEY = 'skeydb.collection.awakenerSort.v1'
 
@@ -162,11 +175,7 @@ export function useCollectionViewModel() {
     loadCollectionOwnership(storage, ownershipCatalog),
   )
   const [tab, setTab] = useState<CollectionTab>('awakeners')
-  const [queryByTab, setQueryByTab] = useState<Record<CollectionTab, string>>({
-    awakeners: '',
-    wheels: '',
-    posses: '',
-  })
+  const [queryByTab, setQueryByTab] = useState(INITIAL_QUERY_BY_TAB)
   const [awakenerFilter, setAwakenerFilter] = useState<AwakenerFilter>('ALL')
   const [wheelRarityFilter, setWheelRarityFilter] = useState<WheelRarityFilter>('ALL')
   const [wheelMainstatFilter, setWheelMainstatFilter] = useState<WheelMainstatFilter>('ALL')
@@ -181,13 +190,7 @@ export function useCollectionViewModel() {
   const [awakenerSortGroupByRealm, setAwakenerSortGroupByRealm] = useState(
     persistedAwakenerSortConfig.groupByRealm,
   )
-  const rememberedLevelsRef = useRef<
-    Record<'awakeners' | 'wheels' | 'posses', RememberedOwnershipLevels>
-  >({
-    awakeners: {},
-    wheels: {},
-    posses: {},
-  })
+  const rememberedLevelsRef = useRef(INITIAL_REMEMBERED_LEVELS)
 
   const awakeners = useMemo(
     () =>

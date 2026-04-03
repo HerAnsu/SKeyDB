@@ -43,6 +43,7 @@ interface EventInput {
   featured?: string
   customArt?: string
   pricing?: string
+  rerun?: boolean
   artAlign?: string
 }
 
@@ -128,6 +129,7 @@ function loadEvent(raw: EventInput): EventEntry {
     pinned: raw.pinned,
     customArt: resolveCustomArt(raw.customArt),
     pricing: raw.pricing,
+    rerun: raw.rerun,
     artAlign: raw.artAlign,
   }
   if (raw.featured) {

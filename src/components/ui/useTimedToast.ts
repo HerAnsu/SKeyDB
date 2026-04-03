@@ -12,7 +12,7 @@ interface TimedToastEntry {
 export function useTimedToast({defaultDurationMs = 3200}: UseTimedToastOptions = {}) {
   const [toastEntries, setToastEntries] = useState<TimedToastEntry[]>([])
   const nextToastIdRef = useRef(0)
-  const timeoutRefs = useRef<Map<number, number>>(new Map())
+  const timeoutRefs = useRef(new Map<number, number>())
 
   const clearToast = useCallback(() => {
     for (const timeoutId of timeoutRefs.current.values()) {
