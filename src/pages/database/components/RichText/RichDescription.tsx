@@ -1,4 +1,4 @@
-﻿import {useCallback, useEffect, useId, useState} from 'react'
+import {useCallback, useEffect, useId, useState} from 'react'
 
 import {createPortal} from 'react-dom'
 
@@ -16,7 +16,7 @@ import {
   type SkillTrailEntry,
   type TagTrailEntry,
   type TrailEntry,
-} from './popover-trail'
+} from '../../utils/popover-trail'
 import {PopoverTrailPanel} from './PopoverTrailPanel'
 import {RichSegmentRenderer} from './RichSegmentRenderer'
 import {ScalingPopover} from './ScalingPopover'
@@ -196,91 +196,89 @@ export function RichDescription({
     stats,
   )
 
-  let trailPanel = null
-  if (trail.length > 0 && trailAnchorRect && trailAnchorElement) {
-    trailPanel = createPortal(
-      <PopoverTrailPanel
-        anchorElement={trailAnchorElement}
-        anchorRect={trailAnchorRect}
-        entryRects={trail.map((entry) => entry.rect)}
-        itemCount={trail.length}
-        onCloseTop={closeTrailTop}
-      >
-        {trail.map((entry, index) => {
-          if (entry.kind === 'skill') {
-            return (
-              <SkillPopover
-                cardNames={rouseAwareCards}
-                description={entry.description}
-                key={entry.key}
-                label={entry.label}
-                name={entry.name}
-                onClose={() => {
-                  closeTrailFrom(index)
-                }}
-                onMechanicTokenClick={(tag, event) => {
-                  openNestedTag(tag, index, event)
-                }}
-                onNavigateToCards={onNavigateToCards ? handleNavigateToCards : undefined}
-                onScalingTokenClick={(values, nextSuffix, nextStat, event) => {
-                  openNestedScaling(values, nextSuffix, nextStat, index, event)
-                }}
-                onSkillTokenClick={(nextName, event) => {
-                  openNestedSkill(nextName, index, event)
-                }}
-                skillLevel={skillLevel}
-                stats={stats}
-              />
-            )
-          }
-
-          if (entry.kind === 'tag') {
-            return (
-              <TagPopover
-                cardNames={rouseAwareCards}
-                key={entry.key}
-                onClose={() => {
-                  closeTrailFrom(index)
-                }}
-                onMechanicTokenClick={(tag, event) => {
-                  openNestedTag(tag, index, event)
-                }}
-                onScalingTokenClick={(values, nextSuffix, nextStat, event) => {
-                  openNestedScaling(values, nextSuffix, nextStat, index, event)
-                }}
-                onSkillTokenClick={(nextName, event) => {
-                  openNestedSkill(nextName, index, event)
-                }}
-                skillLevel={skillLevel}
-                stats={stats}
-                tag={entry.tag}
-              />
-            )
-          }
-
-          return (
-            <ScalingPopover
-              currentLevel={index === 0 ? skillLevel : 0}
-              key={entry.key}
-              onClose={() => {
-                closeTrailFrom(index)
-              }}
-              stat={entry.stat}
-              stats={stats}
-              suffix={entry.suffix}
-              values={entry.values}
-            />
-          )
-        })}
-      </PopoverTrailPanel>,
-      document.body,
-    )
-  }
-
   return (
     <>
       {renderedSegments}
-      {trailPanel}
+      {trail.length > 0 &&
+        trailAnchorRect &&
+        trailAnchorElement &&
+        createPortal(
+          <PopoverTrailPanel
+            anchorElement={trailAnchorElement}
+            anchorRect={trailAnchorRect}
+            entryRects={trail.map((entry) => entry.rect)}
+            itemCount={trail.length}
+            onCloseTop={closeTrailTop}
+          >
+            {trail.map((entry, index) => {
+              if (entry.kind === 'skill') {
+                return (
+                  <SkillPopover
+                    cardNames={rouseAwareCards}
+                    description={entry.description}
+                    key={entry.key}
+                    label={entry.label}
+                    name={entry.name}
+                    onClose={() => {
+                      closeTrailFrom(index)
+                    }}
+                    onMechanicTokenClick={(tag, event) => {
+                      openNestedTag(tag, index, event)
+                    }}
+                    onNavigateToCards={onNavigateToCards ? handleNavigateToCards : undefined}
+                    onScalingTokenClick={(values, nextSuffix, nextStat, event) => {
+                      openNestedScaling(values, nextSuffix, nextStat, index, event)
+                    }}
+                    onSkillTokenClick={(nextName, event) => {
+                      openNestedSkill(nextName, index, event)
+                    }}
+                    skillLevel={skillLevel}
+                    stats={stats}
+                  />
+                )
+              }
+
+              if (entry.kind === 'tag') {
+                return (
+                  <TagPopover
+                    cardNames={rouseAwareCards}
+                    key={entry.key}
+                    onClose={() => {
+                      closeTrailFrom(index)
+                    }}
+                    onMechanicTokenClick={(tag, event) => {
+                      openNestedTag(tag, index, event)
+                    }}
+                    onScalingTokenClick={(values, nextSuffix, nextStat, event) => {
+                      openNestedScaling(values, nextSuffix, nextStat, index, event)
+                    }}
+                    onSkillTokenClick={(nextName, event) => {
+                      openNestedSkill(nextName, index, event)
+                    }}
+                    skillLevel={skillLevel}
+                    stats={stats}
+                    tag={entry.tag}
+                  />
+                )
+              }
+
+              return (
+                <ScalingPopover
+                  currentLevel={index === 0 ? skillLevel : 0}
+                  key={entry.key}
+                  onClose={() => {
+                    closeTrailFrom(index)
+                  }}
+                  stat={entry.stat}
+                  stats={stats}
+                  suffix={entry.suffix}
+                  values={entry.values}
+                />
+              )
+            })}
+          </PopoverTrailPanel>,
+          document.body,
+        )}
     </>
   )
 }

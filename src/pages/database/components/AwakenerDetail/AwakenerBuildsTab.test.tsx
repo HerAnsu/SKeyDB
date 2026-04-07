@@ -7,7 +7,7 @@ const {useAwakenerBuildEntries} = vi.hoisted(() => ({
   useAwakenerBuildEntries: vi.fn(),
 }))
 
-vi.mock('../../domain/useAwakenerBuildEntries', () => ({
+vi.mock('../../../../domain/useAwakenerBuildEntries', () => ({
   useAwakenerBuildEntries,
 }))
 

@@ -6,10 +6,10 @@ import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
 import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
 import {getPortraitRelicByAwakenerIngameId} from '@/domain/relics'
 
+import {scaledFontStyle} from '../../utils/font-scale'
+import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from '../../utils/text-styles'
+import {RichDescription} from '../RichText/RichDescription'
 import {DetailSection} from './DetailSection'
-import {scaledFontStyle} from './font-scale'
-import {RichDescription} from './RichDescription'
-import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
 type AwakenerDetailCardsProps = Readonly<{
   awakener: Awakener

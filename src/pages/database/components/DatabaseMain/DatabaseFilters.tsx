@@ -11,7 +11,7 @@ import {
   type RarityFilterId,
   type RealmFilterId,
   type TypeFilterId,
-} from './useDatabaseViewModel'
+} from '../../hooks/useDatabaseViewModel'
 
 interface DatabaseFiltersProps {
   query: string

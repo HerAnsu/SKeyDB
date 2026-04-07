@@ -1,4 +1,4 @@
-﻿import type {AwakenerFullStats} from '@/domain/awakeners-full'
+import type {AwakenerFullStats} from '@/domain/awakeners-full'
 import type {
   MechanicSegment,
   RichSegment,
@@ -17,7 +17,7 @@ import {
   DATABASE_STAT_TOKEN_CLASS,
   DATABASE_UNIMPLEMENTED_TOKEN_CLASS,
   getDatabaseRealmTint,
-} from './text-styles'
+} from '../../utils/text-styles'
 
 type RichSegmentRendererProps = Readonly<{
   segment: RichSegment

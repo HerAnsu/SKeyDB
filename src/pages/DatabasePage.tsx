@@ -12,10 +12,10 @@ import {
 } from '@/domain/database-paths'
 
 import {useGlobalCollectionSearchCapture} from './collection/useGlobalCollectionSearchCapture'
-import {AwakenerDetailModal} from './database/AwakenerDetailModal'
-import {DatabaseFilters} from './database/DatabaseFilters'
-import {DatabaseGrid} from './database/DatabaseGrid'
-import {useDatabaseViewModel} from './database/useDatabaseViewModel'
+import {AwakenerDetailModal} from './database/components/AwakenerDetail/AwakenerDetailModal'
+import {DatabaseFilters} from './database/components/DatabaseMain/DatabaseFilters'
+import {DatabaseGrid} from './database/components/DatabaseMain/DatabaseGrid'
+import {useDatabaseViewModel} from './database/hooks/useDatabaseViewModel'
 
 export function DatabasePage() {
   const vm = useDatabaseViewModel()

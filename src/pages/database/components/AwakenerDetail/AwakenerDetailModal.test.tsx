@@ -5,7 +5,7 @@ import type {Awakener} from '@/domain/awakeners'
 
 import {AwakenerDetailModal} from './AwakenerDetailModal'
 
-vi.mock('../../domain/awakeners-full', () => ({
+vi.mock('../../../../domain/awakeners-full', () => ({
   loadAwakenersFull: async () => [
     {
       id: 1,
@@ -74,19 +74,19 @@ vi.mock('../../domain/awakeners-full', () => ({
     data.find((entry) => entry.id === id) ?? null,
 }))
 
-vi.mock('../../domain/awakener-assets', () => ({
+vi.mock('../../../../domain/awakener-assets', () => ({
   getAwakenerPortraitAsset: () => null,
 }))
 
-vi.mock('../../domain/rich-text', () => ({
+vi.mock('../../../../domain/rich-text', () => ({
   getCardNamesFromFull: () => new Set<string>(),
 }))
 
-vi.mock('../../domain/name-format', () => ({
+vi.mock('../../../../domain/name-format', () => ({
   formatAwakenerNameForUi: (name: string) => name,
 }))
 
-vi.mock('../../domain/factions', () => ({
+vi.mock('../../../../domain/factions', () => ({
   getRealmIcon: () => null,
   getRealmLabel: (realm: string) => realm,
   getRealmTint: () => '#ffffff',

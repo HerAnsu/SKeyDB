@@ -1,4 +1,4 @@
-﻿import {FaXmark} from 'react-icons/fa6'
+import {FaXmark} from 'react-icons/fa6'
 
 import type {AwakenerFullStats} from '@/domain/awakeners-full'
 import {computeStatValue, fmtNum} from '@/domain/scaling'
@@ -9,7 +9,7 @@ import {
   DATABASE_POPOVER_HEADER_CLASS,
   DATABASE_POPOVER_SHELL_CLASS,
   DATABASE_POPOVER_SURFACE_STYLE,
-} from './text-styles'
+} from '../../utils/text-styles'
 
 type ScalingPopoverProps = Readonly<{
   values: number[]

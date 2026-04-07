@@ -13,9 +13,9 @@ import {useAwakenerBuildEntries} from '@/domain/useAwakenerBuildEntries'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelById} from '@/domain/wheels'
 
-import {DatabaseTab} from './DatabaseTabSection'
-import {scaledFontStyle} from './font-scale'
-import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
+import {scaledFontStyle} from '../../utils/font-scale'
+import {DATABASE_SECTION_TITLE_CLASS} from '../../utils/text-styles'
+import {DatabaseTab} from '../DatabaseMain/DatabaseTabSection'
 
 interface AwakenerBuildsTabProps {
   awakenerId: number

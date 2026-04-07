@@ -1,4 +1,4 @@
-﻿import React, {
+import React, {
   isValidElement,
   useCallback,
   useEffect,
@@ -8,7 +8,7 @@
   type ReactNode,
 } from 'react'
 
-import {decideTrailDirection, isTrailMobileLayout} from './popover-trail'
+import {decideTrailDirection, isTrailMobileLayout} from '../../utils/popover-trail'
 
 type PopoverTrailPanelProps = Readonly<{
   anchorRect: DOMRect

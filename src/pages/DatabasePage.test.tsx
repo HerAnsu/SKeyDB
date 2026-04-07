@@ -57,7 +57,7 @@ vi.mock('../domain/mainstats', () => ({
   getMainstatIcon: () => null,
 }))
 
-vi.mock('./database/AwakenerDetailModal', () => ({
+vi.mock('./database/components/AwakenerDetail/AwakenerDetailModal', () => ({
   AwakenerDetailModal: ({
     awakener,
     onClose,

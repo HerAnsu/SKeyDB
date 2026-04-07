@@ -5,19 +5,19 @@ import type {Awakener} from '@/domain/awakeners'
 
 import {AwakenerGridCard} from './AwakenerGridCard'
 
-vi.mock('../../domain/awakener-assets', () => ({
+vi.mock('../../../../domain/awakener-assets', () => ({
   getAwakenerCardAsset: () => null,
 }))
 
-vi.mock('../../domain/factions', () => ({
+vi.mock('../../../../domain/factions', () => ({
   getRealmTint: () => '#123456',
 }))
 
-vi.mock('../../domain/mainstats', () => ({
+vi.mock('../../../../domain/mainstats', () => ({
   getMainstatIcon: (key: string) => `icon-${key}`,
 }))
 
-vi.mock('../../domain/name-format', () => ({
+vi.mock('../../../../domain/name-format', () => ({
   formatAwakenerNameForUi: (name: string) => `UI ${name}`,
 }))
 

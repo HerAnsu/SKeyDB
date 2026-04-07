@@ -5,8 +5,8 @@ import type {AwakenerFullStats, AwakenerSubstatScaling} from '@/domain/awakeners
 import {getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 
+import {AwakenerLevelSlider} from '../DatabaseMain/AwakenerLevelSlider'
 import {AwakenerEnlightenStepper} from './AwakenerEnlightenStepper'
-import {AwakenerLevelSlider} from './AwakenerLevelSlider'
 import {SkillLevelSlider} from './SkillLevelSlider'
 
 const STAT_DISPLAY_ORDER = [

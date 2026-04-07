@@ -1,7 +1,7 @@
 import {Children, useState, type ReactNode} from 'react'
 
-import {scaledFontStyle} from './font-scale'
-import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
+import {scaledFontStyle} from '../../utils/font-scale'
+import {DATABASE_SECTION_TITLE_CLASS} from '../../utils/text-styles'
 
 interface DatabaseTabProps {
   children: ReactNode

@@ -1,7 +1,7 @@
 import type {ReactNode} from 'react'
 
-import {scaledFontStyle} from './font-scale'
-import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from './text-styles'
+import {scaledFontStyle} from '../../utils/font-scale'
+import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from '../../utils/text-styles'
 
 export interface DetailSectionItem {
   key: string

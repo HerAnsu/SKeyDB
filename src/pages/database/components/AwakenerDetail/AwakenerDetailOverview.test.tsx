@@ -6,11 +6,11 @@ import type {AwakenerFull} from '@/domain/awakeners-full'
 
 import {AwakenerDetailOverview} from './AwakenerDetailOverview'
 
-vi.mock('../../domain/relics', () => ({
+vi.mock('../../../../domain/relics', () => ({
   getPortraitRelicByAwakenerIngameId: () => null,
 }))
 
-vi.mock('../../domain/relic-assets', () => ({
+vi.mock('../../../../domain/relic-assets', () => ({
   getRelicPortraitAssetByAssetId: () => null,
 }))
 

@@ -14,18 +14,20 @@ import {getRealmIcon, getRealmLabel, getRealmTint} from '@/domain/factions'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getCardNamesFromFull} from '@/domain/rich-text'
 
-import {AwakenerBuildsTab} from './AwakenerBuildsTab'
-import {AwakenerDetailCards} from './AwakenerDetailCards'
-import {AwakenerDetailOverview} from './AwakenerDetailOverview'
-import {AwakenerDetailSidebar} from './AwakenerDetailSidebar'
-import {AwakenerTeamsTab} from './AwakenerTeamsTab'
+import {MODAL_GRADIENT_VARIANTS, TABS, type TabId} from '../../constants'
 import {
   FONT_SCALE_OPTIONS,
   FONT_SCALE_VALUES,
   readFontScale,
   writeFontScale,
   type FontScale,
-} from './font-scale'
+} from '../../utils/font-scale'
+import {buildModalBackground, getModalBackgroundVariantIndex} from '../../utils/modal-background'
+import {AwakenerBuildsTab} from './AwakenerBuildsTab'
+import {AwakenerDetailCards} from './AwakenerDetailCards'
+import {AwakenerDetailOverview} from './AwakenerDetailOverview'
+import {AwakenerDetailSidebar} from './AwakenerDetailSidebar'
+import {AwakenerTeamsTab} from './AwakenerTeamsTab'
 
 type AwakenerDetailModalProps = Readonly<{
   awakener: Awakener
@@ -33,109 +35,6 @@ type AwakenerDetailModalProps = Readonly<{
   initialTab?: TabId
   onTabChange?: (tab: TabId) => void
 }>
-
-const TABS = [
-  {id: 'cards', label: 'Skills'},
-  {id: 'copies', label: 'Copies'},
-  {id: 'talents', label: 'Talents'},
-  {id: 'builds', label: 'Builds'},
-  {id: 'teams', label: 'Teams'},
-] as const
-
-type TabId = (typeof TABS)[number]['id']
-interface ModalGlowStop {
-  position: string
-  shape: 'circle' | 'ellipse'
-  strength: number
-  fade: number
-  size?: string
-}
-
-interface ModalGradientVariant {
-  angle: number
-  baseStrength: number
-  vignetteStrength: number
-  edgeGlowStrength: number
-  glows: ModalGlowStop[]
-}
-
-const MODAL_GRADIENT_VARIANTS: ModalGradientVariant[] = [
-  {
-    angle: 185,
-    baseStrength: 5,
-    vignetteStrength: 7,
-    edgeGlowStrength: 7,
-    glows: [
-      {position: '12% 14%', shape: 'circle', strength: 7, fade: 58, size: '68% 68%'},
-      {position: '84% 12%', shape: 'circle', strength: 5, fade: 52, size: '62% 62%'},
-      {position: '56% 100%', shape: 'ellipse', strength: 5, fade: 66, size: '92% 42%'},
-      {position: '38% 46%', shape: 'ellipse', strength: 3, fade: 54, size: '56% 34%'},
-    ],
-  },
-  {
-    angle: 158,
-    baseStrength: 5,
-    vignetteStrength: 7,
-    edgeGlowStrength: 8,
-    glows: [
-      {position: '18% 12%', shape: 'ellipse', strength: 8, fade: 60, size: '78% 48%'},
-      {position: '88% 18%', shape: 'circle', strength: 6, fade: 52, size: '58% 58%'},
-      {position: '46% 76%', shape: 'ellipse', strength: 5, fade: 62, size: '82% 44%'},
-      {position: '72% 54%', shape: 'circle', strength: 3, fade: 48, size: '42% 42%'},
-    ],
-  },
-  {
-    angle: 176,
-    baseStrength: 5,
-    vignetteStrength: 8,
-    edgeGlowStrength: 8,
-    glows: [
-      {position: 'top left', shape: 'ellipse', strength: 7, fade: 62, size: '74% 44%'},
-      {position: '74% 10%', shape: 'ellipse', strength: 6, fade: 52, size: '60% 34%'},
-      {position: '54% 100%', shape: 'ellipse', strength: 6, fade: 66, size: '88% 40%'},
-      {position: '18% 72%', shape: 'circle', strength: 3, fade: 50, size: '40% 40%'},
-    ],
-  },
-]
-
-function getModalBackgroundVariantIndex(awakener: Awakener): number {
-  const seed = `${String(awakener.id)}:${awakener.name}`
-  let hash = 0
-  for (const char of seed) {
-    hash = (hash * 31 + char.charCodeAt(0)) >>> 0
-  }
-  return hash % MODAL_GRADIENT_VARIANTS.length
-}
-
-function buildModalBackground(realmTint: string, variant: ModalGradientVariant): string {
-  const glowLayers = variant.glows.map(
-    (glow) =>
-      `radial-gradient(${glow.size ?? 'auto'} at ${glow.position}, color-mix(in srgb, ${realmTint} ${String(
-        glow.strength,
-      )}%, transparent) 0%, transparent ${String(glow.fade)}%)`,
-  )
-
-  const edgeLayer = `radial-gradient(
-    180% 140% at 50% -12%,
-    color-mix(in srgb, ${realmTint} ${String(variant.edgeGlowStrength)}%, transparent) 0%,
-    transparent 62%
-  )`
-
-  const vignetteLayer = `radial-gradient(
-    140% 140% at 50% 50%,
-    transparent 64%,
-    color-mix(in srgb, #020617 ${String(variant.vignetteStrength)}%, transparent) 100%
-  )`
-
-  const baseLayer = `linear-gradient(
-    ${String(variant.angle)}deg,
-    color-mix(in srgb, ${realmTint} ${String(variant.baseStrength)}%, rgba(2, 6, 23, 0.982)) 0%,
-    rgba(2, 6, 23, 0.975) 34%,
-    rgba(2, 6, 23, 0.99) 100%
-  )`
-
-  return [edgeLayer, ...glowLayers, vignetteLayer, baseLayer].join(', ')
-}
 
 export function AwakenerDetailModal({
   awakener,
