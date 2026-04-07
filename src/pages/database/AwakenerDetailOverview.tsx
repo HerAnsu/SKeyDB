@@ -3,13 +3,10 @@
 import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.png'
 import type {Awakener} from '@/domain/awakeners'
 import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
-import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
-import {getPortraitRelicByAwakenerIngameId} from '@/domain/relics'
 
 import {DetailSection, type DetailSectionItem} from './DetailSection'
-import {getStarSize, scaledFontStyle, type FontScale} from './font-scale'
+import {getStarSize, type FontScale} from './font-scale'
 import {RichDescription} from './RichDescription'
-import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
 type AwakenerDetailOverviewProps = Readonly<{
   awakener: Awakener
@@ -19,6 +16,7 @@ type AwakenerDetailOverviewProps = Readonly<{
   skillLevel: number
   fontScale: FontScale
   onNavigateToCards?: () => void
+  mode: 'copies' | 'talents'
 }>
 
 const ENLIGHTEN_ORDER = ['E1', 'E2', 'E3'] as const
@@ -41,13 +39,14 @@ function buildStarKeys(prefix: string, count: number): string[] {
 }
 
 export function AwakenerDetailOverview({
-  awakener,
+  awakener: _awakener,
   fullData,
   stats,
   cardNames,
   skillLevel,
   fontScale,
   onNavigateToCards,
+  mode,
 }: AwakenerDetailOverviewProps) {
   const renderDescription = useCallback(
     (description: string) => (
@@ -64,7 +63,7 @@ export function AwakenerDetailOverview({
   )
 
   const enlightenItems = useMemo(() => {
-    if (!fullData) return []
+    if (!fullData || mode !== 'copies') return []
     const items: DetailSectionItem[] = []
     const starStyle = getStarSize(fontScale)
 
@@ -112,71 +111,41 @@ export function AwakenerDetailOverview({
     }
 
     return items
-  }, [fontScale, fullData])
+  }, [fontScale, fullData, mode])
 
   if (!fullData) {
     return <p className='py-4 text-xs text-slate-400'>Loading...</p>
   }
-  const talentItems: DetailSectionItem[] = []
-  for (const key of TALENT_ORDER) {
-    if (!hasTalentEntry(fullData, key)) {
-      continue
-    }
-    const entry = fullData.talents[key]
-    talentItems.push({key, label: key, name: entry.name, description: entry.description})
-  }
 
-  const portraitRelic = getPortraitRelicByAwakenerIngameId(awakener.ingameId)
-  const portraitRelicAsset = portraitRelic
-    ? getRelicPortraitAssetByAssetId(portraitRelic.assetId)
-    : undefined
+  const talentItems: DetailSectionItem[] = []
+  if (mode === 'talents') {
+    for (const key of TALENT_ORDER) {
+      if (!hasTalentEntry(fullData, key)) {
+        continue
+      }
+      const entry = fullData.talents[key]
+      talentItems.push({key, label: key, name: entry.name, description: entry.description})
+    }
+  }
 
   return (
     <div className='space-y-4'>
-      <div>
-        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
-          Dimensional Image
-        </h4>
-        {portraitRelic ? (
-          <div className='pt-1 pb-2'>
-            <div className='flex items-start gap-3 border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'>
-              <div className='h-16 w-16 shrink-0 overflow-hidden'>
-                {portraitRelicAsset ? (
-                  <img
-                    alt={`${portraitRelic.name} icon`}
-                    className='h-full w-full object-cover object-center'
-                    draggable={false}
-                    src={portraitRelicAsset}
-                  />
-                ) : (
-                  <div className='h-full w-full bg-[radial-gradient(circle_at_50%_35%,rgba(125,165,215,0.2),rgba(8,13,25,0.95)_70%)]' />
-                )}
-              </div>
-              <div className='min-w-0 flex-1'>
-                <div className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
-                  {renderDescription(portraitRelic.description)}
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <p className='px-4 pb-3 text-xs text-slate-400'>
-            No dimensional image linked yet for this awakener.
-          </p>
-        )}
-      </div>
-      <DetailSection
-        emptyMessage='No enlighten data available.'
-        items={enlightenItems}
-        renderDescription={renderDescription}
-        title='Enlightens'
-      />
-      <DetailSection
-        emptyMessage='No talent data available.'
-        items={talentItems}
-        renderDescription={renderDescription}
-        title='Talents'
-      />
+      {mode === 'copies' && (
+        <DetailSection
+          emptyMessage='No enlighten data available.'
+          items={enlightenItems}
+          renderDescription={renderDescription}
+          title='Enlightens'
+        />
+      )}
+      {mode === 'talents' && (
+        <DetailSection
+          emptyMessage='No talent data available.'
+          items={talentItems}
+          renderDescription={renderDescription}
+          title='Talents'
+        />
+      )}
     </div>
   )
 }

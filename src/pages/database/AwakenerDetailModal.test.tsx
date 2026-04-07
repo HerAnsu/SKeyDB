@@ -155,16 +155,26 @@ vi.mock('./AwakenerDetailSidebar', () => ({
 }))
 
 vi.mock('./AwakenerDetailOverview', () => ({
-  AwakenerDetailOverview: ({stats}: {stats: {CON: string; CritRate: string} | null}) => (
+  AwakenerDetailOverview: ({
+    stats,
+    mode,
+  }: {
+    stats: {CON: string; CritRate: string} | null
+    mode: 'copies' | 'talents'
+  }) => (
     <div>
-      <div>Overview CON {stats?.CON ?? 'none'}</div>
-      <div>Overview Crit Rate {stats?.CritRate ?? 'none'}</div>
+      <div>
+        {mode === 'copies' ? 'Copies' : 'Talents'} CON {stats?.CON ?? 'none'}
+      </div>
+      <div>
+        {mode === 'copies' ? 'Copies' : 'Talents'} Crit Rate {stats?.CritRate ?? 'none'}
+      </div>
     </div>
   ),
 }))
 
 vi.mock('./AwakenerDetailCards', () => ({
-  AwakenerDetailCards: () => <div>Cards Tab</div>,
+  AwakenerDetailCards: () => <div>Skills Tab</div>,
 }))
 
 vi.mock('./AwakenerBuildsTab', () => ({
@@ -189,7 +199,7 @@ function makeAwakener(id: number, name: string): Awakener {
 }
 
 describe('AwakenerDetailModal', () => {
-  it('resets active tab to overview when switching awakeners', async () => {
+  it('resets active tab to Skills when switching awakeners', async () => {
     const onClose = vi.fn()
     const first = makeAwakener(1, 'alpha')
     const second = makeAwakener(2, 'beta')
@@ -198,13 +208,13 @@ describe('AwakenerDetailModal', () => {
       <AwakenerDetailModal awakener={first} key={first.id} onClose={onClose} />,
     )
 
-    fireEvent.click(screen.getByRole('button', {name: 'Cards'}))
-    expect(screen.getByRole('button', {name: 'Cards'}).className).toContain('text-amber-100')
+    fireEvent.click(screen.getByRole('button', {name: 'Copies'}))
+    expect(screen.getByRole('button', {name: 'Copies'}).className).toContain('text-amber-100')
 
     rerender(<AwakenerDetailModal awakener={second} key={second.id} onClose={onClose} />)
 
     await waitFor(() => {
-      expect(screen.getByRole('button', {name: 'Overview'}).className).toContain('text-amber-100')
+      expect(screen.getByRole('button', {name: 'Skills'}).className).toContain('text-amber-100')
     })
   })
 
@@ -214,21 +224,23 @@ describe('AwakenerDetailModal', () => {
 
     render(<AwakenerDetailModal awakener={awakener} onClose={onClose} />)
 
+    fireEvent.click(screen.getByRole('button', {name: 'Copies'}))
+
     await waitFor(() => {
       expect(screen.getAllByText('Sidebar Level 60')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar Skill Level 1')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar CON 140')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(2)
-      expect(screen.getByText('Overview CON 140')).toBeInTheDocument()
-      expect(screen.getByText('Overview Crit Rate 14.6%')).toBeInTheDocument()
+      expect(screen.getByText('Copies CON 140')).toBeInTheDocument()
+      expect(screen.getByText('Copies Crit Rate 14.6%')).toBeInTheDocument()
     })
 
     fireEvent.click(screen.getAllByRole('button', {name: 'Set level 90'})[0])
 
     expect(screen.getAllByText('Sidebar Level 90')).toHaveLength(2)
     expect(screen.getAllByText('Sidebar CON 186')).toHaveLength(2)
-    expect(screen.getByText('Overview CON 186')).toBeInTheDocument()
+    expect(screen.getByText('Copies CON 186')).toBeInTheDocument()
   })
 
   it('updates resolved substats when the Psyche Surge offset changes', async () => {
@@ -237,17 +249,19 @@ describe('AwakenerDetailModal', () => {
 
     render(<AwakenerDetailModal awakener={awakener} onClose={onClose} />)
 
+    fireEvent.click(screen.getByRole('button', {name: 'Copies'}))
+
     await waitFor(() => {
       expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(2)
       expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(2)
-      expect(screen.getByText('Overview Crit Rate 14.6%')).toBeInTheDocument()
+      expect(screen.getByText('Copies Crit Rate 14.6%')).toBeInTheDocument()
     })
 
     fireEvent.click(screen.getAllByRole('button', {name: 'Increase Psyche Surge'})[0])
 
     expect(screen.getAllByText('Sidebar E3+1')).toHaveLength(2)
     expect(screen.getAllByText('Sidebar Crit Rate 16.2%')).toHaveLength(2)
-    expect(screen.getByText('Overview Crit Rate 16.2%')).toBeInTheDocument()
+    expect(screen.getByText('Copies Crit Rate 16.2%')).toBeInTheDocument()
   })
 
   it('passes the active awakener id to the builds tab', async () => {

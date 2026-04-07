@@ -1,6 +1,7 @@
 import {render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 
+import type {Awakener} from '@/domain/awakeners'
 import type {AwakenerFull} from '@/domain/awakeners-full'
 
 import {AwakenerDetailCards} from './AwakenerDetailCards'
@@ -21,6 +22,26 @@ vi.mock('./DetailSection', () => ({
 vi.mock('./RichDescription', () => ({
   RichDescription: ({text}: {text: string}) => <span>{text}</span>,
 }))
+
+vi.mock('@/domain/relics', () => ({
+  getPortraitRelicByAwakenerIngameId: () => null,
+}))
+
+vi.mock('@/domain/relic-assets', () => ({
+  getRelicPortraitAssetByAssetId: () => null,
+}))
+
+const TEST_AWAKENER: Awakener = {
+  id: 1,
+  ingameId: '101',
+  name: 'salvador',
+  realm: 'AEQUOR',
+  faction: 'Test',
+  type: 'ASSAULT',
+  rarity: 'SSR',
+  aliases: ['salvador'],
+  tags: [],
+}
 
 const TEST_FULL_DATA: AwakenerFull = {
   id: 1,
@@ -60,7 +81,13 @@ const TEST_FULL_DATA: AwakenerFull = {
 describe('AwakenerDetailCards', () => {
   it('renders a loading state while full card data is absent', () => {
     render(
-      <AwakenerDetailCards cardNames={new Set()} fullData={null} skillLevel={1} stats={null} />,
+      <AwakenerDetailCards
+        awakener={TEST_AWAKENER}
+        cardNames={new Set()}
+        fullData={null}
+        skillLevel={1}
+        stats={null}
+      />,
     )
 
     expect(screen.getByText('Loading card data...')).toBeInTheDocument()
@@ -69,6 +96,7 @@ describe('AwakenerDetailCards', () => {
   it('renders exalt items and command card meta labels', () => {
     render(
       <AwakenerDetailCards
+        awakener={TEST_AWAKENER}
         cardNames={new Set(['First Card', 'Second Card'])}
         fullData={TEST_FULL_DATA}
         skillLevel={1}
@@ -88,5 +116,6 @@ describe('AwakenerDetailCards', () => {
     expect(screen.getByText('3')).toBeInTheDocument()
     expect(screen.getByText('First card description')).toBeInTheDocument()
     expect(screen.getByText('Second card description')).toBeInTheDocument()
+    expect(screen.getByText('Dimensional Image')).toBeInTheDocument()
   })
 })

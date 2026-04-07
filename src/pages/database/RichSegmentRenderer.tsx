@@ -99,7 +99,7 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
       return (
         <div className={lineClassName}>
           {segment.indented ? (
-            <span className='absolute top-0 left-1 text-[1.2em] text-slate-500/60 select-none'>
+            <span className='absolute top-[0.41em] left-1.5 text-[0.8em] text-slate-500/60 select-none'>
               {INDENT_MARKER}
             </span>
           ) : null}
@@ -115,7 +115,7 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
     }
     case 'indent':
       return (
-        <span className='mr-1.5 ml-1 inline text-[1.2em] text-slate-500/60 select-none'>
+        <span className='relative top-[-0.1em] mr-1.5 ml-1 inline text-[0.8em] text-slate-500/60 select-none'>
           {INDENT_MARKER}
         </span>
       )
@@ -127,7 +127,7 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
 function RichSkillSegment({segment, onSkillClick}: RichSkillSegmentProps) {
   if (onSkillClick === undefined) {
     return (
-      <span className='inline font-bold whitespace-nowrap text-amber-100/85'>{segment.name}</span>
+      <span className='inline font-bold whitespace-nowrap text-amber-200/90'>{segment.name}</span>
     )
   }
 
@@ -229,7 +229,7 @@ function RichScalingSegment({
     if (!isInteractive) {
       return (
         <span
-          className={`${DATABASE_POPOVER_SCALING_TOKEN_CLASS} inline font-bold whitespace-nowrap text-amber-100`}
+          className={`${DATABASE_POPOVER_SCALING_TOKEN_CLASS} inline font-bold whitespace-nowrap text-amber-200/90`}
         >
           {popoverContent}
         </span>
@@ -238,7 +238,7 @@ function RichScalingSegment({
 
     return (
       <button
-        className={`${DATABASE_SCALING_TOKEN_CLASS} cursor-help appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap text-amber-100`}
+        className={`${DATABASE_SCALING_TOKEN_CLASS} cursor-help appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap text-amber-200/90`}
         onClick={(event) => {
           onScalingClick(values, suffix, stat, event)
         }}

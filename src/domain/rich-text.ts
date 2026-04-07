@@ -66,12 +66,21 @@ function ensureStatsLoaded() {
 
 function isStatToken(token: string): boolean {
   ensureStatsLoaded()
-  if (KNOWN_STAT_LABELS.has(token)) {
-    return true
+  const normalizedToken = token.startsWith('Temporary ')
+    ? token.slice('Temporary '.length).trim()
+    : token
+
+  // Treat Crit Rate and Crit DMG as tags/mechanics instead of raw stats
+  if (
+    normalizedToken === 'Crit Rate' ||
+    normalizedToken === 'Crit DMG' ||
+    normalizedToken.toLowerCase() === 'crit damage'
+  ) {
+    return false
   }
-  if (token.startsWith('Temporary ')) {
-    const baseToken = token.slice('Temporary '.length).trim()
-    return KNOWN_STAT_LABELS.has(baseToken)
+
+  if (KNOWN_STAT_LABELS.has(normalizedToken)) {
+    return true
   }
   return false
 }

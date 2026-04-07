@@ -1,7 +1,10 @@
 import {useCallback} from 'react'
 
 import costIcon from '@/assets/icons/UI_Battel_White_Buff_094.png'
+import type {Awakener} from '@/domain/awakeners'
 import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
+import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
+import {getPortraitRelicByAwakenerIngameId} from '@/domain/relics'
 
 import {DetailSection} from './DetailSection'
 import {scaledFontStyle} from './font-scale'
@@ -9,6 +12,7 @@ import {RichDescription} from './RichDescription'
 import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
 type AwakenerDetailCardsProps = Readonly<{
+  awakener: Awakener
   fullData: AwakenerFull | null
   stats: AwakenerFullStats | null
   cardNames: Set<string>
@@ -22,6 +26,7 @@ function hasCard(fullData: AwakenerFull, key: (typeof CARD_KEYS)[number]): boole
 }
 
 export function AwakenerDetailCards({
+  awakener,
   fullData,
   stats,
   cardNames,
@@ -63,6 +68,11 @@ export function AwakenerDetailCards({
     const card = fullData.cards[key]
     cardEntries.push({key, card})
   }
+
+  const portraitRelic = getPortraitRelicByAwakenerIngameId(awakener.ingameId)
+  const portraitRelicAsset = portraitRelic
+    ? getRelicPortraitAssetByAssetId(portraitRelic.assetId)
+    : undefined
 
   return (
     <div className='space-y-4'>
@@ -115,6 +125,39 @@ export function AwakenerDetailCards({
             </div>
           ))}
         </div>
+      </div>
+
+      <div>
+        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
+          Dimensional Image
+        </h4>
+        {portraitRelic ? (
+          <div className='pt-1 pb-2'>
+            <div className='flex items-start gap-3 border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'>
+              <div className='h-16 w-16 shrink-0 overflow-hidden'>
+                {portraitRelicAsset ? (
+                  <img
+                    alt={`${portraitRelic.name} icon`}
+                    className='h-full w-full object-cover object-center'
+                    draggable={false}
+                    src={portraitRelicAsset}
+                  />
+                ) : (
+                  <div className='h-full w-full bg-[radial-gradient(circle_at_50%_35%,rgba(125,165,215,0.2),rgba(8,13,25,0.95)_70%)]' />
+                )}
+              </div>
+              <div className='min-w-0 flex-1'>
+                <div className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+                  {renderDescription(portraitRelic.description)}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <p className='px-4 pb-3 text-xs text-slate-400'>
+            No dimensional image linked yet for this awakener.
+          </p>
+        )}
       </div>
     </div>
   )

@@ -175,7 +175,7 @@ describe('parseRichDescription', () => {
     expect(result).toEqual(
       expectLine([
         {type: 'text', value: 'Gain '},
-        {type: 'stat', name: 'Temporary Crit Rate'},
+        {type: 'mechanic', name: 'Temporary Crit Rate'},
         {type: 'text', value: ' and '},
         {type: 'mechanic', name: 'Temporary STR'},
         {type: 'text', value: '.'},

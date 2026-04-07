@@ -1,4 +1,4 @@
-import {useMemo} from 'react'
+import {useMemo, useState} from 'react'
 
 import {CompactArtTile} from '@/components/ui/CompactArtTile'
 import {
@@ -13,13 +13,9 @@ import {useAwakenerBuildEntries} from '@/domain/useAwakenerBuildEntries'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelById} from '@/domain/wheels'
 
-import {
-  DatabaseTab,
-  DatabaseTabRow,
-  DatabaseTabSection,
-  DatabaseTabSubsection,
-} from './DatabaseTabSection'
+import {DatabaseTab} from './DatabaseTabSection'
 import {scaledFontStyle} from './font-scale'
+import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
 interface AwakenerBuildsTabProps {
   awakenerId: number
@@ -49,37 +45,39 @@ function RecommendationTile({
   label,
   chip,
   imageClassName = '',
-  tileClassName = 'builder-picker-tile w-24 border border-slate-500/45 bg-slate-900/55 p-1',
   aspectClassName = 'aspect-[75/113]',
+  isCovenant = false,
 }: {
   asset?: string
   altText: string
   label: string
   chip: string
   imageClassName?: string
-  tileClassName?: string
   aspectClassName?: string
+  isCovenant?: boolean
 }) {
   return (
-    <CompactArtTile
-      chips={<span className='builder-picker-recommendation-chip text-amber-100/95'>{chip}</span>}
-      containerClassName={tileClassName}
-      name={label}
-      nameClassName='compact-art-tile-name-multiline mt-1.5 text-slate-200'
-      preview={
-        asset ? (
-          <img
-            alt={altText}
-            className={`h-full w-full object-cover ${imageClassName}`.trim()}
-            draggable={false}
-            src={asset}
-          />
-        ) : (
-          <div className='h-full w-full bg-[radial-gradient(circle_at_50%_30%,rgba(148,163,184,0.18),rgba(2,8,23,0.94)_72%)]' />
-        )
-      }
-      previewClassName={`${aspectClassName} border border-slate-600/35 bg-slate-900/75`}
-    />
+    <div style={scaledFontStyle(16)}>
+      <CompactArtTile
+        chips={<span className='builder-picker-recommendation-chip text-amber-100/95'>{chip}</span>}
+        containerClassName='w-[6em] border border-white/[0.06] bg-white/[0.02] p-[0.375em] shadow-sm'
+        name={label}
+        nameClassName='compact-art-tile-name-multiline mt-1.5 text-slate-200'
+        preview={
+          asset ? (
+            <img
+              alt={altText}
+              className={`h-full w-full object-cover ${imageClassName}`.trim()}
+              draggable={false}
+              src={asset}
+            />
+          ) : (
+            <div className='h-full w-full bg-[radial-gradient(circle_at_50%_30%,rgba(148,163,184,0.18),rgba(2,8,23,0.94)_72%)]' />
+          )
+        }
+        previewClassName={`${aspectClassName} ${isCovenant ? '' : 'border border-white/[0.06] bg-white/[0.02]'}`}
+      />
+    </div>
   )
 }
 
@@ -109,21 +107,29 @@ function SubstatIconChip({mainstatKey}: {mainstatKey: MainstatKey}) {
 
   return (
     <span
-      className='inline-flex h-6 w-6 items-center justify-center border border-slate-600/45 bg-slate-950/55'
+      className='inline-flex items-center justify-center gap-1.5 border border-white/[0.06] bg-white/[0.02] px-2 shadow-sm'
+      style={{...scaledFontStyle(14), height: '1.7em'}}
       title={label}
     >
       {icon ? (
         <img
           alt={label}
-          className='h-4 w-4 object-contain opacity-90'
+          className='shrink-0 object-contain opacity-90'
           draggable={false}
           src={icon}
+          style={{width: '1em', height: '1em'}}
         />
       ) : (
-        <span className='text-[9px] tracking-wide text-slate-300 uppercase'>
+        <span
+          className='shrink-0 font-medium tracking-wide text-slate-300 uppercase'
+          style={{fontSize: '0.7em'}}
+        >
           {label.slice(0, 2)}
         </span>
       )}
+      <span className='whitespace-nowrap text-slate-300/90' style={{fontSize: '0.8em'}}>
+        {label}
+      </span>
     </span>
   )
 }
@@ -175,6 +181,7 @@ function CovenantRecommendationGrid({build}: {build: AwakenerBuild}) {
             aspectClassName='aspect-square'
             asset={getCovenantAssetById(covenantId)}
             chip={`#${String(index + 1)}`}
+            isCovenant
             key={covenantId}
             label={label}
           />
@@ -188,7 +195,7 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
   const hasGoodOptions = Boolean(getWheelGroupByTier(build, 'GOOD'))
 
   return (
-    <div className='space-y-2.5'>
+    <div className='space-y-3'>
       <div>
         <p className='text-slate-300/75' style={scaledFontStyle(11)}>
           Top Picks
@@ -199,7 +206,6 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
       </div>
       {hasGoodOptions ? (
         <>
-          <div className='h-px bg-gradient-to-r from-slate-600/40 via-slate-600/15 to-transparent' />
           <div>
             <p className='text-slate-300/75' style={scaledFontStyle(11)}>
               Good Options
@@ -214,51 +220,128 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
   )
 }
 
+function BuildSection({title, children}: {title: string; children: React.ReactNode}) {
+  return (
+    <div>
+      <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
+        {title}
+      </h4>
+      <div className='mx-4 mt-0.5 mb-1.5 h-px bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent' />
+      <div className='flex flex-col gap-y-3 px-4 pt-1 pb-2'>
+        <div className='border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'>
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function BuildTilesSection({title, children}: {title: string; children: React.ReactNode}) {
+  return (
+    <div>
+      <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
+        {title}
+      </h4>
+      <div className='mx-4 mt-0.5 mb-1.5 h-px bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent' />
+      <div className='flex flex-col gap-y-3 px-4 pt-1 pb-2'>{children}</div>
+    </div>
+  )
+}
+
 function BuildCard({
   build,
   showLabel,
   collapsible = false,
+  defaultCollapsed = false,
 }: {
   build: AwakenerBuild
   showLabel: boolean
   collapsible?: boolean
+  defaultCollapsed?: boolean
 }) {
+  const [collapsed, setCollapsed] = useState(defaultCollapsed)
+
   const hasSummary = Boolean(build.summary)
   const hasNote = Boolean(build.note)
   const sectionTitle = showLabel ? build.label : undefined
 
+  const content = (
+    <div className='space-y-4'>
+      {hasSummary ? (
+        <div className='px-1 py-1'>
+          <p className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+            {build.summary}
+          </p>
+        </div>
+      ) : null}
+
+      <BuildTilesSection title='Substat Priority'>
+        <SubstatPriorityInline build={build} />
+      </BuildTilesSection>
+
+      <BuildTilesSection title='Recommended Wheels'>
+        <WheelRecommendations build={build} />
+      </BuildTilesSection>
+
+      <BuildTilesSection title='Recommended Covenants'>
+        <CovenantRecommendationGrid build={build} />
+      </BuildTilesSection>
+
+      {hasNote ? (
+        <BuildSection title='Notes'>
+          <p className='max-w-2xl leading-relaxed text-slate-300/85' style={scaledFontStyle(12)}>
+            {build.note}
+          </p>
+        </BuildSection>
+      ) : null}
+    </div>
+  )
+
+  if (!showLabel) {
+    return content
+  }
+
   return (
-    <DatabaseTabSection collapsible={collapsible && Boolean(sectionTitle)} title={sectionTitle}>
-      <DatabaseTabSubsection>
-        {hasSummary ? (
-          <div className='px-4 py-2.5'>
-            <p className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
-              {build.summary}
-            </p>
+    <div className='mb-6 space-y-4'>
+      {sectionTitle ? (
+        collapsible ? (
+          <button
+            className='flex w-full items-center gap-1.5 text-left transition-opacity hover:opacity-80'
+            onClick={() => {
+              setCollapsed((c) => !c)
+            }}
+            type='button'
+          >
+            <h3
+              className={`text-amber-100/90 ${DATABASE_SECTION_TITLE_CLASS} whitespace-nowrap`}
+              style={scaledFontStyle(24)}
+            >
+              {sectionTitle}
+            </h3>
+            <div className='h-0.5 flex-1 bg-white/[0.06]' />
+            <span className='whitespace-nowrap text-amber-100/50' style={scaledFontStyle(10)}>
+              {collapsed ? 'SHOW' : 'HIDE'}
+            </span>
+          </button>
+        ) : (
+          <div className='flex items-center gap-1.5'>
+            <h3
+              className={`text-amber-100/90 ${DATABASE_SECTION_TITLE_CLASS} whitespace-nowrap`}
+              style={scaledFontStyle(24)}
+            >
+              {sectionTitle}
+            </h3>
+            <div className='h-0.5 flex-1 bg-white/[0.06]' />
           </div>
-        ) : null}
+        )
+      ) : null}
 
-        <DatabaseTabRow label='Substat Priority'>
-          <SubstatPriorityInline build={build} />
-        </DatabaseTabRow>
-
-        <DatabaseTabRow label='Recommended Wheels'>
-          <WheelRecommendations build={build} />
-        </DatabaseTabRow>
-
-        <DatabaseTabRow label='Recommended Covenants'>
-          <CovenantRecommendationGrid build={build} />
-        </DatabaseTabRow>
-
-        {hasNote ? (
-          <DatabaseTabRow label='Notes'>
-            <p className='max-w-2xl leading-relaxed text-slate-300/85' style={scaledFontStyle(12)}>
-              {build.note}
-            </p>
-          </DatabaseTabRow>
-        ) : null}
-      </DatabaseTabSubsection>
-    </DatabaseTabSection>
+      {!collapsed ? (
+        <div className='ml-4 space-y-4 border-b-2 border-l-2 border-white/[0.06] pt-1 pb-4 pl-4'>
+          {content}
+        </div>
+      ) : null}
+    </div>
   )
 }
 

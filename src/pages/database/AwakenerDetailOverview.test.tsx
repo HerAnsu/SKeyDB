@@ -76,6 +76,7 @@ describe('AwakenerDetailOverview', () => {
         skillLevel={1}
         fontScale={'medium'}
         stats={TEST_FULL_DATA.stats}
+        mode='talents'
       />,
     )
 

@@ -23,7 +23,7 @@ export function DatabasePage() {
   const navigate = useNavigate()
   const {awakenerSlug, tabSlug} = useParams<{awakenerSlug?: string; tabSlug?: string}>()
   const selectedAwakener = findAwakenerByDatabaseSlug(getAwakeners(), awakenerSlug)
-  const selectedTab = resolveDatabaseAwakenerTab(tabSlug) ?? 'overview'
+  const selectedTab = resolveDatabaseAwakenerTab(tabSlug) ?? 'cards'
 
   useGlobalCollectionSearchCapture({
     searchInputRef,

@@ -35,8 +35,9 @@ type AwakenerDetailModalProps = Readonly<{
 }>
 
 const TABS = [
-  {id: 'overview', label: 'Overview'},
-  {id: 'cards', label: 'Cards'},
+  {id: 'cards', label: 'Skills'},
+  {id: 'copies', label: 'Copies'},
+  {id: 'talents', label: 'Talents'},
   {id: 'builds', label: 'Builds'},
   {id: 'teams', label: 'Teams'},
 ] as const
@@ -142,7 +143,7 @@ export function AwakenerDetailModal({
   initialTab,
   onTabChange,
 }: AwakenerDetailModalProps) {
-  const [internalActiveTab, setInternalActiveTab] = useState<TabId>('overview')
+  const [internalActiveTab, setInternalActiveTab] = useState<TabId>('cards')
   const [fullData, setFullData] = useState<AwakenerFull | null>(null)
   const [awakenerLevel, setAwakenerLevel] = useState(60)
   const [psycheSurgeOffset, setPsycheSurgeOffset] = useState(0)
@@ -447,7 +448,7 @@ export function AwakenerDetailModal({
 
                   <div className='min-w-0 flex-1 pb-2 lg:pb-2'>
                     <div className='flex items-center gap-2'>
-                      <h3 className='ui-title text-[1.85rem] leading-none text-amber-100 md:text-[2.5rem] lg:text-[2.8rem]'>
+                      <h3 className='ui-title text-[1.85rem] leading-none text-amber-200/90 md:text-[2.5rem] lg:text-[2.8rem]'>
                         {displayName}
                       </h3>
                     </div>
@@ -529,7 +530,7 @@ export function AwakenerDetailModal({
               </div>
 
               <div className='database-tab-content w-full transition-all duration-200 ease-in-out'>
-                {activeTab === 'overview' && (
+                {activeTab === 'copies' && (
                   <AwakenerDetailOverview
                     awakener={awakener}
                     cardNames={cardNames}
@@ -538,10 +539,24 @@ export function AwakenerDetailModal({
                     skillLevel={skillLevel}
                     fontScale={fontScale}
                     stats={resolvedStats}
+                    mode='copies'
+                  />
+                )}
+                {activeTab === 'talents' && (
+                  <AwakenerDetailOverview
+                    awakener={awakener}
+                    cardNames={cardNames}
+                    fullData={fullData}
+                    onNavigateToCards={navigateToCards}
+                    skillLevel={skillLevel}
+                    fontScale={fontScale}
+                    stats={resolvedStats}
+                    mode='talents'
                   />
                 )}
                 {activeTab === 'cards' && (
                   <AwakenerDetailCards
+                    awakener={awakener}
                     cardNames={cardNames}
                     fullData={fullData}
                     skillLevel={skillLevel}

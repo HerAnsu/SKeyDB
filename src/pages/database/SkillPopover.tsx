@@ -82,7 +82,7 @@ export function SkillPopover({
         onNavigateToCards()
       }}
       style={{fontSize: '1.3em'}}
-      title='View in Cards tab'
+      title='View in Skills tab'
       type='button'
     >
       {labelNode}

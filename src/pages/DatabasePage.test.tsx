@@ -61,13 +61,13 @@ vi.mock('./database/AwakenerDetailModal', () => ({
   AwakenerDetailModal: ({
     awakener,
     onClose,
-    initialTab = 'overview',
+    initialTab = 'copies',
     onTabChange,
   }: {
     awakener: {name: string}
     onClose: () => void
-    initialTab?: 'overview' | 'cards' | 'builds' | 'teams'
-    onTabChange?: (tab: 'overview' | 'cards' | 'builds' | 'teams') => void
+    initialTab?: 'copies' | 'talents' | 'cards' | 'builds' | 'teams'
+    onTabChange?: (tab: 'copies' | 'talents' | 'cards' | 'builds' | 'teams') => void
   }) => (
     <div aria-label={`${awakener.name} details`} role='dialog'>
       <div>{`Active tab ${initialTab}`}</div>
@@ -236,11 +236,11 @@ describe('DatabasePage', () => {
     expect(screen.getByTestId('location-path')).toHaveTextContent('/database')
   })
 
-  it('falls back to the awakener overview route when deep link tab is unknown', () => {
+  it('falls back to the awakener cards route when deep link tab is unknown', () => {
     renderDatabasePage('/database/awk/alpha/missing')
 
     expect(screen.getByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
-    expect(screen.getByText('Active tab overview')).toBeInTheDocument()
+    expect(screen.getByText('Active tab cards')).toBeInTheDocument()
     expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha')
   })
 
