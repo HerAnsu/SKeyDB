@@ -24,7 +24,7 @@ export function AwakenerGridCard({awakener, onSelect}: AwakenerGridCardProps) {
   return (
     <article className='collection-item-card group/card p-1'>
       <div
-        className='relative aspect-[5/9] overflow-hidden p-[1px] transition-all duration-300'
+        className='relative aspect-5/9 overflow-hidden p-px transition-all duration-300'
         style={
           {
             '--realm-color': realmTint,
@@ -55,14 +55,14 @@ export function AwakenerGridCard({awakener, onSelect}: AwakenerGridCardProps) {
             </div>
           )}
 
-          <div className='pointer-events-none absolute top-0 right-0 left-0 z-20 bg-gradient-to-b from-black/90 via-black/65 to-transparent p-2'>
+          <div className='pointer-events-none absolute top-0 right-0 left-0 z-20 bg-linear-to-b from-black/90 via-black/65 to-transparent p-2'>
             <p className='font-["Droid_Serif"] text-[15px] leading-[1.1] font-bold tracking-wide text-amber-100/90'>
               {displayName}
             </p>
           </div>
 
           {stats && (
-            <div className='pointer-events-none absolute right-0 bottom-0 left-0 z-20 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-2 pt-6 pb-2'>
+            <div className='pointer-events-none absolute right-0 bottom-0 left-0 z-20 bg-linear-to-t from-black/90 via-black/70 to-transparent px-2 pt-6 pb-2'>
               <div className='flex items-center justify-center gap-1.5'>
                 {STAT_DISPLAY.map(({key, color}, index) => {
                   const icon = getMainstatIcon(key)
@@ -85,9 +85,9 @@ export function AwakenerGridCard({awakener, onSelect}: AwakenerGridCardProps) {
                             }}
                           />
                         )}
-                        <span className='pt-[1px] tracking-tighter tabular-nums'>{stats[key]}</span>
+                        <span className='pt-px tracking-tighter tabular-nums'>{stats[key]}</span>
                       </span>
-                      {!isLast && <div className='ml-1.5 h-3 w-[1px] bg-white/20' />}
+                      {!isLast && <div className='ml-1.5 h-3 w-px bg-white/20' />}
                     </div>
                   )
                 })}

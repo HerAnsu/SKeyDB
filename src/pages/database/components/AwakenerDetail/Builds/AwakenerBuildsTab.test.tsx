@@ -1,4 +1,4 @@
-import {render, screen, waitFor} from '@testing-library/react'
+import {fireEvent, render, screen, waitFor} from '@testing-library/react'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {AwakenerBuildsTab} from './AwakenerBuildsTab'
@@ -7,7 +7,7 @@ const {useAwakenerBuildEntries} = vi.hoisted(() => ({
   useAwakenerBuildEntries: vi.fn(),
 }))
 
-vi.mock('../../../../domain/useAwakenerBuildEntries', () => ({
+vi.mock('../../../../../domain/useAwakenerBuildEntries', () => ({
   useAwakenerBuildEntries,
 }))
 
@@ -104,6 +104,42 @@ describe('AwakenerBuildsTab', () => {
       expect(screen.getByText('Manikin of Oblivion')).toBeInTheDocument()
     })
     expect(screen.queryByText('Core')).not.toBeInTheDocument()
+  })
+
+  it('allows multi-build entries to collapse and expand by heading', async () => {
+    useAwakenerBuildEntries.mockReturnValue([
+      {
+        awakenerId: 27,
+        primaryBuildId: 'dps',
+        builds: [
+          {
+            id: 'dps',
+            label: 'DPS',
+            summary: 'Damage-first setup.',
+            substatPriorityGroups: [['CRIT_DMG']],
+            recommendedWheels: [{tier: 'BIS_SSR', wheelIds: ['C16']}],
+            recommendedCovenantIds: ['005'],
+          },
+          {
+            id: 'tank',
+            label: 'Tank',
+            summary: 'Frontline setup.',
+            substatPriorityGroups: [['DEF']],
+            recommendedWheels: [{tier: 'BIS_SSR', wheelIds: ['ZL04']}],
+            recommendedCovenantIds: ['001'],
+          },
+        ],
+      },
+    ])
+
+    render(<AwakenerBuildsTab awakenerId={27} />)
+
+    const headingButton = await screen.findByRole('button', {name: /DPS/i})
+    fireEvent.click(headingButton)
+    expect(screen.queryByText('Damage-first setup.')).not.toBeInTheDocument()
+
+    fireEvent.click(headingButton)
+    expect(screen.getByText('Damage-first setup.')).toBeInTheDocument()
   })
 
   it('shows an empty state when no curated builds exist for the awakener', () => {

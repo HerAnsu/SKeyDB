@@ -52,7 +52,7 @@ export function AwakenerEnlightenStepper({
       <StepButton ariaLabel='Decrease Psyche Surge' disabled={offset <= 0} onStep={onDecrease}>
         <FaMinus className='h-2.5 w-2.5' />
       </StepButton>
-      <span className='min-w-[3.75rem] rounded border border-slate-500/55 bg-slate-950/80 px-1.5 py-0.5 text-center font-mono text-[10px] text-slate-200'>
+      <span className='min-w-15 rounded border border-slate-500/55 bg-slate-950/80 px-1.5 py-0.5 text-center font-mono text-[10px] text-slate-200'>
         E3+{offset}
       </span>
       <StepButton ariaLabel='Increase Psyche Surge' disabled={offset >= 12} onStep={onIncrease}>

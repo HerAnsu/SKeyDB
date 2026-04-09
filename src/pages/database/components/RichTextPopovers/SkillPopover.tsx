@@ -12,7 +12,8 @@ import {
   DATABASE_POPOVER_SHELL_CLASS,
   DATABASE_POPOVER_SURFACE_STYLE,
 } from '../../utils/text-styles'
-import {RichSegmentRenderer} from './RichSegmentRenderer'
+import {nextRichSegmentKey} from '../RichText/rich-segment-keys'
+import {RichSegmentRenderer} from '../RichText/RichSegmentRenderer'
 
 type SkillPopoverProps = Readonly<{
   name: string
@@ -124,7 +125,7 @@ export function SkillPopover({
         <div className='pl-1.5 leading-relaxed text-slate-400' style={{fontSize: '1.1em'}}>
           {segments.map((segment) => (
             <RichSegmentRenderer
-              key={nextSegmentKey(segmentKeyCounts, segment)}
+              key={nextRichSegmentKey(segmentKeyCounts, segment)}
               onMechanicClick={(tag, event) => {
                 onMechanicTokenClick(tag, event)
               }}
@@ -151,41 +152,4 @@ function formatBubbleLabel(label: string): string {
     .replaceAll('-', ' ')
     .toLowerCase()
     .replaceAll(/\b([a-z])/g, (match) => match.toUpperCase())
-}
-
-function nextSegmentKey(
-  keyCounts: Map<string, number>,
-  segment: ReturnType<typeof parseRichDescription>[number],
-): string {
-  const baseKey = segmentKeyBase(segment)
-  const occurrence = keyCounts.get(baseKey) ?? 0
-  keyCounts.set(baseKey, occurrence + 1)
-  return `${baseKey}:${String(occurrence)}`
-}
-
-function segmentKeyBase(segment: ReturnType<typeof parseRichDescription>[number]): string {
-  switch (segment.type) {
-    case 'text':
-      return `text:${segment.value}`
-    case 'skill':
-      return `skill:${segment.name}`
-    case 'stat':
-      return `stat:${segment.name}`
-    case 'mechanic':
-      return `mechanic:${segment.name}`
-    case 'realm':
-      return `realm:${segment.name}`
-    case 'scaling':
-      return `scaling:${segment.stat ?? 'none'}:${segment.suffix}:${segment.values.join(',')}`
-    case 'newline':
-      return 'newline'
-    case 'paragraph':
-      return 'paragraph'
-    case 'indent':
-      return 'indent'
-    case 'line':
-      return `line:${segment.indented ? 'indented' : 'plain'}:${segment.segments.map(segmentKeyBase).join('|')}`
-    default:
-      return 'unknown'
-  }
 }

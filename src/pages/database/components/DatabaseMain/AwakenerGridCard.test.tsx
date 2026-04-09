@@ -6,7 +6,7 @@ import type {Awakener} from '@/domain/awakeners'
 import {AwakenerGridCard} from './AwakenerGridCard'
 
 vi.mock('../../../../domain/awakener-assets', () => ({
-  getAwakenerCardAsset: () => null,
+  getAwakenerCardAsset: (name: string) => (name === 'atlas' ? 'atlas-card' : null),
 }))
 
 vi.mock('../../../../domain/factions', () => ({
@@ -53,5 +53,18 @@ describe('AwakenerGridCard', () => {
 
     fireEvent.click(screen.getByRole('button', {name: 'View details for UI salvador'}))
     expect(onSelect).toHaveBeenCalledWith(7)
+  })
+
+  it('renders card art and omits stats when the awakener has no stat block', () => {
+    render(
+      <AwakenerGridCard
+        awakener={{...TEST_AWAKENER, id: 8, name: 'atlas', stats: undefined}}
+        onSelect={vi.fn()}
+      />,
+    )
+
+    expect(screen.getByRole('img', {name: 'UI atlas'})).toHaveAttribute('src', 'atlas-card')
+    expect(screen.queryByText('No Image')).toBeNull()
+    expect(screen.queryByText('111')).toBeNull()
   })
 })

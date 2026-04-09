@@ -6,23 +6,36 @@ import {resolveTag} from '@/domain/tags'
 
 import {RichDescription} from './RichDescription'
 
-vi.mock('./PopoverTrailPanel', () => ({
+vi.mock('../RichTextPopovers/PopoverTrailPanel', () => ({
   PopoverTrailPanel: ({children}: {children: React.ReactNode}) => <div>{children}</div>,
 }))
 
-vi.mock('./SkillPopover', () => ({
-  SkillPopover: ({name, label}: {name: string; label: string}) => (
+vi.mock('../RichTextPopovers/SkillPopover', () => ({
+  SkillPopover: ({
+    name,
+    label,
+    onNavigateToCards,
+  }: {
+    name: string
+    label: string
+    onNavigateToCards?: () => void
+  }) => (
     <div>
       Skill Popover {label} {name}
+      {onNavigateToCards ? (
+        <button onClick={onNavigateToCards} type='button'>
+          Navigate to cards
+        </button>
+      ) : null}
     </div>
   ),
 }))
 
-vi.mock('./TagPopover', () => ({
+vi.mock('../RichTextPopovers/TagPopover', () => ({
   TagPopover: ({tag}: {tag: {label: string}}) => <div>Tag Popover {tag.label}</div>,
 }))
 
-vi.mock('./ScalingPopover', () => ({
+vi.mock('../RichTextPopovers/ScalingPopover', () => ({
   ScalingPopover: ({values, suffix}: {values: number[]; suffix: string}) => (
     <div>
       Scaling Popover {values.join('/')}
@@ -130,5 +143,28 @@ describe('RichDescription', () => {
 
     fireEvent.click(screen.getByRole('button', {name: 'Rouse'}))
     expect(screen.getByText('Skill Popover Cost 1 Rouse')).toBeInTheDocument()
+  })
+
+  it('clears the trail when navigating to the cards tab from a skill popover', () => {
+    const onNavigateToCards = vi.fn()
+
+    render(
+      <RichDescription
+        cardNames={new Set(['Strike'])}
+        fullData={TEST_FULL_DATA}
+        onNavigateToCards={onNavigateToCards}
+        skillLevel={1}
+        stats={TEST_FULL_DATA.stats}
+        text='Use {Strike}.'
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: 'Strike'}))
+    expect(screen.getByText('Skill Popover Cost 2 Strike')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: 'Navigate to cards'}))
+
+    expect(onNavigateToCards).toHaveBeenCalledTimes(1)
+    expect(screen.queryByText('Skill Popover Cost 2 Strike')).toBeNull()
   })
 })

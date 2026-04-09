@@ -1,21 +1,16 @@
-import {useCallback, useMemo, useState} from 'react'
+import {useCallback, useMemo} from 'react'
 
 import {getAwakeners, type Awakener} from '@/domain/awakeners'
 import {searchAwakeners} from '@/domain/awakeners-search'
 import type {CollectionSortDirection} from '@/domain/collection-sorting'
 import {compareAwakenersForDatabaseSort, type DatabaseSortKey} from '@/domain/database-sorting'
 
-export type RealmFilterId = 'ALL' | 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA'
-export type RarityFilterId = 'ALL' | 'Genesis' | 'SSR' | 'SR'
-export type TypeFilterId = 'ALL' | 'ASSAULT' | 'WARDEN' | 'CHORUS'
-
-export const DATABASE_SORT_OPTIONS: readonly DatabaseSortKey[] = [
-  'ALPHABETICAL',
-  'RARITY',
-  'ATK',
-  'DEF',
-  'CON',
-]
+import {
+  useDatabaseStore,
+  type RarityFilterId,
+  type RealmFilterId,
+  type TypeFilterId,
+} from './useDatabaseStore'
 
 const allAwakeners = getAwakeners()
 
@@ -54,13 +49,22 @@ function applySorting(
 }
 
 export function useDatabaseViewModel() {
-  const [query, setQueryRaw] = useState('')
-  const [realmFilter, setRealmFilter] = useState<RealmFilterId>('ALL')
-  const [rarityFilter, setRarityFilter] = useState<RarityFilterId>('ALL')
-  const [typeFilter, setTypeFilter] = useState<TypeFilterId>('ALL')
-  const [sortKey, setSortKey] = useState<DatabaseSortKey>('ALPHABETICAL')
-  const [sortDirection, setSortDirection] = useState<CollectionSortDirection>('ASC')
-  const [groupByRealm, setGroupByRealm] = useState(false)
+  const query = useDatabaseStore((state) => state.query)
+  const realmFilter = useDatabaseStore((state) => state.realmFilter)
+  const rarityFilter = useDatabaseStore((state) => state.rarityFilter)
+  const typeFilter = useDatabaseStore((state) => state.typeFilter)
+  const sortKey = useDatabaseStore((state) => state.sortKey)
+  const sortDirection = useDatabaseStore((state) => state.sortDirection)
+  const groupByRealm = useDatabaseStore((state) => state.groupByRealm)
+  const setQueryRaw = useDatabaseStore((state) => state.setQuery)
+  const appendSearchCharacterRaw = useDatabaseStore((state) => state.appendSearchCharacter)
+  const clearQueryRaw = useDatabaseStore((state) => state.clearQuery)
+  const setRealmFilter = useDatabaseStore((state) => state.setRealmFilter)
+  const setRarityFilter = useDatabaseStore((state) => state.setRarityFilter)
+  const setTypeFilter = useDatabaseStore((state) => state.setTypeFilter)
+  const setSortKey = useDatabaseStore((state) => state.setSortKey)
+  const toggleSortDirectionRaw = useDatabaseStore((state) => state.toggleSortDirection)
+  const setGroupByRealm = useDatabaseStore((state) => state.setGroupByRealm)
 
   const filteredAwakeners = useMemo(() => {
     const searched = searchAwakeners(allAwakeners, query)
@@ -68,21 +72,27 @@ export function useDatabaseViewModel() {
     return applySorting(filtered, sortKey, sortDirection, groupByRealm)
   }, [query, realmFilter, rarityFilter, typeFilter, sortKey, sortDirection, groupByRealm])
 
-  const setQuery = useCallback((next: string) => {
-    setQueryRaw(next)
-  }, [])
+  const setQuery = useCallback(
+    (next: string) => {
+      setQueryRaw(next)
+    },
+    [setQueryRaw],
+  )
 
-  const appendSearchCharacter = useCallback((key: string) => {
-    setQueryRaw((prev) => prev + key)
-  }, [])
+  const appendSearchCharacter = useCallback(
+    (key: string) => {
+      appendSearchCharacterRaw(key)
+    },
+    [appendSearchCharacterRaw],
+  )
 
   const clearQuery = useCallback(() => {
-    setQueryRaw('')
-  }, [])
+    clearQueryRaw()
+  }, [clearQueryRaw])
 
   const toggleSortDirection = useCallback(() => {
-    setSortDirection((prev) => (prev === 'ASC' ? 'DESC' : 'ASC'))
-  }, [])
+    toggleSortDirectionRaw()
+  }, [toggleSortDirectionRaw])
 
   return {
     awakeners: filteredAwakeners,

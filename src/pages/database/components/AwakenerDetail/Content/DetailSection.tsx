@@ -1,7 +1,7 @@
 import type {ReactNode} from 'react'
 
-import {scaledFontStyle} from '../../utils/font-scale'
-import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from '../../utils/text-styles'
+import {scaledFontStyle} from '../../../utils/font-scale'
+import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from '../../../utils/text-styles'
 
 export interface DetailSectionItem {
   key: string
@@ -37,7 +37,7 @@ export function DetailSection({
         <div className='flex flex-col gap-y-3 pt-0 pb-2'>
           {items.map((item) => (
             <div
-              className='border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'
+              className='border border-white/4 bg-white/2 px-3.5 py-2.5 shadow-sm'
               key={item.key}
             >
               <div className='m-0 flex items-center text-slate-300' style={scaledFontStyle(12)}>
@@ -45,7 +45,7 @@ export function DetailSection({
                 <span className='mx-1.5 self-center text-slate-600'>·</span>
                 <span className={`${DATABASE_ITEM_NAME_CLASS} self-center`}>{item.name}</span>
               </div>
-              <div className='my-2 h-px w-full bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent' />
+              <div className='my-2 h-px w-full bg-linear-to-r from-white/8 via-white/3 to-transparent' />
               <div className='mt-1 pl-2 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
                 {renderDescription ? renderDescription(item.description) : item.description}
               </div>

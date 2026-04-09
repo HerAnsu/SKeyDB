@@ -1,4 +1,4 @@
-import {DetailLevelSlider} from '../AwakenerDetail/DetailLevelSlider'
+import {DetailLevelSlider} from '../AwakenerDetail/Controls'
 
 interface AwakenerLevelSliderProps {
   level: number

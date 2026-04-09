@@ -14,7 +14,7 @@ vi.mock('../../../../domain/relic-assets', () => ({
   getRelicPortraitAssetByAssetId: () => null,
 }))
 
-vi.mock('./RichDescription', () => ({
+vi.mock('../../RichText/RichDescription', () => ({
   RichDescription: ({text}: {text: string}) => <span>{text}</span>,
 }))
 
@@ -85,5 +85,50 @@ describe('AwakenerDetailOverview', () => {
     expect(screen.getByText('Third Talent')).toBeInTheDocument()
     expect(screen.getByText('Fourth Talent')).toBeInTheDocument()
     expect(screen.getByText('T4')).toBeInTheDocument()
+  })
+
+  it('renders enlightens, including the E4 absolute axiom fallback', () => {
+    render(
+      <AwakenerDetailOverview
+        awakener={TEST_AWAKENER}
+        cardNames={new Set()}
+        fullData={{
+          ...TEST_FULL_DATA,
+          talents: {},
+          enlightens: {
+            E1: {name: 'E1 Name', description: 'E1 description'},
+            E2: {name: 'E2 Name', description: 'E2 description'},
+            E3: {name: 'E3 Name', description: 'E3 description'},
+            E4: {name: 'Absolute Axiom', description: 'Axiom description'},
+          },
+        }}
+        skillLevel={1}
+        fontScale='large'
+        stats={TEST_FULL_DATA.stats}
+        mode='copies'
+      />,
+    )
+
+    expect(screen.getByText('E1 Name')).toBeInTheDocument()
+    expect(screen.getByText('E2 Name')).toBeInTheDocument()
+    expect(screen.getByText('E3 Name')).toBeInTheDocument()
+    expect(screen.getByText('Absolute Axiom')).toBeInTheDocument()
+    expect(screen.getByText('Е15')).toBeInTheDocument()
+  })
+
+  it('shows an empty state when no entries exist for the selected mode', () => {
+    render(
+      <AwakenerDetailOverview
+        awakener={TEST_AWAKENER}
+        cardNames={new Set()}
+        fullData={{...TEST_FULL_DATA, talents: {}, enlightens: {}}}
+        skillLevel={1}
+        fontScale='medium'
+        stats={TEST_FULL_DATA.stats}
+        mode='talents'
+      />,
+    )
+
+    expect(screen.getByText('No talent data available.')).toBeInTheDocument()
   })
 })

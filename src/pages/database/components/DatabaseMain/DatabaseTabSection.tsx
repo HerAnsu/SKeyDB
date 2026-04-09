@@ -40,6 +40,7 @@ export function DatabaseTabSection({
   children,
 }: DatabaseTabSectionProps) {
   const [collapsed, setCollapsed] = useState(defaultCollapsed)
+  const collapseLabel = collapsed ? 'Show' : 'Hide'
 
   return (
     <div className='border border-slate-600/30 bg-slate-900/30'>
@@ -54,7 +55,7 @@ export function DatabaseTabSection({
             type='button'
           >
             <span>{title}</span>
-            <span className='text-[10px] text-slate-400/80'>{collapsed ? '▸ Show' : '▾ Hide'}</span>
+            <span className='text-[10px] text-slate-400/80'>{collapseLabel}</span>
           </button>
         ) : (
           <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
@@ -74,7 +75,7 @@ export function DatabaseTabSubsection({children}: DatabaseTabSubsectionProps) {
       {items.map((child, index) => (
         <div key={index}>
           {index > 0 ? (
-            <div className='mx-4 h-px bg-gradient-to-r from-slate-600/50 via-slate-600/20 to-transparent' />
+            <div className='mx-4 h-px bg-linear-to-r from-slate-600/50 via-slate-600/20 to-transparent' />
           ) : null}
           {child}
         </div>
@@ -87,7 +88,7 @@ export function DatabaseTabRow({label, children, showDivider = false}: DatabaseT
   return (
     <div>
       {showDivider ? (
-        <div className='mx-4 h-px bg-gradient-to-r from-slate-600/50 via-slate-600/20 to-transparent' />
+        <div className='mx-4 h-px bg-linear-to-r from-slate-600/50 via-slate-600/20 to-transparent' />
       ) : null}
       <div className='px-4 py-2.5'>
         <p className='ui-title text-amber-200/90' style={scaledFontStyle(12)}>

@@ -4,8 +4,8 @@ import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.png'
 import type {Awakener} from '@/domain/awakeners'
 import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
 
-import {getStarSize, type FontScale} from '../../utils/font-scale'
-import {RichDescription} from '../RichText/RichDescription'
+import {getStarSize, type FontScale} from '../../../utils/font-scale'
+import {RichDescription} from '../../RichText/RichDescription'
 import {DetailSection, type DetailSectionItem} from './DetailSection'
 
 type AwakenerDetailOverviewProps = Readonly<{

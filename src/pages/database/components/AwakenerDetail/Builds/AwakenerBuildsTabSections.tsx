@@ -1,25 +1,15 @@
-import {useMemo, useState} from 'react'
+import {useState} from 'react'
 
 import {CompactArtTile} from '@/components/ui/CompactArtTile'
-import {
-  getAwakenerBuildEntryById,
-  type AwakenerBuild,
-  type AwakenerBuildWheelTier,
-} from '@/domain/awakener-builds'
+import {type AwakenerBuild, type AwakenerBuildWheelTier} from '@/domain/awakener-builds'
 import {getCovenantAssetById} from '@/domain/covenant-assets'
 import {getCovenants} from '@/domain/covenants'
 import {getMainstatByKey, getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
-import {useAwakenerBuildEntries} from '@/domain/useAwakenerBuildEntries'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelById} from '@/domain/wheels'
 
-import {scaledFontStyle} from '../../utils/font-scale'
-import {DATABASE_SECTION_TITLE_CLASS} from '../../utils/text-styles'
-import {DatabaseTab} from '../DatabaseMain/DatabaseTabSection'
-
-interface AwakenerBuildsTabProps {
-  awakenerId: number
-}
+import {scaledFontStyle} from '../../../utils/font-scale'
+import {DATABASE_SECTION_TITLE_CLASS} from '../../../utils/text-styles'
 
 const PRIMARY_WHEEL_TIERS: AwakenerBuildWheelTier[] = ['BIS_SSR', 'ALT_SSR', 'BIS_SR']
 
@@ -33,11 +23,11 @@ const TIER_LABELS: Record<AwakenerBuildWheelTier, string> = {
 const RECOMMENDATION_GRID_CLASS =
   'grid grid-cols-[repeat(auto-fill,minmax(6rem,6rem))] items-start gap-2 justify-start'
 
+const covenantNameById = new Map(getCovenants().map((covenant) => [covenant.id, covenant.name]))
+
 function getWheelGroupByTier(build: AwakenerBuild, tier: AwakenerBuildWheelTier) {
   return build.recommendedWheels.find((group) => group.tier === tier)
 }
-
-const covenantNameById = new Map(getCovenants().map((covenant) => [covenant.id, covenant.name]))
 
 function RecommendationTile({
   asset,
@@ -81,33 +71,13 @@ function RecommendationTile({
   )
 }
 
-function SubstatPriorityInline({build}: {build: AwakenerBuild}) {
-  return (
-    <div className='mt-1 flex flex-wrap items-center gap-1.5 text-sm text-slate-200'>
-      {build.substatPriorityGroups.map((group, groupIndex) => (
-        <div className='contents' key={`${build.id}-${String(groupIndex)}`}>
-          {group.map((key, statIndex) => (
-            <div className='contents' key={key}>
-              {statIndex > 0 ? <span className='text-slate-500'>=</span> : null}
-              <SubstatIconChip mainstatKey={key} />
-            </div>
-          ))}
-          {groupIndex < build.substatPriorityGroups.length - 1 ? (
-            <span className='text-slate-500'>{'>'}</span>
-          ) : null}
-        </div>
-      ))}
-    </div>
-  )
-}
-
 function SubstatIconChip({mainstatKey}: {mainstatKey: MainstatKey}) {
   const icon = getMainstatIcon(mainstatKey)
   const label = getMainstatByKey(mainstatKey)?.label ?? mainstatKey
 
   return (
     <span
-      className='inline-flex items-center justify-center gap-1.5 border border-white/[0.06] bg-white/[0.02] px-2 shadow-sm'
+      className='inline-flex items-center justify-center gap-1.5 border border-white/6 bg-white/2 px-2 shadow-sm'
       style={{...scaledFontStyle(14), height: '1.7em'}}
       title={label}
     >
@@ -131,6 +101,26 @@ function SubstatIconChip({mainstatKey}: {mainstatKey: MainstatKey}) {
         {label}
       </span>
     </span>
+  )
+}
+
+function SubstatPriorityInline({build}: {build: AwakenerBuild}) {
+  return (
+    <div className='mt-1 flex flex-wrap items-center gap-1.5 text-sm text-slate-200'>
+      {build.substatPriorityGroups.map((group, groupIndex) => (
+        <div className='contents' key={`${build.id}-${String(groupIndex)}`}>
+          {group.map((key, statIndex) => (
+            <div className='contents' key={key}>
+              {statIndex > 0 ? <span className='text-slate-500'>=</span> : null}
+              <SubstatIconChip mainstatKey={key} />
+            </div>
+          ))}
+          {groupIndex < build.substatPriorityGroups.length - 1 ? (
+            <span className='text-slate-500'>{'>'}</span>
+          ) : null}
+        </div>
+      ))}
+    </div>
   )
 }
 
@@ -205,16 +195,14 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
         </div>
       </div>
       {hasGoodOptions ? (
-        <>
-          <div>
-            <p className='text-slate-300/75' style={scaledFontStyle(11)}>
-              Good Options
-            </p>
-            <div className='mt-1.5'>
-              <RecommendationLine build={build} tiers={['GOOD']} />
-            </div>
+        <div>
+          <p className='text-slate-300/75' style={scaledFontStyle(11)}>
+            Good Options
+          </p>
+          <div className='mt-1.5'>
+            <RecommendationLine build={build} tiers={['GOOD']} />
           </div>
-        </>
+        </div>
       ) : null}
     </div>
   )
@@ -226,11 +214,9 @@ function BuildSection({title, children}: {title: string; children: React.ReactNo
       <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
         {title}
       </h4>
-      <div className='mx-4 mt-0.5 mb-1.5 h-px bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent' />
+      <div className='mx-4 mt-0.5 mb-1.5 h-px bg-linear-to-r from-white/8 via-white/3 to-transparent' />
       <div className='flex flex-col gap-y-3 px-4 pt-1 pb-2'>
-        <div className='border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'>
-          {children}
-        </div>
+        <div className='border border-white/4 bg-white/2 px-3.5 py-2.5 shadow-sm'>{children}</div>
       </div>
     </div>
   )
@@ -242,13 +228,13 @@ function BuildTilesSection({title, children}: {title: string; children: React.Re
       <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
         {title}
       </h4>
-      <div className='mx-4 mt-0.5 mb-1.5 h-px bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent' />
+      <div className='mx-4 mt-0.5 mb-1.5 h-px bg-linear-to-r from-white/8 via-white/3 to-transparent' />
       <div className='flex flex-col gap-y-3 px-4 pt-1 pb-2'>{children}</div>
     </div>
   )
 }
 
-function BuildCard({
+export function AwakenerBuildCard({
   build,
   showLabel,
   collapsible = false,
@@ -308,7 +294,7 @@ function BuildCard({
           <button
             className='flex w-full items-center gap-1.5 text-left transition-opacity hover:opacity-80'
             onClick={() => {
-              setCollapsed((c) => !c)
+              setCollapsed((current) => !current)
             }}
             type='button'
           >
@@ -318,7 +304,7 @@ function BuildCard({
             >
               {sectionTitle}
             </h3>
-            <div className='h-0.5 flex-1 bg-white/[0.06]' />
+            <div className='h-0.5 flex-1 bg-white/6' />
             <span className='whitespace-nowrap text-amber-100/50' style={scaledFontStyle(10)}>
               {collapsed ? 'SHOW' : 'HIDE'}
             </span>
@@ -331,47 +317,16 @@ function BuildCard({
             >
               {sectionTitle}
             </h3>
-            <div className='h-0.5 flex-1 bg-white/[0.06]' />
+            <div className='h-0.5 flex-1 bg-white/6' />
           </div>
         )
       ) : null}
 
       {!collapsed ? (
-        <div className='ml-4 space-y-4 border-b-2 border-l-2 border-white/[0.06] pt-1 pb-4 pl-4'>
+        <div className='ml-4 space-y-4 border-b-2 border-l-2 border-white/6 pt-1 pb-4 pl-4'>
           {content}
         </div>
       ) : null}
     </div>
-  )
-}
-
-export function AwakenerBuildsTab({awakenerId}: AwakenerBuildsTabProps) {
-  const entries = useAwakenerBuildEntries()
-
-  const entry = useMemo(() => {
-    return entries ? getAwakenerBuildEntryById(awakenerId, entries) : undefined
-  }, [awakenerId, entries])
-
-  if (!entries) {
-    return <p className='py-4 text-xs text-slate-400'>Loading...</p>
-  }
-
-  if (!entry) {
-    return <p className='py-4 text-xs text-slate-400'>No curated builds available yet.</p>
-  }
-
-  const showBuildLabels = entry.builds.length > 1
-
-  return (
-    <DatabaseTab>
-      {entry.builds.map((build) => (
-        <BuildCard
-          build={build}
-          collapsible={showBuildLabels}
-          key={build.id}
-          showLabel={showBuildLabels}
-        />
-      ))}
-    </DatabaseTab>
   )
 }

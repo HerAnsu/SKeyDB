@@ -6,23 +6,23 @@ import type {AwakenerFullStats, AwakenerSubstatScaling} from '@/domain/awakeners
 
 import {AwakenerDetailSidebar} from './AwakenerDetailSidebar'
 
-vi.mock('../../../../domain/awakener-assets', () => ({
+vi.mock('../../../../../domain/awakener-assets', () => ({
   getAwakenerCardAsset: () => null,
 }))
 
-vi.mock('../../../../domain/name-format', () => ({
+vi.mock('../../../../../domain/name-format', () => ({
   formatAwakenerNameForUi: (name: string) => name,
 }))
 
-vi.mock('../../../../domain/mainstats', () => ({
+vi.mock('../../../../../domain/mainstats', () => ({
   getMainstatIcon: () => null,
 }))
 
-vi.mock('../DatabaseMain/AwakenerLevelSlider', () => ({
+vi.mock('../../DatabaseMain', () => ({
   AwakenerLevelSlider: ({level}: {level: number}) => <div>Level slider {level}</div>,
 }))
 
-vi.mock('./SkillLevelSlider', () => ({
+vi.mock('../Controls/SkillLevelSlider', () => ({
   SkillLevelSlider: ({level}: {level: number}) => <div>Skill slider {level}</div>,
 }))
 

@@ -1,11 +1,12 @@
 import {fireEvent, render, screen, waitFor} from '@testing-library/react'
-import {describe, expect, it, vi} from 'vitest'
+import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import type {Awakener} from '@/domain/awakeners'
 
+import {resetAwakenerDetailModalStore} from '../State/useAwakenerDetailModalStore'
 import {AwakenerDetailModal} from './AwakenerDetailModal'
 
-vi.mock('../../../../domain/awakeners-full', () => ({
+vi.mock('../../../../../domain/awakeners-full', () => ({
   loadAwakenersFull: async () => [
     {
       id: 1,
@@ -74,19 +75,19 @@ vi.mock('../../../../domain/awakeners-full', () => ({
     data.find((entry) => entry.id === id) ?? null,
 }))
 
-vi.mock('../../../../domain/awakener-assets', () => ({
+vi.mock('../../../../../domain/awakener-assets', () => ({
   getAwakenerPortraitAsset: () => null,
 }))
 
-vi.mock('../../../../domain/rich-text', () => ({
+vi.mock('../../../../../domain/rich-text', () => ({
   getCardNamesFromFull: () => new Set<string>(),
 }))
 
-vi.mock('../../../../domain/name-format', () => ({
+vi.mock('../../../../../domain/name-format', () => ({
   formatAwakenerNameForUi: (name: string) => name,
 }))
 
-vi.mock('../../../../domain/factions', () => ({
+vi.mock('../../../../../domain/factions', () => ({
   getRealmIcon: () => null,
   getRealmLabel: (realm: string) => realm,
   getRealmTint: () => '#ffffff',
@@ -154,7 +155,7 @@ vi.mock('./AwakenerDetailSidebar', () => ({
   ),
 }))
 
-vi.mock('./AwakenerDetailOverview', () => ({
+vi.mock('../Content/AwakenerDetailOverview', () => ({
   AwakenerDetailOverview: ({
     stats,
     mode,
@@ -173,15 +174,15 @@ vi.mock('./AwakenerDetailOverview', () => ({
   ),
 }))
 
-vi.mock('./AwakenerDetailCards', () => ({
+vi.mock('../Content/AwakenerDetailCards', () => ({
   AwakenerDetailCards: () => <div>Skills Tab</div>,
 }))
 
-vi.mock('./AwakenerBuildsTab', () => ({
+vi.mock('../Builds/AwakenerBuildsTab', () => ({
   AwakenerBuildsTab: ({awakenerId}: {awakenerId: number}) => <div>Builds Tab {awakenerId}</div>,
 }))
 
-vi.mock('./AwakenerTeamsTab', () => ({
+vi.mock('../Content/AwakenerTeamsTab', () => ({
   AwakenerTeamsTab: () => <div>Teams Tab</div>,
 }))
 
@@ -197,6 +198,11 @@ function makeAwakener(id: number, name: string): Awakener {
     tags: [],
   }
 }
+
+afterEach(() => {
+  localStorage.clear()
+  resetAwakenerDetailModalStore()
+})
 
 describe('AwakenerDetailModal', () => {
   it('resets active tab to Skills when switching awakeners', async () => {

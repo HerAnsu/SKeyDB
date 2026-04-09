@@ -19,16 +19,23 @@ vi.mock('./DetailSection', () => ({
   ),
 }))
 
-vi.mock('./RichDescription', () => ({
+vi.mock('../../RichText/RichDescription', () => ({
   RichDescription: ({text}: {text: string}) => <span>{text}</span>,
 }))
 
 vi.mock('@/domain/relics', () => ({
-  getPortraitRelicByAwakenerIngameId: () => null,
+  getPortraitRelicByAwakenerIngameId: (id: string) =>
+    id === 'portrait'
+      ? {
+          name: 'Portrait Relic',
+          assetId: 'portrait-relic',
+          description: 'Portrait description',
+        }
+      : null,
 }))
 
 vi.mock('@/domain/relic-assets', () => ({
-  getRelicPortraitAssetByAssetId: () => null,
+  getRelicPortraitAssetByAssetId: (assetId: string) => `asset-${assetId}`,
 }))
 
 const TEST_AWAKENER: Awakener = {
@@ -117,5 +124,31 @@ describe('AwakenerDetailCards', () => {
     expect(screen.getByText('First card description')).toBeInTheDocument()
     expect(screen.getByText('Second card description')).toBeInTheDocument()
     expect(screen.getByText('Dimensional Image')).toBeInTheDocument()
+  })
+
+  it('renders sparse card keys and linked dimensional image content', () => {
+    render(
+      <AwakenerDetailCards
+        awakener={{...TEST_AWAKENER, ingameId: 'portrait'}}
+        cardNames={new Set(['First Card', 'Third Card'])}
+        fullData={{
+          ...TEST_FULL_DATA,
+          cards: {
+            C1: {name: 'First Card', cost: '2', description: 'First card description'},
+            C3: {name: 'Third Card', cost: '4', description: 'Third card description'},
+          },
+        }}
+        skillLevel={1}
+        stats={TEST_FULL_DATA.stats}
+      />,
+    )
+
+    expect(screen.getByText('Rouse')).toBeInTheDocument()
+    expect(screen.getByText('C3')).toBeInTheDocument()
+    expect(screen.getByText('Portrait description')).toBeInTheDocument()
+    expect(screen.getByRole('img', {name: 'Portrait Relic icon'})).toHaveAttribute(
+      'src',
+      'asset-portrait-relic',
+    )
   })
 })

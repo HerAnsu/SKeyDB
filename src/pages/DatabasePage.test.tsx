@@ -2,6 +2,7 @@ import {fireEvent, render, screen} from '@testing-library/react'
 import {MemoryRouter, Route, Routes, useLocation} from 'react-router-dom'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
+import {resetDatabaseStore} from './database/hooks/useDatabaseStore'
 import {DatabasePage} from './DatabasePage'
 
 vi.mock('../domain/awakeners', () => ({
@@ -57,7 +58,7 @@ vi.mock('../domain/mainstats', () => ({
   getMainstatIcon: () => null,
 }))
 
-vi.mock('./database/components/AwakenerDetail/AwakenerDetailModal', () => ({
+vi.mock('./database/components/AwakenerDetail', () => ({
   AwakenerDetailModal: ({
     awakener,
     onClose,
@@ -88,6 +89,7 @@ vi.mock('./database/components/AwakenerDetail/AwakenerDetailModal', () => ({
 }))
 
 afterEach(() => {
+  resetDatabaseStore()
   vi.restoreAllMocks()
 })
 

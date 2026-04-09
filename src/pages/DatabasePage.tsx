@@ -12,9 +12,8 @@ import {
 } from '@/domain/database-paths'
 
 import {useGlobalCollectionSearchCapture} from './collection/useGlobalCollectionSearchCapture'
-import {AwakenerDetailModal} from './database/components/AwakenerDetail/AwakenerDetailModal'
-import {DatabaseFilters} from './database/components/DatabaseMain/DatabaseFilters'
-import {DatabaseGrid} from './database/components/DatabaseMain/DatabaseGrid'
+import {AwakenerDetailModal} from './database/components/AwakenerDetail'
+import {DatabaseFilters, DatabaseGrid} from './database/components/DatabaseMain'
 import {useDatabaseViewModel} from './database/hooks/useDatabaseViewModel'
 
 export function DatabasePage() {

@@ -6,9 +6,9 @@ import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
 import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
 import {getPortraitRelicByAwakenerIngameId} from '@/domain/relics'
 
-import {scaledFontStyle} from '../../utils/font-scale'
-import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from '../../utils/text-styles'
-import {RichDescription} from '../RichText/RichDescription'
+import {scaledFontStyle} from '../../../utils/font-scale'
+import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from '../../../utils/text-styles'
+import {RichDescription} from '../../RichText/RichDescription'
 import {DetailSection} from './DetailSection'
 
 type AwakenerDetailCardsProps = Readonly<{
@@ -84,10 +84,7 @@ export function AwakenerDetailCards({
         </h4>
         <div className='flex flex-col gap-y-3 pt-0 pb-2'>
           {cardEntries.map(({key, card}) => (
-            <div
-              className='border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'
-              key={key}
-            >
+            <div className='border border-white/4 bg-white/2 px-3.5 py-2.5 shadow-sm' key={key}>
               <div className='flex items-center justify-between gap-3'>
                 <div className='flex min-w-0 items-center gap-2.5'>
                   <span
@@ -115,7 +112,7 @@ export function AwakenerDetailCards({
                   {key === 'C1' ? 'Rouse' : key}
                 </span>
               </div>
-              <div className='my-2 h-px w-full bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent' />
+              <div className='my-2 h-px w-full bg-linear-to-r from-white/8 via-white/3 to-transparent' />
               <div
                 className='mt-1.5 pl-2 leading-relaxed text-slate-400'
                 style={scaledFontStyle(12)}
@@ -133,7 +130,7 @@ export function AwakenerDetailCards({
         </h4>
         {portraitRelic ? (
           <div className='pt-1 pb-2'>
-            <div className='flex items-start gap-3 border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5 shadow-sm'>
+            <div className='flex items-start gap-3 border border-white/4 bg-white/2 px-3.5 py-2.5 shadow-sm'>
               <div className='h-16 w-16 shrink-0 overflow-hidden'>
                 {portraitRelicAsset ? (
                   <img

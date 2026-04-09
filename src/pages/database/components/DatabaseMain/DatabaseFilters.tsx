@@ -11,7 +11,8 @@ import {
   type RarityFilterId,
   type RealmFilterId,
   type TypeFilterId,
-} from '../../hooks/useDatabaseViewModel'
+} from '../../hooks/useDatabaseStore'
+import {RARITY_FILTER_TABS, REALM_FILTERS, TYPE_FILTER_TABS} from './database-filter-config'
 
 interface DatabaseFiltersProps {
   query: string
@@ -32,22 +33,6 @@ interface DatabaseFiltersProps {
   onSortDirectionToggle: () => void
   onGroupByRealmChange: (next: boolean) => void
 }
-
-const REALM_FILTERS: RealmFilterId[] = ['AEQUOR', 'CARO', 'CHAOS', 'ULTRA']
-
-const rarityFilterTabs: {id: RarityFilterId; label: string}[] = [
-  {id: 'ALL', label: 'All'},
-  {id: 'Genesis', label: 'Genesis'},
-  {id: 'SSR', label: 'SSR'},
-  {id: 'SR', label: 'SR'},
-]
-
-const typeFilterTabs: {id: TypeFilterId; label: string}[] = [
-  {id: 'ALL', label: 'All'},
-  {id: 'ASSAULT', label: 'Assault'},
-  {id: 'WARDEN', label: 'Warden'},
-  {id: 'CHORUS', label: 'Chorus'},
-]
 
 function chipClass(active: boolean): string {
   return `inline-flex items-center gap-1.5 border px-2.5 py-1 text-[11px] uppercase tracking-wide transition-colors ${
@@ -142,7 +127,7 @@ export function DatabaseFilters({
       </FilterRow>
 
       <FilterRow label='Rarity'>
-        {rarityFilterTabs.map((entry) => (
+        {RARITY_FILTER_TABS.map((entry) => (
           <button
             className={chipClass(rarityFilter === entry.id)}
             key={entry.id}
@@ -157,7 +142,7 @@ export function DatabaseFilters({
       </FilterRow>
 
       <FilterRow label='Type'>
-        {typeFilterTabs.map((entry) => (
+        {TYPE_FILTER_TABS.map((entry) => (
           <button
             className={chipClass(typeFilter === entry.id)}
             key={entry.id}
