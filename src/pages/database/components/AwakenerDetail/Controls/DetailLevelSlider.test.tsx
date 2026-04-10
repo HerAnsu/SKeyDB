@@ -33,4 +33,22 @@ describe('DetailLevelSlider', () => {
     fireEvent.change(slider, {target: {value: '77'}})
     expect(onChange).toHaveBeenCalledWith(77)
   })
+
+  it('allows editing the numeric badge directly and clamps to the valid range', () => {
+    const onChange = vi.fn()
+
+    render(
+      <DetailLevelSlider label='Psyche Surge' level={3} max={12} min={0} onChange={onChange} />,
+    )
+
+    const valueInput = screen.getByRole('textbox', {name: 'Psyche Surge value'})
+
+    fireEvent.change(valueInput, {target: {value: '9'}})
+    fireEvent.blur(valueInput)
+    expect(onChange).toHaveBeenCalledWith(9)
+
+    fireEvent.change(valueInput, {target: {value: '99'}})
+    fireEvent.keyDown(valueInput, {key: 'Enter'})
+    expect(onChange).toHaveBeenCalledWith(12)
+  })
 })

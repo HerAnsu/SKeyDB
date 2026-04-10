@@ -42,8 +42,7 @@ export function AwakenerDetailModal({
   const initializeModalState = useAwakenerDetailModalStore((state) => state.initialize)
   const setInternalActiveTab = useAwakenerDetailModalStore((state) => state.setActiveTab)
   const setAwakenerLevel = useAwakenerDetailModalStore((state) => state.setAwakenerLevel)
-  const increasePsycheSurge = useAwakenerDetailModalStore((state) => state.increasePsycheSurge)
-  const decreasePsycheSurge = useAwakenerDetailModalStore((state) => state.decreasePsycheSurge)
+  const setPsycheSurgeOffset = useAwakenerDetailModalStore((state) => state.setPsycheSurgeOffset)
   const setSkillLevel = useAwakenerDetailModalStore((state) => state.setSkillLevel)
   const setFontScale = useAwakenerDetailModalStore((state) => state.setFontScale)
   const toggleScalingMenu = useAwakenerDetailModalStore((state) => state.toggleScalingMenu)
@@ -55,7 +54,7 @@ export function AwakenerDetailModal({
   const panelRef = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
-    initializeModalState()
+    initializeModalState(awakener.id)
   }, [awakener.id, initializeModalState])
 
   useEffect(() => {
@@ -188,13 +187,12 @@ export function AwakenerDetailModal({
     [setAwakenerLevel],
   )
 
-  const handleIncreasePsycheSurge = useCallback(() => {
-    increasePsycheSurge()
-  }, [increasePsycheSurge])
-
-  const handleDecreasePsycheSurge = useCallback(() => {
-    decreasePsycheSurge()
-  }, [decreasePsycheSurge])
+  const handlePsycheSurgeChange = useCallback(
+    (offset: number) => {
+      setPsycheSurgeOffset(offset)
+    },
+    [setPsycheSurgeOffset],
+  )
 
   const handleFontScaleChange = useCallback(
     (nextFontScale: FontScale) => {
@@ -234,16 +232,17 @@ export function AwakenerDetailModal({
         />
 
         <div className='flex min-h-0 flex-1'>
-          <aside className='database-scrollbar hidden w-56 shrink-0 overflow-y-auto py-4 pr-2 pl-4 md:block lg:w-64'>
+          <aside className='database-scrollbar hidden h-full w-56 shrink-0 overflow-y-auto py-4 pr-2 pl-4 md:block lg:w-64'>
             <AwakenerDetailSidebar
               awakener={awakener}
               enlightenOffset={psycheSurgeOffset}
               level={awakenerLevel}
-              onDecreaseEnlighten={handleDecreasePsycheSurge}
-              onIncreaseEnlighten={handleIncreasePsycheSurge}
               onLevelChange={handleAwakenerLevelChange}
+              onPsycheSurgeChange={handlePsycheSurgeChange}
               onSkillLevelChange={setSkillLevel}
+              scalingPreviewSource={fullData}
               skillLevel={skillLevel}
+              statScaling={fullData?.statScaling ?? null}
               stats={resolvedStats}
               substatScaling={fullData?.substatScaling ?? null}
             />
@@ -264,11 +263,12 @@ export function AwakenerDetailModal({
                   compact
                   enlightenOffset={psycheSurgeOffset}
                   level={awakenerLevel}
-                  onDecreaseEnlighten={handleDecreasePsycheSurge}
-                  onIncreaseEnlighten={handleIncreasePsycheSurge}
                   onLevelChange={handleAwakenerLevelChange}
+                  onPsycheSurgeChange={handlePsycheSurgeChange}
                   onSkillLevelChange={setSkillLevel}
+                  scalingPreviewSource={fullData}
                   skillLevel={skillLevel}
+                  statScaling={fullData?.statScaling ?? null}
                   stats={resolvedStats}
                   substatScaling={fullData?.substatScaling ?? null}
                 />

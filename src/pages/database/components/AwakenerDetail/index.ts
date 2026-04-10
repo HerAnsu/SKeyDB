@@ -6,6 +6,6 @@ export {
   DetailSection,
 } from './Content'
 export type {DetailSectionItem} from './Content'
-export {AwakenerEnlightenStepper, DetailLevelSlider, SkillLevelSlider} from './Controls'
+export {DetailLevelSlider, SkillLevelSlider} from './Controls'
 export {AwakenerDetailModal, AwakenerDetailSidebar} from './Shell'
 export {resetAwakenerDetailModalStore, useAwakenerDetailModalStore} from './State'

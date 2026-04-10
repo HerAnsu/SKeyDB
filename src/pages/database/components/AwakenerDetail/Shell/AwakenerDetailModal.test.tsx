@@ -97,19 +97,19 @@ vi.mock('./AwakenerDetailSidebar', () => ({
   AwakenerDetailSidebar: ({
     enlightenOffset,
     level,
-    onDecreaseEnlighten,
-    onIncreaseEnlighten,
     onLevelChange,
+    onPsycheSurgeChange,
     onSkillLevelChange,
+    scalingPreviewSource: _scalingPreviewSource,
     skillLevel,
     stats,
   }: {
     enlightenOffset: number
     level: number
-    onDecreaseEnlighten: () => void
-    onIncreaseEnlighten: () => void
     onLevelChange: (level: number) => void
+    onPsycheSurgeChange: (offset: number) => void
     onSkillLevelChange: (level: number) => void
+    scalingPreviewSource: unknown
     skillLevel: number
     stats: {CON: string; CritRate: string} | null
   }) => (
@@ -132,19 +132,11 @@ vi.mock('./AwakenerDetailSidebar', () => ({
       </button>
       <button
         onClick={() => {
-          onIncreaseEnlighten()
+          onPsycheSurgeChange(1)
         }}
         type='button'
       >
-        Increase Psyche Surge
-      </button>
-      <button
-        onClick={() => {
-          onDecreaseEnlighten()
-        }}
-        type='button'
-      >
-        Decrease Psyche Surge
+        Set Psyche Surge 1
       </button>
       <div>Sidebar Level {level}</div>
       <div>Sidebar Skill Level {skillLevel}</div>
@@ -263,7 +255,7 @@ describe('AwakenerDetailModal', () => {
       expect(screen.getByText('Copies Crit Rate 14.6%')).toBeInTheDocument()
     })
 
-    fireEvent.click(screen.getAllByRole('button', {name: 'Increase Psyche Surge'})[0])
+    fireEvent.click(screen.getAllByRole('button', {name: 'Set Psyche Surge 1'})[0])
 
     expect(screen.getAllByText('Sidebar E3+1')).toHaveLength(2)
     expect(screen.getAllByText('Sidebar Crit Rate 16.2%')).toHaveLength(2)

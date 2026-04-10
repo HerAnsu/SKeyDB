@@ -82,10 +82,12 @@ svg {
   max-width: 100%;
 }
 
-button {
-  font-family: inherit;
-  font-size: 0.6875rem;
-  line-height: 1.1;
+@layer base {
+  button {
+    font-family: inherit;
+    font-size: 0.6875rem;
+    line-height: inherit;
+  }
 }
 
 p {
@@ -114,7 +116,7 @@ a {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0.18em;
+  bottom: var(--db-dash-bottom, 0.18em);
   height: 1px;
   pointer-events: none;
   background-image: linear-gradient(

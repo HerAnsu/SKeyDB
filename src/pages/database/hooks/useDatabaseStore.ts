@@ -1,3 +1,4 @@
+import {produce} from 'immer'
 import {create} from 'zustand'
 
 import type {CollectionSortDirection} from '@/domain/collection-sorting'
@@ -15,7 +16,7 @@ export const DATABASE_SORT_OPTIONS: readonly DatabaseSortKey[] = [
   'CON',
 ]
 
-type DatabaseStoreState = Readonly<{
+interface DatabaseStoreState {
   query: string
   realmFilter: RealmFilterId
   rarityFilter: RarityFilterId
@@ -23,9 +24,9 @@ type DatabaseStoreState = Readonly<{
   sortKey: DatabaseSortKey
   sortDirection: CollectionSortDirection
   groupByRealm: boolean
-}>
+}
 
-type DatabaseStoreActions = Readonly<{
+interface DatabaseStoreActions {
   setQuery: (next: string) => void
   appendSearchCharacter: (key: string) => void
   clearQuery: () => void
@@ -36,7 +37,7 @@ type DatabaseStoreActions = Readonly<{
   toggleSortDirection: () => void
   setGroupByRealm: (next: boolean) => void
   reset: () => void
-}>
+}
 
 export type DatabaseStore = DatabaseStoreState & DatabaseStoreActions
 
@@ -50,6 +51,19 @@ const INITIAL_DATABASE_STORE_STATE: DatabaseStoreState = {
   groupByRealm: false,
 }
 
+function updateDatabaseStore(
+  set: (
+    partial: Partial<DatabaseStore> | ((state: DatabaseStore) => Partial<DatabaseStore>),
+  ) => void,
+  recipe: (draft: DatabaseStoreState) => void,
+): void {
+  set(
+    produce((state: DatabaseStore) => {
+      recipe(state)
+    }),
+  )
+}
+
 function createDatabaseStoreActions(
   set: (
     partial: Partial<DatabaseStore> | ((state: DatabaseStore) => Partial<DatabaseStore>),
@@ -57,34 +71,54 @@ function createDatabaseStoreActions(
 ): DatabaseStoreActions {
   return {
     setQuery: (next) => {
-      set({query: next})
+      updateDatabaseStore(set, (draft) => {
+        draft.query = next
+      })
     },
     appendSearchCharacter: (key) => {
-      set((state) => ({query: state.query + key}))
+      updateDatabaseStore(set, (draft) => {
+        draft.query = draft.query + key
+      })
     },
     clearQuery: () => {
-      set({query: ''})
+      updateDatabaseStore(set, (draft) => {
+        draft.query = ''
+      })
     },
     setRealmFilter: (filter) => {
-      set({realmFilter: filter})
+      updateDatabaseStore(set, (draft) => {
+        draft.realmFilter = filter
+      })
     },
     setRarityFilter: (filter) => {
-      set({rarityFilter: filter})
+      updateDatabaseStore(set, (draft) => {
+        draft.rarityFilter = filter
+      })
     },
     setTypeFilter: (filter) => {
-      set({typeFilter: filter})
+      updateDatabaseStore(set, (draft) => {
+        draft.typeFilter = filter
+      })
     },
     setSortKey: (key) => {
-      set({sortKey: key})
+      updateDatabaseStore(set, (draft) => {
+        draft.sortKey = key
+      })
     },
     toggleSortDirection: () => {
-      set((state) => ({sortDirection: state.sortDirection === 'ASC' ? 'DESC' : 'ASC'}))
+      updateDatabaseStore(set, (draft) => {
+        draft.sortDirection = draft.sortDirection === 'ASC' ? 'DESC' : 'ASC'
+      })
     },
     setGroupByRealm: (next) => {
-      set({groupByRealm: next})
+      updateDatabaseStore(set, (draft) => {
+        draft.groupByRealm = next
+      })
     },
     reset: () => {
-      set(INITIAL_DATABASE_STORE_STATE)
+      updateDatabaseStore(set, (draft) => {
+        Object.assign(draft, INITIAL_DATABASE_STORE_STATE)
+      })
     },
   }
 }

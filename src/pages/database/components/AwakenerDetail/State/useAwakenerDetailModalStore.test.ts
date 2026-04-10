@@ -11,12 +11,13 @@ afterEach(() => {
 })
 
 describe('useAwakenerDetailModalStore', () => {
-  it('updates modal state through store actions', () => {
+  it('updates modal state through store actions and persists them', () => {
     const store = useAwakenerDetailModalStore.getState()
 
+    store.initialize(1)
     store.setActiveTab('builds')
     store.setAwakenerLevel(90)
-    store.increasePsycheSurge()
+    store.setPsycheSurgeOffset(1)
     store.setSkillLevel(6)
     store.toggleScalingMenu()
     store.toggleTagsMenu()
@@ -29,14 +30,51 @@ describe('useAwakenerDetailModalStore', () => {
     expect(nextState.skillLevel).toBe(6)
     expect(nextState.isScalingMenuOpen).toBe(true)
     expect(nextState.isTagsMenuOpen).toBe(true)
+
+    const stored = JSON.parse(localStorage.getItem('awk-detail-settings-1') ?? '{}')
+    expect(stored.awakenerLevel).toBe(90)
+    expect(stored.psycheSurgeOffset).toBe(1)
+    expect(stored.skillLevel).toBe(6)
+  })
+
+  it('loads character-specific settings on initialization', () => {
+    localStorage.setItem(
+      'awk-detail-settings-7',
+      JSON.stringify({awakenerLevel: 45, psycheSurgeOffset: 5, skillLevel: 3}),
+    )
+
+    const store = useAwakenerDetailModalStore.getState()
+    store.initialize(7)
+
+    const nextState = useAwakenerDetailModalStore.getState()
+    expect(nextState.awakenerLevel).toBe(45)
+    expect(nextState.psycheSurgeOffset).toBe(5)
+    expect(nextState.skillLevel).toBe(3)
+  })
+
+  it('maintains separate settings for different characters', () => {
+    const store = useAwakenerDetailModalStore.getState()
+
+    store.initialize(1)
+    store.setAwakenerLevel(90)
+
+    store.initialize(2)
+    store.setAwakenerLevel(1)
+
+    store.initialize(1)
+    expect(useAwakenerDetailModalStore.getState().awakenerLevel).toBe(90)
+
+    store.initialize(2)
+    expect(useAwakenerDetailModalStore.getState().awakenerLevel).toBe(1)
   })
 
   it('resets to the modal defaults and reloads persisted font scale', () => {
     const store = useAwakenerDetailModalStore.getState()
 
+    store.initialize(1)
     store.setActiveTab('teams')
     store.setAwakenerLevel(1)
-    store.increasePsycheSurge()
+    store.setPsycheSurgeOffset(1)
     store.setSkillLevel(4)
     store.setFontScale('large')
     store.toggleScalingMenu()
@@ -59,10 +97,9 @@ describe('useAwakenerDetailModalStore', () => {
   it('clamps level and psyche surge values and closes menus explicitly', () => {
     const store = useAwakenerDetailModalStore.getState()
 
+    store.initialize(1)
     store.setAwakenerLevel(999)
-    for (let index = 0; index < 20; index += 1) {
-      store.increasePsycheSurge()
-    }
+    store.setPsycheSurgeOffset(999)
     store.toggleScalingMenu()
     store.toggleTagsMenu()
     store.closeScalingMenu()
@@ -81,7 +118,7 @@ describe('useAwakenerDetailModalStore', () => {
   it('falls back to the default font scale for invalid stored values during initialization', () => {
     localStorage.setItem('modal-font-scale', 'giant')
 
-    useAwakenerDetailModalStore.getState().initialize()
+    useAwakenerDetailModalStore.getState().initialize(1)
 
     expect(useAwakenerDetailModalStore.getState().fontScale).toBe('small')
   })

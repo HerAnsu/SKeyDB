@@ -1,3 +1,5 @@
+import {memo} from 'react'
+
 import {DetailLevelSlider} from '../AwakenerDetail/Controls'
 
 interface AwakenerLevelSliderProps {
@@ -5,7 +7,10 @@ interface AwakenerLevelSliderProps {
   onChange: (level: number) => void
 }
 
-export function AwakenerLevelSlider({level, onChange}: AwakenerLevelSliderProps) {
+export const AwakenerLevelSlider = memo(function AwakenerLevelSlider({
+  level,
+  onChange,
+}: AwakenerLevelSliderProps) {
   return (
     <DetailLevelSlider
       compact
@@ -14,6 +19,7 @@ export function AwakenerLevelSlider({level, onChange}: AwakenerLevelSliderProps)
       max={90}
       min={1}
       onChange={onChange}
+      valuePrefix='Lv.'
     />
   )
-}
+})
