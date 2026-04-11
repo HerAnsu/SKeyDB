@@ -2,14 +2,13 @@ import {FaXmark} from 'react-icons/fa6'
 
 import type {AwakenerFullStats} from '@/domain/awakeners-full'
 import {computeStatValue, fmtNum} from '@/domain/scaling'
-
 import {
   DATABASE_ENTRY_TITLE_CLASS,
   DATABASE_POPOVER_DIVIDER_CLASS,
   DATABASE_POPOVER_HEADER_CLASS,
   DATABASE_POPOVER_SHELL_CLASS,
   DATABASE_POPOVER_SURFACE_STYLE,
-} from '../../utils/text-styles'
+} from '@/pages/database/utils/text-styles'
 
 type ScalingPopoverProps = Readonly<{
   values: number[]
@@ -54,7 +53,7 @@ export function ScalingPopover({
 
   return (
     <div
-      className={`${DATABASE_POPOVER_SHELL_CLASS} ${usesCustomLevelLabels ? 'w-[240px] max-w-[240px]' : ''} p-[0.7em]`}
+      className={`${DATABASE_POPOVER_SHELL_CLASS} ${usesCustomLevelLabels ? 'w-60 max-w-60' : ''} p-[0.7em]`}
       style={{
         fontSize: 'calc(var(--desc-font-scale, 1) * 10px)',
         ...DATABASE_POPOVER_SURFACE_STYLE,

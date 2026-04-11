@@ -2,8 +2,7 @@ import {getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import type {Awakener} from '@/domain/awakeners'
 import {getRealmIcon, getRealmLabel} from '@/domain/factions'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
-
-import {TABS, type TabId} from '../../../constants'
+import {TABS, type TabId} from '@/pages/database/constants'
 
 type AwakenerDetailModalHeaderProps = Readonly<{
   activeTab: TabId
@@ -50,8 +49,8 @@ export function AwakenerDetailModalHeader({
           </div>
 
           <div className='min-w-0 flex-1 pb-2 lg:pb-2'>
-            <div className='flex items-center gap-2'>
-              <h3 className='ui-title text-[1.85rem] leading-none text-amber-200/90 md:text-[2.5rem] lg:text-[2.8rem]'>
+            <div className='flex items-center gap-2 pr-28 lg:pr-0'>
+              <h3 className='ui-title text-[1.85rem] leading-[1.1] text-amber-200/90 md:text-[2.5rem] lg:text-[2.8rem]'>
                 {displayName}
               </h3>
             </div>
@@ -67,13 +66,13 @@ export function AwakenerDetailModalHeader({
               <span className='font-semibold uppercase' style={{color: realmTint}}>
                 {realmLabel}
               </span>
-              <span className='mx-1.5 text-slate-600 md:mx-2'>В·</span>
+              <span className='mx-1.5 font-bold text-slate-600 md:mx-2'>·</span>
               <span className='font-medium text-slate-200/90 uppercase'>
                 {awakener.type
                   ? awakener.type.charAt(0) + awakener.type.slice(1).toLowerCase()
-                  : 'вЂ”'}
+                  : '—'}
               </span>
-              <span className='mx-1.5 text-slate-600 md:mx-2'>В·</span>
+              <span className='mx-1.5 font-bold text-slate-600 md:mx-2'>·</span>
               <span className='font-medium text-slate-200/80 uppercase'>{awakener.faction}</span>
             </p>
           </div>
@@ -83,7 +82,7 @@ export function AwakenerDetailModalHeader({
           <nav className='flex w-full min-w-0 flex-row justify-center gap-0.5 lg:w-auto lg:flex-none'>
             {TABS.map((tab) => (
               <button
-                className={`flex-1 border-b-2 px-2 py-2 text-center text-[10px] font-semibold tracking-wide uppercase transition-colors sm:px-3.5 sm:text-[11px] lg:px-6 lg:py-2.5 lg:text-[13px] ${
+                className={`flex-1 border-b-2 px-2 py-2 text-center text-[10px] font-semibold tracking-wide uppercase transition-colors sm:px-3.5 sm:text-[11px] lg:px-6 lg:py-2.5 lg:text-[12px] ${
                   activeTab === tab.id
                     ? 'text-amber-100'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
@@ -103,7 +102,7 @@ export function AwakenerDetailModalHeader({
       </div>
 
       <div
-        className='mt-1 h-px w-full lg:mt-0'
+        className='h-px w-full'
         style={{
           background:
             'linear-gradient(90deg, rgba(100, 116, 139, 0.18) 0%, rgba(100, 116, 139, 0.1) 52%, transparent 100%)',

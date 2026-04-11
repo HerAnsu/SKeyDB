@@ -19,9 +19,10 @@ import {
   type MainstatKey,
 } from '@/domain/mainstats'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
+import {AwakenerLevelSlider} from '@/pages/database/components/DatabaseMain'
+import {ScalingPopover} from '@/pages/database/components/RichTextPopovers/ScalingPopover'
+import {scaledFontStyle} from '@/pages/database/utils/font-scale'
 
-import {AwakenerLevelSlider} from '../../DatabaseMain'
-import {ScalingPopover} from '../../RichTextPopovers/ScalingPopover'
 import {DetailLevelSlider, SkillLevelSlider} from '../Controls'
 
 const STAT_DISPLAY_ORDER = [
@@ -218,7 +219,7 @@ const SidebarAttributes = memo(function SidebarAttributes({
     const rowContent = (
       <>
         <span
-          className={`flex min-w-0 items-center ${labelClass} ${compact ? 'gap-1' : 'gap-1.5'}`}
+          className={`flex min-w-0 items-center ${labelClass} ${compact ? 'gap-0.5' : 'gap-1.5'}`}
         >
           {isHighlightedSubstat && coloredIcon ? (
             <img
@@ -250,7 +251,7 @@ const SidebarAttributes = memo(function SidebarAttributes({
               />
             )
           ) : null}
-          {STAT_LABELS[key]}
+          <span className='truncate'>{STAT_LABELS[key]}</span>
         </span>
         <span
           className={`inline-flex items-center justify-end text-right ${valueClass}`}
@@ -265,8 +266,10 @@ const SidebarAttributes = memo(function SidebarAttributes({
       <div className={`relative ${compact ? '' : 'flex min-h-0 flex-1 items-center'}`} key={key}>
         {isHighlightedSubstat ? (
           <button
-            className={`grid w-full grid-cols-[minmax(0,1fr)_auto] items-center rounded-[3px] px-2 py-1 text-left leading-none transition-colors ${
-              compact ? 'gap-x-2.5 text-[12px]' : 'h-full min-h-0 gap-x-3 text-[12px]'
+            className={`grid w-full grid-cols-[minmax(0,1fr)_auto] items-center rounded-[3px] text-left leading-none transition-colors ${
+              compact
+                ? 'gap-x-1.5 px-0.5 py-1 text-[12px]'
+                : 'h-full min-h-0 gap-x-3 px-2 py-0.5 text-[12px]'
             } ${isScalingPreviewOpen ? 'bg-white/4' : 'hover:bg-white/3'}`}
             onClick={(event) => {
               if (activeScalingKey === key) {
@@ -283,8 +286,10 @@ const SidebarAttributes = memo(function SidebarAttributes({
           </button>
         ) : (
           <div
-            className={`grid grid-cols-[minmax(0,1fr)_auto] items-center px-2 py-1 leading-none ${
-              compact ? 'gap-x-2.5 text-[12px]' : 'min-h-0 flex-1 gap-x-3 text-[12px]'
+            className={`grid grid-cols-[minmax(0,1fr)_auto] items-center leading-none ${
+              compact
+                ? 'gap-x-1.5 px-0.5 py-1 text-[12px]'
+                : 'min-h-0 flex-1 gap-x-3 px-2 py-0.5 text-[12px]'
             }`}
           >
             {rowContent}
@@ -322,15 +327,15 @@ const SidebarAttributes = memo(function SidebarAttributes({
 
   if (compact) {
     return (
-      <div className='flex flex-col gap-y-2.5 pt-0.5'>
+      <div className='-mx-1.5 flex flex-col gap-y-2.5 pt-0.5'>
         <div className='grid grid-cols-3 items-center divide-x divide-white/10'>
           {PRIMARY_STAT_ORDER.map((key) => (
-            <div className='px-2 first:pl-0 last:pr-0' key={key}>
+            <div className='px-0.5 first:pl-0 last:pr-0' key={key}>
               {renderStatRow(key)}
             </div>
           ))}
         </div>
-        <div className='relative grid grid-cols-2 gap-x-6 gap-y-1.5'>
+        <div className='relative grid grid-cols-2 gap-x-2 gap-y-1.5'>
           <div className='absolute inset-y-0 left-1/2 w-px bg-white/10' />
           {SECONDARY_STAT_ORDER.map(renderStatRow)}
         </div>
@@ -339,7 +344,7 @@ const SidebarAttributes = memo(function SidebarAttributes({
   }
 
   return (
-    <div className='flex flex-1 flex-col gap-y-1 pt-0.5'>
+    <div className='flex flex-1 flex-col gap-y-0.5 pt-0.5'>
       {STAT_DISPLAY_ORDER.map(renderStatRow)}
     </div>
   )
@@ -374,6 +379,7 @@ export function AwakenerDetailSidebar({
   substatScaling,
   compact,
 }: AwakenerDetailSidebarProps) {
+  const [isExpanded, setIsExpanded] = useState(true)
   const displayName = useMemo(() => formatAwakenerNameForUi(awakener.name), [awakener.name])
   const cardAsset = useMemo(() => getAwakenerCardAsset(awakener.name), [awakener.name])
   const hasSubstatScaling = useMemo(
@@ -407,37 +413,72 @@ export function AwakenerDetailSidebar({
           compact ? 'px-3 py-3' : 'px-3.5 py-3'
         }`}
       >
-        <div className={compact ? 'space-y-2.5' : 'space-y-3'}>
-          <div className={compact ? 'space-y-2.5' : 'space-y-2'}>
-            <AwakenerLevelSlider level={level} onChange={onLevelChange} />
-            <SkillLevelSlider level={skillLevel} onChange={onSkillLevelChange} />
-            {hasSubstatScaling ? (
-              <DetailLevelSlider
-                label='Psyche Surge'
-                level={enlightenOffset}
-                max={12}
-                min={0}
-                onChange={onPsycheSurgeChange}
-                valuePrefix='E3 +'
-              />
-            ) : null}
-          </div>
-        </div>
-        <div className='my-2 h-px w-full bg-linear-to-r from-white/8 via-white/3 to-transparent' />
-
-        {stats ? (
-          <SidebarAttributes
-            compact={compact}
-            dominantPrimaryScaling={dominantPrimaryScaling}
-            enlightenOffset={enlightenOffset}
-            level={level}
-            scalingPreviewSource={scalingPreviewSource}
-            statScaling={statScaling}
-            stats={stats}
-            substatScaling={substatScaling}
-          />
+        {compact ? (
+          <button
+            className={`${isExpanded ? 'mb-2' : ''} flex w-full items-center justify-between text-left transition-opacity hover:opacity-80`}
+            onClick={() => {
+              setIsExpanded((prev) => !prev)
+            }}
+            type='button'
+          >
+            <span className='ui-title tracking-wide text-amber-200/90' style={scaledFontStyle(11)}>
+              {isExpanded ? 'Configuration' : 'Configuration / Attributes'}
+            </span>
+            <span className='whitespace-nowrap text-amber-100/50' style={scaledFontStyle(10)}>
+              {isExpanded ? 'HIDE' : 'SHOW'}
+            </span>
+          </button>
         ) : (
-          <p className='text-[11px] text-slate-500'>Loading...</p>
+          <div className='mb-2 flex items-center gap-1.5'>
+            <span className='ui-title tracking-wide text-amber-200/90' style={scaledFontStyle(11)}>
+              Configuration
+            </span>
+          </div>
+        )}
+
+        {(isExpanded || !compact) && (
+          <>
+            <div className={compact ? 'space-y-2.5' : 'space-y-3'}>
+              <div className={compact ? 'space-y-2.5' : 'space-y-2'}>
+                <AwakenerLevelSlider level={level} onChange={onLevelChange} />
+                <SkillLevelSlider level={skillLevel} onChange={onSkillLevelChange} />
+                {hasSubstatScaling ? (
+                  <DetailLevelSlider
+                    label='Psyche Surge'
+                    level={enlightenOffset}
+                    max={12}
+                    min={0}
+                    onChange={onPsycheSurgeChange}
+                    valuePrefix='E3 +'
+                  />
+                ) : null}
+              </div>
+            </div>
+
+            <div className='mt-4 mb-2 flex items-center gap-1.5'>
+              <span
+                className='ui-title tracking-wide text-amber-200/90'
+                style={scaledFontStyle(11)}
+              >
+                Attributes
+              </span>
+            </div>
+
+            {stats ? (
+              <SidebarAttributes
+                compact={compact}
+                dominantPrimaryScaling={dominantPrimaryScaling}
+                enlightenOffset={enlightenOffset}
+                level={level}
+                scalingPreviewSource={scalingPreviewSource}
+                statScaling={statScaling}
+                stats={stats}
+                substatScaling={substatScaling}
+              />
+            ) : (
+              <p className='text-[11px] text-slate-500'>Loading...</p>
+            )}
+          </>
         )}
       </div>
     </div>

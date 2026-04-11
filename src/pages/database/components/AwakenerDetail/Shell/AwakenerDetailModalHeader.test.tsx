@@ -66,6 +66,6 @@ describe('AwakenerDetailModalHeader', () => {
     const images = screen.getAllByRole('presentation')
     expect(images[0]).toHaveAttribute('src', 'portrait-beta')
     expect(screen.getByRole('button', {name: 'Teams'}).className).toContain('text-amber-100')
-    expect(screen.getByText('вЂ”')).toBeInTheDocument()
+    expect(screen.getByText('—')).toBeInTheDocument()
   })
 })

@@ -103,7 +103,7 @@ describe('AwakenerDetailSidebar', () => {
     expect(screen.getByText('Level slider 60')).toBeInTheDocument()
     expect(screen.getByText('Skill slider 4')).toBeInTheDocument()
 
-    expect(screen.getByText('ATK')).toHaveClass('text-slate-400')
+    expect(screen.getByText('ATK').parentElement).toHaveClass('text-slate-400')
     expect(screen.getByText('135')).toHaveClass('text-slate-200')
     expect(screen.getByText('50%')).toHaveClass('text-slate-500/60')
     expect(document.querySelector('img[src="color-CRIT_RATE"]')).not.toBeNull()
@@ -121,5 +121,68 @@ describe('AwakenerDetailSidebar', () => {
     expect(levelZeroEntries[0]?.closest('div')).toHaveClass('bg-amber-400/10')
     expect(screen.getAllByText(/E3\+12/)[0]).toBeInTheDocument()
     expect(screen.getByText('33.8%')).toBeInTheDocument()
+  })
+
+  it('supports a collapsible configuration block in compact mode', () => {
+    render(
+      <AwakenerDetailSidebar
+        awakener={TEST_AWAKENER}
+        compact
+        enlightenOffset={0}
+        level={60}
+        onLevelChange={vi.fn()}
+        onPsycheSurgeChange={vi.fn()}
+        onSkillLevelChange={vi.fn()}
+        scalingPreviewSource={TEST_SCALING_PREVIEW_SOURCE}
+        skillLevel={4}
+        statScaling={TEST_STAT_SCALING}
+        stats={TEST_STATS}
+        substatScaling={TEST_SUBSTAT_SCALING}
+      />,
+    )
+
+    // Initially expanded
+    expect(screen.getByText('Level slider 60')).toBeInTheDocument()
+    expect(screen.getByText('ATK')).toBeInTheDocument()
+    expect(screen.getByText('HIDE')).toBeInTheDocument()
+    expect(screen.getByText('Configuration')).toBeInTheDocument()
+    expect(screen.getByText('Attributes')).toBeInTheDocument()
+
+    // Collapse
+    fireEvent.click(screen.getByRole('button', {name: /Configuration/i}))
+    expect(screen.queryByText('Level slider 60')).not.toBeInTheDocument()
+    expect(screen.queryByText('ATK')).not.toBeInTheDocument()
+    expect(screen.getByText('Configuration / Attributes')).toBeInTheDocument()
+    expect(screen.getByText('SHOW')).toBeInTheDocument()
+
+    // Expand again
+    fireEvent.click(screen.getByRole('button', {name: /Configuration/i}))
+    expect(screen.getByText('Level slider 60')).toBeInTheDocument()
+    expect(screen.getByText('ATK')).toBeInTheDocument()
+    expect(screen.getByText('HIDE')).toBeInTheDocument()
+  })
+
+  it('renders both Configuration and Attributes headers in desktop mode without toggle', () => {
+    render(
+      <AwakenerDetailSidebar
+        awakener={TEST_AWAKENER}
+        enlightenOffset={0}
+        level={60}
+        onLevelChange={vi.fn()}
+        onPsycheSurgeChange={vi.fn()}
+        onSkillLevelChange={vi.fn()}
+        scalingPreviewSource={TEST_SCALING_PREVIEW_SOURCE}
+        skillLevel={4}
+        statScaling={TEST_STAT_SCALING}
+        stats={TEST_STATS}
+        substatScaling={TEST_SUBSTAT_SCALING}
+      />,
+    )
+
+    expect(screen.getByText('Level slider 60')).toBeInTheDocument()
+    expect(screen.getByText('ATK')).toBeInTheDocument()
+    expect(screen.getByText('Configuration')).toBeInTheDocument()
+    expect(screen.getByText('Attributes')).toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: /Configuration/i})).not.toBeInTheDocument()
   })
 })
