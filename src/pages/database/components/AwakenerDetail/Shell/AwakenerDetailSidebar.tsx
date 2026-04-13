@@ -251,7 +251,7 @@ const SidebarAttributes = memo(function SidebarAttributes({
               />
             )
           ) : null}
-          <span className='truncate'>{STAT_LABELS[key]}</span>
+          <span className='whitespace-nowrap'>{STAT_LABELS[key]}</span>
         </span>
         <span
           className={`inline-flex items-center justify-end text-right ${valueClass}`}
@@ -266,7 +266,7 @@ const SidebarAttributes = memo(function SidebarAttributes({
       <div className={`relative ${compact ? '' : 'flex min-h-0 flex-1 items-center'}`} key={key}>
         {isHighlightedSubstat ? (
           <button
-            className={`grid w-full grid-cols-[minmax(0,1fr)_auto] items-center rounded-[3px] text-left leading-none transition-colors ${
+            className={`grid w-full grid-cols-[minmax(0,1fr)_auto] items-center overflow-visible rounded-[3px] text-left leading-none transition-colors ${
               compact
                 ? 'gap-x-1.5 px-0.5 py-1 text-[12px]'
                 : 'h-full min-h-0 gap-x-3 px-2 py-0.5 text-[12px]'
@@ -286,7 +286,7 @@ const SidebarAttributes = memo(function SidebarAttributes({
           </button>
         ) : (
           <div
-            className={`grid grid-cols-[minmax(0,1fr)_auto] items-center leading-none ${
+            className={`grid grid-cols-[minmax(0,1fr)_auto] items-center overflow-visible leading-none ${
               compact
                 ? 'gap-x-1.5 px-0.5 py-1 text-[12px]'
                 : 'min-h-0 flex-1 gap-x-3 px-2 py-0.5 text-[12px]'
@@ -363,6 +363,7 @@ type AwakenerDetailSidebarProps = Readonly<{
   stats: AwakenerFullStats | null
   substatScaling: AwakenerSubstatScaling | null
   compact?: boolean
+  realmTint?: string
 }>
 
 export function AwakenerDetailSidebar({
@@ -378,6 +379,7 @@ export function AwakenerDetailSidebar({
   stats,
   substatScaling,
   compact,
+  realmTint,
 }: AwakenerDetailSidebarProps) {
   const [isExpanded, setIsExpanded] = useState(true)
   const displayName = useMemo(() => formatAwakenerNameForUi(awakener.name), [awakener.name])
@@ -421,7 +423,10 @@ export function AwakenerDetailSidebar({
             }}
             type='button'
           >
-            <span className='ui-title tracking-wide text-amber-200/90' style={scaledFontStyle(11)}>
+            <span
+              className='ui-title tracking-wide'
+              style={{...scaledFontStyle(11), color: realmTint}}
+            >
               {isExpanded ? 'Configuration' : 'Configuration / Attributes'}
             </span>
             <span className='whitespace-nowrap text-amber-100/50' style={scaledFontStyle(10)}>
@@ -430,7 +435,10 @@ export function AwakenerDetailSidebar({
           </button>
         ) : (
           <div className='mb-2 flex items-center gap-1.5'>
-            <span className='ui-title tracking-wide text-amber-200/90' style={scaledFontStyle(11)}>
+            <span
+              className='ui-title tracking-wide'
+              style={{...scaledFontStyle(11), color: realmTint}}
+            >
               Configuration
             </span>
           </div>
@@ -457,8 +465,8 @@ export function AwakenerDetailSidebar({
 
             <div className='mt-4 mb-2 flex items-center gap-1.5'>
               <span
-                className='ui-title tracking-wide text-amber-200/90'
-                style={scaledFontStyle(11)}
+                className='ui-title tracking-wide'
+                style={{...scaledFontStyle(11), color: realmTint}}
               >
                 Attributes
               </span>

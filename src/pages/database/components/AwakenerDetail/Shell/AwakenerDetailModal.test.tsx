@@ -22,6 +22,7 @@ vi.mock('../../../../../domain/awakeners-full', () => ({
         SigilYield: '0%',
         DamageAmplification: '0%',
         DeathResistance: '0%',
+        BaseAliemus: '100',
       },
       primaryScalingBase: 30,
       statScaling: {
@@ -54,6 +55,7 @@ vi.mock('../../../../../domain/awakeners-full', () => ({
         SigilYield: '0%',
         DamageAmplification: '0%',
         DeathResistance: '0%',
+        BaseAliemus: '100',
       },
       primaryScalingBase: 30,
       statScaling: {

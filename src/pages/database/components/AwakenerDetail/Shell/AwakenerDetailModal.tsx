@@ -240,6 +240,7 @@ export function AwakenerDetailModal({
               onLevelChange={handleAwakenerLevelChange}
               onPsycheSurgeChange={handlePsycheSurgeChange}
               onSkillLevelChange={setSkillLevel}
+              realmTint={realmTint}
               scalingPreviewSource={fullData}
               skillLevel={skillLevel}
               statScaling={fullData?.statScaling ?? null}
@@ -266,6 +267,7 @@ export function AwakenerDetailModal({
                   onLevelChange={handleAwakenerLevelChange}
                   onPsycheSurgeChange={handlePsycheSurgeChange}
                   onSkillLevelChange={setSkillLevel}
+                  realmTint={realmTint}
                   scalingPreviewSource={fullData}
                   skillLevel={skillLevel}
                   statScaling={fullData?.statScaling ?? null}
@@ -281,6 +283,7 @@ export function AwakenerDetailModal({
                 fontScale={fontScale}
                 fullData={fullData}
                 onNavigateToCards={navigateToCards}
+                realmTint={realmTint}
                 skillLevel={skillLevel}
                 stats={resolvedStats}
               />

@@ -35,7 +35,7 @@ export function AwakenerDetailModalHeader({
 
       <div className='flex flex-col lg:flex-row lg:items-end lg:justify-between'>
         <div className='flex min-w-0 flex-1 items-start gap-3'>
-          <div className='h-11 w-11 shrink-0 overflow-hidden border border-slate-500/40 bg-linear-to-b from-slate-800 to-slate-900 lg:hidden'>
+          <div className='h-14 w-14 shrink-0 overflow-hidden border border-slate-500/40 bg-linear-to-b from-slate-800 to-slate-900 lg:hidden'>
             {portrait ? (
               <img
                 alt=''
@@ -50,7 +50,7 @@ export function AwakenerDetailModalHeader({
 
           <div className='min-w-0 flex-1 pb-2 lg:pb-2'>
             <div className='flex items-center gap-2 pr-28 lg:pr-0'>
-              <h3 className='ui-title text-[1.85rem] leading-[1.1] text-amber-200/90 md:text-[2.5rem] lg:text-[2.8rem]'>
+              <h3 className='ui-title text-[1.85rem] leading-[1.1] text-slate-200 md:text-[2.5rem] lg:text-[2.8rem] lg:whitespace-nowrap'>
                 {displayName}
               </h3>
             </div>

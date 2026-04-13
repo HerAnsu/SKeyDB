@@ -1,6 +1,6 @@
 import {DEFAULT_REALM_TINT, REALM_TINT_BY_LABEL} from '@/domain/factions'
 
-export const DATABASE_SECTION_TITLE_CLASS = 'ui-title px-4 pt-3 pb-2 text-amber-200/90'
+export const DATABASE_SECTION_TITLE_CLASS = 'ui-title px-4 pt-3 pb-2 text-slate-200'
 export const DATABASE_ITEM_NAME_CLASS = 'font-semibold text-amber-200/90 leading-tight'
 export const DATABASE_ENTRY_TITLE_CLASS =
   'text-base font-semibold tracking-wide text-amber-200/90 leading-tight'

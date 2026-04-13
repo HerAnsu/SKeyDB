@@ -7,12 +7,19 @@ import type {AwakenerFull} from '@/domain/awakeners-full'
 import {AwakenerDetailCards} from './AwakenerDetailCards'
 
 vi.mock('./DetailSection', () => ({
-  DetailSection: ({title, items}: {title: string; items: {label: string; name: string}[]}) => (
+  DetailSection: ({
+    title,
+    items,
+  }: {
+    title: string
+    items: {label: React.ReactNode; rightLabel?: string; name: string}[]
+  }) => (
     <div>
       <h4>{title}</h4>
       {items.map((item) => (
-        <div key={`${item.label}-${item.name}`}>
-          {item.label}: {item.name}
+        <div key={item.name}>
+          <div>{item.label}</div>
+          {item.rightLabel && <span>{item.rightLabel}</span>}: <span>{item.name}</span>
         </div>
       ))}
     </div>
@@ -65,6 +72,7 @@ const TEST_FULL_DATA: AwakenerFull = {
     SigilYield: '0%',
     DamageAmplification: '0%',
     DeathResistance: '0%',
+    BaseAliemus: '100',
   },
   primaryScalingBase: 20,
   statScaling: {
@@ -112,8 +120,12 @@ describe('AwakenerDetailCards', () => {
     )
 
     expect(screen.getByText('Exalts')).toBeInTheDocument()
-    expect(screen.getByText('Exalt: Exalt Name')).toBeInTheDocument()
-    expect(screen.getByText('Over Exalt: Over Exalt Name')).toBeInTheDocument()
+    expect(screen.getByText('Exalt Name')).toBeInTheDocument()
+    expect(screen.getByText('Over Exalt Name')).toBeInTheDocument()
+    expect(screen.getByText('100')).toBeInTheDocument()
+    expect(screen.getByText('200')).toBeInTheDocument()
+    expect(screen.getByText('Exalt')).toBeInTheDocument()
+    expect(screen.getByText('Over-Exalt')).toBeInTheDocument()
     expect(screen.getByText('Command Cards')).toBeInTheDocument()
     expect(screen.getByText('First Card')).toBeInTheDocument()
     expect(screen.getByText('Second Card')).toBeInTheDocument()

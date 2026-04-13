@@ -3,12 +3,16 @@ import {useCallback} from 'react'
 import costIcon from '@/assets/icons/UI_Battel_White_Buff_094.png'
 import type {Awakener} from '@/domain/awakeners'
 import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
+import {getColoredMainstatIcon} from '@/domain/mainstats'
 import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
 import {getPortraitRelicByAwakenerIngameId} from '@/domain/relics'
+import {RichDescription} from '@/pages/database/components/RichText/RichDescription'
+import {scaledFontStyle} from '@/pages/database/utils/font-scale'
+import {
+  DATABASE_ITEM_NAME_CLASS,
+  DATABASE_SECTION_TITLE_CLASS,
+} from '@/pages/database/utils/text-styles'
 
-import {scaledFontStyle} from '../../../utils/font-scale'
-import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from '../../../utils/text-styles'
-import {RichDescription} from '../../RichText/RichDescription'
 import {DetailSection} from './DetailSection'
 
 type AwakenerDetailCardsProps = Readonly<{
@@ -17,13 +21,8 @@ type AwakenerDetailCardsProps = Readonly<{
   stats: AwakenerFullStats | null
   cardNames: Set<string>
   skillLevel: number
+  realmTint?: string
 }>
-
-const CARD_KEYS = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'] as const
-
-function hasCard(fullData: AwakenerFull, key: (typeof CARD_KEYS)[number]): boolean {
-  return Object.hasOwn(fullData.cards, key)
-}
 
 export function AwakenerDetailCards({
   awakener,
@@ -31,6 +30,7 @@ export function AwakenerDetailCards({
   stats,
   cardNames,
   skillLevel,
+  realmTint,
 }: AwakenerDetailCardsProps) {
   const renderDescription = useCallback(
     (description: string) => (
@@ -50,24 +50,56 @@ export function AwakenerDetailCards({
   }
 
   const {exalt, over_exalt} = fullData.exalts
+  const aliemusIcon = getColoredMainstatIcon('ALIEMUS_REGEN')
+  const baseAliemus = stats?.BaseAliemus ? Number.parseInt(stats.BaseAliemus, 10) : 100
+
   const exaltItems = [
-    {key: 'exalt', label: 'Exalt', name: exalt.name, description: exalt.description},
+    {
+      key: 'exalt',
+      label: (
+        <span className='inline-flex items-center gap-1.5 text-slate-300'>
+          {aliemusIcon && (
+            <img
+              alt=''
+              aria-hidden='true'
+              className='h-[1.3em] w-[1.3em] object-contain'
+              draggable={false}
+              src={aliemusIcon}
+            />
+          )}
+          <span className='font-medium text-amber-200/90'>{baseAliemus}</span>
+        </span>
+      ),
+      rightLabel: exalt.label ?? 'Exalt',
+      name: exalt.name,
+      description: exalt.description,
+    },
     {
       key: 'over_exalt',
-      label: 'Over Exalt',
+      label: (
+        <span className='inline-flex items-center gap-1.5 text-slate-300'>
+          {aliemusIcon && (
+            <img
+              alt=''
+              aria-hidden='true'
+              className='h-[1.3em] w-[1.3em] object-contain'
+              draggable={false}
+              src={aliemusIcon}
+            />
+          )}
+          <span className='font-medium text-amber-200/90'>{baseAliemus * 2}</span>
+        </span>
+      ),
+      rightLabel: over_exalt.label ?? 'Over-Exalt',
       name: over_exalt.name,
+      nameColor: '#bb636d',
       description: over_exalt.description,
     },
   ]
 
-  const cardEntries: {key: string; card: {name: string; cost: string; description: string}}[] = []
-  for (const key of CARD_KEYS) {
-    if (!hasCard(fullData, key)) {
-      continue
-    }
-    const card = fullData.cards[key]
-    cardEntries.push({key, card})
-  }
+  const cardEntries = Object.entries(fullData.cards)
+    .map(([key, card]) => ({key, card}))
+    .sort((a, b) => a.key.localeCompare(b.key, undefined, {numeric: true}))
 
   const portraitRelic = getPortraitRelicByAwakenerIngameId(awakener.ingameId)
   const portraitRelicAsset = portraitRelic
@@ -76,56 +108,76 @@ export function AwakenerDetailCards({
 
   return (
     <div className='space-y-4'>
-      <DetailSection items={exaltItems} renderDescription={renderDescription} title='Exalts' />
+      <DetailSection
+        items={exaltItems}
+        realmTint={realmTint}
+        renderDescription={renderDescription}
+        title='Exalts'
+      />
 
       <div>
-        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
+        <h4
+          className={DATABASE_SECTION_TITLE_CLASS}
+          style={{...scaledFontStyle(20), color: realmTint}}
+        >
           Command Cards
         </h4>
         <div className='flex flex-col gap-y-3 pt-0 pb-2'>
-          {cardEntries.map(({key, card}) => (
-            <div className='border border-white/4 bg-white/2 px-3.5 py-2.5 shadow-sm' key={key}>
-              <div className='flex items-center justify-between gap-3'>
-                <div className='flex min-w-0 items-center gap-2.5'>
-                  <span
-                    className='inline-flex shrink-0 items-center gap-1.5 text-slate-300'
-                    style={scaledFontStyle(12)}
-                  >
-                    <img
-                      alt=''
-                      aria-hidden='true'
-                      className='h-[1.3em] w-[1.3em] object-contain opacity-90'
-                      draggable={false}
-                      src={costIcon}
-                    />
-                    <span className='font-medium text-amber-100/90'>{card.cost}</span>
+          {cardEntries.map(({key, card}) => {
+            const isRouse = card.label ? card.label.toLowerCase() === 'rouse' : key === 'C1'
+
+            return (
+              <div className='border border-white/4 bg-white/2 px-3.5 py-2.5 shadow-sm' key={key}>
+                <div className='flex items-center justify-between gap-3'>
+                  <div className='flex min-w-0 items-center gap-2.5'>
+                    <span
+                      className='inline-flex shrink-0 items-center gap-1.5 text-slate-300'
+                      style={scaledFontStyle(12)}
+                    >
+                      <img
+                        alt=''
+                        aria-hidden='true'
+                        className='h-[1.3em] w-[1.3em] object-contain opacity-90'
+                        draggable={false}
+                        src={costIcon}
+                      />
+                      <span className='font-medium' style={{color: '#ededed'}}>
+                        {card.cost}
+                      </span>
+                    </span>
+                    <span className='shrink-0 text-slate-600'>·</span>
+                    <span
+                      className={DATABASE_ITEM_NAME_CLASS}
+                      style={{
+                        ...scaledFontStyle(12),
+                        color: isRouse ? '#ededed' : '#aebfd8',
+                      }}
+                    >
+                      {card.name}
+                    </span>
+                  </div>
+                  <span className='shrink-0 text-slate-500 italic' style={scaledFontStyle(10)}>
+                    {card.label ?? (isRouse ? 'Rouse' : key)}
                   </span>
-                  <span className='shrink-0 text-slate-600'>·</span>
-                  <p
-                    className={`m-0 min-w-0 ${DATABASE_ITEM_NAME_CLASS}`}
-                    style={scaledFontStyle(12)}
-                  >
-                    {card.name}
-                  </p>
                 </div>
-                <span className='shrink-0 text-slate-500' style={scaledFontStyle(10)}>
-                  {key === 'C1' ? 'Rouse' : key}
-                </span>
+                <div className='my-2 h-px w-full bg-linear-to-r from-white/8 via-white/3 to-transparent' />
+                <div
+                  className='mt-1.5 pl-2 leading-relaxed text-slate-400'
+                  style={scaledFontStyle(12)}
+                >
+                  {renderDescription(card.description)}
+                </div>
               </div>
-              <div className='my-2 h-px w-full bg-linear-to-r from-white/8 via-white/3 to-transparent' />
-              <div
-                className='mt-1.5 pl-2 leading-relaxed text-slate-400'
-                style={scaledFontStyle(12)}
-              >
-                {renderDescription(card.description)}
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 
       <div>
-        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
+        <h4
+          className={DATABASE_SECTION_TITLE_CLASS}
+          style={{...scaledFontStyle(20), color: realmTint}}
+        >
           Dimensional Image
         </h4>
         {portraitRelic ? (

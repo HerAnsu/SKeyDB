@@ -1,4 +1,4 @@
-import {useCallback} from 'react'
+import {useCallback, useMemo} from 'react'
 
 import {createPortal} from 'react-dom'
 
@@ -32,10 +32,18 @@ export function RichDescription({
   skillLevel,
   onNavigateToCards,
 }: RichDescriptionProps) {
-  const rouseAwareCards =
-    fullData && hasRouseRichDescriptionCard(fullData) && !cardNames.has('Rouse')
-      ? new Set([...cardNames, 'Rouse'])
-      : cardNames
+  const rouseAwareCards = useMemo(() => {
+    const names = new Set(cardNames)
+    if (fullData) {
+      if (hasRouseRichDescriptionCard(fullData) && !names.has('Rouse')) {
+        names.add('Rouse')
+      }
+      names.add('exalt')
+      names.add('over_exalt')
+    }
+    return names
+  }, [cardNames, fullData])
+
   const segments = parseRichDescription(text, rouseAwareCards)
   const {
     trail,

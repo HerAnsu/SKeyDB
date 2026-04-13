@@ -59,6 +59,7 @@ const TEST_FULL_DATA: AwakenerFull = {
     SigilYield: '0%',
     DamageAmplification: '0%',
     DeathResistance: '0%',
+    BaseAliemus: '100',
   },
   primaryScalingBase: 20,
   statScaling: {
@@ -92,7 +93,7 @@ describe('RichDescription', () => {
     )
 
     fireEvent.click(screen.getByRole('button', {name: 'Strike'}))
-    expect(screen.getByText('Skill Popover Cost 2 Strike')).toBeInTheDocument()
+    expect(screen.getByText('Skill Popover ROUSE Strike')).toBeInTheDocument()
   })
 
   it('opens a tag popover when a mechanic token with description is clicked', () => {
@@ -142,7 +143,7 @@ describe('RichDescription', () => {
     )
 
     fireEvent.click(screen.getByRole('button', {name: 'Rouse'}))
-    expect(screen.getByText('Skill Popover Cost 1 Rouse')).toBeInTheDocument()
+    expect(screen.getByText('Skill Popover ROUSE Strike')).toBeInTheDocument()
   })
 
   it('clears the trail when navigating to the cards tab from a skill popover', () => {
@@ -160,11 +161,29 @@ describe('RichDescription', () => {
     )
 
     fireEvent.click(screen.getByRole('button', {name: 'Strike'}))
-    expect(screen.getByText('Skill Popover Cost 2 Strike')).toBeInTheDocument()
+    expect(screen.getByText('Skill Popover ROUSE Strike')).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', {name: 'Navigate to cards'}))
 
     expect(onNavigateToCards).toHaveBeenCalledTimes(1)
-    expect(screen.queryByText('Skill Popover Cost 2 Strike')).toBeNull()
+    expect(screen.queryByText('Skill Popover ROUSE Strike')).toBeNull()
+  })
+
+  it('recognizes "exalt" and "over_exalt" as interactive tokens', () => {
+    render(
+      <RichDescription
+        cardNames={new Set()}
+        fullData={TEST_FULL_DATA}
+        skillLevel={1}
+        stats={TEST_FULL_DATA.stats}
+        text='Trigger {exalt} and then {over_exalt}.'
+      />,
+    )
+
+    expect(screen.getByRole('button', {name: 'exalt'})).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: 'over_exalt'})).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: 'exalt'}))
+    expect(screen.getByText('Skill Popover EXALT Exalt')).toBeInTheDocument()
   })
 })

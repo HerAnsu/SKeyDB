@@ -300,17 +300,22 @@ export function getCardNamesFromFull(awakener: {
   enlightens: Record<string, {name: string}>
 }): Set<string> {
   const names = new Set<string>()
-  for (const card of Object.values(awakener.cards)) {
+  for (const [key, card] of Object.entries(awakener.cards)) {
     names.add(card.name)
+    names.add(key)
   }
   names.add(awakener.exalts.exalt.name)
+  names.add('exalt')
   names.add(awakener.exalts.over_exalt.name)
-  for (const talent of Object.values(awakener.talents)) {
+  names.add('over_exalt')
+  for (const [key, talent] of Object.entries(awakener.talents)) {
     if (talent.name === 'None') continue
     names.add(talent.name)
+    names.add(key)
   }
-  for (const enlighten of Object.values(awakener.enlightens)) {
+  for (const [key, enlighten] of Object.entries(awakener.enlightens)) {
     names.add(enlighten.name)
+    names.add(key)
   }
   return names
 }

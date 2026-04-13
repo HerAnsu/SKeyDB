@@ -22,6 +22,7 @@ const TEST_FULL_DATA: AwakenerFull = {
     SigilYield: '0%',
     DamageAmplification: '0%',
     DeathResistance: '0%',
+    BaseAliemus: '100',
   },
   primaryScalingBase: 20,
   statScaling: {CON: 1, ATK: 1, DEF: 1},

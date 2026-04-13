@@ -62,7 +62,7 @@ export function RichSegmentRenderer(props: RichSegmentRendererProps) {
       return (
         <div className={lineClassName}>
           {segment.indented ? (
-            <span className='absolute top-[0.41em] left-1.5 text-[0.8em] text-slate-500/60 select-none'>
+            <span className='absolute top-[0.20em] left-1.5 text-[0.8em] text-slate-500/60 select-none'>
               {INDENT_MARKER}
             </span>
           ) : null}

@@ -6,7 +6,9 @@ import {DATABASE_ITEM_NAME_CLASS, DATABASE_SECTION_TITLE_CLASS} from '../../../u
 export interface DetailSectionItem {
   key: string
   label: ReactNode
+  rightLabel?: ReactNode
   name: string
+  nameColor?: string
   description: string
 }
 
@@ -16,6 +18,7 @@ type DetailSectionProps = Readonly<{
   emptyMessage?: string
   children?: ReactNode
   renderDescription?: (description: string) => ReactNode
+  realmTint?: string
 }>
 
 export function DetailSection({
@@ -24,10 +27,14 @@ export function DetailSection({
   emptyMessage,
   children,
   renderDescription,
+  realmTint,
 }: DetailSectionProps) {
   return (
     <div>
-      <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(20)}>
+      <h4
+        className={DATABASE_SECTION_TITLE_CLASS}
+        style={{...scaledFontStyle(20), color: realmTint}}
+      >
         {title}
       </h4>
 
@@ -40,10 +47,25 @@ export function DetailSection({
               className='border border-white/4 bg-white/2 px-3.5 py-2.5 shadow-sm'
               key={item.key}
             >
-              <div className='m-0 flex items-center text-slate-300' style={scaledFontStyle(12)}>
-                <span className='flex items-center text-slate-500'>{item.label}</span>
-                <span className='mx-1.5 self-center text-slate-600'>·</span>
-                <span className={`${DATABASE_ITEM_NAME_CLASS} self-center`}>{item.name}</span>
+              <div
+                className='m-0 flex items-center justify-between text-slate-300'
+                style={scaledFontStyle(12)}
+              >
+                <div className='flex items-center gap-1.5'>
+                  <span className='flex items-center text-slate-500'>{item.label}</span>
+                  <span className='text-slate-600'>·</span>
+                  <span
+                    className={DATABASE_ITEM_NAME_CLASS}
+                    style={item.nameColor ? {color: item.nameColor} : undefined}
+                  >
+                    {item.name}
+                  </span>
+                </div>
+                {item.rightLabel && (
+                  <span className='shrink-0 text-slate-500 italic' style={scaledFontStyle(10)}>
+                    {item.rightLabel}
+                  </span>
+                )}
               </div>
               <div className='my-2 h-px w-full bg-linear-to-r from-white/8 via-white/3 to-transparent' />
               <div className='mt-1 pl-2 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>

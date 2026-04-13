@@ -14,6 +14,7 @@ type AwakenerDetailModalTabContentProps = Readonly<{
   onNavigateToCards: () => void
   skillLevel: number
   stats: AwakenerFullStats | null
+  realmTint?: string
 }>
 
 export function AwakenerDetailModalTabContent({
@@ -25,6 +26,7 @@ export function AwakenerDetailModalTabContent({
   onNavigateToCards,
   skillLevel,
   stats,
+  realmTint,
 }: AwakenerDetailModalTabContentProps) {
   return (
     <div className='database-tab-content w-full transition-all duration-200 ease-in-out'>
@@ -36,6 +38,7 @@ export function AwakenerDetailModalTabContent({
           fullData={fullData}
           mode='copies'
           onNavigateToCards={onNavigateToCards}
+          realmTint={realmTint}
           skillLevel={skillLevel}
           stats={stats}
         />
@@ -48,6 +51,7 @@ export function AwakenerDetailModalTabContent({
           fullData={fullData}
           mode='talents'
           onNavigateToCards={onNavigateToCards}
+          realmTint={realmTint}
           skillLevel={skillLevel}
           stats={stats}
         />
@@ -57,6 +61,7 @@ export function AwakenerDetailModalTabContent({
           awakener={awakener}
           cardNames={cardNames}
           fullData={fullData}
+          realmTint={realmTint}
           skillLevel={skillLevel}
           stats={stats}
         />

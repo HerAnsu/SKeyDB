@@ -15,7 +15,7 @@ vi.mock('..', () => ({
 
 const TEST_AWAKENER = {id: 7, name: 'alpha'} as Awakener
 const TEST_FULL_DATA = {id: 7} as AwakenerFull
-const TEST_STATS = {CON: '100'} as AwakenerFullStats
+const TEST_STATS = {CON: '100', BaseAliemus: '100'} as AwakenerFullStats
 
 describe('AwakenerDetailModalTabContent', () => {
   it('routes copies and talents tabs to the overview component', () => {

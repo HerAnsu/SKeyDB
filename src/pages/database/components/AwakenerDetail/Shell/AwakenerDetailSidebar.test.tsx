@@ -61,6 +61,7 @@ const TEST_STATS: AwakenerFullStats = {
   SigilYield: '0%',
   DamageAmplification: '0%',
   DeathResistance: '0%',
+  BaseAliemus: '100',
 }
 
 const TEST_SUBSTAT_SCALING: AwakenerSubstatScaling = {

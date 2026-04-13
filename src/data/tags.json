@@ -43,7 +43,7 @@
     "key": "ARITHMETICA",
     "label": "Arithmetica",
     "description": "Resource used for using cards",
-    "iconId": "",
+    "iconId": "094",
     "aliases": []
   },
   {
@@ -154,9 +154,10 @@
     "key": "BLEED",
     "label": "Bleed",
     "description": "",
-    "iconId": "008",
+    "iconId": "022",
     "aliases": [],
-    "category": "debuff"
+    "category": "debuff",
+    "tint": "#bb636d"
   },
   {
     "key": "BLESSED_BLOOD",
@@ -169,10 +170,11 @@
   {
     "key": "BLIGHTEN",
     "label": "Blighten",
-    "description": "",
-    "iconId": "",
+    "description": "Healing received -25%",
+    "iconId": "031",
     "aliases": [],
-    "source": "celeste"
+    "source": "celeste",
+    "tint": "#bb636d"
   },
   {
     "key": "BLOOD_OF_COITION",
@@ -298,17 +300,19 @@
   {
     "key": "CORROSION",
     "label": "Corrosion",
-    "description": "",
-    "iconId": "",
+    "description": "When taking Active Damage, remove an equivalent amount of {Corrosion} stacks to inflict HP loss equal to 300% of the removed stacks. Non-Active or Tentacle Damage removes {Corrosion} stacks at 50% effectiveness.",
+    "iconId": "070",
     "aliases": [],
-    "source": "castor"
+    "source": "castor",
+    "tint": "#976798"
   },
   {
     "key": "COUNTER",
     "label": "Counter",
-    "description": "",
-    "iconId": "",
-    "aliases": ["Temporary Counter"]
+    "description": "When taking damage, deals damage to the attacker equal to the stacks you have.",
+    "iconId": "019",
+    "aliases": ["Temporary Counter"],
+    "tint": "#76aac6"
   },
   {
     "key": "CREATIVITY",
@@ -334,6 +338,22 @@
     "aliases": ["Crimson Furnace Healing"],
     "source": "24, salvador, xu",
     "tint": "#bb636d"
+  },
+  {
+    "key": "CRIT_DMG",
+    "label": "Crit DMG",
+    "description": "Increases the damage dealt by critical hits. Base value is 150%.",
+    "iconId": "007",
+    "aliases": ["Temporary Crit DMG", "crit damage"],
+    "tint": "#c38662"
+  },
+  {
+    "key": "CRIT_RATE",
+    "label": "Crit Rate",
+    "description": "Increases the chance of dealing a critical hit. Max value 100%.",
+    "iconId": "017",
+    "aliases": ["Temporary Crit Rate"],
+    "tint": "#c38662"
   },
   {
     "key": "CURSE",
@@ -381,7 +401,7 @@
     "iconId": "",
     "aliases": [],
     "source": "24",
-    "tint": "#c38662"
+    "tint": "#976798"
   },
   {
     "key": "DESCENDING_SCALE",
@@ -402,9 +422,10 @@
   {
     "key": "DEVOUR",
     "label": "Devour",
-    "description": "",
+    "description": "The condition that if there is an {Embryo} in the hand - it devours it to obtain the effect specified afterwards",
     "iconId": "",
-    "aliases": []
+    "aliases": [],
+    "tint": "#bb636d"
   },
   {
     "key": "DIVINE_REALM_AEQUOR",
@@ -533,9 +554,10 @@
   {
     "key": "EMBRYO_FUSION",
     "label": "Embryo Fusion",
-    "description": "",
+    "description": "Mechanic that allows you to get an {Embryo} in hand. At 100% it puts the {Embryo} in hand and resets to 0%",
     "iconId": "",
-    "aliases": []
+    "aliases": [],
+    "tint": "#bb636d"
   },
   {
     "key": "ENDURE",
@@ -627,9 +649,10 @@
   {
     "key": "FIXED_DMG",
     "label": "Fixed DMG",
-    "description": "",
+    "description": "Deals a fixed amount of DMG, unaffected by states such as Strength, Weakness, or Vulnerability.",
     "iconId": "",
-    "aliases": []
+    "aliases": [],
+    "tint": "#c38662"
   },
   {
     "key": "FRAGILE",
@@ -768,7 +791,7 @@
   {
     "key": "INSIGHT",
     "label": "Insight",
-    "description": "",
+    "description": "Not a command card. Draws 1 card and gives 1 {Arithmetica}",
     "iconId": "",
     "aliases": []
   },
@@ -816,9 +839,10 @@
   {
     "key": "KEYFLARE",
     "label": "Keyflare",
-    "description": "",
-    "iconId": "",
-    "aliases": []
+    "description": "A resource that can be used for posse, character rouses in Ark 2, and for some mechanics. ",
+    "iconId": "035",
+    "aliases": [],
+    "tint": "#92a8b9"
   },
   {
     "key": "LEAP",
@@ -870,10 +894,11 @@
   {
     "key": "MADNESS",
     "label": "Madness",
-    "description": "",
-    "iconId": "",
+    "description": "Increases the number of damage instances by the number of stacks",
+    "iconId": "030",
     "aliases": [],
-    "source": "clementine, pandia"
+    "source": "clementine, pandia",
+    "tint": "#5d8f76"
   },
   {
     "key": "MALIGNANT_CHILD",
@@ -890,7 +915,7 @@
     "iconId": "",
     "aliases": [],
     "source": "24",
-    "tint": "#c38662"
+    "tint": "#bb636d"
   },
   {
     "key": "MARVELOUS_DEBUFF",
@@ -1022,10 +1047,11 @@
   {
     "key": "PHOBIC_FIXATION",
     "label": "Phobic Fixation",
-    "description": "",
-    "iconId": "",
+    "description": "DMG dealt reduces by 3% per stack.",
+    "iconId": "049",
     "aliases": [],
-    "source": "clementine"
+    "source": "clementine",
+    "tint": "#976798"
   },
   {
     "key": "PIERCE_DMG",
@@ -1077,10 +1103,11 @@
   {
     "key": "PSYCHIC_TRAUMA",
     "label": "Psychic Trauma",
-    "description": "",
-    "iconId": "",
+    "description": "DMG taken increases by 3% per stack.",
+    "iconId": "049",
     "aliases": [],
-    "source": "clementine"
+    "source": "clementine",
+    "tint": "#976798"
   },
   {
     "key": "QUACK_DICE",
@@ -1093,15 +1120,16 @@
   {
     "key": "QUASAR",
     "label": "Quasar",
-    "description": "",
+    "description": "When entering {Ultra Space} - reduces the cost of arithmetic by 1.\nUpon the first use of a card with a {Quasar} and if is not {Ultra Round}, it performs the effect corresponding to the effect.",
     "iconId": "",
     "aliases": [],
-    "source": "castor, clementine"
+    "source": "castor, clementine",
+    "tint": "#976798"
   },
   {
     "key": "RAGING_WAVES",
     "label": "Raging Waves",
-    "description": "Requires at least 1 permanent tentacle. Tentacle DMG - 125%. Each instance of Active DMG now also deals 1 tentacle strike equal to 50% of the current Tentacle DMG. Attacks at the end of the turn and then destroys one permanent tentacle",
+    "description": "Requires at least 1 permanent tentacle. {Tentacle DMG} - 125%. Each instance of Active DMG now also deals 1 tentacle strike equal to 50% of the current {Tentacle DMG}. Attacks at the end of the turn and then destroys one permanent tentacle",
     "iconId": "",
     "aliases": [],
     "source": "miryam, murphy: fauxborn",
@@ -1302,10 +1330,11 @@
   {
     "key": "STAGNATION",
     "label": "Stagnation",
-    "description": "",
-    "iconId": "",
+    "description": "Increases the cost of {Arithmetica} by the number of stacks",
+    "iconId": "024",
     "aliases": [],
-    "source": "celeste, karen"
+    "source": "celeste, karen",
+    "tint": "#976798"
   },
   {
     "key": "STEAL",
@@ -1363,10 +1392,11 @@
   {
     "key": "SYMBIOSIS",
     "label": "Symbiosis",
-    "description": "",
-    "iconId": "",
+    "description": "Accumulating stacks of clementines, used by Exalt for {Psychic Trauma} and {Phobic Fixation}",
+    "iconId": "049",
     "aliases": [],
-    "source": "clementine"
+    "source": "clementine",
+    "tint": "#976798"
   },
   {
     "key": "TENTACLE_DMG",
@@ -1374,7 +1404,7 @@
     "description": "Damage dealt by the tentacles on hit. Also receives a bonus from {STR} equal to 0.5x",
     "iconId": "",
     "aliases": ["Temporary Tentacle DMG"],
-    "tint": "#69adc1"
+    "tint": "#76aac6"
   },
   {
     "key": "TENTACLES",

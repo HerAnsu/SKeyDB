@@ -44,6 +44,7 @@ const TEST_FULL_DATA: AwakenerFull = {
     SigilYield: '0%',
     DamageAmplification: '0%',
     DeathResistance: '0%',
+    BaseAliemus: '100',
   },
   primaryScalingBase: 20,
   statScaling: {
@@ -87,7 +88,7 @@ describe('AwakenerDetailOverview', () => {
     expect(screen.getByText('T4')).toBeInTheDocument()
   })
 
-  it('renders enlightens, including the E4 absolute axiom fallback', () => {
+  it('renders enlightens, including the E15 absolute axiom fallback', () => {
     render(
       <AwakenerDetailOverview
         awakener={TEST_AWAKENER}
@@ -99,7 +100,7 @@ describe('AwakenerDetailOverview', () => {
             E1: {name: 'E1 Name', description: 'E1 description'},
             E2: {name: 'E2 Name', description: 'E2 description'},
             E3: {name: 'E3 Name', description: 'E3 description'},
-            E4: {name: 'Absolute Axiom', description: 'Axiom description'},
+            E15: {name: 'Absolute Axiom', description: 'Axiom description'},
           },
         }}
         skillLevel={1}
