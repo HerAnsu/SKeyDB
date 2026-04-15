@@ -6,7 +6,7 @@ export const DATABASE_ENTRY_TITLE_CLASS =
   'text-base font-semibold tracking-wide text-amber-200/90 leading-tight'
 export const DATABASE_POPOVER_SHELL_CLASS =
   'w-max max-w-[320px] border border-white/[0.07] bg-slate-950/96 shadow-none'
-export const DATABASE_POPOVER_HEADER_CLASS = 'mb-2.5 pl-2 flex items-start justify-between gap-5'
+export const DATABASE_POPOVER_HEADER_CLASS = 'mb-2.5 pl-0.5 flex items-center justify-between gap-5'
 export const DATABASE_POPOVER_DIVIDER_CLASS =
   'mb-2 h-px w-full bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-transparent'
 export const DATABASE_POPOVER_SURFACE_STYLE = {} as const
