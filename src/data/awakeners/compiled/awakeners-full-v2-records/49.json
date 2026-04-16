@@ -23,57 +23,26 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.3,
-    "ATK": 1.2,
-    "DEF": 1.25
-  },
-  "substatScaling": {
-    "AliemusRegen": "0.4",
-    "SigilYield": "1.2%"
-  },
-  "assets": {
-    "portraitKey": "tinct",
-    "iconKey": "tinct"
-  },
+  "statScaling": {"CON": 1.3, "ATK": 1.2, "DEF": 1.25},
+  "substatScaling": {"AliemusRegen": "0.4", "SigilYield": "1.2%"},
+  "assets": {"portraitKey": "tinct", "iconKey": "tinct"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Tinct obtains [Energy:Arg1] Aliemus, {Rouse}: Increases the base DMG of Tinct's {Strike} by [Arg2]%, and all of Tinct's cards obtain 1 random effect, which will be removed at the end of the battle.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "200"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}, "Arg2": {"kind": "fixed", "value": "200"}},
       "id": "skill.tinct.voices-from-beyond",
       "ownerAwakenerId": 49,
       "kind": "rouse",
       "displayName": "Voices from Beyond",
       "cost": "1",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Tinct obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.tinct.strike",
       "ownerAwakenerId": 49,
@@ -86,16 +55,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Tinct obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.tinct.defense",
       "ownerAwakenerId": 49,
@@ -108,18 +69,8 @@
     "C4": {
       "descriptionTemplate": "Dispel self {Fragile}, {Weakness}, and {Vulnerable} states. {Steal} [Arg1] {STR} from all enemies. Next card is guaranteed to trigger the {Leap} effect in this turn. {Leap}: Instead, {Steal} [Arg2] {STR} from the front-row enemy.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["17.5", "21", "24.5", "28", "31.5", "35"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["17.5", "21", "24.5", "28", "31.5", "35"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.tinct.requiem",
       "ownerAwakenerId": 49,
@@ -132,26 +83,10 @@
     "C5": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield, and Crit. Rate +[Arg2]% in the next turn. {Leap}: Change to obtain [Block:Arg3] Shield, and Crit. Rate +[Arg4]% in the next turn.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["50", "60", "70", "80", "90", "100"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "15"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["30", "36", "42", "48", "54", "60"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg4": {
-          "kind": "fixed",
-          "value": "45"
-        }
+        "Arg1": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "fixed", "value": "15"},
+        "Arg3": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "DEF"},
+        "Arg4": {"kind": "fixed", "value": "45"}
       },
       "id": "skill.tinct.distant-melody",
       "ownerAwakenerId": 49,
@@ -164,20 +99,9 @@
     "Exalt": {
       "descriptionTemplate": "Obtain [Power:Arg1] {STR}. Temporary Crit. Rate +[Arg2]%. For this battle, Tinct's Strike Base DMG is increased by [Arg3]%. Randomly select 5 cards in hand and reduce their Arithmetica Cost by 1 until the turn ends.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "15"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "50"
-        }
+        "Arg1": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "15"},
+        "Arg3": {"kind": "fixed", "value": "50"}
       },
       "id": "skill.tinct.starlight-aurora",
       "ownerAwakenerId": 49,
@@ -213,25 +137,13 @@
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg2": {
-              "substat": "SigilYield",
-              "multiplier": "0.15",
-              "suffix": "%"
-            }
-          }
+          "argSubstatBonuses": {"Arg2": {"substat": "SigilYield", "multiplier": "0.15", "suffix": "%"}}
         }
       ]
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.tinct.madness-omen",
       "ownerAwakenerId": 49,
       "displayName": "Madness Omen",
@@ -242,24 +154,10 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThe Awakeners' CON, ATK, and DEF are increased by [Arg1] %, and they gain [Arg2] Keyflare upon their first {Rouse}.\nPlaying {Distant Melody} temporarily reduces the DMG dealt by all \"Humanoid\" enemies by [Arg4]%, this effect can't be stacked. For each negative state dispelled by {Requiem}, [Arg3] Aliemus are gained.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg4": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
       },
       "id": "talent.tinct.soulforge-aptitude",
       "ownerAwakenerId": 49,

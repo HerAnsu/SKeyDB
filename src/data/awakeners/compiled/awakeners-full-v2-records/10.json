@@ -23,63 +23,27 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 1.4,
-    "ATK": 1.65,
-    "DEF": 1.35
-  },
-  "substatScaling": {
-    "KeyflareRegen": "2.4",
-    "DamageAmplification": "0.8%"
-  },
-  "assets": {
-    "portraitKey": "clementine",
-    "iconKey": "clementine"
-  },
+  "statScaling": {"CON": 1.4, "ATK": 1.65, "DEF": 1.35},
+  "substatScaling": {"KeyflareRegen": "2.4", "DamageAmplification": "0.8%"},
+  "assets": {"portraitKey": "clementine", "iconKey": "clementine"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Clementine obtains [Energy:Arg1] Aliemus. {Rouse}: The first Command Card Clementine plays each turn has its DMG, Shield, HP Healing, Aliemus, and Keyflare Regen take effect [Arg2] more times.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "2"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}, "Arg2": {"kind": "fixed", "value": "2"}},
       "id": "skill.clementine.call-of-shaggai",
       "ownerAwakenerId": 10,
       "kind": "rouse",
       "displayName": "Call of Shaggai",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG, Clementine obtains [Energy:Arg3] Aliemus. {Quasar}: Obtain [Power:Arg4] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]},
+        "Arg4": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.clementine.strike",
       "ownerAwakenerId": 10,
@@ -92,22 +56,9 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield, Clementine obtains [Energy:Arg3] Aliemus. {Quasar}: Obtain [Power:Arg4] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]},
+        "Arg4": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.clementine.defense",
       "ownerAwakenerId": 10,
@@ -120,64 +71,25 @@
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG [AttackTimes:Arg2] times. Obtain [Arg3]% of Clementine's Keyflare Regen as Keyflare. {Quasar}: Obtain [Power:Arg5] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["20", "24", "28", "32", "36", "40"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "3"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "150"
-        },
-        "Arg5": {
-          "kind": "scaling",
-          "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "3"},
+        "Arg3": {"kind": "fixed", "value": "150"},
+        "Arg5": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.clementine.pain-extraction",
       "ownerAwakenerId": 10,
       "kind": "command",
       "displayName": "Pain Extraction",
       "cost": "3",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        },
-        {
-          "id": "mechanic.prepare",
-          "value": 1
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.prepare", "value": 1}],
       "variants": []
     },
     "C5": {
       "descriptionTemplate": "Restore [Heal:Arg1] HP, temporarily remove {Madness} from all enemies and temporarily reduce their {STR⯆} by [Exhaustion:Arg3]. {Quasar}: Gain [Power:Arg4] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["22.5", "27", "31.5", "36", "40.5", "45"],
-          "suffix": "%",
-          "stat": "CON"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["22.5", "27", "31.5", "36", "40.5", "45"], "suffix": "%", "stat": "CON"},
+        "Arg3": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg4": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.clementine.soulsalve",
       "ownerAwakenerId": 10,
@@ -190,17 +102,8 @@
     "Exalt": {
       "descriptionTemplate": "Remove all your {Symbiosis}, then transform into either {Psychic Trauma} or {Phobic Fixation} on all enemies. Deal [Damage:Arg1] DMG to all enemies. Gain Keyflare equal to [Arg2]% of Clementine's Keyflare Regen.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["150", "180", "210", "240", "270", "300"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["150", "180", "210", "240", "270", "300"],
-          "suffix": "%"
-        }
+        "Arg1": {"kind": "scaling", "values": ["150", "180", "210", "240", "270", "300"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["150", "180", "210", "240", "270", "300"], "suffix": "%"}
       },
       "id": "skill.clementine.lifeform-reconstruction",
       "ownerAwakenerId": 10,
@@ -234,13 +137,7 @@
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.clementine.madness-omen",
       "ownerAwakenerId": 10,
       "displayName": "Madness Omen",
@@ -251,28 +148,11 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nThe {STR} gained by all Awakeners increases by [Arg3]%.\nWhen Clementine deals DMG to \"Insectoid\" enemies, she inflicts a {Bleed} effect equal to [Arg4]% of the DMG dealt. The first time each round Clementine provides a Shield or recovers HP, \"Insectoid\" enemies temporarily lose {STR} equal to [Arg5]% of Clementine's DEF.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["50", "55", "60", "65", "70", "75", "80", "85", "90", "100"]
-        },
-        "Arg5": {
-          "kind": "scaling",
-          "values": ["20", "21", "22", "23", "24", "25", "26", "27", "28", "30"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]},
+        "Arg4": {"kind": "scaling", "values": ["50", "55", "60", "65", "70", "75", "80", "85", "90", "100"]},
+        "Arg5": {"kind": "scaling", "values": ["20", "21", "22", "23", "24", "25", "26", "27", "28", "30"]}
       },
       "id": "talent.clementine.soulforge-aptitude",
       "ownerAwakenerId": 10,
@@ -297,14 +177,7 @@
           "targetId": "skill.clementine.lifeform-reconstruction",
           "targetType": "skill",
           "operation": "override_args",
-          "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["180", "216", "252", "288", "324", "360"],
-              "suffix": "%",
-              "stat": "ATK"
-            }
-          }
+          "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["180", "216", "252", "288", "324", "360"], "suffix": "%", "stat": "ATK"}}
         }
       ]
     },
@@ -322,13 +195,7 @@
           "targetType": "skill",
           "operation": "replace_description",
           "descriptionTemplate": "Remove all {Symbiosis} from self, and choose to convert them into {Psychic Trauma} or {Phobic Fixation} for all enemies, increasing Clementine's Base DMG by 3% for each stack removed. Deal [Damage:Arg1] DMG to all enemies. Gain Keyflare equal to [Arg2]% of Clementine's Keyflare Regen.",
-          "descriptionArgs": {
-            "Arg2": {
-              "kind": "scaling",
-              "values": ["350", "380", "410", "440", "470", "500"],
-              "suffix": "%"
-            }
-          }
+          "descriptionArgs": {"Arg2": {"kind": "scaling", "values": ["350", "380", "410", "440", "470", "500"], "suffix": "%"}}
         }
       ]
     },

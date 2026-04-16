@@ -23,57 +23,26 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.6,
-    "ATK": 1.65,
-    "DEF": 1.4
-  },
-  "substatScaling": {
-    "CritRate": "1.6%",
-    "CritDamage": "1.2%"
-  },
-  "assets": {
-    "portraitKey": "lotan",
-    "iconKey": "lotan"
-  },
+  "statScaling": {"CON": 1.6, "ATK": 1.65, "DEF": 1.4},
+  "substatScaling": {"CritRate": "1.6%", "CritDamage": "1.2%"},
+  "assets": {"portraitKey": "lotan", "iconKey": "lotan"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Lotan obtains [Energy:Arg1] Aliemus. {Rouse}: Lotan's hits count increase by [Arg2] times.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "1"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}, "Arg2": {"kind": "fixed", "value": "1"}},
       "id": "skill.lotan.battle-thirst",
       "ownerAwakenerId": 31,
       "kind": "rouse",
       "displayName": "Battle Thirst",
       "cost": "3",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Lotan obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.lotan.strike",
       "ownerAwakenerId": 31,
@@ -86,16 +55,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Lotan obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.lotan.defense",
       "ownerAwakenerId": 31,
@@ -108,16 +69,8 @@
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to a random enemy, repeat [Arg3] times. Each {Strike} played this turn reduces its Arithmetica Cost by 1.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["7.5", "9.0", "10.5", "12.0", "13.5", "15.0"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "3"
-        }
+        "Arg1": {"kind": "scaling", "values": ["7.5", "9.0", "10.5", "12.0", "13.5", "15.0"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "fixed", "value": "3"}
       },
       "id": "skill.lotan.blade-of-defiance",
       "ownerAwakenerId": 31,
@@ -130,18 +83,8 @@
     "C5": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, obtain [Power:Arg2] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["7.5", "9.0", "10.5", "12.0", "13.5", "15.0"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["2.5", "3.0", "3.5", "4.0", "4.5", "5.0"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["7.5", "9.0", "10.5", "12.0", "13.5", "15.0"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["2.5", "3.0", "3.5", "4.0", "4.5", "5.0"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.lotan.tides-of-hubris",
       "ownerAwakenerId": 31,
@@ -154,18 +97,8 @@
     "Exalt": {
       "descriptionTemplate": "Dispel self {Weakness} state. Deal [Damage:Arg1] DMG to all enemies. For each {Strike} played in this battle, increase the DMG by [Arg2].",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["40", "48", "56", "64", "72", "80"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.lotan.beast-of-chaos",
       "ownerAwakenerId": 31,
@@ -190,13 +123,7 @@
   "talents": {
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.lotan.madness-omen",
       "ownerAwakenerId": 31,
       "displayName": "Madness Omen",
@@ -207,24 +134,10 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nLotan's Command Card Base DMG increases by [Arg3]%. For each instance of DMG Lotan deals, Lotan's Active DMG is increased by 2% for the rest of this turn, up to [Arg4]%.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["50", "55", "60", "65", "70", "75", "80", "85", "90", "100"]
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["50", "55", "60", "65", "70", "75", "80", "85", "90", "100"]},
+        "Arg4": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]}
       },
       "id": "talent.lotan.soulforge-aptitude",
       "ownerAwakenerId": 31,
@@ -268,14 +181,7 @@
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, gain [Power:Arg2] {STR}. Treated as {Strike}.",
-          "descriptionArgs": {
-            "Arg2": {
-              "kind": "scaling",
-              "values": ["5", "6", "7", "8", "9", "10"],
-              "suffix": "%",
-              "stat": "ATK"
-            }
-          }
+          "descriptionArgs": {"Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "ATK"}}
         }
       ]
     },
@@ -293,12 +199,7 @@
           "targetType": "skill",
           "operation": "replace_description",
           "descriptionTemplate": "Dispel self {Weakness} state. Deal [Damage:Arg1] DMG to all enemies [Arg3] times. In this battle, for each {Strike} played, increase DMG by [Arg2]. Add 2 {Strike} cards with {Exhaust} and {Fleeting} to your hand.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "2"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "2"}}
         }
       ]
     },

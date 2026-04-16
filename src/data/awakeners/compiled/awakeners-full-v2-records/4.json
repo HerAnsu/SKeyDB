@@ -23,59 +23,29 @@
     "DeathResistance": "33.6%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.5,
-    "ATK": 1.6,
-    "DEF": 1.75
-  },
-  "substatScaling": {
-    "SigilYield": "0.6%",
-    "DeathResistance": "5.6%"
-  },
-  "assets": {
-    "portraitKey": "alva",
-    "iconKey": "alva"
-  },
+  "statScaling": {"CON": 1.5, "ATK": 1.6, "DEF": 1.75},
+  "substatScaling": {"SigilYield": "0.6%", "DeathResistance": "5.6%"},
+  "assets": {"portraitKey": "alva", "iconKey": "alva"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Alva obtains [Energy:Arg1] Aliemus. {Rouse}: Obtain [Arg2] {Alert}. DMG from Alva's Command Card increases with the current Shield, increasing by 2 DMG for each point of Shield.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"], "suffix": "%", "stat": "DEF"}
       },
       "id": "skill.alva.outstanding-veteran",
       "ownerAwakenerId": 4,
       "kind": "rouse",
       "displayName": "Outstanding Veteran",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Alva obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.alva.strike",
       "ownerAwakenerId": 4,
@@ -88,16 +58,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Alva obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.alva.defense",
       "ownerAwakenerId": 4,
@@ -109,36 +71,18 @@
     },
     "C4": {
       "descriptionTemplate": "Gain [Block:Arg1] Shield. If in hand at turn end, generate Shield 1 more time next time it is played. Dispel all Awakeners' {Sealed} states.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"}},
       "id": "skill.alva.combat-stance",
       "ownerAwakenerId": 4,
       "kind": "command",
       "displayName": "Combat Stance",
       "cost": "0",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C5": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Each point of Shield increases DMG by 2. In this turn, for every 1 {Defense} played, Arithmetica Cost -1. Counts as a {Strike}.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["60", "72", "84", "96", "108", "120"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["60", "72", "84", "96", "108", "120"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.alva.precision-slash",
       "ownerAwakenerId": 4,
       "kind": "command",
@@ -149,14 +93,7 @@
     },
     "Exalt": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Discard all State Cards and Symptom Cards from your hand, and draw a number of cards equal to the quantity discarded.{Vulnerable} All enemies for 1 turn.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["50", "60", "70", "80", "90", "100"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100"], "suffix": "%", "stat": "DEF"}},
       "id": "skill.alva.endless-justice",
       "ownerAwakenerId": 4,
       "kind": "exalt",
@@ -191,38 +128,20 @@
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg1": {
-              "substat": "DeathResistance",
-              "multiplier": "0.5",
-              "suffix": "%"
-            }
-          }
+          "argSubstatBonuses": {"Arg1": {"substat": "DeathResistance", "multiplier": "0.5", "suffix": "%"}}
         },
         {
           "targetId": "skill.alva.strike",
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg1": {
-              "substat": "DeathResistance",
-              "multiplier": "0.5",
-              "suffix": "%"
-            }
-          }
+          "argSubstatBonuses": {"Arg1": {"substat": "DeathResistance", "multiplier": "0.5", "suffix": "%"}}
         }
       ]
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.alva.madness-omen",
       "ownerAwakenerId": 4,
       "displayName": "Madness Omen",
@@ -233,24 +152,10 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nThe base DMG of {Strike} and {Precision Slash} is increased by an amount equal to [Arg3]% of the Shield gained this turn. Alva's Final DMG dealt to the {Caro} Realm enemies is increased by [Arg4]%.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["20", "23", "26", "29", "32", "35", "38", "41", "44", "50"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]},
+        "Arg4": {"kind": "scaling", "values": ["20", "23", "26", "29", "32", "35", "38", "41", "44", "50"]}
       },
       "id": "talent.alva.soulforge-aptitude",
       "ownerAwakenerId": 4,

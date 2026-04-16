@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 
@@ -9,7 +8,7 @@ import skills from '../src/data/awakeners/awakener-skills.json' with {type: 'jso
 import talents from '../src/data/awakeners/awakener-talents.json' with {type: 'json'}
 import derivedSkills from '../src/data/awakeners/derived-skills.json' with {type: 'json'}
 import {compileAwakenersFullV2} from '../src/domain/awakeners-full-v2-compiler.ts'
-import {formatGeneratedJsonFiles} from './format-generated-json.mjs'
+import {syncFormattedJsonDirectory, writeFormattedJsonIfChanged} from './format-generated-json.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -41,25 +40,16 @@ async function main() {
     derivedSkills,
   })
 
-  await fs.mkdir(path.dirname(outputPath), {recursive: true})
-  await fs.writeFile(outputPath, `${JSON.stringify(compiled, null, 2)}\n`)
-  await fs.rm(recordsOutputDir, {recursive: true, force: true})
-  await fs.mkdir(recordsOutputDir, {recursive: true})
-
-  const recordOutputPaths = compiled.map((record) =>
-    path.join(recordsOutputDir, `${String(record.id)}.json`),
+  const topLevelResult = await writeFormattedJsonIfChanged(outputPath, compiled)
+  const recordResults = await syncFormattedJsonDirectory(
+    recordsOutputDir,
+    Object.fromEntries(compiled.map((record) => [`${String(record.id)}.json`, record])),
   )
-
-  await Promise.all(
-    compiled.map((record, index) =>
-      fs.writeFile(recordOutputPaths[index], `${JSON.stringify(record, null, 2)}\n`),
-    ),
-  )
-  await formatGeneratedJsonFiles(repoRoot, [outputPath, recordsOutputDir])
-
-  console.log(`Wrote ${path.relative(repoRoot, outputPath)}`)
+  console.log(`${topLevelResult.changed ? 'Wrote' : 'Kept'} ${path.relative(repoRoot, outputPath)}`)
   console.log(
-    `Wrote ${compiled.length} full V2 records to ${path.relative(repoRoot, recordsOutputDir)}`,
+    `${recordResults.written.length > 0 || recordResults.removed.length > 0 ? 'Synced' : 'Kept'} ${
+      compiled.length
+    } full V2 records in ${path.relative(repoRoot, recordsOutputDir)}`,
   )
 }
 

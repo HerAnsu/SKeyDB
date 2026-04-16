@@ -23,59 +23,29 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.65,
-    "ATK": 1.4,
-    "DEF": 1.7
-  },
-  "substatScaling": {
-    "CritRate": "1.6%",
-    "SigilYield": "0.6%"
-  },
-  "assets": {
-    "portraitKey": "agrippa",
-    "iconKey": "agrippa"
-  },
+  "statScaling": {"CON": 1.65, "ATK": 1.4, "DEF": 1.7},
+  "substatScaling": {"CritRate": "1.6%", "SigilYield": "0.6%"},
+  "assets": {"portraitKey": "agrippa", "iconKey": "agrippa"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Agrippa obtains [Energy:Arg1] Aliemus. {Rouse}: {Poison} inflicted by Agrippa +50%. At turn end, obtain [Block:Arg2] Shield.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"}
       },
       "id": "skill.agrippa.path-of-the-lost",
       "ownerAwakenerId": 2,
       "kind": "rouse",
       "displayName": "Path of the Lost",
       "cost": "1",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Agrippa obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.agrippa.strike",
       "ownerAwakenerId": 2,
@@ -88,16 +58,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Agrippa obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.agrippa.defense",
       "ownerAwakenerId": 2,
@@ -109,14 +71,7 @@
     },
     "C4": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Current {Embryo Fusion} is doubled.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["12.5", "15", "17.5", "20", "22.5", "25"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["12.5", "15", "17.5", "20", "22.5", "25"], "suffix": "%", "stat": "DEF"}},
       "id": "skill.agrippa.reluctant-alms",
       "ownerAwakenerId": 2,
       "kind": "command",
@@ -127,14 +82,7 @@
     },
     "C5": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG and equal {Poison}. Whenever {Devour} is triggered, move {Colorless Spiral} from the Discard Pile to your hand.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.agrippa.colorless-spiral",
       "ownerAwakenerId": 2,
       "kind": "command",
@@ -146,30 +94,10 @@
     "Exalt": {
       "descriptionTemplate": "[{Devour}: Obtain [Power:Arg1] {STR} and [Arg4] {Alert}.] Obtain [Block:Arg2] Shield. Inflict [Poison:Arg3] stacks of {Poison} on all enemies.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["32.5", "39", "45.5", "52", "58.5", "65"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["50", "60", "70", "80", "90", "100"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg4": {"kind": "scaling", "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["32.5", "39", "45.5", "52", "58.5", "65"], "suffix": "%", "stat": "DEF"},
+        "Arg3": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.agrippa.pale-blessing",
       "ownerAwakenerId": 2,
@@ -206,29 +134,15 @@
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
           "argSubstatBonuses": {
-            "Arg2": {
-              "substat": "SigilYield",
-              "multiplier": "0.5",
-              "mode": "scale_base"
-            },
-            "Arg3": {
-              "substat": "SigilYield",
-              "multiplier": "1",
-              "mode": "scale_base"
-            }
+            "Arg2": {"substat": "SigilYield", "multiplier": "0.5", "mode": "scale_base"},
+            "Arg3": {"substat": "SigilYield", "multiplier": "1", "mode": "scale_base"}
           }
         }
       ]
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.agrippa.madness-omen",
       "ownerAwakenerId": 2,
       "displayName": "Madness Omen",
@@ -239,20 +153,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\n{Colorless Spiral} increases {Embryo Fusion} by [Arg3]%. When {Devour} is triggered, 1 {Colorless Spiral} in hand has its Arithmetica Cost -1.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]}
       },
       "id": "talent.agrippa.soulforge-aptitude",
       "ownerAwakenerId": 2,
@@ -296,24 +199,14 @@
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG. Agrippa obtains [Energy:Arg2] Aliemus. Trigger [Arg3]% {Poison} on all enemies.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "10"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "10"}}
         },
         {
           "targetId": "skill.agrippa.defense",
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Obtain [Block:Arg1] Shield. Agrippa obtains [Energy:Arg2] Aliemus. Trigger [Arg3]% of {Poison} on all enemies.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "10"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "10"}}
         }
       ]
     },
@@ -332,16 +225,8 @@
           "operation": "mixed",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG and an equal amount of {Poison}. {Embryo Fusion} +[Blood:Arg2]%. Whenever {Devour} is triggered, move {Colorless Spiral} from the Discard Pile to your hand.",
           "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["22.5", "27", "31.5", "36", "40.5", "45"],
-              "suffix": "%",
-              "stat": "ATK"
-            },
-            "Arg2": {
-              "kind": "fixed",
-              "value": "20"
-            }
+            "Arg1": {"kind": "scaling", "values": ["22.5", "27", "31.5", "36", "40.5", "45"], "suffix": "%", "stat": "ATK"},
+            "Arg2": {"kind": "fixed", "value": "20"}
           }
         }
       ]

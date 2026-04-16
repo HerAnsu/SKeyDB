@@ -23,61 +23,30 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.2,
-    "ATK": 1.3,
-    "DEF": 1.5
-  },
-  "substatScaling": {
-    "RealmMastery": "2",
-    "DamageAmplification": "1.6%"
-  },
-  "assets": {
-    "portraitKey": "faros",
-    "iconKey": "faros"
-  },
+  "statScaling": {"CON": 1.2, "ATK": 1.3, "DEF": 1.5},
+  "substatScaling": {"RealmMastery": "2", "DamageAmplification": "1.6%"},
+  "assets": {"portraitKey": "faros", "iconKey": "faros"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Faros obtains [Energy:Arg1] Aliemus. {Rouse}: Obtain 1 Tentacle. For each card played by Faros, draw [Arg2] cards and trigger [Arg3]% {Poison} Effect on all enemies, up to 3 times per turn.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "1"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "5"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "fixed", "value": "1"},
+        "Arg3": {"kind": "fixed", "value": "5"}
       },
       "id": "skill.faros.abyssal-obsession",
       "ownerAwakenerId": 17,
       "kind": "rouse",
       "displayName": "Abyssal Obsession",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Faros obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.faros.strike",
       "ownerAwakenerId": 17,
@@ -90,16 +59,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Faros obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.faros.defense",
       "ownerAwakenerId": 17,
@@ -112,26 +73,10 @@
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG and an equal amount of {Poison}, which enjoys a [Arg4]% {Tentacle DMG} bonus. Generate [Arg2] Temporary Tentacles. {Tentacle DMG} +[TentaclePower:Arg3].",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["16", "19.2", "22.4", "25.6", "28.8", "32"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg4": {
-          "kind": "fixed",
-          "value": "50"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "1"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["2.5", "3", "3.5", "4", "4.5", "5"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["16", "19.2", "22.4", "25.6", "28.8", "32"], "suffix": "%", "stat": "ATK"},
+        "Arg4": {"kind": "fixed", "value": "50"},
+        "Arg2": {"kind": "fixed", "value": "1"},
+        "Arg3": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.faros.ocean-of-elation",
       "ownerAwakenerId": 17,
@@ -143,36 +88,18 @@
     },
     "C5": {
       "descriptionTemplate": "Within this turn, after causing {Tentacle DMG}, [Poison:Arg1] stacks of {Poison} are applied to all enemies.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["9", "10.8", "12.6", "14.4", "16.2", "18"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["9", "10.8", "12.6", "14.4", "16.2", "18"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.faros.deep-currents",
       "ownerAwakenerId": 17,
       "kind": "command",
       "displayName": "Deep Currents",
       "cost": "1",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "Exalt": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Dispel self {Vulnerable} state. Choose up to 3 cards from the Draw Pile and add them to your hand.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["36", "43.2", "50.4", "57.6", "64.8", "72"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["36", "43.2", "50.4", "57.6", "64.8", "72"], "suffix": "%", "stat": "DEF"}},
       "id": "skill.faros.lost-city-of-lemuria",
       "ownerAwakenerId": 17,
       "kind": "exalt",
@@ -207,25 +134,13 @@
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg1": {
-              "substat": "DamageAmplification",
-              "multiplier": "0.4",
-              "suffix": "%"
-            }
-          }
+          "argSubstatBonuses": {"Arg1": {"substat": "DamageAmplification", "multiplier": "0.4", "suffix": "%"}}
         }
       ]
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.faros.madness-omen",
       "ownerAwakenerId": 17,
       "displayName": "Madness Omen",
@@ -236,20 +151,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nFaros inflicts [Arg3]% more {Poison}. {Lost City of Lemuria} causes all Tentacles to strike 1 additional time at turn end, but each attack deals only 25% DMG.\nWhen there are 1/2/3 other {Lemurian} Awakeners in the team, DMG Amplification +20%/50%/100%.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
       },
       "id": "talent.faros.soulforge-aptitude",
       "ownerAwakenerId": 17,
@@ -274,12 +178,7 @@
           "targetId": "skill.faros.ocean-of-elation",
           "targetType": "skill",
           "operation": "override_args",
-          "descriptionArgs": {
-            "Arg4": {
-              "kind": "fixed",
-              "value": "100"
-            }
-          }
+          "descriptionArgs": {"Arg4": {"kind": "fixed", "value": "100"}}
         }
       ]
     },

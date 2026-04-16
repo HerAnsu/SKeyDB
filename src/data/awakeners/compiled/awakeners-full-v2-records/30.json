@@ -23,57 +23,26 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.35,
-    "ATK": 1.85,
-    "DEF": 1.45
-  },
-  "substatScaling": {
-    "CritRate": "1.6%",
-    "CritDamage": "1.2%"
-  },
-  "assets": {
-    "portraitKey": "liz",
-    "iconKey": "liz"
-  },
+  "statScaling": {"CON": 1.35, "ATK": 1.85, "DEF": 1.45},
+  "substatScaling": {"CritRate": "1.6%", "CritDamage": "1.2%"},
+  "assets": {"portraitKey": "liz", "iconKey": "liz"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Liz obtains [Energy:Arg1] Aliemus. {Rouse}: For every [Arg2] instances of DMG dealt by Liz, put a {Green Flames} with {Exhaust} into hand, up to 3 times per turn.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "3"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}, "Arg2": {"kind": "fixed", "value": "3"}},
       "id": "skill.liz.emerald-reflection",
       "ownerAwakenerId": 30,
       "kind": "rouse",
       "displayName": "Emerald Reflection",
       "cost": "1",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Liz obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.liz.strike",
       "ownerAwakenerId": 30,
@@ -86,16 +55,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Liz obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.liz.defense",
       "ownerAwakenerId": 30,
@@ -107,14 +68,7 @@
     },
     "C4": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield, put 1 {Exhaust} {Green Flames} into hand. {Leap}: Before the start of next turn, each time you are attacked, put 1 {Exhaust} {Green Flames} into hand.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["20", "24", "28", "32", "36", "40"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "DEF"}},
       "id": "skill.liz.moth-trapping-fire",
       "ownerAwakenerId": 30,
       "kind": "command",
@@ -126,43 +80,21 @@
     "C5": {
       "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG}, inflict [Arg2]% of DMG as {Poison}. At turn end, if in hand or in {Ultra Space}, upgrade to {Corrupted Flames}. Can be played with insufficient Arithmetica, changing its effect to obtain [Energy:Arg3] Aliemus and {Exhaust}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "50"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "3"
-        }
+        "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "50"},
+        "Arg3": {"kind": "fixed", "value": "3"}
       },
       "id": "skill.liz.green-flames",
       "ownerAwakenerId": 30,
       "kind": "command",
       "displayName": "Green Flames",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "Exalt": {
       "descriptionTemplate": "Obtain [Power:Arg1] Temporary {STR}. Discard all Liz cards from your hand and trigger their effects.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.liz.dance-to-destruction",
       "ownerAwakenerId": 30,
       "kind": "exalt",
@@ -185,24 +117,10 @@
       {
         "descriptionTemplate": "Deal [Damage:Arg2] {Pierce DMG} [Arg1] times to a random enemy, and inflict {Poison} with [Arg3]% DMG. If Arithmetica is insufficient, it can be played forcefully, andthe effect changes to gaining [Energy:Arg4] Aliemus and {Exhaust} after played.",
         "descriptionArgs": {
-          "Arg2": {
-            "kind": "scaling",
-            "values": ["15", "18", "21", "24", "27", "30"],
-            "suffix": "%",
-            "stat": "ATK"
-          },
-          "Arg1": {
-            "kind": "fixed",
-            "value": "2"
-          },
-          "Arg3": {
-            "kind": "fixed",
-            "value": "50"
-          },
-          "Arg4": {
-            "kind": "fixed",
-            "value": "5"
-          }
+          "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+          "Arg1": {"kind": "fixed", "value": "2"},
+          "Arg3": {"kind": "fixed", "value": "50"},
+          "Arg4": {"kind": "fixed", "value": "5"}
         },
         "id": "derived.liz.corrupted-flames",
         "ownerAwakenerId": 30,
@@ -211,11 +129,7 @@
         "derivedFromId": "skill.liz.green-flames",
         "rootSkillId": "skill.liz.green-flames",
         "childDerivedSkillIds": [],
-        "cardKeywords": [
-          {
-            "id": "mechanic.retain"
-          }
-        ],
+        "cardKeywords": [{"id": "mechanic.retain"}],
         "variants": []
       }
     ]
@@ -223,13 +137,7 @@
   "talents": {
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.liz.madness-omen",
       "ownerAwakenerId": 30,
       "displayName": "Madness Omen",
@@ -240,21 +148,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAt the start of a battle, place a {Corrupted Flames} with {Exhaust} into hand, and increase the Base DMG of {Green Flames} and its related derived cards by [Arg3]%.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "linear", "base": "5", "gainPerLevel": "5"}
       },
       "id": "talent.liz.soulforge-aptitude",
       "ownerAwakenerId": 30,
@@ -298,24 +194,14 @@
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG. Liz obtains [Energy:Arg2] Aliemus. {Leap}: Apply [Arg3]% DMG {Poison}.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "50"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "50"}}
         },
         {
           "targetId": "skill.liz.defense",
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Obtain [Block:Arg1] Shield. Liz obtains [Energy:Arg2] Aliemus. {Leap}: Trigger [Arg3]% {Poison} for all enemies.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "25"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "25"}}
         }
       ]
     },
@@ -342,24 +228,10 @@
     {
       "descriptionTemplate": "Deal [Damage:Arg2] {Pierce DMG} [Arg1] times to a random enemy, and inflict {Poison} with [Arg3]% DMG. If Arithmetica is insufficient, it can be played forcefully, andthe effect changes to gaining [Energy:Arg4] Aliemus and {Exhaust} after played.",
       "descriptionArgs": {
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg1": {
-          "kind": "fixed",
-          "value": "2"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "50"
-        },
-        "Arg4": {
-          "kind": "fixed",
-          "value": "5"
-        }
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+        "Arg1": {"kind": "fixed", "value": "2"},
+        "Arg3": {"kind": "fixed", "value": "50"},
+        "Arg4": {"kind": "fixed", "value": "5"}
       },
       "id": "derived.liz.corrupted-flames",
       "ownerAwakenerId": 30,
@@ -368,30 +240,15 @@
       "derivedFromId": "skill.liz.green-flames",
       "rootSkillId": "skill.liz.green-flames",
       "childDerivedSkillIds": [],
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     {
       "descriptionTemplate": "Deal [Damage:Arg2] {Pierce DMG} [Arg1] times to a random enemy, and inflict {Poison} equal to 50% of the Damage. When Arithmetica is insufficient, it can still be forced out, but the effect changes to gaining [Energy:Arg3] Aliemus and {Exhaust} after played.",
       "descriptionArgs": {
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg1": {
-          "kind": "fixed",
-          "value": "3"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "7"
-        }
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+        "Arg1": {"kind": "fixed", "value": "3"},
+        "Arg3": {"kind": "fixed", "value": "7"}
       },
       "id": "derived.liz.deadly-flames",
       "ownerAwakenerId": 30,
@@ -400,11 +257,7 @@
       "derivedFromId": "skill.liz.omens-descent",
       "rootSkillId": "skill.liz.omens-descent",
       "childDerivedSkillIds": [],
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     }
   ]

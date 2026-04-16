@@ -23,53 +23,26 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.5,
-    "ATK": 1.5,
-    "DEF": 1.5
-  },
-  "substatScaling": {
-    "KeyflareRegen": "2.4",
-    "RealmMastery": "2"
-  },
-  "assets": {
-    "portraitKey": "ramona",
-    "iconKey": "ramona"
-  },
+  "statScaling": {"CON": 1.5, "ATK": 1.5, "DEF": 1.5},
+  "substatScaling": {"KeyflareRegen": "2.4", "RealmMastery": "2"},
+  "assets": {"portraitKey": "ramona", "iconKey": "ramona"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Ramona obtains [Energy:Arg1] Aliemus. {Rouse}: After Ramona plays a card, she gains 1 Arithmetica, up to 3 times per turn.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
       "id": "skill.ramona.first-doctrine",
       "ownerAwakenerId": 42,
       "kind": "rouse",
       "displayName": "First Doctrine",
       "cost": "3",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Ramona obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.ramona.strike",
       "ownerAwakenerId": 42,
@@ -82,16 +55,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Ramona obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.ramona.defense",
       "ownerAwakenerId": 42,
@@ -104,23 +69,10 @@
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg2] times. After playing, increase the DMG count of {Queen's Sword} by 1, up to [Arg3] times. Gain [Arg7] Temporary Realm Mastery.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "% {ATK}"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "2"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "5"
-        },
-        "Arg7": {
-          "kind": "fixed",
-          "value": "0"
-        }
+        "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "% {ATK}"},
+        "Arg2": {"kind": "fixed", "value": "2"},
+        "Arg3": {"kind": "fixed", "value": "5"},
+        "Arg7": {"kind": "fixed", "value": "0"}
       },
       "id": "skill.ramona.queens-sword",
       "ownerAwakenerId": 42,
@@ -132,14 +84,7 @@
     },
     "C5": {
       "descriptionTemplate": "Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg1]. Draw 1 card.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "DEF"}},
       "id": "skill.ramona.assault-thesis",
       "ownerAwakenerId": 42,
       "kind": "command",
@@ -150,12 +95,7 @@
     },
     "Exalt": {
       "descriptionTemplate": "Gain [Arg1] Keyflare. Choose 1 card from the Draw Pile or Discard Pile, add it to your hand, and reduce its Arithmetica Cost to 0.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["100", "120", "140", "160", "180", "200"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["100", "120", "140", "160", "180", "200"]}},
       "id": "skill.ramona.mundus-decree",
       "ownerAwakenerId": 42,
       "kind": "exalt",
@@ -191,29 +131,15 @@
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
           "argSubstatBonuses": {
-            "Arg1": {
-              "substat": "KeyflareRegen",
-              "multiplier": "1",
-              "suffix": "%",
-              "mode": "scale_base"
-            },
-            "Arg7": {
-              "substat": "KeyflareRegen",
-              "multiplier": "0.75"
-            }
+            "Arg1": {"substat": "KeyflareRegen", "multiplier": "1", "suffix": "%", "mode": "scale_base"},
+            "Arg7": {"substat": "KeyflareRegen", "multiplier": "0.75"}
           }
         }
       ]
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.ramona.madness-omen",
       "ownerAwakenerId": 42,
       "displayName": "Madness Omen",
@@ -224,24 +150,10 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nRamona's Keyflare Regen increases by [Arg3]%. At the start of battle, obtain Keyflare equal to [Arg4]% of Ramona's Keyflare Regen.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["50", "60", "70", "80", "90", "100", "110", "120", "130", "150"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]},
+        "Arg4": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100", "110", "120", "130", "150"]}
       },
       "id": "talent.ramona.soulforge-aptitude",
       "ownerAwakenerId": 42,
@@ -255,13 +167,7 @@
   "enlightens": {
     "E1": {
       "descriptionTemplate": "{Queen's Sword} deals +1 instance of DMG and gains Temporary {STR} equal to [Arg1]% of ATK with each DMG dealt. (effect scales with {Queen's Sword} skill level). When discarded, obtain an equal amount of Keyflare.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["2.5", "3", "3.5", "4", "4.5", "5"],
-          "suffix": "%"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%"}},
       "id": "enlighten.ramona.innocent-departure",
       "ownerAwakenerId": 42,
       "slot": "E1",
@@ -274,20 +180,9 @@
           "operation": "replace_description",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg5] times, gaining [Power:Arg4] Temporary {STR} each time DMG is dealt. After playing, increase the number of DMG instances for {Queen's Sword} by 1, up to [Arg6] times. Obtain [Arg7] Temporary Realm Mastery. {Aftershock}: Obtain an equal amount of Keyflare.",
           "descriptionArgs": {
-            "Arg4": {
-              "kind": "scaling",
-              "values": ["2.5", "3", "3.5", "4", "4.5", "5"],
-              "suffix": "%",
-              "stat": "ATK"
-            },
-            "Arg5": {
-              "kind": "fixed",
-              "value": "3"
-            },
-            "Arg6": {
-              "kind": "fixed",
-              "value": "5"
-            }
+            "Arg4": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%", "stat": "ATK"},
+            "Arg5": {"kind": "fixed", "value": "3"},
+            "Arg6": {"kind": "fixed", "value": "5"}
           }
         }
       ]
@@ -306,12 +201,7 @@
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg1]. Draw 1 card. For each point of Arithmetica the drawn card costs, obtain [Arg2] Keyflare.",
-          "descriptionArgs": {
-            "Arg2": {
-              "kind": "fixed",
-              "value": "1"
-            }
-          }
+          "descriptionArgs": {"Arg2": {"kind": "fixed", "value": "1"}}
         }
       ]
     },

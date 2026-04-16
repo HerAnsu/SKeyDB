@@ -23,59 +23,29 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 2.1,
-    "ATK": 1.35,
-    "DEF": 2.1
-  },
-  "substatScaling": {
-    "RealmMastery": "2",
-    "SigilYield": "1.2%"
-  },
-  "assets": {
-    "portraitKey": "salvador",
-    "iconKey": "salvador"
-  },
+  "statScaling": {"CON": 2.1, "ATK": 1.35, "DEF": 2.1},
+  "substatScaling": {"RealmMastery": "2", "SigilYield": "1.2%"},
+  "assets": {"portraitKey": "salvador", "iconKey": "salvador"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Salvador obtains [Energy:Arg1] Aliemus. {Rouse}: Place 1 {Sanctuary of Mercy} into hand. At the end of turn, gain [Power:Arg2] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["2.5", "3", "3.5", "4", "4.5", "5"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.salvador.benediction",
       "ownerAwakenerId": 44,
       "kind": "rouse",
       "displayName": "Benediction",
       "cost": "3",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Salvador obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.salvador.strike",
       "ownerAwakenerId": 44,
@@ -88,16 +58,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Salvador obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.salvador.defense",
       "ownerAwakenerId": 44,
@@ -110,16 +72,8 @@
     "C4": {
       "descriptionTemplate": "{Weakness} all enemies for 1 turn. {Embryo Fusion} +[Arg1]%. Accumulate [Heal:Arg2] {Crimson Furnace} Healing.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "27", "29", "31", "33", "35"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "CON"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "27", "29", "31", "33", "35"]},
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "CON"}
       },
       "id": "skill.salvador.blessed-are-the-bones",
       "ownerAwakenerId": 44,
@@ -132,56 +86,25 @@
     "C5": {
       "descriptionTemplate": "Choose: {Dedication}, {Liberation}, or {Redemption}. Obtain [Energy:Arg5] Aliemus. Deal [Damage:Arg1] DMG to all enemies; for every 1 healing accumulated from the {Crimson Furnace} during this battle, increase DMG by [Float:Arg2] points.",
       "descriptionArgs": {
-        "Arg5": {
-          "kind": "scaling",
-          "values": ["15", "16", "17", "18", "19", "20"]
-        },
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["45", "54", "63", "72", "81", "90"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["0.75", "0.8", "0.85", "0.9", "0.95", "1"]
-        }
+        "Arg5": {"kind": "scaling", "values": ["15", "16", "17", "18", "19", "20"]},
+        "Arg1": {"kind": "scaling", "values": ["45", "54", "63", "72", "81", "90"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["0.75", "0.8", "0.85", "0.9", "0.95", "1"]}
       },
       "id": "skill.salvador.end-of-suffering",
       "ownerAwakenerId": 44,
       "kind": "command",
       "displayName": "End of Suffering",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "Exalt": {
       "descriptionTemplate": "[{Devour}: Gain [Power:Arg1] Temporary {STR}, +[Arg4]% Temporary Crit. Rate.] Gain [Block:Arg2] Shield. {Vulnerable} all enemies for 1 turn. Until the start of the next turn, [Arg3]% of the DMG taken will be converted to {Crimson Furnace} Healing.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["20", "24", "28", "32", "36", "40"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg4": {
-          "kind": "fixed",
-          "value": "25"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "ATK"},
+        "Arg4": {"kind": "fixed", "value": "25"},
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "DEF"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.salvador.he-who-protects",
       "ownerAwakenerId": 44,
@@ -224,13 +147,7 @@
     },
     "T3": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.salvador.madness-omen",
       "ownerAwakenerId": 44,
       "displayName": "Madness Omen",
@@ -241,20 +158,9 @@
     "T4": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAfter selecting {Perception} in {Ashen Ruins}, Max HP increases by [Arg3]% of original Max HP.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["2.5", "2.75", "3", "3.25", "3.5", "3.75", "4", "4.25", "4.5", "5"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["2.5", "2.75", "3", "3.25", "3.5", "3.75", "4", "4.25", "4.5", "5"]}
       },
       "id": "talent.salvador.soulforge-aptitude",
       "ownerAwakenerId": 44,
@@ -268,12 +174,7 @@
   "enlightens": {
     "E1": {
       "descriptionTemplate": "{Defense} accumulates a {Crimson Furnace} recovery amount equivalent to CON [Arg1]% (increases with the level of {Defense}). For every 2 {Crimson Furnace} recovery accumulated in this battle, increase the DMG of {Strike} by 1.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"]}},
       "id": "enlighten.salvador.divine-proxy",
       "ownerAwakenerId": 44,
       "slot": "E1",
@@ -292,25 +193,13 @@
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Obtain [Block:Arg1] Shield. Salvador obtains [Energy:Arg2] Aliemus. Accumulate [Heal:Arg3] {Crimson Furnace} Healing.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "scaling",
-              "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"],
-              "suffix": "%",
-              "stat": "CON"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "scaling", "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"], "suffix": "%", "stat": "CON"}}
         }
       ]
     },
     "E2": {
       "descriptionTemplate": "{Blessed are the Bones} {Embryo Fusion} +15%; the accumulated healing from the {Crimson Furnace} increases with the number of turns, increasing each turn by an amount equal to [Arg1]% of CON (increases with the level of {Blessed are the Bones}); {End of Suffering} Crit. Rate + 25%, and you obtain {Prepare 1}.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["0.75", "0.9", "1.05", "1.2", "1.35", "1.5"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["0.75", "0.9", "1.05", "1.2", "1.35", "1.5"]}},
       "id": "enlighten.salvador.book-of-genesis",
       "ownerAwakenerId": 44,
       "slot": "E2",
@@ -323,16 +212,8 @@
           "operation": "replace_description",
           "descriptionTemplate": "{Weakness} all enemies for 1 turn. {Embryo Fusion} +[Arg1]%. Accumulate [Heal:Arg2] {Crimson Furnace} Healing, and gain an additional [Arg3] per turn during battle.",
           "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["40", "42", "44", "46", "48", "50"]
-            },
-            "Arg3": {
-              "kind": "scaling",
-              "values": ["0.75", "0.9", "1.05", "1.2", "1.35", "1.5"],
-              "suffix": "%",
-              "stat": "CON"
-            }
+            "Arg1": {"kind": "scaling", "values": ["40", "42", "44", "46", "48", "50"]},
+            "Arg3": {"kind": "scaling", "values": ["0.75", "0.9", "1.05", "1.2", "1.35", "1.5"], "suffix": "%", "stat": "CON"}
           }
         },
         {
@@ -340,18 +221,8 @@
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Choose: {Dedication}, {Liberation}, or {Redemption}. Obtain [Energy:Arg5] Aliemus. Deal [Damage:Arg1] DMG to all enemies; for every point of {Crimson Furnace} accumulated during this battle, increase DMG by [Float:Arg2]. This hit's Crit. Rate +[Arg4]%.",
-          "descriptionArgs": {
-            "Arg4": {
-              "kind": "fixed",
-              "value": "25"
-            }
-          },
-          "addCardKeywords": [
-            {
-              "id": "mechanic.prepare",
-              "value": 1
-            }
-          ]
+          "descriptionArgs": {"Arg4": {"kind": "fixed", "value": "25"}},
+          "addCardKeywords": [{"id": "mechanic.prepare", "value": 1}]
         }
       ]
     },
@@ -369,12 +240,7 @@
           "targetType": "skill",
           "operation": "replace_description",
           "descriptionTemplate": "[{Devour}: Obtain [Power:Arg1] Temporary {STR}, Temporary Crit. Rate +[Arg4]%.] Obtain [Block:Arg2] Shield. Apply {Vulnerable} to all enemies for 1 turn. Until the start of next turn, when attacked, [Arg3]% of the DMG taken will be converted to {Crimson Furnace} Healing. Salvador obtains [Arg5]% Temporary Crit. DMG.",
-          "descriptionArgs": {
-            "Arg5": {
-              "kind": "fixed",
-              "value": "35"
-            }
-          }
+          "descriptionArgs": {"Arg5": {"kind": "fixed", "value": "35"}}
         }
       ]
     }
@@ -418,16 +284,7 @@
     },
     {
       "descriptionTemplate": "Obtain [Arg1] stacks of Temporary {Barrier}, {Embryo Fusion} +[Arg2]%.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "fixed",
-          "value": "1"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "100"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "1"}, "Arg2": {"kind": "fixed", "value": "100"}},
       "id": "derived.salvador.sanctuary-of-mercy",
       "ownerAwakenerId": 44,
       "displayName": "Sanctuary of Mercy",
@@ -435,14 +292,7 @@
       "derivedFromId": "skill.salvador.benediction",
       "rootSkillId": "skill.salvador.benediction",
       "childDerivedSkillIds": [],
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        },
-        {
-          "id": "mechanic.exhaust"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
       "variants": []
     }
   ]

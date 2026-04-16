@@ -23,59 +23,29 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 2,
-    "ATK": 1.65,
-    "DEF": 1.6
-  },
-  "substatScaling": {
-    "CritRate": "0.8%",
-    "SigilYield": "1.2%"
-  },
-  "assets": {
-    "portraitKey": "ryker",
-    "iconKey": "ryker"
-  },
+  "statScaling": {"CON": 2, "ATK": 1.65, "DEF": 1.6},
+  "substatScaling": {"CritRate": "0.8%", "SigilYield": "1.2%"},
+  "assets": {"portraitKey": "ryker", "iconKey": "ryker"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Ryker obtains [Energy:Arg1] Aliemus. {Rouse}: Obtain [Power:Arg2] {STR}. In this battle, obtain a selected {Chaotic Legacy} Relic, or upgrade an already owned {Chaotic Legacy}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["6", "7.2", "8.4", "9.6", "10.8", "12"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["6", "7.2", "8.4", "9.6", "10.8", "12"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.ryker.exceptional-luck",
       "ownerAwakenerId": 43,
       "kind": "rouse",
       "displayName": "Exceptional Luck",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Ryker obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.ryker.strike",
       "ownerAwakenerId": 43,
@@ -88,16 +58,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Ryker obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.ryker.defense",
       "ownerAwakenerId": 43,
@@ -109,14 +71,7 @@
     },
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Choose 1 card from the Draw Pile and add it to your hand. If it's a critical hit, the selected card's Arithmetica Cost -1.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["20", "24", "28", "32", "36", "40"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.ryker.unexpected-gain",
       "ownerAwakenerId": 43,
       "kind": "command",
@@ -128,16 +83,8 @@
     "C5": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG 1~6 times, gaining [Energy:Arg2] Aliemus. If it deals 6 or more instances of DMG, obtain 1 {Unexpected Gain} with {Exhaust} and an Arithmetica Cost of 0.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15"]}
       },
       "id": "skill.ryker.showdown",
       "ownerAwakenerId": 43,
@@ -150,18 +97,8 @@
     "Exalt": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. Randomly draw 1~6 cards; for each card drawn, gain [Power:Arg2] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["75", "90", "105", "120", "135", "150"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["1.5", "1.8", "2.1", "2.4", "2.7", "3"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["75", "90", "105", "120", "135", "150"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["1.5", "1.8", "2.1", "2.4", "2.7", "3"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.ryker.all-in",
       "ownerAwakenerId": 43,
@@ -195,13 +132,7 @@
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.ryker.madness-omen",
       "ownerAwakenerId": 43,
       "displayName": "Madness Omen",
@@ -212,24 +143,10 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakeners' CON, ATK, and DEF are increased by [Arg1] %, and they gain [Arg2] Keyflare upon their first {Rouse}.\nRyker gains +[Arg3]% Crit. Rate and +[Arg4]% Black Sigil Yield. If at least 500 Black Sigils have been obtained through battle, upgrade 1 {Chaotic Legacy} at the start of next battle.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["40", "44", "48", "52", "56", "60", "64", "68", "72", "80"]
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["40", "44", "48", "52", "56", "60", "64", "68", "72", "80"]},
+        "Arg4": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]}
       },
       "id": "talent.ryker.soulforge-aptitude",
       "ownerAwakenerId": 43,
@@ -262,12 +179,7 @@
           "targetType": "skill",
           "operation": "replace_description",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG 1~6 times, obtains [Energy:Arg2] Aliemus, and for each Critical Hit, gain an additional [Arg3] Aliemus. If 6 or more instances of DMG are dealt, obtain 1 card with an Arithmetica Cost of 0 and an additional {Exhaust} {Unexpected Gain}.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "3"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "3"}}
         }
       ]
     },

@@ -23,63 +23,30 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.4,
-    "ATK": 1.25,
-    "DEF": 1.6
-  },
-  "substatScaling": {
-    "AliemusRegen": "0.8",
-    "SigilYield": "0.6%"
-  },
-  "assets": {
-    "portraitKey": "winkle",
-    "iconKey": "winkle"
-  },
+  "statScaling": {"CON": 1.4, "ATK": 1.25, "DEF": 1.6},
+  "substatScaling": {"AliemusRegen": "0.8", "SigilYield": "0.6%"},
+  "assets": {"portraitKey": "winkle", "iconKey": "winkle"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Winkle gains [Energy:Arg1] Aliemus.{Rouse}: Winkle's Shield and {Counter} are increased by 10%, and after playing a card, gains [Energy:Arg2] Aliemus and [Counterattack:Arg3] stacks {Counter}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "5"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "fixed", "value": "5"},
+        "Arg3": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.winkle.self-imprisonment",
       "ownerAwakenerId": 53,
       "kind": "rouse",
       "displayName": "Self-Imprisonment",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Winkle obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.winkle.strike",
       "ownerAwakenerId": 53,
@@ -92,16 +59,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Winkle obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.winkle.defense",
       "ownerAwakenerId": 53,
@@ -114,20 +73,9 @@
     "C4": {
       "descriptionTemplate": "Remove all enemy {Barrier} and deal [Damage:Arg1] DMG and 1 turn of {Weakness}. Obtain [Arg3] Keyflare. {Leap}: Instead, obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["150", "160", "170", "180", "190", "200"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["15", "16", "17", "18", "19", "20"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "scaling", "values": ["150", "160", "170", "180", "190", "200"]},
+        "Arg2": {"kind": "scaling", "values": ["15", "16", "17", "18", "19", "20"]}
       },
       "id": "skill.winkle.energy-beam",
       "ownerAwakenerId": 53,
@@ -139,14 +87,7 @@
     },
     "C5": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield, discard all cards in hand, and for each card discarded, the Shield gained increases by 50%. {Leap}: Do not discard cards and draw 1 card; the Shield gained increases by 100%.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["20", "24", "28", "32", "36", "40"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "DEF"}},
       "id": "skill.winkle.psyche-reforged",
       "ownerAwakenerId": 53,
       "kind": "command",
@@ -158,22 +99,9 @@
     "Exalt": {
       "descriptionTemplate": "Dispel self {Fragile} state and gain [Block:Arg1] Shield. Obtain [Counterattack:Arg3] stacks of {Counter}. Choose 1 other Awakener to grant them [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["30", "36", "42", "48", "54", "60"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["20", "24", "28", "32", "36", "40"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["35", "38", "41", "44", "47", "50"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "DEF"},
+        "Arg3": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["35", "38", "41", "44", "47", "50"]}
       },
       "id": "skill.winkle.formless-shifting",
       "ownerAwakenerId": 53,
@@ -198,13 +126,7 @@
   "talents": {
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.winkle.madness-omen",
       "ownerAwakenerId": 53,
       "displayName": "Madness Omen",
@@ -215,20 +137,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAfter unleashing {Annihilation}, Winkle gains [Arg3] Aliemus, with a 3-turn cooldown.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20", "22", "24", "26", "30"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20", "22", "24", "26", "30"]}
       },
       "id": "talent.winkle.soulforge-aptitude",
       "ownerAwakenerId": 53,
@@ -267,12 +178,7 @@
     },
     "E2": {
       "descriptionTemplate": "{Psyche Reforged} grants Shield equal to [Arg1]% of DEF for each card discarded (the effect increases with the level of {Psyche Reforged}). Draw 1 card immediately if {Leap} is triggered.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}},
       "id": "enlighten.winkle.forsaken-homeland",
       "ownerAwakenerId": 53,
       "slot": "E2",
@@ -284,14 +190,7 @@
           "targetType": "skill",
           "operation": "replace_description",
           "descriptionTemplate": "Gain [Block:Arg1] Shield, discard all hands, for each card discarded, the Shield Generation +50% and gain [Block:Arg2] points of Delayed Shield. {Leap}: No longer discard cards and draw 2 cards, the Shield Generation increases by 100%.",
-          "descriptionArgs": {
-            "Arg2": {
-              "kind": "scaling",
-              "values": ["5", "6", "7", "8", "9", "10"],
-              "suffix": "%",
-              "stat": "DEF"
-            }
-          }
+          "descriptionArgs": {"Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "DEF"}}
         }
       ]
     },

@@ -22,59 +22,29 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 1.75,
-    "ATK": 1.1,
-    "DEF": 2.05
-  },
-  "substatScaling": {
-    "SigilYield": "0.6%",
-    "DamageAmplification": "1.6%"
-  },
-  "assets": {
-    "portraitKey": "wanda",
-    "iconKey": "wanda"
-  },
+  "statScaling": {"CON": 1.75, "ATK": 1.1, "DEF": 2.05},
+  "substatScaling": {"SigilYield": "0.6%", "DamageAmplification": "1.6%"},
+  "assets": {"portraitKey": "wanda", "iconKey": "wanda"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Wanda obtains [Energy:Arg1] Aliemus. {Rouse}: Immediately gain 5 stacks of {Dreamlure}. Obtain 1 stack of {Dreamlure} at turn start. Whenever gaining {Dreamlure} brings it to 5 or 10 stacks, gain [Block:Arg2] Shield.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"}
       },
       "id": "skill.wanda.living-deads-delirium",
       "ownerAwakenerId": 52,
       "kind": "rouse",
       "displayName": "Living Dead's Delirium",
       "cost": "1",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Wanda obtains [Energy:Arg2] Aliemus. {Leap}: Obtain 1 stack of {Dreamlure}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.wanda.strike",
       "ownerAwakenerId": 52,
@@ -87,16 +57,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Wanda obtains [Energy:Arg2] Aliemus. {Leap}: Obtain 1 stack of {Dreamlure}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.wanda.defense",
       "ownerAwakenerId": 52,
@@ -109,24 +71,9 @@
     "C4": {
       "descriptionTemplate": "Gain [Counterattack:Arg1] stacks of {Counter}. Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg2]; if there is only one enemy, the {STR⯆} Reduction effect +50%. {Leap}: Consumes 5 stacks of {Dreamlure}; if successful, gain an additional [Arg3] stacks of {Counter}, otherwise gain 2 stacks of {Dreamlure}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["16", "19.2", "22.4", "25.6", "28.8", "32"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["30", "36", "42", "48", "54", "60"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["16", "19.2", "22.4", "25.6", "28.8", "32"], "suffix": "%", "stat": "DEF"},
+        "Arg3": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.wanda.keeper-of-the-lost",
       "ownerAwakenerId": 52,
@@ -139,26 +86,10 @@
     "C5": {
       "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg2] times; this damage enjoys [Arg4]% {Counter} bonus. Each attack temporarily reduces the target's {STR⯆} by [Exhaustion:Arg3]. {Leap}: Spend 5 {Dreamlure}. If successful, refund the Arithmetica consumed and deal damage 2 more times; otherwise, gain 2 {Dreamlure}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "5"
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["15", "16", "17", "18", "19", "20"]
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["1.25", "1.5", "1.75", "2", "2.25", "2.5"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "5"},
+        "Arg4": {"kind": "scaling", "values": ["15", "16", "17", "18", "19", "20"]},
+        "Arg3": {"kind": "scaling", "values": ["1.25", "1.5", "1.75", "2", "2.25", "2.5"], "suffix": "%", "stat": "DEF"}
       },
       "id": "skill.wanda.spine-needle-chains",
       "ownerAwakenerId": 52,
@@ -171,18 +102,8 @@
     "Exalt": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield and [Counterattack:Arg2] stacks of {Counter}. The next {Leap} this turn is guaranteed to trigger. Choose to consume {Dreamlure} stacks to trigger {Slumber Counter} or {Echoes of Whispers}. If the number of {Dreamlure} stacks is less than 5, obtain 1 stack of {Dreamlure}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["30", "36", "42", "48", "54", "60"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.wanda.necropolis-of-dreams",
       "ownerAwakenerId": 52,
@@ -218,25 +139,13 @@
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg2": {
-              "substat": "DamageAmplification",
-              "multiplier": "0.75",
-              "suffix": "%"
-            }
-          }
+          "argSubstatBonuses": {"Arg2": {"substat": "DamageAmplification", "multiplier": "0.75", "suffix": "%"}}
         }
       ]
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.wanda.madness-omen",
       "ownerAwakenerId": 52,
       "displayName": "Madness Omen",
@@ -247,20 +156,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAll teammates' {STR⯆} Reduction effect +[Arg3]%.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
       },
       "id": "talent.wanda.soulforge-aptitude",
       "ownerAwakenerId": 52,
@@ -292,14 +190,7 @@
           "targetId": "skill.wanda.keeper-of-the-lost",
           "targetType": "skill",
           "operation": "override_args",
-          "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["28.75", "34.5", "40.25", "46", "51.75", "57.5"],
-              "suffix": "%",
-              "stat": "ATK"
-            }
-          }
+          "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["28.75", "34.5", "40.25", "46", "51.75", "57.5"], "suffix": "%", "stat": "ATK"}}
         }
       ]
     },
@@ -322,60 +213,31 @@
           "targetId": "skill.wanda.spine-needle-chains",
           "targetType": "skill",
           "operation": "override_args",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "scaling",
-              "values": ["2.5", "3", "3.5", "4", "4.5", "5"],
-              "suffix": "%",
-              "stat": "DEF"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%", "stat": "DEF"}}
         },
         {
           "targetId": "derived.wanda.slumber-counter",
           "targetType": "derived-skill",
           "operation": "override_args",
-          "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["25", "26", "27", "28", "29", "30"]
-            }
-          }
+          "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "26", "27", "28", "29", "30"]}}
         },
         {
           "targetId": "derived.wanda.echoes-of-whispers",
           "targetType": "derived-skill",
           "operation": "override_args",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "65"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "65"}}
         },
         {
           "targetId": "overlay.wanda.murmurs",
           "targetType": "overlay",
           "operation": "override_args",
-          "descriptionArgs": {
-            "StateArg1": {
-              "kind": "fixed",
-              "value": "65"
-            }
-          }
+          "descriptionArgs": {"StateArg1": {"kind": "fixed", "value": "65"}}
         },
         {
           "targetId": "skill.wanda.keeper-of-the-lost",
           "targetType": "skill",
           "operation": "override_args",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "scaling",
-              "values": ["37.5", "45", "52.5", "60", "67.5", "75"],
-              "suffix": "%",
-              "stat": "ATK"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "scaling", "values": ["37.5", "45", "52.5", "60", "67.5", "75"], "suffix": "%", "stat": "ATK"}}
         }
       ]
     },
@@ -393,12 +255,7 @@
   "derivedSkills": [
     {
       "descriptionTemplate": "Consumes 10 stacks of {Dreamlure}, causing all enemies to enter the {Murmurs} state this turn: DMG -[Arg3]%, deal 2x instances of DMG.",
-      "descriptionArgs": {
-        "Arg3": {
-          "kind": "fixed",
-          "value": "60"
-        }
-      },
+      "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "60"}},
       "id": "derived.wanda.echoes-of-whispers",
       "ownerAwakenerId": 52,
       "displayName": "Echoes of Whispers",
@@ -423,15 +280,8 @@
     {
       "descriptionTemplate": "Consume 5 stacks of {Dreamlure}, Wanda obtains [StateArg1] Aliemus, and gains Temporary {Counter} equal to [StateArg2]% of permanent {Counter}.",
       "descriptionArgs": {
-        "StateArg1": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15"]
-        },
-        "StateArg2": {
-          "kind": "scaling",
-          "values": ["35", "38", "41", "44", "47", "50"],
-          "suffix": "%"
-        }
+        "StateArg1": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15"]},
+        "StateArg2": {"kind": "scaling", "values": ["35", "38", "41", "44", "47", "50"], "suffix": "%"}
       },
       "id": "derived.wanda.slumber-counter",
       "ownerAwakenerId": 52,

@@ -23,53 +23,26 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 1.5,
-    "ATK": 1.55,
-    "DEF": 1.45
-  },
-  "substatScaling": {
-    "CritRate": "0.8%",
-    "KeyflareRegen": "2.4"
-  },
-  "assets": {
-    "portraitKey": "hameln",
-    "iconKey": "hameln"
-  },
+  "statScaling": {"CON": 1.5, "ATK": 1.55, "DEF": 1.45},
+  "substatScaling": {"CritRate": "0.8%", "KeyflareRegen": "2.4"},
+  "assets": {"portraitKey": "hameln", "iconKey": "hameln"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Hameln obtains [Energy:Arg1] Aliemus. {Rouse}: At turn start, put a {Symphony of Harmony} into hand.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
       "id": "skill.hameln.laudable-masterpiece",
       "ownerAwakenerId": 22,
       "kind": "rouse",
       "displayName": "Laudable Masterpiece",
       "cost": "3",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Hameln obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.hameln.strike",
       "ownerAwakenerId": 22,
@@ -82,16 +55,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Hameln obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.hameln.defense",
       "ownerAwakenerId": 22,
@@ -103,40 +68,18 @@
     },
     "C4": {
       "descriptionTemplate": "Randomly deal 3 instances of [Damage:Arg1] {Pierce DMG}. Each hit has a 50% chance to randomly apply 1 {Marvelous Debuff} to the target. If used with 0 Arithmetica Cost, it Deal an additional 2 hits.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.hameln.soul-overture",
       "ownerAwakenerId": 22,
       "kind": "command",
       "displayName": "Soul Overture",
       "cost": "3",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        },
-        {
-          "id": "mechanic.prepare",
-          "value": 1
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.prepare", "value": 1}],
       "variants": []
     },
     "C5": {
       "descriptionTemplate": "Obtain [Power:Arg1] {STR}. Add 2 {Insight} to your hand. If you lack the required Arithmetica, you can still play this card, but its effect will be changed to shuffle 2 {Insight} cards into your Draw Pile.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.hameln.memory-rondo",
       "ownerAwakenerId": 22,
       "kind": "command",
@@ -148,18 +91,8 @@
     "Exalt": {
       "descriptionTemplate": "Randomly deal [Damage:Arg1] {Pierce DMG} 3 times, {Stealing} [Arg2] {STR⯆} each time. Choose 1 non-Derived Command Card in hand that does not have {Exhaust}, {Rondino}, or {Crescendo}, and add {Rondino} to it. If there are no cards in your hand which qualify, deal DMG 3 more times.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.hameln.primal-chord",
       "ownerAwakenerId": 22,
@@ -184,13 +117,7 @@
   "talents": {
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.hameln.madness-omen",
       "ownerAwakenerId": 22,
       "displayName": "Madness Omen",
@@ -201,20 +128,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAfter playing {Insight}, gain Temporary {STR} equal to [Arg3]% of ATK, and trigger {Crescendo} once. This effect can trigger up to 5 times per turn.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "10"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "10"]}
       },
       "id": "talent.hameln.soulforge-aptitude",
       "ownerAwakenerId": 22,
@@ -240,28 +156,14 @@
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG. Hameln obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] Temporary {STR}. If either {Rondino} or {Crescendo} are triggered, the obtained Temporary {STR} is doubled.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "10",
-              "suffix": "%",
-              "stat": "ATK"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "10", "suffix": "%", "stat": "ATK"}}
         },
         {
           "targetId": "skill.hameln.defense",
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Obtain [Block:Arg1] Shield. Hameln obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] Temporary {STR}. If either {Rondino} or {Crescendo} are triggered, the obtained Temporary {STR} is doubled.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "10",
-              "suffix": "%",
-              "stat": "ATK"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "10", "suffix": "%", "stat": "ATK"}}
         }
       ]
     },
@@ -330,14 +232,7 @@
       "derivedFromId": "skill.hameln.laudable-masterpiece",
       "rootSkillId": "skill.hameln.laudable-masterpiece",
       "childDerivedSkillIds": ["derived.hameln.ascending-scale", "derived.hameln.descending-scale"],
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        },
-        {
-          "id": "mechanic.exhaust"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
       "variants": []
     }
   ]

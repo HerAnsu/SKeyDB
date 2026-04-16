@@ -23,69 +23,31 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.95,
-    "ATK": 1.55,
-    "DEF": 1.7
-  },
-  "substatScaling": {
-    "RealmMastery": "2",
-    "SigilYield": "1.2%"
-  },
-  "assets": {
-    "portraitKey": "caecus",
-    "iconKey": "caecus"
-  },
+  "statScaling": {"CON": 1.95, "ATK": 1.55, "DEF": 1.7},
+  "substatScaling": {"RealmMastery": "2", "SigilYield": "1.2%"},
+  "assets": {"portraitKey": "caecus", "iconKey": "caecus"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Caecus obtains [Energy:Arg1] Aliemus. {Rouse}: Obtain 1 Tentacle. Whenever Caecus plays 1 card, restore [Heal:Arg2] HP and gain [Counterattack:Arg3] stacks of {Counter}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["7", "8.4", "9.8", "11.2", "12.6", "14"],
-          "suffix": "%",
-          "stat": "CON"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["7", "8.4", "9.8", "11.2", "12.6", "14"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["7", "8.4", "9.8", "11.2", "12.6", "14"], "suffix": "%", "stat": "CON"},
+        "Arg3": {"kind": "scaling", "values": ["7", "8.4", "9.8", "11.2", "12.6", "14"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.caecus.metamorphosed-body",
       "ownerAwakenerId": 6,
       "kind": "rouse",
       "displayName": "Metamorphosed Body",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG, which enjoys a [Arg3]% {Counter} bonus. Caecus obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "0"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "fixed", "value": "0"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.caecus.strike",
       "ownerAwakenerId": 6,
@@ -98,16 +60,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Caecus obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.caecus.defense",
       "ownerAwakenerId": 6,
@@ -120,22 +74,9 @@
     "C4": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Until the start of next turn, {Counter} and Tentacle {Counter} trigger an additional [Arg2] times, dealing 50% DMG. Obtain [Power:Arg3] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "1"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["2.5", "3", "3.5", "4", "4.5", "5"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "fixed", "value": "1"},
+        "Arg3": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.caecus.protective-scales",
       "ownerAwakenerId": 6,
@@ -147,14 +88,7 @@
     },
     "C5": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain an equal amount of {Counter}, enjoying a 50% {Tentacle DMG} bonus.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.caecus.shattered-halberd",
       "ownerAwakenerId": 6,
       "kind": "command",
@@ -166,28 +100,10 @@
     "Exalt": {
       "descriptionTemplate": "Restore [Heal:Arg3] HP and dispel {Weakness} from self, apply [Arg4] stacks of {Vulnerable} to all enemies. {Tentacle DMG} +[TentaclePower:Arg1]. {Counter} +[counterattack:Arg2]. Before the start of the next turn, for each Attack taken, command 1 Tentacle to counterattack.",
       "descriptionArgs": {
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "CON"
-        },
-        "Arg4": {
-          "kind": "fixed",
-          "value": "1"
-        },
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["15", "18", "21", "24", "27", "30"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg3": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "CON"},
+        "Arg4": {"kind": "fixed", "value": "1"},
+        "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.caecus.bloodline-of-heresy",
       "ownerAwakenerId": 6,
@@ -223,25 +139,13 @@
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg3": {
-              "substat": "SigilYield",
-              "multiplier": "1",
-              "suffix": "%"
-            }
-          }
+          "argSubstatBonuses": {"Arg3": {"substat": "SigilYield", "multiplier": "1", "suffix": "%"}}
         }
       ]
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.caecus.madness-omen",
       "ownerAwakenerId": 6,
       "displayName": "Madness Omen",
@@ -252,24 +156,10 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nThe first Caecus Command Card played each turn restores HP equal to [Arg3]% of his CON. The Tentacle attack and {Counter} effect of {Bloodline of Heresy} additionally deal [Arg4]% DMG.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["15", "17", "19", "21", "23", "25", "27", "29", "31", "35"]
-        },
-        "Arg4": {
-          "kind": "scaling",
-          "values": ["50", "60", "70", "80", "90", "100", "110", "120", "130", "150"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["15", "17", "19", "21", "23", "25", "27", "29", "31", "35"]},
+        "Arg4": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100", "110", "120", "130", "150"]}
       },
       "id": "talent.caecus.soulforge-aptitude",
       "ownerAwakenerId": 6,
@@ -283,12 +173,7 @@
   "enlightens": {
     "E1": {
       "descriptionTemplate": "{Shattered Halberd} grants [Arg1] Aliemus. (effect scales with {Shattered Halberd} skill level)",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["15", "16", "17", "18", "19", "20"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["15", "16", "17", "18", "19", "20"]}},
       "id": "enlighten.caecus.bloodline-awaken",
       "ownerAwakenerId": 6,
       "slot": "E1",
@@ -300,12 +185,7 @@
           "targetType": "skill",
           "operation": "replace_description",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain an equal amount of {Counter} with a 50% {Tentacle DMG} bonus. Obtain [Energy:Arg2] Aliemus.",
-          "descriptionArgs": {
-            "Arg2": {
-              "kind": "scaling",
-              "values": ["15", "16", "17", "18", "19", "20"]
-            }
-          }
+          "descriptionArgs": {"Arg2": {"kind": "scaling", "values": ["15", "16", "17", "18", "19", "20"]}}
         }
       ]
     },
@@ -322,19 +202,8 @@
           "targetId": "skill.caecus.protective-scales",
           "targetType": "skill",
           "operation": "mixed",
-          "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["30", "36", "42", "48", "54", "60"],
-              "suffix": "%",
-              "stat": "DEF"
-            }
-          },
-          "addCardKeywords": [
-            {
-              "id": "mechanic.retain"
-            }
-          ]
+          "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "DEF"}},
+          "addCardKeywords": [{"id": "mechanic.retain"}]
         }
       ]
     },

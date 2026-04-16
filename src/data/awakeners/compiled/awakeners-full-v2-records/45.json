@@ -23,59 +23,29 @@
     "DeathResistance": "33.6%"
   },
   "primaryScalingBase": 20,
-  "statScaling": {
-    "CON": 1.6,
-    "ATK": 1.25,
-    "DEF": 1.9
-  },
-  "substatScaling": {
-    "SigilYield": "0.6%",
-    "DeathResistance": "5.6%"
-  },
-  "assets": {
-    "portraitKey": "sanga",
-    "iconKey": "sanga"
-  },
+  "statScaling": {"CON": 1.6, "ATK": 1.25, "DEF": 1.9},
+  "substatScaling": {"SigilYield": "0.6%", "DeathResistance": "5.6%"},
+  "assets": {"portraitKey": "sanga", "iconKey": "sanga"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Sanga gains [Energy:Arg1] points of Aliemus.{Rouse}: Tentacle Count +1. The Shield Generation caused by Sanga is 10%, and each time it causes Shield {Tentacle DMG} +[TentaclePower:Arg2].",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["2.5", "3", "3.5", "4", "4.5", "5"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.sanga.realm-of-oblivion",
       "ownerAwakenerId": 45,
       "kind": "rouse",
       "displayName": "Realm of Oblivion",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Sanga obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.sanga.strike",
       "ownerAwakenerId": 45,
@@ -88,16 +58,8 @@
     "C3": {
       "descriptionTemplate": "Gain [Block:Arg1] Shield. Sanga obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.sanga.defense",
       "ownerAwakenerId": 45,
@@ -110,16 +72,8 @@
     "C4": {
       "descriptionTemplate": "Gain [Block:Arg1] Shield. Obtain [Arg2] Tentacle. {Aftershock}: Gain an amount of Aliemus equal to the current Tentacle Count.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["24", "28.8", "33.6", "38.4", "43.2", "48"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "1"
-        }
+        "Arg1": {"kind": "scaling", "values": ["24", "28.8", "33.6", "38.4", "43.2", "48"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "fixed", "value": "1"}
       },
       "id": "skill.sanga.beautys-mercy",
       "ownerAwakenerId": 45,
@@ -131,14 +85,7 @@
     },
     "C5": {
       "descriptionTemplate": "At the start of next turn, dispel {Fragile} state on self and gain [Block:Arg1] Shield.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["28", "33.6", "39.2", "44.8", "50.4", "56"],
-          "suffix": "%",
-          "stat": "DEF"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["28", "33.6", "39.2", "44.8", "50.4", "56"], "suffix": "%", "stat": "DEF"}},
       "id": "skill.sanga.opus-of-isolation",
       "ownerAwakenerId": 45,
       "kind": "command",
@@ -150,24 +97,10 @@
     "Exalt": {
       "descriptionTemplate": "Gain [Block:Arg1] Shield. Deal [Damage:Arg2] DMG to all enemies, increased by [Arg3] for every point of Shield, which enjoys an additional [Arg4]% Crit. Rate and Crit. DMG bonus. Deals 1 extra instance of DMG in Boss Battles.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["20", "24", "28", "32", "36", "40"],
-          "suffix": "% {DEF}"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["30", "36", "42", "48", "54", "60"],
-          "suffix": "% {ATK}"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "3"
-        },
-        "Arg4": {
-          "kind": "fixed",
-          "value": "0"
-        }
+        "Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "% {DEF}"},
+        "Arg2": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "% {ATK}"},
+        "Arg3": {"kind": "fixed", "value": "3"},
+        "Arg4": {"kind": "fixed", "value": "0"}
       },
       "id": "skill.sanga.the-lost-art",
       "ownerAwakenerId": 45,
@@ -203,48 +136,27 @@
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg2": {
-              "substat": "DeathResistance",
-              "multiplier": "0.03"
-            }
-          }
+          "argSubstatBonuses": {"Arg2": {"substat": "DeathResistance", "multiplier": "0.03"}}
         },
         {
           "targetId": "skill.sanga.strike",
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg2": {
-              "substat": "DeathResistance",
-              "multiplier": "0.03"
-            }
-          }
+          "argSubstatBonuses": {"Arg2": {"substat": "DeathResistance", "multiplier": "0.03"}}
         },
         {
           "targetId": "skill.sanga.the-lost-art",
           "targetType": "skill",
           "operation": "arg_substat_bonuses",
           "descriptionArgs": {},
-          "argSubstatBonuses": {
-            "Arg4": {
-              "substat": "DeathResistance",
-              "multiplier": "0.15"
-            }
-          }
+          "argSubstatBonuses": {"Arg4": {"substat": "DeathResistance", "multiplier": "0.15"}}
         }
       ]
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.sanga.madness-omen",
       "ownerAwakenerId": 45,
       "displayName": "Madness Omen",
@@ -255,20 +167,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nWhen Sanga generates Shield, the {Tentacle DMG} is increased by an amount equal to [Arg3]% of the Shield.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["3", "3.3", "3.6", "3.9", "4.2", "4.5", "4.8", "5.1", "5.4", "6"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["3", "3.3", "3.6", "3.9", "4.2", "4.5", "4.8", "5.1", "5.4", "6"]}
       },
       "id": "talent.sanga.soulforge-aptitude",
       "ownerAwakenerId": 45,
@@ -282,12 +183,7 @@
   "enlightens": {
     "E1": {
       "descriptionTemplate": "{Opus of Isolation} immediately grants a shield equal to [Arg1]% of DEF. (effect stacks with {Opus of Isolation} skill level.)",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"]}},
       "id": "enlighten.sanga.melodic-sculpting",
       "ownerAwakenerId": 45,
       "slot": "E1",
@@ -299,25 +195,13 @@
           "targetType": "skill",
           "operation": "replace_description",
           "descriptionTemplate": "Gain [Block:Arg2] Shield. At the start of next turn, dispel {Fragile} state on self and gain [Block:Arg1] Shield.",
-          "descriptionArgs": {
-            "Arg2": {
-              "kind": "scaling",
-              "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"],
-              "suffix": "%",
-              "stat": "DEF"
-            }
-          }
+          "descriptionArgs": {"Arg2": {"kind": "scaling", "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"], "suffix": "%", "stat": "DEF"}}
         }
       ]
     },
     "E2": {
       "descriptionTemplate": "{Beauty's Mercy} gains an additional shield equal to [Arg1]% of DEF for each Tentacle present. (The effect increases with the level of {Beauty's Mercy}.)",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"]}},
       "id": "enlighten.sanga.kneel-before-beauty",
       "ownerAwakenerId": 45,
       "slot": "E2",
@@ -329,14 +213,7 @@
           "targetType": "skill",
           "operation": "replace_description",
           "descriptionTemplate": "Gain [Block:Arg1] Shield, for each Tentacle, gain an additional [Arg3] Shield. Obtain [Arg2] Tentacles. {Aftershock}: Gain Aliemus equal to the current Tentacle Count.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "scaling",
-              "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"],
-              "suffix": "%",
-              "stat": "DEF"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "scaling", "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"], "suffix": "%", "stat": "DEF"}}
         }
       ]
     },
@@ -354,24 +231,9 @@
           "targetType": "skill",
           "operation": "override_args",
           "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["25", "30", "35", "40", "45", "50"],
-              "suffix": "% {DEF}"
-            },
-            "Arg2": {
-              "kind": "scaling",
-              "values": ["37.5", "45", "52.5", "60", "67.5", "75"],
-              "suffix": "% {ATK}"
-            },
-            "Arg4": {
-              "kind": "fixed",
-              "value": "25",
-              "substatBonus": {
-                "substat": "DeathResistance",
-                "multiplier": "0.15"
-              }
-            }
+            "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "% {DEF}"},
+            "Arg2": {"kind": "scaling", "values": ["37.5", "45", "52.5", "60", "67.5", "75"], "suffix": "% {ATK}"},
+            "Arg4": {"kind": "fixed", "value": "25", "substatBonus": {"substat": "DeathResistance", "multiplier": "0.15"}}
           }
         }
       ]

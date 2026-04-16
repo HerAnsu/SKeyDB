@@ -23,57 +23,29 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 1.6,
-    "ATK": 1.45,
-    "DEF": 1.6
-  },
-  "substatScaling": {
-    "AliemusRegen": "0.8",
-    "RealmMastery": "2"
-  },
-  "assets": {
-    "portraitKey": "pickman",
-    "iconKey": "pickman"
-  },
+  "statScaling": {"CON": 1.6, "ATK": 1.45, "DEF": 1.6},
+  "substatScaling": {"AliemusRegen": "0.8", "RealmMastery": "2"},
+  "assets": {"portraitKey": "pickman", "iconKey": "pickman"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Pickman gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 stack of {Fantasia}. For each stack of {Creativity} Pickman gains, {Embryo Fusion} + [Arg2]%.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["20", "22", "24", "26", "28", "30"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["20", "22", "24", "26", "28", "30"]}
       },
       "id": "skill.pickman.morgue-studio",
       "ownerAwakenerId": 40,
       "kind": "rouse",
       "displayName": "Morgue Studio",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Pickman gains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.pickman.strike",
       "ownerAwakenerId": 40,
@@ -86,16 +58,8 @@
     "C3": {
       "descriptionTemplate": "Gain [Block:Arg1] Shield. Pickman gains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.pickman.defense",
       "ownerAwakenerId": 40,
@@ -108,41 +72,21 @@
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] points of guaranteed Crit to all enemies [Arg3] times, {Stealing} [Arg2] {STR} from the target each time. For each time {Discover} effect triggered this turn, this card's Arithmetica Cost -1. If {Inspiration!} has been triggered, deal DMG 2 more times.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["30", "36", "42", "48", "54", "60"],
-          "suffix": "% {ATK}"
-        },
-        "Arg3": {
-          "kind": "fixed",
-          "value": "3"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["4", "4.8", "5.6", "6.4", "7.2", "8"],
-          "suffix": "% {ATK}"
-        }
+        "Arg1": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "% {ATK}"},
+        "Arg3": {"kind": "fixed", "value": "3"},
+        "Arg2": {"kind": "scaling", "values": ["4", "4.8", "5.6", "6.4", "7.2", "8"], "suffix": "% {ATK}"}
       },
       "id": "skill.pickman.chromaphage",
       "ownerAwakenerId": 40,
       "kind": "command",
       "displayName": "Chromaphage",
       "cost": "4",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C5": {
       "descriptionTemplate": "{Embryo Fusion} + [Arg1]%. Remove {Void} state. {Discover} 3 {Painted Silver Relics} and choose 1 to obtain. The Painted Relic will be removed at the start of next turn.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["20", "22", "24", "26", "28", "30"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["20", "22", "24", "26", "28", "30"]}},
       "id": "skill.pickman.lifelike-rendition",
       "ownerAwakenerId": 40,
       "kind": "command",
@@ -154,16 +98,8 @@
     "Exalt": {
       "descriptionTemplate": "[{Devour}: The next Command Card played this turn has its Arithmetica Cost -2.] Gain [Power:Arg1] {STR}. This turn, the Final DMG, Shield, and Healing from other Awakeners' Exalts +[Arg2]%. {Discover} 3 Skills of the deployed Awakeners with {Painted Orisons}, choose 1 to add to your hand and grant it {Exhaust} and {Retain}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "15"
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "15"}
       },
       "id": "skill.pickman.truth-in-delusion",
       "ownerAwakenerId": 40,
@@ -197,13 +133,7 @@
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.pickman.madness-omen",
       "ownerAwakenerId": 40,
       "displayName": "Madness Omen",
@@ -214,20 +144,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\n{Truth in Delusion} additionally increases the Final DMG dealt by other Awakeners' Exalt this turn by [Arg3]%, and after use, Pickman's Base Aliemus -5.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
       },
       "id": "talent.pickman.soulforge-aptitude",
       "ownerAwakenerId": 40,

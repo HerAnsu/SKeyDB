@@ -23,57 +23,29 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 1.75,
-    "ATK": 1.7,
-    "DEF": 1.25
-  },
-  "substatScaling": {
-    "CritRate": "0.8%",
-    "DamageAmplification": "1.6%"
-  },
-  "assets": {
-    "portraitKey": "helot-catena",
-    "iconKey": "helot-catena"
-  },
+  "statScaling": {"CON": 1.75, "ATK": 1.7, "DEF": 1.25},
+  "substatScaling": {"CritRate": "0.8%", "DamageAmplification": "1.6%"},
+  "assets": {"portraitKey": "helot-catena", "iconKey": "helot-catena"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Helot: Catena obtains [Energy:Arg1] Aliemus. {Rouse}: Place a {Crimson Shackles} into hand, and Helot: Catena's Command Cards gain {Retain}. At turn start, Helot: Catena's Base DMG increases by [Arg2]% for this battle.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15"]}
       },
       "id": "skill.helot-catena.reapers-declaration",
       "ownerAwakenerId": 19,
       "kind": "rouse",
       "displayName": "Reaper's Declaration",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Helot: Catena obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.helot-catena.strike",
       "ownerAwakenerId": 19,
@@ -86,16 +58,8 @@
     "C3": {
       "descriptionTemplate": "Obtain [Block:Arg1] Shield. Helot: Catena obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.helot-catena.defense",
       "ownerAwakenerId": 19,
@@ -108,18 +72,8 @@
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG and equal {Bleed} to all enemies, and gain [Power:Arg2] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["30", "36", "42", "48", "54", "60"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.helot-catena.hatred-unleashed",
       "ownerAwakenerId": 19,
@@ -131,39 +85,20 @@
     },
     "C5": {
       "descriptionTemplate": "Lose 10% of current HP, randomly deal [Damage:Arg1] DMG 2 times and inflict {Bleed} equal to 50% DMG dealt. After playing 3 times, transform into {Bloodthirsty Flail}.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["12.5", "15", "17.5", "20", "22.5", "25"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["12.5", "15", "17.5", "20", "22.5", "25"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.helot-catena.crimson-shackles",
       "ownerAwakenerId": 19,
       "kind": "command",
       "displayName": "Crimson Shackles",
       "cost": "1",
-      "cardKeywords": [
-        {
-          "id": "mechanic.echo"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.echo"}],
       "variants": []
     },
     "Exalt": {
       "descriptionTemplate": "[{Devour}: Draw 1 Helot: Catena Command Card, reducing the Arithmetica Cost of Helot: Catena Command Cards in hand by 1.] This turn, when Helot: Catena deals Active DMG, add [Arg2]%{Bleed}. Deal [Damage:Arg1] DMG.",
       "descriptionArgs": {
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["75", "80", "85", "90", "95", "100"]
-        },
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["100", "120", "140", "160", "180", "200"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg2": {"kind": "scaling", "values": ["75", "80", "85", "90", "95", "100"]},
+        "Arg1": {"kind": "scaling", "values": ["100", "120", "140", "160", "180", "200"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.helot-catena.sanguine-fetters",
       "ownerAwakenerId": 19,
@@ -186,14 +121,7 @@
     "promotedExtras": [
       {
         "descriptionTemplate": "Treated as {Strike}. Deal [Damage:Arg1] DMG, this DMG enjoys a 5x {STR} bonus and triggers the target's 30% {Bleed}, restores 15% of lost HP. After playing, it becomes {Crimson Shackles}.",
-        "descriptionArgs": {
-          "Arg1": {
-            "kind": "scaling",
-            "values": ["120", "144", "168", "192", "216", "240"],
-            "suffix": "%",
-            "stat": "ATK"
-          }
-        },
+        "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["120", "144", "168", "192", "216", "240"], "suffix": "%", "stat": "ATK"}},
         "id": "derived.helot-catena.bloodthirsty-flail",
         "ownerAwakenerId": 19,
         "displayName": "Bloodthirsty Flail",
@@ -201,15 +129,7 @@
         "derivedFromId": "skill.helot-catena.crimson-shackles",
         "rootSkillId": "skill.helot-catena.crimson-shackles",
         "childDerivedSkillIds": [],
-        "cardKeywords": [
-          {
-            "id": "mechanic.prepare",
-            "value": 1
-          },
-          {
-            "id": "mechanic.retain"
-          }
-        ],
+        "cardKeywords": [{"id": "mechanic.prepare", "value": 1}, {"id": "mechanic.retain"}],
         "variants": []
       }
     ]
@@ -217,13 +137,7 @@
   "talents": {
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.helot-catena.madness-omen",
       "ownerAwakenerId": 19,
       "displayName": "Madness Omen",
@@ -234,20 +148,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\n{Sanguine Fetters} enjoys an additional [Arg3]% {STR} bonus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["100", "130", "160", "190", "220", "250", "280", "310", "340", "400"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["100", "130", "160", "190", "220", "250", "280", "310", "340", "400"]}
       },
       "id": "talent.helot-catena.soulforge-aptitude",
       "ownerAwakenerId": 19,
@@ -273,24 +176,14 @@
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG. Helot: Catena obtains [Energy:Arg2] Aliemus. Helot: Catena gains [Arg3]% Temporary Crit. Rate and Crit. DMG.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "15"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "15"}}
         },
         {
           "targetId": "skill.helot-catena.defense",
           "targetType": "skill",
           "operation": "mixed",
           "descriptionTemplate": "Obtain [Block:Arg1] Shield. Helot: Catena obtains [Energy:Arg2] Aliemus. Trigger [Arg3]% of {Bleed} for all enemies.",
-          "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "15"
-            }
-          }
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "15"}}
         }
       ]
     },
@@ -315,12 +208,7 @@
           "targetType": "derived-skill",
           "operation": "card_keywords",
           "descriptionArgs": {},
-          "addCardKeywords": [
-            {
-              "id": "mechanic.prepare",
-              "value": 2
-            }
-          ]
+          "addCardKeywords": [{"id": "mechanic.prepare", "value": 2}]
         }
       ]
     },
@@ -346,14 +234,7 @@
   "derivedSkills": [
     {
       "descriptionTemplate": "Treated as {Strike}. Deal [Damage:Arg1] DMG, this DMG enjoys a 5x {STR} bonus and triggers the target's 30% {Bleed}, restores 15% of lost HP. After playing, it becomes {Crimson Shackles}.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["120", "144", "168", "192", "216", "240"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["120", "144", "168", "192", "216", "240"], "suffix": "%", "stat": "ATK"}},
       "id": "derived.helot-catena.bloodthirsty-flail",
       "ownerAwakenerId": 19,
       "displayName": "Bloodthirsty Flail",
@@ -361,15 +242,7 @@
       "derivedFromId": "skill.helot-catena.crimson-shackles",
       "rootSkillId": "skill.helot-catena.crimson-shackles",
       "childDerivedSkillIds": [],
-      "cardKeywords": [
-        {
-          "id": "mechanic.prepare",
-          "value": 1
-        },
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.prepare", "value": 1}, {"id": "mechanic.retain"}],
       "variants": []
     },
     {
@@ -382,14 +255,7 @@
       "derivedFromId": "skill.helot-catena.fettered-malice",
       "rootSkillId": "skill.helot-catena.fettered-malice",
       "childDerivedSkillIds": [],
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        },
-        {
-          "id": "mechanic.exhaust"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
       "variants": []
     }
   ]

@@ -23,53 +23,26 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 1.55,
-    "ATK": 1.85,
-    "DEF": 1.4
-  },
-  "substatScaling": {
-    "CritRate": "0.8%",
-    "CritDamage": "2.4%"
-  },
-  "assets": {
-    "portraitKey": "kathigu-ra",
-    "iconKey": "kathigu-ra"
-  },
+  "statScaling": {"CON": 1.55, "ATK": 1.85, "DEF": 1.4},
+  "substatScaling": {"CritRate": "0.8%", "CritDamage": "2.4%"},
+  "assets": {"portraitKey": "kathigu-ra", "iconKey": "kathigu-ra"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Kathigu-Ra gains [Energy:Arg1] Aliemus. {Rouse}: At turn start, apply 1 stack of {Fiamma} to 1 Kathigu-Ra's Command Card in hand. After playing a Command Card with 3 stacks of {Fiamma}, return it to hand.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
       "id": "skill.kathigu-ra.karmic-embers",
       "ownerAwakenerId": 27,
       "kind": "rouse",
       "displayName": "Karmic Embers",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Kathigu-Ra gains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.kathigu-ra.strike",
       "ownerAwakenerId": 27,
@@ -82,16 +55,8 @@
     "C3": {
       "descriptionTemplate": "Gain [Block:Arg1] Shield. Kathigu-Ra gains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.kathigu-ra.defense",
       "ownerAwakenerId": 27,
@@ -104,18 +69,8 @@
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG twice, gain [Power:Arg2] {STR}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"], "suffix": "%", "stat": "ATK"}
       },
       "id": "skill.kathigu-ra.last-stand-salvo",
       "ownerAwakenerId": 27,
@@ -128,16 +83,8 @@
     "C5": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, which enjoys [Arg2]% {STR} bonus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["50", "60", "70", "80", "90", "100"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "300"
-        }
+        "Arg1": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "300"}
       },
       "id": "skill.kathigu-ra.solarflare",
       "ownerAwakenerId": 27,
@@ -150,16 +97,8 @@
     "Exalt": {
       "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies, which enjoys [Arg2]% {STR} bonus. Draw 2 Kathigu-Ra's Command Cards and apply 1 stack of {Fiamma} to 3 Kathigu-Ra's Command Cards in hand.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["100", "120", "140", "160", "180", "200"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "300"
-        }
+        "Arg1": {"kind": "scaling", "values": ["100", "120", "140", "160", "180", "200"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "300"}
       },
       "id": "skill.kathigu-ra.world-ending-inferno",
       "ownerAwakenerId": 27,
@@ -182,14 +121,7 @@
     "promotedExtras": [
       {
         "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. For each point of Arithmetica consumed, enjoy an additional 150% {STR} bonus. Consume all {Combust}, gain an additional 50% {STR} bonus per stack consumed. After playing, revert all {Hyperflare} back to {Solarflare}.",
-        "descriptionArgs": {
-          "Arg1": {
-            "kind": "scaling",
-            "values": ["200", "220", "240", "260", "280", "300"],
-            "suffix": "%",
-            "stat": "ATK"
-          }
-        },
+        "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["200", "220", "240", "260", "280", "300"], "suffix": "%", "stat": "ATK"}},
         "id": "derived.kathigu-ra.hyperflare",
         "ownerAwakenerId": 27,
         "displayName": "Hyperflare",
@@ -214,13 +146,7 @@
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.kathigu-ra.madness-omen",
       "ownerAwakenerId": 27,
       "displayName": "Madness Omen",
@@ -231,20 +157,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\n{Fiamma}'s buff effects +[Arg3]%. After each turn starts and before the discard cards phase, clear all {Burn} from cards in hand. Kathigu-Ra gains 1 stack of {Combust} for each stack of {Burn} cleared.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]}
       },
       "id": "talent.kathigu-ra.soulforge-aptitude",
       "ownerAwakenerId": 27,
@@ -270,16 +185,8 @@
           "targetType": "skill",
           "operation": "override_args",
           "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["15", "18", "21", "24", "27", "30"],
-              "suffix": "%",
-              "stat": "ATK"
-            },
-            "Arg2": {
-              "kind": "scaling",
-              "values": ["7.5", "9", "10.5", "12", "13.5", "15"]
-            }
+            "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+            "Arg2": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"]}
           }
         },
         {
@@ -287,16 +194,8 @@
           "targetType": "skill",
           "operation": "override_args",
           "descriptionArgs": {
-            "Arg1": {
-              "kind": "scaling",
-              "values": ["15", "18", "21", "24", "27", "30"],
-              "suffix": "%",
-              "stat": "DEF"
-            },
-            "Arg2": {
-              "kind": "scaling",
-              "values": ["7.5", "9", "10.5", "12", "13.5", "15"]
-            }
+            "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "DEF"},
+            "Arg2": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"]}
           }
         }
       ]
@@ -323,18 +222,8 @@
           "operation": "replace_description",
           "descriptionTemplate": "Deal [Damage:Arg1] DMG twice, gain [Power:Arg4] {STR}, and gain an additional [Power:Arg3] {STR} when possessing 3 stacks of {Fiamma}.",
           "descriptionArgs": {
-            "Arg3": {
-              "kind": "fixed",
-              "value": "3",
-              "suffix": "%",
-              "stat": "ATK"
-            },
-            "Arg4": {
-              "kind": "scaling",
-              "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"],
-              "suffix": "%",
-              "stat": "ATK"
-            }
+            "Arg3": {"kind": "fixed", "value": "3", "suffix": "%", "stat": "ATK"},
+            "Arg4": {"kind": "scaling", "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"], "suffix": "%", "stat": "ATK"}
           }
         }
       ]
@@ -353,14 +242,7 @@
   "derivedSkills": [
     {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. For each point of Arithmetica consumed, enjoy an additional 150% {STR} bonus. Consume all {Combust}, gain an additional 50% {STR} bonus per stack consumed. After playing, revert all {Hyperflare} back to {Solarflare}.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["200", "220", "240", "260", "280", "300"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["200", "220", "240", "260", "280", "300"], "suffix": "%", "stat": "ATK"}},
       "id": "derived.kathigu-ra.hyperflare",
       "ownerAwakenerId": 27,
       "displayName": "Hyperflare",

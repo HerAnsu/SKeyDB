@@ -23,53 +23,26 @@
     "DeathResistance": "0%"
   },
   "primaryScalingBase": 30,
-  "statScaling": {
-    "CON": 1.55,
-    "ATK": 1.75,
-    "DEF": 1.5
-  },
-  "substatScaling": {
-    "CritRate": "1.6%",
-    "DamageAmplification": "0.8%"
-  },
-  "assets": {
-    "portraitKey": "pollux",
-    "iconKey": "pollux"
-  },
+  "statScaling": {"CON": 1.55, "ATK": 1.75, "DEF": 1.5},
+  "substatScaling": {"CritRate": "1.6%", "DamageAmplification": "0.8%"},
+  "assets": {"portraitKey": "pollux", "iconKey": "pollux"},
   "cards": {
     "C1": {
       "descriptionTemplate": "Pollux obtains [Energy:Arg1] Aliemus. {Rouse}: When Pollux's {Rouse} card is played and after the Discard Phase, gain 3 stacks of {Sin Mark}; for each card {Retained} in hand, gain 1 more stack of {Sin Mark}.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["25", "30", "35", "40", "45", "50"]
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
       "id": "skill.pollux.path-of-ablution",
       "ownerAwakenerId": 41,
       "kind": "rouse",
       "displayName": "Path of Ablution",
       "cost": "3",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C2": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. Pollux gains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.pollux.strike",
       "ownerAwakenerId": 41,
@@ -82,16 +55,8 @@
     "C3": {
       "descriptionTemplate": "Gain [Block:Arg1] Shield. Pollux gains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["10", "12", "14", "16", "18", "20"],
-          "suffix": "%",
-          "stat": "DEF"
-        },
-        "Arg2": {
-          "kind": "scaling",
-          "values": ["5", "6", "7", "8", "9", "10"]
-        }
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
       },
       "id": "skill.pollux.defense",
       "ownerAwakenerId": 41,
@@ -103,62 +68,32 @@
     },
     "C4": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies and draw 2 Command Cards with the lowest Arithmetica Cost.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["40", "48", "56", "64", "72", "80"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.pollux.soulsearing-light",
       "ownerAwakenerId": 41,
       "kind": "command",
       "displayName": "Soulsearing Light",
       "cost": "2",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "C5": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg2] times. This card is automatically put in your hand when entering {Ultra Round}.",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["70", "84", "98", "112", "126", "140"],
-          "suffix": "%",
-          "stat": "ATK"
-        },
-        "Arg2": {
-          "kind": "fixed",
-          "value": "2"
-        }
+        "Arg1": {"kind": "scaling", "values": ["70", "84", "98", "112", "126", "140"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "2"}
       },
       "id": "skill.pollux.cleansing-judgement",
       "ownerAwakenerId": 41,
       "kind": "command",
       "displayName": "Cleansing Judgement",
       "cost": "3",
-      "cardKeywords": [
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.retain"}],
       "variants": []
     },
     "Exalt": {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. Your next Pollux Command Card this turn gains {Atonement by Pain}. Put 1 {Sacred Heart} into hand.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "scaling",
-          "values": ["150", "180", "210", "240", "270", "300"],
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["150", "180", "210", "240", "270", "300"], "suffix": "%", "stat": "ATK"}},
       "id": "skill.pollux.sinless-verdict",
       "ownerAwakenerId": 41,
       "kind": "exalt",
@@ -180,14 +115,7 @@
     "promotedExtras": [
       {
         "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain 3 stacks of {Sin Mark}. After playing, shuffle this card to the top of the Draw Pile. On the 3rd play, {Exhaust} and allow the next command card to benefit from the {Atonement by Pain} effect.",
-        "descriptionArgs": {
-          "Arg1": {
-            "kind": "fixed",
-            "value": "70",
-            "suffix": "%",
-            "stat": "ATK"
-          }
-        },
+        "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "70", "suffix": "%", "stat": "ATK"}},
         "id": "derived.pollux.sacred-heart",
         "ownerAwakenerId": 41,
         "displayName": "Sacred Heart",
@@ -195,15 +123,7 @@
         "derivedFromId": "skill.pollux.sinless-verdict",
         "rootSkillId": "skill.pollux.sinless-verdict",
         "childDerivedSkillIds": [],
-        "cardKeywords": [
-          {
-            "id": "mechanic.prepare",
-            "value": 1
-          },
-          {
-            "id": "mechanic.retain"
-          }
-        ],
+        "cardKeywords": [{"id": "mechanic.prepare", "value": 1}, {"id": "mechanic.retain"}],
         "variants": []
       }
     ]
@@ -220,13 +140,7 @@
     },
     "T2": {
       "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "5",
-          "gainPerLevel": "5"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
       "id": "talent.pollux.madness-omen",
       "ownerAwakenerId": 41,
       "displayName": "Madness Omen",
@@ -237,20 +151,9 @@
     "T3": {
       "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nThe Base DMG of {Atonement by Pain} increase by [Arg3]% of Pollux's ATK.\nFor every 50 stacks of {Sin Mark}, add 1 {Sacred Heart} to your hand.\nWhen {Sin Mark} reaches 100 stacks, pull 1 Pollux's Skill Card after {Sacred Heart} is {Exhausted} at 3rd play.\nWhen dealing DMG, the effect of {Sin Mark} is doubled against enemies of the \"Church of the Lightbearers\".",
       "descriptionArgs": {
-        "Arg1": {
-          "kind": "linear",
-          "base": "3",
-          "gainPerLevel": "3"
-        },
-        "Arg2": {
-          "kind": "linear",
-          "base": "50",
-          "gainPerLevel": "50"
-        },
-        "Arg3": {
-          "kind": "scaling",
-          "values": ["50", "60", "70", "80", "90", "100", "110", "120", "130", "150"]
-        }
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100", "110", "120", "130", "150"]}
       },
       "id": "talent.pollux.soulforge-aptitude",
       "ownerAwakenerId": 41,
@@ -312,14 +215,7 @@
   "derivedSkills": [
     {
       "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain 3 stacks of {Sin Mark}. After playing, shuffle this card to the top of the Draw Pile. On the 3rd play, {Exhaust} and allow the next command card to benefit from the {Atonement by Pain} effect.",
-      "descriptionArgs": {
-        "Arg1": {
-          "kind": "fixed",
-          "value": "70",
-          "suffix": "%",
-          "stat": "ATK"
-        }
-      },
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "70", "suffix": "%", "stat": "ATK"}},
       "id": "derived.pollux.sacred-heart",
       "ownerAwakenerId": 41,
       "displayName": "Sacred Heart",
@@ -327,15 +223,7 @@
       "derivedFromId": "skill.pollux.sinless-verdict",
       "rootSkillId": "skill.pollux.sinless-verdict",
       "childDerivedSkillIds": [],
-      "cardKeywords": [
-        {
-          "id": "mechanic.prepare",
-          "value": 1
-        },
-        {
-          "id": "mechanic.retain"
-        }
-      ],
+      "cardKeywords": [{"id": "mechanic.prepare", "value": 1}, {"id": "mechanic.retain"}],
       "variants": []
     }
   ]
