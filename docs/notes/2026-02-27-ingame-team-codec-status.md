@@ -1,6 +1,6 @@
 # In-Game Team Codec Status
 
-Last updated: 2026-02-27
+Last updated: 2026-04-16
 
 ## Goal
 Support Morimens in-game team codes (`@@...@@`) alongside the existing SKeyDB `t1.` / `mt1.` import-export codec, without destabilizing the current builder flow.
@@ -40,6 +40,14 @@ Support Morimens in-game team codes (`@@...@@`) alongside the existing SKeyDB `t
 - Export output is wrapped as `@@<payload>@@`.
 - Unsupported covenant and posse data currently normalize to empty placeholders.
 - Export dialog warns that covenant and posse support is not complete yet.
+
+## Current priority framing
+
+- The remaining work is intentionally narrow:
+  - covenant token coverage
+  - posse token coverage
+  - removal of the current WIP fallback path once both are real
+- The builder and compact SKeyDB codecs are already treated as shipped foundation; the in-game codec note is now mainly a tracking reference for the unfinished covenant/posse portion.
 
 ## Locked Data/Ownership Decisions
 - In-game codec logic stays outside `src/domain/import-export.ts` except for wrapper integration.

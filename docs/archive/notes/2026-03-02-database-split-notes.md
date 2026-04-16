@@ -1,9 +1,10 @@
 # Database Split Notes
 
+Archived note: preserved as migration-era architecture context for the V1 to V2 database transition.
+
 ## Goal
 
 Capture the current findings for the upcoming database work so we do not have to re-argue the same data-loading boundaries later.
-This note is kept as migration-era architecture context for the V1 to V2 database transition.
 
 Date:
 

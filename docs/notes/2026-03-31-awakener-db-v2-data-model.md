@@ -5,7 +5,7 @@ Last updated: 2026-04-15
 ## Why this exists
 
 - Preserve the DB V2 source-of-truth boundary before more schema and migration work lands.
-- Keep future source/reference imports from turning back into another hand-maintained `awakeners-full.json`.
+- Keep future source/reference imports from turning back into another hand-maintained legacy full blob.
 
 ## Current state
 
@@ -144,7 +144,6 @@ This keeps imports disposable, canonical data durable, and frontend payloads rep
 
 ## Follow-up links
 
-- Archive plan: `docs/archive/plans/2026-03-31-awakener-db-v2-migration-plan.md`
 - Roadmap: `docs/roadmap.md`
 - Backlog: `docs/backlog.md`
-- Related note: `docs/notes/2026-03-02-database-split-notes.md`
+- Related note: `docs/archive/notes/2026-03-02-database-split-notes.md`

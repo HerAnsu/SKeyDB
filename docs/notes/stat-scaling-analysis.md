@@ -96,7 +96,7 @@ Current schema in the compiled awakener V2 dataset under `src/data/awakeners/com
 
 ## Validation Notes
 
-- All 55 awakeners currently in the compiled awakener V2 dataset align with the local Lv. 60 audit note in `docs/notes/Stat scaling.md`
+- All 55 awakeners currently in the compiled awakener V2 dataset align with the local Lv. 60 audit note in `docs/archive/notes/2026-03-06-stat-scaling-source-reference.md`
 - The only stale source values were:
   - Wanda ATK scaling and Lv. 60 ATK
   - Pollux ATK scaling and Lv. 60 ATK

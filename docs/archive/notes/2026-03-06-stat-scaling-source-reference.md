@@ -1,3 +1,5 @@
+Archived source reference: raw stat-scaling material kept for audit/history, not current implementation guidance.
+
 Data courtesy of Jynn
 https://docs.google.com/spreadsheets/d/1bIICnH-ZDbsOmIj9PPFFaW355z-NKrPIc3_3pRVSGg4/
 

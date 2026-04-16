@@ -28,18 +28,24 @@ App runs on `http://127.0.0.1:5173`.
 - `npm run build` - type-check + production build
 - `npm run preview` - preview built app
 - `npm run test` - run tests once
+- `npm run test:unit` - fast domain and utility regression pass
+- `npm run test:integration` - builder-heavy interaction regression pass
+- `npm run test:quick` - small collection/UI smoke suite
 - `npm run test:watch` - run tests in watch mode
 - `npm run lint` - run ESLint
+- `npm run data:refresh-awakener-v2` - regenerate the committed awakener V2 read models from tracked source data
 - `npm run verify` - refresh committed awakener artifacts, then format, lint, test, and build
 
 Tracked data artifacts are committed to the repo and consumed directly by the app. Contributor-facing commands in this README are intended to work from a fresh clone.
 
 ## Project Structure
-- `src/pages/BuilderPage.tsx` - main builder page
-- `src/pages/builder/` - builder UI components + DnD logic
-- `src/domain/` - domain logic (search, rules, formatting, assets)
-- `src/data/` - lightweight JSON datasets
-- `docs/` - internal roadmap, backlog, plans, notes, and archive
+- `src/pages/` - route-level surfaces for overview, database, timeline, builder, and collection
+- `src/pages/builder/` - builder UI components, drag/drop coordination, import/export, and team orchestration
+- `src/pages/database/` - database browse/detail UI, rich references, modal flows, and shared detail rendering
+- `src/domain/` - domain logic, codecs, search, normalization, database read models, and asset helpers
+- `src/data/` - tracked canonical datasets plus compiled frontend-ready artifacts
+- `scripts/` - public-safe data compilers, sync helpers, and repo tooling
+- `docs/` - roadmap, backlog, notes, archive, and templates (see `docs/README.md`)
 
 ## Contributors
 - `DZ-David`, Original database and team builder, which some of our data originates from.
@@ -78,20 +84,14 @@ Reference legal pages:
 - https://account.qookkagames.com/service.en-US.html
 - https://agreement.qookkagames.com/qookka/webshop-user-agreement/en/agreement.html
 
-## Current Scope
-Current implementation is an MVP focused on:
-- awakener picker/search
-- team card interactions and drag/drop
-- wheel picker/search + assignment flows
-- covenant picker/search + assignment flows
-- realm constraints and related UX states
-- posse selection UI
-- compact import/export codes (`t1.` single-team, `mt1.` multi-team)
-- import conflict handling (replace, move duplicates, skip duplicates)
-- local builder draft persistence (autosave/restore)
-- collection ownership page (owned/unowned + dupe levels)
-- collection save/load snapshot (`.json`)
+## Current App Surfaces
+- `Overview` - project status, recent changelog, contributor acknowledgements, and public resource links
+- `Database` - awakener filters, ranked search, deep-linked detail routes, exact level 1-90 stat scaling, cards/guide/build tabs, and interactive reference popovers
+- `Timeline` - current and upcoming event/banner tracking
+- `Builder` - multi-team planning with drag/drop, realm rules, quick-lineup helpers, compact `t1.` / `mt1.` codes, and in-game `@@...@@` codec support
+- `Collection` - owned/unowned tracking, dupe/enlighten progress, collection sorting, and snapshot export/import
 
-For roadmap/todo details, see:
+For current priorities and unscheduled ideas, see:
+- `docs/README.md`
 - `docs/roadmap.md`
 - `docs/backlog.md`

@@ -93,4 +93,4 @@ Last updated: 2026-04-15
 ## Follow-up links
 
 - Roadmap: `docs/roadmap.md`
-- Related note: `docs/notes/2026-03-02-database-split-notes.md`
+- Related note: `docs/notes/2026-03-31-awakener-db-v2-data-model.md`
