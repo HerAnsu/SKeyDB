@@ -1,0 +1,337 @@
+{
+  "id": 5,
+  "key": "aurita",
+  "displayName": "aurita",
+  "ingameId": "O05",
+  "faction": "The Fools",
+  "realm": "AEQUOR",
+  "rarity": "SSR",
+  "type": "ASSAULT",
+  "aliases": ["aurita"],
+  "searchTags": ["Discard", "Draw"],
+  "stats": {
+    "CON": "96",
+    "ATK": "104",
+    "DEF": "92",
+    "CritRate": "14.6%",
+    "CritDamage": "50%",
+    "AliemusRegen": "2.4",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {
+    "CON": 1.2,
+    "ATK": 1.3,
+    "DEF": 1.15
+  },
+  "substatScaling": {
+    "CritRate": "1.6%",
+    "AliemusRegen": "0.4"
+  },
+  "assets": {
+    "portraitKey": "aurita",
+    "iconKey": "aurita"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Aurita obtains [Energy:Arg1] Aliemus. {Rouse}: Obtain 1 Tentacle, and add 2 {Gland Division} into hand. When Aurita deals DMG, have [Arg2] Tentacles attack once.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "1"
+        }
+      },
+      "id": "skill.aurita.self-proliferation",
+      "ownerAwakenerId": 5,
+      "kind": "rouse",
+      "displayName": "Self-Proliferation",
+      "cost": "3",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Aurita obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.aurita.strike",
+      "ownerAwakenerId": 5,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Aurita obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.aurita.defense",
+      "ownerAwakenerId": 5,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Shuffle [Arg2] {Gland Division} into the Discard Pile. {Aftershock}: Gain [Energy:Arg3] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["12", "14.4", "16.8", "19.2", "21.6", "24"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "1"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.aurita.gland-division",
+      "ownerAwakenerId": 5,
+      "kind": "command",
+      "displayName": "Gland Division",
+      "cost": "0",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "{Tentacle DMG} +[TentaclePower:Arg1]. Discard all cards in hand, then draw the same amount of cards. Shuffle 1 {Gland Division} into the Discard Pile.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.aurita.power-of-friendship",
+      "ownerAwakenerId": 5,
+      "kind": "command",
+      "displayName": "Power of Friendship",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Expend up to 10 {Gland Division} from the Draw Pile and Discard Pile, each provides 1 more DMG instance. Place 2 {Gland Division} into hand. Increase Aurita's DMG output in this battle by [Arg2].",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["24", "28.8", "33.6", "38.4", "43.2", "48"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["12", "14.4", "16.8", "19.2", "21.6", "24"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.aurita.clamorous-ocean",
+      "ownerAwakenerId": 5,
+      "kind": "exalt",
+      "displayName": "Clamorous Ocean",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Grants an additional 24% ATK {STR} and {Tentacle DMG}. For the next 5 times {Gland Division} is played, draw 1 Card.",
+      "descriptionArgs": {},
+      "id": "skill.aurita.jellyfish-congregation",
+      "ownerAwakenerId": 5,
+      "kind": "over_exalt",
+      "displayName": "Jellyfish Congregation",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 1 Aliemus Regen Level in Aurita, at the start of battle, obtain 1% of Aurita's ATK as {Tentacle DMG}.",
+      "descriptionArgs": {},
+      "id": "talent.aurita.happy-little-fairy",
+      "ownerAwakenerId": 5,
+      "displayName": "Happy Little Fairy",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.aurita.madness-omen",
+      "ownerAwakenerId": 5,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nFor every {Gland Division} consumed by {Clamorous Ocean}, Aurita's DMG output for the rest of the battle increases by [Arg3]% ATK. When at least 20 {Gland Division} cards are consumed in a Boss Battle, {Gland Division} deals +1 instance of DMG when played or consumed.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "8"]
+        }
+      },
+      "id": "talent.aurita.soulforge-aptitude",
+      "ownerAwakenerId": 5,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Power of Friendship} allows you to draw 1 additional card.",
+      "descriptionArgs": {},
+      "id": "enlighten.aurita.bubbling-journey",
+      "ownerAwakenerId": 5,
+      "slot": "E1",
+      "displayName": "Bubbling Journey",
+      "upgradeTargetIds": ["skill.aurita.power-of-friendship"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.aurita.power-of-friendship",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "{Tentacle DMG} +[TentaclePower:Arg1]. Discard all cards in hand, then draw the same amount +1 cards. Shuffle 1 {Gland Division} into the Discard Pile.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Gland Division} and {Clamorous Ocean} increase Base DMG by 100%, dealing {Pierce DMG}.",
+      "descriptionArgs": {},
+      "id": "enlighten.aurita.slick-slide-adventure",
+      "ownerAwakenerId": 5,
+      "slot": "E2",
+      "displayName": "Slick-Slide Adventure",
+      "upgradeTargetIds": ["skill.aurita.clamorous-ocean", "skill.aurita.gland-division"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.aurita.clamorous-ocean",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG}. Consume up to 10 {Gland Division} cards from the Draw Pile and Discard Pile, each causing an additional instance of DMG. Place 2 {Gland Division} cards into hand. Increase the DMG caused by Aurita in this battle by [Arg2] points.",
+          "descriptionArgs": {
+            "Arg1": {
+              "kind": "scaling",
+              "values": ["48", "57.6", "67.2", "76.8", "86.4", "96"],
+              "suffix": "%",
+              "stat": "ATK"
+            }
+          }
+        },
+        {
+          "targetId": "skill.aurita.gland-division",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG}. Shuffle [Arg2] copies of {Gland Division} into the Discard Pile. {Aftershock}: Obtain [Energy:Arg3] Aliemus.",
+          "descriptionArgs": {
+            "Arg1": {
+              "kind": "scaling",
+              "values": ["24", "28.8", "33.6", "38.4", "43.2", "48"],
+              "suffix": "%",
+              "stat": "ATK"
+            }
+          }
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Defense} draws 1 card. Every 3 turns, add 1 {Gland Division} with {Exhaust} and {Fleeting}.",
+      "descriptionArgs": {},
+      "id": "enlighten.aurita.lets-all-have-fun-together",
+      "ownerAwakenerId": 5,
+      "slot": "E3",
+      "displayName": "Let's All Have Fun Together!",
+      "upgradeTargetIds": ["skill.aurita.defense"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.aurita.defense",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield, draw 1 Card. Aurita obtains [Energy:Arg2] Aliemus.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "AbsoluteAxiom": {
+      "descriptionTemplate": "{Rouse} {Self-Proliferation} is enhanced: Aurita's {Strike} deals {Pierce DMG} and triggers 2 additional instances of DMG.",
+      "descriptionArgs": {},
+      "id": "enlighten.aurita.sparkling-friendship",
+      "ownerAwakenerId": 5,
+      "slot": "AbsoluteAxiom",
+      "displayName": "Sparkling Friendship",
+      "upgradeTargetIds": ["skill.aurita.self-proliferation"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.aurita.self-proliferation",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Aurita obtains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 Tentacle, and add 2 {Gland Division} into hand. When Aurita deals DMG, have [Arg2] Tentacles attack once. Aurita's {Strike} deals {Pierce DMG} and attack +2 times.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

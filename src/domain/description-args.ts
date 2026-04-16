@@ -1,0 +1,458 @@
+import type {DescriptionArg, FullStats} from './awakener-source-schema'
+import {fmtNum} from './scaling'
+
+const COMPUTABLE_STAT_KEYS = new Set(['ATK', 'DEF', 'CON'])
+const ARG_TOKEN_PATTERN = /\[(?:(?<channel>[A-Za-z]+):)?(?<argKey>(?:StateArg|DescArg|Arg)\d+)\]/g
+
+export interface DescriptionArgResolveContext {
+  rank?: number
+  stats?: Partial<FullStats> | null
+}
+
+export interface DescriptionArgProgressionContext {
+  rank?: number
+  maxRank?: number
+  stats?: Partial<FullStats> | null
+}
+
+export interface ResolvedDescriptionArg {
+  input: DescriptionArg
+  rank: number
+  rawBaseValue: string
+  baseValue: number | null
+  substatSourceValue: number | null
+  substatBonusMode: 'additive' | 'scale_base' | null
+  substatBonusValue: number
+  totalValue: number | null
+  suffix: string
+  stat: string | null
+  formattedBaseValue: string
+  formattedTotalValue: string
+  absoluteValue: number | null
+}
+
+function formatSubstatLabel(substat: string): string {
+  return substat.replace(/([a-z])([A-Z])/g, '$1 $2')
+}
+
+function formatHoverDisplayText(text: string): string {
+  return text.replaceAll('{', '').replaceAll('}', '')
+}
+
+function ceilDisplayValue(value: number): number {
+  return Math.ceil(value - 1e-9)
+}
+
+function clampRank(rank: number): number {
+  if (!Number.isFinite(rank)) {
+    return 1
+  }
+  return Math.max(1, Math.floor(rank))
+}
+
+function inferDefaultMaxRank(arg: DescriptionArg): number {
+  switch (arg.kind) {
+    case 'fixed':
+      return 1
+    case 'linear':
+      return 1
+    case 'scaling':
+      return arg.values.length
+  }
+}
+
+function clampMaxRank(arg: DescriptionArg, maxRank: number | undefined): number {
+  const fallback = inferDefaultMaxRank(arg)
+  if (maxRank === undefined || !Number.isFinite(maxRank)) {
+    return fallback
+  }
+
+  return Math.max(1, Math.floor(maxRank))
+}
+
+function tryParseNumericValue(rawValue: string): number | null {
+  const trimmed = rawValue.trim()
+  if (!trimmed) {
+    return 0
+  }
+
+  const parsed = Number(trimmed)
+  if (Number.isNaN(parsed)) {
+    return null
+  }
+
+  return parsed
+}
+
+function parseStatValue(rawValue: string | undefined): number | null {
+  if (!rawValue) {
+    return null
+  }
+
+  const match = /^-?\d+(?:\.\d+)?/.exec(rawValue.trim())
+  if (!match) {
+    return null
+  }
+
+  return Number(match[0])
+}
+
+function resolveBaseValue(arg: DescriptionArg, rank: number): number {
+  switch (arg.kind) {
+    case 'fixed':
+      return tryParseNumericValue(arg.value ?? '') ?? 0
+
+    case 'linear':
+      return (
+        (tryParseNumericValue(arg.base) ?? 0) +
+        (tryParseNumericValue(arg.gainPerLevel) ?? 0) * (rank - 1)
+      )
+
+    case 'scaling': {
+      const index = Math.max(0, Math.min(rank - 1, arg.values.length - 1))
+      return tryParseNumericValue(arg.values[index] ?? '0') ?? 0
+    }
+  }
+}
+
+function resolveRawBaseValue(arg: DescriptionArg, rank: number): string {
+  switch (arg.kind) {
+    case 'fixed':
+      return arg.value ?? ''
+
+    case 'linear':
+      return String(resolveBaseValue(arg, rank))
+
+    case 'scaling': {
+      const index = Math.max(0, Math.min(rank - 1, arg.values.length - 1))
+      return arg.values[index] ?? '0'
+    }
+  }
+}
+
+function resolveSubstatBonusValue(
+  arg: DescriptionArg,
+  baseValue: number | null,
+  stats: Partial<FullStats> | null | undefined,
+): {sourceValue: number | null; mode: 'additive' | 'scale_base' | null; value: number} {
+  if (!arg.substatBonus || !stats) {
+    return {
+      sourceValue: null,
+      mode: null,
+      value: 0,
+    }
+  }
+
+  const statValue = parseStatValue(stats[arg.substatBonus.substat])
+  if (statValue === null) {
+    return {
+      sourceValue: null,
+      mode:
+        arg.substatBonus.mode ??
+        (arg.kind !== 'fixed' && inferSuffix(arg).includes('%') ? 'scale_base' : 'additive'),
+      value: 0,
+    }
+  }
+
+  const multiplier = tryParseNumericValue(arg.substatBonus.multiplier) ?? 0
+  const mode =
+    arg.substatBonus.mode ??
+    (arg.kind !== 'fixed' && inferSuffix(arg).includes('%') ? 'scale_base' : 'additive')
+  const value =
+    mode === 'scale_base' && baseValue !== null
+      ? baseValue * ((statValue * multiplier) / 100)
+      : statValue * multiplier
+
+  return {
+    sourceValue: statValue,
+    mode,
+    value,
+  }
+}
+
+function inferStat(arg: DescriptionArg, suffix: string): string | null {
+  if (arg.stat) {
+    return arg.stat
+  }
+
+  const suffixStatMatch = /\{(ATK|DEF|CON)\}/.exec(suffix)
+  return suffixStatMatch?.[1] ?? null
+}
+
+function inferSuffix(arg: DescriptionArg): string {
+  return arg.suffix ?? arg.substatBonus?.suffix ?? ''
+}
+
+function formatResolvedValue(value: number, suffix: string, stat: string | null): string {
+  const suffixHasInlineStat = /\{(ATK|DEF|CON)\}/.test(suffix)
+  const statSuffix = stat && !suffixHasInlineStat ? ` {${stat}}` : ''
+  return `${fmtNum(value)}${suffix}${statSuffix}`
+}
+
+function formatLiteralValue(rawValue: string, suffix: string, stat: string | null): string {
+  const suffixHasInlineStat = /\{(ATK|DEF|CON)\}/.test(suffix)
+  const statSuffix = stat && !suffixHasInlineStat ? ` {${stat}}` : ''
+  return `${rawValue}${suffix}${statSuffix}`
+}
+
+function shouldCeilDisplayedTotalValue(arg: DescriptionArg, baseValue: number | null): boolean {
+  return Boolean(arg.substatBonus) && (baseValue === null || Math.abs(baseValue) < 0.001)
+}
+
+function resolveAbsoluteValue(
+  totalValue: number,
+  suffix: string,
+  stat: string | null,
+  stats: Partial<FullStats> | null | undefined,
+): number | null {
+  if (!stats || !stat || !COMPUTABLE_STAT_KEYS.has(stat) || !suffix.includes('%')) {
+    return null
+  }
+
+  const statValue = parseStatValue(stats[stat as keyof FullStats])
+  if (statValue === null) {
+    return null
+  }
+
+  return ceilDisplayValue((totalValue / 100) * statValue)
+}
+
+export function resolveDescriptionArg(
+  arg: DescriptionArg,
+  context: DescriptionArgResolveContext = {},
+): ResolvedDescriptionArg {
+  const rank = clampRank(context.rank ?? 1)
+  const rawBaseValue = resolveRawBaseValue(arg, rank)
+  const parsedBaseValue = tryParseNumericValue(rawBaseValue)
+  const hasLiteralBaseValue = rawBaseValue.trim().length > 0
+  const baseValue = hasLiteralBaseValue ? parsedBaseValue : null
+  const resolvedSubstatBonus = resolveSubstatBonusValue(arg, baseValue, context.stats)
+  const substatBonusValue = resolvedSubstatBonus.value
+  const totalValue =
+    baseValue === null
+      ? arg.substatBonus
+        ? substatBonusValue
+        : null
+      : baseValue + substatBonusValue
+  const suffix = inferSuffix(arg)
+  const stat = inferStat(arg, suffix)
+  const formattedBaseValue = baseValue === null ? '' : formatResolvedValue(baseValue, suffix, stat)
+  const formattedTotalValue =
+    totalValue === null
+      ? formatLiteralValue(rawBaseValue, suffix, stat)
+      : formatResolvedValue(
+          shouldCeilDisplayedTotalValue(arg, baseValue) ? ceilDisplayValue(totalValue) : totalValue,
+          suffix,
+          stat,
+        )
+
+  return {
+    input: arg,
+    rank,
+    rawBaseValue,
+    baseValue,
+    substatSourceValue: resolvedSubstatBonus.sourceValue,
+    substatBonusMode: resolvedSubstatBonus.mode,
+    substatBonusValue,
+    totalValue,
+    suffix,
+    stat,
+    formattedBaseValue,
+    formattedTotalValue,
+    absoluteValue:
+      totalValue === null ? null : resolveAbsoluteValue(totalValue, suffix, stat, context.stats),
+  }
+}
+
+export function resolveDescriptionArgs(
+  descriptionArgs: Record<string, DescriptionArg>,
+  context: DescriptionArgResolveContext = {},
+): Record<string, ResolvedDescriptionArg> {
+  return Object.fromEntries(
+    Object.entries(descriptionArgs).map(([key, arg]) => [key, resolveDescriptionArg(arg, context)]),
+  )
+}
+
+export function getDescriptionArgKeysInTemplateOrder(
+  descriptionTemplate: string,
+  descriptionArgs: Record<string, DescriptionArg>,
+): string[] {
+  const orderedKeys: string[] = []
+  const seenKeys = new Set<string>()
+
+  for (const match of descriptionTemplate.matchAll(ARG_TOKEN_PATTERN)) {
+    const argKey = match.groups?.argKey
+    if (!argKey || seenKeys.has(argKey) || !Object.hasOwn(descriptionArgs, argKey)) {
+      continue
+    }
+
+    seenKeys.add(argKey)
+    orderedKeys.push(argKey)
+  }
+
+  for (const argKey of Object.keys(descriptionArgs)) {
+    if (seenKeys.has(argKey)) {
+      continue
+    }
+
+    orderedKeys.push(argKey)
+  }
+
+  return orderedKeys
+}
+
+export function getDescriptionArgProgression(
+  arg: DescriptionArg,
+  context: DescriptionArgProgressionContext = {},
+): ResolvedDescriptionArg[] {
+  const maxRank = clampMaxRank(arg, context.maxRank)
+  return Array.from({length: maxRank}, (_, index) =>
+    resolveDescriptionArg(arg, {
+      rank: index + 1,
+      stats: context.stats,
+    }),
+  )
+}
+
+export function formatDescriptionArgProgression(
+  arg: DescriptionArg,
+  context: DescriptionArgProgressionContext = {},
+): string {
+  const progression = getDescriptionArgProgression(arg, context)
+  const suffix = inferSuffix(arg)
+  const stat = inferStat(arg, suffix)
+  const suffixHasInlineStat = /\{(ATK|DEF|CON)\}/.test(suffix)
+  const statSuffix = stat && !suffixHasInlineStat ? ` {${stat}}` : ''
+  const numericProgression = progression.map((entry) => entry.totalValue)
+
+  if (numericProgression.some((value) => value === null)) {
+    const formattedValues = progression.map((entry) => entry.formattedTotalValue)
+    if (formattedValues.every((value) => value === formattedValues[0])) {
+      return formattedValues[0] ?? ''
+    }
+    return formattedValues.join('/')
+  }
+
+  if (numericProgression.length <= 1) {
+    return `${fmtNum(numericProgression[0] ?? 0)}${suffix}${statSuffix}`
+  }
+
+  const step = (numericProgression[1] ?? 0) - (numericProgression[0] ?? 0)
+  const isEvenlySpaced =
+    step !== 0 &&
+    numericProgression.every((value, index) => {
+      if (index === 0) {
+        return true
+      }
+
+      return Math.abs((value ?? 0) - (numericProgression[index - 1] ?? 0) - step) < 0.001
+    })
+
+  if (isEvenlySpaced) {
+    const sign = step > 0 ? '+' : ''
+    return `${fmtNum(numericProgression[0] ?? 0)}${suffix} (${sign}${fmtNum(step)}${suffix}/Lv)${statSuffix}`
+  }
+
+  return `${numericProgression.map((value) => fmtNum(value ?? 0)).join('/')}${suffix}${statSuffix}`
+}
+
+function buildDescriptionArgFormula(arg: DescriptionArg, resolved: ResolvedDescriptionArg): string {
+  if (!arg.substatBonus) {
+    return formatHoverDisplayText(resolved.formattedTotalValue)
+  }
+
+  if (
+    resolved.substatBonusMode === 'scale_base' &&
+    resolved.baseValue !== null &&
+    resolved.substatSourceValue !== null
+  ) {
+    const multiplier = tryParseNumericValue(arg.substatBonus.multiplier) ?? 0
+    const scalePercent = resolved.substatSourceValue * multiplier
+    return formatHoverDisplayText(
+      `${resolved.formattedBaseValue} × ${fmtNum(100 + scalePercent)}% from ${formatSubstatLabel(arg.substatBonus.substat)}`,
+    )
+  }
+
+  const substatTerm = formatHoverDisplayText(
+    `${formatSubstatLabel(arg.substatBonus.substat)} × ${formatLiteralValue(arg.substatBonus.multiplier, resolved.suffix, resolved.stat)}`,
+  )
+
+  if (resolved.baseValue === null || resolved.baseValue === 0) {
+    return substatTerm
+  }
+
+  return `${formatHoverDisplayText(resolved.formattedBaseValue)} + ${substatTerm}`
+}
+
+export function hasDescriptionArgInteractiveHover(arg: DescriptionArg): boolean {
+  return arg.kind !== 'fixed' || Boolean(arg.substatBonus)
+}
+
+export function buildDescriptionArgHover(
+  arg: DescriptionArg,
+  context: DescriptionArgProgressionContext = {},
+): string {
+  if (!hasDescriptionArgInteractiveHover(arg)) {
+    return ''
+  }
+
+  if (arg.kind === 'fixed') {
+    const resolved = resolveDescriptionArg(arg, {
+      rank: context.rank,
+      stats: context.stats,
+    })
+    return buildDescriptionArgFormula(arg, resolved)
+  }
+
+  const progression = getDescriptionArgProgression(arg, context)
+  return progression
+    .map((entry) => {
+      const base = `Lv${String(entry.rank)}: ${formatHoverDisplayText(entry.formattedTotalValue)}`
+      const breakdown =
+        arg.substatBonus && entry.baseValue !== null && entry.substatBonusValue !== 0
+          ? entry.substatBonusMode === 'scale_base' && entry.substatSourceValue !== null
+            ? ` (${formatHoverDisplayText(entry.formattedBaseValue)} × ${fmtNum(100 + entry.substatSourceValue * (tryParseNumericValue(arg.substatBonus.multiplier) ?? 0))}% from ${formatSubstatLabel(arg.substatBonus.substat)})`
+            : ` (${formatHoverDisplayText(entry.formattedBaseValue)} + ${formatHoverDisplayText(formatResolvedValue(entry.substatBonusValue, entry.suffix, entry.stat))} from ${formatSubstatLabel(arg.substatBonus.substat)})`
+          : ''
+      const computed = entry.absoluteValue === null ? '' : ` = ${String(entry.absoluteValue)}`
+      return `${base}${computed}${breakdown}`
+    })
+    .join('\n')
+}
+
+export function resolveDescriptionTemplate(
+  descriptionTemplate: string,
+  descriptionArgs: Record<string, DescriptionArg>,
+  context: DescriptionArgResolveContext = {},
+): string {
+  let result = ''
+  let cursor = 0
+
+  for (const match of descriptionTemplate.matchAll(ARG_TOKEN_PATTERN)) {
+    const fullMatch = match[0]
+    const index = match.index
+    const argKey = match.groups?.argKey
+    if (!argKey) {
+      continue
+    }
+
+    result += descriptionTemplate.slice(cursor, index)
+
+    const arg = Object.hasOwn(descriptionArgs, argKey) ? descriptionArgs[argKey] : undefined
+    if (!arg) {
+      result += fullMatch
+      cursor = index + fullMatch.length
+      continue
+    }
+
+    const replacement = resolveDescriptionArg(arg, context).formattedTotalValue
+    const nextCharacter = descriptionTemplate[index + fullMatch.length] ?? ''
+    const shouldSkipTrailingPercent = replacement.endsWith('%') && nextCharacter === '%'
+
+    result += replacement
+    cursor = index + fullMatch.length + (shouldSkipTrailingPercent ? 1 : 0)
+  }
+
+  result += descriptionTemplate.slice(cursor)
+  return result
+}

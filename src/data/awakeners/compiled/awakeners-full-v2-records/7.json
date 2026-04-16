@@ -1,0 +1,310 @@
+{
+  "id": 7,
+  "key": "casiah",
+  "displayName": "casiah",
+  "ingameId": "D09",
+  "faction": "The Unknowable",
+  "realm": "ULTRA",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "aliases": ["casiah"],
+  "searchTags": ["Arithmetica", "Discard", "Draw"],
+  "stats": {
+    "CON": "108",
+    "ATK": "112",
+    "DEF": "96",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "2.4",
+    "KeyflareRegen": "15",
+    "RealmMastery": "24",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {
+    "CON": 1.35,
+    "ATK": 1.4,
+    "DEF": 1.2
+  },
+  "substatScaling": {
+    "AliemusRegen": "0.4",
+    "RealmMastery": "4"
+  },
+  "assets": {
+    "portraitKey": "casiah",
+    "iconKey": "casiah"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Casiah obtains [Energy:Arg1] Aliemus, {Rouse}: Casiah gains [Power:Arg2] Temporary {STR} for each card played.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.casiah.opening-act",
+      "ownerAwakenerId": 7,
+      "kind": "rouse",
+      "displayName": "Opening Act",
+      "cost": "2",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Casiah obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.casiah.strike",
+      "ownerAwakenerId": 7,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Casiah obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.casiah.defense",
+      "ownerAwakenerId": 7,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Treated as {Strike}. Choose any 1 card from {Ultra Space} and add it to your hand, reducing its Arithmetica Cost by 2. Randomly deal [Damage:Arg1] DMG [Arg2] times, and gain [Power:Arg3] Temporary {STR}.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "3"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.casiah.telekinesis",
+      "ownerAwakenerId": 7,
+      "kind": "command",
+      "displayName": "Telekinesis",
+      "cost": "0",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Obtain [Energy:Arg1] Aliemus. Discard Symptom and State Cards from your hand, shuffle the other cards in your hand into the Draw Pile, then draw the same number of cards. {Leap}: Refund the Arithmetica Cost of {Poof!}.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "11", "12", "13", "14", "15"]
+        }
+      },
+      "id": "skill.casiah.poof",
+      "ownerAwakenerId": 7,
+      "kind": "command",
+      "displayName": "Poof!",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. Draw [Arg2] cards. For each Casiah Command Card drawn, deal [Damage:Arg1] DMG to a random enemy. Increase all of Casiah's Base DMG by [Arg3]%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["45", "54", "63", "72", "81", "90"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "3"
+        },
+        "Arg3": {
+          "kind": "fixed",
+          "substatBonus": {
+            "substat": "RealmMastery",
+            "multiplier": "0.2"
+          }
+        }
+      },
+      "id": "skill.casiah.magic-carnival",
+      "ownerAwakenerId": 7,
+      "kind": "exalt",
+      "displayName": "Magic Carnival",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "This Exalt's DMG instance ×2. The following 5 Casiah Command Cards grant {STR} equal to 8% Casiah's ATK.",
+      "descriptionArgs": {},
+      "id": "skill.casiah.unfettered-mirth",
+      "ownerAwakenerId": 7,
+      "kind": "over_exalt",
+      "displayName": "Unfettered Mirth",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 1 Realm Mastery provided by Casiah and her equipped Wheel of Destiny & Covenant, {Magic Carnival} increases all of Casiah's Base DMG by 0.2%.",
+      "descriptionArgs": {},
+      "id": "talent.casiah.master-of-magic",
+      "ownerAwakenerId": 7,
+      "displayName": "Master of Magic",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.casiah.madness-omen",
+      "ownerAwakenerId": 7,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThe Awakener's CON, ATK, and DEF increase by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAt the start of battle, if there are any \"Beast\" enemies, Casiah's {STR} Generation +[Arg3]% during this battle. After {Poof!} is released for the first time each turn, it triggers the {Aftershock} effect of the card shuffled into the Draw Pile",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["15", "17", "19", "21", "23", "25", "27", "29", "31", "35"]
+        }
+      },
+      "id": "talent.casiah.soulforge-aptitude",
+      "ownerAwakenerId": 7,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "For every card {Poof!} shuffled in, the Sorcerer gains 3 Aliemus.",
+      "descriptionArgs": {},
+      "id": "enlighten.casiah.minds-whisper",
+      "ownerAwakenerId": 7,
+      "slot": "E1",
+      "displayName": "Mind's Whisper",
+      "upgradeTargetIds": ["skill.casiah.poof"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.casiah.poof",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Obtain [Energy:Arg1] Aliemus. Discard Symptom and State Cards from your hand, shuffle the remaining cards in your hand into the Draw Pile, then draw a number of cards equal to the quantity discarded and shuffled, gaining [Energy:Arg2] Aliemus per card drawn. {Leap}: Refund the Arithmetica Cost of '{Poof!}'.",
+          "descriptionArgs": {
+            "Arg2": {
+              "kind": "fixed",
+              "value": "3"
+            }
+          }
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Magic Carnival} draws an additional card. Drawing a Symptom or State card also deals 1 instance of DMG to a random enemy.",
+      "descriptionArgs": {},
+      "id": "enlighten.casiah.veil-of-illusion",
+      "ownerAwakenerId": 7,
+      "slot": "E2",
+      "displayName": "Veil of Illusion",
+      "upgradeTargetIds": ["skill.casiah.magic-carnival"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.casiah.magic-carnival",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. Draw [Arg2] cards. For each Symptom Card, State Card, or Casiah's Command Card drawn, deal [Damage:Arg1] DMG to a random enemy. Increase Casiah's Base DMG by [Arg3]%.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Telekinesis} gains {Aftershock}: Shuffle 1 {Insight} into the Draw Pile.",
+      "descriptionArgs": {},
+      "id": "enlighten.casiah.legendary-copycat",
+      "ownerAwakenerId": 7,
+      "slot": "E3",
+      "displayName": "Legendary Copycat",
+      "upgradeTargetIds": ["skill.casiah.telekinesis"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.casiah.telekinesis",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Treated as {Strike}. Choose any 1 card from {Ultra Space} and add it to your hand, reducing its Arithmetica Cost by 2. Randomly deal [Damage:Arg1] DMG [Arg2] times, and gain [Power:Arg3] Temporary {STR}. {Aftershock}: Shuffle 1 {Insight} into the Draw Pile.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

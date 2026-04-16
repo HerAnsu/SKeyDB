@@ -1,10 +1,9 @@
 import type {
-  AwakenerFull,
-  AwakenerFullStats,
-  AwakenerPrimaryScalingBase,
-  AwakenerSubstatScaling,
-  AwakenerSubstatScalingKey,
-} from './awakeners-full'
+  FullStats,
+  PrimaryScalingBase,
+  SubstatScaling,
+  SubstatScalingKey,
+} from './awakener-source-schema'
 import {fmtNum} from './scaling'
 
 const DATABASE_MIN_LEVEL = 1
@@ -46,28 +45,38 @@ export function clampAwakenerDatabasePsycheSurgeOffset(offset: number): number {
 }
 
 export function resolveAwakenerStatsForLevel(
-  awakener: Pick<AwakenerFull, 'stats' | 'primaryScalingBase' | 'statScaling' | 'substatScaling'>,
+  awakener: Pick<
+    {
+      stats: FullStats
+      primaryScalingBase?: PrimaryScalingBase
+      statScaling: Record<'CON' | 'ATK' | 'DEF', number>
+      substatScaling: SubstatScaling
+    },
+    'stats' | 'primaryScalingBase' | 'statScaling' | 'substatScaling'
+  >,
   level: number,
   psycheSurgeOffset = 0,
-): AwakenerFullStats {
+  soulforgePrimaryStatBonusPercent = 0,
+): FullStats {
   const clampedLevel = clampAwakenerDatabaseLevel(level)
   const clampedPsycheSurgeOffset = clampAwakenerDatabasePsycheSurgeOffset(psycheSurgeOffset)
   const nextStats = {...awakener.stats}
 
   for (const key of PRIMARY_STAT_KEYS) {
-    nextStats[key] = resolvePrimaryStatValue(
+    const scaledPrimaryStat = resolvePrimaryStatValue(
       awakener.stats[key],
       awakener.primaryScalingBase,
       awakener.statScaling[key],
       clampedLevel,
     )
+    nextStats[key] = applyPrimaryStatBonus(scaledPrimaryStat, soulforgePrimaryStatBonusPercent)
   }
 
   for (const [key, growth] of Object.entries(awakener.substatScaling)) {
     if (!growth) {
       continue
     }
-    const statKey = key as AwakenerSubstatScalingKey
+    const statKey = key as SubstatScalingKey
     nextStats[statKey] = resolveSubstatValue(
       awakener.stats[statKey],
       growth,
@@ -79,8 +88,24 @@ export function resolveAwakenerStatsForLevel(
   return nextStats
 }
 
+function applyPrimaryStatBonus(baseValue: string, bonusPercent: number): string {
+  if (!bonusPercent) {
+    return baseValue
+  }
+
+  const parsedBase = parseStatValue(baseValue)
+  if (!parsedBase) {
+    return baseValue
+  }
+
+  return formatStatValue(
+    Math.ceil(parsedBase.value * (1 + bonusPercent / 100) - 1e-9),
+    parsedBase.suffix,
+  )
+}
+
 export function hasAwakenerSubstatScaling(
-  substatScaling: AwakenerSubstatScaling | null | undefined,
+  substatScaling: SubstatScaling | null | undefined,
 ): boolean {
   if (!substatScaling) {
     return false
@@ -90,7 +115,7 @@ export function hasAwakenerSubstatScaling(
 
 function resolvePrimaryStatValue(
   baseValue: string,
-  scalingBase: AwakenerPrimaryScalingBase | undefined,
+  scalingBase: PrimaryScalingBase | undefined,
   growthPerLevel: number,
   level: number,
 ): string {

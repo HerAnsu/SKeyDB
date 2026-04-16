@@ -1,0 +1,311 @@
+{
+  "id": 28,
+  "key": "leigh",
+  "displayName": "leigh",
+  "ingameId": "B08",
+  "faction": "Hybrid",
+  "realm": "CARO",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "aliases": ["leigh"],
+  "searchTags": ["Dispel", "Heal", "Self-Harm"],
+  "stats": {
+    "CON": "72",
+    "ATK": "72",
+    "DEF": "72",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "24",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "16.8%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {
+    "CON": 0.9,
+    "ATK": 0.9,
+    "DEF": 0.9
+  },
+  "substatScaling": {
+    "RealmMastery": "4",
+    "DeathResistance": "2.8%"
+  },
+  "assets": {
+    "portraitKey": "leigh",
+    "iconKey": "leigh"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Leigh obtains [Energy:Arg1] Aliemus. {Rouse}: After Leigh plays a card, {Embryo Fusion} +[Blood:Arg2]%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["15", "16", "17", "18", "19", "20"]
+        }
+      },
+      "id": "skill.leigh.sanguivore",
+      "ownerAwakenerId": 28,
+      "kind": "rouse",
+      "displayName": "Sanguivore",
+      "cost": "1",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Leigh obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.leigh.strike",
+      "ownerAwakenerId": 28,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Leigh obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.leigh.defense",
+      "ownerAwakenerId": 28,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Lose [Arg1]% Current HP. {Embryo Fusion}+[Blood:Arg3]%. Obtain [Power:Arg2] Temporary {STR}.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "fixed",
+          "value": "10"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["20", "22", "24", "26", "28", "30"]
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.leigh.pain-of-unfulfilled-desires",
+      "ownerAwakenerId": 28,
+      "kind": "command",
+      "displayName": "Pain of Unfulfilled Desires",
+      "cost": "0",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg2] times. At the start of next turn, gain 1 Shield for every 2 HP lost.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["30", "36", "42", "48", "54", "60"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "3"
+        }
+      },
+      "id": "skill.leigh.pain-and-pleasure",
+      "ownerAwakenerId": 28,
+      "kind": "command",
+      "displayName": "Pain and Pleasure",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "[{Devour}: Restore [Arg4]% of lost HP. Dispel self {Vulnerable} state.] Restore [Heal:Arg1] HP. Obtain [Power:Arg2] {STR}.",
+      "descriptionArgs": {
+        "Arg4": {
+          "kind": "fixed",
+          "value": "16"
+        },
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["40", "48", "56", "64", "72", "80"],
+          "suffix": "%",
+          "stat": "CON"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.leigh.flatterers-embrace",
+      "ownerAwakenerId": 28,
+      "kind": "exalt",
+      "displayName": "Flatterer's Embrace",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Obtain 100% more {STR}, and all Awakener gain a 10% increase in Crit. Rate and Crit. DMG.",
+      "descriptionArgs": {},
+      "id": "skill.leigh.pallid-bloodied-kiss",
+      "ownerAwakenerId": 28,
+      "kind": "over_exalt",
+      "displayName": "Pallid Bloodied Kiss",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.leigh.madness-omen",
+      "ownerAwakenerId": 28,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nLeigh's {STR} Generation effect +[Arg4]%. After playing Leigh's Command Card, gain {STR} equal to [Arg3]% of Leigh's ATK. This effect can increase by up to 200% based on current lost HP. Triggers up to 3 times per turn.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg4": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["1", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2"]
+        }
+      },
+      "id": "talent.leigh.soulforge-aptitude",
+      "ownerAwakenerId": 28,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Pain and Pleasure} deals {Pierce DMG}, Obtain {Retain}.",
+      "descriptionArgs": {},
+      "id": "enlighten.leigh.newborn-sanguivore",
+      "ownerAwakenerId": 28,
+      "slot": "E1",
+      "displayName": "Newborn Sanguivore",
+      "upgradeTargetIds": ["skill.leigh.pain-and-pleasure"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.leigh.pain-and-pleasure",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Randomly deal [Damage:Arg1] {Pierce DMG} [Arg2] times. Until the start of next turn, gain 1 Shield for every 2 HP lost at the start of next turn.",
+          "descriptionArgs": {},
+          "addCardKeywords": [
+            {
+              "id": "mechanic.retain"
+            }
+          ]
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Pain of Unfulfilled Desires} Obtain 10 Aliemus.",
+      "descriptionArgs": {},
+      "id": "enlighten.leigh.step-into-the-sunlight",
+      "ownerAwakenerId": 28,
+      "slot": "E2",
+      "displayName": "Step into the Sunlight",
+      "upgradeTargetIds": ["skill.leigh.pain-of-unfulfilled-desires"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.leigh.pain-of-unfulfilled-desires",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Lose [Arg1]% Current HP. {Embryo Fusion}+[Blood:Arg3]%. Obtain [Power:Arg2] Temporary {STR}. Obtain [Energy:Arg5] Aliemus.",
+          "descriptionArgs": {
+            "Arg5": {
+              "kind": "fixed",
+              "value": "10"
+            }
+          }
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "When {Flatterer's Embrace} triggers {Devour}, the obtained {STR} is doubled.",
+      "descriptionArgs": {},
+      "id": "enlighten.leigh.basement-journal",
+      "ownerAwakenerId": 28,
+      "slot": "E3",
+      "displayName": "Basement Journal",
+      "upgradeTargetIds": ["skill.leigh.flatterers-embrace"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.leigh.flatterers-embrace",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "[{Devour}: Restore [Arg4]% lost HP, dispel self {Vulnerable} status. The {STR} gained from this {Flatterer's Embrace} is doubled.] Restore [Heal:Arg1] HP. Obtain [Power:Arg2] {STR}.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

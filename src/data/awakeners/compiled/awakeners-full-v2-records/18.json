@@ -1,0 +1,465 @@
+{
+  "id": 18,
+  "key": "doll-inferno",
+  "displayName": "doll: inferno",
+  "ingameId": "C02EX",
+  "faction": "Among the Stars",
+  "realm": "CHAOS",
+  "rarity": "Genesis",
+  "type": "CHORUS",
+  "aliases": ["doll: inferno", "g-doll"],
+  "searchTags": ["Arithmetica", "Draw", "Heal", "Max HP DMG", "Self-Harm"],
+  "stats": {
+    "CON": "99",
+    "ATK": "81",
+    "DEF": "108",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "4.8",
+    "KeyflareRegen": "22.2",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {
+    "CON": 1.1,
+    "ATK": 0.9,
+    "DEF": 1.2
+  },
+  "substatScaling": {
+    "AliemusRegen": "0.8",
+    "KeyflareRegen": "1.2"
+  },
+  "assets": {
+    "portraitKey": "doll-inferno",
+    "iconKey": "doll-inferno"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "\"Doll: Inferno\" obtains [Energy:Arg1] Aliemus. {Rouse}: At turn end, recover [Heal:Arg2] HP and gain Aliemus equal to own Aliemus Regen. {Finale Form}: No longer recover HP, instead trigger [Arg3]% {Poison} on all enemies.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"],
+          "suffix": "%",
+          "stat": "CON"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["35", "38", "41", "44", "47", "50"]
+        }
+      },
+      "id": "skill.doll-inferno.soulblight",
+      "ownerAwakenerId": 18,
+      "kind": "rouse",
+      "displayName": "Soulblight",
+      "cost": "2",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. \"Doll: Inferno\" obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.doll-inferno.strike",
+      "ownerAwakenerId": 18,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. \"Doll: Inferno\" obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.doll-inferno.defense",
+      "ownerAwakenerId": 18,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Choose {Elation} or {Curse}.\n{Self-Destruct: Finale}",
+      "descriptionArgs": {},
+      "id": "skill.doll-inferno.self-destruct",
+      "ownerAwakenerId": 18,
+      "kind": "command",
+      "displayName": "Self-Destruct",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Obtain [Energy:Arg1] Aliemus. Recover [Heal:Arg2] HP, and recover an additional time for every 50 Aliemus currently possessed.\n{Fate's Descent: Finale}",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["35", "38", "41", "44", "47", "50"]
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "CON"
+        }
+      },
+      "id": "skill.doll-inferno.fates-descent",
+      "ownerAwakenerId": 18,
+      "kind": "command",
+      "displayName": "Fate's Descent",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Other Awakeners obtain [Energy:Arg1] Aliemus, inflict [Poison:Arg2] stacks of {Poison} on all enemies, and temporarily increase the team's DMG Amplification by [Arg3]%. {Finale Form}: Draw 3 additional cards, obtain 3 Arithmetica, trigger 50% of {Poison} on all enemies, and increase \"Doll: Inferno\"'s Base Aliemus by 50, up to 3 times.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "11", "12", "13", "14", "15"]
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["50", "60", "70", "80", "90", "100"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["35", "38", "41", "44", "47", "50"]
+        }
+      },
+      "id": "skill.doll-inferno.terminal-of-truth-and-abyss",
+      "ownerAwakenerId": 18,
+      "kind": "exalt",
+      "displayName": "Terminal of Truth and Abyss",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "This Exalt provides 2x Aliemus, and all Awakeners' {Poison}, {Counter}, and Base DMG increase by 10%. In Boss Battles, obtain an additional stack of {Finale}. {Finale Form}: For every 10 Aliemus consumed, trigger an additional 3% {Poison} on all enemies.",
+      "descriptionArgs": {},
+      "id": "skill.doll-inferno.madness-infection",
+      "ownerAwakenerId": 18,
+      "kind": "over_exalt",
+      "displayName": "Madness Infection",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": [
+      {
+        "descriptionTemplate": "Deal 25% of each enemy's Max HP as {Fixed DMG}, with a minimum DMG equal to [Arg1]% of your Max HP. After use, \"Doll: Inferno\"'s specific skills switch to {Finale Form}. The effect of {Illusion's End} activates only once.",
+        "descriptionArgs": {
+          "Arg1": {
+            "kind": "fixed",
+            "value": "25"
+          }
+        },
+        "id": "derived.doll-inferno.illusions-end",
+        "ownerAwakenerId": 18,
+        "displayName": "Illusion's End",
+        "derivedFromId": "talent.doll-inferno.path-of-annihilation",
+        "childDerivedSkillIds": ["derived.doll-inferno.self-destruct-finale", "derived.doll-inferno.fates-descent-finale"],
+        "cardKeywords": [],
+        "variants": []
+      }
+    ]
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "In Boss Battles, at turn start and after \"Doll: Inferno\" releases Exalt, obtain 1 stack of {Finale}. {Finale} can have a maximum of 10 stacks, and when it reaches 10 stacks, place 1 {Illusion's End} into hand.",
+      "descriptionArgs": {},
+      "id": "talent.doll-inferno.path-of-annihilation",
+      "ownerAwakenerId": 18,
+      "displayName": "Path of Annihilation",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.doll-inferno.madness-omen",
+      "ownerAwakenerId": 18,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAfter Exploration begins, all Awakeners' {Poison}, {Counter}, and Base DMG +[Arg3]%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]
+        }
+      },
+      "id": "talent.doll-inferno.soulforge-aptitude",
+      "ownerAwakenerId": 18,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Self-Destruct} applies 1 turn of {Vulnerable} to all enemies when {Elation} is chosen, and applies 1 turn of {Weakness} to all enemies when {Curse} is chosen.",
+      "descriptionArgs": {},
+      "id": "enlighten.doll-inferno.borealis-visitor",
+      "ownerAwakenerId": 18,
+      "slot": "E1",
+      "displayName": "Borealis Visitor",
+      "upgradeTargetIds": ["skill.doll-inferno.self-destruct", "derived.doll-inferno.elation", "derived.doll-inferno.curse"],
+      "upgradePatches": [
+        {
+          "targetId": "derived.doll-inferno.elation",
+          "targetType": "derived-skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Gain 1 turn of {Elation} state: Team DMG Amplification increases by [Arg2]%. Inflict [Arg1] turns of {Vulnerable} on all enemies.",
+          "descriptionArgs": {
+            "Arg1": {
+              "kind": "fixed",
+              "value": "1"
+            }
+          }
+        },
+        {
+          "targetId": "derived.doll-inferno.curse",
+          "targetType": "derived-skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Inflict {Weakness} on all enemies for [Arg1] turns, and temporarily reduce their {STR⯆} by [Exhaustion:Arg2].",
+          "descriptionArgs": {
+            "Arg1": {
+              "kind": "fixed",
+              "value": "1"
+            }
+          }
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Terminal of Truth and Abyss} and {Fate's Descent} increase the Base {Poison} amount by 50%, with an additional 15% increase for each stack of {Finale}. The stacking cap for {Finale} stacks has been removed.",
+      "descriptionArgs": {},
+      "id": "enlighten.doll-inferno.resonant-mycelium",
+      "ownerAwakenerId": 18,
+      "slot": "E2",
+      "displayName": "Resonant Mycelium",
+      "upgradeTargetIds": ["skill.doll-inferno.terminal-of-truth-and-abyss", "derived.doll-inferno.fates-descent-finale"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.doll-inferno.terminal-of-truth-and-abyss",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg2": {
+              "kind": "scaling",
+              "values": ["75", "90", "105", "120", "135", "150"],
+              "suffix": "%",
+              "stat": "ATK"
+            }
+          }
+        },
+        {
+          "targetId": "derived.doll-inferno.fates-descent-finale",
+          "targetType": "derived-skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg2": {
+              "kind": "scaling",
+              "values": ["45", "54", "63", "72", "81", "90"],
+              "suffix": "%",
+              "stat": "ATK"
+            }
+          }
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Strike} and {Defense} additionally generate Aliemus equal to 5% of Doll: Inferno's Base Aliemus. The {Fixed DMG} of {Illusion's End} is increased from 25% to 30%, and additionally heals 30% lost HP.",
+      "descriptionArgs": {},
+      "id": "enlighten.doll-inferno.envoy-of-extinction",
+      "ownerAwakenerId": 18,
+      "slot": "E3",
+      "displayName": "Envoy of Extinction",
+      "upgradeTargetIds": ["skill.doll-inferno.defense", "skill.doll-inferno.strike", "derived.doll-inferno.illusions-end"],
+      "upgradePatches": [
+        {
+          "targetId": "derived.doll-inferno.illusions-end",
+          "targetType": "derived-skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal 30% of all enemies' Max HP as {Fixed DMG}. This DMG will not be less than [Arg1]% of your Max HP. Restores 30% of lost HP. After use, \"Doll: Inferno\"'s specific skills switch to {Finale Form}. The effect of {Illusion's End} activates only once.",
+          "descriptionArgs": {
+            "Arg1": {
+              "kind": "fixed",
+              "value": "500"
+            }
+          }
+        },
+        {
+          "targetId": "skill.doll-inferno.strike",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg2": {
+              "kind": "scaling",
+              "values": ["10", "11", "12", "13", "14", "15"]
+            }
+          }
+        },
+        {
+          "targetId": "skill.doll-inferno.defense",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg2": {
+              "kind": "scaling",
+              "values": ["10", "11", "12", "13", "14", "15"]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "All enemies Temp. {STR⯆} -[Exhaustion:Arg2].",
+      "descriptionArgs": {
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["20", "24", "28", "32", "36", "40"],
+          "suffix": "%",
+          "stat": "DEF"
+        }
+      },
+      "id": "derived.doll-inferno.curse",
+      "ownerAwakenerId": 18,
+      "displayName": "Curse",
+      "derivedFromId": "skill.doll-inferno.self-destruct",
+      "rootSkillId": "skill.doll-inferno.self-destruct",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Gain 1 turn of {Elation} state: Team DMG Amplification increased by [Arg2]%.",
+      "descriptionArgs": {
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["35", "38", "41", "44", "47", "50"]
+        }
+      },
+      "id": "derived.doll-inferno.elation",
+      "ownerAwakenerId": 18,
+      "displayName": "Elation",
+      "derivedFromId": "skill.doll-inferno.self-destruct",
+      "rootSkillId": "skill.doll-inferno.self-destruct",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Obtain [Energy:Arg1] Aliemus. Inflict [Poison:Arg2] stacks of {Poison} on all enemies. For every 50 Aliemus currently possessed, apply an additional stack of {Poison}.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["35", "38", "41", "44", "47", "50"]
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["30", "36", "42", "48", "54", "60"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "derived.doll-inferno.fates-descent-finale",
+      "ownerAwakenerId": 18,
+      "displayName": "Fate's Descent: Finale",
+      "cost": "3",
+      "derivedFromId": "derived.doll-inferno.illusions-end",
+      "rootSkillId": "skill.doll-inferno.fates-descent",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Deal 25% of each enemy's Max HP as {Fixed DMG}, with a minimum DMG equal to [Arg1]% of your Max HP. After use, \"Doll: Inferno\"'s specific skills switch to {Finale Form}. The effect of {Illusion's End} activates only once.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "fixed",
+          "value": "25"
+        }
+      },
+      "id": "derived.doll-inferno.illusions-end",
+      "ownerAwakenerId": 18,
+      "displayName": "Illusion's End",
+      "derivedFromId": "talent.doll-inferno.path-of-annihilation",
+      "childDerivedSkillIds": ["derived.doll-inferno.self-destruct-finale", "derived.doll-inferno.fates-descent-finale"],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Max HP reduced by 10%. Trigger the {Elation} and {Curse} effects.",
+      "descriptionArgs": {},
+      "id": "derived.doll-inferno.self-destruct-finale",
+      "ownerAwakenerId": 18,
+      "displayName": "Self-Destruct: Finale",
+      "cost": "2",
+      "derivedFromId": "derived.doll-inferno.illusions-end",
+      "rootSkillId": "skill.doll-inferno.self-destruct",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+import {useCallback} from 'react'
+
+import {useSearchParams} from 'react-router-dom'
+
+import {
+  DATABASE_BROWSE_DEFAULTS,
+  parseDatabaseBrowseState,
+  patchDatabaseBrowseState,
+  type DatabaseBrowseState,
+  type RarityFilterId,
+  type RealmFilterId,
+  type TypeFilterId,
+} from '@/domain/database-browse-state'
+import type {DatabaseSortKey} from '@/domain/database-sorting'
+
+type BrowseHistoryMode = 'push' | 'replace'
+
+export function useDatabaseBrowseState() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const browseState = parseDatabaseBrowseState(searchParams)
+  const {groupByRealm, query, rarityFilter, realmFilter, sortDirection, sortKey, typeFilter} =
+    browseState
+
+  const commitBrowseState = useCallback(
+    (patch: Partial<DatabaseBrowseState>, historyMode: BrowseHistoryMode) => {
+      const nextParams = patchDatabaseBrowseState(searchParams, patch)
+      if (nextParams.toString() === searchParams.toString()) {
+        return
+      }
+
+      setSearchParams(nextParams, {replace: historyMode === 'replace'})
+    },
+    [searchParams, setSearchParams],
+  )
+
+  const setQuery = useCallback(
+    (next: string) => {
+      commitBrowseState({query: next}, 'replace')
+    },
+    [commitBrowseState],
+  )
+
+  const appendSearchCharacter = useCallback(
+    (key: string) => {
+      commitBrowseState({query: query + key}, 'replace')
+    },
+    [commitBrowseState, query],
+  )
+
+  const removeSearchCharacter = useCallback(() => {
+    commitBrowseState({query: query.slice(0, -1)}, 'replace')
+  }, [commitBrowseState, query])
+
+  const clearQuery = useCallback(() => {
+    commitBrowseState({query: ''}, 'replace')
+  }, [commitBrowseState])
+
+  const setRealmFilter = useCallback(
+    (next: RealmFilterId) => {
+      commitBrowseState({realmFilter: next}, 'push')
+    },
+    [commitBrowseState],
+  )
+
+  const setRarityFilter = useCallback(
+    (next: RarityFilterId) => {
+      commitBrowseState({rarityFilter: next}, 'push')
+    },
+    [commitBrowseState],
+  )
+
+  const setTypeFilter = useCallback(
+    (next: TypeFilterId) => {
+      commitBrowseState({typeFilter: next}, 'push')
+    },
+    [commitBrowseState],
+  )
+
+  const setSortKey = useCallback(
+    (next: DatabaseSortKey) => {
+      commitBrowseState({sortKey: next}, 'push')
+    },
+    [commitBrowseState],
+  )
+
+  const toggleSortDirection = useCallback(() => {
+    commitBrowseState(
+      {
+        sortDirection: sortDirection === 'ASC' ? 'DESC' : DATABASE_BROWSE_DEFAULTS.sortDirection,
+      },
+      'push',
+    )
+  }, [commitBrowseState, sortDirection])
+
+  const setGroupByRealm = useCallback(
+    (next: boolean) => {
+      commitBrowseState({groupByRealm: next}, 'push')
+    },
+    [commitBrowseState],
+  )
+
+  return {
+    groupByRealm,
+    query,
+    rarityFilter,
+    realmFilter,
+    sortDirection,
+    sortKey,
+    typeFilter,
+    setQuery,
+    appendSearchCharacter,
+    removeSearchCharacter,
+    clearQuery,
+    setRealmFilter,
+    setRarityFilter,
+    setTypeFilter,
+    setSortKey,
+    toggleSortDirection,
+    setGroupByRealm,
+  }
+}

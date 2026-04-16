@@ -1,6 +1,6 @@
 # SKeyDB Backlog
 
-Last updated: 2026-03-06
+Last updated: 2026-04-15
 
 This file is for ideas worth remembering but not currently scheduled.
 
@@ -20,8 +20,10 @@ This file is for ideas worth remembering but not currently scheduled.
 ## Database
 
 - Finalize long-term DB scope beyond the current builder/collection data needs.
-- Design richer modal/tab content for characters, wheels, covenants, and posses.
+- Design richer detail surfaces for wheels, covenants, and posses if those domains need the same depth as awakeners.
+- **Soulforge card/exalt support:** A heuristic review showed the remaining cases are mostly mixed conditional behavior, effect injection, or enemy-specific modifiers rather than clean scalar upgrades. Keep full support deferred unless a small curated subset becomes worth the manual authoring and description work.
 - **Tag-based stacking search with autofill:** Allow users to type partial tag names (e.g. "vuln") and autocomplete to `[Vulnerable]`, stacking multiple tag filters (e.g. `[Vulnerable][Poison]`) to find awakeners matching all selected tags. Requires rebuilding the search/filter system to support structured filter tokens alongside free-text search.
+- **Tag icon pass:** The detail settings now persist a `Show tag icons` preference, but the actual icon pairing and rendering pass is still deferred until it is worth the manual lookup work.
 
 ## Promotion rule
 

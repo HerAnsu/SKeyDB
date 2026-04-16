@@ -1,46 +1,67 @@
 import {describe, expect, it} from 'vitest'
 
+import type {AwakenerSkillRecord} from '@/domain/awakener-source-schema'
+
 import {
   closeTrailFromIndex,
-  closeTrailTop,
   decideTrailDirection,
+  insertTrailEntryAfterIndex,
   isSameTrailRoot,
   isTrailMobileLayout,
   openTrailRoot,
-  pushTrailEntry,
   type TrailEntry,
 } from './popover-trail'
 
+const TEST_RECORD: AwakenerSkillRecord = {
+  id: 'skill.test.entry',
+  ownerAwakenerId: 999,
+  kind: 'command',
+  displayName: 'Test Entry',
+  descriptionTemplate: 'desc',
+  descriptionArgs: {},
+  cardKeywords: [],
+  variants: [],
+}
+
 function skillEntry(key: string): TrailEntry {
   return {
-    kind: 'skill',
     key,
+    referenceId: key,
     name: key,
     label: 'Skill',
     description: 'desc',
+    record: TEST_RECORD,
+    descriptionRank: 1,
+    descriptionMaxRank: 6,
+    influenceBadges: [],
+    selectedEnlightenSlot: null,
   }
 }
 
 describe('popover trail stack helpers', () => {
-  it('pushes new entries to the trail', () => {
-    const next = pushTrailEntry([skillEntry('s1')], skillEntry('s2'))
-    expect(next.map((e) => e.key)).toEqual(['s1', 's2'])
+  it('inserts a new nested entry directly after the source entry', () => {
+    const next = insertTrailEntryAfterIndex(
+      [skillEntry('s1'), skillEntry('s2'), skillEntry('s3')],
+      1,
+      skillEntry('retain'),
+    )
+    expect(next.map((e) => e.key)).toEqual(['s1', 's2', 'retain', 's3'])
   })
 
-  it('deduplicates by key and trims descendants when revisiting an existing entry', () => {
+  it('treats reinserting an existing nested entry as a no-op', () => {
     const stack = [skillEntry('s1'), skillEntry('s2'), skillEntry('s3')]
-    const next = pushTrailEntry(stack, skillEntry('s2'))
-    expect(next.map((e) => e.key)).toEqual(['s1', 's2'])
+    const next = insertTrailEntryAfterIndex(stack, 1, skillEntry('s3'))
+    expect(next.map((e) => e.key)).toEqual(['s1', 's2', 's3'])
   })
 
-  it('closes only the top entry', () => {
-    const next = closeTrailTop([skillEntry('s1'), skillEntry('s2')])
-    expect(next.map((e) => e.key)).toEqual(['s1'])
-  })
-
-  it('closes a selected entry and everything above it', () => {
+  it('closes only the selected entry and keeps the rest of the trail', () => {
     const next = closeTrailFromIndex([skillEntry('s1'), skillEntry('s2'), skillEntry('s3')], 1)
-    expect(next.map((e) => e.key)).toEqual(['s1'])
+    expect(next.map((e) => e.key)).toEqual(['s1', 's3'])
+  })
+
+  it('allows closing the root entry while keeping later entries open', () => {
+    const next = closeTrailFromIndex([skillEntry('s1'), skillEntry('s2'), skillEntry('s3')], 0)
+    expect(next.map((e) => e.key)).toEqual(['s2', 's3'])
   })
 
   it('detects when opening the same root source key', () => {

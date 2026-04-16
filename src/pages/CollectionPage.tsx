@@ -7,9 +7,9 @@ import {CollectionPageResults} from './collection/CollectionPageResults'
 import {CollectionPageSidebar} from './collection/CollectionPageSidebar'
 import {CollectionPageToolbar} from './collection/CollectionPageToolbar'
 import {useCollectionViewModel} from './collection/useCollectionViewModel'
-import {useGlobalCollectionSearchCapture} from './collection/useGlobalCollectionSearchCapture'
 import {createOwnedAwakenerBoxEntries} from './collection/useOwnedAwakenerBoxEntries'
 import {createOwnedWheelBoxEntries} from './collection/useOwnedWheelBoxEntries'
+import {useGlobalSearchCapture} from './useGlobalSearchCapture'
 
 function getCollectionLoadErrorMessage(
   error: 'invalid_json' | 'unsupported_version' | 'invalid_payload',
@@ -39,9 +39,10 @@ export function CollectionPage() {
     [model.getWheelOwnedLevel],
   )
 
-  useGlobalCollectionSearchCapture({
+  useGlobalSearchCapture({
     searchInputRef,
     onAppendCharacter: model.appendSearchCharacter,
+    onRemoveCharacter: model.removeSearchCharacter,
     onClearSearch: model.clearActiveQuery,
   })
 

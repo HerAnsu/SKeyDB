@@ -1,0 +1,319 @@
+{
+  "id": 3,
+  "key": "aigis",
+  "displayName": "aigis",
+  "ingameId": "B03",
+  "faction": "Hybrid",
+  "realm": "CARO",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "aliases": ["aigis"],
+  "searchTags": ["Draw", "Keyflare", "Stun"],
+  "stats": {
+    "CON": "100",
+    "ATK": "120",
+    "DEF": "108",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "29.4",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "4.8%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {
+    "CON": 1.25,
+    "ATK": 1.5,
+    "DEF": 1.35
+  },
+  "substatScaling": {
+    "KeyflareRegen": "2.4",
+    "DamageAmplification": "0.8%"
+  },
+  "assets": {
+    "portraitKey": "aigis",
+    "iconKey": "aigis"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Aigis obtains [Energy:Arg1] Aliemus. {Rouse}: After Aigis plays a card, apply [Arg2] turns of {Vulnerable} to all enemies.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "1"
+        }
+      },
+      "id": "skill.aigis.stagnant-curse",
+      "ownerAwakenerId": 3,
+      "kind": "rouse",
+      "displayName": "Stagnant Curse",
+      "cost": "2",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Aigis obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.aigis.strike",
+      "ownerAwakenerId": 3,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Aigis obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.aigis.defense",
+      "ownerAwakenerId": 3,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG and inflict [Arg2] turns of {Vulnerable}. {Embryo Fusion} +[Arg3]%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["12", "14.4", "16.8", "19.2", "21.6", "24"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "1"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["10", "11", "12", "13", "14", "15"]
+        }
+      },
+      "id": "skill.aigis.a-small-wish",
+      "ownerAwakenerId": 3,
+      "kind": "command",
+      "displayName": "A Small Wish",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG, which enjoys a 2x {STR} bonus. If the target is {Vulnerable}, refund the Arithmetica Cost of the card and draw 1 card.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["60", "72", "84", "96", "108", "120"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.aigis.decomposition",
+      "ownerAwakenerId": 3,
+      "kind": "command",
+      "displayName": "Decomposition",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "[{Devour}: This {Eye of Eternity} inflicts 1 turn of {Petrify} on all enemies. If the target has Petrification Resistance, Final DMG is increased by 200%.] Deal [Damage:Arg1] DMG to all enemies and apply [Arg2] turns of {Vulnerable}. Each Release increases the Base DMG of {Eye of Eternity} by 50%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["75", "90", "105", "120", "135", "150"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "2"
+        }
+      },
+      "id": "skill.aigis.eye-of-eternity",
+      "ownerAwakenerId": 3,
+      "kind": "exalt",
+      "displayName": "Eye of Eternity",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "All Awakeners' DMG is increased by 25% this turn.",
+      "descriptionArgs": {},
+      "id": "skill.aigis.gaze-out-of-the-aeons",
+      "ownerAwakenerId": 3,
+      "kind": "over_exalt",
+      "displayName": "Gaze Out of the Aeons",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.aigis.madness-omen",
+      "ownerAwakenerId": 3,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAigis obtains [Arg3]% of her Keyflare Regen as Keyflare after playing the first Command Card each Turn.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["50", "55", "60", "65", "70", "75", "80", "85", "90", "100"]
+        }
+      },
+      "id": "talent.aigis.soulforge-aptitude",
+      "ownerAwakenerId": 3,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "For each stack of {Vulnerable} state on the target of {Strike}, {Embryo Fusion} increases by 5%, up to 30%.",
+      "descriptionArgs": {},
+      "id": "enlighten.aigis.the-witness",
+      "ownerAwakenerId": 3,
+      "slot": "E1",
+      "displayName": "The Witness",
+      "upgradeTargetIds": ["skill.aigis.strike"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.aigis.strike",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG. For each stack of {Vulnerable}, {Embryo Fusion} increases by +[Arg3]%, up to [Arg4]%. Aigis obtains [Energy:Arg2] Aliemus.",
+          "descriptionArgs": {
+            "Arg3": {
+              "kind": "fixed",
+              "value": "5"
+            },
+            "Arg4": {
+              "kind": "fixed",
+              "value": "30"
+            }
+          }
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "For each {Vulnerable} stack on the target, the Final DMG of {Decomposition} increases by 5%, up to 500%.",
+      "descriptionArgs": {},
+      "id": "enlighten.aigis.sugary-aroma",
+      "ownerAwakenerId": 3,
+      "slot": "E2",
+      "displayName": "Sugary Aroma",
+      "upgradeTargetIds": ["skill.aigis.decomposition"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.aigis.decomposition",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG, enjoys a 2x {STR} bonus. If the target is {Vulnerable}, refund the Arithmetica used for this card and draw 1 card. For each stack of {Vulnerable} on the target, increase the Final DMG of {Decomposition} by [Arg2]%, up to 500%.",
+          "descriptionArgs": {
+            "Arg2": {
+              "kind": "fixed",
+              "value": "5"
+            }
+          }
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "Whenever you {Devour}, put {A Small Wish} from the Discard Pile into hand and set its Arithmetica Cost to 0.",
+      "descriptionArgs": {},
+      "id": "enlighten.aigis.nightborne-wings",
+      "ownerAwakenerId": 3,
+      "slot": "E3",
+      "displayName": "Nightborne Wings",
+      "upgradeTargetIds": ["skill.aigis.a-small-wish"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.aigis.a-small-wish",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG and inflict [Arg2] turns of {Vulnerable}. {Embryo Fusion} +[Arg3]%. When {Devour} is triggered, move {A Small Wish} from the Discard Pile to your hand and reduce its Arithmetica Cost to 0.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "AbsoluteAxiom": {
+      "descriptionTemplate": "{Rouse} {Stagnant Curse} is enhanced: Exalt {Eye of Eternity} causes the next {Defense} played by Aigis to trigger 3 times.",
+      "descriptionArgs": {},
+      "id": "enlighten.aigis.crystallized-tear",
+      "ownerAwakenerId": 3,
+      "slot": "AbsoluteAxiom",
+      "displayName": "Crystallized Tear",
+      "upgradeTargetIds": ["skill.aigis.stagnant-curse"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.aigis.stagnant-curse",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Aigis obtains [Energy:Arg1] Aliemus. {Rouse}: After Aigis plays a card, inflict [Arg2] turns of {Vulnerable} on all enemies. Exalt {Eye of Eternity} causes the next Aigis's {Defense} to take effect 3 times.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

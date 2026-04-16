@@ -2,68 +2,64 @@ import {useCallback, useMemo} from 'react'
 
 import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.png'
 import type {Awakener} from '@/domain/awakeners'
-import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
+import type {
+  ResolvedAwakenerDatabaseReferenceLayer,
+  ResolvedAwakenerDatabaseShellView,
+} from '@/domain/awakeners-database-view'
 import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
 import {getPortraitRelicByAwakenerIngameId} from '@/domain/relics'
 
+import {useDatabasePopoverControllerContext} from './database-popover-context'
+import {DatabaseScopedRichDescription} from './DatabaseScopedRichDescription'
 import {DetailSection, type DetailSectionItem} from './DetailSection'
 import {getStarSize, scaledFontStyle, type FontScale} from './font-scale'
-import {RichDescription} from './RichDescription'
 import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
 interface AwakenerDetailOverviewProps {
   awakener: Awakener
-  fullData: AwakenerFull | null
-  stats: AwakenerFullStats | null
-  cardNames: Set<string>
-  skillLevel: number
+  shellView: ResolvedAwakenerDatabaseShellView | null
+  referenceLayer: ResolvedAwakenerDatabaseReferenceLayer | null
   fontScale: FontScale
-  onNavigateToCards?: () => void
+  showVisibleScaling?: boolean
+  showTagIcons?: boolean
 }
 
 const ENLIGHTEN_ORDER = ['E1', 'E2', 'E3'] as const
 const TALENT_ORDER = ['T1', 'T2', 'T3', 'T4'] as const
 
-function hasEnlightenEntry(fullData: AwakenerFull, key: string): boolean {
-  return Object.hasOwn(fullData.enlightens, key)
-}
-
-function hasTalentEntry(fullData: AwakenerFull, key: string): boolean {
-  return Object.hasOwn(fullData.talents, key)
-}
-
 export function AwakenerDetailOverview({
   awakener,
-  fullData,
-  stats,
-  cardNames,
-  skillLevel,
+  shellView,
+  referenceLayer,
   fontScale,
-  onNavigateToCards,
+  showVisibleScaling = true,
+  showTagIcons = true,
 }: AwakenerDetailOverviewProps) {
+  const popoverController = useDatabasePopoverControllerContext()
   const renderDescription = useCallback(
-    (description: string) => (
-      <RichDescription
-        cardNames={cardNames}
-        fullData={fullData}
-        onNavigateToCards={onNavigateToCards}
-        skillLevel={skillLevel}
-        stats={stats}
-        text={description}
+    (item: DetailSectionItem) => (
+      <DatabaseScopedRichDescription
+        descriptionMaxRank={item.descriptionMaxRank}
+        descriptionRank={item.descriptionRank}
+        record={item.record}
+        referenceLayer={referenceLayer}
+        showTagIcons={showTagIcons}
+        showVisibleScaling={showVisibleScaling}
+        skillLevel={shellView?.skillLevel ?? 1}
+        stats={shellView?.stats ?? null}
+        text={item.description}
       />
     ),
-    [cardNames, fullData, onNavigateToCards, skillLevel, stats],
+    [referenceLayer, shellView?.skillLevel, shellView?.stats, showTagIcons, showVisibleScaling],
   )
 
   const enlightenItems = useMemo(() => {
-    if (!fullData) return []
+    if (!shellView) return []
     const items = []
     const starStyle = getStarSize(fontScale)
 
-    for (const key of ENLIGHTEN_ORDER) {
-      if (!hasEnlightenEntry(fullData, key)) continue
-
-      const entry = fullData.enlightens[key]
+    for (const [index, key] of ENLIGHTEN_ORDER.entries()) {
+      const entry = shellView.enlightens[index]
       const starCount = parseInt(key.replace('E', ''))
 
       items.push({
@@ -81,40 +77,58 @@ export function AwakenerDetailOverview({
             ))}
           </span>
         ),
-        name: entry.name,
-        description: entry.description,
+        name: entry.record.displayName,
+        description: entry.resolved.description,
+        record: entry.record,
+        descriptionRank: entry.descriptionRank,
+        descriptionMaxRank: entry.descriptionMaxRank,
       })
     }
 
-    const absoluteAxiom = hasEnlightenEntry(fullData, 'AbsoluteAxiom')
-      ? fullData.enlightens.AbsoluteAxiom
-      : hasEnlightenEntry(fullData, 'E4')
-        ? fullData.enlightens.E4
-        : null
+    const absoluteAxiom = shellView.enlightens.find((entry) => entry.key === 'AbsoluteAxiom')
 
     if (absoluteAxiom) {
       items.push({
         key: 'AbsoluteAxiom',
-        label: 'Е15',
-        name: absoluteAxiom.name,
-        description: absoluteAxiom.description,
+        label: popoverController ? (
+          <button
+            className='cursor-pointer text-slate-500 transition-colors hover:text-amber-100'
+            onClick={(event) => {
+              popoverController.openRootReferenceByName('Absolute Axiom', event)
+            }}
+            style={scaledFontStyle(12)}
+            type='button'
+          >
+            Final Rule
+          </button>
+        ) : (
+          'Final Rule'
+        ),
+        name: absoluteAxiom.record.displayName,
+        description: absoluteAxiom.resolved.description,
+        record: absoluteAxiom.record,
+        descriptionRank: absoluteAxiom.descriptionRank,
+        descriptionMaxRank: absoluteAxiom.descriptionMaxRank,
       })
     }
 
     return items
-  }, [fullData, fontScale])
+  }, [fontScale, popoverController, shellView])
 
-  if (!fullData) {
+  if (!shellView) {
     return <p className='py-4 text-xs text-slate-400'>Loading...</p>
   }
-  const talentItems: DetailSectionItem[] = []
-  for (const key of TALENT_ORDER) {
-    if (!hasTalentEntry(fullData, key)) {
-      continue
-    }
-    const entry = fullData.talents[key]
-    talentItems.push({key, label: key, name: entry.name, description: entry.description})
-  }
+  const talentItems: DetailSectionItem[] = shellView.talents
+    .filter((entry) => TALENT_ORDER.includes(entry.key as (typeof TALENT_ORDER)[number]))
+    .map((entry) => ({
+      key: entry.key,
+      label: entry.key,
+      name: entry.record.displayName,
+      description: entry.resolved.description,
+      record: entry.record,
+      descriptionRank: entry.descriptionRank,
+      descriptionMaxRank: entry.descriptionMaxRank,
+    }))
 
   const portraitRelic = getPortraitRelicByAwakenerIngameId(awakener.ingameId)
   const portraitRelicAsset = portraitRelic
@@ -144,7 +158,14 @@ export function AwakenerDetailOverview({
               </div>
               <div className='min-w-0 flex-1'>
                 <p className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
-                  {renderDescription(portraitRelic.description)}
+                  <DatabaseScopedRichDescription
+                    referenceLayer={referenceLayer}
+                    showTagIcons={showTagIcons}
+                    showVisibleScaling={showVisibleScaling}
+                    skillLevel={shellView.skillLevel}
+                    stats={shellView.stats}
+                    text={portraitRelic.description}
+                  />
                 </p>
               </div>
             </div>

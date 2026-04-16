@@ -1,0 +1,896 @@
+[
+  {
+    "id": 1,
+    "name": "24",
+    "ingameId": "C06",
+    "faction": "Hybrid",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["24", "twenty-four"],
+    "stats": {
+      "CON": 149,
+      "ATK": 189,
+      "DEF": 86
+    },
+    "tags": [
+      "Arithmetica",
+      "Bleed",
+      "Counter",
+      "Embryo Fusion",
+      "Fixed DMG",
+      "Hand Limit",
+      "Keyflare",
+      "Pierce DMG",
+      "Poison",
+      "STR Up",
+      "Tentacles",
+      "Vulnerability",
+      "Weakness"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "agrippa",
+    "ingameId": "B06",
+    "faction": "Outlanders",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["agrippa"],
+    "stats": {
+      "CON": 132,
+      "ATK": 112,
+      "DEF": 136
+    },
+    "tags": ["Draw", "Embryo Fusion", "Poison", "STR Up"]
+  },
+  {
+    "id": 3,
+    "name": "aigis",
+    "ingameId": "B03",
+    "faction": "Hybrid",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["aigis"],
+    "stats": {
+      "CON": 100,
+      "ATK": 120,
+      "DEF": 108
+    },
+    "tags": ["Draw", "Embryo Fusion", "Keyflare", "STR Up", "Stun", "Vulnerability"]
+  },
+  {
+    "id": 4,
+    "name": "alva",
+    "ingameId": "C11",
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["alva"],
+    "stats": {
+      "CON": 120,
+      "ATK": 128,
+      "DEF": 140
+    },
+    "tags": ["Death Resistance", "Discard", "Dispel", "Draw", "Sealed", "Strike", "Vulnerability"]
+  },
+  {
+    "id": 5,
+    "name": "aurita",
+    "ingameId": "O05",
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["aurita"],
+    "stats": {
+      "CON": 96,
+      "ATK": 104,
+      "DEF": 92
+    },
+    "tags": ["Aftershock", "Discard", "Draw", "Pierce DMG", "STR Up"]
+  },
+  {
+    "id": 6,
+    "name": "caecus",
+    "ingameId": "O04",
+    "faction": "Hybrid",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["caecus"],
+    "stats": {
+      "CON": 156,
+      "ATK": 124,
+      "DEF": 136
+    },
+    "tags": ["Counter", "Dispel", "Heal", "STR Up", "Tentacles", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 7,
+    "name": "casiah",
+    "ingameId": "D09",
+    "faction": "The Unknowable",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["casiah"],
+    "stats": {
+      "CON": 108,
+      "ATK": 112,
+      "DEF": 96
+    },
+    "tags": ["Aftershock", "Arithmetica", "Discard", "Draw", "STR Up"]
+  },
+  {
+    "id": 8,
+    "name": "castor",
+    "ingameId": "D11",
+    "faction": "The Fools",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["castor"],
+    "stats": {
+      "CON": 149,
+      "ATK": 135,
+      "DEF": 158
+    },
+    "tags": ["Draw", "Quasar", "Weakness"]
+  },
+  {
+    "id": 9,
+    "name": "celeste",
+    "ingameId": "O09",
+    "faction": "Outlanders",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["celeste"],
+    "stats": {
+      "CON": 80,
+      "ATK": 76,
+      "DEF": 80
+    },
+    "tags": ["Arithmetica", "Blighten", "Dispel", "Heal", "Stagnation", "Tentacles", "Weakness"]
+  },
+  {
+    "id": 10,
+    "name": "clementine",
+    "ingameId": "D13",
+    "faction": "The Unknowable",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["clementine"],
+    "stats": {
+      "CON": 126,
+      "ATK": 149,
+      "DEF": 122
+    },
+    "tags": ["Bleed", "Dispel", "Keyflare", "Quasar", "STR Down", "STR Up"]
+  },
+  {
+    "id": 11,
+    "name": "corposant",
+    "ingameId": "O10",
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["corposant"],
+    "stats": {
+      "CON": 144,
+      "ATK": 126,
+      "DEF": 149
+    },
+    "tags": ["Aftershock", "Death Resistance", "Discard", "Draw", "STR Up", "Tentacles", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 12,
+    "name": "daffodil",
+    "ingameId": "D02",
+    "faction": "The Unknowable",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["daffodil"],
+    "stats": {
+      "CON": 140,
+      "ATK": 176,
+      "DEF": 131
+    },
+    "tags": ["Arithmetica", "Counter", "Draw", "Keyflare", "Poison", "STR Up", "Vulnerability"]
+  },
+  {
+    "id": 13,
+    "name": "doll",
+    "ingameId": "C02",
+    "faction": "Among the Stars",
+    "realm": "CHAOS",
+    "rarity": "SR",
+    "type": "CHORUS",
+    "aliases": ["doll"],
+    "stats": {
+      "CON": 88,
+      "ATK": 72,
+      "DEF": 96
+    },
+    "tags": ["Discard", "Dispel", "Heal", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 18,
+    "name": "doll: inferno",
+    "ingameId": "C02EX",
+    "faction": "Among the Stars",
+    "realm": "CHAOS",
+    "rarity": "Genesis",
+    "type": "CHORUS",
+    "aliases": ["doll: inferno", "g-doll"],
+    "stats": {
+      "CON": 99,
+      "ATK": 81,
+      "DEF": 108
+    },
+    "tags": ["Arithmetica", "Counter", "Draw", "Fixed DMG", "Heal", "Max HP DMG", "Poison", "Self-Harm", "STR Down", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 14,
+    "name": "doresain",
+    "ingameId": "B10",
+    "faction": "Out of the Aeons",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["doresain"],
+    "stats": {
+      "CON": 149,
+      "ATK": 158,
+      "DEF": 131
+    },
+    "tags": ["Pierce DMG", "Self-Harm", "STR Up", "Vulnerability"]
+  },
+  {
+    "id": 15,
+    "name": "erica",
+    "ingameId": "D08",
+    "faction": "Hybrid",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["erica"],
+    "stats": {
+      "CON": 148,
+      "ATK": 144,
+      "DEF": 144
+    },
+    "tags": ["Dispel", "Fragile", "Keyflare", "STR Up", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 16,
+    "name": "faint",
+    "ingameId": "B09",
+    "faction": "Among the Stars",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["faint"],
+    "stats": {
+      "CON": 104,
+      "ATK": 80,
+      "DEF": 124
+    },
+    "tags": ["Counter", "Death Resistance", "Dispel", "Fixed DMG", "Fragile", "Heal", "STR Down", "STR Up", "Weakness"]
+  },
+  {
+    "id": 17,
+    "name": "faros",
+    "ingameId": "O03",
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["faros"],
+    "stats": {
+      "CON": 96,
+      "ATK": 104,
+      "DEF": 120
+    },
+    "tags": ["Arithmetica", "Dispel", "Draw", "Hand Limit", "Poison", "Tentacles", "Vulnerability"]
+  },
+  {
+    "id": 21,
+    "name": "goliath",
+    "ingameId": "O06",
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["goliath"],
+    "stats": {
+      "CON": 164,
+      "ATK": 160,
+      "DEF": 132
+    },
+    "tags": ["STR Down", "STR Up"]
+  },
+  {
+    "id": 22,
+    "name": "hameln",
+    "ingameId": "D12",
+    "faction": "The Unknowable",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["hameln"],
+    "stats": {
+      "CON": 135,
+      "ATK": 140,
+      "DEF": 131
+    },
+    "tags": ["Arithmetica", "Bleed", "Pierce DMG", "Poison", "STR Down", "STR Up", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 23,
+    "name": "helot",
+    "ingameId": "B05",
+    "faction": "The Fools",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["helot"],
+    "stats": {
+      "CON": 140,
+      "ATK": 136,
+      "DEF": 100
+    },
+    "tags": ["Bleed", "Discard", "Draw", "Hand Limit", "Self-Harm", "STR Up", "Strike", "Weakness"]
+  },
+  {
+    "id": 19,
+    "name": "helot: catena",
+    "ingameId": "B05EX",
+    "faction": "The Fools",
+    "realm": "CARO",
+    "rarity": "Genesis",
+    "type": "ASSAULT",
+    "aliases": ["helot: catena", "g-helot"],
+    "stats": {
+      "CON": 158,
+      "ATK": 153,
+      "DEF": 113
+    },
+    "tags": ["Bleed", "Draw", "Hand Limit", "Heal", "Self-Harm", "STR Up", "Strike"]
+  },
+  {
+    "id": 24,
+    "name": "horla",
+    "ingameId": "D06",
+    "faction": "Outlanders",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["horla"],
+    "stats": {
+      "CON": 104,
+      "ATK": 108,
+      "DEF": 95
+    },
+    "tags": ["Counter", "Death Resistance", "Heal", "Poison", "STR Down", "STR Up", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 25,
+    "name": "jenkins",
+    "ingameId": "D07",
+    "faction": "The Fools",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["jenkins"],
+    "stats": {
+      "CON": 100,
+      "ATK": 140,
+      "DEF": 104
+    },
+    "tags": ["Draw", "STR Up"]
+  },
+  {
+    "id": 26,
+    "name": "karen",
+    "ingameId": "C12",
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["karen"],
+    "stats": {
+      "CON": 112,
+      "ATK": 96,
+      "DEF": 108
+    },
+    "tags": ["Arithmetica", "Dispel", "Draw", "Heal", "Keyflare", "Poison", "Stagnation", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 27,
+    "name": "kathigu-ra",
+    "ingameId": "C16",
+    "faction": "Among the Stars",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["kathigu-ra", "kathigura"],
+    "stats": {
+      "CON": 140,
+      "ATK": 167,
+      "DEF": 126
+    },
+    "tags": ["Discard", "Dispel", "Draw", "Pierce DMG", "STR Up"]
+  },
+  {
+    "id": 28,
+    "name": "leigh",
+    "ingameId": "B08",
+    "faction": "Hybrid",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["leigh"],
+    "stats": {
+      "CON": 72,
+      "ATK": 72,
+      "DEF": 72
+    },
+    "tags": ["Dispel", "Embryo Fusion", "Heal", "Pierce DMG", "Self-Harm", "STR Up", "Vulnerability"]
+  },
+  {
+    "id": 29,
+    "name": "lily",
+    "ingameId": "C10",
+    "faction": "Hybrid",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["lily"],
+    "stats": {
+      "CON": 162,
+      "ATK": 117,
+      "DEF": 162
+    },
+    "tags": ["Death Resistance", "Heal", "Poison", "Strike"]
+  },
+  {
+    "id": 30,
+    "name": "liz",
+    "ingameId": "D01",
+    "faction": "The Fools",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["liz"],
+    "stats": {
+      "CON": 108,
+      "ATK": 148,
+      "DEF": 116
+    },
+    "tags": ["Discard", "Draw", "Pierce DMG", "Poison", "STR Up"]
+  },
+  {
+    "id": 31,
+    "name": "lotan",
+    "ingameId": "C04",
+    "faction": "Out of the Aeons",
+    "realm": "CHAOS",
+    "rarity": "SR",
+    "type": "ASSAULT",
+    "aliases": ["lotan"],
+    "stats": {
+      "CON": 128,
+      "ATK": 132,
+      "DEF": 112
+    },
+    "tags": ["Dispel", "Fixed DMG", "Max HP DMG", "STR Up", "Strike", "Weakness"]
+  },
+  {
+    "id": 32,
+    "name": "miryam",
+    "ingameId": "O07",
+    "faction": "Out of the Aeons",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["miryam"],
+    "stats": {
+      "CON": 95,
+      "ATK": 149,
+      "DEF": 81
+    },
+    "tags": ["Arithmetica", "Draw", "Heal", "Pierce DMG", "Poison", "STR Down", "STR Up", "Tentacles", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 33,
+    "name": "mouchette",
+    "ingameId": "C17",
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["mouchette"],
+    "stats": {
+      "CON": 126,
+      "ATK": 149,
+      "DEF": 126
+    },
+    "tags": ["Death Resistance", "Pursuit", "Strike", "Stun"]
+  },
+  {
+    "id": 34,
+    "name": "murphy",
+    "ingameId": "O02",
+    "faction": "Hybrid",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["murphy"],
+    "stats": {
+      "CON": 131,
+      "ATK": 140,
+      "DEF": 158
+    },
+    "tags": ["Aftershock", "Arithmetica", "Keyflare", "Tentacles", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 35,
+    "name": "murphy: fauxborn",
+    "ingameId": "O02EX",
+    "faction": "Out of the Aeons",
+    "realm": "AEQUOR",
+    "rarity": "Genesis",
+    "type": "CHORUS",
+    "aliases": ["murphy: fauxborn", "g-murphy"],
+    "stats": {
+      "CON": 99,
+      "ATK": 122,
+      "DEF": 117
+    },
+    "tags": ["Aftershock", "Arithmetica", "Divine Realm", "Draw", "Keyflare", "Tentacles"]
+  },
+  {
+    "id": 36,
+    "name": "nautila",
+    "ingameId": "C07",
+    "faction": "The Fools",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["nautila"],
+    "stats": {
+      "CON": 152,
+      "ATK": 92,
+      "DEF": 160
+    },
+    "tags": ["Counter", "Dispel", "Fixed DMG", "Fragile", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 37,
+    "name": "nymphaea",
+    "ingameId": "C08",
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["nymphaea"],
+    "stats": {
+      "CON": 76,
+      "ATK": 120,
+      "DEF": 80
+    },
+    "tags": ["Poison", "STR Up", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 38,
+    "name": "ogier",
+    "ingameId": "C03",
+    "faction": "The Fools",
+    "realm": "CHAOS",
+    "rarity": "SR",
+    "type": "WARDEN",
+    "aliases": ["ogier"],
+    "stats": {
+      "CON": 136,
+      "ATK": 116,
+      "DEF": 148
+    },
+    "tags": ["Dispel", "Fragile", "Pierce DMG", "STR Up", "Vulnerability"]
+  },
+  {
+    "id": 39,
+    "name": "pandia",
+    "ingameId": "C09",
+    "faction": "Outlanders",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["pandia"],
+    "stats": {
+      "CON": 120,
+      "ATK": 140,
+      "DEF": 124
+    },
+    "tags": ["Counter", "STR Up", "Vulnerability"]
+  },
+  {
+    "id": 40,
+    "name": "pickman",
+    "ingameId": "B12",
+    "faction": "The Fools",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["pickman"],
+    "stats": {
+      "CON": 144,
+      "ATK": 131,
+      "DEF": 144
+    },
+    "tags": ["Arithmetica", "Draw", "Embryo Fusion", "STR Up"]
+  },
+  {
+    "id": 41,
+    "name": "pollux",
+    "ingameId": "D14",
+    "faction": "Hybrid",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["pollux"],
+    "stats": {
+      "CON": 140,
+      "ATK": 158,
+      "DEF": 135
+    },
+    "tags": ["Bleed", "Discard", "Draw"]
+  },
+  {
+    "id": 42,
+    "name": "ramona",
+    "ingameId": "C01",
+    "faction": "The Unknowable",
+    "realm": "CHAOS",
+    "rarity": "SR",
+    "type": "CHORUS",
+    "aliases": ["ramona"],
+    "stats": {
+      "CON": 120,
+      "ATK": 120,
+      "DEF": 120
+    },
+    "tags": ["Arithmetica", "Discard", "Draw", "Keyflare", "STR Down", "STR Up", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 20,
+    "name": "ramona: timeworn",
+    "ingameId": "C01EX",
+    "faction": "The Unknowable",
+    "realm": "CHAOS",
+    "rarity": "Genesis",
+    "type": "CHORUS",
+    "aliases": ["ramona: timeworn", "g-ramona"],
+    "stats": {
+      "CON": 120,
+      "ATK": 120,
+      "DEF": 120
+    },
+    "tags": ["Arithmetica", "Draw", "Keyflare", "STR Down", "STR Up"]
+  },
+  {
+    "id": 43,
+    "name": "ryker",
+    "ingameId": "C05",
+    "faction": "The Fools",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["ryker"],
+    "stats": {
+      "CON": 180,
+      "ATK": 149,
+      "DEF": 144
+    },
+    "tags": ["Arithmetica", "Draw", "Keyflare", "STR Up"]
+  },
+  {
+    "id": 44,
+    "name": "salvador",
+    "ingameId": "B02",
+    "faction": "Out of the Aeons",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["salvador"],
+    "stats": {
+      "CON": 189,
+      "ATK": 122,
+      "DEF": 189
+    },
+    "tags": ["Embryo Fusion", "Heal", "Self-Harm", "STR Up", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 45,
+    "name": "sanga",
+    "ingameId": "O08",
+    "faction": "Outlanders",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["sanga"],
+    "stats": {
+      "CON": 128,
+      "ATK": 100,
+      "DEF": 152
+    },
+    "tags": ["Aftershock", "Death Resistance", "Dispel", "Fragile", "Tentacles"]
+  },
+  {
+    "id": 46,
+    "name": "sorel",
+    "ingameId": "B04",
+    "faction": "Outlanders",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["sorel"],
+    "stats": {
+      "CON": 131,
+      "ATK": 185,
+      "DEF": 95
+    },
+    "tags": ["Death Resistance", "Embryo Fusion", "Heal", "Self-Harm", "STR Up"]
+  },
+  {
+    "id": 47,
+    "name": "tawil",
+    "ingameId": "C15",
+    "faction": "Gateway",
+    "realm": "CHAOS",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["tawil"],
+    "stats": {
+      "CON": 135,
+      "ATK": 135,
+      "DEF": 135
+    },
+    "tags": ["Arithmetica", "Discard", "Draw", "Fixed DMG", "Keyflare", "Max HP DMG", "Pierce DMG", "STR Up"]
+  },
+  {
+    "id": 48,
+    "name": "thais",
+    "ingameId": "B01",
+    "faction": "Out of the Aeons",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["thais"],
+    "stats": {
+      "CON": 140,
+      "ATK": 135,
+      "DEF": 126
+    },
+    "tags": ["Arithmetica", "Bleed", "Counter", "Embryo Fusion", "Keyflare", "Poison", "STR Up", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 49,
+    "name": "tinct",
+    "ingameId": "D03",
+    "faction": "Among the Stars",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["tinct"],
+    "stats": {
+      "CON": 104,
+      "ATK": 96,
+      "DEF": 100
+    },
+    "tags": ["Arithmetica", "Dispel", "Draw", "Fragile", "STR Up", "Strike", "Vulnerability", "Weakness"]
+  },
+  {
+    "id": 50,
+    "name": "tulu",
+    "ingameId": "O01",
+    "faction": "Out of the Aeons",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["tulu"],
+    "stats": {
+      "CON": 153,
+      "ATK": 171,
+      "DEF": 135
+    },
+    "tags": ["Aftershock", "Dispel", "Divine Realm", "Pierce DMG", "STR Down", "STR Up", "Tentacles", "Weakness"]
+  },
+  {
+    "id": 51,
+    "name": "uvhash",
+    "ingameId": "B07",
+    "faction": "Outlanders",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["uvhash"],
+    "stats": {
+      "CON": 144,
+      "ATK": 136,
+      "DEF": 120
+    },
+    "tags": ["Sealed", "Self-Harm", "STR Up"]
+  },
+  {
+    "id": 52,
+    "name": "wanda",
+    "ingameId": "D04",
+    "faction": "Among the Stars",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "WARDEN",
+    "aliases": ["wanda"],
+    "stats": {
+      "CON": 158,
+      "ATK": 99,
+      "DEF": 185
+    },
+    "tags": ["Counter", "STR Down", "STR Up"]
+  },
+  {
+    "id": 53,
+    "name": "winkle",
+    "ingameId": "D05",
+    "faction": "Among the Stars",
+    "realm": "ULTRA",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["winkle"],
+    "stats": {
+      "CON": 112,
+      "ATK": 100,
+      "DEF": 128
+    },
+    "tags": ["Counter", "Discard", "Dispel", "Draw", "Fragile", "Keyflare", "Weakness"]
+  },
+  {
+    "id": 54,
+    "name": "xu",
+    "ingameId": "B14",
+    "faction": "The Unknowable",
+    "realm": "CARO",
+    "rarity": "SSR",
+    "type": "CHORUS",
+    "aliases": ["xu"],
+    "stats": {
+      "CON": 203,
+      "ATK": 122,
+      "DEF": 113
+    },
+    "tags": ["Arithmetica", "Embryo Fusion", "Fixed DMG", "Max HP DMG", "Poison", "Resonance", "STR Down"]
+  },
+  {
+    "id": 55,
+    "name": "vortice",
+    "ingameId": "O11",
+    "faction": "The Fools",
+    "realm": "AEQUOR",
+    "rarity": "SSR",
+    "type": "ASSAULT",
+    "aliases": ["vortice"],
+    "stats": {
+      "CON": 149,
+      "ATK": 180,
+      "DEF": 122
+    },
+    "tags": ["Aftershock", "Dispel", "Divine Realm", "Fixed DMG", "Fortress", "Pursuit", "Tentacles"]
+  }
+]

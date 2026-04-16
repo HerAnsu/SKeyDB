@@ -1,6 +1,6 @@
 # Docs Guide
 
-Last updated: 2026-03-04
+Last updated: 2026-04-15
 
 This repo keeps current planning separate from historical snapshots.
 

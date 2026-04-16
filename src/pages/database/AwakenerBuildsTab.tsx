@@ -2,6 +2,7 @@ import {useMemo} from 'react'
 
 import {CompactArtTile} from '@/components/ui/CompactArtTile'
 import {
+  getAwakenerBuildEntries,
   getAwakenerBuildEntryById,
   type AwakenerBuild,
   type AwakenerBuildWheelTier,
@@ -9,7 +10,6 @@ import {
 import {getCovenantAssetById} from '@/domain/covenant-assets'
 import {getCovenants} from '@/domain/covenants'
 import {getMainstatByKey, getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
-import {useAwakenerBuildEntries} from '@/domain/useAwakenerBuildEntries'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelById} from '@/domain/wheels'
 
@@ -263,15 +263,9 @@ function BuildCard({
 }
 
 export function AwakenerBuildsTab({awakenerId}: AwakenerBuildsTabProps) {
-  const entries = useAwakenerBuildEntries()
-
   const entry = useMemo(() => {
-    return entries ? getAwakenerBuildEntryById(awakenerId, entries) : undefined
-  }, [awakenerId, entries])
-
-  if (!entries) {
-    return <p className='py-4 text-xs text-slate-400'>Loading...</p>
-  }
+    return getAwakenerBuildEntryById(awakenerId, getAwakenerBuildEntries())
+  }, [awakenerId])
 
   if (!entry) {
     return <p className='py-4 text-xs text-slate-400'>No curated builds available yet.</p>

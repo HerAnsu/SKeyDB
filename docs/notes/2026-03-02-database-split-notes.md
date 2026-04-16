@@ -3,6 +3,7 @@
 ## Goal
 
 Capture the current findings for the upcoming database work so we do not have to re-argue the same data-loading boundaries later.
+This note is kept as migration-era architecture context for the V1 to V2 database transition.
 
 Date:
 
@@ -10,7 +11,7 @@ Date:
 
 ## Current Observation
 
-- `src/data/awakeners-lite.json` is already large enough that it should stop being treated as the future home for every detail field.
+- The old top-level `awakeners-lite.json` / `awakeners-full.json` split was a useful stepping stone, but the maintained path is now canonical `/awakeners` datasets plus compiled V2 artifacts.
 - The upcoming DB page UX has a clear two-stage interaction model:
   - overview page with filters/sorting/search
   - click-through modal with richer detail content
@@ -63,7 +64,7 @@ This data should not be required for builder, collection, or list-page boot.
 
 ## Awakener Split Decision
 
-### `awakeners-lite.json`
+### Historical `awakeners-lite.json`
 
 Keep:
 
@@ -79,7 +80,7 @@ Do **not** keep:
 - rich/tabbed modal copy
 - display-only stat annotations that are not used for overview operations
 
-### `awakeners-full.json`
+### Historical `awakeners-full.json`
 
 Add:
 
@@ -88,7 +89,7 @@ Add:
 - rich descriptions
 - future modal-tab content
 
-The recommended first step is one aggregated `awakeners-full.json`, not per-awakener files.
+That recommendation has now been superseded by one compiled V2 full artifact derived from the split canonical `/awakeners` datasets.
 
 Reason:
 
@@ -165,7 +166,7 @@ This is intentionally a provisional call, not a hard rule.
 
 ## Automation Recommendation
 
-When `full` datasets are introduced, maintainers should not hand-build new rich objects from scratch.
+When `full` datasets are introduced, avoid hand-building new rich objects from scratch.
 
 Recommended workflow:
 
@@ -174,16 +175,11 @@ Recommended workflow:
 3. command creates missing `full` entry skeletons
 4. maintainer fills in the rich fields manually
 
-For awakeners, this likely becomes:
+For awakeners, this was the interim idea:
 
-- `npm run data:sync-awakener-full`
+- `npm run data:compile-awakeners-full-v2`
 
-Expected behavior:
-
-- copy canonical identity fields from lite
-- generate empty/default placeholders for rich sections
-- preserve existing full entries
-- fail CI if a lite entry is missing a matching full entry
+That workflow is now retired in favor of canonical split datasets plus compiled V2 artifacts, so we should not reintroduce writes back into a top-level `awakeners-full.json`.
 
 ## Non-Goals Right Now
 
@@ -199,9 +195,7 @@ Those belong to the actual DB implementation plan.
 
 ## Current Recommendation Summary
 
-1. Split awakeners into:
-- `lite`
-- one aggregated `full`
+1. Keep awakeners in split canonical `/awakeners` datasets and derive compiled V2 runtime artifacts from them.
 
 2. Likely do the same for wheels.
 
@@ -214,7 +208,7 @@ Those belong to the actual DB implementation plan.
 - search
 - operational app behavior
 
-5. Keep `full` focused on:
+5. Keep the compiled full artifact focused on:
 - click-through modal detail content
 
-6. Add sync automation for generating missing `full` skeletons from `lite`.
+6. Do not reintroduce sync automation that writes back into retired top-level full/lite blobs.

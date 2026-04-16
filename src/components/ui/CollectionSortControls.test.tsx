@@ -84,4 +84,26 @@ describe('CollectionSortControls', () => {
     expect(screen.getByRole('combobox', {name: /sort by/i})).toBeInTheDocument()
     expect(screen.getByRole('button', {name: /toggle sort direction/i})).toHaveTextContent('High')
   })
+
+  it('supports narrower sort key unions for database callers', () => {
+    const onSortKeyChange = vi.fn<(nextKey: 'ALPHABETICAL' | 'RARITY') => void>()
+
+    render(
+      <CollectionSortControls<'ALPHABETICAL' | 'RARITY'>
+        groupByRealm={false}
+        onGroupByRealmChange={vi.fn()}
+        onSortDirectionToggle={vi.fn()}
+        onSortKeyChange={onSortKeyChange}
+        sortDirection='DESC'
+        sortKey='ALPHABETICAL'
+        sortOptions={['ALPHABETICAL', 'RARITY']}
+      />,
+    )
+
+    fireEvent.change(screen.getByRole('combobox', {name: /sort by/i}), {
+      target: {value: 'RARITY'},
+    })
+
+    expect(onSortKeyChange).toHaveBeenCalledWith('RARITY')
+  })
 })

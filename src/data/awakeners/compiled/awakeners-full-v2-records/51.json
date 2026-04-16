@@ -1,0 +1,312 @@
+{
+  "id": 51,
+  "key": "uvhash",
+  "displayName": "uvhash",
+  "ingameId": "B07",
+  "faction": "Outlanders",
+  "realm": "CARO",
+  "rarity": "SSR",
+  "type": "ASSAULT",
+  "aliases": ["uvhash"],
+  "searchTags": ["Self-Harm"],
+  "stats": {
+    "CON": "144",
+    "ATK": "136",
+    "DEF": "120",
+    "CritRate": "5%",
+    "CritDamage": "64.4%",
+    "AliemusRegen": "2.4",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {
+    "CON": 1.8,
+    "ATK": 1.7,
+    "DEF": 1.5
+  },
+  "substatScaling": {
+    "CritDamage": "2.4%",
+    "AliemusRegen": "0.4"
+  },
+  "assets": {
+    "portraitKey": "uvhash",
+    "iconKey": "uvhash"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Uvhash obtains [Energy:Arg1] Aliemus. {Rouse}: Uvhash is unaffected by {Sealed}, Crit. Rate and Crit. DMG are increased by [Arg2]%, effects are doubled when HP is below 25%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "15"
+        }
+      },
+      "id": "skill.uvhash.vermilion-rite",
+      "ownerAwakenerId": 51,
+      "kind": "rouse",
+      "displayName": "Vermilion Rite",
+      "cost": "1",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Uvhash obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.uvhash.strike",
+      "ownerAwakenerId": 51,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Uvhash obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.uvhash.defense",
+      "ownerAwakenerId": 51,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG three times. Uvhash obtains [Energy:Arg2] Aliemus, doubled if HP is below 25%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["12", "14.4", "16.8", "19.2", "21.6", "24"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["10", "11", "12", "13", "14", "15"]
+        }
+      },
+      "id": "skill.uvhash.boil-blood",
+      "ownerAwakenerId": 51,
+      "kind": "command",
+      "displayName": "Boil, Blood!",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Lose [Arg1]% Current HP. Deal [Damage:Arg2] DMG to all enemies. Obtain [Power:Arg3] {STR}.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "fixed",
+          "value": "10"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.uvhash.screech-blood",
+      "ownerAwakenerId": 51,
+      "kind": "command",
+      "displayName": "Screech, Blood!",
+      "cost": "0",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "[{Devour}: Subsequent {Hymn of Blood and Sand} DMG +[Arg4], {STR} multiplier +[Arg3] during this battle.] Deal [Damage:Arg1] DMG to all enemies. This DMG enjoys a ×[Arg2] {STR} multiplier. Obtain Aliemus equal to Uvhash's Aliemus Regen.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["80", "96", "112", "128", "144", "160"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "3"
+        },
+        "Arg3": {
+          "kind": "fixed",
+          "value": "1"
+        },
+        "Arg4": {
+          "kind": "scaling",
+          "values": ["80", "96", "112", "128", "144", "160"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.uvhash.hymn-of-blood-and-sand",
+      "ownerAwakenerId": 51,
+      "kind": "exalt",
+      "displayName": "Hymn of Blood and Sand",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Fill your hand with {Screech, Blood!} with {Exhaust} and {Fleeting}. Uvhash deals 1 more instance of DMG this turn.",
+      "descriptionArgs": {},
+      "id": "skill.uvhash.gift-of-surging-blood",
+      "ownerAwakenerId": 51,
+      "kind": "over_exalt",
+      "displayName": "Gift of Surging Blood",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.uvhash.madness-omen",
+      "ownerAwakenerId": 51,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nThe first [Arg3] {Screech, Blood!} cards played each turn do not add {Arithmetica Harmony}. Uvhash's Base DMG is increased by [Arg4]%, and the effect doubles when HP is below 25%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg3": {
+          "kind": "fixed",
+          "value": "10"
+        },
+        "Arg4": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        }
+      },
+      "id": "talent.uvhash.soulforge-aptitude",
+      "ownerAwakenerId": 51,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Screech, Blood!} Base DMG and {STR} increase by 30%.",
+      "descriptionArgs": {},
+      "id": "enlighten.uvhash.the-gladiator",
+      "ownerAwakenerId": 51,
+      "slot": "E1",
+      "displayName": "The Gladiator",
+      "upgradeTargetIds": ["skill.uvhash.screech-blood"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.uvhash.screech-blood",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg2": {
+              "kind": "scaling",
+              "values": ["19.5", "23.4", "27.3", "31.2", "35.1", "39"],
+              "suffix": "%",
+              "stat": "ATK"
+            },
+            "Arg3": {
+              "kind": "scaling",
+              "values": ["2.6", "3.12", "3.64", "4.16", "4.68", "5.2"],
+              "suffix": "%",
+              "stat": "ATK"
+            }
+          }
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Boil, Blood!} Base DMG increases by 33%, and deals 2 additional instances of DMG when HP is below 25%.",
+      "descriptionArgs": {},
+      "id": "enlighten.uvhash.roman-elegy",
+      "ownerAwakenerId": 51,
+      "slot": "E2",
+      "displayName": "Roman Elegy",
+      "upgradeTargetIds": ["skill.uvhash.boil-blood"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.uvhash.boil-blood",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG 3 times. Uvhash obtains [Energy:Arg2] Aliemus, and when HP is below 25%, deal an additional 2 instances of DMG and the Aliemus gained is doubled.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Hymn of Blood and Sand} enjoys an additional 1x {STR} multiplier with each {Devour}.",
+      "descriptionArgs": {},
+      "id": "enlighten.uvhash.sorcerers-end",
+      "ownerAwakenerId": 51,
+      "slot": "E3",
+      "displayName": "Sorcerer's End",
+      "upgradeTargetIds": ["skill.uvhash.hymn-of-blood-and-sand"],
+      "upgradePatches": []
+    }
+  },
+  "derivedSkills": []
+}

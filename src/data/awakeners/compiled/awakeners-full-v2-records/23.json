@@ -1,0 +1,328 @@
+{
+  "id": 23,
+  "key": "helot",
+  "displayName": "helot",
+  "ingameId": "B05",
+  "faction": "The Fools",
+  "realm": "CARO",
+  "rarity": "SSR",
+  "type": "ASSAULT",
+  "aliases": ["helot"],
+  "searchTags": ["Discard", "Draw", "Hand Limit", "Self-Harm", "Strike"],
+  "stats": {
+    "CON": "140",
+    "ATK": "136",
+    "DEF": "100",
+    "CritRate": "9.8%",
+    "CritDamage": "50%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "9.6%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {
+    "CON": 1.75,
+    "ATK": 1.7,
+    "DEF": 1.25
+  },
+  "substatScaling": {
+    "CritRate": "0.8%",
+    "DamageAmplification": "1.6%"
+  },
+  "assets": {
+    "portraitKey": "helot",
+    "iconKey": "helot"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Helot obtains [Energy:Arg1] Aliemus. {Rouse}: Helot's cards gain {Retain}. At turn end, boost the DMG of {Shattering Strike} and the Base DMG of {Lasting Loathe} by 10%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        }
+      },
+      "id": "skill.helot.vengeance-upon-thee",
+      "ownerAwakenerId": 23,
+      "kind": "rouse",
+      "displayName": "Vengeance Upon Thee",
+      "cost": "1",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Helot obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.helot.strike",
+      "ownerAwakenerId": 23,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Helot obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.helot.defense",
+      "ownerAwakenerId": 23,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Treated as a {Strike}. Deal [Damage:Arg1] DMG. For each other {Strike} in your hand, increase Base DMG by [Arg3]%, and gain an additional 1x {STR} bonus. Discard all \"Strikes\".",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["100", "120", "140", "160", "180", "200"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg3": {
+          "kind": "fixed",
+          "value": "15"
+        }
+      },
+      "id": "skill.helot.shattering-strike",
+      "ownerAwakenerId": 23,
+      "kind": "command",
+      "displayName": "Shattering Strike",
+      "cost": "4",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Lose [Arg1]% Current HP. Deal [Damage:Arg2] DMG to all enemies and an equal amount of {Bleed}. Generate 2 random Awakeners' {Strike} cards, place them into hand, and attach {Exhaust}. This card is considered {Strike}.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "fixed",
+          "value": "10"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.helot.lasting-loathe",
+      "ownerAwakenerId": 23,
+      "kind": "command",
+      "displayName": "Lasting Loathe",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "[{Devour}: Draw [Arg1] {Strike} cards, Temporary Hand Limit +2, increase the Base DMG of Helot's {Strike} by [Arg3]% for this battle.] Dispel self {Weakness} and Temporary {STR} debuffs. In this turn, {Strike} DMG +[Arg2]%, Helot's DMG output +[Arg4]%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "fixed",
+          "value": "3"
+        },
+        "Arg3": {
+          "kind": "fixed",
+          "value": "10"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["80", "84", "88", "92", "96", "100"]
+        },
+        "Arg4": {
+          "kind": "fixed",
+          "value": "0"
+        }
+      },
+      "id": "skill.helot.surviving-impasse",
+      "ownerAwakenerId": 23,
+      "kind": "exalt",
+      "displayName": "Surviving Impasse",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Temporarily increase hand limit by 2, add 2 {Irregular Form} to hand, and Helot gains 25% Crit. DMG.",
+      "descriptionArgs": {},
+      "id": "skill.helot.blood-for-blood",
+      "ownerAwakenerId": 23,
+      "kind": "over_exalt",
+      "displayName": "Blood for Blood",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 1% DMG Amplification attribute Helot has, {Surviving Impasse} increases the DMG Helot deals in this turn by 0.3%.",
+      "descriptionArgs": {},
+      "id": "talent.helot.pain-sigil",
+      "ownerAwakenerId": 23,
+      "displayName": "Pain Sigil",
+      "upgradeTargetIds": ["skill.helot.surviving-impasse"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.helot.surviving-impasse",
+          "targetType": "skill",
+          "operation": "arg_substat_bonuses",
+          "descriptionArgs": {},
+          "argSubstatBonuses": {
+            "Arg4": {
+              "substat": "DamageAmplification",
+              "multiplier": "0.3"
+            }
+          }
+        }
+      ]
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.helot.madness-omen",
+      "ownerAwakenerId": 23,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nHelot's Final DMG against \"Snowfield\" enemies +[Arg3]%. If Helot has consumed {Embryo} this turn, her next DMG dealt this turn has its Crit. DMG +[Arg4]%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["15", "17", "19", "21", "23", "25", "27", "29", "31", "35"]
+        },
+        "Arg4": {
+          "kind": "scaling",
+          "values": ["30", "32", "34", "36", "38", "40", "42", "44", "46", "50"]
+        }
+      },
+      "id": "talent.helot.soulforge-aptitude",
+      "ownerAwakenerId": 23,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "At the start of the battle, place 1 {Irregular Form} into hand.",
+      "descriptionArgs": {},
+      "id": "enlighten.helot.regents-heir",
+      "ownerAwakenerId": 23,
+      "slot": "E1",
+      "displayName": "Regent's Heir",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "E2": {
+      "descriptionTemplate": "{Defense} grants Helot 25% Temporary Crit. Rate.",
+      "descriptionArgs": {},
+      "id": "enlighten.helot.sacred-half",
+      "ownerAwakenerId": 23,
+      "slot": "E2",
+      "displayName": "Sacred Half",
+      "upgradeTargetIds": ["skill.helot.defense"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.helot.defense",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Gain [Block:Arg1] Shield. Helot obtains [Energy:Arg2] Aliemus and 25% Temporary Crit. Rate.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Strike} grants Helot 5% Crit. DMG.",
+      "descriptionArgs": {},
+      "id": "enlighten.helot.the-chainbreaker",
+      "ownerAwakenerId": 23,
+      "slot": "E3",
+      "displayName": "The Chainbreaker",
+      "upgradeTargetIds": ["skill.helot.strike"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.helot.strike",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG. Helot obtains [Energy:Arg2] Aliemus and 5% Crit. DMG.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "Choose one from {Shattering Strike}, {Lasting Loathe}, {Strike}, and {Defense} to add to your hand and attach {Exhaust}.",
+      "descriptionArgs": {},
+      "id": "derived.helot.irregular-form",
+      "ownerAwakenerId": 23,
+      "displayName": "Irregular Form",
+      "cost": "0",
+      "derivedFromId": "skill.helot.blood-for-blood",
+      "rootSkillId": "skill.helot.blood-for-blood",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        },
+        {
+          "id": "mechanic.exhaust"
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

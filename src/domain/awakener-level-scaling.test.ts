@@ -6,7 +6,8 @@ import {
   resolveAwakenerStatsForLevel,
 } from './awakener-level-scaling'
 import {getAwakeners} from './awakeners'
-import {loadAwakenersFull, type AwakenerFull} from './awakeners-full'
+import {getAwakenersFullV2, type AwakenerFullV2Record} from './awakeners-full-v2'
+import {resolveDescribedRecord} from './description-records'
 
 const CANONICAL_LEVEL_ONE_SUBSTATS = {
   CritRate: '5%',
@@ -30,13 +31,16 @@ const CANONICAL_SUBSTAT_SUFFIXES = {
   DeathResistance: '%',
 } as const
 
-const CANONICAL_MADNESS_OMEN_DESCRIPTION =
-  '(Max level: 12) Obtain (5 per talent level) Aliemus after the start of exploration.'
+type StatScaledAwakener = Pick<
+  AwakenerFullV2Record,
+  'displayName' | 'stats' | 'primaryScalingBase' | 'statScaling' | 'substatScaling'
+> & {
+  talents: {displayName: string; descriptionTemplate: string}[]
+}
 
-function makeAwakener(overrides?: Partial<AwakenerFull>): AwakenerFull {
+function makeAwakener(overrides?: Partial<StatScaledAwakener>): StatScaledAwakener {
   return {
-    id: 999,
-    name: 'test awakener',
+    displayName: 'test awakener',
     stats: {
       CON: '140',
       ATK: '135',
@@ -59,15 +63,50 @@ function makeAwakener(overrides?: Partial<AwakenerFull>): AwakenerFull {
     substatScaling: {
       CritRate: '1.6%',
     },
-    cards: {},
-    exalts: {
-      exalt: {name: 'Exalt', description: 'x'},
-      over_exalt: {name: 'Over Exalt', description: 'x'},
-    },
-    talents: {},
-    enlightens: {},
+    talents: [],
     ...overrides,
-  } as AwakenerFull
+  }
+}
+
+function getTalentEntries(awakener: Pick<AwakenerFullV2Record, 'talents'>): {
+  key: string
+  displayName: string
+  descriptionTemplate: string
+  talent: NonNullable<AwakenerFullV2Record['talents']['T1']>
+}[] {
+  const entries: {
+    key: string
+    displayName: string
+    descriptionTemplate: string
+    talent: NonNullable<AwakenerFullV2Record['talents']['T1']>
+  }[] = []
+
+  for (const [slot, talent] of [
+    ['T1', awakener.talents.T1],
+    ['T2', awakener.talents.T2],
+    ['T3', awakener.talents.T3],
+    ['T4', awakener.talents.T4],
+  ] as const) {
+    if (talent) {
+      entries.push({
+        key: slot,
+        displayName: talent.displayName,
+        descriptionTemplate: talent.descriptionTemplate,
+        talent,
+      })
+    }
+  }
+
+  for (const [index, talent] of awakener.talents.extraTalents.entries()) {
+    entries.push({
+      key: `extraTalents[${String(index)}]`,
+      displayName: talent.displayName,
+      descriptionTemplate: talent.descriptionTemplate,
+      talent,
+    })
+  }
+
+  return entries
 }
 
 describe('clampAwakenerDatabaseLevel', () => {
@@ -158,31 +197,25 @@ describe('resolveAwakenerStatsForLevel', () => {
   })
 })
 
-describe('awakeners full data', () => {
-  it('stores explicit level scaling metadata instead of embedding growth hints in stat strings', async () => {
-    const data = await loadAwakenersFull()
+describe('awakeners full v2 data', () => {
+  it('stores explicit level scaling metadata instead of embedding growth hints in stat strings', () => {
+    const data = getAwakenersFullV2()
 
     for (const awakener of data) {
-      const typedAwakener = awakener as AwakenerFull & {
-        primaryScalingBase?: number
-        statScaling?: {CON: number; ATK: number; DEF: number}
-        substatScaling?: Record<string, string>
-      }
-
-      expect(typedAwakener.primaryScalingBase).toBeDefined()
-      expect([20, 30]).toContain(typedAwakener.primaryScalingBase)
-      expect(typedAwakener.statScaling).toEqual({
+      expect(awakener.primaryScalingBase).toBeDefined()
+      expect([20, 30]).toContain(awakener.primaryScalingBase)
+      expect(awakener.statScaling).toEqual({
         CON: expect.any(Number),
         ATK: expect.any(Number),
         DEF: expect.any(Number),
       })
-      expect(typedAwakener.substatScaling).toEqual(expect.any(Object))
-      expect(Object.values(typedAwakener.stats).some((value) => value.includes('(+'))).toBe(false)
+      expect(awakener.substatScaling).toEqual(expect.any(Object))
+      expect(Object.values(awakener.stats).some((value) => value.includes('(+'))).toBe(false)
     }
   })
 
-  it('keeps every stored Lv. 60 primary stat aligned with the scaling base formula', async () => {
-    const data = await loadAwakenersFull()
+  it('keeps every stored Lv. 60 primary stat aligned with the scaling base formula', () => {
+    const data = getAwakenersFullV2()
 
     for (const awakener of data) {
       const resolvedAt60 = resolveAwakenerStatsForLevel(awakener, 60)
@@ -193,8 +226,8 @@ describe('awakeners full data', () => {
     }
   })
 
-  it('keeps lite and full awakener identity aligned by id and name', async () => {
-    const fullData = await loadAwakenersFull()
+  it('keeps lite and compiled awakener identity aligned by id and name', () => {
+    const fullData = getAwakenersFullV2()
     const liteData = getAwakeners()
     const liteById = new Map(liteData.map((awakener) => [awakener.id, awakener]))
     const mismatches: string[] = []
@@ -202,12 +235,12 @@ describe('awakeners full data', () => {
     for (const fullAwakener of fullData) {
       const liteAwakener = liteById.get(fullAwakener.id)
       if (!liteAwakener) {
-        mismatches.push(`${String(fullAwakener.id)}:${fullAwakener.name} missing in lite`)
+        mismatches.push(`${String(fullAwakener.id)}:${fullAwakener.displayName} missing in lite`)
         continue
       }
-      if (liteAwakener.name !== fullAwakener.name) {
+      if (liteAwakener.name !== fullAwakener.displayName) {
         mismatches.push(
-          `${String(fullAwakener.id)} name mismatch ${fullAwakener.name} != ${liteAwakener.name}`,
+          `${String(fullAwakener.id)} name mismatch ${fullAwakener.displayName} != ${liteAwakener.name}`,
         )
       }
     }
@@ -215,8 +248,8 @@ describe('awakeners full data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('keeps lite and full primary CON/ATK/DEF stats aligned by awakener id', async () => {
-    const fullData = await loadAwakenersFull()
+  it('keeps lite and compiled primary CON/ATK/DEF stats aligned by awakener id', () => {
+    const fullData = getAwakenersFullV2()
     const liteData = getAwakeners()
     const liteById = new Map(liteData.map((awakener) => [awakener.id, awakener]))
     const mismatches: string[] = []
@@ -224,23 +257,23 @@ describe('awakeners full data', () => {
     for (const fullAwakener of fullData) {
       const liteAwakener = liteById.get(fullAwakener.id)
       if (!liteAwakener?.stats) {
-        mismatches.push(`${String(fullAwakener.id)}:${fullAwakener.name} missing lite stats`)
+        mismatches.push(`${String(fullAwakener.id)}:${fullAwakener.displayName} missing lite stats`)
         continue
       }
 
       if (fullAwakener.stats.CON !== String(liteAwakener.stats.CON)) {
         mismatches.push(
-          `${String(fullAwakener.id)}:${fullAwakener.name} CON ${fullAwakener.stats.CON} != ${String(liteAwakener.stats.CON)}`,
+          `${String(fullAwakener.id)}:${fullAwakener.displayName} CON ${fullAwakener.stats.CON} != ${String(liteAwakener.stats.CON)}`,
         )
       }
       if (fullAwakener.stats.ATK !== String(liteAwakener.stats.ATK)) {
         mismatches.push(
-          `${String(fullAwakener.id)}:${fullAwakener.name} ATK ${fullAwakener.stats.ATK} != ${String(liteAwakener.stats.ATK)}`,
+          `${String(fullAwakener.id)}:${fullAwakener.displayName} ATK ${fullAwakener.stats.ATK} != ${String(liteAwakener.stats.ATK)}`,
         )
       }
       if (fullAwakener.stats.DEF !== String(liteAwakener.stats.DEF)) {
         mismatches.push(
-          `${String(fullAwakener.id)}:${fullAwakener.name} DEF ${fullAwakener.stats.DEF} != ${String(liteAwakener.stats.DEF)}`,
+          `${String(fullAwakener.id)}:${fullAwakener.displayName} DEF ${fullAwakener.stats.DEF} != ${String(liteAwakener.stats.DEF)}`,
         )
       }
     }
@@ -248,10 +281,10 @@ describe('awakeners full data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('fills the remaining mouchette and vortice substat scaling gaps with sane Lv. 1 values', async () => {
-    const data = await loadAwakenersFull()
-    const mouchette = data.find((awakener) => awakener.name === 'mouchette')
-    const vortice = data.find((awakener) => awakener.name === 'vortice')
+  it('fills the remaining mouchette and vortice substat scaling gaps with sane Lv. 1 values', () => {
+    const data = getAwakenersFullV2()
+    const mouchette = data.find((awakener) => awakener.displayName === 'mouchette')
+    const vortice = data.find((awakener) => awakener.displayName === 'vortice')
 
     expect(mouchette?.substatScaling).toEqual({
       AliemusRegen: '0.4',
@@ -276,11 +309,11 @@ describe('awakeners full data', () => {
     )
   })
 
-  it('matches ingame-confirmed Lv. 1 and Lv. 60 primary stats for clementine, pollux, and wanda', async () => {
-    const data = await loadAwakenersFull()
-    const clementine = data.find((awakener) => awakener.name === 'clementine')
-    const pollux = data.find((awakener) => awakener.name === 'pollux')
-    const wanda = data.find((awakener) => awakener.name === 'wanda')
+  it('matches ingame-confirmed Lv. 1 and Lv. 60 primary stats for clementine, pollux, and wanda', () => {
+    const data = getAwakenersFullV2()
+    const clementine = data.find((awakener) => awakener.displayName === 'clementine')
+    const pollux = data.find((awakener) => awakener.displayName === 'pollux')
+    const wanda = data.find((awakener) => awakener.displayName === 'wanda')
 
     expect(clementine ? resolveAwakenerStatsForLevel(clementine, 1) : null).toEqual(
       expect.objectContaining({
@@ -328,10 +361,10 @@ describe('awakeners full data', () => {
     )
   })
 
-  it('matches confirmed 10-level Pollux and Wanda stat progressions', async () => {
-    const data = await loadAwakenersFull()
-    const pollux = data.find((awakener) => awakener.name === 'pollux')
-    const wanda = data.find((awakener) => awakener.name === 'wanda')
+  it('matches confirmed 10-level Pollux and Wanda stat progressions', () => {
+    const data = getAwakenersFullV2()
+    const pollux = data.find((awakener) => awakener.displayName === 'pollux')
+    const wanda = data.find((awakener) => awakener.displayName === 'wanda')
     if (!pollux || !wanda) {
       throw new Error('Expected Pollux and Wanda in awakener full data')
     }
@@ -351,8 +384,8 @@ describe('awakeners full data', () => {
     ).toEqual(['35', '44', '55', '66', '77', '88', '99', '110', '121', '132'])
   })
 
-  it('rewinds every secondary stat back to the canonical Lv. 1 defaults', async () => {
-    const data = await loadAwakenersFull()
+  it('rewinds every secondary stat back to the canonical Lv. 1 defaults', () => {
+    const data = getAwakenersFullV2()
     const mismatches: string[] = []
 
     for (const awakener of data) {
@@ -362,7 +395,7 @@ describe('awakeners full data', () => {
         const statKey = key as keyof typeof CANONICAL_LEVEL_ONE_SUBSTATS
         if (resolvedAtLevelOne[statKey] !== expectedValue) {
           mismatches.push(
-            `${awakener.name}.${statKey}: ${resolvedAtLevelOne[statKey]} != ${expectedValue}`,
+            `${awakener.displayName}.${statKey}: ${resolvedAtLevelOne[statKey]} != ${expectedValue}`,
           )
         }
       }
@@ -371,8 +404,8 @@ describe('awakeners full data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('keeps stored substat values and growth metadata aligned with their canonical units', async () => {
-    const data = await loadAwakenersFull()
+  it('keeps stored substat values and growth metadata aligned with their canonical units', () => {
+    const data = getAwakenersFullV2()
     const mismatches: string[] = []
 
     for (const awakener of data) {
@@ -382,10 +415,10 @@ describe('awakeners full data', () => {
         const growthValue = awakener.substatScaling[statKey]
 
         if (!statValue.endsWith(expectedSuffix)) {
-          mismatches.push(`${awakener.name}.stats.${statKey}: ${statValue}`)
+          mismatches.push(`${awakener.displayName}.stats.${statKey}: ${statValue}`)
         }
         if (growthValue && !growthValue.endsWith(expectedSuffix)) {
-          mismatches.push(`${awakener.name}.substatScaling.${statKey}: ${growthValue}`)
+          mismatches.push(`${awakener.displayName}.substatScaling.${statKey}: ${growthValue}`)
         }
       }
     }
@@ -393,25 +426,40 @@ describe('awakeners full data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('keeps Salvador talent data and Madness Omen descriptions aligned with the canon text', async () => {
-    const data = await loadAwakenersFull()
-    const salvador = data.find((awakener) => awakener.name === 'salvador')
+  it('keeps Salvador talent data and Madness Omen ladders aligned with the canonical template model', () => {
+    const data = getAwakenersFullV2()
+    const salvador = data.find((awakener) => awakener.displayName === 'salvador')
     const mismatches: string[] = []
 
     expect(salvador?.talents.T4).toEqual(
       expect.objectContaining({
-        name: expect.any(String),
-        description: expect.any(String),
+        displayName: expect.any(String),
+        descriptionTemplate: expect.any(String),
       }),
     )
 
     for (const awakener of data) {
-      for (const [key, talent] of Object.entries(awakener.talents)) {
-        if (talent.name !== 'Madness Omen') {
+      for (const talentEntry of getTalentEntries(awakener)) {
+        const {key, displayName, descriptionTemplate, talent} = talentEntry
+        if (displayName !== 'Madness Omen') {
           continue
         }
-        if (talent.description !== CANONICAL_MADNESS_OMEN_DESCRIPTION) {
-          mismatches.push(`${awakener.name}.${key}: ${talent.description}`)
+        const resolvedAtLevelOne = resolveDescribedRecord(talent, {
+          rank: 1,
+        }).description
+        const resolvedAtMaxLevel = resolveDescribedRecord(talent, {
+          rank: talent.maxLevel ?? 1,
+        }).description
+
+        if (
+          talent.maxLevel !== 12 ||
+          !descriptionTemplate.includes('[Arg1]') ||
+          !resolvedAtLevelOne.includes('5 Aliemus') ||
+          !resolvedAtMaxLevel.includes('60 Aliemus')
+        ) {
+          mismatches.push(
+            `${awakener.displayName}.${key}: ${descriptionTemplate} | ${resolvedAtLevelOne} | ${resolvedAtMaxLevel}`,
+          )
         }
       }
     }
@@ -419,18 +467,18 @@ describe('awakeners full data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('strips redundant innate prefixes from talent descriptions', async () => {
-    const data = await loadAwakenersFull()
+  it('strips redundant innate prefixes from talent descriptions', () => {
+    const data = getAwakenersFullV2()
     const mismatches: string[] = []
 
     for (const awakener of data) {
-      for (const [key, talent] of Object.entries(awakener.talents)) {
-        if (talent.description.startsWith('(Max level: 1)')) {
-          mismatches.push(`${awakener.name}.${key}: ${talent.description}`)
+      for (const {key, descriptionTemplate} of getTalentEntries(awakener)) {
+        if (descriptionTemplate.startsWith('(Max level: 1)')) {
+          mismatches.push(`${awakener.displayName}.${key}: ${descriptionTemplate}`)
           continue
         }
-        if (talent.description.startsWith('Innate:')) {
-          mismatches.push(`${awakener.name}.${key}: ${talent.description}`)
+        if (descriptionTemplate.startsWith('Innate:')) {
+          mismatches.push(`${awakener.displayName}.${key}: ${descriptionTemplate}`)
         }
       }
     }

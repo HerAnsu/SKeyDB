@@ -30,6 +30,9 @@ App runs on `http://127.0.0.1:5173`.
 - `npm run test` - run tests once
 - `npm run test:watch` - run tests in watch mode
 - `npm run lint` - run ESLint
+- `npm run verify` - refresh committed awakener artifacts, then format, lint, test, and build
+
+Tracked data artifacts are committed to the repo and consumed directly by the app. Contributor-facing commands in this README are intended to work from a fresh clone.
 
 ## Project Structure
 - `src/pages/BuilderPage.tsx` - main builder page
@@ -37,7 +40,6 @@ App runs on `http://127.0.0.1:5173`.
 - `src/domain/` - domain logic (search, rules, formatting, assets)
 - `src/data/` - lightweight JSON datasets
 - `docs/` - internal roadmap, backlog, plans, notes, and archive
-- `untracked/` - local scratch space (ignored by git)
 
 ## Contributors
 - `DZ-David`, Original database and team builder, which some of our data originates from.

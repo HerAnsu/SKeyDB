@@ -1,0 +1,420 @@
+{
+  "id": 8,
+  "key": "castor",
+  "displayName": "castor",
+  "ingameId": "D11",
+  "faction": "The Fools",
+  "realm": "ULTRA",
+  "rarity": "SSR",
+  "type": "WARDEN",
+  "aliases": ["castor"],
+  "searchTags": ["Draw"],
+  "stats": {
+    "CON": "149",
+    "ATK": "135",
+    "DEF": "158",
+    "CritRate": "5%",
+    "CritDamage": "57.2%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "9.6%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {
+    "CON": 1.65,
+    "ATK": 1.5,
+    "DEF": 1.75
+  },
+  "substatScaling": {
+    "CritDamage": "1.2%",
+    "DamageAmplification": "1.6%"
+  },
+  "assets": {
+    "portraitKey": "castor",
+    "iconKey": "castor"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Castor obtains [Energy:Arg1] Aliemus. {Rouse}: Castor's DMG always critically hits; after playing {Onyx Plume}, inflict [Arg2] stacks of {Corrosion} on the target. Gain +50% Shield from keeping {Onyx Plume} cards in hand at turn ends.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["140", "168", "196", "224", "252", "280"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.castor.skybound-oath",
+      "ownerAwakenerId": 8,
+      "kind": "rouse",
+      "displayName": "Skybound Oath",
+      "cost": "2",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Castor obtains [Energy:Arg2] Aliemus. {Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile and gain [Block:Arg3] Shield.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "DEF"
+        }
+      },
+      "id": "skill.castor.strike",
+      "ownerAwakenerId": 8,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Gain [Block:Arg1] Shield. Castor obtains [Energy:Arg2] Aliemus.{Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile, gain [Block:Arg3] Shield.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "DEF"
+        }
+      },
+      "id": "skill.castor.defense",
+      "ownerAwakenerId": 8,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg2] times, increase other allies' Temporary Crit. DMG by [Arg5]% of Castor's Crit. DMG. {Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile and gain [Block:Arg4] Shield.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["35", "42", "49", "56", "63", "70"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "3"
+        },
+        "Arg5": {
+          "kind": "scaling",
+          "values": ["10", "11", "12", "13", "14", "15"]
+        },
+        "Arg4": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "DEF"
+        }
+      },
+      "id": "skill.castor.umbral-flight",
+      "ownerAwakenerId": 8,
+      "kind": "command",
+      "displayName": "Umbral Flight",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield, inflict {Weakness} on all enemies for 1 turn. {Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile, obtain [Block:Arg3] Shield.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "DEF"
+        }
+      },
+      "id": "skill.castor.stygian-wings",
+      "ownerAwakenerId": 8,
+      "kind": "command",
+      "displayName": "Stygian Wings",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield and shuffle [Arg2] {Onyx Plume} into the Draw Pile.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["45", "54", "63", "72", "81", "90"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "3"
+        }
+      },
+      "id": "skill.castor.dirge-of-the-unbroken",
+      "ownerAwakenerId": 8,
+      "kind": "exalt",
+      "displayName": "Dirge of the Unbroken",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Add 3 additional {Onyx Plume} to your hand. This turn, increase the amount of Shield {Retained} by {Onyx Plume} by 10% of Castor's DEF, and each time you play an {Onyx Plume} card, additionally inflict Castor's ATK*140% stacks of {Corrosion}.",
+      "descriptionArgs": {},
+      "id": "skill.castor.over-the-sea-of-thorns",
+      "ownerAwakenerId": 8,
+      "kind": "over_exalt",
+      "displayName": "Over the Sea of Thorns",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": [
+      {
+        "descriptionTemplate": "Deal [Damage:Arg2] DMG and draw [Arg1] cards. {Retain}: Obtain [Block:Arg3] Shield. {Exhaust}.",
+        "descriptionArgs": {
+          "Arg2": {
+            "kind": "fixed",
+            "value": "70",
+            "suffix": "%",
+            "stat": "ATK"
+          },
+          "Arg1": {
+            "kind": "fixed",
+            "value": "1"
+          },
+          "Arg3": {
+            "kind": "fixed",
+            "value": "10",
+            "suffix": "%",
+            "stat": "DEF"
+          }
+        },
+        "id": "derived.castor.onyx-plume",
+        "ownerAwakenerId": 8,
+        "displayName": "Onyx Plume",
+        "cost": "0",
+        "derivedFromId": "skill.castor.skybound-oath",
+        "rootSkillId": "skill.castor.skybound-oath",
+        "childDerivedSkillIds": [],
+        "cardKeywords": [
+          {
+            "id": "mechanic.retain"
+          },
+          {
+            "id": "mechanic.exhaust"
+          }
+        ],
+        "variants": []
+      }
+    ]
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "Playing {Onyx Plume} for the first time each turn inflicts 840% of Castor's ATK as {Corrosion} on the target and grants 10 Aliemus.\nFor every 1% DMG Amplification that Castor has, the Base amount of {Corrosion} inflicted increases by 1%.\nAfter the battle, {Corrosion} inflicted by Castor permanently increases by 20% during this Exploration.\n{Corrosion} inflicted in Boss Battles doubles.\nAfter inflicting {Corrosion}, Castor's DMG output increases by 5% of the amount of {Corrosion} inflicted this turn.\nDMG dealt by Castor does not remove {Corrosion}.",
+      "descriptionArgs": {},
+      "id": "talent.castor.cleansing-feathers",
+      "ownerAwakenerId": 8,
+      "displayName": "Cleansing Feathers",
+      "upgradeTargetIds": ["skill.castor.skybound-oath"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.castor.skybound-oath",
+          "targetType": "skill",
+          "operation": "arg_substat_bonuses",
+          "descriptionArgs": {},
+          "argSubstatBonuses": {
+            "Arg2": {
+              "substat": "DamageAmplification",
+              "multiplier": "1",
+              "suffix": "%"
+            }
+          }
+        }
+      ]
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.castor.madness-omen",
+      "ownerAwakenerId": 8,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nPlaying {Onyx Plume} will not add {Arithmetica Harmony}. {Corrosion} inflicted with {Cleansing Feathers} is increased by [Arg3]% of Castor's ATK. {Corrosion} inflicted to enemies of the \"Church of the Lightbearers\" + [Arg4]%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["200", "220", "240", "260", "280", "300", "320", "340", "360", "400"]
+        },
+        "Arg4": {
+          "kind": "scaling",
+          "values": ["20", "23", "26", "29", "32", "35", "38", "41", "44", "50"]
+        }
+      },
+      "id": "talent.castor.soulforge-aptitude",
+      "ownerAwakenerId": 8,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "At the start of the battle, place 1 {Onyx Plume} into hand.",
+      "descriptionArgs": {},
+      "id": "enlighten.castor.caged-underground",
+      "ownerAwakenerId": 8,
+      "slot": "E1",
+      "displayName": "Caged Underground",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "E2": {
+      "descriptionTemplate": "For every {Onyx Plume} in hand, playing {Stygian Wings} grants 5 Aliemus. For every {Onyx Plume} you play, the Arithmetica Cost of {Umbral Flight} is reduced by 1 this turn.",
+      "descriptionArgs": {},
+      "id": "enlighten.castor.unyielding-will",
+      "ownerAwakenerId": 8,
+      "slot": "E2",
+      "displayName": "Unyielding Will",
+      "upgradeTargetIds": ["skill.castor.stygian-wings", "skill.castor.umbral-flight"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.castor.umbral-flight",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg2] times, increase other allies' Temporary Crit. DMG by [Arg5]% of Castor's Crit. DMG. For every {Onyx Plume} played this turn, Arithmetica Cost -1. {Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile and gain [Block:Arg4] Shield.",
+          "descriptionArgs": {}
+        },
+        {
+          "targetId": "skill.castor.stygian-wings",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield, inflict {Weakness} on all enemies for 1 turn. For every {Onyx Plume} in hand, obtain [Energy:Arg2] Aliemus. {Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile, obtain [Block:Arg3] Shield.",
+          "descriptionArgs": {
+            "Arg2": {
+              "kind": "fixed",
+              "value": "5"
+            }
+          }
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "For every 3 {Onyx Plume} you play, obtain 1 Arithmetica and increase Castor's Final DMG by 10% in this battle.",
+      "descriptionArgs": {},
+      "id": "enlighten.castor.sky-eclipsing-wings",
+      "ownerAwakenerId": 8,
+      "slot": "E3",
+      "displayName": "Sky-Eclipsing Wings",
+      "upgradeTargetIds": ["derived.castor.onyx-plume"],
+      "upgradePatches": [
+        {
+          "targetId": "derived.castor.onyx-plume",
+          "targetType": "derived-skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg2] DMG and draw [Arg1] cards. For every 3 {Onyx Plume} played, obtain 1 Arithmetica and increase Castor's Final DMG by 10% in this battle. {Retain}: Obtain [Block:Arg3] Shield. {Exhaust}.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "Deal [Damage:Arg2] DMG and draw [Arg1] cards. {Retain}: Obtain [Block:Arg3] Shield. {Exhaust}.",
+      "descriptionArgs": {
+        "Arg2": {
+          "kind": "fixed",
+          "value": "70",
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg1": {
+          "kind": "fixed",
+          "value": "1"
+        },
+        "Arg3": {
+          "kind": "fixed",
+          "value": "10",
+          "suffix": "%",
+          "stat": "DEF"
+        }
+      },
+      "id": "derived.castor.onyx-plume",
+      "ownerAwakenerId": 8,
+      "displayName": "Onyx Plume",
+      "cost": "0",
+      "derivedFromId": "skill.castor.skybound-oath",
+      "rootSkillId": "skill.castor.skybound-oath",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        },
+        {
+          "id": "mechanic.exhaust"
+        }
+      ],
+      "variants": []
+    }
+  ]
+}

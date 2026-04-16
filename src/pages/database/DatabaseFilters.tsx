@@ -1,4 +1,4 @@
-import type {ReactNode, RefObject} from 'react'
+import {useId, type CSSProperties, type ReactNode, type RefObject} from 'react'
 
 import {CollectionSortControls} from '@/components/ui/CollectionSortControls'
 import {TogglePill} from '@/components/ui/TogglePill'
@@ -7,11 +7,14 @@ import type {DatabaseSortKey} from '@/domain/database-sorting'
 import {getRealmIcon, getRealmLabel, getRealmTint} from '@/domain/factions'
 
 import {
+  DATABASE_RARITY_FILTER_IDS,
+  DATABASE_REALM_FILTER_IDS,
   DATABASE_SORT_OPTIONS,
+  DATABASE_TYPE_FILTER_IDS,
   type RarityFilterId,
   type RealmFilterId,
   type TypeFilterId,
-} from './useDatabaseViewModel'
+} from './database-browse-state'
 
 interface DatabaseFiltersProps {
   query: string
@@ -33,21 +36,20 @@ interface DatabaseFiltersProps {
   onGroupByRealmChange: (next: boolean) => void
 }
 
-const REALM_FILTERS: RealmFilterId[] = ['AEQUOR', 'CARO', 'CHAOS', 'ULTRA']
+const REALM_FILTERS = DATABASE_REALM_FILTER_IDS.slice(1)
 
-const rarityFilterTabs: {id: RarityFilterId; label: string}[] = [
-  {id: 'ALL', label: 'All'},
-  {id: 'Genesis', label: 'Genesis'},
-  {id: 'SSR', label: 'SSR'},
-  {id: 'SR', label: 'SR'},
-]
+const rarityFilterTabs: {id: RarityFilterId; label: string}[] = DATABASE_RARITY_FILTER_IDS.map(
+  (id) => ({
+    id,
+    label: id === 'ALL' ? 'All' : id,
+  }),
+)
 
-const typeFilterTabs: {id: TypeFilterId; label: string}[] = [
-  {id: 'ALL', label: 'All'},
-  {id: 'ASSAULT', label: 'Assault'},
-  {id: 'WARDEN', label: 'Warden'},
-  {id: 'CHORUS', label: 'Chorus'},
-]
+const typeFilterTabs: {id: TypeFilterId; label: string}[] = DATABASE_TYPE_FILTER_IDS.map((id) => ({
+  id,
+  label:
+    id === 'ALL' ? 'All' : id === 'ASSAULT' ? 'Assault' : id === 'WARDEN' ? 'Warden' : 'Chorus',
+}))
 
 function chipClass(active: boolean): string {
   return `inline-flex items-center gap-1.5 border px-2.5 py-1 text-[11px] uppercase tracking-wide transition-colors ${
@@ -73,6 +75,27 @@ function FilterRow({label, children}: FilterRowProps) {
   )
 }
 
+interface FilterChipButtonProps {
+  active: boolean
+  children: ReactNode
+  onClick: () => void
+  style?: CSSProperties
+}
+
+function FilterChipButton({active, children, onClick, style}: FilterChipButtonProps) {
+  return (
+    <button
+      aria-pressed={active}
+      className={`${chipClass(active)} focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none`}
+      onClick={onClick}
+      style={style}
+      type='button'
+    >
+      {children}
+    </button>
+  )
+}
+
 export function DatabaseFilters({
   query,
   realmFilter,
@@ -92,14 +115,22 @@ export function DatabaseFilters({
   onSortDirectionToggle,
   onGroupByRealmChange,
 }: DatabaseFiltersProps) {
+  const searchInputId = useId()
+
   return (
     <div className='space-y-2 border-b border-slate-600/40 pb-3'>
       <div className='flex flex-wrap items-center gap-2'>
+        <label className='sr-only' htmlFor={searchInputId}>
+          Search awakeners
+        </label>
         <input
           className='max-w-md min-w-0 flex-1 border border-slate-800/95 bg-slate-950/90 px-3 py-1.5 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-amber-300/65 focus:bg-slate-950'
+          id={searchInputId}
+          name='database-search'
           onChange={(event) => {
             onQueryChange(event.target.value)
           }}
+          autoComplete='off'
           placeholder='Search awakeners... (name, tags, realm, etc.)'
           ref={searchInputRef}
           type='search'
@@ -111,63 +142,59 @@ export function DatabaseFilters({
       </div>
 
       <FilterRow label='Realm'>
-        <button
-          className={chipClass(realmFilter === 'ALL')}
+        <FilterChipButton
+          active={realmFilter === 'ALL'}
           onClick={() => {
             onRealmFilterChange('ALL')
           }}
-          type='button'
         >
           All
-        </button>
+        </FilterChipButton>
         {REALM_FILTERS.map((realm) => {
           const active = realmFilter === realm
           const tint = getRealmTint(realm)
           const icon = getRealmIcon(realm)
           return (
-            <button
-              className={chipClass(active)}
+            <FilterChipButton
+              active={active}
               key={realm}
               onClick={() => {
                 onRealmFilterChange(realm)
               }}
               style={active ? {borderColor: `${tint}88`, color: tint} : undefined}
-              type='button'
             >
               {icon ? <img alt='' className='h-3.5 w-3.5' draggable={false} src={icon} /> : null}
               {getRealmLabel(realm)}
-            </button>
+            </FilterChipButton>
           )
         })}
       </FilterRow>
 
       <FilterRow label='Rarity'>
         {rarityFilterTabs.map((entry) => (
-          <button
-            className={chipClass(rarityFilter === entry.id)}
+          <FilterChipButton
+            active={rarityFilter === entry.id}
             key={entry.id}
             onClick={() => {
               onRarityFilterChange(entry.id)
             }}
-            type='button'
           >
             {entry.label}
-          </button>
+          </FilterChipButton>
         ))}
       </FilterRow>
 
       <FilterRow label='Type'>
         {typeFilterTabs.map((entry) => (
-          <button
-            className={chipClass(typeFilter === entry.id)}
+          <FilterChipButton
+            active={typeFilter === entry.id}
             key={entry.id}
             onClick={() => {
               onTypeFilterChange(entry.id)
             }}
-            type='button'
           >
             {entry.label}
-          </button>
+          </FilterChipButton>
         ))}
       </FilterRow>
 
@@ -177,9 +204,7 @@ export function DatabaseFilters({
           layout='compact'
           onGroupByRealmChange={onGroupByRealmChange}
           onSortDirectionToggle={onSortDirectionToggle}
-          onSortKeyChange={(nextKey) => {
-            onSortKeyChange(nextKey as DatabaseSortKey)
-          }}
+          onSortKeyChange={onSortKeyChange}
           showGroupByRealm={false}
           sortDirection={sortDirection}
           sortKey={sortKey}

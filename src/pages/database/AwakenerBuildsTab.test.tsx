@@ -3,29 +3,28 @@ import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {AwakenerBuildsTab} from './AwakenerBuildsTab'
 
-const {useAwakenerBuildEntries} = vi.hoisted(() => ({
-  useAwakenerBuildEntries: vi.fn(),
+const {getAwakenerBuildEntries} = vi.hoisted(() => ({
+  getAwakenerBuildEntries: vi.fn(),
 }))
 
-vi.mock('../../domain/useAwakenerBuildEntries', () => ({
-  useAwakenerBuildEntries,
-}))
+vi.mock('../../domain/awakener-builds', async () => {
+  const actual = await vi.importActual<typeof import('../../domain/awakener-builds')>(
+    '../../domain/awakener-builds',
+  )
+
+  return {
+    ...actual,
+    getAwakenerBuildEntries,
+  }
+})
 
 describe('AwakenerBuildsTab', () => {
   beforeEach(() => {
-    useAwakenerBuildEntries.mockReset()
-  })
-
-  it('shows a loading state while curated build data is resolving', () => {
-    useAwakenerBuildEntries.mockReturnValue(null)
-
-    render(<AwakenerBuildsTab awakenerId={27} />)
-
-    expect(screen.getByText('Loading...')).toBeInTheDocument()
+    getAwakenerBuildEntries.mockReset()
   })
 
   it('renders all configured builds and groups wheel recommendations by line', () => {
-    useAwakenerBuildEntries.mockReturnValue([
+    getAwakenerBuildEntries.mockReturnValue([
       {
         awakenerId: 27,
         primaryBuildId: 'dps',
@@ -82,7 +81,7 @@ describe('AwakenerBuildsTab', () => {
   })
 
   it('hides a redundant build heading when only one build exists', async () => {
-    useAwakenerBuildEntries.mockReturnValue([
+    getAwakenerBuildEntries.mockReturnValue([
       {
         awakenerId: 18,
         primaryBuildId: 'core',
@@ -107,7 +106,7 @@ describe('AwakenerBuildsTab', () => {
   })
 
   it('shows an empty state when no curated builds exist for the awakener', () => {
-    useAwakenerBuildEntries.mockReturnValue([])
+    getAwakenerBuildEntries.mockReturnValue([])
 
     render(<AwakenerBuildsTab awakenerId={99} />)
 

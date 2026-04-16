@@ -1,0 +1,326 @@
+{
+  "id": 33,
+  "key": "mouchette",
+  "displayName": "mouchette",
+  "ingameId": "C17",
+  "faction": "Outlanders",
+  "realm": "CHAOS",
+  "rarity": "SSR",
+  "type": "ASSAULT",
+  "aliases": ["mouchette"],
+  "searchTags": ["Death Resistance", "Strike", "Stun"],
+  "stats": {
+    "CON": "126",
+    "ATK": "149",
+    "DEF": "126",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "2.4",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "33.6%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {
+    "CON": 1.4,
+    "ATK": 1.65,
+    "DEF": 1.4
+  },
+  "substatScaling": {
+    "AliemusRegen": "0.4",
+    "DeathResistance": "5.6%"
+  },
+  "assets": {
+    "portraitKey": "mouchette",
+    "iconKey": "mouchette"
+  },
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Mouchette gains [Energy:Arg1] Aliemus. {Rouse}: {Dramatic Encounter} hits count +2. Each time {Dramatic Encounter} triggers, Mouchette's {Strike} Temporary Final DMG +25%.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["25", "30", "35", "40", "45", "50"]
+        }
+      },
+      "id": "skill.mouchette.mist-realm-vestige",
+      "ownerAwakenerId": 33,
+      "kind": "rouse",
+      "displayName": "Mist Realm Vestige",
+      "cost": "2",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Mouchette obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.mouchette.strike",
+      "ownerAwakenerId": 33,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Gain [Block:Arg1] Shield. Mouchette obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["10", "12", "14", "16", "18", "20"],
+          "suffix": "%",
+          "stat": "DEF"
+        },
+        "Arg2": {
+          "kind": "scaling",
+          "values": ["5", "6", "7", "8", "9", "10"]
+        }
+      },
+      "id": "skill.mouchette.defense",
+      "ownerAwakenerId": 33,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Counts as {Strike}. Deal [Damage:Arg1] DMG to all enemies [Arg2] times,",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["15", "18", "21", "24", "27", "30"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "2"
+        }
+      },
+      "id": "skill.mouchette.mortal-blast",
+      "ownerAwakenerId": 33,
+      "kind": "command",
+      "displayName": "Mortal Blast",
+      "cost": "1",
+      "cardKeywords": [
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Counts as {Strike}. Deal [Damage:Arg1] DMG to a random enemy [Arg2] times, gain [Energy:Arg3] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["30", "36", "42", "48", "54", "60"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "5"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["20", "22", "24", "26", "28", "30"]
+        }
+      },
+      "id": "skill.mouchette.shining-crush",
+      "ownerAwakenerId": 33,
+      "kind": "command",
+      "displayName": "Shining☆Crush",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. This turn, all Awakeners' {Strike} DMG is increased by [Arg3].",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "scaling",
+          "values": ["250", "300", "350", "400", "450", "500"],
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["125", "150", "175", "200", "225", "250"],
+          "suffix": "%",
+          "stat": "ATK"
+        }
+      },
+      "id": "skill.mouchette.shining-tornado",
+      "ownerAwakenerId": 33,
+      "kind": "exalt",
+      "displayName": "Shining☆Tornado",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "{Over-Exalt}: Hits count +1; for each {Death Resistance} triggered this battle, +1 additional hit.\nSet the Arithmetica Cost of the next {Shining☆Crush} to 0. First release each battle additionally inflicts {Fainted} on all enemies.",
+      "descriptionArgs": {},
+      "id": "skill.mouchette.tornado-of-annihilation",
+      "ownerAwakenerId": 33,
+      "kind": "over_exalt",
+      "displayName": "Tornado of Annihilation☆!",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 2 {Strike} cards played, Mouchette performs a {Pursuit}, randomly dealing 1 instance of DMG equal to 30% of Mouchette's ATK (counts as {Strike}). This effect can trigger up to 4 times per turn.",
+      "descriptionArgs": {},
+      "id": "talent.mouchette.dramatic-encounter",
+      "ownerAwakenerId": 33,
+      "displayName": "Dramatic Encounter",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Gain [Arg1] Aliemus at the start of exploration.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "5",
+          "gainPerLevel": "5"
+        }
+      },
+      "id": "talent.mouchette.madness-omen",
+      "ownerAwakenerId": 33,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nMouchette's Final DMG against \"Dominator\" enemies +[Arg5]%. All Awakeners' {Strike} Base DMG +[Arg3]%. After triggering {Death Resistance}, Mouchette gains [Arg4] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "linear",
+          "base": "3",
+          "gainPerLevel": "3"
+        },
+        "Arg2": {
+          "kind": "linear",
+          "base": "50",
+          "gainPerLevel": "50"
+        },
+        "Arg5": {
+          "kind": "scaling",
+          "values": ["20", "23", "26", "29", "32", "35", "38", "41", "44", "50"]
+        },
+        "Arg3": {
+          "kind": "scaling",
+          "values": ["15", "17", "19", "21", "23", "25", "27", "29", "31", "35"]
+        },
+        "Arg4": {
+          "kind": "scaling",
+          "values": ["20", "23", "26", "29", "32", "35", "38", "41", "44", "50"]
+        }
+      },
+      "id": "talent.mouchette.soulforge-aptitude",
+      "ownerAwakenerId": 33,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "For every 1% {Death Resistance} Mouchette and her equipped WoD & Covenant have, her Crit. Rate and Crit. DMG + 0.15%. Each time {Death Resistance} is triggered, the Crit. DMG provided by {Mist Realm Traveler} +100% for this battle.",
+      "descriptionArgs": {},
+      "id": "enlighten.mouchette.mist-realm-traveler",
+      "ownerAwakenerId": 33,
+      "slot": "E1",
+      "displayName": "Mist Realm Traveler",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "E2": {
+      "descriptionTemplate": "{Mortal Blast} generates 1 temporary copy of the last played other {Strike} and makes its Arithmetica Cost -1.",
+      "descriptionArgs": {},
+      "id": "enlighten.mouchette.irretrievable-past",
+      "ownerAwakenerId": 33,
+      "slot": "E2",
+      "displayName": "Irretrievable Past",
+      "upgradeTargetIds": ["skill.mouchette.mortal-blast"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.mouchette.mortal-blast",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Counts as {Strike}. Deal [Damage:Arg1] DMG to all enemies [Arg2] times, generate 1 temporary copy of the last played other {Strike} and reduce its Arithmetica Cost by 1.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Shining☆Tornado} grants Mouchette +1 hits count this turn.",
+      "descriptionArgs": {},
+      "id": "enlighten.mouchette.cleave-out-a-future",
+      "ownerAwakenerId": 33,
+      "slot": "E3",
+      "displayName": "Cleave Out a Future",
+      "upgradeTargetIds": ["skill.mouchette.shining-tornado"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.mouchette.shining-tornado",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. This turn, Mouchette's hits count +1, and all Awakeners' {Strike} DMG +[Arg3].",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to a random enemy [Arg2] times.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "fixed",
+          "value": "30",
+          "suffix": "%",
+          "stat": "ATK"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "1"
+        }
+      },
+      "id": "derived.mouchette.dramatic-encounter",
+      "ownerAwakenerId": 33,
+      "displayName": "Dramatic Encounter",
+      "derivedFromId": "skill.mouchette.mist-realm-vestige",
+      "rootSkillId": "skill.mouchette.mist-realm-vestige",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    }
+  ]
+}

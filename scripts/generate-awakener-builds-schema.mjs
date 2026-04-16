@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 
-import awakenersLite from '../src/data/awakeners-lite.json' with {type: 'json'}
+import awakenersLite from '../src/data/awakeners/compiled/awakeners-lite.v2.json' with {type: 'json'}
 import covenantsLite from '../src/data/covenants-lite.json' with {type: 'json'}
 import mainstats from '../src/data/mainstats.json' with {type: 'json'}
 import possesLite from '../src/data/posses-lite.json' with {type: 'json'}

@@ -2,10 +2,10 @@ import {useMemo} from 'react'
 
 import {
   buildAwakenerBuildEntryMap,
+  getAwakenerBuildEntries,
   getPrimaryAwakenerBuild,
   type AwakenerBuild,
 } from '@/domain/awakener-builds'
-import {useAwakenerBuildEntries} from '@/domain/useAwakenerBuildEntries'
 
 import type {ActiveSelection, TeamSlot} from './types'
 
@@ -20,11 +20,9 @@ export function useAwakenerBuildRecommendations({
   slotsById,
   awakenerIdByName,
 }: UseAwakenerBuildRecommendationsOptions) {
-  const entries = useAwakenerBuildEntries()
-
   const entryMap = useMemo(() => {
-    return entries ? buildAwakenerBuildEntryMap(entries) : null
-  }, [entries])
+    return buildAwakenerBuildEntryMap(getAwakenerBuildEntries())
+  }, [])
 
   const activeSlot = useMemo(() => {
     if (!activeSelection) {
@@ -42,16 +40,13 @@ export function useAwakenerBuildRecommendations({
   }, [activeSlot, awakenerIdByName])
 
   const activeBuild = useMemo<AwakenerBuild | undefined>(() => {
-    if (!entryMap || activeAwakenerId === undefined) {
+    if (activeAwakenerId === undefined) {
       return undefined
     }
     return getPrimaryAwakenerBuild(entryMap.get(activeAwakenerId))
   }, [entryMap, activeAwakenerId])
 
   const teamRecommendedPosseIds = useMemo<Set<string>>(() => {
-    if (!entryMap) {
-      return new Set()
-    }
     const ids = new Set<string>()
     for (const slot of slotsById.values()) {
       if (!slot.awakenerName) {
@@ -74,6 +69,5 @@ export function useAwakenerBuildRecommendations({
   return {
     activeBuild,
     teamRecommendedPosseIds,
-    hasLoadedBuildRecommendations: entries !== null,
   }
 }
