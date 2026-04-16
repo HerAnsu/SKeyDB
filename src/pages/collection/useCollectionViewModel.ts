@@ -427,6 +427,15 @@ export function useCollectionViewModel() {
     setQueryByTab((prev) => ({...prev, [tab]: `${prev[tab]}${key}`}))
   }
 
+  function removeSearchCharacter() {
+    setQueryByTab((prev) => {
+      if (!prev[tab]) {
+        return prev
+      }
+      return {...prev, [tab]: prev[tab].slice(0, -1)}
+    })
+  }
+
   function clearActiveQuery() {
     setQueryByTab((prev) => {
       if (!prev[tab]) {
@@ -676,6 +685,7 @@ export function useCollectionViewModel() {
     activeQuery,
     setQuery,
     appendSearchCharacter,
+    removeSearchCharacter,
     clearActiveQuery,
     queryByTab,
     awakenerFilter,

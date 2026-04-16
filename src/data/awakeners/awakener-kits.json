@@ -1,0 +1,1316 @@
+[
+  {
+    "awakenerId": 1,
+    "cards": {
+      "C1": "skill.24.mediating-personalities",
+      "C2": "skill.24.strike",
+      "C3": "skill.24.defense",
+      "C4": "skill.24.symbiotic-aberration",
+      "C5": "skill.24.frenzied-slash",
+      "Exalt": "skill.24.twisted-carrion-revel",
+      "OverExalt": "skill.24.aberrant-vivisection",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.24.madness-omen",
+      "T3": "talent.24.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.24.hysteria",
+      "E2": "enlighten.24.restraint-bonds",
+      "E3": "enlighten.24.pavlovian-conditioning-study"
+    }
+  },
+  {
+    "awakenerId": 2,
+    "cards": {
+      "C1": "skill.agrippa.path-of-the-lost",
+      "C2": "skill.agrippa.strike",
+      "C3": "skill.agrippa.defense",
+      "C4": "skill.agrippa.reluctant-alms",
+      "C5": "skill.agrippa.colorless-spiral",
+      "Exalt": "skill.agrippa.pale-blessing",
+      "OverExalt": "skill.agrippa.lady-of-labyrinths",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.agrippa.seal-of-the-pact",
+      "T2": "talent.agrippa.madness-omen",
+      "T3": "talent.agrippa.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.agrippa.the-usurper",
+      "E2": "enlighten.agrippa.ashes-and-skulls",
+      "E3": "enlighten.agrippa.spider-queens-kiss"
+    }
+  },
+  {
+    "awakenerId": 3,
+    "cards": {
+      "C1": "skill.aigis.stagnant-curse",
+      "C2": "skill.aigis.strike",
+      "C3": "skill.aigis.defense",
+      "C4": "skill.aigis.a-small-wish",
+      "C5": "skill.aigis.decomposition",
+      "Exalt": "skill.aigis.eye-of-eternity",
+      "OverExalt": "skill.aigis.gaze-out-of-the-aeons",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.aigis.madness-omen",
+      "T3": "talent.aigis.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.aigis.the-witness",
+      "E2": "enlighten.aigis.sugary-aroma",
+      "E3": "enlighten.aigis.nightborne-wings",
+      "AbsoluteAxiom": "enlighten.aigis.crystallized-tear"
+    }
+  },
+  {
+    "awakenerId": 4,
+    "cards": {
+      "C1": "skill.alva.outstanding-veteran",
+      "C2": "skill.alva.strike",
+      "C3": "skill.alva.defense",
+      "C4": "skill.alva.combat-stance",
+      "C5": "skill.alva.precision-slash",
+      "Exalt": "skill.alva.endless-justice",
+      "OverExalt": "skill.alva.justice-and-truth",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.alva.dynamic-vision",
+      "T2": "talent.alva.madness-omen",
+      "T3": "talent.alva.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.alva.unyielding-bastion",
+      "E2": "enlighten.alva.relentless-fighter",
+      "E3": "enlighten.alva.all-for-justice"
+    }
+  },
+  {
+    "awakenerId": 5,
+    "cards": {
+      "C1": "skill.aurita.self-proliferation",
+      "C2": "skill.aurita.strike",
+      "C3": "skill.aurita.defense",
+      "C4": "skill.aurita.gland-division",
+      "C5": "skill.aurita.power-of-friendship",
+      "Exalt": "skill.aurita.clamorous-ocean",
+      "OverExalt": "skill.aurita.jellyfish-congregation",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.aurita.happy-little-fairy",
+      "T2": "talent.aurita.madness-omen",
+      "T3": "talent.aurita.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.aurita.bubbling-journey",
+      "E2": "enlighten.aurita.slick-slide-adventure",
+      "E3": "enlighten.aurita.lets-all-have-fun-together",
+      "AbsoluteAxiom": "enlighten.aurita.sparkling-friendship"
+    }
+  },
+  {
+    "awakenerId": 6,
+    "cards": {
+      "C1": "skill.caecus.metamorphosed-body",
+      "C2": "skill.caecus.strike",
+      "C3": "skill.caecus.defense",
+      "C4": "skill.caecus.protective-scales",
+      "C5": "skill.caecus.shattered-halberd",
+      "Exalt": "skill.caecus.bloodline-of-heresy",
+      "OverExalt": "skill.caecus.unbending-resolve",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.caecus.rebellious-spikes",
+      "T2": "talent.caecus.madness-omen",
+      "T3": "talent.caecus.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.caecus.bloodline-awaken",
+      "E2": "enlighten.caecus.spike-amalgamation",
+      "E3": "enlighten.caecus.outcasts-anguish"
+    }
+  },
+  {
+    "awakenerId": 7,
+    "cards": {
+      "C1": "skill.casiah.opening-act",
+      "C2": "skill.casiah.strike",
+      "C3": "skill.casiah.defense",
+      "C4": "skill.casiah.telekinesis",
+      "C5": "skill.casiah.poof",
+      "Exalt": "skill.casiah.magic-carnival",
+      "OverExalt": "skill.casiah.unfettered-mirth",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.casiah.master-of-magic",
+      "T2": "talent.casiah.madness-omen",
+      "T3": "talent.casiah.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.casiah.minds-whisper",
+      "E2": "enlighten.casiah.veil-of-illusion",
+      "E3": "enlighten.casiah.legendary-copycat"
+    }
+  },
+  {
+    "awakenerId": 8,
+    "cards": {
+      "C1": "skill.castor.skybound-oath",
+      "C2": "skill.castor.strike",
+      "C3": "skill.castor.defense",
+      "C4": "skill.castor.umbral-flight",
+      "C5": "skill.castor.stygian-wings",
+      "Exalt": "skill.castor.dirge-of-the-unbroken",
+      "OverExalt": "skill.castor.over-the-sea-of-thorns",
+      "promotedExtras": ["derived.castor.onyx-plume"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.castor.cleansing-feathers",
+      "T2": "talent.castor.madness-omen",
+      "T3": "talent.castor.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.castor.caged-underground",
+      "E2": "enlighten.castor.unyielding-will",
+      "E3": "enlighten.castor.sky-eclipsing-wings"
+    }
+  },
+  {
+    "awakenerId": 9,
+    "cards": {
+      "C1": "skill.celeste.power-of-blessing",
+      "C2": "skill.celeste.strike",
+      "C3": "skill.celeste.defense",
+      "C4": "skill.celeste.tintless-dream",
+      "C5": "skill.celeste.everlasting-phantasm",
+      "Exalt": "skill.celeste.undying-bird-of-paradise",
+      "OverExalt": "skill.celeste.divine-vigil",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.celeste.voyage-horn",
+      "T2": "talent.celeste.madness-omen",
+      "T3": "talent.celeste.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.celeste.solitary-mast",
+      "E2": "enlighten.celeste.ancestral-beacon",
+      "E3": "enlighten.celeste.beyond-joy-and-sorrow"
+    }
+  },
+  {
+    "awakenerId": 10,
+    "cards": {
+      "C1": "skill.clementine.call-of-shaggai",
+      "C2": "skill.clementine.strike",
+      "C3": "skill.clementine.defense",
+      "C4": "skill.clementine.pain-extraction",
+      "C5": "skill.clementine.soulsalve",
+      "Exalt": "skill.clementine.lifeform-reconstruction",
+      "OverExalt": "skill.clementine.subconscious-corrosion",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.clementine.hive-resonance",
+      "T2": "talent.clementine.madness-omen",
+      "T3": "talent.clementine.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.clementine.knocking-on-minds-portal",
+      "E2": "enlighten.clementine.soul-healing-journey",
+      "E3": "enlighten.clementine.you-will-recover"
+    }
+  },
+  {
+    "awakenerId": 11,
+    "cards": {
+      "C1": "skill.corposant.sunken-in-the-profound",
+      "C2": "skill.corposant.strike",
+      "C3": "skill.corposant.defense",
+      "C4": "skill.corposant.lightning-retribution",
+      "C5": "skill.corposant.ominous-semaphore",
+      "Exalt": "skill.corposant.to-sail-the-sundered-tides",
+      "OverExalt": "skill.corposant.face-death-in-fiery-resolve",
+      "promotedExtras": ["derived.corposant.pilot"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.corposant.cinders",
+      "T2": "talent.corposant.madness-omen",
+      "T3": "talent.corposant.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.corposant.lodestars-whisper",
+      "E2": "enlighten.corposant.sextants-calculation",
+      "E3": "enlighten.corposant.willing-sacrifice"
+    }
+  },
+  {
+    "awakenerId": 12,
+    "cards": {
+      "C1": "skill.daffodil.dimensional-projection",
+      "C2": "skill.daffodil.strike",
+      "C3": "skill.daffodil.defense",
+      "C4": "skill.daffodil.skull-reaver",
+      "C5": "skill.daffodil.heterogeneous-tides",
+      "Exalt": "skill.daffodil.sea-of-primordial-essence",
+      "OverExalt": "skill.daffodil.phantasmal-haze",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.daffodil.madness-omen",
+      "T3": "talent.daffodil.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.daffodil.infinite-passage",
+      "E2": "enlighten.daffodil.mist-of-avarice",
+      "E3": "enlighten.daffodil.essence-sediment"
+    }
+  },
+  {
+    "awakenerId": 13,
+    "cards": {
+      "C1": "skill.doll.flesh-detached",
+      "C2": "skill.doll.strike",
+      "C3": "skill.doll.defense",
+      "C4": "skill.doll.outer-surgery",
+      "C5": "skill.doll.equivalent-exchange",
+      "Exalt": "skill.doll.rationality-truth-and-reality",
+      "OverExalt": "skill.doll.psyche-dissection",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.doll.gnosis-deconstruction",
+      "T2": "talent.doll.madness-omen",
+      "T3": "talent.doll.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.doll.pure-rationality",
+      "E2": "enlighten.doll.beyond-death",
+      "E3": "enlighten.doll.flesh-transcended",
+      "AbsoluteAxiom": "enlighten.doll.ego-restructured"
+    }
+  },
+  {
+    "awakenerId": 18,
+    "cards": {
+      "C1": "skill.doll-inferno.soulblight",
+      "C2": "skill.doll-inferno.strike",
+      "C3": "skill.doll-inferno.defense",
+      "C4": "skill.doll-inferno.self-destruct",
+      "C5": "skill.doll-inferno.fates-descent",
+      "Exalt": "skill.doll-inferno.terminal-of-truth-and-abyss",
+      "OverExalt": "skill.doll-inferno.madness-infection",
+      "promotedExtras": ["derived.doll-inferno.illusions-end"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.doll-inferno.path-of-annihilation",
+      "T2": "talent.doll-inferno.madness-omen",
+      "T3": "talent.doll-inferno.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.doll-inferno.borealis-visitor",
+      "E2": "enlighten.doll-inferno.resonant-mycelium",
+      "E3": "enlighten.doll-inferno.envoy-of-extinction"
+    }
+  },
+  {
+    "awakenerId": 14,
+    "cards": {
+      "C1": "skill.doresain.crimson-invite",
+      "C2": "skill.doresain.strike",
+      "C3": "skill.doresain.defense",
+      "C4": "skill.doresain.dirge-of-the-fallen",
+      "C5": "skill.doresain.netherward-path",
+      "Exalt": "skill.doresain.necrotic-gala",
+      "OverExalt": "skill.doresain.pandemonium-glut",
+      "promotedExtras": ["derived.doresain.evernights-revel"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.doresain.casket-harvest",
+      "T2": "talent.doresain.festering-grace",
+      "T3": "talent.doresain.madness-omen",
+      "T4": "talent.doresain.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.doresain.feasts-overture",
+      "E2": "enlighten.doresain.hollow-whispers",
+      "E3": "enlighten.doresain.evernights-revel"
+    }
+  },
+  {
+    "awakenerId": 15,
+    "cards": {
+      "C1": "skill.erica.parameter-fitting",
+      "C2": "skill.erica.strike",
+      "C3": "skill.erica.defense",
+      "C4": "skill.erica.unleash-mecha",
+      "C5": "skill.erica.function-overload",
+      "Exalt": "skill.erica.electromagnetic-blast",
+      "OverExalt": "skill.erica.multiple-calculations",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.erica.external-power-source",
+      "T2": "talent.erica.madness-omen",
+      "T3": "talent.erica.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.erica.auto-rectification",
+      "E2": "enlighten.erica.force-circuit",
+      "E3": "enlighten.erica.system-reboot",
+      "AbsoluteAxiom": "enlighten.erica.final-decree"
+    }
+  },
+  {
+    "awakenerId": 16,
+    "cards": {
+      "C1": "skill.faint.boundless-starlight",
+      "C2": "skill.faint.strike",
+      "C3": "skill.faint.defense",
+      "C4": "skill.faint.nutrient-absorption",
+      "C5": "skill.faint.sprouting-bud",
+      "Exalt": "skill.faint.cradle-of-stars",
+      "OverExalt": "skill.faint.blossom-from-cocoon",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.faint.secondary-swaddle",
+      "T2": "talent.faint.madness-omen",
+      "T3": "talent.faint.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.faint.binary-stars",
+      "E2": "enlighten.faint.withering-hymn",
+      "E3": "enlighten.faint.cradle-of-love"
+    }
+  },
+  {
+    "awakenerId": 17,
+    "cards": {
+      "C1": "skill.faros.abyssal-obsession",
+      "C2": "skill.faros.strike",
+      "C3": "skill.faros.defense",
+      "C4": "skill.faros.ocean-of-elation",
+      "C5": "skill.faros.deep-currents",
+      "Exalt": "skill.faros.lost-city-of-lemuria",
+      "OverExalt": "skill.faros.light-of-the-lost",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.faros.homesick",
+      "T2": "talent.faros.madness-omen",
+      "T3": "talent.faros.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.faros.jagged-shore",
+      "E2": "enlighten.faros.congealed-ambergris",
+      "E3": "enlighten.faros.flickering-candle"
+    }
+  },
+  {
+    "awakenerId": 21,
+    "cards": {
+      "C1": "skill.goliath.preemptive-revenge",
+      "C2": "skill.goliath.strike",
+      "C3": "skill.goliath.defense",
+      "C4": "skill.goliath.decapitation-damage",
+      "C5": "skill.goliath.law-of-the-strongest",
+      "Exalt": "skill.goliath.abyssal-depths-power",
+      "OverExalt": "skill.goliath.giants-grip",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.goliath.madness-omen",
+      "T3": "talent.goliath.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.goliath.death-is-rebirth",
+      "E2": "enlighten.goliath.rule-by-the-strongest",
+      "E3": "enlighten.goliath.boundless-ambition"
+    }
+  },
+  {
+    "awakenerId": 22,
+    "cards": {
+      "C1": "skill.hameln.laudable-masterpiece",
+      "C2": "skill.hameln.strike",
+      "C3": "skill.hameln.defense",
+      "C4": "skill.hameln.soul-overture",
+      "C5": "skill.hameln.memory-rondo",
+      "Exalt": "skill.hameln.primal-chord",
+      "OverExalt": "skill.hameln.the-final-sonata",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.hameln.madness-omen",
+      "T3": "talent.hameln.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.hameln.mind-concerto",
+      "E2": "enlighten.hameln.oneiric-waltz",
+      "E3": "enlighten.hameln.moonlit-rhapsody"
+    }
+  },
+  {
+    "awakenerId": 23,
+    "cards": {
+      "C1": "skill.helot.vengeance-upon-thee",
+      "C2": "skill.helot.strike",
+      "C3": "skill.helot.defense",
+      "C4": "skill.helot.shattering-strike",
+      "C5": "skill.helot.lasting-loathe",
+      "Exalt": "skill.helot.surviving-impasse",
+      "OverExalt": "skill.helot.blood-for-blood",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.helot.pain-sigil",
+      "T2": "talent.helot.madness-omen",
+      "T3": "talent.helot.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.helot.regents-heir",
+      "E2": "enlighten.helot.sacred-half",
+      "E3": "enlighten.helot.the-chainbreaker"
+    }
+  },
+  {
+    "awakenerId": 19,
+    "cards": {
+      "C1": "skill.helot-catena.reapers-declaration",
+      "C2": "skill.helot-catena.strike",
+      "C3": "skill.helot-catena.defense",
+      "C4": "skill.helot-catena.hatred-unleashed",
+      "C5": "skill.helot-catena.crimson-shackles",
+      "Exalt": "skill.helot-catena.sanguine-fetters",
+      "OverExalt": "skill.helot-catena.fettered-malice",
+      "promotedExtras": ["derived.helot-catena.bloodthirsty-flail"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.helot-catena.madness-omen",
+      "T3": "talent.helot-catena.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.helot-catena.endless-slaughter",
+      "E2": "enlighten.helot-catena.vengeance-unchained",
+      "E3": "enlighten.helot-catena.remnants-requiem"
+    }
+  },
+  {
+    "awakenerId": 24,
+    "cards": {
+      "C1": "skill.horla.prelude-verse",
+      "C2": "skill.horla.snarl-psalm",
+      "C3": "skill.horla.elegy-psalm",
+      "C4": "skill.horla.carol-psalm",
+      "C5": "skill.horla.dirge-psalm",
+      "Exalt": "skill.horla.resplendent-chapters",
+      "OverExalt": "skill.horla.ink-stained-sonnet",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.horla.writing-with-feeling",
+      "T2": "talent.horla.madness-omen",
+      "T3": "talent.horla.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.horla.emberbound",
+      "E2": "enlighten.horla.chamber-of-shadows",
+      "E3": "enlighten.horla.blossoms-and-verses-reunited"
+    }
+  },
+  {
+    "awakenerId": 25,
+    "cards": {
+      "C1": "skill.jenkins.spatial-fold",
+      "C2": "skill.jenkins.strike",
+      "C3": "skill.jenkins.defense",
+      "C4": "skill.jenkins.mice-assemble",
+      "C5": "skill.jenkins.get-em-brown",
+      "Exalt": "skill.jenkins.mistborn-street-urchin",
+      "OverExalt": "skill.jenkins.gotcha",
+      "promotedExtras": ["derived.jenkins.swarm-impact"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.jenkins.a-common-enemy",
+      "T2": "talent.jenkins.madness-omen",
+      "T3": "talent.jenkins.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.jenkins.red-ribbon",
+      "E2": "enlighten.jenkins.golden-butterflys-memories",
+      "E3": "enlighten.jenkins.obsidian-dissolution"
+    }
+  },
+  {
+    "awakenerId": 26,
+    "cards": {
+      "C1": "skill.karen.dance-of-the-gibbous-moon",
+      "C2": "skill.karen.strike",
+      "C3": "skill.karen.defense",
+      "C4": "skill.karen.toad-stew",
+      "C5": "skill.karen.silent-fealty",
+      "Exalt": "skill.karen.heres-your-meal",
+      "OverExalt": "skill.karen.bounteous-feast",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.karen.madness-omen",
+      "T3": "talent.karen.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.karen.maids-decree",
+      "E2": "enlighten.karen.creamy-frosting",
+      "E3": "enlighten.karen.fermented-recipes"
+    }
+  },
+  {
+    "awakenerId": 27,
+    "cards": {
+      "C1": "skill.kathigu-ra.karmic-embers",
+      "C2": "skill.kathigu-ra.strike",
+      "C3": "skill.kathigu-ra.defense",
+      "C4": "skill.kathigu-ra.last-stand-salvo",
+      "C5": "skill.kathigu-ra.solarflare",
+      "Exalt": "skill.kathigu-ra.world-ending-inferno",
+      "OverExalt": "skill.kathigu-ra.all-melting-truth",
+      "promotedExtras": ["derived.kathigu-ra.hyperflare"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.kathigu-ra.the-living-flame",
+      "T2": "talent.kathigu-ra.madness-omen",
+      "T3": "talent.kathigu-ra.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.kathigu-ra.everburning-flame",
+      "E2": "enlighten.kathigu-ra.astral-meltdown",
+      "E3": "enlighten.kathigu-ra.endless-purgatory"
+    }
+  },
+  {
+    "awakenerId": 28,
+    "cards": {
+      "C1": "skill.leigh.sanguivore",
+      "C2": "skill.leigh.strike",
+      "C3": "skill.leigh.defense",
+      "C4": "skill.leigh.pain-of-unfulfilled-desires",
+      "C5": "skill.leigh.pain-and-pleasure",
+      "Exalt": "skill.leigh.flatterers-embrace",
+      "OverExalt": "skill.leigh.pallid-bloodied-kiss",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.leigh.madness-omen",
+      "T3": "talent.leigh.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.leigh.newborn-sanguivore",
+      "E2": "enlighten.leigh.step-into-the-sunlight",
+      "E3": "enlighten.leigh.basement-journal"
+    }
+  },
+  {
+    "awakenerId": 29,
+    "cards": {
+      "C1": "skill.lily.slime-convergence",
+      "C2": "skill.lily.strike",
+      "C3": "skill.lily.defense",
+      "C4": "skill.lily.strike-to-protect",
+      "C5": "skill.lily.forbidden-swamp",
+      "Exalt": "skill.lily.undying-flower-upon-slime",
+      "OverExalt": "skill.lily.at-your-behest",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.lily.surging-darkness",
+      "T2": "talent.lily.madness-omen",
+      "T3": "talent.lily.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.lily.blackened-nourishment",
+      "E2": "enlighten.lily.viscous-devour",
+      "E3": "enlighten.lily.never-forget"
+    }
+  },
+  {
+    "awakenerId": 30,
+    "cards": {
+      "C1": "skill.liz.emerald-reflection",
+      "C2": "skill.liz.strike",
+      "C3": "skill.liz.defense",
+      "C4": "skill.liz.moth-trapping-fire",
+      "C5": "skill.liz.green-flames",
+      "Exalt": "skill.liz.dance-to-destruction",
+      "OverExalt": "skill.liz.omens-descent",
+      "promotedExtras": ["derived.liz.corrupted-flames"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.liz.madness-omen",
+      "T3": "talent.liz.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.liz.verdant-spark",
+      "E2": "enlighten.liz.eternal-flames",
+      "E3": "enlighten.liz.last-dawnlight"
+    }
+  },
+  {
+    "awakenerId": 31,
+    "cards": {
+      "C1": "skill.lotan.battle-thirst",
+      "C2": "skill.lotan.strike",
+      "C3": "skill.lotan.defense",
+      "C4": "skill.lotan.blade-of-defiance",
+      "C5": "skill.lotan.tides-of-hubris",
+      "Exalt": "skill.lotan.beast-of-chaos",
+      "OverExalt": "skill.lotan.until-the-planets-end",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.lotan.madness-omen",
+      "T3": "talent.lotan.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.lotan.swords-unleashed",
+      "E2": "enlighten.lotan.surging-warlust",
+      "E3": "enlighten.lotan.timeless-solitude",
+      "AbsoluteAxiom": "enlighten.lotan.primal-leviathan"
+    }
+  },
+  {
+    "awakenerId": 32,
+    "cards": {
+      "C1": "skill.miryam.testament-of-faith",
+      "C2": "skill.miryam.strike",
+      "C3": "skill.miryam.defense",
+      "C4": "skill.miryam.exalted-pyre",
+      "C5": "skill.miryam.the-chosen-one",
+      "Exalt": "skill.miryam.pray-to-the-abyss",
+      "OverExalt": "skill.miryam.unacquainted-pain",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.miryam.undying-piety",
+      "T2": "talent.miryam.madness-omen",
+      "T3": "talent.miryam.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.miryam.solitary-pilgrimage",
+      "E2": "enlighten.miryam.the-ultimate-descent",
+      "E3": "enlighten.miryam.vanitys-collapse"
+    }
+  },
+  {
+    "awakenerId": 33,
+    "cards": {
+      "C1": "skill.mouchette.mist-realm-vestige",
+      "C2": "skill.mouchette.strike",
+      "C3": "skill.mouchette.defense",
+      "C4": "skill.mouchette.mortal-blast",
+      "C5": "skill.mouchette.shining-crush",
+      "Exalt": "skill.mouchette.shining-tornado",
+      "OverExalt": "skill.mouchette.tornado-of-annihilation",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.mouchette.dramatic-encounter",
+      "T2": "talent.mouchette.madness-omen",
+      "T3": "talent.mouchette.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.mouchette.mist-realm-traveler",
+      "E2": "enlighten.mouchette.irretrievable-past",
+      "E3": "enlighten.mouchette.cleave-out-a-future"
+    }
+  },
+  {
+    "awakenerId": 34,
+    "cards": {
+      "C1": "skill.murphy.made-into-being",
+      "C2": "skill.murphy.strike",
+      "C3": "skill.murphy.defense",
+      "C4": "skill.murphy.vortex-reversed",
+      "C5": "skill.murphy.divine-maidens-birth",
+      "Exalt": "skill.murphy.delusions-heir",
+      "OverExalt": "skill.murphy.oath-of-liberation",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.murphy.madness-omen",
+      "T3": "talent.murphy.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.murphy.silent-defiance",
+      "E2": "enlighten.murphy.inextricable-bloodline",
+      "E3": "enlighten.murphy.emancipating-touch"
+    }
+  },
+  {
+    "awakenerId": 35,
+    "cards": {
+      "C1": "skill.murphy-fauxborn.tidal-sacrament",
+      "C2": "skill.murphy-fauxborn.strike",
+      "C3": "skill.murphy-fauxborn.defense",
+      "C4": "skill.murphy-fauxborn.waltz-of-lemuria",
+      "C5": "skill.murphy-fauxborn.abyss-hymns",
+      "Exalt": "skill.murphy-fauxborn.princess-of-delusions",
+      "OverExalt": "skill.murphy-fauxborn.aetherial-loop",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.murphy-fauxborn.divine-realms-order",
+      "T2": "talent.murphy-fauxborn.madness-omen",
+      "T3": "talent.murphy-fauxborn.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.murphy-fauxborn.kneelers-supplication",
+      "E2": "enlighten.murphy-fauxborn.inverted-pregnancy",
+      "E3": "enlighten.murphy-fauxborn.profane-apocalypse"
+    }
+  },
+  {
+    "awakenerId": 36,
+    "cards": {
+      "C1": "skill.nautila.maintenance-expert",
+      "C2": "skill.nautila.strike",
+      "C3": "skill.nautila.defense",
+      "C4": "skill.nautila.no-trespassing",
+      "C5": "skill.nautila.short-term-memory",
+      "Exalt": "skill.nautila.ready-and-set",
+      "OverExalt": "skill.nautila.vroom-vroom",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.nautila.daily-maintenance",
+      "T2": "talent.nautila.madness-omen",
+      "T3": "talent.nautila.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.nautila.blank-recollection",
+      "E2": "enlighten.nautila.absent-cogwheel",
+      "E3": "enlighten.nautila.forgotten-dreams"
+    }
+  },
+  {
+    "awakenerId": 37,
+    "cards": {
+      "C1": "skill.nymphaea.drowning-in-sorrow",
+      "C2": "skill.nymphaea.strike",
+      "C3": "skill.nymphaea.defense",
+      "C4": "skill.nymphaea.midnight-tide",
+      "C5": "skill.nymphaea.knell-of-death",
+      "Exalt": "skill.nymphaea.passage-of-the-ego",
+      "OverExalt": "skill.nymphaea.abyssal-funeral-rites",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.nymphaea.immerse",
+      "T2": "talent.nymphaea.madness-omen",
+      "T3": "talent.nymphaea.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.nymphaea.oceans-vessel",
+      "E2": "enlighten.nymphaea.silent-permeation",
+      "E3": "enlighten.nymphaea.frostbloom-tide"
+    }
+  },
+  {
+    "awakenerId": 38,
+    "cards": {
+      "C1": "skill.ogier.knights-zeal",
+      "C2": "skill.ogier.strike",
+      "C3": "skill.ogier.defense",
+      "C4": "skill.ogier.unstable-barrier",
+      "C5": "skill.ogier.piercing-strike",
+      "Exalt": "skill.ogier.seven-arts-and-virtues",
+      "OverExalt": "skill.ogier.resolute-devotion",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.ogier.formless-refinement",
+      "T2": "talent.ogier.madness-omen",
+      "T3": "talent.ogier.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.ogier.honesty-unto-thyself",
+      "E2": "enlighten.ogier.mercy-for-the-meek",
+      "E3": "enlighten.ogier.sacrifice-for-justice",
+      "AbsoluteAxiom": "enlighten.ogier.deathless-loyalty"
+    }
+  },
+  {
+    "awakenerId": 39,
+    "cards": {
+      "C1": "skill.pandia.give-and-take",
+      "C2": "skill.pandia.strike",
+      "C3": "skill.pandia.defense",
+      "C4": "skill.pandia.whip-of-madness",
+      "C5": "skill.pandia.wax-hot-desire",
+      "Exalt": "skill.pandia.honey-colored-tragedy",
+      "OverExalt": "skill.pandia.sweet-surrender",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.pandia.punishment-time",
+      "T2": "talent.pandia.madness-omen",
+      "T3": "talent.pandia.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.pandia.embrace-the-pain",
+      "E2": "enlighten.pandia.blazing-desire",
+      "E3": "enlighten.pandia.youre-being-naughty"
+    }
+  },
+  {
+    "awakenerId": 40,
+    "cards": {
+      "C1": "skill.pickman.morgue-studio",
+      "C2": "skill.pickman.strike",
+      "C3": "skill.pickman.defense",
+      "C4": "skill.pickman.chromaphage",
+      "C5": "skill.pickman.lifelike-rendition",
+      "Exalt": "skill.pickman.truth-in-delusion",
+      "OverExalt": "skill.pickman.art-is-madness",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.pickman.painters-eye",
+      "T2": "talent.pickman.madness-omen",
+      "T3": "talent.pickman.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.pickman.cross-hatched-rendering",
+      "E2": "enlighten.pickman.centered-composition",
+      "E3": "enlighten.pickman.invocation-of-the-muse"
+    }
+  },
+  {
+    "awakenerId": 41,
+    "cards": {
+      "C1": "skill.pollux.path-of-ablution",
+      "C2": "skill.pollux.strike",
+      "C3": "skill.pollux.defense",
+      "C4": "skill.pollux.soulsearing-light",
+      "C5": "skill.pollux.cleansing-judgement",
+      "Exalt": "skill.pollux.sinless-verdict",
+      "OverExalt": "skill.pollux.the-nightbreaker",
+      "promotedExtras": ["derived.pollux.sacred-heart"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.pollux.atonement-by-pain",
+      "T2": "talent.pollux.madness-omen",
+      "T3": "talent.pollux.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.pollux.lightbearers-herald",
+      "E2": "enlighten.pollux.flames-of-salvation",
+      "E3": "enlighten.pollux.divine-revelation"
+    }
+  },
+  {
+    "awakenerId": 42,
+    "cards": {
+      "C1": "skill.ramona.first-doctrine",
+      "C2": "skill.ramona.strike",
+      "C3": "skill.ramona.defense",
+      "C4": "skill.ramona.queens-sword",
+      "C5": "skill.ramona.assault-thesis",
+      "Exalt": "skill.ramona.mundus-decree",
+      "OverExalt": "skill.ramona.labyrinth-of-thought",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.ramona.silverheart-resonance",
+      "T2": "talent.ramona.madness-omen",
+      "T3": "talent.ramona.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.ramona.innocent-departure",
+      "E2": "enlighten.ramona.omen-of-unknowns",
+      "E3": "enlighten.ramona.precious-ties",
+      "AbsoluteAxiom": "enlighten.ramona.sublime-tempering"
+    }
+  },
+  {
+    "awakenerId": 20,
+    "cards": {
+      "C1": "skill.ramona-timeworn.entropy-undone",
+      "C2": "skill.ramona-timeworn.strike",
+      "C3": "skill.ramona-timeworn.defense",
+      "C4": "skill.ramona-timeworn.predetermined-strike",
+      "C5": "skill.ramona-timeworn.sight-unbound",
+      "Exalt": "skill.ramona-timeworn.paradox-converged",
+      "OverExalt": "skill.ramona-timeworn.reach-into-yesterday",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.ramona-timeworn.silverheart-resonance",
+      "T2": "talent.ramona-timeworn.madness-omen",
+      "T3": "talent.ramona-timeworn.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.ramona-timeworn.penrose-pilgrim",
+      "E2": "enlighten.ramona-timeworn.klein-bottle-voyager",
+      "E3": "enlighten.ramona-timeworn.mobius-captive",
+      "AbsoluteAxiom": "enlighten.ramona-timeworn.infinite-singularity"
+    }
+  },
+  {
+    "awakenerId": 43,
+    "cards": {
+      "C1": "skill.ryker.exceptional-luck",
+      "C2": "skill.ryker.strike",
+      "C3": "skill.ryker.defense",
+      "C4": "skill.ryker.unexpected-gain",
+      "C5": "skill.ryker.showdown",
+      "Exalt": "skill.ryker.all-in",
+      "OverExalt": "skill.ryker.jackpot",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.ryker.winner-takes-all",
+      "T2": "talent.ryker.madness-omen",
+      "T3": "talent.ryker.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.ryker.fortunes-boon",
+      "E2": "enlighten.ryker.honest-return",
+      "E3": "enlighten.ryker.certain-gain"
+    }
+  },
+  {
+    "awakenerId": 44,
+    "cards": {
+      "C1": "skill.salvador.benediction",
+      "C2": "skill.salvador.strike",
+      "C3": "skill.salvador.defense",
+      "C4": "skill.salvador.blessed-are-the-bones",
+      "C5": "skill.salvador.end-of-suffering",
+      "Exalt": "skill.salvador.he-who-protects",
+      "OverExalt": "skill.salvador.rite-of-creation",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.salvador.shepard-of-the-souls",
+      "T2": "talent.salvador.origin-of-all-life",
+      "T3": "talent.salvador.madness-omen",
+      "T4": "talent.salvador.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.salvador.divine-proxy",
+      "E2": "enlighten.salvador.book-of-genesis",
+      "E3": "enlighten.salvador.salvations-hand"
+    }
+  },
+  {
+    "awakenerId": 45,
+    "cards": {
+      "C1": "skill.sanga.realm-of-oblivion",
+      "C2": "skill.sanga.strike",
+      "C3": "skill.sanga.defense",
+      "C4": "skill.sanga.beautys-mercy",
+      "C5": "skill.sanga.opus-of-isolation",
+      "Exalt": "skill.sanga.the-lost-art",
+      "OverExalt": "skill.sanga.the-sea-of-corals",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.sanga.enlightenment-of-death",
+      "T2": "talent.sanga.madness-omen",
+      "T3": "talent.sanga.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.sanga.melodic-sculpting",
+      "E2": "enlighten.sanga.kneel-before-beauty",
+      "E3": "enlighten.sanga.artistic-dionysia"
+    }
+  },
+  {
+    "awakenerId": 46,
+    "cards": {
+      "C1": "skill.sorel.host-ladys-privilege",
+      "C2": "skill.sorel.strike",
+      "C3": "skill.sorel.defense",
+      "C4": "skill.sorel.elegance-of-rose",
+      "C5": "skill.sorel.diamond-in-the-rough",
+      "Exalt": "skill.sorel.carousel-of-ambition",
+      "OverExalt": "skill.sorel.roses-infinite-desire",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.sorel.guardian-of-vanity",
+      "T2": "talent.sorel.madness-omen",
+      "T3": "talent.sorel.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.sorel.flowing-rill",
+      "E2": "enlighten.sorel.vintage-nectar",
+      "E3": "enlighten.sorel.lustrous-pearl"
+    }
+  },
+  {
+    "awakenerId": 47,
+    "cards": {
+      "C1": "skill.tawil.the-silver-key-gate",
+      "C2": "skill.tawil.strike",
+      "C3": "skill.tawil.defense",
+      "C4": "skill.tawil.omniscient-verity",
+      "C5": "skill.tawil.pinions-of-time",
+      "Exalt": "skill.tawil.omnifex-convergence",
+      "OverExalt": "skill.tawil.infinite-radiant-brilliance",
+      "promotedExtras": ["derived.tawil.twin-wings", "derived.tawil.four-wings", "derived.tawil.six-wings"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.tawil.madness-omen",
+      "T3": "talent.tawil.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.tawil.boundless-sagacity",
+      "E2": "enlighten.tawil.omniscient-and-omnipotent",
+      "E3": "enlighten.tawil.nonexistent-existence"
+    }
+  },
+  {
+    "awakenerId": 48,
+    "cards": {
+      "C1": "skill.thais.ad-matrem-vocatus",
+      "C2": "skill.thais.strike",
+      "C3": "skill.thais.defense",
+      "C4": "skill.thais.ancient-caress",
+      "C5": "skill.thais.sacred-bloods-instinct",
+      "Exalt": "skill.thais.ritual-of-abundance",
+      "OverExalt": "skill.thais.sacred-relics-perpetuity",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.thais.madness-omen",
+      "T3": "talent.thais.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.thais.forests-embrace",
+      "E2": "enlighten.thais.seed-of-chaos",
+      "E3": "enlighten.thais.everlasting-cycle"
+    }
+  },
+  {
+    "awakenerId": 49,
+    "cards": {
+      "C1": "skill.tinct.voices-from-beyond",
+      "C2": "skill.tinct.strike",
+      "C3": "skill.tinct.defense",
+      "C4": "skill.tinct.requiem",
+      "C5": "skill.tinct.distant-melody",
+      "Exalt": "skill.tinct.starlight-aurora",
+      "OverExalt": "skill.tinct.cosmic-symphony",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.tinct.planetary-traveler",
+      "T2": "talent.tinct.madness-omen",
+      "T3": "talent.tinct.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.tinct.stellar-reverberation",
+      "E2": "enlighten.tinct.midnight-elegy",
+      "E3": "enlighten.tinct.falling-skyward"
+    }
+  },
+  {
+    "awakenerId": 50,
+    "cards": {
+      "C1": "skill.tulu.immortal-majesty",
+      "C2": "skill.tulu.strike",
+      "C3": "skill.tulu.defense",
+      "C4": "skill.tulu.abyss-order",
+      "C5": "skill.tulu.when-lemuria-returns",
+      "Exalt": "skill.tulu.when-the-stars-are-right",
+      "OverExalt": "skill.tulu.the-promised-day",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.tulu.divine-kings-power",
+      "T2": "talent.tulu.madness-omen",
+      "T3": "talent.tulu.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.tulu.nocturnal-murmurs",
+      "E2": "enlighten.tulu.touch-of-revival",
+      "E3": "enlighten.tulu.the-stars-are-right"
+    }
+  },
+  {
+    "awakenerId": 51,
+    "cards": {
+      "C1": "skill.uvhash.vermilion-rite",
+      "C2": "skill.uvhash.strike",
+      "C3": "skill.uvhash.defense",
+      "C4": "skill.uvhash.boil-blood",
+      "C5": "skill.uvhash.screech-blood",
+      "Exalt": "skill.uvhash.hymn-of-blood-and-sand",
+      "OverExalt": "skill.uvhash.gift-of-surging-blood",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.uvhash.madness-omen",
+      "T3": "talent.uvhash.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.uvhash.the-gladiator",
+      "E2": "enlighten.uvhash.roman-elegy",
+      "E3": "enlighten.uvhash.sorcerers-end"
+    }
+  },
+  {
+    "awakenerId": 52,
+    "cards": {
+      "C1": "skill.wanda.living-deads-delirium",
+      "C2": "skill.wanda.strike",
+      "C3": "skill.wanda.defense",
+      "C4": "skill.wanda.keeper-of-the-lost",
+      "C5": "skill.wanda.spine-needle-chains",
+      "Exalt": "skill.wanda.necropolis-of-dreams",
+      "OverExalt": "skill.wanda.lost-dreams-guide",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.wanda.revelation",
+      "T2": "talent.wanda.madness-omen",
+      "T3": "talent.wanda.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.wanda.the-revelation",
+      "E2": "enlighten.wanda.lakeborne-dweller",
+      "E3": "enlighten.wanda.venus-and-fur"
+    }
+  },
+  {
+    "awakenerId": 53,
+    "cards": {
+      "C1": "skill.winkle.self-imprisonment",
+      "C2": "skill.winkle.strike",
+      "C3": "skill.winkle.defense",
+      "C4": "skill.winkle.energy-beam",
+      "C5": "skill.winkle.psyche-reforged",
+      "Exalt": "skill.winkle.formless-shifting",
+      "OverExalt": "skill.winkle.space-time-fold",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.winkle.madness-omen",
+      "T3": "talent.winkle.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.winkle.dread-of-the-darkness",
+      "E2": "enlighten.winkle.forsaken-homeland",
+      "E3": "enlighten.winkle.rebirth-through-death"
+    }
+  },
+  {
+    "awakenerId": 54,
+    "cards": {
+      "C1": "skill.xu.lady-of-dreamless-land",
+      "C2": "skill.xu.strike",
+      "C3": "skill.xu.defense",
+      "C4": "skill.xu.bonesick-longing",
+      "C5": "skill.xu.fan-sealed-kiss",
+      "Exalt": "skill.xu.mist-bound-vow",
+      "OverExalt": "skill.xu.karmic-grave",
+      "promotedExtras": []
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T2": "talent.xu.madness-omen",
+      "T3": "talent.xu.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.xu.enmity-of-the-heart",
+      "E2": "enlighten.xu.fan-and-scythe",
+      "E3": "enlighten.xu.nirvanas-kiss"
+    }
+  },
+  {
+    "awakenerId": 55,
+    "cards": {
+      "C1": "skill.vortice.here-it-goes",
+      "C2": "skill.vortice.strike",
+      "C3": "skill.vortice.defense",
+      "C4": "skill.vortice.charge",
+      "C5": "skill.vortice.reload",
+      "Exalt": "skill.vortice.abyssal-vortex-cannon",
+      "OverExalt": "skill.vortice.moskstraumen-boom",
+      "promotedExtras": ["derived.vortice.vortex-shell"]
+    },
+    "talents": {
+      "extraTalentIds": [],
+      "T1": "talent.vortice.lightless-bottom",
+      "T2": "talent.vortice.madness-omen",
+      "T3": "talent.vortice.soulforge-aptitude"
+    },
+    "enlightens": {
+      "E1": "enlighten.vortice.endless-tide",
+      "E2": "enlighten.vortice.roaring-abyss",
+      "E3": "enlighten.vortice.shackled-impulse"
+    }
+  }
+]

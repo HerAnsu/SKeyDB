@@ -1,0 +1,243 @@
+{
+  "id": 13,
+  "key": "doll",
+  "displayName": "doll",
+  "ingameId": "C02",
+  "faction": "Among the Stars",
+  "realm": "CHAOS",
+  "rarity": "SR",
+  "type": "CHORUS",
+  "aliases": ["doll"],
+  "searchTags": ["Discard", "Dispel", "Heal"],
+  "stats": {
+    "CON": "88",
+    "ATK": "72",
+    "DEF": "96",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "4.8",
+    "KeyflareRegen": "22.2",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {"CON": 1.1, "ATK": 0.9, "DEF": 1.2},
+  "substatScaling": {"AliemusRegen": "0.8", "KeyflareRegen": "1.2"},
+  "assets": {"portraitKey": "doll", "iconKey": "doll"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Doll obtains [Energy:Arg1] Aliemus. {Rouse}: When Doll performs Healing, obtain [Block:Arg2] Shield.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "DEF"}
+      },
+      "id": "skill.doll.flesh-detached",
+      "ownerAwakenerId": 13,
+      "kind": "rouse",
+      "displayName": "Flesh Detached",
+      "cost": "1",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Doll obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.doll.strike",
+      "ownerAwakenerId": 13,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Grant [Block:Arg1] Shield. Doll obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.doll.defense",
+      "ownerAwakenerId": 13,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Restore [Heal:Arg1] HP. Inflict all enemies with [Arg2] stacks of {Weakness}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "CON"},
+        "Arg2": {"kind": "fixed", "value": "1"}
+      },
+      "id": "skill.doll.outer-surgery",
+      "ownerAwakenerId": 13,
+      "kind": "command",
+      "displayName": "Outer Surgery",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Heal [Heal:Arg1] HP. Discard all cards in hand. For each card discarded, heal an additional [Heal:Arg2] HP.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "CON"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "CON"}
+      },
+      "id": "skill.doll.equivalent-exchange",
+      "ownerAwakenerId": 13,
+      "kind": "command",
+      "displayName": "Equivalent Exchange",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Dispel self {Vulnerable} state. Restore [Heal:Arg1] HP, and other Awakeners obtain [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["32", "38.4", "44.8", "51.2", "57.6", "64"], "suffix": "%", "stat": "CON"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.doll.rationality-truth-and-reality",
+      "ownerAwakenerId": 13,
+      "kind": "exalt",
+      "displayName": "Rationality, Truth, and Reality",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "At turn start, restore HP equal to [Arg1]% of Doll's CON, lasting for 3 turns. (effect scales with {Rationality, Truth, and Reality} skill level).",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "CON"}},
+      "id": "skill.doll.psyche-dissection",
+      "ownerAwakenerId": 13,
+      "kind": "over_exalt",
+      "displayName": "Psyche Dissection",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 1 Aliemus Regen Level attribute Doll has, increase the HP Recovery effects of {Outer Surgery} and {Equivalent Exchange} by 0.5%.",
+      "descriptionArgs": {},
+      "id": "talent.doll.gnosis-deconstruction",
+      "ownerAwakenerId": 13,
+      "displayName": "Gnosis Deconstruction",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.doll.madness-omen",
+      "ownerAwakenerId": 13,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nDoll's Aliemus Generation and Exalt Healing Effect are increased by [Arg3]%, and for each other {Chaos} Realm Awakener in the team, this effect is further increased by [Arg4]%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]},
+        "Arg4": {"kind": "fixed", "value": "5"}
+      },
+      "id": "talent.doll.soulforge-aptitude",
+      "ownerAwakenerId": 13,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Outer Surgery} increases the number of {Weakness} turns by 1 and increases Heal amount by 33%.",
+      "descriptionArgs": {},
+      "id": "enlighten.doll.pure-rationality",
+      "ownerAwakenerId": 13,
+      "slot": "E1",
+      "displayName": "Pure Rationality",
+      "upgradeTargetIds": ["skill.doll.outer-surgery"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.doll.outer-surgery",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "CON"},
+            "Arg2": {"kind": "fixed", "value": "2"}
+          }
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Equivalent Exchange} increases Base HP recovery and discard HP recovery effects by 20%. For each card discarded, an additional amount of HP is recovered and an equal amount of shield is obtained.",
+      "descriptionArgs": {},
+      "id": "enlighten.doll.beyond-death",
+      "ownerAwakenerId": 13,
+      "slot": "E2",
+      "displayName": "Beyond Death",
+      "upgradeTargetIds": ["skill.doll.equivalent-exchange"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.doll.equivalent-exchange",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Heal [Heal:Arg1] HP. Discard all cards in hand. For each card discarded, heal an additional [Heal:Arg2] HP and gain the same amount of Shield.",
+          "descriptionArgs": {
+            "Arg1": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "CON"},
+            "Arg2": {"kind": "scaling", "values": ["6", "7.2", "8.4", "9.6", "10.8", "12"], "suffix": "%", "stat": "CON"}
+          }
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Rationality, Truth, and Reality} Healing +25%, and the Aliemus Regen also benefits Doll.",
+      "descriptionArgs": {},
+      "id": "enlighten.doll.flesh-transcended",
+      "ownerAwakenerId": 13,
+      "slot": "E3",
+      "displayName": "Flesh Transcended",
+      "upgradeTargetIds": ["skill.doll.rationality-truth-and-reality"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.doll.rationality-truth-and-reality",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Dispel self {Vulnerable} state. Restore [Heal:Arg1] HP, and all Awakeners obtain [Energy:Arg2] Aliemus.",
+          "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "CON"}}
+        }
+      ]
+    },
+    "AbsoluteAxiom": {
+      "descriptionTemplate": "{Rouse} {Flesh Detached} is enhanced: Doll's {Strike} and {Defense} now also generate Shield.",
+      "descriptionArgs": {},
+      "id": "enlighten.doll.ego-restructured",
+      "ownerAwakenerId": 13,
+      "slot": "AbsoluteAxiom",
+      "displayName": "Ego Restructured",
+      "upgradeTargetIds": ["skill.doll.flesh-detached"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.doll.flesh-detached",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Doll gains [Energy:Arg1] Aliemus.{Rouse}: Gain [Block:Arg2] Shield when Doll performs HP Recovery. Doll's {Strike} and {Defense} also triggers Shield gain.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

@@ -1,4 +1,4 @@
-import {Children, useState, type ReactNode} from 'react'
+import {Children, useId, useState, type ReactNode} from 'react'
 
 import {scaledFontStyle} from './font-scale'
 import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
@@ -24,11 +24,6 @@ interface DatabaseTabSubsectionProps {
   children: ReactNode
 }
 
-interface DatabaseTabProseProps {
-  children: ReactNode
-  baseFontPx?: number
-}
-
 export function DatabaseTab({children}: DatabaseTabProps) {
   return <div className='space-y-4'>{children}</div>
 }
@@ -40,12 +35,16 @@ export function DatabaseTabSection({
   children,
 }: DatabaseTabSectionProps) {
   const [collapsed, setCollapsed] = useState(defaultCollapsed)
+  const contentId = useId()
+  const titleId = useId()
 
   return (
     <div className='border border-slate-600/30 bg-slate-900/30'>
       {title ? (
         collapsible ? (
           <button
+            aria-controls={contentId}
+            aria-expanded={!collapsed}
             className={`${DATABASE_SECTION_TITLE_CLASS} flex w-full items-center justify-between`}
             onClick={() => {
               setCollapsed((prev) => !prev)
@@ -53,16 +52,24 @@ export function DatabaseTabSection({
             style={scaledFontStyle(14)}
             type='button'
           >
-            <span>{title}</span>
+            <span id={titleId}>{title}</span>
             <span className='text-[10px] text-slate-400/80'>{collapsed ? '▸ Show' : '▾ Hide'}</span>
           </button>
         ) : (
-          <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
+          <h4 className={DATABASE_SECTION_TITLE_CLASS} id={titleId} style={scaledFontStyle(14)}>
             {title}
           </h4>
         )
       ) : null}
-      {collapsed ? null : <div>{children}</div>}
+      {collapsed ? null : (
+        <div
+          aria-labelledby={title ? titleId : undefined}
+          id={contentId}
+          role={title ? 'region' : undefined}
+        >
+          {children}
+        </div>
+      )}
     </div>
   )
 }
@@ -95,16 +102,6 @@ export function DatabaseTabRow({label, children, showDivider = false}: DatabaseT
         </p>
         <div className='mt-1.5'>{children}</div>
       </div>
-    </div>
-  )
-}
-
-export function DatabaseTabProse({children, baseFontPx = 12}: DatabaseTabProseProps) {
-  return (
-    <div className='px-4 py-2.5'>
-      <p className='leading-relaxed text-slate-400' style={scaledFontStyle(baseFontPx)}>
-        {children}
-      </p>
     </div>
   )
 }

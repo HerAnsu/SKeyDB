@@ -18,8 +18,13 @@ export function DatabaseGrid({awakeners, onSelectAwakener}: DatabaseGridProps) {
 
   return (
     <div className='grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7'>
-      {awakeners.map((awakener) => (
-        <AwakenerGridCard awakener={awakener} key={awakener.id} onSelect={onSelectAwakener} />
+      {awakeners.map((awakener, index) => (
+        <AwakenerGridCard
+          awakener={awakener}
+          index={index}
+          key={awakener.id}
+          onSelect={onSelectAwakener}
+        />
       ))}
     </div>
   )

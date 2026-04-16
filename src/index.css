@@ -89,7 +89,7 @@ button {
 }
 
 p {
-  text-wrap: pretty;
+  text-wrap-style: balance;
 }
 
 @supports (interpolate-size: allow-keywords) {
@@ -117,6 +117,20 @@ a {
 .text-link:focus-visible {
   color: #fde68a;
   text-decoration-color: rgba(253, 230, 138, 0.9);
+}
+
+.database-tinted-token {
+  color: var(--database-token-color) !important;
+  text-decoration-color: var(
+    --database-token-underline-color,
+    var(--database-token-color)
+  ) !important;
+}
+
+.database-tinted-token:hover,
+.database-tinted-token:focus-visible {
+  color: var(--database-token-hover-color) !important;
+  text-decoration-color: var(--database-token-hover-color) !important;
 }
 
 .compact-filter-chip {
@@ -1075,6 +1089,32 @@ a {
   background-color: rgba(148, 163, 184, 0.65);
 }
 
+.database-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.72) transparent;
+  scrollbar-gutter: stable;
+}
+
+.database-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.database-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.database-scrollbar::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+  background-color: rgba(148, 163, 184, 0.72);
+}
+
+.database-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(186, 200, 219, 0.78);
+}
+
 .ownership-pill {
   --ownership-thumb-width: 55%;
   position: relative;
@@ -1326,13 +1366,13 @@ a {
 .export-box-slider::-webkit-slider-thumb {
   appearance: none;
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border: 2px solid rgba(0, 0, 0, 0.92);
   border-radius: 0;
   background: rgba(230, 234, 242, 0.92);
   transform: rotate(45deg);
-  margin-top: -6px;
+  margin-top: -5px;
   box-shadow: none;
   transition:
     background-color 120ms ease,
@@ -1341,8 +1381,8 @@ a {
 }
 
 .export-box-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border: 2px solid rgba(0, 0, 0, 0.92);
   border-radius: 0;
   background: rgba(230, 234, 242, 0.92);
@@ -1363,15 +1403,15 @@ a {
 }
 
 .export-box-slider--compact::-webkit-slider-thumb {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-width: 1px;
-  margin-top: -3px;
+  margin-top: -2px;
 }
 
 .export-box-slider--compact::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-width: 1px;
 }
 

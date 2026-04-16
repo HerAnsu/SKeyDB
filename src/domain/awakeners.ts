@@ -1,6 +1,6 @@
 import {z} from 'zod'
 
-import awakenersLite from '@/data/awakeners-lite.json'
+import awakenersLite from '@/data/awakeners/compiled/awakeners-lite.v2.json'
 
 const liteStatsSchema = z.object({
   CON: z.number(),

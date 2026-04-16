@@ -1,0 +1,222 @@
+{
+  "id": 40,
+  "key": "pickman",
+  "displayName": "pickman",
+  "ingameId": "B12",
+  "faction": "The Fools",
+  "realm": "CARO",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "aliases": ["pickman"],
+  "searchTags": ["Arithmetica", "Draw"],
+  "stats": {
+    "CON": "144",
+    "ATK": "131",
+    "DEF": "144",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "4.8",
+    "KeyflareRegen": "15",
+    "RealmMastery": "12",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {"CON": 1.6, "ATK": 1.45, "DEF": 1.6},
+  "substatScaling": {"AliemusRegen": "0.8", "RealmMastery": "2"},
+  "assets": {"portraitKey": "pickman", "iconKey": "pickman"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Pickman gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 stack of {Fantasia}. For each stack of {Creativity} Pickman gains, {Embryo Fusion} + [Arg2]%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["20", "22", "24", "26", "28", "30"]}
+      },
+      "id": "skill.pickman.morgue-studio",
+      "ownerAwakenerId": 40,
+      "kind": "rouse",
+      "displayName": "Morgue Studio",
+      "cost": "2",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Pickman gains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.pickman.strike",
+      "ownerAwakenerId": 40,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Gain [Block:Arg1] Shield. Pickman gains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.pickman.defense",
+      "ownerAwakenerId": 40,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] points of guaranteed Crit to all enemies [Arg3] times, {Stealing} [Arg2] {STR} from the target each time. For each time {Discover} effect triggered this turn, this card's Arithmetica Cost -1. If {Inspiration!} has been triggered, deal DMG 2 more times.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "% {ATK}"},
+        "Arg3": {"kind": "fixed", "value": "3"},
+        "Arg2": {"kind": "scaling", "values": ["4", "4.8", "5.6", "6.4", "7.2", "8"], "suffix": "% {ATK}"}
+      },
+      "id": "skill.pickman.chromaphage",
+      "ownerAwakenerId": 40,
+      "kind": "command",
+      "displayName": "Chromaphage",
+      "cost": "4",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "{Embryo Fusion} + [Arg1]%. Remove {Void} state. {Discover} 3 {Painted Silver Relics} and choose 1 to obtain. The Painted Relic will be removed at the start of next turn.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["20", "22", "24", "26", "28", "30"]}},
+      "id": "skill.pickman.lifelike-rendition",
+      "ownerAwakenerId": 40,
+      "kind": "command",
+      "displayName": "Lifelike Rendition",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "[{Devour}: The next Command Card played this turn has its Arithmetica Cost -2.] Gain [Power:Arg1] {STR}. This turn, the Final DMG, Shield, and Healing from other Awakeners' Exalts +[Arg2]%. {Discover} 3 Skills of the deployed Awakeners with {Painted Orisons}, choose 1 to add to your hand and grant it {Exhaust} and {Retain}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "15"}
+      },
+      "id": "skill.pickman.truth-in-delusion",
+      "ownerAwakenerId": 40,
+      "kind": "exalt",
+      "displayName": "Truth in Delusion",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Gain 1 stack of {Fantasia} and additionally {Discover} 1 time.",
+      "descriptionArgs": {},
+      "id": "skill.pickman.art-is-madness",
+      "ownerAwakenerId": 40,
+      "kind": "over_exalt",
+      "displayName": "Art is Madness",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "After Pickman triggers the {Discover} effect or uses {Chromaphage}, he gains 1 stack of {Creativity}.",
+      "descriptionArgs": {},
+      "id": "talent.pickman.painters-eye",
+      "ownerAwakenerId": 40,
+      "displayName": "Painter's Eye",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.pickman.madness-omen",
+      "ownerAwakenerId": 40,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\n{Truth in Delusion} additionally increases the Final DMG dealt by other Awakeners' Exalt this turn by [Arg3]%, and after use, Pickman's Base Aliemus -5.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
+      },
+      "id": "talent.pickman.soulforge-aptitude",
+      "ownerAwakenerId": 40,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Strike} or {Defense} draws 1 \"Skill\" from deployed Awakeners, takes effect up to 1 time per turn.",
+      "descriptionArgs": {},
+      "id": "enlighten.pickman.cross-hatched-rendering",
+      "ownerAwakenerId": 40,
+      "slot": "E1",
+      "displayName": "Cross-Hatched Rendering",
+      "upgradeTargetIds": ["skill.pickman.defense", "skill.pickman.strike"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.pickman.strike",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG. Pickman gains [Energy:Arg2] Aliemus. Randomly draw 1 \"Skill\", which takes effect up to 1 time per turn.",
+          "descriptionArgs": {}
+        },
+        {
+          "targetId": "skill.pickman.defense",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Gain [Block:Arg1] Shield. Pickman gains [Energy:Arg2] Aliemus. Randomly draw 1 \"Skill\", which takes effect up to 1 time per turn.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "The Painted {Orisons} are upgraded to {Advanced Orisons}, and the Painted {Silver Relics} are upgraded to {Golden Relics}.",
+      "descriptionArgs": {},
+      "id": "enlighten.pickman.centered-composition",
+      "ownerAwakenerId": 40,
+      "slot": "E2",
+      "displayName": "Centered Composition",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "E3": {
+      "descriptionTemplate": "After Pickman consumes {Creativity}, he additionally gains 50 Aliemus, and can use Exalt 2 times this turn.",
+      "descriptionArgs": {},
+      "id": "enlighten.pickman.invocation-of-the-muse",
+      "ownerAwakenerId": 40,
+      "slot": "E3",
+      "displayName": "Invocation of the Muse",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "Consume 1 stack of {Fantasia}, choose all {Discover} effects. Gain 1 stack of {Creativity}.",
+      "descriptionArgs": {},
+      "id": "derived.pickman.inspiration",
+      "ownerAwakenerId": 40,
+      "displayName": "Inspiration!",
+      "cost": "0",
+      "derivedFromId": "skill.pickman.chromaphage",
+      "rootSkillId": "skill.pickman.chromaphage",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    }
+  ]
+}

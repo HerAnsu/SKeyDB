@@ -21,4 +21,11 @@ describe('searchPosses', () => {
     const names = searchPosses(posses, 'obsesion eternal').map((posse) => posse.name.toLowerCase())
     expect(names).toContain('obsession eternal')
   })
+
+  it('can fuzzy-match faded legacy realm labels', () => {
+    const names = searchPosses(posses, 'faded legcay').map((posse) => posse.name.toLowerCase())
+
+    expect(names).toContain('voices in your head')
+    expect(names).toContain('tiny wish')
+  })
 })

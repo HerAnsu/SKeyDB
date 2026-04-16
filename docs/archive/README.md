@@ -4,6 +4,8 @@ Historical docs live here once they stop being the current source of truth.
 
 - `docs/archive/plans/`
   - Shipped or superseded implementation plans.
+- `docs/archive/notes/`
+  - Historical audits, migration notes, and source/reference material that is no longer current guidance.
 - `docs/archive/roadmaps/`
   - Retired roadmap snapshots.
 - `docs/archive/backlogs/`

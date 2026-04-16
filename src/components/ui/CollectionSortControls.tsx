@@ -7,14 +7,14 @@ import {type AwakenerSortKey, type CollectionSortDirection} from '@/domain/colle
 import {Button} from './Button'
 import {TogglePill} from './TogglePill'
 
-interface CollectionSortControlsProps {
-  sortKey: AwakenerSortKey
+interface CollectionSortControlsProps<TSortKey extends string = AwakenerSortKey> {
+  sortKey: TSortKey
   sortDirection: CollectionSortDirection
   groupByRealm: boolean
-  onSortKeyChange: (nextKey: AwakenerSortKey) => void
+  onSortKeyChange: (nextKey: TSortKey) => void
   onSortDirectionToggle: () => void
   onGroupByRealmChange: (nextGroupByRealm: boolean) => void
-  sortOptions?: readonly AwakenerSortKey[]
+  sortOptions?: readonly TSortKey[]
   showGroupByRealm?: boolean
   headingText?: string
   sortSelectAriaLabel?: string
@@ -32,7 +32,7 @@ const defaultSortOptions: readonly AwakenerSortKey[] = [
   'ALPHABETICAL',
 ]
 
-function getSortLabel(sortKey: AwakenerSortKey): string {
+function getSortLabel(sortKey: string): string {
   if (sortKey === 'LEVEL') {
     return 'Level'
   }
@@ -54,14 +54,20 @@ function getSortLabel(sortKey: AwakenerSortKey): string {
   return 'Alphabetical'
 }
 
-export function CollectionSortControls({
+function resolveSortOptions<TSortKey extends string>(
+  sortOptions?: readonly TSortKey[],
+): readonly TSortKey[] {
+  return sortOptions ?? (defaultSortOptions as unknown as readonly TSortKey[])
+}
+
+export function CollectionSortControls<TSortKey extends string = AwakenerSortKey>({
   sortKey,
   sortDirection,
   groupByRealm,
   onSortKeyChange,
   onSortDirectionToggle,
   onGroupByRealmChange,
-  sortOptions = defaultSortOptions,
+  sortOptions,
   showGroupByRealm = true,
   headingText = 'Sort',
   sortSelectAriaLabel = 'Sort by',
@@ -70,8 +76,13 @@ export function CollectionSortControls({
   layout = 'stacked',
   compactTrailingAction,
   className,
-}: CollectionSortControlsProps) {
-  const activeSortKey = sortOptions.includes(sortKey) ? sortKey : (sortOptions[0] ?? 'LEVEL')
+}: CollectionSortControlsProps<TSortKey>) {
+  const resolvedSortOptions = resolveSortOptions(sortOptions)
+  const activeSortKey = resolvedSortOptions.includes(sortKey)
+    ? sortKey
+    : resolvedSortOptions.length > 0
+      ? resolvedSortOptions[0]
+      : sortKey
   const isCompact = layout === 'compact'
   const controlClassName =
     'h-6 min-w-0 border border-slate-500/55 bg-slate-950/90 px-2 text-[10px] leading-none text-slate-200 outline-none focus:border-amber-300/65'
@@ -88,11 +99,11 @@ export function CollectionSortControls({
             aria-label={sortSelectAriaLabel}
             className={`flex-1 rounded-none ${controlClassName}`}
             onChange={(event) => {
-              onSortKeyChange(event.target.value as AwakenerSortKey)
+              onSortKeyChange(event.target.value as TSortKey)
             }}
             value={activeSortKey}
           >
-            {sortOptions.map((option) => (
+            {resolvedSortOptions.map((option) => (
               <option key={option} value={option}>
                 {getSortLabel(option)}
               </option>

@@ -1,4 +1,4 @@
-import {act, render, waitFor} from '@testing-library/react'
+import {act, fireEvent, render, screen, waitFor} from '@testing-library/react'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {PopoverTrailPanel} from './PopoverTrailPanel'
@@ -65,14 +65,14 @@ describe('PopoverTrailPanel', () => {
       return makeRect()
     })
 
-    const onCloseTop = vi.fn()
+    const onCloseAll = vi.fn()
 
     render(
       <PopoverTrailPanel
         anchorElement={anchorElement}
         anchorRect={anchorRect}
         itemCount={1}
-        onCloseTop={onCloseTop}
+        onCloseAll={onCloseAll}
       >
         <div>Popover content</div>
       </PopoverTrailPanel>,
@@ -105,5 +105,109 @@ describe('PopoverTrailPanel', () => {
       expect(panel.style.top).toBe('306px')
       expect(panel.style.left).toBe('320px')
     })
+  })
+
+  it('does not close on outside click and uses the explicit close-all action instead', () => {
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      value: 1200,
+    })
+    Object.defineProperty(window, 'innerHeight', {
+      configurable: true,
+      value: 900,
+    })
+
+    const onCloseAll = vi.fn()
+
+    render(
+      <PopoverTrailPanel
+        anchorRect={makeRect({top: 100, bottom: 120, left: 150, right: 170})}
+        itemCount={2}
+        onCloseAll={onCloseAll}
+      >
+        <div>Popover content</div>
+      </PopoverTrailPanel>,
+    )
+
+    fireEvent.mouseDown(document.body)
+    expect(onCloseAll).not.toHaveBeenCalled()
+
+    fireEvent.click(screen.getByRole('button', {name: 'Close all'}))
+    expect(onCloseAll).toHaveBeenCalledTimes(1)
+  })
+
+  it('moves focus into the popover and restores it to the anchor when the panel closes', async () => {
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      value: 1200,
+    })
+    Object.defineProperty(window, 'innerHeight', {
+      configurable: true,
+      value: 900,
+    })
+
+    const anchorElement = document.createElement('button')
+    anchorElement.textContent = 'Anchor'
+    document.body.appendChild(anchorElement)
+    anchorElement.focus()
+
+    const onCloseAll = vi.fn()
+    const {unmount} = render(
+      <PopoverTrailPanel
+        anchorElement={anchorElement}
+        anchorRect={makeRect({top: 100, bottom: 120, left: 150, right: 170})}
+        itemCount={1}
+        onCloseAll={onCloseAll}
+      >
+        <button type='button'>Nested action</button>
+      </PopoverTrailPanel>,
+    )
+
+    expect(
+      await screen.findByRole('dialog', {name: 'Database reference details'}),
+    ).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByRole('button', {name: 'Close all'})).toHaveFocus()
+    })
+
+    unmount()
+    expect(anchorElement).toHaveFocus()
+  })
+
+  it('keeps tab focus inside the popover and supports escape-to-close', async () => {
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      value: 1200,
+    })
+    Object.defineProperty(window, 'innerHeight', {
+      configurable: true,
+      value: 900,
+    })
+
+    const onCloseAll = vi.fn()
+
+    render(
+      <PopoverTrailPanel
+        anchorRect={makeRect({top: 100, bottom: 120, left: 150, right: 170})}
+        itemCount={1}
+        onCloseAll={onCloseAll}
+      >
+        <button type='button'>Nested action</button>
+      </PopoverTrailPanel>,
+    )
+
+    const closeButton = await screen.findByRole('button', {name: 'Close all'})
+    const nestedAction = screen.getByRole('button', {name: 'Nested action'})
+
+    closeButton.focus()
+    fireEvent.keyDown(closeButton, {key: 'Tab', shiftKey: true})
+    expect(nestedAction).toHaveFocus()
+
+    nestedAction.focus()
+    fireEvent.keyDown(nestedAction, {key: 'Tab'})
+    expect(closeButton).toHaveFocus()
+
+    fireEvent.keyDown(closeButton, {key: 'Escape'})
+    expect(onCloseAll).toHaveBeenCalledTimes(1)
   })
 })

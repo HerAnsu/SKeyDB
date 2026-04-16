@@ -1,8 +1,20 @@
 import {describe, expect, it} from 'vitest'
 
-import {getCardNamesFromFull, parseRichDescription} from './rich-text'
+import {collectAwakenerDatabaseCardNames} from './awakeners-database-view'
+import {getAwakenersFullV2, type AwakenerFullV2Record} from './awakeners-full-v2'
+import {resolveDescribedRecord} from './description-records'
+import {parseRichDescription} from './rich-text'
 
 const EMPTY_CARDS = new Set<string>()
+
+function getAwakenerByName(name: string): AwakenerFullV2Record {
+  const awakener = getAwakenersFullV2().find((entry) => entry.displayName === name)
+  expect(awakener).toBeDefined()
+  if (!awakener) {
+    throw new Error(`Missing awakener fixture: ${name}`)
+  }
+  return awakener
+}
 
 describe('parseRichDescription', () => {
   it('returns plain text when no tokens', () => {
@@ -128,6 +140,71 @@ describe('parseRichDescription', () => {
     ])
   })
 
+  it('can suppress self skill aliases so they fall back to mechanics', () => {
+    const cards = new Set(['Rouse'])
+    const result = parseRichDescription('Gain {Rouse}.', cards, undefined, {
+      excludedSkillNames: ['rouse'],
+      overlayMechanicNames: ['rouse'],
+    })
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Gain '},
+      {type: 'mechanic', name: 'Rouse'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('prefers overlay mechanics over stat styling when a matching overlay is available', () => {
+    const result = parseRichDescription(
+      'Gain {Death Resistance} and {Tentacle DMG}.',
+      EMPTY_CARDS,
+      undefined,
+      {
+        overlayMechanicNames: ['Death Resistance', 'Tentacle DMG'],
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Gain '},
+      {type: 'mechanic', name: 'Death Resistance'},
+      {type: 'text', value: ' and '},
+      {type: 'mechanic', name: 'Tentacle DMG'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('promotes bare multi-word overlay names in prose into mechanic segments', () => {
+    const result = parseRichDescription(
+      'Gain Tentacle DMG and Death Resistance.',
+      EMPTY_CARDS,
+      undefined,
+      {
+        overlayMechanicNames: ['Tentacle DMG', 'Death Resistance'],
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Gain '},
+      {type: 'mechanic', name: 'Tentacle DMG'},
+      {type: 'text', value: ' and '},
+      {type: 'mechanic', name: 'Death Resistance'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('renders excluded self skill refs as non-interactive references when no overlay exists', () => {
+    const cards = new Set(['Colorless Spiral'])
+    const result = parseRichDescription('Transform into {Colorless Spiral}.', cards, undefined, {
+      excludedSkillNames: ['colorless spiral'],
+    })
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Transform into '},
+      {type: 'reference', name: 'Colorless Spiral'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
   it('parses STR as a stat even though it is not a mainstat key', () => {
     const result = parseRichDescription('Gain {STR} equal to 8%.', EMPTY_CARDS)
     expect(result).toEqual([
@@ -200,6 +277,8 @@ describe('parseRichDescription', () => {
     const result = parseRichDescription(
       'Casiah gains (25/30/35/40/45/50) Aliemus. {Rouse}: Gain (8/9.6/11.2/12.8/14.4/16% {ATK}) Temporary {STR} for each card played this turn.',
       cards,
+      undefined,
+      {enableFollowupLineBreaks: true},
     )
     expect(result[0]).toEqual({type: 'text', value: 'Casiah gains '})
     expect(result[1]).toEqual({
@@ -209,58 +288,214 @@ describe('parseRichDescription', () => {
       stat: null,
     })
     expect(result[2]).toEqual({type: 'text', value: ' Aliemus. '})
-    expect(result[3]).toEqual({type: 'mechanic', name: 'Rouse'})
-    expect(result[4]).toEqual({type: 'text', value: ': Gain '})
-    expect(result[5]).toEqual({
+    expect(result[3]).toEqual({type: 'text', value: '\n'})
+    expect(result[4]).toEqual({type: 'mechanic', name: 'Rouse'})
+    expect(result[5]).toEqual({type: 'text', value: ': Gain '})
+    expect(result[6]).toEqual({
       type: 'scaling',
       values: [8, 9.6, 11.2, 12.8, 14.4, 16],
       suffix: '%',
       stat: 'ATK',
     })
-    expect(result[6]).toEqual({type: 'text', value: ' Temporary '})
-    expect(result[7]).toEqual({type: 'stat', name: 'STR'})
-    expect(result[8]).toEqual({type: 'text', value: ' for each card played this turn.'})
-  })
-})
-
-describe('getCardNamesFromFull', () => {
-  it('collects card, exalt, talent, and enlighten names', () => {
-    const awakener = {
-      cards: {
-        C1: {name: 'Opening Act'},
-        C2: {name: 'Strike'},
-      },
-      exalts: {
-        exalt: {name: 'Magic Carnival'},
-        over_exalt: {name: 'Unfettered Mirth'},
-      },
-      talents: {
-        T1: {name: 'Master of Magic'},
-        T2: {name: 'Madness Omen'},
-      },
-      enlightens: {
-        E1: {name: 'Hysteria'},
-      },
-    }
-    const names = getCardNamesFromFull(awakener)
-    expect(names).toContain('Opening Act')
-    expect(names).toContain('Strike')
-    expect(names).toContain('Magic Carnival')
-    expect(names).toContain('Unfettered Mirth')
-    expect(names).toContain('Master of Magic')
-    expect(names).toContain('Madness Omen')
-    expect(names).toContain('Hysteria')
+    expect(result[7]).toEqual({type: 'text', value: ' Temporary '})
+    expect(result[8]).toEqual({type: 'stat', name: 'STR'})
+    expect(result[9]).toEqual({type: 'text', value: ' for each card played this turn.'})
   })
 
-  it('skips Innate: None talents', () => {
-    const awakener = {
-      cards: {C1: {name: 'Strike'}},
-      exalts: {exalt: {name: 'Ex'}, over_exalt: {name: 'Ox'}},
-      talents: {T1: {name: 'None'}},
-      enlightens: {},
+  it('inserts a line break before tagged follow-up mechanics like Aftershock', () => {
+    const result = parseRichDescription(
+      'Gain [Block:Arg1] Shield. {Aftershock}: Gain [Power:Arg2] {STR}.',
+      EMPTY_CARDS,
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '10',
+          suffix: '%',
+          stat: 'DEF',
+        },
+        Arg2: {
+          kind: 'fixed',
+          value: '2.8',
+          suffix: '%',
+          stat: 'ATK',
+        },
+      },
+      {enableFollowupLineBreaks: true},
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Gain '},
+      {type: 'descriptionArg', argKey: 'Arg1', channel: 'Block'},
+      {type: 'text', value: ' Shield. '},
+      {type: 'text', value: '\n'},
+      {type: 'mechanic', name: 'Aftershock'},
+      {type: 'text', value: ': Gain '},
+      {type: 'descriptionArg', argKey: 'Arg2', channel: 'Power'},
+      {type: 'text', value: ' '},
+      {type: 'stat', name: 'STR'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('does not add duplicate line breaks when the tagged follow-up already starts on a new line', () => {
+    const result = parseRichDescription(
+      'Gain Shield.\n{Leap}: Gain {Counter}.',
+      EMPTY_CARDS,
+      undefined,
+      {
+        enableFollowupLineBreaks: true,
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Gain Shield.\n'},
+      {type: 'mechanic', name: 'Leap'},
+      {type: 'text', value: ': Gain '},
+      {type: 'mechanic', name: 'Counter'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('inserts a line break after bracketed headings like Devour blocks', () => {
+    const result = parseRichDescription(
+      '[Devour: Obtain {STR} and {Alert}.] Obtain Shield.',
+      EMPTY_CARDS,
+      undefined,
+      {enableFollowupLineBreaks: true},
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: '[Devour: Obtain '},
+      {type: 'stat', name: 'STR'},
+      {type: 'text', value: ' and '},
+      {type: 'mechanic', name: 'Alert'},
+      {type: 'text', value: '.]\nObtain Shield.'},
+    ])
+  })
+
+  it('inserts a line break before tagged Rouse follow-ups', () => {
+    const result = parseRichDescription(
+      'Agrippa obtains 25 Aliemus. {Rouse}: Poison inflicted by Agrippa +50%.',
+      EMPTY_CARDS,
+      undefined,
+      {enableFollowupLineBreaks: true},
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Agrippa obtains 25 Aliemus. '},
+      {type: 'text', value: '\n'},
+      {type: 'mechanic', name: 'Rouse'},
+      {type: 'text', value: ': Poison inflicted by Agrippa +50%.'},
+    ])
+  })
+
+  it('keeps the Rouse line break when a self reference is forced to plain text', () => {
+    const result = parseRichDescription(
+      'Agrippa obtains 25 Aliemus. {Rouse}: Poison inflicted by Agrippa +50%.',
+      EMPTY_CARDS,
+      undefined,
+      {
+        enableFollowupLineBreaks: true,
+        plainTextMechanicNames: ['rouse'],
+        overlayMechanicNames: ['rouse'],
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Agrippa obtains 25 Aliemus. '},
+      {type: 'text', value: '\n'},
+      {type: 'text', value: 'Rouse'},
+      {type: 'text', value: ': Poison inflicted by Agrippa +50%.'},
+    ])
+  })
+
+  it('does not insert follow-up line breaks unless explicitly enabled', () => {
+    const result = parseRichDescription(
+      'Gain Shield. {Aftershock}: Gain {Counter}.',
+      EMPTY_CARDS,
+      undefined,
+      {
+        overlayMechanicNames: ['Aftershock', 'Counter'],
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Gain Shield. '},
+      {type: 'mechanic', name: 'Aftershock'},
+      {type: 'text', value: ': Gain '},
+      {type: 'mechanic', name: 'Counter'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('parses resolved compiled descriptions without leaking raw arg tokens', () => {
+    const cases = [
+      {
+        awakenerName: 'kathigu-ra',
+        slot: 'C1',
+      },
+      {
+        awakenerName: 'kathigu-ra',
+        slot: 'C2',
+      },
+      {
+        awakenerName: 'kathigu-ra',
+        slot: 'C3',
+      },
+      {
+        awakenerName: 'murphy: fauxborn',
+        slot: 'C1',
+      },
+      {
+        awakenerName: 'pickman',
+        slot: 'C1',
+      },
+      {
+        awakenerName: 'pickman',
+        slot: 'C2',
+      },
+      {
+        awakenerName: 'pickman',
+        slot: 'C3',
+      },
+      {
+        awakenerName: 'pollux',
+        slot: 'C1',
+      },
+    ] as const
+
+    for (const testCase of cases) {
+      const awakener = getAwakenerByName(testCase.awakenerName)
+      const card = awakener.cards[testCase.slot]
+      const resolvedDescription = resolveDescribedRecord(card, {rank: 6}, {maxRank: 6}).description
+      const result = parseRichDescription(
+        resolvedDescription,
+        collectAwakenerDatabaseCardNames(awakener),
+      )
+
+      expect(result.some((segment) => segment.type === 'scaling')).toBe(false)
+      expect(result.some((segment) => segment.type === 'text' && segment.value.includes('['))).toBe(
+        false,
+      )
     }
-    const names = getCardNamesFromFull(awakener)
-    expect(names).not.toContain('None')
-    expect(names).not.toContain('Innate: None')
+  })
+
+  it('consumes template percent signs when description args already supply a percent suffix', () => {
+    const result = parseRichDescription('Deal [Arg1]% bonus.', EMPTY_CARDS, {
+      Arg1: {
+        kind: 'fixed',
+        substatBonus: {
+          substat: 'SigilYield',
+          multiplier: '1',
+          suffix: '%',
+        },
+      },
+    })
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Deal '},
+      {type: 'descriptionArg', argKey: 'Arg1', channel: null},
+      {type: 'text', value: ' bonus.'},
+    ])
   })
 })

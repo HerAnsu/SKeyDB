@@ -1,0 +1,239 @@
+{
+  "id": 22,
+  "key": "hameln",
+  "displayName": "hameln",
+  "ingameId": "D12",
+  "faction": "The Unknowable",
+  "realm": "CHAOS",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "aliases": ["hameln"],
+  "searchTags": ["Arithmetica"],
+  "stats": {
+    "CON": "135",
+    "ATK": "140",
+    "DEF": "131",
+    "CritRate": "9.8%",
+    "CritDamage": "50%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "29.4",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {"CON": 1.5, "ATK": 1.55, "DEF": 1.45},
+  "substatScaling": {"CritRate": "0.8%", "KeyflareRegen": "2.4"},
+  "assets": {"portraitKey": "hameln", "iconKey": "hameln"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Hameln obtains [Energy:Arg1] Aliemus. {Rouse}: At turn start, put a {Symphony of Harmony} into hand.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
+      "id": "skill.hameln.laudable-masterpiece",
+      "ownerAwakenerId": 22,
+      "kind": "rouse",
+      "displayName": "Laudable Masterpiece",
+      "cost": "3",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Hameln obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.hameln.strike",
+      "ownerAwakenerId": 22,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Hameln obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.hameln.defense",
+      "ownerAwakenerId": 22,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Randomly deal 3 instances of [Damage:Arg1] {Pierce DMG}. Each hit has a 50% chance to randomly apply 1 {Marvelous Debuff} to the target. If used with 0 Arithmetica Cost, it Deal an additional 2 hits.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"}},
+      "id": "skill.hameln.soul-overture",
+      "ownerAwakenerId": 22,
+      "kind": "command",
+      "displayName": "Soul Overture",
+      "cost": "3",
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.prepare", "value": 1}],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Obtain [Power:Arg1] {STR}. Add 2 {Insight} to your hand. If you lack the required Arithmetica, you can still play this card, but its effect will be changed to shuffle 2 {Insight} cards into your Draw Pile.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"], "suffix": "%", "stat": "ATK"}},
+      "id": "skill.hameln.memory-rondo",
+      "ownerAwakenerId": 22,
+      "kind": "command",
+      "displayName": "Memory Rondo",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Randomly deal [Damage:Arg1] {Pierce DMG} 3 times, {Stealing} [Arg2] {STR⯆} each time. Choose 1 non-Derived Command Card in hand that does not have {Exhaust}, {Rondino}, or {Crescendo}, and add {Rondino} to it. If there are no cards in your hand which qualify, deal DMG 3 more times.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.hameln.primal-chord",
+      "ownerAwakenerId": 22,
+      "kind": "exalt",
+      "displayName": "Primal Chord",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Each time DMG is dealt, randomly apply 1 {Marvelous Debuff} to the target. Choose 1 additional card when adding {Rondino}.",
+      "descriptionArgs": {},
+      "id": "skill.hameln.the-final-sonata",
+      "ownerAwakenerId": 22,
+      "kind": "over_exalt",
+      "displayName": "The Final Sonata",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.hameln.madness-omen",
+      "ownerAwakenerId": 22,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAfter playing {Insight}, gain Temporary {STR} equal to [Arg3]% of ATK, and trigger {Crescendo} once. This effect can trigger up to 5 times per turn.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "10"]}
+      },
+      "id": "talent.hameln.soulforge-aptitude",
+      "ownerAwakenerId": 22,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Strike} and {Defense} obtain Temporary {STR} equivalent to 10% of ATK. If either {Rondino} or {Crescendo} are triggered, the obtained Temporary {STR} is doubled.",
+      "descriptionArgs": {},
+      "id": "enlighten.hameln.mind-concerto",
+      "ownerAwakenerId": 22,
+      "slot": "E1",
+      "displayName": "Mind Concerto",
+      "upgradeTargetIds": ["skill.hameln.defense", "skill.hameln.strike"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.hameln.strike",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG. Hameln obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] Temporary {STR}. If either {Rondino} or {Crescendo} are triggered, the obtained Temporary {STR} is doubled.",
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "10", "suffix": "%", "stat": "ATK"}}
+        },
+        {
+          "targetId": "skill.hameln.defense",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield. Hameln obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] Temporary {STR}. If either {Rondino} or {Crescendo} are triggered, the obtained Temporary {STR} is doubled.",
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "10", "suffix": "%", "stat": "ATK"}}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Rondino} reduces the Arithmetica Cost of granted cards by 2.",
+      "descriptionArgs": {},
+      "id": "enlighten.hameln.oneiric-waltz",
+      "ownerAwakenerId": 22,
+      "slot": "E2",
+      "displayName": "Oneiric Waltz",
+      "upgradeTargetIds": ["overlay.hameln.rondino"],
+      "upgradePatches": [
+        {
+          "targetId": "overlay.hameln.rondino",
+          "targetType": "overlay",
+          "operation": "replace_description",
+          "descriptionTemplate": "Arithmetica Cost -2, takes effect 2 times, then changes to {Crescendo}",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "After triggering the {Melody} effect or playing the {Symphony of Harmony}, Hameln gains 1% Crit. Rate and Crit. DMG. For every 10 triggers, the number of DMG instances of {Soul Overture} and {Primal Chord} +1 in this battle, up to 3 times.",
+      "descriptionArgs": {},
+      "id": "enlighten.hameln.moonlit-rhapsody",
+      "ownerAwakenerId": 22,
+      "slot": "E3",
+      "displayName": "Moonlit Rhapsody",
+      "upgradeTargetIds": ["skill.hameln.primal-chord", "skill.hameln.soul-overture"],
+      "upgradePatches": []
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "The next non-Derived Command Card you play has +2 Arithmetica Cost and takes effect 2 times.",
+      "descriptionArgs": {},
+      "id": "derived.hameln.ascending-scale",
+      "ownerAwakenerId": 22,
+      "displayName": "Ascending Scale",
+      "derivedFromId": "derived.hameln.symphony-of-harmony",
+      "rootSkillId": "skill.hameln.laudable-masterpiece",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "The next non-Derived Command Card you play has -2 Arithmetica Cost.",
+      "descriptionArgs": {},
+      "id": "derived.hameln.descending-scale",
+      "ownerAwakenerId": 22,
+      "displayName": "Descending Scale",
+      "derivedFromId": "derived.hameln.symphony-of-harmony",
+      "rootSkillId": "skill.hameln.laudable-masterpiece",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Choose: {Ascending Scale} or {Descending Scale}.",
+      "descriptionArgs": {},
+      "id": "derived.hameln.symphony-of-harmony",
+      "ownerAwakenerId": 22,
+      "nodeKind": "group",
+      "displayName": "Symphony of Harmony",
+      "cost": "0",
+      "derivedFromId": "skill.hameln.laudable-masterpiece",
+      "rootSkillId": "skill.hameln.laudable-masterpiece",
+      "childDerivedSkillIds": ["derived.hameln.ascending-scale", "derived.hameln.descending-scale"],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
+      "variants": []
+    }
+  ]
+}

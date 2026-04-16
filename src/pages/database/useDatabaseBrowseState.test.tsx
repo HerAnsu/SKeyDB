@@ -1,0 +1,126 @@
+import {act, fireEvent, render, screen} from '@testing-library/react'
+import {MemoryRouter, Route, Routes, useLocation, useNavigate} from 'react-router-dom'
+import {describe, expect, it} from 'vitest'
+
+import {useDatabaseBrowseState} from './useDatabaseBrowseState'
+
+function HistoryBackButton() {
+  const navigate = useNavigate()
+
+  return (
+    <button
+      onClick={() => {
+        void navigate(-1)
+      }}
+      type='button'
+    >
+      Go back in history
+    </button>
+  )
+}
+
+function DatabaseBrowseStateHarness() {
+  const state = useDatabaseBrowseState()
+  const location = useLocation()
+
+  return (
+    <div>
+      <div data-testid='location-search'>{location.search}</div>
+      <button
+        onClick={() => {
+          state.appendSearchCharacter('a')
+        }}
+        type='button'
+      >
+        Append a
+      </button>
+      <button
+        onClick={() => {
+          state.appendSearchCharacter('l')
+        }}
+        type='button'
+      >
+        Append l
+      </button>
+      <button
+        onClick={() => {
+          state.setRealmFilter('AEQUOR')
+        }}
+        type='button'
+      >
+        Set realm AEQUOR
+      </button>
+      <button
+        onClick={() => {
+          state.setSortKey('ATK')
+        }}
+        type='button'
+      >
+        Set sort ATK
+      </button>
+      <button
+        onClick={() => {
+          state.toggleSortDirection()
+        }}
+        type='button'
+      >
+        Toggle sort direction
+      </button>
+      <HistoryBackButton />
+    </div>
+  )
+}
+
+function renderBrowseStateHarness(initialEntries: string[] = ['/database']) {
+  render(
+    <MemoryRouter initialEntries={initialEntries} initialIndex={initialEntries.length - 1}>
+      <Routes>
+        <Route element={<DatabaseBrowseStateHarness />} path='/database' />
+      </Routes>
+    </MemoryRouter>,
+  )
+}
+
+describe('useDatabaseBrowseState', () => {
+  it('keeps query typing as replace-style history updates', async () => {
+    renderBrowseStateHarness(['/database', '/database'])
+
+    fireEvent.click(screen.getByRole('button', {name: 'Append a'}))
+    fireEvent.click(screen.getByRole('button', {name: 'Append l'}))
+
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=al')
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
+    })
+
+    expect(screen.getByTestId('location-search')).toHaveTextContent('')
+  })
+
+  it('pushes discrete browse refinements into history', async () => {
+    renderBrowseStateHarness()
+
+    fireEvent.click(screen.getByRole('button', {name: 'Set realm AEQUOR'}))
+    fireEvent.click(screen.getByRole('button', {name: 'Set sort ATK'}))
+    fireEvent.click(screen.getByRole('button', {name: 'Toggle sort direction'}))
+
+    expect(screen.getByTestId('location-search')).toHaveTextContent(
+      '?realm=AEQUOR&sort=ATK&dir=DESC',
+    )
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
+    })
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?realm=AEQUOR&sort=ATK')
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
+    })
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?realm=AEQUOR')
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
+    })
+    expect(screen.getByTestId('location-search')).toHaveTextContent('')
+  })
+})

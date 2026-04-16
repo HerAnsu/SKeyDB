@@ -183,10 +183,18 @@ export function useBuilderPreferences({searchInputRef, storage}: UseBuilderPrefe
     }))
   }, [])
 
+  const removeSearchCharacter = useCallback((targetPickerTab: PickerTab) => {
+    setPickerSearchByTab((prev) => ({
+      ...prev,
+      [targetPickerTab]: prev[targetPickerTab].slice(0, -1),
+    }))
+  }, [])
+
   useGlobalPickerSearchCapture({
     pickerTab,
     searchInputRef,
     onAppendCharacter: appendSearchCharacter,
+    onRemoveCharacter: removeSearchCharacter,
   })
 
   return {

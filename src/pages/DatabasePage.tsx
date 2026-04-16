@@ -1,9 +1,10 @@
-import {useEffect, useRef} from 'react'
+import {cache, lazy, Suspense, use, useEffect, useRef} from 'react'
 
-import {useNavigate, useParams} from 'react-router-dom'
+import {useLocation, useNavigate, useParams} from 'react-router-dom'
 
 import emojiWke from '@/assets/emoji/Emoji_WKE_S_06.webp'
-import {getAwakeners} from '@/domain/awakeners'
+import {getAwakeners, type Awakener} from '@/domain/awakeners'
+import {loadAwakenerFullV2ById} from '@/domain/awakeners-full-v2-loader'
 import {
   buildDatabaseAwakenerPath,
   findAwakenerByDatabaseSlug,
@@ -11,60 +12,74 @@ import {
   type DatabaseAwakenerTab,
 } from '@/domain/database-paths'
 
-import {useGlobalCollectionSearchCapture} from './collection/useGlobalCollectionSearchCapture'
-import {AwakenerDetailModal} from './database/AwakenerDetailModal'
 import {DatabaseFilters} from './database/DatabaseFilters'
 import {DatabaseGrid} from './database/DatabaseGrid'
+import {useDatabaseBrowseState} from './database/useDatabaseBrowseState'
 import {useDatabaseViewModel} from './database/useDatabaseViewModel'
+import {useGlobalSearchCapture} from './useGlobalSearchCapture'
+
+const AwakenerDetailModal = lazy(() =>
+  import('./database/AwakenerDetailModal').then((module) => ({
+    default: module.AwakenerDetailModal,
+  })),
+)
+const databaseAwakeners = getAwakeners()
+const loadAwakenerFullV2ForSuspense = cache(loadAwakenerFullV2ById)
 
 export function DatabasePage() {
-  const vm = useDatabaseViewModel()
+  const browseState = useDatabaseBrowseState()
+  const vm = useDatabaseViewModel(databaseAwakeners, browseState)
   const searchInputRef = useRef<HTMLInputElement | null>(null)
+  const location = useLocation()
   const navigate = useNavigate()
   const {awakenerSlug, tabSlug} = useParams<{awakenerSlug?: string; tabSlug?: string}>()
-  const selectedAwakener = findAwakenerByDatabaseSlug(getAwakeners(), awakenerSlug)
+  const selectedAwakener = findAwakenerByDatabaseSlug(databaseAwakeners, awakenerSlug)
   const selectedTab = resolveDatabaseAwakenerTab(tabSlug) ?? 'overview'
 
-  useGlobalCollectionSearchCapture({
+  useGlobalSearchCapture({
+    enabled: !selectedAwakener,
     searchInputRef,
-    onAppendCharacter: vm.appendSearchCharacter,
-    onClearSearch: vm.clearQuery,
+    onAppendCharacter: browseState.appendSearchCharacter,
+    onRemoveCharacter: browseState.removeSearchCharacter,
+    onClearSearch: browseState.clearQuery,
   })
 
   useEffect(() => {
-    if (!awakenerSlug || selectedAwakener) {
-      return
+    if (awakenerSlug && !selectedAwakener) {
+      void navigate({pathname: '/database', search: location.search}, {replace: true})
     }
-    void navigate('/database', {replace: true})
-  }, [awakenerSlug, navigate, selectedAwakener])
-
-  useEffect(() => {
-    if (!selectedAwakener || !tabSlug) {
-      return
-    }
-    if (resolveDatabaseAwakenerTab(tabSlug)) {
-      return
-    }
-    void navigate(buildDatabaseAwakenerPath(selectedAwakener), {replace: true})
-  }, [selectedAwakener, tabSlug, navigate])
+  }, [awakenerSlug, location.search, navigate, selectedAwakener])
 
   function openAwakenerDetail(awakenerId: number) {
-    const awakener = getAwakeners().find((entry) => entry.id === awakenerId)
+    const awakener = databaseAwakeners.find((entry) => entry.id === awakenerId)
     if (!awakener) {
       return
     }
-    void navigate(buildDatabaseAwakenerPath(awakener), {replace: true})
+    void navigate({
+      pathname: buildDatabaseAwakenerPath(awakener),
+      search: location.search,
+    })
   }
 
   function closeDetail() {
-    void navigate('/database', {replace: true})
+    void navigate({pathname: '/database', search: location.search})
   }
 
   function handleDetailTabChange(nextTab: DatabaseAwakenerTab) {
     if (!selectedAwakener) {
       return
     }
-    void navigate(buildDatabaseAwakenerPath(selectedAwakener, nextTab), {replace: true})
+    void navigate({
+      pathname: buildDatabaseAwakenerPath(selectedAwakener, nextTab),
+      search: location.search,
+    })
+  }
+
+  function handleModalAwakenerSelect(nextAwakener: Awakener, nextTab: DatabaseAwakenerTab) {
+    void navigate({
+      pathname: buildDatabaseAwakenerPath(nextAwakener, nextTab),
+      search: location.search,
+    })
   }
 
   return (
@@ -85,35 +100,101 @@ export function DatabasePage() {
 
       <DatabaseFilters
         filteredCount={vm.awakeners.length}
-        groupByRealm={vm.groupByRealm}
-        onGroupByRealmChange={vm.setGroupByRealm}
-        onQueryChange={vm.setQuery}
-        onRarityFilterChange={vm.setRarityFilter}
-        onRealmFilterChange={vm.setRealmFilter}
-        onSortDirectionToggle={vm.toggleSortDirection}
-        onSortKeyChange={vm.setSortKey}
-        onTypeFilterChange={vm.setTypeFilter}
-        query={vm.query}
-        rarityFilter={vm.rarityFilter}
-        realmFilter={vm.realmFilter}
+        groupByRealm={browseState.groupByRealm}
+        onGroupByRealmChange={browseState.setGroupByRealm}
+        onQueryChange={browseState.setQuery}
+        onRarityFilterChange={browseState.setRarityFilter}
+        onRealmFilterChange={browseState.setRealmFilter}
+        onSortDirectionToggle={browseState.toggleSortDirection}
+        onSortKeyChange={browseState.setSortKey}
+        onTypeFilterChange={browseState.setTypeFilter}
+        query={browseState.query}
+        rarityFilter={browseState.rarityFilter}
+        realmFilter={browseState.realmFilter}
         searchInputRef={searchInputRef}
-        sortDirection={vm.sortDirection}
-        sortKey={vm.sortKey}
+        sortDirection={browseState.sortDirection}
+        sortKey={browseState.sortKey}
         totalCount={vm.totalCount}
-        typeFilter={vm.typeFilter}
+        typeFilter={browseState.typeFilter}
       />
 
       <DatabaseGrid awakeners={vm.awakeners} onSelectAwakener={openAwakenerDetail} />
 
       {selectedAwakener ? (
-        <AwakenerDetailModal
-          awakener={selectedAwakener}
-          initialTab={selectedTab}
-          key={selectedAwakener.id}
-          onClose={closeDetail}
-          onTabChange={handleDetailTabChange}
-        />
+        <Suspense
+          fallback={
+            <div className='px-2 py-3 text-sm text-slate-300'>Loading awakener details...</div>
+          }
+        >
+          <DatabaseAwakenerDetailRoute
+            activeTab={selectedTab}
+            awakener={selectedAwakener}
+            awakeners={databaseAwakeners}
+            onClose={closeDetail}
+            onSelectAwakener={handleModalAwakenerSelect}
+            onTabChange={handleDetailTabChange}
+            tabSlug={tabSlug}
+          />
+        </Suspense>
       ) : null}
     </section>
+  )
+}
+
+interface DatabaseAwakenerDetailRouteProps {
+  activeTab: DatabaseAwakenerTab
+  awakener: Awakener
+  awakeners: Awakener[]
+  onClose: () => void
+  onSelectAwakener: (awakener: Awakener, tab: DatabaseAwakenerTab) => void
+  onTabChange: (tab: DatabaseAwakenerTab) => void
+  tabSlug?: string
+}
+
+function DatabaseAwakenerDetailRoute({
+  activeTab,
+  awakener,
+  awakeners,
+  onClose,
+  onSelectAwakener,
+  onTabChange,
+  tabSlug,
+}: DatabaseAwakenerDetailRouteProps) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const fullDataV2 = use(loadAwakenerFullV2ForSuspense(awakener.id)) ?? null
+
+  useEffect(() => {
+    if (!fullDataV2) {
+      void navigate({pathname: '/database', search: location.search}, {replace: true})
+      return
+    }
+    if (!tabSlug || resolveDatabaseAwakenerTab(tabSlug)) {
+      return
+    }
+    void navigate(
+      {
+        pathname: buildDatabaseAwakenerPath(awakener),
+        search: location.search,
+      },
+      {replace: true},
+    )
+  }, [awakener, fullDataV2, location.search, navigate, tabSlug])
+
+  if (!fullDataV2) {
+    return null
+  }
+
+  return (
+    <AwakenerDetailModal
+      activeTab={activeTab}
+      awakener={awakener}
+      awakeners={awakeners}
+      fullDataV2={fullDataV2}
+      key={awakener.id}
+      onClose={onClose}
+      onSelectAwakener={onSelectAwakener}
+      onTabChange={onTabChange}
+    />
   )
 }

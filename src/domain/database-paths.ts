@@ -4,6 +4,8 @@ export const DATABASE_AWAKENER_TABS = ['overview', 'cards', 'builds', 'teams'] a
 
 export type DatabaseAwakenerTab = (typeof DATABASE_AWAKENER_TABS)[number]
 
+const DATABASE_AWAKENER_TAB_SET = new Set<string>(DATABASE_AWAKENER_TABS)
+
 function trimEdgeDashes(value: string): string {
   let start = 0
   let end = value.length
@@ -30,9 +32,11 @@ export function resolveDatabaseAwakenerTab(tab: string | undefined): DatabaseAwa
     return null
   }
   const normalizedTab = tab.trim().toLowerCase()
-  return (DATABASE_AWAKENER_TABS as readonly string[]).includes(normalizedTab)
-    ? (normalizedTab as DatabaseAwakenerTab)
-    : null
+  return isDatabaseAwakenerTab(normalizedTab) ? normalizedTab : null
+}
+
+function isDatabaseAwakenerTab(tab: string): tab is DatabaseAwakenerTab {
+  return DATABASE_AWAKENER_TAB_SET.has(tab)
 }
 
 export function buildDatabaseAwakenerPath(

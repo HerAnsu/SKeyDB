@@ -1,0 +1,253 @@
+{
+  "id": 21,
+  "key": "goliath",
+  "displayName": "goliath",
+  "ingameId": "O06",
+  "faction": "The Fools",
+  "realm": "AEQUOR",
+  "rarity": "SSR",
+  "type": "ASSAULT",
+  "aliases": ["goliath"],
+  "stats": {
+    "CON": "164",
+    "ATK": "160",
+    "DEF": "132",
+    "CritRate": "14.6%",
+    "CritDamage": "57.2%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {"CON": 2.05, "ATK": 2, "DEF": 1.65},
+  "substatScaling": {"CritRate": "1.6%", "CritDamage": "1.2%"},
+  "assets": {"portraitKey": "goliath", "iconKey": "goliath"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Goliath gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 Tentacle. When Goliath deals DMG, gain [Power:Arg2] {STR} and [TentaclePower:Arg3] {Tentacle DMG}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "scaling", "values": ["1.25", "1.5", "1.75", "2", "2.25", "2.5"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.goliath.preemptive-revenge",
+      "ownerAwakenerId": 21,
+      "kind": "rouse",
+      "displayName": "Preemptive Revenge",
+      "cost": "3",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Goliath obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.goliath.strike",
+      "ownerAwakenerId": 21,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Goliath obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.goliath.defense",
+      "ownerAwakenerId": 21,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. If the target's HP is below 25% or if the target is killed, refund the Arithmetica Cost. {STR} multiplies the effect by [Arg2] on {Decapitation Damage}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["60", "72", "84", "96", "108", "120"], "suffix": "% {ATK}"},
+        "Arg2": {"kind": "fixed", "value": "3"}
+      },
+      "id": "skill.goliath.decapitation-damage",
+      "ownerAwakenerId": 21,
+      "kind": "command",
+      "displayName": "Decapitation Damage",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Gain [Power:Arg1] {STR}. Temporarily remove all enemies' {STR⯆}.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"], "suffix": "%", "stat": "ATK"}},
+      "id": "skill.goliath.law-of-the-strongest",
+      "ownerAwakenerId": 21,
+      "kind": "command",
+      "displayName": "Law of the Strongest",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Choose: {Usurp} or {Dormancy}. Place 3 {Blade's Dominion} into hand.",
+      "descriptionArgs": {},
+      "id": "skill.goliath.abyssal-depths-power",
+      "ownerAwakenerId": 21,
+      "kind": "exalt",
+      "displayName": "Abyssal Depths' Power",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "When choosing {Usurp}, the Base DMG of {Blade's Dominion} placed in hand increases by 400%, and its Arithmetica Cost becomes 0. When choosing {Dormancy}, do not place {Blade's Dominion}; instead, add 2 copies of {Decapitation Damage} to your hand, granting them the effects of {Exhaust}, {Prepare 1}, and {Retain}.",
+      "descriptionArgs": {},
+      "id": "skill.goliath.giants-grip",
+      "ownerAwakenerId": 21,
+      "kind": "over_exalt",
+      "displayName": "Giant's Grip",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.goliath.madness-omen",
+      "ownerAwakenerId": 21,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nGoliath's Base DMG is increased by [Arg3]%, and {Blade's Dominion} temporarily increases Goliath's Final DMG by [Arg4]%.\nWhen there are 1/2/3 other {Lemurian} Awakeners in the team, all Awakeners' {STR} Generation is increased by 6%/15%/30%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["20", "23", "26", "29", "32", "35", "38", "41", "44", "50"]},
+        "Arg4": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
+      },
+      "id": "talent.goliath.soulforge-aptitude",
+      "ownerAwakenerId": 21,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Decapitation Damage} gains a {STR} buff that doubles for each Tentacle.",
+      "descriptionArgs": {},
+      "id": "enlighten.goliath.death-is-rebirth",
+      "ownerAwakenerId": 21,
+      "slot": "E1",
+      "displayName": "Death is Rebirth",
+      "upgradeTargetIds": ["skill.goliath.decapitation-damage"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.goliath.decapitation-damage",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG. If the Target's HP is below 25% or the Target is Killed, return Arithmetica Cost. {STR} has [Arg2] times effectiveness on {Decapitation Damage}. For each Tentacle, {STR} has an additional 1 time effectiveness.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Law of the Strongest}: Aside from removing {STR} from all enemies, gain the same amount Temporary {STR}.",
+      "descriptionArgs": {},
+      "id": "enlighten.goliath.rule-by-the-strongest",
+      "ownerAwakenerId": 21,
+      "slot": "E2",
+      "displayName": "Rule by the Strongest",
+      "upgradeTargetIds": ["skill.goliath.law-of-the-strongest"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.goliath.law-of-the-strongest",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Gain [Power:Arg1] {STR}. Temporarily remove all enemies' {STR⯆}, and gain the same amount of Temporary {STR}.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Abyssal Depths' Power} grants Goliath 25% Temporary Crit. Rate when choosing {Usurp}, or 25 Aliemus when choosing {Dormancy}.",
+      "descriptionArgs": {},
+      "id": "enlighten.goliath.boundless-ambition",
+      "ownerAwakenerId": 21,
+      "slot": "E3",
+      "displayName": "Boundless Ambition",
+      "upgradeTargetIds": ["derived.goliath.usurp", "derived.goliath.dormancy"],
+      "upgradePatches": [
+        {
+          "targetId": "derived.goliath.usurp",
+          "targetType": "derived-skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand, obtain Temporary {STR} equal to [Arg1]% {Tentacle DMG}. Goliath obtains [Arg2]% Temporary Crit. Rate.",
+          "descriptionArgs": {"Arg2": {"kind": "fixed", "value": "25"}}
+        },
+        {
+          "targetId": "derived.goliath.dormancy",
+          "targetType": "derived-skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand. Increase the Base DMG of {Blade's Dominion} and {Decapitation Damage} by 25% in this battle. Goliath obtains [Energy:Arg2] Aliemus.",
+          "descriptionArgs": {"Arg2": {"kind": "fixed", "value": "25"}}
+        }
+      ]
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. {STR} has [Arg2] times the effect on {Blade's Dominion}. This card is considered {Strike}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "3"}
+      },
+      "id": "derived.goliath.blades-dominion",
+      "ownerAwakenerId": 21,
+      "displayName": "Blade's Dominion",
+      "cost": "2",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}, {"id": "mechanic.prepare", "value": 1}],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand. Increase the Base DMG of {Blade's Dominion} and {Decapitation Damage} by 25% in this battle.",
+      "descriptionArgs": {},
+      "id": "derived.goliath.dormancy",
+      "ownerAwakenerId": 21,
+      "displayName": "Dormancy",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand, gain Temporary {STR} equal to [Arg1]% {Tentacle DMG}.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["40", "44", "48", "52", "56", "60"], "suffix": "%"}},
+      "id": "derived.goliath.usurp",
+      "ownerAwakenerId": 21,
+      "displayName": "Usurp",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    }
+  ]
+}

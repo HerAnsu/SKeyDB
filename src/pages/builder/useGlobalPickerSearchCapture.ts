@@ -1,42 +1,49 @@
 import {useEffect, type RefObject} from 'react'
 
+import {getSearchCaptureAction} from '@/pages/search-capture'
+
 import type {PickerTab} from './types'
-import {isTypingTarget} from './utils'
 
 interface UseGlobalPickerSearchCaptureOptions {
   pickerTab: PickerTab
   searchInputRef: RefObject<HTMLInputElement | null>
   onAppendCharacter: (pickerTab: PickerTab, key: string) => void
+  onRemoveCharacter: (pickerTab: PickerTab) => void
 }
 
 export function useGlobalPickerSearchCapture({
   pickerTab,
   searchInputRef,
   onAppendCharacter,
+  onRemoveCharacter,
 }: UseGlobalPickerSearchCaptureOptions) {
   useEffect(() => {
     function onGlobalKeyDown(event: KeyboardEvent) {
-      if (event.defaultPrevented || event.isComposing) {
-        return
-      }
-      if (event.metaKey || event.ctrlKey || event.altKey) {
-        return
-      }
-      if (isTypingTarget(event.target)) {
-        return
-      }
-      if (event.key.length !== 1) {
+      const action = getSearchCaptureAction({
+        currentSearchValue: searchInputRef.current?.value ?? '',
+        event,
+      })
+      if (!action) {
         return
       }
 
-      onAppendCharacter(pickerTab, event.key)
-      searchInputRef.current?.focus()
       event.preventDefault()
+
+      if (action.kind === 'delete') {
+        onRemoveCharacter(pickerTab)
+        searchInputRef.current?.focus()
+        return
+      }
+
+      if (action.kind === 'character') {
+        onAppendCharacter(pickerTab, action.key)
+        searchInputRef.current?.focus()
+      }
     }
 
     window.addEventListener('keydown', onGlobalKeyDown)
     return () => {
       window.removeEventListener('keydown', onGlobalKeyDown)
     }
-  }, [pickerTab, searchInputRef, onAppendCharacter])
+  }, [pickerTab, searchInputRef, onAppendCharacter, onRemoveCharacter])
 }

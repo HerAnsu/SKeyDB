@@ -1,0 +1,246 @@
+{
+  "id": 24,
+  "key": "horla",
+  "displayName": "horla",
+  "ingameId": "D06",
+  "faction": "Outlanders",
+  "realm": "ULTRA",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "aliases": ["horla"],
+  "searchTags": ["Death Resistance", "Heal"],
+  "stats": {
+    "CON": "104",
+    "ATK": "108",
+    "DEF": "95",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "2.4",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "33.6%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {"CON": 1.15, "ATK": 1.2, "DEF": 1.05},
+  "substatScaling": {"AliemusRegen": "0.4", "DeathResistance": "5.6%"},
+  "assets": {"portraitKey": "horla", "iconKey": "horla"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Horla obtains [Energy:Arg1] Aliemus.{Rouse}: Immediately gain 1 stack of {Metaphor} for each {Emotion} Horla is not currently in. At each turn start, repeat this effect. Each {Emotion} can have a maximum of 3 stacks of {Metaphor}. When Psalm cards trigger {Leap}, consume all {Metaphor} stacks of that {Emotion} to trigger the corresponding effects.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
+      "id": "skill.horla.prelude-verse",
+      "ownerAwakenerId": 24,
+      "kind": "rouse",
+      "displayName": "Prelude Verse",
+      "cost": "2",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Horla obtains [Energy:Arg3] Aliemus. Considered as a \"Strike\". {Leap}: Switch {Emotion} state to {Anger}. For each stack of {Anger} {Metaphor} consumed, deal an additional 2 instances of DMG.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.horla.snarl-psalm",
+      "ownerAwakenerId": 24,
+      "kind": "strike",
+      "displayName": "Snarl Psalm",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Horla obtains [Energy:Arg2] Aliemus. Considered as a \"Defense\".{Leap}: Switch {Emotion} state to {Grief}. For each stack of '{Grief}' {Metaphor} consumed, restore [Heal:Arg3] HP.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]},
+        "Arg3": {"kind": "scaling", "values": ["12.5", "15", "17.5", "20", "22.5", "25"], "suffix": "%", "stat": "CON"}
+      },
+      "id": "skill.horla.elegy-psalm",
+      "ownerAwakenerId": 24,
+      "kind": "defense",
+      "displayName": "Elegy Psalm",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Choose 1 other Awakener to gain [Energy:Arg1] Aliemus. {Leap}: Switch {Emotion} state to {Happiness}. For each stack of {Happiness} {Metaphor} consumed, increase the amount of Aliemus granted by [Energy:Arg2].",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15"]}, "Arg2": {"kind": "fixed", "value": "10"}},
+      "id": "skill.horla.carol-psalm",
+      "ownerAwakenerId": 24,
+      "kind": "command",
+      "displayName": "Carol Psalm",
+      "cost": "0",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Gain [Power:Arg1] {STR}. Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg2]. {Leap}: Switch {Emotion} state to {Fear}. For each stack of {Fear} {Metaphor} consumed, gain an additional [Power:Arg3] {STR}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "scaling", "values": ["3", "3.6", "4.2", "4.8", "5.4", "6"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.horla.dirge-psalm",
+      "ownerAwakenerId": 24,
+      "kind": "command",
+      "displayName": "Dirge Psalm",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Restore [Heal:Arg1] HP, obtain [Power:Arg2] {STR}. Other Awakeners gain [Energy:Arg3] Aliemus. All Awakeners Temporary Crit. Rate and Crit. DMG +[Arg4]%. If Horla is currently under an {Emotion} state, improve the effect provided by {Resplendent Chapters} corresponding to the {Emotion} state by 150%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "CON"},
+        "Arg2": {"kind": "scaling", "values": ["4", "4.8", "5.6", "6.4", "7.2", "8"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "fixed", "value": "5"},
+        "Arg4": {"kind": "fixed", "value": "8"}
+      },
+      "id": "skill.horla.resplendent-chapters",
+      "ownerAwakenerId": 24,
+      "kind": "exalt",
+      "displayName": "Resplendent Chapters",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Further increase the {Emotion} state bonus effect to 600%. Obtain 3 stacks of universal {Metaphor}, which can be treated as a {Metaphor} of any {Emotion}. Universal {Metaphor} takes priority for being consumed when a {Leap} effect is triggered.",
+      "descriptionArgs": {},
+      "id": "skill.horla.ink-stained-sonnet",
+      "ownerAwakenerId": 24,
+      "kind": "over_exalt",
+      "displayName": "Ink-Stained Sonnet",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "Horla's \"Strike\" and \"Defend\" Command Cards are treated as Psalms.\nWhen Horla's Command Cards trigger their {Leap} Effect, she enters the {Emotion} state associated with that Psalm. Horla can only have one {Emotion} state active at a time, and triggering a different Psalm's {Leap} Effect will change the {Emotion} state to the corresponding {Emotion}. Each {Emotion} has a team-wide passive buff that is active while Horla remains in that {Emotion}. Each {Emotion} state enhances a different effect of Horla's Exalt. The {Emotion} state persists throughout the exploration.\nFor every 1% {Death Resistance} Horla has, the passive effect value of Horla's current {Emotion} state increases by 0.1% of the original value.",
+      "descriptionArgs": {},
+      "id": "talent.horla.writing-with-feeling",
+      "ownerAwakenerId": 24,
+      "displayName": "Writing with Feeling",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.horla.madness-omen",
+      "ownerAwakenerId": 24,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAt the start of Boss Battles, gain {Death Resistance} equal to [Arg3]% of Horla's {Death Resistance} attribute. Each time {Death Resistance} is triggered, the corresponding {Emotion} effect of {Resplendent Chapters} +[Arg4]% until turn end.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]},
+        "Arg4": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100", "110", "120", "130", "150"]}
+      },
+      "id": "talent.horla.soulforge-aptitude",
+      "ownerAwakenerId": 24,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Snarl Psalm}: Applies 1 stack of {Vulnerable} to all enemies.\n{Elegy Psalm}: Applies 1 stack of {Weakness} to all enemies.",
+      "descriptionArgs": {},
+      "id": "enlighten.horla.emberbound",
+      "ownerAwakenerId": 24,
+      "slot": "E1",
+      "displayName": "Emberbound",
+      "upgradeTargetIds": ["skill.horla.elegy-psalm", "skill.horla.snarl-psalm"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.horla.snarl-psalm",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG. Horla obtains [Energy:Arg3] Aliemus. Inflict 1 stack of {Vulnerable} on all enemies. Considered as a \"Strike\". {Leap}: Switch {Emotion} state to {Anger}. For each stack of {Anger} {Metaphor} consumed, deal an additional 2 instances of DMG.",
+          "descriptionArgs": {}
+        },
+        {
+          "targetId": "skill.horla.elegy-psalm",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield. Horla obtains [Energy:Arg2] Aliemus. Inflict 1 stack of {Weakness} on all enemies. Considered as a \"Defense\". {Leap}: Switch to the {Grief} {Emotion} state. For each stack of {Grief} {Metaphor} consumed, restore [Heal:Arg3] HP.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "Horla's Psalms gain {Retain}.",
+      "descriptionArgs": {},
+      "id": "enlighten.horla.chamber-of-shadows",
+      "ownerAwakenerId": 24,
+      "slot": "E2",
+      "displayName": "Chamber of Shadows",
+      "upgradeTargetIds": ["skill.horla.snarl-psalm", "skill.horla.elegy-psalm", "skill.horla.carol-psalm", "skill.horla.dirge-psalm"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.horla.snarl-psalm",
+          "targetType": "skill",
+          "operation": "card_keywords",
+          "descriptionArgs": {},
+          "addCardKeywords": [{"id": "mechanic.retain"}]
+        },
+        {
+          "targetId": "skill.horla.elegy-psalm",
+          "targetType": "skill",
+          "operation": "card_keywords",
+          "descriptionArgs": {},
+          "addCardKeywords": [{"id": "mechanic.retain"}]
+        },
+        {
+          "targetId": "skill.horla.carol-psalm",
+          "targetType": "skill",
+          "operation": "card_keywords",
+          "descriptionArgs": {},
+          "addCardKeywords": [{"id": "mechanic.retain"}]
+        },
+        {
+          "targetId": "skill.horla.dirge-psalm",
+          "targetType": "skill",
+          "operation": "card_keywords",
+          "descriptionArgs": {},
+          "addCardKeywords": [{"id": "mechanic.retain"}]
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "Each time the first \"Psalm\" is played in a turn, Horla gains 10 Aliemus.\nEnhance the bonus effect corresponding to the current {Emotion} state when using {Resplendent Chapters} from 150% to 250%.",
+      "descriptionArgs": {},
+      "id": "enlighten.horla.blossoms-and-verses-reunited",
+      "ownerAwakenerId": 24,
+      "slot": "E3",
+      "displayName": "Blossoms and Verses Reunited",
+      "upgradeTargetIds": ["skill.horla.resplendent-chapters"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.horla.resplendent-chapters",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Restore [Heal:Arg1] HP, obtain [Power:Arg2] {STR}. Other Awakeners gain [Energy:Arg3] Aliemus, Temporary Crit. Rate and Crit. DMG +[Arg4]%. Under different emotions, {Resplendent Chapters}' corresponding effects are enhanced by 250%.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

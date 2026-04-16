@@ -1,0 +1,746 @@
+import {describe, expect, it} from 'vitest'
+
+import {
+  getDerivedSkillById,
+  getDerivedSkills,
+  getDerivedSkillsForAwakener,
+  getDerivedSkillsForRootSkill,
+} from './derived-skills'
+
+describe('derived-skills', () => {
+  it('loads canonical derived skill records from the normalized dataset', () => {
+    const derivedSkills = getDerivedSkills()
+
+    expect(derivedSkills.length).toBeGreaterThan(0)
+    expect(derivedSkills[0]).toEqual(
+      expect.objectContaining({
+        id: expect.any(String),
+        displayName: expect.any(String),
+        descriptionTemplate: expect.any(String),
+        descriptionArgs: expect.any(Object),
+        derivedFromId: expect.any(String),
+        rootSkillId: expect.any(String),
+        childDerivedSkillIds: expect.any(Array),
+      }),
+    )
+  })
+
+  it('preserves nested parent-child chains for public derived cards', () => {
+    const derivedSkills = getDerivedSkills()
+
+    expect(getDerivedSkillById('derived.hameln.symphony-of-harmony', derivedSkills)).toEqual(
+      expect.objectContaining({
+        ownerAwakenerId: 22,
+        nodeKind: 'group',
+        rootSkillId: 'skill.hameln.laudable-masterpiece',
+        derivedFromId: 'skill.hameln.laudable-masterpiece',
+        childDerivedSkillIds: ['derived.hameln.ascending-scale', 'derived.hameln.descending-scale'],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.miryam.divine-realms-illusion', derivedSkills)).toEqual(
+      expect.objectContaining({
+        ownerAwakenerId: 32,
+        nodeKind: 'group',
+        rootSkillId: 'skill.miryam.testament-of-faith',
+        derivedFromId: 'derived.miryam.the-end-of-belief',
+        childDerivedSkillIds: [
+          'derived.miryam.faith-of-the-divine-realm',
+          'derived.miryam.call-of-the-divine-realm',
+          'derived.miryam.divine-realms-descent',
+        ],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.six-wings', derivedSkills)).toEqual(
+      expect.objectContaining({
+        ownerAwakenerId: 47,
+        rootSkillId: 'skill.tawil.pinions-of-time',
+        derivedFromId: 'derived.tawil.four-wings',
+        childDerivedSkillIds: ['derived.tawil.memories'],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.memories', derivedSkills)).toEqual(
+      expect.objectContaining({
+        ownerAwakenerId: 47,
+        nodeKind: 'group',
+        rootSkillId: 'skill.tawil.pinions-of-time',
+        derivedFromId: 'derived.tawil.six-wings',
+        childDerivedSkillIds: [
+          'derived.tawil.innocent-return-gift',
+          'derived.tawil.mutated-heart',
+          'derived.tawil.honey-mead',
+          'derived.tawil.emissarys-verdict',
+          'derived.tawil.utopian-veil',
+          'derived.tawil.polar-dusklight',
+        ],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.doll-inferno.illusions-end', derivedSkills)).toEqual(
+      expect.objectContaining({
+        ownerAwakenerId: 18,
+        derivedFromId: 'talent.doll-inferno.path-of-annihilation',
+        childDerivedSkillIds: [
+          'derived.doll-inferno.self-destruct-finale',
+          'derived.doll-inferno.fates-descent-finale',
+        ],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.daffodil.thousand-mirage', derivedSkills)).toEqual(
+      expect.objectContaining({
+        ownerAwakenerId: 12,
+        rootSkillId: 'skill.daffodil.sea-of-primordial-essence',
+        derivedFromId: 'skill.daffodil.sea-of-primordial-essence',
+        childDerivedSkillIds: [
+          'derived.daffodil.thousand-mirage-poison',
+          'derived.daffodil.thousand-mirage-counter',
+          'derived.daffodil.thousand-mirage-damage',
+        ],
+      }),
+    )
+  })
+
+  it('supports lookup by owner awakener id and root skill id', () => {
+    const derivedSkills = getDerivedSkills()
+
+    expect(getDerivedSkillsForAwakener(32, derivedSkills).map((entry) => entry.id)).toEqual(
+      expect.arrayContaining([
+        'derived.miryam.divine-realms-illusion',
+        'derived.miryam.faith-of-the-divine-realm',
+        'derived.miryam.call-of-the-divine-realm',
+        'derived.miryam.divine-realms-descent',
+        'derived.miryam.heretical-faith',
+        'derived.miryam.iron-resolve',
+        'derived.miryam.revelate-devotion',
+        'derived.miryam.the-end-of-belief',
+      ]),
+    )
+
+    expect(getDerivedSkillsForAwakener(18, derivedSkills).map((entry) => entry.id)).toEqual(
+      expect.arrayContaining([
+        'derived.doll-inferno.illusions-end',
+        'derived.doll-inferno.self-destruct-finale',
+        'derived.doll-inferno.fates-descent-finale',
+      ]),
+    )
+
+    expect(getDerivedSkillsForAwakener(19, derivedSkills).map((entry) => entry.id)).toEqual(
+      expect.arrayContaining(['derived.helot-catena.irregular-form-chains']),
+    )
+
+    expect(getDerivedSkillsForAwakener(12, derivedSkills).map((entry) => entry.id)).toEqual(
+      expect.arrayContaining([
+        'derived.daffodil.thousand-mirage',
+        'derived.daffodil.thousand-mirage-poison',
+        'derived.daffodil.thousand-mirage-counter',
+        'derived.daffodil.thousand-mirage-damage',
+      ]),
+    )
+
+    expect(getDerivedSkillsForAwakener(27, derivedSkills).map((entry) => entry.id)).toEqual(
+      expect.arrayContaining(['derived.kathigu-ra.hyperflare']),
+    )
+
+    expect(getDerivedSkillsForAwakener(47, derivedSkills).map((entry) => entry.id)).toEqual(
+      expect.arrayContaining([
+        'derived.tawil.twin-wings',
+        'derived.tawil.four-wings',
+        'derived.tawil.six-wings',
+        'derived.tawil.memories',
+        'derived.tawil.innocent-return-gift',
+        'derived.tawil.mutated-heart',
+        'derived.tawil.honey-mead',
+        'derived.tawil.emissarys-verdict',
+        'derived.tawil.utopian-veil',
+        'derived.tawil.polar-dusklight',
+      ]),
+    )
+
+    expect(
+      getDerivedSkillsForRootSkill('skill.salvador.end-of-suffering', derivedSkills).map(
+        (entry) => entry.id,
+      ),
+    ).toEqual(
+      expect.arrayContaining([
+        'derived.salvador.dedication',
+        'derived.salvador.liberation',
+        'derived.salvador.redemption',
+      ]),
+    )
+
+    expect(getDerivedSkillsForRootSkill('skill.faros.lost-city-of-lemuria', derivedSkills)).toEqual(
+      [],
+    )
+  })
+
+  it('preserves reviewed intrinsic keywords and fixed args for dedicated wiki-derived cards', () => {
+    const derivedSkills = getDerivedSkills()
+
+    expect(getDerivedSkillById('derived.hameln.symphony-of-harmony', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.global.insight', derivedSkills)).toEqual(
+      expect.objectContaining({
+        displayName: 'Insight',
+        descriptionTemplate: 'Obtain 1 Arithmetica, and draw 1 card.',
+        cost: '0',
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.global.embryo', derivedSkills)).toEqual(
+      expect.objectContaining({
+        displayName: 'Embryo',
+        descriptionTemplate:
+          '{Caro} Awakeners consume this on Exalt to trigger {Devour}. On play: One Awakener gains [Energy:Arg1] Aliemus and +[Arg2]% Crit Rate this turn.',
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '30'},
+          Arg2: {kind: 'fixed', value: '10'},
+        },
+        cost: '0',
+        cardKeywords: [],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.global.silver-key-gleam', derivedSkills)).toEqual(
+      expect.objectContaining({
+        displayName: 'Silver Key Gleam',
+        descriptionTemplate: expect.any(String),
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.global.light-cone-boundary', derivedSkills)).toEqual(
+      expect.objectContaining({
+        displayName: 'Light Cone Boundary',
+        descriptionTemplate: expect.any(String),
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.karen.marvelous-cuisine', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '0',
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '3'},
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.jenkins.ultimate-assemble', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: 'X',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['25', '30', '35', '40', '45', '50'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.jenkins.swarm-impact', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionTemplate: 'Deal [Damage:Arg2] DMG to a random enemy X+[Arg1] times.',
+        descriptionArgs: {
+          Arg2: {
+            kind: 'scaling',
+            values: ['25', '30', '35', '40', '45', '50'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+          Arg1: {kind: 'fixed', value: '4'},
+        },
+        cost: '1',
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.doresain.evernights-revel', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionTemplate: 'Deal [Damage:Arg1] {Pierce DMG} to all enemies.',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'fixed',
+            value: '40',
+            suffix: '%',
+            stat: 'ATK',
+          },
+        },
+        cost: '0',
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.daffodil.thousand-mirage-poison', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '0',
+        descriptionTemplate:
+          'Deal [Damage:Arg1] DMG. This DMG enjoys a [Arg2]x {STR} bonus. Inflict {Poison} equal to [Arg3]% DMG dealt.',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['50', '60', '70', '80', '90', '100'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+          Arg2: {kind: 'fixed', value: '3'},
+          Arg3: {kind: 'fixed', value: '50'},
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.daffodil.thousand-mirage-counter', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '2',
+        descriptionTemplate:
+          'Deal [Damage:Arg1] DMG. This DMG enjoys a [Arg2]x {STR} bonus. Obtain Temporary {Counter} equal to [Arg3]% DMG dealt.',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['100', '120', '140', '160', '180', '200'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+          Arg2: {kind: 'fixed', value: '4'},
+          Arg3: {kind: 'fixed', value: '50'},
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.daffodil.thousand-mirage-damage', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '4',
+        descriptionTemplate: 'Deal [Damage:Arg1] DMG. This DMG receives a [Arg2]x {STR} bonus.',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['150', '180', '210', '240', '270', '300'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+          Arg2: {kind: 'fixed', value: '5'},
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.castor.onyx-plume', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '0',
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.vortice.vortex-shell', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: expect.objectContaining({
+          Arg1: expect.objectContaining({
+            channel: 'Damage',
+          }),
+        }),
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.corposant.pilot', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {
+            kind: 'fixed',
+            value: '20',
+            suffix: '%',
+            stat: 'DEF',
+          },
+          Arg2: {
+            kind: 'fixed',
+            value: '2.8',
+            suffix: '%',
+            stat: 'ATK',
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.salvador.sanctuary-of-mercy', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '0',
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '1'},
+          Arg2: {kind: 'fixed', value: '100'},
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.thais.scion-of-purity', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.echoes-of-the-past', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '0',
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.innocent-return-gift', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '0',
+        descriptionTemplate: 'Choose an Awakener to gain [Energy:Arg1] Aliemus.',
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '60'},
+        },
+        cardKeywords: [],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.emissarys-verdict', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '0',
+        descriptionTemplate:
+          "Deal [Arg1]% of the target's max HP as {Fixed DMG} to the enemy in the last row. This DMG cannot be less than 300% of your own max HP.",
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '15'},
+        },
+        cardKeywords: [],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.miryam.heretical-faith', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '6',
+        descriptionArgs: {
+          Arg3: {
+            kind: 'scaling',
+            values: ['25', '30', '35', '40', '45', '50'],
+          },
+        },
+        cardKeywords: [
+          {id: 'mechanic.retain'},
+          {id: 'mechanic.exhaust'},
+          {id: 'mechanic.prepare', value: 3},
+        ],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.miryam.the-end-of-belief', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '9',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['25', '30', '35', '40', '45', '50'],
+          },
+        },
+        cardKeywords: [
+          {id: 'mechanic.retain'},
+          {id: 'mechanic.exhaust'},
+          {id: 'mechanic.prepare', value: 3},
+        ],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.miryam.iron-resolve', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['35', '42', '49', '56', '63', '70'],
+            suffix: '%',
+            stat: 'DEF',
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.miryam.revelate-devotion', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionTemplate:
+          'Gain [Power:Arg1] {STR} and [TentaclePower:Arg1] {Tentacle DMG} at turn start.',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['2', '2.4', '2.8', '3.2', '3.6', '4'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.miryam.faith-of-the-divine-realm', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '25'},
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.miryam.call-of-the-divine-realm', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '25'},
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.miryam.divine-realms-descent', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '25'},
+        },
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.mouchette.dramatic-encounter', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '30', suffix: '%', stat: 'ATK'},
+          Arg2: {kind: 'fixed', value: '1'},
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.thais.blood-of-fear', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '1'},
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.thais.blood-of-decay', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '1'},
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.thais.blood-of-coition', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '20'},
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.xu.betroth', derivedSkills)).toBeUndefined()
+    expect(getDerivedSkillById('derived.xu.enthrall', derivedSkills)).toBeUndefined()
+
+    expect(getDerivedSkillById('derived.wanda.echoes-of-whispers', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg3: {kind: 'fixed', value: '60'},
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.wanda.slumber-counter', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionTemplate:
+          'Consume 5 stacks of {Dreamlure}, Wanda obtains [StateArg1] Aliemus, and gains Temporary {Counter} equal to [StateArg2]% of permanent {Counter}.',
+        descriptionArgs: {
+          StateArg1: {
+            kind: 'scaling',
+            values: ['10', '11', '12', '13', '14', '15'],
+          },
+          StateArg2: {
+            kind: 'scaling',
+            values: ['35', '38', '41', '44', '47', '50'],
+            suffix: '%',
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.doll-inferno.elation', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg2: {
+            kind: 'scaling',
+            values: ['35', '38', '41', '44', '47', '50'],
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.doll-inferno.curse', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg2: {
+            kind: 'scaling',
+            values: ['20', '24', '28', '32', '36', '40'],
+            suffix: '%',
+            stat: 'DEF',
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.daffodil.thousand-mirage', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionTemplate:
+          'Mysterious cards with a thousand forms. Choose the one you need the most!',
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.doll-inferno.self-destruct-finale', derivedSkills)).toEqual(
+      expect.objectContaining({
+        rootSkillId: 'skill.doll-inferno.self-destruct',
+        cost: '2',
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.doll-inferno.fates-descent-finale', derivedSkills)).toEqual(
+      expect.objectContaining({
+        rootSkillId: 'skill.doll-inferno.fates-descent',
+        cost: '3',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['35', '38', '41', '44', '47', '50'],
+          },
+          Arg2: {
+            kind: 'scaling',
+            values: ['30', '36', '42', '48', '54', '60'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.helot-catena.bloodthirsty-flail', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '4',
+        cardKeywords: [{id: 'mechanic.prepare', value: 1}, {id: 'mechanic.retain'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.doresain.evernights-revel', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionTemplate: 'Deal [Damage:Arg1] {Pierce DMG} to all enemies.',
+        cost: '0',
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.goliath.usurp', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['40', '44', '48', '52', '56', '60'],
+            suffix: '%',
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.twin-wings', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['25', '28', '31', '34', '37', '40'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+          Arg2: {
+            kind: 'scaling',
+            values: ['10', '12', '14', '16', '18', '20'],
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.four-wings', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['30', '34', '38', '42', '46', '50'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+          Arg2: {
+            kind: 'scaling',
+            values: ['6.25', '7', '7.75', '8.5', '9.25', '10'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+        },
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.echoes-of-the-past', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '0',
+        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.pollux.sacred-heart', derivedSkills)).toEqual(
+      expect.objectContaining({
+        cost: '1',
+        cardKeywords: [{id: 'mechanic.prepare', value: 1}, {id: 'mechanic.retain'}],
+      }),
+    )
+
+    expect(getDerivedSkillById('derived.tawil.six-wings', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['35', '40', '45', '50', '55', '60'],
+            suffix: '%',
+            stat: 'ATK',
+          },
+        },
+      }),
+    )
+  })
+
+  it('keeps canonical ids aligned with source-backed display names', () => {
+    const derivedSkills = getDerivedSkills()
+    const allowedMismatches = new Set([
+      'derived.daffodil.thousand-mirage-poison',
+      'derived.daffodil.thousand-mirage-counter',
+      'derived.daffodil.thousand-mirage-damage',
+    ])
+    const mismatches = derivedSkills.filter((entry) => {
+      if (allowedMismatches.has(entry.id)) {
+        return false
+      }
+      const slug = entry.id.split('.').slice(2).join('.')
+      const normalizedDisplayName = entry.displayName
+        .trim()
+        .toLowerCase()
+        .replace(/['"]/g, '')
+        .replace(/[:\s]+/g, '-')
+        .replace(/[^a-z0-9-]/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')
+
+      return slug !== normalizedDisplayName
+    })
+
+    expect(mismatches).toEqual([])
+  })
+})

@@ -16,6 +16,12 @@ describe('getRelics', () => {
       description: expect.any(String),
     })
   })
+
+  it('does not leak unresolved source placeholders or wrappers into generated descriptions', () => {
+    const relics = getRelics()
+    expect(relics.every((relic) => !relic.description.includes('[Arg'))).toBe(true)
+    expect(relics.every((relic) => !relic.description.includes('<'))).toBe(true)
+  })
 })
 
 describe('getPortraitRelics', () => {
@@ -48,5 +54,11 @@ describe('getPortraitRelicByAwakenerIngameId', () => {
   it('resolves portrait relic lookup case-insensitively', () => {
     const b01 = getPortraitRelicByAwakenerIngameId('b01')
     expect(b01?.awakenerIngameId).toBe('B01')
+  })
+
+  it('keeps key relic references in canonical tagged form for the database UI', () => {
+    expect(getPortraitRelicByAwakenerIngameId('B06')?.description).toContain('{Reluctant Alms}')
+    expect(getPortraitRelicByAwakenerIngameId('C15')?.description).toContain('{Silver Key Dawn}')
+    expect(getPortraitRelicByAwakenerIngameId('C17')?.description).toContain('Temporary {Strike}')
   })
 })

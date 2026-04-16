@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const repoRoot = path.resolve(__dirname, '..')
 
-const awakenersPath = path.join(repoRoot, 'src', 'data', 'awakeners-lite.json')
+const awakenersPath = path.join(repoRoot, 'src', 'data', 'awakeners', 'awakener-roster.json')
 
 async function main() {
   const awakeners = JSON.parse(await fs.readFile(awakenersPath, 'utf8'))
@@ -40,7 +40,7 @@ async function main() {
 
   await fs.writeFile(awakenersPath, `${JSON.stringify(awakeners, null, 2)}\n`)
 
-  console.log(`Synced ${awakeners.length} awakeners with stable numeric ids from current data.`)
+  console.log(`Synced ${awakeners.length} canonical roster entries with stable numeric ids.`)
 }
 
 main().catch((error) => {

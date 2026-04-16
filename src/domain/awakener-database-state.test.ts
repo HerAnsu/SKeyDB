@@ -1,0 +1,375 @@
+import {describe, expect, it} from 'vitest'
+
+import {
+  getAwakenerDatabaseControls,
+  getDefaultAwakenerDatabaseSelection,
+  normalizeAwakenerDatabaseSelection,
+  normalizeAwakenerDatabaseSelectionForRecord,
+  patchAwakenerDatabaseSelection,
+  resolveAwakenerDatabaseState,
+} from './awakener-database-state'
+import type {AwakenerOverlayRecord} from './awakener-source-schema'
+import {
+  getAwakenerFullV2ById,
+  getAwakenersFullV2,
+  type AwakenerFullV2Record,
+} from './awakeners-full-v2'
+
+describe('awakener-database-state', () => {
+  it('normalizes and clamps database selection inputs', () => {
+    expect(
+      normalizeAwakenerDatabaseSelection({
+        awakenerLevel: 999,
+        psycheSurgeOffset: -2,
+        skillLevel: 99,
+        soulforgeLevel: 4,
+      }),
+    ).toEqual({
+      awakenerLevel: 90,
+      psycheSurgeOffset: 0,
+      skillLevel: 6,
+      selectedEnlightenSlot: null,
+      soulforgeLevel: 4,
+    })
+  })
+
+  it('resolves stats and described view from one selection object', () => {
+    const thais = getAwakenerFullV2ById(48, getAwakenersFullV2())
+    expect(thais).toBeDefined()
+    if (!thais) {
+      throw new Error('Missing canonical Thais V2 record')
+    }
+
+    const resolved = resolveAwakenerDatabaseState(
+      thais,
+      {
+        awakenerLevel: 90,
+        psycheSurgeOffset: 1,
+        skillLevel: 6,
+        selectedEnlightenSlot: 'E3',
+      },
+      {},
+      [],
+      [],
+    )
+
+    expect(resolved.selection).toEqual({
+      awakenerLevel: 90,
+      psycheSurgeOffset: 1,
+      skillLevel: 6,
+      selectedEnlightenSlot: 'E3',
+      soulforgeLevel: 0,
+    })
+    expect(resolved.controls.enlightenOptions).toEqual([
+      {value: null, label: 'E0'},
+      {value: 'E1', label: 'E1'},
+      {value: 'E2', label: 'E2'},
+      {value: 'E3', label: 'E3'},
+    ])
+    expect(resolved.stats.CON).not.toBe(thais.stats.CON)
+    expect(resolved.shellView.activeEnlightenIds).toEqual([
+      'enlighten.thais.forests-embrace',
+      'enlighten.thais.seed-of-chaos',
+      'enlighten.thais.everlasting-cycle',
+    ])
+    expect(resolved.shellView.commandCards[0]?.resolved.description).toContain('Thais obtains')
+    expect(resolved.referenceLayer.referenceInfoByName.size).toBeGreaterThan(0)
+  })
+
+  it('passes soulforge level through to the described view contract', () => {
+    const fakeRecord = buildSoulforgeFixture()
+    const resolved = resolveAwakenerDatabaseState(
+      fakeRecord,
+      {
+        soulforgeLevel: 2,
+      },
+      {},
+      buildOverlayRecords(),
+      [],
+    )
+
+    const soulforge = resolved.shellView.talents.find(
+      (entry) => entry.record.id === 'talent.test.soulforge-aptitude',
+    )
+    expect(soulforge?.resolved.description).toBe('Soulforge 20.')
+  })
+
+  it('applies soulforge stat bonuses on top of level-scaled primary stats', () => {
+    const fakeRecord = buildSoulforgeFixture()
+
+    const baseState = resolveAwakenerDatabaseState(fakeRecord, {
+      awakenerLevel: 60,
+      soulforgeLevel: 0,
+    })
+    const soulforgeState = resolveAwakenerDatabaseState(fakeRecord, {
+      awakenerLevel: 60,
+      soulforgeLevel: 2,
+    })
+
+    expect(baseState.stats.CON).toBe('80')
+    expect(baseState.stats.ATK).toBe('80')
+    expect(baseState.stats.DEF).toBe('80')
+    expect(soulforgeState.stats.CON).toBe('96')
+    expect(soulforgeState.stats.ATK).toBe('96')
+    expect(soulforgeState.stats.DEF).toBe('96')
+  })
+
+  it('describes the available database controls from canonical V2 data', () => {
+    const fakeRecord = buildSoulforgeFixture()
+
+    expect(getAwakenerDatabaseControls(fakeRecord)).toEqual({
+      enlightenOptions: [
+        {value: null, label: 'E0'},
+        {value: 'E1', label: 'E1'},
+        {value: 'E2', label: 'E2'},
+        {value: 'E3', label: 'E3'},
+      ],
+      canAdjustPsycheSurge: false,
+      psycheSurgeOffsetMin: 0,
+      psycheSurgeOffsetMax: 12,
+      hasSoulforgeTalent: true,
+      skillLevelMin: 1,
+      skillLevelMax: 6,
+      soulforgeLevelMin: 0,
+      soulforgeLevelMax: 3,
+    })
+  })
+
+  it('detects soulforge aptitude from canonical T-slots, not just extra talents', () => {
+    const twentyFour = getAwakenerFullV2ById(1, getAwakenersFullV2())
+    expect(twentyFour).toBeDefined()
+    if (!twentyFour) {
+      throw new Error('Missing canonical 24 V2 record')
+    }
+
+    const controls = getAwakenerDatabaseControls(twentyFour)
+
+    expect(twentyFour.talents.T3?.id).toBe('talent.24.soulforge-aptitude')
+    expect(controls.hasSoulforgeTalent).toBe(true)
+    expect(controls.soulforgeLevelMax).toBe(10)
+  })
+
+  it('builds concrete default selection values for upcoming database controls', () => {
+    expect(getDefaultAwakenerDatabaseSelection()).toEqual({
+      awakenerLevel: 60,
+      psycheSurgeOffset: 0,
+      skillLevel: 1,
+      selectedEnlightenSlot: null,
+      soulforgeLevel: 0,
+    })
+  })
+
+  it('normalizes selection against the actual awakener contract', () => {
+    const fakeRecord = buildSoulforgeFixture()
+
+    expect(
+      normalizeAwakenerDatabaseSelectionForRecord(fakeRecord, {
+        selectedEnlightenSlot: 'AbsoluteAxiom',
+        soulforgeLevel: 99,
+      }),
+    ).toEqual({
+      awakenerLevel: 60,
+      psycheSurgeOffset: 0,
+      skillLevel: 1,
+      selectedEnlightenSlot: 'E3',
+      soulforgeLevel: 3,
+    })
+  })
+
+  it('patches selection updates against record defaults and bounds', () => {
+    const fakeRecord = buildSoulforgeFixture()
+
+    expect(
+      patchAwakenerDatabaseSelection(
+        fakeRecord,
+        {
+          awakenerLevel: 90,
+          selectedEnlightenSlot: 'E2',
+        },
+        {
+          selectedEnlightenSlot: 'AbsoluteAxiom',
+          soulforgeLevel: 99,
+        },
+      ),
+    ).toEqual({
+      awakenerLevel: 90,
+      psycheSurgeOffset: 0,
+      skillLevel: 1,
+      selectedEnlightenSlot: 'E3',
+      soulforgeLevel: 3,
+    })
+  })
+})
+
+function buildSoulforgeFixture(): AwakenerFullV2Record {
+  return {
+    id: 999,
+    key: 'tester',
+    displayName: 'Tester',
+    aliases: ['tester'],
+    faction: 'Test',
+    realm: 'ULTRA',
+    rarity: 'SSR',
+    type: 'ASSAULT',
+    stats: {
+      CON: '100',
+      ATK: '100',
+      DEF: '100',
+      CritRate: '5%',
+      CritDamage: '50%',
+      AliemusRegen: '0',
+      KeyflareRegen: '15',
+      RealmMastery: '0',
+      SigilYield: '0%',
+      DamageAmplification: '0%',
+      DeathResistance: '0%',
+    },
+    primaryScalingBase: 20,
+    statScaling: {
+      CON: 1,
+      ATK: 1,
+      DEF: 1,
+    },
+    substatScaling: {},
+    assets: {
+      portraitKey: 'tester',
+      iconKey: 'tester',
+    },
+    searchTags: [],
+    cards: {
+      C1: {
+        id: 'skill.test.rouse',
+        ownerAwakenerId: 999,
+        kind: 'rouse',
+        displayName: 'Rouse',
+        descriptionTemplate: 'Rouse base',
+        descriptionArgs: {},
+        cardKeywords: [],
+        variants: [],
+      },
+      C2: {
+        id: 'skill.test.strike',
+        ownerAwakenerId: 999,
+        kind: 'strike',
+        displayName: 'Strike',
+        descriptionTemplate: 'Strike base',
+        descriptionArgs: {},
+        cardKeywords: [],
+        variants: [],
+      },
+      C3: {
+        id: 'skill.test.defense',
+        ownerAwakenerId: 999,
+        kind: 'defense',
+        displayName: 'Defense',
+        descriptionTemplate: 'Defense base',
+        descriptionArgs: {},
+        cardKeywords: [],
+        variants: [],
+      },
+      C4: {
+        id: 'skill.test.command-1',
+        ownerAwakenerId: 999,
+        kind: 'command',
+        displayName: 'Command 1',
+        cost: '1',
+        descriptionTemplate: 'Command 1 base',
+        descriptionArgs: {},
+        cardKeywords: [],
+        variants: [],
+      },
+      C5: {
+        id: 'skill.test.command-2',
+        ownerAwakenerId: 999,
+        kind: 'command',
+        displayName: 'Command 2',
+        cost: '1',
+        descriptionTemplate: 'Command 2 base',
+        descriptionArgs: {},
+        cardKeywords: [],
+        variants: [],
+      },
+      Exalt: {
+        id: 'skill.test.exalt',
+        ownerAwakenerId: 999,
+        kind: 'exalt',
+        displayName: 'Exalt',
+        descriptionTemplate: 'Exalt base',
+        descriptionArgs: {},
+        cardKeywords: [],
+        variants: [],
+      },
+      promotedExtras: [],
+    },
+    talents: {
+      T1: undefined,
+      T2: undefined,
+      T3: {
+        id: 'talent.test.soulforge-aptitude',
+        ownerAwakenerId: 999,
+        displayName: 'Soulforge Aptitude',
+        descriptionTemplate: 'Soulforge [Arg1].',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'scaling',
+            values: ['10', '20', '30'],
+          },
+        },
+        hasLevelScaledDescription: true,
+        maxLevel: 3,
+        upgradeTargetIds: [],
+        upgradePatches: [],
+      },
+      T4: undefined,
+      extraTalents: [],
+    },
+    enlightens: {
+      E1: {
+        id: 'enlighten.test.e1',
+        ownerAwakenerId: 999,
+        slot: 'E1',
+        displayName: 'E1',
+        descriptionTemplate: 'E1 desc',
+        descriptionArgs: {},
+        upgradeTargetIds: [],
+        upgradePatches: [],
+      },
+      E2: {
+        id: 'enlighten.test.e2',
+        ownerAwakenerId: 999,
+        slot: 'E2',
+        displayName: 'E2',
+        descriptionTemplate: 'E2 desc',
+        descriptionArgs: {},
+        upgradeTargetIds: [],
+        upgradePatches: [],
+      },
+      E3: {
+        id: 'enlighten.test.e3',
+        ownerAwakenerId: 999,
+        slot: 'E3',
+        displayName: 'E3',
+        descriptionTemplate: 'E3 desc',
+        descriptionArgs: {},
+        upgradeTargetIds: [],
+        upgradePatches: [],
+      },
+      AbsoluteAxiom: undefined,
+    },
+    derivedSkills: [],
+  }
+}
+
+function buildOverlayRecords(): AwakenerOverlayRecord[] {
+  return [
+    {
+      id: 'overlay.test.status',
+      ownerAwakenerId: 999,
+      displayName: 'Status',
+      overlayType: 'mechanic',
+      aliases: [],
+      descriptionTemplate: 'Status base',
+      descriptionArgs: {},
+    },
+  ]
+}

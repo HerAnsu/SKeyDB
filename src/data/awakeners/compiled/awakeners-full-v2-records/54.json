@@ -1,0 +1,223 @@
+{
+  "id": 54,
+  "key": "xu",
+  "displayName": "xu",
+  "ingameId": "B14",
+  "faction": "The Unknowable",
+  "realm": "CARO",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "aliases": ["xu"],
+  "searchTags": ["Arithmetica", "Max HP DMG"],
+  "stats": {
+    "CON": "203",
+    "ATK": "122",
+    "DEF": "113",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "9.6%",
+    "DeathResistance": "16.8%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {"CON": 2.25, "ATK": 1.35, "DEF": 1.25},
+  "substatScaling": {"DamageAmplification": "1.6%", "DeathResistance": "2.8%"},
+  "assets": {"portraitKey": "xu", "iconKey": "xu"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Xu gains [Energy:Arg1] Aliemus. {Rouse}: Once per turn, the first time each type of Xu's Command Cards triggers {Resonance}, its Arithmetica Cost is reduced to 0.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
+      "id": "skill.xu.lady-of-dreamless-land",
+      "ownerAwakenerId": 54,
+      "kind": "rouse",
+      "displayName": "Lady of Dreamless Land",
+      "cost": "3",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Xu obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.xu.strike",
+      "ownerAwakenerId": 54,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Xu gains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.xu.defense",
+      "ownerAwakenerId": 54,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies (guaranteed Crit) and trigger [Arg2]% {Poison}. {Resonance 3}: {Embryo Fusion} +[Arg4]%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["150", "180", "210", "240", "270", "300"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "80"},
+        "Arg4": {"kind": "fixed", "value": "50"}
+      },
+      "id": "skill.xu.bonesick-longing",
+      "ownerAwakenerId": 54,
+      "kind": "command",
+      "displayName": "Bonesick Longing",
+      "cost": "3",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Inflict [Poison:Arg1] {Poison} on all enemies, temporarily reducing their {STR⯆} by [Exhaustion:Arg2]. {Resonance 3}: Inflict 1 stack of {Spellbound} on all enemies.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "DEF"}
+      },
+      "id": "skill.xu.fan-sealed-kiss",
+      "ownerAwakenerId": 54,
+      "kind": "command",
+      "displayName": "Fan-Sealed Kiss",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "[{Devour}: Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg1].] Gain [Arg2] Arithmetica and inflict [Poison:Arg3] stacks of {Poison} on all enemies. Choose: {Betroth} or {Enthrall}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "fixed", "value": "3"},
+        "Arg3": {"kind": "scaling", "values": ["80", "96", "112", "128", "144", "160"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.xu.mist-bound-vow",
+      "ownerAwakenerId": 54,
+      "kind": "exalt",
+      "displayName": "Mist-Bound Vow",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "{Embryo Fusion} +100%. When choosing {Betroth}, the {Poison} and {Spellbound} inflicted is tripled; when choosing {Enthrall}, accumulate {Crimson Furnace} equal to 15% CON for each stack of {Spellbound} removed.",
+      "descriptionArgs": {},
+      "id": "skill.xu.karmic-grave",
+      "ownerAwakenerId": 54,
+      "kind": "over_exalt",
+      "displayName": "Karmic Grave",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.xu.madness-omen",
+      "ownerAwakenerId": 54,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAll Awakeners' {Poison} Trigger effect +[Arg3]%. \nEach stack of {Spellbound} additionally reduces the DMG dealt by \"Humanoid\" enemies by 1%, and when {Spellbound} is removed, each stack deals {Fixed DMG} equal to 1% of target's Max HP on \"Humanoid\" enemies.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "7", "9", "11", "13", "15", "17", "19", "21", "25"]}
+      },
+      "id": "talent.xu.soulforge-aptitude",
+      "ownerAwakenerId": 54,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "hasLevelScaledDescription": true,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Bonesick Longing}: {Embryo Fusion} +15%. For every 1% of DMG Amplification that Xu, her Wheels of Destiny, and Covenants have, the {Embryo Fusion} gained from this effect +0.2%.",
+      "descriptionArgs": {},
+      "id": "enlighten.xu.enmity-of-the-heart",
+      "ownerAwakenerId": 54,
+      "slot": "E1",
+      "displayName": "Enmity of the Heart",
+      "upgradeTargetIds": ["skill.xu.bonesick-longing"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.xu.bonesick-longing",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies (guaranteed Crit) and trigger [Arg2]% {Poison}. {Embryo Fusion} +[Arg6]%. {Resonance 3}: {Embryo Fusion} +[Arg4]%.",
+          "descriptionArgs": {"Arg6": {"kind": "fixed", "value": "15", "substatBonus": {"substat": "DamageAmplification", "multiplier": "0.2", "suffix": "%"}}}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Strike} and {Defense} gain {Resonance 3}: additionally gain 15 Aliemus.",
+      "descriptionArgs": {},
+      "id": "enlighten.xu.fan-and-scythe",
+      "ownerAwakenerId": 54,
+      "slot": "E2",
+      "displayName": "Fan and Scythe",
+      "upgradeTargetIds": ["skill.xu.defense", "skill.xu.strike"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.xu.defense",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield. Xu gains [Energy:Arg2] Aliemus.{Resonance 3}: Additionally gain [Energy:Arg3] Aliemus.",
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "15"}}
+        },
+        {
+          "targetId": "skill.xu.strike",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG. Xu gains [Energy:Arg2] Aliemus. {Resonance 3}: Additionally gain [Energy:Arg3] Aliemus.",
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "15"}}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "Max {Spellbound} stacks increases from 5 to 10. {Mist-Bound Vow} doubles the {Resonance} effect for Xu's next Command Card.",
+      "descriptionArgs": {},
+      "id": "enlighten.xu.nirvanas-kiss",
+      "ownerAwakenerId": 54,
+      "slot": "E3",
+      "displayName": "Nirvana's Kiss",
+      "upgradeTargetIds": ["skill.xu.mist-bound-vow", "overlay.xu.spellbound"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.xu.mist-bound-vow",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "[{Devour}: Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg1].] Gain [Arg2] Arithmetica and inflict [Poison:Arg3] stacks of {Poison} on all enemies. Xu's next triggered {Resonance} effect is doubled. Choose: {Betroth} or {Enthrall}.",
+          "descriptionArgs": {}
+        },
+        {
+          "targetId": "overlay.xu.spellbound",
+          "targetType": "overlay",
+          "operation": "override_args",
+          "descriptionArgs": {"DescArg2": {"kind": "fixed", "value": "10"}}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

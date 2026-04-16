@@ -1,6 +1,6 @@
 # Docs Guide
 
-Last updated: 2026-03-04
+Last updated: 2026-04-15
 
 This repo keeps current planning separate from historical snapshots.
 
@@ -15,7 +15,7 @@ This repo keeps current planning separate from historical snapshots.
 - `docs/notes/`
   - Design notes, migration notes, and status/reference docs.
 - `docs/archive/`
-  - Shipped or superseded plans, backlog snapshots, and old roadmap snapshots.
+  - Shipped or superseded plans, historical notes, backlog snapshots, and old roadmap snapshots.
 - `docs/templates/`
   - Lightweight starting points for plans and notes.
 
@@ -23,6 +23,7 @@ This repo keeps current planning separate from historical snapshots.
 
 - When an idea becomes real work, create a dated plan in `docs/plans/`.
 - When that plan ships or is abandoned, move it to `docs/archive/plans/`.
+- When a note becomes historical reference instead of current guidance, move it to `docs/archive/notes/`.
 - Keep completed items out of `docs/roadmap.md` and `docs/backlog.md`.
 - Keep long-lived reasoning in `docs/notes/` so future plans can link to it instead of re-explaining it.
 - Plans should be actively maintained while work is live:

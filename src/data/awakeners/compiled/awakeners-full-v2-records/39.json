@@ -1,0 +1,230 @@
+{
+  "id": 39,
+  "key": "pandia",
+  "displayName": "pandia",
+  "ingameId": "C09",
+  "faction": "Outlanders",
+  "realm": "CHAOS",
+  "rarity": "SSR",
+  "type": "ASSAULT",
+  "aliases": ["pandia"],
+  "stats": {
+    "CON": "120",
+    "ATK": "140",
+    "DEF": "124",
+    "CritRate": "9.8%",
+    "CritDamage": "64.4%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {"CON": 1.5, "ATK": 1.75, "DEF": 1.55},
+  "substatScaling": {"CritRate": "0.8%", "CritDamage": "2.4%"},
+  "assets": {"portraitKey": "pandia", "iconKey": "pandia"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Pandia obtains [Energy:Arg1] Aliemus. {Rouse}: gain [Counterattack:Arg3] stacks of {Counter}, Pandia receives [Counterattack:Arg2] {Counter} for each instance of DMG dealt.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg3": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.pandia.give-and-take",
+      "ownerAwakenerId": 39,
+      "kind": "rouse",
+      "displayName": "Give and Take",
+      "cost": "2",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Pandia obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.pandia.strike",
+      "ownerAwakenerId": 39,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Pandia obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.pandia.defense",
+      "ownerAwakenerId": 39,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg2] times and gain Temporary {Counter} for 50% of the DMG dealt.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "3"}
+      },
+      "id": "skill.pandia.whip-of-madness",
+      "ownerAwakenerId": 39,
+      "kind": "command",
+      "displayName": "Whip of Madness",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Obtain [Counterattack:Arg2] stacks of {Counter}. {Steal} [Arg1] {STR} from all enemies. Remove all enemies' {Counter}.",
+      "descriptionArgs": {
+        "Arg2": {"kind": "scaling", "values": ["6", "7.2", "8.4", "9.6", "10.8", "12"], "suffix": "%", "stat": "ATK"},
+        "Arg1": {"kind": "scaling", "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.pandia.wax-hot-desire",
+      "ownerAwakenerId": 39,
+      "kind": "command",
+      "displayName": "Wax-Hot Desire",
+      "cost": "2",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies 2 times. Each stack of {Counter} increases DMG by [Arg2]. Obtain [Power:Arg3] {STR}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "1"},
+        "Arg3": {"kind": "scaling", "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.pandia.honey-colored-tragedy",
+      "ownerAwakenerId": 39,
+      "kind": "exalt",
+      "displayName": "Honey-Colored Tragedy",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Inflict {Vulnerable} on all enemies before dealing DMG. Obtain {Counter} equal to [Arg1]% of ATK.",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "75"}},
+      "id": "skill.pandia.sweet-surrender",
+      "ownerAwakenerId": 39,
+      "kind": "over_exalt",
+      "displayName": "Sweet Surrender",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 1% Crit. Rate provided by Pandia or her Wheel of Destiny and Covenant, the Permanent {Counter} she produces +0.2%.",
+      "descriptionArgs": {},
+      "id": "talent.pandia.punishment-time",
+      "ownerAwakenerId": 39,
+      "displayName": "Punishment Time",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.pandia.madness-omen",
+      "ownerAwakenerId": 39,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\n{Whip of Madness} gains {Retain} and {Prepare}. Pandia's Final DMG against targets with attack intention +[Arg3]%, which increases by 5% per additional attack instance, up to 20%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
+      },
+      "id": "talent.pandia.soulforge-aptitude",
+      "ownerAwakenerId": 39,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Strike} gains a Temporary {Counter} equal to 50% of DMG. {Defense} gains {Counter} equivalent to [Arg1]% of ATK.",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "50"}},
+      "id": "enlighten.pandia.embrace-the-pain",
+      "ownerAwakenerId": 39,
+      "slot": "E1",
+      "displayName": "Embrace the Pain",
+      "upgradeTargetIds": ["skill.pandia.defense", "skill.pandia.strike"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.pandia.strike",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain Temporary {Counter} for 50% of the Damage. Pandia obtains [Energy:Arg2] Aliemus.",
+          "descriptionArgs": {}
+        },
+        {
+          "targetId": "skill.pandia.defense",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield. Pandia obtains [Energy:Arg2] Aliemus. Obtain [Counterattack:Arg3] stacks of {Counter}.",
+          "descriptionArgs": {"Arg3": {"kind": "scaling", "values": ["7.5", "9", "10.5", "12", "13.5", "15"], "suffix": "%", "stat": "ATK"}}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Wax-Hot Desire} gains 20 Aliemus.",
+      "descriptionArgs": {},
+      "id": "enlighten.pandia.blazing-desire",
+      "ownerAwakenerId": 39,
+      "slot": "E2",
+      "displayName": "Blazing Desire",
+      "upgradeTargetIds": ["skill.pandia.wax-hot-desire"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.pandia.wax-hot-desire",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Obtain [Counterattack:Arg2] stacks of {Counter}. {Steal} [Arg1] {STR} from all enemies. Remove all enemies' {Counter}. Gain [Energy:Arg3] Aliemus.",
+          "descriptionArgs": {"Arg3": {"kind": "fixed", "value": "20"}}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Honey-Colored Tragedy} doubles Base DMG and grants a {Counter} equal to [Arg1]% of ATK.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%"}},
+      "id": "enlighten.pandia.youre-being-naughty",
+      "ownerAwakenerId": 39,
+      "slot": "E3",
+      "displayName": "You're Being Naughty...",
+      "upgradeTargetIds": ["skill.pandia.honey-colored-tragedy"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.pandia.honey-colored-tragedy",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies 2 times. Each stack of {Counter} increases DMG by [Arg2]. Obtain [Power:Arg3] {STR}. Obtain [Counterattack:Arg4] stacks of {Counter}.",
+          "descriptionArgs": {
+            "Arg4": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"},
+            "Arg3": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%", "stat": "ATK"}
+          }
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

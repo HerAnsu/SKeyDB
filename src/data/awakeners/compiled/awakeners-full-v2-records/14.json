@@ -1,0 +1,243 @@
+{
+  "id": 14,
+  "key": "doresain",
+  "displayName": "doresain",
+  "ingameId": "B10",
+  "faction": "Out of the Aeons",
+  "realm": "CARO",
+  "rarity": "SSR",
+  "type": "ASSAULT",
+  "aliases": ["doresain"],
+  "searchTags": ["Self-Harm"],
+  "stats": {
+    "CON": "149",
+    "ATK": "158",
+    "DEF": "131",
+    "CritRate": "5%",
+    "CritDamage": "64.4%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "4.8%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {"CON": 1.65, "ATK": 1.75, "DEF": 1.45},
+  "substatScaling": {"CritDamage": "2.4%", "DamageAmplification": "0.8%"},
+  "assets": {"portraitKey": "doresain", "iconKey": "doresain"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Doresain obtains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg2] {STR}. Doresain's DMG dealt enjoys an extra [Arg3]% {STR} bonus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "fixed", "value": "200"}
+      },
+      "id": "skill.doresain.crimson-invite",
+      "ownerAwakenerId": 14,
+      "kind": "rouse",
+      "displayName": "Crimson Invite",
+      "cost": "3",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Doresain obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.doresain.strike",
+      "ownerAwakenerId": 14,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Doresain obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.doresain.defense",
+      "ownerAwakenerId": 14,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to the enemy with lowest HP. This DMG enjoys [Arg2]% {STR} bonus. Gain [Power:Arg3] {STR}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["80", "96", "112", "128", "144", "160"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "300"},
+        "Arg3": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.doresain.dirge-of-the-fallen",
+      "ownerAwakenerId": 14,
+      "kind": "command",
+      "displayName": "Dirge of the Fallen",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Lose 10% Current HP, deal [Damage:Arg1] DMG to all enemies and inflict 1 turn of {Vulnerable}.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "ATK"}},
+      "id": "skill.doresain.netherward-path",
+      "ownerAwakenerId": 14,
+      "kind": "command",
+      "displayName": "Netherward Path",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "[{Devour}: The Crit. Rate of this Exalt +[Arg2]%. Gain [Power:Arg1] {STR}.]\nDeal [Damage:Arg3] DMG to the enemy with lowest HP. This DMG enjoys [Arg4]% {STR} bonus. For every 1% HP the target is missing, the Final DMG of this Exalt +3%.\nIf there are 3 stacks of {Corpse}, Doresain eats them all to recover [Heal:Arg5] HP and double the Crit. DMG bonus of this hit.",
+      "descriptionArgs": {
+        "Arg2": {"kind": "fixed", "value": "15"},
+        "Arg1": {"kind": "scaling", "values": ["12.5", "15", "17.5", "20", "22.5", "25"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "scaling", "values": ["120", "144", "168", "192", "216", "240"], "suffix": "%", "stat": "ATK"},
+        "Arg4": {"kind": "fixed", "value": "1"},
+        "Arg5": {"kind": "scaling", "values": ["100", "120", "140", "160", "180", "200"], "suffix": "%", "stat": "CON"}
+      },
+      "id": "skill.doresain.necrotic-gala",
+      "ownerAwakenerId": 14,
+      "kind": "exalt",
+      "displayName": "Necrotic Gala",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "The Crit. Rate of this Exalt further +25%, the Final DMG of this Exalt +100%.",
+      "descriptionArgs": {},
+      "id": "skill.doresain.pandemonium-glut",
+      "ownerAwakenerId": 14,
+      "kind": "over_exalt",
+      "displayName": "Pandemonium Glut",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": [
+      {
+        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies.",
+        "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "40", "suffix": "%", "stat": "ATK"}},
+        "id": "derived.doresain.evernights-revel",
+        "ownerAwakenerId": 14,
+        "displayName": "Evernight's Revel",
+        "cost": "0",
+        "derivedFromId": "talent.doresain.festering-grace",
+        "rootSkillId": "talent.doresain.festering-grace",
+        "childDerivedSkillIds": [],
+        "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
+        "variants": []
+      }
+    ]
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "Doresain gathers 1 {Corpse} after killing an enemy or dealing Exalt DMG to a Boss.\nHe can keep up to 3 stacks of {Corpse}, which is {Retained} throughout the exploration.",
+      "descriptionArgs": {},
+      "id": "talent.doresain.casket-harvest",
+      "ownerAwakenerId": 14,
+      "displayName": "Casket Harvest",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "After Doresain gains a {Corpse}, put 1 {Evernight's Revel} into hand.",
+      "descriptionArgs": {},
+      "id": "talent.doresain.festering-grace",
+      "ownerAwakenerId": 14,
+      "displayName": "Festering Grace",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "Gain [Arg1] Aliemus at the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.doresain.madness-omen",
+      "ownerAwakenerId": 14,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T4": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAll teammates' {STR} Generation effect +[Arg3]%. When Doresain kills \"Departed\" enemies, he obtains [Arg4] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]},
+        "Arg4": {"kind": "scaling", "values": ["30", "32", "34", "36", "38", "40", "42", "44", "46", "50"]}
+      },
+      "id": "talent.doresain.soulforge-aptitude",
+      "ownerAwakenerId": 14,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "For every 1% Crit. DMG Doresain and his equipped WoD & Covenant have, increase his Crit. Rate by 0.1%.",
+      "descriptionArgs": {},
+      "id": "enlighten.doresain.feasts-overture",
+      "ownerAwakenerId": 14,
+      "slot": "E1",
+      "displayName": "Feast's Overture",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "E2": {
+      "descriptionTemplate": "For every 1% HP missing, Doresain's Command Cards' Base DMG, Shield, and Aliemus +1%.",
+      "descriptionArgs": {},
+      "id": "enlighten.doresain.hollow-whispers",
+      "ownerAwakenerId": 14,
+      "slot": "E2",
+      "displayName": "Hollow Whispers",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "E3": {
+      "descriptionTemplate": "{Evernight's Revel} Base DMG further +300%. Each time played, this turn's subsequent{Evernight's Revel} enjoy an additional 100% {STR} bonus.",
+      "descriptionArgs": {},
+      "id": "enlighten.doresain.evernights-revel",
+      "ownerAwakenerId": 14,
+      "slot": "E3",
+      "displayName": "Evernight's Revel",
+      "upgradeTargetIds": ["derived.doresain.evernights-revel"],
+      "upgradePatches": [
+        {
+          "targetId": "derived.doresain.evernights-revel",
+          "targetType": "derived-skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies. After playing, subsequent {Evernight's Revel} played this turn enjoys an additional 100% {STR} bonus.",
+          "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "160", "suffix": "%", "stat": "ATK"}}
+        }
+      ]
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies.",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "40", "suffix": "%", "stat": "ATK"}},
+      "id": "derived.doresain.evernights-revel",
+      "ownerAwakenerId": 14,
+      "displayName": "Evernight's Revel",
+      "cost": "0",
+      "derivedFromId": "talent.doresain.festering-grace",
+      "rootSkillId": "talent.doresain.festering-grace",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
+      "variants": []
+    }
+  ]
+}

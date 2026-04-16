@@ -1,6 +1,8 @@
 import {createElement, Fragment, type CSSProperties, type ReactNode} from 'react'
 
-export type FontScale = 'small' | 'medium' | 'large'
+import type {DatabaseDetailFontScale} from '@/domain/database-detail-preferences'
+
+export type FontScale = DatabaseDetailFontScale
 
 export const FONT_SCALE_VALUES: Record<FontScale, number> = {
   small: 1,
@@ -14,23 +16,15 @@ export const FONT_SCALE_OPTIONS: {id: FontScale; label: string}[] = [
   {id: 'large', label: 'L'},
 ]
 
-const STORAGE_KEY = 'modal-font-scale'
-
-export function readFontScale(): FontScale {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored === 'small' || stored === 'medium' || stored === 'large') return stored
-  return 'small'
-}
-
-export function writeFontScale(scale: FontScale): void {
-  localStorage.setItem(STORAGE_KEY, scale)
+export function getDescriptionFontScaleStyle(scale: FontScale): CSSProperties {
+  return {'--desc-font-scale': String(FONT_SCALE_VALUES[scale])} as CSSProperties
 }
 
 export function scaledFontStyle(basePx: number): CSSProperties {
   return {fontSize: `calc(var(--desc-font-scale, 1) * ${String(basePx)}px)`}
 }
 
-export const getStarSize = (scale: string) => {
+export const getStarSize = (scale: FontScale) => {
   switch (scale) {
     case 'small':
       return {width: '20px', height: '20px', space: '-space-x-2.5', top: '5px'}

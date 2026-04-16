@@ -1,0 +1,396 @@
+{
+  "id": 32,
+  "key": "miryam",
+  "displayName": "miryam",
+  "ingameId": "O07",
+  "faction": "Out of the Aeons",
+  "realm": "AEQUOR",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "aliases": ["miryam"],
+  "searchTags": ["Arithmetica", "Draw", "Heal", "Tentacles"],
+  "stats": {
+    "CON": "95",
+    "ATK": "149",
+    "DEF": "81",
+    "CritRate": "5%",
+    "CritDamage": "64.4%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "12",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {"CON": 1.05, "ATK": 1.65, "DEF": 0.9},
+  "substatScaling": {"CritDamage": "2.4%", "RealmMastery": "2"},
+  "assets": {"portraitKey": "miryam", "iconKey": "miryam"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Miryam gains [Energy:Arg1] Aliemus.{Rouse}: Tentacle Limit and Tentacle Count +1. Inflict 1 {Weakness} and {Vulnerable} on all enemies. Miryam's {Strike} and {Exalted Pyre} Crit. Rate +100%. Put 1 {Heretical Faith} into hand.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
+      "id": "skill.miryam.testament-of-faith",
+      "ownerAwakenerId": 32,
+      "kind": "rouse",
+      "displayName": "Testament of Faith",
+      "cost": "3",
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.prepare", "value": 3}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG, which enjoys a 50% {Tentacle DMG} bonus. Miryam obtains [Energy:Arg2] Aliemus. {Ritual}: Final DMG +[Arg4]%/[Arg5]%/[Arg6]%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]},
+        "Arg4": {"kind": "fixed", "value": "100"},
+        "Arg5": {"kind": "fixed", "value": "250"},
+        "Arg6": {"kind": "fixed", "value": "500"}
+      },
+      "id": "skill.miryam.strike",
+      "ownerAwakenerId": 32,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Miryam obtains [Energy:Arg2] Aliemus. {Ritual}: Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg3]/[Exhaustion:Arg4]/[Exhaustion:Arg5].",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "ATK"},
+        "Arg4": {"kind": "scaling", "values": ["12.5", "15", "17.5", "20", "22.5", "25"], "suffix": "%", "stat": "ATK"},
+        "Arg5": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.miryam.defense",
+      "ownerAwakenerId": 32,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} and inflict an equal amount of {Poison}. {Ritual}: Gain [Power:Arg3]/[Power:Arg4]/[Power:Arg5] {STR} and [TentaclePower:Arg3]/[TentaclePower:Arg4]/[TentaclePower:Arg5] {Tentacle DMG}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["45", "54", "63", "72", "81", "90"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "scaling", "values": ["1", "1.2", "1.4", "1.6", "1.8", "2"], "suffix": "%", "stat": "ATK"},
+        "Arg4": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%", "stat": "ATK"},
+        "Arg5": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.miryam.exalted-pyre",
+      "ownerAwakenerId": 32,
+      "kind": "command",
+      "displayName": "Exalted Pyre",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Choose 1 other Awakener to obtain [Energy:Arg2] Aliemus. {Ritual}: Gain [Arg4]/[Arg5]/[Arg6] Aliemus.",
+      "descriptionArgs": {
+        "Arg2": {"kind": "scaling", "values": ["35", "38", "41", "44", "47", "50"]},
+        "Arg4": {"kind": "fixed", "value": "10"},
+        "Arg5": {"kind": "fixed", "value": "25"},
+        "Arg6": {"kind": "fixed", "value": "50"}
+      },
+      "id": "skill.miryam.the-chosen-one",
+      "ownerAwakenerId": 32,
+      "kind": "command",
+      "displayName": "The Chosen One",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Place [Arg4] {Sacrament} into your hand, inflict [Poison:Arg5] {Poison} on all enemies. Gain effects based on Tentacle Stance: {Surging Tides}: gain [Power:Arg1] {STR} and [TentaclePower:Arg1] {Tentacle DMG}; {Tranquil Sea}: other Awakeners gain [Energy:Arg2] Aliemus; {Raging Waves}: trigger [Arg3]% of the {Poison} effect on all enemies.",
+      "descriptionArgs": {
+        "Arg4": {"kind": "fixed", "value": "1"},
+        "Arg5": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "ATK"},
+        "Arg1": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15"]},
+        "Arg3": {"kind": "scaling", "values": ["75", "80", "85", "90", "95", "100"]}
+      },
+      "id": "skill.miryam.pray-to-the-abyss",
+      "ownerAwakenerId": 32,
+      "kind": "exalt",
+      "displayName": "Pray to the Abyss",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Additionally places 2 copies of {Sacrament} into hand, increasing the Tentacle Limit and Tentacle Count by +1.",
+      "descriptionArgs": {},
+      "id": "skill.miryam.unacquainted-pain",
+      "ownerAwakenerId": 32,
+      "kind": "over_exalt",
+      "displayName": "Unacquainted Pain",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "At the start of the battle, place 1 {Obsession} into hand.\nMiryam's {Strike} enjoys 50% {Tentacle DMG} bonus.\nFor every 1% Crit. DMG provided by Miryam and her equipped Wheel of Destiny & Covenant, enhance her Exalt's {STR} Generation, {Tentacle DMG}, Aliemus, and {Poison} Application/Trigger effects by 0.2%.",
+      "descriptionArgs": {},
+      "id": "talent.miryam.undying-piety",
+      "ownerAwakenerId": 32,
+      "displayName": "Undying Piety",
+      "upgradeTargetIds": ["skill.miryam.pray-to-the-abyss"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.miryam.pray-to-the-abyss",
+          "targetType": "skill",
+          "operation": "arg_substat_bonuses",
+          "descriptionArgs": {},
+          "argSubstatBonuses": {
+            "Arg5": {"substat": "CritDamage", "multiplier": "0.2", "mode": "scale_base"},
+            "Arg1": {"substat": "CritDamage", "multiplier": "0.2", "mode": "scale_base"},
+            "Arg2": {"substat": "CritDamage", "multiplier": "0.2", "mode": "scale_base"},
+            "Arg3": {"substat": "CritDamage", "multiplier": "0.2", "mode": "scale_base"}
+          }
+        }
+      ]
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.miryam.madness-omen",
+      "ownerAwakenerId": 32,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAll Awakener's {Tentacle DMG} +[Arg3]%.\nWhen there are 1/2/3 other {Lemurian} Awakeners in the team, the {Tentacle DMG} generated by all Awakeners is additionally increased by 6%/15%/30%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]}
+      },
+      "id": "talent.miryam.soulforge-aptitude",
+      "ownerAwakenerId": 32,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Exalted Pyre} temporarily increases Temporary Crit. DMG by 15% of Miryam's Base Crit. DMG.",
+      "descriptionArgs": {},
+      "id": "enlighten.miryam.solitary-pilgrimage",
+      "ownerAwakenerId": 32,
+      "slot": "E1",
+      "displayName": "Solitary Pilgrimage",
+      "upgradeTargetIds": ["skill.miryam.exalted-pyre"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.miryam.exalted-pyre",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} and inflict an equal amount of {Poison}. Temporary Crit. DMG increases by 15% of Miryam's base Crit. DMG. {Ritual}: Gain [Power:Arg3]/[Power:Arg4]/[Power:Arg5] {STR} and [TentaclePower:Arg3]/[TentaclePower:Arg4]/[TentaclePower:Arg5] {Tentacle DMG}.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{The Chosen One} increases Realm Mastery by 20 points, gains {Prepare 1} and {Retain}.",
+      "descriptionArgs": {},
+      "id": "enlighten.miryam.the-ultimate-descent",
+      "ownerAwakenerId": 32,
+      "slot": "E2",
+      "displayName": "The Ultimate Descent",
+      "upgradeTargetIds": ["skill.miryam.the-chosen-one"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.miryam.the-chosen-one",
+          "targetType": "skill",
+          "operation": "card_keywords",
+          "descriptionArgs": {},
+          "addCardKeywords": [{"id": "mechanic.prepare", "value": 1}, {"id": "mechanic.retain"}]
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Ritual} effect +30%. For each {Sacrament} converted into {Obsession}, increase Miryam's Base DMG and the Base {Poison} of {Pray to the Abyss} by 15% in this battle.",
+      "descriptionArgs": {},
+      "id": "enlighten.miryam.vanitys-collapse",
+      "ownerAwakenerId": 32,
+      "slot": "E3",
+      "displayName": "Vanity's Collapse",
+      "upgradeTargetIds": ["skill.miryam.strike", "skill.miryam.defense", "skill.miryam.exalted-pyre", "skill.miryam.the-chosen-one"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.miryam.strike",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {"Arg4": {"kind": "fixed", "value": "130"}, "Arg5": {"kind": "fixed", "value": "325"}, "Arg6": {"kind": "fixed", "value": "650"}}
+        },
+        {
+          "targetId": "skill.miryam.defense",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg3": {"kind": "scaling", "values": ["6.5", "7.8", "9.1", "10.4", "11.7", "13"], "suffix": "%", "stat": "ATK"},
+            "Arg4": {"kind": "scaling", "values": ["16.25", "19.5", "22.75", "26", "29.25", "32.5"], "suffix": "%", "stat": "ATK"},
+            "Arg5": {"kind": "scaling", "values": ["32.5", "39", "45.5", "52", "58.5", "65"], "suffix": "%", "stat": "ATK"}
+          }
+        },
+        {
+          "targetId": "skill.miryam.exalted-pyre",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg3": {"kind": "scaling", "values": ["1.3", "1.56", "1.82", "2.08", "2.34", "2.6"], "suffix": "%", "stat": "ATK"},
+            "Arg4": {"kind": "scaling", "values": ["9.75", "11.7", "13.65", "15.6", "17.55", "19.5"], "suffix": "%", "stat": "ATK"},
+            "Arg5": {"kind": "scaling", "values": ["19.5", "23.4", "27.3", "31.2", "35.1", "39"], "suffix": "%", "stat": "ATK"}
+          }
+        },
+        {
+          "targetId": "skill.miryam.the-chosen-one",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {"Arg4": {"kind": "scaling", "values": ["13", "33", "65"]}}
+        }
+      ]
+    }
+  },
+  "derivedSkills": [
+    {
+      "descriptionTemplate": "Choose an Awakener to gain [Arg1] Aliemus. Draw 2 cards.",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "25"}},
+      "id": "derived.miryam.call-of-the-divine-realm",
+      "ownerAwakenerId": 32,
+      "displayName": "Call of the Divine Realm",
+      "cost": "0",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Choose an Awakener to gain [Arg1] Aliemus. Obtain 2 Arithmetica.",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "25"}},
+      "id": "derived.miryam.divine-realms-descent",
+      "ownerAwakenerId": 32,
+      "displayName": "Divine Realm's Descent",
+      "cost": "0",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Randomly place 1 of these cards into your hand.",
+      "descriptionArgs": {},
+      "id": "derived.miryam.divine-realms-illusion",
+      "ownerAwakenerId": 32,
+      "nodeKind": "group",
+      "displayName": "Divine Realm's Illusion",
+      "derivedFromId": "derived.miryam.the-end-of-belief",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": ["derived.miryam.faith-of-the-divine-realm", "derived.miryam.call-of-the-divine-realm", "derived.miryam.divine-realms-descent"],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Choose an Awakener to gain [Arg1] Aliemus. {Weakness} and {Vulnerable} all enemies for 1 turn.",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "25"}},
+      "id": "derived.miryam.faith-of-the-divine-realm",
+      "ownerAwakenerId": 32,
+      "displayName": "Faith of the Divine Realm",
+      "cost": "0",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Miryam gains [Energy:Arg3] Aliemus.{Rouse}: Tentacle Limit and Tentacle Count +1, apply 1 layer of {Weakness} and {Vulnerable} to all enemies. Put 1 {The End of Belief} into your hand. Choose: {Iron Resolve} or {Revelate Devotion}.",
+      "descriptionArgs": {"Arg3": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
+      "id": "derived.miryam.heretical-faith",
+      "ownerAwakenerId": 32,
+      "displayName": "Heretical Faith",
+      "cost": "6",
+      "derivedFromId": "skill.miryam.testament-of-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": ["derived.miryam.iron-resolve", "derived.miryam.revelate-devotion", "derived.miryam.the-end-of-belief"],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}, {"id": "mechanic.prepare", "value": 3}],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Gain [Block:Arg1] Shield at turn start.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["35", "42", "49", "56", "63", "70"], "suffix": "%", "stat": "DEF"}},
+      "id": "derived.miryam.iron-resolve",
+      "ownerAwakenerId": 32,
+      "displayName": "Iron Resolve",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Miryam gains [Arg1] Aliemus. At turn end, if this card is in hand, it will transform into {Sacrament} at the cost of reducing the next turn's Draw by 1.",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "15"}},
+      "id": "derived.miryam.obsession",
+      "ownerAwakenerId": 32,
+      "displayName": "Obsession",
+      "cost": "0",
+      "derivedFromId": "derived.miryam.sacrament",
+      "rootSkillId": "skill.miryam.pray-to-the-abyss",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Gain [Power:Arg1] {STR} and [TentaclePower:Arg1] {Tentacle DMG} at turn start.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"], "suffix": "%", "stat": "ATK"}},
+      "id": "derived.miryam.revelate-devotion",
+      "ownerAwakenerId": 32,
+      "displayName": "Revelate Devotion",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": [],
+      "cardKeywords": [],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Recover 10% of lost HP. Can be transformed into {Obsession} through {Ritual}, enhancing this Command Card's effects.",
+      "descriptionArgs": {},
+      "id": "derived.miryam.sacrament",
+      "ownerAwakenerId": 32,
+      "displayName": "Sacrament",
+      "cost": "0",
+      "derivedFromId": "skill.miryam.pray-to-the-abyss",
+      "rootSkillId": "skill.miryam.pray-to-the-abyss",
+      "childDerivedSkillIds": ["derived.miryam.obsession"],
+      "cardKeywords": [{"id": "mechanic.exhaust"}, {"id": "mechanic.retain"}],
+      "variants": []
+    },
+    {
+      "descriptionTemplate": "Miryam gains [Energy:Arg1] Aliemus.{Rouse}: Apply 1 stack of {Weakness} and {Vulnerable} to all enemies. Tentacle Limit and Tentacle Count +1. At turn end, randomly place 1 {Divine Realm's Illusion} into your hand.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]}},
+      "id": "derived.miryam.the-end-of-belief",
+      "ownerAwakenerId": 32,
+      "displayName": "The End of Belief",
+      "cost": "9",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": ["derived.miryam.divine-realms-illusion"],
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.exhaust"}, {"id": "mechanic.prepare", "value": 3}],
+      "variants": []
+    }
+  ]
+}

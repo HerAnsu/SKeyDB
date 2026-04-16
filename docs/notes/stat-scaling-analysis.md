@@ -28,7 +28,7 @@ Where:
 - `primaryScalingBase = 30` for limited awakeners
 - `scaling` is the per-stat value from `statScaling`
 
-This matches confirmed in-game and CN wiki breakpoint tables, including the previously disputed Pollux and Wanda ATK values.
+This matches confirmed in-game values and validated breakpoint tables, including the previously disputed Pollux and Wanda ATK values.
 
 ### Substats
 
@@ -73,7 +73,7 @@ That turned out to be a bad model. Once the limited vs non-limited base split wa
 
 ## Data Shape
 
-Current schema in `src/data/awakeners-full.json`:
+Current schema in the compiled awakener V2 dataset under `src/data/awakeners/compiled/awakeners-full.v2.json`:
 
 ```ts
 {
@@ -96,7 +96,7 @@ Current schema in `src/data/awakeners-full.json`:
 
 ## Validation Notes
 
-- All 55 awakeners currently in `awakeners-full.json` align with the local Lv. 60 audit note in `docs/notes/Stat scaling.md`
+- All 55 awakeners currently in the compiled awakener V2 dataset align with the local Lv. 60 audit note in `docs/archive/notes/2026-03-06-stat-scaling-source-reference.md`
 - The only stale source values were:
   - Wanda ATK scaling and Lv. 60 ATK
   - Pollux ATK scaling and Lv. 60 ATK

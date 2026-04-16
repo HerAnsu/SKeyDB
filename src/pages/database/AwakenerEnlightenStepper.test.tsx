@@ -3,13 +3,13 @@ import {useState} from 'react'
 import {act, fireEvent, render, screen} from '@testing-library/react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {AwakenerEnlightenStepper} from './AwakenerEnlightenStepper'
+import {AwakenerPsycheSurgeStepper} from './AwakenerPsycheSurgeStepper'
 
 function TestHarness({initialOffset}: {initialOffset: number}) {
   const [offset, setOffset] = useState(initialOffset)
 
   return (
-    <AwakenerEnlightenStepper
+    <AwakenerPsycheSurgeStepper
       offset={offset}
       onDecrease={() => {
         setOffset((prev) => Math.max(prev - 1, 0))
@@ -21,7 +21,7 @@ function TestHarness({initialOffset}: {initialOffset: number}) {
   )
 }
 
-describe('AwakenerEnlightenStepper', () => {
+describe('AwakenerPsycheSurgeStepper', () => {
   beforeEach(() => {
     vi.useFakeTimers()
   })

@@ -1,0 +1,253 @@
+{
+  "id": 38,
+  "key": "ogier",
+  "displayName": "ogier",
+  "ingameId": "C03",
+  "faction": "The Fools",
+  "realm": "CHAOS",
+  "rarity": "SR",
+  "type": "WARDEN",
+  "aliases": ["ogier"],
+  "searchTags": ["Dispel"],
+  "stats": {
+    "CON": "136",
+    "ATK": "116",
+    "DEF": "148",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "12",
+    "SigilYield": "7.2%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {"CON": 1.7, "ATK": 1.45, "DEF": 1.85},
+  "substatScaling": {"RealmMastery": "2", "SigilYield": "1.2%"},
+  "assets": {"portraitKey": "ogier", "iconKey": "ogier"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Ogier obtains [Energy:Arg1] Aliemus. {Rouse}: Obtain [Power:Arg3] {STR}. After Ogier plays a Card, obtain [Power:Arg2] {STR}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg3": {"kind": "scaling", "values": ["3.75", "4.5", "5.25", "6.0", "6.75", "7.5"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["1.5", "1.8", "2.1", "2.4", "2.7", "3.0"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.ogier.knights-zeal",
+      "ownerAwakenerId": 38,
+      "kind": "rouse",
+      "displayName": "Knight's Zeal",
+      "cost": "2",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Ogier obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.ogier.strike",
+      "ownerAwakenerId": 38,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Ogier obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.ogier.defense",
+      "ownerAwakenerId": 38,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield X+1 times. For each 1 Arithmetica consumed, obtain [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["7.0", "8.4", "9.8", "11.2", "12.6", "14.0"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "fixed", "value": "5"}
+      },
+      "id": "skill.ogier.unstable-barrier",
+      "ownerAwakenerId": 38,
+      "kind": "command",
+      "displayName": "Unstable Barrier",
+      "cost": "X",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG}, inflict [Arg2] turns of {Vulnerable}, which enjoys a 200% {STR} bonus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "1"}
+      },
+      "id": "skill.ogier.piercing-strike",
+      "ownerAwakenerId": 38,
+      "kind": "command",
+      "displayName": "Piercing Strike",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Dispel self {Fragile} state. Obtain [Block:Arg1] shield. Obtain [Power:Arg2] Temporary {STR}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["15", "18", "21", "24", "27", "30"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.ogier.seven-arts-and-virtues",
+      "ownerAwakenerId": 38,
+      "kind": "exalt",
+      "displayName": "Seven Arts and Virtues",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Shield gain increased by 200%, Ogier's DMG instances +1, lasting 3 turns.",
+      "descriptionArgs": {},
+      "id": "skill.ogier.resolute-devotion",
+      "ownerAwakenerId": 38,
+      "kind": "over_exalt",
+      "displayName": "Resolute Devotion",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 1% Sigil Yield Ogier has, the Temporary {STR} gained from {Seven Arts and Virtues} increases by 3%.",
+      "descriptionArgs": {},
+      "id": "talent.ogier.formless-refinement",
+      "ownerAwakenerId": 38,
+      "displayName": "Formless Refinement",
+      "upgradeTargetIds": ["skill.ogier.seven-arts-and-virtues"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.ogier.seven-arts-and-virtues",
+          "targetType": "skill",
+          "operation": "arg_substat_bonuses",
+          "descriptionArgs": {},
+          "argSubstatBonuses": {"Arg2": {"substat": "SigilYield", "multiplier": "3", "suffix": "%"}}
+        }
+      ]
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.ogier.madness-omen",
+      "ownerAwakenerId": 38,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nOgier's Shield Generation increases by [Arg3]%, and each time his Exalt is played, his Shield Generation in this battle is increased by an additional 1% of DEF.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
+      },
+      "id": "talent.ogier.soulforge-aptitude",
+      "ownerAwakenerId": 38,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Piercing Strike} inflicts +1 turn of {Vulnerable}; Base DMG by +100%; enjoys +100% {STR} bonus.",
+      "descriptionArgs": {},
+      "id": "enlighten.ogier.honesty-unto-thyself",
+      "ownerAwakenerId": 38,
+      "slot": "E1",
+      "displayName": "Honesty Unto Thyself",
+      "upgradeTargetIds": ["skill.ogier.piercing-strike"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.ogier.piercing-strike",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG}, inflict [Arg2] turns {Vulnerable}, and enjoys a 300% {STR} bonus.",
+          "descriptionArgs": {
+            "Arg1": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100"], "suffix": "%", "stat": "ATK"},
+            "Arg2": {"kind": "fixed", "value": "2"}
+          }
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Seven Arts and Virtues} increases shield by 20%. If the character is in a {Fragile} state, {Seven Arts and Virtues} grants an additional 33% shield.",
+      "descriptionArgs": {},
+      "id": "enlighten.ogier.mercy-for-the-meek",
+      "ownerAwakenerId": 38,
+      "slot": "E2",
+      "displayName": "Mercy for the Meek",
+      "upgradeTargetIds": ["skill.ogier.seven-arts-and-virtues"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.ogier.seven-arts-and-virtues",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "If team currently has {Fragile} state, dispel it and obtain [Block:Arg3] Shield. Obtain [Block:Arg1] Shield. Obtain [Power:Arg2] Temporary {STR}.",
+          "descriptionArgs": {"Arg3": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"}}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "{Unstable Barrier} Shield +28% and grants {STR} equal to [Arg1]% of ATK (effect scales with {Unstable Barrier} skill level).",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "28"}},
+      "id": "enlighten.ogier.sacrifice-for-justice",
+      "ownerAwakenerId": 38,
+      "slot": "E3",
+      "displayName": "Sacrifice for Justice",
+      "upgradeTargetIds": ["skill.ogier.unstable-barrier"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.ogier.unstable-barrier",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield X+1 times. For every 1 Arithmetica consumed, obtain [Energy:Arg3] Aliemus. Obtain [Power:Arg2] {STR}.",
+          "descriptionArgs": {
+            "Arg1": {"kind": "scaling", "values": ["9", "10.8", "12.6", "14.4", "16.2", "18"], "suffix": "%", "stat": "DEF"},
+            "Arg2": {"kind": "scaling", "values": ["3.0", "3.6", "4.2", "4.8", "5.4", "6.0"], "suffix": "%", "stat": "ATK"},
+            "Arg3": {"kind": "fixed", "value": "5"}
+          }
+        }
+      ]
+    },
+    "AbsoluteAxiom": {
+      "descriptionTemplate": "{Rouse} {Knight's Zeal} is enhanced: If {Death Resistance} has been triggered this battle, Ogier's Exalt generates 3 times the Temporary {STR} instead.",
+      "descriptionArgs": {},
+      "id": "enlighten.ogier.deathless-loyalty",
+      "ownerAwakenerId": 38,
+      "slot": "AbsoluteAxiom",
+      "displayName": "Deathless Loyalty",
+      "upgradeTargetIds": ["skill.ogier.knights-zeal"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.ogier.knights-zeal",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Ogier gains [Energy:Arg1] Aliemus.{Rouse}: Gain [Power:Arg3] {STR}; every time Ogier's card is played, gain [Power:Arg2] {STR}. If {Death Resistance} has been triggered this battle, Ogier's Exalt generates 3x the Temporary {STR}.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

@@ -10,21 +10,25 @@ const STAT_DISPLAY: {key: 'CON' | 'ATK' | 'DEF'; color: string}[] = [
   {key: 'DEF', color: '#638ea6'},
 ]
 
+const PRIORITIZED_GRID_IMAGE_COUNT = 8
+
 interface AwakenerGridCardProps {
   awakener: Awakener
+  index: number
   onSelect: (id: number) => void
 }
 
-export function AwakenerGridCard({awakener, onSelect}: AwakenerGridCardProps) {
+export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardProps) {
   const cardAsset = getAwakenerCardAsset(awakener.name)
   const displayName = formatAwakenerNameForUi(awakener.name)
   const realmTint = getRealmTint(awakener.realm)
   const stats = awakener.stats
+  const prioritizeImage = index < PRIORITIZED_GRID_IMAGE_COUNT
 
   return (
     <article className='collection-item-card group/card p-1'>
       <div
-        className='relative aspect-[5/9] overflow-hidden p-[1px] transition-all duration-300'
+        className='relative aspect-[5/9] overflow-hidden p-[1px] transition-[transform,box-shadow] duration-300'
         style={
           {
             '--realm-color': realmTint,
@@ -32,10 +36,10 @@ export function AwakenerGridCard({awakener, onSelect}: AwakenerGridCardProps) {
           } as React.CSSProperties
         }
       >
-        <div className='relative h-full w-full overflow-hidden bg-slate-900 transition-all duration-300'>
+        <div className='relative h-full w-full overflow-hidden bg-slate-900 transition-colors duration-300'>
           <button
             aria-label={`View details for ${displayName}`}
-            className='absolute inset-0 z-30 cursor-pointer transition-all duration-300 group-hover/card:bg-white/5 group-hover/card:shadow-[inset_0_0_10px_rgba(255,255,255,0.1)]'
+            className='absolute inset-0 z-30 cursor-pointer transition-[background-color,box-shadow] duration-300 group-hover/card:bg-white/5 group-hover/card:shadow-[inset_0_0_10px_rgba(255,255,255,0.1)] focus-visible:bg-white/5 focus-visible:ring-2 focus-visible:ring-amber-200/70 focus-visible:outline-none focus-visible:ring-inset'
             onClick={() => {
               onSelect(awakener.id)
             }}
@@ -46,7 +50,10 @@ export function AwakenerGridCard({awakener, onSelect}: AwakenerGridCardProps) {
             <img
               alt={displayName}
               className='h-full w-full object-cover object-top'
+              decoding='async'
               draggable={false}
+              fetchPriority={prioritizeImage ? 'high' : 'low'}
+              loading={prioritizeImage ? 'eager' : 'lazy'}
               src={cardAsset}
             />
           ) : (

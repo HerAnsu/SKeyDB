@@ -58,13 +58,3 @@ export function getRealmIcon(realmId: string | undefined): string | undefined {
   }
   return REALM_ICON_BY_ID[normalizeRealmId(realmId)]
 }
-
-// Legacy aliases kept temporarily while the rest of the UI is migrated.
-export const DEFAULT_FACTION_TINT = DEFAULT_REALM_TINT
-export const FACTION_LABEL_BY_ID = REALM_LABEL_BY_ID
-export const FACTION_TINT_BY_ID = REALM_TINT_BY_ID
-export const FACTION_ICON_BY_ID = REALM_ICON_BY_ID
-export const normalizeFactionId = normalizeRealmId
-export const getFactionTint = getRealmTint
-export const getFactionLabel = getRealmLabel
-export const getFactionIcon = getRealmIcon

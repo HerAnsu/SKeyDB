@@ -1,0 +1,237 @@
+{
+  "id": 35,
+  "key": "murphy-fauxborn",
+  "displayName": "murphy: fauxborn",
+  "ingameId": "O02EX",
+  "faction": "Out of the Aeons",
+  "realm": "AEQUOR",
+  "rarity": "Genesis",
+  "type": "CHORUS",
+  "aliases": ["murphy: fauxborn", "g-murphy"],
+  "searchTags": ["Arithmetica", "Divine Realm", "Draw", "Keyflare", "Tentacles"],
+  "stats": {
+    "CON": "99",
+    "ATK": "122",
+    "DEF": "117",
+    "CritRate": "5%",
+    "CritDamage": "57.2%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "29.4",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "0%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {"CON": 1.1, "ATK": 1.35, "DEF": 1.3},
+  "substatScaling": {"CritDamage": "1.2%", "KeyflareRegen": "2.4"},
+  "assets": {"portraitKey": "murphy-fauxborn", "iconKey": "murphy-fauxborn"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Murphy: Fauxborn gains [Energy:Arg1] Aliemus. {Rouse}: Murphy: Fauxborn inflicts [Arg2]% of the DMG she deals as {Sacrifice} stacks on the target. At turn start, gain 1 stack of {Life Seal}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["35", "38", "41", "44", "47", "50"]}
+      },
+      "id": "skill.murphy-fauxborn.tidal-sacrament",
+      "ownerAwakenerId": 35,
+      "kind": "rouse",
+      "displayName": "Tidal Sacrament",
+      "cost": "2",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Murphy: Fauxborn gains [Energy:Arg2] Aliemus",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.murphy-fauxborn.strike",
+      "ownerAwakenerId": 35,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Gain [Block:Arg1] Shield. Murphy: Fauxborn gains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.murphy-fauxborn.defense",
+      "ownerAwakenerId": 35,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Gain Keyflare equal to [Arg6]% Keyflare Regen. Trigger different effects based on current Tentacle Stance:\n{Surging Tides}: {Tentacle DMG} +[TentaclePower:Arg8], generate 1 Tentacle.\n{Tranquil Sea}: Gain [Block:Arg9] Shield, {Retain} 50% Shield to next turn.\n{Raging Waves}: Deal [Damage:Arg4] DMG [Arg3] times to the enemy with Highest HP, which enjoys a [Arg5]% {Tentacle DMG} bonus.",
+      "descriptionArgs": {
+        "Arg6": {"kind": "scaling", "values": ["200", "220", "240", "260", "280", "300"], "suffix": "%"},
+        "Arg8": {"kind": "scaling", "values": ["10.5", "12.6", "14.7", "16.8", "18.9", "21"], "suffix": "%", "stat": "ATK"},
+        "Arg9": {"kind": "scaling", "values": ["41", "49.2", "57.4", "65.6", "73.8", "82"], "suffix": "%", "stat": "DEF"},
+        "Arg4": {"kind": "scaling", "values": ["30", "36", "42", "48", "54", "60"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "fixed", "value": "5"},
+        "Arg5": {"kind": "scaling", "values": ["50", "55", "60", "65", "70", "75"], "suffix": "%"}
+      },
+      "id": "skill.murphy-fauxborn.waltz-of-lemuria",
+      "ownerAwakenerId": 35,
+      "kind": "command",
+      "displayName": "Waltz of Lemuria",
+      "cost": "3",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Gain 2 Arithmetica and draw 2 cards. Suffer {Sacrifice} equal to [Arg1]% Max HP at the start of next turn. {Aftershock}: Remove {Sacrifice} stacks equal to [Float:Arg2]% Max HP.",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "5"}, "Arg2": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4", "4.5", "5"], "suffix": "%"}},
+      "id": "skill.murphy-fauxborn.abyss-hymns",
+      "ownerAwakenerId": 35,
+      "kind": "command",
+      "displayName": "Abyss Hymns",
+      "cost": "0",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Gain [Block:Arg1] Shield. Suffer {Sacrifice} equal to [Arg2]% Max HP at the start of next turn.\nInflict [Arg3] stacks of {Birth Ritual} on all enemies. Deal [Damage:Arg5] DMG [Arg4] times to the enemy with Highest HP, which enjoys an [Arg6]% {Tentacle DMG} bonus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "fixed", "value": "10"},
+        "Arg3": {"kind": "scaling", "values": ["10", "11", "12", "13", "14", "15"]},
+        "Arg5": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "ATK"},
+        "Arg4": {"kind": "fixed", "value": "5"},
+        "Arg6": {"kind": "scaling", "values": ["100", "110", "120", "130", "140", "150"], "suffix": "%"}
+      },
+      "id": "skill.murphy-fauxborn.princess-of-delusions",
+      "ownerAwakenerId": 35,
+      "kind": "exalt",
+      "displayName": "Princess of Delusions",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Inflict +5 stacks of {Birth Ritual}. Generate 3 {Waltz of Lemuria} with 2 Arithmetica Cost, with {Prepare} and {Exhaust}.",
+      "descriptionArgs": {},
+      "id": "skill.murphy-fauxborn.aetherial-loop",
+      "ownerAwakenerId": 35,
+      "kind": "over_exalt",
+      "displayName": "Aetherial Loop",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "When Murphy: Fauxborn is in the team, the {Aequor} Realm ascends to Divine Realm: {Aequor}.\n{Tentacle DMG} is changed to 5% of the team's Max HP.\nTeam DMG Amplification +50% after exploration begins (Effect doubled if the team is entirely {Aequor} and {Chaos} Awakeners, though no additional starting Tentacles will be obtained).\nTentacle Gathering effect is removed.\n{Divine Realm: Tentacle Stance} features the following new effects:\n{Divine Realm: Tranquil Sea}: Immediately generate Shield equal to 25% Max HP, and Tentacles will no longer attack at turn end; 3 turns cooldown.\n{Divine Realm: Raging Waves}: {Tentacle DMG} × 125% for the turn; after dealing Active DMG, 1 Tentacle attacks; lose 1 Tentacle at turn end; 3 turns cooldown.\nRealm Mastery is counted as Divine Realm: {Aequor} Mastery:\nEach point provides: {Tranquil Sea} Stance's Shield Generation +0.025% Max HP. {Raging Waves} Stance's {Tentacle DMG} +0.025%. Effect doubled if the team is entirely {Aequor} and {Chaos} Awakeners.",
+      "descriptionArgs": {},
+      "id": "talent.murphy-fauxborn.divine-realms-order",
+      "ownerAwakenerId": 35,
+      "displayName": "Divine Realm's Order",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.murphy-fauxborn.madness-omen",
+      "ownerAwakenerId": 35,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nWhenever Murphy: Fauxborn deals DMG, inflict {Sacrifice} stacks equal to [Arg3]% of DMG dealt on the target. {Life Seal} state's {Birth Ritual} stack increase effect is doubled.\nWhen there are 1/2/3 other {Lemurian} Awakeners in the team: Max HP +6%/15%/30%; gain Shield equal to 50%/125%/250% of Murphy: Fauxborn's DEF after any {Lemurian} Awakener uses Exalt. Limited to once per turn; does not benefit from Shield Generation Boost.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["10", "14", "18", "22", "26", "30", "34", "38", "42", "50"]}
+      },
+      "id": "talent.murphy-fauxborn.soulforge-aptitude",
+      "ownerAwakenerId": 35,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Waltz of Lemuria} {Tentacle DMG}, Shield Generation, and Final DMG +10%, with an additional 0.2% increase for each point of Keyflare Regen Level.",
+      "descriptionArgs": {},
+      "id": "enlighten.murphy-fauxborn.kneelers-supplication",
+      "ownerAwakenerId": 35,
+      "slot": "E1",
+      "displayName": "Kneeler's Supplication",
+      "upgradeTargetIds": ["skill.murphy-fauxborn.waltz-of-lemuria"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.murphy-fauxborn.waltz-of-lemuria",
+          "targetType": "skill",
+          "operation": "override_args",
+          "descriptionArgs": {
+            "Arg8": {
+              "kind": "scaling",
+              "values": ["11.55", "13.86", "16.17", "18.48", "20.79", "23.1"],
+              "suffix": "%",
+              "stat": "ATK",
+              "substatBonus": {"substat": "KeyflareRegen", "multiplier": "0.2", "suffix": "%"}
+            },
+            "Arg9": {
+              "kind": "scaling",
+              "values": ["45.1", "54.12", "63.14", "72.16", "81.18", "90.2"],
+              "suffix": "%",
+              "stat": "DEF",
+              "substatBonus": {"substat": "KeyflareRegen", "multiplier": "0.2", "suffix": "%"}
+            }
+          }
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "Murphy: Fauxborn's Crit. Rate +3% per Tentacle. Murphy: Fauxborn's Crit. DMG +3% per 1% Max HP value of {Sacrifice} or {Delayed Sacrifice} stacks.",
+      "descriptionArgs": {},
+      "id": "enlighten.murphy-fauxborn.inverted-pregnancy",
+      "ownerAwakenerId": 35,
+      "slot": "E2",
+      "displayName": "Inverted Pregnancy",
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "E3": {
+      "descriptionTemplate": "Draw 1 {Abyss Hymns} when {Strike} or {Defense} is used. Takes effect once per turn.",
+      "descriptionArgs": {},
+      "id": "enlighten.murphy-fauxborn.profane-apocalypse",
+      "ownerAwakenerId": 35,
+      "slot": "E3",
+      "displayName": "Profane Apocalypse",
+      "upgradeTargetIds": ["skill.murphy-fauxborn.defense", "skill.murphy-fauxborn.strike"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.murphy-fauxborn.strike",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG. Murphy: Fauxborn gains [Energy:Arg2] Aliemus. Draw 1 {Abyss Hymns}, takes effect once per turn.",
+          "descriptionArgs": {}
+        },
+        {
+          "targetId": "skill.murphy-fauxborn.defense",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Gain [Block:Arg1] Shield. Murphy: Fauxborn gains [Energy:Arg2] Aliemus. Draw 1 {Abyss Hymns}, takes effect once per turn.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

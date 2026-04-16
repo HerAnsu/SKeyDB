@@ -1,0 +1,232 @@
+{
+  "id": 37,
+  "key": "nymphaea",
+  "displayName": "nymphaea",
+  "ingameId": "C08",
+  "faction": "Outlanders",
+  "realm": "CHAOS",
+  "rarity": "SSR",
+  "type": "ASSAULT",
+  "aliases": ["nymphaea"],
+  "stats": {
+    "CON": "76",
+    "ATK": "120",
+    "DEF": "80",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "22.2",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "9.6%",
+    "DeathResistance": "0%"
+  },
+  "primaryScalingBase": 20,
+  "statScaling": {"CON": 0.95, "ATK": 1.5, "DEF": 1},
+  "substatScaling": {"KeyflareRegen": "1.2", "DamageAmplification": "1.6%"},
+  "assets": {"portraitKey": "nymphaea", "iconKey": "nymphaea"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Nymphaea obtains [Energy:Arg1] Aliemus. {Rouse}: After Nymphaea plays a card, she obtains [Energy:Arg2] Aliemus. At turn end, increase the amount of {Poison} Nymphaea inflicts by [Arg3]%.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]},
+        "Arg3": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%"}
+      },
+      "id": "skill.nymphaea.drowning-in-sorrow",
+      "ownerAwakenerId": 37,
+      "kind": "rouse",
+      "displayName": "Drowning in Sorrow",
+      "cost": "1",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Nymphaea obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.nymphaea.strike",
+      "ownerAwakenerId": 37,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Nymphaea obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.nymphaea.defense",
+      "ownerAwakenerId": 37,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to the enemy with the highest HP and apply an equal amount of {Poison}, which enjoys a 2x {STR} bonus.",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["22.5", "27", "31.5", "36", "40.5", "45"], "suffix": "%", "stat": "ATK"}},
+      "id": "skill.nymphaea.midnight-tide",
+      "ownerAwakenerId": 37,
+      "kind": "command",
+      "displayName": "Midnight Tide",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Inflict [Poison:Arg1] stacks of {Poison} on all enemies for [Arg2] turns, applying {Weakness} and {Vulnerable}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "fixed", "value": "1"}
+      },
+      "id": "skill.nymphaea.knell-of-death",
+      "ownerAwakenerId": 37,
+      "kind": "command",
+      "displayName": "Knell of Death",
+      "cost": "3",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Inflict [Poison:Arg1] stacks of {Poison} on all enemies and trigger [Arg3]% of {Poison}. Obtain [Power:Arg2] {STR}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["45", "54", "63", "72", "81", "90"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "fixed", "value": "120"},
+        "Arg2": {"kind": "scaling", "values": ["4.5", "5.4", "6.3", "7.2", "8.1", "9"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.nymphaea.passage-of-the-ego",
+      "ownerAwakenerId": 37,
+      "kind": "exalt",
+      "displayName": "Passage of the Ego",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Increases the {Poison} effect caused by Nymphaea by 50% for 3 turns.",
+      "descriptionArgs": {},
+      "id": "skill.nymphaea.abyssal-funeral-rites",
+      "ownerAwakenerId": 37,
+      "kind": "over_exalt",
+      "displayName": "Abyssal Funeral Rites",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 1% DMG Amplification attribute Nymphaea has, the Base {Poison} Effect caused by {Knell of Death} and {Passage of the Ego} increases by 0.5%.",
+      "descriptionArgs": {},
+      "id": "talent.nymphaea.immerse",
+      "ownerAwakenerId": 37,
+      "displayName": "Immerse",
+      "upgradeTargetIds": ["skill.nymphaea.knell-of-death", "skill.nymphaea.passage-of-the-ego"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.nymphaea.knell-of-death",
+          "targetType": "skill",
+          "operation": "arg_substat_bonuses",
+          "descriptionArgs": {},
+          "argSubstatBonuses": {"Arg1": {"substat": "DamageAmplification", "multiplier": "0.5", "suffix": "%"}}
+        },
+        {
+          "targetId": "skill.nymphaea.passage-of-the-ego",
+          "targetType": "skill",
+          "operation": "arg_substat_bonuses",
+          "descriptionArgs": {},
+          "argSubstatBonuses": {"Arg1": {"substat": "DamageAmplification", "multiplier": "0.5", "suffix": "%"}}
+        }
+      ]
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.nymphaea.madness-omen",
+      "ownerAwakenerId": 37,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nNymphaea's {Poison} trigger effect +[Arg3]%. All Awakeners inflict +10% {Poison}.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["15", "17", "19", "21", "23", "25", "27", "29", "31", "35"]}
+      },
+      "id": "talent.nymphaea.soulforge-aptitude",
+      "ownerAwakenerId": 37,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "{Knell of Death} {Poison} dealt +100% and grants Shield equal to [Arg1]% of DEF (effect scales with {Knell of Death} skill level).",
+      "descriptionArgs": {"Arg1": {"kind": "fixed", "value": "100"}},
+      "id": "enlighten.nymphaea.oceans-vessel",
+      "ownerAwakenerId": 37,
+      "slot": "E1",
+      "displayName": "Ocean's Vessel",
+      "upgradeTargetIds": ["skill.nymphaea.knell-of-death"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.nymphaea.knell-of-death",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Apply [Poison:Arg1] stacks of {Poison} to all enemies, apply {Weakness} and {Vulnerable} for [Arg2] turns, and gain [Block:Arg3] Shield.",
+          "descriptionArgs": {"Arg3": {"kind": "scaling", "values": ["22.5", "27", "31.5", "36", "40.5", "45"], "suffix": "%", "stat": "DEF"}}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Midnight Tide} DMG increases by 33%. The first 3 Symptom Cards played each turn increase {Midnight Tide} DMG by 10% of ATK for the rest of the battle.",
+      "descriptionArgs": {},
+      "id": "enlighten.nymphaea.silent-permeation",
+      "ownerAwakenerId": 37,
+      "slot": "E2",
+      "displayName": "Silent Permeation",
+      "upgradeTargetIds": ["skill.nymphaea.midnight-tide"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.nymphaea.midnight-tide",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG to the enemy with the highest HP and apply an equal amount of {Poison}, which enjoys a 2x {STR} bonus. The first 3 Symptom Cards played each turn increase the DMG dealt by {Midnight Tide} in this battle by [Arg2].",
+          "descriptionArgs": {"Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"], "suffix": "%", "stat": "ATK"}}
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "After releasing {Passage of the Ego}, in this battle, the number of {Poison} stacks applied by {Passage of the Ego} increases by [Arg1]% of ATK (the effect scales with the level of {Passage of the Ego}).",
+      "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["45", "54", "63", "72", "81", "90"]}},
+      "id": "enlighten.nymphaea.frostbloom-tide",
+      "ownerAwakenerId": 37,
+      "slot": "E3",
+      "displayName": "Frostbloom Tide",
+      "upgradeTargetIds": ["skill.nymphaea.passage-of-the-ego"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.nymphaea.passage-of-the-ego",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Inflict [Poison:Arg1] stacks of {Poison} on all enemies and trigger [Arg3]% of {Poison}. Obtain [Power:Arg2] {STR}. Subsequent uses of {Passage of the Ego} in this battle inflict [Poison:Arg4] more stacks of {Poison}.",
+          "descriptionArgs": {"Arg4": {"kind": "scaling", "values": ["45", "54", "63", "72", "81", "90"], "suffix": "%", "stat": "ATK"}}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}

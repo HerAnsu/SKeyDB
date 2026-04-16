@@ -1,0 +1,247 @@
+{
+  "id": 29,
+  "key": "lily",
+  "displayName": "lily",
+  "ingameId": "C10",
+  "faction": "Hybrid",
+  "realm": "CHAOS",
+  "rarity": "SSR",
+  "type": "WARDEN",
+  "aliases": ["lily"],
+  "searchTags": ["Death Resistance", "Heal", "Strike"],
+  "stats": {
+    "CON": "162",
+    "ATK": "117",
+    "DEF": "162",
+    "CritRate": "5%",
+    "CritDamage": "50%",
+    "AliemusRegen": "0",
+    "KeyflareRegen": "15",
+    "RealmMastery": "0",
+    "SigilYield": "0%",
+    "DamageAmplification": "9.6%",
+    "DeathResistance": "16.8%"
+  },
+  "primaryScalingBase": 30,
+  "statScaling": {"CON": 1.8, "ATK": 1.3, "DEF": 1.8},
+  "substatScaling": {"DamageAmplification": "1.6%", "DeathResistance": "2.8%"},
+  "assets": {"portraitKey": "lily", "iconKey": "lily"},
+  "cards": {
+    "C1": {
+      "descriptionTemplate": "Lily obtains [Energy:Arg1] Aliemus. {Rouse}: At turn start, gain 10% Max HP:{Endure}. When Lily applies a Shield, inflict [Poison:Arg2] stacks of {Poison} on the enemy with the highest HP.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["25", "30", "35", "40", "45", "50"]},
+        "Arg2": {"kind": "scaling", "values": ["33.75", "40.5", "47.25", "54", "60.75", "67.5"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.lily.slime-convergence",
+      "ownerAwakenerId": 29,
+      "kind": "rouse",
+      "displayName": "Slime Convergence",
+      "cost": "2",
+      "cardKeywords": [{"id": "mechanic.retain"}],
+      "variants": []
+    },
+    "C2": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG. Lily obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "ATK"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.lily.strike",
+      "ownerAwakenerId": 29,
+      "kind": "strike",
+      "displayName": "Strike",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C3": {
+      "descriptionTemplate": "Gain [Block:Arg1] Shield. Lily's base Shield increases by 0.25% for each 1% {Death Resistance}. Lily obtains [Energy:Arg2] Aliemus.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["10", "12", "14", "16", "18", "20"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10"]}
+      },
+      "id": "skill.lily.defense",
+      "ownerAwakenerId": 29,
+      "kind": "defense",
+      "displayName": "Defense",
+      "cost": "1",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "C4": {
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG, trigger [Arg3]% of the target's {Poison}. If a Critical Hit occurs, the trigger ratio increases to [Arg4]%. This is considered a {Strike}. For each stack of {Endure}, increase DMG by 2 and remove {Endure} after use.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["75", "90", "105", "120", "135", "150"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "fixed", "value": "50"},
+        "Arg4": {"kind": "fixed", "value": "100"}
+      },
+      "id": "skill.lily.strike-to-protect",
+      "ownerAwakenerId": 29,
+      "kind": "command",
+      "displayName": "Strike to Protect",
+      "cost": "4",
+      "cardKeywords": [{"id": "mechanic.retain"}, {"id": "mechanic.prepare", "value": 1}],
+      "variants": []
+    },
+    "C5": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield and inflict [Poison:Arg2] stacks of {Poison} on all enemies. For every 1% {Death Resistance} Lily has, the Base Shield increases by 0.25%. Until the start of next turn, gain [Arg3] stacks of {Endure} for each attack received.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["12", "14.4", "16.8", "19.2", "21.6", "24"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "scaling", "values": ["40", "48", "56", "64", "72", "80"], "suffix": "%", "stat": "ATK"},
+        "Arg3": {"kind": "scaling", "values": ["20", "24", "28", "32", "36", "40"], "suffix": "%", "stat": "DEF"}
+      },
+      "id": "skill.lily.forbidden-swamp",
+      "ownerAwakenerId": 29,
+      "kind": "command",
+      "displayName": "Forbidden Swamp",
+      "cost": "2",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "Exalt": {
+      "descriptionTemplate": "Obtain [Block:Arg1] Shield. Restore [Arg2]% of {Endure} stacks as HP and remove {Endure}. Each time you are attacked, inflict [Poison:Arg4] stacks of {Poison} to the attacker for 1 turn.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "scaling", "values": ["36", "43.2", "50.4", "57.6", "64.8", "72"], "suffix": "%", "stat": "DEF"},
+        "Arg2": {"kind": "fixed", "value": "10"},
+        "Arg4": {"kind": "scaling", "values": ["50", "60", "70", "80", "90", "100"], "suffix": "%", "stat": "ATK"}
+      },
+      "id": "skill.lily.undying-flower-upon-slime",
+      "ownerAwakenerId": 29,
+      "kind": "exalt",
+      "displayName": "Undying Flower Upon Slime",
+      "cost": "100",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "OverExalt": {
+      "descriptionTemplate": "Increase {Endure} Limit by 100% for this battle, granting {Endure} equal to Max HP. Add 2 {Strike to Protect} cards with additional {Exhaust} to your hand.",
+      "descriptionArgs": {},
+      "id": "skill.lily.at-your-behest",
+      "ownerAwakenerId": 29,
+      "kind": "over_exalt",
+      "displayName": "At Your Behest",
+      "cardKeywords": [],
+      "variants": []
+    },
+    "promotedExtras": []
+  },
+  "talents": {
+    "T1": {
+      "descriptionTemplate": "For every 1% {Death Resistance} Lily and her equipped WoD & Covenant have, the Base Shield of {Forbidden Swamp} and {Defense} increases by 0.25%, and in Boss Battles, the accumulation and limit of {Endure} increase by 0.25%.\nWhen Lily is in the team, gain 1 stack of {Endure} for each lost HP, with an {Endure} stack limit equal to Max HP.",
+      "descriptionArgs": {},
+      "id": "talent.lily.surging-darkness",
+      "ownerAwakenerId": 29,
+      "displayName": "Surging Darkness",
+      "upgradeTargetIds": ["skill.lily.defense", "skill.lily.forbidden-swamp"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.lily.defense",
+          "targetType": "skill",
+          "operation": "arg_substat_bonuses",
+          "descriptionArgs": {},
+          "argSubstatBonuses": {"Arg1": {"substat": "DeathResistance", "multiplier": "0.25", "suffix": "%"}}
+        },
+        {
+          "targetId": "skill.lily.forbidden-swamp",
+          "targetType": "skill",
+          "operation": "arg_substat_bonuses",
+          "descriptionArgs": {},
+          "argSubstatBonuses": {"Arg1": {"substat": "DeathResistance", "multiplier": "0.25", "suffix": "%"}}
+        }
+      ]
+    },
+    "T2": {
+      "descriptionTemplate": "Obtain [Arg1] Aliemus after the start of exploration.",
+      "descriptionArgs": {"Arg1": {"kind": "linear", "base": "5", "gainPerLevel": "5"}},
+      "id": "talent.lily.madness-omen",
+      "ownerAwakenerId": 29,
+      "displayName": "Madness Omen",
+      "maxLevel": 12,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "T3": {
+      "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increased by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nThe Final DMG of Lily's {Strike} is increased by [Arg3]%, and the increase is doubled during Boss Battle. After being attacked by an {Ultra} enemy, gain a Delayed HP Recovery equal to [Arg4]% of the HP lost from the attack.",
+      "descriptionArgs": {
+        "Arg1": {"kind": "linear", "base": "3", "gainPerLevel": "3"},
+        "Arg2": {"kind": "linear", "base": "50", "gainPerLevel": "50"},
+        "Arg3": {"kind": "scaling", "values": ["15", "17", "19", "21", "23", "25", "27", "29", "31", "35"]},
+        "Arg4": {"kind": "scaling", "values": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "15"]}
+      },
+      "id": "talent.lily.soulforge-aptitude",
+      "ownerAwakenerId": 29,
+      "displayName": "Soulforge Aptitude",
+      "maxLevel": 10,
+      "upgradeTargetIds": [],
+      "upgradePatches": []
+    },
+    "extraTalents": []
+  },
+  "enlightens": {
+    "E1": {
+      "descriptionTemplate": "When your current HP is below 50%, {Forbidden Swamp} gains an additional shield, and the {Poison} effect is doubled.",
+      "descriptionArgs": {},
+      "id": "enlighten.lily.blackened-nourishment",
+      "ownerAwakenerId": 29,
+      "slot": "E1",
+      "displayName": "Blackened Nourishment",
+      "upgradeTargetIds": ["skill.lily.forbidden-swamp"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.lily.forbidden-swamp",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield and inflict [Poison:Arg2] stacks of {Poison} to all enemies. For every 1% {Death Resistance} Lily has, the Base Shield is increased by 0.25%. Until the start of next turn, gain [Arg3] stacks of {Endure} for each attack received. If HP is below 50%, gain an additional Shield and the applied {Poison} is doubled.",
+          "descriptionArgs": {}
+        }
+      ]
+    },
+    "E2": {
+      "descriptionTemplate": "{Strike to Protect} {Prepare 1} upgraded to {Prepare 2}, Base DMG and Crit. Rate increased by 20%.",
+      "descriptionArgs": {},
+      "id": "enlighten.lily.viscous-devour",
+      "ownerAwakenerId": 29,
+      "slot": "E2",
+      "displayName": "Viscous Devour",
+      "upgradeTargetIds": ["skill.lily.strike-to-protect"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.lily.strike-to-protect",
+          "targetType": "skill",
+          "operation": "mixed",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG, trigger [Arg3]% of the target's {Poison}. If a Critical Hit occurs, the trigger rate increases to [Arg4]%. Treated as a Strike. For each stack of {Endure}, increase DMG by 2, and remove {Endure} after use. This card's Crit. Rate is increased by 20%.",
+          "descriptionArgs": {"Arg1": {"kind": "scaling", "values": ["90", "108", "126", "144", "162", "180"], "suffix": "%", "stat": "ATK"}},
+          "addCardKeywords": [{"id": "mechanic.prepare", "value": 2}],
+          "removeCardKeywordIds": ["mechanic.prepare"]
+        }
+      ]
+    },
+    "E3": {
+      "descriptionTemplate": "At turn start, obtain {Endure} equal to 10% Max HP. {Undying Flower Upon Slime} and {Strike to Protect} only remove half of the {Endure}.",
+      "descriptionArgs": {},
+      "id": "enlighten.lily.never-forget",
+      "ownerAwakenerId": 29,
+      "slot": "E3",
+      "displayName": "Never Forget...",
+      "upgradeTargetIds": ["skill.lily.strike-to-protect", "skill.lily.undying-flower-upon-slime"],
+      "upgradePatches": [
+        {
+          "targetId": "skill.lily.undying-flower-upon-slime",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Obtain [Block:Arg1] Shield. Restore [Arg2]% of {Endure} stacks as HP and remove half of {Endure}. Each time you are attacked, inflict [Poison:Arg4] stacks of {Poison} to the attacker, lasting 1 turn.",
+          "descriptionArgs": {}
+        },
+        {
+          "targetId": "skill.lily.strike-to-protect",
+          "targetType": "skill",
+          "operation": "replace_description",
+          "descriptionTemplate": "Deal [Damage:Arg1] DMG, trigger [Arg3]% of the target's {Poison}. If a Critical Hit occurs, the trigger rate increases to [Arg4]%. Considered a {Strike}. For each stack of {Endure}, increase DMG by 2, and remove half of the {Endure} after use. This card's Crit. Rate is increased by 20%.",
+          "descriptionArgs": {}
+        }
+      ]
+    }
+  },
+  "derivedSkills": []
+}
