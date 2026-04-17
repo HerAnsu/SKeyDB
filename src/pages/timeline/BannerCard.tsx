@@ -48,9 +48,13 @@ const BORDER_INSET = 1
 const CYCLE_INTERVAL_MS = 2500
 const TRANSITION_DURATION_MS = 800
 
-function findAwakenerRealm(name: string): string | undefined {
+function findAwakener(name: string) {
   const needle = name.toLowerCase()
-  return getAwakeners().find((a) => a.name.toLowerCase() === needle)?.realm
+  return getAwakeners().find((a) => a.name.toLowerCase() === needle)
+}
+
+function findAwakenerRealm(name: string): string | undefined {
+  return findAwakener(name)?.realm
 }
 
 function findSignatureWheel(awakenerName: string) {
@@ -86,12 +90,22 @@ interface SliceAsset {
 }
 
 function resolveSliceAsset(unit: BannerFeaturedUnit): SliceAsset {
+  if (unit.customArt) {
+    const awakener = unit.kind === 'awakener' ? findAwakener(unit.name) : undefined
+    return {
+      url: unit.customArt,
+      label: unit.name,
+      linkTo: awakener ? buildDatabaseAwakenerPath({name: unit.name}) : undefined,
+      realmId: unit.realmId ?? (unit.kind === 'wheel' ? undefined : awakener?.realm),
+      isWheel: unit.kind === 'wheel' || unit.kind === 'wheel-auto',
+    }
+  }
   if (unit.kind === 'awakener') {
     return {
       url: getAwakenerCardAsset(unit.name),
       label: unit.name,
-      linkTo: buildDatabaseAwakenerPath({name: unit.name}),
-      realmId: findAwakenerRealm(unit.name),
+      linkTo: findAwakener(unit.name) ? buildDatabaseAwakenerPath({name: unit.name}) : undefined,
+      realmId: unit.realmId ?? findAwakenerRealm(unit.name),
       isWheel: false,
     }
   }
@@ -102,8 +116,17 @@ function resolveSliceAsset(unit: BannerFeaturedUnit): SliceAsset {
       url: wheel ? getWheelAssetById(wheel.id) : undefined,
       label: unit.name,
       linkTo: undefined,
-      realmId: wheel?.realm,
+      realmId: unit.realmId ?? wheel?.realm,
       isWheel: true,
+    }
+  }
+  if (unit.kind === 'placeholder') {
+    return {
+      url: undefined,
+      label: unit.name,
+      linkTo: undefined,
+      realmId: undefined,
+      isWheel: false,
     }
   }
   const wheel = findSignatureWheel(unit.name)
@@ -111,7 +134,7 @@ function resolveSliceAsset(unit: BannerFeaturedUnit): SliceAsset {
     url: wheel ? getWheelAssetById(wheel.id) : undefined,
     label: wheel?.name ?? unit.name,
     linkTo: undefined,
-    realmId: wheel?.realm ?? findAwakenerRealm(unit.name),
+    realmId: unit.realmId ?? wheel?.realm ?? findAwakenerRealm(unit.name),
     isWheel: true,
   }
 }
@@ -120,6 +143,21 @@ interface BannerSliceProps {
   unit: BannerFeaturedUnit
   index: number
   total: number
+}
+
+function getSliceShellStyle(index: number) {
+  return {
+    flex: '1 1 0',
+    minWidth: 0,
+    marginLeft: index === 0 ? 0 : -SKEW_PX,
+  }
+}
+
+function getSliceClipStyle(index: number, total: number) {
+  return {
+    ...getSliceShellStyle(index),
+    clipPath: buildClipPath(index, total),
+  }
 }
 
 function SliceLabel({asset, total}: {asset: SliceAsset; total: number}) {
@@ -132,9 +170,7 @@ function SliceLabel({asset, total}: {asset: SliceAsset; total: number}) {
   const pb = total <= 2 ? 'pb-2.5' : 'pb-1.5'
 
   return (
-    <div
-      className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-slate-950 from-15% via-slate-950/75 to-transparent px-1 pt-12 ${pb}`}
-    >
+    <div className={`pointer-events-none absolute inset-x-0 bottom-0 z-20 px-1 pt-12 ${pb}`}>
       <div className={`flex flex-col items-center ${gap}`}>
         {realmIcon && !asset.isWheel ? (
           <img
@@ -155,17 +191,27 @@ function SliceLabel({asset, total}: {asset: SliceAsset; total: number}) {
   )
 }
 
-function BannerSlice({unit, index, total}: BannerSliceProps) {
+function SliceLabelSlot({asset, index, total}: {asset: SliceAsset; index: number; total: number}) {
+  return (
+    <div className='relative block h-full shrink-0' style={getSliceShellStyle(index)}>
+      <SliceLabel asset={asset} total={total} />
+    </div>
+  )
+}
+
+function BannerArtSlice({unit, index, total}: BannerSliceProps) {
   const asset = resolveSliceAsset(unit)
-  const clipPath = buildClipPath(index, total)
-  const marginLeft = index === 0 ? 0 : -SKEW_PX
 
   const imgClass = asset.isWheel
     ? 'h-full w-full object-cover object-center scale-[1.15]'
     : 'h-full w-full object-cover object-top'
 
-  const inner = (
-    <>
+  return (
+    <div
+      className='group/slice relative block h-full shrink-0 overflow-hidden transition-[filter] duration-150 hover:brightness-110 focus-visible:brightness-110'
+      style={getSliceClipStyle(index, total)}
+      title={asset.label}
+    >
       <div className='h-full w-full transition-transform duration-300 ease-out group-hover/slice:-translate-y-1 group-hover/slice:scale-[1.03]'>
         {asset.url ? (
           <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
@@ -175,25 +221,9 @@ function BannerSlice({unit, index, total}: BannerSliceProps) {
           </div>
         )}
       </div>
-      <SliceLabel asset={asset} total={total} />
-    </>
-  )
-
-  const sharedClassName =
-    'group/slice relative block h-full shrink-0 overflow-hidden transition-[filter] duration-150 hover:brightness-110 focus-visible:brightness-110'
-  const sharedStyle = {flex: '1 1 0', minWidth: 0, clipPath, marginLeft}
-
-  if (asset.linkTo) {
-    return (
-      <Link className={sharedClassName} style={sharedStyle} title={asset.label} to={asset.linkTo}>
-        {inner}
-      </Link>
-    )
-  }
-
-  return (
-    <div className={sharedClassName} style={sharedStyle} title={asset.label}>
-      {inner}
+      {asset.linkTo ? (
+        <Link className='absolute inset-0 z-30' title={asset.label} to={asset.linkTo} />
+      ) : null}
     </div>
   )
 }
@@ -343,31 +373,25 @@ interface PoolBannerSliceProps {
   total: number
 }
 
-function PoolSliceLayer({asset, total}: {asset: SliceAsset; total: number}) {
+function PoolSliceLayer({asset}: {asset: SliceAsset}) {
   const imgClass = asset.isWheel
     ? 'absolute inset-0 h-full w-full object-cover object-center scale-[1.15]'
     : 'absolute inset-0 h-full w-full object-cover object-top'
 
   return (
-    <>
-      <div className='absolute inset-0 transition-transform duration-300 ease-out group-hover/slice:-translate-y-1 group-hover/slice:scale-[1.03]'>
-        {asset.url ? (
-          <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
-        ) : (
-          <div className='flex h-full w-full items-center justify-center bg-slate-800/80'>
-            <span className='sigil-placeholder sigil-placeholder-card' />
-          </div>
-        )}
-      </div>
-      <SliceLabel asset={asset} total={total} />
-    </>
+    <div className='absolute inset-0 transition-transform duration-300 ease-out group-hover/slice:-translate-y-1 group-hover/slice:scale-[1.03]'>
+      {asset.url ? (
+        <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
+      ) : (
+        <div className='flex h-full w-full items-center justify-center bg-slate-800/80'>
+          <span className='sigil-placeholder sigil-placeholder-card' />
+        </div>
+      )}
+    </div>
   )
 }
 
 function PoolBannerSlice({assets, frame, index, total}: PoolBannerSliceProps) {
-  const clipPath = buildClipPath(index, total)
-  const marginLeft = index === 0 ? 0 : -SKEW_PX
-
   const [layers, setLayers] = useState<{a: number; b: number; front: 'a' | 'b'}>({
     a: frame.activeIdx,
     b: frame.activeIdx,
@@ -392,26 +416,26 @@ function PoolBannerSlice({assets, frame, index, total}: PoolBannerSliceProps) {
 
   return (
     <div
-      className={`relative block h-full shrink-0 overflow-hidden ${hasLink ? 'group/slice transition-[filter] duration-150 hover:brightness-110' : ''}`}
-      style={{flex: '1 1 0', minWidth: 0, clipPath, marginLeft}}
+      className={`group/slice relative block h-full shrink-0 overflow-hidden ${hasLink ? 'transition-[filter] duration-150 hover:brightness-110' : ''}`}
+      style={getSliceClipStyle(index, total)}
     >
       <div
-        className='absolute inset-0 transition-opacity ease-in-out'
+        className='absolute inset-0 overflow-hidden transition-opacity ease-in-out'
         style={{
           opacity: layers.front === 'a' ? 1 : 0,
           transitionDuration: `${String(TRANSITION_DURATION_MS)}ms`,
         }}
       >
-        <PoolSliceLayer asset={assetA} total={total} />
+        <PoolSliceLayer asset={assetA} />
       </div>
       <div
-        className='absolute inset-0 transition-opacity ease-in-out'
+        className='absolute inset-0 overflow-hidden transition-opacity ease-in-out'
         style={{
           opacity: layers.front === 'b' ? 1 : 0,
           transitionDuration: `${String(TRANSITION_DURATION_MS)}ms`,
         }}
       >
-        <PoolSliceLayer asset={assetB} total={total} />
+        <PoolSliceLayer asset={assetB} />
       </div>
       {frontAsset.linkTo ? (
         <Link className='absolute inset-0 z-20' title={frontAsset.label} to={frontAsset.linkTo} />
@@ -447,12 +471,26 @@ export function BannerCard({banner, now}: BannerCardProps) {
   const status = getTimelineStatus(banner.startDate, banner.endDate, now)
   const countdownDisplay = getTimelineCountdownDisplay(banner.startDate, banner.endDate, now)
   const displaySlices = useMemo(() => expandFeatured(banner.featured ?? []), [banner.featured])
+  const displayAssets = useMemo(
+    () => displaySlices.map((unit) => resolveSliceAsset(unit)),
+    [displaySlices],
+  )
   const visualSlots = useMemo(
     () => (banner.poolSlots ? resolvePoolSlots(banner.poolSlots) : null),
     [banner.poolSlots],
   )
   const cycleFrames = usePoolCycling(banner.poolSlots ?? [])
   const isEnded = status === 'ended'
+  const hasSliceArt = (visualSlots?.length ?? 0) > 0 || displayAssets.length > 0
+  const visualLabelAssets = useMemo(() => {
+    if (!visualSlots) return null
+    return visualSlots.map((slot) => {
+      const frame = cycleFrames[slot.cycleFrameIndex]
+      const assetIndex =
+        frame.transitioning && frame.incomingIdx >= 0 ? frame.incomingIdx : frame.activeIdx
+      return slot.assets[assetIndex] ?? slot.assets[0]
+    })
+  }, [cycleFrames, visualSlots])
 
   return (
     <article
@@ -470,9 +508,9 @@ export function BannerCard({banner, now}: BannerCardProps) {
                 total={visualSlots.length}
               />
             ))
-          ) : displaySlices.length > 0 ? (
+          ) : displayAssets.length > 0 ? (
             displaySlices.map((unit, index) => (
-              <BannerSlice
+              <BannerArtSlice
                 index={index}
                 key={`${unit.kind}-${unit.name}`}
                 total={displaySlices.length}
@@ -483,6 +521,32 @@ export function BannerCard({banner, now}: BannerCardProps) {
             <BannerPlaceholderArt />
           )}
         </div>
+        {hasSliceArt ? (
+          <div className='pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-t from-slate-950 from-15% via-slate-950/75 to-transparent' />
+        ) : null}
+        {visualLabelAssets && visualLabelAssets.length > 0 ? (
+          <div className='pointer-events-none absolute inset-0 z-20 flex'>
+            {visualLabelAssets.map((asset, index) => (
+              <SliceLabelSlot
+                asset={asset}
+                index={index}
+                key={`${asset.label}-${String(index)}`}
+                total={visualLabelAssets.length}
+              />
+            ))}
+          </div>
+        ) : displayAssets.length > 0 ? (
+          <div className='pointer-events-none absolute inset-0 z-20 flex'>
+            {displayAssets.map((asset, index) => (
+              <SliceLabelSlot
+                asset={asset}
+                index={index}
+                key={`${asset.label}-${String(index)}`}
+                total={displayAssets.length}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
 
       <div
