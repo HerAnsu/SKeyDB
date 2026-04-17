@@ -11,7 +11,14 @@ import {
 } from './timeline'
 import {getWheels} from './wheels'
 
-type FeaturedInput = string | {name: string; kind?: 'awakener' | 'wheel' | 'wheel-auto'}
+type FeaturedInput =
+  | string
+  | {
+      name: string
+      kind?: 'awakener' | 'wheel' | 'wheel-auto' | 'placeholder'
+      customArt?: string
+      realmId?: string
+    }
 
 interface PoolSlotInput {
   pool: FeaturedInput[]
@@ -52,6 +59,11 @@ const timelineEventAssets = import.meta.glob<string>('../assets/events/*', {
   import: 'default',
 })
 
+const timelineBannerAssets = import.meta.glob<string>('../assets/banners/*', {
+  eager: true,
+  import: 'default',
+})
+
 function cleanDescription(desc: string | undefined): string | undefined {
   if (!desc) return desc
   return desc.replace(/ *\n */g, '\n').trim()
@@ -64,17 +76,30 @@ function resolveBundledEventAsset(value: string): string | undefined {
   return timelineEventAssets[`../assets/events/${fileName}`]
 }
 
+function resolveBundledBannerAsset(value: string): string | undefined {
+  const normalized = value.replace(/^\/+/, '')
+  if (!normalized.startsWith('banners/')) return undefined
+  const fileName = normalized.slice('banners/'.length)
+  return timelineBannerAssets[`../assets/banners/${fileName}`]
+}
+
 function resolveCustomArt(value: string | undefined): string | undefined {
   if (!value) return undefined
   if (value.startsWith('http://') || value.startsWith('https://')) return value
   if (value.startsWith('/events/')) return resolveBundledEventAsset(value)
+  if (value.startsWith('/banners/')) return resolveBundledBannerAsset(value)
   if (value.startsWith('/')) return value
   return undefined
 }
 
 function resolveUnit(input: FeaturedInput): BannerFeaturedUnit {
   if (typeof input !== 'string') {
-    return {name: input.name, kind: input.kind ?? 'awakener'}
+    return {
+      name: input.name,
+      kind: input.kind ?? 'awakener',
+      customArt: resolveCustomArt(input.customArt),
+      realmId: input.realmId,
+    }
   }
   const lower = input.toLowerCase()
   if (getWheels().some((w) => w.name.toLowerCase() === lower)) {

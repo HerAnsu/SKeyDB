@@ -138,11 +138,26 @@ The `featured` array lists the units shown as art slices on the banner card. Eac
 ]
 ```
 
+Objects can also carry optional banner-only rendering fields:
+```json
+{
+  "name": "Arachne",
+  "kind": "awakener",
+  "customArt": "/banners/arachne-char.webp",
+  "realmId": "ULTRA"
+}
+```
+
 | Kind | Meaning |
 |------|---------|
 | `"awakener"` | Character card art (default) |
 | `"wheel"` | Wheel art — use the wheel's exact name |
 | `"wheel-auto"` | Signature wheel — use the **awakener's** name and the code finds their signature wheel automatically |
+| `"placeholder"` | Placeholder label with fallback art — useful when scaffolding a banner before the final unit list is ready |
+
+Optional object fields:
+- `customArt`: Overrides the art for that specific featured unit or pool member. Paths starting with `/banners/` resolve against `src/assets/banners/*`.
+- `realmId`: Overrides the realm used for icon/tint decoration. Useful for fake or unreleased banner units.
 
 A common pattern for solo rate-up banners (character + their wheel):
 ```json
@@ -193,6 +208,16 @@ When `linked` is true, the code auto-expands to show the awakener and their sign
   { "pool": ["Hameln", "Corposant", "Lotan"] },
   { "pool": ["Wheel Unseen", "Celestial Beast", "Amber-Tinted Death"] },
   { "pool": ["Eternal Requiem", "The Last Verse", "Core Meltdown"] }
+]
+```
+
+**Example — staged combo banner** (placeholder slots first, real pools later):
+```json
+"poolSlots": [
+  { "pool": [{ "name": "Awakener Pool A", "kind": "placeholder" }] },
+  { "pool": [{ "name": "Awakener Pool B", "kind": "placeholder" }] },
+  { "pool": [{ "name": "Awakener Pool C", "kind": "placeholder" }] },
+  { "pool": [{ "name": "Wheel Pool", "kind": "placeholder" }] }
 ]
 ```
 
