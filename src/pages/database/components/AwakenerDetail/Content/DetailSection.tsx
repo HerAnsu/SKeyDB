@@ -68,7 +68,7 @@ export function DetailSection({
                 )}
               </div>
               <div className='my-2 h-px w-full bg-linear-to-r from-white/8 via-white/3 to-transparent' />
-              <div className='mt-1 pl-2 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+              <div className='mt-1 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
                 {renderDescription ? renderDescription(item.description) : item.description}
               </div>
             </div>

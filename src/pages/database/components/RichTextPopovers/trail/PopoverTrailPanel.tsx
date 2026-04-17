@@ -1,6 +1,7 @@
 import React, {useRef, type ReactNode} from 'react'
 
-import {decideTrailDirection, isTrailMobileLayout} from '../../utils/popover-trail'
+import {decideTrailDirection, isTrailMobileLayout} from '@/pages/database/utils/popover-trail'
+
 import {usePopoverTrailDismiss, usePopoverTrailViewportVersion} from './popover-trail-panel-hooks'
 import {DesktopPopoverTrailPanel, MobilePopoverTrailPanel} from './PopoverTrailPanelLayouts'
 

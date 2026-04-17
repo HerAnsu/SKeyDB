@@ -12,6 +12,8 @@ export interface SkillTrailEntry extends KeyedTrailEntry {
   name: string
   label: string
   description: string
+  cost?: string
+  skillType?: 'command' | 'exalt' | 'talent' | 'enlighten'
 }
 
 export interface TagTrailEntry extends KeyedTrailEntry {

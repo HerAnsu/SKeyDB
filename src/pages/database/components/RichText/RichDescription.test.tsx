@@ -1,16 +1,31 @@
 import {fireEvent, render, screen} from '@testing-library/react'
-import {describe, expect, it, vi} from 'vitest'
+import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import type {AwakenerFull} from '@/domain/awakeners-full'
 import {resolveTag} from '@/domain/tags'
 
+import * as popoverRenderersModule from '../RichTextPopovers/trail/popover-renderers'
 import {RichDescription} from './RichDescription'
+import * as richDescriptionTrailModule from './useRichDescriptionTrail'
 
-vi.mock('../RichTextPopovers/PopoverTrailPanel', () => ({
-  PopoverTrailPanel: ({children}: {children: React.ReactNode}) => <div>{children}</div>,
+vi.mock('../RichTextPopovers/trail/PopoverTrailPanel', () => ({
+  PopoverTrailPanel: ({
+    children,
+    onCloseTop,
+  }: {
+    children: React.ReactNode
+    onCloseTop: () => void
+  }) => (
+    <div>
+      <button onClick={onCloseTop} type='button'>
+        Close top
+      </button>
+      {children}
+    </div>
+  ),
 }))
 
-vi.mock('../RichTextPopovers/SkillPopover', () => ({
+vi.mock('../RichTextPopovers/entries/SkillPopover', () => ({
   SkillPopover: ({
     name,
     label,
@@ -31,11 +46,11 @@ vi.mock('../RichTextPopovers/SkillPopover', () => ({
   ),
 }))
 
-vi.mock('../RichTextPopovers/TagPopover', () => ({
+vi.mock('../RichTextPopovers/entries/TagPopover', () => ({
   TagPopover: ({tag}: {tag: {label: string}}) => <div>Tag Popover {tag.label}</div>,
 }))
 
-vi.mock('../RichTextPopovers/ScalingPopover', () => ({
+vi.mock('../RichTextPopovers/entries/ScalingPopover', () => ({
   ScalingPopover: ({values, suffix}: {values: number[]; suffix: string}) => (
     <div>
       Scaling Popover {values.join('/')}
@@ -80,7 +95,111 @@ const TEST_FULL_DATA: AwakenerFull = {
   enlightens: {},
 }
 
+afterEach(() => {
+  vi.restoreAllMocks()
+})
+
 describe('RichDescription', () => {
+  it('routes trail rendering through renderTrailEntry and preserves close callbacks for nested entries', () => {
+    const closeTrailTop = vi.fn()
+    const closeTrailFrom = vi.fn()
+    const anchorElement = document.createElement('button')
+    document.body.appendChild(anchorElement)
+    anchorElement.getBoundingClientRect = () =>
+      ({
+        top: 10,
+        bottom: 30,
+        left: 20,
+        right: 40,
+        width: 20,
+        height: 20,
+        x: 20,
+        y: 10,
+        toJSON: () => ({}),
+      }) as DOMRect
+
+    vi.spyOn(richDescriptionTrailModule, 'useRichDescriptionTrail').mockReturnValue({
+      trail: [
+        {
+          key: 'skill:strike',
+          kind: 'skill',
+          name: 'Strike',
+          label: 'C1',
+          description: 'Strike description',
+        },
+        {
+          key: 'tag:weakness',
+          kind: 'tag',
+          tag: {
+            key: 'weakness',
+            label: 'Weakness',
+            description: 'desc',
+            iconId: 'UI_Battle_White_Buff_001',
+            aliases: [],
+          },
+        },
+        {
+          key: 'scaling:atk',
+          kind: 'scaling',
+          values: [10, 20],
+          suffix: '%',
+          stat: 'ATK',
+        },
+      ],
+      trailAnchorRect: anchorElement.getBoundingClientRect(),
+      trailAnchorElement: anchorElement,
+      clearTrail: vi.fn(),
+      openSkillTrail: vi.fn(),
+      openTagTrail: vi.fn(),
+      openScalingTrail: vi.fn(),
+      openNestedSkillTrail: vi.fn(),
+      openNestedTagTrail: vi.fn(),
+      openNestedScalingTrail: vi.fn(),
+      closeTrailTop,
+      closeTrailFrom,
+    })
+
+    const renderTrailEntrySpy = vi
+      .spyOn(popoverRenderersModule, 'renderTrailEntry')
+      .mockImplementation((entry, context) => (
+        <div key={entry.key}>
+          <span>{entry.key}</span>
+          {context.onBack ? (
+            <button onClick={context.onBack} type='button'>
+              Back {entry.key}
+            </button>
+          ) : null}
+          <button onClick={context.onClose} type='button'>
+            Close {entry.key}
+          </button>
+        </div>
+      ))
+
+    render(
+      <RichDescription
+        cardNames={new Set(['Strike'])}
+        fullData={TEST_FULL_DATA}
+        skillLevel={1}
+        stats={TEST_FULL_DATA.stats}
+        text='Ignored because trail is mocked.'
+      />,
+    )
+
+    expect(renderTrailEntrySpy).toHaveBeenCalledTimes(3)
+    expect(renderTrailEntrySpy.mock.calls[0]?.[1]).toMatchObject({depth: 1, totalDepth: 3})
+    expect(renderTrailEntrySpy.mock.calls[1]?.[1]).toMatchObject({depth: 2, totalDepth: 3})
+    expect(renderTrailEntrySpy.mock.calls[2]?.[1]).toMatchObject({depth: 3, totalDepth: 3})
+
+    fireEvent.click(screen.getByRole('button', {name: 'Back tag:weakness'}))
+    expect(closeTrailFrom).toHaveBeenCalledWith(1)
+
+    fireEvent.click(screen.getByRole('button', {name: 'Close scaling:atk'}))
+    expect(closeTrailFrom).toHaveBeenCalledWith(2)
+
+    fireEvent.click(screen.getByRole('button', {name: 'Close top'}))
+    expect(closeTrailTop).toHaveBeenCalledTimes(1)
+  })
+
   it('opens a skill popover when a rendered card token is clicked', () => {
     render(
       <RichDescription

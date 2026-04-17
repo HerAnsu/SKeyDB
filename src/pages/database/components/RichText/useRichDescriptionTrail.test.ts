@@ -1,5 +1,3 @@
-import type React from 'react'
-
 import {act, renderHook} from '@testing-library/react'
 import {describe, expect, it} from 'vitest'
 
@@ -39,33 +37,60 @@ const TEST_FULL_DATA: AwakenerFull = {
   enlightens: {},
 }
 
-function createMouseEvent(rect: Partial<DOMRect> = {}) {
-  return {
-    currentTarget: {
-      getBoundingClientRect: () =>
-        ({
-          top: 10,
-          bottom: 30,
-          left: 20,
-          right: 40,
-          width: 20,
-          height: 20,
-          x: 20,
-          y: 10,
-          toJSON: () => ({}),
-          ...rect,
-        }) as DOMRect,
-    },
-  } as React.MouseEvent
+function createAnchorElement(rect: Partial<DOMRect> = {}) {
+  const anchorElement = document.createElement('button')
+  document.body.appendChild(anchorElement)
+
+  anchorElement.getBoundingClientRect = () =>
+    ({
+      top: 10,
+      bottom: 30,
+      left: 20,
+      right: 40,
+      width: 20,
+      height: 20,
+      x: 20,
+      y: 10,
+      toJSON: () => ({}),
+      ...rect,
+    }) as DOMRect
+
+  return anchorElement
 }
 
 describe('useRichDescriptionTrail', () => {
+  it('accepts only live HTMLElement anchors for root and nested opening', () => {
+    const {result} = renderHook(() => useRichDescriptionTrail(TEST_FULL_DATA))
+    const validAnchor = createAnchorElement()
+    const fakeEvent = {currentTarget: validAnchor} as unknown as HTMLElement
+
+    act(() => {
+      result.current.openSkillTrail('Strike', fakeEvent)
+    })
+    expect(result.current.trail).toHaveLength(0)
+
+    act(() => {
+      result.current.openSkillTrail('Strike', validAnchor)
+    })
+    expect(result.current.trail).toHaveLength(1)
+
+    act(() => {
+      result.current.openNestedSkillTrail('Guard', 0, fakeEvent)
+    })
+    expect(result.current.trail).toHaveLength(1)
+
+    act(() => {
+      result.current.openNestedSkillTrail('Guard', 0, createAnchorElement({left: 60}))
+    })
+    expect(result.current.trail).toHaveLength(2)
+  })
+
   it('opens and deduplicates root skill trails', () => {
     const {result} = renderHook(() => useRichDescriptionTrail(TEST_FULL_DATA))
 
     act(() => {
-      result.current.openSkillTrail('Strike', createMouseEvent())
-      result.current.openSkillTrail('Strike', createMouseEvent({left: 100}))
+      result.current.openSkillTrail('Strike', createAnchorElement())
+      result.current.openSkillTrail('Strike', createAnchorElement({left: 100}))
     })
 
     expect(result.current.trail).toHaveLength(1)
@@ -78,12 +103,12 @@ describe('useRichDescriptionTrail', () => {
     const second = renderHook(() => useRichDescriptionTrail(TEST_FULL_DATA))
 
     act(() => {
-      first.result.current.openSkillTrail('Strike', createMouseEvent())
+      first.result.current.openSkillTrail('Strike', createAnchorElement())
     })
     expect(first.result.current.trail).toHaveLength(1)
 
     act(() => {
-      second.result.current.openScalingTrail([10, 20], '%', 'ATK', createMouseEvent())
+      second.result.current.openScalingTrail([10, 20], '%', 'ATK', createAnchorElement())
     })
 
     expect(first.result.current.trail).toHaveLength(0)
@@ -94,14 +119,26 @@ describe('useRichDescriptionTrail', () => {
     const {result} = renderHook(() => useRichDescriptionTrail(TEST_FULL_DATA))
 
     act(() => {
-      result.current.openSkillTrail('Strike', createMouseEvent())
-      result.current.openNestedSkillTrail('Guard', 0, createMouseEvent({left: 50}))
-      result.current.openNestedScalingTrail([10, 20], '%', 'ATK', 1, createMouseEvent({left: 80}))
+      result.current.openSkillTrail('Strike', createAnchorElement())
+      result.current.openNestedSkillTrail('Guard', 0, createAnchorElement({left: 50}))
+      result.current.openNestedScalingTrail(
+        [10, 20],
+        '%',
+        'ATK',
+        1,
+        createAnchorElement({left: 80}),
+      )
     })
     expect(result.current.trail).toHaveLength(3)
 
     act(() => {
-      result.current.openNestedScalingTrail([5, 15], '%', 'CON', 0, createMouseEvent({left: 120}))
+      result.current.openNestedScalingTrail(
+        [5, 15],
+        '%',
+        'CON',
+        0,
+        createAnchorElement({left: 120}),
+      )
     })
     expect(result.current.trail).toHaveLength(2)
     expect(result.current.trail[1]?.key).toContain('scaling:CON')

@@ -24,6 +24,35 @@ afterEach(() => {
 })
 
 describe('PopoverTrailPanel', () => {
+  it('uses the mobile back control to close only the top popover', () => {
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      value: 480,
+    })
+
+    const onCloseTop = vi.fn()
+
+    render(
+      <PopoverTrailPanel
+        anchorRect={makeRect({top: 100, bottom: 120, left: 150, right: 170})}
+        itemCount={3}
+        onCloseTop={onCloseTop}
+      >
+        <div>Root</div>
+        <div>Nested</div>
+        <div>Top</div>
+      </PopoverTrailPanel>,
+    )
+
+    act(() => {
+      document
+        .querySelector<HTMLButtonElement>('button[type="button"]')
+        ?.dispatchEvent(new MouseEvent('click', {bubbles: true}))
+    })
+
+    expect(onCloseTop).toHaveBeenCalledTimes(1)
+  })
+
   it('repositions against the live anchor element after scroll changes its viewport rect', async () => {
     Object.defineProperty(window, 'innerWidth', {
       configurable: true,

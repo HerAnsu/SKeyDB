@@ -3,15 +3,14 @@ import {useCallback, useMemo} from 'react'
 import {createPortal} from 'react-dom'
 
 import type {AwakenerFull, AwakenerFullStats} from '@/domain/awakeners-full'
-import {parseRichDescription} from '@/domain/rich-text'
-import {type Tag} from '@/domain/tags'
+import {type RichSegment} from '@/domain/rich-text'
 
-import {PopoverTrailPanel} from '../RichTextPopovers/PopoverTrailPanel'
-import {ScalingPopover} from '../RichTextPopovers/ScalingPopover'
-import {SkillPopover} from '../RichTextPopovers/SkillPopover'
-import {TagPopover} from '../RichTextPopovers/TagPopover'
+import {type TokenNavigationRequest} from '../RichTextPopovers/core/popover-navigation'
+import {renderTrailEntry} from '../RichTextPopovers/trail/popover-renderers'
+import {PopoverTrailPanel} from '../RichTextPopovers/trail/PopoverTrailPanel'
 import {hasRouseRichDescriptionCard} from './rich-description-entries'
 import {nextRichSegmentKey} from './rich-segment-keys'
+import {memoizedParseRichDescription} from './rich-text-cache'
 import {RichSegmentRenderer} from './RichSegmentRenderer'
 import {useRichDescriptionTrail} from './useRichDescriptionTrail'
 
@@ -44,7 +43,7 @@ export function RichDescription({
     return names
   }, [cardNames, fullData])
 
-  const segments = parseRichDescription(text, rouseAwareCards)
+  const segments: RichSegment[] = memoizedParseRichDescription(text, rouseAwareCards)
   const {
     trail,
     trailAnchorRect,
@@ -67,11 +66,25 @@ export function RichDescription({
     }
   }, [clearTrail, onNavigateToCards])
 
+  const handleRootTokenNavigate = useCallback(
+    (request: TokenNavigationRequest) => {
+      switch (request.kind) {
+        case 'skill':
+          openSkillTrail(request.name, request.anchorElement)
+          return
+        case 'tag':
+          openTagTrail(request.tag, request.anchorElement)
+          return
+        case 'scaling':
+          openScalingTrail(request.values, request.suffix, request.stat, request.anchorElement)
+      }
+    },
+    [openScalingTrail, openSkillTrail, openTagTrail],
+  )
+
   const renderedSegments = renderRichDescriptionSegments(
     segments,
-    openTagTrail,
-    openScalingTrail,
-    openSkillTrail,
+    handleRootTokenNavigate,
     skillLevel,
     stats,
   )
@@ -91,70 +104,31 @@ export function RichDescription({
             onCloseTop={closeTrailTop}
           >
             {trail.map((entry, index) => {
-              if (entry.kind === 'skill') {
-                return (
-                  <SkillPopover
-                    cardNames={rouseAwareCards}
-                    description={entry.description}
-                    key={entry.key}
-                    label={entry.label}
-                    name={entry.name}
-                    onClose={() => {
+              const depth = index + 1
+              const totalDepth = trail.length
+              const onBack =
+                index > 0
+                  ? () => {
                       closeTrailFrom(index)
-                    }}
-                    onMechanicTokenClick={(tag, event) => {
-                      openNestedTagTrail(tag, index, event)
-                    }}
-                    onNavigateToCards={onNavigateToCards ? handleNavigateToCards : undefined}
-                    onScalingTokenClick={(values, nextSuffix, nextStat, event) => {
-                      openNestedScalingTrail(values, nextSuffix, nextStat, index, event)
-                    }}
-                    onSkillTokenClick={(nextName, event) => {
-                      openNestedSkillTrail(nextName, index, event)
-                    }}
-                    skillLevel={skillLevel}
-                    stats={stats}
-                  />
-                )
-              }
+                    }
+                  : undefined
 
-              if (entry.kind === 'tag') {
-                return (
-                  <TagPopover
-                    cardNames={rouseAwareCards}
-                    key={entry.key}
-                    onClose={() => {
-                      closeTrailFrom(index)
-                    }}
-                    onMechanicTokenClick={(tag, event) => {
-                      openNestedTagTrail(tag, index, event)
-                    }}
-                    onScalingTokenClick={(values, nextSuffix, nextStat, event) => {
-                      openNestedScalingTrail(values, nextSuffix, nextStat, index, event)
-                    }}
-                    onSkillTokenClick={(nextName, event) => {
-                      openNestedSkillTrail(nextName, index, event)
-                    }}
-                    skillLevel={skillLevel}
-                    stats={stats}
-                    tag={entry.tag}
-                  />
-                )
-              }
-
-              return (
-                <ScalingPopover
-                  currentLevel={index === 0 ? skillLevel : 0}
-                  key={entry.key}
-                  onClose={() => {
-                    closeTrailFrom(index)
-                  }}
-                  stat={entry.stat}
-                  stats={stats}
-                  suffix={entry.suffix}
-                  values={entry.values}
-                />
-              )
+              return renderTrailEntry(entry, {
+                cardNames: rouseAwareCards,
+                depth,
+                onBack,
+                onClose: () => {
+                  closeTrailFrom(index)
+                },
+                onNavigateToCards: onNavigateToCards ? handleNavigateToCards : undefined,
+                openNestedScalingTrail,
+                openNestedSkillTrail,
+                openNestedTagTrail,
+                skillLevel,
+                sourceIndex: index,
+                stats,
+                totalDepth,
+              })
             })}
           </PopoverTrailPanel>,
           document.body,
@@ -164,27 +138,18 @@ export function RichDescription({
 }
 
 function renderRichDescriptionSegments(
-  segments: ReturnType<typeof parseRichDescription>,
-  onMechanicClick: (tag: Tag, event: React.MouseEvent) => void,
-  onScalingClick: (
-    values: number[],
-    suffix: string,
-    stat: string | null,
-    event: React.MouseEvent,
-  ) => void,
-  onSkillClick: (name: string, event: React.MouseEvent) => void,
+  segments: RichSegment[],
+  onTokenNavigate: (request: TokenNavigationRequest) => void,
   skillLevel: number,
   stats: AwakenerFullStats | null,
 ) {
   const keyCounts = new Map<string, number>()
-  return segments.map((segment) => {
+  return segments.map((segment: RichSegment) => {
     const key = nextRichSegmentKey(keyCounts, segment)
     return (
       <RichSegmentRenderer
         key={key}
-        onMechanicClick={onMechanicClick}
-        onScalingClick={onScalingClick}
-        onSkillClick={onSkillClick}
+        onTokenNavigate={onTokenNavigate}
         segment={segment}
         skillLevel={skillLevel}
         stats={stats}

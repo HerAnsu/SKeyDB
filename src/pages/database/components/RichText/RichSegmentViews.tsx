@@ -12,14 +12,17 @@ import {
   getDatabaseRealmTint,
 } from '@/pages/database/utils/text-styles'
 
+import {type TokenNavigationRequest} from '../RichTextPopovers/core/popover-navigation'
+import {useHoverIntent} from '../RichTextPopovers/core/useHoverIntent'
+
 type RichSkillSegmentViewProps = Readonly<{
   segment: SkillSegment
-  onSkillClick?: (name: string, event: React.MouseEvent) => void
+  onTokenNavigate?: (request: TokenNavigationRequest) => void
 }>
 
 type RichMechanicSegmentViewProps = Readonly<{
   segment: MechanicSegment
-  onMechanicClick?: (tag: Tag, event: React.MouseEvent) => void
+  onTokenNavigate?: (request: TokenNavigationRequest) => void
 }>
 
 type RichScalingSegmentViewProps = Readonly<{
@@ -27,16 +30,15 @@ type RichScalingSegmentViewProps = Readonly<{
   skillLevel: number
   stats: AwakenerFullStats | null
   variant: 'inline' | 'popover'
-  onScalingClick?: (
-    values: number[],
-    suffix: string,
-    stat: string | null,
-    event: React.MouseEvent,
-  ) => void
+  onTokenNavigate?: (request: TokenNavigationRequest) => void
 }>
 
-export function RichSkillSegmentView({segment, onSkillClick}: RichSkillSegmentViewProps) {
-  if (onSkillClick === undefined) {
+export function RichSkillSegmentView({segment, onTokenNavigate}: RichSkillSegmentViewProps) {
+  const {onMouseEnter, onMouseLeave} = useHoverIntent((anchorElement) => {
+    onTokenNavigate?.({kind: 'skill', name: segment.name, anchorElement})
+  })
+
+  if (onTokenNavigate === undefined) {
     return (
       <span className='inline font-bold whitespace-nowrap text-amber-200/90'>{segment.name}</span>
     )
@@ -46,8 +48,10 @@ export function RichSkillSegmentView({segment, onSkillClick}: RichSkillSegmentVi
     <button
       className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap`}
       onClick={(event) => {
-        onSkillClick(segment.name, event)
+        onTokenNavigate({kind: 'skill', name: segment.name, anchorElement: event.currentTarget})
       }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       style={DATABASE_INLINE_TOKEN_BUTTON_STYLE}
       type='button'
     >
@@ -64,12 +68,16 @@ export function RichStatSegmentView({segment}: Readonly<{segment: StatSegment}>)
   )
 }
 
-export function RichMechanicSegmentView({segment, onMechanicClick}: RichMechanicSegmentViewProps) {
+export function RichMechanicSegmentView({segment, onTokenNavigate}: RichMechanicSegmentViewProps) {
   const tag = resolveTag(segment.name)
   const hasIcon = tag?.iconId && getTagIcon(tag.iconId)
   const color = tag?.tint
 
-  if (!hasTagDescription(tag) || onMechanicClick === undefined) {
+  const {onMouseEnter, onMouseLeave} = useHoverIntent((anchorElement) => {
+    if (tag) onTokenNavigate?.({kind: 'tag', tag, anchorElement})
+  })
+
+  if (!hasTagDescription(tag) || onTokenNavigate === undefined) {
     return (
       <span
         className={`${DATABASE_UNIMPLEMENTED_TOKEN_CLASS} font-bold whitespace-nowrap`}
@@ -92,8 +100,10 @@ export function RichMechanicSegmentView({segment, onMechanicClick}: RichMechanic
     <button
       className={`${DATABASE_INTERACTIVE_TOKEN_CLASS} appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap`}
       onClick={(event) => {
-        onMechanicClick(tag, event)
+        onTokenNavigate({kind: 'tag', tag, anchorElement: event.currentTarget})
       }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       style={{...DATABASE_INLINE_TOKEN_BUTTON_STYLE, color: color ?? undefined}}
       type='button'
     >
@@ -123,10 +133,14 @@ export function RichScalingSegmentView({
   skillLevel,
   stats,
   variant,
-  onScalingClick,
+  onTokenNavigate,
 }: RichScalingSegmentViewProps) {
   const {values, suffix, stat} = segment
-  const isInteractive = onScalingClick !== undefined
+  const isInteractive = onTokenNavigate !== undefined
+
+  const {onMouseEnter, onMouseLeave} = useHoverIntent((anchorElement) => {
+    onTokenNavigate?.({kind: 'scaling', values, suffix, stat, anchorElement})
+  })
 
   if (variant === 'popover') {
     const display = formatScalingRange(values, suffix)
@@ -152,10 +166,17 @@ export function RichScalingSegmentView({
       <button
         className={`${DATABASE_SCALING_TOKEN_CLASS} cursor-help appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap text-amber-200/90`}
         onClick={(event) => {
-          onScalingClick(values, suffix, stat, event)
+          onTokenNavigate({
+            kind: 'scaling',
+            values,
+            suffix,
+            stat,
+            anchorElement: event.currentTarget,
+          })
         }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         style={DATABASE_INLINE_TOKEN_BUTTON_STYLE}
-        title={buildScalingHover(values, suffix, stat, stats)}
         type='button'
       >
         {popoverContent}
@@ -167,17 +188,13 @@ export function RichScalingSegmentView({
   const value = values[idx]
   const displayValue = fmtNum(value)
   const computedValue = computeStatValue(value, suffix, stat, stats)
-  const hoverText = buildScalingHover(values, suffix, stat, stats)
   const fallbackValue = `${displayValue}${suffix}`
   const content = computedValue ?? fallbackValue
   const statSuffix = stat && computedValue === null ? ` ${stat}` : ''
 
   if (!isInteractive) {
     return (
-      <span
-        className={`${DATABASE_SCALING_TOKEN_CLASS} font-bold whitespace-nowrap`}
-        title={hoverText}
-      >
+      <span className={`${DATABASE_SCALING_TOKEN_CLASS} font-bold whitespace-nowrap`}>
         {content}
         {statSuffix}
       </span>
@@ -188,33 +205,23 @@ export function RichScalingSegmentView({
     <button
       className={`${DATABASE_SCALING_TOKEN_CLASS} m-0 cursor-help appearance-none border-0 bg-transparent p-0 font-bold whitespace-nowrap`}
       onClick={(event) => {
-        onScalingClick(values, suffix, stat, event)
+        onTokenNavigate({
+          kind: 'scaling',
+          values,
+          suffix,
+          stat,
+          anchorElement: event.currentTarget,
+        })
       }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       style={DATABASE_INLINE_TOKEN_BUTTON_STYLE}
-      title={hoverText}
       type='button'
     >
       {content}
       {statSuffix}
     </button>
   )
-}
-
-function buildScalingHover(
-  values: number[],
-  suffix: string,
-  stat: string | null,
-  stats: AwakenerFullStats | null,
-): string {
-  if (values.length <= 1) return ''
-  return values
-    .map((value, index) => {
-      const computed = computeStatValue(value, suffix, stat, stats)
-      const base = `${String(value)}${suffix}`
-      const resolvedValue = computed === null ? '' : ` = ${String(computed)}`
-      return `Lv${String(index + 1)}: ${base}${resolvedValue}`
-    })
-    .join('\n')
 }
 
 function hasTagDescription(tag: Tag | null): tag is Tag {

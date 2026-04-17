@@ -11,6 +11,7 @@ import {scaledFontStyle} from '@/pages/database/utils/font-scale'
 import {
   DATABASE_ITEM_NAME_CLASS,
   DATABASE_SECTION_TITLE_CLASS,
+  getDatabaseSkillNameColor,
 } from '@/pages/database/utils/text-styles'
 
 import {DetailSection} from './DetailSection'
@@ -92,7 +93,7 @@ export function AwakenerDetailCards({
       ),
       rightLabel: over_exalt.label ?? 'Over-Exalt',
       name: over_exalt.name,
-      nameColor: '#bb636d',
+      nameColor: getDatabaseSkillNameColor({skillType: 'exalt', isOverExalt: true}),
       description: over_exalt.description,
     },
   ]
@@ -150,7 +151,7 @@ export function AwakenerDetailCards({
                       className={DATABASE_ITEM_NAME_CLASS}
                       style={{
                         ...scaledFontStyle(12),
-                        color: isRouse ? '#ededed' : '#aebfd8',
+                        color: getDatabaseSkillNameColor({skillType: 'command', isRouse}),
                       }}
                     >
                       {card.name}

@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react'
+import {fireEvent, render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 
 import type {AwakenerFullStats} from '@/domain/awakeners-full'
@@ -45,5 +45,43 @@ describe('ScalingPopover', () => {
     )
 
     expect(screen.getByText('Lvl Scaling')).toBeInTheDocument()
+  })
+
+  it('renders a back-enabled depth indicator for nested scaling chains', () => {
+    const onBack = vi.fn()
+
+    render(
+      <ScalingPopover
+        depth={3}
+        onBack={onBack}
+        onClose={vi.fn()}
+        stat='DEF'
+        stats={BASE_STATS}
+        suffix='%'
+        totalDepth={4}
+        values={[10, 20]}
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: 'Step 3 of 4'}))
+    expect(onBack).toHaveBeenCalledTimes(1)
+  })
+
+  it('renders split columns for larger scaling tables and custom level labels', () => {
+    const {container} = render(
+      <ScalingPopover
+        levelLabelPrefix='Rank '
+        levelStart={0}
+        onClose={vi.fn()}
+        stat={null}
+        stats={null}
+        suffix='%'
+        values={[10, 20, 30, 40, 50]}
+      />,
+    )
+
+    expect(screen.getByText('Rank 0')).toBeInTheDocument()
+    expect(screen.getByText('Rank 4')).toBeInTheDocument()
+    expect(container.querySelectorAll('[class*="grid-cols-[3.1em_minmax(0,1fr)]"]')).toHaveLength(5)
   })
 })

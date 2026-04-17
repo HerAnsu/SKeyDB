@@ -51,11 +51,11 @@ describe('RichSegmentViews', () => {
   })
 
   it('renders interactive mechanics with icon and tint', () => {
-    const onMechanicClick = vi.fn()
+    const onTokenNavigate = vi.fn()
 
     render(
       <RichMechanicSegmentView
-        onMechanicClick={onMechanicClick}
+        onTokenNavigate={onTokenNavigate}
         segment={{type: 'mechanic', name: 'Weakness'}}
       />,
     )
@@ -65,10 +65,14 @@ describe('RichSegmentViews', () => {
 
     expect(button).toHaveStyle({color: '#cc8844'})
     expect(screen.getByRole('presentation')).toHaveAttribute('src', 'icon-weakness')
-    expect(onMechanicClick).toHaveBeenCalled()
+    expect(onTokenNavigate).toHaveBeenCalledWith({
+      kind: 'tag',
+      tag: expect.objectContaining({label: 'Weakness'}),
+      anchorElement: expect.any(HTMLButtonElement),
+    })
   })
 
-  it('clamps scaling level lookups and omits hover text for single-value scaling', () => {
+  it('clamps scaling level lookups and renders single-value scaling without a title', () => {
     const {rerender} = render(
       <RichScalingSegmentView
         segment={{type: 'scaling', values: [10, 20], suffix: '%', stat: 'ATK'}}
@@ -88,7 +92,6 @@ describe('RichSegmentViews', () => {
         variant='inline'
       />,
     )
-
-    expect(screen.getByText('25%')).toHaveAttribute('title', '')
+    expect(screen.getByText('25%')).not.toHaveAttribute('title')
   })
 })

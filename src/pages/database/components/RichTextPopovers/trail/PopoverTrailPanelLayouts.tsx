@@ -1,5 +1,7 @@
 import React, {isValidElement, useCallback, useLayoutEffect, useRef, type ReactNode} from 'react'
 
+import {POPOVER_LAYOUT} from '../core/popover-config'
+
 type SinglePopoverProps = Readonly<{
   anchorRect: DOMRect
   direction: 'up' | 'down'
@@ -40,8 +42,8 @@ function SinglePopover({
     const rect = el.getBoundingClientRect()
     const vw = globalThis.innerWidth
     const vh = globalThis.innerHeight
-    const margin = 12
-    const gap = 6
+    const margin = POPOVER_LAYOUT.MARGIN
+    const gap = POPOVER_LAYOUT.GAP
 
     let left = anchorRect.left
     if (left + rect.width > vw - margin) {
@@ -68,7 +70,7 @@ function SinglePopover({
 
   return (
     <div
-      className='fixed max-h-[calc(100vh-24px)] w-[min(22rem,calc(100vw-24px))] bg-transparent shadow-none'
+      className='fixed max-h-[calc(100vh-24px)] w-max max-w-[min(24rem,calc(100vw-24px))] bg-transparent shadow-none'
       ref={ref}
       style={{top: 0, left: -9999, zIndex: 950 + zIndex}}
     >
@@ -85,7 +87,7 @@ export function MobilePopoverTrailPanel({
 }: MobilePopoverTrailPanelProps) {
   return (
     <div
-      className='fixed bottom-4 left-1/2 z-950 flex w-[min(22rem,calc(100vw-24px))] -translate-x-1/2 flex-col items-center'
+      className='fixed bottom-4 left-1/2 z-950 flex w-max max-w-[min(24rem,calc(100vw-24px))] -translate-x-1/2 flex-col items-center'
       data-skill-popover=''
       ref={containerRef}
     >

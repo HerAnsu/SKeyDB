@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {act, fireEvent, render, screen, waitFor} from '@testing-library/react'
-import {describe, expect, it, vi} from 'vitest'
+import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {usePopoverTrailDismiss, usePopoverTrailViewportVersion} from './popover-trail-panel-hooks'
 import {DesktopPopoverTrailPanel, MobilePopoverTrailPanel} from './PopoverTrailPanelLayouts'
@@ -18,6 +18,10 @@ function DismissProbe({onCloseTop}: {onCloseTop: () => void}) {
 }
 
 describe('popover trail panel hooks and layouts', () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('rerenders on viewport change events', async () => {
     const onRender = vi.fn()
 

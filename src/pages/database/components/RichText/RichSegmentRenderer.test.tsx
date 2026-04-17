@@ -23,11 +23,11 @@ const BASE_STATS: AwakenerFullStats = {
 
 describe('RichSegmentRenderer', () => {
   it('renders interactive skill tokens and forwards click callbacks', () => {
-    const onSkillClick = vi.fn()
+    const onTokenNavigate = vi.fn()
 
     render(
       <RichSegmentRenderer
-        onSkillClick={onSkillClick}
+        onTokenNavigate={onTokenNavigate}
         segment={{type: 'skill', name: 'Strike'}}
         skillLevel={1}
         stats={null}
@@ -44,10 +44,14 @@ describe('RichSegmentRenderer', () => {
     })
     expect(button).toHaveClass('font-bold')
     fireEvent.click(button)
-    expect(onSkillClick).toHaveBeenCalledWith('Strike', expect.any(Object))
+    expect(onTokenNavigate).toHaveBeenCalledWith({
+      kind: 'skill',
+      name: 'Strike',
+      anchorElement: expect.any(HTMLButtonElement),
+    })
   })
 
-  it('renders inline scaling using selected skill level with hover breakdown', () => {
+  it('renders inline scaling using selected skill level without a hover title', () => {
     render(
       <RichSegmentRenderer
         segment={{type: 'scaling', values: [10, 20], suffix: '%', stat: 'ATK'}}
@@ -58,7 +62,7 @@ describe('RichSegmentRenderer', () => {
     )
 
     expect(screen.getByText('40')).toBeInTheDocument()
-    expect(screen.getByTitle(/Lv1: 10% = 20/)).toBeInTheDocument()
+    expect(screen.getByText('40')).not.toHaveAttribute('title')
   })
 
   it('renders popover scaling as full-range text', () => {
@@ -75,11 +79,11 @@ describe('RichSegmentRenderer', () => {
   })
 
   it('allows popover scaling tokens to open nested scaling details', () => {
-    const onScalingClick = vi.fn()
+    const onTokenNavigate = vi.fn()
 
     render(
       <RichSegmentRenderer
-        onScalingClick={onScalingClick}
+        onTokenNavigate={onTokenNavigate}
         segment={{type: 'scaling', values: [10, 20], suffix: '%', stat: 'ATK'}}
         skillLevel={1}
         stats={BASE_STATS}
@@ -96,7 +100,13 @@ describe('RichSegmentRenderer', () => {
     })
     expect(button).toHaveClass('font-bold')
     fireEvent.click(button)
-    expect(onScalingClick).toHaveBeenCalledWith([10, 20], '%', 'ATK', expect.any(Object))
+    expect(onTokenNavigate).toHaveBeenCalledWith({
+      kind: 'scaling',
+      values: [10, 20],
+      suffix: '%',
+      stat: 'ATK',
+      anchorElement: expect.any(HTMLButtonElement),
+    })
   })
 
   it('keeps mechanics without description non-interactive', () => {
@@ -110,7 +120,7 @@ describe('RichSegmentRenderer', () => {
 
     render(
       <RichSegmentRenderer
-        onMechanicClick={vi.fn()}
+        onTokenNavigate={vi.fn()}
         segment={{type: 'mechanic', name: 'Empty Desc'}}
         skillLevel={1}
         stats={null}
@@ -123,6 +133,33 @@ describe('RichSegmentRenderer', () => {
       'title',
       'Details coming soon',
     )
+  })
+
+  it('renders interactive mechanic tokens and forwards anchor elements instead of event-shaped objects', () => {
+    const onTokenNavigate = vi.fn()
+    const weaknessTag = tagsModule.resolveTag('Weakness')
+    if (!weaknessTag) {
+      throw new Error('Expected Weakness tag fixture to exist')
+    }
+
+    render(
+      <RichSegmentRenderer
+        onTokenNavigate={onTokenNavigate}
+        segment={{type: 'mechanic', name: 'Weakness'}}
+        skillLevel={1}
+        stats={null}
+        variant='inline'
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: 'Weakness'}))
+
+    expect(onTokenNavigate).toHaveBeenCalledWith({
+      kind: 'tag',
+      tag: weaknessTag,
+      anchorElement: expect.any(HTMLButtonElement),
+    })
+    expect(onTokenNavigate.mock.calls[0]?.[0]).not.toHaveProperty('currentTarget')
   })
 
   it('renders indentation marker with the expected bullet sign', () => {

@@ -4,13 +4,17 @@ import type {AwakenerFull} from '@/domain/awakeners-full'
 import {type Tag} from '@/domain/tags'
 
 import {
-  closeTrailFromIndex,
-  closeTrailTop as closeTrailTopEntry,
-  isSameTrailRoot,
-  openTrailRoot,
-  pushTrailEntry,
-  type TrailEntry,
-} from '../../utils/popover-trail'
+  snapshotPopoverAnchor,
+  type PopoverAnchorElement,
+} from '../RichTextPopovers/core/popover-anchor'
+import {
+  clearRichDescriptionTrailState,
+  closeFromRichDescriptionTrail,
+  closeTopRichDescriptionTrail,
+  openRootRichDescriptionTrail,
+  pushNestedRichDescriptionTrail,
+  type RichDescriptionTrailState,
+} from '../RichTextPopovers/trail/trail-state'
 import {
   buildRichDescriptionScalingTrailEntry,
   buildRichDescriptionSkillTrailEntry,
@@ -21,15 +25,11 @@ import {
 const TRAIL_OPENED_EVENT = 'database:trail-opened'
 
 export function useRichDescriptionTrail(fullData: AwakenerFull | null) {
-  const [trail, setTrail] = useState<TrailEntry[]>([])
-  const [trailAnchorRect, setTrailAnchorRect] = useState<DOMRect | null>(null)
-  const [trailAnchorElement, setTrailAnchorElement] = useState<HTMLElement | null>(null)
+  const [state, setState] = useState<RichDescriptionTrailState>(clearRichDescriptionTrailState)
   const ownerId = useId()
 
   const clearTrail = useCallback(() => {
-    setTrail([])
-    setTrailAnchorRect(null)
-    setTrailAnchorElement(null)
+    setState(clearRichDescriptionTrailState())
   }, [])
 
   useEffect(() => {
@@ -52,67 +52,70 @@ export function useRichDescriptionTrail(fullData: AwakenerFull | null) {
   }, [ownerId])
 
   const openSkillTrail = useCallback(
-    (name: string, event: React.MouseEvent) => {
+    (name: string, anchorElement: PopoverAnchorElement) => {
       if (!fullData) return
       const result = resolveRichDescriptionCardInfo(fullData, name)
       if (!result) return
-      const entry = buildRichDescriptionSkillTrailEntry(result.card, result.label)
-      if (isSameTrailRoot(trail, entry.key)) return
-      const anchorElement = event.currentTarget as HTMLElement
-      const rect = anchorElement.getBoundingClientRect()
+      const entry = buildRichDescriptionSkillTrailEntry(result.card, result.label, result.skillType)
+      const anchor = snapshotPopoverAnchor(anchorElement)
+      if (anchor === null) return
       announceTrailOpened()
-      setTrailAnchorElement(anchorElement)
-      setTrailAnchorRect(rect)
-      setTrail((prev) => openTrailRoot(prev, entry))
+      setState((prev) => openRootRichDescriptionTrail(prev, entry, anchor))
     },
-    [announceTrailOpened, fullData, trail],
+    [announceTrailOpened, fullData],
   )
 
   const openTagTrail = useCallback(
-    (tag: Tag, event: React.MouseEvent) => {
+    (tag: Tag, anchorElement: PopoverAnchorElement) => {
       const entry = buildRichDescriptionTagTrailEntry(tag)
-      if (isSameTrailRoot(trail, entry.key)) return
-      const anchorElement = event.currentTarget as HTMLElement
-      const rect = anchorElement.getBoundingClientRect()
+      const anchor = snapshotPopoverAnchor(anchorElement)
+      if (anchor === null) return
       announceTrailOpened()
-      setTrailAnchorElement(anchorElement)
-      setTrailAnchorRect(rect)
-      setTrail((prev) => openTrailRoot(prev, entry))
+      setState((prev) => openRootRichDescriptionTrail(prev, entry, anchor))
     },
-    [announceTrailOpened, trail],
+    [announceTrailOpened],
   )
 
   const openScalingTrail = useCallback(
-    (values: number[], suffix: string, stat: string | null, event: React.MouseEvent) => {
+    (
+      values: number[],
+      suffix: string,
+      stat: string | null,
+      anchorElement: PopoverAnchorElement,
+    ) => {
       const entry = buildRichDescriptionScalingTrailEntry(values, suffix, stat)
-      if (isSameTrailRoot(trail, entry.key)) return
-      const anchorElement = event.currentTarget as HTMLElement
-      const rect = anchorElement.getBoundingClientRect()
+      const anchor = snapshotPopoverAnchor(anchorElement)
+      if (anchor === null) return
       announceTrailOpened()
-      setTrailAnchorElement(anchorElement)
-      setTrailAnchorRect(rect)
-      setTrail((prev) => openTrailRoot(prev, entry))
+      setState((prev) => openRootRichDescriptionTrail(prev, entry, anchor))
     },
-    [announceTrailOpened, trail],
+    [announceTrailOpened],
   )
 
   const openNestedSkillTrail = useCallback(
-    (name: string, sourceIndex: number, event: React.MouseEvent) => {
+    (name: string, sourceIndex: number, anchorElement: PopoverAnchorElement) => {
       if (!fullData) return
       const result = resolveRichDescriptionCardInfo(fullData, name)
       if (!result) return
-      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect()
-      const entry = buildRichDescriptionSkillTrailEntry(result.card, result.label, rect)
-      setTrail((prev) => pushTrailEntry(prev.slice(0, sourceIndex + 1), entry))
+      const anchor = snapshotPopoverAnchor(anchorElement)
+      if (anchor === null) return
+      const entry = buildRichDescriptionSkillTrailEntry(
+        result.card,
+        result.label,
+        result.skillType,
+        anchor.anchorRect,
+      )
+      setState((prev) => pushNestedRichDescriptionTrail(prev, entry, sourceIndex))
     },
     [fullData],
   )
 
   const openNestedTagTrail = useCallback(
-    (tag: Tag, sourceIndex: number, event: React.MouseEvent) => {
-      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect()
-      const entry = buildRichDescriptionTagTrailEntry(tag, rect)
-      setTrail((prev) => pushTrailEntry(prev.slice(0, sourceIndex + 1), entry))
+    (tag: Tag, sourceIndex: number, anchorElement: PopoverAnchorElement) => {
+      const anchor = snapshotPopoverAnchor(anchorElement)
+      if (anchor === null) return
+      const entry = buildRichDescriptionTagTrailEntry(tag, anchor.anchorRect)
+      setState((prev) => pushNestedRichDescriptionTrail(prev, entry, sourceIndex))
     },
     [],
   )
@@ -123,39 +126,28 @@ export function useRichDescriptionTrail(fullData: AwakenerFull | null) {
       suffix: string,
       stat: string | null,
       sourceIndex: number,
-      event: React.MouseEvent,
+      anchorElement: PopoverAnchorElement,
     ) => {
-      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect()
-      const entry = buildRichDescriptionScalingTrailEntry(values, suffix, stat, rect)
-      setTrail((prev) => pushTrailEntry(prev.slice(0, sourceIndex + 1), entry))
+      const anchor = snapshotPopoverAnchor(anchorElement)
+      if (anchor === null) return
+      const entry = buildRichDescriptionScalingTrailEntry(values, suffix, stat, anchor.anchorRect)
+      setState((prev) => pushNestedRichDescriptionTrail(prev, entry, sourceIndex))
     },
     [],
   )
 
   const closeTrailTop = useCallback(() => {
-    setTrail((prev) => {
-      const next = closeTrailTopEntry(prev)
-      if (next.length === 0) {
-        setTrailAnchorRect(null)
-      }
-      return next
-    })
+    setState((prev) => closeTopRichDescriptionTrail(prev))
   }, [])
 
   const closeTrailFrom = useCallback((index: number) => {
-    setTrail((prev) => {
-      const next = closeTrailFromIndex(prev, index)
-      if (next.length === 0) {
-        setTrailAnchorRect(null)
-      }
-      return next
-    })
+    setState((prev) => closeFromRichDescriptionTrail(prev, index))
   }, [])
 
   return {
-    trail,
-    trailAnchorRect,
-    trailAnchorElement,
+    trail: state.trail,
+    trailAnchorRect: state.trailAnchorRect,
+    trailAnchorElement: state.trailAnchorElement,
     clearTrail,
     openSkillTrail,
     openTagTrail,

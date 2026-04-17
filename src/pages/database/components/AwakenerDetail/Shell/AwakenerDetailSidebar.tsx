@@ -20,7 +20,7 @@ import {
 } from '@/domain/mainstats'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {AwakenerLevelSlider} from '@/pages/database/components/DatabaseMain'
-import {ScalingPopover} from '@/pages/database/components/RichTextPopovers/ScalingPopover'
+import {ScalingPopover} from '@/pages/database/components/RichTextPopovers/entries/ScalingPopover'
 import {scaledFontStyle} from '@/pages/database/utils/font-scale'
 
 import {DetailLevelSlider, SkillLevelSlider} from '../Controls'
