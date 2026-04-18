@@ -233,6 +233,9 @@ describe('useBuilderViewModel', () => {
     expect(result.current.filteredWheels).toHaveLength(0)
 
     act(() => {
+      result.current.setWheelRarityFilter('ALL')
+    })
+    act(() => {
       result.current.setPickerSearchByTab((prev) => ({...prev, wheels: 'ghelot'}))
     })
     expect(result.current.filteredWheels.length).toBeGreaterThan(0)

@@ -1,0 +1,19 @@
+{
+  "id": "SR39",
+  "assetId": "Weapon_Full_SR39",
+  "name": "Lone Feather",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "castor",
+  "ownerAwakenerId": 8,
+  "ownerAwakenerName": "castor",
+  "aliases": ["Lone Feather"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The wielder's Shield Generation increases by [StateArg1]%. Gain Shield equal to [StateArg2]% of the wielder's DEF at turn end, which increases by 2% of the wielder's DEF per turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["6", "8", "10", "12"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["4", "6", "8", "10"], "suffix": "%"}
+  }
+}

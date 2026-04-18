@@ -1,0 +1,19 @@
+{
+  "id": "C15",
+  "assetId": "Weapon_Full_C15",
+  "name": "Wheel Unseen",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "tawil",
+  "ownerAwakenerId": 47,
+  "ownerAwakenerName": "tawil",
+  "aliases": ["Wheel Unseen"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: Keyflare Cap +100%. Hand Limit +2, cannot stack with other WoDs with the same effect. Increases the wielder's Keyflare Regen by [StateArg1]%. After the wielder plays a card, in this turn, the Crit. Rate, Crit. DMG, Shield Generation, Aliemus Generation, and {STR} Generation of the wielder's Command Cards +[StateArg2]%, stacking up to 5 times.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["13", "17", "21", "25"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["3", "4", "5", "6"], "suffix": "%"}
+  }
+}

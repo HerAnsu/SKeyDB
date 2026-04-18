@@ -1,0 +1,20 @@
+{
+  "id": "O01",
+  "assetId": "Weapon_Full_O01",
+  "name": "Hymn of the Sovereign",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "tulu",
+  "ownerAwakenerId": 50,
+  "ownerAwakenerName": "tulu",
+  "aliases": ["Hymn of the Sovereign"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SSR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: At the start of battle, the wielder gains [StateArg1] Aliemus. Each time another Awakener releases Exalt, the wielder gains [StateArg2] Aliemus. If the current Realm is {Aequor}, after the wielder releases Exalt, they gain {Tentacle DMG} equal to [StateArg3]% of their Attack.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["25", "30", "35", "40"]},
+    "StateArg2": {"kind": "scaling", "values": ["3", "4", "5", "6"]},
+    "StateArg3": {"kind": "scaling", "values": ["2", "3", "4", "5"]}
+  }
+}

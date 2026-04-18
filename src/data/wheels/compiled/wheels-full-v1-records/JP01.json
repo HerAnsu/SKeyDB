@@ -1,0 +1,13 @@
+{
+  "id": "JP01",
+  "assetId": "Weapon_Full_JP01",
+  "name": "Special Training",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Special Training"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SSR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: After unleashing a Posse, the wielder's Crit. Rate is temporarily increased by [StateArg1]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["20", "25", "30", "35"]}}
+}

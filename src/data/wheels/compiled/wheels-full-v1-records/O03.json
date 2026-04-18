@@ -1,0 +1,16 @@
+{
+  "id": "O03",
+  "assetId": "Weapon_Full_O03",
+  "name": "Amidst the Downpour",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "faros",
+  "ownerAwakenerId": 17,
+  "ownerAwakenerName": "faros",
+  "aliases": ["Amidst the Downpour"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SSR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The wielder's Strike has a [StateArg1]% chance to gain 1 Arithmetica and trigger 10% {Poison} on all enemies; if the current Realm is {Aequor}, triggering this effect causes 1 Tentacle to attack once. This effect only activates once per turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["55", "70", "85", "100"], "suffix": "%"}}
+}

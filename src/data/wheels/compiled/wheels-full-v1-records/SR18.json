@@ -1,0 +1,16 @@
+{
+  "id": "SR18",
+  "assetId": "Weapon_Full_SR18",
+  "name": "The Gaze of Isarawu",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "wanda",
+  "ownerAwakenerId": 52,
+  "ownerAwakenerName": "wanda",
+  "aliases": ["The Gaze of Isarawu"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: Increases the wielder's Shield and {Counter} by [StateArg1]%. When attacked, there is a [StateArg2]% chance for all Awakeners to gain 1 Aliemus.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["4", "6", "8", "10"]}, "StateArg2": {"kind": "scaling", "values": ["70", "80", "90", "100"]}}
+}

@@ -1,0 +1,20 @@
+{
+  "id": "O112",
+  "assetId": "Weapon_Full_O112",
+  "name": "The Faraway Eden",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "vortice",
+  "ownerAwakenerId": 55,
+  "ownerAwakenerName": "vortice",
+  "aliases": ["The Faraway Eden"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SSR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: Gain Aliemus equal to [StateArg1]% Base Aliemus at the sart of battle. The wielder's Exalt Final DMG increases by a percentage equal to [StateArg2]% of Base Aliemus.\nWhen switching to the {Raging Waves} stance, gain Temporary Realm Mastery equal to [StateArg3]% of your current Realm Mastery. 3-turn cooldown.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["13", "17", "21", "25"]},
+    "StateArg2": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg3": {"kind": "scaling", "values": ["20", "25", "30", "35"]}
+  }
+}

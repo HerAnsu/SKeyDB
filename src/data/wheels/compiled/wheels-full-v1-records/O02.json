@@ -1,0 +1,21 @@
+{
+  "id": "O02",
+  "assetId": "Weapon_Full_O02",
+  "name": "Shrouded Birth",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "murphy",
+  "ownerAwakenerId": 34,
+  "ownerAwakenerName": "murphy",
+  "aliases": ["Shrouded Birth"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: The wielder's Shield Generation +[StateArg1]%. When generating Shield, all allies gain Temporary Crit. Rate of [StateArg3]% and Keyflare from the wielder's Keyflare Regen by [StateArg4]%, up to 2 times per turn. If the current realm is {Aequor}, each time a Tentacle attacks, the wielder gains 1 point of Aliemus, up to [StateArg2] per turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]},
+    "StateArg3": {"kind": "scaling", "values": ["5", "6", "7", "8"]},
+    "StateArg4": {"kind": "scaling", "values": ["90", "110", "130", "150"]},
+    "StateArg2": {"kind": "scaling", "values": ["4", "6", "8", "10"]}
+  }
+}

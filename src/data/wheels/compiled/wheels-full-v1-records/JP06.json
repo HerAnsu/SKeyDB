@@ -1,0 +1,13 @@
+{
+  "id": "JP06",
+  "assetId": "Weapon_Full_JP06",
+  "name": "Stakes of Wisdom",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Stakes of Wisdom"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SSR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: After exploration starts, shuffle 1 \"Stakes of Wisdom\" into the Draw Pile. \"Stakes of Wisdom\": Cost 1 Arithmetica. Shuffle all Command Cards in hand randomly into the Draw Pile. Shuffled Command Cards have a [StateArg1]% chance to take effect 1 additional time when played next, and for each Command Card shuffled in, all Awakeners gain 2 Aliemus. {Retain}. {Exhaust}. {Innate}.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["13", "17", "21", "25"]}}
+}

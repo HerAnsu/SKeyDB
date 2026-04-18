@@ -1,0 +1,20 @@
+{
+  "id": "B04",
+  "assetId": "Weapon_Full_B04",
+  "name": "By Rose Alone",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "sorel",
+  "ownerAwakenerId": 46,
+  "ownerAwakenerName": "sorel",
+  "aliases": ["By Rose Alone"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SSR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: For every instance of DMG dealt by the wielder, there is a [StateArg3]% chance for the wielder to gain 2% Temporary Crit. DMG. After the wielder releases Exalt, they deal Active DMG 3 times to a random enemy equal to [StateArg1]% of the wielder's ATK. If the current realm is {Caro}, for every {Embryo} devoured, {Embryo Fusion} increases by +[StateArg2]%.",
+  "descriptionArgs": {
+    "StateArg3": {"kind": "scaling", "values": ["40", "60", "80", "100"], "suffix": "%"},
+    "StateArg1": {"kind": "scaling", "values": ["15", "20", "25", "30"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["16", "19", "22", "25"], "suffix": "%"}
+  }
+}

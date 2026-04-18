@@ -1,0 +1,16 @@
+{
+  "id": "SR42",
+  "assetId": "Weapon_Full_SR42",
+  "name": "Thirsting Brush",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "pickman",
+  "ownerAwakenerId": 40,
+  "ownerAwakenerName": "pickman",
+  "aliases": ["Thirsting Brush"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: After the wielder unleashes Exalt, they gain 1 stack of \"Collaboration\". The next Exalt of other Awakeners this turn can consume \"Collaboration\", increasing its Crit. Rate by [StateArg1]%, and the Awakener consuming \"Collaboration\" gains Aliemus equal to [StateArg1]% the wielder's Aliemus Regen.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["13", "17", "21", "25"]}}
+}

@@ -1,0 +1,13 @@
+{
+  "id": "SR09",
+  "assetId": "Weapon_Full_SR09",
+  "name": "Memory Syndrome",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Memory Syndrome"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: After playing a Symptom card, the wielder gains [StateArg1] Aliemus. This effect triggers up to 2 times per turn. After playing a Command Card, the wielder gains 1 Aliemus.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "10", "11", "12"]}}
+}

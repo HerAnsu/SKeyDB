@@ -1,0 +1,20 @@
+{
+  "id": "C06",
+  "assetId": "Weapon_Full_C06",
+  "name": "Aberrant Devour",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "24",
+  "ownerAwakenerId": 1,
+  "ownerAwakenerName": "24",
+  "aliases": ["Aberrant Devour"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SSR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: Exalt Base DMG +[StateArg1]%. At the start of exploration, the wielder enters the Scholar Persona. Using Exalt switches the wielder between the Scholar and Jester Personas.\nScholar: Gain [StateArg2] Aliemus at turn end.\nJester: Crit. Rate and Crit. DMG +[StateArg3]% at turn end.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "fixed", "value": "60"},
+    "StateArg2": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg3": {"kind": "scaling", "values": ["4", "5", "6", "7"]}
+  }
+}

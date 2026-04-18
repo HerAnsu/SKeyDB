@@ -1,0 +1,20 @@
+{
+  "id": "O11",
+  "assetId": "Weapon_Full_O11",
+  "name": "Uteri Somnia",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "murphy: fauxborn",
+  "ownerAwakenerId": 35,
+  "ownerAwakenerName": "murphy: fauxborn",
+  "aliases": ["Uteri Somnia"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: Hand Limit +2. Effects of the same type cannot stack. The wielder's Keyflare Regen and Exalt's Final DMG & Shield Generation +[StateArg1]%.\nSwitching to {Tranquil Sea} stance increases the wielder's Aliemus by [StateArg2], 3 turns cooldown.\nSwitching to {Raging Waves} stance inflicts [StateArg3] stacks of {Birth Ritual} on all enemies, 3 turns cooldown.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg2": {"kind": "scaling", "values": ["15", "20", "25", "30"]},
+    "StateArg3": {"kind": "scaling", "values": ["4", "6", "8", "10"]}
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "SR02",
+  "assetId": "Weapon_Full_SR02",
+  "name": "Elevated Focus",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Elevated Focus"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: After triggering Posse, the wielder gains [StateArg1] Aliemus.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

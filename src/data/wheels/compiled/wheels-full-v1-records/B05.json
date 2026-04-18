@@ -1,0 +1,20 @@
+{
+  "id": "B05",
+  "assetId": "Weapon_Full_B05",
+  "name": "Chains Unbound",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "helot",
+  "ownerAwakenerId": 23,
+  "ownerAwakenerName": "helot",
+  "aliases": ["Chains Unbound"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SSR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The Base DMG dealt by the wielder's cards is increased by [StateArg1]%. At turn start, there is a [StateArg2]% chance to generate a random card of the wielder into the hand with added {Exhaust}. If the current realm is {Caro}, using {Embryo} on the wielder increases the Crit. Rate of the wielder's next Strike card's DMG this turn by +[StateArg3]%.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["22", "28", "34", "40"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["15", "20", "25", "30"], "suffix": "%"},
+    "StateArg3": {"kind": "scaling", "values": ["20", "25", "30", "35"], "suffix": "%"}
+  }
+}

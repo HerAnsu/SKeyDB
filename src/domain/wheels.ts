@@ -1,35 +1,18 @@
-import {z} from 'zod'
+import wheelsLite from '@/data/wheels/compiled/wheels-lite.v1.json'
 
-import wheelsLite from '@/data/wheels-lite.json'
-
-import {getMainstatByKey, WHEEL_MAINSTAT_KEYS, type WheelMainstatKey} from './mainstats'
-
-const rawWheelsSchema = z.array(
-  z.object({
-    id: z.string().trim().min(1),
-    assetId: z.string().trim().min(1),
-    name: z.string().trim().min(1),
-    rarity: z.enum(['SSR', 'SR', 'R']),
-    realm: z.enum(['AEQUOR', 'CARO', 'CHAOS', 'ULTRA', 'NEUTRAL']),
-    awakener: z.string(),
-    mainstatKey: z.enum(WHEEL_MAINSTAT_KEYS),
-  }),
-)
+import {getMainstatByKey, type WheelMainstatKey} from './mainstats'
+import {wheelsLiteV1DatasetSchema, type WheelLiteV1Record} from './wheels-lite-v1-compiler'
 
 export type WheelRarity = 'SSR' | 'SR' | 'R'
 export type WheelRealm = 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA' | 'NEUTRAL'
 
-export interface Wheel {
-  id: string
-  assetId: string
-  name: string
+export type Wheel = WheelLiteV1Record & {
   rarity: WheelRarity
   realm: WheelRealm
-  awakener: string
   mainstatKey: WheelMainstatKey
 }
 
-const parsedWheels = rawWheelsSchema.parse(wheelsLite)
+const parsedWheels: Wheel[] = wheelsLiteV1DatasetSchema.parse(wheelsLite)
 const wheelById = new Map(parsedWheels.map((wheel) => [wheel.id, wheel]))
 
 export function getWheels(): Wheel[] {

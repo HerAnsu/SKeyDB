@@ -1,0 +1,20 @@
+{
+  "id": "O10",
+  "assetId": "Weapon_Full_O10",
+  "name": "Flamebound Navigator",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "corposant",
+  "ownerAwakenerId": 11,
+  "ownerAwakenerName": "corposant",
+  "aliases": ["Flamebound Navigator"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SSR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: The Shield caused by the wielder's Exalt increases by [StateArg1]%. After releasing Exalt, all Awakeners' Temporary Crit. DMG increases by [StateArg2]%, with each Tentacle increasing by 1%. After each exploration, trigger {Death Resistance} for the first time, restoring [StateArg3]% of Max HP at the start of next turn",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["15", "20", "25", "30"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["11", "14", "17", "20"], "suffix": "%"},
+    "StateArg3": {"kind": "scaling", "values": ["13", "17", "21", "25"], "suffix": "%"}
+  }
+}

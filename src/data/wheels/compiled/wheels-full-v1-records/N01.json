@@ -1,0 +1,16 @@
+{
+  "id": "N01",
+  "assetId": "Weapon_Full_N01",
+  "name": "Unsent Flowers",
+  "rarity": "R",
+  "realm": "NEUTRAL",
+  "awakener": "ramona",
+  "ownerAwakenerId": 42,
+  "ownerAwakenerName": "ramona",
+  "aliases": ["Unsent Flowers"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "N:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: If the wielder is the Awakener \"Ramona\", the Affinity gained upon completing the stage is increased by [StateArg1]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["35", "40", "45", "50"]}}
+}

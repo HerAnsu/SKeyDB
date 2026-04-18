@@ -1,0 +1,19 @@
+{
+  "id": "D06",
+  "assetId": "Weapon_Full_D06",
+  "name": "The Last Verse",
+  "rarity": "SSR",
+  "realm": "ULTRA",
+  "awakener": "horla",
+  "ownerAwakenerId": 24,
+  "ownerAwakenerName": "horla",
+  "aliases": ["The Last Verse"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SSR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: The wielder's Command Card Crit. Rate and Crit. DMG, Shield Generation, HP Recovery, Aliemus, and {STR} are increased by [StateArg1]%. If the current realm is {Ultra}, gain [StateArg2] Keyflare after releasing {Annihilation}. After entering the {Ultra Round}, the next Posse is released twice this turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg2": {"kind": "scaling", "values": ["110", "140", "170", "200"]}
+  }
+}

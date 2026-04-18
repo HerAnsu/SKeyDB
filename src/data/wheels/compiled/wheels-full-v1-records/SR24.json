@@ -1,0 +1,16 @@
+{
+  "id": "SR24",
+  "assetId": "Weapon_Full_SR24",
+  "name": "Poetic Bygone Days",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "horla",
+  "ownerAwakenerId": 24,
+  "ownerAwakenerName": "horla",
+  "aliases": ["Poetic Bygone Days"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: At the start of battle, draw 1 Command Card of the wielder and have a [StateArg1]% chance to reduce its Arithmetica Cost by 1. Each time {Death Resistance} is triggered, this effect is repeated once.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["40", "60", "80", "100"]}}
+}

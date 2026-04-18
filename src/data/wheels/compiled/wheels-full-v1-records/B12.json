@@ -1,0 +1,20 @@
+{
+  "id": "B12",
+  "assetId": "Weapon_Full_B12",
+  "name": "Paradoxical Realism",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "pickman",
+  "ownerAwakenerId": 40,
+  "ownerAwakenerName": "pickman",
+  "aliases": ["Paradoxical Realism"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SSR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: The wielder's Aliemus and {STR} Generation +[StateArg1]%. After unleashing Exalt, the Final DMG, Shield, and Healing from other Awakeners' Exalts this turn +[StateArg2]%. If this Exalt triggered {Devour}, the wielder gains [StateArg3] Aliemus.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["6", "8", "10", "12"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"], "suffix": "%"},
+    "StateArg3": {"kind": "scaling", "values": ["9", "11", "13", "15"]}
+  }
+}

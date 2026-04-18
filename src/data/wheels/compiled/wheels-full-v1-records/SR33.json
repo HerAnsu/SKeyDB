@@ -1,0 +1,16 @@
+{
+  "id": "SR33",
+  "assetId": "Weapon_Full_SR33",
+  "name": "Macabre Delicacies",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "doresain",
+  "ownerAwakenerId": 14,
+  "ownerAwakenerName": "doresain",
+  "aliases": ["Macabre Delicacies"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: The wielder's Base DMG +[StateArg1]%. Whenever the wielder kills an enemy, accumulate {Crimson Furnace} equal to [StateArg2]% of the wielder's ATK if the current Realm is {Caro}.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}, "StateArg2": {"kind": "scaling", "values": ["8", "12", "16", "20"]}}
+}

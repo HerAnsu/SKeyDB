@@ -1,0 +1,19 @@
+{
+  "id": "O06",
+  "assetId": "Weapon_Full_O06",
+  "name": "Blade of the Titan",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "goliath",
+  "ownerAwakenerId": 21,
+  "ownerAwakenerName": "goliath",
+  "aliases": ["Blade of the Titan"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SSR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: After the wielder finishes using Exalt, their Crit. DMG is increased by [StateArg1]% for the rest of this turn. The wielder's cards in hand have a [StateArg2]% chance to reduce Arithmetica Cost by 1 this turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["30", "40", "50", "60"]},
+    "StateArg2": {"kind": "scaling", "values": ["20", "25", "30", "35"]}
+  }
+}

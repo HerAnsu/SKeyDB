@@ -1,0 +1,16 @@
+{
+  "id": "JP04",
+  "assetId": "Weapon_Full_JP04",
+  "name": "Countdown Moment",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "awakener": "thais",
+  "ownerAwakenerId": 48,
+  "ownerAwakenerName": "thais",
+  "aliases": ["Countdown Moment"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: At the start of exploration, add 1 card \"Countdown Moment: 5\" to the deck. \"Countdown Moment: 5\": Draw 1 card after played, shuffle the next \"Countdown Moment\" into the Discard Pile, {Destroy}. \"Countdown Moment: 0\": Draw 3 cards, gain 3 Arithmetica, and have a [StateArg1]% chance to shuffle \"Countdown Moment: 5\" into the Discard Pile, {Retain}, {Destroy}.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["40", "60", "80", "100"], "suffix": "%"}}
+}

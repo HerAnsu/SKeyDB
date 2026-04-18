@@ -1,0 +1,16 @@
+{
+  "id": "SR21",
+  "assetId": "Weapon_Full_SR21",
+  "name": "Til the Snow Melts",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "helot: catena",
+  "ownerAwakenerId": 19,
+  "ownerAwakenerName": "helot: catena",
+  "aliases": ["Til the Snow Melts"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The wielder's Base DMG increases by [StateArg1]%. At the start of the battle, the wielder gains 25 stacks of \"Snow\". Playing a card grants 2 Aliemus and removes 1 stack. Once all \"Snow\" stacks are removed, the wielder gains [StateArg2]% Crit. Rate.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}, "StateArg2": {"kind": "scaling", "values": ["11", "14", "17", "20"]}}
+}

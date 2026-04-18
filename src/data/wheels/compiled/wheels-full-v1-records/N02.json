@@ -1,0 +1,16 @@
+{
+  "id": "N02",
+  "assetId": "Weapon_Full_N02",
+  "name": "Stepping Over the Muddy Roses",
+  "rarity": "R",
+  "realm": "NEUTRAL",
+  "awakener": "ramona: timeworn",
+  "ownerAwakenerId": 20,
+  "ownerAwakenerName": "ramona: timeworn",
+  "aliases": ["Stepping Over the Muddy Roses"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "N:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: If the wielder is the Awakener \"Ramona: Timeworn,\" the Affinity gained by other Awakeners upon completing the stage is increased by [StateArg1]%, but the wielder does not gain any Affinity.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["35", "40", "45", "50"]}}
+}

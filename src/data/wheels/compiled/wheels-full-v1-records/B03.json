@@ -1,0 +1,16 @@
+{
+  "id": "B03",
+  "assetId": "Weapon_Full_B03",
+  "name": "Winter's Requiem",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "aigis",
+  "ownerAwakenerId": 3,
+  "ownerAwakenerName": "aigis",
+  "aliases": ["Winter's Requiem"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: At the start of battle, apply 2 stacks of {Vulnerable} to front-row enemies. At turn start, enemies affected by {Vulnerable} lose Temporary {STR} equal to the wielder's ATK [StateArg1]%. If the current Realm is {Caro}, after the wielder releases Exalt, {Embryo Fusion} +[StateArg2]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["6", "8", "10", "12"]}, "StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

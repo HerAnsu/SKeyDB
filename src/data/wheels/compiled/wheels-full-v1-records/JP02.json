@@ -1,0 +1,13 @@
+{
+  "id": "JP02",
+  "assetId": "Weapon_Full_JP02",
+  "name": "School Day",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["School Day"],
+  "searchTags": [],
+  "mainstatKey": "SIGIL_YIELD",
+  "mainstatSeriesKey": "SSR:SIGIL_YIELD",
+  "descriptionTemplate": "Team Unique: After resetting stock at \"D-Mark\" and {Ashen Ruins}, the wielder gains [StateArg1] Aliemus.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["35", "40", "45", "50"]}}
+}

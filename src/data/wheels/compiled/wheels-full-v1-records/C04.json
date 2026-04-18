@@ -1,0 +1,16 @@
+{
+  "id": "C04",
+  "assetId": "Weapon_Full_C04",
+  "name": "Celestial Beast",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "lotan",
+  "ownerAwakenerId": 31,
+  "ownerAwakenerName": "lotan",
+  "aliases": ["Celestial Beast"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SSR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: The Base DMG of the wielder's Strike and Exalt is increased by [StateArg1]%. After the wielder uses Strike, they gain a 5% Temporary Crit. Rate, stacking up to 3 times per turn. Upon reaching 3 stacks, they gain 15% Temporary Crit. DMG.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["26", "34", "42", "50"]}}
+}

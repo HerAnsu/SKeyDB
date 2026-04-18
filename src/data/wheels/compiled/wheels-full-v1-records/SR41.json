@@ -1,0 +1,16 @@
+{
+  "id": "SR41",
+  "assetId": "Weapon_Full_SR41",
+  "name": "Navigator at Sea",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "corposant",
+  "ownerAwakenerId": 11,
+  "ownerAwakenerName": "corposant",
+  "aliases": ["Navigator at Sea"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: At the start of battle, gain a Shield equal to [StateArg1]% of the wielder's DEF. After triggering {Death Resistance}, trigger this effect again at the start of next turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["15", "20", "25", "30"]}}
+}

@@ -1,0 +1,19 @@
+{
+  "id": "SR19",
+  "assetId": "Weapon_Full_SR19",
+  "name": "Man in the Mirror",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "salvador",
+  "ownerAwakenerId": 44,
+  "ownerAwakenerName": "salvador",
+  "aliases": ["Man in the Mirror"],
+  "searchTags": [],
+  "mainstatKey": "SIGIL_YIELD",
+  "mainstatSeriesKey": "SR:SIGIL_YIELD",
+  "descriptionTemplate": "Team Unique: At turn end, the wielder gains [StateArg1] Aliemus. When taking DMG, gain Shield equal to [StateArg2]% of the DMG at the start of next turn. If the current Realm is {Caro}, gain {Crimson Furnace} Healing equal to [StateArg2]% of the DMG instead.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["1.5", "2.0", "2.5", "3.0"]},
+    "StateArg2": {"kind": "scaling", "values": ["1.5", "2.0", "2.5", "3.0"]}
+  }
+}

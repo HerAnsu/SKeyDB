@@ -1,0 +1,16 @@
+{
+  "id": "SR29",
+  "assetId": "Weapon_Full_SR29",
+  "name": "Never-Ending Performance",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "hameln",
+  "ownerAwakenerId": 22,
+  "ownerAwakenerName": "hameln",
+  "aliases": ["Never-Ending Performance"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: At turn end, the wielder gains 5 Aliemus. After the wielder releases Exalt, the next Command Card played by the wielder this turn increases its Crit. Rate, Crit. DMG, Shield, and health recovery by [StateArg1]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]}}
+}

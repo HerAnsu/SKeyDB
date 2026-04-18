@@ -1,0 +1,13 @@
+{
+  "id": "SR12",
+  "assetId": "Weapon_Full_SR12",
+  "name": "Nobleman's Staff",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Nobleman's Staff"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: Increases the base Exalt DMG of the wielder by [StateArg1]%, and increases shield and HP Recovery by [StateArg2]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["15", "20", "25", "30"]}, "StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

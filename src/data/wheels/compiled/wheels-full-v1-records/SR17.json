@@ -1,0 +1,16 @@
+{
+  "id": "SR17",
+  "assetId": "Weapon_Full_SR17",
+  "name": "35mm Magic",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "lily",
+  "ownerAwakenerId": 29,
+  "ownerAwakenerName": "lily",
+  "aliases": ["35mm Magic"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: The Shields and {Poison} caused by the wielder increase by [StateArg1]%. Each time {Death Resistance} is triggered, all Awakeners gain [StateArg2]% Temporary Crit. Rate and Crit. DMG.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["4", "6", "8", "10"]}, "StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

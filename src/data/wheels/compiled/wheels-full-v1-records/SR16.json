@@ -1,0 +1,13 @@
+{
+  "id": "SR16",
+  "assetId": "Weapon_Full_SR16",
+  "name": "Hand of Oblivion",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Hand of Oblivion"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: At the start of exploration, add one Strike of the wielder to the deck, increasing the Base DMG of the wielder's Strike by [StateArg1]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["22", "28", "34", "40"]}}
+}

@@ -1,0 +1,20 @@
+{
+  "id": "C07",
+  "assetId": "Weapon_Full_C07",
+  "name": "Memory Spiral",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "nautila",
+  "ownerAwakenerId": 36,
+  "ownerAwakenerName": "nautila",
+  "aliases": ["Memory Spiral"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SSR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: The wielder's Shield Generation +[StateArg1]%. At turn start, {Retain} [StateArg2]% of the remaining Shield, up to [StateArg3]% of Max HP.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg2": {"kind": "scaling", "values": ["35", "40", "45", "50"]},
+    "StateArg3": {"kind": "scaling", "values": ["11", "14", "17", "20"]}
+  }
+}

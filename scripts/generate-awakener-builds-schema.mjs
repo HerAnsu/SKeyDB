@@ -6,7 +6,7 @@ import awakenersLite from '../src/data/awakeners/compiled/awakeners-lite.v2.json
 import covenantsLite from '../src/data/covenants-lite.json' with {type: 'json'}
 import mainstats from '../src/data/mainstats.json' with {type: 'json'}
 import possesLite from '../src/data/posses-lite.json' with {type: 'json'}
-import wheelsLite from '../src/data/wheels-lite.json' with {type: 'json'}
+import wheelsLite from '../src/data/wheels/compiled/wheels-lite.v1.json' with {type: 'json'}
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

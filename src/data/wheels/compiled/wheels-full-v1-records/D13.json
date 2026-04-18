@@ -1,0 +1,21 @@
+{
+  "id": "D13",
+  "assetId": "Weapon_Full_D13",
+  "name": "Veiled Anguish",
+  "rarity": "SSR",
+  "realm": "ULTRA",
+  "awakener": "clementine",
+  "ownerAwakenerId": 10,
+  "ownerAwakenerName": "clementine",
+  "aliases": ["Veiled Anguish"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: The wielder's Exalt Base DMG +[StateArg1]%, and Keyflare Regen +[StateArg2]. After entering {Ultra Round}, all Awakeners obtain [StateArg4] Aliemus. After releasing {Annihilation}, the wielder obtains [StateArg3] Aliemus.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["35", "40", "45", "50"]},
+    "StateArg2": {"kind": "scaling", "values": ["15", "20", "25", "30"]},
+    "StateArg4": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg3": {"kind": "scaling", "values": ["11", "14", "17", "20"]}
+  }
+}

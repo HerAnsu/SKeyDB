@@ -1,0 +1,13 @@
+{
+  "id": "P06",
+  "assetId": "Weapon_Full_P06",
+  "name": "Whisper",
+  "rarity": "R",
+  "realm": "NEUTRAL",
+  "aliases": ["Whisper"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "R:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: After each battle ends, the Awakener with the lowest Aliemus gains [StateArg1] Aliemus. In {Astral Reign}, this effect changes to \"Increases the chance for the wielder's Dimensional Image Relic to appear by 100%.\"",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["35", "40", "45", "50"]}}
+}

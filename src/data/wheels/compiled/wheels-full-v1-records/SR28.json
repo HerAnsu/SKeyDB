@@ -1,0 +1,16 @@
+{
+  "id": "SR28",
+  "assetId": "Weapon_Full_SR28",
+  "name": "Gateway of Truth",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "tawil",
+  "ownerAwakenerId": 47,
+  "ownerAwakenerName": "tawil",
+  "aliases": ["Gateway of Truth"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: After the start of the battle, gain Keyflare equal to [StateArg1]% of the wielder's Keyflare Regen. The first Posse issuance in each battle repeats this effect.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["350", "400", "450", "500"]}}
+}

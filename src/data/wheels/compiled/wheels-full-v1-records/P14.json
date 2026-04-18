@@ -1,0 +1,13 @@
+{
+  "id": "P14",
+  "assetId": "Weapon_Full_P14",
+  "name": "Aged",
+  "rarity": "R",
+  "realm": "NEUTRAL",
+  "aliases": ["Aged"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "R:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: After each battle ends, gain [StateArg1] Keyflare. In {Astral Reign}, this effect changes to \"Increases the chance for the wielder's Dimensional Image Relic to appear by 100%.\"",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["400", "600", "800", "1000"]}}
+}

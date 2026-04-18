@@ -1,0 +1,13 @@
+{
+  "id": "SR07",
+  "assetId": "Weapon_Full_SR07",
+  "name": "Analysis of Death",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Analysis of Death"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: After killing an enemy, the wielder gains [StateArg1] Aliemus and 1% Crit. DMG, effective for the entire exploration.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]}}
+}

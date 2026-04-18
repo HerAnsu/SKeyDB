@@ -1,0 +1,20 @@
+{
+  "id": "D09",
+  "assetId": "Weapon_Full_D09",
+  "name": "Happy Magic Show",
+  "rarity": "SSR",
+  "realm": "ULTRA",
+  "awakener": "casiah",
+  "ownerAwakenerId": 7,
+  "ownerAwakenerName": "casiah",
+  "aliases": ["Happy Magic Show"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SSR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: After the wielder releases an Exalt, they gain [StateArg1] Aliemus and [StateArg2] Keyflare, repeating once for every 4 cards in hand. If the current Realm is {Ultra}, after the wielder's Cards enter {Ultra Space}, they gain Temporary {STR} equal to [StateArg3]% of the wielder's Attack, triggering up to 2 times per turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["3", "4", "5", "6"]},
+    "StateArg2": {"kind": "scaling", "values": ["35", "40", "45", "50"]},
+    "StateArg3": {"kind": "scaling", "values": ["6", "8", "10", "12"]}
+  }
+}

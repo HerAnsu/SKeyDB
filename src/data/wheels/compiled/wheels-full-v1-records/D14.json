@@ -1,0 +1,19 @@
+{
+  "id": "D14",
+  "assetId": "Weapon_Full_D14",
+  "name": "Twisted Knight Ballad",
+  "rarity": "SSR",
+  "realm": "ULTRA",
+  "awakener": "pollux",
+  "ownerAwakenerId": 41,
+  "ownerAwakenerName": "pollux",
+  "aliases": ["Twisted Knight Ballad"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SSR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: The wielder's cards gain +[StateArg1]% Base DMG and Crit. DMG. At the start of your turn and after using the wielder's Exalt, gain 1 stack of \"Alight\". When the wielder's Command Card is played, consume 1 stack to increase its Final DMG and Shield by [StateArg2]%. During an {Ultra Round}, gain \"Ablaze\" instead (effect doubled).",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["20", "25", "30", "35"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"], "suffix": "%"}
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "C11",
+  "assetId": "Weapon_Full_C11",
+  "name": "Will Unyielding",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "alva",
+  "ownerAwakenerId": 4,
+  "ownerAwakenerName": "alva",
+  "aliases": ["Will Unyielding"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SSR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: The wielder's base DMG and Shield increase by [StateArg1]%. At the start of exploration, add one of the wielder's Strike and one Defense to the deck. After the wielder plays Defense, the next Strike's Crit. Rate and Crit. DMG increase by 15%. After the wielder plays Strike, the next Defense's Shield increases by 15%. Can stack up to 3 times.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

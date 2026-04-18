@@ -1,0 +1,13 @@
+{
+  "id": "JP03",
+  "assetId": "Weapon_Full_JP03",
+  "name": "Dear Papa Noel",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Dear Papa Noel"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SSR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: Your first purchase of an \"Orison\" in the \"D-Mark\" store or your first purchase of a discounted item in the {Ashen Ruins} has a [StateArg1]% chance to cost 0 Black Sigils. This can trigger only once per Exploration.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["70", "80", "90", "100"]}}
+}

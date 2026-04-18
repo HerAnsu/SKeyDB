@@ -1,0 +1,16 @@
+{
+  "id": "SR46",
+  "assetId": "Weapon_Full_SR46",
+  "name": "Imprisoned Madness",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "vortice",
+  "ownerAwakenerId": 55,
+  "ownerAwakenerName": "vortice",
+  "aliases": ["Imprisoned Madness"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: When switching to the {Raging Waves} stance, gain Temporary Realm Mastery equal to [StateArg1]% of your current Realm Mastery. 3-turn cooldown.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]}}
+}

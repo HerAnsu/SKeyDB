@@ -1,0 +1,13 @@
+{
+  "id": "SR11",
+  "assetId": "Weapon_Full_SR11",
+  "name": "Critical Point",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Critical Point"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: After dealing Damage, the wielder's Crit. Rate + [StateArg1]%. After a critical hit, the Crit. Rate gained from this effect is reset.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["4", "6", "8", "10"]}}
+}

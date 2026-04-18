@@ -1,0 +1,16 @@
+{
+  "id": "C01",
+  "assetId": "Weapon_Full_C01",
+  "name": "Rewinding Time",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "ramona",
+  "ownerAwakenerId": 42,
+  "ownerAwakenerName": "ramona",
+  "aliases": ["Rewinding Time"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: After playing the wielder's Command Card, there is a [StateArg1]% chance to return it to your hand from the Discard Pile. This effect can only trigger once per turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["30", "40", "50", "60"]}}
+}

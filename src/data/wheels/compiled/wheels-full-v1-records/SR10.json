@@ -1,0 +1,13 @@
+{
+  "id": "SR10",
+  "assetId": "Weapon_Full_SR10",
+  "name": "Mind Barrier",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Mind Barrier"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: After Exalt, gain Shield equal to [StateArg1]% of the wielder's DEF.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["16", "19", "22", "25"]}}
+}

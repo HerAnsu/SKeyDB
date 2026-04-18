@@ -1,0 +1,21 @@
+{
+  "id": "D04",
+  "assetId": "Weapon_Full_D04",
+  "name": "Queen's Edict",
+  "rarity": "SSR",
+  "realm": "ULTRA",
+  "awakener": "wanda",
+  "ownerAwakenerId": 52,
+  "ownerAwakenerName": "wanda",
+  "aliases": ["Queen's Edict"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SSR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The wielder's {Counter} Generation +[StateArg4]%. After playing a card, gain {Counter} equal to [StateArg1]% of the wielder's DEF, up to 2 times per turn. If the card played enters {Ultra Space}, the wielder also gains [StateArg2] Aliemus. After releasing Exalt, all enemies lose [StateArg3]% Temporary {STR} equal to the wielder's DEF.",
+  "descriptionArgs": {
+    "StateArg4": {"kind": "scaling", "values": ["13", "17", "21", "25"], "suffix": "%"},
+    "StateArg1": {"kind": "scaling", "values": ["5", "6", "7", "8"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["6", "8", "10", "12"]},
+    "StateArg3": {"kind": "scaling", "values": ["9", "11", "13", "15"], "suffix": "%"}
+  }
+}

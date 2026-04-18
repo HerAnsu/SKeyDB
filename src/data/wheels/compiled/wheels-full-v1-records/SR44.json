@@ -1,0 +1,16 @@
+{
+  "id": "SR44",
+  "assetId": "Weapon_Full_SR44",
+  "name": "Light of Intellect",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "mouchette",
+  "ownerAwakenerId": 33,
+  "ownerAwakenerName": "mouchette",
+  "aliases": ["Light of Intellect"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: After the first Posse release in each turn, there is a [StateArg1]% chance to draw 1 Strike of the wielder's.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["55", "70", "85", "100"], "suffix": "%"}}
+}

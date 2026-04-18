@@ -1,0 +1,16 @@
+{
+  "id": "ZL04",
+  "assetId": "Weapon_Full_ZL04",
+  "name": "Dusk and Dawn",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Dusk and Dawn"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SSR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: Gain [StateArg1] Keyflare at turn end. Gain [StateArg2] Keyflare after triggering {Death Resistance}. Using Emergency Gnosis increases Arithmetica cap by 3 and allows you to draw 3 cards per turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["125", "150", "175", "200"]},
+    "StateArg2": {"kind": "scaling", "values": ["700", "800", "900", "1000"]}
+  }
+}

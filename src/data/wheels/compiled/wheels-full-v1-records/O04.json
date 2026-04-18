@@ -1,0 +1,21 @@
+{
+  "id": "O04",
+  "assetId": "Weapon_Full_O04",
+  "name": "Fin of Sorrow",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "caecus",
+  "ownerAwakenerId": 6,
+  "ownerAwakenerName": "caecus",
+  "aliases": ["Fin of Sorrow"],
+  "searchTags": [],
+  "mainstatKey": "SIGIL_YIELD",
+  "mainstatSeriesKey": "SSR:SIGIL_YIELD",
+  "descriptionTemplate": "Team Unique: The wielder's Shield and HP Recovery increase by [StateArg1]% of their CON. The wielder's {Counter} dealt +[StateArg3]%. After playing Defense, gain {Counter} equal to [StateArg4]% of their DEF. At the start of battle, gain {STR} equal to [StateArg2]% of their CON. If the current realm is {Aequor}, gain additional {Tentacle DMG} of the same amount.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["2.5", "3", "3.5", "4"]},
+    "StateArg3": {"kind": "scaling", "values": ["9", "11", "13", "15"]},
+    "StateArg4": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg2": {"kind": "scaling", "values": ["6", "8", "10", "12"]}
+  }
+}

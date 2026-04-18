@@ -1,0 +1,20 @@
+{
+  "id": "C12",
+  "assetId": "Weapon_Full_C12",
+  "name": "Silent Banquet",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "karen",
+  "ownerAwakenerId": 26,
+  "ownerAwakenerName": "karen",
+  "aliases": ["Silent Banquet"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SSR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: Increases the wielder's {Poison} DMG by [StateArg3]%. After using Exalt, restores health equal to [StateArg1]% of the wielder's Constitution, plus additional health equal to [StateArg2]% of the wielder's Constitution for each remaining Arithmetica.",
+  "descriptionArgs": {
+    "StateArg3": {"kind": "scaling", "values": ["9", "11", "13", "15"]},
+    "StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg2": {"kind": "scaling", "values": ["2", "3", "4", "5"]}
+  }
+}

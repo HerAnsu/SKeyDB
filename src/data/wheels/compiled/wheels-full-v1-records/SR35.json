@@ -1,0 +1,16 @@
+{
+  "id": "SR35",
+  "assetId": "Weapon_Full_SR35",
+  "name": "Blue-Ringed Toxin",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "murphy: fauxborn",
+  "ownerAwakenerId": 35,
+  "ownerAwakenerName": "murphy: fauxborn",
+  "aliases": ["Blue-Ringed Toxin"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: The wielder's Keyflare Regen, Exalt Final DMG & Shield +[StateArg1]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["5", "6", "7", "8"]}}
+}

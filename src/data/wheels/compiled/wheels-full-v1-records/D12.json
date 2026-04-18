@@ -1,0 +1,20 @@
+{
+  "id": "D12",
+  "assetId": "Weapon_Full_D12",
+  "name": "Eternal Requiem",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "hameln",
+  "ownerAwakenerId": 22,
+  "ownerAwakenerName": "hameln",
+  "aliases": ["Eternal Requiem"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: At the start of exploration, shuffle 1 \"Silver Key Radiance\" with {Destroy} into the Draw Pile. After releasing Posse, the wielder's Crit. DMG +[StateArg1]%. When the wielder deals DMG, gain Keyflare equal to [StateArg2]% of the wielder's Keyflare Regen and [StateArg3]% Temporary Crit. Rate, up to 5 times per turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["2", "3", "4", "5"]},
+    "StateArg2": {"kind": "scaling", "values": ["50", "60", "70", "80"]},
+    "StateArg3": {"kind": "scaling", "values": ["5", "6", "7", "8"]}
+  }
+}

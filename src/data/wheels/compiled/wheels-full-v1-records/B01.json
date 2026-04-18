@@ -1,0 +1,20 @@
+{
+  "id": "B01",
+  "assetId": "Weapon_Full_B01",
+  "name": "Merciful Nurturing",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "thais",
+  "ownerAwakenerId": 48,
+  "ownerAwakenerName": "thais",
+  "aliases": ["Merciful Nurturing"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: Hand Limit +2. At turn end, gain Keyflare equal to [StateArg1]% of the wielder's Keyflare Regen. Each time a Posse is released, all Awakeners gain [StateArg2] Aliemus. If the current Realm is {Caro}, it also increases {Embryo Fusion} by +[StateArg3]%.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["150", "200", "250", "300"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["3", "4", "5", "6"]},
+    "StateArg3": {"kind": "scaling", "values": ["13", "17", "21", "25"], "suffix": "%"}
+  }
+}

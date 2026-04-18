@@ -1,0 +1,13 @@
+{
+  "id": "SR08",
+  "assetId": "Weapon_Full_SR08",
+  "name": "To My Dearest Friend",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["To My Dearest Friend"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: After the wielder uses Exalt, all allies' Crit. Rate + [StateArg1]% this turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["13", "17", "21", "25"]}}
+}

@@ -1,0 +1,13 @@
+{
+  "id": "SR06",
+  "assetId": "Weapon_Full_SR06",
+  "name": "Adventurer's Pack",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Adventurer's Pack"],
+  "searchTags": [],
+  "mainstatKey": "SIGIL_YIELD",
+  "mainstatSeriesKey": "SR:SIGIL_YIELD",
+  "descriptionTemplate": "Team Unique: After playing the wielder's Defense, gain Temporary {STR} equal to [StateArg1]% the wielder's ATK.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "12", "15", "18"]}}
+}

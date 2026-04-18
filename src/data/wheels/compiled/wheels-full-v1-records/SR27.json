@@ -1,0 +1,20 @@
+{
+  "id": "SR27",
+  "assetId": "Weapon_Full_SR27",
+  "name": "Fate Roulette",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "ryker",
+  "ownerAwakenerId": 43,
+  "ownerAwakenerName": "ryker",
+  "aliases": ["Fate Roulette"],
+  "searchTags": [],
+  "mainstatKey": "SIGIL_YIELD",
+  "mainstatSeriesKey": "SR:SIGIL_YIELD",
+  "descriptionTemplate": "Team Unique: Increases the wielder's Crit. Rate by [StateArg1]%. Gain [StateArg2] Black Sigil upon killing an enemy, up to 3 times during exploration. After 3 triggers, the wielder's Crit. Rate permanently increases by [StateArg3]% for the rest of the exploration.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["5", "6", "7", "8"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["3", "4", "5", "6"]},
+    "StateArg3": {"kind": "scaling", "values": ["3", "4", "5", "6"], "suffix": "%"}
+  }
+}

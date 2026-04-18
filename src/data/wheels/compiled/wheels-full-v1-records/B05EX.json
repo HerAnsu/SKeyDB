@@ -1,0 +1,16 @@
+{
+  "id": "B05EX",
+  "assetId": "Weapon_Full_B05EX",
+  "name": "Drowning in Crimson",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "helot: catena",
+  "ownerAwakenerId": 19,
+  "ownerAwakenerName": "helot: catena",
+  "aliases": ["Drowning in Crimson"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SSR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The wielder's Base DMG increases by [StateArg1]%. Before Exalt, Temporary hand size +1, draw 1 Command Card. In {Caro} realm, triggering {Devour} temporarily increases Crit. DMG by [StateArg1]%, once per turn",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["22", "28", "34", "40"], "suffix": "%"}}
+}

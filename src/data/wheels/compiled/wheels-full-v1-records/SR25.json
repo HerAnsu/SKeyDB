@@ -1,0 +1,16 @@
+{
+  "id": "SR25",
+  "assetId": "Weapon_Full_SR25",
+  "name": "Million Loving Gaze",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "sorel",
+  "ownerAwakenerId": 46,
+  "ownerAwakenerName": "sorel",
+  "aliases": ["Million Loving Gaze"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: Increases the DMG dealt by the wielder by [StateArg1]% of their Attack. If the current Realm is {Caro}, each time the {Devour} effect is triggered, it further increases the DMG dealt by the wielder by 3% of their Attack.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["6", "8", "10", "12"]}}
+}

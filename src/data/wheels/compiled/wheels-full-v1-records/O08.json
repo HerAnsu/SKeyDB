@@ -1,0 +1,16 @@
+{
+  "id": "O08",
+  "assetId": "Weapon_Full_O08",
+  "name": "Death of Ms. Coral",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "sanga",
+  "ownerAwakenerId": 45,
+  "ownerAwakenerName": "sanga",
+  "aliases": ["Death of Ms. Coral"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SSR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: After playing the wielder's card, gain a Shield equal to [StateArg1]% of the wielder's Defense. For each Tentacle, increase the Shield by [StateArg2]% of the wielder's Defense. This effect triggers only once per turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["6", "8", "10", "12"]}, "StateArg2": {"kind": "scaling", "values": ["1.5", "2", "2.5", "3"]}}
+}

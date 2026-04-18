@@ -1,0 +1,19 @@
+{
+  "id": "SR45",
+  "assetId": "Weapon_Full_SR45",
+  "name": "Magnolia's Lure",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "xu",
+  "ownerAwakenerId": 54,
+  "ownerAwakenerName": "xu",
+  "aliases": ["Magnolia's Lure"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The Fixed {Poison} & {Poison} Trigger effects caused by the wielder +[StateArg1]%. The wielder gains [StateArg2] Aliemus the first time they trigger {Resonance} each turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["4", "6", "8", "10"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["4", "6", "8", "10"]}
+  }
+}

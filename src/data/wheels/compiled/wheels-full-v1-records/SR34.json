@@ -1,0 +1,19 @@
+{
+  "id": "SR34",
+  "assetId": "Weapon_Full_SR34",
+  "name": "Witch's Wide-brimmed Hat",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "daffodil",
+  "ownerAwakenerId": 12,
+  "ownerAwakenerName": "daffodil",
+  "aliases": ["Witch's Wide-brimmed Hat"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The Base DMG dealt by the first Command Card used by the wielder each turn is increased by [StateArg1]%. If they enter the {Ultra Space}, the wielder gains [StateArg2] Aliemus.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["30", "40", "50", "60"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["5", "6", "7", "8"]}
+  }
+}

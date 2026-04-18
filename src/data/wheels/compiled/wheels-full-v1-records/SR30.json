@@ -1,0 +1,16 @@
+{
+  "id": "SR30",
+  "assetId": "Weapon_Full_SR30",
+  "name": "Shepherd's Staff",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "doll: inferno",
+  "ownerAwakenerId": 18,
+  "ownerAwakenerName": "doll: inferno",
+  "aliases": ["Shepherd's Staff"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: At the start of the battle, the equipped gains Aliemus equal to [StateArg1]% of the wielder Aliemus Regen. After the equipped releases Exalt for the first time in each battle, this effect repeats once.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["70", "80", "90", "100"]}}
+}

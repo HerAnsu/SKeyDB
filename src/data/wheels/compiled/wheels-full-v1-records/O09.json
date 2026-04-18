@@ -1,0 +1,16 @@
+{
+  "id": "O09",
+  "assetId": "Weapon_Full_O09",
+  "name": "Sail of Providence",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "celeste",
+  "ownerAwakenerId": 9,
+  "ownerAwakenerName": "celeste",
+  "aliases": ["Sail of Providence"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SSR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: Increases the wielder's HP Recovery by [StateArg1]%. After releasing Exalt, recover [StateArg2]% of lost HP at the start of next turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["4", "6", "8", "10"]}, "StateArg2": {"kind": "scaling", "values": ["4", "6", "8", "10"]}}
+}

@@ -1,0 +1,20 @@
+{
+  "id": "B09",
+  "assetId": "Weapon_Full_B09",
+  "name": "Lullaby Devoured",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "faint",
+  "ownerAwakenerId": 16,
+  "ownerAwakenerName": "faint",
+  "aliases": ["Lullaby Devoured"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SSR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: After the battle starts, gain a {Counter} equal to [StateArg1]% of the wielder's DEF. After triggering {Death Resistance}, gain up to 2 stacks of \"Cradle\": all friendly units' shield and HP Recovery increase by [StateArg2]%, removing 1 stack at turn end. If the current realm is {Caro}, after triggering {Death Resistance}, {Embryo Fusion} increases by +[StateArg3]%.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["26", "34", "42", "50"]},
+    "StateArg2": {"kind": "scaling", "values": ["15", "20", "25", "30"]},
+    "StateArg3": {"kind": "scaling", "values": ["13", "17", "21", "25"]}
+  }
+}

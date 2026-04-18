@@ -1,0 +1,16 @@
+{
+  "id": "SR23",
+  "assetId": "Weapon_Full_SR23",
+  "name": "Kiss of Farewell",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "thais",
+  "ownerAwakenerId": 48,
+  "ownerAwakenerName": "thais",
+  "aliases": ["Kiss of Farewell"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: After the wielder releases Exalt, they gain {STR} equal to [StateArg1]% of the wielder's ATK. If the current Realm is {Caro}, after releasing Exalt, {Embryo Fusion} increases by +[StateArg2]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["1.5", "2", "2.5", "3"]}, "StateArg2": {"kind": "scaling", "values": ["4", "6", "8", "10"]}}
+}

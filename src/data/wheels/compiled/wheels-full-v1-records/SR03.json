@@ -1,0 +1,13 @@
+{
+  "id": "SR03",
+  "assetId": "Weapon_Full_SR03",
+  "name": "Cursed Binding",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Cursed Binding"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The wielder's {Poison} inflicted is increased by [StateArg1]%. Strike deals DMG equal to [StateArg2]% of the attacker's ATK as {Poison}. This effect can trigger a maximum of 3 times per turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["6", "8", "10", "12"]}, "StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

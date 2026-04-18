@@ -1,0 +1,16 @@
+{
+  "id": "SR20",
+  "assetId": "Weapon_Full_SR20",
+  "name": "Silver Cod's Determination",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "24",
+  "ownerAwakenerId": 1,
+  "ownerAwakenerName": "24",
+  "aliases": ["Silver Cod's Determination"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: The wielder enters the Silver Cod persona after exploration begins. Switch between the Silver Cod and Cat personas after using Exalt.\nSilver Cod: Gain [StateArg1] Keyflare after dealing Damage. Cat: Gain a Temporary Crit. DMG increase of +[StateArg2]% after dealing Damage. These effects share a maximum of 5 triggers per turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["25", "30", "35", "40"]}, "StateArg2": {"kind": "scaling", "values": ["1", "2", "3", "4"]}}
+}

@@ -1,0 +1,13 @@
+{
+  "id": "SR14",
+  "assetId": "Weapon_Full_SR14",
+  "name": "Moment of Reunion",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Moment of Reunion"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: Each time a card of the wielder is played, gain [StateArg1] Keyflare. This effect can trigger up to 3 times per turn.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["20", "30", "40", "50"]}}
+}

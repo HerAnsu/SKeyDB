@@ -1,0 +1,13 @@
+{
+  "id": "ZL01",
+  "assetId": "Weapon_Full_ZL01",
+  "name": "Spring in Yakutsk",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Spring in Yakutsk"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: At turn end, the wielder gains [StateArg1] Aliemus and Keyflare equal to their Keyflare Regen.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

@@ -1,0 +1,13 @@
+{
+  "id": "ZL07",
+  "assetId": "Weapon_Full_ZL07",
+  "name": "We Will Meet Again",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["We Will Meet Again"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SSR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: After switching Tentacle Stances, using {Crimson Furnace}, or unleashing {Annihilation}, draw the wielder's Command Card ×1; each effect has a cooldown of 3 turns. After the Exploration, all Awakeners in the team gain +[StateArg1]% Affinity.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["4", "6", "8", "10"], "suffix": "%"}}
+}

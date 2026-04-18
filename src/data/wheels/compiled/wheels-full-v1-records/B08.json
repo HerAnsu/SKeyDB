@@ -1,0 +1,16 @@
+{
+  "id": "B08",
+  "assetId": "Weapon_Full_B08",
+  "name": "The Glutton's Tale",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "leigh",
+  "ownerAwakenerId": 28,
+  "ownerAwakenerName": "leigh",
+  "aliases": ["The Glutton's Tale"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SSR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: The wielder's Healing effect is increased by [StateArg2]%. At turn start, gain Temporary {STR} and Shield equal to [StateArg1]% of the HP lost last turn.",
+  "descriptionArgs": {"StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"]}, "StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

@@ -1,0 +1,20 @@
+{
+  "id": "D02",
+  "assetId": "Weapon_Full_D02",
+  "name": "Treasured Rarity",
+  "rarity": "SSR",
+  "realm": "ULTRA",
+  "awakener": "daffodil",
+  "ownerAwakenerId": 12,
+  "ownerAwakenerName": "daffodil",
+  "aliases": ["Treasured Rarity"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SSR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: Gain [StateArg1] Black Sigils each time an enemy dies. After the wielder kills an enemy, the wielder's Crit. DMG in this level permanently increases by [StateArg2]%, stacking up to 5 stacks. Each time the wielder triggers the {Leap} effect, increase the Final DMG dealt by the wielder this turn by [StateArg3]%, stacking up to 3 stacks.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "fixed", "value": "2"},
+    "StateArg2": {"kind": "scaling", "values": ["4", "6", "8", "10"]},
+    "StateArg3": {"kind": "scaling", "values": ["2", "3", "4", "5"]}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "SR05",
+  "assetId": "Weapon_Full_SR05",
+  "name": "Cloaked in the Night",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Cloaked in the Night"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: The wielder's {Counter} is increased by [StateArg1]%. Defense grants Temporary {Counter} equal to the wielder's DEF [StateArg2]%. In Boss Battles, this becomes 3 times the Temporary {Counter}. After {Death Resistance} triggers, deals {Fixed DMG} equal to the wielder's {Counter} stack count [StateArg3]% to all enemies.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["6", "8", "10", "12"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["15", "20", "25", "30"], "suffix": "%"},
+    "StateArg3": {"kind": "scaling", "values": ["40", "60", "80", "100"], "suffix": "%"}
+  }
+}

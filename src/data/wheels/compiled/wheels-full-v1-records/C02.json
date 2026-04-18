@@ -1,0 +1,16 @@
+{
+  "id": "C02",
+  "assetId": "Weapon_Full_C02",
+  "name": "Deathless Ascent",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "doll",
+  "ownerAwakenerId": 13,
+  "ownerAwakenerName": "doll",
+  "aliases": ["Deathless Ascent"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SSR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: The healing caused by the wielder's Command Card is increased by [StateArg2]%. Before the wielder releases Exalt, other Awakeners gain [StateArg1] Aliemus. If your team is in a {Vulnerable} state, the effect is doubled.",
+  "descriptionArgs": {"StateArg2": {"kind": "scaling", "values": ["13", "17", "21", "25"]}, "StateArg1": {"kind": "scaling", "values": ["5", "6", "7", "8"]}}
+}

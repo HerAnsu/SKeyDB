@@ -1,0 +1,13 @@
+{
+  "id": "SR01",
+  "assetId": "Weapon_Full_SR01",
+  "name": "Duty's Gravitas",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Duty's Gravitas"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: After the wielder triggers Exalt, all allies gain [StateArg1] Aliemus.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["2", "3", "4", "5"]}}
+}

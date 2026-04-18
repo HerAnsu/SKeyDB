@@ -1,0 +1,20 @@
+{
+  "id": "C16",
+  "assetId": "Weapon_Full_C16",
+  "name": "Amber-Tinted Death",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "kathigu-ra",
+  "ownerAwakenerId": 27,
+  "ownerAwakenerName": "kathigu-ra",
+  "aliases": ["Amber-Tinted Death"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SSR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: The wielder's Base DMG dealt +[StateArg1]%, and {STR} Generation +[StateArg2]%. After playing the wielder's Command Card, gain Temporary {STR} equal to [StateArg3]% of the wielder's ATK, triggering up to 5 times per turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["20", "25", "30", "35"], "suffix": "%"},
+    "StateArg2": {"kind": "scaling", "values": ["6", "8", "10", "12"], "suffix": "%"},
+    "StateArg3": {"kind": "scaling", "values": ["11", "14", "17", "20"], "suffix": "%"}
+  }
+}

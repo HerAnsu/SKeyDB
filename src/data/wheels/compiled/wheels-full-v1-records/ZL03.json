@@ -1,0 +1,17 @@
+{
+  "id": "ZL03",
+  "assetId": "Weapon_Full_ZL03",
+  "name": "Birth of a Soul",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Birth of a Soul"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SSR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: The team's Max HP increases by 10%. The Healing and Shield provided by the wielder increase by [StateArg3]%. After playing the wielder's Strike, restore [StateArg1]% of lost HP. After playing the wielder's Defense, gain Shield equal to [StateArg2]% of current life. This effect can trigger up to 1 time each per turn.",
+  "descriptionArgs": {
+    "StateArg3": {"kind": "scaling", "values": ["4", "6", "8", "10"]},
+    "StateArg1": {"kind": "scaling", "values": ["3", "4", "5", "6"]},
+    "StateArg2": {"kind": "scaling", "values": ["3", "4", "5", "6"]}
+  }
+}

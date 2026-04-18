@@ -1,0 +1,19 @@
+{
+  "id": "C17",
+  "assetId": "Weapon_Full_C17",
+  "name": "Doomsday Rampage",
+  "rarity": "SSR",
+  "realm": "CHAOS",
+  "awakener": "mouchette",
+  "ownerAwakenerId": 33,
+  "ownerAwakenerName": "mouchette",
+  "aliases": ["Doomsday Rampage"],
+  "searchTags": [],
+  "mainstatKey": "DEATH_RESISTANCE",
+  "mainstatSeriesKey": "SSR:DEATH_RESISTANCE",
+  "descriptionTemplate": "Team Unique: The wielder's Exalt and {Pursuit} Base DMG +[StateArg1]%. After playing any Awakener's Strike this turn, the wielder's Strike DMG temporarily +[StateArg2]% of the wielder's ATK. This effect triggers up to 8 times per turn.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["30", "40", "50", "60"]},
+    "StateArg2": {"kind": "scaling", "values": ["13", "17", "21", "25"]}
+  }
+}

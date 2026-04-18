@@ -1,0 +1,16 @@
+{
+  "id": "SR40",
+  "assetId": "Weapon_Full_SR40",
+  "name": "The Divus' Visage",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "pollux",
+  "ownerAwakenerId": 41,
+  "ownerAwakenerName": "pollux",
+  "aliases": ["The Divus' Visage"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: In the {Ultra Round}: Gain 3 stacks of \"Alight\". When the wielder plays a Command Card, consume 1 stack to increase its Final DMG and Shield Generation by [StateArg1]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}

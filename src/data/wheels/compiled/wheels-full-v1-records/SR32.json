@@ -1,0 +1,16 @@
+{
+  "id": "SR32",
+  "assetId": "Weapon_Full_SR32",
+  "name": "Hypnotic Pendulum",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "clementine",
+  "ownerAwakenerId": 10,
+  "ownerAwakenerName": "clementine",
+  "aliases": ["Hypnotic Pendulum"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: Increases the wielder's Keyflare Regen by [StateArg1]%. At the start of the first battle, apply 1 stack of {Weakness} and {Vulnerable} to all enemies.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["4", "6", "8", "10"], "suffix": "%"}}
+}

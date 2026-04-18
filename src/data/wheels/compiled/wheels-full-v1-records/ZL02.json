@@ -1,0 +1,16 @@
+{
+  "id": "ZL02",
+  "assetId": "Weapon_Full_ZL02",
+  "name": "Sunfall",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Sunfall"],
+  "searchTags": [],
+  "mainstatKey": "DMG_AMP",
+  "mainstatSeriesKey": "SSR:DMG_AMP",
+  "descriptionTemplate": "Team Unique: The wielder's Base DMG, {Poison}, and {Counter} are increased by [StateArg1]%. Crit. Rate and Crit. DMG are increased by [StateArg2]%.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
+    "StateArg2": {"kind": "scaling", "values": ["11", "14", "17", "20"]}
+  }
+}

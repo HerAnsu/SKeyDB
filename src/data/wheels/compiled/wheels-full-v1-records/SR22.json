@@ -1,0 +1,16 @@
+{
+  "id": "SR22",
+  "assetId": "Weapon_Full_SR22",
+  "name": "Deep Sea's Call",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "awakener": "miryam",
+  "ownerAwakenerId": 32,
+  "ownerAwakenerName": "miryam",
+  "aliases": ["Deep Sea's Call"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: After the battle starts, gain {STR} equal to [StateArg1]% of the wielder's ATK. If the current realm is {Aequor}, also increase {Tentacle DMG} by [StateArg2]% of the wielder's ATK.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["5", "6", "7", "8"]}, "StateArg2": {"kind": "scaling", "values": ["5", "6", "7", "8"]}}
+}

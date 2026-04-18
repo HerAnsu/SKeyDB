@@ -1,0 +1,21 @@
+{
+  "id": "O05",
+  "assetId": "Weapon_Full_O05",
+  "name": "Dream of the Sea",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "awakener": "aurita",
+  "ownerAwakenerId": 5,
+  "ownerAwakenerName": "aurita",
+  "aliases": ["Dream of the Sea"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_RATE",
+  "mainstatSeriesKey": "SSR:CRIT_RATE",
+  "descriptionTemplate": "Team Unique: After the wielder plays a card, the wielder gains 1 point of Aliemus. At the start of combat, gain [StateArg1]% of the wielder's Attack as {STR}, and if the current Realm is {Aequor}, additionally gain [StateArg2]% of {Tentacle DMG}. Subsequently, at the start of each following turn, gain [StateArg3]% of the wielder's Attack as {STR}, and if the current Realm is {Aequor}, additionally gain [StateArg4]% of {Tentacle DMG}.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["6", "7", "8", "9"]},
+    "StateArg2": {"kind": "scaling", "values": ["3", "4", "5", "6"]},
+    "StateArg3": {"kind": "scaling", "values": ["2.1", "2.4", "2.7", "3"]},
+    "StateArg4": {"kind": "scaling", "values": ["1.1", "1.4", "1.7", "2"]}
+  }
+}

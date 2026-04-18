@@ -1,0 +1,16 @@
+{
+  "id": "B07",
+  "assetId": "Weapon_Full_B07",
+  "name": "Bloody Feast",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "awakener": "uvhash",
+  "ownerAwakenerId": 51,
+  "ownerAwakenerName": "uvhash",
+  "aliases": ["Bloody Feast"],
+  "searchTags": [],
+  "mainstatKey": "CRIT_DMG",
+  "mainstatSeriesKey": "SSR:CRIT_DMG",
+  "descriptionTemplate": "Team Unique: The Crit. Rate and Crit. DMG of the wielder's Exalt are increased by [StateArg2]%. After the wielder releases Exalt, they gain {STR} equal to their CON [StateArg1]%. If this Exalt triggers the {Devour} effect, they gain additional 1 instance of {STR}.",
+  "descriptionArgs": {"StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"]}, "StateArg1": {"kind": "scaling", "values": ["3", "4", "5", "6"]}}
+}

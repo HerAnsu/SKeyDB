@@ -1,0 +1,13 @@
+{
+  "id": "SR13",
+  "assetId": "Weapon_Full_SR13",
+  "name": "Data is Flesh",
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "aliases": ["Data is Flesh"],
+  "searchTags": [],
+  "mainstatKey": "REALM_MASTERY",
+  "mainstatSeriesKey": "SR:REALM_MASTERY",
+  "descriptionTemplate": "Team Unique: Increase the Base DMG of the wielder's Command Card by [StateArg1]%, and increase Shield and HP Recovery by [StateArg2]%.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["15", "20", "25", "30"]}, "StateArg2": {"kind": "scaling", "values": ["9", "11", "13", "15"]}}
+}
