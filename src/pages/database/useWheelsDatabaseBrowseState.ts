@@ -66,6 +66,18 @@ export function useWheelsDatabaseBrowseState() {
     )
   }, [commitBrowseState, sortDirection])
 
+  const resetFilters = useCallback(() => {
+    commitBrowseState(
+      {
+        query: '',
+        realmFilter: 'ALL',
+        rarityFilter: 'ALL',
+        mainstatFilter: 'ALL',
+      },
+      'push',
+    )
+  }, [commitBrowseState])
+
   return {
     query,
     realmFilter,
@@ -82,5 +94,6 @@ export function useWheelsDatabaseBrowseState() {
     setMainstatFilter,
     setSortKey,
     toggleSortDirection,
+    resetFilters,
   }
 }

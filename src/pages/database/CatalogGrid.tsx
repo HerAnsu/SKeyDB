@@ -18,7 +18,7 @@ export function CatalogGrid<TItem>({
 }: CatalogGridProps<TItem>) {
   if (items.length === 0) {
     return (
-      <div className='rounded-sm border border-slate-700/55 bg-[linear-gradient(180deg,rgba(15,23,42,0.4),rgba(9,15,27,0.28))] px-4 py-12 text-center text-sm text-slate-400 shadow-[inset_0_1px_0_rgba(148,163,184,0.04)]'>
+      <div className='rounded-sm border border-slate-700/55 bg-[linear-gradient(180deg,rgba(15,23,42,0.4),rgba(9,15,27,0.28))] px-4 py-12 text-center text-sm text-slate-400'>
         {emptyMessage}
       </div>
     )

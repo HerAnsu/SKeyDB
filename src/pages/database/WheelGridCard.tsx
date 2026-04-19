@@ -57,7 +57,7 @@ export function WheelGridCard({wheel, index, onSelect}: WheelGridCardProps) {
           )}
 
           {mainstatIcon ? (
-            <div className='pointer-events-none absolute top-2 right-2 z-20 inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200/20 bg-black/32 shadow-[0_2px_8px_rgba(2,6,23,0.24)] backdrop-blur-[1px]'>
+            <div className='pointer-events-none absolute top-2 right-2 z-20 inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200/20 bg-slate-950/40 shadow-[0_2px_8px_rgba(2,6,23,0.24)] backdrop-blur-[1px]'>
               <img
                 alt=''
                 className='h-4 w-4 object-contain opacity-90'
@@ -73,11 +73,9 @@ export function WheelGridCard({wheel, index, onSelect}: WheelGridCardProps) {
           />
 
           <div className='pointer-events-none absolute right-0 bottom-0 left-0 z-20 px-2.5 pt-12 pb-2.5'>
-            <div className='min-h-[2.2rem]'>
-              <p className={databaseCardTitleClassName} style={databaseCardTitleClampStyle}>
-                {wheel.name}
-              </p>
-            </div>
+            <p className={databaseCardTitleClassName} style={databaseCardTitleClampStyle}>
+              {wheel.name}
+            </p>
           </div>
         </div>
       </div>

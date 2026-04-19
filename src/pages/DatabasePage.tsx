@@ -15,12 +15,16 @@ import {
   resolveDatabaseAwakenerTab,
   type DatabaseAwakenerTab,
 } from '@/domain/database-paths'
+import {getRealmLabel} from '@/domain/factions'
+import {wheelMainstatFilterOptions} from '@/domain/wheel-mainstat-filters'
 import {getWheels, type Wheel} from '@/domain/wheels'
 import {loadWheelFullV1ById} from '@/domain/wheels-full-v1-loader'
 
+import {type ActiveFilterChip} from './database/ActiveFilterChips'
 import {DatabaseBrowseLayout} from './database/DatabaseBrowseLayout'
 import {DatabaseFilters} from './database/DatabaseFilters'
 import {DatabaseGrid} from './database/DatabaseGrid'
+import {DatabaseViewControls} from './database/DatabaseViewControls'
 import {useDatabaseBrowseState} from './database/useDatabaseBrowseState'
 import {useDatabaseDetailRouteRecord} from './database/useDatabaseDetailRouteRecord'
 import {useDatabaseViewModel} from './database/useDatabaseViewModel'
@@ -28,6 +32,7 @@ import {useWheelsDatabaseBrowseState} from './database/useWheelsDatabaseBrowseSt
 import {useWheelsDatabaseViewModel} from './database/useWheelsDatabaseViewModel'
 import {WheelDatabaseFilters} from './database/WheelDatabaseFilters'
 import {WheelGrid} from './database/WheelGrid'
+import {WheelViewControls} from './database/WheelViewControls'
 import {useGlobalSearchCapture} from './useGlobalSearchCapture'
 
 const AwakenerDetailModal = lazy(() =>
@@ -154,6 +159,87 @@ export function DatabasePage() {
     })
   }
 
+  const awakenerActiveFilterChips: ActiveFilterChip[] = []
+  if (awakenerBrowseState.query.trim().length > 0) {
+    awakenerActiveFilterChips.push({
+      key: 'query',
+      label: `Search: "${awakenerBrowseState.query.trim()}"`,
+      onClear: awakenerBrowseState.clearQuery,
+    })
+  }
+  if (awakenerBrowseState.realmFilter !== 'ALL') {
+    awakenerActiveFilterChips.push({
+      key: 'realm',
+      label: getRealmLabel(awakenerBrowseState.realmFilter),
+      onClear: () => {
+        awakenerBrowseState.setRealmFilter('ALL')
+      },
+    })
+  }
+  if (awakenerBrowseState.rarityFilter !== 'ALL') {
+    awakenerActiveFilterChips.push({
+      key: 'rarity',
+      label: awakenerBrowseState.rarityFilter,
+      onClear: () => {
+        awakenerBrowseState.setRarityFilter('ALL')
+      },
+    })
+  }
+  if (awakenerBrowseState.typeFilter !== 'ALL') {
+    const typeLabel =
+      awakenerBrowseState.typeFilter === 'ASSAULT'
+        ? 'Assault'
+        : awakenerBrowseState.typeFilter === 'WARDEN'
+          ? 'Warden'
+          : 'Chorus'
+    awakenerActiveFilterChips.push({
+      key: 'type',
+      label: typeLabel,
+      onClear: () => {
+        awakenerBrowseState.setTypeFilter('ALL')
+      },
+    })
+  }
+
+  const wheelActiveFilterChips: ActiveFilterChip[] = []
+  if (wheelBrowseState.query.trim().length > 0) {
+    wheelActiveFilterChips.push({
+      key: 'query',
+      label: `Search: "${wheelBrowseState.query.trim()}"`,
+      onClear: wheelBrowseState.clearQuery,
+    })
+  }
+  if (wheelBrowseState.realmFilter !== 'ALL') {
+    wheelActiveFilterChips.push({
+      key: 'realm',
+      label: getRealmLabel(wheelBrowseState.realmFilter),
+      onClear: () => {
+        wheelBrowseState.setRealmFilter('ALL')
+      },
+    })
+  }
+  if (wheelBrowseState.rarityFilter !== 'ALL') {
+    wheelActiveFilterChips.push({
+      key: 'rarity',
+      label: wheelBrowseState.rarityFilter,
+      onClear: () => {
+        wheelBrowseState.setRarityFilter('ALL')
+      },
+    })
+  }
+  if (wheelBrowseState.mainstatFilter !== 'ALL') {
+    const mainstatLabel =
+      wheelMainstatFilterOptions.find((entry) => entry.id === wheelBrowseState.mainstatFilter)
+        ?.label ?? wheelBrowseState.mainstatFilter
+    wheelActiveFilterChips.push({
+      key: 'mainstat',
+      label: mainstatLabel,
+      onClear: () => {
+        wheelBrowseState.setMainstatFilter('ALL')
+      },
+    })
+  }
+
   return (
     <section className='space-y-2.5 sm:space-y-3'>
       <div className='flex items-start gap-2.5 rounded-sm border border-amber-400/20 bg-[linear-gradient(180deg,rgba(120,53,15,0.18),rgba(69,26,3,0.12))] px-2.5 py-2 sm:items-center sm:gap-3 sm:px-3 sm:py-2.5'>
@@ -163,7 +249,7 @@ export function DatabasePage() {
           className='h-9 w-9 shrink-0 -scale-x-100 object-contain sm:h-12 sm:w-12'
           src={emojiWke}
         />
-        <p className='text-[10px] leading-relaxed text-amber-100/72 sm:text-[11px]'>
+        <p className='text-xs leading-normal text-amber-100/75'>
           <strong className='font-semibold text-amber-200/90'>Database beta:</strong> Search,
           filters, and detail views are live. We&apos;re still filling in data and polishing the UI,
           so some entries and interactions may shift.
@@ -173,55 +259,55 @@ export function DatabasePage() {
       {activeEntity === 'wheels' ? (
         <DatabaseBrowseLayout
           activeEntity={activeEntity}
-          description='Browse wheels by name, owner, realm, or main stat, then open a card for the full record.'
+          activeFilterChips={wheelActiveFilterChips}
+          filteredCount={wheelViewModel.wheels.length}
           filters={
             <WheelDatabaseFilters
-              filteredCount={wheelViewModel.wheels.length}
               mainstatFilter={wheelBrowseState.mainstatFilter}
               onMainstatFilterChange={wheelBrowseState.setMainstatFilter}
               onQueryChange={wheelBrowseState.setQuery}
               onRarityFilterChange={wheelBrowseState.setRarityFilter}
               onRealmFilterChange={wheelBrowseState.setRealmFilter}
-              onSortDirectionToggle={wheelBrowseState.toggleSortDirection}
-              onSortKeyChange={wheelBrowseState.setSortKey}
               query={wheelBrowseState.query}
               rarityFilter={wheelBrowseState.rarityFilter}
               realmFilter={wheelBrowseState.realmFilter}
               searchInputRef={searchInputRef}
-              sortDirection={wheelBrowseState.sortDirection}
-              sortKey={wheelBrowseState.sortKey}
-              totalCount={wheelViewModel.totalCount}
             />
           }
+          onResetFilters={wheelBrowseState.resetFilters}
           results={<WheelGrid onSelectWheel={openWheelDetail} wheels={wheelViewModel.wheels} />}
           search={location.search}
           title='Wheels'
+          totalCount={wheelViewModel.totalCount}
+          unitNoun='wheels'
+          viewControls={
+            <WheelViewControls
+              onSortDirectionToggle={wheelBrowseState.toggleSortDirection}
+              onSortKeyChange={wheelBrowseState.setSortKey}
+              sortDirection={wheelBrowseState.sortDirection}
+              sortKey={wheelBrowseState.sortKey}
+            />
+          }
         />
       ) : (
         <DatabaseBrowseLayout
           activeEntity={activeEntity}
-          description='Browse awakeners by name, tag, realm, or role, then open a card for the full profile.'
+          activeFilterChips={awakenerActiveFilterChips}
+          filteredCount={awakenerViewModel.awakeners.length}
           filters={
             <DatabaseFilters
-              filteredCount={awakenerViewModel.awakeners.length}
-              groupByRealm={awakenerBrowseState.groupByRealm}
-              onGroupByRealmChange={awakenerBrowseState.setGroupByRealm}
               onQueryChange={awakenerBrowseState.setQuery}
               onRarityFilterChange={awakenerBrowseState.setRarityFilter}
               onRealmFilterChange={awakenerBrowseState.setRealmFilter}
-              onSortDirectionToggle={awakenerBrowseState.toggleSortDirection}
-              onSortKeyChange={awakenerBrowseState.setSortKey}
               onTypeFilterChange={awakenerBrowseState.setTypeFilter}
               query={awakenerBrowseState.query}
               rarityFilter={awakenerBrowseState.rarityFilter}
               realmFilter={awakenerBrowseState.realmFilter}
               searchInputRef={searchInputRef}
-              sortDirection={awakenerBrowseState.sortDirection}
-              sortKey={awakenerBrowseState.sortKey}
-              totalCount={awakenerViewModel.totalCount}
               typeFilter={awakenerBrowseState.typeFilter}
             />
           }
+          onResetFilters={awakenerBrowseState.resetFilters}
           results={
             <DatabaseGrid
               awakeners={awakenerViewModel.awakeners}
@@ -230,6 +316,18 @@ export function DatabasePage() {
           }
           search={location.search}
           title='Awakeners'
+          totalCount={awakenerViewModel.totalCount}
+          unitNoun='awakeners'
+          viewControls={
+            <DatabaseViewControls
+              groupByRealm={awakenerBrowseState.groupByRealm}
+              onGroupByRealmChange={awakenerBrowseState.setGroupByRealm}
+              onSortDirectionToggle={awakenerBrowseState.toggleSortDirection}
+              onSortKeyChange={awakenerBrowseState.setSortKey}
+              sortDirection={awakenerBrowseState.sortDirection}
+              sortKey={awakenerBrowseState.sortKey}
+            />
+          }
         />
       )}
 

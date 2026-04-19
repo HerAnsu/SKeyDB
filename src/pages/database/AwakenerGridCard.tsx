@@ -72,40 +72,38 @@ export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardPr
           {stats && (
             <div className='pointer-events-none absolute right-0 bottom-0 left-0 z-20 px-2.5 pt-12 pb-2.5'>
               <div className='space-y-1.5'>
-                <div className='min-h-[2.2rem]'>
-                  <p
-                    className={`${databaseCardTitleClassName} text-[clamp(0.86rem,0.28vw+0.8rem,0.98rem)]`}
-                    style={databaseCardTitleClampStyle}
-                  >
-                    {displayName}
-                  </p>
-                </div>
-                <div className='flex items-center justify-center gap-1.5'>
-                  {STAT_DISPLAY.map(({key, color}, index) => {
+                <p
+                  className={`${databaseCardTitleClassName} text-[clamp(0.86rem,0.28vw+0.8rem,0.98rem)]`}
+                  style={databaseCardTitleClampStyle}
+                >
+                  {displayName}
+                </p>
+                <div className='flex items-center justify-center gap-3'>
+                  {STAT_DISPLAY.map(({key, color}) => {
                     const icon = getMainstatIcon(key)
-                    const isLast = index === STAT_DISPLAY.length - 1
 
                     return (
-                      <div key={key} className='flex items-center'>
-                        <span className='inline-flex items-center gap-0.5 font-["Droid_Serif"] text-[10px] leading-none font-bold text-white/92'>
-                          {icon && (
-                            <div
-                              className='h-3 w-3 shrink-0'
-                              style={{
-                                backgroundColor: color,
-                                WebkitMaskImage: `url(${icon})`,
-                                maskImage: `url(${icon})`,
-                                WebkitMaskSize: 'contain',
-                                maskSize: 'contain',
-                                WebkitMaskRepeat: 'no-repeat',
-                                maskRepeat: 'no-repeat',
-                              }}
-                            />
-                          )}
-                          <span className='pt-[1px] tracking-tight tabular-nums'>{stats[key]}</span>
-                        </span>
-                        {!isLast && <div className='ml-1.5 h-3 w-px bg-white/18' />}
-                      </div>
+                      <span
+                        key={key}
+                        className='inline-flex items-center gap-1 text-[11px] leading-none font-medium text-white/85 tabular-nums'
+                      >
+                        {icon && (
+                          <span
+                            aria-hidden
+                            className='h-2.5 w-2.5 shrink-0'
+                            style={{
+                              backgroundColor: color,
+                              WebkitMaskImage: `url(${icon})`,
+                              maskImage: `url(${icon})`,
+                              WebkitMaskSize: 'contain',
+                              maskSize: 'contain',
+                              WebkitMaskRepeat: 'no-repeat',
+                              maskRepeat: 'no-repeat',
+                            }}
+                          />
+                        )}
+                        <span>{stats[key]}</span>
+                      </span>
                     )
                   })}
                 </div>

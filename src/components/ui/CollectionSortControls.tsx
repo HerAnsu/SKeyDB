@@ -24,6 +24,7 @@ interface CollectionSortControlsProps<TSortKey extends string = AwakenerSortKey>
   compactTrailingAction?: ReactNode
   className?: string
   getSortLabel?: (sortKey: TSortKey) => string
+  getSortDirectionLabel?: (sortKey: TSortKey, direction: CollectionSortDirection) => string
 }
 
 const defaultSortOptions: readonly AwakenerSortKey[] = [
@@ -78,6 +79,7 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
   compactTrailingAction,
   className,
   getSortLabel: getSortLabelOverride,
+  getSortDirectionLabel,
 }: CollectionSortControlsProps<TSortKey>) {
   const resolvedSortOptions = resolveSortOptions(sortOptions)
   const activeSortKey = resolvedSortOptions.includes(sortKey)
@@ -91,7 +93,10 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
   const isCompact = layout === 'compact'
   const controlClassName =
     'h-8 min-w-0 border border-slate-700/70 bg-[linear-gradient(180deg,rgba(13,20,34,0.9),rgba(8,13,24,0.84))] px-2.5 text-[11px] leading-none text-slate-200 outline-none transition-colors focus:border-amber-300/60'
-  const directionButtonClassName = 'h-8 w-[78px] px-2.5 text-[11px] leading-none'
+  const directionButtonClassName = 'h-8 px-2.5 text-[11px] leading-none'
+  const directionLabel =
+    getSortDirectionLabel?.(activeSortKey, sortDirection) ??
+    (sortDirection === 'DESC' ? 'High' : 'Low')
 
   return (
     <div className={className}>
@@ -127,7 +132,7 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
               ) : (
                 <FaCaretUp aria-hidden className='text-[11px]' />
               )}
-              <span>{sortDirection === 'DESC' ? 'High' : 'Low'}</span>
+              <span>{directionLabel}</span>
             </span>
           </Button>
           {isCompact ? compactTrailingAction : null}

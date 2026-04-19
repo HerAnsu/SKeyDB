@@ -98,6 +98,18 @@ export function useDatabaseBrowseState() {
     [commitBrowseState],
   )
 
+  const resetFilters = useCallback(() => {
+    commitBrowseState(
+      {
+        query: '',
+        realmFilter: 'ALL',
+        rarityFilter: 'ALL',
+        typeFilter: 'ALL',
+      },
+      'push',
+    )
+  }, [commitBrowseState])
+
   return {
     groupByRealm,
     query,
@@ -116,5 +128,6 @@ export function useDatabaseBrowseState() {
     setSortKey,
     toggleSortDirection,
     setGroupByRealm,
+    resetFilters,
   }
 }

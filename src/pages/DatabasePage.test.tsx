@@ -314,19 +314,19 @@ describe('DatabasePage', () => {
     expect(screen.getByLabelText('View details for Alpha')).toBeInTheDocument()
     expect(screen.getByLabelText('View details for Beta')).toBeInTheDocument()
     expect(screen.getByLabelText('View details for Gamma')).toBeInTheDocument()
-    expect(getResultsSummary('3 shown/3 total')).toBeInTheDocument()
+    expect(getResultsSummary('3 awakeners')).toBeInTheDocument()
   })
 
   it('filters awakeners by realm', async () => {
     await renderDatabasePage()
 
-    const chaosFilter = screen.getByRole('button', {name: /CHAOS/})
+    const chaosFilter = screen.getByRole('button', {name: /^CHAOS$/})
     fireEvent.click(chaosFilter)
 
     expect(screen.getByLabelText('View details for Alpha')).toBeInTheDocument()
     expect(screen.getByLabelText('View details for Gamma')).toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Beta')).not.toBeInTheDocument()
-    expect(getResultsSummary('2 shown/3 total')).toBeInTheDocument()
+    expect(getResultsSummary('2 of 3')).toBeInTheDocument()
     expect(chaosFilter).toHaveAttribute('aria-pressed', 'true')
     expect(
       screen
@@ -343,7 +343,7 @@ describe('DatabasePage', () => {
     expect(screen.getByLabelText('View details for Beta')).toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Alpha')).not.toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Gamma')).not.toBeInTheDocument()
-    expect(getResultsSummary('1 shown/3 total')).toBeInTheDocument()
+    expect(getResultsSummary('1 of 3')).toBeInTheDocument()
   })
 
   it('filters awakeners by rarity', async () => {
@@ -371,7 +371,7 @@ describe('DatabasePage', () => {
     await renderDatabasePage('/database?q=alpha&realm=CHAOS&sort=ATK&dir=DESC')
 
     expect(screen.getByRole('searchbox')).toHaveValue('alpha')
-    expect(screen.getByRole('button', {name: /CHAOS/})).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', {name: /^CHAOS$/})).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByLabelText('Database sort key')).toHaveValue('ATK')
     expect(screen.getByLabelText('View details for Alpha')).toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Beta')).not.toBeInTheDocument()
