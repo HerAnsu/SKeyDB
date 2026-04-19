@@ -6,7 +6,7 @@ import {
 } from './database-entity-paths'
 import type {Wheel} from './wheels'
 
-export const DATABASE_AWAKENER_TABS = ['overview', 'cards', 'builds', 'teams'] as const
+export const DATABASE_AWAKENER_TABS = ['overview', 'skills', 'builds', 'teams'] as const
 
 export type DatabaseAwakenerTab = (typeof DATABASE_AWAKENER_TABS)[number]
 
@@ -25,6 +25,9 @@ export function resolveDatabaseAwakenerTab(tab: string | undefined): DatabaseAwa
     return null
   }
   const normalizedTab = tab.trim().toLowerCase()
+  if (normalizedTab === 'cards') {
+    return 'skills'
+  }
   return isDatabaseAwakenerTab(normalizedTab) ? normalizedTab : null
 }
 

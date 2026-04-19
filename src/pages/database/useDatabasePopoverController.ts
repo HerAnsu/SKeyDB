@@ -27,7 +27,7 @@ interface DatabasePopoverControllerOptions {
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
   stats?: import('@/domain/awakener-source-schema').FullStats | null
-  onNavigateToCards?: () => void
+  onNavigateToSkills?: () => void
   onNavigateToWheelPage?: (wheel: {name: string}) => void
   onToggleEnlightenSlot?: (slot: AwakenerEnlightenRecord['slot']) => void
   showVisibleScaling?: boolean
@@ -40,7 +40,7 @@ export function useDatabasePopoverController({
   referenceLayer,
   selectedEnlightenSlot = null,
   stats = null,
-  onNavigateToCards,
+  onNavigateToSkills,
   onNavigateToWheelPage,
   onToggleEnlightenSlot,
   showVisibleScaling = true,
@@ -94,7 +94,7 @@ export function useDatabasePopoverController({
       influenceBadges: reference.influenceBadges,
       navigationTarget:
         reference.kind === 'skill'
-          ? {kind: 'cards'}
+          ? {kind: 'skills'}
           : reference.kind === 'wheel'
             ? {kind: 'wheel-page', wheelName: reference.name}
             : undefined,
@@ -352,10 +352,10 @@ export function useDatabasePopoverController({
             openNestedOverlayFrom(index, overlay)
           },
           onNavigate:
-            navigationTarget?.kind === 'cards' && onNavigateToCards
+            navigationTarget?.kind === 'skills' && onNavigateToSkills
               ? () => {
                   clearTrail()
-                  onNavigateToCards()
+                  onNavigateToSkills()
                 }
               : navigationTarget?.kind === 'wheel-page' && onNavigateToWheelPage
                 ? () => {
@@ -378,7 +378,7 @@ export function useDatabasePopoverController({
     [
       clearTrail,
       closeTrailFrom,
-      onNavigateToCards,
+      onNavigateToSkills,
       onNavigateToWheelPage,
       onToggleEnlightenSlot,
       openNestedInfoFrom,

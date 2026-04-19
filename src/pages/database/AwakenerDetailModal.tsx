@@ -41,7 +41,7 @@ interface AwakenerDetailModalProps {
 
 const DATABASE_AWAKENER_TAB_LABELS: Record<DatabaseAwakenerTab, string> = {
   overview: 'Overview',
-  cards: 'Cards',
+  skills: 'Skills',
   builds: 'Builds',
   teams: 'Teams',
 }
@@ -115,7 +115,8 @@ export function AwakenerDetailModal({
     preferences: sessionPreferences,
     runtime: sessionRuntime,
   } = session
-  const {defaultSelection, fontScale, value: preferences} = sessionPreferences
+  const {awakener: awakenerPreferences, shared: sharedPreferences} = sessionPreferences
+  const fontScale = sharedPreferences.fontScale
   const {referenceLayer, resolvedControls, resolvedSelection, resolvedStats, shellView} =
     sessionRuntime
 
@@ -224,10 +225,11 @@ export function AwakenerDetailModal({
             {isSettingsOpen ? (
               <AwakenerDetailSettingsPanel
                 controls={resolvedControls}
-                defaultSelection={defaultSelection}
                 onPatchDefaultSelection={sessionActions.patchDefaultSelection}
-                onUpdatePreferences={sessionActions.updatePreferences}
-                preferences={preferences}
+                onUpdateAwakenerPreferences={sessionActions.updateAwakenerPreferences}
+                onUpdateSharedPreferences={sessionActions.updateSharedPreferences}
+                preferences={awakenerPreferences}
+                sharedPreferences={sharedPreferences}
               />
             ) : null}
           </div>
@@ -437,18 +439,18 @@ export function AwakenerDetailModal({
                         fontScale={fontScale}
                         referenceLayer={referenceLayer}
                         shellView={shellView}
-                        showTagIcons={preferences.showTagIcons}
-                        showVisibleScaling={preferences.showVisibleScaling}
+                        showTagIcons={sharedPreferences.showTagIcons}
+                        showVisibleScaling={awakenerPreferences.showVisibleScaling}
                       />
                     )}
-                    {activeTab === 'cards' && (
+                    {activeTab === 'skills' && (
                       <Suspense fallback={TAB_CONTENT_LOADING_FALLBACK}>
                         <AwakenerDetailCards
                           onToggleEnlightenSlot={sessionActions.toggleEnlightenSlot}
                           referenceLayer={referenceLayer}
                           shellView={shellView}
-                          showTagIcons={preferences.showTagIcons}
-                          showVisibleScaling={preferences.showVisibleScaling}
+                          showTagIcons={sharedPreferences.showTagIcons}
+                          showVisibleScaling={awakenerPreferences.showVisibleScaling}
                         />
                       </Suspense>
                     )}

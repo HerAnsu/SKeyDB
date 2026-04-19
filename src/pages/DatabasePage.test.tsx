@@ -153,14 +153,14 @@ vi.mock('./database/AwakenerDetailModal', () => ({
     onSelectAwakener,
     onTabChange,
   }: {
-    activeTab?: 'overview' | 'cards' | 'builds' | 'teams'
+    activeTab?: 'overview' | 'skills' | 'builds' | 'teams'
     awakener: {id: number; name: string}
     onClose: () => void
     onSelectAwakener: (
       awakener: {id: number; name: string},
-      tab: 'overview' | 'cards' | 'builds' | 'teams',
+      tab: 'overview' | 'skills' | 'builds' | 'teams',
     ) => void
-    onTabChange: (tab: 'overview' | 'cards' | 'builds' | 'teams') => void
+    onTabChange: (tab: 'overview' | 'skills' | 'builds' | 'teams') => void
   }) => (
     <div aria-label={`${awakener.name} details`} role='dialog'>
       <div>{`Active tab ${activeTab}`}</div>
@@ -200,7 +200,7 @@ vi.mock('./database/WheelDetailModal', () => ({
     onClose: () => void
     onSelectAwakener?: (
       awakener: {id: number; name: string},
-      tab?: 'overview' | 'cards' | 'builds' | 'teams',
+      tab?: 'overview' | 'skills' | 'builds' | 'teams',
     ) => void
     onSelectWheel?: (wheel: {name: string}) => void
   }) => (
@@ -538,6 +538,13 @@ describe('DatabasePage', () => {
     expect(screen.getByText('Active tab builds')).toBeInTheDocument()
   })
 
+  it('opens the skills tab from the renamed awakener detail route slug', async () => {
+    await renderDatabasePage('/database/awk/beta/skills')
+
+    expect(await screen.findByRole('dialog', {name: /beta details/})).toBeInTheDocument()
+    expect(screen.getByText('Active tab skills')).toBeInTheDocument()
+  })
+
   it('updates url when switching detail tabs', async () => {
     await renderDatabasePage('/database/awk/alpha')
 
@@ -618,6 +625,16 @@ describe('DatabasePage', () => {
     expect(screen.getByText('Active tab overview')).toBeInTheDocument()
     await waitFor(() =>
       expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha'),
+    )
+  })
+
+  it('canonicalizes legacy cards tab routes onto the skills slug', async () => {
+    await renderDatabasePage('/database/awk/alpha/cards')
+
+    expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
+    expect(screen.getByText('Active tab skills')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha/skills'),
     )
   })
 

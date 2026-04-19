@@ -39,7 +39,6 @@ export function useAwakenerDetailModalState({
     preferences: sessionPreferences,
     runtime: sessionRuntime,
   } = databaseState
-  const {defaultSelection, fontScale, value: preferences} = sessionPreferences
   const {referenceLayer, resolvedControls, resolvedSelection, resolvedStats, shellView} =
     sessionRuntime
 
@@ -50,18 +49,18 @@ export function useAwakenerDetailModalState({
     [onTabChange],
   )
 
-  const navigateToCards = useCallback(() => {
-    setActiveTab('cards')
+  const navigateToSkills = useCallback(() => {
+    setActiveTab('skills')
   }, [setActiveTab])
 
   const popoverController = useDatabasePopoverController({
-    onNavigateToCards: navigateToCards,
+    onNavigateToSkills: navigateToSkills,
     onNavigateToWheelPage: onSelectWheel,
     onToggleEnlightenSlot: sessionActions.toggleEnlightenSlot,
     referenceLayer,
     selectedEnlightenSlot: resolvedSelection.selectedEnlightenSlot,
-    showTagIcons: preferences.showTagIcons,
-    showVisibleScaling: preferences.showVisibleScaling,
+    showTagIcons: sessionPreferences.shared.showTagIcons,
+    showVisibleScaling: sessionPreferences.awakener.showVisibleScaling,
     stats: shellView.stats,
   })
   const {
@@ -74,7 +73,7 @@ export function useAwakenerDetailModalState({
   const chrome = useAwakenerDetailChrome({
     awakenerId: awakener.id,
     awakenerTags: awakener.tags,
-    clickOutsideClosesPopovers: preferences.clickOutsideClosesPopovers,
+    clickOutsideClosesPopovers: sessionPreferences.shared.clickOutsideClosesPopovers,
     closeAllPopovers,
     closeSearch: search.closeSearch,
     hasOpenPopovers,
@@ -104,8 +103,7 @@ export function useAwakenerDetailModalState({
     activeSearchIndex: search.activeSearchIndex,
     activeTab,
     canExpandTags: chrome.canExpandTags,
-    defaultSelection,
-    fontScale,
+    fontScale: sessionPreferences.shared.fontScale,
     handleOverlayClick: chrome.handleOverlayClick,
     handlePanelKeyDown: chrome.handlePanelKeyDown,
     handleSearchInputKeyDown: search.handleSearchInputKeyDown,
@@ -118,7 +116,7 @@ export function useAwakenerDetailModalState({
     panelRef: chrome.panelRef,
     popoverContextValue,
     popoverRootProps,
-    preferences,
+    preferences: sessionPreferences,
     referenceLayer,
     resolvedControls,
     resolvedSelection,

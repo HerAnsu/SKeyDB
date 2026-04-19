@@ -83,6 +83,31 @@ export function AwakenerDetailOverview({
       })
     }
 
+    if (shellView.overExalt) {
+      items.push({
+        key: 'OverExalt',
+        label: popoverController ? (
+          <button
+            className='cursor-pointer text-slate-500 transition-colors hover:text-amber-100'
+            onClick={(event) => {
+              popoverController.openRootReferenceByName('Over Exalt', event)
+            }}
+            style={scaledFontStyle(12)}
+            type='button'
+          >
+            Over-Exaltation
+          </button>
+        ) : (
+          'Over-Exaltation'
+        ),
+        name: shellView.overExalt.record.displayName,
+        description: shellView.overExalt.resolved.description,
+        record: shellView.overExalt.record,
+        descriptionRank: shellView.overExalt.descriptionRank,
+        descriptionMaxRank: shellView.overExalt.descriptionMaxRank,
+      })
+    }
+
     const absoluteAxiom = shellView.enlightens.find((entry) => entry.key === 'AbsoluteAxiom')
 
     if (absoluteAxiom) {

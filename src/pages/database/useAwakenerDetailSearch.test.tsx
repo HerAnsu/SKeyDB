@@ -42,7 +42,7 @@ describe('useAwakenerDetailSearch', () => {
     const onSelectAwakener = vi.fn()
     const {result} = renderHook(() =>
       useAwakenerDetailSearch({
-        activeTab: 'cards',
+        activeTab: 'skills',
         awakeners: AWAKENERS,
         onSelectAwakener,
       }),
@@ -69,7 +69,7 @@ describe('useAwakenerDetailSearch', () => {
       result.current.handleSearchInputKeyDown(createKeyboardEvent('Enter'))
     })
 
-    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 1}), 'cards')
+    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 1}), 'skills')
     expect(result.current.searchQuery).toBe('')
     expect(result.current.isSearchOpen).toBe(false)
   })

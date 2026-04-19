@@ -12,9 +12,14 @@ import {
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 
 import {AwakenerEnlightenInfluenceBadges} from './AwakenerEnlightenInfluenceBadges'
+import {
+  DATABASE_DETAIL_BODY_CLASS,
+  getDatabaseDetailBodyStyle,
+  getDatabaseDetailBodyTextStyle,
+  getDatabaseDetailSectionHeadingStyle,
+} from './database-detail-typography'
 import {useDatabasePopoverControllerContext} from './database-popover-context'
 import {DatabaseScopedRichDescription} from './DatabaseScopedRichDescription'
-import {scaledFontStyle} from './font-scale'
 import {
   DATABASE_ITEM_NAME_CLASS,
   DATABASE_SECTION_TITLE_CLASS,
@@ -86,7 +91,7 @@ export function AwakenerDetailCards({
   ) {
     return (
       <div className='border border-slate-600/30 bg-slate-900/30'>
-        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
+        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={getDatabaseDetailSectionHeadingStyle()}>
           {title}
         </h4>
         <div>
@@ -104,7 +109,7 @@ export function AwakenerDetailCards({
                       <p className={DATABASE_ITEM_NAME_CLASS}>{entry.record.displayName}</p>
                       <div
                         className='mt-0.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-slate-500'
-                        style={scaledFontStyle(12)}
+                        style={getDatabaseDetailBodyTextStyle()}
                       >
                         {meta.label}
                         <span className='text-slate-600'>·</span>
@@ -123,7 +128,10 @@ export function AwakenerDetailCards({
                       />
                     </div>
                   </div>
-                  <p className='mt-1 leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
+                  <p
+                    className={`mt-1 ${DATABASE_DETAIL_BODY_CLASS}`}
+                    style={getDatabaseDetailBodyStyle()}
+                  >
                     {renderDescription(entry)}
                   </p>
                 </div>
@@ -147,7 +155,7 @@ export function AwakenerDetailCards({
                 onClick={(event) => {
                   popoverController.openRootReferenceByName('Over Exalt', event)
                 }}
-                style={scaledFontStyle(12)}
+                style={getDatabaseDetailBodyTextStyle()}
                 type='button'
               >
                 Over Exalt
@@ -167,7 +175,7 @@ export function AwakenerDetailCards({
                 onClick={(event) => {
                   popoverController.openRootReferenceByName('Rouse', event)
                 }}
-                style={scaledFontStyle(12)}
+                style={getDatabaseDetailBodyTextStyle()}
                 type='button'
               >
                 Rouse

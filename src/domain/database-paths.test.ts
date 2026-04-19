@@ -98,8 +98,10 @@ describe('database paths', () => {
   it('resolves allowed database tab slugs', () => {
     expect(resolveDatabaseAwakenerTab('builds')).toBe('builds')
     expect(resolveDatabaseAwakenerTab('Builds')).toBe('builds')
+    expect(resolveDatabaseAwakenerTab('skills')).toBe('skills')
+    expect(resolveDatabaseAwakenerTab('cards')).toBe('skills')
     expect(resolveDatabaseAwakenerTab(undefined)).toBeNull()
     expect(resolveDatabaseAwakenerTab('missing')).toBeNull()
-    expect(DATABASE_AWAKENER_TABS).toEqual(['overview', 'cards', 'builds', 'teams'])
+    expect(DATABASE_AWAKENER_TABS).toEqual(['overview', 'skills', 'builds', 'teams'])
   })
 })

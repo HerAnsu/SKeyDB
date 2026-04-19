@@ -31,3 +31,10 @@ export function getWheelEnhanceDiamondCount(enhanceLevel: number): number {
 export function getWheelEnhancePlusLevel(enhanceLevel: number): number {
   return Math.max(0, clampWheelEnhanceLevel(enhanceLevel) - 3)
 }
+
+export function formatWheelEnhanceLevelLabel(enhanceLevel: number): string {
+  const normalizedLevel = clampWheelEnhanceLevel(enhanceLevel)
+  const plusLevel = getWheelEnhancePlusLevel(normalizedLevel)
+
+  return normalizedLevel <= 3 ? `E${String(normalizedLevel)}` : `E3 + ${String(plusLevel)}`
+}

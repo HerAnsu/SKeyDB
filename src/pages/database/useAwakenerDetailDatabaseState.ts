@@ -7,13 +7,9 @@ import {
   type AwakenerDatabaseSelection,
 } from '@/domain/awakener-database-state'
 import {type AwakenerFullV2Record} from '@/domain/awakeners-full-v2'
-import {
-  normalizeDatabaseDetailPreferences,
-  readDatabaseDetailPreferences,
-  resolveDatabaseDetailDefaultSelection,
-  writeDatabaseDetailPreferences,
-  type DatabaseDetailPreferences,
-} from '@/domain/database-detail-preferences'
+import {resolveDatabaseDetailDefaultSelection} from '@/domain/database-detail-preferences'
+
+import {useDatabaseDetailPreferences} from './useDatabaseDetailPreferences'
 
 interface UseAwakenerDetailDatabaseStateOptions {
   fullDataV2: AwakenerFullV2Record
@@ -22,9 +18,8 @@ interface UseAwakenerDetailDatabaseStateOptions {
 export function useAwakenerDetailDatabaseState({
   fullDataV2,
 }: UseAwakenerDetailDatabaseStateOptions) {
-  const [preferences, setPreferences] = useState<DatabaseDetailPreferences>(
-    readDatabaseDetailPreferences,
-  )
+  const {preferences, updateAwakenerPreferences, updateSharedPreferences} =
+    useDatabaseDetailPreferences()
 
   const defaultSelection = useMemo(
     () => resolveDatabaseDetailDefaultSelection(fullDataV2, preferences),
@@ -47,26 +42,15 @@ export function useAwakenerDetailDatabaseState({
     [fullDataV2, selection],
   )
 
-  const updatePreferences = useCallback((nextPartial: Partial<DatabaseDetailPreferences>) => {
-    setPreferences((previous) => {
-      const next = normalizeDatabaseDetailPreferences({
-        ...previous,
-        ...nextPartial,
-      })
-      writeDatabaseDetailPreferences(next)
-      return next
-    })
-  }, [])
-
   const handlePatchDefaultSelection = useCallback(
     (nextPartial: Partial<AwakenerDatabaseSelection>) => {
       const nextSelection = normalizeAwakenerDatabaseSelectionForRecord(fullDataV2, {
-        ...preferences.defaultSelection,
+        ...preferences.awakener.defaultSelection,
         ...nextPartial,
       })
-      updatePreferences({defaultSelection: nextSelection})
+      updateAwakenerPreferences({defaultSelection: nextSelection})
     },
-    [fullDataV2, preferences.defaultSelection, updatePreferences],
+    [fullDataV2, preferences.awakener.defaultSelection, updateAwakenerPreferences],
   )
 
   const handlePatchSelection = useCallback(
@@ -93,12 +77,12 @@ export function useAwakenerDetailDatabaseState({
       patchDefaultSelection: handlePatchDefaultSelection,
       patchSelection: handlePatchSelection,
       toggleEnlightenSlot: handleToggleEnlightenSlot,
-      updatePreferences,
+      updateAwakenerPreferences,
+      updateSharedPreferences,
     },
     preferences: {
-      defaultSelection,
-      fontScale: preferences.fontScale,
-      value: preferences,
+      awakener: preferences.awakener,
+      shared: preferences.shared,
     },
     runtime: {
       referenceLayer: resolvedDatabaseState.referenceLayer,

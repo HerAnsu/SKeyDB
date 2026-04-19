@@ -1,5 +1,9 @@
 import {DupeLevelDisplay} from '@/components/ui/DupeLevelDisplay'
-import {clampWheelEnhanceLevel, getWheelEnhancePlusLevel} from '@/domain/wheel-enhance'
+import {
+  clampWheelEnhanceLevel,
+  formatWheelEnhanceLevelLabel,
+  getWheelEnhancePlusLevel,
+} from '@/domain/wheel-enhance'
 
 interface WheelEnhanceControlProps {
   enhanceLevel: number
@@ -9,8 +13,7 @@ interface WheelEnhanceControlProps {
 export function WheelEnhanceControl({enhanceLevel, onChange}: WheelEnhanceControlProps) {
   const normalizedLevel = clampWheelEnhanceLevel(enhanceLevel)
   const plusLevel = getWheelEnhancePlusLevel(normalizedLevel)
-  const enhanceValueLabel =
-    normalizedLevel <= 3 ? `E${String(normalizedLevel)}` : `E3 + ${String(plusLevel)}`
+  const enhanceValueLabel = formatWheelEnhanceLevelLabel(normalizedLevel)
 
   return (
     <div className='flex flex-col gap-2.5'>

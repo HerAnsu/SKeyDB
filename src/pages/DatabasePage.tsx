@@ -392,6 +392,20 @@ function DatabaseAwakenerDetailRoute({
   })
 
   useEffect(() => {
+    if (!fullDataV2 || tabSlug !== 'cards') {
+      return
+    }
+
+    void navigate(
+      {
+        pathname: buildDatabaseAwakenerPath(awakener, 'skills'),
+        search: location.search,
+      },
+      {replace: true},
+    )
+  }, [awakener, fullDataV2, location.search, navigate, tabSlug])
+
+  useEffect(() => {
     if (!fullDataV2 || !tabSlug || resolveDatabaseAwakenerTab(tabSlug)) {
       return
     }

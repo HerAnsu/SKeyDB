@@ -253,7 +253,7 @@ export function DatabaseReferencePopover({
               className='mb-2 text-[10px] tracking-[0.18em] text-slate-500 uppercase'
               style={scaledFontStyle(10)}
             >
-              Related Cards
+              Related Skills
             </p>
             <div className='space-y-1.5'>
               {relatedReferences.map((entry) => (

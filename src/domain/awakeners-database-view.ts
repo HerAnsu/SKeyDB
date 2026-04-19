@@ -66,6 +66,7 @@ export interface ResolvedAwakenerDatabaseShellView {
   overlayOverridesById: Record<string, AwakenerOverlayRecord>
   commandCards: DatabaseDescribedEntry<AwakenerSkillRecord>[]
   exalts: DatabaseDescribedEntry<AwakenerSkillRecord>[]
+  overExalt: DatabaseDescribedEntry<AwakenerSkillRecord> | null
   talents: DatabaseDescribedEntry<AwakenerTalentRecord>[]
   enlightens: DatabaseDescribedEntry<AwakenerEnlightenRecord>[]
   derivedSkills: DatabaseDescribedEntry<DerivedSkillRecord>[]
@@ -586,6 +587,7 @@ export function resolveAwakenerDatabaseShellView(
     influenceLookups,
     influenceBadgeLookups,
   )
+  const overExalt = exalts.find((entry) => entry.key === 'OverExalt') ?? null
   const promotedExtras = buildDerivedEntries(
     'promoted',
     resolvedAwakenerRecord.cards.promotedExtras,
@@ -613,6 +615,7 @@ export function resolveAwakenerDatabaseShellView(
     overlayOverridesById: resolvedRecord.overlayOverridesById,
     commandCards,
     exalts,
+    overExalt,
     talents,
     enlightens,
     derivedSkills: ownedDerivedSkills,

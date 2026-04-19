@@ -527,7 +527,7 @@ describe('DatabaseReferencePopover', () => {
       />,
     )
 
-    expect(screen.getByText('Related Cards')).toBeInTheDocument()
+    expect(screen.getByText('Related Skills')).toBeInTheDocument()
     expect(screen.getByText('Choose Memory One for a sharpened Barrier.')).toBeInTheDocument()
     expect(screen.getByText('Deal Fixed DMG while guarding with Memory Two.')).toBeInTheDocument()
     expect(screen.queryByText('Card · Derived · Cost 0')).not.toBeInTheDocument()

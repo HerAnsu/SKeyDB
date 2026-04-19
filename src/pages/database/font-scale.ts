@@ -21,7 +21,18 @@ export function getDescriptionFontScaleStyle(scale: FontScale): CSSProperties {
 }
 
 export function scaledFontStyle(basePx: number): CSSProperties {
-  return {fontSize: `calc(var(--desc-font-scale, 1) * ${String(basePx)}px)`}
+  return {fontSize: scaledPixelValue(basePx)}
+}
+
+export function scaledPixelValue(basePx: number): string {
+  return `calc(var(--desc-font-scale, 1) * ${String(basePx)}px)`
+}
+
+export function scaledTypographyStyle(basePx: number, lineHeightPx?: number): CSSProperties {
+  return {
+    fontSize: scaledPixelValue(basePx),
+    ...(lineHeightPx ? {lineHeight: scaledPixelValue(lineHeightPx)} : {}),
+  }
 }
 
 export const getStarSize = (scale: FontScale) => {

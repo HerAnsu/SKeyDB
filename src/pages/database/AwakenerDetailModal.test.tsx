@@ -295,7 +295,7 @@ vi.mock('./AwakenerDetailOverview', () => ({
 }))
 
 vi.mock('./AwakenerDetailCards', () => ({
-  AwakenerDetailCards: () => <div>Cards Tab</div>,
+  AwakenerDetailCards: () => <div>Skills Tab</div>,
 }))
 
 vi.mock('./AwakenerBuildsTab', () => ({
@@ -350,12 +350,12 @@ function makeAwakener(id: number, name: string): Awakener {
 }
 
 interface TestAwakenerDetailModalOptions {
-  activeTab?: 'overview' | 'cards' | 'builds' | 'teams'
+  activeTab?: 'overview' | 'skills' | 'builds' | 'teams'
   awakeners?: Awakener[]
   key?: number
   onClose?: () => void
-  onSelectAwakener?: (awakener: Awakener, tab: 'overview' | 'cards' | 'builds' | 'teams') => void
-  onTabChange?: (tab: 'overview' | 'cards' | 'builds' | 'teams') => void
+  onSelectAwakener?: (awakener: Awakener, tab: 'overview' | 'skills' | 'builds' | 'teams') => void
+  onTabChange?: (tab: 'overview' | 'skills' | 'builds' | 'teams') => void
 }
 
 function getTestFullDataV2(id: number): AwakenerFullV2Record {
@@ -439,8 +439,8 @@ describe('AwakenerDetailModal', () => {
 
     const {rerender} = renderAwakenerDetailModal(first, {key: first.id, onClose})
 
-    fireEvent.click(screen.getByRole('tab', {name: 'Cards'}))
-    expect(screen.getByRole('tab', {name: 'Cards'})).toHaveAttribute('aria-selected', 'true')
+    fireEvent.click(screen.getByRole('tab', {name: 'Skills'}))
+    expect(screen.getByRole('tab', {name: 'Skills'})).toHaveAttribute('aria-selected', 'true')
 
     rerender(createAwakenerDetailModalElement(second, {key: second.id, onClose}))
 
@@ -467,11 +467,11 @@ describe('AwakenerDetailModal', () => {
       'true',
     )
     expect(within(dialog).getByRole('tab', {name: 'Overview'})).toHaveAttribute('tabindex', '0')
-    expect(within(dialog).getByRole('tab', {name: 'Cards'})).toHaveAttribute(
+    expect(within(dialog).getByRole('tab', {name: 'Skills'})).toHaveAttribute(
       'aria-selected',
       'false',
     )
-    expect(within(dialog).getByRole('tab', {name: 'Cards'})).toHaveAttribute('tabindex', '-1')
+    expect(within(dialog).getByRole('tab', {name: 'Skills'})).toHaveAttribute('tabindex', '-1')
 
     const panel = within(dialog).getByRole('tabpanel')
     expect(panel).toHaveAttribute(
@@ -493,14 +493,14 @@ describe('AwakenerDetailModal', () => {
     overviewTab.focus()
 
     fireEvent.keyDown(overviewTab, {key: 'ArrowRight'})
-    expect(screen.getByRole('tab', {name: 'Cards'})).toHaveFocus()
-    expect(screen.getByRole('tab', {name: 'Cards'})).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tab', {name: 'Skills'})).toHaveFocus()
+    expect(screen.getByRole('tab', {name: 'Skills'})).toHaveAttribute('aria-selected', 'true')
     expect(screen.getByRole('tabpanel')).toHaveAttribute(
       'aria-labelledby',
-      screen.getByRole('tab', {name: 'Cards'}).getAttribute('id'),
+      screen.getByRole('tab', {name: 'Skills'}).getAttribute('id'),
     )
 
-    fireEvent.keyDown(screen.getByRole('tab', {name: 'Cards'}), {key: 'End'})
+    fireEvent.keyDown(screen.getByRole('tab', {name: 'Skills'}), {key: 'End'})
     expect(screen.getByRole('tab', {name: 'Teams'})).toHaveFocus()
     expect(screen.getByRole('tab', {name: 'Teams'})).toHaveAttribute('aria-selected', 'true')
 
@@ -763,12 +763,12 @@ describe('AwakenerDetailModal', () => {
 
     renderAwakenerDetailModal(awakener, {onClose, onSelectAwakener})
 
-    fireEvent.click(screen.getByRole('tab', {name: 'Cards'}))
+    fireEvent.click(screen.getByRole('tab', {name: 'Skills'}))
     const searchInput = screen.getByRole('combobox', {name: /jump to awakener/i})
     fireEvent.change(searchInput, {target: {value: 'be'}})
     fireEvent.keyDown(searchInput, {key: 'Enter'})
 
-    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 2}), 'cards')
+    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 2}), 'skills')
   })
 
   it('captures global typing into the modal search and lets escape clear it without closing', async () => {

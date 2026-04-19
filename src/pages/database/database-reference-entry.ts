@@ -11,7 +11,7 @@ export interface DatabaseReferenceAttributeRow {
 }
 
 export type DatabaseReferenceNavigationTarget =
-  | {kind: 'cards'}
+  | {kind: 'skills'}
   | {kind: 'wheel-page'; wheelName: string}
 
 export interface DatabaseReferenceEntry {
