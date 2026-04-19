@@ -29,4 +29,13 @@ describe('DupeLevelDisplay', () => {
     const {container} = render(<DupeLevelDisplay level={6} />)
     expect(container.querySelector('.collection-dupe-svg')).toBeInTheDocument()
   })
+
+  it('can omit the overflow slot while preserving the filled diamonds', () => {
+    const {container} = render(<DupeLevelDisplay level={6} showOverflowSlot={false} />)
+
+    const svgSlots = container.querySelectorAll('.collection-dupe-slot-svg-art')
+    expect(svgSlots).toHaveLength(3)
+    expect(container.querySelector('.collection-dupe-svg-slot-overflow')).not.toBeInTheDocument()
+    expect(screen.queryByText('3')).not.toBeInTheDocument()
+  })
 })

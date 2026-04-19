@@ -55,7 +55,7 @@ export interface DatabaseInfluenceBadge {
 }
 
 export interface DatabaseReferenceInfo<TRecord extends DescribedRecord = DescribedRecord> {
-  kind: 'skill' | 'talent' | 'enlighten' | 'derived-skill' | 'overlay'
+  kind: 'skill' | 'talent' | 'enlighten' | 'derived-skill' | 'overlay' | 'wheel'
   id: string
   name: string
   label: string
@@ -85,13 +85,15 @@ export interface ResolvedAwakenerDatabaseShellView {
   promotedExtras: DatabaseDescribedEntry<DerivedSkillRecord>[]
 }
 
-export interface ResolvedAwakenerDatabaseReferenceLayer {
+export interface DatabaseReferenceLayer {
   cardNames: Set<string>
   accessibleOverlays: AwakenerOverlayRecord[]
   referenceInfoByName: Map<string, DatabaseReferenceInfo>
   referenceInfoById: Map<string, DatabaseReferenceInfo>
   overlayByName: Map<string, AwakenerOverlayRecord>
 }
+
+export type ResolvedAwakenerDatabaseReferenceLayer = DatabaseReferenceLayer
 
 export type ResolvedAwakenerDatabaseView = ResolvedAwakenerDatabaseShellView &
   ResolvedAwakenerDatabaseReferenceLayer

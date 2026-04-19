@@ -3,6 +3,7 @@ import {lazy, Suspense} from 'react'
 import type {FullStats} from '@/domain/awakener-source-schema'
 import type {ResolvedAwakenerDatabaseReferenceLayer} from '@/domain/awakeners-database-view'
 import {buildDatabaseRichDescriptionText} from '@/domain/database-rich-text'
+import {resolveDescriptionTemplate} from '@/domain/description-args'
 import type {DescribedRecord} from '@/domain/description-records'
 
 import {useDatabasePopoverControllerContext} from './database-popover-context'
@@ -39,10 +40,13 @@ export function RichDescription({
   showTagIcons = true,
 }: RichDescriptionProps) {
   const popoverController = useDatabasePopoverControllerContext()
-  const fallbackText = buildDatabaseRichDescriptionText(
-    record?.descriptionTemplate ?? text,
-    keywordFooterText,
-  )
+  const fallbackSourceText = record
+    ? resolveDescriptionTemplate(record.descriptionTemplate, record.descriptionArgs, {
+        rank: descriptionRank ?? skillLevel,
+        stats,
+      })
+    : text
+  const fallbackText = buildDatabaseRichDescriptionText(fallbackSourceText, keywordFooterText)
   const contentProps: DatabaseRichTextContentProps = {
     text,
     record,

@@ -23,6 +23,7 @@ interface CollectionSortControlsProps<TSortKey extends string = AwakenerSortKey>
   layout?: 'stacked' | 'compact'
   compactTrailingAction?: ReactNode
   className?: string
+  getSortLabel?: (sortKey: TSortKey) => string
 }
 
 const defaultSortOptions: readonly AwakenerSortKey[] = [
@@ -76,6 +77,7 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
   layout = 'stacked',
   compactTrailingAction,
   className,
+  getSortLabel: getSortLabelOverride,
 }: CollectionSortControlsProps<TSortKey>) {
   const resolvedSortOptions = resolveSortOptions(sortOptions)
   const activeSortKey = resolvedSortOptions.includes(sortKey)
@@ -105,7 +107,7 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
           >
             {resolvedSortOptions.map((option) => (
               <option key={option} value={option}>
-                {getSortLabel(option)}
+                {getSortLabelOverride ? getSortLabelOverride(option) : getSortLabel(option)}
               </option>
             ))}
           </select>

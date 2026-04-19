@@ -1,21 +1,32 @@
-import {cache, lazy, Suspense, use, useEffect, useRef} from 'react'
+import {lazy, Suspense, useEffect, useRef} from 'react'
 
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
 
 import emojiWke from '@/assets/emoji/Emoji_WKE_S_06.webp'
 import {getAwakeners, type Awakener} from '@/domain/awakeners'
 import {loadAwakenerFullV2ById} from '@/domain/awakeners-full-v2-loader'
+import {buildDatabaseEntityBrowsePath} from '@/domain/database-entity-paths'
 import {
   buildDatabaseAwakenerPath,
+  buildDatabaseWheelBrowsePath,
+  buildDatabaseWheelPath,
   findAwakenerByDatabaseSlug,
+  findWheelByDatabaseSlug,
   resolveDatabaseAwakenerTab,
   type DatabaseAwakenerTab,
 } from '@/domain/database-paths'
+import {getWheels, type Wheel} from '@/domain/wheels'
+import {loadWheelFullV1ById} from '@/domain/wheels-full-v1-loader'
 
+import {DatabaseEntityTabs} from './database/DatabaseEntityTabs'
 import {DatabaseFilters} from './database/DatabaseFilters'
 import {DatabaseGrid} from './database/DatabaseGrid'
 import {useDatabaseBrowseState} from './database/useDatabaseBrowseState'
+import {useDatabaseDetailRouteRecord} from './database/useDatabaseDetailRouteRecord'
 import {useDatabaseViewModel} from './database/useDatabaseViewModel'
+import {useWheelsDatabaseBrowseState} from './database/useWheelsDatabaseBrowseState'
+import {useWheelsDatabaseViewModel} from './database/useWheelsDatabaseViewModel'
+import {WheelsDatabaseSection} from './database/WheelsDatabaseSection'
 import {useGlobalSearchCapture} from './useGlobalSearchCapture'
 
 const AwakenerDetailModal = lazy(() =>
@@ -23,32 +34,71 @@ const AwakenerDetailModal = lazy(() =>
     default: module.AwakenerDetailModal,
   })),
 )
+const WheelDetailModal = lazy(() =>
+  import('./database/WheelDetailModal').then((module) => ({
+    default: module.WheelDetailModal,
+  })),
+)
 const databaseAwakeners = getAwakeners()
-const loadAwakenerFullV2ForSuspense = cache(loadAwakenerFullV2ById)
+const databaseWheels = getWheels()
 
 export function DatabasePage() {
-  const browseState = useDatabaseBrowseState()
-  const vm = useDatabaseViewModel(databaseAwakeners, browseState)
+  const awakenerBrowseState = useDatabaseBrowseState()
+  const awakenerViewModel = useDatabaseViewModel(databaseAwakeners, awakenerBrowseState)
+  const wheelBrowseState = useWheelsDatabaseBrowseState()
+  const wheelViewModel = useWheelsDatabaseViewModel(databaseWheels, wheelBrowseState)
   const searchInputRef = useRef<HTMLInputElement | null>(null)
   const location = useLocation()
   const navigate = useNavigate()
-  const {awakenerSlug, tabSlug} = useParams<{awakenerSlug?: string; tabSlug?: string}>()
+  const {awakenerSlug, tabSlug, wheelSlug} = useParams<{
+    awakenerSlug?: string
+    tabSlug?: string
+    wheelSlug?: string
+  }>()
   const selectedAwakener = findAwakenerByDatabaseSlug(databaseAwakeners, awakenerSlug)
+  const selectedWheel = findWheelByDatabaseSlug(databaseWheels, wheelSlug)
   const selectedTab = resolveDatabaseAwakenerTab(tabSlug) ?? 'overview'
+  const isWheelRoute = location.pathname.startsWith(buildDatabaseWheelBrowsePath())
+  const activeEntity = isWheelRoute ? 'wheels' : 'awakeners'
+  const browsePath = isWheelRoute
+    ? buildDatabaseEntityBrowsePath('wheels')
+    : buildDatabaseEntityBrowsePath('awakeners')
 
   useGlobalSearchCapture({
-    enabled: !selectedAwakener,
+    enabled: !selectedAwakener && !selectedWheel,
     searchInputRef,
-    onAppendCharacter: browseState.appendSearchCharacter,
-    onRemoveCharacter: browseState.removeSearchCharacter,
-    onClearSearch: browseState.clearQuery,
+    onAppendCharacter: isWheelRoute
+      ? wheelBrowseState.appendSearchCharacter
+      : awakenerBrowseState.appendSearchCharacter,
+    onRemoveCharacter: isWheelRoute
+      ? wheelBrowseState.removeSearchCharacter
+      : awakenerBrowseState.removeSearchCharacter,
+    onClearSearch: isWheelRoute ? wheelBrowseState.clearQuery : awakenerBrowseState.clearQuery,
   })
 
   useEffect(() => {
     if (awakenerSlug && !selectedAwakener) {
-      void navigate({pathname: '/database', search: location.search}, {replace: true})
+      void navigate(
+        {
+          pathname: buildDatabaseEntityBrowsePath('awakeners'),
+          search: location.search,
+        },
+        {replace: true},
+      )
     }
   }, [awakenerSlug, location.search, navigate, selectedAwakener])
+
+  useEffect(() => {
+    if (wheelSlug && !selectedWheel) {
+      void navigate(
+        {
+          pathname: buildDatabaseWheelBrowsePath(),
+          search: location.search,
+        },
+        {replace: true},
+      )
+    }
+  }, [location.search, navigate, selectedWheel, wheelSlug])
 
   function openAwakenerDetail(awakenerId: number) {
     const awakener = databaseAwakeners.find((entry) => entry.id === awakenerId)
@@ -61,8 +111,19 @@ export function DatabasePage() {
     })
   }
 
+  function openWheelDetail(wheelId: string) {
+    const wheel = databaseWheels.find((entry) => entry.id === wheelId)
+    if (!wheel) {
+      return
+    }
+    void navigate({
+      pathname: buildDatabaseWheelPath(wheel),
+      search: location.search,
+    })
+  }
+
   function closeDetail() {
-    void navigate({pathname: '/database', search: location.search})
+    void navigate({pathname: browsePath, search: location.search})
   }
 
   function handleDetailTabChange(nextTab: DatabaseAwakenerTab) {
@@ -78,6 +139,13 @@ export function DatabasePage() {
   function handleModalAwakenerSelect(nextAwakener: Awakener, nextTab: DatabaseAwakenerTab) {
     void navigate({
       pathname: buildDatabaseAwakenerPath(nextAwakener, nextTab),
+      search: location.search,
+    })
+  }
+
+  function handleModalWheelSelect(nextWheel: Pick<Wheel, 'name'>) {
+    void navigate({
+      pathname: buildDatabaseWheelPath(nextWheel),
       search: location.search,
     })
   }
@@ -98,27 +166,47 @@ export function DatabasePage() {
         </p>
       </div>
 
-      <DatabaseFilters
-        filteredCount={vm.awakeners.length}
-        groupByRealm={browseState.groupByRealm}
-        onGroupByRealmChange={browseState.setGroupByRealm}
-        onQueryChange={browseState.setQuery}
-        onRarityFilterChange={browseState.setRarityFilter}
-        onRealmFilterChange={browseState.setRealmFilter}
-        onSortDirectionToggle={browseState.toggleSortDirection}
-        onSortKeyChange={browseState.setSortKey}
-        onTypeFilterChange={browseState.setTypeFilter}
-        query={browseState.query}
-        rarityFilter={browseState.rarityFilter}
-        realmFilter={browseState.realmFilter}
-        searchInputRef={searchInputRef}
-        sortDirection={browseState.sortDirection}
-        sortKey={browseState.sortKey}
-        totalCount={vm.totalCount}
-        typeFilter={browseState.typeFilter}
-      />
+      <div className='space-y-3'>
+        <DatabaseEntityTabs activeEntity={activeEntity} search={location.search} />
 
-      <DatabaseGrid awakeners={vm.awakeners} onSelectAwakener={openAwakenerDetail} />
+        {activeEntity === 'wheels' ? (
+          <WheelsDatabaseSection
+            browseState={wheelBrowseState}
+            filteredCount={wheelViewModel.wheels.length}
+            onSelectWheel={openWheelDetail}
+            searchInputRef={searchInputRef}
+            totalCount={wheelViewModel.totalCount}
+            wheels={wheelViewModel.wheels}
+          />
+        ) : (
+          <>
+            <DatabaseFilters
+              filteredCount={awakenerViewModel.awakeners.length}
+              groupByRealm={awakenerBrowseState.groupByRealm}
+              onGroupByRealmChange={awakenerBrowseState.setGroupByRealm}
+              onQueryChange={awakenerBrowseState.setQuery}
+              onRarityFilterChange={awakenerBrowseState.setRarityFilter}
+              onRealmFilterChange={awakenerBrowseState.setRealmFilter}
+              onSortDirectionToggle={awakenerBrowseState.toggleSortDirection}
+              onSortKeyChange={awakenerBrowseState.setSortKey}
+              onTypeFilterChange={awakenerBrowseState.setTypeFilter}
+              query={awakenerBrowseState.query}
+              rarityFilter={awakenerBrowseState.rarityFilter}
+              realmFilter={awakenerBrowseState.realmFilter}
+              searchInputRef={searchInputRef}
+              sortDirection={awakenerBrowseState.sortDirection}
+              sortKey={awakenerBrowseState.sortKey}
+              totalCount={awakenerViewModel.totalCount}
+              typeFilter={awakenerBrowseState.typeFilter}
+            />
+
+            <DatabaseGrid
+              awakeners={awakenerViewModel.awakeners}
+              onSelectAwakener={openAwakenerDetail}
+            />
+          </>
+        )}
+      </div>
 
       {selectedAwakener ? (
         <Suspense
@@ -132,8 +220,25 @@ export function DatabasePage() {
             awakeners={databaseAwakeners}
             onClose={closeDetail}
             onSelectAwakener={handleModalAwakenerSelect}
+            onSelectWheel={handleModalWheelSelect}
             onTabChange={handleDetailTabChange}
             tabSlug={tabSlug}
+          />
+        </Suspense>
+      ) : null}
+
+      {selectedWheel ? (
+        <Suspense
+          fallback={
+            <div className='px-2 py-3 text-sm text-slate-300'>Loading wheel details...</div>
+          }
+        >
+          <DatabaseWheelDetailRoute
+            onClose={closeDetail}
+            onSelectAwakener={handleModalAwakenerSelect}
+            onSelectWheel={handleModalWheelSelect}
+            wheel={selectedWheel}
+            wheels={databaseWheels}
           />
         </Suspense>
       ) : null}
@@ -147,6 +252,7 @@ interface DatabaseAwakenerDetailRouteProps {
   awakeners: Awakener[]
   onClose: () => void
   onSelectAwakener: (awakener: Awakener, tab: DatabaseAwakenerTab) => void
+  onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
   onTabChange: (tab: DatabaseAwakenerTab) => void
   tabSlug?: string
 }
@@ -157,21 +263,23 @@ function DatabaseAwakenerDetailRoute({
   awakeners,
   onClose,
   onSelectAwakener,
+  onSelectWheel,
   onTabChange,
   tabSlug,
 }: DatabaseAwakenerDetailRouteProps) {
   const location = useLocation()
   const navigate = useNavigate()
-  const fullDataV2 = use(loadAwakenerFullV2ForSuspense(awakener.id)) ?? null
+  const {isLoading, record: fullDataV2} = useDatabaseDetailRouteRecord({
+    id: awakener.id,
+    loadRecord: loadAwakenerFullV2ById,
+    missingPathname: buildDatabaseEntityBrowsePath('awakeners'),
+  })
 
   useEffect(() => {
-    if (!fullDataV2) {
-      void navigate({pathname: '/database', search: location.search}, {replace: true})
+    if (!fullDataV2 || !tabSlug || resolveDatabaseAwakenerTab(tabSlug)) {
       return
     }
-    if (!tabSlug || resolveDatabaseAwakenerTab(tabSlug)) {
-      return
-    }
+
     void navigate(
       {
         pathname: buildDatabaseAwakenerPath(awakener),
@@ -180,6 +288,10 @@ function DatabaseAwakenerDetailRoute({
       {replace: true},
     )
   }, [awakener, fullDataV2, location.search, navigate, tabSlug])
+
+  if (isLoading) {
+    return <div className='px-2 py-3 text-sm text-slate-300'>Loading awakener details...</div>
+  }
 
   if (!fullDataV2) {
     return null
@@ -194,7 +306,50 @@ function DatabaseAwakenerDetailRoute({
       key={awakener.id}
       onClose={onClose}
       onSelectAwakener={onSelectAwakener}
+      onSelectWheel={onSelectWheel}
       onTabChange={onTabChange}
+    />
+  )
+}
+
+interface DatabaseWheelDetailRouteProps {
+  wheel: Wheel
+  wheels: Wheel[]
+  onClose: () => void
+  onSelectAwakener: (awakener: Awakener, tab: DatabaseAwakenerTab) => void
+  onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
+}
+
+function DatabaseWheelDetailRoute({
+  wheel,
+  wheels,
+  onClose,
+  onSelectAwakener,
+  onSelectWheel,
+}: DatabaseWheelDetailRouteProps) {
+  const {isLoading, record: fullDataV1} = useDatabaseDetailRouteRecord({
+    id: wheel.id,
+    loadRecord: loadWheelFullV1ById,
+    missingPathname: buildDatabaseWheelBrowsePath(),
+  })
+
+  if (isLoading) {
+    return <div className='px-2 py-3 text-sm text-slate-300'>Loading wheel details...</div>
+  }
+
+  if (!fullDataV1) {
+    return null
+  }
+
+  return (
+    <WheelDetailModal
+      fullDataV1={fullDataV1}
+      key={wheel.id}
+      onClose={onClose}
+      onSelectAwakener={onSelectAwakener}
+      onSelectWheel={onSelectWheel}
+      wheel={wheel}
+      wheels={wheels}
     />
   )
 }

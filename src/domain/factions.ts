@@ -10,6 +10,7 @@ export const REALM_LABEL_BY_ID = {
   CARO: 'Caro',
   CHAOS: 'Chaos',
   ULTRA: 'Ultra',
+  NEUTRAL: 'Neutral',
 } as const
 
 export const REALM_TINT_BY_ID: Record<string, string> = {
@@ -17,6 +18,7 @@ export const REALM_TINT_BY_ID: Record<string, string> = {
   CARO: '#e46161',
   CHAOS: '#e3c96e',
   ULTRA: '#aa89dd',
+  NEUTRAL: '#d9ddd3',
 }
 
 export const REALM_ICON_BY_ID: Record<string, string> = {

@@ -28,6 +28,7 @@ export const wheelFullV1RecordSchema = z.object({
   mainstatSeriesKey: nonEmptyStringSchema,
   descriptionTemplate: nonEmptyStringSchema,
   descriptionArgs: descriptionArgsSchema,
+  lore: nonEmptyStringSchema.optional(),
 })
 
 export const wheelsFullV1DatasetSchema = z.array(wheelFullV1RecordSchema)
@@ -91,6 +92,7 @@ export function compileWheelsFullV1({
       mainstatSeriesKey: resolveWheelMainstatSeriesKey(record, mainstatSeriesKeys),
       descriptionTemplate: record.descriptionTemplate,
       descriptionArgs: record.descriptionArgs,
+      ...(record.lore ? {lore: record.lore} : {}),
     }
   })
 

@@ -76,6 +76,7 @@ export function useAwakenerDetailModalState({
     isSearchOpen: search.isSearchOpen,
     onClose,
     searchContainerRef: search.searchContainerRef,
+    searchInputRef: search.searchInputRef,
   })
   const {clearSearch, closeSearch, searchInputRef, searchQuery} = search
   const {isSettingsOpen, setIsSettingsOpen} = chrome

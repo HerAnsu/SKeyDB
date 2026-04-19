@@ -4,6 +4,7 @@ const WHEEL_RARITY_ORDER: Record<Wheel['rarity'], number> = {
   SSR: 0,
   SR: 1,
   R: 2,
+  N: 3,
 }
 
 const WHEEL_REALM_ORDER: Record<Wheel['realm'], number> = {

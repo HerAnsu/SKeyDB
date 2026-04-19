@@ -15,6 +15,16 @@ import {
   type DescriptionArgResolveContext,
   type ResolvedDescriptionArg,
 } from './description-args'
+import type {WheelFullV1Record} from './wheels-full-v1'
+
+export interface WheelDatabaseDescriptionRecord {
+  id: string
+  kind: 'wheel'
+  displayName: string
+  ownerAwakenerId?: number
+  descriptionTemplate: string
+  descriptionArgs: WheelFullV1Record['descriptionArgs']
+}
 
 export type DescribedRecord =
   | AwakenerSkillRecord
@@ -22,6 +32,7 @@ export type DescribedRecord =
   | AwakenerEnlightenRecord
   | DerivedSkillRecord
   | AwakenerOverlayRecord
+  | WheelDatabaseDescriptionRecord
 
 export interface ResolvedDescribedRecordArgEntry {
   key: string

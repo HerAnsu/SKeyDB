@@ -3,7 +3,7 @@ import wheelsLite from '@/data/wheels/compiled/wheels-lite.v1.json'
 import {getMainstatByKey, type WheelMainstatKey} from './mainstats'
 import {wheelsLiteV1DatasetSchema, type WheelLiteV1Record} from './wheels-lite-v1-compiler'
 
-export type WheelRarity = 'SSR' | 'SR' | 'R'
+export type WheelRarity = 'SSR' | 'SR' | 'R' | 'N'
 export type WheelRealm = 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA' | 'NEUTRAL'
 
 export type Wheel = WheelLiteV1Record & {

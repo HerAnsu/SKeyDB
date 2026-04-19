@@ -3,11 +3,15 @@ import {describe, expect, it} from 'vitest'
 import type {Awakener} from './awakeners'
 import {
   buildDatabaseAwakenerPath,
+  buildDatabaseWheelPath,
   DATABASE_AWAKENER_TABS,
   findAwakenerByDatabaseSlug,
+  findWheelByDatabaseSlug,
   resolveDatabaseAwakenerTab,
   toDatabaseAwakenerSlug,
+  toDatabaseWheelSlug,
 } from './database-paths'
+import type {Wheel} from './wheels'
 
 function makeAwakener(overrides: Partial<Awakener>): Awakener {
   return {
@@ -19,6 +23,21 @@ function makeAwakener(overrides: Partial<Awakener>): Awakener {
     type: 'ASSAULT',
     aliases: ['Thais'],
     tags: [],
+    ...overrides,
+  }
+}
+
+function makeWheel(overrides: Partial<Wheel>): Wheel {
+  return {
+    id: 'B01',
+    assetId: 'Weapon_Full_B01',
+    name: 'Merciful Nurturing',
+    rarity: 'SSR',
+    realm: 'CARO',
+    awakener: 'thais',
+    aliases: ['Merciful Nurturing'],
+    tags: ['Caro'],
+    mainstatKey: 'KEYFLARE_REGEN',
     ...overrides,
   }
 }
@@ -39,6 +58,17 @@ describe('database paths', () => {
     expect(toDatabaseAwakenerSlug('24')).toBe('24')
   })
 
+  it('builds a stable wheel detail path from canonical name', () => {
+    expect(buildDatabaseWheelPath(makeWheel({name: 'Merciful Nurturing'}))).toBe(
+      '/database/wheels/merciful-nurturing',
+    )
+  })
+
+  it('normalizes wheel names into shareable slugs', () => {
+    expect(toDatabaseWheelSlug('Merciful Nurturing')).toBe('merciful-nurturing')
+    expect(toDatabaseWheelSlug('Helot: Catena')).toBe('helot-catena')
+  })
+
   it('finds awakeners by canonical slug', () => {
     const awakeners = [
       makeAwakener({id: 1, name: 'thais'}),
@@ -50,6 +80,19 @@ describe('database paths', () => {
 
   it('returns null for unknown slugs', () => {
     expect(findAwakenerByDatabaseSlug([makeAwakener({id: 1, name: 'thais'})], 'missing')).toBeNull()
+  })
+
+  it('finds wheels by canonical slug', () => {
+    const wheels = [
+      makeWheel({id: 'B01', name: 'Merciful Nurturing'}),
+      makeWheel({id: 'D12', name: 'Shared Dream'}),
+    ]
+
+    expect(findWheelByDatabaseSlug(wheels, 'shared-dream')?.id).toBe('D12')
+  })
+
+  it('returns null for unknown wheel slugs', () => {
+    expect(findWheelByDatabaseSlug([makeWheel({id: 'B01'})], 'missing')).toBeNull()
   })
 
   it('resolves allowed database tab slugs', () => {

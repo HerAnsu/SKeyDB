@@ -70,6 +70,7 @@ interface AwakenerDetailSidebarProps {
   controls: AwakenerDatabaseControls
   selection: AwakenerDatabaseSelection
   onPatchSelection: (nextPartial: Partial<AwakenerDatabaseSelection>) => void
+  onOpenFullArt?: () => void
   stats: FullStats | null
   substatScaling: SubstatScaling | null
   scalingRecord: ScalingInfoRecord
@@ -102,6 +103,7 @@ export function AwakenerDetailSidebar({
   controls,
   selection,
   onPatchSelection,
+  onOpenFullArt,
   stats,
   substatScaling,
   scalingRecord,
@@ -109,6 +111,7 @@ export function AwakenerDetailSidebar({
 }: AwakenerDetailSidebarProps) {
   const displayName = formatAwakenerNameForUi(awakener.name)
   const cardAsset = getAwakenerCardAsset(awakener.name)
+  const fullArtLabel = `View full art for ${displayName}`
   const hasSubstatScaling = hasAwakenerSubstatScaling(substatScaling)
   const progressionSection = (
     <div className='border border-slate-600/30 bg-slate-900/30 px-3 py-2.5'>
@@ -185,7 +188,21 @@ export function AwakenerDetailSidebar({
     <div className='flex shrink-0 flex-col gap-2.5'>
       {!compact ? (
         <div className='h-[16.5rem] w-full overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900 lg:h-[17.5rem]'>
-          {cardAsset ? (
+          {cardAsset && onOpenFullArt ? (
+            <button
+              aria-label={fullArtLabel}
+              className='block h-full w-full'
+              onClick={onOpenFullArt}
+              type='button'
+            >
+              <img
+                alt=''
+                className='h-full w-full object-cover object-top'
+                draggable={false}
+                src={cardAsset}
+              />
+            </button>
+          ) : cardAsset ? (
             <img
               alt={`${displayName} card`}
               className='h-full w-full object-cover object-top'

@@ -14,6 +14,7 @@ import {type AwakenerFullV2Record} from './awakeners-full-v2'
 import {buildCardKeywordFooterText} from './card-keywords'
 import {getDerivedSkills} from './derived-skills'
 import {resolveDescribedRecord, type DescribedRecord} from './description-records'
+import {buildWheelReferenceInfoEntries} from './wheels-database-reference-layer'
 
 type DatabaseReferenceKind = DatabaseReferenceInfo['kind']
 
@@ -284,6 +285,10 @@ function buildReferenceLookups(
     )
   }
 
+  for (const wheelInfo of buildWheelReferenceInfoEntries()) {
+    addReferenceInfoToLookups(byName, byId, wheelInfo, [])
+  }
+
   return {byId, byName}
 }
 
@@ -307,7 +312,10 @@ export function buildAwakenerDatabaseReferenceLayer({
   const referenceLookups = buildReferenceLookups(shellView, accessibleOverlays, globalDerivedSkills)
 
   return {
-    cardNames: collectAwakenerDatabaseCardNames(shellView.resolvedRecord, globalDerivedSkills),
+    cardNames: new Set([
+      ...collectAwakenerDatabaseCardNames(shellView.resolvedRecord, globalDerivedSkills),
+      ...buildWheelReferenceInfoEntries().map((info) => info.name),
+    ]),
     accessibleOverlays,
     referenceInfoByName: referenceLookups.byName,
     referenceInfoById: referenceLookups.byId,

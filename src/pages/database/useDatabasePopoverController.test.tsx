@@ -73,6 +73,27 @@ function buildReferenceLayer(
     'Guard text.',
     'defense',
   )
+  const wheelReference: DatabaseReferenceInfo = {
+    kind: 'wheel',
+    id: 'B01',
+    name: 'Merciful Nurturing',
+    label: 'Wheel · SSR · Caro',
+    record: {
+      id: 'B01',
+      kind: 'wheel',
+      displayName: 'Merciful Nurturing',
+      ownerAwakenerId: 1,
+      descriptionTemplate: 'Wheel text.',
+      descriptionArgs: {},
+    },
+    description: 'Wheel text.',
+    keywordFooterText: undefined,
+    descriptionRank: 1,
+    descriptionMaxRank: 4,
+    influencingEnlightenSlots: [],
+    influencingTalentIds: [],
+    influenceBadges: [],
+  }
 
   return {
     cardNames: new Set<string>(),
@@ -80,10 +101,12 @@ function buildReferenceLayer(
     referenceInfoByName: new Map([
       ['strike', strikeReference],
       ['guard', guardReference],
+      ['merciful nurturing', wheelReference],
     ]),
     referenceInfoById: new Map([
       ['skill.test.strike', strikeReference],
       ['skill.test.guard', guardReference],
+      ['B01', wheelReference],
     ]),
     overlayByName: new Map(),
   } as unknown as ResolvedAwakenerDatabaseReferenceLayer
@@ -136,6 +159,14 @@ function ControllerHarness({
           type='button'
         >
           Open Guard
+        </button>
+        <button
+          onClick={(event) => {
+            popoverController.contextValue.openRootReferenceByName('Merciful Nurturing', event)
+          }}
+          type='button'
+        >
+          Open Wheel
         </button>
         <button
           onClick={(event) => {
@@ -207,5 +238,15 @@ describe('useDatabasePopoverController', () => {
     fireEvent.click(screen.getByRole('button', {name: /Show exact breakpoints/i}))
     expect(await screen.findByText('Detailed scaling text.')).toBeInTheDocument()
     expect(screen.getByText('Scaling Breakdown')).toBeInTheDocument()
+  })
+
+  it('opens wheel references through the shared root popover path', async () => {
+    render(<ControllerHarness referenceLayer={buildReferenceLayer('Base text.')} />)
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Wheel'}))
+
+    expect(await screen.findByText('Wheel text.')).toBeInTheDocument()
+    expect(screen.getByText('Merciful Nurturing')).toBeInTheDocument()
+    expect(screen.getByText('Wheel · SSR · Caro')).toBeInTheDocument()
   })
 })

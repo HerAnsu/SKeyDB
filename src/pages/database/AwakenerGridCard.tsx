@@ -10,7 +10,7 @@ const STAT_DISPLAY: {key: 'CON' | 'ATK' | 'DEF'; color: string}[] = [
   {key: 'DEF', color: '#638ea6'},
 ]
 
-const PRIORITIZED_GRID_IMAGE_COUNT = 8
+const PRIORITIZED_GRID_IMAGE_COUNT = 24
 
 interface AwakenerGridCardProps {
   awakener: Awakener

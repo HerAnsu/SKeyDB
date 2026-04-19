@@ -37,7 +37,7 @@ function addDuplicateStringFieldIssue<T extends Record<string, unknown>>(
   }
 }
 
-export const WHEEL_SOURCE_RARITY_KEYS = ['SSR', 'SR', 'R'] as const
+export const WHEEL_SOURCE_RARITY_KEYS = ['SSR', 'SR', 'R', 'N'] as const
 export const WHEEL_MAINSTAT_SERIES_RARITY_KEYS = ['SSR', 'SR', 'R', 'N'] as const
 export const WHEEL_REALM_KEYS = ['AEQUOR', 'CARO', 'CHAOS', 'ULTRA', 'NEUTRAL'] as const
 export const WHEEL_MAINSTAT_KEYS = [
@@ -59,6 +59,7 @@ export const wheelSourceRecordSchema = describedRecordSchema.extend({
   mainstatKey: z.enum(WHEEL_MAINSTAT_KEYS),
   name: nonEmptyStringSchema,
   ownerAwakenerId: z.number().int().positive().optional(),
+  lore: nonEmptyStringSchema.optional(),
 })
 
 export const wheelSourceDatasetSchema = z

@@ -1,5 +1,4 @@
-import wheelMainstatScalingSourceJson from '@/data/wheels/wheel-mainstat-scaling.json'
-
+import wheelMainstatScalingSourceJson from '../data/wheels/wheel-mainstat-scaling.json' with {type: 'json'}
 import {
   WHEEL_MAINSTAT_KEYS,
   wheelMainstatScalingSourceSchema,

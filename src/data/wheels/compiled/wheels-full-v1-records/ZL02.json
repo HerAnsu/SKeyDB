@@ -12,5 +12,6 @@
   "descriptionArgs": {
     "StateArg1": {"kind": "scaling", "values": ["11", "14", "17", "20"]},
     "StateArg2": {"kind": "scaling", "values": ["11", "14", "17", "20"]}
-  }
+  },
+  "lore": "A.F. 314, on a deep winter night, the sound of an explosion echoed through the Yakutsk Forests.\nThe earth trembled, and the woods were illuminated as if it were midday. Accompanied by the shrieks of life and the wails of nature, the village was razed to the ground.\nAccording to Dexter, a pre-college student majoring in Awakener Studies who participated in the investigation, among the flames shooting into the sky that night, colors of black and silver shone brightly."
 }

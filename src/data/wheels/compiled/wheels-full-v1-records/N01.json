@@ -2,7 +2,7 @@
   "id": "N01",
   "assetId": "Weapon_Full_N01",
   "name": "Unsent Flowers",
-  "rarity": "R",
+  "rarity": "N",
   "realm": "NEUTRAL",
   "awakener": "ramona",
   "ownerAwakenerId": 42,
@@ -12,5 +12,6 @@
   "mainstatKey": "KEYFLARE_REGEN",
   "mainstatSeriesKey": "N:KEYFLARE_REGEN",
   "descriptionTemplate": "Team Unique: If the wielder is the Awakener \"Ramona\", the Affinity gained upon completing the stage is increased by [StateArg1]%.",
-  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["35", "40", "45", "50"]}}
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["35", "40", "45", "50"]}},
+  "lore": "A bouquet that has withered and dried from being left for too long.\n\nIt will never see its master return."
 }

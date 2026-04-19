@@ -1,0 +1,75 @@
+import {useMemo} from 'react'
+
+import {
+  compareWheelsForCollectionSort,
+  type SortableWheelCollectionEntry,
+} from '@/domain/collection-sorting'
+import {getMainstatByKey} from '@/domain/mainstats'
+import {matchesWheelMainstat} from '@/domain/wheel-mainstat-filters'
+import {compareWheelsForUi} from '@/domain/wheel-sort'
+import type {Wheel} from '@/domain/wheels'
+import type {WheelsDatabaseBrowseState} from '@/domain/wheels-database-browse-state'
+import {searchWheels} from '@/domain/wheels-search'
+
+function applyFilters(
+  wheels: Wheel[],
+  browseState: Pick<WheelsDatabaseBrowseState, 'realmFilter' | 'rarityFilter' | 'mainstatFilter'>,
+): Wheel[] {
+  let result = wheels
+  if (browseState.realmFilter !== 'ALL') {
+    result = result.filter((wheel) => wheel.realm === browseState.realmFilter)
+  }
+  if (browseState.rarityFilter !== 'ALL') {
+    result = result.filter((wheel) => wheel.rarity === browseState.rarityFilter)
+  }
+  if (browseState.mainstatFilter !== 'ALL') {
+    result = result.filter((wheel) =>
+      matchesWheelMainstat(wheel.mainstatKey, browseState.mainstatFilter),
+    )
+  }
+  return result
+}
+
+function toSortableWheelEntry(
+  wheel: Wheel,
+  wheelIndexById: ReadonlyMap<string, number>,
+): SortableWheelCollectionEntry {
+  return {
+    label: wheel.name,
+    index: wheelIndexById.get(wheel.id) ?? Number.MAX_SAFE_INTEGER,
+    owned: true,
+    enlighten: 0,
+    rarity: wheel.rarity,
+    realm: wheel.realm,
+    mainstatLabel: getMainstatByKey(wheel.mainstatKey)?.label ?? wheel.mainstatKey,
+  }
+}
+
+export function useWheelsDatabaseViewModel(
+  allWheels: Wheel[],
+  browseState: WheelsDatabaseBrowseState,
+) {
+  const wheelIndexById = useMemo(
+    () => new Map([...allWheels].sort(compareWheelsForUi).map((wheel, index) => [wheel.id, index])),
+    [allWheels],
+  )
+
+  const filteredWheels = useMemo(() => {
+    const searched = searchWheels(allWheels, browseState.query)
+    const filtered = applyFilters(searched, browseState)
+    return [...filtered].sort((left, right) => {
+      const leftEntry = toSortableWheelEntry(left, wheelIndexById)
+      const rightEntry = toSortableWheelEntry(right, wheelIndexById)
+
+      return compareWheelsForCollectionSort(leftEntry, rightEntry, {
+        key: browseState.sortKey,
+        direction: browseState.sortDirection,
+      })
+    })
+  }, [allWheels, browseState, wheelIndexById])
+
+  return {
+    wheels: filteredWheels,
+    totalCount: allWheels.length,
+  }
+}

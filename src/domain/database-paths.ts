@@ -1,4 +1,10 @@
 import type {Awakener} from './awakeners'
+import {
+  buildDatabaseEntityBrowsePath,
+  buildDatabaseEntityDetailPath,
+  toDatabaseEntitySlug,
+} from './database-entity-paths'
+import type {Wheel} from './wheels'
 
 export const DATABASE_AWAKENER_TABS = ['overview', 'cards', 'builds', 'teams'] as const
 
@@ -6,25 +12,12 @@ export type DatabaseAwakenerTab = (typeof DATABASE_AWAKENER_TABS)[number]
 
 const DATABASE_AWAKENER_TAB_SET = new Set<string>(DATABASE_AWAKENER_TABS)
 
-function trimEdgeDashes(value: string): string {
-  let start = 0
-  let end = value.length
-  while (start < end && value[start] === '-') {
-    start += 1
-  }
-  while (end > start && value[end - 1] === '-') {
-    end -= 1
-  }
-  return value.slice(start, end)
+export function toDatabaseAwakenerSlug(name: string): string {
+  return toDatabaseEntitySlug(name)
 }
 
-export function toDatabaseAwakenerSlug(name: string): string {
-  return trimEdgeDashes(
-    name
-      .trim()
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-'),
-  )
+export function toDatabaseWheelSlug(name: string): string {
+  return toDatabaseEntitySlug(name)
 }
 
 export function resolveDatabaseAwakenerTab(tab: string | undefined): DatabaseAwakenerTab | null {
@@ -45,9 +38,17 @@ export function buildDatabaseAwakenerPath(
 ): string {
   const slug = toDatabaseAwakenerSlug(awakener.name)
   if (tab === 'overview') {
-    return `/database/awk/${slug}`
+    return buildDatabaseEntityDetailPath('awakeners', slug)
   }
-  return `/database/awk/${slug}/${tab}`
+  return `${buildDatabaseEntityDetailPath('awakeners', slug)}/${tab}`
+}
+
+export function buildDatabaseWheelBrowsePath(): string {
+  return buildDatabaseEntityBrowsePath('wheels')
+}
+
+export function buildDatabaseWheelPath(wheel: Pick<Wheel, 'name'>): string {
+  return buildDatabaseEntityDetailPath('wheels', toDatabaseWheelSlug(wheel.name))
 }
 
 export function findAwakenerByDatabaseSlug(
@@ -61,4 +62,12 @@ export function findAwakenerByDatabaseSlug(
   return (
     awakeners.find((awakener) => toDatabaseAwakenerSlug(awakener.name) === normalizedSlug) ?? null
   )
+}
+
+export function findWheelByDatabaseSlug(wheels: Wheel[], slug: string | undefined): Wheel | null {
+  if (!slug) {
+    return null
+  }
+  const normalizedSlug = slug.trim().toLowerCase()
+  return wheels.find((wheel) => toDatabaseWheelSlug(wheel.name) === normalizedSlug) ?? null
 }

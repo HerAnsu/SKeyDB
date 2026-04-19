@@ -12,5 +12,6 @@
   "mainstatKey": "CRIT_DMG",
   "mainstatSeriesKey": "SR:CRIT_DMG",
   "descriptionTemplate": "Team Unique: The wielder's Base DMG +[StateArg1]%. Whenever the wielder kills an enemy, accumulate {Crimson Furnace} equal to [StateArg2]% of the wielder's ATK if the current Realm is {Caro}.",
-  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}, "StateArg2": {"kind": "scaling", "values": ["8", "12", "16", "20"]}}
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}, "StateArg2": {"kind": "scaling", "values": ["8", "12", "16", "20"]}},
+  "lore": "Only the quietly dying are worth savoring. The living struggle, and struggle makes the taste bitter.\nWhen the platter arrives, the heart at its center is still faintly warm, its surface rising slightly as if mid-beat. Two eyes gaze up from the side, their pupils boiled docile—milky white, preserving a final instant of shock.\nHe lifts the knife, then pauses.\nThe soul inside still screams. A poet's heart, steeped in sickness and relief, yet tangled with one last regret. He sets the blade down. Folds his hands. Listens.\nTo truly honor this dish, he must wait.\nWait for the obsession in the meat to unravel. Wait for the poet's last memories to soften into aroma—ink and herbs, a lover's trembling breath, the shyness of dawn.\nHe inhales deeply. The air hums with stories.\nUnder the whispering tree, he sits, patient as a grave. The fruit will fall when it is ripe."
 }

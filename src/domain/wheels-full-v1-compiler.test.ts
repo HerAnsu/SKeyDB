@@ -101,4 +101,17 @@ describe('compileWheelsFullV1', () => {
       'N:KEYFLARE_REGEN',
     )
   })
+
+  it('preserves raw wheel lore markup from source data', () => {
+    const compiled = compileWheelsFullV1({
+      sourceRecords: parsedWheelSource,
+      awakeners: parsedAwakenerRoster,
+      mainstatScaling: parsedWheelMainstatScaling,
+    })
+
+    expect(compiled.find((record) => record.id === 'C08')?.lore).toContain(
+      '<Italic:Cowards die many times before their deaths; the valiant never taste of death but once.>',
+    )
+    expect(compiled.find((record) => record.id === 'C09')?.lore).toContain('Tap, tap, tap.')
+  })
 })

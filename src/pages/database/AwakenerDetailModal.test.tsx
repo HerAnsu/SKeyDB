@@ -17,6 +17,7 @@ import {
 } from './database-test-fixtures'
 
 const mockCloseAllPopovers = vi.fn()
+const mockGetAwakenerCardAsset = vi.fn(() => '/card.webp')
 let mockHasOpenPopovers = false
 
 vi.mock('./useDatabasePopoverController', () => ({
@@ -203,7 +204,8 @@ vi.mock('../../domain/awakener-database-state', () => ({
 }))
 
 vi.mock('../../domain/awakener-assets', () => ({
-  getAwakenerPortraitAsset: () => null,
+  getAwakenerCardAsset: (name: string) => mockGetAwakenerCardAsset(name),
+  getAwakenerPortraitAsset: () => '/portrait.webp',
 }))
 
 vi.mock('../../domain/name-format', () => ({
@@ -218,10 +220,12 @@ vi.mock('../../domain/factions', () => ({
 
 vi.mock('./AwakenerDetailSidebar', () => ({
   AwakenerDetailSidebar: ({
+    onOpenFullArt,
     onPatchSelection,
     selection,
     stats,
   }: {
+    onOpenFullArt?: () => void
     onPatchSelection: (nextPartial: {
       awakenerLevel?: number
       psycheSurgeOffset?: number
@@ -235,6 +239,11 @@ vi.mock('./AwakenerDetailSidebar', () => ({
     stats: {CON: string; CritRate: string} | null
   }) => (
     <div>
+      {onOpenFullArt ? (
+        <button onClick={onOpenFullArt} type='button'>
+          Open sidebar art
+        </button>
+      ) : null}
       <button
         onClick={() => {
           onPatchSelection({awakenerLevel: 90})
@@ -417,6 +426,8 @@ function getDetailShell(): HTMLElement {
 describe('AwakenerDetailModal', () => {
   beforeEach(() => {
     mockHasOpenPopovers = false
+    mockGetAwakenerCardAsset.mockReset()
+    mockGetAwakenerCardAsset.mockReturnValue('/card.webp')
     mockCloseAllPopovers.mockReset()
     window.localStorage.clear()
   })
@@ -542,9 +553,6 @@ describe('AwakenerDetailModal', () => {
     fireEvent.click(opener)
 
     const dialog = await screen.findByRole('dialog', {name: /thais details/i})
-    await waitFor(() => {
-      expect(dialog).toHaveFocus()
-    })
 
     const detailShell = getDetailShell()
     const focusableElements = getModalFocusableElements(detailShell)
@@ -783,5 +791,26 @@ describe('AwakenerDetailModal', () => {
 
     expect(mockCloseAllPopovers).toHaveBeenCalledTimes(1)
     expect(onClose).not.toHaveBeenCalled()
+  })
+
+  it('opens the full card art from the mobile portrait trigger and closes it with Escape', () => {
+    renderAwakenerDetailModal(makeAwakener(1, 'thais'))
+
+    fireEvent.click(screen.getByRole('button', {name: /view full art for thais/i}))
+
+    expect(screen.getByRole('dialog', {name: /thais full art/i})).toBeInTheDocument()
+    expect(screen.getByRole('img', {name: /thais full art/i})).toHaveAttribute('src', '/card.webp')
+
+    fireEvent.keyDown(window, {key: 'Escape'})
+
+    expect(screen.queryByRole('dialog', {name: /thais full art/i})).not.toBeInTheDocument()
+  })
+
+  it('opens the full card art from the desktop sidebar trigger', () => {
+    renderAwakenerDetailModal(makeAwakener(1, 'thais'))
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open sidebar art'}))
+
+    expect(screen.getByRole('dialog', {name: /thais full art/i})).toBeInTheDocument()
   })
 })
