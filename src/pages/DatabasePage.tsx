@@ -15,12 +15,13 @@ import {
   resolveDatabaseAwakenerTab,
   type DatabaseAwakenerTab,
 } from '@/domain/database-paths'
-import {getRealmLabel} from '@/domain/factions'
-import {wheelMainstatFilterOptions} from '@/domain/wheel-mainstat-filters'
 import {getWheels, type Wheel} from '@/domain/wheels'
 import {loadWheelFullV1ById} from '@/domain/wheels-full-v1-loader'
 
-import {type ActiveFilterChip} from './database/ActiveFilterChips'
+import {
+  buildAwakenerActiveFilterChips,
+  buildWheelActiveFilterChips,
+} from './database/database-active-filter-chips'
 import {DatabaseBrowseLayout} from './database/DatabaseBrowseLayout'
 import {DatabaseFilters} from './database/DatabaseFilters'
 import {DatabaseGrid} from './database/DatabaseGrid'
@@ -159,86 +160,8 @@ export function DatabasePage() {
     })
   }
 
-  const awakenerActiveFilterChips: ActiveFilterChip[] = []
-  if (awakenerBrowseState.query.trim().length > 0) {
-    awakenerActiveFilterChips.push({
-      key: 'query',
-      label: `Search: "${awakenerBrowseState.query.trim()}"`,
-      onClear: awakenerBrowseState.clearQuery,
-    })
-  }
-  if (awakenerBrowseState.realmFilter !== 'ALL') {
-    awakenerActiveFilterChips.push({
-      key: 'realm',
-      label: getRealmLabel(awakenerBrowseState.realmFilter),
-      onClear: () => {
-        awakenerBrowseState.setRealmFilter('ALL')
-      },
-    })
-  }
-  if (awakenerBrowseState.rarityFilter !== 'ALL') {
-    awakenerActiveFilterChips.push({
-      key: 'rarity',
-      label: awakenerBrowseState.rarityFilter,
-      onClear: () => {
-        awakenerBrowseState.setRarityFilter('ALL')
-      },
-    })
-  }
-  if (awakenerBrowseState.typeFilter !== 'ALL') {
-    const typeLabel =
-      awakenerBrowseState.typeFilter === 'ASSAULT'
-        ? 'Assault'
-        : awakenerBrowseState.typeFilter === 'WARDEN'
-          ? 'Warden'
-          : 'Chorus'
-    awakenerActiveFilterChips.push({
-      key: 'type',
-      label: typeLabel,
-      onClear: () => {
-        awakenerBrowseState.setTypeFilter('ALL')
-      },
-    })
-  }
-
-  const wheelActiveFilterChips: ActiveFilterChip[] = []
-  if (wheelBrowseState.query.trim().length > 0) {
-    wheelActiveFilterChips.push({
-      key: 'query',
-      label: `Search: "${wheelBrowseState.query.trim()}"`,
-      onClear: wheelBrowseState.clearQuery,
-    })
-  }
-  if (wheelBrowseState.realmFilter !== 'ALL') {
-    wheelActiveFilterChips.push({
-      key: 'realm',
-      label: getRealmLabel(wheelBrowseState.realmFilter),
-      onClear: () => {
-        wheelBrowseState.setRealmFilter('ALL')
-      },
-    })
-  }
-  if (wheelBrowseState.rarityFilter !== 'ALL') {
-    wheelActiveFilterChips.push({
-      key: 'rarity',
-      label: wheelBrowseState.rarityFilter,
-      onClear: () => {
-        wheelBrowseState.setRarityFilter('ALL')
-      },
-    })
-  }
-  if (wheelBrowseState.mainstatFilter !== 'ALL') {
-    const mainstatLabel =
-      wheelMainstatFilterOptions.find((entry) => entry.id === wheelBrowseState.mainstatFilter)
-        ?.label ?? wheelBrowseState.mainstatFilter
-    wheelActiveFilterChips.push({
-      key: 'mainstat',
-      label: mainstatLabel,
-      onClear: () => {
-        wheelBrowseState.setMainstatFilter('ALL')
-      },
-    })
-  }
+  const awakenerActiveFilterChips = buildAwakenerActiveFilterChips(awakenerBrowseState)
+  const wheelActiveFilterChips = buildWheelActiveFilterChips(wheelBrowseState)
 
   return (
     <section className='space-y-2.5 sm:space-y-3'>

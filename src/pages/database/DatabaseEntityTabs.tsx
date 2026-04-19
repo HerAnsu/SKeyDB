@@ -31,7 +31,7 @@ export function DatabaseEntityTabs({activeEntity, search}: DatabaseEntityTabsPro
 
 function buildTabClassName(active: boolean) {
   const base =
-    '-mb-px inline-flex min-h-10 items-center border-b-2 px-3.5 pb-2 pt-2 text-sm font-semibold tracking-[0.03em] transition-colors focus-visible:outline-none sm:text-base sm:tracking-[0.02em]'
+    '-mb-px inline-flex min-h-11 items-center border-b-2 px-3.5 pb-2 pt-2 text-sm font-semibold tracking-[0.03em] transition-colors focus-visible:outline-none sm:min-h-10 sm:text-base sm:tracking-[0.02em]'
   return active
     ? `${base} border-amber-300/80 text-amber-100 focus-visible:border-amber-200`
     : `${base} border-transparent text-slate-400 hover:border-slate-500/55 hover:text-slate-200 focus-visible:border-amber-200/60 focus-visible:text-amber-200`

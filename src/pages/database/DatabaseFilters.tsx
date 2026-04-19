@@ -1,18 +1,16 @@
 import type {RefObject} from 'react'
 
-import {
-  CatalogChipFilterRow,
-  CatalogFiltersShell,
-  CatalogRealmFilterRow,
-} from './CatalogFiltersShell'
+import {CatalogChipFilterRow, CatalogRealmFilterRow} from './DatabaseChipPrimitives'
 import {
   DATABASE_RARITY_FILTER_IDS,
   DATABASE_REALM_FILTER_IDS,
   DATABASE_TYPE_FILTER_IDS,
+  getTypeFilterLabel,
   type RarityFilterId,
   type RealmFilterId,
   type TypeFilterId,
 } from './database-browse-state'
+import {DatabaseSearchInput} from './DatabaseSearchInput'
 
 interface DatabaseFiltersProps {
   query: string
@@ -35,8 +33,7 @@ const rarityFilterTabs = DATABASE_RARITY_FILTER_IDS.map((id) => ({
 
 const typeFilterTabs = DATABASE_TYPE_FILTER_IDS.map((id) => ({
   id,
-  label:
-    id === 'ALL' ? 'All' : id === 'ASSAULT' ? 'Assault' : id === 'WARDEN' ? 'Warden' : 'Chorus',
+  label: getTypeFilterLabel(id),
 }))
 
 export function DatabaseFilters({
@@ -51,34 +48,37 @@ export function DatabaseFilters({
   onTypeFilterChange,
 }: DatabaseFiltersProps) {
   return (
-    <CatalogFiltersShell
-      onQueryChange={onQueryChange}
-      query={query}
-      searchInputRef={searchInputRef}
-      searchLabel='Search awakeners'
-      searchPlaceholder='Name, tag, realm, or role'
-    >
-      <div className='grid gap-2 lg:grid-cols-2'>
-        <CatalogRealmFilterRow
-          activeRealm={realmFilter}
-          onChange={onRealmFilterChange}
-          realms={REALM_FILTERS}
-        />
+    <div className='space-y-3 sm:space-y-3.5'>
+      <DatabaseSearchInput
+        label='Search awakeners'
+        onQueryChange={onQueryChange}
+        placeholder='Name, tag, realm, or role'
+        query={query}
+        searchInputRef={searchInputRef}
+      />
+      <div className='space-y-2.5 sm:space-y-3'>
+        <div className='grid gap-2 lg:grid-cols-2'>
+          <CatalogRealmFilterRow
+            activeRealm={realmFilter}
+            onChange={onRealmFilterChange}
+            realms={REALM_FILTERS}
+          />
+
+          <CatalogChipFilterRow
+            activeId={rarityFilter}
+            label='Rarity'
+            onChange={onRarityFilterChange}
+            options={rarityFilterTabs}
+          />
+        </div>
 
         <CatalogChipFilterRow
-          activeId={rarityFilter}
-          label='Rarity'
-          onChange={onRarityFilterChange}
-          options={rarityFilterTabs}
+          activeId={typeFilter}
+          label='Type'
+          onChange={onTypeFilterChange}
+          options={typeFilterTabs}
         />
       </div>
-
-      <CatalogChipFilterRow
-        activeId={typeFilter}
-        label='Type'
-        onChange={onTypeFilterChange}
-        options={typeFilterTabs}
-      />
-    </CatalogFiltersShell>
+    </div>
   )
 }

@@ -14,6 +14,19 @@ export type RarityFilterId = (typeof DATABASE_RARITY_FILTER_IDS)[number]
 export const DATABASE_TYPE_FILTER_IDS = ['ALL', 'ASSAULT', 'WARDEN', 'CHORUS'] as const
 export type TypeFilterId = (typeof DATABASE_TYPE_FILTER_IDS)[number]
 
+export function getTypeFilterLabel(id: TypeFilterId): string {
+  if (id === 'ALL') {
+    return 'All'
+  }
+  if (id === 'ASSAULT') {
+    return 'Assault'
+  }
+  if (id === 'WARDEN') {
+    return 'Warden'
+  }
+  return 'Chorus'
+}
+
 export const DATABASE_SORT_OPTIONS: readonly DatabaseSortKey[] = [
   'ALPHABETICAL',
   'RARITY',

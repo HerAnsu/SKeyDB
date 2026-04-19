@@ -1,7 +1,7 @@
 import type {CollectionSortDirection} from '@/domain/collection-sorting'
 import type {DatabaseSortKey} from '@/domain/database-sorting'
 
-import {CatalogFilterChipButton} from './CatalogFiltersShell'
+import {CatalogFilterChipButton} from './DatabaseChipPrimitives'
 import {DATABASE_SORT_OPTIONS} from './database-browse-state'
 import {DatabaseSortControls} from './DatabaseSortControls'
 

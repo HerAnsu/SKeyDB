@@ -21,7 +21,7 @@ export function ActiveFilterChips({chips, onResetAll}: ActiveFilterChipsProps) {
         <button
           key={chip.key}
           aria-label={`Remove ${chip.label} filter`}
-          className='inline-flex min-h-7 items-center gap-1.5 rounded-[2px] border border-amber-300/42 bg-[linear-gradient(180deg,rgba(251,191,36,0.16),rgba(245,158,11,0.07))] px-2 py-0.5 text-amber-50 transition-colors hover:border-amber-200/70 hover:bg-[linear-gradient(180deg,rgba(251,191,36,0.22),rgba(245,158,11,0.1))] focus-visible:border-amber-200/80 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none'
+          className='inline-flex min-h-7 items-center gap-1.5 rounded-[2px] border border-amber-300/42 bg-[linear-gradient(180deg,rgba(251,191,36,0.16),rgba(245,158,11,0.07))] px-2 py-0.5 text-amber-50 transition-colors hover:border-amber-200/70 hover:bg-[linear-gradient(180deg,rgba(251,191,36,0.22),rgba(245,158,11,0.1))] focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none'
           onClick={chip.onClear}
           type='button'
         >
