@@ -1,6 +1,5 @@
 import type {RefObject} from 'react'
 
-import {CatalogChipFilterRow, CatalogRealmFilterRow} from './DatabaseChipPrimitives'
 import {
   DATABASE_RARITY_FILTER_IDS,
   DATABASE_REALM_FILTER_IDS,
@@ -10,6 +9,7 @@ import {
   type RealmFilterId,
   type TypeFilterId,
 } from './database-browse-state'
+import {CatalogChipFilterRow, CatalogRealmFilterRow} from './DatabaseChipPrimitives'
 import {DatabaseSearchInput} from './DatabaseSearchInput'
 
 interface DatabaseFiltersProps {

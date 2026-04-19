@@ -1,8 +1,8 @@
 import type {CollectionSortDirection} from '@/domain/collection-sorting'
 import type {DatabaseSortKey} from '@/domain/database-sorting'
 
-import {CatalogFilterChipButton} from './DatabaseChipPrimitives'
 import {DATABASE_SORT_OPTIONS} from './database-browse-state'
+import {CatalogFilterChipButton} from './DatabaseChipPrimitives'
 import {DatabaseSortControls} from './DatabaseSortControls'
 
 function getDatabaseSortLabel(sortKey: DatabaseSortKey): string {

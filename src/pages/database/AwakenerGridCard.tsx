@@ -1,9 +1,6 @@
 import {getAwakenerCardAsset} from '@/domain/awakener-assets'
 import type {Awakener} from '@/domain/awakeners'
-import {
-  getAwakenerTextColor,
-  type AwakenerTextColorName,
-} from '@/domain/awakeners-text-colors'
+import {getAwakenerTextColor, type AwakenerTextColorName} from '@/domain/awakeners-text-colors'
 import {getRealmTint} from '@/domain/factions'
 import {getMainstatIcon} from '@/domain/mainstats'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
