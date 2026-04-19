@@ -1,8 +1,16 @@
 import {useState, type CSSProperties, type ReactNode} from 'react'
 
+import {
+  DATABASE_DETAIL_BODY_CLASS,
+  DATABASE_DETAIL_FIXED_UTILITY_ACTION_CLASS,
+  getDatabaseDetailLorePreviewHeight,
+  getDatabaseDetailLoreStyle,
+} from './database-detail-typography'
+
 interface WheelLoreTextProps {
   lore: string
   previewLineCount?: number
+  defaultExpanded?: boolean
 }
 
 const LORE_MARKUP_RE = /(@[1-4]|<([A-Za-z]+):([^>]+)>|<([A-Za-z]+)>)/g
@@ -73,7 +81,7 @@ function WheelLoreRedaction({level}: {level: 1 | 2 | 3 | 4}) {
   return (
     <span
       aria-label='Redacted lore text'
-      className='mx-[0.08em] inline-flex translate-y-[0.08em] items-end gap-px align-baseline text-slate-200/90'
+      className='mx-[0.08em] inline-flex translate-y-[0.08em] items-end gap-px align-baseline'
       role='img'
     >
       {glyphs.map((glyphKey, glyphIndex) => {
@@ -84,10 +92,12 @@ function WheelLoreRedaction({level}: {level: 1 | 2 | 3 | 4}) {
             aria-hidden='true'
             data-glyph-key={glyphKey}
             data-lore-redaction-glyph=''
-            height='14'
             key={buildLoreKey('wheel-lore-redaction-glyph', level, glyphIndex)}
+            style={{
+              width: `calc(var(--desc-font-scale, 1) * ${String(glyph.width)}px)`,
+              height: 'calc(var(--desc-font-scale, 1) * 14px)',
+            }}
             viewBox={glyph.viewBox}
-            width={glyph.width}
           >
             {glyph.paths.map((path, pathIndex) => (
               <path
@@ -152,7 +162,7 @@ function renderLoreInline(text: string, keyPrefix: string): ReactNode[] {
       }
     } else if (bareTagName.length > 0) {
       nodes.push(
-        <span className='text-slate-200' key={buildLoreKey(keyPrefix, 'token', partIndex)}>
+        <span key={buildLoreKey(keyPrefix, 'token', partIndex)}>
           {formatLoreTokenLabel(bareTagName)}
         </span>,
       )
@@ -227,11 +237,15 @@ function renderLoreParagraphs(paragraphs: LoreParagraph[]) {
   ))
 }
 
-export function WheelLoreText({lore, previewLineCount = 4}: WheelLoreTextProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
+export function WheelLoreText({
+  lore,
+  previewLineCount = 4,
+  defaultExpanded = false,
+}: WheelLoreTextProps) {
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded)
   const paragraphs = buildLoreParagraphs(lore)
   const preview = trimLoreParagraphs(paragraphs, previewLineCount)
-  const previewHeight = `${String(previewLineCount * 1.625)}rem`
+  const previewHeight = getDatabaseDetailLorePreviewHeight(previewLineCount)
 
   return (
     <div className='mt-2 max-w-[66ch]'>
@@ -241,16 +255,17 @@ export function WheelLoreText({lore, previewLineCount = 4}: WheelLoreTextProps) 
           style={{'--wheel-lore-preview-height': previewHeight} as CSSProperties}
         >
           <div
-            className='wheel-lore-body space-y-3 text-sm leading-[1.625rem] text-slate-400'
+            className={`wheel-lore-body space-y-3 ${DATABASE_DETAIL_BODY_CLASS}`}
             data-expanded={isExpanded ? 'true' : 'false'}
             data-wheel-lore-content=''
+            style={getDatabaseDetailLoreStyle()}
           >
             {renderLoreParagraphs(paragraphs)}
           </div>
 
           <button
             aria-expanded={isExpanded}
-            className='mt-3 text-[11px] tracking-[0.18em] text-amber-200/85 uppercase transition-colors hover:text-amber-100'
+            className={`mt-3 ${DATABASE_DETAIL_FIXED_UTILITY_ACTION_CLASS} text-amber-200/85 hover:text-amber-100`}
             onClick={() => {
               setIsExpanded((current) => !current)
             }}
@@ -263,8 +278,9 @@ export function WheelLoreText({lore, previewLineCount = 4}: WheelLoreTextProps) 
 
       {!preview.truncated ? (
         <div
-          className='space-y-3 text-sm leading-[1.625rem] text-slate-400'
+          className={`space-y-3 ${DATABASE_DETAIL_BODY_CLASS}`}
           data-wheel-lore-content=''
+          style={getDatabaseDetailLoreStyle()}
         >
           {renderLoreParagraphs(paragraphs)}
         </div>

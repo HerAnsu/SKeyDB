@@ -1,6 +1,6 @@
 import {Suspense, useMemo, useState} from 'react'
 
-import {FaXmark} from 'react-icons/fa6'
+import {FaGear, FaXmark} from 'react-icons/fa6'
 
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import type {Wheel} from '@/domain/wheels'
@@ -9,10 +9,12 @@ import type {WheelFullV1Record} from '@/domain/wheels-full-v1'
 import {DatabasePopoverContext} from './database-popover-context'
 import {DatabaseArtViewerOverlay} from './DatabaseArtViewerOverlay'
 import {DatabasePopoverRoot} from './DatabasePopoverRoot'
+import {getDescriptionFontScaleStyle} from './font-scale'
 import {useWheelDetailModalState} from './useWheelDetailModalState'
 import {WheelDetailArtwork} from './WheelDetailArtwork'
 import {WheelDetailContent} from './WheelDetailContent'
 import {WheelDetailSearchBar} from './WheelDetailSearchBar'
+import {WheelDetailSettingsPanel} from './WheelDetailSettingsPanel'
 
 interface WheelDetailModalProps {
   wheel: Wheel
@@ -21,7 +23,7 @@ interface WheelDetailModalProps {
   onClose: () => void
   onSelectAwakener?: (
     awakener: {id: number; name: string},
-    tab?: 'overview' | 'cards' | 'builds' | 'teams',
+    tab?: 'overview' | 'skills' | 'builds' | 'teams',
   ) => void
   onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
 }
@@ -39,12 +41,15 @@ export function WheelDetailModal({
     chrome,
     descriptionRank,
     enhanceLevel,
+    preferences,
     popoverContextValue,
     popoverRootProps,
     referenceLayer,
     resolvedMainstatValue,
     search,
     setEnhanceLevel,
+    updateSharedPreferences,
+    updateWheelPreferences,
     wheelDescriptionRecord,
   } = useWheelDetailModalState({
     fullDataV1,
@@ -53,7 +58,14 @@ export function WheelDetailModal({
     wheel,
     wheels,
   })
-  const {handleOverlayClick, handlePanelKeyDown, panelRef} = chrome
+  const {
+    handleOverlayClick,
+    handlePanelKeyDown,
+    isSettingsOpen,
+    panelRef,
+    settingsRef,
+    setIsSettingsOpen,
+  } = chrome
   const wheelAsset = getWheelAssetById(wheel.id)
   const fullArtAlt = useMemo(() => `${wheel.name} full art`, [wheel.name])
 
@@ -92,15 +104,38 @@ export function WheelDetailModal({
           className='relative flex max-h-[calc(100dvh-7rem)] min-h-[350px] w-full overflow-hidden border border-amber-200/55 bg-slate-950/[.985] pb-5 shadow-[0_24px_70px_rgba(2,6,23,0.8)] md:max-h-[calc(100dvh-8rem)]'
           ref={panelRef}
           role='dialog'
+          style={getDescriptionFontScaleStyle(preferences.shared.fontScale)}
         >
-          <button
-            aria-label='Close wheel detail'
-            className='absolute top-3 right-3 z-10 inline-flex h-8 w-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100'
-            onClick={onClose}
-            type='button'
-          >
-            <FaXmark className='h-4 w-4' />
-          </button>
+          <div className='absolute top-3 right-3 z-10 flex items-center gap-1.5' ref={settingsRef}>
+            <button
+              aria-expanded={isSettingsOpen}
+              aria-label='Open detail settings'
+              className='inline-flex h-8 w-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100'
+              data-detail-settings-trigger=''
+              onClick={() => {
+                setIsSettingsOpen((previous) => !previous)
+              }}
+              type='button'
+            >
+              <FaGear className='h-3.5 w-3.5' />
+            </button>
+            <button
+              aria-label='Close wheel detail'
+              className='inline-flex h-8 w-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100'
+              onClick={onClose}
+              type='button'
+            >
+              <FaXmark className='h-4 w-4' />
+            </button>
+            {isSettingsOpen ? (
+              <WheelDetailSettingsPanel
+                onUpdateSharedPreferences={updateSharedPreferences}
+                onUpdateWheelPreferences={updateWheelPreferences}
+                preferences={preferences.wheel}
+                sharedPreferences={preferences.shared}
+              />
+            ) : null}
+          </div>
           <DatabasePopoverContext.Provider value={popoverContextValue}>
             <div className='flex max-h-[calc(100dvh-8rem)] min-h-0'>
               <aside className='database-scrollbar hidden w-[18.75rem] shrink-0 overflow-y-auto bg-[linear-gradient(180deg,rgba(15,23,42,0.96),rgba(2,6,23,0.99))] px-6 py-6 md:flex md:items-start md:justify-center'>
@@ -121,6 +156,7 @@ export function WheelDetailModal({
                   <WheelDetailContent
                     descriptionRank={descriptionRank}
                     enhanceLevel={enhanceLevel}
+                    expandLoreByDefault={preferences.wheel.expandLoreByDefault}
                     fullDataV1={fullDataV1}
                     mainstatValue={resolvedMainstatValue}
                     mobileArtwork={
@@ -139,11 +175,16 @@ export function WheelDetailModal({
                     onEnhanceLevelChange={setEnhanceLevel}
                     onSelectAwakener={onSelectAwakener}
                     referenceLayer={referenceLayer}
+                    showTagIcons={preferences.shared.showTagIcons}
                     wheel={wheel}
                     wheelDescriptionRecord={wheelDescriptionRecord}
                   />
                   <Suspense fallback={null}>
-                    <DatabasePopoverRoot {...popoverRootProps} />
+                    <DatabasePopoverRoot
+                      {...popoverRootProps}
+                      fontScale={preferences.shared.fontScale}
+                      showTagIcons={preferences.shared.showTagIcons}
+                    />
                   </Suspense>
                 </div>
               </div>

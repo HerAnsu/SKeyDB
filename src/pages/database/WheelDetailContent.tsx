@@ -6,6 +6,23 @@ import {getRealmAccent, getRealmLabel} from '@/domain/realms'
 import type {Wheel} from '@/domain/wheels'
 import type {WheelFullV1Record} from '@/domain/wheels-full-v1'
 
+import {
+  DATABASE_DETAIL_BODY_CLASS,
+  DATABASE_DETAIL_HEADER_META_CLASS,
+  DATABASE_DETAIL_HEADER_TITLE_CLASS,
+  DATABASE_DETAIL_META_LINK_CLASS,
+  DATABASE_DETAIL_META_PRIMARY_CLASS,
+  DATABASE_DETAIL_META_ROW_CLASS,
+  DATABASE_DETAIL_META_SEPARATOR_CLASS,
+  DATABASE_DETAIL_SECTION_HEADING_CLASS,
+  DATABASE_DETAIL_SECTION_HEADING_MUTED_CLASS,
+  DATABASE_DETAIL_VALUE_CLASS,
+  DATABASE_DETAIL_VALUE_LABEL_CLASS,
+  DATABASE_DETAIL_VALUE_ROW_CLASS,
+  getDatabaseDetailBodyStyle,
+  getDatabaseDetailSectionHeadingStyle,
+  getDatabaseDetailValueStyle,
+} from './database-detail-typography'
 import {RichDescription} from './RichDescription'
 import {WheelEnhanceControl} from './WheelEnhanceControl'
 import {WheelLoreText} from './WheelLoreText'
@@ -17,12 +34,14 @@ interface WheelDetailContentProps {
   enhanceLevel: number
   mainstatValue: string
   referenceLayer: ResolvedDatabaseReferenceLayer | null
+  showTagIcons?: boolean
+  expandLoreByDefault?: boolean
   wheelDescriptionRecord: WheelDatabaseDescriptionRecord
   onEnhanceLevelChange: (level: number) => void
   mobileArtwork?: React.ReactNode
   onSelectAwakener?: (
     awakener: {id: number; name: string},
-    tab?: 'overview' | 'cards' | 'builds' | 'teams',
+    tab?: 'overview' | 'skills' | 'builds' | 'teams',
   ) => void
 }
 
@@ -34,7 +53,9 @@ export function WheelDetailContent({
   mobileArtwork,
   onEnhanceLevelChange,
   onSelectAwakener,
+  expandLoreByDefault = false,
   referenceLayer,
+  showTagIcons = true,
   wheel,
   wheelDescriptionRecord,
 }: WheelDetailContentProps) {
@@ -54,19 +75,17 @@ export function WheelDetailContent({
           {mobileArtwork ? <div className='shrink-0 md:hidden'>{mobileArtwork}</div> : null}
           <div className='min-w-0'>
             <div className='flex flex-wrap items-center gap-2'>
-              <h3 className='ui-title text-[2rem] leading-none text-amber-100 md:text-3xl'>
-                {wheel.name}
-              </h3>
+              <h3 className={DATABASE_DETAIL_HEADER_TITLE_CLASS}>{wheel.name}</h3>
             </div>
-            <p className='mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] tracking-[0.18em] text-slate-500 uppercase'>
-              <span className='text-amber-100/90'>{wheel.rarity}</span>
-              <span className='text-slate-700'>•</span>
+            <p className={`${DATABASE_DETAIL_META_ROW_CLASS} ${DATABASE_DETAIL_HEADER_META_CLASS}`}>
+              <span className={DATABASE_DETAIL_META_PRIMARY_CLASS}>{wheel.rarity}</span>
+              <span className={DATABASE_DETAIL_META_SEPARATOR_CLASS}>•</span>
               <span style={{color: realmAccent}}>{realmLabel}</span>
               {ownerAwakenerId && ownerName && displayOwnerName ? (
                 <>
-                  <span className='text-slate-700'>•</span>
+                  <span className={DATABASE_DETAIL_META_SEPARATOR_CLASS}>•</span>
                   <button
-                    className='cursor-pointer tracking-normal text-amber-100 normal-case transition-colors hover:text-amber-50'
+                    className={DATABASE_DETAIL_META_LINK_CLASS}
                     onClick={() => {
                       onSelectAwakener?.({id: ownerAwakenerId, name: ownerName}, 'overview')
                     }}
@@ -98,13 +117,12 @@ export function WheelDetailContent({
               </span>
             ) : null}
             <div className='min-w-0'>
-              <div className='flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[15px] text-slate-300'>
-                <span className='font-["Droid_Serif"] text-base text-slate-200'>
-                  {mainstatLabel}
-                </span>
-                <span className='font-["Droid_Serif"] text-base text-amber-100'>
-                  {mainstatValue}
-                </span>
+              <div
+                className={DATABASE_DETAIL_VALUE_ROW_CLASS}
+                style={getDatabaseDetailValueStyle()}
+              >
+                <span className={DATABASE_DETAIL_VALUE_LABEL_CLASS}>{mainstatLabel}</span>
+                <span className={DATABASE_DETAIL_VALUE_CLASS}>{mainstatValue}</span>
               </div>
             </div>
           </div>
@@ -113,24 +131,38 @@ export function WheelDetailContent({
         </section>
 
         <section className='mt-5'>
-          <h4 className='ui-title text-[11px] tracking-[0.22em] text-amber-200/88 uppercase'>
+          <h4
+            className={DATABASE_DETAIL_SECTION_HEADING_CLASS}
+            style={getDatabaseDetailSectionHeadingStyle()}
+          >
             Description
           </h4>
-          <p className='mt-3 max-w-[68ch] text-[15px] leading-[1.7] text-slate-300'>
+          <p
+            className={`mt-3 max-w-[68ch] ${DATABASE_DETAIL_BODY_CLASS}`}
+            style={getDatabaseDetailBodyStyle()}
+          >
             <RichDescription
               descriptionRank={descriptionRank}
               record={wheelDescriptionRecord}
               referenceLayer={referenceLayer}
+              showTagIcons={showTagIcons}
             />
           </p>
         </section>
 
         {lore ? (
           <section className='mt-5 border-t border-slate-800/80 pt-4'>
-            <h4 className='ui-title text-[11px] tracking-[0.22em] text-slate-400 uppercase'>
+            <h4
+              className={DATABASE_DETAIL_SECTION_HEADING_MUTED_CLASS}
+              style={getDatabaseDetailSectionHeadingStyle()}
+            >
               Lore
             </h4>
-            <WheelLoreText lore={lore} />
+            <WheelLoreText
+              defaultExpanded={expandLoreByDefault}
+              key={`${wheel.id}:${expandLoreByDefault ? 'expanded' : 'collapsed'}`}
+              lore={lore}
+            />
           </section>
         ) : null}
       </div>

@@ -1,5 +1,5 @@
-import {fireEvent, render, screen} from '@testing-library/react'
-import {describe, expect, it, vi} from 'vitest'
+import {fireEvent, render, screen, waitFor} from '@testing-library/react'
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {resolveDescriptionTemplate} from '@/domain/description-args'
 import {
@@ -66,6 +66,12 @@ function makeWheelFullRecord(overrides: Partial<WheelFullV1Record> = {}): WheelF
 }
 
 describe('WheelDetailModal', () => {
+  beforeEach(() => {
+    mockGetWheelAssetById.mockReset()
+    mockGetWheelAssetById.mockReturnValue('/wheel.webp')
+    window.localStorage.clear()
+  })
+
   it('uses the wheel-specific enhance scaling tiers for description and mainstat values', () => {
     const wheel = makeWheel()
     const fullDataV1 = makeWheelFullRecord()
@@ -247,6 +253,134 @@ describe('WheelDetailModal', () => {
     )
   })
 
+  it('updates default wheel progression for the next wheel without changing the current live state', async () => {
+    const firstWheel = makeWheel()
+    const secondWheel = makeWheel({
+      id: 'D12',
+      name: 'Shared Dream',
+      ownerAwakenerId: undefined,
+      ownerAwakenerName: undefined,
+      rarity: 'SR',
+      realm: 'CHAOS',
+      mainstatKey: 'CRIT_RATE',
+    })
+
+    const {rerender} = render(
+      <WheelDetailModal
+        fullDataV1={makeWheelFullRecord()}
+        onClose={vi.fn()}
+        wheel={firstWheel}
+        wheels={[firstWheel, secondWheel]}
+      />,
+    )
+
+    expect(screen.getByRole('slider', {name: /^enhance$/i})).toHaveAttribute('aria-valuetext', 'E0')
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open detail settings'}))
+    fireEvent.change(screen.getByRole('slider', {name: /default enlighten/i}), {
+      target: {value: '7'},
+    })
+
+    expect(screen.getByRole('slider', {name: /^enhance$/i})).toHaveAttribute('aria-valuetext', 'E0')
+    expect(window.localStorage.getItem('database-detail-preferences')).toContain(
+      '"defaultEnhanceLevel":7',
+    )
+
+    rerender(
+      <WheelDetailModal
+        fullDataV1={makeWheelFullRecord({
+          id: secondWheel.id,
+          assetId: secondWheel.assetId,
+          name: secondWheel.name,
+          rarity: secondWheel.rarity,
+          realm: secondWheel.realm,
+          awakener: secondWheel.awakener,
+          ownerAwakenerId: secondWheel.ownerAwakenerId,
+          ownerAwakenerName: secondWheel.ownerAwakenerName,
+          aliases: secondWheel.aliases,
+          mainstatKey: secondWheel.mainstatKey,
+          mainstatSeriesKey: buildWheelMainstatSeriesKey(
+            secondWheel.rarity,
+            secondWheel.mainstatKey,
+          ),
+        })}
+        onClose={vi.fn()}
+        wheel={secondWheel}
+        wheels={[firstWheel, secondWheel]}
+      />,
+    )
+
+    await waitFor(() => {
+      expect(screen.getByRole('slider', {name: /^enhance$/i})).toHaveAttribute(
+        'aria-valuetext',
+        'E3 + 4',
+      )
+    })
+  })
+
+  it('persists expanding lore on open and applies it when loading the next wheel', async () => {
+    const firstWheel = makeWheel()
+    const secondWheel = makeWheel({
+      id: 'D12',
+      name: 'Shared Dream',
+      ownerAwakenerId: undefined,
+      ownerAwakenerName: undefined,
+      rarity: 'SR',
+      realm: 'CHAOS',
+      mainstatKey: 'CRIT_RATE',
+    })
+
+    const {rerender} = render(
+      <WheelDetailModal
+        fullDataV1={makeWheelFullRecord({
+          lore: 'Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6',
+        })}
+        onClose={vi.fn()}
+        wheel={firstWheel}
+        wheels={[firstWheel, secondWheel]}
+      />,
+    )
+
+    expect(screen.getByText('Show More')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open detail settings'}))
+    fireEvent.click(screen.getByRole('checkbox', {name: /expand lore on open/i}))
+
+    expect(window.localStorage.getItem('database-detail-preferences')).toContain(
+      '"expandLoreByDefault":true',
+    )
+    expect(screen.getByText('Show Less')).toBeInTheDocument()
+
+    rerender(
+      <WheelDetailModal
+        fullDataV1={makeWheelFullRecord({
+          id: secondWheel.id,
+          assetId: secondWheel.assetId,
+          name: secondWheel.name,
+          rarity: secondWheel.rarity,
+          realm: secondWheel.realm,
+          awakener: secondWheel.awakener,
+          ownerAwakenerId: secondWheel.ownerAwakenerId,
+          ownerAwakenerName: secondWheel.ownerAwakenerName,
+          aliases: secondWheel.aliases,
+          mainstatKey: secondWheel.mainstatKey,
+          mainstatSeriesKey: buildWheelMainstatSeriesKey(
+            secondWheel.rarity,
+            secondWheel.mainstatKey,
+          ),
+          lore: 'Other 1\nOther 2\nOther 3\nOther 4\nOther 5\nOther 6',
+        })}
+        onClose={vi.fn()}
+        wheel={secondWheel}
+        wheels={[firstWheel, secondWheel]}
+      />,
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('Show Less')).toBeInTheDocument()
+    })
+  })
+
   it('omits owner and lore chrome when the wheel has no owner or lore data', () => {
     render(
       <WheelDetailModal
@@ -289,6 +423,58 @@ describe('WheelDetailModal', () => {
     expect(screen.queryByText(/<Italic:/)).not.toBeInTheDocument()
     expect(screen.queryByText(/@3/)).not.toBeInTheDocument()
     expect(screen.getByLabelText('Redacted lore text')).toBeInTheDocument()
+  })
+
+  it('uses shared database detail typography roles for scaled text and fixed utility chrome', () => {
+    window.localStorage.setItem(
+      'database-detail-preferences',
+      JSON.stringify({
+        shared: {
+          showTagIcons: true,
+          clickOutsideClosesPopovers: true,
+          fontScale: 'large',
+        },
+        awakener: {
+          showVisibleScaling: true,
+          defaultSelection: {},
+        },
+        wheel: {
+          defaultEnhanceLevel: 0,
+          expandLoreByDefault: true,
+        },
+      }),
+    )
+
+    render(
+      <WheelDetailModal
+        fullDataV1={makeWheelFullRecord({
+          lore: 'Pain, intense pain filled her every sense.\n\n<Italic:Still she kept diving.>\nRetreat to @3!\nLine 4\nLine 5',
+        })}
+        onClose={vi.fn()}
+        wheel={makeWheel()}
+        wheels={[makeWheel()]}
+      />,
+    )
+
+    expect(screen.getByRole('dialog', {name: /merciful nurturing details/i})).toHaveStyle({
+      '--desc-font-scale': '1.67',
+    })
+    expect(screen.getByRole('heading', {name: 'Merciful Nurturing'})).toHaveClass('text-xl')
+    expect(
+      screen.getByRole('heading', {name: 'Merciful Nurturing'}).getAttribute('style'),
+    ).toBeNull()
+    expect(screen.getByText('SSR').closest('p')).toHaveClass('text-xs')
+    expect(screen.getByText('SSR').closest('p')?.getAttribute('style')).toBeNull()
+    expect(
+      screen
+        .getByText(/Gain 10% Keyflare\./)
+        .closest('p')
+        ?.getAttribute('style'),
+    ).toContain('12px')
+    expect(document.querySelector('[data-wheel-lore-content]')?.getAttribute('style')).toContain(
+      '20px',
+    )
+    expect(screen.getByRole('button', {name: 'Show Less'}).getAttribute('style')).toBeNull()
   })
 
   it('keeps the header fixed and scrolls only the detail body region', () => {
