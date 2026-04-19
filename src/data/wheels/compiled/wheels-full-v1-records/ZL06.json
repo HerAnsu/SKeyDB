@@ -1,0 +1,18 @@
+{
+  "id": "ZL06",
+  "assetId": "Weapon_Full_ZL06",
+  "name": "Annihilated Rebirth",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Annihilated Rebirth"],
+  "searchTags": [],
+  "mainstatKey": "ALIEMUS_REGEN",
+  "mainstatSeriesKey": "SSR:ALIEMUS_REGEN",
+  "descriptionTemplate": "Team Unique: After the wielder releases Exalt, the Base DMG of Exalt is increased by [StateArg1]%, Shield and HP Recovery are increased by [StateArg2]%, stacking up to 5 times. After completing exploration, the Affinity gained by the wielder increases by [StateArg3]%.",
+  "descriptionArgs": {
+    "StateArg1": {"kind": "scaling", "values": ["7", "8", "9", "10"]},
+    "StateArg2": {"kind": "scaling", "values": ["2", "3", "4", "5"]},
+    "StateArg3": {"kind": "scaling", "values": ["10", "15", "20", "25"]}
+  },
+  "lore": "You step onto a barren, lifeless wasteland.\n\nAll traces of humanity have long vanished. Withered souls trudge through ash and smog, barely clinging to breath.\n\nSurvival here is no triumph. \nNo one knows where the journey ends. They wander, and wander, and wander still, trapped in an eternal loop of desolation.\n\nUntil their steps falter, and they collapse onto the scorched earth, eyes turned skyward, hands reaching out to plead:\n\nMay my journey's end become a new beginning.\n\nLet these bones be soil, be sustenance, be spring, so that fragile shoots may rise again through dust."
+}

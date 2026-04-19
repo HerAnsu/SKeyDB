@@ -4,6 +4,7 @@ export {
   DATABASE_REALM_FILTER_IDS,
   DATABASE_SORT_OPTIONS,
   DATABASE_TYPE_FILTER_IDS,
+  getTypeFilterLabel,
   parseDatabaseBrowseState,
   patchDatabaseBrowseState,
   type DatabaseBrowseState,

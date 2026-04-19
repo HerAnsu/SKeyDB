@@ -8,7 +8,7 @@ describe('getWheels', () => {
     const wheels = getWheels()
 
     expect(wheels.length).toBeGreaterThan(0)
-    expect(wheels[0]).toEqual({
+    expect(wheels[0]).toMatchObject({
       id: expect.any(String),
       assetId: expect.any(String),
       name: expect.any(String),
@@ -23,6 +23,8 @@ describe('getWheels', () => {
     ).toBe(true)
     expect(wheels.every((wheel) => wheel.name.trim().length > 0)).toBe(true)
     expect(wheels.every((wheel) => typeof wheel.awakener === 'string')).toBe(true)
+    expect(wheels.every((wheel) => Array.isArray(wheel.aliases))).toBe(true)
+    expect(wheels.every((wheel) => Array.isArray(wheel.tags))).toBe(true)
     expect(wheels.every((wheel) => typeof wheel.mainstatKey === 'string')).toBe(true)
   })
 

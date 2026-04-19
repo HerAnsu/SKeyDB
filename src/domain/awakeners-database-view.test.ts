@@ -455,6 +455,7 @@ describe('awakeners-database-view', () => {
       {key: 'Exalt', label: 'Card · Exalt · Cost —'},
       {key: 'OverExalt', label: 'Card · Over Exalt · Cost —'},
     ])
+    expect(view.overExalt?.key).toBe('OverExalt')
     expect(view.enlightens.map((entry) => ({key: entry.key, label: entry.label}))).toEqual([
       {key: 'E1', label: 'Enlighten · E1'},
       {key: 'E2', label: 'Enlighten · E2'},

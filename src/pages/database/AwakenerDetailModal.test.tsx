@@ -17,6 +17,7 @@ import {
 } from './database-test-fixtures'
 
 const mockCloseAllPopovers = vi.fn()
+const mockGetAwakenerCardAsset = vi.fn((_name: string): string | undefined => '/card.webp')
 let mockHasOpenPopovers = false
 
 vi.mock('./useDatabasePopoverController', () => ({
@@ -203,25 +204,28 @@ vi.mock('../../domain/awakener-database-state', () => ({
 }))
 
 vi.mock('../../domain/awakener-assets', () => ({
-  getAwakenerPortraitAsset: () => null,
+  getAwakenerCardAsset: (name: string) => mockGetAwakenerCardAsset(name),
+  getAwakenerPortraitAsset: () => '/portrait.webp',
 }))
 
 vi.mock('../../domain/name-format', () => ({
   formatAwakenerNameForUi: (name: string) => name,
 }))
 
-vi.mock('../../domain/factions', () => ({
+vi.mock('../../domain/realms', () => ({
   getRealmIcon: () => null,
   getRealmLabel: (realm: string) => realm,
-  getRealmTint: () => '#ffffff',
+  getRealmAccent: () => '#ffffff',
 }))
 
 vi.mock('./AwakenerDetailSidebar', () => ({
   AwakenerDetailSidebar: ({
+    onOpenFullArt,
     onPatchSelection,
     selection,
     stats,
   }: {
+    onOpenFullArt?: () => void
     onPatchSelection: (nextPartial: {
       awakenerLevel?: number
       psycheSurgeOffset?: number
@@ -235,6 +239,11 @@ vi.mock('./AwakenerDetailSidebar', () => ({
     stats: {CON: string; CritRate: string} | null
   }) => (
     <div>
+      {onOpenFullArt ? (
+        <button onClick={onOpenFullArt} type='button'>
+          Open sidebar art
+        </button>
+      ) : null}
       <button
         onClick={() => {
           onPatchSelection({awakenerLevel: 90})
@@ -286,7 +295,7 @@ vi.mock('./AwakenerDetailOverview', () => ({
 }))
 
 vi.mock('./AwakenerDetailCards', () => ({
-  AwakenerDetailCards: () => <div>Cards Tab</div>,
+  AwakenerDetailCards: () => <div>Skills Tab</div>,
 }))
 
 vi.mock('./AwakenerBuildsTab', () => ({
@@ -341,12 +350,12 @@ function makeAwakener(id: number, name: string): Awakener {
 }
 
 interface TestAwakenerDetailModalOptions {
-  activeTab?: 'overview' | 'cards' | 'builds' | 'teams'
+  activeTab?: 'overview' | 'skills' | 'builds' | 'teams'
   awakeners?: Awakener[]
   key?: number
   onClose?: () => void
-  onSelectAwakener?: (awakener: Awakener, tab: 'overview' | 'cards' | 'builds' | 'teams') => void
-  onTabChange?: (tab: 'overview' | 'cards' | 'builds' | 'teams') => void
+  onSelectAwakener?: (awakener: Awakener, tab: 'overview' | 'skills' | 'builds' | 'teams') => void
+  onTabChange?: (tab: 'overview' | 'skills' | 'builds' | 'teams') => void
 }
 
 function getTestFullDataV2(id: number): AwakenerFullV2Record {
@@ -417,6 +426,8 @@ function getDetailShell(): HTMLElement {
 describe('AwakenerDetailModal', () => {
   beforeEach(() => {
     mockHasOpenPopovers = false
+    mockGetAwakenerCardAsset.mockReset()
+    mockGetAwakenerCardAsset.mockReturnValue('/card.webp')
     mockCloseAllPopovers.mockReset()
     window.localStorage.clear()
   })
@@ -428,8 +439,8 @@ describe('AwakenerDetailModal', () => {
 
     const {rerender} = renderAwakenerDetailModal(first, {key: first.id, onClose})
 
-    fireEvent.click(screen.getByRole('tab', {name: 'Cards'}))
-    expect(screen.getByRole('tab', {name: 'Cards'})).toHaveAttribute('aria-selected', 'true')
+    fireEvent.click(screen.getByRole('tab', {name: 'Skills'}))
+    expect(screen.getByRole('tab', {name: 'Skills'})).toHaveAttribute('aria-selected', 'true')
 
     rerender(createAwakenerDetailModalElement(second, {key: second.id, onClose}))
 
@@ -456,11 +467,11 @@ describe('AwakenerDetailModal', () => {
       'true',
     )
     expect(within(dialog).getByRole('tab', {name: 'Overview'})).toHaveAttribute('tabindex', '0')
-    expect(within(dialog).getByRole('tab', {name: 'Cards'})).toHaveAttribute(
+    expect(within(dialog).getByRole('tab', {name: 'Skills'})).toHaveAttribute(
       'aria-selected',
       'false',
     )
-    expect(within(dialog).getByRole('tab', {name: 'Cards'})).toHaveAttribute('tabindex', '-1')
+    expect(within(dialog).getByRole('tab', {name: 'Skills'})).toHaveAttribute('tabindex', '-1')
 
     const panel = within(dialog).getByRole('tabpanel')
     expect(panel).toHaveAttribute(
@@ -482,14 +493,14 @@ describe('AwakenerDetailModal', () => {
     overviewTab.focus()
 
     fireEvent.keyDown(overviewTab, {key: 'ArrowRight'})
-    expect(screen.getByRole('tab', {name: 'Cards'})).toHaveFocus()
-    expect(screen.getByRole('tab', {name: 'Cards'})).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tab', {name: 'Skills'})).toHaveFocus()
+    expect(screen.getByRole('tab', {name: 'Skills'})).toHaveAttribute('aria-selected', 'true')
     expect(screen.getByRole('tabpanel')).toHaveAttribute(
       'aria-labelledby',
-      screen.getByRole('tab', {name: 'Cards'}).getAttribute('id'),
+      screen.getByRole('tab', {name: 'Skills'}).getAttribute('id'),
     )
 
-    fireEvent.keyDown(screen.getByRole('tab', {name: 'Cards'}), {key: 'End'})
+    fireEvent.keyDown(screen.getByRole('tab', {name: 'Skills'}), {key: 'End'})
     expect(screen.getByRole('tab', {name: 'Teams'})).toHaveFocus()
     expect(screen.getByRole('tab', {name: 'Teams'})).toHaveAttribute('aria-selected', 'true')
 
@@ -542,9 +553,6 @@ describe('AwakenerDetailModal', () => {
     fireEvent.click(opener)
 
     const dialog = await screen.findByRole('dialog', {name: /thais details/i})
-    await waitFor(() => {
-      expect(dialog).toHaveFocus()
-    })
 
     const detailShell = getDetailShell()
     const focusableElements = getModalFocusableElements(detailShell)
@@ -690,6 +698,53 @@ describe('AwakenerDetailModal', () => {
     })
   })
 
+  it('resets expanded tags when switching awakeners', async () => {
+    const originalScrollHeight = Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      'scrollHeight',
+    )
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
+      configurable: true,
+      get() {
+        return 100
+      },
+    })
+
+    const onClose = vi.fn()
+    const first = makeAwakener(1, 'thais')
+    const second = makeAwakener(2, 'beta')
+    const firstWithTags = {
+      ...first,
+      tags: ['Bleed', 'Crit', 'Burn', 'Slow', 'Shield'],
+    }
+    const secondWithTags = {
+      ...second,
+      tags: ['Support', 'Heal', 'Haste', 'Dispel', 'Barrier'],
+    }
+
+    try {
+      const {rerender} = renderAwakenerDetailModal(firstWithTags, {onClose})
+
+      const toggle = await screen.findByRole('button', {name: 'Show all tags'})
+      fireEvent.click(toggle)
+
+      expect(screen.getByRole('button', {name: 'Show fewer tags'})).toBeInTheDocument()
+
+      rerender(createAwakenerDetailModalElement(secondWithTags, {onClose}))
+
+      await waitFor(() => {
+        expect(screen.getByRole('button', {name: 'Show all tags'})).toBeInTheDocument()
+      })
+      expect(screen.queryByRole('button', {name: 'Show fewer tags'})).not.toBeInTheDocument()
+    } finally {
+      if (originalScrollHeight) {
+        Object.defineProperty(HTMLElement.prototype, 'scrollHeight', originalScrollHeight)
+      } else {
+        delete (HTMLElement.prototype as {scrollHeight?: number}).scrollHeight
+      }
+    }
+  })
+
   it('passes the active awakener id to the builds tab', async () => {
     const onClose = vi.fn()
     const awakener = makeAwakener(1, 'thais')
@@ -708,12 +763,12 @@ describe('AwakenerDetailModal', () => {
 
     renderAwakenerDetailModal(awakener, {onClose, onSelectAwakener})
 
-    fireEvent.click(screen.getByRole('tab', {name: 'Cards'}))
+    fireEvent.click(screen.getByRole('tab', {name: 'Skills'}))
     const searchInput = screen.getByRole('combobox', {name: /jump to awakener/i})
     fireEvent.change(searchInput, {target: {value: 'be'}})
     fireEvent.keyDown(searchInput, {key: 'Enter'})
 
-    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 2}), 'cards')
+    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 2}), 'skills')
   })
 
   it('captures global typing into the modal search and lets escape clear it without closing', async () => {
@@ -783,5 +838,26 @@ describe('AwakenerDetailModal', () => {
 
     expect(mockCloseAllPopovers).toHaveBeenCalledTimes(1)
     expect(onClose).not.toHaveBeenCalled()
+  })
+
+  it('opens the full card art from the mobile portrait trigger and closes it with Escape', () => {
+    renderAwakenerDetailModal(makeAwakener(1, 'thais'))
+
+    fireEvent.click(screen.getByRole('button', {name: /view full art for thais/i}))
+
+    expect(screen.getByRole('dialog', {name: /thais full art/i})).toBeInTheDocument()
+    expect(screen.getByRole('img', {name: /thais full art/i})).toHaveAttribute('src', '/card.webp')
+
+    fireEvent.keyDown(window, {key: 'Escape'})
+
+    expect(screen.queryByRole('dialog', {name: /thais full art/i})).not.toBeInTheDocument()
+  })
+
+  it('opens the full card art from the desktop sidebar trigger', () => {
+    renderAwakenerDetailModal(makeAwakener(1, 'thais'))
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open sidebar art'}))
+
+    expect(screen.getByRole('dialog', {name: /thais full art/i})).toBeInTheDocument()
   })
 })

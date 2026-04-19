@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react'
+import {fireEvent, render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {AwakenerDetailOverview} from './AwakenerDetailOverview'
@@ -7,6 +7,7 @@ import {
   makeDatabaseDescribedEntry,
   makeDatabaseShellView,
   makeEnlightenRecord,
+  makeSkillRecord,
   makeTalentRecord,
   makeTestAwakener,
   makeTestFullStats,
@@ -31,6 +32,19 @@ const TEST_STATS = makeTestFullStats()
 
 const TEST_SHELL_VIEW = makeDatabaseShellView({
   stats: TEST_STATS,
+  overExalt: makeDatabaseDescribedEntry({
+    key: 'OverExalt',
+    label: 'Card · Over Exalt · Cost 200',
+    record: makeSkillRecord({
+      id: 'skill.over-exalt',
+      kind: 'over_exalt',
+      displayName: 'Face Death in Fiery Resolve',
+      descriptionTemplate: 'Over Exalt description',
+    }),
+    resolved: {description: 'Over Exalt description'} as never,
+    descriptionRank: 1,
+    descriptionMaxRank: 6,
+  }),
   talents: [
     makeDatabaseDescribedEntry({
       key: 'T1',
@@ -98,11 +112,13 @@ const TEST_SHELL_VIEW = makeDatabaseShellView({
 })
 
 describe('AwakenerDetailOverview', () => {
-  it('renders fourth talent entries when they exist in the full data', () => {
+  it('renders fourth talent entries and over exalt progression rows when they exist in the full data', () => {
+    const openRootReferenceByName = vi.fn()
+
     render(
       <DatabasePopoverContext.Provider
         value={{
-          openRootReferenceByName: vi.fn(),
+          openRootReferenceByName,
           openRootOverlay: vi.fn(),
           openNestedReferenceByName: vi.fn(),
           openNestedOverlay: vi.fn(),
@@ -124,9 +140,16 @@ describe('AwakenerDetailOverview', () => {
     expect(screen.getByText('Third Talent')).toBeInTheDocument()
     expect(screen.getByText('Fourth Talent')).toBeInTheDocument()
     expect(screen.getByText('T4')).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: 'Over-Exaltation'})).toBeInTheDocument()
+    expect(screen.getByText('Face Death in Fiery Resolve').closest('p')).toHaveTextContent(
+      /Face Death in Fiery Resolve.*Over-Exaltation/,
+    )
     expect(screen.getByRole('button', {name: 'Final Rule'})).toBeInTheDocument()
     expect(screen.getByText('Infinite Singularity').closest('p')).toHaveTextContent(
       /Infinite Singularity.*Final Rule/,
     )
+
+    fireEvent.click(screen.getByRole('button', {name: 'Over-Exaltation'}))
+    expect(openRootReferenceByName).toHaveBeenCalledWith('Over Exalt', expect.anything())
   })
 })

@@ -1,16 +1,20 @@
 import {getAwakenerCardAsset} from '@/domain/awakener-assets'
 import type {Awakener} from '@/domain/awakeners'
-import {getRealmTint} from '@/domain/factions'
+import {getAwakenerTextColor, type AwakenerTextColorName} from '@/domain/awakeners-text-colors'
 import {getMainstatIcon} from '@/domain/mainstats'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
+import {getRealmAccent} from '@/domain/realms'
 
-const STAT_DISPLAY: {key: 'CON' | 'ATK' | 'DEF'; color: string}[] = [
-  {key: 'CON', color: '#5e9177'},
-  {key: 'ATK', color: '#a1525a'},
-  {key: 'DEF', color: '#638ea6'},
+import {databaseCardTitleClampStyle, databaseCardTitleClassName} from './database-card-typography'
+import {DatabaseGridCardFrame} from './DatabaseGridCardFrame'
+
+const STAT_DISPLAY: {key: 'CON' | 'ATK' | 'DEF'; colorName: AwakenerTextColorName}[] = [
+  {key: 'CON', colorName: 'heal'},
+  {key: 'ATK', colorName: 'damage'},
+  {key: 'DEF', colorName: 'shield'},
 ]
 
-const PRIORITIZED_GRID_IMAGE_COUNT = 8
+const PRIORITIZED_GRID_IMAGE_COUNT = 24
 
 interface AwakenerGridCardProps {
   awakener: Awakener
@@ -21,88 +25,62 @@ interface AwakenerGridCardProps {
 export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardProps) {
   const cardAsset = getAwakenerCardAsset(awakener.name)
   const displayName = formatAwakenerNameForUi(awakener.name)
-  const realmTint = getRealmTint(awakener.realm)
+  const realmAccent = getRealmAccent(awakener.realm)
   const stats = awakener.stats
   const prioritizeImage = index < PRIORITIZED_GRID_IMAGE_COUNT
 
   return (
-    <article className='collection-item-card group/card p-1'>
-      <div
-        className='relative aspect-[5/9] overflow-hidden p-[1px] transition-[transform,box-shadow] duration-300'
-        style={
-          {
-            '--realm-color': realmTint,
-            background: `linear-gradient(to bottom, var(--realm-color), #475569)`,
-          } as React.CSSProperties
-        }
-      >
-        <div className='relative h-full w-full overflow-hidden bg-slate-900 transition-colors duration-300'>
-          <button
-            aria-label={`View details for ${displayName}`}
-            className='absolute inset-0 z-30 cursor-pointer transition-[background-color,box-shadow] duration-300 group-hover/card:bg-white/5 group-hover/card:shadow-[inset_0_0_10px_rgba(255,255,255,0.1)] focus-visible:bg-white/5 focus-visible:ring-2 focus-visible:ring-amber-200/70 focus-visible:outline-none focus-visible:ring-inset'
-            onClick={() => {
-              onSelect(awakener.id)
-            }}
-            type='button'
-          />
+    <DatabaseGridCardFrame
+      ariaLabel={`View details for ${displayName}`}
+      fadeHeightClass='h-[52%]'
+      imageAlt={displayName}
+      imageObjectClassName='object-cover object-top'
+      imageSrc={cardAsset}
+      onSelect={() => {
+        onSelect(awakener.id)
+      }}
+      prioritizeImage={prioritizeImage}
+      realmAccent={realmAccent}
+    >
+      {stats ? (
+        <div className='space-y-1.5'>
+          <p
+            className={`${databaseCardTitleClassName} text-[clamp(0.86rem,0.28vw+0.8rem,0.98rem)]`}
+            style={databaseCardTitleClampStyle}
+          >
+            {displayName}
+          </p>
+          <div className='flex items-center justify-center gap-3'>
+            {STAT_DISPLAY.map(({key, colorName}) => {
+              const icon = getMainstatIcon(key)
 
-          {cardAsset ? (
-            <img
-              alt={displayName}
-              className='h-full w-full object-cover object-top'
-              decoding='async'
-              draggable={false}
-              fetchPriority={prioritizeImage ? 'high' : 'low'}
-              loading={prioritizeImage ? 'eager' : 'lazy'}
-              src={cardAsset}
-            />
-          ) : (
-            <div className='flex h-full w-full items-center justify-center bg-slate-800 text-[10px] text-slate-500'>
-              No Image
-            </div>
-          )}
-
-          <div className='pointer-events-none absolute top-0 right-0 left-0 z-20 bg-gradient-to-b from-black/90 via-black/65 to-transparent p-2'>
-            <p className='font-["Droid_Serif"] text-[15px] leading-[1.1] font-bold tracking-wide text-amber-100/90'>
-              {displayName}
-            </p>
+              return (
+                <span
+                  key={key}
+                  className='inline-flex items-center gap-1 text-[11px] leading-none font-medium text-white/85 tabular-nums'
+                >
+                  {icon ? (
+                    <span
+                      aria-hidden
+                      className='h-2.5 w-2.5 shrink-0'
+                      style={{
+                        backgroundColor: getAwakenerTextColor(colorName),
+                        WebkitMaskImage: `url(${icon})`,
+                        maskImage: `url(${icon})`,
+                        WebkitMaskSize: 'contain',
+                        maskSize: 'contain',
+                        WebkitMaskRepeat: 'no-repeat',
+                        maskRepeat: 'no-repeat',
+                      }}
+                    />
+                  ) : null}
+                  <span>{stats[key]}</span>
+                </span>
+              )
+            })}
           </div>
-
-          {stats && (
-            <div className='pointer-events-none absolute right-0 bottom-0 left-0 z-20 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-2 pt-6 pb-2'>
-              <div className='flex items-center justify-center gap-1.5'>
-                {STAT_DISPLAY.map(({key, color}, index) => {
-                  const icon = getMainstatIcon(key)
-                  const isLast = index === STAT_DISPLAY.length - 1
-
-                  return (
-                    <div key={key} className='flex items-center'>
-                      <span className='inline-flex items-center gap-0.5 font-["Droid_Serif"] text-[11px] leading-none font-bold text-white'>
-                        {icon && (
-                          <div
-                            className='h-3.5 w-3.5 shrink-0'
-                            style={{
-                              backgroundColor: color,
-                              WebkitMaskImage: `url(${icon})`,
-                              maskImage: `url(${icon})`,
-                              WebkitMaskSize: 'contain',
-                              maskSize: 'contain',
-                              WebkitMaskRepeat: 'no-repeat',
-                              maskRepeat: 'no-repeat',
-                            }}
-                          />
-                        )}
-                        <span className='pt-[1px] tracking-tighter tabular-nums'>{stats[key]}</span>
-                      </span>
-                      {!isLast && <div className='ml-1.5 h-3 w-[1px] bg-white/20' />}
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          )}
         </div>
-      </div>
-    </article>
+      ) : null}
+    </DatabaseGridCardFrame>
   )
 }

@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:quiet": "tsc -b && vite build --logLevel error",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"scripts/**/*.{js,mjs,cjs}\" \"src/data/**/*.json\" \"src/domain/persistence-contract.v1.json\" \"schemas/**/*.json\" \"package.json\" \"tools/react-sidecar/package.json\" \"eslint.config.js\" \"vite.config.ts\" \"prettier.config.cjs\"",
     "format:changed": "node scripts/format-changed-files.mjs",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"scripts/**/*.{js,mjs,cjs}\" \"src/data/**/*.json\" \"src/domain/persistence-contract.v1.json\" \"schemas/**/*.json\" \"package.json\" \"tools/react-sidecar/package.json\" \"eslint.config.js\" \"vite.config.ts\" \"prettier.config.cjs\"",
@@ -22,9 +23,13 @@
     "test:quick": "vitest run --run src/pages/CollectionPage.test.tsx src/pages/collection/OwnedWheelBoxExport.test.tsx src/components/ui/DupeLevelDisplay.test.tsx",
     "test:watch": "vitest",
     "verify": "npm run data:refresh-awakener-v2 && npm run format && npm run lint && npm run test -- --run && npm run build",
+    "verify:pre-commit": "node scripts/pre-commit-verify.mjs",
     "data:compile-awakeners-full-v2": "node scripts/compile-awakeners-full-v2.mjs",
     "data:derive-awakeners-lite-v2": "node scripts/derive-awakeners-lite-v2.mjs",
     "data:refresh-awakener-v2": "npm run data:compile-awakeners-full-v2 && npm run data:derive-awakeners-lite-v2",
+    "data:compile-wheels-full-v1": "node scripts/compile-wheels-full-v1.mjs",
+    "data:derive-wheels-lite-v1": "node scripts/derive-wheels-lite-v1.mjs",
+    "data:refresh-wheel-v1": "npm run data:compile-wheels-full-v1 && npm run data:derive-wheels-lite-v1",
     "data:sync-awakener-ids": "node scripts/sync-awakener-ids.mjs",
     "data:sync-posse-indices": "node scripts/sync-posse-indices.mjs",
     "data:sync-wheel-data": "node scripts/sync-wheel-data.mjs",
@@ -57,11 +62,11 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^10.2.0",
+    "eslint": "^10.2.1",
     "eslint-import-resolver-node": "^0.3.10",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.2",
-    "eslint-plugin-react-hooks": "7.1.0-canary-00f063c3-20260415",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-sonarjs": "^4.0.3",
     "eslint-plugin-unused-imports": "^4.4.1",
@@ -71,7 +76,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.2.2",
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.58.2",
     "vite": "^8.0.8",
     "vitest": "^4.1.4"
@@ -82,6 +87,6 @@
     "rollup": "^4.59.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run verify"
+    "pre-commit": "npm run verify:pre-commit"
   }
 }

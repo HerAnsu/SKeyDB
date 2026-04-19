@@ -2,10 +2,8 @@ import {useCallback, useMemo} from 'react'
 
 import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.png'
 import type {Awakener} from '@/domain/awakeners'
-import type {
-  ResolvedAwakenerDatabaseReferenceLayer,
-  ResolvedAwakenerDatabaseShellView,
-} from '@/domain/awakeners-database-view'
+import type {ResolvedAwakenerDatabaseShellView} from '@/domain/awakeners-database-view'
+import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
 import {getPortraitRelicByAwakenerIngameId} from '@/domain/relics'
 
@@ -18,7 +16,7 @@ import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 interface AwakenerDetailOverviewProps {
   awakener: Awakener
   shellView: ResolvedAwakenerDatabaseShellView | null
-  referenceLayer: ResolvedAwakenerDatabaseReferenceLayer | null
+  referenceLayer: ResolvedDatabaseReferenceLayer | null
   fontScale: FontScale
   showVisibleScaling?: boolean
   showTagIcons?: boolean
@@ -82,6 +80,31 @@ export function AwakenerDetailOverview({
         record: entry.record,
         descriptionRank: entry.descriptionRank,
         descriptionMaxRank: entry.descriptionMaxRank,
+      })
+    }
+
+    if (shellView.overExalt) {
+      items.push({
+        key: 'OverExalt',
+        label: popoverController ? (
+          <button
+            className='cursor-pointer text-slate-500 transition-colors hover:text-amber-100'
+            onClick={(event) => {
+              popoverController.openRootReferenceByName('Over Exalt', event)
+            }}
+            style={scaledFontStyle(12)}
+            type='button'
+          >
+            Over-Exaltation
+          </button>
+        ) : (
+          'Over-Exaltation'
+        ),
+        name: shellView.overExalt.record.displayName,
+        description: shellView.overExalt.resolved.description,
+        record: shellView.overExalt.record,
+        descriptionRank: shellView.overExalt.descriptionRank,
+        descriptionMaxRank: shellView.overExalt.descriptionMaxRank,
       })
     }
 

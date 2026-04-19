@@ -18,6 +18,12 @@ export interface SortableCollectionEntry {
   realm?: string
 }
 
+export type WheelCollectionSortKey = 'ALPHABETICAL' | 'RARITY' | 'REALM' | 'MAINSTAT'
+
+export interface SortableWheelCollectionEntry extends SortableCollectionEntry {
+  mainstatLabel?: string
+}
+
 export interface AwakenerSortConfig {
   key: AwakenerSortKey
   direction: CollectionSortDirection
@@ -85,6 +91,7 @@ const rarityPriorityByName: Record<string, number> = {
   SSR: 1,
   SR: 2,
   R: 3,
+  N: 4,
 }
 
 function compareNumber(left: number, right: number, direction: CollectionSortDirection): number {
@@ -130,10 +137,10 @@ function compareOwnedFirst(left: SortableCollectionEntry, right: SortableCollect
   return leftOwned ? -1 : 1
 }
 
-function compareByPriority(
-  left: SortableCollectionEntry,
-  right: SortableCollectionEntry,
-  comparators: ((left: SortableCollectionEntry, right: SortableCollectionEntry) => number)[],
+function compareByPriority<TEntry extends SortableCollectionEntry>(
+  left: TEntry,
+  right: TEntry,
+  comparators: ((left: TEntry, right: TEntry) => number)[],
 ): number {
   for (const comparator of comparators) {
     const result = comparator(left, right)
@@ -211,6 +218,58 @@ export function compareWheelsForCollectionDefaultSort(
     (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
     compareIndex,
     (l, r) => compareText(l.label, r.label, 'ASC'),
+  ])
+}
+
+export function compareWheelsForCollectionSort(
+  left: SortableWheelCollectionEntry,
+  right: SortableWheelCollectionEntry,
+  config: {
+    key: WheelCollectionSortKey
+    direction: CollectionSortDirection
+  },
+): number {
+  if (config.key === 'RARITY') {
+    return compareByPriority(left, right, [
+      compareOwnedFirst,
+      (l, r) => (config.direction === 'DESC' ? compareRarity(l, r) : compareRarity(r, l)),
+      compareRealm,
+      (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
+      compareIndex,
+      (l, r) => compareText(l.label, r.label, 'ASC'),
+    ])
+  }
+
+  if (config.key === 'REALM') {
+    return compareByPriority(left, right, [
+      compareOwnedFirst,
+      (l, r) => (config.direction === 'DESC' ? compareRealm(l, r) : compareRealm(r, l)),
+      compareRarity,
+      (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
+      compareIndex,
+      (l, r) => compareText(l.label, r.label, 'ASC'),
+    ])
+  }
+
+  if (config.key === 'MAINSTAT') {
+    return compareByPriority(left, right, [
+      compareOwnedFirst,
+      (l, r) => compareText(l.mainstatLabel ?? '', r.mainstatLabel ?? '', config.direction),
+      compareRarity,
+      compareRealm,
+      (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
+      compareIndex,
+      (l, r) => compareText(l.label, r.label, 'ASC'),
+    ])
+  }
+
+  return compareByPriority(left, right, [
+    compareOwnedFirst,
+    (l, r) => compareText(l.label, r.label, config.direction),
+    compareRarity,
+    compareRealm,
+    (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
+    compareIndex,
   ])
 }
 

@@ -146,6 +146,7 @@ export function makeDatabaseShellView(
     overlayOverridesById: {},
     commandCards: [],
     exalts: [],
+    overExalt: null,
     talents: [],
     enlightens: [],
     derivedSkills: [],

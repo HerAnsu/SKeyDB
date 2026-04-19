@@ -13,17 +13,69 @@ import {
   safeStorageWrite,
   type StorageLike,
 } from './storage'
+import {clampWheelEnhanceLevel} from './wheel-enhance'
 
 const STORAGE_KEY = 'database-detail-preferences'
 
 const fontScaleSchema = z.enum(['small', 'medium', 'large'])
 export type DatabaseDetailFontScale = z.infer<typeof fontScaleSchema>
 
-const databaseDetailPreferencesSchema = z.object({
-  showVisibleScaling: z.boolean().default(true),
-  showTagIcons: z.boolean().default(true),
-  clickOutsideClosesPopovers: z.boolean().default(true),
-  fontScale: fontScaleSchema.default('small'),
+export interface DatabaseDetailSharedPreferences {
+  showTagIcons: boolean
+  clickOutsideClosesPopovers: boolean
+  fontScale: DatabaseDetailFontScale
+}
+
+export interface DatabaseAwakenerDetailPreferences {
+  showVisibleScaling: boolean
+  defaultSelection: AwakenerDatabaseSelection
+}
+
+export interface DatabaseWheelDetailPreferences {
+  defaultEnhanceLevel: number
+  expandLoreByDefault: boolean
+}
+
+export interface DatabaseDetailPreferences {
+  shared: DatabaseDetailSharedPreferences
+  awakener: DatabaseAwakenerDetailPreferences
+  wheel: DatabaseWheelDetailPreferences
+}
+
+export interface DatabaseDetailPreferencesPatch {
+  shared?: Partial<DatabaseDetailSharedPreferences>
+  awakener?: Partial<DatabaseAwakenerDetailPreferences>
+  wheel?: Partial<DatabaseWheelDetailPreferences>
+}
+
+const DEFAULT_DATABASE_DETAIL_SHARED_PREFERENCES: DatabaseDetailSharedPreferences = {
+  showTagIcons: true,
+  clickOutsideClosesPopovers: true,
+  fontScale: 'small',
+}
+
+const DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES: DatabaseAwakenerDetailPreferences = {
+  showVisibleScaling: true,
+  defaultSelection: normalizeAwakenerDatabaseSelection(),
+}
+
+const DEFAULT_DATABASE_DETAIL_WHEEL_PREFERENCES: DatabaseWheelDetailPreferences = {
+  defaultEnhanceLevel: 0,
+  expandLoreByDefault: false,
+}
+
+const databaseDetailSharedPreferencesSchema = z.object({
+  showTagIcons: z.boolean().default(DEFAULT_DATABASE_DETAIL_SHARED_PREFERENCES.showTagIcons),
+  clickOutsideClosesPopovers: z
+    .boolean()
+    .default(DEFAULT_DATABASE_DETAIL_SHARED_PREFERENCES.clickOutsideClosesPopovers),
+  fontScale: fontScaleSchema.default(DEFAULT_DATABASE_DETAIL_SHARED_PREFERENCES.fontScale),
+})
+
+const databaseDetailAwakenerPreferencesSchema = z.object({
+  showVisibleScaling: z
+    .boolean()
+    .default(DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES.showVisibleScaling),
   defaultSelection: z
     .object({
       awakenerLevel: z.number().optional(),
@@ -32,35 +84,94 @@ const databaseDetailPreferencesSchema = z.object({
       selectedEnlightenSlot: selectedEnlightenSlotSchema.optional(),
       soulforgeLevel: z.number().optional(),
     })
-    .default({}),
+    .default(DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES.defaultSelection),
 })
 
-export interface DatabaseDetailPreferences {
-  showVisibleScaling: boolean
-  showTagIcons: boolean
-  clickOutsideClosesPopovers: boolean
-  fontScale: DatabaseDetailFontScale
-  defaultSelection: AwakenerDatabaseSelection
-}
+const databaseDetailWheelPreferencesSchema = z.object({
+  defaultEnhanceLevel: z
+    .number()
+    .default(DEFAULT_DATABASE_DETAIL_WHEEL_PREFERENCES.defaultEnhanceLevel),
+  expandLoreByDefault: z
+    .boolean()
+    .default(DEFAULT_DATABASE_DETAIL_WHEEL_PREFERENCES.expandLoreByDefault),
+})
+
+const databaseDetailPreferencesSchema = z.object({
+  shared: databaseDetailSharedPreferencesSchema.default(DEFAULT_DATABASE_DETAIL_SHARED_PREFERENCES),
+  awakener: databaseDetailAwakenerPreferencesSchema.default(
+    DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES,
+  ),
+  wheel: databaseDetailWheelPreferencesSchema.default(DEFAULT_DATABASE_DETAIL_WHEEL_PREFERENCES),
+})
 
 export const DEFAULT_DATABASE_DETAIL_PREFERENCES: DatabaseDetailPreferences = {
-  showVisibleScaling: true,
-  showTagIcons: true,
-  clickOutsideClosesPopovers: true,
-  fontScale: 'small',
-  defaultSelection: normalizeAwakenerDatabaseSelection(),
+  shared: DEFAULT_DATABASE_DETAIL_SHARED_PREFERENCES,
+  awakener: DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES,
+  wheel: DEFAULT_DATABASE_DETAIL_WHEEL_PREFERENCES,
+}
+
+function extractLegacyPreferences(input: Record<string, unknown>) {
+  return {
+    shared: {
+      showTagIcons: input.showTagIcons,
+      clickOutsideClosesPopovers: input.clickOutsideClosesPopovers,
+      fontScale: input.fontScale,
+    },
+    awakener: {
+      showVisibleScaling: input.showVisibleScaling,
+      defaultSelection: input.defaultSelection,
+    },
+    wheel: {
+      defaultEnhanceLevel: input.defaultWheelEnhanceLevel,
+      expandLoreByDefault: input.expandWheelLoreByDefault,
+    },
+  }
 }
 
 export function normalizeDatabaseDetailPreferences(input: unknown = {}): DatabaseDetailPreferences {
-  const parsed = databaseDetailPreferencesSchema.parse(input)
+  const rawInput = typeof input === 'object' && input ? (input as Record<string, unknown>) : {}
+  const parsed = databaseDetailPreferencesSchema.parse(
+    'shared' in rawInput || 'awakener' in rawInput || 'wheel' in rawInput
+      ? rawInput
+      : extractLegacyPreferences(rawInput),
+  )
 
   return {
-    showVisibleScaling: parsed.showVisibleScaling,
-    showTagIcons: parsed.showTagIcons,
-    clickOutsideClosesPopovers: parsed.clickOutsideClosesPopovers,
-    fontScale: parsed.fontScale,
-    defaultSelection: normalizeAwakenerDatabaseSelection(parsed.defaultSelection),
+    shared: {
+      showTagIcons: parsed.shared.showTagIcons,
+      clickOutsideClosesPopovers: parsed.shared.clickOutsideClosesPopovers,
+      fontScale: parsed.shared.fontScale,
+    },
+    awakener: {
+      showVisibleScaling: parsed.awakener.showVisibleScaling,
+      defaultSelection: normalizeAwakenerDatabaseSelection(parsed.awakener.defaultSelection),
+    },
+    wheel: {
+      defaultEnhanceLevel: clampWheelEnhanceLevel(parsed.wheel.defaultEnhanceLevel),
+      expandLoreByDefault: parsed.wheel.expandLoreByDefault,
+    },
   }
+}
+
+export function mergeDatabaseDetailPreferences(
+  current: DatabaseDetailPreferences,
+  next: DatabaseDetailPreferencesPatch,
+): DatabaseDetailPreferences {
+  return normalizeDatabaseDetailPreferences({
+    shared: {
+      ...current.shared,
+      ...(next.shared ?? {}),
+    },
+    awakener: {
+      ...current.awakener,
+      ...(next.awakener ?? {}),
+      defaultSelection: next.awakener?.defaultSelection ?? current.awakener.defaultSelection,
+    },
+    wheel: {
+      ...current.wheel,
+      ...(next.wheel ?? {}),
+    },
+  })
 }
 
 export function readDatabaseDetailPreferences(
@@ -79,13 +190,10 @@ export function readDatabaseDetailPreferences(
 }
 
 export function writeDatabaseDetailPreferences(
-  next: Partial<DatabaseDetailPreferences>,
+  next: DatabaseDetailPreferencesPatch,
   storage: StorageLike | null = getBrowserLocalStorage(),
 ): boolean {
-  const normalized = normalizeDatabaseDetailPreferences({
-    ...readDatabaseDetailPreferences(storage),
-    ...next,
-  })
+  const normalized = mergeDatabaseDetailPreferences(readDatabaseDetailPreferences(storage), next)
 
   return safeStorageWrite(storage, STORAGE_KEY, JSON.stringify(normalized))
 }
@@ -93,9 +201,12 @@ export function writeDatabaseDetailPreferences(
 export function resolveDatabaseDetailDefaultSelection(
   record: AwakenerFullV2Record,
   preferences:
-    | Partial<DatabaseDetailPreferences>
+    | DatabaseDetailPreferencesPatch
     | DatabaseDetailPreferences = DEFAULT_DATABASE_DETAIL_PREFERENCES,
 ): AwakenerDatabaseSelection {
   const normalizedPreferences = normalizeDatabaseDetailPreferences(preferences)
-  return normalizeAwakenerDatabaseSelectionForRecord(record, normalizedPreferences.defaultSelection)
+  return normalizeAwakenerDatabaseSelectionForRecord(
+    record,
+    normalizedPreferences.awakener.defaultSelection,
+  )
 }

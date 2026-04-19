@@ -1,6 +1,9 @@
 import {Children, useId, useState, type ReactNode} from 'react'
 
-import {scaledFontStyle} from './font-scale'
+import {
+  getDatabaseDetailBodyTextStyle,
+  getDatabaseDetailSectionHeadingStyle,
+} from './database-detail-typography'
 import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
 
 interface DatabaseTabProps {
@@ -49,14 +52,18 @@ export function DatabaseTabSection({
             onClick={() => {
               setCollapsed((prev) => !prev)
             }}
-            style={scaledFontStyle(14)}
+            style={getDatabaseDetailSectionHeadingStyle()}
             type='button'
           >
             <span id={titleId}>{title}</span>
             <span className='text-[10px] text-slate-400/80'>{collapsed ? '▸ Show' : '▾ Hide'}</span>
           </button>
         ) : (
-          <h4 className={DATABASE_SECTION_TITLE_CLASS} id={titleId} style={scaledFontStyle(14)}>
+          <h4
+            className={DATABASE_SECTION_TITLE_CLASS}
+            id={titleId}
+            style={getDatabaseDetailSectionHeadingStyle()}
+          >
             {title}
           </h4>
         )
@@ -97,7 +104,7 @@ export function DatabaseTabRow({label, children, showDivider = false}: DatabaseT
         <div className='mx-4 h-px bg-gradient-to-r from-slate-600/50 via-slate-600/20 to-transparent' />
       ) : null}
       <div className='px-4 py-2.5'>
-        <p className='ui-title text-amber-200/90' style={scaledFontStyle(12)}>
+        <p className='ui-title text-amber-200/90' style={getDatabaseDetailBodyTextStyle()}>
           {label}
         </p>
         <div className='mt-1.5'>{children}</div>

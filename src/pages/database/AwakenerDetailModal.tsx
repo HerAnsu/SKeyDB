@@ -1,19 +1,29 @@
-import {lazy, Suspense, useId, useRef, type KeyboardEvent as ReactKeyboardEvent} from 'react'
+import {
+  lazy,
+  Suspense,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from 'react'
 
 import {FaGear, FaXmark} from 'react-icons/fa6'
 
-import {getAwakenerPortraitAsset} from '@/domain/awakener-assets'
+import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import {type Awakener} from '@/domain/awakeners'
 import {type AwakenerFullV2Record} from '@/domain/awakeners-full-v2'
 import {DATABASE_AWAKENER_TABS, type DatabaseAwakenerTab} from '@/domain/database-paths'
-import {getRealmIcon, getRealmLabel, getRealmTint} from '@/domain/factions'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
+import {getRealmAccent, getRealmIcon, getRealmLabel} from '@/domain/realms'
+import type {Wheel} from '@/domain/wheels'
 
 import {AwakenerDetailOverview} from './AwakenerDetailOverview'
 import {AwakenerDetailSearchBar} from './AwakenerDetailSearchBar'
 import {AwakenerDetailSettingsPanel} from './AwakenerDetailSettingsPanel'
 import {AwakenerDetailSidebar} from './AwakenerDetailSidebar'
 import {DatabasePopoverContext} from './database-popover-context'
+import {DatabaseArtViewerOverlay} from './DatabaseArtViewerOverlay'
 import {DatabasePopoverRoot} from './DatabasePopoverRoot'
 import {getDescriptionFontScaleStyle} from './font-scale'
 import {useAwakenerDetailModalState} from './useAwakenerDetailModalState'
@@ -26,11 +36,12 @@ interface AwakenerDetailModalProps {
   onClose: () => void
   onTabChange: (tab: DatabaseAwakenerTab) => void
   onSelectAwakener?: (awakener: Awakener, tab: DatabaseAwakenerTab) => void
+  onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
 }
 
 const DATABASE_AWAKENER_TAB_LABELS: Record<DatabaseAwakenerTab, string> = {
   overview: 'Overview',
-  cards: 'Cards',
+  skills: 'Skills',
   builds: 'Builds',
   teams: 'Teams',
 }
@@ -57,8 +68,10 @@ export function AwakenerDetailModal({
   onClose,
   onTabChange,
   onSelectAwakener,
+  onSelectWheel,
 }: AwakenerDetailModalProps) {
   const tabButtonRefs = useRef<Partial<Record<DatabaseAwakenerTab, HTMLButtonElement | null>>>({})
+  const [isArtViewerOpen, setIsArtViewerOpen] = useState(false)
   const tabsetId = useId()
   const {
     activeSearchIndex,
@@ -94,6 +107,7 @@ export function AwakenerDetailModal({
     fullDataV2,
     onClose,
     onSelectAwakener,
+    onSelectWheel,
     onTabChange,
   })
   const {
@@ -101,16 +115,19 @@ export function AwakenerDetailModal({
     preferences: sessionPreferences,
     runtime: sessionRuntime,
   } = session
-  const {defaultSelection, fontScale, value: preferences} = sessionPreferences
+  const {awakener: awakenerPreferences, shared: sharedPreferences} = sessionPreferences
+  const fontScale = sharedPreferences.fontScale
   const {referenceLayer, resolvedControls, resolvedSelection, resolvedStats, shellView} =
     sessionRuntime
 
   const displayName = formatAwakenerNameForUi(awakener.name)
-  const realmTint = getRealmTint(awakener.realm)
+  const realmAccent = getRealmAccent(awakener.realm)
   const realmIcon = getRealmIcon(awakener.realm)
   const realmLabel = getRealmLabel(awakener.realm)
+  const cardAsset = getAwakenerCardAsset(awakener.name)
   const portrait = getAwakenerPortraitAsset(awakener.name)
   const tabPanelId = `${tabsetId}-panel`
+  const fullArtAlt = useMemo(() => `${displayName} full art`, [displayName])
 
   function focusTab(tab: DatabaseAwakenerTab) {
     tabButtonRefs.current[tab]?.focus()
@@ -166,7 +183,9 @@ export function AwakenerDetailModal({
             isOpen={isSearchOpen}
             onInputKeyDown={handleSearchInputKeyDown}
             onInputFocus={() => {
-              openSearch()
+              if (searchQuery.trim().length > 0) {
+                openSearch()
+              }
             }}
             onQueryChange={handleSearchQueryChange}
             onSelectAwakener={handleSelectAwakenerFromSearch}
@@ -181,7 +200,6 @@ export function AwakenerDetailModal({
           ref={panelRef}
           role='dialog'
           style={getDescriptionFontScaleStyle(fontScale)}
-          tabIndex={-1}
         >
           <div className='absolute top-3 right-3 z-10 flex items-center gap-1.5' ref={settingsRef}>
             <button
@@ -207,10 +225,11 @@ export function AwakenerDetailModal({
             {isSettingsOpen ? (
               <AwakenerDetailSettingsPanel
                 controls={resolvedControls}
-                defaultSelection={defaultSelection}
                 onPatchDefaultSelection={sessionActions.patchDefaultSelection}
-                onUpdatePreferences={sessionActions.updatePreferences}
-                preferences={preferences}
+                onUpdateAwakenerPreferences={sessionActions.updateAwakenerPreferences}
+                onUpdateSharedPreferences={sessionActions.updateSharedPreferences}
+                preferences={awakenerPreferences}
+                sharedPreferences={sharedPreferences}
               />
             ) : null}
           </div>
@@ -220,6 +239,13 @@ export function AwakenerDetailModal({
                 <AwakenerDetailSidebar
                   awakener={awakener}
                   controls={resolvedControls}
+                  onOpenFullArt={
+                    cardAsset
+                      ? () => {
+                          setIsArtViewerOpen(true)
+                        }
+                      : undefined
+                  }
                   onPatchSelection={sessionActions.patchSelection}
                   scalingRecord={fullDataV2}
                   selection={resolvedSelection}
@@ -242,22 +268,46 @@ export function AwakenerDetailModal({
                     </div>
                   ) : null}
                   <div className='flex items-center gap-2.5 pr-14'>
-                    <div
-                      className={`h-14 w-14 shrink-0 overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900 ${
-                        isMobileHeader ? '' : 'hidden'
-                      }`}
-                    >
-                      {portrait ? (
-                        <img
-                          alt=''
-                          className='h-full w-full object-cover object-top'
-                          draggable={false}
-                          src={portrait}
-                        />
-                      ) : (
-                        <div className='h-full w-full bg-[radial-gradient(circle_at_50%_28%,rgba(125,165,215,0.18),rgba(6,12,24,0.92)_70%)]' />
-                      )}
-                    </div>
+                    {cardAsset ? (
+                      <button
+                        aria-label={`View full art for ${displayName}`}
+                        className={`h-14 w-14 shrink-0 overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900 ${
+                          isMobileHeader ? '' : 'hidden'
+                        }`}
+                        onClick={() => {
+                          setIsArtViewerOpen(true)
+                        }}
+                        type='button'
+                      >
+                        {portrait ? (
+                          <img
+                            alt=''
+                            className='h-full w-full object-cover object-top'
+                            draggable={false}
+                            src={portrait}
+                          />
+                        ) : (
+                          <div className='h-full w-full bg-[radial-gradient(circle_at_50%_28%,rgba(125,165,215,0.18),rgba(6,12,24,0.92)_70%)]' />
+                        )}
+                      </button>
+                    ) : (
+                      <div
+                        className={`h-14 w-14 shrink-0 overflow-hidden border border-slate-500/40 bg-gradient-to-b from-slate-800 to-slate-900 ${
+                          isMobileHeader ? '' : 'hidden'
+                        }`}
+                      >
+                        {portrait ? (
+                          <img
+                            alt=''
+                            className='h-full w-full object-cover object-top'
+                            draggable={false}
+                            src={portrait}
+                          />
+                        ) : (
+                          <div className='h-full w-full bg-[radial-gradient(circle_at_50%_28%,rgba(125,165,215,0.18),rgba(6,12,24,0.92)_70%)]' />
+                        )}
+                      </div>
+                    )}
                     {!isMobileHeader ? (
                       <img
                         alt=''
@@ -279,7 +329,7 @@ export function AwakenerDetailModal({
                         ) : null}
                       </div>
                       <p className='mt-0.5 text-xs text-slate-400'>
-                        <span style={{color: realmTint}}>{realmLabel}</span>
+                        <span style={{color: realmAccent}}>{realmLabel}</span>
                         <span className='mx-1.5 text-slate-600'>·</span>
                         <span>
                           {awakener.type
@@ -389,18 +439,18 @@ export function AwakenerDetailModal({
                         fontScale={fontScale}
                         referenceLayer={referenceLayer}
                         shellView={shellView}
-                        showTagIcons={preferences.showTagIcons}
-                        showVisibleScaling={preferences.showVisibleScaling}
+                        showTagIcons={sharedPreferences.showTagIcons}
+                        showVisibleScaling={awakenerPreferences.showVisibleScaling}
                       />
                     )}
-                    {activeTab === 'cards' && (
+                    {activeTab === 'skills' && (
                       <Suspense fallback={TAB_CONTENT_LOADING_FALLBACK}>
                         <AwakenerDetailCards
                           onToggleEnlightenSlot={sessionActions.toggleEnlightenSlot}
                           referenceLayer={referenceLayer}
                           shellView={shellView}
-                          showTagIcons={preferences.showTagIcons}
-                          showVisibleScaling={preferences.showVisibleScaling}
+                          showTagIcons={sharedPreferences.showTagIcons}
+                          showVisibleScaling={awakenerPreferences.showVisibleScaling}
                         />
                       </Suspense>
                     )}
@@ -421,6 +471,15 @@ export function AwakenerDetailModal({
             </div>
           </DatabasePopoverContext.Provider>
         </div>
+        {isArtViewerOpen && cardAsset ? (
+          <DatabaseArtViewerOverlay
+            alt={fullArtAlt}
+            onClose={() => {
+              setIsArtViewerOpen(false)
+            }}
+            src={cardAsset}
+          />
+        ) : null}
       </div>
     </div>
   )

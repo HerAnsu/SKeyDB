@@ -6,6 +6,51 @@ import {DatabasePage} from './DatabasePage'
 
 let mockAwakenersFullV2 = [{id: 1}, {id: 2}, {id: 3}]
 let mockLoadPromiseCache = new Map<number, Promise<{id: number} | undefined>>()
+let mockWheelsFullV1 = [{id: 'B01'}, {id: 'D12'}]
+let mockWheelLoadPromiseCache = new Map<string, Promise<{id: string} | undefined>>()
+const wheelMockState = vi.hoisted(() => {
+  const wheels = [
+    {
+      id: 'B01',
+      assetId: 'Weapon_Full_B01',
+      name: 'Merciful Nurturing',
+      rarity: 'SSR',
+      realm: 'CARO',
+      awakener: 'alpha',
+      ownerAwakenerId: 1,
+      ownerAwakenerName: 'alpha',
+      aliases: ['Merciful Nurturing'],
+      tags: ['Caro', 'Embryo Fusion'],
+      mainstatKey: 'KEYFLARE_REGEN',
+    },
+    {
+      id: 'D12',
+      assetId: 'Weapon_Full_D12',
+      name: 'Shared Dream',
+      rarity: 'SR',
+      realm: 'CHAOS',
+      awakener: '',
+      aliases: ['Shared Dream'],
+      tags: ['Chaos'],
+      mainstatKey: 'CRIT_RATE',
+    },
+    {
+      id: 'N07',
+      assetId: 'Weapon_Full_N07',
+      name: 'Quiet Orbit',
+      rarity: 'R',
+      realm: 'NEUTRAL',
+      awakener: '',
+      aliases: ['Quiet Orbit'],
+      tags: ['Neutral'],
+      mainstatKey: 'HP',
+    },
+  ] as const
+
+  return {
+    wheels,
+  }
+})
 const mockLoadAwakenerFullV2ById = vi.fn((id: number) => {
   const cachedPromise = mockLoadPromiseCache.get(id)
   if (cachedPromise) {
@@ -14,6 +59,17 @@ const mockLoadAwakenerFullV2ById = vi.fn((id: number) => {
 
   const recordPromise = Promise.resolve(mockAwakenersFullV2.find((entry) => entry.id === id))
   mockLoadPromiseCache.set(id, recordPromise)
+
+  return recordPromise
+})
+const mockLoadWheelFullV1ById = vi.fn((id: string) => {
+  const cachedPromise = mockWheelLoadPromiseCache.get(id)
+  if (cachedPromise) {
+    return cachedPromise
+  }
+
+  const recordPromise = Promise.resolve(mockWheelsFullV1.find((entry) => entry.id === id))
+  mockWheelLoadPromiseCache.set(id, recordPromise)
 
   return recordPromise
 })
@@ -60,19 +116,33 @@ vi.mock('../domain/awakeners-full-v2-loader', () => ({
   loadAwakenerFullV2ById: (id: number) => mockLoadAwakenerFullV2ById(id),
 }))
 
+vi.mock('../domain/wheels', () => ({
+  getWheels: () => wheelMockState.wheels,
+}))
+
+vi.mock('../domain/wheels-full-v1-loader', () => ({
+  loadWheelFullV1ById: (id: string) => mockLoadWheelFullV1ById(id),
+}))
+
 vi.mock('../domain/awakener-assets', () => ({
   getAwakenerCardAsset: () => null,
   getAwakenerPortraitAsset: () => null,
 }))
 
-vi.mock('../domain/factions', () => ({
+vi.mock('../domain/realms', () => ({
   getRealmIcon: () => null,
   getRealmLabel: (realm: string) => realm,
-  getRealmTint: () => '#ffffff',
+  getRealmAccent: () => '#ffffff',
 }))
 
 vi.mock('../domain/mainstats', () => ({
   getMainstatIcon: () => null,
+  getMainstatByKey: (key: string) => ({label: key}),
+  getWheelFilterMainstats: () => [
+    {key: 'CRIT_RATE', label: 'CRIT_RATE', iconId: '001'},
+    {key: 'KEYFLARE_REGEN', label: 'KEYFLARE_REGEN', iconId: '002'},
+  ],
+  MAINSTAT_ICON_BY_ID: {},
 }))
 
 vi.mock('./database/AwakenerDetailModal', () => ({
@@ -83,14 +153,14 @@ vi.mock('./database/AwakenerDetailModal', () => ({
     onSelectAwakener,
     onTabChange,
   }: {
-    activeTab?: 'overview' | 'cards' | 'builds' | 'teams'
+    activeTab?: 'overview' | 'skills' | 'builds' | 'teams'
     awakener: {id: number; name: string}
     onClose: () => void
     onSelectAwakener: (
       awakener: {id: number; name: string},
-      tab: 'overview' | 'cards' | 'builds' | 'teams',
+      tab: 'overview' | 'skills' | 'builds' | 'teams',
     ) => void
-    onTabChange: (tab: 'overview' | 'cards' | 'builds' | 'teams') => void
+    onTabChange: (tab: 'overview' | 'skills' | 'builds' | 'teams') => void
   }) => (
     <div aria-label={`${awakener.name} details`} role='dialog'>
       <div>{`Active tab ${activeTab}`}</div>
@@ -119,12 +189,60 @@ vi.mock('./database/AwakenerDetailModal', () => ({
   ),
 }))
 
+vi.mock('./database/WheelDetailModal', () => ({
+  WheelDetailModal: ({
+    onClose,
+    onSelectAwakener,
+    onSelectWheel,
+    wheel,
+  }: {
+    wheel: {id: string; name: string}
+    onClose: () => void
+    onSelectAwakener?: (
+      awakener: {id: number; name: string},
+      tab?: 'overview' | 'skills' | 'builds' | 'teams',
+    ) => void
+    onSelectWheel?: (wheel: {name: string}) => void
+  }) => (
+    <div aria-label={`${wheel.name} details`} role='dialog'>
+      <button
+        aria-label='Switch to alpha awakener detail'
+        onClick={() => {
+          onSelectAwakener?.({id: 1, name: 'alpha'}, 'overview')
+        }}
+        type='button'
+      >
+        Alpha
+      </button>
+      <button
+        aria-label='Switch to Shared Dream detail'
+        onClick={() => {
+          onSelectWheel?.({name: 'Shared Dream'})
+        }}
+        type='button'
+      >
+        Shared Dream
+      </button>
+      <button aria-label='Close wheel detail' onClick={onClose} type='button'>
+        Close wheel
+      </button>
+    </div>
+  ),
+}))
+
 afterEach(() => {
   vi.restoreAllMocks()
   mockAwakenersFullV2 = [{id: 1}, {id: 2}, {id: 3}]
   mockLoadPromiseCache = new Map()
+  mockWheelsFullV1 = [{id: 'B01'}, {id: 'D12'}]
+  mockWheelLoadPromiseCache = new Map()
   mockLoadAwakenerFullV2ById.mockClear()
+  mockLoadWheelFullV1ById.mockClear()
 })
+
+function getResultsSummary(expectedText: string) {
+  return screen.getByText((_, element) => element?.textContent === expectedText)
+}
 
 async function renderDatabasePage(
   initialEntryOrEntries: string | string[] = '/database',
@@ -169,6 +287,8 @@ async function renderDatabasePage(
           <Route element={<DatabasePage />} path='/database' />
           <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug' />
           <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug/:tabSlug' />
+          <Route element={<DatabasePage />} path='/database/wheels' />
+          <Route element={<DatabasePage />} path='/database/wheels/:wheelSlug' />
         </Routes>
         <HistoryBackButton />
         <LocationProbe />
@@ -180,11 +300,11 @@ async function renderDatabasePage(
 }
 
 describe('DatabasePage', () => {
-  it('renders work-in-progress banner', async () => {
+  it('renders database beta banner', async () => {
     await renderDatabasePage()
 
-    expect(screen.getByText('Work in Progress:')).toBeInTheDocument()
-    expect(screen.getByText(/still being built/)).toBeInTheDocument()
+    expect(screen.getByText('Database beta:')).toBeInTheDocument()
+    expect(screen.getByText(/Search, filters, and detail views are live\./)).toBeInTheDocument()
   })
 
   it('renders all awakeners in the grid by default', async () => {
@@ -194,19 +314,19 @@ describe('DatabasePage', () => {
     expect(screen.getByLabelText('View details for Alpha')).toBeInTheDocument()
     expect(screen.getByLabelText('View details for Beta')).toBeInTheDocument()
     expect(screen.getByLabelText('View details for Gamma')).toBeInTheDocument()
-    expect(screen.getByText('3/3')).toBeInTheDocument()
+    expect(getResultsSummary('3 awakeners')).toBeInTheDocument()
   })
 
   it('filters awakeners by realm', async () => {
     await renderDatabasePage()
 
-    const chaosFilter = screen.getByRole('button', {name: /CHAOS/})
+    const chaosFilter = screen.getByRole('button', {name: /^CHAOS$/})
     fireEvent.click(chaosFilter)
 
     expect(screen.getByLabelText('View details for Alpha')).toBeInTheDocument()
     expect(screen.getByLabelText('View details for Gamma')).toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Beta')).not.toBeInTheDocument()
-    expect(screen.getByText('2/3')).toBeInTheDocument()
+    expect(getResultsSummary('2 of 3')).toBeInTheDocument()
     expect(chaosFilter).toHaveAttribute('aria-pressed', 'true')
     expect(
       screen
@@ -223,7 +343,7 @@ describe('DatabasePage', () => {
     expect(screen.getByLabelText('View details for Beta')).toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Alpha')).not.toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Gamma')).not.toBeInTheDocument()
-    expect(screen.getByText('1/3')).toBeInTheDocument()
+    expect(getResultsSummary('1 of 3')).toBeInTheDocument()
   })
 
   it('filters awakeners by rarity', async () => {
@@ -251,7 +371,7 @@ describe('DatabasePage', () => {
     await renderDatabasePage('/database?q=alpha&realm=CHAOS&sort=ATK&dir=DESC')
 
     expect(screen.getByRole('searchbox')).toHaveValue('alpha')
-    expect(screen.getByRole('button', {name: /CHAOS/})).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', {name: /^CHAOS$/})).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByLabelText('Database sort key')).toHaveValue('ATK')
     expect(screen.getByLabelText('View details for Alpha')).toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Beta')).not.toBeInTheDocument()
@@ -418,6 +538,13 @@ describe('DatabasePage', () => {
     expect(screen.getByText('Active tab builds')).toBeInTheDocument()
   })
 
+  it('opens the skills tab from the renamed awakener detail route slug', async () => {
+    await renderDatabasePage('/database/awk/beta/skills')
+
+    expect(await screen.findByRole('dialog', {name: /beta details/})).toBeInTheDocument()
+    expect(screen.getByText('Active tab skills')).toBeInTheDocument()
+  })
+
   it('updates url when switching detail tabs', async () => {
     await renderDatabasePage('/database/awk/alpha')
 
@@ -499,6 +626,120 @@ describe('DatabasePage', () => {
     await waitFor(() =>
       expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha'),
     )
+  })
+
+  it('canonicalizes legacy cards tab routes onto the skills slug', async () => {
+    await renderDatabasePage('/database/awk/alpha/cards')
+
+    expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
+    expect(screen.getByText('Active tab skills')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha/skills'),
+    )
+  })
+
+  it('canonicalizes mixed-case legacy tab routes onto the skills slug', async () => {
+    await renderDatabasePage('/database/awk/alpha/Cards')
+
+    expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
+    expect(screen.getByText('Active tab skills')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha/skills'),
+    )
+  })
+
+  it('opens wheel browse routes inside the database shell', async () => {
+    await renderDatabasePage('/database/wheels')
+
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/wheels')
+    expect(screen.getByLabelText('Search wheels')).toBeInTheDocument()
+    expect(screen.getByLabelText('View details for Merciful Nurturing')).toBeInTheDocument()
+  })
+
+  it('opens a wheel detail modal from the wheel browse grid and closes back to wheel browse', async () => {
+    await renderDatabasePage('/database/wheels')
+
+    await act(async () => {
+      fireEvent.click(screen.getByLabelText('View details for Merciful Nurturing'))
+    })
+
+    expect(
+      await screen.findByRole('dialog', {name: /merciful nurturing details/i}),
+    ).toBeInTheDocument()
+    expect(screen.getByTestId('location-path')).toHaveTextContent(
+      '/database/wheels/merciful-nurturing',
+    )
+
+    await act(async () => {
+      fireEvent.click(screen.getByLabelText('Close wheel detail'))
+    })
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/wheels')
+  })
+
+  it('opens wheel detail modal from a deep-linked wheel route', async () => {
+    await renderDatabasePage('/database/wheels/merciful-nurturing')
+
+    expect(
+      await screen.findByRole('dialog', {name: /merciful nurturing details/i}),
+    ).toBeInTheDocument()
+  })
+
+  it('falls back to the wheel browse route when deep link wheel slug is unknown', async () => {
+    await renderDatabasePage('/database/wheels/missing')
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    await waitFor(() =>
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/wheels'),
+    )
+  })
+
+  it('preserves search params when switching from a wheel modal to an awakener modal', async () => {
+    await renderDatabasePage('/database/wheels/merciful-nurturing?q=merciful&realm=CARO')
+
+    expect(
+      await screen.findByRole('dialog', {name: /merciful nurturing details/i}),
+    ).toBeInTheDocument()
+
+    await act(async () => {
+      fireEvent.click(screen.getByLabelText('Switch to alpha awakener detail'))
+    })
+
+    await waitFor(() =>
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha'),
+    )
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=merciful&realm=CARO')
+  })
+
+  it('preserves search params when switching from a wheel modal to another wheel modal', async () => {
+    await renderDatabasePage('/database/wheels/merciful-nurturing?q=merciful&realm=CARO')
+
+    expect(
+      await screen.findByRole('dialog', {name: /merciful nurturing details/i}),
+    ).toBeInTheDocument()
+
+    await act(async () => {
+      fireEvent.click(screen.getByLabelText('Switch to Shared Dream detail'))
+    })
+
+    await waitFor(() =>
+      expect(screen.getByTestId('location-path')).toHaveTextContent(
+        '/database/wheels/shared-dream',
+      ),
+    )
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=merciful&realm=CARO')
+  })
+
+  it('filters wheels by the neutral realm without affecting other wheel routes', async () => {
+    await renderDatabasePage('/database/wheels')
+
+    fireEvent.click(screen.getByRole('button', {name: 'NEUTRAL'}))
+
+    expect(screen.getByLabelText('View details for Quiet Orbit')).toBeInTheDocument()
+    expect(screen.queryByLabelText('View details for Merciful Nurturing')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('View details for Shared Dream')).not.toBeInTheDocument()
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?realm=NEUTRAL')
   })
 
   it('sorts awakeners by ATK stat descending', async () => {

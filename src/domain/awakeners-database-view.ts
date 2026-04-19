@@ -17,6 +17,10 @@ import {
   type ResolvedAwakenerFullV2Record,
 } from './awakeners-full-v2-resolver'
 import {buildCardKeywordFooterText} from './card-keywords'
+import type {
+  DatabaseInfluenceBadge,
+  ResolvedDatabaseReferenceLayer,
+} from './database-reference-layer'
 import {getDerivedSkills} from './derived-skills'
 import {
   resolveDescribedRecord,
@@ -25,6 +29,12 @@ import {
 } from './description-records'
 
 export {collectAwakenerDatabaseCardNames} from './awakeners-database-reference-layer'
+export type {
+  DatabaseInfluenceBadge,
+  DatabaseReferenceInfo,
+  DatabaseReferenceLayer,
+  ResolvedDatabaseReferenceLayer,
+} from './database-reference-layer'
 
 export interface AwakenerDatabaseViewOptions extends Partial<
   Pick<AwakenerFullV2ResolveOptions, 'selectedEnlightenSlot' | 'soulforgeLevel'>
@@ -46,29 +56,6 @@ export interface DatabaseDescribedEntry<TRecord extends DescribedRecord> {
   influenceBadges?: DatabaseInfluenceBadge[]
 }
 
-export interface DatabaseInfluenceBadge {
-  kind: 'enlighten' | 'talent'
-  id: string
-  label: string
-  referenceName: string
-  slot?: AwakenerEnlightenRecord['slot']
-}
-
-export interface DatabaseReferenceInfo<TRecord extends DescribedRecord = DescribedRecord> {
-  kind: 'skill' | 'talent' | 'enlighten' | 'derived-skill' | 'overlay'
-  id: string
-  name: string
-  label: string
-  record: TRecord
-  description: string
-  keywordFooterText?: string
-  descriptionRank: number | undefined
-  descriptionMaxRank: number | undefined
-  influencingEnlightenSlots: AwakenerEnlightenRecord['slot'][]
-  influencingTalentIds: string[]
-  influenceBadges?: DatabaseInfluenceBadge[]
-}
-
 export interface ResolvedAwakenerDatabaseShellView {
   selection: ResolvedAwakenerFullV2Record['selection']
   skillLevel: number
@@ -79,19 +66,14 @@ export interface ResolvedAwakenerDatabaseShellView {
   overlayOverridesById: Record<string, AwakenerOverlayRecord>
   commandCards: DatabaseDescribedEntry<AwakenerSkillRecord>[]
   exalts: DatabaseDescribedEntry<AwakenerSkillRecord>[]
+  overExalt: DatabaseDescribedEntry<AwakenerSkillRecord> | null
   talents: DatabaseDescribedEntry<AwakenerTalentRecord>[]
   enlightens: DatabaseDescribedEntry<AwakenerEnlightenRecord>[]
   derivedSkills: DatabaseDescribedEntry<DerivedSkillRecord>[]
   promotedExtras: DatabaseDescribedEntry<DerivedSkillRecord>[]
 }
 
-export interface ResolvedAwakenerDatabaseReferenceLayer {
-  cardNames: Set<string>
-  accessibleOverlays: AwakenerOverlayRecord[]
-  referenceInfoByName: Map<string, DatabaseReferenceInfo>
-  referenceInfoById: Map<string, DatabaseReferenceInfo>
-  overlayByName: Map<string, AwakenerOverlayRecord>
-}
+export type ResolvedAwakenerDatabaseReferenceLayer = ResolvedDatabaseReferenceLayer
 
 export type ResolvedAwakenerDatabaseView = ResolvedAwakenerDatabaseShellView &
   ResolvedAwakenerDatabaseReferenceLayer
@@ -605,6 +587,7 @@ export function resolveAwakenerDatabaseShellView(
     influenceLookups,
     influenceBadgeLookups,
   )
+  const overExalt = exalts.find((entry) => entry.key === 'OverExalt') ?? null
   const promotedExtras = buildDerivedEntries(
     'promoted',
     resolvedAwakenerRecord.cards.promotedExtras,
@@ -632,6 +615,7 @@ export function resolveAwakenerDatabaseShellView(
     overlayOverridesById: resolvedRecord.overlayOverridesById,
     commandCards,
     exalts,
+    overExalt,
     talents,
     enlightens,
     derivedSkills: ownedDerivedSkills,

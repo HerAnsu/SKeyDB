@@ -1,0 +1,14 @@
+{
+  "id": "ZL01",
+  "assetId": "Weapon_Full_ZL01",
+  "name": "Spring in Yakutsk",
+  "rarity": "SSR",
+  "realm": "NEUTRAL",
+  "aliases": ["Spring in Yakutsk"],
+  "searchTags": [],
+  "mainstatKey": "KEYFLARE_REGEN",
+  "mainstatSeriesKey": "SSR:KEYFLARE_REGEN",
+  "descriptionTemplate": "Team Unique: At turn end, the wielder gains [StateArg1] Aliemus and Keyflare equal to their Keyflare Regen.",
+  "descriptionArgs": {"StateArg1": {"kind": "scaling", "values": ["9", "11", "13", "15"]}},
+  "lore": "After the disaster vanished without a trace and the crisis was temporarily resolved, the Mythag Special Operations Team departed from Yakutsk with \"unexpected gains.\"\nMiss Dexter glanced back at the massive pit at the explosion site, noticing that unknown plant sprouts had quietly broken through the soil without her realizing it.\nShe sighed in relief, feeling lighthearted.\nThe vast forests of Yakutsk will surely welcome its spring.\nThe willows will bud when the next spring arrives, and the lilies of the valley will bloom quietly after the next rainy season, with all life embracing new beginnings.\nAnd their journey against the unknown will embark on a new starting point."
+}

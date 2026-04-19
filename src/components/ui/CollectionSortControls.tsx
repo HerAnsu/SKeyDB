@@ -10,10 +10,10 @@ import {TogglePill} from './TogglePill'
 interface CollectionSortControlsProps<TSortKey extends string = AwakenerSortKey> {
   sortKey: TSortKey
   sortDirection: CollectionSortDirection
-  groupByRealm: boolean
+  groupByRealm?: boolean
   onSortKeyChange: (nextKey: TSortKey) => void
   onSortDirectionToggle: () => void
-  onGroupByRealmChange: (nextGroupByRealm: boolean) => void
+  onGroupByRealmChange?: (nextGroupByRealm: boolean) => void
   sortOptions?: readonly TSortKey[]
   showGroupByRealm?: boolean
   headingText?: string
@@ -23,6 +23,13 @@ interface CollectionSortControlsProps<TSortKey extends string = AwakenerSortKey>
   layout?: 'stacked' | 'compact'
   compactTrailingAction?: ReactNode
   className?: string
+  getSortLabel?: (sortKey: TSortKey) => string
+  getSortDirectionLabel?: (sortKey: TSortKey, direction: CollectionSortDirection) => string
+  compactLeadingLabel?: string
+  compactLabelClassName?: string
+  compactRowClassName?: string
+  compactControlClassName?: string
+  compactDirectionButtonClassName?: string
 }
 
 const defaultSortOptions: readonly AwakenerSortKey[] = [
@@ -68,7 +75,7 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
   onSortDirectionToggle,
   onGroupByRealmChange,
   sortOptions,
-  showGroupByRealm = true,
+  showGroupByRealm,
   headingText = 'Sort',
   sortSelectAriaLabel = 'Sort by',
   sortDirectionAriaLabel = 'Toggle sort direction',
@@ -76,6 +83,13 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
   layout = 'stacked',
   compactTrailingAction,
   className,
+  getSortLabel: getSortLabelOverride,
+  getSortDirectionLabel,
+  compactLeadingLabel,
+  compactLabelClassName,
+  compactRowClassName,
+  compactControlClassName,
+  compactDirectionButtonClassName,
 }: CollectionSortControlsProps<TSortKey>) {
   const resolvedSortOptions = resolveSortOptions(sortOptions)
   const activeSortKey = resolvedSortOptions.includes(sortKey)
@@ -83,10 +97,22 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
     : resolvedSortOptions.length > 0
       ? resolvedSortOptions[0]
       : sortKey
+  const resolvedGroupByRealm = groupByRealm ?? false
+  const resolvedShowGroupByRealm =
+    showGroupByRealm ?? (groupByRealm !== undefined && onGroupByRealmChange !== undefined)
   const isCompact = layout === 'compact'
   const controlClassName =
-    'h-6 min-w-0 border border-slate-500/55 bg-slate-950/90 px-2 text-[10px] leading-none text-slate-200 outline-none focus:border-amber-300/65'
-  const directionButtonClassName = 'h-6 w-[72px] px-2 text-[10px] leading-none'
+    'h-8 min-w-0 border border-slate-700/70 bg-[linear-gradient(180deg,rgba(13,20,34,0.9),rgba(8,13,24,0.84))] px-2.5 text-[11px] leading-none text-slate-200 outline-none transition-colors focus:border-amber-300/60'
+  const directionButtonClassName = 'h-8 px-2.5 text-[11px] leading-none'
+  const resolvedControlClassName = compactControlClassName
+    ? `${controlClassName} ${compactControlClassName}`
+    : controlClassName
+  const resolvedDirectionButtonClassName = compactDirectionButtonClassName
+    ? `${directionButtonClassName} ${compactDirectionButtonClassName}`
+    : directionButtonClassName
+  const directionLabel =
+    getSortDirectionLabel?.(activeSortKey, sortDirection) ??
+    (sortDirection === 'DESC' ? 'High' : 'Low')
 
   return (
     <div className={className}>
@@ -94,10 +120,19 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
         {!isCompact ? (
           <div className='text-[10px] tracking-wide text-slate-400 uppercase'>{headingText}</div>
         ) : null}
-        <div className='flex items-center gap-1'>
+        <div className={compactRowClassName ?? 'flex flex-wrap items-center gap-1.5'}>
+          {isCompact && compactLeadingLabel ? (
+            <span
+              className={
+                compactLabelClassName ?? 'text-[10px] tracking-[0.16em] text-slate-500 uppercase'
+              }
+            >
+              {compactLeadingLabel}
+            </span>
+          ) : null}
           <select
             aria-label={sortSelectAriaLabel}
-            className={`flex-1 rounded-none ${controlClassName}`}
+            className={`flex-1 rounded-[2px] ${resolvedControlClassName}`}
             onChange={(event) => {
               onSortKeyChange(event.target.value as TSortKey)
             }}
@@ -105,13 +140,13 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
           >
             {resolvedSortOptions.map((option) => (
               <option key={option} value={option}>
-                {getSortLabel(option)}
+                {getSortLabelOverride ? getSortLabelOverride(option) : getSortLabel(option)}
               </option>
             ))}
           </select>
           <Button
             aria-label={sortDirectionAriaLabel}
-            className={directionButtonClassName}
+            className={resolvedDirectionButtonClassName}
             onClick={onSortDirectionToggle}
             type='button'
             variant='secondary'
@@ -122,19 +157,19 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
               ) : (
                 <FaCaretUp aria-hidden className='text-[11px]' />
               )}
-              <span>{sortDirection === 'DESC' ? 'High' : 'Low'}</span>
+              <span>{directionLabel}</span>
             </span>
           </Button>
           {isCompact ? compactTrailingAction : null}
         </div>
-        {showGroupByRealm ? (
+        {resolvedShowGroupByRealm && onGroupByRealmChange ? (
           <div className='flex items-center justify-between gap-2'>
             <span className='text-[10px] tracking-wide text-slate-400 uppercase'>
               Group By Realm
             </span>
             <TogglePill
               ariaLabel={groupByRealmAriaLabel}
-              checked={groupByRealm}
+              checked={resolvedGroupByRealm}
               className='ownership-pill-builder'
               offLabel='Off'
               onChange={onGroupByRealmChange}

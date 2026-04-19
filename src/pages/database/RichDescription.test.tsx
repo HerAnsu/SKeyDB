@@ -3,6 +3,8 @@ import type {ComponentProps} from 'react'
 import {render, screen, waitFor} from '@testing-library/react'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
+import {resolveDescriptionTemplate} from '@/domain/description-args'
+
 import type {RichDescription as RichDescriptionComponent} from './RichDescription'
 
 vi.mock('./database-popover-context', () => ({
@@ -84,6 +86,41 @@ describe('RichDescription', () => {
     expect(screen.getByText('Record text.')).toBeInTheDocument()
     expect(screen.getByText('Prepare 2')).toBeInTheDocument()
     expect(screen.queryByText('Fallback text.')).not.toBeInTheDocument()
+
+    resolveRichTextContent()
+
+    await waitFor(() => {
+      expect(screen.getByText('loaded content')).toBeInTheDocument()
+    })
+  })
+
+  it('supports wheel records through the same suspense seam', async () => {
+    const descriptionTemplate = 'Gain [StateArg1]% Keyflare.'
+    const descriptionArgs = {
+      StateArg1: {
+        kind: 'scaling' as const,
+        values: ['10', '20', '30', '40'],
+        suffix: '%',
+      },
+    }
+    const {resolveRichTextContent} = await renderRichDescription({
+      record: {
+        id: 'B01',
+        kind: 'wheel',
+        displayName: 'Merciful Nurturing',
+        ownerAwakenerId: 1,
+        descriptionTemplate,
+        descriptionArgs,
+      },
+      descriptionRank: 4,
+      referenceLayer: null,
+      text: 'Fallback wheel text.',
+    })
+
+    expect(
+      screen.getByText(resolveDescriptionTemplate(descriptionTemplate, descriptionArgs, {rank: 4})),
+    ).toBeInTheDocument()
+    expect(screen.queryByText('Fallback wheel text.')).not.toBeInTheDocument()
 
     resolveRichTextContent()
 

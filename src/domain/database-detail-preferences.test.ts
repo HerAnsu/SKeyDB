@@ -28,29 +28,45 @@ describe('database-detail-preferences', () => {
   it('normalizes persisted preferences and falls back on invalid values', () => {
     expect(
       normalizeDatabaseDetailPreferences({
-        showVisibleScaling: false,
-        showTagIcons: false,
-        clickOutsideClosesPopovers: false,
-        fontScale: 'large',
-        defaultSelection: {
-          awakenerLevel: 999,
-          psycheSurgeOffset: -5,
-          skillLevel: 9,
-          selectedEnlightenSlot: 'AbsoluteAxiom',
-          soulforgeLevel: -2,
+        shared: {
+          showTagIcons: false,
+          clickOutsideClosesPopovers: false,
+          fontScale: 'large',
+        },
+        awakener: {
+          showVisibleScaling: false,
+          defaultSelection: {
+            awakenerLevel: 999,
+            psycheSurgeOffset: -5,
+            skillLevel: 9,
+            selectedEnlightenSlot: 'AbsoluteAxiom',
+            soulforgeLevel: -2,
+          },
+        },
+        wheel: {
+          defaultEnhanceLevel: 999,
+          expandLoreByDefault: true,
         },
       }),
     ).toEqual({
-      showVisibleScaling: false,
-      showTagIcons: false,
-      clickOutsideClosesPopovers: false,
-      fontScale: 'large',
-      defaultSelection: {
-        awakenerLevel: 90,
-        psycheSurgeOffset: 0,
-        skillLevel: 6,
-        selectedEnlightenSlot: 'AbsoluteAxiom',
-        soulforgeLevel: 0,
+      shared: {
+        showTagIcons: false,
+        clickOutsideClosesPopovers: false,
+        fontScale: 'large',
+      },
+      awakener: {
+        showVisibleScaling: false,
+        defaultSelection: {
+          awakenerLevel: 90,
+          psycheSurgeOffset: 0,
+          skillLevel: 6,
+          selectedEnlightenSlot: 'AbsoluteAxiom',
+          soulforgeLevel: 0,
+        },
+      },
+      wheel: {
+        defaultEnhanceLevel: 15,
+        expandLoreByDefault: true,
       },
     })
   })
@@ -58,10 +74,36 @@ describe('database-detail-preferences', () => {
   it('reads stored preferences safely and ignores invalid payloads', () => {
     const validStorage = createStorage({
       'database-detail-preferences': JSON.stringify({
-        showVisibleScaling: false,
+        shared: {
+          showTagIcons: false,
+          clickOutsideClosesPopovers: false,
+          fontScale: 'medium',
+        },
+        awakener: {
+          showVisibleScaling: false,
+          defaultSelection: {
+            awakenerLevel: 90,
+            psycheSurgeOffset: 2,
+            skillLevel: 4,
+            selectedEnlightenSlot: 'E2',
+            soulforgeLevel: 3,
+          },
+        },
+        wheel: {
+          defaultEnhanceLevel: 7,
+          expandLoreByDefault: true,
+        },
+      }),
+    })
+
+    expect(readDatabaseDetailPreferences(validStorage)).toEqual({
+      shared: {
         showTagIcons: false,
         clickOutsideClosesPopovers: false,
         fontScale: 'medium',
+      },
+      awakener: {
+        showVisibleScaling: false,
         defaultSelection: {
           awakenerLevel: 90,
           psycheSurgeOffset: 2,
@@ -69,20 +111,10 @@ describe('database-detail-preferences', () => {
           selectedEnlightenSlot: 'E2',
           soulforgeLevel: 3,
         },
-      }),
-    })
-
-    expect(readDatabaseDetailPreferences(validStorage)).toEqual({
-      showVisibleScaling: false,
-      showTagIcons: false,
-      clickOutsideClosesPopovers: false,
-      fontScale: 'medium',
-      defaultSelection: {
-        awakenerLevel: 90,
-        psycheSurgeOffset: 2,
-        skillLevel: 4,
-        selectedEnlightenSlot: 'E2',
-        soulforgeLevel: 3,
+      },
+      wheel: {
+        defaultEnhanceLevel: 7,
+        expandLoreByDefault: true,
       },
     })
 
@@ -101,15 +133,23 @@ describe('database-detail-preferences', () => {
     expect(
       writeDatabaseDetailPreferences(
         {
-          showVisibleScaling: false,
-          clickOutsideClosesPopovers: false,
-          fontScale: 'medium',
-          defaultSelection: {
-            awakenerLevel: 70,
-            psycheSurgeOffset: 1,
-            skillLevel: 3,
-            selectedEnlightenSlot: 'E1',
-            soulforgeLevel: 2,
+          shared: {
+            clickOutsideClosesPopovers: false,
+            fontScale: 'medium',
+          },
+          awakener: {
+            showVisibleScaling: false,
+            defaultSelection: {
+              awakenerLevel: 70,
+              psycheSurgeOffset: 1,
+              skillLevel: 3,
+              selectedEnlightenSlot: 'E1',
+              soulforgeLevel: 2,
+            },
+          },
+          wheel: {
+            defaultEnhanceLevel: 11,
+            expandLoreByDefault: true,
           },
         },
         storage,
@@ -117,16 +157,66 @@ describe('database-detail-preferences', () => {
     ).toBe(true)
 
     expect(JSON.parse(storage.getItem('database-detail-preferences') ?? 'null')).toEqual({
-      showVisibleScaling: false,
-      showTagIcons: true,
-      clickOutsideClosesPopovers: false,
-      fontScale: 'medium',
-      defaultSelection: {
-        awakenerLevel: 70,
-        psycheSurgeOffset: 1,
-        skillLevel: 3,
-        selectedEnlightenSlot: 'E1',
-        soulforgeLevel: 2,
+      shared: {
+        showTagIcons: true,
+        clickOutsideClosesPopovers: false,
+        fontScale: 'medium',
+      },
+      awakener: {
+        showVisibleScaling: false,
+        defaultSelection: {
+          awakenerLevel: 70,
+          psycheSurgeOffset: 1,
+          skillLevel: 3,
+          selectedEnlightenSlot: 'E1',
+          soulforgeLevel: 2,
+        },
+      },
+      wheel: {
+        defaultEnhanceLevel: 11,
+        expandLoreByDefault: true,
+      },
+    })
+  })
+
+  it('upgrades legacy flat preferences into the modal-scoped shape', () => {
+    const legacyStorage = createStorage({
+      'database-detail-preferences': JSON.stringify({
+        showVisibleScaling: false,
+        showTagIcons: false,
+        clickOutsideClosesPopovers: false,
+        fontScale: 'medium',
+        defaultSelection: {
+          awakenerLevel: 90,
+          psycheSurgeOffset: 2,
+          skillLevel: 4,
+          selectedEnlightenSlot: 'E2',
+          soulforgeLevel: 3,
+        },
+        defaultWheelEnhanceLevel: 5,
+        expandWheelLoreByDefault: true,
+      }),
+    })
+
+    expect(readDatabaseDetailPreferences(legacyStorage)).toEqual({
+      shared: {
+        showTagIcons: false,
+        clickOutsideClosesPopovers: false,
+        fontScale: 'medium',
+      },
+      awakener: {
+        showVisibleScaling: false,
+        defaultSelection: {
+          awakenerLevel: 90,
+          psycheSurgeOffset: 2,
+          skillLevel: 4,
+          selectedEnlightenSlot: 'E2',
+          soulforgeLevel: 3,
+        },
+      },
+      wheel: {
+        defaultEnhanceLevel: 5,
+        expandLoreByDefault: true,
       },
     })
   })
@@ -137,12 +227,15 @@ describe('database-detail-preferences', () => {
     expect(
       resolveDatabaseDetailDefaultSelection(record, {
         ...DEFAULT_DATABASE_DETAIL_PREFERENCES,
-        defaultSelection: {
-          awakenerLevel: 90,
-          psycheSurgeOffset: 4,
-          skillLevel: 5,
-          selectedEnlightenSlot: 'AbsoluteAxiom',
-          soulforgeLevel: 8,
+        awakener: {
+          ...DEFAULT_DATABASE_DETAIL_PREFERENCES.awakener,
+          defaultSelection: {
+            awakenerLevel: 90,
+            psycheSurgeOffset: 4,
+            skillLevel: 5,
+            selectedEnlightenSlot: 'AbsoluteAxiom',
+            soulforgeLevel: 8,
+          },
         },
       }),
     ).toEqual({

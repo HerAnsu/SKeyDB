@@ -1,14 +1,6 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type KeyboardEvent as ReactKeyboardEvent,
-  type MouseEvent as ReactMouseEvent,
-  type RefObject,
-} from 'react'
+import {useCallback, useEffect, useRef, useState, type RefObject, type SetStateAction} from 'react'
 
-import {getFocusableElements} from './focus-scope'
+import {useDatabaseDetailChrome} from './useDatabaseDetailChrome'
 
 const MOBILE_TAG_ROWS_HEIGHT = 46
 
@@ -17,6 +9,7 @@ interface UseAwakenerDetailChromeOptions {
   awakenerTags: readonly string[]
   isSearchOpen: boolean
   searchContainerRef: RefObject<HTMLDivElement | null>
+  searchInputRef: RefObject<HTMLInputElement | null>
   closeSearch: (blurInput?: boolean) => void
   hasOpenPopovers: boolean
   closeAllPopovers: () => void
@@ -29,52 +22,34 @@ export function useAwakenerDetailChrome({
   awakenerTags,
   isSearchOpen,
   searchContainerRef,
+  searchInputRef,
   closeSearch,
   hasOpenPopovers,
   closeAllPopovers,
   clickOutsideClosesPopovers,
   onClose,
 }: UseAwakenerDetailChromeOptions) {
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
-  const [showAllTags, setShowAllTags] = useState(false)
+  const [expandedAwakenerId, setExpandedAwakenerId] = useState<number | null>(null)
   const [canExpandTags, setCanExpandTags] = useState(false)
-  const [isMobileHeader, setIsMobileHeader] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth < 768 : false,
-  )
-  const panelRef = useRef<HTMLDivElement>(null)
   const tagsRef = useRef<HTMLDivElement>(null)
-  const settingsRef = useRef<HTMLDivElement>(null)
-  const previouslyFocusedElementRef = useRef<HTMLElement | null>(null)
-
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = previousOverflow
-    }
-  }, [])
-
-  useEffect(() => {
-    previouslyFocusedElementRef.current =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null
-    panelRef.current?.focus()
-
-    return () => {
-      previouslyFocusedElementRef.current?.focus()
-    }
-  }, [])
-
-  useEffect(() => {
-    function updateHeaderLayout() {
-      setIsMobileHeader(window.innerWidth < 768)
-    }
-
-    updateHeaderLayout()
-    window.addEventListener('resize', updateHeaderLayout)
-    return () => {
-      window.removeEventListener('resize', updateHeaderLayout)
-    }
-  }, [])
+  const showAllTags = expandedAwakenerId === awakenerId
+  const setShowAllTags = useCallback(
+    (next: SetStateAction<boolean>) => {
+      const nextValue = typeof next === 'function' ? next(showAllTags) : next
+      setExpandedAwakenerId(nextValue ? awakenerId : null)
+    },
+    [awakenerId, showAllTags],
+  )
+  const chrome = useDatabaseDetailChrome({
+    clickOutsideClosesPopovers,
+    closeAllPopovers,
+    closeSearch,
+    hasOpenPopovers,
+    isSearchOpen,
+    onClose,
+    searchContainerRef,
+    searchInputRef,
+  })
 
   useEffect(() => {
     function refreshTagsOverflow() {
@@ -93,108 +68,16 @@ export function useAwakenerDetailChrome({
     }
   }, [awakenerId, awakenerTags])
 
-  useEffect(() => {
-    if (!isSettingsOpen) {
-      return
-    }
-
-    function handlePointerDown(event: PointerEvent) {
-      const target = event.target as HTMLElement
-      if (settingsRef.current?.contains(target)) {
-        return
-      }
-      if (target.closest('[data-detail-settings-trigger]')) {
-        return
-      }
-      setIsSettingsOpen(false)
-    }
-
-    window.addEventListener('pointerdown', handlePointerDown)
-    return () => {
-      window.removeEventListener('pointerdown', handlePointerDown)
-    }
-  }, [isSettingsOpen])
-
-  const handleOverlayClick = useCallback(
-    (event: ReactMouseEvent) => {
-      const target = event.target as HTMLElement
-      const clickedOutsideSearch = !searchContainerRef.current?.contains(target)
-      if (isSearchOpen && clickedOutsideSearch) {
-        closeSearch(true)
-        return
-      }
-      const clickedInsidePopover = Boolean(target.closest('[data-skill-popover]'))
-      if (
-        hasOpenPopovers &&
-        clickOutsideClosesPopovers &&
-        !clickedInsidePopover &&
-        !target.closest('[data-detail-modal-external]')
-      ) {
-        closeAllPopovers()
-        return
-      }
-      if (
-        panelRef.current &&
-        !panelRef.current.contains(target) &&
-        !clickedInsidePopover &&
-        !target.closest('[data-detail-modal-external]')
-      ) {
-        onClose()
-      }
-    },
-    [
-      clickOutsideClosesPopovers,
-      closeAllPopovers,
-      closeSearch,
-      hasOpenPopovers,
-      isSearchOpen,
-      onClose,
-      searchContainerRef,
-    ],
-  )
-
-  const handlePanelKeyDown = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'Tab') {
-      return
-    }
-
-    const focusScope = event.currentTarget
-    const focusableElements = getFocusableElements(focusScope)
-    if (focusableElements.length === 0) {
-      event.preventDefault()
-      panelRef.current?.focus()
-      return
-    }
-
-    const firstElement = focusableElements[0]
-    const lastElement = focusableElements[focusableElements.length - 1]
-    const activeElement =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null
-
-    if (event.shiftKey) {
-      if (!activeElement || activeElement === firstElement || activeElement === panelRef.current) {
-        event.preventDefault()
-        lastElement.focus()
-      }
-      return
-    }
-
-    if (!activeElement || activeElement === lastElement) {
-      event.preventDefault()
-      firstElement.focus()
-    }
-  }, [])
-
   return {
     canExpandTags,
-    handleOverlayClick,
-    handlePanelKeyDown,
-    isMobileHeader,
-    isSettingsOpen,
-    panelRef,
-    setIsSettingsOpen,
+    handleOverlayClick: chrome.handleOverlayClick,
+    handlePanelKeyDown: chrome.handlePanelKeyDown,
+    isMobileHeader: chrome.isMobileHeader,
+    isSettingsOpen: chrome.isSettingsOpen,
+    panelRef: chrome.panelRef,
+    setIsSettingsOpen: chrome.setIsSettingsOpen,
     setShowAllTags,
-    settingsRef,
+    settingsRef: chrome.settingsRef,
     showAllTags,
     tagsRef,
   }

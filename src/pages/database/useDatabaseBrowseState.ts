@@ -13,47 +13,46 @@ import {
 } from '@/domain/database-browse-state'
 import type {DatabaseSortKey} from '@/domain/database-sorting'
 
+import {useBrowseQueryActions} from './useBrowseQueryActions'
+
 type BrowseHistoryMode = 'push' | 'replace'
 
-export function useDatabaseBrowseState() {
+interface UseUrlBackedBrowseStateOptions<TState> {
+  parseState: (searchParams: URLSearchParams) => TState
+  patchState: (searchParams: URLSearchParams, patch: Partial<TState>) => URLSearchParams
+}
+
+export function useUrlBackedBrowseState<TState>({
+  parseState,
+  patchState,
+}: UseUrlBackedBrowseStateOptions<TState>) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const browseState = parseDatabaseBrowseState(searchParams)
-  const {groupByRealm, query, rarityFilter, realmFilter, sortDirection, sortKey, typeFilter} =
-    browseState
+  const browseState = parseState(searchParams)
 
   const commitBrowseState = useCallback(
-    (patch: Partial<DatabaseBrowseState>, historyMode: BrowseHistoryMode) => {
-      const nextParams = patchDatabaseBrowseState(searchParams, patch)
+    (patch: Partial<TState>, historyMode: BrowseHistoryMode) => {
+      const nextParams = patchState(searchParams, patch)
       if (nextParams.toString() === searchParams.toString()) {
         return
       }
 
       setSearchParams(nextParams, {replace: historyMode === 'replace'})
     },
-    [searchParams, setSearchParams],
+    [patchState, searchParams, setSearchParams],
   )
 
-  const setQuery = useCallback(
-    (next: string) => {
-      commitBrowseState({query: next}, 'replace')
-    },
-    [commitBrowseState],
-  )
+  return {browseState, commitBrowseState}
+}
 
-  const appendSearchCharacter = useCallback(
-    (key: string) => {
-      commitBrowseState({query: query + key}, 'replace')
-    },
-    [commitBrowseState, query],
-  )
-
-  const removeSearchCharacter = useCallback(() => {
-    commitBrowseState({query: query.slice(0, -1)}, 'replace')
-  }, [commitBrowseState, query])
-
-  const clearQuery = useCallback(() => {
-    commitBrowseState({query: ''}, 'replace')
-  }, [commitBrowseState])
+export function useDatabaseBrowseState() {
+  const {browseState, commitBrowseState} = useUrlBackedBrowseState<DatabaseBrowseState>({
+    parseState: parseDatabaseBrowseState,
+    patchState: patchDatabaseBrowseState,
+  })
+  const {groupByRealm, query, rarityFilter, realmFilter, sortDirection, sortKey, typeFilter} =
+    browseState
+  const {setQuery, appendSearchCharacter, removeSearchCharacter, clearQuery} =
+    useBrowseQueryActions<DatabaseBrowseState>(query, commitBrowseState)
 
   const setRealmFilter = useCallback(
     (next: RealmFilterId) => {
@@ -99,6 +98,18 @@ export function useDatabaseBrowseState() {
     [commitBrowseState],
   )
 
+  const resetFilters = useCallback(() => {
+    commitBrowseState(
+      {
+        query: '',
+        realmFilter: 'ALL',
+        rarityFilter: 'ALL',
+        typeFilter: 'ALL',
+      },
+      'push',
+    )
+  }, [commitBrowseState])
+
   return {
     groupByRealm,
     query,
@@ -117,5 +128,6 @@ export function useDatabaseBrowseState() {
     setSortKey,
     toggleSortDirection,
     setGroupByRealm,
+    resetFilters,
   }
 }

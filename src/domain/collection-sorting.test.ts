@@ -4,6 +4,7 @@ import {
   compareAwakenersForCollectionSort,
   comparePossesForCollectionDefaultSort,
   compareWheelsForCollectionDefaultSort,
+  compareWheelsForCollectionSort,
   DEFAULT_AWAKENER_SORT_CONFIG,
   resolveAwakenerSortKey,
   resolveGroupByRealm,
@@ -128,12 +129,13 @@ describe('compareAwakenersForCollectionSort', () => {
 describe('compareWheelsForCollectionDefaultSort', () => {
   it('sorts by rarity then realm then enlighten', () => {
     const entries: SortableCollectionEntry[] = [
+      {label: 'N A', index: 4, enlighten: 0, rarity: 'N', realm: 'NEUTRAL'},
       {label: 'SR A', index: 2, enlighten: 12, rarity: 'SR', realm: 'CHAOS'},
       {label: 'SSR B', index: 1, enlighten: 1, rarity: 'SSR', realm: 'AEQUOR'},
       {label: 'SSR A', index: 3, enlighten: 5, rarity: 'SSR', realm: 'CHAOS'},
     ]
     const sorted = [...entries].sort(compareWheelsForCollectionDefaultSort)
-    expect(sorted.map((entry) => entry.label)).toEqual(['SSR A', 'SSR B', 'SR A'])
+    expect(sorted.map((entry) => entry.label)).toEqual(['SSR A', 'SSR B', 'SR A', 'N A'])
   })
 
   it('always sorts unowned wheels after owned wheels', () => {
@@ -143,6 +145,97 @@ describe('compareWheelsForCollectionDefaultSort', () => {
     ]
     const sorted = [...entries].sort(compareWheelsForCollectionDefaultSort)
     expect(sorted.map((entry) => entry.label)).toEqual(['Owned SR', 'Unowned SSR'])
+  })
+})
+
+describe('compareWheelsForCollectionSort', () => {
+  it('sorts by rarity with collection tie-breakers and includes N', () => {
+    const entries = [
+      {
+        label: 'Needle',
+        index: 4,
+        enlighten: 0,
+        rarity: 'N',
+        realm: 'NEUTRAL',
+        mainstatLabel: 'Keyflare Regen',
+      },
+      {
+        label: 'Silver',
+        index: 3,
+        enlighten: 0,
+        rarity: 'R',
+        realm: 'NEUTRAL',
+        mainstatLabel: 'Crit Rate',
+      },
+      {
+        label: 'Caro Song',
+        index: 2,
+        enlighten: 0,
+        rarity: 'SSR',
+        realm: 'CARO',
+        mainstatLabel: 'DMG Amp',
+      },
+      {
+        label: 'Chaos Song',
+        index: 1,
+        enlighten: 0,
+        rarity: 'SSR',
+        realm: 'CHAOS',
+        mainstatLabel: 'Crit DMG',
+      },
+    ]
+
+    const sorted = [...entries].sort((left, right) =>
+      compareWheelsForCollectionSort(left, right, {
+        key: 'RARITY',
+        direction: 'DESC',
+      }),
+    )
+
+    expect(sorted.map((entry) => entry.label)).toEqual([
+      'Chaos Song',
+      'Caro Song',
+      'Silver',
+      'Needle',
+    ])
+  })
+
+  it('sorts by mainstat and falls back to collection ordering', () => {
+    const entries = [
+      {
+        label: 'Needle',
+        index: 4,
+        enlighten: 0,
+        rarity: 'N',
+        realm: 'NEUTRAL',
+        mainstatLabel: 'Keyflare Regen',
+      },
+      {
+        label: 'Calm Thread',
+        index: 2,
+        enlighten: 0,
+        rarity: 'SR',
+        realm: 'AEQUOR',
+        mainstatLabel: 'Crit Rate',
+      },
+      {
+        label: 'Bright Thread',
+        index: 1,
+        enlighten: 0,
+        rarity: 'SSR',
+        realm: 'CHAOS',
+        mainstatLabel: 'Crit Rate',
+      },
+    ]
+
+    const sorted = [...entries].sort((left, right) =>
+      compareWheelsForCollectionSort(left, right, {
+        key: 'MAINSTAT',
+        direction: 'ASC',
+      }),
+    )
+
+    expect(sorted.map((entry) => entry.label)).toEqual(['Bright Thread', 'Calm Thread', 'Needle'])
   })
 })
 
