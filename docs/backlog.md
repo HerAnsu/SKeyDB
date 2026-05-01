@@ -1,6 +1,6 @@
 # SKeyDB Backlog
 
-Last updated: 2026-04-16
+Last updated: 2026-05-01
 
 This file is for ideas worth remembering but not currently scheduled.
 
@@ -23,7 +23,7 @@ This file is for ideas worth remembering but not currently scheduled.
 - Finish the mobile-first builder layout pass.
 - Add share-via-link flows with safe overwrite UX.
 - Support multiple on-site saved planners beyond the current autosave plus manual snapshot model.
-- Add a migration registry once the first real persisted schema bump requires one.
+- Preserve V2 persisted storage compatibility for `skeydb.collection.v2` and `skeydb.builder.v2` during future schema changes.
 
 ## Database
 

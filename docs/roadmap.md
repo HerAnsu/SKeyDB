@@ -1,12 +1,13 @@
 # SKeyDB Roadmap
 
-Last updated: 2026-04-16
+Last updated: 2026-05-01
 
 ## Current priorities
 
 ### Database search and content depth
 
-- Keep the split canonical awakener datasets plus compiled V2 artifacts as the maintained database path.
+- Keep the public V2 payload from `MomenTB-Tools outputs/public` as the maintained website data boundary.
+- Keep database detail loaders on public V2 records. The current UI still adapts those records into the older detail view shape where needed, but the website should not read private compile outputs or source/audit sidecars.
 - Improve database browse ergonomics with better filtering, ranked search follow-through, and richer curated detail coverage where it is clearly worth the authoring cost.
 - Keep future wheel, covenant, and posse detail surfaces as deliberate follow-on product work rather than reopening the awakener migration foundation.
 - Keep soulforge-driven card/exalt scaling deferred unless a narrow curated subset becomes worth the manual authoring cost.
@@ -17,9 +18,10 @@ Last updated: 2026-04-16
 
 ### In-game codec completion
 
+- Keep `t1.` / `mt1.` compact imports and exports stable through frozen codec tables.
 - Finish covenant support for `@@...@@` import/export.
 - Finish posse support for `@@...@@` import/export.
-- Remove WIP fallback behavior once those two blocks are supported for real.
+- Keep `@@...@@` in-game tokens marked WIP and not guaranteed until those two blocks are supported for real.
 - Reference:
   - `docs/notes/2026-02-27-ingame-team-codec-status.md`
 
@@ -35,19 +37,19 @@ Last updated: 2026-04-16
 
 - Collection bulk editing and faster ownership workflows.
 - Timeline/resource page expansion if the supporting data curation becomes worth the maintenance cost.
-- Persistence migration scaffolding once the first real schema bump demands it.
 
 ## Recently shipped foundations
 
+- Public V2 website data sync from `MomenTB-Tools outputs/public`, including chunked public records for lazy database detail loading.
 - Database V2 compiled read model, selected-state resolver, generated lite projection, and canonical split dataset pipeline.
 - Database detail modal: Overview, Cards, and Guide tabs with rich text parsing, interactive skill/tag popovers, draggable stacked references, modal jump search, persistent detail preferences, exact level 1-90 stat scaling, and shared rendering infrastructure for future tabs.
 - Database & Tools page with filters, stronger ranked search, sorting, basic modal, and deep-linked awakener routes.
 - Public-safe repo contract cleanup for contributors, including fresh-clone-safe `npm run verify`.
 - Generated dimensional relic dataset with cleaned-up canonical descriptions.
 - Multi-team builder and cross-team management.
-- Compact `t1.` / `mt1.` import-export.
-- Baseline in-game `@@...@@` import-export support.
-- Builder and collection local persistence.
+- Compact `t1.` / `mt1.` import-export backed by frozen codec tables.
+- Baseline in-game `@@...@@` import-export support, still WIP for unsupported covenant/posse token coverage.
+- Builder and collection V2 local persistence using `skeydb.builder.v2` and `skeydb.collection.v2`.
 - Builder QOL stage 2 improvements.
 - Realm terminology migration.
 

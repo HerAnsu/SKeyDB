@@ -1,9 +1,9 @@
 # In-Game Team Codec Status
 
-Last updated: 2026-04-16
+Last updated: 2026-05-01
 
 ## Goal
-Support Morimens in-game team codes (`@@...@@`) alongside the existing SKeyDB `t1.` / `mt1.` import-export codec, without destabilizing the current builder flow.
+Support Morimens in-game team codes (`@@...@@`) alongside the stable SKeyDB `t1.` / `mt1.` import-export codec, without destabilizing the current builder flow.
 
 ## Implemented
 - In-game team decode support lives in `src/domain/ingame-codec.ts`.
@@ -14,6 +14,7 @@ Support Morimens in-game team codes (`@@...@@`) alongside the existing SKeyDB `t
   - full pasted in-game share blocks where the `@@...@@` code is embedded in surrounding text
 - Builder now exposes a separate `Export In-Game` action for single-team export.
 - In-game import/export stays separate from the existing compact SKeyDB codec.
+- `t1.` and `mt1.` remain supported through frozen codec tables so website-native compact codes survive future normalized ID changes.
 - Token dictionaries are tracked separately from canonical data in:
   - `src/data/ingame-tokens/awakeners.json`
   - `src/data/ingame-tokens/wheels.json`
@@ -26,6 +27,7 @@ Support Morimens in-game team codes (`@@...@@`) alongside the existing SKeyDB `t
   - import auto-detection behavior
 - Unknown awakener and wheel tokens import safely as empty and surface a warning to the user.
 - Current in-game dialog copy clearly marks the feature as work in progress.
+- `@@...@@` in-game token coverage is still WIP and not guaranteed for unsupported slices.
 
 ## Current Behavior
 ### Import
@@ -82,6 +84,7 @@ Support Morimens in-game team codes (`@@...@@`) alongside the existing SKeyDB `t
 - Covenant slices are not fully supported yet.
 - Posse import/export is not fully supported yet.
 - Future game content can still introduce new unknown tokens, which will import permissively as empty until mapped.
+- `@@...@@` compatibility is not guaranteed until covenant and posse coverage is completed and observed fixtures are refreshed.
 
 ## Files
 - `src/domain/ingame-codec.ts`
@@ -98,3 +101,4 @@ Support Morimens in-game team codes (`@@...@@`) alongside the existing SKeyDB `t
 - Phase B: decode path and import auto-detect - done
 - Phase C: single-team WIP-safe export path - done
 - Phase D: covenant/posse completion - remaining
+- Compact `t1.` / `mt1.` codec compatibility - frozen and supported
