@@ -38,6 +38,7 @@ describe('import-export codec', () => {
     const team = makeTeam('Team 1')
     const code = encodeSingleTeamCode(team)
     expect(code.startsWith('t1.')).toBe(true)
+    expect(code).toBe('t1.IRU8YmMBKjwAAAAAAAAAAAAAAAAA')
 
     const parsed = decodeImportCode(code)
     expect(parsed.kind).toBe('single')
@@ -47,6 +48,35 @@ describe('import-export codec', () => {
     expect(parsed.team.slots[0].awakenerName).toBe('goliath')
     expect(parsed.team.slots[0].wheels).toEqual(['SR19', 'SR20'])
     expect(parsed.team.slots[0].covenantId).toBe('001')
+  })
+
+  it('encodes V2 canonical ids through the frozen standard-code byte contract', () => {
+    const team = makeTeam('Canonical Team')
+    team.posseId = 'posse-0033'
+    team.slots[0].wheels = ['wheel-0095', 'wheel-0096']
+    team.slots[0].covenantId = 'covenant-0001'
+
+    const code = encodeSingleTeamCode(team)
+    expect(code).toBe('t1.IRU8YmMBKjwAAAAAAAAAAAAAAAAA')
+
+    const parsed = decodeImportCode(code)
+    expect(parsed.kind).toBe('single')
+    if (parsed.kind !== 'single') return
+    expect(parsed.team.posseId).toBe('taverns-opening')
+    expect(parsed.team.slots[0].wheels).toEqual(['SR19', 'SR20'])
+    expect(parsed.team.slots[0].covenantId).toBe('001')
+  })
+
+  it('decodes frozen t1 byte meanings through current runtime ids', () => {
+    const parsed = decodeImportCode('t1.IRU8YmMBKjwAAAAAAAAAAAAAAAAA')
+
+    expect(parsed.kind).toBe('single')
+    if (parsed.kind !== 'single') return
+    expect(parsed.team.posseId).toBe('taverns-opening')
+    expect(parsed.team.slots[0].awakenerName).toBe('goliath')
+    expect(parsed.team.slots[0].wheels).toEqual(['SR19', 'SR20'])
+    expect(parsed.team.slots[0].covenantId).toBe('001')
+    expect(parsed.team.slots[1].awakenerName).toBe('ramona')
   })
 
   it('round-trips Vortice in standard t1 export codes even without in-game @@ token support', () => {
