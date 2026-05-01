@@ -1,4 +1,4 @@
-import {useCallback, useMemo, type MouseEvent, type MouseEventHandler} from 'react'
+import {useCallback, useMemo, useRef, type MouseEvent, type MouseEventHandler} from 'react'
 
 import {CompactArtTile} from '@/components/ui/CompactArtTile'
 import {
@@ -225,9 +225,11 @@ function CovenantRecommendationGrid({build}: {build: AwakenerBuild}) {
 
 function WheelRecommendations({build}: {build: AwakenerBuild}) {
   const popoverContext = useDatabasePopoverControllerContext()
+  const requestIdRef = useRef(0)
   const hasGoodOptions = Boolean(getWheelGroupByTier(build, 'GOOD'))
   const handleSelectWheelRecommendation = useCallback(
     (wheelId: string, event: MouseEvent<HTMLElement>) => {
+      event.stopPropagation()
       const openRootInfo = popoverContext?.openRootInfo
       if (!openRootInfo) {
         return
@@ -235,17 +237,17 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
 
       const wheel = getWheelByCanonicalId(wheelId)
       const anchorElement = event.currentTarget
+      const requestId = requestIdRef.current + 1
+      requestIdRef.current = requestId
       void loadWheelFullV2ById(wheel?.id ?? wheelId)
         .then((wheelRecord) => {
-          if (!wheelRecord) {
+          if (!wheelRecord || requestId !== requestIdRef.current) {
             return
           }
 
           openRootInfo(buildWheelPopoverEntry(wheelRecord), {
             currentTarget: anchorElement,
-            stopPropagation: () => {
-              event.stopPropagation()
-            },
+            stopPropagation: () => undefined,
           })
         })
         .catch(() => undefined)

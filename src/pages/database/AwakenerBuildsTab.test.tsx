@@ -31,6 +31,14 @@ vi.mock('@/domain/wheels-full-v2-loader', () => ({
   loadWheelFullV2ById,
 }))
 
+function deferred<T>() {
+  let resolve!: (value: T) => void
+  const promise = new Promise<T>((promiseResolve) => {
+    resolve = promiseResolve
+  })
+  return {promise, resolve}
+}
+
 describe('AwakenerBuildsTab', () => {
   beforeEach(() => {
     getAwakenerBuildEntries.mockReset()
@@ -264,6 +272,83 @@ describe('AwakenerBuildsTab', () => {
           }),
         ]),
       }),
+      expect.any(Object),
+    )
+  })
+
+  it('keeps only the latest lazy wheel preview request active', async () => {
+    const openRootInfo = vi.fn()
+    vi.mocked(useDatabasePopoverControllerContext).mockReturnValue({
+      closeAllPopovers: vi.fn(),
+      hasOpenPopovers: false,
+      openNestedOverlay: vi.fn(),
+      openNestedReferenceByName: vi.fn(),
+      openRootInfo,
+      openRootOverlay: vi.fn(),
+      openRootReferenceByName: vi.fn(),
+    })
+    getAwakenerBuildEntries.mockReturnValue([
+      {
+        id: 'awakener-build-0027',
+        awakenerId: 'awakener-0027',
+        primaryBuildId: 'dps',
+        builds: [
+          {
+            id: 'dps',
+            label: 'DPS',
+            substatPriorityGroups: [['CRIT_DMG']],
+            recommendedWheels: [{tier: 'BIS_SSR', wheelIds: ['wheel-0028', 'wheel-0016']}],
+            recommendedCovenantIds: [],
+          },
+        ],
+      },
+    ])
+
+    const firstRequest = deferred<Awaited<ReturnType<typeof loadWheelFullV2ById>>>()
+    const secondRequest = deferred<Awaited<ReturnType<typeof loadWheelFullV2ById>>>()
+    loadWheelFullV2ById
+      .mockReturnValueOnce(firstRequest.promise)
+      .mockReturnValueOnce(secondRequest.promise)
+
+    render(<AwakenerBuildsTab awakenerId='awakener-0027' />)
+
+    screen.getByRole('button', {name: /Amber-Tinted Death/i}).click()
+    screen.getByRole('button', {name: /Manikin of Oblivion/i}).click()
+
+    secondRequest.resolve({
+      aliases: ['Manikin of Oblivion'],
+      awakener: 'Ghislaine',
+      descriptionArgs: {},
+      descriptionTemplate: 'Restores Aliemus.',
+      id: 'wheel-0016',
+      mainstatKey: 'ALIEMUS_REGEN',
+      mainstatSeriesKey: 'SSR:ALIEMUS_REGEN',
+      name: 'Manikin of Oblivion',
+      ownerAwakenerId: 18,
+      rarity: 'SSR',
+      realm: 'Gnosis',
+      searchTags: [],
+    })
+    firstRequest.resolve({
+      aliases: ['Amber-Tinted Death'],
+      awakener: 'Kathigua',
+      descriptionArgs: {},
+      descriptionTemplate: 'Deals damage.',
+      id: 'wheel-0028',
+      mainstatKey: 'CRIT_DMG',
+      mainstatSeriesKey: 'SSR:CRIT_DMG',
+      name: 'Amber-Tinted Death',
+      ownerAwakenerId: 27,
+      rarity: 'SSR',
+      realm: 'Lumina',
+      searchTags: [],
+    })
+
+    await waitFor(() => {
+      expect(openRootInfo).toHaveBeenCalledTimes(1)
+    })
+    expect(openRootInfo).toHaveBeenCalledWith(
+      expect.objectContaining({name: 'Manikin of Oblivion'}),
       expect.any(Object),
     )
   })

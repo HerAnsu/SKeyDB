@@ -7,6 +7,7 @@ describe('wheels-full-v1-loader', () => {
     await expect(loadWheelFullV1ById('wheel-0003')).resolves.toMatchObject({
       id: 'wheel-0003',
       name: "Winter's Requiem",
+      ownerAwakenerId: 3,
       mainstatSeriesKey: 'SSR:KEYFLARE_REGEN',
     })
   })

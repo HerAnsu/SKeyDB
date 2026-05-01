@@ -22,6 +22,30 @@ const scopes = [
 
 const defaultSourceRoot = path.resolve(repoRoot, '..', 'MomenTB-Tools', 'outputs', 'public')
 const destinationRoot = path.join(repoRoot, 'src', 'data', 'public-v2')
+const forbiddenPublicRecordKeys = new Set([
+  'audit',
+  'codecIndex',
+  'debug',
+  'legacyId',
+  'rawFormula',
+  'slug',
+  'source',
+  'sourceAwakenerId',
+  'sourceConfigId',
+  'sourceFormulaVariables',
+  'sourceId',
+  'sourceSkillId',
+  'sourceTables',
+  'stateLayerBonus',
+])
+const canonicalIdPatterns = {
+  'awakener-builds': /^awakener-build-\d{4}$/,
+  awakeners: /^awakener-\d{4}$/,
+  covenants: /^covenant-\d{4}$/,
+  posses: /^posse-\d{4}$/,
+  relics: /^relic-\d{4}$/,
+  wheels: /^wheel-\d{4}$/,
+}
 
 function parseArgs(argv) {
   const options = {
@@ -122,6 +146,96 @@ async function readFileIfExists(filePath) {
   }
 }
 
+function scanForbiddenPublicKeys(value, filePath, keyPath = []) {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => {
+      scanForbiddenPublicKeys(item, filePath, [...keyPath, index])
+    })
+    return
+  }
+
+  if (!value || typeof value !== 'object') {
+    return
+  }
+
+  for (const [key, childValue] of Object.entries(value)) {
+    const childPath = [...keyPath, key]
+    if (forbiddenPublicRecordKeys.has(key)) {
+      throw new Error(
+        `${filePath} contains forbidden private key "${key}" at ${childPath.join('.')}`,
+      )
+    }
+    scanForbiddenPublicKeys(childValue, filePath, childPath)
+  }
+}
+
+function getScopeForRelativePath(relativePath) {
+  const parts = relativePath.split(path.sep)
+  const fileName = parts.at(-1)
+  if (!fileName?.endsWith('.json')) {
+    throw new Error(`Unexpected public V2 file path: ${relativePath}`)
+  }
+
+  if ((parts[0] === 'full' || parts[0] === 'lite') && parts.length === 2) {
+    return fileName.slice(0, -'.json'.length)
+  }
+
+  if (parts[0] === 'full' && parts.length === 3 && parts[1]?.endsWith('-records')) {
+    return parts[1].slice(0, -'-records'.length)
+  }
+
+  throw new Error(`Unexpected public V2 file path: ${relativePath}`)
+}
+
+function validateRecord(scope, record, filePath) {
+  if (!record || typeof record !== 'object' || Array.isArray(record)) {
+    throw new Error(`${filePath} must contain public V2 object records`)
+  }
+
+  if (typeof record.id !== 'string' || record.id.length === 0) {
+    throw new Error(`${filePath} public V2 record is missing string id`)
+  }
+
+  const idPattern = canonicalIdPatterns[scope]
+  if (idPattern && !idPattern.test(record.id)) {
+    throw new Error(`${filePath} public V2 record id "${record.id}" does not match ${scope}`)
+  }
+
+  scanForbiddenPublicKeys(record, filePath)
+}
+
+async function validatePublicV2JsonFile(sourcePath, relativePath) {
+  const scope = getScopeForRelativePath(relativePath)
+  if (!scopes.includes(scope)) {
+    throw new Error(`${relativePath} has unknown public V2 scope "${scope}"`)
+  }
+
+  const parsed = JSON.parse(await fs.readFile(sourcePath, 'utf8'))
+  const parts = relativePath.split(path.sep)
+
+  if (parts.length === 2) {
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      throw new Error(`${relativePath} must contain a public V2 envelope`)
+    }
+    if (parsed.scope !== scope) {
+      throw new Error(`${relativePath} envelope scope "${parsed.scope}" does not match ${scope}`)
+    }
+    if (!Array.isArray(parsed.records)) {
+      throw new Error(`${relativePath} envelope records must be an array`)
+    }
+    if (parsed.recordCount !== parsed.records.length) {
+      throw new Error(`${relativePath} recordCount does not match records.length`)
+    }
+    scanForbiddenPublicKeys(parsed, relativePath)
+    parsed.records.forEach((record) => {
+      validateRecord(scope, record, relativePath)
+    })
+    return
+  }
+
+  validateRecord(scope, parsed, relativePath)
+}
+
 async function filesMatch(sourcePath, destinationPath) {
   const [sourceContent, destinationContent] = await Promise.all([
     fs.readFile(sourcePath),
@@ -190,6 +304,7 @@ async function runCheck(sourceRoot) {
     for (const relativePath of expected) {
       const sourcePath = path.join(sourceRoot, relativePath)
       const destinationPath = path.join(destinationRoot, relativePath)
+      await validatePublicV2JsonFile(sourcePath, relativePath)
       if (!(await filesMatch(sourcePath, destinationPath))) {
         stale.push(relativePath)
       }
@@ -239,6 +354,7 @@ async function syncFiles(sourceRoot) {
   for (const relativePath of expected) {
     const sourcePath = path.join(sourceRoot, relativePath)
     const destinationPath = path.join(destinationRoot, relativePath)
+    await validatePublicV2JsonFile(sourcePath, relativePath)
     if (await filesMatch(sourcePath, destinationPath)) {
       unchanged += 1
       continue

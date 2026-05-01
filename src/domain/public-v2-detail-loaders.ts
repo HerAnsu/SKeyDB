@@ -47,6 +47,7 @@ type PublicV2WheelRecord = PublicV2Record<'wheels'> & {
   mainstatKey: string
   mainstatSeriesKey?: string
   name: string
+  ownerAwakenerId?: string
   ownerAwakenerName?: string
   rarity: string
   searchTags?: string[]
@@ -465,6 +466,7 @@ function adaptPublicV2WheelRecord(record: PublicV2WheelRecord): WheelFullV1Recor
     aliases: record.aliases ?? [record.name],
     searchTags: record.searchTags ?? [],
     awakener: record.ownerAwakenerName,
+    ownerAwakenerId: record.ownerAwakenerId ? numericAwakenerId(record.ownerAwakenerId) : undefined,
     mainstatSeriesKey:
       record.mainstatSeriesKey ?? buildWheelMainstatSeriesKey(rarity, mainstatKey),
   }

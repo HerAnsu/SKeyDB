@@ -43,8 +43,9 @@ export function useWheelDetailModalState({
       buildWheelDatabaseReferenceLayer({
         activeDescriptionRank: descriptionRank,
         activeWheelId: fullDataV1.id,
+        wheelRecords: [fullDataV1],
       }),
-    [descriptionRank, fullDataV1.id],
+    [descriptionRank, fullDataV1],
   )
   const popoverController = useDatabasePopoverController({
     referenceLayer,
