@@ -4,6 +4,7 @@ import type {AwakenerOverlayRecord, FullStats} from '@/domain/awakener-source-sc
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 import {parseDatabaseRichDescription} from '@/domain/database-rich-text'
 import type {DescribedRecord} from '@/domain/description-records'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import {RichSegmentRenderer, type RichSegmentRendererVariant} from './RichSegmentRenderer'
 
@@ -13,6 +14,7 @@ export interface DatabaseRichTextContentProps {
   keywordFooterText?: string
   descriptionRank?: number
   descriptionMaxRank?: number
+  formulaContext?: PublicFormulaContext
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   showVisibleScaling?: boolean
   showTagIcons?: boolean
@@ -29,6 +31,7 @@ export function DatabaseRichTextContent({
   keywordFooterText,
   descriptionRank,
   descriptionMaxRank,
+  formulaContext,
   referenceLayer,
   showVisibleScaling = true,
   showTagIcons = true,
@@ -55,6 +58,7 @@ export function DatabaseRichTextContent({
       {segments.map((segment, index) => (
         <RichSegmentRenderer
           descriptionArgs={record?.descriptionArgs}
+          formulaContext={formulaContext}
           descriptionMaxRank={descriptionMaxRank}
           descriptionRank={descriptionRank}
           key={index}

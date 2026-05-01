@@ -1,4 +1,9 @@
-import type {DescriptionArg, FullStats} from './awakener-source-schema'
+import type {FullStats} from './awakener-source-schema'
+import {
+  evaluatePublicFormulaExpression,
+  type PublicDescriptionArg,
+  type PublicFormulaContext,
+} from './public-description-args'
 import {fmtNum} from './scaling'
 
 const COMPUTABLE_STAT_KEYS = new Set(['ATK', 'DEF', 'CON'])
@@ -7,17 +12,20 @@ const ARG_TOKEN_PATTERN = /\[(?:(?<channel>[A-Za-z]+):)?(?<argKey>(?:StateArg|De
 export interface DescriptionArgResolveContext {
   rank?: number
   stats?: Partial<FullStats> | null
+  formulaContext?: PublicFormulaContext
 }
 
 export interface DescriptionArgProgressionContext {
   rank?: number
   maxRank?: number
   stats?: Partial<FullStats> | null
+  formulaContext?: PublicFormulaContext
 }
 
 export interface ResolvedDescriptionArg {
-  input: DescriptionArg
+  input: PublicDescriptionArg
   rank: number
+  resolved: boolean
   rawBaseValue: string
   baseValue: number | null
   substatSourceValue: number | null
@@ -50,7 +58,7 @@ function clampRank(rank: number): number {
   return Math.max(1, Math.floor(rank))
 }
 
-function inferDefaultMaxRank(arg: DescriptionArg): number {
+function inferDefaultMaxRank(arg: PublicDescriptionArg): number {
   switch (arg.kind) {
     case 'fixed':
       return 1
@@ -58,10 +66,12 @@ function inferDefaultMaxRank(arg: DescriptionArg): number {
       return 1
     case 'scaling':
       return arg.values.length
+    case 'computed':
+      return 1
   }
 }
 
-function clampMaxRank(arg: DescriptionArg, maxRank: number | undefined): number {
+function clampMaxRank(arg: PublicDescriptionArg, maxRank: number | undefined): number {
   const fallback = inferDefaultMaxRank(arg)
   if (maxRank === undefined || !Number.isFinite(maxRank)) {
     return fallback
@@ -97,7 +107,19 @@ function parseStatValue(rawValue: string | undefined): number | null {
   return Number(match[0])
 }
 
-function resolveBaseValue(arg: DescriptionArg, rank: number): number {
+function getSubstatBonus(arg: PublicDescriptionArg) {
+  return 'substatBonus' in arg ? arg.substatBonus : undefined
+}
+
+function isComputedArg(arg: PublicDescriptionArg): boolean {
+  return arg.kind === 'computed'
+}
+
+function resolveBaseValue(
+  arg: PublicDescriptionArg,
+  rank: number,
+  formulaContext: PublicFormulaContext = {},
+): number {
   switch (arg.kind) {
     case 'fixed':
       return tryParseNumericValue(arg.value ?? '') ?? 0
@@ -112,30 +134,43 @@ function resolveBaseValue(arg: DescriptionArg, rank: number): number {
       const index = Math.max(0, Math.min(rank - 1, arg.values.length - 1))
       return tryParseNumericValue(arg.values[index] ?? '0') ?? 0
     }
+
+    case 'computed':
+      return evaluatePublicFormulaExpression(arg.expression, formulaContext).value ?? 0
   }
 }
 
-function resolveRawBaseValue(arg: DescriptionArg, rank: number): string {
+function resolveRawBaseValue(
+  arg: PublicDescriptionArg,
+  rank: number,
+  formulaContext: PublicFormulaContext = {},
+): string {
   switch (arg.kind) {
     case 'fixed':
       return arg.value ?? ''
 
     case 'linear':
-      return String(resolveBaseValue(arg, rank))
+      return String(resolveBaseValue(arg, rank, formulaContext))
 
     case 'scaling': {
       const index = Math.max(0, Math.min(rank - 1, arg.values.length - 1))
       return arg.values[index] ?? '0'
     }
+
+    case 'computed': {
+      const evaluation = evaluatePublicFormulaExpression(arg.expression, formulaContext)
+      return evaluation.resolved && evaluation.value !== null ? String(evaluation.value) : '—'
+    }
   }
 }
 
 function resolveSubstatBonusValue(
-  arg: DescriptionArg,
+  arg: PublicDescriptionArg,
   baseValue: number | null,
   stats: Partial<FullStats> | null | undefined,
 ): {sourceValue: number | null; mode: 'additive' | 'scale_base' | null; value: number} {
-  if (!arg.substatBonus || !stats) {
+  const substatBonus = getSubstatBonus(arg)
+  if (!substatBonus || !stats) {
     return {
       sourceValue: null,
       mode: null,
@@ -143,20 +178,20 @@ function resolveSubstatBonusValue(
     }
   }
 
-  const statValue = parseStatValue(stats[arg.substatBonus.substat])
+  const statValue = parseStatValue(stats[substatBonus.substat as keyof FullStats])
   if (statValue === null) {
     return {
       sourceValue: null,
       mode:
-        arg.substatBonus.mode ??
+        substatBonus.mode ??
         (arg.kind !== 'fixed' && inferSuffix(arg).includes('%') ? 'scale_base' : 'additive'),
       value: 0,
     }
   }
 
-  const multiplier = tryParseNumericValue(arg.substatBonus.multiplier) ?? 0
+  const multiplier = tryParseNumericValue(substatBonus.multiplier) ?? 0
   const mode =
-    arg.substatBonus.mode ??
+    substatBonus.mode ??
     (arg.kind !== 'fixed' && inferSuffix(arg).includes('%') ? 'scale_base' : 'additive')
   const value =
     mode === 'scale_base' && baseValue !== null
@@ -170,7 +205,7 @@ function resolveSubstatBonusValue(
   }
 }
 
-function inferStat(arg: DescriptionArg, suffix: string): string | null {
+function inferStat(arg: PublicDescriptionArg, suffix: string): string | null {
   if (arg.stat) {
     return arg.stat
   }
@@ -179,8 +214,8 @@ function inferStat(arg: DescriptionArg, suffix: string): string | null {
   return suffixStatMatch?.[1] ?? null
 }
 
-function inferSuffix(arg: DescriptionArg): string {
-  return arg.suffix ?? arg.substatBonus?.suffix ?? ''
+function inferSuffix(arg: PublicDescriptionArg): string {
+  return arg.suffix ?? getSubstatBonus(arg)?.suffix ?? ''
 }
 
 function formatResolvedValue(value: number, suffix: string, stat: string | null): string {
@@ -195,8 +230,8 @@ function formatLiteralValue(rawValue: string, suffix: string, stat: string | nul
   return `${rawValue}${suffix}${statSuffix}`
 }
 
-function shouldCeilDisplayedTotalValue(arg: DescriptionArg, baseValue: number | null): boolean {
-  return Boolean(arg.substatBonus) && (baseValue === null || Math.abs(baseValue) < 0.001)
+function shouldCeilDisplayedTotalValue(arg: PublicDescriptionArg, baseValue: number | null): boolean {
+  return Boolean(getSubstatBonus(arg)) && (baseValue === null || Math.abs(baseValue) < 0.001)
 }
 
 function resolveAbsoluteValue(
@@ -218,11 +253,12 @@ function resolveAbsoluteValue(
 }
 
 export function resolveDescriptionArg(
-  arg: DescriptionArg,
+  arg: PublicDescriptionArg,
   context: DescriptionArgResolveContext = {},
 ): ResolvedDescriptionArg {
   const rank = clampRank(context.rank ?? 1)
-  const rawBaseValue = resolveRawBaseValue(arg, rank)
+  const rawBaseValue = resolveRawBaseValue(arg, rank, context.formulaContext)
+  const resolved = !isComputedArg(arg) || rawBaseValue !== '—'
   const parsedBaseValue = tryParseNumericValue(rawBaseValue)
   const hasLiteralBaseValue = rawBaseValue.trim().length > 0
   const baseValue = hasLiteralBaseValue ? parsedBaseValue : null
@@ -230,7 +266,7 @@ export function resolveDescriptionArg(
   const substatBonusValue = resolvedSubstatBonus.value
   const totalValue =
     baseValue === null
-      ? arg.substatBonus
+      ? getSubstatBonus(arg)
         ? substatBonusValue
         : null
       : baseValue + substatBonusValue
@@ -249,6 +285,7 @@ export function resolveDescriptionArg(
   return {
     input: arg,
     rank,
+    resolved,
     rawBaseValue,
     baseValue,
     substatSourceValue: resolvedSubstatBonus.sourceValue,
@@ -265,7 +302,7 @@ export function resolveDescriptionArg(
 }
 
 export function resolveDescriptionArgs(
-  descriptionArgs: Record<string, DescriptionArg>,
+  descriptionArgs: Record<string, PublicDescriptionArg>,
   context: DescriptionArgResolveContext = {},
 ): Record<string, ResolvedDescriptionArg> {
   return Object.fromEntries(
@@ -275,7 +312,7 @@ export function resolveDescriptionArgs(
 
 export function getDescriptionArgKeysInTemplateOrder(
   descriptionTemplate: string,
-  descriptionArgs: Record<string, DescriptionArg>,
+  descriptionArgs: Record<string, PublicDescriptionArg>,
 ): string[] {
   const orderedKeys: string[] = []
   const seenKeys = new Set<string>()
@@ -302,7 +339,7 @@ export function getDescriptionArgKeysInTemplateOrder(
 }
 
 export function getDescriptionArgProgression(
-  arg: DescriptionArg,
+  arg: PublicDescriptionArg,
   context: DescriptionArgProgressionContext = {},
 ): ResolvedDescriptionArg[] {
   const maxRank = clampMaxRank(arg, context.maxRank)
@@ -310,12 +347,13 @@ export function getDescriptionArgProgression(
     resolveDescriptionArg(arg, {
       rank: index + 1,
       stats: context.stats,
+      formulaContext: context.formulaContext,
     }),
   )
 }
 
 export function formatDescriptionArgProgression(
-  arg: DescriptionArg,
+  arg: PublicDescriptionArg,
   context: DescriptionArgProgressionContext = {},
 ): string {
   const progression = getDescriptionArgProgression(arg, context)
@@ -356,8 +394,8 @@ export function formatDescriptionArgProgression(
   return `${numericProgression.map((value) => fmtNum(value ?? 0)).join('/')}${suffix}${statSuffix}`
 }
 
-function buildDescriptionArgFormula(arg: DescriptionArg, resolved: ResolvedDescriptionArg): string {
-  if (!arg.substatBonus) {
+function buildDescriptionArgFormula(arg: PublicDescriptionArg, resolved: ResolvedDescriptionArg): string {
+  if (!('substatBonus' in arg) || !arg.substatBonus) {
     return formatHoverDisplayText(resolved.formattedTotalValue)
   }
 
@@ -384,12 +422,12 @@ function buildDescriptionArgFormula(arg: DescriptionArg, resolved: ResolvedDescr
   return `${formatHoverDisplayText(resolved.formattedBaseValue)} + ${substatTerm}`
 }
 
-export function hasDescriptionArgInteractiveHover(arg: DescriptionArg): boolean {
-  return arg.kind !== 'fixed' || Boolean(arg.substatBonus)
+export function hasDescriptionArgInteractiveHover(arg: PublicDescriptionArg): boolean {
+  return arg.kind !== 'fixed' || Boolean(getSubstatBonus(arg))
 }
 
 export function buildDescriptionArgHover(
-  arg: DescriptionArg,
+  arg: PublicDescriptionArg,
   context: DescriptionArgProgressionContext = {},
 ): string {
   if (!hasDescriptionArgInteractiveHover(arg)) {
@@ -400,6 +438,7 @@ export function buildDescriptionArgHover(
     const resolved = resolveDescriptionArg(arg, {
       rank: context.rank,
       stats: context.stats,
+      formulaContext: context.formulaContext,
     })
     return buildDescriptionArgFormula(arg, resolved)
   }
@@ -409,7 +448,7 @@ export function buildDescriptionArgHover(
     .map((entry) => {
       const base = `Lv${String(entry.rank)}: ${formatHoverDisplayText(entry.formattedTotalValue)}`
       const breakdown =
-        arg.substatBonus && entry.baseValue !== null && entry.substatBonusValue !== 0
+        'substatBonus' in arg && arg.substatBonus && entry.baseValue !== null && entry.substatBonusValue !== 0
           ? entry.substatBonusMode === 'scale_base' && entry.substatSourceValue !== null
             ? ` (${formatHoverDisplayText(entry.formattedBaseValue)} × ${fmtNum(100 + entry.substatSourceValue * (tryParseNumericValue(arg.substatBonus.multiplier) ?? 0))}% from ${formatSubstatLabel(arg.substatBonus.substat)})`
             : ` (${formatHoverDisplayText(entry.formattedBaseValue)} + ${formatHoverDisplayText(formatResolvedValue(entry.substatBonusValue, entry.suffix, entry.stat))} from ${formatSubstatLabel(arg.substatBonus.substat)})`
@@ -422,7 +461,7 @@ export function buildDescriptionArgHover(
 
 export function resolveDescriptionTemplate(
   descriptionTemplate: string,
-  descriptionArgs: Record<string, DescriptionArg>,
+  descriptionArgs: Record<string, PublicDescriptionArg>,
   context: DescriptionArgResolveContext = {},
 ): string {
   let result = ''
@@ -445,7 +484,14 @@ export function resolveDescriptionTemplate(
       continue
     }
 
-    const replacement = resolveDescriptionArg(arg, context).formattedTotalValue
+    const resolved = resolveDescriptionArg(arg, context)
+    if (!resolved.resolved) {
+      result += fullMatch
+      cursor = index + fullMatch.length
+      continue
+    }
+
+    const replacement = resolved.formattedTotalValue
     const nextCharacter = descriptionTemplate[index + fullMatch.length] ?? ''
     const shouldSkipTrailingPercent = replacement.endsWith('%') && nextCharacter === '%'
 

@@ -1,4 +1,4 @@
-import type {DescriptionArg} from './awakener-source-schema'
+import type {PublicDescriptionArg} from './public-description-args'
 import {getMainstatLabels} from './mainstats-catalog'
 import {COMPUTABLE_STATS} from './scaling'
 
@@ -147,7 +147,7 @@ function consumeDescriptionArgMatch(
   remaining: string,
   segments: RichSegment[],
   nextMatch: Extract<NextRichMatch, {kind: 'descriptionArg'}>,
-  descriptionArgs: Record<string, DescriptionArg> | undefined,
+  descriptionArgs: Record<string, PublicDescriptionArg> | undefined,
 ): string {
   if (nextMatch.index > 0) {
     segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
@@ -167,7 +167,7 @@ function consumeDescriptionArgMatch(
   })
 
   let consumedLength = nextMatch.match[0].length
-  const suffix = arg?.suffix ?? arg?.substatBonus?.suffix ?? ''
+  const suffix = arg?.suffix ?? (arg && 'substatBonus' in arg ? arg.substatBonus?.suffix : '') ?? ''
   const nextCharacter = remaining[nextMatch.index + consumedLength] ?? ''
   if (suffix === '%' && nextCharacter === '%') {
     consumedLength += 1
@@ -403,7 +403,7 @@ function normalizeBareOverlayMechanicSegments(
 export function parseRichDescription(
   text: string,
   cardNames: ReadonlySet<string>,
-  descriptionArgs?: Record<string, DescriptionArg>,
+  descriptionArgs?: Record<string, PublicDescriptionArg>,
   options?: RichTextParseOptions,
 ): RichSegment[] {
   const segments: RichSegment[] = []

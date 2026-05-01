@@ -7,17 +7,15 @@ import {
   type ReactNode,
 } from 'react'
 
-import type {
-  AwakenerOverlayRecord,
-  DescriptionArg,
-  FullStats,
-} from '@/domain/awakener-source-schema'
+import type {AwakenerOverlayRecord, FullStats} from '@/domain/awakener-source-schema'
 import {
   buildDescriptionArgHover,
   hasDescriptionArgInteractiveHover,
   resolveDescriptionArg,
 } from '@/domain/description-args'
 import {loadOverlayIconAsset, peekOverlayIconAsset} from '@/domain/overlay-icon-assets'
+import type {PublicDescriptionArg} from '@/domain/public-description-args'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 import {
   buildRichScalingHover,
   computeRichScalingStatRange,
@@ -53,7 +51,8 @@ interface RichSegmentRendererProps {
   stats: FullStats | null
   showVisibleScaling?: boolean
   showTagIcons?: boolean
-  descriptionArgs?: Record<string, DescriptionArg>
+  descriptionArgs?: Record<string, PublicDescriptionArg>
+  formulaContext?: PublicFormulaContext
   descriptionRank?: number
   descriptionMaxRank?: number
   overlays?: readonly AwakenerOverlayRecord[]
@@ -131,6 +130,7 @@ export function RichSegmentRenderer({
   showVisibleScaling = true,
   showTagIcons = true,
   descriptionArgs,
+  formulaContext,
   descriptionRank,
   descriptionMaxRank,
   overlays,
@@ -252,6 +252,7 @@ export function RichSegmentRenderer({
         <DescriptionArgSegmentView
           arg={arg}
           channel={segment.channel}
+          formulaContext={formulaContext}
           maxRank={descriptionMaxRank}
           rank={descriptionRank ?? skillLevel}
           showVisibleScaling={showVisibleScaling}
@@ -431,20 +432,22 @@ function DescriptionArgSegmentView({
   channel,
   rank,
   maxRank,
+  formulaContext,
   showVisibleScaling,
   stats,
   variant,
 }: {
-  arg: DescriptionArg
+  arg: PublicDescriptionArg
   channel: string | null
   rank: number
   maxRank: number | undefined
+  formulaContext: PublicFormulaContext | undefined
   showVisibleScaling: boolean
   stats: FullStats | null
   variant: RichSegmentRendererVariant
 }) {
-  const resolved = resolveDescriptionArg(arg, {rank, stats})
-  const hoverText = buildDescriptionArgHover(arg, {rank, maxRank, stats})
+  const resolved = resolveDescriptionArg(arg, {rank, stats, formulaContext})
+  const hoverText = buildDescriptionArgHover(arg, {rank, maxRank, stats, formulaContext})
   const isInteractive = hasDescriptionArgInteractiveHover(arg)
   const formulaText = resolved.formattedTotalValue.replaceAll('{', '').replaceAll('}', '')
   const scalingClass =

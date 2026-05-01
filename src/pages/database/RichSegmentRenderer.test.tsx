@@ -128,6 +128,57 @@ describe('RichSegmentRenderer', () => {
     expect(screen.getByTitle(/Lv1: 10% ATK = 20/)).toBeInTheDocument()
   })
 
+  it('resolves computed description args when formula context is supplied', () => {
+    render(
+      <RichSegmentRenderer
+        descriptionArgs={{
+          Arg1: {
+            kind: 'computed',
+            expression: {
+              op: 'ceil',
+              args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
+            },
+            inputs: ['accountDamagePower'],
+            suffix: '%',
+          },
+        }}
+        formulaContext={{accountDamagePower: 8}}
+        segment={{type: 'descriptionArg', argKey: 'Arg1', channel: null}}
+        skillLevel={1}
+        stats={BASE_STATS}
+        variant='inline'
+      />,
+    )
+
+    expect(screen.getByText('12%')).toBeInTheDocument()
+    expect(screen.getByText('12%')).toHaveAttribute('title', 'Lv1: 12%')
+  })
+
+  it('does not present a numeric value for computed args when formula context is missing', () => {
+    render(
+      <RichSegmentRenderer
+        descriptionArgs={{
+          Arg1: {
+            kind: 'computed',
+            expression: {
+              op: 'ceil',
+              args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
+            },
+            inputs: ['accountDamagePower'],
+            suffix: '%',
+          },
+        }}
+        segment={{type: 'descriptionArg', argKey: 'Arg1', channel: null}}
+        skillLevel={1}
+        stats={BASE_STATS}
+        variant='inline'
+      />,
+    )
+
+    expect(screen.getByText('—%')).toBeInTheDocument()
+    expect(screen.queryByText('0%')).not.toBeInTheDocument()
+  })
+
   it('can hide visible scaling while keeping the hover formula available', () => {
     render(
       <RichSegmentRenderer
