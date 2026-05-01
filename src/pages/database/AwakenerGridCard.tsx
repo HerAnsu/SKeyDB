@@ -19,7 +19,7 @@ const PRIORITIZED_GRID_IMAGE_COUNT = 24
 interface AwakenerGridCardProps {
   awakener: Awakener
   index: number
-  onSelect: (id: number) => void
+  onSelect: (id: string) => void
 }
 
 export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardProps) {

@@ -30,7 +30,7 @@ function makeWheel(overrides: Partial<Wheel> = {}): Wheel {
     rarity: 'SSR',
     realm: 'CARO',
     awakener: 'alpha',
-    ownerAwakenerId: 1,
+    ownerAwakenerId: 'awakener-0001',
     ownerAwakenerName: 'alpha',
     aliases: ['Merciful Nurturing'],
     tags: ['Embryo Fusion'],
@@ -166,7 +166,7 @@ describe('WheelDetailModal', () => {
 
     fireEvent.click(screen.getByRole('button', {name: 'Alpha'}))
 
-    expect(onSelectAwakener).toHaveBeenCalledWith({id: 1, name: 'alpha'}, 'overview')
+    expect(onSelectAwakener).toHaveBeenCalledWith({id: 'awakener-0001', name: 'alpha'}, 'overview')
   })
 
   it('renders a wheel jump combobox and navigates to another wheel from search', () => {
@@ -295,7 +295,7 @@ describe('WheelDetailModal', () => {
           rarity: secondWheel.rarity,
           realm: secondWheel.realm,
           awakener: secondWheel.awakener,
-          ownerAwakenerId: secondWheel.ownerAwakenerId,
+          ownerAwakenerId: undefined,
           ownerAwakenerName: secondWheel.ownerAwakenerName,
           aliases: secondWheel.aliases,
           mainstatKey: secondWheel.mainstatKey,
@@ -358,7 +358,7 @@ describe('WheelDetailModal', () => {
           rarity: secondWheel.rarity,
           realm: secondWheel.realm,
           awakener: secondWheel.awakener,
-          ownerAwakenerId: secondWheel.ownerAwakenerId,
+          ownerAwakenerId: undefined,
           ownerAwakenerName: secondWheel.ownerAwakenerName,
           aliases: secondWheel.aliases,
           mainstatKey: secondWheel.mainstatKey,

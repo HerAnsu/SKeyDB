@@ -221,7 +221,7 @@ export function useCollectionViewModel() {
 
   const activeQuery = queryByTab[tab]
   const awakenerIdByName = useMemo(
-    () => new Map(awakeners.map((awakener) => [awakener.name, String(awakener.id)])),
+    () => new Map(awakeners.map((awakener) => [awakener.name, awakener.id])),
     [awakeners],
   )
   const searchedAwakeners = useMemo(
@@ -258,7 +258,7 @@ export function useCollectionViewModel() {
       return compareAwakenersForCollectionSort(
         {
           label: formatAwakenerNameForUi(left.name),
-          index: left.id,
+          index: left.numericId ?? Number.MAX_SAFE_INTEGER,
           owned: leftIsOwned,
           enlighten: leftIsOwned ? leftOwnedLevel : 0,
           level: leftAwakenerLevel,
@@ -267,7 +267,7 @@ export function useCollectionViewModel() {
         },
         {
           label: formatAwakenerNameForUi(right.name),
-          index: right.id,
+          index: right.numericId ?? Number.MAX_SAFE_INTEGER,
           owned: rightIsOwned,
           enlighten: rightIsOwned ? rightOwnedLevel : 0,
           level: rightAwakenerLevel,

@@ -39,10 +39,10 @@ describe('decodeIngameTeamCode', () => {
     const decoded = decodeIngameTeamCode(buildCodeWithCovenantTokens(['w', 'b', 'a', 'D']))
 
     expect(decoded.team.slots.map((slot) => slot.covenantId)).toEqual([
-      '022',
-      '016',
+      'covenant-0020',
+      'covenant-0014',
       undefined,
-      '008',
+      'covenant-0006',
     ])
     expect(decoded.warnings.some((warning) => warning.section === 'covenant')).toBe(false)
   })
@@ -66,8 +66,8 @@ describe('decodeIngameTeamCode', () => {
           awakenerName: 'ramona',
           realm: 'CHAOS',
           level: 60,
-          wheels: ['SR22', 'C01'],
-          covenantId: '022',
+          wheels: ['wheel-0098', 'wheel-0014'],
+          covenantId: 'covenant-0020',
         },
         {slotId: 'slot-2', wheels: [null, null]},
         {slotId: 'slot-3', wheels: [null, null]},
@@ -80,23 +80,23 @@ describe('decodeIngameTeamCode', () => {
     expect(code.endsWith('@@')).toBe(true)
     const decoded = decodeIngameTeamCode(code)
     expect(decoded.team.slots[0].awakenerName).toBe('ramona')
-    expect(decoded.team.slots[0].wheels[0]).toBe('SR22')
-    expect(decoded.team.slots[0].wheels[1]).toBe('C01')
-    expect(decoded.team.slots[0].covenantId).toBe('022')
+    expect(decoded.team.slots[0].wheels[0]).toBe('wheel-0098')
+    expect(decoded.team.slots[0].wheels[1]).toBe('wheel-0014')
+    expect(decoded.team.slots[0].covenantId).toBe('covenant-0020')
   })
 
   it('matches observed in-game export layout for no-covenant team with posse token', () => {
     const team: Team = {
       id: 'team-2',
       name: 'Team 2',
-      posseId: 'manor-echoes',
+      posseId: 'posse-0047',
       slots: [
         {
           slotId: 'slot-1',
           awakenerName: 'doll: inferno',
           realm: 'CHAOS',
           level: 60,
-          wheels: ['C02EX', 'SR01'],
+          wheels: ['wheel-0016', 'wheel-0077'],
         },
         {slotId: 'slot-2', awakenerName: 'doll', realm: 'CHAOS', level: 60, wheels: [null, null]},
         {
@@ -104,14 +104,14 @@ describe('decodeIngameTeamCode', () => {
           awakenerName: 'helot: catena',
           realm: 'CARO',
           level: 60,
-          wheels: ['B05EX', 'O06'],
+          wheels: ['wheel-0006', 'wheel-0055'],
         },
         {
           slotId: 'slot-4',
           awakenerName: 'tawil',
           realm: 'CHAOS',
           level: 60,
-          wheels: ['C15', 'SR02'],
+          wheels: ['wheel-0027', 'wheel-0078'],
         },
       ],
     }
@@ -123,15 +123,15 @@ describe('decodeIngameTeamCode', () => {
     const team: Team = {
       id: 'team-2b',
       name: 'Team 2b',
-      posseId: 'manor-echoes',
+      posseId: 'posse-0047',
       slots: [
         {
           slotId: 'slot-1',
           awakenerName: 'doll: inferno',
           realm: 'CHAOS',
           level: 60,
-          wheels: ['C02EX', 'SR01'],
-          covenantId: '022',
+          wheels: ['wheel-0016', 'wheel-0077'],
+          covenantId: 'covenant-0020',
         },
         {slotId: 'slot-2', awakenerName: 'doll', realm: 'CHAOS', level: 60, wheels: [null, null]},
         {
@@ -139,14 +139,14 @@ describe('decodeIngameTeamCode', () => {
           awakenerName: 'helot: catena',
           realm: 'CARO',
           level: 60,
-          wheels: ['B05EX', 'O06'],
+          wheels: ['wheel-0006', 'wheel-0055'],
         },
         {
           slotId: 'slot-4',
           awakenerName: 'tawil',
           realm: 'CHAOS',
           level: 60,
-          wheels: ['C15', 'SR02'],
+          wheels: ['wheel-0027', 'wheel-0078'],
         },
       ],
     }
@@ -173,18 +173,40 @@ describe('decodeIngameTeamCode', () => {
     const decoded = decodeIngameTeamCode(code)
 
     expect(decoded.team.slots[0].awakenerName).toBe('doll: inferno')
-    expect(decoded.team.slots[0].wheels).toEqual(['C02EX', 'SR01'])
+    expect(decoded.team.slots[0].wheels).toEqual(['wheel-0016', 'wheel-0077'])
     expect(decoded.team.slots[1].awakenerName).toBe('doll')
     expect(decoded.team.slots[1].wheels).toEqual([null, null])
     expect(decoded.team.slots[2].awakenerName).toBe('helot: catena')
-    expect(decoded.team.slots[2].wheels).toEqual(['B05EX', 'O06'])
+    expect(decoded.team.slots[2].wheels).toEqual(['wheel-0006', 'wheel-0055'])
     expect(decoded.team.slots[3].awakenerName).toBe('tawil')
-    expect(decoded.team.slots[3].wheels).toEqual(['C15', 'SR02'])
-    expect(decoded.team.posseId).toBe('manor-echoes')
+    expect(decoded.team.slots[3].wheels).toEqual(['wheel-0027', 'wheel-0078'])
+    expect(decoded.team.posseId).toBe('posse-0047')
     expect(
       decoded.warnings.some(
         (warning) => warning.section === 'covenant' && warning.reason === 'unknown_token',
       ),
     ).toBe(true)
+  })
+
+  it('fails closed instead of encoding selected values without in-game tokens as empty tokens', () => {
+    const team: Team = {
+      id: 'team-3',
+      name: 'Team 3',
+      posseId: 'posse-0050',
+      slots: [
+        {
+          slotId: 'slot-1',
+          awakenerName: 'ramona',
+          realm: 'CHAOS',
+          level: 60,
+          wheels: ['wheel-0098', null],
+        },
+        {slotId: 'slot-2', wheels: [null, null]},
+        {slotId: 'slot-3', wheels: [null, null]},
+        {slotId: 'slot-4', wheels: [null, null]},
+      ],
+    }
+
+    expect(() => encodeIngameTeamCode(team)).toThrow(/posse "posse-0050" is not representable/)
   })
 })

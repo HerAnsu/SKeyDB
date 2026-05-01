@@ -8,23 +8,27 @@ let mockAwakenersFullV2 = [{id: 1}, {id: 2}, {id: 3}]
 let mockLoadPromiseCache = new Map<number, Promise<{id: number} | undefined>>()
 let mockWheelsFullV1 = [{id: 'B01'}, {id: 'D12'}]
 let mockWheelLoadPromiseCache = new Map<string, Promise<{id: string} | undefined>>()
+const mockWheelFullV1IdByCanonicalId = new Map([
+  ['wheel-0001', 'B01'],
+  ['wheel-0040', 'D12'],
+])
 const wheelMockState = vi.hoisted(() => {
   const wheels = [
     {
-      id: 'B01',
+      id: 'wheel-0001',
       assetId: 'Weapon_Full_B01',
       name: 'Merciful Nurturing',
       rarity: 'SSR',
       realm: 'CARO',
       awakener: 'alpha',
-      ownerAwakenerId: 1,
+      ownerAwakenerId: 'awakener-0001',
       ownerAwakenerName: 'alpha',
       aliases: ['Merciful Nurturing'],
       tags: ['Caro', 'Embryo Fusion'],
       mainstatKey: 'KEYFLARE_REGEN',
     },
     {
-      id: 'D12',
+      id: 'wheel-0040',
       assetId: 'Weapon_Full_D12',
       name: 'Shared Dream',
       rarity: 'SR',
@@ -35,7 +39,7 @@ const wheelMockState = vi.hoisted(() => {
       mainstatKey: 'CRIT_RATE',
     },
     {
-      id: 'N07',
+      id: 'wheel-9999',
       assetId: 'Weapon_Full_N07',
       name: 'Quiet Orbit',
       rarity: 'R',
@@ -68,7 +72,8 @@ const mockLoadWheelFullV1ById = vi.fn((id: string) => {
     return cachedPromise
   }
 
-  const recordPromise = Promise.resolve(mockWheelsFullV1.find((entry) => entry.id === id))
+  const fullV1Id = mockWheelFullV1IdByCanonicalId.get(id) ?? id
+  const recordPromise = Promise.resolve(mockWheelsFullV1.find((entry) => entry.id === fullV1Id))
   mockWheelLoadPromiseCache.set(id, recordPromise)
 
   return recordPromise
@@ -77,7 +82,8 @@ const mockLoadWheelFullV1ById = vi.fn((id: string) => {
 vi.mock('../domain/awakeners', () => ({
   getAwakeners: () => [
     {
-      id: 1,
+      id: 'awakener-0001',
+      numericId: 1,
       name: 'alpha',
       faction: 'The Fools',
       realm: 'CHAOS',
@@ -88,7 +94,8 @@ vi.mock('../domain/awakeners', () => ({
       tags: ['Bleed', 'Crit'],
     },
     {
-      id: 2,
+      id: 'awakener-0002',
+      numericId: 2,
       name: 'beta',
       faction: 'Outlanders',
       realm: 'AEQUOR',
@@ -99,7 +106,8 @@ vi.mock('../domain/awakeners', () => ({
       tags: ['Draw', 'STR Up'],
     },
     {
-      id: 3,
+      id: 'awakener-0003',
+      numericId: 3,
       name: 'gamma',
       faction: 'Hybrid',
       realm: 'CHAOS',
@@ -154,10 +162,10 @@ vi.mock('./database/AwakenerDetailModal', () => ({
     onTabChange,
   }: {
     activeTab?: 'overview' | 'skills' | 'builds' | 'teams'
-    awakener: {id: number; name: string}
+    awakener: {id: string; name: string}
     onClose: () => void
     onSelectAwakener: (
-      awakener: {id: number; name: string},
+      awakener: {id: string; name: string},
       tab: 'overview' | 'skills' | 'builds' | 'teams',
     ) => void
     onTabChange: (tab: 'overview' | 'skills' | 'builds' | 'teams') => void
@@ -176,7 +184,7 @@ vi.mock('./database/AwakenerDetailModal', () => ({
       <button
         aria-label='Switch to beta detail'
         onClick={() => {
-          onSelectAwakener({id: 2, name: 'beta'}, activeTab)
+          onSelectAwakener({id: 'awakener-0002', name: 'beta'}, activeTab)
         }}
         type='button'
       >
@@ -199,7 +207,7 @@ vi.mock('./database/WheelDetailModal', () => ({
     wheel: {id: string; name: string}
     onClose: () => void
     onSelectAwakener?: (
-      awakener: {id: number; name: string},
+      awakener: {id: string; name: string},
       tab?: 'overview' | 'skills' | 'builds' | 'teams',
     ) => void
     onSelectWheel?: (wheel: {name: string}) => void
@@ -208,7 +216,7 @@ vi.mock('./database/WheelDetailModal', () => ({
       <button
         aria-label='Switch to alpha awakener detail'
         onClick={() => {
-          onSelectAwakener?.({id: 1, name: 'alpha'}, 'overview')
+          onSelectAwakener?.({id: 'awakener-0001', name: 'alpha'}, 'overview')
         }}
         type='button'
       >

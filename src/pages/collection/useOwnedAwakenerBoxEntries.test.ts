@@ -4,7 +4,15 @@ import {createOwnedAwakenerBoxEntries} from './useOwnedAwakenerBoxEntries'
 
 vi.mock('../../domain/awakeners', () => ({
   getAwakeners: () => [
-    {id: 1, name: 'ramona', faction: 'The Fools', realm: 'CHAOS', aliases: [], rarity: 'SSR'},
+    {
+      id: 'awakener-0042',
+      numericId: 1,
+      name: 'ramona',
+      faction: 'The Fools',
+      realm: 'CHAOS',
+      aliases: [],
+      rarity: 'SSR',
+    },
   ],
 }))
 

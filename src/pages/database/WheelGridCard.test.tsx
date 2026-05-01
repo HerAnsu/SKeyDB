@@ -25,7 +25,7 @@ function makeWheel(overrides: Partial<Wheel> = {}): Wheel {
     rarity: 'SSR',
     realm: 'CARO',
     awakener: 'alpha',
-    ownerAwakenerId: 1,
+    ownerAwakenerId: 'awakener-0001',
     ownerAwakenerName: 'alpha',
     aliases: ['Merciful Nurturing'],
     tags: ['Embryo Fusion'],

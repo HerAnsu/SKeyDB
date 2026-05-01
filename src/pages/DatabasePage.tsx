@@ -157,7 +157,7 @@ export function DatabasePage() {
     }
   }, [location.search, navigate, selectedWheel, wheelSlug])
 
-  function openAwakenerDetail(awakenerId: number) {
+  function openAwakenerDetail(awakenerId: string) {
     const awakener = databaseAwakeners.find((entry) => entry.id === awakenerId)
     if (!awakener) {
       return
@@ -387,7 +387,7 @@ function DatabaseAwakenerDetailRoute({
   const navigate = useNavigate()
   const resolvedTabSlug = resolveDatabaseAwakenerTab(tabSlug)
   const {isLoading, record: fullDataV2} = useDatabaseDetailRouteRecord({
-    id: awakener.id,
+    id: awakener.numericId ?? 0,
     loadRecord: loadAwakenerFullV2ById,
     missingPathname: buildDatabaseEntityBrowsePath('awakeners'),
   })

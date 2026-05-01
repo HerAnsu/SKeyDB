@@ -5,7 +5,7 @@ import {useDatabaseDetailChrome} from './useDatabaseDetailChrome'
 const MOBILE_TAG_ROWS_HEIGHT = 46
 
 interface UseAwakenerDetailChromeOptions {
-  awakenerId: number
+  awakenerId: string
   awakenerTags: readonly string[]
   isSearchOpen: boolean
   searchContainerRef: RefObject<HTMLDivElement | null>
@@ -29,7 +29,7 @@ export function useAwakenerDetailChrome({
   clickOutsideClosesPopovers,
   onClose,
 }: UseAwakenerDetailChromeOptions) {
-  const [expandedAwakenerId, setExpandedAwakenerId] = useState<number | null>(null)
+  const [expandedAwakenerId, setExpandedAwakenerId] = useState<string | null>(null)
   const [canExpandTags, setCanExpandTags] = useState(false)
   const tagsRef = useRef<HTMLDivElement>(null)
   const showAllTags = expandedAwakenerId === awakenerId

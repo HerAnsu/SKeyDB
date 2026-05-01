@@ -15,7 +15,8 @@ import type {Wheel} from './wheels'
 
 function makeAwakener(overrides: Partial<Awakener>): Awakener {
   return {
-    id: 1,
+    id: 'awakener-0001',
+    numericId: 1,
     name: 'thais',
     faction: 'Test',
     realm: 'CARO',
@@ -71,15 +72,17 @@ describe('database paths', () => {
 
   it('finds awakeners by canonical slug', () => {
     const awakeners = [
-      makeAwakener({id: 1, name: 'thais'}),
-      makeAwakener({id: 2, name: 'helot: catena'}),
+      makeAwakener({id: 'awakener-0001', name: 'thais'}),
+      makeAwakener({id: 'awakener-0019', name: 'helot: catena'}),
     ]
 
-    expect(findAwakenerByDatabaseSlug(awakeners, 'helot-catena')?.id).toBe(2)
+    expect(findAwakenerByDatabaseSlug(awakeners, 'helot-catena')?.id).toBe('awakener-0019')
   })
 
   it('returns null for unknown slugs', () => {
-    expect(findAwakenerByDatabaseSlug([makeAwakener({id: 1, name: 'thais'})], 'missing')).toBeNull()
+    expect(
+      findAwakenerByDatabaseSlug([makeAwakener({id: 'awakener-0001', name: 'thais'})], 'missing'),
+    ).toBeNull()
   })
 
   it('finds wheels by canonical slug', () => {

@@ -3,6 +3,7 @@ import type {Team, TeamSlot} from '@/pages/builder/types'
 
 import {getAwakeners} from './awakeners'
 import {buildIngameTokenDictionaries} from './ingame-token-dictionaries'
+import {migrateAwakenerIdV1ToV2} from './persistence-id-migration.v2'
 import {getWheels} from './wheels'
 
 const INGAME_WRAPPER = '@@'
@@ -360,7 +361,7 @@ export function decodeIngameTeamCode(code: string): DecodedIngameTeamCode {
   const emptySlots = createEmptyTeamSlots()
 
   const awakeners = getAwakeners()
-  const awakeningById = new Map(awakeners.map((awakener) => [String(awakener.id), awakener]))
+  const awakeningById = new Map(awakeners.map((awakener) => [awakener.id, awakener]))
   const wheelById = new Map(getWheels().map((wheel) => [wheel.id, wheel]))
 
   const decodedAwakeners = decodeAwakenerSlots(
@@ -402,35 +403,68 @@ function encodeAwakenerToken(
   slot: TeamSlot,
   awakenersByNameId: Map<string, string>,
   byIdToken: Map<string, string>,
+  slotIndex: number,
 ): string {
   if (!slot.awakenerName) {
     return 'a'
   }
-  const awakenerId = awakenersByNameId.get(slot.awakenerName)
+  const rawAwakenerId = awakenersByNameId.get(slot.awakenerName)
+  const awakenerId = rawAwakenerId
+    ? (migrateAwakenerIdV1ToV2(rawAwakenerId) ?? rawAwakenerId)
+    : undefined
   if (!awakenerId) {
-    return 'a'
+    throw new Error(
+      `Cannot export in-game team code: slot ${String(slotIndex + 1)} awakener "${slot.awakenerName}" is not representable.`,
+    )
   }
-  return byIdToken.get(awakenerId) ?? 'a'
+  const token = byIdToken.get(awakenerId)
+  if (!token) {
+    throw new Error(
+      `Cannot export in-game team code: slot ${String(slotIndex + 1)} awakener "${slot.awakenerName}" (${awakenerId}) has no in-game token.`,
+    )
+  }
+  return token
 }
 
-function encodeWheelToken(wheelId: string | null, byIdToken: Map<string, string>): string {
+function encodeWheelToken(
+  wheelId: string | null,
+  byIdToken: Map<string, string>,
+  slotIndex: number,
+  field: 'wheelOne' | 'wheelTwo',
+): string {
   if (!wheelId) {
     return 'a'
   }
-  return byIdToken.get(wheelId) ?? 'a'
+  const token = byIdToken.get(wheelId)
+  if (!token) {
+    throw new Error(
+      `Cannot export in-game team code: slot ${String(slotIndex + 1)} ${field} "${wheelId}" is not representable.`,
+    )
+  }
+  return token
 }
 
-function encodeCovenantBlock(slot: TeamSlot, dictionaries: IngameTokenDictionaries): string {
+function encodeCovenantBlock(
+  slot: TeamSlot,
+  dictionaries: IngameTokenDictionaries,
+  slotIndex: number,
+): string {
   if (!slot.awakenerName || !slot.covenantId) {
     return EMPTY_COVENANT_TOKEN
   }
-  return dictionaries.covenants.byIdToken.get(slot.covenantId) ?? EMPTY_COVENANT_TOKEN
+  const token = dictionaries.covenants.byIdToken.get(slot.covenantId)
+  if (!token) {
+    throw new Error(
+      `Cannot export in-game team code: slot ${String(slotIndex + 1)} covenant "${slot.covenantId}" is not representable.`,
+    )
+  }
+  return token
 }
 
 export function encodeIngameTeamCode(team: Team): string {
   const dictionaries = buildIngameTokenDictionaries()
   const awakenersByNameId = new Map(
-    getAwakeners().map((awakener) => [awakener.name, String(awakener.id)]),
+    getAwakeners().map((awakener) => [awakener.name, awakener.id]),
   )
   const payloadTokens: string[] = []
   const fallbackSlots = createEmptyTeamSlots()
@@ -438,22 +472,32 @@ export function encodeIngameTeamCode(team: Team): string {
   for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
     const slot = team.slots[slotIndex] ?? fallbackSlots[slotIndex]
     payloadTokens.push(
-      encodeAwakenerToken(slot, awakenersByNameId, dictionaries.awakeners.byIdToken),
+      encodeAwakenerToken(slot, awakenersByNameId, dictionaries.awakeners.byIdToken, slotIndex),
     )
   }
 
   for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
     const slot = team.slots[slotIndex] ?? fallbackSlots[slotIndex]
-    payloadTokens.push(encodeWheelToken(slot.wheels[0], dictionaries.wheels.byIdToken))
-    payloadTokens.push(encodeWheelToken(slot.wheels[1], dictionaries.wheels.byIdToken))
+    payloadTokens.push(
+      encodeWheelToken(slot.wheels[0], dictionaries.wheels.byIdToken, slotIndex, 'wheelOne'),
+    )
+    payloadTokens.push(
+      encodeWheelToken(slot.wheels[1], dictionaries.wheels.byIdToken, slotIndex, 'wheelTwo'),
+    )
   }
 
   for (let slotIndex = 0; slotIndex < TEAM_SLOT_COUNT; slotIndex += 1) {
     const slot = team.slots[slotIndex] ?? fallbackSlots[slotIndex]
-    payloadTokens.push(encodeCovenantBlock(slot, dictionaries))
+    payloadTokens.push(encodeCovenantBlock(slot, dictionaries, slotIndex))
   }
 
-  const posseToken = team.posseId ? (dictionaries.posses.byIdToken.get(team.posseId) ?? 'a') : 'a'
+  const posseId = team.posseId
+  const posseToken = posseId ? dictionaries.posses.byIdToken.get(posseId) : 'a'
+  if (!posseToken) {
+    throw new Error(
+      `Cannot export in-game team code: posse "${posseId ?? ''}" is not representable.`,
+    )
+  }
   payloadTokens.push(posseToken)
   return `${INGAME_WRAPPER}${payloadTokens.join('')}${INGAME_WRAPPER}`
 }

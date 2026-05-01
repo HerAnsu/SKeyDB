@@ -2,8 +2,8 @@ import {act, renderHook} from '@testing-library/react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {
-  COLLECTION_OWNERSHIP_LEGACY_KEY,
   COLLECTION_OWNERSHIP_KEY,
+  COLLECTION_OWNERSHIP_LEGACY_KEY,
 } from '@/domain/collection-ownership'
 
 import {useCollectionViewModel} from './useCollectionViewModel'
@@ -31,14 +31,14 @@ describe('useCollectionViewModel', () => {
     expect(result.current.getAwakenerOwnedLevel('ramona: timeworn')).toBe(0)
 
     act(() => {
-      result.current.toggleOwned('awakeners', '42')
+      result.current.toggleOwned('awakeners', 'awakener-0042')
     })
 
     expect(result.current.getAwakenerOwnedLevel('ramona')).toBeNull()
     expect(result.current.getAwakenerOwnedLevel('ramona: timeworn')).toBeNull()
 
     act(() => {
-      result.current.increaseLevel('awakeners', '42')
+      result.current.increaseLevel('awakeners', 'awakener-0042')
     })
 
     expect(result.current.getAwakenerOwnedLevel('ramona')).toBe(0)
@@ -48,42 +48,42 @@ describe('useCollectionViewModel', () => {
   it('clamps wheel level to 15 and does not decrease below 0', () => {
     const {result} = renderHook(() => useCollectionViewModel())
 
-    expect(result.current.getWheelOwnedLevel('SR19')).toBe(0)
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(0)
 
     for (let index = 0; index < 20; index += 1) {
       act(() => {
-        result.current.increaseLevel('wheels', 'SR19')
+        result.current.increaseLevel('wheels', 'wheel-0095')
       })
     }
-    expect(result.current.getWheelOwnedLevel('SR19')).toBe(15)
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(15)
 
     for (let index = 0; index < 30; index += 1) {
       act(() => {
-        result.current.decreaseLevel('wheels', 'SR19')
+        result.current.decreaseLevel('wheels', 'wheel-0095')
       })
     }
-    expect(result.current.getWheelOwnedLevel('SR19')).toBe(0)
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(0)
   })
 
   it('restores previous wheel level after toggling unowned then owned again', () => {
     const {result} = renderHook(() => useCollectionViewModel())
 
     act(() => {
-      result.current.increaseLevel('wheels', 'SR19')
-      result.current.increaseLevel('wheels', 'SR19')
-      result.current.increaseLevel('wheels', 'SR19')
+      result.current.increaseLevel('wheels', 'wheel-0095')
+      result.current.increaseLevel('wheels', 'wheel-0095')
+      result.current.increaseLevel('wheels', 'wheel-0095')
     })
-    expect(result.current.getWheelOwnedLevel('SR19')).toBe(3)
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(3)
 
     act(() => {
-      result.current.toggleOwned('wheels', 'SR19')
+      result.current.toggleOwned('wheels', 'wheel-0095')
     })
-    expect(result.current.getWheelOwnedLevel('SR19')).toBeNull()
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBeNull()
 
     act(() => {
-      result.current.toggleOwned('wheels', 'SR19')
+      result.current.toggleOwned('wheels', 'wheel-0095')
     })
-    expect(result.current.getWheelOwnedLevel('SR19')).toBe(3)
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(3)
   })
 
   it('appends and clears search query on active tab', () => {
@@ -187,7 +187,7 @@ describe('useCollectionViewModel', () => {
 
     expect(result.current.getAwakenerOwnedLevel('ramona')).toBe(4)
     expect(result.current.getAwakenerLevel('ramona')).toBe(71)
-    expect(result.current.getWheelOwnedLevel('SR19')).toBe(3)
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(3)
     expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_LEGACY_KEY)).toBeTruthy()
     expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"version":2')
   })
@@ -213,13 +213,15 @@ describe('useCollectionViewModel', () => {
 
     expect(result.current.getAwakenerOwnedLevel('ramona')).toBe(0)
     expect(result.current.getAwakenerLevel('ramona')).toBe(60)
-    expect(result.current.getWheelOwnedLevel('SR19')).toBe(0)
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(0)
 
     act(() => {
       vi.advanceTimersByTime(300)
     })
 
-    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toBe('{"version":999,"payload":{}}')
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toBe(
+      '{"version":999,"payload":{}}',
+    )
     vi.useRealTimers()
   })
 
@@ -252,7 +254,7 @@ describe('useCollectionViewModel', () => {
 
     expect(result.current.getAwakenerOwnedLevel('ramona')).toBe(5)
     expect(result.current.getAwakenerLevel('ramona')).toBe(75)
-    expect(result.current.getWheelOwnedLevel('SR19')).toBe(6)
+    expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(6)
     expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"version":2')
     expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"awakener-0042"')
   })
@@ -279,7 +281,7 @@ describe('useCollectionViewModel', () => {
     expect(result.current.wheelSortHasPendingChanges).toBe(false)
 
     act(() => {
-      result.current.increaseLevel('wheels', 'SR19')
+      result.current.increaseLevel('wheels', 'wheel-0095')
     })
     expect(result.current.wheelSortHasPendingChanges).toBe(true)
 

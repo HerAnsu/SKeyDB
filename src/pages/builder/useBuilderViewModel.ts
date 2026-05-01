@@ -186,7 +186,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
   )
   const pickerWheels = useMemo(() => [...getWheels()], [])
   const awakenerIdByName = useMemo(
-    () => new Map(pickerAwakeners.map((awakener) => [awakener.name, String(awakener.id)])),
+    () => new Map(pickerAwakeners.map((awakener) => [awakener.name, awakener.id])),
     [pickerAwakeners],
   )
   const awakenerIdByNormalizedName = useMemo(
@@ -284,7 +284,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
       compareAwakenersForCollectionSort(
         {
           label: formatAwakenerNameForUi(left.name),
-          index: left.id,
+          index: left.numericId ?? Number.MAX_SAFE_INTEGER,
           owned: isAwakenerOwnedByName(left.name),
           enlighten: ownedAwakenerLevelByName.get(left.name) ?? 0,
           level: awakenerLevelByName.get(left.name) ?? 60,
@@ -293,7 +293,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
         },
         {
           label: formatAwakenerNameForUi(right.name),
-          index: right.id,
+          index: right.numericId ?? Number.MAX_SAFE_INTEGER,
           owned: isAwakenerOwnedByName(right.name),
           enlighten: ownedAwakenerLevelByName.get(right.name) ?? 0,
           level: awakenerLevelByName.get(right.name) ?? 60,

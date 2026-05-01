@@ -5,20 +5,41 @@ import type {TeamSlot} from './types'
 export const awakenersByNameForTests = new Map<string, Awakener>([
   [
     'Goliath',
-    {id: 1, name: 'Goliath', faction: 'Hybrid', realm: 'AEQUOR', aliases: ['Goliath'], tags: []},
+    {
+      id: 'awakener-0021',
+      name: 'Goliath',
+      faction: 'Hybrid',
+      realm: 'AEQUOR',
+      aliases: ['Goliath'],
+      tags: [],
+    },
   ],
   [
     'Miryam',
-    {id: 2, name: 'Miryam', faction: 'Hybrid', realm: 'AEQUOR', aliases: ['Miryam'], tags: []},
+    {
+      id: 'awakener-0032',
+      name: 'Miryam',
+      faction: 'Hybrid',
+      realm: 'AEQUOR',
+      aliases: ['Miryam'],
+      tags: [],
+    },
   ],
   [
     'Ramona',
-    {id: 3, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'], tags: []},
+    {
+      id: 'awakener-0042',
+      name: 'Ramona',
+      faction: 'The Fools',
+      realm: 'CHAOS',
+      aliases: ['Ramona'],
+      tags: [],
+    },
   ],
   [
     'Ramona: Timeworn',
     {
-      id: 4,
+      id: 'awakener-0020',
       name: 'Ramona: Timeworn',
       faction: 'The Fools',
       realm: 'CHAOS',
@@ -28,12 +49,19 @@ export const awakenersByNameForTests = new Map<string, Awakener>([
   ],
   [
     'Castor',
-    {id: 5, name: 'Castor', faction: 'Outlanders', realm: 'CARO', aliases: ['Castor'], tags: []},
+    {
+      id: 'awakener-0008',
+      name: 'Castor',
+      faction: 'Outlanders',
+      realm: 'CARO',
+      aliases: ['Castor'],
+      tags: [],
+    },
   ],
   [
     'Helot',
     {
-      id: 6,
+      id: 'awakener-0023',
       name: 'Helot',
       faction: 'Among the Stars',
       realm: 'CHAOS',

@@ -22,7 +22,7 @@ interface WheelDetailModalProps {
   fullDataV1: WheelFullV1Record
   onClose: () => void
   onSelectAwakener?: (
-    awakener: {id: number; name: string},
+    awakener: {id: string; name: string},
     tab?: 'overview' | 'skills' | 'builds' | 'teams',
   ) => void
   onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void

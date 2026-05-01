@@ -24,7 +24,7 @@ vi.mock('../../domain/mainstats', () => ({
 }))
 
 const TEST_AWAKENER: Awakener = {
-  id: 1,
+  id: 'awakener-0001',
   name: 'thais',
   realm: 'AEQUOR',
   faction: 'Test',

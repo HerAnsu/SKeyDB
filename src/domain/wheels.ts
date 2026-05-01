@@ -1,18 +1,70 @@
-import wheelsLite from '@/data/wheels/compiled/wheels-lite.v1.json'
+import {z} from 'zod'
 
-import {getMainstatByKey, type WheelMainstatKey} from './mainstats'
-import {wheelsLiteV1DatasetSchema, type WheelLiteV1Record} from './wheels-lite-v1-compiler'
+import publicWheelsLite from '@/data/public-v2/lite/wheels.json'
+
+import {WHEEL_MAINSTAT_KEYS, getMainstatByKey, type WheelMainstatKey} from './mainstats'
 
 export type WheelRarity = 'SSR' | 'SR' | 'R' | 'N'
 export type WheelRealm = 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA' | 'NEUTRAL'
 
-export type Wheel = WheelLiteV1Record & {
+const nonEmptyStringSchema = z.string().trim().min(1)
+
+const publicWheelsLiteSchema = z
+  .object({
+    schemaVersion: z.number().int().positive(),
+    scope: z.literal('wheels'),
+    recordCount: z.number().int().nonnegative(),
+    records: z.array(
+      z.object({
+        id: z.string().regex(/^wheel-\d{4}$/),
+        assetId: nonEmptyStringSchema,
+        name: nonEmptyStringSchema,
+        rarity: z.enum(['SSR', 'SR', 'R', 'N']),
+        realm: z.enum(['AEQUOR', 'CARO', 'CHAOS', 'ULTRA', 'NEUTRAL', 'OTHER']),
+        ownerAwakenerId: z
+          .string()
+          .regex(/^awakener-\d{4}$/)
+          .optional(),
+        ownerAwakenerName: nonEmptyStringSchema.optional(),
+        mainstatKey: z.enum(WHEEL_MAINSTAT_KEYS),
+      }),
+    ),
+  })
+  .strict()
+  .refine((envelope) => envelope.recordCount === envelope.records.length, {
+    message: 'recordCount must match records.length',
+    path: ['recordCount'],
+  })
+
+export interface Wheel {
+  id: string
+  assetId: string
+  name: string
   rarity: WheelRarity
   realm: WheelRealm
+  awakener: string
+  ownerAwakenerId?: string
+  ownerAwakenerName?: string
+  aliases: string[]
+  tags: string[]
   mainstatKey: WheelMainstatKey
 }
 
-const parsedWheels: Wheel[] = wheelsLiteV1DatasetSchema.parse(wheelsLite)
+const parsedWheels: Wheel[] = publicWheelsLiteSchema
+  .parse(publicWheelsLite)
+  .records.map((wheel) => ({
+    id: wheel.id,
+    assetId: wheel.assetId,
+    name: wheel.name,
+    rarity: wheel.rarity,
+    realm: wheel.realm === 'OTHER' ? 'NEUTRAL' : wheel.realm,
+    awakener: wheel.ownerAwakenerName?.toLowerCase() ?? '',
+    ownerAwakenerId: wheel.ownerAwakenerId,
+    ownerAwakenerName: wheel.ownerAwakenerName,
+    aliases: [wheel.name],
+    tags: [],
+    mainstatKey: wheel.mainstatKey,
+  }))
 const wheelById = new Map(parsedWheels.map((wheel) => [wheel.id, wheel]))
 
 export function getWheels(): Wheel[] {

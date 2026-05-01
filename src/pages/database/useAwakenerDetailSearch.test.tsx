@@ -9,7 +9,7 @@ import {useAwakenerDetailSearch} from './useAwakenerDetailSearch'
 
 const AWAKENERS: Awakener[] = [
   {
-    id: 1,
+    id: 'awakener-0001',
     name: 'alpha',
     realm: 'CHAOS',
     faction: 'Test',
@@ -19,7 +19,7 @@ const AWAKENERS: Awakener[] = [
     tags: [],
   },
   {
-    id: 2,
+    id: 'awakener-0002',
     name: 'beta',
     realm: 'AEQUOR',
     faction: 'Test',
@@ -52,7 +52,10 @@ describe('useAwakenerDetailSearch', () => {
       result.current.handleSearchQueryChange('a')
     })
 
-    expect(result.current.searchResults.map((awakener) => awakener.id)).toEqual([1, 2])
+    expect(result.current.searchResults.map((awakener) => awakener.id)).toEqual([
+      'awakener-0001',
+      'awakener-0002',
+    ])
     expect(result.current.activeSearchIndex).toBe(0)
 
     act(() => {
@@ -69,7 +72,10 @@ describe('useAwakenerDetailSearch', () => {
       result.current.handleSearchInputKeyDown(createKeyboardEvent('Enter'))
     })
 
-    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 1}), 'skills')
+    expect(onSelectAwakener).toHaveBeenCalledWith(
+      expect.objectContaining({id: 'awakener-0001'}),
+      'skills',
+    )
     expect(result.current.searchQuery).toBe('')
     expect(result.current.isSearchOpen).toBe(false)
   })

@@ -31,8 +31,9 @@ export function makeTestFullStats(overrides: Partial<FullStats> = {}): FullStats
 }
 
 export function makeTestAwakener(
-  overrides: Partial<Awakener> & Pick<Awakener, 'id' | 'name'>,
+  overrides: Partial<Omit<Awakener, 'id'>> & {id: string | number; name: string},
 ): Awakener {
+  const numericId = typeof overrides.id === 'number' ? overrides.id : overrides.numericId
   return {
     realm: 'AEQUOR',
     faction: 'Test',
@@ -41,6 +42,11 @@ export function makeTestAwakener(
     aliases: [overrides.name],
     tags: [],
     ...overrides,
+    id:
+      typeof overrides.id === 'number'
+        ? `awakener-${String(overrides.id).padStart(4, '0')}`
+        : overrides.id,
+    numericId,
   }
 }
 

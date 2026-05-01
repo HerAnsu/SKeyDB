@@ -299,7 +299,7 @@ vi.mock('./AwakenerDetailCards', () => ({
 }))
 
 vi.mock('./AwakenerBuildsTab', () => ({
-  AwakenerBuildsTab: ({awakenerId}: {awakenerId: number}) => <div>Builds Tab {awakenerId}</div>,
+  AwakenerBuildsTab: ({awakenerId}: {awakenerId: string}) => <div>Builds Tab {awakenerId}</div>,
 }))
 
 vi.mock('./AwakenerTeamsTab', () => ({
@@ -352,14 +352,15 @@ function makeAwakener(id: number, name: string): Awakener {
 interface TestAwakenerDetailModalOptions {
   activeTab?: 'overview' | 'skills' | 'builds' | 'teams'
   awakeners?: Awakener[]
-  key?: number
+  key?: string
   onClose?: () => void
   onSelectAwakener?: (awakener: Awakener, tab: 'overview' | 'skills' | 'builds' | 'teams') => void
   onTabChange?: (tab: 'overview' | 'skills' | 'builds' | 'teams') => void
 }
 
-function getTestFullDataV2(id: number): AwakenerFullV2Record {
-  const fullDataV2 = TEST_AWAKENERS_FULL_V2.find((entry) => entry.id === id)
+function getTestFullDataV2(id: string | number): AwakenerFullV2Record {
+  const numericId = typeof id === 'number' ? id : Number(id.replace(/^awakener-0*/, ''))
+  const fullDataV2 = TEST_AWAKENERS_FULL_V2.find((entry) => entry.id === numericId)
   if (!fullDataV2) {
     throw new Error(`Missing test full V2 data for awakener ${String(id)}`)
   }
@@ -753,7 +754,7 @@ describe('AwakenerDetailModal', () => {
 
     fireEvent.click(screen.getByRole('tab', {name: 'Builds'}))
 
-    expect(await screen.findByText('Builds Tab 1')).toBeInTheDocument()
+    expect(await screen.findByText('Builds Tab awakener-0001')).toBeInTheDocument()
   })
 
   it('opens a searched awakener from the modal search and preserves the active tab', async () => {
@@ -768,7 +769,10 @@ describe('AwakenerDetailModal', () => {
     fireEvent.change(searchInput, {target: {value: 'be'}})
     fireEvent.keyDown(searchInput, {key: 'Enter'})
 
-    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 2}), 'skills')
+    expect(onSelectAwakener).toHaveBeenCalledWith(
+      expect.objectContaining({id: 'awakener-0002'}),
+      'skills',
+    )
   })
 
   it('captures global typing into the modal search and lets escape clear it without closing', async () => {

@@ -1,6 +1,6 @@
 import {z} from 'zod'
 
-import awakenerBuildEntriesJson from '@/data/awakener-builds.json'
+import awakenerBuildEntriesJson from '@/data/public-v2/lite/awakener-builds.json'
 
 import {getAwakeners} from './awakeners'
 import {getCovenants, type Covenant} from './covenants'
@@ -44,12 +44,26 @@ const awakenerBuildSchema = z.object({
 })
 
 const awakenerBuildEntrySchema = z.object({
-  awakenerId: z.number().int().positive(),
+  id: z.string().regex(/^awakener-build-\d{4}$/),
+  awakenerId: z.string().regex(/^awakener-\d{4}$/),
   awakenerName: z.string().trim().min(1).optional(),
   primaryBuildId: z.string().trim().min(1).optional(),
   recommendedPosseIds: z.array(z.string().trim().min(1)).min(1).optional(),
   builds: z.array(awakenerBuildSchema).min(1),
 })
+
+const publicAwakenerBuildEntriesSchema = z
+  .object({
+    schemaVersion: z.number().int().positive(),
+    scope: z.literal('awakener-builds'),
+    recordCount: z.number().int().nonnegative(),
+    records: z.array(awakenerBuildEntrySchema),
+  })
+  .strict()
+  .refine((envelope) => envelope.recordCount === envelope.records.length, {
+    message: 'recordCount must match records.length',
+    path: ['recordCount'],
+  })
 
 const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine((entries, ctx) => {
   const awakenerById = new Map(getAwakeners().map((awakener) => [awakener.id, awakener]))
@@ -57,13 +71,13 @@ const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine
   const wheelIdSet = new Set(getWheels().map((wheel) => wheel.id))
   const covenantIdSet = new Set(getCovenants().map((covenant) => covenant.id))
   const posseIdSet = new Set(getPosses().map((posse) => posse.id))
-  const seenAwakenerIds = new Set<number>()
+  const seenAwakenerIds = new Set<string>()
 
   entries.forEach((entry, entryIndex) => {
     if (seenAwakenerIds.has(entry.awakenerId)) {
       ctx.addIssue({
         code: 'custom',
-        message: `Duplicate awakenerId ${String(entry.awakenerId)}.`,
+        message: `Duplicate awakenerId ${entry.awakenerId}.`,
         path: [entryIndex, 'awakenerId'],
       })
     }
@@ -72,7 +86,7 @@ const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine
     if (!awakenerIdSet.has(entry.awakenerId)) {
       ctx.addIssue({
         code: 'custom',
-        message: `Unknown awakenerId ${String(entry.awakenerId)}.`,
+        message: `Unknown awakenerId ${entry.awakenerId}.`,
         path: [entryIndex, 'awakenerId'],
       })
     }
@@ -81,7 +95,7 @@ const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine
     if (entry.awakenerName && expectedAwakenerName && entry.awakenerName !== expectedAwakenerName) {
       ctx.addIssue({
         code: 'custom',
-        message: `awakenerName "${entry.awakenerName}" does not match canonical awakener name "${expectedAwakenerName}" for id ${String(entry.awakenerId)}.`,
+        message: `awakenerName "${entry.awakenerName}" does not match canonical awakener name "${expectedAwakenerName}" for id ${entry.awakenerId}.`,
         path: [entryIndex, 'awakenerName'],
       })
     }
@@ -229,7 +243,8 @@ export function getAwakenerBuildEntries(): AwakenerBuildEntry[] {
   if (awakenerBuildEntriesCache) {
     return awakenerBuildEntriesCache
   }
-  awakenerBuildEntriesCache = awakenerBuildEntriesSchema.parse(awakenerBuildEntriesJson)
+  const envelope = publicAwakenerBuildEntriesSchema.parse(awakenerBuildEntriesJson)
+  awakenerBuildEntriesCache = awakenerBuildEntriesSchema.parse(envelope.records)
   return awakenerBuildEntriesCache
 }
 
@@ -239,12 +254,12 @@ export function loadAwakenerBuildEntries(): Promise<AwakenerBuildEntry[]> {
 
 export function buildAwakenerBuildEntryMap(
   entries: AwakenerBuildEntry[],
-): Map<number, AwakenerBuildEntry> {
+): Map<string, AwakenerBuildEntry> {
   return new Map(entries.map((entry) => [entry.awakenerId, entry]))
 }
 
 export function getAwakenerBuildEntryById(
-  awakenerId: number,
+  awakenerId: string,
   entries: AwakenerBuildEntry[],
 ): AwakenerBuildEntry | undefined {
   return entries.find((entry) => entry.awakenerId === awakenerId)

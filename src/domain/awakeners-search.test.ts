@@ -70,7 +70,8 @@ describe('searchAwakeners', () => {
   it('keeps one-character queries focused on names instead of broad tag matches', () => {
     const awakeners: Awakener[] = [
       {
-        id: 1,
+        id: 'awakener-0001',
+        numericId: 1,
         name: 'caecus',
         aliases: ['caecus'],
         realm: 'CHAOS',
@@ -78,7 +79,8 @@ describe('searchAwakeners', () => {
         tags: [],
       },
       {
-        id: 2,
+        id: 'awakener-0002',
+        numericId: 2,
         name: 'agrippa',
         aliases: ['agrippa'],
         realm: 'AEQUOR',

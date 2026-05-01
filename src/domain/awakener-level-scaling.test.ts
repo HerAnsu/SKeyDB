@@ -229,7 +229,7 @@ describe('awakeners full v2 data', () => {
   it('keeps lite and compiled awakener identity aligned by id and name', () => {
     const fullData = getAwakenersFullV2()
     const liteData = getAwakeners()
-    const liteById = new Map(liteData.map((awakener) => [awakener.id, awakener]))
+    const liteById = new Map(liteData.map((awakener) => [awakener.numericId, awakener]))
     const mismatches: string[] = []
 
     for (const fullAwakener of fullData) {
@@ -251,7 +251,7 @@ describe('awakeners full v2 data', () => {
   it('keeps lite and compiled primary CON/ATK/DEF stats aligned by awakener id', () => {
     const fullData = getAwakenersFullV2()
     const liteData = getAwakeners()
-    const liteById = new Map(liteData.map((awakener) => [awakener.id, awakener]))
+    const liteById = new Map(liteData.map((awakener) => [awakener.numericId, awakener]))
     const mismatches: string[] = []
 
     for (const fullAwakener of fullData) {

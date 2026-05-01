@@ -33,7 +33,7 @@ function buildTeams(): Team[] {
 
 describe('usePendingTransferDialog', () => {
   it('resolves wheel display name from wheelId instead of itemName', () => {
-    const wheelId = 'SR19'
+    const wheelId = 'wheel-0095'
     const wheelName = getWheelById(wheelId)?.name
     expect(wheelName).toBeTruthy()
     if (!wheelName) {

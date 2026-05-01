@@ -5,6 +5,12 @@ import wheelsCanonical from '@/data/ingame-tokens/wheels.json'
 
 import {getAwakeners} from './awakeners'
 import {getCovenants} from './covenants'
+import {
+  migrateAwakenerIdV1ToV2,
+  migrateCovenantIdV1ToV2,
+  migratePosseIdV1ToV2,
+  migrateWheelIdV1ToV2,
+} from './persistence-id-migration.v2'
 import {getPosses} from './posses'
 import {getWheels} from './wheels'
 
@@ -38,6 +44,13 @@ const canonicalAwakenerEntries: CanonicalTokenEntry[] = awakenersCanonical
 const canonicalCovenantEntries: CanonicalTokenEntry[] = covenantsCanonical
 const canonicalPosseEntries: CanonicalTokenEntry[] = possesCanonical
 const canonicalWheelEntries: CanonicalTokenEntry[] = wheelsCanonical
+
+function normalizeTokenEntries(
+  entries: CanonicalTokenEntry[],
+  migrateId: (id: string) => string | undefined,
+): CanonicalTokenEntry[] {
+  return entries.map((entry) => ({...entry, id: migrateId(entry.id) ?? entry.id}))
+}
 
 export function buildTokenDictionaryFromEntries({
   category,
@@ -105,26 +118,26 @@ export function buildIngameTokenDictionaries(): IngameTokenDictionaries {
 
   const awakenerDictionary = buildTokenDictionaryFromEntries({
     category: 'awakeners',
-    ids: awakeners.map((awakener) => String(awakener.id)),
-    sourceEntries: canonicalAwakenerEntries,
+    ids: awakeners.map((awakener) => awakener.id),
+    sourceEntries: normalizeTokenEntries(canonicalAwakenerEntries, migrateAwakenerIdV1ToV2),
   })
 
   const wheelDictionary = buildTokenDictionaryFromEntries({
     category: 'wheels',
     ids: wheels.map((wheel) => wheel.id),
-    sourceEntries: canonicalWheelEntries,
+    sourceEntries: normalizeTokenEntries(canonicalWheelEntries, migrateWheelIdV1ToV2),
   })
 
   const covenantDictionary = buildTokenDictionaryFromEntries({
     category: 'covenants',
     ids: covenants.map((covenant) => covenant.id),
-    sourceEntries: canonicalCovenantEntries,
+    sourceEntries: normalizeTokenEntries(canonicalCovenantEntries, migrateCovenantIdV1ToV2),
   })
 
   const posseDictionary = buildTokenDictionaryFromEntries({
     category: 'posses',
     ids: posses.map((posse) => posse.id),
-    sourceEntries: canonicalPosseEntries,
+    sourceEntries: normalizeTokenEntries(canonicalPosseEntries, migratePosseIdV1ToV2),
   })
 
   return {

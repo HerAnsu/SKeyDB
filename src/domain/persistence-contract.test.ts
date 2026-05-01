@@ -20,7 +20,7 @@ import {getWheels} from './wheels'
 
 interface PersistenceContractAwakenerEntry {
   name: string
-  id: number
+  id: string | number
 }
 
 interface PersistenceContractPosseEntry {
@@ -86,18 +86,21 @@ function expectUniqueCodecIndices(records: StandardCodeEntry[]): void {
 }
 
 describe('persistence contract', () => {
-  it('keeps stable identifiers and index order used by persistence/import', () => {
+  it('keeps current runtime identifiers aligned with the V2 persistence contract', () => {
     const current = buildCurrentContract()
-    const expected = frozenContract as PersistenceContract
+    const expectedV2 = v2Contract as {
+      awakeners: V2ContractEntry[]
+      wheels: V2ContractEntry[]
+      covenants: V2ContractEntry[]
+      posses: V2ContractEntry[]
+    }
 
-    expect(
-      current,
-      [
-        'Persistence/import contract changed.',
-        'If this is intentional, ship a data migration and then update',
-        'src/domain/persistence-contract.v1.json in the same PR.',
-      ].join(' '),
-    ).toEqual(expected)
+    expect([...current.awakeners.map((entry) => entry.id)].sort()).toEqual(
+      [...contractIds(expectedV2.awakeners)].sort(),
+    )
+    expect(current.wheels).toEqual(contractIds(expectedV2.wheels))
+    expect(current.covenants).toEqual(contractIds(expectedV2.covenants))
+    expect(current.posses.map((entry) => entry.id)).toEqual(contractIds(expectedV2.posses))
   })
 
   it('keeps V2 persistence contract ids canonical', () => {

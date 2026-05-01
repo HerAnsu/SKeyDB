@@ -7,15 +7,29 @@ import {CollectionPage} from './CollectionPage'
 
 vi.mock('../domain/awakeners', () => ({
   getAwakeners: () => [
-    {id: 1, name: 'ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['ram']},
-    {id: 2, name: 'ogier', faction: 'Outlanders', realm: 'CHAOS', aliases: ['ogi']},
+    {
+      id: 'awakener-0042',
+      numericId: 1,
+      name: 'ramona',
+      faction: 'The Fools',
+      realm: 'CHAOS',
+      aliases: ['ram'],
+    },
+    {
+      id: 'awakener-0038',
+      numericId: 2,
+      name: 'ogier',
+      faction: 'Outlanders',
+      realm: 'CHAOS',
+      aliases: ['ogi'],
+    },
   ],
 }))
 
 vi.mock('../domain/wheels', () => ({
   getWheels: () => [
     {
-      id: 'C01',
+      id: 'wheel-0014',
       assetId: 'Weapon_Full_C01',
       name: 'Birth of a Soul',
       rarity: 'SSR',
@@ -24,7 +38,7 @@ vi.mock('../domain/wheels', () => ({
       mainstatKey: 'CRIT_RATE',
     },
     {
-      id: 'C02',
+      id: 'wheel-0015',
       assetId: 'Weapon_Full_C02',
       name: 'Call of the Deep',
       rarity: 'SSR',
@@ -33,7 +47,7 @@ vi.mock('../domain/wheels', () => ({
       mainstatKey: 'ATK',
     },
     {
-      id: 'SR01',
+      id: 'wheel-0077',
       assetId: 'Weapon_Full_SR01',
       name: 'Practice Wheel',
       rarity: 'SR',
@@ -48,14 +62,14 @@ vi.mock('../domain/wheels', () => ({
 vi.mock('../domain/posses', () => ({
   getPosses: () => [
     {
-      id: 'manor-echoes',
+      id: 'posse-0047',
       index: 1,
       name: 'Manor Echoes',
       realm: 'CHAOS',
       isFadedLegacy: false,
       awakenerName: 'ramona',
     },
-    {id: 'tiny-wish', index: 2, name: 'Faded Legacy', realm: 'NEUTRAL', isFadedLegacy: true},
+    {id: 'posse-0005', index: 2, name: 'Faded Legacy', realm: 'NEUTRAL', isFadedLegacy: true},
   ],
 }))
 
@@ -162,8 +176,8 @@ describe('CollectionPage global search capture', () => {
         JSON.stringify({
           version: 1,
           payload: {
-            ownedAwakeners: {1: 3},
-            awakenerLevels: {1: 74},
+            ownedAwakeners: {42: 3},
+            awakenerLevels: {42: 74},
             ownedWheels: {C01: 2},
             ownedPosses: {'manor-echoes': 0},
             displayUnowned: true,
@@ -184,7 +198,7 @@ describe('CollectionPage global search capture', () => {
       'Lv.74',
     )
     expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"version":2')
-    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"awakener-0001"')
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"awakener-0042"')
   })
 
   it('loads v2 snapshot files and shows normal loaded status', async () => {
@@ -196,8 +210,8 @@ describe('CollectionPage global search capture', () => {
         JSON.stringify({
           version: 2,
           payload: {
-            ownedAwakeners: {'awakener-0001': 2},
-            awakenerLevels: {'awakener-0001': 73},
+            ownedAwakeners: {'awakener-0042': 2},
+            awakenerLevels: {'awakener-0042': 73},
             ownedWheels: {'wheel-0014': 1},
             ownedPosses: {'posse-0047': 0},
             displayUnowned: true,

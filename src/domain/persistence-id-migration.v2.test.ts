@@ -42,6 +42,7 @@ describe('persistence V1 to V2 id migration', () => {
     expect(migrateCovenantIdV1ToV2('001')).toBe('covenant-0001')
     expect(migrateCovenantIdV1ToV2('016')).toBe('covenant-0014')
     expect(migratePosseIdV1ToV2('24-all-of-her')).toBe('posse-0022')
+    expect(migratePosseIdV1ToV2('orbis-fatum')).toBe('posse-0050')
   })
 
   it('uses explicit aliases and returns undefined for unknown values', () => {

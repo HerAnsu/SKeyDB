@@ -9,7 +9,7 @@ describe('getWheels', () => {
 
     expect(wheels.length).toBeGreaterThan(0)
     expect(wheels[0]).toMatchObject({
-      id: expect.any(String),
+      id: expect.stringMatching(/^wheel-\d{4}$/),
       assetId: expect.any(String),
       name: expect.any(String),
       rarity: expect.stringMatching(/^(SSR|SR|R)$/),
@@ -28,6 +28,25 @@ describe('getWheels', () => {
     expect(wheels.every((wheel) => typeof wheel.mainstatKey === 'string')).toBe(true)
   })
 
+  it('uses public V2 wheel ids as runtime ids without legacy leakage', () => {
+    const wheels = getWheels()
+    const firstWheel = wheels.find((wheel) => wheel.id === 'wheel-0001')
+
+    expect(firstWheel).toMatchObject({
+      id: 'wheel-0001',
+      ownerAwakenerId: 'awakener-0048',
+    })
+    expect(
+      wheels.every(
+        (wheel) =>
+          !('source' in wheel) &&
+          !('legacyId' in wheel) &&
+          !('sourceConfigId' in wheel) &&
+          !('publicId' in wheel),
+      ),
+    ).toBe(true)
+  })
+
   it('ensures wheel ids are unique', () => {
     const wheels = getWheels()
     const ids = wheels.map((wheel) => wheel.id)
@@ -39,10 +58,10 @@ describe('getWheels', () => {
   it('applies wheel metadata overrides and defaults', () => {
     const wheels = getWheels()
 
-    const d12 = wheels.find((wheel) => wheel.id === 'D12')
-    const sr01 = wheels.find((wheel) => wheel.id === 'SR01')
-    const p01 = wheels.find((wheel) => wheel.id === 'P01')
-    const jp01 = wheels.find((wheel) => wheel.id === 'JP01')
+    const d12 = wheels.find((wheel) => wheel.assetId === 'Weapon_Full_D12')
+    const sr01 = wheels.find((wheel) => wheel.assetId === 'Weapon_Full_SR01')
+    const p01 = wheels.find((wheel) => wheel.assetId === 'Weapon_Full_P01')
+    const jp01 = wheels.find((wheel) => wheel.assetId === 'Weapon_Full_JP01')
 
     expect(d12?.realm).toBe('CHAOS')
     expect(sr01?.rarity).toBe('SR')

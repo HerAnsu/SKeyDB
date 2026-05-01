@@ -5,7 +5,7 @@ import {CatalogGrid} from './CatalogGrid'
 
 interface DatabaseGridProps {
   awakeners: Awakener[]
-  onSelectAwakener: (id: number) => void
+  onSelectAwakener: (id: string) => void
 }
 
 export function DatabaseGrid({awakeners, onSelectAwakener}: DatabaseGridProps) {

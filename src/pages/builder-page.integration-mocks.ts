@@ -4,24 +4,53 @@ import {BUILDER_PERSISTENCE_KEY} from './builder/builder-persistence'
 
 vi.mock('../domain/awakeners', () => ({
   getAwakeners: () => [
-    {id: 1, name: 'goliath', faction: 'Among the Stars', realm: 'CHAOS', aliases: ['goliath']},
-    {id: 2, name: 'ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['ramona']},
     {
-      id: 3,
+      id: 'awakener-0021',
+      numericId: 21,
+      name: 'goliath',
+      faction: 'Among the Stars',
+      realm: 'CHAOS',
+      aliases: ['goliath'],
+    },
+    {
+      id: 'awakener-0042',
+      numericId: 42,
+      name: 'ramona',
+      faction: 'The Fools',
+      realm: 'CHAOS',
+      aliases: ['ramona'],
+    },
+    {
+      id: 'awakener-0020',
+      numericId: 20,
       name: 'ramona: timeworn',
       faction: 'The Fools',
       realm: 'CHAOS',
       aliases: ['timeworn ramona'],
     },
-    {id: 4, name: 'agrippa', faction: 'Outlanders', realm: 'AEQUOR', aliases: ['agrippa']},
-    {id: 5, name: 'casiah', faction: 'The Fools', realm: 'CARO', aliases: ['casiah']},
+    {
+      id: 'awakener-0002',
+      numericId: 2,
+      name: 'agrippa',
+      faction: 'Outlanders',
+      realm: 'AEQUOR',
+      aliases: ['agrippa'],
+    },
+    {
+      id: 'awakener-0007',
+      numericId: 7,
+      name: 'casiah',
+      faction: 'The Fools',
+      realm: 'CARO',
+      aliases: ['casiah'],
+    },
   ],
 }))
 
 vi.mock('../domain/wheels', () => ({
   getWheels: () => [
     {
-      id: 'O01',
+      id: 'wheel-0050',
       assetId: 'Weapon_Full_O01',
       name: 'Merciful Nurturing',
       rarity: 'SSR',
@@ -30,7 +59,7 @@ vi.mock('../domain/wheels', () => ({
       mainstatKey: 'CRIT_RATE',
     },
     {
-      id: 'O02',
+      id: 'wheel-0051',
       assetId: 'Weapon_Full_O02',
       name: 'Tablet of Scriptures',
       rarity: 'SSR',
@@ -39,7 +68,7 @@ vi.mock('../domain/wheels', () => ({
       mainstatKey: 'CRIT_DMG',
     },
     {
-      id: 'SR01',
+      id: 'wheel-0077',
       assetId: 'Weapon_Full_SR01',
       name: 'Training Relic',
       rarity: 'SR',
@@ -48,7 +77,7 @@ vi.mock('../domain/wheels', () => ({
       mainstatKey: 'ATK',
     },
     {
-      id: 'O03',
+      id: 'wheel-0052',
       assetId: 'Weapon_Full_O03',
       name: 'Signal Through Silence',
       rarity: 'SSR',
@@ -57,7 +86,7 @@ vi.mock('../domain/wheels', () => ({
       mainstatKey: 'KEYFLARE_REGEN',
     },
     {
-      id: 'O04',
+      id: 'wheel-0053',
       assetId: 'Weapon_Full_O04',
       name: 'Mute Witness',
       rarity: 'SSR',
@@ -72,14 +101,14 @@ vi.mock('../domain/wheels', () => ({
 vi.mock('../domain/posses', () => ({
   getPosses: () => [
     {
-      id: '33',
+      id: 'posse-0033',
       index: 33,
       name: 'Taverns Opening',
       realm: 'CHAOS',
       isFadedLegacy: false,
       awakenerName: 'goliath',
     },
-    {id: '01', index: 1, name: 'Warded Injection', realm: 'AEQUOR', isFadedLegacy: false},
+    {id: 'posse-0003', index: 1, name: 'Warded Injection', realm: 'AEQUOR', isFadedLegacy: false},
   ],
 }))
 
@@ -99,7 +128,7 @@ vi.mock('../domain/awakener-builds', async () => {
     ...actual,
     getAwakenerBuildEntries: () => [
       {
-        awakenerId: 1,
+        awakenerId: 'awakener-0021',
         primaryBuildId: 'standard',
         builds: [
           {
@@ -108,8 +137,8 @@ vi.mock('../domain/awakener-builds', async () => {
             substatPriorityGroups: [['CRIT_DMG'], ['CRIT_RATE']],
             recommendedWheelMainstats: ['KEYFLARE_REGEN', 'ALIEMUS_REGEN', 'CRIT_DMG'],
             recommendedWheels: [
-              {tier: 'BIS_SSR', wheelIds: ['O02']},
-              {tier: 'GOOD', wheelIds: ['O01']},
+              {tier: 'BIS_SSR', wheelIds: ['wheel-0051']},
+              {tier: 'GOOD', wheelIds: ['wheel-0050']},
             ],
             recommendedCovenantIds: ['c02', 'c01'],
           },
@@ -119,7 +148,7 @@ vi.mock('../domain/awakener-builds', async () => {
     loadAwakenerBuildEntries: () =>
       Promise.resolve([
         {
-          awakenerId: 1,
+          awakenerId: 'awakener-0021',
           primaryBuildId: 'standard',
           builds: [
             {
@@ -128,8 +157,8 @@ vi.mock('../domain/awakener-builds', async () => {
               substatPriorityGroups: [['CRIT_DMG'], ['CRIT_RATE']],
               recommendedWheelMainstats: ['KEYFLARE_REGEN', 'ALIEMUS_REGEN', 'CRIT_DMG'],
               recommendedWheels: [
-                {tier: 'BIS_SSR', wheelIds: ['O02']},
-                {tier: 'GOOD', wheelIds: ['O01']},
+                {tier: 'BIS_SSR', wheelIds: ['wheel-0051']},
+                {tier: 'GOOD', wheelIds: ['wheel-0050']},
               ],
               recommendedCovenantIds: ['c02', 'c01'],
             },

@@ -12,7 +12,7 @@ import type {ActiveSelection, TeamSlot} from './types'
 interface UseAwakenerBuildRecommendationsOptions {
   activeSelection: ActiveSelection
   slotsById: Map<string, TeamSlot>
-  awakenerIdByName: Map<string, number>
+  awakenerIdByName: Map<string, string>
 }
 
 export function useAwakenerBuildRecommendations({

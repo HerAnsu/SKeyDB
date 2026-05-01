@@ -9,7 +9,7 @@ const awakenerByName = new Map<string, Awakener>([
   [
     'Goliath',
     {
-      id: 1,
+      id: 'awakener-0021',
       name: 'Goliath',
       faction: 'Among the Stars',
       realm: 'AEQUOR',
@@ -19,7 +19,14 @@ const awakenerByName = new Map<string, Awakener>([
   ],
   [
     'Ramona',
-    {id: 2, name: 'Ramona', faction: 'The Fools', realm: 'CHAOS', aliases: ['Ramona'], tags: []},
+    {
+      id: 'awakener-0042',
+      name: 'Ramona',
+      faction: 'The Fools',
+      realm: 'CHAOS',
+      aliases: ['Ramona'],
+      tags: [],
+    },
   ],
 ])
 

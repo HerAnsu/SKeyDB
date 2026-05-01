@@ -14,7 +14,7 @@ function makeWheel(overrides: Partial<Wheel> & Pick<Wheel, 'id' | 'name'>): Whee
     rarity: 'SSR',
     realm: 'CARO',
     awakener: 'alpha',
-    ownerAwakenerId: 1,
+    ownerAwakenerId: 'awakener-0001',
     ownerAwakenerName: 'alpha',
     aliases: [name],
     tags: [],

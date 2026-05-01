@@ -8,10 +8,10 @@ import {
   type AwakenerBuildWheelTier,
 } from '@/domain/awakener-builds'
 import {getCovenantAssetById} from '@/domain/covenant-assets'
-import {getCovenants} from '@/domain/covenants'
+import {getCovenants, type Covenant} from '@/domain/covenants'
 import {getMainstatByKey, getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
 import {getWheelAssetById} from '@/domain/wheel-assets'
-import {getWheelById} from '@/domain/wheels'
+import {getWheelById, getWheels, type Wheel} from '@/domain/wheels'
 import {getWheelFullV1ById, getWheelsFullV1} from '@/domain/wheels-full-v1'
 
 import {buildWheelPopoverEntry} from './buildWheelPopoverEntry'
@@ -25,7 +25,7 @@ import {
 import {scaledFontStyle} from './font-scale'
 
 interface AwakenerBuildsTabProps {
-  awakenerId: number
+  awakenerId: string
 }
 
 const PRIMARY_WHEEL_TIERS: AwakenerBuildWheelTier[] = ['BIS_SSR', 'ALT_SSR', 'BIS_SR']
@@ -45,7 +45,17 @@ function getWheelGroupByTier(build: AwakenerBuild, tier: AwakenerBuildWheelTier)
 }
 
 const covenantNameById = new Map(getCovenants().map((covenant) => [covenant.id, covenant.name]))
+const covenantByCanonicalId = new Map(getCovenants().map((covenant) => [covenant.id, covenant]))
+const wheelByCanonicalId = new Map(getWheels().map((wheel) => [wheel.id, wheel]))
 const wheelFullDataRecords = getWheelsFullV1()
+
+function getWheelByCanonicalId(wheelId: string): Wheel | undefined {
+  return wheelByCanonicalId.get(wheelId) ?? getWheelById(wheelId)
+}
+
+function getCovenantByCanonicalId(covenantId: string): Covenant | undefined {
+  return covenantByCanonicalId.get(covenantId)
+}
 
 function RecommendationTile({
   asset,
@@ -169,11 +179,11 @@ function RecommendationLine({
     <div className={RECOMMENDATION_GRID_CLASS}>
       {groups.flatMap((group) =>
         group.wheelIds.map((wheelId) => {
-          const wheel = getWheelById(wheelId)
+          const wheel = getWheelByCanonicalId(wheelId)
           return (
             <RecommendationTile
               altText={`${wheel?.name ?? wheelId} wheel`}
-              asset={getWheelAssetById(wheelId)}
+              asset={getWheelAssetById(wheel?.id ?? wheelId)}
               chip={TIER_LABELS[group.tier]}
               imageClassName='builder-picker-wheel-image'
               key={`${group.tier}-${wheelId}`}
@@ -197,12 +207,13 @@ function CovenantRecommendationGrid({build}: {build: AwakenerBuild}) {
   return (
     <div className={RECOMMENDATION_GRID_CLASS}>
       {build.recommendedCovenantIds.map((covenantId, index) => {
+        const covenant = getCovenantByCanonicalId(covenantId)
         const label = covenantNameById.get(covenantId) ?? covenantId
         return (
           <RecommendationTile
             altText={`${label} covenant`}
             aspectClassName='aspect-square'
-            asset={getCovenantAssetById(covenantId)}
+            asset={getCovenantAssetById(covenant?.id ?? covenantId)}
             chip={`#${String(index + 1)}`}
             key={covenantId}
             label={label}
@@ -223,7 +234,8 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
         return
       }
 
-      const wheelRecord = getWheelFullV1ById(wheelId, wheelFullDataRecords)
+      const wheel = getWheelByCanonicalId(wheelId)
+      const wheelRecord = getWheelFullV1ById(wheel?.id ?? wheelId, wheelFullDataRecords)
       if (!wheelRecord) {
         return
       }

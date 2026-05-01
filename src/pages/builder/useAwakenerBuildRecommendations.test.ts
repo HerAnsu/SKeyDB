@@ -29,7 +29,7 @@ function getEntryName(entry: AwakenerBuildEntry): string {
 
   const awakener = getAwakeners().find((candidate) => candidate.id === entry.awakenerId)
   if (!awakener) {
-    throw new Error(`Expected canonical awakener for id ${String(entry.awakenerId)}`)
+    throw new Error(`Expected canonical awakener for id ${entry.awakenerId}`)
   }
 
   return awakener.name

@@ -559,8 +559,11 @@ export function loadBuilderDraft(storage: StorageLike | null): BuilderDraftPaylo
     if (!migrated) {
       return null
     }
-    saveBuilderDraft(storage, migrated)
-    return migrated
+    if (!saveBuilderDraft(storage, migrated)) {
+      return null
+    }
+    const serialized = serializeDraftV2(migrated)
+    return serialized ? deserializeDraftV2(serialized) : null
   } catch {
     return null
   }

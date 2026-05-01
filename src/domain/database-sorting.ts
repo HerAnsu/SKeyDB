@@ -105,7 +105,7 @@ export function compareAwakenersForDatabaseSort(
   }
 
   comparators.push((innerLeft, innerRight) => compareText(innerLeft.name, innerRight.name, 'ASC'))
-  comparators.push((innerLeft, innerRight) => innerLeft.id - innerRight.id)
+  comparators.push((innerLeft, innerRight) => innerLeft.id.localeCompare(innerRight.id))
 
   return compareByPriority(left, right, comparators)
 }

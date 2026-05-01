@@ -7,10 +7,19 @@ describe('getCovenants', () => {
     const covenants = getCovenants()
 
     expect(covenants.length).toBeGreaterThan(0)
-    expect(covenants[0]).toEqual({
-      id: '001',
+    expect(covenants[0]).toMatchObject({
+      id: 'covenant-0001',
       assetId: 'Icon_Trinket_001',
       name: 'Deus Ex Machina',
     })
+    expect(
+      covenants.every(
+        (covenant) =>
+          !('source' in covenant) &&
+          !('legacyId' in covenant) &&
+          !('sourceConfigId' in covenant) &&
+          !('publicId' in covenant),
+      ),
+    ).toBe(true)
   })
 })

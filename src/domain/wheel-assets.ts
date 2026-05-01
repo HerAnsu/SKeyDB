@@ -1,3 +1,5 @@
+import publicWheelsLite from '@/data/public-v2/lite/wheels.json'
+
 const wheelAssets = import.meta.glob<string>('../assets/wheels/*.webp', {
   eager: true,
   import: 'default',
@@ -12,6 +14,11 @@ const wheelAssetByAssetId = new Map(
   Object.entries(wheelAssets).map(([assetPath, url]) => [basenameWithoutExt(assetPath), url]),
 )
 
+const wheelAssetIdById = new Map(
+  publicWheelsLite.records.map((wheel) => [wheel.id, wheel.assetId] as const),
+)
+
 export function getWheelAssetById(wheelId: string): string | undefined {
-  return wheelAssetByAssetId.get(`Weapon_Full_${wheelId}`)
+  const assetId = wheelAssetIdById.get(wheelId) ?? `Weapon_Full_${wheelId}`
+  return wheelAssetByAssetId.get(assetId)
 }

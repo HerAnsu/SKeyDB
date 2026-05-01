@@ -2,11 +2,11 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 
-import awakenersLite from '../src/data/awakeners/compiled/awakeners-lite.v2.json' with {type: 'json'}
-import covenantsLite from '../src/data/covenants-lite.json' with {type: 'json'}
 import mainstats from '../src/data/mainstats.json' with {type: 'json'}
-import possesLite from '../src/data/posses-lite.json' with {type: 'json'}
-import wheelsLite from '../src/data/wheels/compiled/wheels-lite.v1.json' with {type: 'json'}
+import awakenersLite from '../src/data/public-v2/lite/awakeners.json' with {type: 'json'}
+import covenantsLite from '../src/data/public-v2/lite/covenants.json' with {type: 'json'}
+import possesLite from '../src/data/public-v2/lite/posses.json' with {type: 'json'}
+import wheelsLite from '../src/data/public-v2/lite/wheels.json' with {type: 'json'}
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -30,7 +30,7 @@ function createConstOptions(values) {
 }
 
 function createAwakenerOptions() {
-  return awakenersLite.map((awakener) => ({
+  return awakenersLite.records.map((awakener) => ({
     const: awakener.id,
     title: awakener.name,
     description: `${awakener.rarity} · ${awakener.realm} · ${awakener.type}`,
@@ -38,7 +38,7 @@ function createAwakenerOptions() {
 }
 
 function createAwakenerNameOptions() {
-  return awakenersLite.map((awakener) => ({
+  return awakenersLite.records.map((awakener) => ({
     const: awakener.name,
     title: awakener.name,
     description: `${awakener.rarity} · ${awakener.realm} · ${awakener.type} · id ${String(awakener.id)}`,
@@ -48,15 +48,15 @@ function createAwakenerNameOptions() {
 function createWheelOptions() {
   const mainstatLabelByKey = new Map(mainstats.map((mainstat) => [mainstat.key, mainstat.label]))
 
-  return wheelsLite.map((wheel) => ({
+  return wheelsLite.records.map((wheel) => ({
     const: wheel.id,
     title: wheel.name,
-    description: `${wheel.rarity} · ${wheel.realm} · ${wheel.awakener || 'neutral'} · ${mainstatLabelByKey.get(wheel.mainstatKey) ?? wheel.mainstatKey}`,
+    description: `${wheel.rarity} · ${wheel.realm} · ${wheel.ownerAwakenerName ?? 'neutral'} · ${mainstatLabelByKey.get(wheel.mainstatKey) ?? wheel.mainstatKey}`,
   }))
 }
 
 function createCovenantOptions() {
-  return covenantsLite.map((covenant) => ({
+  return covenantsLite.records.map((covenant) => ({
     const: covenant.id,
     title: covenant.name,
     description: covenant.assetId,
@@ -64,10 +64,10 @@ function createCovenantOptions() {
 }
 
 function createPosseOptions() {
-  return possesLite.map((posse) => ({
+  return possesLite.records.map((posse) => ({
     const: posse.id,
     title: posse.name,
-    description: `${posse.realm} · ${posse.awakenerName ?? 'shared'}`,
+    description: `${posse.realm} · ${posse.ownerAwakenerName ?? 'shared'}`,
   }))
 }
 
@@ -83,10 +83,24 @@ function createMainstatOptions(keys) {
 export function buildAwakenerBuildsSchema() {
   return {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    title: 'Awakener Builds',
-    type: 'array',
-    items: {$ref: '#/$defs/entry'},
+    title: 'Awakener Builds Public V2 Lite',
+    type: 'object',
+    additionalProperties: false,
+    required: ['schemaVersion', 'scope', 'recordCount', 'records'],
+    properties: {
+      schemaVersion: {type: 'integer', minimum: 1},
+      scope: {const: 'awakener-builds'},
+      recordCount: {type: 'integer', minimum: 0},
+      records: {
+        type: 'array',
+        items: {$ref: '#/$defs/entry'},
+      },
+    },
     $defs: {
+      entryId: {
+        type: 'string',
+        pattern: '^awakener-build-\\d{4}$',
+      },
       awakenerId: {
         oneOf: createAwakenerOptions(),
       },
@@ -185,8 +199,9 @@ export function buildAwakenerBuildsSchema() {
       entry: {
         type: 'object',
         additionalProperties: false,
-        required: ['awakenerId', 'builds'],
+        required: ['id', 'awakenerId', 'builds'],
         properties: {
+          id: {$ref: '#/$defs/entryId'},
           awakenerId: {$ref: '#/$defs/awakenerId'},
           awakenerName: {$ref: '#/$defs/awakenerName'},
           primaryBuildId: {$ref: '#/$defs/buildId'},

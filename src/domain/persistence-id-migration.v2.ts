@@ -303,6 +303,7 @@ export const POSSE_ID_V1_TO_V2 = {
   'miracles-dawn': 'posse-0020',
   'new-years-eve-fireworks': 'posse-0048',
   'obsession-eternal': 'posse-0006',
+  'orbis-fatum': 'posse-0050',
   'plague-of-illusions': 'posse-0030',
   'reunions-wish': 'posse-0045',
   'roaring-blood-and-sand': 'posse-0011',

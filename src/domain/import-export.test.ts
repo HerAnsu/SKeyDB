@@ -8,15 +8,15 @@ function makeTeam(name: string): Team {
   return {
     id: `${name}-id`,
     name,
-    posseId: 'taverns-opening',
+    posseId: 'posse-0033',
     slots: [
       {
         slotId: 'slot-1',
         awakenerName: 'goliath',
         realm: 'AEQUOR',
         level: 60,
-        wheels: ['SR19', 'SR20'],
-        covenantId: '001',
+        wheels: ['wheel-0095', 'wheel-0096'],
+        covenantId: 'covenant-0001',
       },
       {slotId: 'slot-2', awakenerName: 'ramona', realm: 'CHAOS', level: 60, wheels: [null, null]},
       {slotId: 'slot-3', wheels: [null, null]},
@@ -44,10 +44,10 @@ describe('import-export codec', () => {
     expect(parsed.kind).toBe('single')
     if (parsed.kind !== 'single') return
     expect(parsed.team.name).toBe('Team 1')
-    expect(parsed.team.posseId).toBe('taverns-opening')
+    expect(parsed.team.posseId).toBe('posse-0033')
     expect(parsed.team.slots[0].awakenerName).toBe('goliath')
-    expect(parsed.team.slots[0].wheels).toEqual(['SR19', 'SR20'])
-    expect(parsed.team.slots[0].covenantId).toBe('001')
+    expect(parsed.team.slots[0].wheels).toEqual(['wheel-0095', 'wheel-0096'])
+    expect(parsed.team.slots[0].covenantId).toBe('covenant-0001')
   })
 
   it('encodes V2 canonical ids through the frozen standard-code byte contract', () => {
@@ -62,9 +62,18 @@ describe('import-export codec', () => {
     const parsed = decodeImportCode(code)
     expect(parsed.kind).toBe('single')
     if (parsed.kind !== 'single') return
-    expect(parsed.team.posseId).toBe('taverns-opening')
-    expect(parsed.team.slots[0].wheels).toEqual(['SR19', 'SR20'])
-    expect(parsed.team.slots[0].covenantId).toBe('001')
+    expect(parsed.team.posseId).toBe('posse-0033')
+    expect(parsed.team.slots[0].wheels).toEqual(['wheel-0095', 'wheel-0096'])
+    expect(parsed.team.slots[0].covenantId).toBe('covenant-0001')
+  })
+
+  it('throws when a selected posse is not representable in the frozen standard-code byte contract', () => {
+    const team = makeTeam('Orbis Fatum Team')
+    team.posseId = 'posse-0050'
+
+    expect(() => encodeSingleTeamCode(team)).toThrow(
+      /posse "posse-0050" is not representable in the frozen standard export format/i,
+    )
   })
 
   it('decodes frozen t1 byte meanings through current runtime ids', () => {
@@ -72,10 +81,10 @@ describe('import-export codec', () => {
 
     expect(parsed.kind).toBe('single')
     if (parsed.kind !== 'single') return
-    expect(parsed.team.posseId).toBe('taverns-opening')
+    expect(parsed.team.posseId).toBe('posse-0033')
     expect(parsed.team.slots[0].awakenerName).toBe('goliath')
-    expect(parsed.team.slots[0].wheels).toEqual(['SR19', 'SR20'])
-    expect(parsed.team.slots[0].covenantId).toBe('001')
+    expect(parsed.team.slots[0].wheels).toEqual(['wheel-0095', 'wheel-0096'])
+    expect(parsed.team.slots[0].covenantId).toBe('covenant-0001')
     expect(parsed.team.slots[1].awakenerName).toBe('ramona')
   })
 
@@ -120,7 +129,7 @@ describe('import-export codec', () => {
       realm: 'AEQUOR',
       level: 90,
       isSupport: true,
-      wheels: ['SR19', null],
+      wheels: ['wheel-0095', null],
     }
     teams[1].slots[1] = {
       slotId: 'slot-2',
@@ -152,7 +161,11 @@ describe('import-export codec', () => {
 
   it('strips wheel assignments from slots without awakeners during roundtrip', () => {
     const team = makeTeam('Team Dirty')
-    team.slots[2] = {slotId: 'slot-3', wheels: ['SR19', 'SR20'], covenantId: '001'}
+    team.slots[2] = {
+      slotId: 'slot-3',
+      wheels: ['wheel-0095', 'wheel-0096'],
+      covenantId: 'covenant-0001',
+    }
 
     const code = encodeSingleTeamCode(team)
     const parsed = decodeImportCode(code)

@@ -87,24 +87,6 @@ const standardPosseIdByIndex = new Map(
 const standardPosseLegacyIdByIndex = new Map(
   standardCode.posses.map((entry) => [entry.codecIndex, String(entry.legacyId)]),
 )
-const currentWheelIdByV2Id = new Map(
-  wheels.flatMap((wheel) => {
-    const v2Id = migrateWheelIdV1ToV2(wheel.id)
-    return v2Id ? [[v2Id, wheel.id] as const] : []
-  }),
-)
-const currentCovenantIdByV2Id = new Map(
-  covenants.flatMap((covenant) => {
-    const v2Id = migrateCovenantIdV1ToV2(covenant.id)
-    return v2Id ? [[v2Id, covenant.id] as const] : []
-  }),
-)
-const currentPosseIdByV2Id = new Map(
-  posses.flatMap((posse) => {
-    const v2Id = migratePosseIdV1ToV2(posse.id)
-    return v2Id ? [[v2Id, posse.id] as const] : []
-  }),
-)
 
 function getAwakenerStandardIdByName(awakenerName: string): string | undefined {
   const v2Id = migrateAwakenerNameV1ToV2(awakenerName)
@@ -113,7 +95,7 @@ function getAwakenerStandardIdByName(awakenerName: string): string | undefined {
   }
 
   const currentId = awakenerIdByName.get(awakenerName)
-  return currentId ? standardAwakenerIdByIndex.get(currentId) : undefined
+  return currentId && standardAwakenerIndexById.has(currentId) ? currentId : undefined
 }
 
 function getStandardWheelId(wheelId: string): string | undefined {
@@ -199,6 +181,11 @@ function pushSlotBytes(buffer: number[], slot: TeamSlot, options?: {includeSuppo
   const awakenerStandardId = slot.awakenerName
     ? getAwakenerStandardIdByName(slot.awakenerName)
     : undefined
+  if (slot.awakenerName && !awakenerStandardId) {
+    throw new Error(
+      `Awakener "${slot.awakenerName}" is not representable in the frozen standard export format.`,
+    )
+  }
   const awakenerIndex = awakenerStandardId
     ? (standardAwakenerIndexById.get(awakenerStandardId) ?? 0)
     : 0
@@ -216,6 +203,21 @@ function pushSlotBytes(buffer: number[], slot: TeamSlot, options?: {includeSuppo
   const wheelOneStandardId = slot.wheels[0] ? getStandardWheelId(slot.wheels[0]) : undefined
   const wheelTwoStandardId = slot.wheels[1] ? getStandardWheelId(slot.wheels[1]) : undefined
   const covenantStandardId = slot.covenantId ? getStandardCovenantId(slot.covenantId) : undefined
+  if (awakenerIndex && slot.wheels[0] && !wheelOneStandardId) {
+    throw new Error(
+      `Wheel "${slot.wheels[0]}" is not representable in the frozen standard export format.`,
+    )
+  }
+  if (awakenerIndex && slot.wheels[1] && !wheelTwoStandardId) {
+    throw new Error(
+      `Wheel "${slot.wheels[1]}" is not representable in the frozen standard export format.`,
+    )
+  }
+  if (awakenerIndex && slot.covenantId && !covenantStandardId) {
+    throw new Error(
+      `Covenant "${slot.covenantId}" is not representable in the frozen standard export format.`,
+    )
+  }
   const wheelOne =
     awakenerIndex && wheelOneStandardId ? (standardWheelIndexById.get(wheelOneStandardId) ?? 0) : 0
   const wheelTwo =
@@ -236,6 +238,11 @@ function pushSlotBytes(buffer: number[], slot: TeamSlot, options?: {includeSuppo
 
 function pushTeamBytes(buffer: number[], team: Team, options?: {includeSupport?: boolean}) {
   const posseStandardId = team.posseId ? getStandardPosseId(team.posseId) : undefined
+  if (team.posseId && !posseStandardId) {
+    throw new Error(
+      `Posse "${team.posseId}" is not representable in the frozen standard export format.`,
+    )
+  }
   const posseIndex = posseStandardId ? (standardPosseIndexById.get(posseStandardId) ?? 0) : 0
   if (posseIndex > 255) {
     throw new Error('Posse index exceeds export format limits.')
@@ -271,11 +278,8 @@ function getDecodedWheelId(wheelIndex: number): string | null {
 
   const standardId = standardWheelIdByIndex.get(wheelIndex)
   const wheelId =
-    resolveCurrentId(
-      standardId,
-      currentWheelIds,
-      standardId ? currentWheelIdByV2Id.get(standardId) : undefined,
-    ) ?? standardWheelLegacyIdByIndex.get(wheelIndex)
+    resolveCurrentId(standardId, currentWheelIds, undefined) ??
+    standardWheelLegacyIdByIndex.get(wheelIndex)
   if (!wheelId) {
     throw new Error(`Unknown wheel index: ${String(wheelIndex)}`)
   }
@@ -289,11 +293,8 @@ function getDecodedCovenantId(covenantIndex: number): string | undefined {
 
   const standardId = standardCovenantIdByIndex.get(covenantIndex)
   const covenantId =
-    resolveCurrentId(
-      standardId,
-      currentCovenantIds,
-      standardId ? currentCovenantIdByV2Id.get(standardId) : undefined,
-    ) ?? standardCovenantLegacyIdByIndex.get(covenantIndex)
+    resolveCurrentId(standardId, currentCovenantIds, undefined) ??
+    standardCovenantLegacyIdByIndex.get(covenantIndex)
   if (!covenantId) {
     throw new Error(`Unknown covenant index: ${String(covenantIndex)}`)
   }
@@ -348,11 +349,8 @@ function decodeTeam(
     throw new Error(`Unknown posse index: ${String(posseIndex)}`)
   }
   const posseId =
-    resolveCurrentId(
-      standardPosseId,
-      currentPosseIds,
-      standardPosseId ? currentPosseIdByV2Id.get(standardPosseId) : undefined,
-    ) ?? standardPosseLegacyIdByIndex.get(posseIndex)
+    resolveCurrentId(standardPosseId, currentPosseIds, undefined) ??
+    standardPosseLegacyIdByIndex.get(posseIndex)
   if (posseIndex && !posseId) {
     throw new Error(`Unknown posse index: ${String(posseIndex)}`)
   }

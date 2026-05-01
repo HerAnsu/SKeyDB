@@ -40,7 +40,7 @@ interface WheelDetailContentProps {
   onEnhanceLevelChange: (level: number) => void
   mobileArtwork?: React.ReactNode
   onSelectAwakener?: (
-    awakener: {id: number; name: string},
+    awakener: {id: string; name: string},
     tab?: 'overview' | 'skills' | 'builds' | 'teams',
   ) => void
 }

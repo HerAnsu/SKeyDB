@@ -80,8 +80,8 @@ describe('buildIngameTokenDictionaries', () => {
   it('uses canonical posse ids rather than display names in the tracked token file', () => {
     const result = buildIngameTokenDictionaries()
 
-    expect(result.posses.byIdToken.get('manor-echoes')).toBe('2')
-    expect(result.posses.byIdToken.get('voices-in-your-head')).toBe('h')
+    expect(result.posses.byIdToken.get('posse-0047')).toBe('2')
+    expect(result.posses.byIdToken.get('posse-0002')).toBe('h')
     expect(result.posses.byIdToken.has('Manor Echoes')).toBe(false)
     expect(
       result.issues.some(
@@ -130,8 +130,8 @@ describe('buildIngameTokenDictionaries', () => {
     const result = buildIngameTokenDictionaries()
 
     expect(result.covenants.byIdToken.size).toBe(21)
-    expect(result.covenants.byIdToken.get('022')).toBe('w')
-    expect(result.covenants.byTokenId.get('w')).toBe('022')
+    expect(result.covenants.byIdToken.get('covenant-0020')).toBe('w')
+    expect(result.covenants.byTokenId.get('w')).toBe('covenant-0020')
   })
 
   it('produces issue metadata for unresolved mappings', () => {

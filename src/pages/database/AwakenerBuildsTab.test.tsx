@@ -32,7 +32,8 @@ describe('AwakenerBuildsTab', () => {
   it('renders all configured builds and groups wheel recommendations by line', () => {
     getAwakenerBuildEntries.mockReturnValue([
       {
-        awakenerId: 27,
+        id: 'awakener-build-0027',
+        awakenerId: 'awakener-0027',
         primaryBuildId: 'dps',
         builds: [
           {
@@ -41,12 +42,12 @@ describe('AwakenerBuildsTab', () => {
             summary: 'Damage-first setup.',
             substatPriorityGroups: [['CRIT_DMG'], ['DMG_AMP', 'CRIT_RATE'], ['ATK']],
             recommendedWheels: [
-              {tier: 'BIS_SSR', wheelIds: ['C16']},
-              {tier: 'ALT_SSR', wheelIds: ['ZL02']},
-              {tier: 'BIS_SR', wheelIds: ['SR43']},
-              {tier: 'GOOD', wheelIds: ['SR11']},
+              {tier: 'BIS_SSR', wheelIds: ['wheel-0028']},
+              {tier: 'ALT_SSR', wheelIds: ['wheel-0121']},
+              {tier: 'BIS_SR', wheelIds: ['wheel-0116']},
+              {tier: 'GOOD', wheelIds: ['wheel-0087']},
             ],
-            recommendedCovenantIds: ['005', '010'],
+            recommendedCovenantIds: ['covenant-0004', 'covenant-0008'],
           },
           {
             id: 'tank',
@@ -54,16 +55,16 @@ describe('AwakenerBuildsTab', () => {
             note: 'Flexible filler support. Use this slot to carry the wheels or covenants your team needs.',
             substatPriorityGroups: [['DEATH_RESISTANCE'], ['CON', 'DEF']],
             recommendedWheels: [
-              {tier: 'BIS_SSR', wheelIds: ['ZL04']},
-              {tier: 'GOOD', wheelIds: ['SR05']},
+              {tier: 'BIS_SSR', wheelIds: ['wheel-0123']},
+              {tier: 'GOOD', wheelIds: ['wheel-0081']},
             ],
-            recommendedCovenantIds: ['001'],
+            recommendedCovenantIds: ['covenant-0001'],
           },
         ],
       },
     ])
 
-    render(<AwakenerBuildsTab awakenerId={27} />)
+    render(<AwakenerBuildsTab awakenerId='awakener-0027' />)
 
     expect(screen.getByText('DPS')).toBeInTheDocument()
     expect(screen.getByText('Tank')).toBeInTheDocument()
@@ -89,21 +90,22 @@ describe('AwakenerBuildsTab', () => {
   it('hides a redundant build heading when only one build exists', async () => {
     getAwakenerBuildEntries.mockReturnValue([
       {
-        awakenerId: 18,
+        id: 'awakener-build-0018',
+        awakenerId: 'awakener-0018',
         primaryBuildId: 'core',
         builds: [
           {
             id: 'core',
             label: 'Core',
             substatPriorityGroups: [['ALIEMUS_REGEN'], ['KEYFLARE_REGEN']],
-            recommendedWheels: [{tier: 'BIS_SSR', wheelIds: ['C02EX']}],
-            recommendedCovenantIds: ['001'],
+            recommendedWheels: [{tier: 'BIS_SSR', wheelIds: ['wheel-0016']}],
+            recommendedCovenantIds: ['covenant-0001'],
           },
         ],
       },
     ])
 
-    render(<AwakenerBuildsTab awakenerId={18} />)
+    render(<AwakenerBuildsTab awakenerId='awakener-0018' />)
 
     await waitFor(() => {
       expect(screen.getByText('Manikin of Oblivion')).toBeInTheDocument()
@@ -114,7 +116,7 @@ describe('AwakenerBuildsTab', () => {
   it('shows an empty state when no curated builds exist for the awakener', () => {
     getAwakenerBuildEntries.mockReturnValue([])
 
-    render(<AwakenerBuildsTab awakenerId={99} />)
+    render(<AwakenerBuildsTab awakenerId='awakener-0099' />)
 
     expect(screen.getByText('No curated builds available yet.')).toBeInTheDocument()
   })
@@ -132,21 +134,22 @@ describe('AwakenerBuildsTab', () => {
     })
     getAwakenerBuildEntries.mockReturnValue([
       {
-        awakenerId: 27,
+        id: 'awakener-build-0027',
+        awakenerId: 'awakener-0027',
         primaryBuildId: 'dps',
         builds: [
           {
             id: 'dps',
             label: 'DPS',
             substatPriorityGroups: [['CRIT_DMG'], ['ATK']],
-            recommendedWheels: [{tier: 'BIS_SSR', wheelIds: ['C16']}],
-            recommendedCovenantIds: ['005'],
+            recommendedWheels: [{tier: 'BIS_SSR', wheelIds: ['wheel-0028']}],
+            recommendedCovenantIds: ['covenant-0004'],
           },
         ],
       },
     ])
 
-    render(<AwakenerBuildsTab awakenerId={27} />)
+    render(<AwakenerBuildsTab awakenerId='awakener-0027' />)
 
     screen.getByRole('button', {name: /Amber-Tinted Death/i}).click()
 
@@ -167,6 +170,52 @@ describe('AwakenerBuildsTab', () => {
         referenceLayerOverride: expect.objectContaining({
           referenceInfoById: expect.any(Map),
         }),
+      }),
+      expect.any(Object),
+    )
+  })
+
+  it('opens wheel preview popovers for canonical wheel ids backed by V1 full records', () => {
+    const openRootInfo = vi.fn()
+    vi.mocked(useDatabasePopoverControllerContext).mockReturnValue({
+      closeAllPopovers: vi.fn(),
+      hasOpenPopovers: false,
+      openNestedOverlay: vi.fn(),
+      openNestedReferenceByName: vi.fn(),
+      openRootInfo,
+      openRootOverlay: vi.fn(),
+      openRootReferenceByName: vi.fn(),
+    })
+    getAwakenerBuildEntries.mockReturnValue([
+      {
+        id: 'awakener-build-0018',
+        awakenerId: 'awakener-0018',
+        primaryBuildId: 'core',
+        builds: [
+          {
+            id: 'core',
+            label: 'Core',
+            substatPriorityGroups: [['ALIEMUS_REGEN']],
+            recommendedWheels: [{tier: 'BIS_SSR', wheelIds: ['wheel-0016']}],
+            recommendedCovenantIds: [],
+          },
+        ],
+      },
+    ])
+
+    render(<AwakenerBuildsTab awakenerId='awakener-0018' />)
+
+    screen.getByRole('button', {name: /Manikin of Oblivion/i}).click()
+
+    expect(openRootInfo).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: 'Manikin of Oblivion',
+        attributeRows: expect.arrayContaining([
+          expect.objectContaining({
+            label: 'Aliemus Regen',
+            value: expect.any(String),
+          }),
+        ]),
       }),
       expect.any(Object),
     )

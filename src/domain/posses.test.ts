@@ -17,6 +17,26 @@ describe('getPosses', () => {
     expect(posses.every((posse) => Number.isInteger(posse.index) && posse.index >= 0)).toBe(true)
   })
 
+  it('uses public V2 posse ids as runtime ids without legacy leakage', () => {
+    const posses = getPosses()
+    const firstPosse = posses.find((posse) => posse.id === 'posse-0001')
+
+    expect(firstPosse).toMatchObject({
+      id: 'posse-0001',
+      index: 1,
+      isFadedLegacy: true,
+    })
+    expect(
+      posses.every(
+        (posse) =>
+          !('source' in posse) &&
+          !('legacyId' in posse) &&
+          !('sourceConfigId' in posse) &&
+          !('publicId' in posse),
+      ),
+    ).toBe(true)
+  })
+
   it('ensures posse indexes are unique', () => {
     const posses = getPosses()
     const indices = posses.map((posse) => posse.index)

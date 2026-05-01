@@ -20,7 +20,7 @@ vi.mock('../../domain/realms', () => ({
 
 const RESULTS: Awakener[] = [
   {
-    id: 1,
+    id: 'awakener-0001',
     name: 'alpha',
     realm: 'CHAOS',
     faction: 'Test',
@@ -30,7 +30,7 @@ const RESULTS: Awakener[] = [
     tags: [],
   },
   {
-    id: 2,
+    id: 'awakener-0002',
     name: 'beta',
     realm: 'AEQUOR',
     faction: 'Test',
@@ -178,6 +178,6 @@ describe('AwakenerDetailSearchBar', () => {
 
     fireEvent.click(option)
 
-    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 1}))
+    expect(onSelectAwakener).toHaveBeenCalledWith(expect.objectContaining({id: 'awakener-0001'}))
   })
 })

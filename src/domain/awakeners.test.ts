@@ -9,7 +9,8 @@ describe('getAwakeners', () => {
     expect(awakeners.length).toBeGreaterThan(0)
     expect(awakeners[0]).toEqual(
       expect.objectContaining({
-        id: expect.any(Number),
+        id: expect.stringMatching(/^awakener-\d{4}$/),
+        numericId: expect.any(Number),
         name: expect.any(String),
         faction: expect.any(String),
         realm: expect.any(String),
@@ -24,12 +25,36 @@ describe('getAwakeners', () => {
         tags: expect.any(Array),
       }),
     )
-    expect(awakeners.every((a) => Number.isInteger(a.id) && a.id > 0)).toBe(true)
+    expect(awakeners.every((a) => /^awakener-\d{4}$/.test(a.id))).toBe(true)
+    expect(
+      awakeners.every(
+        (a) => typeof a.numericId === 'number' && Number.isInteger(a.numericId) && a.numericId > 0,
+      ),
+    ).toBe(true)
     expect(awakeners.every((a) => a.name.trim().length > 0)).toBe(true)
     expect(awakeners.every((a) => a.faction.trim().length > 0)).toBe(true)
     expect(awakeners.every((a) => a.realm.trim().length > 0)).toBe(true)
     expect(awakeners.every((a) => a.aliases.length > 0)).toBe(true)
     expect(awakeners.every((a) => !a.rarity || a.rarity.trim().length > 0)).toBe(true)
+  })
+
+  it('uses public V2 ids as runtime ids without legacy leakage', () => {
+    const awakeners = getAwakeners()
+    const firstAwakener = awakeners.find((awakener) => awakener.id === 'awakener-0001')
+
+    expect(firstAwakener).toMatchObject({
+      id: 'awakener-0001',
+      numericId: 1,
+    })
+    expect(
+      awakeners.every(
+        (awakener) =>
+          !('source' in awakener) &&
+          !('legacyId' in awakener) &&
+          !('sourceAwakenerId' in awakener) &&
+          !('publicId' in awakener),
+      ),
+    ).toBe(true)
   })
 
   it('assigns unique stable ids to all awakeners', () => {

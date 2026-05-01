@@ -33,11 +33,11 @@ describe('BuilderPage awakener basics', () => {
     window.localStorage.setItem(
       COLLECTION_OWNERSHIP_KEY,
       JSON.stringify({
-        version: 1,
+        version: 2,
         updatedAt: '2026-01-01T00:00:00.000Z',
         payload: {
-          ownedAwakeners: {'1': 0},
-          awakenerLevels: {'1': 77},
+          ownedAwakeners: {'awakener-0021': 0},
+          awakenerLevels: {'awakener-0021': 77},
           ownedWheels: {},
           ownedPosses: {},
           displayUnowned: true,

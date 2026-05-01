@@ -41,7 +41,7 @@ function requireDefined<T>(value: T | null | undefined): T {
   return value
 }
 
-async function getPrimaryBuild(awakenerId: number) {
+async function getPrimaryBuild(awakenerId: string) {
   const entries = await loadAwakenerBuildEntries()
   return requireDefined(getPrimaryAwakenerBuild(getAwakenerBuildEntryById(awakenerId, entries)))
 }
@@ -283,7 +283,7 @@ describe('useBuilderViewModel', () => {
   })
 
   it('promotes recommended wheels when the active awakener slot is used as the assignment target', async () => {
-    const build = await getPrimaryBuild(27)
+    const build = await getPrimaryBuild('awakener-0027')
     const {result} = renderHook(() =>
       useBuilderViewModel({
         searchInputRef: createRef<HTMLInputElement>(),
@@ -354,7 +354,7 @@ describe('useBuilderViewModel', () => {
   })
 
   it('promotes matching wheel mainstats ahead of non-matching fallback wheels when enabled', async () => {
-    const build = await getPrimaryBuild(27)
+    const build = await getPrimaryBuild('awakener-0027')
     const recommendedWheelIds = new Set(build.recommendedWheels.flatMap((group) => group.wheelIds))
     const {result} = renderHook(() =>
       useBuilderViewModel({
@@ -402,7 +402,7 @@ describe('useBuilderViewModel', () => {
   })
 
   it('promotes recommended covenants in configured order for the active slot awakener', async () => {
-    const build = await getPrimaryBuild(27)
+    const build = await getPrimaryBuild('awakener-0027')
     const {result} = renderHook(() =>
       useBuilderViewModel({
         searchInputRef: createRef<HTMLInputElement>(),
@@ -436,7 +436,7 @@ describe('useBuilderViewModel', () => {
 
   it('promotes recommended posses to the top when recommendation promotion is enabled', async () => {
     const entries = await loadAwakenerBuildEntries()
-    const entry = requireDefined(getAwakenerBuildEntryById(27, entries))
+    const entry = requireDefined(getAwakenerBuildEntryById('awakener-0027', entries))
     const recommendedPosseIds = requireDefined(entry.recommendedPosseIds)
     const {result} = renderHook(() =>
       useBuilderViewModel({
@@ -464,7 +464,8 @@ describe('useBuilderViewModel', () => {
     })
 
     await waitFor(() => {
-      expect(result.current.filteredPosses[0]?.id).toBe(recommendedPosseIds[0])
+      const firstPosse = result.current.filteredPosses[0]
+      expect(firstPosse.id).toBe(recommendedPosseIds[0])
     })
   })
 

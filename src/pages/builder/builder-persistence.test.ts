@@ -2,8 +2,8 @@ import {describe, expect, it} from 'vitest'
 
 import {
   BUILDER_PERSISTENCE_KEY,
-  LEGACY_BUILDER_PERSISTENCE_KEY,
   clearBuilderDraft,
+  LEGACY_BUILDER_PERSISTENCE_KEY,
   loadBuilderDraft,
   saveBuilderDraft,
 } from './builder-persistence'
@@ -25,14 +25,14 @@ function createTeamFixture(): Team {
   return {
     id: 'team-alpha',
     name: 'Team Alpha',
-    posseId: 'encounter-in-pure-white',
+    posseId: 'posse-0001',
     slots: [
       {
         slotId: 'slot-1',
         awakenerName: 'goliath',
         realm: 'AEQUOR',
         level: 60,
-        wheels: ['B01', 'C01'],
+        wheels: ['wheel-0001', 'wheel-0014'],
       },
       {slotId: 'slot-2', wheels: [null, null]},
       {slotId: 'slot-3', wheels: [null, null]},
@@ -137,7 +137,7 @@ describe('builder-persistence', () => {
             realm: 'AEQUOR',
             level: 90,
             isSupport: true,
-            wheels: ['B01', 'C01'] as [string, string],
+            wheels: ['wheel-0001', 'wheel-0014'] as [string, string],
           },
           {slotId: 'slot-2', wheels: [null, null] as [null, null]},
           {slotId: 'slot-3', wheels: [null, null] as [null, null]},
@@ -168,6 +168,45 @@ describe('builder-persistence', () => {
     expect(loaded).toEqual(legacyEnvelope.payload)
     expect(storage.backing.has(LEGACY_BUILDER_PERSISTENCE_KEY)).toBe(true)
     expect(storage.backing.get(BUILDER_PERSISTENCE_KEY)).toContain('"version":2')
+  })
+
+  it('returns canonical runtime ids on the first legacy V1 draft load', () => {
+    const legacyTeam: Team = {
+      id: 'team-alpha',
+      name: 'Team Alpha',
+      posseId: 'encounter-in-pure-white',
+      slots: [
+        {
+          slotId: 'slot-1',
+          awakenerName: 'goliath',
+          realm: 'AEQUOR',
+          level: 60,
+          wheels: ['B01', 'C01'],
+          covenantId: '022',
+        },
+        {slotId: 'slot-2', wheels: [null, null]},
+        {slotId: 'slot-3', wheels: [null, null]},
+        {slotId: 'slot-4', wheels: [null, null]},
+      ],
+    }
+    const storage = createStorage([
+      [
+        LEGACY_BUILDER_PERSISTENCE_KEY,
+        JSON.stringify({
+          version: 1,
+          updatedAt: '2026-01-01T00:00:00.000Z',
+          payload: {teams: [legacyTeam], activeTeamId: 'team-alpha'},
+        }),
+      ],
+    ])
+
+    const loaded = loadBuilderDraft(storage.api)
+
+    expect(loaded?.teams[0]?.posseId).toBe('posse-0001')
+    expect(loaded?.teams[0]?.slots[0]).toMatchObject({
+      wheels: ['wheel-0001', 'wheel-0014'],
+      covenantId: 'covenant-0020',
+    })
   })
 
   it('prefers valid V2 storage over stale V1 storage', () => {
