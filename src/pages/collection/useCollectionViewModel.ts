@@ -4,6 +4,7 @@ import {getAwakeners} from '@/domain/awakeners'
 import {searchAwakeners} from '@/domain/awakeners-search'
 import {
   clearOwnedEntry,
+  COLLECTION_OWNERSHIP_KEY,
   createDefaultCollectionOwnershipCatalog,
   getAwakenerLevel,
   getOwnedLevel,
@@ -171,6 +172,14 @@ export function useCollectionViewModel() {
   const storage = useMemo(() => getBrowserLocalStorage(), [])
   const ownershipCatalog = useMemo(() => createDefaultCollectionOwnershipCatalog(), [])
   const persistedAwakenerSortConfig = useMemo(() => loadAwakenerSortConfig(storage), [storage])
+  const hasInvalidV2OwnershipSnapshot = useMemo(() => {
+    const rawSnapshot = safeStorageRead(storage, COLLECTION_OWNERSHIP_KEY)
+    if (rawSnapshot === null) {
+      return false
+    }
+    return !parseCollectionOwnershipSnapshot(rawSnapshot, ownershipCatalog).ok
+  }, [storage, ownershipCatalog])
+  const skipNextOwnershipAutosaveRef = useRef(hasInvalidV2OwnershipSnapshot)
   const [ownership, setOwnership] = useState(() =>
     loadCollectionOwnership(storage, ownershipCatalog),
   )
@@ -658,6 +667,11 @@ export function useCollectionViewModel() {
   }
 
   useEffect(() => {
+    if (skipNextOwnershipAutosaveRef.current) {
+      skipNextOwnershipAutosaveRef.current = false
+      return
+    }
+
     const timeoutId = window.setTimeout(() => {
       saveCollectionOwnership(storage, ownership, ownershipCatalog)
     }, OWNERSHIP_AUTOSAVE_DEBOUNCE_MS)
@@ -727,6 +741,7 @@ export function useCollectionViewModel() {
         return parsed
       }
       setOwnership(parsed.state)
+      saveCollectionOwnership(storage, parsed.state, ownershipCatalog)
       applyAwakenerSortFreeze()
       applyWheelSortFreeze()
       return parsed

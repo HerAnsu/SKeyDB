@@ -1,7 +1,10 @@
 import {act, renderHook} from '@testing-library/react'
-import {afterEach, beforeEach, describe, expect, it} from 'vitest'
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {COLLECTION_OWNERSHIP_KEY} from '@/domain/collection-ownership'
+import {
+  COLLECTION_OWNERSHIP_LEGACY_KEY,
+  COLLECTION_OWNERSHIP_KEY,
+} from '@/domain/collection-ownership'
 
 import {useCollectionViewModel} from './useCollectionViewModel'
 
@@ -10,11 +13,14 @@ const COLLECTION_AWAKENER_SORT_KEY = 'skeydb.collection.awakenerSort.v1'
 describe('useCollectionViewModel', () => {
   beforeEach(() => {
     window.localStorage.removeItem(COLLECTION_OWNERSHIP_KEY)
+    window.localStorage.removeItem(COLLECTION_OWNERSHIP_LEGACY_KEY)
     window.localStorage.removeItem(COLLECTION_AWAKENER_SORT_KEY)
   })
 
   afterEach(() => {
+    vi.useRealTimers()
     window.localStorage.removeItem(COLLECTION_OWNERSHIP_KEY)
+    window.localStorage.removeItem(COLLECTION_OWNERSHIP_LEGACY_KEY)
     window.localStorage.removeItem(COLLECTION_AWAKENER_SORT_KEY)
   })
 
@@ -160,6 +166,95 @@ describe('useCollectionViewModel', () => {
     expect(second.result.current.awakenerSortKey).toBe('ALPHABETICAL')
     expect(second.result.current.awakenerSortDirection).toBe('ASC')
     expect(second.result.current.awakenerSortGroupByRealm).toBe(true)
+  })
+
+  it('loads legacy v1 ownership snapshots and saves the current v2 key', () => {
+    window.localStorage.setItem(
+      COLLECTION_OWNERSHIP_LEGACY_KEY,
+      JSON.stringify({
+        version: 1,
+        payload: {
+          ownedAwakeners: {42: 4},
+          awakenerLevels: {42: 71},
+          ownedWheels: {SR19: 3},
+          ownedPosses: {},
+          displayUnowned: true,
+        },
+      }),
+    )
+
+    const {result} = renderHook(() => useCollectionViewModel())
+
+    expect(result.current.getAwakenerOwnedLevel('ramona')).toBe(4)
+    expect(result.current.getAwakenerLevel('ramona')).toBe(71)
+    expect(result.current.getWheelOwnedLevel('SR19')).toBe(3)
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_LEGACY_KEY)).toBeTruthy()
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"version":2')
+  })
+
+  it('does not fall back to v1 or autosave over an invalid existing v2 snapshot on mount', () => {
+    vi.useFakeTimers()
+    window.localStorage.setItem(COLLECTION_OWNERSHIP_KEY, '{"version":999,"payload":{}}')
+    window.localStorage.setItem(
+      COLLECTION_OWNERSHIP_LEGACY_KEY,
+      JSON.stringify({
+        version: 1,
+        payload: {
+          ownedAwakeners: {42: 5},
+          awakenerLevels: {42: 79},
+          ownedWheels: {SR19: 4},
+          ownedPosses: {},
+          displayUnowned: true,
+        },
+      }),
+    )
+
+    const {result} = renderHook(() => useCollectionViewModel())
+
+    expect(result.current.getAwakenerOwnedLevel('ramona')).toBe(0)
+    expect(result.current.getAwakenerLevel('ramona')).toBe(60)
+    expect(result.current.getWheelOwnedLevel('SR19')).toBe(0)
+
+    act(() => {
+      vi.advanceTimersByTime(300)
+    })
+
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toBe('{"version":999,"payload":{}}')
+    vi.useRealTimers()
+  })
+
+  it('exports v2 snapshots and imports migrated v1 snapshots', () => {
+    const {result} = renderHook(() => useCollectionViewModel())
+
+    const exported = result.current.exportOwnershipSnapshot()
+    expect(exported).toContain('"version":2')
+
+    act(() => {
+      const parsed = result.current.importOwnershipSnapshot(
+        JSON.stringify({
+          version: 1,
+          payload: {
+            ownedAwakeners: {42: 5},
+            awakenerLevels: {42: 75},
+            ownedWheels: {SR19: 6},
+            ownedPosses: {},
+            displayUnowned: true,
+          },
+        }),
+      )
+      expect(parsed).toEqual(
+        expect.objectContaining({
+          ok: true,
+          migratedFromVersion: 1,
+        }),
+      )
+    })
+
+    expect(result.current.getAwakenerOwnedLevel('ramona')).toBe(5)
+    expect(result.current.getAwakenerLevel('ramona')).toBe(75)
+    expect(result.current.getWheelOwnedLevel('SR19')).toBe(6)
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"version":2')
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"awakener-0042"')
   })
 
   it('marks awakener sort pending after level changes and clears after apply', () => {

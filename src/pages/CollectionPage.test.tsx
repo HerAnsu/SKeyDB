@@ -1,6 +1,8 @@
 import {act, fireEvent, render, screen, within} from '@testing-library/react'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
+import {COLLECTION_OWNERSHIP_KEY} from '@/domain/collection-ownership'
+
 import {CollectionPage} from './CollectionPage'
 
 vi.mock('../domain/awakeners', () => ({
@@ -46,14 +48,14 @@ vi.mock('../domain/wheels', () => ({
 vi.mock('../domain/posses', () => ({
   getPosses: () => [
     {
-      id: '01',
+      id: 'manor-echoes',
       index: 1,
       name: 'Manor Echoes',
       realm: 'CHAOS',
       isFadedLegacy: false,
       awakenerName: 'ramona',
     },
-    {id: '02', index: 2, name: 'Faded Legacy', realm: 'NEUTRAL', isFadedLegacy: true},
+    {id: 'tiny-wish', index: 2, name: 'Faded Legacy', realm: 'NEUTRAL', isFadedLegacy: true},
   ],
 }))
 
@@ -79,6 +81,7 @@ vi.mock('./collection/OwnedWheelBoxExport', () => ({
 
 afterEach(() => {
   vi.restoreAllMocks()
+  window.localStorage.removeItem(COLLECTION_OWNERSHIP_KEY)
 })
 
 function getRequiredFileInput(container: HTMLElement): HTMLInputElement {
@@ -120,7 +123,7 @@ describe('CollectionPage global search capture', () => {
     expect(screen.getByRole('searchbox')).toHaveValue('')
   })
 
-  it('saves ownership snapshot to file and shows status', () => {
+  it('saves ownership v2 snapshot to file and shows status', async () => {
     const createObjectUrlSpy = vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:mock')
     const revokeObjectUrlSpy = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined)
     const clickSpy = vi
@@ -132,6 +135,9 @@ describe('CollectionPage global search capture', () => {
     fireEvent.click(screen.getByRole('button', {name: /save to file/i}))
 
     expect(createObjectUrlSpy).toHaveBeenCalledTimes(1)
+    const blob = createObjectUrlSpy.mock.calls[0]?.[0]
+    expect(blob).toBeInstanceOf(Blob)
+    await expect((blob as Blob).text()).resolves.toContain('"version":2')
     expect(revokeObjectUrlSpy).toHaveBeenCalledTimes(1)
     expect(clickSpy).toHaveBeenCalledTimes(1)
     expect(screen.getByText(/saved skeydb-collection-/i)).toBeInTheDocument()
@@ -145,6 +151,69 @@ describe('CollectionPage global search capture', () => {
     fireEvent.change(input, {target: {files: [badFile]}})
 
     expect(await screen.findByText(/load failed: file is not valid json\./i)).toBeInTheDocument()
+  })
+
+  it('loads v1 snapshot files and shows migrated status', async () => {
+    const {container} = render(<CollectionPage />)
+    const input = getRequiredFileInput(container)
+
+    const file = new File(
+      [
+        JSON.stringify({
+          version: 1,
+          payload: {
+            ownedAwakeners: {1: 3},
+            awakenerLevels: {1: 74},
+            ownedWheels: {C01: 2},
+            ownedPosses: {'manor-echoes': 0},
+            displayUnowned: true,
+          },
+        }),
+      ],
+      'legacy-collection.json',
+      {type: 'application/json'},
+    )
+    fireEvent.change(input, {target: {files: [file]}})
+
+    expect(
+      await screen.findByText(
+        /loaded legacy-collection\.json and updated it to the current data format/i,
+      ),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /edit awakener level for ramona/i})).toHaveTextContent(
+      'Lv.74',
+    )
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"version":2')
+    expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"awakener-0001"')
+  })
+
+  it('loads v2 snapshot files and shows normal loaded status', async () => {
+    const {container} = render(<CollectionPage />)
+    const input = getRequiredFileInput(container)
+
+    const file = new File(
+      [
+        JSON.stringify({
+          version: 2,
+          payload: {
+            ownedAwakeners: {'awakener-0001': 2},
+            awakenerLevels: {'awakener-0001': 73},
+            ownedWheels: {'wheel-0014': 1},
+            ownedPosses: {'posse-0047': 0},
+            displayUnowned: true,
+          },
+        }),
+      ],
+      'current-collection.json',
+      {type: 'application/json'},
+    )
+    fireEvent.change(input, {target: {files: [file]}})
+
+    expect(await screen.findByText(/loaded current-collection\.json/i)).toBeInTheDocument()
+    expect(screen.queryByText(/updated it to the current data format/i)).not.toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /edit awakener level for ramona/i})).toHaveTextContent(
+      'Lv.73',
+    )
   })
 
   it('shows tab-specific owned box export buttons', () => {

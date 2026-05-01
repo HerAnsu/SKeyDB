@@ -148,7 +148,11 @@ export function CollectionPage() {
       if (!parsed.ok) {
         showToast(getCollectionLoadErrorMessage(parsed.error))
       } else {
-        showToast(`Loaded ${file.name}`)
+        showToast(
+          parsed.migratedFromVersion
+            ? `Loaded ${file.name} and updated it to the current data format`
+            : `Loaded ${file.name}`,
+        )
       }
     } catch {
       showToast('Load failed: could not read file.')
