@@ -12,6 +12,7 @@ export function buildWheelPopoverEntry(
   const referenceLayer = buildWheelDatabaseReferenceLayer({
     activeDescriptionRank: 1,
     activeWheelId: wheelRecord.id,
+    wheelRecords: [wheelRecord],
   })
   const referenceInfo = resolveDatabaseReferenceInfoById(referenceLayer, wheelRecord.id)
   const mainstatLabel = getMainstatByKey(wheelRecord.mainstatKey)?.label ?? wheelRecord.mainstatKey

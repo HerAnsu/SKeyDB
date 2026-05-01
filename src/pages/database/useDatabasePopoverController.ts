@@ -12,7 +12,7 @@ import {
   type ResolvedDatabaseReferenceLayer,
 } from '@/domain/database-reference-layer'
 
-import type {DatabasePopoverContextValue} from './database-popover-context'
+import type {DatabasePopoverAnchorEvent, DatabasePopoverContextValue} from './database-popover-context'
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
 import type {DatabasePopoverRootProps} from './DatabasePopoverRoot'
 import {
@@ -159,12 +159,12 @@ export function useDatabasePopoverController({
   )
 
   const openRootTrailEntry = useCallback(
-    (entry: TrailEntry, event: MouseEvent<HTMLElement>) => {
+    (entry: TrailEntry, event: DatabasePopoverAnchorEvent) => {
       event.stopPropagation()
       if (isSameTrailRoot(trail, entry.key)) {
         return
       }
-      const anchorElement = event.currentTarget as HTMLElement
+      const anchorElement = event.currentTarget
       announceTrailOpened()
       setTrailAnchorElement(anchorElement)
       setTrailAnchorRect(anchorElement.getBoundingClientRect())
@@ -185,7 +185,7 @@ export function useDatabasePopoverController({
   )
 
   const openRootInfo = useCallback(
-    (entry: KeyedDatabaseReferenceEntry, event: MouseEvent<HTMLElement>) => {
+    (entry: KeyedDatabaseReferenceEntry, event: DatabasePopoverAnchorEvent) => {
       openRootTrailEntry(
         {
           ...entry,

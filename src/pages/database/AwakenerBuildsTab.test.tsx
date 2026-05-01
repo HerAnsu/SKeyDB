@@ -8,6 +8,10 @@ const {getAwakenerBuildEntries} = vi.hoisted(() => ({
   getAwakenerBuildEntries: vi.fn(),
 }))
 
+const {loadWheelFullV2ById} = vi.hoisted(() => ({
+  loadWheelFullV2ById: vi.fn(),
+}))
+
 vi.mock('../../domain/awakener-builds', async () => {
   const actual = await vi.importActual<typeof import('../../domain/awakener-builds')>(
     '../../domain/awakener-builds',
@@ -23,9 +27,14 @@ vi.mock('./database-popover-context', () => ({
   useDatabasePopoverControllerContext: vi.fn(),
 }))
 
+vi.mock('@/domain/wheels-full-v2-loader', () => ({
+  loadWheelFullV2ById,
+}))
+
 describe('AwakenerBuildsTab', () => {
   beforeEach(() => {
     getAwakenerBuildEntries.mockReset()
+    loadWheelFullV2ById.mockReset()
     vi.mocked(useDatabasePopoverControllerContext).mockReturnValue(null)
   })
 
@@ -121,7 +130,7 @@ describe('AwakenerBuildsTab', () => {
     expect(screen.getByText('No curated builds available yet.')).toBeInTheDocument()
   })
 
-  it('opens a wheel preview popover entry from recommended wheel tiles', () => {
+  it('opens a wheel preview popover entry from recommended wheel tiles', async () => {
     const openRootInfo = vi.fn()
     vi.mocked(useDatabasePopoverControllerContext).mockReturnValue({
       closeAllPopovers: vi.fn(),
@@ -151,7 +160,26 @@ describe('AwakenerBuildsTab', () => {
 
     render(<AwakenerBuildsTab awakenerId='awakener-0027' />)
 
+    loadWheelFullV2ById.mockResolvedValue({
+      aliases: ['Amber-Tinted Death'],
+      awakener: 'Kathigua',
+      descriptionArgs: {},
+      descriptionTemplate: 'Deals damage.',
+      id: 'wheel-0028',
+      mainstatKey: 'CRIT_DMG',
+      mainstatSeriesKey: 'SSR:CRIT_DMG',
+      name: 'Amber-Tinted Death',
+      ownerAwakenerId: 'awakener-0027',
+      rarity: 'SSR',
+      realm: 'Lumina',
+      searchTags: [],
+    })
+
     screen.getByRole('button', {name: /Amber-Tinted Death/i}).click()
+
+    await waitFor(() => {
+      expect(loadWheelFullV2ById).toHaveBeenCalledWith('wheel-0028')
+    })
 
     expect(openRootInfo).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -175,7 +203,7 @@ describe('AwakenerBuildsTab', () => {
     )
   })
 
-  it('opens wheel preview popovers for canonical wheel ids backed by V1 full records', () => {
+  it('opens wheel preview popovers for canonical wheel ids backed by lazy V2 full records', async () => {
     const openRootInfo = vi.fn()
     vi.mocked(useDatabasePopoverControllerContext).mockReturnValue({
       closeAllPopovers: vi.fn(),
@@ -205,7 +233,26 @@ describe('AwakenerBuildsTab', () => {
 
     render(<AwakenerBuildsTab awakenerId='awakener-0018' />)
 
+    loadWheelFullV2ById.mockResolvedValue({
+      aliases: ['Manikin of Oblivion'],
+      awakener: 'Ghislaine',
+      descriptionArgs: {},
+      descriptionTemplate: 'Restores Aliemus.',
+      id: 'wheel-0016',
+      mainstatKey: 'ALIEMUS_REGEN',
+      mainstatSeriesKey: 'SSR:ALIEMUS_REGEN',
+      name: 'Manikin of Oblivion',
+      ownerAwakenerId: 'awakener-0018',
+      rarity: 'SSR',
+      realm: 'Gnosis',
+      searchTags: [],
+    })
+
     screen.getByRole('button', {name: /Manikin of Oblivion/i}).click()
+
+    await waitFor(() => {
+      expect(loadWheelFullV2ById).toHaveBeenCalledWith('wheel-0016')
+    })
 
     expect(openRootInfo).toHaveBeenCalledWith(
       expect.objectContaining({

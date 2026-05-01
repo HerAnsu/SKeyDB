@@ -4,8 +4,13 @@ import type {AwakenerOverlayRecord} from '@/domain/awakener-source-schema'
 
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
 
+export interface DatabasePopoverAnchorEvent {
+  currentTarget: HTMLElement
+  stopPropagation: () => void
+}
+
 export interface DatabasePopoverContextValue {
-  openRootInfo?: (entry: KeyedDatabaseReferenceEntry, event: MouseEvent<HTMLElement>) => void
+  openRootInfo?: (entry: KeyedDatabaseReferenceEntry, event: DatabasePopoverAnchorEvent) => void
   openRootReferenceByName: (name: string, event: MouseEvent<HTMLElement>) => void
   openRootOverlay: (overlay: AwakenerOverlayRecord, event: MouseEvent<HTMLElement>) => void
   openNestedReferenceByName: (name: string) => void

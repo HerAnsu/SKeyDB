@@ -12,7 +12,7 @@ import {getCovenants, type Covenant} from '@/domain/covenants'
 import {getMainstatByKey, getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelById, getWheels, type Wheel} from '@/domain/wheels'
-import {getWheelFullV1ById, getWheelsFullV1} from '@/domain/wheels-full-v1'
+import {loadWheelFullV2ById} from '@/domain/wheels-full-v2-loader'
 
 import {buildWheelPopoverEntry} from './buildWheelPopoverEntry'
 import {useDatabasePopoverControllerContext} from './database-popover-context'
@@ -47,7 +47,6 @@ function getWheelGroupByTier(build: AwakenerBuild, tier: AwakenerBuildWheelTier)
 const covenantNameById = new Map(getCovenants().map((covenant) => [covenant.id, covenant.name]))
 const covenantByCanonicalId = new Map(getCovenants().map((covenant) => [covenant.id, covenant]))
 const wheelByCanonicalId = new Map(getWheels().map((wheel) => [wheel.id, wheel]))
-const wheelFullDataRecords = getWheelsFullV1()
 
 function getWheelByCanonicalId(wheelId: string): Wheel | undefined {
   return wheelByCanonicalId.get(wheelId) ?? getWheelById(wheelId)
@@ -235,12 +234,21 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
       }
 
       const wheel = getWheelByCanonicalId(wheelId)
-      const wheelRecord = getWheelFullV1ById(wheel?.id ?? wheelId, wheelFullDataRecords)
-      if (!wheelRecord) {
-        return
-      }
+      const anchorElement = event.currentTarget
+      void loadWheelFullV2ById(wheel?.id ?? wheelId)
+        .then((wheelRecord) => {
+          if (!wheelRecord) {
+            return
+          }
 
-      openRootInfo(buildWheelPopoverEntry(wheelRecord), event)
+          openRootInfo(buildWheelPopoverEntry(wheelRecord), {
+            currentTarget: anchorElement,
+            stopPropagation: () => {
+              event.stopPropagation()
+            },
+          })
+        })
+        .catch(() => undefined)
     },
     [popoverContext],
   )
