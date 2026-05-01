@@ -10,7 +10,11 @@ describe('awakeners-full-v2-loader', () => {
     await expect(loadAwakenerFullV2ById('awakener-0001')).resolves.toMatchObject({
       id: publicRecord?.numericId,
       displayName: publicRecord?.name,
-      stats: publicRecord?.baseStatsLv1,
+      stats: expect.objectContaining({
+        CON: '52',
+        ATK: '66',
+        DEF: '30',
+      }),
     })
   })
 
@@ -18,6 +22,19 @@ describe('awakeners-full-v2-loader', () => {
     const thais = await loadAwakenerFullV2ById('awakener-0048')
 
     expect(thais?.cards.C4.id).toBe('skill.thais.ancient-caress')
+    expect(thais?.stats).toMatchObject({
+      CON: '49',
+      ATK: '47',
+      DEF: '44',
+      CritRate: '5%',
+      CritDamage: '50%',
+      AliemusRegen: '2.4',
+      KeyflareRegen: '29.4',
+    })
+    expect(thais?.substatScaling).toEqual({
+      AliemusRegen: '0.4',
+      KeyflareRegen: '2.4',
+    })
     expect(thais?.cards.OverExalt?.id).toBe('skill.thais.sacred-relics-perpetuity')
     expect(thais?.talents.T2?.id).toBe('talent.thais.madness-omen')
     expect(thais?.talents.T3?.id).toBe('talent.thais.soulforge-aptitude')

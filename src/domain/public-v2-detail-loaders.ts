@@ -11,10 +11,12 @@ import {type WheelFullV1Record} from './wheels-full-v1'
 type PublicV2AwakenerRecord = PublicV2Record<'awakeners'> & {
   aliases?: string[]
   assets?: {portraitKey?: string}
-  baseStatsLv1?: unknown
+  baseStatsLv1?: Partial<Record<string, number>>
   name: string
   numericId: number
   searchTags?: string[]
+  substatsLv1?: Partial<Record<string, number>>
+  substatScaling?: Partial<Record<string, number>>
 }
 type PublicV2DerivedSkillRecord = PublicV2Record<'derived-skills'> & {
   cardKeywords?: unknown[]
@@ -81,6 +83,13 @@ const PROMOTED_EXTRA_DERIVED_IDS = new Set([
 
 const awakenerFullByIdPromises = new Map<string, Promise<AwakenerFullV2Record | undefined>>()
 const wheelFullByIdPromises = new Map<string, Promise<WheelFullV1Record | undefined>>()
+const SUBSTAT_PERCENT_KEYS = new Set([
+  'CritRate',
+  'CritDamage',
+  'SigilYield',
+  'DamageAmplification',
+  'DeathResistance',
+])
 
 function isPublicAwakenerId(id: string): boolean {
   return /^awakener-\d{4}$/.test(id)
@@ -109,6 +118,40 @@ async function resolvePublicAwakenerId(awakenerId: string | number): Promise<str
 function numericAwakenerId(publicAwakenerId: string): number {
   const suffix = /^awakener-(\d{4})$/.exec(publicAwakenerId)?.[1]
   return suffix ? Number(suffix) : 0
+}
+
+function formatPublicStatValue(key: string, value: number): string {
+  const normalizedValue = Math.abs(value) < 0.0001 ? 0 : Math.round(value * 10) / 10
+  return `${String(normalizedValue)}${SUBSTAT_PERCENT_KEYS.has(key) ? '%' : ''}`
+}
+
+function adaptPublicV2AwakenerStats(record: PublicV2AwakenerRecord) {
+  const primaryStats = record.baseStatsLv1 ?? {}
+  const substats = record.substatsLv1 ?? {}
+  const substatScaling = record.substatScaling ?? {}
+
+  const adaptedSubstats = Object.fromEntries(
+    Object.entries(substats).map(([key, rawValue]) => {
+      const value = rawValue ?? 0
+      const growth = substatScaling[key] ?? 0
+      return [key, formatPublicStatValue(key, value + growth * 5)]
+    }),
+  )
+
+  return {
+    CON: formatPublicStatValue('CON', primaryStats.CON ?? 0),
+    ATK: formatPublicStatValue('ATK', primaryStats.ATK ?? 0),
+    DEF: formatPublicStatValue('DEF', primaryStats.DEF ?? 0),
+    ...adaptedSubstats,
+  }
+}
+
+function adaptPublicV2SubstatScaling(record: PublicV2AwakenerRecord) {
+  return Object.fromEntries(
+    Object.entries(record.substatScaling ?? {}).flatMap(([key, value]) =>
+      value === undefined || value === 0 ? [] : [[key, formatPublicStatValue(key, value)]],
+    ),
+  )
 }
 
 function withLegacyOwner<T extends {ownerAwakenerId?: string}>(record: T): T {
@@ -382,7 +425,8 @@ async function adaptPublicV2AwakenerRecord(
         ? record.assets.portraitKey
         : record.id,
     displayName: record.name,
-    stats: record.baseStatsLv1,
+    stats: adaptPublicV2AwakenerStats(record),
+    substatScaling: adaptPublicV2SubstatScaling(record),
     aliases: record.aliases ?? [record.name],
     searchTags: record.searchTags ?? [],
     cards,
