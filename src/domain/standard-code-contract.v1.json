@@ -1,0 +1,1348 @@
+{
+  "version": 1,
+  "layout": "t1-mt1-byte-codec",
+  "awakeners": [
+    {
+      "codecIndex": 1,
+      "legacyId": 1,
+      "legacyName": "24",
+      "id": "awakener-0001"
+    },
+    {
+      "codecIndex": 2,
+      "legacyId": 2,
+      "legacyName": "agrippa",
+      "id": "awakener-0002"
+    },
+    {
+      "codecIndex": 3,
+      "legacyId": 3,
+      "legacyName": "aigis",
+      "id": "awakener-0003"
+    },
+    {
+      "codecIndex": 4,
+      "legacyId": 4,
+      "legacyName": "alva",
+      "id": "awakener-0004"
+    },
+    {
+      "codecIndex": 56,
+      "legacyId": 56,
+      "legacyName": "arachne",
+      "id": "awakener-0056"
+    },
+    {
+      "codecIndex": 5,
+      "legacyId": 5,
+      "legacyName": "aurita",
+      "id": "awakener-0005"
+    },
+    {
+      "codecIndex": 6,
+      "legacyId": 6,
+      "legacyName": "caecus",
+      "id": "awakener-0006"
+    },
+    {
+      "codecIndex": 7,
+      "legacyId": 7,
+      "legacyName": "casiah",
+      "id": "awakener-0007"
+    },
+    {
+      "codecIndex": 8,
+      "legacyId": 8,
+      "legacyName": "castor",
+      "id": "awakener-0008"
+    },
+    {
+      "codecIndex": 9,
+      "legacyId": 9,
+      "legacyName": "celeste",
+      "id": "awakener-0009"
+    },
+    {
+      "codecIndex": 10,
+      "legacyId": 10,
+      "legacyName": "clementine",
+      "id": "awakener-0010"
+    },
+    {
+      "codecIndex": 11,
+      "legacyId": 11,
+      "legacyName": "corposant",
+      "id": "awakener-0011"
+    },
+    {
+      "codecIndex": 12,
+      "legacyId": 12,
+      "legacyName": "daffodil",
+      "id": "awakener-0012"
+    },
+    {
+      "codecIndex": 13,
+      "legacyId": 13,
+      "legacyName": "doll",
+      "id": "awakener-0013"
+    },
+    {
+      "codecIndex": 18,
+      "legacyId": 18,
+      "legacyName": "doll: inferno",
+      "id": "awakener-0018"
+    },
+    {
+      "codecIndex": 14,
+      "legacyId": 14,
+      "legacyName": "doresain",
+      "id": "awakener-0014"
+    },
+    {
+      "codecIndex": 15,
+      "legacyId": 15,
+      "legacyName": "erica",
+      "id": "awakener-0015"
+    },
+    {
+      "codecIndex": 16,
+      "legacyId": 16,
+      "legacyName": "faint",
+      "id": "awakener-0016"
+    },
+    {
+      "codecIndex": 17,
+      "legacyId": 17,
+      "legacyName": "faros",
+      "id": "awakener-0017"
+    },
+    {
+      "codecIndex": 21,
+      "legacyId": 21,
+      "legacyName": "goliath",
+      "id": "awakener-0021"
+    },
+    {
+      "codecIndex": 22,
+      "legacyId": 22,
+      "legacyName": "hameln",
+      "id": "awakener-0022"
+    },
+    {
+      "codecIndex": 23,
+      "legacyId": 23,
+      "legacyName": "helot",
+      "id": "awakener-0023"
+    },
+    {
+      "codecIndex": 19,
+      "legacyId": 19,
+      "legacyName": "helot: catena",
+      "id": "awakener-0019"
+    },
+    {
+      "codecIndex": 24,
+      "legacyId": 24,
+      "legacyName": "horla",
+      "id": "awakener-0024"
+    },
+    {
+      "codecIndex": 25,
+      "legacyId": 25,
+      "legacyName": "jenkins",
+      "id": "awakener-0025"
+    },
+    {
+      "codecIndex": 26,
+      "legacyId": 26,
+      "legacyName": "karen",
+      "id": "awakener-0026"
+    },
+    {
+      "codecIndex": 27,
+      "legacyId": 27,
+      "legacyName": "kathigu-ra",
+      "id": "awakener-0027"
+    },
+    {
+      "codecIndex": 28,
+      "legacyId": 28,
+      "legacyName": "leigh",
+      "id": "awakener-0028"
+    },
+    {
+      "codecIndex": 29,
+      "legacyId": 29,
+      "legacyName": "lily",
+      "id": "awakener-0029"
+    },
+    {
+      "codecIndex": 30,
+      "legacyId": 30,
+      "legacyName": "liz",
+      "id": "awakener-0030"
+    },
+    {
+      "codecIndex": 31,
+      "legacyId": 31,
+      "legacyName": "lotan",
+      "id": "awakener-0031"
+    },
+    {
+      "codecIndex": 32,
+      "legacyId": 32,
+      "legacyName": "miryam",
+      "id": "awakener-0032"
+    },
+    {
+      "codecIndex": 33,
+      "legacyId": 33,
+      "legacyName": "mouchette",
+      "id": "awakener-0033"
+    },
+    {
+      "codecIndex": 34,
+      "legacyId": 34,
+      "legacyName": "murphy",
+      "id": "awakener-0034"
+    },
+    {
+      "codecIndex": 35,
+      "legacyId": 35,
+      "legacyName": "murphy: fauxborn",
+      "id": "awakener-0035"
+    },
+    {
+      "codecIndex": 36,
+      "legacyId": 36,
+      "legacyName": "nautila",
+      "id": "awakener-0036"
+    },
+    {
+      "codecIndex": 37,
+      "legacyId": 37,
+      "legacyName": "nymphaea",
+      "id": "awakener-0037"
+    },
+    {
+      "codecIndex": 38,
+      "legacyId": 38,
+      "legacyName": "ogier",
+      "id": "awakener-0038"
+    },
+    {
+      "codecIndex": 39,
+      "legacyId": 39,
+      "legacyName": "pandia",
+      "id": "awakener-0039"
+    },
+    {
+      "codecIndex": 40,
+      "legacyId": 40,
+      "legacyName": "pickman",
+      "id": "awakener-0040"
+    },
+    {
+      "codecIndex": 41,
+      "legacyId": 41,
+      "legacyName": "pollux",
+      "id": "awakener-0041"
+    },
+    {
+      "codecIndex": 42,
+      "legacyId": 42,
+      "legacyName": "ramona",
+      "id": "awakener-0042"
+    },
+    {
+      "codecIndex": 20,
+      "legacyId": 20,
+      "legacyName": "ramona: timeworn",
+      "id": "awakener-0020"
+    },
+    {
+      "codecIndex": 43,
+      "legacyId": 43,
+      "legacyName": "ryker",
+      "id": "awakener-0043"
+    },
+    {
+      "codecIndex": 44,
+      "legacyId": 44,
+      "legacyName": "salvador",
+      "id": "awakener-0044"
+    },
+    {
+      "codecIndex": 45,
+      "legacyId": 45,
+      "legacyName": "sanga",
+      "id": "awakener-0045"
+    },
+    {
+      "codecIndex": 46,
+      "legacyId": 46,
+      "legacyName": "sorel",
+      "id": "awakener-0046"
+    },
+    {
+      "codecIndex": 47,
+      "legacyId": 47,
+      "legacyName": "tawil",
+      "id": "awakener-0047"
+    },
+    {
+      "codecIndex": 48,
+      "legacyId": 48,
+      "legacyName": "thais",
+      "id": "awakener-0048"
+    },
+    {
+      "codecIndex": 49,
+      "legacyId": 49,
+      "legacyName": "tinct",
+      "id": "awakener-0049"
+    },
+    {
+      "codecIndex": 50,
+      "legacyId": 50,
+      "legacyName": "tulu",
+      "id": "awakener-0050"
+    },
+    {
+      "codecIndex": 51,
+      "legacyId": 51,
+      "legacyName": "uvhash",
+      "id": "awakener-0051"
+    },
+    {
+      "codecIndex": 55,
+      "legacyId": 55,
+      "legacyName": "vortice",
+      "id": "awakener-0055"
+    },
+    {
+      "codecIndex": 52,
+      "legacyId": 52,
+      "legacyName": "wanda",
+      "id": "awakener-0052"
+    },
+    {
+      "codecIndex": 53,
+      "legacyId": 53,
+      "legacyName": "winkle",
+      "id": "awakener-0053"
+    },
+    {
+      "codecIndex": 54,
+      "legacyId": 54,
+      "legacyName": "xu",
+      "id": "awakener-0054"
+    }
+  ],
+  "wheels": [
+    {
+      "codecIndex": 1,
+      "legacyId": "B01",
+      "id": "wheel-0001"
+    },
+    {
+      "codecIndex": 2,
+      "legacyId": "B02",
+      "id": "wheel-0002"
+    },
+    {
+      "codecIndex": 3,
+      "legacyId": "B03",
+      "id": "wheel-0003"
+    },
+    {
+      "codecIndex": 4,
+      "legacyId": "B04",
+      "id": "wheel-0004"
+    },
+    {
+      "codecIndex": 5,
+      "legacyId": "B05",
+      "id": "wheel-0005"
+    },
+    {
+      "codecIndex": 6,
+      "legacyId": "B05EX",
+      "id": "wheel-0006"
+    },
+    {
+      "codecIndex": 7,
+      "legacyId": "B06",
+      "id": "wheel-0007"
+    },
+    {
+      "codecIndex": 8,
+      "legacyId": "B07",
+      "id": "wheel-0008"
+    },
+    {
+      "codecIndex": 9,
+      "legacyId": "B08",
+      "id": "wheel-0009"
+    },
+    {
+      "codecIndex": 10,
+      "legacyId": "B09",
+      "id": "wheel-0010"
+    },
+    {
+      "codecIndex": 11,
+      "legacyId": "B10",
+      "id": "wheel-0011"
+    },
+    {
+      "codecIndex": 12,
+      "legacyId": "B12",
+      "id": "wheel-0012"
+    },
+    {
+      "codecIndex": 13,
+      "legacyId": "B14",
+      "id": "wheel-0013"
+    },
+    {
+      "codecIndex": 14,
+      "legacyId": "C01",
+      "id": "wheel-0014"
+    },
+    {
+      "codecIndex": 15,
+      "legacyId": "C02",
+      "id": "wheel-0015"
+    },
+    {
+      "codecIndex": 16,
+      "legacyId": "C02EX",
+      "id": "wheel-0016"
+    },
+    {
+      "codecIndex": 17,
+      "legacyId": "C03",
+      "id": "wheel-0017"
+    },
+    {
+      "codecIndex": 18,
+      "legacyId": "C04",
+      "id": "wheel-0018"
+    },
+    {
+      "codecIndex": 19,
+      "legacyId": "C05",
+      "id": "wheel-0019"
+    },
+    {
+      "codecIndex": 20,
+      "legacyId": "C06",
+      "id": "wheel-0020"
+    },
+    {
+      "codecIndex": 21,
+      "legacyId": "C07",
+      "id": "wheel-0021"
+    },
+    {
+      "codecIndex": 22,
+      "legacyId": "C08",
+      "id": "wheel-0022"
+    },
+    {
+      "codecIndex": 23,
+      "legacyId": "C09",
+      "id": "wheel-0023"
+    },
+    {
+      "codecIndex": 24,
+      "legacyId": "C10",
+      "id": "wheel-0024"
+    },
+    {
+      "codecIndex": 25,
+      "legacyId": "C11",
+      "id": "wheel-0025"
+    },
+    {
+      "codecIndex": 26,
+      "legacyId": "C12",
+      "id": "wheel-0026"
+    },
+    {
+      "codecIndex": 27,
+      "legacyId": "C15",
+      "id": "wheel-0027"
+    },
+    {
+      "codecIndex": 28,
+      "legacyId": "C16",
+      "id": "wheel-0028"
+    },
+    {
+      "codecIndex": 29,
+      "legacyId": "C17",
+      "id": "wheel-0029"
+    },
+    {
+      "codecIndex": 30,
+      "legacyId": "D01",
+      "id": "wheel-0030"
+    },
+    {
+      "codecIndex": 31,
+      "legacyId": "D02",
+      "id": "wheel-0031"
+    },
+    {
+      "codecIndex": 32,
+      "legacyId": "D03",
+      "id": "wheel-0032"
+    },
+    {
+      "codecIndex": 33,
+      "legacyId": "D04",
+      "id": "wheel-0033"
+    },
+    {
+      "codecIndex": 34,
+      "legacyId": "D05",
+      "id": "wheel-0034"
+    },
+    {
+      "codecIndex": 35,
+      "legacyId": "D06",
+      "id": "wheel-0035"
+    },
+    {
+      "codecIndex": 36,
+      "legacyId": "D07",
+      "id": "wheel-0036"
+    },
+    {
+      "codecIndex": 37,
+      "legacyId": "D08",
+      "id": "wheel-0037"
+    },
+    {
+      "codecIndex": 38,
+      "legacyId": "D09",
+      "id": "wheel-0038"
+    },
+    {
+      "codecIndex": 39,
+      "legacyId": "D10",
+      "id": "wheel-0128"
+    },
+    {
+      "codecIndex": 40,
+      "legacyId": "D11",
+      "id": "wheel-0039"
+    },
+    {
+      "codecIndex": 41,
+      "legacyId": "D12",
+      "id": "wheel-0040"
+    },
+    {
+      "codecIndex": 42,
+      "legacyId": "D13",
+      "id": "wheel-0041"
+    },
+    {
+      "codecIndex": 43,
+      "legacyId": "D14",
+      "id": "wheel-0042"
+    },
+    {
+      "codecIndex": 44,
+      "legacyId": "JP01",
+      "id": "wheel-0043"
+    },
+    {
+      "codecIndex": 45,
+      "legacyId": "JP02",
+      "id": "wheel-0044"
+    },
+    {
+      "codecIndex": 46,
+      "legacyId": "JP03",
+      "id": "wheel-0045"
+    },
+    {
+      "codecIndex": 47,
+      "legacyId": "JP04",
+      "id": "wheel-0046"
+    },
+    {
+      "codecIndex": 48,
+      "legacyId": "JP06",
+      "id": "wheel-0047"
+    },
+    {
+      "codecIndex": 49,
+      "legacyId": "JP12",
+      "id": "wheel-0130"
+    },
+    {
+      "codecIndex": 50,
+      "legacyId": "N01",
+      "id": "wheel-0048"
+    },
+    {
+      "codecIndex": 51,
+      "legacyId": "N02",
+      "id": "wheel-0049"
+    },
+    {
+      "codecIndex": 52,
+      "legacyId": "O01",
+      "id": "wheel-0050"
+    },
+    {
+      "codecIndex": 53,
+      "legacyId": "O02",
+      "id": "wheel-0051"
+    },
+    {
+      "codecIndex": 54,
+      "legacyId": "O03",
+      "id": "wheel-0052"
+    },
+    {
+      "codecIndex": 55,
+      "legacyId": "O04",
+      "id": "wheel-0053"
+    },
+    {
+      "codecIndex": 56,
+      "legacyId": "O05",
+      "id": "wheel-0054"
+    },
+    {
+      "codecIndex": 57,
+      "legacyId": "O06",
+      "id": "wheel-0055"
+    },
+    {
+      "codecIndex": 58,
+      "legacyId": "O07",
+      "id": "wheel-0056"
+    },
+    {
+      "codecIndex": 59,
+      "legacyId": "O08",
+      "id": "wheel-0057"
+    },
+    {
+      "codecIndex": 60,
+      "legacyId": "O09",
+      "id": "wheel-0058"
+    },
+    {
+      "codecIndex": 61,
+      "legacyId": "O10",
+      "id": "wheel-0059"
+    },
+    {
+      "codecIndex": 62,
+      "legacyId": "O11",
+      "id": "wheel-0131"
+    },
+    {
+      "codecIndex": 63,
+      "legacyId": "O112",
+      "id": "wheel-0060"
+    },
+    {
+      "codecIndex": 64,
+      "legacyId": "P01",
+      "id": "wheel-0061"
+    },
+    {
+      "codecIndex": 65,
+      "legacyId": "P02",
+      "id": "wheel-0062"
+    },
+    {
+      "codecIndex": 66,
+      "legacyId": "P03",
+      "id": "wheel-0063"
+    },
+    {
+      "codecIndex": 67,
+      "legacyId": "P04",
+      "id": "wheel-0064"
+    },
+    {
+      "codecIndex": 68,
+      "legacyId": "P05",
+      "id": "wheel-0065"
+    },
+    {
+      "codecIndex": 69,
+      "legacyId": "P06",
+      "id": "wheel-0066"
+    },
+    {
+      "codecIndex": 70,
+      "legacyId": "P07",
+      "id": "wheel-0067"
+    },
+    {
+      "codecIndex": 71,
+      "legacyId": "P08",
+      "id": "wheel-0068"
+    },
+    {
+      "codecIndex": 72,
+      "legacyId": "P09",
+      "id": "wheel-0069"
+    },
+    {
+      "codecIndex": 73,
+      "legacyId": "P10",
+      "id": "wheel-0070"
+    },
+    {
+      "codecIndex": 74,
+      "legacyId": "P11",
+      "id": "wheel-0071"
+    },
+    {
+      "codecIndex": 75,
+      "legacyId": "P12",
+      "id": "wheel-0072"
+    },
+    {
+      "codecIndex": 76,
+      "legacyId": "P13",
+      "id": "wheel-0073"
+    },
+    {
+      "codecIndex": 77,
+      "legacyId": "P14",
+      "id": "wheel-0074"
+    },
+    {
+      "codecIndex": 78,
+      "legacyId": "P15",
+      "id": "wheel-0136"
+    },
+    {
+      "codecIndex": 79,
+      "legacyId": "P16",
+      "id": "wheel-0076"
+    },
+    {
+      "codecIndex": 80,
+      "legacyId": "SR01",
+      "id": "wheel-0077"
+    },
+    {
+      "codecIndex": 81,
+      "legacyId": "SR02",
+      "id": "wheel-0078"
+    },
+    {
+      "codecIndex": 82,
+      "legacyId": "SR03",
+      "id": "wheel-0079"
+    },
+    {
+      "codecIndex": 83,
+      "legacyId": "SR04",
+      "id": "wheel-0080"
+    },
+    {
+      "codecIndex": 84,
+      "legacyId": "SR05",
+      "id": "wheel-0081"
+    },
+    {
+      "codecIndex": 85,
+      "legacyId": "SR06",
+      "id": "wheel-0082"
+    },
+    {
+      "codecIndex": 86,
+      "legacyId": "SR07",
+      "id": "wheel-0083"
+    },
+    {
+      "codecIndex": 87,
+      "legacyId": "SR08",
+      "id": "wheel-0084"
+    },
+    {
+      "codecIndex": 88,
+      "legacyId": "SR09",
+      "id": "wheel-0085"
+    },
+    {
+      "codecIndex": 89,
+      "legacyId": "SR10",
+      "id": "wheel-0086"
+    },
+    {
+      "codecIndex": 90,
+      "legacyId": "SR11",
+      "id": "wheel-0087"
+    },
+    {
+      "codecIndex": 91,
+      "legacyId": "SR12",
+      "id": "wheel-0088"
+    },
+    {
+      "codecIndex": 92,
+      "legacyId": "SR13",
+      "id": "wheel-0089"
+    },
+    {
+      "codecIndex": 93,
+      "legacyId": "SR14",
+      "id": "wheel-0090"
+    },
+    {
+      "codecIndex": 94,
+      "legacyId": "SR15",
+      "id": "wheel-0091"
+    },
+    {
+      "codecIndex": 95,
+      "legacyId": "SR16",
+      "id": "wheel-0092"
+    },
+    {
+      "codecIndex": 96,
+      "legacyId": "SR17",
+      "id": "wheel-0093"
+    },
+    {
+      "codecIndex": 97,
+      "legacyId": "SR18",
+      "id": "wheel-0094"
+    },
+    {
+      "codecIndex": 98,
+      "legacyId": "SR19",
+      "id": "wheel-0095"
+    },
+    {
+      "codecIndex": 99,
+      "legacyId": "SR20",
+      "id": "wheel-0096"
+    },
+    {
+      "codecIndex": 100,
+      "legacyId": "SR21",
+      "id": "wheel-0097"
+    },
+    {
+      "codecIndex": 101,
+      "legacyId": "SR22",
+      "id": "wheel-0098"
+    },
+    {
+      "codecIndex": 102,
+      "legacyId": "SR23",
+      "id": "wheel-0099"
+    },
+    {
+      "codecIndex": 103,
+      "legacyId": "SR24",
+      "id": "wheel-0100"
+    },
+    {
+      "codecIndex": 104,
+      "legacyId": "SR25",
+      "id": "wheel-0101"
+    },
+    {
+      "codecIndex": 105,
+      "legacyId": "SR26",
+      "id": "wheel-0102"
+    },
+    {
+      "codecIndex": 106,
+      "legacyId": "SR27",
+      "id": "wheel-0103"
+    },
+    {
+      "codecIndex": 107,
+      "legacyId": "SR28",
+      "id": "wheel-0104"
+    },
+    {
+      "codecIndex": 108,
+      "legacyId": "SR29",
+      "id": "wheel-0105"
+    },
+    {
+      "codecIndex": 109,
+      "legacyId": "SR30",
+      "id": "wheel-0106"
+    },
+    {
+      "codecIndex": 110,
+      "legacyId": "SR31",
+      "id": "wheel-0107"
+    },
+    {
+      "codecIndex": 111,
+      "legacyId": "SR32",
+      "id": "wheel-0137"
+    },
+    {
+      "codecIndex": 112,
+      "legacyId": "SR33",
+      "id": "wheel-0109"
+    },
+    {
+      "codecIndex": 113,
+      "legacyId": "SR34",
+      "id": "wheel-0110"
+    },
+    {
+      "codecIndex": 114,
+      "legacyId": "SR35",
+      "id": "wheel-0111"
+    },
+    {
+      "codecIndex": 115,
+      "legacyId": "SR36",
+      "id": "wheel-0132"
+    },
+    {
+      "codecIndex": 116,
+      "legacyId": "SR39",
+      "id": "wheel-0112"
+    },
+    {
+      "codecIndex": 117,
+      "legacyId": "SR40",
+      "id": "wheel-0113"
+    },
+    {
+      "codecIndex": 118,
+      "legacyId": "SR41",
+      "id": "wheel-0114"
+    },
+    {
+      "codecIndex": 119,
+      "legacyId": "SR42",
+      "id": "wheel-0115"
+    },
+    {
+      "codecIndex": 120,
+      "legacyId": "SR43",
+      "id": "wheel-0116"
+    },
+    {
+      "codecIndex": 121,
+      "legacyId": "SR44",
+      "id": "wheel-0117"
+    },
+    {
+      "codecIndex": 122,
+      "legacyId": "SR45",
+      "id": "wheel-0118"
+    },
+    {
+      "codecIndex": 123,
+      "legacyId": "SR46",
+      "id": "wheel-0119"
+    },
+    {
+      "codecIndex": 124,
+      "legacyId": "ZL01",
+      "id": "wheel-0120"
+    },
+    {
+      "codecIndex": 125,
+      "legacyId": "ZL02",
+      "id": "wheel-0121"
+    },
+    {
+      "codecIndex": 126,
+      "legacyId": "ZL03",
+      "id": "wheel-0122"
+    },
+    {
+      "codecIndex": 127,
+      "legacyId": "ZL04",
+      "id": "wheel-0123"
+    },
+    {
+      "codecIndex": 128,
+      "legacyId": "ZL05",
+      "id": "wheel-0124"
+    },
+    {
+      "codecIndex": 129,
+      "legacyId": "ZL06",
+      "id": "wheel-0125"
+    },
+    {
+      "codecIndex": 130,
+      "legacyId": "ZL07",
+      "id": "wheel-0126"
+    }
+  ],
+  "covenants": [
+    {
+      "codecIndex": 1,
+      "legacyId": "001",
+      "id": "covenant-0001"
+    },
+    {
+      "codecIndex": 2,
+      "legacyId": "002",
+      "id": "covenant-0002"
+    },
+    {
+      "codecIndex": 3,
+      "legacyId": "004",
+      "id": "covenant-0003"
+    },
+    {
+      "codecIndex": 4,
+      "legacyId": "005",
+      "id": "covenant-0004"
+    },
+    {
+      "codecIndex": 5,
+      "legacyId": "006",
+      "id": "covenant-0005"
+    },
+    {
+      "codecIndex": 6,
+      "legacyId": "008",
+      "id": "covenant-0006"
+    },
+    {
+      "codecIndex": 7,
+      "legacyId": "009",
+      "id": "covenant-0007"
+    },
+    {
+      "codecIndex": 8,
+      "legacyId": "010",
+      "id": "covenant-0008"
+    },
+    {
+      "codecIndex": 9,
+      "legacyId": "011",
+      "id": "covenant-0009"
+    },
+    {
+      "codecIndex": 10,
+      "legacyId": "012",
+      "id": "covenant-0010"
+    },
+    {
+      "codecIndex": 11,
+      "legacyId": "013",
+      "id": "covenant-0011"
+    },
+    {
+      "codecIndex": 12,
+      "legacyId": "014",
+      "id": "covenant-0012"
+    },
+    {
+      "codecIndex": 13,
+      "legacyId": "015",
+      "id": "covenant-0013"
+    },
+    {
+      "codecIndex": 14,
+      "legacyId": "016",
+      "id": "covenant-0014"
+    },
+    {
+      "codecIndex": 15,
+      "legacyId": "017",
+      "id": "covenant-0015"
+    },
+    {
+      "codecIndex": 16,
+      "legacyId": "018",
+      "id": "covenant-0016"
+    },
+    {
+      "codecIndex": 17,
+      "legacyId": "019",
+      "id": "covenant-0017"
+    },
+    {
+      "codecIndex": 18,
+      "legacyId": "020",
+      "id": "covenant-0018"
+    },
+    {
+      "codecIndex": 19,
+      "legacyId": "021",
+      "id": "covenant-0019"
+    },
+    {
+      "codecIndex": 20,
+      "legacyId": "022",
+      "id": "covenant-0020"
+    },
+    {
+      "codecIndex": 21,
+      "legacyId": "023",
+      "id": "covenant-0021"
+    }
+  ],
+  "posses": [
+    {
+      "codecIndex": 22,
+      "legacyId": "24-all-of-her",
+      "id": "posse-0022"
+    },
+    {
+      "codecIndex": 45,
+      "legacyId": "a-fleeting-dream",
+      "id": "posse-0043"
+    },
+    {
+      "codecIndex": 27,
+      "legacyId": "a-guns-cry",
+      "id": "posse-0027"
+    },
+    {
+      "codecIndex": 4,
+      "legacyId": "a-mouses-wisdom",
+      "id": "posse-0004"
+    },
+    {
+      "codecIndex": 10,
+      "legacyId": "auritas-treasure",
+      "id": "posse-0010"
+    },
+    {
+      "codecIndex": 43,
+      "legacyId": "beachside-memento",
+      "id": "posse-0041"
+    },
+    {
+      "codecIndex": 32,
+      "legacyId": "black-swans-dance",
+      "id": "posse-0032"
+    },
+    {
+      "codecIndex": 31,
+      "legacyId": "blessing-of-the-stars",
+      "id": "posse-0031"
+    },
+    {
+      "codecIndex": 14,
+      "legacyId": "bone-chilling-embrace",
+      "id": "posse-0014"
+    },
+    {
+      "codecIndex": 39,
+      "legacyId": "cruel-homage",
+      "id": "posse-0037"
+    },
+    {
+      "codecIndex": 36,
+      "legacyId": "derision-of-destiny",
+      "id": "posse-0036"
+    },
+    {
+      "codecIndex": 51,
+      "legacyId": "drowned-innocence",
+      "id": "posse-0049"
+    },
+    {
+      "codecIndex": 1,
+      "legacyId": "encounter-in-pure-white",
+      "id": "posse-0001"
+    },
+    {
+      "codecIndex": 12,
+      "legacyId": "ephemeral-eternity",
+      "id": "posse-0012"
+    },
+    {
+      "codecIndex": 13,
+      "legacyId": "feast-of-decay",
+      "id": "posse-0013"
+    },
+    {
+      "codecIndex": 25,
+      "legacyId": "festival-of-tides",
+      "id": "posse-0025"
+    },
+    {
+      "codecIndex": 48,
+      "legacyId": "from-the-mist-realm",
+      "id": "posse-0046"
+    },
+    {
+      "codecIndex": 8,
+      "legacyId": "funus-aeternum",
+      "id": "posse-0008"
+    },
+    {
+      "codecIndex": 16,
+      "legacyId": "gateway-of-retrospection",
+      "id": "posse-0016"
+    },
+    {
+      "codecIndex": 21,
+      "legacyId": "giants-reign",
+      "id": "posse-0021"
+    },
+    {
+      "codecIndex": 15,
+      "legacyId": "lakeside-glimpse",
+      "id": "posse-0015"
+    },
+    {
+      "codecIndex": 49,
+      "legacyId": "manor-echoes",
+      "id": "posse-0047"
+    },
+    {
+      "codecIndex": 18,
+      "legacyId": "midsummer-vision",
+      "id": "posse-0018"
+    },
+    {
+      "codecIndex": 20,
+      "legacyId": "miracles-dawn",
+      "id": "posse-0020"
+    },
+    {
+      "codecIndex": 50,
+      "legacyId": "new-years-eve-fireworks",
+      "id": "posse-0048"
+    },
+    {
+      "codecIndex": 6,
+      "legacyId": "obsession-eternal",
+      "id": "posse-0006"
+    },
+    {
+      "codecIndex": 30,
+      "legacyId": "plague-of-illusions",
+      "id": "posse-0030"
+    },
+    {
+      "codecIndex": 47,
+      "legacyId": "reunions-wish",
+      "id": "posse-0045"
+    },
+    {
+      "codecIndex": 11,
+      "legacyId": "roaring-blood-and-sand",
+      "id": "posse-0011"
+    },
+    {
+      "codecIndex": 41,
+      "legacyId": "sacred-bleeding-heart",
+      "id": "posse-0039"
+    },
+    {
+      "codecIndex": 34,
+      "legacyId": "sacred-mending",
+      "id": "posse-0034"
+    },
+    {
+      "codecIndex": 26,
+      "legacyId": "springs-verse",
+      "id": "posse-0026"
+    },
+    {
+      "codecIndex": 28,
+      "legacyId": "symphony-fourth",
+      "id": "posse-0028"
+    },
+    {
+      "codecIndex": 33,
+      "legacyId": "taverns-opening",
+      "id": "posse-0033"
+    },
+    {
+      "codecIndex": 9,
+      "legacyId": "the-final-vow",
+      "id": "posse-0009"
+    },
+    {
+      "codecIndex": 29,
+      "legacyId": "the-gated-answer",
+      "id": "posse-0029"
+    },
+    {
+      "codecIndex": 23,
+      "legacyId": "the-lone-seed",
+      "id": "posse-0023"
+    },
+    {
+      "codecIndex": 24,
+      "legacyId": "the-mountains-resolve",
+      "id": "posse-0024"
+    },
+    {
+      "codecIndex": 5,
+      "legacyId": "tiny-wish",
+      "id": "posse-0005"
+    },
+    {
+      "codecIndex": 17,
+      "legacyId": "truth-behind-grey-mist",
+      "id": "posse-0017"
+    },
+    {
+      "codecIndex": 40,
+      "legacyId": "undying-sun",
+      "id": "posse-0038"
+    },
+    {
+      "codecIndex": 35,
+      "legacyId": "undying-thunder",
+      "id": "posse-0035"
+    },
+    {
+      "codecIndex": 7,
+      "legacyId": "unequal-exchange",
+      "id": "posse-0007"
+    },
+    {
+      "codecIndex": 19,
+      "legacyId": "victory-of-roses",
+      "id": "posse-0019"
+    },
+    {
+      "codecIndex": 2,
+      "legacyId": "voices-in-your-head",
+      "id": "posse-0002"
+    },
+    {
+      "codecIndex": 44,
+      "legacyId": "void-hues",
+      "id": "posse-0042"
+    },
+    {
+      "codecIndex": 42,
+      "legacyId": "voracious-resolve",
+      "id": "posse-0040"
+    },
+    {
+      "codecIndex": 3,
+      "legacyId": "warded-injection",
+      "id": "posse-0003"
+    },
+    {
+      "codecIndex": 46,
+      "legacyId": "wayward-ship",
+      "id": "posse-0044"
+    }
+  ]
+}

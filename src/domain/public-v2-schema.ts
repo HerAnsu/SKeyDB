@@ -159,7 +159,7 @@ export const publicV2EnvelopeSchemas = Object.fromEntries(
         path: ['recordCount'],
       }),
   ]),
-) as Record<PublicV2Scope, z.ZodType<PublicV2Envelope>>
+) as unknown as Record<PublicV2Scope, z.ZodType<PublicV2Envelope>>
 
 export function parsePublicV2Envelope<TScope extends PublicV2Scope>(
   scope: TScope,
