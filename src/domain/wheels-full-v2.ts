@@ -22,7 +22,7 @@ export interface WheelFullV2Record {
 }
 
 interface PublicWheelEnvelope {
-  records: Array<{
+  records: {
     id: string
     assetId: string
     name: string
@@ -37,7 +37,7 @@ interface PublicWheelEnvelope {
     descriptionTemplate: string
     descriptionArgs: Record<string, DescriptionArg>
     lore?: string
-  }>
+  }[]
 }
 
 let wheelsFullV2Cache: WheelFullV2Record[] | null = null

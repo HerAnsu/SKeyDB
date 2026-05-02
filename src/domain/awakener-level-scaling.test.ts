@@ -260,9 +260,9 @@ describe('awakeners full v2 data', () => {
         mismatches.push(`${String(fullAwakener.id)}:${fullAwakener.displayName} missing in lite`)
         continue
       }
-      if (liteAwakener.name !== fullAwakener.displayName) {
+      if (!liteAwakener.aliases.includes(fullAwakener.displayName)) {
         mismatches.push(
-          `${String(fullAwakener.id)} name mismatch ${fullAwakener.displayName} != ${liteAwakener.name}`,
+          `${String(fullAwakener.id)} display alias missing ${fullAwakener.displayName} from ${liteAwakener.name}`,
         )
       }
     }

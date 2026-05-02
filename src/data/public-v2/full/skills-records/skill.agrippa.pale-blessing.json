@@ -74,8 +74,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.agrippa.seal-of-the-pact.skill.agrippa.pale-blessing",
-      "upgraderId": "talent.agrippa.seal-of-the-pact",
       "operation": "link_only",
+      "upgraderId": "talent.agrippa.seal-of-the-pact",
       "upgraderType": "talent",
       "patch": {}
     }

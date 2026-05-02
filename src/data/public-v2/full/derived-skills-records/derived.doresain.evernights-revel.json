@@ -24,11 +24,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doresain.evernights-revel.derived.doresain.evernights-revel",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.doresain.evernights-revel",
       "ownerAwakenerId": "awakener-0014",
+      "id": "upgrade.enlighten.doresain.evernights-revel.derived.doresain.evernights-revel",
       "operation": "mixed",
+      "upgraderId": "enlighten.doresain.evernights-revel",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Doresain",
       "upgraderType": "enlighten",
       "patch": {
@@ -40,7 +40,7 @@
             "stat": "ATK"
           }
         },
-        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies. After playing, subsequent \"Evernight's Revel\" played this turn enjoys an additional 100% {STR} bonus."
+        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies. After playing, subsequent {Evernight's Revel} played this turn enjoys an additional 100% {STR} bonus."
       }
     }
   ]

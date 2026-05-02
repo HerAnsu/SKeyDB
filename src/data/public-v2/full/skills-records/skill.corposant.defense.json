@@ -40,11 +40,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.corposant.lodestars-whisper.skill.corposant.defense",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.corposant.lodestars-whisper",
       "ownerAwakenerId": "awakener-0011",
+      "id": "upgrade.enlighten.corposant.lodestars-whisper.skill.corposant.defense",
       "operation": "mixed",
+      "upgraderId": "enlighten.corposant.lodestars-whisper",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Corposant",
       "upgraderType": "enlighten",
       "patch": {
@@ -88,8 +88,8 @@
     },
     {
       "id": "upgrade.talent.corposant.cinders.skill.corposant.defense",
-      "upgraderId": "talent.corposant.cinders",
       "operation": "link_only",
+      "upgraderId": "talent.corposant.cinders",
       "upgraderType": "talent",
       "patch": {}
     }

@@ -24,11 +24,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.liz.last-dawnlight.skill.liz.dance-to-destruction",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.liz.last-dawnlight",
       "ownerAwakenerId": "awakener-0030",
+      "id": "upgrade.enlighten.liz.last-dawnlight.skill.liz.dance-to-destruction",
       "operation": "replace_description",
+      "upgraderId": "enlighten.liz.last-dawnlight",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Liz",
       "upgraderType": "enlighten",
       "patch": {

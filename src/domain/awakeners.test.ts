@@ -65,14 +65,14 @@ describe('getAwakeners', () => {
     expect(uniqueIds.size).toBe(ids.length)
   })
 
-  it('uses public V2 display casing while retaining lowercase search aliases', () => {
+  it('uses canonical runtime names while retaining public V2 display aliases', () => {
     const awakeners = getAwakeners()
 
     for (const [name, alias] of [
-      ['Helot: Catena', 'helot: catena'],
-      ['Doll: Inferno', 'doll: inferno'],
-      ['Ramona: Timeworn', 'ramona: timeworn'],
-      ['Murphy: Fauxborn', 'murphy: fauxborn'],
+      ['helot: catena', 'Helot: Catena'],
+      ['doll: inferno', 'Doll: Inferno'],
+      ['ramona: timeworn', 'Ramona: Timeworn'],
+      ['murphy: fauxborn', 'Murphy: Fauxborn'],
     ] as const) {
       const awakener = awakeners.find((a) => a.name === name)
       expect(awakener).toBeDefined()

@@ -46,11 +46,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.uvhash.paean-of-twisted-fury.skill.uvhash.hymn-of-blood-and-sand",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.uvhash.paean-of-twisted-fury",
       "ownerAwakenerId": "awakener-0051",
+      "id": "upgrade.enlighten.uvhash.paean-of-twisted-fury.skill.uvhash.hymn-of-blood-and-sand",
       "operation": "override_args",
+      "upgraderId": "enlighten.uvhash.paean-of-twisted-fury",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Uvhash",
       "upgraderType": "enlighten",
       "patch": {
@@ -94,11 +94,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.uvhash.sorcerers-end.skill.uvhash.hymn-of-blood-and-sand",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.uvhash.sorcerers-end",
       "ownerAwakenerId": "awakener-0051",
+      "id": "upgrade.enlighten.uvhash.sorcerers-end.skill.uvhash.hymn-of-blood-and-sand",
       "operation": "override_args",
+      "upgraderId": "enlighten.uvhash.sorcerers-end",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Uvhash",
       "upgraderType": "enlighten",
       "patch": {

@@ -38,8 +38,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.wanda.revelation.skill.wanda.necropolis-of-dreams",
-      "upgraderId": "talent.wanda.revelation",
       "operation": "link_only",
+      "upgraderId": "talent.wanda.revelation",
       "upgraderType": "talent",
       "patch": {}
     }

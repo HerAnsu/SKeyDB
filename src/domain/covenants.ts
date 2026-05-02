@@ -16,6 +16,7 @@ const publicCovenantsLiteSchema = z
         name: nonEmptyStringSchema,
       }),
     ),
+    metadata: z.record(z.string(), z.unknown()).optional(),
   })
   .strict()
   .refine((envelope) => envelope.recordCount === envelope.records.length, {

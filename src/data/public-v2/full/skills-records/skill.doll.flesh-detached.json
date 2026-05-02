@@ -39,11 +39,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doll.ego-restructured.skill.doll.flesh-detached",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.doll.ego-restructured",
       "ownerAwakenerId": "awakener-0013",
+      "id": "upgrade.enlighten.doll.ego-restructured.skill.doll.flesh-detached",
       "operation": "replace_description",
+      "upgraderId": "enlighten.doll.ego-restructured",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Doll",
       "upgraderType": "enlighten",
       "patch": {

@@ -48,11 +48,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.horla.blossoms-and-verses-reunited.skill.horla.resplendent-chapters",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.horla.blossoms-and-verses-reunited",
       "ownerAwakenerId": "awakener-0024",
+      "id": "upgrade.enlighten.horla.blossoms-and-verses-reunited.skill.horla.resplendent-chapters",
       "operation": "replace_description",
+      "upgraderId": "enlighten.horla.blossoms-and-verses-reunited",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
       "patch": {
@@ -60,11 +60,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.horla.ink-stained-sonnet.skill.horla.resplendent-chapters",
-      "upgraderSlot": "OverExalt",
-      "upgraderId": "enlighten.horla.ink-stained-sonnet",
       "ownerAwakenerId": "awakener-0024",
+      "id": "upgrade.enlighten.horla.ink-stained-sonnet.skill.horla.resplendent-chapters",
       "operation": "mixed",
+      "upgraderId": "enlighten.horla.ink-stained-sonnet",
+      "upgraderSlot": "OverExalt",
       "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
       "patch": {

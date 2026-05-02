@@ -300,6 +300,7 @@ export interface PublicV2Envelope<TScope extends PublicV2Scope = PublicV2Scope> 
   generatedAt?: string
   recordCount: number
   records: PublicV2Record<TScope>[]
+  metadata?: Record<string, unknown>
 }
 
 export const publicV2EnvelopeSchemas = Object.fromEntries(
@@ -312,6 +313,7 @@ export const publicV2EnvelopeSchemas = Object.fromEntries(
         generatedAt: z.string().optional(),
         recordCount: z.number().int().nonnegative(),
         records: z.array(publicV2RecordSchemas[scope]),
+        metadata: z.record(z.string(), jsonSchema).optional(),
       })
       .strict()
       .refine((envelope) => envelope.recordCount === envelope.records.length, {

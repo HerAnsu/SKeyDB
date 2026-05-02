@@ -39,11 +39,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ryker.fortune-favors-the-damned.skill.ryker.exceptional-luck",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.ryker.fortune-favors-the-damned",
       "ownerAwakenerId": "awakener-0043",
+      "id": "upgrade.enlighten.ryker.fortune-favors-the-damned.skill.ryker.exceptional-luck",
       "operation": "replace_description",
+      "upgraderId": "enlighten.ryker.fortune-favors-the-damned",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Ryker",
       "upgraderType": "enlighten",
       "patch": {

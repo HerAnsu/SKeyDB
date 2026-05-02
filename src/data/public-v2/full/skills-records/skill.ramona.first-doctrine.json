@@ -26,11 +26,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ramona.sublime-tempering.skill.ramona.first-doctrine",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.ramona.sublime-tempering",
       "ownerAwakenerId": "awakener-0042",
+      "id": "upgrade.enlighten.ramona.sublime-tempering.skill.ramona.first-doctrine",
       "operation": "replace_description",
+      "upgraderId": "enlighten.ramona.sublime-tempering",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Ramona",
       "upgraderType": "enlighten",
       "patch": {

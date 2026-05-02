@@ -25,11 +25,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.pollux.divine-revelation.derived.pollux.sacred-heart",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.pollux.divine-revelation",
       "ownerAwakenerId": "awakener-0041",
+      "id": "upgrade.enlighten.pollux.divine-revelation.derived.pollux.sacred-heart",
       "operation": "replace_description",
+      "upgraderId": "enlighten.pollux.divine-revelation",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Pollux",
       "upgraderType": "enlighten",
       "patch": {
@@ -37,11 +37,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.pollux.lux-diouskouron.derived.pollux.sacred-heart",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.pollux.lux-diouskouron",
       "ownerAwakenerId": "awakener-0041",
+      "id": "upgrade.enlighten.pollux.lux-diouskouron.derived.pollux.sacred-heart",
       "operation": "replace_description",
+      "upgraderId": "enlighten.pollux.lux-diouskouron",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Pollux",
       "upgraderType": "enlighten",
       "patch": {

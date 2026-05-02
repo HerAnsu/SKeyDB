@@ -28,11 +28,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.alva.unyielding-bastion.skill.alva.combat-stance",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.alva.unyielding-bastion",
       "ownerAwakenerId": "awakener-0004",
+      "id": "upgrade.enlighten.alva.unyielding-bastion.skill.alva.combat-stance",
       "operation": "replace_description",
+      "upgraderId": "enlighten.alva.unyielding-bastion",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Alva",
       "upgraderType": "enlighten",
       "patch": {

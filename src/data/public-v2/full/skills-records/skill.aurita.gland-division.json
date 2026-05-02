@@ -39,11 +39,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.aurita.slick-slide-adventure.skill.aurita.gland-division",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.aurita.slick-slide-adventure",
       "ownerAwakenerId": "awakener-0005",
+      "id": "upgrade.enlighten.aurita.slick-slide-adventure.skill.aurita.gland-division",
       "operation": "mixed",
+      "upgraderId": "enlighten.aurita.slick-slide-adventure",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Aurita",
       "upgraderType": "enlighten",
       "patch": {

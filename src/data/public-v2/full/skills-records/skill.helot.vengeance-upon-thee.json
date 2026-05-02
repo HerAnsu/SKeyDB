@@ -26,11 +26,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.helot.the-final-arbiter.skill.helot.vengeance-upon-thee",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.helot.the-final-arbiter",
       "ownerAwakenerId": "awakener-0023",
+      "id": "upgrade.enlighten.helot.the-final-arbiter.skill.helot.vengeance-upon-thee",
       "operation": "replace_description",
+      "upgraderId": "enlighten.helot.the-final-arbiter",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Helot",
       "upgraderType": "enlighten",
       "patch": {

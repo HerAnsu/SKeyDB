@@ -37,11 +37,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.xu.nirvanas-kiss.skill.xu.fan-sealed-kiss",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.xu.nirvanas-kiss",
       "ownerAwakenerId": "awakener-0054",
+      "id": "upgrade.enlighten.xu.nirvanas-kiss.skill.xu.fan-sealed-kiss",
       "operation": "replace_description",
+      "upgraderId": "enlighten.xu.nirvanas-kiss",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Xu",
       "upgraderType": "enlighten",
       "patch": {

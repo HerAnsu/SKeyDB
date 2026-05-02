@@ -47,11 +47,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.skill.doll-inferno.terminal-of-truth-and-abyss",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
       "ownerAwakenerId": "awakener-0018",
+      "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.skill.doll-inferno.terminal-of-truth-and-abyss",
       "operation": "override_args",
+      "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Doll: Inferno",
       "upgraderType": "enlighten",
       "patch": {
@@ -96,11 +96,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.doll-inferno.resonant-mycelium.skill.doll-inferno.terminal-of-truth-and-abyss",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.doll-inferno.resonant-mycelium",
       "ownerAwakenerId": "awakener-0018",
+      "id": "upgrade.enlighten.doll-inferno.resonant-mycelium.skill.doll-inferno.terminal-of-truth-and-abyss",
       "operation": "override_args",
+      "upgraderId": "enlighten.doll-inferno.resonant-mycelium",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Doll: Inferno",
       "upgraderType": "enlighten",
       "patch": {

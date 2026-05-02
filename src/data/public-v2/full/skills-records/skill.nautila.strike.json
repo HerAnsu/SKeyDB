@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.nautila.blank-recollection.skill.nautila.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.nautila.blank-recollection",
       "ownerAwakenerId": "awakener-0036",
+      "id": "upgrade.enlighten.nautila.blank-recollection.skill.nautila.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.nautila.blank-recollection",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Nautila",
       "upgraderType": "enlighten",
       "patch": {

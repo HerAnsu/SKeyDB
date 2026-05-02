@@ -32,11 +32,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.mouchette.irretrievable-past.skill.mouchette.mortal-blast",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.mouchette.irretrievable-past",
       "ownerAwakenerId": "awakener-0033",
+      "id": "upgrade.enlighten.mouchette.irretrievable-past.skill.mouchette.mortal-blast",
       "operation": "replace_description",
+      "upgraderId": "enlighten.mouchette.irretrievable-past",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Mouchette",
       "upgraderType": "enlighten",
       "patch": {

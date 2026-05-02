@@ -22,11 +22,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tawil.nonexistent-existence.skill.tawil.omnifex-convergence",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.tawil.nonexistent-existence",
       "ownerAwakenerId": "awakener-0047",
+      "id": "upgrade.enlighten.tawil.nonexistent-existence.skill.tawil.omnifex-convergence",
       "operation": "replace_description",
+      "upgraderId": "enlighten.tawil.nonexistent-existence",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Tawil",
       "upgraderType": "enlighten",
       "patch": {
@@ -34,11 +34,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.tawil.omniscient-and-omnipotent.skill.tawil.omnifex-convergence",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.tawil.omniscient-and-omnipotent",
       "ownerAwakenerId": "awakener-0047",
+      "id": "upgrade.enlighten.tawil.omniscient-and-omnipotent.skill.tawil.omnifex-convergence",
       "operation": "replace_description",
+      "upgraderId": "enlighten.tawil.omniscient-and-omnipotent",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Tawil",
       "upgraderType": "enlighten",
       "patch": {

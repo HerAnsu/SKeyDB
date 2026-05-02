@@ -41,8 +41,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.alva.dynamic-vision.skill.alva.strike",
-      "upgraderId": "talent.alva.dynamic-vision",
       "operation": "link_only",
+      "upgraderId": "talent.alva.dynamic-vision",
       "upgraderType": "talent",
       "patch": {}
     }

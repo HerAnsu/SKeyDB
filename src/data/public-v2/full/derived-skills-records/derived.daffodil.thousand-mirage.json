@@ -1,7 +1,7 @@
 {
   "id": "derived.daffodil.thousand-mirage",
   "displayName": "Thousand Mirage",
-  "descriptionTemplate": "Synthetic group wrapper for Thousand Mirage customization. Browse base cards and potential extra-effect choices separately.",
+  "descriptionTemplate": "Synthetic group wrapper for {Thousand Mirage} customization. Browse base cards and potential extra-effect choices separately.",
   "descriptionArgs": {},
   "cardKeywords": [],
   "derivedFromId": "skill.daffodil.sea-of-primordial-essence",

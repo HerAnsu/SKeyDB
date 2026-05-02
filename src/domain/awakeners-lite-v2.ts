@@ -30,7 +30,7 @@ export type AwakenerLiteV2Record = z.infer<typeof awakenersLiteV2RecordSchema>
 let awakenersLiteV2Cache: AwakenerLiteV2Record[] | null = null
 
 interface PublicAwakenerLiteEnvelope {
-  records: Array<{
+  records: {
     id: string
     numericId: number
     name: string
@@ -39,21 +39,37 @@ interface PublicAwakenerLiteEnvelope {
     realm: string
     rarity?: string
     type?: string
+    assets?: {
+      portraitKey?: string
+      iconKey?: string
+    }
     aliases?: string[]
     searchTags?: string[]
-  }>
+  }[]
 }
 
 interface PublicAwakenerFullEnvelope {
-  records: Array<{
+  records: {
     id: string
     baseStatsLv1: AwakenerLiteV2Record['stats']
-  }>
+  }[]
 }
 
 const publicFullById = new Map(
   (publicAwakenersFull as PublicAwakenerFullEnvelope).records.map((record) => [record.id, record]),
 )
+
+function resolveCanonicalAwakenerName(record: PublicAwakenerLiteEnvelope['records'][number]) {
+  const alias = record.aliases?.find((entry) => !entry.trim().startsWith('g-'))?.trim()
+  if (alias) {
+    return alias
+  }
+  const portraitKey = record.assets?.portraitKey?.trim()
+  if (portraitKey) {
+    return portraitKey.replace(/-/g, ': ')
+  }
+  return record.name.trim().toLowerCase()
+}
 
 function adaptPublicAwakenerLite(
   record: PublicAwakenerLiteEnvelope['records'][number],
@@ -62,16 +78,17 @@ function adaptPublicAwakenerLite(
   if (!fullRecord) {
     throw new Error(`Missing public V2 full awakener stats for "${record.id}".`)
   }
+  const name = resolveCanonicalAwakenerName(record)
 
   return {
     id: record.numericId,
-    name: record.name,
+    name,
     ingameId: record.ingameId,
     faction: record.faction,
     realm: record.realm,
     rarity: record.rarity,
     type: record.type,
-    aliases: record.aliases ?? [record.name],
+    aliases: Array.from(new Set([name, record.name, ...(record.aliases ?? [])])),
     stats: fullRecord.baseStatsLv1,
     tags: record.searchTags ?? [],
   }

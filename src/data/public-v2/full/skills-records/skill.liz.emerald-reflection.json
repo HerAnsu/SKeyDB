@@ -30,11 +30,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.liz.burning-tribute.skill.liz.emerald-reflection",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.liz.burning-tribute",
       "ownerAwakenerId": "awakener-0030",
+      "id": "upgrade.enlighten.liz.burning-tribute.skill.liz.emerald-reflection",
       "operation": "mixed",
+      "upgraderId": "enlighten.liz.burning-tribute",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Liz",
       "upgraderType": "enlighten",
       "patch": {

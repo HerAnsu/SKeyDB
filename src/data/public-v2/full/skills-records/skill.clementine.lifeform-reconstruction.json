@@ -36,11 +36,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.clementine.knocking-on-minds-portal.skill.clementine.lifeform-reconstruction",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.clementine.knocking-on-minds-portal",
       "ownerAwakenerId": "awakener-0010",
+      "id": "upgrade.enlighten.clementine.knocking-on-minds-portal.skill.clementine.lifeform-reconstruction",
       "operation": "override_args",
+      "upgraderId": "enlighten.clementine.knocking-on-minds-portal",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Clementine",
       "upgraderType": "enlighten",
       "patch": {
@@ -74,11 +74,11 @@
       }
     },
     {
+      "ownerAwakenerId": "awakener-0010",
       "id": "upgrade.enlighten.clementine.soul-healing-journey.skill.clementine.lifeform-reconstruction",
-      "upgraderSlot": "E2",
+      "operation": "mixed",
       "upgraderId": "enlighten.clementine.soul-healing-journey",
-      "ownerAwakenerId": "awakener-0010",
-      "operation": "mixed",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Clementine",
       "upgraderType": "enlighten",
       "patch": {
@@ -113,11 +113,11 @@
       }
     },
     {
+      "ownerAwakenerId": "awakener-0010",
       "id": "upgrade.enlighten.clementine.subconscious-corrosion.skill.clementine.lifeform-reconstruction",
-      "upgraderSlot": "OverExalt",
-      "upgraderId": "enlighten.clementine.subconscious-corrosion",
-      "ownerAwakenerId": "awakener-0010",
       "operation": "mixed",
+      "upgraderId": "enlighten.clementine.subconscious-corrosion",
+      "upgraderSlot": "OverExalt",
       "ownerAwakenerName": "Clementine",
       "upgraderType": "enlighten",
       "patch": {
@@ -152,11 +152,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.clementine.you-will-recover.skill.clementine.lifeform-reconstruction",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.clementine.you-will-recover",
       "ownerAwakenerId": "awakener-0010",
+      "id": "upgrade.enlighten.clementine.you-will-recover.skill.clementine.lifeform-reconstruction",
       "operation": "mixed",
+      "upgraderId": "enlighten.clementine.you-will-recover",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Clementine",
       "upgraderType": "enlighten",
       "patch": {

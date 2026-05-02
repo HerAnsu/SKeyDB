@@ -42,11 +42,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.vortice.bang-pop-boom.skill.vortice.here-it-goes",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.vortice.bang-pop-boom",
       "ownerAwakenerId": "awakener-0055",
+      "id": "upgrade.enlighten.vortice.bang-pop-boom.skill.vortice.here-it-goes",
       "operation": "mixed",
+      "upgraderId": "enlighten.vortice.bang-pop-boom",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Vortice",
       "upgraderType": "enlighten",
       "patch": {

@@ -463,9 +463,7 @@ function encodeCovenantBlock(
 
 export function encodeIngameTeamCode(team: Team): string {
   const dictionaries = buildIngameTokenDictionaries()
-  const awakenersByNameId = new Map(
-    getAwakeners().map((awakener) => [awakener.name, awakener.id]),
-  )
+  const awakenersByNameId = new Map(getAwakeners().map((awakener) => [awakener.name, awakener.id]))
   const payloadTokens: string[] = []
   const fallbackSlots = createEmptyTeamSlots()
 

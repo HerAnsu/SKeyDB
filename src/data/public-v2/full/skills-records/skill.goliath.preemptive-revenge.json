@@ -52,11 +52,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.goliath.ascent-of-the-tyrant.skill.goliath.preemptive-revenge",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.goliath.ascent-of-the-tyrant",
       "ownerAwakenerId": "awakener-0021",
+      "id": "upgrade.enlighten.goliath.ascent-of-the-tyrant.skill.goliath.preemptive-revenge",
       "operation": "mixed",
+      "upgraderId": "enlighten.goliath.ascent-of-the-tyrant",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Goliath",
       "upgraderType": "enlighten",
       "patch": {

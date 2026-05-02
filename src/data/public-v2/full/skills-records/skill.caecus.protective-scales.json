@@ -41,19 +41,14 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.caecus.spike-amalgamation.skill.caecus.protective-scales",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.caecus.spike-amalgamation",
       "ownerAwakenerId": "awakener-0006",
+      "id": "upgrade.enlighten.caecus.spike-amalgamation.skill.caecus.protective-scales",
       "operation": "mixed",
+      "upgraderId": "enlighten.caecus.spike-amalgamation",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Caecus",
       "upgraderType": "enlighten",
       "patch": {
-        "cardKeywords": [
-          {
-            "id": "mechanic.retain"
-          }
-        ],
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -85,7 +80,12 @@
             "suffix": "%",
             "stat": "ATK"
           }
-        }
+        },
+        "cardKeywords": [
+          {
+            "id": "mechanic.retain"
+          }
+        ]
       }
     }
   ]

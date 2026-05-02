@@ -41,11 +41,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.nautila.absent-cogwheel.skill.nautila.no-trespassing",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.nautila.absent-cogwheel",
       "ownerAwakenerId": "awakener-0036",
+      "id": "upgrade.enlighten.nautila.absent-cogwheel.skill.nautila.no-trespassing",
       "operation": "override_card_keywords",
+      "upgraderId": "enlighten.nautila.absent-cogwheel",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Nautila",
       "upgraderType": "enlighten",
       "patch": {

@@ -37,11 +37,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.vortice.endless-tide.derived.vortice.vortex-shell",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.vortice.endless-tide",
       "ownerAwakenerId": "awakener-0055",
+      "id": "upgrade.enlighten.vortice.endless-tide.derived.vortice.vortex-shell",
       "operation": "mixed",
+      "upgraderId": "enlighten.vortice.endless-tide",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Vortice",
       "upgraderType": "enlighten",
       "patch": {

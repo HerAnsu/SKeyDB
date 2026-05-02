@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.murphy.inextricable-bloodline.skill.murphy.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.murphy.inextricable-bloodline",
       "ownerAwakenerId": "awakener-0034",
+      "id": "upgrade.enlighten.murphy.inextricable-bloodline.skill.murphy.defense",
       "operation": "mixed",
+      "upgraderId": "enlighten.murphy.inextricable-bloodline",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Murphy",
       "upgraderType": "enlighten",
       "patch": {

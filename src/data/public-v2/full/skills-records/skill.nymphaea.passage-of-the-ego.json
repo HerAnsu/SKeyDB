@@ -42,11 +42,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.nymphaea.frostbloom-tide.skill.nymphaea.passage-of-the-ego",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.nymphaea.frostbloom-tide",
       "ownerAwakenerId": "awakener-0037",
+      "id": "upgrade.enlighten.nymphaea.frostbloom-tide.skill.nymphaea.passage-of-the-ego",
       "operation": "mixed",
+      "upgraderId": "enlighten.nymphaea.frostbloom-tide",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Nymphaea",
       "upgraderType": "enlighten",
       "patch": {
@@ -101,8 +101,8 @@
     },
     {
       "id": "upgrade.talent.nymphaea.immerse.skill.nymphaea.passage-of-the-ego",
-      "upgraderId": "talent.nymphaea.immerse",
       "operation": "link_only",
+      "upgraderId": "talent.nymphaea.immerse",
       "upgraderType": "talent",
       "patch": {}
     }

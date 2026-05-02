@@ -50,11 +50,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.erica.force-circuit.skill.erica.electromagnetic-blast",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.erica.force-circuit",
       "ownerAwakenerId": "awakener-0015",
+      "id": "upgrade.enlighten.erica.force-circuit.skill.erica.electromagnetic-blast",
       "operation": "mixed",
+      "upgraderId": "enlighten.erica.force-circuit",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Erica",
       "upgraderType": "enlighten",
       "patch": {
@@ -108,8 +108,8 @@
     },
     {
       "id": "upgrade.talent.erica.external-power-source.skill.erica.electromagnetic-blast",
-      "upgraderId": "talent.erica.external-power-source",
       "operation": "link_only",
+      "upgraderId": "talent.erica.external-power-source",
       "upgraderType": "talent",
       "patch": {}
     }

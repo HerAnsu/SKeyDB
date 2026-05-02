@@ -28,11 +28,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ogier.honesty-unto-thyself.skill.ogier.piercing-strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.ogier.honesty-unto-thyself",
       "ownerAwakenerId": "awakener-0038",
+      "id": "upgrade.enlighten.ogier.honesty-unto-thyself.skill.ogier.piercing-strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.ogier.honesty-unto-thyself",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Ogier",
       "upgraderType": "enlighten",
       "patch": {

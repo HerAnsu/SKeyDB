@@ -41,11 +41,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.celeste.ancestral-beacon.skill.celeste.tintless-dream",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.celeste.ancestral-beacon",
       "ownerAwakenerId": "awakener-0009",
+      "id": "upgrade.enlighten.celeste.ancestral-beacon.skill.celeste.tintless-dream",
       "operation": "mixed",
+      "upgraderId": "enlighten.celeste.ancestral-beacon",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Celeste",
       "upgraderType": "enlighten",
       "patch": {
@@ -96,8 +96,8 @@
     },
     {
       "id": "upgrade.talent.celeste.voyage-horn.skill.celeste.tintless-dream",
-      "upgraderId": "talent.celeste.voyage-horn",
       "operation": "link_only",
+      "upgraderId": "talent.celeste.voyage-horn",
       "upgraderType": "talent",
       "patch": {}
     }

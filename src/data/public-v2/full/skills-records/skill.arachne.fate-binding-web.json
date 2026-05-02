@@ -35,11 +35,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.arachne.universe-as-i-conceive.skill.arachne.fate-binding-web",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.arachne.universe-as-i-conceive",
       "ownerAwakenerId": "awakener-0056",
+      "id": "upgrade.enlighten.arachne.universe-as-i-conceive.skill.arachne.fate-binding-web",
       "operation": "override_card_keywords",
+      "upgraderId": "enlighten.arachne.universe-as-i-conceive",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Arachne",
       "upgraderType": "enlighten",
       "patch": {

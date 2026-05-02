@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.salvador.divine-proxy.skill.salvador.defense",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.salvador.divine-proxy",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.divine-proxy.skill.salvador.defense",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.divine-proxy",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {

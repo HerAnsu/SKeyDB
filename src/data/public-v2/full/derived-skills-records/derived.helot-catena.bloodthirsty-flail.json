@@ -32,11 +32,11 @@
   "cost": "4",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.helot-catena.vengeance-unchained.derived.helot-catena.bloodthirsty-flail",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.helot-catena.vengeance-unchained",
       "ownerAwakenerId": "awakener-0019",
+      "id": "upgrade.enlighten.helot-catena.vengeance-unchained.derived.helot-catena.bloodthirsty-flail",
       "operation": "override_card_keywords",
+      "upgraderId": "enlighten.helot-catena.vengeance-unchained",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Helot: Catena",
       "upgraderType": "enlighten",
       "patch": {

@@ -24,11 +24,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.derived.arachne.infinite-threads",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
       "ownerAwakenerId": "awakener-0056",
+      "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.derived.arachne.infinite-threads",
       "operation": "replace_description",
+      "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Arachne",
       "upgraderType": "enlighten",
       "patch": {

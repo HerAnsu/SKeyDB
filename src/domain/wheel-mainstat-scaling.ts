@@ -1,3 +1,7 @@
+import {z} from 'zod'
+
+import publicWheelsLite from '@/data/public-v2/lite/wheels.json'
+
 export const WHEEL_MAINSTAT_KEYS = [
   'CRIT_RATE',
   'CRIT_DMG',
@@ -27,186 +31,55 @@ export interface WheelMainstatScalingSource {
   series: WheelMainstatScalingSeries[]
 }
 
-const parsedWheelMainstatScaling: WheelMainstatScalingSource = {
-  growthStartLevel: 4,
-  series: [
+const wheelMainstatScalingSeriesSchema = z
+  .object({
+    seriesKey: z.string().trim().min(1),
+    rarity: z.enum(WHEEL_MAINSTAT_SERIES_RARITY_KEYS),
+    mainstatKey: z.enum(WHEEL_MAINSTAT_KEYS),
+    baseValue: z.string().trim().min(1),
+    perLevel: z.string().trim().min(1),
+  })
+  .strict()
+  .refine(
+    (series) => series.seriesKey === buildWheelMainstatSeriesKey(series.rarity, series.mainstatKey),
     {
-      seriesKey: 'N:KEYFLARE_REGEN',
-      rarity: 'N',
-      mainstatKey: 'KEYFLARE_REGEN',
-      baseValue: '1.8',
-      perLevel: '0.3',
+      message: 'seriesKey must match rarity and mainstatKey',
+      path: ['seriesKey'],
     },
-    {
-      seriesKey: 'R:ALIEMUS_REGEN',
-      rarity: 'R',
-      mainstatKey: 'ALIEMUS_REGEN',
-      baseValue: '1.2',
-      perLevel: '0.2',
-    },
-    {
-      seriesKey: 'R:CRIT_DMG',
-      rarity: 'R',
-      mainstatKey: 'CRIT_DMG',
-      baseValue: '3.6%',
-      perLevel: '0.6%',
-    },
-    {
-      seriesKey: 'R:CRIT_RATE',
-      rarity: 'R',
-      mainstatKey: 'CRIT_RATE',
-      baseValue: '2.4%',
-      perLevel: '0.4%',
-    },
-    {
-      seriesKey: 'R:DEATH_RESISTANCE',
-      rarity: 'R',
-      mainstatKey: 'DEATH_RESISTANCE',
-      baseValue: '8.4%',
-      perLevel: '1.4%',
-    },
-    {
-      seriesKey: 'R:DMG_AMP',
-      rarity: 'R',
-      mainstatKey: 'DMG_AMP',
-      baseValue: '2.4%',
-      perLevel: '0.4%',
-    },
-    {
-      seriesKey: 'R:KEYFLARE_REGEN',
-      rarity: 'R',
-      mainstatKey: 'KEYFLARE_REGEN',
-      baseValue: '3.6',
-      perLevel: '0.6',
-    },
-    {
-      seriesKey: 'R:REALM_MASTERY',
-      rarity: 'R',
-      mainstatKey: 'REALM_MASTERY',
-      baseValue: '6',
-      perLevel: '1',
-    },
-    {
-      seriesKey: 'R:SIGIL_YIELD',
-      rarity: 'R',
-      mainstatKey: 'SIGIL_YIELD',
-      baseValue: '1.8%',
-      perLevel: '0.3%',
-    },
-    {
-      seriesKey: 'SR:ALIEMUS_REGEN',
-      rarity: 'SR',
-      mainstatKey: 'ALIEMUS_REGEN',
-      baseValue: '3.6',
-      perLevel: '0.3',
-    },
-    {
-      seriesKey: 'SR:CRIT_DMG',
-      rarity: 'SR',
-      mainstatKey: 'CRIT_DMG',
-      baseValue: '10.8%',
-      perLevel: '0.9%',
-    },
-    {
-      seriesKey: 'SR:CRIT_RATE',
-      rarity: 'SR',
-      mainstatKey: 'CRIT_RATE',
-      baseValue: '7.2%',
-      perLevel: '0.6%',
-    },
-    {
-      seriesKey: 'SR:DEATH_RESISTANCE',
-      rarity: 'SR',
-      mainstatKey: 'DEATH_RESISTANCE',
-      baseValue: '25.2%',
-      perLevel: '2.1%',
-    },
-    {
-      seriesKey: 'SR:DMG_AMP',
-      rarity: 'SR',
-      mainstatKey: 'DMG_AMP',
-      baseValue: '7.2%',
-      perLevel: '0.6%',
-    },
-    {
-      seriesKey: 'SR:KEYFLARE_REGEN',
-      rarity: 'SR',
-      mainstatKey: 'KEYFLARE_REGEN',
-      baseValue: '10.8',
-      perLevel: '0.9',
-    },
-    {
-      seriesKey: 'SR:REALM_MASTERY',
-      rarity: 'SR',
-      mainstatKey: 'REALM_MASTERY',
-      baseValue: '18',
-      perLevel: '1.5',
-    },
-    {
-      seriesKey: 'SR:SIGIL_YIELD',
-      rarity: 'SR',
-      mainstatKey: 'SIGIL_YIELD',
-      baseValue: '5.4%',
-      perLevel: '0.45%',
-    },
-    {
-      seriesKey: 'SSR:ALIEMUS_REGEN',
-      rarity: 'SSR',
-      mainstatKey: 'ALIEMUS_REGEN',
-      baseValue: '7.2',
-      perLevel: '0.6',
-    },
-    {
-      seriesKey: 'SSR:CRIT_DMG',
-      rarity: 'SSR',
-      mainstatKey: 'CRIT_DMG',
-      baseValue: '21.6%',
-      perLevel: '1.8%',
-    },
-    {
-      seriesKey: 'SSR:CRIT_RATE',
-      rarity: 'SSR',
-      mainstatKey: 'CRIT_RATE',
-      baseValue: '14.4%',
-      perLevel: '1.2%',
-    },
-    {
-      seriesKey: 'SSR:DEATH_RESISTANCE',
-      rarity: 'SSR',
-      mainstatKey: 'DEATH_RESISTANCE',
-      baseValue: '50.4%',
-      perLevel: '4.2%',
-    },
-    {
-      seriesKey: 'SSR:DMG_AMP',
-      rarity: 'SSR',
-      mainstatKey: 'DMG_AMP',
-      baseValue: '14.4%',
-      perLevel: '1.2%',
-    },
-    {
-      seriesKey: 'SSR:KEYFLARE_REGEN',
-      rarity: 'SSR',
-      mainstatKey: 'KEYFLARE_REGEN',
-      baseValue: '21.6',
-      perLevel: '1.8',
-    },
-    {
-      seriesKey: 'SSR:REALM_MASTERY',
-      rarity: 'SSR',
-      mainstatKey: 'REALM_MASTERY',
-      baseValue: '36',
-      perLevel: '3',
-    },
-    {
-      seriesKey: 'SSR:SIGIL_YIELD',
-      rarity: 'SSR',
-      mainstatKey: 'SIGIL_YIELD',
-      baseValue: '10.8%',
-      perLevel: '0.9%',
-    },
-  ],
-}
+  )
+
+const wheelMainstatScalingSourceSchema = z
+  .object({
+    growthStartLevel: z.number().int().nonnegative(),
+    series: z.array(wheelMainstatScalingSeriesSchema).min(1),
+  })
+  .strict()
+  .superRefine((source, context) => {
+    const seenSeriesKeys = new Set<string>()
+    for (const [index, series] of source.series.entries()) {
+      if (seenSeriesKeys.has(series.seriesKey)) {
+        context.addIssue({
+          code: 'custom',
+          message: `Duplicate wheel mainstat scaling series "${series.seriesKey}".`,
+          path: ['series', index, 'seriesKey'],
+        })
+      }
+      seenSeriesKeys.add(series.seriesKey)
+    }
+  })
+
+const publicWheelsMetadataSchema = z
+  .object({
+    metadata: z
+      .object({
+        mainstatScaling: wheelMainstatScalingSourceSchema,
+      })
+      .loose(),
+  })
+  .loose()
+
+const parsedWheelMainstatScaling: WheelMainstatScalingSource =
+  publicWheelsMetadataSchema.parse(publicWheelsLite).metadata.mainstatScaling
 
 const wheelMainstatSeriesByKey = new Map(
   parsedWheelMainstatScaling.series.map((series) => [series.seriesKey, series]),

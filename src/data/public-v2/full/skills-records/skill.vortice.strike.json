@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.vortice.roaring-abyss.skill.vortice.strike",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.vortice.roaring-abyss",
       "ownerAwakenerId": "awakener-0055",
+      "id": "upgrade.enlighten.vortice.roaring-abyss.skill.vortice.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.vortice.roaring-abyss",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Vortice",
       "upgraderType": "enlighten",
       "patch": {

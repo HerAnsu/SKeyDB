@@ -24,10 +24,17 @@ const publicAwakenersLiteSchema = z
         realm: z.string().trim().min(1),
         rarity: z.string().trim().min(1).optional(),
         type: z.string().trim().min(1).optional(),
+        assets: z
+          .object({
+            portraitKey: z.string().trim().min(1).optional(),
+            iconKey: z.string().trim().min(1).optional(),
+          })
+          .optional(),
         aliases: z.array(z.string().trim().min(1)).optional(),
         searchTags: z.array(z.string().trim().min(1)).optional(),
       }),
     ),
+    metadata: z.record(z.string(), z.unknown()).optional(),
   })
   .strict()
   .refine((envelope) => envelope.recordCount === envelope.records.length, {
@@ -44,7 +51,7 @@ const publicAwakenersFullSchema = z
       }),
     ),
   })
-  .passthrough()
+  .loose()
 
 export interface AwakenerLiteStats {
   CON: number
@@ -97,11 +104,27 @@ function getPublicStats(publicId: string): AwakenerLiteStats {
   return stats
 }
 
+function resolveCanonicalAwakenerName(awakener: {
+  name: string
+  aliases?: string[]
+  assets?: {portraitKey?: string}
+}): string {
+  const alias = awakener.aliases?.find((entry) => !entry.trim().startsWith('g-'))?.trim()
+  if (alias) {
+    return alias
+  }
+  const portraitKey = awakener.assets?.portraitKey?.trim()
+  if (portraitKey) {
+    return portraitKey.replace(/-/g, ': ')
+  }
+  return awakener.name.trim().toLowerCase()
+}
+
 const parsedAwakeners = publicAwakenersLiteSchema
   .parse(publicAwakenersLite)
   .records.map((awakener): Awakener => {
-    const name = awakener.name
-    const aliases = Array.from(new Set([name, ...(awakener.aliases ?? [])]))
+    const name = resolveCanonicalAwakenerName(awakener)
+    const aliases = Array.from(new Set([name, awakener.name, ...(awakener.aliases ?? [])]))
     const tags = Array.from(new Set(awakener.searchTags ?? []))
 
     return {

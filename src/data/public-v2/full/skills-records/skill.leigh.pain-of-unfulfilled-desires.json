@@ -41,11 +41,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.leigh.step-into-the-sunlight.skill.leigh.pain-of-unfulfilled-desires",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.leigh.step-into-the-sunlight",
       "ownerAwakenerId": "awakener-0028",
+      "id": "upgrade.enlighten.leigh.step-into-the-sunlight.skill.leigh.pain-of-unfulfilled-desires",
       "operation": "mixed",
+      "upgraderId": "enlighten.leigh.step-into-the-sunlight",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Leigh",
       "upgraderType": "enlighten",
       "patch": {

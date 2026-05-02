@@ -28,20 +28,20 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.leigh.newborn-sanguivore.skill.leigh.pain-and-pleasure",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.leigh.newborn-sanguivore",
       "ownerAwakenerId": "awakener-0028",
+      "id": "upgrade.enlighten.leigh.newborn-sanguivore.skill.leigh.pain-and-pleasure",
       "operation": "mixed",
+      "upgraderId": "enlighten.leigh.newborn-sanguivore",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Leigh",
       "upgraderType": "enlighten",
       "patch": {
+        "descriptionTemplate": "Randomly deal [Damage:Arg1] {Pierce DMG} [Arg2] {plural:[Arg2]|time|times}. Until the start of next turn, gain 1 Shield for every 2 HP lost at the start of next turn.",
         "cardKeywords": [
           {
             "id": "mechanic.retain"
           }
-        ],
-        "descriptionTemplate": "Randomly deal [Damage:Arg1] {Pierce DMG} [Arg2] {plural:[Arg2]|time|times}. Until the start of next turn, gain 1 Shield for every 2 HP lost at the start of next turn."
+        ]
       }
     }
   ]

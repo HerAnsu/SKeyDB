@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.winkle.dread-of-the-darkness.skill.winkle.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.winkle.dread-of-the-darkness",
       "ownerAwakenerId": "awakener-0053",
+      "id": "upgrade.enlighten.winkle.dread-of-the-darkness.skill.winkle.strike",
       "operation": "replace_description",
+      "upgraderId": "enlighten.winkle.dread-of-the-darkness",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Winkle",
       "upgraderType": "enlighten",
       "patch": {

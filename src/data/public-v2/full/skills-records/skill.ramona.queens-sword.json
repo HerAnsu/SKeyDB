@@ -45,11 +45,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ramona.innocent-departure.skill.ramona.queens-sword",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.ramona.innocent-departure",
       "ownerAwakenerId": "awakener-0042",
+      "id": "upgrade.enlighten.ramona.innocent-departure.skill.ramona.queens-sword",
       "operation": "mixed",
+      "upgraderId": "enlighten.ramona.innocent-departure",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Ramona",
       "upgraderType": "enlighten",
       "patch": {
@@ -106,11 +106,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.ramona.precious-ties.skill.ramona.queens-sword",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.ramona.precious-ties",
       "ownerAwakenerId": "awakener-0042",
+      "id": "upgrade.enlighten.ramona.precious-ties.skill.ramona.queens-sword",
       "operation": "mixed",
+      "upgraderId": "enlighten.ramona.precious-ties",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Ramona",
       "upgraderType": "enlighten",
       "patch": {
@@ -168,8 +168,8 @@
     },
     {
       "id": "upgrade.talent.ramona.silverheart-resonance.skill.ramona.queens-sword",
-      "upgraderId": "talent.ramona.silverheart-resonance",
       "operation": "link_only",
+      "upgraderId": "talent.ramona.silverheart-resonance",
       "upgraderType": "talent",
       "patch": {}
     }

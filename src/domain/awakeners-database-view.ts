@@ -597,7 +597,7 @@ function buildTalentInfluenceByTargetId(record: AwakenerFullV2Record): Map<strin
 
 function getPublicV2UpgradeTargets(
   record: AwakenerFullV2Record,
-): Array<{id: string; upgrades?: AwakenerFullV2Record['cards']['C1']['upgrades']}> {
+): {id: string; upgrades?: AwakenerFullV2Record['cards']['C1']['upgrades']}[] {
   return [
     record.cards.C1,
     record.cards.C2,

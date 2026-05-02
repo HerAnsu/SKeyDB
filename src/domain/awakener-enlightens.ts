@@ -6,7 +6,7 @@ import {
 } from './awakener-source-schema'
 
 interface PublicEnlightensEnvelope {
-  records: Array<Omit<AwakenerEnlightenRecord, 'ownerAwakenerId'> & {ownerAwakenerId: string}>
+  records: (Omit<AwakenerEnlightenRecord, 'ownerAwakenerId'> & {ownerAwakenerId: string})[]
 }
 
 let awakenerEnlightensCache: AwakenerEnlightenRecord[] | null = null

@@ -63,11 +63,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.miryam.solitary-pilgrimage.skill.miryam.exalted-pyre",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.miryam.solitary-pilgrimage",
       "ownerAwakenerId": "awakener-0032",
+      "id": "upgrade.enlighten.miryam.solitary-pilgrimage.skill.miryam.exalted-pyre",
       "operation": "replace_description",
+      "upgraderId": "enlighten.miryam.solitary-pilgrimage",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
       "patch": {
@@ -75,11 +75,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.miryam.vanitys-collapse.skill.miryam.exalted-pyre",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.miryam.vanitys-collapse",
       "ownerAwakenerId": "awakener-0032",
+      "id": "upgrade.enlighten.miryam.vanitys-collapse.skill.miryam.exalted-pyre",
       "operation": "mixed",
+      "upgraderId": "enlighten.miryam.vanitys-collapse",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
       "patch": {

@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.thais.everlasting-cycle.skill.thais.strike",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.thais.everlasting-cycle",
       "ownerAwakenerId": "awakener-0048",
+      "id": "upgrade.enlighten.thais.everlasting-cycle.skill.thais.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.thais.everlasting-cycle",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Thais",
       "upgraderType": "enlighten",
       "patch": {

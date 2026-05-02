@@ -31,11 +31,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.uvhash.paean-of-twisted-fury.skill.uvhash.vermilion-rite",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.uvhash.paean-of-twisted-fury",
       "ownerAwakenerId": "awakener-0051",
+      "id": "upgrade.enlighten.uvhash.paean-of-twisted-fury.skill.uvhash.vermilion-rite",
       "operation": "mixed",
+      "upgraderId": "enlighten.uvhash.paean-of-twisted-fury",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Uvhash",
       "upgraderType": "enlighten",
       "patch": {

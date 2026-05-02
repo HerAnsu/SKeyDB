@@ -3,7 +3,7 @@ import publicTalentsFull from '@/data/public-v2/full/talents.json'
 import {awakenerTalentsDatasetSchema, type AwakenerTalentRecord} from './awakener-source-schema'
 
 interface PublicTalentsEnvelope {
-  records: Array<Omit<AwakenerTalentRecord, 'ownerAwakenerId'> & {ownerAwakenerId: string}>
+  records: (Omit<AwakenerTalentRecord, 'ownerAwakenerId'> & {ownerAwakenerId: string})[]
 }
 
 let awakenerTalentsCache: AwakenerTalentRecord[] | null = null

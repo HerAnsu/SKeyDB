@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.faros.congealed-ambergris.skill.faros.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.faros.congealed-ambergris",
       "ownerAwakenerId": "awakener-0017",
+      "id": "upgrade.enlighten.faros.congealed-ambergris.skill.faros.defense",
       "operation": "replace_description",
+      "upgraderId": "enlighten.faros.congealed-ambergris",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Faros",
       "upgraderType": "enlighten",
       "patch": {

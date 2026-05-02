@@ -58,8 +58,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.faint.secondary-swaddle.skill.faint.cradle-of-stars",
-      "upgraderId": "talent.faint.secondary-swaddle",
       "operation": "link_only",
+      "upgraderId": "talent.faint.secondary-swaddle",
       "upgraderType": "talent",
       "patch": {}
     }

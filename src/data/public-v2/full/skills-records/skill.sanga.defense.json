@@ -36,8 +36,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.sanga.enlightenment-of-death.skill.sanga.defense",
-      "upgraderId": "talent.sanga.enlightenment-of-death",
       "operation": "link_only",
+      "upgraderId": "talent.sanga.enlightenment-of-death",
       "upgraderType": "talent",
       "patch": {}
     }

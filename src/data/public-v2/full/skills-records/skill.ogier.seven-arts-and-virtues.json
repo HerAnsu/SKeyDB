@@ -42,11 +42,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ogier.deathless-loyalty.skill.ogier.seven-arts-and-virtues",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.ogier.deathless-loyalty",
       "ownerAwakenerId": "awakener-0038",
+      "id": "upgrade.enlighten.ogier.deathless-loyalty.skill.ogier.seven-arts-and-virtues",
       "operation": "mixed",
+      "upgraderId": "enlighten.ogier.deathless-loyalty",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Ogier",
       "upgraderType": "enlighten",
       "patch": {
@@ -100,11 +100,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.ogier.mercy-for-the-meek.skill.ogier.seven-arts-and-virtues",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.ogier.mercy-for-the-meek",
       "ownerAwakenerId": "awakener-0038",
+      "id": "upgrade.enlighten.ogier.mercy-for-the-meek.skill.ogier.seven-arts-and-virtues",
       "operation": "mixed",
+      "upgraderId": "enlighten.ogier.mercy-for-the-meek",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Ogier",
       "upgraderType": "enlighten",
       "patch": {
@@ -159,8 +159,8 @@
     },
     {
       "id": "upgrade.talent.ogier.formless-refinement.skill.ogier.seven-arts-and-virtues",
-      "upgraderId": "talent.ogier.formless-refinement",
       "operation": "link_only",
+      "upgraderId": "talent.ogier.formless-refinement",
       "upgraderType": "talent",
       "patch": {}
     }

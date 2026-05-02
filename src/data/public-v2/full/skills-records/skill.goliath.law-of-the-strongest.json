@@ -24,11 +24,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.goliath.rule-by-the-strongest.skill.goliath.law-of-the-strongest",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.goliath.rule-by-the-strongest",
       "ownerAwakenerId": "awakener-0021",
+      "id": "upgrade.enlighten.goliath.rule-by-the-strongest.skill.goliath.law-of-the-strongest",
       "operation": "replace_description",
+      "upgraderId": "enlighten.goliath.rule-by-the-strongest",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Goliath",
       "upgraderType": "enlighten",
       "patch": {

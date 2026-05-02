@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.helot.sacred-half.skill.helot.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.helot.sacred-half",
       "ownerAwakenerId": "awakener-0023",
+      "id": "upgrade.enlighten.helot.sacred-half.skill.helot.defense",
       "operation": "replace_description",
+      "upgraderId": "enlighten.helot.sacred-half",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Helot",
       "upgraderType": "enlighten",
       "patch": {

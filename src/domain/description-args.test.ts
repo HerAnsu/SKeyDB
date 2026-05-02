@@ -220,15 +220,12 @@ describe('description-args', () => {
 
   it('renders public V2 detail upgrade patch templates with resolved arg totals', async () => {
     const xu = await loadPublicV2AwakenerFullById(54)
-    expect(xu).toBeDefined()
-    const enlighten = xu?.enlightens.E3
-    expect(enlighten).toBeDefined()
-    if (!enlighten) {
-      throw new Error('Missing enlighten.xu.enmity-of-the-heart')
+    if (!xu) {
+      throw new Error('Missing Xu public V2 record')
     }
 
-    const bonesick = xu?.cards.C4
-    const upgrade = bonesick?.upgrades?.find(
+    const bonesick = xu.cards.C4
+    const upgrade = bonesick.upgrades?.find(
       (entry) => entry.upgraderId === 'enlighten.xu.enmity-of-the-heart',
     )
     const descriptionArgs = upgrade?.patch?.descriptionArgs

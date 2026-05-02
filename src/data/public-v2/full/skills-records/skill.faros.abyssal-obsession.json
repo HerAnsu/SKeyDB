@@ -35,11 +35,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.faros.to-the-radiant-shore.skill.faros.abyssal-obsession",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.faros.to-the-radiant-shore",
       "ownerAwakenerId": "awakener-0017",
+      "id": "upgrade.enlighten.faros.to-the-radiant-shore.skill.faros.abyssal-obsession",
       "operation": "replace_description",
+      "upgraderId": "enlighten.faros.to-the-radiant-shore",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Faros",
       "upgraderType": "enlighten",
       "patch": {

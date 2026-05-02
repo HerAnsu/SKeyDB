@@ -52,11 +52,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.pandia.manifesto-of-loving-discipline.skill.pandia.give-and-take",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.pandia.manifesto-of-loving-discipline",
       "ownerAwakenerId": "awakener-0039",
+      "id": "upgrade.enlighten.pandia.manifesto-of-loving-discipline.skill.pandia.give-and-take",
       "operation": "mixed",
+      "upgraderId": "enlighten.pandia.manifesto-of-loving-discipline",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
       "patch": {

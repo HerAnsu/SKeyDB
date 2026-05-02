@@ -32,19 +32,19 @@ describe('searchAwakeners', () => {
 
   it('matches awakeners by tag via exact search', () => {
     const awakeners = getAwakeners()
-    const results = searchAwakeners(awakeners, 'Bleed')
+    const results = searchAwakeners(awakeners, 'Draw')
 
     expect(results.length).toBeGreaterThan(0)
-    expect(results.every((a) => a.tags.includes('Bleed'))).toBe(true)
+    expect(results.every((a) => a.tags.includes('Draw'))).toBe(true)
   })
 
-  it('does not cross-match similar tags like STR Up and STR Down', () => {
+  it('does not cross-match distinct public tags', () => {
     const awakeners = getAwakeners()
-    const results = searchAwakeners(awakeners, 'STR Up')
+    const results = searchAwakeners(awakeners, 'Divine Realm')
 
     expect(results.length).toBeGreaterThan(0)
-    expect(results.every((a) => a.tags.includes('STR Up'))).toBe(true)
-    expect(results.some((a) => a.tags.includes('STR Down') && !a.tags.includes('STR Up'))).toBe(
+    expect(results.every((a) => a.tags.includes('Divine Realm'))).toBe(true)
+    expect(results.some((a) => a.tags.includes('Dispel') && !a.tags.includes('Divine Realm'))).toBe(
       false,
     )
   })

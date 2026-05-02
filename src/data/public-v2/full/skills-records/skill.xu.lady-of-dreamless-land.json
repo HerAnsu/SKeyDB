@@ -26,11 +26,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.xu.gu-wang-yan.skill.xu.lady-of-dreamless-land",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.xu.gu-wang-yan",
       "ownerAwakenerId": "awakener-0054",
+      "id": "upgrade.enlighten.xu.gu-wang-yan.skill.xu.lady-of-dreamless-land",
       "operation": "replace_description",
+      "upgraderId": "enlighten.xu.gu-wang-yan",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Xu",
       "upgraderType": "enlighten",
       "patch": {

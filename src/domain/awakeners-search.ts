@@ -232,7 +232,8 @@ function isSingleTokenFuzzyFieldCandidate(
     return false
   }
 
-  const queryInitial = normalizedQuery.slice(0, 1)
+  const queryPrefixLength = normalizedQuery.length >= 4 ? 2 : 1
+  const queryInitial = normalizedQuery.slice(0, queryPrefixLength)
   if (field.startsWith(queryInitial)) {
     return true
   }

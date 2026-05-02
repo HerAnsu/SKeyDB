@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tinct.midnight-elegy.skill.tinct.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.tinct.midnight-elegy",
       "ownerAwakenerId": "awakener-0049",
+      "id": "upgrade.enlighten.tinct.midnight-elegy.skill.tinct.defense",
       "operation": "replace_description",
+      "upgraderId": "enlighten.tinct.midnight-elegy",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Tinct",
       "upgraderType": "enlighten",
       "patch": {

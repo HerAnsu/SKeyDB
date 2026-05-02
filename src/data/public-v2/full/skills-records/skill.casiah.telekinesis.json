@@ -41,11 +41,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.casiah.legendary-copycat.skill.casiah.telekinesis",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.casiah.legendary-copycat",
       "ownerAwakenerId": "awakener-0007",
+      "id": "upgrade.enlighten.casiah.legendary-copycat.skill.casiah.telekinesis",
       "operation": "replace_description",
+      "upgraderId": "enlighten.casiah.legendary-copycat",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Casiah",
       "upgraderType": "enlighten",
       "patch": {

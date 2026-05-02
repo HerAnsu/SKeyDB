@@ -22,11 +22,11 @@
   "ownerAwakenerId": "awakener-0018",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.elation",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.doll-inferno.borealis-visitor",
       "ownerAwakenerId": "awakener-0018",
+      "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.elation",
       "operation": "mixed",
+      "upgraderId": "enlighten.doll-inferno.borealis-visitor",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Doll: Inferno",
       "upgraderType": "enlighten",
       "patch": {

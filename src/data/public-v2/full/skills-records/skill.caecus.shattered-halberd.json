@@ -24,11 +24,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.caecus.bloodline-awaken.skill.caecus.shattered-halberd",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.caecus.bloodline-awaken",
       "ownerAwakenerId": "awakener-0006",
+      "id": "upgrade.enlighten.caecus.bloodline-awaken.skill.caecus.shattered-halberd",
       "operation": "mixed",
+      "upgraderId": "enlighten.caecus.bloodline-awaken",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Caecus",
       "upgraderType": "enlighten",
       "patch": {

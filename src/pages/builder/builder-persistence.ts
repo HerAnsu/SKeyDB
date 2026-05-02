@@ -1,14 +1,14 @@
+import {getCovenants} from '@/domain/covenants'
 import {
   AWAKENER_NAME_V1_TO_V2,
   COVENANT_ID_V1_TO_V2,
-  POSSE_ID_V1_TO_V2,
-  WHEEL_ID_V1_TO_V2,
   migrateAwakenerNameV1ToV2,
   migrateCovenantIdV1ToV2,
   migratePosseIdV1ToV2,
   migrateWheelIdV1ToV2,
+  POSSE_ID_V1_TO_V2,
+  WHEEL_ID_V1_TO_V2,
 } from '@/domain/persistence-id-migration.v2'
-import {getCovenants} from '@/domain/covenants'
 import {getPosses} from '@/domain/posses'
 import {
   safeStorageRead,
@@ -382,9 +382,13 @@ function normalizeDraft(payload: BuilderDraftPayload): BuilderDraftPayload | nul
 }
 
 function serializeSlotV2(slot: TeamSlot): PersistedBuilderSlotV2 | null {
-  const awakenerId = slot.awakenerName ? migrateBuilderAwakenerNameToV2(slot.awakenerName) : undefined
+  const awakenerId = slot.awakenerName
+    ? migrateBuilderAwakenerNameToV2(slot.awakenerName)
+    : undefined
   const wheels = slot.wheels.map((wheelId) =>
-    wheelId ? canonicalizePersistedId(wheelId, 'wheel', migrateWheelIdV1ToV2, WHEEL_ID_V2_TO_V1) : null,
+    wheelId
+      ? canonicalizePersistedId(wheelId, 'wheel', migrateWheelIdV1ToV2, WHEEL_ID_V2_TO_V1)
+      : null,
   ) as [string | null, string | null]
   const covenantId = slot.covenantId
     ? canonicalizePersistedId(

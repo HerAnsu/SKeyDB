@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.faint.binary-stars.skill.faint.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.faint.binary-stars",
       "ownerAwakenerId": "awakener-0016",
+      "id": "upgrade.enlighten.faint.binary-stars.skill.faint.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.faint.binary-stars",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Faint",
       "upgraderType": "enlighten",
       "patch": {

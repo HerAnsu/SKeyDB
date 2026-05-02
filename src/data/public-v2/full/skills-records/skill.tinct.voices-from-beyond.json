@@ -31,11 +31,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tinct.when-crimson-meets-thorns.skill.tinct.voices-from-beyond",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.tinct.when-crimson-meets-thorns",
       "ownerAwakenerId": "awakener-0049",
+      "id": "upgrade.enlighten.tinct.when-crimson-meets-thorns.skill.tinct.voices-from-beyond",
       "operation": "replace_description",
+      "upgraderId": "enlighten.tinct.when-crimson-meets-thorns",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Tinct",
       "upgraderType": "enlighten",
       "patch": {

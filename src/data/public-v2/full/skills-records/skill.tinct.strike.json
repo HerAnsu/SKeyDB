@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tinct.stellar-reverberation.skill.tinct.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.tinct.stellar-reverberation",
       "ownerAwakenerId": "awakener-0049",
+      "id": "upgrade.enlighten.tinct.stellar-reverberation.skill.tinct.strike",
       "operation": "replace_description",
+      "upgraderId": "enlighten.tinct.stellar-reverberation",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Tinct",
       "upgraderType": "enlighten",
       "patch": {

@@ -39,11 +39,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.lily.lilium-immaculatum.skill.lily.slime-convergence",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.lily.lilium-immaculatum",
       "ownerAwakenerId": "awakener-0029",
+      "id": "upgrade.enlighten.lily.lilium-immaculatum.skill.lily.slime-convergence",
       "operation": "replace_description",
+      "upgraderId": "enlighten.lily.lilium-immaculatum",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Lily",
       "upgraderType": "enlighten",
       "patch": {

@@ -16,6 +16,7 @@ const publicPossesLiteSchema = z
         realm: nonEmptyStringSchema,
       }),
     ),
+    metadata: z.record(z.string(), z.unknown()).optional(),
   })
   .strict()
   .refine((envelope) => envelope.recordCount === envelope.records.length, {

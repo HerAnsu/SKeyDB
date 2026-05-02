@@ -76,7 +76,7 @@ describe('awakener-enlightens', () => {
 
     expect(
       getAwakenerEnlightenById('enlighten.karen.creamy-frosting', enlightens)?.descriptionTemplate,
-    ).toBe('"The {Toad Stew}\'s {Poison} and HP Recovery effects +25%."')
+    ).toBe("The {Toad Stew}'s {Poison} and HP Recovery effects +25%.")
   })
 
   it('does not synthesize overlay upgrade patches onto aggregate enlightens', () => {

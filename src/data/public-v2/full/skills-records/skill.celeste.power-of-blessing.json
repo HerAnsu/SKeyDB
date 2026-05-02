@@ -39,11 +39,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.celeste.imaginary-cathuria.skill.celeste.power-of-blessing",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.celeste.imaginary-cathuria",
       "ownerAwakenerId": "awakener-0009",
+      "id": "upgrade.enlighten.celeste.imaginary-cathuria.skill.celeste.power-of-blessing",
       "operation": "mixed",
+      "upgraderId": "enlighten.celeste.imaginary-cathuria",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Celeste",
       "upgraderType": "enlighten",
       "patch": {

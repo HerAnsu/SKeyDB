@@ -596,7 +596,7 @@
       "ownerAwakenerId": "awakener-0014",
       "slot": "E3",
       "displayName": "Evernight's Revel",
-      "descriptionTemplate": "\"Evernight's Revel\" Base DMG further +300%. Each time played, this turn's subsequent\"Evernight's Revel\" enjoy an additional 100% {STR} bonus.",
+      "descriptionTemplate": "{Evernight's Revel} Base DMG further +300%. Each time played, this turn's subsequent {Evernight's Revel} enjoy an additional 100% {STR} bonus.",
       "descriptionArgs": {}
     },
     {
@@ -752,7 +752,7 @@
       "ownerAwakenerId": "awakener-0018",
       "slot": "E1",
       "displayName": "Borealis Visitor",
-      "descriptionTemplate": "\"{Self-Destruct} Transformation\" applies 1 turn of Vulnerable to all enemies when {Elation} is chosen, and applies 1 turn of Weakness to all enemies when \"Curse\" is chosen.",
+      "descriptionTemplate": "{Self-Destruct} Transformation applies 1 turn of Vulnerable to all enemies when {Elation} is chosen, and applies 1 turn of Weakness to all enemies when \"Curse\" is chosen.",
       "descriptionArgs": {}
     },
     {
@@ -1092,7 +1092,7 @@
       "ownerAwakenerId": "awakener-0026",
       "slot": "E2",
       "displayName": "Creamy Frosting",
-      "descriptionTemplate": "\"The {Toad Stew}'s {Poison} and HP Recovery effects +25%.\"",
+      "descriptionTemplate": "The {Toad Stew}'s {Poison} and HP Recovery effects +25%.",
       "descriptionArgs": {}
     },
     {
@@ -1364,7 +1364,7 @@
       "ownerAwakenerId": "awakener-0033",
       "slot": "E1",
       "displayName": "Mist Realm Traveler",
-      "descriptionTemplate": "For every 1% {Death Resistance} Mouchette and her equipped WoD & Covenant have, her Crit. Rate and Crit. DMG + 0.15%. Each time {Death Resistance} is triggered, the Crit. DMG provided by {Mist Realm Traveler} +100% for this battle.",
+      "descriptionTemplate": "For every 1% {Death Resistance} Mouchette and her equipped WoD & Covenant have, her Crit. Rate and Crit. DMG +0.15%. Each time {Death Resistance} is triggered, the Crit. DMG provided by {Mist Realm Traveler} +100% for this battle.",
       "descriptionArgs": {}
     },
     {
@@ -1833,7 +1833,7 @@
       "ownerAwakenerId": "awakener-0042",
       "slot": "E3",
       "displayName": "Precious Ties",
-      "descriptionTemplate": "After releasing the Posse, Ramona's Temporary Crit. Rate + 50%. {Mundus Decree} shuffles 1 \"Insight\" into the Draw Pile.",
+      "descriptionTemplate": "After releasing the Posse, Ramona's Temporary Crit. Rate +50%. {Mundus Decree} shuffles 1 \"Insight\" into the Draw Pile.",
       "descriptionArgs": {}
     },
     {
@@ -1917,7 +1917,7 @@
       "ownerAwakenerId": "awakener-0044",
       "slot": "E2",
       "displayName": "Book of Genesis",
-      "descriptionTemplate": "{Blessed are the Bones} {Embryo Fusion} +15%; the accumulated healing from the {Crimson Furnace} increases with the number of turns, increasing each turn by an amount equal to [Arg1]% of CON (increases with the level of {Blessed are the Bones}); {End of Suffering} Crit. Rate + 25%, and you obtain {Prepare 1}.",
+      "descriptionTemplate": "{Blessed are the Bones} {Embryo Fusion} +15%; the accumulated healing from the {Crimson Furnace} increases with the number of turns, increasing each turn by an amount equal to [Arg1]% of CON (increases with the level of {Blessed are the Bones}); {End of Suffering} Crit. Rate +25%, and you obtain {Prepare 1}.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "scaling",
@@ -2393,7 +2393,7 @@
       "ownerAwakenerId": "awakener-0054",
       "slot": "E2",
       "displayName": "Fan and Scythe",
-      "descriptionTemplate": "\"Strike\" and\" \"Defense\" gain {Resonance 3}: additionally gain 15 Aliemus.",
+      "descriptionTemplate": "\"Strike\" and \"Defense\" gain {Resonance 3}: additionally gain 15 Aliemus.",
       "descriptionArgs": {}
     },
     {

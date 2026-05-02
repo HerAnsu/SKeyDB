@@ -29,11 +29,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.kathigu-ra.endless-purgatory.skill.kathigu-ra.world-ending-inferno",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.kathigu-ra.endless-purgatory",
       "ownerAwakenerId": "awakener-0027",
+      "id": "upgrade.enlighten.kathigu-ra.endless-purgatory.skill.kathigu-ra.world-ending-inferno",
       "operation": "override_args",
+      "upgraderId": "enlighten.kathigu-ra.endless-purgatory",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Kathigu-Ra",
       "upgraderType": "enlighten",
       "patch": {

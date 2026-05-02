@@ -43,11 +43,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.leigh.basement-journal.skill.leigh.flatterers-embrace",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.leigh.basement-journal",
       "ownerAwakenerId": "awakener-0028",
+      "id": "upgrade.enlighten.leigh.basement-journal.skill.leigh.flatterers-embrace",
       "operation": "replace_description",
+      "upgraderId": "enlighten.leigh.basement-journal",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Leigh",
       "upgraderType": "enlighten",
       "patch": {
@@ -55,11 +55,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.leigh.insatiable-craving.skill.leigh.flatterers-embrace",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.leigh.insatiable-craving",
       "ownerAwakenerId": "awakener-0028",
+      "id": "upgrade.enlighten.leigh.insatiable-craving.skill.leigh.flatterers-embrace",
       "operation": "mixed",
+      "upgraderId": "enlighten.leigh.insatiable-craving",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Leigh",
       "upgraderType": "enlighten",
       "patch": {

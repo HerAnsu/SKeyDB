@@ -45,11 +45,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.karen.creamy-frosting.skill.karen.toad-stew",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.karen.creamy-frosting",
       "ownerAwakenerId": "awakener-0026",
+      "id": "upgrade.enlighten.karen.creamy-frosting.skill.karen.toad-stew",
       "operation": "override_args",
+      "upgraderId": "enlighten.karen.creamy-frosting",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Karen",
       "upgraderType": "enlighten",
       "patch": {

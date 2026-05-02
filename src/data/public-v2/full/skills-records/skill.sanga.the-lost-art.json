@@ -50,11 +50,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.sanga.artistic-dionysia.skill.sanga.the-lost-art",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.sanga.artistic-dionysia",
       "ownerAwakenerId": "awakener-0045",
+      "id": "upgrade.enlighten.sanga.artistic-dionysia.skill.sanga.the-lost-art",
       "operation": "override_args",
+      "upgraderId": "enlighten.sanga.artistic-dionysia",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Sanga",
       "upgraderType": "enlighten",
       "patch": {
@@ -103,8 +103,8 @@
     },
     {
       "id": "upgrade.talent.sanga.enlightenment-of-death.skill.sanga.the-lost-art",
-      "upgraderId": "talent.sanga.enlightenment-of-death",
       "operation": "link_only",
+      "upgraderId": "talent.sanga.enlightenment-of-death",
       "upgraderType": "talent",
       "patch": {}
     }

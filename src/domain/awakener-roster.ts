@@ -3,7 +3,7 @@ import publicAwakenersFull from '@/data/public-v2/full/awakeners.json'
 import {awakenerRosterDatasetSchema, type AwakenerRosterRecord} from './awakener-source-schema'
 
 interface PublicAwakenersEnvelope {
-  records: Array<{
+  records: {
     id: string
     numericId: number
     assets?: AwakenerRosterRecord['assets']
@@ -19,7 +19,7 @@ interface PublicAwakenersEnvelope {
     substatScaling: Partial<Record<keyof AwakenerRosterRecord['substatScaling'], number>>
     type?: string
     aliases?: string[]
-  }>
+  }[]
 }
 
 let awakenerRosterCache: AwakenerRosterRecord[] | null = null

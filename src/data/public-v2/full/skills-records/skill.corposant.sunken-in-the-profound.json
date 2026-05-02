@@ -44,11 +44,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.corposant.unquenched-unfelled-undimmed.skill.corposant.sunken-in-the-profound",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.corposant.unquenched-unfelled-undimmed",
       "ownerAwakenerId": "awakener-0011",
+      "id": "upgrade.enlighten.corposant.unquenched-unfelled-undimmed.skill.corposant.sunken-in-the-profound",
       "operation": "replace_description",
+      "upgraderId": "enlighten.corposant.unquenched-unfelled-undimmed",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Corposant",
       "upgraderType": "enlighten",
       "patch": {
@@ -57,8 +57,8 @@
     },
     {
       "id": "upgrade.talent.corposant.cinders.skill.corposant.sunken-in-the-profound",
-      "upgraderId": "talent.corposant.cinders",
       "operation": "link_only",
+      "upgraderId": "talent.corposant.cinders",
       "upgraderType": "talent",
       "patch": {}
     }

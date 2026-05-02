@@ -60,21 +60,45 @@ function runPrettier(targets, cwd) {
     prettierArgs.push('--log-level', 'silent')
   }
 
-  if (process.platform === 'win32') {
-    const quotedArgs = [...prettierArgs, ...targets]
-      .map((argument) => `"${argument.replaceAll('"', '\\"')}"`)
-      .join(' ')
-    execSync(`${getNpxCommand()} ${quotedArgs}`, {
-      cwd,
-      stdio: 'inherit',
-    })
-    return
+  for (const targetChunk of chunkTargets(targets)) {
+    if (process.platform === 'win32') {
+      const quotedArgs = [...prettierArgs, ...targetChunk]
+        .map((argument) => `"${argument.replaceAll('"', '\\"')}"`)
+        .join(' ')
+      execSync(`${getNpxCommand()} ${quotedArgs}`, {
+        cwd,
+        stdio: 'inherit',
+      })
+    } else {
+      execFileSync(getNpxCommand(), [...prettierArgs, ...targetChunk], {
+        cwd,
+        stdio: 'inherit',
+      })
+    }
+  }
+}
+
+function chunkTargets(targets) {
+  const chunks = []
+  let currentChunk = []
+  let currentLength = 0
+
+  for (const target of targets) {
+    const nextLength = currentLength + target.length + 1
+    if (currentChunk.length > 0 && nextLength > 2000) {
+      chunks.push(currentChunk)
+      currentChunk = []
+      currentLength = 0
+    }
+    currentChunk.push(target)
+    currentLength += target.length + 1
   }
 
-  execFileSync(getNpxCommand(), [...prettierArgs, ...targets], {
-    cwd,
-    stdio: 'inherit',
-  })
+  if (currentChunk.length > 0) {
+    chunks.push(currentChunk)
+  }
+
+  return chunks
 }
 
 function collectFileHashes(filePaths, cwd) {

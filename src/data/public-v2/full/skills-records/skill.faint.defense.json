@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.faint.withering-hymn.skill.faint.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.faint.withering-hymn",
       "ownerAwakenerId": "awakener-0016",
+      "id": "upgrade.enlighten.faint.withering-hymn.skill.faint.defense",
       "operation": "mixed",
+      "upgraderId": "enlighten.faint.withering-hymn",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Faint",
       "upgraderType": "enlighten",
       "patch": {

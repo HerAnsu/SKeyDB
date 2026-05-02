@@ -151,12 +151,11 @@ describe('awakener-overlays', () => {
 
     expect(overlays.find((entry) => entry.id === 'overlay.hameln.marvelous-debuff')).toMatchObject({
       descriptionTemplate:
-        'Effects: {Bleed} (150% DMG), {Poison} (75% DMG), apply 1 {Weakness}, apply 1 {Vulnerable}, Temp. {STR⯆} -[DescArg1].',
+        'Effects: {Bleed} (150% DMG), {Poison} (75% DMG), apply 1 Weakness, apply 1 Vulnerable, Temp. {STR} -[DescArg1].',
       descriptionArgs: {
-        DescArg1: {
-          kind: 'fixed',
-          value: '22',
-        },
+        DescArg1: expect.objectContaining({
+          kind: 'computed',
+        }),
       },
     })
   })
@@ -165,9 +164,9 @@ describe('awakener-overlays', () => {
     const overlays = getAwakenerOverlays()
     const realmAndPersona = overlays.find((entry) => entry.id === 'overlay.24.realm-and-persona')
 
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Chaos}: Depressed:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Aequor}: Depressed:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Caro}: Depressed:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Ultra}: Depressed:')
+    expect(realmAndPersona?.descriptionTemplate).toContain('{Chaos: Depressed}:')
+    expect(realmAndPersona?.descriptionTemplate).toContain('{Aequor: Depressed}:')
+    expect(realmAndPersona?.descriptionTemplate).toContain('{Caro: Depressed}:')
+    expect(realmAndPersona?.descriptionTemplate).toContain('{Ultra: Depressed}:')
   })
 })

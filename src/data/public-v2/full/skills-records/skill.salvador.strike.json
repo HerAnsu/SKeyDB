@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.salvador.divine-proxy.skill.salvador.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.salvador.divine-proxy",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.divine-proxy.skill.salvador.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.divine-proxy",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {
@@ -77,11 +77,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.salvador.rite-of-creation.skill.salvador.strike",
-      "upgraderSlot": "OverExalt",
-      "upgraderId": "enlighten.salvador.rite-of-creation",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.rite-of-creation.skill.salvador.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.rite-of-creation",
+      "upgraderSlot": "OverExalt",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {

@@ -38,11 +38,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.castor.sky-eclipsing-wings.derived.castor.onyx-plume",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.castor.sky-eclipsing-wings",
       "ownerAwakenerId": "awakener-0008",
+      "id": "upgrade.enlighten.castor.sky-eclipsing-wings.derived.castor.onyx-plume",
       "operation": "replace_description",
+      "upgraderId": "enlighten.castor.sky-eclipsing-wings",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Castor",
       "upgraderType": "enlighten",
       "patch": {

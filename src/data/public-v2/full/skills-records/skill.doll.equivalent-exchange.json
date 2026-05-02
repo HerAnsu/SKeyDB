@@ -48,11 +48,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doll.beyond-death.skill.doll.equivalent-exchange",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.doll.beyond-death",
       "ownerAwakenerId": "awakener-0013",
+      "id": "upgrade.enlighten.doll.beyond-death.skill.doll.equivalent-exchange",
       "operation": "mixed",
+      "upgraderId": "enlighten.doll.beyond-death",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Doll",
       "upgraderType": "enlighten",
       "patch": {

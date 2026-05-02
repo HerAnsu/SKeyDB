@@ -33,11 +33,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.corposant.willing-sacrifice.skill.corposant.to-sail-the-sundered-tides",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.corposant.willing-sacrifice",
       "ownerAwakenerId": "awakener-0011",
+      "id": "upgrade.enlighten.corposant.willing-sacrifice.skill.corposant.to-sail-the-sundered-tides",
       "operation": "mixed",
+      "upgraderId": "enlighten.corposant.willing-sacrifice",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Corposant",
       "upgraderType": "enlighten",
       "patch": {

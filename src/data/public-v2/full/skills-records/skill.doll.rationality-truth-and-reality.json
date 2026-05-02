@@ -35,11 +35,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doll.flesh-transcended.skill.doll.rationality-truth-and-reality",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.doll.flesh-transcended",
       "ownerAwakenerId": "awakener-0013",
+      "id": "upgrade.enlighten.doll.flesh-transcended.skill.doll.rationality-truth-and-reality",
       "operation": "mixed",
+      "upgraderId": "enlighten.doll.flesh-transcended",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Doll",
       "upgraderType": "enlighten",
       "patch": {
@@ -73,11 +73,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.doll.psyche-dissection.skill.doll.rationality-truth-and-reality",
-      "upgraderSlot": "OverExalt",
-      "upgraderId": "enlighten.doll.psyche-dissection",
       "ownerAwakenerId": "awakener-0013",
+      "id": "upgrade.enlighten.doll.psyche-dissection.skill.doll.rationality-truth-and-reality",
       "operation": "mixed",
+      "upgraderId": "enlighten.doll.psyche-dissection",
+      "upgraderSlot": "OverExalt",
       "ownerAwakenerName": "Doll",
       "upgraderType": "enlighten",
       "patch": {

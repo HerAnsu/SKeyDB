@@ -81,9 +81,7 @@ describe('public-formula-context', () => {
     expect(context).not.toHaveProperty('accountStageGrowth')
     expect(context).not.toHaveProperty('somaticResearchHpMultiplier')
     expect(context).not.toHaveProperty('occultResearchDepth')
-    expect(
-      evaluatePublicFormulaExpression({var: 'accountStageGrowth'}, context),
-    ).toStrictEqual({
+    expect(evaluatePublicFormulaExpression({var: 'accountStageGrowth'}, context)).toStrictEqual({
       resolved: false,
       value: null,
     })

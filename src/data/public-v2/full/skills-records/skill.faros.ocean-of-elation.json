@@ -46,11 +46,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.faros.jagged-shore.skill.faros.ocean-of-elation",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.faros.jagged-shore",
       "ownerAwakenerId": "awakener-0017",
+      "id": "upgrade.enlighten.faros.jagged-shore.skill.faros.ocean-of-elation",
       "operation": "override_args",
+      "upgraderId": "enlighten.faros.jagged-shore",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Faros",
       "upgraderType": "enlighten",
       "patch": {

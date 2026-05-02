@@ -41,8 +41,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.lily.surging-darkness.skill.lily.defense",
-      "upgraderId": "talent.lily.surging-darkness",
       "operation": "link_only",
+      "upgraderId": "talent.lily.surging-darkness",
       "upgraderType": "talent",
       "patch": {}
     }

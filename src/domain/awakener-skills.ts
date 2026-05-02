@@ -3,9 +3,9 @@ import publicSkillsFull from '@/data/public-v2/full/skills.json'
 import {awakenerSkillsDatasetSchema, type AwakenerSkillRecord} from './awakener-source-schema'
 
 interface PublicSkillsEnvelope {
-  records: Array<
-    Omit<AwakenerSkillRecord, 'ownerAwakenerId' | 'variants'> & {ownerAwakenerId: string}
-  >
+  records: (Omit<AwakenerSkillRecord, 'ownerAwakenerId' | 'variants'> & {
+    ownerAwakenerId: string
+  })[]
 }
 
 let awakenerSkillsCache: AwakenerSkillRecord[] | null = null

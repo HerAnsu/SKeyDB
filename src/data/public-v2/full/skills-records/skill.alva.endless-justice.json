@@ -24,11 +24,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.alva.all-for-justice.skill.alva.endless-justice",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.alva.all-for-justice",
       "ownerAwakenerId": "awakener-0004",
+      "id": "upgrade.enlighten.alva.all-for-justice.skill.alva.endless-justice",
       "operation": "replace_description",
+      "upgraderId": "enlighten.alva.all-for-justice",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Alva",
       "upgraderType": "enlighten",
       "patch": {
@@ -36,11 +36,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.alva.relentless-fighter.skill.alva.endless-justice",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.alva.relentless-fighter",
       "ownerAwakenerId": "awakener-0004",
+      "id": "upgrade.enlighten.alva.relentless-fighter.skill.alva.endless-justice",
       "operation": "replace_description",
+      "upgraderId": "enlighten.alva.relentless-fighter",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Alva",
       "upgraderType": "enlighten",
       "patch": {

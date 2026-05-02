@@ -39,11 +39,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.agrippa.covenant-of-no-return.skill.agrippa.path-of-the-lost",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.agrippa.covenant-of-no-return",
       "ownerAwakenerId": "awakener-0002",
+      "id": "upgrade.enlighten.agrippa.covenant-of-no-return.skill.agrippa.path-of-the-lost",
       "operation": "replace_description",
+      "upgraderId": "enlighten.agrippa.covenant-of-no-return",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Agrippa",
       "upgraderType": "enlighten",
       "patch": {

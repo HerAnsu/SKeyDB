@@ -4,8 +4,8 @@ import {getAwakeners} from './awakeners'
 import {
   clearCollectionOwnership,
   clearOwnedEntry,
-  COLLECTION_OWNERSHIP_LEGACY_KEY,
   COLLECTION_OWNERSHIP_KEY,
+  COLLECTION_OWNERSHIP_LEGACY_KEY,
   createDefaultCollectionOwnershipCatalog,
   createEmptyCollectionOwnershipState,
   getAwakenerLevel,

@@ -10,9 +10,9 @@ describe('resolveWheelMainstatValue', () => {
     expect(resolveWheelMainstatValue('SR:CRIT_RATE', 15)).toBe('14.4%')
   })
 
-  it('supports the special N keyflare regen ladder', () => {
+  it('supports the special N keyflare regen metadata', () => {
     expect(getWheelMainstatSeries('N:KEYFLARE_REGEN')).toBeDefined()
-    expect(resolveWheelMainstatValue('N:KEYFLARE_REGEN', 3)).toBe('1.8')
+    expect(resolveWheelMainstatValue('N:KEYFLARE_REGEN', 3)).toBe('5.4')
     expect(resolveWheelMainstatValue('N:KEYFLARE_REGEN', 15)).toBe('5.4')
   })
 })

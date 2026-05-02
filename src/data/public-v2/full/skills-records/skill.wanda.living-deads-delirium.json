@@ -39,11 +39,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.wanda.black-stone-decree.skill.wanda.living-deads-delirium",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.wanda.black-stone-decree",
       "ownerAwakenerId": "awakener-0052",
+      "id": "upgrade.enlighten.wanda.black-stone-decree.skill.wanda.living-deads-delirium",
       "operation": "replace_description",
+      "upgraderId": "enlighten.wanda.black-stone-decree",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Wanda",
       "upgraderType": "enlighten",
       "patch": {

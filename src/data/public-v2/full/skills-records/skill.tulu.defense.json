@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tulu.touch-of-revival.skill.tulu.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.tulu.touch-of-revival",
       "ownerAwakenerId": "awakener-0050",
+      "id": "upgrade.enlighten.tulu.touch-of-revival.skill.tulu.defense",
       "operation": "mixed",
+      "upgraderId": "enlighten.tulu.touch-of-revival",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Tulu",
       "upgraderType": "enlighten",
       "patch": {

@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.daffodil.infinite-passage.skill.daffodil.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.daffodil.infinite-passage",
       "ownerAwakenerId": "awakener-0012",
+      "id": "upgrade.enlighten.daffodil.infinite-passage.skill.daffodil.strike",
       "operation": "replace_description",
+      "upgraderId": "enlighten.daffodil.infinite-passage",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Daffodil",
       "upgraderType": "enlighten",
       "patch": {

@@ -37,11 +37,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.celeste.beyond-joy-and-sorrow.skill.celeste.undying-bird-of-paradise",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.celeste.beyond-joy-and-sorrow",
       "ownerAwakenerId": "awakener-0009",
+      "id": "upgrade.enlighten.celeste.beyond-joy-and-sorrow.skill.celeste.undying-bird-of-paradise",
       "operation": "mixed",
+      "upgraderId": "enlighten.celeste.beyond-joy-and-sorrow",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Celeste",
       "upgraderType": "enlighten",
       "patch": {

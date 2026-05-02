@@ -30,8 +30,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.faros.homesick.skill.faros.lost-city-of-lemuria",
-      "upgraderId": "talent.faros.homesick",
       "operation": "link_only",
+      "upgraderId": "talent.faros.homesick",
       "upgraderType": "talent",
       "patch": {}
     }

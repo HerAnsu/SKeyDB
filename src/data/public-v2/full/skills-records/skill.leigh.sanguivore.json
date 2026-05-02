@@ -38,11 +38,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.leigh.insatiable-craving.skill.leigh.sanguivore",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.leigh.insatiable-craving",
       "ownerAwakenerId": "awakener-0028",
+      "id": "upgrade.enlighten.leigh.insatiable-craving.skill.leigh.sanguivore",
       "operation": "mixed",
+      "upgraderId": "enlighten.leigh.insatiable-craving",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Leigh",
       "upgraderType": "enlighten",
       "patch": {

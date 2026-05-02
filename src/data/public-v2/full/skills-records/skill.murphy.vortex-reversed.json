@@ -52,20 +52,20 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.murphy.silent-defiance.skill.murphy.vortex-reversed",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.murphy.silent-defiance",
       "ownerAwakenerId": "awakener-0034",
+      "id": "upgrade.enlighten.murphy.silent-defiance.skill.murphy.vortex-reversed",
       "operation": "mixed",
+      "upgraderId": "enlighten.murphy.silent-defiance",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Murphy",
       "upgraderType": "enlighten",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, and deal an additional 1 instance of DMG for every 2 Tentacles, with the DMG enjoying [Arg4]% {Tentacle DMG} bonus. Apply {Weakness} and {Vulnerable} for [Arg2] {plural:[Arg2]|turn|turns}. Remove [Arg3]% {Sacrifice} stacks.",
         "cardKeywords": [
           {
             "id": "mechanic.retain"
           }
-        ],
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, and deal an additional 1 instance of DMG for every 2 Tentacles, with the DMG enjoying [Arg4]% {Tentacle DMG} bonus. Apply {Weakness} and {Vulnerable} for [Arg2] {plural:[Arg2]|turn|turns}. Remove [Arg3]% {Sacrifice} stacks."
+        ]
       }
     }
   ]

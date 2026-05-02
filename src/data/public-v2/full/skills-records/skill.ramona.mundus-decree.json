@@ -22,11 +22,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ramona.precious-ties.skill.ramona.mundus-decree",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.ramona.precious-ties",
       "ownerAwakenerId": "awakener-0042",
+      "id": "upgrade.enlighten.ramona.precious-ties.skill.ramona.mundus-decree",
       "operation": "replace_description",
+      "upgraderId": "enlighten.ramona.precious-ties",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Ramona",
       "upgraderType": "enlighten",
       "patch": {

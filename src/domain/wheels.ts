@@ -2,7 +2,7 @@ import {z} from 'zod'
 
 import publicWheelsLite from '@/data/public-v2/lite/wheels.json'
 
-import {WHEEL_MAINSTAT_KEYS, getMainstatByKey, type WheelMainstatKey} from './mainstats'
+import {getMainstatByKey, WHEEL_MAINSTAT_KEYS, type WheelMainstatKey} from './mainstats'
 
 export type WheelRarity = 'SSR' | 'SR' | 'R' | 'N'
 export type WheelRealm = 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA' | 'NEUTRAL'
@@ -29,6 +29,7 @@ const publicWheelsLiteSchema = z
         mainstatKey: z.enum(WHEEL_MAINSTAT_KEYS),
       }),
     ),
+    metadata: z.record(z.string(), z.unknown()).optional(),
   })
   .strict()
   .refine((envelope) => envelope.recordCount === envelope.records.length, {

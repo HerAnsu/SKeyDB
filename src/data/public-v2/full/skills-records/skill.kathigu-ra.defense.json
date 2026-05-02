@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.kathigu-ra.everburning-flame.skill.kathigu-ra.defense",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.kathigu-ra.everburning-flame",
       "ownerAwakenerId": "awakener-0027",
+      "id": "upgrade.enlighten.kathigu-ra.everburning-flame.skill.kathigu-ra.defense",
       "operation": "override_args",
+      "upgraderId": "enlighten.kathigu-ra.everburning-flame",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Kathigu-Ra",
       "upgraderType": "enlighten",
       "patch": {

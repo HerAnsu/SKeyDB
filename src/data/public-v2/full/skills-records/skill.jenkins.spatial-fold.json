@@ -36,11 +36,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.jenkins.from-the-shrouded-mist.skill.jenkins.spatial-fold",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.jenkins.from-the-shrouded-mist",
       "ownerAwakenerId": "awakener-0025",
+      "id": "upgrade.enlighten.jenkins.from-the-shrouded-mist.skill.jenkins.spatial-fold",
       "operation": "replace_description",
+      "upgraderId": "enlighten.jenkins.from-the-shrouded-mist",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Jenkin",
       "upgraderType": "enlighten",
       "patch": {

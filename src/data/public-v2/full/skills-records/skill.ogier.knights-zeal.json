@@ -52,11 +52,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ogier.deathless-loyalty.skill.ogier.knights-zeal",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.ogier.deathless-loyalty",
       "ownerAwakenerId": "awakener-0038",
+      "id": "upgrade.enlighten.ogier.deathless-loyalty.skill.ogier.knights-zeal",
       "operation": "replace_description",
+      "upgraderId": "enlighten.ogier.deathless-loyalty",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Ogier",
       "upgraderType": "enlighten",
       "patch": {

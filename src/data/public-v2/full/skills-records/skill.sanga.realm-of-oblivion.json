@@ -44,11 +44,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.sanga.oblivion-takes-all.skill.sanga.realm-of-oblivion",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.sanga.oblivion-takes-all",
       "ownerAwakenerId": "awakener-0045",
+      "id": "upgrade.enlighten.sanga.oblivion-takes-all.skill.sanga.realm-of-oblivion",
       "operation": "replace_description",
+      "upgraderId": "enlighten.sanga.oblivion-takes-all",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Sanga",
       "upgraderType": "enlighten",
       "patch": {

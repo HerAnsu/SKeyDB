@@ -82,11 +82,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.murphy-fauxborn.kneelers-supplication.skill.murphy-fauxborn.waltz-of-lemuria",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.murphy-fauxborn.kneelers-supplication",
       "ownerAwakenerId": "awakener-0035",
+      "id": "upgrade.enlighten.murphy-fauxborn.kneelers-supplication.skill.murphy-fauxborn.waltz-of-lemuria",
       "operation": "override_args",
+      "upgraderId": "enlighten.murphy-fauxborn.kneelers-supplication",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Murphy: Fauxborn",
       "upgraderType": "enlighten",
       "patch": {

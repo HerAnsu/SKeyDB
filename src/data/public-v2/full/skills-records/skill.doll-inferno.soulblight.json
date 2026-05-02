@@ -51,11 +51,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doll-inferno.every-world-drowned.skill.doll-inferno.soulblight",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.doll-inferno.every-world-drowned",
       "ownerAwakenerId": "awakener-0018",
+      "id": "upgrade.enlighten.doll-inferno.every-world-drowned.skill.doll-inferno.soulblight",
       "operation": "replace_description",
+      "upgraderId": "enlighten.doll-inferno.every-world-drowned",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Doll: Inferno",
       "upgraderType": "enlighten",
       "patch": {

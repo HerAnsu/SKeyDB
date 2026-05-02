@@ -2,11 +2,11 @@ import {getAwakenerIdentityKey} from './awakener-identity'
 import {getAwakeners} from './awakeners'
 import {
   AWAKENER_ID_V1_TO_V2,
-  POSSE_ID_V1_TO_V2,
-  WHEEL_ID_V1_TO_V2,
   migrateAwakenerIdV1ToV2,
   migratePosseIdV1ToV2,
   migrateWheelIdV1ToV2,
+  POSSE_ID_V1_TO_V2,
+  WHEEL_ID_V1_TO_V2,
 } from './persistence-id-migration.v2'
 import {getPosses} from './posses'
 import {safeStorageRead, safeStorageRemove, safeStorageWrite, type StorageLike} from './storage'
@@ -370,16 +370,8 @@ function canonicalizeOwnedMap(
 function canonicalizeOwnershipState(state: CollectionOwnershipState): CollectionOwnershipState {
   return {
     ...state,
-    ownedAwakeners: canonicalizeOwnedMap(
-      state.ownedAwakeners,
-      migrateAwakenerIdV1ToV2,
-      'awakener',
-    ),
-    awakenerLevels: canonicalizeOwnedMap(
-      state.awakenerLevels,
-      migrateAwakenerIdV1ToV2,
-      'awakener',
-    ),
+    ownedAwakeners: canonicalizeOwnedMap(state.ownedAwakeners, migrateAwakenerIdV1ToV2, 'awakener'),
+    awakenerLevels: canonicalizeOwnedMap(state.awakenerLevels, migrateAwakenerIdV1ToV2, 'awakener'),
     ownedWheels: canonicalizeOwnedMap(state.ownedWheels, migrateWheelIdV1ToV2, 'wheel'),
     ownedPosses: canonicalizeOwnedMap(state.ownedPosses, migratePosseIdV1ToV2, 'posse'),
   }

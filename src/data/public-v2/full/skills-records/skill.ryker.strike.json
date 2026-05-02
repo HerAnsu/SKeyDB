@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ryker.certain-gain.skill.ryker.strike",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.ryker.certain-gain",
       "ownerAwakenerId": "awakener-0043",
+      "id": "upgrade.enlighten.ryker.certain-gain.skill.ryker.strike",
       "operation": "replace_description",
+      "upgraderId": "enlighten.ryker.certain-gain",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Ryker",
       "upgraderType": "enlighten",
       "patch": {

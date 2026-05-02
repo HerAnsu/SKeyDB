@@ -49,8 +49,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.ramona-timeworn.silverheart-resonance.skill.ramona-timeworn.strike",
-      "upgraderId": "talent.ramona-timeworn.silverheart-resonance",
       "operation": "link_only",
+      "upgraderId": "talent.ramona-timeworn.silverheart-resonance",
       "upgraderType": "talent",
       "patch": {}
     }

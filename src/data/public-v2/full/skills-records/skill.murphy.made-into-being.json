@@ -26,11 +26,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.murphy.defiant-providence.skill.murphy.made-into-being",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.murphy.defiant-providence",
       "ownerAwakenerId": "awakener-0034",
+      "id": "upgrade.enlighten.murphy.defiant-providence.skill.murphy.made-into-being",
       "operation": "replace_description",
+      "upgraderId": "enlighten.murphy.defiant-providence",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Murphy",
       "upgraderType": "enlighten",
       "patch": {

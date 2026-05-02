@@ -28,11 +28,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.24.restraint-bonds.skill.24.symbiotic-aberration",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.24.restraint-bonds",
       "ownerAwakenerId": "awakener-0001",
+      "id": "upgrade.enlighten.24.restraint-bonds.skill.24.symbiotic-aberration",
       "operation": "mixed",
+      "upgraderId": "enlighten.24.restraint-bonds",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "\"24\"",
       "upgraderType": "enlighten",
       "patch": {

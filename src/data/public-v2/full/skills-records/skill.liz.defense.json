@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.liz.eternal-flames.skill.liz.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.liz.eternal-flames",
       "ownerAwakenerId": "awakener-0030",
+      "id": "upgrade.enlighten.liz.eternal-flames.skill.liz.defense",
       "operation": "mixed",
+      "upgraderId": "enlighten.liz.eternal-flames",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Liz",
       "upgraderType": "enlighten",
       "patch": {

@@ -43,11 +43,11 @@
       "cost": "0",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.castor.sky-eclipsing-wings.derived.castor.onyx-plume",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.castor.sky-eclipsing-wings",
           "ownerAwakenerId": "awakener-0008",
+          "id": "upgrade.enlighten.castor.sky-eclipsing-wings.derived.castor.onyx-plume",
           "operation": "replace_description",
+          "upgraderId": "enlighten.castor.sky-eclipsing-wings",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Castor",
           "upgraderType": "enlighten",
           "patch": {
@@ -110,11 +110,11 @@
       "cost": "0",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.corposant.sextants-calculation.derived.corposant.pilot",
-          "upgraderSlot": "E2",
-          "upgraderId": "enlighten.corposant.sextants-calculation",
           "ownerAwakenerId": "awakener-0011",
+          "id": "upgrade.enlighten.corposant.sextants-calculation.derived.corposant.pilot",
           "operation": "override_args",
+          "upgraderId": "enlighten.corposant.sextants-calculation",
+          "upgraderSlot": "E2",
           "ownerAwakenerName": "Corposant",
           "upgraderType": "enlighten",
           "patch": {
@@ -141,8 +141,8 @@
         },
         {
           "id": "upgrade.talent.corposant.cinders.derived.corposant.pilot",
-          "upgraderId": "talent.corposant.cinders",
           "operation": "link_only",
+          "upgraderId": "talent.corposant.cinders",
           "upgraderType": "talent",
           "patch": {}
         }
@@ -151,7 +151,7 @@
     {
       "id": "derived.daffodil.thousand-mirage",
       "displayName": "Thousand Mirage",
-      "descriptionTemplate": "Synthetic group wrapper for Thousand Mirage customization. Browse base cards and potential extra-effect choices separately.",
+      "descriptionTemplate": "Synthetic group wrapper for {Thousand Mirage} customization. Browse base cards and potential extra-effect choices separately.",
       "descriptionArgs": {},
       "cardKeywords": [],
       "derivedFromId": "skill.daffodil.sea-of-primordial-essence",
@@ -798,11 +798,11 @@
       "cost": "0",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.doresain.evernights-revel.derived.doresain.evernights-revel",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.doresain.evernights-revel",
           "ownerAwakenerId": "awakener-0014",
+          "id": "upgrade.enlighten.doresain.evernights-revel.derived.doresain.evernights-revel",
           "operation": "mixed",
+          "upgraderId": "enlighten.doresain.evernights-revel",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Doresain",
           "upgraderType": "enlighten",
           "patch": {
@@ -814,7 +814,7 @@
                 "stat": "ATK"
               }
             },
-            "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies. After playing, subsequent \"Evernight's Revel\" played this turn enjoys an additional 100% {STR} bonus."
+            "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies. After playing, subsequent {Evernight's Revel} played this turn enjoys an additional 100% {STR} bonus."
           }
         }
       ]
@@ -845,11 +845,11 @@
       "cost": "0",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.erica.auto-rectification.derived.erica.retract-mecha",
-          "upgraderSlot": "E1",
-          "upgraderId": "enlighten.erica.auto-rectification",
           "ownerAwakenerId": "awakener-0015",
+          "id": "upgrade.enlighten.erica.auto-rectification.derived.erica.retract-mecha",
           "operation": "replace_description",
+          "upgraderId": "enlighten.erica.auto-rectification",
+          "upgraderSlot": "E1",
           "ownerAwakenerName": "Erica",
           "upgraderType": "enlighten",
           "patch": {
@@ -883,11 +883,11 @@
       "ownerAwakenerId": "awakener-0018",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.curse",
-          "upgraderSlot": "E1",
-          "upgraderId": "enlighten.doll-inferno.borealis-visitor",
           "ownerAwakenerId": "awakener-0018",
+          "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.curse",
           "operation": "mixed",
+          "upgraderId": "enlighten.doll-inferno.borealis-visitor",
+          "upgraderSlot": "E1",
           "ownerAwakenerName": "Doll: Inferno",
           "upgraderType": "enlighten",
           "patch": {
@@ -939,11 +939,11 @@
       "ownerAwakenerId": "awakener-0018",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.elation",
-          "upgraderSlot": "E1",
-          "upgraderId": "enlighten.doll-inferno.borealis-visitor",
           "ownerAwakenerId": "awakener-0018",
+          "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.elation",
           "operation": "mixed",
+          "upgraderId": "enlighten.doll-inferno.borealis-visitor",
+          "upgraderSlot": "E1",
           "ownerAwakenerName": "Doll: Inferno",
           "upgraderType": "enlighten",
           "patch": {
@@ -1007,11 +1007,11 @@
       "cost": "3",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.doll-inferno.resonant-mycelium.derived.doll-inferno.fates-descent-finale",
-          "upgraderSlot": "E2",
-          "upgraderId": "enlighten.doll-inferno.resonant-mycelium",
           "ownerAwakenerId": "awakener-0018",
+          "id": "upgrade.enlighten.doll-inferno.resonant-mycelium.derived.doll-inferno.fates-descent-finale",
           "operation": "override_args",
+          "upgraderId": "enlighten.doll-inferno.resonant-mycelium",
+          "upgraderSlot": "E2",
           "ownerAwakenerName": "Doll: Inferno",
           "upgraderType": "enlighten",
           "patch": {
@@ -1074,11 +1074,11 @@
       "cost": "0",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.derived.doll-inferno.illusions-end",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
           "ownerAwakenerId": "awakener-0018",
+          "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.derived.doll-inferno.illusions-end",
           "operation": "replace_description",
+          "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Doll: Inferno",
           "upgraderType": "enlighten",
           "patch": {
@@ -1132,11 +1132,11 @@
       "cost": "4",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.helot-catena.vengeance-unchained.derived.helot-catena.bloodthirsty-flail",
-          "upgraderSlot": "E2",
-          "upgraderId": "enlighten.helot-catena.vengeance-unchained",
           "ownerAwakenerId": "awakener-0019",
+          "id": "upgrade.enlighten.helot-catena.vengeance-unchained.derived.helot-catena.bloodthirsty-flail",
           "operation": "override_card_keywords",
+          "upgraderId": "enlighten.helot-catena.vengeance-unchained",
+          "upgraderSlot": "E2",
           "ownerAwakenerName": "Helot: Catena",
           "upgraderType": "enlighten",
           "patch": {
@@ -1247,11 +1247,11 @@
       "ownerAwakenerId": "awakener-0021",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.dormancy",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.goliath.boundless-ambition",
           "ownerAwakenerId": "awakener-0021",
+          "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.dormancy",
           "operation": "mixed",
+          "upgraderId": "enlighten.goliath.boundless-ambition",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Goliath",
           "upgraderType": "enlighten",
           "patch": {
@@ -1295,11 +1295,11 @@
       "ownerAwakenerId": "awakener-0021",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.usurp",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.goliath.boundless-ambition",
           "ownerAwakenerId": "awakener-0021",
+          "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.usurp",
           "operation": "mixed",
+          "upgraderId": "enlighten.goliath.boundless-ambition",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Goliath",
           "upgraderType": "enlighten",
           "patch": {
@@ -1507,11 +1507,11 @@
       "cost": "X",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.kathigu-ra.endless-purgatory.derived.kathigu-ra.hyperflare",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.kathigu-ra.endless-purgatory",
           "ownerAwakenerId": "awakener-0027",
+          "id": "upgrade.enlighten.kathigu-ra.endless-purgatory.derived.kathigu-ra.hyperflare",
           "operation": "override_args",
+          "upgraderId": "enlighten.kathigu-ra.endless-purgatory",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Kathigu-Ra",
           "upgraderType": "enlighten",
           "patch": {
@@ -1577,11 +1577,11 @@
       "cost": "2",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.liz.verdant-spark.derived.liz.corrupted-flames",
-          "upgraderSlot": "E1",
-          "upgraderId": "enlighten.liz.verdant-spark",
           "ownerAwakenerId": "awakener-0030",
+          "id": "upgrade.enlighten.liz.verdant-spark.derived.liz.corrupted-flames",
           "operation": "replace_description",
+          "upgraderId": "enlighten.liz.verdant-spark",
+          "upgraderSlot": "E1",
           "ownerAwakenerName": "Liz",
           "upgraderType": "enlighten",
           "patch": {
@@ -1940,11 +1940,11 @@
       "cost": "1",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.pollux.divine-revelation.derived.pollux.sacred-heart",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.pollux.divine-revelation",
           "ownerAwakenerId": "awakener-0041",
+          "id": "upgrade.enlighten.pollux.divine-revelation.derived.pollux.sacred-heart",
           "operation": "replace_description",
+          "upgraderId": "enlighten.pollux.divine-revelation",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Pollux",
           "upgraderType": "enlighten",
           "patch": {
@@ -1952,11 +1952,11 @@
           }
         },
         {
-          "id": "upgrade.enlighten.pollux.lux-diouskouron.derived.pollux.sacred-heart",
-          "upgraderSlot": "AbsoluteAxiom",
-          "upgraderId": "enlighten.pollux.lux-diouskouron",
           "ownerAwakenerId": "awakener-0041",
+          "id": "upgrade.enlighten.pollux.lux-diouskouron.derived.pollux.sacred-heart",
           "operation": "replace_description",
+          "upgraderId": "enlighten.pollux.lux-diouskouron",
+          "upgraderSlot": "AbsoluteAxiom",
           "ownerAwakenerName": "Pollux",
           "upgraderType": "enlighten",
           "patch": {
@@ -2292,11 +2292,11 @@
       "ownerAwakenerId": "awakener-0048",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-coition",
-          "upgraderSlot": "E1",
-          "upgraderId": "enlighten.thais.forests-embrace",
           "ownerAwakenerId": "awakener-0048",
+          "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-coition",
           "operation": "override_args",
+          "upgraderId": "enlighten.thais.forests-embrace",
+          "upgraderSlot": "E1",
           "ownerAwakenerName": "Thais",
           "upgraderType": "enlighten",
           "patch": {
@@ -2327,11 +2327,11 @@
       "ownerAwakenerId": "awakener-0048",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-decay",
-          "upgraderSlot": "E1",
-          "upgraderId": "enlighten.thais.forests-embrace",
           "ownerAwakenerId": "awakener-0048",
+          "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-decay",
           "operation": "override_args",
+          "upgraderId": "enlighten.thais.forests-embrace",
+          "upgraderSlot": "E1",
           "ownerAwakenerName": "Thais",
           "upgraderType": "enlighten",
           "patch": {
@@ -2361,11 +2361,11 @@
       "ownerAwakenerId": "awakener-0048",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-fear",
-          "upgraderSlot": "E1",
-          "upgraderId": "enlighten.thais.forests-embrace",
           "ownerAwakenerId": "awakener-0048",
+          "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-fear",
           "operation": "override_args",
+          "upgraderId": "enlighten.thais.forests-embrace",
+          "upgraderSlot": "E1",
           "ownerAwakenerName": "Thais",
           "upgraderType": "enlighten",
           "patch": {
@@ -2473,11 +2473,11 @@
       "ownerAwakenerId": "awakener-0054",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.xu.nirvanas-kiss.derived.xu.betroth",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.xu.nirvanas-kiss",
           "ownerAwakenerId": "awakener-0054",
+          "id": "upgrade.enlighten.xu.nirvanas-kiss.derived.xu.betroth",
           "operation": "replace_description",
+          "upgraderId": "enlighten.xu.nirvanas-kiss",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Xu",
           "upgraderType": "enlighten",
           "patch": {
@@ -2514,11 +2514,11 @@
       "ownerAwakenerId": "awakener-0054",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.xu.nirvanas-kiss.derived.xu.enthrall",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.xu.nirvanas-kiss",
           "ownerAwakenerId": "awakener-0054",
+          "id": "upgrade.enlighten.xu.nirvanas-kiss.derived.xu.enthrall",
           "operation": "replace_description",
+          "upgraderId": "enlighten.xu.nirvanas-kiss",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Xu",
           "upgraderType": "enlighten",
           "patch": {
@@ -2566,11 +2566,11 @@
       "cost": "0",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.vortice.endless-tide.derived.vortice.vortex-shell",
-          "upgraderSlot": "E1",
-          "upgraderId": "enlighten.vortice.endless-tide",
           "ownerAwakenerId": "awakener-0055",
+          "id": "upgrade.enlighten.vortice.endless-tide.derived.vortice.vortex-shell",
           "operation": "mixed",
+          "upgraderId": "enlighten.vortice.endless-tide",
+          "upgraderSlot": "E1",
           "ownerAwakenerName": "Vortice",
           "upgraderType": "enlighten",
           "patch": {
@@ -2663,11 +2663,11 @@
       "cost": "0",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.derived.arachne.infinite-threads",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
           "ownerAwakenerId": "awakener-0056",
+          "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.derived.arachne.infinite-threads",
           "operation": "replace_description",
+          "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Arachne",
           "upgraderType": "enlighten",
           "patch": {

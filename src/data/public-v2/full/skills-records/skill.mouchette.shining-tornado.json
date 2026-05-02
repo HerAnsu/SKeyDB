@@ -37,11 +37,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.mouchette.cleave-out-a-future.skill.mouchette.shining-tornado",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.mouchette.cleave-out-a-future",
       "ownerAwakenerId": "awakener-0033",
+      "id": "upgrade.enlighten.mouchette.cleave-out-a-future.skill.mouchette.shining-tornado",
       "operation": "replace_description",
+      "upgraderId": "enlighten.mouchette.cleave-out-a-future",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Mouchette",
       "upgraderType": "enlighten",
       "patch": {

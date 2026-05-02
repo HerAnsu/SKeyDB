@@ -44,11 +44,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.castor.nox-diouskouron.skill.castor.skybound-oath",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.castor.nox-diouskouron",
       "ownerAwakenerId": "awakener-0008",
+      "id": "upgrade.enlighten.castor.nox-diouskouron.skill.castor.skybound-oath",
       "operation": "replace_description",
+      "upgraderId": "enlighten.castor.nox-diouskouron",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Castor",
       "upgraderType": "enlighten",
       "patch": {
@@ -57,8 +57,8 @@
     },
     {
       "id": "upgrade.talent.castor.cleansing-feathers.skill.castor.skybound-oath",
-      "upgraderId": "talent.castor.cleansing-feathers",
       "operation": "link_only",
+      "upgraderId": "talent.castor.cleansing-feathers",
       "upgraderType": "talent",
       "patch": {}
     }

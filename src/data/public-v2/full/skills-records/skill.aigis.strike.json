@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.aigis.the-witness.skill.aigis.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.aigis.the-witness",
       "ownerAwakenerId": "awakener-0003",
+      "id": "upgrade.enlighten.aigis.the-witness.skill.aigis.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.aigis.the-witness",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Aigis",
       "upgraderType": "enlighten",
       "patch": {

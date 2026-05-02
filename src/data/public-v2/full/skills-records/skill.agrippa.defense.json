@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.agrippa.ashes-and-skulls.skill.agrippa.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.agrippa.ashes-and-skulls",
       "ownerAwakenerId": "awakener-0002",
+      "id": "upgrade.enlighten.agrippa.ashes-and-skulls.skill.agrippa.defense",
       "operation": "mixed",
+      "upgraderId": "enlighten.agrippa.ashes-and-skulls",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Agrippa",
       "upgraderType": "enlighten",
       "patch": {

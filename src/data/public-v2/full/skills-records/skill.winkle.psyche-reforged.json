@@ -24,11 +24,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.winkle.forsaken-homeland.skill.winkle.psyche-reforged",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.winkle.forsaken-homeland",
       "ownerAwakenerId": "awakener-0053",
+      "id": "upgrade.enlighten.winkle.forsaken-homeland.skill.winkle.psyche-reforged",
       "operation": "mixed",
+      "upgraderId": "enlighten.winkle.forsaken-homeland",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Winkle",
       "upgraderType": "enlighten",
       "patch": {

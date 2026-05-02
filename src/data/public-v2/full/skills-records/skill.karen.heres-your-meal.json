@@ -37,11 +37,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.karen.fermented-recipes.skill.karen.heres-your-meal",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.karen.fermented-recipes",
       "ownerAwakenerId": "awakener-0026",
+      "id": "upgrade.enlighten.karen.fermented-recipes.skill.karen.heres-your-meal",
       "operation": "replace_description",
+      "upgraderId": "enlighten.karen.fermented-recipes",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Karen",
       "upgraderType": "enlighten",
       "patch": {

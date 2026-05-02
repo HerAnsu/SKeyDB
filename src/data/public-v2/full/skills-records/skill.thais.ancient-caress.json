@@ -35,11 +35,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.thais.forests-embrace.skill.thais.ancient-caress",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.thais.forests-embrace",
       "ownerAwakenerId": "awakener-0048",
+      "id": "upgrade.enlighten.thais.forests-embrace.skill.thais.ancient-caress",
       "operation": "override_args",
+      "upgraderId": "enlighten.thais.forests-embrace",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Thais",
       "upgraderType": "enlighten",
       "patch": {

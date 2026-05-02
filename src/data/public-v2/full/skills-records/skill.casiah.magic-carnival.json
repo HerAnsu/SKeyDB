@@ -37,11 +37,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.casiah.veil-of-illusion.skill.casiah.magic-carnival",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.casiah.veil-of-illusion",
       "ownerAwakenerId": "awakener-0007",
+      "id": "upgrade.enlighten.casiah.veil-of-illusion.skill.casiah.magic-carnival",
       "operation": "mixed",
+      "upgraderId": "enlighten.casiah.veil-of-illusion",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Casiah",
       "upgraderType": "enlighten",
       "patch": {

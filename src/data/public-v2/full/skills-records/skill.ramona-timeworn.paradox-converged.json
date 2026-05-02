@@ -22,11 +22,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ramona-timeworn.mobius-captive.skill.ramona-timeworn.paradox-converged",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.ramona-timeworn.mobius-captive",
       "ownerAwakenerId": "awakener-0020",
+      "id": "upgrade.enlighten.ramona-timeworn.mobius-captive.skill.ramona-timeworn.paradox-converged",
       "operation": "replace_description",
+      "upgraderId": "enlighten.ramona-timeworn.mobius-captive",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Ramona: Timeworn",
       "upgraderType": "enlighten",
       "patch": {

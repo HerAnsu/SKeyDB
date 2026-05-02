@@ -39,11 +39,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.benediction",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.salvador.bitter-eucharist",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.benediction",
       "operation": "replace_description",
+      "upgraderId": "enlighten.salvador.bitter-eucharist",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {

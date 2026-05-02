@@ -30,11 +30,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.lotan.primal-leviathan.skill.lotan.battle-thirst",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.lotan.primal-leviathan",
       "ownerAwakenerId": "awakener-0031",
+      "id": "upgrade.enlighten.lotan.primal-leviathan.skill.lotan.battle-thirst",
       "operation": "replace_description",
+      "upgraderId": "enlighten.lotan.primal-leviathan",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Lotan",
       "upgraderType": "enlighten",
       "patch": {

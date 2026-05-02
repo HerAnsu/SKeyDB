@@ -37,11 +37,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.lotan.surging-warlust.skill.lotan.tides-of-hubris",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.lotan.surging-warlust",
       "ownerAwakenerId": "awakener-0031",
+      "id": "upgrade.enlighten.lotan.surging-warlust.skill.lotan.tides-of-hubris",
       "operation": "mixed",
+      "upgraderId": "enlighten.lotan.surging-warlust",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Lotan",
       "upgraderType": "enlighten",
       "patch": {

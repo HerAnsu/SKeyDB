@@ -38,11 +38,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.xu.enmity-of-the-heart.skill.xu.bonesick-longing",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.xu.enmity-of-the-heart",
       "ownerAwakenerId": "awakener-0054",
+      "id": "upgrade.enlighten.xu.enmity-of-the-heart.skill.xu.bonesick-longing",
       "operation": "mixed",
+      "upgraderId": "enlighten.xu.enmity-of-the-heart",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Xu",
       "upgraderType": "enlighten",
       "patch": {

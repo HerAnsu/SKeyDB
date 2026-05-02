@@ -28,11 +28,11 @@
   "cost": "X",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ogier.sacrifice-for-justice.skill.ogier.unstable-barrier",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.ogier.sacrifice-for-justice",
       "ownerAwakenerId": "awakener-0038",
+      "id": "upgrade.enlighten.ogier.sacrifice-for-justice.skill.ogier.unstable-barrier",
       "operation": "mixed",
+      "upgraderId": "enlighten.ogier.sacrifice-for-justice",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Ogier",
       "upgraderType": "enlighten",
       "patch": {

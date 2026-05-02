@@ -14,11 +14,11 @@
   "ownerAwakenerId": "awakener-0021",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.dormancy",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.goliath.boundless-ambition",
       "ownerAwakenerId": "awakener-0021",
+      "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.dormancy",
       "operation": "mixed",
+      "upgraderId": "enlighten.goliath.boundless-ambition",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Goliath",
       "upgraderType": "enlighten",
       "patch": {

@@ -13,7 +13,7 @@ interface PublicOwnedRecord {
 }
 
 interface PublicAwakenerEnvelope {
-  records: Array<{id: string; numericId: number}>
+  records: {id: string; numericId: number}[]
 }
 
 interface PublicOwnedEnvelope {
@@ -45,6 +45,14 @@ function adaptPublicAwakenerToKit(record: {id: string; numericId: number}): Awak
   const ownerTalents = talents.filter((entry) => entry.ownerAwakenerId === record.id)
   const passiveTalents = ownerTalents.filter((entry) => entry.family === 'passive')
 
+  const overExaltCardId = optionalOwnedRecord(skills, 'OverExalt', record.id)
+  const absoluteAxiomId = optionalOwnedRecord(enlightens, 'AbsoluteAxiom', record.id)
+  const overExaltEnlightenId = optionalOwnedRecord(enlightens, 'OverExalt', record.id)
+  const firstPassiveTalentId = passiveTalents[0]?.id
+  const madnessOmenTalentId = ownerTalents.find((entry) => entry.family === 'madness_omen')?.id
+  const soulforgeTalentId = ownerTalents.find((entry) => entry.family === 'soulforge_aptitude')?.id
+  const secondPassiveTalentId = passiveTalents[1]?.id
+
   return {
     awakenerId: record.numericId,
     cards: {
@@ -54,22 +62,22 @@ function adaptPublicAwakenerToKit(record: {id: string; numericId: number}): Awak
       C4: requireOwnedRecord(skills, 'Skill1', record.id),
       C5: requireOwnedRecord(skills, 'Skill2', record.id),
       Exalt: requireOwnedRecord(skills, 'Exalt', record.id),
-      OverExalt: optionalOwnedRecord(skills, 'OverExalt', record.id),
+      ...(overExaltCardId ? {OverExalt: overExaltCardId} : {}),
       promotedExtras: [],
     },
     talents: {
-      T1: passiveTalents[0]?.id,
-      T2: ownerTalents.find((entry) => entry.family === 'madness_omen')?.id,
-      T3: ownerTalents.find((entry) => entry.family === 'soulforge_aptitude')?.id,
-      T4: passiveTalents[1]?.id,
+      ...(firstPassiveTalentId ? {T1: firstPassiveTalentId} : {}),
+      ...(madnessOmenTalentId ? {T2: madnessOmenTalentId} : {}),
+      ...(soulforgeTalentId ? {T3: soulforgeTalentId} : {}),
+      ...(secondPassiveTalentId ? {T4: secondPassiveTalentId} : {}),
       extraTalentIds: passiveTalents.slice(2).map((entry) => entry.id),
     },
     enlightens: {
       E1: requireOwnedRecord(enlightens, 'E1', record.id),
       E2: requireOwnedRecord(enlightens, 'E2', record.id),
       E3: requireOwnedRecord(enlightens, 'E3', record.id),
-      OverExalt: optionalOwnedRecord(enlightens, 'OverExalt', record.id),
-      AbsoluteAxiom: optionalOwnedRecord(enlightens, 'AbsoluteAxiom', record.id),
+      ...(overExaltEnlightenId ? {OverExalt: overExaltEnlightenId} : {}),
+      ...(absoluteAxiomId ? {AbsoluteAxiom: absoluteAxiomId} : {}),
     },
   }
 }

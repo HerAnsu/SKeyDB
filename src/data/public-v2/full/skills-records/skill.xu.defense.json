@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.xu.fan-and-scythe.skill.xu.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.xu.fan-and-scythe",
       "ownerAwakenerId": "awakener-0054",
+      "id": "upgrade.enlighten.xu.fan-and-scythe.skill.xu.defense",
       "operation": "mixed",
+      "upgraderId": "enlighten.xu.fan-and-scythe",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Xu",
       "upgraderType": "enlighten",
       "patch": {

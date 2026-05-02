@@ -3,7 +3,7 @@ import publicOverlaysFull from '@/data/public-v2/full/overlays.json'
 import {awakenerOverlaysDatasetSchema, type AwakenerOverlayRecord} from './awakener-source-schema'
 
 interface PublicOverlayEnvelope {
-  records: Array<Omit<AwakenerOverlayRecord, 'ownerAwakenerId'> & {ownerAwakenerId?: string}>
+  records: (Omit<AwakenerOverlayRecord, 'ownerAwakenerId'> & {ownerAwakenerId?: string})[]
 }
 
 let awakenerOverlaysCache: AwakenerOverlayRecord[] | null = null

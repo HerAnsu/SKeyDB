@@ -55,11 +55,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.lily.blackened-nourishment.skill.lily.forbidden-swamp",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.lily.blackened-nourishment",
       "ownerAwakenerId": "awakener-0029",
+      "id": "upgrade.enlighten.lily.blackened-nourishment.skill.lily.forbidden-swamp",
       "operation": "replace_description",
+      "upgraderId": "enlighten.lily.blackened-nourishment",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Lily",
       "upgraderType": "enlighten",
       "patch": {
@@ -68,8 +68,8 @@
     },
     {
       "id": "upgrade.talent.lily.surging-darkness.skill.lily.forbidden-swamp",
-      "upgraderId": "talent.lily.surging-darkness",
       "operation": "link_only",
+      "upgraderId": "talent.lily.surging-darkness",
       "upgraderType": "talent",
       "patch": {}
     }

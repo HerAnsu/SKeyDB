@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.skill.doll-inferno.defense",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
       "ownerAwakenerId": "awakener-0018",
+      "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.skill.doll-inferno.defense",
       "operation": "override_args",
+      "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Doll: Inferno",
       "upgraderType": "enlighten",
       "patch": {

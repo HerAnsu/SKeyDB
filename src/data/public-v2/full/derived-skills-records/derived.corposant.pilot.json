@@ -32,11 +32,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.corposant.sextants-calculation.derived.corposant.pilot",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.corposant.sextants-calculation",
       "ownerAwakenerId": "awakener-0011",
+      "id": "upgrade.enlighten.corposant.sextants-calculation.derived.corposant.pilot",
       "operation": "override_args",
+      "upgraderId": "enlighten.corposant.sextants-calculation",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Corposant",
       "upgraderType": "enlighten",
       "patch": {
@@ -63,8 +63,8 @@
     },
     {
       "id": "upgrade.talent.corposant.cinders.derived.corposant.pilot",
-      "upgraderId": "talent.corposant.cinders",
       "operation": "link_only",
+      "upgraderId": "talent.corposant.cinders",
       "upgraderType": "talent",
       "patch": {}
     }

@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.pandia.embrace-the-pain.skill.pandia.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.pandia.embrace-the-pain",
       "ownerAwakenerId": "awakener-0039",
+      "id": "upgrade.enlighten.pandia.embrace-the-pain.skill.pandia.strike",
       "operation": "replace_description",
+      "upgraderId": "enlighten.pandia.embrace-the-pain",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
       "patch": {

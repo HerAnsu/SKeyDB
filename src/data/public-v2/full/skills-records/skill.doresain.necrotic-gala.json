@@ -60,11 +60,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doresain.evernights-revel.skill.doresain.necrotic-gala",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.doresain.evernights-revel",
       "ownerAwakenerId": "awakener-0014",
+      "id": "upgrade.enlighten.doresain.evernights-revel.skill.doresain.necrotic-gala",
       "operation": "replace_description",
+      "upgraderId": "enlighten.doresain.evernights-revel",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Doresain",
       "upgraderType": "enlighten",
       "patch": {

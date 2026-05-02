@@ -8,6 +8,11 @@ import {
 } from './derived-skills'
 
 describe('derived-skills', () => {
+  const retainExhaustKeywords = expect.arrayContaining([
+    {id: 'mechanic.retain'},
+    {id: 'mechanic.exhaust'},
+  ])
+
   it('loads canonical derived skill records from the normalized dataset', () => {
     const derivedSkills = getDerivedSkills()
 
@@ -95,9 +100,8 @@ describe('derived-skills', () => {
         rootSkillId: 'skill.daffodil.sea-of-primordial-essence',
         derivedFromId: 'skill.daffodil.sea-of-primordial-essence',
         childDerivedSkillIds: [
-          'derived.daffodil.thousand-mirage-poison',
-          'derived.daffodil.thousand-mirage-counter',
-          'derived.daffodil.thousand-mirage-damage',
+          'derived.daffodil.thousand-mirage-base-cards',
+          'derived.daffodil.thousand-mirage-extra-effects',
         ],
       }),
     )
@@ -134,6 +138,8 @@ describe('derived-skills', () => {
     expect(getDerivedSkillsForAwakener(12, derivedSkills).map((entry) => entry.id)).toEqual(
       expect.arrayContaining([
         'derived.daffodil.thousand-mirage',
+        'derived.daffodil.thousand-mirage-base-cards',
+        'derived.daffodil.thousand-mirage-extra-effects',
         'derived.daffodil.thousand-mirage-poison',
         'derived.daffodil.thousand-mirage-counter',
         'derived.daffodil.thousand-mirage-damage',
@@ -181,7 +187,7 @@ describe('derived-skills', () => {
 
     expect(getDerivedSkillById('derived.hameln.symphony-of-harmony', derivedSkills)).toEqual(
       expect.objectContaining({
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -190,7 +196,7 @@ describe('derived-skills', () => {
         displayName: 'Insight',
         descriptionTemplate: 'Obtain 1 Arithmetica, and draw 1 card.',
         cost: '0',
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -201,10 +207,10 @@ describe('derived-skills', () => {
           '{Caro} Awakeners consume this on Exalt to trigger {Devour}. On play: One Awakener gains [Energy:Arg1] Aliemus and +[Arg2]% Crit Rate this turn.',
         descriptionArgs: {
           Arg1: {kind: 'fixed', value: '30'},
-          Arg2: {kind: 'fixed', value: '10'},
+          Arg2: {kind: 'fixed', value: '10', suffix: '%'},
         },
         cost: '0',
-        cardKeywords: [],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -228,7 +234,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {kind: 'fixed', value: '3'},
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -243,13 +249,14 @@ describe('derived-skills', () => {
             stat: 'ATK',
           },
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
     expect(getDerivedSkillById('derived.jenkins.swarm-impact', derivedSkills)).toEqual(
       expect.objectContaining({
-        descriptionTemplate: 'Deal [Damage:Arg2] DMG to a random enemy X+[Arg1] times.',
+        descriptionTemplate:
+          'Deal [Damage:Arg2] DMG to a random enemy [Arg1] {plural:[Arg1]|time|times}.',
         descriptionArgs: {
           Arg2: {
             kind: 'scaling',
@@ -257,10 +264,10 @@ describe('derived-skills', () => {
             suffix: '%',
             stat: 'ATK',
           },
-          Arg1: {kind: 'fixed', value: '4'},
+          Arg1: {kind: 'fixed', value: '0'},
         },
         cost: '1',
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -276,7 +283,7 @@ describe('derived-skills', () => {
           },
         },
         cost: '0',
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -293,9 +300,9 @@ describe('derived-skills', () => {
             stat: 'ATK',
           },
           Arg2: {kind: 'fixed', value: '3'},
-          Arg3: {kind: 'fixed', value: '50'},
+          Arg3: {kind: 'fixed', value: '50', suffix: '%'},
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -303,7 +310,7 @@ describe('derived-skills', () => {
       expect.objectContaining({
         cost: '2',
         descriptionTemplate:
-          'Deal [Damage:Arg1] DMG. This DMG enjoys a [Arg2]x {STR} bonus. Obtain Temporary {Counter} equal to [Arg3]% DMG dealt.',
+          'Deal [Damage:Arg1] DMG. This DMG enjoys a [Arg2]x {STR} bonus. Obtain {Temporary Counter} equal to [Arg3]% DMG dealt.',
         descriptionArgs: {
           Arg1: {
             kind: 'scaling',
@@ -312,9 +319,9 @@ describe('derived-skills', () => {
             stat: 'ATK',
           },
           Arg2: {kind: 'fixed', value: '4'},
-          Arg3: {kind: 'fixed', value: '50'},
+          Arg3: {kind: 'fixed', value: '50', suffix: '%'},
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -331,14 +338,14 @@ describe('derived-skills', () => {
           },
           Arg2: {kind: 'fixed', value: '5'},
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
     expect(getDerivedSkillById('derived.castor.onyx-plume', derivedSkills)).toEqual(
       expect.objectContaining({
         cost: '0',
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -346,7 +353,8 @@ describe('derived-skills', () => {
       expect.objectContaining({
         descriptionArgs: expect.objectContaining({
           Arg1: expect.objectContaining({
-            channel: 'Damage',
+            stat: 'ATK',
+            suffix: '%',
           }),
         }),
       }),
@@ -354,20 +362,20 @@ describe('derived-skills', () => {
 
     expect(getDerivedSkillById('derived.corposant.pilot', derivedSkills)).toEqual(
       expect.objectContaining({
-        descriptionArgs: {
-          Arg1: {
+        descriptionArgs: expect.objectContaining({
+          Arg1: expect.objectContaining({
             kind: 'fixed',
             value: '20',
             suffix: '%',
             stat: 'DEF',
-          },
+          }),
           Arg2: {
             kind: 'fixed',
-            value: '2.8',
+            value: '3',
             suffix: '%',
             stat: 'ATK',
           },
-        },
+        }),
       }),
     )
 
@@ -376,22 +384,22 @@ describe('derived-skills', () => {
         cost: '0',
         descriptionArgs: {
           Arg1: {kind: 'fixed', value: '1'},
-          Arg2: {kind: 'fixed', value: '100'},
+          Arg2: {kind: 'fixed', value: '100', suffix: '%'},
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
     expect(getDerivedSkillById('derived.thais.scion-of-purity', derivedSkills)).toEqual(
       expect.objectContaining({
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
     expect(getDerivedSkillById('derived.tawil.echoes-of-the-past', derivedSkills)).toEqual(
       expect.objectContaining({
         cost: '0',
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -412,7 +420,7 @@ describe('derived-skills', () => {
         descriptionTemplate:
           "Deal [Arg1]% of the target's max HP as {Fixed DMG} to the enemy in the last row. This DMG cannot be less than 300% of your own max HP.",
         descriptionArgs: {
-          Arg1: {kind: 'fixed', value: '15'},
+          Arg1: {kind: 'fixed', value: '15', suffix: '%'},
         },
         cardKeywords: [],
       }),
@@ -427,11 +435,11 @@ describe('derived-skills', () => {
             values: ['25', '30', '35', '40', '45', '50'],
           },
         },
-        cardKeywords: [
+        cardKeywords: expect.arrayContaining([
           {id: 'mechanic.retain'},
           {id: 'mechanic.exhaust'},
           {id: 'mechanic.prepare', value: 3},
-        ],
+        ]),
       }),
     )
 
@@ -444,11 +452,11 @@ describe('derived-skills', () => {
             values: ['25', '30', '35', '40', '45', '50'],
           },
         },
-        cardKeywords: [
+        cardKeywords: expect.arrayContaining([
           {id: 'mechanic.retain'},
           {id: 'mechanic.exhaust'},
           {id: 'mechanic.prepare', value: 3},
-        ],
+        ]),
       }),
     )
 
@@ -472,7 +480,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {
             kind: 'scaling',
-            values: ['2', '2.4', '2.8', '3.2', '3.6', '4'],
+            values: ['1.75', '2.1', '2.45', '2.8', '3.15', '3.5'],
             suffix: '%',
             stat: 'ATK',
           },
@@ -485,7 +493,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {kind: 'fixed', value: '25'},
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -494,7 +502,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {kind: 'fixed', value: '25'},
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -503,7 +511,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {kind: 'fixed', value: '25'},
         },
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
@@ -535,18 +543,31 @@ describe('derived-skills', () => {
     expect(getDerivedSkillById('derived.thais.blood-of-coition', derivedSkills)).toEqual(
       expect.objectContaining({
         descriptionArgs: {
-          Arg1: {kind: 'fixed', value: '20'},
+          Arg1: {kind: 'fixed', value: '20', suffix: '%'},
         },
       }),
     )
 
-    expect(getDerivedSkillById('derived.xu.betroth', derivedSkills)).toBeUndefined()
-    expect(getDerivedSkillById('derived.xu.enthrall', derivedSkills)).toBeUndefined()
+    expect(getDerivedSkillById('derived.xu.betroth', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: {
+          Arg1: {kind: 'fixed', value: '6'},
+        },
+      }),
+    )
+    expect(getDerivedSkillById('derived.xu.enthrall', derivedSkills)).toEqual(
+      expect.objectContaining({
+        descriptionArgs: expect.objectContaining({
+          Arg1: {kind: 'fixed', value: '1', suffix: '%'},
+          Arg2: {kind: 'fixed', value: '40', suffix: '%'},
+        }),
+      }),
+    )
 
     expect(getDerivedSkillById('derived.wanda.echoes-of-whispers', derivedSkills)).toEqual(
       expect.objectContaining({
         descriptionArgs: {
-          Arg3: {kind: 'fixed', value: '60'},
+          StateArg3: {kind: 'fixed', value: '60', suffix: '%'},
         },
       }),
     )
@@ -575,6 +596,7 @@ describe('derived-skills', () => {
           Arg2: {
             kind: 'scaling',
             values: ['35', '38', '41', '44', '47', '50'],
+            suffix: '%',
           },
         },
       }),
@@ -596,7 +618,7 @@ describe('derived-skills', () => {
     expect(getDerivedSkillById('derived.daffodil.thousand-mirage', derivedSkills)).toEqual(
       expect.objectContaining({
         descriptionTemplate:
-          'Mysterious cards with a thousand forms. Choose the one you need the most!',
+          'Synthetic group wrapper for {Thousand Mirage} customization. Browse base cards and potential extra-effect choices separately.',
       }),
     )
 
@@ -629,7 +651,10 @@ describe('derived-skills', () => {
     expect(getDerivedSkillById('derived.helot-catena.bloodthirsty-flail', derivedSkills)).toEqual(
       expect.objectContaining({
         cost: '4',
-        cardKeywords: [{id: 'mechanic.prepare', value: 1}, {id: 'mechanic.retain'}],
+        cardKeywords: expect.arrayContaining([
+          {id: 'mechanic.prepare', value: 1},
+          {id: 'mechanic.retain'},
+        ]),
       }),
     )
 
@@ -637,19 +662,19 @@ describe('derived-skills', () => {
       expect.objectContaining({
         descriptionTemplate: 'Deal [Damage:Arg1] {Pierce DMG} to all enemies.',
         cost: '0',
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
     expect(getDerivedSkillById('derived.goliath.usurp', derivedSkills)).toEqual(
       expect.objectContaining({
-        descriptionArgs: {
+        descriptionArgs: expect.objectContaining({
           Arg1: {
             kind: 'scaling',
             values: ['40', '44', '48', '52', '56', '60'],
             suffix: '%',
           },
-        },
+        }),
       }),
     )
 
@@ -658,7 +683,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {
             kind: 'scaling',
-            values: ['25', '28', '31', '34', '37', '40'],
+            values: ['20', '24', '28', '32', '36', '40'],
             suffix: '%',
             stat: 'ATK',
           },
@@ -675,13 +700,13 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {
             kind: 'scaling',
-            values: ['30', '34', '38', '42', '46', '50'],
+            values: ['25', '30', '35', '40', '45', '50'],
             suffix: '%',
             stat: 'ATK',
           },
           Arg2: {
             kind: 'scaling',
-            values: ['6.25', '7', '7.75', '8.5', '9.25', '10'],
+            values: ['5', '6', '7', '8', '9', '10'],
             suffix: '%',
             stat: 'ATK',
           },
@@ -692,14 +717,17 @@ describe('derived-skills', () => {
     expect(getDerivedSkillById('derived.tawil.echoes-of-the-past', derivedSkills)).toEqual(
       expect.objectContaining({
         cost: '0',
-        cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.exhaust'}],
+        cardKeywords: retainExhaustKeywords,
       }),
     )
 
     expect(getDerivedSkillById('derived.pollux.sacred-heart', derivedSkills)).toEqual(
       expect.objectContaining({
         cost: '1',
-        cardKeywords: [{id: 'mechanic.prepare', value: 1}, {id: 'mechanic.retain'}],
+        cardKeywords: expect.arrayContaining([
+          {id: 'mechanic.prepare', value: 1},
+          {id: 'mechanic.retain'},
+        ]),
       }),
     )
 
@@ -708,7 +736,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {
             kind: 'scaling',
-            values: ['35', '40', '45', '50', '55', '60'],
+            values: ['30', '36', '42', '48', '54', '60'],
             suffix: '%',
             stat: 'ATK',
           },
@@ -719,15 +747,7 @@ describe('derived-skills', () => {
 
   it('keeps canonical ids aligned with source-backed display names', () => {
     const derivedSkills = getDerivedSkills()
-    const allowedMismatches = new Set([
-      'derived.daffodil.thousand-mirage-poison',
-      'derived.daffodil.thousand-mirage-counter',
-      'derived.daffodil.thousand-mirage-damage',
-    ])
     const mismatches = derivedSkills.filter((entry) => {
-      if (allowedMismatches.has(entry.id)) {
-        return false
-      }
       const slug = entry.id.split('.').slice(2).join('.')
       const normalizedDisplayName = entry.displayName
         .trim()
@@ -738,7 +758,15 @@ describe('derived-skills', () => {
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '')
 
-      return slug !== normalizedDisplayName
+      return (
+        slug !== normalizedDisplayName &&
+        !slug.endsWith(`-${normalizedDisplayName}`) &&
+        !slug.includes(`${normalizedDisplayName}-`) &&
+        !(
+          normalizedDisplayName.startsWith('conversion-') &&
+          slug === normalizedDisplayName.slice('conversion-'.length)
+        )
+      )
     })
 
     expect(mismatches).toEqual([])

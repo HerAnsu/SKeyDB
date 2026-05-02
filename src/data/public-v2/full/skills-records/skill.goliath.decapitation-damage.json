@@ -28,11 +28,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.goliath.death-is-rebirth.skill.goliath.decapitation-damage",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.goliath.death-is-rebirth",
       "ownerAwakenerId": "awakener-0021",
+      "id": "upgrade.enlighten.goliath.death-is-rebirth.skill.goliath.decapitation-damage",
       "operation": "mixed",
+      "upgraderId": "enlighten.goliath.death-is-rebirth",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Goliath",
       "upgraderType": "enlighten",
       "patch": {

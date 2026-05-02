@@ -24,11 +24,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.erica.auto-rectification.derived.erica.retract-mecha",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.erica.auto-rectification",
       "ownerAwakenerId": "awakener-0015",
+      "id": "upgrade.enlighten.erica.auto-rectification.derived.erica.retract-mecha",
       "operation": "replace_description",
+      "upgraderId": "enlighten.erica.auto-rectification",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Erica",
       "upgraderType": "enlighten",
       "patch": {

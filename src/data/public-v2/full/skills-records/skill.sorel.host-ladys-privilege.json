@@ -52,11 +52,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.sorel.carlate-profond.skill.sorel.host-ladys-privilege",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.sorel.carlate-profond",
       "ownerAwakenerId": "awakener-0046",
+      "id": "upgrade.enlighten.sorel.carlate-profond.skill.sorel.host-ladys-privilege",
       "operation": "mixed",
+      "upgraderId": "enlighten.sorel.carlate-profond",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Sorel",
       "upgraderType": "enlighten",
       "patch": {

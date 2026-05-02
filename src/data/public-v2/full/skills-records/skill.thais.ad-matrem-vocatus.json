@@ -26,11 +26,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.thais.the-birthing-deep.skill.thais.ad-matrem-vocatus",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.thais.the-birthing-deep",
       "ownerAwakenerId": "awakener-0048",
+      "id": "upgrade.enlighten.thais.the-birthing-deep.skill.thais.ad-matrem-vocatus",
       "operation": "replace_description",
+      "upgraderId": "enlighten.thais.the-birthing-deep",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Thais",
       "upgraderType": "enlighten",
       "patch": {

@@ -35,11 +35,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.uvhash.roman-elegy.skill.uvhash.boil-blood",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.uvhash.roman-elegy",
       "ownerAwakenerId": "awakener-0051",
+      "id": "upgrade.enlighten.uvhash.roman-elegy.skill.uvhash.boil-blood",
       "operation": "mixed",
+      "upgraderId": "enlighten.uvhash.roman-elegy",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Uvhash",
       "upgraderType": "enlighten",
       "patch": {

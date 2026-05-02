@@ -8,11 +8,11 @@
   "ownerAwakenerId": "awakener-0022",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.hameln.oneiric-waltz.overlay.hameln.rondino",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.hameln.oneiric-waltz",
       "ownerAwakenerId": "awakener-0022",
+      "id": "upgrade.enlighten.hameln.oneiric-waltz.overlay.hameln.rondino",
       "operation": "replace_description",
+      "upgraderId": "enlighten.hameln.oneiric-waltz",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Hameln",
       "upgraderType": "enlighten",
       "patch": {

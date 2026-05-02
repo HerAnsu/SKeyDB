@@ -44,11 +44,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tulu.touch-of-revival.skill.tulu.strike",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.tulu.touch-of-revival",
       "ownerAwakenerId": "awakener-0050",
+      "id": "upgrade.enlighten.tulu.touch-of-revival.skill.tulu.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.tulu.touch-of-revival",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Tulu",
       "upgraderType": "enlighten",
       "patch": {
@@ -105,8 +105,8 @@
     },
     {
       "id": "upgrade.talent.tulu.divine-kings-power.skill.tulu.strike",
-      "upgraderId": "talent.tulu.divine-kings-power",
       "operation": "link_only",
+      "upgraderId": "talent.tulu.divine-kings-power",
       "upgraderType": "talent",
       "patch": {}
     }

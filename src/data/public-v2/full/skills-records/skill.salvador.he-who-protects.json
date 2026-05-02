@@ -54,11 +54,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.he-who-protects",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.salvador.bitter-eucharist",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.he-who-protects",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.bitter-eucharist",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {
@@ -116,11 +116,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.salvador.salvations-hand.skill.salvador.he-who-protects",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.salvador.salvations-hand",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.salvations-hand.skill.salvador.he-who-protects",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.salvations-hand",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {

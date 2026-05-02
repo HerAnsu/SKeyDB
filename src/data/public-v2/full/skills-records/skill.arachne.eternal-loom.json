@@ -24,11 +24,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.arachne.universe-as-i-conceive.skill.arachne.eternal-loom",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.arachne.universe-as-i-conceive",
       "ownerAwakenerId": "awakener-0056",
+      "id": "upgrade.enlighten.arachne.universe-as-i-conceive.skill.arachne.eternal-loom",
       "operation": "override_args",
+      "upgraderId": "enlighten.arachne.universe-as-i-conceive",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Arachne",
       "upgraderType": "enlighten",
       "patch": {

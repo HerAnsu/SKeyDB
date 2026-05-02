@@ -42,11 +42,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.uvhash.the-gladiator.skill.uvhash.screech-blood",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.uvhash.the-gladiator",
       "ownerAwakenerId": "awakener-0051",
+      "id": "upgrade.enlighten.uvhash.the-gladiator.skill.uvhash.screech-blood",
       "operation": "override_args",
+      "upgraderId": "enlighten.uvhash.the-gladiator",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Uvhash",
       "upgraderType": "enlighten",
       "patch": {

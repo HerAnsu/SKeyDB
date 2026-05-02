@@ -48,11 +48,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.winkle.rebirth-through-death.skill.winkle.formless-shifting",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.winkle.rebirth-through-death",
       "ownerAwakenerId": "awakener-0053",
+      "id": "upgrade.enlighten.winkle.rebirth-through-death.skill.winkle.formless-shifting",
       "operation": "mixed",
+      "upgraderId": "enlighten.winkle.rebirth-through-death",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Winkle",
       "upgraderType": "enlighten",
       "patch": {

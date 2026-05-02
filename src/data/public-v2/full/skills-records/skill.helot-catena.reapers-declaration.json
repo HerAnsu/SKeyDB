@@ -38,11 +38,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.helot-catena.death-knell-decree.skill.helot-catena.reapers-declaration",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.helot-catena.death-knell-decree",
       "ownerAwakenerId": "awakener-0019",
+      "id": "upgrade.enlighten.helot-catena.death-knell-decree.skill.helot-catena.reapers-declaration",
       "operation": "replace_description",
+      "upgraderId": "enlighten.helot-catena.death-knell-decree",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Helot: Catena",
       "upgraderType": "enlighten",
       "patch": {

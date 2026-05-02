@@ -52,11 +52,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.erica.final-decree.skill.erica.parameter-fitting",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.erica.final-decree",
       "ownerAwakenerId": "awakener-0015",
+      "id": "upgrade.enlighten.erica.final-decree.skill.erica.parameter-fitting",
       "operation": "mixed",
+      "upgraderId": "enlighten.erica.final-decree",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Erica",
       "upgraderType": "enlighten",
       "patch": {

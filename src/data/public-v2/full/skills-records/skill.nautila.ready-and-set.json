@@ -37,11 +37,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.nautila.forgotten-dreams.skill.nautila.ready-and-set",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.nautila.forgotten-dreams",
       "ownerAwakenerId": "awakener-0036",
+      "id": "upgrade.enlighten.nautila.forgotten-dreams.skill.nautila.ready-and-set",
       "operation": "mixed",
+      "upgraderId": "enlighten.nautila.forgotten-dreams",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Nautila",
       "upgraderType": "enlighten",
       "patch": {
@@ -82,11 +82,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.nautila.vroom-vroom.skill.nautila.ready-and-set",
-      "upgraderSlot": "OverExalt",
-      "upgraderId": "enlighten.nautila.vroom-vroom",
       "ownerAwakenerId": "awakener-0036",
+      "id": "upgrade.enlighten.nautila.vroom-vroom.skill.nautila.ready-and-set",
       "operation": "mixed",
+      "upgraderId": "enlighten.nautila.vroom-vroom",
+      "upgraderSlot": "OverExalt",
       "ownerAwakenerName": "Nautila",
       "upgraderType": "enlighten",
       "patch": {
@@ -128,8 +128,8 @@
     },
     {
       "id": "upgrade.talent.nautila.daily-maintenance.skill.nautila.ready-and-set",
-      "upgraderId": "talent.nautila.daily-maintenance",
       "operation": "link_only",
+      "upgraderId": "talent.nautila.daily-maintenance",
       "upgraderType": "talent",
       "patch": {}
     }

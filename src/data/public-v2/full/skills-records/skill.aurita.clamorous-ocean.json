@@ -37,11 +37,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.aurita.slick-slide-adventure.skill.aurita.clamorous-ocean",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.aurita.slick-slide-adventure",
       "ownerAwakenerId": "awakener-0005",
+      "id": "upgrade.enlighten.aurita.slick-slide-adventure.skill.aurita.clamorous-ocean",
       "operation": "mixed",
+      "upgraderId": "enlighten.aurita.slick-slide-adventure",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Aurita",
       "upgraderType": "enlighten",
       "patch": {

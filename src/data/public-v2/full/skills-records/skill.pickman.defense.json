@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.pickman.cross-hatched-rendering.skill.pickman.defense",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.pickman.cross-hatched-rendering",
       "ownerAwakenerId": "awakener-0040",
+      "id": "upgrade.enlighten.pickman.cross-hatched-rendering.skill.pickman.defense",
       "operation": "replace_description",
+      "upgraderId": "enlighten.pickman.cross-hatched-rendering",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Pickman",
       "upgraderType": "enlighten",
       "patch": {

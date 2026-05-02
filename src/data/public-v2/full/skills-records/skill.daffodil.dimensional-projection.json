@@ -26,11 +26,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.daffodil.dead-souls.skill.daffodil.dimensional-projection",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.daffodil.dead-souls",
       "ownerAwakenerId": "awakener-0012",
+      "id": "upgrade.enlighten.daffodil.dead-souls.skill.daffodil.dimensional-projection",
       "operation": "replace_description",
+      "upgraderId": "enlighten.daffodil.dead-souls",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Daffodil",
       "upgraderType": "enlighten",
       "patch": {

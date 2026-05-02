@@ -44,11 +44,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doresain.styx-uncrossed.skill.doresain.crimson-invite",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.doresain.styx-uncrossed",
       "ownerAwakenerId": "awakener-0014",
+      "id": "upgrade.enlighten.doresain.styx-uncrossed.skill.doresain.crimson-invite",
       "operation": "mixed",
+      "upgraderId": "enlighten.doresain.styx-uncrossed",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Doresain",
       "upgraderType": "enlighten",
       "patch": {

@@ -28,11 +28,11 @@
   "cost": "4",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.sanga.kneel-before-beauty.skill.sanga.beautys-mercy",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.sanga.kneel-before-beauty",
       "ownerAwakenerId": "awakener-0045",
+      "id": "upgrade.enlighten.sanga.kneel-before-beauty.skill.sanga.beautys-mercy",
       "operation": "mixed",
+      "upgraderId": "enlighten.sanga.kneel-before-beauty",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Sanga",
       "upgraderType": "enlighten",
       "patch": {

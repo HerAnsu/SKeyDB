@@ -24,11 +24,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.sanga.melodic-sculpting.skill.sanga.opus-of-isolation",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.sanga.melodic-sculpting",
       "ownerAwakenerId": "awakener-0045",
+      "id": "upgrade.enlighten.sanga.melodic-sculpting.skill.sanga.opus-of-isolation",
       "operation": "mixed",
+      "upgraderId": "enlighten.sanga.melodic-sculpting",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Sanga",
       "upgraderType": "enlighten",
       "patch": {

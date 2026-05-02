@@ -45,8 +45,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.celeste.voyage-horn.skill.celeste.strike",
-      "upgraderId": "talent.celeste.voyage-horn",
       "operation": "link_only",
+      "upgraderId": "talent.celeste.voyage-horn",
       "upgraderType": "talent",
       "patch": {}
     }

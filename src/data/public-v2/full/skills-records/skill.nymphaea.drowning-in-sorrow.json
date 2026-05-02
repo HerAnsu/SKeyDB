@@ -49,11 +49,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.nymphaea.sentiment-oc-anique.skill.nymphaea.drowning-in-sorrow",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.nymphaea.sentiment-oc-anique",
       "ownerAwakenerId": "awakener-0037",
+      "id": "upgrade.enlighten.nymphaea.sentiment-oc-anique.skill.nymphaea.drowning-in-sorrow",
       "operation": "mixed",
+      "upgraderId": "enlighten.nymphaea.sentiment-oc-anique",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Nymphaea",
       "upgraderType": "enlighten",
       "patch": {

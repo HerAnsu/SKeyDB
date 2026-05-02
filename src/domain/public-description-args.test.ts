@@ -22,9 +22,7 @@ describe('public-description-args', () => {
     }
 
     expect(resolveDescriptionArg(arg).formattedTotalValue).toBe('12% {ATK}')
-    expect(resolveDescriptionTemplate('Deal [Arg1] DMG.', {Arg1: arg})).toBe(
-      'Deal 12% {ATK} DMG.',
-    )
+    expect(resolveDescriptionTemplate('Deal [Arg1] DMG.', {Arg1: arg})).toBe('Deal 12% {ATK} DMG.')
     expect(buildDescriptionArgHover(arg)).toBe('')
   })
 
@@ -72,9 +70,13 @@ describe('public-description-args', () => {
       value: 4,
     })
     expect(
-      resolveDescriptionTemplate('Increase final DMG by [Arg1].', {Arg1: arg}, {
-        formulaContext: {accountStageGrowth: 241},
-      }),
+      resolveDescriptionTemplate(
+        'Increase final DMG by [Arg1].',
+        {Arg1: arg},
+        {
+          formulaContext: {accountStageGrowth: 241},
+        },
+      ),
     ).toBe('Increase final DMG by 4%.')
   })
 

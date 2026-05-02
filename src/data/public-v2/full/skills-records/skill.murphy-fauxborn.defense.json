@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.murphy-fauxborn.profane-apocalypse.skill.murphy-fauxborn.defense",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.murphy-fauxborn.profane-apocalypse",
       "ownerAwakenerId": "awakener-0035",
+      "id": "upgrade.enlighten.murphy-fauxborn.profane-apocalypse.skill.murphy-fauxborn.defense",
       "operation": "replace_description",
+      "upgraderId": "enlighten.murphy-fauxborn.profane-apocalypse",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Murphy: Fauxborn",
       "upgraderType": "enlighten",
       "patch": {

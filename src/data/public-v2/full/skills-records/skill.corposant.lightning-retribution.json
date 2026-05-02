@@ -62,11 +62,11 @@
   "cost": "4",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.corposant.unquenched-unfelled-undimmed.skill.corposant.lightning-retribution",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.corposant.unquenched-unfelled-undimmed",
       "ownerAwakenerId": "awakener-0011",
+      "id": "upgrade.enlighten.corposant.unquenched-unfelled-undimmed.skill.corposant.lightning-retribution",
       "operation": "override_args",
+      "upgraderId": "enlighten.corposant.unquenched-unfelled-undimmed",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Corposant",
       "upgraderType": "enlighten",
       "patch": {
@@ -119,8 +119,8 @@
     },
     {
       "id": "upgrade.talent.corposant.cinders.skill.corposant.lightning-retribution",
-      "upgraderId": "talent.corposant.cinders",
       "operation": "link_only",
+      "upgraderId": "talent.corposant.cinders",
       "upgraderType": "talent",
       "patch": {}
     }

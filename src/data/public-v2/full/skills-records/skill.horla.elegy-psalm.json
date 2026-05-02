@@ -48,45 +48,45 @@
   "cost": "1",
   "upgrades": [
     {
+      "ownerAwakenerId": "awakener-0024",
       "id": "upgrade.enlighten.horla.blossoms-and-verses-reunited.skill.horla.elegy-psalm",
-      "upgraderSlot": "E3",
+      "operation": "mixed",
       "upgraderId": "enlighten.horla.blossoms-and-verses-reunited",
-      "ownerAwakenerId": "awakener-0024",
-      "operation": "mixed",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Horla obtains [Energy:Arg2] Aliemus. Inflict 1 stack of {Weakness} on all enemies. Considered as a \"Defense\". {Leap}: Switch to the {Grief} {Emotion} state. For each stack of {Grief} {Metaphor} consumed, restore [Heal:Arg3] HP.",
         "cardKeywords": [
           {
             "id": "mechanic.retain"
           }
-        ],
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Horla obtains [Energy:Arg2] Aliemus. Inflict 1 stack of {Weakness} on all enemies. Considered as a \"Defense\". {Leap}: Switch to the {Grief} {Emotion} state. For each stack of {Grief} {Metaphor} consumed, restore [Heal:Arg3] HP."
+        ]
       }
     },
     {
+      "ownerAwakenerId": "awakener-0024",
       "id": "upgrade.enlighten.horla.chamber-of-shadows.skill.horla.elegy-psalm",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.horla.chamber-of-shadows",
-      "ownerAwakenerId": "awakener-0024",
       "operation": "mixed",
+      "upgraderId": "enlighten.horla.chamber-of-shadows",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Horla obtains [Energy:Arg2] Aliemus. Inflict 1 stack of {Weakness} on all enemies. Considered as a \"Defense\". {Leap}: Switch to the {Grief} {Emotion} state. For each stack of {Grief} {Metaphor} consumed, restore [Heal:Arg3] HP.",
         "cardKeywords": [
           {
             "id": "mechanic.retain"
           }
-        ],
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Horla obtains [Energy:Arg2] Aliemus. Inflict 1 stack of {Weakness} on all enemies. Considered as a \"Defense\". {Leap}: Switch to the {Grief} {Emotion} state. For each stack of {Grief} {Metaphor} consumed, restore [Heal:Arg3] HP."
+        ]
       }
     },
     {
-      "id": "upgrade.enlighten.horla.emberbound.skill.horla.elegy-psalm",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.horla.emberbound",
       "ownerAwakenerId": "awakener-0024",
+      "id": "upgrade.enlighten.horla.emberbound.skill.horla.elegy-psalm",
       "operation": "replace_description",
+      "upgraderId": "enlighten.horla.emberbound",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
       "patch": {

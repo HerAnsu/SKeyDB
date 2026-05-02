@@ -28,11 +28,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.lotan.swords-unleashed.skill.lotan.blade-of-defiance",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.lotan.swords-unleashed",
       "ownerAwakenerId": "awakener-0031",
+      "id": "upgrade.enlighten.lotan.swords-unleashed.skill.lotan.blade-of-defiance",
       "operation": "replace_description",
+      "upgraderId": "enlighten.lotan.swords-unleashed",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Lotan",
       "upgraderType": "enlighten",
       "patch": {

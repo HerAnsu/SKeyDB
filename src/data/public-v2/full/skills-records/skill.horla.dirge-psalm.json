@@ -50,11 +50,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.horla.blossoms-and-verses-reunited.skill.horla.dirge-psalm",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.horla.blossoms-and-verses-reunited",
       "ownerAwakenerId": "awakener-0024",
+      "id": "upgrade.enlighten.horla.blossoms-and-verses-reunited.skill.horla.dirge-psalm",
       "operation": "override_card_keywords",
+      "upgraderId": "enlighten.horla.blossoms-and-verses-reunited",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
       "patch": {
@@ -66,11 +66,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.horla.chamber-of-shadows.skill.horla.dirge-psalm",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.horla.chamber-of-shadows",
       "ownerAwakenerId": "awakener-0024",
+      "id": "upgrade.enlighten.horla.chamber-of-shadows.skill.horla.dirge-psalm",
       "operation": "override_card_keywords",
+      "upgraderId": "enlighten.horla.chamber-of-shadows",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
       "patch": {

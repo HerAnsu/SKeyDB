@@ -37,11 +37,11 @@
   "cost": "X",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.erica.system-reboot.skill.erica.function-overload",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.erica.system-reboot",
       "ownerAwakenerId": "awakener-0015",
+      "id": "upgrade.enlighten.erica.system-reboot.skill.erica.function-overload",
       "operation": "replace_description",
+      "upgraderId": "enlighten.erica.system-reboot",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Erica",
       "upgraderType": "enlighten",
       "patch": {

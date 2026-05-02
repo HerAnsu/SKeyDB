@@ -26,11 +26,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.hameln.all-realms-resound.skill.hameln.laudable-masterpiece",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.hameln.all-realms-resound",
       "ownerAwakenerId": "awakener-0022",
+      "id": "upgrade.enlighten.hameln.all-realms-resound.skill.hameln.laudable-masterpiece",
       "operation": "mixed",
+      "upgraderId": "enlighten.hameln.all-realms-resound",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Hameln",
       "upgraderType": "enlighten",
       "patch": {

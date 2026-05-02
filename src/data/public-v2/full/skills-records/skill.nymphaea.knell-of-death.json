@@ -28,11 +28,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.nymphaea.oceans-vessel.skill.nymphaea.knell-of-death",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.nymphaea.oceans-vessel",
       "ownerAwakenerId": "awakener-0037",
+      "id": "upgrade.enlighten.nymphaea.oceans-vessel.skill.nymphaea.knell-of-death",
       "operation": "mixed",
+      "upgraderId": "enlighten.nymphaea.oceans-vessel",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Nymphaea",
       "upgraderType": "enlighten",
       "patch": {
@@ -73,8 +73,8 @@
     },
     {
       "id": "upgrade.talent.nymphaea.immerse.skill.nymphaea.knell-of-death",
-      "upgraderId": "talent.nymphaea.immerse",
       "operation": "link_only",
+      "upgraderId": "talent.nymphaea.immerse",
       "upgraderType": "talent",
       "patch": {}
     }

@@ -13,11 +13,11 @@
   "ownerAwakenerId": "awakener-0056",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.overlay.arachne.weaver",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
       "ownerAwakenerId": "awakener-0056",
+      "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.overlay.arachne.weaver",
       "operation": "override_args",
+      "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Arachne",
       "upgraderType": "enlighten",
       "patch": {

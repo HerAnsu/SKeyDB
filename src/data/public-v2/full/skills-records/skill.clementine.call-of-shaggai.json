@@ -30,11 +30,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.clementine.collective-unconscious.skill.clementine.call-of-shaggai",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.clementine.collective-unconscious",
       "ownerAwakenerId": "awakener-0010",
+      "id": "upgrade.enlighten.clementine.collective-unconscious.skill.clementine.call-of-shaggai",
       "operation": "replace_description",
+      "upgraderId": "enlighten.clementine.collective-unconscious",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Clementine",
       "upgraderType": "enlighten",
       "patch": {

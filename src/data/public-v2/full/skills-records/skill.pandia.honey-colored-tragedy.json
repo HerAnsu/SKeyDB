@@ -41,11 +41,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.pandia.sweet-surrender.skill.pandia.honey-colored-tragedy",
-      "upgraderSlot": "OverExalt",
-      "upgraderId": "enlighten.pandia.sweet-surrender",
       "ownerAwakenerId": "awakener-0039",
+      "id": "upgrade.enlighten.pandia.sweet-surrender.skill.pandia.honey-colored-tragedy",
       "operation": "mixed",
+      "upgraderId": "enlighten.pandia.sweet-surrender",
+      "upgraderSlot": "OverExalt",
       "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
       "patch": {
@@ -98,11 +98,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.pandia.youre-being-naughty.skill.pandia.honey-colored-tragedy",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.pandia.youre-being-naughty",
       "ownerAwakenerId": "awakener-0039",
+      "id": "upgrade.enlighten.pandia.youre-being-naughty.skill.pandia.honey-colored-tragedy",
       "operation": "mixed",
+      "upgraderId": "enlighten.pandia.youre-being-naughty",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
       "patch": {

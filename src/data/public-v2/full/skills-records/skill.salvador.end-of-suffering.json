@@ -50,23 +50,14 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.salvador.book-of-genesis.skill.salvador.end-of-suffering",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.salvador.book-of-genesis",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.book-of-genesis.skill.salvador.end-of-suffering",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.book-of-genesis",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {
-        "cardKeywords": [
-          {
-            "id": "mechanic.retain"
-          },
-          {
-            "id": "mechanic.prepare",
-            "value": 1
-          }
-        ],
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -109,27 +100,27 @@
             ]
           }
         },
-        "descriptionTemplate": "Choose: {Dedication}, {Liberation}, or {Redemption}. Gain [Energy:Arg5] Aliemus. Deal [Damage:Arg1] DMG to all enemies; for every point of {Crimson Furnace} accumulated during this battle, increase DMG by [Float:Arg2]. This hit's Crit. Rate +[Arg4]%."
+        "descriptionTemplate": "Choose: {Dedication}, {Liberation}, or {Redemption}. Gain [Energy:Arg5] Aliemus. Deal [Damage:Arg1] DMG to all enemies; for every point of {Crimson Furnace} accumulated during this battle, increase DMG by [Float:Arg2]. This hit's Crit. Rate +[Arg4]%.",
+        "cardKeywords": [
+          {
+            "id": "mechanic.retain"
+          },
+          {
+            "id": "mechanic.prepare",
+            "value": 1
+          }
+        ]
       }
     },
     {
-      "id": "upgrade.enlighten.salvador.rite-of-creation.skill.salvador.end-of-suffering",
-      "upgraderSlot": "OverExalt",
-      "upgraderId": "enlighten.salvador.rite-of-creation",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.rite-of-creation.skill.salvador.end-of-suffering",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.rite-of-creation",
+      "upgraderSlot": "OverExalt",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {
-        "cardKeywords": [
-          {
-            "id": "mechanic.retain"
-          },
-          {
-            "id": "mechanic.prepare",
-            "value": 1
-          }
-        ],
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -172,7 +163,16 @@
             ]
           }
         },
-        "descriptionTemplate": "Choose: {Dedication}, {Liberation}, or {Redemption}. Gain [Energy:Arg5] Aliemus. Deal [Damage:Arg1] DMG to all enemies; for every point of {Crimson Furnace} accumulated during this battle, increase DMG by [Float:Arg2]. This hit's Crit. Rate +[Arg4]%."
+        "descriptionTemplate": "Choose: {Dedication}, {Liberation}, or {Redemption}. Gain [Energy:Arg5] Aliemus. Deal [Damage:Arg1] DMG to all enemies; for every point of {Crimson Furnace} accumulated during this battle, increase DMG by [Float:Arg2]. This hit's Crit. Rate +[Arg4]%.",
+        "cardKeywords": [
+          {
+            "id": "mechanic.retain"
+          },
+          {
+            "id": "mechanic.prepare",
+            "value": 1
+          }
+        ]
       }
     }
   ]

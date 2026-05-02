@@ -26,11 +26,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.pollux.lux-diouskouron.skill.pollux.path-of-ablution",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.pollux.lux-diouskouron",
       "ownerAwakenerId": "awakener-0041",
+      "id": "upgrade.enlighten.pollux.lux-diouskouron.skill.pollux.path-of-ablution",
       "operation": "replace_description",
+      "upgraderId": "enlighten.pollux.lux-diouskouron",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Pollux",
       "upgraderType": "enlighten",
       "patch": {

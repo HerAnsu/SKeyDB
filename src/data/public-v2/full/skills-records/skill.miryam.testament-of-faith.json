@@ -30,11 +30,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.miryam.homeland-resurgence.skill.miryam.testament-of-faith",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.miryam.homeland-resurgence",
       "ownerAwakenerId": "awakener-0032",
+      "id": "upgrade.enlighten.miryam.homeland-resurgence.skill.miryam.testament-of-faith",
       "operation": "replace_description",
+      "upgraderId": "enlighten.miryam.homeland-resurgence",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
       "patch": {

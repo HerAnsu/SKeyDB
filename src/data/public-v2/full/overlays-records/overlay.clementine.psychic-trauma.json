@@ -10,11 +10,11 @@
   "textColor": "affliction",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.psychic-trauma",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.clementine.you-will-recover",
       "ownerAwakenerId": "awakener-0010",
+      "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.psychic-trauma",
       "operation": "replace_description",
+      "upgraderId": "enlighten.clementine.you-will-recover",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Clementine",
       "upgraderType": "enlighten",
       "patch": {

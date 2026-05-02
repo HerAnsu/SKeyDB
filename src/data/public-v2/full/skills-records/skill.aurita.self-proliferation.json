@@ -30,11 +30,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.aurita.sparkling-friendship.skill.aurita.self-proliferation",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.aurita.sparkling-friendship",
       "ownerAwakenerId": "awakener-0005",
+      "id": "upgrade.enlighten.aurita.sparkling-friendship.skill.aurita.self-proliferation",
       "operation": "replace_description",
+      "upgraderId": "enlighten.aurita.sparkling-friendship",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Aurita",
       "upgraderType": "enlighten",
       "patch": {

@@ -50,11 +50,11 @@
   "cost": "4",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.wanda.lakeborne-dweller.skill.wanda.keeper-of-the-lost",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.wanda.lakeborne-dweller",
       "ownerAwakenerId": "awakener-0052",
+      "id": "upgrade.enlighten.wanda.lakeborne-dweller.skill.wanda.keeper-of-the-lost",
       "operation": "override_args",
+      "upgraderId": "enlighten.wanda.lakeborne-dweller",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Wanda",
       "upgraderType": "enlighten",
       "patch": {
@@ -102,11 +102,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.wanda.the-revelation.skill.wanda.keeper-of-the-lost",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.wanda.the-revelation",
       "ownerAwakenerId": "awakener-0052",
+      "id": "upgrade.enlighten.wanda.the-revelation.skill.wanda.keeper-of-the-lost",
       "operation": "override_args",
+      "upgraderId": "enlighten.wanda.the-revelation",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Wanda",
       "upgraderType": "enlighten",
       "patch": {

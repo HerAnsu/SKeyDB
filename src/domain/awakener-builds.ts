@@ -58,6 +58,7 @@ const publicAwakenerBuildEntriesSchema = z
     scope: z.literal('awakener-builds'),
     recordCount: z.number().int().nonnegative(),
     records: z.array(awakenerBuildEntrySchema),
+    metadata: z.record(z.string(), z.unknown()).optional(),
   })
   .strict()
   .refine((envelope) => envelope.recordCount === envelope.records.length, {

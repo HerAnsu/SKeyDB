@@ -26,11 +26,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tawil.the-first-logos.skill.tawil.the-silver-key-gate",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.tawil.the-first-logos",
       "ownerAwakenerId": "awakener-0047",
+      "id": "upgrade.enlighten.tawil.the-first-logos.skill.tawil.the-silver-key-gate",
       "operation": "mixed",
+      "upgraderId": "enlighten.tawil.the-first-logos",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Tawil",
       "upgraderType": "enlighten",
       "patch": {

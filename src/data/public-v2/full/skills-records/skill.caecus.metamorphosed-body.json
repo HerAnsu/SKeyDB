@@ -52,11 +52,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.caecus.fury-of-the-inchoate.skill.caecus.metamorphosed-body",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.caecus.fury-of-the-inchoate",
       "ownerAwakenerId": "awakener-0006",
+      "id": "upgrade.enlighten.caecus.fury-of-the-inchoate.skill.caecus.metamorphosed-body",
       "operation": "mixed",
+      "upgraderId": "enlighten.caecus.fury-of-the-inchoate",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Caecus",
       "upgraderType": "enlighten",
       "patch": {

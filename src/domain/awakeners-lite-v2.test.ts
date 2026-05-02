@@ -17,20 +17,18 @@ describe('awakeners-lite-v2', () => {
     )
   })
 
-  it('merges curated roster search tags with overlay-derived search tags', () => {
+  it('exposes public V2 search tags without synthesizing website-side overlay tags', () => {
     const records = getAwakenersLiteV2()
     const vortice = records.find((entry) => entry.name === 'vortice')
     const fauxbornMurphy = records.find((entry) => entry.name === 'murphy: fauxborn')
     const twentyFour = records.find((entry) => entry.name === '24')
 
-    expect(vortice?.tags).toEqual(
-      expect.arrayContaining(['Dispel', 'Divine Realm', 'Fortress', 'Pursuit', 'Tentacles']),
-    )
+    expect(vortice?.tags).toEqual(expect.arrayContaining(['Dispel', 'Divine Realm', 'Tentacles']))
     expect(fauxbornMurphy?.tags).toEqual(
       expect.arrayContaining(['Arithmetica', 'Divine Realm', 'Draw', 'Keyflare', 'Tentacles']),
     )
     expect(twentyFour?.tags).toEqual(
-      expect.arrayContaining(['Bleed', 'Counter', 'Embryo Fusion', 'Fixed DMG', 'STR Up']),
+      expect.arrayContaining(['Arithmetica', 'Hand Limit', 'Keyflare', 'Tentacles']),
     )
   })
 

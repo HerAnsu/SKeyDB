@@ -42,11 +42,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.lily.never-forget.skill.lily.undying-flower-upon-slime",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.lily.never-forget",
       "ownerAwakenerId": "awakener-0029",
+      "id": "upgrade.enlighten.lily.never-forget.skill.lily.undying-flower-upon-slime",
       "operation": "replace_description",
+      "upgraderId": "enlighten.lily.never-forget",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Lily",
       "upgraderType": "enlighten",
       "patch": {

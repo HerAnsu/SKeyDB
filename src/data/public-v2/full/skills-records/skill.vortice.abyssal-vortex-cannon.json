@@ -23,11 +23,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.vortice.bang-pop-boom.skill.vortice.abyssal-vortex-cannon",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.vortice.bang-pop-boom",
       "ownerAwakenerId": "awakener-0055",
+      "id": "upgrade.enlighten.vortice.bang-pop-boom.skill.vortice.abyssal-vortex-cannon",
       "operation": "mixed",
+      "upgraderId": "enlighten.vortice.bang-pop-boom",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Vortice",
       "upgraderType": "enlighten",
       "patch": {
@@ -57,11 +57,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.vortice.endless-tide.skill.vortice.abyssal-vortex-cannon",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.vortice.endless-tide",
       "ownerAwakenerId": "awakener-0055",
+      "id": "upgrade.enlighten.vortice.endless-tide.skill.vortice.abyssal-vortex-cannon",
       "operation": "mixed",
+      "upgraderId": "enlighten.vortice.endless-tide",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Vortice",
       "upgraderType": "enlighten",
       "patch": {
@@ -91,11 +91,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.vortice.shackled-impulse.skill.vortice.abyssal-vortex-cannon",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.vortice.shackled-impulse",
       "ownerAwakenerId": "awakener-0055",
+      "id": "upgrade.enlighten.vortice.shackled-impulse.skill.vortice.abyssal-vortex-cannon",
       "operation": "mixed",
+      "upgraderId": "enlighten.vortice.shackled-impulse",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Vortice",
       "upgraderType": "enlighten",
       "patch": {

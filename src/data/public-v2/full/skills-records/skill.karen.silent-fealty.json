@@ -47,11 +47,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.karen.maids-decree.skill.karen.silent-fealty",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.karen.maids-decree",
       "ownerAwakenerId": "awakener-0026",
+      "id": "upgrade.enlighten.karen.maids-decree.skill.karen.silent-fealty",
       "operation": "override_args",
+      "upgraderId": "enlighten.karen.maids-decree",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Karen",
       "upgraderType": "enlighten",
       "patch": {

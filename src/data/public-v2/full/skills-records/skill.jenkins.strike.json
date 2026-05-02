@@ -36,8 +36,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.jenkins.a-common-enemy.skill.jenkins.strike",
-      "upgraderId": "talent.jenkins.a-common-enemy",
       "operation": "link_only",
+      "upgraderId": "talent.jenkins.a-common-enemy",
       "upgraderType": "talent",
       "patch": {}
     }

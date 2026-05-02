@@ -36,11 +36,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.blessed-are-the-bones",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.salvador.bitter-eucharist",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.blessed-are-the-bones",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.bitter-eucharist",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {
@@ -75,11 +75,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.salvador.book-of-genesis.skill.salvador.blessed-are-the-bones",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.salvador.book-of-genesis",
       "ownerAwakenerId": "awakener-0044",
+      "id": "upgrade.enlighten.salvador.book-of-genesis.skill.salvador.blessed-are-the-bones",
       "operation": "mixed",
+      "upgraderId": "enlighten.salvador.book-of-genesis",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
       "patch": {

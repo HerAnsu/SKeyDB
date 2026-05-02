@@ -24,11 +24,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.aigis.sugary-aroma.skill.aigis.decomposition",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.aigis.sugary-aroma",
       "ownerAwakenerId": "awakener-0003",
+      "id": "upgrade.enlighten.aigis.sugary-aroma.skill.aigis.decomposition",
       "operation": "mixed",
+      "upgraderId": "enlighten.aigis.sugary-aroma",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Aigis",
       "upgraderType": "enlighten",
       "patch": {

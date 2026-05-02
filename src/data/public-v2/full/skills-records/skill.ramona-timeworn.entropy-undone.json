@@ -30,11 +30,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ramona-timeworn.infinite-singularity.skill.ramona-timeworn.entropy-undone",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.ramona-timeworn.infinite-singularity",
       "ownerAwakenerId": "awakener-0020",
+      "id": "upgrade.enlighten.ramona-timeworn.infinite-singularity.skill.ramona-timeworn.entropy-undone",
       "operation": "replace_description",
+      "upgraderId": "enlighten.ramona-timeworn.infinite-singularity",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Ramona: Timeworn",
       "upgraderType": "enlighten",
       "patch": {

@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.sorel.flowing-rill.skill.sorel.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.sorel.flowing-rill",
       "ownerAwakenerId": "awakener-0046",
+      "id": "upgrade.enlighten.sorel.flowing-rill.skill.sorel.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.sorel.flowing-rill",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Sorel",
       "upgraderType": "enlighten",
       "patch": {

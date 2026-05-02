@@ -41,11 +41,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.sorel.vintage-nectar.skill.sorel.elegance-of-rose",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.sorel.vintage-nectar",
       "ownerAwakenerId": "awakener-0046",
+      "id": "upgrade.enlighten.sorel.vintage-nectar.skill.sorel.elegance-of-rose",
       "operation": "mixed",
+      "upgraderId": "enlighten.sorel.vintage-nectar",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Sorel",
       "upgraderType": "enlighten",
       "patch": {

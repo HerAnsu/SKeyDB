@@ -39,11 +39,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.casiah.a-thousand-and-one-miracles.skill.casiah.opening-act",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.casiah.a-thousand-and-one-miracles",
       "ownerAwakenerId": "awakener-0007",
+      "id": "upgrade.enlighten.casiah.a-thousand-and-one-miracles.skill.casiah.opening-act",
       "operation": "replace_description",
+      "upgraderId": "enlighten.casiah.a-thousand-and-one-miracles",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Casiah",
       "upgraderType": "enlighten",
       "patch": {

@@ -28,11 +28,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tawil.boundless-sagacity.skill.tawil.pinions-of-time",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.tawil.boundless-sagacity",
       "ownerAwakenerId": "awakener-0047",
+      "id": "upgrade.enlighten.tawil.boundless-sagacity.skill.tawil.pinions-of-time",
       "operation": "replace_description",
+      "upgraderId": "enlighten.tawil.boundless-sagacity",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Tawil",
       "upgraderType": "enlighten",
       "patch": {

@@ -53,11 +53,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.castor.unyielding-will.skill.castor.umbral-flight",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.castor.unyielding-will",
       "ownerAwakenerId": "awakener-0008",
+      "id": "upgrade.enlighten.castor.unyielding-will.skill.castor.umbral-flight",
       "operation": "replace_description",
+      "upgraderId": "enlighten.castor.unyielding-will",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Castor",
       "upgraderType": "enlighten",
       "patch": {

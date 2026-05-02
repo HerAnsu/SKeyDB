@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.aurita.lets-all-have-fun-together.skill.aurita.defense",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.aurita.lets-all-have-fun-together",
       "ownerAwakenerId": "awakener-0005",
+      "id": "upgrade.enlighten.aurita.lets-all-have-fun-together.skill.aurita.defense",
       "operation": "replace_description",
+      "upgraderId": "enlighten.aurita.lets-all-have-fun-together",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Aurita",
       "upgraderType": "enlighten",
       "patch": {

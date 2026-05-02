@@ -903,11 +903,11 @@
       "ownerAwakenerId": "awakener-0052",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.wanda.lakeborne-dweller.overlay.wanda.murmurs",
-          "upgraderSlot": "E2",
-          "upgraderId": "enlighten.wanda.lakeborne-dweller",
           "ownerAwakenerId": "awakener-0052",
+          "id": "upgrade.enlighten.wanda.lakeborne-dweller.overlay.wanda.murmurs",
           "operation": "override_args",
+          "upgraderId": "enlighten.wanda.lakeborne-dweller",
+          "upgraderSlot": "E2",
           "ownerAwakenerName": "Wanda",
           "upgraderType": "enlighten",
           "patch": {
@@ -1002,11 +1002,11 @@
       "textColor": "affliction",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.phobic-fixation",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.clementine.you-will-recover",
           "ownerAwakenerId": "awakener-0010",
+          "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.phobic-fixation",
           "operation": "replace_description",
+          "upgraderId": "enlighten.clementine.you-will-recover",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Clementine",
           "upgraderType": "enlighten",
           "patch": {
@@ -1065,11 +1065,11 @@
       "textColor": "affliction",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.psychic-trauma",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.clementine.you-will-recover",
           "ownerAwakenerId": "awakener-0010",
+          "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.psychic-trauma",
           "operation": "replace_description",
+          "upgraderId": "enlighten.clementine.you-will-recover",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Clementine",
           "upgraderType": "enlighten",
           "patch": {
@@ -1158,11 +1158,11 @@
       "ownerAwakenerId": "awakener-0009",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.celeste.beyond-joy-and-sorrow.overlay.celeste.revival",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.celeste.beyond-joy-and-sorrow",
           "ownerAwakenerId": "awakener-0009",
+          "id": "upgrade.enlighten.celeste.beyond-joy-and-sorrow.overlay.celeste.revival",
           "operation": "mixed",
+          "upgraderId": "enlighten.celeste.beyond-joy-and-sorrow",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Celeste",
           "upgraderType": "enlighten",
           "patch": {
@@ -1200,11 +1200,11 @@
       "ownerAwakenerId": "awakener-0022",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.hameln.oneiric-waltz.overlay.hameln.rondino",
-          "upgraderSlot": "E2",
-          "upgraderId": "enlighten.hameln.oneiric-waltz",
           "ownerAwakenerId": "awakener-0022",
+          "id": "upgrade.enlighten.hameln.oneiric-waltz.overlay.hameln.rondino",
           "operation": "replace_description",
+          "upgraderId": "enlighten.hameln.oneiric-waltz",
+          "upgraderSlot": "E2",
           "ownerAwakenerName": "Hameln",
           "upgraderType": "enlighten",
           "patch": {
@@ -1319,11 +1319,11 @@
       "textColor": "damage",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.xu.nirvanas-kiss.overlay.xu.spellbound",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.xu.nirvanas-kiss",
           "ownerAwakenerId": "awakener-0054",
+          "id": "upgrade.enlighten.xu.nirvanas-kiss.overlay.xu.spellbound",
           "operation": "override_args",
+          "upgraderId": "enlighten.xu.nirvanas-kiss",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Xu",
           "upgraderType": "enlighten",
           "patch": {
@@ -1416,11 +1416,11 @@
       "textColor": "affliction",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.symbiosis",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.clementine.you-will-recover",
           "ownerAwakenerId": "awakener-0010",
+          "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.symbiosis",
           "operation": "replace_description",
+          "upgraderId": "enlighten.clementine.you-will-recover",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Clementine",
           "upgraderType": "enlighten",
           "patch": {
@@ -1614,11 +1614,11 @@
       "ownerAwakenerId": "awakener-0056",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.overlay.arachne.weaver",
-          "upgraderSlot": "E3",
-          "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
           "ownerAwakenerId": "awakener-0056",
+          "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.overlay.arachne.weaver",
           "operation": "override_args",
+          "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
+          "upgraderSlot": "E3",
           "ownerAwakenerName": "Arachne",
           "upgraderType": "enlighten",
           "patch": {

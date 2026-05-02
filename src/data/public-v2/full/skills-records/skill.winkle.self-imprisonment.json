@@ -43,11 +43,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.winkle.thus-spoke-the-outcast.skill.winkle.self-imprisonment",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.winkle.thus-spoke-the-outcast",
       "ownerAwakenerId": "awakener-0053",
+      "id": "upgrade.enlighten.winkle.thus-spoke-the-outcast.skill.winkle.self-imprisonment",
       "operation": "replace_description",
+      "upgraderId": "enlighten.winkle.thus-spoke-the-outcast",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Winkle",
       "upgraderType": "enlighten",
       "patch": {

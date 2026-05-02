@@ -37,11 +37,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.lotan.primal-leviathan.skill.lotan.beast-of-chaos",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.lotan.primal-leviathan",
       "ownerAwakenerId": "awakener-0031",
+      "id": "upgrade.enlighten.lotan.primal-leviathan.skill.lotan.beast-of-chaos",
       "operation": "mixed",
+      "upgraderId": "enlighten.lotan.primal-leviathan",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Lotan",
       "upgraderType": "enlighten",
       "patch": {
@@ -81,11 +81,11 @@
       }
     },
     {
-      "id": "upgrade.enlighten.lotan.timeless-solitude.skill.lotan.beast-of-chaos",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.lotan.timeless-solitude",
       "ownerAwakenerId": "awakener-0031",
+      "id": "upgrade.enlighten.lotan.timeless-solitude.skill.lotan.beast-of-chaos",
       "operation": "mixed",
+      "upgraderId": "enlighten.lotan.timeless-solitude",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Lotan",
       "upgraderType": "enlighten",
       "patch": {

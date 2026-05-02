@@ -27,11 +27,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.jenkins.obsidian-dissolution.skill.jenkins.mistborn-street-urchin",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.jenkins.obsidian-dissolution",
       "ownerAwakenerId": "awakener-0025",
+      "id": "upgrade.enlighten.jenkins.obsidian-dissolution.skill.jenkins.mistborn-street-urchin",
       "operation": "override_args",
+      "upgraderId": "enlighten.jenkins.obsidian-dissolution",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Jenkin",
       "upgraderType": "enlighten",
       "patch": {

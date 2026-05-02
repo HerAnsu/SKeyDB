@@ -26,11 +26,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.arachne.moiraes-finale.skill.arachne.puppet-stage-unveiled",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.arachne.moiraes-finale",
       "ownerAwakenerId": "awakener-0056",
+      "id": "upgrade.enlighten.arachne.moiraes-finale.skill.arachne.puppet-stage-unveiled",
       "operation": "replace_description",
+      "upgraderId": "enlighten.arachne.moiraes-finale",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Arachne",
       "upgraderType": "enlighten",
       "patch": {

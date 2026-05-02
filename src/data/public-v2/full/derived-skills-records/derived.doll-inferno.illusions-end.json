@@ -27,11 +27,11 @@
   "cost": "0",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.derived.doll-inferno.illusions-end",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
       "ownerAwakenerId": "awakener-0018",
+      "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.derived.doll-inferno.illusions-end",
       "operation": "replace_description",
+      "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Doll: Inferno",
       "upgraderType": "enlighten",
       "patch": {

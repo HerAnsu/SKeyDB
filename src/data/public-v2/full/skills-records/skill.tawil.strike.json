@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tawil.nonexistent-existence.skill.tawil.strike",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.tawil.nonexistent-existence",
       "ownerAwakenerId": "awakener-0047",
+      "id": "upgrade.enlighten.tawil.nonexistent-existence.skill.tawil.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.tawil.nonexistent-existence",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Tawil",
       "upgraderType": "enlighten",
       "patch": {

@@ -20,11 +20,11 @@
   "textColor": "damage",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.xu.nirvanas-kiss.overlay.xu.spellbound",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.xu.nirvanas-kiss",
       "ownerAwakenerId": "awakener-0054",
+      "id": "upgrade.enlighten.xu.nirvanas-kiss.overlay.xu.spellbound",
       "operation": "override_args",
+      "upgraderId": "enlighten.xu.nirvanas-kiss",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Xu",
       "upgraderType": "enlighten",
       "patch": {

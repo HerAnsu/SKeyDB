@@ -46,11 +46,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.celeste.solitary-mast.skill.celeste.everlasting-phantasm",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.celeste.solitary-mast",
       "ownerAwakenerId": "awakener-0009",
+      "id": "upgrade.enlighten.celeste.solitary-mast.skill.celeste.everlasting-phantasm",
       "operation": "override_args",
+      "upgraderId": "enlighten.celeste.solitary-mast",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Celeste",
       "upgraderType": "enlighten",
       "patch": {
@@ -95,8 +95,8 @@
     },
     {
       "id": "upgrade.talent.celeste.voyage-horn.skill.celeste.everlasting-phantasm",
-      "upgraderId": "talent.celeste.voyage-horn",
       "operation": "link_only",
+      "upgraderId": "talent.celeste.voyage-horn",
       "upgraderType": "talent",
       "patch": {}
     }

@@ -42,8 +42,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.helot.pain-sigil.skill.helot.surviving-impasse",
-      "upgraderId": "talent.helot.pain-sigil",
       "operation": "link_only",
+      "upgraderId": "talent.helot.pain-sigil",
       "upgraderType": "talent",
       "patch": {}
     }

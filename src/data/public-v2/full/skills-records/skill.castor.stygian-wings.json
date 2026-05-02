@@ -37,11 +37,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.castor.unyielding-will.skill.castor.stygian-wings",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.castor.unyielding-will",
       "ownerAwakenerId": "awakener-0008",
+      "id": "upgrade.enlighten.castor.unyielding-will.skill.castor.stygian-wings",
       "operation": "mixed",
+      "upgraderId": "enlighten.castor.unyielding-will",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Castor",
       "upgraderType": "enlighten",
       "patch": {

@@ -3,7 +3,7 @@ import publicDerivedSkillsFull from '@/data/public-v2/full/derived-skills.json'
 import {derivedSkillsDatasetSchema, type DerivedSkillRecord} from './awakener-source-schema'
 
 interface PublicDerivedSkillsEnvelope {
-  records: Array<Omit<DerivedSkillRecord, 'ownerAwakenerId'> & {ownerAwakenerId?: string}>
+  records: (Omit<DerivedSkillRecord, 'ownerAwakenerId'> & {ownerAwakenerId?: string})[]
 }
 
 let derivedSkillsCache: DerivedSkillRecord[] | null = null

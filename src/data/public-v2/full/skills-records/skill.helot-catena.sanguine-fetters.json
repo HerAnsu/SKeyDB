@@ -36,11 +36,11 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.helot-catena.remnants-requiem.skill.helot-catena.sanguine-fetters",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.helot-catena.remnants-requiem",
       "ownerAwakenerId": "awakener-0019",
+      "id": "upgrade.enlighten.helot-catena.remnants-requiem.skill.helot-catena.sanguine-fetters",
       "operation": "replace_description",
+      "upgraderId": "enlighten.helot-catena.remnants-requiem",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Helot: Catena",
       "upgraderType": "enlighten",
       "patch": {

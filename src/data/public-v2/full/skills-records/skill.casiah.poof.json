@@ -22,11 +22,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.casiah.minds-whisper.skill.casiah.poof",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.casiah.minds-whisper",
       "ownerAwakenerId": "awakener-0007",
+      "id": "upgrade.enlighten.casiah.minds-whisper.skill.casiah.poof",
       "operation": "mixed",
+      "upgraderId": "enlighten.casiah.minds-whisper",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Casiah",
       "upgraderType": "enlighten",
       "patch": {

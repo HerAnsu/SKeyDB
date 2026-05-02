@@ -52,6 +52,15 @@ These were confirmed website-side bugs from the audit and are patched on this br
   (`src/domain/posses.ts`, `src/domain/posse-assets.ts`, `src/domain/covenants.ts`,
   `src/domain/covenant-assets.ts`). Runtime compatibility leak. These now resolve from public V2
   ids and current icon assets without importing `posses-lite.json` or persistence id maps.
+- **Wheel mainstat scaling lived in a website-owned table**
+  (`src/domain/wheel-mainstat-scaling.ts`). Public data boundary weakness. The website now reads
+  wheel scaling from public V2 wheel envelope metadata and validates that metadata before resolving
+  enhance values.
+- **Public V2 aggregate validators rejected producer metadata**
+  (`src/domain/public-v2-schema.ts`, `src/domain/awakeners.ts`, `src/domain/wheels.ts`,
+  `src/domain/covenants.ts`, `src/domain/posses.ts`, `src/domain/awakener-builds.ts`). Schema/type
+  weakness. Aggregate envelopes now accept top-level public metadata while keeping record schemas
+  strict around the fields the runtime consumes.
 
 ## Needs Context Or Decision
 
@@ -79,9 +88,6 @@ intentional compatibility questions.
 
 ## Public Data / Tooling Gaps
 
-- Wheel mainstat scaling is now a small local TS table in `src/domain/wheel-mainstat-scaling.ts`
-  because no public V2 wheel scaling metadata is available yet. This should move to tooling/public
-  output if tooling wants the public dataset to own this stable per-mainstat/rarity progression.
 - `scripts/sync-public-v2-data.mjs` defaults to the sibling tooling output path
   `../MomenTB-Tools/outputs/public`. Directionally, the authoritative sync/export command should
   live in the tooling repo so maintainers do not need private local update paths; the website can
@@ -130,10 +136,10 @@ intentional compatibility questions.
 Current state after the no-shim cleanup pass:
 
 - `npx tsc -b --pretty false` passes.
-- The broader targeted Vitest slice currently has expectation drift from public V2 wording and
-  target-side upgrade semantics. These are not being hidden with compatibility shims; the remaining
-  work is to update or split those tests around the new public V2 contract.
-- `npm run build:quiet`
+- `npm run data:check-public-v2` passes.
+- The broader targeted Vitest migration slice passes.
+- `npm run format:changed` passes with chunked Prettier invocation for large regenerated public-data
+  diffs.
 
 ## Patch Log
 
@@ -153,4 +159,5 @@ Current state after the no-shim cleanup pass:
 - Added public V2 `OverExalt` enlighten-slot support to the old shared domain schema while leaving
   persisted V1-to-V2 migration bridges intact.
 - Tightened public V2 schema validation for core scope fields and upgrade entry shape.
-- Derived aggregate enlighten influence fields from target-side public V2 `upgrades[]` metadata.
+- Switched wheel mainstat scaling to public V2 wheel metadata instead of a website-owned constant.
+- Accepted public V2 aggregate metadata in runtime validators.

@@ -39,11 +39,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ryker.fortunes-boon.skill.ryker.showdown",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.ryker.fortunes-boon",
       "ownerAwakenerId": "awakener-0043",
+      "id": "upgrade.enlighten.ryker.fortunes-boon.skill.ryker.showdown",
       "operation": "mixed",
+      "upgraderId": "enlighten.ryker.fortunes-boon",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Ryker",
       "upgraderType": "enlighten",
       "patch": {

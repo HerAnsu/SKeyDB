@@ -41,11 +41,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.liz.verdant-spark.derived.liz.corrupted-flames",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.liz.verdant-spark",
       "ownerAwakenerId": "awakener-0030",
+      "id": "upgrade.enlighten.liz.verdant-spark.derived.liz.corrupted-flames",
       "operation": "replace_description",
+      "upgraderId": "enlighten.liz.verdant-spark",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Liz",
       "upgraderType": "enlighten",
       "patch": {

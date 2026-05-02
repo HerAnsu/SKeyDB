@@ -40,11 +40,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.aigis.nightborne-wings.skill.aigis.a-small-wish",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.aigis.nightborne-wings",
       "ownerAwakenerId": "awakener-0003",
+      "id": "upgrade.enlighten.aigis.nightborne-wings.skill.aigis.a-small-wish",
       "operation": "replace_description",
+      "upgraderId": "enlighten.aigis.nightborne-wings",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Aigis",
       "upgraderType": "enlighten",
       "patch": {

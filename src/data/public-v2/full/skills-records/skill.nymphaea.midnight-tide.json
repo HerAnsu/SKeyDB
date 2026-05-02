@@ -24,11 +24,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.nymphaea.silent-permeation.skill.nymphaea.midnight-tide",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.nymphaea.silent-permeation",
       "ownerAwakenerId": "awakener-0037",
+      "id": "upgrade.enlighten.nymphaea.silent-permeation.skill.nymphaea.midnight-tide",
       "operation": "mixed",
+      "upgraderId": "enlighten.nymphaea.silent-permeation",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Nymphaea",
       "upgraderType": "enlighten",
       "patch": {

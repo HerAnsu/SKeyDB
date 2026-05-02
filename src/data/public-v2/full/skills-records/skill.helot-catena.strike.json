@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.helot-catena.endless-slaughter.skill.helot-catena.strike",
-      "upgraderSlot": "E1",
-      "upgraderId": "enlighten.helot-catena.endless-slaughter",
       "ownerAwakenerId": "awakener-0019",
+      "id": "upgrade.enlighten.helot-catena.endless-slaughter.skill.helot-catena.strike",
       "operation": "mixed",
+      "upgraderId": "enlighten.helot-catena.endless-slaughter",
+      "upgraderSlot": "E1",
       "ownerAwakenerName": "Helot: Catena",
       "upgraderType": "enlighten",
       "patch": {

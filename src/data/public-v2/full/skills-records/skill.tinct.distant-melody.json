@@ -47,11 +47,11 @@
   "cost": "3",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.tinct.falling-skyward.skill.tinct.distant-melody",
-      "upgraderSlot": "E3",
-      "upgraderId": "enlighten.tinct.falling-skyward",
       "ownerAwakenerId": "awakener-0049",
+      "id": "upgrade.enlighten.tinct.falling-skyward.skill.tinct.distant-melody",
       "operation": "replace_description",
+      "upgraderId": "enlighten.tinct.falling-skyward",
+      "upgraderSlot": "E3",
       "ownerAwakenerName": "Tinct",
       "upgraderType": "enlighten",
       "patch": {

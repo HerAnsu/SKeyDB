@@ -57,11 +57,11 @@
   "cost": "2",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.faint.ever-barren-rainbow.skill.faint.boundless-starlight",
-      "upgraderSlot": "AbsoluteAxiom",
-      "upgraderId": "enlighten.faint.ever-barren-rainbow",
       "ownerAwakenerId": "awakener-0016",
+      "id": "upgrade.enlighten.faint.ever-barren-rainbow.skill.faint.boundless-starlight",
       "operation": "mixed",
+      "upgraderId": "enlighten.faint.ever-barren-rainbow",
+      "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerName": "Faint",
       "upgraderType": "enlighten",
       "patch": {
@@ -120,8 +120,8 @@
     },
     {
       "id": "upgrade.talent.faint.secondary-swaddle.skill.faint.boundless-starlight",
-      "upgraderId": "talent.faint.secondary-swaddle",
       "operation": "link_only",
+      "upgraderId": "talent.faint.secondary-swaddle",
       "upgraderType": "talent",
       "patch": {}
     }

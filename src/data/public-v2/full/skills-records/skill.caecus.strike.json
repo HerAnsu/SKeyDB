@@ -45,8 +45,8 @@
   "upgrades": [
     {
       "id": "upgrade.talent.caecus.rebellious-spikes.skill.caecus.strike",
-      "upgraderId": "talent.caecus.rebellious-spikes",
       "operation": "link_only",
+      "upgraderId": "talent.caecus.rebellious-spikes",
       "upgraderType": "talent",
       "patch": {}
     }

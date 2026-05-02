@@ -35,11 +35,11 @@
   "cost": "1",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.jenkins.golden-butterflys-memories.skill.jenkins.defense",
-      "upgraderSlot": "E2",
-      "upgraderId": "enlighten.jenkins.golden-butterflys-memories",
       "ownerAwakenerId": "awakener-0025",
+      "id": "upgrade.enlighten.jenkins.golden-butterflys-memories.skill.jenkins.defense",
       "operation": "replace_description",
+      "upgraderId": "enlighten.jenkins.golden-butterflys-memories",
+      "upgraderSlot": "E2",
       "ownerAwakenerName": "Jenkin",
       "upgraderType": "enlighten",
       "patch": {
