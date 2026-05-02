@@ -54,68 +54,6 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.he-who-protects",
-      "operation": "mixed",
-      "upgraderId": "enlighten.salvador.bitter-eucharist",
-      "upgraderType": "enlighten",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerId": "awakener-0044",
-      "ownerAwakenerName": "Salvador",
-      "patch": {
-        "descriptionTemplate": "[{Devour}: Obtain [Power:Arg1] Temporary {STR}, Temporary Crit. Rate +[Arg4]%.] Gain [Block:Arg2] Shield. Apply {Vulnerable} to all enemies for 1 turn. Until the start of next turn, when attacked, [Arg3]% of the DMG taken will be converted to {Crimson Furnace} Healing. Salvador obtains [Arg5]% Temporary Crit. DMG.",
-        "descriptionArgs": {
-          "Arg1": {
-            "kind": "scaling",
-            "values": [
-              "20",
-              "24",
-              "28",
-              "32",
-              "36",
-              "40"
-            ],
-            "stat": "ATK",
-            "suffix": "%"
-          },
-          "Arg2": {
-            "kind": "scaling",
-            "values": [
-              "15",
-              "18",
-              "21",
-              "24",
-              "27",
-              "30"
-            ],
-            "stat": "DEF",
-            "suffix": "%"
-          },
-          "Arg3": {
-            "kind": "scaling",
-            "values": [
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "10"
-            ],
-            "suffix": "%"
-          },
-          "Arg4": {
-            "kind": "fixed",
-            "value": "25",
-            "suffix": "%"
-          },
-          "Arg5": {
-            "kind": "fixed",
-            "value": "35",
-            "suffix": "%"
-          }
-        }
-      }
-    },
-    {
       "id": "upgrade.enlighten.salvador.salvations-hand.skill.salvador.he-who-protects",
       "operation": "mixed",
       "upgraderId": "enlighten.salvador.salvations-hand",

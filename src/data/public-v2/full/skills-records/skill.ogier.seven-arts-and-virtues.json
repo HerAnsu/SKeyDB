@@ -42,64 +42,6 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.ogier.deathless-loyalty.skill.ogier.seven-arts-and-virtues",
-      "operation": "mixed",
-      "upgraderId": "enlighten.ogier.deathless-loyalty",
-      "upgraderType": "enlighten",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerId": "awakener-0038",
-      "ownerAwakenerName": "Ogier",
-      "patch": {
-        "descriptionTemplate": "If team currently has {Fragile} state, dispel it and Gain [Block:Arg3] Shield. Gain [Block:Arg1] Shield. Obtain [Power:Arg2] Temporary {STR}.",
-        "descriptionArgs": {
-          "Arg1": {
-            "kind": "scaling",
-            "values": [
-              "36",
-              "43.2",
-              "50.4",
-              "57.6",
-              "64.8",
-              "72"
-            ],
-            "stat": "DEF",
-            "suffix": "%"
-          },
-          "Arg2": {
-            "kind": "scaling",
-            "values": [
-              "15",
-              "18",
-              "21",
-              "24",
-              "27",
-              "30"
-            ],
-            "stat": "ATK",
-            "suffix": "%",
-            "substatBonus": {
-              "substat": "SigilYield",
-              "multiplier": "3",
-              "mode": "scale_base"
-            }
-          },
-          "Arg3": {
-            "kind": "scaling",
-            "values": [
-              "12",
-              "14.4",
-              "16.8",
-              "19.2",
-              "21.6",
-              "24"
-            ],
-            "stat": "DEF",
-            "suffix": "%"
-          }
-        }
-      }
-    },
-    {
       "id": "upgrade.enlighten.ogier.mercy-for-the-meek.skill.ogier.seven-arts-and-virtues",
       "operation": "mixed",
       "upgraderId": "enlighten.ogier.mercy-for-the-meek",

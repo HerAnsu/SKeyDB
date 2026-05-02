@@ -37,50 +37,6 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.lotan.primal-leviathan.skill.lotan.beast-of-chaos",
-      "operation": "mixed",
-      "upgraderId": "enlighten.lotan.primal-leviathan",
-      "upgraderType": "enlighten",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerId": "awakener-0031",
-      "ownerAwakenerName": "Lotan",
-      "patch": {
-        "descriptionTemplate": "Dispel self {Weakness} state. Deal [Damage:Arg1] DMG to all enemies [Arg3] {plural:[Arg3]|time|times}. In this battle, for each \"Strike\" played, increase DMG by [Arg2]. Add 2 \"Strike\" cards with {Exhaust} and {Fleeting} to your hand.",
-        "descriptionArgs": {
-          "Arg1": {
-            "kind": "scaling",
-            "values": [
-              "40",
-              "48",
-              "56",
-              "64",
-              "72",
-              "80"
-            ],
-            "stat": "ATK",
-            "suffix": "%"
-          },
-          "Arg2": {
-            "kind": "scaling",
-            "values": [
-              "24",
-              "28.8",
-              "33.6",
-              "38.4",
-              "43.2",
-              "48"
-            ],
-            "stat": "ATK",
-            "suffix": "%"
-          },
-          "Arg3": {
-            "kind": "fixed",
-            "value": "2"
-          }
-        }
-      }
-    },
-    {
       "id": "upgrade.enlighten.lotan.timeless-solitude.skill.lotan.beast-of-chaos",
       "operation": "mixed",
       "upgraderId": "enlighten.lotan.timeless-solitude",

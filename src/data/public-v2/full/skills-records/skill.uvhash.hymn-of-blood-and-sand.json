@@ -46,54 +46,6 @@
   "cost": "100",
   "upgrades": [
     {
-      "id": "upgrade.enlighten.uvhash.paean-of-twisted-fury.skill.uvhash.hymn-of-blood-and-sand",
-      "operation": "override_args",
-      "upgraderId": "enlighten.uvhash.paean-of-twisted-fury",
-      "upgraderType": "enlighten",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerId": "awakener-0051",
-      "ownerAwakenerName": "Uvhash",
-      "patch": {
-        "descriptionArgs": {
-          "Arg1": {
-            "kind": "scaling",
-            "values": [
-              "80",
-              "96",
-              "112",
-              "128",
-              "144",
-              "160"
-            ],
-            "rounding": "ceil",
-            "stat": "ATK",
-            "suffix": "%"
-          },
-          "Arg2": {
-            "kind": "fixed",
-            "value": "3"
-          },
-          "Arg3": {
-            "kind": "fixed",
-            "value": "2"
-          },
-          "Arg4": {
-            "kind": "scaling",
-            "values": [
-              "80",
-              "96",
-              "112",
-              "128",
-              "144",
-              "160"
-            ],
-            "stat": "ATK",
-            "suffix": "%"
-          }
-        }
-      }
-    },
-    {
       "id": "upgrade.enlighten.uvhash.sorcerers-end.skill.uvhash.hymn-of-blood-and-sand",
       "operation": "override_args",
       "upgraderId": "enlighten.uvhash.sorcerers-end",

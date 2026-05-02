@@ -4087,62 +4087,6 @@
       "cost": "4",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.corposant.unquenched-unfelled-undimmed.skill.corposant.lightning-retribution",
-          "operation": "override_args",
-          "upgraderId": "enlighten.corposant.unquenched-unfelled-undimmed",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0011",
-          "ownerAwakenerName": "Corposant",
-          "patch": {
-            "descriptionArgs": {
-              "Arg1": {
-                "kind": "scaling",
-                "values": [
-                  "35",
-                  "42",
-                  "49",
-                  "56",
-                  "63",
-                  "70"
-                ],
-                "stat": "ATK",
-                "suffix": "%",
-                "substatBonus": {
-                  "substat": "DeathResistance",
-                  "multiplier": "0.2",
-                  "mode": "scale_base"
-                }
-              },
-              "Arg2": {
-                "kind": "fixed",
-                "value": "5"
-              },
-              "Arg3": {
-                "kind": "scaling",
-                "values": [
-                  "75",
-                  "80",
-                  "85",
-                  "90",
-                  "95",
-                  "100"
-                ],
-                "suffix": "%"
-              },
-              "Arg4": {
-                "kind": "fixed",
-                "value": "5",
-                "suffix": "%"
-              },
-              "Arg5": {
-                "kind": "fixed",
-                "value": "2"
-              }
-            }
-          }
-        },
-        {
           "id": "upgrade.talent.corposant.cinders.skill.corposant.lightning-retribution",
           "operation": "link_only",
           "upgraderId": "talent.corposant.cinders",
@@ -4188,35 +4132,6 @@
           "ownerAwakenerName": "Corposant",
           "patch": {
             "descriptionTemplate": "Gain [Energy:Arg1] Aliemus. Put [Arg2] {Pilot} into hand. Apply {Weakness} to all enemies for 1 turn."
-          }
-        },
-        {
-          "id": "upgrade.enlighten.corposant.unquenched-unfelled-undimmed.skill.corposant.ominous-semaphore",
-          "operation": "mixed",
-          "upgraderId": "enlighten.corposant.unquenched-unfelled-undimmed",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0011",
-          "ownerAwakenerName": "Corposant",
-          "patch": {
-            "descriptionTemplate": "Gain [Energy:Arg1] Aliemus. Put [Arg2] {Pilot} into hand. Apply {Weakness} to all enemies for 1 turn.",
-            "descriptionArgs": {
-              "Arg1": {
-                "kind": "scaling",
-                "values": [
-                  "20",
-                  "22",
-                  "24",
-                  "26",
-                  "28",
-                  "30"
-                ]
-              },
-              "Arg2": {
-                "kind": "fixed",
-                "value": "1"
-              }
-            }
           }
         }
       ]
@@ -10603,53 +10518,6 @@
           "patch": {
             "descriptionTemplate": "[{Devour}: Restore [Arg4]% lost HP, dispel self {Vulnerable} status. The {STR} gained from this {Flatterer's Embrace} is doubled.] Restore [Heal:Arg1] HP. Obtain [Power:Arg2] {STR}."
           }
-        },
-        {
-          "id": "upgrade.enlighten.leigh.insatiable-craving.skill.leigh.flatterers-embrace",
-          "operation": "mixed",
-          "upgraderId": "enlighten.leigh.insatiable-craving",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0028",
-          "ownerAwakenerName": "Leigh",
-          "patch": {
-            "descriptionTemplate": "[{Devour}: Restore [Arg4]% lost HP, dispel self {Vulnerable} status. The {STR} gained from this {Flatterer's Embrace} is doubled.] Restore [Heal:Arg1] HP. Obtain [Power:Arg2] {STR}.",
-            "descriptionArgs": {
-              "Arg1": {
-                "kind": "scaling",
-                "values": [
-                  "40",
-                  "48",
-                  "56",
-                  "64",
-                  "72",
-                  "80"
-                ],
-                "rounding": "ceil",
-                "stat": "CON",
-                "suffix": "%"
-              },
-              "Arg2": {
-                "kind": "scaling",
-                "values": [
-                  "10",
-                  "12",
-                  "14",
-                  "16",
-                  "18",
-                  "20"
-                ],
-                "stat": "ATK",
-                "suffix": "%"
-              },
-              "Arg4": {
-                "kind": "fixed",
-                "value": "16",
-                "rounding": "ceil",
-                "suffix": "%"
-              }
-            }
-          }
         }
       ]
     },
@@ -11708,50 +11576,6 @@
       "cardKeywords": [],
       "cost": "100",
       "upgrades": [
-        {
-          "id": "upgrade.enlighten.lotan.primal-leviathan.skill.lotan.beast-of-chaos",
-          "operation": "mixed",
-          "upgraderId": "enlighten.lotan.primal-leviathan",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0031",
-          "ownerAwakenerName": "Lotan",
-          "patch": {
-            "descriptionTemplate": "Dispel self {Weakness} state. Deal [Damage:Arg1] DMG to all enemies [Arg3] {plural:[Arg3]|time|times}. In this battle, for each \"Strike\" played, increase DMG by [Arg2]. Add 2 \"Strike\" cards with {Exhaust} and {Fleeting} to your hand.",
-            "descriptionArgs": {
-              "Arg1": {
-                "kind": "scaling",
-                "values": [
-                  "40",
-                  "48",
-                  "56",
-                  "64",
-                  "72",
-                  "80"
-                ],
-                "stat": "ATK",
-                "suffix": "%"
-              },
-              "Arg2": {
-                "kind": "scaling",
-                "values": [
-                  "24",
-                  "28.8",
-                  "33.6",
-                  "38.4",
-                  "43.2",
-                  "48"
-                ],
-                "stat": "ATK",
-                "suffix": "%"
-              },
-              "Arg3": {
-                "kind": "fixed",
-                "value": "2"
-              }
-            }
-          }
-        },
         {
           "id": "upgrade.enlighten.lotan.timeless-solitude.skill.lotan.beast-of-chaos",
           "operation": "mixed",
@@ -14819,64 +14643,6 @@
       "cost": "100",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.ogier.deathless-loyalty.skill.ogier.seven-arts-and-virtues",
-          "operation": "mixed",
-          "upgraderId": "enlighten.ogier.deathless-loyalty",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0038",
-          "ownerAwakenerName": "Ogier",
-          "patch": {
-            "descriptionTemplate": "If team currently has {Fragile} state, dispel it and Gain [Block:Arg3] Shield. Gain [Block:Arg1] Shield. Obtain [Power:Arg2] Temporary {STR}.",
-            "descriptionArgs": {
-              "Arg1": {
-                "kind": "scaling",
-                "values": [
-                  "36",
-                  "43.2",
-                  "50.4",
-                  "57.6",
-                  "64.8",
-                  "72"
-                ],
-                "stat": "DEF",
-                "suffix": "%"
-              },
-              "Arg2": {
-                "kind": "scaling",
-                "values": [
-                  "15",
-                  "18",
-                  "21",
-                  "24",
-                  "27",
-                  "30"
-                ],
-                "stat": "ATK",
-                "suffix": "%",
-                "substatBonus": {
-                  "substat": "SigilYield",
-                  "multiplier": "3",
-                  "mode": "scale_base"
-                }
-              },
-              "Arg3": {
-                "kind": "scaling",
-                "values": [
-                  "12",
-                  "14.4",
-                  "16.8",
-                  "19.2",
-                  "21.6",
-                  "24"
-                ],
-                "stat": "DEF",
-                "suffix": "%"
-              }
-            }
-          }
-        },
-        {
           "id": "upgrade.enlighten.ogier.mercy-for-the-meek.skill.ogier.seven-arts-and-virtues",
           "operation": "mixed",
           "upgraderId": "enlighten.ogier.mercy-for-the-meek",
@@ -17017,45 +16783,6 @@
       "cost": "3",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.blessed-are-the-bones",
-          "operation": "mixed",
-          "upgraderId": "enlighten.salvador.bitter-eucharist",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0044",
-          "ownerAwakenerName": "Salvador",
-          "patch": {
-            "descriptionTemplate": "{Weakness} all enemies for 1 turn. {Embryo Fusion} +[Arg1]%. Accumulate [Heal:Arg2] {Crimson Furnace} Healing, and gain an additional [Arg3] per turn during battle.",
-            "descriptionArgs": {
-              "Arg1": {
-                "kind": "scaling",
-                "values": [
-                  "40",
-                  "42",
-                  "44",
-                  "46",
-                  "48",
-                  "50"
-                ],
-                "suffix": "%"
-              },
-              "Arg3": {
-                "kind": "scaling",
-                "values": [
-                  "0.75",
-                  "0.9",
-                  "1.05",
-                  "1.2",
-                  "1.35",
-                  "1.5"
-                ],
-                "stat": "CON",
-                "suffix": "%"
-              }
-            }
-          }
-        },
-        {
           "id": "upgrade.enlighten.salvador.book-of-genesis.skill.salvador.blessed-are-the-bones",
           "operation": "mixed",
           "upgraderId": "enlighten.salvador.book-of-genesis",
@@ -17330,68 +17057,6 @@
       "cardKeywords": [],
       "cost": "100",
       "upgrades": [
-        {
-          "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.he-who-protects",
-          "operation": "mixed",
-          "upgraderId": "enlighten.salvador.bitter-eucharist",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0044",
-          "ownerAwakenerName": "Salvador",
-          "patch": {
-            "descriptionTemplate": "[{Devour}: Obtain [Power:Arg1] Temporary {STR}, Temporary Crit. Rate +[Arg4]%.] Gain [Block:Arg2] Shield. Apply {Vulnerable} to all enemies for 1 turn. Until the start of next turn, when attacked, [Arg3]% of the DMG taken will be converted to {Crimson Furnace} Healing. Salvador obtains [Arg5]% Temporary Crit. DMG.",
-            "descriptionArgs": {
-              "Arg1": {
-                "kind": "scaling",
-                "values": [
-                  "20",
-                  "24",
-                  "28",
-                  "32",
-                  "36",
-                  "40"
-                ],
-                "stat": "ATK",
-                "suffix": "%"
-              },
-              "Arg2": {
-                "kind": "scaling",
-                "values": [
-                  "15",
-                  "18",
-                  "21",
-                  "24",
-                  "27",
-                  "30"
-                ],
-                "stat": "DEF",
-                "suffix": "%"
-              },
-              "Arg3": {
-                "kind": "scaling",
-                "values": [
-                  "5",
-                  "6",
-                  "7",
-                  "8",
-                  "9",
-                  "10"
-                ],
-                "suffix": "%"
-              },
-              "Arg4": {
-                "kind": "fixed",
-                "value": "25",
-                "suffix": "%"
-              },
-              "Arg5": {
-                "kind": "fixed",
-                "value": "35",
-                "suffix": "%"
-              }
-            }
-          }
-        },
         {
           "id": "upgrade.enlighten.salvador.salvations-hand.skill.salvador.he-who-protects",
           "operation": "mixed",
@@ -18687,18 +18352,6 @@
       "cardKeywords": [],
       "cost": "100",
       "upgrades": [
-        {
-          "id": "upgrade.enlighten.tawil.nonexistent-existence.skill.tawil.omnifex-convergence",
-          "operation": "replace_description",
-          "upgraderId": "enlighten.tawil.nonexistent-existence",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "E3",
-          "ownerAwakenerId": "awakener-0047",
-          "ownerAwakenerName": "Tawil",
-          "patch": {
-            "descriptionTemplate": "Obtain [Arg1] Keyflare. Present 5 Skill cards from the current Realm, choose to {Discover} up to 3 of them, and make them Tawil's cards with {Exhaust}, {Prepare 1}, and {Retain}. The next Tawil's Command Card you play takes effect twice."
-          }
-        },
         {
           "id": "upgrade.enlighten.tawil.omniscient-and-omnipotent.skill.tawil.omnifex-convergence",
           "operation": "replace_description",
@@ -20452,54 +20105,6 @@
       "cost": "100",
       "upgrades": [
         {
-          "id": "upgrade.enlighten.uvhash.paean-of-twisted-fury.skill.uvhash.hymn-of-blood-and-sand",
-          "operation": "override_args",
-          "upgraderId": "enlighten.uvhash.paean-of-twisted-fury",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0051",
-          "ownerAwakenerName": "Uvhash",
-          "patch": {
-            "descriptionArgs": {
-              "Arg1": {
-                "kind": "scaling",
-                "values": [
-                  "80",
-                  "96",
-                  "112",
-                  "128",
-                  "144",
-                  "160"
-                ],
-                "rounding": "ceil",
-                "stat": "ATK",
-                "suffix": "%"
-              },
-              "Arg2": {
-                "kind": "fixed",
-                "value": "3"
-              },
-              "Arg3": {
-                "kind": "fixed",
-                "value": "2"
-              },
-              "Arg4": {
-                "kind": "scaling",
-                "values": [
-                  "80",
-                  "96",
-                  "112",
-                  "128",
-                  "144",
-                  "160"
-                ],
-                "stat": "ATK",
-                "suffix": "%"
-              }
-            }
-          }
-        },
-        {
           "id": "upgrade.enlighten.uvhash.sorcerers-end.skill.uvhash.hymn-of-blood-and-sand",
           "operation": "override_args",
           "upgraderId": "enlighten.uvhash.sorcerers-end",
@@ -22125,40 +21730,6 @@
       "cardKeywords": [],
       "cost": "100",
       "upgrades": [
-        {
-          "id": "upgrade.enlighten.vortice.bang-pop-boom.skill.vortice.abyssal-vortex-cannon",
-          "operation": "mixed",
-          "upgraderId": "enlighten.vortice.bang-pop-boom",
-          "upgraderType": "enlighten",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerId": "awakener-0055",
-          "ownerAwakenerName": "Vortice",
-          "patch": {
-            "descriptionTemplate": "Dispel {Burn} from all Cards in hand. Deal DMG equal to [Arg7]% {Tentacle DMG} Bonus to all enemies, dealing 3x DMG to the enemy with the highest HP. {Sacrifice} up to 3 additional Permanent Tentacles, each increasing this Exalt's Crit. DMG by +50%. Gain [Arg6] Realm Mastery, and for every 20 Aliemus spent, other Awakeners gain 1 Aliemus.",
-            "descriptionArgs": {
-              "Arg6": {
-                "kind": "fixed",
-                "value": "50",
-                "substatBonus": {
-                  "substat": "RealmMastery",
-                  "multiplier": "0.5"
-                }
-              },
-              "Arg7": {
-                "kind": "scaling",
-                "values": [
-                  "500",
-                  "550",
-                  "600",
-                  "650",
-                  "700",
-                  "750"
-                ],
-                "suffix": "%"
-              }
-            }
-          }
-        },
         {
           "id": "upgrade.enlighten.vortice.endless-tide.skill.vortice.abyssal-vortex-cannon",
           "operation": "mixed",

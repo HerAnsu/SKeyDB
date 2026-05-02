@@ -53,53 +53,6 @@
       "patch": {
         "descriptionTemplate": "[{Devour}: Restore [Arg4]% lost HP, dispel self {Vulnerable} status. The {STR} gained from this {Flatterer's Embrace} is doubled.] Restore [Heal:Arg1] HP. Obtain [Power:Arg2] {STR}."
       }
-    },
-    {
-      "id": "upgrade.enlighten.leigh.insatiable-craving.skill.leigh.flatterers-embrace",
-      "operation": "mixed",
-      "upgraderId": "enlighten.leigh.insatiable-craving",
-      "upgraderType": "enlighten",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerId": "awakener-0028",
-      "ownerAwakenerName": "Leigh",
-      "patch": {
-        "descriptionTemplate": "[{Devour}: Restore [Arg4]% lost HP, dispel self {Vulnerable} status. The {STR} gained from this {Flatterer's Embrace} is doubled.] Restore [Heal:Arg1] HP. Obtain [Power:Arg2] {STR}.",
-        "descriptionArgs": {
-          "Arg1": {
-            "kind": "scaling",
-            "values": [
-              "40",
-              "48",
-              "56",
-              "64",
-              "72",
-              "80"
-            ],
-            "rounding": "ceil",
-            "stat": "CON",
-            "suffix": "%"
-          },
-          "Arg2": {
-            "kind": "scaling",
-            "values": [
-              "10",
-              "12",
-              "14",
-              "16",
-              "18",
-              "20"
-            ],
-            "stat": "ATK",
-            "suffix": "%"
-          },
-          "Arg4": {
-            "kind": "fixed",
-            "value": "16",
-            "rounding": "ceil",
-            "suffix": "%"
-          }
-        }
-      }
     }
   ]
 }
