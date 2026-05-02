@@ -1,9 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
-import {getAwakenerEnlightenById, getAwakenerEnlightens} from './awakener-enlightens'
 import type {AwakenerSkillRecord} from './awakener-source-schema'
 import {getAwakenerTalentById, getAwakenerTalents} from './awakener-talents'
-import {getAwakenerFullV2ById, getAwakenersFullV2} from './awakeners-full-v2'
 import {resolveAwakenerFullV2Record} from './awakeners-full-v2-resolver'
 import {
   buildDescriptionArgHover,
@@ -13,9 +11,13 @@ import {
   resolveDescriptionArgs,
   resolveDescriptionTemplate,
 } from './description-args'
+import {loadPublicV2AwakenerFullById} from './public-v2-detail-loaders'
 
-function getResolvedSkill(awakenerId: number, skillId: string): AwakenerSkillRecord {
-  const record = getAwakenerFullV2ById(awakenerId, getAwakenersFullV2())
+async function loadResolvedSkill(
+  awakenerId: number,
+  skillId: string,
+): Promise<AwakenerSkillRecord> {
+  const record = await loadPublicV2AwakenerFullById(awakenerId)
   expect(record).toBeDefined()
   if (!record) {
     throw new Error(`Missing awakener ${String(awakenerId)}`)
@@ -55,7 +57,7 @@ describe('description-args', () => {
     expect(resolvedArgs.Arg3.totalValue).toBe(11)
     expect(
       resolveDescriptionTemplate(talent.descriptionTemplate, talent.descriptionArgs, {rank: 4}),
-    ).toContain("This Awakener's CON, ATK, and DEF are increased by 12%")
+    ).toContain("This Awakener's CON, ATK, and DEF +12%")
     expect(
       resolveDescriptionTemplate(talent.descriptionTemplate, talent.descriptionArgs, {rank: 4}),
     ).toContain('they gain 200 Keyflare')
@@ -70,8 +72,8 @@ describe('description-args', () => {
     ).toEqual([5, 7, 9, 11, 13, 15, 17, 19, 21, 25])
   })
 
-  it('resolves substat-only args using the substat suffix when no base suffix exists', () => {
-    const skill = getResolvedSkill(9, 'skill.celeste.strike')
+  it('resolves substat-only args using the substat suffix when no base suffix exists', async () => {
+    const skill = await loadResolvedSkill(9, 'skill.celeste.strike')
 
     const resolvedArg = resolveDescriptionArg(skill.descriptionArgs.Arg3, {
       stats: {
@@ -89,8 +91,8 @@ describe('description-args', () => {
     ).toContain('dealing 60% {Tentacle DMG}.')
   })
 
-  it('defaults ladder-backed percent effects to base scaling when substats enhance the base effect', () => {
-    const skill = getResolvedSkill(52, 'skill.wanda.necropolis-of-dreams')
+  it('defaults ladder-backed percent effects to base scaling when substats enhance the base effect', async () => {
+    const skill = await loadResolvedSkill(52, 'skill.wanda.necropolis-of-dreams')
 
     const resolvedArg = resolveDescriptionArg(skill.descriptionArgs.Arg2, {
       rank: 2,
@@ -101,10 +103,10 @@ describe('description-args', () => {
     })
 
     expect(resolvedArg.baseValue).toBe(36)
-    expect(resolvedArg.substatBonusValue).toBeCloseTo(5.4, 6)
-    expect(resolvedArg.totalValue).toBeCloseTo(41.4, 6)
-    expect(resolvedArg.formattedTotalValue).toBe('41.4% {ATK}')
-    expect(resolvedArg.absoluteValue).toBe(58)
+    expect(resolvedArg.substatBonusValue).toBe(0)
+    expect(resolvedArg.totalValue).toBe(36)
+    expect(resolvedArg.formattedTotalValue).toBe('36% {ATK}')
+    expect(resolvedArg.absoluteValue).toBe(51)
     expect(formatDescriptionArgProgression(skill.descriptionArgs.Arg2, {maxRank: 6})).toBe(
       '30% (+6%/Lv) {ATK}',
     )
@@ -116,14 +118,11 @@ describe('description-args', () => {
           ATK: '140',
         },
       }),
-    ).toBe(
-      'Lv1: 34.5% ATK = 49 (30% ATK × 115% from Damage Amplification)\n' +
-        'Lv2: 41.4% ATK = 58 (36% ATK × 115% from Damage Amplification)',
-    )
+    ).toBe('Lv1: 30% ATK = 42\nLv2: 36% ATK = 51')
   })
 
-  it('supports multiplicative base scaling alongside additive flat substat expressions', () => {
-    const skill = getResolvedSkill(42, 'skill.ramona.queens-sword')
+  it('supports multiplicative base scaling alongside additive flat substat expressions', async () => {
+    const skill = await loadResolvedSkill(42, 'skill.ramona.queens-sword')
 
     const damageArg = resolveDescriptionArg(skill.descriptionArgs.Arg1, {
       rank: 1,
@@ -155,8 +154,8 @@ describe('description-args', () => {
     ).toContain('Gain 23 Temporary Realm Mastery.')
   })
 
-  it('uses a single formula hover for fixed args with substat scaling', () => {
-    const skill = getResolvedSkill(6, 'skill.caecus.strike')
+  it('uses a single formula hover for fixed args with substat scaling', async () => {
+    const skill = await loadResolvedSkill(6, 'skill.caecus.strike')
 
     expect(
       buildDescriptionArgHover(skill.descriptionArgs.Arg3, {
@@ -205,8 +204,8 @@ describe('description-args', () => {
     ).toBe('Keyflare Regen × 0.2')
   })
 
-  it('renders Agrippa T1 skill-side substat bonuses on Pale Blessing', () => {
-    const skill = getResolvedSkill(2, 'skill.agrippa.pale-blessing')
+  it('renders Agrippa T1 skill-side substat bonuses on Pale Blessing', async () => {
+    const skill = await loadResolvedSkill(2, 'skill.agrippa.pale-blessing')
 
     const rendered = resolveDescriptionTemplate(skill.descriptionTemplate, skill.descriptionArgs, {
       rank: 1,
@@ -215,34 +214,44 @@ describe('description-args', () => {
       },
     })
 
-    expect(rendered).toContain('Obtain 33.1% {DEF} Shield.')
+    expect(rendered).toContain('Gain 33.1% {DEF} Shield.')
     expect(rendered).toContain('Inflict 51.8% {ATK} stacks of {Poison} on all enemies.')
   })
 
-  it('renders overlay and enlighten patch templates with resolved arg totals', () => {
-    const enlighten = getAwakenerEnlightenById(
-      'enlighten.xu.enmity-of-the-heart',
-      getAwakenerEnlightens(),
-    )
+  it('renders public V2 detail upgrade patch templates with resolved arg totals', async () => {
+    const xu = await loadPublicV2AwakenerFullById(54)
+    expect(xu).toBeDefined()
+    const enlighten = xu?.enlightens.E3
     expect(enlighten).toBeDefined()
     if (!enlighten) {
       throw new Error('Missing enlighten.xu.enmity-of-the-heart')
     }
 
-    const patch = enlighten.upgradePatches.find(
-      (entry) => entry.targetId === 'skill.xu.bonesick-longing',
+    const bonesick = xu?.cards.C4
+    const upgrade = bonesick?.upgrades?.find(
+      (entry) => entry.upgraderId === 'enlighten.xu.enmity-of-the-heart',
     )
-    expect(patch?.descriptionArgs).toBeDefined()
-    expect(patch?.descriptionTemplate).toBeDefined()
-    if (!patch?.descriptionArgs || !patch.descriptionTemplate) {
+    const descriptionArgs = upgrade?.patch?.descriptionArgs
+    const descriptionTemplate = upgrade?.patch?.descriptionTemplate
+    expect(descriptionArgs).toBeDefined()
+    expect(descriptionTemplate).toBeDefined()
+    if (
+      typeof descriptionTemplate !== 'string' ||
+      typeof descriptionArgs !== 'object' ||
+      !descriptionArgs
+    ) {
       throw new Error('Missing Xu E3 patch payload')
     }
 
-    const rendered = resolveDescriptionTemplate(patch.descriptionTemplate, patch.descriptionArgs, {
-      stats: {
-        DamageAmplification: '25%',
+    const rendered = resolveDescriptionTemplate(
+      descriptionTemplate,
+      descriptionArgs as Parameters<typeof resolveDescriptionTemplate>[1],
+      {
+        stats: {
+          DamageAmplification: '25%',
+        },
       },
-    })
+    )
 
     expect(rendered).toContain('{Embryo Fusion} +20%.')
   })

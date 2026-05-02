@@ -12,7 +12,13 @@ import {
   type DescriptionArg,
   type UpgradePatch,
 } from './awakener-source-schema'
-import {type AwakenerFullV2Record} from './awakeners-full-v2'
+import {
+  type AwakenerFullV2Record,
+  type PublicV2RecordUpgrade,
+  type PublicV2UpgradeableDerivedSkillRecord,
+  type PublicV2UpgradeableOverlayRecord,
+  type PublicV2UpgradeableSkillRecord,
+} from './awakeners-full-v2'
 import {isSoulforgeTalent, selectedEnlightenSlotSchema} from './awakeners-full-v2-contract'
 
 export const awakenerFullV2ResolveOptionsSchema = z.object({
@@ -31,6 +37,11 @@ export interface ResolvedAwakenerFullV2Record {
 }
 
 type PatchableCardRecord = AwakenerSkillRecord | DerivedSkillRecord
+type PublicV2PatchTargetType = 'skill' | 'derived-skill' | 'overlay'
+type PublicV2UpgradeableTarget =
+  | PublicV2UpgradeableSkillRecord
+  | PublicV2UpgradeableDerivedSkillRecord
+  | PublicV2UpgradeableOverlayRecord
 
 function cloneDescriptionArgs(
   descriptionArgs: Record<string, DescriptionArg>,
@@ -239,6 +250,9 @@ function buildAccessibleOverlaysById(
       byId.set(overlay.id, overlay)
     }
   }
+  for (const overlay of record.overlays ?? []) {
+    byId.set(overlay.id, overlay)
+  }
 
   return byId
 }
@@ -307,20 +321,6 @@ function cloneTalentRecord(record: AwakenerTalentRecord): AwakenerTalentRecord {
   return {
     ...record,
     descriptionArgs: cloneDescriptionArgs(record.descriptionArgs),
-    upgradeTargetIds: [...record.upgradeTargetIds],
-    upgradePatches: record.upgradePatches.map((patch) => ({
-      ...patch,
-      ...(patch.descriptionArgs
-        ? {descriptionArgs: cloneDescriptionArgs(patch.descriptionArgs)}
-        : {}),
-      ...(patch.argSubstatBonuses ? {argSubstatBonuses: {...patch.argSubstatBonuses}} : {}),
-      ...(patch.addCardKeywords
-        ? {addCardKeywords: patch.addCardKeywords.map((keyword) => ({...keyword}))}
-        : {}),
-      ...(patch.removeCardKeywordIds
-        ? {removeCardKeywordIds: [...patch.removeCardKeywordIds]}
-        : {}),
-    })),
   }
 }
 
@@ -379,6 +379,110 @@ function rebuildRecordFromMaps(
   }
 }
 
+function cloneUpgradePatch(patch: UpgradePatch): UpgradePatch {
+  return {
+    ...patch,
+    ...(patch.descriptionArgs
+      ? {descriptionArgs: cloneDescriptionArgs(patch.descriptionArgs)}
+      : {}),
+    ...(patch.argSubstatBonuses ? {argSubstatBonuses: {...patch.argSubstatBonuses}} : {}),
+    ...(patch.addCardKeywords
+      ? {addCardKeywords: patch.addCardKeywords.map((keyword) => ({...keyword}))}
+      : {}),
+    ...(patch.removeCardKeywordIds ? {removeCardKeywordIds: [...patch.removeCardKeywordIds]} : {}),
+  }
+}
+
+function toResolverUpgradePatch(
+  target: PublicV2UpgradeableTarget,
+  targetType: PublicV2PatchTargetType,
+  upgrade: PublicV2RecordUpgrade,
+): UpgradePatch | null {
+  if (upgrade.operation === 'link_only') {
+    return null
+  }
+
+  const patch = upgrade.patch ?? {}
+  if (upgrade.operation === 'override_card_keywords') {
+    return {
+      targetId: target.id,
+      targetType,
+      operation: 'card_keywords',
+      addCardKeywords: patch.cardKeywords as CardKeyword[] | undefined,
+    }
+  }
+
+  return {
+    targetId: target.id,
+    targetType,
+    operation: upgrade.operation,
+    ...patch,
+    ...(Array.isArray(patch.cardKeywords) ? {addCardKeywords: patch.cardKeywords} : {}),
+  } as UpgradePatch
+}
+
+function collectUpgradePatchesForUpgraders(
+  targets: PublicV2UpgradeableTarget[],
+  targetType: PublicV2PatchTargetType,
+  activeUpgraderIds: Set<string>,
+): UpgradePatch[] {
+  const patches: UpgradePatch[] = []
+  for (const target of targets) {
+    for (const upgrade of target.upgrades ?? []) {
+      if (!activeUpgraderIds.has(upgrade.upgraderId)) {
+        continue
+      }
+      const patch = toResolverUpgradePatch(target, targetType, upgrade)
+      if (patch) {
+        patches.push(cloneUpgradePatch(patch))
+      }
+    }
+  }
+  return patches
+}
+
+function getSkillUpgradeTargets(record: AwakenerFullV2Record): PublicV2UpgradeableSkillRecord[] {
+  return [
+    record.cards.C1,
+    record.cards.C2,
+    record.cards.C3,
+    record.cards.C4,
+    record.cards.C5,
+    record.cards.Exalt,
+    ...(record.cards.OverExalt ? [record.cards.OverExalt] : []),
+  ]
+}
+
+function getDerivedUpgradeTargets(
+  record: AwakenerFullV2Record,
+): PublicV2UpgradeableDerivedSkillRecord[] {
+  return [...record.cards.promotedExtras, ...record.derivedSkills]
+}
+
+function collectRecordUpgradePatches(
+  record: AwakenerFullV2Record,
+  accessibleOverlaysById: Map<string, AwakenerOverlayRecord>,
+  activeUpgraderIds: Set<string>,
+): UpgradePatch[] {
+  return [
+    ...collectUpgradePatchesForUpgraders(
+      getSkillUpgradeTargets(record),
+      'skill',
+      activeUpgraderIds,
+    ),
+    ...collectUpgradePatchesForUpgraders(
+      getDerivedUpgradeTargets(record),
+      'derived-skill',
+      activeUpgraderIds,
+    ),
+    ...collectUpgradePatchesForUpgraders(
+      [...accessibleOverlaysById.values()] as PublicV2UpgradeableOverlayRecord[],
+      'overlay',
+      activeUpgraderIds,
+    ),
+  ]
+}
+
 export function resolveAwakenerFullV2Record(
   record: AwakenerFullV2Record,
   options: Partial<AwakenerFullV2ResolveOptions> = {},
@@ -391,58 +495,62 @@ export function resolveAwakenerFullV2Record(
   const activeTalents = getActiveTalentEntries(record, selection.soulforgeLevel)
   const activeEnlightens = getActiveEnlightens(record, selection.selectedEnlightenSlot)
 
-  for (const talent of activeTalents) {
-    for (const patch of talent.upgradePatches) {
-      if (patch.targetType === 'overlay') {
-        const currentOverlay =
-          overlayOverridesById.get(patch.targetId) ?? accessibleOverlaysById.get(patch.targetId)
-        if (!currentOverlay) {
-          throw new Error(
-            `Missing overlay "${patch.targetId}" for awakener ${String(record.id)} while applying talent "${talent.id}".`,
-          )
-        }
-        overlayOverridesById.set(
-          patch.targetId,
-          applyPatchToOverlayRecord(cloneOverlayRecord(currentOverlay), patch),
-        )
-        continue
-      }
-
-      const currentCard = cardsById.get(patch.targetId)
-      if (!currentCard) {
+  for (const patch of collectRecordUpgradePatches(
+    record,
+    accessibleOverlaysById,
+    new Set(activeTalents.map((entry) => entry.id)),
+  )) {
+    if (patch.targetType === 'overlay') {
+      const currentOverlay =
+        overlayOverridesById.get(patch.targetId) ?? accessibleOverlaysById.get(patch.targetId)
+      if (!currentOverlay) {
         throw new Error(
-          `Missing ${patch.targetType} "${patch.targetId}" for awakener ${String(record.id)} while applying talent "${talent.id}".`,
+          `Missing overlay "${patch.targetId}" for awakener ${String(record.id)} while applying public V2 talent upgrade.`,
         )
       }
-      cardsById.set(patch.targetId, applyPatchToCardRecord(currentCard, patch))
+      overlayOverridesById.set(
+        patch.targetId,
+        applyPatchToOverlayRecord(cloneOverlayRecord(currentOverlay), patch),
+      )
+      continue
     }
+
+    const currentCard = cardsById.get(patch.targetId)
+    if (!currentCard) {
+      throw new Error(
+        `Missing ${patch.targetType} "${patch.targetId}" for awakener ${String(record.id)} while applying public V2 talent upgrade.`,
+      )
+    }
+    cardsById.set(patch.targetId, applyPatchToCardRecord(currentCard, patch))
   }
 
-  for (const enlighten of activeEnlightens) {
-    for (const patch of enlighten.upgradePatches) {
-      if (patch.targetType === 'overlay') {
-        const currentOverlay =
-          overlayOverridesById.get(patch.targetId) ?? accessibleOverlaysById.get(patch.targetId)
-        if (!currentOverlay) {
-          throw new Error(
-            `Missing overlay "${patch.targetId}" for awakener ${String(record.id)} while applying enlighten "${enlighten.id}".`,
-          )
-        }
-        overlayOverridesById.set(
-          patch.targetId,
-          applyPatchToOverlayRecord(cloneOverlayRecord(currentOverlay), patch),
-        )
-        continue
-      }
-
-      const currentCard = cardsById.get(patch.targetId)
-      if (!currentCard) {
+  for (const patch of collectRecordUpgradePatches(
+    record,
+    accessibleOverlaysById,
+    new Set(activeEnlightens.map((entry) => entry.id)),
+  )) {
+    if (patch.targetType === 'overlay') {
+      const currentOverlay =
+        overlayOverridesById.get(patch.targetId) ?? accessibleOverlaysById.get(patch.targetId)
+      if (!currentOverlay) {
         throw new Error(
-          `Missing ${patch.targetType} "${patch.targetId}" for awakener ${String(record.id)} while applying enlighten "${enlighten.id}".`,
+          `Missing overlay "${patch.targetId}" for awakener ${String(record.id)} while applying public V2 enlighten upgrade.`,
         )
       }
-      cardsById.set(patch.targetId, applyPatchToCardRecord(currentCard, patch))
+      overlayOverridesById.set(
+        patch.targetId,
+        applyPatchToOverlayRecord(cloneOverlayRecord(currentOverlay), patch),
+      )
+      continue
     }
+
+    const currentCard = cardsById.get(patch.targetId)
+    if (!currentCard) {
+      throw new Error(
+        `Missing ${patch.targetType} "${patch.targetId}" for awakener ${String(record.id)} while applying public V2 enlighten upgrade.`,
+      )
+    }
+    cardsById.set(patch.targetId, applyPatchToCardRecord(currentCard, patch))
   }
 
   const resolvedTalents = resolveTalents(record, selection.soulforgeLevel)

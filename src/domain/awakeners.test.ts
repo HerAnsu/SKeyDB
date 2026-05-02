@@ -65,13 +65,19 @@ describe('getAwakeners', () => {
     expect(uniqueIds.size).toBe(ids.length)
   })
 
-  it('maps known alternate names to canonical display names', () => {
+  it('uses public V2 display casing while retaining lowercase search aliases', () => {
     const awakeners = getAwakeners()
 
-    expect(awakeners.find((a) => a.name === 'helot: catena')).toBeDefined()
-    expect(awakeners.find((a) => a.name === 'doll: inferno')).toBeDefined()
-    expect(awakeners.find((a) => a.name === 'ramona: timeworn')).toBeDefined()
-    expect(awakeners.find((a) => a.name === 'murphy: fauxborn')).toBeDefined()
+    for (const [name, alias] of [
+      ['Helot: Catena', 'helot: catena'],
+      ['Doll: Inferno', 'doll: inferno'],
+      ['Ramona: Timeworn', 'ramona: timeworn'],
+      ['Murphy: Fauxborn', 'murphy: fauxborn'],
+    ] as const) {
+      const awakener = awakeners.find((a) => a.name === name)
+      expect(awakener).toBeDefined()
+      expect(awakener?.aliases).toContain(alias)
+    }
   })
 
   it('assigns valid type to every awakener', () => {

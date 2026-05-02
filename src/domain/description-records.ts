@@ -15,15 +15,15 @@ import {
   type DescriptionArgResolveContext,
   type ResolvedDescriptionArg,
 } from './description-args'
-import type {WheelFullV1Record} from './wheels-full-v1'
+import type {WheelFullV2Record} from './wheels-full-v2'
 
 export interface WheelDatabaseDescriptionRecord {
   id: string
   kind: 'wheel'
   displayName: string
-  ownerAwakenerId?: number
+  ownerAwakenerId?: string
   descriptionTemplate: string
-  descriptionArgs: WheelFullV1Record['descriptionArgs']
+  descriptionArgs: WheelFullV2Record['descriptionArgs']
 }
 
 export type DescribedRecord =

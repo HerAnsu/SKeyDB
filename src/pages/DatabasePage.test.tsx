@@ -6,7 +6,7 @@ import {DatabasePage} from './DatabasePage'
 
 let mockAwakenersFullV2 = [{id: 'awakener-0001'}, {id: 'awakener-0002'}, {id: 'awakener-0003'}]
 let mockLoadPromiseCache = new Map<string, Promise<{id: string} | undefined>>()
-let mockWheelsFullV1 = [{id: 'wheel-0001'}, {id: 'wheel-0040'}]
+let mockWheelsFullV2 = [{id: 'wheel-0001'}, {id: 'wheel-0040'}]
 let mockWheelLoadPromiseCache = new Map<string, Promise<{id: string} | undefined>>()
 const wheelMockState = vi.hoisted(() => {
   const wheels = [
@@ -62,13 +62,13 @@ const mockLoadAwakenerFullV2ById = vi.fn((id: string) => {
 
   return recordPromise
 })
-const mockLoadWheelFullV1ById = vi.fn((id: string) => {
+const mockLoadWheelFullV2ById = vi.fn((id: string) => {
   const cachedPromise = mockWheelLoadPromiseCache.get(id)
   if (cachedPromise) {
     return cachedPromise
   }
 
-  const recordPromise = Promise.resolve(mockWheelsFullV1.find((entry) => entry.id === id))
+  const recordPromise = Promise.resolve(mockWheelsFullV2.find((entry) => entry.id === id))
   mockWheelLoadPromiseCache.set(id, recordPromise)
 
   return recordPromise
@@ -115,16 +115,13 @@ vi.mock('../domain/awakeners', () => ({
   ],
 }))
 
-vi.mock('../domain/public-v2-detail-loaders', () => ({
-  loadPublicV2AwakenerFullById: (id: string) => mockLoadAwakenerFullV2ById(id),
-}))
-
 vi.mock('../domain/wheels', () => ({
   getWheels: () => wheelMockState.wheels,
 }))
 
-vi.mock('../domain/wheels-full-v2-loader', () => ({
-  loadWheelFullV2ById: (id: string) => mockLoadWheelFullV1ById(id),
+vi.mock('../domain/public-v2-detail-loaders', () => ({
+  loadPublicV2AwakenerFullById: (id: string) => mockLoadAwakenerFullV2ById(id),
+  loadPublicV2WheelFullById: (id: string) => mockLoadWheelFullV2ById(id),
 }))
 
 vi.mock('../domain/awakener-assets', () => ({
@@ -237,10 +234,10 @@ afterEach(() => {
   vi.restoreAllMocks()
   mockAwakenersFullV2 = [{id: 'awakener-0001'}, {id: 'awakener-0002'}, {id: 'awakener-0003'}]
   mockLoadPromiseCache = new Map()
-  mockWheelsFullV1 = [{id: 'wheel-0001'}, {id: 'wheel-0040'}]
+  mockWheelsFullV2 = [{id: 'wheel-0001'}, {id: 'wheel-0040'}]
   mockWheelLoadPromiseCache = new Map()
   mockLoadAwakenerFullV2ById.mockClear()
-  mockLoadWheelFullV1ById.mockClear()
+  mockLoadWheelFullV2ById.mockClear()
 })
 
 function getResultsSummary(expectedText: string) {

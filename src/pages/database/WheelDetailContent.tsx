@@ -5,7 +5,7 @@ import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {buildPublicFormulaContext} from '@/domain/public-formula-context'
 import {getRealmAccent, getRealmLabel} from '@/domain/realms'
 import type {Wheel} from '@/domain/wheels'
-import type {WheelFullV1Record} from '@/domain/wheels-full-v1'
+import type {WheelFullV2Record} from '@/domain/wheels-full-v2'
 
 import {
   DATABASE_DETAIL_BODY_CLASS,
@@ -30,7 +30,7 @@ import {WheelLoreText} from './WheelLoreText'
 
 interface WheelDetailContentProps {
   wheel: Wheel
-  fullDataV1: WheelFullV1Record
+  fullDataV2: WheelFullV2Record
   descriptionRank: number
   enhanceLevel: number
   mainstatValue: string
@@ -49,7 +49,7 @@ interface WheelDetailContentProps {
 export function WheelDetailContent({
   descriptionRank,
   enhanceLevel,
-  fullDataV1,
+  fullDataV2,
   mainstatValue,
   mobileArtwork,
   onEnhanceLevelChange,
@@ -67,7 +67,7 @@ export function WheelDetailContent({
   const ownerAwakenerId = wheel.ownerAwakenerId
   const ownerName = wheel.ownerAwakenerName ?? wheel.awakener
   const displayOwnerName = ownerName ? formatAwakenerNameForUi(ownerName) : null
-  const lore = fullDataV1.lore ?? null
+  const lore = fullDataV2.lore ?? null
 
   return (
     <div className='flex h-full min-h-0 max-w-3xl flex-col'>

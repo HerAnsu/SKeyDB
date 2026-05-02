@@ -5,6 +5,8 @@ import {describe, expect, it, vi} from 'vitest'
 
 import type {AwakenerOverlayRecord} from '@/domain/awakener-source-schema'
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
+import type {PublicDescriptionArg} from '@/domain/public-description-args'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import {useDatabasePopoverControllerContext} from './database-popover-context'
 import {
@@ -27,6 +29,7 @@ type TestPopoverProps = Omit<ComponentProps<typeof DatabaseReferencePopover>, 'e
   descriptionRecord?: DatabaseReferencePopoverEntry['record']
   descriptionRank?: number
   descriptionMaxRank?: number
+  formulaContext?: PublicFormulaContext
   influenceBadges?: {
     kind: 'enlighten' | 'talent'
     id: string
@@ -47,6 +50,7 @@ function TestDatabaseReferencePopover({
   descriptionRecord,
   descriptionRank,
   descriptionMaxRank,
+  formulaContext,
   influenceBadges,
   ...props
 }: TestPopoverProps) {
@@ -64,7 +68,7 @@ function TestDatabaseReferencePopover({
     influenceBadges,
   } as DatabaseReferencePopoverEntry
 
-  return <DatabaseReferencePopover {...props} entry={entry} />
+  return <DatabaseReferencePopover {...props} entry={entry} formulaContext={formulaContext} />
 }
 
 describe('DatabaseReferencePopover', () => {
@@ -240,6 +244,44 @@ describe('DatabaseReferencePopover', () => {
 
     expect(onNavigate).toHaveBeenCalledTimes(1)
     expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
+  it('resolves computed description args in popover content with the provided formula context', async () => {
+    vi.mocked(useDatabasePopoverControllerContext).mockReturnValue(null)
+
+    render(
+      <TestDatabaseReferencePopover
+        description='Computed text.'
+        descriptionRecord={{
+          id: 'overlay.test.computed',
+          displayName: 'Forbidden Lore',
+          overlayType: 'mechanic',
+          aliases: [],
+          descriptionTemplate: 'Gain [Arg1] Forbidden Lore.',
+          descriptionArgs: {
+            Arg1: {
+              kind: 'computed',
+              expression: {
+                op: 'ceil',
+                args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
+              },
+              inputs: ['accountDamagePower'],
+            } satisfies PublicDescriptionArg,
+          } as unknown as AwakenerOverlayRecord['descriptionArgs'],
+        }}
+        formulaContext={{accountDamagePower: 8}}
+        label='Mechanic'
+        name='Forbidden Lore'
+        onClose={vi.fn()}
+        onMechanicTokenClick={vi.fn()}
+        onSkillTokenClick={vi.fn()}
+        referenceLayer={buildReferenceLayer()}
+        stats={null}
+      />,
+    )
+
+    expect(await screen.findByText('12')).toHaveAttribute('title', 'Lv1: 12')
+    expect(screen.queryByText('—')).not.toBeInTheDocument()
   })
 
   it('forwards nested badge opens through the shared reference callback', () => {

@@ -1,5 +1,6 @@
 import {useCallback, useMemo, useState} from 'react'
 
+import {buildPublicFormulaContext} from '@/domain/public-formula-context'
 import {clampWheelEnhanceLevel, resolveWheelDescriptionRank} from '@/domain/wheel-enhance'
 import {resolveWheelMainstatValue} from '@/domain/wheel-mainstat-scaling'
 import type {Wheel} from '@/domain/wheels'
@@ -7,7 +8,7 @@ import {
   buildWheelDatabaseDescriptionRecord,
   buildWheelDatabaseReferenceLayer,
 } from '@/domain/wheels-database-reference-layer'
-import type {WheelFullV1Record} from '@/domain/wheels-full-v1'
+import type {WheelFullV2Record} from '@/domain/wheels-full-v2'
 
 import {useDatabaseDetailChrome} from './useDatabaseDetailChrome'
 import {useDatabaseDetailModalLifecycle} from './useDatabaseDetailModalLifecycle'
@@ -18,7 +19,7 @@ import {useWheelDetailSearch} from './useWheelDetailSearch'
 interface UseWheelDetailModalStateOptions {
   wheel: Wheel
   wheels: Wheel[]
-  fullDataV1: WheelFullV1Record
+  fullDataV2: WheelFullV2Record
   onClose: () => void
   onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
 }
@@ -26,7 +27,7 @@ interface UseWheelDetailModalStateOptions {
 export function useWheelDetailModalState({
   wheel,
   wheels,
-  fullDataV1,
+  fullDataV2,
   onClose,
   onSelectWheel,
 }: UseWheelDetailModalStateOptions) {
@@ -38,16 +39,22 @@ export function useWheelDetailModalState({
     onSelectWheel,
     wheels,
   })
+  const formulaContext = useMemo(
+    () => buildPublicFormulaContext({wheelEnhanceLevel: enhanceLevel}),
+    [enhanceLevel],
+  )
   const referenceLayer = useMemo(
     () =>
       buildWheelDatabaseReferenceLayer({
         activeDescriptionRank: descriptionRank,
-        activeWheelId: fullDataV1.id,
-        wheelRecords: [fullDataV1],
+        activeWheelId: fullDataV2.id,
+        formulaContext,
+        wheelRecords: [fullDataV2],
       }),
-    [descriptionRank, fullDataV1],
+    [descriptionRank, formulaContext, fullDataV2],
   )
   const popoverController = useDatabasePopoverController({
+    formulaContext,
     referenceLayer,
     showTagIcons: preferences.shared.showTagIcons,
   })
@@ -68,12 +75,12 @@ export function useWheelDetailModalState({
   }, [])
 
   const wheelDescriptionRecord = useMemo(
-    () => buildWheelDatabaseDescriptionRecord(fullDataV1),
-    [fullDataV1],
+    () => buildWheelDatabaseDescriptionRecord(fullDataV2),
+    [fullDataV2],
   )
   const resolvedMainstatValue = useMemo(
-    () => resolveWheelMainstatValue(fullDataV1.mainstatSeriesKey, enhanceLevel),
-    [enhanceLevel, fullDataV1.mainstatSeriesKey],
+    () => resolveWheelMainstatValue(fullDataV2.mainstatSeriesKey, enhanceLevel),
+    [enhanceLevel, fullDataV2.mainstatSeriesKey],
   )
 
   useDatabaseDetailModalLifecycle({

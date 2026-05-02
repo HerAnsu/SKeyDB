@@ -1,13 +1,10 @@
 import {describe, expect, it} from 'vitest'
 
-import awakenersEnlightensJson from '@/data/awakeners/awakener-enlightens.json'
-import awakenersKitsJson from '@/data/awakeners/awakener-kits.json'
-import awakenersOverlaysJson from '@/data/awakeners/awakener-overlays.json'
-import awakenersRosterJson from '@/data/awakeners/awakener-roster.json'
-import awakenersSkillsJson from '@/data/awakeners/awakener-skills.json'
-import awakenersTalentsJson from '@/data/awakeners/awakener-talents.json'
-import derivedSkillsJson from '@/data/awakeners/derived-skills.json'
-
+import {getAwakenerEnlightens} from './awakener-enlightens'
+import {getAwakenerKits} from './awakener-kits'
+import {getAwakenerOverlays} from './awakener-overlays'
+import {getAwakenerRoster} from './awakener-roster'
+import {getAwakenerSkills} from './awakener-skills'
 import {
   awakenerEnlightensDatasetSchema,
   awakenerKitsDatasetSchema,
@@ -17,22 +14,24 @@ import {
   awakenerTalentsDatasetSchema,
   derivedSkillsDatasetSchema,
 } from './awakener-source-schema'
+import {getAwakenerTalents} from './awakener-talents'
+import {getDerivedSkills} from './derived-skills'
 
 describe('awakener-source-schema', () => {
-  it('accepts the tracked dataset files', () => {
-    const parsedRoster = awakenerRosterDatasetSchema.parse(awakenersRosterJson)
-    const parsedKits = awakenerKitsDatasetSchema.parse(awakenersKitsJson)
-    const parsedEnlightens = awakenerEnlightensDatasetSchema.parse(awakenersEnlightensJson)
-    const parsedTalents = awakenerTalentsDatasetSchema.parse(awakenersTalentsJson)
-    const parsedSkills = awakenerSkillsDatasetSchema.parse(awakenersSkillsJson)
-    const parsedOverlays = awakenerOverlaysDatasetSchema.parse(awakenersOverlaysJson)
+  it('accepts public V2-backed runtime records', () => {
+    const parsedRoster = awakenerRosterDatasetSchema.parse(getAwakenerRoster())
+    const parsedKits = awakenerKitsDatasetSchema.parse(getAwakenerKits())
+    const parsedEnlightens = awakenerEnlightensDatasetSchema.parse(getAwakenerEnlightens())
+    const parsedTalents = awakenerTalentsDatasetSchema.parse(getAwakenerTalents())
+    const parsedSkills = awakenerSkillsDatasetSchema.parse(getAwakenerSkills())
+    const parsedOverlays = awakenerOverlaysDatasetSchema.parse(getAwakenerOverlays())
 
     expect(parsedRoster.length).toBeGreaterThan(0)
     expect(parsedKits.length).toBeGreaterThan(0)
     expect(parsedEnlightens.length).toBeGreaterThan(0)
     expect(parsedTalents.length).toBeGreaterThan(0)
     expect(parsedSkills.length).toBeGreaterThan(0)
-    expect(derivedSkillsDatasetSchema.parse(derivedSkillsJson).length).toBeGreaterThan(0)
+    expect(derivedSkillsDatasetSchema.parse(getDerivedSkills()).length).toBeGreaterThan(0)
     expect(parsedOverlays.length).toBeGreaterThan(0)
     expect(parsedOverlays.length).toBeGreaterThan(90)
     expect(parsedOverlays).toEqual(
@@ -221,41 +220,13 @@ describe('awakener-source-schema', () => {
         descriptionArgs: {},
         maxLevel: 10,
         hasLevelScaledDescription: true,
-        upgradeTargetIds: ['skill.xu.defense'],
-        upgradePatches: [
-          {
-            targetId: 'skill.xu.defense',
-            targetType: 'skill',
-            operation: 'arg_substat_bonuses',
-            argSubstatBonuses: {
-              Arg2: {
-                substat: 'KeyflareRegen',
-                multiplier: '0.5',
-                suffix: '%',
-              },
-            },
-          },
-        ],
       },
     ])
 
     expect(parsed[0]?.hasLevelScaledDescription).toBe(true)
     expect(parsed[0]?.maxLevel).toBe(10)
-    expect(parsed[0]?.upgradeTargetIds).toEqual(['skill.xu.defense'])
-    expect(parsed[0]?.upgradePatches).toEqual([
-      {
-        targetId: 'skill.xu.defense',
-        targetType: 'skill',
-        operation: 'arg_substat_bonuses',
-        argSubstatBonuses: {
-          Arg2: {
-            substat: 'KeyflareRegen',
-            multiplier: '0.5',
-            suffix: '%',
-          },
-        },
-      },
-    ])
+    expect(parsed[0]).not.toHaveProperty('upgradeTargetIds')
+    expect(parsed[0]).not.toHaveProperty('upgradePatches')
   })
 
   it('accepts compiled fixed, linear, and scaling arg metadata', () => {
@@ -365,7 +336,7 @@ describe('awakener-source-schema', () => {
     expect(parsed[0]?.variants).toEqual([])
   })
 
-  it('represents an enlighten that upgrades visible or derived skills', () => {
+  it('represents enlighten descriptions without target-side upgrade patch ownership', () => {
     const parsed = awakenerEnlightensDatasetSchema.parse([
       {
         id: 'enlighten.celeste.e2',
@@ -381,68 +352,12 @@ describe('awakener-source-schema', () => {
             suffix: '%',
           },
         },
-        upgradeTargetIds: ['skill.tintless-dream', 'derived.tintless-dream.retain-heal'],
-        upgradePatches: [
-          {
-            targetId: 'skill.tintless-dream',
-            targetType: 'skill',
-            operation: 'override_args',
-            descriptionArgs: {
-              Arg1: {
-                kind: 'scaling',
-                values: ['10', '12', '14'],
-                suffix: '%',
-                stat: 'CON',
-              },
-            },
-          },
-          {
-            targetId: 'skill.tintless-dream',
-            targetType: 'skill',
-            operation: 'card_keywords',
-            addCardKeywords: [{id: 'mechanic.retain'}],
-          },
-          {
-            targetId: 'overlay.celeste.tintless-dream-ritual',
-            targetType: 'overlay',
-            operation: 'replace_description',
-            descriptionTemplate:
-              '{Tintless Dream} additionally restores HP equal to [Arg1]% of CON.',
-            descriptionArgs: {
-              Arg1: {
-                kind: 'scaling',
-                values: ['10', '12', '14'],
-                suffix: '%',
-                stat: 'CON',
-              },
-            },
-          },
-        ],
       },
     ])
 
     expect(parsed[0]?.slot).toBe('E2')
-    expect(parsed[0]?.upgradeTargetIds).toContain('skill.tintless-dream')
-    expect(parsed[0]?.upgradePatches).toHaveLength(3)
-    expect(parsed[0]?.upgradePatches[0]).toEqual({
-      targetId: 'skill.tintless-dream',
-      targetType: 'skill',
-      operation: 'override_args',
-      descriptionArgs: {
-        Arg1: {
-          kind: 'scaling',
-          values: ['10', '12', '14'],
-          suffix: '%',
-          stat: 'CON',
-        },
-      },
-    })
-    expect(parsed[0]?.upgradePatches[1]).toEqual({
-      targetId: 'skill.tintless-dream',
-      targetType: 'skill',
-      operation: 'card_keywords',
-      addCardKeywords: [{id: 'mechanic.retain'}],
-    })
+    expect(parsed[0]).not.toHaveProperty('upgradeTargetIds')
+    expect(parsed[0]).not.toHaveProperty('upgradePatches')
   })
 
   it('represents derived-skill parent-child chains and derived variants', () => {

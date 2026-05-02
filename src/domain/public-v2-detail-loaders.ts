@@ -1,12 +1,8 @@
 import {type AwakenerFullV2Record} from './awakeners-full-v2'
-import {type PublicV2Record} from './public-v2-schema'
 import {loadPublicV2Envelope, loadPublicV2FullRecord} from './public-v2-loaders'
-import {
-  buildWheelMainstatSeriesKey,
-  type WheelMainstatKey,
-  type WheelMainstatSeriesRarity,
-} from './wheel-mainstat-scaling'
-import {type WheelFullV1Record} from './wheels-full-v1'
+import {type PublicV2Record} from './public-v2-schema'
+import {buildWheelMainstatSeriesKey, type WheelMainstatKey} from './wheel-mainstat-scaling'
+import {type WheelFullV2Record} from './wheels-full-v2'
 
 type PublicV2AwakenerRecord = PublicV2Record<'awakeners'> & {
   aliases?: string[]
@@ -52,19 +48,15 @@ type PublicV2WheelRecord = PublicV2Record<'wheels'> & {
   rarity: string
   searchTags?: string[]
 }
-type PublicV2UpgradeableRecord =
-  | PublicV2DerivedSkillRecord
-  | PublicV2OverlayRecord
-  | PublicV2SkillRecord
-
 interface PublicV2UpgradeEntry {
+  id?: string
   upgraderId?: string
   upgraderType?: string
+  upgraderSlot?: string
+  ownerAwakenerId?: string
   operation?: string
   patch?: Record<string, unknown>
 }
-
-type LegacyPatchTargetType = 'skill' | 'derived-skill' | 'overlay'
 
 const PROMOTED_EXTRA_DERIVED_IDS = new Set([
   'derived.castor.onyx-plume',
@@ -83,7 +75,7 @@ const PROMOTED_EXTRA_DERIVED_IDS = new Set([
 ])
 
 const awakenerFullByIdPromises = new Map<string, Promise<AwakenerFullV2Record | undefined>>()
-const wheelFullByIdPromises = new Map<string, Promise<WheelFullV1Record | undefined>>()
+const wheelFullByIdPromises = new Map<string, Promise<WheelFullV2Record | undefined>>()
 const SUBSTAT_PERCENT_KEYS = new Set([
   'CritRate',
   'CritDamage',
@@ -105,8 +97,7 @@ async function resolvePublicAwakenerId(awakenerId: string | number): Promise<str
     return awakenerId
   }
 
-  const numericId =
-    typeof awakenerId === 'number' ? awakenerId : Number.parseInt(awakenerId, 10)
+  const numericId = typeof awakenerId === 'number' ? awakenerId : Number.parseInt(awakenerId, 10)
 
   if (!Number.isInteger(numericId) || numericId <= 0) {
     return undefined
@@ -155,7 +146,7 @@ function adaptPublicV2SubstatScaling(record: PublicV2AwakenerRecord) {
   )
 }
 
-function withLegacyOwner<T extends {ownerAwakenerId?: string}>(record: T): T {
+function withNumericOwner<T extends {ownerAwakenerId?: string}>(record: T): T {
   return {
     ...record,
     ownerAwakenerId: record.ownerAwakenerId ? numericAwakenerId(record.ownerAwakenerId) : undefined,
@@ -185,81 +176,8 @@ function getTalentByFamily(
   return records.find((record) => record.family === family)
 }
 
-function upgradePatchTargetType(
-  scope: 'derived-skills' | 'overlays' | 'skills',
-): LegacyPatchTargetType {
-  if (scope === 'derived-skills') {
-    return 'derived-skill'
-  }
-  if (scope === 'overlays') {
-    return 'overlay'
-  }
-  return 'skill'
-}
-
-function toLegacyPatch(
-  upgrade: PublicV2UpgradeEntry,
-  targetId: string,
-  targetType: LegacyPatchTargetType,
-) {
-  if (!upgrade.operation || upgrade.operation === 'link_only') {
-    return null
-  }
-
-  const patch = upgrade.patch ?? {}
-  if (upgrade.operation === 'override_card_keywords') {
-    return {
-      targetId,
-      targetType,
-      operation: 'card_keywords',
-      addCardKeywords: patch.cardKeywords,
-    }
-  }
-
-  return {
-    targetId,
-    targetType,
-    operation: upgrade.operation,
-    ...patch,
-  }
-}
-
-function collectUpgradeTargetsByUpgrader(
-  records: PublicV2UpgradeableRecord[],
-  targetType: LegacyPatchTargetType,
-): Map<string, {targetIds: Set<string>; patches: unknown[]}> {
-  const byUpgrader = new Map<string, {targetIds: Set<string>; patches: unknown[]}>()
-  for (const record of records) {
-    for (const upgrade of record.upgrades ?? []) {
-      if (!upgrade.upgraderId) {
-        continue
-      }
-      const entry = byUpgrader.get(upgrade.upgraderId) ?? {targetIds: new Set(), patches: []}
-      entry.targetIds.add(record.id)
-      const patch = toLegacyPatch(upgrade, record.id, targetType)
-      if (patch) {
-        entry.patches.push(patch)
-      }
-      byUpgrader.set(upgrade.upgraderId, entry)
-    }
-  }
-  return byUpgrader
-}
-
-function applyLegacyUpgradeFields<T extends {id: string}>(
-  record: T,
-  upgradeTargetsByUpgrader: Map<string, {targetIds: Set<string>; patches: unknown[]}>,
-): T {
-  const upgrades = upgradeTargetsByUpgrader.get(record.id)
-  return {
-    ...record,
-    upgradeTargetIds: upgrades ? [...upgrades.targetIds] : [],
-    upgradePatches: upgrades ? upgrades.patches : [],
-  } as T
-}
-
 function adaptPublicV2CardRecord(record: PublicV2SkillRecord, ownerPublicId: string) {
-  return withLegacyOwner({
+  return withNumericOwner({
     ...record,
     ownerAwakenerId: ownerPublicId,
     variants: [],
@@ -267,7 +185,7 @@ function adaptPublicV2CardRecord(record: PublicV2SkillRecord, ownerPublicId: str
 }
 
 function adaptPublicV2DerivedRecord(record: PublicV2DerivedSkillRecord) {
-  return withLegacyOwner({
+  return withNumericOwner({
     ...record,
     childDerivedSkillIds: record.childDerivedSkillIds ?? [],
     cardKeywords: record.cardKeywords ?? [],
@@ -275,26 +193,15 @@ function adaptPublicV2DerivedRecord(record: PublicV2DerivedSkillRecord) {
   })
 }
 
-function adaptPublicV2TalentRecord(
-  record: PublicV2TalentRecord,
-  upgradeTargetsByUpgrader: Map<string, {targetIds: Set<string>; patches: unknown[]}>,
-) {
-  return withLegacyOwner(
-    applyLegacyUpgradeFields(
-      {
-        ...record,
-        hasLevelScaledDescription: record.maxLevel !== undefined,
-      },
-      upgradeTargetsByUpgrader,
-    ),
-  )
+function adaptPublicV2TalentRecord(record: PublicV2TalentRecord) {
+  return withNumericOwner({
+    ...record,
+    hasLevelScaledDescription: record.maxLevel !== undefined,
+  })
 }
 
-function adaptPublicV2EnlightenRecord(
-  record: PublicV2EnlightenRecord,
-  upgradeTargetsByUpgrader: Map<string, {targetIds: Set<string>; patches: unknown[]}>,
-) {
-  return withLegacyOwner(applyLegacyUpgradeFields(record, upgradeTargetsByUpgrader))
+function adaptPublicV2EnlightenRecord(record: PublicV2EnlightenRecord) {
+  return withNumericOwner(record)
 }
 
 async function loadAwakenerOwnedRecords(publicAwakenerId: string) {
@@ -315,36 +222,14 @@ async function loadAwakenerOwnedRecords(publicAwakenerId: string) {
   const ownedDerivedSkills = (derivedSkills.records as PublicV2DerivedSkillRecord[]).filter(
     ownerMatches,
   )
-  const upgradeTargetsByUpgrader = new Map<string, {targetIds: Set<string>; patches: unknown[]}>()
-  for (const scope of ['skills', 'derived-skills', 'overlays'] as const) {
-    const records =
-      scope === 'skills'
-        ? ownedSkills
-        : scope === 'derived-skills'
-          ? ownedDerivedSkills
-          : (overlays.records as PublicV2OverlayRecord[]).filter(ownerMatches)
-    for (const [upgraderId, upgrades] of collectUpgradeTargetsByUpgrader(
-      records,
-      upgradePatchTargetType(scope),
-    )) {
-      const existing = upgradeTargetsByUpgrader.get(upgraderId) ?? {
-        targetIds: new Set<string>(),
-        patches: [],
-      }
-      for (const targetId of upgrades.targetIds) {
-        existing.targetIds.add(targetId)
-      }
-      existing.patches.push(...upgrades.patches)
-      upgradeTargetsByUpgrader.set(upgraderId, existing)
-    }
-  }
+  const ownedOverlays = (overlays.records as PublicV2OverlayRecord[]).filter(ownerMatches)
 
   return {
     skills: ownedSkills,
     talents: ownedTalents,
     enlightens: ownedEnlightens,
     derivedSkills: ownedDerivedSkills,
-    upgradeTargetsByUpgrader,
+    overlays: ownedOverlays,
   }
 }
 
@@ -353,7 +238,10 @@ async function adaptPublicV2AwakenerRecord(
 ): Promise<AwakenerFullV2Record> {
   const ownedRecords = await loadAwakenerOwnedRecords(record.id)
   const cards = {
-    C1: adaptPublicV2CardRecord(requireSlotRecord(ownedRecords.skills, 'Rouse', 'skill'), record.id),
+    C1: adaptPublicV2CardRecord(
+      requireSlotRecord(ownedRecords.skills, 'Rouse', 'skill'),
+      record.id,
+    ),
     C2: adaptPublicV2CardRecord(
       requireSlotRecord(ownedRecords.skills, 'Strike', 'skill'),
       record.id,
@@ -393,27 +281,20 @@ async function adaptPublicV2AwakenerRecord(
     T4: unknown
     extraTalents: unknown[]
   } = {
-    T1: passiveTalents[0]
-      ? adaptPublicV2TalentRecord(passiveTalents[0], ownedRecords.upgradeTargetsByUpgrader)
-      : undefined,
+    T1: passiveTalents[0] ? adaptPublicV2TalentRecord(passiveTalents[0]) : undefined,
     T2: undefined,
     T3: undefined,
     T4: undefined,
-    extraTalents: passiveTalents
-      .slice(1)
-      .map((talent) => adaptPublicV2TalentRecord(talent, ownedRecords.upgradeTargetsByUpgrader)),
+    extraTalents: passiveTalents.slice(1).map((talent) => adaptPublicV2TalentRecord(talent)),
   }
 
   const madnessOmen = getTalentByFamily(ownedRecords.talents, 'madness_omen')
   const soulforgeAptitude = getTalentByFamily(ownedRecords.talents, 'soulforge_aptitude')
   if (madnessOmen) {
-    talents.T2 = adaptPublicV2TalentRecord(madnessOmen, ownedRecords.upgradeTargetsByUpgrader)
+    talents.T2 = adaptPublicV2TalentRecord(madnessOmen)
   }
   if (soulforgeAptitude) {
-    talents.T3 = adaptPublicV2TalentRecord(
-      soulforgeAptitude,
-      ownedRecords.upgradeTargetsByUpgrader,
-    )
+    talents.T3 = adaptPublicV2TalentRecord(soulforgeAptitude)
   }
 
   const adapted = {
@@ -435,43 +316,38 @@ async function adaptPublicV2AwakenerRecord(
     enlightens: {
       E1: adaptPublicV2EnlightenRecord(
         requireSlotRecord(ownedRecords.enlightens, 'E1', 'enlighten'),
-        ownedRecords.upgradeTargetsByUpgrader,
       ),
       E2: adaptPublicV2EnlightenRecord(
         requireSlotRecord(ownedRecords.enlightens, 'E2', 'enlighten'),
-        ownedRecords.upgradeTargetsByUpgrader,
       ),
       E3: adaptPublicV2EnlightenRecord(
         requireSlotRecord(ownedRecords.enlightens, 'E3', 'enlighten'),
-        ownedRecords.upgradeTargetsByUpgrader,
       ),
       AbsoluteAxiom: getSlotRecord(ownedRecords.enlightens, 'AbsoluteAxiom')
         ? adaptPublicV2EnlightenRecord(
             requireSlotRecord(ownedRecords.enlightens, 'AbsoluteAxiom', 'enlighten'),
-            ownedRecords.upgradeTargetsByUpgrader,
           )
         : undefined,
     },
     derivedSkills: ownedRecords.derivedSkills.map(adaptPublicV2DerivedRecord),
+    overlays: ownedRecords.overlays.map(withNumericOwner),
   }
 
   return adapted as unknown as AwakenerFullV2Record
 }
 
-function adaptPublicV2WheelRecord(record: PublicV2WheelRecord): WheelFullV1Record {
-  const rarity = record.rarity as WheelMainstatSeriesRarity
+function adaptPublicV2WheelRecord(record: PublicV2WheelRecord): WheelFullV2Record {
   const mainstatKey = record.mainstatKey as WheelMainstatKey
+  const rarity = record.rarity as WheelFullV2Record['rarity']
   const adapted = {
     ...record,
     aliases: record.aliases ?? [record.name],
     searchTags: record.searchTags ?? [],
     awakener: record.ownerAwakenerName,
-    ownerAwakenerId: record.ownerAwakenerId ? numericAwakenerId(record.ownerAwakenerId) : undefined,
-    mainstatSeriesKey:
-      record.mainstatSeriesKey ?? buildWheelMainstatSeriesKey(rarity, mainstatKey),
+    mainstatSeriesKey: record.mainstatSeriesKey ?? buildWheelMainstatSeriesKey(rarity, mainstatKey),
   }
 
-  return adapted as unknown as WheelFullV1Record
+  return adapted as unknown as WheelFullV2Record
 }
 
 export async function loadPublicV2AwakenerFullById(
@@ -496,7 +372,7 @@ export async function loadPublicV2AwakenerFullById(
 
 export async function loadPublicV2WheelFullById(
   wheelId: string,
-): Promise<WheelFullV1Record | undefined> {
+): Promise<WheelFullV2Record | undefined> {
   if (!isPublicWheelId(wheelId)) {
     return undefined
   }

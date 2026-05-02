@@ -54,6 +54,7 @@ export function useAwakenerDetailModalState({
   }, [setActiveTab])
 
   const popoverController = useDatabasePopoverController({
+    formulaContext: shellView.formulaContext,
     onNavigateToSkills: navigateToSkills,
     onNavigateToWheelPage: onSelectWheel,
     onToggleEnlightenSlot: sessionActions.toggleEnlightenSlot,

@@ -1,9 +1,27 @@
-import awakenersOverlaysJson from '@/data/awakeners/awakener-overlays.json'
+import publicOverlaysFull from '@/data/public-v2/full/overlays.json'
 
 import {awakenerOverlaysDatasetSchema, type AwakenerOverlayRecord} from './awakener-source-schema'
 
+interface PublicOverlayEnvelope {
+  records: Array<Omit<AwakenerOverlayRecord, 'ownerAwakenerId'> & {ownerAwakenerId?: string}>
+}
+
 let awakenerOverlaysCache: AwakenerOverlayRecord[] | null = null
 let overlayByNameCache: Map<string, AwakenerOverlayRecord> | null = null
+
+function numericAwakenerId(publicAwakenerId: string): number | undefined {
+  const suffix = /^awakener-(\d{4})$/.exec(publicAwakenerId)?.[1]
+  return suffix ? Number(suffix) : undefined
+}
+
+function adaptPublicOverlay(
+  record: PublicOverlayEnvelope['records'][number],
+): AwakenerOverlayRecord {
+  return {
+    ...record,
+    ownerAwakenerId: record.ownerAwakenerId ? numericAwakenerId(record.ownerAwakenerId) : undefined,
+  }
+}
 
 function buildOverlayLookup(overlays: AwakenerOverlayRecord[]): Map<string, AwakenerOverlayRecord> {
   const byName = new Map<string, AwakenerOverlayRecord>()
@@ -23,7 +41,9 @@ export function getAwakenerOverlays(): AwakenerOverlayRecord[] {
     return awakenerOverlaysCache
   }
 
-  awakenerOverlaysCache = awakenerOverlaysDatasetSchema.parse(awakenersOverlaysJson)
+  awakenerOverlaysCache = awakenerOverlaysDatasetSchema.parse(
+    (publicOverlaysFull as unknown as PublicOverlayEnvelope).records.map(adaptPublicOverlay),
+  )
   overlayByNameCache = buildOverlayLookup(awakenerOverlaysCache)
   return awakenerOverlaysCache
 }

@@ -1,6 +1,7 @@
 import {z} from 'zod'
 
 import {AWAKENER_TEXT_COLOR_NAMES} from './awakeners-text-colors.ts'
+import type {ComputedExpression, PublicFormulaKey} from './public-description-args'
 
 const nonEmptyStringSchema = z.string().trim().min(1)
 
@@ -15,7 +16,7 @@ export const SUBSTAT_SCALING_KEYS = [
   'DeathResistance',
 ] as const
 
-export const ENLIGHTEN_SLOT_KEYS = ['E1', 'E2', 'E3', 'AbsoluteAxiom'] as const
+export const ENLIGHTEN_SLOT_KEYS = ['E1', 'E2', 'E3', 'OverExalt', 'AbsoluteAxiom'] as const
 export const SCALING_ARG_STAT_KEYS = ['ATK', 'DEF', 'CON'] as const
 
 export const fullStatsSchema = z.object({
@@ -58,6 +59,28 @@ export const descriptionArgSubstatBonusesSchema = z.record(
 )
 
 const descriptionArgChannelSchema = nonEmptyStringSchema
+const publicFormulaKeySchema = z.enum([
+  'accountStageGrowth',
+  'accountDamagePower',
+  'ownedPosseCount',
+  'wheelRefinementLevel',
+  'somaticResearchHpMultiplier',
+  'occultResearchDepth',
+])
+const computedExpressionSchema: z.ZodType<ComputedExpression> = z.lazy(() =>
+  z.union([
+    z.object({const: z.number()}),
+    z.object({var: publicFormulaKeySchema}),
+    z.object({
+      op: z.enum(['add', 'mul', 'min', 'max']),
+      args: z.array(computedExpressionSchema),
+    }),
+    z.object({
+      op: z.enum(['ceil', 'floor']),
+      args: z.tuple([computedExpressionSchema]),
+    }),
+  ]),
+)
 
 export const descriptionArgSchema = z.discriminatedUnion('kind', [
   z
@@ -79,18 +102,31 @@ export const descriptionArgSchema = z.discriminatedUnion('kind', [
         path: ['value'],
       })
     }),
+  z
+    .object({
+      kind: z.literal('linear'),
+      base: nonEmptyStringSchema,
+      gainPerLevel: nonEmptyStringSchema,
+      channel: descriptionArgChannelSchema.optional(),
+      suffix: nonEmptyStringSchema.optional(),
+      stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
+      substatBonus: descriptionArgSubstatBonusSchema.optional(),
+    })
+    .catchall(z.unknown()),
+  z
+    .object({
+      kind: z.literal('scaling'),
+      values: z.array(nonEmptyStringSchema).min(1),
+      channel: descriptionArgChannelSchema.optional(),
+      suffix: nonEmptyStringSchema.optional(),
+      stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
+      substatBonus: descriptionArgSubstatBonusSchema.optional(),
+    })
+    .catchall(z.unknown()),
   z.object({
-    kind: z.literal('linear'),
-    base: nonEmptyStringSchema,
-    gainPerLevel: nonEmptyStringSchema,
-    channel: descriptionArgChannelSchema.optional(),
-    suffix: nonEmptyStringSchema.optional(),
-    stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
-    substatBonus: descriptionArgSubstatBonusSchema.optional(),
-  }),
-  z.object({
-    kind: z.literal('scaling'),
-    values: z.array(nonEmptyStringSchema).min(1),
+    kind: z.literal('computed'),
+    expression: computedExpressionSchema,
+    inputs: z.array(publicFormulaKeySchema) as z.ZodType<PublicFormulaKey[]>,
     channel: descriptionArgChannelSchema.optional(),
     suffix: nonEmptyStringSchema.optional(),
     stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
@@ -263,8 +299,6 @@ export const awakenerTalentSchema = describedRecordSchema.extend({
   displayName: nonEmptyStringSchema,
   maxLevel: z.number().int().positive().optional(),
   hasLevelScaledDescription: z.boolean().optional(),
-  upgradeTargetIds: z.array(nonEmptyStringSchema).default([]),
-  upgradePatches: z.array(enlightenPatchSchema).default([]),
 })
 
 export const awakenersEnlightenSchema = describedRecordSchema.extend({
@@ -272,8 +306,6 @@ export const awakenersEnlightenSchema = describedRecordSchema.extend({
   ownerAwakenerId: z.number().int().positive(),
   slot: z.enum(ENLIGHTEN_SLOT_KEYS),
   displayName: nonEmptyStringSchema,
-  upgradeTargetIds: z.array(nonEmptyStringSchema),
-  upgradePatches: z.array(enlightenPatchSchema),
 })
 
 export const derivedSkillSchema = describedRecordSchema.extend({
@@ -326,6 +358,7 @@ export const awakenerKitSchema = z.object({
     E1: nonEmptyStringSchema,
     E2: nonEmptyStringSchema,
     E3: nonEmptyStringSchema,
+    OverExalt: nonEmptyStringSchema.optional(),
     AbsoluteAxiom: nonEmptyStringSchema.optional(),
   }),
 })

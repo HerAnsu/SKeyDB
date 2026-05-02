@@ -7,7 +7,7 @@ import {
   resolveWheelMainstatValue,
 } from '@/domain/wheel-mainstat-scaling'
 import type {Wheel} from '@/domain/wheels'
-import type {WheelFullV1Record} from '@/domain/wheels-full-v1'
+import type {WheelFullV2Record} from '@/domain/wheels-full-v2'
 
 import {WheelDetailModal} from './WheelDetailModal'
 
@@ -39,7 +39,7 @@ function makeWheel(overrides: Partial<Wheel> = {}): Wheel {
   }
 }
 
-function makeWheelFullRecord(overrides: Partial<WheelFullV1Record> = {}): WheelFullV1Record {
+function makeWheelFullRecord(overrides: Partial<WheelFullV2Record> = {}): WheelFullV2Record {
   return {
     id: 'B01',
     assetId: 'Weapon_Full_B01',
@@ -47,7 +47,7 @@ function makeWheelFullRecord(overrides: Partial<WheelFullV1Record> = {}): WheelF
     rarity: 'SSR',
     realm: 'CARO',
     awakener: 'alpha',
-    ownerAwakenerId: 1,
+    ownerAwakenerId: 'awakener-0001',
     ownerAwakenerName: 'alpha',
     aliases: ['Merciful Nurturing'],
     searchTags: ['Embryo Fusion'],
@@ -74,20 +74,20 @@ describe('WheelDetailModal', () => {
 
   it('uses the wheel-specific enhance scaling tiers for description and mainstat values', () => {
     const wheel = makeWheel()
-    const fullDataV1 = makeWheelFullRecord()
+    const fullDataV2 = makeWheelFullRecord()
 
     render(
-      <WheelDetailModal fullDataV1={fullDataV1} onClose={vi.fn()} wheel={wheel} wheels={[wheel]} />,
+      <WheelDetailModal fullDataV2={fullDataV2} onClose={vi.fn()} wheel={wheel} wheels={[wheel]} />,
     )
 
     const slider = screen.getByRole('slider', {name: /enhance/i})
 
     expect(
-      screen.getAllByText(resolveWheelMainstatValue(fullDataV1.mainstatSeriesKey, 0)).length,
+      screen.getAllByText(resolveWheelMainstatValue(fullDataV2.mainstatSeriesKey, 0)).length,
     ).toBeGreaterThan(0)
     expect(
       screen.getByText(
-        resolveDescriptionTemplate(fullDataV1.descriptionTemplate, fullDataV1.descriptionArgs, {
+        resolveDescriptionTemplate(fullDataV2.descriptionTemplate, fullDataV2.descriptionArgs, {
           rank: 1,
         }),
       ),
@@ -98,11 +98,11 @@ describe('WheelDetailModal', () => {
     })
 
     expect(
-      screen.getAllByText(resolveWheelMainstatValue(fullDataV1.mainstatSeriesKey, 0)).length,
+      screen.getAllByText(resolveWheelMainstatValue(fullDataV2.mainstatSeriesKey, 0)).length,
     ).toBeGreaterThan(0)
     expect(
       screen.getByText(
-        resolveDescriptionTemplate(fullDataV1.descriptionTemplate, fullDataV1.descriptionArgs, {
+        resolveDescriptionTemplate(fullDataV2.descriptionTemplate, fullDataV2.descriptionArgs, {
           rank: 2,
         }),
       ),
@@ -114,7 +114,7 @@ describe('WheelDetailModal', () => {
 
     expect(
       screen.getByText(
-        resolveDescriptionTemplate(fullDataV1.descriptionTemplate, fullDataV1.descriptionArgs, {
+        resolveDescriptionTemplate(fullDataV2.descriptionTemplate, fullDataV2.descriptionArgs, {
           rank: 3,
         }),
       ),
@@ -125,11 +125,11 @@ describe('WheelDetailModal', () => {
     })
 
     expect(
-      screen.getAllByText(resolveWheelMainstatValue(fullDataV1.mainstatSeriesKey, 0)).length,
+      screen.getAllByText(resolveWheelMainstatValue(fullDataV2.mainstatSeriesKey, 0)).length,
     ).toBeGreaterThan(0)
     expect(
       screen.getByText(
-        resolveDescriptionTemplate(fullDataV1.descriptionTemplate, fullDataV1.descriptionArgs, {
+        resolveDescriptionTemplate(fullDataV2.descriptionTemplate, fullDataV2.descriptionArgs, {
           rank: 4,
         }),
       ),
@@ -140,11 +140,11 @@ describe('WheelDetailModal', () => {
     })
 
     expect(
-      screen.getAllByText(resolveWheelMainstatValue(fullDataV1.mainstatSeriesKey, 4)).length,
+      screen.getAllByText(resolveWheelMainstatValue(fullDataV2.mainstatSeriesKey, 4)).length,
     ).toBeGreaterThan(0)
     expect(
       screen.getByText(
-        resolveDescriptionTemplate(fullDataV1.descriptionTemplate, fullDataV1.descriptionArgs, {
+        resolveDescriptionTemplate(fullDataV2.descriptionTemplate, fullDataV2.descriptionArgs, {
           rank: 4,
         }),
       ),
@@ -156,7 +156,7 @@ describe('WheelDetailModal', () => {
 
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord()}
+        fullDataV2={makeWheelFullRecord()}
         onClose={vi.fn()}
         onSelectAwakener={onSelectAwakener}
         wheel={makeWheel()}
@@ -184,7 +184,7 @@ describe('WheelDetailModal', () => {
 
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord()}
+        fullDataV2={makeWheelFullRecord()}
         onClose={vi.fn()}
         onSelectWheel={onSelectWheel}
         wheel={currentWheel}
@@ -202,11 +202,11 @@ describe('WheelDetailModal', () => {
   })
 
   it('clamps the enhance slider within supported wheel bounds', () => {
-    const fullDataV1 = makeWheelFullRecord()
+    const fullDataV2 = makeWheelFullRecord()
 
     render(
       <WheelDetailModal
-        fullDataV1={fullDataV1}
+        fullDataV2={fullDataV2}
         onClose={vi.fn()}
         wheel={makeWheel()}
         wheels={[makeWheel()]}
@@ -218,14 +218,14 @@ describe('WheelDetailModal', () => {
 
     fireEvent.change(slider, {target: {value: '99'}})
     expect(
-      screen.getAllByText(resolveWheelMainstatValue(fullDataV1.mainstatSeriesKey, 15)).length,
+      screen.getAllByText(resolveWheelMainstatValue(fullDataV2.mainstatSeriesKey, 15)).length,
     ).toBeGreaterThan(0)
     expect(screen.getByText('+12')).toBeInTheDocument()
     expect(screen.queryByText('E15')).not.toBeInTheDocument()
 
     fireEvent.change(slider, {target: {value: '-3'}})
     expect(
-      screen.getAllByText(resolveWheelMainstatValue(fullDataV1.mainstatSeriesKey, 0)).length,
+      screen.getAllByText(resolveWheelMainstatValue(fullDataV2.mainstatSeriesKey, 0)).length,
     ).toBeGreaterThan(0)
     expect(screen.queryByText('+12')).not.toBeInTheDocument()
     expect(screen.queryByText('E0')).not.toBeInTheDocument()
@@ -234,7 +234,7 @@ describe('WheelDetailModal', () => {
   it('exposes the enhance level as aria-valuetext for keyboard users', () => {
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord()}
+        fullDataV2={makeWheelFullRecord()}
         onClose={vi.fn()}
         wheel={makeWheel()}
         wheels={[makeWheel()]}
@@ -267,7 +267,7 @@ describe('WheelDetailModal', () => {
 
     const {rerender} = render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord()}
+        fullDataV2={makeWheelFullRecord()}
         onClose={vi.fn()}
         wheel={firstWheel}
         wheels={[firstWheel, secondWheel]}
@@ -288,7 +288,7 @@ describe('WheelDetailModal', () => {
 
     rerender(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord({
+        fullDataV2={makeWheelFullRecord({
           id: secondWheel.id,
           assetId: secondWheel.assetId,
           name: secondWheel.name,
@@ -330,7 +330,7 @@ describe('WheelDetailModal', () => {
 
     const {rerender} = render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord({
+        fullDataV2={makeWheelFullRecord({
           lore: 'Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6',
         })}
         onClose={vi.fn()}
@@ -351,7 +351,7 @@ describe('WheelDetailModal', () => {
 
     rerender(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord({
+        fullDataV2={makeWheelFullRecord({
           id: secondWheel.id,
           assetId: secondWheel.assetId,
           name: secondWheel.name,
@@ -382,7 +382,7 @@ describe('WheelDetailModal', () => {
   it('omits owner and lore chrome when the wheel has no owner or lore data', () => {
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord({
+        fullDataV2={makeWheelFullRecord({
           lore: undefined,
           ownerAwakenerId: undefined,
           ownerAwakenerName: undefined,
@@ -402,7 +402,7 @@ describe('WheelDetailModal', () => {
   it('renders lore with limited markup and censor tokens without exposing raw tags', () => {
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord({
+        fullDataV2={makeWheelFullRecord({
           lore: 'Pain, intense pain filled her every sense.\n\n<Italic:Still she kept diving.>\nIn her first year as an <Awakener>.\nRetreat to @3!',
         })}
         onClose={vi.fn()}
@@ -445,7 +445,7 @@ describe('WheelDetailModal', () => {
 
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord({
+        fullDataV2={makeWheelFullRecord({
           lore: 'Pain, intense pain filled her every sense.\n\n<Italic:Still she kept diving.>\nRetreat to @3!\nLine 4\nLine 5',
         })}
         onClose={vi.fn()}
@@ -478,7 +478,7 @@ describe('WheelDetailModal', () => {
   it('keeps the header fixed and scrolls only the detail body region', () => {
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord({
+        fullDataV2={makeWheelFullRecord({
           lore: 'Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6',
         })}
         onClose={vi.fn()}
@@ -497,7 +497,7 @@ describe('WheelDetailModal', () => {
 
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord()}
+        fullDataV2={makeWheelFullRecord()}
         onClose={vi.fn()}
         wheel={makeWheel()}
         wheels={[makeWheel()]}
@@ -510,7 +510,7 @@ describe('WheelDetailModal', () => {
   it('opens the full wheel art overlay and closes it on backdrop click', () => {
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord()}
+        fullDataV2={makeWheelFullRecord()}
         onClose={vi.fn()}
         wheel={makeWheel()}
         wheels={[makeWheel()]}
@@ -537,7 +537,7 @@ describe('WheelDetailModal', () => {
   it('does not mutate hidden wheel search while the art viewer overlay owns focus', () => {
     render(
       <WheelDetailModal
-        fullDataV1={makeWheelFullRecord()}
+        fullDataV2={makeWheelFullRecord()}
         onClose={vi.fn()}
         wheel={makeWheel()}
         wheels={[makeWheel()]}

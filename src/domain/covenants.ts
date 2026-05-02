@@ -29,18 +29,10 @@ export interface Covenant {
   name: string
 }
 
-function toLegacyCovenantAssetId(publicAssetId: string): string {
-  const suffix = /^covenant-icon-(\d{3})$/.exec(publicAssetId)?.[1]
-  if (!suffix) {
-    throw new Error(`Cannot map public covenant asset id "${publicAssetId}" to legacy asset id.`)
-  }
-  return `Icon_Trinket_${suffix}`
-}
-
 const parsedCovenants = publicCovenantsLiteSchema.parse(publicCovenantsLite).records.map(
   (covenant): Covenant => ({
     id: covenant.id,
-    assetId: toLegacyCovenantAssetId(covenant.assetId),
+    assetId: covenant.assetId,
     name: covenant.name,
   }),
 )

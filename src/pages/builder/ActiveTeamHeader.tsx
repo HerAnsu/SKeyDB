@@ -1,6 +1,6 @@
 import type {CSSProperties} from 'react'
 
-import tempPosseIcon from '@/assets/posse/00-temposse.webp'
+import tempPosseIcon from '@/assets/posse/Icon/KeyToken_Skill_00.webp'
 import {
   DEFAULT_REALM_ACCENT,
   getRealmAccent,

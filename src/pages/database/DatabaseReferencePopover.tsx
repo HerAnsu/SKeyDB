@@ -14,6 +14,8 @@ import {
   type ResolvedDatabaseReferenceLayer,
 } from '@/domain/database-reference-layer'
 import {buildDatabaseRichDescriptionText} from '@/domain/database-rich-text'
+import {resolveDescriptionTemplate} from '@/domain/description-args'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import {AwakenerEnlightenInfluenceBadges} from './AwakenerEnlightenInfluenceBadges'
 import type {DatabaseReferenceEntry, KeyedDatabaseReferenceEntry} from './database-reference-entry'
@@ -32,6 +34,7 @@ interface DatabaseReferencePopoverProps {
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
   onToggleEnlightenSlot?: (slot: AwakenerEnlightenRecord['slot']) => void
   referenceLayer?: ResolvedDatabaseReferenceLayer | null
+  formulaContext?: PublicFormulaContext
   stats: FullStats | null
   onClose: () => void
   onInfoEntryClick?: (entry: KeyedDatabaseReferenceEntry) => void
@@ -70,6 +73,7 @@ export function DatabaseReferencePopover({
   selectedEnlightenSlot = null,
   onToggleEnlightenSlot,
   referenceLayer = null,
+  formulaContext,
   stats,
   onClose,
   onInfoEntryClick,
@@ -88,16 +92,21 @@ export function DatabaseReferencePopover({
     : 'bg-slate-950/[.95] shadow-[0_10px_24px_rgba(2,6,23,0.58)]'
   const detailLinks = entry.detailLinks ?? []
   const attributeRows = entry.attributeRows ?? []
-  const fallbackText = buildDatabaseRichDescriptionText(
-    entry.record?.descriptionTemplate ?? entry.description,
-    entry.keywordFooterText,
-  )
+  const fallbackSourceText = entry.record
+    ? resolveDescriptionTemplate(entry.record.descriptionTemplate, entry.record.descriptionArgs, {
+        rank: entry.descriptionRank,
+        stats,
+        formulaContext,
+      })
+    : entry.description
+  const fallbackText = buildDatabaseRichDescriptionText(fallbackSourceText, entry.keywordFooterText)
   const contentProps: DatabaseRichTextContentProps = {
     text: entry.description,
     record: entry.record,
     keywordFooterText: entry.keywordFooterText,
     descriptionRank: entry.descriptionRank,
     descriptionMaxRank: entry.descriptionMaxRank,
+    formulaContext,
     referenceLayer,
     showVisibleScaling,
     showTagIcons,

@@ -207,6 +207,7 @@ function buildReferenceLookups(
         overlay,
         shellView.stats,
         shellView.overlayInfluenceBadgesById[overlay.id] ?? [],
+        shellView.formulaContext,
       ),
       overlay.aliases,
     )

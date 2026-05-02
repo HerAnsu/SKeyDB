@@ -4,7 +4,6 @@ import {useLocation, useNavigate, useParams} from 'react-router-dom'
 
 import emojiWke from '@/assets/emoji/Emoji_WKE_S_06.webp'
 import {getAwakeners, type Awakener} from '@/domain/awakeners'
-import {loadPublicV2AwakenerFullById} from '@/domain/public-v2-detail-loaders'
 import {DATABASE_SORT_OPTIONS, type DatabaseSortKey} from '@/domain/database-browse-state'
 import {buildDatabaseEntityBrowsePath} from '@/domain/database-entity-paths'
 import {
@@ -16,12 +15,15 @@ import {
   resolveDatabaseAwakenerTab,
   type DatabaseAwakenerTab,
 } from '@/domain/database-paths'
+import {
+  loadPublicV2AwakenerFullById,
+  loadPublicV2WheelFullById,
+} from '@/domain/public-v2-detail-loaders'
 import {getWheels, type Wheel} from '@/domain/wheels'
 import {
   WHEELS_DATABASE_SORT_OPTIONS,
   type WheelsDatabaseSortKey,
 } from '@/domain/wheels-database-browse-state'
-import {loadWheelFullV2ById} from '@/domain/wheels-full-v2-loader'
 
 import {
   buildAwakenerActiveFilterChips,
@@ -463,9 +465,9 @@ function DatabaseWheelDetailRoute({
   onSelectAwakener,
   onSelectWheel,
 }: DatabaseWheelDetailRouteProps) {
-  const {isLoading, record: fullDataV1} = useDatabaseDetailRouteRecord({
+  const {isLoading, record: fullDataV2} = useDatabaseDetailRouteRecord({
     id: wheel.id,
-    loadRecord: loadWheelFullV2ById,
+    loadRecord: loadPublicV2WheelFullById,
     missingPathname: buildDatabaseWheelBrowsePath(),
   })
 
@@ -473,13 +475,13 @@ function DatabaseWheelDetailRoute({
     return <div className='px-2 py-3 text-sm text-slate-300'>Loading wheel details...</div>
   }
 
-  if (!fullDataV1) {
+  if (!fullDataV2) {
     return null
   }
 
   return (
     <WheelDetailModal
-      fullDataV1={fullDataV1}
+      fullDataV2={fullDataV2}
       key={wheel.id}
       onClose={onClose}
       onSelectAwakener={onSelectAwakener}

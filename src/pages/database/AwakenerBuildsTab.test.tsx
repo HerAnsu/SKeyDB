@@ -8,8 +8,8 @@ const {getAwakenerBuildEntries} = vi.hoisted(() => ({
   getAwakenerBuildEntries: vi.fn(),
 }))
 
-const {loadWheelFullV2ById} = vi.hoisted(() => ({
-  loadWheelFullV2ById: vi.fn(),
+const {loadPublicV2WheelFullById} = vi.hoisted(() => ({
+  loadPublicV2WheelFullById: vi.fn(),
 }))
 
 vi.mock('../../domain/awakener-builds', async () => {
@@ -27,8 +27,8 @@ vi.mock('./database-popover-context', () => ({
   useDatabasePopoverControllerContext: vi.fn(),
 }))
 
-vi.mock('@/domain/wheels-full-v2-loader', () => ({
-  loadWheelFullV2ById,
+vi.mock('@/domain/public-v2-detail-loaders', () => ({
+  loadPublicV2WheelFullById,
 }))
 
 function deferred<T>() {
@@ -42,7 +42,7 @@ function deferred<T>() {
 describe('AwakenerBuildsTab', () => {
   beforeEach(() => {
     getAwakenerBuildEntries.mockReset()
-    loadWheelFullV2ById.mockReset()
+    loadPublicV2WheelFullById.mockReset()
     vi.mocked(useDatabasePopoverControllerContext).mockReturnValue(null)
   })
 
@@ -168,7 +168,7 @@ describe('AwakenerBuildsTab', () => {
 
     render(<AwakenerBuildsTab awakenerId='awakener-0027' />)
 
-    loadWheelFullV2ById.mockResolvedValue({
+    loadPublicV2WheelFullById.mockResolvedValue({
       aliases: ['Amber-Tinted Death'],
       awakener: 'Kathigua',
       descriptionArgs: {},
@@ -186,7 +186,7 @@ describe('AwakenerBuildsTab', () => {
     screen.getByRole('button', {name: /Amber-Tinted Death/i}).click()
 
     await waitFor(() => {
-      expect(loadWheelFullV2ById).toHaveBeenCalledWith('wheel-0028')
+      expect(loadPublicV2WheelFullById).toHaveBeenCalledWith('wheel-0028')
     })
 
     expect(openRootInfo).toHaveBeenCalledWith(
@@ -241,7 +241,7 @@ describe('AwakenerBuildsTab', () => {
 
     render(<AwakenerBuildsTab awakenerId='awakener-0018' />)
 
-    loadWheelFullV2ById.mockResolvedValue({
+    loadPublicV2WheelFullById.mockResolvedValue({
       aliases: ['Manikin of Oblivion'],
       awakener: 'Ghislaine',
       descriptionArgs: {},
@@ -259,7 +259,7 @@ describe('AwakenerBuildsTab', () => {
     screen.getByRole('button', {name: /Manikin of Oblivion/i}).click()
 
     await waitFor(() => {
-      expect(loadWheelFullV2ById).toHaveBeenCalledWith('wheel-0016')
+      expect(loadPublicV2WheelFullById).toHaveBeenCalledWith('wheel-0016')
     })
 
     expect(openRootInfo).toHaveBeenCalledWith(
@@ -304,9 +304,9 @@ describe('AwakenerBuildsTab', () => {
       },
     ])
 
-    const firstRequest = deferred<Awaited<ReturnType<typeof loadWheelFullV2ById>>>()
-    const secondRequest = deferred<Awaited<ReturnType<typeof loadWheelFullV2ById>>>()
-    loadWheelFullV2ById
+    const firstRequest = deferred<Awaited<ReturnType<typeof loadPublicV2WheelFullById>>>()
+    const secondRequest = deferred<Awaited<ReturnType<typeof loadPublicV2WheelFullById>>>()
+    loadPublicV2WheelFullById
       .mockReturnValueOnce(firstRequest.promise)
       .mockReturnValueOnce(secondRequest.promise)
 

@@ -53,6 +53,7 @@ export interface PublicComputedDescriptionArg {
   channel?: string
   suffix?: string
   stat?: PublicDescriptionArgStat
+  substatBonus?: PublicDescriptionArgSubstatBonus
 }
 
 export type PublicDescriptionArg =
@@ -92,10 +93,7 @@ function evaluateAll(
   return values.every((value) => value.resolved) ? values : null
 }
 
-function getPublicFormulaInput(
-  context: PublicFormulaContext,
-  key: string,
-): number | undefined {
+function getPublicFormulaInput(context: PublicFormulaContext, key: string): number | undefined {
   switch (key) {
     case 'accountStageGrowth':
       return context.accountStageGrowth
@@ -130,12 +128,16 @@ export function evaluatePublicFormulaExpression(
   switch (expression.op) {
     case 'add': {
       const values = evaluateAll(expression.args, context)
-      return values ? resolved(values.reduce((total, value) => total + (value.value ?? 0), 0)) : unresolved()
+      return values
+        ? resolved(values.reduce((total, value) => total + (value.value ?? 0), 0))
+        : unresolved()
     }
 
     case 'mul': {
       const values = evaluateAll(expression.args, context)
-      return values ? resolved(values.reduce((total, value) => total * (value.value ?? 1), 1)) : unresolved()
+      return values
+        ? resolved(values.reduce((total, value) => total * (value.value ?? 1), 1))
+        : unresolved()
     }
 
     case 'min': {
@@ -150,12 +152,16 @@ export function evaluatePublicFormulaExpression(
 
     case 'ceil': {
       const value = evaluatePublicFormulaExpression(expression.args[0], context)
-      return value.resolved && value.value !== null ? resolved(Math.ceil(value.value)) : unresolved()
+      return value.resolved && value.value !== null
+        ? resolved(Math.ceil(value.value))
+        : unresolved()
     }
 
     case 'floor': {
       const value = evaluatePublicFormulaExpression(expression.args[0], context)
-      return value.resolved && value.value !== null ? resolved(Math.floor(value.value)) : unresolved()
+      return value.resolved && value.value !== null
+        ? resolved(Math.floor(value.value))
+        : unresolved()
     }
 
     default:

@@ -2,12 +2,12 @@ import {resolveDatabaseReferenceInfoById} from '@/domain/database-reference-info
 import {getMainstatByKey, getMainstatIcon} from '@/domain/mainstats'
 import {resolveWheelMainstatValue} from '@/domain/wheel-mainstat-scaling'
 import {buildWheelDatabaseReferenceLayer} from '@/domain/wheels-database-reference-layer'
-import type {WheelFullV1Record} from '@/domain/wheels-full-v1'
+import type {WheelFullV2Record} from '@/domain/wheels-full-v2'
 
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
 
 export function buildWheelPopoverEntry(
-  wheelRecord: WheelFullV1Record,
+  wheelRecord: WheelFullV2Record,
 ): KeyedDatabaseReferenceEntry {
   const referenceLayer = buildWheelDatabaseReferenceLayer({
     activeDescriptionRank: 1,

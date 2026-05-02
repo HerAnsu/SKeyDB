@@ -11,8 +11,12 @@ import {
   type DatabaseReferenceLayer,
   type ResolvedDatabaseReferenceLayer,
 } from '@/domain/database-reference-layer'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
-import type {DatabasePopoverAnchorEvent, DatabasePopoverContextValue} from './database-popover-context'
+import type {
+  DatabasePopoverAnchorEvent,
+  DatabasePopoverContextValue,
+} from './database-popover-context'
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
 import type {DatabasePopoverRootProps} from './DatabasePopoverRoot'
 import {
@@ -25,6 +29,7 @@ import {
 
 interface DatabasePopoverControllerOptions {
   referenceLayer: ResolvedDatabaseReferenceLayer | null
+  formulaContext?: PublicFormulaContext
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
   stats?: import('@/domain/awakener-source-schema').FullStats | null
   onNavigateToSkills?: () => void
@@ -38,6 +43,7 @@ const TRAIL_OPENED_EVENT = 'database:trail-opened'
 
 export function useDatabasePopoverController({
   referenceLayer,
+  formulaContext,
   selectedEnlightenSlot = null,
   stats = null,
   onNavigateToSkills,
@@ -333,6 +339,7 @@ export function useDatabasePopoverController({
       anchorElement: trailAnchorElement,
       anchorRect: trailAnchorRect,
       referenceLayer,
+      formulaContext,
       stats,
       entries: trail.map((entry, index) => {
         const activeEntry = resolveLiveTrailEntry(entry)
@@ -378,6 +385,7 @@ export function useDatabasePopoverController({
     [
       clearTrail,
       closeTrailFrom,
+      formulaContext,
       onNavigateToSkills,
       onNavigateToWheelPage,
       onToggleEnlightenSlot,

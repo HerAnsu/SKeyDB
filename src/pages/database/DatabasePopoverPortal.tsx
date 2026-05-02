@@ -1,6 +1,7 @@
 import type {AwakenerEnlightenRecord, AwakenerOverlayRecord} from '@/domain/awakener-source-schema'
 import type {ResolvedAwakenerDatabaseShellView} from '@/domain/awakeners-database-view'
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
 import {DatabaseReferencePopover} from './DatabaseReferencePopover'
@@ -24,6 +25,7 @@ interface DatabasePopoverPortalProps {
   anchorElement?: HTMLElement | null
   anchorRect: DOMRect
   referenceLayer: ResolvedDatabaseReferenceLayer | null
+  formulaContext?: PublicFormulaContext
   stats: ResolvedAwakenerDatabaseShellView['stats']
   entries: DatabasePopoverPortalEntry[]
   onCloseAll: () => void
@@ -38,6 +40,7 @@ export function DatabasePopoverPortal({
   anchorElement,
   anchorRect,
   referenceLayer,
+  formulaContext,
   stats,
   entries,
   onCloseAll,
@@ -58,6 +61,7 @@ export function DatabasePopoverPortal({
       {entries.map((entry) => (
         <DatabaseReferencePopover
           entry={entry.activeEntry}
+          formulaContext={formulaContext}
           key={entry.key}
           layerCount={entries.length}
           layerIndex={entry.layerIndex}

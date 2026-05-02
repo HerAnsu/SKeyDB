@@ -1,6 +1,6 @@
 import {z} from 'zod'
 
-import awakenersCompatLite from '@/data/awakeners/compiled/awakeners-lite.v2.json'
+import publicAwakenersFull from '@/data/public-v2/full/awakeners.json'
 import publicAwakenersLite from '@/data/public-v2/lite/awakeners.json'
 
 const liteStatsSchema = z.object({
@@ -8,22 +8,6 @@ const liteStatsSchema = z.object({
   ATK: z.number(),
   DEF: z.number(),
 })
-
-const rawAwakenersSchema = z.array(
-  z.object({
-    id: z.number().int().positive(),
-    name: z.string().trim().min(1),
-    ingameId: z.string().trim().min(1).optional(),
-    faction: z.string().trim().min(1),
-    realm: z.string().trim().min(1),
-    rarity: z.string().trim().min(1).optional(),
-    type: z.string().trim().min(1).optional(),
-    aliases: z.array(z.string().trim().min(1)).optional(),
-    stats: liteStatsSchema.optional(),
-    tags: z.array(z.string().trim().min(1)).optional(),
-    unreleased: z.boolean().optional(),
-  }),
-)
 
 const publicAwakenersLiteSchema = z
   .object({
@@ -51,6 +35,17 @@ const publicAwakenersLiteSchema = z
     path: ['recordCount'],
   })
 
+const publicAwakenersFullSchema = z
+  .object({
+    records: z.array(
+      z.object({
+        id: z.string().regex(/^awakener-\d{4}$/),
+        baseStatsLv1: liteStatsSchema,
+      }),
+    ),
+  })
+  .passthrough()
+
 export interface AwakenerLiteStats {
   CON: number
   ATK: number
@@ -72,8 +67,10 @@ export interface Awakener {
   unreleased?: boolean
 }
 
-const compatAwakenerByNumericId = new Map(
-  rawAwakenersSchema.parse(awakenersCompatLite).map((awakener) => [awakener.id, awakener] as const),
+const publicFullAwakenerById = new Map(
+  publicAwakenersFullSchema
+    .parse(publicAwakenersFull)
+    .records.map((awakener) => [awakener.id, awakener]),
 )
 
 function assertUniqueIngameIds(awakeners: Awakener[]) {
@@ -92,10 +89,10 @@ function assertUniqueIngameIds(awakeners: Awakener[]) {
   }
 }
 
-function getCompatStats(publicId: string, numericId: number): AwakenerLiteStats {
-  const stats = compatAwakenerByNumericId.get(numericId)?.stats
+function getPublicStats(publicId: string): AwakenerLiteStats {
+  const stats = publicFullAwakenerById.get(publicId)?.baseStatsLv1
   if (!stats) {
-    throw new Error(`Missing compatibility stats for public awakener "${publicId}".`)
+    throw new Error(`Missing public V2 stats for awakener "${publicId}".`)
   }
   return stats
 }
@@ -103,12 +100,9 @@ function getCompatStats(publicId: string, numericId: number): AwakenerLiteStats 
 const parsedAwakeners = publicAwakenersLiteSchema
   .parse(publicAwakenersLite)
   .records.map((awakener): Awakener => {
-    const compatAwakener = compatAwakenerByNumericId.get(awakener.numericId)
-    const name = compatAwakener?.name ?? awakener.name
+    const name = awakener.name
     const aliases = Array.from(new Set([name, ...(awakener.aliases ?? [])]))
-    const tags = Array.from(
-      new Set([...(compatAwakener?.tags ?? []), ...(awakener.searchTags ?? [])]),
-    )
+    const tags = Array.from(new Set(awakener.searchTags ?? []))
 
     return {
       id: awakener.id,
@@ -120,7 +114,7 @@ const parsedAwakeners = publicAwakenersLiteSchema
       rarity: awakener.rarity,
       type: awakener.type,
       aliases,
-      stats: getCompatStats(awakener.id, awakener.numericId),
+      stats: getPublicStats(awakener.id),
       tags,
     }
   })

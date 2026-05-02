@@ -9,7 +9,7 @@ describe('getCovenants', () => {
     expect(covenants.length).toBeGreaterThan(0)
     expect(covenants[0]).toMatchObject({
       id: 'covenant-0001',
-      assetId: 'Icon_Trinket_001',
+      assetId: 'covenant-icon-001',
       name: 'Deus Ex Machina',
     })
     expect(

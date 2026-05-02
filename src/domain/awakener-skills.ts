@@ -1,15 +1,35 @@
-import awakenersSkillsJson from '@/data/awakeners/awakener-skills.json'
+import publicSkillsFull from '@/data/public-v2/full/skills.json'
 
 import {awakenerSkillsDatasetSchema, type AwakenerSkillRecord} from './awakener-source-schema'
 
+interface PublicSkillsEnvelope {
+  records: Array<
+    Omit<AwakenerSkillRecord, 'ownerAwakenerId' | 'variants'> & {ownerAwakenerId: string}
+  >
+}
+
 let awakenerSkillsCache: AwakenerSkillRecord[] | null = null
+
+function numericAwakenerId(publicAwakenerId: string): number {
+  return Number(/^awakener-(\d{4})$/.exec(publicAwakenerId)?.[1] ?? 0)
+}
+
+function adaptPublicSkill(record: PublicSkillsEnvelope['records'][number]): AwakenerSkillRecord {
+  return {
+    ...record,
+    ownerAwakenerId: numericAwakenerId(record.ownerAwakenerId),
+    variants: [],
+  }
+}
 
 export function getAwakenerSkills(): AwakenerSkillRecord[] {
   if (awakenerSkillsCache) {
     return awakenerSkillsCache
   }
 
-  awakenerSkillsCache = awakenerSkillsDatasetSchema.parse(awakenersSkillsJson)
+  awakenerSkillsCache = awakenerSkillsDatasetSchema.parse(
+    (publicSkillsFull as unknown as PublicSkillsEnvelope).records.map(adaptPublicSkill),
+  )
   return awakenerSkillsCache
 }
 

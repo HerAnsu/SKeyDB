@@ -1,19 +1,54 @@
-import compiledAwakenersFullV2Json from '@/data/awakeners/compiled/awakeners-full.v2.json'
+import type {
+  AwakenerEnlightenRecord,
+  AwakenerOverlayRecord,
+  AwakenerRosterRecord,
+  AwakenerSkillRecord,
+  AwakenerTalentRecord,
+  DerivedSkillRecord,
+} from './awakener-source-schema'
+import type {PublicV2UpgradeEntry} from './public-v2-schema'
 
-import {awakenersFullV2DatasetSchema, type AwakenerFullV2Record} from './awakeners-full-v2-compiler'
+export type PublicV2RecordUpgrade = PublicV2UpgradeEntry
 
-export {awakenersFullV2DatasetSchema, type AwakenerFullV2Record} from './awakeners-full-v2-compiler'
+export type PublicV2UpgradeableSkillRecord = AwakenerSkillRecord & {
+  upgrades?: PublicV2RecordUpgrade[]
+}
 
-let awakenersFullV2Cache: AwakenerFullV2Record[] | null = null
+export type PublicV2UpgradeableDerivedSkillRecord = DerivedSkillRecord & {
+  upgrades?: PublicV2RecordUpgrade[]
+}
 
-export function getAwakenersFullV2(): AwakenerFullV2Record[] {
-  if (awakenersFullV2Cache) {
-    return awakenersFullV2Cache
+export type PublicV2UpgradeableOverlayRecord = AwakenerOverlayRecord & {
+  upgrades?: PublicV2RecordUpgrade[]
+}
+
+export interface AwakenerFullV2Record extends AwakenerRosterRecord {
+  cards: {
+    C1: PublicV2UpgradeableSkillRecord
+    C2: PublicV2UpgradeableSkillRecord
+    C3: PublicV2UpgradeableSkillRecord
+    C4: PublicV2UpgradeableSkillRecord
+    C5: PublicV2UpgradeableSkillRecord
+    Exalt: PublicV2UpgradeableSkillRecord
+    OverExalt?: PublicV2UpgradeableSkillRecord
+    promotedExtras: PublicV2UpgradeableDerivedSkillRecord[]
   }
-
-  awakenersFullV2Cache = awakenersFullV2DatasetSchema.parse(compiledAwakenersFullV2Json)
-
-  return awakenersFullV2Cache
+  talents: {
+    T1?: AwakenerTalentRecord
+    T2?: AwakenerTalentRecord
+    T3?: AwakenerTalentRecord
+    T4?: AwakenerTalentRecord
+    extraTalents: AwakenerTalentRecord[]
+  }
+  enlightens: {
+    E1: AwakenerEnlightenRecord
+    E2: AwakenerEnlightenRecord
+    E3: AwakenerEnlightenRecord
+    OverExalt?: AwakenerEnlightenRecord
+    AbsoluteAxiom?: AwakenerEnlightenRecord
+  }
+  derivedSkills: PublicV2UpgradeableDerivedSkillRecord[]
+  overlays?: PublicV2UpgradeableOverlayRecord[]
 }
 
 export function getAwakenerFullV2ById(

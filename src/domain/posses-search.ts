@@ -1,6 +1,5 @@
 import Fuse from 'fuse.js'
 
-import {getAwakeners} from './awakeners'
 import type {Posse} from './posses'
 import {getRealmLabel} from './realms'
 import {
@@ -14,8 +13,6 @@ interface IndexedPosseRecord {
   posse: Posse
   normalizedName: string
   normalizedId: string
-  normalizedLinkedAwakenerName: string
-  normalizedLinkedAwakenerAliases: string[]
   normalizedSupplemental: string[]
 }
 
@@ -28,8 +25,6 @@ const realmLabelById: Record<string, string> = {
   OTHER: 'Other',
 }
 
-const awakeners = getAwakeners()
-const awakenerByName = new Map(awakeners.map((awakener) => [awakener.name, awakener]))
 const indexedPosseCache = new WeakMap<Posse[], IndexedPosseRecord[]>()
 const possesFuseCache = new WeakMap<Posse[], Fuse<IndexedPosseRecord>>()
 
@@ -99,17 +94,12 @@ function getIndexedPosses(posses: Posse[]): IndexedPosseRecord[] {
   }
 
   const indexedPosses = posses.map((posse) => {
-    const linkedAwakener = posse.awakenerName ? awakenerByName.get(posse.awakenerName) : undefined
     const supplementalValues = [posse.realm, ...getRealmLabels(posse)]
 
     return {
       posse,
       normalizedName: normalizeForSearch(posse.name),
       normalizedId: normalizeForSearch(posse.id),
-      normalizedLinkedAwakenerName: posse.awakenerName
-        ? normalizeForSearch(posse.awakenerName)
-        : '',
-      normalizedLinkedAwakenerAliases: getNormalizedSearchValues(linkedAwakener?.aliases ?? []),
       normalizedSupplemental: getNormalizedSearchValues(supplementalValues),
     }
   })
@@ -132,10 +122,8 @@ function getPossesFuse(posses: Posse[]): Fuse<IndexedPosseRecord> {
     minMatchCharLength: 2,
     keys: [
       {name: 'normalizedName', weight: 0.25},
-      {name: 'normalizedLinkedAwakenerName', weight: 0.15},
-      {name: 'normalizedLinkedAwakenerAliases', weight: 0.15},
       {name: 'normalizedId', weight: 0.05},
-      {name: 'normalizedSupplemental', weight: 0.4},
+      {name: 'normalizedSupplemental', weight: 0.7},
     ],
   })
 
@@ -148,17 +136,9 @@ function getPosseSearchPriority(
   normalizedQuery: string,
   queryLength: number,
 ): number | null {
-  const linkedAwakener = record.posse.awakenerName
-    ? awakenerByName.get(record.posse.awakenerName)
-    : undefined
-
   const nameMatch = getBestSearchFieldMatch([record.posse.name], normalizedQuery)
   const idMatch =
     queryLength >= 2 ? getBestSearchFieldMatch([record.posse.id], normalizedQuery) : null
-  const linkedNameMatch = record.posse.awakenerName
-    ? getBestSearchFieldMatch([record.posse.awakenerName], normalizedQuery)
-    : null
-  const linkedAliasMatch = getBestSearchFieldMatch(linkedAwakener?.aliases ?? [], normalizedQuery)
   const supplementalMatch =
     queryLength >= 3
       ? getBestSearchFieldMatch(
@@ -175,8 +155,6 @@ function getPosseSearchPriority(
       wordPrefix: 7,
       contains: 8,
     }),
-    toPriority(linkedNameMatch, getLinkedPriorityMap(queryLength)),
-    toPriority(linkedAliasMatch, getLinkedPriorityMap(queryLength)),
     toPriority(supplementalMatch, {
       exact: 10,
       prefix: 11,
@@ -207,24 +185,6 @@ function getPrimaryPriorityMap(queryLength: number): Record<SearchFieldMatchKind
     prefix: 1,
     wordPrefix: 2,
     contains: 6,
-  }
-}
-
-function getLinkedPriorityMap(queryLength: number): Record<SearchFieldMatchKind, number> {
-  if (queryLength === 1) {
-    return {
-      exact: 4,
-      prefix: 5,
-      wordPrefix: 5,
-      contains: 99,
-    }
-  }
-
-  return {
-    exact: 4,
-    prefix: 5,
-    wordPrefix: 5,
-    contains: 9,
   }
 }
 

@@ -1,11 +1,13 @@
 import {fireEvent, render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 
-import type {AwakenerEnlightenRecord} from '@/domain/awakener-source-schema'
+import type {AwakenerEnlightenRecord, AwakenerSkillRecord} from '@/domain/awakener-source-schema'
 import type {
   DatabaseReferenceInfo,
   ResolvedDatabaseReferenceLayer,
 } from '@/domain/database-reference-layer'
+import type {PublicDescriptionArg} from '@/domain/public-description-args'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
 import {DatabasePopoverRoot} from './DatabasePopoverRoot'
@@ -73,6 +75,38 @@ function buildReferenceLayer(
     'Guard text.',
     'defense',
   )
+  const computedReference: DatabaseReferenceInfo = {
+    kind: 'skill',
+    id: 'skill.test.computed',
+    name: 'Computed',
+    label: 'Card · C4 · Cost 1',
+    record: {
+      id: 'skill.test.computed',
+      ownerAwakenerId: 999,
+      kind: 'strike',
+      displayName: 'Computed',
+      descriptionTemplate: 'Gain [Arg1] charge.',
+      descriptionArgs: {
+        Arg1: {
+          kind: 'computed',
+          expression: {
+            op: 'ceil',
+            args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
+          },
+          inputs: ['accountDamagePower'],
+        } satisfies PublicDescriptionArg,
+      } as unknown as AwakenerSkillRecord['descriptionArgs'],
+      cardKeywords: [],
+      variants: [],
+    },
+    description: 'Gain — charge.',
+    keywordFooterText: undefined,
+    descriptionRank: 1,
+    descriptionMaxRank: 6,
+    influencingEnlightenSlots: [],
+    influencingTalentIds: [],
+    influenceBadges: [],
+  }
   const wheelReference: DatabaseReferenceInfo = {
     kind: 'wheel',
     id: 'B01',
@@ -82,7 +116,7 @@ function buildReferenceLayer(
       id: 'B01',
       kind: 'wheel',
       displayName: 'Merciful Nurturing',
-      ownerAwakenerId: 1,
+      ownerAwakenerId: 'awakener-0001',
       descriptionTemplate: 'Wheel text.',
       descriptionArgs: {},
     },
@@ -101,11 +135,13 @@ function buildReferenceLayer(
     referenceInfoByName: new Map([
       ['strike', strikeReference],
       ['guard', guardReference],
+      ['computed', computedReference],
       ['merciful nurturing', wheelReference],
     ]),
     referenceInfoById: new Map([
       ['skill.test.strike', strikeReference],
       ['skill.test.guard', guardReference],
+      ['skill.test.computed', computedReference],
       ['B01', wheelReference],
     ]),
     overlayByName: new Map(),
@@ -147,13 +183,16 @@ function ControllerHarness({
   selectedEnlightenSlot = null,
   onNavigateToWheelPage,
   onOuterClick,
+  formulaContext,
 }: {
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
   onNavigateToWheelPage?: (wheel: {name: string}) => void
   onOuterClick?: () => void
+  formulaContext?: PublicFormulaContext
 }) {
   const popoverController = useDatabasePopoverController({
+    formulaContext,
     onNavigateToWheelPage,
     referenceLayer,
     selectedEnlightenSlot,
@@ -185,6 +224,14 @@ function ControllerHarness({
           type='button'
         >
           Open Wheel
+        </button>
+        <button
+          onClick={(event) => {
+            popoverController.contextValue.openRootReferenceByName('Computed', event)
+          }}
+          type='button'
+        >
+          Open Computed
         </button>
         <button
           onClick={(event) => {
@@ -278,6 +325,23 @@ describe('useDatabasePopoverController', () => {
     expect(await screen.findByText('Wheel text.')).toBeInTheDocument()
     expect(screen.getByText('Merciful Nurturing')).toBeInTheDocument()
     expect(screen.getByText('Wheel · SSR · Caro')).toBeInTheDocument()
+  })
+
+  it('threads formula context from controller options into popover content', async () => {
+    render(
+      <ControllerHarness
+        formulaContext={{accountDamagePower: 8}}
+        referenceLayer={buildReferenceLayer('Base text.')}
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Computed'}))
+
+    expect(await screen.findByText('12')).toHaveAttribute(
+      'title',
+      expect.stringContaining('Lv1: 12'),
+    )
+    expect(screen.queryByText('—')).not.toBeInTheDocument()
   })
 
   it('routes explicit wheel preview entries to the wheel database page', async () => {

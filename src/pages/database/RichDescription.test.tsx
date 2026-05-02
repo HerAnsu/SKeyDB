@@ -108,7 +108,7 @@ describe('RichDescription', () => {
         id: 'B01',
         kind: 'wheel',
         displayName: 'Merciful Nurturing',
-        ownerAwakenerId: 1,
+        ownerAwakenerId: 'awakener-0001',
         descriptionTemplate,
         descriptionArgs,
       },

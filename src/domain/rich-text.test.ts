@@ -1,14 +1,24 @@
 import {describe, expect, it} from 'vitest'
 
 import {collectAwakenerDatabaseCardNames} from './awakeners-database-view'
-import {getAwakenersFullV2, type AwakenerFullV2Record} from './awakeners-full-v2'
+import {type AwakenerFullV2Record} from './awakeners-full-v2'
+import {getAwakenersLiteV2} from './awakeners-lite-v2'
 import {resolveDescribedRecord} from './description-records'
+import {loadPublicV2AwakenerFullById} from './public-v2-detail-loaders'
 import {parseRichDescription} from './rich-text'
 
 const EMPTY_CARDS = new Set<string>()
 
-function getAwakenerByName(name: string): AwakenerFullV2Record {
-  const awakener = getAwakenersFullV2().find((entry) => entry.displayName === name)
+async function loadAwakenerByName(name: string): Promise<AwakenerFullV2Record> {
+  const liteAwakener = getAwakenersLiteV2().find(
+    (entry) => entry.name.toLowerCase() === name.toLowerCase(),
+  )
+  expect(liteAwakener).toBeDefined()
+  if (!liteAwakener) {
+    throw new Error(`Missing awakener fixture: ${name}`)
+  }
+
+  const awakener = await loadPublicV2AwakenerFullById(liteAwakener.id)
   expect(awakener).toBeDefined()
   if (!awakener) {
     throw new Error(`Missing awakener fixture: ${name}`)
@@ -428,7 +438,7 @@ describe('parseRichDescription', () => {
     ])
   })
 
-  it('parses resolved compiled descriptions without leaking raw arg tokens', () => {
+  it('parses resolved public V2 descriptions without leaking raw arg tokens', async () => {
     const cases = [
       {
         awakenerName: 'kathigu-ra',
@@ -465,7 +475,7 @@ describe('parseRichDescription', () => {
     ] as const
 
     for (const testCase of cases) {
-      const awakener = getAwakenerByName(testCase.awakenerName)
+      const awakener = await loadAwakenerByName(testCase.awakenerName)
       const card = awakener.cards[testCase.slot]
       const resolvedDescription = resolveDescribedRecord(card, {rank: 6}, {maxRank: 6}).description
       const result = parseRichDescription(

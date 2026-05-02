@@ -89,7 +89,6 @@ export function makeTalentRecord(
     descriptionArgs: {},
     cardKeywords: [],
     variants: [],
-    upgradePatches: [],
     ...overrides,
   } as AwakenerTalentRecord
 }
@@ -101,8 +100,6 @@ export function makeEnlightenRecord(
   return {
     descriptionTemplate: `${overrides.displayName} text`,
     descriptionArgs: {},
-    upgradeTargetIds: [],
-    upgradePatches: [],
     ...overrides,
   } as AwakenerEnlightenRecord
 }

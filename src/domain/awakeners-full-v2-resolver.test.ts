@@ -8,14 +8,11 @@ import type {
   AwakenerSkillRecord,
   AwakenerTalentRecord,
   DerivedSkillRecord,
+  UpgradePatch,
 } from './awakener-source-schema'
-import {
-  getAwakenerFullV2ById,
-  getAwakenersFullV2,
-  type AwakenerFullV2Record,
-} from './awakeners-full-v2'
-import {loadAwakenerFullV2ById} from './awakeners-full-v2-loader'
+import {type AwakenerFullV2Record} from './awakeners-full-v2'
 import {resolveAwakenerFullV2Record} from './awakeners-full-v2-resolver'
+import {loadPublicV2AwakenerFullById} from './public-v2-detail-loaders'
 
 function buildRosterRecord(): AwakenerRosterRecord {
   return {
@@ -102,27 +99,12 @@ function buildTalent(id: string, displayName: string): AwakenerTalentRecord {
     displayName,
     descriptionTemplate: `${displayName} description`,
     descriptionArgs: {},
-    upgradeTargetIds: [],
-    upgradePatches: [],
-  }
-}
-
-function buildTalentWithPatches(
-  id: string,
-  displayName: string,
-  patches: AwakenerTalentRecord['upgradePatches'],
-): AwakenerTalentRecord {
-  return {
-    ...buildTalent(id, displayName),
-    upgradeTargetIds: patches.map((patch) => patch.targetId),
-    upgradePatches: patches,
   }
 }
 
 function buildEnlighten(
   id: string,
   slot: AwakenerEnlightenRecord['slot'],
-  patches: AwakenerEnlightenRecord['upgradePatches'],
 ): AwakenerEnlightenRecord {
   return {
     id,
@@ -131,109 +113,167 @@ function buildEnlighten(
     displayName: id,
     descriptionTemplate: `${id} description`,
     descriptionArgs: {},
-    upgradeTargetIds: patches.map((patch) => patch.targetId),
-    upgradePatches: patches,
   }
 }
 
+function upgradeFromPatch(
+  upgraderId: string,
+  upgraderType: 'enlighten' | 'talent',
+  patch: UpgradePatch,
+) {
+  return {
+    id: `upgrade.${upgraderId}.${patch.targetId}`,
+    upgraderId,
+    upgraderType,
+    operation:
+      patch.operation === 'card_keywords'
+        ? 'override_card_keywords'
+        : patch.operation === 'arg_substat_bonuses'
+          ? 'mixed'
+          : patch.operation,
+    patch:
+      patch.operation === 'card_keywords'
+        ? {
+            cardKeywords: patch.addCardKeywords,
+          }
+        : {
+            ...(patch.descriptionTemplate ? {descriptionTemplate: patch.descriptionTemplate} : {}),
+            ...(patch.descriptionArgs ? {descriptionArgs: patch.descriptionArgs} : {}),
+            ...(patch.argSubstatBonuses ? {argSubstatBonuses: patch.argSubstatBonuses} : {}),
+            ...(patch.addCardKeywords ? {cardKeywords: patch.addCardKeywords} : {}),
+            ...(patch.removeCardKeywordIds
+              ? {removeCardKeywordIds: patch.removeCardKeywordIds}
+              : {}),
+          },
+  } as const
+}
+
 function buildRecord(): AwakenerFullV2Record {
+  const baseTalent = buildTalent('talent.test.base', 'Base Talent')
+  const soulforgeTalent = buildTalent('talent.test.soulforge-aptitude', 'Soulforge Aptitude')
+  const e1 = buildEnlighten('enlighten.test.e1', 'E1')
+  const e2 = buildEnlighten('enlighten.test.e2', 'E2')
+  const e3 = buildEnlighten('enlighten.test.e3', 'E3')
+  const baseTalentStrikePatch: UpgradePatch = {
+    targetId: 'skill.test.strike',
+    targetType: 'skill',
+    operation: 'arg_substat_bonuses',
+    argSubstatBonuses: {
+      Arg1: {
+        substat: 'CritRate',
+        multiplier: '1',
+        suffix: '%',
+      },
+    },
+  }
+  const soulforgeDefensePatch: UpgradePatch = {
+    targetId: 'skill.test.defense',
+    targetType: 'skill',
+    operation: 'arg_substat_bonuses',
+    argSubstatBonuses: {
+      Arg1: {
+        substat: 'DamageAmplification',
+        multiplier: '0.5',
+        suffix: '%',
+      },
+    },
+  }
+  const e1StrikePatch: UpgradePatch = {
+    targetId: 'skill.test.strike',
+    targetType: 'skill',
+    operation: 'mixed',
+    descriptionTemplate: 'Strike e1',
+    descriptionArgs: {
+      Arg2: {
+        kind: 'fixed',
+        value: '2',
+      },
+    },
+    addCardKeywords: [{id: 'mechanic.retain'}],
+  }
+  const e2DerivedPatch: UpgradePatch = {
+    targetId: 'derived.test.extra',
+    targetType: 'derived-skill',
+    operation: 'override_args',
+    descriptionArgs: {
+      Arg1: {
+        kind: 'fixed',
+        value: '3',
+      },
+    },
+  }
+  const e2OverlayPatch: UpgradePatch = {
+    targetId: 'overlay.test.status',
+    targetType: 'overlay',
+    operation: 'override_args',
+    descriptionArgs: {
+      StateArg1: {
+        kind: 'fixed',
+        value: '5',
+      },
+    },
+  }
+  const e3StrikePatch: UpgradePatch = {
+    targetId: 'skill.test.strike',
+    targetType: 'skill',
+    operation: 'mixed',
+    descriptionTemplate: 'Strike e3',
+    removeCardKeywordIds: ['mechanic.retain'],
+  }
+
   return {
     ...buildRosterRecord(),
     cards: {
-      C1: buildSkill('skill.test.strike', 'Strike', 'strike'),
-      C2: buildSkill('skill.test.defense', 'Defense', 'defense'),
+      C1: {
+        ...buildSkill('skill.test.strike', 'Strike', 'strike'),
+        upgrades: [
+          upgradeFromPatch(baseTalent.id, 'talent', baseTalentStrikePatch),
+          upgradeFromPatch(e1.id, 'enlighten', e1StrikePatch),
+          upgradeFromPatch(e3.id, 'enlighten', e3StrikePatch),
+        ],
+      },
+      C2: {
+        ...buildSkill('skill.test.defense', 'Defense', 'defense'),
+        upgrades: [upgradeFromPatch(soulforgeTalent.id, 'talent', soulforgeDefensePatch)],
+      },
       C3: buildSkill('skill.test.command-1', 'Command 1', 'command'),
       C4: buildSkill('skill.test.command-2', 'Command 2', 'command'),
       C5: buildSkill('skill.test.command-3', 'Command 3', 'command'),
       Exalt: buildSkill('skill.test.exalt', 'Exalt', 'exalt'),
       OverExalt: undefined,
-      promotedExtras: [buildDerived('derived.test.extra', 'Extra')],
+      promotedExtras: [
+        {
+          ...buildDerived('derived.test.extra', 'Extra'),
+          upgrades: [upgradeFromPatch(e2.id, 'enlighten', e2DerivedPatch)],
+        },
+      ],
     },
     talents: {
-      T1: buildTalentWithPatches('talent.test.base', 'Base Talent', [
-        {
-          targetId: 'skill.test.strike',
-          targetType: 'skill',
-          operation: 'arg_substat_bonuses',
-          argSubstatBonuses: {
-            Arg1: {
-              substat: 'CritRate',
-              multiplier: '1',
-              suffix: '%',
-            },
-          },
-        },
-      ]),
+      T1: baseTalent,
       T2: undefined,
-      T3: buildTalentWithPatches('talent.test.soulforge-aptitude', 'Soulforge Aptitude', [
-        {
-          targetId: 'skill.test.defense',
-          targetType: 'skill',
-          operation: 'arg_substat_bonuses',
-          argSubstatBonuses: {
-            Arg1: {
-              substat: 'DamageAmplification',
-              multiplier: '0.5',
-              suffix: '%',
-            },
-          },
-        },
-      ]),
+      T3: soulforgeTalent,
       T4: undefined,
       extraTalents: [],
     },
     enlightens: {
-      E1: buildEnlighten('enlighten.test.e1', 'E1', [
-        {
-          targetId: 'skill.test.strike',
-          targetType: 'skill',
-          operation: 'mixed',
-          descriptionTemplate: 'Strike e1',
-          descriptionArgs: {
-            Arg2: {
-              kind: 'fixed',
-              value: '2',
-            },
-          },
-          addCardKeywords: [{id: 'mechanic.retain'}],
-        },
-      ]),
-      E2: buildEnlighten('enlighten.test.e2', 'E2', [
-        {
-          targetId: 'derived.test.extra',
-          targetType: 'derived-skill',
-          operation: 'override_args',
-          descriptionArgs: {
-            Arg1: {
-              kind: 'fixed',
-              value: '3',
-            },
-          },
-        },
-        {
-          targetId: 'overlay.test.status',
-          targetType: 'overlay',
-          operation: 'override_args',
-          descriptionArgs: {
-            StateArg1: {
-              kind: 'fixed',
-              value: '5',
-            },
-          },
-        },
-      ]),
-      E3: buildEnlighten('enlighten.test.e3', 'E3', [
-        {
-          targetId: 'skill.test.strike',
-          targetType: 'skill',
-          operation: 'mixed',
-          descriptionTemplate: 'Strike e3',
-          removeCardKeywordIds: ['mechanic.retain'],
-        },
-      ]),
+      E1: e1,
+      E2: e2,
+      E3: e3,
       AbsoluteAxiom: undefined,
     },
     derivedSkills: [buildDerived('derived.test.status-card', 'Status Card')],
+    overlays: [
+      {
+        id: 'overlay.test.status',
+        ownerAwakenerId: 999,
+        displayName: 'Status',
+        overlayType: 'mechanic',
+        aliases: [],
+        descriptionTemplate: 'Status base',
+        descriptionArgs: {},
+        upgrades: [upgradeFromPatch(e2.id, 'enlighten', e2OverlayPatch)],
+      },
+    ],
   }
 }
 
@@ -362,8 +402,8 @@ describe('awakeners-full-v2-resolver', () => {
     expect(resolved.record.talents.T3?.id).toBe('talent.test.soulforge-aptitude')
   })
 
-  it('applies real cumulative skill patches from canonical enlightens', () => {
-    const thais = getAwakenerFullV2ById(48, getAwakenersFullV2())
+  it('applies real cumulative skill patches from public V2 enlightens', async () => {
+    const thais = await loadPublicV2AwakenerFullById(48)
     expect(thais).toBeDefined()
     if (!thais) {
       throw new Error('Missing canonical Thais V2 record')
@@ -401,18 +441,18 @@ describe('awakeners-full-v2-resolver', () => {
       'Deal [Damage:Arg1] DMG. Thais obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] {STR}.',
     )
     expect(defense?.descriptionTemplate).toBe(
-      'Obtain [Block:Arg1] Shield. Thais obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] {STR}.',
+      'Gain [Block:Arg1] Shield. Thais obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] {STR}.',
     )
     expect(strike?.descriptionArgs.Arg3).toEqual({
-      kind: 'scaling',
-      values: ['1'],
+      kind: 'fixed',
+      value: '1',
       suffix: '%',
       stat: 'ATK',
     })
   })
 
-  it('applies real overlay patches from canonical enlightens without embedding shared overlays', () => {
-    const wanda = getAwakenerFullV2ById(52, getAwakenersFullV2())
+  it('applies real overlay patches from public V2 enlightens without embedding shared overlays', async () => {
+    const wanda = await loadPublicV2AwakenerFullById(52)
     expect(wanda).toBeDefined()
     if (!wanda) {
       throw new Error('Missing canonical Wanda V2 record')
@@ -438,7 +478,7 @@ describe('awakeners-full-v2-resolver', () => {
   })
 
   it('applies public V2 Xu overlay upgrades through the resolver override surface', async () => {
-    const xu = await loadAwakenerFullV2ById('awakener-0054')
+    const xu = await loadPublicV2AwakenerFullById('awakener-0054')
     expect(xu).toBeDefined()
     if (!xu) {
       throw new Error('Missing public V2 Xu record')

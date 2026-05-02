@@ -4,7 +4,7 @@ import {FaGear, FaXmark} from 'react-icons/fa6'
 
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import type {Wheel} from '@/domain/wheels'
-import type {WheelFullV1Record} from '@/domain/wheels-full-v1'
+import type {WheelFullV2Record} from '@/domain/wheels-full-v2'
 
 import {DatabasePopoverContext} from './database-popover-context'
 import {DatabaseArtViewerOverlay} from './DatabaseArtViewerOverlay'
@@ -19,7 +19,7 @@ import {WheelDetailSettingsPanel} from './WheelDetailSettingsPanel'
 interface WheelDetailModalProps {
   wheel: Wheel
   wheels?: Wheel[]
-  fullDataV1: WheelFullV1Record
+  fullDataV2: WheelFullV2Record
   onClose: () => void
   onSelectAwakener?: (
     awakener: {id: string; name: string},
@@ -29,7 +29,7 @@ interface WheelDetailModalProps {
 }
 
 export function WheelDetailModal({
-  fullDataV1,
+  fullDataV2,
   onClose,
   onSelectAwakener,
   onSelectWheel,
@@ -38,7 +38,7 @@ export function WheelDetailModal({
 }: WheelDetailModalProps) {
   return (
     <WheelDetailModalInner
-      fullDataV1={fullDataV1}
+      fullDataV2={fullDataV2}
       key={wheel.id}
       onClose={onClose}
       onSelectAwakener={onSelectAwakener}
@@ -50,7 +50,7 @@ export function WheelDetailModal({
 }
 
 function WheelDetailModalInner({
-  fullDataV1,
+  fullDataV2,
   onClose,
   onSelectAwakener,
   onSelectWheel,
@@ -73,7 +73,7 @@ function WheelDetailModalInner({
     updateWheelPreferences,
     wheelDescriptionRecord,
   } = useWheelDetailModalState({
-    fullDataV1,
+    fullDataV2,
     onClose,
     onSelectWheel,
     wheel,
@@ -178,7 +178,7 @@ function WheelDetailModalInner({
                     descriptionRank={descriptionRank}
                     enhanceLevel={enhanceLevel}
                     expandLoreByDefault={preferences.wheel.expandLoreByDefault}
-                    fullDataV1={fullDataV1}
+                    fullDataV2={fullDataV2}
                     mainstatValue={resolvedMainstatValue}
                     mobileArtwork={
                       <WheelDetailArtwork

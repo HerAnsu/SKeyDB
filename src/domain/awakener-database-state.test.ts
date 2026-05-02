@@ -9,12 +9,8 @@ import {
   resolveAwakenerDatabaseState,
 } from './awakener-database-state'
 import type {AwakenerOverlayRecord} from './awakener-source-schema'
-import {
-  getAwakenerFullV2ById,
-  getAwakenersFullV2,
-  type AwakenerFullV2Record,
-} from './awakeners-full-v2'
-import {loadAwakenerFullV2ById as loadPublicAwakenerFullV2ById} from './awakeners-full-v2-loader'
+import {type AwakenerFullV2Record} from './awakeners-full-v2'
+import {loadPublicV2AwakenerFullById} from './public-v2-detail-loaders'
 
 describe('awakener-database-state', () => {
   it('normalizes and clamps database selection inputs', () => {
@@ -34,8 +30,8 @@ describe('awakener-database-state', () => {
     })
   })
 
-  it('resolves stats and described view from one selection object', () => {
-    const thais = getAwakenerFullV2ById(48, getAwakenersFullV2())
+  it('resolves stats and described view from one selection object', async () => {
+    const thais = await loadPublicV2AwakenerFullById(48)
     expect(thais).toBeDefined()
     if (!thais) {
       throw new Error('Missing canonical Thais V2 record')
@@ -66,6 +62,7 @@ describe('awakener-database-state', () => {
       {value: 'E1', label: 'E1'},
       {value: 'E2', label: 'E2'},
       {value: 'E3', label: 'E3'},
+      {value: 'AbsoluteAxiom', label: 'AA'},
     ])
     expect(resolved.stats.CON).not.toBe(thais.stats.CON)
     expect(resolved.shellView.activeEnlightenIds).toEqual([
@@ -73,7 +70,7 @@ describe('awakener-database-state', () => {
       'enlighten.thais.seed-of-chaos',
       'enlighten.thais.everlasting-cycle',
     ])
-    expect(resolved.shellView.commandCards[0]?.resolved.description).toContain('Thais obtains')
+    expect(resolved.shellView.commandCards[0]?.resolved.description).toContain('Thais gains')
     expect(resolved.referenceLayer.referenceInfoByName.size).toBeGreaterThan(0)
   })
 
@@ -136,8 +133,8 @@ describe('awakener-database-state', () => {
     })
   })
 
-  it('detects soulforge aptitude from canonical T-slots, not just extra talents', () => {
-    const twentyFour = getAwakenerFullV2ById(1, getAwakenersFullV2())
+  it('detects soulforge aptitude from public V2 T-slots, not just extra talents', async () => {
+    const twentyFour = await loadPublicV2AwakenerFullById(1)
     expect(twentyFour).toBeDefined()
     if (!twentyFour) {
       throw new Error('Missing canonical 24 V2 record')
@@ -151,7 +148,7 @@ describe('awakener-database-state', () => {
   })
 
   it('keeps public V2 overlay upgrade badges on overlay popover references', async () => {
-    const xu = await loadPublicAwakenerFullV2ById('awakener-0054')
+    const xu = await loadPublicV2AwakenerFullById('awakener-0054')
     expect(xu).toBeDefined()
     if (!xu) {
       throw new Error('Missing public V2 Xu record')
@@ -174,7 +171,7 @@ describe('awakener-database-state', () => {
   })
 
   it('keeps public V2 link-only talent influence badges on affected skills', async () => {
-    const agrippa = await loadPublicAwakenerFullV2ById('awakener-0002')
+    const agrippa = await loadPublicV2AwakenerFullById('awakener-0002')
     expect(agrippa).toBeDefined()
     if (!agrippa) {
       throw new Error('Missing public V2 Agrippa record')
@@ -185,8 +182,12 @@ describe('awakener-database-state', () => {
       (entry) => entry.record.id === 'skill.agrippa.pale-blessing',
     )
 
-    expect(agrippa.talents.T1?.upgradeTargetIds).toContain('skill.agrippa.pale-blessing')
-    expect(agrippa.talents.T1?.upgradePatches).toEqual([])
+    expect(agrippa.cards.Exalt.upgrades).toEqual([
+      expect.objectContaining({
+        operation: 'link_only',
+        upgraderId: 'talent.agrippa.seal-of-the-pact',
+      }),
+    ])
     expect(paleBlessing?.influenceBadges).toEqual([
       expect.objectContaining({
         kind: 'talent',
@@ -364,8 +365,6 @@ function buildSoulforgeFixture(): AwakenerFullV2Record {
         },
         hasLevelScaledDescription: true,
         maxLevel: 3,
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       T4: undefined,
       extraTalents: [],
@@ -378,8 +377,6 @@ function buildSoulforgeFixture(): AwakenerFullV2Record {
         displayName: 'E1',
         descriptionTemplate: 'E1 desc',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       E2: {
         id: 'enlighten.test.e2',
@@ -388,8 +385,6 @@ function buildSoulforgeFixture(): AwakenerFullV2Record {
         displayName: 'E2',
         descriptionTemplate: 'E2 desc',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       E3: {
         id: 'enlighten.test.e3',
@@ -398,8 +393,6 @@ function buildSoulforgeFixture(): AwakenerFullV2Record {
         displayName: 'E3',
         descriptionTemplate: 'E3 desc',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       AbsoluteAxiom: undefined,
     },

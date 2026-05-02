@@ -6,8 +6,10 @@ import {
   resolveAwakenerStatsForLevel,
 } from './awakener-level-scaling'
 import {getAwakeners} from './awakeners'
-import {getAwakenersFullV2, type AwakenerFullV2Record} from './awakeners-full-v2'
+import {type AwakenerFullV2Record} from './awakeners-full-v2'
+import {getAwakenersLiteV2} from './awakeners-lite-v2'
 import {resolveDescribedRecord} from './description-records'
+import {loadPublicV2AwakenerFullById} from './public-v2-detail-loaders'
 
 const CANONICAL_LEVEL_ONE_SUBSTATS = {
   CritRate: '5%',
@@ -66,6 +68,26 @@ function makeAwakener(overrides?: Partial<StatScaledAwakener>): StatScaledAwaken
     talents: [],
     ...overrides,
   }
+}
+
+async function loadAwakenersFullV2(): Promise<AwakenerFullV2Record[]> {
+  return Promise.all(
+    getAwakenersLiteV2().map(async (awakener) => {
+      const record = await loadPublicV2AwakenerFullById(awakener.id)
+      if (!record) {
+        throw new Error(`Missing public V2 awakener ${String(awakener.id)}`)
+      }
+      return record
+    }),
+  )
+}
+
+function findAwakenerByName(
+  awakeners: AwakenerFullV2Record[],
+  displayName: string,
+): AwakenerFullV2Record | undefined {
+  const normalizedName = displayName.toLowerCase()
+  return awakeners.find((awakener) => awakener.displayName.toLowerCase() === normalizedName)
 }
 
 function getTalentEntries(awakener: Pick<AwakenerFullV2Record, 'talents'>): {
@@ -198,8 +220,8 @@ describe('resolveAwakenerStatsForLevel', () => {
 })
 
 describe('awakeners full v2 data', () => {
-  it('stores explicit level scaling metadata instead of embedding growth hints in stat strings', () => {
-    const data = getAwakenersFullV2()
+  it('stores explicit level scaling metadata instead of embedding growth hints in stat strings', async () => {
+    const data = await loadAwakenersFullV2()
 
     for (const awakener of data) {
       expect(awakener.primaryScalingBase).toBeDefined()
@@ -214,20 +236,20 @@ describe('awakeners full v2 data', () => {
     }
   })
 
-  it('keeps every stored Lv. 60 primary stat aligned with the scaling base formula', () => {
-    const data = getAwakenersFullV2()
+  it('keeps every stored Lv. 1 primary stat aligned with the scaling base formula', async () => {
+    const data = await loadAwakenersFullV2()
 
     for (const awakener of data) {
-      const resolvedAt60 = resolveAwakenerStatsForLevel(awakener, 60)
+      const resolvedAtLevelOne = resolveAwakenerStatsForLevel(awakener, 1)
 
-      expect(resolvedAt60.CON).toBe(awakener.stats.CON)
-      expect(resolvedAt60.ATK).toBe(awakener.stats.ATK)
-      expect(resolvedAt60.DEF).toBe(awakener.stats.DEF)
+      expect(resolvedAtLevelOne.CON).toBe(awakener.stats.CON)
+      expect(resolvedAtLevelOne.ATK).toBe(awakener.stats.ATK)
+      expect(resolvedAtLevelOne.DEF).toBe(awakener.stats.DEF)
     }
   })
 
-  it('keeps lite and compiled awakener identity aligned by id and name', () => {
-    const fullData = getAwakenersFullV2()
+  it('keeps lite and public awakener identity aligned by id and name', async () => {
+    const fullData = await loadAwakenersFullV2()
     const liteData = getAwakeners()
     const liteById = new Map(liteData.map((awakener) => [awakener.numericId, awakener]))
     const mismatches: string[] = []
@@ -248,8 +270,8 @@ describe('awakeners full v2 data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('keeps lite and compiled primary CON/ATK/DEF stats aligned by awakener id', () => {
-    const fullData = getAwakenersFullV2()
+  it('keeps lite and public primary CON/ATK/DEF stats aligned by awakener id', async () => {
+    const fullData = await loadAwakenersFullV2()
     const liteData = getAwakeners()
     const liteById = new Map(liteData.map((awakener) => [awakener.numericId, awakener]))
     const mismatches: string[] = []
@@ -281,10 +303,10 @@ describe('awakeners full v2 data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('fills the remaining mouchette and vortice substat scaling gaps with sane Lv. 1 values', () => {
-    const data = getAwakenersFullV2()
-    const mouchette = data.find((awakener) => awakener.displayName === 'mouchette')
-    const vortice = data.find((awakener) => awakener.displayName === 'vortice')
+  it('fills the remaining mouchette and vortice substat scaling gaps with sane Lv. 1 values', async () => {
+    const data = await loadAwakenersFullV2()
+    const mouchette = findAwakenerByName(data, 'Mouchette')
+    const vortice = findAwakenerByName(data, 'Vortice')
 
     expect(mouchette?.substatScaling).toEqual({
       AliemusRegen: '0.4',
@@ -309,11 +331,11 @@ describe('awakeners full v2 data', () => {
     )
   })
 
-  it('matches ingame-confirmed Lv. 1 and Lv. 60 primary stats for clementine, pollux, and wanda', () => {
-    const data = getAwakenersFullV2()
-    const clementine = data.find((awakener) => awakener.displayName === 'clementine')
-    const pollux = data.find((awakener) => awakener.displayName === 'pollux')
-    const wanda = data.find((awakener) => awakener.displayName === 'wanda')
+  it('matches ingame-confirmed Lv. 1 and Lv. 60 primary stats for clementine, pollux, and wanda', async () => {
+    const data = await loadAwakenersFullV2()
+    const clementine = findAwakenerByName(data, 'Clementine')
+    const pollux = findAwakenerByName(data, 'Pollux')
+    const wanda = findAwakenerByName(data, 'Wanda')
 
     expect(clementine ? resolveAwakenerStatsForLevel(clementine, 1) : null).toEqual(
       expect.objectContaining({
@@ -322,7 +344,7 @@ describe('awakeners full v2 data', () => {
         DEF: '42',
       }),
     )
-    expect(clementine?.stats).toEqual(
+    expect(clementine ? resolveAwakenerStatsForLevel(clementine, 60) : null).toEqual(
       expect.objectContaining({
         CON: '126',
         ATK: '149',
@@ -337,7 +359,7 @@ describe('awakeners full v2 data', () => {
         DEF: '47',
       }),
     )
-    expect(pollux?.stats).toEqual(
+    expect(pollux ? resolveAwakenerStatsForLevel(pollux, 60) : null).toEqual(
       expect.objectContaining({
         CON: '140',
         ATK: '158',
@@ -352,7 +374,7 @@ describe('awakeners full v2 data', () => {
         DEF: '64',
       }),
     )
-    expect(wanda?.stats).toEqual(
+    expect(wanda ? resolveAwakenerStatsForLevel(wanda, 60) : null).toEqual(
       expect.objectContaining({
         CON: '158',
         ATK: '99',
@@ -361,10 +383,10 @@ describe('awakeners full v2 data', () => {
     )
   })
 
-  it('matches confirmed 10-level Pollux and Wanda stat progressions', () => {
-    const data = getAwakenersFullV2()
-    const pollux = data.find((awakener) => awakener.displayName === 'pollux')
-    const wanda = data.find((awakener) => awakener.displayName === 'wanda')
+  it('matches confirmed 10-level Pollux and Wanda stat progressions', async () => {
+    const data = await loadAwakenersFullV2()
+    const pollux = findAwakenerByName(data, 'Pollux')
+    const wanda = findAwakenerByName(data, 'Wanda')
     if (!pollux || !wanda) {
       throw new Error('Expected Pollux and Wanda in awakener full data')
     }
@@ -384,8 +406,8 @@ describe('awakeners full v2 data', () => {
     ).toEqual(['35', '44', '55', '66', '77', '88', '99', '110', '121', '132'])
   })
 
-  it('rewinds every secondary stat back to the canonical Lv. 1 defaults', () => {
-    const data = getAwakenersFullV2()
+  it('rewinds every secondary stat back to the canonical Lv. 1 defaults', async () => {
+    const data = await loadAwakenersFullV2()
     const mismatches: string[] = []
 
     for (const awakener of data) {
@@ -404,8 +426,8 @@ describe('awakeners full v2 data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('keeps stored substat values and growth metadata aligned with their canonical units', () => {
-    const data = getAwakenersFullV2()
+  it('keeps stored substat values and growth metadata aligned with their canonical units', async () => {
+    const data = await loadAwakenersFullV2()
     const mismatches: string[] = []
 
     for (const awakener of data) {
@@ -426,13 +448,14 @@ describe('awakeners full v2 data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('keeps Salvador talent data and Madness Omen ladders aligned with the canonical template model', () => {
-    const data = getAwakenersFullV2()
-    const salvador = data.find((awakener) => awakener.displayName === 'salvador')
+  it('keeps Salvador talent data and Madness Omen ladders aligned with the public template model', async () => {
+    const data = await loadAwakenersFullV2()
+    const salvador = findAwakenerByName(data, 'Salvador')
     const mismatches: string[] = []
 
-    expect(salvador?.talents.T4).toEqual(
+    expect(salvador?.talents.T2).toEqual(
       expect.objectContaining({
+        id: 'talent.salvador.madness-omen',
         displayName: expect.any(String),
         descriptionTemplate: expect.any(String),
       }),
@@ -467,8 +490,8 @@ describe('awakeners full v2 data', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('strips redundant innate prefixes from talent descriptions', () => {
-    const data = getAwakenersFullV2()
+  it('does not synthesize private talent description cleanup in the website', async () => {
+    const data = await loadAwakenersFullV2()
     const mismatches: string[] = []
 
     for (const awakener of data) {

@@ -19,6 +19,7 @@ import {
   resolveAwakenerDatabaseView,
 } from './awakeners-database-view'
 import type {AwakenerFullV2Record} from './awakeners-full-v2'
+import type {PublicDescriptionArg} from './public-description-args'
 
 const TEST_STATS: FullStats = {
   CON: '100',
@@ -107,28 +108,12 @@ function buildTalent(id: string, displayName: string): AwakenerTalentRecord {
     displayName,
     descriptionTemplate: `${displayName} description`,
     descriptionArgs: {},
-    upgradeTargetIds: [],
-    upgradePatches: [],
-  }
-}
-
-function buildTalentWithPatches(
-  id: string,
-  displayName: string,
-  patches: AwakenerTalentRecord['upgradePatches'],
-): AwakenerTalentRecord {
-  return {
-    ...buildTalent(id, displayName),
-    upgradeTargetIds: patches.map((patch) => patch.targetId),
-    upgradePatches: patches,
   }
 }
 
 function buildEnlighten(
   id: string,
   slot: AwakenerEnlightenRecord['slot'],
-  patches: AwakenerEnlightenRecord['upgradePatches'],
-  upgradeTargetIds: string[] = patches.map((patch) => patch.targetId),
 ): AwakenerEnlightenRecord {
   return {
     id,
@@ -137,39 +122,80 @@ function buildEnlighten(
     displayName: id,
     descriptionTemplate: `${id} description`,
     descriptionArgs: {},
-    upgradeTargetIds,
-    upgradePatches: patches,
   }
 }
 
 function buildRecord(): AwakenerFullV2Record {
+  const baseTalent = buildTalent('talent.test.base', 'Base Talent')
+  const e1 = buildEnlighten('enlighten.test.e1', 'E1')
+  const e2 = buildEnlighten('enlighten.test.e2', 'E2')
   return {
     ...buildRosterRecord(),
     cards: {
-      C1: buildSkill('skill.test.rouse', 'Strike', 'strike'),
+      C1: {
+        ...buildSkill('skill.test.rouse', 'Strike', 'strike'),
+        upgrades: [
+          {
+            id: 'upgrade.talent.test.base.skill.test.rouse',
+            upgraderId: baseTalent.id,
+            upgraderType: 'talent',
+            operation: 'mixed',
+            patch: {
+              argSubstatBonuses: {
+                Arg1: {
+                  substat: 'CritRate',
+                  multiplier: '1',
+                  suffix: '%',
+                },
+              },
+            },
+          },
+          {
+            id: 'upgrade.enlighten.test.e1.skill.test.rouse',
+            upgraderId: e1.id,
+            upgraderType: 'enlighten',
+            upgraderSlot: 'E1',
+            operation: 'mixed',
+            patch: {
+              descriptionTemplate: 'Strike E1 with {Status}.',
+              descriptionArgs: {
+                Arg2: {
+                  kind: 'fixed',
+                  value: '2',
+                },
+              },
+              cardKeywords: [
+                {
+                  id: 'mechanic.prepare',
+                  value: 2,
+                },
+              ],
+            },
+          },
+        ],
+      },
       C2: buildSkill('skill.test.defense', 'Defense', 'defense'),
       C3: buildSkill('skill.test.command-1', 'Command 1', 'command'),
-      C4: buildSkill('skill.test.command-2', 'Command 2', 'command'),
+      C4: {
+        ...buildSkill('skill.test.command-2', 'Command 2', 'command'),
+        upgrades: [
+          {
+            id: 'upgrade.enlighten.test.e1.skill.test.command-2',
+            upgraderId: e1.id,
+            upgraderType: 'enlighten',
+            upgraderSlot: 'E1',
+            operation: 'link_only',
+            patch: {},
+          },
+        ],
+      },
       C5: buildSkill('skill.test.command-3', 'Command 3', 'command'),
       Exalt: buildSkill('skill.test.exalt', 'Exalt', 'exalt'),
       OverExalt: undefined,
       promotedExtras: [buildDerived('derived.test.extra', 'Extra')],
     },
     talents: {
-      T1: buildTalentWithPatches('talent.test.base', 'Base Talent', [
-        {
-          targetId: 'skill.test.rouse',
-          targetType: 'skill',
-          operation: 'arg_substat_bonuses',
-          argSubstatBonuses: {
-            Arg1: {
-              substat: 'CritRate',
-              multiplier: '1',
-              suffix: '%',
-            },
-          },
-        },
-      ]),
+      T1: baseTalent,
       T2: undefined,
       T3: undefined,
       T4: undefined,
@@ -185,53 +211,14 @@ function buildRecord(): AwakenerFullV2Record {
               values: ['10', '20', '30'],
             },
           },
-          upgradeTargetIds: [],
-          upgradePatches: [],
           maxLevel: 3,
         },
       ],
     },
     enlightens: {
-      E1: buildEnlighten(
-        'enlighten.test.e1',
-        'E1',
-        [
-          {
-            targetId: 'skill.test.rouse',
-            targetType: 'skill',
-            operation: 'mixed',
-            descriptionTemplate: 'Strike E1 with {Status}.',
-            descriptionArgs: {
-              Arg2: {
-                kind: 'fixed',
-                value: '2',
-              },
-            },
-            addCardKeywords: [
-              {
-                id: 'mechanic.prepare',
-                value: 2,
-              },
-            ],
-          },
-        ],
-        ['skill.test.rouse', 'skill.test.command-2'],
-      ),
-      E2: buildEnlighten('enlighten.test.e2', 'E2', [
-        {
-          targetId: 'overlay.test.status',
-          targetType: 'overlay',
-          operation: 'mixed',
-          descriptionTemplate: 'Status E2 [StateArg1].',
-          descriptionArgs: {
-            StateArg1: {
-              kind: 'fixed',
-              value: '5',
-            },
-          },
-        },
-      ]),
-      E3: buildEnlighten('enlighten.test.e3', 'E3', []),
+      E1: e1,
+      E2: e2,
+      E3: buildEnlighten('enlighten.test.e3', 'E3'),
       AbsoluteAxiom: undefined,
     },
     derivedSkills: [
@@ -242,7 +229,36 @@ function buildRecord(): AwakenerFullV2Record {
       },
       buildDerived('derived.test.status-card-child', 'Status Child'),
     ],
-  }
+    overlays: [
+      {
+        id: 'overlay.test.status',
+        ownerAwakenerId: 999,
+        displayName: 'Status',
+        overlayType: 'mechanic',
+        aliases: ['Status Alias'],
+        descriptionTemplate: 'Status base',
+        descriptionArgs: {},
+        upgrades: [
+          {
+            id: 'upgrade.enlighten.test.e2.overlay.test.status',
+            upgraderId: e2.id,
+            upgraderType: 'enlighten',
+            upgraderSlot: 'E2',
+            operation: 'mixed',
+            patch: {
+              descriptionTemplate: 'Status E2 [StateArg1].',
+              descriptionArgs: {
+                StateArg1: {
+                  kind: 'fixed',
+                  value: '5',
+                },
+              },
+            },
+          },
+        ],
+      },
+    ],
+  } as unknown as AwakenerFullV2Record
 }
 
 function buildOverlayRecords(): AwakenerOverlayRecord[] {
@@ -432,13 +448,48 @@ describe('awakeners-database-view', () => {
     expect(soulforge?.resolved.description).toBe('Soulforge 20.')
   })
 
+  it('uses formula context when resolving shell and reference descriptions', () => {
+    const record = buildRecord()
+    record.cards.C4 = {
+      ...record.cards.C4,
+      descriptionTemplate: 'Computed [Arg1].',
+      descriptionArgs: {
+        Arg1: {
+          kind: 'computed',
+          expression: {
+            op: 'ceil',
+            args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
+          },
+          inputs: ['accountDamagePower'],
+        } satisfies PublicDescriptionArg,
+      } as unknown as AwakenerSkillRecord['descriptionArgs'],
+    }
+
+    const view = resolveAwakenerDatabaseView(
+      record,
+      {
+        formulaContext: {accountDamagePower: 8},
+        stats: TEST_STATS,
+      },
+      buildOverlayRecords(),
+      buildGlobalDerivedSkills(),
+    )
+
+    const command = view.commandCards.find((entry) => entry.record.id === 'skill.test.command-2')
+    expect(command?.resolved.description).toBe('Computed 12.')
+    expect(resolveAwakenerDatabaseReferenceInfo(view, 'Command 2')).toEqual(
+      expect.objectContaining({
+        description: 'Computed 12.',
+      }),
+    )
+  })
+
   it('preserves optional section ordering and labels for exalts, enlightens, and derived entries', () => {
     const record = buildRecord()
     record.cards.OverExalt = buildSkill('skill.test.over-exalt', 'Over Exalt', 'exalt')
     record.enlightens.AbsoluteAxiom = buildEnlighten(
       'enlighten.test.absolute-axiom',
       'AbsoluteAxiom',
-      [],
     )
 
     const view = resolveAwakenerDatabaseView(

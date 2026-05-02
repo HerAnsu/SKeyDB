@@ -4,6 +4,7 @@ import type {
   FullStats,
 } from './awakener-source-schema'
 import {resolveDescribedRecord, type DescribedRecord} from './description-records'
+import type {PublicFormulaContext} from './public-formula-context'
 
 export interface DatabaseInfluenceBadge {
   kind: 'enlighten' | 'talent'
@@ -80,13 +81,17 @@ export function buildDatabaseOverlayLabel(overlay: AwakenerOverlayRecord): strin
 }
 
 export function buildAccessibleDatabaseOverlays(
-  ownerAwakenerId: number | undefined,
+  ownerAwakenerId: number | string | undefined,
   overlays: AwakenerOverlayRecord[],
   overlayOverridesById: Record<string, AwakenerOverlayRecord> = {},
 ): AwakenerOverlayRecord[] {
+  const numericOwnerAwakenerId =
+    typeof ownerAwakenerId === 'string'
+      ? Number(/^awakener-(\d{4})$/.exec(ownerAwakenerId)?.[1] ?? 0)
+      : ownerAwakenerId
   const accessible = overlays.filter(
     (overlay) =>
-      overlay.ownerAwakenerId === undefined || overlay.ownerAwakenerId === ownerAwakenerId,
+      overlay.ownerAwakenerId === undefined || overlay.ownerAwakenerId === numericOwnerAwakenerId,
   )
 
   return accessible.map((overlay) => overlayOverridesById[overlay.id] ?? overlay)
@@ -111,8 +116,9 @@ export function buildDatabaseOverlayReferenceInfo(
   overlay: AwakenerOverlayRecord,
   stats: FullStats | null = null,
   influenceBadges: DatabaseInfluenceBadge[] = [],
+  formulaContext?: PublicFormulaContext,
 ): DatabaseReferenceInfo<AwakenerOverlayRecord> {
-  const resolved = resolveDescribedRecord(overlay, {stats}, {stats})
+  const resolved = resolveDescribedRecord(overlay, {stats, formulaContext}, {stats, formulaContext})
   const influencingEnlightenSlots = influenceBadges.flatMap((badge) =>
     badge.kind === 'enlighten' && badge.slot ? [badge.slot] : [],
   )

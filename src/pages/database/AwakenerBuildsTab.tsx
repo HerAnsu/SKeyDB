@@ -10,9 +10,9 @@ import {
 import {getCovenantAssetById} from '@/domain/covenant-assets'
 import {getCovenants, type Covenant} from '@/domain/covenants'
 import {getMainstatByKey, getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
+import {loadPublicV2WheelFullById} from '@/domain/public-v2-detail-loaders'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelById, getWheels, type Wheel} from '@/domain/wheels'
-import {loadWheelFullV2ById} from '@/domain/wheels-full-v2-loader'
 
 import {buildWheelPopoverEntry} from './buildWheelPopoverEntry'
 import {useDatabasePopoverControllerContext} from './database-popover-context'
@@ -239,7 +239,7 @@ function WheelRecommendations({build}: {build: AwakenerBuild}) {
       const anchorElement = event.currentTarget
       const requestId = requestIdRef.current + 1
       requestIdRef.current = requestId
-      void loadWheelFullV2ById(wheel?.id ?? wheelId)
+      void loadPublicV2WheelFullById(wheel?.id ?? wheelId)
         .then((wheelRecord) => {
           if (!wheelRecord || requestId !== requestIdRef.current) {
             return

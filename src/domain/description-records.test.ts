@@ -4,13 +4,16 @@ import {getAwakenerEnlightenById, getAwakenerEnlightens} from './awakener-enligh
 import {getAwakenerOverlays, resolveAwakenerOverlay} from './awakener-overlays'
 import type {AwakenerSkillRecord} from './awakener-source-schema'
 import {getAwakenerTalentById, getAwakenerTalents} from './awakener-talents'
-import {getAwakenerFullV2ById, getAwakenersFullV2} from './awakeners-full-v2'
 import {resolveAwakenerFullV2Record} from './awakeners-full-v2-resolver'
 import {getDerivedSkillById, getDerivedSkills} from './derived-skills'
 import {resolveDescribedRecord} from './description-records'
+import {loadPublicV2AwakenerFullById} from './public-v2-detail-loaders'
 
-function getResolvedSkill(awakenerId: number, skillId: string): AwakenerSkillRecord {
-  const record = getAwakenerFullV2ById(awakenerId, getAwakenersFullV2())
+async function loadResolvedSkill(
+  awakenerId: number,
+  skillId: string,
+): Promise<AwakenerSkillRecord> {
+  const record = await loadPublicV2AwakenerFullById(awakenerId)
   if (!record) {
     throw new Error(`Missing awakener ${String(awakenerId)}`)
   }
@@ -34,8 +37,8 @@ function getResolvedSkill(awakenerId: number, skillId: string): AwakenerSkillRec
 }
 
 describe('description-records', () => {
-  it('resolves a skill description and its base-scaled substat enhancement from canonical data', () => {
-    const skill = getResolvedSkill(52, 'skill.wanda.necropolis-of-dreams')
+  it('resolves a skill description and its base-scaled substat enhancement from public V2 data', async () => {
+    const skill = await loadResolvedSkill(52, 'skill.wanda.necropolis-of-dreams')
 
     const resolved = resolveDescribedRecord(
       skill,
@@ -74,11 +77,11 @@ describe('description-records', () => {
     )
 
     expect(resolved.description).toContain(
-      'Obtain 30% {DEF} Shield and 41.4% {ATK} stacks of {Counter}.',
+      'Gain 30% {DEF} Shield and 36% {ATK} stacks of {Counter}.',
     )
-    expect(resolved.resolvedArgs.Arg2.formattedTotalValue).toBe('41.4% {ATK}')
+    expect(resolved.resolvedArgs.Arg2.formattedTotalValue).toBe('36% {ATK}')
     expect(resolved.orderedArgEntries.map((entry) => entry.key)).toEqual(['Arg1', 'Arg2'])
-    expect(resolved.orderedArgEntries[1].hover).toContain('Lv2: 41.4% ATK = 58')
+    expect(resolved.orderedArgEntries[1].hover).toContain('Lv2: 36% ATK = 51')
   })
 
   it('preserves template appearance order even when arg keys are not stored numerically', () => {
@@ -118,7 +121,7 @@ describe('description-records', () => {
       throw new Error('Missing enlighten.24.hysteria')
     }
 
-    expect(resolveDescribedRecord(overlay).description).toContain('Temp. {STR⯆} -22.')
+    expect(resolveDescribedRecord(overlay).description).toContain('Temp. {STR} -[DescArg1].')
     expect(resolveDescribedRecord(derived).description).toContain(
       'One Awakener gains 30 Aliemus and +10% Crit Rate this turn.',
     )

@@ -1,11 +1,20 @@
 import {describe, expect, it} from 'vitest'
 
 import {getAwakenersLiteV2} from './awakeners-lite-v2'
-import {compileCanonicalAwakenersLiteV2} from './awakeners-lite-v2-canonical'
 
 describe('awakeners-lite-v2', () => {
-  it('keeps the generated lite V2 artifact in sync with the compiler', () => {
-    expect(getAwakenersLiteV2()).toEqual(compileCanonicalAwakenersLiteV2())
+  it('loads public lite V2 records without using the retired local compiler path', () => {
+    const records = getAwakenersLiteV2()
+
+    expect(records.length).toBeGreaterThan(0)
+    expect(records[0]).toEqual(
+      expect.objectContaining({
+        id: expect.any(Number),
+        name: expect.any(String),
+        aliases: expect.any(Array),
+        tags: expect.any(Array),
+      }),
+    )
   })
 
   it('merges curated roster search tags with overlay-derived search tags', () => {
