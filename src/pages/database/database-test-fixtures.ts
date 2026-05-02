@@ -150,6 +150,7 @@ export function makeDatabaseShellView(
     record: {} as ResolvedAwakenerDatabaseShellView['record'],
     resolvedRecord: {} as ResolvedAwakenerDatabaseShellView['resolvedRecord'],
     overlayOverridesById: {},
+    overlayInfluenceBadgesById: {},
     commandCards: [],
     exalts: [],
     overExalt: null,

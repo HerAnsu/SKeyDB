@@ -21,6 +21,7 @@ import {type AwakenerFullV2Record} from './awakeners-full-v2'
 import {getSoulforgeTalents, selectedEnlightenSlotSchema} from './awakeners-full-v2-contract'
 import type {ResolvedDatabaseReferenceLayer} from './database-reference-layer'
 import {resolveDescriptionArg} from './description-args'
+import {buildPublicFormulaContext} from './public-formula-context'
 
 export {selectedEnlightenSlotSchema} from './awakeners-full-v2-contract'
 
@@ -241,6 +242,7 @@ export function resolveAwakenerDatabaseState(
       ...extraViewOptions,
       skillLevel: normalizedSelection.skillLevel,
       stats,
+      formulaContext: buildPublicFormulaContext(),
       selectedEnlightenSlot: normalizedSelection.selectedEnlightenSlot,
       soulforgeLevel: normalizedSelection.soulforgeLevel,
     },

@@ -14,6 +14,7 @@ import {
   getAwakenersFullV2,
   type AwakenerFullV2Record,
 } from './awakeners-full-v2'
+import {loadAwakenerFullV2ById} from './awakeners-full-v2-loader'
 import {resolveAwakenerFullV2Record} from './awakeners-full-v2-resolver'
 
 function buildRosterRecord(): AwakenerRosterRecord {
@@ -433,6 +434,29 @@ describe('awakeners-full-v2-resolver', () => {
           value: '65',
         },
       }),
+    )
+  })
+
+  it('applies public V2 Xu overlay upgrades through the resolver override surface', async () => {
+    const xu = await loadAwakenerFullV2ById('awakener-0054')
+    expect(xu).toBeDefined()
+    if (!xu) {
+      throw new Error('Missing public V2 Xu record')
+    }
+
+    const resolved = resolveAwakenerFullV2Record(
+      xu,
+      {
+        selectedEnlightenSlot: 'E3',
+      },
+      getAwakenerOverlays(),
+    )
+
+    expect(resolved.overlayOverridesById['overlay.xu.spellbound'].descriptionArgs.DescArg2).toEqual(
+      {
+        kind: 'fixed',
+        value: '10',
+      },
     )
   })
 })

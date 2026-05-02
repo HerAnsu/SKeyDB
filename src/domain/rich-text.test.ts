@@ -498,4 +498,61 @@ describe('parseRichDescription', () => {
       {type: 'text', value: ' bonus.'},
     ])
   })
+
+  it('parses public V2 description args with braced mechanic channels', () => {
+    const result = parseRichDescription('Inflict [{Poison}:Arg1] {Poison}.', EMPTY_CARDS, {
+      Arg1: {
+        kind: 'fixed',
+        value: '1',
+      },
+    })
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Inflict '},
+      {type: 'descriptionArg', argKey: 'Arg1', channel: 'Poison'},
+      {type: 'text', value: ' '},
+      {type: 'mechanic', name: 'Poison'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('parses public V2 plural macros without leaking macro text', () => {
+    const result = parseRichDescription(
+      'Draw [Arg1] {plural:[Arg1]|card|cards}. Inflict [{Poison}:Arg2] {plural:[{Poison}:Arg2]|stack|stacks}.',
+      EMPTY_CARDS,
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '1',
+        },
+        Arg2: {
+          kind: 'fixed',
+          value: '2',
+        },
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Draw '},
+      {type: 'descriptionArg', argKey: 'Arg1', channel: null},
+      {type: 'text', value: ' '},
+      {type: 'argPlural', argKey: 'Arg1', channel: null, singular: 'card', plural: 'cards'},
+      {type: 'text', value: '. Inflict '},
+      {type: 'descriptionArg', argKey: 'Arg2', channel: 'Poison'},
+      {type: 'text', value: ' '},
+      {type: 'argPlural', argKey: 'Arg2', channel: 'Poison', singular: 'stack', plural: 'stacks'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('collapses public V2 ordinal macros to display text', () => {
+    const result = parseRichDescription('On the {ordinal:3rd} play.', EMPTY_CARDS)
+
+    expect(result).toEqual([
+      {type: 'text', value: 'On the '},
+      {type: 'text', value: '3rd'},
+      {type: 'text', value: ' play.'},
+    ])
+    expect(result.some((segment) => segment.type === 'mechanic')).toBe(false)
+  })
 })

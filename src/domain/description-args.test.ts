@@ -294,4 +294,18 @@ describe('description-args', () => {
       ),
     ).toContain('Lv2: 28.8% ATK = 30')
   })
+
+  it('resolves public V2 braced-channel args and text macros in fallback descriptions', () => {
+    const rendered = resolveDescriptionTemplate(
+      'Inflict [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} on the {ordinal:3rd} play.',
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '2',
+        },
+      },
+    )
+
+    expect(rendered).toBe('Inflict 2 stacks on the 3rd play.')
+  })
 })

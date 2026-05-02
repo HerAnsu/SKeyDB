@@ -261,6 +261,21 @@ export function RichSegmentRenderer({
         />
       )
     }
+
+    case 'argPlural': {
+      const arg = descriptionArgs?.[segment.argKey]
+      if (!arg) {
+        return <>{segment.plural}</>
+      }
+
+      const resolved = resolveDescriptionArg(arg, {
+        rank: descriptionRank ?? skillLevel,
+        stats,
+        formulaContext,
+      })
+      const value = resolved.absoluteValue ?? resolved.totalValue ?? resolved.baseValue
+      return <>{value === 1 ? segment.singular : segment.plural}</>
+    }
   }
 }
 

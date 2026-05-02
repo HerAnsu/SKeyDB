@@ -27,6 +27,7 @@ import {
   type DescribedRecord,
   type ResolvedDescribedRecord,
 } from './description-records'
+import type {PublicFormulaContext} from './public-formula-context'
 
 export {collectAwakenerDatabaseCardNames} from './awakeners-database-reference-layer'
 export type {
@@ -41,6 +42,7 @@ export interface AwakenerDatabaseViewOptions extends Partial<
 > {
   skillLevel?: number
   stats?: FullStats | null
+  formulaContext?: PublicFormulaContext
 }
 
 export interface DatabaseDescribedEntry<TRecord extends DescribedRecord> {
@@ -60,10 +62,12 @@ export interface ResolvedAwakenerDatabaseShellView {
   selection: ResolvedAwakenerFullV2Record['selection']
   skillLevel: number
   stats: FullStats | null
+  formulaContext?: PublicFormulaContext
   activeEnlightenIds: string[]
   record: AwakenerFullV2Record
   resolvedRecord: ResolvedAwakenerFullV2Record['record']
   overlayOverridesById: Record<string, AwakenerOverlayRecord>
+  overlayInfluenceBadgesById: Record<string, DatabaseInfluenceBadge[]>
   commandCards: DatabaseDescribedEntry<AwakenerSkillRecord>[]
   exalts: DatabaseDescribedEntry<AwakenerSkillRecord>[]
   overExalt: DatabaseDescribedEntry<AwakenerSkillRecord> | null
@@ -284,6 +288,32 @@ function resolveEntryInfluences(
       badgeLookups,
     ),
   }
+}
+
+function buildOverlayInfluenceBadgesById(
+  lookups: DatabaseEntryInfluenceLookups,
+  badgeLookups: DatabaseInfluenceBadgeLookups,
+): Record<string, DatabaseInfluenceBadge[]> {
+  const overlayIds = new Set<string>()
+
+  for (const id of lookups.enlightenByTargetId.keys()) {
+    if (id.startsWith('overlay.')) {
+      overlayIds.add(id)
+    }
+  }
+
+  for (const id of lookups.talentByTargetId.keys()) {
+    if (id.startsWith('overlay.')) {
+      overlayIds.add(id)
+    }
+  }
+
+  return Object.fromEntries(
+    [...overlayIds].map((id) => [
+      id,
+      resolveEntryInfluences(id, lookups, badgeLookups).influenceBadges,
+    ]),
+  )
 }
 
 function resolveSkillEntryWithInfluences(
@@ -552,6 +582,7 @@ export function resolveAwakenerDatabaseShellView(
 ): ResolvedAwakenerDatabaseShellView {
   const skillLevel = Math.max(1, Math.floor(options.skillLevel ?? 1))
   const stats = options.stats ?? null
+  const formulaContext = options.formulaContext
   const resolvedRecord = resolveAwakenerFullV2Record(
     record,
     {
@@ -609,10 +640,15 @@ export function resolveAwakenerDatabaseShellView(
     selection: resolvedRecord.selection,
     skillLevel,
     stats,
+    formulaContext,
     activeEnlightenIds: resolvedRecord.activeEnlightenIds,
     record,
     resolvedRecord: resolvedRecord.record,
     overlayOverridesById: resolvedRecord.overlayOverridesById,
+    overlayInfluenceBadgesById: buildOverlayInfluenceBadgesById(
+      influenceLookups,
+      influenceBadgeLookups,
+    ),
     commandCards,
     exalts,
     overExalt,

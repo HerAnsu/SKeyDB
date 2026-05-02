@@ -39,6 +39,7 @@ export function AwakenerDetailOverview({
       <DatabaseScopedRichDescription
         descriptionMaxRank={item.descriptionMaxRank}
         descriptionRank={item.descriptionRank}
+        formulaContext={shellView?.formulaContext}
         record={item.record}
         referenceLayer={referenceLayer}
         showTagIcons={showTagIcons}
@@ -48,7 +49,14 @@ export function AwakenerDetailOverview({
         text={item.description}
       />
     ),
-    [referenceLayer, shellView?.skillLevel, shellView?.stats, showTagIcons, showVisibleScaling],
+    [
+      referenceLayer,
+      shellView?.formulaContext,
+      shellView?.skillLevel,
+      shellView?.stats,
+      showTagIcons,
+      showVisibleScaling,
+    ],
   )
 
   const enlightenItems = useMemo(() => {
@@ -183,6 +191,7 @@ export function AwakenerDetailOverview({
                 <p className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
                   <DatabaseScopedRichDescription
                     referenceLayer={referenceLayer}
+                    formulaContext={shellView.formulaContext}
                     showTagIcons={showTagIcons}
                     showVisibleScaling={showVisibleScaling}
                     skillLevel={shellView.skillLevel}

@@ -69,10 +69,27 @@ describe('awakeners-full-v2-loader', () => {
           targetId: 'skill.arachne.fate-binding-web',
           targetType: 'skill',
           operation: 'card_keywords',
-          addCardKeywords: [
-            {id: 'mechanic.prepare', value: 1},
-            {id: 'mechanic.retain'},
-          ],
+          addCardKeywords: [{id: 'mechanic.prepare', value: 1}, {id: 'mechanic.retain'}],
+        }),
+      ]),
+    )
+  })
+
+  it('translates public V2 overlay upgrades for the existing resolver', async () => {
+    const xu = await loadAwakenerFullV2ById('awakener-0054')
+
+    expect(xu?.enlightens.E3.upgradePatches).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          targetId: 'overlay.xu.spellbound',
+          targetType: 'overlay',
+          operation: 'override_args',
+          descriptionArgs: expect.objectContaining({
+            DescArg2: {
+              kind: 'fixed',
+              value: '10',
+            },
+          }),
         }),
       ]),
     )

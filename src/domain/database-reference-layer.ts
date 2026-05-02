@@ -110,8 +110,16 @@ export function buildDatabaseOverlayLookup(
 export function buildDatabaseOverlayReferenceInfo(
   overlay: AwakenerOverlayRecord,
   stats: FullStats | null = null,
+  influenceBadges: DatabaseInfluenceBadge[] = [],
 ): DatabaseReferenceInfo<AwakenerOverlayRecord> {
   const resolved = resolveDescribedRecord(overlay, {stats}, {stats})
+  const influencingEnlightenSlots = influenceBadges.flatMap((badge) =>
+    badge.kind === 'enlighten' && badge.slot ? [badge.slot] : [],
+  )
+  const influencingTalentIds = influenceBadges.flatMap((badge) =>
+    badge.kind === 'talent' ? [badge.id] : [],
+  )
+
   return {
     kind: 'overlay',
     id: overlay.id,
@@ -122,8 +130,8 @@ export function buildDatabaseOverlayReferenceInfo(
     keywordFooterText: undefined,
     descriptionRank: undefined,
     descriptionMaxRank: undefined,
-    influencingEnlightenSlots: [],
-    influencingTalentIds: [],
-    influenceBadges: [],
+    influencingEnlightenSlots,
+    influencingTalentIds,
+    influenceBadges,
   }
 }

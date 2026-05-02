@@ -14,6 +14,7 @@ import {
   getAwakenersFullV2,
   type AwakenerFullV2Record,
 } from './awakeners-full-v2'
+import {loadAwakenerFullV2ById as loadPublicAwakenerFullV2ById} from './awakeners-full-v2-loader'
 
 describe('awakener-database-state', () => {
   it('normalizes and clamps database selection inputs', () => {
@@ -147,6 +148,29 @@ describe('awakener-database-state', () => {
     expect(twentyFour.talents.T3?.id).toBe('talent.24.soulforge-aptitude')
     expect(controls.hasSoulforgeTalent).toBe(true)
     expect(controls.soulforgeLevelMax).toBe(10)
+  })
+
+  it('keeps public V2 overlay upgrade badges on overlay popover references', async () => {
+    const xu = await loadPublicAwakenerFullV2ById('awakener-0054')
+    expect(xu).toBeDefined()
+    if (!xu) {
+      throw new Error('Missing public V2 Xu record')
+    }
+
+    const resolved = resolveAwakenerDatabaseState(xu, {
+      selectedEnlightenSlot: 'E3',
+    })
+    const spellbound = resolved.referenceLayer.referenceInfoById.get('overlay.xu.spellbound')
+
+    expect(spellbound?.description).toContain('Stacks up to 10')
+    expect(spellbound?.influenceBadges).toEqual([
+      expect.objectContaining({
+        kind: 'enlighten',
+        label: 'E3',
+        referenceName: "Nirvana's Kiss",
+        slot: 'E3',
+      }),
+    ])
   })
 
   it('builds concrete default selection values for upcoming database controls', () => {

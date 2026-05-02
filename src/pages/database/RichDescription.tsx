@@ -5,6 +5,7 @@ import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-l
 import {buildDatabaseRichDescriptionText} from '@/domain/database-rich-text'
 import {resolveDescriptionTemplate} from '@/domain/description-args'
 import type {DescribedRecord} from '@/domain/description-records'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import {useDatabasePopoverControllerContext} from './database-popover-context'
 import type {DatabaseRichTextContentProps} from './DatabaseRichTextContent'
@@ -21,6 +22,7 @@ interface RichDescriptionProps {
   descriptionRank?: number
   descriptionMaxRank?: number
   referenceLayer: ResolvedDatabaseReferenceLayer | null
+  formulaContext?: PublicFormulaContext
   skillLevel?: number
   stats?: FullStats | null
   showVisibleScaling?: boolean
@@ -34,6 +36,7 @@ export function RichDescription({
   descriptionRank,
   descriptionMaxRank,
   referenceLayer,
+  formulaContext,
   skillLevel = 1,
   stats = null,
   showVisibleScaling = true,
@@ -44,6 +47,7 @@ export function RichDescription({
     ? resolveDescriptionTemplate(record.descriptionTemplate, record.descriptionArgs, {
         rank: descriptionRank ?? skillLevel,
         stats,
+        formulaContext,
       })
     : text
   const fallbackText = buildDatabaseRichDescriptionText(fallbackSourceText, keywordFooterText)
@@ -54,6 +58,7 @@ export function RichDescription({
     descriptionRank,
     descriptionMaxRank,
     referenceLayer,
+    formulaContext,
     showVisibleScaling,
     showTagIcons,
     skillLevel,

@@ -203,7 +203,11 @@ function buildReferenceLookups(
     addReferenceInfoToLookups(
       byName,
       byId,
-      buildDatabaseOverlayReferenceInfo(overlay, shellView.stats),
+      buildDatabaseOverlayReferenceInfo(
+        overlay,
+        shellView.stats,
+        shellView.overlayInfluenceBadgesById[overlay.id] ?? [],
+      ),
       overlay.aliases,
     )
   }

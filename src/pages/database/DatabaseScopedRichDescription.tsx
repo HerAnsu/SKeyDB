@@ -1,6 +1,7 @@
 import type {FullStats} from '@/domain/awakener-source-schema'
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 import type {DescribedRecord} from '@/domain/description-records'
+import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import {RichDescription} from './RichDescription'
 
@@ -11,6 +12,7 @@ interface DatabaseScopedRichDescriptionProps {
   descriptionRank?: number
   descriptionMaxRank?: number
   referenceLayer: ResolvedDatabaseReferenceLayer | null
+  formulaContext?: PublicFormulaContext
   skillLevel?: number
   stats?: FullStats | null
   showVisibleScaling?: boolean
@@ -24,6 +26,7 @@ export function DatabaseScopedRichDescription({
   descriptionRank,
   descriptionMaxRank,
   referenceLayer,
+  formulaContext,
   skillLevel = 1,
   stats = null,
   showVisibleScaling = true,
@@ -33,6 +36,7 @@ export function DatabaseScopedRichDescription({
     <RichDescription
       descriptionMaxRank={descriptionMaxRank}
       descriptionRank={descriptionRank}
+      formulaContext={formulaContext}
       keywordFooterText={keywordFooterText}
       record={record}
       referenceLayer={referenceLayer}

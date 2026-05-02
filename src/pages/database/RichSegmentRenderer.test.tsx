@@ -128,6 +128,81 @@ describe('RichSegmentRenderer', () => {
     expect(screen.getByTitle(/Lv1: 10% ATK = 20/)).toBeInTheDocument()
   })
 
+  it('renders public V2 plural segments from resolved arg values', () => {
+    const {rerender} = render(
+      <RichSegmentRenderer
+        descriptionArgs={{
+          Arg1: {
+            kind: 'fixed',
+            value: '1',
+          },
+        }}
+        segment={{
+          type: 'argPlural',
+          argKey: 'Arg1',
+          channel: null,
+          singular: 'stack',
+          plural: 'stacks',
+        }}
+        skillLevel={1}
+        stats={BASE_STATS}
+        variant='inline'
+      />,
+    )
+
+    expect(screen.getByText('stack')).toBeInTheDocument()
+
+    rerender(
+      <RichSegmentRenderer
+        descriptionArgs={{
+          Arg1: {
+            kind: 'fixed',
+            value: '2',
+          },
+        }}
+        segment={{
+          type: 'argPlural',
+          argKey: 'Arg1',
+          channel: null,
+          singular: 'stack',
+          plural: 'stacks',
+        }}
+        skillLevel={1}
+        stats={BASE_STATS}
+        variant='inline'
+      />,
+    )
+
+    expect(screen.getByText('stacks')).toBeInTheDocument()
+  })
+
+  it('renders public V2 plural segments from computed absolute arg values', () => {
+    render(
+      <RichSegmentRenderer
+        descriptionArgs={{
+          Arg1: {
+            kind: 'fixed',
+            value: '10',
+            suffix: '%',
+            stat: 'ATK',
+          },
+        }}
+        segment={{
+          type: 'argPlural',
+          argKey: 'Arg1',
+          channel: 'Poison',
+          singular: 'stack',
+          plural: 'stacks',
+        }}
+        skillLevel={1}
+        stats={BASE_STATS}
+        variant='inline'
+      />,
+    )
+
+    expect(screen.getByText('stacks')).toBeInTheDocument()
+  })
+
   it('resolves computed description args when formula context is supplied', () => {
     render(
       <RichSegmentRenderer

@@ -56,6 +56,7 @@ export function AwakenerDetailCards({
       <DatabaseScopedRichDescription
         descriptionMaxRank={item.descriptionMaxRank}
         descriptionRank={item.descriptionRank}
+        formulaContext={shellView?.formulaContext}
         keywordFooterText={item.keywordFooterText}
         record={item.record}
         referenceLayer={referenceLayer}
@@ -66,7 +67,14 @@ export function AwakenerDetailCards({
         text={item.description ?? item.resolved.description}
       />
     ),
-    [referenceLayer, shellView?.skillLevel, shellView?.stats, showTagIcons, showVisibleScaling],
+    [
+      referenceLayer,
+      shellView?.formulaContext,
+      shellView?.skillLevel,
+      shellView?.stats,
+      showTagIcons,
+      showVisibleScaling,
+    ],
   )
 
   const exaltBaseCost = useMemo(

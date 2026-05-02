@@ -7,7 +7,13 @@ import {
 import {fmtNum} from './scaling'
 
 const COMPUTABLE_STAT_KEYS = new Set(['ATK', 'DEF', 'CON'])
-const ARG_TOKEN_PATTERN = /\[(?:(?<channel>[A-Za-z]+):)?(?<argKey>(?:StateArg|DescArg|Arg)\d+)\]/g
+const ARG_TOKEN_PATTERN =
+  /\[(?:(?<channel>[A-Za-z]+|\{[^}\]]+\}):)?(?<argKey>(?:StateArg|DescArg|Arg)\d+)\]/g
+const ARG_TOKEN_EXTRACT_PATTERN =
+  /\[(?:(?<channel>[A-Za-z]+|\{[^}\]]+\}):)?(?<argKey>(?:StateArg|DescArg|Arg)\d+)\]/
+const PLURAL_MACRO_PATTERN =
+  /\{plural:(?<argToken>\[(?:(?:[A-Za-z]+|\{[^}\]]+\}):)?(?:StateArg|DescArg|Arg)\d+\])\|(?<singular>[^|{}]+)\|(?<plural>[^{}]+)\}/g
+const ORDINAL_MACRO_PATTERN = /\{ordinal:(?<value>[^{}]+)\}/g
 
 export interface DescriptionArgResolveContext {
   rank?: number
@@ -230,7 +236,10 @@ function formatLiteralValue(rawValue: string, suffix: string, stat: string | nul
   return `${rawValue}${suffix}${statSuffix}`
 }
 
-function shouldCeilDisplayedTotalValue(arg: PublicDescriptionArg, baseValue: number | null): boolean {
+function shouldCeilDisplayedTotalValue(
+  arg: PublicDescriptionArg,
+  baseValue: number | null,
+): boolean {
   return Boolean(getSubstatBonus(arg)) && (baseValue === null || Math.abs(baseValue) < 0.001)
 }
 
@@ -394,7 +403,10 @@ export function formatDescriptionArgProgression(
   return `${numericProgression.map((value) => fmtNum(value ?? 0)).join('/')}${suffix}${statSuffix}`
 }
 
-function buildDescriptionArgFormula(arg: PublicDescriptionArg, resolved: ResolvedDescriptionArg): string {
+function buildDescriptionArgFormula(
+  arg: PublicDescriptionArg,
+  resolved: ResolvedDescriptionArg,
+): string {
   if (!('substatBonus' in arg) || !arg.substatBonus) {
     return formatHoverDisplayText(resolved.formattedTotalValue)
   }
@@ -448,7 +460,10 @@ export function buildDescriptionArgHover(
     .map((entry) => {
       const base = `Lv${String(entry.rank)}: ${formatHoverDisplayText(entry.formattedTotalValue)}`
       const breakdown =
-        'substatBonus' in arg && arg.substatBonus && entry.baseValue !== null && entry.substatBonusValue !== 0
+        'substatBonus' in arg &&
+        arg.substatBonus &&
+        entry.baseValue !== null &&
+        entry.substatBonusValue !== 0
           ? entry.substatBonusMode === 'scale_base' && entry.substatSourceValue !== null
             ? ` (${formatHoverDisplayText(entry.formattedBaseValue)} × ${fmtNum(100 + entry.substatSourceValue * (tryParseNumericValue(arg.substatBonus.multiplier) ?? 0))}% from ${formatSubstatLabel(arg.substatBonus.substat)})`
             : ` (${formatHoverDisplayText(entry.formattedBaseValue)} + ${formatHoverDisplayText(formatResolvedValue(entry.substatBonusValue, entry.suffix, entry.stat))} from ${formatSubstatLabel(arg.substatBonus.substat)})`
@@ -464,10 +479,30 @@ export function resolveDescriptionTemplate(
   descriptionArgs: Record<string, PublicDescriptionArg>,
   context: DescriptionArgResolveContext = {},
 ): string {
+  const normalizedTemplate = descriptionTemplate
+    .replace(PLURAL_MACRO_PATTERN, (fullMatch, ...args: unknown[]) => {
+      const groups = args.at(-1) as
+        | {argToken?: string; singular?: string; plural?: string}
+        | undefined
+      const argMatch = groups?.argToken ? ARG_TOKEN_EXTRACT_PATTERN.exec(groups.argToken) : null
+      const argKey = argMatch?.groups?.argKey
+      const arg = argKey && Object.hasOwn(descriptionArgs, argKey) ? descriptionArgs[argKey] : null
+      if (!arg) {
+        return fullMatch
+      }
+
+      const resolved = resolveDescriptionArg(arg, context)
+      const value = resolved.absoluteValue ?? resolved.totalValue ?? resolved.baseValue
+      return value === 1 ? (groups?.singular ?? '') : (groups?.plural ?? '')
+    })
+    .replace(ORDINAL_MACRO_PATTERN, (...args: unknown[]) => {
+      const groups = args.at(-1) as {value?: string} | undefined
+      return groups?.value ?? ''
+    })
   let result = ''
   let cursor = 0
 
-  for (const match of descriptionTemplate.matchAll(ARG_TOKEN_PATTERN)) {
+  for (const match of normalizedTemplate.matchAll(ARG_TOKEN_PATTERN)) {
     const fullMatch = match[0]
     const index = match.index
     const argKey = match.groups?.argKey
@@ -475,7 +510,7 @@ export function resolveDescriptionTemplate(
       continue
     }
 
-    result += descriptionTemplate.slice(cursor, index)
+    result += normalizedTemplate.slice(cursor, index)
 
     const arg = Object.hasOwn(descriptionArgs, argKey) ? descriptionArgs[argKey] : undefined
     if (!arg) {
@@ -492,13 +527,13 @@ export function resolveDescriptionTemplate(
     }
 
     const replacement = resolved.formattedTotalValue
-    const nextCharacter = descriptionTemplate[index + fullMatch.length] ?? ''
+    const nextCharacter = normalizedTemplate[index + fullMatch.length] ?? ''
     const shouldSkipTrailingPercent = replacement.endsWith('%') && nextCharacter === '%'
 
     result += replacement
     cursor = index + fullMatch.length + (shouldSkipTrailingPercent ? 1 : 0)
   }
 
-  result += descriptionTemplate.slice(cursor)
+  result += normalizedTemplate.slice(cursor)
   return result
 }
