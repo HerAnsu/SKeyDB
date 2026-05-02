@@ -1,9 +1,9 @@
 {
   "id": "skill.celeste.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0009",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Celeste obtains [Energy:Arg2] Aliemus. Trigger 1 Tentacle to attack the enemy, dealing [Arg3]% {Tentacle DMG}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -33,11 +33,11 @@
     "Arg3": {
       "kind": "fixed",
       "value": "0",
+      "suffix": "%",
       "substatBonus": {
         "substat": "RealmMastery",
         "multiplier": "0.5"
-      },
-      "suffix": "%"
+      }
     }
   },
   "cardKeywords": [],

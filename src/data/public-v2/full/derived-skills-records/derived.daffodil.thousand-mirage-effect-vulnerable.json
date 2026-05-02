@@ -1,11 +1,11 @@
 {
   "id": "derived.daffodil.thousand-mirage-effect-vulnerable",
   "displayName": "Vulnerable",
+  "ownerAwakenerId": "awakener-0012",
+  "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+  "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
   "descriptionTemplate": "Inflict 1 stack of {Vulnerable} on all enemies.",
   "descriptionArgs": {},
   "cardKeywords": [],
-  "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-  "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-  "ownerAwakenerId": "awakener-0012",
   "cost": "0"
 }

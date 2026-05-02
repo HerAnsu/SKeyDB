@@ -1,13 +1,13 @@
 {
   "id": "relic-0002",
+  "name": "Dimensional Image: Agrippa",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Agrippa",
-  "assetId": "Icon_Creation_Unique_B06",
   "ownerAwakenerId": "awakener-0002",
   "ownerAwakenerName": "Agrippa",
   "rarity": "SSR",
   "realm": "CARO",
+  "assetId": "Icon_Creation_Unique_B06",
   "descriptionTemplate": "At turn start, Agrippa gains [Arg1] Aliemus. {Reluctant Alms} will also reduce Agrippa's Arithmetica Cost by [Arg2] for this turn, triggering a maximum of once per turn.",
   "descriptionArgs": {
     "Arg1": {

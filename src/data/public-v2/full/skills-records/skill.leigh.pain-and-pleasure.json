@@ -1,9 +1,9 @@
 {
   "id": "skill.leigh.pain-and-pleasure",
+  "displayName": "Pain and Pleasure",
   "ownerAwakenerId": "awakener-0028",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Pain and Pleasure",
   "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}. At the start of next turn, gain 1 Shield for every 2 HP lost.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -28,13 +28,13 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0028",
       "id": "upgrade.enlighten.leigh.newborn-sanguivore.skill.leigh.pain-and-pleasure",
       "operation": "mixed",
       "upgraderId": "enlighten.leigh.newborn-sanguivore",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Leigh",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0028",
+      "ownerAwakenerName": "Leigh",
       "patch": {
         "descriptionTemplate": "Randomly deal [Damage:Arg1] {Pierce DMG} [Arg2] {plural:[Arg2]|time|times}. Until the start of next turn, gain 1 Shield for every 2 HP lost at the start of next turn.",
         "cardKeywords": [

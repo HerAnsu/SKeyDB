@@ -1,9 +1,9 @@
 {
   "id": "skill.sorel.elegance-of-rose",
+  "displayName": "Elegance of Rose",
   "ownerAwakenerId": "awakener-0046",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Elegance of Rose",
   "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg3] {plural:[Arg3]|time|times}. Restore [Heal:Arg2] HP at turn end.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "21.6",
         "24"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,8 +29,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "CON"
+      "stat": "CON",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",
@@ -41,14 +41,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0046",
       "id": "upgrade.enlighten.sorel.vintage-nectar.skill.sorel.elegance-of-rose",
       "operation": "mixed",
       "upgraderId": "enlighten.sorel.vintage-nectar",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Sorel",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
       "patch": {
+        "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg3] {plural:[Arg3]|time|times}. For each instance of DMG dealt, Temporarily Crit. Rate +5%. Restore [Heal:Arg2] HP at turn end",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -60,8 +61,8 @@
               "27",
               "30"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -73,15 +74,14 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "CON"
+            "stat": "CON",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
             "value": "4"
           }
-        },
-        "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg3] {plural:[Arg3]|time|times}. For each instance of DMG dealt, Temporarily Crit. Rate +5%. Restore [Heal:Arg2] HP at turn end"
+        }
       }
     }
   ]

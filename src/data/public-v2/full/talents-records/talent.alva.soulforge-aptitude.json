@@ -1,8 +1,9 @@
 {
   "id": "talent.alva.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0004",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0004",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nThe base DMG of \"Strike\" and {Precision Slash} +an amount equal to [Arg3]% of the Shield gained this turn. Alva's Final DMG dealt to the {Caro} Realm enemies +[Arg4]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -45,6 +46,5 @@
         "50"
       ]
     }
-  },
-  "maxLevel": 10
+  }
 }

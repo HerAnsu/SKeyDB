@@ -1,7 +1,7 @@
 import {z} from 'zod'
 
 import {AWAKENER_TEXT_COLOR_NAMES} from './awakeners-text-colors.ts'
-import type {ComputedExpression, PublicFormulaKey} from './public-description-args'
+import type {PublicFormulaKey} from './public-description-args'
 
 const nonEmptyStringSchema = z.string().trim().min(1)
 
@@ -59,28 +59,13 @@ export const descriptionArgSubstatBonusesSchema = z.record(
 )
 
 const descriptionArgChannelSchema = nonEmptyStringSchema
-const publicFormulaKeySchema = z.enum([
+const publicFormulaKeySchema = z.enum(['accountLevel', 'ownedPosseCount', 'wheelRefinementLevel'])
+const publicScaledBaseFormulaSchema = z.enum([
   'accountStageGrowth',
-  'accountDamagePower',
-  'ownedPosseCount',
-  'wheelRefinementLevel',
   'somaticResearchHpMultiplier',
+  'esotericResearchDepth',
   'occultResearchDepth',
 ])
-const computedExpressionSchema: z.ZodType<ComputedExpression> = z.lazy(() =>
-  z.union([
-    z.object({const: z.number()}),
-    z.object({var: publicFormulaKeySchema}),
-    z.object({
-      op: z.enum(['add', 'mul', 'min', 'max']),
-      args: z.array(computedExpressionSchema),
-    }),
-    z.object({
-      op: z.enum(['ceil', 'floor']),
-      args: z.tuple([computedExpressionSchema]),
-    }),
-  ]),
-)
 
 export const descriptionArgSchema = z.discriminatedUnion('kind', [
   z
@@ -123,15 +108,31 @@ export const descriptionArgSchema = z.discriminatedUnion('kind', [
       substatBonus: descriptionArgSubstatBonusSchema.optional(),
     })
     .catchall(z.unknown()),
-  z.object({
-    kind: z.literal('computed'),
-    expression: computedExpressionSchema,
-    inputs: z.array(publicFormulaKeySchema) as z.ZodType<PublicFormulaKey[]>,
-    channel: descriptionArgChannelSchema.optional(),
-    suffix: nonEmptyStringSchema.optional(),
-    stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
-    substatBonus: descriptionArgSubstatBonusSchema.optional(),
-  }),
+  z.discriminatedUnion('formulaKey', [
+    z.object({
+      kind: z.literal('computed'),
+      formulaKey: z.literal('scaled'),
+      baseFormula: publicScaledBaseFormulaSchema,
+      multiplier: z.number().optional(),
+      rounding: z.literal('ceil').optional(),
+      inputs: z.array(publicFormulaKeySchema) as z.ZodType<PublicFormulaKey[]>,
+      channel: descriptionArgChannelSchema.optional(),
+      suffix: nonEmptyStringSchema.optional(),
+      stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
+      substatBonus: descriptionArgSubstatBonusSchema.optional(),
+    }),
+    z.object({
+      kind: z.literal('computed'),
+      formulaKey: z.literal('wheelRefinementLinear'),
+      baseValue: z.number(),
+      perLevel: z.number(),
+      inputs: z.tuple([z.literal('wheelRefinementLevel')]),
+      channel: descriptionArgChannelSchema.optional(),
+      suffix: nonEmptyStringSchema.optional(),
+      stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
+      substatBonus: descriptionArgSubstatBonusSchema.optional(),
+    }),
+  ]),
 ])
 
 export const descriptionArgsSchema = z.record(nonEmptyStringSchema, descriptionArgSchema)

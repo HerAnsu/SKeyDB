@@ -1,6 +1,9 @@
 {
   "id": "derived.goliath.usurp",
   "displayName": "Usurp",
+  "ownerAwakenerId": "awakener-0021",
+  "derivedFromId": "skill.goliath.abyssal-depths-power",
+  "rootSkillId": "skill.goliath.abyssal-depths-power",
   "descriptionTemplate": "Place 3 {Blade's Dominion} cards with Base DMG increased by 400% and Arithmetica Cost of 0 into hand. Obtain {STR} equal to [Arg1]% {Tentacle DMG}. Goliath gain [Arg2]% Temporary Crit. Rate.",
   "descriptionArgs": {
     "Arg1": {
@@ -22,19 +25,17 @@
     }
   },
   "cardKeywords": [],
-  "derivedFromId": "skill.goliath.abyssal-depths-power",
-  "rootSkillId": "skill.goliath.abyssal-depths-power",
-  "ownerAwakenerId": "awakener-0021",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0021",
       "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.usurp",
       "operation": "mixed",
       "upgraderId": "enlighten.goliath.boundless-ambition",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Goliath",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath",
       "patch": {
+        "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand, obtain Temporary {STR} equal to [Arg1]% {Tentacle DMG}. Goliath obtains [Arg2]% Temporary Crit. Rate.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -53,8 +54,7 @@
             "value": "25",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand, obtain Temporary {STR} equal to [Arg1]% {Tentacle DMG}. Goliath obtains [Arg2]% Temporary Crit. Rate."
+        }
       }
     }
   ]

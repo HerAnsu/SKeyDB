@@ -1,6 +1,12 @@
 {
   "id": "derived.miryam.the-end-of-belief",
   "displayName": "The End of Belief",
+  "ownerAwakenerId": "awakener-0032",
+  "derivedFromId": "derived.miryam.heretical-faith",
+  "rootSkillId": "skill.miryam.testament-of-faith",
+  "childDerivedSkillIds": [
+    "derived.miryam.divine-realms-illusion"
+  ],
   "descriptionTemplate": "Miryam gains [Energy:Arg1] Aliemus.{Rouse}: Apply 1 stack of {Weakness} and {Vulnerable} to all enemies. Tentacle Limit and Tentacle Count +1. At turn end, randomly place 1 {Divine Realm's Illusion} into your hand.",
   "descriptionArgs": {
     "Arg1": {
@@ -26,12 +32,6 @@
     {
       "id": "mechanic.exhaust"
     }
-  ],
-  "derivedFromId": "derived.miryam.heretical-faith",
-  "rootSkillId": "skill.miryam.testament-of-faith",
-  "ownerAwakenerId": "awakener-0032",
-  "childDerivedSkillIds": [
-    "derived.miryam.divine-realms-illusion"
   ],
   "cost": "9"
 }

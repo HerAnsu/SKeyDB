@@ -3,8 +3,8 @@
   "displayName": "Fainted",
   "overlayType": "mechanic",
   "aliases": [],
-  "descriptionTemplate": "Cannot perform any actions until turn end.",
-  "descriptionArgs": {},
   "iconId": "Battle_Card_Buff_023",
-  "textColor": "misc"
+  "textColor": "misc",
+  "descriptionTemplate": "Cannot perform any actions until turn end.",
+  "descriptionArgs": {}
 }

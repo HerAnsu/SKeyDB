@@ -1,9 +1,9 @@
 {
   "id": "skill.helot-catena.reapers-declaration",
+  "displayName": "Reaper's Declaration",
   "ownerAwakenerId": "awakener-0019",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Reaper's Declaration",
   "descriptionTemplate": "Helot: Catena gains [Energy:Arg1] Aliemus. {Rouse}: Place a {Crimson Shackles} into hand, and Helot: Catena's Command Cards gain {Retain}. At turn start, Helot: Catena's Base DMG +[Arg2]% for this battle.",
   "descriptionArgs": {
     "Arg1": {
@@ -38,13 +38,13 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0019",
       "id": "upgrade.enlighten.helot-catena.death-knell-decree.skill.helot-catena.reapers-declaration",
       "operation": "replace_description",
       "upgraderId": "enlighten.helot-catena.death-knell-decree",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Helot: Catena",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena",
       "patch": {
         "descriptionTemplate": "Helot: Catena gains [Energy:Arg1] Aliemus. {Rouse}: Place a {Crimson Shackles} into hand, and Helot: Catena's Command Cards gain {Retain}. At turn start, Helot: Catena's Base DMG +[Arg2]% for this battle. After unleashing Exalt {Sanguine Fetters}, grant each unique \"Helot: Catena\" Command Card in hand 35 stacks of {Temporary Enhance}."
       }

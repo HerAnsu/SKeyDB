@@ -1,9 +1,9 @@
 {
   "id": "skill.murphy.divine-maidens-birth",
+  "displayName": "Divine Maiden's Birth",
   "ownerAwakenerId": "awakener-0034",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Divine Maiden's Birth",
   "descriptionTemplate": "Gain a total of (Max HP [Block:Arg1]% + [Block:Arg2]) Shield and [Arg3] Arithmetica. At the start of the next turn, take Max HP [Arg5]% {Sacrifice}. {Aftershock}: {Tentacle DMG} +[TentaclePower:Arg4].",
   "descriptionArgs": {
     "Arg1": {
@@ -21,8 +21,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",
@@ -38,8 +38,8 @@
         "9",
         "10"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg5": {
       "kind": "fixed",

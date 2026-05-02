@@ -25,12 +25,12 @@
     "Useable 10 times",
     "Useable X times"
   ],
+  "textColor": "damage",
   "descriptionTemplate": "Only enters the Discard Pile and resets the count after being used [Layer] times, but \"Orison\" only takes effect the first time it is used.",
   "descriptionArgs": {
     "Layer": {
       "kind": "fixed",
       "value": "X"
     }
-  },
-  "textColor": "damage"
+  }
 }

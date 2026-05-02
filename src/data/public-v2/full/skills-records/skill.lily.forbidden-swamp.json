@@ -1,9 +1,9 @@
 {
   "id": "skill.lily.forbidden-swamp",
+  "displayName": "Forbidden Swamp",
   "ownerAwakenerId": "awakener-0029",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Forbidden Swamp",
   "descriptionTemplate": "Gain [Block:Arg1] Shield and inflict [{Poison}:Arg2] {plural:[{Poison}:Arg2]|stack|stacks} of {Poison} on all enemies. For every 1% {Death Resistance} Lily has, the Base Shield +0.25%. Until the start of next turn, gain [Arg3] {plural:[Arg3]|stack|stacks} of {Endure} for each attack received.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "21.6",
         "24"
       ],
-      "suffix": "%",
       "stat": "DEF",
+      "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
         "multiplier": "0.25",
@@ -34,8 +34,8 @@
         "72",
         "80"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -47,21 +47,21 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0029",
       "id": "upgrade.enlighten.lily.blackened-nourishment.skill.lily.forbidden-swamp",
       "operation": "replace_description",
       "upgraderId": "enlighten.lily.blackened-nourishment",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Lily",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily",
       "patch": {
         "descriptionTemplate": "Gain [Block:Arg1] Shield and inflict [{Poison}:Arg2] {plural:[{Poison}:Arg2]|stack|stacks} of {Poison} to all enemies. For every 1% {Death Resistance} Lily has, the Base Shield +0.25%. Until the start of next turn, gain [Arg3] {plural:[Arg3]|stack|stacks} of {Endure} for each attack received. If HP is below 50%, gain an additional Shield and the applied {Poison} is doubled."
       }

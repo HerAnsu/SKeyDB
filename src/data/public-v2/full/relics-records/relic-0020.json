@@ -1,13 +1,13 @@
 {
   "id": "relic-0020",
+  "name": "Dimensional Image: Ramona: Timeworn",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Ramona: Timeworn",
-  "assetId": "Icon_Creation_Unique_C01EX",
   "ownerAwakenerId": "awakener-0020",
   "ownerAwakenerName": "Ramona: Timeworn",
   "rarity": "SSR",
   "realm": "CHAOS",
+  "assetId": "Icon_Creation_Unique_C01EX",
   "descriptionTemplate": "At turn start, Ramona: Timeworn gains [Arg1] Aliemus. The first time {Loop} is triggered each turn, gain [Arg2] Keyflare and [Arg3] {plural:[Arg3]|stack|stacks} of {Negentropy}.",
   "descriptionArgs": {
     "Arg1": {

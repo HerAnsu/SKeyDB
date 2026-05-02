@@ -1,8 +1,9 @@
 {
   "id": "talent.liz.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0030",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0030",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAt the start of a battle, place a {Corrupted Flames} with {Exhaust} into hand, and increase the Base DMG of {Green Flames} and its related derived cards by [Arg3]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -20,6 +21,5 @@
       "base": "5",
       "gainPerLevel": "5"
     }
-  },
-  "maxLevel": 10
+  }
 }

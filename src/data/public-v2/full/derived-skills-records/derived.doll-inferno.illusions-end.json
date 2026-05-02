@@ -1,6 +1,13 @@
 {
   "id": "derived.doll-inferno.illusions-end",
   "displayName": "Illusion's End",
+  "ownerAwakenerId": "awakener-0018",
+  "derivedFromId": "talent.doll-inferno.path-of-annihilation",
+  "rootSkillId": null,
+  "childDerivedSkillIds": [
+    "derived.doll-inferno.self-destruct-finale",
+    "derived.doll-inferno.fates-descent-finale"
+  ],
   "descriptionTemplate": "Deal 25% of each enemy's Max HP as {Fixed DMG}, with a minimum DMG equal to [Arg1]% of your Max HP. After use, \"Doll: Inferno\"'s specific skills switch to {Finale Form}. The effect of {Illusion's End} activates only once.",
   "descriptionArgs": {
     "Arg1": {
@@ -17,23 +24,16 @@
       "id": "mechanic.retain"
     }
   ],
-  "derivedFromId": "talent.doll-inferno.path-of-annihilation",
-  "rootSkillId": null,
-  "ownerAwakenerId": "awakener-0018",
-  "childDerivedSkillIds": [
-    "derived.doll-inferno.self-destruct-finale",
-    "derived.doll-inferno.fates-descent-finale"
-  ],
   "cost": "0",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0018",
       "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.derived.doll-inferno.illusions-end",
       "operation": "replace_description",
       "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Doll: Inferno",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
       "patch": {
         "descriptionTemplate": "Deal 30% of all enemies' Max HP as {Fixed DMG}. This DMG will not be less than [Arg1]% of your Max HP. Restores 30% of lost HP. After use, \"Doll: Inferno\"'s specific skills switch to {Finale Form}. The effect of {Illusion's End} activates only once."
       }

@@ -1,9 +1,9 @@
 {
   "id": "skill.faros.lost-city-of-lemuria",
+  "displayName": "Lost City of Lemuria",
   "ownerAwakenerId": "awakener-0017",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Lost City of Lemuria",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Dispel self {Vulnerable} state. Choose up to 3 cards from the Draw Pile and add them to your hand.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "64.8",
         "72"
       ],
-      "suffix": "%",
       "stat": "DEF",
+      "suffix": "%",
       "substatBonus": {
         "substat": "DamageAmplification",
         "multiplier": "0.4",

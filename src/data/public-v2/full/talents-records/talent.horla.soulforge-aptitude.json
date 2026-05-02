@@ -1,8 +1,9 @@
 {
   "id": "talent.horla.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0024",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0024",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAt the start of Boss Battles, gain {Death Resistance} equal to [Arg3]% of Horla's {Death Resistance} attribute. Each time {Death Resistance} is triggered, the corresponding {Emotion} effect of {Resplendent Chapters} +[Arg4]% until turn end.",
   "descriptionArgs": {
     "Arg1": {
@@ -45,6 +46,5 @@
         "150"
       ]
     }
-  },
-  "maxLevel": 10
+  }
 }

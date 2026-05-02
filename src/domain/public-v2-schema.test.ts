@@ -109,7 +109,6 @@ function testPosseRecord(id = 'posse-0001') {
     id,
     name: 'Posse',
     assetId: 'Posse_Test',
-    imageAssetId: 'Posse_Image_Test',
   }
 }
 

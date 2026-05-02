@@ -2,7 +2,7 @@
   "id": "covenant-0009",
   "name": "Paradox",
   "assetId": "covenant-icon-011",
-  "lore": "Inevitable, but accidental. Shackled, but unbound.",
+  "lineupToken": "f",
   "setEffects": [
     {
       "set": 3,
@@ -20,5 +20,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "f"
+  "lore": "Inevitable, but accidental. Shackled, but unbound."
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.arachne.eternal-loom",
+  "displayName": "Eternal Loom",
   "ownerAwakenerId": "awakener-0056",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Eternal Loom",
   "descriptionTemplate": "Deal [FateCut:Arg1] {Final Verdict} to all enemies, then generate 1 {Guiding Strings} and place it into hand.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,21 +16,21 @@
         "540",
         "600"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0056",
       "id": "upgrade.enlighten.arachne.universe-as-i-conceive.skill.arachne.eternal-loom",
       "operation": "override_args",
       "upgraderId": "enlighten.arachne.universe-as-i-conceive",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Arachne",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -43,8 +43,8 @@
               "810",
               "900"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
         }
       }

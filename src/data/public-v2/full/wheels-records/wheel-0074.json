@@ -1,11 +1,12 @@
 {
   "id": "wheel-0074",
   "name": "Aged",
-  "assetId": "Weapon_Full_P14",
-  "ownerAwakenerName": null,
   "rarity": "R",
   "realm": "NEUTRAL",
   "mainstatKey": "CRIT_DMG",
+  "ownerAwakenerName": null,
+  "assetId": "Weapon_Full_P14",
+  "lineupToken": "i",
   "descriptionTemplate": "Team Unique: After each battle ends, gain [StateArg1] Keyflare. In {Astral Reign}, this effect changes to \"Increases the chance for the wielder's Dimensional Image Relic to appear by 100%.\"",
   "descriptionArgs": {
     "StateArg1": {
@@ -18,6 +19,5 @@
       ]
     }
   },
-  "lore": "We are as hollow as the scarecrows.",
-  "lineupToken": "i"
+  "lore": "We are as hollow as the scarecrows."
 }

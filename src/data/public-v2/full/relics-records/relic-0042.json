@@ -1,13 +1,13 @@
 {
   "id": "relic-0042",
+  "name": "Dimensional Image: Ramona",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Ramona",
-  "assetId": "Icon_Creation_Unique_C01",
   "ownerAwakenerId": "awakener-0042",
   "ownerAwakenerName": "Ramona",
   "rarity": "SSR",
   "realm": "CHAOS",
+  "assetId": "Icon_Creation_Unique_C01",
   "descriptionTemplate": "At turn start, Ramona gains [Arg1] Aliemus. For every [Arg2]rd Command Card played, that Command Card takes effect 1 additional time and gains [Arg3] Keyflare.",
   "descriptionArgs": {
     "Arg1": {

@@ -1,6 +1,9 @@
 {
   "id": "derived.vortice.vortex-shell",
   "displayName": "Vortex! Shell!",
+  "ownerAwakenerId": "awakener-0055",
+  "derivedFromId": "skill.vortice.moskstraumen-boom",
+  "rootSkillId": "skill.vortice.moskstraumen-boom",
   "descriptionTemplate": "Deal [Arg1] {Fixed DMG} to the enemy with the highest HP, {Tentacle DMG} +[TentaclePower:Arg2].",
   "descriptionArgs": {
     "Arg1": {
@@ -13,8 +16,8 @@
         "2500",
         "3000"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -26,25 +29,23 @@
         "13.5",
         "15"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
-  "derivedFromId": "skill.vortice.moskstraumen-boom",
-  "rootSkillId": "skill.vortice.moskstraumen-boom",
-  "ownerAwakenerId": "awakener-0055",
   "cost": "0",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0055",
       "id": "upgrade.enlighten.vortice.endless-tide.derived.vortice.vortex-shell",
       "operation": "mixed",
       "upgraderId": "enlighten.vortice.endless-tide",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Vortice",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice",
       "patch": {
+        "descriptionTemplate": "Deal [Arg4] +[Float:Arg3]% of target's Max HP as {Fixed DMG} to the enemy with the highest HP, {Tentacle DMG} +[TentaclePower:Arg2].",
         "descriptionArgs": {
           "Arg2": {
             "kind": "scaling",
@@ -56,17 +57,17 @@
               "13.5",
               "15"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
             "value": "0.5",
+            "suffix": "%",
             "substatBonus": {
               "substat": "RealmMastery",
               "multiplier": "0.005"
-            },
-            "suffix": "%"
+            }
           },
           "Arg4": {
             "kind": "scaling",
@@ -78,11 +79,10 @@
               "2500",
               "3000"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Arg4] +[Float:Arg3]% of target's Max HP as {Fixed DMG} to the enemy with the highest HP, {Tentacle DMG} +[TentaclePower:Arg2]."
+        }
       }
     }
   ]

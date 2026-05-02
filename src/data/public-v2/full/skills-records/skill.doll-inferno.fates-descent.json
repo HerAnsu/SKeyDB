@@ -1,9 +1,9 @@
 {
   "id": "skill.doll-inferno.fates-descent",
+  "displayName": "Fate's Descent",
   "ownerAwakenerId": "awakener-0018",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Fate's Descent",
   "descriptionTemplate": "Obtain [Energy:Arg1] Aliemus. Recover [Heal:Arg2] HP, and recover an additional time for every 50 Aliemus currently possessed.\n{Fate's Descent: Finale}",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "CON"
+      "stat": "CON",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],

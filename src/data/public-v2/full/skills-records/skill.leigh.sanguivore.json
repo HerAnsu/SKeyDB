@@ -1,9 +1,9 @@
 {
   "id": "skill.leigh.sanguivore",
+  "displayName": "Sanguivore",
   "ownerAwakenerId": "awakener-0028",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Sanguivore",
   "descriptionTemplate": "Leigh gains [Energy:Arg1] Aliemus. {Rouse}: After Leigh plays a card, {Embryo Fusion} +[Blood:Arg2]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -38,14 +38,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0028",
       "id": "upgrade.enlighten.leigh.insatiable-craving.skill.leigh.sanguivore",
       "operation": "mixed",
       "upgraderId": "enlighten.leigh.insatiable-craving",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Leigh",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0028",
+      "ownerAwakenerName": "Leigh",
       "patch": {
+        "descriptionTemplate": "Leigh gains [Energy:Arg1] Aliemus. {Rouse}: After Leigh plays a card, {Embryo Fusion} +[Blood:Arg2]%, and the next Exalt is Enhanced: gain Temporary {STR} equal to [Arg3]% of Permanent {STR}, stacking up to [Arg4] times.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -79,8 +80,7 @@
             "kind": "fixed",
             "value": "5"
           }
-        },
-        "descriptionTemplate": "Leigh gains [Energy:Arg1] Aliemus. {Rouse}: After Leigh plays a card, {Embryo Fusion} +[Blood:Arg2]%, and the next Exalt is Enhanced: gain Temporary {STR} equal to [Arg3]% of Permanent {STR}, stacking up to [Arg4] times."
+        }
       }
     }
   ]

@@ -2,7 +2,7 @@
   "id": "covenant-0011",
   "name": "Returnal Line",
   "assetId": "covenant-icon-013",
-  "lore": "Rise once more, O sunken city fated for rebirth. Return to us, @3!",
+  "lineupToken": "d",
   "setEffects": [
     {
       "set": 3,
@@ -20,5 +20,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "d"
+  "lore": "Rise once more, O sunken city fated for rebirth. Return to us, @3!"
 }

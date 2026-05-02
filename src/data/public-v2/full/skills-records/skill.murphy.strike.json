@@ -1,9 +1,9 @@
 {
   "id": "skill.murphy.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0034",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deals [Damage:Arg1] DMG. Murphy obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0034",
       "id": "upgrade.enlighten.murphy.inextricable-bloodline.skill.murphy.strike",
       "operation": "mixed",
       "upgraderId": "enlighten.murphy.inextricable-bloodline",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Murphy",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0034",
+      "ownerAwakenerName": "Murphy",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Murphy obtains [Energy:Arg2] Aliemus. {Tentacle DMG} +[TentaclePower:Arg3].",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -78,11 +79,10 @@
               "2.7",
               "3"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Murphy obtains [Energy:Arg2] Aliemus. {Tentacle DMG} +[TentaclePower:Arg3]."
+        }
       }
     }
   ]

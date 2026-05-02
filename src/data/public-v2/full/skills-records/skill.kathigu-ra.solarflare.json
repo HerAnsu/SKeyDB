@@ -1,9 +1,9 @@
 {
   "id": "skill.kathigu-ra.solarflare",
+  "displayName": "Solarflare",
   "ownerAwakenerId": "awakener-0027",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Solarflare",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, which enjoys [Arg2]% {STR} bonus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "90",
         "100"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -29,14 +29,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0027",
       "id": "upgrade.enlighten.kathigu-ra.astral-meltdown.skill.kathigu-ra.solarflare",
       "operation": "mixed",
       "upgraderId": "enlighten.kathigu-ra.astral-meltdown",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Kathigu-Ra",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, which enjoys [Arg2]% {STR} bonus. Base DMG +50% when possessing 3 stacks of {Fiamma}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -48,27 +49,27 @@
               "90",
               "100"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
             "value": "300",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, which enjoys [Arg2]% {STR} bonus. Base DMG +50% when possessing 3 stacks of {Fiamma}."
+        }
       }
     },
     {
-      "ownerAwakenerId": "awakener-0027",
       "id": "upgrade.enlighten.kathigu-ra.endless-purgatory.skill.kathigu-ra.solarflare",
       "operation": "mixed",
       "upgraderId": "enlighten.kathigu-ra.endless-purgatory",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Kathigu-Ra",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, which enjoys [Arg2]% {STR} bonus. Base DMG +50% when possessing 3 stacks of {Fiamma}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -80,16 +81,15 @@
               "90",
               "100"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
             "value": "300",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, which enjoys [Arg2]% {STR} bonus. Base DMG +50% when possessing 3 stacks of {Fiamma}."
+        }
       }
     }
   ]

@@ -1,9 +1,9 @@
 {
   "id": "skill.helot.shattering-strike",
+  "displayName": "Shattering Strike",
   "ownerAwakenerId": "awakener-0023",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Shattering Strike",
   "descriptionTemplate": "Treated as a \"Strike\". Deal [Damage:Arg1] DMG. For each other \"Strike\" in your hand, increase Base DMG by [Arg3]%, and gain an additional 1x {STR} bonus. Discard all \"Strikes\".",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "180",
         "200"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",

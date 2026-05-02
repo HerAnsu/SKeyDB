@@ -1,9 +1,9 @@
 {
   "id": "skill.erica.electromagnetic-blast",
+  "displayName": "Electromagnetic Blast",
   "ownerAwakenerId": "awakener-0015",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Electromagnetic Blast",
   "descriptionTemplate": "Erica gains [Arg4]% Temporary Crit. Rate and Crit. DMG. Gain [Block:Arg2] Shield. Deal [Damage:Arg1] DMG to all enemies and apply [Arg3] {plural:[Arg3]|stack|stacks}{Weakness} and {Vulnerable}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "63",
         "70"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,8 +29,8 @@
         "63",
         "70"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",
@@ -39,25 +39,26 @@
     "Arg4": {
       "kind": "fixed",
       "value": "0",
+      "suffix": "%",
       "substatBonus": {
         "substat": "KeyflareRegen",
         "multiplier": "0.5"
-      },
-      "suffix": "%"
+      }
     }
   },
   "cardKeywords": [],
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0015",
       "id": "upgrade.enlighten.erica.force-circuit.skill.erica.electromagnetic-blast",
       "operation": "mixed",
       "upgraderId": "enlighten.erica.force-circuit",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Erica",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0015",
+      "ownerAwakenerName": "Erica",
       "patch": {
+        "descriptionTemplate": "Erica gains [Arg4]% Temporary Crit. Rate and Crit. DMG. Gain [Block:Arg2] Shield. Deal [Damage:Arg1] DMG to all enemies and apply [Arg3] {plural:[Arg3]|stack|stacks}{Weakness} and {Vulnerable}. This skill additionally enjoys a [Arg7]x {STR} and {Alert} bonus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -69,8 +70,8 @@
               "63",
               "70"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -82,8 +83,8 @@
               "63",
               "70"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
@@ -92,18 +93,17 @@
           "Arg4": {
             "kind": "fixed",
             "value": "0",
+            "suffix": "%",
             "substatBonus": {
               "substat": "KeyflareRegen",
               "multiplier": "0.5"
-            },
-            "suffix": "%"
+            }
           },
           "Arg7": {
             "kind": "fixed",
             "value": "1"
           }
-        },
-        "descriptionTemplate": "Erica gains [Arg4]% Temporary Crit. Rate and Crit. DMG. Gain [Block:Arg2] Shield. Deal [Damage:Arg1] DMG to all enemies and apply [Arg3] {plural:[Arg3]|stack|stacks}{Weakness} and {Vulnerable}. This skill additionally enjoys a [Arg7]x {STR} and {Alert} bonus."
+        }
       }
     },
     {

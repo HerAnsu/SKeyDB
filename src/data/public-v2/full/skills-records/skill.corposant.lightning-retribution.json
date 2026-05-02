@@ -1,9 +1,9 @@
 {
   "id": "skill.corposant.lightning-retribution",
+  "displayName": "Lightning Retribution",
   "ownerAwakenerId": "awakener-0011",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Lightning Retribution",
   "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}, with a [Arg3]% {Tentacle DMG} Bonus, and each time DMG is dealt, target's {Tentacle DMG} taken this turn +[Arg4]%. Add [Arg5] copies of {Pilot} into hand. {Aftershock}: This card returns to the top of the Draw Pile.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "63",
         "70"
       ],
-      "suffix": "%",
       "stat": "ATK",
+      "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
         "multiplier": "0.2",
@@ -62,13 +62,13 @@
   "cost": "4",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0011",
       "id": "upgrade.enlighten.corposant.unquenched-unfelled-undimmed.skill.corposant.lightning-retribution",
       "operation": "override_args",
       "upgraderId": "enlighten.corposant.unquenched-unfelled-undimmed",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Corposant",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -81,8 +81,8 @@
               "63",
               "70"
             ],
-            "suffix": "%",
             "stat": "ATK",
+            "suffix": "%",
             "substatBonus": {
               "substat": "DeathResistance",
               "multiplier": "0.2",

@@ -1,8 +1,9 @@
 {
   "id": "talent.doresain.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0014",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0014",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAll teammates' {STR} Generation effect +[Arg3]%. When Doresain kills \"Departed\" enemies, he obtains [Arg4] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -45,6 +46,5 @@
         "50"
       ]
     }
-  },
-  "maxLevel": 10
+  }
 }

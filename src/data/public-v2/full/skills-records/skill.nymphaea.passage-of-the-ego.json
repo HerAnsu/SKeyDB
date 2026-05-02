@@ -1,9 +1,9 @@
 {
   "id": "skill.nymphaea.passage-of-the-ego",
+  "displayName": "Passage of the Ego",
   "ownerAwakenerId": "awakener-0037",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Passage of the Ego",
   "descriptionTemplate": "Inflict [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} of {Poison} on all enemies and trigger [Arg3]% of {Poison}. Obtain [Power:Arg2] {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "81",
         "90"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,8 +29,8 @@
         "8.1",
         "9"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",
@@ -42,14 +42,15 @@
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0037",
       "id": "upgrade.enlighten.nymphaea.frostbloom-tide.skill.nymphaea.passage-of-the-ego",
       "operation": "mixed",
       "upgraderId": "enlighten.nymphaea.frostbloom-tide",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Nymphaea",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0037",
+      "ownerAwakenerName": "Nymphaea",
       "patch": {
+        "descriptionTemplate": "Inflict [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} of {Poison} on all enemies and trigger [Arg3]% of {Poison}. Obtain [Power:Arg2] {STR}. Subsequent uses of {Passage of the Ego} in this battle inflict [{Poison}:Arg4] more stacks of {Poison}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -61,8 +62,8 @@
               "81",
               "90"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -74,8 +75,8 @@
               "8.1",
               "9"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
@@ -92,11 +93,10 @@
               "81",
               "90"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Inflict [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} of {Poison} on all enemies and trigger [Arg3]% of {Poison}. Obtain [Power:Arg2] {STR}. Subsequent uses of {Passage of the Ego} in this battle inflict [{Poison}:Arg4] more stacks of {Poison}."
+        }
       }
     },
     {

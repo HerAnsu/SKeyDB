@@ -1,13 +1,13 @@
 {
   "id": "relic-0040",
+  "name": "Dimensional Image: Pickman",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Pickman",
-  "assetId": "Icon_Creation_Unique_B12",
   "ownerAwakenerId": "awakener-0040",
   "ownerAwakenerName": "Pickman",
   "rarity": "SSR",
   "realm": "CARO",
+  "assetId": "Icon_Creation_Unique_B12",
   "descriptionTemplate": "At the start of the turn, Pickman gains [Arg1] Aliemus. For each stack of {Creativity} gained, randomly reduce the Arithmetica Cost of 1 card in hand by 1 for this turn. When Pickman consumes {Creativity}, all Awakeners additionally gain [Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {

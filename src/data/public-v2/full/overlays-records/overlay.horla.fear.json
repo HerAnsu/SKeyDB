@@ -2,6 +2,7 @@
   "id": "overlay.horla.fear",
   "displayName": "Fear",
   "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0024",
   "aliases": [],
   "descriptionTemplate": "All Awakeners' {STR} gained, {Counter} gained, and {Poison} inflicted +[StateArg1]%. Increase the {STR} Generation of {Resplendent Chapters}.",
   "descriptionArgs": {
@@ -13,6 +14,5 @@
         "multiplier": "0.02"
       }
     }
-  },
-  "ownerAwakenerId": "awakener-0024"
+  }
 }

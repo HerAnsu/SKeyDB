@@ -1,9 +1,9 @@
 {
   "id": "skill.pandia.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0039",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Pandia obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0039",
       "id": "upgrade.enlighten.pandia.embrace-the-pain.skill.pandia.defense",
       "operation": "mixed",
       "upgraderId": "enlighten.pandia.embrace-the-pain",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0039",
+      "ownerAwakenerName": "Pandia",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Pandia obtains [Energy:Arg2] Aliemus. Obtain [Counterattack:Arg3] stacks of {Counter}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -78,11 +79,10 @@
               "13.5",
               "15"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Pandia obtains [Energy:Arg2] Aliemus. Obtain [Counterattack:Arg3] stacks of {Counter}."
+        }
       }
     }
   ]

@@ -1,9 +1,9 @@
 {
   "id": "skill.24.frenzied-slash",
+  "displayName": "Frenzied Slash",
   "ownerAwakenerId": "awakener-0001",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Frenzied Slash",
   "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}.\nDepressed Persona: Reduces the Arithmetica Cost of the card with the highest cost in your hand by 1, and obtain Temporary {Retain}. Manic Persona: DMG instances +2",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -28,14 +28,15 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0001",
       "id": "upgrade.enlighten.24.hysteria.skill.24.frenzied-slash",
       "operation": "mixed",
       "upgraderId": "enlighten.24.hysteria",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "\"24\"",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0001",
+      "ownerAwakenerName": "\"24\"",
       "patch": {
+        "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}.\nDepressed Persona: Reduces the Arithmetica Cost of the card with the highest cost in your hand by 1, and obtain Temporary {Retain}. Manic Persona: DMG instances +3",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -47,15 +48,14 @@
               "36",
               "40"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
             "value": "3"
           }
-        },
-        "descriptionTemplate": "Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}.\nDepressed Persona: Reduces the Arithmetica Cost of the card with the highest cost in your hand by 1, and obtain Temporary {Retain}. Manic Persona: DMG instances +3"
+        }
       }
     }
   ]

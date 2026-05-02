@@ -1,9 +1,9 @@
 {
   "id": "skill.miryam.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0032",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Miryam obtains [Energy:Arg2] Aliemus. {Ritual}: Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg3]/[Exhaustion:Arg4]/[Exhaustion:Arg5].",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -40,8 +40,8 @@
         "9",
         "10"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg4": {
       "kind": "scaling",
@@ -53,8 +53,8 @@
         "22.5",
         "25"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg5": {
       "kind": "scaling",
@@ -66,21 +66,21 @@
         "45",
         "50"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0032",
       "id": "upgrade.enlighten.miryam.vanitys-collapse.skill.miryam.defense",
       "operation": "override_args",
       "upgraderId": "enlighten.miryam.vanitys-collapse",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -93,8 +93,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -117,8 +117,8 @@
               "11.7",
               "13"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg4": {
             "kind": "scaling",
@@ -130,8 +130,8 @@
               "29.25",
               "32.5"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg5": {
             "kind": "scaling",
@@ -143,8 +143,8 @@
               "58.5",
               "65"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
         }
       }

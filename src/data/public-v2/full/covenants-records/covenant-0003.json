@@ -2,7 +2,7 @@
   "id": "covenant-0003",
   "name": "Scarlet Embrace",
   "assetId": "covenant-icon-004",
-  "lore": "The fabled architect of the automatons, who destroyed his creations with his own hands.",
+  "lineupToken": "t",
   "setEffects": [
     {
       "set": 3,
@@ -21,5 +21,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "t"
+  "lore": "The fabled architect of the automatons, who destroyed his creations with his own hands."
 }

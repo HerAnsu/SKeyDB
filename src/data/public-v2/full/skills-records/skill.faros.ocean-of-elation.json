@@ -1,9 +1,9 @@
 {
   "id": "skill.faros.ocean-of-elation",
+  "displayName": "Ocean of Elation",
   "ownerAwakenerId": "awakener-0017",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Ocean of Elation",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG and an equal amount of {Poison}, which enjoys a [Arg4]% {Tentacle DMG} bonus. Generate [Arg2] Temporary Tentacles. {Tentacle DMG} +[TentaclePower:Arg3].",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "28.8",
         "32"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -33,8 +33,8 @@
         "4.5",
         "5"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg4": {
       "kind": "fixed",
@@ -46,13 +46,13 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0017",
       "id": "upgrade.enlighten.faros.jagged-shore.skill.faros.ocean-of-elation",
       "operation": "override_args",
       "upgraderId": "enlighten.faros.jagged-shore",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Faros",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0017",
+      "ownerAwakenerName": "Faros",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -65,8 +65,8 @@
               "28.8",
               "32"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -82,8 +82,8 @@
               "4.5",
               "5"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg4": {
             "kind": "fixed",

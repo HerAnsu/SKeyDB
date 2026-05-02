@@ -1,13 +1,13 @@
 {
   "id": "relic-0035",
+  "name": "Dimensional Image: Murphy: Fauxborn",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Murphy: Fauxborn",
-  "assetId": "Icon_Creation_Unique_O02EX",
   "ownerAwakenerId": "awakener-0035",
   "ownerAwakenerName": "Murphy: Fauxborn",
   "rarity": "SSR",
   "realm": "AEQUOR",
+  "assetId": "Icon_Creation_Unique_O02EX",
   "descriptionTemplate": "At turn start, Murphy: Fauxborn gains [Arg1] Aliemus. {Waltz of Lemuria} takes effect 3 times every {ordinal:3rd} play.",
   "descriptionArgs": {
     "Arg1": {

@@ -1,9 +1,9 @@
 {
   "id": "skill.lily.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0029",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Lily obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",

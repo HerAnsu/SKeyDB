@@ -1,13 +1,13 @@
 {
   "id": "relic-0022",
+  "name": "Dimensional Image: Hameln",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Hameln",
-  "assetId": "Icon_Creation_Unique_D12",
   "ownerAwakenerId": "awakener-0022",
   "ownerAwakenerName": "Hameln",
   "rarity": "SSR",
   "realm": "CHAOS",
+  "assetId": "Icon_Creation_Unique_D12",
   "descriptionTemplate": "At turn start, Hameln gains [Arg1] Aliemus. The Arithmetica Cost of {Soul Overture} -[Arg2], and the Base DMG count is +[Arg3].",
   "descriptionArgs": {
     "Arg1": {

@@ -1,6 +1,9 @@
 {
   "id": "derived.daffodil.thousand-mirage-effect-brawn",
   "displayName": "Brawn",
+  "ownerAwakenerId": "awakener-0012",
+  "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+  "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
   "descriptionTemplate": "Enjoys an additional 2x {STR} bonus. Obtain [Power:Arg1] {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -13,13 +16,10 @@
         "4.5",
         "5"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
-  "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-  "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-  "ownerAwakenerId": "awakener-0012",
   "cost": "0"
 }

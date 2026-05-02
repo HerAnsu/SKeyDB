@@ -1,9 +1,9 @@
 {
   "id": "skill.liz.emerald-reflection",
+  "displayName": "Emerald Reflection",
   "ownerAwakenerId": "awakener-0030",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Emerald Reflection",
   "descriptionTemplate": "Liz gains [Energy:Arg1] Aliemus. {Rouse}: For every [Arg2] {plural:[Arg2]|instance|instances} of DMG dealt by Liz, put a {Green Flames} with {Exhaust} into hand, up to 3 times per turn.",
   "descriptionArgs": {
     "Arg1": {
@@ -30,14 +30,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0030",
       "id": "upgrade.enlighten.liz.burning-tribute.skill.liz.emerald-reflection",
       "operation": "mixed",
       "upgraderId": "enlighten.liz.burning-tribute",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Liz",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz",
       "patch": {
+        "descriptionTemplate": "Liz gains [Energy:Arg1] Aliemus. {Rouse}: For every [Arg2] {plural:[Arg2]|instance|instances} of DMG Liz deals, put 1 {Green Flames} with {Exhaust} into hand, up to 3 times per turn. Liz's DMG dealt in this battle +[Arg3] for her every 3 instances of DMG.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -57,11 +58,10 @@
           "Arg3": {
             "kind": "fixed",
             "value": "15",
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Liz gains [Energy:Arg1] Aliemus. {Rouse}: For every [Arg2] {plural:[Arg2]|instance|instances} of DMG Liz deals, put 1 {Green Flames} with {Exhaust} into hand, up to 3 times per turn. Liz's DMG dealt in this battle +[Arg3] for her every 3 instances of DMG."
+        }
       }
     }
   ]

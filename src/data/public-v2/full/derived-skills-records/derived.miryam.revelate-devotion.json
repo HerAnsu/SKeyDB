@@ -1,6 +1,9 @@
 {
   "id": "derived.miryam.revelate-devotion",
   "displayName": "Revelate Devotion",
+  "ownerAwakenerId": "awakener-0032",
+  "derivedFromId": "derived.miryam.heretical-faith",
+  "rootSkillId": "skill.miryam.testament-of-faith",
   "descriptionTemplate": "Gain [Power:Arg1] {STR} and [TentaclePower:Arg1] {Tentacle DMG} at turn start.",
   "descriptionArgs": {
     "Arg1": {
@@ -13,12 +16,9 @@
         "3.15",
         "3.5"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
-  "cardKeywords": [],
-  "derivedFromId": "derived.miryam.heretical-faith",
-  "rootSkillId": "skill.miryam.testament-of-faith",
-  "ownerAwakenerId": "awakener-0032"
+  "cardKeywords": []
 }

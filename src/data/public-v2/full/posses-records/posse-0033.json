@@ -1,11 +1,12 @@
 {
   "id": "posse-0033",
   "name": "Tavern's Opening",
+  "realm": "OTHER",
+  "assetId": "KeyToken_Skill_33",
+  "assetCrystalId": "KeyToken_Crystal_33",
+  "assetBadgeId": "KeyToken_Props_33",
+  "lineupToken": "L",
   "descriptionTemplate": "Generate 1 {Leah's Coin} and shuffle it into the Discard Pile.",
   "descriptionArgs": {},
-  "lore": "When one world comes to an end, the prologue of another world begins. Stories will be passed down by people alongside fine wine, but time will write answers for all things.",
-  "realm": "OTHER",
-  "assetId": "posse-icon-33",
-  "imageAssetId": "CG_SD_MyTurn_01",
-  "lineupToken": "L"
+  "lore": "When one world comes to an end, the prologue of another world begins. Stories will be passed down by people alongside fine wine, but time will write answers for all things."
 }

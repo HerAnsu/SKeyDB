@@ -1,9 +1,9 @@
 {
   "id": "skill.erica.parameter-fitting",
+  "displayName": "Parameter Fitting",
   "ownerAwakenerId": "awakener-0015",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Parameter Fitting",
   "descriptionTemplate": "Erica gains [Energy:Arg1] Aliemus. {Rouse}: When Erica deals DMG, she Gains [Power:Arg2] Temporary {STR}; when Erica applies a Shield, she Gains [Arg3] Temporary {Alert}.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "9",
         "10"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -40,8 +40,8 @@
         "2.25",
         "2.5"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -52,14 +52,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0015",
       "id": "upgrade.enlighten.erica.final-decree.skill.erica.parameter-fitting",
       "operation": "mixed",
       "upgraderId": "enlighten.erica.final-decree",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Erica",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0015",
+      "ownerAwakenerName": "Erica",
       "patch": {
+        "descriptionTemplate": "Erica gains [Energy:Arg1] Aliemus. {Rouse}: When Erica deals DMG, she gains [Power:Arg2] Temporary {STR}; when Erica applies a Shield, she gains [Arg3] Temporary {Alert}. After Erica unleashes Exalt, her Exalt additionaly enjoys a 1x {STR} and {Alert} bonuses.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -82,8 +83,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
@@ -95,11 +96,10 @@
               "2.25",
               "2.5"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Erica gains [Energy:Arg1] Aliemus. {Rouse}: When Erica deals DMG, she gains [Power:Arg2] Temporary {STR}; when Erica applies a Shield, she gains [Arg3] Temporary {Alert}. After Erica unleashes Exalt, her Exalt additionaly enjoys a 1x {STR} and {Alert} bonuses."
+        }
       }
     }
   ]

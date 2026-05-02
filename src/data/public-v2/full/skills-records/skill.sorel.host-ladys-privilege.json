@@ -1,9 +1,9 @@
 {
   "id": "skill.sorel.host-ladys-privilege",
+  "displayName": "Host Lady's Privilege",
   "ownerAwakenerId": "awakener-0046",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Host Lady's Privilege",
   "descriptionTemplate": "Sorel gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg2] {STR}. For each instance of DMG dealt by Sorel, gain [Power:Arg3] Temporary {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "8.1",
         "9"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -40,8 +40,8 @@
         "2.7",
         "3"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -52,14 +52,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0046",
       "id": "upgrade.enlighten.sorel.carlate-profond.skill.sorel.host-ladys-privilege",
       "operation": "mixed",
       "upgraderId": "enlighten.sorel.carlate-profond",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Sorel",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
       "patch": {
+        "descriptionTemplate": "Sorel gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg2] {STR}. Each time Sorel deals DMG, gain [Power:Arg3] Temporary {STR}, Sorel's Temporary Final DMG +2%, and other Awakeners' Temporary Final DMG +1%. The Temporary Final DMG increase takes effect up to [Arg4] {plural:[Arg4]|time|times} per turn.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -82,8 +83,8 @@
               "8.1",
               "9"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
@@ -95,15 +96,14 @@
               "2.7",
               "3"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg4": {
             "kind": "fixed",
             "value": "15"
           }
-        },
-        "descriptionTemplate": "Sorel gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg2] {STR}. Each time Sorel deals DMG, gain [Power:Arg3] Temporary {STR}, Sorel's Temporary Final DMG +2%, and other Awakeners' Temporary Final DMG +1%. The Temporary Final DMG increase takes effect up to [Arg4] {plural:[Arg4]|time|times} per turn."
+        }
       }
     }
   ]

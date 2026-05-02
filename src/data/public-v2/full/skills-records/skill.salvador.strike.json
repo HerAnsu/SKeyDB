@@ -1,9 +1,9 @@
 {
   "id": "skill.salvador.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0044",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Salvador obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0044",
       "id": "upgrade.enlighten.salvador.divine-proxy.skill.salvador.strike",
       "operation": "mixed",
       "upgraderId": "enlighten.salvador.divine-proxy",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. For every 2 recovery accumulated from the {Crimson Furnace} in this battle, DMG +[Float:Arg3]. Salvador obtains [Energy:Arg2] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -72,19 +73,19 @@
             "kind": "fixed",
             "value": "1"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. For every 2 recovery accumulated from the {Crimson Furnace} in this battle, DMG +[Float:Arg3]. Salvador obtains [Energy:Arg2] Aliemus."
+        }
       }
     },
     {
-      "ownerAwakenerId": "awakener-0044",
       "id": "upgrade.enlighten.salvador.rite-of-creation.skill.salvador.strike",
       "operation": "mixed",
       "upgraderId": "enlighten.salvador.rite-of-creation",
-      "upgraderSlot": "OverExalt",
-      "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
+      "upgraderSlot": "OverExalt",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. For every 2 recovery accumulated from the {Crimson Furnace} in this battle, DMG +[Float:Arg3]. Salvador obtains [Energy:Arg2] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -96,8 +97,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -114,8 +115,7 @@
             "kind": "fixed",
             "value": "1"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. For every 2 recovery accumulated from the {Crimson Furnace} in this battle, DMG +[Float:Arg3]. Salvador obtains [Energy:Arg2] Aliemus."
+        }
       }
     }
   ]

@@ -1,6 +1,9 @@
 {
   "id": "derived.thais.scion-of-purity",
   "displayName": "Scion of Purity",
+  "ownerAwakenerId": "awakener-0048",
+  "derivedFromId": "skill.thais.ad-matrem-vocatus",
+  "rootSkillId": "skill.thais.ad-matrem-vocatus",
   "descriptionTemplate": "When there is no {Embryo}, this card can be {Devour} and trigger {Devour} twice. When played directly or automatically converted, this card is considered to have 1.5 times the effect of an {Embryo}.",
   "descriptionArgs": {},
   "cardKeywords": [
@@ -11,8 +14,5 @@
       "id": "mechanic.exhaust"
     }
   ],
-  "derivedFromId": "skill.thais.ad-matrem-vocatus",
-  "rootSkillId": "skill.thais.ad-matrem-vocatus",
-  "ownerAwakenerId": "awakener-0048",
   "cost": "0"
 }

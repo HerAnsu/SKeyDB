@@ -1,9 +1,9 @@
 {
   "id": "skill.kathigu-ra.karmic-embers",
+  "displayName": "Karmic Embers",
   "ownerAwakenerId": "awakener-0027",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Karmic Embers",
   "descriptionTemplate": "Kathigu-Ra gains [Energy:Arg1] Aliemus. {Rouse}: At turn start, additionally grant 1 stack of {Fiamma} to 1 of Kathigu-Ra's Command Cards in hand. After playing a Command Card with 3 stacks of {Fiamma}, return it to hand.",
   "descriptionArgs": {
     "Arg1": {
@@ -26,13 +26,13 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0027",
       "id": "upgrade.enlighten.kathigu-ra.ashen-finale.skill.kathigu-ra.karmic-embers",
       "operation": "replace_description",
       "upgraderId": "enlighten.kathigu-ra.ashen-finale",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Kathigu-Ra",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
       "patch": {
         "descriptionTemplate": "Kathigu-Ra gains [Energy:Arg1] Aliemus. {Rouse}: At turn start, additionally grant 1 stack of {Fiamma} to 1 of Kathigu-Ra's Command Cards in hand. After playing a Command Card with 3 stacks of {Fiamma}, return it to hand. Final DMG and {STR} effect per stack of {Fiamma} +30%."
       }

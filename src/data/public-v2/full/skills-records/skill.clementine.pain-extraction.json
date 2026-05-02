@@ -1,9 +1,9 @@
 {
   "id": "skill.clementine.pain-extraction",
+  "displayName": "Pain Extraction",
   "ownerAwakenerId": "awakener-0010",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Pain Extraction",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG [AttackTimes:Arg2] {plural:[AttackTimes:Arg2]|time|times}. Gain [Arg3]% of Clementine's Keyflare Regen as Keyflare. {Quasar}: Obtain [Power:Arg5] {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -38,8 +38,8 @@
         "13.5",
         "15"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [

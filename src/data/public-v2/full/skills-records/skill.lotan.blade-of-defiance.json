@@ -1,9 +1,9 @@
 {
   "id": "skill.lotan.blade-of-defiance",
+  "displayName": "Blade of Defiance",
   "ownerAwakenerId": "awakener-0031",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Blade of Defiance",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to a random enemy, repeat [Arg3] {plural:[Arg3]|time|times}. Each \"Strike\" played this turn reduces its Arithmetica Cost by 1.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "13.5",
         "15"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",
@@ -28,13 +28,13 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0031",
       "id": "upgrade.enlighten.lotan.swords-unleashed.skill.lotan.blade-of-defiance",
       "operation": "replace_description",
       "upgraderId": "enlighten.lotan.swords-unleashed",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Lotan",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0031",
+      "ownerAwakenerName": "Lotan",
       "patch": {
         "descriptionTemplate": "Deal [Damage:Arg1] DMG to a random enemy, repeat [Arg3] {plural:[Arg3]|time|times}. Each \"Strike\" played this turn reduces Arithmetica Cost by 1. Counts as \"Strike\"."
       }

@@ -1,9 +1,9 @@
 {
   "id": "skill.pollux.sinless-verdict",
+  "displayName": "Sinless Verdict",
   "ownerAwakenerId": "awakener-0041",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Sinless Verdict",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. Your next Pollux Command Card this turn gains {Atonement by Pain}. Put 1 {Sacred Heart} into hand.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "270",
         "300"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],

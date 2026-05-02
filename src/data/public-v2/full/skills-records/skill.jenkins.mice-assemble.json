@@ -1,9 +1,9 @@
 {
   "id": "skill.jenkins.mice-assemble",
+  "displayName": "Mice Assemble",
   "ownerAwakenerId": "awakener-0025",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Mice Assemble",
   "descriptionTemplate": "Shuffle 1 {Swarm Impact} that deals [Damage:Arg1] DMG X+4 times into the top of your Draw Pile. {Leap}: Additionally, shuffle 1 {Get 'em! Brown!} into the top of your Draw Pile.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "45",
         "50"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],

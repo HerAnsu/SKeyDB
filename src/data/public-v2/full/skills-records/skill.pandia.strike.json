@@ -1,9 +1,9 @@
 {
   "id": "skill.pandia.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0039",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Pandia obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,13 +35,13 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0039",
       "id": "upgrade.enlighten.pandia.embrace-the-pain.skill.pandia.strike",
       "operation": "replace_description",
       "upgraderId": "enlighten.pandia.embrace-the-pain",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0039",
+      "ownerAwakenerName": "Pandia",
       "patch": {
         "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain Temporary {Counter} for 50% of the Damage. Pandia obtains [Energy:Arg2] Aliemus."
       }

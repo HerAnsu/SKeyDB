@@ -2,10 +2,10 @@
   "id": "overlay.murphy-fauxborn.birth-ritual",
   "displayName": "Birth Ritual",
   "overlayType": "mechanic",
-  "aliases": [],
-  "descriptionTemplate": "Each stack inflicts {Sacrifice} stacks equal to 1% of DMG received. Stacks up to 75. Removed at turn end.",
-  "descriptionArgs": {},
   "ownerAwakenerId": "awakener-0035",
+  "aliases": [],
   "iconId": "Battle_Card_Buff_079",
-  "textColor": "shield"
+  "textColor": "shield",
+  "descriptionTemplate": "Each stack inflicts {Sacrifice} stacks equal to 1% of DMG received. Stacks up to 75. Removed at turn end.",
+  "descriptionArgs": {}
 }

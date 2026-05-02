@@ -10,23 +10,20 @@ function basenameWithoutExt(assetPath: string): string {
   return filename.replace(/\.webp$/i, '')
 }
 
-const posseIconAssetByNumericId = new Map(
-  Object.entries(posseIconAssets).flatMap(([assetPath, url]) => {
-    const suffix = /^KeyToken_Skill_(\d{2})$/.exec(basenameWithoutExt(assetPath))?.[1]
-    return suffix ? [[suffix, url] as const] : []
-  }),
+const posseIconAssetByAssetId = new Map(
+  Object.entries(posseIconAssets).map(([assetPath, url]) => [basenameWithoutExt(assetPath), url]),
 )
-const posseIconNumericIdByPublicId = new Map(
+
+const posseIconAssetIdByPublicId = new Map(
   publicPossesLite.records.flatMap((posse) => {
-    const suffix = /^posse-icon-(\d{2})$/.exec(posse.assetId)?.[1]
-    return suffix ? [[posse.id, suffix] as const] : []
+    return posse.assetId ? [[posse.id, posse.assetId] as const] : []
   }),
 )
 
 export function getPosseAssetById(posseId: string): string | undefined {
-  const iconNumericId = posseIconNumericIdByPublicId.get(posseId)
-  if (!iconNumericId) {
+  const assetId = posseIconAssetIdByPublicId.get(posseId)
+  if (!assetId) {
     return undefined
   }
-  return posseIconAssetByNumericId.get(iconNumericId)
+  return posseIconAssetByAssetId.get(assetId)
 }

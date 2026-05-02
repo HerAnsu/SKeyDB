@@ -1,7 +1,7 @@
 {
   "id": "talent.salvador.shepard-of-the-souls",
-  "ownerAwakenerId": "awakener-0044",
   "displayName": "Shepard of the Souls",
+  "ownerAwakenerId": "awakener-0044",
   "family": "passive",
   "descriptionTemplate": "Salvador's Furnace Healing benefits from the HP Recovery Boost.",
   "descriptionArgs": {}

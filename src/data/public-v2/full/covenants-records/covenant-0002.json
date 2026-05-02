@@ -2,7 +2,7 @@
   "id": "covenant-0002",
   "name": "Re-evolution",
   "assetId": "covenant-icon-002",
-  "lore": "Proliferate, proliferate! Let the souls infused with the blood of the Mother Tree spread across the world.",
+  "lineupToken": "m",
   "setEffects": [
     {
       "set": 3,
@@ -20,5 +20,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "m"
+  "lore": "Proliferate, proliferate! Let the souls infused with the blood of the Mother Tree spread across the world."
 }

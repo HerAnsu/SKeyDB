@@ -1,9 +1,9 @@
 {
   "id": "skill.tinct.distant-melody",
+  "displayName": "Distant Melody",
   "ownerAwakenerId": "awakener-0049",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Distant Melody",
   "descriptionTemplate": "Gain [Block:Arg1] Shield, and Crit. Rate +[Arg2]% in the next turn. {Leap}: Change to Gain [Block:Arg3] Shield, and Crit. Rate +[Arg4]% in the next turn.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "90",
         "100"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -34,8 +34,8 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg4": {
       "kind": "fixed",
@@ -47,13 +47,13 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0049",
       "id": "upgrade.enlighten.tinct.falling-skyward.skill.tinct.distant-melody",
       "operation": "replace_description",
       "upgraderId": "enlighten.tinct.falling-skyward",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Tinct",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0049",
+      "ownerAwakenerName": "Tinct",
       "patch": {
         "descriptionTemplate": "Gain [Block:Arg1] Shield, and increase Crit. Rate and Crit. DMG by +[Arg2]% in the next turn. {Leap}: Instead, Gain [Block:Arg3] Shield, and increase Crit. Rate and Crit. DMG by +[Arg4]% in the next turn."
       }

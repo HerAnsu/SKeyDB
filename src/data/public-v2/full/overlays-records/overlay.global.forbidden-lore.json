@@ -12,114 +12,28 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "computed",
-      "expression": {
-        "op": "mul",
-        "args": [
-          {
-            "var": "somaticResearchHpMultiplier"
-          },
-          {
-            "const": 100.0
-          }
-        ]
-      },
+      "formulaKey": "scaled",
+      "baseFormula": "somaticResearchHpMultiplier",
+      "multiplier": 100.0,
       "inputs": [
-        "somaticResearchHpMultiplier"
+        "accountLevel"
       ]
     },
     "Arg2": {
       "kind": "computed",
-      "expression": {
-        "op": "mul",
-        "args": [
-          {
-            "var": "accountStageGrowth"
-          },
-          {
-            "op": "add",
-            "args": [
-              {
-                "const": 1.0
-              },
-              {
-                "op": "mul",
-                "args": [
-                  {
-                    "op": "min",
-                    "args": [
-                      {
-                        "var": "ownedPosseCount"
-                      },
-                      {
-                        "const": 50.0
-                      }
-                    ]
-                  },
-                  {
-                    "const": 0.01
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
+      "formulaKey": "scaled",
+      "baseFormula": "esotericResearchDepth",
       "inputs": [
-        "accountStageGrowth",
+        "accountLevel",
         "ownedPosseCount"
       ]
     },
     "Arg3": {
       "kind": "computed",
-      "expression": {
-        "op": "mul",
-        "args": [
-          {
-            "var": "accountStageGrowth"
-          },
-          {
-            "op": "mul",
-            "args": [
-              {
-                "var": "accountDamagePower"
-              },
-              {
-                "const": 0.01
-              }
-            ]
-          },
-          {
-            "op": "add",
-            "args": [
-              {
-                "const": 1.0
-              },
-              {
-                "op": "mul",
-                "args": [
-                  {
-                    "op": "min",
-                    "args": [
-                      {
-                        "var": "ownedPosseCount"
-                      },
-                      {
-                        "const": 50.0
-                      }
-                    ]
-                  },
-                  {
-                    "const": 0.01
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
+      "formulaKey": "scaled",
+      "baseFormula": "occultResearchDepth",
       "inputs": [
-        "accountStageGrowth",
-        "accountDamagePower",
+        "accountLevel",
         "ownedPosseCount"
       ]
     }

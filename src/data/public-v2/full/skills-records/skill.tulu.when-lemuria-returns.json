@@ -1,9 +1,9 @@
 {
   "id": "skill.tulu.when-lemuria-returns",
+  "displayName": "When Lemuria Returns",
   "ownerAwakenerId": "awakener-0050",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "When Lemuria Returns",
   "descriptionTemplate": "Dispel self {Weakness} state. Obtain [TentaclePower:Arg1] Temporary {Tentacle DMG} and [Power:Arg1] Temporary {STR}. If the current Stance is {Tranquil Sea}, additionally reduce all enemies' {STR⯆} by [Exhaustion:Arg3] this turn. {Aftershock}: Command 1 Tentacle to attack.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -29,22 +29,23 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0050",
       "id": "upgrade.enlighten.tulu.the-stars-are-right.skill.tulu.when-lemuria-returns",
       "operation": "mixed",
       "upgraderId": "enlighten.tulu.the-stars-are-right",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Tulu",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0050",
+      "ownerAwakenerName": "Tulu",
       "patch": {
+        "descriptionTemplate": "Dispel self {Weakness} state. Obtain [TentaclePower:Arg1] Temporary {Tentacle DMG} and [Power:Arg1] Temporary {STR}. Gain [Arg2]% Temporary Crit. Rate. If the current Stance is {Tranquil Sea}, additionally reduce all enemies' {STR⯆} by [Exhaustion:Arg3] this turn. {Aftershock}: Command 1 Tentacle to attack.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -56,8 +57,8 @@
               "27",
               "30"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -74,11 +75,10 @@
               "36",
               "40"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Dispel self {Weakness} state. Obtain [TentaclePower:Arg1] Temporary {Tentacle DMG} and [Power:Arg1] Temporary {STR}. Gain [Arg2]% Temporary Crit. Rate. If the current Stance is {Tranquil Sea}, additionally reduce all enemies' {STR⯆} by [Exhaustion:Arg3] this turn. {Aftershock}: Command 1 Tentacle to attack."
+        }
       }
     }
   ]

@@ -1,9 +1,9 @@
 {
   "id": "skill.ogier.seven-arts-and-virtues",
+  "displayName": "Seven Arts and Virtues",
   "ownerAwakenerId": "awakener-0038",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Seven Arts and Virtues",
   "descriptionTemplate": "Dispel self {Fragile} state. Gain [Block:Arg1] shield. Obtain [Power:Arg2] Temporary {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,8 +29,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
       "stat": "ATK",
+      "suffix": "%",
       "substatBonus": {
         "substat": "SigilYield",
         "multiplier": "3",
@@ -42,14 +42,15 @@
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0038",
       "id": "upgrade.enlighten.ogier.deathless-loyalty.skill.ogier.seven-arts-and-virtues",
       "operation": "mixed",
       "upgraderId": "enlighten.ogier.deathless-loyalty",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Ogier",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0038",
+      "ownerAwakenerName": "Ogier",
       "patch": {
+        "descriptionTemplate": "If team currently has {Fragile} state, dispel it and Gain [Block:Arg3] Shield. Gain [Block:Arg1] Shield. Obtain [Power:Arg2] Temporary {STR}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -61,8 +62,8 @@
               "64.8",
               "72"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -74,8 +75,8 @@
               "27",
               "30"
             ],
-            "suffix": "%",
             "stat": "ATK",
+            "suffix": "%",
             "substatBonus": {
               "substat": "SigilYield",
               "multiplier": "3",
@@ -92,22 +93,22 @@
               "21.6",
               "24"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "If team currently has {Fragile} state, dispel it and Gain [Block:Arg3] Shield. Gain [Block:Arg1] Shield. Obtain [Power:Arg2] Temporary {STR}."
+        }
       }
     },
     {
-      "ownerAwakenerId": "awakener-0038",
       "id": "upgrade.enlighten.ogier.mercy-for-the-meek.skill.ogier.seven-arts-and-virtues",
       "operation": "mixed",
       "upgraderId": "enlighten.ogier.mercy-for-the-meek",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Ogier",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0038",
+      "ownerAwakenerName": "Ogier",
       "patch": {
+        "descriptionTemplate": "If team currently has {Fragile} state, dispel it and Gain [Block:Arg3] Shield. Gain [Block:Arg1] Shield. Obtain [Power:Arg2] Temporary {STR}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -119,8 +120,8 @@
               "64.8",
               "72"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -132,8 +133,8 @@
               "27",
               "30"
             ],
-            "suffix": "%",
             "stat": "ATK",
+            "suffix": "%",
             "substatBonus": {
               "substat": "SigilYield",
               "multiplier": "3",
@@ -150,11 +151,10 @@
               "21.6",
               "24"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "If team currently has {Fragile} state, dispel it and Gain [Block:Arg3] Shield. Gain [Block:Arg1] Shield. Obtain [Power:Arg2] Temporary {STR}."
+        }
       }
     },
     {

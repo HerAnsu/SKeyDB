@@ -2,21 +2,21 @@
   "id": "overlay.clementine.psychic-trauma",
   "displayName": "Psychic Trauma",
   "overlayType": "mechanic",
-  "aliases": [],
-  "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG taken this turn +3%, stacking up to 10 stacks.",
-  "descriptionArgs": {},
   "ownerAwakenerId": "awakener-0010",
+  "aliases": [],
   "iconId": "Battle_Card_Buff_049",
   "textColor": "affliction",
+  "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG taken this turn +3%, stacking up to 10 stacks.",
+  "descriptionArgs": {},
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0010",
       "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.psychic-trauma",
       "operation": "replace_description",
       "upgraderId": "enlighten.clementine.you-will-recover",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Clementine",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine",
       "patch": {
         "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG taken this turn +3%, stacking up to 15 stacks."
       }

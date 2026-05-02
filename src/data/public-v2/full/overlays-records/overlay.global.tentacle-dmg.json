@@ -3,7 +3,7 @@
   "displayName": "Tentacle DMG",
   "overlayType": "mechanic",
   "aliases": [],
+  "textColor": "misc",
   "descriptionTemplate": "Increases {Tentacle DMG}.",
-  "descriptionArgs": {},
-  "textColor": "misc"
+  "descriptionArgs": {}
 }

@@ -2,6 +2,7 @@
   "id": "overlay.wanda.murmurs",
   "displayName": "Murmurs",
   "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0052",
   "aliases": [
     "Murmur"
   ],
@@ -16,16 +17,15 @@
       "value": "1"
     }
   },
-  "ownerAwakenerId": "awakener-0052",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0052",
       "id": "upgrade.enlighten.wanda.lakeborne-dweller.overlay.wanda.murmurs",
       "operation": "override_args",
       "upgraderId": "enlighten.wanda.lakeborne-dweller",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Wanda",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
       "patch": {
         "descriptionArgs": {
           "StateArg1": {

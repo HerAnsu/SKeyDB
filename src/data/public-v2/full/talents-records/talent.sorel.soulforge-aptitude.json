@@ -1,8 +1,9 @@
 {
   "id": "talent.sorel.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0046",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0046",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF are increase by [Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nSorel gains Temporary {STR} equal to [Arg3]% of her ATK after {Devour}, triggering a maximum of 5 times per round.",
   "descriptionArgs": {
     "Arg1": {
@@ -30,6 +31,5 @@
         "30"
       ]
     }
-  },
-  "maxLevel": 10
+  }
 }

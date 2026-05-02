@@ -1,9 +1,9 @@
 {
   "id": "skill.miryam.pray-to-the-abyss",
+  "displayName": "Pray to the Abyss",
   "ownerAwakenerId": "awakener-0032",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Pray to the Abyss",
   "descriptionTemplate": "Place [Arg4] {Sacrament} into your hand, inflict [{Poison}:Arg5] {Poison} on all enemies. Gain effects based on Tentacle Stance: {Surging Tides}: gain [Power:Arg1] {STR} and [TentaclePower:Arg1] {Tentacle DMG}; {Tranquil Sea}: other Awakeners gain [Energy:Arg2] Aliemus; {Raging Waves}: trigger [Arg3]% of the {Poison} effect on all enemies.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "9",
         "10"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -56,21 +56,21 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0032",
       "id": "upgrade.enlighten.miryam.vanitys-collapse.skill.miryam.pray-to-the-abyss",
       "operation": "override_args",
       "upgraderId": "enlighten.miryam.vanitys-collapse",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -83,8 +83,8 @@
               "9",
               "10"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -123,8 +123,8 @@
               "54",
               "60"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
         }
       }

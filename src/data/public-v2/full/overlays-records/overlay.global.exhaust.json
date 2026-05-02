@@ -5,7 +5,7 @@
   "aliases": [
     "Exhausted"
   ],
+  "textColor": "damage",
   "descriptionTemplate": "After playing, this card is removed from deck instead of discarded.",
-  "descriptionArgs": {},
-  "textColor": "damage"
+  "descriptionArgs": {}
 }

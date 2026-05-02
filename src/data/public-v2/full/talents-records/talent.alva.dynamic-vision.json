@@ -1,7 +1,7 @@
 {
   "id": "talent.alva.dynamic-vision",
-  "ownerAwakenerId": "awakener-0004",
   "displayName": "Dynamic Vision",
+  "ownerAwakenerId": "awakener-0004",
   "family": "passive",
   "descriptionTemplate": ": For every 1% {Death Resistance} that Alva has, the Base DMG +0.5%.",
   "descriptionArgs": {}

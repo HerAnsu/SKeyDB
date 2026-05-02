@@ -1,6 +1,6 @@
 import {z} from 'zod'
 
-import publicWheelsLite from '@/data/public-v2/lite/wheels.json'
+import {gameplayMathMetadata} from './gameplay-math-metadata'
 
 export const WHEEL_MAINSTAT_KEYS = [
   'CRIT_RATE',
@@ -68,18 +68,8 @@ const wheelMainstatScalingSourceSchema = z
     }
   })
 
-const publicWheelsMetadataSchema = z
-  .object({
-    metadata: z
-      .object({
-        mainstatScaling: wheelMainstatScalingSourceSchema,
-      })
-      .loose(),
-  })
-  .loose()
-
 const parsedWheelMainstatScaling: WheelMainstatScalingSource =
-  publicWheelsMetadataSchema.parse(publicWheelsLite).metadata.mainstatScaling
+  wheelMainstatScalingSourceSchema.parse(gameplayMathMetadata.wheelMainstatScaling)
 
 const wheelMainstatSeriesByKey = new Map(
   parsedWheelMainstatScaling.series.map((series) => [series.seriesKey, series]),
@@ -143,7 +133,7 @@ export function resolveWheelMainstatValue(
   }
 
   const normalizedLevel = Math.max(0, Math.floor(enhanceLevel))
-  const growthSteps = Math.max(0, normalizedLevel - parsedWheelMainstatScaling.growthStartLevel + 1)
+  const growthSteps = Math.max(0, normalizedLevel - parsedWheelMainstatScaling.growthStartLevel)
 
   return formatWheelMainstatValue(
     baseValue.numericValue + perLevel.numericValue * growthSteps,

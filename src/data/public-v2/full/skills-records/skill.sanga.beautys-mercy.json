@@ -1,9 +1,9 @@
 {
   "id": "skill.sanga.beautys-mercy",
+  "displayName": "Beauty's Mercy",
   "ownerAwakenerId": "awakener-0045",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Beauty's Mercy",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Gain [Arg2] Tentacle. {Aftershock}: Gain an amount of Aliemus equal to the current Tentacle Count.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "43.2",
         "48"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -28,14 +28,15 @@
   "cost": "4",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0045",
       "id": "upgrade.enlighten.sanga.kneel-before-beauty.skill.sanga.beautys-mercy",
       "operation": "mixed",
       "upgraderId": "enlighten.sanga.kneel-before-beauty",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Sanga",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0045",
+      "ownerAwakenerName": "Sanga",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield, for each Tentacle, gain an additional [Arg3] Shield. Gain [Arg2] Tentacles. {Aftershock}: Gain Aliemus equal to the current Tentacle Count.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -47,9 +48,9 @@
               "43.2",
               "48"
             ],
-            "suffix": "%",
+            "rounding": "ceil",
             "stat": "DEF",
-            "rounding": "ceil"
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -65,11 +66,10 @@
               "5.4",
               "6"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield, for each Tentacle, gain an additional [Arg3] Shield. Gain [Arg2] Tentacles. {Aftershock}: Gain Aliemus equal to the current Tentacle Count."
+        }
       }
     }
   ]

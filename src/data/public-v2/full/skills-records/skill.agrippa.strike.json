@@ -1,9 +1,9 @@
 {
   "id": "skill.agrippa.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0002",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Agrippa obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0002",
       "id": "upgrade.enlighten.agrippa.ashes-and-skulls.skill.agrippa.strike",
       "operation": "mixed",
       "upgraderId": "enlighten.agrippa.ashes-and-skulls",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Agrippa",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0002",
+      "ownerAwakenerName": "Agrippa",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Agrippa obtains [Energy:Arg2] Aliemus. Trigger [Arg3]% {Poison} on all enemies.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -73,8 +74,7 @@
             "value": "10",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Agrippa obtains [Energy:Arg2] Aliemus. Trigger [Arg3]% {Poison} on all enemies."
+        }
       }
     }
   ]

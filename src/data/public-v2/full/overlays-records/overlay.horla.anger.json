@@ -2,6 +2,7 @@
   "id": "overlay.horla.anger",
   "displayName": "Anger",
   "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0024",
   "aliases": [],
   "descriptionTemplate": "The Final DMG dealt by all Awakeners +[StateArg1]%. Increase the temporary Crit. Rate and Crit. DMG gained by {Resplendent Chapters}.",
   "descriptionArgs": {
@@ -13,6 +14,5 @@
         "multiplier": "0.02"
       }
     }
-  },
-  "ownerAwakenerId": "awakener-0024"
+  }
 }

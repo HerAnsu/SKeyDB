@@ -1,6 +1,9 @@
 {
   "id": "derived.arachne.guiding-strings",
   "displayName": "Guiding Strings",
+  "ownerAwakenerId": "awakener-0056",
+  "derivedFromId": "skill.arachne.eternal-loom",
+  "rootSkillId": "skill.arachne.eternal-loom",
   "descriptionTemplate": "Lose [Arg1]% Max HP, gain 1 stack of {Weaver}.\nThis battle, HP lost from {Guiding Strings} and {Final Verdict} dealt by Arachne +10%.\n{Fleeting}: Arachne randomly gains 15~30 Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -14,8 +17,5 @@
       "id": "mechanic.exhaust"
     }
   ],
-  "derivedFromId": "skill.arachne.eternal-loom",
-  "rootSkillId": "skill.arachne.eternal-loom",
-  "ownerAwakenerId": "awakener-0056",
   "cost": "0"
 }

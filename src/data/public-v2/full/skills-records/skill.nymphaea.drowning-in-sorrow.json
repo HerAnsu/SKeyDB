@@ -1,9 +1,9 @@
 {
   "id": "skill.nymphaea.drowning-in-sorrow",
+  "displayName": "Drowning in Sorrow",
   "ownerAwakenerId": "awakener-0037",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Drowning in Sorrow",
   "descriptionTemplate": "Nymphaea gains [Energy:Arg1] Aliemus. {Rouse}: After Nymphaea plays a card, she gains [Energy:Arg2] Aliemus. At turn end, increase the amount of {Poison} Nymphaea inflicts by [Arg3]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -49,14 +49,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0037",
       "id": "upgrade.enlighten.nymphaea.sentiment-oc-anique.skill.nymphaea.drowning-in-sorrow",
       "operation": "mixed",
       "upgraderId": "enlighten.nymphaea.sentiment-oc-anique",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Nymphaea",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0037",
+      "ownerAwakenerName": "Nymphaea",
       "patch": {
+        "descriptionTemplate": "Nymphaea gains [Energy:Arg1] Aliemus. {Rouse}: After Nymphaea plays a card, gain [Energy:Arg2] Aliemus. At turn end, {Poison} inflicted by Nymphaea +[Arg4]%.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -92,8 +93,7 @@
             ],
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Nymphaea gains [Energy:Arg1] Aliemus. {Rouse}: After Nymphaea plays a card, gain [Energy:Arg2] Aliemus. At turn end, {Poison} inflicted by Nymphaea +[Arg4]%."
+        }
       }
     }
   ]

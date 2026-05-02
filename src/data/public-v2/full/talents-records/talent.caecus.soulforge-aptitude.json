@@ -1,8 +1,9 @@
 {
   "id": "talent.caecus.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0006",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0006",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nThe first Caecus Command Card played each turn restores HP equal to [Arg3]% of his CON. The Tentacle attack and {Counter} effect of {Bloodline of Heresy} additionally deal [Arg4]% DMG.",
   "descriptionArgs": {
     "Arg1": {
@@ -45,6 +46,5 @@
         "150"
       ]
     }
-  },
-  "maxLevel": 10
+  }
 }

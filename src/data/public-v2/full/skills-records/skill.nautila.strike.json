@@ -1,9 +1,9 @@
 {
   "id": "skill.nautila.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0036",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Nautila obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0036",
       "id": "upgrade.enlighten.nautila.blank-recollection.skill.nautila.strike",
       "operation": "mixed",
       "upgraderId": "enlighten.nautila.blank-recollection",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Nautila",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0036",
+      "ownerAwakenerName": "Nautila",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Nautila obtains [Energy:Arg2] Aliemus. Obtain [Counterattack:Arg3] stacks of {Counter}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -78,11 +79,10 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Nautila obtains [Energy:Arg2] Aliemus. Obtain [Counterattack:Arg3] stacks of {Counter}."
+        }
       }
     }
   ]

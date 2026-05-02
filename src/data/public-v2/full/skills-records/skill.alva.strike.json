@@ -1,9 +1,9 @@
 {
   "id": "skill.alva.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0004",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Alva obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
       "stat": "ATK",
+      "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
         "multiplier": "0.5",

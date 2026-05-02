@@ -1,8 +1,9 @@
 {
   "id": "talent.doll.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0013",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0013",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nDoll's Aliemus Generation and Exalt Healing Effect +[Arg3]%, and for each other {Chaos} Realm Awakener in the team, this effect is further increased by [Arg4]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -34,6 +35,5 @@
       "kind": "fixed",
       "value": "5"
     }
-  },
-  "maxLevel": 10
+  }
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.sanga.opus-of-isolation",
+  "displayName": "Opus of Isolation",
   "ownerAwakenerId": "awakener-0045",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Opus of Isolation",
   "descriptionTemplate": "At the start of next turn, dispel {Fragile} state on self and gain [Block:Arg1] Shield.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,22 +16,23 @@
         "50.4",
         "56"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0045",
       "id": "upgrade.enlighten.sanga.melodic-sculpting.skill.sanga.opus-of-isolation",
       "operation": "mixed",
       "upgraderId": "enlighten.sanga.melodic-sculpting",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Sanga",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0045",
+      "ownerAwakenerName": "Sanga",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg2] Shield. At the start of next turn, dispel {Fragile} state on self and gain [Block:Arg1] Shield.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -43,8 +44,8 @@
               "50.4",
               "56"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -56,11 +57,10 @@
               "14.4",
               "16"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg2] Shield. At the start of next turn, dispel {Fragile} state on self and gain [Block:Arg1] Shield."
+        }
       }
     }
   ]

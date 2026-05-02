@@ -1,8 +1,8 @@
 {
   "id": "enlighten.caecus.bloodline-awaken",
+  "displayName": "Bloodline Awaken",
   "ownerAwakenerId": "awakener-0006",
   "slot": "E1",
-  "displayName": "Bloodline Awaken",
   "descriptionTemplate": "{Shattered Halberd} grants [Arg1] Aliemus. (effect scales with {Shattered Halberd} skill level)",
   "descriptionArgs": {
     "Arg1": {

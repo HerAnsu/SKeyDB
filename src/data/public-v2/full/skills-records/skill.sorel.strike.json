@@ -1,9 +1,9 @@
 {
   "id": "skill.sorel.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0046",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Sorel obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0046",
       "id": "upgrade.enlighten.sorel.flowing-rill.skill.sorel.strike",
       "operation": "mixed",
       "upgraderId": "enlighten.sorel.flowing-rill",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Sorel",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. If current HP is below 50%, deal an additional 1 instance of DMG, {Embryo Fusion} +[Blood:Arg3]%. Sorel obtains [Energy:Arg2] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -73,8 +74,7 @@
             "value": "10",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. If current HP is below 50%, deal an additional 1 instance of DMG, {Embryo Fusion} +[Blood:Arg3]%. Sorel obtains [Energy:Arg2] Aliemus."
+        }
       }
     }
   ]

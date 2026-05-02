@@ -1,9 +1,9 @@
 {
   "id": "skill.jenkins.spatial-fold",
+  "displayName": "Spatial Fold",
   "ownerAwakenerId": "awakener-0025",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Spatial Fold",
   "descriptionTemplate": "Jenkin gains [Energy:Arg1] Aliemus. {Rouse}: Crit. Rate +[Arg2]%. Each time Jenkin deals DMG, Temporary Crit. DMG +[Arg3]%, stacking up to 5 times per turn.",
   "descriptionArgs": {
     "Arg1": {
@@ -36,13 +36,13 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0025",
       "id": "upgrade.enlighten.jenkins.from-the-shrouded-mist.skill.jenkins.spatial-fold",
       "operation": "replace_description",
       "upgraderId": "enlighten.jenkins.from-the-shrouded-mist",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Jenkin",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0025",
+      "ownerAwakenerName": "Jenkin",
       "patch": {
         "descriptionTemplate": "Jenkin gains [Energy:Arg1] Aliemus. {Rouse}: Crit. Rate +[Arg2]%, and each time Jenkin deals DMG, Temporary Crit. DMG +[Arg3]%, stacking up to 5 times per turn. Double the Crit. DMG effect of {Spatial Fold} and {Mistborn Street Urchin}."
       }

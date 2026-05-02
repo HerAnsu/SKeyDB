@@ -1,6 +1,9 @@
 {
   "id": "derived.jenkins.ultimate-assemble",
   "displayName": "Ultimate Assemble!",
+  "ownerAwakenerId": "awakener-0025",
+  "derivedFromId": "skill.jenkins.gotcha",
+  "rootSkillId": "skill.jenkins.gotcha",
   "descriptionTemplate": "Shuffle 1 card that Deal [Damage:Arg1] DMG X+10 times, {Swarm Impact} into the top of the Draw pile.",
   "descriptionArgs": {
     "Arg1": {
@@ -13,8 +16,8 @@
         "45",
         "50"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -25,8 +28,5 @@
       "id": "mechanic.retain"
     }
   ],
-  "derivedFromId": "skill.jenkins.gotcha",
-  "rootSkillId": "skill.jenkins.gotcha",
-  "ownerAwakenerId": "awakener-0025",
   "cost": "X"
 }

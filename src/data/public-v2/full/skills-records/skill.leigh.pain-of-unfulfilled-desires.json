@@ -1,9 +1,9 @@
 {
   "id": "skill.leigh.pain-of-unfulfilled-desires",
+  "displayName": "Pain of Unfulfilled Desires",
   "ownerAwakenerId": "awakener-0028",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Pain of Unfulfilled Desires",
   "descriptionTemplate": "Lose [Arg1]% Current HP. {Embryo Fusion}+[Blood:Arg3]%. Obtain [Power:Arg2] Temporary {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -21,8 +21,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -41,14 +41,15 @@
   "cost": "0",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0028",
       "id": "upgrade.enlighten.leigh.step-into-the-sunlight.skill.leigh.pain-of-unfulfilled-desires",
       "operation": "mixed",
       "upgraderId": "enlighten.leigh.step-into-the-sunlight",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Leigh",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0028",
+      "ownerAwakenerName": "Leigh",
       "patch": {
+        "descriptionTemplate": "Lose [Arg1]% Current HP. {Embryo Fusion}+[Blood:Arg3]%. Obtain [Power:Arg2] Temporary {STR}. Gain [Energy:Arg5] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "fixed",
@@ -65,8 +66,8 @@
               "27",
               "30"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
@@ -84,8 +85,7 @@
             "kind": "fixed",
             "value": "10"
           }
-        },
-        "descriptionTemplate": "Lose [Arg1]% Current HP. {Embryo Fusion}+[Blood:Arg3]%. Obtain [Power:Arg2] Temporary {STR}. Gain [Energy:Arg5] Aliemus."
+        }
       }
     }
   ]

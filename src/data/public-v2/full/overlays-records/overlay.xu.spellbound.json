@@ -2,7 +2,10 @@
   "id": "overlay.xu.spellbound",
   "displayName": "Spellbound",
   "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0054",
   "aliases": [],
+  "iconId": "Battle_Card_Buff_080",
+  "textColor": "damage",
   "descriptionTemplate": "For each stack, Fixed {Poison} taken +5%, DMG dealt -[DescArg1]%. Stacks up to [DescArg2].",
   "descriptionArgs": {
     "DescArg1": {
@@ -15,18 +18,15 @@
       "value": "5"
     }
   },
-  "ownerAwakenerId": "awakener-0054",
-  "iconId": "Battle_Card_Buff_080",
-  "textColor": "damage",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0054",
       "id": "upgrade.enlighten.xu.nirvanas-kiss.overlay.xu.spellbound",
       "operation": "override_args",
       "upgraderId": "enlighten.xu.nirvanas-kiss",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Xu",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
       "patch": {
         "descriptionArgs": {
           "DescArg1": {

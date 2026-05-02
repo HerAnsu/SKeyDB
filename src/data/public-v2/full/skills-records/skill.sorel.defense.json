@@ -1,9 +1,9 @@
 {
   "id": "skill.sorel.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0046",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Sorel obtains [Energy:Arg3] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -39,14 +39,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0046",
       "id": "upgrade.enlighten.sorel.flowing-rill.skill.sorel.defense",
       "operation": "mixed",
       "upgraderId": "enlighten.sorel.flowing-rill",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Sorel",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. If current HP is below 50%, obtain an additional Shield, {Embryo Fusion} +[Blood:Arg4]%. Sorel obtains [Energy:Arg3] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -58,8 +59,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
@@ -81,8 +82,7 @@
             "value": "10",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. If current HP is below 50%, obtain an additional Shield, {Embryo Fusion} +[Blood:Arg4]%. Sorel obtains [Energy:Arg3] Aliemus."
+        }
       }
     }
   ]

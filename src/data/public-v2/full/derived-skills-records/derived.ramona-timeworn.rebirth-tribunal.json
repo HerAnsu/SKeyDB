@@ -1,10 +1,10 @@
 {
   "id": "derived.ramona-timeworn.rebirth-tribunal",
   "displayName": "Rebirth Tribunal",
-  "descriptionTemplate": "Obtain 3 Arithmetica.",
-  "descriptionArgs": {},
-  "cardKeywords": [],
+  "ownerAwakenerId": "awakener-0020",
   "derivedFromId": "skill.ramona-timeworn.predetermined-strike",
   "rootSkillId": "skill.ramona-timeworn.predetermined-strike",
-  "ownerAwakenerId": "awakener-0020"
+  "descriptionTemplate": "Obtain 3 Arithmetica.",
+  "descriptionArgs": {},
+  "cardKeywords": []
 }

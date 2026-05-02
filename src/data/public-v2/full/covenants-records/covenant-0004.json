@@ -2,7 +2,7 @@
   "id": "covenant-0004",
   "name": "Crimson Pulse",
   "assetId": "covenant-icon-005",
-  "lore": "The fabled architect of the automatons, who nourished his creations with his own blood.",
+  "lineupToken": "h",
   "setEffects": [
     {
       "set": 3,
@@ -21,5 +21,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "h"
+  "lore": "The fabled architect of the automatons, who nourished his creations with his own blood."
 }

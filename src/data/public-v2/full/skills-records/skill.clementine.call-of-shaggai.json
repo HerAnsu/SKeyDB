@@ -1,9 +1,9 @@
 {
   "id": "skill.clementine.call-of-shaggai",
+  "displayName": "Call of Shaggai",
   "ownerAwakenerId": "awakener-0010",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Call of Shaggai",
   "descriptionTemplate": "Clementine gains [Energy:Arg1] Aliemus. {Rouse}: Clementine's first Command Card played each turn triggers its DMG, Shield, HP Recovery, Aliemus, and Keyflare effects +[Arg2] {plural:[Arg2]|time|times}.",
   "descriptionArgs": {
     "Arg1": {
@@ -30,13 +30,13 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0010",
       "id": "upgrade.enlighten.clementine.collective-unconscious.skill.clementine.call-of-shaggai",
       "operation": "replace_description",
       "upgraderId": "enlighten.clementine.collective-unconscious",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Clementine",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine",
       "patch": {
         "descriptionTemplate": "Clementine gains [Energy:Arg1] Aliemus. {Rouse}: Clementine's DMG instances +1. Clementine's first Command Card played each turn triggers its DMG, Shield, HP Recovery, Aliemus, and Keyflare effects +[Arg2] {plural:[Arg2]|time|times}. The {Symbiosis} cap is raised to 20."
       }

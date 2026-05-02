@@ -6,11 +6,7 @@ import {
   resolveDescriptionArg,
   resolveDescriptionTemplate,
 } from './description-args'
-import {
-  evaluatePublicFormulaExpression,
-  type ComputedExpression,
-  type PublicDescriptionArg,
-} from './public-description-args'
+import {evaluatePublicFormulaExpression, type PublicDescriptionArg} from './public-description-args'
 
 describe('public-description-args', () => {
   it('renders fixed args through the public arg contract', () => {
@@ -52,19 +48,19 @@ describe('public-description-args', () => {
     expect(buildDescriptionArgHover(arg, {maxRank: 2})).toBe('Lv1: 10% DEF\nLv2: 20% DEF')
   })
 
-  it('resolves reviewed computed args with producer-shaped expressions', () => {
+  it('resolves scaled computed args from gameplay metadata account curves', () => {
     const arg: PublicDescriptionArg = {
       kind: 'computed',
-      expression: {
-        op: 'ceil',
-        args: [{op: 'mul', args: [{var: 'accountStageGrowth'}, {const: 0.0125}]}],
-      },
-      inputs: ['accountStageGrowth'],
+      formulaKey: 'scaled',
+      baseFormula: 'accountStageGrowth',
+      multiplier: 0.0125,
+      rounding: 'ceil',
+      inputs: ['accountLevel'],
       suffix: '%',
     }
 
     expect(
-      evaluatePublicFormulaExpression(arg.expression, {accountStageGrowth: 241}),
+      evaluatePublicFormulaExpression(arg, {accountLevel: 33, ownedPosseCount: 0}),
     ).toStrictEqual({
       resolved: true,
       value: 4,
@@ -74,44 +70,58 @@ describe('public-description-args', () => {
         'Increase final DMG by [Arg1].',
         {Arg1: arg},
         {
-          formulaContext: {accountStageGrowth: 241},
+          formulaContext: {accountLevel: 33, ownedPosseCount: 0},
         },
       ),
     ).toBe('Increase final DMG by 4%.')
   })
 
-  it('resolves account damage power as an explicit reviewed public input', () => {
+  it('derives occult research depth from account level and owned posse count', () => {
     expect(
-      evaluatePublicFormulaExpression({var: 'accountDamagePower'}, {accountDamagePower: 17}),
+      evaluatePublicFormulaExpression(
+        {
+          kind: 'computed',
+          formulaKey: 'scaled',
+          baseFormula: 'occultResearchDepth',
+          rounding: 'ceil',
+          inputs: ['accountLevel', 'ownedPosseCount'],
+        },
+        {accountLevel: 1, ownedPosseCount: 100},
+      ),
     ).toStrictEqual({
       resolved: true,
-      value: 17,
+      value: 106,
     })
   })
 
-  it('leaves unknown computed variables unresolved', () => {
-    const expression = {var: 'privateRuntimeValue'} as unknown as ComputedExpression
-
-    expect(evaluatePublicFormulaExpression(expression, {accountDamagePower: 17})).toStrictEqual({
-      resolved: false,
-      value: null,
-    })
+  it('resolves wheel refinement linear computed args from wheel refinement level', () => {
+    expect(
+      evaluatePublicFormulaExpression(
+        {
+          kind: 'computed',
+          formulaKey: 'wheelRefinementLinear',
+          baseValue: 5,
+          perLevel: 1.5,
+          inputs: ['wheelRefinementLevel'],
+        },
+        {accountLevel: 100, ownedPosseCount: 0, wheelRefinementLevel: 4},
+      ),
+    ).toStrictEqual({resolved: true, value: 11})
   })
 
   it('falls back gracefully when computed arg context is missing', () => {
     const arg: PublicDescriptionArg = {
       kind: 'computed',
-      expression: {
-        op: 'ceil',
-        args: [{op: 'mul', args: [{var: 'accountStageGrowth'}, {const: 0.0125}]}],
-      },
-      inputs: ['accountStageGrowth'],
+      formulaKey: 'wheelRefinementLinear',
+      baseValue: 5,
+      perLevel: 1.5,
+      inputs: ['wheelRefinementLevel'],
       suffix: '%',
     }
 
     const resolved = resolveDescriptionArg(arg)
 
-    expect(evaluatePublicFormulaExpression(arg.expression)).toStrictEqual({
+    expect(evaluatePublicFormulaExpression(arg)).toStrictEqual({
       resolved: false,
       value: null,
     })
@@ -124,13 +134,10 @@ describe('public-description-args', () => {
     )
   })
 
-  it('treats unknown computed operators as unresolved', () => {
-    const expression = {
-      op: 'div',
-      args: [{const: 10}, {const: 2}],
-    } as unknown as ComputedExpression
-
-    expect(evaluatePublicFormulaExpression(expression)).toStrictEqual({
+  it('treats unknown computed formula keys as unresolved', () => {
+    expect(
+      evaluatePublicFormulaExpression({kind: 'computed', formulaKey: 'unknown'} as never),
+    ).toStrictEqual({
       resolved: false,
       value: null,
     })

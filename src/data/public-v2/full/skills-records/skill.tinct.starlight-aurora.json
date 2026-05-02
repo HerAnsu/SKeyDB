@@ -1,9 +1,9 @@
 {
   "id": "skill.tinct.starlight-aurora",
+  "displayName": "Starlight Aurora",
   "ownerAwakenerId": "awakener-0049",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Starlight Aurora",
   "descriptionTemplate": "Obtain [Power:Arg1] {STR}. Temporary Crit. Rate +[Arg2]%. For this battle, Tinct's Strike Base DMG +[Arg3]%. Randomly select 5 cards in hand and reduce their Arithmetica Cost by 1 until the turn ends.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,17 +16,17 @@
         "13.5",
         "15"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
       "value": "15",
+      "suffix": "%",
       "substatBonus": {
         "substat": "SigilYield",
         "multiplier": "0.15"
-      },
-      "suffix": "%"
+      }
     },
     "Arg3": {
       "kind": "fixed",
@@ -38,13 +38,13 @@
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0049",
       "id": "upgrade.enlighten.tinct.falling-skyward.skill.tinct.starlight-aurora",
       "operation": "replace_description",
       "upgraderId": "enlighten.tinct.falling-skyward",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Tinct",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0049",
+      "ownerAwakenerName": "Tinct",
       "patch": {
         "descriptionTemplate": "Obtain [Power:Arg1] {STR}. Temporary Crit. Rate and Crit. DMG +[Arg2]%. For the duration of this battle, Tinct's \"Strike\" Base DMG +[Arg3]%. Reduce the Arithmetica Cost of 5 random cards in hand by 1 until turn end."
       }

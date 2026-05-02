@@ -2,6 +2,7 @@
   "id": "overlay.24.realm-and-persona",
   "displayName": "Realm and Persona",
   "overlayType": "tag",
+  "ownerAwakenerId": "awakener-0001",
   "aliases": [
     "Realm and Persona Effects"
   ],
@@ -28,8 +29,8 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "StateArg3": {
       "kind": "scaling",
@@ -41,8 +42,8 @@
         "11.7",
         "13"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "StateArg4": {
       "kind": "scaling",
@@ -76,8 +77,8 @@
         "72",
         "80"
       ],
-      "suffix": "%",
-      "stat": "CON"
+      "stat": "CON",
+      "suffix": "%"
     },
     "StateArg7": {
       "kind": "scaling",
@@ -89,8 +90,8 @@
         "11.7",
         "13"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "StateArg8": {
       "kind": "scaling",
@@ -102,8 +103,8 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "StateArg9": {
       "kind": "scaling",
@@ -115,15 +116,14 @@
         "135",
         "150"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "StateArg10": {
       "kind": "fixed",
       "value": "375",
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
-  },
-  "ownerAwakenerId": "awakener-0001"
+  }
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.winkle.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0053",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Winkle obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,13 +35,13 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0053",
       "id": "upgrade.enlighten.winkle.dread-of-the-darkness.skill.winkle.strike",
       "operation": "replace_description",
       "upgraderId": "enlighten.winkle.dread-of-the-darkness",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Winkle",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0053",
+      "ownerAwakenerName": "Winkle",
       "patch": {
         "descriptionTemplate": "Deal [Damage:Arg1] DMG. Winkle obtains [Energy:Arg2] Aliemus. The DMG dealt enjoys a 25% {Counter} bonus."
       }

@@ -2,7 +2,7 @@
   "id": "covenant-0008",
   "name": "Cursed Rabbit",
   "assetId": "covenant-icon-010",
-  "lore": "Everyone will love the fluffy white rabbit, including the lovely Alice.",
+  "lineupToken": "e",
   "setEffects": [
     {
       "set": 3,
@@ -20,5 +20,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "e"
+  "lore": "Everyone will love the fluffy white rabbit, including the lovely Alice."
 }

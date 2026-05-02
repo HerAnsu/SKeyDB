@@ -1,9 +1,9 @@
 {
   "id": "skill.doll.equivalent-exchange",
+  "displayName": "Equivalent Exchange",
   "ownerAwakenerId": "awakener-0013",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Equivalent Exchange",
   "descriptionTemplate": "Heal [Heal:Arg1] HP. Discard all cards in hand. For each card discarded, heal an additional [Heal:Arg2] HP.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "45",
         "50"
       ],
-      "suffix": "%",
       "stat": "CON",
+      "suffix": "%",
       "substatBonus": {
         "substat": "AliemusRegen",
         "multiplier": "0.5",
@@ -34,28 +34,29 @@
         "9",
         "10"
       ],
-      "suffix": "%",
+      "rounding": "ceil",
       "stat": "CON",
+      "suffix": "%",
       "substatBonus": {
         "substat": "AliemusRegen",
         "multiplier": "0.5",
         "mode": "scale_base"
-      },
-      "rounding": "ceil"
+      }
     }
   },
   "cardKeywords": [],
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0013",
       "id": "upgrade.enlighten.doll.beyond-death.skill.doll.equivalent-exchange",
       "operation": "mixed",
       "upgraderId": "enlighten.doll.beyond-death",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Doll",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0013",
+      "ownerAwakenerName": "Doll",
       "patch": {
+        "descriptionTemplate": "Heal [Heal:Arg1] HP. Discard all cards in hand. For each card discarded, heal an additional [Heal:Arg2] HP and gain the same amount of Shield.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -67,8 +68,8 @@
               "54",
               "60"
             ],
-            "suffix": "%",
             "stat": "CON",
+            "suffix": "%",
             "substatBonus": {
               "substat": "AliemusRegen",
               "multiplier": "0.5",
@@ -85,17 +86,16 @@
               "10.8",
               "12"
             ],
-            "suffix": "%",
+            "rounding": "ceil",
             "stat": "CON",
+            "suffix": "%",
             "substatBonus": {
               "substat": "AliemusRegen",
               "multiplier": "0.5",
               "mode": "scale_base"
-            },
-            "rounding": "ceil"
+            }
           }
-        },
-        "descriptionTemplate": "Heal [Heal:Arg1] HP. Discard all cards in hand. For each card discarded, heal an additional [Heal:Arg2] HP and gain the same amount of Shield."
+        }
       }
     }
   ]

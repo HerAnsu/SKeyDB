@@ -1,9 +1,9 @@
 {
   "id": "skill.faint.boundless-starlight",
+  "displayName": "Boundless Starlight",
   "ownerAwakenerId": "awakener-0016",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Boundless Starlight",
   "descriptionTemplate": "Faint gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Counterattack:Arg3] stacks of {Counter}. The {Death Resistance} decay rate is reduced from 50% to 45% during this battle. When Faint plays a card, {Steal} [Arg2] {STR} from all enemies. At turn end, deal {Fixed DMG} equal to 50% of Faint's {Counter}.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "9",
         "10"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -40,8 +40,8 @@
         "108",
         "120"
       ],
-      "suffix": "%",
       "stat": "ATK",
+      "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
         "multiplier": "0.2",
@@ -57,14 +57,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0016",
       "id": "upgrade.enlighten.faint.ever-barren-rainbow.skill.faint.boundless-starlight",
       "operation": "mixed",
       "upgraderId": "enlighten.faint.ever-barren-rainbow",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Faint",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0016",
+      "ownerAwakenerName": "Faint",
       "patch": {
+        "descriptionTemplate": "Faint gains [Energy:Arg1] Aliemus. {Rouse}: Immediately and permanently {Steal} [Arg4] {STR} from all enemies. Gain [Counterattack:Arg3] {plural:[Counterattack:Arg3]|stack|stacks} of {Counter}. The {Death Resistance} decay rate for this battle is reduced from 50% to 45%. When Faint plays a card, {Steal} [Arg2] {STR} from all enemies. At turn end, deal {Fixed DMG} equal to 50% of Faint's {Counter}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -87,8 +88,8 @@
               "9",
               "10"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
@@ -100,8 +101,8 @@
               "108",
               "120"
             ],
-            "suffix": "%",
             "stat": "ATK",
+            "suffix": "%",
             "substatBonus": {
               "substat": "DeathResistance",
               "multiplier": "0.2",
@@ -111,11 +112,10 @@
           "Arg4": {
             "kind": "fixed",
             "value": "20",
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Faint gains [Energy:Arg1] Aliemus. {Rouse}: Immediately and permanently {Steal} [Arg4] {STR} from all enemies. Gain [Counterattack:Arg3] {plural:[Counterattack:Arg3]|stack|stacks} of {Counter}. The {Death Resistance} decay rate for this battle is reduced from 50% to 45%. When Faint plays a card, {Steal} [Arg2] {STR} from all enemies. At turn end, deal {Fixed DMG} equal to 50% of Faint's {Counter}."
+        }
       }
     },
     {

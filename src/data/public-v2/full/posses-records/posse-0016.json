@@ -1,6 +1,11 @@
 {
   "id": "posse-0016",
   "name": "Gateway of Retrospection",
+  "realm": "CHAOS",
+  "assetId": "KeyToken_Skill_16",
+  "assetCrystalId": "KeyToken_Crystal_16",
+  "assetBadgeId": "KeyToken_Props_16",
+  "lineupToken": "p",
   "descriptionTemplate": "Search your Draw Pile for [Arg1] {plural:[Arg1]|card|cards} to put into your hand, and reduce their Arithmetica Cost by [Arg2].",
   "descriptionArgs": {
     "Arg1": {
@@ -12,9 +17,5 @@
       "value": "1"
     }
   },
-  "lore": "The girl has lost count of her cycles and can no longer recall the histories she altered.\n\nThis is the last chance, the final rewind. Her sword pierced Tawil's core, but she only had time to grasp that person's hand before sinking together into the Black Pool.",
-  "realm": "CHAOS",
-  "assetId": "posse-icon-16",
-  "imageAssetId": "CG_SD_S_C01EX_1",
-  "lineupToken": "p"
+  "lore": "The girl has lost count of her cycles and can no longer recall the histories she altered.\n\nThis is the last chance, the final rewind. Her sword pierced Tawil's core, but she only had time to grasp that person's hand before sinking together into the Black Pool."
 }

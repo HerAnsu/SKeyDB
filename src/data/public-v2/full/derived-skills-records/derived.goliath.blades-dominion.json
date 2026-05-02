@@ -1,6 +1,9 @@
 {
   "id": "derived.goliath.blades-dominion",
   "displayName": "Blade's Dominion",
+  "ownerAwakenerId": "awakener-0021",
+  "derivedFromId": "skill.goliath.abyssal-depths-power",
+  "rootSkillId": "skill.goliath.abyssal-depths-power",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. {STR} has [Arg2] {plural:[Arg2]|time|times} the effect on {Blade's Dominion}. This card is considered \"Strike.\"",
   "descriptionArgs": {
     "Arg1": {
@@ -13,8 +16,8 @@
         "360",
         "400"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -33,8 +36,5 @@
       "value": 1
     }
   ],
-  "derivedFromId": "skill.goliath.abyssal-depths-power",
-  "rootSkillId": "skill.goliath.abyssal-depths-power",
-  "ownerAwakenerId": "awakener-0021",
   "cost": "2"
 }

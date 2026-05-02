@@ -1,9 +1,9 @@
 {
   "id": "skill.caecus.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0006",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG, which enjoys a [Arg3]% {Counter} bonus. Caecus obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -33,11 +33,11 @@
     "Arg3": {
       "kind": "fixed",
       "value": "0",
+      "suffix": "%",
       "substatBonus": {
         "substat": "SigilYield",
         "multiplier": "1"
-      },
-      "suffix": "%"
+      }
     }
   },
   "cardKeywords": [],

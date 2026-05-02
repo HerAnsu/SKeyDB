@@ -2,7 +2,7 @@
   "id": "covenant-0006",
   "name": "Burial Ground's Sighs",
   "assetId": "covenant-icon-008",
-  "lore": "I spit on your grave.\nFor you have found a rare peace in death.",
+  "lineupToken": "D",
   "setEffects": [
     {
       "set": 3,
@@ -21,5 +21,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "D"
+  "lore": "I spit on your grave.\nFor you have found a rare peace in death."
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.daffodil.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0012",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Daffodil obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0012",
       "id": "upgrade.enlighten.daffodil.infinite-passage.skill.daffodil.defense",
       "operation": "mixed",
       "upgraderId": "enlighten.daffodil.infinite-passage",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Daffodil",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Daffodil obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] {STR}. {Leap}: Obtain 1 Arithmetica.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -78,11 +79,10 @@
               "1.8",
               "2"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Daffodil obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] {STR}. {Leap}: Obtain 1 Arithmetica."
+        }
       }
     }
   ]

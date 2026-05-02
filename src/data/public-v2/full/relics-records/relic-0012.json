@@ -1,13 +1,13 @@
 {
   "id": "relic-0012",
+  "name": "Dimensional Image: Daffodil",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Daffodil",
-  "assetId": "Icon_Creation_Unique_D02",
   "ownerAwakenerId": "awakener-0012",
   "ownerAwakenerName": "Daffodil",
   "rarity": "SSR",
   "realm": "ULTRA",
+  "assetId": "Icon_Creation_Unique_D02",
   "descriptionTemplate": "At turn start, Daffodil gains [Arg1] Aliemus and 1 \"Insight\" card. The Strength gained from {Heterogeneous Tides} +[Arg2]%, and each card played permanently increases it further by [Arg3]% for this exploration, up to [Arg4]%.",
   "descriptionArgs": {
     "Arg1": {

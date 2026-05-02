@@ -1,9 +1,9 @@
 {
   "id": "skill.wanda.living-deads-delirium",
+  "displayName": "Living Dead's Delirium",
   "ownerAwakenerId": "awakener-0052",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Living Dead's Delirium",
   "descriptionTemplate": "Wanda gains [Energy:Arg1] Aliemus. {Rouse}: Immediately gain 5 stacks of {Dreamlure}. Gain 1 stack of {Dreamlure} At turn start. Whenever {Dreamlure} reaches 5 or 10 stacks, gain [Block:Arg2] Shield.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -39,13 +39,13 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0052",
       "id": "upgrade.enlighten.wanda.black-stone-decree.skill.wanda.living-deads-delirium",
       "operation": "replace_description",
       "upgraderId": "enlighten.wanda.black-stone-decree",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Wanda",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
       "patch": {
         "descriptionTemplate": "Wanda gains [Energy:Arg1] Aliemus. {Rouse}: Immediately gain 5 stacks of {Dreamlure}. Gain 1 stack of {Dreamlure} at turn start. Whenever gaining {Dreamlure} brings it to 5 or 10 stacks, gain [Block:Arg2] Shield. After Wanda uses her Exalt, her next 2 Command Cards take effect 1 extra time."
       }

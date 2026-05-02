@@ -1,8 +1,8 @@
 {
   "id": "enlighten.sanga.kneel-before-beauty",
+  "displayName": "Kneel Before Beauty",
   "ownerAwakenerId": "awakener-0045",
   "slot": "E2",
-  "displayName": "Kneel Before Beauty",
   "descriptionTemplate": "{Beauty's Mercy} gains an additional shield equal to [Arg1]% of DEF for each Tentacle present. (The effect increases with the level of {Beauty's Mercy}.)",
   "descriptionArgs": {
     "Arg1": {

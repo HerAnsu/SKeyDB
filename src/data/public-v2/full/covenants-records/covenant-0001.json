@@ -2,7 +2,7 @@
   "id": "covenant-0001",
   "name": "Deus Ex Machina",
   "assetId": "covenant-icon-001",
-  "lore": "The machine is purity absolute; the divine is supreme.\nWhat descends is no mere thread, but Ariadne herself.",
+  "lineupToken": "k",
   "setEffects": [
     {
       "set": 3,
@@ -20,5 +20,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "k"
+  "lore": "The machine is purity absolute; the divine is supreme.\nWhat descends is no mere thread, but Ariadne herself."
 }

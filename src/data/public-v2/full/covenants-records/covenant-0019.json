@@ -2,7 +2,7 @@
   "id": "covenant-0019",
   "name": "Unstained Chronicle",
   "assetId": "covenant-icon-021",
-  "lore": "A gaze cast from the heart of eternity. Incorruptible, untainted, and absolute.",
+  "lineupToken": "v",
   "setEffects": [
     {
       "set": 3,
@@ -20,5 +20,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "v"
+  "lore": "A gaze cast from the heart of eternity. Incorruptible, untainted, and absolute."
 }

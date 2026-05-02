@@ -3,13 +3,13 @@
   "displayName": "Temporary STR",
   "overlayType": "mechanic",
   "aliases": [],
+  "iconId": "Battle_Card_Buff_021",
+  "textColor": "heal",
   "descriptionTemplate": "This turn, DMG dealt +[Layer].",
   "descriptionArgs": {
     "Layer": {
       "kind": "fixed",
       "value": "X"
     }
-  },
-  "iconId": "Battle_Card_Buff_021",
-  "textColor": "heal"
+  }
 }

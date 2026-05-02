@@ -1,55 +1,20 @@
 {
   "id": "posse-0020",
   "name": "Miracle's Dawn",
+  "realm": "CARO",
+  "assetId": "KeyToken_Skill_20",
+  "assetCrystalId": "KeyToken_Crystal_20",
+  "assetBadgeId": "KeyToken_Props_20",
+  "lineupToken": "r",
   "descriptionTemplate": "Gain [Arg1] {STR}. Until your next turn, whenever you take Active DMG, gain Delayed Shield equal to [Arg2]% of that DMG. If the Realm includes {Caro}, instead accumulate {Crimson Furnace} equal to 10% of that DMG.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "computed",
-      "expression": {
-        "op": "mul",
-        "args": [
-          {
-            "op": "mul",
-            "args": [
-              {
-                "var": "accountStageGrowth"
-              },
-              {
-                "op": "add",
-                "args": [
-                  {
-                    "const": 1.0
-                  },
-                  {
-                    "op": "mul",
-                    "args": [
-                      {
-                        "op": "min",
-                        "args": [
-                          {
-                            "var": "ownedPosseCount"
-                          },
-                          {
-                            "const": 50.0
-                          }
-                        ]
-                      },
-                      {
-                        "const": 0.01
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "const": 0.02
-          }
-        ]
-      },
+      "formulaKey": "scaled",
+      "baseFormula": "esotericResearchDepth",
+      "multiplier": 0.02,
       "inputs": [
-        "accountStageGrowth",
+        "accountLevel",
         "ownedPosseCount"
       ]
     },
@@ -59,9 +24,5 @@
       "suffix": "%"
     }
   },
-  "lore": "Miracle's Dawn descends upon the Church tainted by Madness, at the cost of the blood of the willing sacrifice and the immaculate lover.",
-  "realm": "CARO",
-  "assetId": "posse-icon-20",
-  "imageAssetId": "CG_SD_L_B02_2",
-  "lineupToken": "r"
+  "lore": "Miracle's Dawn descends upon the Church tainted by Madness, at the cost of the blood of the willing sacrifice and the immaculate lover."
 }

@@ -2,7 +2,7 @@
   "id": "covenant-0016",
   "name": "Sweet Slug",
   "assetId": "covenant-icon-018",
-  "lore": "A lethal sweetness fills the air. Beware—the cloying grip of death is upon you.",
+  "lineupToken": "p",
   "setEffects": [
     {
       "set": 3,
@@ -21,5 +21,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "p"
+  "lore": "A lethal sweetness fills the air. Beware—the cloying grip of death is upon you."
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.nautila.ready-and-set",
+  "displayName": "Ready and Set",
   "ownerAwakenerId": "awakener-0036",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Ready and Set",
   "descriptionTemplate": "Gain [Block:Arg1] Shield and [Counterattack:Arg2] stacks of {Counter}. Increase Current Shield by 50%. Deal {Fixed DMG} equal to your {Counter} to all enemies.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "21.6",
         "24"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,22 +29,23 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0036",
       "id": "upgrade.enlighten.nautila.forgotten-dreams.skill.nautila.ready-and-set",
       "operation": "mixed",
       "upgraderId": "enlighten.nautila.forgotten-dreams",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Nautila",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0036",
+      "ownerAwakenerName": "Nautila",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield and [Counterattack:Arg2] stacks of {Counter}. Increase current Shield by 50%. Deal {Fixed DMG} equal to [Arg3]% of your Counterattack to all enemies. Immune to {Fragile}, {Weakness}, and {Vulnerable} for 1 turn.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -56,8 +57,8 @@
               "21.6",
               "24"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -69,27 +70,27 @@
               "36",
               "40"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
             "value": "150",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield and [Counterattack:Arg2] stacks of {Counter}. Increase current Shield by 50%. Deal {Fixed DMG} equal to [Arg3]% of your Counterattack to all enemies. Immune to {Fragile}, {Weakness}, and {Vulnerable} for 1 turn."
+        }
       }
     },
     {
-      "ownerAwakenerId": "awakener-0036",
       "id": "upgrade.enlighten.nautila.vroom-vroom.skill.nautila.ready-and-set",
       "operation": "mixed",
       "upgraderId": "enlighten.nautila.vroom-vroom",
-      "upgraderSlot": "OverExalt",
-      "ownerAwakenerName": "Nautila",
       "upgraderType": "enlighten",
+      "upgraderSlot": "OverExalt",
+      "ownerAwakenerId": "awakener-0036",
+      "ownerAwakenerName": "Nautila",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield and [Counterattack:Arg2] stacks of {Counter}. Increase current Shield by 50%. Deal {Fixed DMG} equal to [Arg3]% of your Counterattack to all enemies. Immune to {Fragile}, {Weakness}, and {Vulnerable} for 1 turn.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -101,8 +102,8 @@
               "21.6",
               "24"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -114,16 +115,15 @@
               "36",
               "40"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
             "value": "150",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield and [Counterattack:Arg2] stacks of {Counter}. Increase current Shield by 50%. Deal {Fixed DMG} equal to [Arg3]% of your Counterattack to all enemies. Immune to {Fragile}, {Weakness}, and {Vulnerable} for 1 turn."
+        }
       }
     },
     {

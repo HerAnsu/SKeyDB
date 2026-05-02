@@ -1,9 +1,9 @@
 {
   "id": "skill.horla.prelude-verse",
+  "displayName": "Prelude Verse",
   "ownerAwakenerId": "awakener-0024",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Prelude Verse",
   "descriptionTemplate": "Horla gains [Energy:Arg1] Aliemus. {Rouse}: Immediately gain 1 stack of {Metaphor} other than the current {Emotion}; also gain 1 stack At turn start. Each {Metaphor} stacks up to 3 times. Each stack of {Metaphor} is consumed when a Psalm {Leap} s, granting a corresponding bonus.",
   "descriptionArgs": {
     "Arg1": {
@@ -26,14 +26,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0024",
       "id": "upgrade.enlighten.horla.spring-in-the-embers.skill.horla.prelude-verse",
       "operation": "mixed",
       "upgraderId": "enlighten.horla.spring-in-the-embers",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
       "patch": {
+        "descriptionTemplate": "Horla gains [Energy:Arg1] Aliemus. {Rouse}: Immediately gain 1 stack of {Metaphor} for each {Emotion} other than the current {Emotion}. At each turn start, also gain 1 stack for each other 3 emotions, up to 3 stacks per type. When a Psalm trigger {Leap}, consumes all stacks of its corresponding {Metaphor} and receives bonus. After releasing {Annihilation}, Horla's next Command Card played this turn triggers {Leap}. Whenever Horla consumes 3 or more stacks of {Metaphor}, the current {Emotion}'s effect +[Arg2]% temporarily. This effect cannot stack.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -51,8 +52,7 @@
             "value": "25",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Horla gains [Energy:Arg1] Aliemus. {Rouse}: Immediately gain 1 stack of {Metaphor} for each {Emotion} other than the current {Emotion}. At each turn start, also gain 1 stack for each other 3 emotions, up to 3 stacks per type. When a Psalm trigger {Leap}, consumes all stacks of its corresponding {Metaphor} and receives bonus. After releasing {Annihilation}, Horla's next Command Card played this turn triggers {Leap}. Whenever Horla consumes 3 or more stacks of {Metaphor}, the current {Emotion}'s effect +[Arg2]% temporarily. This effect cannot stack."
+        }
       }
     }
   ]

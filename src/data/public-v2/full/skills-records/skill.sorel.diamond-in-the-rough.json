@@ -1,9 +1,9 @@
 {
   "id": "skill.sorel.diamond-in-the-rough",
+  "displayName": "Diamond in the Rough",
   "ownerAwakenerId": "awakener-0046",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Diamond in the Rough",
   "descriptionTemplate": "Lose [Arg1]% Current HP.{Embryo Fusion} +[Blood:Arg2]%. During this turn, recover [Arg3] HP at turn end for each instance of DMG dealt.",
   "descriptionArgs": {
     "Arg1": {
@@ -33,8 +33,8 @@
         "2.7",
         "3"
       ],
-      "suffix": "%",
-      "stat": "CON"
+      "stat": "CON",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],

@@ -1,9 +1,9 @@
 {
   "id": "skill.aurita.gland-division",
+  "displayName": "Gland Division",
   "ownerAwakenerId": "awakener-0005",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Gland Division",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Shuffle [Arg2] {Gland Division} into the Discard Pile. {Aftershock}: Gain [Energy:Arg3] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "21.6",
         "24"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -39,14 +39,15 @@
   "cost": "0",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0005",
       "id": "upgrade.enlighten.aurita.slick-slide-adventure.skill.aurita.gland-division",
       "operation": "mixed",
       "upgraderId": "enlighten.aurita.slick-slide-adventure",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Aurita",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0005",
+      "ownerAwakenerName": "Aurita",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG}. Shuffle [Arg2] {plural:[Arg2]|copy|copies} of {Gland Division} into the Discard Pile. {Aftershock}: Gain [Energy:Arg3] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -58,8 +59,8 @@
               "43.2",
               "48"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -76,8 +77,7 @@
               "10"
             ]
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG}. Shuffle [Arg2] {plural:[Arg2]|copy|copies} of {Gland Division} into the Discard Pile. {Aftershock}: Gain [Energy:Arg3] Aliemus."
+        }
       }
     }
   ]

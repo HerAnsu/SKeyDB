@@ -1,9 +1,9 @@
 {
   "id": "skill.xu.bonesick-longing",
+  "displayName": "Bonesick Longing",
   "ownerAwakenerId": "awakener-0054",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Bonesick Longing",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies (guaranteed Crit) and trigger [Arg2]% {Poison}. {Resonance 3}: {Embryo Fusion} +[Arg4]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "270",
         "300"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -38,14 +38,15 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0054",
       "id": "upgrade.enlighten.xu.enmity-of-the-heart.skill.xu.bonesick-longing",
       "operation": "mixed",
       "upgraderId": "enlighten.xu.enmity-of-the-heart",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Xu",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies (guaranteed Crit) and trigger [Arg2]% {Poison}. {Embryo Fusion} +[Arg6]%. {Resonance 3}: {Embryo Fusion} +[Arg4]%.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -57,8 +58,8 @@
               "270",
               "300"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -73,14 +74,13 @@
           "Arg6": {
             "kind": "fixed",
             "value": "15",
+            "suffix": "%",
             "substatBonus": {
               "substat": "DamageAmplification",
               "multiplier": "0.2"
-            },
-            "suffix": "%"
+            }
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies (guaranteed Crit) and trigger [Arg2]% {Poison}. {Embryo Fusion} +[Arg6]%. {Resonance 3}: {Embryo Fusion} +[Arg4]%."
+        }
       }
     }
   ]

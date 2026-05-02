@@ -1,13 +1,13 @@
 {
   "id": "relic-0023",
+  "name": "Dimensional Image: Helot",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Helot",
-  "assetId": "Icon_Creation_Unique_B05",
   "ownerAwakenerId": "awakener-0023",
   "ownerAwakenerName": "Helot",
   "rarity": "SSR",
   "realm": "CARO",
+  "assetId": "Icon_Creation_Unique_B05",
   "descriptionTemplate": "At turn start, Helot gains [Arg1] Aliemus. Each time a card is discarded, Helot gains [Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {

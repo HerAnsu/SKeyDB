@@ -1,9 +1,9 @@
 {
   "id": "skill.horla.resplendent-chapters",
+  "displayName": "Resplendent Chapters",
   "ownerAwakenerId": "awakener-0024",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Resplendent Chapters",
   "descriptionTemplate": "Restore [Heal:Arg1] HP, obtain [Power:Arg2] {STR}. other Awakeners gain [Energy:Arg3] Aliemus. All Awakeners Temporary Crit. Rate and Crit. DMG +[Arg4]%. If Horla is currently under an {Emotion} state, improve the effect provided by {Resplendent Chapters} corresponding to the {Emotion} state by 150%.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,9 +16,9 @@
         "27",
         "30"
       ],
-      "suffix": "%",
+      "rounding": "ceil",
       "stat": "CON",
-      "rounding": "ceil"
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -30,9 +30,9 @@
         "7.2",
         "8"
       ],
-      "suffix": "%",
+      "rounding": "ceil",
       "stat": "ATK",
-      "rounding": "ceil"
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",
@@ -48,26 +48,27 @@
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0024",
       "id": "upgrade.enlighten.horla.blossoms-and-verses-reunited.skill.horla.resplendent-chapters",
       "operation": "replace_description",
       "upgraderId": "enlighten.horla.blossoms-and-verses-reunited",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
       "patch": {
         "descriptionTemplate": "Restore [Heal:Arg1] HP, obtain [Power:Arg2] {STR}. other Awakeners gain [Energy:Arg3] Aliemus, Temporary Crit. Rate and Crit. DMG +[Arg4]%. Under different emotions, {Resplendent Chapters}' corresponding effects are enhanced by 250%."
       }
     },
     {
-      "ownerAwakenerId": "awakener-0024",
       "id": "upgrade.enlighten.horla.ink-stained-sonnet.skill.horla.resplendent-chapters",
       "operation": "mixed",
       "upgraderId": "enlighten.horla.ink-stained-sonnet",
-      "upgraderSlot": "OverExalt",
-      "ownerAwakenerName": "Horla",
       "upgraderType": "enlighten",
+      "upgraderSlot": "OverExalt",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
       "patch": {
+        "descriptionTemplate": "Restore [Heal:Arg1] HP, obtain [Power:Arg2] {STR}. other Awakeners gain [Energy:Arg3] Aliemus, Temporary Crit. Rate and Crit. DMG +[Arg4]%. Under different emotions, {Resplendent Chapters}' corresponding effects are enhanced by 250%.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -79,9 +80,9 @@
               "27",
               "30"
             ],
-            "suffix": "%",
+            "rounding": "ceil",
             "stat": "CON",
-            "rounding": "ceil"
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -93,9 +94,9 @@
               "7.2",
               "8"
             ],
-            "suffix": "%",
+            "rounding": "ceil",
             "stat": "ATK",
-            "rounding": "ceil"
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
@@ -106,8 +107,7 @@
             "value": "8",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Restore [Heal:Arg1] HP, obtain [Power:Arg2] {STR}. other Awakeners gain [Energy:Arg3] Aliemus, Temporary Crit. Rate and Crit. DMG +[Arg4]%. Under different emotions, {Resplendent Chapters}' corresponding effects are enhanced by 250%."
+        }
       }
     }
   ]

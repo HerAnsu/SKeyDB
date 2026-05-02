@@ -2,7 +2,7 @@
   "id": "covenant-0005",
   "name": "Twisted Twins: Black",
   "assetId": "covenant-icon-006",
-  "lore": "Blood-dark sacrifice. May the Twins bless your body.",
+  "lineupToken": "B",
   "setEffects": [
     {
       "set": 3,
@@ -21,5 +21,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "B"
+  "lore": "Blood-dark sacrifice. May the Twins bless your body."
 }

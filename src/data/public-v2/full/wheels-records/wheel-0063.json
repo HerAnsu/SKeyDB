@@ -1,11 +1,12 @@
 {
   "id": "wheel-0063",
   "name": "Favor",
-  "assetId": "Weapon_Full_P03",
-  "ownerAwakenerName": null,
   "rarity": "R",
   "realm": "NEUTRAL",
   "mainstatKey": "CRIT_RATE",
+  "ownerAwakenerName": null,
+  "assetId": "Weapon_Full_P03",
+  "lineupToken": "xq",
   "descriptionTemplate": "Team Unique: After each stage starts, all Awakeners gain [StateArg1] Aliemus. At the start of a Boss Battle, draw 2 cards. In {Astral Reign}, this effect changes to \"Increases the chance for the wielder's Dimensional Image Relic to appear by 100%.\"",
   "descriptionArgs": {
     "StateArg1": {
@@ -18,6 +19,5 @@
       ]
     }
   },
-  "lore": "Offer love and death to the world.",
-  "lineupToken": "xq"
+  "lore": "Offer love and death to the world."
 }

@@ -1,6 +1,11 @@
 {
   "id": "posse-0022",
   "name": "All of Her",
+  "realm": "CHAOS",
+  "assetId": "KeyToken_Skill_22",
+  "assetCrystalId": "KeyToken_Crystal_22",
+  "assetBadgeId": "KeyToken_Props_22",
+  "lineupToken": "t",
   "descriptionTemplate": "Increase {Realm Mastery} by [Arg1]. Increase a chosen Awakener's Aliemus by [Energy:Arg2].",
   "descriptionArgs": {
     "Arg1": {
@@ -12,9 +17,5 @@
       "value": "24"
     }
   },
-  "lore": "All 24 merge into one, dissolving into starlight.\n\nHer personality becomes whole through division, and her body endures through fission.\n\nThere is only one 24 in this world, and she embodies them all.",
-  "realm": "CHAOS",
-  "assetId": "posse-icon-22",
-  "imageAssetId": "CG_SD_S_C06_3",
-  "lineupToken": "t"
+  "lore": "All 24 merge into one, dissolving into starlight.\n\nHer personality becomes whole through division, and her body endures through fission.\n\nThere is only one 24 in this world, and she embodies them all."
 }

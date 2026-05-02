@@ -1,9 +1,9 @@
 {
   "id": "skill.doresain.crimson-invite",
+  "displayName": "Crimson Invite",
   "ownerAwakenerId": "awakener-0014",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Crimson Invite",
   "descriptionTemplate": "Doresain gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg2] {STR}. DMG dealt by Doresain gains an additional [Arg3]% {STR} bonus.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",
@@ -44,14 +44,15 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0014",
       "id": "upgrade.enlighten.doresain.styx-uncrossed.skill.doresain.crimson-invite",
       "operation": "mixed",
       "upgraderId": "enlighten.doresain.styx-uncrossed",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Doresain",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0014",
+      "ownerAwakenerName": "Doresain",
       "patch": {
+        "descriptionTemplate": "Doresain gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg2] {STR}. DMG dealt by Doresain gains an extra [Arg3]% {STR} Bonus. Deal {Fixed DMG} equal to [Arg4]% of current HP to all enemies. After Doresain's first kill each turn, deal {Fixed DMG} equal to the overflow DMG to all other enemies.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -74,8 +75,8 @@
               "36",
               "40"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
@@ -87,8 +88,7 @@
             "value": "20",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Doresain gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg2] {STR}. DMG dealt by Doresain gains an extra [Arg3]% {STR} Bonus. Deal {Fixed DMG} equal to [Arg4]% of current HP to all enemies. After Doresain's first kill each turn, deal {Fixed DMG} equal to the overflow DMG to all other enemies."
+        }
       }
     }
   ]

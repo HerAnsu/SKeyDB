@@ -6,6 +6,9 @@
     {
       "id": "derived.castor.onyx-plume",
       "displayName": "Onyx Plume",
+      "ownerAwakenerId": "awakener-0008",
+      "derivedFromId": "skill.castor.skybound-oath",
+      "rootSkillId": "skill.castor.skybound-oath",
       "descriptionTemplate": "Deal [Damage:Arg2] DMG and draw [Arg1] {plural:[Arg1]|card|cards}. {Retain}: Gain [Block:Arg3] Shield. {Exhaust}.",
       "descriptionArgs": {
         "Arg1": {
@@ -15,14 +18,14 @@
         "Arg2": {
           "kind": "fixed",
           "value": "70",
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg3": {
           "kind": "fixed",
           "value": "10",
-          "suffix": "%",
           "stat": "DEF",
+          "suffix": "%",
           "conditionalBranches": {
             "whenTrue": "15",
             "whenFalse": "10"
@@ -37,19 +40,16 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "skill.castor.skybound-oath",
-      "rootSkillId": "skill.castor.skybound-oath",
-      "ownerAwakenerId": "awakener-0008",
       "cost": "0",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0008",
           "id": "upgrade.enlighten.castor.sky-eclipsing-wings.derived.castor.onyx-plume",
           "operation": "replace_description",
           "upgraderId": "enlighten.castor.sky-eclipsing-wings",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Castor",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0008",
+          "ownerAwakenerName": "Castor",
           "patch": {
             "descriptionTemplate": "Deal [Damage:Arg2] DMG and draw [Arg1] {plural:[Arg1]|card|cards}. For every 3 {Onyx Plume} played, obtain 1 Arithmetica and increase Castor's Final DMG by 10% in this battle. {Retain}: Gain [Block:Arg3] Shield. {Exhaust}."
           }
@@ -59,33 +59,36 @@
     {
       "id": "derived.clementine.phobic-fixation",
       "displayName": "Conversion: Phobic Fixation",
-      "descriptionTemplate": "For every 1 stack of {Symbiosis} removed, apply 1 stack of {Phobic Fixation} to all enemies. Each stack of {Phobic Fixation} reduces DMG dealt by 3%.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
+      "ownerAwakenerId": "awakener-0010",
       "derivedFromId": "skill.clementine.lifeform-reconstruction",
       "rootSkillId": "skill.clementine.lifeform-reconstruction",
-      "ownerAwakenerId": "awakener-0010"
+      "descriptionTemplate": "For every 1 stack of {Symbiosis} removed, apply 1 stack of {Phobic Fixation} to all enemies. Each stack of {Phobic Fixation} reduces DMG dealt by 3%.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.clementine.psychic-trauma",
       "displayName": "Conversion: Psychic Trauma",
-      "descriptionTemplate": "For every 1 stack of {Symbiosis} removed, inflict 1 stack of {Psychic Trauma} on all enemies. Each stack of {Psychic Trauma} increases DMG taken by 3%.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
+      "ownerAwakenerId": "awakener-0010",
       "derivedFromId": "skill.clementine.lifeform-reconstruction",
       "rootSkillId": "skill.clementine.lifeform-reconstruction",
-      "ownerAwakenerId": "awakener-0010"
+      "descriptionTemplate": "For every 1 stack of {Symbiosis} removed, inflict 1 stack of {Psychic Trauma} on all enemies. Each stack of {Psychic Trauma} increases DMG taken by 3%.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.corposant.pilot",
       "displayName": "Pilot",
+      "ownerAwakenerId": "awakener-0011",
+      "derivedFromId": "skill.corposant.sunken-in-the-profound",
+      "rootSkillId": "skill.corposant.sunken-in-the-profound",
       "descriptionTemplate": "Gain [Block:Arg1] Shield. {Aftershock}: Gain [Power:Arg2] {STR} and [TentaclePower:Arg2] {Tentacle DMG}.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
           "value": "20",
-          "suffix": "%",
           "stat": "DEF",
+          "suffix": "%",
           "substatBonus": {
             "substat": "DeathResistance",
             "multiplier": "0.05",
@@ -95,8 +98,8 @@
         "Arg2": {
           "kind": "fixed",
           "value": "3",
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [
@@ -104,26 +107,23 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "skill.corposant.sunken-in-the-profound",
-      "rootSkillId": "skill.corposant.sunken-in-the-profound",
-      "ownerAwakenerId": "awakener-0011",
       "cost": "0",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0011",
           "id": "upgrade.enlighten.corposant.sextants-calculation.derived.corposant.pilot",
           "operation": "override_args",
           "upgraderId": "enlighten.corposant.sextants-calculation",
-          "upgraderSlot": "E2",
-          "ownerAwakenerName": "Corposant",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E2",
+          "ownerAwakenerId": "awakener-0011",
+          "ownerAwakenerName": "Corposant",
           "patch": {
             "descriptionArgs": {
               "Arg1": {
                 "kind": "fixed",
                 "value": "20",
-                "suffix": "%",
                 "stat": "DEF",
+                "suffix": "%",
                 "substatBonus": {
                   "substat": "DeathResistance",
                   "multiplier": "0.05",
@@ -133,8 +133,8 @@
               "Arg2": {
                 "kind": "fixed",
                 "value": "3",
-                "suffix": "%",
-                "stat": "ATK"
+                "stat": "ATK",
+                "suffix": "%"
               }
             }
           }
@@ -151,37 +151,40 @@
     {
       "id": "derived.daffodil.thousand-mirage",
       "displayName": "Thousand Mirage",
-      "descriptionTemplate": "Synthetic group wrapper for {Thousand Mirage} customization. Browse base cards and potential extra-effect choices separately.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
-      "derivedFromId": "skill.daffodil.sea-of-primordial-essence",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "ownerAwakenerId": "awakener-0012",
       "nodeKind": "group",
+      "derivedFromId": "skill.daffodil.sea-of-primordial-essence",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "childDerivedSkillIds": [
         "derived.daffodil.thousand-mirage-base-cards",
         "derived.daffodil.thousand-mirage-extra-effects"
-      ]
+      ],
+      "descriptionTemplate": "Synthetic group wrapper for {Thousand Mirage} customization. Browse base cards and potential extra-effect choices separately.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.daffodil.thousand-mirage-base-cards",
       "displayName": "Thousand Mirage: Base Cards",
-      "descriptionTemplate": "Possible base Thousand Mirage cards before extra effects are attached.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "ownerAwakenerId": "awakener-0012",
       "nodeKind": "group",
+      "derivedFromId": "derived.daffodil.thousand-mirage",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "childDerivedSkillIds": [
         "derived.daffodil.thousand-mirage-poison",
         "derived.daffodil.thousand-mirage-counter",
         "derived.daffodil.thousand-mirage-damage"
-      ]
+      ],
+      "descriptionTemplate": "Possible base Thousand Mirage cards before extra effects are attached.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.daffodil.thousand-mirage-counter",
       "displayName": "Thousand Mirage",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. This DMG enjoys a [Arg2]x {STR} bonus. Obtain {Temporary Counter} equal to [Arg3]% DMG dealt.",
       "descriptionArgs": {
         "Arg1": {
@@ -194,8 +197,8 @@
             "180",
             "200"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg2": {
           "kind": "fixed",
@@ -215,14 +218,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "2"
     },
     {
       "id": "derived.daffodil.thousand-mirage-damage",
       "displayName": "Thousand Mirage",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. This DMG receives a [Arg2]x {STR} bonus.",
       "descriptionArgs": {
         "Arg1": {
@@ -235,8 +238,8 @@
             "270",
             "300"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg2": {
           "kind": "fixed",
@@ -251,14 +254,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "4"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-aliemus",
       "displayName": "Aliemus",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Gain [Energy:Arg1] Aliemus.",
       "descriptionArgs": {
         "Arg1": {
@@ -267,14 +270,14 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-blessing",
       "displayName": "Blessing",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Immune to {Fragile}, {Weakness}, {Vulnerable} for 1 turn. Gain [Block:Arg1] Shield.",
       "descriptionArgs": {
         "Arg1": {
@@ -287,19 +290,19 @@
             "54",
             "60"
           ],
-          "suffix": "%",
-          "stat": "DEF"
+          "stat": "DEF",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-brawn",
       "displayName": "Brawn",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Enjoys an additional 2x {STR} bonus. Obtain [Power:Arg1] {STR}.",
       "descriptionArgs": {
         "Arg1": {
@@ -312,19 +315,19 @@
             "4.5",
             "5"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-catalyst",
       "displayName": "Catalyst",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Other Awakeners gain [Energy:Arg1] Aliemus.",
       "descriptionArgs": {
         "Arg1": {
@@ -333,25 +336,25 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-computation",
       "displayName": "Computation",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Obtain 1 Arithmetica.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-critical-fateweaving",
       "displayName": "Critical Fateweaving",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Temporary Crit. Rate +[Arg1]%. In this battle, the base DMG of {Skull Reaver} and \"Thousand Mirage\" +5%.",
       "descriptionArgs": {
         "Arg1": {
@@ -361,14 +364,14 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-critical-hit",
       "displayName": "Critical Hit",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Increase Crit. Rate by [Arg1]% and Crit. DMG by [Arg2]%.",
       "descriptionArgs": {
         "Arg1": {
@@ -383,14 +386,14 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-curse",
       "displayName": "Curse",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "All enemies {STR⯆} temporarily reduced by [Arg1], Shield gained and {STR⯆} reduced by 50% for 1 turn.",
       "descriptionArgs": {
         "Arg1": {
@@ -403,19 +406,19 @@
             "27",
             "30"
           ],
-          "suffix": "%",
-          "stat": "DEF"
+          "stat": "DEF",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-directed-catalysis",
       "displayName": "Directed Catalysis",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Choose an Awakener to gain [Energy:Arg1] Aliemus.",
       "descriptionArgs": {
         "Arg1": {
@@ -424,25 +427,25 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-finesse",
       "displayName": "Finesse",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Draw 1 card.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-aliemus",
       "displayName": "Hpr. Aliemus",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Gain [Energy:Arg1] Aliemus.",
       "descriptionArgs": {
         "Arg1": {
@@ -451,14 +454,14 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-brawn",
       "displayName": "Hpr. Brawn",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Enjoys an additional 4x {STR} Buff. Obtain [Power:Arg1] {STR}.",
       "descriptionArgs": {
         "Arg1": {
@@ -471,19 +474,19 @@
             "9",
             "10"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-catalysis",
       "displayName": "Hpr. Catalysis",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Other Awakeners gain [Energy:Arg1] Aliemus.",
       "descriptionArgs": {
         "Arg1": {
@@ -492,25 +495,25 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-computation",
       "displayName": "Hpr. Computation",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Obtain 2 Arithmetica.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-directed-catalysis",
       "displayName": "Hpr. Directed Catalysis",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Choose an Awakener to gain [Energy:Arg1] Aliemus.",
       "descriptionArgs": {
         "Arg1": {
@@ -519,36 +522,36 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-finesse",
       "displayName": "Hpr. Finesse",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Draw 2 cards.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-insight",
       "displayName": "Hpr. Insight",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Add 2 {Insight} cards to your Draw Pile.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-keyflare",
       "displayName": "Hpr. Keyflare",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Obtain [Arg1] Keyflare. In this battle, the base DMG of {Skull Reaver} and \"Thousand Mirage\" +10%.",
       "descriptionArgs": {
         "Arg1": {
@@ -557,47 +560,47 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-vulnerable",
       "displayName": "Hpr. Vulnerable",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Apply 2 stacks of {Vulnerable} to all enemies.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-hpr-weakness",
       "displayName": "Hpr. Weakness",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Apply 2 stacks of {Weakness} to all enemies.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-insight",
       "displayName": "Insight",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Add 1 {Insight} to your Draw Pile.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-keyflare",
       "displayName": "Keyflare",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Gain [Arg1] Keyflare. Gain [Block:Arg2] Shield.",
       "descriptionArgs": {
         "Arg1": {
@@ -614,92 +617,86 @@
             "27",
             "30"
           ],
-          "suffix": "%",
-          "stat": "DEF"
+          "stat": "DEF",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-pierce",
       "displayName": "Pierce",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Deal {Pierce DMG}. Reduce the Arithmetica Cost of the highest Arithmetica card in hand by 1.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-pierce-critical-hit",
       "displayName": "Pierce Critical Hit",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "This card's Crit. Rate and Crit. DMG increase by 50%, dealing {Pierce DMG}.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-precise-retrieval",
       "displayName": "Precise Retrieval",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Choose 1 card from the Draw Pile to add to your hand and reduce its Arithmetica Cost by 1.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-retrieve",
       "displayName": "Retrieve",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Choose 1 card from the Draw Pile and add it to your hand.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-vulnerable",
       "displayName": "Vulnerable",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Inflict 1 stack of {Vulnerable} on all enemies.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-effect-weakness",
       "displayName": "Weakness",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Apply 1 stack of {Weakness} to all enemies.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.daffodil.thousand-mirage-extra-effects",
       "displayName": "Thousand Mirage: Extra Effects",
-      "descriptionTemplate": "Potential extra-effect cards used during Thousand Mirage customization. Source-backed selector rows exist as Thousand Mirage: Illusion (choose 1 of 3) and Thousand Mirage: Reality (choose 2 of 3).",
-      "descriptionArgs": {},
-      "cardKeywords": [],
-      "derivedFromId": "derived.daffodil.thousand-mirage",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "ownerAwakenerId": "awakener-0012",
       "nodeKind": "group",
+      "derivedFromId": "derived.daffodil.thousand-mirage",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "childDerivedSkillIds": [
         "derived.daffodil.thousand-mirage-effect-finesse",
         "derived.daffodil.thousand-mirage-effect-computation",
@@ -729,11 +726,17 @@
         "derived.daffodil.thousand-mirage-effect-pierce-critical-hit",
         "derived.daffodil.thousand-mirage-effect-hpr-directed-catalysis",
         "derived.daffodil.thousand-mirage-effect-hpr-keyflare"
-      ]
+      ],
+      "descriptionTemplate": "Potential extra-effect cards used during Thousand Mirage customization. Source-backed selector rows exist as Thousand Mirage: Illusion (choose 1 of 3) and Thousand Mirage: Reality (choose 2 of 3).",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.daffodil.thousand-mirage-poison",
       "displayName": "Thousand Mirage",
+      "ownerAwakenerId": "awakener-0012",
+      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
       "descriptionTemplate": "Deal [Damage:Arg1] DMG. This DMG enjoys a [Arg2]x {STR} bonus. Inflict {Poison} equal to [Arg3]% DMG dealt.",
       "descriptionArgs": {
         "Arg1": {
@@ -746,8 +749,8 @@
             "90",
             "100"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg2": {
           "kind": "fixed",
@@ -767,21 +770,21 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
-      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "ownerAwakenerId": "awakener-0012",
       "cost": "0"
     },
     {
       "id": "derived.doresain.evernights-revel",
       "displayName": "Evernight's Revel",
+      "ownerAwakenerId": "awakener-0014",
+      "derivedFromId": "talent.doresain.festering-grace",
+      "rootSkillId": "talent.doresain.festering-grace",
       "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
           "value": "40",
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [
@@ -792,29 +795,26 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "talent.doresain.festering-grace",
-      "rootSkillId": "talent.doresain.festering-grace",
-      "ownerAwakenerId": "awakener-0014",
       "cost": "0",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0014",
           "id": "upgrade.enlighten.doresain.evernights-revel.derived.doresain.evernights-revel",
           "operation": "mixed",
           "upgraderId": "enlighten.doresain.evernights-revel",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Doresain",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0014",
+          "ownerAwakenerName": "Doresain",
           "patch": {
+            "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies. After playing, subsequent {Evernight's Revel} played this turn enjoys an additional 100% {STR} bonus.",
             "descriptionArgs": {
               "Arg1": {
                 "kind": "fixed",
                 "value": "160",
-                "suffix": "%",
-                "stat": "ATK"
+                "stat": "ATK",
+                "suffix": "%"
               }
-            },
-            "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies. After playing, subsequent {Evernight's Revel} played this turn enjoys an additional 100% {STR} bonus."
+            }
           }
         }
       ]
@@ -822,6 +822,9 @@
     {
       "id": "derived.erica.retract-mecha",
       "displayName": "Retract: Mecha",
+      "ownerAwakenerId": "awakener-0015",
+      "derivedFromId": "skill.erica.unleash-mecha",
+      "rootSkillId": "skill.erica.unleash-mecha",
       "descriptionTemplate": "Gain [Arg1] Temporary {Alert}. Obtain Keyflare equal to Erica's Keyflare Regen. Dispel self {Fragile} state. Whenever a card enters {Ultra Space}, transform into {Unleash: Mecha}.",
       "descriptionArgs": {
         "Arg1": {
@@ -834,24 +837,21 @@
             "4.5",
             "5"
           ],
-          "suffix": "%",
-          "stat": "DEF"
+          "stat": "DEF",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.erica.unleash-mecha",
-      "rootSkillId": "skill.erica.unleash-mecha",
-      "ownerAwakenerId": "awakener-0015",
       "cost": "0",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0015",
           "id": "upgrade.enlighten.erica.auto-rectification.derived.erica.retract-mecha",
           "operation": "replace_description",
           "upgraderId": "enlighten.erica.auto-rectification",
-          "upgraderSlot": "E1",
-          "ownerAwakenerName": "Erica",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E1",
+          "ownerAwakenerId": "awakener-0015",
+          "ownerAwakenerName": "Erica",
           "patch": {
             "descriptionTemplate": "Gain [Arg1] Temporary {Alert}. Obtain Keyflare equal to Erica's Keyflare Regen. Dispel self {Fragile} State. Place 1 of Erica's \"Defense\" with {Exhaust} into hand. Whenever a card enters {Ultra Space}, transform into {Unleash: Mecha}."
           }
@@ -861,6 +861,9 @@
     {
       "id": "derived.doll-inferno.curse",
       "displayName": "Curse",
+      "ownerAwakenerId": "awakener-0018",
+      "derivedFromId": "skill.doll-inferno.self-destruct",
+      "rootSkillId": "skill.doll-inferno.self-destruct",
       "descriptionTemplate": "All enemies Temp. {STR⯆} -[Exhaustion:Arg2].",
       "descriptionArgs": {
         "Arg2": {
@@ -873,24 +876,22 @@
             "36",
             "40"
           ],
-          "suffix": "%",
-          "stat": "DEF"
+          "stat": "DEF",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.doll-inferno.self-destruct",
-      "rootSkillId": "skill.doll-inferno.self-destruct",
-      "ownerAwakenerId": "awakener-0018",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0018",
           "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.curse",
           "operation": "mixed",
           "upgraderId": "enlighten.doll-inferno.borealis-visitor",
-          "upgraderSlot": "E1",
-          "ownerAwakenerName": "Doll: Inferno",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E1",
+          "ownerAwakenerId": "awakener-0018",
+          "ownerAwakenerName": "Doll: Inferno",
           "patch": {
+            "descriptionTemplate": "Inflict {Weakness} on all enemies for [Arg1] {plural:[Arg1]|turn|turns}, and temporarily reduce their {STR⯆} by [Exhaustion:Arg2].",
             "descriptionArgs": {
               "Arg1": {
                 "kind": "fixed",
@@ -906,11 +907,10 @@
                   "36",
                   "40"
                 ],
-                "suffix": "%",
-                "stat": "DEF"
+                "stat": "DEF",
+                "suffix": "%"
               }
-            },
-            "descriptionTemplate": "Inflict {Weakness} on all enemies for [Arg1] {plural:[Arg1]|turn|turns}, and temporarily reduce their {STR⯆} by [Exhaustion:Arg2]."
+            }
           }
         }
       ]
@@ -918,6 +918,9 @@
     {
       "id": "derived.doll-inferno.elation",
       "displayName": "Elation",
+      "ownerAwakenerId": "awakener-0018",
+      "derivedFromId": "skill.doll-inferno.self-destruct",
+      "rootSkillId": "skill.doll-inferno.self-destruct",
       "descriptionTemplate": "Gain 1 turn of {Elation} state: Team DMG Amplification increased by [Arg2]%.",
       "descriptionArgs": {
         "Arg2": {
@@ -934,19 +937,17 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.doll-inferno.self-destruct",
-      "rootSkillId": "skill.doll-inferno.self-destruct",
-      "ownerAwakenerId": "awakener-0018",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0018",
           "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.elation",
           "operation": "mixed",
           "upgraderId": "enlighten.doll-inferno.borealis-visitor",
-          "upgraderSlot": "E1",
-          "ownerAwakenerName": "Doll: Inferno",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E1",
+          "ownerAwakenerId": "awakener-0018",
+          "ownerAwakenerName": "Doll: Inferno",
           "patch": {
+            "descriptionTemplate": "Gain 1 turn of {Elation} state: Team DMG Amplification +[Arg2]%. Inflict [Arg1] {plural:[Arg1]|turn|turns} of {Vulnerable} on all enemies.",
             "descriptionArgs": {
               "Arg1": {
                 "kind": "fixed",
@@ -964,8 +965,7 @@
                 ],
                 "suffix": "%"
               }
-            },
-            "descriptionTemplate": "Gain 1 turn of {Elation} state: Team DMG Amplification +[Arg2]%. Inflict [Arg1] {plural:[Arg1]|turn|turns} of {Vulnerable} on all enemies."
+            }
           }
         }
       ]
@@ -973,6 +973,9 @@
     {
       "id": "derived.doll-inferno.fates-descent-finale",
       "displayName": "Fate's Descent: Finale",
+      "ownerAwakenerId": "awakener-0018",
+      "derivedFromId": "derived.doll-inferno.illusions-end",
+      "rootSkillId": "skill.doll-inferno.fates-descent",
       "descriptionTemplate": "Gain [Energy:Arg1] Aliemus. Inflict [{Poison}:Arg2] {plural:[{Poison}:Arg2]|stack|stacks} of {Poison} on all enemies. For every 50 Aliemus currently possessed, apply an additional stack of {Poison}.",
       "descriptionArgs": {
         "Arg1": {
@@ -996,24 +999,21 @@
             "54",
             "60"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.doll-inferno.illusions-end",
-      "rootSkillId": "skill.doll-inferno.fates-descent",
-      "ownerAwakenerId": "awakener-0018",
       "cost": "3",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0018",
           "id": "upgrade.enlighten.doll-inferno.resonant-mycelium.derived.doll-inferno.fates-descent-finale",
           "operation": "override_args",
           "upgraderId": "enlighten.doll-inferno.resonant-mycelium",
-          "upgraderSlot": "E2",
-          "ownerAwakenerName": "Doll: Inferno",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E2",
+          "ownerAwakenerId": "awakener-0018",
+          "ownerAwakenerName": "Doll: Inferno",
           "patch": {
             "descriptionArgs": {
               "Arg1": {
@@ -1037,8 +1037,8 @@
                   "81",
                   "90"
                 ],
-                "suffix": "%",
-                "stat": "ATK"
+                "stat": "ATK",
+                "suffix": "%"
               }
             }
           }
@@ -1048,6 +1048,13 @@
     {
       "id": "derived.doll-inferno.illusions-end",
       "displayName": "Illusion's End",
+      "ownerAwakenerId": "awakener-0018",
+      "derivedFromId": "talent.doll-inferno.path-of-annihilation",
+      "rootSkillId": null,
+      "childDerivedSkillIds": [
+        "derived.doll-inferno.self-destruct-finale",
+        "derived.doll-inferno.fates-descent-finale"
+      ],
       "descriptionTemplate": "Deal 25% of each enemy's Max HP as {Fixed DMG}, with a minimum DMG equal to [Arg1]% of your Max HP. After use, \"Doll: Inferno\"'s specific skills switch to {Finale Form}. The effect of {Illusion's End} activates only once.",
       "descriptionArgs": {
         "Arg1": {
@@ -1064,23 +1071,16 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "talent.doll-inferno.path-of-annihilation",
-      "rootSkillId": null,
-      "ownerAwakenerId": "awakener-0018",
-      "childDerivedSkillIds": [
-        "derived.doll-inferno.self-destruct-finale",
-        "derived.doll-inferno.fates-descent-finale"
-      ],
       "cost": "0",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0018",
           "id": "upgrade.enlighten.doll-inferno.envoy-of-extinction.derived.doll-inferno.illusions-end",
           "operation": "replace_description",
           "upgraderId": "enlighten.doll-inferno.envoy-of-extinction",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Doll: Inferno",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0018",
+          "ownerAwakenerName": "Doll: Inferno",
           "patch": {
             "descriptionTemplate": "Deal 30% of all enemies' Max HP as {Fixed DMG}. This DMG will not be less than [Arg1]% of your Max HP. Restores 30% of lost HP. After use, \"Doll: Inferno\"'s specific skills switch to {Finale Form}. The effect of {Illusion's End} activates only once."
           }
@@ -1090,17 +1090,20 @@
     {
       "id": "derived.doll-inferno.self-destruct-finale",
       "displayName": "Self-Destruct: Finale",
+      "ownerAwakenerId": "awakener-0018",
+      "derivedFromId": "derived.doll-inferno.illusions-end",
+      "rootSkillId": "skill.doll-inferno.self-destruct",
       "descriptionTemplate": "Max HP reduced by 10%. Trigger the {Elation} and \"Curse\" effects.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.doll-inferno.illusions-end",
-      "rootSkillId": "skill.doll-inferno.self-destruct",
-      "ownerAwakenerId": "awakener-0018",
       "cost": "2"
     },
     {
       "id": "derived.helot-catena.bloodthirsty-flail",
       "displayName": "Bloodthirsty Flail",
+      "ownerAwakenerId": "awakener-0019",
+      "derivedFromId": "skill.helot-catena.crimson-shackles",
+      "rootSkillId": "skill.helot-catena.crimson-shackles",
       "descriptionTemplate": "Treated as \"Strike\". Deal [Damage:Arg1] DMG, this DMG enjoys a 5x {STR} bonus and triggers the target's 30% {Bleed}, restores 15% of lost HP. After playing, it becomes {Crimson Shackles}.",
       "descriptionArgs": {
         "Arg1": {
@@ -1113,8 +1116,8 @@
             "216",
             "240"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [
@@ -1126,19 +1129,16 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.helot-catena.crimson-shackles",
-      "rootSkillId": "skill.helot-catena.crimson-shackles",
-      "ownerAwakenerId": "awakener-0019",
       "cost": "4",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0019",
           "id": "upgrade.enlighten.helot-catena.vengeance-unchained.derived.helot-catena.bloodthirsty-flail",
           "operation": "override_card_keywords",
           "upgraderId": "enlighten.helot-catena.vengeance-unchained",
-          "upgraderSlot": "E2",
-          "ownerAwakenerName": "Helot: Catena",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E2",
+          "ownerAwakenerId": "awakener-0019",
+          "ownerAwakenerName": "Helot: Catena",
           "patch": {
             "cardKeywords": [
               {
@@ -1156,6 +1156,9 @@
     {
       "id": "derived.helot-catena.irregular-form-chains",
       "displayName": "Irregular Form: Chains",
+      "ownerAwakenerId": "awakener-0019",
+      "derivedFromId": "skill.helot-catena.fettered-malice",
+      "rootSkillId": "skill.helot-catena.fettered-malice",
       "descriptionTemplate": "Choose a Base Command Card of Helot: Catena and place it into hand.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -1166,34 +1169,34 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.helot-catena.fettered-malice",
-      "rootSkillId": "skill.helot-catena.fettered-malice",
-      "ownerAwakenerId": "awakener-0019",
       "cost": "0"
     },
     {
       "id": "derived.ramona-timeworn.ode-to-tomorrow",
       "displayName": "Ode to Tomorrow",
-      "descriptionTemplate": "Deal double DMG and gain 3 times Keyflare, but {Exhaust} after playing.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
+      "ownerAwakenerId": "awakener-0020",
       "derivedFromId": "skill.ramona-timeworn.predetermined-strike",
       "rootSkillId": "skill.ramona-timeworn.predetermined-strike",
-      "ownerAwakenerId": "awakener-0020"
+      "descriptionTemplate": "Deal double DMG and gain 3 times Keyflare, but {Exhaust} after playing.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.ramona-timeworn.rebirth-tribunal",
       "displayName": "Rebirth Tribunal",
-      "descriptionTemplate": "Obtain 3 Arithmetica.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
+      "ownerAwakenerId": "awakener-0020",
       "derivedFromId": "skill.ramona-timeworn.predetermined-strike",
       "rootSkillId": "skill.ramona-timeworn.predetermined-strike",
-      "ownerAwakenerId": "awakener-0020"
+      "descriptionTemplate": "Obtain 3 Arithmetica.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.goliath.blades-dominion",
       "displayName": "Blade's Dominion",
+      "ownerAwakenerId": "awakener-0021",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power",
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. {STR} has [Arg2] {plural:[Arg2]|time|times} the effect on {Blade's Dominion}. This card is considered \"Strike.\"",
       "descriptionArgs": {
         "Arg1": {
@@ -1206,8 +1209,8 @@
             "360",
             "400"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg2": {
           "kind": "fixed",
@@ -1226,14 +1229,14 @@
           "value": 1
         }
       ],
-      "derivedFromId": "skill.goliath.abyssal-depths-power",
-      "rootSkillId": "skill.goliath.abyssal-depths-power",
-      "ownerAwakenerId": "awakener-0021",
       "cost": "2"
     },
     {
       "id": "derived.goliath.dormancy",
       "displayName": "Dormancy",
+      "ownerAwakenerId": "awakener-0021",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power",
       "descriptionTemplate": "Add 2 {Decapitation Damage} to your hand and grant them {Exhaust}, {Prepare 1}, and {Retain}. Increase the Base DMG of {Blade's Dominion} and {Decapitation Damage} by 25% for this battle. Goliath obtains [Energy:Arg2] Aliemus.",
       "descriptionArgs": {
         "Arg2": {
@@ -1242,26 +1245,23 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.goliath.abyssal-depths-power",
-      "rootSkillId": "skill.goliath.abyssal-depths-power",
-      "ownerAwakenerId": "awakener-0021",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0021",
           "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.dormancy",
           "operation": "mixed",
           "upgraderId": "enlighten.goliath.boundless-ambition",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Goliath",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0021",
+          "ownerAwakenerName": "Goliath",
           "patch": {
+            "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand. Increase the Base DMG of {Blade's Dominion} and {Decapitation Damage} by 25% in this battle. Goliath obtains [Energy:Arg2] Aliemus.",
             "descriptionArgs": {
               "Arg2": {
                 "kind": "fixed",
                 "value": "25"
               }
-            },
-            "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand. Increase the Base DMG of {Blade's Dominion} and {Decapitation Damage} by 25% in this battle. Goliath obtains [Energy:Arg2] Aliemus."
+            }
           }
         }
       ]
@@ -1269,6 +1269,9 @@
     {
       "id": "derived.goliath.usurp",
       "displayName": "Usurp",
+      "ownerAwakenerId": "awakener-0021",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power",
       "descriptionTemplate": "Place 3 {Blade's Dominion} cards with Base DMG increased by 400% and Arithmetica Cost of 0 into hand. Obtain {STR} equal to [Arg1]% {Tentacle DMG}. Goliath gain [Arg2]% Temporary Crit. Rate.",
       "descriptionArgs": {
         "Arg1": {
@@ -1290,19 +1293,17 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.goliath.abyssal-depths-power",
-      "rootSkillId": "skill.goliath.abyssal-depths-power",
-      "ownerAwakenerId": "awakener-0021",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0021",
           "id": "upgrade.enlighten.goliath.boundless-ambition.derived.goliath.usurp",
           "operation": "mixed",
           "upgraderId": "enlighten.goliath.boundless-ambition",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Goliath",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0021",
+          "ownerAwakenerName": "Goliath",
           "patch": {
+            "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand, obtain Temporary {STR} equal to [Arg1]% {Tentacle DMG}. Goliath obtains [Arg2]% Temporary Crit. Rate.",
             "descriptionArgs": {
               "Arg1": {
                 "kind": "scaling",
@@ -1321,8 +1322,7 @@
                 "value": "25",
                 "suffix": "%"
               }
-            },
-            "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand, obtain Temporary {STR} equal to [Arg1]% {Tentacle DMG}. Goliath obtains [Arg2]% Temporary Crit. Rate."
+            }
           }
         }
       ]
@@ -1330,28 +1330,36 @@
     {
       "id": "derived.hameln.ascending-scale",
       "displayName": "Ascending Scale",
+      "ownerAwakenerId": "awakener-0022",
+      "derivedFromId": "derived.hameln.symphony-of-harmony",
+      "rootSkillId": "skill.hameln.laudable-masterpiece",
       "descriptionTemplate": "The next non-Derived Command Card you play has +2 Arithmetica Cost and takes effect 2 times.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.hameln.symphony-of-harmony",
-      "rootSkillId": "skill.hameln.laudable-masterpiece",
-      "ownerAwakenerId": "awakener-0022",
       "cost": "0"
     },
     {
       "id": "derived.hameln.descending-scale",
       "displayName": "Descending Scale",
+      "ownerAwakenerId": "awakener-0022",
+      "derivedFromId": "derived.hameln.symphony-of-harmony",
+      "rootSkillId": "skill.hameln.laudable-masterpiece",
       "descriptionTemplate": "The next non-Derived Command Card you play has -2 Arithmetica Cost.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.hameln.symphony-of-harmony",
-      "rootSkillId": "skill.hameln.laudable-masterpiece",
-      "ownerAwakenerId": "awakener-0022",
       "cost": "0"
     },
     {
       "id": "derived.hameln.symphony-of-harmony",
       "displayName": "Symphony of Harmony",
+      "ownerAwakenerId": "awakener-0022",
+      "nodeKind": "group",
+      "derivedFromId": "skill.hameln.laudable-masterpiece",
+      "rootSkillId": "skill.hameln.laudable-masterpiece",
+      "childDerivedSkillIds": [
+        "derived.hameln.ascending-scale",
+        "derived.hameln.descending-scale"
+      ],
       "descriptionTemplate": "Choose: {Ascending Scale} or {Descending Scale}.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -1362,19 +1370,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.hameln.laudable-masterpiece",
-      "rootSkillId": "skill.hameln.laudable-masterpiece",
-      "ownerAwakenerId": "awakener-0022",
-      "nodeKind": "group",
-      "childDerivedSkillIds": [
-        "derived.hameln.ascending-scale",
-        "derived.hameln.descending-scale"
-      ],
       "cost": "0"
     },
     {
       "id": "derived.helot.irregular-form",
       "displayName": "Irregular Form",
+      "ownerAwakenerId": "awakener-0023",
+      "derivedFromId": "skill.helot.blood-for-blood",
+      "rootSkillId": "skill.helot.blood-for-blood",
       "descriptionTemplate": "Choose one from {Shattering Strike}, {Lasting Loathe}, \"Strike,\" and \"Defense\" to add to your hand and attach {Exhaust}.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -1385,14 +1388,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.helot.blood-for-blood",
-      "rootSkillId": "skill.helot.blood-for-blood",
-      "ownerAwakenerId": "awakener-0023",
       "cost": "0"
     },
     {
       "id": "derived.jenkins.swarm-impact",
       "displayName": "Swarm Impact",
+      "ownerAwakenerId": "awakener-0025",
+      "derivedFromId": "skill.jenkins.mice-assemble",
+      "rootSkillId": "skill.jenkins.mice-assemble",
       "descriptionTemplate": "Deal [Damage:Arg2] DMG to a random enemy [Arg1] {plural:[Arg1]|time|times}.",
       "descriptionArgs": {
         "Arg1": {
@@ -1409,8 +1412,8 @@
             "45",
             "50"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [
@@ -1421,14 +1424,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.jenkins.mice-assemble",
-      "rootSkillId": "skill.jenkins.mice-assemble",
-      "ownerAwakenerId": "awakener-0025",
       "cost": "1"
     },
     {
       "id": "derived.jenkins.ultimate-assemble",
       "displayName": "Ultimate Assemble!",
+      "ownerAwakenerId": "awakener-0025",
+      "derivedFromId": "skill.jenkins.gotcha",
+      "rootSkillId": "skill.jenkins.gotcha",
       "descriptionTemplate": "Shuffle 1 card that Deal [Damage:Arg1] DMG X+10 times, {Swarm Impact} into the top of the Draw pile.",
       "descriptionArgs": {
         "Arg1": {
@@ -1441,8 +1444,8 @@
             "45",
             "50"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [
@@ -1453,14 +1456,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.jenkins.gotcha",
-      "rootSkillId": "skill.jenkins.gotcha",
-      "ownerAwakenerId": "awakener-0025",
       "cost": "X"
     },
     {
       "id": "derived.karen.marvelous-cuisine",
       "displayName": "Marvelous Cuisine",
+      "ownerAwakenerId": "awakener-0026",
+      "derivedFromId": "skill.karen.dance-of-the-gibbous-moon",
+      "rootSkillId": "skill.karen.dance-of-the-gibbous-moon",
       "descriptionTemplate": "Obtain 1 Arithmetica, usable [Arg1] {plural:[Arg1]|time|times}.",
       "descriptionArgs": {
         "Arg1": {
@@ -1476,14 +1479,14 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "skill.karen.dance-of-the-gibbous-moon",
-      "rootSkillId": "skill.karen.dance-of-the-gibbous-moon",
-      "ownerAwakenerId": "awakener-0026",
       "cost": "0"
     },
     {
       "id": "derived.kathigu-ra.hyperflare",
       "displayName": "Hyperflare",
+      "ownerAwakenerId": "awakener-0027",
+      "derivedFromId": "talent.kathigu-ra.the-living-flame",
+      "rootSkillId": "skill.kathigu-ra.solarflare",
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. For each point of Arithmetica consumed, enjoy an additional 150% {STR} bonus. Consume all {Combust}, gain an additional 50% {STR} bonus per stack consumed. After playing, revert all {Hyperflare} back to {Solarflare}.",
       "descriptionArgs": {
         "Arg1": {
@@ -1496,24 +1499,21 @@
             "315",
             "350"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "talent.kathigu-ra.the-living-flame",
-      "rootSkillId": "skill.kathigu-ra.solarflare",
-      "ownerAwakenerId": "awakener-0027",
       "cost": "X",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0027",
           "id": "upgrade.enlighten.kathigu-ra.endless-purgatory.derived.kathigu-ra.hyperflare",
           "operation": "override_args",
           "upgraderId": "enlighten.kathigu-ra.endless-purgatory",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Kathigu-Ra",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0027",
+          "ownerAwakenerName": "Kathigu-Ra",
           "patch": {
             "descriptionArgs": {
               "Arg1": {
@@ -1526,8 +1526,8 @@
                   "315",
                   "350"
                 ],
-                "suffix": "%",
-                "stat": "ATK"
+                "stat": "ATK",
+                "suffix": "%"
               }
             }
           }
@@ -1537,6 +1537,9 @@
     {
       "id": "derived.liz.corrupted-flames",
       "displayName": "Corrupted Flames",
+      "ownerAwakenerId": "awakener-0030",
+      "derivedFromId": "skill.liz.green-flames",
+      "rootSkillId": "skill.liz.green-flames",
       "descriptionTemplate": "Deal [Damage:Arg2] {Pierce DMG} [Arg1] {plural:[Arg1]|time|times} to a random enemy, and inflict {Poison} with [Arg3]% DMG. If Arithmetica is insufficient, it can be played forcefully, andthe effect changes to gaining [Energy:Arg4] Aliemus and {Exhaust} after played.",
       "descriptionArgs": {
         "Arg1": {
@@ -1553,8 +1556,8 @@
             "27",
             "30"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg3": {
           "kind": "fixed",
@@ -1571,19 +1574,16 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.liz.green-flames",
-      "rootSkillId": "skill.liz.green-flames",
-      "ownerAwakenerId": "awakener-0030",
       "cost": "2",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0030",
           "id": "upgrade.enlighten.liz.verdant-spark.derived.liz.corrupted-flames",
           "operation": "replace_description",
           "upgraderId": "enlighten.liz.verdant-spark",
-          "upgraderSlot": "E1",
-          "ownerAwakenerName": "Liz",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E1",
+          "ownerAwakenerId": "awakener-0030",
+          "ownerAwakenerName": "Liz",
           "patch": {
             "descriptionTemplate": "Deal [Damage:Arg2] {Pierce DMG} [Arg1] {plural:[Arg1]|time|times} to a random enemy, and inflict [Arg3]% DMG {Poison}. At turn end, if in hand or {Ultra Space}, upgrade to {Deadly Flames}. Can be played with insufficient Arithmetica, changing its effect to Gain [Energy:Arg4] Aliemus and {Exhaust}."
           }
@@ -1593,6 +1593,9 @@
     {
       "id": "derived.liz.deadly-flames",
       "displayName": "Deadly Flames",
+      "ownerAwakenerId": "awakener-0030",
+      "derivedFromId": "skill.liz.omens-descent",
+      "rootSkillId": "skill.liz.omens-descent",
       "descriptionTemplate": "Deal [Damage:Arg2] {Pierce DMG} [Arg1] {plural:[Arg1]|time|times} to a random enemy, and inflict {Poison} equal to 50% of the Damage. When Arithmetica is insufficient, it can still be forced out, but the effect changes to gaining [Energy:Arg3] Aliemus and {Exhaust} after played.",
       "descriptionArgs": {
         "Arg1": {
@@ -1609,8 +1612,8 @@
             "27",
             "30"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg3": {
           "kind": "fixed",
@@ -1622,14 +1625,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.liz.omens-descent",
-      "rootSkillId": "skill.liz.omens-descent",
-      "ownerAwakenerId": "awakener-0030",
       "cost": "2"
     },
     {
       "id": "derived.miryam.call-of-the-divine-realm",
       "displayName": "Call of the Divine Realm",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith",
       "descriptionTemplate": "Choose an Awakener to gain [Arg1] Aliemus. Draw 2 cards.",
       "descriptionArgs": {
         "Arg1": {
@@ -1645,14 +1648,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "derived.miryam.divine-realms-illusion",
-      "rootSkillId": "skill.miryam.testament-of-faith",
-      "ownerAwakenerId": "awakener-0032",
       "cost": "0"
     },
     {
       "id": "derived.miryam.divine-realms-descent",
       "displayName": "Divine Realm's Descent",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith",
       "descriptionTemplate": "Choose an Awakener to gain [Arg1] Aliemus. Obtain 2 Arithmetica.",
       "descriptionArgs": {
         "Arg1": {
@@ -1668,30 +1671,30 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "derived.miryam.divine-realms-illusion",
-      "rootSkillId": "skill.miryam.testament-of-faith",
-      "ownerAwakenerId": "awakener-0032",
       "cost": "0"
     },
     {
       "id": "derived.miryam.divine-realms-illusion",
       "displayName": "Divine Realm's Illusion",
-      "descriptionTemplate": "Randomly place 1 of these cards into your hand.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
-      "derivedFromId": "derived.miryam.the-end-of-belief",
-      "rootSkillId": "skill.miryam.testament-of-faith",
       "ownerAwakenerId": "awakener-0032",
       "nodeKind": "group",
+      "derivedFromId": "derived.miryam.the-end-of-belief",
+      "rootSkillId": "skill.miryam.testament-of-faith",
       "childDerivedSkillIds": [
         "derived.miryam.faith-of-the-divine-realm",
         "derived.miryam.call-of-the-divine-realm",
         "derived.miryam.divine-realms-descent"
-      ]
+      ],
+      "descriptionTemplate": "Randomly place 1 of these cards into your hand.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.miryam.faith-of-the-divine-realm",
       "displayName": "Faith of the Divine Realm",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith",
       "descriptionTemplate": "Choose an Awakener to gain [Arg1] Aliemus. {Weakness} and {Vulnerable} all enemies for 1 turn.",
       "descriptionArgs": {
         "Arg1": {
@@ -1707,14 +1710,19 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "derived.miryam.divine-realms-illusion",
-      "rootSkillId": "skill.miryam.testament-of-faith",
-      "ownerAwakenerId": "awakener-0032",
       "cost": "0"
     },
     {
       "id": "derived.miryam.heretical-faith",
       "displayName": "Heretical Faith",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "skill.miryam.testament-of-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": [
+        "derived.miryam.iron-resolve",
+        "derived.miryam.revelate-devotion",
+        "derived.miryam.the-end-of-belief"
+      ],
       "descriptionTemplate": "Miryam gains [Energy:Arg3] Aliemus.{Rouse}: Tentacle Limit and Tentacle Count +1, apply 1 layer of {Weakness} and {Vulnerable} to all enemies. Put 1 {The End of Belief} into your hand. Choose: {Iron Resolve} or {Revelate Devotion}.",
       "descriptionArgs": {
         "Arg3": {
@@ -1741,19 +1749,14 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "skill.miryam.testament-of-faith",
-      "rootSkillId": "skill.miryam.testament-of-faith",
-      "ownerAwakenerId": "awakener-0032",
-      "childDerivedSkillIds": [
-        "derived.miryam.iron-resolve",
-        "derived.miryam.revelate-devotion",
-        "derived.miryam.the-end-of-belief"
-      ],
       "cost": "6"
     },
     {
       "id": "derived.miryam.iron-resolve",
       "displayName": "Iron Resolve",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
       "descriptionTemplate": "Gain [Block:Arg1] Shield at turn start.",
       "descriptionArgs": {
         "Arg1": {
@@ -1766,18 +1769,18 @@
             "63",
             "70"
           ],
-          "suffix": "%",
-          "stat": "DEF"
+          "stat": "DEF",
+          "suffix": "%"
         }
       },
-      "cardKeywords": [],
-      "derivedFromId": "derived.miryam.heretical-faith",
-      "rootSkillId": "skill.miryam.testament-of-faith",
-      "ownerAwakenerId": "awakener-0032"
+      "cardKeywords": []
     },
     {
       "id": "derived.miryam.obsession",
       "displayName": "Obsession",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "derived.miryam.sacrament",
+      "rootSkillId": "skill.miryam.pray-to-the-abyss",
       "descriptionTemplate": "Miryam gains [Arg1] Aliemus. At turn end, if this card is in hand, it will transform into {Sacrament} at the cost of reducing the next turn's Draw by 1.",
       "descriptionArgs": {
         "Arg1": {
@@ -1793,14 +1796,14 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "derived.miryam.sacrament",
-      "rootSkillId": "skill.miryam.pray-to-the-abyss",
-      "ownerAwakenerId": "awakener-0032",
       "cost": "0"
     },
     {
       "id": "derived.miryam.revelate-devotion",
       "displayName": "Revelate Devotion",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
       "descriptionTemplate": "Gain [Power:Arg1] {STR} and [TentaclePower:Arg1] {Tentacle DMG} at turn start.",
       "descriptionArgs": {
         "Arg1": {
@@ -1813,18 +1816,21 @@
             "3.15",
             "3.5"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
-      "cardKeywords": [],
-      "derivedFromId": "derived.miryam.heretical-faith",
-      "rootSkillId": "skill.miryam.testament-of-faith",
-      "ownerAwakenerId": "awakener-0032"
+      "cardKeywords": []
     },
     {
       "id": "derived.miryam.sacrament",
       "displayName": "Sacrament",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "skill.miryam.pray-to-the-abyss",
+      "rootSkillId": "skill.miryam.pray-to-the-abyss",
+      "childDerivedSkillIds": [
+        "derived.miryam.obsession"
+      ],
       "descriptionTemplate": "Recover 10% of lost HP. Can be transformed into {Obsession} through {Ritual}, enhancing this Command Card's effects.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -1835,17 +1841,17 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "skill.miryam.pray-to-the-abyss",
-      "rootSkillId": "skill.miryam.pray-to-the-abyss",
-      "ownerAwakenerId": "awakener-0032",
-      "childDerivedSkillIds": [
-        "derived.miryam.obsession"
-      ],
       "cost": "0"
     },
     {
       "id": "derived.miryam.the-end-of-belief",
       "displayName": "The End of Belief",
+      "ownerAwakenerId": "awakener-0032",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": [
+        "derived.miryam.divine-realms-illusion"
+      ],
       "descriptionTemplate": "Miryam gains [Energy:Arg1] Aliemus.{Rouse}: Apply 1 stack of {Weakness} and {Vulnerable} to all enemies. Tentacle Limit and Tentacle Count +1. At turn end, randomly place 1 {Divine Realm's Illusion} into your hand.",
       "descriptionArgs": {
         "Arg1": {
@@ -1872,24 +1878,21 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "derived.miryam.heretical-faith",
-      "rootSkillId": "skill.miryam.testament-of-faith",
-      "ownerAwakenerId": "awakener-0032",
-      "childDerivedSkillIds": [
-        "derived.miryam.divine-realms-illusion"
-      ],
       "cost": "9"
     },
     {
       "id": "derived.mouchette.dramatic-encounter",
       "displayName": "Dramatic Encounter",
+      "ownerAwakenerId": "awakener-0033",
+      "derivedFromId": "skill.mouchette.mist-realm-vestige",
+      "rootSkillId": "skill.mouchette.mist-realm-vestige",
       "descriptionTemplate": "Deal [Damage:Arg1] DMG to a random enemy [Arg2] {plural:[Arg2]|time|times}.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
           "value": "30",
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg2": {
           "kind": "fixed",
@@ -1897,32 +1900,32 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.mouchette.mist-realm-vestige",
-      "rootSkillId": "skill.mouchette.mist-realm-vestige",
-      "ownerAwakenerId": "awakener-0033",
       "cost": "0"
     },
     {
       "id": "derived.pickman.inspiration",
       "displayName": "Inspiration!",
+      "ownerAwakenerId": "awakener-0040",
+      "derivedFromId": "skill.pickman.chromaphage",
+      "rootSkillId": "skill.pickman.chromaphage",
       "descriptionTemplate": "Consume 1 stack of {Fantasia}, choose all {Discover} effects. Gain 1 stack of {Creativity}.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "skill.pickman.chromaphage",
-      "rootSkillId": "skill.pickman.chromaphage",
-      "ownerAwakenerId": "awakener-0040",
       "cost": "0"
     },
     {
       "id": "derived.pollux.sacred-heart",
       "displayName": "Sacred Heart",
+      "ownerAwakenerId": "awakener-0041",
+      "derivedFromId": "skill.pollux.sinless-verdict",
+      "rootSkillId": "skill.pollux.sinless-verdict",
       "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain 3 stacks of {Sin Mark}. After playing, shuffle this card to the top of the Draw Pile. On the {ordinal:3rd} play, {Exhaust} and allow the next command card to benefit from the {Atonement by Pain} effect.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
           "value": "70",
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [
@@ -1934,31 +1937,28 @@
           "value": 1
         }
       ],
-      "derivedFromId": "skill.pollux.sinless-verdict",
-      "rootSkillId": "skill.pollux.sinless-verdict",
-      "ownerAwakenerId": "awakener-0041",
       "cost": "1",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0041",
           "id": "upgrade.enlighten.pollux.divine-revelation.derived.pollux.sacred-heart",
           "operation": "replace_description",
           "upgraderId": "enlighten.pollux.divine-revelation",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Pollux",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0041",
+          "ownerAwakenerName": "Pollux",
           "patch": {
             "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain 3 stacks of {Sin Mark}. After playing, shuffle this card into the top of the Draw Pile. On the {ordinal:3rd} play, {Exhaust} and make your next Command Card benefit from the {Atonement by Pain} effect, applying it 2 times."
           }
         },
         {
-          "ownerAwakenerId": "awakener-0041",
           "id": "upgrade.enlighten.pollux.lux-diouskouron.derived.pollux.sacred-heart",
           "operation": "replace_description",
           "upgraderId": "enlighten.pollux.lux-diouskouron",
-          "upgraderSlot": "AbsoluteAxiom",
-          "ownerAwakenerName": "Pollux",
           "upgraderType": "enlighten",
+          "upgraderSlot": "AbsoluteAxiom",
+          "ownerAwakenerId": "awakener-0041",
+          "ownerAwakenerName": "Pollux",
           "patch": {
             "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain 3 stacks of {Sin Mark}. After playing, shuffle this card into the top of the Draw Pile. On the {ordinal:3rd} play, {Exhaust} and make your next Command Card benefit from the {Atonement by Pain} effect, applying it 2 times."
           }
@@ -1968,36 +1968,39 @@
     {
       "id": "derived.salvador.dedication",
       "displayName": "Dedication",
-      "descriptionTemplate": "Heal with blood. After dealing Damage, lose 10% of current HP and gain an equivalent amount of healing from the {Crimson Furnace}.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
+      "ownerAwakenerId": "awakener-0044",
       "derivedFromId": "skill.salvador.end-of-suffering",
       "rootSkillId": "skill.salvador.end-of-suffering",
-      "ownerAwakenerId": "awakener-0044"
+      "descriptionTemplate": "Heal with blood. After dealing Damage, lose 10% of current HP and gain an equivalent amount of healing from the {Crimson Furnace}.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.salvador.liberation",
       "displayName": "Liberation",
-      "descriptionTemplate": "Pain for pain. Consume all remaining Healing from the {Crimson Furnace}, each point consumed increases DMG dealt by 3 (9 during a Boss Battle).",
-      "descriptionArgs": {},
-      "cardKeywords": [],
+      "ownerAwakenerId": "awakener-0044",
       "derivedFromId": "skill.salvador.end-of-suffering",
       "rootSkillId": "skill.salvador.end-of-suffering",
-      "ownerAwakenerId": "awakener-0044"
+      "descriptionTemplate": "Pain for pain. Consume all remaining Healing from the {Crimson Furnace}, each point consumed increases DMG dealt by 3 (9 during a Boss Battle).",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.salvador.redemption",
       "displayName": "Redemption",
-      "descriptionTemplate": "{Redemption} through faith. Consume all remaining Healing from the {Crimson Furnace} to gain a Shield equal to 150% of the consumed amount. This Shield is unaffected by Shield Bonuses or Debuffs and ignores Shield Caps.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
+      "ownerAwakenerId": "awakener-0044",
       "derivedFromId": "skill.salvador.end-of-suffering",
       "rootSkillId": "skill.salvador.end-of-suffering",
-      "ownerAwakenerId": "awakener-0044"
+      "descriptionTemplate": "{Redemption} through faith. Consume all remaining Healing from the {Crimson Furnace} to gain a Shield equal to 150% of the consumed amount. This Shield is unaffected by Shield Bonuses or Debuffs and ignores Shield Caps.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.salvador.sanctuary-of-mercy",
       "displayName": "Sanctuary of Mercy",
+      "ownerAwakenerId": "awakener-0044",
+      "derivedFromId": "skill.salvador.benediction",
+      "rootSkillId": "skill.salvador.benediction",
       "descriptionTemplate": "Gain [Arg1] {plural:[Arg1]|stack|stacks} of Temporary {Barrier}, {Embryo Fusion} +[Arg2]%.",
       "descriptionArgs": {
         "Arg1": {
@@ -2018,14 +2021,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.salvador.benediction",
-      "rootSkillId": "skill.salvador.benediction",
-      "ownerAwakenerId": "awakener-0044",
       "cost": "0"
     },
     {
       "id": "derived.tawil.echoes-of-the-past",
       "displayName": "Echoes of the Past",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "skill.tawil.the-silver-key-gate",
+      "rootSkillId": "skill.tawil.the-silver-key-gate",
       "descriptionTemplate": "Restore Current HP and Shield to the state at the end of the previous Turn.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -2036,14 +2039,14 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.tawil.the-silver-key-gate",
-      "rootSkillId": "skill.tawil.the-silver-key-gate",
-      "ownerAwakenerId": "awakener-0047",
       "cost": "0"
     },
     {
       "id": "derived.tawil.emissarys-verdict",
       "displayName": "Emissary's Verdict",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time",
       "descriptionTemplate": "Deal [Arg1]% of the target's max HP as {Fixed DMG} to the enemy in the last row. This DMG cannot be less than 300% of your own max HP.",
       "descriptionArgs": {
         "Arg1": {
@@ -2053,14 +2056,17 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.tawil.memories",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
       "cost": "0"
     },
     {
       "id": "derived.tawil.four-wings",
       "displayName": "Four Wings",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "derived.tawil.twin-wings",
+      "rootSkillId": "skill.tawil.pinions-of-time",
+      "childDerivedSkillIds": [
+        "derived.tawil.six-wings"
+      ],
       "descriptionTemplate": "When Arithmetica is insufficient, it consumes 500 Keyflare to play. Deal 4 instances of [Damage:Arg1] DMG, draw 1 card. For each hit, {Steal} [Arg2] Temporary {STR} from the target. Shuffle {Six Wings} into the Draw Pile.",
       "descriptionArgs": {
         "Arg1": {
@@ -2073,8 +2079,8 @@
             "45",
             "50"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg2": {
           "kind": "scaling",
@@ -2086,8 +2092,8 @@
             "9",
             "10"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [
@@ -2095,28 +2101,25 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "derived.tawil.twin-wings",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
-      "childDerivedSkillIds": [
-        "derived.tawil.six-wings"
-      ],
       "cost": "2"
     },
     {
       "id": "derived.tawil.honey-mead",
       "displayName": "Honey Mead",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time",
       "descriptionTemplate": "Obtain 1 stack of Temporary {Barrier}.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.tawil.memories",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
       "cost": "0"
     },
     {
       "id": "derived.tawil.innocent-return-gift",
       "displayName": "Innocent Return Gift",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time",
       "descriptionTemplate": "Choose an Awakener to gain [Energy:Arg1] Aliemus.",
       "descriptionArgs": {
         "Arg1": {
@@ -2125,21 +2128,15 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "derived.tawil.memories",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
       "cost": "0"
     },
     {
       "id": "derived.tawil.memories",
       "displayName": "Memories",
-      "descriptionTemplate": "Choose 1 of these {Memories} to trigger its effect. A chosen memory cannot be selected again during this exploration.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
-      "derivedFromId": "derived.tawil.six-wings",
-      "rootSkillId": "skill.tawil.pinions-of-time",
       "ownerAwakenerId": "awakener-0047",
       "nodeKind": "group",
+      "derivedFromId": "derived.tawil.six-wings",
+      "rootSkillId": "skill.tawil.pinions-of-time",
       "childDerivedSkillIds": [
         "derived.tawil.innocent-return-gift",
         "derived.tawil.mutated-heart",
@@ -2147,33 +2144,39 @@
         "derived.tawil.emissarys-verdict",
         "derived.tawil.utopian-veil",
         "derived.tawil.polar-dusklight"
-      ]
+      ],
+      "descriptionTemplate": "Choose 1 of these {Memories} to trigger its effect. A chosen memory cannot be selected again during this exploration.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.tawil.mutated-heart",
       "displayName": "Mutated Heart",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time",
       "descriptionTemplate": "Discard all cards in your hand and draw a number of cards equal to that quantity +3.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.tawil.memories",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
       "cost": "0"
     },
     {
       "id": "derived.tawil.polar-dusklight",
       "displayName": "Polar Dusklight",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time",
       "descriptionTemplate": "Choose 1 card from the Draw Pile or Discard Pile and add it to your hand, reducing its Arithmetica Cost to 0.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.tawil.memories",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
       "cost": "0"
     },
     {
       "id": "derived.tawil.silver-key-dawn",
       "displayName": "Silver Key Dawn",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "skill.tawil.the-silver-key-gate",
+      "rootSkillId": "skill.tawil.the-silver-key-gate",
       "descriptionTemplate": "Choose 1 unlocked Posse from 3 randomly unlocked Posses to activate immediately, and it will take effect twice.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -2184,14 +2187,17 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": "skill.tawil.the-silver-key-gate",
-      "rootSkillId": "skill.tawil.the-silver-key-gate",
-      "ownerAwakenerId": "awakener-0047",
       "cost": "0"
     },
     {
       "id": "derived.tawil.six-wings",
       "displayName": "Six Wings",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "derived.tawil.four-wings",
+      "rootSkillId": "skill.tawil.pinions-of-time",
+      "childDerivedSkillIds": [
+        "derived.tawil.memories"
+      ],
       "descriptionTemplate": "Can be played by consuming 500 Keyflare when Arithmetica is insufficient. Deal 6 instances of [Damage:Arg1] {Pierce DMG}. You can choose one out of six {Memories} to trigger its effect; this \"Memory\" cannot be selected again during this exploration.",
       "descriptionArgs": {
         "Arg1": {
@@ -2204,8 +2210,8 @@
             "54",
             "60"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [
@@ -2213,17 +2219,17 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "derived.tawil.four-wings",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
-      "childDerivedSkillIds": [
-        "derived.tawil.memories"
-      ],
       "cost": "2"
     },
     {
       "id": "derived.tawil.twin-wings",
       "displayName": "Twin Wings",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "skill.tawil.pinions-of-time",
+      "rootSkillId": "skill.tawil.pinions-of-time",
+      "childDerivedSkillIds": [
+        "derived.tawil.four-wings"
+      ],
       "descriptionTemplate": "Can be played by consuming 500 Keyflare when Arithmetica is insufficient. Deal [Damage:Arg1] DMG 2 times, and Tawil obtains [Energy:Arg2] Aliemus. Draw a card. Shuffle {Four Wings} into the Draw Pile.",
       "descriptionArgs": {
         "Arg1": {
@@ -2236,8 +2242,8 @@
             "36",
             "40"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg2": {
           "kind": "scaling",
@@ -2256,28 +2262,25 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "skill.tawil.pinions-of-time",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
-      "childDerivedSkillIds": [
-        "derived.tawil.four-wings"
-      ],
       "cost": "2"
     },
     {
       "id": "derived.tawil.utopian-veil",
       "displayName": "Utopian Veil",
+      "ownerAwakenerId": "awakener-0047",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time",
       "descriptionTemplate": "View 3 Posse and choose 1 to release immediately.",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "derivedFromId": "derived.tawil.memories",
-      "rootSkillId": "skill.tawil.pinions-of-time",
-      "ownerAwakenerId": "awakener-0047",
       "cost": "0"
     },
     {
       "id": "derived.thais.blood-of-coition",
       "displayName": "Blood of Coition",
+      "ownerAwakenerId": "awakener-0048",
+      "derivedFromId": "skill.thais.sacred-bloods-instinct",
+      "rootSkillId": "skill.thais.sacred-bloods-instinct",
       "descriptionTemplate": "{Embryo Fusion} +[Arg1]%.",
       "descriptionArgs": {
         "Arg1": {
@@ -2287,18 +2290,15 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.thais.sacred-bloods-instinct",
-      "rootSkillId": "skill.thais.sacred-bloods-instinct",
-      "ownerAwakenerId": "awakener-0048",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0048",
           "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-coition",
           "operation": "override_args",
           "upgraderId": "enlighten.thais.forests-embrace",
-          "upgraderSlot": "E1",
-          "ownerAwakenerName": "Thais",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E1",
+          "ownerAwakenerId": "awakener-0048",
+          "ownerAwakenerName": "Thais",
           "patch": {
             "descriptionArgs": {
               "Arg1": {
@@ -2314,6 +2314,9 @@
     {
       "id": "derived.thais.blood-of-decay",
       "displayName": "Blood of Decay",
+      "ownerAwakenerId": "awakener-0048",
+      "derivedFromId": "skill.thais.sacred-bloods-instinct",
+      "rootSkillId": "skill.thais.sacred-bloods-instinct",
       "descriptionTemplate": "{Vulnerable} all enemies for [Arg1] {plural:[Arg1]|turn|turns}.",
       "descriptionArgs": {
         "Arg1": {
@@ -2322,18 +2325,15 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.thais.sacred-bloods-instinct",
-      "rootSkillId": "skill.thais.sacred-bloods-instinct",
-      "ownerAwakenerId": "awakener-0048",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0048",
           "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-decay",
           "operation": "override_args",
           "upgraderId": "enlighten.thais.forests-embrace",
-          "upgraderSlot": "E1",
-          "ownerAwakenerName": "Thais",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E1",
+          "ownerAwakenerId": "awakener-0048",
+          "ownerAwakenerName": "Thais",
           "patch": {
             "descriptionArgs": {
               "Arg1": {
@@ -2348,6 +2348,9 @@
     {
       "id": "derived.thais.blood-of-fear",
       "displayName": "Blood of Fear",
+      "ownerAwakenerId": "awakener-0048",
+      "derivedFromId": "skill.thais.sacred-bloods-instinct",
+      "rootSkillId": "skill.thais.sacred-bloods-instinct",
       "descriptionTemplate": "{Weakness} all enemies for [Arg1] {plural:[Arg1]|turn|turns}.",
       "descriptionArgs": {
         "Arg1": {
@@ -2356,18 +2359,15 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.thais.sacred-bloods-instinct",
-      "rootSkillId": "skill.thais.sacred-bloods-instinct",
-      "ownerAwakenerId": "awakener-0048",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0048",
           "id": "upgrade.enlighten.thais.forests-embrace.derived.thais.blood-of-fear",
           "operation": "override_args",
           "upgraderId": "enlighten.thais.forests-embrace",
-          "upgraderSlot": "E1",
-          "ownerAwakenerName": "Thais",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E1",
+          "ownerAwakenerId": "awakener-0048",
+          "ownerAwakenerName": "Thais",
           "patch": {
             "descriptionArgs": {
               "Arg1": {
@@ -2382,6 +2382,9 @@
     {
       "id": "derived.thais.scion-of-purity",
       "displayName": "Scion of Purity",
+      "ownerAwakenerId": "awakener-0048",
+      "derivedFromId": "skill.thais.ad-matrem-vocatus",
+      "rootSkillId": "skill.thais.ad-matrem-vocatus",
       "descriptionTemplate": "When there is no {Embryo}, this card can be {Devour} and trigger {Devour} twice. When played directly or automatically converted, this card is considered to have 1.5 times the effect of an {Embryo}.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -2392,14 +2395,14 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "skill.thais.ad-matrem-vocatus",
-      "rootSkillId": "skill.thais.ad-matrem-vocatus",
-      "ownerAwakenerId": "awakener-0048",
       "cost": "0"
     },
     {
       "id": "derived.wanda.echoes-of-whispers",
       "displayName": "Echoes of Whispers",
+      "ownerAwakenerId": "awakener-0052",
+      "derivedFromId": "skill.wanda.necropolis-of-dreams",
+      "rootSkillId": "skill.wanda.necropolis-of-dreams",
       "descriptionTemplate": "{Exhaust} 10 stacks of {Dreamlure}, causing all enemies to enter the {Murmur} state for 1 turn: DMG reduced by [StateArg3]%, but the number of attacks is doubled.",
       "descriptionArgs": {
         "StateArg3": {
@@ -2408,24 +2411,24 @@
           "suffix": "%"
         }
       },
-      "cardKeywords": [],
-      "derivedFromId": "skill.wanda.necropolis-of-dreams",
-      "rootSkillId": "skill.wanda.necropolis-of-dreams",
-      "ownerAwakenerId": "awakener-0052"
+      "cardKeywords": []
     },
     {
       "id": "derived.wanda.hypnotic-veins",
       "displayName": "Hypnotic Veins",
-      "descriptionTemplate": "Obtain 1 stack of {Dreamlure}.",
-      "descriptionArgs": {},
-      "cardKeywords": [],
+      "ownerAwakenerId": "awakener-0052",
       "derivedFromId": "skill.wanda.lost-dreams-guide",
       "rootSkillId": "skill.wanda.lost-dreams-guide",
-      "ownerAwakenerId": "awakener-0052"
+      "descriptionTemplate": "Obtain 1 stack of {Dreamlure}.",
+      "descriptionArgs": {},
+      "cardKeywords": []
     },
     {
       "id": "derived.wanda.slumber-counter",
       "displayName": "Slumber Counter",
+      "ownerAwakenerId": "awakener-0052",
+      "derivedFromId": "skill.wanda.necropolis-of-dreams",
+      "rootSkillId": "skill.wanda.necropolis-of-dreams",
       "descriptionTemplate": "Consume 5 stacks of {Dreamlure}, Wanda obtains [StateArg1] Aliemus, and gains Temporary {Counter} equal to [StateArg2]% of permanent {Counter}.",
       "descriptionArgs": {
         "StateArg1": {
@@ -2452,14 +2455,14 @@
           "suffix": "%"
         }
       },
-      "cardKeywords": [],
-      "derivedFromId": "skill.wanda.necropolis-of-dreams",
-      "rootSkillId": "skill.wanda.necropolis-of-dreams",
-      "ownerAwakenerId": "awakener-0052"
+      "cardKeywords": []
     },
     {
       "id": "derived.xu.betroth",
       "displayName": "Betroth",
+      "ownerAwakenerId": "awakener-0054",
+      "derivedFromId": "skill.xu.mist-bound-vow",
+      "rootSkillId": "skill.xu.mist-bound-vow",
       "descriptionTemplate": "Inflict [Arg1] {plural:[Arg1]|stack|stacks} of {Spellbound} on all enemies. {Poison} inflicted +200%.",
       "descriptionArgs": {
         "Arg1": {
@@ -2468,18 +2471,15 @@
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.xu.mist-bound-vow",
-      "rootSkillId": "skill.xu.mist-bound-vow",
-      "ownerAwakenerId": "awakener-0054",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0054",
           "id": "upgrade.enlighten.xu.nirvanas-kiss.derived.xu.betroth",
           "operation": "replace_description",
           "upgraderId": "enlighten.xu.nirvanas-kiss",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Xu",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0054",
+          "ownerAwakenerName": "Xu",
           "patch": {
             "descriptionTemplate": "Inflict [Arg1] {plural:[Arg1]|stack|stacks} of {Spellbound} on all enemies. {Poison} inflicted +200%."
           }
@@ -2489,6 +2489,9 @@
     {
       "id": "derived.xu.enthrall",
       "displayName": "Enthrall",
+      "ownerAwakenerId": "awakener-0054",
+      "derivedFromId": "skill.xu.mist-bound-vow",
+      "rootSkillId": "skill.xu.mist-bound-vow",
       "descriptionTemplate": "Remove all enemies' {Spellbound}. For each stack removed: {Crimson Furnace} +[Arg3]; cause {Fixed DMG} equal to [Arg1]% of the target's Max HP; trigger [Arg2]% {Poison}.",
       "descriptionArgs": {
         "Arg1": {
@@ -2504,23 +2507,20 @@
         "Arg3": {
           "kind": "fixed",
           "value": "20",
-          "suffix": "%",
-          "stat": "CON"
+          "stat": "CON",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.xu.mist-bound-vow",
-      "rootSkillId": "skill.xu.mist-bound-vow",
-      "ownerAwakenerId": "awakener-0054",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0054",
           "id": "upgrade.enlighten.xu.nirvanas-kiss.derived.xu.enthrall",
           "operation": "replace_description",
           "upgraderId": "enlighten.xu.nirvanas-kiss",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Xu",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0054",
+          "ownerAwakenerName": "Xu",
           "patch": {
             "descriptionTemplate": "Remove all enemies' {Spellbound}. For each stack removed: {Crimson Furnace} +[Arg3]; cause {Fixed DMG} equal to [Arg1]% of the target's Max HP; trigger [Arg2]% {Poison}."
           }
@@ -2530,6 +2530,9 @@
     {
       "id": "derived.vortice.vortex-shell",
       "displayName": "Vortex! Shell!",
+      "ownerAwakenerId": "awakener-0055",
+      "derivedFromId": "skill.vortice.moskstraumen-boom",
+      "rootSkillId": "skill.vortice.moskstraumen-boom",
       "descriptionTemplate": "Deal [Arg1] {Fixed DMG} to the enemy with the highest HP, {Tentacle DMG} +[TentaclePower:Arg2].",
       "descriptionArgs": {
         "Arg1": {
@@ -2542,8 +2545,8 @@
             "2500",
             "3000"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "Arg2": {
           "kind": "scaling",
@@ -2555,25 +2558,23 @@
             "13.5",
             "15"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.vortice.moskstraumen-boom",
-      "rootSkillId": "skill.vortice.moskstraumen-boom",
-      "ownerAwakenerId": "awakener-0055",
       "cost": "0",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0055",
           "id": "upgrade.enlighten.vortice.endless-tide.derived.vortice.vortex-shell",
           "operation": "mixed",
           "upgraderId": "enlighten.vortice.endless-tide",
-          "upgraderSlot": "E1",
-          "ownerAwakenerName": "Vortice",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E1",
+          "ownerAwakenerId": "awakener-0055",
+          "ownerAwakenerName": "Vortice",
           "patch": {
+            "descriptionTemplate": "Deal [Arg4] +[Float:Arg3]% of target's Max HP as {Fixed DMG} to the enemy with the highest HP, {Tentacle DMG} +[TentaclePower:Arg2].",
             "descriptionArgs": {
               "Arg2": {
                 "kind": "scaling",
@@ -2585,17 +2586,17 @@
                   "13.5",
                   "15"
                 ],
-                "suffix": "%",
-                "stat": "ATK"
+                "stat": "ATK",
+                "suffix": "%"
               },
               "Arg3": {
                 "kind": "fixed",
                 "value": "0.5",
+                "suffix": "%",
                 "substatBonus": {
                   "substat": "RealmMastery",
                   "multiplier": "0.005"
-                },
-                "suffix": "%"
+                }
               },
               "Arg4": {
                 "kind": "scaling",
@@ -2607,11 +2608,10 @@
                   "2500",
                   "3000"
                 ],
-                "suffix": "%",
-                "stat": "ATK"
+                "stat": "ATK",
+                "suffix": "%"
               }
-            },
-            "descriptionTemplate": "Deal [Arg4] +[Float:Arg3]% of target's Max HP as {Fixed DMG} to the enemy with the highest HP, {Tentacle DMG} +[TentaclePower:Arg2]."
+            }
           }
         }
       ]
@@ -2619,6 +2619,9 @@
     {
       "id": "derived.arachne.guiding-strings",
       "displayName": "Guiding Strings",
+      "ownerAwakenerId": "awakener-0056",
+      "derivedFromId": "skill.arachne.eternal-loom",
+      "rootSkillId": "skill.arachne.eternal-loom",
       "descriptionTemplate": "Lose [Arg1]% Max HP, gain 1 stack of {Weaver}.\nThis battle, HP lost from {Guiding Strings} and {Final Verdict} dealt by Arachne +10%.\n{Fleeting}: Arachne randomly gains 15~30 Aliemus.",
       "descriptionArgs": {
         "Arg1": {
@@ -2632,14 +2635,14 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": "skill.arachne.eternal-loom",
-      "rootSkillId": "skill.arachne.eternal-loom",
-      "ownerAwakenerId": "awakener-0056",
       "cost": "0"
     },
     {
       "id": "derived.arachne.infinite-threads",
       "displayName": "Infinite Threads",
+      "ownerAwakenerId": "awakener-0056",
+      "derivedFromId": "skill.arachne.moira-as-i-decree",
+      "rootSkillId": "skill.arachne.moira-as-i-decree",
       "descriptionTemplate": "Gain 5 stacks of Temporary {Singularity Prism}, deal [FateCut:Arg2] {Final Verdict} to the enemy with lowest HP.",
       "descriptionArgs": {
         "Arg2": {
@@ -2652,24 +2655,21 @@
             "2160",
             "2400"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
       },
       "cardKeywords": [],
-      "derivedFromId": "skill.arachne.moira-as-i-decree",
-      "rootSkillId": "skill.arachne.moira-as-i-decree",
-      "ownerAwakenerId": "awakener-0056",
       "cost": "0",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0056",
           "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.derived.arachne.infinite-threads",
           "operation": "replace_description",
           "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Arachne",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0056",
+          "ownerAwakenerName": "Arachne",
           "patch": {
             "descriptionTemplate": "Gain 10 stacks of Temporary {Singularity Prism}, deal [FateCut:Arg2] {Final Verdict} to the enemy with lowest HP."
           }
@@ -2679,6 +2679,8 @@
     {
       "id": "derived.global.embryo",
       "displayName": "Embryo",
+      "derivedFromId": null,
+      "rootSkillId": null,
       "descriptionTemplate": "{Caro} Awakeners consume this on Exalt to trigger {Devour}. On play: One Awakener gains [Energy:Arg1] Aliemus and +[Arg2]% Crit Rate this turn.",
       "descriptionArgs": {
         "Arg1": {
@@ -2699,13 +2701,13 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": null,
-      "rootSkillId": null,
       "cost": "0"
     },
     {
       "id": "derived.global.insight",
       "displayName": "Insight",
+      "derivedFromId": null,
+      "rootSkillId": null,
       "descriptionTemplate": "Obtain 1 Arithmetica, and draw 1 card.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -2716,13 +2718,13 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": null,
-      "rootSkillId": null,
       "cost": "0"
     },
     {
       "id": "derived.global.light-cone-boundary",
       "displayName": "Light Cone Boundary",
+      "derivedFromId": null,
+      "rootSkillId": null,
       "descriptionTemplate": "Max out Keyflare and all Awakeners' Aliemus.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -2730,13 +2732,13 @@
           "id": "mechanic.exhaust"
         }
       ],
-      "derivedFromId": null,
-      "rootSkillId": null,
       "cost": "0"
     },
     {
       "id": "derived.global.silver-key-gleam",
       "displayName": "Silver Key Gleam",
+      "derivedFromId": null,
+      "rootSkillId": null,
       "descriptionTemplate": "Choose one of the 3 unlocked random Posse to release immediately.",
       "descriptionArgs": {},
       "cardKeywords": [
@@ -2747,8 +2749,6 @@
           "id": "mechanic.retain"
         }
       ],
-      "derivedFromId": null,
-      "rootSkillId": null,
       "cost": "0"
     }
   ]

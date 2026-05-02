@@ -142,7 +142,7 @@ function resolveBaseValue(
     }
 
     case 'computed':
-      return evaluatePublicFormulaExpression(arg.expression, formulaContext).value ?? 0
+      return evaluatePublicFormulaExpression(arg, formulaContext).value ?? 0
   }
 }
 
@@ -164,7 +164,7 @@ function resolveRawBaseValue(
     }
 
     case 'computed': {
-      const evaluation = evaluatePublicFormulaExpression(arg.expression, formulaContext)
+      const evaluation = evaluatePublicFormulaExpression(arg, formulaContext)
       return evaluation.resolved && evaluation.value !== null ? String(evaluation.value) : '—'
     }
   }

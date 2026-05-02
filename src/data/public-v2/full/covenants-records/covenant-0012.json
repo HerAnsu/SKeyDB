@@ -2,7 +2,7 @@
   "id": "covenant-0012",
   "name": "Ring of Chamber 36",
   "assetId": "covenant-icon-014",
-  "lore": "Spin, then forget—this is all of her life.",
+  "lineupToken": "r",
   "setEffects": [
     {
       "set": 3,
@@ -20,5 +20,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "r"
+  "lore": "Spin, then forget—this is all of her life."
 }

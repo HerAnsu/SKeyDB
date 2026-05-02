@@ -9,12 +9,12 @@
     "Prepare 4",
     "Prepare 5"
   ],
+  "textColor": "damage",
   "descriptionTemplate": "At turn end, Arithmetica Cost -[Layer], This effect triggers even if discarded.",
   "descriptionArgs": {
     "Layer": {
       "kind": "fixed",
       "value": "X"
     }
-  },
-  "textColor": "damage"
+  }
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.ogier.unstable-barrier",
+  "displayName": "Unstable Barrier",
   "ownerAwakenerId": "awakener-0038",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Unstable Barrier",
   "descriptionTemplate": "Gain [Block:Arg1] Shield X+1 times. For each 1 Arithmetica consumed, Gain [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "12.6",
         "14"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -28,14 +28,15 @@
   "cost": "X",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0038",
       "id": "upgrade.enlighten.ogier.sacrifice-for-justice.skill.ogier.unstable-barrier",
       "operation": "mixed",
       "upgraderId": "enlighten.ogier.sacrifice-for-justice",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Ogier",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0038",
+      "ownerAwakenerName": "Ogier",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield X+1 times. For every 1 Arithmetica consumed, Gain [Energy:Arg3] Aliemus. Obtain [Power:Arg2] {STR}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -47,8 +48,8 @@
               "16.2",
               "18"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -60,15 +61,14 @@
               "5.4",
               "6"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
             "value": "5"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield X+1 times. For every 1 Arithmetica consumed, Gain [Energy:Arg3] Aliemus. Obtain [Power:Arg2] {STR}."
+        }
       }
     }
   ]

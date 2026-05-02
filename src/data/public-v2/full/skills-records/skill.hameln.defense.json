@@ -1,9 +1,9 @@
 {
   "id": "skill.hameln.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0022",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Hameln obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0022",
       "id": "upgrade.enlighten.hameln.mind-concerto.skill.hameln.defense",
       "operation": "mixed",
       "upgraderId": "enlighten.hameln.mind-concerto",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Hameln",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Hameln obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] Temporary {STR}. If either {Rondino} or {Crescendo} are triggered, the obtained Temporary {STR} is doubled.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -71,11 +72,10 @@
           "Arg3": {
             "kind": "fixed",
             "value": "10",
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Hameln obtains [Energy:Arg2] Aliemus. Obtain [Power:Arg3] Temporary {STR}. If either {Rondino} or {Crescendo} are triggered, the obtained Temporary {STR} is doubled."
+        }
       }
     }
   ]

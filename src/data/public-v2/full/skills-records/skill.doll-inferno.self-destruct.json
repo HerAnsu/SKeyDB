@@ -1,9 +1,9 @@
 {
   "id": "skill.doll-inferno.self-destruct",
+  "displayName": "Self-Destruct",
   "ownerAwakenerId": "awakener-0018",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Self-Destruct",
   "descriptionTemplate": "Choose {Elation} or \"Curse\".\n{Self-Destruct: Finale}",
   "descriptionArgs": {},
   "cardKeywords": [],

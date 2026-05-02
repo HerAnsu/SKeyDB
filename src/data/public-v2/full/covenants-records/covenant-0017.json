@@ -2,7 +2,7 @@
   "id": "covenant-0017",
   "name": "Dream of Medicine",
   "assetId": "covenant-icon-019",
-  "lore": "A thousand years ago, five minutes was equivalent to forty ounces of fine sand.",
+  "lineupToken": "o",
   "setEffects": [
     {
       "set": 3,
@@ -21,5 +21,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "o"
+  "lore": "A thousand years ago, five minutes was equivalent to forty ounces of fine sand."
 }

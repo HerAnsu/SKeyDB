@@ -1,9 +1,9 @@
 {
   "id": "skill.doll.outer-surgery",
+  "displayName": "Outer Surgery",
   "ownerAwakenerId": "awakener-0013",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Outer Surgery",
   "descriptionTemplate": "Restore [Heal:Arg1] HP. Inflict all enemies with [Arg2] {plural:[Arg2]|stack|stacks} of {Weakness}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
       "stat": "CON",
+      "suffix": "%",
       "substatBonus": {
         "substat": "AliemusRegen",
         "multiplier": "0.5",
@@ -33,13 +33,13 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0013",
       "id": "upgrade.enlighten.doll.pure-rationality.skill.doll.outer-surgery",
       "operation": "override_args",
       "upgraderId": "enlighten.doll.pure-rationality",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Doll",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0013",
+      "ownerAwakenerName": "Doll",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -52,8 +52,8 @@
               "36",
               "40"
             ],
-            "suffix": "%",
             "stat": "CON",
+            "suffix": "%",
             "substatBonus": {
               "substat": "AliemusRegen",
               "multiplier": "0.5",

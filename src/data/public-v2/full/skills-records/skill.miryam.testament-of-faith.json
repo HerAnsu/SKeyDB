@@ -1,9 +1,9 @@
 {
   "id": "skill.miryam.testament-of-faith",
+  "displayName": "Testament of Faith",
   "ownerAwakenerId": "awakener-0032",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Testament of Faith",
   "descriptionTemplate": "Miryam gains [Energy:Arg1] Aliemus. {Rouse}: Tentacle Limit and Tentacle Count +1. Inflict 1 stack of {Weakness} and {Vulnerable} on all enemies. Miryam's \"Strike\" and {Exalted Pyre} Crit. Rate +100%. Place 1 {Heretical Faith} into hand.",
   "descriptionArgs": {
     "Arg1": {
@@ -30,13 +30,13 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0032",
       "id": "upgrade.enlighten.miryam.homeland-resurgence.skill.miryam.testament-of-faith",
       "operation": "replace_description",
       "upgraderId": "enlighten.miryam.homeland-resurgence",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "patch": {
         "descriptionTemplate": "Miryam gains [Energy:Arg1] Aliemus. {Rouse}: Tentacle Limit and Tentacle Count +1. Inflict 1 stack of {Weakness} and {Vulnerable} on all enemies. Miryam's \"Strike\" and {Exalted Pyre} Crit. Rate +100%. Place 1 {Heretical Faith} into hand. For every 2 {Sacrament} cards flipped, place 1 {Divine Realm's Illusion} into hand."
       }

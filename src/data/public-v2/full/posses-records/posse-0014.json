@@ -1,6 +1,11 @@
 {
   "id": "posse-0014",
   "name": "Bone-Chilling Embrace",
+  "realm": "AEQUOR",
+  "assetId": "KeyToken_Skill_14",
+  "assetCrystalId": "KeyToken_Crystal_14",
+  "assetBadgeId": "KeyToken_Props_14",
+  "lineupToken": "n",
   "descriptionTemplate": "Recover [Arg1] Arithmetica and gain [Block:Arg2] Delayed Shield. If your Tentacle Stance is {Surging Tides}, instead summon [Arg3] Tentacles.",
   "descriptionArgs": {
     "Arg1": {
@@ -9,51 +14,11 @@
     },
     "Arg2": {
       "kind": "computed",
-      "expression": {
-        "op": "mul",
-        "args": [
-          {
-            "op": "mul",
-            "args": [
-              {
-                "var": "accountStageGrowth"
-              },
-              {
-                "op": "add",
-                "args": [
-                  {
-                    "const": 1.0
-                  },
-                  {
-                    "op": "mul",
-                    "args": [
-                      {
-                        "op": "min",
-                        "args": [
-                          {
-                            "var": "ownedPosseCount"
-                          },
-                          {
-                            "const": 50.0
-                          }
-                        ]
-                      },
-                      {
-                        "const": 0.01
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "const": 0.1
-          }
-        ]
-      },
+      "formulaKey": "scaled",
+      "baseFormula": "esotericResearchDepth",
+      "multiplier": 0.1,
       "inputs": [
-        "accountStageGrowth",
+        "accountLevel",
         "ownedPosseCount"
       ]
     },
@@ -62,9 +27,5 @@
       "value": "1"
     }
   },
-  "lore": "Flesh dissolves into the sea, bones harden into coral. Her gaze burns; she embraces you and sculpts you.\n\nShe promises to take you home.",
-  "realm": "AEQUOR",
-  "assetId": "posse-icon-14",
-  "imageAssetId": "CG_SD_S_O08_1",
-  "lineupToken": "n"
+  "lore": "Flesh dissolves into the sea, bones harden into coral. Her gaze burns; she embraces you and sculpts you.\n\nShe promises to take you home."
 }

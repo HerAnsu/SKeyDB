@@ -1,9 +1,9 @@
 {
   "id": "skill.nautila.short-term-memory",
+  "displayName": "Short-Term Memory",
   "ownerAwakenerId": "awakener-0036",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Short-Term Memory",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Choose 1 other Awakeners to Gain [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "14.4",
         "16"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",

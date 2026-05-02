@@ -1,6 +1,9 @@
 {
   "id": "derived.daffodil.thousand-mirage-effect-curse",
   "displayName": "Curse",
+  "ownerAwakenerId": "awakener-0012",
+  "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+  "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
   "descriptionTemplate": "All enemies {STR⯆} temporarily reduced by [Arg1], Shield gained and {STR⯆} reduced by 50% for 1 turn.",
   "descriptionArgs": {
     "Arg1": {
@@ -13,13 +16,10 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
-  "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
-  "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-  "ownerAwakenerId": "awakener-0012",
   "cost": "0"
 }

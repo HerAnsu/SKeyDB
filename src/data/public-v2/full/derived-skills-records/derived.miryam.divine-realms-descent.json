@@ -1,6 +1,9 @@
 {
   "id": "derived.miryam.divine-realms-descent",
   "displayName": "Divine Realm's Descent",
+  "ownerAwakenerId": "awakener-0032",
+  "derivedFromId": "derived.miryam.divine-realms-illusion",
+  "rootSkillId": "skill.miryam.testament-of-faith",
   "descriptionTemplate": "Choose an Awakener to gain [Arg1] Aliemus. Obtain 2 Arithmetica.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +19,5 @@
       "id": "mechanic.retain"
     }
   ],
-  "derivedFromId": "derived.miryam.divine-realms-illusion",
-  "rootSkillId": "skill.miryam.testament-of-faith",
-  "ownerAwakenerId": "awakener-0032",
   "cost": "0"
 }

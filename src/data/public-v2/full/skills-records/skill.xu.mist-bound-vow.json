@@ -1,9 +1,9 @@
 {
   "id": "skill.xu.mist-bound-vow",
+  "displayName": "Mist-Bound Vow",
   "ownerAwakenerId": "awakener-0054",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Mist-Bound Vow",
   "descriptionTemplate": "[{Devour}: Temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg1].] Gain [Arg2] Arithmetica and inflict [{Poison}:Arg3] {plural:[{Poison}:Arg3]|stack|stacks} of {Poison} on all enemies. Choose: {Betroth} or {Enthrall}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -33,8 +33,8 @@
         "144",
         "160"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],

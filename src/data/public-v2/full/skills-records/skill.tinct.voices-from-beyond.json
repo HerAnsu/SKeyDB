@@ -1,9 +1,9 @@
 {
   "id": "skill.tinct.voices-from-beyond",
+  "displayName": "Voices from Beyond",
   "ownerAwakenerId": "awakener-0049",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Voices from Beyond",
   "descriptionTemplate": "Tinct gains [Energy:Arg1] Aliemus. {Rouse}: Tinct's \"Strike\" Base DMG +[Arg2]%, and all of Tinct's cards gain 1 random effect, removed at the end of combat.",
   "descriptionArgs": {
     "Arg1": {
@@ -31,13 +31,13 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0049",
       "id": "upgrade.enlighten.tinct.when-crimson-meets-thorns.skill.tinct.voices-from-beyond",
       "operation": "replace_description",
       "upgraderId": "enlighten.tinct.when-crimson-meets-thorns",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Tinct",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0049",
+      "ownerAwakenerName": "Tinct",
       "patch": {
         "descriptionTemplate": "Tinct gains [Energy:Arg1] Aliemus, {Rouse}: Tinct's \"Strike\" Base DMG +[Arg2]%, all of Tinct's cards gain 1 random effect, which will be removed at battle end. The first time Tinct plays a \"Skill\" each turn, generate 1 Temporary \"Strike\" with 0 Arithmetica Cost."
       }

@@ -1,9 +1,9 @@
 {
   "id": "skill.lily.undying-flower-upon-slime",
+  "displayName": "Undying Flower Upon Slime",
   "ownerAwakenerId": "awakener-0029",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Undying Flower Upon Slime",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Restore [Arg2]% of {Endure} stacks as HP and remove {Endure}. Each time you are attacked, inflict [{Poison}:Arg4] {plural:[{Poison}:Arg4]|stack|stacks} of {Poison} to the attacker for 1 turn.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "64.8",
         "72"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -34,21 +34,21 @@
         "90",
         "100"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0029",
       "id": "upgrade.enlighten.lily.never-forget.skill.lily.undying-flower-upon-slime",
       "operation": "replace_description",
       "upgraderId": "enlighten.lily.never-forget",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Lily",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily",
       "patch": {
         "descriptionTemplate": "Gain [Block:Arg1] Shield. Restore [Arg2]% of {Endure} stacks as HP and remove half of {Endure}. Each time you are attacked, inflict [{Poison}:Arg4] {plural:[{Poison}:Arg4]|stack|stacks} of {Poison} to the attacker, lasting 1 turn."
       }

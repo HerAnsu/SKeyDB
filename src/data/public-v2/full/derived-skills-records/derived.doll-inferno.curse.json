@@ -1,6 +1,9 @@
 {
   "id": "derived.doll-inferno.curse",
   "displayName": "Curse",
+  "ownerAwakenerId": "awakener-0018",
+  "derivedFromId": "skill.doll-inferno.self-destruct",
+  "rootSkillId": "skill.doll-inferno.self-destruct",
   "descriptionTemplate": "All enemies Temp. {STR⯆} -[Exhaustion:Arg2].",
   "descriptionArgs": {
     "Arg2": {
@@ -13,24 +16,22 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
-  "derivedFromId": "skill.doll-inferno.self-destruct",
-  "rootSkillId": "skill.doll-inferno.self-destruct",
-  "ownerAwakenerId": "awakener-0018",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0018",
       "id": "upgrade.enlighten.doll-inferno.borealis-visitor.derived.doll-inferno.curse",
       "operation": "mixed",
       "upgraderId": "enlighten.doll-inferno.borealis-visitor",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Doll: Inferno",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
       "patch": {
+        "descriptionTemplate": "Inflict {Weakness} on all enemies for [Arg1] {plural:[Arg1]|turn|turns}, and temporarily reduce their {STR⯆} by [Exhaustion:Arg2].",
         "descriptionArgs": {
           "Arg1": {
             "kind": "fixed",
@@ -46,11 +47,10 @@
               "36",
               "40"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Inflict {Weakness} on all enemies for [Arg1] {plural:[Arg1]|turn|turns}, and temporarily reduce their {STR⯆} by [Exhaustion:Arg2]."
+        }
       }
     }
   ]

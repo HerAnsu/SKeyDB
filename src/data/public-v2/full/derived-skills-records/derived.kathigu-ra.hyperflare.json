@@ -1,6 +1,9 @@
 {
   "id": "derived.kathigu-ra.hyperflare",
   "displayName": "Hyperflare",
+  "ownerAwakenerId": "awakener-0027",
+  "derivedFromId": "talent.kathigu-ra.the-living-flame",
+  "rootSkillId": "skill.kathigu-ra.solarflare",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. For each point of Arithmetica consumed, enjoy an additional 150% {STR} bonus. Consume all {Combust}, gain an additional 50% {STR} bonus per stack consumed. After playing, revert all {Hyperflare} back to {Solarflare}.",
   "descriptionArgs": {
     "Arg1": {
@@ -13,24 +16,21 @@
         "315",
         "350"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
-  "derivedFromId": "talent.kathigu-ra.the-living-flame",
-  "rootSkillId": "skill.kathigu-ra.solarflare",
-  "ownerAwakenerId": "awakener-0027",
   "cost": "X",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0027",
       "id": "upgrade.enlighten.kathigu-ra.endless-purgatory.derived.kathigu-ra.hyperflare",
       "operation": "override_args",
       "upgraderId": "enlighten.kathigu-ra.endless-purgatory",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Kathigu-Ra",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -43,8 +43,8 @@
               "315",
               "350"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
         }
       }

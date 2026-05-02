@@ -1,9 +1,9 @@
 {
   "id": "skill.ryker.all-in",
+  "displayName": "All-in!",
   "ownerAwakenerId": "awakener-0043",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "All-in!",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. Randomly draw 1~[Arg3] {plural:[Arg3]|card|cards}; for each card drawn, gain [Power:Arg2] {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "135",
         "150"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,8 +29,8 @@
         "2.7",
         "3"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",

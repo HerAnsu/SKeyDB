@@ -1,13 +1,13 @@
 {
   "id": "relic-0047",
+  "name": "Dimensional Image: Tawil",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Tawil",
-  "assetId": "Icon_Creation_Unique_C15",
   "ownerAwakenerId": "awakener-0047",
   "ownerAwakenerName": "Tawil",
   "rarity": "SSR",
   "realm": "CHAOS",
+  "assetId": "Icon_Creation_Unique_C15",
   "descriptionTemplate": "At turn start, Tawil gains [Arg1] Aliemus. If [Arg2] of Tawil's Command Cards are played in one turn, add 1 {Silver Key Dawn} to hand, cooldown [Arg3] {plural:[Arg3]|turn|turns}.",
   "descriptionArgs": {
     "Arg1": {

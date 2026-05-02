@@ -1,9 +1,9 @@
 {
   "id": "skill.salvador.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0044",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Salvador obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0044",
       "id": "upgrade.enlighten.salvador.divine-proxy.skill.salvador.defense",
       "operation": "mixed",
       "upgraderId": "enlighten.salvador.divine-proxy",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Salvador obtains [Energy:Arg2] Aliemus. Accumulate [Heal:Arg3] {Crimson Furnace} Healing.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -78,11 +79,10 @@
               "5.4",
               "6"
             ],
-            "suffix": "%",
-            "stat": "CON"
+            "stat": "CON",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Salvador obtains [Energy:Arg2] Aliemus. Accumulate [Heal:Arg3] {Crimson Furnace} Healing."
+        }
       }
     }
   ]

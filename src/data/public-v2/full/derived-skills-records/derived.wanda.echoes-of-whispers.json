@@ -1,6 +1,9 @@
 {
   "id": "derived.wanda.echoes-of-whispers",
   "displayName": "Echoes of Whispers",
+  "ownerAwakenerId": "awakener-0052",
+  "derivedFromId": "skill.wanda.necropolis-of-dreams",
+  "rootSkillId": "skill.wanda.necropolis-of-dreams",
   "descriptionTemplate": "{Exhaust} 10 stacks of {Dreamlure}, causing all enemies to enter the {Murmur} state for 1 turn: DMG reduced by [StateArg3]%, but the number of attacks is doubled.",
   "descriptionArgs": {
     "StateArg3": {
@@ -9,8 +12,5 @@
       "suffix": "%"
     }
   },
-  "cardKeywords": [],
-  "derivedFromId": "skill.wanda.necropolis-of-dreams",
-  "rootSkillId": "skill.wanda.necropolis-of-dreams",
-  "ownerAwakenerId": "awakener-0052"
+  "cardKeywords": []
 }

@@ -1,6 +1,9 @@
 {
   "id": "derived.miryam.iron-resolve",
   "displayName": "Iron Resolve",
+  "ownerAwakenerId": "awakener-0032",
+  "derivedFromId": "derived.miryam.heretical-faith",
+  "rootSkillId": "skill.miryam.testament-of-faith",
   "descriptionTemplate": "Gain [Block:Arg1] Shield at turn start.",
   "descriptionArgs": {
     "Arg1": {
@@ -13,12 +16,9 @@
         "63",
         "70"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
-  "cardKeywords": [],
-  "derivedFromId": "derived.miryam.heretical-faith",
-  "rootSkillId": "skill.miryam.testament-of-faith",
-  "ownerAwakenerId": "awakener-0032"
+  "cardKeywords": []
 }

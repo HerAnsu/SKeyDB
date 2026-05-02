@@ -2,7 +2,7 @@
   "id": "covenant-0014",
   "name": "April Tribute",
   "assetId": "covenant-icon-016",
-  "lore": "Laid to rest in the spring of 18@2; the headstones stand as a chorus of silent hymns.",
+  "lineupToken": "b",
   "setEffects": [
     {
       "set": 3,
@@ -21,5 +21,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "b"
+  "lore": "Laid to rest in the spring of 18@2; the headstones stand as a chorus of silent hymns."
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.vortice.here-it-goes",
+  "displayName": "HERE IT GOES!",
   "ownerAwakenerId": "awakener-0055",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "HERE IT GOES!",
   "descriptionTemplate": "Vortice gains [Energy:Arg1] Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice uses a {Pursuit}, Vortice's next Exalt gains an additional [Arg2]% {Tentacle DMG} Bonus, stacking up to [Arg3] {plural:[Arg3]|time|times}.",
   "descriptionArgs": {
     "Arg1": {
@@ -42,14 +42,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0055",
       "id": "upgrade.enlighten.vortice.bang-pop-boom.skill.vortice.here-it-goes",
       "operation": "mixed",
       "upgraderId": "enlighten.vortice.bang-pop-boom",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Vortice",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice",
       "patch": {
+        "descriptionTemplate": "Vortice gains [Energy:Arg1] Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice unleashes {Pursuit}, her next Exalt gains an extra [Arg2]% {Tentacle DMG} Bonus, and the next Exalt deals {Fixed DMG} equal to 1% of Max HP to the enemy with the highest HP, stacking up to [Arg3] {plural:[Arg3]|time|times}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -78,8 +79,7 @@
             "kind": "fixed",
             "value": "5"
           }
-        },
-        "descriptionTemplate": "Vortice gains [Energy:Arg1] Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice unleashes {Pursuit}, her next Exalt gains an extra [Arg2]% {Tentacle DMG} Bonus, and the next Exalt deals {Fixed DMG} equal to 1% of Max HP to the enemy with the highest HP, stacking up to [Arg3] {plural:[Arg3]|time|times}."
+        }
       }
     }
   ]

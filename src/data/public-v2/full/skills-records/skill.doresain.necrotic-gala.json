@@ -1,9 +1,9 @@
 {
   "id": "skill.doresain.necrotic-gala",
+  "displayName": "Necrotic Gala",
   "ownerAwakenerId": "awakener-0014",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Necrotic Gala",
   "descriptionTemplate": "[{Devour}: The Crit. Rate of this Exalt +[Arg2]%. Gain [Power:Arg1] {STR}.]\nDeal [Damage:Arg3] DMG to the enemy with lowest HP. This DMG enjoys [Arg4]% {STR} bonus. For every 1% HP the target is missing, the Final DMG of this Exalt +3%.\nIf there are 3 stacks of {Corpse}, Doresain eats them all to recover [Heal:Arg5] HP and double the Crit. DMG bonus of this hit.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "22.5",
         "25"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -34,8 +34,8 @@
         "216",
         "240"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg4": {
       "kind": "fixed",
@@ -52,21 +52,21 @@
         "180",
         "200"
       ],
-      "suffix": "%",
-      "stat": "CON"
+      "stat": "CON",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0014",
       "id": "upgrade.enlighten.doresain.evernights-revel.skill.doresain.necrotic-gala",
       "operation": "replace_description",
       "upgraderId": "enlighten.doresain.evernights-revel",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Doresain",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0014",
+      "ownerAwakenerName": "Doresain",
       "patch": {
         "descriptionTemplate": "[{Devour}: The Crit. Rate of this Exalt +[Arg2]%. Gain [Power:Arg1] {STR}.]Deal [Damage:Arg3] DMG to the enemy with lowest HP. This DMG enjoys [Arg4]% {STR} bonus. For every 1% HP the target is missing, the Final DMG of this Exalt +3%.If there are 3 stacks of {Corpse}, Doresain eats them all to recover [Heal:Arg5] HP and double the Crit. DMG bonus of this hit."
       }

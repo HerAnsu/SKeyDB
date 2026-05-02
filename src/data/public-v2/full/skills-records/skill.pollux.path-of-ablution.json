@@ -1,9 +1,9 @@
 {
   "id": "skill.pollux.path-of-ablution",
+  "displayName": "Path of Ablution",
   "ownerAwakenerId": "awakener-0041",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Path of Ablution",
   "descriptionTemplate": "Pollux gains [Energy:Arg1] Aliemus. {Rouse}: When played and after the Discard Phase, gain 3 stacks of {Sin Mark}; for each card in hand, gain 1 additional stack of {Sin Mark}.",
   "descriptionArgs": {
     "Arg1": {
@@ -26,13 +26,13 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0041",
       "id": "upgrade.enlighten.pollux.lux-diouskouron.skill.pollux.path-of-ablution",
       "operation": "replace_description",
       "upgraderId": "enlighten.pollux.lux-diouskouron",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Pollux",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
       "patch": {
         "descriptionTemplate": "Pollux gains [Energy:Arg1] Aliemus. {Rouse}: Gain 3 stacks of {Sin Mark} when played and after the discard phase, plus 1 additional stack per card in hand. {Sacred Heart} inflicts {Bleed} equal to 100% DMG. After being shuffled into the Draw Pile by playing a card, that {Sacred Heart}'s Arithmetica Cost becomes 0 this turn and applies {Bleed} equal to 100% DMG."
       }

@@ -1,9 +1,9 @@
 {
   "id": "skill.hameln.the-final-sonata",
+  "displayName": "The Final Sonata",
   "ownerAwakenerId": "awakener-0022",
   "slot": "OverExalt",
   "kind": "over_exalt",
-  "displayName": "The Final Sonata",
   "descriptionTemplate": "Each time DMG is dealt, randomly apply 1 {Marvelous Debuff} to the target. Choose 1 additional card when adding {Rondino}.",
   "descriptionArgs": {},
   "cardKeywords": []

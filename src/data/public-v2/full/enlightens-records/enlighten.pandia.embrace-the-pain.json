@@ -1,8 +1,8 @@
 {
   "id": "enlighten.pandia.embrace-the-pain",
+  "displayName": "Embrace the Pain",
   "ownerAwakenerId": "awakener-0039",
   "slot": "E1",
-  "displayName": "Embrace the Pain",
   "descriptionTemplate": "\"Basic Strike\" gains a Temporary {Counter} equal to 50% of DMG. \"Basic Defense\" gains {Counter} equivalent to [Arg1]% of ATK.",
   "descriptionArgs": {
     "Arg1": {

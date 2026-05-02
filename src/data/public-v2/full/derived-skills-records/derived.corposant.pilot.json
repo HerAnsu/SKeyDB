@@ -1,13 +1,16 @@
 {
   "id": "derived.corposant.pilot",
   "displayName": "Pilot",
+  "ownerAwakenerId": "awakener-0011",
+  "derivedFromId": "skill.corposant.sunken-in-the-profound",
+  "rootSkillId": "skill.corposant.sunken-in-the-profound",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. {Aftershock}: Gain [Power:Arg2] {STR} and [TentaclePower:Arg2] {Tentacle DMG}.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "fixed",
       "value": "20",
-      "suffix": "%",
       "stat": "DEF",
+      "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
         "multiplier": "0.05",
@@ -17,8 +20,8 @@
     "Arg2": {
       "kind": "fixed",
       "value": "3",
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -26,26 +29,23 @@
       "id": "mechanic.exhaust"
     }
   ],
-  "derivedFromId": "skill.corposant.sunken-in-the-profound",
-  "rootSkillId": "skill.corposant.sunken-in-the-profound",
-  "ownerAwakenerId": "awakener-0011",
   "cost": "0",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0011",
       "id": "upgrade.enlighten.corposant.sextants-calculation.derived.corposant.pilot",
       "operation": "override_args",
       "upgraderId": "enlighten.corposant.sextants-calculation",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Corposant",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
             "kind": "fixed",
             "value": "20",
-            "suffix": "%",
             "stat": "DEF",
+            "suffix": "%",
             "substatBonus": {
               "substat": "DeathResistance",
               "multiplier": "0.05",
@@ -55,8 +55,8 @@
           "Arg2": {
             "kind": "fixed",
             "value": "3",
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
         }
       }

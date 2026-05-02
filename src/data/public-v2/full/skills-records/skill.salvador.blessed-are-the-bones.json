@@ -1,9 +1,9 @@
 {
   "id": "skill.salvador.blessed-are-the-bones",
+  "displayName": "Blessed are the Bones",
   "ownerAwakenerId": "awakener-0044",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Blessed are the Bones",
   "descriptionTemplate": "{Weakness} all enemies for 1 turn. {Embryo Fusion} +[Arg1]%. Accumulate [Heal:Arg2] {Crimson Furnace} Healing.",
   "descriptionArgs": {
     "Arg1": {
@@ -28,22 +28,23 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "CON"
+      "stat": "CON",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0044",
       "id": "upgrade.enlighten.salvador.bitter-eucharist.skill.salvador.blessed-are-the-bones",
       "operation": "mixed",
       "upgraderId": "enlighten.salvador.bitter-eucharist",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
       "patch": {
+        "descriptionTemplate": "{Weakness} all enemies for 1 turn. {Embryo Fusion} +[Arg1]%. Accumulate [Heal:Arg2] {Crimson Furnace} Healing, and gain an additional [Arg3] per turn during battle.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -67,22 +68,22 @@
               "1.35",
               "1.5"
             ],
-            "suffix": "%",
-            "stat": "CON"
+            "stat": "CON",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "{Weakness} all enemies for 1 turn. {Embryo Fusion} +[Arg1]%. Accumulate [Heal:Arg2] {Crimson Furnace} Healing, and gain an additional [Arg3] per turn during battle."
+        }
       }
     },
     {
-      "ownerAwakenerId": "awakener-0044",
       "id": "upgrade.enlighten.salvador.book-of-genesis.skill.salvador.blessed-are-the-bones",
       "operation": "mixed",
       "upgraderId": "enlighten.salvador.book-of-genesis",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Salvador",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
       "patch": {
+        "descriptionTemplate": "{Weakness} all enemies for 1 turn. {Embryo Fusion} +[Arg1]%. Accumulate [Heal:Arg2] {Crimson Furnace} Healing, and gain an additional [Arg3] per turn during battle.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -106,11 +107,10 @@
               "1.35",
               "1.5"
             ],
-            "suffix": "%",
-            "stat": "CON"
+            "stat": "CON",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "{Weakness} all enemies for 1 turn. {Embryo Fusion} +[Arg1]%. Accumulate [Heal:Arg2] {Crimson Furnace} Healing, and gain an additional [Arg3] per turn during battle."
+        }
       }
     }
   ]

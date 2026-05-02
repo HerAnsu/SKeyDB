@@ -1,9 +1,9 @@
 {
   "id": "skill.ryker.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0043",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Ryker obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,13 +35,13 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0043",
       "id": "upgrade.enlighten.ryker.certain-gain.skill.ryker.strike",
       "operation": "replace_description",
       "upgraderId": "enlighten.ryker.certain-gain",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Ryker",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker",
       "patch": {
         "descriptionTemplate": "Deal [Damage:Arg1] DMG. Ryker obtains [Energy:Arg2] Aliemus. If Arithmetica is insufficient, consume 3 Black Sigils to play it twice."
       }

@@ -3,7 +3,7 @@
   "displayName": "Aftershock",
   "overlayType": "mechanic",
   "aliases": [],
+  "textColor": "shield",
   "descriptionTemplate": "Triggers the {Aftershock} effect when discarded.",
-  "descriptionArgs": {},
-  "textColor": "shield"
+  "descriptionArgs": {}
 }

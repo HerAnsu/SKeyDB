@@ -1,10 +1,10 @@
 {
   "id": "derived.wanda.hypnotic-veins",
   "displayName": "Hypnotic Veins",
-  "descriptionTemplate": "Obtain 1 stack of {Dreamlure}.",
-  "descriptionArgs": {},
-  "cardKeywords": [],
+  "ownerAwakenerId": "awakener-0052",
   "derivedFromId": "skill.wanda.lost-dreams-guide",
   "rootSkillId": "skill.wanda.lost-dreams-guide",
-  "ownerAwakenerId": "awakener-0052"
+  "descriptionTemplate": "Obtain 1 stack of {Dreamlure}.",
+  "descriptionArgs": {},
+  "cardKeywords": []
 }

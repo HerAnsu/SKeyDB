@@ -2,7 +2,7 @@
   "id": "covenant-0007",
   "name": "Twisted Twins: White",
   "assetId": "covenant-icon-009",
-  "lore": "Mist-white prayers. May the Twins bless your soul.",
+  "lineupToken": "s",
   "setEffects": [
     {
       "set": 3,
@@ -21,5 +21,5 @@
       "descriptionArgs": {}
     }
   ],
-  "lineupToken": "s"
+  "lore": "Mist-white prayers. May the Twins bless your soul."
 }

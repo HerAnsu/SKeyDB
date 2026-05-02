@@ -1,9 +1,9 @@
 {
   "id": "skill.doresain.netherward-path",
+  "displayName": "Netherward Path",
   "ownerAwakenerId": "awakener-0014",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Netherward Path",
   "descriptionTemplate": "Lose 10% Current HP, deal [Damage:Arg1] DMG to all enemies and inflict 1 turn of {Vulnerable}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "72",
         "80"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],

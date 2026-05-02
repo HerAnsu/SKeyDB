@@ -1,9 +1,9 @@
 {
   "id": "skill.aigis.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0003",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Aigis obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0003",
       "id": "upgrade.enlighten.aigis.the-witness.skill.aigis.strike",
       "operation": "mixed",
       "upgraderId": "enlighten.aigis.the-witness",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Aigis",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0003",
+      "ownerAwakenerName": "Aigis",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. For each stack of {Vulnerable}, {Embryo Fusion} +[Arg3]%, up to [Arg4]%. Aigis obtains [Energy:Arg2] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -78,8 +79,7 @@
             "value": "30",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. For each stack of {Vulnerable}, {Embryo Fusion} +[Arg3]%, up to [Arg4]%. Aigis obtains [Energy:Arg2] Aliemus."
+        }
       }
     }
   ]

@@ -6,6 +6,36 @@
     {
       "id": "standard",
       "label": "Core",
+      "recommendedCovenantIds": [
+        "covenant-0012",
+        "covenant-0006"
+      ],
+      "recommendedWheels": [
+        {
+          "wheelIds": [
+            "wheel-0025"
+          ],
+          "tier": "BIS_SSR"
+        },
+        {
+          "wheelIds": [
+            "wheel-0024"
+          ],
+          "tier": "ALT_SSR"
+        },
+        {
+          "wheelIds": [
+            "wheel-0083"
+          ],
+          "tier": "BIS_SR"
+        },
+        {
+          "wheelIds": [
+            "wheel-0093"
+          ],
+          "tier": "GOOD"
+        }
+      ],
       "substatPriorityGroups": [
         [
           "DEATH_RESISTANCE"
@@ -16,36 +46,6 @@
         [
           "CRIT_DMG"
         ]
-      ],
-      "recommendedWheels": [
-        {
-          "tier": "BIS_SSR",
-          "wheelIds": [
-            "wheel-0025"
-          ]
-        },
-        {
-          "tier": "ALT_SSR",
-          "wheelIds": [
-            "wheel-0024"
-          ]
-        },
-        {
-          "tier": "BIS_SR",
-          "wheelIds": [
-            "wheel-0083"
-          ]
-        },
-        {
-          "tier": "GOOD",
-          "wheelIds": [
-            "wheel-0093"
-          ]
-        }
-      ],
-      "recommendedCovenantIds": [
-        "covenant-0012",
-        "covenant-0006"
       ],
       "recommendedWheelMainstats": [
         "DEATH_RESISTANCE",

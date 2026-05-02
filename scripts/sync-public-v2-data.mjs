@@ -103,6 +103,15 @@ async function listExpectedFiles(sourceRoot) {
   const expected = []
   const missing = []
 
+  const metadataRelativeDir = 'metadata'
+  const metadataSourceDir = path.join(sourceRoot, metadataRelativeDir)
+  if (await pathExists(metadataSourceDir)) {
+    const metadataFiles = await readDirectoryFiles(metadataSourceDir)
+    for (const fileName of metadataFiles) {
+      expected.push(path.join(metadataRelativeDir, fileName))
+    }
+  }
+
   for (const scope of scopes) {
     for (const segment of ['lite', 'full']) {
       const relativePath = path.join(segment, `${scope}.json`)
@@ -187,6 +196,59 @@ function getScopeForRelativePath(relativePath) {
   throw new Error(`Unexpected public V2 file path: ${relativePath}`)
 }
 
+function validateGameplayMathMetadata(parsed, relativePath) {
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+    throw new Error(`${relativePath} must contain a public V2 metadata object`)
+  }
+
+  if (parsed.schemaVersion !== 1) {
+    throw new Error(`${relativePath} schemaVersion must be 1`)
+  }
+
+  const accountLevelCurve = parsed.accountLevelCurve
+  if (
+    !accountLevelCurve ||
+    typeof accountLevelCurve !== 'object' ||
+    Array.isArray(accountLevelCurve)
+  ) {
+    throw new Error(`${relativePath} accountLevelCurve must be an object`)
+  }
+
+  const {minLevel, maxLevel, stageGrow, accountDamagePower, hpMultiplier} = accountLevelCurve
+  if (!Number.isInteger(minLevel) || !Number.isInteger(maxLevel) || maxLevel < minLevel) {
+    throw new Error(`${relativePath} accountLevelCurve level bounds are invalid`)
+  }
+
+  const expectedCurveLength = maxLevel - minLevel + 1
+  for (const [fieldName, values] of Object.entries({stageGrow, accountDamagePower, hpMultiplier})) {
+    if (!Array.isArray(values) || values.length !== expectedCurveLength) {
+      throw new Error(`${relativePath} accountLevelCurve.${fieldName} length is invalid`)
+    }
+  }
+
+  const wheelMainstatScaling = parsed.wheelMainstatScaling
+  if (
+    !wheelMainstatScaling ||
+    typeof wheelMainstatScaling !== 'object' ||
+    Array.isArray(wheelMainstatScaling) ||
+    !Number.isInteger(wheelMainstatScaling.growthStartLevel) ||
+    !Array.isArray(wheelMainstatScaling.series)
+  ) {
+    throw new Error(`${relativePath} wheelMainstatScaling is invalid`)
+  }
+
+  for (const [index, series] of wheelMainstatScaling.series.entries()) {
+    if (!series || typeof series !== 'object' || Array.isArray(series)) {
+      throw new Error(`${relativePath} wheelMainstatScaling.series.${index} must be an object`)
+    }
+    if (series.seriesKey !== `${series.rarity}:${series.mainstatKey}`) {
+      throw new Error(
+        `${relativePath} wheelMainstatScaling.series.${index} has mismatched seriesKey`,
+      )
+    }
+  }
+}
+
 function validateRecord(scope, record, filePath) {
   if (!record || typeof record !== 'object' || Array.isArray(record)) {
     throw new Error(`${filePath} must contain public V2 object records`)
@@ -205,13 +267,21 @@ function validateRecord(scope, record, filePath) {
 }
 
 async function validatePublicV2JsonFile(sourcePath, relativePath) {
+  const parsed = JSON.parse(await fs.readFile(sourcePath, 'utf8'))
+  const parts = relativePath.split(path.sep)
+
+  if (parts[0] === 'metadata' && parts.length === 2) {
+    if (parts[1] === 'gameplay-math.json') {
+      validateGameplayMathMetadata(parsed, relativePath)
+      return
+    }
+    throw new Error(`Unexpected public V2 metadata file: ${relativePath}`)
+  }
+
   const scope = getScopeForRelativePath(relativePath)
   if (!scopes.includes(scope)) {
     throw new Error(`${relativePath} has unknown public V2 scope "${scope}"`)
   }
-
-  const parsed = JSON.parse(await fs.readFile(sourcePath, 'utf8'))
-  const parts = relativePath.split(path.sep)
 
   if (parts.length === 2) {
     if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {

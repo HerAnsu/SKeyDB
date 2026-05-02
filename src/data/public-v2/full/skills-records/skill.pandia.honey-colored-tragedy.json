@@ -1,9 +1,9 @@
 {
   "id": "skill.pandia.honey-colored-tragedy",
+  "displayName": "Honey-Colored Tragedy",
   "ownerAwakenerId": "awakener-0039",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Honey-Colored Tragedy",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies 2 times. Each stack of {Counter} increases DMG by [Arg2]. Obtain [Power:Arg3] {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -33,22 +33,23 @@
         "3.6",
         "4"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0039",
       "id": "upgrade.enlighten.pandia.sweet-surrender.skill.pandia.honey-colored-tragedy",
       "operation": "mixed",
       "upgraderId": "enlighten.pandia.sweet-surrender",
-      "upgraderSlot": "OverExalt",
-      "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
+      "upgraderSlot": "OverExalt",
+      "ownerAwakenerId": "awakener-0039",
+      "ownerAwakenerName": "Pandia",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies 2 times. Each stack of {Counter} increases DMG by [Arg2]. Obtain [Power:Arg3] {STR}. Obtain [Counterattack:Arg4] stacks of {Counter}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -60,8 +61,8 @@
               "108",
               "120"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -77,8 +78,8 @@
               "4.5",
               "5"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg4": {
             "kind": "scaling",
@@ -90,22 +91,22 @@
               "27",
               "30"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies 2 times. Each stack of {Counter} increases DMG by [Arg2]. Obtain [Power:Arg3] {STR}. Obtain [Counterattack:Arg4] stacks of {Counter}."
+        }
       }
     },
     {
-      "ownerAwakenerId": "awakener-0039",
       "id": "upgrade.enlighten.pandia.youre-being-naughty.skill.pandia.honey-colored-tragedy",
       "operation": "mixed",
       "upgraderId": "enlighten.pandia.youre-being-naughty",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0039",
+      "ownerAwakenerName": "Pandia",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies 2 times. Each stack of {Counter} increases DMG by [Arg2]. Obtain [Power:Arg3] {STR}. Obtain [Counterattack:Arg4] stacks of {Counter}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -117,8 +118,8 @@
               "108",
               "120"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -134,8 +135,8 @@
               "4.5",
               "5"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg4": {
             "kind": "scaling",
@@ -147,11 +148,10 @@
               "27",
               "30"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies 2 times. Each stack of {Counter} increases DMG by [Arg2]. Obtain [Power:Arg3] {STR}. Obtain [Counterattack:Arg4] stacks of {Counter}."
+        }
       }
     }
   ]

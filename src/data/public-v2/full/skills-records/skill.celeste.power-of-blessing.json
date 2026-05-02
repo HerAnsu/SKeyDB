@@ -1,9 +1,9 @@
 {
   "id": "skill.celeste.power-of-blessing",
+  "displayName": "Power of Blessing",
   "ownerAwakenerId": "awakener-0009",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Power of Blessing",
   "descriptionTemplate": "Celeste gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 Tentacle. Celeste's Healing +10%. When healing, gain +[TentaclePower:Arg2] {Tentacle DMG}.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -39,14 +39,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0009",
       "id": "upgrade.enlighten.celeste.imaginary-cathuria.skill.celeste.power-of-blessing",
       "operation": "mixed",
       "upgraderId": "enlighten.celeste.imaginary-cathuria",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Celeste",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0009",
+      "ownerAwakenerName": "Celeste",
       "patch": {
+        "descriptionTemplate": "Celeste gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 Tentacle. Celeste's Healing +10%. When healing, Temporary {Tentacle DMG} +[TentaclePower:Arg2]. When triggers resurrect of {Undying Bird of Paradise}, Temporary {Tentacle DMG} +[TentaclePower:Arg3], with the effect doubled in Boss Battles.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -69,17 +70,16 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
             "value": "150",
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Celeste gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 Tentacle. Celeste's Healing +10%. When healing, Temporary {Tentacle DMG} +[TentaclePower:Arg2]. When triggers resurrect of {Undying Bird of Paradise}, Temporary {Tentacle DMG} +[TentaclePower:Arg3], with the effect doubled in Boss Battles."
+        }
       }
     }
   ]

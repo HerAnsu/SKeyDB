@@ -1,9 +1,9 @@
 {
   "id": "skill.24.mediating-personalities",
+  "displayName": "Mediating Personalities",
   "ownerAwakenerId": "awakener-0001",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Mediating Personalities",
   "descriptionTemplate": "\"24\" gains [Energy:Arg1] Aliemus. {Rouse}:\n{Chaos}: The Crit. Rate and Crit. DMG of \"24\" +[StateArg4]%. Each time a Posse is used, the Exalt DMG of \"24\" +[StateArg1].\n{Aequor}: The DMG \"24\" deals enjoys a [StateArg2]% {Tentacle DMG} bonus and inflicts {Poison} equal to 10% of DMG dealt. \"24\"'s Exalt can trigger 50% {Poison} on enemies.\n{Caro}: For every 1 Arithmetica \"24\" consumes, {Embryo Fusion} +5%, \"24\" gains [StateArg3] {STR}.\n{Ultra}: The DMG \"24\" deals enjoys a [StateArg5]% {Counter} DMG Bonus. Shuffle 1 \"Insight\" into the Discard Pile at turn end, Hand Limit +2.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "90",
         "100"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "StateArg2": {
       "kind": "scaling",
@@ -52,8 +52,8 @@
         "1.8",
         "2"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "StateArg4": {
       "kind": "scaling",

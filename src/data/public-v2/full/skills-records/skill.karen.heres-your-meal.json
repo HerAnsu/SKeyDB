@@ -1,9 +1,9 @@
 {
   "id": "skill.karen.heres-your-meal",
+  "displayName": "Here's Your Meal!",
   "ownerAwakenerId": "awakener-0026",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Here's Your Meal!",
   "descriptionTemplate": "Remove the {Stagnation} state from all cards in hand. Restore [Heal:Arg1] HP. Add 1 {Marvelous Cuisine} to your hand. Inflict [{Poison}:Arg2] {plural:[{Poison}:Arg2]|stack|stacks} of {Poison} on all enemies.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "45",
         "50"
       ],
-      "suffix": "%",
-      "stat": "CON"
+      "stat": "CON",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,21 +29,21 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0026",
       "id": "upgrade.enlighten.karen.fermented-recipes.skill.karen.heres-your-meal",
       "operation": "replace_description",
       "upgraderId": "enlighten.karen.fermented-recipes",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Karen",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0026",
+      "ownerAwakenerName": "Karen",
       "patch": {
         "descriptionTemplate": "Remove the {Stagnation} state from all cards in hand. Restore [Heal:Arg1] HP. Add 1 {Marvelous Cuisine} to your hand. Inflict [{Poison}:Arg2] {plural:[{Poison}:Arg2]|stack|stacks} of {Poison} on all enemies."
       }

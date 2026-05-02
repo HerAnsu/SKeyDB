@@ -1,9 +1,9 @@
 {
   "id": "skill.caecus.protective-scales",
+  "displayName": "Protective Scales",
   "ownerAwakenerId": "awakener-0006",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Protective Scales",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Until the start of next turn, {Counter} and Tentacle {Counter} trigger an additional [Arg2] {plural:[Arg2]|time|times}, dealing 50% DMG. Obtain [Power:Arg3] {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "45",
         "50"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -33,21 +33,21 @@
         "4.5",
         "5"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0006",
       "id": "upgrade.enlighten.caecus.spike-amalgamation.skill.caecus.protective-scales",
       "operation": "mixed",
       "upgraderId": "enlighten.caecus.spike-amalgamation",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Caecus",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0006",
+      "ownerAwakenerName": "Caecus",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -60,8 +60,8 @@
               "54",
               "60"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -77,8 +77,8 @@
               "4.5",
               "5"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
         },
         "cardKeywords": [

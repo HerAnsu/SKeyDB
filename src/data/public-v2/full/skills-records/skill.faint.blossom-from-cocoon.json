@@ -1,9 +1,9 @@
 {
   "id": "skill.faint.blossom-from-cocoon",
+  "displayName": "Blossom from Cocoon",
   "ownerAwakenerId": "awakener-0016",
   "slot": "OverExalt",
   "kind": "over_exalt",
-  "displayName": "Blossom from Cocoon",
   "descriptionTemplate": "Temporarily reduces all enemies' {STR⯆} by [Arg1]% of their DEF (scales with {Cradle of Stars} level up).",
   "descriptionArgs": {
     "Arg1": {

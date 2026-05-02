@@ -1,9 +1,9 @@
 {
   "id": "skill.faint.cradle-of-stars",
+  "displayName": "Cradle of Stars",
   "ownerAwakenerId": "awakener-0016",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Cradle of Stars",
   "descriptionTemplate": "[{Devour}: Place 1 \"Sprouting Bud\" with 0 Arithmetica Cost into hand and attach {Exhaust}. Inflict {Weakness} to all Enemies for 2 turns.] Obtain [Counterattack:Arg1] stacks of {Counter}. If {Death Resistance} is less than [Arg2]%, then +[Arg3]%. Dispel self {Fragile}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "108",
         "120"
       ],
-      "suffix": "%",
       "stat": "ATK",
+      "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
         "multiplier": "0.2",
@@ -34,11 +34,11 @@
         "280",
         "300"
       ],
+      "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
         "multiplier": "2"
-      },
-      "suffix": "%"
+      }
     },
     "Arg3": {
       "kind": "scaling",

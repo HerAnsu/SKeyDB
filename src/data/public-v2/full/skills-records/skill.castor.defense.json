@@ -1,9 +1,9 @@
 {
   "id": "skill.castor.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0008",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Castor obtains [Energy:Arg2] Aliemus.{Quasar}: Shuffle 1 {Onyx Plume} into the Draw Pile, gain [Block:Arg3] Shield.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -40,8 +40,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],

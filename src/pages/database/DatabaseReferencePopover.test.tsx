@@ -261,15 +261,14 @@ describe('DatabaseReferencePopover', () => {
           descriptionArgs: {
             Arg1: {
               kind: 'computed',
-              expression: {
-                op: 'ceil',
-                args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
-              },
-              inputs: ['accountDamagePower'],
+              formulaKey: 'wheelRefinementLinear',
+              baseValue: 0,
+              perLevel: 3,
+              inputs: ['wheelRefinementLevel'],
             } satisfies PublicDescriptionArg,
           } as unknown as AwakenerOverlayRecord['descriptionArgs'],
         }}
-        formulaContext={{accountDamagePower: 8}}
+        formulaContext={{wheelRefinementLevel: 4}}
         label='Mechanic'
         name='Forbidden Lore'
         onClose={vi.fn()}

@@ -1,6 +1,9 @@
 {
   "id": "derived.wanda.slumber-counter",
   "displayName": "Slumber Counter",
+  "ownerAwakenerId": "awakener-0052",
+  "derivedFromId": "skill.wanda.necropolis-of-dreams",
+  "rootSkillId": "skill.wanda.necropolis-of-dreams",
   "descriptionTemplate": "Consume 5 stacks of {Dreamlure}, Wanda obtains [StateArg1] Aliemus, and gains Temporary {Counter} equal to [StateArg2]% of permanent {Counter}.",
   "descriptionArgs": {
     "StateArg1": {
@@ -27,8 +30,5 @@
       "suffix": "%"
     }
   },
-  "cardKeywords": [],
-  "derivedFromId": "skill.wanda.necropolis-of-dreams",
-  "rootSkillId": "skill.wanda.necropolis-of-dreams",
-  "ownerAwakenerId": "awakener-0052"
+  "cardKeywords": []
 }

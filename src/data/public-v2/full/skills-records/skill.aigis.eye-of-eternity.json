@@ -1,9 +1,9 @@
 {
   "id": "skill.aigis.eye-of-eternity",
+  "displayName": "Eye of Eternity",
   "ownerAwakenerId": "awakener-0003",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Eye of Eternity",
   "descriptionTemplate": "[{Devour}: This \"Eye of Eternity\" inflicts 1 turn of {Petrify} on all enemies. If the target has Petrification Resistance, Final DMG +200%.] Deal [Damage:Arg1] DMG to all enemies and apply [Arg2] {plural:[Arg2]|turn|turns} of {Vulnerable}. Each Release increases the Base DMG of {Eye of Eternity} by 50%.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "135",
         "150"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",

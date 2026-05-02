@@ -1,9 +1,9 @@
 {
   "id": "skill.pandia.whip-of-madness",
+  "displayName": "Whip of Madness",
   "ownerAwakenerId": "awakener-0039",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Whip of Madness",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times} and gain Temporary {Counter} for 50% of the DMG dealt.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",

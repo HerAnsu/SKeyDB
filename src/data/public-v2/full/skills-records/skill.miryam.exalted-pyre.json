@@ -1,9 +1,9 @@
 {
   "id": "skill.miryam.exalted-pyre",
+  "displayName": "Exalted Pyre",
   "ownerAwakenerId": "awakener-0032",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Exalted Pyre",
   "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} and inflict an equal amount of {Poison}. {Ritual}: Gain [Power:Arg3]/[Power:Arg4]/[Power:Arg5] {STR} and [TentaclePower:Arg3]/[TentaclePower:Arg4]/[TentaclePower:Arg5] {Tentacle DMG}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "81",
         "90"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -29,8 +29,8 @@
         "1.8",
         "2"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg4": {
       "kind": "scaling",
@@ -42,8 +42,8 @@
         "4.5",
         "5"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg5": {
       "kind": "scaling",
@@ -55,34 +55,35 @@
         "9",
         "10"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0032",
       "id": "upgrade.enlighten.miryam.solitary-pilgrimage.skill.miryam.exalted-pyre",
       "operation": "replace_description",
       "upgraderId": "enlighten.miryam.solitary-pilgrimage",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "patch": {
         "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} and inflict an equal amount of {Poison}. Temporary Crit. DMG +15% of Miryam's base Crit. DMG. {Ritual}: Gain [Power:Arg3]/[Power:Arg4]/[Power:Arg5] {STR} and [TentaclePower:Arg3]/[TentaclePower:Arg4]/[TentaclePower:Arg5] {Tentacle DMG}."
       }
     },
     {
-      "ownerAwakenerId": "awakener-0032",
       "id": "upgrade.enlighten.miryam.vanitys-collapse.skill.miryam.exalted-pyre",
       "operation": "mixed",
       "upgraderId": "enlighten.miryam.vanitys-collapse",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} and inflict an equal amount of {Poison}. Temporary Crit. DMG +15% of Miryam's base Crit. DMG. {Ritual}: Gain [Power:Arg3]/[Power:Arg4]/[Power:Arg5] {STR} and [TentaclePower:Arg3]/[TentaclePower:Arg4]/[TentaclePower:Arg5] {Tentacle DMG}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -94,8 +95,8 @@
               "81",
               "90"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
@@ -107,8 +108,8 @@
               "2.34",
               "2.6"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg4": {
             "kind": "scaling",
@@ -120,8 +121,8 @@
               "5.85",
               "6.5"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg5": {
             "kind": "scaling",
@@ -133,11 +134,10 @@
               "11.7",
               "13"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} and inflict an equal amount of {Poison}. Temporary Crit. DMG +15% of Miryam's base Crit. DMG. {Ritual}: Gain [Power:Arg3]/[Power:Arg4]/[Power:Arg5] {STR} and [TentaclePower:Arg3]/[TentaclePower:Arg4]/[TentaclePower:Arg5] {Tentacle DMG}."
+        }
       }
     }
   ]

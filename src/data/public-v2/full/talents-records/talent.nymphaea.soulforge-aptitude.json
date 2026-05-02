@@ -1,8 +1,9 @@
 {
   "id": "talent.nymphaea.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0037",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0037",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nNymphaea's {Poison} trigger effect +[Arg3]%. All Awakeners inflict +10% {Poison}.",
   "descriptionArgs": {
     "Arg1": {
@@ -30,6 +31,5 @@
         "35"
       ]
     }
-  },
-  "maxLevel": 10
+  }
 }

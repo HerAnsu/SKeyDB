@@ -1,13 +1,13 @@
 {
   "id": "relic-0032",
+  "name": "Dimensional Image: Miryam",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Miryam",
-  "assetId": "Icon_Creation_Unique_O07",
   "ownerAwakenerId": "awakener-0032",
   "ownerAwakenerName": "Miryam",
   "rarity": "SSR",
   "realm": "AEQUOR",
+  "assetId": "Icon_Creation_Unique_O07",
   "descriptionTemplate": "At turn start, Miryam gains [Arg1] Aliemus and puts 1 {Sacrament} into hand.",
   "descriptionArgs": {
     "Arg1": {

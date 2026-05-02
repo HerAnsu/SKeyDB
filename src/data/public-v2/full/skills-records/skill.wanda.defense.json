@@ -1,9 +1,9 @@
 {
   "id": "skill.wanda.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0052",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Wanda obtains [Energy:Arg2] Aliemus. {Leap}: Obtain 1 stack of {Dreamlure}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",

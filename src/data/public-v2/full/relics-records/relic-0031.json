@@ -1,13 +1,13 @@
 {
   "id": "relic-0031",
+  "name": "Dimensional Image: Lotan",
   "kind": "PORTRAIT",
   "relicType": "DIMENSIONAL_IMAGE",
-  "name": "Dimensional Image: Lotan",
-  "assetId": "Icon_Creation_Unique_C04",
   "ownerAwakenerId": "awakener-0031",
   "ownerAwakenerName": "Lotan",
   "rarity": "SSR",
   "realm": "CHAOS",
+  "assetId": "Icon_Creation_Unique_C04",
   "descriptionTemplate": "At turn start, Lotan gains [Arg1] Aliemus. After the first use of Lotan's \"Defense\" each turn, place [Arg2] additional {Exhaust} and {Fleeting} cards with the Illusion's {Blade of Defiance} into hand.",
   "descriptionArgs": {
     "Arg1": {

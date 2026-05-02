@@ -1,9 +1,9 @@
 {
   "id": "skill.liz.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0030",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Liz obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0030",
       "id": "upgrade.enlighten.liz.eternal-flames.skill.liz.defense",
       "operation": "mixed",
       "upgraderId": "enlighten.liz.eternal-flames",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Liz",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz",
       "patch": {
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Liz obtains [Energy:Arg2] Aliemus. {Leap}: Trigger [Arg3]% {Poison} for all enemies.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -73,8 +74,7 @@
             "value": "25",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Liz obtains [Energy:Arg2] Aliemus. {Leap}: Trigger [Arg3]% {Poison} for all enemies."
+        }
       }
     }
   ]

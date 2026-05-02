@@ -1,9 +1,9 @@
 {
   "id": "skill.vortice.charge",
+  "displayName": "Charge!",
   "ownerAwakenerId": "awakener-0055",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Charge!",
   "descriptionTemplate": "Gain [Energy:Arg1] Aliemus, the next Vortice Exalt Crit. Rate +[Arg2]%. {Aftershock}: other Awakeners gain [Energy:Arg3] Aliemus.",
   "descriptionArgs": {
     "Arg1": {

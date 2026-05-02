@@ -1,9 +1,9 @@
 {
   "id": "skill.jenkins.mistborn-street-urchin",
+  "displayName": "Mistborn Street Urchin",
   "ownerAwakenerId": "awakener-0025",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Mistborn Street Urchin",
   "descriptionTemplate": "Place [Arg1] additional {Exhaust} {Get 'em! Brown!} into hand with an Arithmetica Cost of 0. Temporary Crit. DMG +[Arg2]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,13 +27,13 @@
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0025",
       "id": "upgrade.enlighten.jenkins.obsidian-dissolution.skill.jenkins.mistborn-street-urchin",
       "operation": "override_args",
       "upgraderId": "enlighten.jenkins.obsidian-dissolution",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Jenkin",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0025",
+      "ownerAwakenerName": "Jenkin",
       "patch": {
         "descriptionArgs": {
           "Arg1": {

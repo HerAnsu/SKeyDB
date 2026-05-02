@@ -1,9 +1,9 @@
 {
   "id": "skill.pickman.morgue-studio",
+  "displayName": "Morgue Studio",
   "ownerAwakenerId": "awakener-0040",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Morgue Studio",
   "descriptionTemplate": "Pickman gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 stack of {Fantasia}. For each stack of {Creativity} Pickman gains, {Embryo Fusion} +[Arg2]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -38,13 +38,13 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0040",
       "id": "upgrade.enlighten.pickman.world-in-the-painting.skill.pickman.morgue-studio",
       "operation": "replace_description",
       "upgraderId": "enlighten.pickman.world-in-the-painting",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Pickman",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman",
       "patch": {
         "descriptionTemplate": "Pickman gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 stack of {Fantasia}. For each stack of {Creativity} Pickman gains, {Embryo Fusion}+ [Arg2]%. The duration of the Painted Golden Relic created by {Lifelike Rendition} is increased from 1 turn to 2 turns."
       }

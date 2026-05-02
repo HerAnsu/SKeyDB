@@ -456,11 +456,10 @@ describe('awakeners-database-view', () => {
       descriptionArgs: {
         Arg1: {
           kind: 'computed',
-          expression: {
-            op: 'ceil',
-            args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
-          },
-          inputs: ['accountDamagePower'],
+          formulaKey: 'wheelRefinementLinear',
+          baseValue: 0,
+          perLevel: 3,
+          inputs: ['wheelRefinementLevel'],
         } satisfies PublicDescriptionArg,
       } as unknown as AwakenerSkillRecord['descriptionArgs'],
     }
@@ -468,7 +467,7 @@ describe('awakeners-database-view', () => {
     const view = resolveAwakenerDatabaseView(
       record,
       {
-        formulaContext: {accountDamagePower: 8},
+        formulaContext: {wheelRefinementLevel: 4},
         stats: TEST_STATS,
       },
       buildOverlayRecords(),

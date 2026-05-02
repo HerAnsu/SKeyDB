@@ -1,9 +1,9 @@
 {
   "id": "skill.celeste.undying-bird-of-paradise",
+  "displayName": "Undying Bird of Paradise",
   "ownerAwakenerId": "awakener-0009",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Undying Bird of Paradise",
   "descriptionTemplate": "Dispel self {Blighten} state, restore [Heal:Arg1] HP and gain 1 Arithmetica. Upon receiving lethal DMG in this battle, revive and restore [Arg2]% HP. Can only be triggered once per battle.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "90",
         "100"
       ],
-      "suffix": "%",
-      "stat": "CON"
+      "stat": "CON",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -37,14 +37,15 @@
   "cost": "100",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0009",
       "id": "upgrade.enlighten.celeste.beyond-joy-and-sorrow.skill.celeste.undying-bird-of-paradise",
       "operation": "mixed",
       "upgraderId": "enlighten.celeste.beyond-joy-and-sorrow",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Celeste",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0009",
+      "ownerAwakenerName": "Celeste",
       "patch": {
+        "descriptionTemplate": "Dispels own {Blighten} state, restores [Heal:Arg1] HP and gains 1 Arithmetica. Revives upon receiving lethal DMG during this battle, restores [Arg2]% HP and grants all Awakeners [Energy:Arg4] Aliemus. This revive Effect can only be triggered again after 6 turns.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -56,8 +57,8 @@
               "90",
               "100"
             ],
-            "suffix": "%",
-            "stat": "CON"
+            "stat": "CON",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -76,8 +77,7 @@
             "kind": "fixed",
             "value": "25"
           }
-        },
-        "descriptionTemplate": "Dispels own {Blighten} state, restores [Heal:Arg1] HP and gains 1 Arithmetica. Revives upon receiving lethal DMG during this battle, restores [Arg2]% HP and grants all Awakeners [Energy:Arg4] Aliemus. This revive Effect can only be triggered again after 6 turns."
+        }
       }
     }
   ]

@@ -2,8 +2,8 @@
   "id": "overlay.arachne.singularity-warp",
   "displayName": "Singularity Warp",
   "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0056",
   "aliases": [],
   "descriptionTemplate": "If currently in an {Ultra Round}, activate the {Singularity Warp} effect. {Singularity Annihilation} also guarantees the next {Singularity Warp} trigger this turn.",
-  "descriptionArgs": {},
-  "ownerAwakenerId": "awakener-0056"
+  "descriptionArgs": {}
 }

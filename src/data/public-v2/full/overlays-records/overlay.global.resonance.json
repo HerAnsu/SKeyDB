@@ -9,7 +9,7 @@
     "Resonance 4",
     "Resonance 5"
   ],
+  "textColor": "damage",
   "descriptionTemplate": "If other Awakeners have played a total of X Command Cards, trigger follow-up effects after playing this card. The Awakener whom this card belongs to will have their {Resonance} reset when any of their card is played, or at turn end.",
-  "descriptionArgs": {},
-  "textColor": "damage"
+  "descriptionArgs": {}
 }

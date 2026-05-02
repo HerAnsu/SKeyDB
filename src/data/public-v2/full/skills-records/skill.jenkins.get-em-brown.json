@@ -1,9 +1,9 @@
 {
   "id": "skill.jenkins.get-em-brown",
+  "displayName": "Get 'em! Brown!",
   "ownerAwakenerId": "awakener-0025",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Get 'em! Brown!",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. In this battle, the DMG dealt by {Get 'em! Brown!} +[Arg2]. {Leap}: This skill additionally benefits from an additional 1x {STR} bonus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,22 +29,23 @@
         "9",
         "10"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0025",
       "id": "upgrade.enlighten.jenkins.red-ribbon.skill.jenkins.get-em-brown",
       "operation": "mixed",
       "upgraderId": "enlighten.jenkins.red-ribbon",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Jenkin",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0025",
+      "ownerAwakenerName": "Jenkin",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. In this battle, the DMG of {Get 'em! Brown!} +[Arg2], and the DMG of {Swarm Impact} +[Arg3]. {Leap}: Enjoys an additional 1x {STR} bonus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -56,8 +57,8 @@
               "27",
               "30"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -69,8 +70,8 @@
               "9",
               "10"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
@@ -82,11 +83,10 @@
               "4.5",
               "5"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. In this battle, the DMG of {Get 'em! Brown!} +[Arg2], and the DMG of {Swarm Impact} +[Arg3]. {Leap}: Enjoys an additional 1x {STR} bonus."
+        }
       }
     },
     {

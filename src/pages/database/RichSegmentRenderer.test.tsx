@@ -209,15 +209,14 @@ describe('RichSegmentRenderer', () => {
         descriptionArgs={{
           Arg1: {
             kind: 'computed',
-            expression: {
-              op: 'ceil',
-              args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
-            },
-            inputs: ['accountDamagePower'],
+            formulaKey: 'wheelRefinementLinear',
+            baseValue: 0,
+            perLevel: 3,
+            inputs: ['wheelRefinementLevel'],
             suffix: '%',
           },
         }}
-        formulaContext={{accountDamagePower: 8}}
+        formulaContext={{wheelRefinementLevel: 4}}
         segment={{type: 'descriptionArg', argKey: 'Arg1', channel: null}}
         skillLevel={1}
         stats={BASE_STATS}
@@ -235,11 +234,10 @@ describe('RichSegmentRenderer', () => {
         descriptionArgs={{
           Arg1: {
             kind: 'computed',
-            expression: {
-              op: 'ceil',
-              args: [{op: 'mul', args: [{var: 'accountDamagePower'}, {const: 1.5}]}],
-            },
-            inputs: ['accountDamagePower'],
+            formulaKey: 'wheelRefinementLinear',
+            baseValue: 0,
+            perLevel: 3,
+            inputs: ['wheelRefinementLevel'],
             suffix: '%',
           },
         }}

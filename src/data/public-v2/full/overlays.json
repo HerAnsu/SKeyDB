@@ -49,6 +49,7 @@
       "id": "overlay.24.realm-and-persona",
       "displayName": "Realm and Persona",
       "overlayType": "tag",
+      "ownerAwakenerId": "awakener-0001",
       "aliases": [
         "Realm and Persona Effects"
       ],
@@ -75,8 +76,8 @@
             "36",
             "40"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "StateArg3": {
           "kind": "scaling",
@@ -88,8 +89,8 @@
             "11.7",
             "13"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "StateArg4": {
           "kind": "scaling",
@@ -123,8 +124,8 @@
             "72",
             "80"
           ],
-          "suffix": "%",
-          "stat": "CON"
+          "stat": "CON",
+          "suffix": "%"
         },
         "StateArg7": {
           "kind": "scaling",
@@ -136,8 +137,8 @@
             "11.7",
             "13"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "StateArg8": {
           "kind": "scaling",
@@ -149,8 +150,8 @@
             "54",
             "60"
           ],
-          "suffix": "%",
-          "stat": "DEF"
+          "stat": "DEF",
+          "suffix": "%"
         },
         "StateArg9": {
           "kind": "scaling",
@@ -162,41 +163,41 @@
             "135",
             "150"
           ],
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         },
         "StateArg10": {
           "kind": "fixed",
           "value": "375",
-          "suffix": "%",
-          "stat": "ATK"
+          "stat": "ATK",
+          "suffix": "%"
         }
-      },
-      "ownerAwakenerId": "awakener-0001"
+      }
     },
     {
       "id": "overlay.global.aftershock",
       "displayName": "Aftershock",
       "overlayType": "mechanic",
       "aliases": [],
+      "textColor": "shield",
       "descriptionTemplate": "Triggers the {Aftershock} effect when discarded.",
-      "descriptionArgs": {},
-      "textColor": "shield"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.alert",
       "displayName": "Alert",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Increase Shield generation.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_009",
-      "textColor": "shield"
+      "textColor": "shield",
+      "descriptionTemplate": "Increase Shield generation.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.horla.anger",
       "displayName": "Anger",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0024",
       "aliases": [],
       "descriptionTemplate": "The Final DMG dealt by all Awakeners +[StateArg1]%. Increase the temporary Crit. Rate and Crit. DMG gained by {Resplendent Chapters}.",
       "descriptionArgs": {
@@ -208,8 +209,7 @@
             "multiplier": "0.02"
           }
         }
-      },
-      "ownerAwakenerId": "awakener-0024"
+      }
     },
     {
       "id": "overlay.global.annihilation",
@@ -224,15 +224,15 @@
       "displayName": "Arithmetica Harmony",
       "overlayType": "mechanic",
       "aliases": [],
+      "iconId": "Battle_Card_Buff_069",
+      "textColor": "misc",
       "descriptionTemplate": "After playing [DescArg1] Command Cards, enter the {Arithmetica Harmony} state.",
       "descriptionArgs": {
         "DescArg1": {
           "kind": "fixed",
           "value": "11"
         }
-      },
-      "iconId": "Battle_Card_Buff_069",
-      "textColor": "misc"
+      }
     },
     {
       "id": "overlay.global.ashen-ruins",
@@ -255,142 +255,142 @@
       "displayName": "Barrier",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "When attacked, cancel out the DMG and remove 1 stack.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_013",
-      "textColor": "shield"
+      "textColor": "shield",
+      "descriptionTemplate": "When attacked, cancel out the DMG and remove 1 stack.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.xu.betroth",
       "displayName": "Betroth",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0054",
       "aliases": [],
+      "iconId": "Battle_Card_Buff_080",
+      "textColor": "damage",
       "descriptionTemplate": "Inflict [Arg1] {plural:[Arg1]|stack|stacks} of {Spellbound} on all enemies.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
           "value": "2"
         }
-      },
-      "ownerAwakenerId": "awakener-0054",
-      "iconId": "Battle_Card_Buff_080",
-      "textColor": "damage"
+      }
     },
     {
       "id": "overlay.murphy-fauxborn.birth-ritual",
       "displayName": "Birth Ritual",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "Each stack inflicts {Sacrifice} stacks equal to 1% of DMG received. Stacks up to 75. Removed at turn end.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0035",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_079",
-      "textColor": "shield"
+      "textColor": "shield",
+      "descriptionTemplate": "Each stack inflicts {Sacrifice} stacks equal to 1% of DMG received. Stacks up to 75. Removed at turn end.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.bleed",
       "displayName": "Bleed",
       "overlayType": "mechanic",
       "aliases": [],
+      "iconId": "Battle_Card_Buff_022",
+      "textColor": "damage",
       "descriptionTemplate": "At turn end, take DMG equal to stacks and remove this state.",
       "descriptionArgs": {
         "Layer": {
           "kind": "fixed",
           "value": "X"
         }
-      },
-      "iconId": "Battle_Card_Buff_022",
-      "textColor": "damage"
+      }
     },
     {
       "id": "overlay.global.blighten",
       "displayName": "Blighten",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Healing received -25%. Remove 1 stack at turn end.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_031",
-      "textColor": "damage"
+      "textColor": "damage",
+      "descriptionTemplate": "Healing received -25%. Remove 1 stack at turn end.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.burn",
       "displayName": "Burn",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Set the card on fire, dealing 5% of Max HP damage upon playing, and if still in hand at turn end, it will be {Exhausted}.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_057",
-      "textColor": "damage"
+      "textColor": "damage",
+      "descriptionTemplate": "Set the card on fire, dealing 5% of Max HP damage upon playing, and if still in hand at turn end, it will be {Exhausted}.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.ryker.chaotic-legacy",
       "displayName": "Chaotic Legacy",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0043",
       "aliases": [],
       "descriptionTemplate": "Includes the following three relics:\n\"Lucky Windcoat\": Increases all Awakener Crit. Rates by 10%. All Ryker and dice rolls will never result in the minimum value.\n{Upgrade}: The Crit. Rate increase changes to 15%, and the maximum value of random results +1.\n\"Octahedron Dice\": Each time a Posse is activated, add 1 \"{Octahedron Dice}\" to your hand.\n{Upgrade}: Change to add 1 \"{Shining Octahedron Dice}\" to your hand.\n\"Big Mouth Button\": At turn start and when Ryker or dice's random effect triggers, gain 50 Keyflare and 2% Crit. DMG, up to 30% Crit. DMG.\n{Upgrade}: Change to gain 100 Keyflare and 4% Crit. DMG, up to 50% Crit. DMG.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0043"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.kathigu-ra.combust",
       "displayName": "Combust",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0027",
       "aliases": [],
       "descriptionTemplate": "When {Combust} reaches 10 stacks, gain 2 Arithmetica and upgrade all {Solarflare} to {Hyperflare}.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0027"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.doresain.corpse",
       "displayName": "Corpse",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "Corpses can be eaten by certain {Caro} Awakener(s) to trigger special effects. You can keep up to 3 Corpses, which is carried over to the next battle.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0014",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_076",
-      "textColor": "misc"
+      "textColor": "misc",
+      "descriptionTemplate": "Corpses can be eaten by certain {Caro} Awakener(s) to trigger special effects. You can keep up to 3 Corpses, which is carried over to the next battle.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.castor.corrosion",
       "displayName": "Corrosion",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "When taking Active DMG or {Tentacle DMG}, remove an equivalent amount of {Corrosion} stacks and suffer HP loss equal to 300% of the removed stacks. Other types of DMG removes {Corrosion} stacks at 50% effectiveness.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0008",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_070",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "When taking Active DMG or {Tentacle DMG}, remove an equivalent amount of {Corrosion} stacks and suffer HP loss equal to 300% of the removed stacks. Other types of DMG removes {Corrosion} stacks at 50% effectiveness.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.counter",
       "displayName": "Counter",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "When attacked, deal DMG equal to the number of {Counter} stacks to the attacker.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_019",
-      "textColor": "shield"
+      "textColor": "shield",
+      "descriptionTemplate": "When attacked, deal DMG equal to the number of {Counter} stacks to the attacker.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.pickman.creativity",
       "displayName": "Creativity",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "When Pickman has 10 stacks of {Creativity} and uses Exalt, he consumes all {Creativity} stacks to gain one stack of {Fantasia}. This also grants 15 Aliemus to all teammates. His {Creativity} can stack up to 10 and is preserved between battles.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0040",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_077",
-      "textColor": "misc"
+      "textColor": "misc",
+      "descriptionTemplate": "When Pickman has 10 stacks of {Creativity} and uses Exalt, he consumes all {Creativity} stacks to gain one stack of {Fantasia}. This also grants 15 Aliemus to all teammates. His {Creativity} can stack up to 10 and is preserved between battles.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.hameln.crescendo",
       "displayName": "Crescendo",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0022",
       "aliases": [],
       "descriptionTemplate": "Play this card to grant Hameln 3 Aliemus.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0022"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.crimson-furnace",
@@ -405,10 +405,10 @@
       "displayName": "Death Resistance",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "When taking fatal DMG, there is a chance to trigger {Death Resistance} and survive at 1 HP. Each trigger halves your {Death Resistance} % and subsequent {Death Resistance} gains during this exploration.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_012",
-      "textColor": "heal"
+      "textColor": "heal",
+      "descriptionTemplate": "When taking fatal DMG, there is a chance to trigger {Death Resistance} and survive at 1 HP. Each trigger halves your {Death Resistance} % and subsequent {Death Resistance} gains during this exploration.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.delayed-sacrifice",
@@ -443,12 +443,12 @@
       "id": "overlay.arachne.singularity-shuttle",
       "displayName": "Dimension Shuttle",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0056",
       "aliases": [
         "Singularity Shuttle"
       ],
       "descriptionTemplate": "After playing the first Command Card each turn, move a Temporary Base Copy of it to {Ultra Space}. This cannot trigger during {Ultra Rounds}.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0056"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.dimension-shuttle",
@@ -520,21 +520,21 @@
       "id": "overlay.wanda.dreamlure",
       "displayName": "Dreamlure",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "When Wanda's skill triggers the {Leap} effect and there are 5 stacks present, consume 5 stacks to grant an additional effect. The cap for {Dreamlure} is 10 stacks, which will carry over into the next battle.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0052",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_043",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "When Wanda's skill triggers the {Leap} effect and there are 5 stacks present, consume 5 stacks to grant an additional effect. The cap for {Dreamlure} is 10 stacks, which will carry over into the next battle.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.echo",
       "displayName": "Echo",
       "overlayType": "mechanic",
       "aliases": [],
+      "textColor": "damage",
       "descriptionTemplate": "After playing this card, it returns to your hand. The Orison is disabled until turn end.",
-      "descriptionArgs": {},
-      "textColor": "damage"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.embryo-fusion",
@@ -548,27 +548,30 @@
       "id": "overlay.horla.emotion",
       "displayName": "Emotion",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0024",
       "aliases": [],
       "descriptionTemplate": "When Horla's Command Cards trigger their {Leap} Effect, she enters the corresponding {Emotion} state.\nHorla can only have one {Emotion} active at a time, and each {Emotion} grants a team-wide passive buff while active.\nThe current {Emotion} also enhances a different effect of {Resplendent Chapters}.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0024"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.lily.endure",
       "displayName": "Endure",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "For every 1 point of HP lost, gain 1 stack of {Endure}, up to 100% of Max HP. {Endure} will carry over to the next battle.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0029",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_040",
-      "textColor": "misc"
+      "textColor": "misc",
+      "descriptionTemplate": "For every 1 point of HP lost, gain 1 stack of {Endure}, up to 100% of Max HP. {Endure} will carry over to the next battle.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.xu.enthrall",
       "displayName": "Enthrall",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0054",
       "aliases": [],
+      "iconId": "Battle_Card_Buff_080",
+      "textColor": "damage",
       "descriptionTemplate": "Remove all enemies' {Spellbound}. Each stack removed causes {Fixed DMG} equal to [Arg1]% of the target's Max HP and triggers [Arg2]% {Poison}.",
       "descriptionArgs": {
         "Arg1": {
@@ -581,10 +584,7 @@
           "value": "40",
           "suffix": "%"
         }
-      },
-      "ownerAwakenerId": "awakener-0054",
-      "iconId": "Battle_Card_Buff_080",
-      "textColor": "damage"
+      }
     },
     {
       "id": "overlay.global.exhaust",
@@ -593,35 +593,36 @@
       "aliases": [
         "Exhausted"
       ],
+      "textColor": "damage",
       "descriptionTemplate": "After playing, this card is removed from deck instead of discarded.",
-      "descriptionArgs": {},
-      "textColor": "damage"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.fainted",
       "displayName": "Fainted",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Cannot perform any actions until turn end.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_023",
-      "textColor": "misc"
+      "textColor": "misc",
+      "descriptionTemplate": "Cannot perform any actions until turn end.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.pickman.fantasia",
       "displayName": "Fantasia",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "When Pickman triggers the {Discover} effect, provide the {Inspiration!} option: Consume 1 stack of {Fantasia}, choose all {Discover} effects, and gain 1 stack of {Creativity}.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0040",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_066",
-      "textColor": "misc"
+      "textColor": "misc",
+      "descriptionTemplate": "When Pickman triggers the {Discover} effect, provide the {Inspiration!} option: Consume 1 stack of {Fantasia}, choose all {Discover} effects, and gain 1 stack of {Creativity}.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.horla.fear",
       "displayName": "Fear",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0024",
       "aliases": [],
       "descriptionTemplate": "All Awakeners' {STR} gained, {Counter} gained, and {Poison} inflicted +[StateArg1]%. Increase the {STR} Generation of {Resplendent Chapters}.",
       "descriptionArgs": {
@@ -633,19 +634,18 @@
             "multiplier": "0.02"
           }
         }
-      },
-      "ownerAwakenerId": "awakener-0024"
+      }
     },
     {
       "id": "overlay.kathigu-ra.fiamma",
       "displayName": "Fiamma",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "The Final DMG, Shield, Aliemus, and {STR} granted by this card +30%. Gains {Retain}. After playing, consume all {Fiamma} stacks, and transfer 1 stack of {Fiamma} to another Kathigu-Ra's Command Card in hand.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0027",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_057",
-      "textColor": "damage"
+      "textColor": "damage",
+      "descriptionTemplate": "The Final DMG, Shield, Aliemus, and {STR} granted by this card +30%. Gains {Retain}. After playing, consume all {Fiamma} stacks, and transfer 1 stack of {Fiamma} to another Kathigu-Ra's Command Card in hand.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.final-rule",
@@ -661,28 +661,28 @@
       "id": "overlay.arachne.final-verdict",
       "displayName": "Final Verdict",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0056",
       "aliases": [],
       "descriptionTemplate": "If the target's HP is equal to or below the number of stacks, remove all {Final Verdict} and instantly kill them.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0056"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.doll-inferno.finale",
       "displayName": "Finale",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0018",
       "aliases": [],
       "descriptionTemplate": "When you have 10 stacks of {Finale}, place 1 {Illusion's End} into hand.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0018"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.doll-inferno.finale-form",
       "displayName": "Finale Form",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0018",
       "aliases": [],
       "descriptionTemplate": "Changes \"Doll: Inferno\"'s specific skills to their {Finale Form} effects.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0018"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.fixed-dmg",
@@ -705,25 +705,26 @@
       "displayName": "Fortress",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Each stack reduces DMG taken by 1%.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_046",
-      "textColor": "shield"
+      "textColor": "shield",
+      "descriptionTemplate": "Each stack reduces DMG taken by 1%.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.fragile",
       "displayName": "Fragile",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "All Shields obtained -25%, remove 1 stack at turn end.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_015",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "All Shields obtained -25%, remove 1 stack at turn end.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.horla.grief",
       "displayName": "Grief",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0024",
       "aliases": [],
       "descriptionTemplate": "All Awakeners' Shield Generated, HP Recovery, and {STR} Reduction effect +[StateArg1]%. Increase the HP Recovery of {Resplendent Chapters}.",
       "descriptionArgs": {
@@ -735,13 +736,13 @@
             "multiplier": "0.02"
           }
         }
-      },
-      "ownerAwakenerId": "awakener-0024"
+      }
     },
     {
       "id": "overlay.horla.happiness",
       "displayName": "Happiness",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0024",
       "aliases": [],
       "descriptionTemplate": "The Aliemus generated by all Awakeners +[StateArg1]%. Arithmetica and Command Cards at turn end can be {Retained} until the next turn. {Resplendent Chapters} generates more Aliemus.",
       "descriptionArgs": {
@@ -753,8 +754,7 @@
             "multiplier": "0.02"
           }
         }
-      },
-      "ownerAwakenerId": "awakener-0024"
+      }
     },
     {
       "id": "overlay.global.infinite-devour",
@@ -792,63 +792,51 @@
       "id": "overlay.murphy-fauxborn.life-seal",
       "displayName": "Life Seal",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0035",
       "aliases": [],
       "descriptionTemplate": "Each stack grants the next {Princess of Delusions} +20% {Birth Ritual}, up to 5 stacks, at which point the next {Princess of Delusions} DMG count doubles.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0035"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.ramona-timeworn.loop",
       "displayName": "Loop",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "Ramona: Timeworn: Unique additional effect of Ramona's Command Card, triggered when there are 3 stacks of {Negentropy}. The {Loop} will carry over to the next Battle.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0020",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_038",
-      "textColor": "light"
+      "textColor": "light",
+      "descriptionTemplate": "Ramona: Timeworn: Unique additional effect of Ramona's Command Card, triggered when there are 3 stacks of {Negentropy}. The {Loop} will carry over to the next Battle.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.madness",
       "displayName": "Madness",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Each stack increases instances of DMG dealt by 1.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_030",
-      "textColor": "heal"
+      "textColor": "heal",
+      "descriptionTemplate": "Each stack increases instances of DMG dealt by 1.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.hameln.marvelous-debuff",
       "displayName": "Marvelous Debuff",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0022",
       "aliases": [],
       "descriptionTemplate": "Effects: {Bleed} (150% DMG), {Poison} (75% DMG), apply 1 Weakness, apply 1 Vulnerable, Temp. {STR} -[DescArg1].",
       "descriptionArgs": {
         "DescArg1": {
           "kind": "computed",
-          "expression": {
-            "op": "ceil",
-            "args": [
-              {
-                "op": "mul",
-                "args": [
-                  {
-                    "var": "accountStageGrowth"
-                  },
-                  {
-                    "const": 0.025
-                  }
-                ]
-              }
-            ]
-          },
+          "formulaKey": "scaled",
+          "baseFormula": "accountStageGrowth",
+          "multiplier": 0.025,
+          "rounding": "ceil",
           "inputs": [
-            "accountStageGrowth"
+            "accountLevel"
           ]
         }
       },
-      "ownerAwakenerId": "awakener-0022",
       "childOverlayIds": [
         "overlay.global.bleed",
         "overlay.global.poison",
@@ -861,10 +849,10 @@
       "id": "overlay.hameln.melody",
       "displayName": "Melody",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0022",
       "aliases": [],
       "descriptionTemplate": "Collective term for Hameln's {Melody} effects: {Rondino} and {Crescendo}.",
       "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0022",
       "nodeKind": "group",
       "childOverlayIds": [
         "overlay.hameln.rondino",
@@ -875,17 +863,18 @@
       "id": "overlay.horla.metaphor",
       "displayName": "Metaphor",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0024",
       "aliases": [
         "Metaphors"
       ],
       "descriptionTemplate": "Each type of {Metaphor} can have a maximum of 3 stacks. Different {Metaphors} will enhance different effects of the Psalms:\n{Snarl Psalm}: Consumes all {Anger} {Metaphors}, each stack of {Metaphor} deals an additional 2 instances of DMG.\n{Elegy Psalm}: Consumes all {Grief} {Metaphors}, each stack of {Metaphor} provides additional HP Recovery.\n{Carol Psalm}: Consumes all {Happiness} {Metaphors}, each stack of {Metaphor} grants an additional 10 Aliemus.\n{Dirge Psalm}: Consumes all {Fear} {Metaphors}, each stack of {Metaphor} grants an additional {STR}.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0024"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.wanda.murmurs",
       "displayName": "Murmurs",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0052",
       "aliases": [
         "Murmur"
       ],
@@ -900,16 +889,15 @@
           "value": "1"
         }
       },
-      "ownerAwakenerId": "awakener-0052",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0052",
           "id": "upgrade.enlighten.wanda.lakeborne-dweller.overlay.wanda.murmurs",
           "operation": "override_args",
           "upgraderId": "enlighten.wanda.lakeborne-dweller",
-          "upgraderSlot": "E2",
-          "ownerAwakenerName": "Wanda",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E2",
+          "ownerAwakenerId": "awakener-0052",
+          "ownerAwakenerName": "Wanda",
           "patch": {
             "descriptionArgs": {
               "StateArg1": {
@@ -929,12 +917,12 @@
       "id": "overlay.ramona-timeworn.negentropy",
       "displayName": "Negentropy",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "With 3 {Negentropy} stacks, using Ramona: Timeworn's Command Cards consumes all stacks and triggers the extra {Loop} effect. (Max 3 stacks)",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0020",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_039",
-      "textColor": "light"
+      "textColor": "light",
+      "descriptionTemplate": "With 3 {Negentropy} stacks, using Ramona: Timeworn's Command Cards consumes all stacks and triggers the extra {Loop} effect. (Max 3 stacks)",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.over-exalt",
@@ -950,26 +938,26 @@
       "id": "overlay.pickman.painted-orisons",
       "displayName": "Painted Orisons",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0040",
       "aliases": [
         "Advanced Orisons",
         "Orisons"
       ],
       "descriptionTemplate": "Includes the following {Orisons}: {Computation}, {Finesse}, Berserk, {Catalyst}, Might, Bastion, Drain, Insight.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0040"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.pickman.painted-relics",
       "displayName": "Painted Relics",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0040",
       "aliases": [
         "Golden Relics",
         "Silver Relics",
         "Painted Silver Relics"
       ],
       "descriptionTemplate": "Includes the following \"{Astral Reign} Relics\": Malignant Child, Rite of Spring, Iron Lock, Filigree Agate, Blessed Blood, Rusted Saw, Gilded Reverie, Bloody Pebble.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0040"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.perception",
@@ -983,32 +971,32 @@
       "id": "overlay.aigis.petrify",
       "displayName": "Petrify",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "Cannot act for 1 turn. Petrified enemies can't be Petrified again.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0003",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_023",
-      "textColor": "misc"
+      "textColor": "misc",
+      "descriptionTemplate": "Cannot act for 1 turn. Petrified enemies can't be Petrified again.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.clementine.phobic-fixation",
       "displayName": "Phobic Fixation",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG dealt this turn -3%, stacking up to 10 stacks.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0010",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_049",
       "textColor": "affliction",
+      "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG dealt this turn -3%, stacking up to 10 stacks.",
+      "descriptionArgs": {},
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0010",
           "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.phobic-fixation",
           "operation": "replace_description",
           "upgraderId": "enlighten.clementine.you-will-recover",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Clementine",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0010",
+          "ownerAwakenerName": "Clementine",
           "patch": {
             "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG dealt this turn -3%, stacking up to 15 stacks."
           }
@@ -1028,10 +1016,10 @@
       "displayName": "Poison",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "At turn end, take DMG equal to stacks.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_006",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "At turn end, take DMG equal to stacks.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.prepare",
@@ -1044,34 +1032,34 @@
         "Prepare 4",
         "Prepare 5"
       ],
+      "textColor": "damage",
       "descriptionTemplate": "At turn end, Arithmetica Cost -[Layer], This effect triggers even if discarded.",
       "descriptionArgs": {
         "Layer": {
           "kind": "fixed",
           "value": "X"
         }
-      },
-      "textColor": "damage"
+      }
     },
     {
       "id": "overlay.clementine.psychic-trauma",
       "displayName": "Psychic Trauma",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG taken this turn +3%, stacking up to 10 stacks.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0010",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_049",
       "textColor": "affliction",
+      "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG taken this turn +3%, stacking up to 10 stacks.",
+      "descriptionArgs": {},
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0010",
           "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.psychic-trauma",
           "operation": "replace_description",
           "upgraderId": "enlighten.clementine.you-will-recover",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Clementine",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0010",
+          "ownerAwakenerName": "Clementine",
           "patch": {
             "descriptionTemplate": "Under the erosion of the Hive, your fears are laid bare. For each stack, DMG taken this turn +3%, stacking up to 15 stacks."
           }
@@ -1099,9 +1087,9 @@
       "displayName": "Quasar",
       "overlayType": "mechanic",
       "aliases": [],
+      "textColor": "affliction",
       "descriptionTemplate": "If this card triggers \"Dimension Shuttle\" after being played, trigger the subsequent effect. Arithmetica Cost -1 when taken from {Ultra Space}.",
-      "descriptionArgs": {},
-      "textColor": "affliction"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.raging-waves",
@@ -1133,9 +1121,9 @@
         "Resonance 4",
         "Resonance 5"
       ],
+      "textColor": "damage",
       "descriptionTemplate": "If other Awakeners have played a total of X Command Cards, trigger follow-up effects after playing this card. The Awakener whom this card belongs to will have their {Resonance} reset when any of their card is played, or at turn end.",
-      "descriptionArgs": {},
-      "textColor": "damage"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.retain",
@@ -1144,28 +1132,29 @@
       "aliases": [
         "Retained"
       ],
+      "textColor": "damage",
       "descriptionTemplate": "Card will not enter the Discard Pile, but instead remains in your hand.",
-      "descriptionArgs": {},
-      "textColor": "damage"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.celeste.revival",
       "displayName": "Revival",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0009",
       "aliases": [],
       "descriptionTemplate": "Upon receiving lethal DMG in this battle, revive and restore X% HP. Can only be triggered once per battle.",
       "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0009",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0009",
           "id": "upgrade.enlighten.celeste.beyond-joy-and-sorrow.overlay.celeste.revival",
           "operation": "mixed",
           "upgraderId": "enlighten.celeste.beyond-joy-and-sorrow",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Celeste",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0009",
+          "ownerAwakenerName": "Celeste",
           "patch": {
+            "descriptionTemplate": "Revives upon receiving lethal DMG during this battle, restores [Arg2]% HP and grants all Awakeners [Energy:Arg4] Aliemus. This revive Effect can only be triggered again after 6 turns.",
             "descriptionArgs": {
               "Arg2": {
                 "kind": "fixed",
@@ -1175,8 +1164,7 @@
                 "kind": "fixed",
                 "value": "25"
               }
-            },
-            "descriptionTemplate": "Revives upon receiving lethal DMG during this battle, restores [Arg2]% HP and grants all Awakeners [Energy:Arg4] Aliemus. This revive Effect can only be triggered again after 6 turns."
+            }
           }
         }
       ]
@@ -1185,28 +1173,28 @@
       "id": "overlay.miryam.ritual",
       "displayName": "Ritual",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0032",
       "aliases": [],
       "descriptionTemplate": "Convert up to 3 {Sacrament} in hand into {Obsession}, gaining different additional effects based on the number of conversions.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0032"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.hameln.rondino",
       "displayName": "Rondino",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0022",
       "aliases": [],
       "descriptionTemplate": "When played, takes effect 2 times and changes to {Crescendo}",
       "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0022",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0022",
           "id": "upgrade.enlighten.hameln.oneiric-waltz.overlay.hameln.rondino",
           "operation": "replace_description",
           "upgraderId": "enlighten.hameln.oneiric-waltz",
-          "upgraderSlot": "E2",
-          "ownerAwakenerName": "Hameln",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E2",
+          "ownerAwakenerId": "awakener-0022",
+          "ownerAwakenerName": "Hameln",
           "patch": {
             "descriptionTemplate": "Arithmetica Cost -2, takes effect 2 times, then changes to {Crescendo}"
           }
@@ -1228,10 +1216,10 @@
       "displayName": "Sacrifice",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "At turn end, take DMG equal to the number of stacks, then remove 50% of the {Sacrifice} stacks. {Sacrifice} carries over to the next battle.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_041",
-      "textColor": "shield"
+      "textColor": "shield",
+      "descriptionTemplate": "At turn end, take DMG equal to the number of stacks, then remove 50% of the {Sacrifice} stacks. {Sacrifice} carries over to the next battle.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.sealed",
@@ -1245,63 +1233,66 @@
       "id": "overlay.pollux.sin-mark",
       "displayName": "Sin Mark",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "Each stack grants Pollux's damage a 1% {Bleed} effect.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0041",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_078",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "Each stack grants Pollux's damage a 1% {Bleed} effect.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.arachne.singularity-annihilation",
       "displayName": "Singularity Annihilation",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0056",
       "aliases": [],
       "descriptionTemplate": "Draw the leftmost card from {Ultra Space}. 3 turns cooldown.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0056"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.arachne.singularity-beacon",
       "displayName": "Singularity Beacon",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0056",
       "aliases": [],
       "descriptionTemplate": "For each stack, increase the final DMG, {STR} & {Tentacle DMG} Boost, Fixed {Poison}, and Fixed {Counter} effects of this card by 2%; increase the final Shield, HP Recovery, and {STR⯆} effects by 1%. Cards with {Singularity Beacon} cannot trigger \"Dimension Shuttle\".",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0056"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.arachne.singularity-prism",
       "displayName": "Singularity Prism",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0056",
       "aliases": [],
       "descriptionTemplate": "For each stack, increase the final DMG, {STR} & {Tentacle DMG} Boost, fixed {Poison}, and fixed {Counter} effects of all Awakener cards by 2%; increase the final Shield, HP Healing, and {STR⯆} effects by 1%.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0056"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.arachne.singularity-warp",
       "displayName": "Singularity Warp",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0056",
       "aliases": [],
       "descriptionTemplate": "If currently in an {Ultra Round}, activate the {Singularity Warp} effect. {Singularity Annihilation} also guarantees the next {Singularity Warp} trigger this turn.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0056"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.arachne.singularity-ultra",
       "displayName": "Singularity: Ultra",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0056",
       "aliases": [],
       "descriptionTemplate": "{Dimension Shuttle}: After playing the first Command Card each turn, move a Temporary Base Copy of it to {Ultra Space}. Grant the original and the copy 25 stacks of {Singularity Beacon}. This cannot trigger during {Ultra} Rounds.\n{Singularity Beacon}: Each stack increases Final DMG, {STR}/{Tentacle DMG} Generation, and Fixed {Poison}/{Counter} effects by 2%. Increases Final Shield, HP Recovery, and {STR⯆} effects by 1%. Removed after play. Cards with this effect cannot trigger {Dimension Shuttle}.\n{Ultra Space}: When full, ending the turn activates {Ultra Space} immediately instead of initiating an {Ultra Round}: Discard all non-{Retain} cards, trigger their {Fleeting} effects, draw all {Ultra Space} cards, and set Arithmetica to 5. This current turn is treated as an {Ultra Round}.\n{Singularity Annihilation}: Draw the leftmost card from {Ultra Space}. 3 turns cooldown.\nUpon starting exploration, the team gains +50% DMG Amplification and 15 stacks of {Singularity Prism}.\n{Singularity Prism}: All Command Cards gain {Singularity Beacon} bonuses equal to these stacks.\n{Ultra} Mastery: For each 1 point of Realm Mastery, {Singularity Beacon} stacks from {Singularity Prism} and {Dimension Shuttle} increase by 0.05%.\nPure {Ultra}: If the team consists only of {Ultra} or {Chaos} Awakeners, the {Ultra} Mastery effect and Realm DMG Amplification are doubled.",
-      "descriptionArgs": {},
-      "ownerAwakenerId": "awakener-0056"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.xu.spellbound",
       "displayName": "Spellbound",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0054",
       "aliases": [],
+      "iconId": "Battle_Card_Buff_080",
+      "textColor": "damage",
       "descriptionTemplate": "For each stack, Fixed {Poison} taken +5%, DMG dealt -[DescArg1]%. Stacks up to [DescArg2].",
       "descriptionArgs": {
         "DescArg1": {
@@ -1314,18 +1305,15 @@
           "value": "5"
         }
       },
-      "ownerAwakenerId": "awakener-0054",
-      "iconId": "Battle_Card_Buff_080",
-      "textColor": "damage",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0054",
           "id": "upgrade.enlighten.xu.nirvanas-kiss.overlay.xu.spellbound",
           "operation": "override_args",
           "upgraderId": "enlighten.xu.nirvanas-kiss",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Xu",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0054",
+          "ownerAwakenerName": "Xu",
           "patch": {
             "descriptionArgs": {
               "DescArg1": {
@@ -1347,10 +1335,10 @@
       "displayName": "Stagnation",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Increase a card's Arithmetica Cost.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_024",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "Increase a card's Arithmetica Cost.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.steal",
@@ -1359,10 +1347,10 @@
       "aliases": [
         "Stealing"
       ],
-      "descriptionTemplate": "Temporarily reduce target's {STR⯆} and gain the same amount of Temporary {STR}.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_014",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "Temporarily reduce target's {STR⯆} and gain the same amount of Temporary {STR}.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.str",
@@ -1371,30 +1359,30 @@
       "aliases": [
         "Strength"
       ],
-      "descriptionTemplate": "Increase Active DMG dealt.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_021",
-      "textColor": "heal"
+      "textColor": "heal",
+      "descriptionTemplate": "Increase Active DMG dealt.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.strength",
       "displayName": "STR⯆",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Reduce Active and {Tentacle DMG}.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_037",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "Reduce Active and {Tentacle DMG}.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.stun",
       "displayName": "Stun",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Stunned. Unable to act.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_023",
-      "textColor": "misc"
+      "textColor": "misc",
+      "descriptionTemplate": "Stunned. Unable to act.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.surging-tides",
@@ -1408,21 +1396,21 @@
       "id": "overlay.clementine.symbiosis",
       "displayName": "Symbiosis",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "Her emotions, cognition, and everything else are eternally linked to the Hive Will. {Symbiosis} can be transformed into debuff effects by Clementine's Exalt {Lifeform Reconstruction}, stacking up to 10 stacks.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0010",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_049",
       "textColor": "affliction",
+      "descriptionTemplate": "Her emotions, cognition, and everything else are eternally linked to the Hive Will. {Symbiosis} can be transformed into debuff effects by Clementine's Exalt {Lifeform Reconstruction}, stacking up to 10 stacks.",
+      "descriptionArgs": {},
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0010",
           "id": "upgrade.enlighten.clementine.you-will-recover.overlay.clementine.symbiosis",
           "operation": "replace_description",
           "upgraderId": "enlighten.clementine.you-will-recover",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Clementine",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0010",
+          "ownerAwakenerName": "Clementine",
           "patch": {
             "descriptionTemplate": "Her emotions, cognition, and everything else are eternally linked to the Hive Will. \"Empathy\" can be transformed into debuff effects by Clementine's Exalt {Lifeform Reconstruction}, stacking up to 15 stacks."
           }
@@ -1434,15 +1422,15 @@
       "displayName": "Temporary Counter",
       "overlayType": "mechanic",
       "aliases": [],
+      "iconId": "Battle_Card_Buff_019",
+      "textColor": "shield",
       "descriptionTemplate": "This turn, each time you are attacked, deal [Layer] DMG to the attacker.",
       "descriptionArgs": {
         "Layer": {
           "kind": "fixed",
           "value": "X"
         }
-      },
-      "iconId": "Battle_Card_Buff_019",
-      "textColor": "shield"
+      }
     },
     {
       "id": "overlay.global.temporary-enhance",
@@ -1457,24 +1445,24 @@
       "displayName": "Temporary STR",
       "overlayType": "mechanic",
       "aliases": [],
+      "iconId": "Battle_Card_Buff_021",
+      "textColor": "heal",
       "descriptionTemplate": "This turn, DMG dealt +[Layer].",
       "descriptionArgs": {
         "Layer": {
           "kind": "fixed",
           "value": "X"
         }
-      },
-      "iconId": "Battle_Card_Buff_021",
-      "textColor": "heal"
+      }
     },
     {
       "id": "overlay.global.tentacle-dmg",
       "displayName": "Tentacle DMG",
       "overlayType": "mechanic",
       "aliases": [],
+      "textColor": "misc",
       "descriptionTemplate": "Increases {Tentacle DMG}.",
-      "descriptionArgs": {},
-      "textColor": "misc"
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.tranquil-sea",
@@ -1547,35 +1535,35 @@
         "Useable 10 times",
         "Useable X times"
       ],
+      "textColor": "damage",
       "descriptionTemplate": "Only enters the Discard Pile and resets the count after being used [Layer] times, but \"Orison\" only takes effect the first time it is used.",
       "descriptionArgs": {
         "Layer": {
           "kind": "fixed",
           "value": "X"
         }
-      },
-      "textColor": "damage"
+      }
     },
     {
       "id": "overlay.global.void",
       "displayName": "Void",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "At turn end, all Awakeners lose Aliemus.",
-      "descriptionArgs": {},
       "iconId": "IconS_Buff_029",
-      "textColor": "aliemus"
+      "textColor": "aliemus",
+      "descriptionTemplate": "At turn end, all Awakeners lose Aliemus.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.vortice.vortex-reload",
       "displayName": "Vortex Reload",
       "overlayType": "mechanic",
-      "aliases": [],
-      "descriptionTemplate": "After other Awakeners unleash Exalt, consume 1 stack, and Vortice unleashes {Vortex! Shell!} as a {Pursuit}.",
-      "descriptionArgs": {},
       "ownerAwakenerId": "awakener-0055",
+      "aliases": [],
       "iconId": "Battle_Card_Buff_081",
-      "textColor": "shield"
+      "textColor": "shield",
+      "descriptionTemplate": "After other Awakeners unleash Exalt, consume 1 stack, and Vortice unleashes {Vortex! Shell!} as a {Pursuit}.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.vulnerable",
@@ -1584,25 +1572,26 @@
       "aliases": [
         "Vulnerability"
       ],
-      "descriptionTemplate": "All DMG taken +50%, remove 1 stack at turn end.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_003",
-      "textColor": "damage"
+      "textColor": "damage",
+      "descriptionTemplate": "All DMG taken +50%, remove 1 stack at turn end.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.global.weakness",
       "displayName": "Weakness",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "All DMG dealt -25%, remove 1 stack at turn end.",
-      "descriptionArgs": {},
       "iconId": "Battle_Card_Buff_005",
-      "textColor": "affliction"
+      "textColor": "affliction",
+      "descriptionTemplate": "All DMG dealt -25%, remove 1 stack at turn end.",
+      "descriptionArgs": {}
     },
     {
       "id": "overlay.arachne.weaver",
       "displayName": "Weaver",
       "overlayType": "mechanic",
+      "ownerAwakenerId": "awakener-0056",
       "aliases": [],
       "descriptionTemplate": "The Fate {Weaver} draws her threads. Max [DescArg1] stacks, persist across battles, and can be consumed by Exalt to unleash {Pursuit}: {Infinite Threads}.",
       "descriptionArgs": {
@@ -1611,16 +1600,15 @@
           "value": "3"
         }
       },
-      "ownerAwakenerId": "awakener-0056",
       "upgrades": [
         {
-          "ownerAwakenerId": "awakener-0056",
           "id": "upgrade.enlighten.arachne.destiny-as-i-arrange.overlay.arachne.weaver",
           "operation": "override_args",
           "upgraderId": "enlighten.arachne.destiny-as-i-arrange",
-          "upgraderSlot": "E3",
-          "ownerAwakenerName": "Arachne",
           "upgraderType": "enlighten",
+          "upgraderSlot": "E3",
+          "ownerAwakenerId": "awakener-0056",
+          "ownerAwakenerName": "Arachne",
           "patch": {
             "descriptionArgs": {
               "DescArg1": {
@@ -1646,114 +1634,28 @@
       "descriptionArgs": {
         "Arg1": {
           "kind": "computed",
-          "expression": {
-            "op": "mul",
-            "args": [
-              {
-                "var": "somaticResearchHpMultiplier"
-              },
-              {
-                "const": 100.0
-              }
-            ]
-          },
+          "formulaKey": "scaled",
+          "baseFormula": "somaticResearchHpMultiplier",
+          "multiplier": 100.0,
           "inputs": [
-            "somaticResearchHpMultiplier"
+            "accountLevel"
           ]
         },
         "Arg2": {
           "kind": "computed",
-          "expression": {
-            "op": "mul",
-            "args": [
-              {
-                "var": "accountStageGrowth"
-              },
-              {
-                "op": "add",
-                "args": [
-                  {
-                    "const": 1.0
-                  },
-                  {
-                    "op": "mul",
-                    "args": [
-                      {
-                        "op": "min",
-                        "args": [
-                          {
-                            "var": "ownedPosseCount"
-                          },
-                          {
-                            "const": 50.0
-                          }
-                        ]
-                      },
-                      {
-                        "const": 0.01
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
+          "formulaKey": "scaled",
+          "baseFormula": "esotericResearchDepth",
           "inputs": [
-            "accountStageGrowth",
+            "accountLevel",
             "ownedPosseCount"
           ]
         },
         "Arg3": {
           "kind": "computed",
-          "expression": {
-            "op": "mul",
-            "args": [
-              {
-                "var": "accountStageGrowth"
-              },
-              {
-                "op": "mul",
-                "args": [
-                  {
-                    "var": "accountDamagePower"
-                  },
-                  {
-                    "const": 0.01
-                  }
-                ]
-              },
-              {
-                "op": "add",
-                "args": [
-                  {
-                    "const": 1.0
-                  },
-                  {
-                    "op": "mul",
-                    "args": [
-                      {
-                        "op": "min",
-                        "args": [
-                          {
-                            "var": "ownedPosseCount"
-                          },
-                          {
-                            "const": 50.0
-                          }
-                        ]
-                      },
-                      {
-                        "const": 0.01
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
+          "formulaKey": "scaled",
+          "baseFormula": "occultResearchDepth",
           "inputs": [
-            "accountStageGrowth",
-            "accountDamagePower",
+            "accountLevel",
             "ownedPosseCount"
           ]
         }

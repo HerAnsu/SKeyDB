@@ -1,9 +1,9 @@
 {
   "id": "skill.miryam.the-chosen-one",
+  "displayName": "The Chosen One",
   "ownerAwakenerId": "awakener-0032",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "The Chosen One",
   "descriptionTemplate": "Choose 1 other Awakeners to Gain [Energy:Arg2] Aliemus. {Ritual}: Gain [Arg4]/[Arg5]/[Arg6] Aliemus.",
   "descriptionArgs": {
     "Arg2": {
@@ -34,14 +34,15 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0032",
       "id": "upgrade.enlighten.miryam.the-ultimate-descent.skill.miryam.the-chosen-one",
       "operation": "mixed",
       "upgraderId": "enlighten.miryam.the-ultimate-descent",
-      "upgraderSlot": "E2",
-      "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "patch": {
+        "descriptionTemplate": "Choose 1 other Awakeners to Gain [Energy:Arg2] Aliemus, Realm Mastery +[Arg3]. {Ritual}: Gain an additional [Arg4]/[Arg5]/[Arg6] Aliemus.",
         "descriptionArgs": {
           "Arg2": {
             "kind": "scaling",
@@ -71,7 +72,6 @@
             "value": "50"
           }
         },
-        "descriptionTemplate": "Choose 1 other Awakeners to Gain [Energy:Arg2] Aliemus, Realm Mastery +[Arg3]. {Ritual}: Gain an additional [Arg4]/[Arg5]/[Arg6] Aliemus.",
         "cardKeywords": [
           {
             "id": "mechanic.retain"
@@ -84,14 +84,15 @@
       }
     },
     {
-      "ownerAwakenerId": "awakener-0032",
       "id": "upgrade.enlighten.miryam.vanitys-collapse.skill.miryam.the-chosen-one",
       "operation": "mixed",
       "upgraderId": "enlighten.miryam.vanitys-collapse",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Miryam",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "patch": {
+        "descriptionTemplate": "Choose 1 other Awakeners to Gain [Energy:Arg2] Aliemus, Realm Mastery +[Arg3]. {Ritual}: Gain an additional [Arg4]/[Arg5]/[Arg6] Aliemus.",
         "descriptionArgs": {
           "Arg2": {
             "kind": "scaling",
@@ -121,7 +122,6 @@
             "value": "65"
           }
         },
-        "descriptionTemplate": "Choose 1 other Awakeners to Gain [Energy:Arg2] Aliemus, Realm Mastery +[Arg3]. {Ritual}: Gain an additional [Arg4]/[Arg5]/[Arg6] Aliemus.",
         "cardKeywords": [
           {
             "id": "mechanic.retain"

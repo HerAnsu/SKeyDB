@@ -1,62 +1,23 @@
 {
   "id": "posse-0006",
   "name": "Obsession Eternal",
+  "realm": "FADED_LEGACY",
+  "assetId": "KeyToken_Skill_06",
+  "assetCrystalId": "KeyToken_Crystal_06",
+  "assetBadgeId": "KeyToken_Props_06",
+  "lineupToken": "g",
   "descriptionTemplate": "Gain [Arg1] {STR}, then gain Temporary {STR} equal to 25% of your permanent {STR}.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "computed",
-      "expression": {
-        "op": "mul",
-        "args": [
-          {
-            "op": "mul",
-            "args": [
-              {
-                "var": "accountStageGrowth"
-              },
-              {
-                "op": "add",
-                "args": [
-                  {
-                    "const": 1.0
-                  },
-                  {
-                    "op": "mul",
-                    "args": [
-                      {
-                        "op": "min",
-                        "args": [
-                          {
-                            "var": "ownedPosseCount"
-                          },
-                          {
-                            "const": 50.0
-                          }
-                        ]
-                      },
-                      {
-                        "const": 0.01
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "const": 0.03
-          }
-        ]
-      },
+      "formulaKey": "scaled",
+      "baseFormula": "esotericResearchDepth",
+      "multiplier": 0.03,
       "inputs": [
-        "accountStageGrowth",
+        "accountLevel",
         "ownedPosseCount"
       ]
     }
   },
-  "lore": "Given her obsession, I have a vague feeling that this millennia-spanning ritual has yet to reach its end...",
-  "realm": "FADED_LEGACY",
-  "assetId": "posse-icon-06",
-  "imageAssetId": "CG_C05_003",
-  "lineupToken": "g"
+  "lore": "Given her obsession, I have a vague feeling that this millennia-spanning ritual has yet to reach its end..."
 }

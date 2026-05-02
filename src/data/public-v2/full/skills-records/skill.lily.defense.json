@@ -1,9 +1,9 @@
 {
   "id": "skill.lily.defense",
+  "displayName": "Defense",
   "ownerAwakenerId": "awakener-0029",
   "slot": "Defense",
   "kind": "defense",
-  "displayName": "Defense",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. Lily's base Shield +0.25% for each 1% {Death Resistance}. Lily obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
       "stat": "DEF",
+      "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
         "multiplier": "0.25",

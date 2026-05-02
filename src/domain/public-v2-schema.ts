@@ -183,7 +183,6 @@ function createScopedRecordShape(scope: PublicV2Scope): z.ZodRawShape {
       return {
         name: nonEmptyStringSchema,
         assetId: nonEmptyStringSchema,
-        imageAssetId: nonEmptyStringSchema,
         descriptionTemplate: z.string().optional(),
         descriptionArgs: descriptionArgsSchema.optional(),
       }

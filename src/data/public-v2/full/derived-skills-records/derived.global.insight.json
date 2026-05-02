@@ -1,6 +1,8 @@
 {
   "id": "derived.global.insight",
   "displayName": "Insight",
+  "derivedFromId": null,
+  "rootSkillId": null,
   "descriptionTemplate": "Obtain 1 Arithmetica, and draw 1 card.",
   "descriptionArgs": {},
   "cardKeywords": [
@@ -11,7 +13,5 @@
       "id": "mechanic.retain"
     }
   ],
-  "derivedFromId": null,
-  "rootSkillId": null,
   "cost": "0"
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.tawil.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0047",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Tawil obtains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -35,14 +35,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0047",
       "id": "upgrade.enlighten.tawil.nonexistent-existence.skill.tawil.strike",
       "operation": "mixed",
       "upgraderId": "enlighten.tawil.nonexistent-existence",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Tawil",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Tawil obtains [Energy:Arg2] Aliemus, [Arg3]% Crit. Rate and Crit. DMG, stacking up to 10 times.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -54,8 +55,8 @@
               "18",
               "20"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -73,8 +74,7 @@
             "value": "3",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Tawil obtains [Energy:Arg2] Aliemus, [Arg3]% Crit. Rate and Crit. DMG, stacking up to 10 times."
+        }
       }
     }
   ]

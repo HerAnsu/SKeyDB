@@ -1,9 +1,9 @@
 {
   "id": "skill.sanga.the-sea-of-corals",
+  "displayName": "The Sea of Corals",
   "ownerAwakenerId": "awakener-0045",
   "slot": "OverExalt",
   "kind": "over_exalt",
-  "displayName": "The Sea of Corals",
   "descriptionTemplate": "Shield obtained +200%. {The Lost Art} and \"Basic Strike\" enjoy an additional 100% Shield bonus during this battle.",
   "descriptionArgs": {},
   "cardKeywords": []

@@ -1,9 +1,9 @@
 {
   "id": "skill.pickman.chromaphage",
+  "displayName": "Chromaphage",
   "ownerAwakenerId": "awakener-0040",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Chromaphage",
   "descriptionTemplate": "Deal [Damage:Arg1] points of guaranteed Crit to all enemies [Arg3] {plural:[Arg3]|time|times}, {Stealing} [Arg2] {STR} from the target each time. For each time {Discover} effect triggered this turn, this card's Arithmetica Cost -1. If {Inspiration!} has been triggered, deal DMG 2 more times.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,8 +29,8 @@
         "7.2",
         "8"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",

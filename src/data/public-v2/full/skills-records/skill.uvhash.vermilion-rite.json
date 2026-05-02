@@ -1,9 +1,9 @@
 {
   "id": "skill.uvhash.vermilion-rite",
+  "displayName": "Vermilion Rite",
   "ownerAwakenerId": "awakener-0051",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Vermilion Rite",
   "descriptionTemplate": "Uvhash gains [Energy:Arg1] Aliemus. {Rouse}: Uvhash is immune to {Sealed}; Crit. Rate and Crit. DMG +[Arg2]%, doubling when HP is below 25%.",
   "descriptionArgs": {
     "Arg1": {
@@ -31,14 +31,15 @@
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0051",
       "id": "upgrade.enlighten.uvhash.paean-of-twisted-fury.skill.uvhash.vermilion-rite",
       "operation": "mixed",
       "upgraderId": "enlighten.uvhash.paean-of-twisted-fury",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Uvhash",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0051",
+      "ownerAwakenerName": "Uvhash",
       "patch": {
+        "descriptionTemplate": "Uvhash gains [Energy:Arg1] Aliemus. {Rouse}: Uvhash is immune to {Sealed}, Crit. Rate and Crit. DMG +[Arg2]%, {Hymn of Blood and Sand} Final DMG +[Arg5]%, with the effect doubled when HP is below 25%.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -61,8 +62,7 @@
             "value": "25",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Uvhash gains [Energy:Arg1] Aliemus. {Rouse}: Uvhash is immune to {Sealed}, Crit. Rate and Crit. DMG +[Arg2]%, {Hymn of Blood and Sand} Final DMG +[Arg5]%, with the effect doubled when HP is below 25%."
+        }
       }
     }
   ]

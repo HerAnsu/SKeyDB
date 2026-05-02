@@ -1,9 +1,9 @@
 {
   "id": "skill.agrippa.pale-blessing",
+  "displayName": "Pale Blessing",
   "ownerAwakenerId": "awakener-0002",
   "slot": "Exalt",
   "kind": "exalt",
-  "displayName": "Pale Blessing",
   "descriptionTemplate": "[{Devour}: Obtain [Power:Arg1] {STR} and [Arg4] {Alert}.] Gain [Block:Arg2] Shield. Inflict [{Poison}:Arg3] {plural:[{Poison}:Arg3]|stack|stacks} of {Poison} on all enemies.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -29,8 +29,8 @@
         "58.5",
         "65"
       ],
-      "suffix": "%",
       "stat": "DEF",
+      "suffix": "%",
       "substatBonus": {
         "substat": "SigilYield",
         "multiplier": "0.5",
@@ -47,8 +47,8 @@
         "90",
         "100"
       ],
-      "suffix": "%",
       "stat": "ATK",
+      "suffix": "%",
       "substatBonus": {
         "substat": "SigilYield",
         "multiplier": "1",
@@ -65,8 +65,8 @@
         "3.6",
         "4"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],

@@ -1,9 +1,9 @@
 {
   "id": "skill.thais.ancient-caress",
+  "displayName": "Ancient Caress",
   "ownerAwakenerId": "awakener-0048",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Ancient Caress",
   "descriptionTemplate": "Choose 1 other Awakeners to grant both this Awakener and {The Chosen One} [Energy:Arg1] Aliemus. Obtain [Power:Arg2] {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,21 +27,21 @@
         "4.5",
         "5"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0048",
       "id": "upgrade.enlighten.thais.forests-embrace.skill.thais.ancient-caress",
       "operation": "override_args",
       "upgraderId": "enlighten.thais.forests-embrace",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Thais",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
       "patch": {
         "descriptionArgs": {
           "Arg1": {
@@ -65,8 +65,8 @@
               "6.75",
               "7.5"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           }
         }
       }

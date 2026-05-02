@@ -1,9 +1,9 @@
 {
   "id": "skill.ryker.showdown",
+  "displayName": "Showdown",
   "ownerAwakenerId": "awakener-0043",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Showdown",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG 1~[Arg4] {plural:[Arg4]|time|times}, gaining [Energy:Arg2] Aliemus. If it deals 6 or more instances of DMG, obtain 1 {Unexpected Gain} with {Exhaust} and 0 Arithmetica Cost.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -39,14 +39,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0043",
       "id": "upgrade.enlighten.ryker.fortunes-boon.skill.ryker.showdown",
       "operation": "mixed",
       "upgraderId": "enlighten.ryker.fortunes-boon",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Ryker",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker",
       "patch": {
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG 1~[Arg4] {plural:[Arg4]|time|times}, obtains [Energy:Arg2] Aliemus, and for each Crit. Hit, gain an additional [Arg3] Aliemus. If 6 or more instances of DMG are dealt, obtain 1 {Unexpected Gain} with {Exhaust} and 0 Arithmetica Cost.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -58,8 +59,8 @@
               "27",
               "30"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
@@ -80,8 +81,7 @@
             "kind": "fixed",
             "value": "6"
           }
-        },
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG 1~[Arg4] {plural:[Arg4]|time|times}, obtains [Energy:Arg2] Aliemus, and for each Crit. Hit, gain an additional [Arg3] Aliemus. If 6 or more instances of DMG are dealt, obtain 1 {Unexpected Gain} with {Exhaust} and 0 Arithmetica Cost."
+        }
       }
     }
   ]

@@ -5,7 +5,7 @@
   "aliases": [
     "Retained"
   ],
+  "textColor": "damage",
   "descriptionTemplate": "Card will not enter the Discard Pile, but instead remains in your hand.",
-  "descriptionArgs": {},
-  "textColor": "damage"
+  "descriptionArgs": {}
 }

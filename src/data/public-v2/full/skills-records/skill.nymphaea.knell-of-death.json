@@ -1,9 +1,9 @@
 {
   "id": "skill.nymphaea.knell-of-death",
+  "displayName": "Knell of Death",
   "ownerAwakenerId": "awakener-0037",
   "slot": "Skill2",
   "kind": "command",
-  "displayName": "Knell of Death",
   "descriptionTemplate": "Inflict [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} of {Poison} on all enemies for [Arg2] {plural:[Arg2]|turn|turns}, applying {Weakness} and {Vulnerable}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "36",
         "40"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -28,14 +28,15 @@
   "cost": "3",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0037",
       "id": "upgrade.enlighten.nymphaea.oceans-vessel.skill.nymphaea.knell-of-death",
       "operation": "mixed",
       "upgraderId": "enlighten.nymphaea.oceans-vessel",
-      "upgraderSlot": "E1",
-      "ownerAwakenerName": "Nymphaea",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E1",
+      "ownerAwakenerId": "awakener-0037",
+      "ownerAwakenerName": "Nymphaea",
       "patch": {
+        "descriptionTemplate": "Apply [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} of {Poison} to all enemies, apply {Weakness} and {Vulnerable} for [Arg2] {plural:[Arg2]|turn|turns}, and gain [Block:Arg3] Shield.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -47,8 +48,8 @@
               "72",
               "80"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
@@ -64,11 +65,10 @@
               "40.5",
               "45"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Apply [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} of {Poison} to all enemies, apply {Weakness} and {Vulnerable} for [Arg2] {plural:[Arg2]|turn|turns}, and gain [Block:Arg3] Shield."
+        }
       }
     },
     {

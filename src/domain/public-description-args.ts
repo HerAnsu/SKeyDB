@@ -1,7 +1,13 @@
-import type {PublicFormulaContext} from './public-formula-context'
+import {resolveAccountLevelCurveEntry} from './gameplay-math-metadata'
+import {buildPublicFormulaContext, type PublicFormulaContext} from './public-formula-context'
 
 export type {PublicFormulaContext} from './public-formula-context'
 export type PublicFormulaKey = keyof PublicFormulaContext
+export type PublicScaledBaseFormula =
+  | 'accountStageGrowth'
+  | 'somaticResearchHpMultiplier'
+  | 'esotericResearchDepth'
+  | 'occultResearchDepth'
 
 export type PublicDescriptionArgStat = 'ATK' | 'DEF' | 'CON'
 
@@ -40,21 +46,34 @@ export interface PublicScalingDescriptionArg {
   substatBonus?: PublicDescriptionArgSubstatBonus
 }
 
-export type ComputedExpression =
-  | {const: number}
-  | {var: PublicFormulaKey}
-  | {op: 'add' | 'mul' | 'min' | 'max'; args: ComputedExpression[]}
-  | {op: 'ceil' | 'floor'; args: [ComputedExpression]}
-
-export interface PublicComputedDescriptionArg {
+export interface PublicScaledComputedDescriptionArg {
   kind: 'computed'
-  expression: ComputedExpression
+  formulaKey: 'scaled'
+  baseFormula: PublicScaledBaseFormula
+  multiplier?: number
+  rounding?: 'ceil'
   inputs: PublicFormulaKey[]
   channel?: string
   suffix?: string
   stat?: PublicDescriptionArgStat
   substatBonus?: PublicDescriptionArgSubstatBonus
 }
+
+export interface PublicWheelRefinementLinearComputedDescriptionArg {
+  kind: 'computed'
+  formulaKey: 'wheelRefinementLinear'
+  baseValue: number
+  perLevel: number
+  inputs: ['wheelRefinementLevel']
+  channel?: string
+  suffix?: string
+  stat?: PublicDescriptionArgStat
+  substatBonus?: PublicDescriptionArgSubstatBonus
+}
+
+export type PublicComputedDescriptionArg =
+  | PublicScaledComputedDescriptionArg
+  | PublicWheelRefinementLinearComputedDescriptionArg
 
 export type PublicDescriptionArg =
   | PublicFixedDescriptionArg
@@ -85,86 +104,66 @@ function resolved(value: number): PublicFormulaEvaluation {
   }
 }
 
-function evaluateAll(
-  args: ComputedExpression[],
-  context: PublicFormulaContext,
-): PublicFormulaEvaluation[] | null {
-  const values = args.map((arg) => evaluatePublicFormulaExpression(arg, context))
-  return values.every((value) => value.resolved) ? values : null
+function isPublicComputedDescriptionArg(value: unknown): value is PublicComputedDescriptionArg {
+  if (!value || typeof value !== 'object') {
+    return false
+  }
+
+  const candidate = value as {kind?: unknown; formulaKey?: unknown}
+  return (
+    candidate.kind === 'computed' &&
+    (candidate.formulaKey === 'scaled' || candidate.formulaKey === 'wheelRefinementLinear')
+  )
 }
 
-function getPublicFormulaInput(context: PublicFormulaContext, key: string): number | undefined {
-  switch (key) {
+function resolveScaledBaseFormula(
+  baseFormula: PublicScaledBaseFormula,
+  context: PublicFormulaContext,
+): PublicFormulaEvaluation {
+  const resolvedContext = {...buildPublicFormulaContext(), ...context}
+  const curve = resolveAccountLevelCurveEntry(resolvedContext.accountLevel)
+  const ownedPosseCount = Math.min(resolvedContext.ownedPosseCount ?? 0, 50)
+  const ownedPosseMultiplier = 1 + ownedPosseCount * 0.01
+
+  switch (baseFormula) {
     case 'accountStageGrowth':
-      return context.accountStageGrowth
-    case 'accountDamagePower':
-      return context.accountDamagePower
-    case 'ownedPosseCount':
-      return context.ownedPosseCount
-    case 'wheelRefinementLevel':
-      return context.wheelRefinementLevel
+      return resolved(curve.stageGrow)
     case 'somaticResearchHpMultiplier':
-      return context.somaticResearchHpMultiplier
+      return resolved(curve.hpMultiplier)
+    case 'esotericResearchDepth':
+      return resolved(curve.stageGrow * ownedPosseMultiplier)
     case 'occultResearchDepth':
-      return context.occultResearchDepth
-    default:
-      return undefined
+      return resolved(curve.stageGrow * (curve.accountDamagePower / 100) * ownedPosseMultiplier)
   }
+
+  return unresolved()
 }
 
 export function evaluatePublicFormulaExpression(
-  expression: ComputedExpression,
+  arg: unknown,
   context: PublicFormulaContext = {},
 ): PublicFormulaEvaluation {
-  if ('const' in expression) {
-    return resolved(expression.const)
+  if (!isPublicComputedDescriptionArg(arg)) {
+    return unresolved()
   }
 
-  if ('var' in expression) {
-    const value = getPublicFormulaInput(context, expression.var)
-    return typeof value === 'number' ? resolved(value) : unresolved()
-  }
-
-  switch (expression.op) {
-    case 'add': {
-      const values = evaluateAll(expression.args, context)
-      return values
-        ? resolved(values.reduce((total, value) => total + (value.value ?? 0), 0))
-        : unresolved()
-    }
-
-    case 'mul': {
-      const values = evaluateAll(expression.args, context)
-      return values
-        ? resolved(values.reduce((total, value) => total * (value.value ?? 1), 1))
-        : unresolved()
-    }
-
-    case 'min': {
-      const values = evaluateAll(expression.args, context)
-      return values ? resolved(Math.min(...values.map((value) => value.value ?? 0))) : unresolved()
-    }
-
-    case 'max': {
-      const values = evaluateAll(expression.args, context)
-      return values ? resolved(Math.max(...values.map((value) => value.value ?? 0))) : unresolved()
-    }
-
-    case 'ceil': {
-      const value = evaluatePublicFormulaExpression(expression.args[0], context)
-      return value.resolved && value.value !== null
-        ? resolved(Math.ceil(value.value))
-        : unresolved()
-    }
-
-    case 'floor': {
-      const value = evaluatePublicFormulaExpression(expression.args[0], context)
-      return value.resolved && value.value !== null
-        ? resolved(Math.floor(value.value))
-        : unresolved()
-    }
-
-    default:
+  if (arg.formulaKey === 'scaled') {
+    const base = resolveScaledBaseFormula(arg.baseFormula, context)
+    if (!base.resolved || base.value === null) {
       return unresolved()
+    }
+
+    const scaledValue =
+      typeof arg.multiplier === 'number' && Number.isFinite(arg.multiplier)
+        ? base.value * arg.multiplier
+        : base.value
+    return resolved(arg.rounding === 'ceil' ? Math.ceil(scaledValue) : scaledValue)
   }
+
+  const wheelRefinementLevel = context.wheelRefinementLevel
+  if (typeof wheelRefinementLevel !== 'number' || !Number.isFinite(wheelRefinementLevel)) {
+    return unresolved()
+  }
+
+  return resolved(arg.baseValue + wheelRefinementLevel * arg.perLevel)
 }

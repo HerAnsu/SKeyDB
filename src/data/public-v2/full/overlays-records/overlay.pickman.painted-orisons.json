@@ -2,11 +2,11 @@
   "id": "overlay.pickman.painted-orisons",
   "displayName": "Painted Orisons",
   "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0040",
   "aliases": [
     "Advanced Orisons",
     "Orisons"
   ],
   "descriptionTemplate": "Includes the following {Orisons}: {Computation}, {Finesse}, Berserk, {Catalyst}, Might, Bastion, Drain, Insight.",
-  "descriptionArgs": {},
-  "ownerAwakenerId": "awakener-0040"
+  "descriptionArgs": {}
 }

@@ -1,9 +1,9 @@
 {
   "id": "skill.alva.outstanding-veteran",
+  "displayName": "Outstanding Veteran",
   "ownerAwakenerId": "awakener-0004",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Outstanding Veteran",
   "descriptionTemplate": "Alva gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Arg2] {Alert}. DMG from Alva's Command Cards increases with current Shield, increasing by 2 DMG for each point of Shield.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "5.4",
         "6"
       ],
-      "suffix": "%",
-      "stat": "DEF"
+      "stat": "DEF",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -39,14 +39,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0004",
       "id": "upgrade.enlighten.alva.crusade-to-utopia.skill.alva.outstanding-veteran",
       "operation": "mixed",
       "upgraderId": "enlighten.alva.crusade-to-utopia",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Alva",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0004",
+      "ownerAwakenerName": "Alva",
       "patch": {
+        "descriptionTemplate": "Alva gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Arg2] {Alert}. DMG dealt by Alva's Command Cards scales with current Shield, +2 per Shield point. The first time DMG is dealt each turn, gain [Block:Arg3] Shield.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -69,17 +70,16 @@
               "5.4",
               "6"
             ],
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "fixed",
             "value": "40",
-            "suffix": "%",
-            "stat": "DEF"
+            "stat": "DEF",
+            "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Alva gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Arg2] {Alert}. DMG dealt by Alva's Command Cards scales with current Shield, +2 per Shield point. The first time DMG is dealt each turn, gain [Block:Arg3] Shield."
+        }
       }
     }
   ]

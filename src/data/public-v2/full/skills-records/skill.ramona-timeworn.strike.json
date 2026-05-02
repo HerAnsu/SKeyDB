@@ -1,9 +1,9 @@
 {
   "id": "skill.ramona-timeworn.strike",
+  "displayName": "Strike",
   "ownerAwakenerId": "awakener-0020",
   "slot": "Strike",
   "kind": "strike",
-  "displayName": "Strike",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG. Ramona: Timeworn obtains [Energy:Arg2] Aliemus. {Loop}: Deal DMG [Arg3] {plural:[Arg3]|time|times}, Ramona: Timeworn's Crit. Rate +[Arg5]%.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "18",
         "20"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
@@ -37,11 +37,11 @@
     "Arg5": {
       "kind": "fixed",
       "value": "0",
+      "suffix": "%",
       "substatBonus": {
         "substat": "KeyflareRegen",
         "multiplier": "0.2"
-      },
-      "suffix": "%"
+      }
     }
   },
   "cardKeywords": [],

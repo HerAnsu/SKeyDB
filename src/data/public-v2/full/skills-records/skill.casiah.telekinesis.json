@@ -1,9 +1,9 @@
 {
   "id": "skill.casiah.telekinesis",
+  "displayName": "Telekinesis",
   "ownerAwakenerId": "awakener-0007",
   "slot": "Skill1",
   "kind": "command",
-  "displayName": "Telekinesis",
   "descriptionTemplate": "Treated as \"Strike\". Choose any 1 card from {Ultra Space} and add it to your hand, reducing its Arithmetica Cost by 2. Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}, and gain [Power:Arg3] Temporary {STR}.",
   "descriptionArgs": {
     "Arg1": {
@@ -16,8 +16,8 @@
         "27",
         "30"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
@@ -33,21 +33,21 @@
         "14.4",
         "16"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
   "cost": "0",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0007",
       "id": "upgrade.enlighten.casiah.legendary-copycat.skill.casiah.telekinesis",
       "operation": "replace_description",
       "upgraderId": "enlighten.casiah.legendary-copycat",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Casiah",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0007",
+      "ownerAwakenerName": "Casiah",
       "patch": {
         "descriptionTemplate": "Treated as \"Strike\". Choose any 1 card from {Ultra Space} and add it to your hand, reducing its Arithmetica Cost by 2. Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}, and gain [Power:Arg3] Temporary {STR}. {Aftershock}: Shuffle 1 {Insight} into the Draw Pile."
       }

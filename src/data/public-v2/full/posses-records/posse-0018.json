@@ -1,6 +1,11 @@
 {
   "id": "posse-0018",
   "name": "Midsummer Vision",
+  "realm": "CHAOS",
+  "assetId": "KeyToken_Skill_18",
+  "assetCrystalId": "KeyToken_Crystal_18",
+  "assetBadgeId": "KeyToken_Props_18",
+  "lineupToken": "w",
   "descriptionTemplate": "Draw a card; if the drawn card is a Command or {Rouse} card, reduce its Arithmetica Cost to 0 and increase its owner's Aliemus by [Arg1]. Otherwise, discard that card and repeat this process.",
   "descriptionArgs": {
     "Arg1": {
@@ -8,9 +13,5 @@
       "value": "20"
     }
   },
-  "lore": "It was a fleeting, ethereal dream of a night, light and soft, not captured on film but flowing through the memory of every photographer.",
-  "realm": "CHAOS",
-  "assetId": "posse-icon-18",
-  "imageAssetId": "CG_SD_L_C10_3",
-  "lineupToken": "w"
+  "lore": "It was a fleeting, ethereal dream of a night, light and soft, not captured on film but flowing through the memory of every photographer."
 }

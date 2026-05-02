@@ -1,9 +1,9 @@
 {
   "id": "skill.pandia.give-and-take",
+  "displayName": "Give and Take",
   "ownerAwakenerId": "awakener-0039",
   "slot": "Rouse",
   "kind": "rouse",
-  "displayName": "Give and Take",
   "descriptionTemplate": "Pandia gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Counterattack:Arg3] {plural:[Counterattack:Arg3]|stack|stacks} of {Counter}. Each time Pandia deals DMG, gain [Counterattack:Arg2] {Counter}.",
   "descriptionArgs": {
     "Arg1": {
@@ -27,8 +27,8 @@
         "13.5",
         "15"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
@@ -40,8 +40,8 @@
         "54",
         "60"
       ],
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -52,14 +52,15 @@
   "cost": "2",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0039",
       "id": "upgrade.enlighten.pandia.manifesto-of-loving-discipline.skill.pandia.give-and-take",
       "operation": "mixed",
       "upgraderId": "enlighten.pandia.manifesto-of-loving-discipline",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Pandia",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0039",
+      "ownerAwakenerName": "Pandia",
       "patch": {
+        "descriptionTemplate": "Pandia gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Counterattack:Arg3] {plural:[Counterattack:Arg3]|stack|stacks} of {Counter}. Each time Pandia deals DMG, gain [Counterattack:Arg2] {Counter}. When Pandia gains Permanent {Counter}, gain {STR} equal to [Arg4]% of that value.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -82,8 +83,8 @@
               "13.5",
               "15"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
@@ -95,16 +96,15 @@
               "54",
               "60"
             ],
-            "suffix": "%",
-            "stat": "ATK"
+            "stat": "ATK",
+            "suffix": "%"
           },
           "Arg4": {
             "kind": "fixed",
             "value": "3",
             "suffix": "%"
           }
-        },
-        "descriptionTemplate": "Pandia gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Counterattack:Arg3] {plural:[Counterattack:Arg3]|stack|stacks} of {Counter}. Each time Pandia deals DMG, gain [Counterattack:Arg2] {Counter}. When Pandia gains Permanent {Counter}, gain {STR} equal to [Arg4]% of that value."
+        }
       }
     }
   ]

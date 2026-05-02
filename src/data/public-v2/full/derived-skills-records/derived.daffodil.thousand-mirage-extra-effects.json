@@ -1,13 +1,10 @@
 {
   "id": "derived.daffodil.thousand-mirage-extra-effects",
   "displayName": "Thousand Mirage: Extra Effects",
-  "descriptionTemplate": "Potential extra-effect cards used during Thousand Mirage customization. Source-backed selector rows exist as Thousand Mirage: Illusion (choose 1 of 3) and Thousand Mirage: Reality (choose 2 of 3).",
-  "descriptionArgs": {},
-  "cardKeywords": [],
-  "derivedFromId": "derived.daffodil.thousand-mirage",
-  "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
   "ownerAwakenerId": "awakener-0012",
   "nodeKind": "group",
+  "derivedFromId": "derived.daffodil.thousand-mirage",
+  "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
   "childDerivedSkillIds": [
     "derived.daffodil.thousand-mirage-effect-finesse",
     "derived.daffodil.thousand-mirage-effect-computation",
@@ -37,5 +34,8 @@
     "derived.daffodil.thousand-mirage-effect-pierce-critical-hit",
     "derived.daffodil.thousand-mirage-effect-hpr-directed-catalysis",
     "derived.daffodil.thousand-mirage-effect-hpr-keyflare"
-  ]
+  ],
+  "descriptionTemplate": "Potential extra-effect cards used during Thousand Mirage customization. Source-backed selector rows exist as Thousand Mirage: Illusion (choose 1 of 3) and Thousand Mirage: Reality (choose 2 of 3).",
+  "descriptionArgs": {},
+  "cardKeywords": []
 }

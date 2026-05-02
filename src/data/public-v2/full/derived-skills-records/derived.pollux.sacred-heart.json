@@ -1,13 +1,16 @@
 {
   "id": "derived.pollux.sacred-heart",
   "displayName": "Sacred Heart",
+  "ownerAwakenerId": "awakener-0041",
+  "derivedFromId": "skill.pollux.sinless-verdict",
+  "rootSkillId": "skill.pollux.sinless-verdict",
   "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain 3 stacks of {Sin Mark}. After playing, shuffle this card to the top of the Draw Pile. On the {ordinal:3rd} play, {Exhaust} and allow the next command card to benefit from the {Atonement by Pain} effect.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "fixed",
       "value": "70",
-      "suffix": "%",
-      "stat": "ATK"
+      "stat": "ATK",
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -19,31 +22,28 @@
       "value": 1
     }
   ],
-  "derivedFromId": "skill.pollux.sinless-verdict",
-  "rootSkillId": "skill.pollux.sinless-verdict",
-  "ownerAwakenerId": "awakener-0041",
   "cost": "1",
   "upgrades": [
     {
-      "ownerAwakenerId": "awakener-0041",
       "id": "upgrade.enlighten.pollux.divine-revelation.derived.pollux.sacred-heart",
       "operation": "replace_description",
       "upgraderId": "enlighten.pollux.divine-revelation",
-      "upgraderSlot": "E3",
-      "ownerAwakenerName": "Pollux",
       "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
       "patch": {
         "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain 3 stacks of {Sin Mark}. After playing, shuffle this card into the top of the Draw Pile. On the {ordinal:3rd} play, {Exhaust} and make your next Command Card benefit from the {Atonement by Pain} effect, applying it 2 times."
       }
     },
     {
-      "ownerAwakenerId": "awakener-0041",
       "id": "upgrade.enlighten.pollux.lux-diouskouron.derived.pollux.sacred-heart",
       "operation": "replace_description",
       "upgraderId": "enlighten.pollux.lux-diouskouron",
-      "upgraderSlot": "AbsoluteAxiom",
-      "ownerAwakenerName": "Pollux",
       "upgraderType": "enlighten",
+      "upgraderSlot": "AbsoluteAxiom",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
       "patch": {
         "descriptionTemplate": "Deal [Damage:Arg1] DMG and gain 3 stacks of {Sin Mark}. After playing, shuffle this card into the top of the Draw Pile. On the {ordinal:3rd} play, {Exhaust} and make your next Command Card benefit from the {Atonement by Pain} effect, applying it 2 times."
       }

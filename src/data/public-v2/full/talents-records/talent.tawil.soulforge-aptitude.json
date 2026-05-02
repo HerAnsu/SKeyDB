@@ -1,8 +1,9 @@
 {
   "id": "talent.tawil.soulforge-aptitude",
-  "ownerAwakenerId": "awakener-0047",
   "displayName": "Soulforge Aptitude",
+  "ownerAwakenerId": "awakener-0047",
   "family": "soulforge_aptitude",
+  "maxLevel": 10,
   "descriptionTemplate": "This talent is only effective in the {Astral Reign} level.\nThe Awakeners' CON, Attack, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nWhen Tawil plays a card originally belonging to other Awakeners in the team, the corresponding Awakeners' Final DMG, Shield, and HP Recovery in this turn +[Arg3]%, and this effect does not stack.",
   "descriptionArgs": {
     "Arg1": {
@@ -30,6 +31,5 @@
         "25"
       ]
     }
-  },
-  "maxLevel": 10
+  }
 }
