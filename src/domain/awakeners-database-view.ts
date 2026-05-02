@@ -544,6 +544,14 @@ function buildTalentInfluenceByTargetId(record: AwakenerFullV2Record): Map<strin
       continue
     }
 
+    for (const targetId of talent.upgradeTargetIds) {
+      const existing = influenceByTargetId.get(targetId) ?? []
+      if (!existing.includes(talent.id)) {
+        existing.push(talent.id)
+        influenceByTargetId.set(targetId, existing)
+      }
+    }
+
     for (const patch of talent.upgradePatches) {
       const existing = influenceByTargetId.get(patch.targetId) ?? []
       if (!existing.includes(talent.id)) {

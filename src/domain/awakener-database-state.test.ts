@@ -173,6 +173,29 @@ describe('awakener-database-state', () => {
     ])
   })
 
+  it('keeps public V2 link-only talent influence badges on affected skills', async () => {
+    const agrippa = await loadPublicAwakenerFullV2ById('awakener-0002')
+    expect(agrippa).toBeDefined()
+    if (!agrippa) {
+      throw new Error('Missing public V2 Agrippa record')
+    }
+
+    const resolved = resolveAwakenerDatabaseState(agrippa)
+    const paleBlessing = resolved.shellView.exalts.find(
+      (entry) => entry.record.id === 'skill.agrippa.pale-blessing',
+    )
+
+    expect(agrippa.talents.T1?.upgradeTargetIds).toContain('skill.agrippa.pale-blessing')
+    expect(agrippa.talents.T1?.upgradePatches).toEqual([])
+    expect(paleBlessing?.influenceBadges).toEqual([
+      expect.objectContaining({
+        kind: 'talent',
+        label: 'T1',
+        referenceName: 'Seal of the Pact',
+      }),
+    ])
+  })
+
   it('builds concrete default selection values for upcoming database controls', () => {
     expect(getDefaultAwakenerDatabaseSelection()).toEqual({
       awakenerLevel: 60,

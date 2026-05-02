@@ -95,6 +95,14 @@ describe('awakeners-full-v2-loader', () => {
     )
   })
 
+  it('translates public V2 link-only talent influences for existing badge lookups', async () => {
+    const agrippa = await loadAwakenerFullV2ById('awakener-0002')
+
+    expect(agrippa?.talents.T1?.id).toBe('talent.agrippa.seal-of-the-pact')
+    expect(agrippa?.talents.T1?.upgradeTargetIds).toContain('skill.agrippa.pale-blessing')
+    expect(agrippa?.talents.T1?.upgradePatches).toEqual([])
+  })
+
   it('loads individual records from public V2 chunks by legacy numeric id', async () => {
     await expect(loadAwakenerFullV2ById(1)).resolves.toMatchObject({
       displayName: '"24"',
