@@ -4,6 +4,6 @@
   "overlayType": "mechanic",
   "ownerAwakenerId": "awakener-0056",
   "aliases": [],
-  "descriptionTemplate": "For each stack, increase the final DMG, {STR} & {Tentacle DMG} Boost, Fixed {Poison}, and Fixed {Counter} effects of this card by 2%; increase the final Shield, HP Recovery, and {STR⯆} effects by 1%. Cards with {Singularity Beacon} cannot trigger \"Dimension Shuttle\".",
+  "descriptionTemplate": "For each stack, increase the final DMG, {STR} & {Tentacle DMG} Boost, Fixed {Poison}, and Fixed {Counter} effects of this card by 2%; increase the final Shield, HP Recovery, and {STR⯆} effects by 1%. Cards with {Singularity Beacon} cannot trigger {Dimension Shuttle}.",
   "descriptionArgs": {}
 }

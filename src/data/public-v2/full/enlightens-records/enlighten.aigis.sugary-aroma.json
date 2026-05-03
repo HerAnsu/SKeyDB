@@ -3,6 +3,6 @@
   "displayName": "Sugary Aroma",
   "ownerAwakenerId": "awakener-0003",
   "slot": "E2",
-  "descriptionTemplate": "For each Vulnerable stack on the target, the Final DMG of {Decomposition} +5%, up to 500%.",
+  "descriptionTemplate": "For each {Vulnerable} stack on the target, the Final DMG of {Decomposition} +5%, up to 500%.",
   "descriptionArgs": {}
 }

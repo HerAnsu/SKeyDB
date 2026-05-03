@@ -4,7 +4,7 @@
   "ownerAwakenerId": "awakener-0043",
   "slot": "Skill1",
   "kind": "command",
-  "descriptionTemplate": "Deal [Damage:Arg1] DMG. Choose 1 card from the Draw Pile and add it to your hand. If it's a {Critical Hit}, the selected card's Arithmetica Cost -1.",
+  "descriptionTemplate": "Deal [Damage:Arg1] DMG. Choose 1 card from the Draw Pile and add it to your hand. If it's a critical hit, the selected card's Arithmetica Cost -1.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
@@ -32,7 +32,7 @@
       "ownerAwakenerId": "awakener-0043",
       "ownerAwakenerName": "Ryker",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Choose 1 card from the Draw Pile and place it into hand. If it's a {Critical Hit}, reduce the chosen card's Arithmetica Cost by 2."
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Choose 1 card from the Draw Pile and place it into hand. If it's a critical hit, reduce the chosen card's Arithmetica Cost by 2."
       }
     }
   ]

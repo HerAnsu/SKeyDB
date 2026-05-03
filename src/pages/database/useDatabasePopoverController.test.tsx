@@ -336,10 +336,7 @@ describe('useDatabasePopoverController', () => {
 
     fireEvent.click(screen.getByRole('button', {name: 'Open Computed'}))
 
-    expect(await screen.findByText('12')).toHaveAttribute(
-      'title',
-      expect.stringContaining('Lv1: 12'),
-    )
+    expect(await screen.findByTitle(/Lv1: 12/)).toHaveTextContent('12')
     expect(screen.queryByText('—')).not.toBeInTheDocument()
   })
 

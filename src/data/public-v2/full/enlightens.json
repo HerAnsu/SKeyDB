@@ -16,7 +16,7 @@
       "displayName": "Restraint Bonds",
       "ownerAwakenerId": "awakener-0001",
       "slot": "E2",
-      "descriptionTemplate": "{Symbiotic Aberration} generates 2 more Aliemus. In Depressed state, inflict Weakness on all enemies for 1 turn; in Manic state, inflict Vulnerable on all enemies for 1 turn.",
+      "descriptionTemplate": "{Symbiotic Aberration} generates 2 more Aliemus. In Depressed state, inflict {Weakness} on all enemies for 1 turn; in Manic state, inflict {Vulnerable} on all enemies for 1 turn.",
       "descriptionArgs": {}
     },
     {
@@ -88,7 +88,7 @@
       "displayName": "The Witness",
       "ownerAwakenerId": "awakener-0003",
       "slot": "E1",
-      "descriptionTemplate": "For each stack of Vulnerable state on the target of \"Strike,\" {Embryo Fusion} +5%, up to 30%.",
+      "descriptionTemplate": "For each stack of {Vulnerable} state on the target of \"Strike,\" {Embryo Fusion} +5%, up to 30%.",
       "descriptionArgs": {}
     },
     {
@@ -96,7 +96,7 @@
       "displayName": "Sugary Aroma",
       "ownerAwakenerId": "awakener-0003",
       "slot": "E2",
-      "descriptionTemplate": "For each Vulnerable stack on the target, the Final DMG of {Decomposition} +5%, up to 500%.",
+      "descriptionTemplate": "For each {Vulnerable} stack on the target, the Final DMG of {Decomposition} +5%, up to 500%.",
       "descriptionArgs": {}
     },
     {
@@ -440,7 +440,7 @@
       "displayName": "Sextant's Calculation",
       "ownerAwakenerId": "awakener-0011",
       "slot": "E2",
-      "descriptionTemplate": "{Ominous Semaphore} inflicts Weakness on all enemies for 1 Turn. For each Tentacle present, {Pilot}'s Shield, Strength, and {Tentacle DMG} increase by 5%, up to 50%.",
+      "descriptionTemplate": "{Ominous Semaphore} inflicts {Weakness} on all enemies for 1 Turn. For each Tentacle present, {Pilot}'s Shield, Strength, and {Tentacle DMG} increase by 5%, up to 50%.",
       "descriptionArgs": {}
     },
     {
@@ -448,7 +448,7 @@
       "displayName": "Willing Sacrifice",
       "ownerAwakenerId": "awakener-0011",
       "slot": "E3",
-      "descriptionTemplate": "{To Sail the Sundered Tides} makes all enemies Vulnerable for 1 turn, increases Temporary Crit. DMG by 20%, and each time {Death Resistance} is triggered in this battle, it further +10%.",
+      "descriptionTemplate": "{To Sail the Sundered Tides} makes all enemies {Vulnerable} for 1 turn, increases Temporary Crit. DMG by 20%, and each time {Death Resistance} is triggered in this battle, it further +10%.",
       "descriptionArgs": {}
     },
     {
@@ -526,7 +526,7 @@
       "displayName": "Pure Rationality",
       "ownerAwakenerId": "awakener-0013",
       "slot": "E1",
-      "descriptionTemplate": "{Outer Surgery} increases the number of Weakness turns by 1 and increases Heal amount by 33%.",
+      "descriptionTemplate": "{Outer Surgery} increases the number of {Weakness} turns by 1 and increases Heal amount by 33%.",
       "descriptionArgs": {}
     },
     {
@@ -752,7 +752,7 @@
       "displayName": "Borealis Visitor",
       "ownerAwakenerId": "awakener-0018",
       "slot": "E1",
-      "descriptionTemplate": "{Self-Destruct} Transformation applies 1 turn of Vulnerable to all enemies when {Elation} is chosen, and applies 1 turn of Weakness to all enemies when \"Curse\" is chosen.",
+      "descriptionTemplate": "{Self-Destruct} Transformation applies 1 turn of {Vulnerable} to all enemies when {Elation} is chosen, and applies 1 turn of {Weakness} to all enemies when \"Curse\" is chosen.",
       "descriptionArgs": {}
     },
     {
@@ -1100,7 +1100,7 @@
       "displayName": "Fermented Recipes",
       "ownerAwakenerId": "awakener-0026",
       "slot": "E3",
-      "descriptionTemplate": "{Marvelous Cuisine} has a 50% chance to trigger a random Marvelous Effect, including gaining 10 Aliemus for self, granting 5 Aliemus to allies, making all enemies Vulnerable for 1 turn, inflicting Weakness on all enemies for 1 turn, drawing 1 card, or obtaining 200 Keyflare.",
+      "descriptionTemplate": "{Marvelous Cuisine} has a 50% chance to trigger a random Marvelous Effect, including gaining 10 Aliemus for self, granting 5 Aliemus to allies, making all enemies {Vulnerable} for 1 turn, inflicting {Weakness} on all enemies for 1 turn, drawing 1 card, or obtaining 200 Keyflare.",
       "descriptionArgs": {}
     },
     {
@@ -1535,7 +1535,7 @@
       "displayName": "Forgotten Dreams",
       "ownerAwakenerId": "awakener-0036",
       "slot": "E3",
-      "descriptionTemplate": "Increases {Fixed DMG} of {Ready and Set} by 50%. After release, gain Immune to {Fragile}, Weakness, and Vulnerable for 1 turn.",
+      "descriptionTemplate": "Increases {Fixed DMG} of {Ready and Set} by 50%. After release, gain Immune to {Fragile}, {Weakness}, and {Vulnerable} for 1 turn.",
       "descriptionArgs": {}
     },
     {
@@ -1616,7 +1616,7 @@
       "displayName": "Honesty Unto Thyself",
       "ownerAwakenerId": "awakener-0038",
       "slot": "E1",
-      "descriptionTemplate": "{Piercing Strike} inflicts +1 turn of Vulnerable; Base DMG by +100%; enjoys +100% {STR} bonus.",
+      "descriptionTemplate": "{Piercing Strike} inflicts +1 turn of {Vulnerable}; Base DMG by +100%; enjoys +100% {STR} bonus.",
       "descriptionArgs": {}
     },
     {
@@ -1703,7 +1703,7 @@
       "displayName": "Sweet Surrender",
       "ownerAwakenerId": "awakener-0039",
       "slot": "OverExalt",
-      "descriptionTemplate": "Inflict \"Vulnerable\" on all enemies before dealing DMG. Obtain {Counter} equal to [Arg1]% of ATK.",
+      "descriptionTemplate": "Inflict {Vulnerable} on all enemies before dealing DMG. Obtain {Counter} equal to [Arg1]% of ATK.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
@@ -1857,7 +1857,7 @@
       "displayName": "Fortune's Boon",
       "ownerAwakenerId": "awakener-0043",
       "slot": "E1",
-      "descriptionTemplate": "{Unexpected Gain} will also reduce the Arithmetica Cost of the chosen Card by an additional 1 if a {Critical Hit} occurs. {Showdown} grants Ryker an additional 3 Aliemus for every {Critical Hit}.",
+      "descriptionTemplate": "{Unexpected Gain} will also reduce the Arithmetica Cost of the chosen Card by an additional 1 if a critical hit occurs. {Showdown} grants Ryker an additional 3 Aliemus for every critical hit.",
       "descriptionArgs": {}
     },
     {
@@ -2409,7 +2409,7 @@
       "displayName": "Karmic Grave",
       "ownerAwakenerId": "awakener-0054",
       "slot": "OverExalt",
-      "descriptionTemplate": "{Embryo Fusion} +100%. When choosing \"Betroth,\" the {Poison} and {Spellbound} inflicted is tripled; when choosing \"Enthrall,\" accumulate {Crimson Furnace} equal to 15% CON for each stack of {Spellbound} removed.",
+      "descriptionTemplate": "{Embryo Fusion} +100%. When choosing {Betroth}, the {Poison} and {Spellbound} inflicted is tripled; when choosing {Enthrall}, accumulate {Crimson Furnace} equal to 15% CON for each stack of {Spellbound} removed.",
       "descriptionArgs": {}
     },
     {

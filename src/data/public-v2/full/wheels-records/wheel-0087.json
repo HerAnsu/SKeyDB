@@ -7,7 +7,7 @@
   "ownerAwakenerName": null,
   "assetId": "Weapon_Full_SR11",
   "lineupToken": "U",
-  "descriptionTemplate": "Team Unique: After dealing Damage, the wielder's Crit. Rate + [StateArg1]%. After a {Critical Hit}, the Crit. Rate gained from this effect is reset.",
+  "descriptionTemplate": "Team Unique: After dealing Damage, the wielder's Crit. Rate + [StateArg1]%. After a critical hit, the Crit. Rate gained from this effect is reset.",
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",

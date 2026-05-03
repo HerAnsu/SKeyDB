@@ -60,7 +60,7 @@
       "rarity": "SSR",
       "realm": "CARO",
       "assetId": "Icon_Creation_Unique_B03",
-      "descriptionTemplate": "At turn start, Aigis gains [Arg1] Aliemus. When Aigis deals DMG to enemies with Vulnerable, she also steals [Arg2] Temporary {STR}, up to [Arg3] {plural:[Arg3]|time|times} per turn.",
+      "descriptionTemplate": "At turn start, Aigis gains [Arg1] Aliemus. When Aigis deals DMG to enemies with {Vulnerable}, she also steals [Arg2] Temporary {STR}, up to [Arg3] {plural:[Arg3]|time|times} per turn.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
@@ -489,7 +489,7 @@
       "rarity": "SSR",
       "realm": "CARO",
       "assetId": "Icon_Creation_Unique_B05EX",
-      "descriptionTemplate": "At turn start, Helot: Catena gains [Arg1] Aliemus. Helot: Catena's Active DMG adds [Arg2]% Bleeding, and killing an enemy causes Bleeding equal to the excess DMG to other enemies.",
+      "descriptionTemplate": "At turn start, Helot: Catena gains [Arg1] Aliemus. Helot: Catena's Active DMG adds [Arg2]% {Bleeding}, and killing an enemy causes {Bleeding} equal to the excess DMG to other enemies.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
@@ -1005,7 +1005,7 @@
       "rarity": "SSR",
       "realm": "ULTRA",
       "assetId": "Icon_Creation_Unique_D14",
-      "descriptionTemplate": "At turn start, Pollux gains [Arg1] Aliemus. At the start of the battle, gain 1 {Sacred Heart}. When {Exhausted} at its {ordinal:3rd} use, {Sacred Heart} inflicts Vulnerable on all enemies and deal DMG twice.",
+      "descriptionTemplate": "At turn start, Pollux gains [Arg1] Aliemus. At the start of the battle, gain 1 {Sacred Heart}. When {Exhausted} at its {ordinal:3rd} use, {Sacred Heart} inflicts {Vulnerable} on all enemies and deal DMG twice.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",

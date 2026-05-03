@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "scope": "overlays",
-  "recordCount": 123,
+  "recordCount": 125,
   "records": [
     {
       "id": "overlay.global.aequor",
@@ -56,6 +56,14 @@
       "aliases": []
     },
     {
+      "id": "overlay.global.ancient-embers",
+      "displayName": "Ancient Embers",
+      "overlayType": "mechanic",
+      "aliases": [
+        "Old Embers"
+      ]
+    },
+    {
       "id": "overlay.horla.anger",
       "displayName": "Anger",
       "overlayType": "mechanic",
@@ -107,7 +115,9 @@
       "id": "overlay.global.bleed",
       "displayName": "Bleed",
       "overlayType": "mechanic",
-      "aliases": []
+      "aliases": [
+        "Bleeding"
+      ]
     },
     {
       "id": "overlay.global.blighten",
@@ -191,7 +201,10 @@
       "id": "overlay.global.devour",
       "displayName": "Devour",
       "overlayType": "mechanic",
-      "aliases": []
+      "aliases": [
+        "Devouring",
+        "Devoured"
+      ]
     },
     {
       "id": "overlay.arachne.singularity-shuttle",
@@ -661,6 +674,12 @@
       "aliases": [
         "Stealing"
       ]
+    },
+    {
+      "id": "overlay.global.stellar-protection",
+      "displayName": "Stellar Protection",
+      "overlayType": "mechanic",
+      "aliases": []
     },
     {
       "id": "overlay.global.str",

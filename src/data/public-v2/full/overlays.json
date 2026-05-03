@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "scope": "overlays",
-  "recordCount": 123,
+  "recordCount": 125,
   "records": [
     {
       "id": "overlay.global.aequor",
@@ -10,7 +10,7 @@
       "aliases": [
         "Aequor Realm"
       ],
-      "descriptionTemplate": "At the start of an {Aequor} team battle, generate 1 {Tentacle}. The {Tentacle} attacks front-row enemies at turn end. You can check the current {Tentacle DMG} and attack count via the formula below the Tentacle icon. Some Awakeners can increase the Tentacle Count and their DMG, dealing significant damage at turn end.",
+      "descriptionTemplate": "At the start of an {Aequor} team battle, generate 1 Tentacle. The Tentacle attacks front-row enemies at turn end. You can check the current {Tentacle DMG} and attack count via the formula below the Tentacle icon. Some Awakeners can increase the Tentacle Count and their DMG, dealing significant damage at turn end.",
       "descriptionArgs": {}
     },
     {
@@ -26,7 +26,7 @@
       "displayName": "Chaos",
       "overlayType": "realm",
       "aliases": [],
-      "descriptionTemplate": "{Chaos} Awakeners can {break through realm restrictions} and form lineups with Awakeners from other realms, providing different symbiotic effects. Any lineup that includes a {Chaos} Awakener gains an additional 100% {Death Resistance}.\nCompared to other Realm teams, {Chaos} Realm teams gain Keyflare faster and can select from all available Porses when releasing the second Posse, and the selected Posse will trigger twice. Therefore, {Chaos} Realm teams rely more on coordination between Posses, and choosing the right Posse can greatly enhance the strength of a {Chaos} Realm team!",
+      "descriptionTemplate": "{Chaos} Awakeners can break through realm restrictions and form lineups with Awakeners from other realms, providing different symbiotic effects. Any lineup that includes a {Chaos} Awakener gains an additional 100% {Death Resistance}.\nCompared to other Realm teams, {Chaos} Realm teams gain Keyflare faster and can select from all available Porses when releasing the second Posse, and the selected Posse will trigger twice. Therefore, {Chaos} Realm teams rely more on coordination between Posses, and choosing the right Posse can greatly enhance the strength of a {Chaos} Realm team!",
       "descriptionArgs": {}
     },
     {
@@ -42,7 +42,7 @@
       "displayName": "Ultra",
       "overlayType": "realm",
       "aliases": [],
-      "descriptionTemplate": "An {Ultra} team's temporary copy of the {first} command card played each turn enters {Ultra Space} and triggers powerful {Leap} effects. When {Ultra Space} reaches its limit, gain 1 extra {Ultra Round}, during which {all leap effects are triggered}. The key to mastering the {Ultra} Team: carefully plan the first card played each turn.",
+      "descriptionTemplate": "An {Ultra} team's temporary copy of the first command card played each turn enters {Ultra Space} and triggers powerful {Leap} effects. When {Ultra Space} reaches its limit, gain 1 extra {Ultra Round}, during which all {Leap} effects are triggered. The key to mastering the {Ultra} Team: carefully plan the first card played each turn.",
       "descriptionArgs": {}
     },
     {
@@ -194,6 +194,17 @@
       "descriptionArgs": {}
     },
     {
+      "id": "overlay.global.ancient-embers",
+      "displayName": "Ancient Embers",
+      "overlayType": "mechanic",
+      "aliases": [
+        "Old Embers"
+      ],
+      "textColor": "affliction",
+      "descriptionTemplate": "After suffering active damage or Tentacle damage, remove an equivalent amount of {Old Embers} and lose 300% of the removal amount in life; when suffering other damage, remove half. The number of {Old Embers} resets each turn.",
+      "descriptionArgs": {}
+    },
+    {
       "id": "overlay.horla.anger",
       "displayName": "Anger",
       "overlayType": "mechanic",
@@ -291,7 +302,9 @@
       "id": "overlay.global.bleed",
       "displayName": "Bleed",
       "overlayType": "mechanic",
-      "aliases": [],
+      "aliases": [
+        "Bleeding"
+      ],
       "iconId": "Battle_Card_Buff_022",
       "textColor": "damage",
       "descriptionTemplate": "At turn end, take DMG equal to stacks and remove this state.",
@@ -328,7 +341,7 @@
       "overlayType": "mechanic",
       "ownerAwakenerId": "awakener-0043",
       "aliases": [],
-      "descriptionTemplate": "Includes the following three relics:\n\"Lucky Windcoat\": Increases all Awakener Crit. Rates by 10%. All Ryker and dice rolls will never result in the minimum value.\n{Upgrade}: The Crit. Rate increase changes to 15%, and the maximum value of random results +1.\n\"Octahedron Dice\": Each time a Posse is activated, add 1 \"{Octahedron Dice}\" to your hand.\n{Upgrade}: Change to add 1 \"{Shining Octahedron Dice}\" to your hand.\n\"Big Mouth Button\": At turn start and when Ryker or dice's random effect triggers, gain 50 Keyflare and 2% Crit. DMG, up to 30% Crit. DMG.\n{Upgrade}: Change to gain 100 Keyflare and 4% Crit. DMG, up to 50% Crit. DMG.",
+      "descriptionTemplate": "Includes the following three relics:\n\"Lucky Windcoat\": Increases all Awakener Crit. Rates by 10%. All Ryker and dice rolls will never result in the minimum value.\nUpgrade: The Crit. Rate increase changes to 15%, and the maximum value of random results +1.\n{Octahedron Dice}: Each time a Posse is activated, add 1 {Octahedron Dice} to your hand.\nUpgrade: Change to add 1 {Shining Octahedron Dice} to your hand.\n\"Big Mouth Button\": At turn start and when Ryker or dice's random effect triggers, gain 50 Keyflare and 2% Crit. DMG, up to 30% Crit. DMG.\nUpgrade: Change to gain 100 Keyflare and 4% Crit. DMG, up to 50% Crit. DMG.",
       "descriptionArgs": {}
     },
     {
@@ -446,7 +459,10 @@
       "id": "overlay.global.devour",
       "displayName": "Devour",
       "overlayType": "mechanic",
-      "aliases": [],
+      "aliases": [
+        "Devouring",
+        "Devoured"
+      ],
       "descriptionTemplate": "If {Embryo} is in hand, consume 1 to trigger the {Devour} effect.",
       "descriptionArgs": {}
     },
@@ -700,7 +716,7 @@
       "displayName": "Fixed DMG",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "Deals a fixed amount of DMG, unaffected by states such as Strength, Weakness, or {Vulnerability}.",
+      "descriptionTemplate": "Deals a fixed amount of DMG, unaffected by states such as Strength, {Weakness}, or {Vulnerability}.",
       "descriptionArgs": {}
     },
     {
@@ -788,7 +804,7 @@
       "displayName": "Leap",
       "overlayType": "mechanic",
       "aliases": [],
-      "descriptionTemplate": "If this card triggers \"Dimension Shuttle\" after being played or is currently in an {Ultra Round}, trigger the subsequent effect.",
+      "descriptionTemplate": "If this card triggers {Dimension Shuttle} after being played or is currently in an {Ultra Round}, trigger the subsequent effect.",
       "descriptionArgs": {}
     },
     {
@@ -835,7 +851,7 @@
       "overlayType": "mechanic",
       "ownerAwakenerId": "awakener-0022",
       "aliases": [],
-      "descriptionTemplate": "Effects: {Bleed} (150% DMG), {Poison} (75% DMG), apply 1 Weakness, apply 1 Vulnerable, Temp. {STR} -[DescArg1].",
+      "descriptionTemplate": "Effects: {Bleed} (150% DMG), {Poison} (75% DMG), apply 1 {Weakness}, apply 1 {Vulnerable}, Temp. {STR⯆} -[DescArg1].",
       "descriptionArgs": {
         "DescArg1": {
           "kind": "computed",
@@ -1098,7 +1114,7 @@
       "overlayType": "mechanic",
       "aliases": [],
       "textColor": "affliction",
-      "descriptionTemplate": "If this card triggers \"Dimension Shuttle\" after being played, trigger the subsequent effect. Arithmetica Cost -1 when taken from {Ultra Space}.",
+      "descriptionTemplate": "If this card triggers {Dimension Shuttle} after being played, trigger the subsequent effect. Arithmetica Cost -1 when taken from {Ultra Space}.",
       "descriptionArgs": {}
     },
     {
@@ -1265,7 +1281,7 @@
       "overlayType": "mechanic",
       "ownerAwakenerId": "awakener-0056",
       "aliases": [],
-      "descriptionTemplate": "For each stack, increase the final DMG, {STR} & {Tentacle DMG} Boost, Fixed {Poison}, and Fixed {Counter} effects of this card by 2%; increase the final Shield, HP Recovery, and {STR⯆} effects by 1%. Cards with {Singularity Beacon} cannot trigger \"Dimension Shuttle\".",
+      "descriptionTemplate": "For each stack, increase the final DMG, {STR} & {Tentacle DMG} Boost, Fixed {Poison}, and Fixed {Counter} effects of this card by 2%; increase the final Shield, HP Recovery, and {STR⯆} effects by 1%. Cards with {Singularity Beacon} cannot trigger {Dimension Shuttle}.",
       "descriptionArgs": {}
     },
     {
@@ -1361,6 +1377,20 @@
       "textColor": "affliction",
       "descriptionTemplate": "Temporarily reduce target's {STR⯆} and gain the same amount of Temporary {STR}.",
       "descriptionArgs": {}
+    },
+    {
+      "id": "overlay.global.stellar-protection",
+      "displayName": "Stellar Protection",
+      "overlayType": "mechanic",
+      "aliases": [],
+      "textColor": "shield",
+      "descriptionTemplate": "When using {Arouse}, gain [Layer] Arithmetica. If the current Realm is {Aequor}, an additional [Layer] Tentacles are generated temporarily.",
+      "descriptionArgs": {
+        "Layer": {
+          "kind": "fixed",
+          "value": "X"
+        }
+      }
     },
     {
       "id": "overlay.global.str",

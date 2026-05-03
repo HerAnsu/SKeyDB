@@ -6,7 +6,7 @@
   "assetCrystalId": "KeyToken_Crystal_22",
   "assetBadgeId": "KeyToken_Props_22",
   "lineupToken": "t",
-  "descriptionTemplate": "Increase {Realm Mastery} by [Arg1]. Increase a chosen Awakener's Aliemus by [Energy:Arg2].",
+  "descriptionTemplate": "Increase Realm Mastery by [Arg1]. Increase a chosen Awakener's Aliemus by [Energy:Arg2].",
   "descriptionArgs": {
     "Arg1": {
       "kind": "fixed",

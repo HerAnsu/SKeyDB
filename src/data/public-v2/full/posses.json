@@ -555,7 +555,7 @@
       "assetCrystalId": "KeyToken_Crystal_22",
       "assetBadgeId": "KeyToken_Props_22",
       "lineupToken": "t",
-      "descriptionTemplate": "Increase {Realm Mastery} by [Arg1]. Increase a chosen Awakener's Aliemus by [Energy:Arg2].",
+      "descriptionTemplate": "Increase Realm Mastery by [Arg1]. Increase a chosen Awakener's Aliemus by [Energy:Arg2].",
       "descriptionArgs": {
         "Arg1": {
           "kind": "fixed",
@@ -628,7 +628,7 @@
       "assetCrystalId": "KeyToken_Crystal_26",
       "assetBadgeId": "KeyToken_Props_26",
       "lineupToken": "A",
-      "descriptionTemplate": "Choose one of four {Poetry Pages} that haven't been chosen; reset after all {Poems} have been chosen.",
+      "descriptionTemplate": "Choose one of four Poetry Pages that haven't been chosen; reset after all Poems have been chosen.",
       "descriptionArgs": {},
       "lore": "Pray, accept my poem, this offering of spring to the garden.\nIn our desolate lives, the roses dwell in deep red."
     },
@@ -714,7 +714,7 @@
       "assetCrystalId": "KeyToken_Crystal_31",
       "assetBadgeId": "KeyToken_Props_31",
       "lineupToken": "K",
-      "descriptionTemplate": "Choose either \"{Slumber}\" or \"{Arouse}\".",
+      "descriptionTemplate": "Choose either {Slumber} or {Arouse}.",
       "descriptionArgs": {},
       "lore": "He chose that Crown, and that Crown also chose him.\nThe soul of the new king resonated with the ancient god in an instant. An overwhelming shadow appeared behind him, bringing eternal peace to the nation."
     },

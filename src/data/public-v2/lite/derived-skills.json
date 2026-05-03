@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "scope": "derived-skills",
-  "recordCount": 107,
+  "recordCount": 113,
   "records": [
     {
       "id": "derived.castor.onyx-plume",
@@ -533,6 +533,16 @@
       "rootSkillId": "skill.pollux.sinless-verdict"
     },
     {
+      "id": "derived.ryker.octahedron-dice",
+      "ownerAwakenerId": "awakener-0043",
+      "displayName": "Octahedron Dice"
+    },
+    {
+      "id": "derived.ryker.shining-octahedron-dice",
+      "ownerAwakenerId": "awakener-0043",
+      "displayName": "Shining Octahedron Dice"
+    },
+    {
       "id": "derived.salvador.dedication",
       "ownerAwakenerId": "awakener-0044",
       "displayName": "Dedication",
@@ -730,12 +740,24 @@
       "rootSkillId": "skill.arachne.moira-as-i-decree"
     },
     {
+      "id": "derived.global.arouse",
+      "displayName": "Arouse"
+    },
+    {
       "id": "derived.global.embryo",
       "displayName": "Embryo"
     },
     {
+      "id": "derived.global.fleeting-beauty",
+      "displayName": "Fleeting Beauty"
+    },
+    {
       "id": "derived.global.insight",
       "displayName": "Insight"
+    },
+    {
+      "id": "derived.global.leahs-coin",
+      "displayName": "Leah's Coin"
     },
     {
       "id": "derived.global.light-cone-boundary",
@@ -744,6 +766,10 @@
     {
       "id": "derived.global.silver-key-gleam",
       "displayName": "Silver Key Gleam"
+    },
+    {
+      "id": "derived.global.slumber",
+      "displayName": "Slumber"
     }
   ]
 }

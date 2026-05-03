@@ -3,6 +3,6 @@
   "displayName": "Sextant's Calculation",
   "ownerAwakenerId": "awakener-0011",
   "slot": "E2",
-  "descriptionTemplate": "{Ominous Semaphore} inflicts Weakness on all enemies for 1 Turn. For each Tentacle present, {Pilot}'s Shield, Strength, and {Tentacle DMG} increase by 5%, up to 50%.",
+  "descriptionTemplate": "{Ominous Semaphore} inflicts {Weakness} on all enemies for 1 Turn. For each Tentacle present, {Pilot}'s Shield, Strength, and {Tentacle DMG} increase by 5%, up to 50%.",
   "descriptionArgs": {}
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "scope": "derived-skills",
-  "recordCount": 107,
+  "recordCount": 113,
   "records": [
     {
       "id": "derived.castor.onyx-plume",
@@ -1944,6 +1944,70 @@
       ]
     },
     {
+      "id": "derived.ryker.octahedron-dice",
+      "displayName": "Octahedron Dice",
+      "ownerAwakenerId": "awakener-0043",
+      "derivedFromId": null,
+      "rootSkillId": null,
+      "descriptionTemplate": "Roll a [Arg2]-sided die, gain Temporary {STR} equal to the die roll*[Arg1]. If the roll is 4 or higher, {Vulnerable} all enemies for 1 turn. If the roll is 6 or higher, the gained Temporary {STR} is doubled.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "computed",
+          "formulaKey": "scaled",
+          "baseFormula": "accountStageGrowth",
+          "multiplier": 0.0065,
+          "inputs": [
+            "accountLevel"
+          ]
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "6"
+        }
+      },
+      "cardKeywords": [
+        {
+          "id": "mechanic.exhaust"
+        },
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "cost": "0"
+    },
+    {
+      "id": "derived.ryker.shining-octahedron-dice",
+      "displayName": "Shining Octahedron Dice",
+      "ownerAwakenerId": "awakener-0043",
+      "derivedFromId": null,
+      "rootSkillId": null,
+      "descriptionTemplate": "Roll a [Arg2]-sided die, gain Temporary {STR} equal to the die roll*[Arg1]. If the roll is 4 or higher, Inflict {Weakness} and {Vulnerable} on all enemies for 1 turn. If the roll is 6 or higher, double the gained Temporary {STR} and obtain 1 Arithmetica.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "computed",
+          "formulaKey": "scaled",
+          "baseFormula": "accountStageGrowth",
+          "multiplier": 0.0104,
+          "inputs": [
+            "accountLevel"
+          ]
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "6"
+        }
+      },
+      "cardKeywords": [
+        {
+          "id": "mechanic.exhaust"
+        },
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "cost": "0"
+    },
+    {
       "id": "derived.salvador.dedication",
       "displayName": "Dedication",
       "ownerAwakenerId": "awakener-0044",
@@ -2714,6 +2778,21 @@
       ]
     },
     {
+      "id": "derived.global.arouse",
+      "displayName": "Arouse",
+      "derivedFromId": null,
+      "rootSkillId": null,
+      "descriptionTemplate": "Increase all Awakeners' Aliemus by [Arg1]. Consume all {Stellar Protection}. For each stack consumed, recover 1 Arithmetica; if the Realm includes {Aequor}, also summon that many Temporary Tentacles.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "fixed",
+          "value": "8"
+        }
+      },
+      "cardKeywords": [],
+      "cost": "0"
+    },
+    {
       "id": "derived.global.embryo",
       "displayName": "Embryo",
       "derivedFromId": null,
@@ -2741,6 +2820,23 @@
       "cost": "0"
     },
     {
+      "id": "derived.global.fleeting-beauty",
+      "displayName": "Fleeting Beauty",
+      "derivedFromId": null,
+      "rootSkillId": null,
+      "descriptionTemplate": "Place 1 \"Strike\" with Arithmetica Cost 0 into hand for each Awakener, and attach {Exhaust}. Replace all Awakener cards in your hand with \"Strike\" with Arithmetica Cost 0 until the turn ends.",
+      "descriptionArgs": {},
+      "cardKeywords": [
+        {
+          "id": "mechanic.exhaust"
+        },
+        {
+          "id": "mechanic.retain"
+        }
+      ],
+      "cost": "0"
+    },
+    {
       "id": "derived.global.insight",
       "displayName": "Insight",
       "derivedFromId": null,
@@ -2756,6 +2852,24 @@
         }
       ],
       "cost": "0"
+    },
+    {
+      "id": "derived.global.leahs-coin",
+      "displayName": "Leah's Coin",
+      "derivedFromId": null,
+      "rootSkillId": null,
+      "descriptionTemplate": "Draw [Arg1] {plural:[Arg1]|card|cards} and gain [Arg2] Arithmetica.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "fixed",
+          "value": "2"
+        },
+        "Arg2": {
+          "kind": "fixed",
+          "value": "2"
+        }
+      },
+      "cardKeywords": []
     },
     {
       "id": "derived.global.light-cone-boundary",
@@ -2786,6 +2900,27 @@
           "id": "mechanic.retain"
         }
       ],
+      "cost": "0"
+    },
+    {
+      "id": "derived.global.slumber",
+      "displayName": "Slumber",
+      "derivedFromId": null,
+      "rootSkillId": null,
+      "descriptionTemplate": "Gain [Block:Arg1] Shield and 1 stack of {Stellar Protection}. Max 5 stacks. Stacks persist between battles.",
+      "descriptionArgs": {
+        "Arg1": {
+          "kind": "computed",
+          "formulaKey": "scaled",
+          "baseFormula": "esotericResearchDepth",
+          "multiplier": 0.06,
+          "inputs": [
+            "accountLevel",
+            "ownedPosseCount"
+          ]
+        }
+      },
+      "cardKeywords": [],
       "cost": "0"
     }
   ]
