@@ -15,12 +15,14 @@ export interface PublicDescriptionArgSubstatBonus {
   substat: string
   multiplier: string
   suffix?: string
-  mode?: 'additive' | 'scale_base'
+  mode?: 'additive' | 'scale_base' | 'additive_factor'
+  baseMultiplier?: string
 }
 
 export interface PublicFixedDescriptionArg {
   kind: 'fixed'
   value?: string
+  displayFormula?: string
   channel?: string
   suffix?: string
   stat?: PublicDescriptionArgStat

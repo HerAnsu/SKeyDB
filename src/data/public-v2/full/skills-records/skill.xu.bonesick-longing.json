@@ -77,7 +77,8 @@
             "suffix": "%",
             "substatBonus": {
               "substat": "DamageAmplification",
-              "multiplier": "0.2"
+              "multiplier": "0.2",
+              "mode": "additive"
             }
           }
         }

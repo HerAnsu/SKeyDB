@@ -68,6 +68,20 @@ function getRelatedReferencePreview(entry: DatabaseReferenceInfo): string {
   return entry.description.replace(/[{}]/g, '').replace(/\s+/g, ' ').trim()
 }
 
+function buildRelatedReferenceEntry(entry: DatabaseReferenceInfo): KeyedDatabaseReferenceEntry {
+  return {
+    key: `${entry.kind}:${entry.id}`,
+    name: entry.name,
+    label: entry.label,
+    description: entry.description,
+    keywordFooterText: entry.keywordFooterText,
+    record: entry.record,
+    descriptionRank: entry.descriptionRank,
+    descriptionMaxRank: entry.descriptionMaxRank,
+    influenceBadges: entry.influenceBadges,
+  }
+}
+
 export function DatabaseReferencePopover({
   entry,
   selectedEnlightenSlot = null,
@@ -270,6 +284,10 @@ export function DatabaseReferencePopover({
                   className='block w-full border border-slate-700/45 bg-slate-900/45 px-2.5 py-2 text-left transition-colors hover:border-amber-200/40 hover:bg-slate-900/75'
                   key={entry.id}
                   onClick={() => {
+                    if (onInfoEntryClick) {
+                      onInfoEntryClick(buildRelatedReferenceEntry(entry))
+                      return
+                    }
                     onSkillTokenClick(entry.name)
                   }}
                   type='button'

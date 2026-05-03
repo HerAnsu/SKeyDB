@@ -492,6 +492,7 @@ describe('DatabaseReferencePopover', () => {
   })
 
   it('renders grouped related derived cards inline and opens them through the shared trail path', () => {
+    const onInfoEntryClick = vi.fn()
     const onSkillTokenClick = vi.fn()
     vi.mocked(useDatabasePopoverControllerContext).mockReturnValue(null)
     const referenceLayer = buildReferenceLayer({
@@ -561,6 +562,7 @@ describe('DatabaseReferencePopover', () => {
         label='Card · Derived Group'
         name='Memories'
         onClose={vi.fn()}
+        onInfoEntryClick={onInfoEntryClick}
         onMechanicTokenClick={vi.fn()}
         onSkillTokenClick={onSkillTokenClick}
         referenceLayer={referenceLayer}
@@ -575,7 +577,139 @@ describe('DatabaseReferencePopover', () => {
     fireEvent.click(screen.getByRole('button', {name: /Memory One/i}))
     fireEvent.click(screen.getByRole('button', {name: /Memory Two/i}))
 
-    expect(onSkillTokenClick).toHaveBeenNthCalledWith(1, 'Memory One')
-    expect(onSkillTokenClick).toHaveBeenNthCalledWith(2, 'Memory Two')
+    expect(onSkillTokenClick).not.toHaveBeenCalled()
+    expect(onInfoEntryClick).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        key: 'derived-skill:derived.test.memory-1',
+        name: 'Memory One',
+        record: expect.objectContaining({id: 'derived.test.memory-1'}),
+      }),
+    )
+    expect(onInfoEntryClick).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        key: 'derived-skill:derived.test.memory-2',
+        name: 'Memory Two',
+        record: expect.objectContaining({id: 'derived.test.memory-2'}),
+      }),
+    )
+  })
+
+  it('opens duplicate-named related derived skills by id instead of display name', async () => {
+    vi.mocked(useDatabasePopoverControllerContext).mockReturnValue(null)
+    const onInfoEntryClick = vi.fn()
+    const onSkillTokenClick = vi.fn()
+    const referenceLayer = buildReferenceLayer({
+      referenceInfoById: new Map([
+        [
+          'derived.test.choice-a',
+          {
+            kind: 'derived-skill',
+            id: 'derived.test.choice-a',
+            name: 'Thousand Mirage',
+            label: 'Card · Derived',
+            record: {
+              id: 'derived.test.choice-a',
+              displayName: 'Thousand Mirage',
+              descriptionTemplate: 'Choice A.',
+              descriptionArgs: {},
+              childDerivedSkillIds: [],
+              cardKeywords: [],
+              variants: [],
+            },
+            description: 'Choice A.',
+            descriptionRank: 1,
+            descriptionMaxRank: 1,
+            influencingEnlightenSlots: [],
+            influencingTalentIds: [],
+          },
+        ],
+        [
+          'derived.test.choice-b',
+          {
+            kind: 'derived-skill',
+            id: 'derived.test.choice-b',
+            name: 'Thousand Mirage',
+            label: 'Card · Derived',
+            record: {
+              id: 'derived.test.choice-b',
+              displayName: 'Thousand Mirage',
+              descriptionTemplate: 'Choice B.',
+              descriptionArgs: {},
+              childDerivedSkillIds: [],
+              cardKeywords: [],
+              variants: [],
+            },
+            description: 'Choice B.',
+            descriptionRank: 1,
+            descriptionMaxRank: 1,
+            influencingEnlightenSlots: [],
+            influencingTalentIds: [],
+          },
+        ],
+      ]) as ResolvedDatabaseReferenceLayer['referenceInfoById'],
+      referenceInfoByName: new Map([
+        [
+          'thousand mirage',
+          {
+            kind: 'derived-skill',
+            id: 'derived.test.parent',
+            name: 'Thousand Mirage',
+            label: 'Card · Derived Group',
+            record: {
+              id: 'derived.test.parent',
+              nodeKind: 'group',
+              displayName: 'Thousand Mirage',
+              descriptionTemplate: 'Parent.',
+              descriptionArgs: {},
+              childDerivedSkillIds: ['derived.test.choice-a', 'derived.test.choice-b'],
+              cardKeywords: [],
+              variants: [],
+            },
+            description: 'Parent.',
+            descriptionRank: 1,
+            descriptionMaxRank: 1,
+            influencingEnlightenSlots: [],
+            influencingTalentIds: [],
+          },
+        ],
+      ]) as ResolvedDatabaseReferenceLayer['referenceInfoByName'],
+    })
+
+    render(
+      <TestDatabaseReferencePopover
+        description='Parent.'
+        descriptionRecord={{
+          id: 'derived.test.parent',
+          nodeKind: 'group',
+          displayName: 'Thousand Mirage',
+          descriptionTemplate: 'Parent.',
+          descriptionArgs: {},
+          childDerivedSkillIds: ['derived.test.choice-a', 'derived.test.choice-b'],
+          cardKeywords: [],
+          variants: [],
+        }}
+        label='Card · Derived Group'
+        name='Thousand Mirage'
+        onClose={vi.fn()}
+        onInfoEntryClick={onInfoEntryClick}
+        onMechanicTokenClick={vi.fn()}
+        onSkillTokenClick={onSkillTokenClick}
+        referenceLayer={referenceLayer}
+        stats={null}
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: /Choice B/i}))
+
+    expect(onSkillTokenClick).not.toHaveBeenCalled()
+    expect(onInfoEntryClick).toHaveBeenCalledWith(
+      expect.objectContaining({
+        key: 'derived-skill:derived.test.choice-b',
+        name: 'Thousand Mirage',
+        record: expect.objectContaining({id: 'derived.test.choice-b'}),
+      }),
+    )
   })
 })

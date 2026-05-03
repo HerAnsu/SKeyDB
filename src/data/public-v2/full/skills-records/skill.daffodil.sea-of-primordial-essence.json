@@ -4,7 +4,7 @@
   "ownerAwakenerId": "awakener-0012",
   "slot": "Exalt",
   "kind": "exalt",
-  "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, this DMG enjoys [Arg4]x {STR} bonus. Create 1 Customized \"Thousand Mirage\" and place it into hand. If it is not an {Ultra Round} and there is no \"Thousand Mirage\" in the {Ultra Space}, copy it and place it into the {Ultra Space}. Otherwise, place 1 {Insight} into hand.",
+  "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, this DMG enjoys [Arg4]x {STR} bonus. Create 1 Customized {Thousand Mirage} and place it into hand. If it is not an {Ultra Round} and there is no {Thousand Mirage} in the {Ultra Space}, copy it and place it into the {Ultra Space}. Otherwise, place 1 {Insight} into hand.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",

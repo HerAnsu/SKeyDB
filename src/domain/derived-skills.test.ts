@@ -618,7 +618,7 @@ describe('derived-skills', () => {
     expect(getDerivedSkillById('derived.daffodil.thousand-mirage', derivedSkills)).toEqual(
       expect.objectContaining({
         descriptionTemplate:
-          'Synthetic group wrapper for {Thousand Mirage} customization. Browse base cards and potential extra-effect choices separately.',
+          'Customize a {Thousand Mirage} card by choosing a base card and adding extra effects.',
       }),
     )
 

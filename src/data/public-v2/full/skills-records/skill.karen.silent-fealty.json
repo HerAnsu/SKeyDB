@@ -16,7 +16,6 @@
         "8.1",
         "9"
       ],
-      "rounding": "ceil",
       "stat": "CON",
       "suffix": "%"
     },
@@ -30,7 +29,6 @@
         "8.1",
         "9"
       ],
-      "rounding": "ceil",
       "stat": "DEF",
       "suffix": "%"
     },
@@ -66,7 +64,6 @@
               "8.1",
               "9"
             ],
-            "rounding": "ceil",
             "stat": "CON",
             "suffix": "%"
           },
@@ -80,7 +77,6 @@
               "8.1",
               "9"
             ],
-            "rounding": "ceil",
             "stat": "DEF",
             "suffix": "%"
           },

@@ -58,6 +58,19 @@
             ],
             "suffix": "%"
           },
+          "Arg2": {
+            "kind": "scaling",
+            "values": [
+              "15",
+              "18",
+              "21",
+              "24",
+              "27",
+              "30"
+            ],
+            "stat": "CON",
+            "suffix": "%"
+          },
           "Arg3": {
             "kind": "scaling",
             "values": [

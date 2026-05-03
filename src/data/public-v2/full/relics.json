@@ -71,7 +71,6 @@
           "formulaKey": "scaled",
           "baseFormula": "esotericResearchDepth",
           "multiplier": 0.0125,
-          "rounding": "ceil",
           "inputs": [
             "accountLevel",
             "ownedPosseCount"
@@ -183,7 +182,6 @@
           "formulaKey": "scaled",
           "baseFormula": "esotericResearchDepth",
           "multiplier": 0.03,
-          "rounding": "ceil",
           "inputs": [
             "accountLevel",
             "ownedPosseCount"
@@ -213,7 +211,6 @@
           "formulaKey": "scaled",
           "baseFormula": "esotericResearchDepth",
           "multiplier": 0.075,
-          "rounding": "ceil",
           "inputs": [
             "accountLevel",
             "ownedPosseCount"
@@ -243,7 +240,6 @@
           "formulaKey": "scaled",
           "baseFormula": "esotericResearchDepth",
           "multiplier": 0.02,
-          "rounding": "ceil",
           "inputs": [
             "accountLevel",
             "ownedPosseCount"
@@ -372,7 +368,6 @@
           "formulaKey": "scaled",
           "baseFormula": "esotericResearchDepth",
           "multiplier": 0.02,
-          "rounding": "ceil",
           "inputs": [
             "accountLevel",
             "ownedPosseCount"
@@ -1114,7 +1109,6 @@
           "formulaKey": "scaled",
           "baseFormula": "esotericResearchDepth",
           "multiplier": 0.03,
-          "rounding": "ceil",
           "inputs": [
             "accountLevel",
             "ownedPosseCount"
@@ -1208,7 +1202,6 @@
           "formulaKey": "scaled",
           "baseFormula": "esotericResearchDepth",
           "multiplier": 0.12,
-          "rounding": "ceil",
           "inputs": [
             "accountLevel",
             "ownedPosseCount"

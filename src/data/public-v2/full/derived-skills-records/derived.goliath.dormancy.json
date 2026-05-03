@@ -4,13 +4,8 @@
   "ownerAwakenerId": "awakener-0021",
   "derivedFromId": "skill.goliath.abyssal-depths-power",
   "rootSkillId": "skill.goliath.abyssal-depths-power",
-  "descriptionTemplate": "Add 2 {Decapitation Damage} to your hand and grant them {Exhaust}, {Prepare 1}, and {Retain}. Increase the Base DMG of {Blade's Dominion} and {Decapitation Damage} by 25% for this battle. Goliath obtains [Energy:Arg2] Aliemus.",
-  "descriptionArgs": {
-    "Arg2": {
-      "kind": "fixed",
-      "value": "25"
-    }
-  },
+  "descriptionTemplate": "Add 3 {Blade's Dominion} to your hand. Increase the Base DMG of {Blade's Dominion} and {Decapitation Damage} by 25% in this battle.",
+  "descriptionArgs": {},
   "cardKeywords": [],
   "upgrades": [
     {

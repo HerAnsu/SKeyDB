@@ -61,18 +61,19 @@
           "Arg2": {
             "kind": "scaling",
             "values": [
-              "93.75",
-              "100",
-              "106.25",
-              "112.5",
-              "118.75",
-              "125"
+              "75",
+              "80",
+              "85",
+              "90",
+              "95",
+              "100"
             ],
             "suffix": "%",
             "substatBonus": {
               "substat": "RealmMastery",
               "multiplier": "0.25",
-              "mode": "scale_base"
+              "mode": "additive_factor",
+              "baseMultiplier": "1.25"
             }
           }
         }
@@ -104,18 +105,19 @@
           "Arg2": {
             "kind": "scaling",
             "values": [
-              "93.75",
-              "100",
-              "106.25",
-              "112.5",
-              "118.75",
-              "125"
+              "75",
+              "80",
+              "85",
+              "90",
+              "95",
+              "100"
             ],
             "suffix": "%",
             "substatBonus": {
               "substat": "RealmMastery",
               "multiplier": "0.25",
-              "mode": "scale_base"
+              "mode": "additive_factor",
+              "baseMultiplier": "1.25"
             }
           }
         }

@@ -103,10 +103,10 @@ describe('description-args', () => {
     })
 
     expect(resolvedArg.baseValue).toBe(36)
-    expect(resolvedArg.substatBonusValue).toBe(0)
-    expect(resolvedArg.totalValue).toBe(36)
-    expect(resolvedArg.formattedTotalValue).toBe('36% {ATK}')
-    expect(resolvedArg.absoluteValue).toBe(51)
+    expect(resolvedArg.substatBonusValue).toBeCloseTo(5.4, 6)
+    expect(resolvedArg.totalValue).toBeCloseTo(41.4, 6)
+    expect(resolvedArg.formattedTotalValue).toBe('41.4% {ATK}')
+    expect(resolvedArg.absoluteValue).toBe(58)
     expect(formatDescriptionArgProgression(skill.descriptionArgs.Arg2, {maxRank: 6})).toBe(
       '30% (+6%/Lv) {ATK}',
     )
@@ -118,7 +118,9 @@ describe('description-args', () => {
           ATK: '140',
         },
       }),
-    ).toBe('Lv1: 30% ATK = 42\nLv2: 36% ATK = 51')
+    ).toBe(
+      'Lv1: 34.5% ATK = 49 (30% ATK × 115% from Damage Amplification)\nLv2: 41.4% ATK = 58 (36% ATK × 115% from Damage Amplification)',
+    )
   })
 
   it('supports multiplicative base scaling alongside additive flat substat expressions', async () => {
@@ -202,6 +204,44 @@ describe('description-args', () => {
         },
       ),
     ).toBe('Keyflare Regen × 0.2')
+  })
+
+  it('ceil-displays Sanga talent-enhanced Aliemus scaling', async () => {
+    const skill = await loadResolvedSkill(45, 'skill.sanga.strike')
+
+    const rendered = resolveDescriptionTemplate(skill.descriptionTemplate, skill.descriptionArgs, {
+      rank: 1,
+      stats: {
+        DeathResistance: '33.6%',
+      },
+    })
+
+    expect(rendered).toContain('Sanga obtains 7 Aliemus.')
+  })
+
+  it('supports additive-factor substat bonuses from Arachne enlighten patches', async () => {
+    const record = await loadPublicV2AwakenerFullById(56)
+    expect(record).toBeDefined()
+    if (!record) {
+      throw new Error('Missing Arachne public V2 record')
+    }
+
+    const resolvedRecord = resolveAwakenerFullV2Record(record, {
+      selectedEnlightenSlot: 'E3',
+    }).record
+
+    const rendered = resolveDescriptionTemplate(
+      resolvedRecord.cards.Exalt.descriptionTemplate,
+      resolvedRecord.cards.Exalt.descriptionArgs,
+      {
+        rank: 5,
+        stats: {
+          RealmMastery: '24',
+        },
+      },
+    )
+
+    expect(rendered).toContain('Temporary DMG Amplification +125%')
   })
 
   it('renders Agrippa T1 skill-side substat bonuses on Pale Blessing', async () => {

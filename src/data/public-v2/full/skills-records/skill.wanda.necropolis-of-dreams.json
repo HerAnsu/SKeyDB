@@ -30,7 +30,12 @@
         "60"
       ],
       "stat": "ATK",
-      "suffix": "%"
+      "suffix": "%",
+      "substatBonus": {
+        "substat": "DamageAmplification",
+        "multiplier": "0.75",
+        "mode": "scale_base"
+      }
     }
   },
   "cardKeywords": [],

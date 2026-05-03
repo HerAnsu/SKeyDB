@@ -38,7 +38,8 @@
             "value": "50",
             "substatBonus": {
               "substat": "RealmMastery",
-              "multiplier": "0.5"
+              "multiplier": "0.5",
+              "mode": "additive"
             }
           },
           "Arg7": {
@@ -72,7 +73,8 @@
             "value": "50",
             "substatBonus": {
               "substat": "RealmMastery",
-              "multiplier": "0.5"
+              "multiplier": "0.5",
+              "mode": "additive"
             }
           },
           "Arg7": {

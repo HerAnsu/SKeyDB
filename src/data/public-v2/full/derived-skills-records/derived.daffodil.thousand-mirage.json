@@ -9,7 +9,7 @@
     "derived.daffodil.thousand-mirage-base-cards",
     "derived.daffodil.thousand-mirage-extra-effects"
   ],
-  "descriptionTemplate": "Synthetic group wrapper for {Thousand Mirage} customization. Browse base cards and potential extra-effect choices separately.",
+  "descriptionTemplate": "Customize a {Thousand Mirage} card by choosing a base card and adding extra effects.",
   "descriptionArgs": {},
   "cardKeywords": []
 }

@@ -22,6 +22,34 @@ describe('public-description-args', () => {
     expect(buildDescriptionArgHover(arg)).toBe('')
   })
 
+  it('uses fixed arg display formulas as hover text', () => {
+    const arg: PublicDescriptionArg = {
+      kind: 'fixed',
+      value: 'X',
+      displayFormula: 'Max HP * 0.2%',
+    }
+
+    expect(resolveDescriptionArg(arg).formattedTotalValue).toBe('X')
+    expect(buildDescriptionArgHover(arg)).toBe('Max HP * 0.2%')
+  })
+
+  it('ceils displayed totals when substat bonuses affect public args', () => {
+    const arg: PublicDescriptionArg = {
+      kind: 'scaling',
+      values: ['200'],
+      suffix: '%',
+      substatBonus: {
+        substat: 'DeathResistance',
+        multiplier: '2',
+        mode: 'additive',
+      },
+    }
+
+    expect(
+      resolveDescriptionArg(arg, {stats: {DeathResistance: '33.6%'}}).formattedTotalValue,
+    ).toBe('268%')
+  })
+
   it('renders linear args through the public arg contract', () => {
     const arg: PublicDescriptionArg = {
       kind: 'linear',

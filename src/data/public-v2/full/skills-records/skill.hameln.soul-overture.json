@@ -29,5 +29,14 @@
       "id": "mechanic.retain"
     }
   ],
-  "cost": "3"
+  "cost": "3",
+  "upgrades": [
+    {
+      "id": "upgrade.enlighten.hameln.moonlit-rhapsody.skill.hameln.soul-overture",
+      "operation": "link_only",
+      "upgraderId": "enlighten.hameln.moonlit-rhapsody",
+      "upgraderType": "enlighten",
+      "patch": {}
+    }
+  ]
 }

@@ -35,7 +35,6 @@
     "Arg4": {
       "kind": "fixed",
       "value": "16",
-      "rounding": "ceil",
       "suffix": "%"
     }
   },

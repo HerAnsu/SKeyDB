@@ -95,7 +95,8 @@
             "suffix": "%",
             "substatBonus": {
               "substat": "DeathResistance",
-              "multiplier": "0.15"
+              "multiplier": "0.15",
+              "mode": "additive"
             }
           }
         }

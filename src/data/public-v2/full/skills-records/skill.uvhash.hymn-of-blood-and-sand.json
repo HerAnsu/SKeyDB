@@ -16,7 +16,6 @@
         "144",
         "160"
       ],
-      "rounding": "ceil",
       "stat": "ATK",
       "suffix": "%"
     },
@@ -65,7 +64,6 @@
               "144",
               "160"
             ],
-            "rounding": "ceil",
             "stat": "ATK",
             "suffix": "%"
           },

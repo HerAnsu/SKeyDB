@@ -17,7 +17,12 @@
         "20"
       ],
       "stat": "ATK",
-      "suffix": "%"
+      "suffix": "%",
+      "substatBonus": {
+        "substat": "CritRate",
+        "multiplier": "2",
+        "mode": "scale_base"
+      }
     },
     "Arg2": {
       "kind": "scaling",

@@ -34,7 +34,6 @@
         "9",
         "10"
       ],
-      "rounding": "ceil",
       "stat": "CON",
       "suffix": "%",
       "substatBonus": {
@@ -86,7 +85,6 @@
               "10.8",
               "12"
             ],
-            "rounding": "ceil",
             "stat": "CON",
             "suffix": "%",
             "substatBonus": {

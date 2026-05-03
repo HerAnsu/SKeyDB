@@ -35,7 +35,7 @@
     "derived.daffodil.thousand-mirage-effect-hpr-directed-catalysis",
     "derived.daffodil.thousand-mirage-effect-hpr-keyflare"
   ],
-  "descriptionTemplate": "Potential extra-effect cards used during Thousand Mirage customization. Source-backed selector rows exist as Thousand Mirage: Illusion (choose 1 of 3) and Thousand Mirage: Reality (choose 2 of 3).",
+  "descriptionTemplate": "Choose extra effects to add to a {Thousand Mirage} card.",
   "descriptionArgs": {},
   "cardKeywords": []
 }

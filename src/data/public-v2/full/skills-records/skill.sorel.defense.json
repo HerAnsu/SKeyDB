@@ -31,7 +31,8 @@
       ],
       "substatBonus": {
         "substat": "CritRate",
-        "multiplier": "0.2"
+        "multiplier": "0.2",
+        "mode": "additive"
       }
     }
   },
@@ -74,7 +75,8 @@
             ],
             "substatBonus": {
               "substat": "CritRate",
-              "multiplier": "0.2"
+              "multiplier": "0.2",
+              "mode": "additive"
             }
           },
           "Arg4": {

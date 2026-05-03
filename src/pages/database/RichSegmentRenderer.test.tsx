@@ -323,6 +323,27 @@ describe('RichSegmentRenderer', () => {
     expect(screen.getByText('5')).not.toHaveAttribute('title')
   })
 
+  it('renders fixed description args with display formula tooltips', () => {
+    render(
+      <RichSegmentRenderer
+        descriptionArgs={{
+          Arg1: {
+            kind: 'fixed',
+            value: 'X',
+            displayFormula: 'Max HP * 0.2%',
+          },
+        }}
+        descriptionRank={1}
+        segment={{type: 'descriptionArg', argKey: 'Arg1', channel: null}}
+        skillLevel={1}
+        stats={BASE_STATS}
+        variant='inline'
+      />,
+    )
+
+    expect(screen.getByText('X')).toHaveAttribute('title', 'Max HP * 0.2%')
+  })
+
   it('renders fixed substat args with a single formula tooltip', () => {
     render(
       <RichSegmentRenderer

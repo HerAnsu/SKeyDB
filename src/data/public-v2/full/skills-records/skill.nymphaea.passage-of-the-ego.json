@@ -17,7 +17,12 @@
         "90"
       ],
       "stat": "ATK",
-      "suffix": "%"
+      "suffix": "%",
+      "substatBonus": {
+        "substat": "DamageAmplification",
+        "multiplier": "0.5",
+        "mode": "scale_base"
+      }
     },
     "Arg2": {
       "kind": "scaling",
@@ -63,7 +68,12 @@
               "90"
             ],
             "stat": "ATK",
-            "suffix": "%"
+            "suffix": "%",
+            "substatBonus": {
+              "substat": "DamageAmplification",
+              "multiplier": "0.5",
+              "mode": "scale_base"
+            }
           },
           "Arg2": {
             "kind": "scaling",

@@ -30,7 +30,12 @@
         "40"
       ],
       "stat": "ATK",
-      "suffix": "%"
+      "suffix": "%",
+      "substatBonus": {
+        "substat": "RealmMastery",
+        "multiplier": "0.25",
+        "mode": "scale_base"
+      }
     }
   },
   "cardKeywords": [],
@@ -71,7 +76,12 @@
               "40"
             ],
             "stat": "ATK",
-            "suffix": "%"
+            "suffix": "%",
+            "substatBonus": {
+              "substat": "RealmMastery",
+              "multiplier": "0.25",
+              "mode": "scale_base"
+            }
           },
           "Arg3": {
             "kind": "fixed",
@@ -116,7 +126,12 @@
               "40"
             ],
             "stat": "ATK",
-            "suffix": "%"
+            "suffix": "%",
+            "substatBonus": {
+              "substat": "RealmMastery",
+              "multiplier": "0.25",
+              "mode": "scale_base"
+            }
           },
           "Arg3": {
             "kind": "fixed",

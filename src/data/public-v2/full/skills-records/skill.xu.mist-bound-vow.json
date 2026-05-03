@@ -38,5 +38,14 @@
     }
   },
   "cardKeywords": [],
-  "cost": "100"
+  "cost": "100",
+  "upgrades": [
+    {
+      "id": "upgrade.enlighten.xu.nirvanas-kiss.skill.xu.mist-bound-vow",
+      "operation": "link_only",
+      "upgraderId": "enlighten.xu.nirvanas-kiss",
+      "upgraderType": "enlighten",
+      "patch": {}
+    }
+  ]
 }

@@ -35,7 +35,7 @@ export interface ResolvedDescriptionArg {
   rawBaseValue: string
   baseValue: number | null
   substatSourceValue: number | null
-  substatBonusMode: 'additive' | 'scale_base' | null
+  substatBonusMode: 'additive' | 'scale_base' | 'additive_factor' | null
   substatBonusValue: number
   totalValue: number | null
   suffix: string
@@ -117,6 +117,10 @@ function getSubstatBonus(arg: PublicDescriptionArg) {
   return 'substatBonus' in arg ? arg.substatBonus : undefined
 }
 
+function getDisplayFormula(arg: PublicDescriptionArg): string | undefined {
+  return 'displayFormula' in arg ? arg.displayFormula : undefined
+}
+
 function isComputedArg(arg: PublicDescriptionArg): boolean {
   return arg.kind === 'computed'
 }
@@ -174,7 +178,11 @@ function resolveSubstatBonusValue(
   arg: PublicDescriptionArg,
   baseValue: number | null,
   stats: Partial<FullStats> | null | undefined,
-): {sourceValue: number | null; mode: 'additive' | 'scale_base' | null; value: number} {
+): {
+  sourceValue: number | null
+  mode: 'additive' | 'scale_base' | 'additive_factor' | null
+  value: number
+} {
   const substatBonus = getSubstatBonus(arg)
   if (!substatBonus || !stats) {
     return {
@@ -202,7 +210,12 @@ function resolveSubstatBonusValue(
   const value =
     mode === 'scale_base' && baseValue !== null
       ? baseValue * ((statValue * multiplier) / 100)
-      : statValue * multiplier
+      : mode === 'additive_factor' && baseValue !== null
+        ? baseValue *
+          ((tryParseNumericValue(substatBonus.baseMultiplier ?? '') ?? 1) +
+            (statValue * multiplier) / 100 -
+            1)
+        : statValue * multiplier
 
   return {
     sourceValue: statValue,
@@ -238,9 +251,21 @@ function formatLiteralValue(rawValue: string, suffix: string, stat: string | nul
 
 function shouldCeilDisplayedTotalValue(
   arg: PublicDescriptionArg,
-  baseValue: number | null,
+  _baseValue: number | null,
 ): boolean {
-  return Boolean(getSubstatBonus(arg)) && (baseValue === null || Math.abs(baseValue) < 0.001)
+  const substatBonus = getSubstatBonus(arg)
+  if (!substatBonus && arg.kind === 'computed' && arg.formulaKey === 'scaled') {
+    return true
+  }
+
+  if (!substatBonus) {
+    return false
+  }
+
+  const mode =
+    substatBonus.mode ??
+    (arg.kind !== 'fixed' && inferSuffix(arg).includes('%') ? 'scale_base' : 'additive')
+  return mode === 'additive' || mode === 'additive_factor'
 }
 
 function resolveAbsoluteValue(
@@ -407,6 +432,11 @@ function buildDescriptionArgFormula(
   arg: PublicDescriptionArg,
   resolved: ResolvedDescriptionArg,
 ): string {
+  const displayFormula = getDisplayFormula(arg)
+  if (displayFormula) {
+    return formatHoverDisplayText(displayFormula)
+  }
+
   if (!('substatBonus' in arg) || !arg.substatBonus) {
     return formatHoverDisplayText(resolved.formattedTotalValue)
   }
@@ -423,6 +453,19 @@ function buildDescriptionArgFormula(
     )
   }
 
+  if (
+    resolved.substatBonusMode === 'additive_factor' &&
+    resolved.baseValue !== null &&
+    resolved.substatSourceValue !== null
+  ) {
+    const multiplier = tryParseNumericValue(arg.substatBonus.multiplier) ?? 0
+    const baseMultiplier = tryParseNumericValue(arg.substatBonus.baseMultiplier ?? '') ?? 1
+    const factor = baseMultiplier + (resolved.substatSourceValue * multiplier) / 100
+    return formatHoverDisplayText(
+      `${resolved.formattedBaseValue} × ${fmtNum(factor)} from ${formatSubstatLabel(arg.substatBonus.substat)}`,
+    )
+  }
+
   const substatTerm = formatHoverDisplayText(
     `${formatSubstatLabel(arg.substatBonus.substat)} × ${formatLiteralValue(arg.substatBonus.multiplier, resolved.suffix, resolved.stat)}`,
   )
@@ -435,7 +478,7 @@ function buildDescriptionArgFormula(
 }
 
 export function hasDescriptionArgInteractiveHover(arg: PublicDescriptionArg): boolean {
-  return arg.kind !== 'fixed' || Boolean(getSubstatBonus(arg))
+  return arg.kind !== 'fixed' || Boolean(getSubstatBonus(arg) ?? getDisplayFormula(arg))
 }
 
 export function buildDescriptionArgHover(
@@ -466,7 +509,9 @@ export function buildDescriptionArgHover(
         entry.substatBonusValue !== 0
           ? entry.substatBonusMode === 'scale_base' && entry.substatSourceValue !== null
             ? ` (${formatHoverDisplayText(entry.formattedBaseValue)} × ${fmtNum(100 + entry.substatSourceValue * (tryParseNumericValue(arg.substatBonus.multiplier) ?? 0))}% from ${formatSubstatLabel(arg.substatBonus.substat)})`
-            : ` (${formatHoverDisplayText(entry.formattedBaseValue)} + ${formatHoverDisplayText(formatResolvedValue(entry.substatBonusValue, entry.suffix, entry.stat))} from ${formatSubstatLabel(arg.substatBonus.substat)})`
+            : entry.substatBonusMode === 'additive_factor' && entry.substatSourceValue !== null
+              ? ` (${formatHoverDisplayText(entry.formattedBaseValue)} × ${fmtNum((tryParseNumericValue(arg.substatBonus.baseMultiplier ?? '') ?? 1) + (entry.substatSourceValue * (tryParseNumericValue(arg.substatBonus.multiplier) ?? 0)) / 100)} from ${formatSubstatLabel(arg.substatBonus.substat)})`
+              : ` (${formatHoverDisplayText(entry.formattedBaseValue)} + ${formatHoverDisplayText(formatResolvedValue(entry.substatBonusValue, entry.suffix, entry.stat))} from ${formatSubstatLabel(arg.substatBonus.substat)})`
           : ''
       const computed = entry.absoluteValue === null ? '' : ` = ${String(entry.absoluteValue)}`
       return `${base}${computed}${breakdown}`

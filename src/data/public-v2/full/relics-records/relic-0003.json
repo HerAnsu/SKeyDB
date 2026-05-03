@@ -19,7 +19,6 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.0125,
-      "rounding": "ceil",
       "inputs": [
         "accountLevel",
         "ownedPosseCount"

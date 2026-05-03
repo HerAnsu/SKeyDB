@@ -34,5 +34,14 @@
     }
   },
   "cardKeywords": [],
-  "cost": "100"
+  "cost": "100",
+  "upgrades": [
+    {
+      "id": "upgrade.enlighten.hameln.moonlit-rhapsody.skill.hameln.primal-chord",
+      "operation": "link_only",
+      "upgraderId": "enlighten.hameln.moonlit-rhapsody",
+      "upgraderType": "enlighten",
+      "patch": {}
+    }
+  ]
 }

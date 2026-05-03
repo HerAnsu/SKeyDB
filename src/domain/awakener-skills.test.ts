@@ -316,6 +316,11 @@ describe('awakener-skills', () => {
       values: ['30', '36', '42', '48', '54', '60'],
       suffix: '%',
       stat: 'ATK',
+      substatBonus: {
+        substat: 'CritDamage',
+        multiplier: '0.2',
+        mode: 'scale_base',
+      },
     })
     expect(
       getAwakenerSkillById('skill.miryam.pray-to-the-abyss', skills)?.descriptionArgs.Arg1,
@@ -324,12 +329,22 @@ describe('awakener-skills', () => {
       values: ['5', '6', '7', '8', '9', '10'],
       suffix: '%',
       stat: 'ATK',
+      substatBonus: {
+        substat: 'CritDamage',
+        multiplier: '0.2',
+        mode: 'scale_base',
+      },
     })
     expect(
       getAwakenerSkillById('skill.miryam.pray-to-the-abyss', skills)?.descriptionArgs.Arg2,
     ).toEqual({
       kind: 'scaling',
       values: ['10', '11', '12', '13', '14', '15'],
+      substatBonus: {
+        substat: 'CritDamage',
+        multiplier: '0.2',
+        mode: 'scale_base',
+      },
     })
     expect(
       getAwakenerSkillById('skill.miryam.pray-to-the-abyss', skills)?.descriptionArgs.Arg3,
@@ -450,6 +465,11 @@ describe('awakener-skills', () => {
       values: ['10', '12', '14', '16', '18', '20'],
       suffix: '%',
       stat: 'ATK',
+      substatBonus: {
+        substat: 'CritRate',
+        multiplier: '2',
+        mode: 'scale_base',
+      },
     })
     expect(
       getAwakenerSkillById('skill.jenkins.get-em-brown', skills)?.descriptionArgs.Arg1,
@@ -458,6 +478,11 @@ describe('awakener-skills', () => {
       values: ['15', '18', '21', '24', '27', '30'],
       suffix: '%',
       stat: 'ATK',
+      substatBonus: {
+        substat: 'CritRate',
+        multiplier: '2',
+        mode: 'scale_base',
+      },
     })
     expect(getAwakenerSkillById('skill.lily.defense', skills)?.descriptionArgs.Arg1).toEqual(
       expect.objectContaining({
@@ -474,6 +499,11 @@ describe('awakener-skills', () => {
       values: ['20', '24', '28', '32', '36', '40'],
       suffix: '%',
       stat: 'ATK',
+      substatBonus: {
+        substat: 'RealmMastery',
+        multiplier: '0.25',
+        mode: 'scale_base',
+      },
     })
     expect(
       getAwakenerSkillById('skill.ogier.seven-arts-and-virtues', skills)?.descriptionArgs.Arg2,
@@ -651,6 +681,11 @@ describe('awakener-skills', () => {
       values: ['30', '36', '42', '48', '54', '60'],
       suffix: '%',
       stat: 'ATK',
+      substatBonus: {
+        substat: 'DamageAmplification',
+        multiplier: '0.75',
+        mode: 'scale_base',
+      },
     })
     expect(
       getAwakenerSkillById('skill.vortice.here-it-goes', skills)?.descriptionArgs.Arg2,

@@ -92,7 +92,12 @@
               "30"
             ],
             "stat": "ATK",
-            "suffix": "%"
+            "suffix": "%",
+            "substatBonus": {
+              "substat": "CritRate",
+              "multiplier": "0.2",
+              "mode": "scale_base"
+            }
           }
         }
       }
@@ -149,7 +154,12 @@
               "30"
             ],
             "stat": "ATK",
-            "suffix": "%"
+            "suffix": "%",
+            "substatBonus": {
+              "substat": "CritRate",
+              "multiplier": "0.2",
+              "mode": "scale_base"
+            }
           }
         }
       }

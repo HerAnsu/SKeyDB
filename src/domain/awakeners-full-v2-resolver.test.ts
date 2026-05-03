@@ -499,4 +499,33 @@ describe('awakeners-full-v2-resolver', () => {
       },
     )
   })
+
+  it('applies Sanga talent substat patches to strike and defense Aliemus args', async () => {
+    const sanga = await loadPublicV2AwakenerFullById('awakener-0045')
+    expect(sanga).toBeDefined()
+    if (!sanga) {
+      throw new Error('Missing public V2 Sanga record')
+    }
+
+    const resolved = resolveAwakenerFullV2Record(sanga)
+
+    expect(resolved.record.cards.C2.descriptionArgs.Arg2).toEqual({
+      kind: 'scaling',
+      values: ['5', '6', '7', '8', '9', '10'],
+      substatBonus: {
+        substat: 'DeathResistance',
+        multiplier: '0.03',
+        mode: 'additive',
+      },
+    })
+    expect(resolved.record.cards.C3.descriptionArgs.Arg2).toEqual({
+      kind: 'scaling',
+      values: ['5', '6', '7', '8', '9', '10'],
+      substatBonus: {
+        substat: 'DeathResistance',
+        multiplier: '0.03',
+        mode: 'additive',
+      },
+    })
+  })
 })

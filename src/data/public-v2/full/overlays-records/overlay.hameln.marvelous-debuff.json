@@ -11,7 +11,6 @@
       "formulaKey": "scaled",
       "baseFormula": "accountStageGrowth",
       "multiplier": 0.025,
-      "rounding": "ceil",
       "inputs": [
         "accountLevel"
       ]

@@ -50,7 +50,8 @@ export const descriptionArgSubstatBonusSchema = z.object({
   substat: z.enum(SUBSTAT_SCALING_KEYS),
   multiplier: nonEmptyStringSchema,
   suffix: nonEmptyStringSchema.optional(),
-  mode: z.enum(['additive', 'scale_base']).optional(),
+  mode: z.enum(['additive', 'scale_base', 'additive_factor']).optional(),
+  baseMultiplier: nonEmptyStringSchema.optional(),
 })
 
 export const descriptionArgSubstatBonusesSchema = z.record(
@@ -72,6 +73,7 @@ export const descriptionArgSchema = z.discriminatedUnion('kind', [
     .object({
       kind: z.literal('fixed'),
       value: nonEmptyStringSchema.optional(),
+      displayFormula: nonEmptyStringSchema.optional(),
       channel: descriptionArgChannelSchema.optional(),
       suffix: nonEmptyStringSchema.optional(),
       stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),

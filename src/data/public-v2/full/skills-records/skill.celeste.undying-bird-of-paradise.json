@@ -29,7 +29,6 @@
         "24",
         "25"
       ],
-      "rounding": "ceil",
       "suffix": "%"
     }
   },
@@ -70,7 +69,6 @@
               "24",
               "25"
             ],
-            "rounding": "ceil",
             "suffix": "%"
           },
           "Arg4": {

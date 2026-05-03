@@ -12,5 +12,25 @@
       "suffix": "%"
     }
   },
-  "cardKeywords": []
+  "cardKeywords": [],
+  "upgrades": [
+    {
+      "id": "upgrade.enlighten.wanda.lakeborne-dweller.derived.wanda.echoes-of-whispers",
+      "operation": "override_args",
+      "upgraderId": "enlighten.wanda.lakeborne-dweller",
+      "upgraderType": "enlighten",
+      "upgraderSlot": "E2",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
+      "patch": {
+        "descriptionArgs": {
+          "StateArg3": {
+            "kind": "fixed",
+            "value": "65",
+            "suffix": "%"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -16,7 +16,6 @@
         "27",
         "30"
       ],
-      "rounding": "ceil",
       "stat": "CON",
       "suffix": "%"
     },
@@ -30,7 +29,6 @@
         "7.2",
         "8"
       ],
-      "rounding": "ceil",
       "stat": "ATK",
       "suffix": "%"
     },
@@ -80,7 +78,6 @@
               "27",
               "30"
             ],
-            "rounding": "ceil",
             "stat": "CON",
             "suffix": "%"
           },
@@ -94,7 +91,6 @@
               "7.2",
               "8"
             ],
-            "rounding": "ceil",
             "stat": "ATK",
             "suffix": "%"
           },

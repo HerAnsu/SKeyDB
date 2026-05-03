@@ -3070,7 +3070,6 @@
                   "9",
                   "10"
                 ],
-                "rounding": "ceil",
                 "stat": "CON",
                 "suffix": "%"
               },
@@ -3247,7 +3246,6 @@
             "24",
             "25"
           ],
-          "rounding": "ceil",
           "suffix": "%"
         }
       },
@@ -3288,7 +3286,6 @@
                   "24",
                   "25"
                 ],
-                "rounding": "ceil",
                 "suffix": "%"
               },
               "Arg4": {
@@ -4490,7 +4487,7 @@
       "ownerAwakenerId": "awakener-0012",
       "slot": "Exalt",
       "kind": "exalt",
-      "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, this DMG enjoys [Arg4]x {STR} bonus. Create 1 Customized \"Thousand Mirage\" and place it into hand. If it is not an {Ultra Round} and there is no \"Thousand Mirage\" in the {Ultra Space}, copy it and place it into the {Ultra Space}. Otherwise, place 1 {Insight} into hand.",
+      "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies, this DMG enjoys [Arg4]x {STR} bonus. Create 1 Customized {Thousand Mirage} and place it into hand. If it is not an {Ultra Round} and there is no {Thousand Mirage} in the {Ultra Space}, copy it and place it into the {Ultra Space}. Otherwise, place 1 {Insight} into hand.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "scaling",
@@ -4756,7 +4753,6 @@
             "9",
             "10"
           ],
-          "rounding": "ceil",
           "stat": "CON",
           "suffix": "%",
           "substatBonus": {
@@ -4808,7 +4804,6 @@
                   "10.8",
                   "12"
                 ],
-                "rounding": "ceil",
                 "stat": "CON",
                 "suffix": "%",
                 "substatBonus": {
@@ -6080,7 +6075,8 @@
           "suffix": "%",
           "substatBonus": {
             "substat": "DeathResistance",
-            "multiplier": "2"
+            "multiplier": "2",
+            "mode": "additive"
           }
         },
         "Arg3": {
@@ -6677,10 +6673,19 @@
       "ownerAwakenerId": "awakener-0018",
       "slot": "Skill1",
       "kind": "command",
-      "descriptionTemplate": "Choose {Elation} or \"Curse\".\n{Self-Destruct: Finale}",
+      "descriptionTemplate": "Choose {Elation} or {Curse}.\n{Self-Destruct: Finale}",
       "descriptionArgs": {},
       "cardKeywords": [],
-      "cost": "2"
+      "cost": "2",
+      "upgrades": [
+        {
+          "id": "upgrade.enlighten.doll-inferno.borealis-visitor.skill.doll-inferno.self-destruct",
+          "operation": "link_only",
+          "upgraderId": "enlighten.doll-inferno.borealis-visitor",
+          "upgraderType": "enlighten",
+          "patch": {}
+        }
+      ]
     },
     {
       "id": "skill.doll-inferno.fates-descent",
@@ -8061,7 +8066,16 @@
           "id": "mechanic.retain"
         }
       ],
-      "cost": "3"
+      "cost": "3",
+      "upgrades": [
+        {
+          "id": "upgrade.enlighten.hameln.moonlit-rhapsody.skill.hameln.soul-overture",
+          "operation": "link_only",
+          "upgraderId": "enlighten.hameln.moonlit-rhapsody",
+          "upgraderType": "enlighten",
+          "patch": {}
+        }
+      ]
     },
     {
       "id": "skill.hameln.memory-rondo",
@@ -8124,7 +8138,16 @@
         }
       },
       "cardKeywords": [],
-      "cost": "100"
+      "cost": "100",
+      "upgrades": [
+        {
+          "id": "upgrade.enlighten.hameln.moonlit-rhapsody.skill.hameln.primal-chord",
+          "operation": "link_only",
+          "upgraderId": "enlighten.hameln.moonlit-rhapsody",
+          "upgraderType": "enlighten",
+          "patch": {}
+        }
+      ]
     },
     {
       "id": "skill.hameln.the-final-sonata",
@@ -8802,7 +8825,6 @@
             "27",
             "30"
           ],
-          "rounding": "ceil",
           "stat": "CON",
           "suffix": "%"
         },
@@ -8816,7 +8838,6 @@
             "7.2",
             "8"
           ],
-          "rounding": "ceil",
           "stat": "ATK",
           "suffix": "%"
         },
@@ -8866,7 +8887,6 @@
                   "27",
                   "30"
                 ],
-                "rounding": "ceil",
                 "stat": "CON",
                 "suffix": "%"
               },
@@ -8880,7 +8900,6 @@
                   "7.2",
                   "8"
                 ],
-                "rounding": "ceil",
                 "stat": "ATK",
                 "suffix": "%"
               },
@@ -8978,7 +8997,12 @@
             "20"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "CritRate",
+            "multiplier": "2",
+            "mode": "scale_base"
+          }
         },
         "Arg2": {
           "kind": "scaling",
@@ -9098,7 +9122,12 @@
             "30"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "CritRate",
+            "multiplier": "2",
+            "mode": "scale_base"
+          }
         },
         "Arg2": {
           "kind": "scaling",
@@ -9139,7 +9168,12 @@
                   "30"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritRate",
+                  "multiplier": "2",
+                  "mode": "scale_base"
+                }
               },
               "Arg2": {
                 "kind": "scaling",
@@ -9496,7 +9530,6 @@
             "8.1",
             "9"
           ],
-          "rounding": "ceil",
           "stat": "CON",
           "suffix": "%"
         },
@@ -9510,7 +9543,6 @@
             "8.1",
             "9"
           ],
-          "rounding": "ceil",
           "stat": "DEF",
           "suffix": "%"
         },
@@ -9546,7 +9578,6 @@
                   "8.1",
                   "9"
                 ],
-                "rounding": "ceil",
                 "stat": "CON",
                 "suffix": "%"
               },
@@ -9560,7 +9591,6 @@
                   "8.1",
                   "9"
                 ],
-                "rounding": "ceil",
                 "stat": "DEF",
                 "suffix": "%"
               },
@@ -10500,7 +10530,6 @@
         "Arg4": {
           "kind": "fixed",
           "value": "16",
-          "rounding": "ceil",
           "suffix": "%"
         }
       },
@@ -12235,7 +12264,12 @@
             "10"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "CritDamage",
+            "multiplier": "0.2",
+            "mode": "scale_base"
+          }
         },
         "Arg2": {
           "kind": "scaling",
@@ -12246,7 +12280,12 @@
             "13",
             "14",
             "15"
-          ]
+          ],
+          "substatBonus": {
+            "substat": "CritDamage",
+            "multiplier": "0.2",
+            "mode": "scale_base"
+          }
         },
         "Arg3": {
           "kind": "scaling",
@@ -12258,7 +12297,12 @@
             "95",
             "100"
           ],
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "CritDamage",
+            "multiplier": "0.2",
+            "mode": "scale_base"
+          }
         },
         "Arg4": {
           "kind": "fixed",
@@ -12275,7 +12319,12 @@
             "60"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "CritDamage",
+            "multiplier": "0.2",
+            "mode": "scale_base"
+          }
         }
       },
       "cardKeywords": [],
@@ -12302,7 +12351,12 @@
                   "10"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritDamage",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               },
               "Arg2": {
                 "kind": "scaling",
@@ -12313,7 +12367,12 @@
                   "13",
                   "14",
                   "15"
-                ]
+                ],
+                "substatBonus": {
+                  "substat": "CritDamage",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               },
               "Arg3": {
                 "kind": "scaling",
@@ -12325,7 +12384,12 @@
                   "95",
                   "100"
                 ],
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritDamage",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               },
               "Arg4": {
                 "kind": "fixed",
@@ -12342,7 +12406,12 @@
                   "60"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritDamage",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               }
             }
           }
@@ -12372,7 +12441,7 @@
       "ownerAwakenerId": "awakener-0033",
       "slot": "Rouse",
       "kind": "rouse",
-      "descriptionTemplate": "Mouchette gains [Energy:Arg1] Aliemus. {Rouse}: \"Dramatic Encounter\" DMG count +2. Each time \"Dramatic Encounter\" triggers, Mouchette's \"Strike\" Temporary Final DMG +25%.",
+      "descriptionTemplate": "Mouchette gains [Energy:Arg1] Aliemus. {Rouse}: {Dramatic Encounter} DMG count +2. Each time {Dramatic Encounter} triggers, Mouchette's \"Strike\" Temporary Final DMG +25%.",
       "descriptionArgs": {
         "Arg1": {
           "kind": "scaling",
@@ -12402,7 +12471,7 @@
           "ownerAwakenerId": "awakener-0033",
           "ownerAwakenerName": "Mouchette",
           "patch": {
-            "descriptionTemplate": "Mouchette gains [Energy:Arg1] Aliemus. {Rouse}: \"Dramatic Encounter\" DMG instances +2. The trigger limit per turn is increased to 5. Each time \"Dramatic Encounter\" is triggered, Mouchette's \"Strike\" Temporary Final DMG +25%. Immediately generate 2 Temporary {Mortal Blast} with 0 Arithmetica Cost."
+            "descriptionTemplate": "Mouchette gains [Energy:Arg1] Aliemus. {Rouse}: {Dramatic Encounter} DMG instances +2. The trigger limit per turn is increased to 5. Each time {Dramatic Encounter} is triggered, Mouchette's \"Strike\" Temporary Final DMG +25%. Immediately generate 2 Temporary {Mortal Blast} with 0 Arithmetica Cost."
           }
         }
       ]
@@ -13774,7 +13843,12 @@
             "40"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "RealmMastery",
+            "multiplier": "0.25",
+            "mode": "scale_base"
+          }
         }
       },
       "cardKeywords": [],
@@ -13815,7 +13889,12 @@
                   "40"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "RealmMastery",
+                  "multiplier": "0.25",
+                  "mode": "scale_base"
+                }
               },
               "Arg3": {
                 "kind": "fixed",
@@ -13860,7 +13939,12 @@
                   "40"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "RealmMastery",
+                  "multiplier": "0.25",
+                  "mode": "scale_base"
+                }
               },
               "Arg3": {
                 "kind": "fixed",
@@ -14140,7 +14224,12 @@
             "40"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "DamageAmplification",
+            "multiplier": "0.5",
+            "mode": "scale_base"
+          }
         },
         "Arg2": {
           "kind": "fixed",
@@ -14172,7 +14261,12 @@
                   "80"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "DamageAmplification",
+                  "multiplier": "0.5",
+                  "mode": "scale_base"
+                }
               },
               "Arg2": {
                 "kind": "fixed",
@@ -14222,7 +14316,12 @@
             "90"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "DamageAmplification",
+            "multiplier": "0.5",
+            "mode": "scale_base"
+          }
         },
         "Arg2": {
           "kind": "scaling",
@@ -14268,7 +14367,12 @@
                   "90"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "DamageAmplification",
+                  "multiplier": "0.5",
+                  "mode": "scale_base"
+                }
               },
               "Arg2": {
                 "kind": "scaling",
@@ -14749,7 +14853,12 @@
             "15"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "CritRate",
+            "multiplier": "0.2",
+            "mode": "scale_base"
+          }
         },
         "Arg3": {
           "kind": "scaling",
@@ -14762,7 +14871,12 @@
             "60"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "CritRate",
+            "multiplier": "0.2",
+            "mode": "scale_base"
+          }
         }
       },
       "cardKeywords": [
@@ -14805,7 +14919,12 @@
                   "15"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritRate",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               },
               "Arg3": {
                 "kind": "scaling",
@@ -14818,7 +14937,12 @@
                   "60"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritRate",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               },
               "Arg4": {
                 "kind": "fixed",
@@ -14962,7 +15086,12 @@
                   "15"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritRate",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               }
             }
           }
@@ -15016,7 +15145,6 @@
             "14.4",
             "16"
           ],
-          "rounding": "ceil",
           "stat": "ATK",
           "suffix": "%"
         },
@@ -15031,7 +15159,12 @@
             "12"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "CritRate",
+            "multiplier": "0.2",
+            "mode": "scale_base"
+          }
         }
       },
       "cardKeywords": [
@@ -15062,7 +15195,6 @@
                   "14.4",
                   "16"
                 ],
-                "rounding": "ceil",
                 "stat": "ATK",
                 "suffix": "%"
               },
@@ -15077,7 +15209,12 @@
                   "12"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritRate",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               },
               "Arg3": {
                 "kind": "fixed",
@@ -15182,7 +15319,12 @@
                   "30"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritRate",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               }
             }
           }
@@ -15239,7 +15381,12 @@
                   "30"
                 ],
                 "stat": "ATK",
-                "suffix": "%"
+                "suffix": "%",
+                "substatBonus": {
+                  "substat": "CritRate",
+                  "multiplier": "0.2",
+                  "mode": "scale_base"
+                }
               }
             }
           }
@@ -16805,6 +16952,19 @@
                 ],
                 "suffix": "%"
               },
+              "Arg2": {
+                "kind": "scaling",
+                "values": [
+                  "15",
+                  "18",
+                  "21",
+                  "24",
+                  "27",
+                  "30"
+                ],
+                "stat": "CON",
+                "suffix": "%"
+              },
               "Arg3": {
                 "kind": "scaling",
                 "values": [
@@ -17228,10 +17388,44 @@
       "upgrades": [
         {
           "id": "upgrade.talent.sanga.enlightenment-of-death.skill.sanga.strike",
-          "operation": "link_only",
+          "operation": "override_args",
           "upgraderId": "talent.sanga.enlightenment-of-death",
           "upgraderType": "talent",
-          "patch": {}
+          "ownerAwakenerId": "awakener-0045",
+          "ownerAwakenerName": "Sanga",
+          "patch": {
+            "descriptionArgs": {
+              "Arg1": {
+                "kind": "scaling",
+                "values": [
+                  "10",
+                  "12",
+                  "14",
+                  "16",
+                  "18",
+                  "20"
+                ],
+                "stat": "ATK",
+                "suffix": "%"
+              },
+              "Arg2": {
+                "kind": "scaling",
+                "values": [
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10"
+                ],
+                "substatBonus": {
+                  "substat": "DeathResistance",
+                  "multiplier": "0.03",
+                  "mode": "additive"
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -17273,10 +17467,44 @@
       "upgrades": [
         {
           "id": "upgrade.talent.sanga.enlightenment-of-death.skill.sanga.defense",
-          "operation": "link_only",
+          "operation": "override_args",
           "upgraderId": "talent.sanga.enlightenment-of-death",
           "upgraderType": "talent",
-          "patch": {}
+          "ownerAwakenerId": "awakener-0045",
+          "ownerAwakenerName": "Sanga",
+          "patch": {
+            "descriptionArgs": {
+              "Arg1": {
+                "kind": "scaling",
+                "values": [
+                  "10",
+                  "12",
+                  "14",
+                  "16",
+                  "18",
+                  "20"
+                ],
+                "stat": "DEF",
+                "suffix": "%"
+              },
+              "Arg2": {
+                "kind": "scaling",
+                "values": [
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10"
+                ],
+                "substatBonus": {
+                  "substat": "DeathResistance",
+                  "multiplier": "0.03",
+                  "mode": "additive"
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -17330,7 +17558,6 @@
                   "43.2",
                   "48"
                 ],
-                "rounding": "ceil",
                 "stat": "DEF",
                 "suffix": "%"
               },
@@ -17520,7 +17747,8 @@
                 "suffix": "%",
                 "substatBonus": {
                   "substat": "DeathResistance",
-                  "multiplier": "0.15"
+                  "multiplier": "0.15",
+                  "mode": "additive"
                 }
               }
             }
@@ -17769,7 +17997,8 @@
           ],
           "substatBonus": {
             "substat": "CritRate",
-            "multiplier": "0.2"
+            "multiplier": "0.2",
+            "mode": "additive"
           }
         }
       },
@@ -17812,7 +18041,8 @@
                 ],
                 "substatBonus": {
                   "substat": "CritRate",
-                  "multiplier": "0.2"
+                  "multiplier": "0.2",
+                  "mode": "additive"
                 }
               },
               "Arg4": {
@@ -19221,7 +19451,8 @@
           "suffix": "%",
           "substatBonus": {
             "substat": "SigilYield",
-            "multiplier": "0.15"
+            "multiplier": "0.15",
+            "mode": "additive"
           }
         },
         "Arg3": {
@@ -20075,7 +20306,6 @@
             "144",
             "160"
           ],
-          "rounding": "ceil",
           "stat": "ATK",
           "suffix": "%"
         },
@@ -20124,7 +20354,6 @@
                   "144",
                   "160"
                 ],
-                "rounding": "ceil",
                 "stat": "ATK",
                 "suffix": "%"
               },
@@ -20603,7 +20832,12 @@
             "60"
           ],
           "stat": "ATK",
-          "suffix": "%"
+          "suffix": "%",
+          "substatBonus": {
+            "substat": "DamageAmplification",
+            "multiplier": "0.75",
+            "mode": "scale_base"
+          }
         }
       },
       "cardKeywords": [],
@@ -21292,7 +21526,8 @@
                 "suffix": "%",
                 "substatBonus": {
                   "substat": "DamageAmplification",
-                  "multiplier": "0.2"
+                  "multiplier": "0.2",
+                  "mode": "additive"
                 }
               }
             }
@@ -21392,7 +21627,16 @@
         }
       },
       "cardKeywords": [],
-      "cost": "100"
+      "cost": "100",
+      "upgrades": [
+        {
+          "id": "upgrade.enlighten.xu.nirvanas-kiss.skill.xu.mist-bound-vow",
+          "operation": "link_only",
+          "upgraderId": "enlighten.xu.nirvanas-kiss",
+          "upgraderType": "enlighten",
+          "patch": {}
+        }
+      ]
     },
     {
       "id": "skill.xu.karmic-grave",
@@ -21746,7 +21990,8 @@
                 "value": "50",
                 "substatBonus": {
                   "substat": "RealmMastery",
-                  "multiplier": "0.5"
+                  "multiplier": "0.5",
+                  "mode": "additive"
                 }
               },
               "Arg7": {
@@ -21780,7 +22025,8 @@
                 "value": "50",
                 "substatBonus": {
                   "substat": "RealmMastery",
-                  "multiplier": "0.5"
+                  "multiplier": "0.5",
+                  "mode": "additive"
                 }
               },
               "Arg7": {
@@ -22097,18 +22343,19 @@
               "Arg2": {
                 "kind": "scaling",
                 "values": [
-                  "93.75",
-                  "100",
-                  "106.25",
-                  "112.5",
-                  "118.75",
-                  "125"
+                  "75",
+                  "80",
+                  "85",
+                  "90",
+                  "95",
+                  "100"
                 ],
                 "suffix": "%",
                 "substatBonus": {
                   "substat": "RealmMastery",
                   "multiplier": "0.25",
-                  "mode": "scale_base"
+                  "mode": "additive_factor",
+                  "baseMultiplier": "1.25"
                 }
               }
             }
@@ -22140,18 +22387,19 @@
               "Arg2": {
                 "kind": "scaling",
                 "values": [
-                  "93.75",
-                  "100",
-                  "106.25",
-                  "112.5",
-                  "118.75",
-                  "125"
+                  "75",
+                  "80",
+                  "85",
+                  "90",
+                  "95",
+                  "100"
                 ],
                 "suffix": "%",
                 "substatBonus": {
                   "substat": "RealmMastery",
                   "multiplier": "0.25",
-                  "mode": "scale_base"
+                  "mode": "additive_factor",
+                  "baseMultiplier": "1.25"
                 }
               }
             }

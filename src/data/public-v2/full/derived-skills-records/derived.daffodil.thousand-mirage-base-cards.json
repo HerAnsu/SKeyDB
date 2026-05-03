@@ -10,7 +10,7 @@
     "derived.daffodil.thousand-mirage-counter",
     "derived.daffodil.thousand-mirage-damage"
   ],
-  "descriptionTemplate": "Possible base Thousand Mirage cards before extra effects are attached.",
+  "descriptionTemplate": "Choose a base {Thousand Mirage} card before adding extra effects.",
   "descriptionArgs": {},
   "cardKeywords": []
 }

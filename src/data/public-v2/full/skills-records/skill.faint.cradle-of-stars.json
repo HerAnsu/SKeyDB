@@ -37,7 +37,8 @@
       "suffix": "%",
       "substatBonus": {
         "substat": "DeathResistance",
-        "multiplier": "2"
+        "multiplier": "2",
+        "mode": "additive"
       }
     },
     "Arg3": {

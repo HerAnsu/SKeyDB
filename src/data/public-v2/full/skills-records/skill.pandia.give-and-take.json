@@ -28,7 +28,12 @@
         "15"
       ],
       "stat": "ATK",
-      "suffix": "%"
+      "suffix": "%",
+      "substatBonus": {
+        "substat": "CritRate",
+        "multiplier": "0.2",
+        "mode": "scale_base"
+      }
     },
     "Arg3": {
       "kind": "scaling",
@@ -41,7 +46,12 @@
         "60"
       ],
       "stat": "ATK",
-      "suffix": "%"
+      "suffix": "%",
+      "substatBonus": {
+        "substat": "CritRate",
+        "multiplier": "0.2",
+        "mode": "scale_base"
+      }
     }
   },
   "cardKeywords": [
@@ -84,7 +94,12 @@
               "15"
             ],
             "stat": "ATK",
-            "suffix": "%"
+            "suffix": "%",
+            "substatBonus": {
+              "substat": "CritRate",
+              "multiplier": "0.2",
+              "mode": "scale_base"
+            }
           },
           "Arg3": {
             "kind": "scaling",
@@ -97,7 +112,12 @@
               "60"
             ],
             "stat": "ATK",
-            "suffix": "%"
+            "suffix": "%",
+            "substatBonus": {
+              "substat": "CritRate",
+              "multiplier": "0.2",
+              "mode": "scale_base"
+            }
           },
           "Arg4": {
             "kind": "fixed",
