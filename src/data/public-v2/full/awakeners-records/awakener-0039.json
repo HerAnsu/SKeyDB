@@ -49,7 +49,11 @@
   },
   "profile": {
     "title": "Pandia",
-    "awakerIntroduction": "Through {Rouse} and Command Cards, you can quickly stack {Counter}. The higher the DMG dealt, the more {Counter} you Obtain.\nThe higher your Current {Counter}, the greater the AoE DMG caused by Exalt. If there is only 1 enemy, Exalt will also deal an additional instance of DMG.\nIn this stage, Pandia will join the battle at Level 50, with Skill Level 5 and 3 Enlighten. Enemies will gain Enhance on their first turn.",
+    "birthday": "28-Oct",
+    "gender": "Female",
+    "height": "4'9.9''",
+    "weight": "86lbs",
+    "gnosticIndex": "21.06",
     "storySections": [
       {
         "kind": "introduction",
@@ -81,13 +85,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "\"Master, whip me.\"\nThe fire of desire burned in her eyes that should have dried up, melting wax dripping like tears.\nThirst, pain, curses, filth—all the humiliation she craved, all the pleasures she offered, finally arrived upon her in this moment."
       }
-    ],
-    "birthday": "28-Oct",
-    "gender": "Female",
-    "height": "4'9.9''",
-    "weight": "86lbs",
-    "gnosticIndex": "21.06",
-    "characteristic": "Counter Enemies    Multiple Hits",
-    "introduction": "Strikes rivals while gaining a large amount of Counter, leaving any would-be retaliators in excruciating pain."
+    ]
   }
 }

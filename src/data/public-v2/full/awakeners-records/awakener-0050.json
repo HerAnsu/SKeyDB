@@ -53,7 +53,12 @@
   },
   "profile": {
     "title": "Tulu",
-    "awakerIntroduction": "Use cards and Exalt to trigger Tentacle growth bursts.\nUtilize the abilities of the Tentacles to deal massive DMG to enemies.\nObtain additional Arithmetica and Aliemus in this stage.",
+    "birthday": "20-Aug",
+    "gender": "Male",
+    "height": "8'3''",
+    "weight": "70.5lbs",
+    "gnosticIndex": "49.51",
+    "faction": "Lemuria",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +90,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "His transcendent wisdom exacts a heavy toll on his body; he must sleep for more than fifteen hours a day, and even in his waking hours, he is haunted by a persistent lethargy.\nWithin his dreams, he sometimes feels the fury of the gods; at other times, he glimpses the intersection of fractured timelines. Occasionally, he even wanders into the furthest depths, coming face-to-face with the Divine itself.\nHe has never sought their revelations or prophecies, yet no matter how he tries to evade them, the visions always come to pass.\nHe never asked for offerings. To be worshiped, to be feared—these were burdens thrust upon him by others, and they hold no interest for him.\nTo be reborn was nothing more than an unwelcome interruption of an eternal dream.\nNo need for invocation. No need for prayer."
       }
-    ],
-    "birthday": "20-Aug",
-    "gender": "Male",
-    "height": "8'3''",
-    "weight": "70.5lbs",
-    "gnosticIndex": "49.51",
-    "characteristic": "Tentacle Burst    Tentacle Growth",
-    "introduction": "Commands Tentacles to subdue enemies and rapidly triggers explosive Tentacle damage."
+    ]
   }
 }

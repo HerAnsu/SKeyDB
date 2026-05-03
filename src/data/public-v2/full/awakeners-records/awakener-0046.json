@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Sorel",
-    "awakerIntroduction": "The lower the HP, the stronger the DMG and Healing.\nStockpile embryos in advance, and unleash a burst of Aliemus through infinite {Devour} to deal massive DMG at once.\nIn this level, Sorel will be brought into battle with a carrying Level of 50, Skill Level 5, and 3 Enlighten, starting with 40% HP.",
+    "birthday": "9-Feb",
+    "gender": "Female",
+    "height": "5'7''",
+    "weight": "130lbs",
+    "gnosticIndex": "23.1421",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Even now, as an Awakener, Sorel cannot forget those nobles who fawned over her; she cannot forget their faces, one after another, etched with flattery.\n\nHow utterly nauseating those smiling faces were: slick, mercenary, every one of them oozing desire and calculation, yet she had no choice but to weave a gentle web around each one.\n\nShe would weave the most meticulous of webs, reaching into every dark corner, winning over every person, seizing every piece of leverage. She had to be like water slowly brought to a boil, letting those people sink deeper and deeper, so that by the time they wished to remove their masks, they would find there was no escape.\n\nBut when she finally came to her senses, the one with no escape turned out to be herself.\n\nNo escape. No rest. No surrender.\n\nSorel has long since lost the right to turn back. Aside from standing above everyone, there is no other path for her to walk."
       }
-    ],
-    "birthday": "9-Feb",
-    "gender": "Female",
-    "height": "5'7''",
-    "weight": "130lbs",
-    "gnosticIndex": "23.1421",
-    "characteristic": "Multi-hit DMG    HP Healing",
-    "introduction": "Deals high-frequency damage with a graceful waltz and heals itself with the enemy's blood."
+    ]
   }
 }

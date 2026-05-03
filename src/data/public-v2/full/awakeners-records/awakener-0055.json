@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Vortice",
-    "awakerIntroduction": "A cheerful girl yearning for friendship. Inspired by her allies' Exalt, she can unleash coordinated attacks as {Pursuit}.\nHer massive cannon, frighteningly disproportionate to her slender frame, devours energy hungrily. When her restraints are released, the vortex that cannon generates will instantly level everything around it.\n\nIn this Stage, Vortice, Ramona, and Ogier will join the battle at Level 50, Skill Level 5, and Enlighten 3. At the Start of each turn, all Awakeners gain 50 Aliemus, draw 3 cards, and gain 3 Arithmetica.",
+    "birthday": "13-Jul",
+    "gender": "Female",
+    "height": "6' 20''",
+    "weight": "Anthropometry Not Applicable",
+    "gnosticIndex": "21.35",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Out on the boundless ocean, in the salty breeze, the ship gave her a family and friends beyond blood ties before the torrent swallowed everything. For the first time, she truly understood what loneliness was, and she never wanted to feel it again.\nYet for her best friend, her little family, she was willing to return to that pitch-black silence.\nAfter the darkness covered everything, she was reborn in a new form. Sure, this new life comes with inconveniences—she keeps forgetting how destructive her power is—but the chance to make more friends still fills her with pure joy.\nOf course, it would be even better if her best friend could remember the stories they once shared.\n\"Even better than better—super-duper better!\""
       }
-    ],
-    "birthday": "13-Jul",
-    "gender": "Female",
-    "height": "6' 20''",
-    "weight": "Anthropometry Not Applicable",
-    "gnosticIndex": "21.35",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "A cheerful and forthright girl. Her heavy weapon channels vortex energy to unleash devastating destruction."
+    ]
   }
 }

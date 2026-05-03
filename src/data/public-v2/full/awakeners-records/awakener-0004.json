@@ -55,7 +55,11 @@
   },
   "profile": {
     "title": "Alva",
-    "awakerIntroduction": "Possesses strong defense and single-target DMG capabilities; the higher the Shield, the greater the DMG dealt by {Precision Slash}.\nAfter {Rouse}, all DMG dealt by Alva will enjoy Shield bonus.\n{Combat Stance} has the ability to dispel Exalt Seals, and during Exalt, Symptoms or State Cards can be discarded to gain additional draws.\nIn this stage, Alva will be deployed at Level 50, Skill Level 5, Enlightened Level 3, and enemies will receive a buff in their first round.",
+    "birthday": "20-Jan",
+    "gender": "Female",
+    "height": "5'8''",
+    "weight": "143lbs",
+    "gnosticIndex": "22.3",
     "storySections": [
       {
         "kind": "introduction",
@@ -87,13 +91,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Alva had doubted her righteousness, but those bewildered days and nights brought her profound enlightenment.\nIllusions are tangible.\nThe initial starting point never changed; the justice she fights for is not an organization turned aggressor, not an individual shouting slogans, but a genuine existence within her beliefs.\n\nAll life, all innocence, all dreams, aspirations, and beautiful yearnings can easily turn to ash under gunfire.\nWhat is lost in war will never return, like hellish demons devouring all goodness.\nThus, those who start wars for selfish desires must also taste the ashes of destruction. There will be true heroes, with noble intentions, selflessly fighting for the bright future of all.\nThis is the value called justice.\n......\n\nWrong, then correct it.\nMake the sacrifices worthwhile, make this phantom pain of severed legs and limbs worthwhile.\nIf there is anything unfortunate destroyed, reclaim it with these new prosthetics.\nThose small and fragile things will never lose their shine.\nEverything is for that truly bloodless, tearless utopia."
       }
-    ],
-    "birthday": "20-Jan",
-    "gender": "Female",
-    "height": "5'8''",
-    "weight": "143lbs",
-    "gnosticIndex": "22.3",
-    "characteristic": "Anti-Seca    Alert Boost",
-    "introduction": "A veteran of the battlefield who excels at stacking large amounts of Shield and converting Shield into Blade for attacks."
+    ]
   }
 }

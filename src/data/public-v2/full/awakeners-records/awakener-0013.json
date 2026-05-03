@@ -53,6 +53,11 @@
   },
   "profile": {
     "title": "Doll",
+    "birthday": "11-Jan",
+    "gender": "Female",
+    "height": "5'2''",
+    "weight": "90lbs",
+    "gnosticIndex": "22",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "A new star of science and knowledge rises in an ordinary worker's family.\nMost of Doll's childhood was filled with the sounds of cylinder throbs and gear operations.\nBut a love for machinery was not enough to support the girl in climbing the rugged and steep mountain of science.\nWhat led her onto the path of knowledge was a plague.\nAn unknown madness raged through the city; hospitals were overcrowded, the morgue was overwhelmed, and everyone was on edge.\n\"The city's graveyards aren't enough—dig up grandma or burn mom, you have to choose one.\"\nThus, Doll watched her mother disappear into the flames.\nUnlike others who were cremated, among the fragments and ashes she once called \"mother,\" there flowed a shimmering silver mass.\n\"I want to know if I can see her again.\"\n\"I want to know if her kind soul is inside that.\"\n\"I want to know if that silver substance is the genesis of life, if it is the essence of the soul.\"\n\"I want to know if everything in this world has a common starting point.\"\nBefore getting the answers, Doll will not bow to the D-phenomenon."
       }
-    ],
-    "birthday": "11-Jan",
-    "gender": "Female",
-    "height": "5'2''",
-    "weight": "90lbs",
-    "gnosticIndex": "22",
-    "characteristic": "Cleanse Vulnerable    HP Recovery",
-    "introduction": "Provides their team with perfected research results, granting Aliemus and restoring a large amount of HP."
+    ]
   }
 }

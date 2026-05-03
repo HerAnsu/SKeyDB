@@ -54,7 +54,11 @@
   },
   "profile": {
     "title": "Winkle",
-    "awakerIntroduction": "Possesses strong defense and the ability to provide Aliemus.\nExalt grants a significant amount of Aliemus to another Awakeners, enabling them to release more Exalts or even multiple Exalts in one turn.\n{Rouse} grants {Counter} when applying Shield, providing {Counter} against multi-hit enemies.\nIn this quest, Winkle and Lotan, both at Level 50 with Skill Level 5 and Enlighten Level 3, will join. They gain benefits during trial battles, while enemies are strengthened in the first turn.",
+    "birthday": "7-Sep",
+    "gender": "Female",
+    "height": "5'6''",
+    "weight": "123lbs",
+    "gnosticIndex": "21.7",
     "storySections": [
       {
         "kind": "introduction",
@@ -86,13 +90,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Survival is both instinct and an inescapable burden. In the face of a death that erases memory, she alone is proof they ever existed—her parents, her friends, everything from her hometown.\nSo, she fled to an untainted world, to this ocean-covered planet, finding new life in the body of a deceased human girl.\nBut the black death has infinite patience.\nHuman eyes cannot see the Dissolution, but she knows what the cold at the edge of consciousness means, what the darkness in her mind represents—what humans call Dissolution has caught up, unknowingly binding her Spirit and Body.\nShe tried to flee over and over, only to fail each time, until utterly exhausted, her Spirit torn to its limit, she dragged her Body to the one place she hoped might offer salvation.\nNo matter what, she wanted to live."
       }
-    ],
-    "birthday": "7-Sep",
-    "gender": "Female",
-    "height": "5'6''",
-    "weight": "123lbs",
-    "gnosticIndex": "21.7",
-    "characteristic": "Aliemus Supply    Delayed Draw",
-    "introduction": "Provides Aliemus to other allies and spends all cards in hand to generate a large amount of Shield."
+    ]
   }
 }

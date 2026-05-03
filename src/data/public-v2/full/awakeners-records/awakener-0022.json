@@ -51,7 +51,11 @@
   },
   "profile": {
     "title": "Hameln",
-    "awakerIntroduction": "Hameln elegantly manipulates notes to reduce card Arithmetica Costs and allow them to take effect multiple times.\nHis performance delivers continuous {Pierce DMG}, weakening the enemy's will and dismantling their defenses.\nIn this trial, try Lv. 50, Skill Lv. 5, Enlighten 3 Hameln, who gains 35 additional Aliemus per turn.",
+    "birthday": "21-Sep",
+    "gender": "Male",
+    "height": "5'10''",
+    "weight": "121lbs",
+    "gnosticIndex": "22.46",
     "storySections": [
       {
         "kind": "introduction",
@@ -83,13 +87,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "His life was monotonous and dull, with loneliness as a contant companion, alongside feelings of resentment, confusion and hatred that had long been digested since before he could even remember.\nNow, he has become one with music, transcending mere passion—unavoidable, inescapable.\nAll that remains to him is music.\nKeep moving upward; do not look back at those nine hundred and ninety-nine steps behind.\nAfter all, he has already touched the ultimate melody, the destined flute.\nAccept this endless flow of music, and let it saturate your soul and dreams.\nFor he has long since used his own soul as an instrument to resonate with yours."
       }
-    ],
-    "birthday": "21-Sep",
-    "gender": "Male",
-    "height": "5'10''",
-    "weight": "121lbs",
-    "gnosticIndex": "22.46",
-    "characteristic": "Suggested Translation",
-    "introduction": "His Rondino cards deal damage and allow your cards to take effect multiple times, while also generating a large amount of \"Insight\"."
+    ]
   }
 }

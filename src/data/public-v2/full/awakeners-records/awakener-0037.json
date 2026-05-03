@@ -49,7 +49,11 @@
   },
   "profile": {
     "title": "Nymphaea",
-    "awakerIntroduction": "Quickly stack {Poison} on enemies using Command Cards, then trigger the enemy's {Poison} effect with Exalt to deal massive DMG.\nThe DMG and {Poison} from {Midnight Tide} will increase as you play Symptom Cards.\nThe {Poison} applied by Exalt will increase with each use.\nIn this battle, bring Nymphaea with a Level of 50, Skill Level 5, and 3 Enlightened, and Obtain 3 Symptom Cards at the Start of the Battle.",
+    "birthday": "7-Dec",
+    "gender": "Female",
+    "height": "5'1''",
+    "weight": "90lbs",
+    "gnosticIndex": "21.05",
     "storySections": [
       {
         "kind": "introduction",
@@ -81,13 +85,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "I love the sea. Febvre's sea. The Prussian blue sea. The sea with warm, moist breezes. The sea that looks like a painting from the sanatorium's window. The sea with returning sails. The sea nurturing countless lives like a mother.\nNow, I've finally returned to the tranquil sea, back to before birth, back to being enveloped in my mother's amniotic fluid. The currents gather the unfortunate Fragments, piecing me together among bones and coral. The deep-sea fish swim past, listening to the laments of fate's suffering.\nMother, if I could be born again, would I be happier?"
       }
-    ],
-    "birthday": "7-Dec",
-    "gender": "Female",
-    "height": "5'1''",
-    "weight": "90lbs",
-    "gnosticIndex": "21.05",
-    "characteristic": "Trigger Poison    Weakness to Enemy",
-    "introduction": "Applies Poison and Weakness to continuously torment opponents while ensuring your team's safety."
+    ]
   }
 }

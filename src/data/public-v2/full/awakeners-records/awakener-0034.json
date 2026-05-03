@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Murphy",
-    "awakerIntroduction": "Possesses unique protective abilities that transform enemy DMG into {Sacrifice}.\nUsing cards can grant a number of Tentacles that ignore the Tentacle Limit.\nFlexibly overdrawing {Sacrifice} to exchange for DEF can provide more powerful short-term combat power.\nIn this stage, \"Murphy\" will be deployed at Level 50, Skill Level 5, and Enlighten Level 3.",
+    "birthday": "22-Dec",
+    "gender": "Female",
+    "height": "4'8.7''",
+    "weight": "92.5lbs",
+    "gnosticIndex": "21.21",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "The arrogance of disregarding others is merely an empty show of force. Beneath that elegant dress lies a rebellious heart known only to herself.\nTrapped in a beautiful cage crafted by sacred narratives, Murphy understands better than anyone the hypocrisy of humans and gods: the gaze of the congregation upon her is nothing but fear and pity, and the care shown by her \"nurturers\" is merely for a sacrificial offering. The end goal of her mission will not be glory, but her own death — she already knows the outcome. How could she be lost in the distant kingdom painted by doctrines?\nThe plans for deification, the revival of the old king, so many unrealistic expectations placed upon her — yet no one has ever cared whether she is willing to accept a doomed fate for an uncertain future.\nThe canary does not wish to remain forever trapped in a cage; thus it flaps its wings toward the thorny fence. Determined to wager her life to break free from the shackles of destiny, she must now decide the direction of her flight herself.\n\"My name is Murphy... don't think you can order me around! I know what I should do and what I shouldn't do.\""
       }
-    ],
-    "birthday": "22-Dec",
-    "gender": "Female",
-    "height": "4'8.7''",
-    "weight": "92.5lbs",
-    "gnosticIndex": "21.21",
-    "characteristic": "Tentacle Activation    Replenish Arithmetica",
-    "introduction": "Withstands a Sacrifice Ritual to resist high enemy damage and commands Tentacles to launch a full-scale attack."
+    ]
   }
 }

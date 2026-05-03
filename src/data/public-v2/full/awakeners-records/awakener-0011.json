@@ -54,7 +54,11 @@
   },
   "profile": {
     "title": "Corposant",
-    "awakerIntroduction": "A Resilient Maiden, one who faces death unflinchingly can burst with limitless potential when confronted with the threat of death.\nThe {Pilot} of vessels, a Mareel Glow in the night sky, capable of generating numerous Tentacles while reconfiguring your hand to guide you to Victory with the {Aftershock} Effect.\nIn this stage, you will bring Corposant into battle at Level 50, Skill Level 5, and Enlighten Level 3. Each Turn, draw 2 additional cards and Obtain 1 Tentacle.",
+    "birthday": "3-Oct",
+    "gender": "Female",
+    "height": "5'9''",
+    "weight": "145lbs",
+    "gnosticIndex": "23",
     "storySections": [
       {
         "kind": "introduction",
@@ -86,13 +90,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Until the last moment, Corposant was diligently fulfilling her duties, yet the ship she piloted still sank.\n\nEvery night, she dreams of those lost passengers: water flooding into the cabins, sea monsters' Tentacles rampaging, people drowning, jumping overboard, kneeling for one last guidance, but hope was lost.\n\nThis brutal reality reproaches her, tortures her—she has desecrated her profession.\n\nFor this, she must be punished, and the lightning that eternally entwines and torments her is the retribution. But it's not enough; she must atone for her negligence.\n\nFortunately, the great entity provided the answer: when the Divine Realm descends, the world will become paradise.\n\n\"So, to quell the eternal roaring of the sea, for the innocent buried at sea, for guiding the direction of all beings, I request the Divine Realm's arrival.\"\n\nThis is her last, final navigation."
       }
-    ],
-    "birthday": "3-Oct",
-    "gender": "Female",
-    "height": "5'9''",
-    "weight": "145lbs",
-    "gnosticIndex": "23",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "Generates a large number of Tentacles and helps reshuffling your hand. The \"Aftershock\" effect unlocks greater potential."
+    ]
   }
 }

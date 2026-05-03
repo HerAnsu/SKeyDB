@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Liz",
-    "awakerIntroduction": "At turn end, if \"Green Flame\" is in your hand or the {Ultra Space}, it will upgrade to {Corrupted Green Flame}. After upgrading, it can deal higher DMG and apply {Poison}.\nWhen facing multi-hit Damage, you can gain multiple {Green Flames} through {Moth-Trapping Fire}.\nExalt can release all Liz's cards in hand without Arithmetica, accumulating a large number of {Green Flames} to deal extremely high burst Damage.\nIn this level, you will bring \"Liz\" at level 50, skill level 5, and enlightenment level 3 into battle, gaining 7 {STR} and 15 {Chaos} per turn, and after the start of the {Ultra Round}, an additional 100 {Chaos}. The enemies will receive an Enhance on their first turn.",
+    "birthday": "31-Jan",
+    "gender": "Female",
+    "height": "5'5''",
+    "weight": "?",
+    "gnosticIndex": "?",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "This is the Promised Land, an artistic utopia, the ultimate paradise—dance should be the dancer's home, maintaining eternal purity.\nAs long as I burn, filth cannot taint our Church... This is my mission, my hope... Allow me to burn brightly, and I will cleanse all impurity for everyone."
       }
-    ],
-    "birthday": "31-Jan",
-    "gender": "Female",
-    "height": "5'5''",
-    "weight": "?",
-    "gnosticIndex": "?",
-    "characteristic": "Poison Burst    Resource Cycle",
-    "introduction": "Constantly grows the emerald flame in Ultra Space or in hand, then unleashes Exalt to release it all at once, burning away enemies."
+    ]
   }
 }

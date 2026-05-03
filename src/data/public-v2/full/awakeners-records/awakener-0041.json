@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Pollux",
-    "awakerIntroduction": "A pious and noble Divus of the Lightbearer, his {Sacred Heart} perpetually yearning for the dawn. He harnesses divine brilliance to periodically enhance card effects and wields the authority of a Divus to pass judgment upon all sins that dwell in shadow.\nIn this stage, Pollux debuts at level 50 with skill level 5 and enlightenment 3, gaining 50 aliemus and 1 \"Insight\" each turn.",
+    "birthday": "20-Jun",
+    "gender": "Male",
+    "height": "5'8''",
+    "weight": "141lbs",
+    "gnosticIndex": "25.46",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "His entire life was lived under manipulated strings, and the script written long ago was a laughable lie that made him constantly lose, forget, and miss out. \n When he was young, what he desired most was to freely flap his wings and see the world beyond that lake. \n It wasn't until he lost everything for this wish that he could no longer regard such a light and carefree life as his ultimate dream. \n Endless rage ignited that pitch-black heart, and the pain and hatred he repressed like blood needed to be washed away with the deaths of those false believers."
       }
-    ],
-    "birthday": "20-Jun",
-    "gender": "Male",
-    "height": "5'8''",
-    "weight": "141lbs",
-    "gnosticIndex": "25.46",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "Periodically enhance card effects using Pollux's Radiant Light. The authority of the Divus can judge all dark evils."
+    ]
   }
 }

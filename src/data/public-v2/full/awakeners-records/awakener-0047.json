@@ -55,7 +55,11 @@
   },
   "profile": {
     "title": "Tawil",
-    "awakerIntroduction": "The all-knowing sage, possessing infinite wisdom, skillfully masters all skills, searching for the best path among countless possibilities.\nCan provide a large amount of Keyflare for the team and also convert Keyflare into winged strikes against enemies.\nIn this level, Tawil and Lotan will participate at Level 50, Skill Level 5, and Enlighten Level 3, gaining 100 Aliemus and increasing Keyflare Regen by 50 at the start of battle.",
+    "birthday": "31-Dec",
+    "gender": "Female",
+    "height": "5'5''",
+    "weight": "???",
+    "gnosticIndex": "Immeasurable",
     "storySections": [
       {
         "kind": "introduction",
@@ -87,13 +91,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "As the Aeon of Sagacity's Proxy and Gatekeeper, Tawil has not lacked the desire to explore Their own essence. Tawil yearns to walk the earth like those The Gatekeeper watches over, witnessing the changes in civilization and the vicissitudes of history, gathering all They see into a treasury called 'Omniscience.' But Their existence does not allow Them to abandon Their post. Deep in Tawil's heart, perhaps what They envy most is the girl who carries a thread of Their will..."
       }
-    ],
-    "birthday": "31-Dec",
-    "gender": "Female",
-    "height": "5'5''",
-    "weight": "???",
-    "gnosticIndex": "Immeasurable",
-    "characteristic": "Suggested Translation",
-    "introduction": "Tawil knows all and can utilize any Skill for their own purposes, using Keyflare as a resource to launch attacks."
+    ]
   }
 }

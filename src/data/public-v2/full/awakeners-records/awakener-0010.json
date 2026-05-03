@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Clementine",
-    "awakerIntroduction": "The gentle and elegant psychologist can gradually sense the emotional buildup of the patients during communication, accumulating {Symbiosis}. After releasing the Exalt, they can consume {Symbiosis} to manipulate their spirit state, instilling {Fear} to dismantle the enemies' combat will, or implanting trauma to instantly {Destroy} their mental defenses.\nIn this level, Clementine will fight with level 50, skill level 5, and Enlighten 3, with Keyflare Regen increased by 50, gaining 20 Aliemus per round.",
+    "birthday": "16-Aug",
+    "gender": "Female",
+    "height": "5'5.7''",
+    "weight": "102lbs",
+    "gnosticIndex": "21.31",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "At first, some trivial pain could satisfy her. \n\nThen, her craving for sweetness led her to embrace more and more malice during psychological guidance. \n\nThis malice surged like a river, flooding one after another island of the soul. \n\nBut it was not enough. Far from it. \n\nOnly with the awakening of that ancient long dream, will the entire world turn into a sea of pain, bringing ultimate joy. \n\nSo, she was excited, she prayed, she waited. \n\nWhen everything merged into chaos, she would bow her head, joyfully savoring the most extreme lament of the world. \n\nEven if this sea of pain would drown her."
       }
-    ],
-    "birthday": "16-Aug",
-    "gender": "Female",
-    "height": "5'5.7''",
-    "weight": "102lbs",
-    "gnosticIndex": "21.31",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "Builds up Symbiosis, hypnotizes enemies to reduce their damage, or inflicts Trauma on enemies to increase the damage they take."
+    ]
   }
 }

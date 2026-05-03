@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Mouchette",
-    "awakerIntroduction": "A lively maiden wielding a massive axe. She transforms into a frenzied warrior in battle, unleashing even greater combat power in adversity.\nWhen working in tandem with her allies, Mouchette's Battle Intent is greatly stimulated, and her offensive becomes increasingly fierce with the use of Strikes.\nIn this stage, a Level 50 Mouchette with Skill Level 5 and Enlighten Level 3 will join the battle, gaining 50 Aliemus, drawing 3 cards, and obtaining 3 Arithmetica at turn start.",
+    "birthday": "28-Nov",
+    "gender": "Female",
+    "height": "5'4.6''",
+    "weight": "99lbs",
+    "gnosticIndex": "Unstable",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "One day, she will return to her own world.\n\nBut before that, she wants to see the conclusion of this world—\n\nWill the one known as the \"Keeper\" be consumed by this chaotic and terrifying world, or will they shine brightly, bringing true redemption and light to this crumbling world?\n\nThis is a mystery, a challenge, a gamble.\n\nAnd she wants to know the answer."
       }
-    ],
-    "birthday": "28-Nov",
-    "gender": "Female",
-    "height": "5'4.6''",
-    "weight": "99lbs",
-    "gnosticIndex": "Unstable",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "A lively maiden wielding a massive axe. She transforms into a frenzied warrior in battle, unleashing even greater combat power in adversity."
+    ]
   }
 }

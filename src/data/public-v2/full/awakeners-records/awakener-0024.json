@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Horla",
-    "awakerIntroduction": "Horla's 4 Psalm cards feature distinct effects, Trigger a {Leap} to enter one of four emotional states: {Happiness}, {Anger}, {Grief}, or {Fear}.\nEach state grants unique bonuses to all Awakeners, with Horla's Exalt receiving enhanced effects.\nIn this trial, try out Level 50 Horla and Lotan with Skill Level 5 and Enlighten Level 3. The enemy will gain enhancements on the first turn.",
+    "birthday": "14-Feb",
+    "gender": "Female",
+    "height": "5'42''",
+    "weight": "89lbs",
+    "gnosticIndex": "21.12",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "\"Horla, from today onward, I will treasure all your poems. In the future, I'll trade my flowers for your poems!\"\n\"Colette, you will definitely come back to save me...right?\""
       }
-    ],
-    "birthday": "14-Feb",
-    "gender": "Female",
-    "height": "5'42''",
-    "weight": "89lbs",
-    "gnosticIndex": "21.12",
-    "characteristic": "Delayed Healing    Weaken Enemy",
-    "introduction": "Different Emotions provide powerful buffs and alter the effect of her Exalt."
+    ]
   }
 }

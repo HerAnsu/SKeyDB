@@ -54,7 +54,12 @@
   },
   "profile": {
     "title": "Miryam",
-    "awakerIntroduction": "Command Cards possess unique {Ritual} effects that convert {Sacrament} to enhance them.\nUsing Exalt not only grants more {Sacrament}, but also yields different effects based on your Tentacle Stances.\nThe three {Rouse} abilities play sequentially, each offering distinct effects, ultimately granting continuous acquisition of the powerful buff card {Divine Realm's Illusion}.\nIn this stage, Miryam and Aurita (Level 50, Skill Level 5, Enlighten Level 3) are deployed. Maximum Hand Size +2. Miryam starts with 35 Aliemus and gains 20 Aliemus each turn.",
+    "birthday": "2-Jul",
+    "gender": "Female",
+    "height": "5'7''",
+    "weight": "110lbs",
+    "gnosticIndex": "22.61",
+    "faction": "Lemuria",
     "storySections": [
       {
         "kind": "introduction",
@@ -86,13 +91,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "The unenlightened are pitiful, for they cannot comprehend the true essence of immortality. Worldly conflicts are meaningless, as they are but shallow diversions in the grand scheme of things.\nI have gazed upon it, I have tasted it, and I have long understood my purpose.\nBut, oh, how cruel is fate! Why did you... not choose your most loyal Priest once more?\n—It must be that you are bestowing upon me a trial, testing my faith. In the farthest reaches from my homeland, in moments devoid of your grace, my faith has endured through millennia, unwavering.\nI could not be the one to welcome your rebirth, but I have prepared everything for it. I will seek out a new eternal realm for you... The mix of resentment and honor weighs heavily upon me, and I must bear this responsibility alone...\nForgive my ugly jealousy. As long as I can once again witness your majesty, as long as I can rebuild your kingdom, I am willing to do anything."
       }
-    ],
-    "birthday": "2-Jul",
-    "gender": "Female",
-    "height": "5'7''",
-    "weight": "110lbs",
-    "gnosticIndex": "22.61",
-    "characteristic": "Tentacle Generation    Aliemus Support",
-    "introduction": "She uses her power as the High Priestess to command more Tentacles, and wields the Sacrificial Dagger to poison enemies."
+    ]
   }
 }

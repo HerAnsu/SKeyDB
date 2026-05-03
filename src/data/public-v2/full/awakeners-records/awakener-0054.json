@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Xu",
-    "awakerIntroduction": "An elegant and alluring Eastern \"deity.\" When she lowers her fan, all beings fall entranced by her lethal charm.\n\nThe pleasure born of desire clings like a bone-deep {Poison}, luring mortals to willingly dissolve into silence within the vows of passion she bestows.\nIn this stage, you will deploy Xu and Ramona at Level 50, Skill Level 5, and Enlighten Level 3. At turn start, place 1 \"Adv. Insight\" and 1 {Embryo} into hand; inflict 1 stack of {Spellbound} on all enemies.",
+    "birthday": "1-Jun",
+    "gender": "Female",
+    "height": "?+5'52''",
+    "weight": "?+105lbs",
+    "gnosticIndex": "43.34",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Have you ever felt the world grow so deathly quiet that you felt the urge to shatter something, just to hear the sound?\n\nLust is the silver vase she hurls; the prey startled by its chime... they will slaughter for love and be slaughtered by love, until their spirit is bled dry and only a hollow shell remains.\n\nThen, those drained husks will offer her ever greater dominion, staining everything in sight with a bloody, delicious chaos.\nA chaos that never ends."
       }
-    ],
-    "birthday": "1-Jun",
-    "gender": "Female",
-    "height": "?+5'52''",
-    "weight": "?+105lbs",
-    "gnosticIndex": "43.34",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "Her intoxicating charm shatters the enemy's will to fight, and the bone-deep poison seeping through their body erupts violently the moment they succumb."
+    ]
   }
 }

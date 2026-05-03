@@ -52,6 +52,11 @@
   },
   "profile": {
     "title": "Aurita",
+    "birthday": "8-Jun",
+    "gender": "Female",
+    "height": "5'10.5''",
+    "weight": "45lbs",
+    "gnosticIndex": "21.11",
     "storySections": [
       {
         "kind": "introduction",
@@ -83,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "A fishing village with exceptionally clear waters, its shores adorned like the Milky Way on a midsummer night, resounds with the cheerful laughter of caravans—those memories that no longer exist occasionally flash back, only to be quickly forgotten.\nAs long as there are companions constantly emerging by her side, new memories can always be created, and the jellyfish are always present—this is what Aurita believes.\nAfter all, it is in their nature and destiny as jellyfish to thrive by drifting, multiplying, and overwhelming enemies with sheer numbers."
       }
-    ],
-    "birthday": "8-Jun",
-    "gender": "Female",
-    "height": "5'10.5''",
-    "weight": "45lbs",
-    "gnosticIndex": "21.11",
-    "characteristic": "Multi-hit DMG    Pierce Protection",
-    "introduction": "Continuously splits glands to perform low Arithmetica Cost attacks, and consumes all glands at once to launch a full-scale assault when necessary."
+    ]
   }
 }

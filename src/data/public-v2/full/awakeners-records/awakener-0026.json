@@ -55,7 +55,11 @@
   },
   "profile": {
     "title": "Karen",
-    "awakerIntroduction": "Possesses powerful HP Healing and flexible Arithmetica supply ability.\nBoth {Toad Stew} and {Silent Fealty} have {Retain}. Each {Retain} turn will obtain different growth.\nExalt, {Toad Stew}, and {Marvelous Cuisine} can all inflict {Poison} on all enemies.\nIn this level, Karen will be deployed at Level 50, with Skill Level 5 and 3 Enlighten. The enemy's first Attack will receive Enhance.",
+    "birthday": "9-Sep",
+    "gender": "Female",
+    "height": "5'1''",
+    "weight": "99lbs",
+    "gnosticIndex": "21.08",
     "storySections": [
       {
         "kind": "introduction",
@@ -87,13 +91,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Ruby earrings, sapphire necklaces, beautiful hair accessories woven from garnet and malachite... How dazzling, how beautiful, how full of charm they are! Wherever they appear, people flock to them.\nThese jewelry pendants are not mere \"decorative items,\" no, they are the true stars of the world. Noble ladies wearing turquoise necklaces are immortalized in songs by poets; elderly ladies adorned with emeralds are seen as symbols of nobility. Even those lowborn girls, with a cheap bracelet on their wrist, can earn the endearing title of \"Pearl Girl,\" attracting countless gazes.\nEven dry branches and putrid bones can become objects of everyone's desire when adorned with a string of beautiful jewels.\nIf she could wear those necklaces and earrings, those bracelets and headpieces, surely she would become the center of attention as well."
       }
-    ],
-    "birthday": "9-Sep",
-    "gender": "Female",
-    "height": "5'1''",
-    "weight": "99lbs",
-    "gnosticIndex": "21.08",
-    "characteristic": "Replenish Arithmetica    Resist Death",
-    "introduction": "Provides your team with a large amount of Arithmetica, restores HP with Cuisine, and uses Creepy Cuisine to poison and kill enemies."
+    ]
   }
 }

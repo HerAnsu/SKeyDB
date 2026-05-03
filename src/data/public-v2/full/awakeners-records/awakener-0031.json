@@ -53,6 +53,11 @@
   },
   "profile": {
     "title": "Lotan",
+    "birthday": "21-Mar",
+    "gender": "Female",
+    "height": "5'6''",
+    "weight": "25ton",
+    "gnosticIndex": "21",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Born from Chaos, she embodies pure chaotic power, an untamed free soul, and an undefined order.\nShe craves challenges and battles; only by unleashing her overwhelming destructive urge can she fulfill her creator's sole wish.\n—To safeguard the planet until the end, she has long yearned for a fierce Battle."
       }
-    ],
-    "birthday": "21-Mar",
-    "gender": "Female",
-    "height": "5'6''",
-    "weight": "25ton",
-    "gnosticIndex": "21",
-    "characteristic": "AoE Damage    Multi-Hit Damage",
-    "introduction": "Deals multiple instances of \"Strike\" damage in succession and summons a world-ending beast to devour enemies."
+    ]
   }
 }

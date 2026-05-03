@@ -60,7 +60,11 @@
       },
       "profile": {
         "title": "\"24\"",
-        "awakerIntroduction": "Possesses both Depressed and Manic stances, starting in the Depressed stance. Releasing Exalt will switch stances, and Card effects vary in different stances.\nBoth Exalt and {Rouse} have unique Effects in different Realms. Exalt will also trigger different Effects based on the Depressed and Manic stances.\nIn this stage, \"24\" and teammates from different Realms will be deployed, all at Level 50, Skill Level 5, Gnosis Level 3.",
+        "birthday": "19-Jul",
+        "gender": "Female",
+        "height": "5'6''",
+        "weight": "?",
+        "gnosticIndex": "21.86",
         "storySections": [
           {
             "kind": "introduction",
@@ -92,14 +96,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "On a snowy day in November that year, 24 fell ill.\nAfter a week of high-intensity work, she developed a severe fever and lay in bed for several days.\nIn a daze, she seemed to hear little mice whimpering in her ears. After an unknown amount of time, someone stood beside her.\nShe recognized those eyes — it was the child from the sewer. Covered in mud, she handed a dirty pill to 24.\n\"For you, take it,\" the child said bluntly, her voice pleasant — it turned out she was a girl.\n24 looked at the wounds on her elbow and face but didn't ask where the pills came from. She tightly grasped the girl's hand.\nThe girl awkwardly hummed a few times, coolly saying, \"I won't leave. I'll go when you're better.\"\nEven if I get better, don't leave.\n24 silently replied in her heart.\nThe first winter snow fell in Londinium for a whole week. On the day the snow stopped, 24 was very happy because not only had her fever subsided, but she had also gained a sister."
           }
-        ],
-        "birthday": "19-Jul",
-        "gender": "Female",
-        "height": "5'6''",
-        "weight": "?",
-        "gnosticIndex": "21.86",
-        "characteristic": "High Single-Hit DMG    Exalt Amplification",
-        "introduction": "Adapts to different realms in various forms, acting as a hunter who constantly switches between \"Depressive\" and \"Manic\" personalities."
+        ]
       }
     },
     {
@@ -155,7 +152,11 @@
       },
       "profile": {
         "title": "Agrippa",
-        "awakerIntroduction": "Possesses powerful defensive capabilities and the ability to inflict {Poison}. Triggering {Devour} grants permanent attack and defense growth.\n{Reluctant Alms} has the ability to double the current {Embryo Fusion}.\nWhen {Devour} is triggered, {Colorless Spiral} can return from the Discard Pile to the Hand, allowing it to be played multiple times in a turn.\nIn this level, Agrippa will join the battle at Level 50, with Skill Level 5 and 3 Enlightenments. Each turn, she gains 30% {Embryo Fusion} and 10 Aliemus.",
+        "birthday": "15-Apr",
+        "gender": "Female",
+        "height": "5'2''",
+        "weight": "90lbs",
+        "gnosticIndex": "?",
         "storySections": [
           {
             "kind": "introduction",
@@ -187,14 +188,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "It was... a dazzling daylight and heat wave, an ecstasy of indulgent revelry.\nCheers roared like waves, the warriors bathed in blood and glory in the arena.\nThe girl returned home reluctantly, still wielding her whip, mercilessly striking the dazed gladiator in front of her.\n\nThis was her battlefield.\n\nThere were no thrilling duels, no flowers or applause. The tall warriors were the gentlest reindeer; all her curses and fury dissolved into the dark void, leaving not even a whisper of wind."
           }
-        ],
-        "birthday": "15-Apr",
-        "gender": "Female",
-        "height": "5'2''",
-        "weight": "90lbs",
-        "gnosticIndex": "?",
-        "characteristic": "Alert Growth    Poison Combo",
-        "introduction": "Provides a large amount of Embryo Fusion while injecting toxins into enemies to disrupt their sanity."
+        ]
       }
     },
     {
@@ -252,6 +246,11 @@
       },
       "profile": {
         "title": "Aigis",
+        "birthday": "27-Jun",
+        "gender": "Female",
+        "height": "4'6''",
+        "weight": "70lbs",
+        "gnosticIndex": "25.8",
         "storySections": [
           {
             "kind": "introduction",
@@ -283,14 +282,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Fearful of light, fearful of gaze, fearful of love, fearful of embrace.\nDesiring light, desiring gaze, desiring love, desiring embrace.\nIf only I could avoid harming others, if only I wouldn't trouble others, if only I were as smart as Tiuog, if only I were as brave as Jenkin...\nThen I wouldn't be scorched by the blazing sun, nor despised by others, right?\nWith unfounded worries, the doll cautiously reached out its pale, almost translucent hand from the shadow into the sunlight."
           }
-        ],
-        "birthday": "27-Jun",
-        "gender": "Female",
-        "height": "4'6''",
-        "weight": "70lbs",
-        "gnosticIndex": "25.8",
-        "characteristic": "Petrify Control    Vulnerable Enemy",
-        "introduction": "Petrifies enemies with her eye, rendering them unable to act and making them fragile."
+        ]
       }
     },
     {
@@ -350,7 +342,11 @@
       },
       "profile": {
         "title": "Alva",
-        "awakerIntroduction": "Possesses strong defense and single-target DMG capabilities; the higher the Shield, the greater the DMG dealt by {Precision Slash}.\nAfter {Rouse}, all DMG dealt by Alva will enjoy Shield bonus.\n{Combat Stance} has the ability to dispel Exalt Seals, and during Exalt, Symptoms or State Cards can be discarded to gain additional draws.\nIn this stage, Alva will be deployed at Level 50, Skill Level 5, Enlightened Level 3, and enemies will receive a buff in their first round.",
+        "birthday": "20-Jan",
+        "gender": "Female",
+        "height": "5'8''",
+        "weight": "143lbs",
+        "gnosticIndex": "22.3",
         "storySections": [
           {
             "kind": "introduction",
@@ -382,14 +378,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Alva had doubted her righteousness, but those bewildered days and nights brought her profound enlightenment.\nIllusions are tangible.\nThe initial starting point never changed; the justice she fights for is not an organization turned aggressor, not an individual shouting slogans, but a genuine existence within her beliefs.\n\nAll life, all innocence, all dreams, aspirations, and beautiful yearnings can easily turn to ash under gunfire.\nWhat is lost in war will never return, like hellish demons devouring all goodness.\nThus, those who start wars for selfish desires must also taste the ashes of destruction. There will be true heroes, with noble intentions, selflessly fighting for the bright future of all.\nThis is the value called justice.\n......\n\nWrong, then correct it.\nMake the sacrifices worthwhile, make this phantom pain of severed legs and limbs worthwhile.\nIf there is anything unfortunate destroyed, reclaim it with these new prosthetics.\nThose small and fragile things will never lose their shine.\nEverything is for that truly bloodless, tearless utopia."
           }
-        ],
-        "birthday": "20-Jan",
-        "gender": "Female",
-        "height": "5'8''",
-        "weight": "143lbs",
-        "gnosticIndex": "22.3",
-        "characteristic": "Anti-Seca    Alert Boost",
-        "introduction": "A veteran of the battlefield who excels at stacking large amounts of Shield and converting Shield into Blade for attacks."
+        ]
       }
     },
     {
@@ -446,6 +435,11 @@
       },
       "profile": {
         "title": "Aurita",
+        "birthday": "8-Jun",
+        "gender": "Female",
+        "height": "5'10.5''",
+        "weight": "45lbs",
+        "gnosticIndex": "21.11",
         "storySections": [
           {
             "kind": "introduction",
@@ -477,14 +471,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "A fishing village with exceptionally clear waters, its shores adorned like the Milky Way on a midsummer night, resounds with the cheerful laughter of caravans—those memories that no longer exist occasionally flash back, only to be quickly forgotten.\nAs long as there are companions constantly emerging by her side, new memories can always be created, and the jellyfish are always present—this is what Aurita believes.\nAfter all, it is in their nature and destiny as jellyfish to thrive by drifting, multiplying, and overwhelming enemies with sheer numbers."
           }
-        ],
-        "birthday": "8-Jun",
-        "gender": "Female",
-        "height": "5'10.5''",
-        "weight": "45lbs",
-        "gnosticIndex": "21.11",
-        "characteristic": "Multi-hit DMG    Pierce Protection",
-        "introduction": "Continuously splits glands to perform low Arithmetica Cost attacks, and consumes all glands at once to launch a full-scale assault when necessary."
+        ]
       }
     },
     {
@@ -542,7 +529,11 @@
       },
       "profile": {
         "title": "Caecus",
-        "awakerIntroduction": "Has powerful HP Healing and stacking {Counter} Ability, performing well against enemies with multi-hit attacks.\nExalt and {Protective Scales} can deal more {Counter} DMG.\nIn this level, Caecus will be brought into battle at Level 50, Skill Level 5, and Enlighten Level 3. He will Obtain 10 Aliemus each turn, and the enemy will receive Enhance on the first turn.",
+        "birthday": "11-Nov",
+        "gender": "Male",
+        "height": "5'5''",
+        "weight": "114.6lbs",
+        "gnosticIndex": "21",
         "storySections": [
           {
             "kind": "introduction",
@@ -574,14 +565,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Haven't you had such dreams? Suddenly inheriting a massive fortune, suddenly gaining immense power... enough to trample those who once disdained and hurt us.\nThen, at the moment you wake up, faced with relentless reality, you fall deeper into despair.\nBut my dream is true, my fate has arrived.\n\nKnow this: you are the weak ones.\n\nCan physical frailty and a wilting soul not uphold a noble bloodline? No, that's impossible, because the name Oren is our family's pride and symbol. Endowed with the bloodline and name, I am no longer that bullied freak; I am someone with noble blood.\n\nSo... please... stop looking at me with those suffocating eyes..."
           }
-        ],
-        "birthday": "11-Nov",
-        "gender": "Male",
-        "height": "5'5''",
-        "weight": "114.6lbs",
-        "gnosticIndex": "21",
-        "characteristic": "Counter Enemies    Tentacle DMG",
-        "introduction": "Erects all body spines to counterattack invading enemies and uses their bloodline power to heal self."
+        ]
       }
     },
     {
@@ -639,7 +623,11 @@
       },
       "profile": {
         "title": "Casiah",
-        "awakerIntroduction": "Exalt can deal area DMG and draw cards; the more Command Cards, States, or Symptom Cards drawn, the greater the number of DMG instances dealt.\n{Poof!} can reshuffle the hand while discarding State or Symptom Cards to gain Aliemus.\n{Telekinesis} takes cards from {Ultra Space} in exchange for high DMG and Arithmetica resources.\nIn this stage, Casiah will be deployed at Level 50, Skill Level 5, Enlighten Level 3, and the first attack from the boss enemy will receive an Enhance.",
+        "birthday": "1-Apr",
+        "gender": "Female",
+        "height": "4'12''",
+        "weight": "99lbs",
+        "gnosticIndex": "21.75",
         "storySections": [
           {
             "kind": "introduction",
@@ -671,14 +659,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Casiah reached into the hat, and it was empty.\nCasiah reached into the door, and it was empty.\nCasiah reached into her chest, and it was empty.\nThe collected joys and sorrows, fears and angers, the warmth and coldness of humanity, the noise before the curtain, the cheers during the twists, the whistles at the highlights, the applause at the closing, and the indifference at dispersal all slipped away from this hollow chest, leaving no trace of ever existing.\nCasiah imitated the expressions of the audience in the mirror—the wrinkles at the corners of the eyes, the flow of muscles, the curvature of lips—clearly identical to those people, yet devoid of any true meaning.\nIf only she could perceive... If only she could transcend imitation... If only she could become one of them... Or, if only someone could remain...\nThen surely this \"void\" in her chest would be filled."
           }
-        ],
-        "birthday": "1-Apr",
-        "gender": "Female",
-        "height": "4'12''",
-        "weight": "99lbs",
-        "gnosticIndex": "21.75",
-        "characteristic": "Replenish Hand    Temporary STR",
-        "introduction": "Able to draw or replace a large number of cards as if performing magic, and gain Temporary Strength to enhance damage."
+        ]
       }
     },
     {
@@ -734,7 +715,11 @@
       },
       "profile": {
         "title": "Castor",
-        "awakerIntroduction": "The unyielding lone bird, summoning storms with his wings to protect his own.\nHis descent scatters Onyx Plumes, each one carrying deadly {Corrosion}, dealing severe HP loss to enemies struck this turn.\nIn this stage, Castor and Jenkin (Lv. 50, Skill Lv. 5, Enlighten 3) will deploy. Battle start grants 100 Aliemus, plus 30 each turn.",
+        "birthday": "20-Jun",
+        "gender": "Male",
+        "height": "6'0.3''\n(wingspan 9'9.8'')",
+        "weight": "205 lbs",
+        "gnosticIndex": "23.39",
         "storySections": [
           {
             "kind": "introduction",
@@ -766,14 +751,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Twins are born with nothing but each other, yet Castor continues to savor the taste of loss.\nBeing hurt, forgotten, and betrayed, that silent heart is not made of iron, but he keeps getting back up.\n\"But it's okay, I will hold on to your share too,\" Castor said, looking at his brother, who was disfigured, believing blindly.\nIn his heart, he tightly clutched that faint flame, tirelessly resisting the knife-like wind and snow.\nOne day, he will climb to the peak of freedom and use his wings to touch the sky's low-hanging curtain.\nHe believes that the end of that thorny path must be the bright daylight promised by his younger brother in childhood."
           }
-        ],
-        "birthday": "20-Jun",
-        "gender": "Male",
-        "height": "6'0.3''\n(wingspan 9'9.8'')",
-        "weight": "205 lbs",
-        "gnosticIndex": "23.39",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "With wings that stir violent winds to shield his allies, Castor's Onyx Plumes cause lethal \"Corrosion,\" inflicting massive HP loss upon enemies when they take DMG this turn."
+        ]
       }
     },
     {
@@ -832,7 +810,11 @@
       },
       "profile": {
         "title": "Celeste",
-        "awakerIntroduction": "Comprehensive Arithmetica supply, Healing, and {Tentacle DMG} enhancement Assist Ability.\nAfter Exalt, resurrect upon taking lethal DMG once per battle.\nIn this quest, a Level 50 Celeste with Skill Level 5 and Enlighten 3 will join, gaining 20 Aliemus each turn, and enemies are strengthened in the first turn.",
+        "birthday": "15-Mar",
+        "gender": "Female",
+        "height": "5'5''",
+        "weight": "?",
+        "gnosticIndex": "?",
         "storySections": [
           {
             "kind": "introduction",
@@ -864,14 +846,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Our good friend, the resourceful Hannah Peaslee, somehow dug up the research materials on Celeste. Thanks to this audacious reporter, both the originally confidential materials and her brief interview with Celeste has now spreaded into every corner.\n\nAfter reading the confidential materials, Hannah posed a question to her usually emotionless face.\n\n\"Most Awakeners have unfulfilled wishes, which lie in their basic motivations for cooperating with the university. However, your wish section is blank in this material. Don't you have any desire to accomplish anything? Or what is your meaning as an Awakener?\"\n\n\"I have, I do have.\"\n\nThe girl's expression showed no cracks, as ethereal and noble as usual. If it were not for that brief answer and the anxiety within, the reporter would have almost thought that she miss the question.\n\n\n\"I will find my wish... everyone wishes so. Therefore I will find it.\"\n\nHer soft voice resounded, delicate and fragile like an easily shattered dream."
           }
-        ],
-        "birthday": "15-Mar",
-        "gender": "Female",
-        "height": "5'5''",
-        "weight": "?",
-        "gnosticIndex": "?",
-        "characteristic": "Temporary Tentacle    Death Immunity",
-        "introduction": "A blessed maiden who guards allies from the brink of death, and uses the power of dreams to heal."
+        ]
       }
     },
     {
@@ -928,7 +903,11 @@
       },
       "profile": {
         "title": "Clementine",
-        "awakerIntroduction": "The gentle and elegant psychologist can gradually sense the emotional buildup of the patients during communication, accumulating {Symbiosis}. After releasing the Exalt, they can consume {Symbiosis} to manipulate their spirit state, instilling {Fear} to dismantle the enemies' combat will, or implanting trauma to instantly {Destroy} their mental defenses.\nIn this level, Clementine will fight with level 50, skill level 5, and Enlighten 3, with Keyflare Regen increased by 50, gaining 20 Aliemus per round.",
+        "birthday": "16-Aug",
+        "gender": "Female",
+        "height": "5'5.7''",
+        "weight": "102lbs",
+        "gnosticIndex": "21.31",
         "storySections": [
           {
             "kind": "introduction",
@@ -960,14 +939,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "At first, some trivial pain could satisfy her. \n\nThen, her craving for sweetness led her to embrace more and more malice during psychological guidance. \n\nThis malice surged like a river, flooding one after another island of the soul. \n\nBut it was not enough. Far from it. \n\nOnly with the awakening of that ancient long dream, will the entire world turn into a sea of pain, bringing ultimate joy. \n\nSo, she was excited, she prayed, she waited. \n\nWhen everything merged into chaos, she would bow her head, joyfully savoring the most extreme lament of the world. \n\nEven if this sea of pain would drown her."
           }
-        ],
-        "birthday": "16-Aug",
-        "gender": "Female",
-        "height": "5'5.7''",
-        "weight": "102lbs",
-        "gnosticIndex": "21.31",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "Builds up Symbiosis, hypnotizes enemies to reduce their damage, or inflicts Trauma on enemies to increase the damage they take."
+        ]
       }
     },
     {
@@ -1026,7 +998,11 @@
       },
       "profile": {
         "title": "Corposant",
-        "awakerIntroduction": "A Resilient Maiden, one who faces death unflinchingly can burst with limitless potential when confronted with the threat of death.\nThe {Pilot} of vessels, a Mareel Glow in the night sky, capable of generating numerous Tentacles while reconfiguring your hand to guide you to Victory with the {Aftershock} Effect.\nIn this stage, you will bring Corposant into battle at Level 50, Skill Level 5, and Enlighten Level 3. Each Turn, draw 2 additional cards and Obtain 1 Tentacle.",
+        "birthday": "3-Oct",
+        "gender": "Female",
+        "height": "5'9''",
+        "weight": "145lbs",
+        "gnosticIndex": "23",
         "storySections": [
           {
             "kind": "introduction",
@@ -1058,14 +1034,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Until the last moment, Corposant was diligently fulfilling her duties, yet the ship she piloted still sank.\n\nEvery night, she dreams of those lost passengers: water flooding into the cabins, sea monsters' Tentacles rampaging, people drowning, jumping overboard, kneeling for one last guidance, but hope was lost.\n\nThis brutal reality reproaches her, tortures her—she has desecrated her profession.\n\nFor this, she must be punished, and the lightning that eternally entwines and torments her is the retribution. But it's not enough; she must atone for her negligence.\n\nFortunately, the great entity provided the answer: when the Divine Realm descends, the world will become paradise.\n\n\"So, to quell the eternal roaring of the sea, for the innocent buried at sea, for guiding the direction of all beings, I request the Divine Realm's arrival.\"\n\nThis is her last, final navigation."
           }
-        ],
-        "birthday": "3-Oct",
-        "gender": "Female",
-        "height": "5'9''",
-        "weight": "145lbs",
-        "gnosticIndex": "23",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "Generates a large number of Tentacles and helps reshuffling your hand. The \"Aftershock\" effect unlocks greater potential."
+        ]
       }
     },
     {
@@ -1123,7 +1092,11 @@
       },
       "profile": {
         "title": "Daffodil",
-        "awakerIntroduction": "Has DMG growth methods and powerful combo burst abilities.\nExalt can create perfect cards at any time.\nIn this level, you will bring \"Daffodil\" into battle at Level 50, Skill Level 5, and Enlighten Level 3, gaining an additional 10 Aliemus per turn.",
+        "birthday": "10-Oct",
+        "gender": "Female",
+        "height": "5'7.7''",
+        "weight": "132lbs",
+        "gnosticIndex": "43",
         "storySections": [
           {
             "kind": "introduction",
@@ -1155,14 +1128,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "In the gray, viscous sea of primal matter, emptiness prevails; the concepts narrated by travelers crossing dimensions remain only in abstract descriptions and imaginations.\nIt wants to confirm with its own eyes the \"places of longing\" for humans, to personally witness the magnificent scenery of the mortal world, and to experience the bittersweet nuances of life and death.\nYet above all, it desires a specific person, someone worthy of cherishing, someone to trust.\nA fair trade means equality, means division, means a transaction where nothing more than what is given is taken. But it yearns for something different, a kind of unconditional trust, to eliminate barriers, to break through tests, to dissolve the frozen barriers.\nIt gains and loses, but will ultimately regain what was lost."
           }
-        ],
-        "birthday": "10-Oct",
-        "gender": "Female",
-        "height": "5'7.7''",
-        "weight": "132lbs",
-        "gnosticIndex": "43",
-        "characteristic": "Versatile Creation    Vulnerable Enemies",
-        "introduction": "A witch capable of customizing powerful Thousand Mirage illusions and placing them into Ultra Space."
+        ]
       }
     },
     {
@@ -1220,6 +1186,11 @@
       },
       "profile": {
         "title": "Doll",
+        "birthday": "11-Jan",
+        "gender": "Female",
+        "height": "5'2''",
+        "weight": "90lbs",
+        "gnosticIndex": "22",
         "storySections": [
           {
             "kind": "introduction",
@@ -1251,14 +1222,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "A new star of science and knowledge rises in an ordinary worker's family.\nMost of Doll's childhood was filled with the sounds of cylinder throbs and gear operations.\nBut a love for machinery was not enough to support the girl in climbing the rugged and steep mountain of science.\nWhat led her onto the path of knowledge was a plague.\nAn unknown madness raged through the city; hospitals were overcrowded, the morgue was overwhelmed, and everyone was on edge.\n\"The city's graveyards aren't enough—dig up grandma or burn mom, you have to choose one.\"\nThus, Doll watched her mother disappear into the flames.\nUnlike others who were cremated, among the fragments and ashes she once called \"mother,\" there flowed a shimmering silver mass.\n\"I want to know if I can see her again.\"\n\"I want to know if her kind soul is inside that.\"\n\"I want to know if that silver substance is the genesis of life, if it is the essence of the soul.\"\n\"I want to know if everything in this world has a common starting point.\"\nBefore getting the answers, Doll will not bow to the D-phenomenon."
           }
-        ],
-        "birthday": "11-Jan",
-        "gender": "Female",
-        "height": "5'2''",
-        "weight": "90lbs",
-        "gnosticIndex": "22",
-        "characteristic": "Cleanse Vulnerable    HP Recovery",
-        "introduction": "Provides their team with perfected research results, granting Aliemus and restoring a large amount of HP."
+        ]
       }
     },
     {
@@ -1314,7 +1278,11 @@
       },
       "profile": {
         "title": "Doresain",
-        "awakerIntroduction": "An elegant epicure who delivers fated demise to anguished souls.\nHe savors the remnants of the dead with gluttonous delight, converting their essence into HP restoration and unleashing devastating damage!\nIn this stage, you will enter battle with a Level 50 Doresain, Skill Level 5, Enlighten 3. Doresain's attacks are guaranteed to be critical hits in this battle.",
+        "birthday": "20-Nov",
+        "gender": "Male",
+        "height": "6'1.7''",
+        "weight": "137lbs",
+        "gnosticIndex": "37.58",
         "storySections": [
           {
             "kind": "introduction",
@@ -1346,14 +1314,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "He had once believed that his entire life existed for the pursuit of ultimate deliciousness.\nThe duties of a crown prince, the estrangement from loved ones, the weight of moral teachings... He had cast all this pain aside in his relentless quest for culinary perfection.\nFrom prince to monarch, from mortal to divine, his hunger never waned. He mastered every cooking technique, could detect the most fleeting nuance in every corpse's flavor profile.\nHe attained everything he desired, yet after each ephemeral moment of satisfaction, that hollow feeling remained - like a flavor just beyond his palate's reach.\nIt wasn't until he consumed Celina's corpse and glimpsed her lingering soul that understanding came.\nThe stories etched in flesh before death's arrival, the unfinished yearnings that clung to bones - these were the missing ingredients he'd been chasing, the true essence he'd been tasting without realizing.\n\"Eating is remembrance; every feast a reunion between departed and living\" —these are the words carved into Necrovia's throne. He will grant those who seek his protection remembrance and eternal rest."
           }
-        ],
-        "birthday": "20-Nov",
-        "gender": "Male",
-        "height": "6'1.7''",
-        "weight": "137lbs",
-        "gnosticIndex": "37.58",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "An elegant epicure. Deals devastating damage to foes with low HP. When devouring the corpses of departed enemies, he empowers himself and drains their lingering vitality."
+        ]
       }
     },
     {
@@ -1410,6 +1371,11 @@
       },
       "profile": {
         "title": "Erica",
+        "birthday": "29-Sep",
+        "gender": "Female",
+        "height": "5'6.9''",
+        "weight": "183lbs",
+        "gnosticIndex": "???",
         "storySections": [
           {
             "kind": "introduction",
@@ -1441,14 +1407,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Hannah: Do you remember what happened before your disassembly?\nErica: The automaton's behavior began to spiral out of control, consciousness experienced fractures, and during those fractures, it would destroy everything. Everything would perish beneath the currents and flames.\nHannah: Erica?\nErica: ...\nHannah: I can't be that lucky to encounter the \"Tick-Tock Effect,\" right... Erica?\nErica: The head component is operational again; I apologize for the inconvenience earlier.\nAs I just mentioned, the automaton recognized its increasing threat to humans, and because it still regarded itself as human at that time, it was in great pain.\nHannah: You mentioned protection before; does that mean protecting humans?\nErica: Yes, the automaton hoped to protect.\nHannah: Then why didn't you tell me that just now?\nErica: ...\nHannah: Do I need to change the question?\nErica: No. I am no longer burdened by emotions and can answer.\nUpon realizing its own danger, the automaton attempted to short-circuit its body before the consciousness fragmentation to minimize self-inflicted damage.\nIn the end, the protection failed, and the human friend died.\nThe automaton felt sadness, regret, and despair.\nThe automaton self-destructed to ensure it would cause no more destruction, and then the Silver was recovered by Mythag University, creating me, Erica, body number EA307881.\n—Excerpt from a recording by Hannah Piszley titled \"0711, Tick-Tock Person Exclusive Interview\""
           }
-        ],
-        "birthday": "29-Sep",
-        "gender": "Female",
-        "height": "5'6.9''",
-        "weight": "183lbs",
-        "gnosticIndex": "???",
-        "characteristic": "Offense & Defense    Form Shift",
-        "introduction": "Provides temporary Burst Strength or Alert, making them a great asset for both offense and defense."
+        ]
       }
     },
     {
@@ -1506,7 +1465,11 @@
       },
       "profile": {
         "title": "Faint",
-        "awakerIntroduction": "Exalt can provide permanent {Death Resistance} to your team.\nAfter triggering {Death Resistance}, both DEF and Healing will be enhanced.\n{Rouse} and Command Cards can both obtain significant {Counter} and weaken enemies' {STR}, providing an advantage against multiple enemies and multiple hits.\nIn this level, Faint will join the battle at Level 50, with Skill Level 5 and Enlighten 3. Each turn, she will gain 30% {Embryo Fusion} and 10 Aliemus. Enemies will receive Enhance in the first two turns.",
+        "birthday": "7-Mar",
+        "gender": "Female",
+        "height": "4'6''",
+        "weight": "73lbs",
+        "gnosticIndex": "31.4",
         "storySections": [
           {
             "kind": "introduction",
@@ -1538,14 +1501,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Do I have the right to have wishes?\nIf so, can I become a part of my sister?\nTo make her whole, to make us whole.\nThat way, I can express \"love\" without reservation, and she can embrace \"love\" without distraction.\nDear Tinct... this is what I, as the firstborn child, should do for you, right?"
           }
-        ],
-        "birthday": "7-Mar",
-        "gender": "Female",
-        "height": "4'6''",
-        "weight": "73lbs",
-        "gnosticIndex": "31.4",
-        "characteristic": "Death Resistance    Steal Strength",
-        "introduction": "Applies high Death Resistance and leeches the rival's Strength to defend against attacks."
+        ]
       }
     },
     {
@@ -1605,7 +1561,12 @@
       },
       "profile": {
         "title": "Faros",
-        "awakerIntroduction": "Exalt and {Rouse} provides quick card shuffling, improving your team's margin for error.\n{Deep Currents} makes Tentacles inflict {Poison} on all enemies with each attack. Combine this with {Ocean of Elation} to inflict a large amount of {Poison} on enemies at once.\nIn this stage, you will enter battle with Faros at Level 50, Skill Level 5, and Enlighten 3. The enemy will gain Enhance on the first turn.",
+        "birthday": "8-Apr",
+        "gender": "Female",
+        "height": "5'5.7''",
+        "weight": "?",
+        "gnosticIndex": "23",
+        "faction": "Lemuria",
         "storySections": [
           {
             "kind": "introduction",
@@ -1637,14 +1598,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Return to her home, trace back to her origin, reunion with her lost dreamshe doesn't care how does her wish reflect in people's words. Even her body has altered to an Awakener, tides of her homeland still clamor in her soul.\nThe breath of sea-bottom volcanoes dissipated from her ears. The ocean's dreams writhing with ecstasies obscured from her eyes. Only her obsession with the Divine Realm still gleaming, more glorious than ever.\nMind her docility, a mere temporarily disguise. Her king's throne calls to her, like a lighthouse reaches through the aeons; her sacrifice will always be everything, like a wick's devotion to the light."
           }
-        ],
-        "birthday": "8-Apr",
-        "gender": "Female",
-        "height": "5'5.7''",
-        "weight": "?",
-        "gnosticIndex": "23",
-        "characteristic": "Tentacle Generation    Replenish Hand",
-        "introduction": "Infects enemies with Viperous Venom-imbued Tentacles to humiliate them and uses their devoted faith to grant their team Cards, indicating the path forward."
+        ]
       }
     },
     {
@@ -1705,7 +1659,11 @@
       },
       "profile": {
         "title": "Doll: Inferno",
-        "awakerIntroduction": "A skilled researcher who provides reliable battlefield support, capable of both strengthening allies and weakening enemies while generating large amounts of Aliemus.\nDuring boss fights, she gradually builds power by accumulating {Finale} stacks, eventually unleashing the devastating {Illusion's End} attack. Once activated, she becomes more aggressive until the battle concludes.\nFor this stage, you have access to Doll: Inferno and Nymphaea, both set at Level 50 with Skill Level 5 and Enlighten 3. At turn start, Doll: Inferno automatically gains 50 additional Aliemus and 1 stack of {Finale}.",
+        "birthday": "11-Jan",
+        "gender": "Female",
+        "height": "5'2''",
+        "weight": "89.9lbs",
+        "gnosticIndex": "42.31",
         "storySections": [
           {
             "kind": "introduction",
@@ -1737,14 +1695,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "All meaning dissipates like sand, the world's false curtain fades in her eyes, and everything returns to the most primordial darkness.  \nIn this final performance on the pitch-black stage, the dancer of science still dances with all her might.  \nShe no longer cares about being slowly devoured by dissolution, as the ending of the play was written from the very beginning.  \nAs in the past, she will unreservedly dedicate the power of genius to the world in a manner closest to the truth.  \nIf you ask her gently, she will insist that she still holds love for humanity and the world; she wants to end all suffering in the world and bring people back to their true, original home."
           }
-        ],
-        "birthday": "11-Jan",
-        "gender": "Female",
-        "height": "5'2''",
-        "weight": "89.9lbs",
-        "gnosticIndex": "42.31",
-        "characteristic": "HP Healing    High Single-Hit DMG",
-        "introduction": "Provides healing and a large amount of Aliemus to your team. In boss battles, it activates the Engine of Destruction to end its enemies."
+        ]
       }
     },
     {
@@ -1805,7 +1756,11 @@
       },
       "profile": {
         "title": "Helot: Catena",
-        "awakerIntroduction": "Flexibly use the chain to strike enemies, dealing DMG while applying a large amount of {Bleed}.\nPre-accumulate hand cards and look for opportunities to release Exalt to gain powerful Buffs, and use the {Devour} effect to reduce the Arithmetica Cost of all your Cards.\nIn this level, you will bring Helot: Catena at Level 50, Skill Level 5, and with 3 Enlighten. The initial HP is 40%, and at the end of each turn, you will gain 50 Aliemus and 100% {Embryo Fusion} Level.",
+        "birthday": "25-Dec",
+        "gender": "Female",
+        "height": "1.07bēma",
+        "weight": "71mina",
+        "gnosticIndex": "37",
         "storySections": [
           {
             "kind": "introduction",
@@ -1837,14 +1792,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Her life's experiences seemed crafted to bring her suffering. Kindness, tolerance, compassion, trust—all the tender aspects of her humanity were torn away, discarded along with gory flesh. \nThe word \"forgiveness\" was absent from her vocabulary; only the blood and hatred of others could resolve her own. \nBlood for blood, the fairest law revered by both warriors and slaves. \nA volcano that had simmered for a thousand years erupted in one night, and a hand crawled out of the underworld onto human soil. \nIt was a vengeful spirit, seeking to flood the world with rivers of crimson."
           }
-        ],
-        "birthday": "25-Dec",
-        "gender": "Female",
-        "height": "1.07bēma",
-        "weight": "71mina",
-        "gnosticIndex": "37",
-        "characteristic": "Chain Strike    Strike Card Amplify",
-        "introduction": "Uses unique techniques to combo enemies, finishing off rivals with Bleed damage."
+        ]
       }
     },
     {
@@ -1903,6 +1851,11 @@
       },
       "profile": {
         "title": "Ramona: Timeworn",
+        "birthday": "12-Dec",
+        "gender": "Female",
+        "height": "5'5''",
+        "weight": "102lbs",
+        "gnosticIndex": "25",
         "storySections": [
           {
             "kind": "introduction",
@@ -1934,14 +1887,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "When occupying Ramona's body, \"Ramona\" has never walked through the campus.\nLotan's boldness, Ogier's shy loyalty, William's calm composure, Doll's strict seriousness... No one remembers these moments more than she does.\nBut she always kept in mind: these beautiful things no longer belong to her.\nNow, she needs to focus entirely on protecting another destined person... This is also to protect another precarious world and another innocent version of herself."
           }
-        ],
-        "birthday": "12-Dec",
-        "gender": "Female",
-        "height": "5'5''",
-        "weight": "102lbs",
-        "gnosticIndex": "25",
-        "characteristic": "Search for Cards    Multi-Hit Damage",
-        "introduction": "Draws strength from past commands, then unleashes a Predetermined Strike to deal massive single-instance damage."
+        ]
       }
     },
     {
@@ -1995,7 +1941,12 @@
       },
       "profile": {
         "title": "Goliath",
-        "awakerIntroduction": "{Blade's Dominion} and {Decapitation Damage} have high DMG and multiple {STR} buffs, capable of dealing massive DMG to single and group enemies.\n{Decapitation Damage} can also return Arithmetica Cost when attacking low-HP enemies or causing a kill.\nExalt can choose to {Usurp} or {Dormancy}, selecting the timing for growth or burst to deal more Damage.\nIn this level, Goliath will be brought into battle at Level 50, with Skill Level 5 and 3 Enlighten.",
+        "birthday": "20-May",
+        "gender": "Male",
+        "height": "9'4.2''",
+        "weight": "?",
+        "gnosticIndex": "?",
+        "faction": "Lemuria",
         "storySections": [
           {
             "kind": "introduction",
@@ -2027,14 +1978,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Beheading death's cold embrace, he survived and transformed. The glitter on his blade fades. The mask of apostle conceals his savage expression.\nHe did revere instinctively when that miracle manifested. But no god could capture his fear, and no cult could earn his faith.\nA giant should not yield to others. A warrior should not lower his head.\nHis past already wreathed in dust, his war still longing for final triumph. The desire for conquest run through his veins, etching into bones like a sigil bearing the bestowed power. Perhaps, one day, death will end his dominion. Perhaps, one day, he will rise to the sole supremacy."
           }
-        ],
-        "birthday": "20-May",
-        "gender": "Male",
-        "height": "9'4.2''",
-        "weight": "?",
-        "gnosticIndex": "?",
-        "characteristic": "Strength Burst    STR Steal",
-        "introduction": "Swings a heavy blade with the power of a great blade to slay enemies. Their Tentacle damage and Strength make them even more powerful."
+        ]
       }
     },
     {
@@ -2090,7 +2034,11 @@
       },
       "profile": {
         "title": "Hameln",
-        "awakerIntroduction": "Hameln elegantly manipulates notes to reduce card Arithmetica Costs and allow them to take effect multiple times.\nHis performance delivers continuous {Pierce DMG}, weakening the enemy's will and dismantling their defenses.\nIn this trial, try Lv. 50, Skill Lv. 5, Enlighten 3 Hameln, who gains 35 additional Aliemus per turn.",
+        "birthday": "21-Sep",
+        "gender": "Male",
+        "height": "5'10''",
+        "weight": "121lbs",
+        "gnosticIndex": "22.46",
         "storySections": [
           {
             "kind": "introduction",
@@ -2122,14 +2070,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "His life was monotonous and dull, with loneliness as a contant companion, alongside feelings of resentment, confusion and hatred that had long been digested since before he could even remember.\nNow, he has become one with music, transcending mere passion—unavoidable, inescapable.\nAll that remains to him is music.\nKeep moving upward; do not look back at those nine hundred and ninety-nine steps behind.\nAfter all, he has already touched the ultimate melody, the destined flute.\nAccept this endless flow of music, and let it saturate your soul and dreams.\nFor he has long since used his own soul as an instrument to resonate with yours."
           }
-        ],
-        "birthday": "21-Sep",
-        "gender": "Male",
-        "height": "5'10''",
-        "weight": "121lbs",
-        "gnosticIndex": "22.46",
-        "characteristic": "Suggested Translation",
-        "introduction": "His Rondino cards deal damage and allow your cards to take effect multiple times, while also generating a large amount of \"Insight\"."
+        ]
       }
     },
     {
@@ -2189,7 +2130,11 @@
       },
       "profile": {
         "title": "Helot",
-        "awakerIntroduction": "Exalt significantly boosts \"Strike\" DMG in this turn.\nThe more \"Strike\" cards you have in hand, the higher the DMG of {Shattering Strike} will be, and the greater the {STR} bonus it enjoys. Combine \"Strike\" with Exalt to deal massive DMG in one go.\nIn this level, Helot will join the battle at Level 50, with Skill Level 5 and 3 Enlightenments. At the start of the Battle, you will Obtain 3 \"Strike\" cards, gain 30% {Embryo Fusion} each turn, 10 Aliemus, and 6 {STR}. The enemy will gain Enhance on their first turn.",
+        "birthday": "25-Dec",
+        "gender": "Female",
+        "height": "1.07bēma",
+        "weight": "75mina",
+        "gnosticIndex": "26",
         "storySections": [
           {
             "kind": "introduction",
@@ -2221,14 +2166,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "The lady high above took her hand, promising to give her all the love in the world.\nShe believed in the lady's gentleness and the master's indulgence, trusted every smile and every hug, unaware that in their eyes, she was merely a pet—something to be discarded the moment it posed any threat.\nThey personally threw her into a cage, shattering her trust. But neither the warden's whip nor the torment from her kin hurt as much as the betrayal from her loved ones.\nHate, such hate! She hated them for their lies that won her genuine heart, hated them for using her life to create this painful farce. If trusting others led to this, then she would forever rely only on herself.\nHer trust belongs solely to herself."
           }
-        ],
-        "birthday": "25-Dec",
-        "gender": "Female",
-        "height": "1.07bēma",
-        "weight": "75mina",
-        "gnosticIndex": "26",
-        "characteristic": "High Single-Hit DMG    Strength Growth",
-        "introduction": "An avenger who continuously restrains and builds up Strength, delivering a single devastating strike to bring an End to the enemy."
+        ]
       }
     },
     {
@@ -2285,7 +2223,11 @@
       },
       "profile": {
         "title": "Horla",
-        "awakerIntroduction": "Horla's 4 Psalm cards feature distinct effects, Trigger a {Leap} to enter one of four emotional states: {Happiness}, {Anger}, {Grief}, or {Fear}.\nEach state grants unique bonuses to all Awakeners, with Horla's Exalt receiving enhanced effects.\nIn this trial, try out Level 50 Horla and Lotan with Skill Level 5 and Enlighten Level 3. The enemy will gain enhancements on the first turn.",
+        "birthday": "14-Feb",
+        "gender": "Female",
+        "height": "5'42''",
+        "weight": "89lbs",
+        "gnosticIndex": "21.12",
         "storySections": [
           {
             "kind": "introduction",
@@ -2317,14 +2259,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "\"Horla, from today onward, I will treasure all your poems. In the future, I'll trade my flowers for your poems!\"\n\"Colette, you will definitely come back to save me...right?\""
           }
-        ],
-        "birthday": "14-Feb",
-        "gender": "Female",
-        "height": "5'42''",
-        "weight": "89lbs",
-        "gnosticIndex": "21.12",
-        "characteristic": "Delayed Healing    Weaken Enemy",
-        "introduction": "Different Emotions provide powerful buffs and alter the effect of her Exalt."
+        ]
       }
     },
     {
@@ -2380,7 +2315,11 @@
       },
       "profile": {
         "title": "Jenkin",
-        "awakerIntroduction": "{Mice Assemble} consumes Arithmetica to generate {Swarm Impact}. The more Arithmetica consumed, the higher the number of hits, allowing for high DMG by saving Arithmetica.\nEvery time you play \"{Get 'em! Brown!},\" both {Get 'em! Brown!} and {Swarm Impact} deal increased Damage.\nExalt and {Rouse} can increase Jenkin's Crit. Rate and Crit. DMG, further enhancing her DMG output.\nIn this stage, bring a level 50 Jenkin with Skill level 5 and Enlighten 3, receiving 1 {Insight} per turn, while the enemy is strengthened on the first turn.",
+        "birthday": "1-Jan",
+        "gender": "Female",
+        "height": "4'4.4''",
+        "weight": "67lbs",
+        "gnosticIndex": "21.43",
         "storySections": [
           {
             "kind": "introduction",
@@ -2412,14 +2351,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Street life is not difficult for her.\nWhen hungry, she looks for work; if there are no jobs, she makes a living with her own hands. Her coordination with Brown is so tacit that they can sustain a life of food and drink without anyone else's help.\n\"We don't need anyone,\" she swore with her mouse partner, \"we only need each other.\" \nBut every snowy night, she cannot help but glance at those windows lit with dim yellow lights, watching those who embrace each other by the meager dinner, blessing one another.\nShe truly does not need a concealed roof, does not require luxurious high beds and soft pillows; she indeed has trustworthy partners, but she is still curious what it would feel like to have a home for a long time?\nThis question was answered when Mason adopted her."
           }
-        ],
-        "birthday": "1-Jan",
-        "gender": "Female",
-        "height": "4'4.4''",
-        "weight": "67lbs",
-        "gnosticIndex": "21.43",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "With a high Crit. Rate and Crit. Damage, Brown and the swarm of rats are her key allies in fighting multiple enemies."
+        ]
       }
     },
     {
@@ -2479,7 +2411,11 @@
       },
       "profile": {
         "title": "Karen",
-        "awakerIntroduction": "Possesses powerful HP Healing and flexible Arithmetica supply ability.\nBoth {Toad Stew} and {Silent Fealty} have {Retain}. Each {Retain} turn will obtain different growth.\nExalt, {Toad Stew}, and {Marvelous Cuisine} can all inflict {Poison} on all enemies.\nIn this level, Karen will be deployed at Level 50, with Skill Level 5 and 3 Enlighten. The enemy's first Attack will receive Enhance.",
+        "birthday": "9-Sep",
+        "gender": "Female",
+        "height": "5'1''",
+        "weight": "99lbs",
+        "gnosticIndex": "21.08",
         "storySections": [
           {
             "kind": "introduction",
@@ -2511,14 +2447,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Ruby earrings, sapphire necklaces, beautiful hair accessories woven from garnet and malachite... How dazzling, how beautiful, how full of charm they are! Wherever they appear, people flock to them.\nThese jewelry pendants are not mere \"decorative items,\" no, they are the true stars of the world. Noble ladies wearing turquoise necklaces are immortalized in songs by poets; elderly ladies adorned with emeralds are seen as symbols of nobility. Even those lowborn girls, with a cheap bracelet on their wrist, can earn the endearing title of \"Pearl Girl,\" attracting countless gazes.\nEven dry branches and putrid bones can become objects of everyone's desire when adorned with a string of beautiful jewels.\nIf she could wear those necklaces and earrings, those bracelets and headpieces, surely she would become the center of attention as well."
           }
-        ],
-        "birthday": "9-Sep",
-        "gender": "Female",
-        "height": "5'1''",
-        "weight": "99lbs",
-        "gnosticIndex": "21.08",
-        "characteristic": "Replenish Arithmetica    Resist Death",
-        "introduction": "Provides your team with a large amount of Arithmetica, restores HP with Cuisine, and uses Creepy Cuisine to poison and kill enemies."
+        ]
       }
     },
     {
@@ -2577,7 +2506,11 @@
       },
       "profile": {
         "title": "Kathigu-Ra",
-        "awakerIntroduction": "Kathigu-Ra, {The Living Flame}, engulfs all opposition in fire.\nLingering {Fiamma} converts to {Combust} stacks, causing unstoppable eruptions at threshold.\nIn this stage, Kathigu-Ra will enter battle with Level 50, Skill level 5, Enlighten 3, gaining 5 Arithmetica, 30 Aliemus, and 50 {STR} per turn.",
+        "birthday": "30-Aug",
+        "gender": "Female",
+        "height": "6'0''",
+        "weight": "135lbs",
+        "gnosticIndex": "29.7",
         "storySections": [
           {
             "kind": "introduction",
@@ -2609,14 +2542,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "(Small text at the beginning of the file)\nDamn it, how did you find this file? I clearly forbade anyone from accessing it... Well, since you're able to see this file, it means your clearance is far above mine, which indicates you're one of Them, so naturally I have no authority to stop you from knowing these things.\n\nHowever, please keep in mind, this file should not exist anywhere. The following content is not any formal investigation, but rather an unofficial product composed by myself through secondary inferences based on certain real situations.\n\nI must seriously remind you that the process of compiling this file contains a large amount of investigative methods that cannot be described in detail, subjective assumptions from personal thinking, and even acts of accepting bribes from investigated subjects. If you are not bothered by my aforementioned actions, please continue reading. I guarantee with my reputation that the following content is undeniably authentic.\n\n■Subject Number: ■■■■-A■■-SSS\n■Awakener Codename: Lord of Combustion\n\"Honestly, I don't really like fighting.\"\nI was quite surprised to hear such an answer, considering in all the reports, investigators would use words like \"madness,\" \"joy,\" and \"elation\" when describing her in combat.\nI originally thought her attitude toward fighting was \"not initiating, not hating, not refusing,\" never expecting her to actually feel disgusted by the act itself.\nAs the conversation continued deeper, I gradually began to understand certain things. When I asked if I could record these words, Kathigu-Ra generously gave me permission to do so.\n\n\"You must understand, for most people in this world, simply being alive is already a luxury.\"\nI expressed agreement with this statement. Although most people I've encountered live comfortable lives—I could even go to the biggest opera house in Lentienni anytime I wanted—I clearly know the hidden truth of this world, and how many people are carrying burdens behind my comfortable life.\n\n\"Therefore, in many cases, intense fighting spirit is the price you pay to stay alive.\"\n\"We don't get to choose how we live. Once you step into the mud, it's nearly impossible to pull yourself out again.\"\nI originally wanted to argue against this viewpoint, but upon carefully recalling several cases, I found they were all people who could hardly be considered ordinary. As for those nameless nobodies, they mostly only exist within the memoirs of others.\n\"Perhaps some naive person might say, if that's the case, then why not just not do it from the beginning? That idea sounds good. I once carved it onto a certain tombstone to commemorate someone who strictly followed that principle.\"\n\"To protect everyone in this cruel world, I must appear strong and mad enough to make the ever-present malice hesitate.\"\n\"Of course, those emotions I display during battle are not fake. I truly enjoy the sensations battle brings me.\"\n\"It might be a bit hard to understand, but it's like how you might enjoy the content of your job, but not the act of working itself.\"\nUpon hearing this explanation, I immediately understood her meaning. Indeed, I really enjoy prying into others' privacy to satisfy my own guilty curiosity, but that doesn't mean I enjoy having to drag myself out of bed at eight o'clock every morning and follow orders to stay somewhere the entire day.\n\n\"When I was first abandoned, I was just like many other girls—lost, hesitant, and clueless.\"\n\"I hoped to receive help from others, but the world gave me nothing but countless betrayals and pains.\"\n\"Gradually, I began using cruelty and madness to forge armor against malice, adapting to everything in this world like drinking poison to quench thirst.\"\n\"Until finally, they melted within the ceaseless flames, merging with my flesh and blood.\"\nAs if to prove her words just now, Kathigu-Ra suddenly gave me an extremely cruel, evil, and mad smile, so much that I spilled the pale yellow liquid in my cup all over myself.\nOh, maybe it's a good thing, because this way, if I ever lose muscle control and accidentally spill something, I can naturally explain it as just the drink I spilled earlier.\nIn the end, Kathigu-Ra never directly answered my question, but I think my previous judgment was correct—she simply shouldn't exist within DIOL.\n—Recorder Karapolis Trak\n\n\"My original wish was simply to have a home.\"\n\"A home without betrayal, without pain, filled with laughter and joy.\"\n\"Unfortunately, I didn't understand until that day.\"\n\"This was the most luxurious delusion in this cruel world.\"\n—Kathigu-Ra"
           }
-        ],
-        "birthday": "30-Aug",
-        "gender": "Female",
-        "height": "6'0''",
-        "weight": "135lbs",
-        "gnosticIndex": "29.7",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "The blazing sun that burns everything with scorching flames, consuming more Arithmetica to greatly enhance damage output."
+        ]
       }
     },
     {
@@ -2674,7 +2600,11 @@
       },
       "profile": {
         "title": "Leigh",
-        "awakerIntroduction": "Exalt can restore a significant amount of HP, with more healing at lower HP levels.\nAfter {Rouse}, playing your own Command Card can enhance {Embryo Fusion}, thus obtaining more {Embryo} to provide resource support for the {Caro} team.\nIn this level, Leigh will be brought into battle at Level 50, Skill Level 5, and Enlighten Level 3.",
+        "birthday": "28-Jun",
+        "gender": "Female",
+        "height": "5'3''",
+        "weight": "91lbs",
+        "gnosticIndex": "22.05",
         "storySections": [
           {
             "kind": "introduction",
@@ -2706,14 +2636,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "The taste of rust spread in the air.\nThat is... the taste of \"food\".\nThe girl slowly opened her eyes. After being injected with a large dose of sedatives for a long time, her mind was in chaos. Lying in front of her was a Beagle with its throat bitten off, apparently called... Bambi? Bobby?\nJust as the girl was lost in memories, a sharp pain shot through her abdomen — she was attacked by \"food\". At that moment, the bound homeless man trembled, seemingly shouting loudly.\n\"Vampire! Monster... monster!!\"\nHowever, the girl paid no heed, only absentmindedly stroking the blood on her abdomen.\nA large amount of warm blood poured out of the wound, like slippery satin, joyfully spilling everywhere.\nIt turns out, she could still feel pain, she could still bleed.\nThe girl silently shed tears. She extended her frail hands soaked in blood, gently caressing the \"prey's\" cheek.\n\"Next, could you please use a little more strength?\""
           }
-        ],
-        "birthday": "28-Jun",
-        "gender": "Female",
-        "height": "5'3''",
-        "weight": "91lbs",
-        "gnosticIndex": "22.05",
-        "characteristic": "HP Healing    Strength Boost",
-        "introduction": "Converts pain into strength, allowing for significant healing when HP is low."
+        ]
       }
     },
     {
@@ -2771,7 +2694,11 @@
       },
       "profile": {
         "title": "Lily",
-        "awakerIntroduction": "Has powerful Defense abilities that gets stronger as HP drops.\nThe more pain, the more {Madness}; unleashing lethal {STR} in desperate situations.\nIn this quest, a level 50 Lily with Skill level 5 and Enlighten 3 will join the battle.",
+        "birthday": "15-Jun",
+        "gender": "Female",
+        "height": "4'4.2''",
+        "weight": "340lbs",
+        "gnosticIndex": "27.6",
         "storySections": [
           {
             "kind": "introduction",
@@ -2809,14 +2736,7 @@
             "unlockCondition": "Affinity Level 10",
             "content": "The small soul, which should have been lost to the river of history, relied on her mother's wish, the abundant spiritual energy from establishing the magic circle with @1@2@1, and the fusion with the giant creature frozen beneath Elworth, resurrecting as the monster \"Lily\".\nDue to incomplete awakening, Lily at the beginning had no consciousness, merely a combat doll that obeyed orders.\nFrancis Oswood, a member of the Sculptors' Association, used Lily as a prototype to conduct illegal experiments lasting @2 years. From Francis's diary, it was known that Lily's state back then was extremely unstable, often going out of control and causing localized destruction, which forced Francis to frequently change residences.\nWith the intake of the gnosis elixir and the implantation of the silver chip, Lily regained her perception and some memories on an undocumented day. After some twists and turns, Francis took over the almost bankrupt Lai Hospital and transformed it into a testing ground.\nDuring the \"Hellhound\" incident in Lai Town No. L-776, her mother, Francis Oswood, was trapped in her self-created anomalous dimension and lost contact."
           }
-        ],
-        "birthday": "15-Jun",
-        "gender": "Female",
-        "height": "4'4.2''",
-        "weight": "340lbs",
-        "gnosticIndex": "27.6",
-        "characteristic": "Max HP    Stronger When Hurt",
-        "introduction": "Converts the pain it endures into fury to eliminate enemies or into HP to aid allies."
+        ]
       }
     },
     {
@@ -2873,7 +2793,11 @@
       },
       "profile": {
         "title": "Liz",
-        "awakerIntroduction": "At turn end, if \"Green Flame\" is in your hand or the {Ultra Space}, it will upgrade to {Corrupted Green Flame}. After upgrading, it can deal higher DMG and apply {Poison}.\nWhen facing multi-hit Damage, you can gain multiple {Green Flames} through {Moth-Trapping Fire}.\nExalt can release all Liz's cards in hand without Arithmetica, accumulating a large number of {Green Flames} to deal extremely high burst Damage.\nIn this level, you will bring \"Liz\" at level 50, skill level 5, and enlightenment level 3 into battle, gaining 7 {STR} and 15 {Chaos} per turn, and after the start of the {Ultra Round}, an additional 100 {Chaos}. The enemies will receive an Enhance on their first turn.",
+        "birthday": "31-Jan",
+        "gender": "Female",
+        "height": "5'5''",
+        "weight": "?",
+        "gnosticIndex": "?",
         "storySections": [
           {
             "kind": "introduction",
@@ -2905,14 +2829,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "This is the Promised Land, an artistic utopia, the ultimate paradise—dance should be the dancer's home, maintaining eternal purity.\nAs long as I burn, filth cannot taint our Church... This is my mission, my hope... Allow me to burn brightly, and I will cleanse all impurity for everyone."
           }
-        ],
-        "birthday": "31-Jan",
-        "gender": "Female",
-        "height": "5'5''",
-        "weight": "?",
-        "gnosticIndex": "?",
-        "characteristic": "Poison Burst    Resource Cycle",
-        "introduction": "Constantly grows the emerald flame in Ultra Space or in hand, then unleashes Exalt to release it all at once, burning away enemies."
+        ]
       }
     },
     {
@@ -2970,6 +2887,11 @@
       },
       "profile": {
         "title": "Lotan",
+        "birthday": "21-Mar",
+        "gender": "Female",
+        "height": "5'6''",
+        "weight": "25ton",
+        "gnosticIndex": "21",
         "storySections": [
           {
             "kind": "introduction",
@@ -3001,14 +2923,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Born from Chaos, she embodies pure chaotic power, an untamed free soul, and an undefined order.\nShe craves challenges and battles; only by unleashing her overwhelming destructive urge can she fulfill her creator's sole wish.\n—To safeguard the planet until the end, she has long yearned for a fierce Battle."
           }
-        ],
-        "birthday": "21-Mar",
-        "gender": "Female",
-        "height": "5'6''",
-        "weight": "25ton",
-        "gnosticIndex": "21",
-        "characteristic": "AoE Damage    Multi-Hit Damage",
-        "introduction": "Deals multiple instances of \"Strike\" damage in succession and summons a world-ending beast to devour enemies."
+        ]
       }
     },
     {
@@ -3067,7 +2982,12 @@
       },
       "profile": {
         "title": "Miryam",
-        "awakerIntroduction": "Command Cards possess unique {Ritual} effects that convert {Sacrament} to enhance them.\nUsing Exalt not only grants more {Sacrament}, but also yields different effects based on your Tentacle Stances.\nThe three {Rouse} abilities play sequentially, each offering distinct effects, ultimately granting continuous acquisition of the powerful buff card {Divine Realm's Illusion}.\nIn this stage, Miryam and Aurita (Level 50, Skill Level 5, Enlighten Level 3) are deployed. Maximum Hand Size +2. Miryam starts with 35 Aliemus and gains 20 Aliemus each turn.",
+        "birthday": "2-Jul",
+        "gender": "Female",
+        "height": "5'7''",
+        "weight": "110lbs",
+        "gnosticIndex": "22.61",
+        "faction": "Lemuria",
         "storySections": [
           {
             "kind": "introduction",
@@ -3099,14 +3019,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "The unenlightened are pitiful, for they cannot comprehend the true essence of immortality. Worldly conflicts are meaningless, as they are but shallow diversions in the grand scheme of things.\nI have gazed upon it, I have tasted it, and I have long understood my purpose.\nBut, oh, how cruel is fate! Why did you... not choose your most loyal Priest once more?\n—It must be that you are bestowing upon me a trial, testing my faith. In the farthest reaches from my homeland, in moments devoid of your grace, my faith has endured through millennia, unwavering.\nI could not be the one to welcome your rebirth, but I have prepared everything for it. I will seek out a new eternal realm for you... The mix of resentment and honor weighs heavily upon me, and I must bear this responsibility alone...\nForgive my ugly jealousy. As long as I can once again witness your majesty, as long as I can rebuild your kingdom, I am willing to do anything."
           }
-        ],
-        "birthday": "2-Jul",
-        "gender": "Female",
-        "height": "5'7''",
-        "weight": "110lbs",
-        "gnosticIndex": "22.61",
-        "characteristic": "Tentacle Generation    Aliemus Support",
-        "introduction": "She uses her power as the High Priestess to command more Tentacles, and wields the Sacrificial Dagger to poison enemies."
+        ]
       }
     },
     {
@@ -3164,7 +3077,11 @@
       },
       "profile": {
         "title": "Mouchette",
-        "awakerIntroduction": "A lively maiden wielding a massive axe. She transforms into a frenzied warrior in battle, unleashing even greater combat power in adversity.\nWhen working in tandem with her allies, Mouchette's Battle Intent is greatly stimulated, and her offensive becomes increasingly fierce with the use of Strikes.\nIn this stage, a Level 50 Mouchette with Skill Level 5 and Enlighten Level 3 will join the battle, gaining 50 Aliemus, drawing 3 cards, and obtaining 3 Arithmetica at turn start.",
+        "birthday": "28-Nov",
+        "gender": "Female",
+        "height": "5'4.6''",
+        "weight": "99lbs",
+        "gnosticIndex": "Unstable",
         "storySections": [
           {
             "kind": "introduction",
@@ -3196,14 +3113,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "One day, she will return to her own world.\n\nBut before that, she wants to see the conclusion of this world—\n\nWill the one known as the \"Keeper\" be consumed by this chaotic and terrifying world, or will they shine brightly, bringing true redemption and light to this crumbling world?\n\nThis is a mystery, a challenge, a gamble.\n\nAnd she wants to know the answer."
           }
-        ],
-        "birthday": "28-Nov",
-        "gender": "Female",
-        "height": "5'4.6''",
-        "weight": "99lbs",
-        "gnosticIndex": "Unstable",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "A lively maiden wielding a massive axe. She transforms into a frenzied warrior in battle, unleashing even greater combat power in adversity."
+        ]
       }
     },
     {
@@ -3261,7 +3171,11 @@
       },
       "profile": {
         "title": "Murphy",
-        "awakerIntroduction": "Possesses unique protective abilities that transform enemy DMG into {Sacrifice}.\nUsing cards can grant a number of Tentacles that ignore the Tentacle Limit.\nFlexibly overdrawing {Sacrifice} to exchange for DEF can provide more powerful short-term combat power.\nIn this stage, \"Murphy\" will be deployed at Level 50, Skill Level 5, and Enlighten Level 3.",
+        "birthday": "22-Dec",
+        "gender": "Female",
+        "height": "4'8.7''",
+        "weight": "92.5lbs",
+        "gnosticIndex": "21.21",
         "storySections": [
           {
             "kind": "introduction",
@@ -3293,14 +3207,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "The arrogance of disregarding others is merely an empty show of force. Beneath that elegant dress lies a rebellious heart known only to herself.\nTrapped in a beautiful cage crafted by sacred narratives, Murphy understands better than anyone the hypocrisy of humans and gods: the gaze of the congregation upon her is nothing but fear and pity, and the care shown by her \"nurturers\" is merely for a sacrificial offering. The end goal of her mission will not be glory, but her own death — she already knows the outcome. How could she be lost in the distant kingdom painted by doctrines?\nThe plans for deification, the revival of the old king, so many unrealistic expectations placed upon her — yet no one has ever cared whether she is willing to accept a doomed fate for an uncertain future.\nThe canary does not wish to remain forever trapped in a cage; thus it flaps its wings toward the thorny fence. Determined to wager her life to break free from the shackles of destiny, she must now decide the direction of her flight herself.\n\"My name is Murphy... don't think you can order me around! I know what I should do and what I shouldn't do.\""
           }
-        ],
-        "birthday": "22-Dec",
-        "gender": "Female",
-        "height": "4'8.7''",
-        "weight": "92.5lbs",
-        "gnosticIndex": "21.21",
-        "characteristic": "Tentacle Activation    Replenish Arithmetica",
-        "introduction": "Withstands a Sacrifice Ritual to resist high enemy damage and commands Tentacles to launch a full-scale attack."
+        ]
       }
     },
     {
@@ -3361,7 +3268,12 @@
       },
       "profile": {
         "title": "Murphy: Fauxborn",
-        "awakerIntroduction": "As the Divine Mother revered by Seafarers, she establishes a new order to protect all her subjects, significantly enhancing the base effect of the {Aequor Realm}.\nInverted Fate grants her supreme power, allowing her to consecrate the lives of ther enemies as a {Sacrifice} to the god. However, a taboo power often comes with a steep price...\nIn this Stage, \"Murphy: Fauxborn\" and \"Tulu\" will be deployed, both at Level 50, with Skill Level 5 and Enlighten Level 3.",
+        "birthday": "22-Dec",
+        "gender": "Female",
+        "height": "4'8.7''",
+        "weight": "92.5lbs",
+        "gnosticIndex": "21.21",
+        "faction": "Lemuria",
         "storySections": [
           {
             "kind": "introduction",
@@ -3393,14 +3305,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "\"I am the Daughter of God, and simultaneously the Bearer of God.\"\nThis is how she confirms her authority. Only by maintaining this universally admired dignity can she preserve a precarious balance. So what if it's hypocrisy? So what if it's a delusion? Who isn't living in the \"present\" moment?\nMurphy holds the swaddling cloth, which conceals the grotesque Divine Fetus, and acts as the God's proxy, speaking one lie after another:\n\"He has descended.\" \"The Divine Realm will rise.\" \"Please wait for the next moment of Stellar Alignment.\"\nRather than letting others' hypocrisy fabricate an illusion, she would rather decorate this prison with her own hands to a likeness she finds acceptable. As long as the \"Mother,\" \"Companions,\" and \"Servants\" she desires are still by her side, whether it is superficial deference or insincere mystification, she accepts it and finds it sweet.\n\"My name is Murphy, the Princess who bore the God. Regarding Lemuria, regarding the Seafarers' long-cherished wish... you need not inquire. I have my own arrangements.\""
           }
-        ],
-        "birthday": "22-Dec",
-        "gender": "Female",
-        "height": "4'8.7''",
-        "weight": "92.5lbs",
-        "gnosticIndex": "21.21",
-        "characteristic": "Tentacle Activation    Replenish Arithmetica",
-        "introduction": "As the Divine Mother, she grants blessings and sanctuary to her subjects. Her ultimate power allows her to consecrate the lives of her enemies as a sacrifice."
+        ]
       }
     },
     {
@@ -3456,7 +3361,11 @@
       },
       "profile": {
         "title": "Nautila",
-        "awakerIntroduction": "Possesses strong defensive and stacking {Counter} abilities, which become even more powerful after {Rouse}.\nThe higher the Current Shield, the more Shield gained from Exalt; the higher the Current {Counter}, the greater the AoE DMG dealt by Exalt.\nIn this level, Nautila and Doll will join the battle at Level 50, Skill Level 5, and Enlighten 3, gaining 10 Aliemus per turn, with enemies receiving Enhance on the first turn.",
+        "birthday": "29-Jul",
+        "gender": "Female",
+        "height": "5'2''",
+        "weight": "105lbs",
+        "gnosticIndex": "21.3",
         "storySections": [
           {
             "kind": "introduction",
@@ -3488,14 +3397,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "A.F. 315, January, @2\nDr. Sylvia suggested that I jot down my thoughts in a notebook to help train my memory. Everyone says doctors know a lot and can surely help me. So I'm counting on it; tomorrow, I mustn't forget the purpose of this notebook! \n Today, I completed the production and assembly of the exhaust pipe. Now it can exhaust air without interfering with the auxiliary hose's movement. This should be the last step, right? At least I haven't found any issues so far, but I can't rule out forgetting a screw somewhere... That's right, I must have forgotten something—either a screw or a pipe, or maybe bearing lubrication? Engine oil? Honestly, I've always had this nagging feeling that something's off with the Phantom. It's always... lacking? Is that the word? It misses a crucial component, even more critical than the engine. Without it, I can't set off, can't embark on that journey into the unknown, because that is ours. @2 \n Why am I saying ours? Who am I with? Did I... have someone? I remember, it seems like... @2 @4 @3 \n Uh, my head hurts so much. \n But this notebook feels quite useful; that way, I can continue recalling from here tomorrow, and who knows, maybe I really will remember? \n — The only entry in Nautila's diary."
           }
-        ],
-        "birthday": "29-Jul",
-        "gender": "Female",
-        "height": "5'2''",
-        "weight": "105lbs",
-        "gnosticIndex": "21.3",
-        "characteristic": "Defensive Burst    Recycle Discards",
-        "introduction": "Her sturdy shell bolsters your team's defense, using spikes on the shell to counterattack incoming rivals."
+        ]
       }
     },
     {
@@ -3549,7 +3451,11 @@
       },
       "profile": {
         "title": "Nymphaea",
-        "awakerIntroduction": "Quickly stack {Poison} on enemies using Command Cards, then trigger the enemy's {Poison} effect with Exalt to deal massive DMG.\nThe DMG and {Poison} from {Midnight Tide} will increase as you play Symptom Cards.\nThe {Poison} applied by Exalt will increase with each use.\nIn this battle, bring Nymphaea with a Level of 50, Skill Level 5, and 3 Enlightened, and Obtain 3 Symptom Cards at the Start of the Battle.",
+        "birthday": "7-Dec",
+        "gender": "Female",
+        "height": "5'1''",
+        "weight": "90lbs",
+        "gnosticIndex": "21.05",
         "storySections": [
           {
             "kind": "introduction",
@@ -3581,14 +3487,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "I love the sea. Febvre's sea. The Prussian blue sea. The sea with warm, moist breezes. The sea that looks like a painting from the sanatorium's window. The sea with returning sails. The sea nurturing countless lives like a mother.\nNow, I've finally returned to the tranquil sea, back to before birth, back to being enveloped in my mother's amniotic fluid. The currents gather the unfortunate Fragments, piecing me together among bones and coral. The deep-sea fish swim past, listening to the laments of fate's suffering.\nMother, if I could be born again, would I be happier?"
           }
-        ],
-        "birthday": "7-Dec",
-        "gender": "Female",
-        "height": "5'1''",
-        "weight": "90lbs",
-        "gnosticIndex": "21.05",
-        "characteristic": "Trigger Poison    Weakness to Enemy",
-        "introduction": "Applies Poison and Weakness to continuously torment opponents while ensuring your team's safety."
+        ]
       }
     },
     {
@@ -3644,6 +3543,11 @@
       },
       "profile": {
         "title": "Ogier",
+        "birthday": "5-May",
+        "gender": "Male",
+        "height": "5 feet (self-proclaimed)",
+        "weight": "66lbs",
+        "gnosticIndex": "22",
         "storySections": [
           {
             "kind": "introduction",
@@ -3675,14 +3579,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "— How can this not be his fault? What he has done is far from enough.\nWith such extreme self-blame, Ogier executes his tasks at twice the frequency of other Awakeners, burying \"Death\" under universally praised \"Virtue\".\nThe excessive work and the words of gratitude from young Investigators seem to wash away the pain etched into the Soul.\nChronic ailments are pushed into the Shadows of the heart, emitting a rotting smell, secretly leading the knight towards the deep black mire.\n\"Sorry? Hello?\"\nSomeone came to Ogier with a ray of sunshine, or a gust of wind.\n\"Senior said Ogier will join me and Ramona to carry out my initial Investigation task, right?\"\nHe couldn't protect the princess for a second time, but Heaven gave him another chance to protect the \"Keeper\".\n\"My name is Ogier, and it is an honor to form a Contract with you. I will guard your Life with my Soul. Today's vow will be remembered forever.\""
           }
-        ],
-        "birthday": "5-May",
-        "gender": "Male",
-        "height": "5 feet (self-proclaimed)",
-        "weight": "66lbs",
-        "gnosticIndex": "22",
-        "characteristic": "Cleanse Fragile    Temporary STR",
-        "introduction": "Condenses a formless barrier from viscous slime, then raises a spear to signal teammates and initiate the charge."
+        ]
       }
     },
     {
@@ -3736,7 +3633,11 @@
       },
       "profile": {
         "title": "Pandia",
-        "awakerIntroduction": "Through {Rouse} and Command Cards, you can quickly stack {Counter}. The higher the DMG dealt, the more {Counter} you Obtain.\nThe higher your Current {Counter}, the greater the AoE DMG caused by Exalt. If there is only 1 enemy, Exalt will also deal an additional instance of DMG.\nIn this stage, Pandia will join the battle at Level 50, with Skill Level 5 and 3 Enlighten. Enemies will gain Enhance on their first turn.",
+        "birthday": "28-Oct",
+        "gender": "Female",
+        "height": "4'9.9''",
+        "weight": "86lbs",
+        "gnosticIndex": "21.06",
         "storySections": [
           {
             "kind": "introduction",
@@ -3768,14 +3669,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "\"Master, whip me.\"\nThe fire of desire burned in her eyes that should have dried up, melting wax dripping like tears.\nThirst, pain, curses, filth—all the humiliation she craved, all the pleasures she offered, finally arrived upon her in this moment."
           }
-        ],
-        "birthday": "28-Oct",
-        "gender": "Female",
-        "height": "4'9.9''",
-        "weight": "86lbs",
-        "gnosticIndex": "21.06",
-        "characteristic": "Counter Enemies    Multiple Hits",
-        "introduction": "Strikes rivals while gaining a large amount of Counter, leaving any would-be retaliators in excruciating pain."
+        ]
       }
     },
     {
@@ -3832,7 +3726,11 @@
       },
       "profile": {
         "title": "Pickman",
-        "awakerIntroduction": "This artist uses human remains as his medium, and his macabre creations provide various spiritual enhancements to his team. As he sketches, he accumulates creative energy. Once his inspiration peaks, it erupts in a frenzied artistic banquet.\nIn this stage, a level 50 Pickman enters the battle alongside Lotan, Ogier, and Doll. Each turn, Pickman gains an additional 100 Aliemus, while other allied Awakeners gain 30.",
+        "birthday": "17-Feb",
+        "gender": "Male",
+        "height": "6'0.1''",
+        "weight": "143lbs",
+        "gnosticIndex": "28.2",
         "storySections": [
           {
             "kind": "introduction",
@@ -3864,14 +3762,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "A monster. A freak. Demon with the blood of monsters. Madman who desecrates art...\nBefore Pickman, a canvas unfurls, and the curses mix with other sounds, smearing brilliant colors across the canvas.\nHe leaps into this dazzling world, wandering in the mad colors. He eagerly hopes to lead others into his painting, to let them witness the most authentic visage of the world.\nThe sharp spikes of reality pierce his heart countless times; mutual understanding between people is more challenging than opening the boundaries of two worlds.\nFrom humans to ghouls, from human cities to Necropolis, the road is long and winding. He has been wounded time and again, yet he rises again and again. He has long understood that there is neither truth nor falsehood. Pain and madness are the truth of the world. And his duty is to depict all of this faithfully.\nThe meaning of depiction lies only in the act of depicting itself.\nHe dedicates all his life and passion to painting. His expectations rarely receive a response; his pursuit never ceases."
           }
-        ],
-        "birthday": "17-Feb",
-        "gender": "Male",
-        "height": "6'0.1''",
-        "weight": "143lbs",
-        "gnosticIndex": "28.2",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "Flexibly create different Paintings, and greatly enhance the Exalt effect of other Awakeners."
+        ]
       }
     },
     {
@@ -3928,7 +3819,11 @@
       },
       "profile": {
         "title": "Pollux",
-        "awakerIntroduction": "A pious and noble Divus of the Lightbearer, his {Sacred Heart} perpetually yearning for the dawn. He harnesses divine brilliance to periodically enhance card effects and wields the authority of a Divus to pass judgment upon all sins that dwell in shadow.\nIn this stage, Pollux debuts at level 50 with skill level 5 and enlightenment 3, gaining 50 aliemus and 1 \"Insight\" each turn.",
+        "birthday": "20-Jun",
+        "gender": "Male",
+        "height": "5'8''",
+        "weight": "141lbs",
+        "gnosticIndex": "25.46",
         "storySections": [
           {
             "kind": "introduction",
@@ -3960,14 +3855,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "His entire life was lived under manipulated strings, and the script written long ago was a laughable lie that made him constantly lose, forget, and miss out. \n When he was young, what he desired most was to freely flap his wings and see the world beyond that lake. \n It wasn't until he lost everything for this wish that he could no longer regard such a light and carefree life as his ultimate dream. \n Endless rage ignited that pitch-black heart, and the pain and hatred he repressed like blood needed to be washed away with the deaths of those false believers."
           }
-        ],
-        "birthday": "20-Jun",
-        "gender": "Male",
-        "height": "5'8''",
-        "weight": "141lbs",
-        "gnosticIndex": "25.46",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "Periodically enhance card effects using Pollux's Radiant Light. The authority of the Divus can judge all dark evils."
+        ]
       }
     },
     {
@@ -4026,6 +3914,11 @@
       },
       "profile": {
         "title": "Ramona",
+        "birthday": "12-Dec",
+        "gender": "Female",
+        "height": "5'5''",
+        "weight": "102lbs",
+        "gnosticIndex": "25",
         "storySections": [
           {
             "kind": "introduction",
@@ -4057,14 +3950,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "She knows everything.\nShe knows the bell tower rings in emergencies, that the Eridanus meteor shower will return in ten years, and that she possesses a unique power.\nShe knows nothing.\nShe doesn't know the secret spice in the cafeteria's curry recipe, how to calculate the radius of a planet after its annihilation, or the direction her future will take.\nShe finds it hard to let go of everything around her, yet cannot resist the path her intuition reveals.\nOn the journey toward truth and normalcy, Ramona needs steadfast companions to help her secure the road back to everyday life."
           }
-        ],
-        "birthday": "12-Dec",
-        "gender": "Female",
-        "height": "5'5''",
-        "weight": "102lbs",
-        "gnosticIndex": "25",
-        "characteristic": "Search for Cards    Multi-Hit Damage",
-        "introduction": "Provides your team with essential card support, then pierces through rivals with gradually accelerating sword techniques."
+        ]
       }
     },
     {
@@ -4122,7 +4008,11 @@
       },
       "profile": {
         "title": "Ryker",
-        "awakerIntroduction": "Ryker's Exalt and Skills yield randomized results; the better your luck, the greater the rewards.\n{Rouse} grants or allows selection of upgrades for {Chaotic Legacy}.\nIn this stage, Ryker and Lotan will be deployed at Level 50, Skill Level 5, Enlighten Level 3. Ryker initially has a 25% Crit. Rate boost, all {Chaotic Legacy} Relics, and an additional set of Cards. The enemy receives Temporary Strengthening in the first round.",
+        "birthday": "6-Jun",
+        "gender": "Male",
+        "height": "?",
+        "weight": "102lbs",
+        "gnosticIndex": "?",
         "storySections": [
           {
             "kind": "introduction",
@@ -4154,14 +4044,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "When the mountaineer reaches the peak of Elworth.\nWhen the competitor lifts the world's number one trophy.\nWhen the devout listens to the Revelation in dreams.\nWhen victory comes too easily, the accompanying satisfaction may turn into bland inertia.\nLooking around, there are no opponents, no fun at all.\nOn the surface, Ryker yearns for an exhilarating game, craving the heart-pounding moment after an ALL-IN, desiring the surge of adrenaline.\n\"There is no need to say those things. Only I understand you. What you truly desire is simply failure.\nLet me grant you the sweetest failure.\""
           }
-        ],
-        "birthday": "6-Jun",
-        "gender": "Male",
-        "height": "?",
-        "weight": "102lbs",
-        "gnosticIndex": "?",
-        "characteristic": "Replenish Hand    Black Sigil Acquisition",
-        "introduction": "Draws a large number of cards and win Chaotic Legacy Relics by obtaining Black Sigils."
+        ]
       }
     },
     {
@@ -4218,7 +4101,11 @@
       },
       "profile": {
         "title": "Salvador",
-        "awakerIntroduction": "Unique {Crimson Furnace} accumulation from Command Cards, HP, and even enemy Damage.\nCan flexibly convert furnace recovery into substantial Shields or Damage.\nIn this quest, a level 50 Salvador with skill level 5 and Enlighten 3 will join, starting with 50% Crit. Rate, gaining 20 Aliemus each turn, but enemies receive 150 Temporary {STR} in the first two turns.",
+        "birthday": "30-May",
+        "gender": "Male",
+        "height": "6'1.6''",
+        "weight": "165lbs",
+        "gnosticIndex": "45",
         "storySections": [
           {
             "kind": "introduction",
@@ -4250,14 +4137,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "\"The benevolent Father once said: Cherish all things within the sky, on the ground, in the water, and in the soil. For all beings are my offspring.\n\"Thus, I say: Render all suffering unto me. Let those tormented by life or plagued by disease be made whole. Let all pain and madness melt as frost before the rising sun. Let you, my brethren, receive joy everlasting. \n\"Burn me, grind my bones to dust, and rend my flesh asunder. For as long as you can find solace, I have little complaints.\"\n—B.F. 1@1, May 30, Sal @1doMartin @2I @1as, left at @3 the Tribunal"
           }
-        ],
-        "birthday": "30-May",
-        "gender": "Male",
-        "height": "6'1.6''",
-        "weight": "165lbs",
-        "gnosticIndex": "45",
-        "characteristic": "Arithmetica Support    Shield to Offense",
-        "introduction": "Accumulates infinite benevolence in the Crimson Furnace, providing emergency support when an ally is injured."
+        ]
       }
     },
     {
@@ -4315,7 +4195,11 @@
       },
       "profile": {
         "title": "Sanga",
-        "awakerIntroduction": "Has powerful Defense and the ability to permanently generate Tentacles; more Tentacles mean stronger defense.\nExalt deals AoE DMG, and Shield increase the amount of DMG dealt.\nIn this quest, a level 50 Sanga with skill level 5 and Enlighten level 3 will join. Enemies will be strengthened in the first turn.",
+        "birthday": "31-Oct",
+        "gender": "Female",
+        "height": "5'5''",
+        "weight": "176lbs",
+        "gnosticIndex": "22.98",
         "storySections": [
           {
             "kind": "introduction",
@@ -4347,14 +4231,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Watched by countless nights, the sculptor suffered from Dissolution slips beneath the murmuring waves, falling into writhing dreams:\nAs Lemuria's spirals inflamed by her kindreds, its majestic walls arise in her hands.\nAs the Father and His servants slumbering into epics, their statues find immortality under her carving.\nHer senses dull. Her body stiffens. Her chisel nearly escapes.\nCoral-like white mists have crept to her forearms. Hands tremble under her gaze. A smile flickers. Her life will fade like an extinguishing candle, while her body will step beyond eternal's door.\nHer wish fullfilled as she sinking onto the seabed. Coral shattering to foam, black slime of Dissolution threads into the ocean—she finally embraces the City long-lost in currents, and mingles with its splendor—together, ever after."
           }
-        ],
-        "birthday": "31-Oct",
-        "gender": "Female",
-        "height": "5'5''",
-        "weight": "176lbs",
-        "gnosticIndex": "22.98",
-        "characteristic": "Sustained Protection    Tentacle Growth",
-        "introduction": "Creates stone sculptures to defend against subsequent attacks, with \"The Lost Art\" dealing more damage as the Shield increases."
+        ]
       }
     },
     {
@@ -4412,7 +4289,11 @@
       },
       "profile": {
         "title": "Sorel",
-        "awakerIntroduction": "The lower the HP, the stronger the DMG and Healing.\nStockpile embryos in advance, and unleash a burst of Aliemus through infinite {Devour} to deal massive DMG at once.\nIn this level, Sorel will be brought into battle with a carrying Level of 50, Skill Level 5, and 3 Enlighten, starting with 40% HP.",
+        "birthday": "9-Feb",
+        "gender": "Female",
+        "height": "5'7''",
+        "weight": "130lbs",
+        "gnosticIndex": "23.1421",
         "storySections": [
           {
             "kind": "introduction",
@@ -4444,14 +4325,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Even now, as an Awakener, Sorel cannot forget those nobles who fawned over her; she cannot forget their faces, one after another, etched with flattery.\n\nHow utterly nauseating those smiling faces were: slick, mercenary, every one of them oozing desire and calculation, yet she had no choice but to weave a gentle web around each one.\n\nShe would weave the most meticulous of webs, reaching into every dark corner, winning over every person, seizing every piece of leverage. She had to be like water slowly brought to a boil, letting those people sink deeper and deeper, so that by the time they wished to remove their masks, they would find there was no escape.\n\nBut when she finally came to her senses, the one with no escape turned out to be herself.\n\nNo escape. No rest. No surrender.\n\nSorel has long since lost the right to turn back. Aside from standing above everyone, there is no other path for her to walk."
           }
-        ],
-        "birthday": "9-Feb",
-        "gender": "Female",
-        "height": "5'7''",
-        "weight": "130lbs",
-        "gnosticIndex": "23.1421",
-        "characteristic": "Multi-hit DMG    HP Healing",
-        "introduction": "Deals high-frequency damage with a graceful waltz and heals itself with the enemy's blood."
+        ]
       }
     },
     {
@@ -4511,7 +4385,11 @@
       },
       "profile": {
         "title": "Tawil",
-        "awakerIntroduction": "The all-knowing sage, possessing infinite wisdom, skillfully masters all skills, searching for the best path among countless possibilities.\nCan provide a large amount of Keyflare for the team and also convert Keyflare into winged strikes against enemies.\nIn this level, Tawil and Lotan will participate at Level 50, Skill Level 5, and Enlighten Level 3, gaining 100 Aliemus and increasing Keyflare Regen by 50 at the start of battle.",
+        "birthday": "31-Dec",
+        "gender": "Female",
+        "height": "5'5''",
+        "weight": "???",
+        "gnosticIndex": "Immeasurable",
         "storySections": [
           {
             "kind": "introduction",
@@ -4543,14 +4421,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "As the Aeon of Sagacity's Proxy and Gatekeeper, Tawil has not lacked the desire to explore Their own essence. Tawil yearns to walk the earth like those The Gatekeeper watches over, witnessing the changes in civilization and the vicissitudes of history, gathering all They see into a treasury called 'Omniscience.' But Their existence does not allow Them to abandon Their post. Deep in Tawil's heart, perhaps what They envy most is the girl who carries a thread of Their will..."
           }
-        ],
-        "birthday": "31-Dec",
-        "gender": "Female",
-        "height": "5'5''",
-        "weight": "???",
-        "gnosticIndex": "Immeasurable",
-        "characteristic": "Suggested Translation",
-        "introduction": "Tawil knows all and can utilize any Skill for their own purposes, using Keyflare as a resource to launch attacks."
+        ]
       }
     },
     {
@@ -4607,7 +4478,11 @@
       },
       "profile": {
         "title": "Thais",
-        "awakerIntroduction": "Thais boasts the unique ability to copy Cards, and those copied Cards come with a reduced Arithmetica Cost.\nUpon {Rouse}, gain {Scion of Purity}. When consumed by {Caro} characters' Exalt, it triggers the Devouring effect twice. When unleashing Posse, convert {Embryo} into {Scion of Purity}.\nIn this stage, you'll deploy Awakener \"Thais\" and \"Ramona\" (Level 50, Skill Level 5, Enlighten Level 3), alongside the Tiny Wish Posse.",
+        "birthday": "19-Apr",
+        "gender": "Female",
+        "height": "5'9''",
+        "weight": "149lbs",
+        "gnosticIndex": "28.4",
         "storySections": [
           {
             "kind": "introduction",
@@ -4639,14 +4514,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "It is real.\nIt is a gaze cast by God, a branch extending into the universe.\nIt delights in the grandeur of history and hungers for the prosperity of civilization.\nIt seeks to transcend withering and overcome death.\nShe desires deep chanting, sandy soil and salty wind, silver leaves, and Mosul's moonlight.\nHarlot, witch, sorceress... These epithets from mankind mean nothing.\nIf even a single drop of blood escapes the black encroachment, they will reclaim eternity."
           }
-        ],
-        "birthday": "19-Apr",
-        "gender": "Female",
-        "height": "5'9''",
-        "weight": "149lbs",
-        "gnosticIndex": "28.4",
-        "characteristic": "Copy Cards    Aliemus Supply",
-        "introduction": "She gives birth to scions of the Holy Tree to allow more Devour triggers, while her Ritual of Abundance produces copies of skill cards."
+        ]
       }
     },
     {
@@ -4705,7 +4573,11 @@
       },
       "profile": {
         "title": "Tinct",
-        "awakerIntroduction": "{Rouse} can grant Tinct all Command Cards with random effects, randomly obtaining {Weakness}, {Vulnerable}, Draw, Arithmetica, and Aliemus abilities.\nExalt can reduce the Arithmetica Cost of five Hand cards by 1 while also enhancing Tinct's base \"Strike\" DMG.\nBy accumulating Strength and base \"Strike\" DMG, using \"Strike\" can deal massive Damage.\nIn this level, you will carry a Level 50 Tinct with Skill Level 5 and 3 Enlightenments, gaining 15 Aliemus each turn, and the enemy will gain Enhance on the first turn.",
+        "birthday": "7-Mar",
+        "gender": "Female",
+        "height": "5'4''",
+        "weight": "110lbs",
+        "gnosticIndex": "23.67",
         "storySections": [
           {
             "kind": "introduction",
@@ -4737,14 +4609,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "At this point, discussing \"my own life\" with me may be asking too much.\nI have grown accustomed to dissipating into the high skies and concealing myself among the stars.\nThe person the onlookers are gazing at is not me; I am not the one being played with like a music box, nor the one drifting through the desolate starry sky. That is merely a tool selling its voice for survival, a walking corpse wandering in search of Faint. Only by believing that others' value far surpasses my own can I find meaning in all this effort.\nSo, at this point, please don't make me notice myself anymore.\n\n\"But, dear sister, don't dwell on those memories that have already passed.\nOpen your eyes and take a look—your one-of-a-kind song has already resounded throughout the universe.\""
           }
-        ],
-        "birthday": "7-Mar",
-        "gender": "Female",
-        "height": "5'4''",
-        "weight": "110lbs",
-        "gnosticIndex": "23.67",
-        "characteristic": "Strength Steal    Cost Reduction",
-        "introduction": "Uses transcendent singing to reduce the Arithmetica Cost of a large number of cards in hand and boosts teammates' battle morale."
+        ]
       }
     },
     {
@@ -4802,7 +4667,12 @@
       },
       "profile": {
         "title": "Tulu",
-        "awakerIntroduction": "Use cards and Exalt to trigger Tentacle growth bursts.\nUtilize the abilities of the Tentacles to deal massive DMG to enemies.\nObtain additional Arithmetica and Aliemus in this stage.",
+        "birthday": "20-Aug",
+        "gender": "Male",
+        "height": "8'3''",
+        "weight": "70.5lbs",
+        "gnosticIndex": "49.51",
+        "faction": "Lemuria",
         "storySections": [
           {
             "kind": "introduction",
@@ -4834,14 +4704,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "His transcendent wisdom exacts a heavy toll on his body; he must sleep for more than fifteen hours a day, and even in his waking hours, he is haunted by a persistent lethargy.\nWithin his dreams, he sometimes feels the fury of the gods; at other times, he glimpses the intersection of fractured timelines. Occasionally, he even wanders into the furthest depths, coming face-to-face with the Divine itself.\nHe has never sought their revelations or prophecies, yet no matter how he tries to evade them, the visions always come to pass.\nHe never asked for offerings. To be worshiped, to be feared—these were burdens thrust upon him by others, and they hold no interest for him.\nTo be reborn was nothing more than an unwelcome interruption of an eternal dream.\nNo need for invocation. No need for prayer."
           }
-        ],
-        "birthday": "20-Aug",
-        "gender": "Male",
-        "height": "8'3''",
-        "weight": "70.5lbs",
-        "gnosticIndex": "49.51",
-        "characteristic": "Tentacle Burst    Tentacle Growth",
-        "introduction": "Commands Tentacles to subdue enemies and rapidly triggers explosive Tentacle damage."
+        ]
       }
     },
     {
@@ -4897,7 +4760,11 @@
       },
       "profile": {
         "title": "Uvhash",
-        "awakerIntroduction": "Exalt deals high AoE DMG and enjoys high {STR} bonus.\nWhen Exalt triggers {Devour}, the subsequent Exalt DMG and {STR} Buff in this battle are increased.\nThe lower the HP, the higher the Damage.\nIn this level, Uvhash will join the battle at Level 50 with Skill Level 5 and 3 Enlightenments, gaining 30% {Embryo Fusion} each turn, and enemies will be Enhanced for the first two turns.",
+        "birthday": "4-Apr",
+        "gender": "Male",
+        "height": "6'2''",
+        "weight": "190lbs",
+        "gnosticIndex": "23.01",
         "storySections": [
           {
             "kind": "introduction",
@@ -4929,14 +4796,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "@2 Years, the ancient city of Akka.\nAfter a millennium of hunger and thirst, it finally erupted—killing, drinking blood, killing, drinking blood. In the end, all that remained before him was an endless desert and countless dried corpses. Even vultures feared to approach him.\nKneeling in the yellow sand, he laughed heartily: Exhilarating! Truly @1 exhilarating!\nNow, he himself would bring this massacre to a perfect end.\nThe warrior bit his wrist, drained his own blood, and collapsed into the crimson pool."
           }
-        ],
-        "birthday": "4-Apr",
-        "gender": "Male",
-        "height": "6'2''",
-        "weight": "190lbs",
-        "gnosticIndex": "23.01",
-        "characteristic": "Exalt    Growing Stronger",
-        "introduction": "A berserker who fights relentlessly and grows stronger, becoming even more powerful as their HP drops."
+        ]
       }
     },
     {
@@ -4990,7 +4850,11 @@
       },
       "profile": {
         "title": "Wanda",
-        "awakerIntroduction": "Wanda possesses powerful {Counter} abilities and unique effects that trigger {Leap}.\nPlay Cards to accumulate {Dreamlure}, then flexibly consume it to enhance her abilities. Stack {Counter} to weaken enemies and boost damage.\nIn this stage, \"Wanda\" (Level 50, Skill Level 5, Enlighten Level 3) will be deployed.",
+        "birthday": "2-Nov",
+        "gender": "Female",
+        "height": "5'7''",
+        "weight": "121lbs",
+        "gnosticIndex": "23.41",
         "storySections": [
           {
             "kind": "introduction",
@@ -5022,14 +4886,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "\"Indulgence and lust lead to eternal fire as a warning...\"\nFor 23 days, the monk stood outside her gate, reciting monotonous scriptures.\nWanda had him tied up and brought in.\nThe monk said, 'Why worry about suffering? Where the Lord's spirit is, there is freedom.'\nShe stripped him.\nThe monk said, 'Why worry about clothes? The lilies of the field neither spin nor bow.'\nShe severed his limbs.\nThe monk said, 'Why worry about blood? All flesh dies.'\nWanda laughed, 'I will not only make you bleed, but also turn you into my slave, forever.'\n'Why?' the monk lifted his head, 'Shouldn't you show mercy to your companion as I showed mercy to you?'\nWanda studied the monk. His eyes were as blue as the clear sky.\nShe gouged out his eyes.\nUnable to bear the torture, the monk eventually died. The local parish feared her wealth and power, and no one dared to accuse her.\nBefore dying, the monk said, '@2 is near, you should...'\nYears passed, and Wanda had long forgotten the monk's face and name, only remembering his eyes. On the night she was about to be devoured by @2, she recalled the monk's unfinished words.\n'@2 is near, you should...'\nIn her blurred consciousness, she speculated on the monk's last words, but found nothing.\""
           }
-        ],
-        "birthday": "2-Nov",
-        "gender": "Female",
-        "height": "5'7''",
-        "weight": "121lbs",
-        "gnosticIndex": "23.41",
-        "characteristic": "High Counter    Trigger Leap",
-        "introduction": "Commanding deadly thorns, she establishes a formidable defense by stacking Counter effects, then unleashes them to deal DMG."
+        ]
       }
     },
     {
@@ -5088,7 +4945,11 @@
       },
       "profile": {
         "title": "Winkle",
-        "awakerIntroduction": "Possesses strong defense and the ability to provide Aliemus.\nExalt grants a significant amount of Aliemus to another Awakeners, enabling them to release more Exalts or even multiple Exalts in one turn.\n{Rouse} grants {Counter} when applying Shield, providing {Counter} against multi-hit enemies.\nIn this quest, Winkle and Lotan, both at Level 50 with Skill Level 5 and Enlighten Level 3, will join. They gain benefits during trial battles, while enemies are strengthened in the first turn.",
+        "birthday": "7-Sep",
+        "gender": "Female",
+        "height": "5'6''",
+        "weight": "123lbs",
+        "gnosticIndex": "21.7",
         "storySections": [
           {
             "kind": "introduction",
@@ -5120,14 +4981,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Survival is both instinct and an inescapable burden. In the face of a death that erases memory, she alone is proof they ever existed—her parents, her friends, everything from her hometown.\nSo, she fled to an untainted world, to this ocean-covered planet, finding new life in the body of a deceased human girl.\nBut the black death has infinite patience.\nHuman eyes cannot see the Dissolution, but she knows what the cold at the edge of consciousness means, what the darkness in her mind represents—what humans call Dissolution has caught up, unknowingly binding her Spirit and Body.\nShe tried to flee over and over, only to fail each time, until utterly exhausted, her Spirit torn to its limit, she dragged her Body to the one place she hoped might offer salvation.\nNo matter what, she wanted to live."
           }
-        ],
-        "birthday": "7-Sep",
-        "gender": "Female",
-        "height": "5'6''",
-        "weight": "123lbs",
-        "gnosticIndex": "21.7",
-        "characteristic": "Aliemus Supply    Delayed Draw",
-        "introduction": "Provides Aliemus to other allies and spends all cards in hand to generate a large amount of Shield."
+        ]
       }
     },
     {
@@ -5184,7 +5038,11 @@
       },
       "profile": {
         "title": "Xu",
-        "awakerIntroduction": "An elegant and alluring Eastern \"deity.\" When she lowers her fan, all beings fall entranced by her lethal charm.\n\nThe pleasure born of desire clings like a bone-deep {Poison}, luring mortals to willingly dissolve into silence within the vows of passion she bestows.\nIn this stage, you will deploy Xu and Ramona at Level 50, Skill Level 5, and Enlighten Level 3. At turn start, place 1 \"Adv. Insight\" and 1 {Embryo} into hand; inflict 1 stack of {Spellbound} on all enemies.",
+        "birthday": "1-Jun",
+        "gender": "Female",
+        "height": "?+5'52''",
+        "weight": "?+105lbs",
+        "gnosticIndex": "43.34",
         "storySections": [
           {
             "kind": "introduction",
@@ -5216,14 +5074,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Have you ever felt the world grow so deathly quiet that you felt the urge to shatter something, just to hear the sound?\n\nLust is the silver vase she hurls; the prey startled by its chime... they will slaughter for love and be slaughtered by love, until their spirit is bled dry and only a hollow shell remains.\n\nThen, those drained husks will offer her ever greater dominion, staining everything in sight with a bloody, delicious chaos.\nA chaos that never ends."
           }
-        ],
-        "birthday": "1-Jun",
-        "gender": "Female",
-        "height": "?+5'52''",
-        "weight": "?+105lbs",
-        "gnosticIndex": "43.34",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "Her intoxicating charm shatters the enemy's will to fight, and the bone-deep poison seeping through their body erupts violently the moment they succumb."
+        ]
       }
     },
     {
@@ -5281,7 +5132,11 @@
       },
       "profile": {
         "title": "Vortice",
-        "awakerIntroduction": "A cheerful girl yearning for friendship. Inspired by her allies' Exalt, she can unleash coordinated attacks as {Pursuit}.\nHer massive cannon, frighteningly disproportionate to her slender frame, devours energy hungrily. When her restraints are released, the vortex that cannon generates will instantly level everything around it.\n\nIn this Stage, Vortice, Ramona, and Ogier will join the battle at Level 50, Skill Level 5, and Enlighten 3. At the Start of each turn, all Awakeners gain 50 Aliemus, draw 3 cards, and gain 3 Arithmetica.",
+        "birthday": "13-Jul",
+        "gender": "Female",
+        "height": "6' 20''",
+        "weight": "Anthropometry Not Applicable",
+        "gnosticIndex": "21.35",
         "storySections": [
           {
             "kind": "introduction",
@@ -5313,14 +5168,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "Out on the boundless ocean, in the salty breeze, the ship gave her a family and friends beyond blood ties before the torrent swallowed everything. For the first time, she truly understood what loneliness was, and she never wanted to feel it again.\nYet for her best friend, her little family, she was willing to return to that pitch-black silence.\nAfter the darkness covered everything, she was reborn in a new form. Sure, this new life comes with inconveniences—she keeps forgetting how destructive her power is—but the chance to make more friends still fills her with pure joy.\nOf course, it would be even better if her best friend could remember the stories they once shared.\n\"Even better than better—super-duper better!\""
           }
-        ],
-        "birthday": "13-Jul",
-        "gender": "Female",
-        "height": "6' 20''",
-        "weight": "Anthropometry Not Applicable",
-        "gnosticIndex": "21.35",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "A cheerful and forthright girl. Her heavy weapon channels vortex energy to unleash devastating destruction."
+        ]
       }
     },
     {
@@ -5377,7 +5225,11 @@
       },
       "profile": {
         "title": "Arachne",
-        "awakerIntroduction": "Bound by destiny, the {Weaver} grows more powerful through her continuous weaving, though she must bear an ever-increasing cost. By weaving the web of fate, she protects her allies and grants them Prismatic Power, allowing the accumulated {Final Verdict} to tighten and purge filth at the decisive moment.\nIn this stage, you will deploy Arachne and Nymphaea at Level 50, with Skill Level 5 and Enlighten 3.\nDuring this battle, the effectiveness of {Poison} applied by all Awakeners is increased by 200%. At the start of each turn, all Awakeners gain 30 Aliemus, 1 stack of {Weaver}, 3 additional Aliemus, and draw 3 cards.",
+        "birthday": "24-May",
+        "gender": "Female",
+        "height": "5'8''",
+        "weight": "135lbs",
+        "gnosticIndex": "52.29",
         "storySections": [
           {
             "kind": "introduction",
@@ -5409,14 +5261,7 @@
             "unlockCondition": "Affinity Level 9",
             "content": "As the Weaver of the Web of Fate, Arachne governed the threads of countless lives, with past and future flowing through her hands. Yet, she harbored a hobby that bordered on the frivolous. \n\nShe loved the theater. Not for the twisting plot or the well-turned phrase: those were already etched into her mind. As the creator of the script, she knew every turn of the story and every line of the actors by heart. \nYet, time and again, she stepped into the theater. \n\nWhat she truly craved was the immersive sense of \"presence\"—the feeling of truly being there. \nWhen the curtain rises and the audience sinks into darkness, the stage becomes the only true world. In that moment, time is no longer a river running in a single direction, but an enactment within a confined space—past, present, and future overlap here. Everything ceases to be a script upon a page and becomes a tremor of life unfolding in the living present. \n\nAnd she, at last, is no longer the exile gazing at the threads she can never touch. \n\nInside the theater, she can briefly seal away her memories. She can step onto the stage as the girl gasping out her final words, or sit among the crowd, granting the actors their freedom. Casting off the prophet’s burden, she allows herself to simply tremble, weep, and hold her breath at every stirring pulse of the performance. Not as a seer, but as a living soul—adopting the posture of the ignorant, breathing in sync with the characters, shattered by a single line. Even knowing the end is written, even knowing the tragedy is foreordained. This illusion allows her a fleeting escape from her sentence as an eternal spectator. \n\nNo longer exiled from fate, but welcomed into it—even for a single instant, even as a phantom. \n\nThis small indulgence was already the most luxurious grace fate could bestow upon Arachne."
           }
-        ],
-        "birthday": "24-May",
-        "gender": "Female",
-        "height": "5'8''",
-        "weight": "135lbs",
-        "gnosticIndex": "52.29",
-        "characteristic": "Multi-hit Damage    Critical Hit",
-        "introduction": "The Weaver of Fate spins the threads of destiny to safeguard the peace beneath her wheel, using the power of severance to excise all corruption."
+        ]
       }
     }
   ]

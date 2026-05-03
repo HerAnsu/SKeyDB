@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Caecus",
-    "awakerIntroduction": "Has powerful HP Healing and stacking {Counter} Ability, performing well against enemies with multi-hit attacks.\nExalt and {Protective Scales} can deal more {Counter} DMG.\nIn this level, Caecus will be brought into battle at Level 50, Skill Level 5, and Enlighten Level 3. He will Obtain 10 Aliemus each turn, and the enemy will receive Enhance on the first turn.",
+    "birthday": "11-Nov",
+    "gender": "Male",
+    "height": "5'5''",
+    "weight": "114.6lbs",
+    "gnosticIndex": "21",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Haven't you had such dreams? Suddenly inheriting a massive fortune, suddenly gaining immense power... enough to trample those who once disdained and hurt us.\nThen, at the moment you wake up, faced with relentless reality, you fall deeper into despair.\nBut my dream is true, my fate has arrived.\n\nKnow this: you are the weak ones.\n\nCan physical frailty and a wilting soul not uphold a noble bloodline? No, that's impossible, because the name Oren is our family's pride and symbol. Endowed with the bloodline and name, I am no longer that bullied freak; I am someone with noble blood.\n\nSo... please... stop looking at me with those suffocating eyes..."
       }
-    ],
-    "birthday": "11-Nov",
-    "gender": "Male",
-    "height": "5'5''",
-    "weight": "114.6lbs",
-    "gnosticIndex": "21",
-    "characteristic": "Counter Enemies    Tentacle DMG",
-    "introduction": "Erects all body spines to counterattack invading enemies and uses their bloodline power to heal self."
+    ]
   }
 }

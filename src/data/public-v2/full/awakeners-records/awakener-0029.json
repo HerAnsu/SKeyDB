@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Lily",
-    "awakerIntroduction": "Has powerful Defense abilities that gets stronger as HP drops.\nThe more pain, the more {Madness}; unleashing lethal {STR} in desperate situations.\nIn this quest, a level 50 Lily with Skill level 5 and Enlighten 3 will join the battle.",
+    "birthday": "15-Jun",
+    "gender": "Female",
+    "height": "4'4.2''",
+    "weight": "340lbs",
+    "gnosticIndex": "27.6",
     "storySections": [
       {
         "kind": "introduction",
@@ -91,13 +95,6 @@
         "unlockCondition": "Affinity Level 10",
         "content": "The small soul, which should have been lost to the river of history, relied on her mother's wish, the abundant spiritual energy from establishing the magic circle with @1@2@1, and the fusion with the giant creature frozen beneath Elworth, resurrecting as the monster \"Lily\".\nDue to incomplete awakening, Lily at the beginning had no consciousness, merely a combat doll that obeyed orders.\nFrancis Oswood, a member of the Sculptors' Association, used Lily as a prototype to conduct illegal experiments lasting @2 years. From Francis's diary, it was known that Lily's state back then was extremely unstable, often going out of control and causing localized destruction, which forced Francis to frequently change residences.\nWith the intake of the gnosis elixir and the implantation of the silver chip, Lily regained her perception and some memories on an undocumented day. After some twists and turns, Francis took over the almost bankrupt Lai Hospital and transformed it into a testing ground.\nDuring the \"Hellhound\" incident in Lai Town No. L-776, her mother, Francis Oswood, was trapped in her self-created anomalous dimension and lost contact."
       }
-    ],
-    "birthday": "15-Jun",
-    "gender": "Female",
-    "height": "4'4.2''",
-    "weight": "340lbs",
-    "gnosticIndex": "27.6",
-    "characteristic": "Max HP    Stronger When Hurt",
-    "introduction": "Converts the pain it endures into fury to eliminate enemies or into HP to aid allies."
+    ]
   }
 }

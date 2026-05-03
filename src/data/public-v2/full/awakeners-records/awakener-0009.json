@@ -54,7 +54,11 @@
   },
   "profile": {
     "title": "Celeste",
-    "awakerIntroduction": "Comprehensive Arithmetica supply, Healing, and {Tentacle DMG} enhancement Assist Ability.\nAfter Exalt, resurrect upon taking lethal DMG once per battle.\nIn this quest, a Level 50 Celeste with Skill Level 5 and Enlighten 3 will join, gaining 20 Aliemus each turn, and enemies are strengthened in the first turn.",
+    "birthday": "15-Mar",
+    "gender": "Female",
+    "height": "5'5''",
+    "weight": "?",
+    "gnosticIndex": "?",
     "storySections": [
       {
         "kind": "introduction",
@@ -86,13 +90,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Our good friend, the resourceful Hannah Peaslee, somehow dug up the research materials on Celeste. Thanks to this audacious reporter, both the originally confidential materials and her brief interview with Celeste has now spreaded into every corner.\n\nAfter reading the confidential materials, Hannah posed a question to her usually emotionless face.\n\n\"Most Awakeners have unfulfilled wishes, which lie in their basic motivations for cooperating with the university. However, your wish section is blank in this material. Don't you have any desire to accomplish anything? Or what is your meaning as an Awakener?\"\n\n\"I have, I do have.\"\n\nThe girl's expression showed no cracks, as ethereal and noble as usual. If it were not for that brief answer and the anxiety within, the reporter would have almost thought that she miss the question.\n\n\n\"I will find my wish... everyone wishes so. Therefore I will find it.\"\n\nHer soft voice resounded, delicate and fragile like an easily shattered dream."
       }
-    ],
-    "birthday": "15-Mar",
-    "gender": "Female",
-    "height": "5'5''",
-    "weight": "?",
-    "gnosticIndex": "?",
-    "characteristic": "Temporary Tentacle    Death Immunity",
-    "introduction": "A blessed maiden who guards allies from the brink of death, and uses the power of dreams to heal."
+    ]
   }
 }

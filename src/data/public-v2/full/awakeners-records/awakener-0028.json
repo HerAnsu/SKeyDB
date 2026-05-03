@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Leigh",
-    "awakerIntroduction": "Exalt can restore a significant amount of HP, with more healing at lower HP levels.\nAfter {Rouse}, playing your own Command Card can enhance {Embryo Fusion}, thus obtaining more {Embryo} to provide resource support for the {Caro} team.\nIn this level, Leigh will be brought into battle at Level 50, Skill Level 5, and Enlighten Level 3.",
+    "birthday": "28-Jun",
+    "gender": "Female",
+    "height": "5'3''",
+    "weight": "91lbs",
+    "gnosticIndex": "22.05",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "The taste of rust spread in the air.\nThat is... the taste of \"food\".\nThe girl slowly opened her eyes. After being injected with a large dose of sedatives for a long time, her mind was in chaos. Lying in front of her was a Beagle with its throat bitten off, apparently called... Bambi? Bobby?\nJust as the girl was lost in memories, a sharp pain shot through her abdomen — she was attacked by \"food\". At that moment, the bound homeless man trembled, seemingly shouting loudly.\n\"Vampire! Monster... monster!!\"\nHowever, the girl paid no heed, only absentmindedly stroking the blood on her abdomen.\nA large amount of warm blood poured out of the wound, like slippery satin, joyfully spilling everywhere.\nIt turns out, she could still feel pain, she could still bleed.\nThe girl silently shed tears. She extended her frail hands soaked in blood, gently caressing the \"prey's\" cheek.\n\"Next, could you please use a little more strength?\""
       }
-    ],
-    "birthday": "28-Jun",
-    "gender": "Female",
-    "height": "5'3''",
-    "weight": "91lbs",
-    "gnosticIndex": "22.05",
-    "characteristic": "HP Healing    Strength Boost",
-    "introduction": "Converts pain into strength, allowing for significant healing when HP is low."
+    ]
   }
 }

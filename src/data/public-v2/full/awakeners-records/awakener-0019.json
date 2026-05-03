@@ -56,7 +56,11 @@
   },
   "profile": {
     "title": "Helot: Catena",
-    "awakerIntroduction": "Flexibly use the chain to strike enemies, dealing DMG while applying a large amount of {Bleed}.\nPre-accumulate hand cards and look for opportunities to release Exalt to gain powerful Buffs, and use the {Devour} effect to reduce the Arithmetica Cost of all your Cards.\nIn this level, you will bring Helot: Catena at Level 50, Skill Level 5, and with 3 Enlighten. The initial HP is 40%, and at the end of each turn, you will gain 50 Aliemus and 100% {Embryo Fusion} Level.",
+    "birthday": "25-Dec",
+    "gender": "Female",
+    "height": "1.07bēma",
+    "weight": "71mina",
+    "gnosticIndex": "37",
     "storySections": [
       {
         "kind": "introduction",
@@ -88,13 +92,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Her life's experiences seemed crafted to bring her suffering. Kindness, tolerance, compassion, trust—all the tender aspects of her humanity were torn away, discarded along with gory flesh. \nThe word \"forgiveness\" was absent from her vocabulary; only the blood and hatred of others could resolve her own. \nBlood for blood, the fairest law revered by both warriors and slaves. \nA volcano that had simmered for a thousand years erupted in one night, and a hand crawled out of the underworld onto human soil. \nIt was a vengeful spirit, seeking to flood the world with rivers of crimson."
       }
-    ],
-    "birthday": "25-Dec",
-    "gender": "Female",
-    "height": "1.07bēma",
-    "weight": "71mina",
-    "gnosticIndex": "37",
-    "characteristic": "Chain Strike    Strike Card Amplify",
-    "introduction": "Uses unique techniques to combo enemies, finishing off rivals with Bleed damage."
+    ]
   }
 }

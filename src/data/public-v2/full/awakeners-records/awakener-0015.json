@@ -52,6 +52,11 @@
   },
   "profile": {
     "title": "Erica",
+    "birthday": "29-Sep",
+    "gender": "Female",
+    "height": "5'6.9''",
+    "weight": "183lbs",
+    "gnosticIndex": "???",
     "storySections": [
       {
         "kind": "introduction",
@@ -83,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Hannah: Do you remember what happened before your disassembly?\nErica: The automaton's behavior began to spiral out of control, consciousness experienced fractures, and during those fractures, it would destroy everything. Everything would perish beneath the currents and flames.\nHannah: Erica?\nErica: ...\nHannah: I can't be that lucky to encounter the \"Tick-Tock Effect,\" right... Erica?\nErica: The head component is operational again; I apologize for the inconvenience earlier.\nAs I just mentioned, the automaton recognized its increasing threat to humans, and because it still regarded itself as human at that time, it was in great pain.\nHannah: You mentioned protection before; does that mean protecting humans?\nErica: Yes, the automaton hoped to protect.\nHannah: Then why didn't you tell me that just now?\nErica: ...\nHannah: Do I need to change the question?\nErica: No. I am no longer burdened by emotions and can answer.\nUpon realizing its own danger, the automaton attempted to short-circuit its body before the consciousness fragmentation to minimize self-inflicted damage.\nIn the end, the protection failed, and the human friend died.\nThe automaton felt sadness, regret, and despair.\nThe automaton self-destructed to ensure it would cause no more destruction, and then the Silver was recovered by Mythag University, creating me, Erica, body number EA307881.\n—Excerpt from a recording by Hannah Piszley titled \"0711, Tick-Tock Person Exclusive Interview\""
       }
-    ],
-    "birthday": "29-Sep",
-    "gender": "Female",
-    "height": "5'6.9''",
-    "weight": "183lbs",
-    "gnosticIndex": "???",
-    "characteristic": "Offense & Defense    Form Shift",
-    "introduction": "Provides temporary Burst Strength or Alert, making them a great asset for both offense and defense."
+    ]
   }
 }

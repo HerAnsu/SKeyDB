@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Salvador",
-    "awakerIntroduction": "Unique {Crimson Furnace} accumulation from Command Cards, HP, and even enemy Damage.\nCan flexibly convert furnace recovery into substantial Shields or Damage.\nIn this quest, a level 50 Salvador with skill level 5 and Enlighten 3 will join, starting with 50% Crit. Rate, gaining 20 Aliemus each turn, but enemies receive 150 Temporary {STR} in the first two turns.",
+    "birthday": "30-May",
+    "gender": "Male",
+    "height": "6'1.6''",
+    "weight": "165lbs",
+    "gnosticIndex": "45",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "\"The benevolent Father once said: Cherish all things within the sky, on the ground, in the water, and in the soil. For all beings are my offspring.\n\"Thus, I say: Render all suffering unto me. Let those tormented by life or plagued by disease be made whole. Let all pain and madness melt as frost before the rising sun. Let you, my brethren, receive joy everlasting. \n\"Burn me, grind my bones to dust, and rend my flesh asunder. For as long as you can find solace, I have little complaints.\"\n—B.F. 1@1, May 30, Sal @1doMartin @2I @1as, left at @3 the Tribunal"
       }
-    ],
-    "birthday": "30-May",
-    "gender": "Male",
-    "height": "6'1.6''",
-    "weight": "165lbs",
-    "gnosticIndex": "45",
-    "characteristic": "Arithmetica Support    Shield to Offense",
-    "introduction": "Accumulates infinite benevolence in the Crimson Furnace, providing emergency support when an ally is injured."
+    ]
   }
 }

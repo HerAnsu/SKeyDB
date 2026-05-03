@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Thais",
-    "awakerIntroduction": "Thais boasts the unique ability to copy Cards, and those copied Cards come with a reduced Arithmetica Cost.\nUpon {Rouse}, gain {Scion of Purity}. When consumed by {Caro} characters' Exalt, it triggers the Devouring effect twice. When unleashing Posse, convert {Embryo} into {Scion of Purity}.\nIn this stage, you'll deploy Awakener \"Thais\" and \"Ramona\" (Level 50, Skill Level 5, Enlighten Level 3), alongside the Tiny Wish Posse.",
+    "birthday": "19-Apr",
+    "gender": "Female",
+    "height": "5'9''",
+    "weight": "149lbs",
+    "gnosticIndex": "28.4",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "It is real.\nIt is a gaze cast by God, a branch extending into the universe.\nIt delights in the grandeur of history and hungers for the prosperity of civilization.\nIt seeks to transcend withering and overcome death.\nShe desires deep chanting, sandy soil and salty wind, silver leaves, and Mosul's moonlight.\nHarlot, witch, sorceress... These epithets from mankind mean nothing.\nIf even a single drop of blood escapes the black encroachment, they will reclaim eternity."
       }
-    ],
-    "birthday": "19-Apr",
-    "gender": "Female",
-    "height": "5'9''",
-    "weight": "149lbs",
-    "gnosticIndex": "28.4",
-    "characteristic": "Copy Cards    Aliemus Supply",
-    "introduction": "She gives birth to scions of the Holy Tree to allow more Devour triggers, while her Ritual of Abundance produces copies of skill cards."
+    ]
   }
 }

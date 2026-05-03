@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Faint",
-    "awakerIntroduction": "Exalt can provide permanent {Death Resistance} to your team.\nAfter triggering {Death Resistance}, both DEF and Healing will be enhanced.\n{Rouse} and Command Cards can both obtain significant {Counter} and weaken enemies' {STR}, providing an advantage against multiple enemies and multiple hits.\nIn this level, Faint will join the battle at Level 50, with Skill Level 5 and Enlighten 3. Each turn, she will gain 30% {Embryo Fusion} and 10 Aliemus. Enemies will receive Enhance in the first two turns.",
+    "birthday": "7-Mar",
+    "gender": "Female",
+    "height": "4'6''",
+    "weight": "73lbs",
+    "gnosticIndex": "31.4",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Do I have the right to have wishes?\nIf so, can I become a part of my sister?\nTo make her whole, to make us whole.\nThat way, I can express \"love\" without reservation, and she can embrace \"love\" without distraction.\nDear Tinct... this is what I, as the firstborn child, should do for you, right?"
       }
-    ],
-    "birthday": "7-Mar",
-    "gender": "Female",
-    "height": "4'6''",
-    "weight": "73lbs",
-    "gnosticIndex": "31.4",
-    "characteristic": "Death Resistance    Steal Strength",
-    "introduction": "Applies high Death Resistance and leeches the rival's Strength to defend against attacks."
+    ]
   }
 }

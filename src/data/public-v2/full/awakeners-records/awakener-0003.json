@@ -53,6 +53,11 @@
   },
   "profile": {
     "title": "Aigis",
+    "birthday": "27-Jun",
+    "gender": "Female",
+    "height": "4'6''",
+    "weight": "70lbs",
+    "gnosticIndex": "25.8",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Fearful of light, fearful of gaze, fearful of love, fearful of embrace.\nDesiring light, desiring gaze, desiring love, desiring embrace.\nIf only I could avoid harming others, if only I wouldn't trouble others, if only I were as smart as Tiuog, if only I were as brave as Jenkin...\nThen I wouldn't be scorched by the blazing sun, nor despised by others, right?\nWith unfounded worries, the doll cautiously reached out its pale, almost translucent hand from the shadow into the sunlight."
       }
-    ],
-    "birthday": "27-Jun",
-    "gender": "Female",
-    "height": "4'6''",
-    "weight": "70lbs",
-    "gnosticIndex": "25.8",
-    "characteristic": "Petrify Control    Vulnerable Enemy",
-    "introduction": "Petrifies enemies with her eye, rendering them unable to act and making them fragile."
+    ]
   }
 }

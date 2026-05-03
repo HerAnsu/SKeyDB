@@ -51,6 +51,11 @@
   },
   "profile": {
     "title": "Ogier",
+    "birthday": "5-May",
+    "gender": "Male",
+    "height": "5 feet (self-proclaimed)",
+    "weight": "66lbs",
+    "gnosticIndex": "22",
     "storySections": [
       {
         "kind": "introduction",
@@ -82,13 +87,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "— How can this not be his fault? What he has done is far from enough.\nWith such extreme self-blame, Ogier executes his tasks at twice the frequency of other Awakeners, burying \"Death\" under universally praised \"Virtue\".\nThe excessive work and the words of gratitude from young Investigators seem to wash away the pain etched into the Soul.\nChronic ailments are pushed into the Shadows of the heart, emitting a rotting smell, secretly leading the knight towards the deep black mire.\n\"Sorry? Hello?\"\nSomeone came to Ogier with a ray of sunshine, or a gust of wind.\n\"Senior said Ogier will join me and Ramona to carry out my initial Investigation task, right?\"\nHe couldn't protect the princess for a second time, but Heaven gave him another chance to protect the \"Keeper\".\n\"My name is Ogier, and it is an honor to form a Contract with you. I will guard your Life with my Soul. Today's vow will be remembered forever.\""
       }
-    ],
-    "birthday": "5-May",
-    "gender": "Male",
-    "height": "5 feet (self-proclaimed)",
-    "weight": "66lbs",
-    "gnosticIndex": "22",
-    "characteristic": "Cleanse Fragile    Temporary STR",
-    "introduction": "Condenses a formless barrier from viscous slime, then raises a spear to signal teammates and initiate the charge."
+    ]
   }
 }

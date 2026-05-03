@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Ryker",
-    "awakerIntroduction": "Ryker's Exalt and Skills yield randomized results; the better your luck, the greater the rewards.\n{Rouse} grants or allows selection of upgrades for {Chaotic Legacy}.\nIn this stage, Ryker and Lotan will be deployed at Level 50, Skill Level 5, Enlighten Level 3. Ryker initially has a 25% Crit. Rate boost, all {Chaotic Legacy} Relics, and an additional set of Cards. The enemy receives Temporary Strengthening in the first round.",
+    "birthday": "6-Jun",
+    "gender": "Male",
+    "height": "?",
+    "weight": "102lbs",
+    "gnosticIndex": "?",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "When the mountaineer reaches the peak of Elworth.\nWhen the competitor lifts the world's number one trophy.\nWhen the devout listens to the Revelation in dreams.\nWhen victory comes too easily, the accompanying satisfaction may turn into bland inertia.\nLooking around, there are no opponents, no fun at all.\nOn the surface, Ryker yearns for an exhilarating game, craving the heart-pounding moment after an ALL-IN, desiring the surge of adrenaline.\n\"There is no need to say those things. Only I understand you. What you truly desire is simply failure.\nLet me grant you the sweetest failure.\""
       }
-    ],
-    "birthday": "6-Jun",
-    "gender": "Male",
-    "height": "?",
-    "weight": "102lbs",
-    "gnosticIndex": "?",
-    "characteristic": "Replenish Hand    Black Sigil Acquisition",
-    "introduction": "Draws a large number of cards and win Chaotic Legacy Relics by obtaining Black Sigils."
+    ]
   }
 }

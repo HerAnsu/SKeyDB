@@ -54,6 +54,11 @@
   },
   "profile": {
     "title": "Ramona: Timeworn",
+    "birthday": "12-Dec",
+    "gender": "Female",
+    "height": "5'5''",
+    "weight": "102lbs",
+    "gnosticIndex": "25",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +90,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "When occupying Ramona's body, \"Ramona\" has never walked through the campus.\nLotan's boldness, Ogier's shy loyalty, William's calm composure, Doll's strict seriousness... No one remembers these moments more than she does.\nBut she always kept in mind: these beautiful things no longer belong to her.\nNow, she needs to focus entirely on protecting another destined person... This is also to protect another precarious world and another innocent version of herself."
       }
-    ],
-    "birthday": "12-Dec",
-    "gender": "Female",
-    "height": "5'5''",
-    "weight": "102lbs",
-    "gnosticIndex": "25",
-    "characteristic": "Search for Cards    Multi-Hit Damage",
-    "introduction": "Draws strength from past commands, then unleashes a Predetermined Strike to deal massive single-instance damage."
+    ]
   }
 }

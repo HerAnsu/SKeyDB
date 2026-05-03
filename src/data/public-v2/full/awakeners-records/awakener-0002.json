@@ -51,7 +51,11 @@
   },
   "profile": {
     "title": "Agrippa",
-    "awakerIntroduction": "Possesses powerful defensive capabilities and the ability to inflict {Poison}. Triggering {Devour} grants permanent attack and defense growth.\n{Reluctant Alms} has the ability to double the current {Embryo Fusion}.\nWhen {Devour} is triggered, {Colorless Spiral} can return from the Discard Pile to the Hand, allowing it to be played multiple times in a turn.\nIn this level, Agrippa will join the battle at Level 50, with Skill Level 5 and 3 Enlightenments. Each turn, she gains 30% {Embryo Fusion} and 10 Aliemus.",
+    "birthday": "15-Apr",
+    "gender": "Female",
+    "height": "5'2''",
+    "weight": "90lbs",
+    "gnosticIndex": "?",
     "storySections": [
       {
         "kind": "introduction",
@@ -83,13 +87,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "It was... a dazzling daylight and heat wave, an ecstasy of indulgent revelry.\nCheers roared like waves, the warriors bathed in blood and glory in the arena.\nThe girl returned home reluctantly, still wielding her whip, mercilessly striking the dazed gladiator in front of her.\n\nThis was her battlefield.\n\nThere were no thrilling duels, no flowers or applause. The tall warriors were the gentlest reindeer; all her curses and fury dissolved into the dark void, leaving not even a whisper of wind."
       }
-    ],
-    "birthday": "15-Apr",
-    "gender": "Female",
-    "height": "5'2''",
-    "weight": "90lbs",
-    "gnosticIndex": "?",
-    "characteristic": "Alert Growth    Poison Combo",
-    "introduction": "Provides a large amount of Embryo Fusion while injecting toxins into enemies to disrupt their sanity."
+    ]
   }
 }

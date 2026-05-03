@@ -51,7 +51,11 @@
   },
   "profile": {
     "title": "Jenkin",
-    "awakerIntroduction": "{Mice Assemble} consumes Arithmetica to generate {Swarm Impact}. The more Arithmetica consumed, the higher the number of hits, allowing for high DMG by saving Arithmetica.\nEvery time you play \"{Get 'em! Brown!},\" both {Get 'em! Brown!} and {Swarm Impact} deal increased Damage.\nExalt and {Rouse} can increase Jenkin's Crit. Rate and Crit. DMG, further enhancing her DMG output.\nIn this stage, bring a level 50 Jenkin with Skill level 5 and Enlighten 3, receiving 1 {Insight} per turn, while the enemy is strengthened on the first turn.",
+    "birthday": "1-Jan",
+    "gender": "Female",
+    "height": "4'4.4''",
+    "weight": "67lbs",
+    "gnosticIndex": "21.43",
     "storySections": [
       {
         "kind": "introduction",
@@ -83,13 +87,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Street life is not difficult for her.\nWhen hungry, she looks for work; if there are no jobs, she makes a living with her own hands. Her coordination with Brown is so tacit that they can sustain a life of food and drink without anyone else's help.\n\"We don't need anyone,\" she swore with her mouse partner, \"we only need each other.\" \nBut every snowy night, she cannot help but glance at those windows lit with dim yellow lights, watching those who embrace each other by the meager dinner, blessing one another.\nShe truly does not need a concealed roof, does not require luxurious high beds and soft pillows; she indeed has trustworthy partners, but she is still curious what it would feel like to have a home for a long time?\nThis question was answered when Mason adopted her."
       }
-    ],
-    "birthday": "1-Jan",
-    "gender": "Female",
-    "height": "4'4.4''",
-    "weight": "67lbs",
-    "gnosticIndex": "21.43",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "With a high Crit. Rate and Crit. Damage, Brown and the swarm of rats are her key allies in fighting multiple enemies."
+    ]
   }
 }

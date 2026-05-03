@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Casiah",
-    "awakerIntroduction": "Exalt can deal area DMG and draw cards; the more Command Cards, States, or Symptom Cards drawn, the greater the number of DMG instances dealt.\n{Poof!} can reshuffle the hand while discarding State or Symptom Cards to gain Aliemus.\n{Telekinesis} takes cards from {Ultra Space} in exchange for high DMG and Arithmetica resources.\nIn this stage, Casiah will be deployed at Level 50, Skill Level 5, Enlighten Level 3, and the first attack from the boss enemy will receive an Enhance.",
+    "birthday": "1-Apr",
+    "gender": "Female",
+    "height": "4'12''",
+    "weight": "99lbs",
+    "gnosticIndex": "21.75",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Casiah reached into the hat, and it was empty.\nCasiah reached into the door, and it was empty.\nCasiah reached into her chest, and it was empty.\nThe collected joys and sorrows, fears and angers, the warmth and coldness of humanity, the noise before the curtain, the cheers during the twists, the whistles at the highlights, the applause at the closing, and the indifference at dispersal all slipped away from this hollow chest, leaving no trace of ever existing.\nCasiah imitated the expressions of the audience in the mirror—the wrinkles at the corners of the eyes, the flow of muscles, the curvature of lips—clearly identical to those people, yet devoid of any true meaning.\nIf only she could perceive... If only she could transcend imitation... If only she could become one of them... Or, if only someone could remain...\nThen surely this \"void\" in her chest would be filled."
       }
-    ],
-    "birthday": "1-Apr",
-    "gender": "Female",
-    "height": "4'12''",
-    "weight": "99lbs",
-    "gnosticIndex": "21.75",
-    "characteristic": "Replenish Hand    Temporary STR",
-    "introduction": "Able to draw or replace a large number of cards as if performing magic, and gain Temporary Strength to enhance damage."
+    ]
   }
 }

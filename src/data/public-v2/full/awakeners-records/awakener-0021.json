@@ -49,7 +49,12 @@
   },
   "profile": {
     "title": "Goliath",
-    "awakerIntroduction": "{Blade's Dominion} and {Decapitation Damage} have high DMG and multiple {STR} buffs, capable of dealing massive DMG to single and group enemies.\n{Decapitation Damage} can also return Arithmetica Cost when attacking low-HP enemies or causing a kill.\nExalt can choose to {Usurp} or {Dormancy}, selecting the timing for growth or burst to deal more Damage.\nIn this level, Goliath will be brought into battle at Level 50, with Skill Level 5 and 3 Enlighten.",
+    "birthday": "20-May",
+    "gender": "Male",
+    "height": "9'4.2''",
+    "weight": "?",
+    "gnosticIndex": "?",
+    "faction": "Lemuria",
     "storySections": [
       {
         "kind": "introduction",
@@ -81,13 +86,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Beheading death's cold embrace, he survived and transformed. The glitter on his blade fades. The mask of apostle conceals his savage expression.\nHe did revere instinctively when that miracle manifested. But no god could capture his fear, and no cult could earn his faith.\nA giant should not yield to others. A warrior should not lower his head.\nHis past already wreathed in dust, his war still longing for final triumph. The desire for conquest run through his veins, etching into bones like a sigil bearing the bestowed power. Perhaps, one day, death will end his dominion. Perhaps, one day, he will rise to the sole supremacy."
       }
-    ],
-    "birthday": "20-May",
-    "gender": "Male",
-    "height": "9'4.2''",
-    "weight": "?",
-    "gnosticIndex": "?",
-    "characteristic": "Strength Burst    STR Steal",
-    "introduction": "Swings a heavy blade with the power of a great blade to slay enemies. Their Tentacle damage and Strength make them even more powerful."
+    ]
   }
 }

@@ -51,7 +51,11 @@
   },
   "profile": {
     "title": "Doresain",
-    "awakerIntroduction": "An elegant epicure who delivers fated demise to anguished souls.\nHe savors the remnants of the dead with gluttonous delight, converting their essence into HP restoration and unleashing devastating damage!\nIn this stage, you will enter battle with a Level 50 Doresain, Skill Level 5, Enlighten 3. Doresain's attacks are guaranteed to be critical hits in this battle.",
+    "birthday": "20-Nov",
+    "gender": "Male",
+    "height": "6'1.7''",
+    "weight": "137lbs",
+    "gnosticIndex": "37.58",
     "storySections": [
       {
         "kind": "introduction",
@@ -83,13 +87,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "He had once believed that his entire life existed for the pursuit of ultimate deliciousness.\nThe duties of a crown prince, the estrangement from loved ones, the weight of moral teachings... He had cast all this pain aside in his relentless quest for culinary perfection.\nFrom prince to monarch, from mortal to divine, his hunger never waned. He mastered every cooking technique, could detect the most fleeting nuance in every corpse's flavor profile.\nHe attained everything he desired, yet after each ephemeral moment of satisfaction, that hollow feeling remained - like a flavor just beyond his palate's reach.\nIt wasn't until he consumed Celina's corpse and glimpsed her lingering soul that understanding came.\nThe stories etched in flesh before death's arrival, the unfinished yearnings that clung to bones - these were the missing ingredients he'd been chasing, the true essence he'd been tasting without realizing.\n\"Eating is remembrance; every feast a reunion between departed and living\" —these are the words carved into Necrovia's throne. He will grant those who seek his protection remembrance and eternal rest."
       }
-    ],
-    "birthday": "20-Nov",
-    "gender": "Male",
-    "height": "6'1.7''",
-    "weight": "137lbs",
-    "gnosticIndex": "37.58",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "An elegant epicure. Deals devastating damage to foes with low HP. When devouring the corpses of departed enemies, he empowers himself and drains their lingering vitality."
+    ]
   }
 }

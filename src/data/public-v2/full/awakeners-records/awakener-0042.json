@@ -54,6 +54,11 @@
   },
   "profile": {
     "title": "Ramona",
+    "birthday": "12-Dec",
+    "gender": "Female",
+    "height": "5'5''",
+    "weight": "102lbs",
+    "gnosticIndex": "25",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +90,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "She knows everything.\nShe knows the bell tower rings in emergencies, that the Eridanus meteor shower will return in ten years, and that she possesses a unique power.\nShe knows nothing.\nShe doesn't know the secret spice in the cafeteria's curry recipe, how to calculate the radius of a planet after its annihilation, or the direction her future will take.\nShe finds it hard to let go of everything around her, yet cannot resist the path her intuition reveals.\nOn the journey toward truth and normalcy, Ramona needs steadfast companions to help her secure the road back to everyday life."
       }
-    ],
-    "birthday": "12-Dec",
-    "gender": "Female",
-    "height": "5'5''",
-    "weight": "102lbs",
-    "gnosticIndex": "25",
-    "characteristic": "Search for Cards    Multi-Hit Damage",
-    "introduction": "Provides your team with essential card support, then pierces through rivals with gradually accelerating sword techniques."
+    ]
   }
 }

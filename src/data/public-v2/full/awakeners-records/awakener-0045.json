@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Sanga",
-    "awakerIntroduction": "Has powerful Defense and the ability to permanently generate Tentacles; more Tentacles mean stronger defense.\nExalt deals AoE DMG, and Shield increase the amount of DMG dealt.\nIn this quest, a level 50 Sanga with skill level 5 and Enlighten level 3 will join. Enemies will be strengthened in the first turn.",
+    "birthday": "31-Oct",
+    "gender": "Female",
+    "height": "5'5''",
+    "weight": "176lbs",
+    "gnosticIndex": "22.98",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Watched by countless nights, the sculptor suffered from Dissolution slips beneath the murmuring waves, falling into writhing dreams:\nAs Lemuria's spirals inflamed by her kindreds, its majestic walls arise in her hands.\nAs the Father and His servants slumbering into epics, their statues find immortality under her carving.\nHer senses dull. Her body stiffens. Her chisel nearly escapes.\nCoral-like white mists have crept to her forearms. Hands tremble under her gaze. A smile flickers. Her life will fade like an extinguishing candle, while her body will step beyond eternal's door.\nHer wish fullfilled as she sinking onto the seabed. Coral shattering to foam, black slime of Dissolution threads into the ocean—she finally embraces the City long-lost in currents, and mingles with its splendor—together, ever after."
       }
-    ],
-    "birthday": "31-Oct",
-    "gender": "Female",
-    "height": "5'5''",
-    "weight": "176lbs",
-    "gnosticIndex": "22.98",
-    "characteristic": "Sustained Protection    Tentacle Growth",
-    "introduction": "Creates stone sculptures to defend against subsequent attacks, with \"The Lost Art\" dealing more damage as the Shield increases."
+    ]
   }
 }

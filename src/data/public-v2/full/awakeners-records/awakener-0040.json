@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Pickman",
-    "awakerIntroduction": "This artist uses human remains as his medium, and his macabre creations provide various spiritual enhancements to his team. As he sketches, he accumulates creative energy. Once his inspiration peaks, it erupts in a frenzied artistic banquet.\nIn this stage, a level 50 Pickman enters the battle alongside Lotan, Ogier, and Doll. Each turn, Pickman gains an additional 100 Aliemus, while other allied Awakeners gain 30.",
+    "birthday": "17-Feb",
+    "gender": "Male",
+    "height": "6'0.1''",
+    "weight": "143lbs",
+    "gnosticIndex": "28.2",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "A monster. A freak. Demon with the blood of monsters. Madman who desecrates art...\nBefore Pickman, a canvas unfurls, and the curses mix with other sounds, smearing brilliant colors across the canvas.\nHe leaps into this dazzling world, wandering in the mad colors. He eagerly hopes to lead others into his painting, to let them witness the most authentic visage of the world.\nThe sharp spikes of reality pierce his heart countless times; mutual understanding between people is more challenging than opening the boundaries of two worlds.\nFrom humans to ghouls, from human cities to Necropolis, the road is long and winding. He has been wounded time and again, yet he rises again and again. He has long understood that there is neither truth nor falsehood. Pain and madness are the truth of the world. And his duty is to depict all of this faithfully.\nThe meaning of depiction lies only in the act of depicting itself.\nHe dedicates all his life and passion to painting. His expectations rarely receive a response; his pursuit never ceases."
       }
-    ],
-    "birthday": "17-Feb",
-    "gender": "Male",
-    "height": "6'0.1''",
-    "weight": "143lbs",
-    "gnosticIndex": "28.2",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "Flexibly create different Paintings, and greatly enhance the Exalt effect of other Awakeners."
+    ]
   }
 }

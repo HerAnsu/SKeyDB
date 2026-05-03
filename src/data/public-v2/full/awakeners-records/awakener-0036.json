@@ -51,7 +51,11 @@
   },
   "profile": {
     "title": "Nautila",
-    "awakerIntroduction": "Possesses strong defensive and stacking {Counter} abilities, which become even more powerful after {Rouse}.\nThe higher the Current Shield, the more Shield gained from Exalt; the higher the Current {Counter}, the greater the AoE DMG dealt by Exalt.\nIn this level, Nautila and Doll will join the battle at Level 50, Skill Level 5, and Enlighten 3, gaining 10 Aliemus per turn, with enemies receiving Enhance on the first turn.",
+    "birthday": "29-Jul",
+    "gender": "Female",
+    "height": "5'2''",
+    "weight": "105lbs",
+    "gnosticIndex": "21.3",
     "storySections": [
       {
         "kind": "introduction",
@@ -83,13 +87,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "A.F. 315, January, @2\nDr. Sylvia suggested that I jot down my thoughts in a notebook to help train my memory. Everyone says doctors know a lot and can surely help me. So I'm counting on it; tomorrow, I mustn't forget the purpose of this notebook! \n Today, I completed the production and assembly of the exhaust pipe. Now it can exhaust air without interfering with the auxiliary hose's movement. This should be the last step, right? At least I haven't found any issues so far, but I can't rule out forgetting a screw somewhere... That's right, I must have forgotten something—either a screw or a pipe, or maybe bearing lubrication? Engine oil? Honestly, I've always had this nagging feeling that something's off with the Phantom. It's always... lacking? Is that the word? It misses a crucial component, even more critical than the engine. Without it, I can't set off, can't embark on that journey into the unknown, because that is ours. @2 \n Why am I saying ours? Who am I with? Did I... have someone? I remember, it seems like... @2 @4 @3 \n Uh, my head hurts so much. \n But this notebook feels quite useful; that way, I can continue recalling from here tomorrow, and who knows, maybe I really will remember? \n — The only entry in Nautila's diary."
       }
-    ],
-    "birthday": "29-Jul",
-    "gender": "Female",
-    "height": "5'2''",
-    "weight": "105lbs",
-    "gnosticIndex": "21.3",
-    "characteristic": "Defensive Burst    Recycle Discards",
-    "introduction": "Her sturdy shell bolsters your team's defense, using spikes on the shell to counterattack incoming rivals."
+    ]
   }
 }

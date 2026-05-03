@@ -56,7 +56,12 @@
   },
   "profile": {
     "title": "Murphy: Fauxborn",
-    "awakerIntroduction": "As the Divine Mother revered by Seafarers, she establishes a new order to protect all her subjects, significantly enhancing the base effect of the {Aequor Realm}.\nInverted Fate grants her supreme power, allowing her to consecrate the lives of ther enemies as a {Sacrifice} to the god. However, a taboo power often comes with a steep price...\nIn this Stage, \"Murphy: Fauxborn\" and \"Tulu\" will be deployed, both at Level 50, with Skill Level 5 and Enlighten Level 3.",
+    "birthday": "22-Dec",
+    "gender": "Female",
+    "height": "4'8.7''",
+    "weight": "92.5lbs",
+    "gnosticIndex": "21.21",
+    "faction": "Lemuria",
     "storySections": [
       {
         "kind": "introduction",
@@ -88,13 +93,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "\"I am the Daughter of God, and simultaneously the Bearer of God.\"\nThis is how she confirms her authority. Only by maintaining this universally admired dignity can she preserve a precarious balance. So what if it's hypocrisy? So what if it's a delusion? Who isn't living in the \"present\" moment?\nMurphy holds the swaddling cloth, which conceals the grotesque Divine Fetus, and acts as the God's proxy, speaking one lie after another:\n\"He has descended.\" \"The Divine Realm will rise.\" \"Please wait for the next moment of Stellar Alignment.\"\nRather than letting others' hypocrisy fabricate an illusion, she would rather decorate this prison with her own hands to a likeness she finds acceptable. As long as the \"Mother,\" \"Companions,\" and \"Servants\" she desires are still by her side, whether it is superficial deference or insincere mystification, she accepts it and finds it sweet.\n\"My name is Murphy, the Princess who bore the God. Regarding Lemuria, regarding the Seafarers' long-cherished wish... you need not inquire. I have my own arrangements.\""
       }
-    ],
-    "birthday": "22-Dec",
-    "gender": "Female",
-    "height": "4'8.7''",
-    "weight": "92.5lbs",
-    "gnosticIndex": "21.21",
-    "characteristic": "Tentacle Activation    Replenish Arithmetica",
-    "introduction": "As the Divine Mother, she grants blessings and sanctuary to her subjects. Her ultimate power allows her to consecrate the lives of her enemies as a sacrifice."
+    ]
   }
 }

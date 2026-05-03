@@ -49,7 +49,11 @@
   },
   "profile": {
     "title": "Wanda",
-    "awakerIntroduction": "Wanda possesses powerful {Counter} abilities and unique effects that trigger {Leap}.\nPlay Cards to accumulate {Dreamlure}, then flexibly consume it to enhance her abilities. Stack {Counter} to weaken enemies and boost damage.\nIn this stage, \"Wanda\" (Level 50, Skill Level 5, Enlighten Level 3) will be deployed.",
+    "birthday": "2-Nov",
+    "gender": "Female",
+    "height": "5'7''",
+    "weight": "121lbs",
+    "gnosticIndex": "23.41",
     "storySections": [
       {
         "kind": "introduction",
@@ -81,13 +85,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "\"Indulgence and lust lead to eternal fire as a warning...\"\nFor 23 days, the monk stood outside her gate, reciting monotonous scriptures.\nWanda had him tied up and brought in.\nThe monk said, 'Why worry about suffering? Where the Lord's spirit is, there is freedom.'\nShe stripped him.\nThe monk said, 'Why worry about clothes? The lilies of the field neither spin nor bow.'\nShe severed his limbs.\nThe monk said, 'Why worry about blood? All flesh dies.'\nWanda laughed, 'I will not only make you bleed, but also turn you into my slave, forever.'\n'Why?' the monk lifted his head, 'Shouldn't you show mercy to your companion as I showed mercy to you?'\nWanda studied the monk. His eyes were as blue as the clear sky.\nShe gouged out his eyes.\nUnable to bear the torture, the monk eventually died. The local parish feared her wealth and power, and no one dared to accuse her.\nBefore dying, the monk said, '@2 is near, you should...'\nYears passed, and Wanda had long forgotten the monk's face and name, only remembering his eyes. On the night she was about to be devoured by @2, she recalled the monk's unfinished words.\n'@2 is near, you should...'\nIn her blurred consciousness, she speculated on the monk's last words, but found nothing.\""
       }
-    ],
-    "birthday": "2-Nov",
-    "gender": "Female",
-    "height": "5'7''",
-    "weight": "121lbs",
-    "gnosticIndex": "23.41",
-    "characteristic": "High Counter    Trigger Leap",
-    "introduction": "Commanding deadly thorns, she establishes a formidable defense by stacking Counter effects, then unleashes them to deal DMG."
+    ]
   }
 }

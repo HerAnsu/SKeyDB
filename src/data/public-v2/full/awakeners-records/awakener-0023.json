@@ -55,7 +55,11 @@
   },
   "profile": {
     "title": "Helot",
-    "awakerIntroduction": "Exalt significantly boosts \"Strike\" DMG in this turn.\nThe more \"Strike\" cards you have in hand, the higher the DMG of {Shattering Strike} will be, and the greater the {STR} bonus it enjoys. Combine \"Strike\" with Exalt to deal massive DMG in one go.\nIn this level, Helot will join the battle at Level 50, with Skill Level 5 and 3 Enlightenments. At the start of the Battle, you will Obtain 3 \"Strike\" cards, gain 30% {Embryo Fusion} each turn, 10 Aliemus, and 6 {STR}. The enemy will gain Enhance on their first turn.",
+    "birthday": "25-Dec",
+    "gender": "Female",
+    "height": "1.07bēma",
+    "weight": "75mina",
+    "gnosticIndex": "26",
     "storySections": [
       {
         "kind": "introduction",
@@ -87,13 +91,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "The lady high above took her hand, promising to give her all the love in the world.\nShe believed in the lady's gentleness and the master's indulgence, trusted every smile and every hug, unaware that in their eyes, she was merely a pet—something to be discarded the moment it posed any threat.\nThey personally threw her into a cage, shattering her trust. But neither the warden's whip nor the torment from her kin hurt as much as the betrayal from her loved ones.\nHate, such hate! She hated them for their lies that won her genuine heart, hated them for using her life to create this painful farce. If trusting others led to this, then she would forever rely only on herself.\nHer trust belongs solely to herself."
       }
-    ],
-    "birthday": "25-Dec",
-    "gender": "Female",
-    "height": "1.07bēma",
-    "weight": "75mina",
-    "gnosticIndex": "26",
-    "characteristic": "High Single-Hit DMG    Strength Growth",
-    "introduction": "An avenger who continuously restrains and builds up Strength, delivering a single devastating strike to bring an End to the enemy."
+    ]
   }
 }

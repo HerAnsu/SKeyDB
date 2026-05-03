@@ -55,7 +55,12 @@
   },
   "profile": {
     "title": "Faros",
-    "awakerIntroduction": "Exalt and {Rouse} provides quick card shuffling, improving your team's margin for error.\n{Deep Currents} makes Tentacles inflict {Poison} on all enemies with each attack. Combine this with {Ocean of Elation} to inflict a large amount of {Poison} on enemies at once.\nIn this stage, you will enter battle with Faros at Level 50, Skill Level 5, and Enlighten 3. The enemy will gain Enhance on the first turn.",
+    "birthday": "8-Apr",
+    "gender": "Female",
+    "height": "5'5.7''",
+    "weight": "?",
+    "gnosticIndex": "23",
+    "faction": "Lemuria",
     "storySections": [
       {
         "kind": "introduction",
@@ -87,13 +92,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "Return to her home, trace back to her origin, reunion with her lost dreamshe doesn't care how does her wish reflect in people's words. Even her body has altered to an Awakener, tides of her homeland still clamor in her soul.\nThe breath of sea-bottom volcanoes dissipated from her ears. The ocean's dreams writhing with ecstasies obscured from her eyes. Only her obsession with the Divine Realm still gleaming, more glorious than ever.\nMind her docility, a mere temporarily disguise. Her king's throne calls to her, like a lighthouse reaches through the aeons; her sacrifice will always be everything, like a wick's devotion to the light."
       }
-    ],
-    "birthday": "8-Apr",
-    "gender": "Female",
-    "height": "5'5.7''",
-    "weight": "?",
-    "gnosticIndex": "23",
-    "characteristic": "Tentacle Generation    Replenish Hand",
-    "introduction": "Infects enemies with Viperous Venom-imbued Tentacles to humiliate them and uses their devoted faith to grant their team Cards, indicating the path forward."
+    ]
   }
 }

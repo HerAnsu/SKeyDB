@@ -52,7 +52,11 @@
   },
   "profile": {
     "title": "Arachne",
-    "awakerIntroduction": "Bound by destiny, the {Weaver} grows more powerful through her continuous weaving, though she must bear an ever-increasing cost. By weaving the web of fate, she protects her allies and grants them Prismatic Power, allowing the accumulated {Final Verdict} to tighten and purge filth at the decisive moment.\nIn this stage, you will deploy Arachne and Nymphaea at Level 50, with Skill Level 5 and Enlighten 3.\nDuring this battle, the effectiveness of {Poison} applied by all Awakeners is increased by 200%. At the start of each turn, all Awakeners gain 30 Aliemus, 1 stack of {Weaver}, 3 additional Aliemus, and draw 3 cards.",
+    "birthday": "24-May",
+    "gender": "Female",
+    "height": "5'8''",
+    "weight": "135lbs",
+    "gnosticIndex": "52.29",
     "storySections": [
       {
         "kind": "introduction",
@@ -84,13 +88,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "As the Weaver of the Web of Fate, Arachne governed the threads of countless lives, with past and future flowing through her hands. Yet, she harbored a hobby that bordered on the frivolous. \n\nShe loved the theater. Not for the twisting plot or the well-turned phrase: those were already etched into her mind. As the creator of the script, she knew every turn of the story and every line of the actors by heart. \nYet, time and again, she stepped into the theater. \n\nWhat she truly craved was the immersive sense of \"presence\"—the feeling of truly being there. \nWhen the curtain rises and the audience sinks into darkness, the stage becomes the only true world. In that moment, time is no longer a river running in a single direction, but an enactment within a confined space—past, present, and future overlap here. Everything ceases to be a script upon a page and becomes a tremor of life unfolding in the living present. \n\nAnd she, at last, is no longer the exile gazing at the threads she can never touch. \n\nInside the theater, she can briefly seal away her memories. She can step onto the stage as the girl gasping out her final words, or sit among the crowd, granting the actors their freedom. Casting off the prophet’s burden, she allows herself to simply tremble, weep, and hold her breath at every stirring pulse of the performance. Not as a seer, but as a living soul—adopting the posture of the ignorant, breathing in sync with the characters, shattered by a single line. Even knowing the end is written, even knowing the tragedy is foreordained. This illusion allows her a fleeting escape from her sentence as an eternal spectator. \n\nNo longer exiled from fate, but welcomed into it—even for a single instant, even as a phantom. \n\nThis small indulgence was already the most luxurious grace fate could bestow upon Arachne."
       }
-    ],
-    "birthday": "24-May",
-    "gender": "Female",
-    "height": "5'8''",
-    "weight": "135lbs",
-    "gnosticIndex": "52.29",
-    "characteristic": "Multi-hit Damage    Critical Hit",
-    "introduction": "The Weaver of Fate spins the threads of destiny to safeguard the peace beneath her wheel, using the power of severance to excise all corruption."
+    ]
   }
 }

@@ -56,7 +56,11 @@
   },
   "profile": {
     "title": "Doll: Inferno",
-    "awakerIntroduction": "A skilled researcher who provides reliable battlefield support, capable of both strengthening allies and weakening enemies while generating large amounts of Aliemus.\nDuring boss fights, she gradually builds power by accumulating {Finale} stacks, eventually unleashing the devastating {Illusion's End} attack. Once activated, she becomes more aggressive until the battle concludes.\nFor this stage, you have access to Doll: Inferno and Nymphaea, both set at Level 50 with Skill Level 5 and Enlighten 3. At turn start, Doll: Inferno automatically gains 50 additional Aliemus and 1 stack of {Finale}.",
+    "birthday": "11-Jan",
+    "gender": "Female",
+    "height": "5'2''",
+    "weight": "89.9lbs",
+    "gnosticIndex": "42.31",
     "storySections": [
       {
         "kind": "introduction",
@@ -88,13 +92,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "All meaning dissipates like sand, the world's false curtain fades in her eyes, and everything returns to the most primordial darkness.  \nIn this final performance on the pitch-black stage, the dancer of science still dances with all her might.  \nShe no longer cares about being slowly devoured by dissolution, as the ending of the play was written from the very beginning.  \nAs in the past, she will unreservedly dedicate the power of genius to the world in a manner closest to the truth.  \nIf you ask her gently, she will insist that she still holds love for humanity and the world; she wants to end all suffering in the world and bring people back to their true, original home."
       }
-    ],
-    "birthday": "11-Jan",
-    "gender": "Female",
-    "height": "5'2''",
-    "weight": "89.9lbs",
-    "gnosticIndex": "42.31",
-    "characteristic": "HP Healing    High Single-Hit DMG",
-    "introduction": "Provides healing and a large amount of Aliemus to your team. In boss battles, it activates the Engine of Destruction to end its enemies."
+    ]
   }
 }

@@ -53,7 +53,11 @@
   },
   "profile": {
     "title": "Daffodil",
-    "awakerIntroduction": "Has DMG growth methods and powerful combo burst abilities.\nExalt can create perfect cards at any time.\nIn this level, you will bring \"Daffodil\" into battle at Level 50, Skill Level 5, and Enlighten Level 3, gaining an additional 10 Aliemus per turn.",
+    "birthday": "10-Oct",
+    "gender": "Female",
+    "height": "5'7.7''",
+    "weight": "132lbs",
+    "gnosticIndex": "43",
     "storySections": [
       {
         "kind": "introduction",
@@ -85,13 +89,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "In the gray, viscous sea of primal matter, emptiness prevails; the concepts narrated by travelers crossing dimensions remain only in abstract descriptions and imaginations.\nIt wants to confirm with its own eyes the \"places of longing\" for humans, to personally witness the magnificent scenery of the mortal world, and to experience the bittersweet nuances of life and death.\nYet above all, it desires a specific person, someone worthy of cherishing, someone to trust.\nA fair trade means equality, means division, means a transaction where nothing more than what is given is taken. But it yearns for something different, a kind of unconditional trust, to eliminate barriers, to break through tests, to dissolve the frozen barriers.\nIt gains and loses, but will ultimately regain what was lost."
       }
-    ],
-    "birthday": "10-Oct",
-    "gender": "Female",
-    "height": "5'7.7''",
-    "weight": "132lbs",
-    "gnosticIndex": "43",
-    "characteristic": "Versatile Creation    Vulnerable Enemies",
-    "introduction": "A witch capable of customizing powerful Thousand Mirage illusions and placing them into Ultra Space."
+    ]
   }
 }

@@ -51,7 +51,11 @@
   },
   "profile": {
     "title": "Uvhash",
-    "awakerIntroduction": "Exalt deals high AoE DMG and enjoys high {STR} bonus.\nWhen Exalt triggers {Devour}, the subsequent Exalt DMG and {STR} Buff in this battle are increased.\nThe lower the HP, the higher the Damage.\nIn this level, Uvhash will join the battle at Level 50 with Skill Level 5 and 3 Enlightenments, gaining 30% {Embryo Fusion} each turn, and enemies will be Enhanced for the first two turns.",
+    "birthday": "4-Apr",
+    "gender": "Male",
+    "height": "6'2''",
+    "weight": "190lbs",
+    "gnosticIndex": "23.01",
     "storySections": [
       {
         "kind": "introduction",
@@ -83,13 +87,6 @@
         "unlockCondition": "Affinity Level 9",
         "content": "@2 Years, the ancient city of Akka.\nAfter a millennium of hunger and thirst, it finally erupted—killing, drinking blood, killing, drinking blood. In the end, all that remained before him was an endless desert and countless dried corpses. Even vultures feared to approach him.\nKneeling in the yellow sand, he laughed heartily: Exhilarating! Truly @1 exhilarating!\nNow, he himself would bring this massacre to a perfect end.\nThe warrior bit his wrist, drained his own blood, and collapsed into the crimson pool."
       }
-    ],
-    "birthday": "4-Apr",
-    "gender": "Male",
-    "height": "6'2''",
-    "weight": "190lbs",
-    "gnosticIndex": "23.01",
-    "characteristic": "Exalt    Growing Stronger",
-    "introduction": "A berserker who fights relentlessly and grows stronger, becoming even more powerful as their HP drops."
+    ]
   }
 }
