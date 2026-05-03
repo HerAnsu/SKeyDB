@@ -1,10 +1,10 @@
-const overlayIconAssets = import.meta.glob<string>('../assets/icons/*.png', {
+const overlayIconAssets = import.meta.glob<string>('../assets/icons/*.{png,webp}', {
   import: 'default',
 })
 
 function basenameWithoutExt(assetPath: string): string {
   const filename = assetPath.split('/').at(-1) ?? assetPath
-  return filename.replace(/\.png$/i, '')
+  return filename.replace(/\.(png|webp)$/i, '')
 }
 
 function indexAssetMap<T>(assets: Record<string, T>): Map<string, T> {

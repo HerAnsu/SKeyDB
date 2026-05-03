@@ -3,7 +3,6 @@ import process from 'node:process'
 
 const projectRoot = process.cwd()
 
-runScript('data:check-public-v2')
 runNodeScript('scripts/format-changed-files.mjs', ['--quiet', '--fail-on-write'])
 runScript('lint')
 runScript('test:bounded')

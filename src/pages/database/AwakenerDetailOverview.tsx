@@ -1,6 +1,6 @@
 import {useCallback, useMemo} from 'react'
 
-import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.png'
+import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.webp'
 import type {Awakener} from '@/domain/awakeners'
 import type {ResolvedAwakenerDatabaseShellView} from '@/domain/awakeners-database-view'
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'

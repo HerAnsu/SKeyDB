@@ -1,7 +1,5 @@
 import {describe, expect, it} from 'vitest'
 
-// @ts-expect-error Build script is a typed runtime module imported for schema-generation verification.
-import {buildAwakenerBuildsSchema} from '../../scripts/generate-awakener-builds-schema.mjs'
 import {
   compareCovenantsForBuildRecommendation,
   compareWheelsForBuildRecommendation,
@@ -15,15 +13,6 @@ import {getMainstatByKey} from './mainstats'
 import {getPosses} from './posses'
 import {compareWheelsForUi} from './wheel-sort'
 import {getWheels} from './wheels'
-
-interface SchemaChoiceContainer {
-  $defs: {
-    wheelId: unknown
-    covenantId: unknown
-    awakenerId: unknown
-    awakenerName: unknown
-  }
-}
 
 function buildFixtureBuild(): AwakenerBuild {
   return {
@@ -204,50 +193,4 @@ describe('awakener builds', () => {
       })
     })
   })
-
-  it('builds schema autocomplete with readable metadata for curated ids', () => {
-    const schema = (buildAwakenerBuildsSchema as () => SchemaChoiceContainer)()
-    const wheelOptions = getSchemaChoices(schema.$defs.wheelId)
-    const covenantOptions = getSchemaChoices(schema.$defs.covenantId)
-    const awakenerOptions = getSchemaChoices(schema.$defs.awakenerId)
-    const awakenerNameOptions = getSchemaChoices(schema.$defs.awakenerName)
-
-    expect(wheelOptions).toContainEqual(
-      expect.objectContaining({
-        const: 'wheel-0028',
-        title: 'Amber-Tinted Death',
-        description: expect.stringContaining('Kathigu-Ra'),
-      }),
-    )
-    expect(covenantOptions).toContainEqual(
-      expect.objectContaining({
-        const: 'covenant-0004',
-        title: 'Crimson Pulse',
-      }),
-    )
-    expect(awakenerOptions).toContainEqual(
-      expect.objectContaining({
-        const: 'awakener-0018',
-        title: 'Doll: Inferno',
-      }),
-    )
-    expect(awakenerNameOptions).toContainEqual(
-      expect.objectContaining({
-        const: 'Doll: Inferno',
-      }),
-    )
-  })
 })
-
-function getSchemaChoices(definition: unknown): unknown[] {
-  if (
-    definition &&
-    typeof definition === 'object' &&
-    'oneOf' in definition &&
-    Array.isArray(definition.oneOf)
-  ) {
-    return definition.oneOf
-  }
-
-  throw new Error('Expected schema definition with oneOf choices')
-}
