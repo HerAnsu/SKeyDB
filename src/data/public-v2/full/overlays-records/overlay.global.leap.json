@@ -3,6 +3,7 @@
   "displayName": "Leap",
   "overlayType": "mechanic",
   "aliases": [],
+  "textColor": "misc",
   "descriptionTemplate": "If this card triggers {Dimension Shuttle} after being played or is currently in an {Ultra Round}, trigger the subsequent effect.",
   "descriptionArgs": {}
 }

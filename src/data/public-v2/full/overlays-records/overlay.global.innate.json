@@ -3,6 +3,7 @@
   "displayName": "Innate",
   "overlayType": "mechanic",
   "aliases": [],
+  "textColor": "misc",
   "descriptionTemplate": "Always appears in the starting hand.",
   "descriptionArgs": {}
 }

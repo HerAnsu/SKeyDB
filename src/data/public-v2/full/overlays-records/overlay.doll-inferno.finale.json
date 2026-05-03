@@ -4,6 +4,7 @@
   "overlayType": "mechanic",
   "ownerAwakenerId": "awakener-0018",
   "aliases": [],
+  "iconId": "IconS_Buff_052",
   "descriptionTemplate": "When you have 10 stacks of {Finale}, place 1 {Illusion's End} into hand.",
   "descriptionArgs": {}
 }

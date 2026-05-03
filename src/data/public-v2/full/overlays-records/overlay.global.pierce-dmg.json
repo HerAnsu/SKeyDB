@@ -3,6 +3,7 @@
   "displayName": "Pierce DMG",
   "overlayType": "mechanic",
   "aliases": [],
+  "textColor": "misc",
   "descriptionTemplate": "DMG reduces both Shield and HP. Cannot be Immuned.",
   "descriptionArgs": {}
 }

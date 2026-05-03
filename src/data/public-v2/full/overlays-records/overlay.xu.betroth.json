@@ -4,13 +4,8 @@
   "overlayType": "mechanic",
   "ownerAwakenerId": "awakener-0054",
   "aliases": [],
-  "iconId": "Battle_Card_Buff_080",
+  "iconId": "IconS_Buff_080",
   "textColor": "damage",
-  "descriptionTemplate": "Inflict [Arg1] {plural:[Arg1]|stack|stacks} of {Spellbound} on all enemies.",
-  "descriptionArgs": {
-    "Arg1": {
-      "kind": "fixed",
-      "value": "2"
-    }
-  }
+  "descriptionTemplate": "Inflict 2 stacks of {Spellbound} on all enemies.",
+  "descriptionArgs": {}
 }

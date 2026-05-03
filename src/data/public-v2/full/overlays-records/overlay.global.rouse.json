@@ -5,6 +5,7 @@
   "aliases": [
     "Keyflare Rouse"
   ],
+  "textColor": "misc",
   "descriptionTemplate": "Grants the Awakener permanent combat boosts. Repeated {Rouse} uses don't stack.",
   "descriptionArgs": {}
 }

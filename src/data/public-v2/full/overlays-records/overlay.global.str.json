@@ -5,7 +5,7 @@
   "aliases": [
     "Strength"
   ],
-  "iconId": "Battle_Card_Buff_021",
+  "iconId": "IconS_Buff_021",
   "textColor": "heal",
   "descriptionTemplate": "Increase Active DMG dealt.",
   "descriptionArgs": {}

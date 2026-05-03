@@ -3,6 +3,7 @@
   "displayName": "Embryo Fusion",
   "overlayType": "mechanic",
   "aliases": [],
+  "textColor": "misc",
   "descriptionTemplate": "At 100% {Embryo Fusion}, add 1 {Embryo} to your hand.",
   "descriptionArgs": {}
 }

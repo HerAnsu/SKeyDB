@@ -7,6 +7,7 @@
     "Advanced Orisons",
     "Orisons"
   ],
+  "textColor": "misc",
   "descriptionTemplate": "Includes the following {Orisons}: {Computation}, {Finesse}, Berserk, {Catalyst}, Might, Bastion, Drain, Insight.",
   "descriptionArgs": {}
 }

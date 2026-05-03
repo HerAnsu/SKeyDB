@@ -3,6 +3,7 @@
   "displayName": "Destroy",
   "overlayType": "mechanic",
   "aliases": [],
+  "textColor": "misc",
   "descriptionTemplate": "Once played, it will be permanently removed and will no longer appear in the deck for this stage.",
   "descriptionArgs": {}
 }

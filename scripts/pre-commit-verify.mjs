@@ -6,7 +6,7 @@ const projectRoot = process.cwd()
 runScript('data:check-public-v2')
 runNodeScript('scripts/format-changed-files.mjs', ['--quiet', '--fail-on-write'])
 runScript('lint')
-runScript('test', ['--', '--run'])
+runScript('test:bounded')
 runScript('build:quiet')
 
 function runScript(scriptName, extraArgs = []) {

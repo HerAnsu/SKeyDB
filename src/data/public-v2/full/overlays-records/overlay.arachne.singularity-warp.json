@@ -4,6 +4,8 @@
   "overlayType": "mechanic",
   "ownerAwakenerId": "awakener-0056",
   "aliases": [],
+  "iconId": "IconS_Buff_067",
+  "textColor": "affliction",
   "descriptionTemplate": "If currently in an {Ultra Round}, activate the {Singularity Warp} effect. {Singularity Annihilation} also guarantees the next {Singularity Warp} trigger this turn.",
   "descriptionArgs": {}
 }

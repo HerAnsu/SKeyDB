@@ -4,6 +4,7 @@
   "overlayType": "mechanic",
   "ownerAwakenerId": "awakener-0022",
   "aliases": [],
+  "textColor": "damage",
   "descriptionTemplate": "When played, takes effect 2 times and changes to {Crescendo}",
   "descriptionArgs": {},
   "upgrades": [

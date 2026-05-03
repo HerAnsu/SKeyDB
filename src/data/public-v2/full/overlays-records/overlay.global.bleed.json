@@ -5,7 +5,7 @@
   "aliases": [
     "Bleeding"
   ],
-  "iconId": "Battle_Card_Buff_022",
+  "iconId": "IconS_Buff_022",
   "textColor": "damage",
   "descriptionTemplate": "At turn end, take DMG equal to stacks and remove this state.",
   "descriptionArgs": {

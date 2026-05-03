@@ -3,7 +3,7 @@
   "displayName": "Burn",
   "overlayType": "mechanic",
   "aliases": [],
-  "iconId": "Battle_Card_Buff_057",
+  "iconId": "IconS_Buff_057",
   "textColor": "damage",
   "descriptionTemplate": "Set the card on fire, dealing 5% of Max HP damage upon playing, and if still in hand at turn end, it will be {Exhausted}.",
   "descriptionArgs": {}

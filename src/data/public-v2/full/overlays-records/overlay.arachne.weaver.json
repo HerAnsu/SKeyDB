@@ -4,6 +4,8 @@
   "overlayType": "mechanic",
   "ownerAwakenerId": "awakener-0056",
   "aliases": [],
+  "iconId": "IconS_Buff_084",
+  "textColor": "affliction",
   "descriptionTemplate": "The Fate {Weaver} draws her threads. Max [DescArg1] stacks, persist across battles, and can be consumed by Exalt to unleash {Pursuit}: {Infinite Threads}.",
   "descriptionArgs": {
     "DescArg1": {

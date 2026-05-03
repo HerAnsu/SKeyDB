@@ -4,6 +4,7 @@
   "overlayType": "mechanic",
   "ownerAwakenerId": "awakener-0035",
   "aliases": [],
+  "textColor": "shield",
   "descriptionTemplate": "Each stack grants the next {Princess of Delusions} +20% {Birth Ritual}, up to 5 stacks, at which point the next {Princess of Delusions} DMG count doubles.",
   "descriptionArgs": {}
 }

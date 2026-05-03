@@ -3,7 +3,7 @@
   "displayName": "Poison",
   "overlayType": "mechanic",
   "aliases": [],
-  "iconId": "Battle_Card_Buff_006",
+  "iconId": "IconS_Buff_006",
   "textColor": "affliction",
   "descriptionTemplate": "At turn end, take DMG equal to stacks.",
   "descriptionArgs": {}

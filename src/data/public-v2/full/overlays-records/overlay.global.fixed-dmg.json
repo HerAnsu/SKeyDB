@@ -3,6 +3,7 @@
   "displayName": "Fixed DMG",
   "overlayType": "mechanic",
   "aliases": [],
+  "textColor": "misc",
   "descriptionTemplate": "Deals a fixed amount of DMG, unaffected by states such as Strength, {Weakness}, or {Vulnerability}.",
   "descriptionArgs": {}
 }

@@ -4,7 +4,7 @@
   "overlayType": "mechanic",
   "ownerAwakenerId": "awakener-0010",
   "aliases": [],
-  "iconId": "Battle_Card_Buff_049",
+  "iconId": "IconS_Buff_049",
   "textColor": "affliction",
   "descriptionTemplate": "Her emotions, cognition, and everything else are eternally linked to the Hive Will. {Symbiosis} can be transformed into debuff effects by Clementine's Exalt {Lifeform Reconstruction}, stacking up to 10 stacks.",
   "descriptionArgs": {},
