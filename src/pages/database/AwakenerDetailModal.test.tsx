@@ -278,20 +278,15 @@ vi.mock('./AwakenerDetailSidebar', () => ({
 }))
 
 vi.mock('./AwakenerDetailOverview', () => ({
-  AwakenerDetailOverview: ({
-    shellView,
-  }: {
-    shellView: {
-      stats: {CON: string; CritRate: string} | null
-      selection: {selectedEnlightenSlot: 'E1' | 'E2' | 'E3' | 'AbsoluteAxiom' | null}
-    } | null
-  }) => (
+  AwakenerDetailOverview: ({stats}: {stats: {CON: string; CritRate: string} | null}) => (
     <div>
-      <div>Overview CON {shellView?.stats?.CON ?? 'none'}</div>
-      <div>Overview Crit Rate {shellView?.stats?.CritRate ?? 'none'}</div>
-      <div>Overview Enlighten {shellView?.selection.selectedEnlightenSlot ?? 'E0'}</div>
+      <div>Overview CON {stats?.CON ?? 'none'}</div>
     </div>
   ),
+}))
+
+vi.mock('./AwakenerDetailUpgrades', () => ({
+  AwakenerDetailUpgrades: () => <div>Upgrades Tab</div>,
 }))
 
 vi.mock('./AwakenerDetailCards', () => ({
@@ -350,12 +345,15 @@ function makeAwakener(id: number, name: string): Awakener {
 }
 
 interface TestAwakenerDetailModalOptions {
-  activeTab?: 'overview' | 'skills' | 'builds' | 'teams'
+  activeTab?: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams'
   awakeners?: Awakener[]
   key?: string
   onClose?: () => void
-  onSelectAwakener?: (awakener: Awakener, tab: 'overview' | 'skills' | 'builds' | 'teams') => void
-  onTabChange?: (tab: 'overview' | 'skills' | 'builds' | 'teams') => void
+  onSelectAwakener?: (
+    awakener: Awakener,
+    tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams',
+  ) => void
+  onTabChange?: (tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams') => void
 }
 
 function getTestFullDataV2(id: string | number): AwakenerFullV2Record {
@@ -468,6 +466,10 @@ describe('AwakenerDetailModal', () => {
       'true',
     )
     expect(within(dialog).getByRole('tab', {name: 'Overview'})).toHaveAttribute('tabindex', '0')
+    expect(within(dialog).getByRole('tab', {name: 'Upgrades'})).toHaveAttribute(
+      'aria-selected',
+      'false',
+    )
     expect(within(dialog).getByRole('tab', {name: 'Skills'})).toHaveAttribute(
       'aria-selected',
       'false',
@@ -494,14 +496,14 @@ describe('AwakenerDetailModal', () => {
     overviewTab.focus()
 
     fireEvent.keyDown(overviewTab, {key: 'ArrowRight'})
-    expect(screen.getByRole('tab', {name: 'Skills'})).toHaveFocus()
-    expect(screen.getByRole('tab', {name: 'Skills'})).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tab', {name: 'Upgrades'})).toHaveFocus()
+    expect(screen.getByRole('tab', {name: 'Upgrades'})).toHaveAttribute('aria-selected', 'true')
     expect(screen.getByRole('tabpanel')).toHaveAttribute(
       'aria-labelledby',
-      screen.getByRole('tab', {name: 'Skills'}).getAttribute('id'),
+      screen.getByRole('tab', {name: 'Upgrades'}).getAttribute('id'),
     )
 
-    fireEvent.keyDown(screen.getByRole('tab', {name: 'Skills'}), {key: 'End'})
+    fireEvent.keyDown(screen.getByRole('tab', {name: 'Upgrades'}), {key: 'End'})
     expect(screen.getByRole('tab', {name: 'Teams'})).toHaveFocus()
     expect(screen.getByRole('tab', {name: 'Teams'})).toHaveAttribute('aria-selected', 'true')
 
@@ -582,20 +584,18 @@ describe('AwakenerDetailModal', () => {
     renderAwakenerDetailModal(awakener, {onClose})
 
     await waitFor(() => {
-      expect(screen.getAllByText('Sidebar Level 60')).toHaveLength(2)
-      expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(2)
-      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(2)
-      expect(screen.getAllByText('Sidebar CON 140')).toHaveLength(2)
-      expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(2)
+      expect(screen.getAllByText('Sidebar Level 60')).toHaveLength(1)
+      expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(1)
+      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(1)
+      expect(screen.getAllByText('Sidebar CON 140')).toHaveLength(1)
+      expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(1)
       expect(screen.getByText('Overview CON 140')).toBeInTheDocument()
-      expect(screen.getByText('Overview Crit Rate 14.6%')).toBeInTheDocument()
-      expect(screen.getByText('Overview Enlighten E0')).toBeInTheDocument()
     })
 
     fireEvent.click(screen.getAllByRole('button', {name: 'Set level 90'})[0])
 
-    expect(screen.getAllByText('Sidebar Level 90')).toHaveLength(2)
-    expect(screen.getAllByText('Sidebar CON 186')).toHaveLength(2)
+    expect(screen.getAllByText('Sidebar Level 90')).toHaveLength(1)
+    expect(screen.getAllByText('Sidebar CON 186')).toHaveLength(1)
     expect(screen.getByText('Overview CON 186')).toBeInTheDocument()
   })
 
@@ -606,16 +606,14 @@ describe('AwakenerDetailModal', () => {
     renderAwakenerDetailModal(awakener, {onClose})
 
     await waitFor(() => {
-      expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(2)
-      expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(2)
-      expect(screen.getByText('Overview Crit Rate 14.6%')).toBeInTheDocument()
+      expect(screen.getAllByText('Sidebar E3+0')).toHaveLength(1)
+      expect(screen.getAllByText('Sidebar Crit Rate 14.6%')).toHaveLength(1)
     })
 
     fireEvent.click(screen.getAllByRole('button', {name: 'Increase Psyche Surge'})[0])
 
-    expect(screen.getAllByText('Sidebar E3+1')).toHaveLength(2)
-    expect(screen.getAllByText('Sidebar Crit Rate 16.2%')).toHaveLength(2)
-    expect(screen.getByText('Overview Crit Rate 16.2%')).toBeInTheDocument()
+    expect(screen.getAllByText('Sidebar E3+1')).toHaveLength(1)
+    expect(screen.getAllByText('Sidebar Crit Rate 16.2%')).toHaveLength(1)
   })
 
   it('updates the selected enlighten slot through shared selection state', async () => {
@@ -625,13 +623,12 @@ describe('AwakenerDetailModal', () => {
     renderAwakenerDetailModal(awakener, {onClose})
 
     await waitFor(() => {
-      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(2)
+      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(1)
     })
 
     fireEvent.click(screen.getAllByRole('button', {name: 'Set E2'})[0])
 
-    expect(screen.getAllByText('Sidebar Enlighten E2')).toHaveLength(2)
-    expect(screen.getByText('Overview Enlighten E2')).toBeInTheDocument()
+    expect(screen.getAllByText('Sidebar Enlighten E2')).toHaveLength(1)
   })
 
   it('updates default progression for the next awakener without changing the current live state', async () => {
@@ -642,8 +639,7 @@ describe('AwakenerDetailModal', () => {
     const {rerender} = renderAwakenerDetailModal(first, {key: first.id, onClose})
 
     await waitFor(() => {
-      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(2)
-      expect(screen.getByText('Overview Enlighten E0')).toBeInTheDocument()
+      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(1)
     })
 
     fireEvent.click(screen.getByRole('button', {name: 'Open detail settings'}))
@@ -660,8 +656,7 @@ describe('AwakenerDetailModal', () => {
 
     fireEvent.click(within(defaultProgressionSection).getByRole('button', {name: 'E2'}))
 
-    expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(2)
-    expect(screen.getByText('Overview Enlighten E0')).toBeInTheDocument()
+    expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(1)
     expect(window.localStorage.getItem('database-detail-preferences')).toContain(
       '"selectedEnlightenSlot":"E2"',
     )
@@ -669,8 +664,7 @@ describe('AwakenerDetailModal', () => {
     rerender(createAwakenerDetailModalElement(second, {key: second.id, onClose}))
 
     await waitFor(() => {
-      expect(screen.getAllByText('Sidebar Enlighten E2')).toHaveLength(2)
-      expect(screen.getByText('Overview Enlighten E2')).toBeInTheDocument()
+      expect(screen.getAllByText('Sidebar Enlighten E2')).toHaveLength(1)
     })
   })
 
@@ -682,20 +676,17 @@ describe('AwakenerDetailModal', () => {
     const {rerender} = renderAwakenerDetailModal(first, {onClose})
 
     await waitFor(() => {
-      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(2)
-      expect(screen.getByText('Overview Enlighten E0')).toBeInTheDocument()
+      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(1)
     })
 
     fireEvent.click(screen.getAllByRole('button', {name: 'Set E2'})[0])
 
-    expect(screen.getAllByText('Sidebar Enlighten E2')).toHaveLength(2)
-    expect(screen.getByText('Overview Enlighten E2')).toBeInTheDocument()
+    expect(screen.getAllByText('Sidebar Enlighten E2')).toHaveLength(1)
 
     rerender(createAwakenerDetailModalElement(second, {onClose}))
 
     await waitFor(() => {
-      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(2)
-      expect(screen.getByText('Overview Enlighten E0')).toBeInTheDocument()
+      expect(screen.getAllByText('Sidebar Enlighten E0')).toHaveLength(1)
     })
   })
 

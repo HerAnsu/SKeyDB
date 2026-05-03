@@ -1,7 +1,7 @@
 import {fireEvent, render, screen} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 
-import {AwakenerDetailOverview} from './AwakenerDetailOverview'
+import {AwakenerDetailUpgrades} from './AwakenerDetailUpgrades'
 import {DatabasePopoverContext} from './database-popover-context'
 import {
   makeDatabaseDescribedEntry,
@@ -111,7 +111,7 @@ const TEST_SHELL_VIEW = makeDatabaseShellView({
   ],
 })
 
-describe('AwakenerDetailOverview', () => {
+describe('AwakenerDetailUpgrades', () => {
   it('renders fourth talent entries and over exalt progression rows when they exist in the full data', () => {
     const openRootReferenceByName = vi.fn()
 
@@ -126,7 +126,7 @@ describe('AwakenerDetailOverview', () => {
           closeAllPopovers: vi.fn(),
         }}
       >
-        <AwakenerDetailOverview
+        <AwakenerDetailUpgrades
           awakener={TEST_AWAKENER}
           fontScale={'medium'}
           referenceLayer={null}

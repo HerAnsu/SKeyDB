@@ -6,7 +6,7 @@ import {
 } from './database-entity-paths'
 import type {Wheel} from './wheels'
 
-export const DATABASE_AWAKENER_TABS = ['overview', 'skills', 'builds', 'teams'] as const
+export const DATABASE_AWAKENER_TABS = ['overview', 'upgrades', 'skills', 'builds', 'teams'] as const
 
 export type DatabaseAwakenerTab = (typeof DATABASE_AWAKENER_TABS)[number]
 

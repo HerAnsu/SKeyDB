@@ -153,14 +153,14 @@ vi.mock('./database/AwakenerDetailModal', () => ({
     onSelectAwakener,
     onTabChange,
   }: {
-    activeTab?: 'overview' | 'skills' | 'builds' | 'teams'
+    activeTab?: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams'
     awakener: {id: string; name: string}
     onClose: () => void
     onSelectAwakener: (
       awakener: {id: string; name: string},
-      tab: 'overview' | 'skills' | 'builds' | 'teams',
+      tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams',
     ) => void
-    onTabChange: (tab: 'overview' | 'skills' | 'builds' | 'teams') => void
+    onTabChange: (tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams') => void
   }) => (
     <div aria-label={`${awakener.name} details`} role='dialog'>
       <div>{`Active tab ${activeTab}`}</div>
@@ -200,7 +200,7 @@ vi.mock('./database/WheelDetailModal', () => ({
     onClose: () => void
     onSelectAwakener?: (
       awakener: {id: string; name: string},
-      tab?: 'overview' | 'skills' | 'builds' | 'teams',
+      tab?: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams',
     ) => void
     onSelectWheel?: (wheel: {name: string}) => void
   }) => (

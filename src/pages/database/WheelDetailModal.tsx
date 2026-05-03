@@ -2,6 +2,7 @@ import {Suspense, useMemo, useState} from 'react'
 
 import {FaGear, FaXmark} from 'react-icons/fa6'
 
+import type {DatabaseAwakenerTab} from '@/domain/database-paths'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import type {Wheel} from '@/domain/wheels'
 import type {WheelFullV2Record} from '@/domain/wheels-full-v2'
@@ -21,10 +22,7 @@ interface WheelDetailModalProps {
   wheels?: Wheel[]
   fullDataV2: WheelFullV2Record
   onClose: () => void
-  onSelectAwakener?: (
-    awakener: {id: string; name: string},
-    tab?: 'overview' | 'skills' | 'builds' | 'teams',
-  ) => void
+  onSelectAwakener?: (awakener: {id: string; name: string}, tab?: DatabaseAwakenerTab) => void
   onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
 }
 

@@ -22,6 +22,7 @@ import {AwakenerDetailOverview} from './AwakenerDetailOverview'
 import {AwakenerDetailSearchBar} from './AwakenerDetailSearchBar'
 import {AwakenerDetailSettingsPanel} from './AwakenerDetailSettingsPanel'
 import {AwakenerDetailSidebar} from './AwakenerDetailSidebar'
+import {AwakenerDetailUpgrades} from './AwakenerDetailUpgrades'
 import {DatabasePopoverContext} from './database-popover-context'
 import {DatabaseArtViewerOverlay} from './DatabaseArtViewerOverlay'
 import {DatabasePopoverRoot} from './DatabasePopoverRoot'
@@ -41,6 +42,7 @@ interface AwakenerDetailModalProps {
 
 const DATABASE_AWAKENER_TAB_LABELS: Record<DatabaseAwakenerTab, string> = {
   overview: 'Overview',
+  upgrades: 'Upgrades',
   skills: 'Skills',
   builds: 'Builds',
   teams: 'Teams',
@@ -72,6 +74,7 @@ export function AwakenerDetailModal({
 }: AwakenerDetailModalProps) {
   const tabButtonRefs = useRef<Partial<Record<DatabaseAwakenerTab, HTMLButtonElement | null>>>({})
   const [isArtViewerOpen, setIsArtViewerOpen] = useState(false)
+  const [areStatsExpanded, setAreStatsExpanded] = useState(false)
   const tabsetId = useId()
   const {
     activeSearchIndex,
@@ -128,6 +131,14 @@ export function AwakenerDetailModal({
   const portrait = getAwakenerPortraitAsset(awakener.name)
   const tabPanelId = `${tabsetId}-panel`
   const fullArtAlt = useMemo(() => `${displayName} full art`, [displayName])
+  const headerMetaItems = [
+    {key: 'realm', label: realmLabel, color: realmAccent},
+    {
+      key: 'type',
+      label: awakener.type ? awakener.type.charAt(0) + awakener.type.slice(1).toLowerCase() : '—',
+    },
+    awakener.faction ? {key: 'faction', label: awakener.faction} : null,
+  ].filter((item): item is {key: string; label: string; color?: string} => item !== null)
 
   function focusTab(tab: DatabaseAwakenerTab) {
     tabButtonRefs.current[tab]?.focus()
@@ -247,10 +258,14 @@ export function AwakenerDetailModal({
                       : undefined
                   }
                   onPatchSelection={sessionActions.patchSelection}
+                  onStatsExpandedChange={setAreStatsExpanded}
                   scalingRecord={fullDataV2}
                   selection={resolvedSelection}
                   stats={resolvedStats}
                   substatScaling={fullDataV2.substatScaling}
+                  profile={fullDataV2.profile}
+                  areStatsExpanded={areStatsExpanded}
+                  variant={activeTab === 'overview' ? 'profile' : 'progression'}
                 />
               </aside>
 
@@ -329,15 +344,14 @@ export function AwakenerDetailModal({
                         ) : null}
                       </div>
                       <p className='mt-0.5 text-xs text-slate-400'>
-                        <span style={{color: realmAccent}}>{realmLabel}</span>
-                        <span className='mx-1.5 text-slate-600'>·</span>
-                        <span>
-                          {awakener.type
-                            ? awakener.type.charAt(0) + awakener.type.slice(1).toLowerCase()
-                            : '—'}
-                        </span>
-                        <span className='mx-1.5 text-slate-600'>·</span>
-                        <span>{awakener.faction}</span>
+                        {headerMetaItems.map((item, index) => (
+                          <span key={item.key}>
+                            {index > 0 ? <span className='mx-1.5 text-slate-600'>·</span> : null}
+                            <span style={item.color ? {color: item.color} : undefined}>
+                              {item.label}
+                            </span>
+                          </span>
+                        ))}
                       </p>
                       {awakener.tags.length > 0 ? (
                         <div className='mt-1.5 max-w-xl'>
@@ -377,14 +391,14 @@ export function AwakenerDetailModal({
                   <div className='mt-3 max-w-2xl'>
                     <nav
                       aria-label='Awakener detail sections'
-                      className='flex min-w-0 flex-wrap gap-0.5'
+                      className='database-scrollbar flex min-w-0 flex-nowrap gap-0.5 overflow-x-auto'
                       role='tablist'
                     >
                       {DATABASE_AWAKENER_TABS.map((tab) => (
                         <button
                           aria-controls={tabPanelId}
                           aria-selected={activeTab === tab}
-                          className={`px-3.5 py-2 text-[11px] tracking-wide uppercase transition-colors ${
+                          className={`shrink-0 px-2 py-2 text-[10px] tracking-wide uppercase transition-colors sm:px-3.5 sm:text-[11px] ${
                             activeTab === tab
                               ? 'border-b-2 border-amber-200/70 text-amber-100'
                               : 'border-b-2 border-transparent text-slate-400 hover:text-slate-200'
@@ -412,29 +426,51 @@ export function AwakenerDetailModal({
                   <div className='mt-0 h-px w-3/4 bg-slate-700/50' />
                 </div>
 
-                <div className='database-scrollbar flex-1 overflow-y-auto p-5 pr-8 lg:pr-16'>
-                  <div className='mb-4 md:hidden'>
-                    <AwakenerDetailSidebar
-                      awakener={awakener}
-                      compact
-                      controls={resolvedControls}
-                      onPatchSelection={sessionActions.patchSelection}
-                      scalingRecord={fullDataV2}
-                      selection={resolvedSelection}
-                      stats={resolvedStats}
-                      substatScaling={fullDataV2.substatScaling}
-                    />
-                  </div>
+                <div
+                  className={`database-scrollbar flex-1 ${
+                    activeTab === 'overview'
+                      ? 'overflow-y-auto px-5 pt-0 pb-5 md:overflow-hidden md:p-5 md:pr-5 lg:pr-5'
+                      : 'overflow-y-auto p-5 pr-8 lg:pr-16'
+                  }`}
+                >
+                  {activeTab === 'overview' ? null : (
+                    <div className='mb-4 md:hidden'>
+                      <AwakenerDetailSidebar
+                        awakener={awakener}
+                        compact
+                        controls={resolvedControls}
+                        onPatchSelection={sessionActions.patchSelection}
+                        onStatsExpandedChange={setAreStatsExpanded}
+                        scalingRecord={fullDataV2}
+                        selection={resolvedSelection}
+                        stats={resolvedStats}
+                        substatScaling={fullDataV2.substatScaling}
+                        areStatsExpanded={areStatsExpanded}
+                      />
+                    </div>
+                  )}
 
                   <div
                     aria-labelledby={`${tabsetId}-tab-${activeTab}`}
-                    className='max-w-2xl'
+                    className={activeTab === 'overview' ? 'h-full max-w-none' : 'max-w-2xl'}
                     id={tabPanelId}
                     role='tabpanel'
                     tabIndex={0}
                   >
                     {activeTab === 'overview' && (
                       <AwakenerDetailOverview
+                        awakener={awakener}
+                        areStatsExpanded={areStatsExpanded}
+                        fontScale={fontScale}
+                        fullDataV2={fullDataV2}
+                        onStatsExpandedChange={setAreStatsExpanded}
+                        scalingRecord={fullDataV2}
+                        stats={resolvedStats}
+                        substatScaling={fullDataV2.substatScaling}
+                      />
+                    )}
+                    {activeTab === 'upgrades' && (
+                      <AwakenerDetailUpgrades
                         awakener={awakener}
                         fontScale={fontScale}
                         referenceLayer={referenceLayer}

@@ -90,7 +90,7 @@ const TEST_SELECTION: AwakenerDatabaseSelection = {
 }
 
 describe('AwakenerDetailSidebar', () => {
-  it('keeps the level label in the slider, shows the Psyche Surge stepper, and exposes scaling info on demand', () => {
+  it('keeps main stats visible, collapses secondary stats, and exposes scaling info on demand', () => {
     const openRootInfo = vi.fn()
     render(
       <DatabasePopoverContext.Provider
@@ -116,11 +116,17 @@ describe('AwakenerDetailSidebar', () => {
       </DatabasePopoverContext.Provider>,
     )
 
-    expect(screen.getByRole('heading', {name: 'Attributes'})).toBeInTheDocument()
+    expect(screen.getByRole('heading', {name: 'Stats'})).toBeInTheDocument()
     expect(screen.queryByText('(Lv. 60)')).not.toBeInTheDocument()
     expect(screen.getByText('E3+0')).toBeInTheDocument()
 
     expect(screen.getByText('140')).toHaveClass('text-slate-200')
+    expect(screen.getByText('135')).toHaveClass('text-slate-200')
+    expect(screen.getByText('126')).toHaveClass('text-slate-200')
+    expect(screen.queryByText('Crit Rate')).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /show all stats/i}))
+
     expect(screen.getByText('14.6%')).toHaveClass('text-slate-200')
     expect(screen.getByTitle('Level scaling: +1.6% per 10 levels to Lv. 60')).toHaveTextContent(
       '14.6%',
@@ -146,7 +152,7 @@ describe('AwakenerDetailSidebar', () => {
     )
   })
 
-  it('shows attributes before progression in compact mode', () => {
+  it('shows stats before progression in compact mode', () => {
     const {container} = render(
       <AwakenerDetailSidebar
         compact
@@ -163,10 +169,8 @@ describe('AwakenerDetailSidebar', () => {
     const panels = Array.from(container.querySelectorAll('.border.border-slate-600\\/30'))
     expect(panels).toHaveLength(2)
     expect(
-      within(panels[0] as HTMLElement).getByRole('heading', {name: 'Attributes'}),
+      within(panels[0] as HTMLElement).getByRole('heading', {name: 'Stats'}),
     ).toBeInTheDocument()
-    expect(
-      within(panels[1] as HTMLElement).getByRole('heading', {name: 'Progression'}),
-    ).toBeInTheDocument()
+    expect(within(panels[1] as HTMLElement).getByRole('button', {name: 'E0'})).toBeInTheDocument()
   })
 })

@@ -10,6 +10,24 @@ import type {PublicV2UpgradeEntry} from './public-v2-schema'
 
 export type PublicV2RecordUpgrade = PublicV2UpgradeEntry
 
+export interface AwakenerProfileStorySection {
+  kind: 'introduction' | 'story'
+  title: string
+  unlockCondition?: string
+  content: string
+}
+
+export interface AwakenerProfile {
+  title?: string
+  birthday?: string
+  gender?: string
+  height?: string
+  weight?: string
+  gnosticIndex?: string
+  faction?: string
+  storySections?: AwakenerProfileStorySection[]
+}
+
 export type PublicV2UpgradeableSkillRecord = AwakenerSkillRecord & {
   upgrades?: PublicV2RecordUpgrade[]
 }
@@ -23,6 +41,7 @@ export type PublicV2UpgradeableOverlayRecord = AwakenerOverlayRecord & {
 }
 
 export interface AwakenerFullV2Record extends AwakenerRosterRecord {
+  profile?: AwakenerProfile
   cards: {
     C1: PublicV2UpgradeableSkillRecord
     C2: PublicV2UpgradeableSkillRecord

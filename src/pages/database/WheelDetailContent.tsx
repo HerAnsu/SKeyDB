@@ -1,3 +1,4 @@
+import type {DatabaseAwakenerTab} from '@/domain/database-paths'
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 import type {WheelDatabaseDescriptionRecord} from '@/domain/description-records'
 import {getMainstatByKey, getMainstatIcon} from '@/domain/mainstats'
@@ -41,10 +42,7 @@ interface WheelDetailContentProps {
   wheelDescriptionRecord: WheelDatabaseDescriptionRecord
   onEnhanceLevelChange: (level: number) => void
   mobileArtwork?: React.ReactNode
-  onSelectAwakener?: (
-    awakener: {id: string; name: string},
-    tab?: 'overview' | 'skills' | 'builds' | 'teams',
-  ) => void
+  onSelectAwakener?: (awakener: {id: string; name: string}, tab?: DatabaseAwakenerTab) => void
 }
 
 export function WheelDetailContent({

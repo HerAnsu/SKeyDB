@@ -1,225 +1,222 @@
-import {useCallback, useMemo} from 'react'
+import {useMemo, useState} from 'react'
 
-import enlightensStars from '@/assets/icons/Battle_Card_Buff_045.webp'
+import type {FullStats, SubstatScaling} from '@/domain/awakener-source-schema'
 import type {Awakener} from '@/domain/awakeners'
-import type {ResolvedAwakenerDatabaseShellView} from '@/domain/awakeners-database-view'
-import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
-import {getRelicPortraitAssetByAssetId} from '@/domain/relic-assets'
-import {getPortraitRelicByAwakenerId} from '@/domain/relics'
+import type {AwakenerFullV2Record, AwakenerProfileStorySection} from '@/domain/awakeners-full-v2'
+import type {ScalingInfoRecord} from '@/domain/database-scaling-info'
 
-import {useDatabasePopoverControllerContext} from './database-popover-context'
-import {DatabaseScopedRichDescription} from './DatabaseScopedRichDescription'
-import {DetailSection, type DetailSectionItem} from './DetailSection'
-import {getStarSize, scaledFontStyle, type FontScale} from './font-scale'
-import {DATABASE_SECTION_TITLE_CLASS} from './text-styles'
+import {AwakenerDetailProfileFacts} from './AwakenerDetailProfileFacts'
+import {AwakenerDetailStatsPanel} from './AwakenerDetailStatsPanel'
+import {
+  DATABASE_DETAIL_BODY_CLASS,
+  DATABASE_DETAIL_FIXED_UTILITY_ACTION_CLASS,
+  DATABASE_DETAIL_SECTION_HEADING_CLASS,
+  getDatabaseDetailBodyStyle,
+  getDatabaseDetailSectionHeadingStyle,
+} from './database-detail-typography'
+import type {FontScale} from './font-scale'
+import {WheelLoreText} from './WheelLoreText'
 
 interface AwakenerDetailOverviewProps {
   awakener: Awakener
-  shellView: ResolvedAwakenerDatabaseShellView | null
-  referenceLayer: ResolvedDatabaseReferenceLayer | null
+  areStatsExpanded?: boolean
+  fullDataV2: AwakenerFullV2Record
   fontScale: FontScale
-  showVisibleScaling?: boolean
-  showTagIcons?: boolean
+  onStatsExpandedChange?: (isExpanded: boolean) => void
+  stats: FullStats | null
+  substatScaling: SubstatScaling | null
+  scalingRecord: ScalingInfoRecord
 }
 
-const ENLIGHTEN_ORDER = ['E1', 'E2', 'E3'] as const
-const TALENT_ORDER = ['T1', 'T2', 'T3', 'T4'] as const
+function getStoryNavLabel(section: AwakenerProfileStorySection, index: number): string {
+  if (section.kind === 'introduction' || index === 0) {
+    return 'Intro'
+  }
+
+  const romanMatch = /(?:Story:?\s*)?([IVX]+)$/i.exec(section.title.trim())
+  return romanMatch?.[1] ?? String(index)
+}
+
+function getStoryHeading(section: AwakenerProfileStorySection, index: number): string {
+  if (section.kind === 'introduction' || index === 0) {
+    return 'Introduction'
+  }
+  return section.title.replace(':', '').trim()
+}
+
+function getStoryPreview(content: string): string {
+  const preview = content
+    .replace(/@[1-4]/g, '')
+    .replace(/<([A-Za-z]+):([^>]+)>/g, '$2')
+    .replace(/<([A-Za-z]+)>/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  return preview.length > 104 ? `${preview.slice(0, 104).trim()}...` : preview
+}
+
+function shouldShowStoryUnlock(section: AwakenerProfileStorySection, index: number): boolean {
+  return index > 0 && section.kind !== 'introduction' && Boolean(section.unlockCondition)
+}
 
 export function AwakenerDetailOverview({
+  areStatsExpanded,
   awakener,
-  shellView,
-  referenceLayer,
-  fontScale,
-  showVisibleScaling = true,
-  showTagIcons = true,
+  fullDataV2,
+  onStatsExpandedChange,
+  scalingRecord,
+  stats,
+  substatScaling,
 }: AwakenerDetailOverviewProps) {
-  const popoverController = useDatabasePopoverControllerContext()
-  const renderDescription = useCallback(
-    (item: DetailSectionItem) => (
-      <DatabaseScopedRichDescription
-        descriptionMaxRank={item.descriptionMaxRank}
-        descriptionRank={item.descriptionRank}
-        formulaContext={shellView?.formulaContext}
-        record={item.record}
-        referenceLayer={referenceLayer}
-        showTagIcons={showTagIcons}
-        showVisibleScaling={showVisibleScaling}
-        skillLevel={shellView?.skillLevel ?? 1}
-        stats={shellView?.stats ?? null}
-        text={item.description}
-      />
-    ),
-    [
-      referenceLayer,
-      shellView?.formulaContext,
-      shellView?.skillLevel,
-      shellView?.stats,
-      showTagIcons,
-      showVisibleScaling,
-    ],
-  )
+  const profile = fullDataV2.profile
+  const stories = useMemo(() => profile?.storySections ?? [], [profile?.storySections])
+  const [storySelection, setStorySelection] = useState({awakenerId: awakener.id, index: 0})
+  const activeStoryIndex = storySelection.awakenerId === awakener.id ? storySelection.index : 0
+  const activeStory = stories.at(activeStoryIndex) ?? null
 
-  const enlightenItems = useMemo(() => {
-    if (!shellView) return []
-    const items = []
-    const starStyle = getStarSize(fontScale)
-
-    for (const [index, key] of ENLIGHTEN_ORDER.entries()) {
-      const entry = shellView.enlightens[index]
-      const starCount = parseInt(key.replace('E', ''))
-
-      items.push({
-        key,
-        label: (
-          <span className={`relative inline-flex items-center ${starStyle.space}`}>
-            {Array.from({length: starCount}).map((_, i) => (
-              <img
-                key={i}
-                src={enlightensStars}
-                alt={`E${(i + 1).toString()}`}
-                className='relative'
-                style={{width: starStyle.width, height: starStyle.height, top: starStyle.top}}
-              />
-            ))}
-          </span>
-        ),
-        name: entry.record.displayName,
-        description: entry.resolved.description,
-        record: entry.record,
-        descriptionRank: entry.descriptionRank,
-        descriptionMaxRank: entry.descriptionMaxRank,
-      })
-    }
-
-    if (shellView.overExalt) {
-      items.push({
-        key: 'OverExalt',
-        label: popoverController ? (
-          <button
-            className='cursor-pointer text-slate-500 transition-colors hover:text-amber-100'
-            onClick={(event) => {
-              popoverController.openRootReferenceByName('Over Exalt', event)
-            }}
-            style={scaledFontStyle(12)}
-            type='button'
-          >
-            Over-Exaltation
-          </button>
-        ) : (
-          'Over-Exaltation'
-        ),
-        name: shellView.overExalt.record.displayName,
-        description: shellView.overExalt.resolved.description,
-        record: shellView.overExalt.record,
-        descriptionRank: shellView.overExalt.descriptionRank,
-        descriptionMaxRank: shellView.overExalt.descriptionMaxRank,
-      })
-    }
-
-    const absoluteAxiom = shellView.enlightens.find((entry) => entry.key === 'AbsoluteAxiom')
-
-    if (absoluteAxiom) {
-      items.push({
-        key: 'AbsoluteAxiom',
-        label: popoverController ? (
-          <button
-            className='cursor-pointer text-slate-500 transition-colors hover:text-amber-100'
-            onClick={(event) => {
-              popoverController.openRootReferenceByName('Absolute Axiom', event)
-            }}
-            style={scaledFontStyle(12)}
-            type='button'
-          >
-            Absolute Axiom
-          </button>
-        ) : (
-          'Absolute Axiom'
-        ),
-        name: absoluteAxiom.record.displayName,
-        description: absoluteAxiom.resolved.description,
-        record: absoluteAxiom.record,
-        descriptionRank: absoluteAxiom.descriptionRank,
-        descriptionMaxRank: absoluteAxiom.descriptionMaxRank,
-      })
-    }
-
-    return items
-  }, [fontScale, popoverController, shellView])
-
-  if (!shellView) {
-    return <p className='py-4 text-xs text-slate-400'>Loading...</p>
+  if (!profile && stories.length === 0) {
+    return (
+      <div className='space-y-3'>
+        <AwakenerDetailStatsPanel
+          compact
+          isExpanded={areStatsExpanded}
+          onExpandedChange={onStatsExpandedChange}
+          scalingRecord={scalingRecord}
+          stats={stats}
+          substatScaling={substatScaling}
+        />
+        <p className='text-xs text-slate-400'>No profile or story data available yet.</p>
+      </div>
+    )
   }
-  const talentItems: DetailSectionItem[] = shellView.talents
-    .filter((entry) => TALENT_ORDER.includes(entry.key as (typeof TALENT_ORDER)[number]))
-    .map((entry) => ({
-      key: entry.key,
-      label: entry.key,
-      name: entry.record.displayName,
-      description: entry.resolved.description,
-      record: entry.record,
-      descriptionRank: entry.descriptionRank,
-      descriptionMaxRank: entry.descriptionMaxRank,
-    }))
-
-  const portraitRelic = getPortraitRelicByAwakenerId(awakener.id)
-  const portraitRelicAsset = portraitRelic
-    ? getRelicPortraitAssetByAssetId(portraitRelic.assetId)
-    : undefined
 
   return (
-    <div className='space-y-4'>
-      <div className='border border-slate-600/30 bg-slate-900/30'>
-        <h4 className={DATABASE_SECTION_TITLE_CLASS} style={scaledFontStyle(14)}>
-          Dimensional Image
-        </h4>
-        {portraitRelic ? (
-          <div className='px-4 py-3'>
-            <div className='flex items-start gap-3'>
-              <div className='h-16 w-16 shrink-0 overflow-hidden'>
-                {portraitRelicAsset ? (
-                  <img
-                    alt={`${portraitRelic.name} icon`}
-                    className='h-full w-full object-cover object-center'
-                    draggable={false}
-                    src={portraitRelicAsset}
-                  />
-                ) : (
-                  <div className='h-full w-full bg-[radial-gradient(circle_at_50%_35%,rgba(125,165,215,0.2),rgba(8,13,25,0.95)_70%)]' />
-                )}
-              </div>
-              <div className='min-w-0 flex-1'>
-                <p className='leading-relaxed text-slate-400' style={scaledFontStyle(12)}>
-                  <DatabaseScopedRichDescription
-                    referenceLayer={referenceLayer}
-                    formulaContext={shellView.formulaContext}
-                    showTagIcons={showTagIcons}
-                    showVisibleScaling={showVisibleScaling}
-                    skillLevel={shellView.skillLevel}
-                    stats={shellView.stats}
-                    text={portraitRelic.description}
-                  />
-                </p>
+    <div className='flex h-full min-h-0 flex-col gap-4 md:flex-row md:gap-5'>
+      <div className='mt-5 space-y-3 md:hidden'>
+        <AwakenerDetailProfileFacts compact profile={profile} />
+        <AwakenerDetailStatsPanel
+          compact
+          isExpanded={areStatsExpanded}
+          onExpandedChange={onStatsExpandedChange}
+          scalingRecord={scalingRecord}
+          stats={stats}
+          substatScaling={substatScaling}
+        />
+      </div>
+
+      {activeStory ? (
+        <>
+          <section className='flex min-h-0 min-w-0 flex-1 flex-col'>
+            <div className='sticky top-0 z-[2] -mx-5 border-y border-slate-800/80 bg-slate-950/[.97] px-5 py-2 md:hidden'>
+              <div
+                aria-label='Awakener stories'
+                className='database-scrollbar flex gap-1.5 overflow-x-auto'
+                role='tablist'
+              >
+                {stories.map((story, index) => {
+                  const label = getStoryNavLabel(story, index)
+                  const isActive = index === activeStoryIndex
+
+                  return (
+                    <button
+                      aria-selected={isActive}
+                      className={`flex min-h-11 min-w-11 shrink-0 items-center justify-center border-b-2 px-3 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors ${
+                        isActive
+                          ? 'border-amber-200/80 text-amber-100'
+                          : 'border-transparent text-slate-500 hover:text-slate-300'
+                      }`}
+                      key={`${story.title}:${index.toString()}`}
+                      onClick={() => {
+                        setStorySelection({awakenerId: awakener.id, index})
+                      }}
+                      role='tab'
+                      type='button'
+                    >
+                      {label}
+                    </button>
+                  )
+                })}
               </div>
             </div>
-          </div>
-        ) : (
-          <p className='px-4 pb-3 text-xs text-slate-400'>
-            No dimensional image linked yet for this awakener.
+
+            <article className='database-scrollbar min-h-0 flex-1 pt-3 md:overflow-y-auto md:border md:border-slate-800/80 md:bg-slate-950/45 md:px-4 md:py-3'>
+              <div className='max-w-[68ch] pb-8 md:pb-2'>
+                <div className='flex items-baseline justify-between gap-3'>
+                  <h4
+                    className={DATABASE_DETAIL_SECTION_HEADING_CLASS}
+                    style={getDatabaseDetailSectionHeadingStyle()}
+                  >
+                    {getStoryHeading(activeStory, activeStoryIndex)}
+                  </h4>
+                  {shouldShowStoryUnlock(activeStory, activeStoryIndex) ? (
+                    <p className='shrink-0 text-[10px] tracking-[0.16em] text-amber-100/70 uppercase'>
+                      {activeStory.unlockCondition}
+                    </p>
+                  ) : null}
+                </div>
+                <WheelLoreText defaultExpanded lore={activeStory.content} previewLineCount={999} />
+              </div>
+            </article>
+          </section>
+
+          <aside className='hidden w-72 shrink-0 flex-col border-l border-slate-800/80 pl-4 md:flex md:min-h-0'>
+            <h4
+              className='ui-title mb-2 shrink-0 text-slate-400 uppercase'
+              style={getDatabaseDetailSectionHeadingStyle()}
+            >
+              Story Index
+            </h4>
+            <div className='database-scrollbar min-h-0 flex-1 space-y-1.5 overflow-y-auto pr-1'>
+              {stories.map((story, index) => {
+                const isActive = index === activeStoryIndex
+                const label = getStoryNavLabel(story, index)
+
+                return (
+                  <button
+                    className={`w-full border px-2.5 py-2 text-left transition-colors ${
+                      isActive
+                        ? 'border-amber-200/75 bg-amber-200/8'
+                        : 'border-slate-700/55 bg-slate-950/30 hover:border-slate-500/65'
+                    }`}
+                    key={`${story.title}:${index.toString()}`}
+                    onClick={() => {
+                      setStorySelection({awakenerId: awakener.id, index})
+                    }}
+                    type='button'
+                  >
+                    <span className='flex items-center justify-between gap-3'>
+                      <span className='ui-title text-[12px] text-amber-100'>{label}</span>
+                      {shouldShowStoryUnlock(story, index) ? (
+                        <span className='truncate text-[9px] tracking-[0.12em] text-slate-500 uppercase'>
+                          Unlock: {story.unlockCondition}
+                        </span>
+                      ) : null}
+                    </span>
+                    <span className='mt-1 [display:-webkit-box] block overflow-hidden text-[11px] leading-snug text-slate-500 [-webkit-box-orient:vertical] [-webkit-line-clamp:2]'>
+                      {getStoryPreview(story.content)}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          </aside>
+        </>
+      ) : (
+        <section className='border border-slate-700/45 bg-slate-900/20 px-4 py-3'>
+          <h4
+            className={DATABASE_DETAIL_SECTION_HEADING_CLASS}
+            style={getDatabaseDetailSectionHeadingStyle()}
+          >
+            Profile
+          </h4>
+          <p className={`mt-2 ${DATABASE_DETAIL_BODY_CLASS}`} style={getDatabaseDetailBodyStyle()}>
+            Profile facts are available, but no story sections are linked yet.
           </p>
-        )}
-      </div>
-      <DetailSection
-        emptyMessage='No enlighten data available.'
-        items={enlightenItems}
-        renderDescription={renderDescription}
-        title='Enlightens'
-      />
-      <DetailSection
-        emptyMessage='No talent data available.'
-        items={talentItems}
-        renderDescription={renderDescription}
-        title='Talents'
-      />
+          <p className={`mt-3 ${DATABASE_DETAIL_FIXED_UTILITY_ACTION_CLASS} text-slate-500`}>
+            Story data missing
+          </p>
+        </section>
+      )}
     </div>
   )
 }
