@@ -17,12 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "The Fools",
-  "aliases": [
-    "jenkins"
-  ],
-  "searchTags": [
-    "Draw"
-  ],
+  "aliases": ["jenkins"],
+  "searchTags": ["Draw"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 27,

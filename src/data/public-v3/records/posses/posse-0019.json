@@ -21,20 +21,14 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.045,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     },
     "Arg2": {
       "kind": "computed",
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.015,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "The graceful rose has achieved her complete victory.\n\nShe has returned to the noble rose surrounded by the crowd like stars around the moon, with only the gaze directed at you proclaiming the secret adventure experienced with you at the opera house."

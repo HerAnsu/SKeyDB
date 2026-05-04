@@ -95,10 +95,7 @@
       "nodeKind": "group",
       "derivedFromId": "skill.daffodil.sea-of-primordial-essence",
       "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "childDerivedSkillIds": [
-        "derived.daffodil.thousand-mirage-base-cards",
-        "derived.daffodil.thousand-mirage-extra-effects"
-      ]
+      "childDerivedSkillIds": ["derived.daffodil.thousand-mirage-base-cards", "derived.daffodil.thousand-mirage-extra-effects"]
     },
     {
       "kind": "derivedSkill",
@@ -113,11 +110,7 @@
       "nodeKind": "group",
       "derivedFromId": "derived.daffodil.thousand-mirage",
       "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
-      "childDerivedSkillIds": [
-        "derived.daffodil.thousand-mirage-poison",
-        "derived.daffodil.thousand-mirage-counter",
-        "derived.daffodil.thousand-mirage-damage"
-      ]
+      "childDerivedSkillIds": ["derived.daffodil.thousand-mirage-poison", "derived.daffodil.thousand-mirage-counter", "derived.daffodil.thousand-mirage-damage"]
     },
     {
       "kind": "derivedSkill",
@@ -616,10 +609,7 @@
       "ownerAwakenerId": "awakener-0018",
       "ownerAwakenerName": "Doll: Inferno",
       "derivedFromId": "talent.doll-inferno.path-of-annihilation",
-      "childDerivedSkillIds": [
-        "derived.doll-inferno.self-destruct-finale",
-        "derived.doll-inferno.fates-descent-finale"
-      ]
+      "childDerivedSkillIds": ["derived.doll-inferno.self-destruct-finale", "derived.doll-inferno.fates-descent-finale"]
     },
     {
       "kind": "derivedSkill",
@@ -810,10 +800,7 @@
       "nodeKind": "group",
       "derivedFromId": "skill.hameln.laudable-masterpiece",
       "rootSkillId": "skill.hameln.laudable-masterpiece",
-      "childDerivedSkillIds": [
-        "derived.hameln.ascending-scale",
-        "derived.hameln.descending-scale"
-      ]
+      "childDerivedSkillIds": ["derived.hameln.ascending-scale", "derived.hameln.descending-scale"]
     },
     {
       "kind": "derivedSkill",
@@ -971,11 +958,7 @@
       "nodeKind": "group",
       "derivedFromId": "derived.miryam.the-end-of-belief",
       "rootSkillId": "skill.miryam.testament-of-faith",
-      "childDerivedSkillIds": [
-        "derived.miryam.faith-of-the-divine-realm",
-        "derived.miryam.call-of-the-divine-realm",
-        "derived.miryam.divine-realms-descent"
-      ]
+      "childDerivedSkillIds": ["derived.miryam.faith-of-the-divine-realm", "derived.miryam.call-of-the-divine-realm", "derived.miryam.divine-realms-descent"]
     },
     {
       "kind": "derivedSkill",
@@ -1002,11 +985,7 @@
       "ownerAwakenerName": "Miryam",
       "derivedFromId": "skill.miryam.testament-of-faith",
       "rootSkillId": "skill.miryam.testament-of-faith",
-      "childDerivedSkillIds": [
-        "derived.miryam.iron-resolve",
-        "derived.miryam.revelate-devotion",
-        "derived.miryam.the-end-of-belief"
-      ]
+      "childDerivedSkillIds": ["derived.miryam.iron-resolve", "derived.miryam.revelate-devotion", "derived.miryam.the-end-of-belief"]
     },
     {
       "kind": "derivedSkill",
@@ -1059,9 +1038,7 @@
       "ownerAwakenerName": "Miryam",
       "derivedFromId": "skill.miryam.pray-to-the-abyss",
       "rootSkillId": "skill.miryam.pray-to-the-abyss",
-      "childDerivedSkillIds": [
-        "derived.miryam.obsession"
-      ]
+      "childDerivedSkillIds": ["derived.miryam.obsession"]
     },
     {
       "kind": "derivedSkill",
@@ -1075,9 +1052,7 @@
       "ownerAwakenerName": "Miryam",
       "derivedFromId": "derived.miryam.heretical-faith",
       "rootSkillId": "skill.miryam.testament-of-faith",
-      "childDerivedSkillIds": [
-        "derived.miryam.divine-realms-illusion"
-      ]
+      "childDerivedSkillIds": ["derived.miryam.divine-realms-illusion"]
     },
     {
       "kind": "derivedSkill",
@@ -1256,9 +1231,7 @@
       "ownerAwakenerName": "Tawil",
       "derivedFromId": "derived.tawil.twin-wings",
       "rootSkillId": "skill.tawil.pinions-of-time",
-      "childDerivedSkillIds": [
-        "derived.tawil.six-wings"
-      ]
+      "childDerivedSkillIds": ["derived.tawil.six-wings"]
     },
     {
       "kind": "derivedSkill",
@@ -1359,9 +1332,7 @@
       "ownerAwakenerName": "Tawil",
       "derivedFromId": "derived.tawil.four-wings",
       "rootSkillId": "skill.tawil.pinions-of-time",
-      "childDerivedSkillIds": [
-        "derived.tawil.memories"
-      ]
+      "childDerivedSkillIds": ["derived.tawil.memories"]
     },
     {
       "kind": "derivedSkill",
@@ -1375,9 +1346,7 @@
       "ownerAwakenerName": "Tawil",
       "derivedFromId": "skill.tawil.pinions-of-time",
       "rootSkillId": "skill.tawil.pinions-of-time",
-      "childDerivedSkillIds": [
-        "derived.tawil.four-wings"
-      ]
+      "childDerivedSkillIds": ["derived.tawil.four-wings"]
     },
     {
       "kind": "derivedSkill",

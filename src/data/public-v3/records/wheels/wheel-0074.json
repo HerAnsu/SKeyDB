@@ -18,12 +18,7 @@
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
-      "values": [
-        "400",
-        "600",
-        "800",
-        "1000"
-      ]
+      "values": ["400", "600", "800", "1000"]
     }
   },
   "lore": "We are as hollow as the scarecrows."

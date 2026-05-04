@@ -13,14 +13,7 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": [
-        "0.75",
-        "0.9",
-        "1.05",
-        "1.2",
-        "1.35",
-        "1.5"
-      ]
+      "values": ["0.75", "0.9", "1.05", "1.2", "1.35", "1.5"]
     }
   },
   "ownerAwakenerName": "Salvador"

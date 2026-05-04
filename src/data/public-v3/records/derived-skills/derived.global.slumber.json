@@ -14,10 +14,7 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.06,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "cardKeywords": [],

@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "The Unknowable",
-  "aliases": [
-    "casiah"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Discard",
-    "Draw"
-  ],
+  "aliases": ["casiah"],
+  "searchTags": ["Arithmetica", "Discard", "Draw"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 29,

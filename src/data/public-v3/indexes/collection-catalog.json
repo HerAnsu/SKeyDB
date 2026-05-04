@@ -453,18 +453,8 @@
       ]
     },
     "awakenersByRarity": {
-      "Genesis": [
-        "awakener-0018",
-        "awakener-0019",
-        "awakener-0020",
-        "awakener-0035"
-      ],
-      "SR": [
-        "awakener-0013",
-        "awakener-0031",
-        "awakener-0038",
-        "awakener-0042"
-      ],
+      "Genesis": ["awakener-0018", "awakener-0019", "awakener-0020", "awakener-0035"],
+      "SR": ["awakener-0013", "awakener-0031", "awakener-0038", "awakener-0042"],
       "SSR": [
         "awakener-0001",
         "awakener-0002",
@@ -517,68 +507,12 @@
       ]
     },
     "possesByRealm": {
-      "AEQUOR": [
-        "posse-0010",
-        "posse-0014",
-        "posse-0021",
-        "posse-0025",
-        "posse-0031",
-        "posse-0035",
-        "posse-0044",
-        "posse-0049"
-      ],
-      "CARO": [
-        "posse-0011",
-        "posse-0015",
-        "posse-0019",
-        "posse-0020",
-        "posse-0023",
-        "posse-0024",
-        "posse-0037",
-        "posse-0040",
-        "posse-0042",
-        "posse-0047"
-      ],
-      "CHAOS": [
-        "posse-0009",
-        "posse-0016",
-        "posse-0018",
-        "posse-0022",
-        "posse-0027",
-        "posse-0028",
-        "posse-0029",
-        "posse-0030",
-        "posse-0038",
-        "posse-0046"
-      ],
-      "FADED_LEGACY": [
-        "posse-0001",
-        "posse-0002",
-        "posse-0003",
-        "posse-0004",
-        "posse-0005",
-        "posse-0006",
-        "posse-0008"
-      ],
-      "OTHER": [
-        "posse-0007",
-        "posse-0033",
-        "posse-0041",
-        "posse-0043",
-        "posse-0045",
-        "posse-0048"
-      ],
-      "ULTRA": [
-        "posse-0012",
-        "posse-0013",
-        "posse-0017",
-        "posse-0026",
-        "posse-0032",
-        "posse-0034",
-        "posse-0036",
-        "posse-0039",
-        "posse-0050"
-      ]
+      "AEQUOR": ["posse-0010", "posse-0014", "posse-0021", "posse-0025", "posse-0031", "posse-0035", "posse-0044", "posse-0049"],
+      "CARO": ["posse-0011", "posse-0015", "posse-0019", "posse-0020", "posse-0023", "posse-0024", "posse-0037", "posse-0040", "posse-0042", "posse-0047"],
+      "CHAOS": ["posse-0009", "posse-0016", "posse-0018", "posse-0022", "posse-0027", "posse-0028", "posse-0029", "posse-0030", "posse-0038", "posse-0046"],
+      "FADED_LEGACY": ["posse-0001", "posse-0002", "posse-0003", "posse-0004", "posse-0005", "posse-0006", "posse-0008"],
+      "OTHER": ["posse-0007", "posse-0033", "posse-0041", "posse-0043", "posse-0045", "posse-0048"],
+      "ULTRA": ["posse-0012", "posse-0013", "posse-0017", "posse-0026", "posse-0032", "posse-0034", "posse-0036", "posse-0039", "posse-0050"]
     },
     "relicsByRealm": {
       "AEQUOR": [
@@ -849,10 +783,7 @@
       ]
     },
     "wheelsByRarity": {
-      "N": [
-        "wheel-0048",
-        "wheel-0049"
-      ],
+      "N": ["wheel-0048", "wheel-0049"],
       "R": [
         "wheel-0061",
         "wheel-0062",

@@ -17,12 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "The Fools",
-  "aliases": [
-    "castor"
-  ],
-  "searchTags": [
-    "Draw"
-  ],
+  "aliases": ["castor"],
+  "searchTags": ["Draw"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 52,

@@ -13,50 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0014",
-        "covenant-0020"
-      ],
+      "recommendedCovenantIds": ["covenant-0014", "covenant-0020"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0055"
-          ],
+          "wheelIds": ["wheel-0055"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0031"
-          ],
+          "wheelIds": ["wheel-0031"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0083"
-          ],
+          "wheelIds": ["wheel-0083"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0121"
-          ],
+          "wheelIds": ["wheel-0121"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "CRIT_DMG"
-        ],
-        [
-          "KEYFLARE_REGEN",
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "CRIT_DMG",
-        "KEYFLARE_REGEN",
-        "DMG_AMP"
-      ]
+      "substatPriorityGroups": [["CRIT_DMG"], ["KEYFLARE_REGEN", "DMG_AMP"]],
+      "recommendedWheelMainstats": ["CRIT_DMG", "KEYFLARE_REGEN", "DMG_AMP"]
     }
   ],
   "ownerAwakenerName": "Daffodil"

@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Hybrid",
-  "aliases": [
-    "aigis"
-  ],
-  "searchTags": [
-    "Draw",
-    "Keyflare",
-    "Stun"
-  ],
+  "aliases": ["aigis"],
+  "searchTags": ["Draw", "Keyflare", "Stun"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 27,

@@ -11,9 +11,7 @@
     "icon": "asset-overlay.global.str-icon"
   },
   "overlayType": "mechanic",
-  "aliases": [
-    "Strength"
-  ],
+  "aliases": ["Strength"],
   "iconId": "IconS_Buff_021",
   "textColor": "heal",
   "descriptionTemplate": "Increase Active DMG dealt.",

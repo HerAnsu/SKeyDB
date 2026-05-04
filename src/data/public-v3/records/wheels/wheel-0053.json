@@ -20,42 +20,22 @@
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
-      "values": [
-        "2.5",
-        "3",
-        "3.5",
-        "4"
-      ],
+      "values": ["2.5", "3", "3.5", "4"],
       "suffix": "%"
     },
     "StateArg2": {
       "kind": "scaling",
-      "values": [
-        "6",
-        "8",
-        "10",
-        "12"
-      ],
+      "values": ["6", "8", "10", "12"],
       "suffix": "%"
     },
     "StateArg3": {
       "kind": "scaling",
-      "values": [
-        "9",
-        "11",
-        "13",
-        "15"
-      ],
+      "values": ["9", "11", "13", "15"],
       "suffix": "%"
     },
     "StateArg4": {
       "kind": "scaling",
-      "values": [
-        "11",
-        "14",
-        "17",
-        "20"
-      ],
+      "values": ["11", "14", "17", "20"],
       "suffix": "%"
     }
   },

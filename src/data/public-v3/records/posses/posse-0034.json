@@ -21,20 +21,14 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.07,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     },
     "Arg2": {
       "kind": "computed",
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.02,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "She has healed countless patients, guiding them toward rebirth, and everything now is just a psychological therapy.\nThe only special thing is that the patient is herself."

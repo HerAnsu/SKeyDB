@@ -14,14 +14,7 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": [
-        "15",
-        "18",
-        "21",
-        "24",
-        "27",
-        "30"
-      ],
+      "values": ["15", "18", "21", "24", "27", "30"],
       "stat": "DEF",
       "suffix": "%"
     }

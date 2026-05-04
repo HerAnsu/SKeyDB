@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Out of the Aeons",
-  "aliases": [
-    "thais"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Keyflare"
-  ],
+  "aliases": ["thais"],
+  "searchTags": ["Arithmetica", "Keyflare"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 49,

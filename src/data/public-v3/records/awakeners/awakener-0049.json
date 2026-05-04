@@ -17,15 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Among the Stars",
-  "aliases": [
-    "tinct"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Dispel",
-    "Draw",
-    "Strike"
-  ],
+  "aliases": ["tinct"],
+  "searchTags": ["Arithmetica", "Dispel", "Draw", "Strike"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 28,

@@ -21,10 +21,7 @@
       "formulaKey": "scaled",
       "baseFormula": "occultResearchDepth",
       "multiplier": 0.08,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "The High Priestess of Lemuria never expects a response from the ocean.\n\nShe offers everything to the ocean, which has nothing to do with the ocean."

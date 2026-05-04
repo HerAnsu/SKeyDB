@@ -15,9 +15,7 @@
       "ownerAwakenerId": "awakener-0001",
       "ownerAwakenerName": "24",
       "overlayType": "tag",
-      "aliases": [
-        "Realm and Persona Effects"
-      ]
+      "aliases": ["Realm and Persona Effects"]
     },
     {
       "kind": "overlay",
@@ -115,9 +113,7 @@
       "ownerAwakenerName": "Arachne",
       "overlayType": "mechanic",
       "textColor": "affliction",
-      "aliases": [
-        "Singularity Shuttle"
-      ]
+      "aliases": ["Singularity Shuttle"]
     },
     {
       "kind": "overlay",
@@ -302,9 +298,7 @@
         "canonicalPath": "/database/overlays/aequor"
       },
       "overlayType": "realm",
-      "aliases": [
-        "Aequor Realm"
-      ]
+      "aliases": ["Aequor Realm"]
     },
     {
       "kind": "overlay",
@@ -346,9 +340,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "affliction",
-      "aliases": [
-        "Old Embers"
-      ]
+      "aliases": ["Old Embers"]
     },
     {
       "kind": "overlay",
@@ -426,9 +418,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "damage",
-      "aliases": [
-        "Bleeding"
-      ]
+      "aliases": ["Bleeding"]
     },
     {
       "kind": "overlay",
@@ -560,10 +550,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "misc",
-      "aliases": [
-        "Devouring",
-        "Devoured"
-      ]
+      "aliases": ["Devouring", "Devoured"]
     },
     {
       "kind": "overlay",
@@ -692,9 +679,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "damage",
-      "aliases": [
-        "Exhausted"
-      ]
+      "aliases": ["Exhausted"]
     },
     {
       "kind": "overlay",
@@ -721,9 +706,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "misc",
-      "aliases": [
-        "Absolute Axiom"
-      ]
+      "aliases": ["Absolute Axiom"]
     },
     {
       "kind": "overlay",
@@ -758,12 +741,7 @@
         "canonicalPath": "/database/overlays/forbidden-lore"
       },
       "overlayType": "help",
-      "aliases": [
-        "Forbidden Lore Level",
-        "Somatic Research",
-        "Esoteric Research",
-        "Occult Research"
-      ]
+      "aliases": ["Forbidden Lore Level", "Somatic Research", "Esoteric Research", "Occult Research"]
     },
     {
       "kind": "overlay",
@@ -867,9 +845,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "misc",
-      "aliases": [
-        "Over Exalt"
-      ]
+      "aliases": ["Over Exalt"]
     },
     {
       "kind": "overlay",
@@ -919,13 +895,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "damage",
-      "aliases": [
-        "Prepare 1",
-        "Prepare 2",
-        "Prepare 3",
-        "Prepare 4",
-        "Prepare 5"
-      ]
+      "aliases": ["Prepare 1", "Prepare 2", "Prepare 3", "Prepare 4", "Prepare 5"]
     },
     {
       "kind": "overlay",
@@ -982,13 +952,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "damage",
-      "aliases": [
-        "Resonance 1",
-        "Resonance 2",
-        "Resonance 3",
-        "Resonance 4",
-        "Resonance 5"
-      ]
+      "aliases": ["Resonance 1", "Resonance 2", "Resonance 3", "Resonance 4", "Resonance 5"]
     },
     {
       "kind": "overlay",
@@ -1000,9 +964,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "damage",
-      "aliases": [
-        "Retained"
-      ]
+      "aliases": ["Retained"]
     },
     {
       "kind": "overlay",
@@ -1014,9 +976,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "misc",
-      "aliases": [
-        "Keyflare Rouse"
-      ]
+      "aliases": ["Keyflare Rouse"]
     },
     {
       "kind": "overlay",
@@ -1076,9 +1036,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "affliction",
-      "aliases": [
-        "Stealing"
-      ]
+      "aliases": ["Stealing"]
     },
     {
       "kind": "overlay",
@@ -1105,9 +1063,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "heal",
-      "aliases": [
-        "Strength"
-      ]
+      "aliases": ["Strength"]
     },
     {
       "kind": "overlay",
@@ -1246,9 +1202,7 @@
         "canonicalPath": "/database/overlays/ultra-round"
       },
       "overlayType": "mechanic",
-      "aliases": [
-        "Ultra Rounds"
-      ]
+      "aliases": ["Ultra Rounds"]
     },
     {
       "kind": "overlay",
@@ -1323,9 +1277,7 @@
       },
       "overlayType": "mechanic",
       "textColor": "damage",
-      "aliases": [
-        "Vulnerability"
-      ]
+      "aliases": ["Vulnerability"]
     },
     {
       "kind": "overlay",
@@ -1365,13 +1317,7 @@
       },
       "ownerAwakenerId": "awakener-0022",
       "ownerAwakenerName": "Hameln",
-      "childOverlayIds": [
-        "overlay.global.bleed",
-        "overlay.global.poison",
-        "overlay.global.weakness",
-        "overlay.global.vulnerable",
-        "overlay.global.strength"
-      ],
+      "childOverlayIds": ["overlay.global.bleed", "overlay.global.poison", "overlay.global.weakness", "overlay.global.vulnerable", "overlay.global.strength"],
       "overlayType": "mechanic",
       "textColor": "misc",
       "aliases": []
@@ -1387,10 +1333,7 @@
       "ownerAwakenerId": "awakener-0022",
       "ownerAwakenerName": "Hameln",
       "nodeKind": "group",
-      "childOverlayIds": [
-        "overlay.hameln.rondino",
-        "overlay.hameln.crescendo"
-      ],
+      "childOverlayIds": ["overlay.hameln.rondino", "overlay.hameln.crescendo"],
       "overlayType": "mechanic",
       "aliases": []
     },
@@ -1484,9 +1427,7 @@
       "ownerAwakenerId": "awakener-0024",
       "ownerAwakenerName": "Horla",
       "overlayType": "mechanic",
-      "aliases": [
-        "Metaphors"
-      ]
+      "aliases": ["Metaphors"]
     },
     {
       "kind": "overlay",
@@ -1630,10 +1571,7 @@
       "ownerAwakenerName": "Pickman",
       "overlayType": "mechanic",
       "textColor": "misc",
-      "aliases": [
-        "Advanced Orisons",
-        "Orisons"
-      ]
+      "aliases": ["Advanced Orisons", "Orisons"]
     },
     {
       "kind": "overlay",
@@ -1647,11 +1585,7 @@
       "ownerAwakenerName": "Pickman",
       "overlayType": "mechanic",
       "textColor": "misc",
-      "aliases": [
-        "Golden Relics",
-        "Silver Relics",
-        "Painted Silver Relics"
-      ]
+      "aliases": ["Golden Relics", "Silver Relics", "Painted Silver Relics"]
     },
     {
       "kind": "overlay",
@@ -1766,9 +1700,7 @@
       "ownerAwakenerId": "awakener-0052",
       "ownerAwakenerName": "Wanda",
       "overlayType": "mechanic",
-      "aliases": [
-        "Murmur"
-      ]
+      "aliases": ["Murmur"]
     },
     {
       "kind": "overlay",

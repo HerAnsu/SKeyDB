@@ -8,10 +8,7 @@
     "canonicalPath": "/database/overlays/devour"
   },
   "overlayType": "mechanic",
-  "aliases": [
-    "Devouring",
-    "Devoured"
-  ],
+  "aliases": ["Devouring", "Devoured"],
   "textColor": "misc",
   "descriptionTemplate": "If {Embryo} is in hand, consume 1 to trigger the {Devour} effect.",
   "descriptionArgs": {}

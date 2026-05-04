@@ -17,15 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "The Fools",
-  "aliases": [
-    "corposant"
-  ],
-  "searchTags": [
-    "Death Resistance",
-    "Discard",
-    "Draw",
-    "Tentacles"
-  ],
+  "aliases": ["corposant"],
+  "searchTags": ["Death Resistance", "Discard", "Draw", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 50,

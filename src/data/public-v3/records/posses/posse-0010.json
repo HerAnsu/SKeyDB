@@ -25,10 +25,7 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.01,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "Glass tank. Fish tank. Palace.\n\nCall it whatever you like. It is a small paradise where Aurita's friends reside, free from Dissolution and suffering."

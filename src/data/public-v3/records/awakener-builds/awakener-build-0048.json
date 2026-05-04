@@ -13,45 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0013",
-        "covenant-0002"
-      ],
+      "recommendedCovenantIds": ["covenant-0013", "covenant-0002"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0001"
-          ],
+          "wheelIds": ["wheel-0001"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0034"
-          ],
+          "wheelIds": ["wheel-0034"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0104",
-            "wheel-0015"
-          ],
+          "wheelIds": ["wheel-0104", "wheel-0015"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
     }
   ],
   "ownerAwakenerName": "Thais"

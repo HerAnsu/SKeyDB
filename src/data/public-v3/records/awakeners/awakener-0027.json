@@ -17,15 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "Among the Stars",
-  "aliases": [
-    "kathigu-ra",
-    "kathigura"
-  ],
-  "searchTags": [
-    "Discard",
-    "Dispel",
-    "Draw"
-  ],
+  "aliases": ["kathigu-ra", "kathigura"],
+  "searchTags": ["Discard", "Dispel", "Draw"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 49,

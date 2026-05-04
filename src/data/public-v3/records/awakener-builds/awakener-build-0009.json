@@ -13,50 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0008",
-        "covenant-0006"
-      ],
+      "recommendedCovenantIds": ["covenant-0008", "covenant-0006"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0122"
-          ],
+          "wheelIds": ["wheel-0122"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0123"
-          ],
+          "wheelIds": ["wheel-0123"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0095"
-          ],
+          "wheelIds": ["wheel-0095"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "ALIEMUS_REGEN",
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN",
-        "ALIEMUS_REGEN",
-        "DMG_AMP"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN", "DMG_AMP"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN", "DMG_AMP"]
     }
   ],
   "ownerAwakenerName": "Celeste"

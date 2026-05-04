@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Outlanders",
-  "aliases": [
-    "horla"
-  ],
-  "searchTags": [
-    "Death Resistance",
-    "Heal"
-  ],
+  "aliases": ["horla"],
+  "searchTags": ["Death Resistance", "Heal"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 36,

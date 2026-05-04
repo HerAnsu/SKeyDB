@@ -21,9 +21,7 @@
       "formulaKey": "wheelRefinementLinear",
       "baseValue": 2.0,
       "perLevel": 1.0,
-      "inputs": [
-        "wheelRefinementLevel"
-      ]
+      "inputs": ["wheelRefinementLevel"]
     }
   },
   "lore": "After a great many years of amassing tremendous power, we hereby declare—"

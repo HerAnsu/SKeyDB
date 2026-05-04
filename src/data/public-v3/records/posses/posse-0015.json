@@ -21,20 +21,14 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.06,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     },
     "Arg2": {
       "kind": "computed",
       "formulaKey": "scaled",
       "baseFormula": "occultResearchDepth",
       "multiplier": 0.14,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "The lake in Cambrian Valley shimmers with crystal-clear waters.\n\nThe clamor of the maze gradually fades away, leaving only you and the newly freed girl to savor this tranquil moment."

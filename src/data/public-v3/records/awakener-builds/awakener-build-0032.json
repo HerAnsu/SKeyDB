@@ -13,45 +13,23 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0002",
-        "covenant-0017"
-      ],
+      "recommendedCovenantIds": ["covenant-0002", "covenant-0017"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0056"
-          ],
+          "wheelIds": ["wheel-0056"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0034"
-          ],
+          "wheelIds": ["wheel-0034"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "CRIT_DMG"
-        ],
-        [
-          "ALIEMUS_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN",
-        "CRIT_DMG"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"], ["CRIT_DMG"], ["ALIEMUS_REGEN"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN", "CRIT_DMG"]
     }
   ],
   "ownerAwakenerName": "Miryam"

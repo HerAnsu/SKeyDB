@@ -7,12 +7,7 @@
       "id": "awakener-build-0001",
       "name": "24 Builds",
       "aliases": [],
-      "tokens": [
-        "24",
-        "24 builds",
-        "builds",
-        "dps"
-      ],
+      "tokens": ["24", "24 builds", "builds", "dps"],
       "facets": {
         "awakenerId": "awakener-0001",
         "primaryBuildId": "dps"
@@ -28,12 +23,7 @@
       "id": "awakener-build-0002",
       "name": "Agrippa Builds",
       "aliases": [],
-      "tokens": [
-        "agrippa",
-        "agrippa builds",
-        "builds",
-        "dps"
-      ],
+      "tokens": ["agrippa", "agrippa builds", "builds", "dps"],
       "facets": {
         "awakenerId": "awakener-0002",
         "primaryBuildId": "dps"
@@ -49,12 +39,7 @@
       "id": "awakener-build-0003",
       "name": "Aigis Builds",
       "aliases": [],
-      "tokens": [
-        "aigis",
-        "aigis builds",
-        "builds",
-        "standard"
-      ],
+      "tokens": ["aigis", "aigis builds", "builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0003",
         "primaryBuildId": "standard"
@@ -70,14 +55,7 @@
       "id": "awakener-build-0004",
       "name": "Alva Builds",
       "aliases": [],
-      "tokens": [
-        "alva",
-        "alva builds",
-        "builds",
-        "standard",
-        "standard support",
-        "support"
-      ],
+      "tokens": ["alva", "alva builds", "builds", "standard", "standard support", "support"],
       "facets": {
         "awakenerId": "awakener-0004",
         "primaryBuildId": "standard-support"
@@ -93,12 +71,7 @@
       "id": "awakener-build-0005",
       "name": "Aurita Builds",
       "aliases": [],
-      "tokens": [
-        "aurita",
-        "aurita builds",
-        "builds",
-        "standard"
-      ],
+      "tokens": ["aurita", "aurita builds", "builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0005",
         "primaryBuildId": "standard"
@@ -114,12 +87,7 @@
       "id": "awakener-build-0006",
       "name": "Caecus Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "caecus",
-        "caecus builds",
-        "defence"
-      ],
+      "tokens": ["builds", "caecus", "caecus builds", "defence"],
       "facets": {
         "awakenerId": "awakener-0006",
         "primaryBuildId": "defence"
@@ -135,12 +103,7 @@
       "id": "awakener-build-0007",
       "name": "Casiah Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "casiah",
-        "casiah builds",
-        "standard"
-      ],
+      "tokens": ["builds", "casiah", "casiah builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0007",
         "primaryBuildId": "standard"
@@ -156,14 +119,7 @@
       "id": "awakener-build-0008",
       "name": "Castor Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "castor",
-        "castor builds",
-        "dps",
-        "general",
-        "general dps"
-      ],
+      "tokens": ["builds", "castor", "castor builds", "dps", "general", "general dps"],
       "facets": {
         "awakenerId": "awakener-0008",
         "primaryBuildId": "general-dps"
@@ -179,12 +135,7 @@
       "id": "awakener-build-0009",
       "name": "Celeste Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "celeste",
-        "celeste builds",
-        "standard"
-      ],
+      "tokens": ["builds", "celeste", "celeste builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0009",
         "primaryBuildId": "standard"
@@ -200,12 +151,7 @@
       "id": "awakener-build-0010",
       "name": "Clementine Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "clementine",
-        "clementine builds",
-        "standard"
-      ],
+      "tokens": ["builds", "clementine", "clementine builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0010",
         "primaryBuildId": "standard"
@@ -221,12 +167,7 @@
       "id": "awakener-build-0011",
       "name": "Corposant Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "corposant",
-        "corposant builds",
-        "dps"
-      ],
+      "tokens": ["builds", "corposant", "corposant builds", "dps"],
       "facets": {
         "awakenerId": "awakener-0011",
         "primaryBuildId": "dps"
@@ -242,12 +183,7 @@
       "id": "awakener-build-0012",
       "name": "Daffodil Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "daffodil",
-        "daffodil builds",
-        "standard"
-      ],
+      "tokens": ["builds", "daffodil", "daffodil builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0012",
         "primaryBuildId": "standard"
@@ -263,12 +199,7 @@
       "id": "awakener-build-0013",
       "name": "Doll Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "doll",
-        "doll builds",
-        "standard"
-      ],
+      "tokens": ["builds", "doll", "doll builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0013",
         "primaryBuildId": "standard"
@@ -284,12 +215,7 @@
       "id": "awakener-build-0014",
       "name": "Doresain Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "doresain",
-        "doresain builds",
-        "standard"
-      ],
+      "tokens": ["builds", "doresain", "doresain builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0014",
         "primaryBuildId": "standard"
@@ -305,12 +231,7 @@
       "id": "awakener-build-0015",
       "name": "Erica Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "erica",
-        "erica builds",
-        "standard"
-      ],
+      "tokens": ["builds", "erica", "erica builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0015",
         "primaryBuildId": "standard"
@@ -326,12 +247,7 @@
       "id": "awakener-build-0016",
       "name": "Faint Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "faint",
-        "faint builds",
-        "standard"
-      ],
+      "tokens": ["builds", "faint", "faint builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0016",
         "primaryBuildId": "standard"
@@ -347,12 +263,7 @@
       "id": "awakener-build-0017",
       "name": "Faros Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "faros",
-        "faros builds",
-        "standard"
-      ],
+      "tokens": ["builds", "faros", "faros builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0017",
         "primaryBuildId": "standard"
@@ -368,14 +279,7 @@
       "id": "awakener-build-0018",
       "name": "Doll: Inferno Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "doll",
-        "doll inferno",
-        "doll inferno builds",
-        "inferno",
-        "standard"
-      ],
+      "tokens": ["builds", "doll", "doll inferno", "doll inferno builds", "inferno", "standard"],
       "facets": {
         "awakenerId": "awakener-0018",
         "primaryBuildId": "standard"
@@ -391,14 +295,7 @@
       "id": "awakener-build-0019",
       "name": "Helot: Catena Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "catena",
-        "helot",
-        "helot catena",
-        "helot catena builds",
-        "standard"
-      ],
+      "tokens": ["builds", "catena", "helot", "helot catena", "helot catena builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0019",
         "primaryBuildId": "standard"
@@ -414,14 +311,7 @@
       "id": "awakener-build-0020",
       "name": "Ramona: Timeworn Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "ramona",
-        "ramona timeworn",
-        "ramona timeworn builds",
-        "support",
-        "timeworn"
-      ],
+      "tokens": ["builds", "ramona", "ramona timeworn", "ramona timeworn builds", "support", "timeworn"],
       "facets": {
         "awakenerId": "awakener-0020",
         "primaryBuildId": "support"
@@ -437,12 +327,7 @@
       "id": "awakener-build-0021",
       "name": "Goliath Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "goliath",
-        "goliath builds",
-        "standard"
-      ],
+      "tokens": ["builds", "goliath", "goliath builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0021",
         "primaryBuildId": "standard"
@@ -458,12 +343,7 @@
       "id": "awakener-build-0022",
       "name": "Hameln Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "hameln",
-        "hameln builds",
-        "standard"
-      ],
+      "tokens": ["builds", "hameln", "hameln builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0022",
         "primaryBuildId": "standard"
@@ -479,12 +359,7 @@
       "id": "awakener-build-0023",
       "name": "Helot Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "helot",
-        "helot builds",
-        "support"
-      ],
+      "tokens": ["builds", "helot", "helot builds", "support"],
       "facets": {
         "awakenerId": "awakener-0023",
         "primaryBuildId": "support"
@@ -500,12 +375,7 @@
       "id": "awakener-build-0024",
       "name": "Horla Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "horla",
-        "horla builds",
-        "standard"
-      ],
+      "tokens": ["builds", "horla", "horla builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0024",
         "primaryBuildId": "standard"
@@ -521,12 +391,7 @@
       "id": "awakener-build-0025",
       "name": "Jenkin Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "dps",
-        "jenkin",
-        "jenkin builds"
-      ],
+      "tokens": ["builds", "dps", "jenkin", "jenkin builds"],
       "facets": {
         "awakenerId": "awakener-0025",
         "primaryBuildId": "dps"
@@ -542,12 +407,7 @@
       "id": "awakener-build-0026",
       "name": "Karen Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "karen",
-        "karen builds",
-        "standard"
-      ],
+      "tokens": ["builds", "karen", "karen builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0026",
         "primaryBuildId": "standard"
@@ -563,14 +423,7 @@
       "id": "awakener-build-0027",
       "name": "Kathigu-Ra Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "dps",
-        "kathigu",
-        "kathigu ra",
-        "kathigu ra builds",
-        "ra"
-      ],
+      "tokens": ["builds", "dps", "kathigu", "kathigu ra", "kathigu ra builds", "ra"],
       "facets": {
         "awakenerId": "awakener-0027",
         "primaryBuildId": "dps"
@@ -586,12 +439,7 @@
       "id": "awakener-build-0028",
       "name": "Leigh Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "leigh",
-        "leigh builds",
-        "standard"
-      ],
+      "tokens": ["builds", "leigh", "leigh builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0028",
         "primaryBuildId": "standard"
@@ -607,12 +455,7 @@
       "id": "awakener-build-0029",
       "name": "Lily Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "lily",
-        "lily builds",
-        "standard"
-      ],
+      "tokens": ["builds", "lily", "lily builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0029",
         "primaryBuildId": "standard"
@@ -628,12 +471,7 @@
       "id": "awakener-build-0030",
       "name": "Liz Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "liz",
-        "liz builds",
-        "standard"
-      ],
+      "tokens": ["builds", "liz", "liz builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0030",
         "primaryBuildId": "standard"
@@ -649,12 +487,7 @@
       "id": "awakener-build-0031",
       "name": "Lotan Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "lotan",
-        "lotan builds",
-        "standard"
-      ],
+      "tokens": ["builds", "lotan", "lotan builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0031",
         "primaryBuildId": "standard"
@@ -670,12 +503,7 @@
       "id": "awakener-build-0032",
       "name": "Miryam Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "miryam",
-        "miryam builds",
-        "standard"
-      ],
+      "tokens": ["builds", "miryam", "miryam builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0032",
         "primaryBuildId": "standard"
@@ -691,12 +519,7 @@
       "id": "awakener-build-0033",
       "name": "Mouchette Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "mouchette",
-        "mouchette builds",
-        "standard"
-      ],
+      "tokens": ["builds", "mouchette", "mouchette builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0033",
         "primaryBuildId": "standard"
@@ -712,12 +535,7 @@
       "id": "awakener-build-0034",
       "name": "Murphy Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "murphy",
-        "murphy builds",
-        "standard"
-      ],
+      "tokens": ["builds", "murphy", "murphy builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0034",
         "primaryBuildId": "standard"
@@ -733,14 +551,7 @@
       "id": "awakener-build-0035",
       "name": "Murphy: Fauxborn Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "fauxborn",
-        "murphy",
-        "murphy fauxborn",
-        "murphy fauxborn builds",
-        "support"
-      ],
+      "tokens": ["builds", "fauxborn", "murphy", "murphy fauxborn", "murphy fauxborn builds", "support"],
       "facets": {
         "awakenerId": "awakener-0035",
         "primaryBuildId": "support"
@@ -756,12 +567,7 @@
       "id": "awakener-build-0036",
       "name": "Nautila Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "nautila",
-        "nautila builds",
-        "standard"
-      ],
+      "tokens": ["builds", "nautila", "nautila builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0036",
         "primaryBuildId": "standard"
@@ -777,12 +583,7 @@
       "id": "awakener-build-0037",
       "name": "Nymphaea Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "nymphaea",
-        "nymphaea builds",
-        "standard"
-      ],
+      "tokens": ["builds", "nymphaea", "nymphaea builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0037",
         "primaryBuildId": "standard"
@@ -798,12 +599,7 @@
       "id": "awakener-build-0038",
       "name": "Ogier Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "ogier",
-        "ogier builds",
-        "standard"
-      ],
+      "tokens": ["builds", "ogier", "ogier builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0038",
         "primaryBuildId": "standard"
@@ -819,12 +615,7 @@
       "id": "awakener-build-0039",
       "name": "Pandia Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "pandia",
-        "pandia builds",
-        "standard"
-      ],
+      "tokens": ["builds", "pandia", "pandia builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0039",
         "primaryBuildId": "standard"
@@ -840,12 +631,7 @@
       "id": "awakener-build-0040",
       "name": "Pickman Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "pickman",
-        "pickman builds",
-        "supp"
-      ],
+      "tokens": ["builds", "pickman", "pickman builds", "supp"],
       "facets": {
         "awakenerId": "awakener-0040",
         "primaryBuildId": "supp"
@@ -861,12 +647,7 @@
       "id": "awakener-build-0041",
       "name": "Pollux Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "pollux",
-        "pollux builds",
-        "standard"
-      ],
+      "tokens": ["builds", "pollux", "pollux builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0041",
         "primaryBuildId": "standard"
@@ -882,12 +663,7 @@
       "id": "awakener-build-0042",
       "name": "Ramona Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "ramona",
-        "ramona builds",
-        "standard"
-      ],
+      "tokens": ["builds", "ramona", "ramona builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0042",
         "primaryBuildId": "standard"
@@ -903,12 +679,7 @@
       "id": "awakener-build-0043",
       "name": "Ryker Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "ryker",
-        "ryker builds",
-        "standard"
-      ],
+      "tokens": ["builds", "ryker", "ryker builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0043",
         "primaryBuildId": "standard"
@@ -924,12 +695,7 @@
       "id": "awakener-build-0044",
       "name": "Salvador Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "salvador",
-        "salvador builds",
-        "support"
-      ],
+      "tokens": ["builds", "salvador", "salvador builds", "support"],
       "facets": {
         "awakenerId": "awakener-0044",
         "primaryBuildId": "support"
@@ -945,12 +711,7 @@
       "id": "awakener-build-0045",
       "name": "Sanga Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "sanga",
-        "sanga builds",
-        "standard"
-      ],
+      "tokens": ["builds", "sanga", "sanga builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0045",
         "primaryBuildId": "standard"
@@ -966,12 +727,7 @@
       "id": "awakener-build-0046",
       "name": "Sorel Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "sorel",
-        "sorel builds",
-        "standard"
-      ],
+      "tokens": ["builds", "sorel", "sorel builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0046",
         "primaryBuildId": "standard"
@@ -987,12 +743,7 @@
       "id": "awakener-build-0047",
       "name": "Tawil Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "tawil",
-        "tawil builds"
-      ],
+      "tokens": ["builds", "standard", "tawil", "tawil builds"],
       "facets": {
         "awakenerId": "awakener-0047",
         "primaryBuildId": "standard"
@@ -1008,12 +759,7 @@
       "id": "awakener-build-0048",
       "name": "Thais Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "thais",
-        "thais builds"
-      ],
+      "tokens": ["builds", "standard", "thais", "thais builds"],
       "facets": {
         "awakenerId": "awakener-0048",
         "primaryBuildId": "standard"
@@ -1029,12 +775,7 @@
       "id": "awakener-build-0049",
       "name": "Tinct Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "tinct",
-        "tinct builds"
-      ],
+      "tokens": ["builds", "standard", "tinct", "tinct builds"],
       "facets": {
         "awakenerId": "awakener-0049",
         "primaryBuildId": "standard"
@@ -1050,12 +791,7 @@
       "id": "awakener-build-0050",
       "name": "Tulu Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "tulu",
-        "tulu builds"
-      ],
+      "tokens": ["builds", "standard", "tulu", "tulu builds"],
       "facets": {
         "awakenerId": "awakener-0050",
         "primaryBuildId": "standard"
@@ -1071,12 +807,7 @@
       "id": "awakener-build-0051",
       "name": "Uvhash Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "uvhash",
-        "uvhash builds"
-      ],
+      "tokens": ["builds", "standard", "uvhash", "uvhash builds"],
       "facets": {
         "awakenerId": "awakener-0051",
         "primaryBuildId": "standard"
@@ -1092,12 +823,7 @@
       "id": "awakener-build-0052",
       "name": "Wanda Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "wanda",
-        "wanda builds"
-      ],
+      "tokens": ["builds", "standard", "wanda", "wanda builds"],
       "facets": {
         "awakenerId": "awakener-0052",
         "primaryBuildId": "standard"
@@ -1113,12 +839,7 @@
       "id": "awakener-build-0053",
       "name": "Winkle Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "winkle",
-        "winkle builds"
-      ],
+      "tokens": ["builds", "standard", "winkle", "winkle builds"],
       "facets": {
         "awakenerId": "awakener-0053",
         "primaryBuildId": "standard"
@@ -1134,12 +855,7 @@
       "id": "awakener-build-0054",
       "name": "Xu Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "xu",
-        "xu builds"
-      ],
+      "tokens": ["builds", "standard", "xu", "xu builds"],
       "facets": {
         "awakenerId": "awakener-0054",
         "primaryBuildId": "standard"
@@ -1155,12 +871,7 @@
       "id": "awakener-build-0055",
       "name": "Vortice Builds",
       "aliases": [],
-      "tokens": [
-        "builds",
-        "standard",
-        "vortice",
-        "vortice builds"
-      ],
+      "tokens": ["builds", "standard", "vortice", "vortice builds"],
       "facets": {
         "awakenerId": "awakener-0055",
         "primaryBuildId": "standard"
@@ -1176,12 +887,7 @@
       "id": "awakener-build-0056",
       "name": "Arachne Builds",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "arachne builds",
-        "builds",
-        "standard"
-      ],
+      "tokens": ["arachne", "arachne builds", "builds", "standard"],
       "facets": {
         "awakenerId": "awakener-0056",
         "primaryBuildId": "standard"

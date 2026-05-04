@@ -13,50 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0013",
-        "covenant-0002"
-      ],
+      "recommendedCovenantIds": ["covenant-0013", "covenant-0002"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0001"
-          ],
+          "wheelIds": ["wheel-0001"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0014"
-          ],
+          "wheelIds": ["wheel-0014"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0104"
-          ],
+          "wheelIds": ["wheel-0104"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "ALIEMUS_REGEN",
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN",
-        "ALIEMUS_REGEN",
-        "DMG_AMP"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN", "DMG_AMP"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN", "DMG_AMP"]
     }
   ],
   "ownerAwakenerName": "Hameln"

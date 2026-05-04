@@ -8,9 +8,7 @@
     "canonicalPath": "/database/overlays/exhaust"
   },
   "overlayType": "mechanic",
-  "aliases": [
-    "Exhausted"
-  ],
+  "aliases": ["Exhausted"],
   "textColor": "damage",
   "descriptionTemplate": "After playing, this card is removed from deck instead of discarded.",
   "descriptionArgs": {}

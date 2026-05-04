@@ -25,21 +25,11 @@
     },
     "StateArg2": {
       "kind": "scaling",
-      "values": [
-        "11",
-        "14",
-        "17",
-        "20"
-      ]
+      "values": ["11", "14", "17", "20"]
     },
     "StateArg3": {
       "kind": "scaling",
-      "values": [
-        "4",
-        "5",
-        "6",
-        "7"
-      ],
+      "values": ["4", "5", "6", "7"],
       "suffix": "%"
     }
   },

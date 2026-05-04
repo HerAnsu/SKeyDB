@@ -17,17 +17,8 @@
   "rarity": "Genesis",
   "type": "CHORUS",
   "faction": "Among the Stars",
-  "aliases": [
-    "doll: inferno",
-    "g-doll"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Draw",
-    "Heal",
-    "Max HP DMG",
-    "Self-Harm"
-  ],
+  "aliases": ["doll: inferno", "g-doll"],
+  "searchTags": ["Arithmetica", "Draw", "Heal", "Max HP DMG", "Self-Harm"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 35,

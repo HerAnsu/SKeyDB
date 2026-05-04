@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Hybrid",
-  "aliases": [
-    "erica"
-  ],
-  "searchTags": [
-    "Dispel",
-    "Keyflare"
-  ],
+  "aliases": ["erica"],
+  "searchTags": ["Dispel", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 39,

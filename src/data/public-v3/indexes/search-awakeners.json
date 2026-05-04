@@ -6,10 +6,7 @@
       "kind": "awakener",
       "id": "awakener-0001",
       "name": "\"24\"",
-      "aliases": [
-        "24",
-        "twenty-four"
-      ],
+      "aliases": ["24", "twenty-four"],
       "tokens": [
         "24",
         "arithmetica",
@@ -31,12 +28,7 @@
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "Hybrid",
-        "tags": [
-          "Arithmetica",
-          "Hand Limit",
-          "Keyflare",
-          "Tentacles"
-        ]
+        "tags": ["Arithmetica", "Hand Limit", "Keyflare", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -48,25 +40,14 @@
       "kind": "awakener",
       "id": "awakener-0002",
       "name": "Agrippa",
-      "aliases": [
-        "agrippa"
-      ],
-      "tokens": [
-        "agrippa",
-        "caro",
-        "draw",
-        "outlanders",
-        "ssr",
-        "warden"
-      ],
+      "aliases": ["agrippa"],
+      "tokens": ["agrippa", "caro", "draw", "outlanders", "ssr", "warden"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Outlanders",
-        "tags": [
-          "Draw"
-        ]
+        "tags": ["Draw"]
       },
       "boosts": {
         "name": 10,
@@ -78,29 +59,14 @@
       "kind": "awakener",
       "id": "awakener-0003",
       "name": "Aigis",
-      "aliases": [
-        "aigis"
-      ],
-      "tokens": [
-        "aigis",
-        "caro",
-        "chorus",
-        "draw",
-        "hybrid",
-        "keyflare",
-        "ssr",
-        "stun"
-      ],
+      "aliases": ["aigis"],
+      "tokens": ["aigis", "caro", "chorus", "draw", "hybrid", "keyflare", "ssr", "stun"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Hybrid",
-        "tags": [
-          "Draw",
-          "Keyflare",
-          "Stun"
-        ]
+        "tags": ["Draw", "Keyflare", "Stun"]
       },
       "boosts": {
         "name": 10,
@@ -112,35 +78,14 @@
       "kind": "awakener",
       "id": "awakener-0004",
       "name": "Alva",
-      "aliases": [
-        "alva"
-      ],
-      "tokens": [
-        "alva",
-        "chaos",
-        "death",
-        "death resistance",
-        "discard",
-        "dispel",
-        "draw",
-        "outlanders",
-        "resistance",
-        "ssr",
-        "strike",
-        "warden"
-      ],
+      "aliases": ["alva"],
+      "tokens": ["alva", "chaos", "death", "death resistance", "discard", "dispel", "draw", "outlanders", "resistance", "ssr", "strike", "warden"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Outlanders",
-        "tags": [
-          "Death Resistance",
-          "Discard",
-          "Dispel",
-          "Draw",
-          "Strike"
-        ]
+        "tags": ["Death Resistance", "Discard", "Dispel", "Draw", "Strike"]
       },
       "boosts": {
         "name": 10,
@@ -152,29 +97,14 @@
       "kind": "awakener",
       "id": "awakener-0005",
       "name": "Aurita",
-      "aliases": [
-        "aurita"
-      ],
-      "tokens": [
-        "aequor",
-        "assault",
-        "aurita",
-        "discard",
-        "draw",
-        "fools",
-        "ssr",
-        "the",
-        "the fools"
-      ],
+      "aliases": ["aurita"],
+      "tokens": ["aequor", "assault", "aurita", "discard", "draw", "fools", "ssr", "the", "the fools"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "The Fools",
-        "tags": [
-          "Discard",
-          "Draw"
-        ]
+        "tags": ["Discard", "Draw"]
       },
       "boosts": {
         "name": 10,
@@ -186,29 +116,14 @@
       "kind": "awakener",
       "id": "awakener-0006",
       "name": "Caecus",
-      "aliases": [
-        "caecus"
-      ],
-      "tokens": [
-        "aequor",
-        "caecus",
-        "dispel",
-        "heal",
-        "hybrid",
-        "ssr",
-        "tentacles",
-        "warden"
-      ],
+      "aliases": ["caecus"],
+      "tokens": ["aequor", "caecus", "dispel", "heal", "hybrid", "ssr", "tentacles", "warden"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Hybrid",
-        "tags": [
-          "Dispel",
-          "Heal",
-          "Tentacles"
-        ]
+        "tags": ["Dispel", "Heal", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -220,31 +135,14 @@
       "kind": "awakener",
       "id": "awakener-0007",
       "name": "Casiah",
-      "aliases": [
-        "casiah"
-      ],
-      "tokens": [
-        "arithmetica",
-        "casiah",
-        "chorus",
-        "discard",
-        "draw",
-        "ssr",
-        "the",
-        "the unknowable",
-        "ultra",
-        "unknowable"
-      ],
+      "aliases": ["casiah"],
+      "tokens": ["arithmetica", "casiah", "chorus", "discard", "draw", "ssr", "the", "the unknowable", "ultra", "unknowable"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "The Unknowable",
-        "tags": [
-          "Arithmetica",
-          "Discard",
-          "Draw"
-        ]
+        "tags": ["Arithmetica", "Discard", "Draw"]
       },
       "boosts": {
         "name": 10,
@@ -256,27 +154,14 @@
       "kind": "awakener",
       "id": "awakener-0008",
       "name": "Castor",
-      "aliases": [
-        "castor"
-      ],
-      "tokens": [
-        "castor",
-        "draw",
-        "fools",
-        "ssr",
-        "the",
-        "the fools",
-        "ultra",
-        "warden"
-      ],
+      "aliases": ["castor"],
+      "tokens": ["castor", "draw", "fools", "ssr", "the", "the fools", "ultra", "warden"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "The Fools",
-        "tags": [
-          "Draw"
-        ]
+        "tags": ["Draw"]
       },
       "boosts": {
         "name": 10,
@@ -288,31 +173,14 @@
       "kind": "awakener",
       "id": "awakener-0009",
       "name": "Celeste",
-      "aliases": [
-        "celeste"
-      ],
-      "tokens": [
-        "aequor",
-        "arithmetica",
-        "celeste",
-        "chorus",
-        "dispel",
-        "heal",
-        "outlanders",
-        "ssr",
-        "tentacles"
-      ],
+      "aliases": ["celeste"],
+      "tokens": ["aequor", "arithmetica", "celeste", "chorus", "dispel", "heal", "outlanders", "ssr", "tentacles"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Outlanders",
-        "tags": [
-          "Arithmetica",
-          "Dispel",
-          "Heal",
-          "Tentacles"
-        ]
+        "tags": ["Arithmetica", "Dispel", "Heal", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -324,29 +192,14 @@
       "kind": "awakener",
       "id": "awakener-0010",
       "name": "Clementine",
-      "aliases": [
-        "clementine"
-      ],
-      "tokens": [
-        "chorus",
-        "clementine",
-        "dispel",
-        "keyflare",
-        "ssr",
-        "the",
-        "the unknowable",
-        "ultra",
-        "unknowable"
-      ],
+      "aliases": ["clementine"],
+      "tokens": ["chorus", "clementine", "dispel", "keyflare", "ssr", "the", "the unknowable", "ultra", "unknowable"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "The Unknowable",
-        "tags": [
-          "Dispel",
-          "Keyflare"
-        ]
+        "tags": ["Dispel", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -358,9 +211,7 @@
       "kind": "awakener",
       "id": "awakener-0011",
       "name": "Corposant",
-      "aliases": [
-        "corposant"
-      ],
+      "aliases": ["corposant"],
       "tokens": [
         "aequor",
         "corposant",
@@ -381,12 +232,7 @@
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "The Fools",
-        "tags": [
-          "Death Resistance",
-          "Discard",
-          "Draw",
-          "Tentacles"
-        ]
+        "tags": ["Death Resistance", "Discard", "Draw", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -398,31 +244,14 @@
       "kind": "awakener",
       "id": "awakener-0012",
       "name": "Daffodil",
-      "aliases": [
-        "daffodil"
-      ],
-      "tokens": [
-        "arithmetica",
-        "assault",
-        "daffodil",
-        "draw",
-        "keyflare",
-        "ssr",
-        "the",
-        "the unknowable",
-        "ultra",
-        "unknowable"
-      ],
+      "aliases": ["daffodil"],
+      "tokens": ["arithmetica", "assault", "daffodil", "draw", "keyflare", "ssr", "the", "the unknowable", "ultra", "unknowable"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "The Unknowable",
-        "tags": [
-          "Arithmetica",
-          "Draw",
-          "Keyflare"
-        ]
+        "tags": ["Arithmetica", "Draw", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -434,32 +263,14 @@
       "kind": "awakener",
       "id": "awakener-0013",
       "name": "Doll",
-      "aliases": [
-        "doll"
-      ],
-      "tokens": [
-        "among",
-        "among the stars",
-        "chaos",
-        "chorus",
-        "discard",
-        "dispel",
-        "doll",
-        "heal",
-        "sr",
-        "stars",
-        "the"
-      ],
+      "aliases": ["doll"],
+      "tokens": ["among", "among the stars", "chaos", "chorus", "discard", "dispel", "doll", "heal", "sr", "stars", "the"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SR",
         "type": "CHORUS",
         "faction": "Among the Stars",
-        "tags": [
-          "Discard",
-          "Dispel",
-          "Heal"
-        ]
+        "tags": ["Discard", "Dispel", "Heal"]
       },
       "boosts": {
         "name": 10,
@@ -471,31 +282,14 @@
       "kind": "awakener",
       "id": "awakener-0014",
       "name": "Doresain",
-      "aliases": [
-        "doresain"
-      ],
-      "tokens": [
-        "aeons",
-        "assault",
-        "caro",
-        "doresain",
-        "harm",
-        "of",
-        "out",
-        "out of the aeons",
-        "self",
-        "self harm",
-        "ssr",
-        "the"
-      ],
+      "aliases": ["doresain"],
+      "tokens": ["aeons", "assault", "caro", "doresain", "harm", "of", "out", "out of the aeons", "self", "self harm", "ssr", "the"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "Out of the Aeons",
-        "tags": [
-          "Self-Harm"
-        ]
+        "tags": ["Self-Harm"]
       },
       "boosts": {
         "name": 10,
@@ -507,27 +301,14 @@
       "kind": "awakener",
       "id": "awakener-0015",
       "name": "Erica",
-      "aliases": [
-        "erica"
-      ],
-      "tokens": [
-        "dispel",
-        "erica",
-        "hybrid",
-        "keyflare",
-        "ssr",
-        "ultra",
-        "warden"
-      ],
+      "aliases": ["erica"],
+      "tokens": ["dispel", "erica", "hybrid", "keyflare", "ssr", "ultra", "warden"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Hybrid",
-        "tags": [
-          "Dispel",
-          "Keyflare"
-        ]
+        "tags": ["Dispel", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -539,34 +320,14 @@
       "kind": "awakener",
       "id": "awakener-0016",
       "name": "Faint",
-      "aliases": [
-        "faint"
-      ],
-      "tokens": [
-        "among",
-        "among the stars",
-        "caro",
-        "death",
-        "death resistance",
-        "dispel",
-        "faint",
-        "heal",
-        "resistance",
-        "ssr",
-        "stars",
-        "the",
-        "warden"
-      ],
+      "aliases": ["faint"],
+      "tokens": ["among", "among the stars", "caro", "death", "death resistance", "dispel", "faint", "heal", "resistance", "ssr", "stars", "the", "warden"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Among the Stars",
-        "tags": [
-          "Death Resistance",
-          "Dispel",
-          "Heal"
-        ]
+        "tags": ["Death Resistance", "Dispel", "Heal"]
       },
       "boosts": {
         "name": 10,
@@ -578,37 +339,14 @@
       "kind": "awakener",
       "id": "awakener-0017",
       "name": "Faros",
-      "aliases": [
-        "faros"
-      ],
-      "tokens": [
-        "aequor",
-        "arithmetica",
-        "chorus",
-        "dispel",
-        "draw",
-        "faros",
-        "fools",
-        "hand",
-        "hand limit",
-        "limit",
-        "ssr",
-        "tentacles",
-        "the",
-        "the fools"
-      ],
+      "aliases": ["faros"],
+      "tokens": ["aequor", "arithmetica", "chorus", "dispel", "draw", "faros", "fools", "hand", "hand limit", "limit", "ssr", "tentacles", "the", "the fools"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "The Fools",
-        "tags": [
-          "Arithmetica",
-          "Dispel",
-          "Draw",
-          "Hand Limit",
-          "Tentacles"
-        ]
+        "tags": ["Arithmetica", "Dispel", "Draw", "Hand Limit", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -620,10 +358,7 @@
       "kind": "awakener",
       "id": "awakener-0018",
       "name": "Doll: Inferno",
-      "aliases": [
-        "doll: inferno",
-        "g-doll"
-      ],
+      "aliases": ["doll: inferno", "g-doll"],
       "tokens": [
         "among",
         "among the stars",
@@ -653,13 +388,7 @@
         "rarity": "Genesis",
         "type": "CHORUS",
         "faction": "Among the Stars",
-        "tags": [
-          "Arithmetica",
-          "Draw",
-          "Heal",
-          "Max HP DMG",
-          "Self-Harm"
-        ]
+        "tags": ["Arithmetica", "Draw", "Heal", "Max HP DMG", "Self-Harm"]
       },
       "boosts": {
         "name": 10,
@@ -671,10 +400,7 @@
       "kind": "awakener",
       "id": "awakener-0019",
       "name": "Helot: Catena",
-      "aliases": [
-        "helot: catena",
-        "g-helot"
-      ],
+      "aliases": ["helot: catena", "g-helot"],
       "tokens": [
         "assault",
         "caro",
@@ -702,13 +428,7 @@
         "rarity": "Genesis",
         "type": "ASSAULT",
         "faction": "The Fools",
-        "tags": [
-          "Draw",
-          "Hand Limit",
-          "Heal",
-          "Self-Harm",
-          "Strike"
-        ]
+        "tags": ["Draw", "Hand Limit", "Heal", "Self-Harm", "Strike"]
       },
       "boosts": {
         "name": 10,
@@ -720,10 +440,7 @@
       "kind": "awakener",
       "id": "awakener-0020",
       "name": "Ramona: Timeworn",
-      "aliases": [
-        "ramona: timeworn",
-        "g-ramona"
-      ],
+      "aliases": ["ramona: timeworn", "g-ramona"],
       "tokens": [
         "arithmetica",
         "chaos",
@@ -745,11 +462,7 @@
         "rarity": "Genesis",
         "type": "CHORUS",
         "faction": "The Unknowable",
-        "tags": [
-          "Arithmetica",
-          "Draw",
-          "Keyflare"
-        ]
+        "tags": ["Arithmetica", "Draw", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -761,18 +474,8 @@
       "kind": "awakener",
       "id": "awakener-0021",
       "name": "Goliath",
-      "aliases": [
-        "goliath"
-      ],
-      "tokens": [
-        "aequor",
-        "assault",
-        "fools",
-        "goliath",
-        "ssr",
-        "the",
-        "the fools"
-      ],
+      "aliases": ["goliath"],
+      "tokens": ["aequor", "assault", "fools", "goliath", "ssr", "the", "the fools"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -789,27 +492,14 @@
       "kind": "awakener",
       "id": "awakener-0022",
       "name": "Hameln",
-      "aliases": [
-        "hameln"
-      ],
-      "tokens": [
-        "arithmetica",
-        "chaos",
-        "chorus",
-        "hameln",
-        "ssr",
-        "the",
-        "the unknowable",
-        "unknowable"
-      ],
+      "aliases": ["hameln"],
+      "tokens": ["arithmetica", "chaos", "chorus", "hameln", "ssr", "the", "the unknowable", "unknowable"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "The Unknowable",
-        "tags": [
-          "Arithmetica"
-        ]
+        "tags": ["Arithmetica"]
       },
       "boosts": {
         "name": 10,
@@ -821,9 +511,7 @@
       "kind": "awakener",
       "id": "awakener-0023",
       "name": "Helot",
-      "aliases": [
-        "helot"
-      ],
+      "aliases": ["helot"],
       "tokens": [
         "assault",
         "caro",
@@ -847,13 +535,7 @@
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "The Fools",
-        "tags": [
-          "Discard",
-          "Draw",
-          "Hand Limit",
-          "Self-Harm",
-          "Strike"
-        ]
+        "tags": ["Discard", "Draw", "Hand Limit", "Self-Harm", "Strike"]
       },
       "boosts": {
         "name": 10,
@@ -865,29 +547,14 @@
       "kind": "awakener",
       "id": "awakener-0024",
       "name": "Horla",
-      "aliases": [
-        "horla"
-      ],
-      "tokens": [
-        "chorus",
-        "death",
-        "death resistance",
-        "heal",
-        "horla",
-        "outlanders",
-        "resistance",
-        "ssr",
-        "ultra"
-      ],
+      "aliases": ["horla"],
+      "tokens": ["chorus", "death", "death resistance", "heal", "horla", "outlanders", "resistance", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Outlanders",
-        "tags": [
-          "Death Resistance",
-          "Heal"
-        ]
+        "tags": ["Death Resistance", "Heal"]
       },
       "boosts": {
         "name": 10,
@@ -899,28 +566,14 @@
       "kind": "awakener",
       "id": "awakener-0025",
       "name": "Jenkin",
-      "aliases": [
-        "jenkins"
-      ],
-      "tokens": [
-        "assault",
-        "draw",
-        "fools",
-        "jenkin",
-        "jenkins",
-        "ssr",
-        "the",
-        "the fools",
-        "ultra"
-      ],
+      "aliases": ["jenkins"],
+      "tokens": ["assault", "draw", "fools", "jenkin", "jenkins", "ssr", "the", "the fools", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "The Fools",
-        "tags": [
-          "Draw"
-        ]
+        "tags": ["Draw"]
       },
       "boosts": {
         "name": 10,
@@ -932,33 +585,14 @@
       "kind": "awakener",
       "id": "awakener-0026",
       "name": "Karen",
-      "aliases": [
-        "karen"
-      ],
-      "tokens": [
-        "arithmetica",
-        "chaos",
-        "chorus",
-        "dispel",
-        "draw",
-        "heal",
-        "karen",
-        "keyflare",
-        "outlanders",
-        "ssr"
-      ],
+      "aliases": ["karen"],
+      "tokens": ["arithmetica", "chaos", "chorus", "dispel", "draw", "heal", "karen", "keyflare", "outlanders", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Outlanders",
-        "tags": [
-          "Arithmetica",
-          "Dispel",
-          "Draw",
-          "Heal",
-          "Keyflare"
-        ]
+        "tags": ["Arithmetica", "Dispel", "Draw", "Heal", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -970,10 +604,7 @@
       "kind": "awakener",
       "id": "awakener-0027",
       "name": "Kathigu-Ra",
-      "aliases": [
-        "kathigu-ra",
-        "kathigura"
-      ],
+      "aliases": ["kathigu-ra", "kathigura"],
       "tokens": [
         "among",
         "among the stars",
@@ -995,11 +626,7 @@
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "Among the Stars",
-        "tags": [
-          "Discard",
-          "Dispel",
-          "Draw"
-        ]
+        "tags": ["Discard", "Dispel", "Draw"]
       },
       "boosts": {
         "name": 10,
@@ -1011,31 +638,14 @@
       "kind": "awakener",
       "id": "awakener-0028",
       "name": "Leigh",
-      "aliases": [
-        "leigh"
-      ],
-      "tokens": [
-        "caro",
-        "chorus",
-        "dispel",
-        "harm",
-        "heal",
-        "hybrid",
-        "leigh",
-        "self",
-        "self harm",
-        "ssr"
-      ],
+      "aliases": ["leigh"],
+      "tokens": ["caro", "chorus", "dispel", "harm", "heal", "hybrid", "leigh", "self", "self harm", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Hybrid",
-        "tags": [
-          "Dispel",
-          "Heal",
-          "Self-Harm"
-        ]
+        "tags": ["Dispel", "Heal", "Self-Harm"]
       },
       "boosts": {
         "name": 10,
@@ -1047,31 +657,14 @@
       "kind": "awakener",
       "id": "awakener-0029",
       "name": "Lily",
-      "aliases": [
-        "lily"
-      ],
-      "tokens": [
-        "chaos",
-        "death",
-        "death resistance",
-        "heal",
-        "hybrid",
-        "lily",
-        "resistance",
-        "ssr",
-        "strike",
-        "warden"
-      ],
+      "aliases": ["lily"],
+      "tokens": ["chaos", "death", "death resistance", "heal", "hybrid", "lily", "resistance", "ssr", "strike", "warden"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Hybrid",
-        "tags": [
-          "Death Resistance",
-          "Heal",
-          "Strike"
-        ]
+        "tags": ["Death Resistance", "Heal", "Strike"]
       },
       "boosts": {
         "name": 10,
@@ -1083,29 +676,14 @@
       "kind": "awakener",
       "id": "awakener-0030",
       "name": "Liz",
-      "aliases": [
-        "liz"
-      ],
-      "tokens": [
-        "assault",
-        "discard",
-        "draw",
-        "fools",
-        "liz",
-        "ssr",
-        "the",
-        "the fools",
-        "ultra"
-      ],
+      "aliases": ["liz"],
+      "tokens": ["assault", "discard", "draw", "fools", "liz", "ssr", "the", "the fools", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "The Fools",
-        "tags": [
-          "Discard",
-          "Draw"
-        ]
+        "tags": ["Discard", "Draw"]
       },
       "boosts": {
         "name": 10,
@@ -1117,36 +695,14 @@
       "kind": "awakener",
       "id": "awakener-0031",
       "name": "Lotan",
-      "aliases": [
-        "lotan"
-      ],
-      "tokens": [
-        "aeons",
-        "assault",
-        "chaos",
-        "dispel",
-        "dmg",
-        "hp",
-        "lotan",
-        "max",
-        "max hp dmg",
-        "of",
-        "out",
-        "out of the aeons",
-        "sr",
-        "strike",
-        "the"
-      ],
+      "aliases": ["lotan"],
+      "tokens": ["aeons", "assault", "chaos", "dispel", "dmg", "hp", "lotan", "max", "max hp dmg", "of", "out", "out of the aeons", "sr", "strike", "the"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SR",
         "type": "ASSAULT",
         "faction": "Out of the Aeons",
-        "tags": [
-          "Dispel",
-          "Max HP DMG",
-          "Strike"
-        ]
+        "tags": ["Dispel", "Max HP DMG", "Strike"]
       },
       "boosts": {
         "name": 10,
@@ -1158,35 +714,14 @@
       "kind": "awakener",
       "id": "awakener-0032",
       "name": "Miryam",
-      "aliases": [
-        "miryam"
-      ],
-      "tokens": [
-        "aeons",
-        "aequor",
-        "arithmetica",
-        "chorus",
-        "draw",
-        "heal",
-        "miryam",
-        "of",
-        "out",
-        "out of the aeons",
-        "ssr",
-        "tentacles",
-        "the"
-      ],
+      "aliases": ["miryam"],
+      "tokens": ["aeons", "aequor", "arithmetica", "chorus", "draw", "heal", "miryam", "of", "out", "out of the aeons", "ssr", "tentacles", "the"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Out of the Aeons",
-        "tags": [
-          "Arithmetica",
-          "Draw",
-          "Heal",
-          "Tentacles"
-        ]
+        "tags": ["Arithmetica", "Draw", "Heal", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -1198,31 +733,14 @@
       "kind": "awakener",
       "id": "awakener-0033",
       "name": "Mouchette",
-      "aliases": [
-        "mouchette"
-      ],
-      "tokens": [
-        "assault",
-        "chaos",
-        "death",
-        "death resistance",
-        "mouchette",
-        "outlanders",
-        "resistance",
-        "ssr",
-        "strike",
-        "stun"
-      ],
+      "aliases": ["mouchette"],
+      "tokens": ["assault", "chaos", "death", "death resistance", "mouchette", "outlanders", "resistance", "ssr", "strike", "stun"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "Outlanders",
-        "tags": [
-          "Death Resistance",
-          "Strike",
-          "Stun"
-        ]
+        "tags": ["Death Resistance", "Strike", "Stun"]
       },
       "boosts": {
         "name": 10,
@@ -1234,29 +752,14 @@
       "kind": "awakener",
       "id": "awakener-0034",
       "name": "Murphy",
-      "aliases": [
-        "murphy"
-      ],
-      "tokens": [
-        "aequor",
-        "arithmetica",
-        "hybrid",
-        "keyflare",
-        "murphy",
-        "ssr",
-        "tentacles",
-        "warden"
-      ],
+      "aliases": ["murphy"],
+      "tokens": ["aequor", "arithmetica", "hybrid", "keyflare", "murphy", "ssr", "tentacles", "warden"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Hybrid",
-        "tags": [
-          "Arithmetica",
-          "Keyflare",
-          "Tentacles"
-        ]
+        "tags": ["Arithmetica", "Keyflare", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -1268,10 +771,7 @@
       "kind": "awakener",
       "id": "awakener-0035",
       "name": "Murphy: Fauxborn",
-      "aliases": [
-        "murphy: fauxborn",
-        "g-murphy"
-      ],
+      "aliases": ["murphy: fauxborn", "g-murphy"],
       "tokens": [
         "aeons",
         "aequor",
@@ -1299,13 +799,7 @@
         "rarity": "Genesis",
         "type": "CHORUS",
         "faction": "Out of the Aeons",
-        "tags": [
-          "Arithmetica",
-          "Divine Realm",
-          "Draw",
-          "Keyflare",
-          "Tentacles"
-        ]
+        "tags": ["Arithmetica", "Divine Realm", "Draw", "Keyflare", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -1317,27 +811,14 @@
       "kind": "awakener",
       "id": "awakener-0036",
       "name": "Nautila",
-      "aliases": [
-        "nautila"
-      ],
-      "tokens": [
-        "chaos",
-        "dispel",
-        "fools",
-        "nautila",
-        "ssr",
-        "the",
-        "the fools",
-        "warden"
-      ],
+      "aliases": ["nautila"],
+      "tokens": ["chaos", "dispel", "fools", "nautila", "ssr", "the", "the fools", "warden"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "The Fools",
-        "tags": [
-          "Dispel"
-        ]
+        "tags": ["Dispel"]
       },
       "boosts": {
         "name": 10,
@@ -1349,16 +830,8 @@
       "kind": "awakener",
       "id": "awakener-0037",
       "name": "Nymphaea",
-      "aliases": [
-        "nymphaea"
-      ],
-      "tokens": [
-        "assault",
-        "chaos",
-        "nymphaea",
-        "outlanders",
-        "ssr"
-      ],
+      "aliases": ["nymphaea"],
+      "tokens": ["assault", "chaos", "nymphaea", "outlanders", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -1375,27 +848,14 @@
       "kind": "awakener",
       "id": "awakener-0038",
       "name": "Ogier",
-      "aliases": [
-        "ogier"
-      ],
-      "tokens": [
-        "chaos",
-        "dispel",
-        "fools",
-        "ogier",
-        "sr",
-        "the",
-        "the fools",
-        "warden"
-      ],
+      "aliases": ["ogier"],
+      "tokens": ["chaos", "dispel", "fools", "ogier", "sr", "the", "the fools", "warden"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SR",
         "type": "WARDEN",
         "faction": "The Fools",
-        "tags": [
-          "Dispel"
-        ]
+        "tags": ["Dispel"]
       },
       "boosts": {
         "name": 10,
@@ -1407,16 +867,8 @@
       "kind": "awakener",
       "id": "awakener-0039",
       "name": "Pandia",
-      "aliases": [
-        "pandia"
-      ],
-      "tokens": [
-        "assault",
-        "chaos",
-        "outlanders",
-        "pandia",
-        "ssr"
-      ],
+      "aliases": ["pandia"],
+      "tokens": ["assault", "chaos", "outlanders", "pandia", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -1433,29 +885,14 @@
       "kind": "awakener",
       "id": "awakener-0040",
       "name": "Pickman",
-      "aliases": [
-        "pickman"
-      ],
-      "tokens": [
-        "arithmetica",
-        "caro",
-        "chorus",
-        "draw",
-        "fools",
-        "pickman",
-        "ssr",
-        "the",
-        "the fools"
-      ],
+      "aliases": ["pickman"],
+      "tokens": ["arithmetica", "caro", "chorus", "draw", "fools", "pickman", "ssr", "the", "the fools"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "The Fools",
-        "tags": [
-          "Arithmetica",
-          "Draw"
-        ]
+        "tags": ["Arithmetica", "Draw"]
       },
       "boosts": {
         "name": 10,
@@ -1467,27 +904,14 @@
       "kind": "awakener",
       "id": "awakener-0041",
       "name": "Pollux",
-      "aliases": [
-        "pollux"
-      ],
-      "tokens": [
-        "assault",
-        "discard",
-        "draw",
-        "hybrid",
-        "pollux",
-        "ssr",
-        "ultra"
-      ],
+      "aliases": ["pollux"],
+      "tokens": ["assault", "discard", "draw", "hybrid", "pollux", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "Hybrid",
-        "tags": [
-          "Discard",
-          "Draw"
-        ]
+        "tags": ["Discard", "Draw"]
       },
       "boosts": {
         "name": 10,
@@ -1499,33 +923,14 @@
       "kind": "awakener",
       "id": "awakener-0042",
       "name": "Ramona",
-      "aliases": [
-        "ramona"
-      ],
-      "tokens": [
-        "arithmetica",
-        "chaos",
-        "chorus",
-        "discard",
-        "draw",
-        "keyflare",
-        "ramona",
-        "sr",
-        "the",
-        "the unknowable",
-        "unknowable"
-      ],
+      "aliases": ["ramona"],
+      "tokens": ["arithmetica", "chaos", "chorus", "discard", "draw", "keyflare", "ramona", "sr", "the", "the unknowable", "unknowable"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SR",
         "type": "CHORUS",
         "faction": "The Unknowable",
-        "tags": [
-          "Arithmetica",
-          "Discard",
-          "Draw",
-          "Keyflare"
-        ]
+        "tags": ["Arithmetica", "Discard", "Draw", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -1537,31 +942,14 @@
       "kind": "awakener",
       "id": "awakener-0043",
       "name": "Ryker",
-      "aliases": [
-        "ryker"
-      ],
-      "tokens": [
-        "arithmetica",
-        "chaos",
-        "chorus",
-        "draw",
-        "fools",
-        "keyflare",
-        "ryker",
-        "ssr",
-        "the",
-        "the fools"
-      ],
+      "aliases": ["ryker"],
+      "tokens": ["arithmetica", "chaos", "chorus", "draw", "fools", "keyflare", "ryker", "ssr", "the", "the fools"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "The Fools",
-        "tags": [
-          "Arithmetica",
-          "Draw",
-          "Keyflare"
-        ]
+        "tags": ["Arithmetica", "Draw", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -1573,33 +961,14 @@
       "kind": "awakener",
       "id": "awakener-0044",
       "name": "Salvador",
-      "aliases": [
-        "salvador"
-      ],
-      "tokens": [
-        "aeons",
-        "caro",
-        "harm",
-        "heal",
-        "of",
-        "out",
-        "out of the aeons",
-        "salvador",
-        "self",
-        "self harm",
-        "ssr",
-        "the",
-        "warden"
-      ],
+      "aliases": ["salvador"],
+      "tokens": ["aeons", "caro", "harm", "heal", "of", "out", "out of the aeons", "salvador", "self", "self harm", "ssr", "the", "warden"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Out of the Aeons",
-        "tags": [
-          "Heal",
-          "Self-Harm"
-        ]
+        "tags": ["Heal", "Self-Harm"]
       },
       "boosts": {
         "name": 10,
@@ -1611,31 +980,14 @@
       "kind": "awakener",
       "id": "awakener-0045",
       "name": "Sanga",
-      "aliases": [
-        "sanga"
-      ],
-      "tokens": [
-        "aequor",
-        "death",
-        "death resistance",
-        "dispel",
-        "outlanders",
-        "resistance",
-        "sanga",
-        "ssr",
-        "tentacles",
-        "warden"
-      ],
+      "aliases": ["sanga"],
+      "tokens": ["aequor", "death", "death resistance", "dispel", "outlanders", "resistance", "sanga", "ssr", "tentacles", "warden"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Outlanders",
-        "tags": [
-          "Death Resistance",
-          "Dispel",
-          "Tentacles"
-        ]
+        "tags": ["Death Resistance", "Dispel", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -1647,33 +999,14 @@
       "kind": "awakener",
       "id": "awakener-0046",
       "name": "Sorel",
-      "aliases": [
-        "sorel"
-      ],
-      "tokens": [
-        "assault",
-        "caro",
-        "death",
-        "death resistance",
-        "harm",
-        "heal",
-        "outlanders",
-        "resistance",
-        "self",
-        "self harm",
-        "sorel",
-        "ssr"
-      ],
+      "aliases": ["sorel"],
+      "tokens": ["assault", "caro", "death", "death resistance", "harm", "heal", "outlanders", "resistance", "self", "self harm", "sorel", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "Outlanders",
-        "tags": [
-          "Death Resistance",
-          "Heal",
-          "Self-Harm"
-        ]
+        "tags": ["Death Resistance", "Heal", "Self-Harm"]
       },
       "boosts": {
         "name": 10,
@@ -1685,36 +1018,14 @@
       "kind": "awakener",
       "id": "awakener-0047",
       "name": "Tawil",
-      "aliases": [
-        "tawil"
-      ],
-      "tokens": [
-        "arithmetica",
-        "chaos",
-        "chorus",
-        "discard",
-        "dmg",
-        "draw",
-        "gateway",
-        "hp",
-        "keyflare",
-        "max",
-        "max hp dmg",
-        "ssr",
-        "tawil"
-      ],
+      "aliases": ["tawil"],
+      "tokens": ["arithmetica", "chaos", "chorus", "discard", "dmg", "draw", "gateway", "hp", "keyflare", "max", "max hp dmg", "ssr", "tawil"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Gateway",
-        "tags": [
-          "Arithmetica",
-          "Discard",
-          "Draw",
-          "Keyflare",
-          "Max HP DMG"
-        ]
+        "tags": ["Arithmetica", "Discard", "Draw", "Keyflare", "Max HP DMG"]
       },
       "boosts": {
         "name": 10,
@@ -1726,31 +1037,14 @@
       "kind": "awakener",
       "id": "awakener-0048",
       "name": "Thais",
-      "aliases": [
-        "thais"
-      ],
-      "tokens": [
-        "aeons",
-        "arithmetica",
-        "caro",
-        "chorus",
-        "keyflare",
-        "of",
-        "out",
-        "out of the aeons",
-        "ssr",
-        "thais",
-        "the"
-      ],
+      "aliases": ["thais"],
+      "tokens": ["aeons", "arithmetica", "caro", "chorus", "keyflare", "of", "out", "out of the aeons", "ssr", "thais", "the"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Out of the Aeons",
-        "tags": [
-          "Arithmetica",
-          "Keyflare"
-        ]
+        "tags": ["Arithmetica", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -1762,34 +1056,14 @@
       "kind": "awakener",
       "id": "awakener-0049",
       "name": "Tinct",
-      "aliases": [
-        "tinct"
-      ],
-      "tokens": [
-        "among",
-        "among the stars",
-        "arithmetica",
-        "chorus",
-        "dispel",
-        "draw",
-        "ssr",
-        "stars",
-        "strike",
-        "the",
-        "tinct",
-        "ultra"
-      ],
+      "aliases": ["tinct"],
+      "tokens": ["among", "among the stars", "arithmetica", "chorus", "dispel", "draw", "ssr", "stars", "strike", "the", "tinct", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "Among the Stars",
-        "tags": [
-          "Arithmetica",
-          "Dispel",
-          "Draw",
-          "Strike"
-        ]
+        "tags": ["Arithmetica", "Dispel", "Draw", "Strike"]
       },
       "boosts": {
         "name": 10,
@@ -1801,35 +1075,14 @@
       "kind": "awakener",
       "id": "awakener-0050",
       "name": "Tulu",
-      "aliases": [
-        "tulu"
-      ],
-      "tokens": [
-        "aeons",
-        "aequor",
-        "assault",
-        "dispel",
-        "divine",
-        "divine realm",
-        "of",
-        "out",
-        "out of the aeons",
-        "realm",
-        "ssr",
-        "tentacles",
-        "the",
-        "tulu"
-      ],
+      "aliases": ["tulu"],
+      "tokens": ["aeons", "aequor", "assault", "dispel", "divine", "divine realm", "of", "out", "out of the aeons", "realm", "ssr", "tentacles", "the", "tulu"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "Out of the Aeons",
-        "tags": [
-          "Dispel",
-          "Divine Realm",
-          "Tentacles"
-        ]
+        "tags": ["Dispel", "Divine Realm", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -1841,27 +1094,14 @@
       "kind": "awakener",
       "id": "awakener-0051",
       "name": "Uvhash",
-      "aliases": [
-        "uvhash"
-      ],
-      "tokens": [
-        "assault",
-        "caro",
-        "harm",
-        "outlanders",
-        "self",
-        "self harm",
-        "ssr",
-        "uvhash"
-      ],
+      "aliases": ["uvhash"],
+      "tokens": ["assault", "caro", "harm", "outlanders", "self", "self harm", "ssr", "uvhash"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "Outlanders",
-        "tags": [
-          "Self-Harm"
-        ]
+        "tags": ["Self-Harm"]
       },
       "boosts": {
         "name": 10,
@@ -1873,19 +1113,8 @@
       "kind": "awakener",
       "id": "awakener-0052",
       "name": "Wanda",
-      "aliases": [
-        "wanda"
-      ],
-      "tokens": [
-        "among",
-        "among the stars",
-        "ssr",
-        "stars",
-        "the",
-        "ultra",
-        "wanda",
-        "warden"
-      ],
+      "aliases": ["wanda"],
+      "tokens": ["among", "among the stars", "ssr", "stars", "the", "ultra", "wanda", "warden"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -1902,34 +1131,14 @@
       "kind": "awakener",
       "id": "awakener-0053",
       "name": "Winkle",
-      "aliases": [
-        "winkle"
-      ],
-      "tokens": [
-        "among",
-        "among the stars",
-        "discard",
-        "dispel",
-        "draw",
-        "keyflare",
-        "ssr",
-        "stars",
-        "the",
-        "ultra",
-        "warden",
-        "winkle"
-      ],
+      "aliases": ["winkle"],
+      "tokens": ["among", "among the stars", "discard", "dispel", "draw", "keyflare", "ssr", "stars", "the", "ultra", "warden", "winkle"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "WARDEN",
         "faction": "Among the Stars",
-        "tags": [
-          "Discard",
-          "Dispel",
-          "Draw",
-          "Keyflare"
-        ]
+        "tags": ["Discard", "Dispel", "Draw", "Keyflare"]
       },
       "boosts": {
         "name": 10,
@@ -1941,32 +1150,14 @@
       "kind": "awakener",
       "id": "awakener-0054",
       "name": "Xu",
-      "aliases": [
-        "xu"
-      ],
-      "tokens": [
-        "arithmetica",
-        "caro",
-        "chorus",
-        "dmg",
-        "hp",
-        "max",
-        "max hp dmg",
-        "ssr",
-        "the",
-        "the unknowable",
-        "unknowable",
-        "xu"
-      ],
+      "aliases": ["xu"],
+      "tokens": ["arithmetica", "caro", "chorus", "dmg", "hp", "max", "max hp dmg", "ssr", "the", "the unknowable", "unknowable", "xu"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "The Unknowable",
-        "tags": [
-          "Arithmetica",
-          "Max HP DMG"
-        ]
+        "tags": ["Arithmetica", "Max HP DMG"]
       },
       "boosts": {
         "name": 10,
@@ -1978,33 +1169,14 @@
       "kind": "awakener",
       "id": "awakener-0055",
       "name": "Vortice",
-      "aliases": [
-        "vortice"
-      ],
-      "tokens": [
-        "aequor",
-        "assault",
-        "dispel",
-        "divine",
-        "divine realm",
-        "fools",
-        "realm",
-        "ssr",
-        "tentacles",
-        "the",
-        "the fools",
-        "vortice"
-      ],
+      "aliases": ["vortice"],
+      "tokens": ["aequor", "assault", "dispel", "divine", "divine realm", "fools", "realm", "ssr", "tentacles", "the", "the fools", "vortice"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
         "type": "ASSAULT",
         "faction": "The Fools",
-        "tags": [
-          "Dispel",
-          "Divine Realm",
-          "Tentacles"
-        ]
+        "tags": ["Dispel", "Divine Realm", "Tentacles"]
       },
       "boosts": {
         "name": 10,
@@ -2016,31 +1188,14 @@
       "kind": "awakener",
       "id": "awakener-0056",
       "name": "Arachne",
-      "aliases": [
-        "arachne"
-      ],
-      "tokens": [
-        "arachne",
-        "chorus",
-        "divine",
-        "divine realm",
-        "realm",
-        "spider",
-        "ssr",
-        "the",
-        "the unknowable",
-        "ultra",
-        "unknowable"
-      ],
+      "aliases": ["arachne"],
+      "tokens": ["arachne", "chorus", "divine", "divine realm", "realm", "spider", "ssr", "the", "the unknowable", "ultra", "unknowable"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
         "type": "CHORUS",
         "faction": "The Unknowable",
-        "tags": [
-          "Divine Realm",
-          "Spider"
-        ]
+        "tags": ["Divine Realm", "Spider"]
       },
       "boosts": {
         "name": 10,

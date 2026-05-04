@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "Out of the Aeons",
-  "aliases": [
-    "tulu"
-  ],
-  "searchTags": [
-    "Dispel",
-    "Divine Realm",
-    "Tentacles"
-  ],
+  "aliases": ["tulu"],
+  "searchTags": ["Dispel", "Divine Realm", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 53,

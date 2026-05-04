@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Hybrid",
-  "aliases": [
-    "caecus"
-  ],
-  "searchTags": [
-    "Dispel",
-    "Heal",
-    "Tentacles"
-  ],
+  "aliases": ["caecus"],
+  "searchTags": ["Dispel", "Heal", "Tentacles"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 41,

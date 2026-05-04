@@ -7,16 +7,7 @@
       "id": "posse-0001",
       "name": "Encounter in Pure White",
       "aliases": [],
-      "tokens": [
-        "encounter",
-        "encounter in pure white",
-        "faded",
-        "faded legacy",
-        "in",
-        "legacy",
-        "pure",
-        "white"
-      ],
+      "tokens": ["encounter", "encounter in pure white", "faded", "faded legacy", "in", "legacy", "pure", "white"],
       "facets": {
         "realm": "FADED_LEGACY"
       },
@@ -31,16 +22,7 @@
       "id": "posse-0002",
       "name": "Voices in Your Head",
       "aliases": [],
-      "tokens": [
-        "faded",
-        "faded legacy",
-        "head",
-        "in",
-        "legacy",
-        "voices",
-        "voices in your head",
-        "your"
-      ],
+      "tokens": ["faded", "faded legacy", "head", "in", "legacy", "voices", "voices in your head", "your"],
       "facets": {
         "realm": "FADED_LEGACY"
       },
@@ -55,14 +37,7 @@
       "id": "posse-0003",
       "name": "Warded Injection",
       "aliases": [],
-      "tokens": [
-        "faded",
-        "faded legacy",
-        "injection",
-        "legacy",
-        "warded",
-        "warded injection"
-      ],
+      "tokens": ["faded", "faded legacy", "injection", "legacy", "warded", "warded injection"],
       "facets": {
         "realm": "FADED_LEGACY"
       },
@@ -77,15 +52,7 @@
       "id": "posse-0004",
       "name": "A Mouse's Wisdom",
       "aliases": [],
-      "tokens": [
-        "a",
-        "a mouses wisdom",
-        "faded",
-        "faded legacy",
-        "legacy",
-        "mouses",
-        "wisdom"
-      ],
+      "tokens": ["a", "a mouses wisdom", "faded", "faded legacy", "legacy", "mouses", "wisdom"],
       "facets": {
         "realm": "FADED_LEGACY"
       },
@@ -100,14 +67,7 @@
       "id": "posse-0005",
       "name": "Tiny Wish",
       "aliases": [],
-      "tokens": [
-        "faded",
-        "faded legacy",
-        "legacy",
-        "tiny",
-        "tiny wish",
-        "wish"
-      ],
+      "tokens": ["faded", "faded legacy", "legacy", "tiny", "tiny wish", "wish"],
       "facets": {
         "realm": "FADED_LEGACY"
       },
@@ -122,14 +82,7 @@
       "id": "posse-0006",
       "name": "Obsession Eternal",
       "aliases": [],
-      "tokens": [
-        "eternal",
-        "faded",
-        "faded legacy",
-        "legacy",
-        "obsession",
-        "obsession eternal"
-      ],
+      "tokens": ["eternal", "faded", "faded legacy", "legacy", "obsession", "obsession eternal"],
       "facets": {
         "realm": "FADED_LEGACY"
       },
@@ -144,12 +97,7 @@
       "id": "posse-0007",
       "name": "Unequal Exchange",
       "aliases": [],
-      "tokens": [
-        "exchange",
-        "other",
-        "unequal",
-        "unequal exchange"
-      ],
+      "tokens": ["exchange", "other", "unequal", "unequal exchange"],
       "facets": {
         "realm": "OTHER"
       },
@@ -164,14 +112,7 @@
       "id": "posse-0008",
       "name": "Funus Aeternum",
       "aliases": [],
-      "tokens": [
-        "aeternum",
-        "faded",
-        "faded legacy",
-        "funus",
-        "funus aeternum",
-        "legacy"
-      ],
+      "tokens": ["aeternum", "faded", "faded legacy", "funus", "funus aeternum", "legacy"],
       "facets": {
         "realm": "FADED_LEGACY"
       },
@@ -186,13 +127,7 @@
       "id": "posse-0009",
       "name": "The Final Vow",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "final",
-        "the",
-        "the final vow",
-        "vow"
-      ],
+      "tokens": ["chaos", "final", "the", "the final vow", "vow"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -207,12 +142,7 @@
       "id": "posse-0010",
       "name": "Aurita's Treasure",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "auritas",
-        "auritas treasure",
-        "treasure"
-      ],
+      "tokens": ["aequor", "auritas", "auritas treasure", "treasure"],
       "facets": {
         "realm": "AEQUOR"
       },
@@ -227,14 +157,7 @@
       "id": "posse-0011",
       "name": "Roaring Blood and Sand",
       "aliases": [],
-      "tokens": [
-        "and",
-        "blood",
-        "caro",
-        "roaring",
-        "roaring blood and sand",
-        "sand"
-      ],
+      "tokens": ["and", "blood", "caro", "roaring", "roaring blood and sand", "sand"],
       "facets": {
         "realm": "CARO"
       },
@@ -249,12 +172,7 @@
       "id": "posse-0012",
       "name": "Ephemeral Eternity",
       "aliases": [],
-      "tokens": [
-        "ephemeral",
-        "ephemeral eternity",
-        "eternity",
-        "ultra"
-      ],
+      "tokens": ["ephemeral", "ephemeral eternity", "eternity", "ultra"],
       "facets": {
         "realm": "ULTRA"
       },
@@ -269,13 +187,7 @@
       "id": "posse-0013",
       "name": "Feast of Decay",
       "aliases": [],
-      "tokens": [
-        "decay",
-        "feast",
-        "feast of decay",
-        "of",
-        "ultra"
-      ],
+      "tokens": ["decay", "feast", "feast of decay", "of", "ultra"],
       "facets": {
         "realm": "ULTRA"
       },
@@ -290,13 +202,7 @@
       "id": "posse-0014",
       "name": "Bone-Chilling Embrace",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "bone",
-        "bone chilling embrace",
-        "chilling",
-        "embrace"
-      ],
+      "tokens": ["aequor", "bone", "bone chilling embrace", "chilling", "embrace"],
       "facets": {
         "realm": "AEQUOR"
       },
@@ -311,12 +217,7 @@
       "id": "posse-0015",
       "name": "Lakeside Glimpse",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "glimpse",
-        "lakeside",
-        "lakeside glimpse"
-      ],
+      "tokens": ["caro", "glimpse", "lakeside", "lakeside glimpse"],
       "facets": {
         "realm": "CARO"
       },
@@ -331,13 +232,7 @@
       "id": "posse-0016",
       "name": "Gateway of Retrospection",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "gateway",
-        "gateway of retrospection",
-        "of",
-        "retrospection"
-      ],
+      "tokens": ["chaos", "gateway", "gateway of retrospection", "of", "retrospection"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -352,14 +247,7 @@
       "id": "posse-0017",
       "name": "Truth Behind Grey Mist",
       "aliases": [],
-      "tokens": [
-        "behind",
-        "grey",
-        "mist",
-        "truth",
-        "truth behind grey mist",
-        "ultra"
-      ],
+      "tokens": ["behind", "grey", "mist", "truth", "truth behind grey mist", "ultra"],
       "facets": {
         "realm": "ULTRA"
       },
@@ -374,12 +262,7 @@
       "id": "posse-0018",
       "name": "Midsummer Vision",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "midsummer",
-        "midsummer vision",
-        "vision"
-      ],
+      "tokens": ["chaos", "midsummer", "midsummer vision", "vision"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -394,13 +277,7 @@
       "id": "posse-0019",
       "name": "Victory of Roses",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "of",
-        "roses",
-        "victory",
-        "victory of roses"
-      ],
+      "tokens": ["caro", "of", "roses", "victory", "victory of roses"],
       "facets": {
         "realm": "CARO"
       },
@@ -415,12 +292,7 @@
       "id": "posse-0020",
       "name": "Miracle's Dawn",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dawn",
-        "miracles",
-        "miracles dawn"
-      ],
+      "tokens": ["caro", "dawn", "miracles", "miracles dawn"],
       "facets": {
         "realm": "CARO"
       },
@@ -435,12 +307,7 @@
       "id": "posse-0021",
       "name": "Giant's Reign",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "giants",
-        "giants reign",
-        "reign"
-      ],
+      "tokens": ["aequor", "giants", "giants reign", "reign"],
       "facets": {
         "realm": "AEQUOR"
       },
@@ -455,13 +322,7 @@
       "id": "posse-0022",
       "name": "All of Her",
       "aliases": [],
-      "tokens": [
-        "all",
-        "all of her",
-        "chaos",
-        "her",
-        "of"
-      ],
+      "tokens": ["all", "all of her", "chaos", "her", "of"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -476,13 +337,7 @@
       "id": "posse-0023",
       "name": "The Lone Seed",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "lone",
-        "seed",
-        "the",
-        "the lone seed"
-      ],
+      "tokens": ["caro", "lone", "seed", "the", "the lone seed"],
       "facets": {
         "realm": "CARO"
       },
@@ -497,13 +352,7 @@
       "id": "posse-0024",
       "name": "The Mountains' Resolve",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "mountains",
-        "resolve",
-        "the",
-        "the mountains resolve"
-      ],
+      "tokens": ["caro", "mountains", "resolve", "the", "the mountains resolve"],
       "facets": {
         "realm": "CARO"
       },
@@ -518,13 +367,7 @@
       "id": "posse-0025",
       "name": "Festival of Tides",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "festival",
-        "festival of tides",
-        "of",
-        "tides"
-      ],
+      "tokens": ["aequor", "festival", "festival of tides", "of", "tides"],
       "facets": {
         "realm": "AEQUOR"
       },
@@ -539,12 +382,7 @@
       "id": "posse-0026",
       "name": "Spring's Verse",
       "aliases": [],
-      "tokens": [
-        "springs",
-        "springs verse",
-        "ultra",
-        "verse"
-      ],
+      "tokens": ["springs", "springs verse", "ultra", "verse"],
       "facets": {
         "realm": "ULTRA"
       },
@@ -559,13 +397,7 @@
       "id": "posse-0027",
       "name": "A Gun's Cry",
       "aliases": [],
-      "tokens": [
-        "a",
-        "a guns cry",
-        "chaos",
-        "cry",
-        "guns"
-      ],
+      "tokens": ["a", "a guns cry", "chaos", "cry", "guns"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -580,12 +412,7 @@
       "id": "posse-0028",
       "name": "Symphony Fourth",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "fourth",
-        "symphony",
-        "symphony fourth"
-      ],
+      "tokens": ["chaos", "fourth", "symphony", "symphony fourth"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -600,14 +427,7 @@
       "id": "posse-0029",
       "name": "Answer of the Gate",
       "aliases": [],
-      "tokens": [
-        "answer",
-        "answer of the gate",
-        "chaos",
-        "gate",
-        "of",
-        "the"
-      ],
+      "tokens": ["answer", "answer of the gate", "chaos", "gate", "of", "the"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -622,13 +442,7 @@
       "id": "posse-0030",
       "name": "Plague of Illusions",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "illusions",
-        "of",
-        "plague",
-        "plague of illusions"
-      ],
+      "tokens": ["chaos", "illusions", "of", "plague", "plague of illusions"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -643,14 +457,7 @@
       "id": "posse-0031",
       "name": "Blessing of the Stars",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "blessing",
-        "blessing of the stars",
-        "of",
-        "stars",
-        "the"
-      ],
+      "tokens": ["aequor", "blessing", "blessing of the stars", "of", "stars", "the"],
       "facets": {
         "realm": "AEQUOR"
       },
@@ -665,13 +472,7 @@
       "id": "posse-0032",
       "name": "Black Swan's Dance",
       "aliases": [],
-      "tokens": [
-        "black",
-        "black swans dance",
-        "dance",
-        "swans",
-        "ultra"
-      ],
+      "tokens": ["black", "black swans dance", "dance", "swans", "ultra"],
       "facets": {
         "realm": "ULTRA"
       },
@@ -686,12 +487,7 @@
       "id": "posse-0033",
       "name": "Tavern's Opening",
       "aliases": [],
-      "tokens": [
-        "opening",
-        "other",
-        "taverns",
-        "taverns opening"
-      ],
+      "tokens": ["opening", "other", "taverns", "taverns opening"],
       "facets": {
         "realm": "OTHER"
       },
@@ -706,12 +502,7 @@
       "id": "posse-0034",
       "name": "Sacred Mending",
       "aliases": [],
-      "tokens": [
-        "mending",
-        "sacred",
-        "sacred mending",
-        "ultra"
-      ],
+      "tokens": ["mending", "sacred", "sacred mending", "ultra"],
       "facets": {
         "realm": "ULTRA"
       },
@@ -726,12 +517,7 @@
       "id": "posse-0035",
       "name": "Undying Thunder",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "thunder",
-        "undying",
-        "undying thunder"
-      ],
+      "tokens": ["aequor", "thunder", "undying", "undying thunder"],
       "facets": {
         "realm": "AEQUOR"
       },
@@ -746,13 +532,7 @@
       "id": "posse-0036",
       "name": "Derision of Destiny",
       "aliases": [],
-      "tokens": [
-        "derision",
-        "derision of destiny",
-        "destiny",
-        "of",
-        "ultra"
-      ],
+      "tokens": ["derision", "derision of destiny", "destiny", "of", "ultra"],
       "facets": {
         "realm": "ULTRA"
       },
@@ -767,12 +547,7 @@
       "id": "posse-0037",
       "name": "Cruel Homage",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "cruel",
-        "cruel homage",
-        "homage"
-      ],
+      "tokens": ["caro", "cruel", "cruel homage", "homage"],
       "facets": {
         "realm": "CARO"
       },
@@ -787,12 +562,7 @@
       "id": "posse-0038",
       "name": "Undying Sun",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "sun",
-        "undying",
-        "undying sun"
-      ],
+      "tokens": ["chaos", "sun", "undying", "undying sun"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -807,13 +577,7 @@
       "id": "posse-0039",
       "name": "Sacred Bleeding Heart",
       "aliases": [],
-      "tokens": [
-        "bleeding",
-        "heart",
-        "sacred",
-        "sacred bleeding heart",
-        "ultra"
-      ],
+      "tokens": ["bleeding", "heart", "sacred", "sacred bleeding heart", "ultra"],
       "facets": {
         "realm": "ULTRA"
       },
@@ -828,12 +592,7 @@
       "id": "posse-0040",
       "name": "Voracious Resolve",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "resolve",
-        "voracious",
-        "voracious resolve"
-      ],
+      "tokens": ["caro", "resolve", "voracious", "voracious resolve"],
       "facets": {
         "realm": "CARO"
       },
@@ -848,12 +607,7 @@
       "id": "posse-0041",
       "name": "Beachside Memento",
       "aliases": [],
-      "tokens": [
-        "beachside",
-        "beachside memento",
-        "memento",
-        "other"
-      ],
+      "tokens": ["beachside", "beachside memento", "memento", "other"],
       "facets": {
         "realm": "OTHER"
       },
@@ -868,12 +622,7 @@
       "id": "posse-0042",
       "name": "Void Hues",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "hues",
-        "void",
-        "void hues"
-      ],
+      "tokens": ["caro", "hues", "void", "void hues"],
       "facets": {
         "realm": "CARO"
       },
@@ -888,13 +637,7 @@
       "id": "posse-0043",
       "name": "A Fleeting Dream",
       "aliases": [],
-      "tokens": [
-        "a",
-        "a fleeting dream",
-        "dream",
-        "fleeting",
-        "other"
-      ],
+      "tokens": ["a", "a fleeting dream", "dream", "fleeting", "other"],
       "facets": {
         "realm": "OTHER"
       },
@@ -909,12 +652,7 @@
       "id": "posse-0044",
       "name": "Wayward Ship",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "ship",
-        "wayward",
-        "wayward ship"
-      ],
+      "tokens": ["aequor", "ship", "wayward", "wayward ship"],
       "facets": {
         "realm": "AEQUOR"
       },
@@ -929,12 +667,7 @@
       "id": "posse-0045",
       "name": "Reunion Wish",
       "aliases": [],
-      "tokens": [
-        "other",
-        "reunion",
-        "reunion wish",
-        "wish"
-      ],
+      "tokens": ["other", "reunion", "reunion wish", "wish"],
       "facets": {
         "realm": "OTHER"
       },
@@ -949,14 +682,7 @@
       "id": "posse-0046",
       "name": "From the Mist Realm",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "from",
-        "from the mist realm",
-        "mist",
-        "realm",
-        "the"
-      ],
+      "tokens": ["chaos", "from", "from the mist realm", "mist", "realm", "the"],
       "facets": {
         "realm": "CHAOS"
       },
@@ -971,12 +697,7 @@
       "id": "posse-0047",
       "name": "Manor Echoes",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "echoes",
-        "manor",
-        "manor echoes"
-      ],
+      "tokens": ["caro", "echoes", "manor", "manor echoes"],
       "facets": {
         "realm": "CARO"
       },
@@ -991,13 +712,7 @@
       "id": "posse-0048",
       "name": "Year-End Sparks",
       "aliases": [],
-      "tokens": [
-        "end",
-        "other",
-        "sparks",
-        "year",
-        "year end sparks"
-      ],
+      "tokens": ["end", "other", "sparks", "year", "year end sparks"],
       "facets": {
         "realm": "OTHER"
       },
@@ -1012,12 +727,7 @@
       "id": "posse-0049",
       "name": "Drowned Innocence",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "drowned",
-        "drowned innocence",
-        "innocence"
-      ],
+      "tokens": ["aequor", "drowned", "drowned innocence", "innocence"],
       "facets": {
         "realm": "AEQUOR"
       },
@@ -1032,12 +742,7 @@
       "id": "posse-0050",
       "name": "Orbis Fatum",
       "aliases": [],
-      "tokens": [
-        "fatum",
-        "orbis",
-        "orbis fatum",
-        "ultra"
-      ],
+      "tokens": ["fatum", "orbis", "orbis fatum", "ultra"],
       "facets": {
         "realm": "ULTRA"
       },

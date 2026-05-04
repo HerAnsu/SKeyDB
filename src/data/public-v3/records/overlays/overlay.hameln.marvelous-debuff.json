@@ -18,17 +18,9 @@
       "formulaKey": "scaled",
       "baseFormula": "accountStageGrowth",
       "multiplier": 0.025,
-      "inputs": [
-        "accountLevel"
-      ]
+      "inputs": ["accountLevel"]
     }
   },
-  "childOverlayIds": [
-    "overlay.global.bleed",
-    "overlay.global.poison",
-    "overlay.global.weakness",
-    "overlay.global.vulnerable",
-    "overlay.global.strength"
-  ],
+  "childOverlayIds": ["overlay.global.bleed", "overlay.global.poison", "overlay.global.weakness", "overlay.global.vulnerable", "overlay.global.strength"],
   "ownerAwakenerName": "Hameln"
 }

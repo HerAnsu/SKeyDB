@@ -17,12 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "The Unknowable",
-  "aliases": [
-    "hameln"
-  ],
-  "searchTags": [
-    "Arithmetica"
-  ],
+  "aliases": ["hameln"],
+  "searchTags": ["Arithmetica"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 47,

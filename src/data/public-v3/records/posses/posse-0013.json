@@ -21,20 +21,14 @@
       "formulaKey": "scaled",
       "baseFormula": "occultResearchDepth",
       "multiplier": 0.06,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     },
     "Arg2": {
       "kind": "computed",
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.03,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "The feast has reached its peak. The queen of Cambrian laughed heartily, raising her glass to you amidst the revelry and D-Slime."

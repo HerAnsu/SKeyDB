@@ -21,10 +21,7 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.15,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "Everything beautiful, complete, and soft leads to one's downfall, and you choose to become your own executioner, personally severing your soul from the warm bed of dreams.\nAfter piercing through the false veil, you look back, and those smiling faces are frozen within pale lines, waiting for your true return."

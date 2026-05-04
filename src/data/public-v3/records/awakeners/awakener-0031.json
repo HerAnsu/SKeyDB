@@ -17,14 +17,8 @@
   "rarity": "SR",
   "type": "ASSAULT",
   "faction": "Out of the Aeons",
-  "aliases": [
-    "lotan"
-  ],
-  "searchTags": [
-    "Dispel",
-    "Max HP DMG",
-    "Strike"
-  ],
+  "aliases": ["lotan"],
+  "searchTags": ["Dispel", "Max HP DMG", "Strike"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 34,

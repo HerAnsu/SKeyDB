@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Hybrid",
-  "aliases": [
-    "lily"
-  ],
-  "searchTags": [
-    "Death Resistance",
-    "Heal",
-    "Strike"
-  ],
+  "aliases": ["lily"],
+  "searchTags": ["Death Resistance", "Heal", "Strike"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 56,

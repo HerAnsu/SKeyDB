@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Out of the Aeons",
-  "aliases": [
-    "salvador"
-  ],
-  "searchTags": [
-    "Heal",
-    "Self-Harm"
-  ],
+  "aliases": ["salvador"],
+  "searchTags": ["Heal", "Self-Harm"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 66,

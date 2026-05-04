@@ -13,45 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0013",
-        "covenant-0003",
-        "covenant-0006"
-      ],
+      "recommendedCovenantIds": ["covenant-0013", "covenant-0003", "covenant-0006"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0001"
-          ],
+          "wheelIds": ["wheel-0001"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0003"
-          ],
+          "wheelIds": ["wheel-0003"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0104"
-          ],
+          "wheelIds": ["wheel-0104"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
     }
   ],
   "ownerAwakenerName": "Aigis"

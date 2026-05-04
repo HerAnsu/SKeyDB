@@ -23,37 +23,23 @@
       "formulaKey": "wheelRefinementLinear",
       "baseValue": 6.0,
       "perLevel": 1.0,
-      "inputs": [
-        "wheelRefinementLevel"
-      ]
+      "inputs": ["wheelRefinementLevel"]
     },
     "StateArg2": {
       "kind": "computed",
       "formulaKey": "wheelRefinementLinear",
       "baseValue": 3.0,
       "perLevel": 1.0,
-      "inputs": [
-        "wheelRefinementLevel"
-      ]
+      "inputs": ["wheelRefinementLevel"]
     },
     "StateArg3": {
       "kind": "scaling",
-      "values": [
-        "2.1",
-        "2.4",
-        "2.7",
-        "3"
-      ],
+      "values": ["2.1", "2.4", "2.7", "3"],
       "suffix": "%"
     },
     "StateArg4": {
       "kind": "scaling",
-      "values": [
-        "1.1",
-        "1.4",
-        "1.7",
-        "2"
-      ],
+      "values": ["1.1", "1.4", "1.7", "2"],
       "suffix": "%"
     }
   },

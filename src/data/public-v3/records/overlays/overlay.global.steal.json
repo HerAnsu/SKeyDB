@@ -11,9 +11,7 @@
     "icon": "asset-overlay.global.steal-icon"
   },
   "overlayType": "mechanic",
-  "aliases": [
-    "Stealing"
-  ],
+  "aliases": ["Stealing"],
   "iconId": "IconS_Buff_014",
   "textColor": "affliction",
   "descriptionTemplate": "Temporarily reduce target's {STR⯆} and gain the same amount of Temporary {STR}.",

@@ -18,12 +18,7 @@
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
-      "values": [
-        "11",
-        "14",
-        "17",
-        "20"
-      ]
+      "values": ["11", "14", "17", "20"]
     }
   },
   "lore": "On the brink of death, the will to live ignites."

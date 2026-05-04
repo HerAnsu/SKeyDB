@@ -13,51 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0012",
-        "covenant-0006"
-      ],
+      "recommendedCovenantIds": ["covenant-0012", "covenant-0006"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0025"
-          ],
+          "wheelIds": ["wheel-0025"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0024"
-          ],
+          "wheelIds": ["wheel-0024"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0083"
-          ],
+          "wheelIds": ["wheel-0083"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0093"
-          ],
+          "wheelIds": ["wheel-0093"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "DEATH_RESISTANCE"
-        ],
-        [
-          "CRIT_RATE"
-        ],
-        [
-          "CRIT_DMG"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "DEATH_RESISTANCE",
-        "CRIT_RATE"
-      ]
+      "substatPriorityGroups": [["DEATH_RESISTANCE"], ["CRIT_RATE"], ["CRIT_DMG"]],
+      "recommendedWheelMainstats": ["DEATH_RESISTANCE", "CRIT_RATE"]
     }
   ],
   "ownerAwakenerName": "Sanga"

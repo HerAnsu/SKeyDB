@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "The Fools",
-  "aliases": [
-    "ryker"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Draw",
-    "Keyflare"
-  ],
+  "aliases": ["ryker"],
+  "searchTags": ["Arithmetica", "Draw", "Keyflare"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 62,

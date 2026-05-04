@@ -7,17 +7,9 @@
       "id": "covenant-0001",
       "name": "Deus Ex Machina",
       "aliases": [],
-      "tokens": [
-        "deus",
-        "deus ex machina",
-        "ex",
-        "machina"
-      ],
+      "tokens": ["deus", "deus ex machina", "ex", "machina"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -30,16 +22,9 @@
       "id": "covenant-0002",
       "name": "Re-evolution",
       "aliases": [],
-      "tokens": [
-        "evolution",
-        "re",
-        "re evolution"
-      ],
+      "tokens": ["evolution", "re", "re evolution"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -52,16 +37,9 @@
       "id": "covenant-0003",
       "name": "Scarlet Embrace",
       "aliases": [],
-      "tokens": [
-        "embrace",
-        "scarlet",
-        "scarlet embrace"
-      ],
+      "tokens": ["embrace", "scarlet", "scarlet embrace"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -74,16 +52,9 @@
       "id": "covenant-0004",
       "name": "Crimson Pulse",
       "aliases": [],
-      "tokens": [
-        "crimson",
-        "crimson pulse",
-        "pulse"
-      ],
+      "tokens": ["crimson", "crimson pulse", "pulse"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -96,17 +67,9 @@
       "id": "covenant-0005",
       "name": "Twisted Twins: Black",
       "aliases": [],
-      "tokens": [
-        "black",
-        "twins",
-        "twisted",
-        "twisted twins black"
-      ],
+      "tokens": ["black", "twins", "twisted", "twisted twins black"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -119,17 +82,9 @@
       "id": "covenant-0006",
       "name": "Burial Ground's Sighs",
       "aliases": [],
-      "tokens": [
-        "burial",
-        "burial grounds sighs",
-        "grounds",
-        "sighs"
-      ],
+      "tokens": ["burial", "burial grounds sighs", "grounds", "sighs"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -142,17 +97,9 @@
       "id": "covenant-0007",
       "name": "Twisted Twins: White",
       "aliases": [],
-      "tokens": [
-        "twins",
-        "twisted",
-        "twisted twins white",
-        "white"
-      ],
+      "tokens": ["twins", "twisted", "twisted twins white", "white"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -165,16 +112,9 @@
       "id": "covenant-0008",
       "name": "Cursed Rabbit",
       "aliases": [],
-      "tokens": [
-        "cursed",
-        "cursed rabbit",
-        "rabbit"
-      ],
+      "tokens": ["cursed", "cursed rabbit", "rabbit"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -187,14 +127,9 @@
       "id": "covenant-0009",
       "name": "Paradox",
       "aliases": [],
-      "tokens": [
-        "paradox"
-      ],
+      "tokens": ["paradox"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -207,16 +142,9 @@
       "id": "covenant-0010",
       "name": "Photosynthesis Rite",
       "aliases": [],
-      "tokens": [
-        "photosynthesis",
-        "photosynthesis rite",
-        "rite"
-      ],
+      "tokens": ["photosynthesis", "photosynthesis rite", "rite"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -229,16 +157,9 @@
       "id": "covenant-0011",
       "name": "Returnal Line",
       "aliases": [],
-      "tokens": [
-        "line",
-        "returnal",
-        "returnal line"
-      ],
+      "tokens": ["line", "returnal", "returnal line"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -251,18 +172,9 @@
       "id": "covenant-0012",
       "name": "Ring of Chamber 36",
       "aliases": [],
-      "tokens": [
-        "36",
-        "chamber",
-        "of",
-        "ring",
-        "ring of chamber 36"
-      ],
+      "tokens": ["36", "chamber", "of", "ring", "ring of chamber 36"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -275,16 +187,9 @@
       "id": "covenant-0013",
       "name": "Life Drain",
       "aliases": [],
-      "tokens": [
-        "drain",
-        "life",
-        "life drain"
-      ],
+      "tokens": ["drain", "life", "life drain"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -297,16 +202,9 @@
       "id": "covenant-0014",
       "name": "April Tribute",
       "aliases": [],
-      "tokens": [
-        "april",
-        "april tribute",
-        "tribute"
-      ],
+      "tokens": ["april", "april tribute", "tribute"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -319,16 +217,9 @@
       "id": "covenant-0015",
       "name": "Organic Form",
       "aliases": [],
-      "tokens": [
-        "form",
-        "organic",
-        "organic form"
-      ],
+      "tokens": ["form", "organic", "organic form"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -341,16 +232,9 @@
       "id": "covenant-0016",
       "name": "Sweet Slug",
       "aliases": [],
-      "tokens": [
-        "slug",
-        "sweet",
-        "sweet slug"
-      ],
+      "tokens": ["slug", "sweet", "sweet slug"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -363,17 +247,9 @@
       "id": "covenant-0017",
       "name": "Dream of Medicine",
       "aliases": [],
-      "tokens": [
-        "dream",
-        "dream of medicine",
-        "medicine",
-        "of"
-      ],
+      "tokens": ["dream", "dream of medicine", "medicine", "of"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -386,17 +262,9 @@
       "id": "covenant-0018",
       "name": "Feast from Afar",
       "aliases": [],
-      "tokens": [
-        "afar",
-        "feast",
-        "feast from afar",
-        "from"
-      ],
+      "tokens": ["afar", "feast", "feast from afar", "from"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -409,16 +277,9 @@
       "id": "covenant-0019",
       "name": "Unstained Chronicle",
       "aliases": [],
-      "tokens": [
-        "chronicle",
-        "unstained",
-        "unstained chronicle"
-      ],
+      "tokens": ["chronicle", "unstained", "unstained chronicle"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -431,14 +292,9 @@
       "id": "covenant-0020",
       "name": "Steppenwolf",
       "aliases": [],
-      "tokens": [
-        "steppenwolf"
-      ],
+      "tokens": ["steppenwolf"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,
@@ -451,18 +307,9 @@
       "id": "covenant-0021",
       "name": "Chrysalis of the Maiden",
       "aliases": [],
-      "tokens": [
-        "chrysalis",
-        "chrysalis of the maiden",
-        "maiden",
-        "of",
-        "the"
-      ],
+      "tokens": ["chrysalis", "chrysalis of the maiden", "maiden", "of", "the"],
       "facets": {
-        "setBonus": [
-          3,
-          6
-        ]
+        "setBonus": [3, 6]
       },
       "boosts": {
         "name": 10,

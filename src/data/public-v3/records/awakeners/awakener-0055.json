@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "The Fools",
-  "aliases": [
-    "vortice"
-  ],
-  "searchTags": [
-    "Dispel",
-    "Divine Realm",
-    "Tentacles"
-  ],
+  "aliases": ["vortice"],
+  "searchTags": ["Dispel", "Divine Realm", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 52,

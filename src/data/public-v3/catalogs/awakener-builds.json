@@ -19,102 +19,52 @@
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0020",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0020", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0121"
-              ],
+              "wheelIds": ["wheel-0121"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0018"
-              ],
+              "wheelIds": ["wheel-0018"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0088"
-              ],
+              "wheelIds": ["wheel-0088"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0087",
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0087", "wheel-0083"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         },
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0016"
-              ],
+              "wheelIds": ["wheel-0016"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0015"
-              ],
+              "wheelIds": ["wheel-0015"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0077"
-              ],
+              "wheelIds": ["wheel-0077"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0020"
-              ],
+              "wheelIds": ["wheel-0020"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP"]
         }
       ]
     },
@@ -133,94 +83,48 @@
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0020",
-            "covenant-0017"
-          ],
+          "recommendedCovenantIds": ["covenant-0020", "covenant-0017"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0121"
-              ],
+              "wheelIds": ["wheel-0121"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         },
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0018",
-            "covenant-0008"
-          ],
+          "recommendedCovenantIds": ["covenant-0018", "covenant-0008"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0014"
-              ],
+              "wheelIds": ["wheel-0014"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0007"
-              ],
+              "wheelIds": ["wheel-0007"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095"
-              ],
+              "wheelIds": ["wheel-0095"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "SIGIL_YIELD"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "SIGIL_YIELD"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["SIGIL_YIELD"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "SIGIL_YIELD"]
         }
       ]
     },
@@ -239,45 +143,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0013",
-            "covenant-0003",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0013", "covenant-0003", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0001"
-              ],
+              "wheelIds": ["wheel-0001"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0003"
-              ],
+              "wheelIds": ["wheel-0003"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104"
-              ],
+              "wheelIds": ["wheel-0104"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
         }
       ]
     },
@@ -296,100 +182,52 @@
         {
           "id": "standard-support",
           "label": "Standard Support",
-          "recommendedCovenantIds": [
-            "covenant-0007",
-            "covenant-0009",
-            "covenant-0018"
-          ],
+          "recommendedCovenantIds": ["covenant-0007", "covenant-0009", "covenant-0018"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0122"
-              ],
+              "wheelIds": ["wheel-0122"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0021"
-              ],
+              "wheelIds": ["wheel-0021"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0094",
-                "wheel-0093"
-              ],
+              "wheelIds": ["wheel-0094", "wheel-0093"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP",
-              "DEATH_RESISTANCE"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "REALM_MASTERY",
-            "SIGIL_YIELD"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP", "DEATH_RESISTANCE"]],
+          "recommendedWheelMainstats": ["REALM_MASTERY", "SIGIL_YIELD"]
         },
         {
           "id": "dps-arc-2",
           "label": "DPS Arc 2",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0014"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0014"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0024"
-              ],
+              "wheelIds": ["wheel-0024"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0021"
-              ],
+              "wheelIds": ["wheel-0021"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "DEATH_RESISTANCE"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["DEATH_RESISTANCE"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -408,54 +246,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0003",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0003", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0014"
-              ],
+              "wheelIds": ["wheel-0014"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0036"
-              ],
+              "wheelIds": ["wheel-0036"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0090"
-              ],
+              "wheelIds": ["wheel-0090"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0097",
-                "wheel-0004",
-                "wheel-0083",
-                "wheel-0096"
-              ],
+              "wheelIds": ["wheel-0097", "wheel-0004", "wheel-0083", "wheel-0096"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -474,96 +285,48 @@
         {
           "id": "defence",
           "label": "Defence",
-          "recommendedCovenantIds": [
-            "covenant-0018",
-            "covenant-0008"
-          ],
+          "recommendedCovenantIds": ["covenant-0018", "covenant-0008"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0053"
-              ],
+              "wheelIds": ["wheel-0053"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0122"
-              ],
+              "wheelIds": ["wheel-0122"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095",
-                "wheel-0089",
-                "wheel-0081",
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0095", "wheel-0089", "wheel-0081", "wheel-0078"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "ALIEMUS_REGEN",
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "ALIEMUS_REGEN",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN", "DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN", "DMG_AMP"]
         },
         {
           "id": "counter-carry",
           "label": "Counter Carry",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0020"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0020"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0121"
-              ],
+              "wheelIds": ["wheel-0121"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0084"
-              ],
+              "wheelIds": ["wheel-0084"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -582,44 +345,23 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0052"
-              ],
+              "wheelIds": ["wheel-0052"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0038"
-              ],
+              "wheelIds": ["wheel-0038"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0080"
-              ],
+              "wheelIds": ["wheel-0080"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "REALM_MASTERY",
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "REALM_MASTERY",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["REALM_MASTERY", "DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "REALM_MASTERY", "DMG_AMP"]
         }
       ]
     },
@@ -634,151 +376,82 @@
       "ownerAwakenerName": "Castor",
       "awakenerId": "awakener-0008",
       "primaryBuildId": "general-dps",
-      "recommendedPosseIds": [
-        "posse-0036"
-      ],
+      "recommendedPosseIds": ["posse-0036"],
       "builds": [
         {
           "id": "general-dps",
           "label": "General/DPS",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0005",
-            "covenant-0020"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0005", "covenant-0020"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0121"
-              ],
+              "wheelIds": ["wheel-0121"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0005"
-              ],
+              "wheelIds": ["wheel-0005"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0080"
-              ],
+              "wheelIds": ["wheel-0080"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0094",
-                "wheel-0006",
-                "wheel-0112"
-              ],
+              "wheelIds": ["wheel-0094", "wheel-0006", "wheel-0112"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "DMG_AMP"
-            ],
-            [
-              "CRIT_DMG"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "DMG_AMP",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["DMG_AMP"], ["CRIT_DMG"]],
+          "recommendedWheelMainstats": ["DMG_AMP", "CRIT_DMG"]
         },
         {
           "id": "tank-focus",
           "label": "Tank Focus",
-          "recommendedCovenantIds": [
-            "covenant-0008",
-            "covenant-0018"
-          ],
+          "recommendedCovenantIds": ["covenant-0008", "covenant-0018"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0039"
-              ],
+              "wheelIds": ["wheel-0039"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0052"
-              ],
+              "wheelIds": ["wheel-0052"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0094",
-                "wheel-0021"
-              ],
+              "wheelIds": ["wheel-0094", "wheel-0021"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "DMG_AMP"
-            ],
-            [
-              "DEATH_RESISTANCE"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "DMG_AMP",
-            "DEATH_RESISTANCE"
-          ]
+          "substatPriorityGroups": [["DMG_AMP"], ["DEATH_RESISTANCE"]],
+          "recommendedWheelMainstats": ["DMG_AMP", "DEATH_RESISTANCE"]
         },
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0005",
-            "covenant-0010"
-          ],
+          "recommendedCovenantIds": ["covenant-0005", "covenant-0010"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0039"
-              ],
+              "wheelIds": ["wheel-0039"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0052"
-              ],
+              "wheelIds": ["wheel-0052"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0080"
-              ],
+              "wheelIds": ["wheel-0080"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0094"
-              ],
+              "wheelIds": ["wheel-0094"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "DMG_AMP"
-            ],
-            [
-              "DEATH_RESISTANCE"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "DMG_AMP",
-            "DEATH_RESISTANCE"
-          ]
+          "substatPriorityGroups": [["DMG_AMP"], ["DEATH_RESISTANCE"]],
+          "recommendedWheelMainstats": ["DMG_AMP", "DEATH_RESISTANCE"]
         }
       ]
     },
@@ -797,50 +470,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0008",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0008", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0122"
-              ],
+              "wheelIds": ["wheel-0122"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0123"
-              ],
+              "wheelIds": ["wheel-0123"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095"
-              ],
+              "wheelIds": ["wheel-0095"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "ALIEMUS_REGEN",
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "ALIEMUS_REGEN",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN", "DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN", "DMG_AMP"]
         }
       ]
     },
@@ -859,44 +509,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0013",
-            "covenant-0005"
-          ],
+          "recommendedCovenantIds": ["covenant-0013", "covenant-0005"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0041"
-              ],
+              "wheelIds": ["wheel-0041"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0052"
-              ],
+              "wheelIds": ["wheel-0052"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104"
-              ],
+              "wheelIds": ["wheel-0104"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
         }
       ]
     },
@@ -915,98 +548,52 @@
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0014"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0014"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0035"
-              ],
+              "wheelIds": ["wheel-0035"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0084"
-              ],
+              "wheelIds": ["wheel-0084"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0005"
-              ],
+              "wheelIds": ["wheel-0005"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         },
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0006",
-            "covenant-0008",
-            "covenant-0002"
-          ],
+          "recommendedCovenantIds": ["covenant-0006", "covenant-0008", "covenant-0002"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0035"
-              ],
+              "wheelIds": ["wheel-0035"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0005"
-              ],
+              "wheelIds": ["wheel-0005"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0084"
-              ],
+              "wheelIds": ["wheel-0084"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0057"
-              ],
+              "wheelIds": ["wheel-0057"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DEATH_RESISTANCE"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DEATH_RESISTANCE"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DEATH_RESISTANCE"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DEATH_RESISTANCE"]
         }
       ]
     },
@@ -1025,50 +612,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0020"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0020"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0031"
-              ],
+              "wheelIds": ["wheel-0031"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0121"
-              ],
+              "wheelIds": ["wheel-0121"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN",
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_DMG",
-            "KEYFLARE_REGEN",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["CRIT_DMG"], ["KEYFLARE_REGEN", "DMG_AMP"]],
+          "recommendedWheelMainstats": ["CRIT_DMG", "KEYFLARE_REGEN", "DMG_AMP"]
         }
       ]
     },
@@ -1087,52 +651,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0013",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0013", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0015"
-              ],
+              "wheelIds": ["wheel-0015"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0016"
-              ],
+              "wheelIds": ["wheel-0016"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0077"
-              ],
+              "wheelIds": ["wheel-0077"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "ALIEMUS_REGEN"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "ALIEMUS_REGEN",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["ALIEMUS_REGEN"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["ALIEMUS_REGEN", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -1147,59 +686,32 @@
       "ownerAwakenerName": "Doresain",
       "awakenerId": "awakener-0014",
       "primaryBuildId": "standard",
-      "recommendedPosseIds": [
-        "posse-0037"
-      ],
+      "recommendedPosseIds": ["posse-0037"],
       "builds": [
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0011"
-              ],
+              "wheelIds": ["wheel-0011"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0008"
-              ],
+              "wheelIds": ["wheel-0008"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0028",
-                "wheel-0137"
-              ],
+              "wheelIds": ["wheel-0028", "wheel-0137"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -1218,44 +730,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0013",
-            "covenant-0008"
-          ],
+          "recommendedCovenantIds": ["covenant-0013", "covenant-0008"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0124"
-              ],
+              "wheelIds": ["wheel-0124"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0037"
-              ],
+              "wheelIds": ["wheel-0037"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104"
-              ],
+              "wheelIds": ["wheel-0104"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
         }
       ]
     },
@@ -1274,44 +769,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0006",
-            "covenant-0008"
-          ],
+          "recommendedCovenantIds": ["covenant-0006", "covenant-0008"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0123"
-              ],
+              "wheelIds": ["wheel-0123"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0050"
-              ],
+              "wheelIds": ["wheel-0050"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0081"
-              ],
+              "wheelIds": ["wheel-0081"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0093"
-              ],
+              "wheelIds": ["wheel-0093"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
         }
       ]
     },
@@ -1330,51 +808,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0018",
-            "covenant-0008",
-            "covenant-0002"
-          ],
+          "recommendedCovenantIds": ["covenant-0018", "covenant-0008", "covenant-0002"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0052"
-              ],
+              "wheelIds": ["wheel-0052"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0122"
-              ],
+              "wheelIds": ["wheel-0122"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0102"
-              ],
+              "wheelIds": ["wheel-0102"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP",
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DMG_AMP",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP", "ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP", "ALIEMUS_REGEN"]
         }
       ]
     },
@@ -1393,51 +847,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0017"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0017"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0016"
-              ],
+              "wheelIds": ["wheel-0016"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0034"
-              ],
+              "wheelIds": ["wheel-0034"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0077"
-              ],
+              "wheelIds": ["wheel-0077"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "ALIEMUS_REGEN"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "ALIEMUS_REGEN",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["ALIEMUS_REGEN"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["ALIEMUS_REGEN", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -1452,59 +882,32 @@
       "ownerAwakenerName": "Helot: Catena",
       "awakenerId": "awakener-0019",
       "primaryBuildId": "standard",
-      "recommendedPosseIds": [
-        "posse-0023"
-      ],
+      "recommendedPosseIds": ["posse-0023"],
       "builds": [
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0006"
-              ],
+              "wheelIds": ["wheel-0006"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0092"
-              ],
+              "wheelIds": ["wheel-0092"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0018"
-              ],
+              "wheelIds": ["wheel-0018"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE",
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE", "CRIT_DMG"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -1523,92 +926,48 @@
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0013",
-            "covenant-0002"
-          ],
+          "recommendedCovenantIds": ["covenant-0013", "covenant-0002"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0001"
-              ],
+              "wheelIds": ["wheel-0001"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0014"
-              ],
+              "wheelIds": ["wheel-0014"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104"
-              ],
+              "wheelIds": ["wheel-0104"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "ALIEMUS_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN"]
         },
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0009",
-            "covenant-0014",
-            "covenant-0017"
-          ],
+          "recommendedCovenantIds": ["covenant-0009", "covenant-0014", "covenant-0017"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0040"
-              ],
+              "wheelIds": ["wheel-0040"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN",
-              "CRIT_RATE",
-              "CRIT_DMG"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN", "CRIT_RATE", "CRIT_DMG"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -1627,52 +986,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0050"
-              ],
+              "wheelIds": ["wheel-0050"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0052"
-              ],
+              "wheelIds": ["wheel-0052"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0084"
-              ],
+              "wheelIds": ["wheel-0084"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095",
-                "wheel-0054",
-                "wheel-0122"
-              ],
+              "wheelIds": ["wheel-0095", "wheel-0054", "wheel-0122"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP",
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DMG_AMP",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP", "ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP", "ALIEMUS_REGEN"]
         }
       ]
     },
@@ -1691,50 +1025,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0013",
-            "covenant-0002"
-          ],
+          "recommendedCovenantIds": ["covenant-0013", "covenant-0002"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0001"
-              ],
+              "wheelIds": ["wheel-0001"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0014"
-              ],
+              "wheelIds": ["wheel-0014"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104"
-              ],
+              "wheelIds": ["wheel-0104"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "ALIEMUS_REGEN",
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "ALIEMUS_REGEN",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN", "DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN", "DMG_AMP"]
         }
       ]
     },
@@ -1753,87 +1064,48 @@
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0050"
-              ],
+              "wheelIds": ["wheel-0050"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0052"
-              ],
+              "wheelIds": ["wheel-0052"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095"
-              ],
+              "wheelIds": ["wheel-0095"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
         },
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0006"
-              ],
+              "wheelIds": ["wheel-0006"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -1852,48 +1124,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0006",
-            "covenant-0007"
-          ],
+          "recommendedCovenantIds": ["covenant-0006", "covenant-0007"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0123"
-              ],
+              "wheelIds": ["wheel-0123"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0035"
-              ],
+              "wheelIds": ["wheel-0035"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0085"
-              ],
+              "wheelIds": ["wheel-0085"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0100"
-              ],
+              "wheelIds": ["wheel-0100"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "DEATH_RESISTANCE"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "DEATH_RESISTANCE",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["DEATH_RESISTANCE"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["DEATH_RESISTANCE", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -1912,104 +1163,52 @@
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0028"
-              ],
+              "wheelIds": ["wheel-0028"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0036",
-                "wheel-0087"
-              ],
+              "wheelIds": ["wheel-0036", "wheel-0087"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         },
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0050"
-              ],
+              "wheelIds": ["wheel-0050"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0123"
-              ],
+              "wheelIds": ["wheel-0123"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0084"
-              ],
+              "wheelIds": ["wheel-0084"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095",
-                "wheel-0031",
-                "wheel-0036",
-                "wheel-0087"
-              ],
+              "wheelIds": ["wheel-0095", "wheel-0031", "wheel-0036", "wheel-0087"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "ALIEMUS_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN"]
         }
       ]
     },
@@ -2028,50 +1227,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0001"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0001"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0050"
-              ],
+              "wheelIds": ["wheel-0050"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0034"
-              ],
+              "wheelIds": ["wheel-0034"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095"
-              ],
+              "wheelIds": ["wheel-0095"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "ALIEMUS_REGEN"
-            ],
-            [
-              "KEYFLARE_REGEN",
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "ALIEMUS_REGEN",
-            "KEYFLARE_REGEN",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["ALIEMUS_REGEN"], ["KEYFLARE_REGEN", "DMG_AMP"]],
+          "recommendedWheelMainstats": ["ALIEMUS_REGEN", "KEYFLARE_REGEN", "DMG_AMP"]
         }
       ]
     },
@@ -2086,107 +1262,53 @@
       "ownerAwakenerName": "Kathigu-Ra",
       "awakenerId": "awakener-0027",
       "primaryBuildId": "dps",
-      "recommendedPosseIds": [
-        "posse-0038"
-      ],
+      "recommendedPosseIds": ["posse-0038"],
       "builds": [
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0028"
-              ],
+              "wheelIds": ["wheel-0028"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         },
         {
           "id": "tank",
           "label": "Tank",
-          "recommendedCovenantIds": [
-            "covenant-0018",
-            "covenant-0009"
-          ],
+          "recommendedCovenantIds": ["covenant-0018", "covenant-0009"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0025"
-              ],
+              "wheelIds": ["wheel-0025"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0035"
-              ],
+              "wheelIds": ["wheel-0035"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -2205,44 +1327,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0008",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0008", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0122"
-              ],
+              "wheelIds": ["wheel-0122"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0009"
-              ],
+              "wheelIds": ["wheel-0009"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095"
-              ],
+              "wheelIds": ["wheel-0095"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
         }
       ]
     },
@@ -2261,49 +1366,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0018",
-            "covenant-0007",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0018", "covenant-0007", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0024"
-              ],
+              "wheelIds": ["wheel-0024"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0025"
-              ],
+              "wheelIds": ["wheel-0025"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0123"
-              ],
+              "wheelIds": ["wheel-0123"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "DEATH_RESISTANCE"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "DEATH_RESISTANCE",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["DEATH_RESISTANCE"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["DEATH_RESISTANCE", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -2322,55 +1405,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0020",
-            "covenant-0014"
-          ],
+          "recommendedCovenantIds": ["covenant-0020", "covenant-0014"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0121"
-              ],
+              "wheelIds": ["wheel-0121"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0030"
-              ],
+              "wheelIds": ["wheel-0030"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0110",
-                "wheel-0039",
-                "wheel-0005",
-                "wheel-0022",
-                "wheel-0087"
-              ],
+              "wheelIds": ["wheel-0110", "wheel-0039", "wheel-0005", "wheel-0022", "wheel-0087"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -2389,52 +1444,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0024"
-              ],
+              "wheelIds": ["wheel-0024"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0018"
-              ],
+              "wheelIds": ["wheel-0018"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0092"
-              ],
+              "wheelIds": ["wheel-0092"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0005",
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0005", "wheel-0055"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -2453,45 +1483,23 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0017"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0017"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0056"
-              ],
+              "wheelIds": ["wheel-0056"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0034"
-              ],
+              "wheelIds": ["wheel-0034"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["CRIT_DMG"], ["ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "CRIT_DMG"]
         }
       ]
     },
@@ -2506,61 +1514,32 @@
       "ownerAwakenerName": "Mouchette",
       "awakenerId": "awakener-0033",
       "primaryBuildId": "standard",
-      "recommendedPosseIds": [
-        "posse-0046"
-      ],
+      "recommendedPosseIds": ["posse-0046"],
       "builds": [
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0017",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0017", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0024"
-              ],
+              "wheelIds": ["wheel-0024"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0018",
-                "wheel-0029",
-                "wheel-0093"
-              ],
+              "wheelIds": ["wheel-0018", "wheel-0029", "wheel-0093"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "DEATH_RESISTANCE"
-            ],
-            [
-              "CRIT_DMG"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "DEATH_RESISTANCE"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["DEATH_RESISTANCE"], ["CRIT_DMG"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "DEATH_RESISTANCE"]
         }
       ]
     },
@@ -2579,52 +1558,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0013",
-            "covenant-0007"
-          ],
+          "recommendedCovenantIds": ["covenant-0013", "covenant-0007"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0051"
-              ],
+              "wheelIds": ["wheel-0051"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0014"
-              ],
+              "wheelIds": ["wheel-0014"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104",
-                "wheel-0090",
-                "wheel-0102"
-              ],
+              "wheelIds": ["wheel-0104", "wheel-0090", "wheel-0102"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP",
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DMG_AMP",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP", "ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP", "ALIEMUS_REGEN"]
         }
       ]
     },
@@ -2643,100 +1597,52 @@
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0013"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0013"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0131"
-              ],
+              "wheelIds": ["wheel-0131"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0014"
-              ],
+              "wheelIds": ["wheel-0014"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0090"
-              ],
+              "wheelIds": ["wheel-0090"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104",
-                "wheel-0001"
-              ],
+              "wheelIds": ["wheel-0104", "wheel-0001"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP",
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DMG_AMP",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP", "ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP", "ALIEMUS_REGEN"]
         },
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0014"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0014"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0027"
-              ],
+              "wheelIds": ["wheel-0027"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0090"
-              ],
+              "wheelIds": ["wheel-0090"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104"
-              ],
+              "wheelIds": ["wheel-0104"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "CRIT_DMG"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["KEYFLARE_REGEN"], ["CRIT_DMG"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -2755,46 +1661,23 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0018",
-            "covenant-0008",
-            "covenant-0002"
-          ],
+          "recommendedCovenantIds": ["covenant-0018", "covenant-0008", "covenant-0002"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0021"
-              ],
+              "wheelIds": ["wheel-0021"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0122"
-              ],
+              "wheelIds": ["wheel-0122"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ],
-            [
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP"], ["ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP"]
         }
       ]
     },
@@ -2813,52 +1696,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0020",
-            "covenant-0013",
-            "covenant-0002"
-          ],
+          "recommendedCovenantIds": ["covenant-0020", "covenant-0013", "covenant-0002"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0016"
-              ],
+              "wheelIds": ["wheel-0016"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0022"
-              ],
+              "wheelIds": ["wheel-0022"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104"
-              ],
+              "wheelIds": ["wheel-0104"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ],
-            [
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP"], ["ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP"]
         }
       ]
     },
@@ -2877,46 +1735,23 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0018",
-            "covenant-0008"
-          ],
+          "recommendedCovenantIds": ["covenant-0018", "covenant-0008"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0017"
-              ],
+              "wheelIds": ["wheel-0017"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0122"
-              ],
+              "wheelIds": ["wheel-0122"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "SIGIL_YIELD"
-            ],
-            [
-              "ALIEMUS_REGEN",
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "SIGIL_YIELD"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["SIGIL_YIELD"], ["ALIEMUS_REGEN", "DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "SIGIL_YIELD"]
         }
       ]
     },
@@ -2935,45 +1770,23 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0004",
-            "covenant-0014"
-          ],
+          "recommendedCovenantIds": ["covenant-0004", "covenant-0014"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0023"
-              ],
+              "wheelIds": ["wheel-0023"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0008"
-              ],
+              "wheelIds": ["wheel-0008"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -2992,96 +1805,52 @@
         {
           "id": "supp",
           "label": "Supp",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0002",
-            "covenant-0003"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0002", "covenant-0003"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0012"
-              ],
+              "wheelIds": ["wheel-0012"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0034"
-              ],
+              "wheelIds": ["wheel-0034"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0084"
-              ],
+              "wheelIds": ["wheel-0084"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0016",
-                "wheel-0015"
-              ],
+              "wheelIds": ["wheel-0016", "wheel-0015"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN"]
         },
         {
           "id": "sub-dps",
           "label": "Sub DPS",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0014"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0014"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0006"
-              ],
+              "wheelIds": ["wheel-0006"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0005"
-              ],
+              "wheelIds": ["wheel-0005"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_DMG",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_DMG", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -3100,45 +1869,23 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0042"
-              ],
+              "wheelIds": ["wheel-0042"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -3157,51 +1904,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0013",
-            "covenant-0001"
-          ],
+          "recommendedCovenantIds": ["covenant-0013", "covenant-0001"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0001"
-              ],
+              "wheelIds": ["wheel-0001"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0014"
-              ],
+              "wheelIds": ["wheel-0014"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104",
-                "wheel-0003"
-              ],
+              "wheelIds": ["wheel-0104", "wheel-0003"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "DMG_AMP",
-              "ALIEMUS_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "DMG_AMP",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP", "ALIEMUS_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP", "ALIEMUS_REGEN"]
         }
       ]
     },
@@ -3220,51 +1943,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0003",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0003", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0019"
-              ],
+              "wheelIds": ["wheel-0019"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0036"
-              ],
+              "wheelIds": ["wheel-0036"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0103"
-              ],
+              "wheelIds": ["wheel-0103"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "SIGIL_YIELD"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "SIGIL_YIELD"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["SIGIL_YIELD"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "SIGIL_YIELD"]
         }
       ]
     },
@@ -3283,92 +1982,52 @@
         {
           "id": "support",
           "label": "Support",
-          "recommendedCovenantIds": [
-            "covenant-0009",
-            "covenant-0008"
-          ],
+          "recommendedCovenantIds": ["covenant-0009", "covenant-0008"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0002"
-              ],
+              "wheelIds": ["wheel-0002"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0014"
-              ],
+              "wheelIds": ["wheel-0014"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0089"
-              ],
+              "wheelIds": ["wheel-0089"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095",
-                "wheel-0035"
-              ],
+              "wheelIds": ["wheel-0095", "wheel-0035"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
         },
         {
           "id": "dps",
           "label": "DPS",
-          "recommendedCovenantIds": [
-            "covenant-0009",
-            "covenant-0014"
-          ],
+          "recommendedCovenantIds": ["covenant-0009", "covenant-0014"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0002"
-              ],
+              "wheelIds": ["wheel-0002"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0035"
-              ],
+              "wheelIds": ["wheel-0035"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE",
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE", "CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -3387,51 +2046,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0012",
-            "covenant-0006"
-          ],
+          "recommendedCovenantIds": ["covenant-0012", "covenant-0006"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0025"
-              ],
+              "wheelIds": ["wheel-0025"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0024"
-              ],
+              "wheelIds": ["wheel-0024"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0093"
-              ],
+              "wheelIds": ["wheel-0093"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "DEATH_RESISTANCE"
-            ],
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "DEATH_RESISTANCE",
-            "CRIT_RATE"
-          ]
+          "substatPriorityGroups": [["DEATH_RESISTANCE"], ["CRIT_RATE"], ["CRIT_DMG"]],
+          "recommendedWheelMainstats": ["DEATH_RESISTANCE", "CRIT_RATE"]
         }
       ]
     },
@@ -3450,52 +2085,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0012"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0012"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0004"
-              ],
+              "wheelIds": ["wheel-0004"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0008"
-              ],
+              "wheelIds": ["wheel-0008"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0101",
-                "wheel-0036"
-              ],
+              "wheelIds": ["wheel-0101", "wheel-0036"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -3514,53 +2124,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0014",
-            "covenant-0004",
-            "covenant-0013"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0014", "covenant-0004", "covenant-0013"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0027"
-              ],
+              "wheelIds": ["wheel-0027"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0090"
-              ],
+              "wheelIds": ["wheel-0090"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104"
-              ],
+              "wheelIds": ["wheel-0104"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "CRIT_DMG"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["KEYFLARE_REGEN"], ["CRIT_DMG"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -3579,45 +2163,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0013",
-            "covenant-0002"
-          ],
+          "recommendedCovenantIds": ["covenant-0013", "covenant-0002"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0001"
-              ],
+              "wheelIds": ["wheel-0001"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0034"
-              ],
+              "wheelIds": ["wheel-0034"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0104",
-                "wheel-0015"
-              ],
+              "wheelIds": ["wheel-0104", "wheel-0015"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN"]
         }
       ]
     },
@@ -3636,50 +2202,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0018",
-            "covenant-0013"
-          ],
+          "recommendedCovenantIds": ["covenant-0018", "covenant-0013"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0051"
-              ],
+              "wheelIds": ["wheel-0051"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0021"
-              ],
+              "wheelIds": ["wheel-0021"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0091"
-              ],
+              "wheelIds": ["wheel-0091"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0107"
-              ],
+              "wheelIds": ["wheel-0107"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "SIGIL_YIELD",
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "SIGIL_YIELD",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["SIGIL_YIELD", "DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "SIGIL_YIELD", "DMG_AMP"]
         }
       ]
     },
@@ -3698,49 +2241,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0013"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0013"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0050"
-              ],
+              "wheelIds": ["wheel-0050"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0034"
-              ],
+              "wheelIds": ["wheel-0034"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0084"
-              ],
+              "wheelIds": ["wheel-0084"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0107",
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0107", "wheel-0078"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "ALIEMUS_REGEN"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "ALIEMUS_REGEN",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["ALIEMUS_REGEN"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["ALIEMUS_REGEN", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -3759,45 +2280,23 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0014",
-            "covenant-0004"
-          ],
+          "recommendedCovenantIds": ["covenant-0014", "covenant-0004"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0008"
-              ],
+              "wheelIds": ["wheel-0008"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0055"
-              ],
+              "wheelIds": ["wheel-0055"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0083"
-              ],
+              "wheelIds": ["wheel-0083"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "CRIT_RATE"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "CRIT_RATE",
-            "CRIT_DMG"
-          ]
+          "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
         }
       ]
     },
@@ -3816,52 +2315,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0020",
-            "covenant-0017"
-          ],
+          "recommendedCovenantIds": ["covenant-0020", "covenant-0017"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0033"
-              ],
+              "wheelIds": ["wheel-0033"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0053"
-              ],
+              "wheelIds": ["wheel-0053"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0081"
-              ],
+              "wheelIds": ["wheel-0081"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0023",
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0023", "wheel-0078"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "DMG_AMP"
-            ],
-            [
-              "SIGIL_YIELD"
-            ],
-            [
-              "DEATH_RESISTANCE"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "DMG_AMP",
-            "SIGIL_YIELD"
-          ]
+          "substatPriorityGroups": [["DMG_AMP"], ["SIGIL_YIELD"], ["DEATH_RESISTANCE"]],
+          "recommendedWheelMainstats": ["DMG_AMP", "SIGIL_YIELD"]
         }
       ]
     },
@@ -3880,55 +2354,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0002",
-            "covenant-0013"
-          ],
+          "recommendedCovenantIds": ["covenant-0002", "covenant-0013"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0041"
-              ],
+              "wheelIds": ["wheel-0041"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0034"
-              ],
+              "wheelIds": ["wheel-0034"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0095",
-                "wheel-0015",
-                "wheel-0016",
-                "wheel-0050",
-                "wheel-0038"
-              ],
+              "wheelIds": ["wheel-0095", "wheel-0015", "wheel-0016", "wheel-0050", "wheel-0038"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "KEYFLARE_REGEN"
-            ],
-            [
-              "ALIEMUS_REGEN"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "KEYFLARE_REGEN",
-            "ALIEMUS_REGEN"
-          ]
+          "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN"]
         }
       ]
     },
@@ -3943,47 +2389,28 @@
       "ownerAwakenerName": "Xu",
       "awakenerId": "awakener-0054",
       "primaryBuildId": "standard",
-      "recommendedPosseIds": [
-        "posse-0047"
-      ],
+      "recommendedPosseIds": ["posse-0047"],
       "builds": [
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0017",
-            "covenant-0002"
-          ],
+          "recommendedCovenantIds": ["covenant-0017", "covenant-0002"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0013"
-              ],
+              "wheelIds": ["wheel-0013"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0026"
-              ],
+              "wheelIds": ["wheel-0026"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "DMG_AMP",
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "DMG_AMP",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["DMG_AMP", "KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["DMG_AMP", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -4002,54 +2429,27 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0011",
-            "covenant-0001",
-            "covenant-0017"
-          ],
+          "recommendedCovenantIds": ["covenant-0011", "covenant-0001", "covenant-0017"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0060",
-                "wheel-0021"
-              ],
+              "wheelIds": ["wheel-0060", "wheel-0021"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0126"
-              ],
+              "wheelIds": ["wheel-0126"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0078"
-              ],
+              "wheelIds": ["wheel-0078"],
               "tier": "BIS_SR"
             },
             {
-              "wheelIds": [
-                "wheel-0119"
-              ],
+              "wheelIds": ["wheel-0119"],
               "tier": "GOOD"
             }
           ],
-          "substatPriorityGroups": [
-            [
-              "REALM_MASTERY"
-            ],
-            [
-              "CRIT_DMG"
-            ],
-            [
-              "KEYFLARE_REGEN"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "REALM_MASTERY",
-            "CRIT_DMG",
-            "KEYFLARE_REGEN"
-          ]
+          "substatPriorityGroups": [["REALM_MASTERY"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+          "recommendedWheelMainstats": ["REALM_MASTERY", "CRIT_DMG", "KEYFLARE_REGEN"]
         }
       ]
     },
@@ -4068,46 +2468,24 @@
         {
           "id": "standard",
           "label": "Core",
-          "recommendedCovenantIds": [
-            "covenant-0006",
-            "covenant-0017",
-            "covenant-0008"
-          ],
+          "recommendedCovenantIds": ["covenant-0006", "covenant-0017", "covenant-0008"],
           "recommendedWheels": [
             {
-              "wheelIds": [
-                "wheel-0128"
-              ],
+              "wheelIds": ["wheel-0128"],
               "tier": "BIS_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0058",
-                "wheel-0021"
-              ],
+              "wheelIds": ["wheel-0058", "wheel-0021"],
               "tier": "ALT_SSR"
             },
             {
-              "wheelIds": [
-                "wheel-0132",
-                "wheel-0089"
-              ],
+              "wheelIds": ["wheel-0132", "wheel-0089"],
               "tier": "BIS_SR"
             }
           ],
           "summary": "Sparse early guide content; prioritize Realm Mastery wheels while Arachne recommendations settle.",
-          "substatPriorityGroups": [
-            [
-              "REALM_MASTERY"
-            ],
-            [
-              "DMG_AMP"
-            ]
-          ],
-          "recommendedWheelMainstats": [
-            "REALM_MASTERY",
-            "DMG_AMP"
-          ]
+          "substatPriorityGroups": [["REALM_MASTERY"], ["DMG_AMP"]],
+          "recommendedWheelMainstats": ["REALM_MASTERY", "DMG_AMP"]
         }
       ]
     }

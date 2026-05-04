@@ -6,19 +6,8 @@
       "kind": "overlay",
       "id": "overlay.24.realm-and-persona",
       "name": "Realm and Persona",
-      "aliases": [
-        "Realm and Persona Effects"
-      ],
-      "tokens": [
-        "24",
-        "and",
-        "effects",
-        "persona",
-        "realm",
-        "realm and persona",
-        "realm and persona effects",
-        "tag"
-      ],
+      "aliases": ["Realm and Persona Effects"],
+      "tokens": ["24", "and", "effects", "persona", "realm", "realm and persona", "realm and persona effects", "tag"],
       "facets": {
         "ownerAwakenerId": "awakener-0001",
         "overlayType": "tag"
@@ -34,11 +23,7 @@
       "id": "overlay.aigis.petrify",
       "name": "Petrify",
       "aliases": [],
-      "tokens": [
-        "aigis",
-        "mechanic",
-        "petrify"
-      ],
+      "tokens": ["aigis", "mechanic", "petrify"],
       "facets": {
         "ownerAwakenerId": "awakener-0003",
         "overlayType": "mechanic"
@@ -54,13 +39,7 @@
       "id": "overlay.arachne.final-verdict",
       "name": "Final Verdict",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "final",
-        "final verdict",
-        "mechanic",
-        "verdict"
-      ],
+      "tokens": ["arachne", "final", "final verdict", "mechanic", "verdict"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "overlayType": "mechanic"
@@ -76,13 +55,7 @@
       "id": "overlay.arachne.singularity-annihilation",
       "name": "Singularity Annihilation",
       "aliases": [],
-      "tokens": [
-        "annihilation",
-        "arachne",
-        "mechanic",
-        "singularity",
-        "singularity annihilation"
-      ],
+      "tokens": ["annihilation", "arachne", "mechanic", "singularity", "singularity annihilation"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "overlayType": "mechanic"
@@ -98,13 +71,7 @@
       "id": "overlay.arachne.singularity-beacon",
       "name": "Singularity Beacon",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "beacon",
-        "mechanic",
-        "singularity",
-        "singularity beacon"
-      ],
+      "tokens": ["arachne", "beacon", "mechanic", "singularity", "singularity beacon"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "overlayType": "mechanic"
@@ -120,13 +87,7 @@
       "id": "overlay.arachne.singularity-prism",
       "name": "Singularity Prism",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "mechanic",
-        "prism",
-        "singularity",
-        "singularity prism"
-      ],
+      "tokens": ["arachne", "mechanic", "prism", "singularity", "singularity prism"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "overlayType": "mechanic"
@@ -141,18 +102,8 @@
       "kind": "overlay",
       "id": "overlay.arachne.singularity-shuttle",
       "name": "Dimension Shuttle",
-      "aliases": [
-        "Singularity Shuttle"
-      ],
-      "tokens": [
-        "arachne",
-        "dimension",
-        "dimension shuttle",
-        "mechanic",
-        "shuttle",
-        "singularity",
-        "singularity shuttle"
-      ],
+      "aliases": ["Singularity Shuttle"],
+      "tokens": ["arachne", "dimension", "dimension shuttle", "mechanic", "shuttle", "singularity", "singularity shuttle"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "overlayType": "mechanic"
@@ -168,13 +119,7 @@
       "id": "overlay.arachne.singularity-ultra",
       "name": "Singularity: Ultra",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "mechanic",
-        "singularity",
-        "singularity ultra",
-        "ultra"
-      ],
+      "tokens": ["arachne", "mechanic", "singularity", "singularity ultra", "ultra"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "overlayType": "mechanic"
@@ -190,13 +135,7 @@
       "id": "overlay.arachne.singularity-warp",
       "name": "Singularity Warp",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "mechanic",
-        "singularity",
-        "singularity warp",
-        "warp"
-      ],
+      "tokens": ["arachne", "mechanic", "singularity", "singularity warp", "warp"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "overlayType": "mechanic"
@@ -212,11 +151,7 @@
       "id": "overlay.arachne.weaver",
       "name": "Weaver",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "mechanic",
-        "weaver"
-      ],
+      "tokens": ["arachne", "mechanic", "weaver"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "overlayType": "mechanic"
@@ -232,11 +167,7 @@
       "id": "overlay.castor.corrosion",
       "name": "Corrosion",
       "aliases": [],
-      "tokens": [
-        "castor",
-        "corrosion",
-        "mechanic"
-      ],
+      "tokens": ["castor", "corrosion", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0008",
         "overlayType": "mechanic"
@@ -252,11 +183,7 @@
       "id": "overlay.celeste.revival",
       "name": "Revival",
       "aliases": [],
-      "tokens": [
-        "celeste",
-        "mechanic",
-        "revival"
-      ],
+      "tokens": ["celeste", "mechanic", "revival"],
       "facets": {
         "ownerAwakenerId": "awakener-0009",
         "overlayType": "mechanic"
@@ -272,13 +199,7 @@
       "id": "overlay.clementine.phobic-fixation",
       "name": "Phobic Fixation",
       "aliases": [],
-      "tokens": [
-        "clementine",
-        "fixation",
-        "mechanic",
-        "phobic",
-        "phobic fixation"
-      ],
+      "tokens": ["clementine", "fixation", "mechanic", "phobic", "phobic fixation"],
       "facets": {
         "ownerAwakenerId": "awakener-0010",
         "overlayType": "mechanic"
@@ -294,13 +215,7 @@
       "id": "overlay.clementine.psychic-trauma",
       "name": "Psychic Trauma",
       "aliases": [],
-      "tokens": [
-        "clementine",
-        "mechanic",
-        "psychic",
-        "psychic trauma",
-        "trauma"
-      ],
+      "tokens": ["clementine", "mechanic", "psychic", "psychic trauma", "trauma"],
       "facets": {
         "ownerAwakenerId": "awakener-0010",
         "overlayType": "mechanic"
@@ -316,11 +231,7 @@
       "id": "overlay.clementine.symbiosis",
       "name": "Symbiosis",
       "aliases": [],
-      "tokens": [
-        "clementine",
-        "mechanic",
-        "symbiosis"
-      ],
+      "tokens": ["clementine", "mechanic", "symbiosis"],
       "facets": {
         "ownerAwakenerId": "awakener-0010",
         "overlayType": "mechanic"
@@ -336,13 +247,7 @@
       "id": "overlay.doll-inferno.finale",
       "name": "Finale",
       "aliases": [],
-      "tokens": [
-        "doll",
-        "doll inferno",
-        "finale",
-        "inferno",
-        "mechanic"
-      ],
+      "tokens": ["doll", "doll inferno", "finale", "inferno", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0018",
         "overlayType": "mechanic"
@@ -358,15 +263,7 @@
       "id": "overlay.doll-inferno.finale-form",
       "name": "Finale Form",
       "aliases": [],
-      "tokens": [
-        "doll",
-        "doll inferno",
-        "finale",
-        "finale form",
-        "form",
-        "inferno",
-        "mechanic"
-      ],
+      "tokens": ["doll", "doll inferno", "finale", "finale form", "form", "inferno", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0018",
         "overlayType": "mechanic"
@@ -382,11 +279,7 @@
       "id": "overlay.doresain.corpse",
       "name": "Corpse",
       "aliases": [],
-      "tokens": [
-        "corpse",
-        "doresain",
-        "mechanic"
-      ],
+      "tokens": ["corpse", "doresain", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0014",
         "overlayType": "mechanic"
@@ -401,14 +294,8 @@
       "kind": "overlay",
       "id": "overlay.global.aequor",
       "name": "Aequor",
-      "aliases": [
-        "Aequor Realm"
-      ],
-      "tokens": [
-        "aequor",
-        "aequor realm",
-        "realm"
-      ],
+      "aliases": ["Aequor Realm"],
+      "tokens": ["aequor", "aequor realm", "realm"],
       "facets": {
         "overlayType": "realm"
       },
@@ -423,10 +310,7 @@
       "id": "overlay.global.aftershock",
       "name": "Aftershock",
       "aliases": [],
-      "tokens": [
-        "aftershock",
-        "mechanic"
-      ],
+      "tokens": ["aftershock", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -441,10 +325,7 @@
       "id": "overlay.global.alert",
       "name": "Alert",
       "aliases": [],
-      "tokens": [
-        "alert",
-        "mechanic"
-      ],
+      "tokens": ["alert", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -458,17 +339,8 @@
       "kind": "overlay",
       "id": "overlay.global.ancient-embers",
       "name": "Ancient Embers",
-      "aliases": [
-        "Old Embers"
-      ],
-      "tokens": [
-        "ancient",
-        "ancient embers",
-        "embers",
-        "mechanic",
-        "old",
-        "old embers"
-      ],
+      "aliases": ["Old Embers"],
+      "tokens": ["ancient", "ancient embers", "embers", "mechanic", "old", "old embers"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -483,10 +355,7 @@
       "id": "overlay.global.annihilation",
       "name": "Annihilation",
       "aliases": [],
-      "tokens": [
-        "annihilation",
-        "mechanic"
-      ],
+      "tokens": ["annihilation", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -501,12 +370,7 @@
       "id": "overlay.global.arithmetica-harmony",
       "name": "Arithmetica Harmony",
       "aliases": [],
-      "tokens": [
-        "arithmetica",
-        "arithmetica harmony",
-        "harmony",
-        "mechanic"
-      ],
+      "tokens": ["arithmetica", "arithmetica harmony", "harmony", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -521,12 +385,7 @@
       "id": "overlay.global.ashen-ruins",
       "name": "Ashen Ruins",
       "aliases": [],
-      "tokens": [
-        "ashen",
-        "ashen ruins",
-        "mechanic",
-        "ruins"
-      ],
+      "tokens": ["ashen", "ashen ruins", "mechanic", "ruins"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -541,12 +400,7 @@
       "id": "overlay.global.astral-reign",
       "name": "Astral Reign",
       "aliases": [],
-      "tokens": [
-        "astral",
-        "astral reign",
-        "mechanic",
-        "reign"
-      ],
+      "tokens": ["astral", "astral reign", "mechanic", "reign"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -561,10 +415,7 @@
       "id": "overlay.global.barrier",
       "name": "Barrier",
       "aliases": [],
-      "tokens": [
-        "barrier",
-        "mechanic"
-      ],
+      "tokens": ["barrier", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -578,14 +429,8 @@
       "kind": "overlay",
       "id": "overlay.global.bleed",
       "name": "Bleed",
-      "aliases": [
-        "Bleeding"
-      ],
-      "tokens": [
-        "bleed",
-        "bleeding",
-        "mechanic"
-      ],
+      "aliases": ["Bleeding"],
+      "tokens": ["bleed", "bleeding", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -600,10 +445,7 @@
       "id": "overlay.global.blighten",
       "name": "Blighten",
       "aliases": [],
-      "tokens": [
-        "blighten",
-        "mechanic"
-      ],
+      "tokens": ["blighten", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -618,10 +460,7 @@
       "id": "overlay.global.burn",
       "name": "Burn",
       "aliases": [],
-      "tokens": [
-        "burn",
-        "mechanic"
-      ],
+      "tokens": ["burn", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -636,10 +475,7 @@
       "id": "overlay.global.caro",
       "name": "Caro",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "realm"
-      ],
+      "tokens": ["caro", "realm"],
       "facets": {
         "overlayType": "realm"
       },
@@ -654,10 +490,7 @@
       "id": "overlay.global.chaos",
       "name": "Chaos",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "realm"
-      ],
+      "tokens": ["chaos", "realm"],
       "facets": {
         "overlayType": "realm"
       },
@@ -672,10 +505,7 @@
       "id": "overlay.global.counter",
       "name": "Counter",
       "aliases": [],
-      "tokens": [
-        "counter",
-        "mechanic"
-      ],
+      "tokens": ["counter", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -690,12 +520,7 @@
       "id": "overlay.global.crimson-furnace",
       "name": "Crimson Furnace",
       "aliases": [],
-      "tokens": [
-        "crimson",
-        "crimson furnace",
-        "furnace",
-        "mechanic"
-      ],
+      "tokens": ["crimson", "crimson furnace", "furnace", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -710,12 +535,7 @@
       "id": "overlay.global.death-resistance",
       "name": "Death Resistance",
       "aliases": [],
-      "tokens": [
-        "death",
-        "death resistance",
-        "mechanic",
-        "resistance"
-      ],
+      "tokens": ["death", "death resistance", "mechanic", "resistance"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -730,12 +550,7 @@
       "id": "overlay.global.delayed-sacrifice",
       "name": "Delayed Sacrifice",
       "aliases": [],
-      "tokens": [
-        "delayed",
-        "delayed sacrifice",
-        "mechanic",
-        "sacrifice"
-      ],
+      "tokens": ["delayed", "delayed sacrifice", "mechanic", "sacrifice"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -750,10 +565,7 @@
       "id": "overlay.global.destroy",
       "name": "Destroy",
       "aliases": [],
-      "tokens": [
-        "destroy",
-        "mechanic"
-      ],
+      "tokens": ["destroy", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -767,16 +579,8 @@
       "kind": "overlay",
       "id": "overlay.global.devour",
       "name": "Devour",
-      "aliases": [
-        "Devouring",
-        "Devoured"
-      ],
-      "tokens": [
-        "devour",
-        "devoured",
-        "devouring",
-        "mechanic"
-      ],
+      "aliases": ["Devouring", "Devoured"],
+      "tokens": ["devour", "devoured", "devouring", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -791,12 +595,7 @@
       "id": "overlay.global.dimension-shuttle",
       "name": "Dimension Shuttle",
       "aliases": [],
-      "tokens": [
-        "dimension",
-        "dimension shuttle",
-        "mechanic",
-        "shuttle"
-      ],
+      "tokens": ["dimension", "dimension shuttle", "mechanic", "shuttle"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -811,10 +610,7 @@
       "id": "overlay.global.discover",
       "name": "Discover",
       "aliases": [],
-      "tokens": [
-        "discover",
-        "mechanic"
-      ],
+      "tokens": ["discover", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -829,12 +625,7 @@
       "id": "overlay.global.divine-realm-aequor",
       "name": "Divine Realm: Aequor",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "divine",
-        "divine realm aequor",
-        "realm"
-      ],
+      "tokens": ["aequor", "divine", "divine realm aequor", "realm"],
       "facets": {
         "overlayType": "realm"
       },
@@ -849,14 +640,7 @@
       "id": "overlay.global.divine-realm-aequor-mastery",
       "name": "Divine Realm: Aequor Mastery",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "divine",
-        "divine realm aequor mastery",
-        "mastery",
-        "mechanic",
-        "realm"
-      ],
+      "tokens": ["aequor", "divine", "divine realm aequor mastery", "mastery", "mechanic", "realm"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -871,14 +655,7 @@
       "id": "overlay.global.divine-realm-raging-waves",
       "name": "Divine Realm: Raging Waves",
       "aliases": [],
-      "tokens": [
-        "divine",
-        "divine realm raging waves",
-        "mechanic",
-        "raging",
-        "realm",
-        "waves"
-      ],
+      "tokens": ["divine", "divine realm raging waves", "mechanic", "raging", "realm", "waves"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -893,14 +670,7 @@
       "id": "overlay.global.divine-realm-surging-tides",
       "name": "Divine Realm: Surging Tides",
       "aliases": [],
-      "tokens": [
-        "divine",
-        "divine realm surging tides",
-        "mechanic",
-        "realm",
-        "surging",
-        "tides"
-      ],
+      "tokens": ["divine", "divine realm surging tides", "mechanic", "realm", "surging", "tides"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -915,14 +685,7 @@
       "id": "overlay.global.divine-realm-tentacle-stance",
       "name": "Divine Realm: Tentacle Stance",
       "aliases": [],
-      "tokens": [
-        "divine",
-        "divine realm tentacle stance",
-        "mechanic",
-        "realm",
-        "stance",
-        "tentacle"
-      ],
+      "tokens": ["divine", "divine realm tentacle stance", "mechanic", "realm", "stance", "tentacle"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -937,14 +700,7 @@
       "id": "overlay.global.divine-realm-tranquil-sea",
       "name": "Divine Realm: Tranquil Sea",
       "aliases": [],
-      "tokens": [
-        "divine",
-        "divine realm tranquil sea",
-        "mechanic",
-        "realm",
-        "sea",
-        "tranquil"
-      ],
+      "tokens": ["divine", "divine realm tranquil sea", "mechanic", "realm", "sea", "tranquil"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -959,10 +715,7 @@
       "id": "overlay.global.echo",
       "name": "Echo",
       "aliases": [],
-      "tokens": [
-        "echo",
-        "mechanic"
-      ],
+      "tokens": ["echo", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -977,12 +730,7 @@
       "id": "overlay.global.embryo-fusion",
       "name": "Embryo Fusion",
       "aliases": [],
-      "tokens": [
-        "embryo",
-        "embryo fusion",
-        "fusion",
-        "mechanic"
-      ],
+      "tokens": ["embryo", "embryo fusion", "fusion", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -996,14 +744,8 @@
       "kind": "overlay",
       "id": "overlay.global.exhaust",
       "name": "Exhaust",
-      "aliases": [
-        "Exhausted"
-      ],
-      "tokens": [
-        "exhaust",
-        "exhausted",
-        "mechanic"
-      ],
+      "aliases": ["Exhausted"],
+      "tokens": ["exhaust", "exhausted", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1018,10 +760,7 @@
       "id": "overlay.global.fainted",
       "name": "Fainted",
       "aliases": [],
-      "tokens": [
-        "fainted",
-        "mechanic"
-      ],
+      "tokens": ["fainted", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1035,18 +774,8 @@
       "kind": "overlay",
       "id": "overlay.global.final-rule",
       "name": "Final Rule",
-      "aliases": [
-        "Absolute Axiom"
-      ],
-      "tokens": [
-        "absolute",
-        "absolute axiom",
-        "axiom",
-        "final",
-        "final rule",
-        "mechanic",
-        "rule"
-      ],
+      "aliases": ["Absolute Axiom"],
+      "tokens": ["absolute", "absolute axiom", "axiom", "final", "final rule", "mechanic", "rule"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1061,12 +790,7 @@
       "id": "overlay.global.fixed-dmg",
       "name": "Fixed DMG",
       "aliases": [],
-      "tokens": [
-        "dmg",
-        "fixed",
-        "fixed dmg",
-        "mechanic"
-      ],
+      "tokens": ["dmg", "fixed", "fixed dmg", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1081,10 +805,7 @@
       "id": "overlay.global.fleeting",
       "name": "Fleeting",
       "aliases": [],
-      "tokens": [
-        "fleeting",
-        "mechanic"
-      ],
+      "tokens": ["fleeting", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1098,12 +819,7 @@
       "kind": "overlay",
       "id": "overlay.global.forbidden-lore",
       "name": "Forbidden Lore",
-      "aliases": [
-        "Forbidden Lore Level",
-        "Somatic Research",
-        "Esoteric Research",
-        "Occult Research"
-      ],
+      "aliases": ["Forbidden Lore Level", "Somatic Research", "Esoteric Research", "Occult Research"],
       "tokens": [
         "esoteric",
         "esoteric research",
@@ -1133,10 +849,7 @@
       "id": "overlay.global.fortress",
       "name": "Fortress",
       "aliases": [],
-      "tokens": [
-        "fortress",
-        "mechanic"
-      ],
+      "tokens": ["fortress", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1151,10 +864,7 @@
       "id": "overlay.global.fragile",
       "name": "Fragile",
       "aliases": [],
-      "tokens": [
-        "fragile",
-        "mechanic"
-      ],
+      "tokens": ["fragile", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1169,12 +879,7 @@
       "id": "overlay.global.infinite-devour",
       "name": "Infinite Devour",
       "aliases": [],
-      "tokens": [
-        "devour",
-        "infinite",
-        "infinite devour",
-        "mechanic"
-      ],
+      "tokens": ["devour", "infinite", "infinite devour", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1189,10 +894,7 @@
       "id": "overlay.global.innate",
       "name": "Innate",
       "aliases": [],
-      "tokens": [
-        "innate",
-        "mechanic"
-      ],
+      "tokens": ["innate", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1207,10 +909,7 @@
       "id": "overlay.global.leap",
       "name": "Leap",
       "aliases": [],
-      "tokens": [
-        "leap",
-        "mechanic"
-      ],
+      "tokens": ["leap", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1225,10 +924,7 @@
       "id": "overlay.global.lemurian",
       "name": "Lemurian",
       "aliases": [],
-      "tokens": [
-        "lemurian",
-        "mechanic"
-      ],
+      "tokens": ["lemurian", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1243,10 +939,7 @@
       "id": "overlay.global.madness",
       "name": "Madness",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "mechanic"
-      ],
+      "tokens": ["madness", "mechanic"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1260,15 +953,8 @@
       "kind": "overlay",
       "id": "overlay.global.over-exalt",
       "name": "Over-Exalt",
-      "aliases": [
-        "Over Exalt"
-      ],
-      "tokens": [
-        "exalt",
-        "mechanic",
-        "over",
-        "over exalt"
-      ],
+      "aliases": ["Over Exalt"],
+      "tokens": ["exalt", "mechanic", "over", "over exalt"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1283,10 +969,7 @@
       "id": "overlay.global.perception",
       "name": "Perception",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "perception"
-      ],
+      "tokens": ["mechanic", "perception"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1301,12 +984,7 @@
       "id": "overlay.global.pierce-dmg",
       "name": "Pierce DMG",
       "aliases": [],
-      "tokens": [
-        "dmg",
-        "mechanic",
-        "pierce",
-        "pierce dmg"
-      ],
+      "tokens": ["dmg", "mechanic", "pierce", "pierce dmg"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1321,10 +999,7 @@
       "id": "overlay.global.poison",
       "name": "Poison",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "poison"
-      ],
+      "tokens": ["mechanic", "poison"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1338,27 +1013,8 @@
       "kind": "overlay",
       "id": "overlay.global.prepare",
       "name": "Prepare",
-      "aliases": [
-        "Prepare 1",
-        "Prepare 2",
-        "Prepare 3",
-        "Prepare 4",
-        "Prepare 5"
-      ],
-      "tokens": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "mechanic",
-        "prepare",
-        "prepare 1",
-        "prepare 2",
-        "prepare 3",
-        "prepare 4",
-        "prepare 5"
-      ],
+      "aliases": ["Prepare 1", "Prepare 2", "Prepare 3", "Prepare 4", "Prepare 5"],
+      "tokens": ["1", "2", "3", "4", "5", "mechanic", "prepare", "prepare 1", "prepare 2", "prepare 3", "prepare 4", "prepare 5"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1373,12 +1029,7 @@
       "id": "overlay.global.pure-ultra",
       "name": "Pure Ultra",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "pure",
-        "pure ultra",
-        "ultra"
-      ],
+      "tokens": ["mechanic", "pure", "pure ultra", "ultra"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1393,10 +1044,7 @@
       "id": "overlay.global.pursuit",
       "name": "Pursuit",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "pursuit"
-      ],
+      "tokens": ["mechanic", "pursuit"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1411,10 +1059,7 @@
       "id": "overlay.global.quasar",
       "name": "Quasar",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "quasar"
-      ],
+      "tokens": ["mechanic", "quasar"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1429,12 +1074,7 @@
       "id": "overlay.global.raging-waves",
       "name": "Raging Waves",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "raging",
-        "raging waves",
-        "waves"
-      ],
+      "tokens": ["mechanic", "raging", "raging waves", "waves"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1448,27 +1088,8 @@
       "kind": "overlay",
       "id": "overlay.global.resonance",
       "name": "Resonance",
-      "aliases": [
-        "Resonance 1",
-        "Resonance 2",
-        "Resonance 3",
-        "Resonance 4",
-        "Resonance 5"
-      ],
-      "tokens": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "mechanic",
-        "resonance",
-        "resonance 1",
-        "resonance 2",
-        "resonance 3",
-        "resonance 4",
-        "resonance 5"
-      ],
+      "aliases": ["Resonance 1", "Resonance 2", "Resonance 3", "Resonance 4", "Resonance 5"],
+      "tokens": ["1", "2", "3", "4", "5", "mechanic", "resonance", "resonance 1", "resonance 2", "resonance 3", "resonance 4", "resonance 5"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1482,14 +1103,8 @@
       "kind": "overlay",
       "id": "overlay.global.retain",
       "name": "Retain",
-      "aliases": [
-        "Retained"
-      ],
-      "tokens": [
-        "mechanic",
-        "retain",
-        "retained"
-      ],
+      "aliases": ["Retained"],
+      "tokens": ["mechanic", "retain", "retained"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1503,15 +1118,8 @@
       "kind": "overlay",
       "id": "overlay.global.rouse",
       "name": "Rouse",
-      "aliases": [
-        "Keyflare Rouse"
-      ],
-      "tokens": [
-        "keyflare",
-        "keyflare rouse",
-        "mechanic",
-        "rouse"
-      ],
+      "aliases": ["Keyflare Rouse"],
+      "tokens": ["keyflare", "keyflare rouse", "mechanic", "rouse"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1526,10 +1134,7 @@
       "id": "overlay.global.sacrifice",
       "name": "Sacrifice",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "sacrifice"
-      ],
+      "tokens": ["mechanic", "sacrifice"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1544,10 +1149,7 @@
       "id": "overlay.global.sealed",
       "name": "Sealed",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "sealed"
-      ],
+      "tokens": ["mechanic", "sealed"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1562,10 +1164,7 @@
       "id": "overlay.global.stagnation",
       "name": "Stagnation",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "stagnation"
-      ],
+      "tokens": ["mechanic", "stagnation"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1579,14 +1178,8 @@
       "kind": "overlay",
       "id": "overlay.global.steal",
       "name": "Steal",
-      "aliases": [
-        "Stealing"
-      ],
-      "tokens": [
-        "mechanic",
-        "steal",
-        "stealing"
-      ],
+      "aliases": ["Stealing"],
+      "tokens": ["mechanic", "steal", "stealing"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1601,12 +1194,7 @@
       "id": "overlay.global.stellar-protection",
       "name": "Stellar Protection",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "protection",
-        "stellar",
-        "stellar protection"
-      ],
+      "tokens": ["mechanic", "protection", "stellar", "stellar protection"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1620,14 +1208,8 @@
       "kind": "overlay",
       "id": "overlay.global.str",
       "name": "STR",
-      "aliases": [
-        "Strength"
-      ],
-      "tokens": [
-        "mechanic",
-        "str",
-        "strength"
-      ],
+      "aliases": ["Strength"],
+      "tokens": ["mechanic", "str", "strength"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1642,12 +1224,7 @@
       "id": "overlay.global.strength",
       "name": "STR⯆",
       "aliases": [],
-      "tokens": [
-        "down",
-        "mechanic",
-        "str",
-        "str down"
-      ],
+      "tokens": ["down", "mechanic", "str", "str down"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1662,10 +1239,7 @@
       "id": "overlay.global.stun",
       "name": "Stun",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "stun"
-      ],
+      "tokens": ["mechanic", "stun"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1680,12 +1254,7 @@
       "id": "overlay.global.surging-tides",
       "name": "Surging Tides",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "surging",
-        "surging tides",
-        "tides"
-      ],
+      "tokens": ["mechanic", "surging", "surging tides", "tides"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1700,12 +1269,7 @@
       "id": "overlay.global.temporary-counter",
       "name": "Temporary Counter",
       "aliases": [],
-      "tokens": [
-        "counter",
-        "mechanic",
-        "temporary",
-        "temporary counter"
-      ],
+      "tokens": ["counter", "mechanic", "temporary", "temporary counter"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1720,12 +1284,7 @@
       "id": "overlay.global.temporary-enhance",
       "name": "Temporary Enhance",
       "aliases": [],
-      "tokens": [
-        "enhance",
-        "mechanic",
-        "temporary",
-        "temporary enhance"
-      ],
+      "tokens": ["enhance", "mechanic", "temporary", "temporary enhance"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1740,12 +1299,7 @@
       "id": "overlay.global.temporary-str",
       "name": "Temporary STR",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "str",
-        "temporary",
-        "temporary str"
-      ],
+      "tokens": ["mechanic", "str", "temporary", "temporary str"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1760,12 +1314,7 @@
       "id": "overlay.global.tentacle-dmg",
       "name": "Tentacle DMG",
       "aliases": [],
-      "tokens": [
-        "dmg",
-        "mechanic",
-        "tentacle",
-        "tentacle dmg"
-      ],
+      "tokens": ["dmg", "mechanic", "tentacle", "tentacle dmg"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1780,12 +1329,7 @@
       "id": "overlay.global.tranquil-sea",
       "name": "Tranquil Sea",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "sea",
-        "tranquil",
-        "tranquil sea"
-      ],
+      "tokens": ["mechanic", "sea", "tranquil", "tranquil sea"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1800,10 +1344,7 @@
       "id": "overlay.global.ultra",
       "name": "Ultra",
       "aliases": [],
-      "tokens": [
-        "realm",
-        "ultra"
-      ],
+      "tokens": ["realm", "ultra"],
       "facets": {
         "overlayType": "realm"
       },
@@ -1818,12 +1359,7 @@
       "id": "overlay.global.ultra-mastery",
       "name": "Ultra Mastery",
       "aliases": [],
-      "tokens": [
-        "mastery",
-        "mechanic",
-        "ultra",
-        "ultra mastery"
-      ],
+      "tokens": ["mastery", "mechanic", "ultra", "ultra mastery"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1837,17 +1373,8 @@
       "kind": "overlay",
       "id": "overlay.global.ultra-round",
       "name": "Ultra Round",
-      "aliases": [
-        "Ultra Rounds"
-      ],
-      "tokens": [
-        "mechanic",
-        "round",
-        "rounds",
-        "ultra",
-        "ultra round",
-        "ultra rounds"
-      ],
+      "aliases": ["Ultra Rounds"],
+      "tokens": ["mechanic", "round", "rounds", "ultra", "ultra round", "ultra rounds"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1862,12 +1389,7 @@
       "id": "overlay.global.ultra-space",
       "name": "Ultra Space",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "space",
-        "ultra",
-        "ultra space"
-      ],
+      "tokens": ["mechanic", "space", "ultra", "ultra space"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1957,10 +1479,7 @@
       "id": "overlay.global.void",
       "name": "Void",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "void"
-      ],
+      "tokens": ["mechanic", "void"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1974,14 +1493,8 @@
       "kind": "overlay",
       "id": "overlay.global.vulnerable",
       "name": "Vulnerable",
-      "aliases": [
-        "Vulnerability"
-      ],
-      "tokens": [
-        "mechanic",
-        "vulnerability",
-        "vulnerable"
-      ],
+      "aliases": ["Vulnerability"],
+      "tokens": ["mechanic", "vulnerability", "vulnerable"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -1996,10 +1509,7 @@
       "id": "overlay.global.weakness",
       "name": "Weakness",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "weakness"
-      ],
+      "tokens": ["mechanic", "weakness"],
       "facets": {
         "overlayType": "mechanic"
       },
@@ -2014,11 +1524,7 @@
       "id": "overlay.hameln.crescendo",
       "name": "Crescendo",
       "aliases": [],
-      "tokens": [
-        "crescendo",
-        "hameln",
-        "mechanic"
-      ],
+      "tokens": ["crescendo", "hameln", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0022",
         "overlayType": "mechanic"
@@ -2034,13 +1540,7 @@
       "id": "overlay.hameln.marvelous-debuff",
       "name": "Marvelous Debuff",
       "aliases": [],
-      "tokens": [
-        "debuff",
-        "hameln",
-        "marvelous",
-        "marvelous debuff",
-        "mechanic"
-      ],
+      "tokens": ["debuff", "hameln", "marvelous", "marvelous debuff", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0022",
         "overlayType": "mechanic"
@@ -2056,11 +1556,7 @@
       "id": "overlay.hameln.melody",
       "name": "Melody",
       "aliases": [],
-      "tokens": [
-        "hameln",
-        "mechanic",
-        "melody"
-      ],
+      "tokens": ["hameln", "mechanic", "melody"],
       "facets": {
         "ownerAwakenerId": "awakener-0022",
         "overlayType": "mechanic"
@@ -2076,11 +1572,7 @@
       "id": "overlay.hameln.rondino",
       "name": "Rondino",
       "aliases": [],
-      "tokens": [
-        "hameln",
-        "mechanic",
-        "rondino"
-      ],
+      "tokens": ["hameln", "mechanic", "rondino"],
       "facets": {
         "ownerAwakenerId": "awakener-0022",
         "overlayType": "mechanic"
@@ -2096,11 +1588,7 @@
       "id": "overlay.horla.anger",
       "name": "Anger",
       "aliases": [],
-      "tokens": [
-        "anger",
-        "horla",
-        "mechanic"
-      ],
+      "tokens": ["anger", "horla", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "overlayType": "mechanic"
@@ -2116,11 +1604,7 @@
       "id": "overlay.horla.emotion",
       "name": "Emotion",
       "aliases": [],
-      "tokens": [
-        "emotion",
-        "horla",
-        "mechanic"
-      ],
+      "tokens": ["emotion", "horla", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "overlayType": "mechanic"
@@ -2136,11 +1620,7 @@
       "id": "overlay.horla.fear",
       "name": "Fear",
       "aliases": [],
-      "tokens": [
-        "fear",
-        "horla",
-        "mechanic"
-      ],
+      "tokens": ["fear", "horla", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "overlayType": "mechanic"
@@ -2156,11 +1636,7 @@
       "id": "overlay.horla.grief",
       "name": "Grief",
       "aliases": [],
-      "tokens": [
-        "grief",
-        "horla",
-        "mechanic"
-      ],
+      "tokens": ["grief", "horla", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "overlayType": "mechanic"
@@ -2176,11 +1652,7 @@
       "id": "overlay.horla.happiness",
       "name": "Happiness",
       "aliases": [],
-      "tokens": [
-        "happiness",
-        "horla",
-        "mechanic"
-      ],
+      "tokens": ["happiness", "horla", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "overlayType": "mechanic"
@@ -2195,15 +1667,8 @@
       "kind": "overlay",
       "id": "overlay.horla.metaphor",
       "name": "Metaphor",
-      "aliases": [
-        "Metaphors"
-      ],
-      "tokens": [
-        "horla",
-        "mechanic",
-        "metaphor",
-        "metaphors"
-      ],
+      "aliases": ["Metaphors"],
+      "tokens": ["horla", "mechanic", "metaphor", "metaphors"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "overlayType": "mechanic"
@@ -2219,13 +1684,7 @@
       "id": "overlay.kathigu-ra.combust",
       "name": "Combust",
       "aliases": [],
-      "tokens": [
-        "combust",
-        "kathigu",
-        "kathigu ra",
-        "mechanic",
-        "ra"
-      ],
+      "tokens": ["combust", "kathigu", "kathigu ra", "mechanic", "ra"],
       "facets": {
         "ownerAwakenerId": "awakener-0027",
         "overlayType": "mechanic"
@@ -2241,13 +1700,7 @@
       "id": "overlay.kathigu-ra.fiamma",
       "name": "Fiamma",
       "aliases": [],
-      "tokens": [
-        "fiamma",
-        "kathigu",
-        "kathigu ra",
-        "mechanic",
-        "ra"
-      ],
+      "tokens": ["fiamma", "kathigu", "kathigu ra", "mechanic", "ra"],
       "facets": {
         "ownerAwakenerId": "awakener-0027",
         "overlayType": "mechanic"
@@ -2263,11 +1716,7 @@
       "id": "overlay.lily.endure",
       "name": "Endure",
       "aliases": [],
-      "tokens": [
-        "endure",
-        "lily",
-        "mechanic"
-      ],
+      "tokens": ["endure", "lily", "mechanic"],
       "facets": {
         "ownerAwakenerId": "awakener-0029",
         "overlayType": "mechanic"
@@ -2283,11 +1732,7 @@
       "id": "overlay.miryam.ritual",
       "name": "Ritual",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "miryam",
-        "ritual"
-      ],
+      "tokens": ["mechanic", "miryam", "ritual"],
       "facets": {
         "ownerAwakenerId": "awakener-0032",
         "overlayType": "mechanic"
@@ -2303,15 +1748,7 @@
       "id": "overlay.murphy-fauxborn.birth-ritual",
       "name": "Birth Ritual",
       "aliases": [],
-      "tokens": [
-        "birth",
-        "birth ritual",
-        "fauxborn",
-        "mechanic",
-        "murphy",
-        "murphy fauxborn",
-        "ritual"
-      ],
+      "tokens": ["birth", "birth ritual", "fauxborn", "mechanic", "murphy", "murphy fauxborn", "ritual"],
       "facets": {
         "ownerAwakenerId": "awakener-0035",
         "overlayType": "mechanic"
@@ -2327,15 +1764,7 @@
       "id": "overlay.murphy-fauxborn.life-seal",
       "name": "Life Seal",
       "aliases": [],
-      "tokens": [
-        "fauxborn",
-        "life",
-        "life seal",
-        "mechanic",
-        "murphy",
-        "murphy fauxborn",
-        "seal"
-      ],
+      "tokens": ["fauxborn", "life", "life seal", "mechanic", "murphy", "murphy fauxborn", "seal"],
       "facets": {
         "ownerAwakenerId": "awakener-0035",
         "overlayType": "mechanic"
@@ -2351,11 +1780,7 @@
       "id": "overlay.pickman.creativity",
       "name": "Creativity",
       "aliases": [],
-      "tokens": [
-        "creativity",
-        "mechanic",
-        "pickman"
-      ],
+      "tokens": ["creativity", "mechanic", "pickman"],
       "facets": {
         "ownerAwakenerId": "awakener-0040",
         "overlayType": "mechanic"
@@ -2371,11 +1796,7 @@
       "id": "overlay.pickman.fantasia",
       "name": "Fantasia",
       "aliases": [],
-      "tokens": [
-        "fantasia",
-        "mechanic",
-        "pickman"
-      ],
+      "tokens": ["fantasia", "mechanic", "pickman"],
       "facets": {
         "ownerAwakenerId": "awakener-0040",
         "overlayType": "mechanic"
@@ -2390,19 +1811,8 @@
       "kind": "overlay",
       "id": "overlay.pickman.painted-orisons",
       "name": "Painted Orisons",
-      "aliases": [
-        "Advanced Orisons",
-        "Orisons"
-      ],
-      "tokens": [
-        "advanced",
-        "advanced orisons",
-        "mechanic",
-        "orisons",
-        "painted",
-        "painted orisons",
-        "pickman"
-      ],
+      "aliases": ["Advanced Orisons", "Orisons"],
+      "tokens": ["advanced", "advanced orisons", "mechanic", "orisons", "painted", "painted orisons", "pickman"],
       "facets": {
         "ownerAwakenerId": "awakener-0040",
         "overlayType": "mechanic"
@@ -2417,23 +1827,8 @@
       "kind": "overlay",
       "id": "overlay.pickman.painted-relics",
       "name": "Painted Relics",
-      "aliases": [
-        "Golden Relics",
-        "Silver Relics",
-        "Painted Silver Relics"
-      ],
-      "tokens": [
-        "golden",
-        "golden relics",
-        "mechanic",
-        "painted",
-        "painted relics",
-        "painted silver relics",
-        "pickman",
-        "relics",
-        "silver",
-        "silver relics"
-      ],
+      "aliases": ["Golden Relics", "Silver Relics", "Painted Silver Relics"],
+      "tokens": ["golden", "golden relics", "mechanic", "painted", "painted relics", "painted silver relics", "pickman", "relics", "silver", "silver relics"],
       "facets": {
         "ownerAwakenerId": "awakener-0040",
         "overlayType": "mechanic"
@@ -2449,13 +1844,7 @@
       "id": "overlay.pollux.sin-mark",
       "name": "Sin Mark",
       "aliases": [],
-      "tokens": [
-        "mark",
-        "mechanic",
-        "pollux",
-        "sin",
-        "sin mark"
-      ],
+      "tokens": ["mark", "mechanic", "pollux", "sin", "sin mark"],
       "facets": {
         "ownerAwakenerId": "awakener-0041",
         "overlayType": "mechanic"
@@ -2471,13 +1860,7 @@
       "id": "overlay.ramona-timeworn.loop",
       "name": "Loop",
       "aliases": [],
-      "tokens": [
-        "loop",
-        "mechanic",
-        "ramona",
-        "ramona timeworn",
-        "timeworn"
-      ],
+      "tokens": ["loop", "mechanic", "ramona", "ramona timeworn", "timeworn"],
       "facets": {
         "ownerAwakenerId": "awakener-0020",
         "overlayType": "mechanic"
@@ -2493,13 +1876,7 @@
       "id": "overlay.ramona-timeworn.negentropy",
       "name": "Negentropy",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "negentropy",
-        "ramona",
-        "ramona timeworn",
-        "timeworn"
-      ],
+      "tokens": ["mechanic", "negentropy", "ramona", "ramona timeworn", "timeworn"],
       "facets": {
         "ownerAwakenerId": "awakener-0020",
         "overlayType": "mechanic"
@@ -2515,13 +1892,7 @@
       "id": "overlay.ryker.chaotic-legacy",
       "name": "Chaotic Legacy",
       "aliases": [],
-      "tokens": [
-        "chaotic",
-        "chaotic legacy",
-        "legacy",
-        "mechanic",
-        "ryker"
-      ],
+      "tokens": ["chaotic", "chaotic legacy", "legacy", "mechanic", "ryker"],
       "facets": {
         "ownerAwakenerId": "awakener-0043",
         "overlayType": "mechanic"
@@ -2537,13 +1908,7 @@
       "id": "overlay.vortice.vortex-reload",
       "name": "Vortex Reload",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "reload",
-        "vortex",
-        "vortex reload",
-        "vortice"
-      ],
+      "tokens": ["mechanic", "reload", "vortex", "vortex reload", "vortice"],
       "facets": {
         "ownerAwakenerId": "awakener-0055",
         "overlayType": "mechanic"
@@ -2559,11 +1924,7 @@
       "id": "overlay.wanda.dreamlure",
       "name": "Dreamlure",
       "aliases": [],
-      "tokens": [
-        "dreamlure",
-        "mechanic",
-        "wanda"
-      ],
+      "tokens": ["dreamlure", "mechanic", "wanda"],
       "facets": {
         "ownerAwakenerId": "awakener-0052",
         "overlayType": "mechanic"
@@ -2578,15 +1939,8 @@
       "kind": "overlay",
       "id": "overlay.wanda.murmurs",
       "name": "Murmurs",
-      "aliases": [
-        "Murmur"
-      ],
-      "tokens": [
-        "mechanic",
-        "murmur",
-        "murmurs",
-        "wanda"
-      ],
+      "aliases": ["Murmur"],
+      "tokens": ["mechanic", "murmur", "murmurs", "wanda"],
       "facets": {
         "ownerAwakenerId": "awakener-0052",
         "overlayType": "mechanic"
@@ -2602,11 +1956,7 @@
       "id": "overlay.xu.betroth",
       "name": "Betroth",
       "aliases": [],
-      "tokens": [
-        "betroth",
-        "mechanic",
-        "xu"
-      ],
+      "tokens": ["betroth", "mechanic", "xu"],
       "facets": {
         "ownerAwakenerId": "awakener-0054",
         "overlayType": "mechanic"
@@ -2622,11 +1972,7 @@
       "id": "overlay.xu.enthrall",
       "name": "Enthrall",
       "aliases": [],
-      "tokens": [
-        "enthrall",
-        "mechanic",
-        "xu"
-      ],
+      "tokens": ["enthrall", "mechanic", "xu"],
       "facets": {
         "ownerAwakenerId": "awakener-0054",
         "overlayType": "mechanic"
@@ -2642,11 +1988,7 @@
       "id": "overlay.xu.spellbound",
       "name": "Spellbound",
       "aliases": [],
-      "tokens": [
-        "mechanic",
-        "spellbound",
-        "xu"
-      ],
+      "tokens": ["mechanic", "spellbound", "xu"],
       "facets": {
         "ownerAwakenerId": "awakener-0054",
         "overlayType": "mechanic"

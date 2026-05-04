@@ -11,10 +11,7 @@
   "nodeKind": "group",
   "derivedFromId": "skill.hameln.laudable-masterpiece",
   "rootSkillId": "skill.hameln.laudable-masterpiece",
-  "childDerivedSkillIds": [
-    "derived.hameln.ascending-scale",
-    "derived.hameln.descending-scale"
-  ],
+  "childDerivedSkillIds": ["derived.hameln.ascending-scale", "derived.hameln.descending-scale"],
   "descriptionTemplate": "Choose: {Ascending Scale} or {Descending Scale}.",
   "descriptionArgs": {},
   "cardKeywords": [

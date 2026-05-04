@@ -13,14 +13,7 @@
   "descriptionArgs": {
     "Arg2": {
       "kind": "scaling",
-      "values": [
-        "35",
-        "38",
-        "41",
-        "44",
-        "47",
-        "50"
-      ]
+      "values": ["35", "38", "41", "44", "47", "50"]
     },
     "Arg4": {
       "kind": "fixed",
@@ -51,14 +44,7 @@
         "descriptionArgs": {
           "Arg2": {
             "kind": "scaling",
-            "values": [
-              "35",
-              "38",
-              "41",
-              "44",
-              "47",
-              "50"
-            ]
+            "values": ["35", "38", "41", "44", "47", "50"]
           },
           "Arg3": {
             "kind": "fixed",
@@ -101,14 +87,7 @@
         "descriptionArgs": {
           "Arg2": {
             "kind": "scaling",
-            "values": [
-              "35",
-              "38",
-              "41",
-              "44",
-              "47",
-              "50"
-            ]
+            "values": ["35", "38", "41", "44", "47", "50"]
           },
           "Arg3": {
             "kind": "fixed",

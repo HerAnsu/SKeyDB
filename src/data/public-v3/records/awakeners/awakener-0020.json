@@ -17,15 +17,8 @@
   "rarity": "Genesis",
   "type": "CHORUS",
   "faction": "The Unknowable",
-  "aliases": [
-    "ramona: timeworn",
-    "g-ramona"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Draw",
-    "Keyflare"
-  ],
+  "aliases": ["ramona: timeworn", "g-ramona"],
+  "searchTags": ["Arithmetica", "Draw", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 32,

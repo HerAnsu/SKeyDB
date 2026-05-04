@@ -17,9 +17,7 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Among the Stars",
-  "aliases": [
-    "wanda"
-  ],
+  "aliases": ["wanda"],
   "searchTags": [],
   "primaryScalingBase": 30,
   "baseStatsLv1": {

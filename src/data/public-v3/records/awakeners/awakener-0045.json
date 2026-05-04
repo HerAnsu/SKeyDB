@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Outlanders",
-  "aliases": [
-    "sanga"
-  ],
-  "searchTags": [
-    "Death Resistance",
-    "Dispel",
-    "Tentacles"
-  ],
+  "aliases": ["sanga"],
+  "searchTags": ["Death Resistance", "Dispel", "Tentacles"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 34,

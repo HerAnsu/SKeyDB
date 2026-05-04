@@ -17,16 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Outlanders",
-  "aliases": [
-    "alva"
-  ],
-  "searchTags": [
-    "Death Resistance",
-    "Discard",
-    "Dispel",
-    "Draw",
-    "Strike"
-  ],
+  "aliases": ["alva"],
+  "searchTags": ["Death Resistance", "Discard", "Dispel", "Draw", "Strike"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 32,

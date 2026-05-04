@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "Outlanders",
-  "aliases": [
-    "sorel"
-  ],
-  "searchTags": [
-    "Death Resistance",
-    "Heal",
-    "Self-Harm"
-  ],
+  "aliases": ["sorel"],
+  "searchTags": ["Death Resistance", "Heal", "Self-Harm"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 45,

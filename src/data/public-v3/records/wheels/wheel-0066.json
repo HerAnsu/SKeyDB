@@ -18,12 +18,7 @@
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
-      "values": [
-        "35",
-        "40",
-        "45",
-        "50"
-      ]
+      "values": ["35", "40", "45", "50"]
     }
   },
   "lore": "A conversation with \"Him.\""

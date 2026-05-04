@@ -21,10 +21,7 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.01,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "The moment your hands clasped, you saw confusion and bewilderment in each other's eyes.\nFragmented melodies converge here, for you have long forgotten the past.\nA silent symphony is about to be composed, for you are determined to step into the future."

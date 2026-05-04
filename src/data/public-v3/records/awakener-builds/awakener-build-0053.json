@@ -13,55 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0002",
-        "covenant-0013"
-      ],
+      "recommendedCovenantIds": ["covenant-0002", "covenant-0013"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0041"
-          ],
+          "wheelIds": ["wheel-0041"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0034"
-          ],
+          "wheelIds": ["wheel-0034"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0095",
-            "wheel-0015",
-            "wheel-0016",
-            "wheel-0050",
-            "wheel-0038"
-          ],
+          "wheelIds": ["wheel-0095", "wheel-0015", "wheel-0016", "wheel-0050", "wheel-0038"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "ALIEMUS_REGEN"
-        ],
-        [
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN",
-        "ALIEMUS_REGEN"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"], ["ALIEMUS_REGEN"], ["DMG_AMP"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN", "ALIEMUS_REGEN"]
     }
   ],
   "ownerAwakenerName": "Winkle"

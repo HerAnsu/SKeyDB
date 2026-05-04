@@ -13,54 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0003",
-        "covenant-0004"
-      ],
+      "recommendedCovenantIds": ["covenant-0003", "covenant-0004"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0014"
-          ],
+          "wheelIds": ["wheel-0014"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0036"
-          ],
+          "wheelIds": ["wheel-0036"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0090"
-          ],
+          "wheelIds": ["wheel-0090"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0097",
-            "wheel-0004",
-            "wheel-0083",
-            "wheel-0096"
-          ],
+          "wheelIds": ["wheel-0097", "wheel-0004", "wheel-0083", "wheel-0096"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "CRIT_RATE"
-        ],
-        [
-          "CRIT_DMG"
-        ],
-        [
-          "ALIEMUS_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "CRIT_RATE",
-        "CRIT_DMG"
-      ]
+      "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["ALIEMUS_REGEN"]],
+      "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
     }
   ],
   "ownerAwakenerName": "Aurita"

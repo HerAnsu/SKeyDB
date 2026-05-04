@@ -21,10 +21,7 @@
       "formulaKey": "scaled",
       "baseFormula": "occultResearchDepth",
       "multiplier": 0.3,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "Year after year, the blossoms return unchanged;\nSeason after season, I long for our reunion.\n\nThis Spring Festival is so brief, so sweet, like a beautiful dream. My dear, when you stand beside your beloved, hand in hand,\ngazing upon the countless fireworks lighting the sky... pray, do not forget the devotion of this humble heart."

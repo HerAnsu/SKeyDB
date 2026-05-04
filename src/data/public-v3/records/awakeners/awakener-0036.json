@@ -17,12 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "The Fools",
-  "aliases": [
-    "nautila"
-  ],
-  "searchTags": [
-    "Dispel"
-  ],
+  "aliases": ["nautila"],
+  "searchTags": ["Dispel"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 40,

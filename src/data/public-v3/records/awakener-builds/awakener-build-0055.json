@@ -13,54 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0011",
-        "covenant-0001",
-        "covenant-0017"
-      ],
+      "recommendedCovenantIds": ["covenant-0011", "covenant-0001", "covenant-0017"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0060",
-            "wheel-0021"
-          ],
+          "wheelIds": ["wheel-0060", "wheel-0021"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0126"
-          ],
+          "wheelIds": ["wheel-0126"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0119"
-          ],
+          "wheelIds": ["wheel-0119"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "REALM_MASTERY"
-        ],
-        [
-          "CRIT_DMG"
-        ],
-        [
-          "KEYFLARE_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "REALM_MASTERY",
-        "CRIT_DMG",
-        "KEYFLARE_REGEN"
-      ]
+      "substatPriorityGroups": [["REALM_MASTERY"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+      "recommendedWheelMainstats": ["REALM_MASTERY", "CRIT_DMG", "KEYFLARE_REGEN"]
     }
   ],
   "ownerAwakenerName": "Vortice"

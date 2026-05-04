@@ -20,30 +20,15 @@
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
-      "values": [
-        "25",
-        "30",
-        "35",
-        "40"
-      ]
+      "values": ["25", "30", "35", "40"]
     },
     "StateArg2": {
       "kind": "scaling",
-      "values": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "values": ["3", "4", "5", "6"]
     },
     "StateArg3": {
       "kind": "scaling",
-      "values": [
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
+      "values": ["2", "3", "4", "5"],
       "suffix": "%"
     }
   },

@@ -17,12 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Outlanders",
-  "aliases": [
-    "agrippa"
-  ],
-  "searchTags": [
-    "Draw"
-  ],
+  "aliases": ["agrippa"],
+  "searchTags": ["Draw"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 35,

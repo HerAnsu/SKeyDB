@@ -6,19 +6,7 @@
   "build": {
     "gameDataVersion": "compiled-sha256-d2ad95aa1fdfeec4",
     "recordCount": 1433,
-    "scopes": [
-      "awakeners",
-      "wheels",
-      "relics",
-      "covenants",
-      "posses",
-      "skills",
-      "derived-skills",
-      "talents",
-      "enlightens",
-      "overlays",
-      "awakener-builds"
-    ]
+    "scopes": ["awakeners", "wheels", "relics", "covenants", "posses", "skills", "derived-skills", "talents", "enlightens", "overlays", "awakener-builds"]
   },
   "scopes": {
     "awakeners": {

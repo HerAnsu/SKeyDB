@@ -17,17 +17,8 @@
   "rarity": "Genesis",
   "type": "CHORUS",
   "faction": "Out of the Aeons",
-  "aliases": [
-    "murphy: fauxborn",
-    "g-murphy"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Divine Realm",
-    "Draw",
-    "Keyflare",
-    "Tentacles"
-  ],
+  "aliases": ["murphy: fauxborn", "g-murphy"],
+  "searchTags": ["Arithmetica", "Divine Realm", "Draw", "Keyflare", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 35,

@@ -17,15 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Outlanders",
-  "aliases": [
-    "celeste"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Dispel",
-    "Heal",
-    "Tentacles"
-  ],
+  "aliases": ["celeste"],
+  "searchTags": ["Arithmetica", "Dispel", "Heal", "Tentacles"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 21,

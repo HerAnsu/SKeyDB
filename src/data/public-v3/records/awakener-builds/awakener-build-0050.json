@@ -13,49 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0002",
-        "covenant-0013"
-      ],
+      "recommendedCovenantIds": ["covenant-0002", "covenant-0013"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0050"
-          ],
+          "wheelIds": ["wheel-0050"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0034"
-          ],
+          "wheelIds": ["wheel-0034"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0084"
-          ],
+          "wheelIds": ["wheel-0084"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0107",
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0107", "wheel-0078"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "ALIEMUS_REGEN"
-        ],
-        [
-          "KEYFLARE_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "ALIEMUS_REGEN",
-        "KEYFLARE_REGEN"
-      ]
+      "substatPriorityGroups": [["ALIEMUS_REGEN"], ["KEYFLARE_REGEN"]],
+      "recommendedWheelMainstats": ["ALIEMUS_REGEN", "KEYFLARE_REGEN"]
     }
   ],
   "ownerAwakenerName": "Tulu"

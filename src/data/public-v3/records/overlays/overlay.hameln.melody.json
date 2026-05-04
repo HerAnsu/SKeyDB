@@ -13,9 +13,6 @@
   "descriptionTemplate": "Collective term for Hameln's {Melody} effects: {Rondino} and {Crescendo}.",
   "descriptionArgs": {},
   "nodeKind": "group",
-  "childOverlayIds": [
-    "overlay.hameln.rondino",
-    "overlay.hameln.crescendo"
-  ],
+  "childOverlayIds": ["overlay.hameln.rondino", "overlay.hameln.crescendo"],
   "ownerAwakenerName": "Hameln"
 }

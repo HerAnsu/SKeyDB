@@ -13,14 +13,7 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": [
-        "10",
-        "12",
-        "14",
-        "16",
-        "18",
-        "20"
-      ],
+      "values": ["10", "12", "14", "16", "18", "20"],
       "stat": "DEF",
       "suffix": "%",
       "substatBonus": {
@@ -31,14 +24,7 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": [
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10"
-      ]
+      "values": ["5", "6", "7", "8", "9", "10"]
     }
   },
   "cardKeywords": [],

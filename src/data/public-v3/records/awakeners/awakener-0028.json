@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Hybrid",
-  "aliases": [
-    "leigh"
-  ],
-  "searchTags": [
-    "Dispel",
-    "Heal",
-    "Self-Harm"
-  ],
+  "aliases": ["leigh"],
+  "searchTags": ["Dispel", "Heal", "Self-Harm"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 19,

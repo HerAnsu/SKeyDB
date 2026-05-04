@@ -20,12 +20,7 @@
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
-      "values": [
-        "30",
-        "40",
-        "50",
-        "60"
-      ],
+      "values": ["30", "40", "50", "60"],
       "suffix": "%"
     }
   },

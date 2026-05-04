@@ -21,10 +21,7 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.04,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "The full moon has risen to the zenith, and the King of the Ghouls salutes you.\nTonight, we drink in hatred from the skulls of our enemies.\nTonight, we measure eternity with the ribs of our lovers."

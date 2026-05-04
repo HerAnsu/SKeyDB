@@ -17,14 +17,8 @@
   "rarity": "SR",
   "type": "CHORUS",
   "faction": "Among the Stars",
-  "aliases": [
-    "doll"
-  ],
-  "searchTags": [
-    "Discard",
-    "Dispel",
-    "Heal"
-  ],
+  "aliases": ["doll"],
+  "searchTags": ["Discard", "Dispel", "Heal"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 24,

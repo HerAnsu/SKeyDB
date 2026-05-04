@@ -13,14 +13,7 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": [
-        "45",
-        "54",
-        "63",
-        "72",
-        "81",
-        "90"
-      ],
+      "values": ["45", "54", "63", "72", "81", "90"],
       "stat": "ATK",
       "suffix": "%"
     },
@@ -54,14 +47,7 @@
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
-            "values": [
-              "45",
-              "54",
-              "63",
-              "72",
-              "81",
-              "90"
-            ],
+            "values": ["45", "54", "63", "72", "81", "90"],
             "stat": "ATK",
             "suffix": "%"
           },

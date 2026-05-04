@@ -17,15 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Among the Stars",
-  "aliases": [
-    "winkle"
-  ],
-  "searchTags": [
-    "Discard",
-    "Dispel",
-    "Draw",
-    "Keyflare"
-  ],
+  "aliases": ["winkle"],
+  "searchTags": ["Discard", "Dispel", "Draw", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 30,

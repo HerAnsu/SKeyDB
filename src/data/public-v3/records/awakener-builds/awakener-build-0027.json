@@ -9,107 +9,53 @@
   },
   "awakenerId": "awakener-0027",
   "primaryBuildId": "dps",
-  "recommendedPosseIds": [
-    "posse-0038"
-  ],
+  "recommendedPosseIds": ["posse-0038"],
   "builds": [
     {
       "id": "dps",
       "label": "DPS",
-      "recommendedCovenantIds": [
-        "covenant-0014",
-        "covenant-0004"
-      ],
+      "recommendedCovenantIds": ["covenant-0014", "covenant-0004"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0055"
-          ],
+          "wheelIds": ["wheel-0055"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0028"
-          ],
+          "wheelIds": ["wheel-0028"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0083"
-          ],
+          "wheelIds": ["wheel-0083"],
           "tier": "BIS_SR"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "CRIT_RATE"
-        ],
-        [
-          "CRIT_DMG"
-        ],
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "CRIT_RATE",
-        "CRIT_DMG"
-      ]
+      "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+      "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
     },
     {
       "id": "tank",
       "label": "Tank",
-      "recommendedCovenantIds": [
-        "covenant-0018",
-        "covenant-0009"
-      ],
+      "recommendedCovenantIds": ["covenant-0018", "covenant-0009"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0025"
-          ],
+          "wheelIds": ["wheel-0025"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0055"
-          ],
+          "wheelIds": ["wheel-0055"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0091"
-          ],
+          "wheelIds": ["wheel-0091"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0035"
-          ],
+          "wheelIds": ["wheel-0035"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "CRIT_RATE"
-        ],
-        [
-          "CRIT_DMG"
-        ],
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "CRIT_RATE",
-        "CRIT_DMG"
-      ]
+      "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+      "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
     }
   ],
   "ownerAwakenerName": "Kathigu-Ra"

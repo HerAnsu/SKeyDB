@@ -53,16 +53,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "T",
-      "aliases": [
-        "24",
-        "twenty-four"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Hand Limit",
-        "Keyflare",
-        "Tentacles"
-      ]
+      "aliases": ["24", "twenty-four"],
+      "searchTags": ["Arithmetica", "Hand Limit", "Keyflare", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -113,12 +105,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "S",
-      "aliases": [
-        "agrippa"
-      ],
-      "searchTags": [
-        "Draw"
-      ]
+      "aliases": ["agrippa"],
+      "searchTags": ["Draw"]
     },
     {
       "kind": "awakener",
@@ -169,14 +157,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "J",
-      "aliases": [
-        "aigis"
-      ],
-      "searchTags": [
-        "Draw",
-        "Keyflare",
-        "Stun"
-      ]
+      "aliases": ["aigis"],
+      "searchTags": ["Draw", "Keyflare", "Stun"]
     },
     {
       "kind": "awakener",
@@ -227,16 +209,8 @@
         "DeathResistance": 5.6
       },
       "lineupToken": "G",
-      "aliases": [
-        "alva"
-      ],
-      "searchTags": [
-        "Death Resistance",
-        "Discard",
-        "Dispel",
-        "Draw",
-        "Strike"
-      ]
+      "aliases": ["alva"],
+      "searchTags": ["Death Resistance", "Discard", "Dispel", "Draw", "Strike"]
     },
     {
       "kind": "awakener",
@@ -287,13 +261,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "o",
-      "aliases": [
-        "aurita"
-      ],
-      "searchTags": [
-        "Discard",
-        "Draw"
-      ]
+      "aliases": ["aurita"],
+      "searchTags": ["Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -344,14 +313,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "M",
-      "aliases": [
-        "caecus"
-      ],
-      "searchTags": [
-        "Dispel",
-        "Heal",
-        "Tentacles"
-      ]
+      "aliases": ["caecus"],
+      "searchTags": ["Dispel", "Heal", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -402,14 +365,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "n",
-      "aliases": [
-        "casiah"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Discard",
-        "Draw"
-      ]
+      "aliases": ["casiah"],
+      "searchTags": ["Arithmetica", "Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -460,12 +417,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "7",
-      "aliases": [
-        "castor"
-      ],
-      "searchTags": [
-        "Draw"
-      ]
+      "aliases": ["castor"],
+      "searchTags": ["Draw"]
     },
     {
       "kind": "awakener",
@@ -516,15 +469,8 @@
         "DeathResistance": 2.8
       },
       "lineupToken": "h",
-      "aliases": [
-        "celeste"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Dispel",
-        "Heal",
-        "Tentacles"
-      ]
+      "aliases": ["celeste"],
+      "searchTags": ["Arithmetica", "Dispel", "Heal", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -575,13 +521,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "9",
-      "aliases": [
-        "clementine"
-      ],
-      "searchTags": [
-        "Dispel",
-        "Keyflare"
-      ]
+      "aliases": ["clementine"],
+      "searchTags": ["Dispel", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -632,15 +573,8 @@
         "DeathResistance": 5.6
       },
       "lineupToken": "6",
-      "aliases": [
-        "corposant"
-      ],
-      "searchTags": [
-        "Death Resistance",
-        "Discard",
-        "Draw",
-        "Tentacles"
-      ]
+      "aliases": ["corposant"],
+      "searchTags": ["Death Resistance", "Discard", "Draw", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -691,14 +625,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "I",
-      "aliases": [
-        "daffodil"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Draw",
-        "Keyflare"
-      ]
+      "aliases": ["daffodil"],
+      "searchTags": ["Arithmetica", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -749,14 +677,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "l",
-      "aliases": [
-        "doll"
-      ],
-      "searchTags": [
-        "Discard",
-        "Dispel",
-        "Heal"
-      ]
+      "aliases": ["doll"],
+      "searchTags": ["Discard", "Dispel", "Heal"]
     },
     {
       "kind": "awakener",
@@ -807,12 +729,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "xi",
-      "aliases": [
-        "doresain"
-      ],
-      "searchTags": [
-        "Self-Harm"
-      ]
+      "aliases": ["doresain"],
+      "searchTags": ["Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -863,13 +781,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "V",
-      "aliases": [
-        "erica"
-      ],
-      "searchTags": [
-        "Dispel",
-        "Keyflare"
-      ]
+      "aliases": ["erica"],
+      "searchTags": ["Dispel", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -920,14 +833,8 @@
         "DeathResistance": 5.6
       },
       "lineupToken": "s",
-      "aliases": [
-        "faint"
-      ],
-      "searchTags": [
-        "Death Resistance",
-        "Dispel",
-        "Heal"
-      ]
+      "aliases": ["faint"],
+      "searchTags": ["Death Resistance", "Dispel", "Heal"]
     },
     {
       "kind": "awakener",
@@ -978,16 +885,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "q",
-      "aliases": [
-        "faros"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Dispel",
-        "Draw",
-        "Hand Limit",
-        "Tentacles"
-      ]
+      "aliases": ["faros"],
+      "searchTags": ["Arithmetica", "Dispel", "Draw", "Hand Limit", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -1038,17 +937,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "U",
-      "aliases": [
-        "doll: inferno",
-        "g-doll"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Draw",
-        "Heal",
-        "Max HP DMG",
-        "Self-Harm"
-      ]
+      "aliases": ["doll: inferno", "g-doll"],
+      "searchTags": ["Arithmetica", "Draw", "Heal", "Max HP DMG", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -1099,17 +989,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "i",
-      "aliases": [
-        "helot: catena",
-        "g-helot"
-      ],
-      "searchTags": [
-        "Draw",
-        "Hand Limit",
-        "Heal",
-        "Self-Harm",
-        "Strike"
-      ]
+      "aliases": ["helot: catena", "g-helot"],
+      "searchTags": ["Draw", "Hand Limit", "Heal", "Self-Harm", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1160,15 +1041,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "j",
-      "aliases": [
-        "ramona: timeworn",
-        "g-ramona"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Draw",
-        "Keyflare"
-      ]
+      "aliases": ["ramona: timeworn", "g-ramona"],
+      "searchTags": ["Arithmetica", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -1219,9 +1093,7 @@
         "DeathResistance": 0
       },
       "lineupToken": "f",
-      "aliases": [
-        "goliath"
-      ],
+      "aliases": ["goliath"],
       "searchTags": []
     },
     {
@@ -1273,12 +1145,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "Y",
-      "aliases": [
-        "hameln"
-      ],
-      "searchTags": [
-        "Arithmetica"
-      ]
+      "aliases": ["hameln"],
+      "searchTags": ["Arithmetica"]
     },
     {
       "kind": "awakener",
@@ -1329,16 +1197,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "F",
-      "aliases": [
-        "helot"
-      ],
-      "searchTags": [
-        "Discard",
-        "Draw",
-        "Hand Limit",
-        "Self-Harm",
-        "Strike"
-      ]
+      "aliases": ["helot"],
+      "searchTags": ["Discard", "Draw", "Hand Limit", "Self-Harm", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1389,13 +1249,8 @@
         "DeathResistance": 5.6
       },
       "lineupToken": "B",
-      "aliases": [
-        "horla"
-      ],
-      "searchTags": [
-        "Death Resistance",
-        "Heal"
-      ]
+      "aliases": ["horla"],
+      "searchTags": ["Death Resistance", "Heal"]
     },
     {
       "kind": "awakener",
@@ -1446,12 +1301,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "L",
-      "aliases": [
-        "jenkins"
-      ],
-      "searchTags": [
-        "Draw"
-      ]
+      "aliases": ["jenkins"],
+      "searchTags": ["Draw"]
     },
     {
       "kind": "awakener",
@@ -1502,16 +1353,8 @@
         "DeathResistance": 2.8
       },
       "lineupToken": "m",
-      "aliases": [
-        "karen"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Dispel",
-        "Draw",
-        "Heal",
-        "Keyflare"
-      ]
+      "aliases": ["karen"],
+      "searchTags": ["Arithmetica", "Dispel", "Draw", "Heal", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -1562,15 +1405,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "1",
-      "aliases": [
-        "kathigu-ra",
-        "kathigura"
-      ],
-      "searchTags": [
-        "Discard",
-        "Dispel",
-        "Draw"
-      ]
+      "aliases": ["kathigu-ra", "kathigura"],
+      "searchTags": ["Discard", "Dispel", "Draw"]
     },
     {
       "kind": "awakener",
@@ -1621,14 +1457,8 @@
         "DeathResistance": 2.8
       },
       "lineupToken": "P",
-      "aliases": [
-        "leigh"
-      ],
-      "searchTags": [
-        "Dispel",
-        "Heal",
-        "Self-Harm"
-      ]
+      "aliases": ["leigh"],
+      "searchTags": ["Dispel", "Heal", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -1679,14 +1509,8 @@
         "DeathResistance": 2.8
       },
       "lineupToken": "w",
-      "aliases": [
-        "lily"
-      ],
-      "searchTags": [
-        "Death Resistance",
-        "Heal",
-        "Strike"
-      ]
+      "aliases": ["lily"],
+      "searchTags": ["Death Resistance", "Heal", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1737,13 +1561,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "d",
-      "aliases": [
-        "liz"
-      ],
-      "searchTags": [
-        "Discard",
-        "Draw"
-      ]
+      "aliases": ["liz"],
+      "searchTags": ["Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -1794,14 +1613,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "k",
-      "aliases": [
-        "lotan"
-      ],
-      "searchTags": [
-        "Dispel",
-        "Max HP DMG",
-        "Strike"
-      ]
+      "aliases": ["lotan"],
+      "searchTags": ["Dispel", "Max HP DMG", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1852,15 +1665,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "A",
-      "aliases": [
-        "miryam"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Draw",
-        "Heal",
-        "Tentacles"
-      ]
+      "aliases": ["miryam"],
+      "searchTags": ["Arithmetica", "Draw", "Heal", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -1911,14 +1717,8 @@
         "DeathResistance": 5.6
       },
       "lineupToken": "xg",
-      "aliases": [
-        "mouchette"
-      ],
-      "searchTags": [
-        "Death Resistance",
-        "Strike",
-        "Stun"
-      ]
+      "aliases": ["mouchette"],
+      "searchTags": ["Death Resistance", "Strike", "Stun"]
     },
     {
       "kind": "awakener",
@@ -1969,14 +1769,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "r",
-      "aliases": [
-        "murphy"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Keyflare",
-        "Tentacles"
-      ]
+      "aliases": ["murphy"],
+      "searchTags": ["Arithmetica", "Keyflare", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -2027,17 +1821,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "H",
-      "aliases": [
-        "murphy: fauxborn",
-        "g-murphy"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Divine Realm",
-        "Draw",
-        "Keyflare",
-        "Tentacles"
-      ]
+      "aliases": ["murphy: fauxborn", "g-murphy"],
+      "searchTags": ["Arithmetica", "Divine Realm", "Draw", "Keyflare", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -2088,12 +1873,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "g",
-      "aliases": [
-        "nautila"
-      ],
-      "searchTags": [
-        "Dispel"
-      ]
+      "aliases": ["nautila"],
+      "searchTags": ["Dispel"]
     },
     {
       "kind": "awakener",
@@ -2144,9 +1925,7 @@
         "DeathResistance": 0
       },
       "lineupToken": "v",
-      "aliases": [
-        "nymphaea"
-      ],
+      "aliases": ["nymphaea"],
       "searchTags": []
     },
     {
@@ -2198,12 +1977,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "D",
-      "aliases": [
-        "ogier"
-      ],
-      "searchTags": [
-        "Dispel"
-      ]
+      "aliases": ["ogier"],
+      "searchTags": ["Dispel"]
     },
     {
       "kind": "awakener",
@@ -2254,9 +2029,7 @@
         "DeathResistance": 0
       },
       "lineupToken": "b",
-      "aliases": [
-        "pandia"
-      ],
+      "aliases": ["pandia"],
       "searchTags": []
     },
     {
@@ -2308,13 +2081,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "0",
-      "aliases": [
-        "pickman"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Draw"
-      ]
+      "aliases": ["pickman"],
+      "searchTags": ["Arithmetica", "Draw"]
     },
     {
       "kind": "awakener",
@@ -2365,13 +2133,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "3",
-      "aliases": [
-        "pollux"
-      ],
-      "searchTags": [
-        "Discard",
-        "Draw"
-      ]
+      "aliases": ["pollux"],
+      "searchTags": ["Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -2422,15 +2185,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "N",
-      "aliases": [
-        "ramona"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Discard",
-        "Draw",
-        "Keyflare"
-      ]
+      "aliases": ["ramona"],
+      "searchTags": ["Arithmetica", "Discard", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -2481,14 +2237,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "W",
-      "aliases": [
-        "ryker"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Draw",
-        "Keyflare"
-      ]
+      "aliases": ["ryker"],
+      "searchTags": ["Arithmetica", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -2539,13 +2289,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "R",
-      "aliases": [
-        "salvador"
-      ],
-      "searchTags": [
-        "Heal",
-        "Self-Harm"
-      ]
+      "aliases": ["salvador"],
+      "searchTags": ["Heal", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -2596,14 +2341,8 @@
         "DeathResistance": 5.6
       },
       "lineupToken": "K",
-      "aliases": [
-        "sanga"
-      ],
-      "searchTags": [
-        "Death Resistance",
-        "Dispel",
-        "Tentacles"
-      ]
+      "aliases": ["sanga"],
+      "searchTags": ["Death Resistance", "Dispel", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -2654,14 +2393,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "C",
-      "aliases": [
-        "sorel"
-      ],
-      "searchTags": [
-        "Death Resistance",
-        "Heal",
-        "Self-Harm"
-      ]
+      "aliases": ["sorel"],
+      "searchTags": ["Death Resistance", "Heal", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -2712,16 +2445,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "X",
-      "aliases": [
-        "tawil"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Discard",
-        "Draw",
-        "Keyflare",
-        "Max HP DMG"
-      ]
+      "aliases": ["tawil"],
+      "searchTags": ["Arithmetica", "Discard", "Draw", "Keyflare", "Max HP DMG"]
     },
     {
       "kind": "awakener",
@@ -2772,13 +2497,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "O",
-      "aliases": [
-        "thais"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Keyflare"
-      ]
+      "aliases": ["thais"],
+      "searchTags": ["Arithmetica", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -2829,15 +2549,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "p",
-      "aliases": [
-        "tinct"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Dispel",
-        "Draw",
-        "Strike"
-      ]
+      "aliases": ["tinct"],
+      "searchTags": ["Arithmetica", "Dispel", "Draw", "Strike"]
     },
     {
       "kind": "awakener",
@@ -2888,14 +2601,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "e",
-      "aliases": [
-        "tulu"
-      ],
-      "searchTags": [
-        "Dispel",
-        "Divine Realm",
-        "Tentacles"
-      ]
+      "aliases": ["tulu"],
+      "searchTags": ["Dispel", "Divine Realm", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -2946,12 +2653,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "Q",
-      "aliases": [
-        "uvhash"
-      ],
-      "searchTags": [
-        "Self-Harm"
-      ]
+      "aliases": ["uvhash"],
+      "searchTags": ["Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -3002,9 +2705,7 @@
         "DeathResistance": 0
       },
       "lineupToken": "E",
-      "aliases": [
-        "wanda"
-      ],
+      "aliases": ["wanda"],
       "searchTags": []
     },
     {
@@ -3056,15 +2757,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "u",
-      "aliases": [
-        "winkle"
-      ],
-      "searchTags": [
-        "Discard",
-        "Dispel",
-        "Draw",
-        "Keyflare"
-      ]
+      "aliases": ["winkle"],
+      "searchTags": ["Discard", "Dispel", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -3115,13 +2809,8 @@
         "DeathResistance": 2.8
       },
       "lineupToken": "xk",
-      "aliases": [
-        "xu"
-      ],
-      "searchTags": [
-        "Arithmetica",
-        "Max HP DMG"
-      ]
+      "aliases": ["xu"],
+      "searchTags": ["Arithmetica", "Max HP DMG"]
     },
     {
       "kind": "awakener",
@@ -3172,14 +2861,8 @@
         "DeathResistance": 0
       },
       "lineupToken": "xo",
-      "aliases": [
-        "vortice"
-      ],
-      "searchTags": [
-        "Dispel",
-        "Divine Realm",
-        "Tentacles"
-      ]
+      "aliases": ["vortice"],
+      "searchTags": ["Dispel", "Divine Realm", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -3230,13 +2913,8 @@
         "DeathResistance": 2.8
       },
       "lineupToken": "4",
-      "aliases": [
-        "arachne"
-      ],
-      "searchTags": [
-        "Spider",
-        "Divine Realm"
-      ]
+      "aliases": ["arachne"],
+      "searchTags": ["Spider", "Divine Realm"]
     }
   ]
 }

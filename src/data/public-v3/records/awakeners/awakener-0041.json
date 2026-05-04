@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "Hybrid",
-  "aliases": [
-    "pollux"
-  ],
-  "searchTags": [
-    "Discard",
-    "Draw"
-  ],
+  "aliases": ["pollux"],
+  "searchTags": ["Discard", "Draw"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 49,

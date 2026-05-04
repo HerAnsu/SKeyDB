@@ -7,14 +7,7 @@
       "id": "relic-0001",
       "name": "Dimensional Image: \"24\"",
       "aliases": [],
-      "tokens": [
-        "24",
-        "chaos",
-        "dimensional",
-        "dimensional image 24",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["24", "chaos", "dimensional", "dimensional image 24", "image", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -31,14 +24,7 @@
       "id": "relic-0002",
       "name": "Dimensional Image: Agrippa",
       "aliases": [],
-      "tokens": [
-        "agrippa",
-        "caro",
-        "dimensional",
-        "dimensional image agrippa",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["agrippa", "caro", "dimensional", "dimensional image agrippa", "image", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -55,14 +41,7 @@
       "id": "relic-0003",
       "name": "Dimensional Image: Aigis",
       "aliases": [],
-      "tokens": [
-        "aigis",
-        "caro",
-        "dimensional",
-        "dimensional image aigis",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["aigis", "caro", "dimensional", "dimensional image aigis", "image", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -79,14 +58,7 @@
       "id": "relic-0004",
       "name": "Dimensional Image: Alva",
       "aliases": [],
-      "tokens": [
-        "alva",
-        "chaos",
-        "dimensional",
-        "dimensional image alva",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["alva", "chaos", "dimensional", "dimensional image alva", "image", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -103,14 +75,7 @@
       "id": "relic-0005",
       "name": "Dimensional Image: Aurita",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "aurita",
-        "dimensional",
-        "dimensional image aurita",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["aequor", "aurita", "dimensional", "dimensional image aurita", "image", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -127,14 +92,7 @@
       "id": "relic-0006",
       "name": "Dimensional Image: Caecus",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "caecus",
-        "dimensional",
-        "dimensional image caecus",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["aequor", "caecus", "dimensional", "dimensional image caecus", "image", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -151,14 +109,7 @@
       "id": "relic-0007",
       "name": "Dimensional Image: Casiah",
       "aliases": [],
-      "tokens": [
-        "casiah",
-        "dimensional",
-        "dimensional image casiah",
-        "image",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["casiah", "dimensional", "dimensional image casiah", "image", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -175,14 +126,7 @@
       "id": "relic-0008",
       "name": "Dimensional Image: Castor",
       "aliases": [],
-      "tokens": [
-        "castor",
-        "dimensional",
-        "dimensional image castor",
-        "image",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["castor", "dimensional", "dimensional image castor", "image", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -199,14 +143,7 @@
       "id": "relic-0009",
       "name": "Dimensional Image: Celeste",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "celeste",
-        "dimensional",
-        "dimensional image celeste",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["aequor", "celeste", "dimensional", "dimensional image celeste", "image", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -223,14 +160,7 @@
       "id": "relic-0010",
       "name": "Dimensional Image: Clementine",
       "aliases": [],
-      "tokens": [
-        "clementine",
-        "dimensional",
-        "dimensional image clementine",
-        "image",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["clementine", "dimensional", "dimensional image clementine", "image", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -247,14 +177,7 @@
       "id": "relic-0011",
       "name": "Dimensional Image: Corposant",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "corposant",
-        "dimensional",
-        "dimensional image corposant",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["aequor", "corposant", "dimensional", "dimensional image corposant", "image", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -271,14 +194,7 @@
       "id": "relic-0012",
       "name": "Dimensional Image: Daffodil",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "dimensional",
-        "dimensional image daffodil",
-        "image",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["daffodil", "dimensional", "dimensional image daffodil", "image", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -295,14 +211,7 @@
       "id": "relic-0013",
       "name": "Dimensional Image: Doll",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image doll",
-        "doll",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image doll", "doll", "image", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -319,14 +228,7 @@
       "id": "relic-0014",
       "name": "Dimensional Image: Doresain",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image doresain",
-        "doresain",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image doresain", "doresain", "image", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -343,14 +245,7 @@
       "id": "relic-0015",
       "name": "Dimensional Image: Erica",
       "aliases": [],
-      "tokens": [
-        "dimensional",
-        "dimensional image erica",
-        "erica",
-        "image",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["dimensional", "dimensional image erica", "erica", "image", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -367,14 +262,7 @@
       "id": "relic-0016",
       "name": "Dimensional Image: Faint",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image faint",
-        "faint",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image faint", "faint", "image", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -391,14 +279,7 @@
       "id": "relic-0017",
       "name": "Dimensional Image: Faros",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "dimensional",
-        "dimensional image faros",
-        "faros",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["aequor", "dimensional", "dimensional image faros", "faros", "image", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -415,16 +296,7 @@
       "id": "relic-0018",
       "name": "Dimensional Image: Doll: Inferno",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image doll inferno",
-        "doll",
-        "doll inferno",
-        "image",
-        "inferno",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image doll inferno", "doll", "doll inferno", "image", "inferno", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -441,16 +313,7 @@
       "id": "relic-0019",
       "name": "Dimensional Image: Helot: Catena",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "catena",
-        "dimensional",
-        "dimensional image helot catena",
-        "helot",
-        "helot catena",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["caro", "catena", "dimensional", "dimensional image helot catena", "helot", "helot catena", "image", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -467,16 +330,7 @@
       "id": "relic-0020",
       "name": "Dimensional Image: Ramona: Timeworn",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image ramona timeworn",
-        "image",
-        "ramona",
-        "ramona timeworn",
-        "ssr",
-        "timeworn"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image ramona timeworn", "image", "ramona", "ramona timeworn", "ssr", "timeworn"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -493,14 +347,7 @@
       "id": "relic-0021",
       "name": "Dimensional Image: Goliath",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "dimensional",
-        "dimensional image goliath",
-        "goliath",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["aequor", "dimensional", "dimensional image goliath", "goliath", "image", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -517,14 +364,7 @@
       "id": "relic-0022",
       "name": "Dimensional Image: Hameln",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image hameln",
-        "hameln",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image hameln", "hameln", "image", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -541,14 +381,7 @@
       "id": "relic-0023",
       "name": "Dimensional Image: Helot",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image helot",
-        "helot",
-        "image",
-        "ssr"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image helot", "helot", "image", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -565,14 +398,7 @@
       "id": "relic-0024",
       "name": "Dimensional Image: Horla",
       "aliases": [],
-      "tokens": [
-        "dimensional",
-        "dimensional image horla",
-        "horla",
-        "image",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["dimensional", "dimensional image horla", "horla", "image", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -589,14 +415,7 @@
       "id": "relic-0025",
       "name": "Dimensional Image: Jenkin",
       "aliases": [],
-      "tokens": [
-        "dimensional",
-        "dimensional image jenkin",
-        "image",
-        "jenkin",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["dimensional", "dimensional image jenkin", "image", "jenkin", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -613,14 +432,7 @@
       "id": "relic-0026",
       "name": "Dimensional Image: Karen",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image karen",
-        "image",
-        "karen",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image karen", "image", "karen", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -637,16 +449,7 @@
       "id": "relic-0027",
       "name": "Dimensional Image: Kathigu-Ra",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image kathigu ra",
-        "image",
-        "kathigu",
-        "kathigu ra",
-        "ra",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image kathigu ra", "image", "kathigu", "kathigu ra", "ra", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -663,14 +466,7 @@
       "id": "relic-0028",
       "name": "Dimensional Image: Leigh",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image leigh",
-        "image",
-        "leigh",
-        "ssr"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image leigh", "image", "leigh", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -687,14 +483,7 @@
       "id": "relic-0029",
       "name": "Dimensional Image: Lily",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image lily",
-        "image",
-        "lily",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image lily", "image", "lily", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -711,14 +500,7 @@
       "id": "relic-0030",
       "name": "Dimensional Image: Liz",
       "aliases": [],
-      "tokens": [
-        "dimensional",
-        "dimensional image liz",
-        "image",
-        "liz",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["dimensional", "dimensional image liz", "image", "liz", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -735,14 +517,7 @@
       "id": "relic-0031",
       "name": "Dimensional Image: Lotan",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image lotan",
-        "image",
-        "lotan",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image lotan", "image", "lotan", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -759,14 +534,7 @@
       "id": "relic-0032",
       "name": "Dimensional Image: Miryam",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "dimensional",
-        "dimensional image miryam",
-        "image",
-        "miryam",
-        "ssr"
-      ],
+      "tokens": ["aequor", "dimensional", "dimensional image miryam", "image", "miryam", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -783,14 +551,7 @@
       "id": "relic-0033",
       "name": "Dimensional Image: Mouchette",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image mouchette",
-        "image",
-        "mouchette",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image mouchette", "image", "mouchette", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -807,14 +568,7 @@
       "id": "relic-0034",
       "name": "Dimensional Image: Murphy",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "dimensional",
-        "dimensional image murphy",
-        "image",
-        "murphy",
-        "ssr"
-      ],
+      "tokens": ["aequor", "dimensional", "dimensional image murphy", "image", "murphy", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -831,16 +585,7 @@
       "id": "relic-0035",
       "name": "Dimensional Image: Murphy: Fauxborn",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "dimensional",
-        "dimensional image murphy fauxborn",
-        "fauxborn",
-        "image",
-        "murphy",
-        "murphy fauxborn",
-        "ssr"
-      ],
+      "tokens": ["aequor", "dimensional", "dimensional image murphy fauxborn", "fauxborn", "image", "murphy", "murphy fauxborn", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -857,14 +602,7 @@
       "id": "relic-0036",
       "name": "Dimensional Image: Nautila",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image nautila",
-        "image",
-        "nautila",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image nautila", "image", "nautila", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -881,14 +619,7 @@
       "id": "relic-0037",
       "name": "Dimensional Image: Nymphaea",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image nymphaea",
-        "image",
-        "nymphaea",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image nymphaea", "image", "nymphaea", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -905,14 +636,7 @@
       "id": "relic-0038",
       "name": "Dimensional Image: Ogier",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image ogier",
-        "image",
-        "ogier",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image ogier", "image", "ogier", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -929,14 +653,7 @@
       "id": "relic-0039",
       "name": "Dimensional Image: Pandia",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image pandia",
-        "image",
-        "pandia",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image pandia", "image", "pandia", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -953,14 +670,7 @@
       "id": "relic-0040",
       "name": "Dimensional Image: Pickman",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image pickman",
-        "image",
-        "pickman",
-        "ssr"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image pickman", "image", "pickman", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -977,14 +687,7 @@
       "id": "relic-0041",
       "name": "Dimensional Image: Pollux",
       "aliases": [],
-      "tokens": [
-        "dimensional",
-        "dimensional image pollux",
-        "image",
-        "pollux",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["dimensional", "dimensional image pollux", "image", "pollux", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -1001,14 +704,7 @@
       "id": "relic-0042",
       "name": "Dimensional Image: Ramona",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image ramona",
-        "image",
-        "ramona",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image ramona", "image", "ramona", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -1025,14 +721,7 @@
       "id": "relic-0043",
       "name": "Dimensional Image: Ryker",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image ryker",
-        "image",
-        "ryker",
-        "ssr"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image ryker", "image", "ryker", "ssr"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -1049,14 +738,7 @@
       "id": "relic-0044",
       "name": "Dimensional Image: Salvador",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image salvador",
-        "image",
-        "salvador",
-        "ssr"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image salvador", "image", "salvador", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -1073,14 +755,7 @@
       "id": "relic-0045",
       "name": "Dimensional Image: Sanga",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "dimensional",
-        "dimensional image sanga",
-        "image",
-        "sanga",
-        "ssr"
-      ],
+      "tokens": ["aequor", "dimensional", "dimensional image sanga", "image", "sanga", "ssr"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -1097,14 +772,7 @@
       "id": "relic-0046",
       "name": "Dimensional Image: Sorel",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image sorel",
-        "image",
-        "sorel",
-        "ssr"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image sorel", "image", "sorel", "ssr"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -1121,14 +789,7 @@
       "id": "relic-0047",
       "name": "Dimensional Image: Tawil",
       "aliases": [],
-      "tokens": [
-        "chaos",
-        "dimensional",
-        "dimensional image tawil",
-        "image",
-        "ssr",
-        "tawil"
-      ],
+      "tokens": ["chaos", "dimensional", "dimensional image tawil", "image", "ssr", "tawil"],
       "facets": {
         "realm": "CHAOS",
         "rarity": "SSR",
@@ -1145,14 +806,7 @@
       "id": "relic-0048",
       "name": "Dimensional Image: Thais",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image thais",
-        "image",
-        "ssr",
-        "thais"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image thais", "image", "ssr", "thais"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -1169,14 +823,7 @@
       "id": "relic-0049",
       "name": "Dimensional Image: Tinct",
       "aliases": [],
-      "tokens": [
-        "dimensional",
-        "dimensional image tinct",
-        "image",
-        "ssr",
-        "tinct",
-        "ultra"
-      ],
+      "tokens": ["dimensional", "dimensional image tinct", "image", "ssr", "tinct", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -1193,14 +840,7 @@
       "id": "relic-0050",
       "name": "Dimensional Image: Tulu",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "dimensional",
-        "dimensional image tulu",
-        "image",
-        "ssr",
-        "tulu"
-      ],
+      "tokens": ["aequor", "dimensional", "dimensional image tulu", "image", "ssr", "tulu"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -1217,14 +857,7 @@
       "id": "relic-0051",
       "name": "Dimensional Image: Uvhash",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image uvhash",
-        "image",
-        "ssr",
-        "uvhash"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image uvhash", "image", "ssr", "uvhash"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -1241,14 +874,7 @@
       "id": "relic-0052",
       "name": "Dimensional Image: Wanda",
       "aliases": [],
-      "tokens": [
-        "dimensional",
-        "dimensional image wanda",
-        "image",
-        "ssr",
-        "ultra",
-        "wanda"
-      ],
+      "tokens": ["dimensional", "dimensional image wanda", "image", "ssr", "ultra", "wanda"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -1265,14 +891,7 @@
       "id": "relic-0053",
       "name": "Dimensional Image: Winkle",
       "aliases": [],
-      "tokens": [
-        "dimensional",
-        "dimensional image winkle",
-        "image",
-        "ssr",
-        "ultra",
-        "winkle"
-      ],
+      "tokens": ["dimensional", "dimensional image winkle", "image", "ssr", "ultra", "winkle"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",
@@ -1289,14 +908,7 @@
       "id": "relic-0054",
       "name": "Dimensional Image: Xu",
       "aliases": [],
-      "tokens": [
-        "caro",
-        "dimensional",
-        "dimensional image xu",
-        "image",
-        "ssr",
-        "xu"
-      ],
+      "tokens": ["caro", "dimensional", "dimensional image xu", "image", "ssr", "xu"],
       "facets": {
         "realm": "CARO",
         "rarity": "SSR",
@@ -1313,14 +925,7 @@
       "id": "relic-0055",
       "name": "Dimensional Image: Vortice",
       "aliases": [],
-      "tokens": [
-        "aequor",
-        "dimensional",
-        "dimensional image vortice",
-        "image",
-        "ssr",
-        "vortice"
-      ],
+      "tokens": ["aequor", "dimensional", "dimensional image vortice", "image", "ssr", "vortice"],
       "facets": {
         "realm": "AEQUOR",
         "rarity": "SSR",
@@ -1337,14 +942,7 @@
       "id": "relic-0056",
       "name": "Dimensional Image: Arachne",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "dimensional",
-        "dimensional image arachne",
-        "image",
-        "ssr",
-        "ultra"
-      ],
+      "tokens": ["arachne", "dimensional", "dimensional image arachne", "image", "ssr", "ultra"],
       "facets": {
         "realm": "ULTRA",
         "rarity": "SSR",

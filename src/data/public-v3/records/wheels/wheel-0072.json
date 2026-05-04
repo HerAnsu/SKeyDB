@@ -18,12 +18,7 @@
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
-      "values": [
-        "13",
-        "17",
-        "21",
-        "25"
-      ]
+      "values": ["13", "17", "21", "25"]
     }
   },
   "lore": "My soul is a tomb."

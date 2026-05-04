@@ -17,12 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "Outlanders",
-  "aliases": [
-    "uvhash"
-  ],
-  "searchTags": [
-    "Self-Harm"
-  ],
+  "aliases": ["uvhash"],
+  "searchTags": ["Self-Harm"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 38,

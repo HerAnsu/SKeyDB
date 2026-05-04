@@ -18,12 +18,7 @@
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
-      "values": [
-        "15",
-        "20",
-        "25",
-        "30"
-      ],
+      "values": ["15", "20", "25", "30"],
       "suffix": "%"
     }
   },

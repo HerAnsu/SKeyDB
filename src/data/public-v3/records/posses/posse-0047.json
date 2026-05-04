@@ -21,10 +21,7 @@
       "formulaKey": "scaled",
       "baseFormula": "esotericResearchDepth",
       "multiplier": 0.041,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "The secluded manor holds too many secrets—of power, of obsession, of desire.\nOf the glimpse the evil deity casts upon the mortal world, brimming with love both \"delighted\" and \"twisted.\""

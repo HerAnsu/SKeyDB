@@ -586,235 +586,69 @@
   },
   "groups": {
     "wheelsByAwakener": {
-      "awakener-0001": [
-        "wheel-0020"
-      ],
-      "awakener-0002": [
-        "wheel-0007"
-      ],
-      "awakener-0003": [
-        "wheel-0003"
-      ],
-      "awakener-0004": [
-        "wheel-0025"
-      ],
-      "awakener-0005": [
-        "wheel-0054"
-      ],
-      "awakener-0006": [
-        "wheel-0053"
-      ],
-      "awakener-0007": [
-        "wheel-0038"
-      ],
-      "awakener-0008": [
-        "wheel-0039"
-      ],
-      "awakener-0009": [
-        "wheel-0058"
-      ],
-      "awakener-0010": [
-        "wheel-0041"
-      ],
-      "awakener-0011": [
-        "wheel-0059"
-      ],
-      "awakener-0012": [
-        "wheel-0031"
-      ],
-      "awakener-0013": [
-        "wheel-0015"
-      ],
-      "awakener-0014": [
-        "wheel-0011"
-      ],
-      "awakener-0015": [
-        "wheel-0037"
-      ],
-      "awakener-0016": [
-        "wheel-0010"
-      ],
-      "awakener-0017": [
-        "wheel-0052"
-      ],
-      "awakener-0018": [
-        "wheel-0016"
-      ],
-      "awakener-0019": [
-        "wheel-0006"
-      ],
-      "awakener-0021": [
-        "wheel-0055"
-      ],
-      "awakener-0022": [
-        "wheel-0040"
-      ],
-      "awakener-0023": [
-        "wheel-0005"
-      ],
-      "awakener-0024": [
-        "wheel-0035"
-      ],
-      "awakener-0025": [
-        "wheel-0036"
-      ],
-      "awakener-0026": [
-        "wheel-0026"
-      ],
-      "awakener-0027": [
-        "wheel-0028"
-      ],
-      "awakener-0028": [
-        "wheel-0009"
-      ],
-      "awakener-0029": [
-        "wheel-0024"
-      ],
-      "awakener-0030": [
-        "wheel-0030"
-      ],
-      "awakener-0031": [
-        "wheel-0018"
-      ],
-      "awakener-0032": [
-        "wheel-0056"
-      ],
-      "awakener-0033": [
-        "wheel-0029"
-      ],
-      "awakener-0034": [
-        "wheel-0051"
-      ],
-      "awakener-0035": [
-        "wheel-0131"
-      ],
-      "awakener-0036": [
-        "wheel-0021"
-      ],
-      "awakener-0037": [
-        "wheel-0022"
-      ],
-      "awakener-0038": [
-        "wheel-0017"
-      ],
-      "awakener-0039": [
-        "wheel-0023"
-      ],
-      "awakener-0040": [
-        "wheel-0012"
-      ],
-      "awakener-0041": [
-        "wheel-0042"
-      ],
-      "awakener-0042": [
-        "wheel-0014"
-      ],
-      "awakener-0043": [
-        "wheel-0019"
-      ],
-      "awakener-0044": [
-        "wheel-0002"
-      ],
-      "awakener-0045": [
-        "wheel-0057"
-      ],
-      "awakener-0046": [
-        "wheel-0004"
-      ],
-      "awakener-0047": [
-        "wheel-0027"
-      ],
-      "awakener-0048": [
-        "wheel-0001"
-      ],
-      "awakener-0049": [
-        "wheel-0032"
-      ],
-      "awakener-0050": [
-        "wheel-0050"
-      ],
-      "awakener-0051": [
-        "wheel-0008"
-      ],
-      "awakener-0052": [
-        "wheel-0033"
-      ],
-      "awakener-0053": [
-        "wheel-0034"
-      ],
-      "awakener-0054": [
-        "wheel-0013"
-      ],
-      "awakener-0055": [
-        "wheel-0060"
-      ],
-      "awakener-0056": [
-        "wheel-0128"
-      ]
+      "awakener-0001": ["wheel-0020"],
+      "awakener-0002": ["wheel-0007"],
+      "awakener-0003": ["wheel-0003"],
+      "awakener-0004": ["wheel-0025"],
+      "awakener-0005": ["wheel-0054"],
+      "awakener-0006": ["wheel-0053"],
+      "awakener-0007": ["wheel-0038"],
+      "awakener-0008": ["wheel-0039"],
+      "awakener-0009": ["wheel-0058"],
+      "awakener-0010": ["wheel-0041"],
+      "awakener-0011": ["wheel-0059"],
+      "awakener-0012": ["wheel-0031"],
+      "awakener-0013": ["wheel-0015"],
+      "awakener-0014": ["wheel-0011"],
+      "awakener-0015": ["wheel-0037"],
+      "awakener-0016": ["wheel-0010"],
+      "awakener-0017": ["wheel-0052"],
+      "awakener-0018": ["wheel-0016"],
+      "awakener-0019": ["wheel-0006"],
+      "awakener-0021": ["wheel-0055"],
+      "awakener-0022": ["wheel-0040"],
+      "awakener-0023": ["wheel-0005"],
+      "awakener-0024": ["wheel-0035"],
+      "awakener-0025": ["wheel-0036"],
+      "awakener-0026": ["wheel-0026"],
+      "awakener-0027": ["wheel-0028"],
+      "awakener-0028": ["wheel-0009"],
+      "awakener-0029": ["wheel-0024"],
+      "awakener-0030": ["wheel-0030"],
+      "awakener-0031": ["wheel-0018"],
+      "awakener-0032": ["wheel-0056"],
+      "awakener-0033": ["wheel-0029"],
+      "awakener-0034": ["wheel-0051"],
+      "awakener-0035": ["wheel-0131"],
+      "awakener-0036": ["wheel-0021"],
+      "awakener-0037": ["wheel-0022"],
+      "awakener-0038": ["wheel-0017"],
+      "awakener-0039": ["wheel-0023"],
+      "awakener-0040": ["wheel-0012"],
+      "awakener-0041": ["wheel-0042"],
+      "awakener-0042": ["wheel-0014"],
+      "awakener-0043": ["wheel-0019"],
+      "awakener-0044": ["wheel-0002"],
+      "awakener-0045": ["wheel-0057"],
+      "awakener-0046": ["wheel-0004"],
+      "awakener-0047": ["wheel-0027"],
+      "awakener-0048": ["wheel-0001"],
+      "awakener-0049": ["wheel-0032"],
+      "awakener-0050": ["wheel-0050"],
+      "awakener-0051": ["wheel-0008"],
+      "awakener-0052": ["wheel-0033"],
+      "awakener-0053": ["wheel-0034"],
+      "awakener-0054": ["wheel-0013"],
+      "awakener-0055": ["wheel-0060"],
+      "awakener-0056": ["wheel-0128"]
     },
     "possesByRealm": {
-      "AEQUOR": [
-        "posse-0010",
-        "posse-0014",
-        "posse-0021",
-        "posse-0025",
-        "posse-0031",
-        "posse-0035",
-        "posse-0044",
-        "posse-0049"
-      ],
-      "CARO": [
-        "posse-0011",
-        "posse-0015",
-        "posse-0019",
-        "posse-0020",
-        "posse-0023",
-        "posse-0024",
-        "posse-0037",
-        "posse-0040",
-        "posse-0042",
-        "posse-0047"
-      ],
-      "CHAOS": [
-        "posse-0009",
-        "posse-0016",
-        "posse-0018",
-        "posse-0022",
-        "posse-0027",
-        "posse-0028",
-        "posse-0029",
-        "posse-0030",
-        "posse-0038",
-        "posse-0046"
-      ],
-      "FADED_LEGACY": [
-        "posse-0001",
-        "posse-0002",
-        "posse-0003",
-        "posse-0004",
-        "posse-0005",
-        "posse-0006",
-        "posse-0008"
-      ],
-      "OTHER": [
-        "posse-0007",
-        "posse-0033",
-        "posse-0041",
-        "posse-0043",
-        "posse-0045",
-        "posse-0048"
-      ],
-      "ULTRA": [
-        "posse-0012",
-        "posse-0013",
-        "posse-0017",
-        "posse-0026",
-        "posse-0032",
-        "posse-0034",
-        "posse-0036",
-        "posse-0039",
-        "posse-0050"
-      ]
+      "AEQUOR": ["posse-0010", "posse-0014", "posse-0021", "posse-0025", "posse-0031", "posse-0035", "posse-0044", "posse-0049"],
+      "CARO": ["posse-0011", "posse-0015", "posse-0019", "posse-0020", "posse-0023", "posse-0024", "posse-0037", "posse-0040", "posse-0042", "posse-0047"],
+      "CHAOS": ["posse-0009", "posse-0016", "posse-0018", "posse-0022", "posse-0027", "posse-0028", "posse-0029", "posse-0030", "posse-0038", "posse-0046"],
+      "FADED_LEGACY": ["posse-0001", "posse-0002", "posse-0003", "posse-0004", "posse-0005", "posse-0006", "posse-0008"],
+      "OTHER": ["posse-0007", "posse-0033", "posse-0041", "posse-0043", "posse-0045", "posse-0048"],
+      "ULTRA": ["posse-0012", "posse-0013", "posse-0017", "posse-0026", "posse-0032", "posse-0034", "posse-0036", "posse-0039", "posse-0050"]
     },
     "covenantsBySetBonus": {
       "3": [
@@ -865,174 +699,62 @@
       ]
     },
     "awakenerBuildsByAwakener": {
-      "awakener-0001": [
-        "awakener-build-0001"
-      ],
-      "awakener-0002": [
-        "awakener-build-0002"
-      ],
-      "awakener-0003": [
-        "awakener-build-0003"
-      ],
-      "awakener-0004": [
-        "awakener-build-0004"
-      ],
-      "awakener-0005": [
-        "awakener-build-0005"
-      ],
-      "awakener-0006": [
-        "awakener-build-0006"
-      ],
-      "awakener-0007": [
-        "awakener-build-0007"
-      ],
-      "awakener-0008": [
-        "awakener-build-0008"
-      ],
-      "awakener-0009": [
-        "awakener-build-0009"
-      ],
-      "awakener-0010": [
-        "awakener-build-0010"
-      ],
-      "awakener-0011": [
-        "awakener-build-0011"
-      ],
-      "awakener-0012": [
-        "awakener-build-0012"
-      ],
-      "awakener-0013": [
-        "awakener-build-0013"
-      ],
-      "awakener-0014": [
-        "awakener-build-0014"
-      ],
-      "awakener-0015": [
-        "awakener-build-0015"
-      ],
-      "awakener-0016": [
-        "awakener-build-0016"
-      ],
-      "awakener-0017": [
-        "awakener-build-0017"
-      ],
-      "awakener-0018": [
-        "awakener-build-0018"
-      ],
-      "awakener-0019": [
-        "awakener-build-0019"
-      ],
-      "awakener-0020": [
-        "awakener-build-0020"
-      ],
-      "awakener-0021": [
-        "awakener-build-0021"
-      ],
-      "awakener-0022": [
-        "awakener-build-0022"
-      ],
-      "awakener-0023": [
-        "awakener-build-0023"
-      ],
-      "awakener-0024": [
-        "awakener-build-0024"
-      ],
-      "awakener-0025": [
-        "awakener-build-0025"
-      ],
-      "awakener-0026": [
-        "awakener-build-0026"
-      ],
-      "awakener-0027": [
-        "awakener-build-0027"
-      ],
-      "awakener-0028": [
-        "awakener-build-0028"
-      ],
-      "awakener-0029": [
-        "awakener-build-0029"
-      ],
-      "awakener-0030": [
-        "awakener-build-0030"
-      ],
-      "awakener-0031": [
-        "awakener-build-0031"
-      ],
-      "awakener-0032": [
-        "awakener-build-0032"
-      ],
-      "awakener-0033": [
-        "awakener-build-0033"
-      ],
-      "awakener-0034": [
-        "awakener-build-0034"
-      ],
-      "awakener-0035": [
-        "awakener-build-0035"
-      ],
-      "awakener-0036": [
-        "awakener-build-0036"
-      ],
-      "awakener-0037": [
-        "awakener-build-0037"
-      ],
-      "awakener-0038": [
-        "awakener-build-0038"
-      ],
-      "awakener-0039": [
-        "awakener-build-0039"
-      ],
-      "awakener-0040": [
-        "awakener-build-0040"
-      ],
-      "awakener-0041": [
-        "awakener-build-0041"
-      ],
-      "awakener-0042": [
-        "awakener-build-0042"
-      ],
-      "awakener-0043": [
-        "awakener-build-0043"
-      ],
-      "awakener-0044": [
-        "awakener-build-0044"
-      ],
-      "awakener-0045": [
-        "awakener-build-0045"
-      ],
-      "awakener-0046": [
-        "awakener-build-0046"
-      ],
-      "awakener-0047": [
-        "awakener-build-0047"
-      ],
-      "awakener-0048": [
-        "awakener-build-0048"
-      ],
-      "awakener-0049": [
-        "awakener-build-0049"
-      ],
-      "awakener-0050": [
-        "awakener-build-0050"
-      ],
-      "awakener-0051": [
-        "awakener-build-0051"
-      ],
-      "awakener-0052": [
-        "awakener-build-0052"
-      ],
-      "awakener-0053": [
-        "awakener-build-0053"
-      ],
-      "awakener-0054": [
-        "awakener-build-0054"
-      ],
-      "awakener-0055": [
-        "awakener-build-0055"
-      ],
-      "awakener-0056": [
-        "awakener-build-0056"
-      ]
+      "awakener-0001": ["awakener-build-0001"],
+      "awakener-0002": ["awakener-build-0002"],
+      "awakener-0003": ["awakener-build-0003"],
+      "awakener-0004": ["awakener-build-0004"],
+      "awakener-0005": ["awakener-build-0005"],
+      "awakener-0006": ["awakener-build-0006"],
+      "awakener-0007": ["awakener-build-0007"],
+      "awakener-0008": ["awakener-build-0008"],
+      "awakener-0009": ["awakener-build-0009"],
+      "awakener-0010": ["awakener-build-0010"],
+      "awakener-0011": ["awakener-build-0011"],
+      "awakener-0012": ["awakener-build-0012"],
+      "awakener-0013": ["awakener-build-0013"],
+      "awakener-0014": ["awakener-build-0014"],
+      "awakener-0015": ["awakener-build-0015"],
+      "awakener-0016": ["awakener-build-0016"],
+      "awakener-0017": ["awakener-build-0017"],
+      "awakener-0018": ["awakener-build-0018"],
+      "awakener-0019": ["awakener-build-0019"],
+      "awakener-0020": ["awakener-build-0020"],
+      "awakener-0021": ["awakener-build-0021"],
+      "awakener-0022": ["awakener-build-0022"],
+      "awakener-0023": ["awakener-build-0023"],
+      "awakener-0024": ["awakener-build-0024"],
+      "awakener-0025": ["awakener-build-0025"],
+      "awakener-0026": ["awakener-build-0026"],
+      "awakener-0027": ["awakener-build-0027"],
+      "awakener-0028": ["awakener-build-0028"],
+      "awakener-0029": ["awakener-build-0029"],
+      "awakener-0030": ["awakener-build-0030"],
+      "awakener-0031": ["awakener-build-0031"],
+      "awakener-0032": ["awakener-build-0032"],
+      "awakener-0033": ["awakener-build-0033"],
+      "awakener-0034": ["awakener-build-0034"],
+      "awakener-0035": ["awakener-build-0035"],
+      "awakener-0036": ["awakener-build-0036"],
+      "awakener-0037": ["awakener-build-0037"],
+      "awakener-0038": ["awakener-build-0038"],
+      "awakener-0039": ["awakener-build-0039"],
+      "awakener-0040": ["awakener-build-0040"],
+      "awakener-0041": ["awakener-build-0041"],
+      "awakener-0042": ["awakener-build-0042"],
+      "awakener-0043": ["awakener-build-0043"],
+      "awakener-0044": ["awakener-build-0044"],
+      "awakener-0045": ["awakener-build-0045"],
+      "awakener-0046": ["awakener-build-0046"],
+      "awakener-0047": ["awakener-build-0047"],
+      "awakener-0048": ["awakener-build-0048"],
+      "awakener-0049": ["awakener-build-0049"],
+      "awakener-0050": ["awakener-build-0050"],
+      "awakener-0051": ["awakener-build-0051"],
+      "awakener-0052": ["awakener-build-0052"],
+      "awakener-0053": ["awakener-build-0053"],
+      "awakener-0054": ["awakener-build-0054"],
+      "awakener-0055": ["awakener-build-0055"],
+      "awakener-0056": ["awakener-build-0056"]
     }
   }
 }

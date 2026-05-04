@@ -13,27 +13,13 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": [
-        "100",
-        "120",
-        "140",
-        "160",
-        "180",
-        "200"
-      ],
+      "values": ["100", "120", "140", "160", "180", "200"],
       "stat": "DEF",
       "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
-      "values": [
-        "75",
-        "80",
-        "85",
-        "90",
-        "95",
-        "100"
-      ],
+      "values": ["75", "80", "85", "90", "95", "100"],
       "suffix": "%"
     }
   },
@@ -52,27 +38,13 @@
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
-            "values": [
-              "100",
-              "120",
-              "140",
-              "160",
-              "180",
-              "200"
-            ],
+            "values": ["100", "120", "140", "160", "180", "200"],
             "stat": "DEF",
             "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
-            "values": [
-              "75",
-              "80",
-              "85",
-              "90",
-              "95",
-              "100"
-            ],
+            "values": ["75", "80", "85", "90", "95", "100"],
             "suffix": "%",
             "substatBonus": {
               "substat": "RealmMastery",
@@ -96,27 +68,13 @@
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
-            "values": [
-              "100",
-              "120",
-              "140",
-              "160",
-              "180",
-              "200"
-            ],
+            "values": ["100", "120", "140", "160", "180", "200"],
             "stat": "DEF",
             "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
-            "values": [
-              "75",
-              "80",
-              "85",
-              "90",
-              "95",
-              "100"
-            ],
+            "values": ["75", "80", "85", "90", "95", "100"],
             "suffix": "%",
             "substatBonus": {
               "substat": "RealmMastery",

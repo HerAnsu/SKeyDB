@@ -17,12 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "Out of the Aeons",
-  "aliases": [
-    "doresain"
-  ],
-  "searchTags": [
-    "Self-Harm"
-  ],
+  "aliases": ["doresain"],
+  "searchTags": ["Self-Harm"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 52,

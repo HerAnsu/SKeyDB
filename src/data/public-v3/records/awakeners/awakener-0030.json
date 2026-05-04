@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "The Fools",
-  "aliases": [
-    "liz"
-  ],
-  "searchTags": [
-    "Discard",
-    "Draw"
-  ],
+  "aliases": ["liz"],
+  "searchTags": ["Discard", "Draw"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 29,

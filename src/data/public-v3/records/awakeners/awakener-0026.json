@@ -17,16 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Outlanders",
-  "aliases": [
-    "karen"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Dispel",
-    "Draw",
-    "Heal",
-    "Keyflare"
-  ],
+  "aliases": ["karen"],
+  "searchTags": ["Arithmetica", "Dispel", "Draw", "Heal", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 30,

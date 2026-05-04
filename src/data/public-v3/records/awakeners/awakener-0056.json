@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "The Unknowable",
-  "aliases": [
-    "arachne"
-  ],
-  "searchTags": [
-    "Spider",
-    "Divine Realm"
-  ],
+  "aliases": ["arachne"],
+  "searchTags": ["Spider", "Divine Realm"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 50,

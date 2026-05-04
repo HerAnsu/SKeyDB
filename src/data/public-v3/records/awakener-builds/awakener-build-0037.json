@@ -13,52 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0020",
-        "covenant-0013",
-        "covenant-0002"
-      ],
+      "recommendedCovenantIds": ["covenant-0020", "covenant-0013", "covenant-0002"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0016"
-          ],
+          "wheelIds": ["wheel-0016"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0022"
-          ],
+          "wheelIds": ["wheel-0022"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0104"
-          ],
+          "wheelIds": ["wheel-0104"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "DMG_AMP"
-        ],
-        [
-          "ALIEMUS_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN",
-        "DMG_AMP"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP"], ["ALIEMUS_REGEN"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP"]
     }
   ],
   "ownerAwakenerName": "Nymphaea"

@@ -13,46 +13,23 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0018",
-        "covenant-0008"
-      ],
+      "recommendedCovenantIds": ["covenant-0018", "covenant-0008"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0017"
-          ],
+          "wheelIds": ["wheel-0017"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0122"
-          ],
+          "wheelIds": ["wheel-0122"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0091"
-          ],
+          "wheelIds": ["wheel-0091"],
           "tier": "BIS_SR"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "SIGIL_YIELD"
-        ],
-        [
-          "ALIEMUS_REGEN",
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN",
-        "SIGIL_YIELD"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"], ["SIGIL_YIELD"], ["ALIEMUS_REGEN", "DMG_AMP"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN", "SIGIL_YIELD"]
     }
   ],
   "ownerAwakenerName": "Ogier"

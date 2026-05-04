@@ -17,16 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "The Fools",
-  "aliases": [
-    "helot"
-  ],
-  "searchTags": [
-    "Discard",
-    "Draw",
-    "Hand Limit",
-    "Self-Harm",
-    "Strike"
-  ],
+  "aliases": ["helot"],
+  "searchTags": ["Discard", "Draw", "Hand Limit", "Self-Harm", "Strike"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 37,

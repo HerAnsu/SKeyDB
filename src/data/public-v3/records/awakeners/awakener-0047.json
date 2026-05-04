@@ -17,16 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Gateway",
-  "aliases": [
-    "tawil"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Discard",
-    "Draw",
-    "Keyflare",
-    "Max HP DMG"
-  ],
+  "aliases": ["tawil"],
+  "searchTags": ["Arithmetica", "Discard", "Draw", "Keyflare", "Max HP DMG"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 47,

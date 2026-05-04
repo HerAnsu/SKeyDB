@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Hybrid",
-  "aliases": [
-    "murphy"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Keyflare",
-    "Tentacles"
-  ],
+  "aliases": ["murphy"],
+  "searchTags": ["Arithmetica", "Keyflare", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 45,

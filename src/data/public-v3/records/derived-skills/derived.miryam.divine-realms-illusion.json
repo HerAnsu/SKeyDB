@@ -11,11 +11,7 @@
   "nodeKind": "group",
   "derivedFromId": "derived.miryam.the-end-of-belief",
   "rootSkillId": "skill.miryam.testament-of-faith",
-  "childDerivedSkillIds": [
-    "derived.miryam.faith-of-the-divine-realm",
-    "derived.miryam.call-of-the-divine-realm",
-    "derived.miryam.divine-realms-descent"
-  ],
+  "childDerivedSkillIds": ["derived.miryam.faith-of-the-divine-realm", "derived.miryam.call-of-the-divine-realm", "derived.miryam.divine-realms-descent"],
   "descriptionTemplate": "Randomly place 1 of these cards into your hand.",
   "descriptionArgs": {},
   "cardKeywords": [],

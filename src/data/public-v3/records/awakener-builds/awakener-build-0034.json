@@ -13,52 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0013",
-        "covenant-0007"
-      ],
+      "recommendedCovenantIds": ["covenant-0013", "covenant-0007"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0051"
-          ],
+          "wheelIds": ["wheel-0051"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0014"
-          ],
+          "wheelIds": ["wheel-0014"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0104",
-            "wheel-0090",
-            "wheel-0102"
-          ],
+          "wheelIds": ["wheel-0104", "wheel-0090", "wheel-0102"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "DMG_AMP",
-          "ALIEMUS_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN",
-        "DMG_AMP",
-        "ALIEMUS_REGEN"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DMG_AMP", "ALIEMUS_REGEN"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DMG_AMP", "ALIEMUS_REGEN"]
     }
   ],
   "ownerAwakenerName": "Murphy"

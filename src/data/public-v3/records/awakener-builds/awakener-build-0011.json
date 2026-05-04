@@ -13,98 +13,52 @@
     {
       "id": "dps",
       "label": "DPS",
-      "recommendedCovenantIds": [
-        "covenant-0017",
-        "covenant-0014"
-      ],
+      "recommendedCovenantIds": ["covenant-0017", "covenant-0014"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0035"
-          ],
+          "wheelIds": ["wheel-0035"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0055"
-          ],
+          "wheelIds": ["wheel-0055"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0084"
-          ],
+          "wheelIds": ["wheel-0084"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0005"
-          ],
+          "wheelIds": ["wheel-0005"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "CRIT_RATE"
-        ],
-        [
-          "CRIT_DMG"
-        ],
-        [
-          "KEYFLARE_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "CRIT_RATE",
-        "CRIT_DMG"
-      ]
+      "substatPriorityGroups": [["CRIT_RATE"], ["CRIT_DMG"], ["KEYFLARE_REGEN"]],
+      "recommendedWheelMainstats": ["CRIT_RATE", "CRIT_DMG"]
     },
     {
       "id": "support",
       "label": "Support",
-      "recommendedCovenantIds": [
-        "covenant-0006",
-        "covenant-0008",
-        "covenant-0002"
-      ],
+      "recommendedCovenantIds": ["covenant-0006", "covenant-0008", "covenant-0002"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0035"
-          ],
+          "wheelIds": ["wheel-0035"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0005"
-          ],
+          "wheelIds": ["wheel-0005"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0084"
-          ],
+          "wheelIds": ["wheel-0084"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0057"
-          ],
+          "wheelIds": ["wheel-0057"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "DEATH_RESISTANCE"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "KEYFLARE_REGEN",
-        "DEATH_RESISTANCE"
-      ]
+      "substatPriorityGroups": [["KEYFLARE_REGEN"], ["DEATH_RESISTANCE"]],
+      "recommendedWheelMainstats": ["KEYFLARE_REGEN", "DEATH_RESISTANCE"]
     }
   ],
   "ownerAwakenerName": "Corposant"

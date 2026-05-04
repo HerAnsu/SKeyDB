@@ -7,12 +7,7 @@
       "id": "derived.arachne.guiding-strings",
       "name": "Guiding Strings",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "guiding",
-        "guiding strings",
-        "strings"
-      ],
+      "tokens": ["arachne", "guiding", "guiding strings", "strings"],
       "facets": {
         "ownerAwakenerId": "awakener-0056"
       },
@@ -27,12 +22,7 @@
       "id": "derived.arachne.infinite-threads",
       "name": "Infinite Threads",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "infinite",
-        "infinite threads",
-        "threads"
-      ],
+      "tokens": ["arachne", "infinite", "infinite threads", "threads"],
       "facets": {
         "ownerAwakenerId": "awakener-0056"
       },
@@ -47,12 +37,7 @@
       "id": "derived.castor.onyx-plume",
       "name": "Onyx Plume",
       "aliases": [],
-      "tokens": [
-        "castor",
-        "onyx",
-        "onyx plume",
-        "plume"
-      ],
+      "tokens": ["castor", "onyx", "onyx plume", "plume"],
       "facets": {
         "ownerAwakenerId": "awakener-0008"
       },
@@ -67,13 +52,7 @@
       "id": "derived.clementine.phobic-fixation",
       "name": "Conversion: Phobic Fixation",
       "aliases": [],
-      "tokens": [
-        "clementine",
-        "conversion",
-        "conversion phobic fixation",
-        "fixation",
-        "phobic"
-      ],
+      "tokens": ["clementine", "conversion", "conversion phobic fixation", "fixation", "phobic"],
       "facets": {
         "ownerAwakenerId": "awakener-0010"
       },
@@ -88,13 +67,7 @@
       "id": "derived.clementine.psychic-trauma",
       "name": "Conversion: Psychic Trauma",
       "aliases": [],
-      "tokens": [
-        "clementine",
-        "conversion",
-        "conversion psychic trauma",
-        "psychic",
-        "trauma"
-      ],
+      "tokens": ["clementine", "conversion", "conversion psychic trauma", "psychic", "trauma"],
       "facets": {
         "ownerAwakenerId": "awakener-0010"
       },
@@ -109,10 +82,7 @@
       "id": "derived.corposant.pilot",
       "name": "Pilot",
       "aliases": [],
-      "tokens": [
-        "corposant",
-        "pilot"
-      ],
+      "tokens": ["corposant", "pilot"],
       "facets": {
         "ownerAwakenerId": "awakener-0011"
       },
@@ -127,12 +97,7 @@
       "id": "derived.daffodil.thousand-mirage",
       "name": "Thousand Mirage",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "mirage",
-        "thousand",
-        "thousand mirage"
-      ],
+      "tokens": ["daffodil", "mirage", "thousand", "thousand mirage"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -147,14 +112,7 @@
       "id": "derived.daffodil.thousand-mirage-base-cards",
       "name": "Thousand Mirage: Base Cards",
       "aliases": [],
-      "tokens": [
-        "base",
-        "cards",
-        "daffodil",
-        "mirage",
-        "thousand",
-        "thousand mirage base cards"
-      ],
+      "tokens": ["base", "cards", "daffodil", "mirage", "thousand", "thousand mirage base cards"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -169,14 +127,7 @@
       "id": "derived.daffodil.thousand-mirage-counter",
       "name": "Thousand Mirage",
       "aliases": [],
-      "tokens": [
-        "counter",
-        "daffodil",
-        "mirage",
-        "thousand",
-        "thousand mirage",
-        "thousand mirage counter"
-      ],
+      "tokens": ["counter", "daffodil", "mirage", "thousand", "thousand mirage", "thousand mirage counter"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -191,14 +142,7 @@
       "id": "derived.daffodil.thousand-mirage-damage",
       "name": "Thousand Mirage",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "damage",
-        "mirage",
-        "thousand",
-        "thousand mirage",
-        "thousand mirage damage"
-      ],
+      "tokens": ["daffodil", "damage", "mirage", "thousand", "thousand mirage", "thousand mirage damage"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -213,10 +157,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-aliemus",
       "name": "Aliemus",
       "aliases": [],
-      "tokens": [
-        "aliemus",
-        "daffodil"
-      ],
+      "tokens": ["aliemus", "daffodil"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -231,10 +172,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-blessing",
       "name": "Blessing",
       "aliases": [],
-      "tokens": [
-        "blessing",
-        "daffodil"
-      ],
+      "tokens": ["blessing", "daffodil"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -249,10 +187,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-brawn",
       "name": "Brawn",
       "aliases": [],
-      "tokens": [
-        "brawn",
-        "daffodil"
-      ],
+      "tokens": ["brawn", "daffodil"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -267,10 +202,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-catalyst",
       "name": "Catalyst",
       "aliases": [],
-      "tokens": [
-        "catalyst",
-        "daffodil"
-      ],
+      "tokens": ["catalyst", "daffodil"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -285,10 +217,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-computation",
       "name": "Computation",
       "aliases": [],
-      "tokens": [
-        "computation",
-        "daffodil"
-      ],
+      "tokens": ["computation", "daffodil"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -303,12 +232,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-critical-fateweaving",
       "name": "Critical Fateweaving",
       "aliases": [],
-      "tokens": [
-        "critical",
-        "critical fateweaving",
-        "daffodil",
-        "fateweaving"
-      ],
+      "tokens": ["critical", "critical fateweaving", "daffodil", "fateweaving"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -323,12 +247,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-critical-hit",
       "name": "Critical Hit",
       "aliases": [],
-      "tokens": [
-        "critical",
-        "critical hit",
-        "daffodil",
-        "hit"
-      ],
+      "tokens": ["critical", "critical hit", "daffodil", "hit"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -343,10 +262,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-curse",
       "name": "Curse",
       "aliases": [],
-      "tokens": [
-        "curse",
-        "daffodil"
-      ],
+      "tokens": ["curse", "daffodil"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -361,12 +277,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-directed-catalysis",
       "name": "Directed Catalysis",
       "aliases": [],
-      "tokens": [
-        "catalysis",
-        "daffodil",
-        "directed",
-        "directed catalysis"
-      ],
+      "tokens": ["catalysis", "daffodil", "directed", "directed catalysis"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -381,10 +292,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-finesse",
       "name": "Finesse",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "finesse"
-      ],
+      "tokens": ["daffodil", "finesse"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -399,12 +307,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-aliemus",
       "name": "Hpr. Aliemus",
       "aliases": [],
-      "tokens": [
-        "aliemus",
-        "daffodil",
-        "hpr",
-        "hpr aliemus"
-      ],
+      "tokens": ["aliemus", "daffodil", "hpr", "hpr aliemus"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -419,12 +322,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-brawn",
       "name": "Hpr. Brawn",
       "aliases": [],
-      "tokens": [
-        "brawn",
-        "daffodil",
-        "hpr",
-        "hpr brawn"
-      ],
+      "tokens": ["brawn", "daffodil", "hpr", "hpr brawn"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -439,12 +337,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-catalysis",
       "name": "Hpr. Catalysis",
       "aliases": [],
-      "tokens": [
-        "catalysis",
-        "daffodil",
-        "hpr",
-        "hpr catalysis"
-      ],
+      "tokens": ["catalysis", "daffodil", "hpr", "hpr catalysis"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -459,12 +352,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-computation",
       "name": "Hpr. Computation",
       "aliases": [],
-      "tokens": [
-        "computation",
-        "daffodil",
-        "hpr",
-        "hpr computation"
-      ],
+      "tokens": ["computation", "daffodil", "hpr", "hpr computation"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -479,13 +367,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-directed-catalysis",
       "name": "Hpr. Directed Catalysis",
       "aliases": [],
-      "tokens": [
-        "catalysis",
-        "daffodil",
-        "directed",
-        "hpr",
-        "hpr directed catalysis"
-      ],
+      "tokens": ["catalysis", "daffodil", "directed", "hpr", "hpr directed catalysis"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -500,12 +382,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-finesse",
       "name": "Hpr. Finesse",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "finesse",
-        "hpr",
-        "hpr finesse"
-      ],
+      "tokens": ["daffodil", "finesse", "hpr", "hpr finesse"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -520,12 +397,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-insight",
       "name": "Hpr. Insight",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "hpr",
-        "hpr insight",
-        "insight"
-      ],
+      "tokens": ["daffodil", "hpr", "hpr insight", "insight"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -540,12 +412,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-keyflare",
       "name": "Hpr. Keyflare",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "hpr",
-        "hpr keyflare",
-        "keyflare"
-      ],
+      "tokens": ["daffodil", "hpr", "hpr keyflare", "keyflare"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -560,12 +427,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-vulnerable",
       "name": "Hpr. Vulnerable",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "hpr",
-        "hpr vulnerable",
-        "vulnerable"
-      ],
+      "tokens": ["daffodil", "hpr", "hpr vulnerable", "vulnerable"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -580,12 +442,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-hpr-weakness",
       "name": "Hpr. Weakness",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "hpr",
-        "hpr weakness",
-        "weakness"
-      ],
+      "tokens": ["daffodil", "hpr", "hpr weakness", "weakness"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -600,10 +457,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-insight",
       "name": "Insight",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "insight"
-      ],
+      "tokens": ["daffodil", "insight"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -618,10 +472,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-keyflare",
       "name": "Keyflare",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "keyflare"
-      ],
+      "tokens": ["daffodil", "keyflare"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -636,10 +487,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-pierce",
       "name": "Pierce",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "pierce"
-      ],
+      "tokens": ["daffodil", "pierce"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -654,13 +502,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-pierce-critical-hit",
       "name": "Pierce Critical Hit",
       "aliases": [],
-      "tokens": [
-        "critical",
-        "daffodil",
-        "hit",
-        "pierce",
-        "pierce critical hit"
-      ],
+      "tokens": ["critical", "daffodil", "hit", "pierce", "pierce critical hit"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -675,12 +517,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-precise-retrieval",
       "name": "Precise Retrieval",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "precise",
-        "precise retrieval",
-        "retrieval"
-      ],
+      "tokens": ["daffodil", "precise", "precise retrieval", "retrieval"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -695,10 +532,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-retrieve",
       "name": "Retrieve",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "retrieve"
-      ],
+      "tokens": ["daffodil", "retrieve"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -713,10 +547,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-vulnerable",
       "name": "Vulnerable",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "vulnerable"
-      ],
+      "tokens": ["daffodil", "vulnerable"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -731,10 +562,7 @@
       "id": "derived.daffodil.thousand-mirage-effect-weakness",
       "name": "Weakness",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "weakness"
-      ],
+      "tokens": ["daffodil", "weakness"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -749,14 +577,7 @@
       "id": "derived.daffodil.thousand-mirage-extra-effects",
       "name": "Thousand Mirage: Extra Effects",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "effects",
-        "extra",
-        "mirage",
-        "thousand",
-        "thousand mirage extra effects"
-      ],
+      "tokens": ["daffodil", "effects", "extra", "mirage", "thousand", "thousand mirage extra effects"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -771,14 +592,7 @@
       "id": "derived.daffodil.thousand-mirage-poison",
       "name": "Thousand Mirage",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "mirage",
-        "poison",
-        "thousand",
-        "thousand mirage",
-        "thousand mirage poison"
-      ],
+      "tokens": ["daffodil", "mirage", "poison", "thousand", "thousand mirage", "thousand mirage poison"],
       "facets": {
         "ownerAwakenerId": "awakener-0012"
       },
@@ -793,12 +607,7 @@
       "id": "derived.doll-inferno.curse",
       "name": "Curse",
       "aliases": [],
-      "tokens": [
-        "curse",
-        "doll",
-        "doll inferno",
-        "inferno"
-      ],
+      "tokens": ["curse", "doll", "doll inferno", "inferno"],
       "facets": {
         "ownerAwakenerId": "awakener-0018"
       },
@@ -813,12 +622,7 @@
       "id": "derived.doll-inferno.elation",
       "name": "Elation",
       "aliases": [],
-      "tokens": [
-        "doll",
-        "doll inferno",
-        "elation",
-        "inferno"
-      ],
+      "tokens": ["doll", "doll inferno", "elation", "inferno"],
       "facets": {
         "ownerAwakenerId": "awakener-0018"
       },
@@ -833,15 +637,7 @@
       "id": "derived.doll-inferno.fates-descent-finale",
       "name": "Fate's Descent: Finale",
       "aliases": [],
-      "tokens": [
-        "descent",
-        "doll",
-        "doll inferno",
-        "fates",
-        "fates descent finale",
-        "finale",
-        "inferno"
-      ],
+      "tokens": ["descent", "doll", "doll inferno", "fates", "fates descent finale", "finale", "inferno"],
       "facets": {
         "ownerAwakenerId": "awakener-0018"
       },
@@ -856,14 +652,7 @@
       "id": "derived.doll-inferno.illusions-end",
       "name": "Illusion's End",
       "aliases": [],
-      "tokens": [
-        "doll",
-        "doll inferno",
-        "end",
-        "illusions",
-        "illusions end",
-        "inferno"
-      ],
+      "tokens": ["doll", "doll inferno", "end", "illusions", "illusions end", "inferno"],
       "facets": {
         "ownerAwakenerId": "awakener-0018"
       },
@@ -878,15 +667,7 @@
       "id": "derived.doll-inferno.self-destruct-finale",
       "name": "Self-Destruct: Finale",
       "aliases": [],
-      "tokens": [
-        "destruct",
-        "doll",
-        "doll inferno",
-        "finale",
-        "inferno",
-        "self",
-        "self destruct finale"
-      ],
+      "tokens": ["destruct", "doll", "doll inferno", "finale", "inferno", "self", "self destruct finale"],
       "facets": {
         "ownerAwakenerId": "awakener-0018"
       },
@@ -901,12 +682,7 @@
       "id": "derived.doresain.evernights-revel",
       "name": "Evernight's Revel",
       "aliases": [],
-      "tokens": [
-        "doresain",
-        "evernights",
-        "evernights revel",
-        "revel"
-      ],
+      "tokens": ["doresain", "evernights", "evernights revel", "revel"],
       "facets": {
         "ownerAwakenerId": "awakener-0014"
       },
@@ -921,12 +697,7 @@
       "id": "derived.erica.retract-mecha",
       "name": "Retract: Mecha",
       "aliases": [],
-      "tokens": [
-        "erica",
-        "mecha",
-        "retract",
-        "retract mecha"
-      ],
+      "tokens": ["erica", "mecha", "retract", "retract mecha"],
       "facets": {
         "ownerAwakenerId": "awakener-0015"
       },
@@ -941,9 +712,7 @@
       "id": "derived.global.arouse",
       "name": "Arouse",
       "aliases": [],
-      "tokens": [
-        "arouse"
-      ],
+      "tokens": ["arouse"],
       "facets": {},
       "boosts": {
         "name": 10,
@@ -956,9 +725,7 @@
       "id": "derived.global.embryo",
       "name": "Embryo",
       "aliases": [],
-      "tokens": [
-        "embryo"
-      ],
+      "tokens": ["embryo"],
       "facets": {},
       "boosts": {
         "name": 10,
@@ -971,11 +738,7 @@
       "id": "derived.global.fleeting-beauty",
       "name": "Fleeting Beauty",
       "aliases": [],
-      "tokens": [
-        "beauty",
-        "fleeting",
-        "fleeting beauty"
-      ],
+      "tokens": ["beauty", "fleeting", "fleeting beauty"],
       "facets": {},
       "boosts": {
         "name": 10,
@@ -988,9 +751,7 @@
       "id": "derived.global.insight",
       "name": "Insight",
       "aliases": [],
-      "tokens": [
-        "insight"
-      ],
+      "tokens": ["insight"],
       "facets": {},
       "boosts": {
         "name": 10,
@@ -1003,11 +764,7 @@
       "id": "derived.global.leahs-coin",
       "name": "Leah's Coin",
       "aliases": [],
-      "tokens": [
-        "coin",
-        "leahs",
-        "leahs coin"
-      ],
+      "tokens": ["coin", "leahs", "leahs coin"],
       "facets": {},
       "boosts": {
         "name": 10,
@@ -1020,12 +777,7 @@
       "id": "derived.global.light-cone-boundary",
       "name": "Light Cone Boundary",
       "aliases": [],
-      "tokens": [
-        "boundary",
-        "cone",
-        "light",
-        "light cone boundary"
-      ],
+      "tokens": ["boundary", "cone", "light", "light cone boundary"],
       "facets": {},
       "boosts": {
         "name": 10,
@@ -1038,12 +790,7 @@
       "id": "derived.global.silver-key-gleam",
       "name": "Silver Key Gleam",
       "aliases": [],
-      "tokens": [
-        "gleam",
-        "key",
-        "silver",
-        "silver key gleam"
-      ],
+      "tokens": ["gleam", "key", "silver", "silver key gleam"],
       "facets": {},
       "boosts": {
         "name": 10,
@@ -1056,9 +803,7 @@
       "id": "derived.global.slumber",
       "name": "Slumber",
       "aliases": [],
-      "tokens": [
-        "slumber"
-      ],
+      "tokens": ["slumber"],
       "facets": {},
       "boosts": {
         "name": 10,
@@ -1071,12 +816,7 @@
       "id": "derived.goliath.blades-dominion",
       "name": "Blade's Dominion",
       "aliases": [],
-      "tokens": [
-        "blades",
-        "blades dominion",
-        "dominion",
-        "goliath"
-      ],
+      "tokens": ["blades", "blades dominion", "dominion", "goliath"],
       "facets": {
         "ownerAwakenerId": "awakener-0021"
       },
@@ -1091,10 +831,7 @@
       "id": "derived.goliath.dormancy",
       "name": "Dormancy",
       "aliases": [],
-      "tokens": [
-        "dormancy",
-        "goliath"
-      ],
+      "tokens": ["dormancy", "goliath"],
       "facets": {
         "ownerAwakenerId": "awakener-0021"
       },
@@ -1109,10 +846,7 @@
       "id": "derived.goliath.usurp",
       "name": "Usurp",
       "aliases": [],
-      "tokens": [
-        "goliath",
-        "usurp"
-      ],
+      "tokens": ["goliath", "usurp"],
       "facets": {
         "ownerAwakenerId": "awakener-0021"
       },
@@ -1127,12 +861,7 @@
       "id": "derived.hameln.ascending-scale",
       "name": "Ascending Scale",
       "aliases": [],
-      "tokens": [
-        "ascending",
-        "ascending scale",
-        "hameln",
-        "scale"
-      ],
+      "tokens": ["ascending", "ascending scale", "hameln", "scale"],
       "facets": {
         "ownerAwakenerId": "awakener-0022"
       },
@@ -1147,12 +876,7 @@
       "id": "derived.hameln.descending-scale",
       "name": "Descending Scale",
       "aliases": [],
-      "tokens": [
-        "descending",
-        "descending scale",
-        "hameln",
-        "scale"
-      ],
+      "tokens": ["descending", "descending scale", "hameln", "scale"],
       "facets": {
         "ownerAwakenerId": "awakener-0022"
       },
@@ -1167,13 +891,7 @@
       "id": "derived.hameln.symphony-of-harmony",
       "name": "Symphony of Harmony",
       "aliases": [],
-      "tokens": [
-        "hameln",
-        "harmony",
-        "of",
-        "symphony",
-        "symphony of harmony"
-      ],
+      "tokens": ["hameln", "harmony", "of", "symphony", "symphony of harmony"],
       "facets": {
         "ownerAwakenerId": "awakener-0022"
       },
@@ -1188,14 +906,7 @@
       "id": "derived.helot-catena.bloodthirsty-flail",
       "name": "Bloodthirsty Flail",
       "aliases": [],
-      "tokens": [
-        "bloodthirsty",
-        "bloodthirsty flail",
-        "catena",
-        "flail",
-        "helot",
-        "helot catena"
-      ],
+      "tokens": ["bloodthirsty", "bloodthirsty flail", "catena", "flail", "helot", "helot catena"],
       "facets": {
         "ownerAwakenerId": "awakener-0019"
       },
@@ -1210,15 +921,7 @@
       "id": "derived.helot-catena.irregular-form-chains",
       "name": "Irregular Form: Chains",
       "aliases": [],
-      "tokens": [
-        "catena",
-        "chains",
-        "form",
-        "helot",
-        "helot catena",
-        "irregular",
-        "irregular form chains"
-      ],
+      "tokens": ["catena", "chains", "form", "helot", "helot catena", "irregular", "irregular form chains"],
       "facets": {
         "ownerAwakenerId": "awakener-0019"
       },
@@ -1233,12 +936,7 @@
       "id": "derived.helot.irregular-form",
       "name": "Irregular Form",
       "aliases": [],
-      "tokens": [
-        "form",
-        "helot",
-        "irregular",
-        "irregular form"
-      ],
+      "tokens": ["form", "helot", "irregular", "irregular form"],
       "facets": {
         "ownerAwakenerId": "awakener-0023"
       },
@@ -1253,12 +951,7 @@
       "id": "derived.jenkins.swarm-impact",
       "name": "Swarm Impact",
       "aliases": [],
-      "tokens": [
-        "impact",
-        "jenkin",
-        "swarm",
-        "swarm impact"
-      ],
+      "tokens": ["impact", "jenkin", "swarm", "swarm impact"],
       "facets": {
         "ownerAwakenerId": "awakener-0025"
       },
@@ -1273,12 +966,7 @@
       "id": "derived.jenkins.ultimate-assemble",
       "name": "Ultimate Assemble!",
       "aliases": [],
-      "tokens": [
-        "assemble",
-        "jenkin",
-        "ultimate",
-        "ultimate assemble"
-      ],
+      "tokens": ["assemble", "jenkin", "ultimate", "ultimate assemble"],
       "facets": {
         "ownerAwakenerId": "awakener-0025"
       },
@@ -1293,12 +981,7 @@
       "id": "derived.karen.marvelous-cuisine",
       "name": "Marvelous Cuisine",
       "aliases": [],
-      "tokens": [
-        "cuisine",
-        "karen",
-        "marvelous",
-        "marvelous cuisine"
-      ],
+      "tokens": ["cuisine", "karen", "marvelous", "marvelous cuisine"],
       "facets": {
         "ownerAwakenerId": "awakener-0026"
       },
@@ -1313,12 +996,7 @@
       "id": "derived.kathigu-ra.hyperflare",
       "name": "Hyperflare",
       "aliases": [],
-      "tokens": [
-        "hyperflare",
-        "kathigu",
-        "kathigu ra",
-        "ra"
-      ],
+      "tokens": ["hyperflare", "kathigu", "kathigu ra", "ra"],
       "facets": {
         "ownerAwakenerId": "awakener-0027"
       },
@@ -1333,12 +1011,7 @@
       "id": "derived.liz.corrupted-flames",
       "name": "Corrupted Flames",
       "aliases": [],
-      "tokens": [
-        "corrupted",
-        "corrupted flames",
-        "flames",
-        "liz"
-      ],
+      "tokens": ["corrupted", "corrupted flames", "flames", "liz"],
       "facets": {
         "ownerAwakenerId": "awakener-0030"
       },
@@ -1353,12 +1026,7 @@
       "id": "derived.liz.deadly-flames",
       "name": "Deadly Flames",
       "aliases": [],
-      "tokens": [
-        "deadly",
-        "deadly flames",
-        "flames",
-        "liz"
-      ],
+      "tokens": ["deadly", "deadly flames", "flames", "liz"],
       "facets": {
         "ownerAwakenerId": "awakener-0030"
       },
@@ -1373,15 +1041,7 @@
       "id": "derived.miryam.call-of-the-divine-realm",
       "name": "Call of the Divine Realm",
       "aliases": [],
-      "tokens": [
-        "call",
-        "call of the divine realm",
-        "divine",
-        "miryam",
-        "of",
-        "realm",
-        "the"
-      ],
+      "tokens": ["call", "call of the divine realm", "divine", "miryam", "of", "realm", "the"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1396,13 +1056,7 @@
       "id": "derived.miryam.divine-realms-descent",
       "name": "Divine Realm's Descent",
       "aliases": [],
-      "tokens": [
-        "descent",
-        "divine",
-        "divine realms descent",
-        "miryam",
-        "realms"
-      ],
+      "tokens": ["descent", "divine", "divine realms descent", "miryam", "realms"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1417,13 +1071,7 @@
       "id": "derived.miryam.divine-realms-illusion",
       "name": "Divine Realm's Illusion",
       "aliases": [],
-      "tokens": [
-        "divine",
-        "divine realms illusion",
-        "illusion",
-        "miryam",
-        "realms"
-      ],
+      "tokens": ["divine", "divine realms illusion", "illusion", "miryam", "realms"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1438,15 +1086,7 @@
       "id": "derived.miryam.faith-of-the-divine-realm",
       "name": "Faith of the Divine Realm",
       "aliases": [],
-      "tokens": [
-        "divine",
-        "faith",
-        "faith of the divine realm",
-        "miryam",
-        "of",
-        "realm",
-        "the"
-      ],
+      "tokens": ["divine", "faith", "faith of the divine realm", "miryam", "of", "realm", "the"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1461,12 +1101,7 @@
       "id": "derived.miryam.heretical-faith",
       "name": "Heretical Faith",
       "aliases": [],
-      "tokens": [
-        "faith",
-        "heretical",
-        "heretical faith",
-        "miryam"
-      ],
+      "tokens": ["faith", "heretical", "heretical faith", "miryam"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1481,12 +1116,7 @@
       "id": "derived.miryam.iron-resolve",
       "name": "Iron Resolve",
       "aliases": [],
-      "tokens": [
-        "iron",
-        "iron resolve",
-        "miryam",
-        "resolve"
-      ],
+      "tokens": ["iron", "iron resolve", "miryam", "resolve"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1501,10 +1131,7 @@
       "id": "derived.miryam.obsession",
       "name": "Obsession",
       "aliases": [],
-      "tokens": [
-        "miryam",
-        "obsession"
-      ],
+      "tokens": ["miryam", "obsession"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1519,12 +1146,7 @@
       "id": "derived.miryam.revelate-devotion",
       "name": "Revelate Devotion",
       "aliases": [],
-      "tokens": [
-        "devotion",
-        "miryam",
-        "revelate",
-        "revelate devotion"
-      ],
+      "tokens": ["devotion", "miryam", "revelate", "revelate devotion"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1539,10 +1161,7 @@
       "id": "derived.miryam.sacrament",
       "name": "Sacrament",
       "aliases": [],
-      "tokens": [
-        "miryam",
-        "sacrament"
-      ],
+      "tokens": ["miryam", "sacrament"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1557,14 +1176,7 @@
       "id": "derived.miryam.the-end-of-belief",
       "name": "The End of Belief",
       "aliases": [],
-      "tokens": [
-        "belief",
-        "end",
-        "miryam",
-        "of",
-        "the",
-        "the end of belief"
-      ],
+      "tokens": ["belief", "end", "miryam", "of", "the", "the end of belief"],
       "facets": {
         "ownerAwakenerId": "awakener-0032"
       },
@@ -1579,12 +1191,7 @@
       "id": "derived.mouchette.dramatic-encounter",
       "name": "Dramatic Encounter",
       "aliases": [],
-      "tokens": [
-        "dramatic",
-        "dramatic encounter",
-        "encounter",
-        "mouchette"
-      ],
+      "tokens": ["dramatic", "dramatic encounter", "encounter", "mouchette"],
       "facets": {
         "ownerAwakenerId": "awakener-0033"
       },
@@ -1599,10 +1206,7 @@
       "id": "derived.pickman.inspiration",
       "name": "Inspiration!",
       "aliases": [],
-      "tokens": [
-        "inspiration",
-        "pickman"
-      ],
+      "tokens": ["inspiration", "pickman"],
       "facets": {
         "ownerAwakenerId": "awakener-0040"
       },
@@ -1617,12 +1221,7 @@
       "id": "derived.pollux.sacred-heart",
       "name": "Sacred Heart",
       "aliases": [],
-      "tokens": [
-        "heart",
-        "pollux",
-        "sacred",
-        "sacred heart"
-      ],
+      "tokens": ["heart", "pollux", "sacred", "sacred heart"],
       "facets": {
         "ownerAwakenerId": "awakener-0041"
       },
@@ -1637,15 +1236,7 @@
       "id": "derived.ramona-timeworn.ode-to-tomorrow",
       "name": "Ode to Tomorrow",
       "aliases": [],
-      "tokens": [
-        "ode",
-        "ode to tomorrow",
-        "ramona",
-        "ramona timeworn",
-        "timeworn",
-        "to",
-        "tomorrow"
-      ],
+      "tokens": ["ode", "ode to tomorrow", "ramona", "ramona timeworn", "timeworn", "to", "tomorrow"],
       "facets": {
         "ownerAwakenerId": "awakener-0020"
       },
@@ -1660,14 +1251,7 @@
       "id": "derived.ramona-timeworn.rebirth-tribunal",
       "name": "Rebirth Tribunal",
       "aliases": [],
-      "tokens": [
-        "ramona",
-        "ramona timeworn",
-        "rebirth",
-        "rebirth tribunal",
-        "timeworn",
-        "tribunal"
-      ],
+      "tokens": ["ramona", "ramona timeworn", "rebirth", "rebirth tribunal", "timeworn", "tribunal"],
       "facets": {
         "ownerAwakenerId": "awakener-0020"
       },
@@ -1682,12 +1266,7 @@
       "id": "derived.ryker.octahedron-dice",
       "name": "Octahedron Dice",
       "aliases": [],
-      "tokens": [
-        "dice",
-        "octahedron",
-        "octahedron dice",
-        "ryker"
-      ],
+      "tokens": ["dice", "octahedron", "octahedron dice", "ryker"],
       "facets": {
         "ownerAwakenerId": "awakener-0043"
       },
@@ -1702,13 +1281,7 @@
       "id": "derived.ryker.shining-octahedron-dice",
       "name": "Shining Octahedron Dice",
       "aliases": [],
-      "tokens": [
-        "dice",
-        "octahedron",
-        "ryker",
-        "shining",
-        "shining octahedron dice"
-      ],
+      "tokens": ["dice", "octahedron", "ryker", "shining", "shining octahedron dice"],
       "facets": {
         "ownerAwakenerId": "awakener-0043"
       },
@@ -1723,10 +1296,7 @@
       "id": "derived.salvador.dedication",
       "name": "Dedication",
       "aliases": [],
-      "tokens": [
-        "dedication",
-        "salvador"
-      ],
+      "tokens": ["dedication", "salvador"],
       "facets": {
         "ownerAwakenerId": "awakener-0044"
       },
@@ -1741,10 +1311,7 @@
       "id": "derived.salvador.liberation",
       "name": "Liberation",
       "aliases": [],
-      "tokens": [
-        "liberation",
-        "salvador"
-      ],
+      "tokens": ["liberation", "salvador"],
       "facets": {
         "ownerAwakenerId": "awakener-0044"
       },
@@ -1759,10 +1326,7 @@
       "id": "derived.salvador.redemption",
       "name": "Redemption",
       "aliases": [],
-      "tokens": [
-        "redemption",
-        "salvador"
-      ],
+      "tokens": ["redemption", "salvador"],
       "facets": {
         "ownerAwakenerId": "awakener-0044"
       },
@@ -1777,13 +1341,7 @@
       "id": "derived.salvador.sanctuary-of-mercy",
       "name": "Sanctuary of Mercy",
       "aliases": [],
-      "tokens": [
-        "mercy",
-        "of",
-        "salvador",
-        "sanctuary",
-        "sanctuary of mercy"
-      ],
+      "tokens": ["mercy", "of", "salvador", "sanctuary", "sanctuary of mercy"],
       "facets": {
         "ownerAwakenerId": "awakener-0044"
       },
@@ -1798,14 +1356,7 @@
       "id": "derived.tawil.echoes-of-the-past",
       "name": "Echoes of the Past",
       "aliases": [],
-      "tokens": [
-        "echoes",
-        "echoes of the past",
-        "of",
-        "past",
-        "tawil",
-        "the"
-      ],
+      "tokens": ["echoes", "echoes of the past", "of", "past", "tawil", "the"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1820,12 +1371,7 @@
       "id": "derived.tawil.emissarys-verdict",
       "name": "Emissary's Verdict",
       "aliases": [],
-      "tokens": [
-        "emissarys",
-        "emissarys verdict",
-        "tawil",
-        "verdict"
-      ],
+      "tokens": ["emissarys", "emissarys verdict", "tawil", "verdict"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1840,12 +1386,7 @@
       "id": "derived.tawil.four-wings",
       "name": "Four Wings",
       "aliases": [],
-      "tokens": [
-        "four",
-        "four wings",
-        "tawil",
-        "wings"
-      ],
+      "tokens": ["four", "four wings", "tawil", "wings"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1860,12 +1401,7 @@
       "id": "derived.tawil.honey-mead",
       "name": "Honey Mead",
       "aliases": [],
-      "tokens": [
-        "honey",
-        "honey mead",
-        "mead",
-        "tawil"
-      ],
+      "tokens": ["honey", "honey mead", "mead", "tawil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1880,13 +1416,7 @@
       "id": "derived.tawil.innocent-return-gift",
       "name": "Innocent Return Gift",
       "aliases": [],
-      "tokens": [
-        "gift",
-        "innocent",
-        "innocent return gift",
-        "return",
-        "tawil"
-      ],
+      "tokens": ["gift", "innocent", "innocent return gift", "return", "tawil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1901,10 +1431,7 @@
       "id": "derived.tawil.memories",
       "name": "Memories",
       "aliases": [],
-      "tokens": [
-        "memories",
-        "tawil"
-      ],
+      "tokens": ["memories", "tawil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1919,12 +1446,7 @@
       "id": "derived.tawil.mutated-heart",
       "name": "Mutated Heart",
       "aliases": [],
-      "tokens": [
-        "heart",
-        "mutated",
-        "mutated heart",
-        "tawil"
-      ],
+      "tokens": ["heart", "mutated", "mutated heart", "tawil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1939,12 +1461,7 @@
       "id": "derived.tawil.polar-dusklight",
       "name": "Polar Dusklight",
       "aliases": [],
-      "tokens": [
-        "dusklight",
-        "polar",
-        "polar dusklight",
-        "tawil"
-      ],
+      "tokens": ["dusklight", "polar", "polar dusklight", "tawil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1959,13 +1476,7 @@
       "id": "derived.tawil.silver-key-dawn",
       "name": "Silver Key Dawn",
       "aliases": [],
-      "tokens": [
-        "dawn",
-        "key",
-        "silver",
-        "silver key dawn",
-        "tawil"
-      ],
+      "tokens": ["dawn", "key", "silver", "silver key dawn", "tawil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -1980,12 +1491,7 @@
       "id": "derived.tawil.six-wings",
       "name": "Six Wings",
       "aliases": [],
-      "tokens": [
-        "six",
-        "six wings",
-        "tawil",
-        "wings"
-      ],
+      "tokens": ["six", "six wings", "tawil", "wings"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -2000,12 +1506,7 @@
       "id": "derived.tawil.twin-wings",
       "name": "Twin Wings",
       "aliases": [],
-      "tokens": [
-        "tawil",
-        "twin",
-        "twin wings",
-        "wings"
-      ],
+      "tokens": ["tawil", "twin", "twin wings", "wings"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -2020,12 +1521,7 @@
       "id": "derived.tawil.utopian-veil",
       "name": "Utopian Veil",
       "aliases": [],
-      "tokens": [
-        "tawil",
-        "utopian",
-        "utopian veil",
-        "veil"
-      ],
+      "tokens": ["tawil", "utopian", "utopian veil", "veil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047"
       },
@@ -2040,13 +1536,7 @@
       "id": "derived.thais.blood-of-coition",
       "name": "Blood of Coition",
       "aliases": [],
-      "tokens": [
-        "blood",
-        "blood of coition",
-        "coition",
-        "of",
-        "thais"
-      ],
+      "tokens": ["blood", "blood of coition", "coition", "of", "thais"],
       "facets": {
         "ownerAwakenerId": "awakener-0048"
       },
@@ -2061,13 +1551,7 @@
       "id": "derived.thais.blood-of-decay",
       "name": "Blood of Decay",
       "aliases": [],
-      "tokens": [
-        "blood",
-        "blood of decay",
-        "decay",
-        "of",
-        "thais"
-      ],
+      "tokens": ["blood", "blood of decay", "decay", "of", "thais"],
       "facets": {
         "ownerAwakenerId": "awakener-0048"
       },
@@ -2082,13 +1566,7 @@
       "id": "derived.thais.blood-of-fear",
       "name": "Blood of Fear",
       "aliases": [],
-      "tokens": [
-        "blood",
-        "blood of fear",
-        "fear",
-        "of",
-        "thais"
-      ],
+      "tokens": ["blood", "blood of fear", "fear", "of", "thais"],
       "facets": {
         "ownerAwakenerId": "awakener-0048"
       },
@@ -2103,13 +1581,7 @@
       "id": "derived.thais.scion-of-purity",
       "name": "Scion of Purity",
       "aliases": [],
-      "tokens": [
-        "of",
-        "purity",
-        "scion",
-        "scion of purity",
-        "thais"
-      ],
+      "tokens": ["of", "purity", "scion", "scion of purity", "thais"],
       "facets": {
         "ownerAwakenerId": "awakener-0048"
       },
@@ -2124,12 +1596,7 @@
       "id": "derived.vortice.vortex-shell",
       "name": "Vortex! Shell!",
       "aliases": [],
-      "tokens": [
-        "shell",
-        "vortex",
-        "vortex shell",
-        "vortice"
-      ],
+      "tokens": ["shell", "vortex", "vortex shell", "vortice"],
       "facets": {
         "ownerAwakenerId": "awakener-0055"
       },
@@ -2144,13 +1611,7 @@
       "id": "derived.wanda.echoes-of-whispers",
       "name": "Echoes of Whispers",
       "aliases": [],
-      "tokens": [
-        "echoes",
-        "echoes of whispers",
-        "of",
-        "wanda",
-        "whispers"
-      ],
+      "tokens": ["echoes", "echoes of whispers", "of", "wanda", "whispers"],
       "facets": {
         "ownerAwakenerId": "awakener-0052"
       },
@@ -2165,12 +1626,7 @@
       "id": "derived.wanda.hypnotic-veins",
       "name": "Hypnotic Veins",
       "aliases": [],
-      "tokens": [
-        "hypnotic",
-        "hypnotic veins",
-        "veins",
-        "wanda"
-      ],
+      "tokens": ["hypnotic", "hypnotic veins", "veins", "wanda"],
       "facets": {
         "ownerAwakenerId": "awakener-0052"
       },
@@ -2185,12 +1641,7 @@
       "id": "derived.wanda.slumber-counter",
       "name": "Slumber Counter",
       "aliases": [],
-      "tokens": [
-        "counter",
-        "slumber",
-        "slumber counter",
-        "wanda"
-      ],
+      "tokens": ["counter", "slumber", "slumber counter", "wanda"],
       "facets": {
         "ownerAwakenerId": "awakener-0052"
       },
@@ -2205,10 +1656,7 @@
       "id": "derived.xu.betroth",
       "name": "Betroth",
       "aliases": [],
-      "tokens": [
-        "betroth",
-        "xu"
-      ],
+      "tokens": ["betroth", "xu"],
       "facets": {
         "ownerAwakenerId": "awakener-0054"
       },
@@ -2223,10 +1671,7 @@
       "id": "derived.xu.enthrall",
       "name": "Enthrall",
       "aliases": [],
-      "tokens": [
-        "enthrall",
-        "xu"
-      ],
+      "tokens": ["enthrall", "xu"],
       "facets": {
         "ownerAwakenerId": "awakener-0054"
       },

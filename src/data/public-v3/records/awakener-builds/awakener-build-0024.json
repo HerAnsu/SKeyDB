@@ -13,48 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0006",
-        "covenant-0007"
-      ],
+      "recommendedCovenantIds": ["covenant-0006", "covenant-0007"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0123"
-          ],
+          "wheelIds": ["wheel-0123"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0035"
-          ],
+          "wheelIds": ["wheel-0035"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0085"
-          ],
+          "wheelIds": ["wheel-0085"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0100"
-          ],
+          "wheelIds": ["wheel-0100"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "DEATH_RESISTANCE"
-        ],
-        [
-          "KEYFLARE_REGEN"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "DEATH_RESISTANCE",
-        "KEYFLARE_REGEN"
-      ]
+      "substatPriorityGroups": [["DEATH_RESISTANCE"], ["KEYFLARE_REGEN"]],
+      "recommendedWheelMainstats": ["DEATH_RESISTANCE", "KEYFLARE_REGEN"]
     }
   ],
   "ownerAwakenerName": "Horla"

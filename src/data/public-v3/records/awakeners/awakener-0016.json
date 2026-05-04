@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "WARDEN",
   "faction": "Among the Stars",
-  "aliases": [
-    "faint"
-  ],
-  "searchTags": [
-    "Death Resistance",
-    "Dispel",
-    "Heal"
-  ],
+  "aliases": ["faint"],
+  "searchTags": ["Death Resistance", "Dispel", "Heal"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 28,

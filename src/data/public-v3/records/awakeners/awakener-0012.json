@@ -17,14 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "The Unknowable",
-  "aliases": [
-    "daffodil"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Draw",
-    "Keyflare"
-  ],
+  "aliases": ["daffodil"],
+  "searchTags": ["Arithmetica", "Draw", "Keyflare"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 49,

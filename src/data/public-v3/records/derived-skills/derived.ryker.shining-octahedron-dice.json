@@ -15,9 +15,7 @@
       "formulaKey": "scaled",
       "baseFormula": "accountStageGrowth",
       "multiplier": 0.0104,
-      "inputs": [
-        "accountLevel"
-      ]
+      "inputs": ["accountLevel"]
     },
     "Arg2": {
       "kind": "fixed",

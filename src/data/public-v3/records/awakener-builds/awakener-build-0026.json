@@ -13,50 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0002",
-        "covenant-0001"
-      ],
+      "recommendedCovenantIds": ["covenant-0002", "covenant-0001"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0050"
-          ],
+          "wheelIds": ["wheel-0050"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0034"
-          ],
+          "wheelIds": ["wheel-0034"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0095"
-          ],
+          "wheelIds": ["wheel-0095"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "ALIEMUS_REGEN"
-        ],
-        [
-          "KEYFLARE_REGEN",
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "ALIEMUS_REGEN",
-        "KEYFLARE_REGEN",
-        "DMG_AMP"
-      ]
+      "substatPriorityGroups": [["ALIEMUS_REGEN"], ["KEYFLARE_REGEN", "DMG_AMP"]],
+      "recommendedWheelMainstats": ["ALIEMUS_REGEN", "KEYFLARE_REGEN", "DMG_AMP"]
     }
   ],
   "ownerAwakenerName": "Karen"

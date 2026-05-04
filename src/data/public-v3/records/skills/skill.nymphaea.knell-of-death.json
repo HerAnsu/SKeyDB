@@ -13,14 +13,7 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": [
-        "20",
-        "24",
-        "28",
-        "32",
-        "36",
-        "40"
-      ],
+      "values": ["20", "24", "28", "32", "36", "40"],
       "stat": "ATK",
       "suffix": "%",
       "substatBonus": {
@@ -50,14 +43,7 @@
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
-            "values": [
-              "40",
-              "48",
-              "56",
-              "64",
-              "72",
-              "80"
-            ],
+            "values": ["40", "48", "56", "64", "72", "80"],
             "stat": "ATK",
             "suffix": "%",
             "substatBonus": {
@@ -72,14 +58,7 @@
           },
           "Arg3": {
             "kind": "scaling",
-            "values": [
-              "22.5",
-              "27",
-              "31.5",
-              "36",
-              "40.5",
-              "45"
-            ],
+            "values": ["22.5", "27", "31.5", "36", "40.5", "45"],
             "stat": "DEF",
             "suffix": "%"
           }

@@ -17,15 +17,8 @@
   "rarity": "SR",
   "type": "CHORUS",
   "faction": "The Unknowable",
-  "aliases": [
-    "ramona"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Discard",
-    "Draw",
-    "Keyflare"
-  ],
+  "aliases": ["ramona"],
+  "searchTags": ["Arithmetica", "Discard", "Draw", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 32,

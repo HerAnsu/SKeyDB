@@ -11,9 +11,7 @@
     "icon": "asset-overlay.global.bleed-icon"
   },
   "overlayType": "mechanic",
-  "aliases": [
-    "Bleeding"
-  ],
+  "aliases": ["Bleeding"],
   "iconId": "IconS_Buff_022",
   "textColor": "damage",
   "descriptionTemplate": "At turn end, take DMG equal to stacks and remove this state.",

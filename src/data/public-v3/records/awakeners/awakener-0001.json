@@ -17,16 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "Hybrid",
-  "aliases": [
-    "24",
-    "twenty-four"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Hand Limit",
-    "Keyflare",
-    "Tentacles"
-  ],
+  "aliases": ["24", "twenty-four"],
+  "searchTags": ["Arithmetica", "Hand Limit", "Keyflare", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 52,

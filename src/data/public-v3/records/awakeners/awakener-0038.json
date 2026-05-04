@@ -17,12 +17,8 @@
   "rarity": "SR",
   "type": "WARDEN",
   "faction": "The Fools",
-  "aliases": [
-    "ogier"
-  ],
-  "searchTags": [
-    "Dispel"
-  ],
+  "aliases": ["ogier"],
+  "searchTags": ["Dispel"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 36,

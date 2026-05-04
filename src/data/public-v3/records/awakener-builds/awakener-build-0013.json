@@ -13,52 +13,27 @@
     {
       "id": "standard",
       "label": "Core",
-      "recommendedCovenantIds": [
-        "covenant-0002",
-        "covenant-0013",
-        "covenant-0006"
-      ],
+      "recommendedCovenantIds": ["covenant-0002", "covenant-0013", "covenant-0006"],
       "recommendedWheels": [
         {
-          "wheelIds": [
-            "wheel-0015"
-          ],
+          "wheelIds": ["wheel-0015"],
           "tier": "BIS_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0016"
-          ],
+          "wheelIds": ["wheel-0016"],
           "tier": "ALT_SSR"
         },
         {
-          "wheelIds": [
-            "wheel-0078"
-          ],
+          "wheelIds": ["wheel-0078"],
           "tier": "BIS_SR"
         },
         {
-          "wheelIds": [
-            "wheel-0077"
-          ],
+          "wheelIds": ["wheel-0077"],
           "tier": "GOOD"
         }
       ],
-      "substatPriorityGroups": [
-        [
-          "ALIEMUS_REGEN"
-        ],
-        [
-          "KEYFLARE_REGEN"
-        ],
-        [
-          "DMG_AMP"
-        ]
-      ],
-      "recommendedWheelMainstats": [
-        "ALIEMUS_REGEN",
-        "KEYFLARE_REGEN"
-      ]
+      "substatPriorityGroups": [["ALIEMUS_REGEN"], ["KEYFLARE_REGEN"], ["DMG_AMP"]],
+      "recommendedWheelMainstats": ["ALIEMUS_REGEN", "KEYFLARE_REGEN"]
     }
   ],
   "ownerAwakenerName": "Doll"

@@ -25,10 +25,7 @@
       "formulaKey": "scaled",
       "baseFormula": "occultResearchDepth",
       "multiplier": 0.045,
-      "inputs": [
-        "accountLevel",
-        "ownedPosseCount"
-      ]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     }
   },
   "lore": "The Void is a plague brought by the Hidden Truth, erasing all colors and painting everything gray.\nDo not look directly into those mad Eyes; be careful, she may have already infected you."

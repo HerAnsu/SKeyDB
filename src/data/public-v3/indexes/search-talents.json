@@ -7,12 +7,7 @@
       "id": "talent.24.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "24",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["24", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0001",
         "family": "madness_omen"
@@ -28,12 +23,7 @@
       "id": "talent.24.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "24",
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["24", "aptitude", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0001",
         "family": "soulforge_aptitude"
@@ -49,12 +39,7 @@
       "id": "talent.agrippa.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "agrippa",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["agrippa", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0002",
         "family": "madness_omen"
@@ -70,15 +55,7 @@
       "id": "talent.agrippa.seal-of-the-pact",
       "name": "Seal of the Pact",
       "aliases": [],
-      "tokens": [
-        "agrippa",
-        "of",
-        "pact",
-        "passive",
-        "seal",
-        "seal of the pact",
-        "the"
-      ],
+      "tokens": ["agrippa", "of", "pact", "passive", "seal", "seal of the pact", "the"],
       "facets": {
         "ownerAwakenerId": "awakener-0002",
         "family": "passive"
@@ -94,12 +71,7 @@
       "id": "talent.agrippa.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "agrippa",
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["agrippa", "aptitude", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0002",
         "family": "soulforge_aptitude"
@@ -115,12 +87,7 @@
       "id": "talent.aigis.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "aigis",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["aigis", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0003",
         "family": "madness_omen"
@@ -136,12 +103,7 @@
       "id": "talent.aigis.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aigis",
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aigis", "aptitude", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0003",
         "family": "soulforge_aptitude"
@@ -157,13 +119,7 @@
       "id": "talent.alva.dynamic-vision",
       "name": "Dynamic Vision",
       "aliases": [],
-      "tokens": [
-        "alva",
-        "dynamic",
-        "dynamic vision",
-        "passive",
-        "vision"
-      ],
+      "tokens": ["alva", "dynamic", "dynamic vision", "passive", "vision"],
       "facets": {
         "ownerAwakenerId": "awakener-0004",
         "family": "passive"
@@ -179,12 +135,7 @@
       "id": "talent.alva.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "alva",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["alva", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0004",
         "family": "madness_omen"
@@ -200,12 +151,7 @@
       "id": "talent.alva.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "alva",
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["alva", "aptitude", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0004",
         "family": "soulforge_aptitude"
@@ -221,12 +167,7 @@
       "id": "talent.arachne.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["arachne", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "family": "madness_omen"
@@ -242,12 +183,7 @@
       "id": "talent.arachne.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "arachne",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "arachne", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "family": "soulforge_aptitude"
@@ -263,14 +199,7 @@
       "id": "talent.arachne.threads-of-fate",
       "name": "Threads of Fate",
       "aliases": [],
-      "tokens": [
-        "arachne",
-        "fate",
-        "of",
-        "passive",
-        "threads",
-        "threads of fate"
-      ],
+      "tokens": ["arachne", "fate", "of", "passive", "threads", "threads of fate"],
       "facets": {
         "ownerAwakenerId": "awakener-0056",
         "family": "passive"
@@ -286,14 +215,7 @@
       "id": "talent.aurita.happy-little-fairy",
       "name": "Happy Little Fairy",
       "aliases": [],
-      "tokens": [
-        "aurita",
-        "fairy",
-        "happy",
-        "happy little fairy",
-        "little",
-        "passive"
-      ],
+      "tokens": ["aurita", "fairy", "happy", "happy little fairy", "little", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0005",
         "family": "passive"
@@ -309,12 +231,7 @@
       "id": "talent.aurita.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "aurita",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["aurita", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0005",
         "family": "madness_omen"
@@ -330,12 +247,7 @@
       "id": "talent.aurita.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "aurita",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "aurita", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0005",
         "family": "soulforge_aptitude"
@@ -351,12 +263,7 @@
       "id": "talent.caecus.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "caecus",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["caecus", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0006",
         "family": "madness_omen"
@@ -372,13 +279,7 @@
       "id": "talent.caecus.rebellious-spikes",
       "name": "Rebellious Spikes",
       "aliases": [],
-      "tokens": [
-        "caecus",
-        "passive",
-        "rebellious",
-        "rebellious spikes",
-        "spikes"
-      ],
+      "tokens": ["caecus", "passive", "rebellious", "rebellious spikes", "spikes"],
       "facets": {
         "ownerAwakenerId": "awakener-0006",
         "family": "passive"
@@ -394,12 +295,7 @@
       "id": "talent.caecus.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "caecus",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "caecus", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0006",
         "family": "soulforge_aptitude"
@@ -415,12 +311,7 @@
       "id": "talent.casiah.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "casiah",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["casiah", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0007",
         "family": "madness_omen"
@@ -436,14 +327,7 @@
       "id": "talent.casiah.master-of-magic",
       "name": "Master of Magic",
       "aliases": [],
-      "tokens": [
-        "casiah",
-        "magic",
-        "master",
-        "master of magic",
-        "of",
-        "passive"
-      ],
+      "tokens": ["casiah", "magic", "master", "master of magic", "of", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0007",
         "family": "passive"
@@ -459,12 +343,7 @@
       "id": "talent.casiah.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "casiah",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "casiah", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0007",
         "family": "soulforge_aptitude"
@@ -480,13 +359,7 @@
       "id": "talent.castor.cleansing-feathers",
       "name": "Cleansing Feathers",
       "aliases": [],
-      "tokens": [
-        "castor",
-        "cleansing",
-        "cleansing feathers",
-        "feathers",
-        "passive"
-      ],
+      "tokens": ["castor", "cleansing", "cleansing feathers", "feathers", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0008",
         "family": "passive"
@@ -502,12 +375,7 @@
       "id": "talent.castor.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "castor",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["castor", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0008",
         "family": "madness_omen"
@@ -523,12 +391,7 @@
       "id": "talent.castor.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "castor",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "castor", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0008",
         "family": "soulforge_aptitude"
@@ -544,12 +407,7 @@
       "id": "talent.celeste.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "celeste",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["celeste", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0009",
         "family": "madness_omen"
@@ -565,12 +423,7 @@
       "id": "talent.celeste.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "celeste",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "celeste", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0009",
         "family": "soulforge_aptitude"
@@ -586,13 +439,7 @@
       "id": "talent.celeste.voyage-horn",
       "name": "Voyage Horn",
       "aliases": [],
-      "tokens": [
-        "celeste",
-        "horn",
-        "passive",
-        "voyage",
-        "voyage horn"
-      ],
+      "tokens": ["celeste", "horn", "passive", "voyage", "voyage horn"],
       "facets": {
         "ownerAwakenerId": "awakener-0009",
         "family": "passive"
@@ -608,13 +455,7 @@
       "id": "talent.clementine.hive-resonance",
       "name": "Hive Resonance",
       "aliases": [],
-      "tokens": [
-        "clementine",
-        "hive",
-        "hive resonance",
-        "passive",
-        "resonance"
-      ],
+      "tokens": ["clementine", "hive", "hive resonance", "passive", "resonance"],
       "facets": {
         "ownerAwakenerId": "awakener-0010",
         "family": "passive"
@@ -630,12 +471,7 @@
       "id": "talent.clementine.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "clementine",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["clementine", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0010",
         "family": "madness_omen"
@@ -651,12 +487,7 @@
       "id": "talent.clementine.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "clementine",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "clementine", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0010",
         "family": "soulforge_aptitude"
@@ -672,11 +503,7 @@
       "id": "talent.corposant.cinders",
       "name": "Cinders",
       "aliases": [],
-      "tokens": [
-        "cinders",
-        "corposant",
-        "passive"
-      ],
+      "tokens": ["cinders", "corposant", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0011",
         "family": "passive"
@@ -692,12 +519,7 @@
       "id": "talent.corposant.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "corposant",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["corposant", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0011",
         "family": "madness_omen"
@@ -713,12 +535,7 @@
       "id": "talent.corposant.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "corposant",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "corposant", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0011",
         "family": "soulforge_aptitude"
@@ -734,12 +551,7 @@
       "id": "talent.daffodil.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "daffodil",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["daffodil", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0012",
         "family": "madness_omen"
@@ -755,12 +567,7 @@
       "id": "talent.daffodil.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "daffodil",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "daffodil", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0012",
         "family": "soulforge_aptitude"
@@ -776,14 +583,7 @@
       "id": "talent.doll-inferno.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "doll",
-        "doll inferno",
-        "inferno",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["doll", "doll inferno", "inferno", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0018",
         "family": "madness_omen"
@@ -799,16 +599,7 @@
       "id": "talent.doll-inferno.path-of-annihilation",
       "name": "Path of Annihilation",
       "aliases": [],
-      "tokens": [
-        "annihilation",
-        "doll",
-        "doll inferno",
-        "inferno",
-        "of",
-        "passive",
-        "path",
-        "path of annihilation"
-      ],
+      "tokens": ["annihilation", "doll", "doll inferno", "inferno", "of", "passive", "path", "path of annihilation"],
       "facets": {
         "ownerAwakenerId": "awakener-0018",
         "family": "passive"
@@ -824,14 +615,7 @@
       "id": "talent.doll-inferno.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "doll",
-        "doll inferno",
-        "inferno",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "doll", "doll inferno", "inferno", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0018",
         "family": "soulforge_aptitude"
@@ -847,13 +631,7 @@
       "id": "talent.doll.gnosis-deconstruction",
       "name": "Gnosis Deconstruction",
       "aliases": [],
-      "tokens": [
-        "deconstruction",
-        "doll",
-        "gnosis",
-        "gnosis deconstruction",
-        "passive"
-      ],
+      "tokens": ["deconstruction", "doll", "gnosis", "gnosis deconstruction", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0013",
         "family": "passive"
@@ -869,12 +647,7 @@
       "id": "talent.doll.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "doll",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["doll", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0013",
         "family": "madness_omen"
@@ -890,12 +663,7 @@
       "id": "talent.doll.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "doll",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "doll", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0013",
         "family": "soulforge_aptitude"
@@ -911,13 +679,7 @@
       "id": "talent.doresain.casket-harvest",
       "name": "Casket Harvest",
       "aliases": [],
-      "tokens": [
-        "casket",
-        "casket harvest",
-        "doresain",
-        "harvest",
-        "passive"
-      ],
+      "tokens": ["casket", "casket harvest", "doresain", "harvest", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0014",
         "family": "passive"
@@ -933,13 +695,7 @@
       "id": "talent.doresain.festering-grace",
       "name": "Festering Grace",
       "aliases": [],
-      "tokens": [
-        "doresain",
-        "festering",
-        "festering grace",
-        "grace",
-        "passive"
-      ],
+      "tokens": ["doresain", "festering", "festering grace", "grace", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0014",
         "family": "passive"
@@ -955,12 +711,7 @@
       "id": "talent.doresain.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "doresain",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["doresain", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0014",
         "family": "madness_omen"
@@ -976,12 +727,7 @@
       "id": "talent.doresain.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "doresain",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "doresain", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0014",
         "family": "soulforge_aptitude"
@@ -997,14 +743,7 @@
       "id": "talent.erica.external-power-source",
       "name": "External Power Source",
       "aliases": [],
-      "tokens": [
-        "erica",
-        "external",
-        "external power source",
-        "passive",
-        "power",
-        "source"
-      ],
+      "tokens": ["erica", "external", "external power source", "passive", "power", "source"],
       "facets": {
         "ownerAwakenerId": "awakener-0015",
         "family": "passive"
@@ -1020,12 +759,7 @@
       "id": "talent.erica.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "erica",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["erica", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0015",
         "family": "madness_omen"
@@ -1041,12 +775,7 @@
       "id": "talent.erica.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "erica",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "erica", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0015",
         "family": "soulforge_aptitude"
@@ -1062,12 +791,7 @@
       "id": "talent.faint.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "faint",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["faint", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0016",
         "family": "madness_omen"
@@ -1083,13 +807,7 @@
       "id": "talent.faint.secondary-swaddle",
       "name": "Secondary Swaddle",
       "aliases": [],
-      "tokens": [
-        "faint",
-        "passive",
-        "secondary",
-        "secondary swaddle",
-        "swaddle"
-      ],
+      "tokens": ["faint", "passive", "secondary", "secondary swaddle", "swaddle"],
       "facets": {
         "ownerAwakenerId": "awakener-0016",
         "family": "passive"
@@ -1105,12 +823,7 @@
       "id": "talent.faint.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "faint",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "faint", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0016",
         "family": "soulforge_aptitude"
@@ -1126,11 +839,7 @@
       "id": "talent.faros.homesick",
       "name": "Homesick",
       "aliases": [],
-      "tokens": [
-        "faros",
-        "homesick",
-        "passive"
-      ],
+      "tokens": ["faros", "homesick", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0017",
         "family": "passive"
@@ -1146,12 +855,7 @@
       "id": "talent.faros.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "faros",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["faros", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0017",
         "family": "madness_omen"
@@ -1167,12 +871,7 @@
       "id": "talent.faros.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "faros",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "faros", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0017",
         "family": "soulforge_aptitude"
@@ -1188,12 +887,7 @@
       "id": "talent.goliath.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "goliath",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["goliath", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0021",
         "family": "madness_omen"
@@ -1209,12 +903,7 @@
       "id": "talent.goliath.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "goliath",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "goliath", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0021",
         "family": "soulforge_aptitude"
@@ -1230,12 +919,7 @@
       "id": "talent.hameln.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "hameln",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["hameln", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0022",
         "family": "madness_omen"
@@ -1251,12 +935,7 @@
       "id": "talent.hameln.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "hameln",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "hameln", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0022",
         "family": "soulforge_aptitude"
@@ -1272,14 +951,7 @@
       "id": "talent.helot-catena.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "catena",
-        "helot",
-        "helot catena",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["catena", "helot", "helot catena", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0019",
         "family": "madness_omen"
@@ -1295,14 +967,7 @@
       "id": "talent.helot-catena.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "catena",
-        "helot",
-        "helot catena",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "catena", "helot", "helot catena", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0019",
         "family": "soulforge_aptitude"
@@ -1318,12 +983,7 @@
       "id": "talent.helot.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "helot",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["helot", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0023",
         "family": "madness_omen"
@@ -1339,13 +999,7 @@
       "id": "talent.helot.pain-sigil",
       "name": "Pain Sigil",
       "aliases": [],
-      "tokens": [
-        "helot",
-        "pain",
-        "pain sigil",
-        "passive",
-        "sigil"
-      ],
+      "tokens": ["helot", "pain", "pain sigil", "passive", "sigil"],
       "facets": {
         "ownerAwakenerId": "awakener-0023",
         "family": "passive"
@@ -1361,12 +1015,7 @@
       "id": "talent.helot.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "helot",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "helot", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0023",
         "family": "soulforge_aptitude"
@@ -1382,12 +1031,7 @@
       "id": "talent.horla.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "horla",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["horla", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "family": "madness_omen"
@@ -1403,12 +1047,7 @@
       "id": "talent.horla.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "horla",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "horla", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "family": "soulforge_aptitude"
@@ -1424,14 +1063,7 @@
       "id": "talent.horla.writing-with-feeling",
       "name": "Writing with Feeling",
       "aliases": [],
-      "tokens": [
-        "feeling",
-        "horla",
-        "passive",
-        "with",
-        "writing",
-        "writing with feeling"
-      ],
+      "tokens": ["feeling", "horla", "passive", "with", "writing", "writing with feeling"],
       "facets": {
         "ownerAwakenerId": "awakener-0024",
         "family": "passive"
@@ -1447,14 +1079,7 @@
       "id": "talent.jenkins.a-common-enemy",
       "name": "A Common Enemy",
       "aliases": [],
-      "tokens": [
-        "a",
-        "a common enemy",
-        "common",
-        "enemy",
-        "jenkin",
-        "passive"
-      ],
+      "tokens": ["a", "a common enemy", "common", "enemy", "jenkin", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0025",
         "family": "passive"
@@ -1470,12 +1095,7 @@
       "id": "talent.jenkins.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "jenkin",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["jenkin", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0025",
         "family": "madness_omen"
@@ -1491,12 +1111,7 @@
       "id": "talent.jenkins.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "jenkin",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "jenkin", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0025",
         "family": "soulforge_aptitude"
@@ -1512,12 +1127,7 @@
       "id": "talent.karen.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "karen",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["karen", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0026",
         "family": "madness_omen"
@@ -1533,12 +1143,7 @@
       "id": "talent.karen.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "karen",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "karen", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0026",
         "family": "soulforge_aptitude"
@@ -1554,14 +1159,7 @@
       "id": "talent.kathigu-ra.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "kathigu",
-        "kathigu ra",
-        "madness",
-        "madness omen",
-        "omen",
-        "ra"
-      ],
+      "tokens": ["kathigu", "kathigu ra", "madness", "madness omen", "omen", "ra"],
       "facets": {
         "ownerAwakenerId": "awakener-0027",
         "family": "madness_omen"
@@ -1577,14 +1175,7 @@
       "id": "talent.kathigu-ra.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "kathigu",
-        "kathigu ra",
-        "ra",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "kathigu", "kathigu ra", "ra", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0027",
         "family": "soulforge_aptitude"
@@ -1600,16 +1191,7 @@
       "id": "talent.kathigu-ra.the-living-flame",
       "name": "The Living Flame",
       "aliases": [],
-      "tokens": [
-        "flame",
-        "kathigu",
-        "kathigu ra",
-        "living",
-        "passive",
-        "ra",
-        "the",
-        "the living flame"
-      ],
+      "tokens": ["flame", "kathigu", "kathigu ra", "living", "passive", "ra", "the", "the living flame"],
       "facets": {
         "ownerAwakenerId": "awakener-0027",
         "family": "passive"
@@ -1625,12 +1207,7 @@
       "id": "talent.leigh.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "leigh",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["leigh", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0028",
         "family": "madness_omen"
@@ -1646,12 +1223,7 @@
       "id": "talent.leigh.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "leigh",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "leigh", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0028",
         "family": "soulforge_aptitude"
@@ -1667,12 +1239,7 @@
       "id": "talent.lily.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "lily",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["lily", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0029",
         "family": "madness_omen"
@@ -1688,12 +1255,7 @@
       "id": "talent.lily.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "lily",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "lily", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0029",
         "family": "soulforge_aptitude"
@@ -1709,13 +1271,7 @@
       "id": "talent.lily.surging-darkness",
       "name": "Surging Darkness",
       "aliases": [],
-      "tokens": [
-        "darkness",
-        "lily",
-        "passive",
-        "surging",
-        "surging darkness"
-      ],
+      "tokens": ["darkness", "lily", "passive", "surging", "surging darkness"],
       "facets": {
         "ownerAwakenerId": "awakener-0029",
         "family": "passive"
@@ -1731,12 +1287,7 @@
       "id": "talent.liz.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "liz",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["liz", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0030",
         "family": "madness_omen"
@@ -1752,12 +1303,7 @@
       "id": "talent.liz.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "liz",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "liz", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0030",
         "family": "soulforge_aptitude"
@@ -1773,12 +1319,7 @@
       "id": "talent.lotan.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "lotan",
-        "madness",
-        "madness omen",
-        "omen"
-      ],
+      "tokens": ["lotan", "madness", "madness omen", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0031",
         "family": "madness_omen"
@@ -1794,12 +1335,7 @@
       "id": "talent.lotan.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "lotan",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "lotan", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0031",
         "family": "soulforge_aptitude"
@@ -1815,12 +1351,7 @@
       "id": "talent.miryam.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "miryam",
-        "omen"
-      ],
+      "tokens": ["madness", "madness omen", "miryam", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0032",
         "family": "madness_omen"
@@ -1836,12 +1367,7 @@
       "id": "talent.miryam.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "miryam",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "miryam", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0032",
         "family": "soulforge_aptitude"
@@ -1857,13 +1383,7 @@
       "id": "talent.miryam.undying-piety",
       "name": "Undying Piety",
       "aliases": [],
-      "tokens": [
-        "miryam",
-        "passive",
-        "piety",
-        "undying",
-        "undying piety"
-      ],
+      "tokens": ["miryam", "passive", "piety", "undying", "undying piety"],
       "facets": {
         "ownerAwakenerId": "awakener-0032",
         "family": "passive"
@@ -1879,13 +1399,7 @@
       "id": "talent.mouchette.dramatic-encounter",
       "name": "Dramatic Encounter",
       "aliases": [],
-      "tokens": [
-        "dramatic",
-        "dramatic encounter",
-        "encounter",
-        "mouchette",
-        "passive"
-      ],
+      "tokens": ["dramatic", "dramatic encounter", "encounter", "mouchette", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0033",
         "family": "passive"
@@ -1901,12 +1415,7 @@
       "id": "talent.mouchette.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "mouchette",
-        "omen"
-      ],
+      "tokens": ["madness", "madness omen", "mouchette", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0033",
         "family": "madness_omen"
@@ -1922,12 +1431,7 @@
       "id": "talent.mouchette.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "mouchette",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "mouchette", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0033",
         "family": "soulforge_aptitude"
@@ -1943,16 +1447,7 @@
       "id": "talent.murphy-fauxborn.divine-realms-order",
       "name": "Divine Realm's Order",
       "aliases": [],
-      "tokens": [
-        "divine",
-        "divine realms order",
-        "fauxborn",
-        "murphy",
-        "murphy fauxborn",
-        "order",
-        "passive",
-        "realms"
-      ],
+      "tokens": ["divine", "divine realms order", "fauxborn", "murphy", "murphy fauxborn", "order", "passive", "realms"],
       "facets": {
         "ownerAwakenerId": "awakener-0035",
         "family": "passive"
@@ -1968,14 +1463,7 @@
       "id": "talent.murphy-fauxborn.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "fauxborn",
-        "madness",
-        "madness omen",
-        "murphy",
-        "murphy fauxborn",
-        "omen"
-      ],
+      "tokens": ["fauxborn", "madness", "madness omen", "murphy", "murphy fauxborn", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0035",
         "family": "madness_omen"
@@ -1991,14 +1479,7 @@
       "id": "talent.murphy-fauxborn.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "fauxborn",
-        "murphy",
-        "murphy fauxborn",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "fauxborn", "murphy", "murphy fauxborn", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0035",
         "family": "soulforge_aptitude"
@@ -2014,12 +1495,7 @@
       "id": "talent.murphy.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "murphy",
-        "omen"
-      ],
+      "tokens": ["madness", "madness omen", "murphy", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0034",
         "family": "madness_omen"
@@ -2035,12 +1511,7 @@
       "id": "talent.murphy.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "murphy",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "murphy", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0034",
         "family": "soulforge_aptitude"
@@ -2056,13 +1527,7 @@
       "id": "talent.nautila.daily-maintenance",
       "name": "Daily Maintenance",
       "aliases": [],
-      "tokens": [
-        "daily",
-        "daily maintenance",
-        "maintenance",
-        "nautila",
-        "passive"
-      ],
+      "tokens": ["daily", "daily maintenance", "maintenance", "nautila", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0036",
         "family": "passive"
@@ -2078,12 +1543,7 @@
       "id": "talent.nautila.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "nautila",
-        "omen"
-      ],
+      "tokens": ["madness", "madness omen", "nautila", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0036",
         "family": "madness_omen"
@@ -2099,12 +1559,7 @@
       "id": "talent.nautila.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "nautila",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "nautila", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0036",
         "family": "soulforge_aptitude"
@@ -2120,11 +1575,7 @@
       "id": "talent.nymphaea.immerse",
       "name": "Immerse",
       "aliases": [],
-      "tokens": [
-        "immerse",
-        "nymphaea",
-        "passive"
-      ],
+      "tokens": ["immerse", "nymphaea", "passive"],
       "facets": {
         "ownerAwakenerId": "awakener-0037",
         "family": "passive"
@@ -2140,12 +1591,7 @@
       "id": "talent.nymphaea.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "nymphaea",
-        "omen"
-      ],
+      "tokens": ["madness", "madness omen", "nymphaea", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0037",
         "family": "madness_omen"
@@ -2161,12 +1607,7 @@
       "id": "talent.nymphaea.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "nymphaea",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "nymphaea", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0037",
         "family": "soulforge_aptitude"
@@ -2182,13 +1623,7 @@
       "id": "talent.ogier.formless-refinement",
       "name": "Formless Refinement",
       "aliases": [],
-      "tokens": [
-        "formless",
-        "formless refinement",
-        "ogier",
-        "passive",
-        "refinement"
-      ],
+      "tokens": ["formless", "formless refinement", "ogier", "passive", "refinement"],
       "facets": {
         "ownerAwakenerId": "awakener-0038",
         "family": "passive"
@@ -2204,12 +1639,7 @@
       "id": "talent.ogier.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "ogier",
-        "omen"
-      ],
+      "tokens": ["madness", "madness omen", "ogier", "omen"],
       "facets": {
         "ownerAwakenerId": "awakener-0038",
         "family": "madness_omen"
@@ -2225,12 +1655,7 @@
       "id": "talent.ogier.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "ogier",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "ogier", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0038",
         "family": "soulforge_aptitude"
@@ -2246,12 +1671,7 @@
       "id": "talent.pandia.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "pandia"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "pandia"],
       "facets": {
         "ownerAwakenerId": "awakener-0039",
         "family": "madness_omen"
@@ -2267,13 +1687,7 @@
       "id": "talent.pandia.punishment-time",
       "name": "Punishment Time",
       "aliases": [],
-      "tokens": [
-        "pandia",
-        "passive",
-        "punishment",
-        "punishment time",
-        "time"
-      ],
+      "tokens": ["pandia", "passive", "punishment", "punishment time", "time"],
       "facets": {
         "ownerAwakenerId": "awakener-0039",
         "family": "passive"
@@ -2289,12 +1703,7 @@
       "id": "talent.pandia.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "pandia",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "pandia", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0039",
         "family": "soulforge_aptitude"
@@ -2310,12 +1719,7 @@
       "id": "talent.pickman.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "pickman"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "pickman"],
       "facets": {
         "ownerAwakenerId": "awakener-0040",
         "family": "madness_omen"
@@ -2331,13 +1735,7 @@
       "id": "talent.pickman.painters-eye",
       "name": "Painter's Eye",
       "aliases": [],
-      "tokens": [
-        "eye",
-        "painters",
-        "painters eye",
-        "passive",
-        "pickman"
-      ],
+      "tokens": ["eye", "painters", "painters eye", "passive", "pickman"],
       "facets": {
         "ownerAwakenerId": "awakener-0040",
         "family": "passive"
@@ -2353,12 +1751,7 @@
       "id": "talent.pickman.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "pickman",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "pickman", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0040",
         "family": "soulforge_aptitude"
@@ -2374,14 +1767,7 @@
       "id": "talent.pollux.atonement-by-pain",
       "name": "Atonement by Pain",
       "aliases": [],
-      "tokens": [
-        "atonement",
-        "atonement by pain",
-        "by",
-        "pain",
-        "passive",
-        "pollux"
-      ],
+      "tokens": ["atonement", "atonement by pain", "by", "pain", "passive", "pollux"],
       "facets": {
         "ownerAwakenerId": "awakener-0041",
         "family": "passive"
@@ -2397,12 +1783,7 @@
       "id": "talent.pollux.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "pollux"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "pollux"],
       "facets": {
         "ownerAwakenerId": "awakener-0041",
         "family": "madness_omen"
@@ -2418,12 +1799,7 @@
       "id": "talent.pollux.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "pollux",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "pollux", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0041",
         "family": "soulforge_aptitude"
@@ -2439,14 +1815,7 @@
       "id": "talent.ramona-timeworn.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "ramona",
-        "ramona timeworn",
-        "timeworn"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "ramona", "ramona timeworn", "timeworn"],
       "facets": {
         "ownerAwakenerId": "awakener-0020",
         "family": "madness_omen"
@@ -2462,15 +1831,7 @@
       "id": "talent.ramona-timeworn.silverheart-resonance",
       "name": "Silverheart Resonance",
       "aliases": [],
-      "tokens": [
-        "passive",
-        "ramona",
-        "ramona timeworn",
-        "resonance",
-        "silverheart",
-        "silverheart resonance",
-        "timeworn"
-      ],
+      "tokens": ["passive", "ramona", "ramona timeworn", "resonance", "silverheart", "silverheart resonance", "timeworn"],
       "facets": {
         "ownerAwakenerId": "awakener-0020",
         "family": "passive"
@@ -2486,14 +1847,7 @@
       "id": "talent.ramona-timeworn.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "ramona",
-        "ramona timeworn",
-        "soulforge",
-        "soulforge aptitude",
-        "timeworn"
-      ],
+      "tokens": ["aptitude", "ramona", "ramona timeworn", "soulforge", "soulforge aptitude", "timeworn"],
       "facets": {
         "ownerAwakenerId": "awakener-0020",
         "family": "soulforge_aptitude"
@@ -2509,12 +1863,7 @@
       "id": "talent.ramona.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "ramona"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "ramona"],
       "facets": {
         "ownerAwakenerId": "awakener-0042",
         "family": "madness_omen"
@@ -2530,13 +1879,7 @@
       "id": "talent.ramona.silverheart-resonance",
       "name": "Silverheart Resonance",
       "aliases": [],
-      "tokens": [
-        "passive",
-        "ramona",
-        "resonance",
-        "silverheart",
-        "silverheart resonance"
-      ],
+      "tokens": ["passive", "ramona", "resonance", "silverheart", "silverheart resonance"],
       "facets": {
         "ownerAwakenerId": "awakener-0042",
         "family": "passive"
@@ -2552,12 +1895,7 @@
       "id": "talent.ramona.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "ramona",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "ramona", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0042",
         "family": "soulforge_aptitude"
@@ -2573,12 +1911,7 @@
       "id": "talent.ryker.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "ryker"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "ryker"],
       "facets": {
         "ownerAwakenerId": "awakener-0043",
         "family": "madness_omen"
@@ -2594,12 +1927,7 @@
       "id": "talent.ryker.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "ryker",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "ryker", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0043",
         "family": "soulforge_aptitude"
@@ -2615,14 +1943,7 @@
       "id": "talent.ryker.winner-takes-all",
       "name": "Winner Takes All",
       "aliases": [],
-      "tokens": [
-        "all",
-        "passive",
-        "ryker",
-        "takes",
-        "winner",
-        "winner takes all"
-      ],
+      "tokens": ["all", "passive", "ryker", "takes", "winner", "winner takes all"],
       "facets": {
         "ownerAwakenerId": "awakener-0043",
         "family": "passive"
@@ -2638,12 +1959,7 @@
       "id": "talent.salvador.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "salvador"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "salvador"],
       "facets": {
         "ownerAwakenerId": "awakener-0044",
         "family": "madness_omen"
@@ -2659,15 +1975,7 @@
       "id": "talent.salvador.origin-of-all-life",
       "name": "Origin of All Life",
       "aliases": [],
-      "tokens": [
-        "all",
-        "life",
-        "of",
-        "origin",
-        "origin of all life",
-        "passive",
-        "salvador"
-      ],
+      "tokens": ["all", "life", "of", "origin", "origin of all life", "passive", "salvador"],
       "facets": {
         "ownerAwakenerId": "awakener-0044",
         "family": "passive"
@@ -2683,15 +1991,7 @@
       "id": "talent.salvador.shepard-of-the-souls",
       "name": "Shepard of the Souls",
       "aliases": [],
-      "tokens": [
-        "of",
-        "passive",
-        "salvador",
-        "shepard",
-        "shepard of the souls",
-        "souls",
-        "the"
-      ],
+      "tokens": ["of", "passive", "salvador", "shepard", "shepard of the souls", "souls", "the"],
       "facets": {
         "ownerAwakenerId": "awakener-0044",
         "family": "passive"
@@ -2707,12 +2007,7 @@
       "id": "talent.salvador.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "salvador",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "salvador", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0044",
         "family": "soulforge_aptitude"
@@ -2728,14 +2023,7 @@
       "id": "talent.sanga.enlightenment-of-death",
       "name": "Enlightenment of Death",
       "aliases": [],
-      "tokens": [
-        "death",
-        "enlightenment",
-        "enlightenment of death",
-        "of",
-        "passive",
-        "sanga"
-      ],
+      "tokens": ["death", "enlightenment", "enlightenment of death", "of", "passive", "sanga"],
       "facets": {
         "ownerAwakenerId": "awakener-0045",
         "family": "passive"
@@ -2751,12 +2039,7 @@
       "id": "talent.sanga.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "sanga"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "sanga"],
       "facets": {
         "ownerAwakenerId": "awakener-0045",
         "family": "madness_omen"
@@ -2772,12 +2055,7 @@
       "id": "talent.sanga.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "sanga",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "sanga", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0045",
         "family": "soulforge_aptitude"
@@ -2793,14 +2071,7 @@
       "id": "talent.sorel.guardian-of-vanity",
       "name": "Guardian of Vanity",
       "aliases": [],
-      "tokens": [
-        "guardian",
-        "guardian of vanity",
-        "of",
-        "passive",
-        "sorel",
-        "vanity"
-      ],
+      "tokens": ["guardian", "guardian of vanity", "of", "passive", "sorel", "vanity"],
       "facets": {
         "ownerAwakenerId": "awakener-0046",
         "family": "passive"
@@ -2816,12 +2087,7 @@
       "id": "talent.sorel.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "sorel"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "sorel"],
       "facets": {
         "ownerAwakenerId": "awakener-0046",
         "family": "madness_omen"
@@ -2837,12 +2103,7 @@
       "id": "talent.sorel.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "sorel",
-        "soulforge",
-        "soulforge aptitude"
-      ],
+      "tokens": ["aptitude", "sorel", "soulforge", "soulforge aptitude"],
       "facets": {
         "ownerAwakenerId": "awakener-0046",
         "family": "soulforge_aptitude"
@@ -2858,12 +2119,7 @@
       "id": "talent.tawil.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "tawil"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "tawil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047",
         "family": "madness_omen"
@@ -2879,12 +2135,7 @@
       "id": "talent.tawil.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "tawil"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "tawil"],
       "facets": {
         "ownerAwakenerId": "awakener-0047",
         "family": "soulforge_aptitude"
@@ -2900,12 +2151,7 @@
       "id": "talent.thais.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "thais"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "thais"],
       "facets": {
         "ownerAwakenerId": "awakener-0048",
         "family": "madness_omen"
@@ -2921,12 +2167,7 @@
       "id": "talent.thais.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "thais"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "thais"],
       "facets": {
         "ownerAwakenerId": "awakener-0048",
         "family": "soulforge_aptitude"
@@ -2942,12 +2183,7 @@
       "id": "talent.tinct.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "tinct"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "tinct"],
       "facets": {
         "ownerAwakenerId": "awakener-0049",
         "family": "madness_omen"
@@ -2963,13 +2199,7 @@
       "id": "talent.tinct.planetary-traveler",
       "name": "Planetary Traveler",
       "aliases": [],
-      "tokens": [
-        "passive",
-        "planetary",
-        "planetary traveler",
-        "tinct",
-        "traveler"
-      ],
+      "tokens": ["passive", "planetary", "planetary traveler", "tinct", "traveler"],
       "facets": {
         "ownerAwakenerId": "awakener-0049",
         "family": "passive"
@@ -2985,12 +2215,7 @@
       "id": "talent.tinct.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "tinct"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "tinct"],
       "facets": {
         "ownerAwakenerId": "awakener-0049",
         "family": "soulforge_aptitude"
@@ -3006,14 +2231,7 @@
       "id": "talent.tulu.divine-kings-power",
       "name": "Divine King's Power",
       "aliases": [],
-      "tokens": [
-        "divine",
-        "divine kings power",
-        "kings",
-        "passive",
-        "power",
-        "tulu"
-      ],
+      "tokens": ["divine", "divine kings power", "kings", "passive", "power", "tulu"],
       "facets": {
         "ownerAwakenerId": "awakener-0050",
         "family": "passive"
@@ -3029,12 +2247,7 @@
       "id": "talent.tulu.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "tulu"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "tulu"],
       "facets": {
         "ownerAwakenerId": "awakener-0050",
         "family": "madness_omen"
@@ -3050,12 +2263,7 @@
       "id": "talent.tulu.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "tulu"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "tulu"],
       "facets": {
         "ownerAwakenerId": "awakener-0050",
         "family": "soulforge_aptitude"
@@ -3071,12 +2279,7 @@
       "id": "talent.uvhash.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "uvhash"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "uvhash"],
       "facets": {
         "ownerAwakenerId": "awakener-0051",
         "family": "madness_omen"
@@ -3092,12 +2295,7 @@
       "id": "talent.uvhash.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "uvhash"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "uvhash"],
       "facets": {
         "ownerAwakenerId": "awakener-0051",
         "family": "soulforge_aptitude"
@@ -3113,13 +2311,7 @@
       "id": "talent.vortice.lightless-bottom",
       "name": "Lightless Bottom",
       "aliases": [],
-      "tokens": [
-        "bottom",
-        "lightless",
-        "lightless bottom",
-        "passive",
-        "vortice"
-      ],
+      "tokens": ["bottom", "lightless", "lightless bottom", "passive", "vortice"],
       "facets": {
         "ownerAwakenerId": "awakener-0055",
         "family": "passive"
@@ -3135,12 +2327,7 @@
       "id": "talent.vortice.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "vortice"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "vortice"],
       "facets": {
         "ownerAwakenerId": "awakener-0055",
         "family": "madness_omen"
@@ -3156,12 +2343,7 @@
       "id": "talent.vortice.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "vortice"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "vortice"],
       "facets": {
         "ownerAwakenerId": "awakener-0055",
         "family": "soulforge_aptitude"
@@ -3177,12 +2359,7 @@
       "id": "talent.wanda.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "wanda"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "wanda"],
       "facets": {
         "ownerAwakenerId": "awakener-0052",
         "family": "madness_omen"
@@ -3198,11 +2375,7 @@
       "id": "talent.wanda.revelation",
       "name": "Revelation",
       "aliases": [],
-      "tokens": [
-        "passive",
-        "revelation",
-        "wanda"
-      ],
+      "tokens": ["passive", "revelation", "wanda"],
       "facets": {
         "ownerAwakenerId": "awakener-0052",
         "family": "passive"
@@ -3218,12 +2391,7 @@
       "id": "talent.wanda.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "wanda"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "wanda"],
       "facets": {
         "ownerAwakenerId": "awakener-0052",
         "family": "soulforge_aptitude"
@@ -3239,12 +2407,7 @@
       "id": "talent.winkle.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "winkle"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "winkle"],
       "facets": {
         "ownerAwakenerId": "awakener-0053",
         "family": "madness_omen"
@@ -3260,12 +2423,7 @@
       "id": "talent.winkle.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "winkle"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "winkle"],
       "facets": {
         "ownerAwakenerId": "awakener-0053",
         "family": "soulforge_aptitude"
@@ -3281,12 +2439,7 @@
       "id": "talent.xu.madness-omen",
       "name": "Madness Omen",
       "aliases": [],
-      "tokens": [
-        "madness",
-        "madness omen",
-        "omen",
-        "xu"
-      ],
+      "tokens": ["madness", "madness omen", "omen", "xu"],
       "facets": {
         "ownerAwakenerId": "awakener-0054",
         "family": "madness_omen"
@@ -3302,12 +2455,7 @@
       "id": "talent.xu.soulforge-aptitude",
       "name": "Soulforge Aptitude",
       "aliases": [],
-      "tokens": [
-        "aptitude",
-        "soulforge",
-        "soulforge aptitude",
-        "xu"
-      ],
+      "tokens": ["aptitude", "soulforge", "soulforge aptitude", "xu"],
       "facets": {
         "ownerAwakenerId": "awakener-0054",
         "family": "soulforge_aptitude"

@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "ASSAULT",
   "faction": "The Fools",
-  "aliases": [
-    "aurita"
-  ],
-  "searchTags": [
-    "Discard",
-    "Draw"
-  ],
+  "aliases": ["aurita"],
+  "searchTags": ["Discard", "Draw"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 26,

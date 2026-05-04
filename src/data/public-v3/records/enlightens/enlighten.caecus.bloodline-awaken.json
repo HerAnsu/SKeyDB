@@ -13,14 +13,7 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": [
-        "15",
-        "16",
-        "17",
-        "18",
-        "19",
-        "20"
-      ]
+      "values": ["15", "16", "17", "18", "19", "20"]
     }
   },
   "ownerAwakenerName": "Caecus"

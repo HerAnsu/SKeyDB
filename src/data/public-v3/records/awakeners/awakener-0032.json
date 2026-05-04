@@ -17,15 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "Out of the Aeons",
-  "aliases": [
-    "miryam"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Draw",
-    "Heal",
-    "Tentacles"
-  ],
+  "aliases": ["miryam"],
+  "searchTags": ["Arithmetica", "Draw", "Heal", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 33,

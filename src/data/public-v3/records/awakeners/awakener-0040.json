@@ -17,13 +17,8 @@
   "rarity": "SSR",
   "type": "CHORUS",
   "faction": "The Fools",
-  "aliases": [
-    "pickman"
-  ],
-  "searchTags": [
-    "Arithmetica",
-    "Draw"
-  ],
+  "aliases": ["pickman"],
+  "searchTags": ["Arithmetica", "Draw"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 50,
