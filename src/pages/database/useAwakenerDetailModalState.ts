@@ -2,6 +2,7 @@ import {useCallback} from 'react'
 
 import {type Awakener} from '@/domain/awakeners'
 import {type AwakenerFullV2Record} from '@/domain/awakeners-full-v2'
+import type {Covenant} from '@/domain/covenants'
 import {type DatabaseAwakenerTab} from '@/domain/database-paths'
 import type {Wheel} from '@/domain/wheels'
 
@@ -19,6 +20,7 @@ interface UseAwakenerDetailModalStateOptions {
   onClose: () => void
   onSelectAwakener?: (awakener: Awakener, tab: DatabaseAwakenerTab) => void
   onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
+  onSelectCovenant?: (covenant: Pick<Covenant, 'name'>) => void
   onTabChange: (tab: DatabaseAwakenerTab) => void
 }
 
@@ -30,6 +32,7 @@ export function useAwakenerDetailModalState({
   onClose,
   onSelectAwakener,
   onSelectWheel,
+  onSelectCovenant,
   onTabChange,
 }: UseAwakenerDetailModalStateOptions) {
   const search = useAwakenerDetailSearch({activeTab, awakeners, onSelectAwakener})
@@ -56,6 +59,7 @@ export function useAwakenerDetailModalState({
   const popoverController = useDatabasePopoverController({
     formulaContext: shellView.formulaContext,
     onNavigateToSkills: navigateToSkills,
+    onNavigateToCovenantPage: onSelectCovenant,
     onNavigateToWheelPage: onSelectWheel,
     onToggleEnlightenSlot: sessionActions.toggleEnlightenSlot,
     referenceLayer,

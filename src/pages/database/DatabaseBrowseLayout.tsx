@@ -1,10 +1,12 @@
 import type {ReactNode} from 'react'
 
+import type {DatabaseEntityId} from '@/domain/database-entity-paths'
+
 import {ActiveFilterChips, type ActiveFilterChip} from './ActiveFilterChips'
 import {DatabaseEntityTabs} from './DatabaseEntityTabs'
 
 interface DatabaseBrowseLayoutProps {
-  activeEntity: 'awakeners' | 'wheels'
+  activeEntity: DatabaseEntityId
   search: string
   title: string
   unitNoun: string

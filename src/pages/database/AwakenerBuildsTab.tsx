@@ -10,10 +10,14 @@ import {
 import {getCovenantAssetById} from '@/domain/covenant-assets'
 import {getCovenants, type Covenant} from '@/domain/covenants'
 import {getMainstatByKey, getMainstatIcon, type MainstatKey} from '@/domain/mainstats'
-import {loadPublicV2WheelFullById} from '@/domain/public-v2-detail-loaders'
+import {
+  loadPublicV2CovenantFullById,
+  loadPublicV2WheelFullById,
+} from '@/domain/public-v2-detail-loaders'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelById, getWheels, type Wheel} from '@/domain/wheels'
 
+import {buildCovenantPopoverEntry} from './buildCovenantPopoverEntry'
 import {buildWheelPopoverEntry} from './buildWheelPopoverEntry'
 import {useDatabasePopoverControllerContext} from './database-popover-context'
 import {
@@ -203,6 +207,36 @@ function RecommendationLine({
 }
 
 function CovenantRecommendationGrid({build}: {build: AwakenerBuild}) {
+  const popoverContext = useDatabasePopoverControllerContext()
+  const requestIdRef = useRef(0)
+  const handleSelectCovenantRecommendation = useCallback(
+    (covenantId: string, event: MouseEvent<HTMLElement>) => {
+      event.stopPropagation()
+      const openRootInfo = popoverContext?.openRootInfo
+      if (!openRootInfo) {
+        return
+      }
+
+      const covenant = getCovenantByCanonicalId(covenantId)
+      const anchorElement = event.currentTarget
+      const requestId = requestIdRef.current + 1
+      requestIdRef.current = requestId
+      void loadPublicV2CovenantFullById(covenant?.id ?? covenantId)
+        .then((covenantRecord) => {
+          if (!covenantRecord || requestId !== requestIdRef.current) {
+            return
+          }
+
+          openRootInfo(buildCovenantPopoverEntry(covenantRecord), {
+            currentTarget: anchorElement,
+            stopPropagation: () => undefined,
+          })
+        })
+        .catch(() => undefined)
+    },
+    [popoverContext],
+  )
+
   return (
     <div className={RECOMMENDATION_GRID_CLASS}>
       {build.recommendedCovenantIds.map((covenantId, index) => {
@@ -216,6 +250,9 @@ function CovenantRecommendationGrid({build}: {build: AwakenerBuild}) {
             chip={`#${String(index + 1)}`}
             key={covenantId}
             label={label}
+            onClick={(event) => {
+              handleSelectCovenantRecommendation(covenantId, event)
+            }}
           />
         )
       })}

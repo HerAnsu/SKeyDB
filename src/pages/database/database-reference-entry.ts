@@ -13,6 +13,7 @@ export interface DatabaseReferenceAttributeRow {
 export type DatabaseReferenceNavigationTarget =
   | {kind: 'skills'}
   | {kind: 'wheel-page'; wheelName: string}
+  | {kind: 'covenant-page'; covenantName: string}
 
 export interface DatabaseReferenceEntry {
   name: string
@@ -27,6 +28,11 @@ export interface DatabaseReferenceEntry {
   detailLinks?: {
     label: string
     entry: KeyedDatabaseReferenceEntry
+  }[]
+  descriptionSections?: {
+    label: string
+    description: string
+    record?: DescribedRecord
   }[]
   navigationLabel?: string
   navigationTarget?: DatabaseReferenceNavigationTarget

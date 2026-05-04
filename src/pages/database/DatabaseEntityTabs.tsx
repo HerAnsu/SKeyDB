@@ -1,9 +1,9 @@
 import {NavLink} from 'react-router-dom'
 
-import {buildDatabaseEntityBrowsePath} from '@/domain/database-entity-paths'
+import {buildDatabaseEntityBrowsePath, type DatabaseEntityId} from '@/domain/database-entity-paths'
 
 interface DatabaseEntityTabsProps {
-  activeEntity: 'awakeners' | 'wheels'
+  activeEntity: DatabaseEntityId
   search: string
 }
 
@@ -24,6 +24,18 @@ export function DatabaseEntityTabs({activeEntity, search}: DatabaseEntityTabsPro
         to={{pathname: buildDatabaseEntityBrowsePath('wheels'), search}}
       >
         Wheels
+      </NavLink>
+      <NavLink
+        className={buildTabClassName(activeEntity === 'posses')}
+        to={{pathname: buildDatabaseEntityBrowsePath('posses'), search}}
+      >
+        Posses
+      </NavLink>
+      <NavLink
+        className={buildTabClassName(activeEntity === 'covenants')}
+        to={{pathname: buildDatabaseEntityBrowsePath('covenants'), search}}
+      >
+        Covenants
       </NavLink>
     </nav>
   )

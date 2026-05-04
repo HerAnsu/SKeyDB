@@ -4,6 +4,10 @@ const covenantIconAssets = import.meta.glob<string>('../assets/covenants/Icon/*.
   eager: true,
   import: 'default',
 })
+const covenantFullArtAssets = import.meta.glob<string>('../assets/covenants/FullArt/*.webp', {
+  eager: true,
+  import: 'default',
+})
 
 function basenameWithoutExt(assetPath: string): string {
   const filename = assetPath.split('/').at(-1) ?? assetPath
@@ -12,6 +16,12 @@ function basenameWithoutExt(assetPath: string): string {
 
 const covenantIconAssetByAssetId = new Map(
   Object.entries(covenantIconAssets).map(([assetPath, url]) => [
+    basenameWithoutExt(assetPath),
+    url,
+  ]),
+)
+const covenantFullArtAssetByAssetId = new Map(
+  Object.entries(covenantFullArtAssets).map(([assetPath, url]) => [
     basenameWithoutExt(assetPath),
     url,
   ]),
@@ -34,4 +44,9 @@ const covenantAssetIdById = new Map(
 export function getCovenantAssetById(covenantId: string): string | undefined {
   const assetId = covenantAssetIdById.get(covenantId)
   return assetId ? covenantIconAssetByAssetId.get(assetId) : undefined
+}
+
+export function getCovenantFullArtAssetById(covenantId: string): string | undefined {
+  const assetId = covenantAssetIdById.get(covenantId)
+  return assetId ? covenantFullArtAssetByAssetId.get(assetId) : undefined
 }

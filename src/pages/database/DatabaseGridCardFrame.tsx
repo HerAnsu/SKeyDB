@@ -8,6 +8,7 @@ interface DatabaseGridCardFrameProps {
   imageObjectClassName?: string
   prioritizeImage: boolean
   fadeHeightClass: string
+  aspectClassName?: string
   cornerOverlay?: ReactNode
   children?: ReactNode
   onSelect: () => void
@@ -15,6 +16,7 @@ interface DatabaseGridCardFrameProps {
 
 export function DatabaseGridCardFrame({
   ariaLabel,
+  aspectClassName = 'aspect-[5/9]',
   children,
   cornerOverlay,
   fadeHeightClass,
@@ -28,7 +30,7 @@ export function DatabaseGridCardFrame({
   return (
     <article className='collection-item-card group/card p-0.5'>
       <div
-        className='relative aspect-[5/9] overflow-hidden p-[1px] shadow-[0_8px_20px_rgba(2,6,23,0.24)] transition-[transform,box-shadow] duration-300 group-hover/card:-translate-y-0.5 group-hover/card:shadow-[0_14px_30px_rgba(2,6,23,0.34)]'
+        className={`relative overflow-hidden p-[1px] shadow-[0_8px_20px_rgba(2,6,23,0.24)] transition-[transform,box-shadow] duration-300 group-hover/card:-translate-y-0.5 group-hover/card:shadow-[0_14px_30px_rgba(2,6,23,0.34)] ${aspectClassName}`}
         style={
           {
             '--realm-accent': realmAccent,

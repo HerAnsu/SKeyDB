@@ -1,4 +1,6 @@
 import {type AwakenerFullV2Record} from './awakeners-full-v2'
+import {type CovenantFullV2Record} from './covenants-full-v2'
+import {type PosseFullV2Record} from './posses-full-v2'
 import {loadPublicV2Envelope, loadPublicV2FullRecord} from './public-v2-loaders'
 import {type PublicV2Record} from './public-v2-schema'
 import {buildWheelMainstatSeriesKey, type WheelMainstatKey} from './wheel-mainstat-scaling'
@@ -76,6 +78,8 @@ const PROMOTED_EXTRA_DERIVED_IDS = new Set([
 
 const awakenerFullByIdPromises = new Map<string, Promise<AwakenerFullV2Record | undefined>>()
 const wheelFullByIdPromises = new Map<string, Promise<WheelFullV2Record | undefined>>()
+const posseFullByIdPromises = new Map<string, Promise<PosseFullV2Record | undefined>>()
+const covenantFullByIdPromises = new Map<string, Promise<CovenantFullV2Record | undefined>>()
 const SUBSTAT_PERCENT_KEYS = new Set([
   'CritRate',
   'CritDamage',
@@ -90,6 +94,14 @@ function isPublicAwakenerId(id: string): boolean {
 
 function isPublicWheelId(id: string): boolean {
   return /^wheel-\d{4}$/.test(id)
+}
+
+function isPublicPosseId(id: string): boolean {
+  return /^posse-\d{4}$/.test(id)
+}
+
+function isPublicCovenantId(id: string): boolean {
+  return /^covenant-\d{4}$/.test(id)
 }
 
 async function resolvePublicAwakenerId(awakenerId: string | number): Promise<string | undefined> {
@@ -386,5 +398,43 @@ export async function loadPublicV2WheelFullById(
     record ? adaptPublicV2WheelRecord(record as PublicV2WheelRecord) : undefined,
   )
   wheelFullByIdPromises.set(wheelId, recordPromise)
+  return recordPromise
+}
+
+export async function loadPublicV2PosseFullById(
+  posseId: string,
+): Promise<PosseFullV2Record | undefined> {
+  if (!isPublicPosseId(posseId)) {
+    return undefined
+  }
+
+  const cachedPromise = posseFullByIdPromises.get(posseId)
+  if (cachedPromise) {
+    return cachedPromise
+  }
+
+  const recordPromise = loadPublicV2FullRecord('posses', posseId).then((record) =>
+    record ? (record as unknown as PosseFullV2Record) : undefined,
+  )
+  posseFullByIdPromises.set(posseId, recordPromise)
+  return recordPromise
+}
+
+export async function loadPublicV2CovenantFullById(
+  covenantId: string,
+): Promise<CovenantFullV2Record | undefined> {
+  if (!isPublicCovenantId(covenantId)) {
+    return undefined
+  }
+
+  const cachedPromise = covenantFullByIdPromises.get(covenantId)
+  if (cachedPromise) {
+    return cachedPromise
+  }
+
+  const recordPromise = loadPublicV2FullRecord('covenants', covenantId).then((record) =>
+    record ? (record as unknown as CovenantFullV2Record) : undefined,
+  )
+  covenantFullByIdPromises.set(covenantId, recordPromise)
   return recordPromise
 }

@@ -13,9 +13,13 @@ import type {PublicFormulaContext} from './public-formula-context'
 import {getRealmLabel} from './realms'
 import {getWheelsFullV2, type WheelFullV2Record} from './wheels-full-v2'
 
-export function buildWheelDatabaseDescriptionRecord(
-  record: WheelFullV2Record,
-): WheelDatabaseDescriptionRecord {
+export function buildWheelDatabaseDescriptionRecord(record: {
+  id: string
+  name: string
+  ownerAwakenerId?: string
+  descriptionTemplate: string
+  descriptionArgs: WheelFullV2Record['descriptionArgs']
+}): WheelDatabaseDescriptionRecord {
   return {
     id: record.id,
     kind: 'wheel',

@@ -13,6 +13,7 @@ import {FaGear, FaXmark} from 'react-icons/fa6'
 import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import {type Awakener} from '@/domain/awakeners'
 import {type AwakenerFullV2Record} from '@/domain/awakeners-full-v2'
+import type {Covenant} from '@/domain/covenants'
 import {DATABASE_AWAKENER_TABS, type DatabaseAwakenerTab} from '@/domain/database-paths'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getRealmAccent, getRealmIcon, getRealmLabel} from '@/domain/realms'
@@ -38,6 +39,7 @@ interface AwakenerDetailModalProps {
   onTabChange: (tab: DatabaseAwakenerTab) => void
   onSelectAwakener?: (awakener: Awakener, tab: DatabaseAwakenerTab) => void
   onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
+  onSelectCovenant?: (covenant: Pick<Covenant, 'name'>) => void
 }
 
 const DATABASE_AWAKENER_TAB_LABELS: Record<DatabaseAwakenerTab, string> = {
@@ -71,6 +73,7 @@ export function AwakenerDetailModal({
   onTabChange,
   onSelectAwakener,
   onSelectWheel,
+  onSelectCovenant,
 }: AwakenerDetailModalProps) {
   const tabButtonRefs = useRef<Partial<Record<DatabaseAwakenerTab, HTMLButtonElement | null>>>({})
   const [isArtViewerOpen, setIsArtViewerOpen] = useState(false)
@@ -110,6 +113,7 @@ export function AwakenerDetailModal({
     fullDataV2,
     onClose,
     onSelectAwakener,
+    onSelectCovenant,
     onSelectWheel,
     onTabChange,
   })

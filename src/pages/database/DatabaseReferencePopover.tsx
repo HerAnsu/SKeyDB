@@ -105,6 +105,7 @@ export function DatabaseReferencePopover({
     ? 'bg-slate-950/[.985] shadow-[0_18px_40px_rgba(2,6,23,0.78)]'
     : 'bg-slate-950/[.95] shadow-[0_10px_24px_rgba(2,6,23,0.58)]'
   const detailLinks = entry.detailLinks ?? []
+  const descriptionSections = entry.descriptionSections ?? []
   const attributeRows = entry.attributeRows ?? []
   const fallbackSourceText = entry.record
     ? resolveDescriptionTemplate(entry.record.descriptionTemplate, entry.record.descriptionArgs, {
@@ -231,13 +232,53 @@ export function DatabaseReferencePopover({
             ))}
           </div>
         ) : null}
-        <p className='leading-relaxed text-slate-400' style={scaledFontStyle(11)}>
-          <Suspense
-            fallback={fallbackText ? <span>{renderTextWithBreaks(fallbackText)}</span> : null}
-          >
-            <DatabaseRichTextContent {...contentProps} />
-          </Suspense>
-        </p>
+        {descriptionSections.length > 0 ? (
+          <div className='space-y-3'>
+            {descriptionSections.map((section) => {
+              const sectionFallbackSourceText = section.record
+                ? resolveDescriptionTemplate(
+                    section.record.descriptionTemplate,
+                    section.record.descriptionArgs,
+                    {
+                      rank: entry.descriptionRank,
+                      stats,
+                      formulaContext,
+                    },
+                  )
+                : section.description
+              return (
+                <div key={section.label}>
+                  <p className='mb-1 text-[11px] text-slate-400' style={scaledFontStyle(11)}>
+                    {section.label}
+                  </p>
+                  <p className='leading-relaxed text-slate-400' style={scaledFontStyle(11)}>
+                    <Suspense
+                      fallback={
+                        sectionFallbackSourceText ? (
+                          <span>{renderTextWithBreaks(sectionFallbackSourceText)}</span>
+                        ) : null
+                      }
+                    >
+                      <DatabaseRichTextContent
+                        {...contentProps}
+                        record={section.record}
+                        text={section.description}
+                      />
+                    </Suspense>
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+        ) : (
+          <p className='leading-relaxed text-slate-400' style={scaledFontStyle(11)}>
+            <Suspense
+              fallback={fallbackText ? <span>{renderTextWithBreaks(fallbackText)}</span> : null}
+            >
+              <DatabaseRichTextContent {...contentProps} />
+            </Suspense>
+          </p>
+        )}
         {detailLinks.length > 0 && onInfoEntryClick ? (
           <div className='mt-3 border-t border-slate-700/45 pt-2.5'>
             <p

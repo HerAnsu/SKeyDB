@@ -5,6 +5,7 @@ import type {
   AwakenerTalentRecord,
   DerivedSkillRecord,
 } from './awakener-source-schema'
+import type {CovenantSetEffectRecord} from './covenants-full-v2'
 import {
   buildDescriptionArgHover,
   formatDescriptionArgProgression,
@@ -15,6 +16,7 @@ import {
   type DescriptionArgResolveContext,
   type ResolvedDescriptionArg,
 } from './description-args'
+import type {PosseFullV2Record} from './posses-full-v2'
 import type {WheelFullV2Record} from './wheels-full-v2'
 
 export interface WheelDatabaseDescriptionRecord {
@@ -26,6 +28,23 @@ export interface WheelDatabaseDescriptionRecord {
   descriptionArgs: WheelFullV2Record['descriptionArgs']
 }
 
+export interface PosseDatabaseDescriptionRecord {
+  id: string
+  kind: 'posse'
+  displayName: string
+  ownerAwakenerId?: string
+  descriptionTemplate: string
+  descriptionArgs: PosseFullV2Record['descriptionArgs']
+}
+
+export interface CovenantDatabaseDescriptionRecord {
+  id: string
+  kind: 'covenant'
+  displayName: string
+  descriptionTemplate: string
+  descriptionArgs: CovenantSetEffectRecord['descriptionArgs']
+}
+
 export type DescribedRecord =
   | AwakenerSkillRecord
   | AwakenerTalentRecord
@@ -33,6 +52,8 @@ export type DescribedRecord =
   | DerivedSkillRecord
   | AwakenerOverlayRecord
   | WheelDatabaseDescriptionRecord
+  | PosseDatabaseDescriptionRecord
+  | CovenantDatabaseDescriptionRecord
 
 export interface ResolvedDescribedRecordArgEntry {
   key: string

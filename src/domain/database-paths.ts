@@ -1,9 +1,11 @@
 import type {Awakener} from './awakeners'
+import type {Covenant} from './covenants'
 import {
   buildDatabaseEntityBrowsePath,
   buildDatabaseEntityDetailPath,
   toDatabaseEntitySlug,
 } from './database-entity-paths'
+import type {Posse} from './posses'
 import type {Wheel} from './wheels'
 
 export const DATABASE_AWAKENER_TABS = ['overview', 'upgrades', 'skills', 'builds', 'teams'] as const
@@ -17,6 +19,14 @@ export function toDatabaseAwakenerSlug(name: string): string {
 }
 
 export function toDatabaseWheelSlug(name: string): string {
+  return toDatabaseEntitySlug(name)
+}
+
+export function toDatabasePosseSlug(name: string): string {
+  return toDatabaseEntitySlug(name)
+}
+
+export function toDatabaseCovenantSlug(name: string): string {
   return toDatabaseEntitySlug(name)
 }
 
@@ -50,8 +60,24 @@ export function buildDatabaseWheelBrowsePath(): string {
   return buildDatabaseEntityBrowsePath('wheels')
 }
 
+export function buildDatabasePosseBrowsePath(): string {
+  return buildDatabaseEntityBrowsePath('posses')
+}
+
+export function buildDatabaseCovenantBrowsePath(): string {
+  return buildDatabaseEntityBrowsePath('covenants')
+}
+
 export function buildDatabaseWheelPath(wheel: Pick<Wheel, 'name'>): string {
   return buildDatabaseEntityDetailPath('wheels', toDatabaseWheelSlug(wheel.name))
+}
+
+export function buildDatabasePossePath(posse: Pick<Posse, 'name'>): string {
+  return buildDatabaseEntityDetailPath('posses', toDatabasePosseSlug(posse.name))
+}
+
+export function buildDatabaseCovenantPath(covenant: Pick<Covenant, 'name'>): string {
+  return buildDatabaseEntityDetailPath('covenants', toDatabaseCovenantSlug(covenant.name))
 }
 
 export function findAwakenerByDatabaseSlug(
@@ -73,4 +99,25 @@ export function findWheelByDatabaseSlug(wheels: Wheel[], slug: string | undefine
   }
   const normalizedSlug = slug.trim().toLowerCase()
   return wheels.find((wheel) => toDatabaseWheelSlug(wheel.name) === normalizedSlug) ?? null
+}
+
+export function findPosseByDatabaseSlug(posses: Posse[], slug: string | undefined): Posse | null {
+  if (!slug) {
+    return null
+  }
+  const normalizedSlug = slug.trim().toLowerCase()
+  return posses.find((posse) => toDatabasePosseSlug(posse.name) === normalizedSlug) ?? null
+}
+
+export function findCovenantByDatabaseSlug(
+  covenants: Covenant[],
+  slug: string | undefined,
+): Covenant | null {
+  if (!slug) {
+    return null
+  }
+  const normalizedSlug = slug.trim().toLowerCase()
+  return (
+    covenants.find((covenant) => toDatabaseCovenantSlug(covenant.name) === normalizedSlug) ?? null
+  )
 }

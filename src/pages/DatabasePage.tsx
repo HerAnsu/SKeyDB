@@ -1,22 +1,34 @@
-import {lazy, Suspense, useEffect, useRef} from 'react'
+import {lazy, Suspense, useEffect, useMemo, useRef, useState} from 'react'
 
-import {useLocation, useNavigate, useParams} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 
 import emojiWke from '@/assets/emoji/Emoji_WKE_S_06.webp'
 import {getAwakeners, type Awakener} from '@/domain/awakeners'
+import {getCovenants, type Covenant} from '@/domain/covenants'
+import {searchCovenants} from '@/domain/covenants-search'
 import {DATABASE_SORT_OPTIONS, type DatabaseSortKey} from '@/domain/database-browse-state'
-import {buildDatabaseEntityBrowsePath} from '@/domain/database-entity-paths'
+import {buildDatabaseEntityBrowsePath, type DatabaseEntityId} from '@/domain/database-entity-paths'
 import {
   buildDatabaseAwakenerPath,
+  buildDatabaseCovenantBrowsePath,
+  buildDatabaseCovenantPath,
+  buildDatabasePosseBrowsePath,
+  buildDatabasePossePath,
   buildDatabaseWheelBrowsePath,
   buildDatabaseWheelPath,
   findAwakenerByDatabaseSlug,
+  findCovenantByDatabaseSlug,
+  findPosseByDatabaseSlug,
   findWheelByDatabaseSlug,
   resolveDatabaseAwakenerTab,
   type DatabaseAwakenerTab,
 } from '@/domain/database-paths'
+import {getPosses, type Posse} from '@/domain/posses'
+import {searchPosses} from '@/domain/posses-search'
 import {
   loadPublicV2AwakenerFullById,
+  loadPublicV2CovenantFullById,
+  loadPublicV2PosseFullById,
   loadPublicV2WheelFullById,
 } from '@/domain/public-v2-detail-loaders'
 import {getWheels, type Wheel} from '@/domain/wheels'
@@ -33,6 +45,13 @@ import {DatabaseBrowseLayout} from './database/DatabaseBrowseLayout'
 import {DatabaseFilters} from './database/DatabaseFilters'
 import {DatabaseGrid} from './database/DatabaseGrid'
 import {EntityViewControls} from './database/EntityViewControls'
+import {SimpleArtifactDetailModal} from './database/SimpleArtifactDetailModal'
+import {
+  CovenantDatabaseFilters,
+  PosseDatabaseFilters,
+  type PosseRealmFilter,
+} from './database/SimpleArtifactFilters'
+import {CovenantGrid, PosseGrid} from './database/SimpleArtifactGrid'
 import {useDatabaseBrowseState} from './database/useDatabaseBrowseState'
 import {useDatabaseDetailRouteRecord} from './database/useDatabaseDetailRouteRecord'
 import {useDatabaseViewModel} from './database/useDatabaseViewModel'
@@ -54,6 +73,8 @@ const WheelDetailModal = lazy(() =>
 )
 const databaseAwakeners = getAwakeners()
 const databaseWheels = getWheels()
+const databasePosses = getPosses()
+const databaseCovenants = getCovenants()
 
 function getDatabaseSortLabel(sortKey: DatabaseSortKey): string {
   if (sortKey === 'RARITY') {
@@ -101,38 +122,114 @@ function getWheelSortDirectionLabel(
   return direction === 'ASC' ? 'A -> Z' : 'Z -> A'
 }
 
+function getActiveDatabaseEntity(pathname: string): DatabaseEntityId {
+  if (pathname.startsWith(buildDatabaseCovenantBrowsePath())) {
+    return 'covenants'
+  }
+  if (pathname.startsWith(buildDatabasePosseBrowsePath())) {
+    return 'posses'
+  }
+  if (pathname.startsWith(buildDatabaseWheelBrowsePath())) {
+    return 'wheels'
+  }
+  return 'awakeners'
+}
+
+function parseDatabaseRoute(pathname: string): {
+  awakenerSlug?: string
+  covenantSlug?: string
+  posseSlug?: string
+  tabSlug?: string
+  wheelSlug?: string
+} {
+  const parts = pathname.split('/').filter(Boolean)
+  if (parts[0] !== 'database') {
+    return {}
+  }
+
+  if (parts[1] === 'wheels') {
+    return {wheelSlug: parts[2]}
+  }
+  if (parts[1] === 'posses') {
+    return {posseSlug: parts[2]}
+  }
+  if (parts[1] === 'covenants') {
+    return {covenantSlug: parts[2]}
+  }
+  if (parts[1] === 'awk') {
+    return {awakenerSlug: parts[2], tabSlug: parts[3]}
+  }
+  return {}
+}
+
 export function DatabasePage() {
   const awakenerBrowseState = useDatabaseBrowseState()
   const awakenerViewModel = useDatabaseViewModel(databaseAwakeners, awakenerBrowseState)
   const wheelBrowseState = useWheelsDatabaseBrowseState()
   const wheelViewModel = useWheelsDatabaseViewModel(databaseWheels, wheelBrowseState)
+  const [posseQuery, setPosseQuery] = useState('')
+  const [posseRealmFilter, setPosseRealmFilter] = useState<PosseRealmFilter>('ALL')
+  const [covenantQuery, setCovenantQuery] = useState('')
+  const filteredPosses = useMemo(() => {
+    const searched = searchPosses(databasePosses, posseQuery)
+    return posseRealmFilter === 'ALL'
+      ? searched
+      : searched.filter((posse) => posse.realm === posseRealmFilter)
+  }, [posseQuery, posseRealmFilter])
+  const filteredCovenants = useMemo(
+    () => searchCovenants(databaseCovenants, covenantQuery),
+    [covenantQuery],
+  )
   const searchInputRef = useRef<HTMLInputElement | null>(null)
   const location = useLocation()
   const navigate = useNavigate()
-  const {awakenerSlug, tabSlug, wheelSlug} = useParams<{
-    awakenerSlug?: string
-    tabSlug?: string
-    wheelSlug?: string
-  }>()
+  const {awakenerSlug, covenantSlug, posseSlug, tabSlug, wheelSlug} = parseDatabaseRoute(
+    location.pathname,
+  )
   const selectedAwakener = findAwakenerByDatabaseSlug(databaseAwakeners, awakenerSlug)
   const selectedWheel = findWheelByDatabaseSlug(databaseWheels, wheelSlug)
+  const selectedPosse = findPosseByDatabaseSlug(databasePosses, posseSlug)
+  const selectedCovenant = findCovenantByDatabaseSlug(databaseCovenants, covenantSlug)
   const selectedTab = resolveDatabaseAwakenerTab(tabSlug) ?? 'overview'
-  const isWheelRoute = location.pathname.startsWith(buildDatabaseWheelBrowsePath())
-  const activeEntity = isWheelRoute ? 'wheels' : 'awakeners'
-  const browsePath = isWheelRoute
-    ? buildDatabaseEntityBrowsePath('wheels')
-    : buildDatabaseEntityBrowsePath('awakeners')
+  const activeEntity = getActiveDatabaseEntity(location.pathname)
+  const browsePath = buildDatabaseEntityBrowsePath(activeEntity)
 
   useGlobalSearchCapture({
-    enabled: !selectedAwakener && !selectedWheel,
+    enabled: !selectedAwakener && !selectedWheel && !selectedPosse && !selectedCovenant,
     searchInputRef,
-    onAppendCharacter: isWheelRoute
-      ? wheelBrowseState.appendSearchCharacter
-      : awakenerBrowseState.appendSearchCharacter,
-    onRemoveCharacter: isWheelRoute
-      ? wheelBrowseState.removeSearchCharacter
-      : awakenerBrowseState.removeSearchCharacter,
-    onClearSearch: isWheelRoute ? wheelBrowseState.clearQuery : awakenerBrowseState.clearQuery,
+    onAppendCharacter: (character) => {
+      if (activeEntity === 'wheels') {
+        wheelBrowseState.appendSearchCharacter(character)
+      } else if (activeEntity === 'posses') {
+        setPosseQuery((query) => `${query}${character}`)
+      } else if (activeEntity === 'covenants') {
+        setCovenantQuery((query) => `${query}${character}`)
+      } else {
+        awakenerBrowseState.appendSearchCharacter(character)
+      }
+    },
+    onRemoveCharacter: () => {
+      if (activeEntity === 'wheels') {
+        wheelBrowseState.removeSearchCharacter()
+      } else if (activeEntity === 'posses') {
+        setPosseQuery((query) => query.slice(0, -1))
+      } else if (activeEntity === 'covenants') {
+        setCovenantQuery((query) => query.slice(0, -1))
+      } else {
+        awakenerBrowseState.removeSearchCharacter()
+      }
+    },
+    onClearSearch: () => {
+      if (activeEntity === 'wheels') {
+        wheelBrowseState.clearQuery()
+      } else if (activeEntity === 'posses') {
+        setPosseQuery('')
+      } else if (activeEntity === 'covenants') {
+        setCovenantQuery('')
+      } else {
+        awakenerBrowseState.clearQuery()
+      }
+    },
   })
 
   useEffect(() => {
@@ -159,6 +256,30 @@ export function DatabasePage() {
     }
   }, [location.search, navigate, selectedWheel, wheelSlug])
 
+  useEffect(() => {
+    if (posseSlug && !selectedPosse) {
+      void navigate(
+        {
+          pathname: buildDatabasePosseBrowsePath(),
+          search: location.search,
+        },
+        {replace: true},
+      )
+    }
+  }, [location.search, navigate, posseSlug, selectedPosse])
+
+  useEffect(() => {
+    if (covenantSlug && !selectedCovenant) {
+      void navigate(
+        {
+          pathname: buildDatabaseCovenantBrowsePath(),
+          search: location.search,
+        },
+        {replace: true},
+      )
+    }
+  }, [covenantSlug, location.search, navigate, selectedCovenant])
+
   function openAwakenerDetail(awakenerId: string) {
     const awakener = databaseAwakeners.find((entry) => entry.id === awakenerId)
     if (!awakener) {
@@ -177,6 +298,28 @@ export function DatabasePage() {
     }
     void navigate({
       pathname: buildDatabaseWheelPath(wheel),
+      search: location.search,
+    })
+  }
+
+  function openPosseDetail(posseId: string) {
+    const posse = databasePosses.find((entry) => entry.id === posseId)
+    if (!posse) {
+      return
+    }
+    void navigate({
+      pathname: buildDatabasePossePath(posse),
+      search: location.search,
+    })
+  }
+
+  function openCovenantDetail(covenantId: string) {
+    const covenant = databaseCovenants.find((entry) => entry.id === covenantId)
+    if (!covenant) {
+      return
+    }
+    void navigate({
+      pathname: buildDatabaseCovenantPath(covenant),
       search: location.search,
     })
   }
@@ -212,6 +355,13 @@ export function DatabasePage() {
     })
   }
 
+  function handleModalCovenantSelect(nextCovenant: Pick<Covenant, 'name'>) {
+    void navigate({
+      pathname: buildDatabaseCovenantPath(nextCovenant),
+      search: location.search,
+    })
+  }
+
   const awakenerActiveFilterChips = buildAwakenerActiveFilterChips(awakenerBrowseState, {
     clearQuery: awakenerBrowseState.clearQuery,
     setRealmFilter: awakenerBrowseState.setRealmFilter,
@@ -241,7 +391,56 @@ export function DatabasePage() {
         </p>
       </div>
 
-      {activeEntity === 'wheels' ? (
+      {activeEntity === 'posses' ? (
+        <DatabaseBrowseLayout
+          activeEntity={activeEntity}
+          activeFilterChips={[]}
+          filteredCount={filteredPosses.length}
+          filters={
+            <PosseDatabaseFilters
+              onQueryChange={setPosseQuery}
+              onRealmFilterChange={setPosseRealmFilter}
+              query={posseQuery}
+              realmFilter={posseRealmFilter}
+              searchInputRef={searchInputRef}
+            />
+          }
+          onResetFilters={() => {
+            setPosseQuery('')
+            setPosseRealmFilter('ALL')
+          }}
+          results={<PosseGrid onSelectPosse={openPosseDetail} posses={filteredPosses} />}
+          search={location.search}
+          title='Posses'
+          totalCount={databasePosses.length}
+          unitNoun='posses'
+          viewControls={null}
+        />
+      ) : activeEntity === 'covenants' ? (
+        <DatabaseBrowseLayout
+          activeEntity={activeEntity}
+          activeFilterChips={[]}
+          filteredCount={filteredCovenants.length}
+          filters={
+            <CovenantDatabaseFilters
+              onQueryChange={setCovenantQuery}
+              query={covenantQuery}
+              searchInputRef={searchInputRef}
+            />
+          }
+          onResetFilters={() => {
+            setCovenantQuery('')
+          }}
+          results={
+            <CovenantGrid covenants={filteredCovenants} onSelectCovenant={openCovenantDetail} />
+          }
+          search={location.search}
+          title='Covenants'
+          totalCount={databaseCovenants.length}
+          unitNoun='covenants'
+          viewControls={null}
+        />
+      ) : activeEntity === 'wheels' ? (
         <DatabaseBrowseLayout
           activeEntity={activeEntity}
           activeFilterChips={wheelActiveFilterChips}
@@ -338,6 +537,7 @@ export function DatabasePage() {
             awakeners={databaseAwakeners}
             onClose={closeDetail}
             onSelectAwakener={handleModalAwakenerSelect}
+            onSelectCovenant={handleModalCovenantSelect}
             onSelectWheel={handleModalWheelSelect}
             onTabChange={handleDetailTabChange}
             tabSlug={tabSlug}
@@ -360,6 +560,30 @@ export function DatabasePage() {
           />
         </Suspense>
       ) : null}
+
+      {selectedPosse ? (
+        <Suspense
+          fallback={
+            <div className='px-2 py-3 text-sm text-slate-300'>Loading posse details...</div>
+          }
+        >
+          <DatabasePosseDetailRoute
+            onClose={closeDetail}
+            onSelectAwakener={handleModalAwakenerSelect}
+            posse={selectedPosse}
+          />
+        </Suspense>
+      ) : null}
+
+      {selectedCovenant ? (
+        <Suspense
+          fallback={
+            <div className='px-2 py-3 text-sm text-slate-300'>Loading covenant details...</div>
+          }
+        >
+          <DatabaseCovenantDetailRoute covenant={selectedCovenant} onClose={closeDetail} />
+        </Suspense>
+      ) : null}
     </section>
   )
 }
@@ -371,6 +595,7 @@ interface DatabaseAwakenerDetailRouteProps {
   onClose: () => void
   onSelectAwakener: (awakener: Pick<Awakener, 'id' | 'name'>, tab?: DatabaseAwakenerTab) => void
   onSelectWheel: (wheel: Pick<Wheel, 'name'>) => void
+  onSelectCovenant: (covenant: Pick<Covenant, 'name'>) => void
   onTabChange: (tab: DatabaseAwakenerTab) => void
   tabSlug?: string
 }
@@ -382,6 +607,7 @@ function DatabaseAwakenerDetailRoute({
   onClose,
   onSelectAwakener,
   onSelectWheel,
+  onSelectCovenant,
   onTabChange,
   tabSlug,
 }: DatabaseAwakenerDetailRouteProps) {
@@ -444,6 +670,7 @@ function DatabaseAwakenerDetailRoute({
       key={awakener.id}
       onClose={onClose}
       onSelectAwakener={onSelectAwakener}
+      onSelectCovenant={onSelectCovenant}
       onSelectWheel={onSelectWheel}
       onTabChange={onTabChange}
     />
@@ -488,6 +715,72 @@ function DatabaseWheelDetailRoute({
       onSelectWheel={onSelectWheel}
       wheel={wheel}
       wheels={wheels}
+    />
+  )
+}
+
+interface DatabasePosseDetailRouteProps {
+  posse: Posse
+  onClose: () => void
+  onSelectAwakener: (awakener: Pick<Awakener, 'id' | 'name'>, tab?: DatabaseAwakenerTab) => void
+}
+
+function DatabasePosseDetailRoute({
+  onClose,
+  onSelectAwakener,
+  posse,
+}: DatabasePosseDetailRouteProps) {
+  const {isLoading, record: fullDataV2} = useDatabaseDetailRouteRecord({
+    id: posse.id,
+    loadRecord: loadPublicV2PosseFullById,
+    missingPathname: buildDatabasePosseBrowsePath(),
+  })
+
+  if (isLoading) {
+    return <div className='px-2 py-3 text-sm text-slate-300'>Loading posse details...</div>
+  }
+
+  if (!fullDataV2) {
+    return null
+  }
+
+  return (
+    <SimpleArtifactDetailModal
+      fullDataV2={fullDataV2}
+      item={posse}
+      kind='posse'
+      onClose={onClose}
+      onSelectAwakener={onSelectAwakener}
+    />
+  )
+}
+
+interface DatabaseCovenantDetailRouteProps {
+  covenant: Covenant
+  onClose: () => void
+}
+
+function DatabaseCovenantDetailRoute({covenant, onClose}: DatabaseCovenantDetailRouteProps) {
+  const {isLoading, record: fullDataV2} = useDatabaseDetailRouteRecord({
+    id: covenant.id,
+    loadRecord: loadPublicV2CovenantFullById,
+    missingPathname: buildDatabaseCovenantBrowsePath(),
+  })
+
+  if (isLoading) {
+    return <div className='px-2 py-3 text-sm text-slate-300'>Loading covenant details...</div>
+  }
+
+  if (!fullDataV2) {
+    return null
+  }
+
+  return (
+    <SimpleArtifactDetailModal
+      fullDataV2={fullDataV2}
+      item={covenant}
+      kind='covenant'
+      onClose={onClose}
     />
   )
 }
