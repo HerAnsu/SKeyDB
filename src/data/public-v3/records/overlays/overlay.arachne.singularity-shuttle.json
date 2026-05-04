@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.arachne.singularity-shuttle",
+  "name": "Dimension Shuttle",
+  "route": {
+    "slug": "dimension-shuttle",
+    "canonicalPath": "/database/awakeners/arachne/overlays/dimension-shuttle"
+  },
+  "assets": {
+    "icon": "asset-overlay.arachne.singularity-shuttle-icon"
+  },
+  "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0056",
+  "aliases": [
+    "Singularity Shuttle"
+  ],
+  "iconId": "IconS_Buff_067",
+  "textColor": "affliction",
+  "descriptionTemplate": "After playing the first Command Card each turn, move a Temporary Base Copy of it to {Ultra Space}. This cannot trigger during {Ultra Rounds}.",
+  "descriptionArgs": {},
+  "ownerAwakenerName": "Arachne"
+}

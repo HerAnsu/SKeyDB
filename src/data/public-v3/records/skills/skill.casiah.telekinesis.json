@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 3,
+  "kind": "skill",
+  "id": "skill.casiah.telekinesis",
+  "name": "Telekinesis",
+  "route": {
+    "slug": "telekinesis",
+    "canonicalPath": "/database/awakeners/casiah/skills/telekinesis"
+  },
+  "ownerAwakenerId": "awakener-0007",
+  "slot": "Skill1",
+  "descriptionTemplate": "Treated as \"Strike\". Choose any 1 card from {Ultra Space} and add it to your hand, reducing its Arithmetica Cost by 2. Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}, and gain [Power:Arg3] Temporary {STR}.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "scaling",
+      "values": [
+        "15",
+        "18",
+        "21",
+        "24",
+        "27",
+        "30"
+      ],
+      "stat": "ATK",
+      "suffix": "%"
+    },
+    "Arg2": {
+      "kind": "fixed",
+      "value": "3"
+    },
+    "Arg3": {
+      "kind": "scaling",
+      "values": [
+        "8",
+        "9.6",
+        "11.2",
+        "12.8",
+        "14.4",
+        "16"
+      ],
+      "stat": "ATK",
+      "suffix": "%"
+    }
+  },
+  "cardKeywords": [],
+  "cost": "0",
+  "upgrades": [
+    {
+      "id": "upgrade.enlighten.casiah.legendary-copycat.skill.casiah.telekinesis",
+      "operation": "replace_description",
+      "upgraderId": "enlighten.casiah.legendary-copycat",
+      "upgraderType": "enlighten",
+      "upgraderSlot": "E3",
+      "ownerAwakenerId": "awakener-0007",
+      "ownerAwakenerName": "Casiah",
+      "patch": {
+        "descriptionTemplate": "Treated as \"Strike\". Choose any 1 card from {Ultra Space} and add it to your hand, reducing its Arithmetica Cost by 2. Randomly deal [Damage:Arg1] DMG [Arg2] {plural:[Arg2]|time|times}, and gain [Power:Arg3] Temporary {STR}. {Aftershock}: Shuffle 1 {Insight} into the Draw Pile."
+      }
+    }
+  ],
+  "ownerAwakenerName": "Casiah"
+}

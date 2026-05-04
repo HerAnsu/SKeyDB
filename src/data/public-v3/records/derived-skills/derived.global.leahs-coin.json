@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 3,
+  "kind": "derivedSkill",
+  "id": "derived.global.leahs-coin",
+  "name": "Leah's Coin",
+  "route": {
+    "slug": "leahs-coin",
+    "canonicalPath": "/database/derived-skills/leahs-coin"
+  },
+  "descriptionTemplate": "Draw [Arg1] {plural:[Arg1]|card|cards} and gain [Arg2] Arithmetica.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "fixed",
+      "value": "2"
+    },
+    "Arg2": {
+      "kind": "fixed",
+      "value": "2"
+    }
+  },
+  "cardKeywords": []
+}

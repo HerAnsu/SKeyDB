@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.pickman.fantasia",
+  "name": "Fantasia",
+  "route": {
+    "slug": "fantasia",
+    "canonicalPath": "/database/awakeners/pickman/overlays/fantasia"
+  },
+  "assets": {
+    "icon": "asset-overlay.pickman.fantasia-icon"
+  },
+  "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0040",
+  "aliases": [],
+  "iconId": "IconS_Buff_066",
+  "textColor": "misc",
+  "descriptionTemplate": "When Pickman triggers the {Discover} effect, provide the {Inspiration!} option: Consume 1 stack of {Fantasia}, choose all {Discover} effects, and gain 1 stack of {Creativity}.",
+  "descriptionArgs": {},
+  "ownerAwakenerName": "Pickman"
+}

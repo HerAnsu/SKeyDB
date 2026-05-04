@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.global.ancient-embers",
+  "name": "Ancient Embers",
+  "route": {
+    "slug": "ancient-embers",
+    "canonicalPath": "/database/overlays/ancient-embers"
+  },
+  "assets": {
+    "icon": "asset-overlay.global.ancient-embers-icon"
+  },
+  "overlayType": "mechanic",
+  "aliases": [
+    "Old Embers"
+  ],
+  "iconId": "IconS_Buff_025",
+  "textColor": "affliction",
+  "descriptionTemplate": "After suffering active damage or Tentacle damage, remove an equivalent amount of {Old Embers} and lose 300% of the removal amount in life; when suffering other damage, remove half. The number of {Old Embers} resets each turn.",
+  "descriptionArgs": {}
+}

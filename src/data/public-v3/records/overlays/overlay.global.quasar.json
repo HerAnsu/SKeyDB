@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.global.quasar",
+  "name": "Quasar",
+  "route": {
+    "slug": "quasar",
+    "canonicalPath": "/database/overlays/quasar"
+  },
+  "overlayType": "mechanic",
+  "aliases": [],
+  "textColor": "affliction",
+  "descriptionTemplate": "If this card triggers {Dimension Shuttle} after being played, trigger the subsequent effect. Arithmetica Cost -1 when taken from {Ultra Space}.",
+  "descriptionArgs": {}
+}

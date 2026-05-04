@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "kind": "posse",
+  "id": "posse-0024",
+  "name": "The Mountains' Resolve",
+  "route": {
+    "slug": "the-mountains-resolve",
+    "canonicalPath": "/database/posses/the-mountains-resolve"
+  },
+  "assets": {
+    "icon": "asset-posse-0024-icon",
+    "crystal": "asset-posse-0024-crystal",
+    "badge": "asset-posse-0024-badge"
+  },
+  "realm": "CARO",
+  "lineupToken": "E",
+  "descriptionTemplate": "Choose an Awakener; draw 2 of their Command Cards.",
+  "descriptionArgs": {},
+  "lore": "The towering mountains of the frigid glacier devour the valiant warriors and mad beasts, covering the remnants of stories with pure white snow.\nBut when spring comes next year, faint signs of life will finally traverse the blizzard. The mountains have long prepared for this awakening."
+}

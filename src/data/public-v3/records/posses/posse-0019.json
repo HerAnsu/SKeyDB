@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 3,
+  "kind": "posse",
+  "id": "posse-0019",
+  "name": "Victory of Roses",
+  "route": {
+    "slug": "victory-of-roses",
+    "canonicalPath": "/database/posses/victory-of-roses"
+  },
+  "assets": {
+    "icon": "asset-posse-0019-icon",
+    "crystal": "asset-posse-0019-crystal",
+    "badge": "asset-posse-0019-badge"
+  },
+  "realm": "CARO",
+  "lineupToken": "u",
+  "descriptionTemplate": "Draw 2 cards and gain [Arg1] Temp. {STR}. If the Realm includes {Caro}, consume 10% of your HP to gain another [Arg2] Temp. {STR}, and another [Arg2] Temp. {STR} for each {Embryo} in your hand.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "computed",
+      "formulaKey": "scaled",
+      "baseFormula": "esotericResearchDepth",
+      "multiplier": 0.045,
+      "inputs": [
+        "accountLevel",
+        "ownedPosseCount"
+      ]
+    },
+    "Arg2": {
+      "kind": "computed",
+      "formulaKey": "scaled",
+      "baseFormula": "esotericResearchDepth",
+      "multiplier": 0.015,
+      "inputs": [
+        "accountLevel",
+        "ownedPosseCount"
+      ]
+    }
+  },
+  "lore": "The graceful rose has achieved her complete victory.\n\nShe has returned to the noble rose surrounded by the crowd like stars around the moon, with only the gaze directed at you proclaiming the secret adventure experienced with you at the opera house."
+}

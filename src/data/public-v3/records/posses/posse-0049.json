@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "kind": "posse",
+  "id": "posse-0049",
+  "name": "Drowned Innocence",
+  "route": {
+    "slug": "drowned-innocence",
+    "canonicalPath": "/database/posses/drowned-innocence"
+  },
+  "assets": {
+    "icon": "asset-posse-0049-icon",
+    "crystal": "asset-posse-0049-crystal",
+    "badge": "asset-posse-0049-badge"
+  },
+  "realm": "AEQUOR",
+  "lineupToken": "5",
+  "descriptionTemplate": "Choose an Awakener to gain 15 Aliemus, while other Awakeners gain 5 Aliemus. Vortice: Immediately unleash {Vortex! Shell!} as a {Pursuit}.",
+  "descriptionArgs": {},
+  "lore": "She plunged into the icy sea without hesitation, fully aware that the vortex would claim her life.\nBecause in her pure, innocent mind, this was the only way to save her friends."
+}

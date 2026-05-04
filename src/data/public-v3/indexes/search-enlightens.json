@@ -1,0 +1,6352 @@
+{
+  "schemaVersion": 3,
+  "scope": "enlightens",
+  "records": [
+    {
+      "kind": "enlighten",
+      "id": "enlighten.24.aberrant-vivisection",
+      "name": "Aberrant Vivisection",
+      "aliases": [],
+      "tokens": [
+        "24",
+        "aberrant",
+        "aberrant vivisection",
+        "overexalt",
+        "vivisection"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0001",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.24.animus-projection",
+      "name": "Animus Projection",
+      "aliases": [],
+      "tokens": [
+        "24",
+        "absoluteaxiom",
+        "animus",
+        "animus projection",
+        "projection"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0001",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.24.hysteria",
+      "name": "Hysteria",
+      "aliases": [],
+      "tokens": [
+        "24",
+        "e1",
+        "hysteria"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0001",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.24.pavlovian-conditioning-study",
+      "name": "Pavlovian Conditioning Study",
+      "aliases": [],
+      "tokens": [
+        "24",
+        "conditioning",
+        "e3",
+        "pavlovian",
+        "pavlovian conditioning study",
+        "study"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0001",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.24.restraint-bonds",
+      "name": "Restraint Bonds",
+      "aliases": [],
+      "tokens": [
+        "24",
+        "bonds",
+        "e2",
+        "restraint",
+        "restraint bonds"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0001",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.agrippa.ashes-and-skulls",
+      "name": "Ashes and Skulls",
+      "aliases": [],
+      "tokens": [
+        "agrippa",
+        "and",
+        "ashes",
+        "ashes and skulls",
+        "e2",
+        "skulls"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0002",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.agrippa.covenant-of-no-return",
+      "name": "Covenant of No Return",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "agrippa",
+        "covenant",
+        "covenant of no return",
+        "no",
+        "of",
+        "return"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0002",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.agrippa.lady-of-labyrinths",
+      "name": "Lady of Labyrinths",
+      "aliases": [],
+      "tokens": [
+        "agrippa",
+        "labyrinths",
+        "lady",
+        "lady of labyrinths",
+        "of",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0002",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.agrippa.spider-queens-kiss",
+      "name": "Spider Queen's Kiss",
+      "aliases": [],
+      "tokens": [
+        "agrippa",
+        "e3",
+        "kiss",
+        "queens",
+        "spider",
+        "spider queens kiss"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0002",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.agrippa.the-usurper",
+      "name": "The Usurper",
+      "aliases": [],
+      "tokens": [
+        "agrippa",
+        "e1",
+        "the",
+        "the usurper",
+        "usurper"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0002",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aigis.crystallized-tear",
+      "name": "Crystallized Tear",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "aigis",
+        "crystallized",
+        "crystallized tear",
+        "tear"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0003",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aigis.gaze-out-of-the-aeons",
+      "name": "Gaze Out of the Aeons",
+      "aliases": [],
+      "tokens": [
+        "aeons",
+        "aigis",
+        "gaze",
+        "gaze out of the aeons",
+        "of",
+        "out",
+        "overexalt",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0003",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aigis.nightborne-wings",
+      "name": "Nightborne Wings",
+      "aliases": [],
+      "tokens": [
+        "aigis",
+        "e3",
+        "nightborne",
+        "nightborne wings",
+        "wings"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0003",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aigis.sugary-aroma",
+      "name": "Sugary Aroma",
+      "aliases": [],
+      "tokens": [
+        "aigis",
+        "aroma",
+        "e2",
+        "sugary",
+        "sugary aroma"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0003",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aigis.the-witness",
+      "name": "The Witness",
+      "aliases": [],
+      "tokens": [
+        "aigis",
+        "e1",
+        "the",
+        "the witness",
+        "witness"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0003",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.alva.all-for-justice",
+      "name": "All for Justice",
+      "aliases": [],
+      "tokens": [
+        "all",
+        "all for justice",
+        "alva",
+        "e3",
+        "for",
+        "justice"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0004",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.alva.crusade-to-utopia",
+      "name": "Crusade to Utopia",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "alva",
+        "crusade",
+        "crusade to utopia",
+        "to",
+        "utopia"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0004",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.alva.justice-and-truth",
+      "name": "Justice and Truth",
+      "aliases": [],
+      "tokens": [
+        "alva",
+        "and",
+        "justice",
+        "justice and truth",
+        "overexalt",
+        "truth"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0004",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.alva.relentless-fighter",
+      "name": "Relentless Fighter",
+      "aliases": [],
+      "tokens": [
+        "alva",
+        "e2",
+        "fighter",
+        "relentless",
+        "relentless fighter"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0004",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.alva.unyielding-bastion",
+      "name": "Unyielding Bastion",
+      "aliases": [],
+      "tokens": [
+        "alva",
+        "bastion",
+        "e1",
+        "unyielding",
+        "unyielding bastion"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0004",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.arachne.destiny-as-i-arrange",
+      "name": "Destiny, As I Arrange",
+      "aliases": [],
+      "tokens": [
+        "arachne",
+        "arrange",
+        "as",
+        "destiny",
+        "destiny as i arrange",
+        "e3",
+        "i"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0056",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.arachne.elegy-over-fate",
+      "name": "Elegy Over Fate",
+      "aliases": [],
+      "tokens": [
+        "arachne",
+        "elegy",
+        "elegy over fate",
+        "fate",
+        "over",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0056",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.arachne.future-as-i-foresee",
+      "name": "Future, As I Foresee",
+      "aliases": [],
+      "tokens": [
+        "arachne",
+        "as",
+        "e1",
+        "foresee",
+        "future",
+        "future as i foresee",
+        "i"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0056",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.arachne.moiraes-finale",
+      "name": "Moirae's Finale",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "arachne",
+        "finale",
+        "moiraes",
+        "moiraes finale"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0056",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.arachne.universe-as-i-conceive",
+      "name": "Universe, As I Conceive",
+      "aliases": [],
+      "tokens": [
+        "arachne",
+        "as",
+        "conceive",
+        "e2",
+        "i",
+        "universe",
+        "universe as i conceive"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0056",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aurita.bubbling-journey",
+      "name": "Bubbling Journey",
+      "aliases": [],
+      "tokens": [
+        "aurita",
+        "bubbling",
+        "bubbling journey",
+        "e1",
+        "journey"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0005",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aurita.jellyfish-congregation",
+      "name": "Jellyfish Congregation",
+      "aliases": [],
+      "tokens": [
+        "aurita",
+        "congregation",
+        "jellyfish",
+        "jellyfish congregation",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0005",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aurita.lets-all-have-fun-together",
+      "name": "Let's All Have Fun Together!",
+      "aliases": [],
+      "tokens": [
+        "all",
+        "aurita",
+        "e3",
+        "fun",
+        "have",
+        "lets",
+        "lets all have fun together",
+        "together"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0005",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aurita.slick-slide-adventure",
+      "name": "Slick-Slide Adventure",
+      "aliases": [],
+      "tokens": [
+        "adventure",
+        "aurita",
+        "e2",
+        "slick",
+        "slick slide adventure",
+        "slide"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0005",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.aurita.sparkling-friendship",
+      "name": "Sparkling Friendship",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "aurita",
+        "friendship",
+        "sparkling",
+        "sparkling friendship"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0005",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.caecus.bloodline-awaken",
+      "name": "Bloodline Awaken",
+      "aliases": [],
+      "tokens": [
+        "awaken",
+        "bloodline",
+        "bloodline awaken",
+        "caecus",
+        "e1"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0006",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.caecus.fury-of-the-inchoate",
+      "name": "Fury of the Inchoate",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "caecus",
+        "fury",
+        "fury of the inchoate",
+        "inchoate",
+        "of",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0006",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.caecus.outcasts-anguish",
+      "name": "Outcast's Anguish",
+      "aliases": [],
+      "tokens": [
+        "anguish",
+        "caecus",
+        "e3",
+        "outcasts",
+        "outcasts anguish"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0006",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.caecus.spike-amalgamation",
+      "name": "Spike Amalgamation",
+      "aliases": [],
+      "tokens": [
+        "amalgamation",
+        "caecus",
+        "e2",
+        "spike",
+        "spike amalgamation"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0006",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.caecus.unbending-resolve",
+      "name": "Unbending Resolve",
+      "aliases": [],
+      "tokens": [
+        "caecus",
+        "overexalt",
+        "resolve",
+        "unbending",
+        "unbending resolve"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0006",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.casiah.a-thousand-and-one-miracles",
+      "name": "A Thousand and One Miracles",
+      "aliases": [],
+      "tokens": [
+        "a",
+        "a thousand and one miracles",
+        "absoluteaxiom",
+        "and",
+        "casiah",
+        "miracles",
+        "one",
+        "thousand"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0007",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.casiah.legendary-copycat",
+      "name": "Legendary Copycat",
+      "aliases": [],
+      "tokens": [
+        "casiah",
+        "copycat",
+        "e3",
+        "legendary",
+        "legendary copycat"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0007",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.casiah.minds-whisper",
+      "name": "Mind's Whisper",
+      "aliases": [],
+      "tokens": [
+        "casiah",
+        "e1",
+        "minds",
+        "minds whisper",
+        "whisper"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0007",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.casiah.unfettered-mirth",
+      "name": "Unfettered Mirth",
+      "aliases": [],
+      "tokens": [
+        "casiah",
+        "mirth",
+        "overexalt",
+        "unfettered",
+        "unfettered mirth"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0007",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.casiah.veil-of-illusion",
+      "name": "Veil of Illusion",
+      "aliases": [],
+      "tokens": [
+        "casiah",
+        "e2",
+        "illusion",
+        "of",
+        "veil",
+        "veil of illusion"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0007",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.castor.caged-underground",
+      "name": "Caged Underground",
+      "aliases": [],
+      "tokens": [
+        "caged",
+        "caged underground",
+        "castor",
+        "e1",
+        "underground"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0008",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.castor.nox-diouskouron",
+      "name": "Nox Diouskouron",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "castor",
+        "diouskouron",
+        "nox",
+        "nox diouskouron"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0008",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.castor.over-the-sea-of-thorns",
+      "name": "Over the Sea of Thorns",
+      "aliases": [],
+      "tokens": [
+        "castor",
+        "of",
+        "over",
+        "over the sea of thorns",
+        "overexalt",
+        "sea",
+        "the",
+        "thorns"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0008",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.castor.sky-eclipsing-wings",
+      "name": "Sky-Eclipsing Wings",
+      "aliases": [],
+      "tokens": [
+        "castor",
+        "e3",
+        "eclipsing",
+        "sky",
+        "sky eclipsing wings",
+        "wings"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0008",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.castor.unyielding-will",
+      "name": "Unyielding Will",
+      "aliases": [],
+      "tokens": [
+        "castor",
+        "e2",
+        "unyielding",
+        "unyielding will",
+        "will"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0008",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.celeste.ancestral-beacon",
+      "name": "Ancestral Beacon",
+      "aliases": [],
+      "tokens": [
+        "ancestral",
+        "ancestral beacon",
+        "beacon",
+        "celeste",
+        "e2"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0009",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.celeste.beyond-joy-and-sorrow",
+      "name": "Beyond Joy and Sorrow",
+      "aliases": [],
+      "tokens": [
+        "and",
+        "beyond",
+        "beyond joy and sorrow",
+        "celeste",
+        "e3",
+        "joy",
+        "sorrow"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0009",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.celeste.divine-vigil",
+      "name": "Divine Vigil",
+      "aliases": [],
+      "tokens": [
+        "celeste",
+        "divine",
+        "divine vigil",
+        "overexalt",
+        "vigil"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0009",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.celeste.imaginary-cathuria",
+      "name": "Imaginary Cathuria",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "cathuria",
+        "celeste",
+        "imaginary",
+        "imaginary cathuria"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0009",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.celeste.solitary-mast",
+      "name": "Solitary Mast",
+      "aliases": [],
+      "tokens": [
+        "celeste",
+        "e1",
+        "mast",
+        "solitary",
+        "solitary mast"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0009",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.clementine.collective-unconscious",
+      "name": "Collective Unconscious",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "clementine",
+        "collective",
+        "collective unconscious",
+        "unconscious"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0010",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.clementine.knocking-on-minds-portal",
+      "name": "Knocking on Mind's Portal",
+      "aliases": [],
+      "tokens": [
+        "clementine",
+        "e1",
+        "knocking",
+        "knocking on minds portal",
+        "minds",
+        "on",
+        "portal"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0010",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.clementine.soul-healing-journey",
+      "name": "Soul Healing Journey",
+      "aliases": [],
+      "tokens": [
+        "clementine",
+        "e2",
+        "healing",
+        "journey",
+        "soul",
+        "soul healing journey"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0010",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.clementine.subconscious-corrosion",
+      "name": "Subconscious Corrosion",
+      "aliases": [],
+      "tokens": [
+        "clementine",
+        "corrosion",
+        "overexalt",
+        "subconscious",
+        "subconscious corrosion"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0010",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.clementine.you-will-recover",
+      "name": "You Will Recover",
+      "aliases": [],
+      "tokens": [
+        "clementine",
+        "e3",
+        "recover",
+        "will",
+        "you",
+        "you will recover"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0010",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.corposant.face-death-in-fiery-resolve",
+      "name": "Face Death in Fiery Resolve",
+      "aliases": [],
+      "tokens": [
+        "corposant",
+        "death",
+        "face",
+        "face death in fiery resolve",
+        "fiery",
+        "in",
+        "overexalt",
+        "resolve"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0011",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.corposant.lodestars-whisper",
+      "name": "lodestar's Whisper",
+      "aliases": [],
+      "tokens": [
+        "corposant",
+        "e1",
+        "lodestars",
+        "lodestars whisper",
+        "whisper"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0011",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.corposant.sextants-calculation",
+      "name": "Sextant's Calculation",
+      "aliases": [],
+      "tokens": [
+        "calculation",
+        "corposant",
+        "e2",
+        "sextants",
+        "sextants calculation"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0011",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.corposant.unquenched-unfelled-undimmed",
+      "name": "Unquenched, Unfelled, Undimmed",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "corposant",
+        "undimmed",
+        "unfelled",
+        "unquenched",
+        "unquenched unfelled undimmed"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0011",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.corposant.willing-sacrifice",
+      "name": "Willing Sacrifice",
+      "aliases": [],
+      "tokens": [
+        "corposant",
+        "e3",
+        "sacrifice",
+        "willing",
+        "willing sacrifice"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0011",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.daffodil.dead-souls",
+      "name": "Dead Souls",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "daffodil",
+        "dead",
+        "dead souls",
+        "souls"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0012",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.daffodil.essence-sediment",
+      "name": "Essence Sediment",
+      "aliases": [],
+      "tokens": [
+        "daffodil",
+        "e3",
+        "essence",
+        "essence sediment",
+        "sediment"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0012",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.daffodil.infinite-passage",
+      "name": "Infinite Passage",
+      "aliases": [],
+      "tokens": [
+        "daffodil",
+        "e1",
+        "infinite",
+        "infinite passage",
+        "passage"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0012",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.daffodil.mist-of-avarice",
+      "name": "Mist of Avarice",
+      "aliases": [],
+      "tokens": [
+        "avarice",
+        "daffodil",
+        "e2",
+        "mist",
+        "mist of avarice",
+        "of"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0012",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.daffodil.phantasmal-haze",
+      "name": "Phantasmal Haze",
+      "aliases": [],
+      "tokens": [
+        "daffodil",
+        "haze",
+        "overexalt",
+        "phantasmal",
+        "phantasmal haze"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0012",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll-inferno.borealis-visitor",
+      "name": "Borealis Visitor",
+      "aliases": [],
+      "tokens": [
+        "borealis",
+        "borealis visitor",
+        "doll",
+        "doll inferno",
+        "e1",
+        "inferno",
+        "visitor"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0018",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll-inferno.envoy-of-extinction",
+      "name": "Envoy of Extinction",
+      "aliases": [],
+      "tokens": [
+        "doll",
+        "doll inferno",
+        "e3",
+        "envoy",
+        "envoy of extinction",
+        "extinction",
+        "inferno",
+        "of"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0018",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll-inferno.every-world-drowned",
+      "name": "Every World, Drowned",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "doll",
+        "doll inferno",
+        "drowned",
+        "every",
+        "every world drowned",
+        "inferno",
+        "world"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0018",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll-inferno.madness-infection",
+      "name": "Madness Infection",
+      "aliases": [],
+      "tokens": [
+        "doll",
+        "doll inferno",
+        "infection",
+        "inferno",
+        "madness",
+        "madness infection",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0018",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll-inferno.resonant-mycelium",
+      "name": "Resonant Mycelium",
+      "aliases": [],
+      "tokens": [
+        "doll",
+        "doll inferno",
+        "e2",
+        "inferno",
+        "mycelium",
+        "resonant",
+        "resonant mycelium"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0018",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll.beyond-death",
+      "name": "Beyond Death",
+      "aliases": [],
+      "tokens": [
+        "beyond",
+        "beyond death",
+        "death",
+        "doll",
+        "e2"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0013",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll.ego-restructured",
+      "name": "Ego Restructured",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "doll",
+        "ego",
+        "ego restructured",
+        "restructured"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0013",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll.flesh-transcended",
+      "name": "Flesh Transcended",
+      "aliases": [],
+      "tokens": [
+        "doll",
+        "e3",
+        "flesh",
+        "flesh transcended",
+        "transcended"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0013",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll.psyche-dissection",
+      "name": "Psyche Dissection",
+      "aliases": [],
+      "tokens": [
+        "dissection",
+        "doll",
+        "overexalt",
+        "psyche",
+        "psyche dissection"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0013",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doll.pure-rationality",
+      "name": "Pure Rationality",
+      "aliases": [],
+      "tokens": [
+        "doll",
+        "e1",
+        "pure",
+        "pure rationality",
+        "rationality"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0013",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doresain.evernights-revel",
+      "name": "Evernight's Revel",
+      "aliases": [],
+      "tokens": [
+        "doresain",
+        "e3",
+        "evernights",
+        "evernights revel",
+        "revel"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0014",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doresain.feasts-overture",
+      "name": "Feast's Overture",
+      "aliases": [],
+      "tokens": [
+        "doresain",
+        "e1",
+        "feasts",
+        "feasts overture",
+        "overture"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0014",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doresain.hollow-whispers",
+      "name": "Hollow Whispers",
+      "aliases": [],
+      "tokens": [
+        "doresain",
+        "e2",
+        "hollow",
+        "hollow whispers",
+        "whispers"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0014",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doresain.pandemonium-glut",
+      "name": "Pandemonium Glut",
+      "aliases": [],
+      "tokens": [
+        "doresain",
+        "glut",
+        "overexalt",
+        "pandemonium",
+        "pandemonium glut"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0014",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.doresain.styx-uncrossed",
+      "name": "Styx Uncrossed",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "doresain",
+        "styx",
+        "styx uncrossed",
+        "uncrossed"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0014",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.erica.auto-rectification",
+      "name": "Auto-Rectification",
+      "aliases": [],
+      "tokens": [
+        "auto",
+        "auto rectification",
+        "e1",
+        "erica",
+        "rectification"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0015",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.erica.final-decree",
+      "name": "Final Decree",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "decree",
+        "erica",
+        "final",
+        "final decree"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0015",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.erica.force-circuit",
+      "name": "Force Circuit",
+      "aliases": [],
+      "tokens": [
+        "circuit",
+        "e2",
+        "erica",
+        "force",
+        "force circuit"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0015",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.erica.multiple-calculations",
+      "name": "Multiple Calculations",
+      "aliases": [],
+      "tokens": [
+        "calculations",
+        "erica",
+        "multiple",
+        "multiple calculations",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0015",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.erica.system-reboot",
+      "name": "System Reboot",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "erica",
+        "reboot",
+        "system",
+        "system reboot"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0015",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faint.binary-stars",
+      "name": "Binary Stars",
+      "aliases": [],
+      "tokens": [
+        "binary",
+        "binary stars",
+        "e1",
+        "faint",
+        "stars"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0016",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faint.blossom-from-cocoon",
+      "name": "Blossom from Cocoon",
+      "aliases": [],
+      "tokens": [
+        "blossom",
+        "blossom from cocoon",
+        "cocoon",
+        "faint",
+        "from",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0016",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faint.cradle-of-love",
+      "name": "Cradle of Love",
+      "aliases": [],
+      "tokens": [
+        "cradle",
+        "cradle of love",
+        "e3",
+        "faint",
+        "love",
+        "of"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0016",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faint.ever-barren-rainbow",
+      "name": "Ever-Barren Rainbow",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "barren",
+        "ever",
+        "ever barren rainbow",
+        "faint",
+        "rainbow"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0016",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faint.withering-hymn",
+      "name": "Withering Hymn",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "faint",
+        "hymn",
+        "withering",
+        "withering hymn"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0016",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faros.congealed-ambergris",
+      "name": "Congealed Ambergris",
+      "aliases": [],
+      "tokens": [
+        "ambergris",
+        "congealed",
+        "congealed ambergris",
+        "e2",
+        "faros"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0017",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faros.flickering-candle",
+      "name": "Flickering Candle",
+      "aliases": [],
+      "tokens": [
+        "candle",
+        "e3",
+        "faros",
+        "flickering",
+        "flickering candle"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0017",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faros.jagged-shore",
+      "name": "Jagged Shore",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "faros",
+        "jagged",
+        "jagged shore",
+        "shore"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0017",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faros.light-of-the-lost",
+      "name": "Light of the Lost",
+      "aliases": [],
+      "tokens": [
+        "faros",
+        "light",
+        "light of the lost",
+        "lost",
+        "of",
+        "overexalt",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0017",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.faros.to-the-radiant-shore",
+      "name": "To the Radiant Shore",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "faros",
+        "radiant",
+        "shore",
+        "the",
+        "to",
+        "to the radiant shore"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0017",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.goliath.ascent-of-the-tyrant",
+      "name": "Ascent of the Tyrant",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "ascent",
+        "ascent of the tyrant",
+        "goliath",
+        "of",
+        "the",
+        "tyrant"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0021",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.goliath.boundless-ambition",
+      "name": "Boundless Ambition",
+      "aliases": [],
+      "tokens": [
+        "ambition",
+        "boundless",
+        "boundless ambition",
+        "e3",
+        "goliath"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0021",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.goliath.death-is-rebirth",
+      "name": "Death is Rebirth",
+      "aliases": [],
+      "tokens": [
+        "death",
+        "death is rebirth",
+        "e1",
+        "goliath",
+        "is",
+        "rebirth"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0021",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.goliath.giants-grip",
+      "name": "Giant's Grip",
+      "aliases": [],
+      "tokens": [
+        "giants",
+        "giants grip",
+        "goliath",
+        "grip",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0021",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.goliath.rule-by-the-strongest",
+      "name": "Rule by the Strongest",
+      "aliases": [],
+      "tokens": [
+        "by",
+        "e2",
+        "goliath",
+        "rule",
+        "rule by the strongest",
+        "strongest",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0021",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.hameln.all-realms-resound",
+      "name": "All Realms Resound",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "all",
+        "all realms resound",
+        "hameln",
+        "realms",
+        "resound"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0022",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.hameln.mind-concerto",
+      "name": "Mind Concerto",
+      "aliases": [],
+      "tokens": [
+        "concerto",
+        "e1",
+        "hameln",
+        "mind",
+        "mind concerto"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0022",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.hameln.moonlit-rhapsody",
+      "name": "Moonlit Rhapsody",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "hameln",
+        "moonlit",
+        "moonlit rhapsody",
+        "rhapsody"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0022",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.hameln.oneiric-waltz",
+      "name": "Oneiric Waltz",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "hameln",
+        "oneiric",
+        "oneiric waltz",
+        "waltz"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0022",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.hameln.the-final-sonata",
+      "name": "The Final Sonata",
+      "aliases": [],
+      "tokens": [
+        "final",
+        "hameln",
+        "overexalt",
+        "sonata",
+        "the",
+        "the final sonata"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0022",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot-catena.death-knell-decree",
+      "name": "Death Knell Decree",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "catena",
+        "death",
+        "death knell decree",
+        "decree",
+        "helot",
+        "helot catena",
+        "knell"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0019",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot-catena.endless-slaughter",
+      "name": "Endless Slaughter",
+      "aliases": [],
+      "tokens": [
+        "catena",
+        "e1",
+        "endless",
+        "endless slaughter",
+        "helot",
+        "helot catena",
+        "slaughter"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0019",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot-catena.fettered-malice",
+      "name": "Fettered Malice",
+      "aliases": [],
+      "tokens": [
+        "catena",
+        "fettered",
+        "fettered malice",
+        "helot",
+        "helot catena",
+        "malice",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0019",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot-catena.remnants-requiem",
+      "name": "Remnant's Requiem",
+      "aliases": [],
+      "tokens": [
+        "catena",
+        "e3",
+        "helot",
+        "helot catena",
+        "remnants",
+        "remnants requiem",
+        "requiem"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0019",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot-catena.vengeance-unchained",
+      "name": "Vengeance Unchained",
+      "aliases": [],
+      "tokens": [
+        "catena",
+        "e2",
+        "helot",
+        "helot catena",
+        "unchained",
+        "vengeance",
+        "vengeance unchained"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0019",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot.blood-for-blood",
+      "name": "Blood for Blood",
+      "aliases": [],
+      "tokens": [
+        "blood",
+        "blood for blood",
+        "for",
+        "helot",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0023",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot.regents-heir",
+      "name": "Regent's Heir",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "heir",
+        "helot",
+        "regents",
+        "regents heir"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0023",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot.sacred-half",
+      "name": "Sacred Half",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "half",
+        "helot",
+        "sacred",
+        "sacred half"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0023",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot.the-chainbreaker",
+      "name": "The Chainbreaker",
+      "aliases": [],
+      "tokens": [
+        "chainbreaker",
+        "e3",
+        "helot",
+        "the",
+        "the chainbreaker"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0023",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.helot.the-final-arbiter",
+      "name": "The Final Arbiter",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "arbiter",
+        "final",
+        "helot",
+        "the",
+        "the final arbiter"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0023",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.horla.blossoms-and-verses-reunited",
+      "name": "Blossoms and Verses Reunited",
+      "aliases": [],
+      "tokens": [
+        "and",
+        "blossoms",
+        "blossoms and verses reunited",
+        "e3",
+        "horla",
+        "reunited",
+        "verses"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0024",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.horla.chamber-of-shadows",
+      "name": "Chamber of Shadows",
+      "aliases": [],
+      "tokens": [
+        "chamber",
+        "chamber of shadows",
+        "e2",
+        "horla",
+        "of",
+        "shadows"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0024",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.horla.emberbound",
+      "name": "Emberbound",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "emberbound",
+        "horla"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0024",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.horla.ink-stained-sonnet",
+      "name": "Ink-Stained Sonnet",
+      "aliases": [],
+      "tokens": [
+        "horla",
+        "ink",
+        "ink stained sonnet",
+        "overexalt",
+        "sonnet",
+        "stained"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0024",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.horla.spring-in-the-embers",
+      "name": "Spring in the Embers",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "embers",
+        "horla",
+        "in",
+        "spring",
+        "spring in the embers",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0024",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.jenkins.from-the-shrouded-mist",
+      "name": "From the Shrouded Mist",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "from",
+        "from the shrouded mist",
+        "jenkin",
+        "mist",
+        "shrouded",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0025",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.jenkins.golden-butterflys-memories",
+      "name": "Golden Butterfly's Memories",
+      "aliases": [],
+      "tokens": [
+        "butterflys",
+        "e2",
+        "golden",
+        "golden butterflys memories",
+        "jenkin",
+        "memories"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0025",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.jenkins.gotcha",
+      "name": "Gotcha!",
+      "aliases": [],
+      "tokens": [
+        "gotcha",
+        "jenkin",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0025",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.jenkins.obsidian-dissolution",
+      "name": "Obsidian Dissolution",
+      "aliases": [],
+      "tokens": [
+        "dissolution",
+        "e3",
+        "jenkin",
+        "obsidian",
+        "obsidian dissolution"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0025",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.jenkins.red-ribbon",
+      "name": "Red Ribbon",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "jenkin",
+        "red",
+        "red ribbon",
+        "ribbon"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0025",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.karen.bounteous-feast",
+      "name": "Bounteous Feast",
+      "aliases": [],
+      "tokens": [
+        "bounteous",
+        "bounteous feast",
+        "feast",
+        "karen",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0026",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.karen.creamy-frosting",
+      "name": "Creamy Frosting",
+      "aliases": [],
+      "tokens": [
+        "creamy",
+        "creamy frosting",
+        "e2",
+        "frosting",
+        "karen"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0026",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.karen.fermented-recipes",
+      "name": "Fermented Recipes",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "fermented",
+        "fermented recipes",
+        "karen",
+        "recipes"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0026",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.karen.maids-decree",
+      "name": "Maid's Decree",
+      "aliases": [],
+      "tokens": [
+        "decree",
+        "e1",
+        "karen",
+        "maids",
+        "maids decree"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0026",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.karen.mistmoon-banquet",
+      "name": "Mistmoon Banquet",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "banquet",
+        "karen",
+        "mistmoon",
+        "mistmoon banquet"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0026",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.kathigu-ra.all-melting-truth",
+      "name": "All-Melting Truth",
+      "aliases": [],
+      "tokens": [
+        "all",
+        "all melting truth",
+        "kathigu",
+        "kathigu ra",
+        "melting",
+        "overexalt",
+        "ra",
+        "truth"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0027",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.kathigu-ra.ashen-finale",
+      "name": "Ashen Finale",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "ashen",
+        "ashen finale",
+        "finale",
+        "kathigu",
+        "kathigu ra",
+        "ra"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0027",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.kathigu-ra.astral-meltdown",
+      "name": "Astral Meltdown",
+      "aliases": [],
+      "tokens": [
+        "astral",
+        "astral meltdown",
+        "e2",
+        "kathigu",
+        "kathigu ra",
+        "meltdown",
+        "ra"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0027",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.kathigu-ra.endless-purgatory",
+      "name": "Endless Purgatory",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "endless",
+        "endless purgatory",
+        "kathigu",
+        "kathigu ra",
+        "purgatory",
+        "ra"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0027",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.kathigu-ra.everburning-flame",
+      "name": "Everburning Flame",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "everburning",
+        "everburning flame",
+        "flame",
+        "kathigu",
+        "kathigu ra",
+        "ra"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0027",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.leigh.basement-journal",
+      "name": "Basement Journal",
+      "aliases": [],
+      "tokens": [
+        "basement",
+        "basement journal",
+        "e3",
+        "journal",
+        "leigh"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0028",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.leigh.insatiable-craving",
+      "name": "Insatiable Craving",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "craving",
+        "insatiable",
+        "insatiable craving",
+        "leigh"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0028",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.leigh.newborn-sanguivore",
+      "name": "Newborn Sanguivore",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "leigh",
+        "newborn",
+        "newborn sanguivore",
+        "sanguivore"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0028",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.leigh.pallid-bloodied-kiss",
+      "name": "Pallid Bloodied Kiss",
+      "aliases": [],
+      "tokens": [
+        "bloodied",
+        "kiss",
+        "leigh",
+        "overexalt",
+        "pallid",
+        "pallid bloodied kiss"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0028",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.leigh.step-into-the-sunlight",
+      "name": "Step into the Sunlight",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "into",
+        "leigh",
+        "step",
+        "step into the sunlight",
+        "sunlight",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0028",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lily.at-your-behest",
+      "name": "At Your Behest",
+      "aliases": [],
+      "tokens": [
+        "at",
+        "at your behest",
+        "behest",
+        "lily",
+        "overexalt",
+        "your"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0029",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lily.blackened-nourishment",
+      "name": "Blackened Nourishment",
+      "aliases": [],
+      "tokens": [
+        "blackened",
+        "blackened nourishment",
+        "e1",
+        "lily",
+        "nourishment"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0029",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lily.lilium-immaculatum",
+      "name": "Lilium Immaculatum",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "immaculatum",
+        "lilium",
+        "lilium immaculatum",
+        "lily"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0029",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lily.never-forget",
+      "name": "Never Forget...",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "forget",
+        "lily",
+        "never",
+        "never forget"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0029",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lily.viscous-devour",
+      "name": "Viscous Devour",
+      "aliases": [],
+      "tokens": [
+        "devour",
+        "e2",
+        "lily",
+        "viscous",
+        "viscous devour"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0029",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.liz.burning-tribute",
+      "name": "Burning Tribute",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "burning",
+        "burning tribute",
+        "liz",
+        "tribute"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0030",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.liz.eternal-flames",
+      "name": "Eternal Flames",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "eternal",
+        "eternal flames",
+        "flames",
+        "liz"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0030",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.liz.last-dawnlight",
+      "name": "Last Dawnlight",
+      "aliases": [],
+      "tokens": [
+        "dawnlight",
+        "e3",
+        "last",
+        "last dawnlight",
+        "liz"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0030",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.liz.omens-descent",
+      "name": "Omen's Descent",
+      "aliases": [],
+      "tokens": [
+        "descent",
+        "liz",
+        "omens",
+        "omens descent",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0030",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.liz.verdant-spark",
+      "name": "Verdant Spark",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "liz",
+        "spark",
+        "verdant",
+        "verdant spark"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0030",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lotan.primal-leviathan",
+      "name": "Primal Leviathan",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "leviathan",
+        "lotan",
+        "primal",
+        "primal leviathan"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0031",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lotan.surging-warlust",
+      "name": "Surging Warlust",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "lotan",
+        "surging",
+        "surging warlust",
+        "warlust"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0031",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lotan.swords-unleashed",
+      "name": "Swords Unleashed",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "lotan",
+        "swords",
+        "swords unleashed",
+        "unleashed"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0031",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lotan.timeless-solitude",
+      "name": "Timeless Solitude",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "lotan",
+        "solitude",
+        "timeless",
+        "timeless solitude"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0031",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.lotan.until-the-planets-end",
+      "name": "Until the Planet's End",
+      "aliases": [],
+      "tokens": [
+        "end",
+        "lotan",
+        "overexalt",
+        "planets",
+        "the",
+        "until",
+        "until the planets end"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0031",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.miryam.homeland-resurgence",
+      "name": "Homeland Resurgence",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "homeland",
+        "homeland resurgence",
+        "miryam",
+        "resurgence"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0032",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.miryam.solitary-pilgrimage",
+      "name": "Solitary Pilgrimage",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "miryam",
+        "pilgrimage",
+        "solitary",
+        "solitary pilgrimage"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0032",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.miryam.the-ultimate-descent",
+      "name": "The Ultimate Descent",
+      "aliases": [],
+      "tokens": [
+        "descent",
+        "e2",
+        "miryam",
+        "the",
+        "the ultimate descent",
+        "ultimate"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0032",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.miryam.unacquainted-pain",
+      "name": "Unacquainted Pain",
+      "aliases": [],
+      "tokens": [
+        "miryam",
+        "overexalt",
+        "pain",
+        "unacquainted",
+        "unacquainted pain"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0032",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.miryam.vanitys-collapse",
+      "name": "Vanity's Collapse",
+      "aliases": [],
+      "tokens": [
+        "collapse",
+        "e3",
+        "miryam",
+        "vanitys",
+        "vanitys collapse"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0032",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.mouchette.cleave-out-a-future",
+      "name": "Cleave Out a Future",
+      "aliases": [],
+      "tokens": [
+        "a",
+        "cleave",
+        "cleave out a future",
+        "e3",
+        "future",
+        "mouchette",
+        "out"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0033",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.mouchette.ego-beyond-the-fog",
+      "name": "Ego Beyond the Fog",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "beyond",
+        "ego",
+        "ego beyond the fog",
+        "fog",
+        "mouchette",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0033",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.mouchette.irretrievable-past",
+      "name": "Irretrievable Past",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "irretrievable",
+        "irretrievable past",
+        "mouchette",
+        "past"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0033",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.mouchette.mist-realm-traveler",
+      "name": "Mist Realm Traveler",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "mist",
+        "mist realm traveler",
+        "mouchette",
+        "realm",
+        "traveler"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0033",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.mouchette.tornado-of-annihilation",
+      "name": "Tornado of Annihilation☆!",
+      "aliases": [],
+      "tokens": [
+        "annihilation",
+        "mouchette",
+        "of",
+        "overexalt",
+        "tornado",
+        "tornado of annihilation"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0033",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy-fauxborn.aetherial-loop",
+      "name": "Aetherial Loop",
+      "aliases": [],
+      "tokens": [
+        "aetherial",
+        "aetherial loop",
+        "fauxborn",
+        "loop",
+        "murphy",
+        "murphy fauxborn",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0035",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy-fauxborn.celestial-resonance",
+      "name": "Celestial Resonance",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "celestial",
+        "celestial resonance",
+        "fauxborn",
+        "murphy",
+        "murphy fauxborn",
+        "resonance"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0035",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy-fauxborn.inverted-pregnancy",
+      "name": "Inverted Pregnancy",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "fauxborn",
+        "inverted",
+        "inverted pregnancy",
+        "murphy",
+        "murphy fauxborn",
+        "pregnancy"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0035",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy-fauxborn.kneelers-supplication",
+      "name": "Kneeler's Supplication",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "fauxborn",
+        "kneelers",
+        "kneelers supplication",
+        "murphy",
+        "murphy fauxborn",
+        "supplication"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0035",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy-fauxborn.profane-apocalypse",
+      "name": "Profane Apocalypse",
+      "aliases": [],
+      "tokens": [
+        "apocalypse",
+        "e3",
+        "fauxborn",
+        "murphy",
+        "murphy fauxborn",
+        "profane",
+        "profane apocalypse"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0035",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy.defiant-providence",
+      "name": "Defiant Providence",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "defiant",
+        "defiant providence",
+        "murphy",
+        "providence"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0034",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy.emancipating-touch",
+      "name": "Emancipating Touch",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "emancipating",
+        "emancipating touch",
+        "murphy",
+        "touch"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0034",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy.inextricable-bloodline",
+      "name": "Inextricable Bloodline",
+      "aliases": [],
+      "tokens": [
+        "bloodline",
+        "e2",
+        "inextricable",
+        "inextricable bloodline",
+        "murphy"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0034",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy.oath-of-liberation",
+      "name": "Oath of Liberation",
+      "aliases": [],
+      "tokens": [
+        "liberation",
+        "murphy",
+        "oath",
+        "oath of liberation",
+        "of",
+        "overexalt"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0034",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.murphy.silent-defiance",
+      "name": "Silent Defiance",
+      "aliases": [],
+      "tokens": [
+        "defiance",
+        "e1",
+        "murphy",
+        "silent",
+        "silent defiance"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0034",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nautila.absent-cogwheel",
+      "name": "Absent Cogwheel",
+      "aliases": [],
+      "tokens": [
+        "absent",
+        "absent cogwheel",
+        "cogwheel",
+        "e2",
+        "nautila"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0036",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nautila.ace-mechanist",
+      "name": "Ace Mechanist",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "ace",
+        "ace mechanist",
+        "mechanist",
+        "nautila"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0036",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nautila.blank-recollection",
+      "name": "Blank Recollection",
+      "aliases": [],
+      "tokens": [
+        "blank",
+        "blank recollection",
+        "e1",
+        "nautila",
+        "recollection"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0036",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nautila.forgotten-dreams",
+      "name": "Forgotten Dreams",
+      "aliases": [],
+      "tokens": [
+        "dreams",
+        "e3",
+        "forgotten",
+        "forgotten dreams",
+        "nautila"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0036",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nautila.vroom-vroom",
+      "name": "Vroom Vroom!",
+      "aliases": [],
+      "tokens": [
+        "nautila",
+        "overexalt",
+        "vroom",
+        "vroom vroom"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0036",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nymphaea.abyssal-funeral-rites",
+      "name": "Abyssal Funeral Rites",
+      "aliases": [],
+      "tokens": [
+        "abyssal",
+        "abyssal funeral rites",
+        "funeral",
+        "nymphaea",
+        "overexalt",
+        "rites"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0037",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nymphaea.frostbloom-tide",
+      "name": "Frostbloom Tide",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "frostbloom",
+        "frostbloom tide",
+        "nymphaea",
+        "tide"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0037",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nymphaea.oceans-vessel",
+      "name": "Ocean's Vessel",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "nymphaea",
+        "oceans",
+        "oceans vessel",
+        "vessel"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0037",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nymphaea.sentiment-oc-anique",
+      "name": "Sentiment Océanique",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "nymphaea",
+        "oceanique",
+        "sentiment",
+        "sentiment oceanique"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0037",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.nymphaea.silent-permeation",
+      "name": "Silent Permeation",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "nymphaea",
+        "permeation",
+        "silent",
+        "silent permeation"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0037",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ogier.deathless-loyalty",
+      "name": "Deathless Loyalty",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "deathless",
+        "deathless loyalty",
+        "loyalty",
+        "ogier"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0038",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ogier.honesty-unto-thyself",
+      "name": "Honesty Unto Thyself",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "honesty",
+        "honesty unto thyself",
+        "ogier",
+        "thyself",
+        "unto"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0038",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ogier.mercy-for-the-meek",
+      "name": "Mercy for the Meek",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "for",
+        "meek",
+        "mercy",
+        "mercy for the meek",
+        "ogier",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0038",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ogier.resolute-devotion",
+      "name": "Resolute Devotion",
+      "aliases": [],
+      "tokens": [
+        "devotion",
+        "ogier",
+        "overexalt",
+        "resolute",
+        "resolute devotion"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0038",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ogier.sacrifice-for-justice",
+      "name": "Sacrifice for Justice",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "for",
+        "justice",
+        "ogier",
+        "sacrifice",
+        "sacrifice for justice"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0038",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pandia.blazing-desire",
+      "name": "Blazing Desire",
+      "aliases": [],
+      "tokens": [
+        "blazing",
+        "blazing desire",
+        "desire",
+        "e2",
+        "pandia"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0039",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pandia.embrace-the-pain",
+      "name": "Embrace the Pain",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "embrace",
+        "embrace the pain",
+        "pain",
+        "pandia",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0039",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pandia.manifesto-of-loving-discipline",
+      "name": "Manifesto of Loving Discipline",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "discipline",
+        "loving",
+        "manifesto",
+        "manifesto of loving discipline",
+        "of",
+        "pandia"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0039",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pandia.sweet-surrender",
+      "name": "Sweet Surrender",
+      "aliases": [],
+      "tokens": [
+        "overexalt",
+        "pandia",
+        "surrender",
+        "sweet",
+        "sweet surrender"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0039",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pandia.youre-being-naughty",
+      "name": "You're Being Naughty...",
+      "aliases": [],
+      "tokens": [
+        "being",
+        "e3",
+        "naughty",
+        "pandia",
+        "youre",
+        "youre being naughty"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0039",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pickman.art-is-madness",
+      "name": "Art is Madness",
+      "aliases": [],
+      "tokens": [
+        "art",
+        "art is madness",
+        "is",
+        "madness",
+        "overexalt",
+        "pickman"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0040",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pickman.centered-composition",
+      "name": "Centered Composition",
+      "aliases": [],
+      "tokens": [
+        "centered",
+        "centered composition",
+        "composition",
+        "e2",
+        "pickman"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0040",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pickman.cross-hatched-rendering",
+      "name": "Cross-Hatched Rendering",
+      "aliases": [],
+      "tokens": [
+        "cross",
+        "cross hatched rendering",
+        "e1",
+        "hatched",
+        "pickman",
+        "rendering"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0040",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pickman.invocation-of-the-muse",
+      "name": "Invocation of the Muse",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "invocation",
+        "invocation of the muse",
+        "muse",
+        "of",
+        "pickman",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0040",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pickman.world-in-the-painting",
+      "name": "World in the Painting",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "in",
+        "painting",
+        "pickman",
+        "the",
+        "world",
+        "world in the painting"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0040",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pollux.divine-revelation",
+      "name": "Divine Revelation",
+      "aliases": [],
+      "tokens": [
+        "divine",
+        "divine revelation",
+        "e3",
+        "pollux",
+        "revelation"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0041",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pollux.flames-of-salvation",
+      "name": "Flames of Salvation",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "flames",
+        "flames of salvation",
+        "of",
+        "pollux",
+        "salvation"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0041",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pollux.lightbearers-herald",
+      "name": "Lightbearer's Herald",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "herald",
+        "lightbearers",
+        "lightbearers herald",
+        "pollux"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0041",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pollux.lux-diouskouron",
+      "name": "Lux Diouskouron",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "diouskouron",
+        "lux",
+        "lux diouskouron",
+        "pollux"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0041",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.pollux.the-nightbreaker",
+      "name": "The Nightbreaker",
+      "aliases": [],
+      "tokens": [
+        "nightbreaker",
+        "overexalt",
+        "pollux",
+        "the",
+        "the nightbreaker"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0041",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona-timeworn.infinite-singularity",
+      "name": "Infinite Singularity",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "infinite",
+        "infinite singularity",
+        "ramona",
+        "ramona timeworn",
+        "singularity",
+        "timeworn"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0020",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona-timeworn.klein-bottle-voyager",
+      "name": "Klein Bottle Voyager",
+      "aliases": [],
+      "tokens": [
+        "bottle",
+        "e2",
+        "klein",
+        "klein bottle voyager",
+        "ramona",
+        "ramona timeworn",
+        "timeworn",
+        "voyager"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0020",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona-timeworn.mobius-captive",
+      "name": "Mobius Captive",
+      "aliases": [],
+      "tokens": [
+        "captive",
+        "e3",
+        "mobius",
+        "mobius captive",
+        "ramona",
+        "ramona timeworn",
+        "timeworn"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0020",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona-timeworn.penrose-pilgrim",
+      "name": "Penrose Pilgrim",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "penrose",
+        "penrose pilgrim",
+        "pilgrim",
+        "ramona",
+        "ramona timeworn",
+        "timeworn"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0020",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona-timeworn.reach-into-yesterday",
+      "name": "Reach into Yesterday",
+      "aliases": [],
+      "tokens": [
+        "into",
+        "overexalt",
+        "ramona",
+        "ramona timeworn",
+        "reach",
+        "reach into yesterday",
+        "timeworn",
+        "yesterday"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0020",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona.innocent-departure",
+      "name": "Innocent Departure",
+      "aliases": [],
+      "tokens": [
+        "departure",
+        "e1",
+        "innocent",
+        "innocent departure",
+        "ramona"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0042",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona.labyrinth-of-thought",
+      "name": "Labyrinth of Thought",
+      "aliases": [],
+      "tokens": [
+        "labyrinth",
+        "labyrinth of thought",
+        "of",
+        "overexalt",
+        "ramona",
+        "thought"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0042",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona.omen-of-unknowns",
+      "name": "Omen of Unknowns",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "of",
+        "omen",
+        "omen of unknowns",
+        "ramona",
+        "unknowns"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0042",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona.precious-ties",
+      "name": "Precious Ties",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "precious",
+        "precious ties",
+        "ramona",
+        "ties"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0042",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ramona.sublime-tempering",
+      "name": "Sublime Tempering",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "ramona",
+        "sublime",
+        "sublime tempering",
+        "tempering"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0042",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ryker.certain-gain",
+      "name": "Certain Gain",
+      "aliases": [],
+      "tokens": [
+        "certain",
+        "certain gain",
+        "e3",
+        "gain",
+        "ryker"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0043",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ryker.fortune-favors-the-damned",
+      "name": "Fortune Favors the Damned",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "damned",
+        "favors",
+        "fortune",
+        "fortune favors the damned",
+        "ryker",
+        "the"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0043",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ryker.fortunes-boon",
+      "name": "Fortune's Boon",
+      "aliases": [],
+      "tokens": [
+        "boon",
+        "e1",
+        "fortunes",
+        "fortunes boon",
+        "ryker"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0043",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ryker.honest-return",
+      "name": "Honest Return",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "honest",
+        "honest return",
+        "return",
+        "ryker"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0043",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.ryker.jackpot",
+      "name": "Jackpot!",
+      "aliases": [],
+      "tokens": [
+        "jackpot",
+        "overexalt",
+        "ryker"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0043",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.salvador.bitter-eucharist",
+      "name": "Bitter Eucharist",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "bitter",
+        "bitter eucharist",
+        "eucharist",
+        "salvador"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0044",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.salvador.book-of-genesis",
+      "name": "Book of Genesis",
+      "aliases": [],
+      "tokens": [
+        "book",
+        "book of genesis",
+        "e2",
+        "genesis",
+        "of",
+        "salvador"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0044",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.salvador.divine-proxy",
+      "name": "Divine Proxy",
+      "aliases": [],
+      "tokens": [
+        "divine",
+        "divine proxy",
+        "e1",
+        "proxy",
+        "salvador"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0044",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.salvador.rite-of-creation",
+      "name": "Rite of Creation",
+      "aliases": [],
+      "tokens": [
+        "creation",
+        "of",
+        "overexalt",
+        "rite",
+        "rite of creation",
+        "salvador"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0044",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.salvador.salvations-hand",
+      "name": "Salvation's Hand",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "hand",
+        "salvador",
+        "salvations",
+        "salvations hand"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0044",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sanga.artistic-dionysia",
+      "name": "Artistic Dionysia",
+      "aliases": [],
+      "tokens": [
+        "artistic",
+        "artistic dionysia",
+        "dionysia",
+        "e3",
+        "sanga"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0045",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sanga.kneel-before-beauty",
+      "name": "Kneel Before Beauty",
+      "aliases": [],
+      "tokens": [
+        "beauty",
+        "before",
+        "e2",
+        "kneel",
+        "kneel before beauty",
+        "sanga"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0045",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sanga.melodic-sculpting",
+      "name": "Melodic Sculpting",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "melodic",
+        "melodic sculpting",
+        "sanga",
+        "sculpting"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0045",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sanga.oblivion-takes-all",
+      "name": "Oblivion Takes All",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "all",
+        "oblivion",
+        "oblivion takes all",
+        "sanga",
+        "takes"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0045",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sanga.the-sea-of-corals",
+      "name": "The Sea of Corals",
+      "aliases": [],
+      "tokens": [
+        "corals",
+        "of",
+        "overexalt",
+        "sanga",
+        "sea",
+        "the",
+        "the sea of corals"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0045",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sorel.carlate-profond",
+      "name": "Écarlate Profond",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "ecarlate",
+        "ecarlate profond",
+        "profond",
+        "sorel"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0046",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sorel.flowing-rill",
+      "name": "Flowing Rill",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "flowing",
+        "flowing rill",
+        "rill",
+        "sorel"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0046",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sorel.lustrous-pearl",
+      "name": "Lustrous Pearl",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "lustrous",
+        "lustrous pearl",
+        "pearl",
+        "sorel"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0046",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sorel.roses-infinite-desire",
+      "name": "Rose's Infinite Desire",
+      "aliases": [],
+      "tokens": [
+        "desire",
+        "infinite",
+        "overexalt",
+        "roses",
+        "roses infinite desire",
+        "sorel"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0046",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.sorel.vintage-nectar",
+      "name": "Vintage Nectar",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "nectar",
+        "sorel",
+        "vintage",
+        "vintage nectar"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0046",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tawil.boundless-sagacity",
+      "name": "Boundless Sagacity",
+      "aliases": [],
+      "tokens": [
+        "boundless",
+        "boundless sagacity",
+        "e1",
+        "sagacity",
+        "tawil"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0047",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tawil.infinite-radiant-brilliance",
+      "name": "Infinite Radiant Brilliance",
+      "aliases": [],
+      "tokens": [
+        "brilliance",
+        "infinite",
+        "infinite radiant brilliance",
+        "overexalt",
+        "radiant",
+        "tawil"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0047",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tawil.nonexistent-existence",
+      "name": "Nonexistent Existence",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "existence",
+        "nonexistent",
+        "nonexistent existence",
+        "tawil"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0047",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tawil.omniscient-and-omnipotent",
+      "name": "Omniscient and Omnipotent",
+      "aliases": [],
+      "tokens": [
+        "and",
+        "e2",
+        "omnipotent",
+        "omniscient",
+        "omniscient and omnipotent",
+        "tawil"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0047",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tawil.the-first-logos",
+      "name": "The First Logos",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "first",
+        "logos",
+        "tawil",
+        "the",
+        "the first logos"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0047",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.thais.everlasting-cycle",
+      "name": "Everlasting Cycle",
+      "aliases": [],
+      "tokens": [
+        "cycle",
+        "e3",
+        "everlasting",
+        "everlasting cycle",
+        "thais"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0048",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.thais.forests-embrace",
+      "name": "Forest's Embrace",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "embrace",
+        "forests",
+        "forests embrace",
+        "thais"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0048",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.thais.sacred-relics-perpetuity",
+      "name": "Sacred Relic's Perpetuity",
+      "aliases": [],
+      "tokens": [
+        "overexalt",
+        "perpetuity",
+        "relics",
+        "sacred",
+        "sacred relics perpetuity",
+        "thais"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0048",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.thais.seed-of-chaos",
+      "name": "Seed of Chaos",
+      "aliases": [],
+      "tokens": [
+        "chaos",
+        "e2",
+        "of",
+        "seed",
+        "seed of chaos",
+        "thais"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0048",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.thais.the-birthing-deep",
+      "name": "The Birthing Deep",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "birthing",
+        "deep",
+        "thais",
+        "the",
+        "the birthing deep"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0048",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tinct.cosmic-symphony",
+      "name": "Cosmic Symphony",
+      "aliases": [],
+      "tokens": [
+        "cosmic",
+        "cosmic symphony",
+        "overexalt",
+        "symphony",
+        "tinct"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0049",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tinct.falling-skyward",
+      "name": "Falling Skyward",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "falling",
+        "falling skyward",
+        "skyward",
+        "tinct"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0049",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tinct.midnight-elegy",
+      "name": "Midnight Elegy",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "elegy",
+        "midnight",
+        "midnight elegy",
+        "tinct"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0049",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tinct.stellar-reverberation",
+      "name": "Stellar Reverberation",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "reverberation",
+        "stellar",
+        "stellar reverberation",
+        "tinct"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0049",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tinct.when-crimson-meets-thorns",
+      "name": "When Crimson Meets Thorns",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "crimson",
+        "meets",
+        "thorns",
+        "tinct",
+        "when",
+        "when crimson meets thorns"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0049",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tulu.lone-king",
+      "name": "Lone King",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "king",
+        "lone",
+        "lone king",
+        "tulu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0050",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tulu.nocturnal-murmurs",
+      "name": "Nocturnal Murmurs",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "murmurs",
+        "nocturnal",
+        "nocturnal murmurs",
+        "tulu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0050",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tulu.the-promised-day",
+      "name": "The Promised Day",
+      "aliases": [],
+      "tokens": [
+        "day",
+        "overexalt",
+        "promised",
+        "the",
+        "the promised day",
+        "tulu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0050",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tulu.the-stars-are-right",
+      "name": "The Stars Are Right",
+      "aliases": [],
+      "tokens": [
+        "are",
+        "e3",
+        "right",
+        "stars",
+        "the",
+        "the stars are right",
+        "tulu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0050",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.tulu.touch-of-revival",
+      "name": "Touch of Revival",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "of",
+        "revival",
+        "touch",
+        "touch of revival",
+        "tulu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0050",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.uvhash.gift-of-surging-blood",
+      "name": "Gift of Surging Blood",
+      "aliases": [],
+      "tokens": [
+        "blood",
+        "gift",
+        "gift of surging blood",
+        "of",
+        "overexalt",
+        "surging",
+        "uvhash"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0051",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.uvhash.paean-of-twisted-fury",
+      "name": "Paean of Twisted Fury",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "fury",
+        "of",
+        "paean",
+        "paean of twisted fury",
+        "twisted",
+        "uvhash"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0051",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.uvhash.roman-elegy",
+      "name": "Roman Elegy",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "elegy",
+        "roman",
+        "roman elegy",
+        "uvhash"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0051",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.uvhash.sorcerers-end",
+      "name": "Sorcerer's End",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "end",
+        "sorcerers",
+        "sorcerers end",
+        "uvhash"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0051",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.uvhash.the-gladiator",
+      "name": "The Gladiator",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "gladiator",
+        "the",
+        "the gladiator",
+        "uvhash"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0051",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.vortice.bang-pop-boom",
+      "name": "BANG! POP! BOOM!",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "bang",
+        "bang pop boom",
+        "boom",
+        "pop",
+        "vortice"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0055",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.vortice.endless-tide",
+      "name": "Endless Tide",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "endless",
+        "endless tide",
+        "tide",
+        "vortice"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0055",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.vortice.moskstraumen-boom",
+      "name": "Moskstraumen! BOOM!",
+      "aliases": [],
+      "tokens": [
+        "boom",
+        "moskstraumen",
+        "moskstraumen boom",
+        "overexalt",
+        "vortice"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0055",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.vortice.roaring-abyss",
+      "name": "Roaring Abyss",
+      "aliases": [],
+      "tokens": [
+        "abyss",
+        "e2",
+        "roaring",
+        "roaring abyss",
+        "vortice"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0055",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.vortice.shackled-impulse",
+      "name": "Shackled Impulse",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "impulse",
+        "shackled",
+        "shackled impulse",
+        "vortice"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0055",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.wanda.black-stone-decree",
+      "name": "Black Stone Decree",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "black",
+        "black stone decree",
+        "decree",
+        "stone",
+        "wanda"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0052",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.wanda.lakeborne-dweller",
+      "name": "Lakeborne Dweller",
+      "aliases": [],
+      "tokens": [
+        "dweller",
+        "e2",
+        "lakeborne",
+        "lakeborne dweller",
+        "wanda"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0052",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.wanda.lost-dreams-guide",
+      "name": "Lost Dream's Guide",
+      "aliases": [],
+      "tokens": [
+        "dreams",
+        "guide",
+        "lost",
+        "lost dreams guide",
+        "overexalt",
+        "wanda"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0052",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.wanda.the-revelation",
+      "name": "The Revelation",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "revelation",
+        "the",
+        "the revelation",
+        "wanda"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0052",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.wanda.venus-and-fur",
+      "name": "Venus and Fur",
+      "aliases": [],
+      "tokens": [
+        "and",
+        "e3",
+        "fur",
+        "venus",
+        "venus and fur",
+        "wanda"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0052",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.winkle.dread-of-the-darkness",
+      "name": "Dread of the Darkness",
+      "aliases": [],
+      "tokens": [
+        "darkness",
+        "dread",
+        "dread of the darkness",
+        "e1",
+        "of",
+        "the",
+        "winkle"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0053",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.winkle.forsaken-homeland",
+      "name": "Forsaken Homeland",
+      "aliases": [],
+      "tokens": [
+        "e2",
+        "forsaken",
+        "forsaken homeland",
+        "homeland",
+        "winkle"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0053",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.winkle.rebirth-through-death",
+      "name": "Rebirth Through Death",
+      "aliases": [],
+      "tokens": [
+        "death",
+        "e3",
+        "rebirth",
+        "rebirth through death",
+        "through",
+        "winkle"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0053",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.winkle.space-time-fold",
+      "name": "Space-Time Fold",
+      "aliases": [],
+      "tokens": [
+        "fold",
+        "overexalt",
+        "space",
+        "space time fold",
+        "time",
+        "winkle"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0053",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.winkle.thus-spoke-the-outcast",
+      "name": "Thus Spoke the Outcast",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "outcast",
+        "spoke",
+        "the",
+        "thus",
+        "thus spoke the outcast",
+        "winkle"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0053",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.xu.enmity-of-the-heart",
+      "name": "Enmity of the Heart",
+      "aliases": [],
+      "tokens": [
+        "e1",
+        "enmity",
+        "enmity of the heart",
+        "heart",
+        "of",
+        "the",
+        "xu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0054",
+        "slot": "E1"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.xu.fan-and-scythe",
+      "name": "Fan and Scythe",
+      "aliases": [],
+      "tokens": [
+        "and",
+        "e2",
+        "fan",
+        "fan and scythe",
+        "scythe",
+        "xu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0054",
+        "slot": "E2"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.xu.gu-wang-yan",
+      "name": "Gu Wang Yan",
+      "aliases": [],
+      "tokens": [
+        "absoluteaxiom",
+        "gu",
+        "gu wang yan",
+        "wang",
+        "xu",
+        "yan"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0054",
+        "slot": "AbsoluteAxiom"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.xu.karmic-grave",
+      "name": "Karmic Grave",
+      "aliases": [],
+      "tokens": [
+        "grave",
+        "karmic",
+        "karmic grave",
+        "overexalt",
+        "xu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0054",
+        "slot": "OverExalt"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.xu.nirvanas-kiss",
+      "name": "Nirvana's Kiss",
+      "aliases": [],
+      "tokens": [
+        "e3",
+        "kiss",
+        "nirvanas",
+        "nirvanas kiss",
+        "xu"
+      ],
+      "facets": {
+        "ownerAwakenerId": "awakener-0054",
+        "slot": "E3"
+      },
+      "boosts": {
+        "name": 10,
+        "alias": 6,
+        "tag": 2
+      }
+    }
+  ]
+}

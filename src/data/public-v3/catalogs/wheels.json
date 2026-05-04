@@ -1,0 +1,2198 @@
+{
+  "schemaVersion": 3,
+  "scope": "wheels",
+  "kind": "wheel",
+  "recordCount": 130,
+  "records": [
+    {
+      "kind": "wheel",
+      "id": "wheel-0001",
+      "name": "Merciful Nurturing",
+      "route": {
+        "slug": "merciful-nurturing",
+        "canonicalPath": "/database/wheels/merciful-nurturing"
+      },
+      "assets": {
+        "icon": "asset-wheel-0001-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
+      "lineupToken": "xb"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0002",
+      "name": "Tablet of Scriptures",
+      "route": {
+        "slug": "tablet-of-scriptures",
+        "canonicalPath": "/database/wheels/tablet-of-scriptures"
+      },
+      "assets": {
+        "icon": "asset-wheel-0002-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
+      "lineupToken": "xC"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0003",
+      "name": "Winter's Requiem",
+      "route": {
+        "slug": "winters-requiem",
+        "canonicalPath": "/database/wheels/winters-requiem"
+      },
+      "assets": {
+        "icon": "asset-wheel-0003-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0003",
+      "ownerAwakenerName": "Aigis",
+      "lineupToken": "W"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0004",
+      "name": "By Rose Alone",
+      "route": {
+        "slug": "by-rose-alone",
+        "canonicalPath": "/database/wheels/by-rose-alone"
+      },
+      "assets": {
+        "icon": "asset-wheel-0004-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
+      "lineupToken": "xc"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0005",
+      "name": "Chains Unbound",
+      "route": {
+        "slug": "chains-unbound",
+        "canonicalPath": "/database/wheels/chains-unbound"
+      },
+      "assets": {
+        "icon": "asset-wheel-0005-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0023",
+      "ownerAwakenerName": "Helot",
+      "lineupToken": "3"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0006",
+      "name": "Drowning in Crimson",
+      "route": {
+        "slug": "drowning-in-crimson",
+        "canonicalPath": "/database/wheels/drowning-in-crimson"
+      },
+      "assets": {
+        "icon": "asset-wheel-0006-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena",
+      "lineupToken": "xY"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0007",
+      "name": "Pale Descendant",
+      "route": {
+        "slug": "pale-descendant",
+        "canonicalPath": "/database/wheels/pale-descendant"
+      },
+      "assets": {
+        "icon": "asset-wheel-0007-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0002",
+      "ownerAwakenerName": "Agrippa",
+      "lineupToken": "xA"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0008",
+      "name": "Bloody Feast",
+      "route": {
+        "slug": "bloody-feast",
+        "canonicalPath": "/database/wheels/bloody-feast"
+      },
+      "assets": {
+        "icon": "asset-wheel-0008-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0051",
+      "ownerAwakenerName": "Uvhash",
+      "lineupToken": "0"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0009",
+      "name": "The Glutton's Tale",
+      "route": {
+        "slug": "the-gluttons-tale",
+        "canonicalPath": "/database/wheels/the-gluttons-tale"
+      },
+      "assets": {
+        "icon": "asset-wheel-0009-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0028",
+      "ownerAwakenerName": "Leigh",
+      "lineupToken": "xk"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0010",
+      "name": "Lullaby Devoured",
+      "route": {
+        "slug": "lullaby-devoured",
+        "canonicalPath": "/database/wheels/lullaby-devoured"
+      },
+      "assets": {
+        "icon": "asset-wheel-0010-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0016",
+      "ownerAwakenerName": "Faint",
+      "lineupToken": "C"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0011",
+      "name": "Kiss of Repose",
+      "route": {
+        "slug": "kiss-of-repose",
+        "canonicalPath": "/database/wheels/kiss-of-repose"
+      },
+      "assets": {
+        "icon": "asset-wheel-0011-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0014",
+      "ownerAwakenerName": "Doresain",
+      "lineupToken": "yP"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0012",
+      "name": "Paradoxical Realism",
+      "route": {
+        "slug": "paradoxical-realism",
+        "canonicalPath": "/database/wheels/paradoxical-realism"
+      },
+      "assets": {
+        "icon": "asset-wheel-0012-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman",
+      "lineupToken": "yd"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0013",
+      "name": "Vain Regrets",
+      "route": {
+        "slug": "vain-regrets",
+        "canonicalPath": "/database/wheels/vain-regrets"
+      },
+      "assets": {
+        "icon": "asset-wheel-0013-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
+      "lineupToken": "yX"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0014",
+      "name": "Rewinding Time",
+      "route": {
+        "slug": "rewinding-time",
+        "canonicalPath": "/database/wheels/rewinding-time"
+      },
+      "assets": {
+        "icon": "asset-wheel-0014-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0042",
+      "ownerAwakenerName": "Ramona",
+      "lineupToken": "Z"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0015",
+      "name": "Deathless Ascent",
+      "route": {
+        "slug": "deathless-ascent",
+        "canonicalPath": "/database/wheels/deathless-ascent"
+      },
+      "assets": {
+        "icon": "asset-wheel-0015-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0013",
+      "ownerAwakenerName": "Doll",
+      "lineupToken": "4"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0016",
+      "name": "Manikin of Oblivion",
+      "route": {
+        "slug": "manikin-of-oblivion",
+        "canonicalPath": "/database/wheels/manikin-of-oblivion"
+      },
+      "assets": {
+        "icon": "asset-wheel-0016-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
+      "lineupToken": "xW"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0017",
+      "name": "Heart of a Knight",
+      "route": {
+        "slug": "heart-of-a-knight",
+        "canonicalPath": "/database/wheels/heart-of-a-knight"
+      },
+      "assets": {
+        "icon": "asset-wheel-0017-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0038",
+      "ownerAwakenerName": "Ogier",
+      "lineupToken": "8"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0018",
+      "name": "Celestial Beast",
+      "route": {
+        "slug": "celestial-beast",
+        "canonicalPath": "/database/wheels/celestial-beast"
+      },
+      "assets": {
+        "icon": "asset-wheel-0018-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0031",
+      "ownerAwakenerName": "Lotan",
+      "lineupToken": "c"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0019",
+      "name": "Hour of Fortune",
+      "route": {
+        "slug": "hour-of-fortune",
+        "canonicalPath": "/database/wheels/hour-of-fortune"
+      },
+      "assets": {
+        "icon": "asset-wheel-0019-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker",
+      "lineupToken": "xJ"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0020",
+      "name": "Aberrant Devour",
+      "route": {
+        "slug": "aberrant-devour",
+        "canonicalPath": "/database/wheels/aberrant-devour"
+      },
+      "assets": {
+        "icon": "asset-wheel-0020-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0001",
+      "ownerAwakenerName": "24",
+      "lineupToken": "n"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0021",
+      "name": "Memory Spiral",
+      "route": {
+        "slug": "memory-spiral",
+        "canonicalPath": "/database/wheels/memory-spiral"
+      },
+      "assets": {
+        "icon": "asset-wheel-0021-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0036",
+      "ownerAwakenerName": "Nautila",
+      "lineupToken": "7"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0022",
+      "name": "Gift of Decay",
+      "route": {
+        "slug": "gift-of-decay",
+        "canonicalPath": "/database/wheels/gift-of-decay"
+      },
+      "assets": {
+        "icon": "asset-wheel-0022-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0037",
+      "ownerAwakenerName": "Nymphaea",
+      "lineupToken": "o"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0023",
+      "name": "Drifting in Desire",
+      "route": {
+        "slug": "drifting-in-desire",
+        "canonicalPath": "/database/wheels/drifting-in-desire"
+      },
+      "assets": {
+        "icon": "asset-wheel-0023-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0039",
+      "ownerAwakenerName": "Pandia",
+      "lineupToken": "xd"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0024",
+      "name": "Grace Through Pain",
+      "route": {
+        "slug": "grace-through-pain",
+        "canonicalPath": "/database/wheels/grace-through-pain"
+      },
+      "assets": {
+        "icon": "asset-wheel-0024-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily",
+      "lineupToken": "R"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0025",
+      "name": "Will Unyielding",
+      "route": {
+        "slug": "will-unyielding",
+        "canonicalPath": "/database/wheels/will-unyielding"
+      },
+      "assets": {
+        "icon": "asset-wheel-0025-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0004",
+      "ownerAwakenerName": "Alva",
+      "lineupToken": "G"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0026",
+      "name": "Silent Banquet",
+      "route": {
+        "slug": "silent-banquet",
+        "canonicalPath": "/database/wheels/silent-banquet"
+      },
+      "assets": {
+        "icon": "asset-wheel-0026-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0026",
+      "ownerAwakenerName": "Karen",
+      "lineupToken": "xh"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0027",
+      "name": "Wheel Unseen",
+      "route": {
+        "slug": "wheel-unseen",
+        "canonicalPath": "/database/wheels/wheel-unseen"
+      },
+      "assets": {
+        "icon": "asset-wheel-0027-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "lineupToken": "xV"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0028",
+      "name": "Amber-Tinted Death",
+      "route": {
+        "slug": "amber-tinted-death",
+        "canonicalPath": "/database/wheels/amber-tinted-death"
+      },
+      "assets": {
+        "icon": "asset-wheel-0028-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
+      "lineupToken": "yn"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0029",
+      "name": "Doomsday Rampage",
+      "route": {
+        "slug": "doomsday-rampage",
+        "canonicalPath": "/database/wheels/doomsday-rampage"
+      },
+      "assets": {
+        "icon": "asset-wheel-0029-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0033",
+      "ownerAwakenerName": "Mouchette",
+      "lineupToken": "yM"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0030",
+      "name": "Fouetté",
+      "route": {
+        "slug": "fouette",
+        "canonicalPath": "/database/wheels/fouette"
+      },
+      "assets": {
+        "icon": "asset-wheel-0030-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz",
+      "lineupToken": "t"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0031",
+      "name": "Treasured Rarity",
+      "route": {
+        "slug": "treasured-rarity",
+        "canonicalPath": "/database/wheels/treasured-rarity"
+      },
+      "assets": {
+        "icon": "asset-wheel-0031-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "lineupToken": "l"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0032",
+      "name": "Song of the Bound",
+      "route": {
+        "slug": "song-of-the-bound",
+        "canonicalPath": "/database/wheels/song-of-the-bound"
+      },
+      "assets": {
+        "icon": "asset-wheel-0032-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0049",
+      "ownerAwakenerName": "Tinct",
+      "lineupToken": "X"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0033",
+      "name": "Queen's Edict",
+      "route": {
+        "slug": "queens-edict",
+        "canonicalPath": "/database/wheels/queens-edict"
+      },
+      "assets": {
+        "icon": "asset-wheel-0033-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
+      "lineupToken": "D"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0034",
+      "name": "Incalculable Factor",
+      "route": {
+        "slug": "incalculable-factor",
+        "canonicalPath": "/database/wheels/incalculable-factor"
+      },
+      "assets": {
+        "icon": "asset-wheel-0034-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0053",
+      "ownerAwakenerName": "Winkle",
+      "lineupToken": "xf"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0035",
+      "name": "The Last Verse",
+      "route": {
+        "slug": "the-last-verse",
+        "canonicalPath": "/database/wheels/the-last-verse"
+      },
+      "assets": {
+        "icon": "asset-wheel-0035-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
+      "lineupToken": "k"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0036",
+      "name": "Path Forsaken",
+      "route": {
+        "slug": "path-forsaken",
+        "canonicalPath": "/database/wheels/path-forsaken"
+      },
+      "assets": {
+        "icon": "asset-wheel-0036-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0025",
+      "ownerAwakenerName": "Jenkin",
+      "lineupToken": "2"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0037",
+      "name": "Core Meltdown",
+      "route": {
+        "slug": "core-meltdown",
+        "canonicalPath": "/database/wheels/core-meltdown"
+      },
+      "assets": {
+        "icon": "asset-wheel-0037-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0015",
+      "ownerAwakenerName": "Erica",
+      "lineupToken": "s"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0038",
+      "name": "Happy Magic Show",
+      "route": {
+        "slug": "happy-magic-show",
+        "canonicalPath": "/database/wheels/happy-magic-show"
+      },
+      "assets": {
+        "icon": "asset-wheel-0038-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0007",
+      "ownerAwakenerName": "Casiah",
+      "lineupToken": "S"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0039",
+      "name": "Unbearable Freedom",
+      "route": {
+        "slug": "unbearable-freedom",
+        "canonicalPath": "/database/wheels/unbearable-freedom"
+      },
+      "assets": {
+        "icon": "asset-wheel-0039-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0008",
+      "ownerAwakenerName": "Castor",
+      "lineupToken": "yb"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0040",
+      "name": "Eternal Requiem",
+      "route": {
+        "slug": "eternal-requiem",
+        "canonicalPath": "/database/wheels/eternal-requiem"
+      },
+      "assets": {
+        "icon": "asset-wheel-0040-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln",
+      "lineupToken": "xX"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0041",
+      "name": "Veiled Anguish",
+      "route": {
+        "slug": "veiled-anguish",
+        "canonicalPath": "/database/wheels/veiled-anguish"
+      },
+      "assets": {
+        "icon": "asset-wheel-0041-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine",
+      "lineupToken": "yf"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0042",
+      "name": "Twisted Knight Ballad",
+      "route": {
+        "slug": "twisted-knight-ballad",
+        "canonicalPath": "/database/wheels/twisted-knight-ballad"
+      },
+      "assets": {
+        "icon": "asset-wheel-0042-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
+      "lineupToken": "yg"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0043",
+      "name": "Special Training",
+      "route": {
+        "slug": "special-training",
+        "canonicalPath": "/database/wheels/special-training"
+      },
+      "assets": {
+        "icon": "asset-wheel-0043-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "yJ"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0044",
+      "name": "School Day",
+      "route": {
+        "slug": "school-day",
+        "canonicalPath": "/database/wheels/school-day"
+      },
+      "assets": {
+        "icon": "asset-wheel-0044-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "lineupToken": "yI"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0045",
+      "name": "Dear Papa Noel",
+      "route": {
+        "slug": "dear-papa-noel",
+        "canonicalPath": "/database/wheels/dear-papa-noel"
+      },
+      "assets": {
+        "icon": "asset-wheel-0045-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "yS"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0046",
+      "name": "Countdown Moment",
+      "route": {
+        "slug": "countdown-moment",
+        "canonicalPath": "/database/wheels/countdown-moment"
+      },
+      "assets": {
+        "icon": "asset-wheel-0046-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "yT"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0047",
+      "name": "Stakes of Wisdom",
+      "route": {
+        "slug": "stakes-of-wisdom",
+        "canonicalPath": "/database/wheels/stakes-of-wisdom"
+      },
+      "assets": {
+        "icon": "asset-wheel-0047-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "y8"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0048",
+      "name": "Unsent Flowers",
+      "route": {
+        "slug": "unsent-flowers",
+        "canonicalPath": "/database/wheels/unsent-flowers"
+      },
+      "assets": {
+        "icon": "asset-wheel-0048-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "N",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "ya"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0049",
+      "name": "Roses in Mud",
+      "route": {
+        "slug": "roses-in-mud",
+        "canonicalPath": "/database/wheels/roses-in-mud"
+      },
+      "assets": {
+        "icon": "asset-wheel-0049-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "N",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "yY"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0050",
+      "name": "Hymn of the Sovereign",
+      "route": {
+        "slug": "hymn-of-the-sovereign",
+        "canonicalPath": "/database/wheels/hymn-of-the-sovereign"
+      },
+      "assets": {
+        "icon": "asset-wheel-0050-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0050",
+      "ownerAwakenerName": "Tulu",
+      "lineupToken": "B"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0051",
+      "name": "Shrouded Birth",
+      "route": {
+        "slug": "shrouded-birth",
+        "canonicalPath": "/database/wheels/shrouded-birth"
+      },
+      "assets": {
+        "icon": "asset-wheel-0051-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0034",
+      "ownerAwakenerName": "Murphy",
+      "lineupToken": "m"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0052",
+      "name": "Amidst the Downpour",
+      "route": {
+        "slug": "amidst-the-downpour",
+        "canonicalPath": "/database/wheels/amidst-the-downpour"
+      },
+      "assets": {
+        "icon": "asset-wheel-0052-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0017",
+      "ownerAwakenerName": "Faros",
+      "lineupToken": "v"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0053",
+      "name": "Fin of Sorrow",
+      "route": {
+        "slug": "fin-of-sorrow",
+        "canonicalPath": "/database/wheels/fin-of-sorrow"
+      },
+      "assets": {
+        "icon": "asset-wheel-0053-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0006",
+      "ownerAwakenerName": "Caecus",
+      "lineupToken": "e"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0054",
+      "name": "Dream of the Sea",
+      "route": {
+        "slug": "dream-of-the-sea",
+        "canonicalPath": "/database/wheels/dream-of-the-sea"
+      },
+      "assets": {
+        "icon": "asset-wheel-0054-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0005",
+      "ownerAwakenerName": "Aurita",
+      "lineupToken": "9"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0055",
+      "name": "Blade of the Titan",
+      "route": {
+        "slug": "blade-of-the-titan",
+        "canonicalPath": "/database/wheels/blade-of-the-titan"
+      },
+      "assets": {
+        "icon": "asset-wheel-0055-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath",
+      "lineupToken": "1"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0056",
+      "name": "Power of the Pious",
+      "route": {
+        "slug": "power-of-the-pious",
+        "canonicalPath": "/database/wheels/power-of-the-pious"
+      },
+      "assets": {
+        "icon": "asset-wheel-0056-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "lineupToken": "xK"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0057",
+      "name": "Death of Ms. Coral",
+      "route": {
+        "slug": "death-of-ms-coral",
+        "canonicalPath": "/database/wheels/death-of-ms-coral"
+      },
+      "assets": {
+        "icon": "asset-wheel-0057-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0045",
+      "ownerAwakenerName": "Sanga",
+      "lineupToken": "A"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0058",
+      "name": "Sail of Providence",
+      "route": {
+        "slug": "sail-of-providence",
+        "canonicalPath": "/database/wheels/sail-of-providence"
+      },
+      "assets": {
+        "icon": "asset-wheel-0058-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0009",
+      "ownerAwakenerName": "Celeste",
+      "lineupToken": "f"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0059",
+      "name": "Flamebound Navigator",
+      "route": {
+        "slug": "flamebound-navigator",
+        "canonicalPath": "/database/wheels/flamebound-navigator"
+      },
+      "assets": {
+        "icon": "asset-wheel-0059-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant",
+      "lineupToken": "ye"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0060",
+      "name": "The Faraway Eden",
+      "route": {
+        "slug": "the-faraway-eden",
+        "canonicalPath": "/database/wheels/the-faraway-eden"
+      },
+      "assets": {
+        "icon": "asset-wheel-0060-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice",
+      "lineupToken": "y6"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0061",
+      "name": "Gluttony",
+      "route": {
+        "slug": "gluttony",
+        "canonicalPath": "/database/wheels/gluttony"
+      },
+      "assets": {
+        "icon": "asset-wheel-0061-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "xs"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0062",
+      "name": "Frenzy",
+      "route": {
+        "slug": "frenzy",
+        "canonicalPath": "/database/wheels/frenzy"
+      },
+      "assets": {
+        "icon": "asset-wheel-0062-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "xr"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0063",
+      "name": "Favor",
+      "route": {
+        "slug": "favor",
+        "canonicalPath": "/database/wheels/favor"
+      },
+      "assets": {
+        "icon": "asset-wheel-0063-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "xq"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0064",
+      "name": "Emerge",
+      "route": {
+        "slug": "emerge",
+        "canonicalPath": "/database/wheels/emerge"
+      },
+      "assets": {
+        "icon": "asset-wheel-0064-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "SIGIL_YIELD",
+      "lineupToken": "xp"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0065",
+      "name": "Delirium",
+      "route": {
+        "slug": "delirium",
+        "canonicalPath": "/database/wheels/delirium"
+      },
+      "assets": {
+        "icon": "asset-wheel-0065-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "xo"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0066",
+      "name": "Whisper",
+      "route": {
+        "slug": "whisper",
+        "canonicalPath": "/database/wheels/whisper"
+      },
+      "assets": {
+        "icon": "asset-wheel-0066-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "xn"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0067",
+      "name": "Hope",
+      "route": {
+        "slug": "hope",
+        "canonicalPath": "/database/wheels/hope"
+      },
+      "assets": {
+        "icon": "asset-wheel-0067-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "xm"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0068",
+      "name": "Epiphany",
+      "route": {
+        "slug": "epiphany",
+        "canonicalPath": "/database/wheels/epiphany"
+      },
+      "assets": {
+        "icon": "asset-wheel-0068-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "xu"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0069",
+      "name": "Punishment",
+      "route": {
+        "slug": "punishment",
+        "canonicalPath": "/database/wheels/punishment"
+      },
+      "assets": {
+        "icon": "asset-wheel-0069-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "xt"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0070",
+      "name": "Blessing",
+      "route": {
+        "slug": "blessing",
+        "canonicalPath": "/database/wheels/blessing"
+      },
+      "assets": {
+        "icon": "asset-wheel-0070-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "xl"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0071",
+      "name": "Vitality",
+      "route": {
+        "slug": "vitality",
+        "canonicalPath": "/database/wheels/vitality"
+      },
+      "assets": {
+        "icon": "asset-wheel-0071-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "xi"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0072",
+      "name": "Exile",
+      "route": {
+        "slug": "exile",
+        "canonicalPath": "/database/wheels/exile"
+      },
+      "assets": {
+        "icon": "asset-wheel-0072-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "xj"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0073",
+      "name": "Suction",
+      "route": {
+        "slug": "suction",
+        "canonicalPath": "/database/wheels/suction"
+      },
+      "assets": {
+        "icon": "asset-wheel-0073-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "g"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0074",
+      "name": "Aged",
+      "route": {
+        "slug": "aged",
+        "canonicalPath": "/database/wheels/aged"
+      },
+      "assets": {
+        "icon": "asset-wheel-0074-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "i"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0076",
+      "name": "Insight",
+      "route": {
+        "slug": "insight",
+        "canonicalPath": "/database/wheels/insight"
+      },
+      "assets": {
+        "icon": "asset-wheel-0076-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "SIGIL_YIELD",
+      "lineupToken": "xv"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0077",
+      "name": "Duty's Gravitas",
+      "route": {
+        "slug": "dutys-gravitas",
+        "canonicalPath": "/database/wheels/dutys-gravitas"
+      },
+      "assets": {
+        "icon": "asset-wheel-0077-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "5"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0078",
+      "name": "Elevated Focus",
+      "route": {
+        "slug": "elevated-focus",
+        "canonicalPath": "/database/wheels/elevated-focus"
+      },
+      "assets": {
+        "icon": "asset-wheel-0078-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "xD"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0079",
+      "name": "Cursed Binding",
+      "route": {
+        "slug": "cursed-binding",
+        "canonicalPath": "/database/wheels/cursed-binding"
+      },
+      "assets": {
+        "icon": "asset-wheel-0079-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "6"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0080",
+      "name": "Sever and Scar",
+      "route": {
+        "slug": "sever-and-scar",
+        "canonicalPath": "/database/wheels/sever-and-scar"
+      },
+      "assets": {
+        "icon": "asset-wheel-0080-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "xE"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0081",
+      "name": "Cloaked in the Night",
+      "route": {
+        "slug": "cloaked-in-the-night",
+        "canonicalPath": "/database/wheels/cloaked-in-the-night"
+      },
+      "assets": {
+        "icon": "asset-wheel-0081-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "V"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0082",
+      "name": "Adventurer's Pack",
+      "route": {
+        "slug": "adventurers-pack",
+        "canonicalPath": "/database/wheels/adventurers-pack"
+      },
+      "assets": {
+        "icon": "asset-wheel-0082-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "SIGIL_YIELD",
+      "lineupToken": "xF"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0083",
+      "name": "Analysis of Death",
+      "route": {
+        "slug": "analysis-of-death",
+        "canonicalPath": "/database/wheels/analysis-of-death"
+      },
+      "assets": {
+        "icon": "asset-wheel-0083-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "xG"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0084",
+      "name": "To My Dearest Friend",
+      "route": {
+        "slug": "to-my-dearest-friend",
+        "canonicalPath": "/database/wheels/to-my-dearest-friend"
+      },
+      "assets": {
+        "icon": "asset-wheel-0084-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "xH"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0085",
+      "name": "Memory Syndrome",
+      "route": {
+        "slug": "memory-syndrome",
+        "canonicalPath": "/database/wheels/memory-syndrome"
+      },
+      "assets": {
+        "icon": "asset-wheel-0085-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "xI"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0086",
+      "name": "Mind Barrier",
+      "route": {
+        "slug": "mind-barrier",
+        "canonicalPath": "/database/wheels/mind-barrier"
+      },
+      "assets": {
+        "icon": "asset-wheel-0086-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "J"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0087",
+      "name": "Critical Point",
+      "route": {
+        "slug": "critical-point",
+        "canonicalPath": "/database/wheels/critical-point"
+      },
+      "assets": {
+        "icon": "asset-wheel-0087-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "U"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0088",
+      "name": "Nobleman's Staff",
+      "route": {
+        "slug": "noblemans-staff",
+        "canonicalPath": "/database/wheels/noblemans-staff"
+      },
+      "assets": {
+        "icon": "asset-wheel-0088-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "H"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0089",
+      "name": "Data is Flesh",
+      "route": {
+        "slug": "data-is-flesh",
+        "canonicalPath": "/database/wheels/data-is-flesh"
+      },
+      "assets": {
+        "icon": "asset-wheel-0089-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "I"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0090",
+      "name": "Moment of Reunion",
+      "route": {
+        "slug": "moment-of-reunion",
+        "canonicalPath": "/database/wheels/moment-of-reunion"
+      },
+      "assets": {
+        "icon": "asset-wheel-0090-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "r"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0091",
+      "name": "The Land of Nonexistence",
+      "route": {
+        "slug": "the-land-of-nonexistence",
+        "canonicalPath": "/database/wheels/the-land-of-nonexistence"
+      },
+      "assets": {
+        "icon": "asset-wheel-0091-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "SIGIL_YIELD",
+      "lineupToken": "M"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0092",
+      "name": "Hand of Oblivion",
+      "route": {
+        "slug": "hand-of-oblivion",
+        "canonicalPath": "/database/wheels/hand-of-oblivion"
+      },
+      "assets": {
+        "icon": "asset-wheel-0092-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "K"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0093",
+      "name": "35mm Magic",
+      "route": {
+        "slug": "35mm-magic",
+        "canonicalPath": "/database/wheels/35mm-magic"
+      },
+      "assets": {
+        "icon": "asset-wheel-0093-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "xM"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0094",
+      "name": "The Gaze of Isarawu",
+      "route": {
+        "slug": "the-gaze-of-isarawu",
+        "canonicalPath": "/database/wheels/the-gaze-of-isarawu"
+      },
+      "assets": {
+        "icon": "asset-wheel-0094-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "xN"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0095",
+      "name": "Man in the Mirror",
+      "route": {
+        "slug": "man-in-the-mirror",
+        "canonicalPath": "/database/wheels/man-in-the-mirror"
+      },
+      "assets": {
+        "icon": "asset-wheel-0095-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "SIGIL_YIELD",
+      "lineupToken": "xO"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0096",
+      "name": "Silver Cod's Determination",
+      "route": {
+        "slug": "silver-cods-determination",
+        "canonicalPath": "/database/wheels/silver-cods-determination"
+      },
+      "assets": {
+        "icon": "asset-wheel-0096-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "xP"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0097",
+      "name": "Til the Snow Melts",
+      "route": {
+        "slug": "til-the-snow-melts",
+        "canonicalPath": "/database/wheels/til-the-snow-melts"
+      },
+      "assets": {
+        "icon": "asset-wheel-0097-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "xZ"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0098",
+      "name": "Deep Sea's Call",
+      "route": {
+        "slug": "deep-seas-call",
+        "canonicalPath": "/database/wheels/deep-seas-call"
+      },
+      "assets": {
+        "icon": "asset-wheel-0098-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "xQ"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0099",
+      "name": "Kiss of Farewell",
+      "route": {
+        "slug": "kiss-of-farewell",
+        "canonicalPath": "/database/wheels/kiss-of-farewell"
+      },
+      "assets": {
+        "icon": "asset-wheel-0099-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "xS"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0100",
+      "name": "Poetic Bygone Days",
+      "route": {
+        "slug": "poetic-bygone-days",
+        "canonicalPath": "/database/wheels/poetic-bygone-days"
+      },
+      "assets": {
+        "icon": "asset-wheel-0100-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "xR"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0101",
+      "name": "Million Loving Gaze",
+      "route": {
+        "slug": "million-loving-gaze",
+        "canonicalPath": "/database/wheels/million-loving-gaze"
+      },
+      "assets": {
+        "icon": "asset-wheel-0101-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "xU"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0102",
+      "name": "Slumber Beneath the Glacier",
+      "route": {
+        "slug": "slumber-beneath-the-glacier",
+        "canonicalPath": "/database/wheels/slumber-beneath-the-glacier"
+      },
+      "assets": {
+        "icon": "asset-wheel-0102-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "x4"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0103",
+      "name": "Fate Roulette",
+      "route": {
+        "slug": "fate-roulette",
+        "canonicalPath": "/database/wheels/fate-roulette"
+      },
+      "assets": {
+        "icon": "asset-wheel-0103-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "SIGIL_YIELD",
+      "lineupToken": "x3"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0104",
+      "name": "Gateway of Truth",
+      "route": {
+        "slug": "gateway-of-truth",
+        "canonicalPath": "/database/wheels/gateway-of-truth"
+      },
+      "assets": {
+        "icon": "asset-wheel-0104-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "x5"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0105",
+      "name": "Never-Ending Performance",
+      "route": {
+        "slug": "never-ending-performance",
+        "canonicalPath": "/database/wheels/never-ending-performance"
+      },
+      "assets": {
+        "icon": "asset-wheel-0105-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "x2"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0106",
+      "name": "Shepherd's Staff",
+      "route": {
+        "slug": "shepherds-staff",
+        "canonicalPath": "/database/wheels/shepherds-staff"
+      },
+      "assets": {
+        "icon": "asset-wheel-0106-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "x1"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0107",
+      "name": "Blue Stone Throne",
+      "route": {
+        "slug": "blue-stone-throne",
+        "canonicalPath": "/database/wheels/blue-stone-throne"
+      },
+      "assets": {
+        "icon": "asset-wheel-0107-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "x7"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0109",
+      "name": "Macabre Delicacies",
+      "route": {
+        "slug": "macabre-delicacies",
+        "canonicalPath": "/database/wheels/macabre-delicacies"
+      },
+      "assets": {
+        "icon": "asset-wheel-0109-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "yO"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0110",
+      "name": "Witch's Wide-brimmed Hat",
+      "route": {
+        "slug": "witchs-wide-brimmed-hat",
+        "canonicalPath": "/database/wheels/witchs-wide-brimmed-hat"
+      },
+      "assets": {
+        "icon": "asset-wheel-0110-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "x8"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0111",
+      "name": "Blue-Ringed Toxin",
+      "route": {
+        "slug": "blue-ringed-toxin",
+        "canonicalPath": "/database/wheels/blue-ringed-toxin"
+      },
+      "assets": {
+        "icon": "asset-wheel-0111-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "yQ"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0112",
+      "name": "Lone Feather",
+      "route": {
+        "slug": "lone-feather",
+        "canonicalPath": "/database/wheels/lone-feather"
+      },
+      "assets": {
+        "icon": "asset-wheel-0112-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "yq"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0113",
+      "name": "The Divus' Visage",
+      "route": {
+        "slug": "the-divus-visage",
+        "canonicalPath": "/database/wheels/the-divus-visage"
+      },
+      "assets": {
+        "icon": "asset-wheel-0113-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_RATE",
+      "lineupToken": "yD"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0114",
+      "name": "Navigator at Sea",
+      "route": {
+        "slug": "navigator-at-sea",
+        "canonicalPath": "/database/wheels/navigator-at-sea"
+      },
+      "assets": {
+        "icon": "asset-wheel-0114-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "yv"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0115",
+      "name": "Thirsting Brush",
+      "route": {
+        "slug": "thirsting-brush",
+        "canonicalPath": "/database/wheels/thirsting-brush"
+      },
+      "assets": {
+        "icon": "asset-wheel-0115-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "yt"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0116",
+      "name": "Impending Sun",
+      "route": {
+        "slug": "impending-sun",
+        "canonicalPath": "/database/wheels/impending-sun"
+      },
+      "assets": {
+        "icon": "asset-wheel-0116-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "yE"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0117",
+      "name": "Light of Intellect",
+      "route": {
+        "slug": "light-of-intellect",
+        "canonicalPath": "/database/wheels/light-of-intellect"
+      },
+      "assets": {
+        "icon": "asset-wheel-0117-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "yK"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0118",
+      "name": "Magnolia's Lure",
+      "route": {
+        "slug": "magnolias-lure",
+        "canonicalPath": "/database/wheels/magnolias-lure"
+      },
+      "assets": {
+        "icon": "asset-wheel-0118-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "yW"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0119",
+      "name": "Imprisoned Madness",
+      "route": {
+        "slug": "imprisoned-madness",
+        "canonicalPath": "/database/wheels/imprisoned-madness"
+      },
+      "assets": {
+        "icon": "asset-wheel-0119-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "y7"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0120",
+      "name": "Spring in Yakutsk",
+      "route": {
+        "slug": "spring-in-yakutsk",
+        "canonicalPath": "/database/wheels/spring-in-yakutsk"
+      },
+      "assets": {
+        "icon": "asset-wheel-0120-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "u"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0121",
+      "name": "Sunfall",
+      "route": {
+        "slug": "sunfall",
+        "canonicalPath": "/database/wheels/sunfall"
+      },
+      "assets": {
+        "icon": "asset-wheel-0121-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "DMG_AMP",
+      "lineupToken": "N"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0122",
+      "name": "Birth of a Soul",
+      "route": {
+        "slug": "birth-of-a-soul",
+        "canonicalPath": "/database/wheels/birth-of-a-soul"
+      },
+      "assets": {
+        "icon": "asset-wheel-0122-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "O"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0123",
+      "name": "Dusk and Dawn",
+      "route": {
+        "slug": "dusk-and-dawn",
+        "canonicalPath": "/database/wheels/dusk-and-dawn"
+      },
+      "assets": {
+        "icon": "asset-wheel-0123-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "DEATH_RESISTANCE",
+      "lineupToken": "xT"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0124",
+      "name": "Heart of Silver",
+      "route": {
+        "slug": "heart-of-silver",
+        "canonicalPath": "/database/wheels/heart-of-silver"
+      },
+      "assets": {
+        "icon": "asset-wheel-0124-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "x6"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0125",
+      "name": "Annihilated Rebirth",
+      "route": {
+        "slug": "annihilated-rebirth",
+        "canonicalPath": "/database/wheels/annihilated-rebirth"
+      },
+      "assets": {
+        "icon": "asset-wheel-0125-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "yH"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0126",
+      "name": "We Will Meet Again",
+      "route": {
+        "slug": "we-will-meet-again",
+        "canonicalPath": "/database/wheels/we-will-meet-again"
+      },
+      "assets": {
+        "icon": "asset-wheel-0126-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "yR"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0128",
+      "name": "Eternal Weave",
+      "route": {
+        "slug": "eternal-weave",
+        "canonicalPath": "/database/wheels/eternal-weave"
+      },
+      "assets": {
+        "icon": "asset-wheel-0128-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne",
+      "lineupToken": "yi"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0130",
+      "name": "Private Afternoon",
+      "route": {
+        "slug": "private-afternoon",
+        "canonicalPath": "/database/wheels/private-afternoon"
+      },
+      "assets": {
+        "icon": "asset-wheel-0130-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "CRIT_DMG",
+      "lineupToken": "y9"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0131",
+      "name": "Uteri Somnia",
+      "route": {
+        "slug": "uteri-somnia",
+        "canonicalPath": "/database/wheels/uteri-somnia"
+      },
+      "assets": {
+        "icon": "asset-wheel-0131-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0035",
+      "ownerAwakenerName": "Murphy: Fauxborn",
+      "lineupToken": "yp"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0132",
+      "name": "Rota Fortunae",
+      "route": {
+        "slug": "rota-fortunae",
+        "canonicalPath": "/database/wheels/rota-fortunae"
+      },
+      "assets": {
+        "icon": "asset-wheel-0132-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "yu"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0136",
+      "name": "Greed",
+      "route": {
+        "slug": "greed",
+        "canonicalPath": "/database/wheels/greed"
+      },
+      "assets": {
+        "icon": "asset-wheel-0136-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "R",
+      "mainstatKey": "ALIEMUS_REGEN",
+      "lineupToken": "xB"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0137",
+      "name": "Hypnotic Pendulum",
+      "route": {
+        "slug": "hypnotic-pendulum",
+        "canonicalPath": "/database/wheels/hypnotic-pendulum"
+      },
+      "assets": {
+        "icon": "asset-wheel-0137-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "KEYFLARE_REGEN",
+      "lineupToken": "x0"
+    }
+  ]
+}

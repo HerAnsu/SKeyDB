@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 3,
+  "kind": "posse",
+  "id": "posse-0012",
+  "name": "Ephemeral Eternity",
+  "route": {
+    "slug": "ephemeral-eternity",
+    "canonicalPath": "/database/posses/ephemeral-eternity"
+  },
+  "assets": {
+    "icon": "asset-posse-0012-icon",
+    "crystal": "asset-posse-0012-crystal",
+    "badge": "asset-posse-0012-badge"
+  },
+  "realm": "ULTRA",
+  "lineupToken": "m",
+  "descriptionTemplate": "Gain [Arg4] Arithmetica. Choose an Awakener; place their [Arg1] {plural:[Arg1]|copy|copies} of \"Strike\" and [Arg1] {plural:[Arg1]|copy|copies} of \"Defense\" into your hand, and grant them {Exhaust} and {Fleeting}. If the current Realm is {Ultra}, gain [Arg2] Temp. {STR} and [Arg3] Temp. {Alert}.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "fixed",
+      "value": "1"
+    },
+    "Arg2": {
+      "kind": "computed",
+      "formulaKey": "scaled",
+      "baseFormula": "esotericResearchDepth",
+      "multiplier": 0.02,
+      "inputs": [
+        "accountLevel",
+        "ownedPosseCount"
+      ]
+    },
+    "Arg3": {
+      "kind": "computed",
+      "formulaKey": "scaled",
+      "baseFormula": "esotericResearchDepth",
+      "multiplier": 0.005,
+      "inputs": [
+        "accountLevel",
+        "ownedPosseCount"
+      ]
+    },
+    "Arg4": {
+      "kind": "fixed",
+      "value": "1"
+    }
+  },
+  "lore": "The mechanical doll rejected the newborn spirit's promise of eternity, as the core's current scorched her soul. Before her body could no longer hold, she had one last task to complete—"
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 3,
+  "kind": "enlighten",
+  "id": "enlighten.leigh.newborn-sanguivore",
+  "name": "Newborn Sanguivore",
+  "route": {
+    "slug": "newborn-sanguivore",
+    "canonicalPath": "/database/awakeners/leigh/enlightens/newborn-sanguivore"
+  },
+  "ownerAwakenerId": "awakener-0028",
+  "slot": "E1",
+  "descriptionTemplate": "{Pain and Pleasure} deals {Pierce DMG}, Obtain {Retain}.",
+  "descriptionArgs": {},
+  "ownerAwakenerName": "Leigh"
+}

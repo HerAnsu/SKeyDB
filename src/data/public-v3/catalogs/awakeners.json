@@ -1,0 +1,3242 @@
+{
+  "schemaVersion": 3,
+  "scope": "awakeners",
+  "kind": "awakener",
+  "recordCount": 56,
+  "records": [
+    {
+      "kind": "awakener",
+      "id": "awakener-0001",
+      "name": "\"24\"",
+      "route": {
+        "slug": "24",
+        "canonicalPath": "/database/awakeners/24"
+      },
+      "assets": {
+        "icon": "asset-awakener-0001-icon"
+      },
+      "numericId": 1,
+      "ingameId": "C06",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Hybrid",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 52,
+        "ATK": 66,
+        "DEF": 30
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 50,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.65,
+        "ATK": 2.1,
+        "DEF": 0.95
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 0,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "T",
+      "aliases": [
+        "24",
+        "twenty-four"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Hand Limit",
+        "Keyflare",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0002",
+      "name": "Agrippa",
+      "route": {
+        "slug": "agrippa",
+        "canonicalPath": "/database/awakeners/agrippa"
+      },
+      "assets": {
+        "icon": "asset-awakener-0002-icon"
+      },
+      "numericId": 2,
+      "ingameId": "B06",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Outlanders",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 35,
+        "ATK": 30,
+        "DEF": 36
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.65,
+        "ATK": 1.4,
+        "DEF": 1.7
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "S",
+      "aliases": [
+        "agrippa"
+      ],
+      "searchTags": [
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0003",
+      "name": "Aigis",
+      "route": {
+        "slug": "aigis",
+        "canonicalPath": "/database/awakeners/aigis"
+      },
+      "assets": {
+        "icon": "asset-awakener-0003-icon"
+      },
+      "numericId": 3,
+      "ingameId": "B03",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Hybrid",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 27,
+        "ATK": 32,
+        "DEF": 29
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.25,
+        "ATK": 1.5,
+        "DEF": 1.35
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "lineupToken": "J",
+      "aliases": [
+        "aigis"
+      ],
+      "searchTags": [
+        "Draw",
+        "Keyflare",
+        "Stun"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0004",
+      "name": "Alva",
+      "route": {
+        "slug": "alva",
+        "canonicalPath": "/database/awakeners/alva"
+      },
+      "assets": {
+        "icon": "asset-awakener-0004-icon"
+      },
+      "numericId": 4,
+      "ingameId": "C11",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Outlanders",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 32,
+        "ATK": 34,
+        "DEF": 37
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "statScaling": {
+        "CON": 1.5,
+        "ATK": 1.6,
+        "DEF": 1.75
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "lineupToken": "G",
+      "aliases": [
+        "alva"
+      ],
+      "searchTags": [
+        "Death Resistance",
+        "Discard",
+        "Dispel",
+        "Draw",
+        "Strike"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0005",
+      "name": "Aurita",
+      "route": {
+        "slug": "aurita",
+        "canonicalPath": "/database/awakeners/aurita"
+      },
+      "assets": {
+        "icon": "asset-awakener-0005-icon"
+      },
+      "numericId": 5,
+      "ingameId": "O05",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "The Fools",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 26,
+        "ATK": 28,
+        "DEF": 25
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 50,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.2,
+        "ATK": 1.3,
+        "DEF": 1.15
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 0,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "o",
+      "aliases": [
+        "aurita"
+      ],
+      "searchTags": [
+        "Discard",
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0006",
+      "name": "Caecus",
+      "route": {
+        "slug": "caecus",
+        "canonicalPath": "/database/awakeners/caecus"
+      },
+      "assets": {
+        "icon": "asset-awakener-0006-icon"
+      },
+      "numericId": 6,
+      "ingameId": "O04",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Hybrid",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 41,
+        "ATK": 33,
+        "DEF": 36
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 2,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.95,
+        "ATK": 1.55,
+        "DEF": 1.7
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 2,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "M",
+      "aliases": [
+        "caecus"
+      ],
+      "searchTags": [
+        "Dispel",
+        "Heal",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0007",
+      "name": "Casiah",
+      "route": {
+        "slug": "casiah",
+        "canonicalPath": "/database/awakeners/casiah"
+      },
+      "assets": {
+        "icon": "asset-awakener-0007-icon"
+      },
+      "numericId": 7,
+      "ingameId": "D09",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "The Unknowable",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 29,
+        "ATK": 30,
+        "DEF": 26
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 15,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.35,
+        "ATK": 1.4,
+        "DEF": 1.2
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 0,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "n",
+      "aliases": [
+        "casiah"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Discard",
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0008",
+      "name": "Castor",
+      "route": {
+        "slug": "castor",
+        "canonicalPath": "/database/awakeners/castor"
+      },
+      "assets": {
+        "icon": "asset-awakener-0008-icon"
+      },
+      "numericId": 8,
+      "ingameId": "D11",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "The Fools",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 52,
+        "ATK": 47,
+        "DEF": 55
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 51.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.65,
+        "ATK": 1.5,
+        "DEF": 1.75
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 1.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "lineupToken": "7",
+      "aliases": [
+        "castor"
+      ],
+      "searchTags": [
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0009",
+      "name": "Celeste",
+      "route": {
+        "slug": "celeste",
+        "canonicalPath": "/database/awakeners/celeste"
+      },
+      "assets": {
+        "icon": "asset-awakener-0009-icon"
+      },
+      "numericId": 9,
+      "ingameId": "O09",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Outlanders",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 21,
+        "ATK": 20,
+        "DEF": 21
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 2.8
+      },
+      "statScaling": {
+        "CON": 1,
+        "ATK": 0.95,
+        "DEF": 1
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 2.8
+      },
+      "lineupToken": "h",
+      "aliases": [
+        "celeste"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Dispel",
+        "Heal",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0010",
+      "name": "Clementine",
+      "route": {
+        "slug": "clementine",
+        "canonicalPath": "/database/awakeners/clementine"
+      },
+      "assets": {
+        "icon": "asset-awakener-0010-icon"
+      },
+      "numericId": 10,
+      "ingameId": "D13",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "The Unknowable",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 44,
+        "ATK": 52,
+        "DEF": 42
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.4,
+        "ATK": 1.65,
+        "DEF": 1.35
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "lineupToken": "9",
+      "aliases": [
+        "clementine"
+      ],
+      "searchTags": [
+        "Dispel",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0011",
+      "name": "Corposant",
+      "route": {
+        "slug": "corposant",
+        "canonicalPath": "/database/awakeners/corposant"
+      },
+      "assets": {
+        "icon": "asset-awakener-0011-icon"
+      },
+      "numericId": 11,
+      "ingameId": "O10",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "The Fools",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 50,
+        "ATK": 44,
+        "DEF": 52
+      },
+      "substatsLv1": {
+        "CritRate": 5.8,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "statScaling": {
+        "CON": 1.6,
+        "ATK": 1.4,
+        "DEF": 1.65
+      },
+      "substatScaling": {
+        "CritRate": 0.8,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "lineupToken": "6",
+      "aliases": [
+        "corposant"
+      ],
+      "searchTags": [
+        "Death Resistance",
+        "Discard",
+        "Draw",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0012",
+      "name": "Daffodil",
+      "route": {
+        "slug": "daffodil",
+        "canonicalPath": "/database/awakeners/daffodil"
+      },
+      "assets": {
+        "icon": "asset-awakener-0012-icon"
+      },
+      "numericId": 12,
+      "ingameId": "D02",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "The Unknowable",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 49,
+        "ATK": 61,
+        "DEF": 45
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 52.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.55,
+        "ATK": 1.95,
+        "DEF": 1.45
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 2.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "lineupToken": "I",
+      "aliases": [
+        "daffodil"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Draw",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0013",
+      "name": "Doll",
+      "route": {
+        "slug": "doll",
+        "canonicalPath": "/database/awakeners/doll"
+      },
+      "assets": {
+        "icon": "asset-awakener-0013-icon"
+      },
+      "numericId": 13,
+      "ingameId": "C02",
+      "realm": "CHAOS",
+      "rarity": "SR",
+      "type": "CHORUS",
+      "faction": "Among the Stars",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 24,
+        "ATK": 19,
+        "DEF": 26
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 16.2,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.1,
+        "ATK": 0.9,
+        "DEF": 1.2
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 1.2,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "l",
+      "aliases": [
+        "doll"
+      ],
+      "searchTags": [
+        "Discard",
+        "Dispel",
+        "Heal"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0014",
+      "name": "Doresain",
+      "route": {
+        "slug": "doresain",
+        "canonicalPath": "/database/awakeners/doresain"
+      },
+      "assets": {
+        "icon": "asset-awakener-0014-icon"
+      },
+      "numericId": 14,
+      "ingameId": "B10",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Out of the Aeons",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 52,
+        "ATK": 55,
+        "DEF": 45
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 52.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.65,
+        "ATK": 1.75,
+        "DEF": 1.45
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 2.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "lineupToken": "xi",
+      "aliases": [
+        "doresain"
+      ],
+      "searchTags": [
+        "Self-Harm"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0015",
+      "name": "Erica",
+      "route": {
+        "slug": "erica",
+        "canonicalPath": "/database/awakeners/erica"
+      },
+      "assets": {
+        "icon": "asset-awakener-0015-icon"
+      },
+      "numericId": 15,
+      "ingameId": "D08",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Hybrid",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 39,
+        "ATK": 38,
+        "DEF": 38
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.85,
+        "ATK": 1.8,
+        "DEF": 1.8
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "V",
+      "aliases": [
+        "erica"
+      ],
+      "searchTags": [
+        "Dispel",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0016",
+      "name": "Faint",
+      "route": {
+        "slug": "faint",
+        "canonicalPath": "/database/awakeners/faint"
+      },
+      "assets": {
+        "icon": "asset-awakener-0016-icon"
+      },
+      "numericId": 16,
+      "ingameId": "B09",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Among the Stars",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 28,
+        "ATK": 21,
+        "DEF": 33
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "statScaling": {
+        "CON": 1.3,
+        "ATK": 1,
+        "DEF": 1.55
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "lineupToken": "s",
+      "aliases": [
+        "faint"
+      ],
+      "searchTags": [
+        "Death Resistance",
+        "Dispel",
+        "Heal"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0017",
+      "name": "Faros",
+      "route": {
+        "slug": "faros",
+        "canonicalPath": "/database/awakeners/faros"
+      },
+      "assets": {
+        "icon": "asset-awakener-0017-icon"
+      },
+      "numericId": 17,
+      "ingameId": "O03",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "The Fools",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 26,
+        "ATK": 28,
+        "DEF": 32
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.2,
+        "ATK": 1.3,
+        "DEF": 1.5
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "lineupToken": "q",
+      "aliases": [
+        "faros"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Dispel",
+        "Draw",
+        "Hand Limit",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0018",
+      "name": "Doll: Inferno",
+      "route": {
+        "slug": "doll-inferno",
+        "canonicalPath": "/database/awakeners/doll-inferno"
+      },
+      "assets": {
+        "icon": "asset-awakener-0018-icon"
+      },
+      "numericId": 18,
+      "ingameId": "C02EX",
+      "realm": "CHAOS",
+      "rarity": "Genesis",
+      "type": "CHORUS",
+      "faction": "Among the Stars",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 35,
+        "ATK": 28,
+        "DEF": 38
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 16.2,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.1,
+        "ATK": 0.9,
+        "DEF": 1.2
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 1.2,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "U",
+      "aliases": [
+        "doll: inferno",
+        "g-doll"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Draw",
+        "Heal",
+        "Max HP DMG",
+        "Self-Harm"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0019",
+      "name": "Helot: Catena",
+      "route": {
+        "slug": "helot-catena",
+        "canonicalPath": "/database/awakeners/helot-catena"
+      },
+      "assets": {
+        "icon": "asset-awakener-0019-icon"
+      },
+      "numericId": 19,
+      "ingameId": "B05EX",
+      "realm": "CARO",
+      "rarity": "Genesis",
+      "type": "ASSAULT",
+      "faction": "The Fools",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 55,
+        "ATK": 53,
+        "DEF": 39
+      },
+      "substatsLv1": {
+        "CritRate": 5.8,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.75,
+        "ATK": 1.7,
+        "DEF": 1.25
+      },
+      "substatScaling": {
+        "CritRate": 0.8,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "lineupToken": "i",
+      "aliases": [
+        "helot: catena",
+        "g-helot"
+      ],
+      "searchTags": [
+        "Draw",
+        "Hand Limit",
+        "Heal",
+        "Self-Harm",
+        "Strike"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0020",
+      "name": "Ramona: Timeworn",
+      "route": {
+        "slug": "ramona-timeworn",
+        "canonicalPath": "/database/awakeners/ramona-timeworn"
+      },
+      "assets": {
+        "icon": "asset-awakener-0020-icon"
+      },
+      "numericId": 20,
+      "ingameId": "C01EX",
+      "realm": "CHAOS",
+      "rarity": "Genesis",
+      "type": "CHORUS",
+      "faction": "The Unknowable",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 32,
+        "ATK": 32,
+        "DEF": 32
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.5,
+        "ATK": 1.5,
+        "DEF": 1.5
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "j",
+      "aliases": [
+        "ramona: timeworn",
+        "g-ramona"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Draw",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0021",
+      "name": "Goliath",
+      "route": {
+        "slug": "goliath",
+        "canonicalPath": "/database/awakeners/goliath"
+      },
+      "assets": {
+        "icon": "asset-awakener-0021-icon"
+      },
+      "numericId": 21,
+      "ingameId": "O06",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "The Fools",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 44,
+        "ATK": 42,
+        "DEF": 35
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 51.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 2.05,
+        "ATK": 2,
+        "DEF": 1.65
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 1.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "f",
+      "aliases": [
+        "goliath"
+      ],
+      "searchTags": []
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0022",
+      "name": "Hameln",
+      "route": {
+        "slug": "hameln",
+        "canonicalPath": "/database/awakeners/hameln"
+      },
+      "assets": {
+        "icon": "asset-awakener-0022-icon"
+      },
+      "numericId": 22,
+      "ingameId": "D12",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "The Unknowable",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 47,
+        "ATK": 49,
+        "DEF": 45
+      },
+      "substatsLv1": {
+        "CritRate": 5.8,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.5,
+        "ATK": 1.55,
+        "DEF": 1.45
+      },
+      "substatScaling": {
+        "CritRate": 0.8,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "Y",
+      "aliases": [
+        "hameln"
+      ],
+      "searchTags": [
+        "Arithmetica"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0023",
+      "name": "Helot",
+      "route": {
+        "slug": "helot",
+        "canonicalPath": "/database/awakeners/helot"
+      },
+      "assets": {
+        "icon": "asset-awakener-0023-icon"
+      },
+      "numericId": 23,
+      "ingameId": "B05",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "The Fools",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 37,
+        "ATK": 36,
+        "DEF": 27
+      },
+      "substatsLv1": {
+        "CritRate": 5.8,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.75,
+        "ATK": 1.7,
+        "DEF": 1.25
+      },
+      "substatScaling": {
+        "CritRate": 0.8,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "lineupToken": "F",
+      "aliases": [
+        "helot"
+      ],
+      "searchTags": [
+        "Discard",
+        "Draw",
+        "Hand Limit",
+        "Self-Harm",
+        "Strike"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0024",
+      "name": "Horla",
+      "route": {
+        "slug": "horla",
+        "canonicalPath": "/database/awakeners/horla"
+      },
+      "assets": {
+        "icon": "asset-awakener-0024-icon"
+      },
+      "numericId": 24,
+      "ingameId": "D06",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Outlanders",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 36,
+        "ATK": 38,
+        "DEF": 33
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "statScaling": {
+        "CON": 1.15,
+        "ATK": 1.2,
+        "DEF": 1.05
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "lineupToken": "B",
+      "aliases": [
+        "horla"
+      ],
+      "searchTags": [
+        "Death Resistance",
+        "Heal"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0025",
+      "name": "Jenkin",
+      "route": {
+        "slug": "jenkin",
+        "canonicalPath": "/database/awakeners/jenkin"
+      },
+      "assets": {
+        "icon": "asset-awakener-0025-icon"
+      },
+      "numericId": 25,
+      "ingameId": "D07",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "The Fools",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 27,
+        "ATK": 37,
+        "DEF": 28
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.25,
+        "ATK": 1.75,
+        "DEF": 1.3
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "L",
+      "aliases": [
+        "jenkins"
+      ],
+      "searchTags": [
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0026",
+      "name": "Karen",
+      "route": {
+        "slug": "karen",
+        "canonicalPath": "/database/awakeners/karen"
+      },
+      "assets": {
+        "icon": "asset-awakener-0026-icon"
+      },
+      "numericId": 26,
+      "ingameId": "C12",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Outlanders",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 30,
+        "ATK": 26,
+        "DEF": 29
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 2.8
+      },
+      "statScaling": {
+        "CON": 1.4,
+        "ATK": 1.2,
+        "DEF": 1.35
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 2.8
+      },
+      "lineupToken": "m",
+      "aliases": [
+        "karen"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Dispel",
+        "Draw",
+        "Heal",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0027",
+      "name": "Kathigu-Ra",
+      "route": {
+        "slug": "kathigu-ra",
+        "canonicalPath": "/database/awakeners/kathigu-ra"
+      },
+      "assets": {
+        "icon": "asset-awakener-0027-icon"
+      },
+      "numericId": 27,
+      "ingameId": "C16",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Among the Stars",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 49,
+        "ATK": 58,
+        "DEF": 44
+      },
+      "substatsLv1": {
+        "CritRate": 5.8,
+        "CritDamage": 52.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.55,
+        "ATK": 1.85,
+        "DEF": 1.4
+      },
+      "substatScaling": {
+        "CritRate": 0.8,
+        "CritDamage": 2.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "1",
+      "aliases": [
+        "kathigu-ra",
+        "kathigura"
+      ],
+      "searchTags": [
+        "Discard",
+        "Dispel",
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0028",
+      "name": "Leigh",
+      "route": {
+        "slug": "leigh",
+        "canonicalPath": "/database/awakeners/leigh"
+      },
+      "assets": {
+        "icon": "asset-awakener-0028-icon"
+      },
+      "numericId": 28,
+      "ingameId": "B08",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Hybrid",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 19,
+        "ATK": 19,
+        "DEF": 19
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 2.8
+      },
+      "statScaling": {
+        "CON": 0.9,
+        "ATK": 0.9,
+        "DEF": 0.9
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 2.8
+      },
+      "lineupToken": "P",
+      "aliases": [
+        "leigh"
+      ],
+      "searchTags": [
+        "Dispel",
+        "Heal",
+        "Self-Harm"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0029",
+      "name": "Lily",
+      "route": {
+        "slug": "lily",
+        "canonicalPath": "/database/awakeners/lily"
+      },
+      "assets": {
+        "icon": "asset-awakener-0029-icon"
+      },
+      "numericId": 29,
+      "ingameId": "C10",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Hybrid",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 56,
+        "ATK": 41,
+        "DEF": 56
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 2.8
+      },
+      "statScaling": {
+        "CON": 1.8,
+        "ATK": 1.3,
+        "DEF": 1.8
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 2.8
+      },
+      "lineupToken": "w",
+      "aliases": [
+        "lily"
+      ],
+      "searchTags": [
+        "Death Resistance",
+        "Heal",
+        "Strike"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0030",
+      "name": "Liz",
+      "route": {
+        "slug": "liz",
+        "canonicalPath": "/database/awakeners/liz"
+      },
+      "assets": {
+        "icon": "asset-awakener-0030-icon"
+      },
+      "numericId": 30,
+      "ingameId": "D01",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "The Fools",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 29,
+        "ATK": 39,
+        "DEF": 31
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 51.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.35,
+        "ATK": 1.85,
+        "DEF": 1.45
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 1.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "d",
+      "aliases": [
+        "liz"
+      ],
+      "searchTags": [
+        "Discard",
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0031",
+      "name": "Lotan",
+      "route": {
+        "slug": "lotan",
+        "canonicalPath": "/database/awakeners/lotan"
+      },
+      "assets": {
+        "icon": "asset-awakener-0031-icon"
+      },
+      "numericId": 31,
+      "ingameId": "C04",
+      "realm": "CHAOS",
+      "rarity": "SR",
+      "type": "ASSAULT",
+      "faction": "Out of the Aeons",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 34,
+        "ATK": 35,
+        "DEF": 30
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 51.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.6,
+        "ATK": 1.65,
+        "DEF": 1.4
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 1.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "k",
+      "aliases": [
+        "lotan"
+      ],
+      "searchTags": [
+        "Dispel",
+        "Max HP DMG",
+        "Strike"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0032",
+      "name": "Miryam",
+      "route": {
+        "slug": "miryam",
+        "canonicalPath": "/database/awakeners/miryam"
+      },
+      "assets": {
+        "icon": "asset-awakener-0032-icon"
+      },
+      "numericId": 32,
+      "ingameId": "O07",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Out of the Aeons",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 33,
+        "ATK": 52,
+        "DEF": 28
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 52.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.05,
+        "ATK": 1.65,
+        "DEF": 0.9
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 2.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "A",
+      "aliases": [
+        "miryam"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Draw",
+        "Heal",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0033",
+      "name": "Mouchette",
+      "route": {
+        "slug": "mouchette",
+        "canonicalPath": "/database/awakeners/mouchette"
+      },
+      "assets": {
+        "icon": "asset-awakener-0033-icon"
+      },
+      "numericId": 33,
+      "ingameId": "C17",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Outlanders",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 44,
+        "ATK": 52,
+        "DEF": 44
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "statScaling": {
+        "CON": 1.4,
+        "ATK": 1.65,
+        "DEF": 1.4
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "lineupToken": "xg",
+      "aliases": [
+        "mouchette"
+      ],
+      "searchTags": [
+        "Death Resistance",
+        "Strike",
+        "Stun"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0034",
+      "name": "Murphy",
+      "route": {
+        "slug": "murphy",
+        "canonicalPath": "/database/awakeners/murphy"
+      },
+      "assets": {
+        "icon": "asset-awakener-0034-icon"
+      },
+      "numericId": 34,
+      "ingameId": "O02",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Hybrid",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 45,
+        "ATK": 49,
+        "DEF": 55
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 16.2,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.45,
+        "ATK": 1.55,
+        "DEF": 1.75
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 1.2,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "r",
+      "aliases": [
+        "murphy"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Keyflare",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0035",
+      "name": "Murphy: Fauxborn",
+      "route": {
+        "slug": "murphy-fauxborn",
+        "canonicalPath": "/database/awakeners/murphy-fauxborn"
+      },
+      "assets": {
+        "icon": "asset-awakener-0035-icon"
+      },
+      "numericId": 35,
+      "ingameId": "O02EX",
+      "realm": "AEQUOR",
+      "rarity": "Genesis",
+      "type": "CHORUS",
+      "faction": "Out of the Aeons",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 35,
+        "ATK": 42,
+        "DEF": 41
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 51.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.1,
+        "ATK": 1.35,
+        "DEF": 1.3
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 1.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "H",
+      "aliases": [
+        "murphy: fauxborn",
+        "g-murphy"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Divine Realm",
+        "Draw",
+        "Keyflare",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0036",
+      "name": "Nautila",
+      "route": {
+        "slug": "nautila",
+        "canonicalPath": "/database/awakeners/nautila"
+      },
+      "assets": {
+        "icon": "asset-awakener-0036-icon"
+      },
+      "numericId": 36,
+      "ingameId": "C07",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "The Fools",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 40,
+        "ATK": 25,
+        "DEF": 42
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.9,
+        "ATK": 1.15,
+        "DEF": 2
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "lineupToken": "g",
+      "aliases": [
+        "nautila"
+      ],
+      "searchTags": [
+        "Dispel"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0037",
+      "name": "Nymphaea",
+      "route": {
+        "slug": "nymphaea",
+        "canonicalPath": "/database/awakeners/nymphaea"
+      },
+      "assets": {
+        "icon": "asset-awakener-0037-icon"
+      },
+      "numericId": 37,
+      "ingameId": "C08",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Outlanders",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 20,
+        "ATK": 32,
+        "DEF": 21
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 16.2,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 0.95,
+        "ATK": 1.5,
+        "DEF": 1
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 1.2,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "lineupToken": "v",
+      "aliases": [
+        "nymphaea"
+      ],
+      "searchTags": []
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0038",
+      "name": "Ogier",
+      "route": {
+        "slug": "ogier",
+        "canonicalPath": "/database/awakeners/ogier"
+      },
+      "assets": {
+        "icon": "asset-awakener-0038-icon"
+      },
+      "numericId": 38,
+      "ingameId": "C03",
+      "realm": "CHAOS",
+      "rarity": "SR",
+      "type": "WARDEN",
+      "faction": "The Fools",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 36,
+        "ATK": 31,
+        "DEF": 39
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 2,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.7,
+        "ATK": 1.45,
+        "DEF": 1.85
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 2,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "D",
+      "aliases": [
+        "ogier"
+      ],
+      "searchTags": [
+        "Dispel"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0039",
+      "name": "Pandia",
+      "route": {
+        "slug": "pandia",
+        "canonicalPath": "/database/awakeners/pandia"
+      },
+      "assets": {
+        "icon": "asset-awakener-0039-icon"
+      },
+      "numericId": 39,
+      "ingameId": "C09",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Outlanders",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 32,
+        "ATK": 37,
+        "DEF": 33
+      },
+      "substatsLv1": {
+        "CritRate": 5.8,
+        "CritDamage": 52.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.5,
+        "ATK": 1.75,
+        "DEF": 1.55
+      },
+      "substatScaling": {
+        "CritRate": 0.8,
+        "CritDamage": 2.4,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "b",
+      "aliases": [
+        "pandia"
+      ],
+      "searchTags": []
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0040",
+      "name": "Pickman",
+      "route": {
+        "slug": "pickman",
+        "canonicalPath": "/database/awakeners/pickman"
+      },
+      "assets": {
+        "icon": "asset-awakener-0040-icon"
+      },
+      "numericId": 40,
+      "ingameId": "B12",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "The Fools",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 50,
+        "ATK": 45,
+        "DEF": 50
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 15,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.6,
+        "ATK": 1.45,
+        "DEF": 1.6
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 0,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "0",
+      "aliases": [
+        "pickman"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0041",
+      "name": "Pollux",
+      "route": {
+        "slug": "pollux",
+        "canonicalPath": "/database/awakeners/pollux"
+      },
+      "assets": {
+        "icon": "asset-awakener-0041-icon"
+      },
+      "numericId": 41,
+      "ingameId": "D14",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Hybrid",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 49,
+        "ATK": 55,
+        "DEF": 47
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.55,
+        "ATK": 1.75,
+        "DEF": 1.5
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0.8,
+        "DeathResistance": 0
+      },
+      "lineupToken": "3",
+      "aliases": [
+        "pollux"
+      ],
+      "searchTags": [
+        "Discard",
+        "Draw"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0042",
+      "name": "Ramona",
+      "route": {
+        "slug": "ramona",
+        "canonicalPath": "/database/awakeners/ramona"
+      },
+      "assets": {
+        "icon": "asset-awakener-0042-icon"
+      },
+      "numericId": 42,
+      "ingameId": "C01",
+      "realm": "CHAOS",
+      "rarity": "SR",
+      "type": "CHORUS",
+      "faction": "The Unknowable",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 32,
+        "ATK": 32,
+        "DEF": 32
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.5,
+        "ATK": 1.5,
+        "DEF": 1.5
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "N",
+      "aliases": [
+        "ramona"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Discard",
+        "Draw",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0043",
+      "name": "Ryker",
+      "route": {
+        "slug": "ryker",
+        "canonicalPath": "/database/awakeners/ryker"
+      },
+      "assets": {
+        "icon": "asset-awakener-0043-icon"
+      },
+      "numericId": 43,
+      "ingameId": "C05",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "The Fools",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 62,
+        "ATK": 52,
+        "DEF": 50
+      },
+      "substatsLv1": {
+        "CritRate": 5.8,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 2,
+        "ATK": 1.65,
+        "DEF": 1.6
+      },
+      "substatScaling": {
+        "CritRate": 0.8,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "W",
+      "aliases": [
+        "ryker"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Draw",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0044",
+      "name": "Salvador",
+      "route": {
+        "slug": "salvador",
+        "canonicalPath": "/database/awakeners/salvador"
+      },
+      "assets": {
+        "icon": "asset-awakener-0044-icon"
+      },
+      "numericId": 44,
+      "ingameId": "B02",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Out of the Aeons",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 66,
+        "ATK": 42,
+        "DEF": 66
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 2,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 2.1,
+        "ATK": 1.35,
+        "DEF": 2.1
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 2,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "R",
+      "aliases": [
+        "salvador"
+      ],
+      "searchTags": [
+        "Heal",
+        "Self-Harm"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0045",
+      "name": "Sanga",
+      "route": {
+        "slug": "sanga",
+        "canonicalPath": "/database/awakeners/sanga"
+      },
+      "assets": {
+        "icon": "asset-awakener-0045-icon"
+      },
+      "numericId": 45,
+      "ingameId": "O08",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Outlanders",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 34,
+        "ATK": 27,
+        "DEF": 40
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "statScaling": {
+        "CON": 1.6,
+        "ATK": 1.25,
+        "DEF": 1.9
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 5.6
+      },
+      "lineupToken": "K",
+      "aliases": [
+        "sanga"
+      ],
+      "searchTags": [
+        "Death Resistance",
+        "Dispel",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0046",
+      "name": "Sorel",
+      "route": {
+        "slug": "sorel",
+        "canonicalPath": "/database/awakeners/sorel"
+      },
+      "assets": {
+        "icon": "asset-awakener-0046-icon"
+      },
+      "numericId": 46,
+      "ingameId": "B04",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Outlanders",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 45,
+        "ATK": 64,
+        "DEF": 33
+      },
+      "substatsLv1": {
+        "CritRate": 6.6,
+        "CritDamage": 51.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.45,
+        "ATK": 2.05,
+        "DEF": 1.05
+      },
+      "substatScaling": {
+        "CritRate": 1.6,
+        "CritDamage": 1.2,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "C",
+      "aliases": [
+        "sorel"
+      ],
+      "searchTags": [
+        "Death Resistance",
+        "Heal",
+        "Self-Harm"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0047",
+      "name": "Tawil",
+      "route": {
+        "slug": "tawil",
+        "canonicalPath": "/database/awakeners/tawil"
+      },
+      "assets": {
+        "icon": "asset-awakener-0047-icon"
+      },
+      "numericId": 47,
+      "ingameId": "C15",
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Gateway",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 47,
+        "ATK": 47,
+        "DEF": 47
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.5,
+        "ATK": 1.5,
+        "DEF": 1.5
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 2,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "X",
+      "aliases": [
+        "tawil"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Discard",
+        "Draw",
+        "Keyflare",
+        "Max HP DMG"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0048",
+      "name": "Thais",
+      "route": {
+        "slug": "thais",
+        "canonicalPath": "/database/awakeners/thais"
+      },
+      "assets": {
+        "icon": "asset-awakener-0048-icon"
+      },
+      "numericId": 48,
+      "ingameId": "B01",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Out of the Aeons",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 49,
+        "ATK": 47,
+        "DEF": 44
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.55,
+        "ATK": 1.5,
+        "DEF": 1.4
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "O",
+      "aliases": [
+        "thais"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0049",
+      "name": "Tinct",
+      "route": {
+        "slug": "tinct",
+        "canonicalPath": "/database/awakeners/tinct"
+      },
+      "assets": {
+        "icon": "asset-awakener-0049-icon"
+      },
+      "numericId": 49,
+      "ingameId": "D03",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "Among the Stars",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 28,
+        "ATK": 26,
+        "DEF": 27
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.3,
+        "ATK": 1.2,
+        "DEF": 1.25
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 1.2,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "p",
+      "aliases": [
+        "tinct"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Dispel",
+        "Draw",
+        "Strike"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0050",
+      "name": "Tulu",
+      "route": {
+        "slug": "tulu",
+        "canonicalPath": "/database/awakeners/tulu"
+      },
+      "assets": {
+        "icon": "asset-awakener-0050-icon"
+      },
+      "numericId": 50,
+      "ingameId": "O01",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Out of the Aeons",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 53,
+        "ATK": 59,
+        "DEF": 47
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 17.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.7,
+        "ATK": 1.9,
+        "DEF": 1.5
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 2.4,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "e",
+      "aliases": [
+        "tulu"
+      ],
+      "searchTags": [
+        "Dispel",
+        "Divine Realm",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0051",
+      "name": "Uvhash",
+      "route": {
+        "slug": "uvhash",
+        "canonicalPath": "/database/awakeners/uvhash"
+      },
+      "assets": {
+        "icon": "asset-awakener-0051-icon"
+      },
+      "numericId": 51,
+      "ingameId": "B07",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "Outlanders",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 38,
+        "ATK": 36,
+        "DEF": 32
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 52.4,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.8,
+        "ATK": 1.7,
+        "DEF": 1.5
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 2.4,
+        "AliemusRegen": 0.4,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "Q",
+      "aliases": [
+        "uvhash"
+      ],
+      "searchTags": [
+        "Self-Harm"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0052",
+      "name": "Wanda",
+      "route": {
+        "slug": "wanda",
+        "canonicalPath": "/database/awakeners/wanda"
+      },
+      "assets": {
+        "icon": "asset-awakener-0052-icon"
+      },
+      "numericId": 52,
+      "ingameId": "D04",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Among the Stars",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 55,
+        "ATK": 35,
+        "DEF": 64
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.75,
+        "ATK": 1.1,
+        "DEF": 2.05
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 0
+      },
+      "lineupToken": "E",
+      "aliases": [
+        "wanda"
+      ],
+      "searchTags": []
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0053",
+      "name": "Winkle",
+      "route": {
+        "slug": "winkle",
+        "canonicalPath": "/database/awakeners/winkle"
+      },
+      "assets": {
+        "icon": "asset-awakener-0053-icon"
+      },
+      "numericId": 53,
+      "ingameId": "D05",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "WARDEN",
+      "faction": "Among the Stars",
+      "primaryScalingBase": 20,
+      "baseStatsLv1": {
+        "CON": 30,
+        "ATK": 27,
+        "DEF": 34
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.4,
+        "ATK": 1.25,
+        "DEF": 1.6
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0.8,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0.6,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "u",
+      "aliases": [
+        "winkle"
+      ],
+      "searchTags": [
+        "Discard",
+        "Dispel",
+        "Draw",
+        "Keyflare"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0054",
+      "name": "Xu",
+      "route": {
+        "slug": "xu",
+        "canonicalPath": "/database/awakeners/xu"
+      },
+      "assets": {
+        "icon": "asset-awakener-0054-icon"
+      },
+      "numericId": 54,
+      "ingameId": "B14",
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "The Unknowable",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 70,
+        "ATK": 42,
+        "DEF": 39
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 2.8
+      },
+      "statScaling": {
+        "CON": 2.25,
+        "ATK": 1.35,
+        "DEF": 1.25
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 0,
+        "SigilYield": 0,
+        "DamageAmplification": 1.6,
+        "DeathResistance": 2.8
+      },
+      "lineupToken": "xk",
+      "aliases": [
+        "xu"
+      ],
+      "searchTags": [
+        "Arithmetica",
+        "Max HP DMG"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0055",
+      "name": "Vortice",
+      "route": {
+        "slug": "vortice",
+        "canonicalPath": "/database/awakeners/vortice"
+      },
+      "assets": {
+        "icon": "asset-awakener-0055-icon"
+      },
+      "numericId": 55,
+      "ingameId": "O11",
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "type": "ASSAULT",
+      "faction": "The Fools",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 52,
+        "ATK": 62,
+        "DEF": 42
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 16.2,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "statScaling": {
+        "CON": 1.65,
+        "ATK": 2,
+        "DEF": 1.35
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 1.2,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 0
+      },
+      "lineupToken": "xo",
+      "aliases": [
+        "vortice"
+      ],
+      "searchTags": [
+        "Dispel",
+        "Divine Realm",
+        "Tentacles"
+      ]
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0056",
+      "name": "Arachne",
+      "route": {
+        "slug": "arachne",
+        "canonicalPath": "/database/awakeners/arachne"
+      },
+      "assets": {
+        "icon": "asset-awakener-0056-icon"
+      },
+      "numericId": 56,
+      "ingameId": "D10",
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "faction": "The Unknowable",
+      "primaryScalingBase": 30,
+      "baseStatsLv1": {
+        "CON": 50,
+        "ATK": 36,
+        "DEF": 49
+      },
+      "substatsLv1": {
+        "CritRate": 5,
+        "CritDamage": 50,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 15,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 2.8
+      },
+      "statScaling": {
+        "CON": 1.6,
+        "ATK": 1.15,
+        "DEF": 1.55
+      },
+      "substatScaling": {
+        "CritRate": 0,
+        "CritDamage": 0,
+        "AliemusRegen": 0,
+        "KeyflareRegen": 0,
+        "RealmMastery": 4,
+        "SigilYield": 0,
+        "DamageAmplification": 0,
+        "DeathResistance": 2.8
+      },
+      "lineupToken": "4",
+      "aliases": [
+        "arachne"
+      ],
+      "searchTags": [
+        "Spider",
+        "Divine Realm"
+      ]
+    }
+  ]
+}

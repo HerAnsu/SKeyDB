@@ -1,0 +1,2442 @@
+{
+  "schemaVersion": 3,
+  "awakener-builds": {
+    "primaryBuildId": [
+      {
+        "value": "defence",
+        "label": "Defence",
+        "order": 1000
+      },
+      {
+        "value": "dps",
+        "label": "Dps",
+        "order": 1000
+      },
+      {
+        "value": "general-dps",
+        "label": "General-Dps",
+        "order": 1000
+      },
+      {
+        "value": "standard",
+        "label": "Standard",
+        "order": 1000
+      },
+      {
+        "value": "standard-support",
+        "label": "Standard-Support",
+        "order": 1000
+      },
+      {
+        "value": "supp",
+        "label": "Supp",
+        "order": 1000
+      },
+      {
+        "value": "support",
+        "label": "Support",
+        "order": 1000
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0001",
+        "label": "24",
+        "order": 0
+      },
+      {
+        "value": "awakener-0002",
+        "label": "Agrippa",
+        "order": 1
+      },
+      {
+        "value": "awakener-0003",
+        "label": "Aigis",
+        "order": 2
+      },
+      {
+        "value": "awakener-0004",
+        "label": "Alva",
+        "order": 3
+      },
+      {
+        "value": "awakener-0005",
+        "label": "Aurita",
+        "order": 4
+      },
+      {
+        "value": "awakener-0006",
+        "label": "Caecus",
+        "order": 5
+      },
+      {
+        "value": "awakener-0007",
+        "label": "Casiah",
+        "order": 6
+      },
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0009",
+        "label": "Celeste",
+        "order": 8
+      },
+      {
+        "value": "awakener-0010",
+        "label": "Clementine",
+        "order": 9
+      },
+      {
+        "value": "awakener-0011",
+        "label": "Corposant",
+        "order": 10
+      },
+      {
+        "value": "awakener-0012",
+        "label": "Daffodil",
+        "order": 11
+      },
+      {
+        "value": "awakener-0013",
+        "label": "Doll",
+        "order": 12
+      },
+      {
+        "value": "awakener-0014",
+        "label": "Doresain",
+        "order": 13
+      },
+      {
+        "value": "awakener-0015",
+        "label": "Erica",
+        "order": 14
+      },
+      {
+        "value": "awakener-0016",
+        "label": "Faint",
+        "order": 15
+      },
+      {
+        "value": "awakener-0017",
+        "label": "Faros",
+        "order": 16
+      },
+      {
+        "value": "awakener-0018",
+        "label": "Doll: Inferno",
+        "order": 17
+      },
+      {
+        "value": "awakener-0019",
+        "label": "Helot: Catena",
+        "order": 18
+      },
+      {
+        "value": "awakener-0020",
+        "label": "Ramona: Timeworn",
+        "order": 19
+      },
+      {
+        "value": "awakener-0021",
+        "label": "Goliath",
+        "order": 20
+      },
+      {
+        "value": "awakener-0022",
+        "label": "Hameln",
+        "order": 21
+      },
+      {
+        "value": "awakener-0023",
+        "label": "Helot",
+        "order": 22
+      },
+      {
+        "value": "awakener-0024",
+        "label": "Horla",
+        "order": 23
+      },
+      {
+        "value": "awakener-0025",
+        "label": "Jenkin",
+        "order": 24
+      },
+      {
+        "value": "awakener-0026",
+        "label": "Karen",
+        "order": 25
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0028",
+        "label": "Leigh",
+        "order": 27
+      },
+      {
+        "value": "awakener-0029",
+        "label": "Lily",
+        "order": 28
+      },
+      {
+        "value": "awakener-0030",
+        "label": "Liz",
+        "order": 29
+      },
+      {
+        "value": "awakener-0031",
+        "label": "Lotan",
+        "order": 30
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0033",
+        "label": "Mouchette",
+        "order": 32
+      },
+      {
+        "value": "awakener-0034",
+        "label": "Murphy",
+        "order": 33
+      },
+      {
+        "value": "awakener-0035",
+        "label": "Murphy: Fauxborn",
+        "order": 34
+      },
+      {
+        "value": "awakener-0036",
+        "label": "Nautila",
+        "order": 35
+      },
+      {
+        "value": "awakener-0037",
+        "label": "Nymphaea",
+        "order": 36
+      },
+      {
+        "value": "awakener-0038",
+        "label": "Ogier",
+        "order": 37
+      },
+      {
+        "value": "awakener-0039",
+        "label": "Pandia",
+        "order": 38
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0042",
+        "label": "Ramona",
+        "order": 41
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0044",
+        "label": "Salvador",
+        "order": 43
+      },
+      {
+        "value": "awakener-0045",
+        "label": "Sanga",
+        "order": 44
+      },
+      {
+        "value": "awakener-0046",
+        "label": "Sorel",
+        "order": 45
+      },
+      {
+        "value": "awakener-0047",
+        "label": "Tawil",
+        "order": 46
+      },
+      {
+        "value": "awakener-0048",
+        "label": "Thais",
+        "order": 47
+      },
+      {
+        "value": "awakener-0049",
+        "label": "Tinct",
+        "order": 48
+      },
+      {
+        "value": "awakener-0050",
+        "label": "Tulu",
+        "order": 49
+      },
+      {
+        "value": "awakener-0051",
+        "label": "Uvhash",
+        "order": 50
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0053",
+        "label": "Winkle",
+        "order": 52
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
+      },
+      {
+        "value": "awakener-0056",
+        "label": "Arachne",
+        "order": 55
+      }
+    ]
+  },
+  "awakeners": {
+    "realm": [
+      {
+        "value": "CHAOS",
+        "label": "Chaos",
+        "order": 0
+      },
+      {
+        "value": "AEQUOR",
+        "label": "Aequor",
+        "order": 10
+      },
+      {
+        "value": "CARO",
+        "label": "Caro",
+        "order": 20
+      },
+      {
+        "value": "ULTRA",
+        "label": "Ultra",
+        "order": 30
+      }
+    ],
+    "rarity": [
+      {
+        "value": "Genesis",
+        "label": "Genesis",
+        "order": 1000
+      },
+      {
+        "value": "SR",
+        "label": "SR",
+        "order": 1000
+      },
+      {
+        "value": "SSR",
+        "label": "SSR",
+        "order": 1000
+      }
+    ],
+    "type": [
+      {
+        "value": "ASSAULT",
+        "label": "Assault",
+        "order": 1000
+      },
+      {
+        "value": "CHORUS",
+        "label": "Chorus",
+        "order": 1000
+      },
+      {
+        "value": "WARDEN",
+        "label": "Warden",
+        "order": 1000
+      }
+    ],
+    "faction": [
+      {
+        "value": "Among the Stars",
+        "label": "Among The Stars",
+        "order": 1000
+      },
+      {
+        "value": "Gateway",
+        "label": "Gateway",
+        "order": 1000
+      },
+      {
+        "value": "Hybrid",
+        "label": "Hybrid",
+        "order": 1000
+      },
+      {
+        "value": "Out of the Aeons",
+        "label": "Out Of The Aeons",
+        "order": 1000
+      },
+      {
+        "value": "Outlanders",
+        "label": "Outlanders",
+        "order": 1000
+      },
+      {
+        "value": "The Fools",
+        "label": "The Fools",
+        "order": 1000
+      },
+      {
+        "value": "The Unknowable",
+        "label": "The Unknowable",
+        "order": 1000
+      }
+    ],
+    "tags": [
+      {
+        "value": "Arithmetica",
+        "label": "Arithmetica",
+        "order": 1000
+      },
+      {
+        "value": "Death Resistance",
+        "label": "Death Resistance",
+        "order": 1000
+      },
+      {
+        "value": "Discard",
+        "label": "Discard",
+        "order": 1000
+      },
+      {
+        "value": "Dispel",
+        "label": "Dispel",
+        "order": 1000
+      },
+      {
+        "value": "Divine Realm",
+        "label": "Divine Realm",
+        "order": 1000
+      },
+      {
+        "value": "Draw",
+        "label": "Draw",
+        "order": 1000
+      },
+      {
+        "value": "Hand Limit",
+        "label": "Hand Limit",
+        "order": 1000
+      },
+      {
+        "value": "Heal",
+        "label": "Heal",
+        "order": 1000
+      },
+      {
+        "value": "Keyflare",
+        "label": "Keyflare",
+        "order": 1000
+      },
+      {
+        "value": "Max HP DMG",
+        "label": "Max Hp Dmg",
+        "order": 1000
+      },
+      {
+        "value": "Self-Harm",
+        "label": "Self-Harm",
+        "order": 1000
+      },
+      {
+        "value": "Spider",
+        "label": "Spider",
+        "order": 1000
+      },
+      {
+        "value": "Strike",
+        "label": "Strike",
+        "order": 1000
+      },
+      {
+        "value": "Stun",
+        "label": "Stun",
+        "order": 1000
+      },
+      {
+        "value": "Tentacles",
+        "label": "Tentacles",
+        "order": 1000
+      }
+    ]
+  },
+  "covenants": {
+    "setBonus": [
+      {
+        "value": 3,
+        "label": "3-piece",
+        "order": 3
+      },
+      {
+        "value": 6,
+        "label": "6-piece",
+        "order": 6
+      }
+    ]
+  },
+  "derived-skills": {
+    "nodeKind": [
+      {
+        "value": "group",
+        "label": "Group",
+        "order": 1000
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0010",
+        "label": "Clementine",
+        "order": 9
+      },
+      {
+        "value": "awakener-0011",
+        "label": "Corposant",
+        "order": 10
+      },
+      {
+        "value": "awakener-0012",
+        "label": "Daffodil",
+        "order": 11
+      },
+      {
+        "value": "awakener-0014",
+        "label": "Doresain",
+        "order": 13
+      },
+      {
+        "value": "awakener-0015",
+        "label": "Erica",
+        "order": 14
+      },
+      {
+        "value": "awakener-0018",
+        "label": "Doll: Inferno",
+        "order": 17
+      },
+      {
+        "value": "awakener-0019",
+        "label": "Helot: Catena",
+        "order": 18
+      },
+      {
+        "value": "awakener-0020",
+        "label": "Ramona: Timeworn",
+        "order": 19
+      },
+      {
+        "value": "awakener-0021",
+        "label": "Goliath",
+        "order": 20
+      },
+      {
+        "value": "awakener-0022",
+        "label": "Hameln",
+        "order": 21
+      },
+      {
+        "value": "awakener-0023",
+        "label": "Helot",
+        "order": 22
+      },
+      {
+        "value": "awakener-0025",
+        "label": "Jenkin",
+        "order": 24
+      },
+      {
+        "value": "awakener-0026",
+        "label": "Karen",
+        "order": 25
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0030",
+        "label": "Liz",
+        "order": 29
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0033",
+        "label": "Mouchette",
+        "order": 32
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0044",
+        "label": "Salvador",
+        "order": 43
+      },
+      {
+        "value": "awakener-0047",
+        "label": "Tawil",
+        "order": 46
+      },
+      {
+        "value": "awakener-0048",
+        "label": "Thais",
+        "order": 47
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
+      },
+      {
+        "value": "awakener-0056",
+        "label": "Arachne",
+        "order": 55
+      }
+    ]
+  },
+  "enlightens": {
+    "slot": [
+      {
+        "value": "AbsoluteAxiom",
+        "label": "Absoluteaxiom",
+        "order": 1000
+      },
+      {
+        "value": "E1",
+        "label": "E1",
+        "order": 1000
+      },
+      {
+        "value": "E2",
+        "label": "E2",
+        "order": 1000
+      },
+      {
+        "value": "E3",
+        "label": "E3",
+        "order": 1000
+      },
+      {
+        "value": "OverExalt",
+        "label": "Overexalt",
+        "order": 1000
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0001",
+        "label": "24",
+        "order": 0
+      },
+      {
+        "value": "awakener-0002",
+        "label": "Agrippa",
+        "order": 1
+      },
+      {
+        "value": "awakener-0003",
+        "label": "Aigis",
+        "order": 2
+      },
+      {
+        "value": "awakener-0004",
+        "label": "Alva",
+        "order": 3
+      },
+      {
+        "value": "awakener-0005",
+        "label": "Aurita",
+        "order": 4
+      },
+      {
+        "value": "awakener-0006",
+        "label": "Caecus",
+        "order": 5
+      },
+      {
+        "value": "awakener-0007",
+        "label": "Casiah",
+        "order": 6
+      },
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0009",
+        "label": "Celeste",
+        "order": 8
+      },
+      {
+        "value": "awakener-0010",
+        "label": "Clementine",
+        "order": 9
+      },
+      {
+        "value": "awakener-0011",
+        "label": "Corposant",
+        "order": 10
+      },
+      {
+        "value": "awakener-0012",
+        "label": "Daffodil",
+        "order": 11
+      },
+      {
+        "value": "awakener-0013",
+        "label": "Doll",
+        "order": 12
+      },
+      {
+        "value": "awakener-0014",
+        "label": "Doresain",
+        "order": 13
+      },
+      {
+        "value": "awakener-0015",
+        "label": "Erica",
+        "order": 14
+      },
+      {
+        "value": "awakener-0016",
+        "label": "Faint",
+        "order": 15
+      },
+      {
+        "value": "awakener-0017",
+        "label": "Faros",
+        "order": 16
+      },
+      {
+        "value": "awakener-0018",
+        "label": "Doll: Inferno",
+        "order": 17
+      },
+      {
+        "value": "awakener-0019",
+        "label": "Helot: Catena",
+        "order": 18
+      },
+      {
+        "value": "awakener-0020",
+        "label": "Ramona: Timeworn",
+        "order": 19
+      },
+      {
+        "value": "awakener-0021",
+        "label": "Goliath",
+        "order": 20
+      },
+      {
+        "value": "awakener-0022",
+        "label": "Hameln",
+        "order": 21
+      },
+      {
+        "value": "awakener-0023",
+        "label": "Helot",
+        "order": 22
+      },
+      {
+        "value": "awakener-0024",
+        "label": "Horla",
+        "order": 23
+      },
+      {
+        "value": "awakener-0025",
+        "label": "Jenkin",
+        "order": 24
+      },
+      {
+        "value": "awakener-0026",
+        "label": "Karen",
+        "order": 25
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0028",
+        "label": "Leigh",
+        "order": 27
+      },
+      {
+        "value": "awakener-0029",
+        "label": "Lily",
+        "order": 28
+      },
+      {
+        "value": "awakener-0030",
+        "label": "Liz",
+        "order": 29
+      },
+      {
+        "value": "awakener-0031",
+        "label": "Lotan",
+        "order": 30
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0033",
+        "label": "Mouchette",
+        "order": 32
+      },
+      {
+        "value": "awakener-0034",
+        "label": "Murphy",
+        "order": 33
+      },
+      {
+        "value": "awakener-0035",
+        "label": "Murphy: Fauxborn",
+        "order": 34
+      },
+      {
+        "value": "awakener-0036",
+        "label": "Nautila",
+        "order": 35
+      },
+      {
+        "value": "awakener-0037",
+        "label": "Nymphaea",
+        "order": 36
+      },
+      {
+        "value": "awakener-0038",
+        "label": "Ogier",
+        "order": 37
+      },
+      {
+        "value": "awakener-0039",
+        "label": "Pandia",
+        "order": 38
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0042",
+        "label": "Ramona",
+        "order": 41
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0044",
+        "label": "Salvador",
+        "order": 43
+      },
+      {
+        "value": "awakener-0045",
+        "label": "Sanga",
+        "order": 44
+      },
+      {
+        "value": "awakener-0046",
+        "label": "Sorel",
+        "order": 45
+      },
+      {
+        "value": "awakener-0047",
+        "label": "Tawil",
+        "order": 46
+      },
+      {
+        "value": "awakener-0048",
+        "label": "Thais",
+        "order": 47
+      },
+      {
+        "value": "awakener-0049",
+        "label": "Tinct",
+        "order": 48
+      },
+      {
+        "value": "awakener-0050",
+        "label": "Tulu",
+        "order": 49
+      },
+      {
+        "value": "awakener-0051",
+        "label": "Uvhash",
+        "order": 50
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0053",
+        "label": "Winkle",
+        "order": 52
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
+      },
+      {
+        "value": "awakener-0056",
+        "label": "Arachne",
+        "order": 55
+      }
+    ]
+  },
+  "overlays": {
+    "overlayType": [
+      {
+        "value": "help",
+        "label": "Help",
+        "order": 1000
+      },
+      {
+        "value": "mechanic",
+        "label": "Mechanic",
+        "order": 1000
+      },
+      {
+        "value": "realm",
+        "label": "Realm",
+        "order": 1000
+      },
+      {
+        "value": "tag",
+        "label": "Tag",
+        "order": 1000
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0001",
+        "label": "24",
+        "order": 0
+      },
+      {
+        "value": "awakener-0003",
+        "label": "Aigis",
+        "order": 2
+      },
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0009",
+        "label": "Celeste",
+        "order": 8
+      },
+      {
+        "value": "awakener-0010",
+        "label": "Clementine",
+        "order": 9
+      },
+      {
+        "value": "awakener-0014",
+        "label": "Doresain",
+        "order": 13
+      },
+      {
+        "value": "awakener-0018",
+        "label": "Doll: Inferno",
+        "order": 17
+      },
+      {
+        "value": "awakener-0020",
+        "label": "Ramona: Timeworn",
+        "order": 19
+      },
+      {
+        "value": "awakener-0022",
+        "label": "Hameln",
+        "order": 21
+      },
+      {
+        "value": "awakener-0024",
+        "label": "Horla",
+        "order": 23
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0029",
+        "label": "Lily",
+        "order": 28
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0035",
+        "label": "Murphy: Fauxborn",
+        "order": 34
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
+      },
+      {
+        "value": "awakener-0056",
+        "label": "Arachne",
+        "order": 55
+      }
+    ]
+  },
+  "posses": {
+    "realm": [
+      {
+        "value": "CHAOS",
+        "label": "Chaos",
+        "order": 0
+      },
+      {
+        "value": "AEQUOR",
+        "label": "Aequor",
+        "order": 10
+      },
+      {
+        "value": "CARO",
+        "label": "Caro",
+        "order": 20
+      },
+      {
+        "value": "ULTRA",
+        "label": "Ultra",
+        "order": 30
+      },
+      {
+        "value": "FADED_LEGACY",
+        "label": "Faded Legacy",
+        "order": 40
+      },
+      {
+        "value": "OTHER",
+        "label": "Other",
+        "order": 50
+      }
+    ]
+  },
+  "relics": {
+    "realm": [
+      {
+        "value": "CHAOS",
+        "label": "Chaos",
+        "order": 0
+      },
+      {
+        "value": "AEQUOR",
+        "label": "Aequor",
+        "order": 10
+      },
+      {
+        "value": "CARO",
+        "label": "Caro",
+        "order": 20
+      },
+      {
+        "value": "ULTRA",
+        "label": "Ultra",
+        "order": 30
+      }
+    ],
+    "rarity": [
+      {
+        "value": "SSR",
+        "label": "SSR",
+        "order": 1000
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0001",
+        "label": "24",
+        "order": 0
+      },
+      {
+        "value": "awakener-0002",
+        "label": "Agrippa",
+        "order": 1
+      },
+      {
+        "value": "awakener-0003",
+        "label": "Aigis",
+        "order": 2
+      },
+      {
+        "value": "awakener-0004",
+        "label": "Alva",
+        "order": 3
+      },
+      {
+        "value": "awakener-0005",
+        "label": "Aurita",
+        "order": 4
+      },
+      {
+        "value": "awakener-0006",
+        "label": "Caecus",
+        "order": 5
+      },
+      {
+        "value": "awakener-0007",
+        "label": "Casiah",
+        "order": 6
+      },
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0009",
+        "label": "Celeste",
+        "order": 8
+      },
+      {
+        "value": "awakener-0010",
+        "label": "Clementine",
+        "order": 9
+      },
+      {
+        "value": "awakener-0011",
+        "label": "Corposant",
+        "order": 10
+      },
+      {
+        "value": "awakener-0012",
+        "label": "Daffodil",
+        "order": 11
+      },
+      {
+        "value": "awakener-0013",
+        "label": "Doll",
+        "order": 12
+      },
+      {
+        "value": "awakener-0014",
+        "label": "Doresain",
+        "order": 13
+      },
+      {
+        "value": "awakener-0015",
+        "label": "Erica",
+        "order": 14
+      },
+      {
+        "value": "awakener-0016",
+        "label": "Faint",
+        "order": 15
+      },
+      {
+        "value": "awakener-0017",
+        "label": "Faros",
+        "order": 16
+      },
+      {
+        "value": "awakener-0018",
+        "label": "Doll: Inferno",
+        "order": 17
+      },
+      {
+        "value": "awakener-0019",
+        "label": "Helot: Catena",
+        "order": 18
+      },
+      {
+        "value": "awakener-0020",
+        "label": "Ramona: Timeworn",
+        "order": 19
+      },
+      {
+        "value": "awakener-0021",
+        "label": "Goliath",
+        "order": 20
+      },
+      {
+        "value": "awakener-0022",
+        "label": "Hameln",
+        "order": 21
+      },
+      {
+        "value": "awakener-0023",
+        "label": "Helot",
+        "order": 22
+      },
+      {
+        "value": "awakener-0024",
+        "label": "Horla",
+        "order": 23
+      },
+      {
+        "value": "awakener-0025",
+        "label": "Jenkin",
+        "order": 24
+      },
+      {
+        "value": "awakener-0026",
+        "label": "Karen",
+        "order": 25
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0028",
+        "label": "Leigh",
+        "order": 27
+      },
+      {
+        "value": "awakener-0029",
+        "label": "Lily",
+        "order": 28
+      },
+      {
+        "value": "awakener-0030",
+        "label": "Liz",
+        "order": 29
+      },
+      {
+        "value": "awakener-0031",
+        "label": "Lotan",
+        "order": 30
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0033",
+        "label": "Mouchette",
+        "order": 32
+      },
+      {
+        "value": "awakener-0034",
+        "label": "Murphy",
+        "order": 33
+      },
+      {
+        "value": "awakener-0035",
+        "label": "Murphy: Fauxborn",
+        "order": 34
+      },
+      {
+        "value": "awakener-0036",
+        "label": "Nautila",
+        "order": 35
+      },
+      {
+        "value": "awakener-0037",
+        "label": "Nymphaea",
+        "order": 36
+      },
+      {
+        "value": "awakener-0038",
+        "label": "Ogier",
+        "order": 37
+      },
+      {
+        "value": "awakener-0039",
+        "label": "Pandia",
+        "order": 38
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0042",
+        "label": "Ramona",
+        "order": 41
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0044",
+        "label": "Salvador",
+        "order": 43
+      },
+      {
+        "value": "awakener-0045",
+        "label": "Sanga",
+        "order": 44
+      },
+      {
+        "value": "awakener-0046",
+        "label": "Sorel",
+        "order": 45
+      },
+      {
+        "value": "awakener-0047",
+        "label": "Tawil",
+        "order": 46
+      },
+      {
+        "value": "awakener-0048",
+        "label": "Thais",
+        "order": 47
+      },
+      {
+        "value": "awakener-0049",
+        "label": "Tinct",
+        "order": 48
+      },
+      {
+        "value": "awakener-0050",
+        "label": "Tulu",
+        "order": 49
+      },
+      {
+        "value": "awakener-0051",
+        "label": "Uvhash",
+        "order": 50
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0053",
+        "label": "Winkle",
+        "order": 52
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
+      },
+      {
+        "value": "awakener-0056",
+        "label": "Arachne",
+        "order": 55
+      }
+    ]
+  },
+  "skills": {
+    "slot": [
+      {
+        "value": "Defense",
+        "label": "Defense",
+        "order": 1000
+      },
+      {
+        "value": "Exalt",
+        "label": "Exalt",
+        "order": 1000
+      },
+      {
+        "value": "OverExalt",
+        "label": "Overexalt",
+        "order": 1000
+      },
+      {
+        "value": "Rouse",
+        "label": "Rouse",
+        "order": 1000
+      },
+      {
+        "value": "Skill1",
+        "label": "Skill1",
+        "order": 1000
+      },
+      {
+        "value": "Skill2",
+        "label": "Skill2",
+        "order": 1000
+      },
+      {
+        "value": "Strike",
+        "label": "Strike",
+        "order": 1000
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0001",
+        "label": "24",
+        "order": 0
+      },
+      {
+        "value": "awakener-0002",
+        "label": "Agrippa",
+        "order": 1
+      },
+      {
+        "value": "awakener-0003",
+        "label": "Aigis",
+        "order": 2
+      },
+      {
+        "value": "awakener-0004",
+        "label": "Alva",
+        "order": 3
+      },
+      {
+        "value": "awakener-0005",
+        "label": "Aurita",
+        "order": 4
+      },
+      {
+        "value": "awakener-0006",
+        "label": "Caecus",
+        "order": 5
+      },
+      {
+        "value": "awakener-0007",
+        "label": "Casiah",
+        "order": 6
+      },
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0009",
+        "label": "Celeste",
+        "order": 8
+      },
+      {
+        "value": "awakener-0010",
+        "label": "Clementine",
+        "order": 9
+      },
+      {
+        "value": "awakener-0011",
+        "label": "Corposant",
+        "order": 10
+      },
+      {
+        "value": "awakener-0012",
+        "label": "Daffodil",
+        "order": 11
+      },
+      {
+        "value": "awakener-0013",
+        "label": "Doll",
+        "order": 12
+      },
+      {
+        "value": "awakener-0014",
+        "label": "Doresain",
+        "order": 13
+      },
+      {
+        "value": "awakener-0015",
+        "label": "Erica",
+        "order": 14
+      },
+      {
+        "value": "awakener-0016",
+        "label": "Faint",
+        "order": 15
+      },
+      {
+        "value": "awakener-0017",
+        "label": "Faros",
+        "order": 16
+      },
+      {
+        "value": "awakener-0018",
+        "label": "Doll: Inferno",
+        "order": 17
+      },
+      {
+        "value": "awakener-0019",
+        "label": "Helot: Catena",
+        "order": 18
+      },
+      {
+        "value": "awakener-0020",
+        "label": "Ramona: Timeworn",
+        "order": 19
+      },
+      {
+        "value": "awakener-0021",
+        "label": "Goliath",
+        "order": 20
+      },
+      {
+        "value": "awakener-0022",
+        "label": "Hameln",
+        "order": 21
+      },
+      {
+        "value": "awakener-0023",
+        "label": "Helot",
+        "order": 22
+      },
+      {
+        "value": "awakener-0024",
+        "label": "Horla",
+        "order": 23
+      },
+      {
+        "value": "awakener-0025",
+        "label": "Jenkin",
+        "order": 24
+      },
+      {
+        "value": "awakener-0026",
+        "label": "Karen",
+        "order": 25
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0028",
+        "label": "Leigh",
+        "order": 27
+      },
+      {
+        "value": "awakener-0029",
+        "label": "Lily",
+        "order": 28
+      },
+      {
+        "value": "awakener-0030",
+        "label": "Liz",
+        "order": 29
+      },
+      {
+        "value": "awakener-0031",
+        "label": "Lotan",
+        "order": 30
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0033",
+        "label": "Mouchette",
+        "order": 32
+      },
+      {
+        "value": "awakener-0034",
+        "label": "Murphy",
+        "order": 33
+      },
+      {
+        "value": "awakener-0035",
+        "label": "Murphy: Fauxborn",
+        "order": 34
+      },
+      {
+        "value": "awakener-0036",
+        "label": "Nautila",
+        "order": 35
+      },
+      {
+        "value": "awakener-0037",
+        "label": "Nymphaea",
+        "order": 36
+      },
+      {
+        "value": "awakener-0038",
+        "label": "Ogier",
+        "order": 37
+      },
+      {
+        "value": "awakener-0039",
+        "label": "Pandia",
+        "order": 38
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0042",
+        "label": "Ramona",
+        "order": 41
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0044",
+        "label": "Salvador",
+        "order": 43
+      },
+      {
+        "value": "awakener-0045",
+        "label": "Sanga",
+        "order": 44
+      },
+      {
+        "value": "awakener-0046",
+        "label": "Sorel",
+        "order": 45
+      },
+      {
+        "value": "awakener-0047",
+        "label": "Tawil",
+        "order": 46
+      },
+      {
+        "value": "awakener-0048",
+        "label": "Thais",
+        "order": 47
+      },
+      {
+        "value": "awakener-0049",
+        "label": "Tinct",
+        "order": 48
+      },
+      {
+        "value": "awakener-0050",
+        "label": "Tulu",
+        "order": 49
+      },
+      {
+        "value": "awakener-0051",
+        "label": "Uvhash",
+        "order": 50
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0053",
+        "label": "Winkle",
+        "order": 52
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
+      },
+      {
+        "value": "awakener-0056",
+        "label": "Arachne",
+        "order": 55
+      }
+    ]
+  },
+  "talents": {
+    "family": [
+      {
+        "value": "madness_omen",
+        "label": "Madness Omen",
+        "order": 1000
+      },
+      {
+        "value": "passive",
+        "label": "Passive",
+        "order": 1000
+      },
+      {
+        "value": "soulforge_aptitude",
+        "label": "Soulforge Aptitude",
+        "order": 1000
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0001",
+        "label": "24",
+        "order": 0
+      },
+      {
+        "value": "awakener-0002",
+        "label": "Agrippa",
+        "order": 1
+      },
+      {
+        "value": "awakener-0003",
+        "label": "Aigis",
+        "order": 2
+      },
+      {
+        "value": "awakener-0004",
+        "label": "Alva",
+        "order": 3
+      },
+      {
+        "value": "awakener-0005",
+        "label": "Aurita",
+        "order": 4
+      },
+      {
+        "value": "awakener-0006",
+        "label": "Caecus",
+        "order": 5
+      },
+      {
+        "value": "awakener-0007",
+        "label": "Casiah",
+        "order": 6
+      },
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0009",
+        "label": "Celeste",
+        "order": 8
+      },
+      {
+        "value": "awakener-0010",
+        "label": "Clementine",
+        "order": 9
+      },
+      {
+        "value": "awakener-0011",
+        "label": "Corposant",
+        "order": 10
+      },
+      {
+        "value": "awakener-0012",
+        "label": "Daffodil",
+        "order": 11
+      },
+      {
+        "value": "awakener-0013",
+        "label": "Doll",
+        "order": 12
+      },
+      {
+        "value": "awakener-0014",
+        "label": "Doresain",
+        "order": 13
+      },
+      {
+        "value": "awakener-0015",
+        "label": "Erica",
+        "order": 14
+      },
+      {
+        "value": "awakener-0016",
+        "label": "Faint",
+        "order": 15
+      },
+      {
+        "value": "awakener-0017",
+        "label": "Faros",
+        "order": 16
+      },
+      {
+        "value": "awakener-0018",
+        "label": "Doll: Inferno",
+        "order": 17
+      },
+      {
+        "value": "awakener-0019",
+        "label": "Helot: Catena",
+        "order": 18
+      },
+      {
+        "value": "awakener-0020",
+        "label": "Ramona: Timeworn",
+        "order": 19
+      },
+      {
+        "value": "awakener-0021",
+        "label": "Goliath",
+        "order": 20
+      },
+      {
+        "value": "awakener-0022",
+        "label": "Hameln",
+        "order": 21
+      },
+      {
+        "value": "awakener-0023",
+        "label": "Helot",
+        "order": 22
+      },
+      {
+        "value": "awakener-0024",
+        "label": "Horla",
+        "order": 23
+      },
+      {
+        "value": "awakener-0025",
+        "label": "Jenkin",
+        "order": 24
+      },
+      {
+        "value": "awakener-0026",
+        "label": "Karen",
+        "order": 25
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0028",
+        "label": "Leigh",
+        "order": 27
+      },
+      {
+        "value": "awakener-0029",
+        "label": "Lily",
+        "order": 28
+      },
+      {
+        "value": "awakener-0030",
+        "label": "Liz",
+        "order": 29
+      },
+      {
+        "value": "awakener-0031",
+        "label": "Lotan",
+        "order": 30
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0033",
+        "label": "Mouchette",
+        "order": 32
+      },
+      {
+        "value": "awakener-0034",
+        "label": "Murphy",
+        "order": 33
+      },
+      {
+        "value": "awakener-0035",
+        "label": "Murphy: Fauxborn",
+        "order": 34
+      },
+      {
+        "value": "awakener-0036",
+        "label": "Nautila",
+        "order": 35
+      },
+      {
+        "value": "awakener-0037",
+        "label": "Nymphaea",
+        "order": 36
+      },
+      {
+        "value": "awakener-0038",
+        "label": "Ogier",
+        "order": 37
+      },
+      {
+        "value": "awakener-0039",
+        "label": "Pandia",
+        "order": 38
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0042",
+        "label": "Ramona",
+        "order": 41
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0044",
+        "label": "Salvador",
+        "order": 43
+      },
+      {
+        "value": "awakener-0045",
+        "label": "Sanga",
+        "order": 44
+      },
+      {
+        "value": "awakener-0046",
+        "label": "Sorel",
+        "order": 45
+      },
+      {
+        "value": "awakener-0047",
+        "label": "Tawil",
+        "order": 46
+      },
+      {
+        "value": "awakener-0048",
+        "label": "Thais",
+        "order": 47
+      },
+      {
+        "value": "awakener-0049",
+        "label": "Tinct",
+        "order": 48
+      },
+      {
+        "value": "awakener-0050",
+        "label": "Tulu",
+        "order": 49
+      },
+      {
+        "value": "awakener-0051",
+        "label": "Uvhash",
+        "order": 50
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0053",
+        "label": "Winkle",
+        "order": 52
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
+      },
+      {
+        "value": "awakener-0056",
+        "label": "Arachne",
+        "order": 55
+      }
+    ]
+  },
+  "wheels": {
+    "realm": [
+      {
+        "value": "CHAOS",
+        "label": "Chaos",
+        "order": 0
+      },
+      {
+        "value": "AEQUOR",
+        "label": "Aequor",
+        "order": 10
+      },
+      {
+        "value": "CARO",
+        "label": "Caro",
+        "order": 20
+      },
+      {
+        "value": "ULTRA",
+        "label": "Ultra",
+        "order": 30
+      },
+      {
+        "value": "NEUTRAL",
+        "label": "Neutral",
+        "order": 1000
+      }
+    ],
+    "rarity": [
+      {
+        "value": "N",
+        "label": "N",
+        "order": 1000
+      },
+      {
+        "value": "R",
+        "label": "R",
+        "order": 1000
+      },
+      {
+        "value": "SR",
+        "label": "SR",
+        "order": 1000
+      },
+      {
+        "value": "SSR",
+        "label": "SSR",
+        "order": 1000
+      }
+    ],
+    "mainstatKey": [
+      {
+        "value": "ALIEMUS_REGEN",
+        "label": "Aliemus Regen",
+        "order": 1000
+      },
+      {
+        "value": "CRIT_DMG",
+        "label": "Crit Dmg",
+        "order": 1000
+      },
+      {
+        "value": "CRIT_RATE",
+        "label": "Crit Rate",
+        "order": 1000
+      },
+      {
+        "value": "DEATH_RESISTANCE",
+        "label": "Death Resistance",
+        "order": 1000
+      },
+      {
+        "value": "DMG_AMP",
+        "label": "Dmg Amp",
+        "order": 1000
+      },
+      {
+        "value": "KEYFLARE_REGEN",
+        "label": "Keyflare Regen",
+        "order": 1000
+      },
+      {
+        "value": "REALM_MASTERY",
+        "label": "Realm Mastery",
+        "order": 1000
+      },
+      {
+        "value": "SIGIL_YIELD",
+        "label": "Sigil Yield",
+        "order": 1000
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0001",
+        "label": "24",
+        "order": 0
+      },
+      {
+        "value": "awakener-0002",
+        "label": "Agrippa",
+        "order": 1
+      },
+      {
+        "value": "awakener-0003",
+        "label": "Aigis",
+        "order": 2
+      },
+      {
+        "value": "awakener-0004",
+        "label": "Alva",
+        "order": 3
+      },
+      {
+        "value": "awakener-0005",
+        "label": "Aurita",
+        "order": 4
+      },
+      {
+        "value": "awakener-0006",
+        "label": "Caecus",
+        "order": 5
+      },
+      {
+        "value": "awakener-0007",
+        "label": "Casiah",
+        "order": 6
+      },
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0009",
+        "label": "Celeste",
+        "order": 8
+      },
+      {
+        "value": "awakener-0010",
+        "label": "Clementine",
+        "order": 9
+      },
+      {
+        "value": "awakener-0011",
+        "label": "Corposant",
+        "order": 10
+      },
+      {
+        "value": "awakener-0012",
+        "label": "Daffodil",
+        "order": 11
+      },
+      {
+        "value": "awakener-0013",
+        "label": "Doll",
+        "order": 12
+      },
+      {
+        "value": "awakener-0014",
+        "label": "Doresain",
+        "order": 13
+      },
+      {
+        "value": "awakener-0015",
+        "label": "Erica",
+        "order": 14
+      },
+      {
+        "value": "awakener-0016",
+        "label": "Faint",
+        "order": 15
+      },
+      {
+        "value": "awakener-0017",
+        "label": "Faros",
+        "order": 16
+      },
+      {
+        "value": "awakener-0018",
+        "label": "Doll: Inferno",
+        "order": 17
+      },
+      {
+        "value": "awakener-0019",
+        "label": "Helot: Catena",
+        "order": 18
+      },
+      {
+        "value": "awakener-0021",
+        "label": "Goliath",
+        "order": 20
+      },
+      {
+        "value": "awakener-0022",
+        "label": "Hameln",
+        "order": 21
+      },
+      {
+        "value": "awakener-0023",
+        "label": "Helot",
+        "order": 22
+      },
+      {
+        "value": "awakener-0024",
+        "label": "Horla",
+        "order": 23
+      },
+      {
+        "value": "awakener-0025",
+        "label": "Jenkin",
+        "order": 24
+      },
+      {
+        "value": "awakener-0026",
+        "label": "Karen",
+        "order": 25
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0028",
+        "label": "Leigh",
+        "order": 27
+      },
+      {
+        "value": "awakener-0029",
+        "label": "Lily",
+        "order": 28
+      },
+      {
+        "value": "awakener-0030",
+        "label": "Liz",
+        "order": 29
+      },
+      {
+        "value": "awakener-0031",
+        "label": "Lotan",
+        "order": 30
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0033",
+        "label": "Mouchette",
+        "order": 32
+      },
+      {
+        "value": "awakener-0034",
+        "label": "Murphy",
+        "order": 33
+      },
+      {
+        "value": "awakener-0035",
+        "label": "Murphy: Fauxborn",
+        "order": 34
+      },
+      {
+        "value": "awakener-0036",
+        "label": "Nautila",
+        "order": 35
+      },
+      {
+        "value": "awakener-0037",
+        "label": "Nymphaea",
+        "order": 36
+      },
+      {
+        "value": "awakener-0038",
+        "label": "Ogier",
+        "order": 37
+      },
+      {
+        "value": "awakener-0039",
+        "label": "Pandia",
+        "order": 38
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0042",
+        "label": "Ramona",
+        "order": 41
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0044",
+        "label": "Salvador",
+        "order": 43
+      },
+      {
+        "value": "awakener-0045",
+        "label": "Sanga",
+        "order": 44
+      },
+      {
+        "value": "awakener-0046",
+        "label": "Sorel",
+        "order": 45
+      },
+      {
+        "value": "awakener-0047",
+        "label": "Tawil",
+        "order": 46
+      },
+      {
+        "value": "awakener-0048",
+        "label": "Thais",
+        "order": 47
+      },
+      {
+        "value": "awakener-0049",
+        "label": "Tinct",
+        "order": 48
+      },
+      {
+        "value": "awakener-0050",
+        "label": "Tulu",
+        "order": 49
+      },
+      {
+        "value": "awakener-0051",
+        "label": "Uvhash",
+        "order": 50
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0053",
+        "label": "Winkle",
+        "order": 52
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
+      },
+      {
+        "value": "awakener-0056",
+        "label": "Arachne",
+        "order": 55
+      }
+    ]
+  }
+}

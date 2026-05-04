@@ -1,0 +1,960 @@
+{
+  "schemaVersion": 3,
+  "scope": "relics",
+  "kind": "relic",
+  "recordCount": 56,
+  "records": [
+    {
+      "kind": "relic",
+      "id": "relic-0001",
+      "name": "Dimensional Image: \"24\"",
+      "route": {
+        "slug": "dimensional-image-24",
+        "canonicalPath": "/database/relics/dimensional-image-24"
+      },
+      "assets": {
+        "icon": "asset-relic-0001-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0001",
+      "ownerAwakenerName": "24",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0002",
+      "name": "Dimensional Image: Agrippa",
+      "route": {
+        "slug": "dimensional-image-agrippa",
+        "canonicalPath": "/database/relics/dimensional-image-agrippa"
+      },
+      "assets": {
+        "icon": "asset-relic-0002-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0002",
+      "ownerAwakenerName": "Agrippa",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0003",
+      "name": "Dimensional Image: Aigis",
+      "route": {
+        "slug": "dimensional-image-aigis",
+        "canonicalPath": "/database/relics/dimensional-image-aigis"
+      },
+      "assets": {
+        "icon": "asset-relic-0003-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0003",
+      "ownerAwakenerName": "Aigis",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0004",
+      "name": "Dimensional Image: Alva",
+      "route": {
+        "slug": "dimensional-image-alva",
+        "canonicalPath": "/database/relics/dimensional-image-alva"
+      },
+      "assets": {
+        "icon": "asset-relic-0004-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0004",
+      "ownerAwakenerName": "Alva",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0005",
+      "name": "Dimensional Image: Aurita",
+      "route": {
+        "slug": "dimensional-image-aurita",
+        "canonicalPath": "/database/relics/dimensional-image-aurita"
+      },
+      "assets": {
+        "icon": "asset-relic-0005-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0005",
+      "ownerAwakenerName": "Aurita",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0006",
+      "name": "Dimensional Image: Caecus",
+      "route": {
+        "slug": "dimensional-image-caecus",
+        "canonicalPath": "/database/relics/dimensional-image-caecus"
+      },
+      "assets": {
+        "icon": "asset-relic-0006-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0006",
+      "ownerAwakenerName": "Caecus",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0007",
+      "name": "Dimensional Image: Casiah",
+      "route": {
+        "slug": "dimensional-image-casiah",
+        "canonicalPath": "/database/relics/dimensional-image-casiah"
+      },
+      "assets": {
+        "icon": "asset-relic-0007-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0007",
+      "ownerAwakenerName": "Casiah",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0008",
+      "name": "Dimensional Image: Castor",
+      "route": {
+        "slug": "dimensional-image-castor",
+        "canonicalPath": "/database/relics/dimensional-image-castor"
+      },
+      "assets": {
+        "icon": "asset-relic-0008-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0008",
+      "ownerAwakenerName": "Castor",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0009",
+      "name": "Dimensional Image: Celeste",
+      "route": {
+        "slug": "dimensional-image-celeste",
+        "canonicalPath": "/database/relics/dimensional-image-celeste"
+      },
+      "assets": {
+        "icon": "asset-relic-0009-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0009",
+      "ownerAwakenerName": "Celeste",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0010",
+      "name": "Dimensional Image: Clementine",
+      "route": {
+        "slug": "dimensional-image-clementine",
+        "canonicalPath": "/database/relics/dimensional-image-clementine"
+      },
+      "assets": {
+        "icon": "asset-relic-0010-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0011",
+      "name": "Dimensional Image: Corposant",
+      "route": {
+        "slug": "dimensional-image-corposant",
+        "canonicalPath": "/database/relics/dimensional-image-corposant"
+      },
+      "assets": {
+        "icon": "asset-relic-0011-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0012",
+      "name": "Dimensional Image: Daffodil",
+      "route": {
+        "slug": "dimensional-image-daffodil",
+        "canonicalPath": "/database/relics/dimensional-image-daffodil"
+      },
+      "assets": {
+        "icon": "asset-relic-0012-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0013",
+      "name": "Dimensional Image: Doll",
+      "route": {
+        "slug": "dimensional-image-doll",
+        "canonicalPath": "/database/relics/dimensional-image-doll"
+      },
+      "assets": {
+        "icon": "asset-relic-0013-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0013",
+      "ownerAwakenerName": "Doll",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0014",
+      "name": "Dimensional Image: Doresain",
+      "route": {
+        "slug": "dimensional-image-doresain",
+        "canonicalPath": "/database/relics/dimensional-image-doresain"
+      },
+      "assets": {
+        "icon": "asset-relic-0014-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0014",
+      "ownerAwakenerName": "Doresain",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0015",
+      "name": "Dimensional Image: Erica",
+      "route": {
+        "slug": "dimensional-image-erica",
+        "canonicalPath": "/database/relics/dimensional-image-erica"
+      },
+      "assets": {
+        "icon": "asset-relic-0015-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0015",
+      "ownerAwakenerName": "Erica",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0016",
+      "name": "Dimensional Image: Faint",
+      "route": {
+        "slug": "dimensional-image-faint",
+        "canonicalPath": "/database/relics/dimensional-image-faint"
+      },
+      "assets": {
+        "icon": "asset-relic-0016-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0016",
+      "ownerAwakenerName": "Faint",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0017",
+      "name": "Dimensional Image: Faros",
+      "route": {
+        "slug": "dimensional-image-faros",
+        "canonicalPath": "/database/relics/dimensional-image-faros"
+      },
+      "assets": {
+        "icon": "asset-relic-0017-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0017",
+      "ownerAwakenerName": "Faros",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0018",
+      "name": "Dimensional Image: Doll: Inferno",
+      "route": {
+        "slug": "dimensional-image-doll-inferno",
+        "canonicalPath": "/database/relics/dimensional-image-doll-inferno"
+      },
+      "assets": {
+        "icon": "asset-relic-0018-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0019",
+      "name": "Dimensional Image: Helot: Catena",
+      "route": {
+        "slug": "dimensional-image-helot-catena",
+        "canonicalPath": "/database/relics/dimensional-image-helot-catena"
+      },
+      "assets": {
+        "icon": "asset-relic-0019-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0020",
+      "name": "Dimensional Image: Ramona: Timeworn",
+      "route": {
+        "slug": "dimensional-image-ramona-timeworn",
+        "canonicalPath": "/database/relics/dimensional-image-ramona-timeworn"
+      },
+      "assets": {
+        "icon": "asset-relic-0020-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0020",
+      "ownerAwakenerName": "Ramona: Timeworn",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0021",
+      "name": "Dimensional Image: Goliath",
+      "route": {
+        "slug": "dimensional-image-goliath",
+        "canonicalPath": "/database/relics/dimensional-image-goliath"
+      },
+      "assets": {
+        "icon": "asset-relic-0021-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0022",
+      "name": "Dimensional Image: Hameln",
+      "route": {
+        "slug": "dimensional-image-hameln",
+        "canonicalPath": "/database/relics/dimensional-image-hameln"
+      },
+      "assets": {
+        "icon": "asset-relic-0022-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0023",
+      "name": "Dimensional Image: Helot",
+      "route": {
+        "slug": "dimensional-image-helot",
+        "canonicalPath": "/database/relics/dimensional-image-helot"
+      },
+      "assets": {
+        "icon": "asset-relic-0023-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0023",
+      "ownerAwakenerName": "Helot",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0024",
+      "name": "Dimensional Image: Horla",
+      "route": {
+        "slug": "dimensional-image-horla",
+        "canonicalPath": "/database/relics/dimensional-image-horla"
+      },
+      "assets": {
+        "icon": "asset-relic-0024-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0025",
+      "name": "Dimensional Image: Jenkin",
+      "route": {
+        "slug": "dimensional-image-jenkin",
+        "canonicalPath": "/database/relics/dimensional-image-jenkin"
+      },
+      "assets": {
+        "icon": "asset-relic-0025-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0025",
+      "ownerAwakenerName": "Jenkin",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0026",
+      "name": "Dimensional Image: Karen",
+      "route": {
+        "slug": "dimensional-image-karen",
+        "canonicalPath": "/database/relics/dimensional-image-karen"
+      },
+      "assets": {
+        "icon": "asset-relic-0026-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0026",
+      "ownerAwakenerName": "Karen",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0027",
+      "name": "Dimensional Image: Kathigu-Ra",
+      "route": {
+        "slug": "dimensional-image-kathigu-ra",
+        "canonicalPath": "/database/relics/dimensional-image-kathigu-ra"
+      },
+      "assets": {
+        "icon": "asset-relic-0027-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0028",
+      "name": "Dimensional Image: Leigh",
+      "route": {
+        "slug": "dimensional-image-leigh",
+        "canonicalPath": "/database/relics/dimensional-image-leigh"
+      },
+      "assets": {
+        "icon": "asset-relic-0028-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0028",
+      "ownerAwakenerName": "Leigh",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0029",
+      "name": "Dimensional Image: Lily",
+      "route": {
+        "slug": "dimensional-image-lily",
+        "canonicalPath": "/database/relics/dimensional-image-lily"
+      },
+      "assets": {
+        "icon": "asset-relic-0029-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0030",
+      "name": "Dimensional Image: Liz",
+      "route": {
+        "slug": "dimensional-image-liz",
+        "canonicalPath": "/database/relics/dimensional-image-liz"
+      },
+      "assets": {
+        "icon": "asset-relic-0030-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0031",
+      "name": "Dimensional Image: Lotan",
+      "route": {
+        "slug": "dimensional-image-lotan",
+        "canonicalPath": "/database/relics/dimensional-image-lotan"
+      },
+      "assets": {
+        "icon": "asset-relic-0031-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0031",
+      "ownerAwakenerName": "Lotan",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0032",
+      "name": "Dimensional Image: Miryam",
+      "route": {
+        "slug": "dimensional-image-miryam",
+        "canonicalPath": "/database/relics/dimensional-image-miryam"
+      },
+      "assets": {
+        "icon": "asset-relic-0032-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0033",
+      "name": "Dimensional Image: Mouchette",
+      "route": {
+        "slug": "dimensional-image-mouchette",
+        "canonicalPath": "/database/relics/dimensional-image-mouchette"
+      },
+      "assets": {
+        "icon": "asset-relic-0033-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0033",
+      "ownerAwakenerName": "Mouchette",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0034",
+      "name": "Dimensional Image: Murphy",
+      "route": {
+        "slug": "dimensional-image-murphy",
+        "canonicalPath": "/database/relics/dimensional-image-murphy"
+      },
+      "assets": {
+        "icon": "asset-relic-0034-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0034",
+      "ownerAwakenerName": "Murphy",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0035",
+      "name": "Dimensional Image: Murphy: Fauxborn",
+      "route": {
+        "slug": "dimensional-image-murphy-fauxborn",
+        "canonicalPath": "/database/relics/dimensional-image-murphy-fauxborn"
+      },
+      "assets": {
+        "icon": "asset-relic-0035-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0035",
+      "ownerAwakenerName": "Murphy: Fauxborn",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0036",
+      "name": "Dimensional Image: Nautila",
+      "route": {
+        "slug": "dimensional-image-nautila",
+        "canonicalPath": "/database/relics/dimensional-image-nautila"
+      },
+      "assets": {
+        "icon": "asset-relic-0036-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0036",
+      "ownerAwakenerName": "Nautila",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0037",
+      "name": "Dimensional Image: Nymphaea",
+      "route": {
+        "slug": "dimensional-image-nymphaea",
+        "canonicalPath": "/database/relics/dimensional-image-nymphaea"
+      },
+      "assets": {
+        "icon": "asset-relic-0037-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0037",
+      "ownerAwakenerName": "Nymphaea",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0038",
+      "name": "Dimensional Image: Ogier",
+      "route": {
+        "slug": "dimensional-image-ogier",
+        "canonicalPath": "/database/relics/dimensional-image-ogier"
+      },
+      "assets": {
+        "icon": "asset-relic-0038-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0038",
+      "ownerAwakenerName": "Ogier",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0039",
+      "name": "Dimensional Image: Pandia",
+      "route": {
+        "slug": "dimensional-image-pandia",
+        "canonicalPath": "/database/relics/dimensional-image-pandia"
+      },
+      "assets": {
+        "icon": "asset-relic-0039-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0039",
+      "ownerAwakenerName": "Pandia",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0040",
+      "name": "Dimensional Image: Pickman",
+      "route": {
+        "slug": "dimensional-image-pickman",
+        "canonicalPath": "/database/relics/dimensional-image-pickman"
+      },
+      "assets": {
+        "icon": "asset-relic-0040-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0041",
+      "name": "Dimensional Image: Pollux",
+      "route": {
+        "slug": "dimensional-image-pollux",
+        "canonicalPath": "/database/relics/dimensional-image-pollux"
+      },
+      "assets": {
+        "icon": "asset-relic-0041-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0042",
+      "name": "Dimensional Image: Ramona",
+      "route": {
+        "slug": "dimensional-image-ramona",
+        "canonicalPath": "/database/relics/dimensional-image-ramona"
+      },
+      "assets": {
+        "icon": "asset-relic-0042-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0042",
+      "ownerAwakenerName": "Ramona",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0043",
+      "name": "Dimensional Image: Ryker",
+      "route": {
+        "slug": "dimensional-image-ryker",
+        "canonicalPath": "/database/relics/dimensional-image-ryker"
+      },
+      "assets": {
+        "icon": "asset-relic-0043-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0044",
+      "name": "Dimensional Image: Salvador",
+      "route": {
+        "slug": "dimensional-image-salvador",
+        "canonicalPath": "/database/relics/dimensional-image-salvador"
+      },
+      "assets": {
+        "icon": "asset-relic-0044-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0045",
+      "name": "Dimensional Image: Sanga",
+      "route": {
+        "slug": "dimensional-image-sanga",
+        "canonicalPath": "/database/relics/dimensional-image-sanga"
+      },
+      "assets": {
+        "icon": "asset-relic-0045-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0045",
+      "ownerAwakenerName": "Sanga",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0046",
+      "name": "Dimensional Image: Sorel",
+      "route": {
+        "slug": "dimensional-image-sorel",
+        "canonicalPath": "/database/relics/dimensional-image-sorel"
+      },
+      "assets": {
+        "icon": "asset-relic-0046-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0047",
+      "name": "Dimensional Image: Tawil",
+      "route": {
+        "slug": "dimensional-image-tawil",
+        "canonicalPath": "/database/relics/dimensional-image-tawil"
+      },
+      "assets": {
+        "icon": "asset-relic-0047-icon"
+      },
+      "realm": "CHAOS",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0048",
+      "name": "Dimensional Image: Thais",
+      "route": {
+        "slug": "dimensional-image-thais",
+        "canonicalPath": "/database/relics/dimensional-image-thais"
+      },
+      "assets": {
+        "icon": "asset-relic-0048-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0049",
+      "name": "Dimensional Image: Tinct",
+      "route": {
+        "slug": "dimensional-image-tinct",
+        "canonicalPath": "/database/relics/dimensional-image-tinct"
+      },
+      "assets": {
+        "icon": "asset-relic-0049-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0049",
+      "ownerAwakenerName": "Tinct",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0050",
+      "name": "Dimensional Image: Tulu",
+      "route": {
+        "slug": "dimensional-image-tulu",
+        "canonicalPath": "/database/relics/dimensional-image-tulu"
+      },
+      "assets": {
+        "icon": "asset-relic-0050-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0050",
+      "ownerAwakenerName": "Tulu",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0051",
+      "name": "Dimensional Image: Uvhash",
+      "route": {
+        "slug": "dimensional-image-uvhash",
+        "canonicalPath": "/database/relics/dimensional-image-uvhash"
+      },
+      "assets": {
+        "icon": "asset-relic-0051-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0051",
+      "ownerAwakenerName": "Uvhash",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0052",
+      "name": "Dimensional Image: Wanda",
+      "route": {
+        "slug": "dimensional-image-wanda",
+        "canonicalPath": "/database/relics/dimensional-image-wanda"
+      },
+      "assets": {
+        "icon": "asset-relic-0052-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0053",
+      "name": "Dimensional Image: Winkle",
+      "route": {
+        "slug": "dimensional-image-winkle",
+        "canonicalPath": "/database/relics/dimensional-image-winkle"
+      },
+      "assets": {
+        "icon": "asset-relic-0053-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0053",
+      "ownerAwakenerName": "Winkle",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0054",
+      "name": "Dimensional Image: Xu",
+      "route": {
+        "slug": "dimensional-image-xu",
+        "canonicalPath": "/database/relics/dimensional-image-xu"
+      },
+      "assets": {
+        "icon": "asset-relic-0054-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0055",
+      "name": "Dimensional Image: Vortice",
+      "route": {
+        "slug": "dimensional-image-vortice",
+        "canonicalPath": "/database/relics/dimensional-image-vortice"
+      },
+      "assets": {
+        "icon": "asset-relic-0055-icon"
+      },
+      "realm": "AEQUOR",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0056",
+      "name": "Dimensional Image: Arachne",
+      "route": {
+        "slug": "dimensional-image-arachne",
+        "canonicalPath": "/database/relics/dimensional-image-arachne"
+      },
+      "assets": {
+        "icon": "asset-relic-0056-icon"
+      },
+      "realm": "ULTRA",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne",
+      "relicType": "DIMENSIONAL_IMAGE"
+    }
+  ]
+}
