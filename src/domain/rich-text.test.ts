@@ -438,7 +438,7 @@ describe('parseRichDescription', () => {
     ])
   })
 
-  it('parses resolved public V2 descriptions without leaking raw arg tokens', async () => {
+  it('parses resolved public V3 descriptions without leaking raw arg tokens', async () => {
     const cases = [
       {
         awakenerName: 'kathigu-ra',
@@ -509,7 +509,7 @@ describe('parseRichDescription', () => {
     ])
   })
 
-  it('parses public V2 description args with braced mechanic channels', () => {
+  it('parses public V3 description args with braced mechanic channels', () => {
     const result = parseRichDescription('Inflict [{Poison}:Arg1] {Poison}.', EMPTY_CARDS, {
       Arg1: {
         kind: 'fixed',
@@ -526,7 +526,7 @@ describe('parseRichDescription', () => {
     ])
   })
 
-  it('parses public V2 plural macros without leaking macro text', () => {
+  it('parses public V3 plural macros without leaking macro text', () => {
     const result = parseRichDescription(
       'Draw [Arg1] {plural:[Arg1]|card|cards}. Inflict [{Poison}:Arg2] {plural:[{Poison}:Arg2]|stack|stacks}.',
       EMPTY_CARDS,
@@ -555,7 +555,7 @@ describe('parseRichDescription', () => {
     ])
   })
 
-  it('collapses public V2 ordinal macros to display text', () => {
+  it('collapses public V3 ordinal macros to display text', () => {
     const result = parseRichDescription('On the {ordinal:3rd} play.', EMPTY_CARDS)
 
     expect(result).toEqual([

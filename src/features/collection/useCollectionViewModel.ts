@@ -174,7 +174,7 @@ export function useCollectionViewModel() {
   const storage = useMemo(() => getBrowserLocalStorage(), [])
   const ownershipCatalog = useMemo(() => createDefaultCollectionOwnershipCatalog(), [])
   const persistedAwakenerSortConfig = useMemo(() => loadAwakenerSortConfig(storage), [storage])
-  const hasInvalidV2OwnershipSnapshot = useMemo(() => {
+  const hasInvalidCurrentOwnershipSnapshot = useMemo(() => {
     const rawSnapshot = safeStorageRead(storage, COLLECTION_OWNERSHIP_KEY)
     if (rawSnapshot === null) {
       return false
@@ -185,7 +185,7 @@ export function useCollectionViewModel() {
     collectionOwnershipStore.getState().hydrate()
     return true
   })
-  const skipNextOwnershipAutosaveRef = useRef(hasInvalidV2OwnershipSnapshot)
+  const skipNextOwnershipAutosaveRef = useRef(hasInvalidCurrentOwnershipSnapshot)
   const ownership = useStore(collectionOwnershipStore, (state) => state.ownership)
   const updateOwnership = useStore(collectionOwnershipStore, (state) => state.updateOwnership)
   const setStoreDisplayUnowned = useStore(

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.doresain.styx-uncrossed",
-  "displayName": "Styx Uncrossed",
-  "ownerAwakenerId": "awakener-0014",
-  "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Crimson Invite} is enhanced: When played, immediately deal {Fixed DMG} equal to 20% of current HP to all enemies. After Doresain's first kill each turn, deal {Fixed DMG} equal to the overflow DMG to all other enemies.",
-  "descriptionArgs": {}
-}

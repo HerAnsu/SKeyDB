@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.horla.chamber-of-shadows",
-  "displayName": "Chamber of Shadows",
-  "ownerAwakenerId": "awakener-0024",
-  "slot": "E2",
-  "descriptionTemplate": "Horla's Psalms gain {Retain}.",
-  "descriptionArgs": {}
-}

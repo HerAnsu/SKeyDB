@@ -1,9 +1,0 @@
-{
-  "id": "overlay.global.aftershock",
-  "displayName": "Aftershock",
-  "overlayType": "mechanic",
-  "aliases": [],
-  "textColor": "shield",
-  "descriptionTemplate": "Triggers the {Aftershock} effect when discarded.",
-  "descriptionArgs": {}
-}

@@ -37,7 +37,7 @@ async function loadResolvedSkill(
 }
 
 describe('description-records', () => {
-  it('resolves a skill description and its base-scaled substat enhancement from public V2 data', async () => {
+  it('resolves a skill description and its base-scaled substat enhancement from public V3 data', async () => {
     const skill = await loadResolvedSkill(52, 'skill.wanda.necropolis-of-dreams')
 
     const resolved = resolveDescribedRecord(

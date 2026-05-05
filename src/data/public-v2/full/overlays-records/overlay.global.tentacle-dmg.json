@@ -1,9 +1,0 @@
-{
-  "id": "overlay.global.tentacle-dmg",
-  "displayName": "Tentacle DMG",
-  "overlayType": "mechanic",
-  "aliases": [],
-  "textColor": "misc",
-  "descriptionTemplate": "Increases {Tentacle DMG}.",
-  "descriptionArgs": {}
-}

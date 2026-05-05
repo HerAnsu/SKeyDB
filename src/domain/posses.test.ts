@@ -17,7 +17,7 @@ describe('getPosses', () => {
     expect(posses.every((posse) => Number.isInteger(posse.index) && posse.index >= 0)).toBe(true)
   })
 
-  it('uses public V2 posse ids as runtime ids without legacy leakage', () => {
+  it('uses public V3 posse ids as runtime ids without legacy leakage', () => {
     const posses = getPosses()
     const firstPosse = posses.find((posse) => posse.id === 'posse-0001')
 

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.castor.sky-eclipsing-wings",
-  "displayName": "Sky-Eclipsing Wings",
-  "ownerAwakenerId": "awakener-0008",
-  "slot": "E3",
-  "descriptionTemplate": "For every 3 {Onyx Plume} you play, obtain 1 Arithmetica and increase Castor's Final DMG by 10% in this battle.",
-  "descriptionArgs": {}
-}

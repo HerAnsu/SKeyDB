@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.goliath.death-is-rebirth",
-  "displayName": "Death is Rebirth",
-  "ownerAwakenerId": "awakener-0021",
-  "slot": "E1",
-  "descriptionTemplate": "{Decapitation Damage} gains a Strength buff that doubles for each Tentacle.",
-  "descriptionArgs": {}
-}

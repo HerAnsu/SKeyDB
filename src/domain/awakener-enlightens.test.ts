@@ -52,7 +52,7 @@ describe('awakener-enlightens', () => {
     )
   })
 
-  it('does not synthesize target-side public V2 upgrades onto aggregate enlightens', () => {
+  it('does not synthesize target-side public V3 upgrades onto aggregate enlightens', () => {
     const enlightens = getAwakenerEnlightens()
 
     for (const id of [

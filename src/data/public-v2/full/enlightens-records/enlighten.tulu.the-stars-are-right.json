@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.tulu.the-stars-are-right",
-  "displayName": "The Stars Are Right",
-  "ownerAwakenerId": "awakener-0050",
-  "slot": "E3",
-  "descriptionTemplate": "At turn end, Tulu obtains 5 Aliemus. {When Lemuria Returns} increases Temporary Crit. Rate by 15%.",
-  "descriptionArgs": {}
-}

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.nautila.ace-mechanist",
-  "displayName": "Ace Mechanist",
-  "ownerAwakenerId": "awakener-0036",
-  "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Maintenance Expert} is enhanced: All Awakeners' Fixed {Counter} +25%.",
-  "descriptionArgs": {}
-}

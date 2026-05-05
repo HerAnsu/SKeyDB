@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.caecus.outcasts-anguish",
-  "displayName": "Outcast's Anguish",
-  "ownerAwakenerId": "awakener-0006",
-  "slot": "E3",
-  "descriptionTemplate": "Heal HP equal to 7.5% of CON at turn end.",
-  "descriptionArgs": {}
-}

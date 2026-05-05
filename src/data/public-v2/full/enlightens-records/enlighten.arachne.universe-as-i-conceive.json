@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.arachne.universe-as-i-conceive",
-  "displayName": "Universe, As I Conceive",
-  "ownerAwakenerId": "awakener-0056",
-  "slot": "E2",
-  "descriptionTemplate": "{Eternal Loom} deals +50% {Final Verdict}. {Fate-Binding Web} gains {Prepare} and {Retain}.",
-  "descriptionArgs": {}
-}

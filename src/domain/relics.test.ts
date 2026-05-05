@@ -4,7 +4,7 @@ import {getAwakeners} from './awakeners'
 import {getPortraitRelicByAwakenerId, getPortraitRelics, getRelics} from './relics'
 
 describe('getRelics', () => {
-  it('returns parsed public V2 relics with stable ids', () => {
+  it('returns parsed public V3 relics with stable ids', () => {
     const relics = getRelics()
     expect(relics.length).toBeGreaterThan(0)
     expect(relics[0]).toEqual({

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.erica.force-circuit",
-  "displayName": "Force Circuit",
-  "ownerAwakenerId": "awakener-0015",
-  "slot": "E2",
-  "descriptionTemplate": "{Electromagnetic Blast} enjoys an additional 1x {STR} and {Alert} Buff.",
-  "descriptionArgs": {}
-}

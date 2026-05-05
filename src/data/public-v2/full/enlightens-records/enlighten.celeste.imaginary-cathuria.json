@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.celeste.imaginary-cathuria",
-  "displayName": "Imaginary Cathuria",
-  "ownerAwakenerId": "awakener-0009",
-  "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Power of Blessing} is enhanced: When triggers resurrect of {Undying Bird of Paradise}, immediately gain Temporary {Tentacle DMG} equal to 150% of Celeste's ATK. This effect doubles in Boss Battles.",
-  "descriptionArgs": {}
-}

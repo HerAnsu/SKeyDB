@@ -161,7 +161,7 @@ describe('CollectionPage global search capture', () => {
     expect(screen.getByRole('searchbox')).toHaveValue('')
   })
 
-  it('saves ownership v2 snapshot to file and shows status', async () => {
+  it('saves ownership current snapshot to file and shows status', async () => {
     const createObjectUrlSpy = vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:mock')
     const revokeObjectUrlSpy = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined)
     const clickSpy = vi
@@ -225,7 +225,7 @@ describe('CollectionPage global search capture', () => {
     expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"awakener-0042"')
   })
 
-  it('loads v2 snapshot files and shows normal loaded status', async () => {
+  it('loads current snapshot files and shows normal loaded status', async () => {
     const {container} = render(<CollectionPage />)
     const input = getRequiredFileInput(container)
 

@@ -12,9 +12,9 @@ import {afterEach, beforeAll, describe, expect, it, vi} from 'vitest'
 
 import {DatabaseRouteElements} from './routes'
 
-let mockAwakenersFullV2 = [{id: 'awakener-0001'}, {id: 'awakener-0002'}, {id: 'awakener-0003'}]
+let mockAwakenerDetails = [{id: 'awakener-0001'}, {id: 'awakener-0002'}, {id: 'awakener-0003'}]
 let mockLoadPromiseCache = new Map<string, Promise<{id: string} | undefined>>()
-let mockWheelsFullV2 = [{id: 'wheel-0001'}, {id: 'wheel-0040'}]
+let mockWheelDetails = [{id: 'wheel-0001'}, {id: 'wheel-0040'}]
 let mockWheelLoadPromiseCache = new Map<string, Promise<{id: string} | undefined>>()
 const wheelMockState = vi.hoisted(() => {
   const wheels = [
@@ -59,24 +59,24 @@ const wheelMockState = vi.hoisted(() => {
     wheels,
   }
 })
-const mockLoadAwakenerFullV2ById = vi.fn((id: string) => {
+const mockLoadAwakenerDetailById = vi.fn((id: string) => {
   const cachedPromise = mockLoadPromiseCache.get(id)
   if (cachedPromise) {
     return cachedPromise
   }
 
-  const recordPromise = Promise.resolve(mockAwakenersFullV2.find((entry) => entry.id === id))
+  const recordPromise = Promise.resolve(mockAwakenerDetails.find((entry) => entry.id === id))
   mockLoadPromiseCache.set(id, recordPromise)
 
   return recordPromise
 })
-const mockLoadWheelFullV2ById = vi.fn((id: string) => {
+const mockLoadWheelDetailById = vi.fn((id: string) => {
   const cachedPromise = mockWheelLoadPromiseCache.get(id)
   if (cachedPromise) {
     return cachedPromise
   }
 
-  const recordPromise = Promise.resolve(mockWheelsFullV2.find((entry) => entry.id === id))
+  const recordPromise = Promise.resolve(mockWheelDetails.find((entry) => entry.id === id))
   mockWheelLoadPromiseCache.set(id, recordPromise)
 
   return recordPromise
@@ -168,8 +168,8 @@ vi.mock('@/domain/covenants', () => ({
 }))
 
 vi.mock('@/domain/public-detail-record-adapters', () => ({
-  loadPublicAwakenerDetailById: (id: string) => mockLoadAwakenerFullV2ById(id),
-  loadPublicWheelDetailById: (id: string) => mockLoadWheelFullV2ById(id),
+  loadPublicAwakenerDetailById: (id: string) => mockLoadAwakenerDetailById(id),
+  loadPublicWheelDetailById: (id: string) => mockLoadWheelDetailById(id),
   loadPublicPosseDetailById: () => Promise.resolve(undefined),
   loadPublicCovenantDetailById: () => Promise.resolve(undefined),
 }))
@@ -295,12 +295,12 @@ beforeAll(async () => {
 
 afterEach(() => {
   vi.restoreAllMocks()
-  mockAwakenersFullV2 = [{id: 'awakener-0001'}, {id: 'awakener-0002'}, {id: 'awakener-0003'}]
+  mockAwakenerDetails = [{id: 'awakener-0001'}, {id: 'awakener-0002'}, {id: 'awakener-0003'}]
   mockLoadPromiseCache = new Map()
-  mockWheelsFullV2 = [{id: 'wheel-0001'}, {id: 'wheel-0040'}]
+  mockWheelDetails = [{id: 'wheel-0001'}, {id: 'wheel-0040'}]
   mockWheelLoadPromiseCache = new Map()
-  mockLoadAwakenerFullV2ById.mockClear()
-  mockLoadWheelFullV2ById.mockClear()
+  mockLoadAwakenerDetailById.mockClear()
+  mockLoadWheelDetailById.mockClear()
 })
 
 function getResultsSummary(expectedText: string) {
@@ -699,8 +699,8 @@ describe('DatabasePage', () => {
     await waitFor(() => expect(screen.getByTestId('location-path')).toHaveTextContent('/database'))
   })
 
-  it('falls back to the database root when a deep-linked awakener is missing V2 data', async () => {
-    mockAwakenersFullV2 = [{id: 'awakener-0001'}, {id: 'awakener-0003'}]
+  it('falls back to the database root when a deep-linked awakener is missing current public data', async () => {
+    mockAwakenerDetails = [{id: 'awakener-0001'}, {id: 'awakener-0003'}]
     mockLoadPromiseCache = new Map()
 
     await renderDatabasePage('/database/awk/beta')

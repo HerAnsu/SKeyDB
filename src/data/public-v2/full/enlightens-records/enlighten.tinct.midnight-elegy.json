@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.tinct.midnight-elegy",
-  "displayName": "Midnight Elegy",
-  "ownerAwakenerId": "awakener-0049",
-  "slot": "E2",
-  "descriptionTemplate": "\"Basic Defense\" grants 2 instances of Shields and gains {Leap}: Gain Aliemus for one more time.",
-  "descriptionArgs": {}
-}

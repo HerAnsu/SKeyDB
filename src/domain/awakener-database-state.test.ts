@@ -34,7 +34,7 @@ describe('awakener-database-state', () => {
     const thais = await loadPublicAwakenerDetailById(48)
     expect(thais).toBeDefined()
     if (!thais) {
-      throw new Error('Missing canonical Thais V2 record')
+      throw new Error('Missing canonical Thais current record')
     }
 
     const resolved = resolveAwakenerDatabaseState(
@@ -112,7 +112,7 @@ describe('awakener-database-state', () => {
     expect(soulforgeState.stats.DEF).toBe('96')
   })
 
-  it('describes the available database controls from canonical V2 data', () => {
+  it('describes the available database controls from canonical current data', () => {
     const fakeRecord = buildSoulforgeFixture()
 
     expect(getAwakenerDatabaseControls(fakeRecord)).toEqual({
@@ -133,11 +133,11 @@ describe('awakener-database-state', () => {
     })
   })
 
-  it('detects soulforge aptitude from public V2 T-slots, not just extra talents', async () => {
+  it('detects soulforge aptitude from public V3 T-slots, not just extra talents', async () => {
     const twentyFour = await loadPublicAwakenerDetailById(1)
     expect(twentyFour).toBeDefined()
     if (!twentyFour) {
-      throw new Error('Missing canonical 24 V2 record')
+      throw new Error('Missing canonical 24 current record')
     }
 
     const controls = getAwakenerDatabaseControls(twentyFour)
@@ -147,11 +147,11 @@ describe('awakener-database-state', () => {
     expect(controls.soulforgeLevelMax).toBe(10)
   })
 
-  it('keeps public V2 overlay upgrade badges on overlay popover references', async () => {
+  it('keeps public V3 overlay upgrade badges on overlay popover references', async () => {
     const xu = await loadPublicAwakenerDetailById('awakener-0054')
     expect(xu).toBeDefined()
     if (!xu) {
-      throw new Error('Missing public V2 Xu record')
+      throw new Error('Missing public V3 Xu record')
     }
 
     const resolved = resolveAwakenerDatabaseState(xu, {
@@ -170,11 +170,11 @@ describe('awakener-database-state', () => {
     ])
   })
 
-  it('keeps public V2 link-only talent influence badges on affected skills', async () => {
+  it('keeps public V3 link-only talent influence badges on affected skills', async () => {
     const agrippa = await loadPublicAwakenerDetailById('awakener-0002')
     expect(agrippa).toBeDefined()
     if (!agrippa) {
-      throw new Error('Missing public V2 Agrippa record')
+      throw new Error('Missing public V3 Agrippa record')
     }
 
     const resolved = resolveAwakenerDatabaseState(agrippa)

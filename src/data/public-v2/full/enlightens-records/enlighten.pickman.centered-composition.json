@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.pickman.centered-composition",
-  "displayName": "Centered Composition",
-  "ownerAwakenerId": "awakener-0040",
-  "slot": "E2",
-  "descriptionTemplate": "The Painted {Orisons} are upgraded to {Advanced Orisons}, and the Painted {Silver Relics} are upgraded to {Golden Relics}.",
-  "descriptionArgs": {}
-}

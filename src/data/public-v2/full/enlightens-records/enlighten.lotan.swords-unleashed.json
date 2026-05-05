@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.lotan.swords-unleashed",
-  "displayName": "Swords Unleashed",
-  "ownerAwakenerId": "awakener-0031",
-  "slot": "E1",
-  "descriptionTemplate": "{Blade of Defiance} is considered as \"Strike.\" Lotan's Base Strike DMG +30%.",
-  "descriptionArgs": {}
-}

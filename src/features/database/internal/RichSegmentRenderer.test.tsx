@@ -128,7 +128,7 @@ describe('RichSegmentRenderer', () => {
     expect(screen.getByTitle(/Lv1: 10% ATK = 20/)).toBeInTheDocument()
   })
 
-  it('renders public V2 plural segments from resolved arg values', () => {
+  it('renders public V3 plural segments from resolved arg values', () => {
     const {rerender} = render(
       <RichSegmentRenderer
         descriptionArgs={{
@@ -176,7 +176,7 @@ describe('RichSegmentRenderer', () => {
     expect(screen.getByText('stacks')).toBeInTheDocument()
   })
 
-  it('renders public V2 plural segments from computed absolute arg values', () => {
+  it('renders public V3 plural segments from computed absolute arg values', () => {
     render(
       <RichSegmentRenderer
         descriptionArgs={{

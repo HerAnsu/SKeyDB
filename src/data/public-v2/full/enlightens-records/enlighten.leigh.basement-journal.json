@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.leigh.basement-journal",
-  "displayName": "Basement Journal",
-  "ownerAwakenerId": "awakener-0028",
-  "slot": "E3",
-  "descriptionTemplate": "When {Flatterer's Embrace} triggers {Devour}, the obtained Strength is doubled.",
-  "descriptionArgs": {}
-}

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.miryam.the-ultimate-descent",
-  "displayName": "The Ultimate Descent",
-  "ownerAwakenerId": "awakener-0032",
-  "slot": "E2",
-  "descriptionTemplate": "{The Chosen One} increases Realm Mastery by 20 points, gains {Prepare 1} and {Retain}.",
-  "descriptionArgs": {}
-}

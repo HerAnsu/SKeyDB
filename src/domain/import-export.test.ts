@@ -57,7 +57,7 @@ describe('import-export codec', () => {
     expect(parsed.team.slots[0].covenantId).toBe('covenant-0001')
   })
 
-  it('encodes V2 canonical ids through the frozen standard-code byte contract', () => {
+  it('encodes current canonical ids through the frozen standard-code byte contract', () => {
     const team = makeTeam('Canonical Team')
     team.posseId = 'posse-0033'
     team.slots[0].wheels = ['wheel-0095', 'wheel-0096']

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.pickman.invocation-of-the-muse",
-  "displayName": "Invocation of the Muse",
-  "ownerAwakenerId": "awakener-0040",
-  "slot": "E3",
-  "descriptionTemplate": "After Pickman consumes {Creativity}, he additionally gains 50 Aliemus, and can use Exalt 2 times this turn.",
-  "descriptionArgs": {}
-}

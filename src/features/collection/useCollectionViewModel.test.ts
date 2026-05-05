@@ -168,7 +168,7 @@ describe('useCollectionViewModel', () => {
     expect(second.result.current.awakenerSortGroupByRealm).toBe(true)
   })
 
-  it('loads legacy v1 ownership snapshots and saves the current v2 key', () => {
+  it('loads legacy v1 ownership snapshots and saves the current storage key', () => {
     window.localStorage.setItem(
       COLLECTION_OWNERSHIP_LEGACY_KEY,
       JSON.stringify({
@@ -192,7 +192,7 @@ describe('useCollectionViewModel', () => {
     expect(window.localStorage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"version":2')
   })
 
-  it('does not fall back to v1 or autosave over an invalid existing v2 snapshot on mount', () => {
+  it('does not fall back to v1 or autosave over an invalid existing current snapshot on mount', () => {
     vi.useFakeTimers()
     window.localStorage.setItem(COLLECTION_OWNERSHIP_KEY, '{"version":999,"payload":{}}')
     window.localStorage.setItem(
@@ -225,7 +225,7 @@ describe('useCollectionViewModel', () => {
     vi.useRealTimers()
   })
 
-  it('exports v2 snapshots and imports migrated v1 snapshots', () => {
+  it('exports current snapshots and imports migrated v1 snapshots', () => {
     const {result} = renderHook(() => useCollectionViewModel())
 
     const exported = result.current.exportOwnershipSnapshot()

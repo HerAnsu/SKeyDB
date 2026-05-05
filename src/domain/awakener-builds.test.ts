@@ -167,7 +167,7 @@ describe('awakener builds', () => {
     )
   })
 
-  it('uses canonical public V2 ids for curated build references', async () => {
+  it('uses canonical public V3 ids for curated build references', async () => {
     const entries = await loadAwakenerBuildEntries()
     const wheelIds = new Set(getWheels().map((wheel) => wheel.id))
     const covenantIds = new Set(getCovenants().map((covenant) => covenant.id))

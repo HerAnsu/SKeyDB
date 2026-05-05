@@ -7,7 +7,7 @@ describe('getPosseAssetById', () => {
     expect(getPosseAssetById('posse-0001')).toMatch(/posse\/Icon\/KeyToken_Skill_01\.webp$/)
   })
 
-  it('uses public V2 asset ids when public ids differ from icon numbers', () => {
+  it('uses public V3 asset ids when public ids differ from icon numbers', () => {
     expect(getPosseAssetById('posse-0039')).toMatch(/posse\/Icon\/KeyToken_Skill_41\.webp$/)
   })
 })

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.castor.caged-underground",
-  "displayName": "Caged Underground",
-  "ownerAwakenerId": "awakener-0008",
-  "slot": "E1",
-  "descriptionTemplate": "At the start of the battle, place 1 {Onyx Plume} into hand.",
-  "descriptionArgs": {}
-}

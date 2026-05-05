@@ -1,8 +1,0 @@
-{
-  "id": "talent.salvador.origin-of-all-life",
-  "displayName": "Origin of All Life",
-  "ownerAwakenerId": "awakener-0044",
-  "family": "passive",
-  "descriptionTemplate": "For every 1% Sigil Yield attribute Salvador possesses, the maximum of the {Crimson Furnace} +0.15% Max HP.",
-  "descriptionArgs": {}
-}

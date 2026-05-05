@@ -224,7 +224,7 @@ describe('description-args', () => {
     const record = await loadPublicAwakenerDetailById(56)
     expect(record).toBeDefined()
     if (!record) {
-      throw new Error('Missing Arachne public V2 record')
+      throw new Error('Missing Arachne public V3 record')
     }
 
     const resolvedRecord = resolveAwakenerFullRecord(record, {
@@ -262,7 +262,7 @@ describe('description-args', () => {
   it('renders public detail upgrade patch templates with resolved arg totals', async () => {
     const xu = await loadPublicAwakenerDetailById(54)
     if (!xu) {
-      throw new Error('Missing Xu public V2 record')
+      throw new Error('Missing Xu public V3 record')
     }
 
     const bonesick = xu.cards.C4
@@ -342,7 +342,7 @@ describe('description-args', () => {
     ).toContain('Lv2: 28.8% ATK = 30')
   })
 
-  it('resolves public V2 braced-channel args and text macros in fallback descriptions', () => {
+  it('resolves public V3 braced-channel args and text macros in fallback descriptions', () => {
     const rendered = resolveDescriptionTemplate(
       'Inflict [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} on the {ordinal:3rd} play.',
       {

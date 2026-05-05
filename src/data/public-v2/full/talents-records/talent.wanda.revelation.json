@@ -1,8 +1,0 @@
-{
-  "id": "talent.wanda.revelation",
-  "displayName": "Revelation",
-  "ownerAwakenerId": "awakener-0052",
-  "family": "passive",
-  "descriptionTemplate": "At turn start, obtain 1 stack of {Dreamlure}.\nConsuming 1 stack of {Dreamlure} increases the {Counter} for {Keeper of the Lost} and {Necropolis of Dreams} by 5% ATK in this battle.\nFor every 1% DMG Amplification attribute provided by Wanda and her equipped Wheel of Destiny & Covenant, the {Counter} for {Necropolis of Dreams} +0.75%.",
-  "descriptionArgs": {}
-}

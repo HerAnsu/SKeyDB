@@ -305,7 +305,7 @@ vi.mock('./AwakenerTeamsTab', () => ({
   AwakenerTeamsTab: () => <div>Teams Tab</div>,
 }))
 
-const TEST_AWAKENERS_FULL_V2 = [
+const TEST_AWAKENER_DETAILS = [
   makeTestAwakenerFullRecord({
     id: 1,
     displayName: 'thais',
@@ -362,9 +362,9 @@ interface TestAwakenerDetailModalOptions {
 
 function getTestFullData(id: string | number): AwakenerFullRecord {
   const numericId = typeof id === 'number' ? id : Number(id.replace(/^awakener-0*/, ''))
-  const fullData = TEST_AWAKENERS_FULL_V2.find((entry) => entry.id === numericId)
+  const fullData = TEST_AWAKENER_DETAILS.find((entry) => entry.id === numericId)
   if (!fullData) {
-    throw new Error(`Missing test full V2 data for awakener ${String(id)}`)
+    throw new Error(`Missing test full current public data for awakener ${String(id)}`)
   }
   return fullData
 }

@@ -4,14 +4,14 @@ import {getPublicCatalogRecords} from '@/data-access/public-data/repository'
 
 import {getAwakeners} from './awakeners'
 import {getCovenants} from './covenants'
+import currentPersistenceContract from './persistence-contract.current.json'
 import frozenContract from './persistence-contract.v1.json'
-import v2Contract from './persistence-contract.v2.json'
 import {
-  migrateAwakenerIdV1ToV2,
-  migrateCovenantIdV1ToV2,
-  migratePosseIdV1ToV2,
-  migrateWheelIdV1ToV2,
-} from './persistence-id-migration.v2'
+  migrateAwakenerIdV1ToCurrent,
+  migrateCovenantIdV1ToCurrent,
+  migratePosseIdV1ToCurrent,
+  migrateWheelIdV1ToCurrent,
+} from './persistence-id-migration'
 import {getPosses} from './posses'
 import standardCodeContract from './standard-code-contract.v1.json'
 import {getWheels} from './wheels'
@@ -34,7 +34,7 @@ interface PersistenceContract {
   covenants: string[]
 }
 
-interface V2ContractEntry {
+interface CurrentContractEntry {
   id: string
 }
 
@@ -71,7 +71,7 @@ function publicCatalogIds(scope: Parameters<typeof getPublicCatalogRecords>[0]):
   return getPublicCatalogRecords(scope).map((record) => record.id)
 }
 
-function contractIds(records: V2ContractEntry[]): string[] {
+function contractIds(records: CurrentContractEntry[]): string[] {
   return records.map((record) => record.id)
 }
 
@@ -80,30 +80,30 @@ function expectUniqueCodecIndices(records: StandardCodeEntry[]): void {
 }
 
 describe('persistence contract', () => {
-  it('keeps current runtime identifiers aligned with the V2 persistence contract', () => {
+  it('keeps current runtime identifiers aligned with the current persistence contract', () => {
     const current = buildCurrentContract()
-    const expectedV2 = v2Contract as {
-      awakeners: V2ContractEntry[]
-      wheels: V2ContractEntry[]
-      covenants: V2ContractEntry[]
-      posses: V2ContractEntry[]
+    const expected = currentPersistenceContract as {
+      awakeners: CurrentContractEntry[]
+      wheels: CurrentContractEntry[]
+      covenants: CurrentContractEntry[]
+      posses: CurrentContractEntry[]
     }
 
     expect([...current.awakeners.map((entry) => entry.id)].sort()).toEqual(
-      [...contractIds(expectedV2.awakeners)].sort(),
+      [...contractIds(expected.awakeners)].sort(),
     )
-    expect(current.wheels).toEqual(contractIds(expectedV2.wheels))
-    expect(current.covenants).toEqual(contractIds(expectedV2.covenants))
-    expect(current.posses.map((entry) => entry.id)).toEqual(contractIds(expectedV2.posses))
+    expect(current.wheels).toEqual(contractIds(expected.wheels))
+    expect(current.covenants).toEqual(contractIds(expected.covenants))
+    expect(current.posses.map((entry) => entry.id)).toEqual(contractIds(expected.posses))
   })
 
   it('keeps current persistence contract ids canonical against public V3 catalogs', () => {
-    const contract = v2Contract as {
+    const contract = currentPersistenceContract as {
       version: number
-      awakeners: V2ContractEntry[]
-      wheels: V2ContractEntry[]
-      covenants: V2ContractEntry[]
-      posses: V2ContractEntry[]
+      awakeners: CurrentContractEntry[]
+      wheels: CurrentContractEntry[]
+      covenants: CurrentContractEntry[]
+      posses: CurrentContractEntry[]
     }
 
     expect(contract.version).toBe(2)
@@ -132,20 +132,20 @@ describe('persistence contract', () => {
     expectUniqueCodecIndices(contract.posses)
   })
 
-  it('preserves V1 byte meanings and maps rows through V2 migration helpers', () => {
+  it('preserves V1 byte meanings and maps rows through current migration helpers', () => {
     const v1 = frozenContract as PersistenceContract
     const standardCode = standardCodeContract as StandardCodeContract
-    const v2 = v2Contract as {
-      awakeners: V2ContractEntry[]
-      wheels: V2ContractEntry[]
-      covenants: V2ContractEntry[]
-      posses: V2ContractEntry[]
+    const current = currentPersistenceContract as {
+      awakeners: CurrentContractEntry[]
+      wheels: CurrentContractEntry[]
+      covenants: CurrentContractEntry[]
+      posses: CurrentContractEntry[]
     }
-    const v2Ids = new Set([
-      ...contractIds(v2.awakeners),
-      ...contractIds(v2.wheels),
-      ...contractIds(v2.covenants),
-      ...contractIds(v2.posses),
+    const currentIds = new Set([
+      ...contractIds(current.awakeners),
+      ...contractIds(current.wheels),
+      ...contractIds(current.covenants),
+      ...contractIds(current.posses),
     ])
 
     expect(
@@ -162,20 +162,20 @@ describe('persistence contract', () => {
     )
 
     for (const entry of standardCode.awakeners) {
-      expect(entry.id).toBe(migrateAwakenerIdV1ToV2(entry.legacyId))
-      expect(v2Ids.has(entry.id)).toBe(true)
+      expect(entry.id).toBe(migrateAwakenerIdV1ToCurrent(entry.legacyId))
+      expect(currentIds.has(entry.id)).toBe(true)
     }
     for (const entry of standardCode.wheels) {
-      expect(entry.id).toBe(migrateWheelIdV1ToV2(String(entry.legacyId)))
-      expect(v2Ids.has(entry.id)).toBe(true)
+      expect(entry.id).toBe(migrateWheelIdV1ToCurrent(String(entry.legacyId)))
+      expect(currentIds.has(entry.id)).toBe(true)
     }
     for (const entry of standardCode.covenants) {
-      expect(entry.id).toBe(migrateCovenantIdV1ToV2(String(entry.legacyId)))
-      expect(v2Ids.has(entry.id)).toBe(true)
+      expect(entry.id).toBe(migrateCovenantIdV1ToCurrent(String(entry.legacyId)))
+      expect(currentIds.has(entry.id)).toBe(true)
     }
     for (const entry of standardCode.posses) {
-      expect(entry.id).toBe(migratePosseIdV1ToV2(String(entry.legacyId)))
-      expect(v2Ids.has(entry.id)).toBe(true)
+      expect(entry.id).toBe(migratePosseIdV1ToCurrent(String(entry.legacyId)))
+      expect(currentIds.has(entry.id)).toBe(true)
     }
   })
 })

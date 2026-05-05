@@ -18,7 +18,7 @@ import {getAwakenerTalents} from './awakener-talents'
 import {getDerivedSkills} from './derived-skills'
 
 describe('awakener-source-schema', () => {
-  it('accepts public V2-backed runtime records', () => {
+  it('accepts public V3-backed runtime records', () => {
     const parsedRoster = awakenerRosterDatasetSchema.parse(getAwakenerRoster())
     const parsedKits = awakenerKitsDatasetSchema.parse(getAwakenerKits())
     const parsedEnlightens = awakenerEnlightensDatasetSchema.parse(getAwakenerEnlightens())

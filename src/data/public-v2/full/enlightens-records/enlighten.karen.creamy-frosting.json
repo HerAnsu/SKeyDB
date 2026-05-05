@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.karen.creamy-frosting",
-  "displayName": "Creamy Frosting",
-  "ownerAwakenerId": "awakener-0026",
-  "slot": "E2",
-  "descriptionTemplate": "The {Toad Stew}'s {Poison} and HP Recovery effects +25%.",
-  "descriptionArgs": {}
-}

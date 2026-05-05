@@ -28,7 +28,7 @@ describe('getWheels', () => {
     expect(wheels.every((wheel) => typeof wheel.mainstatKey === 'string')).toBe(true)
   })
 
-  it('uses public V2 wheel ids as runtime ids without legacy leakage', () => {
+  it('uses public V3 wheel ids as runtime ids without legacy leakage', () => {
     const wheels = getWheels()
     const firstWheel = wheels.find((wheel) => wheel.id === 'wheel-0001')
 

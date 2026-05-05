@@ -38,7 +38,7 @@ describe('getAwakeners', () => {
     expect(awakeners.every((a) => !a.rarity || a.rarity.trim().length > 0)).toBe(true)
   })
 
-  it('uses public V2 ids as runtime ids without legacy leakage', () => {
+  it('uses public V3 ids as runtime ids without legacy leakage', () => {
     const awakeners = getAwakeners()
     const firstAwakener = awakeners.find((awakener) => awakener.id === 'awakener-0001')
 
@@ -65,7 +65,7 @@ describe('getAwakeners', () => {
     expect(uniqueIds.size).toBe(ids.length)
   })
 
-  it('uses canonical runtime names while retaining public V2 display aliases', () => {
+  it('uses canonical runtime names while retaining public V3 display aliases', () => {
     const awakeners = getAwakeners()
 
     for (const [name, alias] of [

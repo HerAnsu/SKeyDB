@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.pollux.divine-revelation",
-  "displayName": "Divine Revelation",
-  "ownerAwakenerId": "awakener-0041",
-  "slot": "E3",
-  "descriptionTemplate": "When {Exhausted} at its {ordinal:3rd} use, {Sacred Heart} causes Pollux's next Command Card to take effect 1 additional time.",
-  "descriptionArgs": {}
-}

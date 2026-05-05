@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.mouchette.irretrievable-past",
-  "displayName": "Irretrievable Past",
-  "ownerAwakenerId": "awakener-0033",
-  "slot": "E2",
-  "descriptionTemplate": "{Mortal Blast} generates 1 temporary copy of the last played other \"Strike\" and makes its Arithmetica Cost -1.",
-  "descriptionArgs": {}
-}

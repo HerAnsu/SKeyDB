@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.tinct.stellar-reverberation",
-  "displayName": "Stellar Reverberation",
-  "ownerAwakenerId": "awakener-0049",
-  "slot": "E1",
-  "descriptionTemplate": "\"Basic Strike\" deals DMG twice and gains {Leap}: Deal DMG for one more time.",
-  "descriptionArgs": {}
-}

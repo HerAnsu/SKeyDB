@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.leigh.newborn-sanguivore",
-  "displayName": "Newborn Sanguivore",
-  "ownerAwakenerId": "awakener-0028",
-  "slot": "E1",
-  "descriptionTemplate": "{Pain and Pleasure} deals {Pierce DMG}, Obtain {Retain}.",
-  "descriptionArgs": {}
-}

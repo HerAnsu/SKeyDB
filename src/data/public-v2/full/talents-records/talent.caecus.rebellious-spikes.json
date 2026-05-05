@@ -1,8 +1,0 @@
-{
-  "id": "talent.caecus.rebellious-spikes",
-  "displayName": "Rebellious Spikes",
-  "ownerAwakenerId": "awakener-0006",
-  "family": "passive",
-  "descriptionTemplate": "For every 1% Sigil Yield that Caecus has, \"Basic Strike\" enjoys a 1% {Counter} bonus.",
-  "descriptionArgs": {}
-}

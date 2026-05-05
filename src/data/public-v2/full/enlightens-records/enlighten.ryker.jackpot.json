@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.ryker.jackpot",
-  "displayName": "Jackpot!",
-  "ownerAwakenerId": "awakener-0043",
-  "slot": "OverExalt",
-  "descriptionTemplate": "{All-in!} deals 3 instances DMG and reduces the Arithmetica Cost of drawn Cards by 1.",
-  "descriptionArgs": {}
-}

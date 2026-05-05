@@ -1,8 +1,0 @@
-{
-  "id": "talent.jenkins.a-common-enemy",
-  "displayName": "A Common Enemy",
-  "ownerAwakenerId": "awakener-0025",
-  "family": "passive",
-  "descriptionTemplate": "For every 1% Crit. Rate provided by Jenkin and her equipped Wheel of Destiny & Covenant, the Base DMG of \"Basic Strike\" and {Get 'em! Brown!} +2%.",
-  "descriptionArgs": {}
-}

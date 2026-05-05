@@ -15,7 +15,7 @@ Support Morimens in-game team codes (`@@...@@`) alongside the stable SKeyDB `t1.
 - Builder now exposes a separate `Export In-Game` action for single-team export.
 - In-game import/export stays separate from the existing compact SKeyDB codec.
 - `t1.` and `mt1.` remain supported through frozen codec tables so website-native compact codes survive future normalized ID changes.
-- Token dictionaries are built from public V2 `lineupToken` fields on awakeners, wheels, covenants, and posses.
+- Token dictionaries are built from public V3 `lineupToken` fields on awakeners, wheels, covenants, and posses.
 - Dictionary validation and codec coverage tests were added for:
   - token collisions
   - canonical data coverage
@@ -31,21 +31,21 @@ Support Morimens in-game team codes (`@@...@@`) alongside the stable SKeyDB `t1.
 - Import remains permissive when structure is recoverable.
 - Unknown awakeners and wheels are dropped to empty instead of failing the entire import.
 - Builder surfaces a warning toast when unsupported awakener/wheel tokens are encountered.
-- Covenant and posse sections decode through public V2 `lineupToken` fields.
+- Covenant and posse sections decode through public V3 `lineupToken` fields.
 
 ### Export
 - In-game export is single-team only in the current release.
 - Export output is wrapped as `@@<payload>@@`.
-- Covenant and posse export uses public V2 `lineupToken` fields.
+- Covenant and posse export uses public V3 `lineupToken` fields.
 
 ## Current priority framing
 
-- The builder and compact SKeyDB codecs are already treated as shipped foundation; the in-game codec now depends on public V2 token coverage rather than local token tables.
+- The builder and compact SKeyDB codecs are already treated as shipped foundation; the in-game codec now depends on public V3 token coverage rather than local token tables.
 
 ## Locked Data/Ownership Decisions
 - In-game codec logic stays outside `src/domain/import-export.ts` except for wrapper integration.
-- Reverse-engineered transport tokens are public V2 `lineupToken` metadata.
-- Runtime lookup tables are derived from public V2 lite records.
+- Reverse-engineered transport tokens are public V3 `lineupToken` metadata.
+- Runtime lookup tables are derived from public V3 lite records.
 - Parser/encoder contract already reserves all 4 blocks:
   - awakeners
   - wheels
@@ -53,7 +53,7 @@ Support Morimens in-game team codes (`@@...@@`) alongside the stable SKeyDB `t1.
   - posses
 
 ## Data Contract Note
-- Posses use public V2 `posse-####` ids as dictionary identity.
+- Posses use public V3 `posse-####` ids as dictionary identity.
 
 ## Remaining Work
 ### Medium priority
@@ -66,7 +66,7 @@ Support Morimens in-game team codes (`@@...@@`) alongside the stable SKeyDB `t1.
 
 ## Current Known Limitations
 - Future game content can still introduce new unknown tokens, which will import permissively as empty until mapped.
-- `@@...@@` compatibility depends on public V2 `lineupToken` coverage staying current.
+- `@@...@@` compatibility depends on public V3 `lineupToken` coverage staying current.
 
 ## Files
 - `src/domain/ingame-codec.ts`
@@ -79,7 +79,7 @@ Support Morimens in-game team codes (`@@...@@`) alongside the stable SKeyDB `t1.
 - `src/pages/builder/BuilderImportExportDialogs.tsx`
 
 ## Status
-- Phase A: public V2 token ingestion and validation tooling - done
+- Phase A: public V3 token ingestion and validation tooling - done
 - Phase B: decode path and import auto-detect - done
 - Phase C: single-team WIP-safe export path - done
 - Phase D: covenant/posse completion - done

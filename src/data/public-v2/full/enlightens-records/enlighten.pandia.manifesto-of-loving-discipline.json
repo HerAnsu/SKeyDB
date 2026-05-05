@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.pandia.manifesto-of-loving-discipline",
-  "displayName": "Manifesto of Loving Discipline",
-  "ownerAwakenerId": "awakener-0039",
-  "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Give and Take} is enhanced: When Pandia gains Permanent {Counter}, gain {STR} equal to 3% of that value.",
-  "descriptionArgs": {}
-}

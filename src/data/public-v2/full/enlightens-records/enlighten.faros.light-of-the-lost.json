@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.faros.light-of-the-lost",
-  "displayName": "Light of the Lost",
-  "ownerAwakenerId": "awakener-0017",
-  "slot": "OverExalt",
-  "descriptionTemplate": "Hand Limit +2. At turn end, choose 1 card to {Retain} and reduce its Arithmetica Cost by 1 for 3 turns.",
-  "descriptionArgs": {}
-}

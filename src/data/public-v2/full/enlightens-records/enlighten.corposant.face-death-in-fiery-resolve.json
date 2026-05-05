@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.corposant.face-death-in-fiery-resolve",
-  "displayName": "Face Death in Fiery Resolve",
-  "ownerAwakenerId": "awakener-0011",
-  "slot": "OverExalt",
-  "descriptionTemplate": "Obtain 3 Tentacles. The discarded card {Aftershock} Effect triggers an additional time.",
-  "descriptionArgs": {}
-}

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.helot.the-chainbreaker",
-  "displayName": "The Chainbreaker",
-  "ownerAwakenerId": "awakener-0023",
-  "slot": "E3",
-  "descriptionTemplate": "\"Strike\" grants Helot 5% Crit. DMG.",
-  "descriptionArgs": {}
-}

@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.faint.binary-stars",
-  "displayName": "Binary Stars",
-  "ownerAwakenerId": "awakener-0016",
-  "slot": "E1",
-  "descriptionTemplate": "\"Basic Strike\" deals DMG twice and grants Temporary {Counter} equal to 50% of DMG dealt.",
-  "descriptionArgs": {}
-}

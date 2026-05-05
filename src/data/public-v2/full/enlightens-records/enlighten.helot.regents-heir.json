@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.helot.regents-heir",
-  "displayName": "Regent's Heir",
-  "ownerAwakenerId": "awakener-0023",
-  "slot": "E1",
-  "descriptionTemplate": "At the start of the battle, place 1 {Irregular Form} into hand.",
-  "descriptionArgs": {}
-}

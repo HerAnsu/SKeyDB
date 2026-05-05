@@ -402,11 +402,11 @@ describe('awakeners-full-resolver', () => {
     expect(resolved.record.talents.T3?.id).toBe('talent.test.soulforge-aptitude')
   })
 
-  it('applies real cumulative skill patches from public V2 enlightens', async () => {
+  it('applies real cumulative skill patches from public V3 enlightens', async () => {
     const thais = await loadPublicAwakenerDetailById(48)
     expect(thais).toBeDefined()
     if (!thais) {
-      throw new Error('Missing canonical Thais V2 record')
+      throw new Error('Missing canonical Thais current record')
     }
 
     const resolved = resolveAwakenerFullRecord(thais, {
@@ -451,11 +451,11 @@ describe('awakeners-full-resolver', () => {
     })
   })
 
-  it('applies real overlay patches from public V2 enlightens without embedding shared overlays', async () => {
+  it('applies real overlay patches from public V3 enlightens without embedding shared overlays', async () => {
     const wanda = await loadPublicAwakenerDetailById(52)
     expect(wanda).toBeDefined()
     if (!wanda) {
-      throw new Error('Missing canonical Wanda V2 record')
+      throw new Error('Missing canonical Wanda current record')
     }
 
     const resolved = resolveAwakenerFullRecord(
@@ -477,11 +477,11 @@ describe('awakeners-full-resolver', () => {
     )
   })
 
-  it('applies public V2 Xu overlay upgrades through the resolver override surface', async () => {
+  it('applies public V3 Xu overlay upgrades through the resolver override surface', async () => {
     const xu = await loadPublicAwakenerDetailById('awakener-0054')
     expect(xu).toBeDefined()
     if (!xu) {
-      throw new Error('Missing public V2 Xu record')
+      throw new Error('Missing public V3 Xu record')
     }
 
     const resolved = resolveAwakenerFullRecord(
@@ -504,7 +504,7 @@ describe('awakeners-full-resolver', () => {
     const sanga = await loadPublicAwakenerDetailById('awakener-0045')
     expect(sanga).toBeDefined()
     if (!sanga) {
-      throw new Error('Missing public V2 Sanga record')
+      throw new Error('Missing public V3 Sanga record')
     }
 
     const resolved = resolveAwakenerFullRecord(sanga)

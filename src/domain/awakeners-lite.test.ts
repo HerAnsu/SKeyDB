@@ -3,7 +3,7 @@ import {describe, expect, it} from 'vitest'
 import {getAwakenersLite} from './awakeners-lite'
 
 describe('awakeners-lite', () => {
-  it('loads public lite V2 records without using the retired local compiler path', () => {
+  it('loads public lite records without using the retired local compiler path', () => {
     const records = getAwakenersLite()
 
     expect(records.length).toBeGreaterThan(0)
@@ -17,7 +17,7 @@ describe('awakeners-lite', () => {
     )
   })
 
-  it('exposes public V2 search tags without synthesizing website-side overlay tags', () => {
+  it('exposes public V3 search tags without synthesizing website-side overlay tags', () => {
     const records = getAwakenersLite()
     const vortice = records.find((entry) => entry.name === 'vortice')
     const fauxbornMurphy = records.find((entry) => entry.name === 'murphy: fauxborn')

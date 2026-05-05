@@ -40,7 +40,7 @@ describe('buildTokenDictionaryFromEntries', () => {
 })
 
 describe('buildIngameTokenDictionaries', () => {
-  it('builds non-empty dictionaries from public V2 lineupToken fields', () => {
+  it('builds non-empty dictionaries from public V3 lineupToken fields', () => {
     const result = buildIngameTokenDictionaries()
 
     expect(result.awakeners.byIdToken.size).toBeGreaterThan(40)
@@ -50,7 +50,7 @@ describe('buildIngameTokenDictionaries', () => {
     expect(result.issues).toEqual([])
   })
 
-  it('uses current public V2 ids and tokens for known lineup examples', () => {
+  it('uses current public V3 ids and tokens for known lineup examples', () => {
     const result = buildIngameTokenDictionaries()
 
     expect(result.awakeners.byIdToken.get('awakener-0056')).toBe('4')

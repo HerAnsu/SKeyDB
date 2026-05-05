@@ -61,7 +61,7 @@ describe('builder-persistence', () => {
     expect('awakenerName' in (loaded?.teams[0]?.slots[0] ?? {})).toBe(false)
   })
 
-  it('serializes builder drafts with canonical V2 public ids', () => {
+  it('serializes builder drafts with canonical current public ids', () => {
     const storage = createStorage()
 
     saveBuilderDraft(storage.api, {teams: [createTeamFixture()], activeTeamId: 'team-alpha'})
@@ -80,7 +80,7 @@ describe('builder-persistence', () => {
     expect(JSON.stringify(persisted.payload)).not.toContain('"B01"')
   })
 
-  it('fails closed instead of saving unmapped runtime ids into a V2 envelope', () => {
+  it('fails closed instead of saving unmapped runtime ids into a current envelope', () => {
     const storage = createStorage()
     const team = createTeamFixture()
     team.slots[0] = {
@@ -158,7 +158,7 @@ describe('builder-persistence', () => {
     expect(loaded?.teams[0]?.slots[0]?.isSupport).toBe(true)
   })
 
-  it('falls back to V1 draft storage and immediately migrates to V2', () => {
+  it('falls back to legacy draft storage and immediately migrates to current storage', () => {
     const legacyEnvelope = {
       version: 1,
       updatedAt: '2026-01-01T00:00:00.000Z',
@@ -218,8 +218,8 @@ describe('builder-persistence', () => {
     expect('awakenerName' in (loaded?.teams[0]?.slots[0] ?? {})).toBe(false)
   })
 
-  it('prefers valid V2 storage over stale V1 storage', () => {
-    const v2Team = createTeamFixture()
+  it('prefers valid current storage over stale legacy storage', () => {
+    const currentTeam = createTeamFixture()
     const staleLegacyTeam = {...createTeamFixture(), id: 'team-legacy', name: 'Legacy Team'}
     const storage = createStorage([
       [
@@ -231,12 +231,15 @@ describe('builder-persistence', () => {
         }),
       ],
     ])
-    saveBuilderDraft(storage.api, {teams: [v2Team], activeTeamId: 'team-alpha'})
+    saveBuilderDraft(storage.api, {teams: [currentTeam], activeTeamId: 'team-alpha'})
 
-    expect(loadBuilderDraft(storage.api)).toEqual({teams: [v2Team], activeTeamId: 'team-alpha'})
+    expect(loadBuilderDraft(storage.api)).toEqual({
+      teams: [currentTeam],
+      activeTeamId: 'team-alpha',
+    })
   })
 
-  it('does not fall back to V1 when present V2 storage is invalid', () => {
+  it('does not fall back to legacy storage when present current storage is invalid', () => {
     const storage = createStorage([
       [
         BUILDER_PERSISTENCE_KEY,
@@ -255,7 +258,7 @@ describe('builder-persistence', () => {
     expect(loadBuilderDraft(storage.api)).toBeNull()
   })
 
-  it('rejects unknown canonical V2 wheel ids instead of dropping equipment', () => {
+  it('rejects unknown canonical current wheel ids instead of dropping equipment', () => {
     const storage = createStorage([
       [
         BUILDER_PERSISTENCE_KEY,

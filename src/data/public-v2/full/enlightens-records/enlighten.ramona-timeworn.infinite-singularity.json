@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.ramona-timeworn.infinite-singularity",
-  "displayName": "Infinite Singularity",
-  "ownerAwakenerId": "awakener-0020",
-  "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Entropy Undone} is enhanced: The limit on activations per turn is removed.",
-  "descriptionArgs": {}
-}

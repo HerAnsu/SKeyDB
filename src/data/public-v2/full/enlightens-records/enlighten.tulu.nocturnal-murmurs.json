@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.tulu.nocturnal-murmurs",
-  "displayName": "Nocturnal Murmurs",
-  "ownerAwakenerId": "awakener-0050",
-  "slot": "E1",
-  "descriptionTemplate": "{Abyss Order} commands Tentacles to attack all enemies. If the current Stance is {Tranquil Sea}, Arithmetica Cost -2.",
-  "descriptionArgs": {}
-}

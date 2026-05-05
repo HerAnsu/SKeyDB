@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.casiah.minds-whisper",
-  "displayName": "Mind's Whisper",
-  "ownerAwakenerId": "awakener-0007",
-  "slot": "E1",
-  "descriptionTemplate": "For every card {Poof!} shuffled in, the Sorcerer gains 3 Aliemus.",
-  "descriptionArgs": {}
-}

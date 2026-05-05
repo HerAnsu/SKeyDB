@@ -1,8 +1,0 @@
-{
-  "id": "talent.nymphaea.immerse",
-  "displayName": "Immerse",
-  "ownerAwakenerId": "awakener-0037",
-  "family": "passive",
-  "descriptionTemplate": "For every 1% DMG Amplification attribute Nymphaea has, the Base {Poison} Effect caused by {Knell of Death} and {Passage of the Ego} +0.5%.",
-  "descriptionArgs": {}
-}

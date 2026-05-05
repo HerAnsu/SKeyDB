@@ -78,7 +78,7 @@ describe('collection ownership migrations', () => {
     expect(loadCollectionOwnership(storage, catalog)).toEqual(defaultOwnedStateForCatalog)
   })
 
-  it('does not fall back to v1 when the v2 key exists but is invalid', () => {
+  it('does not fall back to v1 when the current key exists but is invalid', () => {
     const storage = createStorage()
     storage.setItem(COLLECTION_OWNERSHIP_KEY, '{"version":999,"payload":{}}')
     storage.setItem(
@@ -99,7 +99,7 @@ describe('collection ownership migrations', () => {
     expect(storage.getItem(COLLECTION_OWNERSHIP_KEY)).toBe('{"version":999,"payload":{}}')
   })
 
-  it('prefers v2 storage over v1 fallback', () => {
+  it('prefers current storage over v1 fallback', () => {
     const storage = createStorage()
     storage.setItem(COLLECTION_OWNERSHIP_LEGACY_KEY, '{"version":1,"payload":{}}')
     storage.setItem(
@@ -125,7 +125,7 @@ describe('collection ownership migrations', () => {
     })
   })
 
-  it('falls back from v1 storage, migrates, and saves v2 without deleting v1', () => {
+  it('falls back from legacy storage, migrates, and saves current storage without deleting legacy data', () => {
     const storage = createStorage()
     storage.setItem(
       COLLECTION_OWNERSHIP_LEGACY_KEY,
@@ -197,7 +197,7 @@ describe('collection ownership migrations', () => {
     })
   })
 
-  it('serializes v1 runtime ids as v2 public ids and imports them back for v1 runtime catalog', () => {
+  it('serializes v1 runtime ids as current public ids and imports them back for v1 runtime catalog', () => {
     const snapshot = serializeCollectionOwnershipSnapshot(
       {
         ownedAwakeners: {'1': 4},
@@ -235,7 +235,7 @@ describe('collection ownership migrations', () => {
     })
   })
 
-  it('migrates v1 snapshots to v2 ids for v2 catalogs', () => {
+  it('migrates v1 snapshots to current ids for current catalogs', () => {
     expect(
       parseCollectionOwnershipSnapshot(
         JSON.stringify({
@@ -267,7 +267,7 @@ describe('collection ownership migrations', () => {
     })
   })
 
-  it('does not treat legacy ids as valid v2 snapshot ids', () => {
+  it('does not treat legacy ids as valid current snapshot ids', () => {
     expect(
       parseCollectionOwnershipSnapshot(
         JSON.stringify({
@@ -294,7 +294,7 @@ describe('collection ownership migrations', () => {
     })
   })
 
-  it('does not treat unmapped runtime catalog ids as valid v2 snapshot ids', () => {
+  it('does not treat unmapped runtime catalog ids as valid current snapshot ids', () => {
     expect(
       parseCollectionOwnershipSnapshot(
         JSON.stringify({
@@ -325,7 +325,7 @@ describe('collection ownership migrations', () => {
     })
   })
 
-  it('fails serialization instead of emitting unmapped runtime ids in v2 snapshots', () => {
+  it('fails serialization instead of emitting unmapped runtime ids in current snapshots', () => {
     expect(() =>
       serializeCollectionOwnershipSnapshot(
         {
@@ -367,7 +367,7 @@ describe('collection ownership migrations', () => {
     expect(storage.getItem(COLLECTION_OWNERSHIP_KEY)).toBeNull()
   })
 
-  it('merges mixed v1 and v2 ids deterministically by max level', () => {
+  it('merges mixed legacy and current ids deterministically by max level', () => {
     expect(
       parseCollectionOwnershipSnapshot(
         JSON.stringify({
@@ -431,7 +431,7 @@ describe('collection ownership migrations', () => {
     })
   })
 
-  it('merges canonicalization collisions by max level before v2 serialization', () => {
+  it('merges canonicalization collisions by max level before current serialization', () => {
     const snapshot = serializeCollectionOwnershipSnapshot(
       {
         ownedAwakeners: {'1': 3, 'awakener-0001': 8},

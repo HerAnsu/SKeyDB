@@ -1,8 +1,0 @@
-{
-  "id": "talent.faros.homesick",
-  "displayName": "Homesick",
-  "ownerAwakenerId": "awakener-0017",
-  "family": "passive",
-  "descriptionTemplate": "Faros gains 0.4% additional Shield from {Lost City of Lemuria} for every 1% DMG Amplification attribute.",
-  "descriptionArgs": {}
-}

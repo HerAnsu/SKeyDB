@@ -1,8 +1,0 @@
-{
-  "id": "enlighten.uvhash.paean-of-twisted-fury",
-  "displayName": "Paean of Twisted Fury",
-  "ownerAwakenerId": "awakener-0051",
-  "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Vermilion Rite} is enhanced: Uvhash's Exalt Final DMG +25%. This effect doubles when HP is below 25%.",
-  "descriptionArgs": {}
-}
