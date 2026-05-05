@@ -1,28 +1,15 @@
-import publicEnlightensFull from '@/data/public-v2/full/enlightens.json'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {
   awakenerEnlightensDatasetSchema,
   type AwakenerEnlightenRecord,
 } from './awakener-source-schema'
-
-interface PublicEnlightensEnvelope {
-  records: (Omit<AwakenerEnlightenRecord, 'ownerAwakenerId'> & {ownerAwakenerId: string})[]
-}
+import {
+  adaptPublicV3EnlightenRecord,
+  type PublicV3EnlightenRecord,
+} from './public-v3-awakener-record-adapters'
 
 let awakenerEnlightensCache: AwakenerEnlightenRecord[] | null = null
-
-function numericAwakenerId(publicAwakenerId: string): number {
-  return Number(/^awakener-(\d{4})$/.exec(publicAwakenerId)?.[1] ?? 0)
-}
-
-function adaptPublicEnlighten(
-  record: PublicEnlightensEnvelope['records'][number],
-): AwakenerEnlightenRecord {
-  return {
-    ...record,
-    ownerAwakenerId: numericAwakenerId(record.ownerAwakenerId),
-  }
-}
 
 export function getAwakenerEnlightens(): AwakenerEnlightenRecord[] {
   if (awakenerEnlightensCache) {
@@ -30,7 +17,9 @@ export function getAwakenerEnlightens(): AwakenerEnlightenRecord[] {
   }
 
   awakenerEnlightensCache = awakenerEnlightensDatasetSchema.parse(
-    (publicEnlightensFull as unknown as PublicEnlightensEnvelope).records.map(adaptPublicEnlighten),
+    getPublicRecordSnapshots('enlightens').map((record) =>
+      adaptPublicV3EnlightenRecord(record as PublicV3EnlightenRecord),
+    ),
   )
   return awakenerEnlightensCache
 }

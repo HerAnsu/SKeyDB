@@ -1,25 +1,38 @@
-import publicSkillsFull from '@/data/public-v2/full/skills.json'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {awakenerSkillsDatasetSchema, type AwakenerSkillRecord} from './awakener-source-schema'
-
-interface PublicSkillsEnvelope {
-  records: (Omit<AwakenerSkillRecord, 'ownerAwakenerId' | 'variants'> & {
-    ownerAwakenerId: string
-  })[]
-}
+import {
+  adaptPublicV3SkillRecord,
+  numericAwakenerId,
+  type PublicV3SkillRecord,
+} from './public-v3-awakener-record-adapters'
 
 let awakenerSkillsCache: AwakenerSkillRecord[] | null = null
 
-function numericAwakenerId(publicAwakenerId: string): number {
-  return Number(/^awakener-(\d{4})$/.exec(publicAwakenerId)?.[1] ?? 0)
-}
+const skillSlotOrder = new Map([
+  ['Rouse', 0],
+  ['Strike', 1],
+  ['Defense', 2],
+  ['Skill1', 3],
+  ['Skill2', 4],
+  ['Exalt', 5],
+  ['OverExalt', 6],
+])
 
-function adaptPublicSkill(record: PublicSkillsEnvelope['records'][number]): AwakenerSkillRecord {
-  return {
-    ...record,
-    ownerAwakenerId: numericAwakenerId(record.ownerAwakenerId),
-    variants: [],
+function comparePublicSkillRecords(left: PublicV3SkillRecord, right: PublicV3SkillRecord): number {
+  const ownerOrder =
+    numericAwakenerId(left.ownerAwakenerId ?? '') - numericAwakenerId(right.ownerAwakenerId ?? '')
+  if (ownerOrder !== 0) {
+    return ownerOrder
   }
+
+  const slotOrder =
+    (skillSlotOrder.get(left.slot ?? '') ?? 99) - (skillSlotOrder.get(right.slot ?? '') ?? 99)
+  if (slotOrder !== 0) {
+    return slotOrder
+  }
+
+  return left.id.localeCompare(right.id)
 }
 
 export function getAwakenerSkills(): AwakenerSkillRecord[] {
@@ -28,7 +41,10 @@ export function getAwakenerSkills(): AwakenerSkillRecord[] {
   }
 
   awakenerSkillsCache = awakenerSkillsDatasetSchema.parse(
-    (publicSkillsFull as unknown as PublicSkillsEnvelope).records.map(adaptPublicSkill),
+    getPublicRecordSnapshots('skills')
+      .map((record) => record as PublicV3SkillRecord)
+      .sort(comparePublicSkillRecords)
+      .map(adaptPublicV3SkillRecord),
   )
   return awakenerSkillsCache
 }

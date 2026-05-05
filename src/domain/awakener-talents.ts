@@ -1,23 +1,12 @@
-import publicTalentsFull from '@/data/public-v2/full/talents.json'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {awakenerTalentsDatasetSchema, type AwakenerTalentRecord} from './awakener-source-schema'
-
-interface PublicTalentsEnvelope {
-  records: (Omit<AwakenerTalentRecord, 'ownerAwakenerId'> & {ownerAwakenerId: string})[]
-}
+import {
+  adaptPublicV3TalentRecord,
+  type PublicV3TalentRecord,
+} from './public-v3-awakener-record-adapters'
 
 let awakenerTalentsCache: AwakenerTalentRecord[] | null = null
-
-function numericAwakenerId(publicAwakenerId: string): number {
-  return Number(/^awakener-(\d{4})$/.exec(publicAwakenerId)?.[1] ?? 0)
-}
-
-function adaptPublicTalent(record: PublicTalentsEnvelope['records'][number]): AwakenerTalentRecord {
-  return {
-    ...record,
-    ownerAwakenerId: numericAwakenerId(record.ownerAwakenerId),
-  }
-}
 
 export function getAwakenerTalents(): AwakenerTalentRecord[] {
   if (awakenerTalentsCache) {
@@ -25,7 +14,9 @@ export function getAwakenerTalents(): AwakenerTalentRecord[] {
   }
 
   awakenerTalentsCache = awakenerTalentsDatasetSchema.parse(
-    (publicTalentsFull as unknown as PublicTalentsEnvelope).records.map(adaptPublicTalent),
+    getPublicRecordSnapshots('talents').map((record) =>
+      adaptPublicV3TalentRecord(record as PublicV3TalentRecord),
+    ),
   )
   return awakenerTalentsCache
 }

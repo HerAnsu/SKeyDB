@@ -1,6 +1,7 @@
 import Fuse from 'fuse.js'
 
 import type {Covenant} from './covenants'
+import {getPublicSearchAliases, getPublicSearchSupplementalValues} from './public-search-values'
 import {
   getBestSearchFieldMatch,
   getNormalizedSearchValues,
@@ -59,7 +60,11 @@ function getIndexedCovenants(covenants: Covenant[]): IndexedCovenantRecord[] {
     covenant,
     normalizedName: normalizeForSearch(covenant.name),
     normalizedId: normalizeForSearch(covenant.id),
-    normalizedSupplemental: getNormalizedSearchValues([covenant.assetId]),
+    normalizedSupplemental: getNormalizedSearchValues([
+      ...getPublicSearchAliases('covenants', covenant.id),
+      ...getPublicSearchSupplementalValues('covenants', covenant.id),
+      covenant.assetId,
+    ]),
   }))
   indexedCovenantCache.set(covenants, indexed)
   return indexed
@@ -92,9 +97,18 @@ function getCovenantSearchPriority(
 ): number | null {
   const nameMatch = getBestSearchFieldMatch([record.covenant.name], normalizedQuery)
   const idMatch = getBestSearchFieldMatch([record.covenant.id], normalizedQuery)
+  const supplementalMatch = getBestSearchFieldMatch(
+    [
+      ...getPublicSearchAliases('covenants', record.covenant.id),
+      ...getPublicSearchSupplementalValues('covenants', record.covenant.id),
+      record.covenant.assetId,
+    ],
+    normalizedQuery,
+  )
   const priorities = [
     toPriority(nameMatch, {exact: 0, prefix: 1, wordPrefix: 2, contains: 6}),
     toPriority(idMatch, {exact: 3, prefix: 7, wordPrefix: 7, contains: 8}),
+    toPriority(supplementalMatch, {exact: 9, prefix: 10, wordPrefix: 10, contains: 11}),
   ].filter((priority): priority is number => priority !== null)
 
   return priorities.length > 0 ? Math.min(...priorities) : null

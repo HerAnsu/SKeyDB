@@ -1,4 +1,8 @@
-import publicWheelsFull from '@/data/public-v2/full/wheels.json'
+import {
+  resolvePublicAsset,
+  resolvePublicEntityAsset,
+} from '@/data-access/public-data/assetRepository'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import type {DescriptionArg} from './awakener-source-schema'
 import {buildWheelMainstatSeriesKey, type WheelMainstatKey} from './wheel-mainstat-scaling'
@@ -21,30 +25,33 @@ export interface WheelFullV2Record {
   lore?: string
 }
 
-interface PublicWheelEnvelope {
-  records: {
-    id: string
-    assetId: string
-    name: string
-    rarity: WheelFullV2Record['rarity']
-    realm: WheelFullV2Record['realm']
-    ownerAwakenerId?: string
-    ownerAwakenerName?: string
-    aliases?: string[]
-    searchTags?: string[]
-    mainstatKey: WheelMainstatKey
-    mainstatSeriesKey?: string
-    descriptionTemplate: string
-    descriptionArgs: Record<string, DescriptionArg>
-    lore?: string
-  }[]
+interface PublicWheelRecord {
+  id: string
+  name: string
+  rarity: WheelFullV2Record['rarity']
+  realm: WheelFullV2Record['realm']
+  ownerAwakenerId?: string
+  ownerAwakenerName?: string
+  aliases?: string[]
+  searchTags?: string[]
+  mainstatKey: WheelMainstatKey
+  mainstatSeriesKey?: string
+  descriptionTemplate: string
+  descriptionArgs: Record<string, DescriptionArg>
+  lore?: string
 }
 
 let wheelsFullV2Cache: WheelFullV2Record[] | null = null
 
-function adaptPublicWheel(record: PublicWheelEnvelope['records'][number]): WheelFullV2Record {
+function getWheelPublicAssetId(wheelId: string): string {
+  const assetIndexId = resolvePublicEntityAsset(wheelId, 'icon')
+  return assetIndexId ? (resolvePublicAsset(assetIndexId)?.assetId ?? 'TBD') : 'TBD'
+}
+
+function adaptPublicWheel(record: PublicWheelRecord): WheelFullV2Record {
   return {
     ...record,
+    assetId: getWheelPublicAssetId(record.id),
     aliases: record.aliases ?? [record.name],
     searchTags: record.searchTags ?? [],
     awakener: record.ownerAwakenerName,
@@ -58,7 +65,9 @@ export function getWheelsFullV2(): WheelFullV2Record[] {
     return wheelsFullV2Cache
   }
 
-  wheelsFullV2Cache = (publicWheelsFull as PublicWheelEnvelope).records.map(adaptPublicWheel)
+  wheelsFullV2Cache = (getPublicRecordSnapshots('wheels') as unknown as PublicWheelRecord[]).map(
+    adaptPublicWheel,
+  )
   return wheelsFullV2Cache
 }
 

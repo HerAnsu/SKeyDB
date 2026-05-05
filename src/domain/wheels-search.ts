@@ -1,6 +1,7 @@
 import Fuse from 'fuse.js'
 
 import {getMainstatByKey} from './mainstats'
+import {getPublicSearchAliases, getPublicSearchSupplementalValues} from './public-search-values'
 import {getRealmLabel} from './realms'
 import {
   getBestSearchFieldMatch,
@@ -79,8 +80,11 @@ function getIndexedWheels(wheels: Wheel[]): IndexedWheelRecord[] {
   }
 
   const indexedWheels = wheels.map((wheel) => {
-    const aliasValues = wheel.aliases.filter((alias) => alias !== wheel.name)
+    const aliasValues = [...wheel.aliases, ...getPublicSearchAliases('wheels', wheel.id)].filter(
+      (alias) => alias !== wheel.name,
+    )
     const supplementalValues = [
+      ...getPublicSearchSupplementalValues('wheels', wheel.id),
       wheel.realm,
       getRealmLabel(wheel.realm),
       getMainstatByKey(wheel.mainstatKey)?.label ?? wheel.mainstatKey,
@@ -129,11 +133,15 @@ function getWheelSearchPriority(
   queryLength: number,
 ): number | null {
   const nameMatch = getBestSearchFieldMatch([record.wheel.name], normalizedQuery)
-  const aliasMatch = getBestSearchFieldMatch(record.wheel.aliases, normalizedQuery)
+  const aliasMatch = getBestSearchFieldMatch(
+    [...record.wheel.aliases, ...getPublicSearchAliases('wheels', record.wheel.id)],
+    normalizedQuery,
+  )
   const supplementalMatch =
     queryLength >= 2
       ? getBestSearchFieldMatch(
           [
+            ...getPublicSearchSupplementalValues('wheels', record.wheel.id),
             record.wheel.realm,
             getRealmLabel(record.wheel.realm),
             getMainstatByKey(record.wheel.mainstatKey)?.label ?? record.wheel.mainstatKey,

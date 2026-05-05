@@ -1,31 +1,12 @@
-import publicDerivedSkillsFull from '@/data/public-v2/full/derived-skills.json'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {derivedSkillsDatasetSchema, type DerivedSkillRecord} from './awakener-source-schema'
-
-interface PublicDerivedSkillsEnvelope {
-  records: (Omit<DerivedSkillRecord, 'ownerAwakenerId'> & {ownerAwakenerId?: string})[]
-}
+import {
+  adaptPublicV3DerivedSkillRecord,
+  type PublicV3DerivedSkillRecord,
+} from './public-v3-awakener-record-adapters'
 
 let derivedSkillsCache: DerivedSkillRecord[] | null = null
-
-function numericAwakenerId(publicAwakenerId: string): number | undefined {
-  const suffix = /^awakener-(\d{4})$/.exec(publicAwakenerId)?.[1]
-  return suffix ? Number(suffix) : undefined
-}
-
-function adaptPublicDerivedSkill(
-  record: PublicDerivedSkillsEnvelope['records'][number],
-): DerivedSkillRecord {
-  const derivedFromId = record.derivedFromId ?? undefined
-  const rootSkillId = record.rootSkillId ?? undefined
-
-  return {
-    ...record,
-    derivedFromId,
-    rootSkillId,
-    ownerAwakenerId: record.ownerAwakenerId ? numericAwakenerId(record.ownerAwakenerId) : undefined,
-  }
-}
 
 export function getDerivedSkills(): DerivedSkillRecord[] {
   if (derivedSkillsCache) {
@@ -33,8 +14,8 @@ export function getDerivedSkills(): DerivedSkillRecord[] {
   }
 
   derivedSkillsCache = derivedSkillsDatasetSchema.parse(
-    (publicDerivedSkillsFull as unknown as PublicDerivedSkillsEnvelope).records.map(
-      adaptPublicDerivedSkill,
+    getPublicRecordSnapshots('derived-skills').map((record) =>
+      adaptPublicV3DerivedSkillRecord(record as PublicV3DerivedSkillRecord),
     ),
   )
   return derivedSkillsCache

@@ -119,9 +119,49 @@ vi.mock('../domain/wheels', () => ({
   getWheels: () => wheelMockState.wheels,
 }))
 
+vi.mock('../domain/posses', () => ({
+  getPosses: () => [
+    {
+      id: 'posse-0001',
+      index: 1,
+      name: 'Silent Sigil',
+      realm: 'CHAOS',
+      isFadedLegacy: false,
+      lineupToken: 'silent-sigil',
+    },
+    {
+      id: 'posse-0002',
+      index: 2,
+      name: 'Aequor Banner',
+      realm: 'AEQUOR',
+      isFadedLegacy: false,
+      lineupToken: 'aequor-banner',
+    },
+  ],
+}))
+
+vi.mock('../domain/covenants', () => ({
+  getCovenants: () => [
+    {
+      id: 'covenant-0001',
+      assetId: 'Icon_Covenant_01',
+      name: 'Oath of Glass',
+      lineupToken: 'oath-of-glass',
+    },
+    {
+      id: 'covenant-0002',
+      assetId: 'Icon_Covenant_02',
+      name: 'Iron Promise',
+      lineupToken: 'iron-promise',
+    },
+  ],
+}))
+
 vi.mock('../domain/public-v2-detail-loaders', () => ({
   loadPublicV2AwakenerFullById: (id: string) => mockLoadAwakenerFullV2ById(id),
   loadPublicV2WheelFullById: (id: string) => mockLoadWheelFullV2ById(id),
+  loadPublicV2PosseFullById: () => Promise.resolve(undefined),
+  loadPublicV2CovenantFullById: () => Promise.resolve(undefined),
 }))
 
 vi.mock('../domain/awakener-assets', () => ({
@@ -129,7 +169,16 @@ vi.mock('../domain/awakener-assets', () => ({
   getAwakenerPortraitAsset: () => null,
 }))
 
+vi.mock('../domain/posse-assets', () => ({
+  getPosseBadgeAssetById: () => null,
+}))
+
+vi.mock('../domain/covenant-assets', () => ({
+  getCovenantAssetById: () => null,
+}))
+
 vi.mock('../domain/realms', () => ({
+  DEFAULT_REALM_ACCENT: '#ffffff',
   getRealmIcon: () => null,
   getRealmLabel: (realm: string) => realm,
   getRealmAccent: () => '#ffffff',
@@ -285,10 +334,16 @@ async function renderDatabasePage(
       <MemoryRouter initialEntries={initialEntries} initialIndex={initialIndex}>
         <Routes>
           <Route element={<DatabasePage />} path='/database' />
+          <Route element={<DatabasePage />} path='/database/awakeners/:awakenerSlug' />
+          <Route element={<DatabasePage />} path='/database/awakeners/:awakenerSlug/:tabSlug' />
           <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug' />
           <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug/:tabSlug' />
           <Route element={<DatabasePage />} path='/database/wheels' />
           <Route element={<DatabasePage />} path='/database/wheels/:wheelSlug' />
+          <Route element={<DatabasePage />} path='/database/posses' />
+          <Route element={<DatabasePage />} path='/database/posses/:posseSlug' />
+          <Route element={<DatabasePage />} path='/database/covenants' />
+          <Route element={<DatabasePage />} path='/database/covenants/:covenantSlug' />
         </Routes>
         <HistoryBackButton />
         <LocationProbe />
@@ -469,7 +524,7 @@ describe('DatabasePage', () => {
     })
 
     expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
-    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha')
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha')
   })
 
   it('pushes detail open into browser history instead of replacing the browse page', async () => {
@@ -480,7 +535,7 @@ describe('DatabasePage', () => {
     })
 
     expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
-    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha')
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha')
 
     await act(async () => {
       fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
@@ -498,7 +553,7 @@ describe('DatabasePage', () => {
     })
 
     expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
-    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha')
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha')
     expect(screen.getByTestId('location-search')).toHaveTextContent('?q=alpha&realm=CHAOS')
 
     await act(async () => {
@@ -553,7 +608,9 @@ describe('DatabasePage', () => {
       fireEvent.click(screen.getByLabelText('Switch to builds tab'))
     })
 
-    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha/builds')
+    expect(screen.getByTestId('location-path')).toHaveTextContent(
+      '/database/awakeners/alpha/builds',
+    )
   })
 
   it('pushes detail tab changes into browser history', async () => {
@@ -565,14 +622,16 @@ describe('DatabasePage', () => {
       fireEvent.click(screen.getByLabelText('Switch to builds tab'))
     })
 
-    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha/builds')
+    expect(screen.getByTestId('location-path')).toHaveTextContent(
+      '/database/awakeners/alpha/builds',
+    )
 
     await act(async () => {
       fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
     })
 
     await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha'),
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha'),
     )
     expect(screen.getByText('Active tab overview')).toBeInTheDocument()
   })
@@ -587,7 +646,7 @@ describe('DatabasePage', () => {
     })
 
     await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/beta'),
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/beta'),
     )
     expect(screen.getByRole('dialog', {name: /beta details/})).toBeInTheDocument()
 
@@ -596,7 +655,7 @@ describe('DatabasePage', () => {
     })
 
     await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha'),
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha'),
     )
     expect(screen.getByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
   })
@@ -624,7 +683,7 @@ describe('DatabasePage', () => {
     expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
     expect(screen.getByText('Active tab overview')).toBeInTheDocument()
     await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha'),
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha'),
     )
   })
 
@@ -634,7 +693,9 @@ describe('DatabasePage', () => {
     expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
     expect(screen.getByText('Active tab skills')).toBeInTheDocument()
     await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha/skills'),
+      expect(screen.getByTestId('location-path')).toHaveTextContent(
+        '/database/awakeners/alpha/skills',
+      ),
     )
   })
 
@@ -644,7 +705,9 @@ describe('DatabasePage', () => {
     expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
     expect(screen.getByText('Active tab skills')).toBeInTheDocument()
     await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha/skills'),
+      expect(screen.getByTestId('location-path')).toHaveTextContent(
+        '/database/awakeners/alpha/skills',
+      ),
     )
   })
 
@@ -707,7 +770,7 @@ describe('DatabasePage', () => {
     })
 
     await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awk/alpha'),
+      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha'),
     )
     expect(screen.getByTestId('location-search')).toHaveTextContent('?q=merciful&realm=CARO')
   })
@@ -740,6 +803,53 @@ describe('DatabasePage', () => {
     expect(screen.queryByLabelText('View details for Merciful Nurturing')).not.toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Shared Dream')).not.toBeInTheDocument()
     expect(screen.getByTestId('location-search')).toHaveTextContent('?realm=NEUTRAL')
+  })
+
+  it('initializes posse filters and search from query params', async () => {
+    await renderDatabasePage('/database/posses?q=sigil&realm=CHAOS')
+
+    expect(screen.getByRole('searchbox')).toHaveValue('sigil')
+    expect(screen.getByRole('button', {name: 'Chaos'})).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByLabelText('View details for Silent Sigil')).toBeInTheDocument()
+    expect(screen.queryByLabelText('View details for Aequor Banner')).not.toBeInTheDocument()
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=sigil&realm=CHAOS')
+  })
+
+  it('writes posse browse control changes back into query params', async () => {
+    await renderDatabasePage('/database/posses')
+
+    fireEvent.change(screen.getByRole('searchbox'), {target: {value: 'sigil'}})
+    fireEvent.click(screen.getByRole('button', {name: 'Chaos'}))
+
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=sigil&realm=CHAOS')
+  })
+
+  it('initializes and writes covenant search through query params', async () => {
+    await renderDatabasePage('/database/covenants?q=oath')
+
+    expect(screen.getByRole('searchbox')).toHaveValue('oath')
+    expect(screen.getByLabelText('View details for Oath of Glass')).toBeInTheDocument()
+    expect(screen.queryByLabelText('View details for Iron Promise')).not.toBeInTheDocument()
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=oath')
+
+    fireEvent.change(screen.getByRole('searchbox'), {target: {value: 'iron'}})
+
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=iron')
+  })
+
+  it('clears unrelated entity params when switching database tabs', async () => {
+    await renderDatabasePage('/database/wheels?mainstat=KEYFLARE_REGEN')
+
+    fireEvent.click(screen.getByRole('link', {name: 'Posses'}))
+
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/posses')
+    expect(screen.getByTestId('location-search')).toBeEmptyDOMElement()
+  })
+
+  it('strips invalid entity params from deep-linked posse routes', async () => {
+    await renderDatabasePage('/database/posses?mainstat=KEYFLARE_REGEN')
+
+    await waitFor(() => expect(screen.getByTestId('location-search')).toBeEmptyDOMElement())
   })
 
   it('sorts awakeners by ATK stat descending', async () => {

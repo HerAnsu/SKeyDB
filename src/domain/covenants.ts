@@ -1,29 +1,20 @@
 import {z} from 'zod'
 
-import publicCovenantsLite from '@/data/public-v2/lite/covenants.json'
+import {
+  resolvePublicAsset,
+  resolvePublicEntityAsset,
+} from '@/data-access/public-data/assetRepository'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 const nonEmptyStringSchema = z.string().trim().min(1)
 
-const publicCovenantsLiteSchema = z
+const publicV3CovenantCatalogRecordSchema = z
   .object({
-    schemaVersion: z.number().int().positive(),
-    scope: z.literal('covenants'),
-    recordCount: z.number().int().nonnegative(),
-    records: z.array(
-      z.object({
-        id: z.string().regex(/^covenant-\d{4}$/),
-        assetId: nonEmptyStringSchema.regex(/^covenant-icon-\d{3}$/),
-        name: nonEmptyStringSchema,
-        lineupToken: nonEmptyStringSchema,
-      }),
-    ),
-    metadata: z.record(z.string(), z.unknown()).optional(),
+    id: z.string().regex(/^covenant-\d{4}$/),
+    name: nonEmptyStringSchema,
+    lineupToken: nonEmptyStringSchema,
   })
-  .strict()
-  .refine((envelope) => envelope.recordCount === envelope.records.length, {
-    message: 'recordCount must match records.length',
-    path: ['recordCount'],
-  })
+  .loose()
 
 export interface Covenant {
   id: string
@@ -32,14 +23,21 @@ export interface Covenant {
   lineupToken: string
 }
 
-const parsedCovenants = publicCovenantsLiteSchema.parse(publicCovenantsLite).records.map(
-  (covenant): Covenant => ({
-    id: covenant.id,
-    assetId: covenant.assetId,
-    name: covenant.name,
-    lineupToken: covenant.lineupToken,
-  }),
-)
+function getCovenantPublicAssetId(covenantId: string): string {
+  const assetIndexId = resolvePublicEntityAsset(covenantId, 'icon')
+  return assetIndexId ? (resolvePublicAsset(assetIndexId)?.assetId ?? 'TBD') : 'TBD'
+}
+
+const parsedCovenants = getPublicCatalogRecords('covenants')
+  .map((record) => publicV3CovenantCatalogRecordSchema.parse(record))
+  .map(
+    (covenant): Covenant => ({
+      id: covenant.id,
+      assetId: getCovenantPublicAssetId(covenant.id),
+      name: covenant.name,
+      lineupToken: covenant.lineupToken,
+    }),
+  )
 
 export function getCovenants(): Covenant[] {
   return parsedCovenants

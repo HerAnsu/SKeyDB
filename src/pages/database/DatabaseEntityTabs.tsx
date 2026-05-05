@@ -8,6 +8,9 @@ interface DatabaseEntityTabsProps {
 }
 
 export function DatabaseEntityTabs({activeEntity, search}: DatabaseEntityTabsProps) {
+  const getTabSearch = (targetEntity: DatabaseEntityId) =>
+    targetEntity === activeEntity ? search : ''
+
   return (
     <nav
       aria-label='Database entities'
@@ -15,25 +18,31 @@ export function DatabaseEntityTabs({activeEntity, search}: DatabaseEntityTabsPro
     >
       <NavLink
         className={buildTabClassName(activeEntity === 'awakeners')}
-        to={{pathname: buildDatabaseEntityBrowsePath('awakeners'), search}}
+        to={{
+          pathname: buildDatabaseEntityBrowsePath('awakeners'),
+          search: getTabSearch('awakeners'),
+        }}
       >
         Awakeners
       </NavLink>
       <NavLink
         className={buildTabClassName(activeEntity === 'wheels')}
-        to={{pathname: buildDatabaseEntityBrowsePath('wheels'), search}}
+        to={{pathname: buildDatabaseEntityBrowsePath('wheels'), search: getTabSearch('wheels')}}
       >
         Wheels
       </NavLink>
       <NavLink
         className={buildTabClassName(activeEntity === 'posses')}
-        to={{pathname: buildDatabaseEntityBrowsePath('posses'), search}}
+        to={{pathname: buildDatabaseEntityBrowsePath('posses'), search: getTabSearch('posses')}}
       >
         Posses
       </NavLink>
       <NavLink
         className={buildTabClassName(activeEntity === 'covenants')}
-        to={{pathname: buildDatabaseEntityBrowsePath('covenants'), search}}
+        to={{
+          pathname: buildDatabaseEntityBrowsePath('covenants'),
+          search: getTabSearch('covenants'),
+        }}
       >
         Covenants
       </NavLink>

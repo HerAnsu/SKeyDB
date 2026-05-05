@@ -1358,6 +1358,25 @@ a {
     0 0 0 1px rgba(14, 116, 144, 0.12);
 }
 
+.collection-sort-select {
+  color-scheme: dark;
+}
+
+.collection-sort-select__option {
+  background-color: rgb(15, 23, 42);
+  color: rgb(226, 232, 240);
+}
+
+.collection-sort-select__option:checked {
+  background-color: rgb(30, 41, 59);
+  color: rgb(248, 250, 252);
+}
+
+.collection-sort-select__option:hover {
+  background-color: rgb(51, 65, 85);
+  color: rgb(248, 250, 252);
+}
+
 .export-box-slider {
   width: 100%;
   appearance: none;

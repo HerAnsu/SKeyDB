@@ -1,6 +1,7 @@
 import Fuse from 'fuse.js'
 
 import type {Awakener} from './awakeners'
+import {getPublicSearchAliases, getPublicSearchSupplementalValues} from './public-search-values'
 import {getRealmLabel} from './realms'
 import {
   getBestSearchFieldMatch,
@@ -80,8 +81,12 @@ function getIndexedAwakeners(awakeners: Awakener[]): IndexedAwakenerRecord[] {
   }
 
   const indexedAwakeners = awakeners.map((awakener) => {
-    const aliasValues = getAwakenerAliases(awakener).filter((alias) => alias !== awakener.name)
+    const aliasValues = [
+      ...getAwakenerAliases(awakener),
+      ...getPublicSearchAliases('awakeners', awakener.id),
+    ].filter((alias) => alias !== awakener.name)
     const supplementalValues = [
+      ...getPublicSearchSupplementalValues('awakeners', awakener.id),
       ...getAwakenerTags(awakener),
       awakener.realm,
       getRealmLabel(awakener.realm),
@@ -130,13 +135,17 @@ function getAwakenerSearchPriority(
 ): number | null {
   const nameMatch = getBestSearchFieldMatch([record.awakener.name], normalizedQuery)
   const aliasMatch = getBestSearchFieldMatch(
-    getAwakenerAliases(record.awakener).filter((alias) => alias !== record.awakener.name),
+    [
+      ...getAwakenerAliases(record.awakener),
+      ...getPublicSearchAliases('awakeners', record.awakener.id),
+    ].filter((alias) => alias !== record.awakener.name),
     normalizedQuery,
   )
   const supplementalMatch =
     queryLength >= 3
       ? getBestSearchFieldMatch(
           [
+            ...getPublicSearchSupplementalValues('awakeners', record.awakener.id),
             ...getAwakenerTags(record.awakener),
             record.awakener.realm,
             getRealmLabel(record.awakener.realm),
@@ -226,7 +235,7 @@ function isRelevantAwakenerFuzzyMatch(
 function isSingleTokenFuzzyFieldCandidate(
   field: string,
   normalizedQuery: string,
-  score: number,
+  _score: number,
 ): boolean {
   if (field.length === 0 || normalizedQuery.length === 0) {
     return false
@@ -234,11 +243,7 @@ function isSingleTokenFuzzyFieldCandidate(
 
   const queryPrefixLength = normalizedQuery.length >= 4 ? 2 : 1
   const queryInitial = normalizedQuery.slice(0, queryPrefixLength)
-  if (field.startsWith(queryInitial)) {
-    return true
-  }
-
-  return score <= 0.25
+  return field.startsWith(queryInitial)
 }
 
 function getAwakenerAliases(awakener: Awakener): string[] {

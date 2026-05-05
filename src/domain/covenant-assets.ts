@@ -1,4 +1,7 @@
-import publicCovenantsLite from '@/data/public-v2/lite/covenants.json'
+import {
+  resolvePublicAsset,
+  resolvePublicEntityAsset,
+} from '@/data-access/public-data/assetRepository'
 
 const covenantIconAssets = import.meta.glob<string>('../assets/covenants/Icon/*.webp', {
   eager: true,
@@ -35,18 +38,22 @@ function iconFileStemFromPublicAssetId(publicAssetId: string): string {
   return `Icon_Trinket_${suffix}`
 }
 
-const covenantAssetIdById = new Map(
-  publicCovenantsLite.records.map(
-    (covenant) => [covenant.id, iconFileStemFromPublicAssetId(covenant.assetId)] as const,
-  ),
-)
+function getCovenantAssetFileStem(covenantId: string): string | undefined {
+  const assetIndexId = resolvePublicEntityAsset(covenantId, 'icon')
+  if (!assetIndexId) {
+    return undefined
+  }
+
+  const publicAssetId = resolvePublicAsset(assetIndexId)?.assetId
+  return publicAssetId ? iconFileStemFromPublicAssetId(publicAssetId) : undefined
+}
 
 export function getCovenantAssetById(covenantId: string): string | undefined {
-  const assetId = covenantAssetIdById.get(covenantId)
+  const assetId = getCovenantAssetFileStem(covenantId)
   return assetId ? covenantIconAssetByAssetId.get(assetId) : undefined
 }
 
 export function getCovenantFullArtAssetById(covenantId: string): string | undefined {
-  const assetId = covenantAssetIdById.get(covenantId)
+  const assetId = getCovenantAssetFileStem(covenantId)
   return assetId ? covenantFullArtAssetByAssetId.get(assetId) : undefined
 }

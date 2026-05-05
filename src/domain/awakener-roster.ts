@@ -1,4 +1,4 @@
-import publicAwakenersFull from '@/data/public-v2/full/awakeners.json'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {awakenerRosterDatasetSchema, type AwakenerRosterRecord} from './awakener-source-schema'
 
@@ -6,7 +6,6 @@ interface PublicAwakenersEnvelope {
   records: {
     id: string
     numericId: number
-    assets?: AwakenerRosterRecord['assets']
     baseStatsLv1: Partial<Record<keyof AwakenerRosterRecord['stats'], number>>
     faction: string
     ingameId?: string
@@ -19,6 +18,9 @@ interface PublicAwakenersEnvelope {
     substatScaling: Partial<Record<keyof AwakenerRosterRecord['substatScaling'], number>>
     type?: string
     aliases?: string[]
+    route?: {
+      slug?: string
+    }
   }[]
 }
 
@@ -27,6 +29,7 @@ let awakenerRosterCache: AwakenerRosterRecord[] | null = null
 function adaptPublicAwakener(
   record: PublicAwakenersEnvelope['records'][number],
 ): AwakenerRosterRecord {
+  const assetKey = record.route?.slug ?? record.id
   const fullStats = {
     CON: record.baseStatsLv1.CON ?? 0,
     ATK: record.baseStatsLv1.ATK ?? 0,
@@ -43,7 +46,7 @@ function adaptPublicAwakener(
 
   return {
     id: record.numericId,
-    key: record.assets?.portraitKey ?? record.id,
+    key: assetKey,
     displayName: record.name,
     ingameId: record.ingameId,
     faction: record.faction,
@@ -60,7 +63,7 @@ function adaptPublicAwakener(
     substatScaling: Object.fromEntries(
       Object.entries(record.substatScaling).map(([key, value]) => [key, String(value)]),
     ) as AwakenerRosterRecord['substatScaling'],
-    assets: record.assets ?? {portraitKey: record.id, iconKey: record.id},
+    assets: {portraitKey: assetKey, iconKey: assetKey},
   }
 }
 
@@ -70,7 +73,9 @@ export function getAwakenerRoster(): AwakenerRosterRecord[] {
   }
 
   awakenerRosterCache = awakenerRosterDatasetSchema.parse(
-    (publicAwakenersFull as unknown as PublicAwakenersEnvelope).records.map(adaptPublicAwakener),
+    (getPublicCatalogRecords('awakeners') as unknown as PublicAwakenersEnvelope['records']).map(
+      adaptPublicAwakener,
+    ),
   )
   return awakenerRosterCache
 }

@@ -5,6 +5,12 @@ import type {
   TypeFilterId,
 } from '@/domain/database-browse-state'
 import {getRealmLabel} from '@/domain/realms'
+import {
+  getPosseDatabaseRealmFilterLabel,
+  type CovenantDatabaseBrowseState,
+  type PosseDatabaseBrowseState,
+  type PosseDatabaseRealmFilterId,
+} from '@/domain/simple-artifact-database-browse-state'
 import {wheelMainstatFilterOptions} from '@/domain/wheel-mainstat-filters'
 import type {
   WheelsDatabaseBrowseState,
@@ -20,6 +26,15 @@ interface AwakenerActiveFilterActions {
   setRealmFilter: (next: RealmFilterId) => void
   setRarityFilter: (next: RarityFilterId) => void
   setTypeFilter: (next: TypeFilterId) => void
+}
+
+interface PosseActiveFilterActions {
+  clearQuery: () => void
+  setRealmFilter: (next: PosseDatabaseRealmFilterId) => void
+}
+
+interface CovenantActiveFilterActions {
+  clearQuery: () => void
 }
 
 interface WheelActiveFilterActions {
@@ -71,6 +86,52 @@ export function buildAwakenerActiveFilterChips(
       onClear: () => {
         actions.setTypeFilter('ALL')
       },
+    })
+  }
+
+  return chips
+}
+
+export function buildPosseActiveFilterChips(
+  state: PosseDatabaseBrowseState,
+  actions: PosseActiveFilterActions,
+): ActiveFilterChip[] {
+  const chips: ActiveFilterChip[] = []
+
+  const trimmedQuery = state.query.trim()
+  if (trimmedQuery.length > 0) {
+    chips.push({
+      key: 'query',
+      label: `Search: "${trimmedQuery}"`,
+      onClear: actions.clearQuery,
+    })
+  }
+
+  if (state.realmFilter !== 'ALL') {
+    chips.push({
+      key: 'realm',
+      label: getPosseDatabaseRealmFilterLabel(state.realmFilter),
+      onClear: () => {
+        actions.setRealmFilter('ALL')
+      },
+    })
+  }
+
+  return chips
+}
+
+export function buildCovenantActiveFilterChips(
+  state: CovenantDatabaseBrowseState,
+  actions: CovenantActiveFilterActions,
+): ActiveFilterChip[] {
+  const chips: ActiveFilterChip[] = []
+  const trimmedQuery = state.query.trim()
+
+  if (trimmedQuery.length > 0) {
+    chips.push({
+      key: 'query',
+      label: `Search: "${trimmedQuery}"`,
+      onClear: actions.clearQuery,
     })
   }
 

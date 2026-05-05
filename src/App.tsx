@@ -59,6 +59,8 @@ function App() {
             <Route element={<DatabasePage />} path='/database/posses' />
             <Route element={<DatabasePage />} path='/database/covenants/:covenantSlug' />
             <Route element={<DatabasePage />} path='/database/covenants' />
+            <Route element={<DatabasePage />} path='/database/awakeners/:awakenerSlug' />
+            <Route element={<DatabasePage />} path='/database/awakeners/:awakenerSlug/:tabSlug' />
             <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug' />
             <Route element={<DatabasePage />} path='/database/awk/:awakenerSlug/:tabSlug' />
             <Route element={<TimelinePage />} path='/timeline' />

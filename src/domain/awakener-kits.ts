@@ -1,23 +1,13 @@
-import publicEnlightensFull from '@/data/public-v2/full/enlightens.json'
-import publicSkillsFull from '@/data/public-v2/full/skills.json'
-import publicTalentsFull from '@/data/public-v2/full/talents.json'
-import publicAwakenersLite from '@/data/public-v2/lite/awakeners.json'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {awakenerKitsDatasetSchema, type AwakenerKitRecord} from './awakener-source-schema'
+import {numericAwakenerId} from './public-v3-awakener-record-adapters'
 
 interface PublicOwnedRecord {
   id: string
   ownerAwakenerId: string
   slot?: string
   family?: string
-}
-
-interface PublicAwakenerEnvelope {
-  records: {id: string; numericId: number}[]
-}
-
-interface PublicOwnedEnvelope {
-  records: PublicOwnedRecord[]
 }
 
 let awakenerKitsCache: AwakenerKitRecord[] | null = null
@@ -39,9 +29,9 @@ function optionalOwnedRecord(
 }
 
 function adaptPublicAwakenerToKit(record: {id: string; numericId: number}): AwakenerKitRecord {
-  const skills = (publicSkillsFull as unknown as PublicOwnedEnvelope).records
-  const talents = (publicTalentsFull as unknown as PublicOwnedEnvelope).records
-  const enlightens = (publicEnlightensFull as unknown as PublicOwnedEnvelope).records
+  const skills = getPublicCatalogRecords('skills') as unknown as PublicOwnedRecord[]
+  const talents = getPublicCatalogRecords('talents') as unknown as PublicOwnedRecord[]
+  const enlightens = getPublicCatalogRecords('enlightens') as unknown as PublicOwnedRecord[]
   const ownerTalents = talents.filter((entry) => entry.ownerAwakenerId === record.id)
   const passiveTalents = ownerTalents.filter((entry) => entry.family === 'passive')
 
@@ -88,9 +78,13 @@ export function getAwakenerKits(): AwakenerKitRecord[] {
   }
 
   awakenerKitsCache = awakenerKitsDatasetSchema.parse(
-    (publicAwakenersLite as unknown as PublicAwakenerEnvelope).records.map(
-      adaptPublicAwakenerToKit,
-    ),
+    getPublicCatalogRecords('awakeners')
+      .map((record) => ({
+        id: record.id,
+        numericId:
+          typeof record.numericId === 'number' ? record.numericId : numericAwakenerId(record.id),
+      }))
+      .map(adaptPublicAwakenerToKit),
   )
   return awakenerKitsCache
 }

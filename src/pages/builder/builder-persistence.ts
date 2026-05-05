@@ -8,7 +8,7 @@ import {
   migrateWheelIdV1ToV2,
   POSSE_ID_V1_TO_V2,
   WHEEL_ID_V1_TO_V2,
-} from '@/domain/persistence-id-migration.v2'
+} from '@/domain/persistence-id-migration'
 import {getPosses} from '@/domain/posses'
 import {
   safeStorageRead,

@@ -1,4 +1,8 @@
-import publicPossesFull from '@/data/public-v2/full/posses.json'
+import {
+  resolvePublicAsset,
+  resolvePublicEntityAsset,
+} from '@/data-access/public-data/assetRepository'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import type {DescriptionArg} from './awakener-source-schema'
 
@@ -16,18 +20,41 @@ export interface PosseFullV2Record {
   lore?: string
 }
 
-interface PublicPosseEnvelope {
-  records: PosseFullV2Record[]
+interface PublicPosseRecord {
+  id: string
+  name: string
+  realm: string
+  ownerAwakenerId?: string
+  ownerAwakenerName?: string
+  descriptionTemplate: string
+  descriptionArgs: Record<string, DescriptionArg>
+  lore?: string
 }
 
 let possesFullV2Cache: PosseFullV2Record[] | null = null
+
+function getPossePublicAssetId(posseId: string, slot: string): string | undefined {
+  const assetIndexId = resolvePublicEntityAsset(posseId, slot)
+  return assetIndexId ? resolvePublicAsset(assetIndexId)?.assetId : undefined
+}
+
+function adaptPublicPosse(record: PublicPosseRecord): PosseFullV2Record {
+  return {
+    ...record,
+    assetId: getPossePublicAssetId(record.id, 'icon') ?? '',
+    assetCrystalId: getPossePublicAssetId(record.id, 'crystal'),
+    assetBadgeId: getPossePublicAssetId(record.id, 'badge'),
+  }
+}
 
 export function getPossesFullV2(): PosseFullV2Record[] {
   if (possesFullV2Cache) {
     return possesFullV2Cache
   }
 
-  possesFullV2Cache = (publicPossesFull as PublicPosseEnvelope).records
+  possesFullV2Cache = (getPublicRecordSnapshots('posses') as unknown as PublicPosseRecord[]).map(
+    adaptPublicPosse,
+  )
   return possesFullV2Cache
 }
 

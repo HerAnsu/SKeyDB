@@ -1,6 +1,6 @@
 import {z} from 'zod'
 
-import gameplayMathMetadataJson from '@/data/public-v2/metadata/gameplay-math.json'
+import {getPublicGameplayMathMetadata} from '@/data-access/public-data/gameplayMetadataRepository'
 
 const nonEmptyStringSchema = z.string().trim().min(1)
 
@@ -71,14 +71,16 @@ const wheelMainstatScalingSchema = z
 
 const gameplayMathMetadataSchema = z
   .object({
-    schemaVersion: z.literal(1),
+    schemaVersion: z.union([z.literal(1), z.literal(3)]),
     accountLevelCurve: accountLevelCurveSchema,
     wheelMainstatScaling: wheelMainstatScalingSchema,
     formulas: z.record(z.string(), z.unknown()),
   })
   .strict()
 
-export const gameplayMathMetadata = gameplayMathMetadataSchema.parse(gameplayMathMetadataJson)
+export const gameplayMathMetadata = gameplayMathMetadataSchema.parse(
+  getPublicGameplayMathMetadata(),
+)
 
 export type GameplayMathMetadata = typeof gameplayMathMetadata
 export type WheelMainstatScalingMetadata = GameplayMathMetadata['wheelMainstatScaling']

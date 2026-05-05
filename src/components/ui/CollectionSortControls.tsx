@@ -132,14 +132,14 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
           ) : null}
           <select
             aria-label={sortSelectAriaLabel}
-            className={`flex-1 rounded-[2px] ${resolvedControlClassName}`}
+            className={`collection-sort-select flex-1 rounded-[2px] ${resolvedControlClassName}`}
             onChange={(event) => {
               onSortKeyChange(event.target.value as TSortKey)
             }}
             value={activeSortKey}
           >
             {resolvedSortOptions.map((option) => (
-              <option key={option} value={option}>
+              <option className='collection-sort-select__option' key={option} value={option}>
                 {getSortLabelOverride ? getSortLabelOverride(option) : getSortLabel(option)}
               </option>
             ))}

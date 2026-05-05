@@ -1,9 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
-import publicAwakeners from '../data/public-v2/lite/awakeners.json'
-import publicCovenants from '../data/public-v2/lite/covenants.json'
-import publicPosses from '../data/public-v2/lite/posses.json'
-import publicWheels from '../data/public-v2/lite/wheels.json'
+import {getPublicCatalogRecords} from '@/data-access/public-data/repository'
+
 import {getAwakeners} from './awakeners'
 import {getCovenants} from './covenants'
 import frozenContract from './persistence-contract.v1.json'
@@ -55,10 +53,6 @@ interface StandardCodeContract {
   covenants: StandardCodeEntry[]
 }
 
-interface PublicLiteRecords {
-  records: V2ContractEntry[]
-}
-
 function buildCurrentContract(): PersistenceContract {
   return {
     version: 1,
@@ -73,8 +67,8 @@ function buildCurrentContract(): PersistenceContract {
   }
 }
 
-function liteIds(lite: PublicLiteRecords): string[] {
-  return lite.records.map((record) => record.id)
+function publicCatalogIds(scope: Parameters<typeof getPublicCatalogRecords>[0]): string[] {
+  return getPublicCatalogRecords(scope).map((record) => record.id)
 }
 
 function contractIds(records: V2ContractEntry[]): string[] {
@@ -103,7 +97,7 @@ describe('persistence contract', () => {
     expect(current.posses.map((entry) => entry.id)).toEqual(contractIds(expectedV2.posses))
   })
 
-  it('keeps V2 persistence contract ids canonical', () => {
+  it('keeps current persistence contract ids canonical against public V3 catalogs', () => {
     const contract = v2Contract as {
       version: number
       awakeners: V2ContractEntry[]
@@ -121,10 +115,10 @@ describe('persistence contract', () => {
     expect(contract.wheels.every((entry) => /^wheel-\d{4}$/.test(entry.id))).toBe(true)
     expect(contract.covenants.every((entry) => /^covenant-\d{4}$/.test(entry.id))).toBe(true)
     expect(contract.posses.every((entry) => /^posse-\d{4}$/.test(entry.id))).toBe(true)
-    expect(contractIds(contract.awakeners)).toEqual(liteIds(publicAwakeners))
-    expect(contractIds(contract.wheels)).toEqual(liteIds(publicWheels))
-    expect(contractIds(contract.covenants)).toEqual(liteIds(publicCovenants))
-    expect(contractIds(contract.posses)).toEqual(liteIds(publicPosses))
+    expect(contractIds(contract.awakeners)).toEqual(publicCatalogIds('awakeners'))
+    expect(contractIds(contract.wheels)).toEqual(publicCatalogIds('wheels'))
+    expect(contractIds(contract.covenants)).toEqual(publicCatalogIds('covenants'))
+    expect(contractIds(contract.posses)).toEqual(publicCatalogIds('posses'))
   })
 
   it('preserves V1 standard-code codec indices as unique byte meanings', () => {

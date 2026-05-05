@@ -1,12 +1,14 @@
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
+import type {PublicDataScope, PublicRecord} from '@/data-access/public-data/contract'
+import {loadPublicRecord} from '@/data-access/public-data/recordRepository'
+
 import {type AwakenerFullV2Record} from './awakeners-full-v2'
 import {type CovenantFullV2Record} from './covenants-full-v2'
 import {type PosseFullV2Record} from './posses-full-v2'
-import {loadPublicV2Envelope, loadPublicV2FullRecord} from './public-v2-loaders'
-import {type PublicV2Record} from './public-v2-schema'
 import {buildWheelMainstatSeriesKey, type WheelMainstatKey} from './wheel-mainstat-scaling'
 import {type WheelFullV2Record} from './wheels-full-v2'
 
-type PublicV2AwakenerRecord = PublicV2Record<'awakeners'> & {
+type PublicV3AwakenerRecord = PublicRecord & {
   aliases?: string[]
   assets?: {portraitKey?: string}
   baseStatsLv1?: Partial<Record<string, number>>
@@ -16,31 +18,31 @@ type PublicV2AwakenerRecord = PublicV2Record<'awakeners'> & {
   substatsLv1?: Partial<Record<string, number>>
   substatScaling?: Partial<Record<string, number>>
 }
-type PublicV2DerivedSkillRecord = PublicV2Record<'derived-skills'> & {
+type PublicV3DerivedSkillRecord = PublicRecord & {
   cardKeywords?: unknown[]
   childDerivedSkillIds?: string[]
   ownerAwakenerId?: string
-  upgrades?: PublicV2UpgradeEntry[]
+  upgrades?: PublicV3UpgradeEntry[]
 }
-type PublicV2EnlightenRecord = PublicV2Record<'enlightens'> & {
+type PublicV3EnlightenRecord = PublicRecord & {
   ownerAwakenerId?: string
   slot?: string
 }
-type PublicV2OverlayRecord = PublicV2Record<'overlays'> & {
+type PublicV3OverlayRecord = PublicRecord & {
   ownerAwakenerId?: string
-  upgrades?: PublicV2UpgradeEntry[]
+  upgrades?: PublicV3UpgradeEntry[]
 }
-type PublicV2SkillRecord = PublicV2Record<'skills'> & {
+type PublicV3SkillRecord = PublicRecord & {
   ownerAwakenerId?: string
   slot?: string
-  upgrades?: PublicV2UpgradeEntry[]
+  upgrades?: PublicV3UpgradeEntry[]
 }
-type PublicV2TalentRecord = PublicV2Record<'talents'> & {
+type PublicV3TalentRecord = PublicRecord & {
   family?: string
   maxLevel?: number
   ownerAwakenerId?: string
 }
-type PublicV2WheelRecord = PublicV2Record<'wheels'> & {
+type PublicV3WheelRecord = PublicRecord & {
   aliases?: string[]
   mainstatKey: string
   mainstatSeriesKey?: string
@@ -50,7 +52,7 @@ type PublicV2WheelRecord = PublicV2Record<'wheels'> & {
   rarity: string
   searchTags?: string[]
 }
-interface PublicV2UpgradeEntry {
+interface PublicV3UpgradeEntry {
   id?: string
   upgraderId?: string
   upgraderType?: string
@@ -104,7 +106,7 @@ function isPublicCovenantId(id: string): boolean {
   return /^covenant-\d{4}$/.test(id)
 }
 
-async function resolvePublicAwakenerId(awakenerId: string | number): Promise<string | undefined> {
+function resolvePublicAwakenerId(awakenerId: string | number): string | undefined {
   if (typeof awakenerId === 'string' && isPublicAwakenerId(awakenerId)) {
     return awakenerId
   }
@@ -115,8 +117,7 @@ async function resolvePublicAwakenerId(awakenerId: string | number): Promise<str
     return undefined
   }
 
-  const envelope = await loadPublicV2Envelope('lite', 'awakeners')
-  return envelope.records.find((record) => record.numericId === numericId)?.id
+  return getPublicCatalogRecords('awakeners').find((record) => record.numericId === numericId)?.id
 }
 
 function numericAwakenerId(publicAwakenerId: string): number {
@@ -129,7 +130,7 @@ function formatPublicStatValue(key: string, value: number): string {
   return `${String(normalizedValue)}${SUBSTAT_PERCENT_KEYS.has(key) ? '%' : ''}`
 }
 
-function adaptPublicV2AwakenerStats(record: PublicV2AwakenerRecord) {
+function adaptPublicV2AwakenerStats(record: PublicV3AwakenerRecord) {
   const primaryStats = record.baseStatsLv1 ?? {}
   const substats = record.substatsLv1 ?? {}
   const substatScaling = record.substatScaling ?? {}
@@ -150,7 +151,7 @@ function adaptPublicV2AwakenerStats(record: PublicV2AwakenerRecord) {
   }
 }
 
-function adaptPublicV2SubstatScaling(record: PublicV2AwakenerRecord) {
+function adaptPublicV2SubstatScaling(record: PublicV3AwakenerRecord) {
   return Object.fromEntries(
     Object.entries(record.substatScaling ?? {}).flatMap(([key, value]) =>
       value === undefined || value === 0 ? [] : [[key, formatPublicStatValue(key, value)]],
@@ -182,59 +183,98 @@ function requireSlotRecord<T extends {id: string; slot?: string}>(
 }
 
 function getTalentByFamily(
-  records: PublicV2TalentRecord[],
+  records: PublicV3TalentRecord[],
   family: string,
-): PublicV2TalentRecord | undefined {
+): PublicV3TalentRecord | undefined {
   return records.find((record) => record.family === family)
 }
 
-function adaptPublicV2CardRecord(record: PublicV2SkillRecord, ownerPublicId: string) {
+function skillKindFromPublicSlot(slot: string | undefined): string {
+  switch (slot) {
+    case 'Rouse':
+      return 'rouse'
+    case 'Strike':
+      return 'strike'
+    case 'Defense':
+      return 'defense'
+    case 'Skill1':
+    case 'Skill2':
+      return 'command'
+    case 'Exalt':
+      return 'exalt'
+    case 'OverExalt':
+      return 'over_exalt'
+    default:
+      return 'other'
+  }
+}
+
+function adaptPublicV2CardRecord(record: PublicV3SkillRecord, ownerPublicId: string) {
   return withNumericOwner({
     ...record,
+    kind: skillKindFromPublicSlot(record.slot),
+    displayName: record.name,
     ownerAwakenerId: ownerPublicId,
     variants: [],
   })
 }
 
-function adaptPublicV2DerivedRecord(record: PublicV2DerivedSkillRecord) {
+function adaptPublicV2DerivedRecord(record: PublicV3DerivedSkillRecord) {
   return withNumericOwner({
     ...record,
+    displayName: record.name,
     childDerivedSkillIds: record.childDerivedSkillIds ?? [],
     cardKeywords: record.cardKeywords ?? [],
     variants: [],
   })
 }
 
-function adaptPublicV2TalentRecord(record: PublicV2TalentRecord) {
+function adaptPublicV2TalentRecord(record: PublicV3TalentRecord) {
   return withNumericOwner({
     ...record,
+    displayName: record.name,
     hasLevelScaledDescription: record.maxLevel !== undefined,
   })
 }
 
-function adaptPublicV2EnlightenRecord(record: PublicV2EnlightenRecord) {
-  return withNumericOwner(record)
+function adaptPublicV2EnlightenRecord(record: PublicV3EnlightenRecord) {
+  return withNumericOwner({
+    ...record,
+    displayName: record.name,
+  })
+}
+
+function adaptPublicV2OverlayRecord(record: PublicV3OverlayRecord) {
+  return withNumericOwner({
+    ...record,
+    displayName: record.name,
+    aliases: record.aliases ?? [],
+  })
+}
+
+async function loadPublicRecordsByIds<TRecord extends PublicRecord>(
+  scope: PublicDataScope,
+  ids: string[] | undefined,
+): Promise<TRecord[]> {
+  const records = await Promise.all((ids ?? []).map((id) => loadPublicRecord(scope, id)))
+  return records.filter((record): record is TRecord => Boolean(record))
 }
 
 async function loadAwakenerOwnedRecords(publicAwakenerId: string) {
-  const [skills, talents, enlightens, derivedSkills, overlays] = await Promise.all([
-    loadPublicV2Envelope('full', 'skills'),
-    loadPublicV2Envelope('full', 'talents'),
-    loadPublicV2Envelope('full', 'enlightens'),
-    loadPublicV2Envelope('full', 'derived-skills'),
-    loadPublicV2Envelope('full', 'overlays'),
-  ])
-
-  const ownerMatches = (record: {ownerAwakenerId?: string}): boolean =>
-    record.ownerAwakenerId === publicAwakenerId
-
-  const ownedSkills = (skills.records as PublicV2SkillRecord[]).filter(ownerMatches)
-  const ownedTalents = (talents.records as PublicV2TalentRecord[]).filter(ownerMatches)
-  const ownedEnlightens = (enlightens.records as PublicV2EnlightenRecord[]).filter(ownerMatches)
-  const ownedDerivedSkills = (derivedSkills.records as PublicV2DerivedSkillRecord[]).filter(
-    ownerMatches,
-  )
-  const ownedOverlays = (overlays.records as PublicV2OverlayRecord[]).filter(ownerMatches)
+  const {getPublicRelationshipsIndex} =
+    await import('@/data-access/public-data/relationshipRepository')
+  const relationships = getPublicRelationshipsIndex().forward[publicAwakenerId] ?? {}
+  const [ownedSkills, ownedTalents, ownedEnlightens, ownedDerivedSkills, ownedOverlays] =
+    await Promise.all([
+      loadPublicRecordsByIds<PublicV3SkillRecord>('skills', relationships.ownedSkills),
+      loadPublicRecordsByIds<PublicV3TalentRecord>('talents', relationships.ownedTalents),
+      loadPublicRecordsByIds<PublicV3EnlightenRecord>('enlightens', relationships.ownedEnlightens),
+      loadPublicRecordsByIds<PublicV3DerivedSkillRecord>(
+        'derived-skills',
+        relationships.ownedDerivedSkills,
+      ),
+      loadPublicRecordsByIds<PublicV3OverlayRecord>('overlays', relationships.ownedOverlays),
+    ])
 
   return {
     skills: ownedSkills,
@@ -246,7 +286,7 @@ async function loadAwakenerOwnedRecords(publicAwakenerId: string) {
 }
 
 async function adaptPublicV2AwakenerRecord(
-  record: PublicV2AwakenerRecord,
+  record: PublicV3AwakenerRecord,
 ): Promise<AwakenerFullV2Record> {
   const ownedRecords = await loadAwakenerOwnedRecords(record.id)
   const cards = {
@@ -342,13 +382,13 @@ async function adaptPublicV2AwakenerRecord(
         : undefined,
     },
     derivedSkills: ownedRecords.derivedSkills.map(adaptPublicV2DerivedRecord),
-    overlays: ownedRecords.overlays.map(withNumericOwner),
+    overlays: ownedRecords.overlays.map(adaptPublicV2OverlayRecord),
   }
 
   return adapted as unknown as AwakenerFullV2Record
 }
 
-function adaptPublicV2WheelRecord(record: PublicV2WheelRecord): WheelFullV2Record {
+function adaptPublicV2WheelRecord(record: PublicV3WheelRecord): WheelFullV2Record {
   const mainstatKey = record.mainstatKey as WheelMainstatKey
   const rarity = record.rarity as WheelFullV2Record['rarity']
   const adapted = {
@@ -365,7 +405,7 @@ function adaptPublicV2WheelRecord(record: PublicV2WheelRecord): WheelFullV2Recor
 export async function loadPublicV2AwakenerFullById(
   awakenerId: string | number,
 ): Promise<AwakenerFullV2Record | undefined> {
-  const publicId = await resolvePublicAwakenerId(awakenerId)
+  const publicId = resolvePublicAwakenerId(awakenerId)
   if (!publicId) {
     return undefined
   }
@@ -375,8 +415,8 @@ export async function loadPublicV2AwakenerFullById(
     return cachedPromise
   }
 
-  const recordPromise = loadPublicV2FullRecord('awakeners', publicId).then((record) =>
-    record ? adaptPublicV2AwakenerRecord(record as PublicV2AwakenerRecord) : undefined,
+  const recordPromise = loadPublicRecord('awakeners', publicId).then((record) =>
+    record ? adaptPublicV2AwakenerRecord(record as PublicV3AwakenerRecord) : undefined,
   )
   awakenerFullByIdPromises.set(publicId, recordPromise)
   return recordPromise
@@ -394,8 +434,8 @@ export async function loadPublicV2WheelFullById(
     return cachedPromise
   }
 
-  const recordPromise = loadPublicV2FullRecord('wheels', wheelId).then((record) =>
-    record ? adaptPublicV2WheelRecord(record as PublicV2WheelRecord) : undefined,
+  const recordPromise = loadPublicRecord('wheels', wheelId).then((record) =>
+    record ? adaptPublicV2WheelRecord(record as PublicV3WheelRecord) : undefined,
   )
   wheelFullByIdPromises.set(wheelId, recordPromise)
   return recordPromise
@@ -413,7 +453,7 @@ export async function loadPublicV2PosseFullById(
     return cachedPromise
   }
 
-  const recordPromise = loadPublicV2FullRecord('posses', posseId).then((record) =>
+  const recordPromise = loadPublicRecord('posses', posseId).then((record) =>
     record ? (record as unknown as PosseFullV2Record) : undefined,
   )
   posseFullByIdPromises.set(posseId, recordPromise)
@@ -432,7 +472,7 @@ export async function loadPublicV2CovenantFullById(
     return cachedPromise
   }
 
-  const recordPromise = loadPublicV2FullRecord('covenants', covenantId).then((record) =>
+  const recordPromise = loadPublicRecord('covenants', covenantId).then((record) =>
     record ? (record as unknown as CovenantFullV2Record) : undefined,
   )
   covenantFullByIdPromises.set(covenantId, recordPromise)

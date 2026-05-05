@@ -1,11 +1,12 @@
 import {describe, expect, it} from 'vitest'
 
+import {loadPublicRecord} from '@/data-access/public-data/repository'
+
 import {loadPublicV2AwakenerFullById} from './public-v2-detail-loaders'
-import {loadPublicV2FullRecord} from './public-v2-loaders'
 
 describe('public-v2-detail-loaders', () => {
   it('loads individual records from public V2 chunks by canonical id', async () => {
-    const publicRecord = await loadPublicV2FullRecord('awakeners', 'awakener-0001')
+    const publicRecord = await loadPublicRecord('awakeners', 'awakener-0001')
 
     await expect(loadPublicV2AwakenerFullById('awakener-0001')).resolves.toMatchObject({
       id: publicRecord?.numericId,

@@ -1,6 +1,7 @@
 import Fuse from 'fuse.js'
 
 import type {Posse} from './posses'
+import {getPublicSearchSupplementalValues} from './public-search-values'
 import {getRealmLabel} from './realms'
 import {
   getBestSearchFieldMatch,
@@ -94,7 +95,11 @@ function getIndexedPosses(posses: Posse[]): IndexedPosseRecord[] {
   }
 
   const indexedPosses = posses.map((posse) => {
-    const supplementalValues = [posse.realm, ...getRealmLabels(posse)]
+    const supplementalValues = [
+      ...getPublicSearchSupplementalValues('posses', posse.id),
+      posse.realm,
+      ...getRealmLabels(posse),
+    ]
 
     return {
       posse,
@@ -142,7 +147,11 @@ function getPosseSearchPriority(
   const supplementalMatch =
     queryLength >= 3
       ? getBestSearchFieldMatch(
-          [record.posse.realm, ...getRealmLabels(record.posse)],
+          [
+            ...getPublicSearchSupplementalValues('posses', record.posse.id),
+            record.posse.realm,
+            ...getRealmLabels(record.posse),
+          ],
           normalizedQuery,
         )
       : null

@@ -1,26 +1,21 @@
 import type {RefObject} from 'react'
 
+import {
+  getPosseDatabaseRealmFilterLabel,
+  POSSE_DATABASE_REALM_FILTER_IDS,
+  type PosseDatabaseRealmFilterId,
+} from '@/domain/simple-artifact-database-browse-state'
+
 import {CatalogChipFilterRow} from './DatabaseChipPrimitives'
 import {DatabaseSearchInput} from './DatabaseSearchInput'
 
-export type PosseRealmFilter =
-  | 'ALL'
-  | 'FADED_LEGACY'
-  | 'AEQUOR'
-  | 'CARO'
-  | 'CHAOS'
-  | 'ULTRA'
-  | 'OTHER'
+export type PosseRealmFilter = PosseDatabaseRealmFilterId
 
-const POSSE_REALM_OPTIONS: {id: PosseRealmFilter; label: string}[] = [
-  {id: 'ALL', label: 'All'},
-  {id: 'FADED_LEGACY', label: 'Faded Legacy'},
-  {id: 'AEQUOR', label: 'Aequor'},
-  {id: 'CARO', label: 'Caro'},
-  {id: 'CHAOS', label: 'Chaos'},
-  {id: 'ULTRA', label: 'Ultra'},
-  {id: 'OTHER', label: 'Other'},
-]
+const POSSE_REALM_OPTIONS: {id: PosseRealmFilter; label: string}[] =
+  POSSE_DATABASE_REALM_FILTER_IDS.map((id) => ({
+    id,
+    label: getPosseDatabaseRealmFilterLabel(id),
+  }))
 
 interface PosseDatabaseFiltersProps {
   query: string

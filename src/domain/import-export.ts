@@ -9,7 +9,7 @@ import {
   migrateCovenantIdV1ToV2,
   migratePosseIdV1ToV2,
   migrateWheelIdV1ToV2,
-} from './persistence-id-migration.v2'
+} from './persistence-id-migration'
 import {getPosses} from './posses'
 import standardCodeContract from './standard-code-contract.v1.json'
 import {getWheels} from './wheels'

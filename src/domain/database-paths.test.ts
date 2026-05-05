@@ -47,12 +47,15 @@ function makeWheel(overrides: Partial<Wheel>): Wheel {
 
 describe('database paths', () => {
   it('builds a stable awakener detail path from canonical name', () => {
-    expect(buildDatabaseAwakenerPath(makeAwakener({name: 'helot: catena'}))).toBe(
-      '/database/awk/helot-catena',
-    )
-    expect(buildDatabaseAwakenerPath(makeAwakener({name: 'helot: catena'}), 'builds')).toBe(
-      '/database/awk/helot-catena/builds',
-    )
+    expect(
+      buildDatabaseAwakenerPath(makeAwakener({id: 'awakener-0019', name: 'helot: catena'})),
+    ).toBe('/database/awakeners/helot-catena')
+    expect(
+      buildDatabaseAwakenerPath(
+        makeAwakener({id: 'awakener-0019', name: 'helot: catena'}),
+        'builds',
+      ),
+    ).toBe('/database/awakeners/helot-catena/builds')
   })
 
   it('normalizes awakener names into shareable slugs', () => {

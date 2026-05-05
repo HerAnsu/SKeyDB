@@ -1,6 +1,10 @@
 import {z} from 'zod'
 
-import publicWheelsLite from '@/data/public-v2/lite/wheels.json'
+import {
+  resolvePublicAsset,
+  resolvePublicEntityAsset,
+} from '@/data-access/public-data/assetRepository'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {getMainstatByKey, WHEEL_MAINSTAT_KEYS, type WheelMainstatKey} from './mainstats'
 
@@ -9,34 +13,21 @@ export type WheelRealm = 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA' | 'NEUTRAL'
 
 const nonEmptyStringSchema = z.string().trim().min(1)
 
-const publicWheelsLiteSchema = z
+const publicV3WheelCatalogRecordSchema = z
   .object({
-    schemaVersion: z.number().int().positive(),
-    scope: z.literal('wheels'),
-    recordCount: z.number().int().nonnegative(),
-    records: z.array(
-      z.object({
-        id: z.string().regex(/^wheel-\d{4}$/),
-        assetId: nonEmptyStringSchema,
-        name: nonEmptyStringSchema,
-        rarity: z.enum(['SSR', 'SR', 'R', 'N']),
-        realm: z.enum(['AEQUOR', 'CARO', 'CHAOS', 'ULTRA', 'NEUTRAL', 'OTHER']),
-        ownerAwakenerId: z
-          .string()
-          .regex(/^awakener-\d{4}$/)
-          .optional(),
-        ownerAwakenerName: nonEmptyStringSchema.optional(),
-        mainstatKey: z.enum(WHEEL_MAINSTAT_KEYS),
-        lineupToken: nonEmptyStringSchema,
-      }),
-    ),
-    metadata: z.record(z.string(), z.unknown()).optional(),
+    id: z.string().regex(/^wheel-\d{4}$/),
+    name: nonEmptyStringSchema,
+    rarity: z.enum(['SSR', 'SR', 'R', 'N']),
+    realm: z.enum(['AEQUOR', 'CARO', 'CHAOS', 'ULTRA', 'NEUTRAL', 'OTHER']),
+    ownerAwakenerId: z
+      .string()
+      .regex(/^awakener-\d{4}$/)
+      .optional(),
+    ownerAwakenerName: nonEmptyStringSchema.optional(),
+    mainstatKey: z.enum(WHEEL_MAINSTAT_KEYS),
+    lineupToken: nonEmptyStringSchema,
   })
-  .strict()
-  .refine((envelope) => envelope.recordCount === envelope.records.length, {
-    message: 'recordCount must match records.length',
-    path: ['recordCount'],
-  })
+  .loose()
 
 export interface Wheel {
   id: string
@@ -53,11 +44,16 @@ export interface Wheel {
   lineupToken: string
 }
 
-const parsedWheels: Wheel[] = publicWheelsLiteSchema
-  .parse(publicWheelsLite)
-  .records.map((wheel) => ({
+function getWheelPublicAssetId(wheelId: string): string {
+  const assetIndexId = resolvePublicEntityAsset(wheelId, 'icon')
+  return assetIndexId ? (resolvePublicAsset(assetIndexId)?.assetId ?? 'TBD') : 'TBD'
+}
+
+const parsedWheels: Wheel[] = getPublicCatalogRecords('wheels')
+  .map((record) => publicV3WheelCatalogRecordSchema.parse(record))
+  .map((wheel) => ({
     id: wheel.id,
-    assetId: wheel.assetId,
+    assetId: getWheelPublicAssetId(wheel.id),
     name: wheel.name,
     rarity: wheel.rarity,
     realm: wheel.realm === 'OTHER' ? 'NEUTRAL' : wheel.realm,

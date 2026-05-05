@@ -1,4 +1,7 @@
-import publicPossesLite from '@/data/public-v2/lite/posses.json'
+import {
+  resolvePublicAsset,
+  resolvePublicEntityAsset,
+} from '@/data-access/public-data/assetRepository'
 
 const posseIconAssets = import.meta.glob<string>('../assets/posse/Icon/*.webp', {
   eager: true,
@@ -31,24 +34,13 @@ const posseFullArtAssetByAssetId = new Map(
   ]),
 )
 
-const posseIconAssetIdByPublicId = new Map(
-  publicPossesLite.records.flatMap((posse) => {
-    return posse.assetId ? [[posse.id, posse.assetId] as const] : []
-  }),
-)
-const posseBadgeAssetIdByPublicId = new Map(
-  publicPossesLite.records.flatMap((posse) => {
-    return posse.assetBadgeId ? [[posse.id, posse.assetBadgeId] as const] : []
-  }),
-)
-const posseFullArtAssetIdByPublicId = new Map(
-  publicPossesLite.records.flatMap((posse) => {
-    return posse.assetCrystalId ? [[posse.id, posse.assetCrystalId] as const] : []
-  }),
-)
+function getPublicAssetFileStem(posseId: string, slot: string): string | undefined {
+  const assetIndexId = resolvePublicEntityAsset(posseId, slot)
+  return assetIndexId ? resolvePublicAsset(assetIndexId)?.assetId : undefined
+}
 
 export function getPosseAssetById(posseId: string): string | undefined {
-  const assetId = posseIconAssetIdByPublicId.get(posseId)
+  const assetId = getPublicAssetFileStem(posseId, 'icon')
   if (!assetId) {
     return undefined
   }
@@ -56,7 +48,7 @@ export function getPosseAssetById(posseId: string): string | undefined {
 }
 
 export function getPosseBadgeAssetById(posseId: string): string | undefined {
-  const assetId = posseBadgeAssetIdByPublicId.get(posseId)
+  const assetId = getPublicAssetFileStem(posseId, 'badge')
   if (!assetId) {
     return undefined
   }
@@ -64,7 +56,7 @@ export function getPosseBadgeAssetById(posseId: string): string | undefined {
 }
 
 export function getPosseFullArtAssetById(posseId: string): string | undefined {
-  const assetId = posseFullArtAssetIdByPublicId.get(posseId)
+  const assetId = getPublicAssetFileStem(posseId, 'crystal')
   if (!assetId) {
     return undefined
   }

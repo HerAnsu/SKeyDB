@@ -1,6 +1,10 @@
 import {z} from 'zod'
 
-import publicRelicsFull from '@/data/public-v2/full/relics.json'
+import {
+  resolvePublicAsset,
+  resolvePublicEntityAsset,
+} from '@/data-access/public-data/assetRepository'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {descriptionArgsSchema} from './awakener-source-schema'
 import {getAwakeners} from './awakeners'
@@ -8,33 +12,20 @@ import {resolveDescriptionTemplate} from './description-args'
 
 const nonEmptyStringSchema = z.string().trim().min(1)
 
-const publicRelicsFullSchema = z
+const publicRelicRecordSchema = z
   .object({
-    schemaVersion: z.number().int().positive(),
-    scope: z.literal('relics'),
-    recordCount: z.number().int().nonnegative(),
-    records: z.array(
-      z.object({
-        id: z.string().regex(/^relic-\d{4}$/),
-        kind: z.enum(['PORTRAIT', 'GENERIC']),
-        name: nonEmptyStringSchema,
-        assetId: nonEmptyStringSchema,
-        ownerAwakenerId: z
-          .string()
-          .regex(/^awakener-\d{4}$/)
-          .optional(),
-        ownerAwakenerName: nonEmptyStringSchema.optional(),
-        descriptionTemplate: z.string(),
-        descriptionArgs: descriptionArgsSchema,
-      }),
-    ),
-    metadata: z.record(z.string(), z.unknown()).optional(),
+    id: z.string().regex(/^relic-\d{4}$/),
+    relicType: nonEmptyStringSchema.optional(),
+    name: nonEmptyStringSchema,
+    ownerAwakenerId: z
+      .string()
+      .regex(/^awakener-\d{4}$/)
+      .optional(),
+    ownerAwakenerName: nonEmptyStringSchema.optional(),
+    descriptionTemplate: z.string(),
+    descriptionArgs: descriptionArgsSchema,
   })
-  .strict()
-  .refine((envelope) => envelope.recordCount === envelope.records.length, {
-    message: 'recordCount must match records.length',
-    path: ['recordCount'],
-  })
+  .loose()
 
 function renderRelicDescription(
   descriptionTemplate: string,
@@ -62,17 +53,19 @@ export type PortraitRelic = Relic & {
   ownerAwakenerId: string
 }
 
-const parsedRelics: Relic[] = publicRelicsFullSchema.parse(publicRelicsFull).records.map(
-  (relic): Relic => ({
-    id: relic.id,
-    kind: relic.kind,
-    ownerAwakenerId: relic.ownerAwakenerId,
-    ownerAwakenerName: relic.ownerAwakenerName,
-    assetId: relic.assetId,
-    name: relic.name,
-    description: renderRelicDescription(relic.descriptionTemplate, relic.descriptionArgs),
-  }),
-)
+const parsedRelics: Relic[] = getPublicRecordSnapshots('relics')
+  .map((record) => publicRelicRecordSchema.parse(record))
+  .map(
+    (relic): Relic => ({
+      id: relic.id,
+      kind: relic.relicType === 'DIMENSIONAL_IMAGE' ? 'PORTRAIT' : 'GENERIC',
+      ownerAwakenerId: relic.ownerAwakenerId,
+      ownerAwakenerName: relic.ownerAwakenerName,
+      assetId: getRelicPublicAssetId(relic.id),
+      name: relic.name,
+      description: renderRelicDescription(relic.descriptionTemplate, relic.descriptionArgs),
+    }),
+  )
 
 const portraitRelics: PortraitRelic[] = parsedRelics.filter(
   (relic): relic is PortraitRelic => relic.kind === 'PORTRAIT' && !!relic.ownerAwakenerId,
@@ -106,6 +99,11 @@ function assertPortraitRelicsLinkedToKnownAwakeners(relics: PortraitRelic[]) {
 
 assertPortraitRelicsLinkedToKnownAwakeners(portraitRelics)
 const portraitRelicByAwakenerId = buildPortraitRelicByAwakenerIdMap(portraitRelics)
+
+function getRelicPublicAssetId(relicId: string): string {
+  const assetIndexId = resolvePublicEntityAsset(relicId, 'icon')
+  return assetIndexId ? (resolvePublicAsset(assetIndexId)?.assetId ?? '') : ''
+}
 
 export function getRelics(): Relic[] {
   return parsedRelics

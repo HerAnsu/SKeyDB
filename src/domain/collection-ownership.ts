@@ -7,7 +7,7 @@ import {
   migrateWheelIdV1ToV2,
   POSSE_ID_V1_TO_V2,
   WHEEL_ID_V1_TO_V2,
-} from './persistence-id-migration.v2'
+} from './persistence-id-migration'
 import {getPosses} from './posses'
 import {safeStorageRead, safeStorageRemove, safeStorageWrite, type StorageLike} from './storage'
 import {getWheels} from './wheels'

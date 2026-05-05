@@ -1,9 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
-import publicAwakeners from '../data/public-v2/lite/awakeners.json'
-import publicCovenants from '../data/public-v2/lite/covenants.json'
-import publicPosses from '../data/public-v2/lite/posses.json'
-import publicWheels from '../data/public-v2/lite/wheels.json'
+import {getPublicCatalogRecords} from '@/data-access/public-data/repository'
+
 import v1Contract from './persistence-contract.v1.json'
 import v2Contract from './persistence-contract.v2.json'
 import {
@@ -19,8 +17,8 @@ import {
   WHEEL_ID_V1_TO_V2,
 } from './persistence-id-migration.v2'
 
-function publicIds(records: {records: {id: string}[]}): Set<string> {
-  return new Set(records.records.map((record) => record.id))
+function publicIds(scope: Parameters<typeof getPublicCatalogRecords>[0]): Set<string> {
+  return new Set(getPublicCatalogRecords(scope).map((record) => record.id))
 }
 
 function contractIds(records: {id: string}[]): Set<string> {
@@ -85,10 +83,10 @@ describe('persistence V1 to V2 id migration', () => {
     const contractWheelIds = contractIds(v2.wheels)
     const contractCovenantIds = contractIds(v2.covenants)
     const contractPosseIds = contractIds(v2.posses)
-    const awakenerIds = publicIds(publicAwakeners)
-    const wheelIds = publicIds(publicWheels)
-    const covenantIds = publicIds(publicCovenants)
-    const posseIds = publicIds(publicPosses)
+    const awakenerIds = publicIds('awakeners')
+    const wheelIds = publicIds('wheels')
+    const covenantIds = publicIds('covenants')
+    const posseIds = publicIds('posses')
 
     expect(Object.values(AWAKENER_ID_V1_TO_V2).every((id) => contractAwakenerIds.has(id))).toBe(
       true,

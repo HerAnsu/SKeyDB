@@ -1,7 +1,6 @@
 import {z} from 'zod'
 
-import publicAwakenersFull from '@/data/public-v2/full/awakeners.json'
-import publicAwakenersLite from '@/data/public-v2/lite/awakeners.json'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 const liteStatsSchema = z.object({
   CON: z.number(),
@@ -30,54 +29,35 @@ export type AwakenerLiteV2Record = z.infer<typeof awakenersLiteV2RecordSchema>
 let awakenersLiteV2Cache: AwakenerLiteV2Record[] | null = null
 
 interface PublicAwakenerLiteEnvelope {
-  records: {
-    id: string
-    numericId: number
-    name: string
-    ingameId?: string
-    faction: string
-    realm: string
-    rarity?: string
-    type?: string
-    assets?: {
-      portraitKey?: string
-      iconKey?: string
-    }
-    aliases?: string[]
-    searchTags?: string[]
-  }[]
+  id: string
+  numericId: number
+  name: string
+  ingameId?: string
+  faction: string
+  realm: string
+  rarity?: string
+  type?: string
+  route?: {
+    slug?: string
+  }
+  aliases?: string[]
+  searchTags?: string[]
+  baseStatsLv1: AwakenerLiteV2Record['stats']
 }
 
-interface PublicAwakenerFullEnvelope {
-  records: {
-    id: string
-    baseStatsLv1: AwakenerLiteV2Record['stats']
-  }[]
-}
-
-const publicFullById = new Map(
-  (publicAwakenersFull as PublicAwakenerFullEnvelope).records.map((record) => [record.id, record]),
-)
-
-function resolveCanonicalAwakenerName(record: PublicAwakenerLiteEnvelope['records'][number]) {
+function resolveCanonicalAwakenerName(record: PublicAwakenerLiteEnvelope) {
   const alias = record.aliases?.find((entry) => !entry.trim().startsWith('g-'))?.trim()
   if (alias) {
     return alias
   }
-  const portraitKey = record.assets?.portraitKey?.trim()
+  const portraitKey = record.route?.slug?.trim()
   if (portraitKey) {
     return portraitKey.replace(/-/g, ': ')
   }
   return record.name.trim().toLowerCase()
 }
 
-function adaptPublicAwakenerLite(
-  record: PublicAwakenerLiteEnvelope['records'][number],
-): AwakenerLiteV2Record {
-  const fullRecord = publicFullById.get(record.id)
-  if (!fullRecord) {
-    throw new Error(`Missing public V2 full awakener stats for "${record.id}".`)
-  }
+function adaptPublicAwakenerLite(record: PublicAwakenerLiteEnvelope): AwakenerLiteV2Record {
   const name = resolveCanonicalAwakenerName(record)
 
   return {
@@ -89,7 +69,7 @@ function adaptPublicAwakenerLite(
     rarity: record.rarity,
     type: record.type,
     aliases: Array.from(new Set([name, record.name, ...(record.aliases ?? [])])),
-    stats: fullRecord.baseStatsLv1,
+    stats: record.baseStatsLv1,
     tags: record.searchTags ?? [],
   }
 }
@@ -100,7 +80,9 @@ export function getAwakenersLiteV2(): AwakenerLiteV2Record[] {
   }
 
   awakenersLiteV2Cache = awakenersLiteV2DatasetSchema.parse(
-    (publicAwakenersLite as PublicAwakenerLiteEnvelope).records.map(adaptPublicAwakenerLite),
+    (getPublicCatalogRecords('awakeners') as unknown as PublicAwakenerLiteEnvelope[]).map(
+      adaptPublicAwakenerLite,
+    ),
   )
   return awakenersLiteV2Cache
 }

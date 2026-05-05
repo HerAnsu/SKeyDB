@@ -10,7 +10,7 @@ interface DatabaseEntityPathConfig {
 const DATABASE_ENTITY_PATH_CONFIG: Record<DatabaseEntityId, DatabaseEntityPathConfig> = {
   awakeners: {
     browsePath: '/database',
-    detailPathPrefix: '/database/awk',
+    detailPathPrefix: '/database/awakeners',
   },
   wheels: {
     browsePath: '/database/wheels',

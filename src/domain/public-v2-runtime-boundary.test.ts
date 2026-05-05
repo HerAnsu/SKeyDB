@@ -18,6 +18,7 @@ const runtimeSourceFiles = Object.keys(runtimeSourceModules)
   .filter((filePath) => !filePath.endsWith('.test.tsx'))
 
 const allowedPersistenceBridgeFiles = new Set([
+  'src/domain/persistence-id-migration.ts',
   'src/domain/persistence-id-migration.v2.ts',
   'src/domain/collection-ownership.ts',
   'src/pages/builder/builder-persistence.ts',
@@ -46,6 +47,22 @@ function readSource(filePath: string): string {
 }
 
 describe('public V2 runtime boundary', () => {
+  it('confines generated public V3 JSON imports to the public-data repository boundary', () => {
+    const offenders = runtimeSourceFiles.flatMap((filePath) => {
+      const normalizedPath = normalizePath(filePath)
+      if (normalizedPath.startsWith('src/data-access/public-data/')) {
+        return []
+      }
+
+      const source = readSource(filePath)
+      return source.includes('data/public-v3') || source.includes('@/data/public-v3')
+        ? [normalizedPath]
+        : []
+    })
+
+    expect(offenders).toEqual([])
+  })
+
   it('does not import old awakener or wheel database files outside the persistence bridge', () => {
     const forbiddenImportPatterns = [
       '@/data/awakeners',

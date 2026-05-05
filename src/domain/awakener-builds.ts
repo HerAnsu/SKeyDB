@@ -1,6 +1,6 @@
 import {z} from 'zod'
 
-import awakenerBuildEntriesJson from '@/data/public-v2/lite/awakener-builds.json'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {getAwakeners} from './awakeners'
 import {getCovenants, type Covenant} from './covenants'
@@ -51,20 +51,6 @@ const awakenerBuildEntrySchema = z.object({
   recommendedPosseIds: z.array(z.string().trim().min(1)).min(1).optional(),
   builds: z.array(awakenerBuildSchema).min(1),
 })
-
-const publicAwakenerBuildEntriesSchema = z
-  .object({
-    schemaVersion: z.number().int().positive(),
-    scope: z.literal('awakener-builds'),
-    recordCount: z.number().int().nonnegative(),
-    records: z.array(awakenerBuildEntrySchema),
-    metadata: z.record(z.string(), z.unknown()).optional(),
-  })
-  .strict()
-  .refine((envelope) => envelope.recordCount === envelope.records.length, {
-    message: 'recordCount must match records.length',
-    path: ['recordCount'],
-  })
 
 const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine((entries, ctx) => {
   const awakenerById = new Map(getAwakeners().map((awakener) => [awakener.id, awakener]))
@@ -244,8 +230,9 @@ export function getAwakenerBuildEntries(): AwakenerBuildEntry[] {
   if (awakenerBuildEntriesCache) {
     return awakenerBuildEntriesCache
   }
-  const envelope = publicAwakenerBuildEntriesSchema.parse(awakenerBuildEntriesJson)
-  awakenerBuildEntriesCache = awakenerBuildEntriesSchema.parse(envelope.records)
+  awakenerBuildEntriesCache = awakenerBuildEntriesSchema.parse(
+    getPublicCatalogRecords('awakener-builds'),
+  )
   return awakenerBuildEntriesCache
 }
 

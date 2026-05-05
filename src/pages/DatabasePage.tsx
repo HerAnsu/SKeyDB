@@ -1,4 +1,4 @@
-import {lazy, Suspense, useEffect, useMemo, useRef, useState} from 'react'
+import {lazy, Suspense, useEffect, useMemo, useRef} from 'react'
 
 import {useLocation, useNavigate} from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import {getCovenants, type Covenant} from '@/domain/covenants'
 import {searchCovenants} from '@/domain/covenants-search'
 import {DATABASE_SORT_OPTIONS, type DatabaseSortKey} from '@/domain/database-browse-state'
 import {buildDatabaseEntityBrowsePath, type DatabaseEntityId} from '@/domain/database-entity-paths'
+import {sanitizeDatabaseEntitySearch} from '@/domain/database-entity-search'
 import {
   buildDatabaseAwakenerPath,
   buildDatabaseCovenantBrowsePath,
@@ -39,6 +40,8 @@ import {
 
 import {
   buildAwakenerActiveFilterChips,
+  buildCovenantActiveFilterChips,
+  buildPosseActiveFilterChips,
   buildWheelActiveFilterChips,
 } from './database/database-active-filter-chips'
 import {DatabaseBrowseLayout} from './database/DatabaseBrowseLayout'
@@ -46,15 +49,15 @@ import {DatabaseFilters} from './database/DatabaseFilters'
 import {DatabaseGrid} from './database/DatabaseGrid'
 import {EntityViewControls} from './database/EntityViewControls'
 import {SimpleArtifactDetailModal} from './database/SimpleArtifactDetailModal'
-import {
-  CovenantDatabaseFilters,
-  PosseDatabaseFilters,
-  type PosseRealmFilter,
-} from './database/SimpleArtifactFilters'
+import {CovenantDatabaseFilters, PosseDatabaseFilters} from './database/SimpleArtifactFilters'
 import {CovenantGrid, PosseGrid} from './database/SimpleArtifactGrid'
 import {useDatabaseBrowseState} from './database/useDatabaseBrowseState'
 import {useDatabaseDetailRouteRecord} from './database/useDatabaseDetailRouteRecord'
 import {useDatabaseViewModel} from './database/useDatabaseViewModel'
+import {
+  useCovenantDatabaseBrowseState,
+  usePosseDatabaseBrowseState,
+} from './database/useSimpleArtifactDatabaseBrowseState'
 import {useWheelsDatabaseBrowseState} from './database/useWheelsDatabaseBrowseState'
 import {useWheelsDatabaseViewModel} from './database/useWheelsDatabaseViewModel'
 import {WheelDatabaseFilters} from './database/WheelDatabaseFilters'
@@ -156,7 +159,7 @@ function parseDatabaseRoute(pathname: string): {
   if (parts[1] === 'covenants') {
     return {covenantSlug: parts[2]}
   }
-  if (parts[1] === 'awk') {
+  if (parts[1] === 'awakeners' || parts[1] === 'awk') {
     return {awakenerSlug: parts[2], tabSlug: parts[3]}
   }
   return {}
@@ -167,18 +170,17 @@ export function DatabasePage() {
   const awakenerViewModel = useDatabaseViewModel(databaseAwakeners, awakenerBrowseState)
   const wheelBrowseState = useWheelsDatabaseBrowseState()
   const wheelViewModel = useWheelsDatabaseViewModel(databaseWheels, wheelBrowseState)
-  const [posseQuery, setPosseQuery] = useState('')
-  const [posseRealmFilter, setPosseRealmFilter] = useState<PosseRealmFilter>('ALL')
-  const [covenantQuery, setCovenantQuery] = useState('')
+  const posseBrowseState = usePosseDatabaseBrowseState()
+  const covenantBrowseState = useCovenantDatabaseBrowseState()
   const filteredPosses = useMemo(() => {
-    const searched = searchPosses(databasePosses, posseQuery)
-    return posseRealmFilter === 'ALL'
+    const searched = searchPosses(databasePosses, posseBrowseState.query)
+    return posseBrowseState.realmFilter === 'ALL'
       ? searched
-      : searched.filter((posse) => posse.realm === posseRealmFilter)
-  }, [posseQuery, posseRealmFilter])
+      : searched.filter((posse) => posse.realm === posseBrowseState.realmFilter)
+  }, [posseBrowseState.query, posseBrowseState.realmFilter])
   const filteredCovenants = useMemo(
-    () => searchCovenants(databaseCovenants, covenantQuery),
-    [covenantQuery],
+    () => searchCovenants(databaseCovenants, covenantBrowseState.query),
+    [covenantBrowseState.query],
   )
   const searchInputRef = useRef<HTMLInputElement | null>(null)
   const location = useLocation()
@@ -192,7 +194,22 @@ export function DatabasePage() {
   const selectedCovenant = findCovenantByDatabaseSlug(databaseCovenants, covenantSlug)
   const selectedTab = resolveDatabaseAwakenerTab(tabSlug) ?? 'overview'
   const activeEntity = getActiveDatabaseEntity(location.pathname)
+  const activeSearch = sanitizeDatabaseEntitySearch(activeEntity, location.search)
   const browsePath = buildDatabaseEntityBrowsePath(activeEntity)
+
+  useEffect(() => {
+    if (location.search === activeSearch) {
+      return
+    }
+
+    void navigate(
+      {
+        pathname: location.pathname,
+        search: activeSearch,
+      },
+      {replace: true},
+    )
+  }, [activeSearch, location.pathname, location.search, navigate])
 
   useGlobalSearchCapture({
     enabled: !selectedAwakener && !selectedWheel && !selectedPosse && !selectedCovenant,
@@ -201,9 +218,9 @@ export function DatabasePage() {
       if (activeEntity === 'wheels') {
         wheelBrowseState.appendSearchCharacter(character)
       } else if (activeEntity === 'posses') {
-        setPosseQuery((query) => `${query}${character}`)
+        posseBrowseState.appendSearchCharacter(character)
       } else if (activeEntity === 'covenants') {
-        setCovenantQuery((query) => `${query}${character}`)
+        covenantBrowseState.appendSearchCharacter(character)
       } else {
         awakenerBrowseState.appendSearchCharacter(character)
       }
@@ -212,9 +229,9 @@ export function DatabasePage() {
       if (activeEntity === 'wheels') {
         wheelBrowseState.removeSearchCharacter()
       } else if (activeEntity === 'posses') {
-        setPosseQuery((query) => query.slice(0, -1))
+        posseBrowseState.removeSearchCharacter()
       } else if (activeEntity === 'covenants') {
-        setCovenantQuery((query) => query.slice(0, -1))
+        covenantBrowseState.removeSearchCharacter()
       } else {
         awakenerBrowseState.removeSearchCharacter()
       }
@@ -223,9 +240,9 @@ export function DatabasePage() {
       if (activeEntity === 'wheels') {
         wheelBrowseState.clearQuery()
       } else if (activeEntity === 'posses') {
-        setPosseQuery('')
+        posseBrowseState.clearQuery()
       } else if (activeEntity === 'covenants') {
-        setCovenantQuery('')
+        covenantBrowseState.clearQuery()
       } else {
         awakenerBrowseState.clearQuery()
       }
@@ -237,48 +254,116 @@ export function DatabasePage() {
       void navigate(
         {
           pathname: buildDatabaseEntityBrowsePath('awakeners'),
-          search: location.search,
+          search: activeSearch,
         },
         {replace: true},
       )
     }
-  }, [awakenerSlug, location.search, navigate, selectedAwakener])
+  }, [activeSearch, awakenerSlug, navigate, selectedAwakener])
+
+  useEffect(() => {
+    if (!awakenerSlug || !selectedAwakener) {
+      return
+    }
+    const canonicalPath = buildDatabaseAwakenerPath(selectedAwakener, selectedTab)
+    if (location.pathname === canonicalPath) {
+      return
+    }
+    void navigate(
+      {
+        pathname: canonicalPath,
+        search: activeSearch,
+      },
+      {replace: true},
+    )
+  }, [activeSearch, awakenerSlug, location.pathname, navigate, selectedAwakener, selectedTab])
 
   useEffect(() => {
     if (wheelSlug && !selectedWheel) {
       void navigate(
         {
           pathname: buildDatabaseWheelBrowsePath(),
-          search: location.search,
+          search: activeSearch,
         },
         {replace: true},
       )
     }
-  }, [location.search, navigate, selectedWheel, wheelSlug])
+  }, [activeSearch, navigate, selectedWheel, wheelSlug])
+
+  useEffect(() => {
+    if (!wheelSlug || !selectedWheel) {
+      return
+    }
+    const canonicalPath = buildDatabaseWheelPath(selectedWheel)
+    if (location.pathname === canonicalPath) {
+      return
+    }
+    void navigate(
+      {
+        pathname: canonicalPath,
+        search: activeSearch,
+      },
+      {replace: true},
+    )
+  }, [activeSearch, location.pathname, navigate, selectedWheel, wheelSlug])
 
   useEffect(() => {
     if (posseSlug && !selectedPosse) {
       void navigate(
         {
           pathname: buildDatabasePosseBrowsePath(),
-          search: location.search,
+          search: activeSearch,
         },
         {replace: true},
       )
     }
-  }, [location.search, navigate, posseSlug, selectedPosse])
+  }, [activeSearch, navigate, posseSlug, selectedPosse])
+
+  useEffect(() => {
+    if (!posseSlug || !selectedPosse) {
+      return
+    }
+    const canonicalPath = buildDatabasePossePath(selectedPosse)
+    if (location.pathname === canonicalPath) {
+      return
+    }
+    void navigate(
+      {
+        pathname: canonicalPath,
+        search: activeSearch,
+      },
+      {replace: true},
+    )
+  }, [activeSearch, location.pathname, navigate, posseSlug, selectedPosse])
 
   useEffect(() => {
     if (covenantSlug && !selectedCovenant) {
       void navigate(
         {
           pathname: buildDatabaseCovenantBrowsePath(),
-          search: location.search,
+          search: activeSearch,
         },
         {replace: true},
       )
     }
-  }, [covenantSlug, location.search, navigate, selectedCovenant])
+  }, [activeSearch, covenantSlug, navigate, selectedCovenant])
+
+  useEffect(() => {
+    if (!covenantSlug || !selectedCovenant) {
+      return
+    }
+    const canonicalPath = buildDatabaseCovenantPath(selectedCovenant)
+    if (location.pathname === canonicalPath) {
+      return
+    }
+    void navigate(
+      {
+        pathname: canonicalPath,
+        search: activeSearch,
+      },
+      {replace: true},
+    )
+  }, [activeSearch, covenantSlug, location.pathname, navigate, selectedCovenant])
 
   function openAwakenerDetail(awakenerId: string) {
     const awakener = databaseAwakeners.find((entry) => entry.id === awakenerId)
@@ -287,7 +372,7 @@ export function DatabasePage() {
     }
     void navigate({
       pathname: buildDatabaseAwakenerPath(awakener),
-      search: location.search,
+      search: activeSearch,
     })
   }
 
@@ -298,7 +383,7 @@ export function DatabasePage() {
     }
     void navigate({
       pathname: buildDatabaseWheelPath(wheel),
-      search: location.search,
+      search: activeSearch,
     })
   }
 
@@ -309,7 +394,7 @@ export function DatabasePage() {
     }
     void navigate({
       pathname: buildDatabasePossePath(posse),
-      search: location.search,
+      search: activeSearch,
     })
   }
 
@@ -320,12 +405,12 @@ export function DatabasePage() {
     }
     void navigate({
       pathname: buildDatabaseCovenantPath(covenant),
-      search: location.search,
+      search: activeSearch,
     })
   }
 
   function closeDetail() {
-    void navigate({pathname: browsePath, search: location.search})
+    void navigate({pathname: browsePath, search: activeSearch})
   }
 
   function handleDetailTabChange(nextTab: DatabaseAwakenerTab) {
@@ -334,7 +419,7 @@ export function DatabasePage() {
     }
     void navigate({
       pathname: buildDatabaseAwakenerPath(selectedAwakener, nextTab),
-      search: location.search,
+      search: activeSearch,
     })
   }
 
@@ -344,21 +429,21 @@ export function DatabasePage() {
   ) {
     void navigate({
       pathname: buildDatabaseAwakenerPath(nextAwakener, nextTab),
-      search: location.search,
+      search: sanitizeDatabaseEntitySearch('awakeners', activeSearch),
     })
   }
 
   function handleModalWheelSelect(nextWheel: Pick<Wheel, 'name'>) {
     void navigate({
       pathname: buildDatabaseWheelPath(nextWheel),
-      search: location.search,
+      search: sanitizeDatabaseEntitySearch('wheels', activeSearch),
     })
   }
 
   function handleModalCovenantSelect(nextCovenant: Pick<Covenant, 'name'>) {
     void navigate({
       pathname: buildDatabaseCovenantPath(nextCovenant),
-      search: location.search,
+      search: sanitizeDatabaseEntitySearch('covenants', activeSearch),
     })
   }
 
@@ -373,6 +458,13 @@ export function DatabasePage() {
     setRealmFilter: wheelBrowseState.setRealmFilter,
     setRarityFilter: wheelBrowseState.setRarityFilter,
     setMainstatFilter: wheelBrowseState.setMainstatFilter,
+  })
+  const posseActiveFilterChips = buildPosseActiveFilterChips(posseBrowseState, {
+    clearQuery: posseBrowseState.clearQuery,
+    setRealmFilter: posseBrowseState.setRealmFilter,
+  })
+  const covenantActiveFilterChips = buildCovenantActiveFilterChips(covenantBrowseState, {
+    clearQuery: covenantBrowseState.clearQuery,
   })
 
   return (
@@ -394,23 +486,20 @@ export function DatabasePage() {
       {activeEntity === 'posses' ? (
         <DatabaseBrowseLayout
           activeEntity={activeEntity}
-          activeFilterChips={[]}
+          activeFilterChips={posseActiveFilterChips}
           filteredCount={filteredPosses.length}
           filters={
             <PosseDatabaseFilters
-              onQueryChange={setPosseQuery}
-              onRealmFilterChange={setPosseRealmFilter}
-              query={posseQuery}
-              realmFilter={posseRealmFilter}
+              onQueryChange={posseBrowseState.setQuery}
+              onRealmFilterChange={posseBrowseState.setRealmFilter}
+              query={posseBrowseState.query}
+              realmFilter={posseBrowseState.realmFilter}
               searchInputRef={searchInputRef}
             />
           }
-          onResetFilters={() => {
-            setPosseQuery('')
-            setPosseRealmFilter('ALL')
-          }}
+          onResetFilters={posseBrowseState.resetFilters}
           results={<PosseGrid onSelectPosse={openPosseDetail} posses={filteredPosses} />}
-          search={location.search}
+          search={activeSearch}
           title='Posses'
           totalCount={databasePosses.length}
           unitNoun='posses'
@@ -419,22 +508,20 @@ export function DatabasePage() {
       ) : activeEntity === 'covenants' ? (
         <DatabaseBrowseLayout
           activeEntity={activeEntity}
-          activeFilterChips={[]}
+          activeFilterChips={covenantActiveFilterChips}
           filteredCount={filteredCovenants.length}
           filters={
             <CovenantDatabaseFilters
-              onQueryChange={setCovenantQuery}
-              query={covenantQuery}
+              onQueryChange={covenantBrowseState.setQuery}
+              query={covenantBrowseState.query}
               searchInputRef={searchInputRef}
             />
           }
-          onResetFilters={() => {
-            setCovenantQuery('')
-          }}
+          onResetFilters={covenantBrowseState.resetFilters}
           results={
             <CovenantGrid covenants={filteredCovenants} onSelectCovenant={openCovenantDetail} />
           }
-          search={location.search}
+          search={activeSearch}
           title='Covenants'
           totalCount={databaseCovenants.length}
           unitNoun='covenants'
@@ -460,7 +547,7 @@ export function DatabasePage() {
           }
           onResetFilters={wheelBrowseState.resetFilters}
           results={<WheelGrid onSelectWheel={openWheelDetail} wheels={wheelViewModel.wheels} />}
-          search={location.search}
+          search={activeSearch}
           title='Wheels'
           totalCount={wheelViewModel.totalCount}
           unitNoun='wheels'
@@ -503,7 +590,7 @@ export function DatabasePage() {
               onSelectAwakener={openAwakenerDetail}
             />
           }
-          search={location.search}
+          search={activeSearch}
           title='Awakeners'
           totalCount={awakenerViewModel.totalCount}
           unitNoun='awakeners'
