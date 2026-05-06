@@ -27,7 +27,6 @@ import {
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getPosses} from '@/domain/posses'
 import {searchPosses} from '@/domain/posses-search'
-import {normalizeForSearch} from '@/domain/search-utils'
 import {
   getBrowserLocalStorage,
   safeStorageRead,
@@ -36,7 +35,8 @@ import {
 } from '@/domain/storage'
 import {matchesWheelMainstat, type WheelMainstatFilter} from '@/domain/wheel-mainstat-filters'
 import {compareWheelsForUi} from '@/domain/wheel-sort'
-import {getWheelMainstatLabel, getWheels} from '@/domain/wheels'
+import {getWheels} from '@/domain/wheels'
+import {searchWheels} from '@/domain/wheels-search'
 import {
   COLLECTION_OWNERSHIP_KEY,
   parseCollectionOwnershipSnapshot,
@@ -345,20 +345,6 @@ export function useCollectionViewModel() {
   }, [searchedPosses, posseFilter, displayUnowned, ownership])
 
   const filteredWheels = useMemo(() => {
-    const query = queryByTab.wheels.trim().toLowerCase()
-    const normalizedQuery = normalizeForSearch(query)
-    const matchedAwakenerNames =
-      normalizedQuery.length > 0
-        ? new Set(
-            awakeners
-              .filter((awakener) =>
-                [awakener.name, ...awakener.aliases].some((value) =>
-                  normalizeForSearch(value).includes(normalizedQuery),
-                ),
-              )
-              .map((awakener) => awakener.name.toLowerCase()),
-          )
-        : null
     const wheelsByRarity =
       wheelRarityFilter === 'ALL'
         ? wheels
@@ -370,19 +356,7 @@ export function useCollectionViewModel() {
             matchesWheelMainstat(wheel.mainstatKey, wheelMainstatFilter),
           )
 
-    const matchingSearch = !query
-      ? wheelsByMainstat
-      : wheelsByMainstat.filter(
-          (wheel) =>
-            wheel.name.toLowerCase().includes(query) ||
-            wheel.id.toLowerCase().includes(query) ||
-            wheel.rarity.toLowerCase().includes(query) ||
-            wheel.realm.toLowerCase().includes(query) ||
-            wheel.awakener.toLowerCase().includes(query) ||
-            getWheelMainstatLabel(wheel).toLowerCase().includes(query) ||
-            wheel.mainstatKey.toLowerCase().includes(query) ||
-            Boolean(matchedAwakenerNames?.has(wheel.awakener.toLowerCase())),
-        )
+    const matchingSearch = searchWheels(wheelsByMainstat, queryByTab.wheels)
 
     const byOwnership = displayUnowned
       ? matchingSearch
@@ -410,7 +384,6 @@ export function useCollectionViewModel() {
     )
   }, [
     queryByTab.wheels,
-    awakeners,
     wheelRarityFilter,
     wheelMainstatFilter,
     wheels,

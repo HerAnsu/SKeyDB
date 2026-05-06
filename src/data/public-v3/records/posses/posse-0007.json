@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0007-crystal",
     "badge": "asset-posse-0007-badge"
   },
+  "acquisitionSource": "Sediment Exchange",
   "realm": "OTHER",
   "lineupToken": "e",
   "descriptionTemplate": "Draw 4 cards.",

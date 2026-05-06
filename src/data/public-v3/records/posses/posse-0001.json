@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0001-crystal",
     "badge": "asset-posse-0001-badge"
   },
+  "acquisitionSource": "Clear Operation: Faded Legacy - Ch. 3 - Beware of Hounds",
   "realm": "FADED_LEGACY",
   "lineupToken": "d",
   "descriptionTemplate": "Discard your hand, then draw that many cards plus 2.",

@@ -16,6 +16,8 @@
   "realm": "ULTRA",
   "rarity": "SSR",
   "type": "ASSAULT",
+  "availabilityType": "PERMANENT",
+  "releaseDate": "2023-11-29",
   "faction": "The Fools",
   "aliases": ["jenkins"],
   "searchTags": ["Draw"],

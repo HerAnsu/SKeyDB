@@ -2,18 +2,17 @@ import type {DatabaseAwakenerTab} from '@/domain/database-paths'
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 import type {WheelDatabaseDescriptionRecord} from '@/domain/description-records'
 import {getMainstatByKey, getMainstatIcon} from '@/domain/mainstats'
-import {formatAwakenerNameForUi} from '@/domain/name-format'
 import type {PublicFormulaContext} from '@/domain/public-formula-context'
 import {getRealmAccent, getRealmLabel} from '@/domain/realms'
 import {buildWheelMainstatHover} from '@/domain/wheel-mainstat-scaling'
 import type {Wheel} from '@/domain/wheels'
 import type {WheelFullRecord} from '@/domain/wheels-full'
+import {OwnerAwakenerMetaLink} from '@/features/database/detail/OwnerAwakenerMetaLink'
 
 import {
   DATABASE_DETAIL_BODY_CLASS,
   DATABASE_DETAIL_HEADER_META_CLASS,
   DATABASE_DETAIL_HEADER_TITLE_CLASS,
-  DATABASE_DETAIL_META_LINK_CLASS,
   DATABASE_DETAIL_META_PRIMARY_CLASS,
   DATABASE_DETAIL_META_ROW_CLASS,
   DATABASE_DETAIL_META_SEPARATOR_CLASS,
@@ -68,7 +67,6 @@ export function WheelDetailContent({
   const mainstatHover = buildWheelMainstatHover(fullData.mainstatSeriesKey, enhanceLevel)
   const ownerAwakenerId = wheel.ownerAwakenerId
   const ownerName = wheel.ownerAwakenerName ?? wheel.awakener
-  const displayOwnerName = ownerName ? formatAwakenerNameForUi(ownerName) : null
   const lore = fullData.lore ?? null
 
   return (
@@ -84,20 +82,11 @@ export function WheelDetailContent({
               <span className={DATABASE_DETAIL_META_PRIMARY_CLASS}>{wheel.rarity}</span>
               <span className={DATABASE_DETAIL_META_SEPARATOR_CLASS}>•</span>
               <span style={{color: realmAccent}}>{realmLabel}</span>
-              {ownerAwakenerId && ownerName && displayOwnerName ? (
-                <>
-                  <span className={DATABASE_DETAIL_META_SEPARATOR_CLASS}>•</span>
-                  <button
-                    className={DATABASE_DETAIL_META_LINK_CLASS}
-                    onClick={() => {
-                      onSelectAwakener?.({id: ownerAwakenerId, name: ownerName}, 'overview')
-                    }}
-                    type='button'
-                  >
-                    {displayOwnerName}
-                  </button>
-                </>
-              ) : null}
+              <OwnerAwakenerMetaLink
+                onSelectAwakener={onSelectAwakener}
+                ownerAwakenerId={ownerAwakenerId}
+                ownerAwakenerName={ownerName}
+              />
             </p>
           </div>
         </div>

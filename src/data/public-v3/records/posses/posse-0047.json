@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0047-crystal",
     "badge": "asset-posse-0047-badge"
   },
+  "ownerAwakenerId": "awakener-0054",
+  "ownerAwakenerName": "Xu",
+  "acquisitionSource": "Clear Psyche Deepdive: Whispers Behind the Fan",
   "realm": "CARO",
   "lineupToken": "2",
   "descriptionTemplate": "Gain 1 Arithmetica and temporarily reduce all enemies' {STR⯆} by [Exhaustion:Arg1] for 1 turn. If \"Xu\" is in the team, inflict 1 stack of {Spellbound} on all enemies.",

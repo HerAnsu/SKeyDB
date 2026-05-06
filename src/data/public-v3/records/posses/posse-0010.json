@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0010-crystal",
     "badge": "asset-posse-0010-badge"
   },
+  "ownerAwakenerId": "awakener-0005",
+  "ownerAwakenerName": "Aurita",
+  "acquisitionSource": "Clear Psyche Deepdive: Eadem Omnia",
   "realm": "AEQUOR",
   "lineupToken": "j",
   "descriptionTemplate": "Draw [Arg1] {plural:[Arg1]|card|cards} with the lowest Arithmetica Cost from the Draw Pile. If the Realm includes {Aequor}, increase {Tentacle DMG} by [Arg2].",

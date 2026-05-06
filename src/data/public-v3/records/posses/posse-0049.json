@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0049-crystal",
     "badge": "asset-posse-0049-badge"
   },
+  "ownerAwakenerId": "awakener-0055",
+  "ownerAwakenerName": "Vortice",
+  "acquisitionSource": "Clear Psyche Deepdive: No More the Shore",
   "realm": "AEQUOR",
   "lineupToken": "5",
   "descriptionTemplate": "Choose an Awakener to gain 15 Aliemus, while other Awakeners gain 5 Aliemus. Vortice: Immediately unleash {Vortex! Shell!} as a {Pursuit}.",

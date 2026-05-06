@@ -16,9 +16,11 @@
   "realm": "ULTRA",
   "rarity": "SSR",
   "type": "WARDEN",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-03-14",
   "faction": "Among the Stars",
   "aliases": ["wanda"],
-  "searchTags": [],
+  "searchTags": ["Counter", "STR Down"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 55,

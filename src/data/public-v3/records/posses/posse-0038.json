@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0038-crystal",
     "badge": "asset-posse-0038-badge"
   },
+  "ownerAwakenerId": "awakener-0027",
+  "ownerAwakenerName": "Kathigu-Ra",
+  "acquisitionSource": "Clear Psyche Deepdive: Everburning Vex",
   "realm": "CHAOS",
   "lineupToken": "R",
   "descriptionTemplate": "Recover 1 Arithmetica and gain [Arg1]% Temp. DMG Amplification. If Kathigu-Ra is in your team, draw 1 of her cards and apply 1 stack of {Fiamma} to it",

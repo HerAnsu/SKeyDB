@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0024-crystal",
     "badge": "asset-posse-0024-badge"
   },
+  "ownerAwakenerId": "awakener-0019",
+  "ownerAwakenerName": "Helot: Catena",
+  "acquisitionSource": "Clear Special Ops: Elworth's Returnee",
   "realm": "CARO",
   "lineupToken": "E",
   "descriptionTemplate": "Choose an Awakener; draw 2 of their Command Cards.",

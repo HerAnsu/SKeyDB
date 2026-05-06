@@ -16,9 +16,11 @@
   "realm": "ULTRA",
   "rarity": "SSR",
   "type": "WARDEN",
+  "availabilityType": "WELFARE",
+  "releaseDate": "2023-11-29",
   "faction": "Hybrid",
   "aliases": ["erica"],
-  "searchTags": ["Dispel", "Keyflare"],
+  "searchTags": ["Weakness", "Vulnerable", "Alert", "STR Up", "Dispel", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 39,

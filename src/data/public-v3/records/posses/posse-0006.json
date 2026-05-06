@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0006-crystal",
     "badge": "asset-posse-0006-badge"
   },
+  "acquisitionSource": "Clear Operation: Faded Legacy - Ch. 5 - Eye of the Storm",
   "realm": "FADED_LEGACY",
   "lineupToken": "g",
   "descriptionTemplate": "Gain [Arg1] {STR}, then gain Temporary {STR} equal to 25% of your permanent {STR}.",

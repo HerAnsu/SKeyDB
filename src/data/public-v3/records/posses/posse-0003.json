@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0003-crystal",
     "badge": "asset-posse-0003-badge"
   },
+  "acquisitionSource": "Clear Operation: Faded Legacy - Ch. 4 - Where Silence Reigns",
   "realm": "FADED_LEGACY",
   "lineupToken": "b",
   "descriptionTemplate": "Gain [Block:Arg1] Shield. If current HP is below 25%, recover [Heal:Arg2] HP.",

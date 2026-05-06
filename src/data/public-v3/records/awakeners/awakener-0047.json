@@ -16,9 +16,11 @@
   "realm": "CHAOS",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-11-18",
   "faction": "Gateway",
   "aliases": ["tawil"],
-  "searchTags": ["Arithmetica", "Discard", "Draw", "Keyflare", "Max HP DMG"],
+  "searchTags": ["Barrier", "STR Up", "Pierce DMG", "Fixed DMG", "Arithmetica", "Discard", "Draw", "Keyflare", "Max HP DMG"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 47,

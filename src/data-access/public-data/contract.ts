@@ -172,8 +172,8 @@ export interface PublicSearchDocument extends EntityRef {
   name: string
   aliases: string[]
   tokens: string[]
+  fields: Partial<Record<string, string[]>>
   facets?: Record<string, unknown>
-  boosts?: Record<string, number>
 }
 
 export interface PublicSearchIndex {

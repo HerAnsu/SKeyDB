@@ -16,9 +16,11 @@
   "realm": "ULTRA",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-07-15",
   "faction": "Outlanders",
   "aliases": ["horla"],
-  "searchTags": ["Death Resistance", "Heal"],
+  "searchTags": ["Weakness", "Vulnerable", "Counter", "STR Up", "STR Down", "Death Resistance", "Heal"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 36,

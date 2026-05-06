@@ -16,9 +16,11 @@
   "realm": "CHAOS",
   "rarity": "SR",
   "type": "CHORUS",
+  "availabilityType": "WELFARE",
+  "releaseDate": "2023-11-29",
   "faction": "The Unknowable",
   "aliases": ["ramona"],
-  "searchTags": ["Arithmetica", "Discard", "Draw", "Keyflare"],
+  "searchTags": ["Weakness", "Vulnerable", "STR Up", "STR Down", "Arithmetica", "Discard", "Draw", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 32,

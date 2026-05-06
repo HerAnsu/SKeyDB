@@ -28,11 +28,19 @@ describe('searchCovenants', () => {
     expect(searchCovenants(getCovenants(), 'covenant-icon-001')).toEqual([])
   })
 
-  it('matches generated covenant search supplemental values', () => {
+  it('does not match generated covenant supplemental values', () => {
     const covenants = [makeCovenant({id: 'covenant-0001', name: 'Machine Oath'})]
 
-    expect(searchCovenants(covenants, '6').map((covenant) => covenant.name)).toEqual([
-      'Machine Oath',
-    ])
+    expect(searchCovenants(covenants, '6')).toEqual([])
+  })
+
+  it('does not search generated set-bonus values', () => {
+    expect(searchCovenants(getCovenants(), '6-piece')).toEqual([])
+  })
+
+  it('does not match raw covenant ids', () => {
+    const covenants = [makeCovenant({id: 'covenant-0001', name: 'Machine Oath'})]
+
+    expect(searchCovenants(covenants, 'covenant-0001')).toEqual([])
   })
 })

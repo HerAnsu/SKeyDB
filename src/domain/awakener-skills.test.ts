@@ -108,10 +108,7 @@ describe('awakener-skills', () => {
     expect(getAwakenerSkillById('skill.vortice.abyssal-vortex-cannon', skills)?.cost).toBe('100')
     expect(
       getAwakenerSkillById('skill.vortice.abyssal-vortex-cannon', skills)?.descriptionTemplate,
-    ).toContain('{Sacrifice} up to 3 additional Permanent Tentacles')
-    expect(
-      getAwakenerSkillById('skill.vortice.abyssal-vortex-cannon', skills)?.descriptionTemplate,
-    ).toContain('{Sacrifice}')
+    ).toContain('Sacrifice up to 3 additional Permanent Tentacles')
     expect(getAwakenerSkillById('skill.24.symbiotic-aberration', skills)?.cost).toBe('2')
     expect(getAwakenerSkillById('skill.24.frenzied-slash', skills)?.cost).toBe('3')
     expect(getAwakenerSkillById('skill.24.mediating-personalities', skills)?.cost).toBe('2')

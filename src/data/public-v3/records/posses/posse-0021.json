@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0021-crystal",
     "badge": "asset-posse-0021-badge"
   },
+  "ownerAwakenerId": "awakener-0021",
+  "ownerAwakenerName": "Goliath",
+  "acquisitionSource": "Clear Psyche Deepdive: The Fall of Giant",
   "realm": "AEQUOR",
   "lineupToken": "s",
   "descriptionTemplate": "Recover 1 Arithmetica and gain [Arg1] {STR}. Increase a chosen Awakener's Aliemus by [Arg2]. If your Tentacle Stance is {Raging Waves}, instead gain +15% Temporary Crit. Rate & Crit. DMG.",

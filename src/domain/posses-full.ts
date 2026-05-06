@@ -20,6 +20,7 @@ export interface PosseFullRecord {
   descriptionTemplate: string
   descriptionArgs: Record<string, DescriptionArg>
   lore?: string
+  acquisitionSource?: string
 }
 
 const publicPosseRecordSchema = z.object({
@@ -31,6 +32,7 @@ const publicPosseRecordSchema = z.object({
   descriptionTemplate: z.string(),
   descriptionArgs: descriptionArgsSchema,
   lore: z.string().optional(),
+  acquisitionSource: z.string().optional(),
 })
 
 const publicPosseRecordsSchema = z.array(publicPosseRecordSchema)

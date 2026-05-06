@@ -8,13 +8,12 @@
       "name": "Encounter in Pure White",
       "aliases": [],
       "tokens": ["encounter", "encounter in pure white", "faded", "faded legacy", "in", "legacy", "pure", "white"],
+      "fields": {
+        "name": ["Encounter in Pure White", "encounter-in-pure-white"],
+        "facet": ["FADED_LEGACY", "Faded Legacy"]
+      },
       "facets": {
         "realm": "FADED_LEGACY"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -23,13 +22,12 @@
       "name": "Voices in Your Head",
       "aliases": [],
       "tokens": ["faded", "faded legacy", "head", "in", "legacy", "voices", "voices in your head", "your"],
+      "fields": {
+        "name": ["Voices in Your Head", "voices-in-your-head"],
+        "facet": ["FADED_LEGACY", "Faded Legacy"]
+      },
       "facets": {
         "realm": "FADED_LEGACY"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -38,13 +36,12 @@
       "name": "Warded Injection",
       "aliases": [],
       "tokens": ["faded", "faded legacy", "injection", "legacy", "warded", "warded injection"],
+      "fields": {
+        "name": ["Warded Injection", "warded-injection"],
+        "facet": ["FADED_LEGACY", "Faded Legacy"]
+      },
       "facets": {
         "realm": "FADED_LEGACY"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -53,13 +50,12 @@
       "name": "A Mouse's Wisdom",
       "aliases": [],
       "tokens": ["a", "a mouses wisdom", "faded", "faded legacy", "legacy", "mouses", "wisdom"],
+      "fields": {
+        "name": ["A Mouse's Wisdom", "a-mouses-wisdom"],
+        "facet": ["FADED_LEGACY", "Faded Legacy"]
+      },
       "facets": {
         "realm": "FADED_LEGACY"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -68,13 +64,12 @@
       "name": "Tiny Wish",
       "aliases": [],
       "tokens": ["faded", "faded legacy", "legacy", "tiny", "tiny wish", "wish"],
+      "fields": {
+        "name": ["Tiny Wish", "tiny-wish"],
+        "facet": ["FADED_LEGACY", "Faded Legacy"]
+      },
       "facets": {
         "realm": "FADED_LEGACY"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -83,13 +78,12 @@
       "name": "Obsession Eternal",
       "aliases": [],
       "tokens": ["eternal", "faded", "faded legacy", "legacy", "obsession", "obsession eternal"],
+      "fields": {
+        "name": ["Obsession Eternal", "obsession-eternal"],
+        "facet": ["FADED_LEGACY", "Faded Legacy"]
+      },
       "facets": {
         "realm": "FADED_LEGACY"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -98,13 +92,12 @@
       "name": "Unequal Exchange",
       "aliases": [],
       "tokens": ["exchange", "other", "unequal", "unequal exchange"],
+      "fields": {
+        "name": ["Unequal Exchange", "unequal-exchange"],
+        "facet": ["OTHER"]
+      },
       "facets": {
         "realm": "OTHER"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -113,13 +106,12 @@
       "name": "Funus Aeternum",
       "aliases": [],
       "tokens": ["aeternum", "faded", "faded legacy", "funus", "funus aeternum", "legacy"],
+      "fields": {
+        "name": ["Funus Aeternum", "funus-aeternum"],
+        "facet": ["FADED_LEGACY", "Faded Legacy"]
+      },
       "facets": {
         "realm": "FADED_LEGACY"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -127,14 +119,15 @@
       "id": "posse-0009",
       "name": "The Final Vow",
       "aliases": [],
-      "tokens": ["chaos", "final", "the", "the final vow", "vow"],
-      "facets": {
-        "realm": "CHAOS"
+      "tokens": ["chaos", "final", "ogier", "the", "the final vow", "vow"],
+      "fields": {
+        "name": ["The Final Vow", "the-final-vow"],
+        "owner": ["Ogier"],
+        "facet": ["CHAOS"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CHAOS",
+        "owner": "awakener-0038"
       }
     },
     {
@@ -142,14 +135,15 @@
       "id": "posse-0010",
       "name": "Aurita's Treasure",
       "aliases": [],
-      "tokens": ["aequor", "auritas", "auritas treasure", "treasure"],
-      "facets": {
-        "realm": "AEQUOR"
+      "tokens": ["aequor", "aurita", "auritas", "auritas treasure", "treasure"],
+      "fields": {
+        "name": ["Aurita's Treasure", "auritas-treasure"],
+        "owner": ["Aurita"],
+        "facet": ["AEQUOR"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "AEQUOR",
+        "owner": "awakener-0005"
       }
     },
     {
@@ -157,14 +151,15 @@
       "id": "posse-0011",
       "name": "Roaring Blood and Sand",
       "aliases": [],
-      "tokens": ["and", "blood", "caro", "roaring", "roaring blood and sand", "sand"],
-      "facets": {
-        "realm": "CARO"
+      "tokens": ["and", "blood", "caro", "roaring", "roaring blood and sand", "sand", "uvhash"],
+      "fields": {
+        "name": ["Roaring Blood and Sand", "roaring-blood-and-sand"],
+        "owner": ["Uvhash"],
+        "facet": ["CARO"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CARO",
+        "owner": "awakener-0051"
       }
     },
     {
@@ -172,14 +167,15 @@
       "id": "posse-0012",
       "name": "Ephemeral Eternity",
       "aliases": [],
-      "tokens": ["ephemeral", "ephemeral eternity", "eternity", "ultra"],
-      "facets": {
-        "realm": "ULTRA"
+      "tokens": ["ephemeral", "ephemeral eternity", "erica", "eternity", "ultra"],
+      "fields": {
+        "name": ["Ephemeral Eternity", "ephemeral-eternity"],
+        "owner": ["Erica"],
+        "facet": ["ULTRA"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "ULTRA",
+        "owner": "awakener-0015"
       }
     },
     {
@@ -187,14 +183,15 @@
       "id": "posse-0013",
       "name": "Feast of Decay",
       "aliases": [],
-      "tokens": ["decay", "feast", "feast of decay", "of", "ultra"],
-      "facets": {
-        "realm": "ULTRA"
+      "tokens": ["decay", "feast", "feast of decay", "of", "ultra", "wanda"],
+      "fields": {
+        "name": ["Feast of Decay", "feast-of-decay"],
+        "owner": ["Wanda"],
+        "facet": ["ULTRA"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "ULTRA",
+        "owner": "awakener-0052"
       }
     },
     {
@@ -202,14 +199,15 @@
       "id": "posse-0014",
       "name": "Bone-Chilling Embrace",
       "aliases": [],
-      "tokens": ["aequor", "bone", "bone chilling embrace", "chilling", "embrace"],
-      "facets": {
-        "realm": "AEQUOR"
+      "tokens": ["aequor", "bone", "bone chilling embrace", "chilling", "embrace", "sanga"],
+      "fields": {
+        "name": ["Bone-Chilling Embrace", "bone-chilling-embrace"],
+        "owner": ["Sanga"],
+        "facet": ["AEQUOR"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "AEQUOR",
+        "owner": "awakener-0045"
       }
     },
     {
@@ -217,14 +215,15 @@
       "id": "posse-0015",
       "name": "Lakeside Glimpse",
       "aliases": [],
-      "tokens": ["caro", "glimpse", "lakeside", "lakeside glimpse"],
-      "facets": {
-        "realm": "CARO"
+      "tokens": ["agrippa", "caro", "glimpse", "lakeside", "lakeside glimpse"],
+      "fields": {
+        "name": ["Lakeside Glimpse", "lakeside-glimpse"],
+        "owner": ["Agrippa"],
+        "facet": ["CARO"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CARO",
+        "owner": "awakener-0002"
       }
     },
     {
@@ -232,14 +231,15 @@
       "id": "posse-0016",
       "name": "Gateway of Retrospection",
       "aliases": [],
-      "tokens": ["chaos", "gateway", "gateway of retrospection", "of", "retrospection"],
-      "facets": {
-        "realm": "CHAOS"
+      "tokens": ["chaos", "g", "g ramona", "gateway", "gateway of retrospection", "of", "ramona", "ramona timeworn", "retrospection", "timeworn"],
+      "fields": {
+        "name": ["Gateway of Retrospection", "gateway-of-retrospection"],
+        "owner": ["Ramona: Timeworn", "ramona-timeworn", "g-ramona"],
+        "facet": ["CHAOS"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CHAOS",
+        "owner": "awakener-0020"
       }
     },
     {
@@ -247,14 +247,15 @@
       "id": "posse-0017",
       "name": "Truth Behind Grey Mist",
       "aliases": [],
-      "tokens": ["behind", "grey", "mist", "truth", "truth behind grey mist", "ultra"],
-      "facets": {
-        "realm": "ULTRA"
+      "tokens": ["behind", "daffodil", "grey", "mist", "truth", "truth behind grey mist", "ultra"],
+      "fields": {
+        "name": ["Truth Behind Grey Mist", "truth-behind-grey-mist"],
+        "owner": ["Daffodil"],
+        "facet": ["ULTRA"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "ULTRA",
+        "owner": "awakener-0012"
       }
     },
     {
@@ -262,14 +263,15 @@
       "id": "posse-0018",
       "name": "Midsummer Vision",
       "aliases": [],
-      "tokens": ["chaos", "midsummer", "midsummer vision", "vision"],
-      "facets": {
-        "realm": "CHAOS"
+      "tokens": ["chaos", "lily", "midsummer", "midsummer vision", "vision"],
+      "fields": {
+        "name": ["Midsummer Vision", "midsummer-vision"],
+        "owner": ["Lily"],
+        "facet": ["CHAOS"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CHAOS",
+        "owner": "awakener-0029"
       }
     },
     {
@@ -277,14 +279,15 @@
       "id": "posse-0019",
       "name": "Victory of Roses",
       "aliases": [],
-      "tokens": ["caro", "of", "roses", "victory", "victory of roses"],
-      "facets": {
-        "realm": "CARO"
+      "tokens": ["caro", "of", "roses", "sorel", "victory", "victory of roses"],
+      "fields": {
+        "name": ["Victory of Roses", "victory-of-roses"],
+        "owner": ["Sorel"],
+        "facet": ["CARO"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CARO",
+        "owner": "awakener-0046"
       }
     },
     {
@@ -292,14 +295,15 @@
       "id": "posse-0020",
       "name": "Miracle's Dawn",
       "aliases": [],
-      "tokens": ["caro", "dawn", "miracles", "miracles dawn"],
-      "facets": {
-        "realm": "CARO"
+      "tokens": ["caro", "dawn", "miracles", "miracles dawn", "salvador"],
+      "fields": {
+        "name": ["Miracle's Dawn", "miracles-dawn"],
+        "owner": ["Salvador"],
+        "facet": ["CARO"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CARO",
+        "owner": "awakener-0044"
       }
     },
     {
@@ -307,14 +311,15 @@
       "id": "posse-0021",
       "name": "Giant's Reign",
       "aliases": [],
-      "tokens": ["aequor", "giants", "giants reign", "reign"],
-      "facets": {
-        "realm": "AEQUOR"
+      "tokens": ["aequor", "giants", "giants reign", "goliath", "reign"],
+      "fields": {
+        "name": ["Giant's Reign", "giants-reign"],
+        "owner": ["Goliath"],
+        "facet": ["AEQUOR"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "AEQUOR",
+        "owner": "awakener-0021"
       }
     },
     {
@@ -322,14 +327,15 @@
       "id": "posse-0022",
       "name": "All of Her",
       "aliases": [],
-      "tokens": ["all", "all of her", "chaos", "her", "of"],
-      "facets": {
-        "realm": "CHAOS"
+      "tokens": ["24", "all", "all of her", "chaos", "four", "her", "of", "twenty", "twenty four"],
+      "fields": {
+        "name": ["All of Her", "all-of-her"],
+        "owner": ["24", "\"24\"", "twenty-four"],
+        "facet": ["CHAOS"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CHAOS",
+        "owner": "awakener-0001"
       }
     },
     {
@@ -338,13 +344,12 @@
       "name": "The Lone Seed",
       "aliases": [],
       "tokens": ["caro", "lone", "seed", "the", "the lone seed"],
+      "fields": {
+        "name": ["The Lone Seed", "the-lone-seed"],
+        "facet": ["CARO"]
+      },
       "facets": {
         "realm": "CARO"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -352,14 +357,15 @@
       "id": "posse-0024",
       "name": "The Mountains' Resolve",
       "aliases": [],
-      "tokens": ["caro", "mountains", "resolve", "the", "the mountains resolve"],
-      "facets": {
-        "realm": "CARO"
+      "tokens": ["caro", "catena", "g", "g helot", "helot", "helot catena", "mountains", "resolve", "the", "the mountains resolve"],
+      "fields": {
+        "name": ["The Mountains' Resolve", "the-mountains-resolve"],
+        "owner": ["Helot: Catena", "helot-catena", "g-helot"],
+        "facet": ["CARO"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CARO",
+        "owner": "awakener-0019"
       }
     },
     {
@@ -367,14 +373,15 @@
       "id": "posse-0025",
       "name": "Festival of Tides",
       "aliases": [],
-      "tokens": ["aequor", "festival", "festival of tides", "of", "tides"],
-      "facets": {
-        "realm": "AEQUOR"
+      "tokens": ["aequor", "festival", "festival of tides", "miryam", "of", "tides"],
+      "fields": {
+        "name": ["Festival of Tides", "festival-of-tides"],
+        "owner": ["Miryam"],
+        "facet": ["AEQUOR"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "AEQUOR",
+        "owner": "awakener-0032"
       }
     },
     {
@@ -382,14 +389,15 @@
       "id": "posse-0026",
       "name": "Spring's Verse",
       "aliases": [],
-      "tokens": ["springs", "springs verse", "ultra", "verse"],
-      "facets": {
-        "realm": "ULTRA"
+      "tokens": ["horla", "springs", "springs verse", "ultra", "verse"],
+      "fields": {
+        "name": ["Spring's Verse", "springs-verse"],
+        "owner": ["Horla"],
+        "facet": ["ULTRA"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "ULTRA",
+        "owner": "awakener-0024"
       }
     },
     {
@@ -397,14 +405,15 @@
       "id": "posse-0027",
       "name": "A Gun's Cry",
       "aliases": [],
-      "tokens": ["a", "a guns cry", "chaos", "cry", "guns"],
-      "facets": {
-        "realm": "CHAOS"
+      "tokens": ["a", "a guns cry", "chaos", "cry", "guns", "ryker"],
+      "fields": {
+        "name": ["A Gun's Cry", "a-guns-cry"],
+        "owner": ["Ryker"],
+        "facet": ["CHAOS"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CHAOS",
+        "owner": "awakener-0043"
       }
     },
     {
@@ -413,13 +422,12 @@
       "name": "Symphony Fourth",
       "aliases": [],
       "tokens": ["chaos", "fourth", "symphony", "symphony fourth"],
+      "fields": {
+        "name": ["Symphony Fourth", "symphony-fourth"],
+        "facet": ["CHAOS"]
+      },
       "facets": {
         "realm": "CHAOS"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -428,13 +436,12 @@
       "name": "Answer of the Gate",
       "aliases": [],
       "tokens": ["answer", "answer of the gate", "chaos", "gate", "of", "the"],
+      "fields": {
+        "name": ["Answer of the Gate", "answer-of-the-gate"],
+        "facet": ["CHAOS"]
+      },
       "facets": {
         "realm": "CHAOS"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -443,13 +450,12 @@
       "name": "Plague of Illusions",
       "aliases": [],
       "tokens": ["chaos", "illusions", "of", "plague", "plague of illusions"],
+      "fields": {
+        "name": ["Plague of Illusions", "plague-of-illusions"],
+        "facet": ["CHAOS"]
+      },
       "facets": {
         "realm": "CHAOS"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -457,14 +463,15 @@
       "id": "posse-0031",
       "name": "Blessing of the Stars",
       "aliases": [],
-      "tokens": ["aequor", "blessing", "blessing of the stars", "of", "stars", "the"],
-      "facets": {
-        "realm": "AEQUOR"
+      "tokens": ["aequor", "blessing", "blessing of the stars", "of", "stars", "the", "tulu"],
+      "fields": {
+        "name": ["Blessing of the Stars", "blessing-of-the-stars"],
+        "owner": ["Tulu"],
+        "facet": ["AEQUOR"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "AEQUOR",
+        "owner": "awakener-0050"
       }
     },
     {
@@ -472,14 +479,15 @@
       "id": "posse-0032",
       "name": "Black Swan's Dance",
       "aliases": [],
-      "tokens": ["black", "black swans dance", "dance", "swans", "ultra"],
-      "facets": {
-        "realm": "ULTRA"
+      "tokens": ["black", "black swans dance", "dance", "liz", "swans", "ultra"],
+      "fields": {
+        "name": ["Black Swan's Dance", "black-swans-dance"],
+        "owner": ["Liz"],
+        "facet": ["ULTRA"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "ULTRA",
+        "owner": "awakener-0030"
       }
     },
     {
@@ -488,13 +496,12 @@
       "name": "Tavern's Opening",
       "aliases": [],
       "tokens": ["opening", "other", "taverns", "taverns opening"],
+      "fields": {
+        "name": ["Tavern's Opening", "taverns-opening"],
+        "facet": ["OTHER"]
+      },
       "facets": {
         "realm": "OTHER"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -503,13 +510,12 @@
       "name": "Sacred Mending",
       "aliases": [],
       "tokens": ["mending", "sacred", "sacred mending", "ultra"],
+      "fields": {
+        "name": ["Sacred Mending", "sacred-mending"],
+        "facet": ["ULTRA"]
+      },
       "facets": {
         "realm": "ULTRA"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -517,14 +523,15 @@
       "id": "posse-0035",
       "name": "Undying Thunder",
       "aliases": [],
-      "tokens": ["aequor", "thunder", "undying", "undying thunder"],
-      "facets": {
-        "realm": "AEQUOR"
+      "tokens": ["aequor", "corposant", "thunder", "undying", "undying thunder"],
+      "fields": {
+        "name": ["Undying Thunder", "undying-thunder"],
+        "owner": ["Corposant"],
+        "facet": ["AEQUOR"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "AEQUOR",
+        "owner": "awakener-0011"
       }
     },
     {
@@ -532,14 +539,15 @@
       "id": "posse-0036",
       "name": "Derision of Destiny",
       "aliases": [],
-      "tokens": ["derision", "derision of destiny", "destiny", "of", "ultra"],
-      "facets": {
-        "realm": "ULTRA"
+      "tokens": ["castor", "derision", "derision of destiny", "destiny", "of", "ultra"],
+      "fields": {
+        "name": ["Derision of Destiny", "derision-of-destiny"],
+        "owner": ["Castor"],
+        "facet": ["ULTRA"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "ULTRA",
+        "owner": "awakener-0008"
       }
     },
     {
@@ -548,13 +556,12 @@
       "name": "Cruel Homage",
       "aliases": [],
       "tokens": ["caro", "cruel", "cruel homage", "homage"],
+      "fields": {
+        "name": ["Cruel Homage", "cruel-homage"],
+        "facet": ["CARO"]
+      },
       "facets": {
         "realm": "CARO"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -562,14 +569,15 @@
       "id": "posse-0038",
       "name": "Undying Sun",
       "aliases": [],
-      "tokens": ["chaos", "sun", "undying", "undying sun"],
-      "facets": {
-        "realm": "CHAOS"
+      "tokens": ["chaos", "kathigu", "kathigu ra", "kathigura", "ra", "sun", "undying", "undying sun"],
+      "fields": {
+        "name": ["Undying Sun", "undying-sun"],
+        "owner": ["Kathigu-Ra", "kathigura"],
+        "facet": ["CHAOS"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CHAOS",
+        "owner": "awakener-0027"
       }
     },
     {
@@ -577,14 +585,15 @@
       "id": "posse-0039",
       "name": "Sacred Bleeding Heart",
       "aliases": [],
-      "tokens": ["bleeding", "heart", "sacred", "sacred bleeding heart", "ultra"],
-      "facets": {
-        "realm": "ULTRA"
+      "tokens": ["bleeding", "heart", "pollux", "sacred", "sacred bleeding heart", "ultra"],
+      "fields": {
+        "name": ["Sacred Bleeding Heart", "sacred-bleeding-heart"],
+        "owner": ["Pollux"],
+        "facet": ["ULTRA"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "ULTRA",
+        "owner": "awakener-0041"
       }
     },
     {
@@ -593,13 +602,12 @@
       "name": "Voracious Resolve",
       "aliases": [],
       "tokens": ["caro", "resolve", "voracious", "voracious resolve"],
+      "fields": {
+        "name": ["Voracious Resolve", "voracious-resolve"],
+        "facet": ["CARO"]
+      },
       "facets": {
         "realm": "CARO"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -608,13 +616,12 @@
       "name": "Beachside Memento",
       "aliases": [],
       "tokens": ["beachside", "beachside memento", "memento", "other"],
+      "fields": {
+        "name": ["Beachside Memento", "beachside-memento"],
+        "facet": ["OTHER"]
+      },
       "facets": {
         "realm": "OTHER"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -622,14 +629,15 @@
       "id": "posse-0042",
       "name": "Void Hues",
       "aliases": [],
-      "tokens": ["caro", "hues", "void", "void hues"],
-      "facets": {
-        "realm": "CARO"
+      "tokens": ["caro", "hues", "pickman", "void", "void hues"],
+      "fields": {
+        "name": ["Void Hues", "void-hues"],
+        "owner": ["Pickman"],
+        "facet": ["CARO"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CARO",
+        "owner": "awakener-0040"
       }
     },
     {
@@ -638,13 +646,12 @@
       "name": "A Fleeting Dream",
       "aliases": [],
       "tokens": ["a", "a fleeting dream", "dream", "fleeting", "other"],
+      "fields": {
+        "name": ["A Fleeting Dream", "a-fleeting-dream"],
+        "facet": ["OTHER"]
+      },
       "facets": {
         "realm": "OTHER"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -653,13 +660,12 @@
       "name": "Wayward Ship",
       "aliases": [],
       "tokens": ["aequor", "ship", "wayward", "wayward ship"],
+      "fields": {
+        "name": ["Wayward Ship", "wayward-ship"],
+        "facet": ["AEQUOR"]
+      },
       "facets": {
         "realm": "AEQUOR"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -667,14 +673,15 @@
       "id": "posse-0045",
       "name": "Reunion Wish",
       "aliases": [],
-      "tokens": ["other", "reunion", "reunion wish", "wish"],
-      "facets": {
-        "realm": "OTHER"
+      "tokens": ["other", "ramona", "reunion", "reunion wish", "wish"],
+      "fields": {
+        "name": ["Reunion Wish", "reunion-wish"],
+        "owner": ["Ramona"],
+        "facet": ["OTHER"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "OTHER",
+        "owner": "awakener-0042"
       }
     },
     {
@@ -682,14 +689,15 @@
       "id": "posse-0046",
       "name": "From the Mist Realm",
       "aliases": [],
-      "tokens": ["chaos", "from", "from the mist realm", "mist", "realm", "the"],
-      "facets": {
-        "realm": "CHAOS"
+      "tokens": ["chaos", "from", "from the mist realm", "mist", "mouchette", "realm", "the"],
+      "fields": {
+        "name": ["From the Mist Realm", "from-the-mist-realm"],
+        "owner": ["Mouchette"],
+        "facet": ["CHAOS"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CHAOS",
+        "owner": "awakener-0033"
       }
     },
     {
@@ -697,14 +705,15 @@
       "id": "posse-0047",
       "name": "Manor Echoes",
       "aliases": [],
-      "tokens": ["caro", "echoes", "manor", "manor echoes"],
-      "facets": {
-        "realm": "CARO"
+      "tokens": ["caro", "echoes", "manor", "manor echoes", "xu"],
+      "fields": {
+        "name": ["Manor Echoes", "manor-echoes"],
+        "owner": ["Xu"],
+        "facet": ["CARO"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "CARO",
+        "owner": "awakener-0054"
       }
     },
     {
@@ -713,13 +722,12 @@
       "name": "Year-End Sparks",
       "aliases": [],
       "tokens": ["end", "other", "sparks", "year", "year end sparks"],
+      "fields": {
+        "name": ["Year-End Sparks", "year-end-sparks"],
+        "facet": ["OTHER"]
+      },
       "facets": {
         "realm": "OTHER"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     },
     {
@@ -727,14 +735,15 @@
       "id": "posse-0049",
       "name": "Drowned Innocence",
       "aliases": [],
-      "tokens": ["aequor", "drowned", "drowned innocence", "innocence"],
-      "facets": {
-        "realm": "AEQUOR"
+      "tokens": ["aequor", "drowned", "drowned innocence", "innocence", "vortice"],
+      "fields": {
+        "name": ["Drowned Innocence", "drowned-innocence"],
+        "owner": ["Vortice"],
+        "facet": ["AEQUOR"]
       },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "facets": {
+        "realm": "AEQUOR",
+        "owner": "awakener-0055"
       }
     },
     {
@@ -743,13 +752,12 @@
       "name": "Orbis Fatum",
       "aliases": [],
       "tokens": ["fatum", "orbis", "orbis fatum", "ultra"],
+      "fields": {
+        "name": ["Orbis Fatum", "orbis-fatum"],
+        "facet": ["ULTRA"]
+      },
       "facets": {
         "realm": "ULTRA"
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
       }
     }
   ]

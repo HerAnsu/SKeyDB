@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0037-crystal",
     "badge": "asset-posse-0037-badge"
   },
+  "acquisitionSource": "Clear Operation: Astral Reign - Ch. 3 - Ossuary Gala",
   "realm": "CARO",
   "lineupToken": "S",
   "descriptionTemplate": "{Steal} [Arg1] {STR} from all enemies. If Doresain is in your team, he gains 1 {Corpse}.",

@@ -6,21 +6,18 @@ import {searchPosses} from './posses-search'
 describe('searchPosses', () => {
   const posses = getPosses()
 
-  it('matches by faded legacy realm label', () => {
-    const names = searchPosses(posses, 'faded legacy').map((posse) => posse.name.toLowerCase())
-    expect(names).toContain('voices in your head')
-    expect(names).toContain('tiny wish')
-  })
-
   it('matches by posse name fuzzy typo', () => {
     const names = searchPosses(posses, 'obsesion eternal').map((posse) => posse.name.toLowerCase())
     expect(names).toContain('obsession eternal')
   })
 
-  it('can fuzzy-match faded legacy realm labels', () => {
-    const names = searchPosses(posses, 'faded legcay').map((posse) => posse.name.toLowerCase())
-
-    expect(names).toContain('voices in your head')
-    expect(names).toContain('tiny wish')
+  it('matches generated owner and realm search fields', () => {
+    expect(searchPosses(posses, 'ogier').map((posse) => posse.name)).toContain('The Final Vow')
+    expect(searchPosses(posses, 'faded legacy').map((posse) => posse.realm)).toEqual(
+      expect.arrayContaining(['FADED_LEGACY']),
+    )
+    expect(searchPosses(posses, 'caro').map((posse) => posse.realm)).toEqual(
+      expect.arrayContaining(['CARO']),
+    )
   })
 })

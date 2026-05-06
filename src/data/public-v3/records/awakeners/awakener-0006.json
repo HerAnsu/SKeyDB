@@ -16,9 +16,11 @@
   "realm": "AEQUOR",
   "rarity": "SSR",
   "type": "WARDEN",
+  "availabilityType": "PERMANENT",
+  "releaseDate": "2023-11-29",
   "faction": "Hybrid",
   "aliases": ["caecus"],
-  "searchTags": ["Dispel", "Heal", "Tentacles"],
+  "searchTags": ["Counter", "STR Up", "Tentacle DMG", "Dispel", "Heal", "Tentacles"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 41,

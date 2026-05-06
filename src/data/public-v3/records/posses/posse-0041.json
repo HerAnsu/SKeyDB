@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0041-crystal",
     "badge": "asset-posse-0041-badge"
   },
+  "acquisitionSource": "Clear Dreamscape: See You in Neverland",
   "realm": "OTHER",
   "lineupToken": "T",
   "descriptionTemplate": "Choose an Awakener; create 1 of their basic Strike Commands. It has {Exhaust}. Every {ordinal:3rd} time this is unleashed, instead create 1 {Fleeting Beauty} and gain +[Arg1]% Temp. Crit. Rate.",

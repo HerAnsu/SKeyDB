@@ -16,9 +16,11 @@
   "realm": "CARO",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2026-01-26",
   "faction": "The Unknowable",
   "aliases": ["xu"],
-  "searchTags": ["Arithmetica", "Max HP DMG"],
+  "searchTags": ["Poison", "STR Down", "Fixed DMG", "Arithmetica", "Max HP DMG"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 70,

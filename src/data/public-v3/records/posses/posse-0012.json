@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0012-crystal",
     "badge": "asset-posse-0012-badge"
   },
+  "ownerAwakenerId": "awakener-0015",
+  "ownerAwakenerName": "Erica",
+  "acquisitionSource": "Clear Psyche Deepdive: Twisted Core",
   "realm": "ULTRA",
   "lineupToken": "m",
   "descriptionTemplate": "Gain [Arg4] Arithmetica. Choose an Awakener; place their [Arg1] {plural:[Arg1]|copy|copies} of \"Strike\" and [Arg1] {plural:[Arg1]|copy|copies} of \"Defense\" into your hand, and grant them {Exhaust} and {Fleeting}. If the current Realm is {Ultra}, gain [Arg2] Temp. {STR} and [Arg3] Temp. {Alert}.",

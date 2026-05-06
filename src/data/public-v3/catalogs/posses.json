@@ -146,6 +146,8 @@
         "badge": "asset-posse-0009-badge"
       },
       "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0038",
+      "ownerAwakenerName": "Ogier",
       "lineupToken": "l"
     },
     {
@@ -162,6 +164,8 @@
         "badge": "asset-posse-0010-badge"
       },
       "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0005",
+      "ownerAwakenerName": "Aurita",
       "lineupToken": "j"
     },
     {
@@ -178,6 +182,8 @@
         "badge": "asset-posse-0011-badge"
       },
       "realm": "CARO",
+      "ownerAwakenerId": "awakener-0051",
+      "ownerAwakenerName": "Uvhash",
       "lineupToken": "k"
     },
     {
@@ -194,6 +200,8 @@
         "badge": "asset-posse-0012-badge"
       },
       "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0015",
+      "ownerAwakenerName": "Erica",
       "lineupToken": "m"
     },
     {
@@ -210,6 +218,8 @@
         "badge": "asset-posse-0013-badge"
       },
       "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
       "lineupToken": "q"
     },
     {
@@ -226,6 +236,8 @@
         "badge": "asset-posse-0014-badge"
       },
       "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0045",
+      "ownerAwakenerName": "Sanga",
       "lineupToken": "n"
     },
     {
@@ -242,6 +254,8 @@
         "badge": "asset-posse-0015-badge"
       },
       "realm": "CARO",
+      "ownerAwakenerId": "awakener-0002",
+      "ownerAwakenerName": "Agrippa",
       "lineupToken": "o"
     },
     {
@@ -258,6 +272,8 @@
         "badge": "asset-posse-0016-badge"
       },
       "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0020",
+      "ownerAwakenerName": "Ramona: Timeworn",
       "lineupToken": "p"
     },
     {
@@ -274,6 +290,8 @@
         "badge": "asset-posse-0017-badge"
       },
       "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
       "lineupToken": "v"
     },
     {
@@ -290,6 +308,8 @@
         "badge": "asset-posse-0018-badge"
       },
       "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily",
       "lineupToken": "w"
     },
     {
@@ -306,6 +326,8 @@
         "badge": "asset-posse-0019-badge"
       },
       "realm": "CARO",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
       "lineupToken": "u"
     },
     {
@@ -322,6 +344,8 @@
         "badge": "asset-posse-0020-badge"
       },
       "realm": "CARO",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
       "lineupToken": "r"
     },
     {
@@ -338,6 +362,8 @@
         "badge": "asset-posse-0021-badge"
       },
       "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath",
       "lineupToken": "s"
     },
     {
@@ -354,6 +380,8 @@
         "badge": "asset-posse-0022-badge"
       },
       "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0001",
+      "ownerAwakenerName": "24",
       "lineupToken": "t"
     },
     {
@@ -386,6 +414,8 @@
         "badge": "asset-posse-0024-badge"
       },
       "realm": "CARO",
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena",
       "lineupToken": "E"
     },
     {
@@ -402,6 +432,8 @@
         "badge": "asset-posse-0025-badge"
       },
       "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "lineupToken": "C"
     },
     {
@@ -418,6 +450,8 @@
         "badge": "asset-posse-0026-badge"
       },
       "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
       "lineupToken": "A"
     },
     {
@@ -434,6 +468,8 @@
         "badge": "asset-posse-0027-badge"
       },
       "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker",
       "lineupToken": "D"
     },
     {
@@ -498,6 +534,8 @@
         "badge": "asset-posse-0031-badge"
       },
       "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0050",
+      "ownerAwakenerName": "Tulu",
       "lineupToken": "K"
     },
     {
@@ -514,6 +552,8 @@
         "badge": "asset-posse-0032-badge"
       },
       "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz",
       "lineupToken": "B"
     },
     {
@@ -562,6 +602,8 @@
         "badge": "asset-posse-0035-badge"
       },
       "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant",
       "lineupToken": "N"
     },
     {
@@ -578,6 +620,8 @@
         "badge": "asset-posse-0036-badge"
       },
       "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0008",
+      "ownerAwakenerName": "Castor",
       "lineupToken": "O"
     },
     {
@@ -610,6 +654,8 @@
         "badge": "asset-posse-0038-badge"
       },
       "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
       "lineupToken": "R"
     },
     {
@@ -626,6 +672,8 @@
         "badge": "asset-posse-0039-badge"
       },
       "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
       "lineupToken": "V"
     },
     {
@@ -674,6 +722,8 @@
         "badge": "asset-posse-0042-badge"
       },
       "realm": "CARO",
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman",
       "lineupToken": "U"
     },
     {
@@ -722,6 +772,8 @@
         "badge": "asset-posse-0045-badge"
       },
       "realm": "OTHER",
+      "ownerAwakenerId": "awakener-0042",
+      "ownerAwakenerName": "Ramona",
       "lineupToken": "Y"
     },
     {
@@ -738,6 +790,8 @@
         "badge": "asset-posse-0046-badge"
       },
       "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0033",
+      "ownerAwakenerName": "Mouchette",
       "lineupToken": "Z"
     },
     {
@@ -754,6 +808,8 @@
         "badge": "asset-posse-0047-badge"
       },
       "realm": "CARO",
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
       "lineupToken": "2"
     },
     {
@@ -786,6 +842,8 @@
         "badge": "asset-posse-0049-badge"
       },
       "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice",
       "lineupToken": "5"
     },
     {

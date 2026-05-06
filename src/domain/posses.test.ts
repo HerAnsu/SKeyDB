@@ -1,6 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
 import {getPosses} from './posses'
+import {getPossesFull} from './posses-full'
 
 describe('getPosses', () => {
   it('returns posses with stable numeric indexes', () => {
@@ -43,5 +44,15 @@ describe('getPosses', () => {
     const uniqueIndices = new Set(indices)
 
     expect(uniqueIndices.size).toBe(indices.length)
+  })
+
+  it('loads public acquisition copy from V3 detail records', () => {
+    const fullRecords = getPossesFull()
+    const encounter = fullRecords.find((posse) => posse.id === 'posse-0001')
+
+    expect(encounter?.acquisitionSource).toBe(
+      'Clear Operation: Faded Legacy - Ch. 3 - Beware of Hounds',
+    )
+    expect(encounter).not.toHaveProperty('source')
   })
 })

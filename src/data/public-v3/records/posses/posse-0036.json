@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0036-crystal",
     "badge": "asset-posse-0036-badge"
   },
+  "ownerAwakenerId": "awakener-0008",
+  "ownerAwakenerName": "Castor",
+  "acquisitionSource": "Clear Dreamscape: Beyond the Skies: Part I",
   "realm": "ULTRA",
   "lineupToken": "O",
   "descriptionTemplate": "Increase a chosen Awakener's Aliemus by [Energy:Arg3]. Draw [Arg2] {plural:[Arg2]|card|cards} with the lowest Arithmetica Cost from the Draw Pile. If Castor is in your team, increase his Temp. DMG Amplification by [Arg1]%.",

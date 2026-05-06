@@ -16,9 +16,11 @@
   "realm": "AEQUOR",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "PERMANENT",
+  "releaseDate": "2023-11-29",
   "faction": "The Fools",
   "aliases": ["faros"],
-  "searchTags": ["Arithmetica", "Dispel", "Draw", "Hand Limit", "Tentacles"],
+  "searchTags": ["Poison", "Tentacle DMG", "Dispel", "Arithmetica", "Draw", "Hand Limit", "Tentacles"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 26,

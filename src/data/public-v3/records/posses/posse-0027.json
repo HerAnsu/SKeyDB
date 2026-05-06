@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0027-crystal",
     "badge": "asset-posse-0027-badge"
   },
+  "ownerAwakenerId": "awakener-0043",
+  "ownerAwakenerName": "Ryker",
+  "acquisitionSource": "Clear Special Ops: Happy Hunting!",
   "realm": "CHAOS",
   "lineupToken": "D",
   "descriptionTemplate": "Create 1 {Shining Octahedron Dice} and gain [Arg1]% Temporary Crit. Rate.",

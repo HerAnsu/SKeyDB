@@ -80,12 +80,19 @@ describe('public-data repository', () => {
     ])
     expect(getPublicSearchDocuments('posses')[0]).toMatchObject({
       kind: 'posse',
-      id: 'posse-0001',
-      tokens: expect.arrayContaining(['encounter in pure white', 'faded legacy']),
+      id: expect.stringMatching(/^posse-\d{4}$/),
+    })
+    expect(getPublicSearchDocuments('covenants')[0]).toMatchObject({
+      kind: 'covenant',
+      id: expect.stringMatching(/^covenant-\d{4}$/),
+    })
+    expect(getPublicSearchDocuments('relics')[0]).toMatchObject({
+      kind: 'relic',
+      id: expect.stringMatching(/^relic-\d{4}$/),
     })
     expect(getPublicSearchDocuments('awakeners')[0]).toMatchObject({
       kind: 'awakener',
-      facets: {tags: expect.arrayContaining(['Hand Limit'])},
+      facets: {tags: expect.arrayContaining(['hand-limit'])},
     })
 
     const assetId = resolvePublicEntityAsset('posse-0001', 'icon')

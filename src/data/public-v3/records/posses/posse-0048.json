@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0048-crystal",
     "badge": "asset-posse-0048-badge"
   },
+  "acquisitionSource": "Clear Special Ops: Spring Festival Express",
   "realm": "OTHER",
   "lineupToken": "3",
   "descriptionTemplate": "Temporary Crit. Rate +15%, gain 1 Arithmetica. The first time unleashed in this battle, deal [Arg3] {Ancient Embers} to all enemies.",

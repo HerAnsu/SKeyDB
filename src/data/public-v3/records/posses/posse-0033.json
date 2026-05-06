@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0033-crystal",
     "badge": "asset-posse-0033-badge"
   },
+  "acquisitionSource": "Clear Multiverse Link: My Turn!",
   "realm": "OTHER",
   "lineupToken": "L",
   "descriptionTemplate": "Generate 1 {Leah's Coin} and shuffle it into the Discard Pile.",

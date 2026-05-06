@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0008-crystal",
     "badge": "asset-posse-0008-badge"
   },
+  "acquisitionSource": "Clear Operation: Faded Legacy - Ch. 6 - Twisted Stars",
   "realm": "FADED_LEGACY",
   "lineupToken": "f",
   "descriptionTemplate": "Increase all Awakeners' Aliemus by 15. Suffer a Delayed {Sacrifice} equal to 5% of your Max HP.",

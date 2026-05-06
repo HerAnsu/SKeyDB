@@ -16,9 +16,11 @@
   "realm": "CARO",
   "rarity": "SSR",
   "type": "WARDEN",
+  "availabilityType": "PERMANENT",
+  "releaseDate": "2023-11-29",
   "faction": "Outlanders",
   "aliases": ["agrippa"],
-  "searchTags": ["Draw"],
+  "searchTags": ["Poison", "Alert", "STR Up", "Draw"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 35,

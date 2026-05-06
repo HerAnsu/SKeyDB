@@ -11,10 +11,8 @@ import {
   DATABASE_DETAIL_BODY_CLASS,
   DATABASE_DETAIL_HEADER_META_CLASS,
   DATABASE_DETAIL_HEADER_TITLE_CLASS,
-  DATABASE_DETAIL_META_LINK_CLASS,
   DATABASE_DETAIL_META_PRIMARY_CLASS,
   DATABASE_DETAIL_META_ROW_CLASS,
-  DATABASE_DETAIL_META_SEPARATOR_CLASS,
   DATABASE_DETAIL_SECTION_HEADING_CLASS,
   DATABASE_DETAIL_SECTION_HEADING_MUTED_CLASS,
   getDatabaseDetailBodyStyle,
@@ -22,6 +20,8 @@ import {
 } from '@/features/database/internal/database-detail-typography'
 import {RichDescription} from '@/features/database/internal/RichDescription'
 import {WheelLoreText} from '@/features/database/internal/WheelLoreText'
+
+import {OwnerAwakenerMetaLink} from './OwnerAwakenerMetaLink'
 
 interface SimpleArtifactDescriptionEntry {
   heading: string
@@ -35,6 +35,7 @@ interface SimpleArtifactDetailBodyProps {
   headerIconClassName?: string
   itemName: string
   lore?: string
+  acquisitionSource?: string
   onOpenArtViewer: () => void
   referenceLayer: ResolvedDatabaseReferenceLayer
   showTagIcons: boolean
@@ -49,10 +50,12 @@ export function SimpleArtifactDetailBody({
   itemName,
   lore,
   meta,
+  acquisitionSource,
   onOpenArtViewer,
   referenceLayer,
   showTagIcons,
 }: SimpleArtifactDetailBodyProps) {
+  const trimmedAcquisitionSource = acquisitionSource?.trim()
   return (
     <>
       <div className='shrink-0 border-b border-slate-800/75 pb-5'>
@@ -102,6 +105,23 @@ export function SimpleArtifactDetailBody({
           </section>
         ))}
 
+        {trimmedAcquisitionSource ? (
+          <section className='mt-5'>
+            <h4
+              className={DATABASE_DETAIL_SECTION_HEADING_CLASS}
+              style={getDatabaseDetailSectionHeadingStyle()}
+            >
+              How to Obtain
+            </h4>
+            <p
+              className={`mt-3 max-w-[68ch] ${DATABASE_DETAIL_BODY_CLASS}`}
+              style={getDatabaseDetailBodyStyle()}
+            >
+              {trimmedAcquisitionSource}
+            </p>
+          </section>
+        ) : null}
+
         {lore ? (
           <section className='mt-5 border-t border-slate-800/80 pt-4'>
             <h4
@@ -135,23 +155,11 @@ export function PosseMeta({
       <span className={DATABASE_DETAIL_META_PRIMARY_CLASS} style={{color: realmAccent}}>
         {realmLabel}
       </span>
-      {fullData.ownerAwakenerId && fullData.ownerAwakenerName ? (
-        <>
-          <span className={DATABASE_DETAIL_META_SEPARATOR_CLASS}>•</span>
-          <button
-            className={DATABASE_DETAIL_META_LINK_CLASS}
-            onClick={() => {
-              onSelectAwakener?.(
-                {id: fullData.ownerAwakenerId ?? '', name: fullData.ownerAwakenerName ?? ''},
-                'overview',
-              )
-            }}
-            type='button'
-          >
-            {fullData.ownerAwakenerName}
-          </button>
-        </>
-      ) : null}
+      <OwnerAwakenerMetaLink
+        onSelectAwakener={onSelectAwakener}
+        ownerAwakenerId={fullData.ownerAwakenerId}
+        ownerAwakenerName={fullData.ownerAwakenerName}
+      />
     </p>
   )
 }

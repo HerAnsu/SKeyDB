@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0019-crystal",
     "badge": "asset-posse-0019-badge"
   },
+  "ownerAwakenerId": "awakener-0046",
+  "ownerAwakenerName": "Sorel",
+  "acquisitionSource": "Clear Special Ops: Tribute to the Rose",
   "realm": "CARO",
   "lineupToken": "u",
   "descriptionTemplate": "Draw 2 cards and gain [Arg1] Temp. {STR}. If the Realm includes {Caro}, consume 10% of your HP to gain another [Arg2] Temp. {STR}, and another [Arg2] Temp. {STR} for each {Embryo} in your hand.",

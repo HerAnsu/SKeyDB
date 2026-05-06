@@ -16,9 +16,11 @@
   "realm": "CHAOS",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-09-09",
   "faction": "The Unknowable",
   "aliases": ["hameln"],
-  "searchTags": ["Arithmetica"],
+  "searchTags": ["Weakness", "Vulnerable", "Poison", "Bleed", "STR Up", "STR Down", "Steal STR", "Pierce DMG", "Arithmetica"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 47,

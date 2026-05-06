@@ -16,9 +16,11 @@
   "realm": "AEQUOR",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-06-17",
   "faction": "Out of the Aeons",
   "aliases": ["miryam"],
-  "searchTags": ["Arithmetica", "Draw", "Heal", "Tentacles"],
+  "searchTags": ["Weakness", "Vulnerable", "Poison", "STR Up", "STR Down", "Tentacle DMG", "Pierce DMG", "Arithmetica", "Draw", "Heal", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 33,

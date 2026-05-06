@@ -130,6 +130,7 @@ function SimpleArtifactDetailModalInner({
           onOpenArtViewer={openArtViewer}
           referenceLayer={referenceLayer}
           showTagIcons={preferences.shared.showTagIcons}
+          acquisitionSource={fullData.acquisitionSource}
         />
       )}
     </DbDetailShell>

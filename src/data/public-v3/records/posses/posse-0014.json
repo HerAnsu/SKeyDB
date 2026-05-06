@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0014-crystal",
     "badge": "asset-posse-0014-badge"
   },
+  "ownerAwakenerId": "awakener-0045",
+  "ownerAwakenerName": "Sanga",
+  "acquisitionSource": "Clear Psyche Deepdive: Sculpted Like a Song",
   "realm": "AEQUOR",
   "lineupToken": "n",
   "descriptionTemplate": "Recover [Arg1] Arithmetica and gain [Block:Arg2] Delayed Shield. If your Tentacle Stance is {Surging Tides}, instead summon [Arg3] Tentacles.",

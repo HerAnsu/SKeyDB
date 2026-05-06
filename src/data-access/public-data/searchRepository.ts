@@ -1,40 +1,36 @@
-import searchAwakenerBuildsJson from '@/data/public-v3/indexes/search-awakener-builds.json'
 import searchAwakenersJson from '@/data/public-v3/indexes/search-awakeners.json'
 import searchCovenantsJson from '@/data/public-v3/indexes/search-covenants.json'
-import searchDerivedSkillsJson from '@/data/public-v3/indexes/search-derived-skills.json'
-import searchEnlightensJson from '@/data/public-v3/indexes/search-enlightens.json'
-import searchOverlaysJson from '@/data/public-v3/indexes/search-overlays.json'
 import searchPossesJson from '@/data/public-v3/indexes/search-posses.json'
 import searchRelicsJson from '@/data/public-v3/indexes/search-relics.json'
-import searchSkillsJson from '@/data/public-v3/indexes/search-skills.json'
-import searchTalentsJson from '@/data/public-v3/indexes/search-talents.json'
 import searchWheelsJson from '@/data/public-v3/indexes/search-wheels.json'
 
 import {getOrCreateMapValue} from './cache'
 import type {PublicDataScope, PublicSearchDocument, PublicSearchIndex} from './contract'
 import {publicSearchIndexSchema} from './schemas'
 
-const searchJsonByScope = {
-  'awakener-builds': searchAwakenerBuildsJson,
+const searchJsonByScope: Partial<Record<PublicDataScope, unknown>> = {
   awakeners: searchAwakenersJson,
   covenants: searchCovenantsJson,
-  'derived-skills': searchDerivedSkillsJson,
-  enlightens: searchEnlightensJson,
-  overlays: searchOverlaysJson,
   posses: searchPossesJson,
   relics: searchRelicsJson,
-  skills: searchSkillsJson,
-  talents: searchTalentsJson,
   wheels: searchWheelsJson,
-} satisfies Record<PublicDataScope, unknown>
+}
+
+const emptySearchIndexByScope = new Map<PublicDataScope, PublicSearchIndex>()
 
 const searchCache = new Map<PublicDataScope, PublicSearchIndex>()
 const searchDocumentByIdCache = new Map<PublicDataScope, Map<string, PublicSearchDocument>>()
 
 function getPublicSearchIndex(scope: PublicDataScope): PublicSearchIndex {
-  return getOrCreateMapValue(searchCache, scope, () =>
-    publicSearchIndexSchema.parse(searchJsonByScope[scope]),
-  )
+  const searchJson = searchJsonByScope[scope]
+  if (searchJson === undefined) {
+    return getOrCreateMapValue(emptySearchIndexByScope, scope, () => ({
+      schemaVersion: 3,
+      scope,
+      records: [],
+    }))
+  }
+  return getOrCreateMapValue(searchCache, scope, () => publicSearchIndexSchema.parse(searchJson))
 }
 
 export function getPublicSearchDocuments(scope: PublicDataScope): PublicSearchDocument[] {

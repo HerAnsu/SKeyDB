@@ -16,9 +16,11 @@
   "realm": "CARO",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2025-09-08",
   "faction": "The Fools",
   "aliases": ["pickman"],
-  "searchTags": ["Arithmetica", "Draw"],
+  "searchTags": ["STR Up", "Steal STR", "Discover", "Arithmetica", "Draw"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 50,

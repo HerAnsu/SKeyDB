@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0005-crystal",
     "badge": "asset-posse-0005-badge"
   },
+  "acquisitionSource": "Clear Operation: Faded Legacy - Ch. 1 - East District's Enigma",
   "realm": "FADED_LEGACY",
   "lineupToken": "i",
   "descriptionTemplate": "Increase a chosen Awakener's Aliemus by [Arg1].",

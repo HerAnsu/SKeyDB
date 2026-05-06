@@ -16,9 +16,11 @@
   "realm": "AEQUOR",
   "rarity": "SSR",
   "type": "WARDEN",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2025-05-05",
   "faction": "The Fools",
   "aliases": ["corposant"],
-  "searchTags": ["Death Resistance", "Discard", "Draw", "Tentacles"],
+  "searchTags": ["Weakness", "STR Up", "Tentacle DMG", "Aftershock", "Death Resistance", "Discard", "Draw", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 50,

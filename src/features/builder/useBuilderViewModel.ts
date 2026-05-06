@@ -10,14 +10,15 @@ import {getAwakenerIdentityKeyById} from '@/domain/awakener-identity'
 import {searchAwakeners} from '@/domain/awakeners-search'
 import {compareAwakenersForCollectionSort} from '@/domain/collection-sorting'
 import {getCovenants} from '@/domain/covenants'
+import {searchCovenants} from '@/domain/covenants-search'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getPosseAssetById} from '@/domain/posse-assets'
 import {getPosses} from '@/domain/posses'
 import {searchPosses} from '@/domain/posses-search'
-import {normalizeForSearch} from '@/domain/search-utils'
 import {getBrowserLocalStorage} from '@/domain/storage'
 import {compareWheelsForUi} from '@/domain/wheel-sort'
-import {getWheelMainstatLabel, getWheels} from '@/domain/wheels'
+import {getWheels} from '@/domain/wheels'
+import {searchWheels} from '@/domain/wheels-search'
 import {builderDraftStore, type BuilderDraftFocus} from '@/stores/builderDraftStore'
 import {collectionOwnershipStore} from '@/stores/collectionOwnershipStore'
 
@@ -388,20 +389,6 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
     teamRecommendedPosseIds,
   ])
   const filteredWheels = useMemo(() => {
-    const query = pickerSearchByTab.wheels.trim().toLowerCase()
-    const normalizedQuery = normalizeForSearch(query)
-    const matchedAwakenerNames =
-      normalizedQuery.length > 0
-        ? new Set(
-            pickerAwakeners
-              .filter((awakener) =>
-                [awakener.name, ...awakener.aliases].some((value) =>
-                  normalizeForSearch(value).includes(normalizedQuery),
-                ),
-              )
-              .map((awakener) => awakener.name.toLowerCase()),
-          )
-        : null
     const wheelsByRarity =
       wheelRarityFilter === 'ALL'
         ? pickerWheels
@@ -416,22 +403,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
     const visibleWheels = displayUnowned
       ? wheelsByMainstat
       : wheelsByMainstat.filter((wheel) => isWheelOwnedById(wheel.id))
-    const queryFiltered = query
-      ? visibleWheels.filter((wheel) => {
-          if (!displayUnowned && !isWheelOwnedById(wheel.id)) {
-            return false
-          }
-          return (
-            wheel.name.toLowerCase().includes(query) ||
-            wheel.rarity.toLowerCase().includes(query) ||
-            wheel.realm.toLowerCase().includes(query) ||
-            wheel.awakener.toLowerCase().includes(query) ||
-            getWheelMainstatLabel(wheel).toLowerCase().includes(query) ||
-            wheel.mainstatKey.toLowerCase().includes(query) ||
-            Boolean(matchedAwakenerNames?.has(wheel.awakener.toLowerCase()))
-          )
-        })
-      : visibleWheels
+    const queryFiltered = searchWheels(visibleWheels, pickerSearchByTab.wheels)
     const sorted = [...queryFiltered].sort((left, right) =>
       promoteRecommendedGear
         ? compareWheelsForBuildRecommendation(left, right, {
@@ -445,7 +417,6 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
       ? sinkUnownedToEnd(sorted, (wheel) => isWheelOwnedById(wheel.id))
       : sorted
   }, [
-    pickerAwakeners,
     pickerWheels,
     pickerSearchByTab.wheels,
     wheelMainstatFilter,
@@ -458,14 +429,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
     promoteMatchingWheelMainstats,
   ])
   const filteredCovenants = useMemo(() => {
-    const query = pickerSearchByTab.covenants.trim().toLowerCase()
-    const queryFiltered = !query
-      ? pickerCovenants
-      : pickerCovenants.filter(
-          (covenant) =>
-            covenant.name.toLowerCase().includes(query) ||
-            covenant.id.toLowerCase().includes(query),
-        )
+    const queryFiltered = searchCovenants(pickerCovenants, pickerSearchByTab.covenants)
     return [...queryFiltered].sort((left, right) =>
       promoteRecommendedGear
         ? compareCovenantsForBuildRecommendation(left, right, activeBuild, {

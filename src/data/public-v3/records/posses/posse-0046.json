@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0046-crystal",
     "badge": "asset-posse-0046-badge"
   },
+  "ownerAwakenerId": "awakener-0033",
+  "ownerAwakenerName": "Mouchette",
+  "acquisitionSource": "Clear Multiverse Link: Baptism of Silver and Blood",
   "realm": "CHAOS",
   "lineupToken": "Z",
   "descriptionTemplate": "Draw 2 \"Strike\" cards. If \"Mouchette\" is in the team, reduce their Arithmetica Cost by 1.",

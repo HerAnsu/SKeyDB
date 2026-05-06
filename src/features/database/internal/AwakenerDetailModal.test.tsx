@@ -864,14 +864,14 @@ describe('AwakenerDetailModal', () => {
 
     const searchInput = screen.getByRole('combobox', {name: /jump to awakener/i})
     fireEvent.focus(searchInput)
-    fireEvent.change(searchInput, {target: {value: 'a'}})
+    fireEvent.change(searchInput, {target: {value: 'th'}})
 
     expect(screen.getByRole('option', {name: /thais/i})).toBeInTheDocument()
 
     fireEvent.click(container.firstChild as HTMLElement)
 
     expect(screen.queryByRole('option', {name: /thais/i})).not.toBeInTheDocument()
-    expect(searchInput).toHaveValue('a')
+    expect(searchInput).toHaveValue('th')
     expect(onClose).not.toHaveBeenCalled()
   })
 

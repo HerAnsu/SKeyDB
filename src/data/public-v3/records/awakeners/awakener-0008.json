@@ -16,9 +16,11 @@
   "realm": "ULTRA",
   "rarity": "SSR",
   "type": "WARDEN",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2025-06-02",
   "faction": "The Fools",
   "aliases": ["castor"],
-  "searchTags": ["Draw"],
+  "searchTags": ["Weakness", "Draw"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 52,

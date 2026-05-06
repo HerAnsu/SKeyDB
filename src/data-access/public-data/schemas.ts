@@ -184,8 +184,8 @@ export const publicSearchDocumentSchema = entityRefSchema
     name: nonEmptyStringSchema,
     aliases: z.array(nonEmptyStringSchema),
     tokens: z.array(nonEmptyStringSchema),
+    fields: z.record(nonEmptyStringSchema, z.array(nonEmptyStringSchema)),
     facets: z.record(nonEmptyStringSchema, z.unknown()).optional(),
-    boosts: z.record(nonEmptyStringSchema, z.number()).optional(),
   })
   .strict()
 

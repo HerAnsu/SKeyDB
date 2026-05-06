@@ -16,9 +16,11 @@
   "realm": "CHAOS",
   "rarity": "SR",
   "type": "ASSAULT",
+  "availabilityType": "WELFARE",
+  "releaseDate": "2023-11-29",
   "faction": "Out of the Aeons",
   "aliases": ["lotan"],
-  "searchTags": ["Dispel", "Max HP DMG", "Strike"],
+  "searchTags": ["STR Up", "Fixed DMG", "Dispel", "Max HP DMG", "Strike"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 34,

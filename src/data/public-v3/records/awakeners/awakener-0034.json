@@ -16,9 +16,11 @@
   "realm": "AEQUOR",
   "rarity": "SSR",
   "type": "WARDEN",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-02-21",
   "faction": "Hybrid",
   "aliases": ["murphy"],
-  "searchTags": ["Arithmetica", "Keyflare", "Tentacles"],
+  "searchTags": ["Weakness", "Vulnerable", "Tentacle DMG", "Aftershock", "Dispel", "Arithmetica", "Keyflare", "Tentacles", "Sacrifice"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 45,

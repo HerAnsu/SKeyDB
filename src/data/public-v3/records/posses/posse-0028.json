@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0028-crystal",
     "badge": "asset-posse-0028-badge"
   },
+  "acquisitionSource": "Clear Operation: Faded Legacy - Ch. 8 - Last Symphony",
   "realm": "CHAOS",
   "lineupToken": "I",
   "descriptionTemplate": "If the Arithmetica Cost of the next card you play this turn is 3 or more, recover 2 Arithmetica. Otherwise, draw 2 cards. If this is the {ordinal:4th} time this Posse was unleashed this battle, instead create 4 {Insight}.",

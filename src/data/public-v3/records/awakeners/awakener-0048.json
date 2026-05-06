@@ -16,9 +16,11 @@
   "realm": "CARO",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-05-18",
   "faction": "Out of the Aeons",
   "aliases": ["thais"],
-  "searchTags": ["Arithmetica", "Keyflare"],
+  "searchTags": ["Weakness", "Vulnerable", "Poison", "Bleed", "Counter", "STR Up", "Arithmetica", "Keyflare"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 49,

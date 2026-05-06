@@ -16,9 +16,11 @@
   "realm": "CARO",
   "rarity": "Genesis",
   "type": "ASSAULT",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-10-07",
   "faction": "The Fools",
   "aliases": ["helot: catena", "g-helot"],
-  "searchTags": ["Draw", "Hand Limit", "Heal", "Self-Harm", "Strike"],
+  "searchTags": ["Bleed", "STR Up", "Draw", "Hand Limit", "Heal", "Self-Harm", "Strike"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 55,

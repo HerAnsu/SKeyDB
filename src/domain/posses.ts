@@ -9,6 +9,11 @@ const publicV3PosseCatalogRecordSchema = z
     id: z.string().regex(/^posse-\d{4}$/),
     name: nonEmptyStringSchema,
     realm: nonEmptyStringSchema,
+    ownerAwakenerId: z
+      .string()
+      .regex(/^awakener-\d{4}$/)
+      .optional(),
+    ownerAwakenerName: nonEmptyStringSchema.optional(),
     lineupToken: nonEmptyStringSchema,
   })
   .loose()
@@ -18,6 +23,8 @@ export interface Posse {
   index: number
   name: string
   realm: string
+  ownerAwakenerId?: string
+  ownerAwakenerName?: string
   isFadedLegacy: boolean
   lineupToken: string
 }
@@ -38,6 +45,8 @@ const parsedPosses = getPublicCatalogRecords('posses')
       index: getPosseIndex(posse.id),
       name: posse.name,
       realm: posse.realm,
+      ownerAwakenerId: posse.ownerAwakenerId,
+      ownerAwakenerName: posse.ownerAwakenerName,
       isFadedLegacy: posse.realm === 'FADED_LEGACY',
       lineupToken: posse.lineupToken,
     }),

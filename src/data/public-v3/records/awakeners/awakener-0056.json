@@ -16,9 +16,11 @@
   "realm": "ULTRA",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2026-04-20",
   "faction": "The Unknowable",
   "aliases": ["arachne"],
-  "searchTags": ["Spider", "Divine Realm"],
+  "searchTags": ["Final Verdict", "Tentacle DMG", "Pursuit", "Fixed DMG", "Divine Realm", "Spider"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 50,

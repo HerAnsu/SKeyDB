@@ -11,6 +11,7 @@
         "enlighten.24.restraint-bonds"
       ],
       "ownedOverlays": ["overlay.24.realm-and-persona"],
+      "ownedPosses": ["posse-0022"],
       "ownedRelics": ["relic-0001"],
       "ownedSkills": [
         "skill.24.aberrant-vivisection",
@@ -33,6 +34,7 @@
         "enlighten.agrippa.spider-queens-kiss",
         "enlighten.agrippa.the-usurper"
       ],
+      "ownedPosses": ["posse-0015"],
       "ownedRelics": ["relic-0002"],
       "ownedSkills": [
         "skill.agrippa.colorless-spiral",
@@ -100,6 +102,7 @@
         "enlighten.aurita.slick-slide-adventure",
         "enlighten.aurita.sparkling-friendship"
       ],
+      "ownedPosses": ["posse-0010"],
       "ownedRelics": ["relic-0005"],
       "ownedSkills": [
         "skill.aurita.clamorous-ocean",
@@ -168,6 +171,7 @@
         "enlighten.castor.unyielding-will"
       ],
       "ownedOverlays": ["overlay.castor.corrosion"],
+      "ownedPosses": ["posse-0036"],
       "ownedRelics": ["relic-0008"],
       "ownedSkills": [
         "skill.castor.defense",
@@ -238,6 +242,7 @@
         "enlighten.corposant.unquenched-unfelled-undimmed",
         "enlighten.corposant.willing-sacrifice"
       ],
+      "ownedPosses": ["posse-0035"],
       "ownedRelics": ["relic-0011"],
       "ownedSkills": [
         "skill.corposant.defense",
@@ -296,6 +301,7 @@
         "enlighten.daffodil.mist-of-avarice",
         "enlighten.daffodil.phantasmal-haze"
       ],
+      "ownedPosses": ["posse-0017"],
       "ownedRelics": ["relic-0012"],
       "ownedSkills": [
         "skill.daffodil.defense",
@@ -370,6 +376,7 @@
         "enlighten.erica.multiple-calculations",
         "enlighten.erica.system-reboot"
       ],
+      "ownedPosses": ["posse-0012"],
       "ownedRelics": ["relic-0015"],
       "ownedSkills": [
         "skill.erica.defense",
@@ -467,6 +474,7 @@
         "enlighten.helot-catena.remnants-requiem",
         "enlighten.helot-catena.vengeance-unchained"
       ],
+      "ownedPosses": ["posse-0024"],
       "ownedRelics": ["relic-0019"],
       "ownedSkills": [
         "skill.helot-catena.crimson-shackles",
@@ -491,6 +499,7 @@
         "enlighten.ramona-timeworn.reach-into-yesterday"
       ],
       "ownedOverlays": ["overlay.ramona-timeworn.loop", "overlay.ramona-timeworn.negentropy"],
+      "ownedPosses": ["posse-0016"],
       "ownedRelics": ["relic-0020"],
       "ownedSkills": [
         "skill.ramona-timeworn.defense",
@@ -513,6 +522,7 @@
         "enlighten.goliath.giants-grip",
         "enlighten.goliath.rule-by-the-strongest"
       ],
+      "ownedPosses": ["posse-0021"],
       "ownedRelics": ["relic-0021"],
       "ownedSkills": [
         "skill.goliath.abyssal-depths-power",
@@ -590,6 +600,7 @@
         "overlay.horla.happiness",
         "overlay.horla.metaphor"
       ],
+      "ownedPosses": ["posse-0026"],
       "ownedRelics": ["relic-0024"],
       "ownedSkills": [
         "skill.horla.carol-psalm",
@@ -660,6 +671,7 @@
         "enlighten.kathigu-ra.everburning-flame"
       ],
       "ownedOverlays": ["overlay.kathigu-ra.combust", "overlay.kathigu-ra.fiamma"],
+      "ownedPosses": ["posse-0038"],
       "ownedRelics": ["relic-0027"],
       "ownedSkills": [
         "skill.kathigu-ra.all-melting-truth",
@@ -705,6 +717,7 @@
         "enlighten.lily.viscous-devour"
       ],
       "ownedOverlays": ["overlay.lily.endure"],
+      "ownedPosses": ["posse-0018"],
       "ownedRelics": ["relic-0029"],
       "ownedSkills": [
         "skill.lily.at-your-behest",
@@ -728,6 +741,7 @@
         "enlighten.liz.omens-descent",
         "enlighten.liz.verdant-spark"
       ],
+      "ownedPosses": ["posse-0032"],
       "ownedRelics": ["relic-0030"],
       "ownedSkills": [
         "skill.liz.dance-to-destruction",
@@ -785,6 +799,7 @@
         "enlighten.miryam.vanitys-collapse"
       ],
       "ownedOverlays": ["overlay.miryam.ritual"],
+      "ownedPosses": ["posse-0025"],
       "ownedRelics": ["relic-0032"],
       "ownedSkills": [
         "skill.miryam.defense",
@@ -808,6 +823,7 @@
         "enlighten.mouchette.mist-realm-traveler",
         "enlighten.mouchette.tornado-of-annihilation"
       ],
+      "ownedPosses": ["posse-0046"],
       "ownedRelics": ["relic-0033"],
       "ownedSkills": [
         "skill.mouchette.defense",
@@ -919,6 +935,7 @@
         "enlighten.ogier.resolute-devotion",
         "enlighten.ogier.sacrifice-for-justice"
       ],
+      "ownedPosses": ["posse-0009"],
       "ownedRelics": ["relic-0038"],
       "ownedSkills": [
         "skill.ogier.defense",
@@ -965,6 +982,7 @@
         "enlighten.pickman.world-in-the-painting"
       ],
       "ownedOverlays": ["overlay.pickman.creativity", "overlay.pickman.fantasia", "overlay.pickman.painted-orisons", "overlay.pickman.painted-relics"],
+      "ownedPosses": ["posse-0042"],
       "ownedRelics": ["relic-0040"],
       "ownedSkills": [
         "skill.pickman.art-is-madness",
@@ -989,6 +1007,7 @@
         "enlighten.pollux.the-nightbreaker"
       ],
       "ownedOverlays": ["overlay.pollux.sin-mark"],
+      "ownedPosses": ["posse-0039"],
       "ownedRelics": ["relic-0041"],
       "ownedSkills": [
         "skill.pollux.cleansing-judgement",
@@ -1011,6 +1030,7 @@
         "enlighten.ramona.precious-ties",
         "enlighten.ramona.sublime-tempering"
       ],
+      "ownedPosses": ["posse-0045"],
       "ownedRelics": ["relic-0042"],
       "ownedSkills": [
         "skill.ramona.assault-thesis",
@@ -1035,6 +1055,7 @@
         "enlighten.ryker.jackpot"
       ],
       "ownedOverlays": ["overlay.ryker.chaotic-legacy"],
+      "ownedPosses": ["posse-0027"],
       "ownedRelics": ["relic-0043"],
       "ownedSkills": [
         "skill.ryker.all-in",
@@ -1063,6 +1084,7 @@
         "enlighten.salvador.rite-of-creation",
         "enlighten.salvador.salvations-hand"
       ],
+      "ownedPosses": ["posse-0020"],
       "ownedRelics": ["relic-0044"],
       "ownedSkills": [
         "skill.salvador.benediction",
@@ -1090,6 +1112,7 @@
         "enlighten.sanga.oblivion-takes-all",
         "enlighten.sanga.the-sea-of-corals"
       ],
+      "ownedPosses": ["posse-0014"],
       "ownedRelics": ["relic-0045"],
       "ownedSkills": [
         "skill.sanga.beautys-mercy",
@@ -1112,6 +1135,7 @@
         "enlighten.sorel.roses-infinite-desire",
         "enlighten.sorel.vintage-nectar"
       ],
+      "ownedPosses": ["posse-0019"],
       "ownedRelics": ["relic-0046"],
       "ownedSkills": [
         "skill.sorel.carousel-of-ambition",
@@ -1215,6 +1239,7 @@
         "enlighten.tulu.the-stars-are-right",
         "enlighten.tulu.touch-of-revival"
       ],
+      "ownedPosses": ["posse-0031"],
       "ownedRelics": ["relic-0050"],
       "ownedSkills": [
         "skill.tulu.abyss-order",
@@ -1237,6 +1262,7 @@
         "enlighten.uvhash.sorcerers-end",
         "enlighten.uvhash.the-gladiator"
       ],
+      "ownedPosses": ["posse-0011"],
       "ownedRelics": ["relic-0051"],
       "ownedSkills": [
         "skill.uvhash.boil-blood",
@@ -1261,6 +1287,7 @@
         "enlighten.wanda.venus-and-fur"
       ],
       "ownedOverlays": ["overlay.wanda.dreamlure", "overlay.wanda.murmurs"],
+      "ownedPosses": ["posse-0013"],
       "ownedRelics": ["relic-0052"],
       "ownedSkills": [
         "skill.wanda.defense",
@@ -1307,6 +1334,7 @@
         "enlighten.xu.nirvanas-kiss"
       ],
       "ownedOverlays": ["overlay.xu.betroth", "overlay.xu.enthrall", "overlay.xu.spellbound"],
+      "ownedPosses": ["posse-0047"],
       "ownedRelics": ["relic-0054"],
       "ownedSkills": [
         "skill.xu.bonesick-longing",
@@ -1331,6 +1359,7 @@
         "enlighten.vortice.shackled-impulse"
       ],
       "ownedOverlays": ["overlay.vortice.vortex-reload"],
+      "ownedPosses": ["posse-0049"],
       "ownedRelics": ["relic-0055"],
       "ownedSkills": [
         "skill.vortice.abyssal-vortex-cannon",
@@ -4393,47 +4422,105 @@
     "posse-0006": {},
     "posse-0007": {},
     "posse-0008": {},
-    "posse-0009": {},
-    "posse-0010": {},
-    "posse-0011": {},
-    "posse-0012": {},
-    "posse-0013": {},
-    "posse-0014": {},
-    "posse-0015": {},
-    "posse-0016": {},
-    "posse-0017": {},
-    "posse-0018": {},
-    "posse-0019": {},
-    "posse-0020": {},
-    "posse-0021": {},
-    "posse-0022": {},
+    "posse-0009": {
+      "ownerAwakenerId": "awakener-0038"
+    },
+    "posse-0010": {
+      "ownerAwakenerId": "awakener-0005"
+    },
+    "posse-0011": {
+      "ownerAwakenerId": "awakener-0051"
+    },
+    "posse-0012": {
+      "ownerAwakenerId": "awakener-0015"
+    },
+    "posse-0013": {
+      "ownerAwakenerId": "awakener-0052"
+    },
+    "posse-0014": {
+      "ownerAwakenerId": "awakener-0045"
+    },
+    "posse-0015": {
+      "ownerAwakenerId": "awakener-0002"
+    },
+    "posse-0016": {
+      "ownerAwakenerId": "awakener-0020"
+    },
+    "posse-0017": {
+      "ownerAwakenerId": "awakener-0012"
+    },
+    "posse-0018": {
+      "ownerAwakenerId": "awakener-0029"
+    },
+    "posse-0019": {
+      "ownerAwakenerId": "awakener-0046"
+    },
+    "posse-0020": {
+      "ownerAwakenerId": "awakener-0044"
+    },
+    "posse-0021": {
+      "ownerAwakenerId": "awakener-0021"
+    },
+    "posse-0022": {
+      "ownerAwakenerId": "awakener-0001"
+    },
     "posse-0023": {},
-    "posse-0024": {},
-    "posse-0025": {},
-    "posse-0026": {},
-    "posse-0027": {},
+    "posse-0024": {
+      "ownerAwakenerId": "awakener-0019"
+    },
+    "posse-0025": {
+      "ownerAwakenerId": "awakener-0032"
+    },
+    "posse-0026": {
+      "ownerAwakenerId": "awakener-0024"
+    },
+    "posse-0027": {
+      "ownerAwakenerId": "awakener-0043"
+    },
     "posse-0028": {},
     "posse-0029": {},
     "posse-0030": {},
-    "posse-0031": {},
-    "posse-0032": {},
+    "posse-0031": {
+      "ownerAwakenerId": "awakener-0050"
+    },
+    "posse-0032": {
+      "ownerAwakenerId": "awakener-0030"
+    },
     "posse-0033": {},
     "posse-0034": {},
-    "posse-0035": {},
-    "posse-0036": {},
+    "posse-0035": {
+      "ownerAwakenerId": "awakener-0011"
+    },
+    "posse-0036": {
+      "ownerAwakenerId": "awakener-0008"
+    },
     "posse-0037": {},
-    "posse-0038": {},
-    "posse-0039": {},
+    "posse-0038": {
+      "ownerAwakenerId": "awakener-0027"
+    },
+    "posse-0039": {
+      "ownerAwakenerId": "awakener-0041"
+    },
     "posse-0040": {},
     "posse-0041": {},
-    "posse-0042": {},
+    "posse-0042": {
+      "ownerAwakenerId": "awakener-0040"
+    },
     "posse-0043": {},
     "posse-0044": {},
-    "posse-0045": {},
-    "posse-0046": {},
-    "posse-0047": {},
+    "posse-0045": {
+      "ownerAwakenerId": "awakener-0042"
+    },
+    "posse-0046": {
+      "ownerAwakenerId": "awakener-0033"
+    },
+    "posse-0047": {
+      "ownerAwakenerId": "awakener-0054"
+    },
     "posse-0048": {},
-    "posse-0049": {},
+    "posse-0049": {
+      "ownerAwakenerId": "awakener-0055"
+    },
     "posse-0050": {},
     "relic-0001": {
       "ownerAwakenerId": "awakener-0001"

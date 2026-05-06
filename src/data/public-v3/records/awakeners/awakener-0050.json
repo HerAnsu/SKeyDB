@@ -16,9 +16,11 @@
   "realm": "AEQUOR",
   "rarity": "SSR",
   "type": "ASSAULT",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2023-11-29",
   "faction": "Out of the Aeons",
   "aliases": ["tulu"],
-  "searchTags": ["Dispel", "Divine Realm", "Tentacles"],
+  "searchTags": ["STR Up", "STR Down", "Tentacle DMG", "Pierce DMG", "Aftershock", "Dispel", "Divine Realm", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 53,

@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0009-crystal",
     "badge": "asset-posse-0009-badge"
   },
+  "ownerAwakenerId": "awakener-0038",
+  "ownerAwakenerName": "Ogier",
+  "acquisitionSource": "Clear Psyche Deepdive: The Knight's Wish",
   "realm": "CHAOS",
   "lineupToken": "l",
   "descriptionTemplate": "Gain +[Arg1]% Temporary Crit. Rate and [Arg2] Temporary {STR}. If you're in a Boss Battle and have played no cards this turn, attempt to trigger {Death Resistance} [Arg3] {plural:[Arg3]|time|times}. If successful, gain [Block:Arg4] Shield. This effect can only trigger [Arg5] {plural:[Arg5]|time|times} per battle.",

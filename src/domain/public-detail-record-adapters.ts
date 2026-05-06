@@ -84,6 +84,7 @@ type PublicV3WheelRecord = PublicRecord & {
   searchTags?: string[]
 }
 type PublicV3PosseRecord = PublicRecord & {
+  acquisitionSource?: string
   descriptionArgs: PosseFullRecord['descriptionArgs']
   descriptionTemplate: string
   lore?: string
@@ -92,6 +93,7 @@ type PublicV3PosseRecord = PublicRecord & {
   realm: string
 }
 type PublicV3CovenantRecord = PublicRecord & {
+  acquisitionSource?: string
   lore?: string
   setEffects: CovenantFullRecord['setEffects']
 }
@@ -140,6 +142,7 @@ const publicWheelDetailSchema = z.looseObject({
   searchTags: z.array(z.string()).optional(),
 })
 const publicPosseDetailSchema = z.looseObject({
+  acquisitionSource: z.string().optional(),
   id: z.string(),
   descriptionArgs: descriptionArgsSchema,
   descriptionTemplate: z.string(),
@@ -150,6 +153,7 @@ const publicPosseDetailSchema = z.looseObject({
   realm: z.string(),
 })
 const publicCovenantDetailSchema = z.looseObject({
+  acquisitionSource: z.string().optional(),
   id: z.string(),
   lore: z.string().optional(),
   name: z.string(),

@@ -16,9 +16,11 @@
   "realm": "CARO",
   "rarity": "SSR",
   "type": "WARDEN",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-04-04",
   "faction": "Out of the Aeons",
   "aliases": ["salvador"],
-  "searchTags": ["Heal", "Self-Harm"],
+  "searchTags": ["Weakness", "Vulnerable", "Barrier", "STR Up", "Heal", "Self-Harm"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 66,

@@ -16,9 +16,11 @@
   "realm": "CHAOS",
   "rarity": "SR",
   "type": "WARDEN",
+  "availabilityType": "WELFARE",
+  "releaseDate": "2023-11-29",
   "faction": "The Fools",
   "aliases": ["ogier"],
-  "searchTags": ["Dispel"],
+  "searchTags": ["Vulnerable", "STR Up", "Pierce DMG", "Dispel"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 36,

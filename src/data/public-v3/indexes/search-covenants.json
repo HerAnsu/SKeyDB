@@ -8,13 +8,8 @@
       "name": "Deus Ex Machina",
       "aliases": [],
       "tokens": ["deus", "deus ex machina", "ex", "machina"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Deus Ex Machina", "deus-ex-machina"]
       }
     },
     {
@@ -23,13 +18,8 @@
       "name": "Re-evolution",
       "aliases": [],
       "tokens": ["evolution", "re", "re evolution"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Re-evolution"]
       }
     },
     {
@@ -38,13 +28,8 @@
       "name": "Scarlet Embrace",
       "aliases": [],
       "tokens": ["embrace", "scarlet", "scarlet embrace"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Scarlet Embrace", "scarlet-embrace"]
       }
     },
     {
@@ -53,13 +38,8 @@
       "name": "Crimson Pulse",
       "aliases": [],
       "tokens": ["crimson", "crimson pulse", "pulse"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Crimson Pulse", "crimson-pulse"]
       }
     },
     {
@@ -68,13 +48,8 @@
       "name": "Twisted Twins: Black",
       "aliases": [],
       "tokens": ["black", "twins", "twisted", "twisted twins black"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Twisted Twins: Black", "twisted-twins-black"]
       }
     },
     {
@@ -83,13 +58,8 @@
       "name": "Burial Ground's Sighs",
       "aliases": [],
       "tokens": ["burial", "burial grounds sighs", "grounds", "sighs"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Burial Ground's Sighs", "burial-grounds-sighs"]
       }
     },
     {
@@ -98,13 +68,8 @@
       "name": "Twisted Twins: White",
       "aliases": [],
       "tokens": ["twins", "twisted", "twisted twins white", "white"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Twisted Twins: White", "twisted-twins-white"]
       }
     },
     {
@@ -113,13 +78,8 @@
       "name": "Cursed Rabbit",
       "aliases": [],
       "tokens": ["cursed", "cursed rabbit", "rabbit"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Cursed Rabbit", "cursed-rabbit"]
       }
     },
     {
@@ -128,13 +88,8 @@
       "name": "Paradox",
       "aliases": [],
       "tokens": ["paradox"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Paradox"]
       }
     },
     {
@@ -143,13 +98,8 @@
       "name": "Photosynthesis Rite",
       "aliases": [],
       "tokens": ["photosynthesis", "photosynthesis rite", "rite"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Photosynthesis Rite", "photosynthesis-rite"]
       }
     },
     {
@@ -158,13 +108,8 @@
       "name": "Returnal Line",
       "aliases": [],
       "tokens": ["line", "returnal", "returnal line"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Returnal Line", "returnal-line"]
       }
     },
     {
@@ -173,13 +118,8 @@
       "name": "Ring of Chamber 36",
       "aliases": [],
       "tokens": ["36", "chamber", "of", "ring", "ring of chamber 36"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Ring of Chamber 36", "ring-of-chamber-36"]
       }
     },
     {
@@ -188,13 +128,8 @@
       "name": "Life Drain",
       "aliases": [],
       "tokens": ["drain", "life", "life drain"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Life Drain", "life-drain"]
       }
     },
     {
@@ -203,13 +138,8 @@
       "name": "April Tribute",
       "aliases": [],
       "tokens": ["april", "april tribute", "tribute"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["April Tribute", "april-tribute"]
       }
     },
     {
@@ -218,13 +148,8 @@
       "name": "Organic Form",
       "aliases": [],
       "tokens": ["form", "organic", "organic form"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Organic Form", "organic-form"]
       }
     },
     {
@@ -233,13 +158,8 @@
       "name": "Sweet Slug",
       "aliases": [],
       "tokens": ["slug", "sweet", "sweet slug"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Sweet Slug", "sweet-slug"]
       }
     },
     {
@@ -248,13 +168,8 @@
       "name": "Dream of Medicine",
       "aliases": [],
       "tokens": ["dream", "dream of medicine", "medicine", "of"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Dream of Medicine", "dream-of-medicine"]
       }
     },
     {
@@ -263,13 +178,8 @@
       "name": "Feast from Afar",
       "aliases": [],
       "tokens": ["afar", "feast", "feast from afar", "from"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Feast from Afar", "feast-from-afar"]
       }
     },
     {
@@ -278,13 +188,8 @@
       "name": "Unstained Chronicle",
       "aliases": [],
       "tokens": ["chronicle", "unstained", "unstained chronicle"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Unstained Chronicle", "unstained-chronicle"]
       }
     },
     {
@@ -293,13 +198,8 @@
       "name": "Steppenwolf",
       "aliases": [],
       "tokens": ["steppenwolf"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Steppenwolf"]
       }
     },
     {
@@ -308,13 +208,8 @@
       "name": "Chrysalis of the Maiden",
       "aliases": [],
       "tokens": ["chrysalis", "chrysalis of the maiden", "maiden", "of", "the"],
-      "facets": {
-        "setBonus": [3, 6]
-      },
-      "boosts": {
-        "name": 10,
-        "alias": 6,
-        "tag": 2
+      "fields": {
+        "name": ["Chrysalis of the Maiden", "chrysalis-of-the-maiden"]
       }
     }
   ]

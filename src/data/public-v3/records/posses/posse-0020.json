@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0020-crystal",
     "badge": "asset-posse-0020-badge"
   },
+  "ownerAwakenerId": "awakener-0044",
+  "ownerAwakenerName": "Salvador",
+  "acquisitionSource": "Clear Special Ops: The Color of Blood",
   "realm": "CARO",
   "lineupToken": "r",
   "descriptionTemplate": "Gain [Arg1] {STR}. Until your next turn, whenever you take Active DMG, gain Delayed Shield equal to [Arg2]% of that DMG. If the Realm includes {Caro}, instead accumulate {Crimson Furnace} equal to 10% of that DMG.",

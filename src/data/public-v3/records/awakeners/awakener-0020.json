@@ -16,9 +16,11 @@
   "realm": "CHAOS",
   "rarity": "Genesis",
   "type": "CHORUS",
+  "availabilityType": "WELFARE",
+  "releaseDate": "2023-11-29",
   "faction": "The Unknowable",
   "aliases": ["ramona: timeworn", "g-ramona"],
-  "searchTags": ["Arithmetica", "Draw", "Keyflare"],
+  "searchTags": ["STR Up", "STR Down", "Arithmetica", "Draw", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 32,

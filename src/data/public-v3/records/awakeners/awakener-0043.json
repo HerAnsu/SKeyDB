@@ -16,9 +16,11 @@
   "realm": "CHAOS",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_FADED_LEGACY",
+  "releaseDate": "2024-08-12",
   "faction": "The Fools",
   "aliases": ["ryker"],
-  "searchTags": ["Arithmetica", "Draw", "Keyflare"],
+  "searchTags": ["Weakness", "Vulnerable", "STR Up", "Arithmetica", "Draw", "Keyflare"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 62,

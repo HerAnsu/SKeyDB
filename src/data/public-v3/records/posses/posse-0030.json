@@ -12,6 +12,7 @@
     "crystal": "asset-posse-0030-crystal",
     "badge": "asset-posse-0030-badge"
   },
+  "acquisitionSource": "Clear Operation: Astral Reign - Ch. 1 - Return to the Big Smoke",
   "realm": "CHAOS",
   "lineupToken": "J",
   "descriptionTemplate": "Increase a chosen Awakener's Aliemus by [Arg1], and inflict [Arg2] {Poison} on all enemies. For each 1% of HP the target is missing, trigger 1% of their {Poison}, up to 50%.",

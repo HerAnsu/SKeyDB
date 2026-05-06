@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0017-crystal",
     "badge": "asset-posse-0017-badge"
   },
+  "ownerAwakenerId": "awakener-0012",
+  "ownerAwakenerName": "Daffodil",
+  "acquisitionSource": "Clear Special Ops: Phantom of the Rainy Town",
   "realm": "ULTRA",
   "lineupToken": "v",
   "descriptionTemplate": "Gain [Arg1] {STR} and create [Arg2] {Insight}. If in an {Ultra Round}, instead create [Arg3] {Insight}.",

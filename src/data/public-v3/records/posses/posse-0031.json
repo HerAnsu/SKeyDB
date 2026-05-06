@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0031-crystal",
     "badge": "asset-posse-0031-badge"
   },
+  "ownerAwakenerId": "awakener-0050",
+  "ownerAwakenerName": "Tulu",
+  "acquisitionSource": "Clear Psyche Deepdive: Coronation Day",
   "realm": "AEQUOR",
   "lineupToken": "K",
   "descriptionTemplate": "Choose either {Slumber} or {Arouse}.",

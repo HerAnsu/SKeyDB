@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0016-crystal",
     "badge": "asset-posse-0016-badge"
   },
+  "ownerAwakenerId": "awakener-0020",
+  "ownerAwakenerName": "Ramona: Timeworn",
+  "acquisitionSource": "Clear Psyche Deepdive: One Step Away",
   "realm": "CHAOS",
   "lineupToken": "p",
   "descriptionTemplate": "Search your Draw Pile for [Arg1] {plural:[Arg1]|card|cards} to put into your hand, and reduce their Arithmetica Cost by [Arg2].",

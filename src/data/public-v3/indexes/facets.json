@@ -378,6 +378,28 @@
         "order": 1000
       }
     ],
+    "availabilityType": [
+      {
+        "value": "PERMANENT",
+        "label": "Permanent",
+        "order": 0
+      },
+      {
+        "value": "WELFARE",
+        "label": "Welfare",
+        "order": 10
+      },
+      {
+        "value": "LIMITED_FADED_LEGACY",
+        "label": "Limited: Faded Legacy",
+        "order": 20
+      },
+      {
+        "value": "LIMITED_ASTRAL_REIGN",
+        "label": "Limited: Astral Reign",
+        "order": 30
+      }
+    ],
     "faction": [
       {
         "value": "Among the Stars",
@@ -417,79 +439,202 @@
     ],
     "tags": [
       {
-        "value": "Arithmetica",
-        "label": "Arithmetica",
-        "order": 1000
+        "value": "weakness",
+        "label": "Weakness",
+        "section": "affix",
+        "order": 100
       },
       {
-        "value": "Death Resistance",
-        "label": "Death Resistance",
-        "order": 1000
+        "value": "vulnerable",
+        "label": "Vulnerable",
+        "section": "affix",
+        "order": 110
       },
       {
-        "value": "Discard",
-        "label": "Discard",
-        "order": 1000
+        "value": "poison",
+        "label": "Poison",
+        "section": "affix",
+        "order": 120
       },
       {
-        "value": "Dispel",
-        "label": "Dispel",
-        "order": 1000
+        "value": "bleed",
+        "label": "Bleed",
+        "section": "affix",
+        "order": 130
       },
       {
-        "value": "Divine Realm",
-        "label": "Divine Realm",
-        "order": 1000
+        "value": "barrier",
+        "label": "Barrier",
+        "section": "affix",
+        "order": 180
       },
       {
-        "value": "Draw",
-        "label": "Draw",
-        "order": 1000
+        "value": "counter",
+        "label": "Counter",
+        "section": "affix",
+        "order": 190
       },
       {
-        "value": "Hand Limit",
-        "label": "Hand Limit",
-        "order": 1000
+        "value": "final-verdict",
+        "label": "Final Verdict",
+        "section": "affix",
+        "order": 200
       },
       {
-        "value": "Heal",
-        "label": "Heal",
-        "order": 1000
+        "value": "alert",
+        "label": "Alert",
+        "section": "affix",
+        "order": 205
       },
       {
-        "value": "Keyflare",
-        "label": "Keyflare",
-        "order": 1000
+        "value": "str-up",
+        "label": "STR Up",
+        "section": "affix",
+        "order": 210
       },
       {
-        "value": "Max HP DMG",
-        "label": "Max Hp Dmg",
-        "order": 1000
+        "value": "str-down",
+        "label": "STR Down",
+        "section": "affix",
+        "order": 220
       },
       {
-        "value": "Self-Harm",
-        "label": "Self-Harm",
-        "order": 1000
+        "value": "tentacle-dmg",
+        "label": "Tentacle DMG",
+        "section": "archetype",
+        "order": 225
       },
       {
-        "value": "Spider",
-        "label": "Spider",
-        "order": 1000
-      },
-      {
-        "value": "Strike",
-        "label": "Strike",
-        "order": 1000
-      },
-      {
-        "value": "Stun",
+        "value": "stun",
         "label": "Stun",
+        "section": "affix",
+        "order": 230
+      },
+      {
+        "value": "pursuit",
+        "label": "Pursuit",
+        "section": "mechanic",
+        "order": 240
+      },
+      {
+        "value": "steal-str",
+        "label": "Steal STR",
+        "section": "mechanic",
+        "order": 245
+      },
+      {
+        "value": "pierce-dmg",
+        "label": "Pierce DMG",
+        "section": "mechanic",
+        "order": 250
+      },
+      {
+        "value": "fixed-dmg",
+        "label": "Fixed DMG",
+        "section": "mechanic",
+        "order": 255
+      },
+      {
+        "value": "aftershock",
+        "label": "Aftershock",
+        "section": "mechanic",
+        "order": 260
+      },
+      {
+        "value": "discover",
+        "label": "Discover",
+        "section": "mechanic",
+        "order": 265
+      },
+      {
+        "value": "dispel",
+        "label": "Dispel",
+        "section": "mechanic",
+        "order": 300
+      },
+      {
+        "value": "arithmetica",
+        "label": "Arithmetica",
+        "section": "archetype",
+        "order": 900
+      },
+      {
+        "value": "death-resistance",
+        "label": "Death Resistance",
+        "section": "archetype",
+        "order": 910
+      },
+      {
+        "value": "discard",
+        "label": "Discard",
+        "section": "archetype",
+        "order": 920
+      },
+      {
+        "value": "divine-realm",
+        "label": "Divine Realm",
+        "section": "archetype",
+        "order": 930
+      },
+      {
+        "value": "draw",
+        "label": "Draw",
+        "section": "archetype",
+        "order": 940
+      },
+      {
+        "value": "hand-limit",
+        "label": "Hand Limit",
+        "section": "archetype",
+        "order": 950
+      },
+      {
+        "value": "heal",
+        "label": "Heal",
+        "section": "archetype",
+        "order": 960
+      },
+      {
+        "value": "keyflare",
+        "label": "Keyflare",
+        "section": "archetype",
+        "order": 970
+      },
+      {
+        "value": "max-hp-dmg",
+        "label": "Max HP DMG",
+        "section": "archetype",
+        "order": 980
+      },
+      {
+        "value": "self-harm",
+        "label": "Self-Harm",
+        "section": "archetype",
+        "order": 990
+      },
+      {
+        "value": "spider",
+        "label": "Spider",
+        "section": "archetype",
         "order": 1000
       },
       {
-        "value": "Tentacles",
+        "value": "strike",
+        "label": "Strike",
+        "section": "archetype",
+        "order": 1010
+      },
+      {
+        "value": "tentacles",
         "label": "Tentacles",
-        "order": 1000
+        "section": "archetype",
+        "order": 1020
+      },
+      {
+        "value": "sacrifice",
+        "label": "Sacrifice",
+        "section": "mechanic",
+        "order": 1030
       }
     ]
   },
@@ -1131,6 +1276,153 @@
         "value": "OTHER",
         "label": "Other",
         "order": 50
+      }
+    ],
+    "owner": [
+      {
+        "value": "awakener-0001",
+        "label": "24",
+        "order": 0
+      },
+      {
+        "value": "awakener-0002",
+        "label": "Agrippa",
+        "order": 1
+      },
+      {
+        "value": "awakener-0005",
+        "label": "Aurita",
+        "order": 4
+      },
+      {
+        "value": "awakener-0008",
+        "label": "Castor",
+        "order": 7
+      },
+      {
+        "value": "awakener-0011",
+        "label": "Corposant",
+        "order": 10
+      },
+      {
+        "value": "awakener-0012",
+        "label": "Daffodil",
+        "order": 11
+      },
+      {
+        "value": "awakener-0015",
+        "label": "Erica",
+        "order": 14
+      },
+      {
+        "value": "awakener-0019",
+        "label": "Helot: Catena",
+        "order": 18
+      },
+      {
+        "value": "awakener-0020",
+        "label": "Ramona: Timeworn",
+        "order": 19
+      },
+      {
+        "value": "awakener-0021",
+        "label": "Goliath",
+        "order": 20
+      },
+      {
+        "value": "awakener-0024",
+        "label": "Horla",
+        "order": 23
+      },
+      {
+        "value": "awakener-0027",
+        "label": "Kathigu-Ra",
+        "order": 26
+      },
+      {
+        "value": "awakener-0029",
+        "label": "Lily",
+        "order": 28
+      },
+      {
+        "value": "awakener-0030",
+        "label": "Liz",
+        "order": 29
+      },
+      {
+        "value": "awakener-0032",
+        "label": "Miryam",
+        "order": 31
+      },
+      {
+        "value": "awakener-0033",
+        "label": "Mouchette",
+        "order": 32
+      },
+      {
+        "value": "awakener-0038",
+        "label": "Ogier",
+        "order": 37
+      },
+      {
+        "value": "awakener-0040",
+        "label": "Pickman",
+        "order": 39
+      },
+      {
+        "value": "awakener-0041",
+        "label": "Pollux",
+        "order": 40
+      },
+      {
+        "value": "awakener-0042",
+        "label": "Ramona",
+        "order": 41
+      },
+      {
+        "value": "awakener-0043",
+        "label": "Ryker",
+        "order": 42
+      },
+      {
+        "value": "awakener-0044",
+        "label": "Salvador",
+        "order": 43
+      },
+      {
+        "value": "awakener-0045",
+        "label": "Sanga",
+        "order": 44
+      },
+      {
+        "value": "awakener-0046",
+        "label": "Sorel",
+        "order": 45
+      },
+      {
+        "value": "awakener-0050",
+        "label": "Tulu",
+        "order": 49
+      },
+      {
+        "value": "awakener-0051",
+        "label": "Uvhash",
+        "order": 50
+      },
+      {
+        "value": "awakener-0052",
+        "label": "Wanda",
+        "order": 51
+      },
+      {
+        "value": "awakener-0054",
+        "label": "Xu",
+        "order": 53
+      },
+      {
+        "value": "awakener-0055",
+        "label": "Vortice",
+        "order": 54
       }
     ]
   },

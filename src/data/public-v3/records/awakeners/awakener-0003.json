@@ -16,9 +16,11 @@
   "realm": "CARO",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "WELFARE",
+  "releaseDate": "2023-11-29",
   "faction": "Hybrid",
   "aliases": ["aigis"],
-  "searchTags": ["Draw", "Keyflare", "Stun"],
+  "searchTags": ["Vulnerable", "Stun", "Draw", "Keyflare"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 27,

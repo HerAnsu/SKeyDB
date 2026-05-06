@@ -16,9 +16,11 @@
   "realm": "ULTRA",
   "rarity": "SSR",
   "type": "ASSAULT",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2025-10-20",
   "faction": "Hybrid",
   "aliases": ["pollux"],
-  "searchTags": ["Discard", "Draw"],
+  "searchTags": ["Bleed", "Discard", "Draw"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 49,

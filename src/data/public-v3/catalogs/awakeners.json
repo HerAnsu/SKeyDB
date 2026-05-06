@@ -20,6 +20,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-04-27",
       "faction": "Hybrid",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -54,7 +56,21 @@
       },
       "lineupToken": "T",
       "aliases": ["24", "twenty-four"],
-      "searchTags": ["Arithmetica", "Hand Limit", "Keyflare", "Tentacles"]
+      "searchTags": [
+        "Weakness",
+        "Vulnerable",
+        "Poison",
+        "Bleed",
+        "Counter",
+        "STR Up",
+        "Tentacle DMG",
+        "Pierce DMG",
+        "Fixed DMG",
+        "Arithmetica",
+        "Hand Limit",
+        "Keyflare",
+        "Tentacles"
+      ]
     },
     {
       "kind": "awakener",
@@ -72,6 +88,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Outlanders",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -106,7 +124,7 @@
       },
       "lineupToken": "S",
       "aliases": ["agrippa"],
-      "searchTags": ["Draw"]
+      "searchTags": ["Poison", "Alert", "STR Up", "Draw"]
     },
     {
       "kind": "awakener",
@@ -124,6 +142,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29",
       "faction": "Hybrid",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -158,7 +178,7 @@
       },
       "lineupToken": "J",
       "aliases": ["aigis"],
-      "searchTags": ["Draw", "Keyflare", "Stun"]
+      "searchTags": ["Vulnerable", "Stun", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -176,6 +196,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Outlanders",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -210,7 +232,7 @@
       },
       "lineupToken": "G",
       "aliases": ["alva"],
-      "searchTags": ["Death Resistance", "Discard", "Dispel", "Draw", "Strike"]
+      "searchTags": ["Vulnerable", "Alert", "Dispel", "Death Resistance", "Discard", "Draw", "Strike"]
     },
     {
       "kind": "awakener",
@@ -228,6 +250,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29",
       "faction": "The Fools",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -262,7 +286,7 @@
       },
       "lineupToken": "o",
       "aliases": ["aurita"],
-      "searchTags": ["Discard", "Draw"]
+      "searchTags": ["STR Up", "Tentacle DMG", "Pierce DMG", "Aftershock", "Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -280,6 +304,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Hybrid",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -314,7 +340,7 @@
       },
       "lineupToken": "M",
       "aliases": ["caecus"],
-      "searchTags": ["Dispel", "Heal", "Tentacles"]
+      "searchTags": ["Counter", "STR Up", "Tentacle DMG", "Dispel", "Heal", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -332,6 +358,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "The Unknowable",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -366,7 +394,7 @@
       },
       "lineupToken": "n",
       "aliases": ["casiah"],
-      "searchTags": ["Arithmetica", "Discard", "Draw"]
+      "searchTags": ["STR Up", "Aftershock", "Arithmetica", "Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -384,6 +412,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-06-02",
       "faction": "The Fools",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -418,7 +448,7 @@
       },
       "lineupToken": "7",
       "aliases": ["castor"],
-      "searchTags": ["Draw"]
+      "searchTags": ["Weakness", "Draw"]
     },
     {
       "kind": "awakener",
@@ -436,6 +466,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Outlanders",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -470,7 +502,7 @@
       },
       "lineupToken": "h",
       "aliases": ["celeste"],
-      "searchTags": ["Arithmetica", "Dispel", "Heal", "Tentacles"]
+      "searchTags": ["Weakness", "Tentacle DMG", "Dispel", "Arithmetica", "Heal", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -488,6 +520,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-04-07",
       "faction": "The Unknowable",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -522,7 +556,7 @@
       },
       "lineupToken": "9",
       "aliases": ["clementine"],
-      "searchTags": ["Dispel", "Keyflare"]
+      "searchTags": ["Bleed", "STR Up", "Dispel", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -540,6 +574,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-05-05",
       "faction": "The Fools",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -574,7 +610,7 @@
       },
       "lineupToken": "6",
       "aliases": ["corposant"],
-      "searchTags": ["Death Resistance", "Discard", "Draw", "Tentacles"]
+      "searchTags": ["Weakness", "STR Up", "Tentacle DMG", "Aftershock", "Death Resistance", "Discard", "Draw", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -592,6 +628,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2023-12-20",
       "faction": "The Unknowable",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -626,7 +664,7 @@
       },
       "lineupToken": "I",
       "aliases": ["daffodil"],
-      "searchTags": ["Arithmetica", "Draw", "Keyflare"]
+      "searchTags": ["Weakness", "Vulnerable", "Poison", "Counter", "STR Up", "Pierce DMG", "Arithmetica", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -644,6 +682,8 @@
       "realm": "CHAOS",
       "rarity": "SR",
       "type": "CHORUS",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29",
       "faction": "Among the Stars",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -678,7 +718,7 @@
       },
       "lineupToken": "l",
       "aliases": ["doll"],
-      "searchTags": ["Discard", "Dispel", "Heal"]
+      "searchTags": ["Weakness", "Dispel", "Discard", "Heal"]
     },
     {
       "kind": "awakener",
@@ -696,6 +736,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-07-21",
       "faction": "Out of the Aeons",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -730,7 +772,7 @@
       },
       "lineupToken": "xi",
       "aliases": ["doresain"],
-      "searchTags": ["Self-Harm"]
+      "searchTags": ["Vulnerable", "STR Up", "Pierce DMG", "Fixed DMG", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -748,6 +790,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29",
       "faction": "Hybrid",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -782,7 +826,7 @@
       },
       "lineupToken": "V",
       "aliases": ["erica"],
-      "searchTags": ["Dispel", "Keyflare"]
+      "searchTags": ["Weakness", "Vulnerable", "Alert", "STR Up", "Dispel", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -800,6 +844,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Among the Stars",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -834,7 +880,7 @@
       },
       "lineupToken": "s",
       "aliases": ["faint"],
-      "searchTags": ["Death Resistance", "Dispel", "Heal"]
+      "searchTags": ["Weakness", "Counter", "STR Up", "STR Down", "Steal STR", "Fixed DMG", "Dispel", "Death Resistance", "Heal"]
     },
     {
       "kind": "awakener",
@@ -852,6 +898,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "The Fools",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -886,7 +934,7 @@
       },
       "lineupToken": "q",
       "aliases": ["faros"],
-      "searchTags": ["Arithmetica", "Dispel", "Draw", "Hand Limit", "Tentacles"]
+      "searchTags": ["Poison", "Tentacle DMG", "Dispel", "Arithmetica", "Draw", "Hand Limit", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -904,6 +952,8 @@
       "realm": "CHAOS",
       "rarity": "Genesis",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-02-10",
       "faction": "Among the Stars",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -938,7 +988,7 @@
       },
       "lineupToken": "U",
       "aliases": ["doll: inferno", "g-doll"],
-      "searchTags": ["Arithmetica", "Draw", "Heal", "Max HP DMG", "Self-Harm"]
+      "searchTags": ["Weakness", "Vulnerable", "Poison", "Fixed DMG", "Arithmetica", "Draw", "Heal", "Max HP DMG", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -956,6 +1006,8 @@
       "realm": "CARO",
       "rarity": "Genesis",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-10-07",
       "faction": "The Fools",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -990,7 +1042,7 @@
       },
       "lineupToken": "i",
       "aliases": ["helot: catena", "g-helot"],
-      "searchTags": ["Draw", "Hand Limit", "Heal", "Self-Harm", "Strike"]
+      "searchTags": ["Bleed", "STR Up", "Draw", "Hand Limit", "Heal", "Self-Harm", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1008,6 +1060,8 @@
       "realm": "CHAOS",
       "rarity": "Genesis",
       "type": "CHORUS",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29",
       "faction": "The Unknowable",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1042,7 +1096,7 @@
       },
       "lineupToken": "j",
       "aliases": ["ramona: timeworn", "g-ramona"],
-      "searchTags": ["Arithmetica", "Draw", "Keyflare"]
+      "searchTags": ["STR Up", "STR Down", "Arithmetica", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -1060,6 +1114,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "The Fools",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1094,7 +1150,7 @@
       },
       "lineupToken": "f",
       "aliases": ["goliath"],
-      "searchTags": []
+      "searchTags": ["STR Up", "Tentacle DMG", "Dispel"]
     },
     {
       "kind": "awakener",
@@ -1112,6 +1168,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-09-09",
       "faction": "The Unknowable",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -1146,7 +1204,7 @@
       },
       "lineupToken": "Y",
       "aliases": ["hameln"],
-      "searchTags": ["Arithmetica"]
+      "searchTags": ["Weakness", "Vulnerable", "Poison", "Bleed", "STR Up", "STR Down", "Steal STR", "Pierce DMG", "Arithmetica"]
     },
     {
       "kind": "awakener",
@@ -1164,6 +1222,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "The Fools",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1198,7 +1258,7 @@
       },
       "lineupToken": "F",
       "aliases": ["helot"],
-      "searchTags": ["Discard", "Draw", "Hand Limit", "Self-Harm", "Strike"]
+      "searchTags": ["Dispel", "Discard", "Draw", "Hand Limit", "Self-Harm", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1216,6 +1276,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-07-15",
       "faction": "Outlanders",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -1250,7 +1312,7 @@
       },
       "lineupToken": "B",
       "aliases": ["horla"],
-      "searchTags": ["Death Resistance", "Heal"]
+      "searchTags": ["Weakness", "Vulnerable", "Counter", "STR Up", "STR Down", "Death Resistance", "Heal"]
     },
     {
       "kind": "awakener",
@@ -1268,6 +1330,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "The Fools",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1320,6 +1384,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Outlanders",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1354,7 +1420,7 @@
       },
       "lineupToken": "m",
       "aliases": ["karen"],
-      "searchTags": ["Arithmetica", "Dispel", "Draw", "Heal", "Keyflare"]
+      "searchTags": ["Weakness", "Poison", "Dispel", "Arithmetica", "Draw", "Heal", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -1372,6 +1438,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-08-18",
       "faction": "Among the Stars",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -1406,7 +1474,7 @@
       },
       "lineupToken": "1",
       "aliases": ["kathigu-ra", "kathigura"],
-      "searchTags": ["Discard", "Dispel", "Draw"]
+      "searchTags": ["STR Up", "Pierce DMG", "Dispel", "Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -1424,6 +1492,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Hybrid",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1458,7 +1528,7 @@
       },
       "lineupToken": "P",
       "aliases": ["leigh"],
-      "searchTags": ["Dispel", "Heal", "Self-Harm"]
+      "searchTags": ["STR Up", "Pierce DMG", "Dispel", "Heal", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -1476,6 +1546,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-01-31",
       "faction": "Hybrid",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -1510,7 +1582,7 @@
       },
       "lineupToken": "w",
       "aliases": ["lily"],
-      "searchTags": ["Death Resistance", "Heal", "Strike"]
+      "searchTags": ["Poison", "Death Resistance", "Heal", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1528,6 +1600,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "The Fools",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1562,7 +1636,7 @@
       },
       "lineupToken": "d",
       "aliases": ["liz"],
-      "searchTags": ["Discard", "Draw"]
+      "searchTags": ["Poison", "STR Up", "Pierce DMG", "Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -1580,6 +1654,8 @@
       "realm": "CHAOS",
       "rarity": "SR",
       "type": "ASSAULT",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29",
       "faction": "Out of the Aeons",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1614,7 +1690,7 @@
       },
       "lineupToken": "k",
       "aliases": ["lotan"],
-      "searchTags": ["Dispel", "Max HP DMG", "Strike"]
+      "searchTags": ["STR Up", "Fixed DMG", "Dispel", "Max HP DMG", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1632,6 +1708,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-06-17",
       "faction": "Out of the Aeons",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -1666,7 +1744,7 @@
       },
       "lineupToken": "A",
       "aliases": ["miryam"],
-      "searchTags": ["Arithmetica", "Draw", "Heal", "Tentacles"]
+      "searchTags": ["Weakness", "Vulnerable", "Poison", "STR Up", "STR Down", "Tentacle DMG", "Pierce DMG", "Arithmetica", "Draw", "Heal", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -1684,6 +1762,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-12-29",
       "faction": "Outlanders",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -1718,7 +1798,7 @@
       },
       "lineupToken": "xg",
       "aliases": ["mouchette"],
-      "searchTags": ["Death Resistance", "Strike", "Stun"]
+      "searchTags": ["Stun", "Pursuit", "Death Resistance", "Strike"]
     },
     {
       "kind": "awakener",
@@ -1736,6 +1816,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-02-21",
       "faction": "Hybrid",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -1770,7 +1852,7 @@
       },
       "lineupToken": "r",
       "aliases": ["murphy"],
-      "searchTags": ["Arithmetica", "Keyflare", "Tentacles"]
+      "searchTags": ["Weakness", "Vulnerable", "Tentacle DMG", "Aftershock", "Dispel", "Arithmetica", "Keyflare", "Tentacles", "Sacrifice"]
     },
     {
       "kind": "awakener",
@@ -1788,6 +1870,8 @@
       "realm": "AEQUOR",
       "rarity": "Genesis",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-11-24",
       "faction": "Out of the Aeons",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -1822,7 +1906,7 @@
       },
       "lineupToken": "H",
       "aliases": ["murphy: fauxborn", "g-murphy"],
-      "searchTags": ["Arithmetica", "Divine Realm", "Draw", "Keyflare", "Tentacles"]
+      "searchTags": ["Tentacle DMG", "Aftershock", "Arithmetica", "Divine Realm", "Draw", "Keyflare", "Tentacles", "Sacrifice"]
     },
     {
       "kind": "awakener",
@@ -1840,6 +1924,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "The Fools",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1874,7 +1960,7 @@
       },
       "lineupToken": "g",
       "aliases": ["nautila"],
-      "searchTags": ["Dispel"]
+      "searchTags": ["Counter", "Fixed DMG"]
     },
     {
       "kind": "awakener",
@@ -1892,6 +1978,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Outlanders",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1926,7 +2014,7 @@
       },
       "lineupToken": "v",
       "aliases": ["nymphaea"],
-      "searchTags": []
+      "searchTags": ["Weakness", "Vulnerable", "Poison", "STR Up"]
     },
     {
       "kind": "awakener",
@@ -1944,6 +2032,8 @@
       "realm": "CHAOS",
       "rarity": "SR",
       "type": "WARDEN",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29",
       "faction": "The Fools",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -1978,7 +2068,7 @@
       },
       "lineupToken": "D",
       "aliases": ["ogier"],
-      "searchTags": ["Dispel"]
+      "searchTags": ["Vulnerable", "STR Up", "Pierce DMG", "Dispel"]
     },
     {
       "kind": "awakener",
@@ -1996,6 +2086,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Outlanders",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -2030,7 +2122,7 @@
       },
       "lineupToken": "b",
       "aliases": ["pandia"],
-      "searchTags": []
+      "searchTags": ["Vulnerable", "Counter", "STR Up", "Steal STR", "Dispel"]
     },
     {
       "kind": "awakener",
@@ -2048,6 +2140,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-09-08",
       "faction": "The Fools",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2082,7 +2176,7 @@
       },
       "lineupToken": "0",
       "aliases": ["pickman"],
-      "searchTags": ["Arithmetica", "Draw"]
+      "searchTags": ["STR Up", "Steal STR", "Discover", "Arithmetica", "Draw"]
     },
     {
       "kind": "awakener",
@@ -2100,6 +2194,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-10-20",
       "faction": "Hybrid",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2134,7 +2230,7 @@
       },
       "lineupToken": "3",
       "aliases": ["pollux"],
-      "searchTags": ["Discard", "Draw"]
+      "searchTags": ["Bleed", "Discard", "Draw"]
     },
     {
       "kind": "awakener",
@@ -2152,6 +2248,8 @@
       "realm": "CHAOS",
       "rarity": "SR",
       "type": "CHORUS",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29",
       "faction": "The Unknowable",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -2186,7 +2284,7 @@
       },
       "lineupToken": "N",
       "aliases": ["ramona"],
-      "searchTags": ["Arithmetica", "Discard", "Draw", "Keyflare"]
+      "searchTags": ["Weakness", "Vulnerable", "STR Up", "STR Down", "Arithmetica", "Discard", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -2204,6 +2302,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-08-12",
       "faction": "The Fools",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2238,7 +2338,7 @@
       },
       "lineupToken": "W",
       "aliases": ["ryker"],
-      "searchTags": ["Arithmetica", "Draw", "Keyflare"]
+      "searchTags": ["Weakness", "Vulnerable", "STR Up", "Arithmetica", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -2256,6 +2356,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-04-04",
       "faction": "Out of the Aeons",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2290,7 +2392,7 @@
       },
       "lineupToken": "R",
       "aliases": ["salvador"],
-      "searchTags": ["Heal", "Self-Harm"]
+      "searchTags": ["Weakness", "Vulnerable", "Barrier", "STR Up", "Heal", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -2308,6 +2410,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Outlanders",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -2342,7 +2446,7 @@
       },
       "lineupToken": "K",
       "aliases": ["sanga"],
-      "searchTags": ["Death Resistance", "Dispel", "Tentacles"]
+      "searchTags": ["Tentacle DMG", "Aftershock", "Dispel", "Death Resistance", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -2360,6 +2464,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-01-10",
       "faction": "Outlanders",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2394,7 +2500,7 @@
       },
       "lineupToken": "C",
       "aliases": ["sorel"],
-      "searchTags": ["Death Resistance", "Heal", "Self-Harm"]
+      "searchTags": ["STR Up", "Death Resistance", "Heal", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -2412,6 +2518,8 @@
       "realm": "CHAOS",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-11-18",
       "faction": "Gateway",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2446,7 +2554,7 @@
       },
       "lineupToken": "X",
       "aliases": ["tawil"],
-      "searchTags": ["Arithmetica", "Discard", "Draw", "Keyflare", "Max HP DMG"]
+      "searchTags": ["Barrier", "STR Up", "Pierce DMG", "Fixed DMG", "Arithmetica", "Discard", "Draw", "Keyflare", "Max HP DMG"]
     },
     {
       "kind": "awakener",
@@ -2464,6 +2572,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-05-18",
       "faction": "Out of the Aeons",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2498,7 +2608,7 @@
       },
       "lineupToken": "O",
       "aliases": ["thais"],
-      "searchTags": ["Arithmetica", "Keyflare"]
+      "searchTags": ["Weakness", "Vulnerable", "Poison", "Bleed", "Counter", "STR Up", "Arithmetica", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -2516,6 +2626,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Among the Stars",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -2550,7 +2662,7 @@
       },
       "lineupToken": "p",
       "aliases": ["tinct"],
-      "searchTags": ["Arithmetica", "Dispel", "Draw", "Strike"]
+      "searchTags": ["STR Up", "Steal STR", "Dispel", "Arithmetica", "Draw", "Strike"]
     },
     {
       "kind": "awakener",
@@ -2568,6 +2680,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2023-11-29",
       "faction": "Out of the Aeons",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2602,7 +2716,7 @@
       },
       "lineupToken": "e",
       "aliases": ["tulu"],
-      "searchTags": ["Dispel", "Divine Realm", "Tentacles"]
+      "searchTags": ["STR Up", "STR Down", "Tentacle DMG", "Pierce DMG", "Aftershock", "Dispel", "Divine Realm", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -2620,6 +2734,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Outlanders",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -2654,7 +2770,7 @@
       },
       "lineupToken": "Q",
       "aliases": ["uvhash"],
-      "searchTags": ["Self-Harm"]
+      "searchTags": ["STR Up", "Self-Harm"]
     },
     {
       "kind": "awakener",
@@ -2672,6 +2788,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-03-14",
       "faction": "Among the Stars",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2706,7 +2824,7 @@
       },
       "lineupToken": "E",
       "aliases": ["wanda"],
-      "searchTags": []
+      "searchTags": ["Counter", "STR Down"]
     },
     {
       "kind": "awakener",
@@ -2724,6 +2842,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29",
       "faction": "Among the Stars",
       "primaryScalingBase": 20,
       "baseStatsLv1": {
@@ -2758,7 +2878,7 @@
       },
       "lineupToken": "u",
       "aliases": ["winkle"],
-      "searchTags": ["Discard", "Dispel", "Draw", "Keyflare"]
+      "searchTags": ["Counter", "Dispel", "Discard", "Draw", "Keyflare"]
     },
     {
       "kind": "awakener",
@@ -2776,6 +2896,8 @@
       "realm": "CARO",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2026-01-26",
       "faction": "The Unknowable",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2810,7 +2932,7 @@
       },
       "lineupToken": "xk",
       "aliases": ["xu"],
-      "searchTags": ["Arithmetica", "Max HP DMG"]
+      "searchTags": ["Poison", "STR Down", "Fixed DMG", "Arithmetica", "Max HP DMG"]
     },
     {
       "kind": "awakener",
@@ -2828,6 +2950,8 @@
       "realm": "AEQUOR",
       "rarity": "SSR",
       "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2026-03-09",
       "faction": "The Fools",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2862,7 +2986,7 @@
       },
       "lineupToken": "xo",
       "aliases": ["vortice"],
-      "searchTags": ["Dispel", "Divine Realm", "Tentacles"]
+      "searchTags": ["Tentacle DMG", "Pursuit", "Fixed DMG", "Aftershock", "Dispel", "Divine Realm", "Tentacles"]
     },
     {
       "kind": "awakener",
@@ -2880,6 +3004,8 @@
       "realm": "ULTRA",
       "rarity": "SSR",
       "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2026-04-20",
       "faction": "The Unknowable",
       "primaryScalingBase": 30,
       "baseStatsLv1": {
@@ -2914,7 +3040,7 @@
       },
       "lineupToken": "4",
       "aliases": ["arachne"],
-      "searchTags": ["Spider", "Divine Realm"]
+      "searchTags": ["Final Verdict", "Tentacle DMG", "Pursuit", "Fixed DMG", "Divine Realm", "Spider"]
     }
   ]
 }

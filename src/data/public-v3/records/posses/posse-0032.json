@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0032-crystal",
     "badge": "asset-posse-0032-badge"
   },
+  "ownerAwakenerId": "awakener-0030",
+  "ownerAwakenerName": "Liz",
+  "acquisitionSource": "Clear Psyche Deepdive: Passion to Dust",
   "realm": "ULTRA",
   "lineupToken": "B",
   "descriptionTemplate": "Increase a chosen Awakener's Aliemus by [Arg2], and the Temp. Crit. Rate & Crit. DMG of their Command Cards by [Arg1]%. If Liz is in your team, create 1 {Corrupted Flames} with {Exhaust}.",

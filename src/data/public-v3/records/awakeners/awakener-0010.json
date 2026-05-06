@@ -16,9 +16,11 @@
   "realm": "ULTRA",
   "rarity": "SSR",
   "type": "CHORUS",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2025-04-07",
   "faction": "The Unknowable",
   "aliases": ["clementine"],
-  "searchTags": ["Dispel", "Keyflare"],
+  "searchTags": ["Bleed", "STR Up", "Dispel", "Keyflare"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 44,

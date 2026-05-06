@@ -16,9 +16,11 @@
   "realm": "AEQUOR",
   "rarity": "SSR",
   "type": "ASSAULT",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2026-03-09",
   "faction": "The Fools",
   "aliases": ["vortice"],
-  "searchTags": ["Dispel", "Divine Realm", "Tentacles"],
+  "searchTags": ["Tentacle DMG", "Pursuit", "Fixed DMG", "Aftershock", "Dispel", "Divine Realm", "Tentacles"],
   "primaryScalingBase": 30,
   "baseStatsLv1": {
     "CON": 52,

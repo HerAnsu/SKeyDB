@@ -58,6 +58,28 @@ describe('searchAwakeners', () => {
     expect(names).toEqual(['caecus', 'casiah', 'castor', 'celeste', 'clementine', 'corposant'])
   })
 
+  it('keeps two-character character searches out of substring and facet noise', () => {
+    const awakeners = getAwakeners()
+    const names = searchAwakeners(awakeners, 'th').map((x) => x.name)
+
+    expect(names).toEqual(['thais'])
+  })
+
+  it('does not append fuzzy drift to short direct prefix matches', () => {
+    const awakeners = getAwakeners()
+    const names = searchAwakeners(awakeners, 'tha').map((x) => x.name)
+
+    expect(names).toEqual(['thais'])
+  })
+
+  it('does not treat interior tag text as a realm lookup', () => {
+    const results = searchAwakeners(getAwakeners(), 'car')
+
+    expect(results.length).toBeGreaterThan(0)
+    expect(results.every((awakener) => awakener.realm === 'CARO')).toBe(true)
+    expect(results.map((awakener) => awakener.name)).not.toContain('alva')
+  })
+
   it('clusters multi-letter name prefixes ahead of broader matches', () => {
     const awakeners = getAwakeners()
     const names = searchAwakeners(awakeners, 'Ca')

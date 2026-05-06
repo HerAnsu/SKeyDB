@@ -20,6 +20,7 @@ export interface CovenantFullRecord {
   assetId: string
   setEffects: CovenantSetEffectRecord[]
   lore?: string
+  acquisitionSource?: string
 }
 
 const publicCovenantRecordSchema = z.object({
@@ -33,6 +34,7 @@ const publicCovenantRecordSchema = z.object({
     }),
   ),
   lore: z.string().optional(),
+  acquisitionSource: z.string().optional(),
 })
 
 const publicCovenantRecordsSchema = z.array(publicCovenantRecordSchema)

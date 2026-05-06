@@ -12,6 +12,9 @@
     "crystal": "asset-posse-0035-crystal",
     "badge": "asset-posse-0035-badge"
   },
+  "ownerAwakenerId": "awakener-0011",
+  "ownerAwakenerName": "Corposant",
+  "acquisitionSource": "Clear Psyche Deepdive: Final Steersmanship",
   "realm": "AEQUOR",
   "lineupToken": "N",
   "descriptionTemplate": "Draw [Arg2] {plural:[Arg2]|card|cards}. Gain [Arg1] Shield. If Corposant is in your team, create 1 {Pilot}.",

@@ -16,9 +16,11 @@
   "realm": "CHAOS",
   "rarity": "SR",
   "type": "CHORUS",
+  "availabilityType": "WELFARE",
+  "releaseDate": "2023-11-29",
   "faction": "Among the Stars",
   "aliases": ["doll"],
-  "searchTags": ["Discard", "Dispel", "Heal"],
+  "searchTags": ["Weakness", "Dispel", "Discard", "Heal"],
   "primaryScalingBase": 20,
   "baseStatsLv1": {
     "CON": 24,

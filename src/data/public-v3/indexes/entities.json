@@ -14,7 +14,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-04-27"
     },
     "awakener-0002": {
       "kind": "awakener",
@@ -29,7 +31,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0003": {
       "kind": "awakener",
@@ -44,7 +48,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0004": {
       "kind": "awakener",
@@ -59,7 +65,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0005": {
       "kind": "awakener",
@@ -74,7 +82,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0006": {
       "kind": "awakener",
@@ -89,7 +99,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0007": {
       "kind": "awakener",
@@ -104,7 +116,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0008": {
       "kind": "awakener",
@@ -119,7 +133,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-06-02"
     },
     "awakener-0009": {
       "kind": "awakener",
@@ -134,7 +150,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0010": {
       "kind": "awakener",
@@ -149,7 +167,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-04-07"
     },
     "awakener-0011": {
       "kind": "awakener",
@@ -164,7 +184,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-05-05"
     },
     "awakener-0012": {
       "kind": "awakener",
@@ -179,7 +201,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2023-12-20"
     },
     "awakener-0013": {
       "kind": "awakener",
@@ -194,7 +218,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0014": {
       "kind": "awakener",
@@ -209,7 +235,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-07-21"
     },
     "awakener-0015": {
       "kind": "awakener",
@@ -224,7 +252,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0016": {
       "kind": "awakener",
@@ -239,7 +269,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0017": {
       "kind": "awakener",
@@ -254,7 +286,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0018": {
       "kind": "awakener",
@@ -269,7 +303,9 @@
       },
       "realm": "CHAOS",
       "rarity": "Genesis",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-02-10"
     },
     "awakener-0019": {
       "kind": "awakener",
@@ -284,7 +320,9 @@
       },
       "realm": "CARO",
       "rarity": "Genesis",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-10-07"
     },
     "awakener-0020": {
       "kind": "awakener",
@@ -299,7 +337,9 @@
       },
       "realm": "CHAOS",
       "rarity": "Genesis",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0021": {
       "kind": "awakener",
@@ -314,7 +354,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0022": {
       "kind": "awakener",
@@ -329,7 +371,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-09-09"
     },
     "awakener-0023": {
       "kind": "awakener",
@@ -344,7 +388,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0024": {
       "kind": "awakener",
@@ -359,7 +405,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-07-15"
     },
     "awakener-0025": {
       "kind": "awakener",
@@ -374,7 +422,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0026": {
       "kind": "awakener",
@@ -389,7 +439,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0027": {
       "kind": "awakener",
@@ -404,7 +456,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-08-18"
     },
     "awakener-0028": {
       "kind": "awakener",
@@ -419,7 +473,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0029": {
       "kind": "awakener",
@@ -434,7 +490,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-01-31"
     },
     "awakener-0030": {
       "kind": "awakener",
@@ -449,7 +507,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0031": {
       "kind": "awakener",
@@ -464,7 +524,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0032": {
       "kind": "awakener",
@@ -479,7 +541,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-06-17"
     },
     "awakener-0033": {
       "kind": "awakener",
@@ -494,7 +558,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-12-29"
     },
     "awakener-0034": {
       "kind": "awakener",
@@ -509,7 +575,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-02-21"
     },
     "awakener-0035": {
       "kind": "awakener",
@@ -524,7 +592,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "Genesis",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-11-24"
     },
     "awakener-0036": {
       "kind": "awakener",
@@ -539,7 +609,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0037": {
       "kind": "awakener",
@@ -554,7 +626,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0038": {
       "kind": "awakener",
@@ -569,7 +643,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0039": {
       "kind": "awakener",
@@ -584,7 +660,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0040": {
       "kind": "awakener",
@@ -599,7 +677,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-09-08"
     },
     "awakener-0041": {
       "kind": "awakener",
@@ -614,7 +694,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2025-10-20"
     },
     "awakener-0042": {
       "kind": "awakener",
@@ -629,7 +711,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "WELFARE",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0043": {
       "kind": "awakener",
@@ -644,7 +728,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-08-12"
     },
     "awakener-0044": {
       "kind": "awakener",
@@ -659,7 +745,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-04-04"
     },
     "awakener-0045": {
       "kind": "awakener",
@@ -674,7 +762,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0046": {
       "kind": "awakener",
@@ -689,7 +779,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-01-10"
     },
     "awakener-0047": {
       "kind": "awakener",
@@ -704,7 +796,9 @@
       },
       "realm": "CHAOS",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-11-18"
     },
     "awakener-0048": {
       "kind": "awakener",
@@ -719,7 +813,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-05-18"
     },
     "awakener-0049": {
       "kind": "awakener",
@@ -734,7 +830,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0050": {
       "kind": "awakener",
@@ -749,7 +847,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0051": {
       "kind": "awakener",
@@ -764,7 +864,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0052": {
       "kind": "awakener",
@@ -779,7 +881,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "LIMITED_FADED_LEGACY",
+      "releaseDate": "2024-03-14"
     },
     "awakener-0053": {
       "kind": "awakener",
@@ -794,7 +898,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "WARDEN"
+      "type": "WARDEN",
+      "availabilityType": "PERMANENT",
+      "releaseDate": "2023-11-29"
     },
     "awakener-0054": {
       "kind": "awakener",
@@ -809,7 +915,9 @@
       },
       "realm": "CARO",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2026-01-26"
     },
     "awakener-0055": {
       "kind": "awakener",
@@ -824,7 +932,9 @@
       },
       "realm": "AEQUOR",
       "rarity": "SSR",
-      "type": "ASSAULT"
+      "type": "ASSAULT",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2026-03-09"
     },
     "awakener-0056": {
       "kind": "awakener",
@@ -839,7 +949,9 @@
       },
       "realm": "ULTRA",
       "rarity": "SSR",
-      "type": "CHORUS"
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2026-04-20"
     },
     "awakener-build-0001": {
       "kind": "awakenerBuild",
@@ -8006,7 +8118,9 @@
         "crystal": "asset-posse-0009-crystal",
         "badge": "asset-posse-0009-badge"
       },
-      "realm": "CHAOS"
+      "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0038",
+      "ownerAwakenerName": "Ogier"
     },
     "posse-0010": {
       "kind": "posse",
@@ -8021,7 +8135,9 @@
         "crystal": "asset-posse-0010-crystal",
         "badge": "asset-posse-0010-badge"
       },
-      "realm": "AEQUOR"
+      "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0005",
+      "ownerAwakenerName": "Aurita"
     },
     "posse-0011": {
       "kind": "posse",
@@ -8036,7 +8152,9 @@
         "crystal": "asset-posse-0011-crystal",
         "badge": "asset-posse-0011-badge"
       },
-      "realm": "CARO"
+      "realm": "CARO",
+      "ownerAwakenerId": "awakener-0051",
+      "ownerAwakenerName": "Uvhash"
     },
     "posse-0012": {
       "kind": "posse",
@@ -8051,7 +8169,9 @@
         "crystal": "asset-posse-0012-crystal",
         "badge": "asset-posse-0012-badge"
       },
-      "realm": "ULTRA"
+      "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0015",
+      "ownerAwakenerName": "Erica"
     },
     "posse-0013": {
       "kind": "posse",
@@ -8066,7 +8186,9 @@
         "crystal": "asset-posse-0013-crystal",
         "badge": "asset-posse-0013-badge"
       },
-      "realm": "ULTRA"
+      "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda"
     },
     "posse-0014": {
       "kind": "posse",
@@ -8081,7 +8203,9 @@
         "crystal": "asset-posse-0014-crystal",
         "badge": "asset-posse-0014-badge"
       },
-      "realm": "AEQUOR"
+      "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0045",
+      "ownerAwakenerName": "Sanga"
     },
     "posse-0015": {
       "kind": "posse",
@@ -8096,7 +8220,9 @@
         "crystal": "asset-posse-0015-crystal",
         "badge": "asset-posse-0015-badge"
       },
-      "realm": "CARO"
+      "realm": "CARO",
+      "ownerAwakenerId": "awakener-0002",
+      "ownerAwakenerName": "Agrippa"
     },
     "posse-0016": {
       "kind": "posse",
@@ -8111,7 +8237,9 @@
         "crystal": "asset-posse-0016-crystal",
         "badge": "asset-posse-0016-badge"
       },
-      "realm": "CHAOS"
+      "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0020",
+      "ownerAwakenerName": "Ramona: Timeworn"
     },
     "posse-0017": {
       "kind": "posse",
@@ -8126,7 +8254,9 @@
         "crystal": "asset-posse-0017-crystal",
         "badge": "asset-posse-0017-badge"
       },
-      "realm": "ULTRA"
+      "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil"
     },
     "posse-0018": {
       "kind": "posse",
@@ -8141,7 +8271,9 @@
         "crystal": "asset-posse-0018-crystal",
         "badge": "asset-posse-0018-badge"
       },
-      "realm": "CHAOS"
+      "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily"
     },
     "posse-0019": {
       "kind": "posse",
@@ -8156,7 +8288,9 @@
         "crystal": "asset-posse-0019-crystal",
         "badge": "asset-posse-0019-badge"
       },
-      "realm": "CARO"
+      "realm": "CARO",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel"
     },
     "posse-0020": {
       "kind": "posse",
@@ -8171,7 +8305,9 @@
         "crystal": "asset-posse-0020-crystal",
         "badge": "asset-posse-0020-badge"
       },
-      "realm": "CARO"
+      "realm": "CARO",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador"
     },
     "posse-0021": {
       "kind": "posse",
@@ -8186,7 +8322,9 @@
         "crystal": "asset-posse-0021-crystal",
         "badge": "asset-posse-0021-badge"
       },
-      "realm": "AEQUOR"
+      "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath"
     },
     "posse-0022": {
       "kind": "posse",
@@ -8201,7 +8339,9 @@
         "crystal": "asset-posse-0022-crystal",
         "badge": "asset-posse-0022-badge"
       },
-      "realm": "CHAOS"
+      "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0001",
+      "ownerAwakenerName": "24"
     },
     "posse-0023": {
       "kind": "posse",
@@ -8231,7 +8371,9 @@
         "crystal": "asset-posse-0024-crystal",
         "badge": "asset-posse-0024-badge"
       },
-      "realm": "CARO"
+      "realm": "CARO",
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena"
     },
     "posse-0025": {
       "kind": "posse",
@@ -8246,7 +8388,9 @@
         "crystal": "asset-posse-0025-crystal",
         "badge": "asset-posse-0025-badge"
       },
-      "realm": "AEQUOR"
+      "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam"
     },
     "posse-0026": {
       "kind": "posse",
@@ -8261,7 +8405,9 @@
         "crystal": "asset-posse-0026-crystal",
         "badge": "asset-posse-0026-badge"
       },
-      "realm": "ULTRA"
+      "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla"
     },
     "posse-0027": {
       "kind": "posse",
@@ -8276,7 +8422,9 @@
         "crystal": "asset-posse-0027-crystal",
         "badge": "asset-posse-0027-badge"
       },
-      "realm": "CHAOS"
+      "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker"
     },
     "posse-0028": {
       "kind": "posse",
@@ -8336,7 +8484,9 @@
         "crystal": "asset-posse-0031-crystal",
         "badge": "asset-posse-0031-badge"
       },
-      "realm": "AEQUOR"
+      "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0050",
+      "ownerAwakenerName": "Tulu"
     },
     "posse-0032": {
       "kind": "posse",
@@ -8351,7 +8501,9 @@
         "crystal": "asset-posse-0032-crystal",
         "badge": "asset-posse-0032-badge"
       },
-      "realm": "ULTRA"
+      "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz"
     },
     "posse-0033": {
       "kind": "posse",
@@ -8396,7 +8548,9 @@
         "crystal": "asset-posse-0035-crystal",
         "badge": "asset-posse-0035-badge"
       },
-      "realm": "AEQUOR"
+      "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant"
     },
     "posse-0036": {
       "kind": "posse",
@@ -8411,7 +8565,9 @@
         "crystal": "asset-posse-0036-crystal",
         "badge": "asset-posse-0036-badge"
       },
-      "realm": "ULTRA"
+      "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0008",
+      "ownerAwakenerName": "Castor"
     },
     "posse-0037": {
       "kind": "posse",
@@ -8441,7 +8597,9 @@
         "crystal": "asset-posse-0038-crystal",
         "badge": "asset-posse-0038-badge"
       },
-      "realm": "CHAOS"
+      "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra"
     },
     "posse-0039": {
       "kind": "posse",
@@ -8456,7 +8614,9 @@
         "crystal": "asset-posse-0039-crystal",
         "badge": "asset-posse-0039-badge"
       },
-      "realm": "ULTRA"
+      "realm": "ULTRA",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux"
     },
     "posse-0040": {
       "kind": "posse",
@@ -8501,7 +8661,9 @@
         "crystal": "asset-posse-0042-crystal",
         "badge": "asset-posse-0042-badge"
       },
-      "realm": "CARO"
+      "realm": "CARO",
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman"
     },
     "posse-0043": {
       "kind": "posse",
@@ -8546,7 +8708,9 @@
         "crystal": "asset-posse-0045-crystal",
         "badge": "asset-posse-0045-badge"
       },
-      "realm": "OTHER"
+      "realm": "OTHER",
+      "ownerAwakenerId": "awakener-0042",
+      "ownerAwakenerName": "Ramona"
     },
     "posse-0046": {
       "kind": "posse",
@@ -8561,7 +8725,9 @@
         "crystal": "asset-posse-0046-crystal",
         "badge": "asset-posse-0046-badge"
       },
-      "realm": "CHAOS"
+      "realm": "CHAOS",
+      "ownerAwakenerId": "awakener-0033",
+      "ownerAwakenerName": "Mouchette"
     },
     "posse-0047": {
       "kind": "posse",
@@ -8576,7 +8742,9 @@
         "crystal": "asset-posse-0047-crystal",
         "badge": "asset-posse-0047-badge"
       },
-      "realm": "CARO"
+      "realm": "CARO",
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu"
     },
     "posse-0048": {
       "kind": "posse",
@@ -8606,7 +8774,9 @@
         "crystal": "asset-posse-0049-crystal",
         "badge": "asset-posse-0049-badge"
       },
-      "realm": "AEQUOR"
+      "realm": "AEQUOR",
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice"
     },
     "posse-0050": {
       "kind": "posse",
