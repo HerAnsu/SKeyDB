@@ -25,6 +25,9 @@ function getDatabaseSortLabel(sortKey: DatabaseSortKey): string {
   if (sortKey === 'RARITY') {
     return 'Rarity'
   }
+  if (sortKey === 'RELEASE_DATE') {
+    return 'Release date'
+  }
   if (sortKey === 'ATK') {
     return 'ATK'
   }
@@ -43,6 +46,9 @@ function getDatabaseSortDirectionLabel(
 ): string {
   if (sortKey === 'ALPHABETICAL') {
     return direction === 'ASC' ? 'A -> Z' : 'Z -> A'
+  }
+  if (sortKey === 'RELEASE_DATE') {
+    return direction === 'ASC' ? 'Old -> New' : 'New -> Old'
   }
   return direction === 'ASC' ? 'Low -> High' : 'High -> Low'
 }
@@ -76,7 +82,7 @@ interface EntityBrowseRegistryEntry {
 
 export const entityBrowseRegistry: Record<DatabaseEntityId, EntityBrowseRegistryEntry> = {
   awakeners: {
-    allowedUrlParams: ['q', 'realm', 'rarity', 'type', 'sort', 'dir', 'group'],
+    allowedUrlParams: ['q', 'realm', 'rarity', 'type', 'availability', 'sort', 'dir', 'group'],
     title: 'Awakeners',
     unitNoun: 'awakeners',
     render: (controller) => {
@@ -90,10 +96,12 @@ export const entityBrowseRegistry: Record<DatabaseEntityId, EntityBrowseRegistry
           filters={
             <DatabaseFilters
               onQueryChange={browseState.setQuery}
+              onAvailabilityFilterChange={browseState.setAvailabilityFilter}
               onRarityFilterChange={browseState.setRarityFilter}
               onRealmFilterChange={browseState.setRealmFilter}
               onTypeFilterChange={browseState.setTypeFilter}
               query={browseState.query}
+              availabilityFilter={browseState.availabilityFilter}
               rarityFilter={browseState.rarityFilter}
               realmFilter={browseState.realmFilter}
               searchInputRef={controller.searchInputRef}

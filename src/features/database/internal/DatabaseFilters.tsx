@@ -1,10 +1,12 @@
 import type {RefObject} from 'react'
 
 import {
+  DATABASE_AVAILABILITY_FILTER_IDS,
   DATABASE_RARITY_FILTER_IDS,
   DATABASE_REALM_FILTER_IDS,
   DATABASE_TYPE_FILTER_IDS,
   getTypeFilterLabel,
+  type AvailabilityFilterId,
   type RarityFilterId,
   type RealmFilterId,
   type TypeFilterId,
@@ -19,11 +21,13 @@ interface DatabaseFiltersProps {
   realmFilter: RealmFilterId
   rarityFilter: RarityFilterId
   typeFilter: TypeFilterId
+  availabilityFilter: AvailabilityFilterId
   searchInputRef: RefObject<HTMLInputElement | null>
   onQueryChange: (query: string) => void
   onRealmFilterChange: (filter: RealmFilterId) => void
   onRarityFilterChange: (filter: RarityFilterId) => void
   onTypeFilterChange: (filter: TypeFilterId) => void
+  onAvailabilityFilterChange: (filter: AvailabilityFilterId) => void
 }
 
 const REALM_FILTERS = DATABASE_REALM_FILTER_IDS.slice(1)
@@ -38,16 +42,34 @@ const typeFilterTabs = DATABASE_TYPE_FILTER_IDS.map((id) => ({
   label: getTypeFilterLabel(id),
 }))
 
+const availabilityFilterTabs = DATABASE_AVAILABILITY_FILTER_IDS.map((id) => ({
+  id,
+  label:
+    id === 'ALL'
+      ? 'All'
+      : id === 'PERMANENT'
+        ? 'Permanent'
+        : id === 'WELFARE'
+          ? 'Welfare'
+          : id === 'LIMITED'
+            ? 'Limited'
+            : id === 'LIMITED_FADED_LEGACY'
+              ? 'Faded Legacy'
+              : 'Astral Reign',
+}))
+
 export function DatabaseFilters({
   query,
   realmFilter,
   rarityFilter,
   typeFilter,
+  availabilityFilter,
   searchInputRef,
   onQueryChange,
   onRealmFilterChange,
   onRarityFilterChange,
   onTypeFilterChange,
+  onAvailabilityFilterChange,
 }: DatabaseFiltersProps) {
   return (
     <div className='space-y-3 sm:space-y-3.5'>
@@ -79,6 +101,12 @@ export function DatabaseFilters({
           label='Type'
           onChange={onTypeFilterChange}
           options={typeFilterTabs}
+        />
+        <ChipFilterRow
+          activeId={availabilityFilter}
+          label='Source'
+          onChange={onAvailabilityFilterChange}
+          options={availabilityFilterTabs}
         />
       </div>
     </div>

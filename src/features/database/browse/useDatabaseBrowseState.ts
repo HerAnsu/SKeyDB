@@ -6,6 +6,7 @@ import {
   DATABASE_BROWSE_DEFAULTS,
   parseDatabaseBrowseState,
   patchDatabaseBrowseState,
+  type AvailabilityFilterId,
   type DatabaseBrowseState,
   type RarityFilterId,
   type RealmFilterId,
@@ -49,8 +50,16 @@ export function useDatabaseBrowseState() {
     parseState: parseDatabaseBrowseState,
     patchState: patchDatabaseBrowseState,
   })
-  const {groupByRealm, query, rarityFilter, realmFilter, sortDirection, sortKey, typeFilter} =
-    browseState
+  const {
+    availabilityFilter,
+    groupByRealm,
+    query,
+    rarityFilter,
+    realmFilter,
+    sortDirection,
+    sortKey,
+    typeFilter,
+  } = browseState
   const {setQuery, appendSearchCharacter, removeSearchCharacter, clearQuery} =
     useBrowseQueryActions<DatabaseBrowseState>(query, commitBrowseState)
 
@@ -71,6 +80,13 @@ export function useDatabaseBrowseState() {
   const setTypeFilter = useCallback(
     (next: TypeFilterId) => {
       commitBrowseState({typeFilter: next}, 'push')
+    },
+    [commitBrowseState],
+  )
+
+  const setAvailabilityFilter = useCallback(
+    (next: AvailabilityFilterId) => {
+      commitBrowseState({availabilityFilter: next}, 'push')
     },
     [commitBrowseState],
   )
@@ -105,6 +121,7 @@ export function useDatabaseBrowseState() {
         realmFilter: 'ALL',
         rarityFilter: 'ALL',
         typeFilter: 'ALL',
+        availabilityFilter: 'ALL',
       },
       'push',
     )
@@ -112,6 +129,7 @@ export function useDatabaseBrowseState() {
 
   return {
     groupByRealm,
+    availabilityFilter,
     query,
     rarityFilter,
     realmFilter,
@@ -125,6 +143,7 @@ export function useDatabaseBrowseState() {
     setRealmFilter,
     setRarityFilter,
     setTypeFilter,
+    setAvailabilityFilter,
     setSortKey,
     toggleSortDirection,
     setGroupByRealm,

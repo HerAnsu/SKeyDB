@@ -282,6 +282,7 @@ export function useCollectionViewModel() {
           level: leftAwakenerLevel,
           rarity: left.rarity,
           realm: left.realm,
+          releaseDate: left.releaseDate,
         },
         {
           label: formatAwakenerNameForUi(right.name),
@@ -291,6 +292,7 @@ export function useCollectionViewModel() {
           level: rightAwakenerLevel,
           rarity: right.rarity,
           realm: right.realm,
+          releaseDate: right.releaseDate,
         },
         {
           key: awakenerSortKey,

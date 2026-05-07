@@ -15,6 +15,15 @@ export const DATABASE_RARITY_FILTER_IDS = ['ALL', 'Genesis', 'SSR', 'SR'] as con
 export type RarityFilterId = (typeof DATABASE_RARITY_FILTER_IDS)[number]
 export const DATABASE_TYPE_FILTER_IDS = ['ALL', 'ASSAULT', 'WARDEN', 'CHORUS'] as const
 export type TypeFilterId = (typeof DATABASE_TYPE_FILTER_IDS)[number]
+export const DATABASE_AVAILABILITY_FILTER_IDS = [
+  'ALL',
+  'PERMANENT',
+  'WELFARE',
+  'LIMITED',
+  'LIMITED_FADED_LEGACY',
+  'LIMITED_ASTRAL_REIGN',
+] as const
+export type AvailabilityFilterId = (typeof DATABASE_AVAILABILITY_FILTER_IDS)[number]
 
 export function getTypeFilterLabel(id: TypeFilterId): string {
   if (id === 'ALL') {
@@ -32,6 +41,7 @@ export function getTypeFilterLabel(id: TypeFilterId): string {
 export const DATABASE_SORT_OPTIONS: readonly DatabaseSortKey[] = [
   'ALPHABETICAL',
   'RARITY',
+  'RELEASE_DATE',
   'ATK',
   'DEF',
   'CON',
@@ -42,6 +52,7 @@ export interface DatabaseBrowseState {
   realmFilter: RealmFilterId
   rarityFilter: RarityFilterId
   typeFilter: TypeFilterId
+  availabilityFilter: AvailabilityFilterId
   sortKey: DatabaseSortKey
   sortDirection: CollectionSortDirection
   groupByRealm: boolean
@@ -52,6 +63,7 @@ export const DATABASE_BROWSE_DEFAULTS: DatabaseBrowseState = {
   realmFilter: 'ALL',
   rarityFilter: 'ALL',
   typeFilter: 'ALL',
+  availabilityFilter: 'ALL',
   sortKey: 'ALPHABETICAL',
   sortDirection: 'ASC',
   groupByRealm: false,
@@ -82,6 +94,11 @@ export function parseDatabaseBrowseState(searchParams: URLSearchParams): Databas
       searchParams.get('type'),
       DATABASE_TYPE_FILTER_IDS,
       DATABASE_BROWSE_DEFAULTS.typeFilter,
+    ),
+    availabilityFilter: parseEnumSearchParam(
+      searchParams.get('availability'),
+      DATABASE_AVAILABILITY_FILTER_IDS,
+      DATABASE_BROWSE_DEFAULTS.availabilityFilter,
     ),
     sortKey: parseEnumSearchParam(
       searchParams.get('sort'),
@@ -123,6 +140,13 @@ export function patchDatabaseBrowseState(
         nextState.typeFilter === DATABASE_BROWSE_DEFAULTS.typeFilter
           ? undefined
           : nextState.typeFilter,
+      )
+      setSearchParam(
+        nextParams,
+        'availability',
+        nextState.availabilityFilter === DATABASE_BROWSE_DEFAULTS.availabilityFilter
+          ? undefined
+          : nextState.availabilityFilter,
       )
       setSearchParam(
         nextParams,

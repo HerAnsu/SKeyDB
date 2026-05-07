@@ -22,6 +22,7 @@ export function createOwnedAwakenerBoxEntries(
           displayName: formatAwakenerNameForUi(awakener.name),
           realm: awakener.realm,
           rarity: awakener.rarity,
+          releaseDate: awakener.releaseDate,
           index: awakener.numericId ?? 0,
           level,
           awakenerLevel: resolveAwakenerLevel(awakener.name),

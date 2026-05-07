@@ -5,6 +5,7 @@ export interface OwnedAwakenerBoxEntry {
   displayName: string
   realm: string
   rarity?: string
+  releaseDate?: string
   index: number
   level: number
   awakenerLevel: number
@@ -22,6 +23,7 @@ export function OwnedAwakenerBoxExport({entries, onStatusMessage}: OwnedAwakener
     label: entry.displayName,
     realm: entry.realm,
     rarity: entry.rarity,
+    releaseDate: entry.releaseDate,
     sortIndex: entry.index,
     level: entry.level,
     cardLevel: entry.awakenerLevel,
@@ -40,7 +42,7 @@ export function OwnedAwakenerBoxExport({entries, onStatusMessage}: OwnedAwakener
       nameToggleLabel='Character Names'
       onStatusMessage={onStatusMessage}
       placeholderClassName='sigil-placeholder-card'
-      sortOptions={['LEVEL', 'RARITY', 'ENLIGHTEN', 'ALPHABETICAL']}
+      sortOptions={['LEVEL', 'RARITY', 'ENLIGHTEN', 'RELEASE_DATE', 'ALPHABETICAL']}
       storageKeyPrefix='skeydb.ownedBoxExport'
     />
   )

@@ -1,5 +1,6 @@
 import {
   getTypeFilterLabel,
+  type AvailabilityFilterId,
   type DatabaseBrowseState,
   type RarityFilterId,
   type RealmFilterId,
@@ -25,6 +26,7 @@ interface AwakenerActiveFilterActions {
   setRealmFilter: (next: RealmFilterId) => void
   setRarityFilter: (next: RarityFilterId) => void
   setTypeFilter: (next: TypeFilterId) => void
+  setAvailabilityFilter: (next: AvailabilityFilterId) => void
 }
 
 interface PosseActiveFilterActions {
@@ -44,7 +46,10 @@ interface WheelActiveFilterActions {
 }
 
 export function buildAwakenerActiveFilterChips(
-  state: Pick<DatabaseBrowseState, 'query' | 'realmFilter' | 'rarityFilter' | 'typeFilter'>,
+  state: Pick<
+    DatabaseBrowseState,
+    'query' | 'realmFilter' | 'rarityFilter' | 'typeFilter' | 'availabilityFilter'
+  >,
   actions: AwakenerActiveFilterActions,
 ): ActiveFilterChip[] {
   const chips: ActiveFilterChip[] = []
@@ -84,6 +89,25 @@ export function buildAwakenerActiveFilterChips(
       label: getTypeFilterLabel(state.typeFilter),
       onClear: () => {
         actions.setTypeFilter('ALL')
+      },
+    })
+  }
+
+  if (state.availabilityFilter !== 'ALL') {
+    chips.push({
+      key: 'availability',
+      label:
+        state.availabilityFilter === 'PERMANENT'
+          ? 'Permanent'
+          : state.availabilityFilter === 'WELFARE'
+            ? 'Welfare'
+            : state.availabilityFilter === 'LIMITED'
+              ? 'Limited'
+              : state.availabilityFilter === 'LIMITED_FADED_LEGACY'
+                ? 'Faded Legacy'
+                : 'Astral Reign',
+      onClear: () => {
+        actions.setAvailabilityFilter('ALL')
       },
     })
   }

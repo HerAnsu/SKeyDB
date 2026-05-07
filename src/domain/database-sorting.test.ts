@@ -92,4 +92,30 @@ describe('compareAwakenersForDatabaseSort', () => {
       'Omega SR',
     ])
   })
+
+  it('sorts by release date with alphabetical fallback inside the same date', () => {
+    const awakeners = [
+      makeAwakener({id: 'awakener-0001', name: 'Gamma', releaseDate: '2024-04-27'}),
+      makeAwakener({id: 'awakener-0002', name: 'Beta', releaseDate: '2023-11-29'}),
+      makeAwakener({id: 'awakener-0003', name: 'Alpha', releaseDate: '2023-11-29'}),
+    ]
+
+    const ascending = [...awakeners].sort((left, right) =>
+      compareAwakenersForDatabaseSort(left, right, {
+        key: 'RELEASE_DATE',
+        direction: 'ASC',
+        groupByRealm: false,
+      }),
+    )
+    const descending = [...awakeners].sort((left, right) =>
+      compareAwakenersForDatabaseSort(left, right, {
+        key: 'RELEASE_DATE',
+        direction: 'DESC',
+        groupByRealm: false,
+      }),
+    )
+
+    expect(ascending.map((awakener) => awakener.name)).toEqual(['Alpha', 'Beta', 'Gamma'])
+    expect(descending.map((awakener) => awakener.name)).toEqual(['Gamma', 'Alpha', 'Beta'])
+  })
 })

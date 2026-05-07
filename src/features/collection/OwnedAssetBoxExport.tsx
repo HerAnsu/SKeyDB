@@ -100,6 +100,7 @@ function toSortableCollectionEntry<R extends string>(
     level: entry.cardLevel ?? 0,
     rarity: entry.rarity,
     realm: entry.realm,
+    releaseDate: entry.releaseDate,
   }
 }
 

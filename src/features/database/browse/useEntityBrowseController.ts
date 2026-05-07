@@ -156,6 +156,7 @@ export function useEntityBrowseController({
         setRealmFilter: awakeners.setRealmFilter,
         setRarityFilter: awakeners.setRarityFilter,
         setTypeFilter: awakeners.setTypeFilter,
+        setAvailabilityFilter: awakeners.setAvailabilityFilter,
       }),
     },
     wheels: {

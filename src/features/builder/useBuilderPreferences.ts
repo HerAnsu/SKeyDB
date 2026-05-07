@@ -1,6 +1,10 @@
 import {useCallback, useEffect, useState, type RefObject} from 'react'
 
-import type {AwakenerSortKey, CollectionSortDirection} from '@/domain/collection-sorting'
+import {
+  resolveAwakenerSortKey,
+  type AwakenerSortKey,
+  type CollectionSortDirection,
+} from '@/domain/collection-sorting'
 import {safeStorageRead, safeStorageWrite, type StorageLike} from '@/domain/storage'
 
 import type {
@@ -37,15 +41,7 @@ export function useBuilderPreferences({searchInputRef, storage}: UseBuilderPrefe
   const [wheelMainstatFilter, setWheelMainstatFilter] = useState<WheelMainstatFilter>('ALL')
   const [awakenerSortKey, setAwakenerSortKey] = useState<AwakenerSortKey>(() => {
     const stored = safeStorageRead(storage, BUILDER_AWAKENER_SORT_KEY_KEY)
-    if (
-      stored === 'LEVEL' ||
-      stored === 'RARITY' ||
-      stored === 'ENLIGHTEN' ||
-      stored === 'ALPHABETICAL'
-    ) {
-      return stored
-    }
-    return 'LEVEL'
+    return resolveAwakenerSortKey(stored)
   })
   const [awakenerSortDirection, setAwakenerSortDirection] = useState<CollectionSortDirection>(
     () => {

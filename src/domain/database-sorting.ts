@@ -3,7 +3,7 @@ import type {AwakenerSortKey, CollectionSortDirection} from './collection-sortin
 
 export type DatabaseSortKey = Extract<
   AwakenerSortKey,
-  'ALPHABETICAL' | 'RARITY' | 'ATK' | 'DEF' | 'CON'
+  'ALPHABETICAL' | 'RARITY' | 'RELEASE_DATE' | 'ATK' | 'DEF' | 'CON'
 >
 
 export interface DatabaseSortConfig {
@@ -64,6 +64,14 @@ function compareStat(
   return compareNumber(left.stats?.[statKey] ?? 0, right.stats?.[statKey] ?? 0, direction)
 }
 
+function compareReleaseDate(
+  left: Awakener,
+  right: Awakener,
+  direction: CollectionSortDirection,
+): number {
+  return compareText(left.releaseDate ?? '', right.releaseDate ?? '', direction)
+}
+
 function compareByPriority(
   left: Awakener,
   right: Awakener,
@@ -92,6 +100,10 @@ export function compareAwakenersForDatabaseSort(
   if (config.key === 'RARITY') {
     comparators.push((innerLeft, innerRight) =>
       compareRarity(innerLeft, innerRight, config.direction),
+    )
+  } else if (config.key === 'RELEASE_DATE') {
+    comparators.push((innerLeft, innerRight) =>
+      compareReleaseDate(innerLeft, innerRight, config.direction),
     )
   } else if (config.key === 'ATK' || config.key === 'DEF' || config.key === 'CON') {
     const statKey = config.key

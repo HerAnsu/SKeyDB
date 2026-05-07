@@ -9,7 +9,9 @@ import {
 describe('database-browse-state', () => {
   it('parses known browse params and falls back safely for invalid values', () => {
     const state = parseDatabaseBrowseState(
-      new URLSearchParams('q=beta&realm=AEQUOR&rarity=SR&type=WARDEN&sort=ATK&dir=DESC&group=1'),
+      new URLSearchParams(
+        'q=beta&realm=AEQUOR&rarity=SR&type=WARDEN&availability=LIMITED&sort=RELEASE_DATE&dir=DESC&group=1',
+      ),
     )
 
     expect(state).toEqual({
@@ -17,7 +19,8 @@ describe('database-browse-state', () => {
       realmFilter: 'AEQUOR',
       rarityFilter: 'SR',
       typeFilter: 'WARDEN',
-      sortKey: 'ATK',
+      availabilityFilter: 'LIMITED',
+      sortKey: 'RELEASE_DATE',
       sortDirection: 'DESC',
       groupByRealm: true,
     })
@@ -35,11 +38,14 @@ describe('database-browse-state', () => {
   it('patches browse params while preserving unrelated query values', () => {
     const nextParams = patchDatabaseBrowseState(new URLSearchParams('foo=bar&q=alpha'), {
       realmFilter: 'CHAOS',
+      availabilityFilter: 'LIMITED_ASTRAL_REIGN',
       sortKey: 'ATK',
       sortDirection: 'DESC',
     })
 
-    expect(nextParams.toString()).toBe('foo=bar&q=alpha&realm=CHAOS&sort=ATK&dir=DESC')
+    expect(nextParams.toString()).toBe(
+      'foo=bar&q=alpha&realm=CHAOS&availability=LIMITED_ASTRAL_REIGN&sort=ATK&dir=DESC',
+    )
   })
 
   it('writes the query param back in canonical trimmed form', () => {

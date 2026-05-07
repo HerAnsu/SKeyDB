@@ -143,6 +143,7 @@ export interface OwnedAssetBoxEntry<R extends string = never> {
   asset: string | null
   rarity?: R
   realm?: string
+  releaseDate?: string
   sortIndex?: number
 }
 

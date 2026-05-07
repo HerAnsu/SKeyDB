@@ -309,6 +309,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
           level: awakenerLevelByName.get(left.name) ?? 60,
           rarity: left.rarity,
           realm: left.realm,
+          releaseDate: left.releaseDate,
         },
         {
           label: formatAwakenerNameForUi(right.name),
@@ -318,6 +319,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
           level: awakenerLevelByName.get(right.name) ?? 60,
           rarity: right.rarity,
           realm: right.realm,
+          releaseDate: right.releaseDate,
         },
         {
           key: awakenerSortKey,

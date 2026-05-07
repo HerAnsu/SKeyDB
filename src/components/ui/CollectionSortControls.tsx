@@ -36,6 +36,7 @@ const defaultSortOptions: readonly AwakenerSortKey[] = [
   'LEVEL',
   'RARITY',
   'ENLIGHTEN',
+  'RELEASE_DATE',
   'ALPHABETICAL',
 ]
 
@@ -48,6 +49,9 @@ function getSortLabel(sortKey: string): string {
   }
   if (sortKey === 'RARITY') {
     return 'Rarity'
+  }
+  if (sortKey === 'RELEASE_DATE') {
+    return 'Release date'
   }
   if (sortKey === 'ATK') {
     return 'ATK'

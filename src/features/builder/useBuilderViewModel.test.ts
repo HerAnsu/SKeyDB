@@ -1128,7 +1128,7 @@ describe('useBuilderViewModel', () => {
 
   it('hydrates and persists builder awakener sort config', () => {
     window.localStorage.setItem(BUILDER_AWAKENER_SORT_GROUP_BY_REALM_KEY, '1')
-    window.localStorage.setItem(BUILDER_AWAKENER_SORT_KEY_KEY, 'RARITY')
+    window.localStorage.setItem(BUILDER_AWAKENER_SORT_KEY_KEY, 'RELEASE_DATE')
     window.localStorage.setItem(BUILDER_AWAKENER_SORT_DIRECTION_KEY, 'ASC')
 
     const {result} = renderHook(() =>
@@ -1137,7 +1137,7 @@ describe('useBuilderViewModel', () => {
       }),
     )
 
-    expect(result.current.awakenerSortKey).toBe('RARITY')
+    expect(result.current.awakenerSortKey).toBe('RELEASE_DATE')
     expect(result.current.awakenerSortDirection).toBe('ASC')
     expect(result.current.awakenerSortGroupByRealm).toBe(true)
 
