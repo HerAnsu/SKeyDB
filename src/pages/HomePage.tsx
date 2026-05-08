@@ -8,30 +8,6 @@ import emojiRose from '@/assets/emoji/Emoji_AEL_K_08.webp'
 
 import {changelogItems} from './home/changelog'
 
-type TaskStatus = 'planned' | 'in_progress' | 'done' | 'forever_in_progress'
-
-interface TaskItem {
-  label: string
-  status: TaskStatus
-}
-
-const builderTasks: TaskItem[] = [
-  {label: 'Local storage persistence', status: 'done'},
-  {label: 'Collection (owned/unowned)', status: 'done'},
-  {label: 'Mobile-first builder layout', status: 'planned'},
-  {label: 'Quick Team Lineup flow for faster selection', status: 'done'},
-  {label: 'General QoL and things', status: 'forever_in_progress'},
-]
-
-const databaseTasks: TaskItem[] = [
-  {label: 'Data integration from the legacy database', status: 'done'},
-  {label: 'Search and filtering improvements', status: 'in_progress'},
-  {label: 'Detail content expansion (tags, guide, teams)', status: 'in_progress'},
-  {label: 'Schema and data coverage expansion', status: 'planned'},
-]
-
-const resourceTasks: TaskItem[] = [{label: 'Useful links and tools page', status: 'planned'}]
-
 interface PlayLinkItem {
   label: string
   href: string
@@ -48,20 +24,6 @@ const morimensPlayLinks: PlayLinkItem[] = [
     icon: FaGooglePlay,
   },
 ]
-
-const statusLabel: Record<TaskStatus, string> = {
-  planned: 'Planned',
-  in_progress: 'In Progress',
-  done: 'Done',
-  forever_in_progress: 'Forever In Progress',
-}
-
-const statusClassName: Record<TaskStatus, string> = {
-  planned: 'border-slate-400/40 text-slate-200',
-  in_progress: 'border-sky-300/45 text-sky-200',
-  done: 'border-emerald-300/45 text-emerald-200',
-  forever_in_progress: 'border-violet-300/45 text-violet-200',
-}
 
 export function HomePage() {
   const [showAllChangelog, setShowAllChangelog] = useState(false)
@@ -134,19 +96,28 @@ export function HomePage() {
 
       <div className='grid gap-4 md:grid-cols-2'>
         <InfoCard
-          description='The database is now live and actually usable: search/filter/sort awakeners and open richer detail popups. Next up is better filtering and more content depth.'
-          title='Database (In Progress)'
+          description='The database now covers Awakeners, Wheels, Posses, and Covenants with search, filters, detail pages, and related-entry links. Some data is still being filled in and corrected, but it is the main place to browse game info now.'
+          title='Database (Beta)'
         />
         <InfoCard
-          description='Interactive Team Planner / Builder with drag and drop, team rules, import/export, and multi-team workflow. Stable enough for public testing.'
+          description='Interactive Team Planner / Builder with drag and drop, team rules, quick lineup, import/export, and multi-team planning. Your builder and collection data stay local to your browser.'
           title='Team Builder (Stable Beta)'
         />
       </div>
 
       <div className='grid gap-4 lg:grid-cols-3'>
-        <RoadmapCard items={builderTasks} title='Builder Tracker' />
-        <RoadmapCard items={databaseTasks} title='Database Tracker' />
-        <RoadmapCard items={resourceTasks} title='Resources Tracker' />
+        <InfoCard
+          description='Current work is mostly polish, data corrections, and making searches/details feel more dependable across every database section.'
+          title='Current Focus'
+        />
+        <InfoCard
+          description='The builder and collection pages are usable for normal planning and tracking. Mobile layout and smaller comfort fixes are still on the long list.'
+          title='Planning Tools'
+        />
+        <InfoCard
+          description='A proper resources page is still planned. For now, the most useful external links are kept here on the overview page.'
+          title='Resources'
+        />
       </div>
 
       <article className='border border-slate-500/45 bg-slate-900/55 p-4'>
@@ -284,26 +255,6 @@ function InfoCard({title, description}: {title: string; description: string}) {
     <article className='border border-amber-200/35 bg-slate-900/40 p-4 shadow-[0_0_0_1px_rgba(251,191,36,0.08)]'>
       <h3 className='ui-title text-lg text-amber-100'>{title}</h3>
       <p className='mt-2 text-sm text-slate-200'>{description}</p>
-    </article>
-  )
-}
-
-function RoadmapCard({title, items}: {title: string; items: TaskItem[]}) {
-  return (
-    <article className='border border-slate-500/45 bg-slate-900/55 p-4'>
-      <h3 className='ui-title text-lg text-amber-100'>{title}</h3>
-      <ul className='mt-2 space-y-2 text-sm text-slate-200'>
-        {items.map((item) => (
-          <li className='flex items-start justify-between gap-3' key={item.label}>
-            <span>{item.label}</span>
-            <span
-              className={`shrink-0 rounded border bg-slate-900/70 px-2 py-0.5 text-xs ${statusClassName[item.status]}`}
-            >
-              {statusLabel[item.status]}
-            </span>
-          </li>
-        ))}
-      </ul>
     </article>
   )
 }

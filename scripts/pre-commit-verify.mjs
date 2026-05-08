@@ -3,10 +3,10 @@ import process from 'node:process'
 
 const projectRoot = process.cwd()
 
-runScript('data:refresh-awakener-v2')
-runNodeScript('scripts/format-changed-files.mjs', ['--quiet', '--fail-on-write'])
+runNodeScript('scripts/format-changed-files.mjs', ['--staged', '--quiet', '--fail-on-write'])
 runScript('lint')
-runScript('test', ['--', '--run'])
+runScript('test:bounded')
+runScript('test:scripts')
 runScript('build:quiet')
 
 function runScript(scriptName, extraArgs = []) {

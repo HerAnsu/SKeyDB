@@ -50,16 +50,16 @@ describe('awakener-roster', () => {
   it('preserves known asset and key edge cases', () => {
     const roster = getAwakenerRoster()
 
-    expect(roster.find((entry) => entry.displayName === '24')).toEqual(
+    expect(roster.find((entry) => entry.displayName === '"24"')).toEqual(
       expect.objectContaining({
         key: '24',
         assets: expect.objectContaining({
-          portraitKey: 'mason',
+          portraitKey: '24',
         }),
       }),
     )
 
-    expect(roster.find((entry) => entry.displayName === 'ramona: timeworn')).toEqual(
+    expect(roster.find((entry) => entry.displayName === 'Ramona: Timeworn')).toEqual(
       expect.objectContaining({
         key: 'ramona-timeworn',
       }),
@@ -76,7 +76,7 @@ describe('awakener-roster', () => {
 
   it('stores Arachne primary scaling that reproduces the provided level breakpoints', () => {
     const roster = getAwakenerRoster()
-    const arachne = roster.find((entry) => entry.displayName === 'arachne')
+    const arachne = roster.find((entry) => entry.displayName === 'Arachne')
 
     expect(arachne).toEqual(
       expect.objectContaining({

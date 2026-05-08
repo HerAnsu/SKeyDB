@@ -3,16 +3,16 @@ import {describe, expect, it} from 'vitest'
 import type {AwakenerOverlayRecord} from './awakener-source-schema'
 import {resolveDatabaseOverlay, resolveDatabaseReferenceInfo} from './database-reference-info'
 import {buildWheelDatabaseReferenceLayer} from './wheels-database-reference-layer'
-import type {WheelFullV1Record} from './wheels-full-v1'
+import type {WheelFullRecord} from './wheels-full'
 
-function buildWheelRecord(): WheelFullV1Record {
+function buildWheelRecord(): WheelFullRecord {
   return {
-    id: 'B01',
-    assetId: 'B01',
+    id: 'wheel-0001',
+    assetId: 'Weapon_Full_B01',
     name: 'Merciful Nurturing',
     rarity: 'SSR',
     realm: 'CARO',
-    ownerAwakenerId: 999,
+    ownerAwakenerId: 'awakener-0999',
     ownerAwakenerName: 'Tester',
     awakener: 'Tester',
     aliases: ['Merciful Nurturing'],
@@ -41,7 +41,7 @@ function buildOverlayRecords(): AwakenerOverlayRecord[] {
 describe('wheels-database-reference-layer', () => {
   it('resolves overlay aliases through the neutral reference contract with shared labels', () => {
     const referenceLayer = buildWheelDatabaseReferenceLayer({
-      activeWheelId: 'B01',
+      activeWheelId: 'wheel-0001',
       overlays: buildOverlayRecords(),
       wheelRecords: [buildWheelRecord()],
     })

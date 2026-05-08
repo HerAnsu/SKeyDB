@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 3,
+  "kind": "posse",
+  "id": "posse-0005",
+  "name": "Tiny Wish",
+  "route": {
+    "slug": "tiny-wish",
+    "canonicalPath": "/database/posses/tiny-wish"
+  },
+  "assets": {
+    "icon": "asset-posse-0005-icon",
+    "crystal": "asset-posse-0005-crystal",
+    "badge": "asset-posse-0005-badge"
+  },
+  "acquisitionSource": "Clear Operation: Faded Legacy - Ch. 1 - East District's Enigma",
+  "realm": "FADED_LEGACY",
+  "lineupToken": "i",
+  "descriptionTemplate": "Increase a chosen Awakener's Aliemus by [Arg1].",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "fixed",
+      "value": "35"
+    }
+  },
+  "lore": "On the day of her sixth birthday, the girl made a wish:\nTo have a toy bear named \"Bobo,\" and for love—not too much, just a little.\nThe girl has never been good at fantasizing, nor is she a greedy person."
+}

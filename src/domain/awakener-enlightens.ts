@@ -1,9 +1,13 @@
-import awakenersEnlightensJson from '@/data/awakeners/awakener-enlightens.json'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {
   awakenerEnlightensDatasetSchema,
   type AwakenerEnlightenRecord,
 } from './awakener-source-schema'
+import {
+  adaptPublicV3EnlightenRecord,
+  type PublicV3EnlightenRecord,
+} from './public-v3-awakener-record-adapters'
 
 let awakenerEnlightensCache: AwakenerEnlightenRecord[] | null = null
 
@@ -12,7 +16,11 @@ export function getAwakenerEnlightens(): AwakenerEnlightenRecord[] {
     return awakenerEnlightensCache
   }
 
-  awakenerEnlightensCache = awakenerEnlightensDatasetSchema.parse(awakenersEnlightensJson)
+  awakenerEnlightensCache = awakenerEnlightensDatasetSchema.parse(
+    getPublicRecordSnapshots('enlightens').map((record) =>
+      adaptPublicV3EnlightenRecord(record as PublicV3EnlightenRecord),
+    ),
+  )
   return awakenerEnlightensCache
 }
 

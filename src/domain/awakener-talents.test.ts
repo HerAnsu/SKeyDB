@@ -115,115 +115,25 @@ describe('awakener-talents', () => {
     expect(murphyFauxbornTalent?.descriptionTemplate).toContain('\n')
     expect(murphyFauxbornTalent?.descriptionTemplate).not.toContain('\\n')
     expect(murphyFauxbornTalent?.descriptionTemplate).toContain(
-      'Realm Mastery is counted as Divine Realm: {Aequor} Mastery:',
+      'Realm Mastery is counted as {Divine Realm: Aequor Mastery}:',
     )
-    expect(murphyFauxbornTalent?.descriptionTemplate).not.toContain('{Divine Realm: Aequor}')
   })
 
-  it('stores talent-owned substat scaling as upgrade patches instead of base card args', () => {
+  it('loads talent records without synthesized target-side upgrade patch fields', () => {
     const talents = getAwakenerTalents()
 
-    expect(getAwakenerTalentById('talent.agrippa.seal-of-the-pact', talents)).toEqual(
-      expect.objectContaining({
-        upgradeTargetIds: ['skill.agrippa.pale-blessing'],
-        upgradePatches: [
-          expect.objectContaining({
-            targetId: 'skill.agrippa.pale-blessing',
-            targetType: 'skill',
-            operation: 'arg_substat_bonuses',
-            argSubstatBonuses: {
-              Arg2: {
-                substat: 'SigilYield',
-                multiplier: '0.5',
-                mode: 'scale_base',
-              },
-              Arg3: {
-                substat: 'SigilYield',
-                multiplier: '1',
-                mode: 'scale_base',
-              },
-            },
-          }),
-        ],
-      }),
-    )
-
-    expect(getAwakenerTalentById('talent.caecus.rebellious-spikes', talents)).toEqual(
-      expect.objectContaining({
-        upgradeTargetIds: ['skill.caecus.strike'],
-        upgradePatches: [
-          expect.objectContaining({
-            targetId: 'skill.caecus.strike',
-            argSubstatBonuses: {
-              Arg3: {
-                substat: 'SigilYield',
-                multiplier: '1',
-                suffix: '%',
-              },
-            },
-          }),
-        ],
-      }),
-    )
-
-    expect(getAwakenerTalentById('talent.corposant.cinders', talents)).toEqual(
-      expect.objectContaining({
-        upgradeTargetIds: expect.arrayContaining([
-          'skill.corposant.defense',
-          'skill.corposant.lightning-retribution',
-          'skill.corposant.strike',
-          'skill.corposant.sunken-in-the-profound',
-          'derived.corposant.pilot',
-        ]),
-      }),
-    )
-
-    expect(getAwakenerTalentById('talent.ramona.silverheart-resonance', talents)).toEqual(
-      expect.objectContaining({
-        upgradeTargetIds: ['skill.ramona.queens-sword'],
-        upgradePatches: [
-          expect.objectContaining({
-            targetId: 'skill.ramona.queens-sword',
-            argSubstatBonuses: {
-              Arg1: {
-                substat: 'KeyflareRegen',
-                multiplier: '1',
-                suffix: '%',
-                mode: 'scale_base',
-              },
-              Arg7: {
-                substat: 'KeyflareRegen',
-                multiplier: '0.75',
-              },
-            },
-          }),
-        ],
-      }),
-    )
-
-    expect(getAwakenerTalentById('talent.wanda.revelation', talents)).toEqual(
-      expect.objectContaining({
-        upgradeTargetIds: ['skill.wanda.necropolis-of-dreams'],
-        upgradePatches: [
-          expect.objectContaining({
-            targetId: 'skill.wanda.necropolis-of-dreams',
-            argSubstatBonuses: {
-              Arg2: {
-                substat: 'DamageAmplification',
-                multiplier: '0.75',
-                suffix: '%',
-              },
-            },
-          }),
-        ],
-      }),
-    )
-
-    expect(getAwakenerTalentById('talent.casiah.master-of-magic', talents)).toEqual(
-      expect.objectContaining({
-        upgradeTargetIds: [],
-        upgradePatches: [],
-      }),
-    )
+    for (const talentId of [
+      'talent.agrippa.seal-of-the-pact',
+      'talent.caecus.rebellious-spikes',
+      'talent.corposant.cinders',
+      'talent.ramona.silverheart-resonance',
+      'talent.wanda.revelation',
+      'talent.casiah.master-of-magic',
+    ]) {
+      const talent = getAwakenerTalentById(talentId, talents) as Record<string, unknown> | undefined
+      expect(talent).toBeDefined()
+      expect(talent).not.toHaveProperty('upgradeTargetIds')
+      expect(talent).not.toHaveProperty('upgradePatches')
+    }
   })
 })

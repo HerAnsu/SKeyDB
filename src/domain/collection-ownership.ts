@@ -1,12 +1,7 @@
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
+import {getPublicCollectionCatalog} from '@/data-access/public-data/collectionRepository'
+
 import {getAwakenerIdentityKey} from './awakener-identity'
-import {getAwakeners} from './awakeners'
-import {getPosses} from './posses'
-import {safeStorageRead, safeStorageRemove, safeStorageWrite, type StorageLike} from './storage'
-import {getWheels} from './wheels'
-
-const COLLECTION_OWNERSHIP_VERSION = 1
-
-export const COLLECTION_OWNERSHIP_KEY = `skeydb.collection.v${String(COLLECTION_OWNERSHIP_VERSION)}`
 
 export type CollectionOwnershipKind = 'awakeners' | 'wheels' | 'posses'
 
@@ -24,16 +19,6 @@ export interface CollectionOwnershipCatalog {
   posseIds: Iterable<string>
   linkedAwakenerGroups?: string[][]
 }
-
-interface CollectionOwnershipEnvelope {
-  version: number
-  updatedAt: string
-  payload: CollectionOwnershipState
-}
-
-export type ParseCollectionOwnershipSnapshotResult =
-  | {ok: true; state: CollectionOwnershipState}
-  | {ok: false; error: 'invalid_json' | 'unsupported_version' | 'invalid_payload'}
 
 function createDefaultOwnedMap(ids: Iterable<string>): Record<string, number> {
   const ownedMap: Record<string, number> = {}
@@ -102,49 +87,75 @@ function normalizeAwakenerLevel(value: unknown): number {
   return normalized
 }
 
-function normalizeAwakenerLevelMap(
+export function normalizeCollectionAwakenerLevelMap(
   rawMap: unknown,
   allowedIds: Iterable<string>,
+  resolveId: (id: string) => string | null = (id) => id,
 ): Record<string, number> {
   const source = rawMap && typeof rawMap === 'object' ? (rawMap as Record<string, unknown>) : {}
   const output: Record<string, number> = {}
+  const allowedIdSet = toAllowedSet(allowedIds)
+  const resolvedSource = new Map<string, unknown>()
+  for (const [id, rawValue] of Object.entries(source)) {
+    const resolvedId = resolveId(id)
+    if (resolvedId && allowedIdSet.has(resolvedId)) {
+      const previousValue = resolvedSource.get(resolvedId)
+      const normalizedValue = normalizeAwakenerLevel(rawValue)
+      resolvedSource.set(
+        resolvedId,
+        previousValue === undefined
+          ? normalizedValue
+          : Math.max(normalizeAwakenerLevel(previousValue), normalizedValue),
+      )
+    }
+  }
   for (const id of allowedIds) {
-    output[id] = normalizeAwakenerLevel(source[id])
+    output[id] = normalizeAwakenerLevel(resolvedSource.get(id))
   }
   return output
 }
 
-function normalizeOwnedMap(rawMap: unknown, allowedIds: Set<string>): Record<string, number> {
+function normalizeOwnedMap(
+  rawMap: unknown,
+  allowedIds: Set<string>,
+  resolveId: (id: string) => string | null = (id) => id,
+): Record<string, number> {
   if (!rawMap || typeof rawMap !== 'object') {
     return {}
   }
 
   const output: Record<string, number> = {}
   for (const [id, rawValue] of Object.entries(rawMap as Record<string, unknown>)) {
-    if (!allowedIds.has(id)) {
+    const resolvedId = resolveId(id)
+    if (!resolvedId || !allowedIds.has(resolvedId)) {
       continue
     }
     const level = normalizeLevel(rawValue)
     if (level !== null) {
-      output[id] = level
+      output[resolvedId] = Math.max(output[resolvedId] ?? 0, level)
     }
   }
   return output
 }
 
-function normalizePosseOwnedMap(rawMap: unknown, allowedIds: Set<string>): Record<string, number> {
+function normalizePosseOwnedMap(
+  rawMap: unknown,
+  allowedIds: Set<string>,
+  resolveId: (id: string) => string | null = (id) => id,
+): Record<string, number> {
   if (!rawMap || typeof rawMap !== 'object') {
     return {}
   }
 
   const output: Record<string, number> = {}
   for (const [id, rawValue] of Object.entries(rawMap as Record<string, unknown>)) {
-    if (!allowedIds.has(id)) {
+    const resolvedId = resolveId(id)
+    if (!resolvedId || !allowedIds.has(resolvedId)) {
       continue
     }
     const level = normalizePosseLevel(rawValue)
     if (level !== null) {
-      output[id] = level
+      output[resolvedId] = 0
     }
   }
   return output
@@ -182,9 +193,47 @@ function unifyLinkedGroupLevels(
   return next
 }
 
-function normalizeOwnershipState(
+function normalizeLinkedAwakenerLevelMap(
+  rawMap: unknown,
+  catalog: CollectionOwnershipCatalog,
+  allowedIds: Set<string>,
+  resolveId: (id: string) => string | null = (id) => id,
+): Record<string, number> {
+  const source = rawMap && typeof rawMap === 'object' ? (rawMap as Record<string, unknown>) : {}
+  const sparseLevels: Record<string, number> = {}
+  for (const [id, rawValue] of Object.entries(source)) {
+    const resolvedId = resolveId(id)
+    if (!resolvedId || !allowedIds.has(resolvedId)) {
+      continue
+    }
+    sparseLevels[resolvedId] = Math.max(
+      sparseLevels[resolvedId] ?? 0,
+      normalizeAwakenerLevel(rawValue),
+    )
+  }
+
+  const unifiedLevels = unifyLinkedGroupLevels(
+    sparseLevels,
+    allowedIds,
+    catalog.linkedAwakenerGroups,
+  )
+  const output: Record<string, number> = {}
+  for (const id of catalog.awakenerIds) {
+    output[id] = normalizeAwakenerLevel(unifiedLevels[id])
+  }
+  return output
+}
+
+export interface CollectionOwnershipStateIdResolvers {
+  awakenerId?: (id: string) => string | null
+  wheelId?: (id: string) => string | null
+  posseId?: (id: string) => string | null
+}
+
+export function normalizeCollectionOwnershipState(
   rawState: unknown,
   catalog: CollectionOwnershipCatalog,
+  idResolvers: CollectionOwnershipStateIdResolvers = {},
 ): CollectionOwnershipState {
   if (!rawState || typeof rawState !== 'object') {
     return createSeedCollectionOwnershipState(catalog)
@@ -194,17 +243,26 @@ function normalizeOwnershipState(
   const awakenerIdSet = toAllowedSet(catalog.awakenerIds)
   return {
     ownedAwakeners: unifyLinkedGroupLevels(
-      normalizeOwnedMap(state.ownedAwakeners, awakenerIdSet),
+      normalizeOwnedMap(state.ownedAwakeners, awakenerIdSet, idResolvers.awakenerId),
       awakenerIdSet,
       catalog.linkedAwakenerGroups,
     ),
-    awakenerLevels: unifyLinkedGroupLevels(
-      normalizeAwakenerLevelMap(state.awakenerLevels, catalog.awakenerIds),
+    awakenerLevels: normalizeLinkedAwakenerLevelMap(
+      state.awakenerLevels,
+      catalog,
       awakenerIdSet,
-      catalog.linkedAwakenerGroups,
+      idResolvers.awakenerId,
     ),
-    ownedWheels: normalizeOwnedMap(state.ownedWheels, toAllowedSet(catalog.wheelIds)),
-    ownedPosses: normalizePosseOwnedMap(state.ownedPosses, toAllowedSet(catalog.posseIds)),
+    ownedWheels: normalizeOwnedMap(
+      state.ownedWheels,
+      toAllowedSet(catalog.wheelIds),
+      idResolvers.wheelId,
+    ),
+    ownedPosses: normalizePosseOwnedMap(
+      state.ownedPosses,
+      toAllowedSet(catalog.posseIds),
+      idResolvers.posseId,
+    ),
     displayUnowned: state.displayUnowned !== false,
   }
 }
@@ -227,21 +285,24 @@ function omitOwnershipIds(
   ids: Iterable<string>,
 ): Record<string, number> {
   const omittedIds = new Set(ids)
-  return Object.fromEntries(
-    Object.entries(map).filter(([entryId]) => !omittedIds.has(entryId)),
-  ) as Record<string, number>
+  return Object.fromEntries(Object.entries(map).filter(([entryId]) => !omittedIds.has(entryId)))
 }
 
 export function createDefaultCollectionOwnershipCatalog(): CollectionOwnershipCatalog {
-  const awakeners = getAwakeners()
+  const catalog = getPublicCollectionCatalog()
+  const awakenerIds = catalog.collectables.awakeners
+  const allowedAwakenerIds = new Set(awakenerIds)
   const linkedAwakenerIdsByIdentity = new Map<string, string[]>()
-  for (const awakener of awakeners) {
+  for (const awakener of getPublicCatalogRecords('awakeners')) {
+    if (!allowedAwakenerIds.has(awakener.id)) {
+      continue
+    }
     const identityKey = getAwakenerIdentityKey(awakener.name)
     const entry = linkedAwakenerIdsByIdentity.get(identityKey)
     if (entry) {
-      entry.push(String(awakener.id))
+      entry.push(awakener.id)
     } else {
-      linkedAwakenerIdsByIdentity.set(identityKey, [String(awakener.id)])
+      linkedAwakenerIdsByIdentity.set(identityKey, [awakener.id])
     }
   }
 
@@ -250,97 +311,16 @@ export function createDefaultCollectionOwnershipCatalog(): CollectionOwnershipCa
     .map((group) => [...group].sort((left, right) => left.localeCompare(right)))
 
   return {
-    awakenerIds: awakeners.map((awakener) => String(awakener.id)),
-    wheelIds: getWheels().map((wheel) => wheel.id),
-    posseIds: getPosses().map((posse) => posse.id),
+    awakenerIds,
+    wheelIds: catalog.collectables.wheels,
+    posseIds: catalog.collectables.posses,
     linkedAwakenerGroups,
   }
 }
 
 export function createEmptyCollectionOwnershipState(): CollectionOwnershipState {
   const catalog = createDefaultCollectionOwnershipCatalog()
-  return normalizeOwnershipState(createSeedCollectionOwnershipState(catalog), catalog)
-}
-
-export function loadCollectionOwnership(
-  storage: StorageLike | null,
-  catalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
-): CollectionOwnershipState {
-  const raw = safeStorageRead(storage, COLLECTION_OWNERSHIP_KEY)
-  if (!raw) {
-    return normalizeOwnershipState(createSeedCollectionOwnershipState(catalog), catalog)
-  }
-
-  try {
-    const parsed = parseCollectionOwnershipSnapshot(raw, catalog)
-    if (!parsed.ok) {
-      return normalizeOwnershipState(createSeedCollectionOwnershipState(catalog), catalog)
-    }
-    return parsed.state
-  } catch {
-    return normalizeOwnershipState(createSeedCollectionOwnershipState(catalog), catalog)
-  }
-}
-
-export function serializeCollectionOwnershipSnapshot(
-  state: CollectionOwnershipState,
-  catalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
-): string {
-  const normalizedState = normalizeOwnershipState(state, catalog)
-  const envelope: CollectionOwnershipEnvelope = {
-    version: COLLECTION_OWNERSHIP_VERSION,
-    updatedAt: new Date().toISOString(),
-    payload: normalizedState,
-  }
-  return JSON.stringify(envelope)
-}
-
-export function parseCollectionOwnershipSnapshot(
-  raw: string,
-  catalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
-): ParseCollectionOwnershipSnapshotResult {
-  let parsed: unknown
-  try {
-    parsed = JSON.parse(raw)
-  } catch {
-    return {ok: false, error: 'invalid_json'}
-  }
-
-  if (!parsed || typeof parsed !== 'object') {
-    return {ok: false, error: 'invalid_payload'}
-  }
-
-  const envelope = parsed as Partial<CollectionOwnershipEnvelope>
-  if (typeof envelope.version !== 'number') {
-    return {ok: false, error: 'invalid_payload'}
-  }
-  if (envelope.version !== COLLECTION_OWNERSHIP_VERSION) {
-    return {ok: false, error: 'unsupported_version'}
-  }
-  if (!envelope.payload || typeof envelope.payload !== 'object') {
-    return {ok: false, error: 'invalid_payload'}
-  }
-
-  return {
-    ok: true,
-    state: normalizeOwnershipState(envelope.payload, catalog),
-  }
-}
-
-export function saveCollectionOwnership(
-  storage: StorageLike | null,
-  state: CollectionOwnershipState,
-  catalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
-): boolean {
-  return safeStorageWrite(
-    storage,
-    COLLECTION_OWNERSHIP_KEY,
-    serializeCollectionOwnershipSnapshot(state, catalog),
-  )
-}
-
-export function clearCollectionOwnership(storage: StorageLike | null): boolean {
-  return safeStorageRemove(storage, COLLECTION_OWNERSHIP_KEY)
+  return normalizeCollectionOwnershipState(createSeedCollectionOwnershipState(catalog), catalog)
 }
 
 export function isOwned(

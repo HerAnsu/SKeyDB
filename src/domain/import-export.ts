@@ -1,10 +1,17 @@
-import {createEmptyTeamSlots} from '@/pages/builder/constants'
-import type {Team, TeamSlot} from '@/pages/builder/types'
+import {createEmptyTeamSlots} from '@/features/builder/constants'
+import type {Team, TeamSlot} from '@/features/builder/types'
 
 import {getAwakeners} from './awakeners'
 import {getCovenants} from './covenants'
 import {decodeIngameTeamCode, type IngameImportWarning} from './ingame-codec'
+import {
+  migrateAwakenerNameV1ToCurrent,
+  migrateCovenantIdV1ToCurrent,
+  migratePosseIdV1ToCurrent,
+  migrateWheelIdV1ToCurrent,
+} from './persistence-id-migration'
 import {getPosses} from './posses'
+import standardCodeContract from './standard-code-contract.v1.json'
 import {getWheels} from './wheels'
 
 const singlePrefix = 't1.'
@@ -26,12 +33,104 @@ const wheels = getWheels()
 
 const awakenerIdByName = new Map(awakeners.map((awakener) => [awakener.name, awakener.id]))
 const awakenerById = new Map(awakeners.map((awakener) => [awakener.id, awakener]))
-const posseIndexById = new Map(posses.map((posse) => [posse.id, posse.index]))
-const posseIdByIndex = new Map(posses.map((posse) => [posse.index, posse.id]))
-const wheelIndexById = new Map(wheels.map((wheel, index) => [wheel.id, index + 1]))
-const wheelIdByIndex = new Map(wheels.map((wheel, index) => [index + 1, wheel.id]))
-const covenantIndexById = new Map(covenants.map((covenant, index) => [covenant.id, index + 1]))
-const covenantIdByIndex = new Map(covenants.map((covenant, index) => [index + 1, covenant.id]))
+const awakenerByLegacyName = new Map(
+  awakeners.map((awakener) => [awakener.name.toLowerCase(), awakener]),
+)
+const currentWheelIds = new Set(wheels.map((wheel) => wheel.id))
+const currentCovenantIds = new Set(covenants.map((covenant) => covenant.id))
+const currentPosseIds = new Set(posses.map((posse) => posse.id))
+
+interface StandardCodeEntry {
+  codecIndex: number
+  legacyId: number | string
+  legacyName?: string
+  id: string
+}
+
+interface StandardCodeContract {
+  awakeners: StandardCodeEntry[]
+  wheels: StandardCodeEntry[]
+  covenants: StandardCodeEntry[]
+  posses: StandardCodeEntry[]
+}
+
+const standardCode = standardCodeContract as StandardCodeContract
+const standardAwakenerIndexById = new Map(
+  standardCode.awakeners.map((entry) => [entry.id, entry.codecIndex]),
+)
+const standardAwakenerIdByIndex = new Map(
+  standardCode.awakeners.map((entry) => [entry.codecIndex, entry.id]),
+)
+const standardWheelIndexById = new Map(
+  standardCode.wheels.map((entry) => [entry.id, entry.codecIndex]),
+)
+const standardWheelIdByIndex = new Map(
+  standardCode.wheels.map((entry) => [entry.codecIndex, entry.id]),
+)
+const standardWheelLegacyIdByIndex = new Map(
+  standardCode.wheels.map((entry) => [entry.codecIndex, String(entry.legacyId)]),
+)
+const standardCovenantIndexById = new Map(
+  standardCode.covenants.map((entry) => [entry.id, entry.codecIndex]),
+)
+const standardCovenantIdByIndex = new Map(
+  standardCode.covenants.map((entry) => [entry.codecIndex, entry.id]),
+)
+const standardCovenantLegacyIdByIndex = new Map(
+  standardCode.covenants.map((entry) => [entry.codecIndex, String(entry.legacyId)]),
+)
+const standardPosseIndexById = new Map(
+  standardCode.posses.map((entry) => [entry.id, entry.codecIndex]),
+)
+const standardPosseIdByIndex = new Map(
+  standardCode.posses.map((entry) => [entry.codecIndex, entry.id]),
+)
+const standardPosseLegacyIdByIndex = new Map(
+  standardCode.posses.map((entry) => [entry.codecIndex, String(entry.legacyId)]),
+)
+
+function getAwakenerStandardIdByName(awakenerName: string): string | undefined {
+  const currentId = migrateAwakenerNameV1ToCurrent(awakenerName)
+  if (currentId) {
+    return currentId
+  }
+
+  const runtimeId = awakenerIdByName.get(awakenerName)
+  return runtimeId && standardAwakenerIndexById.has(runtimeId) ? runtimeId : undefined
+}
+
+function getAwakenerStandardId(slot: TeamSlot): string | undefined {
+  if (slot.awakenerId) {
+    return standardAwakenerIndexById.has(slot.awakenerId) ? slot.awakenerId : undefined
+  }
+  const legacyName = (slot as TeamSlot & {awakenerName?: string}).awakenerName
+  return legacyName ? getAwakenerStandardIdByName(legacyName) : undefined
+}
+
+function getStandardWheelId(wheelId: string): string | undefined {
+  return standardWheelIndexById.has(wheelId) ? wheelId : migrateWheelIdV1ToCurrent(wheelId)
+}
+
+function getStandardCovenantId(covenantId: string): string | undefined {
+  return standardCovenantIndexById.has(covenantId)
+    ? covenantId
+    : migrateCovenantIdV1ToCurrent(covenantId)
+}
+
+function getStandardPosseId(posseId: string): string | undefined {
+  return standardPosseIndexById.has(posseId) ? posseId : migratePosseIdV1ToCurrent(posseId)
+}
+
+function resolveCurrentId(
+  publicId: string | undefined,
+  currentIds: Set<string>,
+  legacyId: string | undefined,
+): string | undefined {
+  if (publicId && currentIds.has(publicId)) {
+    return publicId
+  }
+  return legacyId
+}
 
 export type DecodedImport =
   | {kind: 'single'; team: Team; warnings?: IngameImportWarning[]}
@@ -88,19 +187,54 @@ function base64UrlToBytes(value: string): Uint8Array {
 }
 
 function pushSlotBytes(buffer: number[], slot: TeamSlot, options?: {includeSupport?: boolean}) {
-  const awakenerId = slot.awakenerName ? (awakenerIdByName.get(slot.awakenerName) ?? 0) : 0
-  if (awakenerId > 255) {
+  const awakenerStandardId = getAwakenerStandardId(slot)
+  const legacyName = (slot as TeamSlot & {awakenerName?: string}).awakenerName
+  if ((slot.awakenerId || legacyName) && !awakenerStandardId) {
+    const awakenerLabel = slot.awakenerId ?? legacyName ?? 'unknown'
+    throw new Error(
+      `Awakener "${awakenerLabel}" is not representable in the frozen standard export format.`,
+    )
+  }
+  const awakenerIndex = awakenerStandardId
+    ? (standardAwakenerIndexById.get(awakenerStandardId) ?? 0)
+    : 0
+  if (awakenerIndex > 255) {
     throw new Error('Awakener ID exceeds export format limits.')
   }
-  const rawLevel = awakenerId ? (slot.level ?? 0) : 0
+  const rawLevel = awakenerIndex ? (slot.level ?? 0) : 0
   if (rawLevel < 0 || rawLevel > levelValueMask) {
     throw new Error('Awakener level exceeds export format limits.')
   }
   const level =
-    options?.includeSupport && awakenerId && slot.isSupport ? rawLevel | supportLevelFlag : rawLevel
-  const wheelOne = awakenerId && slot.wheels[0] ? (wheelIndexById.get(slot.wheels[0]) ?? 0) : 0
-  const wheelTwo = awakenerId && slot.wheels[1] ? (wheelIndexById.get(slot.wheels[1]) ?? 0) : 0
-  const covenant = awakenerId && slot.covenantId ? (covenantIndexById.get(slot.covenantId) ?? 0) : 0
+    options?.includeSupport && awakenerIndex && slot.isSupport
+      ? rawLevel | supportLevelFlag
+      : rawLevel
+  const wheelOneStandardId = slot.wheels[0] ? getStandardWheelId(slot.wheels[0]) : undefined
+  const wheelTwoStandardId = slot.wheels[1] ? getStandardWheelId(slot.wheels[1]) : undefined
+  const covenantStandardId = slot.covenantId ? getStandardCovenantId(slot.covenantId) : undefined
+  if (awakenerIndex && slot.wheels[0] && !wheelOneStandardId) {
+    throw new Error(
+      `Wheel "${slot.wheels[0]}" is not representable in the frozen standard export format.`,
+    )
+  }
+  if (awakenerIndex && slot.wheels[1] && !wheelTwoStandardId) {
+    throw new Error(
+      `Wheel "${slot.wheels[1]}" is not representable in the frozen standard export format.`,
+    )
+  }
+  if (awakenerIndex && slot.covenantId && !covenantStandardId) {
+    throw new Error(
+      `Covenant "${slot.covenantId}" is not representable in the frozen standard export format.`,
+    )
+  }
+  const wheelOne =
+    awakenerIndex && wheelOneStandardId ? (standardWheelIndexById.get(wheelOneStandardId) ?? 0) : 0
+  const wheelTwo =
+    awakenerIndex && wheelTwoStandardId ? (standardWheelIndexById.get(wheelTwoStandardId) ?? 0) : 0
+  const covenant =
+    awakenerIndex && covenantStandardId
+      ? (standardCovenantIndexById.get(covenantStandardId) ?? 0)
+      : 0
   if (wheelOne > 255 || wheelTwo > 255) {
     throw new Error('Equipment index exceeds export format limits.')
   }
@@ -108,11 +242,17 @@ function pushSlotBytes(buffer: number[], slot: TeamSlot, options?: {includeSuppo
     throw new Error('Covenant index exceeds export format limits.')
   }
 
-  buffer.push(awakenerId, level, wheelOne, wheelTwo, covenant)
+  buffer.push(awakenerIndex, level, wheelOne, wheelTwo, covenant)
 }
 
 function pushTeamBytes(buffer: number[], team: Team, options?: {includeSupport?: boolean}) {
-  const posseIndex = team.posseId ? (posseIndexById.get(team.posseId) ?? 0) : 0
+  const posseStandardId = team.posseId ? getStandardPosseId(team.posseId) : undefined
+  if (team.posseId && !posseStandardId) {
+    throw new Error(
+      `Posse "${team.posseId}" is not representable in the frozen standard export format.`,
+    )
+  }
+  const posseIndex = posseStandardId ? (standardPosseIndexById.get(posseStandardId) ?? 0) : 0
   if (posseIndex > 255) {
     throw new Error('Posse index exceeds export format limits.')
   }
@@ -128,7 +268,17 @@ function getDecodedAwakener(awakenerId: number) {
     return undefined
   }
 
-  const awakener = awakenerById.get(awakenerId)
+  const standardId = standardAwakenerIdByIndex.get(awakenerId)
+  const currentAwakener = standardId ? awakenerById.get(standardId) : undefined
+  if (currentAwakener) {
+    return currentAwakener
+  }
+
+  const contractEntry = standardCode.awakeners.find((entry) => entry.id === standardId)
+  const awakener =
+    typeof contractEntry?.legacyName === 'string'
+      ? awakenerByLegacyName.get(contractEntry.legacyName.toLowerCase())
+      : undefined
   if (!awakener) {
     throw new Error(`Unknown awakener id: ${String(awakenerId)}`)
   }
@@ -140,7 +290,10 @@ function getDecodedWheelId(wheelIndex: number): string | null {
     return null
   }
 
-  const wheelId = wheelIdByIndex.get(wheelIndex)
+  const standardId = standardWheelIdByIndex.get(wheelIndex)
+  const wheelId =
+    resolveCurrentId(standardId, currentWheelIds, undefined) ??
+    standardWheelLegacyIdByIndex.get(wheelIndex)
   if (!wheelId) {
     throw new Error(`Unknown wheel index: ${String(wheelIndex)}`)
   }
@@ -152,7 +305,10 @@ function getDecodedCovenantId(covenantIndex: number): string | undefined {
     return undefined
   }
 
-  const covenantId = covenantIdByIndex.get(covenantIndex)
+  const standardId = standardCovenantIdByIndex.get(covenantIndex)
+  const covenantId =
+    resolveCurrentId(standardId, currentCovenantIds, undefined) ??
+    standardCovenantLegacyIdByIndex.get(covenantIndex)
   if (!covenantId) {
     throw new Error(`Unknown covenant index: ${String(covenantIndex)}`)
   }
@@ -173,21 +329,27 @@ function decodeSlot(
   const isSupport = options?.includeSupport ? (encodedLevel & supportLevelFlag) !== 0 : false
   const level = encodedLevel & levelValueMask
 
-  const awakener = getDecodedAwakener(awakenerId)
-  const decodedWheels: [string | null, string | null] = awakener
+  const decodedAwakener = getDecodedAwakener(awakenerId)
+  const decodedWheels: [string | null, string | null] = decodedAwakener
     ? [getDecodedWheelId(wheelOne), getDecodedWheelId(wheelTwo)]
     : [null, null]
-  const covenantId = awakener ? getDecodedCovenantId(covenant) : undefined
-
-  return {
+  const covenantId = decodedAwakener ? getDecodedCovenantId(covenant) : undefined
+  const slot: TeamSlot = {
     slotId,
-    awakenerName: awakener?.name,
-    realm: awakener?.realm,
-    level: awakener ? level || 60 : undefined,
-    isSupport: awakener && isSupport ? true : undefined,
     wheels: decodedWheels,
-    covenantId,
   }
+  if (decodedAwakener) {
+    slot.awakenerId = decodedAwakener.id
+    slot.realm = decodedAwakener.realm
+    slot.level = level || 60
+  }
+  if (decodedAwakener && isSupport) {
+    slot.isSupport = true
+  }
+  if (covenantId) {
+    slot.covenantId = covenantId
+  }
+  return slot
 }
 
 function decodeTeam(
@@ -202,7 +364,14 @@ function decodeTeam(
   const posseIndex = bytes[offset]
   let cursor = offset + 1
 
-  if (posseIndex && !posseIdByIndex.has(posseIndex)) {
+  const standardPosseId = posseIndex ? standardPosseIdByIndex.get(posseIndex) : undefined
+  if (posseIndex && !standardPosseId) {
+    throw new Error(`Unknown posse index: ${String(posseIndex)}`)
+  }
+  const posseId =
+    resolveCurrentId(standardPosseId, currentPosseIds, undefined) ??
+    standardPosseLegacyIdByIndex.get(posseIndex)
+  if (posseIndex && !posseId) {
     throw new Error(`Unknown posse index: ${String(posseIndex)}`)
   }
 
@@ -222,7 +391,7 @@ function decodeTeam(
       id: `imported-team-${String(teamIndex)}-${crypto.randomUUID()}`,
       name: `Team ${String(teamIndex + 1)}`,
       slots,
-      posseId: posseIndex ? posseIdByIndex.get(posseIndex) : undefined,
+      posseId,
     },
     nextOffset: cursor,
   }

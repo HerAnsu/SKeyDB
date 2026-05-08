@@ -32,19 +32,19 @@ describe('searchAwakeners', () => {
 
   it('matches awakeners by tag via exact search', () => {
     const awakeners = getAwakeners()
-    const results = searchAwakeners(awakeners, 'Bleed')
+    const results = searchAwakeners(awakeners, 'Draw')
 
     expect(results.length).toBeGreaterThan(0)
-    expect(results.every((a) => a.tags.includes('Bleed'))).toBe(true)
+    expect(results.every((a) => a.tags.includes('Draw'))).toBe(true)
   })
 
-  it('does not cross-match similar tags like STR Up and STR Down', () => {
+  it('does not cross-match distinct public tags', () => {
     const awakeners = getAwakeners()
-    const results = searchAwakeners(awakeners, 'STR Up')
+    const results = searchAwakeners(awakeners, 'Divine Realm')
 
     expect(results.length).toBeGreaterThan(0)
-    expect(results.every((a) => a.tags.includes('STR Up'))).toBe(true)
-    expect(results.some((a) => a.tags.includes('STR Down') && !a.tags.includes('STR Up'))).toBe(
+    expect(results.every((a) => a.tags.includes('Divine Realm'))).toBe(true)
+    expect(results.some((a) => a.tags.includes('Dispel') && !a.tags.includes('Divine Realm'))).toBe(
       false,
     )
   })
@@ -56,6 +56,28 @@ describe('searchAwakeners', () => {
       .map((x) => x.name)
 
     expect(names).toEqual(['caecus', 'casiah', 'castor', 'celeste', 'clementine', 'corposant'])
+  })
+
+  it('keeps two-character character searches out of substring and facet noise', () => {
+    const awakeners = getAwakeners()
+    const names = searchAwakeners(awakeners, 'th').map((x) => x.name)
+
+    expect(names).toEqual(['thais'])
+  })
+
+  it('does not append fuzzy drift to short direct prefix matches', () => {
+    const awakeners = getAwakeners()
+    const names = searchAwakeners(awakeners, 'tha').map((x) => x.name)
+
+    expect(names).toEqual(['thais'])
+  })
+
+  it('does not treat interior tag text as a realm lookup', () => {
+    const results = searchAwakeners(getAwakeners(), 'car')
+
+    expect(results.length).toBeGreaterThan(0)
+    expect(results.every((awakener) => awakener.realm === 'CARO')).toBe(true)
+    expect(results.map((awakener) => awakener.name)).not.toContain('alva')
   })
 
   it('clusters multi-letter name prefixes ahead of broader matches', () => {
@@ -70,20 +92,24 @@ describe('searchAwakeners', () => {
   it('keeps one-character queries focused on names instead of broad tag matches', () => {
     const awakeners: Awakener[] = [
       {
-        id: 1,
+        id: 'awakener-0001',
+        numericId: 1,
         name: 'caecus',
         aliases: ['caecus'],
         realm: 'CHAOS',
         faction: 'Test',
         tags: [],
+        lineupToken: 'a',
       },
       {
-        id: 2,
+        id: 'awakener-0002',
+        numericId: 2,
         name: 'agrippa',
         aliases: ['agrippa'],
         realm: 'AEQUOR',
         faction: 'Test',
         tags: ['Counter'],
+        lineupToken: 'b',
       },
     ]
 

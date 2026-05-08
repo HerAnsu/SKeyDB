@@ -15,7 +15,7 @@ export const SUBSTAT_SCALING_KEYS = [
   'DeathResistance',
 ] as const
 
-export const ENLIGHTEN_SLOT_KEYS = ['E1', 'E2', 'E3', 'AbsoluteAxiom'] as const
+export const ENLIGHTEN_SLOT_KEYS = ['E1', 'E2', 'E3', 'OverExalt', 'AbsoluteAxiom'] as const
 export const SCALING_ARG_STAT_KEYS = ['ATK', 'DEF', 'CON'] as const
 
 export const fullStatsSchema = z.object({
@@ -49,7 +49,8 @@ export const descriptionArgSubstatBonusSchema = z.object({
   substat: z.enum(SUBSTAT_SCALING_KEYS),
   multiplier: nonEmptyStringSchema,
   suffix: nonEmptyStringSchema.optional(),
-  mode: z.enum(['additive', 'scale_base']).optional(),
+  mode: z.enum(['additive', 'scale_base', 'additive_factor']).optional(),
+  baseMultiplier: nonEmptyStringSchema.optional(),
 })
 
 export const descriptionArgSubstatBonusesSchema = z.record(
@@ -58,12 +59,20 @@ export const descriptionArgSubstatBonusesSchema = z.record(
 )
 
 const descriptionArgChannelSchema = nonEmptyStringSchema
+const publicFormulaKeySchema = z.enum(['accountLevel', 'ownedPosseCount', 'wheelRefinementLevel'])
+const publicScaledBaseFormulaSchema = z.enum([
+  'accountStageGrowth',
+  'somaticResearchHpMultiplier',
+  'esotericResearchDepth',
+  'occultResearchDepth',
+])
 
 export const descriptionArgSchema = z.discriminatedUnion('kind', [
   z
     .object({
       kind: z.literal('fixed'),
       value: nonEmptyStringSchema.optional(),
+      displayFormula: nonEmptyStringSchema.optional(),
       channel: descriptionArgChannelSchema.optional(),
       suffix: nonEmptyStringSchema.optional(),
       stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
@@ -79,23 +88,52 @@ export const descriptionArgSchema = z.discriminatedUnion('kind', [
         path: ['value'],
       })
     }),
-  z.object({
-    kind: z.literal('linear'),
-    base: nonEmptyStringSchema,
-    gainPerLevel: nonEmptyStringSchema,
-    channel: descriptionArgChannelSchema.optional(),
-    suffix: nonEmptyStringSchema.optional(),
-    stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
-    substatBonus: descriptionArgSubstatBonusSchema.optional(),
-  }),
-  z.object({
-    kind: z.literal('scaling'),
-    values: z.array(nonEmptyStringSchema).min(1),
-    channel: descriptionArgChannelSchema.optional(),
-    suffix: nonEmptyStringSchema.optional(),
-    stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
-    substatBonus: descriptionArgSubstatBonusSchema.optional(),
-  }),
+  z
+    .object({
+      kind: z.literal('linear'),
+      base: nonEmptyStringSchema,
+      gainPerLevel: nonEmptyStringSchema,
+      channel: descriptionArgChannelSchema.optional(),
+      suffix: nonEmptyStringSchema.optional(),
+      stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
+      substatBonus: descriptionArgSubstatBonusSchema.optional(),
+    })
+    .catchall(z.unknown()),
+  z
+    .object({
+      kind: z.literal('scaling'),
+      values: z.array(nonEmptyStringSchema).min(1),
+      channel: descriptionArgChannelSchema.optional(),
+      suffix: nonEmptyStringSchema.optional(),
+      stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
+      substatBonus: descriptionArgSubstatBonusSchema.optional(),
+    })
+    .catchall(z.unknown()),
+  z.discriminatedUnion('formulaKey', [
+    z.object({
+      kind: z.literal('computed'),
+      formulaKey: z.literal('scaled'),
+      baseFormula: publicScaledBaseFormulaSchema,
+      multiplier: z.number().optional(),
+      rounding: z.literal('ceil').optional(),
+      inputs: z.array(publicFormulaKeySchema),
+      channel: descriptionArgChannelSchema.optional(),
+      suffix: nonEmptyStringSchema.optional(),
+      stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
+      substatBonus: descriptionArgSubstatBonusSchema.optional(),
+    }),
+    z.object({
+      kind: z.literal('computed'),
+      formulaKey: z.literal('wheelRefinementLinear'),
+      baseValue: z.number(),
+      perLevel: z.number(),
+      inputs: z.tuple([z.literal('wheelRefinementLevel')]),
+      channel: descriptionArgChannelSchema.optional(),
+      suffix: nonEmptyStringSchema.optional(),
+      stat: z.enum(SCALING_ARG_STAT_KEYS).optional(),
+      substatBonus: descriptionArgSubstatBonusSchema.optional(),
+    }),
+  ]),
 ])
 
 export const descriptionArgsSchema = z.record(nonEmptyStringSchema, descriptionArgSchema)
@@ -263,8 +301,6 @@ export const awakenerTalentSchema = describedRecordSchema.extend({
   displayName: nonEmptyStringSchema,
   maxLevel: z.number().int().positive().optional(),
   hasLevelScaledDescription: z.boolean().optional(),
-  upgradeTargetIds: z.array(nonEmptyStringSchema).default([]),
-  upgradePatches: z.array(enlightenPatchSchema).default([]),
 })
 
 export const awakenersEnlightenSchema = describedRecordSchema.extend({
@@ -272,8 +308,6 @@ export const awakenersEnlightenSchema = describedRecordSchema.extend({
   ownerAwakenerId: z.number().int().positive(),
   slot: z.enum(ENLIGHTEN_SLOT_KEYS),
   displayName: nonEmptyStringSchema,
-  upgradeTargetIds: z.array(nonEmptyStringSchema),
-  upgradePatches: z.array(enlightenPatchSchema),
 })
 
 export const derivedSkillSchema = describedRecordSchema.extend({
@@ -326,6 +360,7 @@ export const awakenerKitSchema = z.object({
     E1: nonEmptyStringSchema,
     E2: nonEmptyStringSchema,
     E3: nonEmptyStringSchema,
+    OverExalt: nonEmptyStringSchema.optional(),
     AbsoluteAxiom: nonEmptyStringSchema.optional(),
   }),
 })

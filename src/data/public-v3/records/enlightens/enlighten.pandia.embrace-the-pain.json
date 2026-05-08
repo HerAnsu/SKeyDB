@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "kind": "enlighten",
+  "id": "enlighten.pandia.embrace-the-pain",
+  "name": "Embrace the Pain",
+  "route": {
+    "slug": "embrace-the-pain",
+    "canonicalPath": "/database/awakeners/pandia/enlightens/embrace-the-pain"
+  },
+  "ownerAwakenerId": "awakener-0039",
+  "slot": "E1",
+  "descriptionTemplate": "\"Basic Strike\" gains a Temporary {Counter} equal to 50% of DMG. \"Basic Defense\" gains {Counter} equivalent to [Arg1]% of ATK.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "fixed",
+      "value": "50"
+    }
+  },
+  "ownerAwakenerName": "Pandia"
+}

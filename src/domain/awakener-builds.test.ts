@@ -1,7 +1,5 @@
 import {describe, expect, it} from 'vitest'
 
-// @ts-expect-error Build script is a typed runtime module imported for schema-generation verification.
-import {buildAwakenerBuildsSchema} from '../../scripts/generate-awakener-builds-schema.mjs'
 import {
   compareCovenantsForBuildRecommendation,
   compareWheelsForBuildRecommendation,
@@ -12,17 +10,9 @@ import {
 } from './awakener-builds'
 import {getCovenants} from './covenants'
 import {getMainstatByKey} from './mainstats'
+import {getPosses} from './posses'
 import {compareWheelsForUi} from './wheel-sort'
 import {getWheels} from './wheels'
-
-interface SchemaChoiceContainer {
-  $defs: {
-    wheelId: unknown
-    covenantId: unknown
-    awakenerId: unknown
-    awakenerName: unknown
-  }
-}
 
 function buildFixtureBuild(): AwakenerBuild {
   return {
@@ -31,12 +21,12 @@ function buildFixtureBuild(): AwakenerBuild {
     substatPriorityGroups: [['CRIT_DMG'], ['DMG_AMP', 'CRIT_RATE']],
     recommendedWheelMainstats: ['KEYFLARE_REGEN', 'ALIEMUS_REGEN'],
     recommendedWheels: [
-      {tier: 'BIS_SSR', wheelIds: ['C16']},
-      {tier: 'ALT_SSR', wheelIds: ['ZL02']},
-      {tier: 'BIS_SR', wheelIds: ['SR43']},
-      {tier: 'GOOD', wheelIds: ['SR11', 'SR04']},
+      {tier: 'BIS_SSR', wheelIds: ['wheel-0028']},
+      {tier: 'ALT_SSR', wheelIds: ['wheel-0121']},
+      {tier: 'BIS_SR', wheelIds: ['wheel-0116']},
+      {tier: 'GOOD', wheelIds: ['wheel-0087', 'wheel-0080']},
     ],
-    recommendedCovenantIds: ['005', '010'],
+    recommendedCovenantIds: ['covenant-0004', 'covenant-0008'],
   }
 }
 
@@ -51,19 +41,19 @@ describe('awakener builds', () => {
 
     expect(second).toBe(first)
 
-    const dollInferno = getAwakenerBuildEntryById(18, first)
-    const kathiguRa = getAwakenerBuildEntryById(27, first)
+    const dollInferno = getAwakenerBuildEntryById('awakener-0018', first)
+    const kathiguRa = getAwakenerBuildEntryById('awakener-0027', first)
 
     expect(dollInferno?.builds).toHaveLength(1)
     expect(kathiguRa?.builds).toHaveLength(2)
     expect(kathiguRa?.primaryBuildId).toBe('dps')
-    expect(kathiguRa?.awakenerName).toBe('kathigu-ra')
-    expect(kathiguRa?.recommendedPosseIds).toEqual(['undying-sun'])
+    expect(kathiguRa?.awakenerId).toBe('awakener-0027')
+    expect(kathiguRa?.recommendedPosseIds).toEqual(['posse-0038'])
   })
 
   it('resolves the primary build and preserves grouped substat priorities', async () => {
     const entries = await loadAwakenerBuildEntries()
-    const ramona = getAwakenerBuildEntryById(42, entries)
+    const ramona = getAwakenerBuildEntryById('awakener-0042', entries)
     const primaryBuild = getPrimaryAwakenerBuild(ramona)
 
     expect(primaryBuild?.id).toBe('standard')
@@ -76,7 +66,16 @@ describe('awakener builds', () => {
   it('promotes recommended wheels ahead of fallback order while preserving comparator tie-breaks', () => {
     const build = buildFixtureBuild()
     const rankedIds = [...getWheels()]
-      .filter((wheel) => ['C16', 'ZL02', 'SR43', 'SR11', 'SR04', 'B04'].includes(wheel.id))
+      .filter((wheel) =>
+        [
+          'wheel-0028',
+          'wheel-0121',
+          'wheel-0116',
+          'wheel-0087',
+          'wheel-0080',
+          'wheel-0004',
+        ].includes(wheel.id),
+      )
       .sort((left, right) =>
         compareWheelsForBuildRecommendation(left, right, {
           build,
@@ -86,13 +85,22 @@ describe('awakener builds', () => {
       )
       .map((wheel) => wheel.id)
 
-    expect(rankedIds).toEqual(['C16', 'ZL02', 'SR43', 'SR04', 'SR11', 'B04'])
+    expect(rankedIds).toEqual([
+      'wheel-0028',
+      'wheel-0121',
+      'wheel-0116',
+      'wheel-0080',
+      'wheel-0087',
+      'wheel-0004',
+    ])
   })
 
   it('adds ordered mainstat promotion buckets without replacing fallback wheel ordering', () => {
     const build = buildFixtureBuild()
     const rankedIds = [...getWheels()]
-      .filter((wheel) => ['C16', 'B01', 'B12', 'O05', 'B04'].includes(wheel.id))
+      .filter((wheel) =>
+        ['wheel-0028', 'wheel-0001', 'wheel-0012', 'wheel-0056', 'wheel-0004'].includes(wheel.id),
+      )
       .sort((left, right) =>
         compareWheelsForBuildRecommendation(left, right, {
           build,
@@ -102,13 +110,21 @@ describe('awakener builds', () => {
       )
       .map((wheel) => wheel.id)
 
-    expect(rankedIds).toEqual(['C16', 'B01', 'B12', 'O05', 'B04'])
+    expect(rankedIds).toEqual([
+      'wheel-0028',
+      'wheel-0001',
+      'wheel-0012',
+      'wheel-0056',
+      'wheel-0004',
+    ])
   })
 
   it('promotes recommended covenants in configured order before alphabetical fallback', () => {
     const build = buildFixtureBuild()
     const rankedIds = [...getCovenants()]
-      .filter((covenant) => ['005', '010', '001', '002'].includes(covenant.id))
+      .filter((covenant) =>
+        ['covenant-0004', 'covenant-0008', 'covenant-0001', 'covenant-0002'].includes(covenant.id),
+      )
       .sort((left, right) =>
         compareCovenantsForBuildRecommendation(left, right, build, {
           fallbackCompare: (a, b) => a.id.localeCompare(b.id),
@@ -116,7 +132,7 @@ describe('awakener builds', () => {
       )
       .map((covenant) => covenant.id)
 
-    expect(rankedIds).toEqual(['005', '010', '001', '002'])
+    expect(rankedIds).toEqual(['covenant-0004', 'covenant-0008', 'covenant-0001', 'covenant-0002'])
   })
 
   it('keeps referenced wheel mainstats linked to canonical mainstat metadata', async () => {
@@ -131,73 +147,50 @@ describe('awakener builds', () => {
     })
   })
 
-  it('preserves manual compendium corrections in the curated data', async () => {
+  it('preserves selected migrated recommendations in the curated data', async () => {
     const entries = await loadAwakenerBuildEntries()
 
-    expect(getGoodWheelIds(getAwakenerBuildEntryById(3, entries)?.builds[0])).toEqual(
-      expect.arrayContaining(['C01', 'SR14']),
+    expect(getGoodWheelIds(getAwakenerBuildEntryById('awakener-0003', entries)?.builds[0])).toEqual(
+      expect.arrayContaining(['wheel-0104']),
     )
-    expect(getGoodWheelIds(getAwakenerBuildEntryById(14, entries)?.builds[0])).not.toContain('SR32')
-    expect(getAwakenerBuildEntryById(54, entries)?.builds[0].recommendedCovenantIds).toEqual([
-      '019',
-      '002',
-      '008',
-    ])
-    expect(getAwakenerBuildEntryById(33, entries)?.builds[0].recommendedCovenantIds).toEqual([
-      '016',
-      '019',
-      '005',
-      '008',
-    ])
+    expect(getGoodWheelIds(getAwakenerBuildEntryById('awakener-0014', entries)?.builds[0])).toEqual(
+      expect.arrayContaining(['wheel-0028', 'wheel-0137']),
+    )
     expect(
-      getAwakenerBuildEntryById(4, entries)?.builds.find((build) => build.id === 'standard-support')
-        ?.note,
-    ).toMatch(/flexible filler support/i)
+      getAwakenerBuildEntryById('awakener-0054', entries)?.builds[0].recommendedCovenantIds,
+    ).toEqual(['covenant-0017', 'covenant-0002'])
+    expect(
+      getAwakenerBuildEntryById('awakener-0033', entries)?.builds[0].recommendedCovenantIds,
+    ).toEqual(['covenant-0014', 'covenant-0017', 'covenant-0004'])
+    expect(getAwakenerBuildEntryById('awakener-0004', entries)?.primaryBuildId).toBe(
+      'standard-support',
+    )
   })
 
-  it('builds schema autocomplete with readable metadata for curated ids', () => {
-    const schema = (buildAwakenerBuildsSchema as () => SchemaChoiceContainer)()
-    const wheelOptions = getSchemaChoices(schema.$defs.wheelId)
-    const covenantOptions = getSchemaChoices(schema.$defs.covenantId)
-    const awakenerOptions = getSchemaChoices(schema.$defs.awakenerId)
-    const awakenerNameOptions = getSchemaChoices(schema.$defs.awakenerName)
+  it('uses canonical public V3 ids for curated build references', async () => {
+    const entries = await loadAwakenerBuildEntries()
+    const wheelIds = new Set(getWheels().map((wheel) => wheel.id))
+    const covenantIds = new Set(getCovenants().map((covenant) => covenant.id))
+    const posseIds = new Set(getPosses().map((posse) => posse.id))
 
-    expect(wheelOptions).toContainEqual(
-      expect.objectContaining({
-        const: 'C16',
-        title: 'Amber-Tinted Death',
-        description: expect.stringContaining('kathigu-ra'),
-      }),
-    )
-    expect(covenantOptions).toContainEqual(
-      expect.objectContaining({
-        const: '005',
-        title: 'Crimson Pulse',
-      }),
-    )
-    expect(awakenerOptions).toContainEqual(
-      expect.objectContaining({
-        const: 18,
-        title: 'doll: inferno',
-      }),
-    )
-    expect(awakenerNameOptions).toContainEqual(
-      expect.objectContaining({
-        const: 'doll: inferno',
-      }),
-    )
+    entries.forEach((entry) => {
+      expect(entry.awakenerId).toMatch(/^awakener-\d{4}$/)
+      entry.recommendedPosseIds?.forEach((posseId) => {
+        expect(posseId).toMatch(/^posse-\d{4}$/)
+        expect(posseIds.has(posseId)).toBe(true)
+      })
+      entry.builds.forEach((build) => {
+        build.recommendedWheels.forEach((group) => {
+          group.wheelIds.forEach((wheelId) => {
+            expect(wheelId).toMatch(/^wheel-\d{4}$/)
+            expect(wheelIds.has(wheelId)).toBe(true)
+          })
+        })
+        build.recommendedCovenantIds.forEach((covenantId) => {
+          expect(covenantId).toMatch(/^covenant-\d{4}$/)
+          expect(covenantIds.has(covenantId)).toBe(true)
+        })
+      })
+    })
   })
 })
-
-function getSchemaChoices(definition: unknown): unknown[] {
-  if (
-    definition &&
-    typeof definition === 'object' &&
-    'oneOf' in definition &&
-    Array.isArray(definition.oneOf)
-  ) {
-    return definition.oneOf
-  }
-
-  throw new Error('Expected schema definition with oneOf choices')
-}

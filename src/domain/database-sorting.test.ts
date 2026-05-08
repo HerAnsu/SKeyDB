@@ -5,7 +5,8 @@ import {compareAwakenersForDatabaseSort} from './database-sorting'
 
 function makeAwakener(overrides: Partial<Awakener>): Awakener {
   return {
-    id: 1,
+    id: 'awakener-0001',
+    numericId: 1,
     name: 'Alpha',
     faction: 'Test',
     realm: 'AEQUOR',
@@ -13,6 +14,7 @@ function makeAwakener(overrides: Partial<Awakener>): Awakener {
     type: 'ASSAULT',
     aliases: ['Alpha'],
     tags: [],
+    lineupToken: 'a',
     stats: {
       CON: 100,
       ATK: 100,
@@ -25,21 +27,26 @@ function makeAwakener(overrides: Partial<Awakener>): Awakener {
 describe('compareAwakenersForDatabaseSort', () => {
   it('groups by realm without losing the selected stat order inside each realm', () => {
     const awakeners = [
-      makeAwakener({id: 1, name: 'Chaos Low', realm: 'CHAOS', stats: {CON: 100, ATK: 10, DEF: 50}}),
       makeAwakener({
-        id: 2,
+        id: 'awakener-0001',
+        name: 'Chaos Low',
+        realm: 'CHAOS',
+        stats: {CON: 100, ATK: 10, DEF: 50},
+      }),
+      makeAwakener({
+        id: 'awakener-0002',
         name: 'Aequor High',
         realm: 'AEQUOR',
         stats: {CON: 100, ATK: 90, DEF: 50},
       }),
       makeAwakener({
-        id: 3,
+        id: 'awakener-0003',
         name: 'Chaos High',
         realm: 'CHAOS',
         stats: {CON: 100, ATK: 80, DEF: 50},
       }),
       makeAwakener({
-        id: 4,
+        id: 'awakener-0004',
         name: 'Aequor Low',
         realm: 'AEQUOR',
         stats: {CON: 100, ATK: 20, DEF: 50},
@@ -64,10 +71,10 @@ describe('compareAwakenersForDatabaseSort', () => {
 
   it('sorts rarity buckets with alphabetical fallback inside the same rarity', () => {
     const awakeners = [
-      makeAwakener({id: 1, name: 'Gamma SSR', rarity: 'SSR'}),
-      makeAwakener({id: 2, name: 'Beta Genesis', rarity: 'Genesis'}),
-      makeAwakener({id: 3, name: 'Alpha Genesis', rarity: 'Genesis'}),
-      makeAwakener({id: 4, name: 'Omega SR', rarity: 'SR'}),
+      makeAwakener({id: 'awakener-0001', name: 'Gamma SSR', rarity: 'SSR'}),
+      makeAwakener({id: 'awakener-0002', name: 'Beta Genesis', rarity: 'Genesis'}),
+      makeAwakener({id: 'awakener-0003', name: 'Alpha Genesis', rarity: 'Genesis'}),
+      makeAwakener({id: 'awakener-0004', name: 'Omega SR', rarity: 'SR'}),
     ]
 
     const sorted = [...awakeners].sort((left, right) =>
@@ -84,5 +91,31 @@ describe('compareAwakenersForDatabaseSort', () => {
       'Gamma SSR',
       'Omega SR',
     ])
+  })
+
+  it('sorts by release date with alphabetical fallback inside the same date', () => {
+    const awakeners = [
+      makeAwakener({id: 'awakener-0001', name: 'Gamma', releaseDate: '2024-04-27'}),
+      makeAwakener({id: 'awakener-0002', name: 'Beta', releaseDate: '2023-11-29'}),
+      makeAwakener({id: 'awakener-0003', name: 'Alpha', releaseDate: '2023-11-29'}),
+    ]
+
+    const ascending = [...awakeners].sort((left, right) =>
+      compareAwakenersForDatabaseSort(left, right, {
+        key: 'RELEASE_DATE',
+        direction: 'ASC',
+        groupByRealm: false,
+      }),
+    )
+    const descending = [...awakeners].sort((left, right) =>
+      compareAwakenersForDatabaseSort(left, right, {
+        key: 'RELEASE_DATE',
+        direction: 'DESC',
+        groupByRealm: false,
+      }),
+    )
+
+    expect(ascending.map((awakener) => awakener.name)).toEqual(['Alpha', 'Beta', 'Gamma'])
+    expect(descending.map((awakener) => awakener.name)).toEqual(['Gamma', 'Alpha', 'Beta'])
   })
 })

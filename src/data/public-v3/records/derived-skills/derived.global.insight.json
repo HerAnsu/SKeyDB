@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 3,
+  "kind": "derivedSkill",
+  "id": "derived.global.insight",
+  "name": "Insight",
+  "route": {
+    "slug": "insight",
+    "canonicalPath": "/database/derived-skills/insight"
+  },
+  "descriptionTemplate": "Obtain 1 Arithmetica, and draw 1 card.",
+  "descriptionArgs": {},
+  "cardKeywords": [
+    {
+      "id": "mechanic.exhaust"
+    },
+    {
+      "id": "mechanic.retain"
+    }
+  ],
+  "cost": "0"
+}

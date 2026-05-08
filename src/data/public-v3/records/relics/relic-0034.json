@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 3,
+  "kind": "relic",
+  "id": "relic-0034",
+  "name": "Dimensional Image: Murphy",
+  "route": {
+    "slug": "dimensional-image-murphy",
+    "canonicalPath": "/database/relics/dimensional-image-murphy"
+  },
+  "assets": {
+    "icon": "asset-relic-0034-icon"
+  },
+  "relicType": "DIMENSIONAL_IMAGE",
+  "ownerAwakenerId": "awakener-0034",
+  "ownerAwakenerName": "Murphy",
+  "rarity": "SSR",
+  "realm": "AEQUOR",
+  "descriptionTemplate": "At turn start, Murphy gains [Arg1] Aliemus. Murphy's \"Strike\" and \"Defense\" can convert [Arg2]% of the {Sacrifice} into Temporary {Tentacle DMG}, but can only take effect once per turn.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "fixed",
+      "value": "15"
+    },
+    "Arg2": {
+      "kind": "fixed",
+      "value": "25",
+      "suffix": "%"
+    }
+  }
+}

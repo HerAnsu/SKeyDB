@@ -9,12 +9,17 @@ import {
   type ResolvedDatabaseReferenceLayer,
 } from './database-reference-layer'
 import {resolveDescribedRecord, type WheelDatabaseDescriptionRecord} from './description-records'
+import type {PublicFormulaContext} from './public-formula-context'
 import {getRealmLabel} from './realms'
-import {getWheelsFullV1, type WheelFullV1Record} from './wheels-full-v1'
+import {getWheelsFull, type WheelFullRecord} from './wheels-full'
 
-export function buildWheelDatabaseDescriptionRecord(
-  record: WheelFullV1Record,
-): WheelDatabaseDescriptionRecord {
+export function buildWheelDatabaseDescriptionRecord(record: {
+  id: string
+  name: string
+  ownerAwakenerId?: string
+  descriptionTemplate: string
+  descriptionArgs: WheelFullRecord['descriptionArgs']
+}): WheelDatabaseDescriptionRecord {
   return {
     id: record.id,
     kind: 'wheel',
@@ -26,11 +31,12 @@ export function buildWheelDatabaseDescriptionRecord(
 }
 
 function buildWheelReferenceInfo(
-  record: WheelFullV1Record,
+  record: WheelFullRecord,
   descriptionRank: number,
+  formulaContext?: PublicFormulaContext,
 ): DatabaseReferenceInfo<WheelDatabaseDescriptionRecord> {
   const describedRecord = buildWheelDatabaseDescriptionRecord(record)
-  const resolved = resolveDescribedRecord(describedRecord, {rank: descriptionRank})
+  const resolved = resolveDescribedRecord(describedRecord, {rank: descriptionRank, formulaContext})
 
   return {
     kind: 'wheel',
@@ -49,20 +55,23 @@ function buildWheelReferenceInfo(
 }
 
 interface BuildWheelReferenceInfoEntriesOptions {
-  wheelRecords?: WheelFullV1Record[]
+  wheelRecords?: WheelFullRecord[]
   activeWheelId?: string
   activeDescriptionRank?: number
+  formulaContext?: PublicFormulaContext
 }
 
 export function buildWheelReferenceInfoEntries({
   activeDescriptionRank = 1,
   activeWheelId,
-  wheelRecords = getWheelsFullV1(),
+  formulaContext,
+  wheelRecords = getWheelsFull(),
 }: BuildWheelReferenceInfoEntriesOptions = {}): DatabaseReferenceInfo<WheelDatabaseDescriptionRecord>[] {
   return wheelRecords.map((record) =>
     buildWheelReferenceInfo(
       record,
       activeWheelId && record.id === activeWheelId ? activeDescriptionRank : 1,
+      activeWheelId && record.id === activeWheelId ? formulaContext : undefined,
     ),
   )
 }
@@ -74,14 +83,16 @@ interface BuildWheelDatabaseReferenceLayerOptions extends BuildWheelReferenceInf
 export function buildWheelDatabaseReferenceLayer({
   activeDescriptionRank = 1,
   activeWheelId,
+  formulaContext,
   overlays = getAwakenerOverlays(),
-  wheelRecords = getWheelsFullV1(),
+  wheelRecords = getWheelsFull(),
 }: BuildWheelDatabaseReferenceLayerOptions = {}): ResolvedDatabaseReferenceLayer {
   const referenceInfoByName = new Map<string, DatabaseReferenceInfo>()
   const referenceInfoById = new Map<string, DatabaseReferenceInfo>()
   const wheelInfos = buildWheelReferenceInfoEntries({
     activeDescriptionRank,
     activeWheelId,
+    formulaContext,
     wheelRecords,
   })
   const activeWheel = wheelRecords.find((record) => record.id === activeWheelId)
@@ -99,7 +110,7 @@ export function buildWheelDatabaseReferenceLayer({
   })
 
   for (const overlay of accessibleOverlays) {
-    const overlayInfo = buildDatabaseOverlayReferenceInfo(overlay)
+    const overlayInfo = buildDatabaseOverlayReferenceInfo(overlay, null, [], formulaContext)
     addDatabaseReferenceInfoToLookups(
       referenceInfoByName,
       referenceInfoById,

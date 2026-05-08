@@ -1,6 +1,10 @@
-import awakenersOverlaysJson from '@/data/awakeners/awakener-overlays.json'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {awakenerOverlaysDatasetSchema, type AwakenerOverlayRecord} from './awakener-source-schema'
+import {
+  adaptPublicV3OverlayRecord,
+  type PublicV3OverlayRecord,
+} from './public-v3-awakener-record-adapters'
 
 let awakenerOverlaysCache: AwakenerOverlayRecord[] | null = null
 let overlayByNameCache: Map<string, AwakenerOverlayRecord> | null = null
@@ -23,7 +27,11 @@ export function getAwakenerOverlays(): AwakenerOverlayRecord[] {
     return awakenerOverlaysCache
   }
 
-  awakenerOverlaysCache = awakenerOverlaysDatasetSchema.parse(awakenersOverlaysJson)
+  awakenerOverlaysCache = awakenerOverlaysDatasetSchema.parse(
+    getPublicRecordSnapshots('overlays').map((record) =>
+      adaptPublicV3OverlayRecord(record as PublicV3OverlayRecord),
+    ),
+  )
   overlayByNameCache = buildOverlayLookup(awakenerOverlaysCache)
   return awakenerOverlaysCache
 }

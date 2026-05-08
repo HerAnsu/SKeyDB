@@ -1,6 +1,10 @@
-import awakenersTalentsJson from '@/data/awakeners/awakener-talents.json'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {awakenerTalentsDatasetSchema, type AwakenerTalentRecord} from './awakener-source-schema'
+import {
+  adaptPublicV3TalentRecord,
+  type PublicV3TalentRecord,
+} from './public-v3-awakener-record-adapters'
 
 let awakenerTalentsCache: AwakenerTalentRecord[] | null = null
 
@@ -9,7 +13,11 @@ export function getAwakenerTalents(): AwakenerTalentRecord[] {
     return awakenerTalentsCache
   }
 
-  awakenerTalentsCache = awakenerTalentsDatasetSchema.parse(awakenersTalentsJson)
+  awakenerTalentsCache = awakenerTalentsDatasetSchema.parse(
+    getPublicRecordSnapshots('talents').map((record) =>
+      adaptPublicV3TalentRecord(record as PublicV3TalentRecord),
+    ),
+  )
   return awakenerTalentsCache
 }
 

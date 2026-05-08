@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.global.sacrifice",
+  "name": "Sacrifice",
+  "route": {
+    "slug": "sacrifice",
+    "canonicalPath": "/database/overlays/sacrifice"
+  },
+  "assets": {
+    "icon": "asset-overlay.global.sacrifice-icon"
+  },
+  "overlayType": "mechanic",
+  "aliases": [],
+  "iconId": "IconS_Buff_041",
+  "textColor": "shield",
+  "descriptionTemplate": "At turn end, take DMG equal to the number of stacks, then remove 50% of the {Sacrifice} stacks. {Sacrifice} carries over to the next battle.",
+  "descriptionArgs": {}
+}

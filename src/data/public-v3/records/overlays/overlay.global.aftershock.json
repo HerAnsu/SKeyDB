@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.global.aftershock",
+  "name": "Aftershock",
+  "route": {
+    "slug": "aftershock",
+    "canonicalPath": "/database/overlays/aftershock"
+  },
+  "overlayType": "mechanic",
+  "aliases": [],
+  "textColor": "shield",
+  "descriptionTemplate": "Triggers the {Aftershock} effect when discarded.",
+  "descriptionArgs": {}
+}

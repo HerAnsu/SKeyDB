@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 3,
+  "kind": "skill",
+  "id": "skill.ryker.all-in",
+  "name": "All-in!",
+  "route": {
+    "slug": "all-in",
+    "canonicalPath": "/database/awakeners/ryker/skills/all-in"
+  },
+  "ownerAwakenerId": "awakener-0043",
+  "slot": "Exalt",
+  "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies. Randomly draw 1~[Arg3] {plural:[Arg3]|card|cards}; for each card drawn, gain [Power:Arg2] {STR}.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "scaling",
+      "values": ["75", "90", "105", "120", "135", "150"],
+      "stat": "ATK",
+      "suffix": "%"
+    },
+    "Arg2": {
+      "kind": "scaling",
+      "values": ["1.5", "1.8", "2.1", "2.4", "2.7", "3"],
+      "stat": "ATK",
+      "suffix": "%"
+    },
+    "Arg3": {
+      "kind": "fixed",
+      "value": "6"
+    }
+  },
+  "cardKeywords": [],
+  "cost": "100",
+  "ownerAwakenerName": "Ryker"
+}

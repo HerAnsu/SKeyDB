@@ -1,6 +1,10 @@
-import derivedSkillsJson from '@/data/awakeners/derived-skills.json'
+import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
 import {derivedSkillsDatasetSchema, type DerivedSkillRecord} from './awakener-source-schema'
+import {
+  adaptPublicV3DerivedSkillRecord,
+  type PublicV3DerivedSkillRecord,
+} from './public-v3-awakener-record-adapters'
 
 let derivedSkillsCache: DerivedSkillRecord[] | null = null
 
@@ -9,7 +13,11 @@ export function getDerivedSkills(): DerivedSkillRecord[] {
     return derivedSkillsCache
   }
 
-  derivedSkillsCache = derivedSkillsDatasetSchema.parse(derivedSkillsJson)
+  derivedSkillsCache = derivedSkillsDatasetSchema.parse(
+    getPublicRecordSnapshots('derived-skills').map((record) =>
+      adaptPublicV3DerivedSkillRecord(record as PublicV3DerivedSkillRecord),
+    ),
+  )
   return derivedSkillsCache
 }
 

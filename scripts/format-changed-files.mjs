@@ -4,11 +4,14 @@ import {existsSync, readFileSync} from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
+import prettier from 'prettier'
+
 const args = new Set(process.argv.slice(2))
 const quiet = args.has('--quiet')
 const failOnWrite = args.has('--fail-on-write')
+const stagedOnly = args.has('--staged')
 const repoRoot = getRepoRoot()
-const changedFiles = collectChangedFiles(repoRoot)
+const changedFiles = collectChangedFiles(repoRoot, {stagedOnly})
 const prettierTargets = changedFiles.filter(isPrettierTarget)
 
 if (prettierTargets.length === 0) {
@@ -21,6 +24,22 @@ if (prettierTargets.length === 0) {
 if (!quiet) {
   console.log(`format-changed-files: formatting ${prettierTargets.length} file(s)`)
 }
+
+if (stagedOnly && failOnWrite) {
+  const unformattedTargets = await collectUnformattedStagedTargets(prettierTargets, repoRoot)
+  if (unformattedTargets.length > 0) {
+    console.error(
+      [
+        'format-changed-files: staged files are not formatted.',
+        'Format the files and restage before committing again.',
+        ...unformattedTargets.map((filePath) => `  - ${filePath}`),
+      ].join('\n'),
+    )
+    process.exit(1)
+  }
+  process.exit(0)
+}
+
 const hashesBeforeFormat = failOnWrite ? collectFileHashes(prettierTargets, repoRoot) : null
 runPrettier(prettierTargets, repoRoot)
 
@@ -50,31 +69,59 @@ function execGit(args) {
   })
 }
 
+function readStagedFile(filePath) {
+  return execGit(['show', `:${filePath}`])
+}
+
 function getNpxCommand() {
   return process.platform === 'win32' ? 'npx.cmd' : 'npx'
 }
 
 function runPrettier(targets, cwd) {
-  const prettierArgs = ['prettier', '--write']
+  const prettierArgs = ['prettier', '--write', '--ignore-unknown']
   if (quiet) {
     prettierArgs.push('--log-level', 'silent')
   }
 
-  if (process.platform === 'win32') {
-    const quotedArgs = [...prettierArgs, ...targets]
-      .map((argument) => `"${argument.replaceAll('"', '\\"')}"`)
-      .join(' ')
-    execSync(`${getNpxCommand()} ${quotedArgs}`, {
-      cwd,
-      stdio: 'inherit',
-    })
-    return
+  for (const targetChunk of chunkTargets(targets)) {
+    if (process.platform === 'win32') {
+      const quotedArgs = [...prettierArgs, ...targetChunk]
+        .map((argument) => `"${argument.replaceAll('"', '\\"')}"`)
+        .join(' ')
+      execSync(`${getNpxCommand()} ${quotedArgs}`, {
+        cwd,
+        stdio: 'inherit',
+      })
+    } else {
+      execFileSync(getNpxCommand(), [...prettierArgs, ...targetChunk], {
+        cwd,
+        stdio: 'inherit',
+      })
+    }
+  }
+}
+
+function chunkTargets(targets) {
+  const chunks = []
+  let currentChunk = []
+  let currentLength = 0
+
+  for (const target of targets) {
+    const nextLength = currentLength + target.length + 1
+    if (currentChunk.length > 0 && nextLength > 2000) {
+      chunks.push(currentChunk)
+      currentChunk = []
+      currentLength = 0
+    }
+    currentChunk.push(target)
+    currentLength += target.length + 1
   }
 
-  execFileSync(getNpxCommand(), [...prettierArgs, ...targets], {
-    cwd,
-    stdio: 'inherit',
-  })
+  if (currentChunk.length > 0) {
+    chunks.push(currentChunk)
+  }
+
+  return chunks
 }
 
 function collectFileHashes(filePaths, cwd) {
@@ -84,6 +131,27 @@ function collectFileHashes(filePaths, cwd) {
       return [filePath, hashFile(absolutePath)]
     }),
   )
+}
+
+async function collectUnformattedStagedTargets(filePaths, cwd) {
+  const unformattedTargets = []
+  const ignorePath = path.join(cwd, '.prettierignore')
+  for (const filePath of filePaths) {
+    const absolutePath = path.join(cwd, filePath)
+    const fileInfo = await prettier.getFileInfo(absolutePath, {ignorePath})
+    if (fileInfo.ignored) {
+      continue
+    }
+    const options = {
+      ...(await prettier.resolveConfig(absolutePath)),
+      filepath: absolutePath,
+    }
+    const isFormatted = await prettier.check(readStagedFile(filePath), options)
+    if (!isFormatted) {
+      unformattedTargets.push(filePath)
+    }
+  }
+  return unformattedTargets
 }
 
 function collectRewrittenTargets(filePaths, cwd, previousHashes) {
@@ -99,21 +167,24 @@ function hashFile(filePath) {
   return hash.digest('hex')
 }
 
-function collectChangedFiles(cwd) {
+function collectChangedFiles(cwd, {stagedOnly} = {stagedOnly: false}) {
   const fileSet = new Set()
+  const gitCommands = stagedOnly
+    ? [['diff', '--cached', '--name-only', '--diff-filter=ACMR']]
+    : [
+        ['diff', '--name-only', '--diff-filter=ACMR'],
+        ['diff', '--cached', '--name-only', '--diff-filter=ACMR'],
+        ['ls-files', '--others', '--modified', '--exclude-standard'],
+      ]
 
-  for (const args of [
-    ['diff', '--name-only', '--diff-filter=ACMR'],
-    ['diff', '--cached', '--name-only', '--diff-filter=ACMR'],
-    ['ls-files', '--others', '--modified', '--exclude-standard'],
-  ]) {
+  for (const args of gitCommands) {
     for (const entry of execGit(args)
       .split(/\r?\n/)
       .map((line) => line.trim())
       .filter(Boolean)) {
       const normalized = entry.replaceAll('\\', '/')
       const absolutePath = path.join(cwd, normalized)
-      if (existsSync(absolutePath)) {
+      if (stagedOnly || existsSync(absolutePath)) {
         fileSet.add(normalized)
       }
     }
@@ -126,8 +197,10 @@ function isPrettierTarget(filePath) {
   if (
     filePath === 'package.json' ||
     filePath === 'prettier.config.cjs' ||
+    filePath === '.prettierignore' ||
     filePath === 'eslint.config.js' ||
     filePath === 'vite.config.ts' ||
+    filePath === 'vitest.config.ts' ||
     filePath === 'src/domain/persistence-contract.v1.json' ||
     filePath === 'tools/react-sidecar/package.json'
   ) {
@@ -141,6 +214,14 @@ function isPrettierTarget(filePath) {
   }
 
   if (/^scripts\/.*\.(js|mjs|cjs)$/.test(normalized)) {
+    return true
+  }
+
+  if (/^tsconfig.*\.json$/.test(normalized)) {
+    return true
+  }
+
+  if (/^\.github\/workflows\/.*\.yml$/.test(normalized)) {
     return true
   }
 

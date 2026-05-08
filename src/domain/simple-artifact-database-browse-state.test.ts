@@ -1,0 +1,47 @@
+import {describe, expect, it} from 'vitest'
+
+import {
+  COVENANT_DATABASE_BROWSE_DEFAULTS,
+  parseCovenantDatabaseBrowseState,
+  parsePosseDatabaseBrowseState,
+  patchCovenantDatabaseBrowseState,
+  patchPosseDatabaseBrowseState,
+  POSSE_DATABASE_BROWSE_DEFAULTS,
+} from './simple-artifact-database-browse-state'
+
+describe('simple-artifact-database-browse-state', () => {
+  it('parses posse browse params and falls back safely for invalid values', () => {
+    const state = parsePosseDatabaseBrowseState(new URLSearchParams('q=sigil&realm=CHAOS'))
+
+    expect(state).toEqual({
+      query: 'sigil',
+      realmFilter: 'CHAOS',
+    })
+    expect(parsePosseDatabaseBrowseState(new URLSearchParams('realm=missing'))).toEqual(
+      POSSE_DATABASE_BROWSE_DEFAULTS,
+    )
+  })
+
+  it('patches posse params in canonical entity-scoped form', () => {
+    const nextParams = patchPosseDatabaseBrowseState(
+      new URLSearchParams('foo=bar&q=%20sigil%20&mainstat=KEYFLARE_REGEN'),
+      {realmFilter: 'CHAOS'},
+    )
+
+    expect(nextParams.toString()).toBe('q=sigil&realm=CHAOS')
+  })
+
+  it('parses covenant search and patches it in canonical entity-scoped form', () => {
+    const state = parseCovenantDatabaseBrowseState(new URLSearchParams('q=%20oath%20'))
+    const nextParams = patchCovenantDatabaseBrowseState(
+      new URLSearchParams('foo=bar&q=%20oath%20&realm=CHAOS'),
+      {},
+    )
+
+    expect(state).toEqual({query: 'oath'})
+    expect(nextParams.toString()).toBe('q=oath')
+    expect(parseCovenantDatabaseBrowseState(new URLSearchParams())).toEqual(
+      COVENANT_DATABASE_BROWSE_DEFAULTS,
+    )
+  })
+})

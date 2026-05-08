@@ -1,0 +1,1062 @@
+{
+  "schemaVersion": 3,
+  "scope": "relics",
+  "records": [
+    {
+      "kind": "relic",
+      "id": "relic-0001",
+      "name": "Dimensional Image: \"24\"",
+      "aliases": [],
+      "tokens": ["24", "chaos", "dimensional", "dimensional image", "dimensional image 24", "four", "image", "ssr", "twenty", "twenty four"],
+      "fields": {
+        "name": ["Dimensional Image: \"24\"", "dimensional-image-24"],
+        "owner": ["24", "\"24\"", "twenty-four"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0001"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0002",
+      "name": "Dimensional Image: Agrippa",
+      "aliases": [],
+      "tokens": ["agrippa", "caro", "dimensional", "dimensional image", "dimensional image agrippa", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Agrippa", "dimensional-image-agrippa"],
+        "owner": ["Agrippa"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0002"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0003",
+      "name": "Dimensional Image: Aigis",
+      "aliases": [],
+      "tokens": ["aigis", "caro", "dimensional", "dimensional image", "dimensional image aigis", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Aigis", "dimensional-image-aigis"],
+        "owner": ["Aigis"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0003"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0004",
+      "name": "Dimensional Image: Alva",
+      "aliases": [],
+      "tokens": ["alva", "chaos", "dimensional", "dimensional image", "dimensional image alva", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Alva", "dimensional-image-alva"],
+        "owner": ["Alva"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0004"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0005",
+      "name": "Dimensional Image: Aurita",
+      "aliases": [],
+      "tokens": ["aequor", "aurita", "dimensional", "dimensional image", "dimensional image aurita", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Aurita", "dimensional-image-aurita"],
+        "owner": ["Aurita"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0005"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0006",
+      "name": "Dimensional Image: Caecus",
+      "aliases": [],
+      "tokens": ["aequor", "caecus", "dimensional", "dimensional image", "dimensional image caecus", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Caecus", "dimensional-image-caecus"],
+        "owner": ["Caecus"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0006"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0007",
+      "name": "Dimensional Image: Casiah",
+      "aliases": [],
+      "tokens": ["casiah", "dimensional", "dimensional image", "dimensional image casiah", "image", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Casiah", "dimensional-image-casiah"],
+        "owner": ["Casiah"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0007"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0008",
+      "name": "Dimensional Image: Castor",
+      "aliases": [],
+      "tokens": ["castor", "dimensional", "dimensional image", "dimensional image castor", "image", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Castor", "dimensional-image-castor"],
+        "owner": ["Castor"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0008"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0009",
+      "name": "Dimensional Image: Celeste",
+      "aliases": [],
+      "tokens": ["aequor", "celeste", "dimensional", "dimensional image", "dimensional image celeste", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Celeste", "dimensional-image-celeste"],
+        "owner": ["Celeste"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0009"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0010",
+      "name": "Dimensional Image: Clementine",
+      "aliases": [],
+      "tokens": ["clementine", "dimensional", "dimensional image", "dimensional image clementine", "image", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Clementine", "dimensional-image-clementine"],
+        "owner": ["Clementine"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0010"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0011",
+      "name": "Dimensional Image: Corposant",
+      "aliases": [],
+      "tokens": ["aequor", "corposant", "dimensional", "dimensional image", "dimensional image corposant", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Corposant", "dimensional-image-corposant"],
+        "owner": ["Corposant"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0011"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0012",
+      "name": "Dimensional Image: Daffodil",
+      "aliases": [],
+      "tokens": ["daffodil", "dimensional", "dimensional image", "dimensional image daffodil", "image", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Daffodil", "dimensional-image-daffodil"],
+        "owner": ["Daffodil"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0012"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0013",
+      "name": "Dimensional Image: Doll",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image doll", "doll", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Doll", "dimensional-image-doll"],
+        "owner": ["Doll"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0013"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0014",
+      "name": "Dimensional Image: Doresain",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image doresain", "doresain", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Doresain", "dimensional-image-doresain"],
+        "owner": ["Doresain"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0014"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0015",
+      "name": "Dimensional Image: Erica",
+      "aliases": [],
+      "tokens": ["dimensional", "dimensional image", "dimensional image erica", "erica", "image", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Erica", "dimensional-image-erica"],
+        "owner": ["Erica"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0015"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0016",
+      "name": "Dimensional Image: Faint",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image faint", "faint", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Faint", "dimensional-image-faint"],
+        "owner": ["Faint"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0016"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0017",
+      "name": "Dimensional Image: Faros",
+      "aliases": [],
+      "tokens": ["aequor", "dimensional", "dimensional image", "dimensional image faros", "faros", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Faros", "dimensional-image-faros"],
+        "owner": ["Faros"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0017"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0018",
+      "name": "Dimensional Image: Doll: Inferno",
+      "aliases": [],
+      "tokens": [
+        "chaos",
+        "dimensional",
+        "dimensional image",
+        "dimensional image doll inferno",
+        "doll",
+        "doll inferno",
+        "g",
+        "g doll",
+        "image",
+        "inferno",
+        "ssr"
+      ],
+      "fields": {
+        "name": ["Dimensional Image: Doll: Inferno", "dimensional-image-doll-inferno"],
+        "owner": ["Doll: Inferno", "doll-inferno", "g-doll"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0018"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0019",
+      "name": "Dimensional Image: Helot: Catena",
+      "aliases": [],
+      "tokens": [
+        "caro",
+        "catena",
+        "dimensional",
+        "dimensional image",
+        "dimensional image helot catena",
+        "g",
+        "g helot",
+        "helot",
+        "helot catena",
+        "image",
+        "ssr"
+      ],
+      "fields": {
+        "name": ["Dimensional Image: Helot: Catena", "dimensional-image-helot-catena"],
+        "owner": ["Helot: Catena", "helot-catena", "g-helot"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0019"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0020",
+      "name": "Dimensional Image: Ramona: Timeworn",
+      "aliases": [],
+      "tokens": [
+        "chaos",
+        "dimensional",
+        "dimensional image",
+        "dimensional image ramona timeworn",
+        "g",
+        "g ramona",
+        "image",
+        "ramona",
+        "ramona timeworn",
+        "ssr",
+        "timeworn"
+      ],
+      "fields": {
+        "name": ["Dimensional Image: Ramona: Timeworn", "dimensional-image-ramona-timeworn"],
+        "owner": ["Ramona: Timeworn", "ramona-timeworn", "g-ramona"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0020"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0021",
+      "name": "Dimensional Image: Goliath",
+      "aliases": [],
+      "tokens": ["aequor", "dimensional", "dimensional image", "dimensional image goliath", "goliath", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Goliath", "dimensional-image-goliath"],
+        "owner": ["Goliath"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0021"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0022",
+      "name": "Dimensional Image: Hameln",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image hameln", "hameln", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Hameln", "dimensional-image-hameln"],
+        "owner": ["Hameln"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0022"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0023",
+      "name": "Dimensional Image: Helot",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image helot", "helot", "image", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Helot", "dimensional-image-helot"],
+        "owner": ["Helot"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0023"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0024",
+      "name": "Dimensional Image: Horla",
+      "aliases": [],
+      "tokens": ["dimensional", "dimensional image", "dimensional image horla", "horla", "image", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Horla", "dimensional-image-horla"],
+        "owner": ["Horla"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0024"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0025",
+      "name": "Dimensional Image: Jenkin",
+      "aliases": [],
+      "tokens": ["dimensional", "dimensional image", "dimensional image jenkin", "image", "jenkin", "jenkins", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Jenkin", "dimensional-image-jenkin"],
+        "owner": ["Jenkin", "jenkins"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0025"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0026",
+      "name": "Dimensional Image: Karen",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image karen", "image", "karen", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Karen", "dimensional-image-karen"],
+        "owner": ["Karen"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0026"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0027",
+      "name": "Dimensional Image: Kathigu-Ra",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image kathigu ra", "image", "kathigu", "kathigu ra", "kathigura", "ra", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Kathigu-Ra", "dimensional-image-kathigu-ra"],
+        "owner": ["Kathigu-Ra", "kathigura"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0027"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0028",
+      "name": "Dimensional Image: Leigh",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image leigh", "image", "leigh", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Leigh", "dimensional-image-leigh"],
+        "owner": ["Leigh"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0028"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0029",
+      "name": "Dimensional Image: Lily",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image lily", "image", "lily", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Lily", "dimensional-image-lily"],
+        "owner": ["Lily"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0029"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0030",
+      "name": "Dimensional Image: Liz",
+      "aliases": [],
+      "tokens": ["dimensional", "dimensional image", "dimensional image liz", "image", "liz", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Liz", "dimensional-image-liz"],
+        "owner": ["Liz"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0030"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0031",
+      "name": "Dimensional Image: Lotan",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image lotan", "image", "lotan", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Lotan", "dimensional-image-lotan"],
+        "owner": ["Lotan"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0031"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0032",
+      "name": "Dimensional Image: Miryam",
+      "aliases": [],
+      "tokens": ["aequor", "dimensional", "dimensional image", "dimensional image miryam", "image", "miryam", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Miryam", "dimensional-image-miryam"],
+        "owner": ["Miryam"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0032"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0033",
+      "name": "Dimensional Image: Mouchette",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image mouchette", "image", "mouchette", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Mouchette", "dimensional-image-mouchette"],
+        "owner": ["Mouchette"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0033"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0034",
+      "name": "Dimensional Image: Murphy",
+      "aliases": [],
+      "tokens": ["aequor", "dimensional", "dimensional image", "dimensional image murphy", "image", "murphy", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Murphy", "dimensional-image-murphy"],
+        "owner": ["Murphy"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0034"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0035",
+      "name": "Dimensional Image: Murphy: Fauxborn",
+      "aliases": [],
+      "tokens": [
+        "aequor",
+        "dimensional",
+        "dimensional image",
+        "dimensional image murphy fauxborn",
+        "fauxborn",
+        "g",
+        "g murphy",
+        "image",
+        "murphy",
+        "murphy fauxborn",
+        "ssr"
+      ],
+      "fields": {
+        "name": ["Dimensional Image: Murphy: Fauxborn", "dimensional-image-murphy-fauxborn"],
+        "owner": ["Murphy: Fauxborn", "murphy-fauxborn", "g-murphy"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0035"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0036",
+      "name": "Dimensional Image: Nautila",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image nautila", "image", "nautila", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Nautila", "dimensional-image-nautila"],
+        "owner": ["Nautila"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0036"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0037",
+      "name": "Dimensional Image: Nymphaea",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image nymphaea", "image", "nymphaea", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Nymphaea", "dimensional-image-nymphaea"],
+        "owner": ["Nymphaea"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0037"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0038",
+      "name": "Dimensional Image: Ogier",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image ogier", "image", "ogier", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Ogier", "dimensional-image-ogier"],
+        "owner": ["Ogier"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0038"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0039",
+      "name": "Dimensional Image: Pandia",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image pandia", "image", "pandia", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Pandia", "dimensional-image-pandia"],
+        "owner": ["Pandia"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0039"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0040",
+      "name": "Dimensional Image: Pickman",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image pickman", "image", "pickman", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Pickman", "dimensional-image-pickman"],
+        "owner": ["Pickman"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0040"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0041",
+      "name": "Dimensional Image: Pollux",
+      "aliases": [],
+      "tokens": ["dimensional", "dimensional image", "dimensional image pollux", "image", "pollux", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Pollux", "dimensional-image-pollux"],
+        "owner": ["Pollux"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0041"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0042",
+      "name": "Dimensional Image: Ramona",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image ramona", "image", "ramona", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Ramona", "dimensional-image-ramona"],
+        "owner": ["Ramona"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0042"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0043",
+      "name": "Dimensional Image: Ryker",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image ryker", "image", "ryker", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Ryker", "dimensional-image-ryker"],
+        "owner": ["Ryker"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0043"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0044",
+      "name": "Dimensional Image: Salvador",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image salvador", "image", "salvador", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Salvador", "dimensional-image-salvador"],
+        "owner": ["Salvador"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0044"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0045",
+      "name": "Dimensional Image: Sanga",
+      "aliases": [],
+      "tokens": ["aequor", "dimensional", "dimensional image", "dimensional image sanga", "image", "sanga", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Sanga", "dimensional-image-sanga"],
+        "owner": ["Sanga"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0045"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0046",
+      "name": "Dimensional Image: Sorel",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image sorel", "image", "sorel", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Sorel", "dimensional-image-sorel"],
+        "owner": ["Sorel"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0046"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0047",
+      "name": "Dimensional Image: Tawil",
+      "aliases": [],
+      "tokens": ["chaos", "dimensional", "dimensional image", "dimensional image tawil", "image", "ssr", "tawil"],
+      "fields": {
+        "name": ["Dimensional Image: Tawil", "dimensional-image-tawil"],
+        "owner": ["Tawil"],
+        "facet": ["CHAOS", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CHAOS",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0047"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0048",
+      "name": "Dimensional Image: Thais",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image thais", "image", "ssr", "thais"],
+      "fields": {
+        "name": ["Dimensional Image: Thais", "dimensional-image-thais"],
+        "owner": ["Thais"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0048"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0049",
+      "name": "Dimensional Image: Tinct",
+      "aliases": [],
+      "tokens": ["dimensional", "dimensional image", "dimensional image tinct", "image", "ssr", "tinct", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Tinct", "dimensional-image-tinct"],
+        "owner": ["Tinct"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0049"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0050",
+      "name": "Dimensional Image: Tulu",
+      "aliases": [],
+      "tokens": ["aequor", "dimensional", "dimensional image", "dimensional image tulu", "image", "ssr", "tulu"],
+      "fields": {
+        "name": ["Dimensional Image: Tulu", "dimensional-image-tulu"],
+        "owner": ["Tulu"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0050"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0051",
+      "name": "Dimensional Image: Uvhash",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image uvhash", "image", "ssr", "uvhash"],
+      "fields": {
+        "name": ["Dimensional Image: Uvhash", "dimensional-image-uvhash"],
+        "owner": ["Uvhash"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0051"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0052",
+      "name": "Dimensional Image: Wanda",
+      "aliases": [],
+      "tokens": ["dimensional", "dimensional image", "dimensional image wanda", "image", "ssr", "ultra", "wanda"],
+      "fields": {
+        "name": ["Dimensional Image: Wanda", "dimensional-image-wanda"],
+        "owner": ["Wanda"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0052"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0053",
+      "name": "Dimensional Image: Winkle",
+      "aliases": [],
+      "tokens": ["dimensional", "dimensional image", "dimensional image winkle", "image", "ssr", "ultra", "winkle"],
+      "fields": {
+        "name": ["Dimensional Image: Winkle", "dimensional-image-winkle"],
+        "owner": ["Winkle"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0053"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0054",
+      "name": "Dimensional Image: Xu",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image xu", "image", "ssr", "xu"],
+      "fields": {
+        "name": ["Dimensional Image: Xu", "dimensional-image-xu"],
+        "owner": ["Xu"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0054"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0055",
+      "name": "Dimensional Image: Vortice",
+      "aliases": [],
+      "tokens": ["aequor", "dimensional", "dimensional image", "dimensional image vortice", "image", "ssr", "vortice"],
+      "fields": {
+        "name": ["Dimensional Image: Vortice", "dimensional-image-vortice"],
+        "owner": ["Vortice"],
+        "facet": ["AEQUOR", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "AEQUOR",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0055"
+      }
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0056",
+      "name": "Dimensional Image: Arachne",
+      "aliases": [],
+      "tokens": ["arachne", "dimensional", "dimensional image", "dimensional image arachne", "image", "ssr", "ultra"],
+      "fields": {
+        "name": ["Dimensional Image: Arachne", "dimensional-image-arachne"],
+        "owner": ["Arachne"],
+        "facet": ["ULTRA", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "ULTRA",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0056"
+      }
+    }
+  ]
+}

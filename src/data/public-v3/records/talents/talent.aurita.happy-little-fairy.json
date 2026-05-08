@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 3,
+  "kind": "talent",
+  "id": "talent.aurita.happy-little-fairy",
+  "name": "Happy Little Fairy",
+  "route": {
+    "slug": "happy-little-fairy",
+    "canonicalPath": "/database/awakeners/aurita/talents/happy-little-fairy"
+  },
+  "ownerAwakenerId": "awakener-0005",
+  "family": "passive",
+  "descriptionTemplate": "For every 1 Aliemus Regen Level in Aurita, at the start of battle, obtain 1% of Aurita's ATK as {Tentacle DMG}.",
+  "descriptionArgs": {},
+  "ownerAwakenerName": "Aurita"
+}

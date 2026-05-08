@@ -1,5 +1,5 @@
-import type {DescriptionArg} from './awakener-source-schema'
 import {getMainstatLabels} from './mainstats-catalog'
+import type {PublicDescriptionArg} from './public-description-args'
 import {COMPUTABLE_STATS} from './scaling'
 
 export interface TextSegment {
@@ -37,6 +37,13 @@ export interface DescriptionArgSegment {
   argKey: string
   channel: string | null
 }
+export interface ArgPluralSegment {
+  type: 'argPlural'
+  argKey: string
+  channel: string | null
+  singular: string
+  plural: string
+}
 
 export interface RichTextParseOptions {
   excludedSkillNames?: Iterable<string>
@@ -54,6 +61,7 @@ export type RichSegment =
   | RealmSegment
   | ScalingSegment
   | DescriptionArgSegment
+  | ArgPluralSegment
 
 const LINE_BREAK_BEFORE_MECHANICS = new Set(['Aftershock', 'Leap', 'Quasar', 'Rouse'])
 
@@ -84,14 +92,28 @@ const KNOWN_REALMS = new Set(['Chaos', 'Aequor', 'Caro', 'Ultra'])
 
 const SCALING_RE = /\((\d[\d./]*(?:\/\d[\d./]*)+)(%)?\s*(?:\{([^}]+)\})?\)/
 const PROSE_SCALING_RE = /(\d+(?:\.\d+)?)(%)\s+of\s+\{([^}]+)\}/
-const DESCRIPTION_ARG_RE = /\[(?:(?<channel>[A-Za-z]+):)?(?<argKey>(?:StateArg|DescArg|Arg)\d+)\]/
+const DESCRIPTION_ARG_RE =
+  /\[(?:(?<channel>[A-Za-z]+|\{[^}\]]+\}):)?(?<argKey>(?:StateArg|DescArg|Arg)\d+)\]/
+const PLURAL_MACRO_RE =
+  /\{plural:(?<argToken>\[(?:(?:[A-Za-z]+|\{[^}\]]+\}):)?(?:StateArg|DescArg|Arg)\d+\])\|(?<singular>[^|{}]+)\|(?<plural>[^{}]+)\}/
+const ORDINAL_MACRO_RE = /\{ordinal:(?<value>[^{}]+)\}/
 
 type NextRichMatch =
   | {kind: 'none'}
   | {kind: 'descriptionArg'; index: number; match: RegExpExecArray}
+  | {kind: 'plural'; index: number; match: RegExpExecArray}
+  | {kind: 'ordinal'; index: number; match: RegExpExecArray}
   | {kind: 'scaling'; index: number; match: RegExpExecArray}
   | {kind: 'prose'; index: number; match: RegExpExecArray}
   | {kind: 'bracket'; index: number}
+
+function normalizeDescriptionArgChannel(channel: string | undefined): string | null {
+  if (!channel) {
+    return null
+  }
+
+  return channel.startsWith('{') && channel.endsWith('}') ? channel.slice(1, -1).trim() : channel
+}
 
 function parseScaling(raw: string): ScalingSegment | null {
   const m = SCALING_RE.exec(raw)
@@ -105,11 +127,15 @@ function parseScaling(raw: string): ScalingSegment | null {
 
 function findNextRichMatch(remaining: string): NextRichMatch {
   const descriptionArgMatch = DESCRIPTION_ARG_RE.exec(remaining)
+  const pluralMatch = PLURAL_MACRO_RE.exec(remaining)
+  const ordinalMatch = ORDINAL_MACRO_RE.exec(remaining)
   const scalingMatch = SCALING_RE.exec(remaining)
   const proseMatch = PROSE_SCALING_RE.exec(remaining)
   const bracketIdx = remaining.indexOf('{')
 
   const nextDescriptionArgIdx = descriptionArgMatch?.index ?? Infinity
+  const nextPluralIdx = pluralMatch?.index ?? Infinity
+  const nextOrdinalIdx = ordinalMatch?.index ?? Infinity
   const nextScalingIdx = scalingMatch?.index ?? Infinity
   const nextProseIdx =
     proseMatch && COMPUTABLE_STATS.has(proseMatch[3]) ? proseMatch.index : Infinity
@@ -117,6 +143,8 @@ function findNextRichMatch(remaining: string): NextRichMatch {
 
   if (
     nextDescriptionArgIdx === Infinity &&
+    nextPluralIdx === Infinity &&
+    nextOrdinalIdx === Infinity &&
     nextScalingIdx === Infinity &&
     nextProseIdx === Infinity &&
     nextBracketIdx === Infinity
@@ -124,9 +152,24 @@ function findNextRichMatch(remaining: string): NextRichMatch {
     return {kind: 'none'}
   }
 
-  if (nextDescriptionArgIdx <= Math.min(nextScalingIdx, nextProseIdx, nextBracketIdx)) {
+  if (
+    nextDescriptionArgIdx <=
+    Math.min(nextPluralIdx, nextOrdinalIdx, nextScalingIdx, nextProseIdx, nextBracketIdx)
+  ) {
     if (descriptionArgMatch) {
       return {kind: 'descriptionArg', index: nextDescriptionArgIdx, match: descriptionArgMatch}
+    }
+  }
+
+  if (nextPluralIdx <= Math.min(nextOrdinalIdx, nextScalingIdx, nextProseIdx, nextBracketIdx)) {
+    if (pluralMatch) {
+      return {kind: 'plural', index: nextPluralIdx, match: pluralMatch}
+    }
+  }
+
+  if (nextOrdinalIdx <= Math.min(nextScalingIdx, nextProseIdx, nextBracketIdx)) {
+    if (ordinalMatch) {
+      return {kind: 'ordinal', index: nextOrdinalIdx, match: ordinalMatch}
     }
   }
 
@@ -147,7 +190,7 @@ function consumeDescriptionArgMatch(
   remaining: string,
   segments: RichSegment[],
   nextMatch: Extract<NextRichMatch, {kind: 'descriptionArg'}>,
-  descriptionArgs: Record<string, DescriptionArg> | undefined,
+  descriptionArgs: Record<string, PublicDescriptionArg> | undefined,
 ): string {
   if (nextMatch.index > 0) {
     segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
@@ -163,11 +206,11 @@ function consumeDescriptionArgMatch(
   segments.push({
     type: 'descriptionArg',
     argKey,
-    channel: nextMatch.match.groups?.channel ?? null,
+    channel: normalizeDescriptionArgChannel(nextMatch.match.groups?.channel),
   })
 
   let consumedLength = nextMatch.match[0].length
-  const suffix = arg?.suffix ?? arg?.substatBonus?.suffix ?? ''
+  const suffix = arg?.suffix ?? (arg && 'substatBonus' in arg ? arg.substatBonus?.suffix : '') ?? ''
   const nextCharacter = remaining[nextMatch.index + consumedLength] ?? ''
   if (suffix === '%' && nextCharacter === '%') {
     consumedLength += 1
@@ -176,6 +219,47 @@ function consumeDescriptionArgMatch(
   }
 
   return remaining.slice(nextMatch.index + consumedLength)
+}
+
+function consumePluralMatch(
+  remaining: string,
+  segments: RichSegment[],
+  nextMatch: Extract<NextRichMatch, {kind: 'plural'}>,
+  descriptionArgs: Record<string, PublicDescriptionArg> | undefined,
+): string {
+  if (nextMatch.index > 0) {
+    segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
+  }
+
+  const argToken = nextMatch.match.groups?.argToken
+  const argMatch = argToken ? DESCRIPTION_ARG_RE.exec(argToken) : null
+  const argKey = argMatch?.groups?.argKey
+  if (!argKey || (descriptionArgs && !Object.hasOwn(descriptionArgs, argKey))) {
+    segments.push({type: 'text', value: nextMatch.match[0]})
+    return remaining.slice(nextMatch.index + nextMatch.match[0].length)
+  }
+
+  segments.push({
+    type: 'argPlural',
+    argKey,
+    channel: normalizeDescriptionArgChannel(argMatch.groups?.channel),
+    singular: nextMatch.match.groups?.singular ?? '',
+    plural: nextMatch.match.groups?.plural ?? '',
+  })
+  return remaining.slice(nextMatch.index + nextMatch.match[0].length)
+}
+
+function consumeOrdinalMatch(
+  remaining: string,
+  segments: RichSegment[],
+  nextMatch: Extract<NextRichMatch, {kind: 'ordinal'}>,
+): string {
+  if (nextMatch.index > 0) {
+    segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
+  }
+
+  segments.push({type: 'text', value: nextMatch.match.groups?.value ?? nextMatch.match[0]})
+  return remaining.slice(nextMatch.index + nextMatch.match[0].length)
 }
 
 function consumeScalingMatch(
@@ -403,7 +487,7 @@ function normalizeBareOverlayMechanicSegments(
 export function parseRichDescription(
   text: string,
   cardNames: ReadonlySet<string>,
-  descriptionArgs?: Record<string, DescriptionArg>,
+  descriptionArgs?: Record<string, PublicDescriptionArg>,
   options?: RichTextParseOptions,
 ): RichSegment[] {
   const segments: RichSegment[] = []
@@ -432,7 +516,11 @@ export function parseRichDescription(
           )
         : nextMatch.kind === 'descriptionArg'
           ? consumeDescriptionArgMatch(remaining, segments, nextMatch, descriptionArgs)
-          : consumeScalingMatch(remaining, segments, nextMatch)
+          : nextMatch.kind === 'plural'
+            ? consumePluralMatch(remaining, segments, nextMatch, descriptionArgs)
+            : nextMatch.kind === 'ordinal'
+              ? consumeOrdinalMatch(remaining, segments, nextMatch)
+              : consumeScalingMatch(remaining, segments, nextMatch)
   }
 
   const normalizedSegments = normalizeBareOverlayMechanicSegments(segments, normalizedOptions)

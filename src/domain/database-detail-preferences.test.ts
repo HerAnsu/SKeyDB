@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest'
 
-import type {AwakenerFullV2Record} from './awakeners-full-v2'
+import type {AwakenerFullRecord} from './awakeners-full'
 import {
   DEFAULT_DATABASE_DETAIL_PREFERENCES,
   normalizeDatabaseDetailPreferences,
@@ -32,6 +32,7 @@ describe('database-detail-preferences', () => {
           showTagIcons: false,
           clickOutsideClosesPopovers: false,
           fontScale: 'large',
+          accountLevel: 999,
         },
         awakener: {
           showVisibleScaling: false,
@@ -53,6 +54,7 @@ describe('database-detail-preferences', () => {
         showTagIcons: false,
         clickOutsideClosesPopovers: false,
         fontScale: 'large',
+        accountLevel: 100,
       },
       awakener: {
         showVisibleScaling: false,
@@ -78,6 +80,7 @@ describe('database-detail-preferences', () => {
           showTagIcons: false,
           clickOutsideClosesPopovers: false,
           fontScale: 'medium',
+          accountLevel: 77,
         },
         awakener: {
           showVisibleScaling: false,
@@ -101,6 +104,7 @@ describe('database-detail-preferences', () => {
         showTagIcons: false,
         clickOutsideClosesPopovers: false,
         fontScale: 'medium',
+        accountLevel: 77,
       },
       awakener: {
         showVisibleScaling: false,
@@ -136,6 +140,7 @@ describe('database-detail-preferences', () => {
           shared: {
             clickOutsideClosesPopovers: false,
             fontScale: 'medium',
+            accountLevel: 42,
           },
           awakener: {
             showVisibleScaling: false,
@@ -161,6 +166,7 @@ describe('database-detail-preferences', () => {
         showTagIcons: true,
         clickOutsideClosesPopovers: false,
         fontScale: 'medium',
+        accountLevel: 42,
       },
       awakener: {
         showVisibleScaling: false,
@@ -186,6 +192,7 @@ describe('database-detail-preferences', () => {
         showTagIcons: false,
         clickOutsideClosesPopovers: false,
         fontScale: 'medium',
+        accountLevel: 22,
         defaultSelection: {
           awakenerLevel: 90,
           psycheSurgeOffset: 2,
@@ -203,6 +210,7 @@ describe('database-detail-preferences', () => {
         showTagIcons: false,
         clickOutsideClosesPopovers: false,
         fontScale: 'medium',
+        accountLevel: 22,
       },
       awakener: {
         showVisibleScaling: false,
@@ -248,7 +256,7 @@ describe('database-detail-preferences', () => {
   })
 })
 
-function buildRecord(): AwakenerFullV2Record {
+function buildRecord(): AwakenerFullRecord {
   return {
     id: 1,
     key: 'test',
@@ -352,8 +360,6 @@ function buildRecord(): AwakenerFullV2Record {
         descriptionArgs: {},
         hasLevelScaledDescription: true,
         maxLevel: 3,
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       T4: undefined,
       extraTalents: [],
@@ -366,8 +372,6 @@ function buildRecord(): AwakenerFullV2Record {
         displayName: 'E1',
         descriptionTemplate: '',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       E2: {
         id: 'enlighten.test.e2',
@@ -376,8 +380,6 @@ function buildRecord(): AwakenerFullV2Record {
         displayName: 'E2',
         descriptionTemplate: '',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       E3: {
         id: 'enlighten.test.e3',
@@ -386,8 +388,6 @@ function buildRecord(): AwakenerFullV2Record {
         displayName: 'E3',
         descriptionTemplate: '',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       AbsoluteAxiom: undefined,
     },

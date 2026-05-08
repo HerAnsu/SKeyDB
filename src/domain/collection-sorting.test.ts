@@ -65,6 +65,24 @@ describe('compareAwakenersForCollectionSort', () => {
     expect(desc.map((entry) => entry.label)).toEqual(['C', 'B', 'A'])
   })
 
+  it('sorts by release date inside the owned and unowned buckets', () => {
+    const entries = [
+      baseAwakener({label: 'Owned New', owned: true, releaseDate: '2024-04-27'}),
+      baseAwakener({label: 'Unowned Old', owned: false, releaseDate: '2023-11-29'}),
+      baseAwakener({label: 'Owned Old', owned: true, releaseDate: '2023-11-29'}),
+    ]
+
+    const sorted = [...entries].sort((l, r) =>
+      compareAwakenersForCollectionSort(l, r, {
+        key: 'RELEASE_DATE',
+        direction: 'ASC',
+        groupByRealm: false,
+      }),
+    )
+
+    expect(sorted.map((entry) => entry.label)).toEqual(['Owned Old', 'Owned New', 'Unowned Old'])
+  })
+
   it('always sorts unowned awakeners after owned awakeners', () => {
     const entries = [
       baseAwakener({label: 'Owned Low', owned: true, level: 1}),

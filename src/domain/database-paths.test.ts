@@ -15,7 +15,8 @@ import type {Wheel} from './wheels'
 
 function makeAwakener(overrides: Partial<Awakener>): Awakener {
   return {
-    id: 1,
+    id: 'awakener-0001',
+    numericId: 1,
     name: 'thais',
     faction: 'Test',
     realm: 'CARO',
@@ -23,6 +24,7 @@ function makeAwakener(overrides: Partial<Awakener>): Awakener {
     type: 'ASSAULT',
     aliases: ['Thais'],
     tags: [],
+    lineupToken: 'a',
     ...overrides,
   }
 }
@@ -38,18 +40,22 @@ function makeWheel(overrides: Partial<Wheel>): Wheel {
     aliases: ['Merciful Nurturing'],
     tags: ['Caro'],
     mainstatKey: 'KEYFLARE_REGEN',
+    lineupToken: 'a',
     ...overrides,
   }
 }
 
 describe('database paths', () => {
   it('builds a stable awakener detail path from canonical name', () => {
-    expect(buildDatabaseAwakenerPath(makeAwakener({name: 'helot: catena'}))).toBe(
-      '/database/awk/helot-catena',
-    )
-    expect(buildDatabaseAwakenerPath(makeAwakener({name: 'helot: catena'}), 'builds')).toBe(
-      '/database/awk/helot-catena/builds',
-    )
+    expect(
+      buildDatabaseAwakenerPath(makeAwakener({id: 'awakener-0019', name: 'helot: catena'})),
+    ).toBe('/database/awakeners/helot-catena')
+    expect(
+      buildDatabaseAwakenerPath(
+        makeAwakener({id: 'awakener-0019', name: 'helot: catena'}),
+        'builds',
+      ),
+    ).toBe('/database/awakeners/helot-catena/builds')
   })
 
   it('normalizes awakener names into shareable slugs', () => {
@@ -71,15 +77,17 @@ describe('database paths', () => {
 
   it('finds awakeners by canonical slug', () => {
     const awakeners = [
-      makeAwakener({id: 1, name: 'thais'}),
-      makeAwakener({id: 2, name: 'helot: catena'}),
+      makeAwakener({id: 'awakener-0001', name: 'thais'}),
+      makeAwakener({id: 'awakener-0019', name: 'helot: catena'}),
     ]
 
-    expect(findAwakenerByDatabaseSlug(awakeners, 'helot-catena')?.id).toBe(2)
+    expect(findAwakenerByDatabaseSlug(awakeners, 'helot-catena')?.id).toBe('awakener-0019')
   })
 
   it('returns null for unknown slugs', () => {
-    expect(findAwakenerByDatabaseSlug([makeAwakener({id: 1, name: 'thais'})], 'missing')).toBeNull()
+    expect(
+      findAwakenerByDatabaseSlug([makeAwakener({id: 'awakener-0001', name: 'thais'})], 'missing'),
+    ).toBeNull()
   })
 
   it('finds wheels by canonical slug', () => {
@@ -98,10 +106,11 @@ describe('database paths', () => {
   it('resolves allowed database tab slugs', () => {
     expect(resolveDatabaseAwakenerTab('builds')).toBe('builds')
     expect(resolveDatabaseAwakenerTab('Builds')).toBe('builds')
+    expect(resolveDatabaseAwakenerTab('upgrades')).toBe('upgrades')
     expect(resolveDatabaseAwakenerTab('skills')).toBe('skills')
     expect(resolveDatabaseAwakenerTab('cards')).toBe('skills')
     expect(resolveDatabaseAwakenerTab(undefined)).toBeNull()
     expect(resolveDatabaseAwakenerTab('missing')).toBeNull()
-    expect(DATABASE_AWAKENER_TABS).toEqual(['overview', 'skills', 'builds', 'teams'])
+    expect(DATABASE_AWAKENER_TABS).toEqual(['overview', 'upgrades', 'skills', 'builds', 'teams'])
   })
 })

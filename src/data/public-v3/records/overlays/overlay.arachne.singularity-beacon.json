@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.arachne.singularity-beacon",
+  "name": "Singularity Beacon",
+  "route": {
+    "slug": "singularity-beacon",
+    "canonicalPath": "/database/awakeners/arachne/overlays/singularity-beacon"
+  },
+  "assets": {
+    "icon": "asset-overlay.arachne.singularity-beacon-icon"
+  },
+  "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0056",
+  "aliases": [],
+  "iconId": "IconS_Buff_067",
+  "textColor": "affliction",
+  "descriptionTemplate": "For each stack, increase the final DMG, {STR} & {Tentacle DMG} Boost, Fixed {Poison}, and Fixed {Counter} effects of this card by 2%; increase the final Shield, HP Recovery, and {STR⯆} effects by 1%. Cards with {Singularity Beacon} cannot trigger {Dimension Shuttle}.",
+  "descriptionArgs": {},
+  "ownerAwakenerName": "Arachne"
+}

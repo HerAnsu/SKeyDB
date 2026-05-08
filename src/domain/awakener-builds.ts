@@ -1,17 +1,16 @@
 import {z} from 'zod'
 
-import awakenerBuildEntriesJson from '@/data/awakener-builds.json'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
+import {getPublicBuilderCatalog} from '@/data-access/public-data/collectionRepository'
 
-import {getAwakeners} from './awakeners'
-import {getCovenants, type Covenant} from './covenants'
+import type {Covenant} from './covenants'
 import {
   MAINSTAT_KEYS,
   WHEEL_MAINSTAT_KEYS,
   type MainstatKey,
   type WheelMainstatKey,
 } from './mainstats'
-import {getPosses} from './posses'
-import {getWheels, type Wheel} from './wheels'
+import type {Wheel} from './wheels'
 
 export const AWAKENER_BUILD_WHEEL_TIERS = ['BIS_SSR', 'ALT_SSR', 'BIS_SR', 'GOOD'] as const
 
@@ -44,26 +43,42 @@ const awakenerBuildSchema = z.object({
 })
 
 const awakenerBuildEntrySchema = z.object({
-  awakenerId: z.number().int().positive(),
+  id: z.string().regex(/^awakener-build-\d{4}$/),
+  awakenerId: z.string().regex(/^awakener-\d{4}$/),
   awakenerName: z.string().trim().min(1).optional(),
   primaryBuildId: z.string().trim().min(1).optional(),
   recommendedPosseIds: z.array(z.string().trim().min(1)).min(1).optional(),
   builds: z.array(awakenerBuildSchema).min(1),
 })
 
+function getBuilderOptionIdSet(optionKey: string): Set<string> {
+  return new Set(getPublicBuilderCatalog().options[optionKey] ?? [])
+}
+
 const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine((entries, ctx) => {
-  const awakenerById = new Map(getAwakeners().map((awakener) => [awakener.id, awakener]))
-  const awakenerIdSet = new Set(awakenerById.keys())
-  const wheelIdSet = new Set(getWheels().map((wheel) => wheel.id))
-  const covenantIdSet = new Set(getCovenants().map((covenant) => covenant.id))
-  const posseIdSet = new Set(getPosses().map((posse) => posse.id))
-  const seenAwakenerIds = new Set<number>()
+  const awakenerById = new Map(
+    getPublicCatalogRecords('awakeners').map((awakener) => [awakener.id, awakener]),
+  )
+  const awakenerIdSet = getBuilderOptionIdSet('awakeners')
+  const awakenerBuildIdSet = getBuilderOptionIdSet('awakenerBuilds')
+  const wheelIdSet = getBuilderOptionIdSet('wheels')
+  const covenantIdSet = getBuilderOptionIdSet('covenants')
+  const posseIdSet = getBuilderOptionIdSet('posses')
+  const seenAwakenerIds = new Set<string>()
 
   entries.forEach((entry, entryIndex) => {
+    if (!awakenerBuildIdSet.has(entry.id)) {
+      ctx.addIssue({
+        code: 'custom',
+        message: `Unknown awakener build id ${entry.id}.`,
+        path: [entryIndex, 'id'],
+      })
+    }
+
     if (seenAwakenerIds.has(entry.awakenerId)) {
       ctx.addIssue({
         code: 'custom',
-        message: `Duplicate awakenerId ${String(entry.awakenerId)}.`,
+        message: `Duplicate awakenerId ${entry.awakenerId}.`,
         path: [entryIndex, 'awakenerId'],
       })
     }
@@ -72,7 +87,7 @@ const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine
     if (!awakenerIdSet.has(entry.awakenerId)) {
       ctx.addIssue({
         code: 'custom',
-        message: `Unknown awakenerId ${String(entry.awakenerId)}.`,
+        message: `Unknown awakenerId ${entry.awakenerId}.`,
         path: [entryIndex, 'awakenerId'],
       })
     }
@@ -81,7 +96,7 @@ const awakenerBuildEntriesSchema = z.array(awakenerBuildEntrySchema).superRefine
     if (entry.awakenerName && expectedAwakenerName && entry.awakenerName !== expectedAwakenerName) {
       ctx.addIssue({
         code: 'custom',
-        message: `awakenerName "${entry.awakenerName}" does not match canonical awakener name "${expectedAwakenerName}" for id ${String(entry.awakenerId)}.`,
+        message: `awakenerName "${entry.awakenerName}" does not match canonical awakener name "${expectedAwakenerName}" for id ${entry.awakenerId}.`,
         path: [entryIndex, 'awakenerName'],
       })
     }
@@ -229,7 +244,9 @@ export function getAwakenerBuildEntries(): AwakenerBuildEntry[] {
   if (awakenerBuildEntriesCache) {
     return awakenerBuildEntriesCache
   }
-  awakenerBuildEntriesCache = awakenerBuildEntriesSchema.parse(awakenerBuildEntriesJson)
+  awakenerBuildEntriesCache = awakenerBuildEntriesSchema.parse(
+    getPublicCatalogRecords('awakener-builds'),
+  )
   return awakenerBuildEntriesCache
 }
 
@@ -239,12 +256,12 @@ export function loadAwakenerBuildEntries(): Promise<AwakenerBuildEntry[]> {
 
 export function buildAwakenerBuildEntryMap(
   entries: AwakenerBuildEntry[],
-): Map<number, AwakenerBuildEntry> {
+): Map<string, AwakenerBuildEntry> {
   return new Map(entries.map((entry) => [entry.awakenerId, entry]))
 }
 
 export function getAwakenerBuildEntryById(
-  awakenerId: number,
+  awakenerId: string,
   entries: AwakenerBuildEntry[],
 ): AwakenerBuildEntry | undefined {
   return entries.find((entry) => entry.awakenerId === awakenerId)

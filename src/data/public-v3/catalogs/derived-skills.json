@@ -1,0 +1,1495 @@
+{
+  "schemaVersion": 3,
+  "scope": "derived-skills",
+  "kind": "derivedSkill",
+  "recordCount": 113,
+  "records": [
+    {
+      "kind": "derivedSkill",
+      "id": "derived.arachne.guiding-strings",
+      "name": "Guiding Strings",
+      "route": {
+        "slug": "guiding-strings",
+        "canonicalPath": "/database/awakeners/arachne/derived-skills/guiding-strings"
+      },
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne",
+      "derivedFromId": "skill.arachne.eternal-loom",
+      "rootSkillId": "skill.arachne.eternal-loom"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.arachne.infinite-threads",
+      "name": "Infinite Threads",
+      "route": {
+        "slug": "infinite-threads",
+        "canonicalPath": "/database/awakeners/arachne/derived-skills/infinite-threads"
+      },
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne",
+      "derivedFromId": "skill.arachne.moira-as-i-decree",
+      "rootSkillId": "skill.arachne.moira-as-i-decree"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.castor.onyx-plume",
+      "name": "Onyx Plume",
+      "route": {
+        "slug": "onyx-plume",
+        "canonicalPath": "/database/awakeners/castor/derived-skills/onyx-plume"
+      },
+      "ownerAwakenerId": "awakener-0008",
+      "ownerAwakenerName": "Castor",
+      "derivedFromId": "skill.castor.skybound-oath",
+      "rootSkillId": "skill.castor.skybound-oath"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.clementine.phobic-fixation",
+      "name": "Conversion: Phobic Fixation",
+      "route": {
+        "slug": "conversion-phobic-fixation",
+        "canonicalPath": "/database/awakeners/clementine/derived-skills/conversion-phobic-fixation"
+      },
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine",
+      "derivedFromId": "skill.clementine.lifeform-reconstruction",
+      "rootSkillId": "skill.clementine.lifeform-reconstruction"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.clementine.psychic-trauma",
+      "name": "Conversion: Psychic Trauma",
+      "route": {
+        "slug": "conversion-psychic-trauma",
+        "canonicalPath": "/database/awakeners/clementine/derived-skills/conversion-psychic-trauma"
+      },
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine",
+      "derivedFromId": "skill.clementine.lifeform-reconstruction",
+      "rootSkillId": "skill.clementine.lifeform-reconstruction"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.corposant.pilot",
+      "name": "Pilot",
+      "route": {
+        "slug": "pilot",
+        "canonicalPath": "/database/awakeners/corposant/derived-skills/pilot"
+      },
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant",
+      "derivedFromId": "skill.corposant.sunken-in-the-profound",
+      "rootSkillId": "skill.corposant.sunken-in-the-profound"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage",
+      "name": "Thousand Mirage",
+      "route": {
+        "slug": "thousand-mirage",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/thousand-mirage"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "nodeKind": "group",
+      "derivedFromId": "skill.daffodil.sea-of-primordial-essence",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
+      "childDerivedSkillIds": ["derived.daffodil.thousand-mirage-base-cards", "derived.daffodil.thousand-mirage-extra-effects"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-base-cards",
+      "name": "Thousand Mirage: Base Cards",
+      "route": {
+        "slug": "thousand-mirage-base-cards",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/thousand-mirage-base-cards"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "nodeKind": "group",
+      "derivedFromId": "derived.daffodil.thousand-mirage",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
+      "childDerivedSkillIds": ["derived.daffodil.thousand-mirage-poison", "derived.daffodil.thousand-mirage-counter", "derived.daffodil.thousand-mirage-damage"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-counter",
+      "name": "Thousand Mirage",
+      "route": {
+        "slug": "thousand-mirage-counter",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/thousand-mirage-counter"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-damage",
+      "name": "Thousand Mirage",
+      "route": {
+        "slug": "thousand-mirage-damage",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/thousand-mirage-damage"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-aliemus",
+      "name": "Aliemus",
+      "route": {
+        "slug": "aliemus",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/aliemus"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-blessing",
+      "name": "Blessing",
+      "route": {
+        "slug": "blessing",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/blessing"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-brawn",
+      "name": "Brawn",
+      "route": {
+        "slug": "brawn",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/brawn"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-catalyst",
+      "name": "Catalyst",
+      "route": {
+        "slug": "catalyst",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/catalyst"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-computation",
+      "name": "Computation",
+      "route": {
+        "slug": "computation",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/computation"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-critical-fateweaving",
+      "name": "Critical Fateweaving",
+      "route": {
+        "slug": "critical-fateweaving",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/critical-fateweaving"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-critical-hit",
+      "name": "Critical Hit",
+      "route": {
+        "slug": "critical-hit",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/critical-hit"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-curse",
+      "name": "Curse",
+      "route": {
+        "slug": "curse",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/curse"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-directed-catalysis",
+      "name": "Directed Catalysis",
+      "route": {
+        "slug": "directed-catalysis",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/directed-catalysis"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-finesse",
+      "name": "Finesse",
+      "route": {
+        "slug": "finesse",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/finesse"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-aliemus",
+      "name": "Hpr. Aliemus",
+      "route": {
+        "slug": "hpr-aliemus",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-aliemus"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-brawn",
+      "name": "Hpr. Brawn",
+      "route": {
+        "slug": "hpr-brawn",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-brawn"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-catalysis",
+      "name": "Hpr. Catalysis",
+      "route": {
+        "slug": "hpr-catalysis",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-catalysis"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-computation",
+      "name": "Hpr. Computation",
+      "route": {
+        "slug": "hpr-computation",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-computation"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-directed-catalysis",
+      "name": "Hpr. Directed Catalysis",
+      "route": {
+        "slug": "hpr-directed-catalysis",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-directed-catalysis"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-finesse",
+      "name": "Hpr. Finesse",
+      "route": {
+        "slug": "hpr-finesse",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-finesse"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-insight",
+      "name": "Hpr. Insight",
+      "route": {
+        "slug": "hpr-insight",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-insight"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-keyflare",
+      "name": "Hpr. Keyflare",
+      "route": {
+        "slug": "hpr-keyflare",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-keyflare"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-vulnerable",
+      "name": "Hpr. Vulnerable",
+      "route": {
+        "slug": "hpr-vulnerable",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-vulnerable"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-hpr-weakness",
+      "name": "Hpr. Weakness",
+      "route": {
+        "slug": "hpr-weakness",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/hpr-weakness"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-insight",
+      "name": "Insight",
+      "route": {
+        "slug": "insight",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/insight"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-keyflare",
+      "name": "Keyflare",
+      "route": {
+        "slug": "keyflare",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/keyflare"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-pierce",
+      "name": "Pierce",
+      "route": {
+        "slug": "pierce",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/pierce"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-pierce-critical-hit",
+      "name": "Pierce Critical Hit",
+      "route": {
+        "slug": "pierce-critical-hit",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/pierce-critical-hit"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-precise-retrieval",
+      "name": "Precise Retrieval",
+      "route": {
+        "slug": "precise-retrieval",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/precise-retrieval"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-retrieve",
+      "name": "Retrieve",
+      "route": {
+        "slug": "retrieve",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/retrieve"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-vulnerable",
+      "name": "Vulnerable",
+      "route": {
+        "slug": "vulnerable",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/vulnerable"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-effect-weakness",
+      "name": "Weakness",
+      "route": {
+        "slug": "weakness",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/weakness"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-extra-effects",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-extra-effects",
+      "name": "Thousand Mirage: Extra Effects",
+      "route": {
+        "slug": "thousand-mirage-extra-effects",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/thousand-mirage-extra-effects"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "nodeKind": "group",
+      "derivedFromId": "derived.daffodil.thousand-mirage",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence",
+      "childDerivedSkillIds": [
+        "derived.daffodil.thousand-mirage-effect-finesse",
+        "derived.daffodil.thousand-mirage-effect-computation",
+        "derived.daffodil.thousand-mirage-effect-vulnerable",
+        "derived.daffodil.thousand-mirage-effect-weakness",
+        "derived.daffodil.thousand-mirage-effect-aliemus",
+        "derived.daffodil.thousand-mirage-effect-catalyst",
+        "derived.daffodil.thousand-mirage-effect-insight",
+        "derived.daffodil.thousand-mirage-effect-hpr-finesse",
+        "derived.daffodil.thousand-mirage-effect-hpr-computation",
+        "derived.daffodil.thousand-mirage-effect-hpr-vulnerable",
+        "derived.daffodil.thousand-mirage-effect-hpr-weakness",
+        "derived.daffodil.thousand-mirage-effect-hpr-aliemus",
+        "derived.daffodil.thousand-mirage-effect-hpr-catalysis",
+        "derived.daffodil.thousand-mirage-effect-hpr-insight",
+        "derived.daffodil.thousand-mirage-effect-critical-hit",
+        "derived.daffodil.thousand-mirage-effect-pierce",
+        "derived.daffodil.thousand-mirage-effect-retrieve",
+        "derived.daffodil.thousand-mirage-effect-brawn",
+        "derived.daffodil.thousand-mirage-effect-keyflare",
+        "derived.daffodil.thousand-mirage-effect-directed-catalysis",
+        "derived.daffodil.thousand-mirage-effect-critical-fateweaving",
+        "derived.daffodil.thousand-mirage-effect-precise-retrieval",
+        "derived.daffodil.thousand-mirage-effect-hpr-brawn",
+        "derived.daffodil.thousand-mirage-effect-curse",
+        "derived.daffodil.thousand-mirage-effect-blessing",
+        "derived.daffodil.thousand-mirage-effect-pierce-critical-hit",
+        "derived.daffodil.thousand-mirage-effect-hpr-directed-catalysis",
+        "derived.daffodil.thousand-mirage-effect-hpr-keyflare"
+      ]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.daffodil.thousand-mirage-poison",
+      "name": "Thousand Mirage",
+      "route": {
+        "slug": "thousand-mirage-poison",
+        "canonicalPath": "/database/awakeners/daffodil/derived-skills/thousand-mirage-poison"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "derivedFromId": "derived.daffodil.thousand-mirage-base-cards",
+      "rootSkillId": "skill.daffodil.sea-of-primordial-essence"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.doll-inferno.curse",
+      "name": "Curse",
+      "route": {
+        "slug": "curse",
+        "canonicalPath": "/database/awakeners/doll-inferno/derived-skills/curse"
+      },
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
+      "derivedFromId": "skill.doll-inferno.self-destruct",
+      "rootSkillId": "skill.doll-inferno.self-destruct"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.doll-inferno.elation",
+      "name": "Elation",
+      "route": {
+        "slug": "elation",
+        "canonicalPath": "/database/awakeners/doll-inferno/derived-skills/elation"
+      },
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
+      "derivedFromId": "skill.doll-inferno.self-destruct",
+      "rootSkillId": "skill.doll-inferno.self-destruct"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.doll-inferno.fates-descent-finale",
+      "name": "Fate's Descent: Finale",
+      "route": {
+        "slug": "fates-descent-finale",
+        "canonicalPath": "/database/awakeners/doll-inferno/derived-skills/fates-descent-finale"
+      },
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
+      "derivedFromId": "derived.doll-inferno.illusions-end",
+      "rootSkillId": "skill.doll-inferno.fates-descent"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.doll-inferno.illusions-end",
+      "name": "Illusion's End",
+      "route": {
+        "slug": "illusions-end",
+        "canonicalPath": "/database/awakeners/doll-inferno/derived-skills/illusions-end"
+      },
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
+      "derivedFromId": "talent.doll-inferno.path-of-annihilation",
+      "childDerivedSkillIds": ["derived.doll-inferno.self-destruct-finale", "derived.doll-inferno.fates-descent-finale"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.doll-inferno.self-destruct-finale",
+      "name": "Self-Destruct: Finale",
+      "route": {
+        "slug": "self-destruct-finale",
+        "canonicalPath": "/database/awakeners/doll-inferno/derived-skills/self-destruct-finale"
+      },
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
+      "derivedFromId": "derived.doll-inferno.illusions-end",
+      "rootSkillId": "skill.doll-inferno.self-destruct"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.doresain.evernights-revel",
+      "name": "Evernight's Revel",
+      "route": {
+        "slug": "evernights-revel",
+        "canonicalPath": "/database/awakeners/doresain/derived-skills/evernights-revel"
+      },
+      "ownerAwakenerId": "awakener-0014",
+      "ownerAwakenerName": "Doresain",
+      "derivedFromId": "talent.doresain.festering-grace",
+      "rootSkillId": "talent.doresain.festering-grace"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.erica.retract-mecha",
+      "name": "Retract: Mecha",
+      "route": {
+        "slug": "retract-mecha",
+        "canonicalPath": "/database/awakeners/erica/derived-skills/retract-mecha"
+      },
+      "ownerAwakenerId": "awakener-0015",
+      "ownerAwakenerName": "Erica",
+      "derivedFromId": "skill.erica.unleash-mecha",
+      "rootSkillId": "skill.erica.unleash-mecha"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.arouse",
+      "name": "Arouse",
+      "route": {
+        "slug": "arouse",
+        "canonicalPath": "/database/derived-skills/arouse"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.embryo",
+      "name": "Embryo",
+      "route": {
+        "slug": "embryo",
+        "canonicalPath": "/database/derived-skills/embryo"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.fleeting-beauty",
+      "name": "Fleeting Beauty",
+      "route": {
+        "slug": "fleeting-beauty",
+        "canonicalPath": "/database/derived-skills/fleeting-beauty"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.insight",
+      "name": "Insight",
+      "route": {
+        "slug": "insight",
+        "canonicalPath": "/database/derived-skills/insight"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.leahs-coin",
+      "name": "Leah's Coin",
+      "route": {
+        "slug": "leahs-coin",
+        "canonicalPath": "/database/derived-skills/leahs-coin"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.light-cone-boundary",
+      "name": "Light Cone Boundary",
+      "route": {
+        "slug": "light-cone-boundary",
+        "canonicalPath": "/database/derived-skills/light-cone-boundary"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.silver-key-gleam",
+      "name": "Silver Key Gleam",
+      "route": {
+        "slug": "silver-key-gleam",
+        "canonicalPath": "/database/derived-skills/silver-key-gleam"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.slumber",
+      "name": "Slumber",
+      "route": {
+        "slug": "slumber",
+        "canonicalPath": "/database/derived-skills/slumber"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.goliath.blades-dominion",
+      "name": "Blade's Dominion",
+      "route": {
+        "slug": "blades-dominion",
+        "canonicalPath": "/database/awakeners/goliath/derived-skills/blades-dominion"
+      },
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.goliath.dormancy",
+      "name": "Dormancy",
+      "route": {
+        "slug": "dormancy",
+        "canonicalPath": "/database/awakeners/goliath/derived-skills/dormancy"
+      },
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.goliath.usurp",
+      "name": "Usurp",
+      "route": {
+        "slug": "usurp",
+        "canonicalPath": "/database/awakeners/goliath/derived-skills/usurp"
+      },
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath",
+      "derivedFromId": "skill.goliath.abyssal-depths-power",
+      "rootSkillId": "skill.goliath.abyssal-depths-power"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.hameln.ascending-scale",
+      "name": "Ascending Scale",
+      "route": {
+        "slug": "ascending-scale",
+        "canonicalPath": "/database/awakeners/hameln/derived-skills/ascending-scale"
+      },
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln",
+      "derivedFromId": "derived.hameln.symphony-of-harmony",
+      "rootSkillId": "skill.hameln.laudable-masterpiece"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.hameln.descending-scale",
+      "name": "Descending Scale",
+      "route": {
+        "slug": "descending-scale",
+        "canonicalPath": "/database/awakeners/hameln/derived-skills/descending-scale"
+      },
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln",
+      "derivedFromId": "derived.hameln.symphony-of-harmony",
+      "rootSkillId": "skill.hameln.laudable-masterpiece"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.hameln.symphony-of-harmony",
+      "name": "Symphony of Harmony",
+      "route": {
+        "slug": "symphony-of-harmony",
+        "canonicalPath": "/database/awakeners/hameln/derived-skills/symphony-of-harmony"
+      },
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln",
+      "nodeKind": "group",
+      "derivedFromId": "skill.hameln.laudable-masterpiece",
+      "rootSkillId": "skill.hameln.laudable-masterpiece",
+      "childDerivedSkillIds": ["derived.hameln.ascending-scale", "derived.hameln.descending-scale"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.helot-catena.bloodthirsty-flail",
+      "name": "Bloodthirsty Flail",
+      "route": {
+        "slug": "bloodthirsty-flail",
+        "canonicalPath": "/database/awakeners/helot-catena/derived-skills/bloodthirsty-flail"
+      },
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena",
+      "derivedFromId": "skill.helot-catena.crimson-shackles",
+      "rootSkillId": "skill.helot-catena.crimson-shackles"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.helot-catena.irregular-form-chains",
+      "name": "Irregular Form: Chains",
+      "route": {
+        "slug": "irregular-form-chains",
+        "canonicalPath": "/database/awakeners/helot-catena/derived-skills/irregular-form-chains"
+      },
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena",
+      "derivedFromId": "skill.helot-catena.fettered-malice",
+      "rootSkillId": "skill.helot-catena.fettered-malice"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.helot.irregular-form",
+      "name": "Irregular Form",
+      "route": {
+        "slug": "irregular-form",
+        "canonicalPath": "/database/awakeners/helot/derived-skills/irregular-form"
+      },
+      "ownerAwakenerId": "awakener-0023",
+      "ownerAwakenerName": "Helot",
+      "derivedFromId": "skill.helot.blood-for-blood",
+      "rootSkillId": "skill.helot.blood-for-blood"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.jenkins.swarm-impact",
+      "name": "Swarm Impact",
+      "route": {
+        "slug": "swarm-impact",
+        "canonicalPath": "/database/awakeners/jenkin/derived-skills/swarm-impact"
+      },
+      "ownerAwakenerId": "awakener-0025",
+      "ownerAwakenerName": "Jenkin",
+      "derivedFromId": "skill.jenkins.mice-assemble",
+      "rootSkillId": "skill.jenkins.mice-assemble"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.jenkins.ultimate-assemble",
+      "name": "Ultimate Assemble!",
+      "route": {
+        "slug": "ultimate-assemble",
+        "canonicalPath": "/database/awakeners/jenkin/derived-skills/ultimate-assemble"
+      },
+      "ownerAwakenerId": "awakener-0025",
+      "ownerAwakenerName": "Jenkin",
+      "derivedFromId": "skill.jenkins.gotcha",
+      "rootSkillId": "skill.jenkins.gotcha"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.karen.marvelous-cuisine",
+      "name": "Marvelous Cuisine",
+      "route": {
+        "slug": "marvelous-cuisine",
+        "canonicalPath": "/database/awakeners/karen/derived-skills/marvelous-cuisine"
+      },
+      "ownerAwakenerId": "awakener-0026",
+      "ownerAwakenerName": "Karen",
+      "derivedFromId": "skill.karen.dance-of-the-gibbous-moon",
+      "rootSkillId": "skill.karen.dance-of-the-gibbous-moon"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.kathigu-ra.hyperflare",
+      "name": "Hyperflare",
+      "route": {
+        "slug": "hyperflare",
+        "canonicalPath": "/database/awakeners/kathigu-ra/derived-skills/hyperflare"
+      },
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
+      "derivedFromId": "talent.kathigu-ra.the-living-flame",
+      "rootSkillId": "skill.kathigu-ra.solarflare"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.liz.corrupted-flames",
+      "name": "Corrupted Flames",
+      "route": {
+        "slug": "corrupted-flames",
+        "canonicalPath": "/database/awakeners/liz/derived-skills/corrupted-flames"
+      },
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz",
+      "derivedFromId": "skill.liz.green-flames",
+      "rootSkillId": "skill.liz.green-flames"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.liz.deadly-flames",
+      "name": "Deadly Flames",
+      "route": {
+        "slug": "deadly-flames",
+        "canonicalPath": "/database/awakeners/liz/derived-skills/deadly-flames"
+      },
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz",
+      "derivedFromId": "skill.liz.omens-descent",
+      "rootSkillId": "skill.liz.omens-descent"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.call-of-the-divine-realm",
+      "name": "Call of the Divine Realm",
+      "route": {
+        "slug": "call-of-the-divine-realm",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/call-of-the-divine-realm"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.divine-realms-descent",
+      "name": "Divine Realm's Descent",
+      "route": {
+        "slug": "divine-realms-descent",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/divine-realms-descent"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.divine-realms-illusion",
+      "name": "Divine Realm's Illusion",
+      "route": {
+        "slug": "divine-realms-illusion",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/divine-realms-illusion"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "nodeKind": "group",
+      "derivedFromId": "derived.miryam.the-end-of-belief",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": ["derived.miryam.faith-of-the-divine-realm", "derived.miryam.call-of-the-divine-realm", "derived.miryam.divine-realms-descent"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.faith-of-the-divine-realm",
+      "name": "Faith of the Divine Realm",
+      "route": {
+        "slug": "faith-of-the-divine-realm",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/faith-of-the-divine-realm"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "derived.miryam.divine-realms-illusion",
+      "rootSkillId": "skill.miryam.testament-of-faith"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.heretical-faith",
+      "name": "Heretical Faith",
+      "route": {
+        "slug": "heretical-faith",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/heretical-faith"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "skill.miryam.testament-of-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": ["derived.miryam.iron-resolve", "derived.miryam.revelate-devotion", "derived.miryam.the-end-of-belief"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.iron-resolve",
+      "name": "Iron Resolve",
+      "route": {
+        "slug": "iron-resolve",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/iron-resolve"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.obsession",
+      "name": "Obsession",
+      "route": {
+        "slug": "obsession",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/obsession"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "derived.miryam.sacrament",
+      "rootSkillId": "skill.miryam.pray-to-the-abyss"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.revelate-devotion",
+      "name": "Revelate Devotion",
+      "route": {
+        "slug": "revelate-devotion",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/revelate-devotion"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.sacrament",
+      "name": "Sacrament",
+      "route": {
+        "slug": "sacrament",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/sacrament"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "skill.miryam.pray-to-the-abyss",
+      "rootSkillId": "skill.miryam.pray-to-the-abyss",
+      "childDerivedSkillIds": ["derived.miryam.obsession"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.miryam.the-end-of-belief",
+      "name": "The End of Belief",
+      "route": {
+        "slug": "the-end-of-belief",
+        "canonicalPath": "/database/awakeners/miryam/derived-skills/the-end-of-belief"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "derivedFromId": "derived.miryam.heretical-faith",
+      "rootSkillId": "skill.miryam.testament-of-faith",
+      "childDerivedSkillIds": ["derived.miryam.divine-realms-illusion"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.mouchette.dramatic-encounter",
+      "name": "Dramatic Encounter",
+      "route": {
+        "slug": "dramatic-encounter",
+        "canonicalPath": "/database/awakeners/mouchette/derived-skills/dramatic-encounter"
+      },
+      "ownerAwakenerId": "awakener-0033",
+      "ownerAwakenerName": "Mouchette",
+      "derivedFromId": "skill.mouchette.mist-realm-vestige",
+      "rootSkillId": "skill.mouchette.mist-realm-vestige"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.pickman.inspiration",
+      "name": "Inspiration!",
+      "route": {
+        "slug": "inspiration",
+        "canonicalPath": "/database/awakeners/pickman/derived-skills/inspiration"
+      },
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman",
+      "derivedFromId": "skill.pickman.chromaphage",
+      "rootSkillId": "skill.pickman.chromaphage"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.pollux.sacred-heart",
+      "name": "Sacred Heart",
+      "route": {
+        "slug": "sacred-heart",
+        "canonicalPath": "/database/awakeners/pollux/derived-skills/sacred-heart"
+      },
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
+      "derivedFromId": "skill.pollux.sinless-verdict",
+      "rootSkillId": "skill.pollux.sinless-verdict"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.ramona-timeworn.ode-to-tomorrow",
+      "name": "Ode to Tomorrow",
+      "route": {
+        "slug": "ode-to-tomorrow",
+        "canonicalPath": "/database/awakeners/ramona-timeworn/derived-skills/ode-to-tomorrow"
+      },
+      "ownerAwakenerId": "awakener-0020",
+      "ownerAwakenerName": "Ramona: Timeworn",
+      "derivedFromId": "skill.ramona-timeworn.predetermined-strike",
+      "rootSkillId": "skill.ramona-timeworn.predetermined-strike"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.ramona-timeworn.rebirth-tribunal",
+      "name": "Rebirth Tribunal",
+      "route": {
+        "slug": "rebirth-tribunal",
+        "canonicalPath": "/database/awakeners/ramona-timeworn/derived-skills/rebirth-tribunal"
+      },
+      "ownerAwakenerId": "awakener-0020",
+      "ownerAwakenerName": "Ramona: Timeworn",
+      "derivedFromId": "skill.ramona-timeworn.predetermined-strike",
+      "rootSkillId": "skill.ramona-timeworn.predetermined-strike"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.ryker.octahedron-dice",
+      "name": "Octahedron Dice",
+      "route": {
+        "slug": "octahedron-dice",
+        "canonicalPath": "/database/awakeners/ryker/derived-skills/octahedron-dice"
+      },
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.ryker.shining-octahedron-dice",
+      "name": "Shining Octahedron Dice",
+      "route": {
+        "slug": "shining-octahedron-dice",
+        "canonicalPath": "/database/awakeners/ryker/derived-skills/shining-octahedron-dice"
+      },
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.salvador.dedication",
+      "name": "Dedication",
+      "route": {
+        "slug": "dedication",
+        "canonicalPath": "/database/awakeners/salvador/derived-skills/dedication"
+      },
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
+      "derivedFromId": "skill.salvador.end-of-suffering",
+      "rootSkillId": "skill.salvador.end-of-suffering"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.salvador.liberation",
+      "name": "Liberation",
+      "route": {
+        "slug": "liberation",
+        "canonicalPath": "/database/awakeners/salvador/derived-skills/liberation"
+      },
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
+      "derivedFromId": "skill.salvador.end-of-suffering",
+      "rootSkillId": "skill.salvador.end-of-suffering"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.salvador.redemption",
+      "name": "Redemption",
+      "route": {
+        "slug": "redemption",
+        "canonicalPath": "/database/awakeners/salvador/derived-skills/redemption"
+      },
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
+      "derivedFromId": "skill.salvador.end-of-suffering",
+      "rootSkillId": "skill.salvador.end-of-suffering"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.salvador.sanctuary-of-mercy",
+      "name": "Sanctuary of Mercy",
+      "route": {
+        "slug": "sanctuary-of-mercy",
+        "canonicalPath": "/database/awakeners/salvador/derived-skills/sanctuary-of-mercy"
+      },
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
+      "derivedFromId": "skill.salvador.benediction",
+      "rootSkillId": "skill.salvador.benediction"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.echoes-of-the-past",
+      "name": "Echoes of the Past",
+      "route": {
+        "slug": "echoes-of-the-past",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/echoes-of-the-past"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "skill.tawil.the-silver-key-gate",
+      "rootSkillId": "skill.tawil.the-silver-key-gate"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.emissarys-verdict",
+      "name": "Emissary's Verdict",
+      "route": {
+        "slug": "emissarys-verdict",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/emissarys-verdict"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.four-wings",
+      "name": "Four Wings",
+      "route": {
+        "slug": "four-wings",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/four-wings"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "derived.tawil.twin-wings",
+      "rootSkillId": "skill.tawil.pinions-of-time",
+      "childDerivedSkillIds": ["derived.tawil.six-wings"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.honey-mead",
+      "name": "Honey Mead",
+      "route": {
+        "slug": "honey-mead",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/honey-mead"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.innocent-return-gift",
+      "name": "Innocent Return Gift",
+      "route": {
+        "slug": "innocent-return-gift",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/innocent-return-gift"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.memories",
+      "name": "Memories",
+      "route": {
+        "slug": "memories",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/memories"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "nodeKind": "group",
+      "derivedFromId": "derived.tawil.six-wings",
+      "rootSkillId": "skill.tawil.pinions-of-time",
+      "childDerivedSkillIds": [
+        "derived.tawil.innocent-return-gift",
+        "derived.tawil.mutated-heart",
+        "derived.tawil.honey-mead",
+        "derived.tawil.emissarys-verdict",
+        "derived.tawil.utopian-veil",
+        "derived.tawil.polar-dusklight"
+      ]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.mutated-heart",
+      "name": "Mutated Heart",
+      "route": {
+        "slug": "mutated-heart",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/mutated-heart"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.polar-dusklight",
+      "name": "Polar Dusklight",
+      "route": {
+        "slug": "polar-dusklight",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/polar-dusklight"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.silver-key-dawn",
+      "name": "Silver Key Dawn",
+      "route": {
+        "slug": "silver-key-dawn",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/silver-key-dawn"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "skill.tawil.the-silver-key-gate",
+      "rootSkillId": "skill.tawil.the-silver-key-gate"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.six-wings",
+      "name": "Six Wings",
+      "route": {
+        "slug": "six-wings",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/six-wings"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "derived.tawil.four-wings",
+      "rootSkillId": "skill.tawil.pinions-of-time",
+      "childDerivedSkillIds": ["derived.tawil.memories"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.twin-wings",
+      "name": "Twin Wings",
+      "route": {
+        "slug": "twin-wings",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/twin-wings"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "skill.tawil.pinions-of-time",
+      "rootSkillId": "skill.tawil.pinions-of-time",
+      "childDerivedSkillIds": ["derived.tawil.four-wings"]
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.tawil.utopian-veil",
+      "name": "Utopian Veil",
+      "route": {
+        "slug": "utopian-veil",
+        "canonicalPath": "/database/awakeners/tawil/derived-skills/utopian-veil"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "derivedFromId": "derived.tawil.memories",
+      "rootSkillId": "skill.tawil.pinions-of-time"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.thais.blood-of-coition",
+      "name": "Blood of Coition",
+      "route": {
+        "slug": "blood-of-coition",
+        "canonicalPath": "/database/awakeners/thais/derived-skills/blood-of-coition"
+      },
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
+      "derivedFromId": "skill.thais.sacred-bloods-instinct",
+      "rootSkillId": "skill.thais.sacred-bloods-instinct"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.thais.blood-of-decay",
+      "name": "Blood of Decay",
+      "route": {
+        "slug": "blood-of-decay",
+        "canonicalPath": "/database/awakeners/thais/derived-skills/blood-of-decay"
+      },
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
+      "derivedFromId": "skill.thais.sacred-bloods-instinct",
+      "rootSkillId": "skill.thais.sacred-bloods-instinct"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.thais.blood-of-fear",
+      "name": "Blood of Fear",
+      "route": {
+        "slug": "blood-of-fear",
+        "canonicalPath": "/database/awakeners/thais/derived-skills/blood-of-fear"
+      },
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
+      "derivedFromId": "skill.thais.sacred-bloods-instinct",
+      "rootSkillId": "skill.thais.sacred-bloods-instinct"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.thais.scion-of-purity",
+      "name": "Scion of Purity",
+      "route": {
+        "slug": "scion-of-purity",
+        "canonicalPath": "/database/awakeners/thais/derived-skills/scion-of-purity"
+      },
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
+      "derivedFromId": "skill.thais.ad-matrem-vocatus",
+      "rootSkillId": "skill.thais.ad-matrem-vocatus"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.vortice.vortex-shell",
+      "name": "Vortex! Shell!",
+      "route": {
+        "slug": "vortex-shell",
+        "canonicalPath": "/database/awakeners/vortice/derived-skills/vortex-shell"
+      },
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice",
+      "derivedFromId": "skill.vortice.moskstraumen-boom",
+      "rootSkillId": "skill.vortice.moskstraumen-boom"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.wanda.echoes-of-whispers",
+      "name": "Echoes of Whispers",
+      "route": {
+        "slug": "echoes-of-whispers",
+        "canonicalPath": "/database/awakeners/wanda/derived-skills/echoes-of-whispers"
+      },
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
+      "derivedFromId": "skill.wanda.necropolis-of-dreams",
+      "rootSkillId": "skill.wanda.necropolis-of-dreams"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.wanda.hypnotic-veins",
+      "name": "Hypnotic Veins",
+      "route": {
+        "slug": "hypnotic-veins",
+        "canonicalPath": "/database/awakeners/wanda/derived-skills/hypnotic-veins"
+      },
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
+      "derivedFromId": "skill.wanda.lost-dreams-guide",
+      "rootSkillId": "skill.wanda.lost-dreams-guide"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.wanda.slumber-counter",
+      "name": "Slumber Counter",
+      "route": {
+        "slug": "slumber-counter",
+        "canonicalPath": "/database/awakeners/wanda/derived-skills/slumber-counter"
+      },
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
+      "derivedFromId": "skill.wanda.necropolis-of-dreams",
+      "rootSkillId": "skill.wanda.necropolis-of-dreams"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.xu.betroth",
+      "name": "Betroth",
+      "route": {
+        "slug": "betroth",
+        "canonicalPath": "/database/awakeners/xu/derived-skills/betroth"
+      },
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
+      "derivedFromId": "skill.xu.mist-bound-vow",
+      "rootSkillId": "skill.xu.mist-bound-vow"
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.xu.enthrall",
+      "name": "Enthrall",
+      "route": {
+        "slug": "enthrall",
+        "canonicalPath": "/database/awakeners/xu/derived-skills/enthrall"
+      },
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
+      "derivedFromId": "skill.xu.mist-bound-vow",
+      "rootSkillId": "skill.xu.mist-bound-vow"
+    }
+  ]
+}

@@ -123,4 +123,21 @@ describe('CollectionSortControls', () => {
 
     expect(onSortKeyChange).toHaveBeenCalledWith('RARITY')
   })
+
+  it('applies explicit native option colors for browser dropdown popups', () => {
+    render(
+      <CollectionSortControls<'ALPHABETICAL' | 'RARITY'>
+        onSortDirectionToggle={vi.fn()}
+        onSortKeyChange={vi.fn()}
+        sortDirection='DESC'
+        sortKey='ALPHABETICAL'
+        sortOptions={['ALPHABETICAL', 'RARITY']}
+      />,
+    )
+
+    expect(screen.getByRole('combobox', {name: /sort by/i})).toHaveClass('collection-sort-select')
+    expect(screen.getByRole('option', {name: 'Alphabetical'})).toHaveClass(
+      'collection-sort-select__option',
+    )
+  })
 })

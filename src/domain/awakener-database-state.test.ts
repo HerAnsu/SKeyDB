@@ -9,11 +9,8 @@ import {
   resolveAwakenerDatabaseState,
 } from './awakener-database-state'
 import type {AwakenerOverlayRecord} from './awakener-source-schema'
-import {
-  getAwakenerFullV2ById,
-  getAwakenersFullV2,
-  type AwakenerFullV2Record,
-} from './awakeners-full-v2'
+import {type AwakenerFullRecord} from './awakeners-full'
+import {loadPublicAwakenerDetailById} from './public-detail-record-adapters'
 
 describe('awakener-database-state', () => {
   it('normalizes and clamps database selection inputs', () => {
@@ -33,11 +30,11 @@ describe('awakener-database-state', () => {
     })
   })
 
-  it('resolves stats and described view from one selection object', () => {
-    const thais = getAwakenerFullV2ById(48, getAwakenersFullV2())
+  it('resolves stats and described view from one selection object', async () => {
+    const thais = await loadPublicAwakenerDetailById(48)
     expect(thais).toBeDefined()
     if (!thais) {
-      throw new Error('Missing canonical Thais V2 record')
+      throw new Error('Missing canonical Thais current record')
     }
 
     const resolved = resolveAwakenerDatabaseState(
@@ -65,6 +62,7 @@ describe('awakener-database-state', () => {
       {value: 'E1', label: 'E1'},
       {value: 'E2', label: 'E2'},
       {value: 'E3', label: 'E3'},
+      {value: 'AbsoluteAxiom', label: 'AA'},
     ])
     expect(resolved.stats.CON).not.toBe(thais.stats.CON)
     expect(resolved.shellView.activeEnlightenIds).toEqual([
@@ -72,7 +70,7 @@ describe('awakener-database-state', () => {
       'enlighten.thais.seed-of-chaos',
       'enlighten.thais.everlasting-cycle',
     ])
-    expect(resolved.shellView.commandCards[0]?.resolved.description).toContain('Thais obtains')
+    expect(resolved.shellView.commandCards[0]?.resolved.description).toContain('Thais gains')
     expect(resolved.referenceLayer.referenceInfoByName.size).toBeGreaterThan(0)
   })
 
@@ -114,7 +112,7 @@ describe('awakener-database-state', () => {
     expect(soulforgeState.stats.DEF).toBe('96')
   })
 
-  it('describes the available database controls from canonical V2 data', () => {
+  it('describes the available database controls from canonical current data', () => {
     const fakeRecord = buildSoulforgeFixture()
 
     expect(getAwakenerDatabaseControls(fakeRecord)).toEqual({
@@ -135,11 +133,11 @@ describe('awakener-database-state', () => {
     })
   })
 
-  it('detects soulforge aptitude from canonical T-slots, not just extra talents', () => {
-    const twentyFour = getAwakenerFullV2ById(1, getAwakenersFullV2())
+  it('detects soulforge aptitude from public V3 T-slots, not just extra talents', async () => {
+    const twentyFour = await loadPublicAwakenerDetailById(1)
     expect(twentyFour).toBeDefined()
     if (!twentyFour) {
-      throw new Error('Missing canonical 24 V2 record')
+      throw new Error('Missing canonical 24 current record')
     }
 
     const controls = getAwakenerDatabaseControls(twentyFour)
@@ -147,6 +145,56 @@ describe('awakener-database-state', () => {
     expect(twentyFour.talents.T3?.id).toBe('talent.24.soulforge-aptitude')
     expect(controls.hasSoulforgeTalent).toBe(true)
     expect(controls.soulforgeLevelMax).toBe(10)
+  })
+
+  it('keeps public V3 overlay upgrade badges on overlay popover references', async () => {
+    const xu = await loadPublicAwakenerDetailById('awakener-0054')
+    expect(xu).toBeDefined()
+    if (!xu) {
+      throw new Error('Missing public V3 Xu record')
+    }
+
+    const resolved = resolveAwakenerDatabaseState(xu, {
+      selectedEnlightenSlot: 'E3',
+    })
+    const spellbound = resolved.referenceLayer.referenceInfoById.get('overlay.xu.spellbound')
+
+    expect(spellbound?.description).toContain('Stacks up to 10')
+    expect(spellbound?.influenceBadges).toEqual([
+      expect.objectContaining({
+        kind: 'enlighten',
+        label: 'E3',
+        referenceName: "Nirvana's Kiss",
+        slot: 'E3',
+      }),
+    ])
+  })
+
+  it('keeps public V3 link-only talent influence badges on affected skills', async () => {
+    const agrippa = await loadPublicAwakenerDetailById('awakener-0002')
+    expect(agrippa).toBeDefined()
+    if (!agrippa) {
+      throw new Error('Missing public V3 Agrippa record')
+    }
+
+    const resolved = resolveAwakenerDatabaseState(agrippa)
+    const paleBlessing = resolved.shellView.exalts.find(
+      (entry) => entry.record.id === 'skill.agrippa.pale-blessing',
+    )
+
+    expect(agrippa.cards.Exalt.upgrades).toEqual([
+      expect.objectContaining({
+        operation: 'link_only',
+        upgraderId: 'talent.agrippa.seal-of-the-pact',
+      }),
+    ])
+    expect(paleBlessing?.influenceBadges).toEqual([
+      expect.objectContaining({
+        kind: 'talent',
+        label: 'T1',
+        referenceName: 'Seal of the Pact',
+      }),
+    ])
   })
 
   it('builds concrete default selection values for upcoming database controls', () => {
@@ -201,7 +249,7 @@ describe('awakener-database-state', () => {
   })
 })
 
-function buildSoulforgeFixture(): AwakenerFullV2Record {
+function buildSoulforgeFixture(): AwakenerFullRecord {
   return {
     id: 999,
     key: 'tester',
@@ -317,8 +365,6 @@ function buildSoulforgeFixture(): AwakenerFullV2Record {
         },
         hasLevelScaledDescription: true,
         maxLevel: 3,
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       T4: undefined,
       extraTalents: [],
@@ -331,8 +377,6 @@ function buildSoulforgeFixture(): AwakenerFullV2Record {
         displayName: 'E1',
         descriptionTemplate: 'E1 desc',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       E2: {
         id: 'enlighten.test.e2',
@@ -341,8 +385,6 @@ function buildSoulforgeFixture(): AwakenerFullV2Record {
         displayName: 'E2',
         descriptionTemplate: 'E2 desc',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       E3: {
         id: 'enlighten.test.e3',
@@ -351,8 +393,6 @@ function buildSoulforgeFixture(): AwakenerFullV2Record {
         displayName: 'E3',
         descriptionTemplate: 'E3 desc',
         descriptionArgs: {},
-        upgradeTargetIds: [],
-        upgradePatches: [],
       },
       AbsoluteAxiom: undefined,
     },

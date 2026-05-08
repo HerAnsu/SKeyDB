@@ -1,6 +1,6 @@
 # Awakener DB V2 Data Model Note
 
-Last updated: 2026-04-15
+Last updated: 2026-05-01
 
 ## Why this exists
 
@@ -9,9 +9,10 @@ Last updated: 2026-04-15
 
 ## Current state
 
-- The repo now has tracked normalized awakener datasets under `src/data/awakeners/`.
-- The database page and rich popover flow now consume the compiled V2 awakener dataset plus the canonical `/awakeners` side datasets.
-- The compiled V2 full and lite artifacts are generated and in live use; the old top-level full/lite/tag blobs are retired as maintained runtime inputs.
+- The website now syncs public V2 records from `MomenTB-Tools outputs/public`.
+- The repo still has tracked normalized awakener datasets under `src/data/awakeners/` for the older authored/compiler path, but the public website boundary is the synced `src/data/public-v2/` payload.
+- The database page and rich popover flow now consume public V2 detail records through chunked loaders. A temporary adapter maps public V2 records back into the current detail UI shape until that UI contract is retired.
+- The compiled V2 full and lite artifacts remain useful for compatibility tests and legacy detail types; the old top-level full/lite/tag blobs are retired as maintained runtime inputs.
 - Source CSV and external validation inputs are still acting as reference material, not a clean canonical data pipeline.
 - The repo can now compile an aggregated V2 awakener payload directly from canonical tracked datasets via `src/domain/awakeners-full-v2.ts`, without reading legacy runtime blobs.
 - Canonical records now cover card keywords, derived groups, overlay/popover ownership, continuation refs, and talent-owned upgrade patches as part of the normal DB V2 model.
@@ -79,16 +80,16 @@ Last updated: 2026-04-15
   - Some clickable references are families or bundles of cards rather than single playable cards.
   - Example shape: `Divine Realm's Illusion` as a group node with child derived card ids.
 
-- Legacy top-level full/lite/tag blobs should stay retired; the maintained path is canonical `/awakeners` datasets plus compiled V2 artifacts.
+- Legacy top-level full/lite/tag blobs should stay retired; the maintained website path is synced public V2 records plus narrow compatibility adapters where the current UI still expects older detail shapes.
 - The preferred target is now:
   - canonical split datasets remain the authored source of truth
   - a generated `compiled/awakeners-full.v2.json` becomes the runtime-facing read model
   - smaller runtime projections such as `compiled/awakeners-lite.v2.json` and tag/search indexes should derive from that same compiled graph
 - The compiler and resolver now do the heavy lifting before React consumers render the database experience.
-- Frontend code should keep consuming resolved read models, not reimplement compiler behavior inside selectors or components.
+- Frontend code should keep consuming public records and resolved read models, not reimplement compiler behavior inside selectors or components.
 
 - Public-safe gating remains mandatory.
-  - Unreleased or source-only future content must stay out of tracked parent-repo data unless explicitly approved for inclusion.
+  - Unreleased or source-only future content must stay out of `MomenTB-Tools outputs/public` and tracked parent-repo data unless explicitly approved for inclusion.
 
 ## Proposed canonical storage
 
@@ -104,6 +105,9 @@ Tracked canonical datasets in `src/data/awakeners/`:
 
 Generated frontend read model:
 
+- `src/data/public-v2/full/*.json`
+- `src/data/public-v2/full/*-records/*.json`
+- `src/data/public-v2/lite/*.json`
 - `src/data/awakeners/compiled/awakeners-full.v2.json`
 - `src/data/awakeners/compiled/awakeners-lite.v2.json` as a derived projection, not an independently maintained sibling
 
@@ -125,16 +129,17 @@ Reference-only inputs outside tracked canonical data:
    - card keywords
    - enlighten upgrade patches
    - overlays
-5. Run the compiler to regenerate the frontend read model.
-6. Regenerate derived projections such as `compiled/awakeners-lite.v2.json` and tag/search indexes from the compiled output.
-7. Frontend consumes the compiled read model and its derived projections, not stale hand-maintained artifacts.
+5. Run the private tooling pipeline that emits `outputs/public`.
+6. Sync public V2 payloads into the website.
+7. Frontend consumes public V2 records and their derived projections, not stale hand-maintained artifacts or private source reports.
 
 This keeps imports disposable, canonical data durable, and frontend payloads reproducible.
 
 ## Implications
 
-- We should keep non-`/awakeners` DB payloads out of the maintained source path entirely.
+- We should keep private source/audit payloads out of the maintained website path entirely.
 - The DB V2 schema is now stable enough that future work should mostly be follow-up coverage, not more foundational churn.
+- The current public V2-to-detail adapter is a transition layer for React detail views, not a compatibility artifact that future schemas should preserve forever.
 - Soulforge-driven card/exalt support is intentionally deferred for now; the reviewed cases skew toward mixed conditional behavior and injected effects rather than clean scalar upgrades.
 - Search-oriented tags like `STR Up` / `STR Down` belong in derived search/index output.
   - They are useful list/search buckets.

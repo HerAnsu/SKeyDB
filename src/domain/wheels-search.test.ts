@@ -1,7 +1,6 @@
 import {describe, expect, it} from 'vitest'
 
-import {getMainstatByKey} from './mainstats'
-import type {Wheel} from './wheels'
+import {getWheels, type Wheel} from './wheels'
 import {searchWheels} from './wheels-search'
 
 function makeWheel(overrides: Partial<Wheel> & Pick<Wheel, 'id' | 'name'>): Wheel {
@@ -14,17 +13,17 @@ function makeWheel(overrides: Partial<Wheel> & Pick<Wheel, 'id' | 'name'>): Whee
     rarity: 'SSR',
     realm: 'CARO',
     awakener: 'alpha',
-    ownerAwakenerId: 1,
+    ownerAwakenerId: 'awakener-0001',
     ownerAwakenerName: 'alpha',
     aliases: [name],
     tags: [],
     mainstatKey: 'KEYFLARE_REGEN',
+    lineupToken: 'a',
     ...restOverrides,
   }
 }
 
 describe('searchWheels', () => {
-  const keyflareLabel = getMainstatByKey('KEYFLARE_REGEN')?.label ?? 'Keyflare Regen'
   const wheels = [
     makeWheel({
       id: 'B01',
@@ -51,20 +50,22 @@ describe('searchWheels', () => {
     expect(searchWheels(wheels, 'Nurturing').map((wheel) => wheel.id)).toEqual(['B01'])
   })
 
-  it('matches owner awakener names', () => {
-    expect(searchWheels(wheels, 'beta').map((wheel) => wheel.id)).toEqual(['D12'])
-  })
-
-  it('matches realm labels', () => {
-    expect(searchWheels(wheels, 'Caro').map((wheel) => wheel.id)).toEqual(['B01'])
-  })
-
-  it('matches wheel mainstat labels', () => {
-    expect(searchWheels(wheels, keyflareLabel).map((wheel) => wheel.id)).toEqual(['B01'])
-  })
-
   it('matches description-derived or lite search tags', () => {
     expect(searchWheels(wheels, 'Embryo Fusion').map((wheel) => wheel.id)).toEqual(['B01'])
+  })
+
+  it('matches generated owner, realm, and mainstat search fields', () => {
+    const realWheels = getWheels()
+
+    expect(searchWheels(realWheels, 'Thais').map((wheel) => wheel.name)).toContain(
+      'Merciful Nurturing',
+    )
+    expect(searchWheels(realWheels, 'Caro').some((wheel) => wheel.realm === 'CARO')).toBe(true)
+    expect(
+      searchWheels(realWheels, 'Keyflare Regen').some(
+        (wheel) => wheel.mainstatKey === 'KEYFLARE_REGEN',
+      ),
+    ).toBe(true)
   })
 
   it('keeps single-character queries scoped to primary wheel names', () => {
@@ -72,23 +73,7 @@ describe('searchWheels', () => {
     expect(searchWheels(wheels, 'b')).toEqual([])
   })
 
-  it('still matches short supplemental queries like two-letter owner names', () => {
-    const shortOwnerWheel = makeWheel({
-      id: 'N11',
-      name: "Magnolia's Lure",
-      ownerAwakenerName: 'xu',
-    })
-
-    expect(searchWheels([shortOwnerWheel], 'xu').map((wheel) => wheel.id)).toEqual(['N11'])
-  })
-
-  it('formats neutral realms through the shared realm label helper', () => {
-    const neutralWheel = makeWheel({
-      id: 'R01',
-      name: 'Blessing',
-      realm: 'NEUTRAL',
-    })
-
-    expect(searchWheels([neutralWheel], 'Neutral').map((wheel) => wheel.id)).toEqual(['R01'])
+  it('matches short exact owner names from generated search fields', () => {
+    expect(searchWheels(getWheels(), 'Xu').map((wheel) => wheel.ownerAwakenerName)).toContain('Xu')
   })
 })

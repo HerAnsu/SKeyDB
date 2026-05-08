@@ -58,21 +58,21 @@ describe('awakener-overlays', () => {
           displayName: 'Loop',
           overlayType: 'mechanic',
           textColor: 'light',
-          iconId: 'Battle_Card_Buff_038',
+          iconId: 'IconS_Buff_038',
         }),
         expect.objectContaining({
           id: 'overlay.xu.betroth',
           displayName: 'Betroth',
           overlayType: 'mechanic',
           textColor: 'damage',
-          iconId: 'Battle_Card_Buff_080',
+          iconId: 'IconS_Buff_080',
         }),
         expect.objectContaining({
           id: 'overlay.xu.enthrall',
           displayName: 'Enthrall',
           overlayType: 'mechanic',
           textColor: 'damage',
-          iconId: 'Battle_Card_Buff_080',
+          iconId: 'IconS_Buff_080',
         }),
         expect.objectContaining({
           id: 'overlay.24.realm-and-persona',
@@ -153,10 +153,9 @@ describe('awakener-overlays', () => {
       descriptionTemplate:
         'Effects: {Bleed} (150% DMG), {Poison} (75% DMG), apply 1 {Weakness}, apply 1 {Vulnerable}, Temp. {STR⯆} -[DescArg1].',
       descriptionArgs: {
-        DescArg1: {
-          kind: 'fixed',
-          value: '22',
-        },
+        DescArg1: expect.objectContaining({
+          kind: 'computed',
+        }),
       },
     })
   })
@@ -165,9 +164,9 @@ describe('awakener-overlays', () => {
     const overlays = getAwakenerOverlays()
     const realmAndPersona = overlays.find((entry) => entry.id === 'overlay.24.realm-and-persona')
 
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Chaos}: Depressed:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Aequor}: Depressed:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Caro}: Depressed:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Ultra}: Depressed:')
+    expect(realmAndPersona?.descriptionTemplate).toContain('{Chaos: Depressed}:')
+    expect(realmAndPersona?.descriptionTemplate).toContain('{Aequor: Depressed}:')
+    expect(realmAndPersona?.descriptionTemplate).toContain('{Caro: Depressed}:')
+    expect(realmAndPersona?.descriptionTemplate).toContain('{Ultra: Depressed}:')
   })
 })

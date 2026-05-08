@@ -36,6 +36,7 @@ const defaultSortOptions: readonly AwakenerSortKey[] = [
   'LEVEL',
   'RARITY',
   'ENLIGHTEN',
+  'RELEASE_DATE',
   'ALPHABETICAL',
 ]
 
@@ -48,6 +49,9 @@ function getSortLabel(sortKey: string): string {
   }
   if (sortKey === 'RARITY') {
     return 'Rarity'
+  }
+  if (sortKey === 'RELEASE_DATE') {
+    return 'Release date'
   }
   if (sortKey === 'ATK') {
     return 'ATK'
@@ -132,14 +136,14 @@ export function CollectionSortControls<TSortKey extends string = AwakenerSortKey
           ) : null}
           <select
             aria-label={sortSelectAriaLabel}
-            className={`flex-1 rounded-[2px] ${resolvedControlClassName}`}
+            className={`collection-sort-select flex-1 rounded-[2px] ${resolvedControlClassName}`}
             onChange={(event) => {
               onSortKeyChange(event.target.value as TSortKey)
             }}
             value={activeSortKey}
           >
             {resolvedSortOptions.map((option) => (
-              <option key={option} value={option}>
+              <option className='collection-sort-select__option' key={option} value={option}>
                 {getSortLabelOverride ? getSortLabelOverride(option) : getSortLabel(option)}
               </option>
             ))}

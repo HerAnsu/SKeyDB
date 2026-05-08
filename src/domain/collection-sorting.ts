@@ -4,6 +4,7 @@ export type AwakenerSortKey =
   | 'RARITY'
   | 'ENLIGHTEN'
   | 'ALPHABETICAL'
+  | 'RELEASE_DATE'
   | 'ATK'
   | 'DEF'
   | 'CON'
@@ -16,6 +17,7 @@ export interface SortableCollectionEntry {
   level?: number
   rarity?: string
   realm?: string
+  releaseDate?: string
 }
 
 export type WheelCollectionSortKey = 'ALPHABETICAL' | 'RARITY' | 'REALM' | 'MAINSTAT'
@@ -41,6 +43,7 @@ const VALID_SORT_KEYS: ReadonlySet<string> = new Set<AwakenerSortKey>([
   'RARITY',
   'ENLIGHTEN',
   'ALPHABETICAL',
+  'RELEASE_DATE',
   'ATK',
   'DEF',
   'CON',
@@ -124,6 +127,14 @@ function compareRealm(left: SortableCollectionEntry, right: SortableCollectionEn
   return leftRank - rightRank
 }
 
+function compareReleaseDate(
+  left: SortableCollectionEntry,
+  right: SortableCollectionEntry,
+  direction: CollectionSortDirection,
+): number {
+  return compareText(left.releaseDate ?? '', right.releaseDate ?? '', direction)
+}
+
 function compareIndex(left: SortableCollectionEntry, right: SortableCollectionEntry): number {
   return left.index - right.index
 }
@@ -193,6 +204,19 @@ export function compareAwakenersForCollectionSort(
       ...withOptionalRealm([]),
       (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
       compareIndex,
+    ])
+  }
+
+  if (config.key === 'RELEASE_DATE') {
+    return compareByPriority(left, right, [
+      compareOwnedFirst,
+      (l, r) => compareReleaseDate(l, r, config.direction),
+      (l, r) => compareNumber(l.level ?? 0, r.level ?? 0, 'DESC'),
+      compareRarity,
+      ...withOptionalRealm([]),
+      (l, r) => compareNumber(l.enlighten, r.enlighten, 'DESC'),
+      compareIndex,
+      (l, r) => compareText(l.label, r.label, 'ASC'),
     ])
   }
 

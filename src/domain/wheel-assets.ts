@@ -1,3 +1,8 @@
+import {
+  resolvePublicAsset,
+  resolvePublicEntityAsset,
+} from '@/data-access/public-data/assetRepository'
+
 const wheelAssets = import.meta.glob<string>('../assets/wheels/*.webp', {
   eager: true,
   import: 'default',
@@ -13,5 +18,9 @@ const wheelAssetByAssetId = new Map(
 )
 
 export function getWheelAssetById(wheelId: string): string | undefined {
-  return wheelAssetByAssetId.get(`Weapon_Full_${wheelId}`)
+  const publicAssetId = resolvePublicEntityAsset(wheelId, 'icon')
+  const assetId = publicAssetId
+    ? (resolvePublicAsset(publicAssetId)?.assetId ?? `Weapon_Full_${wheelId}`)
+    : `Weapon_Full_${wheelId}`
+  return wheelAssetByAssetId.get(assetId)
 }

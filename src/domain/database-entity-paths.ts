@@ -1,4 +1,4 @@
-export const DATABASE_ENTITY_IDS = ['awakeners', 'wheels'] as const
+export const DATABASE_ENTITY_IDS = ['awakeners', 'wheels', 'posses', 'covenants'] as const
 
 export type DatabaseEntityId = (typeof DATABASE_ENTITY_IDS)[number]
 
@@ -10,11 +10,19 @@ interface DatabaseEntityPathConfig {
 const DATABASE_ENTITY_PATH_CONFIG: Record<DatabaseEntityId, DatabaseEntityPathConfig> = {
   awakeners: {
     browsePath: '/database',
-    detailPathPrefix: '/database/awk',
+    detailPathPrefix: '/database/awakeners',
   },
   wheels: {
     browsePath: '/database/wheels',
     detailPathPrefix: '/database/wheels',
+  },
+  posses: {
+    browsePath: '/database/posses',
+    detailPathPrefix: '/database/posses',
+  },
+  covenants: {
+    browsePath: '/database/covenants',
+    detailPathPrefix: '/database/covenants',
   },
 }
 

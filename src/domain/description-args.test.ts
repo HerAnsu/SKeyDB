@@ -1,10 +1,8 @@
 import {describe, expect, it} from 'vitest'
 
-import {getAwakenerEnlightenById, getAwakenerEnlightens} from './awakener-enlightens'
 import type {AwakenerSkillRecord} from './awakener-source-schema'
 import {getAwakenerTalentById, getAwakenerTalents} from './awakener-talents'
-import {getAwakenerFullV2ById, getAwakenersFullV2} from './awakeners-full-v2'
-import {resolveAwakenerFullV2Record} from './awakeners-full-v2-resolver'
+import {resolveAwakenerFullRecord} from './awakeners-full-resolver'
 import {
   buildDescriptionArgHover,
   formatDescriptionArgProgression,
@@ -13,15 +11,20 @@ import {
   resolveDescriptionArgs,
   resolveDescriptionTemplate,
 } from './description-args'
+import type {PublicDescriptionArg} from './public-description-args'
+import {loadPublicAwakenerDetailById} from './public-detail-record-adapters'
 
-function getResolvedSkill(awakenerId: number, skillId: string): AwakenerSkillRecord {
-  const record = getAwakenerFullV2ById(awakenerId, getAwakenersFullV2())
+async function loadResolvedSkill(
+  awakenerId: number,
+  skillId: string,
+): Promise<AwakenerSkillRecord> {
+  const record = await loadPublicAwakenerDetailById(awakenerId)
   expect(record).toBeDefined()
   if (!record) {
     throw new Error(`Missing awakener ${String(awakenerId)}`)
   }
 
-  const resolvedRecord = resolveAwakenerFullV2Record(record).record
+  const resolvedRecord = resolveAwakenerFullRecord(record).record
   const cards = [
     resolvedRecord.cards.C1,
     resolvedRecord.cards.C2,
@@ -55,7 +58,7 @@ describe('description-args', () => {
     expect(resolvedArgs.Arg3.totalValue).toBe(11)
     expect(
       resolveDescriptionTemplate(talent.descriptionTemplate, talent.descriptionArgs, {rank: 4}),
-    ).toContain("This Awakener's CON, ATK, and DEF are increased by 12%")
+    ).toContain("This Awakener's CON, ATK, and DEF +12%")
     expect(
       resolveDescriptionTemplate(talent.descriptionTemplate, talent.descriptionArgs, {rank: 4}),
     ).toContain('they gain 200 Keyflare')
@@ -70,8 +73,8 @@ describe('description-args', () => {
     ).toEqual([5, 7, 9, 11, 13, 15, 17, 19, 21, 25])
   })
 
-  it('resolves substat-only args using the substat suffix when no base suffix exists', () => {
-    const skill = getResolvedSkill(9, 'skill.celeste.strike')
+  it('resolves substat-only args using the substat suffix when no base suffix exists', async () => {
+    const skill = await loadResolvedSkill(9, 'skill.celeste.strike')
 
     const resolvedArg = resolveDescriptionArg(skill.descriptionArgs.Arg3, {
       stats: {
@@ -89,8 +92,8 @@ describe('description-args', () => {
     ).toContain('dealing 60% {Tentacle DMG}.')
   })
 
-  it('defaults ladder-backed percent effects to base scaling when substats enhance the base effect', () => {
-    const skill = getResolvedSkill(52, 'skill.wanda.necropolis-of-dreams')
+  it('defaults ladder-backed percent effects to base scaling when substats enhance the base effect', async () => {
+    const skill = await loadResolvedSkill(52, 'skill.wanda.necropolis-of-dreams')
 
     const resolvedArg = resolveDescriptionArg(skill.descriptionArgs.Arg2, {
       rank: 2,
@@ -117,13 +120,12 @@ describe('description-args', () => {
         },
       }),
     ).toBe(
-      'Lv1: 34.5% ATK = 49 (30% ATK × 115% from Damage Amplification)\n' +
-        'Lv2: 41.4% ATK = 58 (36% ATK × 115% from Damage Amplification)',
+      'Lv1: 34.5% ATK = 49 (30% ATK × 115% from Damage Amplification)\nLv2: 41.4% ATK = 58 (36% ATK × 115% from Damage Amplification)',
     )
   })
 
-  it('supports multiplicative base scaling alongside additive flat substat expressions', () => {
-    const skill = getResolvedSkill(42, 'skill.ramona.queens-sword')
+  it('supports multiplicative base scaling alongside additive flat substat expressions', async () => {
+    const skill = await loadResolvedSkill(42, 'skill.ramona.queens-sword')
 
     const damageArg = resolveDescriptionArg(skill.descriptionArgs.Arg1, {
       rank: 1,
@@ -155,8 +157,8 @@ describe('description-args', () => {
     ).toContain('Gain 23 Temporary Realm Mastery.')
   })
 
-  it('uses a single formula hover for fixed args with substat scaling', () => {
-    const skill = getResolvedSkill(6, 'skill.caecus.strike')
+  it('uses a single formula hover for fixed args with substat scaling', async () => {
+    const skill = await loadResolvedSkill(6, 'skill.caecus.strike')
 
     expect(
       buildDescriptionArgHover(skill.descriptionArgs.Arg3, {
@@ -205,8 +207,46 @@ describe('description-args', () => {
     ).toBe('Keyflare Regen × 0.2')
   })
 
-  it('renders Agrippa T1 skill-side substat bonuses on Pale Blessing', () => {
-    const skill = getResolvedSkill(2, 'skill.agrippa.pale-blessing')
+  it('ceil-displays Sanga talent-enhanced Aliemus scaling', async () => {
+    const skill = await loadResolvedSkill(45, 'skill.sanga.strike')
+
+    const rendered = resolveDescriptionTemplate(skill.descriptionTemplate, skill.descriptionArgs, {
+      rank: 1,
+      stats: {
+        DeathResistance: '33.6%',
+      },
+    })
+
+    expect(rendered).toContain('Sanga obtains 7 Aliemus.')
+  })
+
+  it('supports additive-factor substat bonuses from Arachne enlighten patches', async () => {
+    const record = await loadPublicAwakenerDetailById(56)
+    expect(record).toBeDefined()
+    if (!record) {
+      throw new Error('Missing Arachne public V3 record')
+    }
+
+    const resolvedRecord = resolveAwakenerFullRecord(record, {
+      selectedEnlightenSlot: 'E3',
+    }).record
+
+    const rendered = resolveDescriptionTemplate(
+      resolvedRecord.cards.Exalt.descriptionTemplate,
+      resolvedRecord.cards.Exalt.descriptionArgs,
+      {
+        rank: 5,
+        stats: {
+          RealmMastery: '24',
+        },
+      },
+    )
+
+    expect(rendered).toContain('Temporary DMG Amplification +125%')
+  })
+
+  it('renders Agrippa T1 skill-side substat bonuses on Pale Blessing', async () => {
+    const skill = await loadResolvedSkill(2, 'skill.agrippa.pale-blessing')
 
     const rendered = resolveDescriptionTemplate(skill.descriptionTemplate, skill.descriptionArgs, {
       rank: 1,
@@ -215,34 +255,41 @@ describe('description-args', () => {
       },
     })
 
-    expect(rendered).toContain('Obtain 33.1% {DEF} Shield.')
+    expect(rendered).toContain('Gain 33.1% {DEF} Shield.')
     expect(rendered).toContain('Inflict 51.8% {ATK} stacks of {Poison} on all enemies.')
   })
 
-  it('renders overlay and enlighten patch templates with resolved arg totals', () => {
-    const enlighten = getAwakenerEnlightenById(
-      'enlighten.xu.enmity-of-the-heart',
-      getAwakenerEnlightens(),
-    )
-    expect(enlighten).toBeDefined()
-    if (!enlighten) {
-      throw new Error('Missing enlighten.xu.enmity-of-the-heart')
+  it('renders public detail upgrade patch templates with resolved arg totals', async () => {
+    const xu = await loadPublicAwakenerDetailById(54)
+    if (!xu) {
+      throw new Error('Missing Xu public V3 record')
     }
 
-    const patch = enlighten.upgradePatches.find(
-      (entry) => entry.targetId === 'skill.xu.bonesick-longing',
+    const bonesick = xu.cards.C4
+    const upgrade = bonesick.upgrades?.find(
+      (entry) => entry.upgraderId === 'enlighten.xu.enmity-of-the-heart',
     )
-    expect(patch?.descriptionArgs).toBeDefined()
-    expect(patch?.descriptionTemplate).toBeDefined()
-    if (!patch?.descriptionArgs || !patch.descriptionTemplate) {
+    const descriptionArgs = upgrade?.patch?.descriptionArgs
+    const descriptionTemplate = upgrade?.patch?.descriptionTemplate
+    expect(descriptionArgs).toBeDefined()
+    expect(descriptionTemplate).toBeDefined()
+    if (
+      typeof descriptionTemplate !== 'string' ||
+      typeof descriptionArgs !== 'object' ||
+      !descriptionArgs
+    ) {
       throw new Error('Missing Xu E3 patch payload')
     }
 
-    const rendered = resolveDescriptionTemplate(patch.descriptionTemplate, patch.descriptionArgs, {
-      stats: {
-        DamageAmplification: '25%',
+    const rendered = resolveDescriptionTemplate(
+      descriptionTemplate,
+      descriptionArgs as Parameters<typeof resolveDescriptionTemplate>[1],
+      {
+        stats: {
+          DamageAmplification: '25%',
+        },
       },
-    })
+    )
 
     expect(rendered).toContain('{Embryo Fusion} +20%.')
   })
@@ -293,5 +340,125 @@ describe('description-args', () => {
         },
       ),
     ).toContain('Lv2: 28.8% ATK = 30')
+  })
+
+  it('resolves public V3 braced-channel args and text macros in fallback descriptions', () => {
+    const rendered = resolveDescriptionTemplate(
+      'Inflict [{Poison}:Arg1] {plural:[{Poison}:Arg1]|stack|stacks} on the {ordinal:3rd} play.',
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '2',
+        },
+      },
+    )
+
+    expect(rendered).toBe('Inflict 2 stacks on the 3rd play.')
+  })
+
+  it('explains scaled computed formula hovers with player-facing math labels', () => {
+    const arg: PublicDescriptionArg = {
+      kind: 'computed',
+      formulaKey: 'scaled',
+      baseFormula: 'occultResearchDepth',
+      multiplier: 0.045,
+      inputs: ['accountLevel', 'ownedPosseCount'],
+    }
+
+    expect(
+      buildDescriptionArgHover(arg, {
+        formulaContext: {
+          accountLevel: 75,
+          ownedPosseCount: 42,
+        },
+      }),
+    ).toBe(
+      [
+        'Forbidden Lore Scaling',
+        'Base (Account Lv 75): Occult Research 3,579 × 4.5% = 162',
+        'Astral Reign: 42 Posses add +42% to Research → 229',
+      ].join('\n'),
+    )
+  })
+
+  it('shows the normal value first and Astral Reign value second for Forbidden Lore scaling', () => {
+    const arg: PublicDescriptionArg = {
+      kind: 'computed',
+      formulaKey: 'scaled',
+      baseFormula: 'esotericResearchDepth',
+      multiplier: 0.04,
+      inputs: ['accountLevel', 'ownedPosseCount'],
+    }
+
+    const context = {
+      formulaContext: {
+        accountLevel: 67,
+        ownedPosseCount: 28,
+      },
+    }
+
+    expect(resolveDescriptionTemplate('{Steal} [Arg1] {STR}', {Arg1: arg}, context)).toBe(
+      '{Steal} 36 (46) {STR}',
+    )
+    expect(buildDescriptionArgHover(arg, context)).toBe(
+      [
+        'Forbidden Lore Scaling',
+        'Base (Account Lv 67): Esoteric Research 897 × 4% = 36',
+        'Astral Reign: 28 Posses add +28% to Research → 46',
+      ].join('\n'),
+    )
+  })
+
+  it('explains Forbidden Lore research conversions without percent-looking multipliers', () => {
+    const arg: PublicDescriptionArg = {
+      kind: 'computed',
+      formulaKey: 'scaled',
+      baseFormula: 'somaticResearchHpMultiplier',
+      multiplier: 100,
+      inputs: ['accountLevel'],
+    }
+
+    expect(
+      buildDescriptionArgHover(arg, {
+        formulaContext: {
+          accountLevel: 67,
+        },
+      }),
+    ).toBe(
+      [
+        'Forbidden Lore Scaling',
+        'Account Lv 67: Somatic Research 2.5',
+        'Effect multiplier: ×100',
+        '',
+        '2.5 × 100 = 250',
+      ].join('\n'),
+    )
+  })
+
+  it('keeps the scaled formula explanation generic when there is no posse bonus', () => {
+    const arg: PublicDescriptionArg = {
+      kind: 'computed',
+      formulaKey: 'scaled',
+      baseFormula: 'accountStageGrowth',
+      multiplier: 0.045,
+      inputs: ['accountLevel'],
+    }
+
+    expect(
+      buildDescriptionArgHover(arg, {
+        formulaContext: {
+          accountLevel: 75,
+          ownedPosseCount: 42,
+        },
+      }),
+    ).toBe(
+      [
+        'Account Growth Bonus',
+        'Account Lv 75: 1,011 base growth',
+        'Effect multiplier: 4.5%',
+        '',
+        '1,011 × 4.5% = 46',
+      ].join('\n'),
+    )
   })
 })

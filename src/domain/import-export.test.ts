@@ -1,24 +1,31 @@
-import {describe, expect, it} from 'vitest'
+import {describe, expect, it, vi} from 'vitest'
 
-import type {Team} from '@/pages/builder/types'
+import type {Team} from '@/features/builder/types'
 
 import {decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode} from './import-export'
+import standardCodeContract from './standard-code-contract.v1.json'
 
 function makeTeam(name: string): Team {
   return {
     id: `${name}-id`,
     name,
-    posseId: 'taverns-opening',
+    posseId: 'posse-0033',
     slots: [
       {
         slotId: 'slot-1',
-        awakenerName: 'goliath',
+        awakenerId: 'awakener-0021',
         realm: 'AEQUOR',
         level: 60,
-        wheels: ['SR19', 'SR20'],
-        covenantId: '001',
+        wheels: ['wheel-0095', 'wheel-0096'],
+        covenantId: 'covenant-0001',
       },
-      {slotId: 'slot-2', awakenerName: 'ramona', realm: 'CHAOS', level: 60, wheels: [null, null]},
+      {
+        slotId: 'slot-2',
+        awakenerId: 'awakener-0042',
+        realm: 'CHAOS',
+        level: 60,
+        wheels: [null, null],
+      },
       {slotId: 'slot-3', wheels: [null, null]},
       {slotId: 'slot-4', wheels: [null, null]},
     ],
@@ -38,22 +45,86 @@ describe('import-export codec', () => {
     const team = makeTeam('Team 1')
     const code = encodeSingleTeamCode(team)
     expect(code.startsWith('t1.')).toBe(true)
+    expect(code).toBe('t1.IRU8YmMBKjwAAAAAAAAAAAAAAAAA')
 
     const parsed = decodeImportCode(code)
     expect(parsed.kind).toBe('single')
     if (parsed.kind !== 'single') return
     expect(parsed.team.name).toBe('Team 1')
-    expect(parsed.team.posseId).toBe('taverns-opening')
-    expect(parsed.team.slots[0].awakenerName).toBe('goliath')
-    expect(parsed.team.slots[0].wheels).toEqual(['SR19', 'SR20'])
-    expect(parsed.team.slots[0].covenantId).toBe('001')
+    expect(parsed.team.posseId).toBe('posse-0033')
+    expect(parsed.team.slots[0].awakenerId).toBe('awakener-0021')
+    expect('awakenerName' in parsed.team.slots[0]).toBe(false)
+    expect(parsed.team.slots[0].wheels).toEqual(['wheel-0095', 'wheel-0096'])
+    expect(parsed.team.slots[0].covenantId).toBe('covenant-0001')
+  })
+
+  it('encodes current canonical ids through the frozen standard-code byte contract', () => {
+    const team = makeTeam('Canonical Team')
+    team.posseId = 'posse-0033'
+    team.slots[0].wheels = ['wheel-0095', 'wheel-0096']
+    team.slots[0].covenantId = 'covenant-0001'
+
+    const code = encodeSingleTeamCode(team)
+    expect(code).toBe('t1.IRU8YmMBKjwAAAAAAAAAAAAAAAAA')
+
+    const parsed = decodeImportCode(code)
+    expect(parsed.kind).toBe('single')
+    if (parsed.kind !== 'single') return
+    expect(parsed.team.posseId).toBe('posse-0033')
+    expect(parsed.team.slots[0].wheels).toEqual(['wheel-0095', 'wheel-0096'])
+    expect(parsed.team.slots[0].covenantId).toBe('covenant-0001')
+    expect(parsed.team.slots[0].awakenerId).toBe('awakener-0021')
+    expect('awakenerName' in parsed.team.slots[0]).toBe(false)
+  })
+
+  it('throws when a selected posse is not representable in the frozen standard-code byte contract', () => {
+    const team = makeTeam('Orbis Fatum Team')
+    team.posseId = 'posse-0050'
+
+    expect(() => encodeSingleTeamCode(team)).toThrow(
+      /posse "posse-0050" is not representable in the frozen standard export format/i,
+    )
+  })
+
+  it('decodes frozen t1 byte meanings through current runtime ids', () => {
+    const parsed = decodeImportCode('t1.IRU8YmMBKjwAAAAAAAAAAAAAAAAA')
+
+    expect(parsed.kind).toBe('single')
+    if (parsed.kind !== 'single') return
+    expect(parsed.team.posseId).toBe('posse-0033')
+    expect(parsed.team.slots[0].awakenerId).toBe('awakener-0021')
+    expect('awakenerName' in parsed.team.slots[0]).toBe(false)
+    expect(parsed.team.slots[0].wheels).toEqual(['wheel-0095', 'wheel-0096'])
+    expect(parsed.team.slots[0].covenantId).toBe('covenant-0001')
+    expect(parsed.team.slots[1].awakenerId).toBe('awakener-0042')
+    expect('awakenerName' in parsed.team.slots[1]).toBe(false)
+  })
+
+  it('decodes standard awakeners by public id before the transitional legacy name', async () => {
+    vi.resetModules()
+    const mutatedContract = structuredClone(standardCodeContract)
+    const targetEntry = mutatedContract.awakeners.find((entry) => entry.id === 'awakener-0021')
+    if (!targetEntry) {
+      throw new Error('Expected standard code contract to include awakener-0021')
+    }
+    targetEntry.legacyName = 'renamed legacy value'
+    vi.doMock('./standard-code-contract.v1.json', () => ({default: mutatedContract}))
+
+    const {decodeImportCode: decodeWithMutatedContract} = await import('./import-export')
+    const parsed = decodeWithMutatedContract('t1.IRU8YmMBKjwAAAAAAAAAAAAAAAAA')
+
+    expect(parsed.kind).toBe('single')
+    if (parsed.kind !== 'single') return
+    expect(parsed.team.slots[0].awakenerId).toBe('awakener-0021')
+
+    vi.doUnmock('./standard-code-contract.v1.json')
   })
 
   it('round-trips Vortice in standard t1 export codes even without in-game @@ token support', () => {
     const team = makeTeam('Vortice Team')
     team.slots[0] = {
       slotId: 'slot-1',
-      awakenerName: 'vortice',
+      awakenerId: 'awakener-0055',
       realm: 'AEQUOR',
       level: 60,
       wheels: [null, null],
@@ -64,7 +135,8 @@ describe('import-export codec', () => {
 
     expect(parsed.kind).toBe('single')
     if (parsed.kind !== 'single') return
-    expect(parsed.team.slots[0].awakenerName).toBe('vortice')
+    expect(parsed.team.slots[0].awakenerId).toBe('awakener-0055')
+    expect('awakenerName' in parsed.team.slots[0]).toBe(false)
     expect(parsed.team.slots[0].realm).toBe('AEQUOR')
     expect(parsed.team.slots[0].wheels).toEqual([null, null])
   })
@@ -86,15 +158,15 @@ describe('import-export codec', () => {
     const teams = [makeTeam('Team 1'), makeTeam('Team 2')]
     teams[1].slots[0] = {
       slotId: 'slot-1',
-      awakenerName: 'goliath',
+      awakenerId: 'awakener-0021',
       realm: 'AEQUOR',
       level: 90,
       isSupport: true,
-      wheels: ['SR19', null],
+      wheels: ['wheel-0095', null],
     }
     teams[1].slots[1] = {
       slotId: 'slot-2',
-      awakenerName: 'ramona',
+      awakenerId: 'awakener-0042',
       realm: 'CHAOS',
       level: 88,
       wheels: [null, null],
@@ -122,14 +194,19 @@ describe('import-export codec', () => {
 
   it('strips wheel assignments from slots without awakeners during roundtrip', () => {
     const team = makeTeam('Team Dirty')
-    team.slots[2] = {slotId: 'slot-3', wheels: ['SR19', 'SR20'], covenantId: '001'}
+    team.slots[2] = {
+      slotId: 'slot-3',
+      wheels: ['wheel-0095', 'wheel-0096'],
+      covenantId: 'covenant-0001',
+    }
 
     const code = encodeSingleTeamCode(team)
     const parsed = decodeImportCode(code)
 
     expect(parsed.kind).toBe('single')
     if (parsed.kind !== 'single') return
-    expect(parsed.team.slots[2].awakenerName).toBeUndefined()
+    expect(parsed.team.slots[2].awakenerId).toBeUndefined()
+    expect('awakenerName' in parsed.team.slots[2]).toBe(false)
     expect(parsed.team.slots[2].wheels).toEqual([null, null])
     expect(parsed.team.slots[2].covenantId).toBeUndefined()
   })
@@ -142,7 +219,8 @@ describe('import-export codec', () => {
     const parsed = decodeImportCode('@@NDklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad@@')
     expect(parsed.kind).toBe('single')
     if (parsed.kind !== 'single') return
-    expect(parsed.team.slots.every((slot) => Boolean(slot.awakenerName))).toBe(true)
+    expect(parsed.team.slots.every((slot) => Boolean(slot.awakenerId))).toBe(true)
+    expect(parsed.team.slots.every((slot) => !('awakenerName' in slot))).toBe(true)
   })
 
   it('extracts and imports @@ code from full copied in-game block text', () => {
@@ -160,7 +238,8 @@ The Lone Seed
     const parsed = decodeImportCode(pasted)
     expect(parsed.kind).toBe('single')
     if (parsed.kind !== 'single') return
-    expect(parsed.team.slots.every((slot) => Boolean(slot.awakenerName))).toBe(true)
+    expect(parsed.team.slots.every((slot) => Boolean(slot.awakenerId))).toBe(true)
+    expect(parsed.team.slots.every((slot) => !('awakenerName' in slot))).toBe(true)
   })
 
   it('extracts t1 code from surrounding text', () => {

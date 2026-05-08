@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.arachne.singularity-prism",
+  "name": "Singularity Prism",
+  "route": {
+    "slug": "singularity-prism",
+    "canonicalPath": "/database/awakeners/arachne/overlays/singularity-prism"
+  },
+  "assets": {
+    "icon": "asset-overlay.arachne.singularity-prism-icon"
+  },
+  "overlayType": "mechanic",
+  "ownerAwakenerId": "awakener-0056",
+  "aliases": [],
+  "iconId": "IconS_Buff_067",
+  "textColor": "affliction",
+  "descriptionTemplate": "For each stack, increase the final DMG, {STR} & {Tentacle DMG} Boost, fixed {Poison}, and fixed {Counter} effects of all Awakener cards by 2%; increase the final Shield, HP Healing, and {STR⯆} effects by 1%.",
+  "descriptionArgs": {},
+  "ownerAwakenerName": "Arachne"
+}

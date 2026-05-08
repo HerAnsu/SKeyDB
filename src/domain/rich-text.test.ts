@@ -1,14 +1,24 @@
 import {describe, expect, it} from 'vitest'
 
 import {collectAwakenerDatabaseCardNames} from './awakeners-database-view'
-import {getAwakenersFullV2, type AwakenerFullV2Record} from './awakeners-full-v2'
+import {type AwakenerFullRecord} from './awakeners-full'
+import {getAwakenersLite} from './awakeners-lite'
 import {resolveDescribedRecord} from './description-records'
+import {loadPublicAwakenerDetailById} from './public-detail-record-adapters'
 import {parseRichDescription} from './rich-text'
 
 const EMPTY_CARDS = new Set<string>()
 
-function getAwakenerByName(name: string): AwakenerFullV2Record {
-  const awakener = getAwakenersFullV2().find((entry) => entry.displayName === name)
+async function loadAwakenerByName(name: string): Promise<AwakenerFullRecord> {
+  const liteAwakener = getAwakenersLite().find(
+    (entry) => entry.name.toLowerCase() === name.toLowerCase(),
+  )
+  expect(liteAwakener).toBeDefined()
+  if (!liteAwakener) {
+    throw new Error(`Missing awakener fixture: ${name}`)
+  }
+
+  const awakener = await loadPublicAwakenerDetailById(liteAwakener.id)
   expect(awakener).toBeDefined()
   if (!awakener) {
     throw new Error(`Missing awakener fixture: ${name}`)
@@ -428,7 +438,7 @@ describe('parseRichDescription', () => {
     ])
   })
 
-  it('parses resolved compiled descriptions without leaking raw arg tokens', () => {
+  it('parses resolved public V3 descriptions without leaking raw arg tokens', async () => {
     const cases = [
       {
         awakenerName: 'kathigu-ra',
@@ -465,7 +475,7 @@ describe('parseRichDescription', () => {
     ] as const
 
     for (const testCase of cases) {
-      const awakener = getAwakenerByName(testCase.awakenerName)
+      const awakener = await loadAwakenerByName(testCase.awakenerName)
       const card = awakener.cards[testCase.slot]
       const resolvedDescription = resolveDescribedRecord(card, {rank: 6}, {maxRank: 6}).description
       const result = parseRichDescription(
@@ -497,5 +507,62 @@ describe('parseRichDescription', () => {
       {type: 'descriptionArg', argKey: 'Arg1', channel: null},
       {type: 'text', value: ' bonus.'},
     ])
+  })
+
+  it('parses public V3 description args with braced mechanic channels', () => {
+    const result = parseRichDescription('Inflict [{Poison}:Arg1] {Poison}.', EMPTY_CARDS, {
+      Arg1: {
+        kind: 'fixed',
+        value: '1',
+      },
+    })
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Inflict '},
+      {type: 'descriptionArg', argKey: 'Arg1', channel: 'Poison'},
+      {type: 'text', value: ' '},
+      {type: 'mechanic', name: 'Poison'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('parses public V3 plural macros without leaking macro text', () => {
+    const result = parseRichDescription(
+      'Draw [Arg1] {plural:[Arg1]|card|cards}. Inflict [{Poison}:Arg2] {plural:[{Poison}:Arg2]|stack|stacks}.',
+      EMPTY_CARDS,
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '1',
+        },
+        Arg2: {
+          kind: 'fixed',
+          value: '2',
+        },
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Draw '},
+      {type: 'descriptionArg', argKey: 'Arg1', channel: null},
+      {type: 'text', value: ' '},
+      {type: 'argPlural', argKey: 'Arg1', channel: null, singular: 'card', plural: 'cards'},
+      {type: 'text', value: '. Inflict '},
+      {type: 'descriptionArg', argKey: 'Arg2', channel: 'Poison'},
+      {type: 'text', value: ' '},
+      {type: 'argPlural', argKey: 'Arg2', channel: 'Poison', singular: 'stack', plural: 'stacks'},
+      {type: 'text', value: '.'},
+    ])
+  })
+
+  it('collapses public V3 ordinal macros to display text', () => {
+    const result = parseRichDescription('On the {ordinal:3rd} play.', EMPTY_CARDS)
+
+    expect(result).toEqual([
+      {type: 'text', value: 'On the '},
+      {type: 'text', value: '3rd'},
+      {type: 'text', value: ' play.'},
+    ])
+    expect(result.some((segment) => segment.type === 'mechanic')).toBe(false)
   })
 })

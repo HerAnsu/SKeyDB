@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.global.crimson-furnace",
+  "name": "Crimson Furnace",
+  "route": {
+    "slug": "crimson-furnace",
+    "canonicalPath": "/database/overlays/crimson-furnace"
+  },
+  "overlayType": "mechanic",
+  "aliases": [],
+  "descriptionTemplate": "Consume all stored healing in the furnace to restore [Heal:Arg1] HP.\nAfter each battle, 5% of your Max HP is stored as healing in the {Crimson Furnace}. Each {Embryo} card in your hand grants an additional storage attempt, up to [Arg2], scaling with your Max HP.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "fixed",
+      "value": "X",
+      "displayFormula": "stored Crimson Furnace healing * (1 - Lost HP %)"
+    },
+    "Arg2": {
+      "kind": "fixed",
+      "value": "X",
+      "displayFormula": "(Max HP * 5% * 5 + additional Crimson Furnace storage) * (1 + Crimson Furnace storage bonus / 100)"
+    }
+  }
+}
