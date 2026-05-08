@@ -1,8 +1,9 @@
-import {describe, expect, it} from 'vitest'
+import {describe, expect, it, vi} from 'vitest'
 
 import type {Team} from '@/features/builder/types'
 
 import {decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode} from './import-export'
+import standardCodeContract from './standard-code-contract.v1.json'
 
 function makeTeam(name: string): Team {
   return {
@@ -97,6 +98,26 @@ describe('import-export codec', () => {
     expect(parsed.team.slots[0].covenantId).toBe('covenant-0001')
     expect(parsed.team.slots[1].awakenerId).toBe('awakener-0042')
     expect('awakenerName' in parsed.team.slots[1]).toBe(false)
+  })
+
+  it('decodes standard awakeners by public id before the transitional legacy name', async () => {
+    vi.resetModules()
+    const mutatedContract = structuredClone(standardCodeContract)
+    const targetEntry = mutatedContract.awakeners.find((entry) => entry.id === 'awakener-0021')
+    if (!targetEntry) {
+      throw new Error('Expected standard code contract to include awakener-0021')
+    }
+    targetEntry.legacyName = 'renamed legacy value'
+    vi.doMock('./standard-code-contract.v1.json', () => ({default: mutatedContract}))
+
+    const {decodeImportCode: decodeWithMutatedContract} = await import('./import-export')
+    const parsed = decodeWithMutatedContract('t1.IRU8YmMBKjwAAAAAAAAAAAAAAAAA')
+
+    expect(parsed.kind).toBe('single')
+    if (parsed.kind !== 'single') return
+    expect(parsed.team.slots[0].awakenerId).toBe('awakener-0021')
+
+    vi.doUnmock('./standard-code-contract.v1.json')
   })
 
   it('round-trips Vortice in standard t1 export codes even without in-game @@ token support', () => {

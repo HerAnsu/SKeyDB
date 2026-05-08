@@ -16,7 +16,8 @@ export interface IngameImportWarning {
   slotIndex?: number
   field?: 'wheelOne' | 'wheelTwo'
   token: string
-  reason: 'unknown_token' | 'unsupported_wip_block' | 'ambiguous_parse'
+  reason: 'unknown_token' | 'ambiguous_parse'
+  candidateIds?: string[]
 }
 
 export interface DecodedIngameTeamCode {
@@ -27,6 +28,7 @@ export interface DecodedIngameTeamCode {
 interface WheelCandidate {
   token: string
   wheelId?: string
+  candidateIds?: string[]
   unknown?: boolean
 }
 
@@ -65,7 +67,7 @@ function findLongestTokenAt(payload: string, cursor: number, tokenList: string[]
 function getWheelCandidatesAt(
   payload: string,
   cursor: number,
-  wheelTokensByToken: Map<string, string>,
+  wheelIdsByToken: Map<string, string[]>,
   sortedWheelTokens: string[],
 ): WheelCandidate[] {
   const candidates: WheelCandidate[] = []
@@ -77,7 +79,12 @@ function getWheelCandidatesAt(
     if (!payload.startsWith(token, cursor)) {
       continue
     }
-    candidates.push({token, wheelId: wheelTokensByToken.get(token)})
+    const candidateIds = wheelIdsByToken.get(token) ?? []
+    candidates.push({
+      token,
+      wheelId: candidateIds.length === 1 ? candidateIds[0] : undefined,
+      candidateIds,
+    })
   }
 
   if (candidates.length === 0 && cursor < payload.length) {
@@ -90,15 +97,32 @@ function getWheelCandidatesAt(
 function parseWheelToken(
   payload: string,
   cursor: number,
-  wheelTokensByToken: Map<string, string>,
+  wheelIdsByToken: Map<string, string[]>,
   sortedWheelTokens: string[],
 ): {candidate: WheelCandidate; nextCursor: number} {
-  const candidates = getWheelCandidatesAt(payload, cursor, wheelTokensByToken, sortedWheelTokens)
+  const candidates = getWheelCandidatesAt(payload, cursor, wheelIdsByToken, sortedWheelTokens)
   const candidate = candidates[0] ?? {token: payload[cursor] ?? 'a', unknown: true}
   return {
     candidate,
     nextCursor: cursor + candidate.token.length,
   }
+}
+
+function pushAmbiguousWarning(
+  warnings: IngameImportWarning[],
+  section: IngameImportWarning['section'],
+  token: string,
+  candidateIds: string[],
+  options: {slotIndex?: number; field?: 'wheelOne' | 'wheelTwo'} = {},
+) {
+  warnings.push({
+    section,
+    slotIndex: options.slotIndex,
+    field: options.field,
+    token,
+    reason: 'ambiguous_parse',
+    candidateIds,
+  })
 }
 
 function pushUnknownAwakenerWarning(
@@ -121,7 +145,7 @@ function decodeAwakenerSlots(
   emptySlots: TeamSlot[],
   warnings: IngameImportWarning[],
 ): {slots: TeamSlot[]; cursor: number} {
-  const awakenerTokenList = buildLongestTokenList(dictionaries.awakeners.byTokenId.keys())
+  const awakenerTokenList = buildLongestTokenList(dictionaries.awakeners.byTokenIds.keys())
   let cursor = 0
   const slots: TeamSlot[] = emptySlots.map((slot) => ({...slot, wheels: [null, null]}))
 
@@ -137,7 +161,14 @@ function decodeAwakenerSlots(
       continue
     }
 
-    const awakenerId = dictionaries.awakeners.byTokenId.get(token)
+    const candidateIds = dictionaries.awakeners.byTokenIds.get(token) ?? []
+    if (candidateIds.length > 1) {
+      pushAmbiguousWarning(warnings, 'awakener', token, candidateIds, {slotIndex})
+      cursor += token.length
+      continue
+    }
+
+    const awakenerId = candidateIds[0]
     const awakener = awakenerId ? awakeningById.get(awakenerId) : undefined
     if (!awakener) {
       pushUnknownAwakenerWarning(warnings, slotIndex, token)
@@ -162,7 +193,7 @@ function decodeWheelCandidates(
   cursor: number,
   dictionaries: IngameTokenDictionaries,
 ): {wheelCandidates: WheelCandidate[]; cursor: number} {
-  const wheelTokenList = buildLongestTokenList(dictionaries.wheels.byTokenId.keys())
+  const wheelTokenList = buildLongestTokenList(dictionaries.wheels.byTokenIds.keys())
   const wheelCandidates: WheelCandidate[] = []
 
   for (let index = 0; index < TEAM_SLOT_COUNT * WHEEL_TOKENS_PER_SLOT; index += 1) {
@@ -170,7 +201,7 @@ function decodeWheelCandidates(
       throw new Error('Corrupted in-game code: missing wheel token block.')
     }
 
-    const parsed = parseWheelToken(payload, cursor, dictionaries.wheels.byTokenId, wheelTokenList)
+    const parsed = parseWheelToken(payload, cursor, dictionaries.wheels.byTokenIds, wheelTokenList)
     wheelCandidates.push(parsed.candidate)
     cursor = parsed.nextCursor
   }
@@ -186,6 +217,12 @@ function resolveDecodedWheelId(
   warnings: IngameImportWarning[],
 ): string | null {
   const wheelId = candidate?.wheelId
+  const candidateIds = candidate?.candidateIds ?? []
+  if (candidate && candidateIds.length > 1) {
+    pushAmbiguousWarning(warnings, 'wheel', candidate.token, candidateIds, {slotIndex, field})
+    return null
+  }
+
   if (wheelId && wheelById.has(wheelId)) {
     return wheelId
   }
@@ -277,7 +314,7 @@ function decodeCovenantTokens(
   dictionaries: IngameTokenDictionaries,
   warnings: IngameImportWarning[],
 ): string[] {
-  const tokenList = buildLongestTokenList(dictionaries.covenants.byTokenId.keys())
+  const tokenList = buildLongestTokenList(dictionaries.covenants.byTokenIds.keys())
   const tokensBySlot: string[] = []
   let cursor = 0
 
@@ -320,7 +357,13 @@ function resolveDecodedCovenantId(
     return undefined
   }
 
-  const covenantId = dictionaries.covenants.byTokenId.get(token)
+  const candidateIds = dictionaries.covenants.byTokenIds.get(token) ?? []
+  if (candidateIds.length > 1) {
+    pushAmbiguousWarning(warnings, 'covenant', token, candidateIds, {slotIndex})
+    return undefined
+  }
+
+  const covenantId = candidateIds[0]
   if (!covenantId) {
     warnings.push({
       section: 'covenant',
@@ -340,7 +383,13 @@ function decodePosseId(
   warnings: IngameImportWarning[],
 ): string | undefined {
   const posseToken = payload[payload.length - 1]
-  const posseId = dictionaries.posses.byTokenId.get(posseToken)
+  const candidateIds = dictionaries.posses.byTokenIds.get(posseToken) ?? []
+  if (candidateIds.length > 1) {
+    pushAmbiguousWarning(warnings, 'posse', posseToken, candidateIds)
+    return undefined
+  }
+
+  const posseId = candidateIds[0]
   if (posseToken !== 'a' && !posseId) {
     warnings.push({
       section: 'posse',

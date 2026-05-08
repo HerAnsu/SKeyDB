@@ -69,6 +69,38 @@ interface UseBuilderImportFlowOptions {
   showToast: (message: string) => void
 }
 
+export function getIngameImportWarningMessage(
+  warnings: Exclude<ReturnType<typeof decodeImportCode>, {kind: 'multi'}>['warnings'],
+) {
+  if (!warnings || warnings.length === 0) {
+    return undefined
+  }
+
+  const surfaced = warnings.filter(
+    (warning) =>
+      (warning.reason === 'unknown_token' || warning.reason === 'ambiguous_parse') &&
+      (warning.section === 'awakener' || warning.section === 'wheel'),
+  )
+  if (surfaced.length === 0) {
+    return undefined
+  }
+
+  const detailParts = surfaced.slice(0, 2).map((warning) => {
+    const slotLabel =
+      warning.slotIndex === undefined ? 'unknown slot' : `slot ${String(warning.slotIndex + 1)}`
+    if (warning.section === 'awakener') {
+      return `${slotLabel} awakener`
+    }
+    const wheelLabel = warning.field === 'wheelTwo' ? 'wheel 2' : 'wheel 1'
+    return `${slotLabel} ${wheelLabel}`
+  })
+  const suffix = surfaced.length > 2 ? '; ...' : ''
+  const details = detailParts.join('; ')
+  const tokenLabel = surfaced.length === 1 ? 'token' : 'tokens'
+
+  return `In-game note: ${String(surfaced.length)} unsupported or ambiguous awakener/wheel ${tokenLabel} imported as empty (${details}${suffix}).`
+}
+
 export function useBuilderImportFlow({
   teams,
   setTeams,
@@ -216,38 +248,6 @@ export function useBuilderImportFlow({
     }
 
     finalizePreparedImport(result.teams, options.importWarningMessage)
-  }
-
-  function getIngameImportWarningMessage(
-    warnings: Exclude<ReturnType<typeof decodeImportCode>, {kind: 'multi'}>['warnings'],
-  ) {
-    if (!warnings || warnings.length === 0) {
-      return undefined
-    }
-
-    const surfaced = warnings.filter(
-      (warning) =>
-        warning.reason === 'unknown_token' &&
-        (warning.section === 'awakener' || warning.section === 'wheel'),
-    )
-    if (surfaced.length === 0) {
-      return undefined
-    }
-
-    const detailParts = surfaced.slice(0, 2).map((warning) => {
-      const slotLabel =
-        warning.slotIndex === undefined ? 'unknown slot' : `slot ${String(warning.slotIndex + 1)}`
-      if (warning.section === 'awakener') {
-        return `${slotLabel} awakener`
-      }
-      const wheelLabel = warning.field === 'wheelTwo' ? 'wheel 2' : 'wheel 1'
-      return `${slotLabel} ${wheelLabel}`
-    })
-    const suffix = surfaced.length > 2 ? '; ...' : ''
-    const details = detailParts.join('; ')
-    const tokenLabel = surfaced.length === 1 ? 'token' : 'tokens'
-
-    return `In-game note: ${String(surfaced.length)} unsupported awakener/wheel ${tokenLabel} imported as empty (${details}${suffix}).`
   }
 
   function submitImportCode(code: string) {

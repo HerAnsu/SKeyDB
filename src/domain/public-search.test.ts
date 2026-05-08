@@ -86,4 +86,33 @@ describe('searchPublicEntities', () => {
       searchPublicEntities('covenants', [{id: 'covenant-test', name: 'Machine Oath'}], '6-piece'),
     ).toEqual([])
   })
+
+  it('does not reuse an earlier search index when fallback fields change', () => {
+    documentsById.clear()
+    const entities = [{id: 'awakener-fallback', name: 'Silent Bell'}]
+
+    expect(searchPublicEntities('awakeners', entities, 'ember')).toEqual([])
+    expect(
+      searchPublicEntities('awakeners', entities, 'ember', {
+        getFallbackFields: () => ({alias: ['Ember Bell']}),
+      }).map((entity) => entity.id),
+    ).toEqual(['awakener-fallback'])
+  })
+
+  it('searches generated tokens as explicit low-priority runtime fields', () => {
+    documentsById.clear()
+    documentsById.set('awakener-token', {
+      kind: 'awakener',
+      id: 'awakener-token',
+      name: 'Silent Bell',
+      aliases: [],
+      tokens: ['emberline'],
+      fields: {name: ['Silent Bell']},
+    })
+
+    expect(
+      searchPublicEntities('awakeners', [{id: 'awakener-token', name: 'Silent Bell'}], 'ember')
+        .map((entity) => entity.id),
+    ).toEqual(['awakener-token'])
+  })
 })

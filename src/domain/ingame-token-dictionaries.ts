@@ -16,6 +16,7 @@ export interface IngameDictionaryIssue {
 export interface IngameTokenDictionaryBuildResult {
   byIdToken: Map<string, string>
   byTokenId: Map<string, string>
+  byTokenIds: Map<string, string[]>
   issues: IngameDictionaryIssue[]
 }
 
@@ -57,6 +58,7 @@ export function buildTokenDictionaryFromEntries({
   return {
     byIdToken,
     byTokenId,
+    byTokenIds: provisionalByTokenIds,
     issues,
   }
 }

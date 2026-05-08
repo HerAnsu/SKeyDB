@@ -8,6 +8,7 @@ import {decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode} from '@/dom
 import {saveBuilderDraft} from './builder-persistence'
 import {BuilderPage} from './BuilderPage'
 import type {Team} from './types'
+import {getIngameImportWarningMessage} from './useBuilderImportFlow'
 
 const awakenerIdByName = new Map([
   ['goliath', 'awakener-0021'],
@@ -163,8 +164,32 @@ describe('BuilderPage import-export', () => {
     fireEvent.click(within(importDialog).getByRole('button', {name: /^import$/i}))
 
     expect(
-      screen.getByText(/unsupported awakener\/wheel tokens imported as empty/i),
+      screen.getByText(/unsupported or ambiguous awakener\/wheel tokens imported as empty/i),
     ).toBeInTheDocument()
+  })
+
+  it('surfaces ambiguous in-game awakener and wheel parse warnings in import messaging', () => {
+    expect(
+      getIngameImportWarningMessage([
+        {
+          section: 'awakener',
+          slotIndex: 0,
+          token: 'x',
+          reason: 'ambiguous_parse',
+          candidateIds: ['awakener-0001', 'awakener-0002'],
+        },
+        {
+          section: 'wheel',
+          slotIndex: 1,
+          field: 'wheelTwo',
+          token: 'y',
+          reason: 'ambiguous_parse',
+          candidateIds: ['wheel-0001', 'wheel-0002'],
+        },
+      ]),
+    ).toBe(
+      'In-game note: 2 unsupported or ambiguous awakener/wheel tokens imported as empty (slot 1 awakener; slot 2 wheel 2).',
+    )
   })
 
   it('can escalate skipped duplicate-conflict imports into the duplicate-override flow', () => {

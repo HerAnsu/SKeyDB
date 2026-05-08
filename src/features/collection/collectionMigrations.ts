@@ -12,6 +12,7 @@ import {
   POSSE_ID_V1_TO_CURRENT,
   WHEEL_ID_V1_TO_CURRENT,
 } from '@/domain/persistence-id-migration'
+import {isPublicEntityId} from '@/data-access/public-data/ids'
 import {
   safeStorageRead,
   safeStorageRemove,
@@ -51,7 +52,7 @@ const WHEEL_ID_CURRENT_TO_V1 = invertMap(WHEEL_ID_V1_TO_CURRENT)
 const POSSE_ID_CURRENT_TO_V1 = invertMap(POSSE_ID_V1_TO_CURRENT)
 
 function isPublicCollectionId(id: string, kind: CollectionOwnershipPublicIdKind): boolean {
-  return new RegExp(`^${kind}-\\d{4,}$`).test(id)
+  return isPublicEntityId(kind, id)
 }
 
 function resolveCatalogId(

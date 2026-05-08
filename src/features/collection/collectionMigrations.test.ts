@@ -285,6 +285,28 @@ describe('collection ownership migrations', () => {
     ).toEqual({ok: false, error: 'invalid_payload'})
   })
 
+  it('rejects current v2 snapshots with public ids that do not match the shared kind contract', () => {
+    expect(
+      parseCollectionOwnershipSnapshot(
+        JSON.stringify({
+          version: 2,
+          payload: {
+            ownedAwakeners: {'wheel-0001': 4},
+            awakenerLevels: {'wheel-0001': 72},
+            ownedWheels: {'wheel-00001': 2},
+            ownedPosses: {'posse-0001': 0},
+            displayUnowned: true,
+          },
+        }),
+        {
+          awakenerIds: ['wheel-0001'],
+          wheelIds: ['wheel-00001'],
+          posseIds: ['posse-0001'],
+        },
+      ),
+    ).toEqual({ok: false, error: 'invalid_payload'})
+  })
+
   it('rejects current v2 snapshots with non-number ownership values', () => {
     expect(
       parseCollectionOwnershipSnapshot(

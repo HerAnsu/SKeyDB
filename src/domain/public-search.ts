@@ -12,7 +12,7 @@ import {
   type SearchFieldMatchKind,
 } from './search-utils'
 
-type SearchFieldName = 'name' | 'alias' | 'owner' | 'tag' | 'facet'
+type SearchFieldName = 'name' | 'alias' | 'owner' | 'tag' | 'facet' | 'token'
 
 type SearchFields = Partial<Record<SearchFieldName, string[]>>
 
@@ -31,15 +31,6 @@ interface IndexedPublicSearchRecord<TEntity extends PublicSearchableEntity> {
   fields: SearchFields
   normalizedFields: SearchFields
 }
-
-const indexedSearchCache = new WeakMap<
-  readonly PublicSearchableEntity[],
-  Map<SearchablePublicDataScope, IndexedPublicSearchRecord<PublicSearchableEntity>[]>
->()
-const fuseSearchCache = new WeakMap<
-  readonly PublicSearchableEntity[],
-  Map<SearchablePublicDataScope, Fuse<IndexedPublicSearchRecord<PublicSearchableEntity>>>
->()
 
 export function searchPublicEntities<TEntity extends PublicSearchableEntity>(
   scope: SearchablePublicDataScope,
@@ -91,13 +82,7 @@ function getIndexedPublicSearchRecords<TEntity extends PublicSearchableEntity>(
   entities: TEntity[],
   options: PublicSearchOptions<TEntity>,
 ): IndexedPublicSearchRecord<TEntity>[] {
-  const cachedByScope = indexedSearchCache.get(entities)
-  const cached = cachedByScope?.get(scope)
-  if (cached) {
-    return cached as IndexedPublicSearchRecord<TEntity>[]
-  }
-
-  const indexed = entities.map((entity) => {
+  return entities.map((entity) => {
     const document = getPublicSearchDocument(scope, entity.id)
     const fields = mergeSearchFields(
       fieldsFromDocument(document, entity),
@@ -110,16 +95,6 @@ function getIndexedPublicSearchRecords<TEntity extends PublicSearchableEntity>(
       normalizedFields: normalizeSearchFields(fields),
     }
   })
-
-  const nextByScope: Map<
-    SearchablePublicDataScope,
-    IndexedPublicSearchRecord<PublicSearchableEntity>[]
-  > =
-    cachedByScope ??
-    new Map<SearchablePublicDataScope, IndexedPublicSearchRecord<PublicSearchableEntity>[]>()
-  nextByScope.set(scope, indexed as IndexedPublicSearchRecord<PublicSearchableEntity>[])
-  indexedSearchCache.set(entities, nextByScope)
-  return indexed
 }
 
 function getPublicSearchFuse<TEntity extends PublicSearchableEntity>(
@@ -127,13 +102,7 @@ function getPublicSearchFuse<TEntity extends PublicSearchableEntity>(
   entities: TEntity[],
   options: PublicSearchOptions<TEntity>,
 ): Fuse<IndexedPublicSearchRecord<PublicSearchableEntity>> {
-  const cachedByScope = fuseSearchCache.get(entities)
-  const cached = cachedByScope?.get(scope)
-  if (cached) {
-    return cached
-  }
-
-  const fuse = new Fuse(
+  return new Fuse(
     getIndexedPublicSearchRecords(
       scope,
       entities,
@@ -150,18 +119,10 @@ function getPublicSearchFuse<TEntity extends PublicSearchableEntity>(
         {name: 'normalizedFields.owner', weight: 0.16},
         {name: 'normalizedFields.tag', weight: 0.08},
         {name: 'normalizedFields.facet', weight: 0.06},
+        {name: 'normalizedFields.token', weight: 0.04},
       ],
     },
   )
-
-  const nextByScope: Map<
-    SearchablePublicDataScope,
-    Fuse<IndexedPublicSearchRecord<PublicSearchableEntity>>
-  > = cachedByScope ??
-  new Map<SearchablePublicDataScope, Fuse<IndexedPublicSearchRecord<PublicSearchableEntity>>>()
-  nextByScope.set(scope, fuse)
-  fuseSearchCache.set(entities, nextByScope)
-  return fuse
 }
 
 function fieldsFromDocument(
@@ -182,6 +143,7 @@ function fieldsFromDocument(
     owner: document.fields.owner,
     tag: document.fields.tag,
     facet: document.fields.facet,
+    token: document.tokens,
   }
 }
 
@@ -214,7 +176,7 @@ function getPublicSearchPriority<TEntity extends PublicSearchableEntity>(
   record: IndexedPublicSearchRecord<TEntity>,
   normalizedQuery: string,
 ): number | null {
-  const priorities = (['name', 'alias', 'owner', 'tag', 'facet'] as const)
+  const priorities = (['name', 'alias', 'owner', 'tag', 'facet', 'token'] as const)
     .map((fieldName) =>
       toPriority(
         getBestSearchFieldMatch(record.fields[fieldName], normalizedQuery),
@@ -265,7 +227,10 @@ function getFieldPriorityMap(
   if (fieldName === 'tag') {
     return {exact: 13, prefix: 14, wordPrefix: 15, contains: 99}
   }
-  return {exact: 18, prefix: 19, wordPrefix: 20, contains: 99}
+  if (fieldName === 'facet') {
+    return {exact: 18, prefix: 19, wordPrefix: 20, contains: 99}
+  }
+  return {exact: 23, prefix: 24, wordPrefix: 25, contains: 99}
 }
 
 function documentMatchesEntity(

@@ -32,6 +32,7 @@ const posses = getPosses()
 const wheels = getWheels()
 
 const awakenerIdByName = new Map(awakeners.map((awakener) => [awakener.name, awakener.id]))
+const awakenerById = new Map(awakeners.map((awakener) => [awakener.id, awakener]))
 const awakenerByLegacyName = new Map(
   awakeners.map((awakener) => [awakener.name.toLowerCase(), awakener]),
 )
@@ -268,6 +269,11 @@ function getDecodedAwakener(awakenerId: number) {
   }
 
   const standardId = standardAwakenerIdByIndex.get(awakenerId)
+  const currentAwakener = standardId ? awakenerById.get(standardId) : undefined
+  if (currentAwakener) {
+    return currentAwakener
+  }
+
   const contractEntry = standardCode.awakeners.find((entry) => entry.id === standardId)
   const awakener =
     typeof contractEntry?.legacyName === 'string'

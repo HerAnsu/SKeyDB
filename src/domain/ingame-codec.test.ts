@@ -1,4 +1,4 @@
-import {describe, expect, it} from 'vitest'
+import {describe, expect, it, vi} from 'vitest'
 
 import type {Team} from '@/features/builder/types'
 
@@ -220,5 +220,85 @@ describe('decodeIngameTeamCode', () => {
     }
 
     expect(() => encodeIngameTeamCode(team)).toThrow(/posse "posse-9999" is not representable/)
+  })
+
+  it('reports known duplicate in-game tokens as ambiguous instead of unknown', async () => {
+    vi.resetModules()
+    const buildDictionary = (entries: Record<string, string | string[]>) => {
+      const byTokenIds = new Map(
+        Object.entries(entries).map(([token, ids]) => [
+          token,
+          Array.isArray(ids) ? ids : [ids],
+        ]),
+      )
+      return {
+        byIdToken: new Map<string, string>(),
+        byTokenId: new Map(
+          Array.from(byTokenIds)
+            .filter(([, ids]) => ids.length === 1)
+            .map(([token, ids]) => [token, ids[0]]),
+        ),
+        byTokenIds,
+        issues: [],
+      }
+    }
+
+    vi.doMock('./ingame-token-dictionaries', () => ({
+      buildIngameTokenDictionaries: () => ({
+        awakeners: buildDictionary({
+          b: 'awakener-0001',
+          c: 'awakener-0002',
+          d: 'awakener-0003',
+          e: 'awakener-0004',
+        }),
+        wheels: buildDictionary({x: ['wheel-0001', 'wheel-0002']}),
+        covenants: buildDictionary({y: ['covenant-0001', 'covenant-0002']}),
+        posses: buildDictionary({z: ['posse-0001', 'posse-0002']}),
+        issues: [],
+      }),
+    }))
+    vi.doMock('./awakeners', () => ({
+      getAwakeners: () => [
+        {id: 'awakener-0001', name: 'One', realm: 'AEQUOR'},
+        {id: 'awakener-0002', name: 'Two', realm: 'CHAOS'},
+        {id: 'awakener-0003', name: 'Three', realm: 'CARO'},
+        {id: 'awakener-0004', name: 'Four', realm: 'IRE'},
+      ],
+    }))
+    vi.doMock('./wheels', () => ({
+      getWheels: () => [],
+    }))
+
+    const {decodeIngameTeamCode: decodeWithAmbiguousTokens} = await import('./ingame-codec')
+    const decoded = decodeWithAmbiguousTokens('@@bcdexaaaaaaayaaaz@@')
+
+    expect(decoded.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          section: 'wheel',
+          field: 'wheelOne',
+          token: 'x',
+          reason: 'ambiguous_parse',
+          candidateIds: ['wheel-0001', 'wheel-0002'],
+        }),
+        expect.objectContaining({
+          section: 'covenant',
+          token: 'y',
+          reason: 'ambiguous_parse',
+          candidateIds: ['covenant-0001', 'covenant-0002'],
+        }),
+        expect.objectContaining({
+          section: 'posse',
+          token: 'z',
+          reason: 'ambiguous_parse',
+          candidateIds: ['posse-0001', 'posse-0002'],
+        }),
+      ]),
+    )
+    expect(decoded.warnings.some((warning) => warning.reason === 'unknown_token')).toBe(false)
+
+    vi.doUnmock('./ingame-token-dictionaries')
+    vi.doUnmock('./awakeners')
+    vi.doUnmock('./wheels')
   })
 })

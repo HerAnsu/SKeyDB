@@ -3,7 +3,10 @@ import {describe, expect, it} from 'vitest'
 import {resolvePublicAsset, resolvePublicEntityAsset} from './assetRepository'
 import {PUBLIC_DATA_SCOPES} from './contract'
 import {getPublicRecordSnapshot, getPublicRecordSnapshots} from './recordSnapshots'
-import {resolvePublicReferenceToken} from './referenceRepository'
+import {
+  resolvePublicReferenceToken,
+  resolvePublicReferenceTokenResult,
+} from './referenceRepository'
 import {
   getPublicBuilderCatalog,
   getPublicCatalog,
@@ -84,6 +87,21 @@ describe('public-data repository', () => {
     expect(resolvePublicReferenceToken('deus ex machina')).toEqual([
       {kind: 'covenant', id: 'covenant-0001'},
     ])
+    expect(resolvePublicReferenceTokenResult('deus ex machina')).toEqual({
+      status: 'match',
+      refs: [{kind: 'covenant', id: 'covenant-0001'}],
+    })
+    expect(resolvePublicReferenceTokenResult('aberrant vivisection')).toEqual({
+      status: 'ambiguous',
+      refs: [
+        {kind: 'enlighten', id: 'enlighten.24.aberrant-vivisection'},
+        {kind: 'skill', id: 'skill.24.aberrant-vivisection'},
+      ],
+    })
+    expect(resolvePublicReferenceTokenResult('not a public token')).toEqual({
+      status: 'notFound',
+      refs: [],
+    })
     expect(getPublicSearchDocuments('posses')[0]).toMatchObject({
       kind: 'posse',
       id: expect.stringMatching(/^posse-\d{4}$/),

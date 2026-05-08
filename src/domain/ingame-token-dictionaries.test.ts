@@ -23,7 +23,7 @@ describe('buildTokenDictionaryFromEntries', () => {
     expect(result.issues).toEqual([])
   })
 
-  it('reports duplicate tokens and excludes ambiguous reverse mappings', () => {
+  it('reports duplicate tokens and keeps ambiguous reverse mapping candidates', () => {
     const result = buildTokenDictionaryFromEntries({
       category: 'wheels',
       entries: [
@@ -33,6 +33,7 @@ describe('buildTokenDictionaryFromEntries', () => {
     })
 
     expect(result.byTokenId.has('x')).toBe(false)
+    expect(result.byTokenIds.get('x')).toEqual(['wheel-0001', 'wheel-0002'])
     expect(result.byIdToken.get('wheel-0001')).toBe('x')
     expect(result.byIdToken.get('wheel-0002')).toBe('x')
     expect(result.issues).toEqual([{category: 'wheels', kind: 'duplicate_token', token: 'x'}])

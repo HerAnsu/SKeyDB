@@ -19,7 +19,23 @@ function normalizeReferenceToken(token: string): string {
     .trim()
 }
 
-export function resolvePublicReferenceToken(token: string): EntityRef[] {
+export type PublicReferenceResolveResult =
+  | {status: 'match'; refs: EntityRef[]}
+  | {status: 'ambiguous'; refs: EntityRef[]}
+  | {status: 'notFound'; refs: []}
+
+export function resolvePublicReferenceTokenResult(token: string): PublicReferenceResolveResult {
   const normalizedToken = normalizeReferenceToken(token)
-  return getPublicReferencesIndex().tokens[normalizedToken] ?? []
+  const referencesIndex = getPublicReferencesIndex()
+  const ambiguousRefs = referencesIndex.ambiguous[normalizedToken]
+  if (ambiguousRefs) {
+    return {status: 'ambiguous', refs: ambiguousRefs}
+  }
+
+  const refs = referencesIndex.tokens[normalizedToken]
+  return refs ? {status: 'match', refs} : {status: 'notFound', refs: []}
+}
+
+export function resolvePublicReferenceToken(token: string): EntityRef[] {
+  return resolvePublicReferenceTokenResult(token).refs
 }

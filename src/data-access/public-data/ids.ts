@@ -1,5 +1,6 @@
 import type {EntityKind} from './contract'
 
+// Generated public-v3 numeric IDs are exactly four digits; legacy widening stays at named migration boundaries.
 const PUBLIC_ID_PATTERNS: Partial<Record<EntityKind, RegExp>> = {
   awakener: /^awakener-\d{4}$/,
   awakenerBuild: /^awakener-build-\d{4}$/,
