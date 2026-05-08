@@ -56,9 +56,13 @@ describe('builder-persistence', () => {
     expect(raw).toContain('"version":2')
 
     const loaded = loadBuilderDraft(storage.api)
-    expect(loaded).toEqual({teams, activeTeamId: 'team-alpha'})
-    expect(loaded?.teams[0]?.slots[0]?.awakenerId).toBe('awakener-0021')
-    expect('awakenerName' in (loaded?.teams[0]?.slots[0] ?? {})).toBe(false)
+    expect(loaded).toEqual({status: 'loaded', draft: {teams, activeTeamId: 'team-alpha'}})
+    expect(loaded.status === 'loaded' ? loaded.draft.teams[0]?.slots[0]?.awakenerId : null).toBe(
+      'awakener-0021',
+    )
+    expect(
+      'awakenerName' in (loaded.status === 'loaded' ? (loaded.draft.teams[0]?.slots[0] ?? {}) : {}),
+    ).toBe(false)
   })
 
   it('serializes builder drafts with canonical current public ids', () => {
@@ -92,13 +96,43 @@ describe('builder-persistence', () => {
     expect(storage.backing.has(BUILDER_PERSISTENCE_KEY)).toBe(false)
   })
 
-  it('returns null for malformed or unsupported payloads', () => {
+  it('returns invalid-current for unsupported current storage versions', () => {
     const storage = createStorage([
       [BUILDER_PERSISTENCE_KEY, '{"version":999,"payload":{"teams":[],"activeTeamId":""}}'],
     ])
 
-    const loaded = loadBuilderDraft(storage.api)
-    expect(loaded).toBeNull()
+    expect(loadBuilderDraft(storage.api)).toEqual({
+      status: 'invalid-current',
+      reason: expect.any(String),
+    })
+  })
+
+  it('returns invalid-current for malformed current builder storage', () => {
+    const storage = createStorage([[BUILDER_PERSISTENCE_KEY, '{bad-json']])
+
+    expect(loadBuilderDraft(storage.api)).toEqual({
+      status: 'invalid-current',
+      reason: expect.any(String),
+    })
+  })
+
+  it('returns invalid-current for an empty current builder storage value', () => {
+    const storage = createStorage([
+      [BUILDER_PERSISTENCE_KEY, ''],
+      [
+        LEGACY_BUILDER_PERSISTENCE_KEY,
+        JSON.stringify({
+          version: 1,
+          updatedAt: '2026-01-01T00:00:00.000Z',
+          payload: {teams: [createTeamFixture()], activeTeamId: 'team-alpha'},
+        }),
+      ],
+    ])
+
+    expect(loadBuilderDraft(storage.api)).toEqual({
+      status: 'invalid-current',
+      reason: expect.any(String),
+    })
   })
 
   it('rejects malformed slot payloads during load', () => {
@@ -126,8 +160,10 @@ describe('builder-persistence', () => {
       ],
     ])
 
-    const loaded = loadBuilderDraft(storage.api)
-    expect(loaded).toBeNull()
+    expect(loadBuilderDraft(storage.api)).toEqual({
+      status: 'invalid-current',
+      reason: expect.any(String),
+    })
   })
 
   it('round-trips support slot state in builder draft storage', () => {
@@ -155,7 +191,9 @@ describe('builder-persistence', () => {
 
     const loaded = loadBuilderDraft(storage.api)
 
-    expect(loaded?.teams[0]?.slots[0]?.isSupport).toBe(true)
+    expect(loaded.status === 'loaded' ? loaded.draft.teams[0]?.slots[0]?.isSupport : null).toBe(
+      true,
+    )
   })
 
   it('falls back to legacy draft storage and immediately migrates to current storage', () => {
@@ -170,9 +208,18 @@ describe('builder-persistence', () => {
 
     const loaded = loadBuilderDraft(storage.api)
 
-    expect(loaded).toEqual(legacyEnvelope.payload)
-    expect(loaded?.teams[0]?.slots[0]?.awakenerId).toBe('awakener-0021')
-    expect('awakenerName' in (loaded?.teams[0]?.slots[0] ?? {})).toBe(false)
+    expect(loaded).toEqual({
+      status: 'loaded-legacy',
+      draft: legacyEnvelope.payload,
+      migrationSaved: true,
+    })
+    expect(
+      loaded.status === 'loaded-legacy' ? loaded.draft.teams[0]?.slots[0]?.awakenerId : null,
+    ).toBe('awakener-0021')
+    expect(
+      'awakenerName' in
+        (loaded.status === 'loaded-legacy' ? (loaded.draft.teams[0]?.slots[0] ?? {}) : {}),
+    ).toBe(false)
     expect(storage.backing.has(LEGACY_BUILDER_PERSISTENCE_KEY)).toBe(true)
     expect(storage.backing.get(BUILDER_PERSISTENCE_KEY)).toContain('"version":2')
   })
@@ -209,13 +256,43 @@ describe('builder-persistence', () => {
 
     const loaded = loadBuilderDraft(storage.api)
 
-    expect(loaded?.teams[0]?.posseId).toBe('posse-0001')
-    expect(loaded?.teams[0]?.slots[0]).toMatchObject({
+    expect(loaded.status).toBe('loaded-legacy')
+    expect(loaded.status === 'loaded-legacy' ? loaded.draft.teams[0]?.posseId : null).toBe(
+      'posse-0001',
+    )
+    expect(
+      loaded.status === 'loaded-legacy' ? loaded.draft.teams[0]?.slots[0] : null,
+    ).toMatchObject({
       awakenerId: 'awakener-0021',
       wheels: ['wheel-0001', 'wheel-0014'],
       covenantId: 'covenant-0020',
     })
-    expect('awakenerName' in (loaded?.teams[0]?.slots[0] ?? {})).toBe(false)
+    expect(
+      'awakenerName' in
+        (loaded.status === 'loaded-legacy' ? (loaded.draft.teams[0]?.slots[0] ?? {}) : {}),
+    ).toBe(false)
+  })
+
+  it('returns a valid legacy draft even when saving the migrated v2 copy fails', () => {
+    const legacyEnvelope = {
+      version: 1,
+      updatedAt: '2026-01-01T00:00:00.000Z',
+      payload: {teams: [createTeamFixture()], activeTeamId: 'team-alpha'},
+    }
+    const storage = {
+      getItem: (key: string) =>
+        key === LEGACY_BUILDER_PERSISTENCE_KEY ? JSON.stringify(legacyEnvelope) : null,
+      setItem: () => {
+        throw new Error('quota exceeded')
+      },
+      removeItem: () => undefined,
+    }
+
+    expect(loadBuilderDraft(storage)).toEqual({
+      status: 'loaded-legacy',
+      draft: legacyEnvelope.payload,
+      migrationSaved: false,
+    })
   })
 
   it('prefers valid current storage over stale legacy storage', () => {
@@ -234,8 +311,11 @@ describe('builder-persistence', () => {
     saveBuilderDraft(storage.api, {teams: [currentTeam], activeTeamId: 'team-alpha'})
 
     expect(loadBuilderDraft(storage.api)).toEqual({
-      teams: [currentTeam],
-      activeTeamId: 'team-alpha',
+      status: 'loaded',
+      draft: {
+        teams: [currentTeam],
+        activeTeamId: 'team-alpha',
+      },
     })
   })
 
@@ -255,7 +335,10 @@ describe('builder-persistence', () => {
       ],
     ])
 
-    expect(loadBuilderDraft(storage.api)).toBeNull()
+    expect(loadBuilderDraft(storage.api)).toEqual({
+      status: 'invalid-current',
+      reason: expect.any(String),
+    })
   })
 
   it('rejects unknown canonical current wheel ids instead of dropping equipment', () => {
@@ -290,7 +373,10 @@ describe('builder-persistence', () => {
       ],
     ])
 
-    expect(loadBuilderDraft(storage.api)).toBeNull()
+    expect(loadBuilderDraft(storage.api)).toEqual({
+      status: 'invalid-current',
+      reason: expect.any(String),
+    })
   })
 
   it('removes current and legacy draft keys on clear', () => {

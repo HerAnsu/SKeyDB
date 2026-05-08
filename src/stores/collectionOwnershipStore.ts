@@ -29,7 +29,7 @@ export interface CollectionOwnershipStoreState {
   persistenceStatus: CollectionOwnershipPersistenceStatus
   hydrate: () => void
   save: () => boolean
-  importSnapshot: (rawSnapshot: string) => ParseCollectionOwnershipSnapshotResult
+  importSnapshot: (rawSnapshot: string) => ImportCollectionOwnershipSnapshotResult
   exportSnapshot: () => string
   replaceOwnership: (ownership: CollectionOwnershipState) => void
   updateOwnership: (
@@ -41,6 +41,14 @@ export interface CollectionOwnershipStoreState {
   setAwakenerLevel: (id: string, level: number) => void
   setDisplayUnowned: (displayUnowned: boolean) => void
 }
+
+export type ImportCollectionOwnershipSnapshotResult =
+  | (Extract<ParseCollectionOwnershipSnapshotResult, {ok: true}> & {persisted: true})
+  | (Extract<ParseCollectionOwnershipSnapshotResult, {ok: true}> & {
+      persisted: false
+      error: 'save_failed'
+    })
+  | Extract<ParseCollectionOwnershipSnapshotResult, {ok: false}>
 
 interface CreateCollectionOwnershipStoreOptions {
   catalog?: CollectionOwnershipCatalog
@@ -123,9 +131,11 @@ export function createCollectionOwnershipStore({
         return parsed
       }
       set({ownership: parsed.state, persistenceStatus: 'ready'})
-      get().save()
+      const persisted = get().save()
       set({ownership: parsed.state, persistenceStatus: 'ready'})
-      return parsed
+      return persisted
+        ? {...parsed, persisted: true}
+        : {...parsed, persisted: false, error: 'save_failed'}
     },
     exportSnapshot: () => serializeCollectionOwnershipSnapshot(get().ownership, catalog),
     replaceOwnership: (ownership) => {

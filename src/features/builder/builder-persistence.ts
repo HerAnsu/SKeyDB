@@ -25,47 +25,62 @@ export const LEGACY_BUILDER_PERSISTENCE_KEY = `skeydb.builder.v${String(
   LEGACY_BUILDER_PERSISTENCE_VERSION,
 )}`
 
-export function loadBuilderDraft(storage: StorageLike | null): BuilderDraftPayload | null {
+export type LoadBuilderDraftResult =
+  | {status: 'empty'}
+  | {status: 'loaded'; draft: BuilderDraftPayload}
+  | {status: 'invalid-current'; reason: string}
+  | {status: 'invalid-legacy'; reason: string}
+  | {status: 'loaded-legacy'; draft: BuilderDraftPayload; migrationSaved: boolean}
+
+export function loadBuilderDraft(storage: StorageLike | null): LoadBuilderDraftResult {
   const raw = safeStorageRead(storage, BUILDER_PERSISTENCE_KEY)
-  if (raw) {
+  if (raw !== null) {
     try {
       const parsed = JSON.parse(raw) as PersistedBuilderEnvelope<PersistedBuilderPayload>
       if (parsed.version !== BUILDER_PERSISTENCE_VERSION) {
-        return null
+        return {status: 'invalid-current', reason: 'Unsupported builder draft version.'}
       }
       if (!isPersistedBuilderPayload(parsed.payload)) {
-        return null
+        return {status: 'invalid-current', reason: 'Malformed builder draft payload.'}
       }
-      return deserializeBuilderDraft(parsed.payload)
+      const draft = deserializeBuilderDraft(parsed.payload)
+      if (!draft) {
+        return {status: 'invalid-current', reason: 'Builder draft payload contains invalid ids.'}
+      }
+      return {status: 'loaded', draft}
     } catch {
-      return null
+      return {status: 'invalid-current', reason: 'Malformed builder draft envelope.'}
     }
   }
 
   const legacyRaw = safeStorageRead(storage, LEGACY_BUILDER_PERSISTENCE_KEY)
   if (!legacyRaw) {
-    return null
+    return {status: 'empty'}
   }
 
   try {
     const parsed = JSON.parse(legacyRaw) as PersistedBuilderEnvelope
     if (parsed.version !== LEGACY_BUILDER_PERSISTENCE_VERSION) {
-      return null
+      return {status: 'invalid-legacy', reason: 'Unsupported legacy builder draft version.'}
     }
     if (!isBuilderDraftPayload(parsed.payload)) {
-      return null
+      return {status: 'invalid-legacy', reason: 'Malformed legacy builder draft payload.'}
     }
     const migrated = normalizeBuilderDraft(parsed.payload)
     if (!migrated) {
-      return null
+      return {
+        status: 'invalid-legacy',
+        reason: 'Legacy builder draft payload contains invalid ids.',
+      }
     }
-    if (!saveBuilderDraft(storage, migrated)) {
-      return null
-    }
+    const migrationSaved = saveBuilderDraft(storage, migrated)
     const serialized = serializeBuilderDraft(migrated)
-    return serialized ? deserializeBuilderDraft(serialized) : null
+    const draft = serialized ? deserializeBuilderDraft(serialized) : null
+    return draft
+      ? {status: 'loaded-legacy', draft, migrationSaved}
+      : {status: 'invalid-legacy', reason: 'Legacy builder draft payload cannot be serialized.'}
   } catch {
-    return null
+    return {status: 'invalid-legacy', reason: 'Malformed legacy builder draft envelope.'}
   }
 }
 

@@ -571,6 +571,43 @@ describe('useBuilderViewModel', () => {
     clearBuilderDraft(window.localStorage)
   })
 
+  it('does not autosave over invalid current builder storage', () => {
+    vi.useFakeTimers()
+    const invalidCurrentDraft = '{bad-json'
+    window.localStorage.setItem(BUILDER_PERSISTENCE_KEY, invalidCurrentDraft)
+
+    const {result} = renderHook(() =>
+      useBuilderViewModel({
+        searchInputRef: createRef<HTMLInputElement>(),
+      }),
+    )
+
+    act(() => {
+      result.current.setTeams([
+        {
+          id: 'team-autosave-blocked',
+          name: 'Autosave Blocked',
+          slots: [
+            {slotId: 'slot-1', wheels: [null, null] as [string | null, string | null]},
+            {slotId: 'slot-2', wheels: [null, null] as [string | null, string | null]},
+            {slotId: 'slot-3', wheels: [null, null] as [string | null, string | null]},
+            {slotId: 'slot-4', wheels: [null, null] as [string | null, string | null]},
+          ],
+        },
+      ])
+      result.current.setActiveTeamId('team-autosave-blocked')
+    })
+
+    act(() => {
+      vi.advanceTimersByTime(400)
+    })
+
+    expect(window.localStorage.getItem(BUILDER_PERSISTENCE_KEY)).toBe(invalidCurrentDraft)
+
+    vi.useRealTimers()
+    clearBuilderDraft(window.localStorage)
+  })
+
   it('hydrates ownership and keeps linked awakeners synced', () => {
     saveCollectionOwnership(window.localStorage, {
       ownedAwakeners: {'42': 5},

@@ -33,6 +33,16 @@ function createStorage() {
   }
 }
 
+function createWriteFailingStorage() {
+  const storage = createStorage()
+  return {
+    ...storage,
+    setItem: () => {
+      throw new Error('write failed')
+    },
+  }
+}
+
 describe('collectionOwnershipStore', () => {
   it('hydrates shipped v1 ownership and writes the current public-id snapshot', () => {
     const storage = createStorage()
@@ -189,5 +199,39 @@ describe('collectionOwnershipStore', () => {
     })
     expect(storage.getItem(COLLECTION_OWNERSHIP_KEY)).toContain('"wheel-0001"')
     expect(storage.getItem(COLLECTION_OWNERSHIP_KEY)).not.toContain('"B01"')
+  })
+
+  it('reports import persistence failure without treating parse as failed', () => {
+    const storage = createWriteFailingStorage()
+    const store = createCollectionOwnershipStore({catalog, storage})
+    store.getState().hydrate()
+
+    const result = store.getState().importSnapshot(
+      JSON.stringify({
+        version: 1,
+        payload: {
+          ownedAwakeners: {'1': 3},
+          awakenerLevels: {'1': 42},
+          ownedWheels: {B01: 9},
+          ownedPosses: {'encounter-in-pure-white': 0},
+          displayUnowned: false,
+        },
+      }),
+    )
+
+    expect(result).toEqual({
+      ok: true,
+      migratedFromVersion: 1,
+      state: {
+        ownedAwakeners: {'awakener-0001': 3, 'awakener-0002': 3},
+        awakenerLevels: {'awakener-0001': 42, 'awakener-0002': 42},
+        ownedWheels: {'wheel-0001': 9},
+        ownedPosses: {'posse-0001': 0},
+        displayUnowned: false,
+      },
+      persisted: false,
+      error: 'save_failed',
+    })
+    expect(store.getState().ownership.ownedWheels).toEqual({'wheel-0001': 9})
   })
 })

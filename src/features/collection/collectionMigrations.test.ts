@@ -42,6 +42,15 @@ describe('collection ownership migrations', () => {
     displayUnowned: true,
   } as const
 
+  function expectLoadedState(storage: ReturnType<typeof createStorage>) {
+    const result = loadCollectionOwnership(storage, catalog)
+    expect(result.ok).toBe(true)
+    if (!result.ok) {
+      throw new Error(`Expected load to succeed, got ${result.error}`)
+    }
+    return expect(result.state)
+  }
+
   it('saves and loads ownership data with normalization', () => {
     const storage = createStorage()
     const saved = saveCollectionOwnership(
@@ -60,7 +69,7 @@ describe('collection ownership migrations', () => {
     const raw = storage.rawStore.get(COLLECTION_OWNERSHIP_KEY)
     expect(raw).toContain('"version":2')
 
-    expect(loadCollectionOwnership(storage, catalog)).toEqual({
+    expectLoadedState(storage).toEqual({
       ownedAwakeners: {'1': 5, '2': 5},
       awakenerLevels: {'1': 60, '2': 60},
       ownedWheels: {B01: 0},
@@ -72,10 +81,13 @@ describe('collection ownership migrations', () => {
   it('returns empty defaults for malformed or unsupported payloads', () => {
     const storage = createStorage()
     storage.setItem(COLLECTION_OWNERSHIP_KEY, '{"version":999,"payload":{}}')
-    expect(loadCollectionOwnership(storage, catalog)).toEqual(defaultOwnedStateForCatalog)
+    expect(loadCollectionOwnership(storage, catalog)).toEqual({
+      ok: false,
+      error: 'unsupported_version',
+    })
 
     storage.setItem(COLLECTION_OWNERSHIP_KEY, '{this is not json')
-    expect(loadCollectionOwnership(storage, catalog)).toEqual(defaultOwnedStateForCatalog)
+    expect(loadCollectionOwnership(storage, catalog)).toEqual({ok: false, error: 'invalid_json'})
   })
 
   it('does not fall back to v1 when the current key exists but is invalid', () => {
@@ -95,7 +107,10 @@ describe('collection ownership migrations', () => {
       }),
     )
 
-    expect(loadCollectionOwnership(storage, catalog)).toEqual(defaultOwnedStateForCatalog)
+    expect(loadCollectionOwnership(storage, catalog)).toEqual({
+      ok: false,
+      error: 'unsupported_version',
+    })
     expect(storage.getItem(COLLECTION_OWNERSHIP_KEY)).toBe('{"version":999,"payload":{}}')
   })
 
@@ -116,7 +131,7 @@ describe('collection ownership migrations', () => {
       }),
     )
 
-    expect(loadCollectionOwnership(storage, catalog)).toEqual({
+    expectLoadedState(storage).toEqual({
       ownedAwakeners: {'1': 3, '2': 3},
       awakenerLevels: {'1': 70, '2': 70},
       ownedWheels: {B02: 4},
@@ -141,7 +156,7 @@ describe('collection ownership migrations', () => {
       }),
     )
 
-    expect(loadCollectionOwnership(storage, catalog)).toEqual({
+    expectLoadedState(storage).toEqual({
       ownedAwakeners: {'1': 4, '2': 4},
       awakenerLevels: {'1': 72, '2': 72},
       ownedWheels: {B01: 2},
@@ -193,6 +208,158 @@ describe('collection ownership migrations', () => {
         ownedWheels: {B01: 2},
         ownedPosses: {'encounter-in-pure-white': 0},
         displayUnowned: true,
+      },
+    })
+  })
+
+  it('rejects current v2 snapshots with empty payloads instead of defaulting them', () => {
+    expect(
+      parseCollectionOwnershipSnapshot(
+        JSON.stringify({
+          version: 2,
+          payload: {},
+        }),
+        catalog,
+      ),
+    ).toEqual({ok: false, error: 'invalid_payload'})
+  })
+
+  it('rejects current v2 snapshots missing required ownership maps', () => {
+    expect(
+      parseCollectionOwnershipSnapshot(
+        JSON.stringify({
+          version: 2,
+          payload: {
+            ownedAwakeners: {'awakener-0001': 4},
+            awakenerLevels: {'awakener-0001': 72},
+            ownedWheels: {'wheel-0001': 2},
+            displayUnowned: false,
+          },
+        }),
+        {
+          awakenerIds: ['awakener-0001'],
+          wheelIds: ['wheel-0001'],
+          posseIds: ['posse-0001'],
+        },
+      ),
+    ).toEqual({ok: false, error: 'invalid_payload'})
+  })
+
+  it('rejects current v2 snapshots keyed by legacy ids', () => {
+    expect(
+      parseCollectionOwnershipSnapshot(
+        JSON.stringify({
+          version: 2,
+          payload: {
+            ownedAwakeners: {'1': 4},
+            awakenerLevels: {'1': 72},
+            ownedWheels: {B01: 2},
+            ownedPosses: {'encounter-in-pure-white': 0},
+            displayUnowned: false,
+          },
+        }),
+        catalog,
+      ),
+    ).toEqual({ok: false, error: 'invalid_payload'})
+  })
+
+  it('rejects current v2 snapshots with public ids outside the collection public id contract', () => {
+    expect(
+      parseCollectionOwnershipSnapshot(
+        JSON.stringify({
+          version: 2,
+          payload: {
+            ownedAwakeners: {'runtime-new': 4},
+            awakenerLevels: {'runtime-new': 72},
+            ownedWheels: {WheelRuntimeNew: 2},
+            ownedPosses: {'runtime-posse-new': 0},
+            displayUnowned: true,
+          },
+        }),
+        {
+          awakenerIds: ['runtime-new'],
+          wheelIds: ['WheelRuntimeNew'],
+          posseIds: ['runtime-posse-new'],
+        },
+      ),
+    ).toEqual({ok: false, error: 'invalid_payload'})
+  })
+
+  it('rejects current v2 snapshots with non-number ownership values', () => {
+    expect(
+      parseCollectionOwnershipSnapshot(
+        JSON.stringify({
+          version: 2,
+          payload: {
+            ownedAwakeners: {'awakener-0001': 4},
+            awakenerLevels: {'awakener-0001': 72},
+            ownedWheels: {'wheel-0001': '9'},
+            ownedPosses: {'posse-0001': 0},
+            displayUnowned: true,
+          },
+        }),
+        {
+          awakenerIds: ['awakener-0001'],
+          wheelIds: ['wheel-0001'],
+          posseIds: ['posse-0001'],
+        },
+      ),
+    ).toEqual({ok: false, error: 'invalid_payload'})
+  })
+
+  it('rejects current v2 snapshots with invalid awakener level values', () => {
+    expect(
+      parseCollectionOwnershipSnapshot(
+        JSON.stringify({
+          version: 2,
+          payload: {
+            ownedAwakeners: {'awakener-0001': 4},
+            awakenerLevels: {'awakener-0001': '72'},
+            ownedWheels: {'wheel-0001': 9},
+            ownedPosses: {'posse-0001': 0},
+            displayUnowned: true,
+          },
+        }),
+        {
+          awakenerIds: ['awakener-0001'],
+          wheelIds: ['wheel-0001'],
+          posseIds: ['posse-0001'],
+        },
+      ),
+    ).toEqual({ok: false, error: 'invalid_payload'})
+  })
+
+  it('rejects current v2 snapshots with invalid displayUnowned values', () => {
+    expect(
+      parseCollectionOwnershipSnapshot(
+        JSON.stringify({
+          version: 2,
+          payload: {
+            ownedAwakeners: {'awakener-0001': 4},
+            awakenerLevels: {'awakener-0001': 72},
+            ownedWheels: {'wheel-0001': 9},
+            ownedPosses: {'posse-0001': 0},
+            displayUnowned: 'true',
+          },
+        }),
+        {
+          awakenerIds: ['awakener-0001'],
+          wheelIds: ['wheel-0001'],
+          posseIds: ['posse-0001'],
+        },
+      ),
+    ).toEqual({ok: false, error: 'invalid_payload'})
+  })
+
+  it('keeps legacy v1 migration lenient for empty payloads', () => {
+    expect(parseCollectionOwnershipSnapshot('{"version":1,"payload":{}}', catalog)).toEqual({
+      ok: true,
+      migratedFromVersion: 1,
+      state: {
+        ...defaultOwnedStateForCatalog,
+        ownedAwakeners: {},
+        ownedWheels: {},
+        ownedPosses: {},
       },
     })
   })
@@ -282,16 +449,7 @@ describe('collection ownership migrations', () => {
         }),
         catalog,
       ),
-    ).toEqual({
-      ok: true,
-      state: {
-        ownedAwakeners: {},
-        awakenerLevels: {'1': 60, '2': 60},
-        ownedWheels: {},
-        ownedPosses: {},
-        displayUnowned: false,
-      },
-    })
+    ).toEqual({ok: false, error: 'invalid_payload'})
   })
 
   it('does not treat unmapped runtime catalog ids as valid current snapshot ids', () => {
@@ -313,16 +471,7 @@ describe('collection ownership migrations', () => {
           posseIds: ['runtime-posse-new'],
         },
       ),
-    ).toEqual({
-      ok: true,
-      state: {
-        ownedAwakeners: {},
-        awakenerLevels: {'runtime-new': 60},
-        ownedWheels: {},
-        ownedPosses: {},
-        displayUnowned: true,
-      },
-    })
+    ).toEqual({ok: false, error: 'invalid_payload'})
   })
 
   it('fails serialization instead of emitting unmapped runtime ids in current snapshots', () => {

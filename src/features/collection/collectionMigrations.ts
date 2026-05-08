@@ -37,6 +37,8 @@ export type ParseCollectionOwnershipSnapshotResult =
   | {ok: true; state: CollectionOwnershipState; migratedFromVersion?: number}
   | {ok: false; error: 'invalid_json' | 'unsupported_version' | 'invalid_payload'}
 
+export type LoadCollectionOwnershipResult = ParseCollectionOwnershipSnapshotResult
+
 type CollectionOwnershipIdFormat = 'legacy' | 'public'
 type CollectionOwnershipPublicIdKind = 'awakener' | 'wheel' | 'posse'
 
@@ -166,14 +168,133 @@ function createSnapshotIdResolvers(
   }
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return !!value && typeof value === 'object' && !Array.isArray(value)
+}
+
+function hasOnlyValidPublicIds(
+  map: Record<string, unknown>,
+  resolver: (id: string) => string | null,
+  kind: CollectionOwnershipPublicIdKind,
+): boolean {
+  return Object.keys(map).every((id) => isPublicCollectionId(id, kind) && resolver(id) !== null)
+}
+
+function hasOnlyNumberValues(map: Record<string, unknown>): boolean {
+  return Object.values(map).every((value) => typeof value === 'number' && Number.isFinite(value))
+}
+
+function isValidPublicCollectionPayload(
+  payload: unknown,
+  catalog: CollectionOwnershipCatalog,
+): payload is CollectionOwnershipState {
+  if (!isRecord(payload)) {
+    return false
+  }
+
+  const {ownedAwakeners, awakenerLevels, ownedWheels, ownedPosses, displayUnowned} = payload
+
+  if (
+    !isRecord(ownedAwakeners) ||
+    !isRecord(awakenerLevels) ||
+    !isRecord(ownedWheels) ||
+    !isRecord(ownedPosses) ||
+    typeof displayUnowned !== 'boolean'
+  ) {
+    return false
+  }
+
+  const resolvers = createSnapshotIdResolvers(catalog, 'public')
+  return (
+    hasOnlyValidPublicIds(ownedAwakeners, resolvers.awakenerId, 'awakener') &&
+    hasOnlyNumberValues(ownedAwakeners) &&
+    hasOnlyValidPublicIds(awakenerLevels, resolvers.awakenerId, 'awakener') &&
+    hasOnlyNumberValues(awakenerLevels) &&
+    hasOnlyValidPublicIds(ownedWheels, resolvers.wheelId, 'wheel') &&
+    hasOnlyNumberValues(ownedWheels) &&
+    hasOnlyValidPublicIds(ownedPosses, resolvers.posseId, 'posse') &&
+    hasOnlyNumberValues(ownedPosses)
+  )
+}
+
+export function parsePublicCollectionSnapshot(
+  raw: string,
+  publicCatalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
+): ParseCollectionOwnershipSnapshotResult {
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(raw)
+  } catch {
+    return {ok: false, error: 'invalid_json'}
+  }
+
+  if (!isRecord(parsed)) {
+    return {ok: false, error: 'invalid_payload'}
+  }
+
+  const envelope = parsed as Partial<CollectionOwnershipEnvelope>
+  if (typeof envelope.version !== 'number' || envelope.version !== COLLECTION_OWNERSHIP_VERSION) {
+    return {ok: false, error: 'unsupported_version'}
+  }
+  if (!isValidPublicCollectionPayload(envelope.payload, publicCatalog)) {
+    return {ok: false, error: 'invalid_payload'}
+  }
+
+  return {
+    ok: true,
+    state: normalizeCollectionOwnershipState(
+      envelope.payload,
+      publicCatalog,
+      createSnapshotIdResolvers(publicCatalog, 'public'),
+    ),
+  }
+}
+
+export function migrateLegacyCollectionSnapshot(
+  raw: string,
+  legacyCatalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
+  publicCatalog: CollectionOwnershipCatalog = legacyCatalog,
+): ParseCollectionOwnershipSnapshotResult {
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(raw)
+  } catch {
+    return {ok: false, error: 'invalid_json'}
+  }
+
+  if (!isRecord(parsed)) {
+    return {ok: false, error: 'invalid_payload'}
+  }
+
+  const envelope = parsed as Partial<CollectionOwnershipEnvelope>
+  if (
+    typeof envelope.version !== 'number' ||
+    envelope.version !== COLLECTION_OWNERSHIP_LEGACY_VERSION
+  ) {
+    return {ok: false, error: 'unsupported_version'}
+  }
+  if (!envelope.payload || typeof envelope.payload !== 'object') {
+    return {ok: false, error: 'invalid_payload'}
+  }
+
+  return {
+    ok: true,
+    state: normalizeCollectionOwnershipState(
+      envelope.payload,
+      publicCatalog,
+      createSnapshotIdResolvers(publicCatalog, 'legacy'),
+    ),
+    migratedFromVersion: COLLECTION_OWNERSHIP_LEGACY_VERSION,
+  }
+}
+
 export function loadCollectionOwnership(
   storage: StorageLike | null,
   catalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
-): CollectionOwnershipState {
+): LoadCollectionOwnershipResult {
   const raw = safeStorageRead(storage, COLLECTION_OWNERSHIP_KEY)
   if (raw !== null) {
-    const parsed = parseCollectionOwnershipSnapshot(raw, catalog)
-    return parsed.ok ? parsed.state : normalizeCollectionOwnershipState(null, catalog)
+    return parseCollectionOwnershipSnapshot(raw, catalog)
   }
 
   const legacyRaw = safeStorageRead(storage, COLLECTION_OWNERSHIP_LEGACY_KEY)
@@ -181,14 +302,14 @@ export function loadCollectionOwnership(
     const parsed = parseCollectionOwnershipSnapshot(legacyRaw, catalog)
     if (parsed.ok) {
       saveCollectionOwnership(storage, parsed.state, catalog)
-      return parsed.state
+      return parsed
     }
   }
 
-  return normalizeCollectionOwnershipState(null, catalog)
+  return {ok: true, state: normalizeCollectionOwnershipState(null, catalog)}
 }
 
-export function serializeCollectionOwnershipSnapshot(
+export function serializePublicCollectionSnapshot(
   state: CollectionOwnershipState,
   catalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
 ): string {
@@ -203,6 +324,8 @@ export function serializeCollectionOwnershipSnapshot(
   return JSON.stringify(envelope)
 }
 
+export const serializeCollectionOwnershipSnapshot = serializePublicCollectionSnapshot
+
 export function parseCollectionOwnershipSnapshot(
   raw: string,
   catalog: CollectionOwnershipCatalog = createDefaultCollectionOwnershipCatalog(),
@@ -214,7 +337,7 @@ export function parseCollectionOwnershipSnapshot(
     return {ok: false, error: 'invalid_json'}
   }
 
-  if (!parsed || typeof parsed !== 'object') {
+  if (!isRecord(parsed)) {
     return {ok: false, error: 'invalid_payload'}
   }
 
@@ -222,30 +345,13 @@ export function parseCollectionOwnershipSnapshot(
   if (typeof envelope.version !== 'number') {
     return {ok: false, error: 'invalid_payload'}
   }
-  if (
-    envelope.version !== COLLECTION_OWNERSHIP_VERSION &&
-    envelope.version !== COLLECTION_OWNERSHIP_LEGACY_VERSION
-  ) {
-    return {ok: false, error: 'unsupported_version'}
+  if (envelope.version === COLLECTION_OWNERSHIP_VERSION) {
+    return parsePublicCollectionSnapshot(raw, catalog)
   }
-  if (!envelope.payload || typeof envelope.payload !== 'object') {
-    return {ok: false, error: 'invalid_payload'}
+  if (envelope.version === COLLECTION_OWNERSHIP_LEGACY_VERSION) {
+    return migrateLegacyCollectionSnapshot(raw, catalog, catalog)
   }
-
-  return {
-    ok: true,
-    state: normalizeCollectionOwnershipState(
-      envelope.payload,
-      catalog,
-      createSnapshotIdResolvers(
-        catalog,
-        envelope.version === COLLECTION_OWNERSHIP_VERSION ? 'public' : 'legacy',
-      ),
-    ),
-    ...(envelope.version === COLLECTION_OWNERSHIP_LEGACY_VERSION
-      ? {migratedFromVersion: COLLECTION_OWNERSHIP_LEGACY_VERSION}
-      : {}),
-  }
+  return {ok: false, error: 'unsupported_version'}
 }
 
 export function saveCollectionOwnership(

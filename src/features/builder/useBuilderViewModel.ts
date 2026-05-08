@@ -96,12 +96,15 @@ function buildUsedWheelByTeamOrder(teams: Team[]): Map<string, WheelUsageLocatio
 
 export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions) {
   const storage = useMemo(() => getBrowserLocalStorage(), [])
-  useState(() => {
+  const [canAutosaveBuilderDraft, setCanAutosaveBuilderDraft] = useState(() => {
     const persisted = loadBuilderDraft(storage)
-    const initialBuilderState = persisted ?? createDefaultBuilderState()
+    const initialBuilderState =
+      persisted.status === 'loaded' || persisted.status === 'loaded-legacy'
+        ? persisted.draft
+        : createDefaultBuilderState()
     builderDraftStore.getState().hydrateBuilderDraft(initialBuilderState)
     collectionOwnershipStore.getState().hydrate()
-    return true
+    return persisted.status !== 'invalid-current'
   })
   const teams = useStore(builderDraftStore, (state) => state.teams)
   const activeTeamId = useStore(builderDraftStore, (state) => state.activeTeamId)
@@ -482,6 +485,10 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
   )
 
   useEffect(() => {
+    if (!canAutosaveBuilderDraft) {
+      return
+    }
+
     const timeoutId = window.setTimeout(() => {
       saveBuilderDraft(storage, {teams, activeTeamId: effectiveActiveTeamId})
     }, BUILDER_AUTOSAVE_DEBOUNCE_MS)
@@ -489,7 +496,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
     return () => {
       window.clearTimeout(timeoutId)
     }
-  }, [storage, teams, effectiveActiveTeamId])
+  }, [canAutosaveBuilderDraft, storage, teams, effectiveActiveTeamId])
 
   const resolvedActiveSelection = useMemo(() => {
     if (!activeSelection) {
@@ -544,11 +551,13 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
 
   function replaceBuilderDraft(nextDraft: BuilderDraftPayload) {
     storeReplaceBuilderDraft(nextDraft)
+    setCanAutosaveBuilderDraft(true)
     saveBuilderDraft(storage, nextDraft)
   }
 
   function resetBuilderDraft() {
     const nextDraft = storeResetBuilderDraft()
+    setCanAutosaveBuilderDraft(true)
     saveBuilderDraft(storage, nextDraft)
     return nextDraft
   }
