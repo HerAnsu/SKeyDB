@@ -24,7 +24,7 @@ interface UseWheelDetailModalStateOptions {
   wheels: Wheel[]
   fullData: WheelFullRecord
   onClose: () => void
-  onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
+  onSelectWheel?: (wheel: Pick<Wheel, 'id' | 'name'>) => void
 }
 
 export function useWheelDetailModalState({

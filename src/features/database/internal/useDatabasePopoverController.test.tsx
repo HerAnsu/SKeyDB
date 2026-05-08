@@ -1,4 +1,4 @@
-import {fireEvent, render, screen} from '@testing-library/react'
+import {fireEvent, render, screen, waitFor} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 
 import type {AwakenerEnlightenRecord, AwakenerSkillRecord} from '@/domain/awakener-source-schema'
@@ -6,6 +6,7 @@ import type {
   DatabaseReferenceInfo,
   ResolvedDatabaseReferenceLayer,
 } from '@/domain/database-reference-layer'
+import * as globalDatabaseReferenceLayer from '@/domain/global-database-reference-layer'
 import type {PublicDescriptionArg} from '@/domain/public-description-args'
 import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
@@ -186,7 +187,7 @@ function ControllerHarness({
 }: {
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
-  onNavigateToWheelPage?: (wheel: {name: string}) => void
+  onNavigateToWheelPage?: (wheel: {id: string; name: string}) => void
   onOuterClick?: () => void
   formulaContext?: PublicFormulaContext
 }) {
@@ -326,6 +327,40 @@ describe('useDatabasePopoverController', () => {
     expect(screen.getByText('Wheel · SSR · Caro')).toBeInTheDocument()
   })
 
+  it('ignores stale root hydration after another root opens', async () => {
+    let resolveHydration: ((reference: DatabaseReferenceInfo) => void) | undefined
+    vi.spyOn(
+      globalDatabaseReferenceLayer,
+      'hydrateGlobalDatabaseReferenceInfo',
+    ).mockImplementationOnce(
+      (reference) =>
+        new Promise<DatabaseReferenceInfo>((resolve) => {
+          resolveHydration = () => {
+            resolve({...reference, description: 'Hydrated wheel text.'})
+          }
+        }),
+    )
+    const referenceLayer = buildReferenceLayer('Base text.')
+    const wheelReference = referenceLayer.referenceInfoByName.get('merciful nurturing')
+    if (!wheelReference) {
+      throw new Error('Expected test wheel reference')
+    }
+    wheelReference.description = ''
+
+    render(<ControllerHarness referenceLayer={referenceLayer} />)
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Wheel'}))
+    fireEvent.click(screen.getByRole('button', {name: 'Open Guard'}))
+    expect(await screen.findByText('Guard text.')).toBeInTheDocument()
+
+    resolveHydration?.(wheelReference)
+
+    await waitFor(() => {
+      expect(screen.queryByText('Hydrated wheel text.')).not.toBeInTheDocument()
+      expect(screen.getByText('Guard text.')).toBeInTheDocument()
+    })
+  })
+
   it('threads formula context from controller options into popover content', async () => {
     render(
       <ControllerHarness
@@ -353,6 +388,9 @@ describe('useDatabasePopoverController', () => {
     fireEvent.click(screen.getByRole('button', {name: 'Open Wheel Preview'}))
     fireEvent.click(await screen.findByRole('button', {name: /Open in Wheels DB/i}))
 
-    expect(onNavigateToWheelPage).toHaveBeenCalledWith({name: 'Merciful Nurturing'})
+    expect(onNavigateToWheelPage).toHaveBeenCalledWith({
+      id: 'wheel.preview.B01',
+      name: 'Merciful Nurturing',
+    })
   })
 })

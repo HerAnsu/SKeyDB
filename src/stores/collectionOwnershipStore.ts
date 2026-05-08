@@ -3,7 +3,6 @@ import {createStore} from 'zustand/vanilla'
 import {
   clearOwnedEntry,
   createDefaultCollectionOwnershipCatalog,
-  getOwnedLevel,
   normalizeCollectionOwnershipState,
   setAwakenerLevel as setDomainAwakenerLevel,
   setDisplayUnowned as setDomainDisplayUnowned,
@@ -35,7 +34,6 @@ export interface CollectionOwnershipStoreState {
   updateOwnership: (
     updater: (ownership: CollectionOwnershipState) => CollectionOwnershipState,
   ) => void
-  toggleOwned: (kind: CollectionOwnershipKind, id: string) => void
   setOwnedLevel: (kind: CollectionOwnershipKind, id: string, level: number) => void
   clearOwned: (kind: CollectionOwnershipKind, id: string) => void
   setAwakenerLevel: (id: string, level: number) => void
@@ -84,11 +82,6 @@ export function createCollectionOwnershipStore({
   storage = null,
 }: CreateCollectionOwnershipStoreOptions = {}) {
   const initialOwnership = normalizeCollectionOwnershipState(null, catalog)
-  const rememberedLevels: Record<CollectionOwnershipKind, Record<string, number>> = {
-    awakeners: {},
-    wheels: {},
-    posses: {},
-  }
   let hydratedCurrentSnapshot: string | null | undefined
   let hydratedLegacySnapshot: string | null | undefined
 
@@ -145,26 +138,6 @@ export function createCollectionOwnershipStore({
       set((state) => ({
         ownership: normalizeCollectionOwnershipState(updater(state.ownership), catalog),
       }))
-    },
-    toggleOwned: (kind, id) => {
-      set((state) => {
-        const currentLevel = getOwnedLevel(state.ownership, kind, id)
-        if (currentLevel !== null) {
-          rememberedLevels[kind][id] = currentLevel
-        }
-        return {
-          ownership:
-            currentLevel === null
-              ? setDomainOwnedLevel(
-                  state.ownership,
-                  kind,
-                  id,
-                  rememberedLevels[kind][id] ?? 0,
-                  catalog,
-                )
-              : clearOwnedEntry(state.ownership, kind, id, catalog),
-        }
-      })
     },
     setOwnedLevel: (kind, id, level) => {
       set((state) => ({

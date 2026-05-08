@@ -24,7 +24,7 @@ interface WheelDetailModalProps {
   fullData: WheelFullRecord
   onClose: () => void
   onSelectAwakener?: (awakener: {id: string; name: string}, tab?: DatabaseAwakenerTab) => void
-  onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
+  onSelectWheel?: (wheel: Pick<Wheel, 'id' | 'name'>) => void
 }
 
 export function WheelDetailModal({

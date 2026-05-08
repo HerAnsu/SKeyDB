@@ -64,13 +64,15 @@ const INITIAL_QUERY_BY_TAB: Record<CollectionTab, string> = {
   wheels: '',
   posses: '',
 }
-const INITIAL_REMEMBERED_LEVELS: Record<
+export function createInitialRememberedLevels(): Record<
   'awakeners' | 'wheels' | 'posses',
   RememberedOwnershipLevels
-> = {
-  awakeners: {},
-  wheels: {},
-  posses: {},
+> {
+  return {
+    awakeners: {},
+    wheels: {},
+    posses: {},
+  }
 }
 const OWNERSHIP_AUTOSAVE_DEBOUNCE_MS = 220
 const COLLECTION_AWAKENER_SORT_KEY = 'skeydb.collection.awakenerSort.v1'
@@ -217,7 +219,7 @@ export function useCollectionViewModel() {
   const [awakenerSortGroupByRealm, setAwakenerSortGroupByRealm] = useState(
     persistedAwakenerSortConfig.groupByRealm,
   )
-  const rememberedLevelsRef = useRef(INITIAL_REMEMBERED_LEVELS)
+  const rememberedLevelsRef = useRef(createInitialRememberedLevels())
 
   const awakeners = useMemo(
     () =>
@@ -461,7 +463,9 @@ export function useCollectionViewModel() {
       setAwakenerSortHasPendingChanges(true)
       return
     }
-    setWheelSortHasPendingChanges(true)
+    if (kind === 'wheels') {
+      setWheelSortHasPendingChanges(true)
+    }
   }
 
   function increaseLevel(kind: 'awakeners' | 'wheels', id: string) {

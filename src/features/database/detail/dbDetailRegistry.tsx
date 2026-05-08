@@ -41,8 +41,8 @@ export type DatabaseDetailKind = Extract<EntityKind, 'awakener' | 'wheel' | 'pos
 export interface DatabaseDetailRenderCallbacks {
   onClose: () => void
   onSelectAwakener: (awakener: Pick<Awakener, 'id' | 'name'>, tab?: DatabaseAwakenerTab) => void
-  onSelectWheel: (wheel: Pick<Wheel, 'name'>) => void
-  onSelectCovenant: (covenant: Pick<Covenant, 'name'>) => void
+  onSelectWheel: (wheel: Pick<Wheel, 'id' | 'name'>) => void
+  onSelectCovenant: (covenant: Pick<Covenant, 'id' | 'name'>) => void
   onTabChange: (tab: DatabaseAwakenerTab) => void
 }
 

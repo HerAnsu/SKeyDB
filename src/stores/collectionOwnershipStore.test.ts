@@ -106,7 +106,7 @@ describe('collectionOwnershipStore', () => {
     expect(storage.getItem(COLLECTION_OWNERSHIP_KEY)).toBe('{"version":999,"payload":{}}')
   })
 
-  it('keeps linked awakener ownership, remembered levels, and display-unowned in the store', () => {
+  it('keeps linked awakener ownership and display-unowned in the store', () => {
     const storage = createStorage()
     const store = createCollectionOwnershipStore({catalog, storage})
     store.getState().hydrate()
@@ -117,13 +117,13 @@ describe('collectionOwnershipStore', () => {
       'awakener-0002': 6,
     })
 
-    store.getState().toggleOwned('awakeners', 'awakener-0001')
+    store.getState().clearOwned('awakeners', 'awakener-0001')
     expect(store.getState().ownership.ownedAwakeners).toEqual({})
 
-    store.getState().toggleOwned('awakeners', 'awakener-0001')
+    store.getState().setOwnedLevel('awakeners', 'awakener-0001', 0)
     expect(store.getState().ownership.ownedAwakeners).toEqual({
-      'awakener-0001': 6,
-      'awakener-0002': 6,
+      'awakener-0001': 0,
+      'awakener-0002': 0,
     })
 
     store.getState().setAwakenerLevel('awakener-0001', 88)

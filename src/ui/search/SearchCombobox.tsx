@@ -43,8 +43,12 @@ export function SearchCombobox<TResult>({
   const optionRefs = useRef<Record<number, HTMLButtonElement | null>>({})
   const searchId = useId()
   const resultsId = `${searchId}-results`
-  const activeOptionId = hasResults
-    ? `${searchId}-option-${String(getResultId(results[activeIndex]))}`
+  const clampedActiveIndex = hasResults
+    ? Math.min(Math.max(activeIndex, 0), results.length - 1)
+    : -1
+  const activeResult = hasResults ? results[clampedActiveIndex] : undefined
+  const activeOptionId = activeResult
+    ? `${searchId}-option-${String(getResultId(activeResult))}`
     : undefined
 
   useEffect(() => {
@@ -52,13 +56,13 @@ export function SearchCombobox<TResult>({
       return
     }
 
-    const activeOption = optionRefs.current[activeIndex]
+    const activeOption = optionRefs.current[clampedActiveIndex]
     if (typeof activeOption?.scrollIntoView !== 'function') {
       return
     }
 
     activeOption.scrollIntoView({block: 'nearest'})
-  }, [activeIndex, hasResults])
+  }, [clampedActiveIndex, hasResults])
 
   return (
     <div className='relative w-full' data-detail-modal-external='' ref={containerRef}>
@@ -94,7 +98,7 @@ export function SearchCombobox<TResult>({
             role='listbox'
           >
             {results.map((result, index) => {
-              const active = index === activeIndex
+              const active = index === clampedActiveIndex
               const optionId = `${searchId}-option-${String(getResultId(result))}`
 
               return (

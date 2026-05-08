@@ -1,5 +1,7 @@
 import {useMemo, useRef, type ChangeEvent, type WheelEvent} from 'react'
 
+import {useStore} from 'zustand'
+
 import {Toast} from '@/components/ui/Toast'
 import {useTimedToast} from '@/components/ui/useTimedToast'
 import {getAwakeners} from '@/domain/awakeners'
@@ -38,6 +40,9 @@ export function CollectionPage() {
   const awakeners = useMemo(() => getAwakeners(), [])
   const covenants = useMemo(() => getCovenants(), [])
   const wheels = useMemo(() => getWheels(), [])
+  const hasDetailOverlayOpen = useStore(dbDetailStore, (state) =>
+    state.stack.some((entry) => entry.source !== 'database-route'),
+  )
   const ownedAwakenersForBoxExport = useMemo(
     () => createOwnedAwakenerBoxEntries(model.getAwakenerOwnedLevel, model.getAwakenerLevel),
     [model.getAwakenerOwnedLevel, model.getAwakenerLevel],
@@ -48,6 +53,7 @@ export function CollectionPage() {
   )
 
   useGlobalSearchCapture({
+    enabled: !hasDetailOverlayOpen,
     searchInputRef,
     onAppendCharacter: model.appendSearchCharacter,
     onRemoveCharacter: model.removeSearchCharacter,
@@ -204,7 +210,10 @@ export function CollectionPage() {
             dbDetailStore.getState().pushReferenceDetail({kind: 'awakener', id: awakener.id})
           },
           onSelectCovenant: (covenant) => {
-            const matchingCovenant = covenants.find((entry) => entry.name === covenant.name)
+            const matchingCovenant =
+              'id' in covenant && typeof covenant.id === 'string'
+                ? covenants.find((entry) => entry.id === covenant.id)
+                : covenants.find((entry) => entry.name === covenant.name)
             if (matchingCovenant) {
               dbDetailStore
                 .getState()
@@ -212,7 +221,10 @@ export function CollectionPage() {
             }
           },
           onSelectWheel: (wheel) => {
-            const matchingWheel = wheels.find((entry) => entry.name === wheel.name)
+            const matchingWheel =
+              'id' in wheel && typeof wheel.id === 'string'
+                ? wheels.find((entry) => entry.id === wheel.id)
+                : wheels.find((entry) => entry.name === wheel.name)
             if (matchingWheel) {
               dbDetailStore.getState().pushReferenceDetail({kind: 'wheel', id: matchingWheel.id})
             }

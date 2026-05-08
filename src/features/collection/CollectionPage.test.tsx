@@ -148,6 +148,21 @@ describe('CollectionPage global search capture', () => {
     expect(searchbox).toHaveFocus()
   })
 
+  it('does not capture global typing while a collection detail overlay is open', () => {
+    act(() => {
+      dbDetailStore
+        .getState()
+        .openDetail({kind: 'awakener', id: 'awakener-0042'}, 'collection-overlay')
+    })
+
+    render(<CollectionPage />)
+
+    fireEvent.keyDown(window, {key: 'r'})
+
+    expect(screen.getByRole('searchbox')).toHaveValue('')
+    expect(screen.getByRole('dialog')).toHaveTextContent('Detail host: awakener:awakener-0042')
+  })
+
   it('clears searchbox on Escape', () => {
     render(<CollectionPage />)
 

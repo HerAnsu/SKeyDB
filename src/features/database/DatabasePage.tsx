@@ -232,14 +232,14 @@ export function DatabasePage({routeEntity}: DatabasePageProps = {}) {
     })
   }
 
-  function handleModalWheelSelect(nextWheel: Pick<Wheel, 'name'>) {
+  function handleModalWheelSelect(nextWheel: Pick<Wheel, 'id' | 'name'>) {
     void navigate({
       pathname: buildDatabaseWheelPath(nextWheel),
       search: sanitizeDatabaseEntitySearch('wheels', activeSearch),
     })
   }
 
-  function handleModalCovenantSelect(nextCovenant: Pick<Covenant, 'name'>) {
+  function handleModalCovenantSelect(nextCovenant: Pick<Covenant, 'id' | 'name'>) {
     void navigate({
       pathname: buildDatabaseCovenantPath(nextCovenant),
       search: sanitizeDatabaseEntitySearch('covenants', activeSearch),

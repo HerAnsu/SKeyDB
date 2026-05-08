@@ -7,7 +7,7 @@ import {useDetailEntitySearch} from './useDetailEntitySearch'
 
 interface UseWheelDetailSearchOptions {
   wheels: Wheel[]
-  onSelectWheel?: (wheel: Pick<Wheel, 'name'>) => void
+  onSelectWheel?: (wheel: Pick<Wheel, 'id' | 'name'>) => void
 }
 
 export function useWheelDetailSearch({wheels, onSelectWheel}: UseWheelDetailSearchOptions) {

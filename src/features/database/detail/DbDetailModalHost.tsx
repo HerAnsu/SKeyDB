@@ -83,7 +83,10 @@ function resolveAwakenerRef(
   return byName ? {kind: 'awakener', id: byName.id} : null
 }
 
-function resolveWheelRef(wheels: Wheel[], wheel: Pick<Wheel, 'name'>): EntityRef | null {
+function resolveWheelRef(
+  wheels: Wheel[],
+  wheel: Pick<Wheel, 'name'> & Partial<Pick<Wheel, 'id'>>,
+): EntityRef | null {
   if ('id' in wheel && typeof wheel.id === 'string') {
     const byId = wheels.find((entry) => entry.id === wheel.id)
     if (byId) {
@@ -96,7 +99,9 @@ function resolveWheelRef(wheels: Wheel[], wheel: Pick<Wheel, 'name'>): EntityRef
   return byName ? {kind: 'wheel', id: byName.id} : null
 }
 
-function resolveCovenantRef(covenant: Pick<Covenant, 'name'>): EntityRef | null {
+function resolveCovenantRef(
+  covenant: Pick<Covenant, 'name'> & Partial<Pick<Covenant, 'id'>>,
+): EntityRef | null {
   if ('id' in covenant && typeof covenant.id === 'string') {
     const byId = getCovenants().find((entry) => entry.id === covenant.id)
     if (byId) {

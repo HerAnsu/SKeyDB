@@ -6,7 +6,7 @@ import {
   COLLECTION_OWNERSHIP_LEGACY_KEY,
 } from '@/features/collection/collectionMigrations'
 
-import {useCollectionViewModel} from './useCollectionViewModel'
+import {createInitialRememberedLevels, useCollectionViewModel} from './useCollectionViewModel'
 
 const COLLECTION_AWAKENER_SORT_KEY = 'skeydb.collection.awakenerSort.v1'
 
@@ -84,6 +84,15 @@ describe('useCollectionViewModel', () => {
       result.current.toggleOwned('wheels', 'wheel-0095')
     })
     expect(result.current.getWheelOwnedLevel('wheel-0095')).toBe(3)
+  })
+
+  it('creates independent remembered-level containers per hook instance', () => {
+    const first = createInitialRememberedLevels()
+    const second = createInitialRememberedLevels()
+
+    first.wheels['wheel-0095'] = 7
+
+    expect(second.wheels['wheel-0095']).toBeUndefined()
   })
 
   it('appends and clears search query on active tab', () => {
@@ -288,6 +297,18 @@ describe('useCollectionViewModel', () => {
     act(() => {
       result.current.applyWheelSortChanges()
     })
+    expect(result.current.wheelSortHasPendingChanges).toBe(false)
+  })
+
+  it('does not mark wheel sort pending when toggling posse ownership', () => {
+    const {result} = renderHook(() => useCollectionViewModel())
+
+    expect(result.current.wheelSortHasPendingChanges).toBe(false)
+
+    act(() => {
+      result.current.toggleOwned('posses', 'posse-0001')
+    })
+
     expect(result.current.wheelSortHasPendingChanges).toBe(false)
   })
 })

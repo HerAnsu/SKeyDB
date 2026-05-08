@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useId, useMemo, useState} from 'react'
+import {useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
 
 import type {AwakenerEnlightenRecord, AwakenerOverlayRecord} from '@/domain/awakener-source-schema'
 import {
@@ -34,8 +34,8 @@ interface DatabasePopoverControllerOptions {
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
   stats?: import('@/domain/awakener-source-schema').FullStats | null
   onNavigateToSkills?: () => void
-  onNavigateToWheelPage?: (wheel: {name: string}) => void
-  onNavigateToCovenantPage?: (covenant: {name: string}) => void
+  onNavigateToWheelPage?: (wheel: {id: string; name: string}) => void
+  onNavigateToCovenantPage?: (covenant: {id: string; name: string}) => void
   onToggleEnlightenSlot?: (slot: AwakenerEnlightenRecord['slot']) => void
   showVisibleScaling?: boolean
   showTagIcons?: boolean
@@ -63,13 +63,20 @@ export function useDatabasePopoverController({
   const [trail, setTrail] = useState<TrailEntry[]>([])
   const [trailAnchorRect, setTrailAnchorRect] = useState<DOMRect | null>(null)
   const [trailAnchorElement, setTrailAnchorElement] = useState<HTMLElement | null>(null)
+  const rootHydrationRequestRef = useRef(0)
   const ownerId = useId()
 
+  const invalidateRootHydration = useCallback(() => {
+    rootHydrationRequestRef.current += 1
+    return rootHydrationRequestRef.current
+  }, [])
+
   const clearTrail = useCallback(() => {
+    invalidateRootHydration()
     setTrail([])
     setTrailAnchorRect(null)
     setTrailAnchorElement(null)
-  }, [])
+  }, [invalidateRootHydration])
 
   useEffect(() => {
     function handleTrailOpened(event: Event) {
@@ -184,13 +191,14 @@ export function useDatabasePopoverController({
       if (isSameTrailRoot(trail, entry.key)) {
         return
       }
+      invalidateRootHydration()
       const anchorElement = event.currentTarget
       announceTrailOpened()
       setTrailAnchorElement(anchorElement)
       setTrailAnchorRect(anchorElement.getBoundingClientRect())
       setTrail((prev) => openTrailRoot(prev, entry))
     },
-    [announceTrailOpened, trail],
+    [announceTrailOpened, invalidateRootHydration, trail],
   )
 
   const openRootTrailEntryAtAnchor = useCallback(
@@ -198,12 +206,13 @@ export function useDatabasePopoverController({
       if (isSameTrailRoot(trail, entry.key)) {
         return
       }
+      invalidateRootHydration()
       announceTrailOpened()
       setTrailAnchorElement(anchorElement)
       setTrailAnchorRect(anchorRect)
       setTrail((prev) => openTrailRoot(prev, entry))
     },
-    [announceTrailOpened, trail],
+    [announceTrailOpened, invalidateRootHydration, trail],
   )
 
   const openRootReferenceByName = useCallback(
@@ -223,7 +232,11 @@ export function useDatabasePopoverController({
       }
       const anchorElement = event.currentTarget
       const anchorRect = anchorElement.getBoundingClientRect()
+      const hydrationRequest = invalidateRootHydration()
       void hydrateReference(reference).then((hydratedReference) => {
+        if (hydrationRequest !== rootHydrationRequestRef.current) {
+          return
+        }
         openRootTrailEntryAtAnchor(
           buildSelectedTrailEntry(hydratedReference),
           anchorElement,
@@ -234,6 +247,7 @@ export function useDatabasePopoverController({
     [
       buildSelectedTrailEntry,
       hydrateReference,
+      invalidateRootHydration,
       openRootTrailEntryAtAnchor,
       resolveReferenceByNameFromCurrentLayer,
     ],
@@ -267,15 +281,20 @@ export function useDatabasePopoverController({
         if (!reference) {
           return prev
         }
+        const sourceIndex = prev.length - 1
+        const sourceKey = sourceEntry?.key
         void hydrateReference(reference).then((hydratedReference) => {
           setTrail((current) => {
-            const currentSourceEntry = current.at(-1)
+            const currentSourceEntry = current.at(sourceIndex)
+            if (!sourceKey || currentSourceEntry?.key !== sourceKey) {
+              return current
+            }
             const entry = buildTrailEntry(
               hydratedReference,
-              currentSourceEntry?.selectedEnlightenSlot ?? selectedEnlightenSlot,
-              currentSourceEntry?.referenceLayerOverride ?? null,
+              currentSourceEntry.selectedEnlightenSlot ?? selectedEnlightenSlot,
+              currentSourceEntry.referenceLayerOverride ?? null,
             )
-            return insertTrailEntryAfterIndex(current, current.length - 1, entry)
+            return insertTrailEntryAfterIndex(current, sourceIndex, entry)
           })
         })
         return prev
@@ -310,13 +329,17 @@ export function useDatabasePopoverController({
         if (!reference) {
           return prev
         }
+        const sourceKey = sourceEntry?.key
         void hydrateReference(reference).then((hydratedReference) => {
           setTrail((current) => {
             const currentSourceEntry = current.at(sourceIndex)
+            if (!sourceKey || currentSourceEntry?.key !== sourceKey) {
+              return current
+            }
             const entry = buildTrailEntry(
               hydratedReference,
-              currentSourceEntry?.selectedEnlightenSlot ?? selectedEnlightenSlot,
-              currentSourceEntry?.referenceLayerOverride ?? null,
+              currentSourceEntry.selectedEnlightenSlot ?? selectedEnlightenSlot,
+              currentSourceEntry.referenceLayerOverride ?? null,
             )
             return insertTrailEntryAfterIndex(current, sourceIndex, entry)
           })
@@ -441,12 +464,18 @@ export function useDatabasePopoverController({
               : navigationTarget?.kind === 'wheel-page' && onNavigateToWheelPage
                 ? () => {
                     clearTrail()
-                    onNavigateToWheelPage({name: navigationTarget.wheelName})
+                    onNavigateToWheelPage({
+                      id: activeEntry.referenceId ?? activeEntry.key,
+                      name: navigationTarget.wheelName,
+                    })
                   }
                 : navigationTarget?.kind === 'covenant-page' && onNavigateToCovenantPage
                   ? () => {
                       clearTrail()
-                      onNavigateToCovenantPage({name: navigationTarget.covenantName})
+                      onNavigateToCovenantPage({
+                        id: activeEntry.referenceId ?? activeEntry.key,
+                        name: navigationTarget.covenantName,
+                      })
                     }
                   : undefined,
           onSkillTokenClick: (name: string) => {
