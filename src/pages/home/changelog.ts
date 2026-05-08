@@ -5,6 +5,26 @@ export interface ChangelogItem {
 
 export const changelogItems: ChangelogItem[] = [
   {
+    date: '2026-05-08',
+    summary:
+      'The database is much bigger now: Wheels, Posses, and Covenants have their own browse pages and detail popups alongside Awakeners.',
+  },
+  {
+    date: '2026-05-08',
+    summary:
+      'Search and related-entry links got a reliability pass, so database popups and cross-links should open the right thing more consistently.',
+  },
+  {
+    date: '2026-05-08',
+    summary:
+      'Builder and Collection saves/imports are more careful around broken local data, which should make planning and tracking less scary to rely on.',
+  },
+  {
+    date: '2026-05-08',
+    summary:
+      'Many database entries were cleaned up so names, detail pages, images, and related links should stay more consistent as more content is added.',
+  },
+  {
     date: '2026-03-06',
     summary:
       "Added the ability to 'Level Up' characters to scale their stats and skills in real time, thanks to Jynn for the super helpful spreadsheet that made this possible. Lots of other fixes and tweaks to the db!",
