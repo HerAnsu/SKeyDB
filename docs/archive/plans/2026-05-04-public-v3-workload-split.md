@@ -1,8 +1,10 @@
 # Public V3 DB Architecture Workload Split
 
+> Archived: 2026-05-08. This workload split was superseded by the completed public-v3 migration/remediation work; it is historical context, not an active execution checklist.
+
 > **Status:** Draft scope split after `docs/notes/2026-05-04-architecture-review.md`.
 > This is not an implementation plan. It is the sequencing boundary for later plans.
-> **Website update:** The current TypeScript remainder plan is `docs/superpowers/plans/2026-05-05-public-v3-typescript-remainder.md`. Workload B in this document is source inventory, not the execution checklist.
+> **Website update:** The TypeScript remainder plan moved to `docs/archive/plans/2026-05-05-public-v3-typescript-remainder.md`. Workload B in this document is source inventory, not the execution checklist.
 
 **Goal:** Move DB/content compiler responsibilities into `MomenTB-Tools` first, then make the website consume generated `public-v3` projections through a repository layer.
 

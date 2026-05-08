@@ -1,5 +1,7 @@
 # Public V3 TypeScript Remainder Implementation Plan
 
+> Archived: 2026-05-08. This internal agent plan has been completed/superseded by the final public-v3 remediation commits; it is historical context, not an active execution checklist.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Do not create worktrees or sub-branches for this branch. If subagents are explicitly re-enabled by the user, use them only for read-only exploration unless a later instruction says otherwise.
 
 **Goal:** Finish the remaining website TypeScript migration after the V3 data bundle landed: remove frontend compiler slop, split the app into feature boundaries, centralize runtime/user state, preserve shipped persistence migrations, and keep computed output/formula behavior locked.
@@ -18,7 +20,7 @@ This plan inventories and supersedes the website-side TypeScript portions of:
 - `docs/plans/2026-05-04-public-v3-workload-split.md`, mainly Workload B
 - `docs/plans/2026-05-04-covenant-posse-db-deslop.md`
 - `docs/notes/2026-05-04-covenant-posse-db-audit.md`
-- `docs/superpowers/plans/2026-05-05-public-v3-frontend-migration.md`
+- `docs/archive/plans/2026-05-05-public-v3-frontend-migration.md`
 
 The tooling-side Workload A is treated as already handed off for this TypeScript plan because the website now has `src/data/public-v3` with manifest, catalogs, records, indexes, and gameplay metadata.
 

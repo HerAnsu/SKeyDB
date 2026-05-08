@@ -1,5 +1,7 @@
 # Database Wheels Implementation Plan
 
+> Archived: 2026-05-08. This plan shipped or was superseded during the public-v3 migration work; it is historical context, not an active execution checklist.
+
 **Goal:** Build a wheels database page and modal flow that mirrors the awakener database UX while reusing as much shared browse, modal, rich-text, and popover infrastructure as possible.
 
 **Architecture:** Treat wheels as a second database entity living inside the same route-backed database shell, not as a separate one-off page. Reuse the current awakeners browse/modal patterns where they are genuinely generic, extract the chrome and routing seams that should be shared, and keep wheel-specific search/filter/detail logic in dedicated domain modules. Wheel descriptions should render through the same rich-text pipeline as awakeners, while wheel popovers should reuse the existing popover shell with wheel-specific reference adapters and entity-aware navigation helpers.

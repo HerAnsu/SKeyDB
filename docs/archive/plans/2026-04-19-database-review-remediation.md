@@ -1,5 +1,7 @@
 # Database Review Remediation Plan
 
+> Archived: 2026-05-08. This plan shipped or was superseded during the public-v3 migration work; it is historical context, not an active execution checklist.
+
 > **For agentic workers:** REQUIRED: Use `superpowers:subagent-driven-development` if subagents are available. Steps use checkbox syntax for tracking.
 
 **Goal:** Remove the cross-page ownership leaks, duplicated database infrastructure, and React lifecycle drift identified in the Wheels vs Awakener database review.

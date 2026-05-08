@@ -1,5 +1,7 @@
 # 07 - Final Closure Audit
 
+> Archived: 2026-05-08. This was an internal review-remediation closure audit for the public-v3 migration branch, not product-facing documentation or an active plan.
+
 This audit re-reads `00-review.md` through `06-planner-scope.md` after remediation Plans 1-7. Statuses are based on the current branch state, not on intent.
 
 | Source | Finding | Status | Evidence | Follow-up |

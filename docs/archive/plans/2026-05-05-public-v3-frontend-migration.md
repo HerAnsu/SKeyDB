@@ -1,6 +1,8 @@
 # Public V3 Frontend Migration Implementation Plan
 
-> **Status:** Superseded by `docs/superpowers/plans/2026-05-05-public-v3-typescript-remainder.md`.
+> Archived: 2026-05-08. This internal agent plan was superseded by the completed public-v3 migration/remediation work; it is historical context, not an active execution checklist.
+
+> **Status:** Superseded by `docs/archive/plans/2026-05-05-public-v3-typescript-remainder.md`.
 > This document captured the first V3 data-consumption pass. Use the remainder plan for the actual remaining TypeScript architecture work.
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.

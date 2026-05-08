@@ -1,6 +1,8 @@
 # Covenant Posse DB Deslop Implementation Plan
 
-> **Status:** Superseded for TypeScript execution by `docs/superpowers/plans/2026-05-05-public-v3-typescript-remainder.md`.
+> Archived: 2026-05-08. This plan was superseded by the public-v3 migration/remediation work; it is historical context, not an active execution checklist.
+
+> **Status:** Superseded for TypeScript execution by `docs/archive/plans/2026-05-05-public-v3-typescript-remainder.md`.
 > Keep this document as audit/source material only. Its V2 stabilization steps are branch-local draft cleanup and should not be executed as the main queue.
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development` (recommended) or `superpowers:executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
