@@ -6,7 +6,10 @@ import {
 } from '@/data-access/public-data/assetRepository'
 import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
-import {descriptionArgsSchema, type DescriptionArg} from './awakener-source-schema'
+import {
+  publicDescriptionArgsSchema,
+  type PublicDescriptionArg,
+} from './public-description-args.schema'
 
 export interface PosseFullRecord {
   id: string
@@ -18,7 +21,7 @@ export interface PosseFullRecord {
   ownerAwakenerId?: string
   ownerAwakenerName?: string
   descriptionTemplate: string
-  descriptionArgs: Record<string, DescriptionArg>
+  descriptionArgs: Record<string, PublicDescriptionArg>
   lore?: string
   acquisitionSource?: string
 }
@@ -30,7 +33,7 @@ const publicPosseRecordSchema = z.object({
   ownerAwakenerId: z.string().optional(),
   ownerAwakenerName: z.string().optional(),
   descriptionTemplate: z.string(),
-  descriptionArgs: descriptionArgsSchema,
+  descriptionArgs: publicDescriptionArgsSchema,
   lore: z.string().optional(),
   acquisitionSource: z.string().optional(),
 })

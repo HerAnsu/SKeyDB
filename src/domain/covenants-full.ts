@@ -6,12 +6,15 @@ import {
 } from '@/data-access/public-data/assetRepository'
 import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
-import {descriptionArgsSchema, type DescriptionArg} from './awakener-source-schema'
+import {
+  publicDescriptionArgsSchema,
+  type PublicDescriptionArg,
+} from './public-description-args.schema'
 
 export interface CovenantSetEffectRecord {
   set: number
   descriptionTemplate: string
-  descriptionArgs: Record<string, DescriptionArg>
+  descriptionArgs: Record<string, PublicDescriptionArg>
 }
 
 export interface CovenantFullRecord {
@@ -30,7 +33,7 @@ const publicCovenantRecordSchema = z.object({
     z.object({
       set: z.number(),
       descriptionTemplate: z.string(),
-      descriptionArgs: descriptionArgsSchema,
+      descriptionArgs: publicDescriptionArgsSchema,
     }),
   ),
   lore: z.string().optional(),

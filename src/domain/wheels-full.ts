@@ -6,7 +6,10 @@ import {
 } from '@/data-access/public-data/assetRepository'
 import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
-import {descriptionArgsSchema, type DescriptionArg} from './awakener-source-schema'
+import {
+  publicDescriptionArgsSchema,
+  type PublicDescriptionArg,
+} from './public-description-args.schema'
 import {buildWheelMainstatSeriesKey, type WheelMainstatKey} from './wheel-mainstat-scaling'
 
 export interface WheelFullRecord {
@@ -23,7 +26,7 @@ export interface WheelFullRecord {
   mainstatKey: WheelMainstatKey
   mainstatSeriesKey: string
   descriptionTemplate: string
-  descriptionArgs: Record<string, DescriptionArg>
+  descriptionArgs: Record<string, PublicDescriptionArg>
   lore?: string
 }
 
@@ -39,7 +42,7 @@ const publicWheelRecordSchema = z.object({
   mainstatKey: z.custom<WheelMainstatKey>((value) => typeof value === 'string'),
   mainstatSeriesKey: z.string().optional(),
   descriptionTemplate: z.string(),
-  descriptionArgs: descriptionArgsSchema,
+  descriptionArgs: publicDescriptionArgsSchema,
   lore: z.string().optional(),
 })
 

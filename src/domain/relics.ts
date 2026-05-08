@@ -6,9 +6,9 @@ import {
 } from '@/data-access/public-data/assetRepository'
 import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
 
-import {descriptionArgsSchema} from './awakener-source-schema'
 import {getAwakeners} from './awakeners'
 import {resolveDescriptionTemplate} from './description-args'
+import {publicDescriptionArgsSchema} from './public-description-args.schema'
 
 const nonEmptyStringSchema = z.string().trim().min(1)
 
@@ -23,13 +23,13 @@ const publicRelicRecordSchema = z
       .optional(),
     ownerAwakenerName: nonEmptyStringSchema.optional(),
     descriptionTemplate: z.string(),
-    descriptionArgs: descriptionArgsSchema,
+    descriptionArgs: publicDescriptionArgsSchema,
   })
   .loose()
 
 function renderRelicDescription(
   descriptionTemplate: string,
-  descriptionArgs: z.infer<typeof descriptionArgsSchema>,
+  descriptionArgs: z.infer<typeof publicDescriptionArgsSchema>,
 ): string {
   return resolveDescriptionTemplate(descriptionTemplate, descriptionArgs).replace(
     /\[(?:(?:[A-Za-z]+|\{[^}\]]+\}):)?(?:StateArg|DescArg|Arg)\d+\]/g,
