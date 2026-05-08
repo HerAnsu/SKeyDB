@@ -67,6 +67,39 @@ const manifestScopeSchema = z
   })
   .strict()
 
+const publicScopeCapabilitySchema = z.enum(['catalog', 'detailRecord', 'search', 'snapshot'])
+
+export const publicScopeMetadataSchema = z
+  .object({
+    scope: publicDataScopeSchema,
+    kind: entityKindSchema,
+    idPrefix: nonEmptyStringSchema,
+    capabilities: z.array(publicScopeCapabilitySchema),
+    searchable: z.boolean(),
+    recordCount: z.number().int().nonnegative(),
+  })
+  .strict()
+
+export const publicScopesIndexSchema = z
+  .object({
+    schemaVersion: z.literal(3),
+    records: z.array(publicScopeMetadataSchema),
+    byScope: z.record(publicDataScopeSchema, publicScopeMetadataSchema),
+  })
+  .strict()
+  .superRefine((index, ctx) => {
+    for (const scope of PUBLIC_DATA_SCOPES) {
+      const scopedRecord = index.byScope[scope]
+      if (scopedRecord.scope !== scope) {
+        ctx.addIssue({
+          code: 'custom',
+          message: `Generated public scope metadata key "${scope}" contains scope "${scopedRecord.scope}".`,
+          path: ['byScope', scope, 'scope'],
+        })
+      }
+    }
+  })
+
 export const publicManifestSchema = z
   .object({
     schemaVersion: z.literal(3),

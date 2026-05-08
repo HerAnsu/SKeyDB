@@ -1,87 +1,25 @@
 import {resolveAccountLevelCurveEntry} from './gameplay-math-metadata'
+import type {
+  PublicComputedDescriptionArg,
+  PublicScaledBaseFormula,
+  PublicScaledComputedDescriptionArg,
+} from './public-description-args.schema'
 import {buildPublicFormulaContext, type PublicFormulaContext} from './public-formula-context'
 
 export type {PublicFormulaContext} from './public-formula-context'
-export type PublicFormulaKey = keyof PublicFormulaContext
-export type PublicScaledBaseFormula =
-  | 'accountStageGrowth'
-  | 'somaticResearchHpMultiplier'
-  | 'esotericResearchDepth'
-  | 'occultResearchDepth'
-
-export type PublicDescriptionArgStat = 'ATK' | 'DEF' | 'CON'
-
-export interface PublicDescriptionArgSubstatBonus {
-  substat: string
-  multiplier: string
-  suffix?: string
-  mode?: 'additive' | 'scale_base' | 'additive_factor'
-  baseMultiplier?: string
-}
-
-export interface PublicFixedDescriptionArg {
-  kind: 'fixed'
-  value?: string
-  displayFormula?: string
-  channel?: string
-  suffix?: string
-  stat?: PublicDescriptionArgStat
-  substatBonus?: PublicDescriptionArgSubstatBonus
-}
-
-export interface PublicLinearDescriptionArg {
-  kind: 'linear'
-  base: string
-  gainPerLevel: string
-  channel?: string
-  suffix?: string
-  stat?: PublicDescriptionArgStat
-  substatBonus?: PublicDescriptionArgSubstatBonus
-}
-
-export interface PublicScalingDescriptionArg {
-  kind: 'scaling'
-  values: string[]
-  channel?: string
-  suffix?: string
-  stat?: PublicDescriptionArgStat
-  substatBonus?: PublicDescriptionArgSubstatBonus
-}
-
-export interface PublicScaledComputedDescriptionArg {
-  kind: 'computed'
-  formulaKey: 'scaled'
-  baseFormula: PublicScaledBaseFormula
-  multiplier?: number
-  rounding?: 'ceil'
-  inputs: PublicFormulaKey[]
-  channel?: string
-  suffix?: string
-  stat?: PublicDescriptionArgStat
-  substatBonus?: PublicDescriptionArgSubstatBonus
-}
-
-export interface PublicWheelRefinementLinearComputedDescriptionArg {
-  kind: 'computed'
-  formulaKey: 'wheelRefinementLinear'
-  baseValue: number
-  perLevel: number
-  inputs: ['wheelRefinementLevel']
-  channel?: string
-  suffix?: string
-  stat?: PublicDescriptionArgStat
-  substatBonus?: PublicDescriptionArgSubstatBonus
-}
-
-export type PublicComputedDescriptionArg =
-  | PublicScaledComputedDescriptionArg
-  | PublicWheelRefinementLinearComputedDescriptionArg
-
-export type PublicDescriptionArg =
-  | PublicFixedDescriptionArg
-  | PublicLinearDescriptionArg
-  | PublicScalingDescriptionArg
-  | PublicComputedDescriptionArg
+export type {
+  PublicComputedDescriptionArg,
+  PublicDescriptionArg,
+  PublicDescriptionArgStat,
+  PublicDescriptionArgSubstatBonus,
+  PublicFixedDescriptionArg,
+  PublicFormulaKey,
+  PublicLinearDescriptionArg,
+  PublicScaledBaseFormula,
+  PublicScaledComputedDescriptionArg,
+  PublicScalingDescriptionArg,
+  PublicWheelRefinementLinearComputedDescriptionArg,
+} from './public-description-args.schema'
 
 export interface PublicFormulaEvaluation {
   resolved: boolean

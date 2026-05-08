@@ -226,10 +226,7 @@ describe('decodeIngameTeamCode', () => {
     vi.resetModules()
     const buildDictionary = (entries: Record<string, string | string[]>) => {
       const byTokenIds = new Map(
-        Object.entries(entries).map(([token, ids]) => [
-          token,
-          Array.isArray(ids) ? ids : [ids],
-        ]),
+        Object.entries(entries).map(([token, ids]) => [token, Array.isArray(ids) ? ids : [ids]]),
       )
       return {
         byIdToken: new Map<string, string>(),

@@ -1,11 +1,15 @@
-import type {
-  EntityKind,
-  PublicCatalog,
-  PublicCatalogRecord,
-  PublicDataScope,
-  PublicRecord,
+import scopesIndexJson from '@/data/public-v3/indexes/scopes.json'
+
+import {
+  PUBLIC_DATA_SCOPES,
+  type EntityKind,
+  type PublicCatalog,
+  type PublicCatalogRecord,
+  type PublicDataScope,
+  type PublicRecord,
 } from './contract'
 import {isPublicEntityId} from './ids'
+import {publicScopesIndexSchema} from './schemas'
 
 export type PublicScopeCapability = 'catalog' | 'detailRecord' | 'search' | 'snapshot'
 
@@ -15,95 +19,35 @@ export interface PublicScopeDescriptor {
   idPrefix: string
   capabilities: readonly PublicScopeCapability[]
   hasRouteIndex: boolean
+  recordCount: number
 }
 
-export const PUBLIC_SCOPE_DESCRIPTORS = {
-  'awakener-builds': {
-    scope: 'awakener-builds',
-    kind: 'awakenerBuild',
-    idPrefix: 'awakener-build-',
-    capabilities: ['catalog', 'detailRecord'],
-    hasRouteIndex: true,
-  },
-  awakeners: {
-    scope: 'awakeners',
-    kind: 'awakener',
-    idPrefix: 'awakener-',
-    capabilities: ['catalog', 'detailRecord', 'search'],
-    hasRouteIndex: true,
-  },
-  covenants: {
-    scope: 'covenants',
-    kind: 'covenant',
-    idPrefix: 'covenant-',
-    capabilities: ['catalog', 'detailRecord', 'search', 'snapshot'],
-    hasRouteIndex: true,
-  },
-  'derived-skills': {
-    scope: 'derived-skills',
-    kind: 'derivedSkill',
-    idPrefix: 'derived.',
-    capabilities: ['catalog', 'detailRecord', 'snapshot'],
-    hasRouteIndex: true,
-  },
-  enlightens: {
-    scope: 'enlightens',
-    kind: 'enlighten',
-    idPrefix: 'enlighten.',
-    capabilities: ['catalog', 'detailRecord', 'snapshot'],
-    hasRouteIndex: true,
-  },
-  overlays: {
-    scope: 'overlays',
-    kind: 'overlay',
-    idPrefix: 'overlay.',
-    capabilities: ['catalog', 'detailRecord', 'snapshot'],
-    hasRouteIndex: true,
-  },
-  posses: {
-    scope: 'posses',
-    kind: 'posse',
-    idPrefix: 'posse-',
-    capabilities: ['catalog', 'detailRecord', 'search', 'snapshot'],
-    hasRouteIndex: true,
-  },
-  relics: {
-    scope: 'relics',
-    kind: 'relic',
-    idPrefix: 'relic-',
-    capabilities: ['catalog', 'detailRecord', 'search', 'snapshot'],
-    hasRouteIndex: true,
-  },
-  skills: {
-    scope: 'skills',
-    kind: 'skill',
-    idPrefix: 'skill.',
-    capabilities: ['catalog', 'detailRecord', 'snapshot'],
-    hasRouteIndex: true,
-  },
-  talents: {
-    scope: 'talents',
-    kind: 'talent',
-    idPrefix: 'talent.',
-    capabilities: ['catalog', 'detailRecord', 'snapshot'],
-    hasRouteIndex: true,
-  },
-  wheels: {
-    scope: 'wheels',
-    kind: 'wheel',
-    idPrefix: 'wheel-',
-    capabilities: ['catalog', 'detailRecord', 'search', 'snapshot'],
-    hasRouteIndex: true,
-  },
-} as const satisfies Record<PublicDataScope, PublicScopeDescriptor>
+const GENERATED_PUBLIC_SCOPE_METADATA = publicScopesIndexSchema.parse(scopesIndexJson)
 
-type PublicScopeDescriptors = typeof PUBLIC_SCOPE_DESCRIPTORS
+function buildPublicScopeDescriptors(): Record<PublicDataScope, PublicScopeDescriptor> {
+  const descriptors = {} as Record<PublicDataScope, PublicScopeDescriptor>
 
-export type PublicDataScopeWithCapability<TCapability extends PublicScopeCapability> = {
-  [TScope in PublicDataScope]: TCapability extends PublicScopeDescriptors[TScope]['capabilities'][number]
-    ? TScope
-    : never
-}[PublicDataScope]
+  for (const scope of PUBLIC_DATA_SCOPES) {
+    const metadata = GENERATED_PUBLIC_SCOPE_METADATA.byScope[scope]
+    descriptors[scope] = {
+      scope: metadata.scope,
+      kind: metadata.kind,
+      idPrefix: metadata.idPrefix,
+      capabilities: metadata.capabilities,
+      hasRouteIndex: true,
+      recordCount: metadata.recordCount,
+    }
+  }
+
+  return descriptors
+}
+
+export const PUBLIC_SCOPE_DESCRIPTORS = buildPublicScopeDescriptors()
+
+export type PublicDataScopeWithCapability<TCapability extends PublicScopeCapability> =
+  TCapability extends 'search'
+    ? 'awakeners' | 'covenants' | 'posses' | 'relics' | 'wheels'
+    : PublicDataScope
 
 export type SearchablePublicDataScope = PublicDataScopeWithCapability<'search'>
 export type SnapshotPublicDataScope = PublicDataScopeWithCapability<'snapshot'>

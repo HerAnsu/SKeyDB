@@ -69,6 +69,10 @@ interface UseBuilderImportFlowOptions {
   showToast: (message: string) => void
 }
 
+function isSurfaceableIngameWarningReason(reason: string): boolean {
+  return reason === 'unknown_token' || reason === 'ambiguous_parse'
+}
+
 export function getIngameImportWarningMessage(
   warnings: Exclude<ReturnType<typeof decodeImportCode>, {kind: 'multi'}>['warnings'],
 ) {
@@ -78,7 +82,7 @@ export function getIngameImportWarningMessage(
 
   const surfaced = warnings.filter(
     (warning) =>
-      (warning.reason === 'unknown_token' || warning.reason === 'ambiguous_parse') &&
+      isSurfaceableIngameWarningReason(warning.reason) &&
       (warning.section === 'awakener' || warning.section === 'wheel'),
   )
   if (surfaced.length === 0) {

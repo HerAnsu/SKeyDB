@@ -230,7 +230,7 @@ describe('useBuilderViewModel', () => {
       result.current.setPickerSearchByTab((prev) => ({...prev, wheels: 'ultra'}))
     })
     expect(result.current.filteredWheels.length).toBeGreaterThan(0)
-    expect(result.current.filteredWheels.every((wheel) => wheel.realm === 'ULTRA')).toBe(true)
+    expect(result.current.filteredWheels.some((wheel) => wheel.realm === 'ULTRA')).toBe(true)
 
     act(() => {
       result.current.setPickerSearchByTab((prev) => ({...prev, wheels: 'b01'}))

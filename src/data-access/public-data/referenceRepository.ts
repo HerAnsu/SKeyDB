@@ -27,13 +27,15 @@ export type PublicReferenceResolveResult =
 export function resolvePublicReferenceTokenResult(token: string): PublicReferenceResolveResult {
   const normalizedToken = normalizeReferenceToken(token)
   const referencesIndex = getPublicReferencesIndex()
-  const ambiguousRefs = referencesIndex.ambiguous[normalizedToken]
-  if (ambiguousRefs) {
-    return {status: 'ambiguous', refs: ambiguousRefs}
+  if (Object.hasOwn(referencesIndex.ambiguous, normalizedToken)) {
+    return {status: 'ambiguous', refs: referencesIndex.ambiguous[normalizedToken] ?? []}
   }
 
-  const refs = referencesIndex.tokens[normalizedToken]
-  return refs ? {status: 'match', refs} : {status: 'notFound', refs: []}
+  if (Object.hasOwn(referencesIndex.tokens, normalizedToken)) {
+    return {status: 'match', refs: referencesIndex.tokens[normalizedToken] ?? []}
+  }
+
+  return {status: 'notFound', refs: []}
 }
 
 export function resolvePublicReferenceToken(token: string): EntityRef[] {

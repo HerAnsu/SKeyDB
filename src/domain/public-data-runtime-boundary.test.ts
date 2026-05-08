@@ -187,6 +187,12 @@ describe('public data runtime boundary', () => {
     expect(offenders).toEqual([])
   })
 
+  it('keeps public-to-legacy compatibility overrides out of the main detail adapter facade', () => {
+    const source = readSource('./public-detail-record-adapters.ts')
+
+    expect(source).not.toContain('PROMOTED_EXTRA_DERIVED_IDS')
+  })
+
   it('keeps retired public-v2 runtime module and path names out of runtime source', () => {
     const generatedPublicDataImports = [
       'data/public-v2',

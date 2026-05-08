@@ -111,8 +111,9 @@ describe('searchPublicEntities', () => {
     })
 
     expect(
-      searchPublicEntities('awakeners', [{id: 'awakener-token', name: 'Silent Bell'}], 'ember')
-        .map((entity) => entity.id),
+      searchPublicEntities('awakeners', [{id: 'awakener-token', name: 'Silent Bell'}], 'ember').map(
+        (entity) => entity.id,
+      ),
     ).toEqual(['awakener-token'])
   })
 })

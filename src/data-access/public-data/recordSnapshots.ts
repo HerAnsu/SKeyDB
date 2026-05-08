@@ -8,7 +8,7 @@ import {
 } from './scopeRegistry'
 
 const recordSnapshots: Partial<Record<string, unknown>> = import.meta.glob(
-  '../../data/public-v3/records/{covenants,derived-skills,enlightens,overlays,posses,relics,skills,talents,wheels}/*.json',
+  '../../data/public-v3/records/*/*.json',
   {
     eager: true,
     import: 'default',

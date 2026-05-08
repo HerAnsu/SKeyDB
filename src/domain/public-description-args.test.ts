@@ -7,8 +7,27 @@ import {
   resolveDescriptionTemplate,
 } from './description-args'
 import {evaluatePublicFormulaExpression, type PublicDescriptionArg} from './public-description-args'
+import {publicDescriptionArgsSchema} from './public-description-args.schema'
 
 describe('public-description-args', () => {
+  it('validates public generated description args through the public schema', () => {
+    const args = publicDescriptionArgsSchema.parse({
+      DescArg1: {
+        kind: 'computed',
+        formulaKey: 'wheelRefinementLinear',
+        baseValue: 5,
+        perLevel: 1.5,
+        inputs: ['wheelRefinementLevel'],
+        suffix: '%',
+      },
+    })
+
+    expect(evaluatePublicFormulaExpression(args.DescArg1, {wheelRefinementLevel: 2})).toEqual({
+      resolved: true,
+      value: 8,
+    })
+  })
+
   it('renders fixed args through the public arg contract', () => {
     const arg: PublicDescriptionArg = {
       kind: 'fixed',

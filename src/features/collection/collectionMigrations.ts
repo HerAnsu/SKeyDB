@@ -1,3 +1,4 @@
+import {isPublicEntityId} from '@/data-access/public-data/ids'
 import {
   createDefaultCollectionOwnershipCatalog,
   normalizeCollectionOwnershipState,
@@ -12,7 +13,6 @@ import {
   POSSE_ID_V1_TO_CURRENT,
   WHEEL_ID_V1_TO_CURRENT,
 } from '@/domain/persistence-id-migration'
-import {isPublicEntityId} from '@/data-access/public-data/ids'
 import {
   safeStorageRead,
   safeStorageRemove,

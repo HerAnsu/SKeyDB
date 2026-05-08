@@ -104,6 +104,21 @@ export interface PublicManifestScope {
   count: number
 }
 
+export interface PublicScopeMetadata {
+  scope: PublicDataScope
+  kind: EntityKind
+  idPrefix: string
+  capabilities: string[]
+  searchable: boolean
+  recordCount: number
+}
+
+export interface PublicScopesIndex {
+  schemaVersion: 3
+  records: PublicScopeMetadata[]
+  byScope: Record<PublicDataScope, PublicScopeMetadata>
+}
+
 export interface PublicManifest {
   schemaVersion: 3
   gameDataVersion: string

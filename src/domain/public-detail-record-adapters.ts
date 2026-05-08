@@ -9,7 +9,6 @@ import type {PublicDataScope, PublicRecord} from '@/data-access/public-data/cont
 import {loadPublicRecord} from '@/data-access/public-data/recordRepository'
 
 import {
-  descriptionArgsSchema,
   fullStatsSchema,
   primaryScalingBaseSchema,
   statScalingSchema,
@@ -17,7 +16,9 @@ import {
 } from './awakener-source-schema'
 import {type AwakenerFullRecord} from './awakeners-full'
 import {type CovenantFullRecord} from './covenants-full'
+import {isLegacyPromotedDerivedExtra} from './legacy-public-v3-adapter/compatibilityOverrides'
 import {type PosseFullRecord} from './posses-full'
+import {publicDescriptionArgsSchema} from './public-description-args.schema'
 import {
   adaptPublicV3DerivedSkillRecord,
   adaptPublicV3EnlightenRecord,
@@ -129,7 +130,7 @@ const publicAwakenerDetailSchema = z.looseObject({
 const publicWheelDetailSchema = z.looseObject({
   id: z.string(),
   aliases: z.array(z.string()).optional(),
-  descriptionArgs: descriptionArgsSchema,
+  descriptionArgs: publicDescriptionArgsSchema,
   descriptionTemplate: z.string(),
   lore: z.string().optional(),
   mainstatKey: z.string(),
@@ -144,7 +145,7 @@ const publicWheelDetailSchema = z.looseObject({
 const publicPosseDetailSchema = z.looseObject({
   acquisitionSource: z.string().optional(),
   id: z.string(),
-  descriptionArgs: descriptionArgsSchema,
+  descriptionArgs: publicDescriptionArgsSchema,
   descriptionTemplate: z.string(),
   lore: z.string().optional(),
   name: z.string(),
@@ -160,27 +161,11 @@ const publicCovenantDetailSchema = z.looseObject({
   setEffects: z.array(
     z.object({
       set: z.number(),
-      descriptionArgs: descriptionArgsSchema,
+      descriptionArgs: publicDescriptionArgsSchema,
       descriptionTemplate: z.string(),
     }),
   ),
 })
-
-const PROMOTED_EXTRA_DERIVED_IDS = new Set([
-  'derived.castor.onyx-plume',
-  'derived.corposant.pilot',
-  'derived.doll-inferno.illusions-end',
-  'derived.doresain.evernights-revel',
-  'derived.helot-catena.bloodthirsty-flail',
-  'derived.jenkins.swarm-impact',
-  'derived.kathigu-ra.hyperflare',
-  'derived.liz.corrupted-flames',
-  'derived.pollux.sacred-heart',
-  'derived.tawil.four-wings',
-  'derived.tawil.six-wings',
-  'derived.tawil.twin-wings',
-  'derived.vortice.vortex-shell',
-])
 
 const awakenerFullByIdPromises = new Map<string, Promise<AwakenerFullRecord | undefined>>()
 const wheelFullByIdPromises = new Map<string, Promise<WheelFullRecord | undefined>>()
@@ -395,7 +380,7 @@ async function adaptPublicAwakenerRecord(
 ): Promise<AwakenerFullRecord> {
   const ownedRecords = await loadAwakenerOwnedRecords(record.id)
   const regularDerivedSkills = ownedRecords.derivedSkills.filter(
-    (entry) => !PROMOTED_EXTRA_DERIVED_IDS.has(entry.id),
+    (entry) => !isLegacyPromotedDerivedExtra(entry.id),
   )
   const cards = {
     C1: adaptPublicCardRecord(requireSlotRecord(ownedRecords.skills, 'Rouse', 'skill'), record.id),
@@ -417,7 +402,7 @@ async function adaptPublicAwakenerRecord(
         )
       : undefined,
     promotedExtras: ownedRecords.derivedSkills
-      .filter((entry) => PROMOTED_EXTRA_DERIVED_IDS.has(entry.id))
+      .filter((entry) => isLegacyPromotedDerivedExtra(entry.id))
       .map(adaptPublicDerivedRecord),
   }
 

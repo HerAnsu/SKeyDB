@@ -3,10 +3,7 @@ import {describe, expect, it} from 'vitest'
 import {resolvePublicAsset, resolvePublicEntityAsset} from './assetRepository'
 import {PUBLIC_DATA_SCOPES} from './contract'
 import {getPublicRecordSnapshot, getPublicRecordSnapshots} from './recordSnapshots'
-import {
-  resolvePublicReferenceToken,
-  resolvePublicReferenceTokenResult,
-} from './referenceRepository'
+import {resolvePublicReferenceToken, resolvePublicReferenceTokenResult} from './referenceRepository'
 import {
   getPublicBuilderCatalog,
   getPublicCatalog,
@@ -16,11 +13,7 @@ import {
   loadPublicRecord,
 } from './repository'
 import {getPublicRoutesIndex, resolvePublicRoute} from './routeResolver'
-import {
-  getPublicScopeDescriptor,
-  type SearchablePublicDataScope,
-  type SnapshotPublicDataScope,
-} from './scopeRegistry'
+import {getPublicScopeDescriptor, type SearchablePublicDataScope} from './scopeRegistry'
 import {getPublicSearchDocuments} from './searchRepository'
 
 describe('public-data repository', () => {
@@ -155,11 +148,15 @@ describe('public-data repository', () => {
   })
 
   it('rejects public-data scopes without synchronous snapshot support', () => {
-    const unsupportedSnapshotScope = 'awakeners' as SnapshotPublicDataScope
+    const manifest = getPublicManifest()
 
-    expect(() => getPublicRecordSnapshots(unsupportedSnapshotScope)).toThrow(
-      'Public V3 scope "awakeners" does not support synchronous record snapshots.',
-    )
+    for (const scope of PUBLIC_DATA_SCOPES) {
+      const descriptor = getPublicScopeDescriptor(scope)
+      const snapshots = getPublicRecordSnapshots(scope)
+
+      expect(descriptor.capabilities).toContain('snapshot')
+      expect(snapshots).toHaveLength(manifest.scopes[scope].count)
+    }
   })
 
   it('keeps manifest, catalog, route, and search invariants aligned with scope descriptors', () => {
@@ -197,6 +194,23 @@ describe('public-data repository', () => {
         expect(document.kind).toBe(descriptor.kind)
         expect(document.id.startsWith(descriptor.idPrefix)).toBe(true)
       }
+    }
+  })
+
+  it('uses generated scope metadata as the descriptor source of truth', () => {
+    const manifest = getPublicManifest()
+
+    for (const scope of PUBLIC_DATA_SCOPES) {
+      const descriptor = getPublicScopeDescriptor(scope)
+
+      expect(descriptor.recordCount).toBe(manifest.scopes[scope].count)
+      expect(descriptor.idPrefix).toBe(
+        scope === 'awakener-builds'
+          ? 'awakener-build'
+          : manifest.scopes[scope].kind === 'derivedSkill'
+            ? 'derived'
+            : manifest.scopes[scope].kind,
+      )
     }
   })
 })
