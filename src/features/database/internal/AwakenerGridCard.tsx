@@ -1,20 +1,11 @@
-import {getAwakenerCardAsset} from '@/domain/awakener-assets'
+import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import {resolveAwakenerLiteStatsForLevel, type Awakener} from '@/domain/awakeners'
-import {getAwakenerTextColor, type AwakenerTextColorName} from '@/domain/awakeners-text-colors'
-import {getMainstatIcon} from '@/domain/mainstats'
+import {formatAwakenerAvailabilityLabel} from '@/domain/database-browse-state'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
-import {getRealmAccent} from '@/domain/realms'
-import {
-  databaseCardTitleClampStyle,
-  databaseCardTitleClassName,
-} from '@/ui/cards/database-card-typography'
+import {getRealmAccent, getRealmBadge, getRealmIcon, getRealmLabel} from '@/domain/realms'
+import {databaseCardTitleClassName} from '@/ui/cards/database-card-typography'
 import {DatabaseGridCardFrame} from '@/ui/cards/DatabaseGridCardFrame'
-
-const STAT_DISPLAY: {key: 'CON' | 'ATK' | 'DEF'; colorName: AwakenerTextColorName}[] = [
-  {key: 'CON', colorName: 'heal'},
-  {key: 'ATK', colorName: 'damage'},
-  {key: 'DEF', colorName: 'shield'},
-]
+import {DatabaseStatTriad} from '@/ui/cards/DatabaseStatTriad'
 
 const PRIORITIZED_GRID_IMAGE_COUNT = 24
 const DATABASE_GRID_AWAKENER_STAT_LEVEL = 60
@@ -25,65 +16,77 @@ interface AwakenerGridCardProps {
   onSelect: (id: string) => void
 }
 
+function formatReleaseDate(value: string | undefined): string | undefined {
+  if (!value) {
+    return undefined
+  }
+  const parsedDate = new Date(`${value}T00:00:00Z`)
+  if (Number.isNaN(parsedDate.getTime())) {
+    return value
+  }
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(parsedDate)
+}
+
 export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardProps) {
   const cardAsset = getAwakenerCardAsset(awakener.name)
+  const portraitAsset = getAwakenerPortraitAsset(awakener.name)
   const displayName = formatAwakenerNameForUi(awakener.name)
   const realmAccent = getRealmAccent(awakener.realm)
+  const realmBadge = getRealmBadge(awakener.realm)
+  const realmIcon = getRealmIcon(awakener.realm)
+  const realmLabel = getRealmLabel(awakener.realm)
   const stats = resolveAwakenerLiteStatsForLevel(awakener, DATABASE_GRID_AWAKENER_STAT_LEVEL)
   const prioritizeImage = index < PRIORITIZED_GRID_IMAGE_COUNT
+  const detailItems = [
+    formatAwakenerAvailabilityLabel(awakener.availabilityType),
+    formatReleaseDate(awakener.releaseDate),
+  ].filter(Boolean)
 
   return (
     <DatabaseGridCardFrame
       ariaLabel={`View details for ${displayName}`}
-      fadeHeightClass='h-[52%]'
-      imageAlt={displayName}
-      imageObjectClassName='object-cover object-top'
-      imageSrc={cardAsset}
-      onSelect={() => {
-        onSelect(awakener.id)
-      }}
-      prioritizeImage={prioritizeImage}
-      realmAccent={realmAccent}
-    >
-      {stats ? (
-        <div className='space-y-1.5'>
+      content={{
+        detail:
+          detailItems.length > 0 ? (
+            <>
+              {detailItems.map((item, itemIndex) => (
+                <span key={item}>
+                  {itemIndex > 0 ? <span className='mx-1.5 text-slate-600'>|</span> : null}
+                  {item}
+                </span>
+              ))}
+            </>
+          ) : null,
+        dossierTitleAddon: realmIcon ? (
+          <img alt='' className='h-5 w-5 object-contain' draggable={false} src={realmIcon} />
+        ) : null,
+        meta: stats ? <DatabaseStatTriad stats={stats} /> : null,
+        title: (
           <p
-            className={`${databaseCardTitleClassName} text-[clamp(0.86rem,0.28vw+0.8rem,0.98rem)]`}
-            style={databaseCardTitleClampStyle}
+            className={`${databaseCardTitleClassName} database-grid-card__title-text`}
+            title={displayName}
           >
             {displayName}
           </p>
-          <div className='flex items-center justify-center gap-3'>
-            {STAT_DISPLAY.map(({key, colorName}) => {
-              const icon = getMainstatIcon(key)
-
-              return (
-                <span
-                  key={key}
-                  className='inline-flex items-center gap-1 text-[11px] leading-none font-medium text-white/85 tabular-nums'
-                >
-                  {icon ? (
-                    <span
-                      aria-hidden
-                      className='h-2.5 w-2.5 shrink-0'
-                      style={{
-                        backgroundColor: getAwakenerTextColor(colorName),
-                        WebkitMaskImage: `url(${icon})`,
-                        maskImage: `url(${icon})`,
-                        WebkitMaskSize: 'contain',
-                        maskSize: 'contain',
-                        WebkitMaskRepeat: 'no-repeat',
-                        maskRepeat: 'no-repeat',
-                      }}
-                    />
-                  ) : null}
-                  <span>{stats[key]}</span>
-                </span>
-              )
-            })}
-          </div>
-        </div>
-      ) : null}
-    </DatabaseGridCardFrame>
+        ),
+      }}
+      media={{
+        alt: displayName,
+        dossierClassName: 'object-cover object-top',
+        dossierSrc: portraitAsset ?? cardAsset,
+        posterBadge: {label: realmLabel, src: realmBadge},
+        posterClassName: 'object-cover object-top',
+        posterSrc: cardAsset,
+        prioritize: prioritizeImage,
+      }}
+      onSelect={() => {
+        onSelect(awakener.id)
+      }}
+      realmAccent={realmAccent}
+    />
   )
 }

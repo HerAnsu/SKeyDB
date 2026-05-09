@@ -6,11 +6,11 @@ import {
 
 export const POSSE_DATABASE_REALM_FILTER_IDS = [
   'ALL',
-  'FADED_LEGACY',
   'AEQUOR',
   'CARO',
   'CHAOS',
   'ULTRA',
+  'FADED_LEGACY',
   'OTHER',
 ] as const
 export type PosseDatabaseRealmFilterId = (typeof POSSE_DATABASE_REALM_FILTER_IDS)[number]

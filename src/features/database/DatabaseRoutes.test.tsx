@@ -127,6 +127,7 @@ vi.mock('@/domain/awakeners', () => ({
 
 vi.mock('@/domain/wheels', () => ({
   getWheels: () => wheelMockState.wheels,
+  getWheelMainstatLabel: (wheel: {mainstatKey: string}) => wheel.mainstatKey,
 }))
 
 vi.mock('@/domain/posses', () => ({
@@ -189,6 +190,7 @@ vi.mock('@/domain/covenant-assets', () => ({
 
 vi.mock('@/domain/realms', () => ({
   DEFAULT_REALM_ACCENT: '#ffffff',
+  getRealmBadge: () => null,
   getRealmIcon: () => null,
   getRealmLabel: (realm: string) => realm,
   getRealmAccent: () => '#ffffff',
@@ -851,7 +853,7 @@ describe('DatabasePage', () => {
     await renderDatabasePage('/database/posses?q=sigil&realm=CHAOS')
 
     expect(screen.getByRole('searchbox')).toHaveValue('sigil')
-    expect(screen.getByRole('button', {name: 'Chaos'})).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', {name: /^chaos$/i})).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByLabelText('View details for Silent Sigil')).toBeInTheDocument()
     expect(screen.queryByLabelText('View details for Aequor Banner')).not.toBeInTheDocument()
     expect(screen.getByTestId('location-search')).toHaveTextContent('?q=sigil&realm=CHAOS')
@@ -861,7 +863,7 @@ describe('DatabasePage', () => {
     await renderDatabasePage('/database/posses')
 
     fireEvent.change(screen.getByRole('searchbox'), {target: {value: 'sigil'}})
-    fireEvent.click(screen.getByRole('button', {name: 'Chaos'}))
+    fireEvent.click(screen.getByRole('button', {name: /^chaos$/i}))
 
     expect(screen.getByTestId('location-search')).toHaveTextContent('?q=sigil&realm=CHAOS')
   })

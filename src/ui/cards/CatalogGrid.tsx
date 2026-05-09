@@ -1,4 +1,9 @@
-import type {ReactNode} from 'react'
+import {useCallback, useLayoutEffect, useState, type ReactNode} from 'react'
+
+import {
+  HybridDatabaseCardModeContext,
+  type HybridDatabaseCardMode,
+} from './hybrid-database-card-mode'
 
 interface CatalogGridProps<TItem> {
   items: TItem[]
@@ -7,8 +12,82 @@ interface CatalogGridProps<TItem> {
   className?: string
 }
 
-const DEFAULT_GRID_CLASS_NAME =
-  'grid content-start grid-cols-2 gap-[clamp(0.75rem,1vw,1.05rem)] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7'
+export const HYBRID_DATABASE_GRID_CLASS_NAME = 'database-card-grid database-card-grid--hybrid'
+
+const DEFAULT_GRID_CLASS_NAME = 'database-card-grid'
+const HYBRID_DOSSIER_CONTAINER_WIDTH = 620
+
+function resolveHybridDatabaseCardMode(inlineSize: number): HybridDatabaseCardMode {
+  return inlineSize <= HYBRID_DOSSIER_CONTAINER_WIDTH ? 'dossier' : 'poster'
+}
+
+function useMeasuredHybridCardMode(isHybridGrid: boolean, hasItems: boolean) {
+  const [element, setElement] = useState<HTMLDivElement | null>(null)
+  const [mode, setMode] = useState<HybridDatabaseCardMode | null>(isHybridGrid ? null : 'poster')
+  const ref = useCallback(
+    (node: HTMLDivElement | null) => {
+      setElement(node)
+      if (!isHybridGrid || !hasItems || !node) {
+        return
+      }
+      const inlineSize = node.getBoundingClientRect().width
+      if (inlineSize > 0) {
+        setMode(resolveHybridDatabaseCardMode(inlineSize))
+      }
+    },
+    [hasItems, isHybridGrid],
+  )
+
+  useLayoutEffect(() => {
+    if (!isHybridGrid) {
+      return undefined
+    }
+
+    if (!hasItems) {
+      return undefined
+    }
+
+    if (!element) {
+      return undefined
+    }
+
+    const updateMode = (inlineSize: number) => {
+      if (inlineSize <= 0) {
+        setMode('poster')
+        return
+      }
+      setMode(resolveHybridDatabaseCardMode(inlineSize))
+    }
+
+    const measureElement = () => {
+      updateMode(element.getBoundingClientRect().width)
+    }
+    const frame = requestAnimationFrame(measureElement)
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', measureElement)
+      return () => {
+        cancelAnimationFrame(frame)
+        window.removeEventListener('resize', measureElement)
+      }
+    }
+    window.addEventListener('resize', measureElement)
+
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0]
+      const inlineSize = entry.contentBoxSize[0]?.inlineSize ?? entry.contentRect.width
+      updateMode(inlineSize)
+    })
+    observer.observe(element)
+
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('resize', measureElement)
+      observer.disconnect()
+    }
+  }, [element, hasItems, isHybridGrid])
+
+  return {mode, ref}
+}
 
 export function CatalogGrid<TItem>({
   className = DEFAULT_GRID_CLASS_NAME,
@@ -16,13 +95,22 @@ export function CatalogGrid<TItem>({
   items,
   renderItem,
 }: CatalogGridProps<TItem>) {
+  const isHybridGrid = className.split(/\s+/).includes('database-card-grid--hybrid')
+  const {mode, ref} = useMeasuredHybridCardMode(isHybridGrid, items.length > 0)
+
   if (items.length === 0) {
     return (
-      <div className='rounded-sm border border-slate-700/55 bg-[linear-gradient(180deg,rgba(15,23,42,0.4),rgba(9,15,27,0.28))] px-4 py-12 text-center text-sm text-slate-400'>
+      <div className='border border-slate-700/55 bg-[linear-gradient(180deg,rgba(15,23,42,0.4),rgba(9,15,27,0.28))] px-4 py-12 text-center text-sm text-slate-400'>
         {emptyMessage}
       </div>
     )
   }
 
-  return <div className={className}>{items.map((item, index) => renderItem(item, index))}</div>
+  return (
+    <HybridDatabaseCardModeContext.Provider value={mode}>
+      <div className='database-card-roster' data-hybrid-mode={mode ?? 'pending'} ref={ref}>
+        <div className={className}>{items.map((item, index) => renderItem(item, index))}</div>
+      </div>
+    </HybridDatabaseCardModeContext.Provider>
+  )
 }
