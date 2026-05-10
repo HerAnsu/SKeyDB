@@ -139,7 +139,7 @@ export const descriptionArgSchema = z.discriminatedUnion('kind', [
 export const descriptionArgsSchema = z.record(nonEmptyStringSchema, descriptionArgSchema)
 
 export const describedRecordSchema = z.object({
-  descriptionTemplate: nonEmptyStringSchema,
+  descriptionTemplate: z.string(),
   descriptionArgs: descriptionArgsSchema,
 })
 

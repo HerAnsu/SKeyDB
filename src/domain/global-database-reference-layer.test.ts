@@ -1,11 +1,14 @@
-import {describe, expect, it} from 'vitest'
+import {describe, expect, it, vi} from 'vitest'
 
 import {parseDatabaseRichDescription} from './database-rich-text'
 import {
   buildCovenantDatabaseDescriptionRecord,
+  buildPosseDatabaseDescriptionRecord,
   hydrateGlobalDatabaseReferenceInfo,
 } from './global-database-reference-layer'
+import * as publicDetailRecordAdapters from './public-detail-record-adapters'
 import type {RichSegment} from './rich-text'
+import {buildWheelDatabaseDescriptionRecord} from './wheels-database-reference-layer'
 
 function getSegmentText(segment: RichSegment): string {
   switch (segment.type) {
@@ -23,6 +26,66 @@ function getSegmentText(segment: RichSegment): string {
 }
 
 describe('hydrateGlobalDatabaseReferenceInfo', () => {
+  it('hydrates wheel descriptions through per-record detail loading', async () => {
+    const loadPublicWheelDetailById = vi.spyOn(
+      publicDetailRecordAdapters,
+      'loadPublicWheelDetailById',
+    )
+    const info = await hydrateGlobalDatabaseReferenceInfo({
+      kind: 'wheel',
+      id: 'wheel-0001',
+      name: 'Dark Star',
+      label: 'Wheel · SSR · Caro',
+      record: buildWheelDatabaseDescriptionRecord({
+        id: 'wheel-0001',
+        name: 'Dark Star',
+        descriptionTemplate: '',
+        descriptionArgs: {},
+      }),
+      description: '',
+      keywordFooterText: undefined,
+      descriptionRank: undefined,
+      descriptionMaxRank: undefined,
+      influencingEnlightenSlots: [],
+      influencingTalentIds: [],
+      influenceBadges: [],
+    })
+
+    expect(loadPublicWheelDetailById).toHaveBeenCalledWith('wheel-0001')
+    expect(info.description).not.toBe('')
+    expect(info.kind).toBe('wheel')
+  })
+
+  it('hydrates posse descriptions through per-record detail loading', async () => {
+    const loadPublicPosseDetailById = vi.spyOn(
+      publicDetailRecordAdapters,
+      'loadPublicPosseDetailById',
+    )
+    const info = await hydrateGlobalDatabaseReferenceInfo({
+      kind: 'posse',
+      id: 'posse-0001',
+      name: 'Flora',
+      label: 'Posse · Aequor',
+      record: buildPosseDatabaseDescriptionRecord({
+        id: 'posse-0001',
+        name: 'Flora',
+        descriptionTemplate: '',
+        descriptionArgs: {},
+      }),
+      description: '',
+      keywordFooterText: undefined,
+      descriptionRank: undefined,
+      descriptionMaxRank: undefined,
+      influencingEnlightenSlots: [],
+      influencingTalentIds: [],
+      influenceBadges: [],
+    })
+
+    expect(loadPublicPosseDetailById).toHaveBeenCalledWith('posse-0001')
+    expect(info.description).not.toBe('')
+    expect(info.kind).toBe('posse')
+  })
+
   it('hydrates every covenant set effect into reference descriptions', async () => {
     const info = await hydrateGlobalDatabaseReferenceInfo({
       kind: 'covenant',

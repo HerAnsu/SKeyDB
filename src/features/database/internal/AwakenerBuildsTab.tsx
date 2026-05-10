@@ -90,7 +90,10 @@ function RecommendationTile({
           <img
             alt={altText}
             className={`h-full w-full object-cover ${imageClassName}`.trim()}
+            decoding='async'
             draggable={false}
+            fetchPriority='low'
+            loading='lazy'
             src={asset}
           />
         ) : (

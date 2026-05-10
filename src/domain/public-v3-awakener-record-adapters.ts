@@ -1,3 +1,4 @@
+import {resolvePublicAsset} from '@/data-access/public-data/assetRepository'
 import type {PublicRecord} from '@/data-access/public-data/contract'
 
 import {
@@ -26,25 +27,36 @@ export type PublicV3OwnedRecord = PublicRecord & {
 
 export type PublicV3SkillRecord = PublicV3OwnedRecord & {
   cardKeywords?: unknown[]
+  descriptionArgs?: unknown
+  descriptionTemplate?: string
   slot?: string
 }
 
 export type PublicV3TalentRecord = PublicV3OwnedRecord & {
+  descriptionArgs?: unknown
+  descriptionTemplate?: string
   family?: string
   maxLevel?: number
 }
 
 export type PublicV3EnlightenRecord = PublicV3OwnedRecord & {
+  descriptionArgs?: unknown
+  descriptionTemplate?: string
   slot?: string
 }
 
 export type PublicV3DerivedSkillRecord = PublicV3OwnedRecord & {
   cardKeywords?: unknown[]
   childDerivedSkillIds?: string[]
+  descriptionArgs?: unknown
+  descriptionTemplate?: string
 }
 
 export type PublicV3OverlayRecord = PublicV3OwnedRecord & {
   aliases?: string[]
+  descriptionArgs?: unknown
+  descriptionTemplate?: string
+  iconId?: string
   overlayType?: string
 }
 
@@ -85,6 +97,8 @@ export function adaptPublicV3SkillRecord(record: PublicV3SkillRecord): AwakenerS
     kind: skillKindFromPublicSlot(record.slot),
     displayName: record.name,
     cardKeywords: record.cardKeywords ?? [],
+    descriptionTemplate: record.descriptionTemplate ?? '',
+    descriptionArgs: record.descriptionArgs ?? {},
     variants: [],
   })
 }
@@ -94,6 +108,8 @@ export function adaptPublicV3TalentRecord(record: PublicV3TalentRecord): Awakene
     ...record,
     ownerAwakenerId: numericAwakenerId(record.ownerAwakenerId ?? ''),
     displayName: record.name,
+    descriptionTemplate: record.descriptionTemplate ?? '',
+    descriptionArgs: record.descriptionArgs ?? {},
     hasLevelScaledDescription: record.maxLevel !== undefined,
   })
 }
@@ -105,6 +121,8 @@ export function adaptPublicV3EnlightenRecord(
     ...record,
     ownerAwakenerId: numericAwakenerId(record.ownerAwakenerId ?? ''),
     displayName: record.name,
+    descriptionTemplate: record.descriptionTemplate ?? '',
+    descriptionArgs: record.descriptionArgs ?? {},
   })
 }
 
@@ -117,15 +135,24 @@ export function adaptPublicV3DerivedSkillRecord(
     displayName: record.name,
     childDerivedSkillIds: record.childDerivedSkillIds ?? [],
     cardKeywords: record.cardKeywords ?? [],
+    descriptionTemplate: record.descriptionTemplate ?? '',
+    descriptionArgs: record.descriptionArgs ?? {},
     variants: [],
   })
 }
 
 export function adaptPublicV3OverlayRecord(record: PublicV3OverlayRecord): AwakenerOverlayRecord {
+  const iconId =
+    record.iconId ??
+    (record.assets?.icon ? resolvePublicAsset(record.assets.icon)?.assetId : undefined)
+
   return publicV3AwakenerOverlaySchema.parse({
     ...record,
     ownerAwakenerId: optionalNumericAwakenerId(record.ownerAwakenerId),
     displayName: record.name,
     aliases: record.aliases ?? [],
+    iconId,
+    descriptionTemplate: record.descriptionTemplate ?? '',
+    descriptionArgs: record.descriptionArgs ?? {},
   })
 }

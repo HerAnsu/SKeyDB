@@ -14,10 +14,10 @@ import {
   statScalingSchema,
   substatScalingSchema,
 } from './awakener-source-schema'
-import {type AwakenerFullRecord} from './awakeners-full'
-import {type CovenantFullRecord} from './covenants-full'
+import type {AwakenerFullRecord} from './awakeners-full'
+import type {CovenantFullRecord} from './covenants-full'
 import {isLegacyPromotedDerivedExtra} from './legacy-public-v3-adapter/compatibilityOverrides'
-import {type PosseFullRecord} from './posses-full'
+import type {PosseFullRecord} from './posses-full'
 import {publicDescriptionArgsSchema} from './public-description-args.schema'
 import {
   adaptPublicV3DerivedSkillRecord,
@@ -27,7 +27,7 @@ import {
   adaptPublicV3TalentRecord,
 } from './public-v3-awakener-record-adapters'
 import {buildWheelMainstatSeriesKey, type WheelMainstatKey} from './wheel-mainstat-scaling'
-import {type WheelFullRecord} from './wheels-full'
+import type {WheelFullRecord} from './wheels-full'
 
 type PublicV3AwakenerRecord = PublicRecord & {
   aliases?: string[]

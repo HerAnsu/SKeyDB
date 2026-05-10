@@ -147,7 +147,10 @@ export function PickerAwakenerTile({
               <img
                 alt={`${displayName} portrait`}
                 className={`h-full w-full object-cover ${!isOwned ? 'builder-picker-art-unowned' : ''} ${isDimmed ? 'builder-picker-art-dimmed' : ''}`}
+                decoding='async'
                 draggable={false}
+                fetchPriority='low'
+                loading='lazy'
                 src={portraitAsset}
               />
             ) : (

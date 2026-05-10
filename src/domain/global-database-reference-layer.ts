@@ -358,8 +358,8 @@ export async function hydrateGlobalDatabaseReferenceInfo(
   }
 
   if (info.kind === 'wheel') {
-    const {getWheelFullById, getWheelsFull} = await import('./wheels-full')
-    const record = getWheelFullById(info.id, getWheelsFull())
+    const {loadPublicWheelDetailById} = await import('./public-detail-record-adapters')
+    const record = await loadPublicWheelDetailById(info.id)
     if (!record) {
       return info
     }
@@ -371,8 +371,8 @@ export async function hydrateGlobalDatabaseReferenceInfo(
   }
 
   if (info.kind === 'posse') {
-    const {getPosseFullById, getPossesFull} = await import('./posses-full')
-    const record = getPosseFullById(info.id, getPossesFull())
+    const {loadPublicPosseDetailById} = await import('./public-detail-record-adapters')
+    const record = await loadPublicPosseDetailById(info.id)
     if (!record) {
       return info
     }

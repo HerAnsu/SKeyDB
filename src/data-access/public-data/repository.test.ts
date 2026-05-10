@@ -2,7 +2,7 @@ import {describe, expect, it} from 'vitest'
 
 import {resolvePublicAsset, resolvePublicEntityAsset} from './assetRepository'
 import {PUBLIC_DATA_SCOPES} from './contract'
-import {getPublicRecordSnapshot, getPublicRecordSnapshots} from './recordSnapshots'
+import {getPublicRecordSnapshot} from './recordSnapshots'
 import {resolvePublicReferenceToken, resolvePublicReferenceTokenResult} from './referenceRepository'
 import {
   getPublicBuilderCatalog,
@@ -124,15 +124,22 @@ describe('public-data repository', () => {
     expect(getPublicCollectionCatalog().collectables.posses).toContain('posse-0001')
   })
 
-  it('exposes repository-confined synchronous snapshots for legacy detail tables', () => {
-    expect(getPublicRecordSnapshot('skills', 'skill.thais.ancient-caress')).toMatchObject({
+  it('exposes repository-confined lazy snapshots for legacy detail tables', async () => {
+    await expect(
+      getPublicRecordSnapshot('skills', 'skill.thais.ancient-caress'),
+    ).resolves.toMatchObject({
       schemaVersion: 3,
       kind: 'skill',
       id: 'skill.thais.ancient-caress',
       ownerAwakenerId: 'awakener-0048',
     })
-    expect(getPublicRecordSnapshots('overlays').length).toBeGreaterThan(0)
-    expect(getPublicRecordSnapshot('wheels', 'wheel-0001')).toMatchObject({
+    await expect(
+      getPublicRecordSnapshot('overlays', 'overlay.global.madness'),
+    ).resolves.toMatchObject({
+      schemaVersion: 3,
+      kind: 'overlay',
+    })
+    await expect(getPublicRecordSnapshot('wheels', 'wheel-0001')).resolves.toMatchObject({
       kind: 'wheel',
       id: 'wheel-0001',
       descriptionTemplate: expect.stringContaining('Hand Limit'),
@@ -147,15 +154,14 @@ describe('public-data repository', () => {
     )
   })
 
-  it('rejects public-data scopes without synchronous snapshot support', () => {
+  it('keeps snapshot capability metadata aligned with generated counts', () => {
     const manifest = getPublicManifest()
 
     for (const scope of PUBLIC_DATA_SCOPES) {
       const descriptor = getPublicScopeDescriptor(scope)
-      const snapshots = getPublicRecordSnapshots(scope)
 
       expect(descriptor.capabilities).toContain('snapshot')
-      expect(snapshots).toHaveLength(manifest.scopes[scope].count)
+      expect(descriptor.recordCount).toBe(manifest.scopes[scope].count)
     }
   })
 

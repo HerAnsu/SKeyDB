@@ -4,7 +4,7 @@ import {
   resolvePublicAsset,
   resolvePublicEntityAsset,
 } from '@/data-access/public-data/assetRepository'
-import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {getAwakeners} from './awakeners'
 import {resolveDescriptionTemplate} from './description-args'
@@ -22,8 +22,8 @@ const publicRelicRecordSchema = z
       .regex(/^awakener-\d{4}$/)
       .optional(),
     ownerAwakenerName: nonEmptyStringSchema.optional(),
-    descriptionTemplate: z.string(),
-    descriptionArgs: publicDescriptionArgsSchema,
+    descriptionTemplate: z.string().default(''),
+    descriptionArgs: publicDescriptionArgsSchema.default({}),
   })
   .loose()
 
@@ -53,7 +53,7 @@ export type PortraitRelic = Relic & {
   ownerAwakenerId: string
 }
 
-const parsedRelics: Relic[] = getPublicRecordSnapshots('relics')
+const parsedRelics: Relic[] = getPublicCatalogRecords('relics')
   .map((record) => publicRelicRecordSchema.parse(record))
   .map(
     (relic): Relic => ({

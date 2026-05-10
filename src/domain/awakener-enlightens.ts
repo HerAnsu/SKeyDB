@@ -1,4 +1,4 @@
-import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {
   awakenerEnlightensDatasetSchema,
@@ -17,7 +17,7 @@ export function getAwakenerEnlightens(): AwakenerEnlightenRecord[] {
   }
 
   awakenerEnlightensCache = awakenerEnlightensDatasetSchema.parse(
-    getPublicRecordSnapshots('enlightens').map((record) =>
+    getPublicCatalogRecords('enlightens').map((record) =>
       adaptPublicV3EnlightenRecord(record as PublicV3EnlightenRecord),
     ),
   )

@@ -1,4 +1,4 @@
-import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {awakenerTalentsDatasetSchema, type AwakenerTalentRecord} from './awakener-source-schema'
 import {
@@ -14,7 +14,7 @@ export function getAwakenerTalents(): AwakenerTalentRecord[] {
   }
 
   awakenerTalentsCache = awakenerTalentsDatasetSchema.parse(
-    getPublicRecordSnapshots('talents').map((record) =>
+    getPublicCatalogRecords('talents').map((record) =>
       adaptPublicV3TalentRecord(record as PublicV3TalentRecord),
     ),
   )

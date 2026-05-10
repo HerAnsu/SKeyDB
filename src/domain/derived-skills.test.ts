@@ -1,11 +1,29 @@
 import {describe, expect, it} from 'vitest'
 
+import {loadPublicRecord} from '@/data-access/public-data/repository'
+
 import {
   getDerivedSkillById,
   getDerivedSkills,
   getDerivedSkillsForAwakener,
   getDerivedSkillsForRootSkill,
 } from './derived-skills'
+
+async function getDetailedDerivedSkills() {
+  const derivedSkills = getDerivedSkills()
+  return Promise.all(
+    derivedSkills.map(async (derivedSkill) => {
+      const detail = await loadPublicRecord('derived-skills', derivedSkill.id)
+      return {
+        ...derivedSkill,
+        ...detail,
+        displayName: derivedSkill.displayName,
+        ownerAwakenerId: derivedSkill.ownerAwakenerId,
+        variants: derivedSkill.variants,
+      }
+    }),
+  )
+}
 
 describe('derived-skills', () => {
   const retainExhaustKeywords = expect.arrayContaining([
@@ -182,8 +200,8 @@ describe('derived-skills', () => {
     )
   })
 
-  it('preserves reviewed intrinsic keywords and fixed args for dedicated wiki-derived cards', () => {
-    const derivedSkills = getDerivedSkills()
+  it('preserves reviewed intrinsic keywords and fixed args for dedicated wiki-derived cards', async () => {
+    const derivedSkills = await getDetailedDerivedSkills()
 
     expect(getDerivedSkillById('derived.hameln.symphony-of-harmony', derivedSkills)).toEqual(
       expect.objectContaining({

@@ -1,7 +1,23 @@
 import {describe, expect, it} from 'vitest'
 
+import {loadPublicRecord} from '@/data-access/public-data/repository'
+
 import {getAwakeners} from './awakeners'
+import {resolveDescriptionTemplate} from './description-args'
+import type {PublicDescriptionArg} from './public-description-args'
 import {getPortraitRelicByAwakenerId, getPortraitRelics, getRelics} from './relics'
+
+function renderPublicRecordDescription(record: Awaited<ReturnType<typeof loadPublicRecord>>) {
+  if (typeof record?.descriptionTemplate !== 'string') {
+    return ''
+  }
+
+  const descriptionArgs =
+    record.descriptionArgs && typeof record.descriptionArgs === 'object'
+      ? (record.descriptionArgs as Record<string, PublicDescriptionArg>)
+      : {}
+  return resolveDescriptionTemplate(record.descriptionTemplate, descriptionArgs)
+}
 
 describe('getRelics', () => {
   it('returns parsed public V3 relics with stable ids', () => {
@@ -74,11 +90,16 @@ describe('getPortraitRelicByAwakenerId', () => {
     })
   })
 
-  it('keeps key relic references in canonical tagged form for the database UI', () => {
-    expect(getPortraitRelicByAwakenerId('awakener-0002')?.description).toContain('{Reluctant Alms}')
-    expect(getPortraitRelicByAwakenerId('awakener-0047')?.description).toContain(
-      '{Silver Key Dawn}',
-    )
-    expect(getPortraitRelicByAwakenerId('awakener-0033')?.description).toContain('Temporary Strike')
+  it('keeps key relic references in canonical tagged form for the database UI', async () => {
+    const agrippaRelic = await loadPublicRecord('relics', 'relic-0002')
+    const tawilRelic = await loadPublicRecord('relics', 'relic-0047')
+    const murphyRelic = await loadPublicRecord('relics', 'relic-0033')
+
+    expect(renderPublicRecordDescription(agrippaRelic)).toContain('{Reluctant Alms}')
+    expect(renderPublicRecordDescription(tawilRelic)).toContain('{Silver Key Dawn}')
+    expect(renderPublicRecordDescription(murphyRelic)).toContain('Temporary Strike')
+    expect(getPortraitRelicByAwakenerId('awakener-0002')?.description).toBe('')
+    expect(getPortraitRelicByAwakenerId('awakener-0047')?.description).toBe('')
+    expect(getPortraitRelicByAwakenerId('awakener-0033')?.description).toBe('')
   })
 })

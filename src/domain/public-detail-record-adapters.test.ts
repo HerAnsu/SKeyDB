@@ -100,6 +100,23 @@ describe('public-detail-record-adapters', () => {
     )
   })
 
+  it('keeps full overlay descriptions on lazily loaded detail records', async () => {
+    const hameln = await loadPublicAwakenerDetailById('awakener-0022')
+
+    const marvelousDebuff = hameln?.overlays?.find(
+      (overlay) => overlay.id === 'overlay.hameln.marvelous-debuff',
+    )
+    expect(marvelousDebuff).toMatchObject({
+      descriptionTemplate:
+        'Effects: {Bleed} (150% DMG), {Poison} (75% DMG), apply 1 {Weakness}, apply 1 {Vulnerable}, Temp. {STR⯆} -[DescArg1].',
+      descriptionArgs: {
+        DescArg1: expect.objectContaining({
+          kind: 'computed',
+        }),
+      },
+    })
+  })
+
   it('keeps link-only talent influences on the upgraded target record', async () => {
     const agrippa = await loadPublicAwakenerDetailById('awakener-0002')
 

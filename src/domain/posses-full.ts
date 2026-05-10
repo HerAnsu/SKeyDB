@@ -4,7 +4,7 @@ import {
   resolvePublicAsset,
   resolvePublicEntityAsset,
 } from '@/data-access/public-data/assetRepository'
-import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {
   publicDescriptionArgsSchema,
@@ -32,8 +32,8 @@ const publicPosseRecordSchema = z.object({
   realm: z.string(),
   ownerAwakenerId: z.string().optional(),
   ownerAwakenerName: z.string().optional(),
-  descriptionTemplate: z.string(),
-  descriptionArgs: publicDescriptionArgsSchema,
+  descriptionTemplate: z.string().default(''),
+  descriptionArgs: publicDescriptionArgsSchema.default({}),
   lore: z.string().optional(),
   acquisitionSource: z.string().optional(),
 })
@@ -64,7 +64,7 @@ export function getPossesFull(): PosseFullRecord[] {
   }
 
   possesFullCache = publicPosseRecordsSchema
-    .parse(getPublicRecordSnapshots('posses'))
+    .parse(getPublicCatalogRecords('posses'))
     .map(adaptPublicPosse)
   return possesFullCache
 }

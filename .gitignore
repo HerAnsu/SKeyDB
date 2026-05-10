@@ -25,5 +25,9 @@ dist-ssr
 untracked/*
 .mcp_data/*
 .worktrees/
+
+# Local agent planning state
+docs/goals/
+
 INSTRUCTIONS.md
 PRODUCT.md

@@ -97,6 +97,9 @@ export function DatabasePage({routeEntity}: DatabasePageProps = {}) {
     if (!awakenerSlug || !selectedAwakener) {
       return
     }
+    if (tabSlug) {
+      return
+    }
     const canonicalPath = buildCanonicalAwakenerRoutePath(
       selectedAwakener,
       awakenerSlug,
@@ -112,7 +115,15 @@ export function DatabasePage({routeEntity}: DatabasePageProps = {}) {
       },
       {replace: true},
     )
-  }, [activeSearch, awakenerSlug, location.pathname, navigate, selectedAwakener, selectedTab])
+  }, [
+    activeSearch,
+    awakenerSlug,
+    location.pathname,
+    navigate,
+    selectedAwakener,
+    selectedTab,
+    tabSlug,
+  ])
 
   useEffect(() => {
     if (wheelSlug && !selectedWheel) {

@@ -1,7 +1,8 @@
 import {describe, expect, it} from 'vitest'
 
+import {loadPublicRecord} from '@/data-access/public-data/repository'
+
 import type {AwakenerSkillRecord} from './awakener-source-schema'
-import {getAwakenerTalentById, getAwakenerTalents} from './awakener-talents'
 import {resolveAwakenerFullRecord} from './awakeners-full-resolver'
 import {
   buildDescriptionArgHover,
@@ -13,6 +14,7 @@ import {
 } from './description-args'
 import type {PublicDescriptionArg} from './public-description-args'
 import {loadPublicAwakenerDetailById} from './public-detail-record-adapters'
+import {adaptPublicV3TalentRecord} from './public-v3-awakener-record-adapters'
 
 async function loadResolvedSkill(
   awakenerId: number,
@@ -44,8 +46,9 @@ async function loadResolvedSkill(
 }
 
 describe('description-args', () => {
-  it('resolves linear talent ladders across non-skill max levels', () => {
-    const talent = getAwakenerTalentById('talent.xu.soulforge-aptitude', getAwakenerTalents())
+  it('resolves linear talent ladders across non-skill max levels', async () => {
+    const talentRecord = await loadPublicRecord('talents', 'talent.xu.soulforge-aptitude')
+    const talent = talentRecord ? adaptPublicV3TalentRecord(talentRecord) : undefined
     expect(talent).toBeDefined()
     if (!talent) {
       throw new Error('Missing talent.xu.soulforge-aptitude')

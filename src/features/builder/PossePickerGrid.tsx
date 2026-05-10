@@ -135,7 +135,10 @@ function PossePickerTile({
               <img
                 alt={`${posse.name} posse`}
                 className={imageClassName}
+                decoding='async'
                 draggable={false}
+                fetchPriority='low'
+                loading='lazy'
                 src={posseAsset}
               />
             ) : (

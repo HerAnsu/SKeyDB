@@ -15,15 +15,8 @@ import {
 import type {EntityKind} from '@/domain/entities/types'
 import type {Posse} from '@/domain/posses'
 import type {PosseFullRecord} from '@/domain/posses-full'
-import {
-  loadPublicAwakenerDetailById,
-  loadPublicCovenantDetailById,
-  loadPublicPosseDetailById,
-  loadPublicWheelDetailById,
-} from '@/domain/public-detail-record-adapters'
 import type {Wheel} from '@/domain/wheels'
 import type {WheelFullRecord} from '@/domain/wheels-full'
-import {SimpleArtifactDetailModal} from '@/features/database/internal/SimpleArtifactDetailModal'
 
 const AwakenerDetailModal = lazy(() =>
   import('@/features/database/internal/AwakenerDetailModal').then((module) => ({
@@ -33,6 +26,11 @@ const AwakenerDetailModal = lazy(() =>
 const WheelDetailModal = lazy(() =>
   import('@/features/database/internal/WheelDetailModal').then((module) => ({
     default: module.WheelDetailModal,
+  })),
+)
+const SimpleArtifactDetailModal = lazy(() =>
+  import('@/features/database/internal/SimpleArtifactDetailModal').then((module) => ({
+    default: module.SimpleArtifactDetailModal,
   })),
 )
 
@@ -67,9 +65,33 @@ interface DatabaseDetailRegistryEntry {
   render: (options: DatabaseDetailRenderOptions) => ReactNode
 }
 
+async function loadAwakenerDetailRecord(id: string) {
+  const {loadPublicAwakenerDetailById} = await import('@/domain/public-detail-record-adapters')
+
+  return loadPublicAwakenerDetailById(id)
+}
+
+async function loadWheelDetailRecord(id: string) {
+  const {loadPublicWheelDetailById} = await import('@/domain/public-detail-record-adapters')
+
+  return loadPublicWheelDetailById(id)
+}
+
+async function loadPosseDetailRecord(id: string) {
+  const {loadPublicPosseDetailById} = await import('@/domain/public-detail-record-adapters')
+
+  return loadPublicPosseDetailById(id)
+}
+
+async function loadCovenantDetailRecord(id: string) {
+  const {loadPublicCovenantDetailById} = await import('@/domain/public-detail-record-adapters')
+
+  return loadPublicCovenantDetailById(id)
+}
+
 export const dbDetailRegistry: Record<DatabaseDetailKind, DatabaseDetailRegistryEntry> = {
   awakener: {
-    loadRecord: loadPublicAwakenerDetailById,
+    loadRecord: loadAwakenerDetailRecord,
     loadingLabel: 'Loading awakener details...',
     missingBrowsePath: buildDatabaseEntityBrowsePath('awakeners'),
     render: ({awakeners, callbacks, item, record}) => {
@@ -94,7 +116,7 @@ export const dbDetailRegistry: Record<DatabaseDetailKind, DatabaseDetailRegistry
     },
   },
   wheel: {
-    loadRecord: loadPublicWheelDetailById,
+    loadRecord: loadWheelDetailRecord,
     loadingLabel: 'Loading wheel details...',
     missingBrowsePath: buildDatabaseWheelBrowsePath(),
     render: ({callbacks, item, record, wheels}) => {
@@ -116,7 +138,7 @@ export const dbDetailRegistry: Record<DatabaseDetailKind, DatabaseDetailRegistry
     },
   },
   posse: {
-    loadRecord: loadPublicPosseDetailById,
+    loadRecord: loadPosseDetailRecord,
     loadingLabel: 'Loading posse details...',
     missingBrowsePath: buildDatabasePosseBrowsePath(),
     render: ({callbacks, item, record}) => {
@@ -136,7 +158,7 @@ export const dbDetailRegistry: Record<DatabaseDetailKind, DatabaseDetailRegistry
     },
   },
   covenant: {
-    loadRecord: loadPublicCovenantDetailById,
+    loadRecord: loadCovenantDetailRecord,
     loadingLabel: 'Loading covenant details...',
     missingBrowsePath: buildDatabaseCovenantBrowsePath(),
     render: ({callbacks, item, record}) => {

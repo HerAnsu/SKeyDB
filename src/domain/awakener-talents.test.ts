@@ -1,5 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
+import {loadPublicRecord} from '@/data-access/public-data/repository'
+
 import {getAwakenerKits} from './awakener-kits'
 import {
   getAwakenerTalentById,
@@ -44,7 +46,7 @@ describe('awakener-talents', () => {
     })
   })
 
-  it('preserves public slot coverage and soulforge metadata', () => {
+  it('preserves public slot coverage and soulforge metadata', async () => {
     const talents = getAwakenerTalents()
 
     expect(getAwakenerTalentById('talent.corposant.cinders', talents)).toEqual(
@@ -54,7 +56,10 @@ describe('awakener-talents', () => {
       }),
     )
 
-    expect(getAwakenerTalentById('talent.24.madness-omen', talents)).toEqual(
+    const madnessOmen = await loadPublicRecord('talents', 'talent.24.madness-omen')
+    const xuSoulforge = await loadPublicRecord('talents', 'talent.xu.soulforge-aptitude')
+
+    expect(madnessOmen).toEqual(
       expect.objectContaining({
         maxLevel: 12,
         descriptionArgs: {
@@ -67,7 +72,7 @@ describe('awakener-talents', () => {
       }),
     )
 
-    expect(getAwakenerTalentById('talent.xu.soulforge-aptitude', talents)).toEqual(
+    expect(xuSoulforge).toEqual(
       expect.objectContaining({
         maxLevel: 10,
         hasLevelScaledDescription: true,
@@ -105,11 +110,10 @@ describe('awakener-talents', () => {
     )
   })
 
-  it('stores multiline descriptions as real newlines instead of escaped literals', () => {
-    const talents = getAwakenerTalents()
-    const murphyFauxbornTalent = getAwakenerTalentById(
+  it('stores multiline descriptions as real newlines instead of escaped literals', async () => {
+    const murphyFauxbornTalent = await loadPublicRecord(
+      'talents',
       'talent.murphy-fauxborn.divine-realms-order',
-      talents,
     )
 
     expect(murphyFauxbornTalent?.descriptionTemplate).toContain('\n')

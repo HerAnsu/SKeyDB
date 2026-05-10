@@ -309,6 +309,22 @@ function getResultsSummary(expectedText: string) {
   return screen.getByText((_, element) => element?.textContent === expectedText)
 }
 
+async function expectAwakenerDetailRouteEndState({
+  dialogName,
+  path,
+  tab,
+}: {
+  dialogName: RegExp
+  path: string
+  tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams'
+}) {
+  await waitFor(() => {
+    expect(screen.getByRole('dialog', {name: dialogName})).toBeInTheDocument()
+    expect(screen.getByText(`Active tab ${tab}`)).toBeInTheDocument()
+    expect(screen.getByTestId('location-path')).toHaveTextContent(path)
+  })
+}
+
 async function renderDatabasePage(
   initialEntryOrEntries: string | string[] = '/database',
   initialIndex?: number,
@@ -714,35 +730,31 @@ describe('DatabasePage', () => {
   it('falls back to the awakener overview route when deep link tab is unknown', async () => {
     await renderDatabasePage('/database/awk/alpha/missing')
 
-    expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
-    expect(screen.getByText('Active tab overview')).toBeInTheDocument()
-    await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha'),
-    )
+    await expectAwakenerDetailRouteEndState({
+      dialogName: /alpha details/,
+      path: '/database/awakeners/alpha',
+      tab: 'overview',
+    })
   })
 
   it('canonicalizes legacy cards tab routes onto the skills slug', async () => {
     await renderDatabasePage('/database/awk/alpha/cards')
 
-    expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
-    expect(screen.getByText('Active tab skills')).toBeInTheDocument()
-    await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent(
-        '/database/awakeners/alpha/skills',
-      ),
-    )
+    await expectAwakenerDetailRouteEndState({
+      dialogName: /alpha details/,
+      path: '/database/awakeners/alpha/skills',
+      tab: 'skills',
+    })
   })
 
   it('canonicalizes mixed-case legacy tab routes onto the skills slug', async () => {
     await renderDatabasePage('/database/awk/alpha/Cards')
 
-    expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
-    expect(screen.getByText('Active tab skills')).toBeInTheDocument()
-    await waitFor(() =>
-      expect(screen.getByTestId('location-path')).toHaveTextContent(
-        '/database/awakeners/alpha/skills',
-      ),
-    )
+    await expectAwakenerDetailRouteEndState({
+      dialogName: /alpha details/,
+      path: '/database/awakeners/alpha/skills',
+      tab: 'skills',
+    })
   })
 
   it('preserves generated canonical awakener slugs and only entity-valid query params', async () => {

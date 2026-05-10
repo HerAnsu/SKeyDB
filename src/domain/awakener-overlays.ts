@@ -1,4 +1,4 @@
-import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {awakenerOverlaysDatasetSchema, type AwakenerOverlayRecord} from './awakener-source-schema'
 import {
@@ -28,7 +28,7 @@ export function getAwakenerOverlays(): AwakenerOverlayRecord[] {
   }
 
   awakenerOverlaysCache = awakenerOverlaysDatasetSchema.parse(
-    getPublicRecordSnapshots('overlays').map((record) =>
+    getPublicCatalogRecords('overlays').map((record) =>
       adaptPublicV3OverlayRecord(record as PublicV3OverlayRecord),
     ),
   )

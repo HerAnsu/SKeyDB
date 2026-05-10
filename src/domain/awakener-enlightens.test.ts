@@ -1,5 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
+import {loadPublicRecord} from '@/data-access/public-data/repository'
+
 import {getAwakenerEnlightenById, getAwakenerEnlightens} from './awakener-enlightens'
 import {getAwakenerKits} from './awakener-kits'
 
@@ -64,18 +66,17 @@ describe('awakener-enlightens', () => {
     }
   })
 
-  it('cleans malformed quote-heavy enlighten descriptions into canonical rich-text terms', () => {
-    const enlightens = getAwakenerEnlightens()
-
+  it('cleans malformed quote-heavy enlighten descriptions into canonical rich-text terms', async () => {
     expect(
-      getAwakenerEnlightenById('enlighten.clementine.you-will-recover', enlightens)
+      (await loadPublicRecord('enlightens', 'enlighten.clementine.you-will-recover'))
         ?.descriptionTemplate,
     ).toBe(
       'At turn end, obtain 2 stacks of {Symbiosis}. The stacking limit for {Symbiosis}, {Psychic Trauma}, and {Phobic Fixation} is increased to 15.',
     )
 
     expect(
-      getAwakenerEnlightenById('enlighten.karen.creamy-frosting', enlightens)?.descriptionTemplate,
+      (await loadPublicRecord('enlightens', 'enlighten.karen.creamy-frosting'))
+        ?.descriptionTemplate,
     ).toBe("The {Toad Stew}'s {Poison} and HP Recovery effects +25%.")
   })
 
