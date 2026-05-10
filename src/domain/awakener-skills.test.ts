@@ -1,5 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
+import {loadPublicRecord} from '@/data-access/public-data/repository'
+
 import {getAwakenerKits} from './awakener-kits'
 import {
   getAwakenerSkillById,
@@ -7,6 +9,23 @@ import {
   getAwakenerSkillsForAwakener,
 } from './awakener-skills'
 import {getDerivedSkills} from './derived-skills'
+
+async function getDetailedAwakenerSkills() {
+  const skills = getAwakenerSkills()
+  return Promise.all(
+    skills.map(async (skill) => {
+      const detail = await loadPublicRecord('skills', skill.id)
+      return {
+        ...skill,
+        ...detail,
+        displayName: skill.displayName,
+        kind: skill.kind,
+        ownerAwakenerId: skill.ownerAwakenerId,
+        variants: skill.variants,
+      }
+    }),
+  )
+}
 
 describe('awakener-skills', () => {
   it('loads canonical skill records from the normalized dataset', () => {
@@ -46,8 +65,8 @@ describe('awakener-skills', () => {
     })
   })
 
-  it('preserves slot semantics and source-backed naming for public skills', () => {
-    const skills = getAwakenerSkills()
+  it('preserves slot semantics and source-backed naming for public skills', async () => {
+    const skills = await getDetailedAwakenerSkills()
     const mediatingPersonalities = getAwakenerSkillById('skill.24.mediating-personalities', skills)
     const strike24 = getAwakenerSkillById('skill.24.strike', skills)
     const frenzy24 = getAwakenerSkillById('skill.24.frenzied-slash', skills)
@@ -171,8 +190,8 @@ describe('awakener-skills', () => {
     expect(mismatches).toEqual([])
   })
 
-  it('keeps upgrade-only keyword tags off base cards and baseline stacks honest', () => {
-    const skills = getAwakenerSkills()
+  it('keeps upgrade-only keyword tags off base cards and baseline stacks honest', async () => {
+    const skills = await getDetailedAwakenerSkills()
 
     expect(getAwakenerSkillById('skill.caecus.protective-scales', skills)?.cardKeywords).toEqual([])
     expect(getAwakenerSkillById('skill.caecus.strike', skills)?.descriptionArgs.Arg3).toEqual(

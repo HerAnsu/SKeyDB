@@ -9,13 +9,21 @@ vi.mock('@/domain/wheel-assets', () => ({
   getWheelAssetById: () => '/wheel.webp',
 }))
 
-vi.mock('@/domain/realms', () => ({
-  getRealmAccent: () => '#ffffff',
-}))
+vi.mock('@/domain/realms', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/domain/realms')>()
+  return {
+    ...actual,
+    getRealmAccent: () => '#ffffff',
+  }
+})
 
-vi.mock('@/domain/mainstats', () => ({
-  getMainstatIcon: () => '/mainstat.png',
-}))
+vi.mock('@/domain/mainstats', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/domain/mainstats')>()
+  return {
+    ...actual,
+    getMainstatIcon: () => '/mainstat.png',
+  }
+})
 
 function makeWheel(overrides: Partial<Wheel> = {}): Wheel {
   return {

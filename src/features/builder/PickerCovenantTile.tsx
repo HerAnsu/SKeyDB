@@ -42,7 +42,10 @@ function renderCovenantPreview(
       <img
         alt={altText}
         className='h-full w-full object-cover'
+        decoding='async'
         draggable={false}
+        fetchPriority='low'
+        loading='lazy'
         src={covenantAsset}
       />
     )

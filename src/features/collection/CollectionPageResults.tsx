@@ -153,7 +153,10 @@ function AwakenerCollectionCard({
           <img
             alt={`${formatAwakenerNameForUi(awakener.name)} card`}
             className={`collection-card-art h-full w-full object-cover object-top ${ownedLevel === null ? 'builder-picker-art-unowned' : ''}`}
+            decoding='async'
             draggable={false}
+            fetchPriority='low'
+            loading='lazy'
             src={cardAsset}
           />
         ) : (
@@ -243,7 +246,10 @@ function WheelCollectionCard({
           <img
             alt={`${wheel.name} wheel`}
             className={`collection-card-art builder-picker-wheel-image h-full w-full object-cover ${ownedLevel === null ? 'builder-picker-art-unowned' : ''}`}
+            decoding='async'
             draggable={false}
+            fetchPriority='low'
+            loading='lazy'
             src={wheelAsset}
           />
         ) : (
@@ -313,7 +319,10 @@ function PosseCollectionCard({
           <img
             alt={`${posse.name} posse`}
             className={`collection-card-art h-full w-full object-cover ${ownedLevel === null ? 'builder-picker-art-unowned' : ''}`}
+            decoding='async'
             draggable={false}
+            fetchPriority='low'
+            loading='lazy'
             src={asset}
           />
         ) : (

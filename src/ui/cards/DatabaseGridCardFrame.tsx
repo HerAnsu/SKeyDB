@@ -1,78 +1,171 @@
 import type {CSSProperties, ReactNode} from 'react'
 
+import {useHybridDatabaseCardMode} from './hybrid-database-card-mode'
+
 interface DatabaseGridCardFrameProps {
-  realmAccent: string
   ariaLabel: string
-  imageSrc: string | undefined
-  imageAlt: string
-  imageObjectClassName?: string
-  prioritizeImage: boolean
-  fadeHeightClass: string
-  aspectClassName?: string
-  cornerOverlay?: ReactNode
-  children?: ReactNode
+  content: {
+    detail?: ReactNode
+    dossierTitleAddon?: ReactNode
+    meta?: ReactNode
+    title: ReactNode
+  }
+  layout?: 'hybrid' | 'portrait'
+  media: {
+    alt: string
+    dossierClassName?: string
+    dossierSrc?: string | undefined
+    posterAspectClassName?: string
+    posterBadge?: {
+      label?: string | undefined
+      src?: string | undefined
+    }
+    posterClassName?: string
+    posterSrc: string | undefined
+    prioritize: boolean
+  }
   onSelect: () => void
+  realmAccent: string
+}
+
+function NoImage({className}: {className?: string}) {
+  return (
+    <div
+      className={`flex h-full w-full items-center justify-center text-[10px] tracking-wide text-slate-500 uppercase ${className ?? ''}`}
+    >
+      No Image
+    </div>
+  )
+}
+
+function PendingImage({className}: {className?: string}) {
+  return (
+    <div
+      aria-hidden='true'
+      className={`h-full w-full bg-[color-mix(in_oklab,var(--realm-accent)_5%,rgb(8_15_27))] ${className ?? ''}`}
+    />
+  )
+}
+
+function CardImage({
+  alt,
+  className,
+  decorative = false,
+  prioritize,
+  src,
+}: {
+  alt: string
+  className: string
+  decorative?: boolean
+  prioritize: boolean
+  src: string | undefined
+}) {
+  if (!src) {
+    return <NoImage className={className} />
+  }
+
+  return (
+    <div className='database-grid-card__image-plane absolute inset-0'>
+      <img
+        alt={decorative ? '' : alt}
+        aria-hidden={decorative ? 'true' : undefined}
+        className={className}
+        decoding='async'
+        draggable={false}
+        fetchPriority={prioritize ? 'high' : 'low'}
+        loading={prioritize ? 'eager' : 'lazy'}
+        src={src}
+      />
+    </div>
+  )
+}
+
+function PosterBadge({label, src}: {label: string | undefined; src: string | undefined}) {
+  if (!src) {
+    return null
+  }
+
+  return (
+    <img
+      alt=''
+      aria-hidden='true'
+      className='database-grid-card__poster-badge absolute top-0 left-0 z-10 h-12 w-12 object-contain'
+      draggable={false}
+      src={src}
+      title={label}
+    />
+  )
 }
 
 export function DatabaseGridCardFrame({
   ariaLabel,
-  aspectClassName = 'aspect-[5/9]',
-  children,
-  cornerOverlay,
-  fadeHeightClass,
-  imageAlt,
-  imageObjectClassName = 'object-cover',
-  imageSrc,
+  content,
+  layout = 'hybrid',
+  media,
   onSelect,
-  prioritizeImage,
   realmAccent,
 }: DatabaseGridCardFrameProps) {
+  const accentStyle = {'--realm-accent': realmAccent} as CSSProperties
+  const resolvedDossierSrc = media.dossierSrc ?? media.posterSrc
+  const hybridMode = useHybridDatabaseCardMode()
+  const imageMode =
+    layout === 'hybrid' ? (hybridMode === undefined ? 'poster' : hybridMode) : 'poster'
+  const isDossierMode = imageMode === 'dossier'
+  const activeImageSrc = isDossierMode ? resolvedDossierSrc : media.posterSrc
+  const activeImageClassName = isDossierMode
+    ? (media.dossierClassName ?? 'object-cover object-top')
+    : (media.posterClassName ?? 'object-cover object-top')
+
   return (
-    <article className='collection-item-card group/card p-0.5'>
-      <div
-        className={`relative overflow-hidden p-[1px] shadow-[0_8px_20px_rgba(2,6,23,0.24)] transition-[transform,box-shadow] duration-300 group-hover/card:-translate-y-0.5 group-hover/card:shadow-[0_14px_30px_rgba(2,6,23,0.34)] ${aspectClassName}`}
-        style={
-          {
-            '--realm-accent': realmAccent,
-            background: `linear-gradient(180deg, color-mix(in srgb, var(--realm-accent) 92%, white 8%), rgba(71,85,105,0.92))`,
-          } as CSSProperties
-        }
-      >
-        <div className='relative h-full w-full overflow-hidden bg-slate-900 transition-colors duration-300'>
-          <button
-            aria-label={ariaLabel}
-            className='absolute inset-0 z-30 cursor-pointer transition-[background-color,box-shadow] duration-300 group-hover/card:bg-white/5 group-hover/card:shadow-[inset_0_0_10px_rgba(255,255,255,0.1)] focus-visible:bg-white/5 focus-visible:ring-2 focus-visible:ring-amber-200/70 focus-visible:outline-none focus-visible:ring-inset'
-            onClick={onSelect}
-            type='button'
-          />
+    <article
+      className={`database-grid-card-frame database-grid-card-frame--${layout} group/card`}
+      data-image-mode={imageMode ?? 'pending'}
+      style={accentStyle}
+    >
+      <div className='database-grid-card__surface relative isolate grid min-w-0 overflow-hidden border border-[color-mix(in_srgb,var(--realm-accent)_48%,rgb(51_65_85)_52%)] bg-[rgb(7_15_27)] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.025),0_8px_18px_rgba(2,6,23,0.22)] transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.25,1,0.5,1)] group-focus-within/card:border-[color-mix(in_srgb,var(--realm-accent)_66%,rgb(51_65_85)_34%)] group-focus-within/card:bg-[rgb(10_18_32)] group-focus-within/card:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_12px_24px_rgba(2,6,23,0.28)] group-hover/card:border-[color-mix(in_srgb,var(--realm-accent)_66%,rgb(51_65_85)_34%)] group-hover/card:bg-[rgb(10_18_32)] group-hover/card:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_12px_24px_rgba(2,6,23,0.28)] motion-reduce:transition-none'>
+        <button
+          aria-label={ariaLabel}
+          className='absolute inset-0 z-30 cursor-pointer focus-visible:ring-2 focus-visible:ring-amber-200/70 focus-visible:outline-none focus-visible:ring-inset'
+          onClick={onSelect}
+          type='button'
+        />
 
-          {imageSrc ? (
-            <img
-              alt={imageAlt}
-              className={`h-full w-full ${imageObjectClassName}`}
-              decoding='async'
-              draggable={false}
-              fetchPriority={prioritizeImage ? 'high' : 'low'}
-              loading={prioritizeImage ? 'eager' : 'lazy'}
-              src={imageSrc}
-            />
+        <div
+          className={`database-grid-card__art relative min-w-0 overflow-hidden border-b border-[color-mix(in_srgb,var(--realm-accent)_32%,rgb(30_41_59)_68%)] bg-[color-mix(in_oklab,var(--realm-accent)_8%,rgb(8_15_27))] ${media.posterAspectClassName ?? 'aspect-[4/5]'}`}
+        >
+          {imageMode ? (
+            <>
+              <CardImage
+                alt={media.alt}
+                className={`database-grid-card__image h-full w-full ${activeImageClassName}`}
+                prioritize={media.prioritize}
+                src={activeImageSrc}
+              />
+              {!isDossierMode ? (
+                <PosterBadge label={media.posterBadge?.label} src={media.posterBadge?.src} />
+              ) : null}
+            </>
           ) : (
-            <div className='flex h-full w-full items-center justify-center bg-slate-800 text-[10px] text-slate-500'>
-              No Image
-            </div>
+            <PendingImage className='database-grid-card__image h-full w-full' />
           )}
+        </div>
 
-          {cornerOverlay}
-
-          <div
-            aria-hidden
-            className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/90 via-black/66 via-42% to-transparent ${fadeHeightClass}`}
-          />
-
-          {children ? (
-            <div className='pointer-events-none absolute right-0 bottom-0 left-0 z-20 px-2.5 pt-12 pb-2.5'>
-              {children}
+        <div className='database-grid-card__body grid min-w-0 content-center gap-1.5 bg-[linear-gradient(180deg,rgba(9,19,33,0.98),rgba(5,12,23,0.96))] px-2.5 py-2'>
+          <div className='database-grid-card__title flex min-w-0 items-center gap-1.5'>
+            {content.title}
+            {isDossierMode && content.dossierTitleAddon ? (
+              <span className='database-grid-card__dossier-title-addon hidden shrink-0'>
+                {content.dossierTitleAddon}
+              </span>
+            ) : null}
+          </div>
+          {content.detail ? (
+            <div className='database-grid-card__detail hidden min-w-0 text-[10.5px] leading-[1.25] font-medium tracking-[0.035em] text-slate-400'>
+              {content.detail}
             </div>
+          ) : null}
+          {content.meta ? (
+            <div className='database-grid-card__meta min-w-0'>{content.meta}</div>
           ) : null}
         </div>
       </div>

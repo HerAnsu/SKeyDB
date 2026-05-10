@@ -6,12 +6,12 @@ import {getAwakeners} from '@/domain/awakeners'
 import {DatabaseGrid} from './DatabaseGrid'
 
 describe('DatabaseGrid', () => {
-  it('defers lower-priority grid portraits while keeping the first twenty-four cards eager', () => {
+  it('defers lower-priority grid portraits while keeping the first twenty-four cards eager', async () => {
     render(<DatabaseGrid awakeners={getAwakeners().slice(0, 30)} onSelectAwakener={vi.fn()} />)
 
     expect(screen.getAllByRole('button', {name: /View details for/})).toHaveLength(30)
 
-    const images = screen.getAllByRole('img')
+    const images = await screen.findAllByRole('img')
 
     expect(images).toHaveLength(30)
     expect(images[0]).toHaveAttribute('loading', 'eager')

@@ -192,26 +192,28 @@ describe('AwakenerBuildsTab', () => {
       expect(loadPublicWheelDetailById).toHaveBeenCalledWith('wheel-0028')
     })
 
-    expect(openRootInfo).toHaveBeenCalledWith(
-      expect.objectContaining({
-        name: 'Amber-Tinted Death',
-        navigationLabel: 'Open in Wheels DB',
-        navigationTarget: {
-          kind: 'wheel-page',
-          wheelName: 'Amber-Tinted Death',
-        },
-        attributeRows: [
-          expect.objectContaining({
-            label: 'Crit DMG',
-            value: expect.any(String),
+    await waitFor(() => {
+      expect(openRootInfo).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: 'Amber-Tinted Death',
+          navigationLabel: 'Open in Wheels DB',
+          navigationTarget: {
+            kind: 'wheel-page',
+            wheelName: 'Amber-Tinted Death',
+          },
+          attributeRows: [
+            expect.objectContaining({
+              label: 'Crit DMG',
+              value: expect.any(String),
+            }),
+          ],
+          referenceLayerOverride: expect.objectContaining({
+            referenceInfoById: expect.any(Map),
           }),
-        ],
-        referenceLayerOverride: expect.objectContaining({
-          referenceInfoById: expect.any(Map),
         }),
-      }),
-      expect.any(Object),
-    )
+        expect.any(Object),
+      )
+    })
   })
 
   it('opens wheel preview popovers for canonical wheel ids backed by lazy detail records', async () => {
@@ -265,18 +267,20 @@ describe('AwakenerBuildsTab', () => {
       expect(loadPublicWheelDetailById).toHaveBeenCalledWith('wheel-0016')
     })
 
-    expect(openRootInfo).toHaveBeenCalledWith(
-      expect.objectContaining({
-        name: 'Manikin of Oblivion',
-        attributeRows: expect.arrayContaining([
-          expect.objectContaining({
-            label: 'Aliemus Regen',
-            value: expect.any(String),
-          }),
-        ]),
-      }),
-      expect.any(Object),
-    )
+    await waitFor(() => {
+      expect(openRootInfo).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: 'Manikin of Oblivion',
+          attributeRows: expect.arrayContaining([
+            expect.objectContaining({
+              label: 'Aliemus Regen',
+              value: expect.any(String),
+            }),
+          ]),
+        }),
+        expect.any(Object),
+      )
+    })
   })
 
   it('keeps only the latest lazy wheel preview request active', async () => {

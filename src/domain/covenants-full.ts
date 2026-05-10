@@ -4,7 +4,7 @@ import {
   resolvePublicAsset,
   resolvePublicEntityAsset,
 } from '@/data-access/public-data/assetRepository'
-import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {
   publicDescriptionArgsSchema,
@@ -29,13 +29,15 @@ export interface CovenantFullRecord {
 const publicCovenantRecordSchema = z.object({
   id: z.string(),
   name: z.string(),
-  setEffects: z.array(
-    z.object({
-      set: z.number(),
-      descriptionTemplate: z.string(),
-      descriptionArgs: publicDescriptionArgsSchema,
-    }),
-  ),
+  setEffects: z
+    .array(
+      z.object({
+        set: z.number(),
+        descriptionTemplate: z.string(),
+        descriptionArgs: publicDescriptionArgsSchema,
+      }),
+    )
+    .default([]),
   lore: z.string().optional(),
   acquisitionSource: z.string().optional(),
 })
@@ -64,7 +66,7 @@ export function getCovenantsFull(): CovenantFullRecord[] {
   }
 
   covenantsFullCache = publicCovenantRecordsSchema
-    .parse(getPublicRecordSnapshots('covenants'))
+    .parse(getPublicCatalogRecords('covenants'))
     .map(adaptPublicCovenant)
   return covenantsFullCache
 }

@@ -7,6 +7,7 @@ import {
   patchCovenantDatabaseBrowseState,
   patchPosseDatabaseBrowseState,
   POSSE_DATABASE_BROWSE_DEFAULTS,
+  POSSE_DATABASE_REALM_FILTER_IDS,
 } from './simple-artifact-database-browse-state'
 
 describe('simple-artifact-database-browse-state', () => {
@@ -43,5 +44,17 @@ describe('simple-artifact-database-browse-state', () => {
     expect(parseCovenantDatabaseBrowseState(new URLSearchParams())).toEqual(
       COVENANT_DATABASE_BROWSE_DEFAULTS,
     )
+  })
+
+  it('orders posse realm filters with Faded Legacy after Ultra and before Other', () => {
+    expect(POSSE_DATABASE_REALM_FILTER_IDS).toEqual([
+      'ALL',
+      'AEQUOR',
+      'CARO',
+      'CHAOS',
+      'ULTRA',
+      'FADED_LEGACY',
+      'OTHER',
+    ])
   })
 })

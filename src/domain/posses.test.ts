@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
 import {getPosses} from './posses'
-import {getPossesFull} from './posses-full'
+import {loadPublicPosseDetailById} from './public-detail-record-adapters'
 
 describe('getPosses', () => {
   it('returns posses with stable numeric indexes', () => {
@@ -46,9 +46,8 @@ describe('getPosses', () => {
     expect(uniqueIndices.size).toBe(indices.length)
   })
 
-  it('loads public acquisition copy from V3 detail records', () => {
-    const fullRecords = getPossesFull()
-    const encounter = fullRecords.find((posse) => posse.id === 'posse-0001')
+  it('loads acquisition copy lazily from V3 detail records', async () => {
+    const encounter = await loadPublicPosseDetailById('posse-0001')
 
     expect(encounter?.acquisitionSource).toBe(
       'Clear Operation: Faded Legacy - Ch. 3 - Beware of Hounds',

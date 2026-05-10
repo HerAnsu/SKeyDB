@@ -21,6 +21,7 @@ export function PosseGrid({onSelectPosse, posses}: PosseGridProps) {
           id={posse.id}
           imageSrc={getPosseBadgeAssetById(posse.id)}
           index={index}
+          imageTreatment='badge'
           key={posse.id}
           name={posse.name}
           onSelect={onSelectPosse}
@@ -46,6 +47,7 @@ export function CovenantGrid({covenants, onSelectCovenant}: CovenantGridProps) {
           id={covenant.id}
           imageSrc={getCovenantAssetById(covenant.id)}
           index={index}
+          imageTreatment='emblem'
           key={covenant.id}
           name={covenant.name}
           onSelect={onSelectCovenant}

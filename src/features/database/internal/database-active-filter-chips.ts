@@ -1,4 +1,5 @@
 import {
+  getAvailabilityFilterLabel,
   getTypeFilterLabel,
   type AvailabilityFilterId,
   type DatabaseBrowseState,
@@ -96,16 +97,7 @@ export function buildAwakenerActiveFilterChips(
   if (state.availabilityFilter !== 'ALL') {
     chips.push({
       key: 'availability',
-      label:
-        state.availabilityFilter === 'PERMANENT'
-          ? 'Permanent'
-          : state.availabilityFilter === 'WELFARE'
-            ? 'Welfare'
-            : state.availabilityFilter === 'LIMITED'
-              ? 'Limited'
-              : state.availabilityFilter === 'LIMITED_FADED_LEGACY'
-                ? 'Faded Legacy'
-                : 'Astral Reign',
+      label: getAvailabilityFilterLabel(state.availabilityFilter),
       onClear: () => {
         actions.setAvailabilityFilter('ALL')
       },

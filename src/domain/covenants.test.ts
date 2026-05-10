@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
 import {getCovenants} from './covenants'
-import {getCovenantsFull} from './covenants-full'
+import {loadPublicCovenantDetailById} from './public-detail-record-adapters'
 
 describe('getCovenants', () => {
   it('returns parsed covenants with ids and asset ids', () => {
@@ -24,9 +24,8 @@ describe('getCovenants', () => {
     ).toBe(true)
   })
 
-  it('loads public acquisition copy from V3 detail records', () => {
-    const covenants = getCovenantsFull()
-    const deusExMachina = covenants.find((covenant) => covenant.id === 'covenant-0001')
+  it('loads acquisition copy lazily from V3 detail records', async () => {
+    const deusExMachina = await loadPublicCovenantDetailById('covenant-0001')
 
     expect(deusExMachina?.acquisitionSource).toBe(
       'Clear Interlude - Verboten Covenant: City of Big Smoke',

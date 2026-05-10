@@ -1,13 +1,17 @@
 import {describe, expect, it} from 'vitest'
 
-import {getAwakenerEnlightenById, getAwakenerEnlightens} from './awakener-enlightens'
-import {getAwakenerOverlays, resolveAwakenerOverlay} from './awakener-overlays'
+import {loadPublicRecord} from '@/data-access/public-data/repository'
+
 import type {AwakenerSkillRecord} from './awakener-source-schema'
-import {getAwakenerTalentById, getAwakenerTalents} from './awakener-talents'
 import {resolveAwakenerFullRecord} from './awakeners-full-resolver'
-import {getDerivedSkillById, getDerivedSkills} from './derived-skills'
 import {resolveDescribedRecord} from './description-records'
 import {loadPublicAwakenerDetailById} from './public-detail-record-adapters'
+import {
+  adaptPublicV3DerivedSkillRecord,
+  adaptPublicV3EnlightenRecord,
+  adaptPublicV3OverlayRecord,
+  adaptPublicV3TalentRecord,
+} from './public-v3-awakener-record-adapters'
 
 async function loadResolvedSkill(
   awakenerId: number,
@@ -84,14 +88,12 @@ describe('description-records', () => {
     expect(resolved.orderedArgEntries[1].hover).toContain('Lv2: 41.4% ATK = 58')
   })
 
-  it('preserves template appearance order even when arg keys are not stored numerically', () => {
-    const talent = getAwakenerTalentById(
-      'talent.mouchette.soulforge-aptitude',
-      getAwakenerTalents(),
-    )
-    if (!talent) {
+  it('preserves template appearance order even when arg keys are not stored numerically', async () => {
+    const talentRecord = await loadPublicRecord('talents', 'talent.mouchette.soulforge-aptitude')
+    if (!talentRecord) {
       throw new Error('Missing talent.mouchette.soulforge-aptitude')
     }
+    const talent = adaptPublicV3TalentRecord(talentRecord)
 
     const resolved = resolveDescribedRecord(talent, {rank: 4}, {maxRank: talent.maxLevel})
 
@@ -106,20 +108,23 @@ describe('description-records', () => {
     expect(resolved.orderedArgEntries[2]?.progression).toBe('20/23/26/29/32/35/38/41/44/50')
   })
 
-  it('resolves overlays, derived skills, and enlightens through the same described-record path', () => {
-    const overlay = resolveAwakenerOverlay('Marvelous Debuff', getAwakenerOverlays())
-    const derived = getDerivedSkillById('derived.global.embryo', getDerivedSkills())
-    const enlighten = getAwakenerEnlightenById('enlighten.24.hysteria', getAwakenerEnlightens())
+  it('resolves overlays, derived skills, and enlightens through the same described-record path', async () => {
+    const overlayRecord = await loadPublicRecord('overlays', 'overlay.hameln.marvelous-debuff')
+    const derivedRecord = await loadPublicRecord('derived-skills', 'derived.global.embryo')
+    const enlightenRecord = await loadPublicRecord('enlightens', 'enlighten.24.hysteria')
 
-    if (!overlay) {
+    if (!overlayRecord) {
       throw new Error('Missing overlay.hameln.marvelous-debuff')
     }
-    if (!derived) {
+    if (!derivedRecord) {
       throw new Error('Missing derived.global.embryo')
     }
-    if (!enlighten) {
+    if (!enlightenRecord) {
       throw new Error('Missing enlighten.24.hysteria')
     }
+    const overlay = adaptPublicV3OverlayRecord(overlayRecord)
+    const derived = adaptPublicV3DerivedSkillRecord(derivedRecord)
+    const enlighten = adaptPublicV3EnlightenRecord(enlightenRecord)
 
     expect(resolveDescribedRecord(overlay).description).toContain('Temp. {STR⯆} -13.')
     expect(resolveDescribedRecord(derived).description).toContain(

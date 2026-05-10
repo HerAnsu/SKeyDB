@@ -3,6 +3,7 @@ import {describe, expect, it} from 'vitest'
 import {
   DEFAULT_REALM_ACCENT,
   getRealmAccent,
+  getRealmBadge,
   getRealmIcon,
   getRealmLabel,
   normalizeRealmId,
@@ -24,6 +25,8 @@ describe('realms domain', () => {
   it('returns canonical labels with fallback to the given value', () => {
     expect(getRealmLabel('AEQUOR')).toBe('Aequor')
     expect(getRealmLabel('ultra')).toBe('Ultra')
+    expect(getRealmLabel('FADED_LEGACY')).toBe('Faded Legacy')
+    expect(getRealmLabel('OTHER')).toBe('Other')
     expect(getRealmLabel('XREALM')).toBe('XREALM')
   })
 
@@ -32,5 +35,12 @@ describe('realms domain', () => {
     expect(getRealmIcon('CHAOS')).toEqual(expect.any(String))
     expect(getRealmIcon('unknown')).toBeUndefined()
     expect(getRealmIcon(undefined)).toBeUndefined()
+  })
+
+  it('returns badge assets for known realms and undefined for unknown ids', () => {
+    expect(getRealmBadge('AEQUOR')).toEqual(expect.any(String))
+    expect(getRealmBadge('caro')).toEqual(expect.any(String))
+    expect(getRealmBadge('unknown')).toBeUndefined()
+    expect(getRealmBadge(undefined)).toBeUndefined()
   })
 })

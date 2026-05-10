@@ -1,8 +1,5 @@
 import {DEFAULT_REALM_ACCENT, getRealmAccent} from '@/domain/realms'
-import {
-  databaseCardTitleClampStyle,
-  databaseCardTitleClassName,
-} from '@/ui/cards/database-card-typography'
+import {databaseCardTitleClassName} from '@/ui/cards/database-card-typography'
 import {DatabaseGridCardFrame} from '@/ui/cards/DatabaseGridCardFrame'
 
 const PRIORITIZED_GRID_IMAGE_COUNT = 24
@@ -11,6 +8,7 @@ interface SimpleArtifactGridCardProps {
   id: string
   name: string
   imageSrc: string | undefined
+  imageTreatment?: 'badge' | 'emblem'
   realm?: string
   index: number
   onSelect: (id: string) => void
@@ -19,28 +17,44 @@ interface SimpleArtifactGridCardProps {
 export function SimpleArtifactGridCard({
   id,
   imageSrc,
+  imageTreatment = 'badge',
   index,
   name,
   onSelect,
   realm = 'NEUTRAL',
 }: SimpleArtifactGridCardProps) {
+  const isNeutral = realm === 'NEUTRAL'
+  const realmAccent = isNeutral ? DEFAULT_REALM_ACCENT : getRealmAccent(realm)
+  const posterImageClassName =
+    imageTreatment === 'emblem'
+      ? 'database-grid-card__image--emblem object-contain object-center'
+      : 'database-grid-card__image--badge object-contain object-center'
+
   return (
     <DatabaseGridCardFrame
       ariaLabel={`View details for ${name}`}
-      aspectClassName='aspect-[4/5]'
-      fadeHeightClass='h-[44%]'
-      imageAlt={name}
-      imageObjectClassName='object-contain px-3 pt-2 pb-8'
-      imageSrc={imageSrc}
+      content={{
+        title: (
+          <p
+            className={`${databaseCardTitleClassName} database-grid-card__title-text`}
+            title={name}
+          >
+            {name}
+          </p>
+        ),
+      }}
+      layout='portrait'
+      media={{
+        alt: name,
+        posterAspectClassName: 'aspect-square',
+        posterClassName: posterImageClassName,
+        posterSrc: imageSrc,
+        prioritize: index < PRIORITIZED_GRID_IMAGE_COUNT,
+      }}
       onSelect={() => {
         onSelect(id)
       }}
-      prioritizeImage={index < PRIORITIZED_GRID_IMAGE_COUNT}
-      realmAccent={realm === 'NEUTRAL' ? DEFAULT_REALM_ACCENT : getRealmAccent(realm)}
-    >
-      <p className={databaseCardTitleClassName} style={databaseCardTitleClampStyle}>
-        {name}
-      </p>
-    </DatabaseGridCardFrame>
+      realmAccent={realmAccent}
+    />
   )
 }

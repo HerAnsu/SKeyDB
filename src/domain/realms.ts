@@ -2,6 +2,10 @@ import aequorIcon from '@/assets/factions/aequor.webp'
 import caroIcon from '@/assets/factions/caro.webp'
 import chaosIcon from '@/assets/factions/chaos.webp'
 import ultraIcon from '@/assets/factions/ultra.webp'
+import aequorBadge from '@/assets/ui/realm-badge-aequor.webp'
+import caroBadge from '@/assets/ui/realm-badge-caro.webp'
+import chaosBadge from '@/assets/ui/realm-badge-chaos.webp'
+import ultraBadge from '@/assets/ui/realm-badge-ultra.webp'
 
 export const DEFAULT_REALM_ACCENT = '#7a8da8'
 
@@ -10,7 +14,9 @@ export const REALM_LABEL_BY_ID = {
   CARO: 'Caro',
   CHAOS: 'Chaos',
   ULTRA: 'Ultra',
+  FADED_LEGACY: 'Faded Legacy',
   NEUTRAL: 'Neutral',
+  OTHER: 'Other',
 } as const
 
 export const REALM_ACCENT_BY_ID: Record<string, string> = {
@@ -26,6 +32,13 @@ export const REALM_ICON_BY_ID: Record<string, string> = {
   CARO: caroIcon,
   CHAOS: chaosIcon,
   ULTRA: ultraIcon,
+}
+
+export const REALM_BADGE_BY_ID: Record<string, string> = {
+  AEQUOR: aequorBadge,
+  CARO: caroBadge,
+  CHAOS: chaosBadge,
+  ULTRA: ultraBadge,
 }
 
 export const REALM_ACCENT_BY_LABEL: Record<string, string> = Object.fromEntries(
@@ -59,4 +72,11 @@ export function getRealmIcon(realmId: string | undefined): string | undefined {
     return undefined
   }
   return REALM_ICON_BY_ID[normalizeRealmId(realmId)]
+}
+
+export function getRealmBadge(realmId: string | undefined): string | undefined {
+  if (!realmId) {
+    return undefined
+  }
+  return REALM_BADGE_BY_ID[normalizeRealmId(realmId)]
 }

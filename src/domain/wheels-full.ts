@@ -4,7 +4,7 @@ import {
   resolvePublicAsset,
   resolvePublicEntityAsset,
 } from '@/data-access/public-data/assetRepository'
-import {getPublicRecordSnapshots} from '@/data-access/public-data/recordSnapshots'
+import {getPublicCatalogRecords} from '@/data-access/public-data/catalogRepository'
 
 import {
   publicDescriptionArgsSchema,
@@ -41,8 +41,8 @@ const publicWheelRecordSchema = z.object({
   searchTags: z.array(z.string()).optional(),
   mainstatKey: z.custom<WheelMainstatKey>((value) => typeof value === 'string'),
   mainstatSeriesKey: z.string().optional(),
-  descriptionTemplate: z.string(),
-  descriptionArgs: publicDescriptionArgsSchema,
+  descriptionTemplate: z.string().default(''),
+  descriptionArgs: publicDescriptionArgsSchema.default({}),
   lore: z.string().optional(),
 })
 
@@ -75,7 +75,7 @@ export function getWheelsFull(): WheelFullRecord[] {
   }
 
   wheelsFullCache = publicWheelRecordsSchema
-    .parse(getPublicRecordSnapshots('wheels'))
+    .parse(getPublicCatalogRecords('wheels'))
     .map(adaptPublicWheel)
   return wheelsFullCache
 }

@@ -146,27 +146,22 @@ describe('awakener-overlays', () => {
     expect(resolveAwakenerOverlay('Missing Overlay', overlays)).toBeNull()
   })
 
-  it('keeps reviewed placeholder-backed overlays explicit when the source formula is still unknown', () => {
+  it('loads catalog-backed overlays as lightweight reference stubs', () => {
     const overlays = getAwakenerOverlays()
 
-    expect(overlays.find((entry) => entry.id === 'overlay.hameln.marvelous-debuff')).toMatchObject({
-      descriptionTemplate:
-        'Effects: {Bleed} (150% DMG), {Poison} (75% DMG), apply 1 {Weakness}, apply 1 {Vulnerable}, Temp. {STR⯆} -[DescArg1].',
-      descriptionArgs: {
-        DescArg1: expect.objectContaining({
-          kind: 'computed',
-        }),
-      },
+    expect(overlays.find((entry) => entry.id === 'overlay.global.ultra-space')).toMatchObject({
+      id: 'overlay.global.ultra-space',
+      displayName: 'Ultra Space',
+      descriptionTemplate: '',
+      descriptionArgs: {},
     })
   })
 
-  it('keeps realm labels clickable inside the reviewed Realm and Persona overlay copy', () => {
+  it('does not hydrate full overlay copy from the catalog source', () => {
     const overlays = getAwakenerOverlays()
     const realmAndPersona = overlays.find((entry) => entry.id === 'overlay.24.realm-and-persona')
 
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Chaos: Depressed}:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Aequor: Depressed}:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Caro: Depressed}:')
-    expect(realmAndPersona?.descriptionTemplate).toContain('{Ultra: Depressed}:')
+    expect(realmAndPersona?.descriptionTemplate).toBe('')
+    expect(realmAndPersona?.descriptionArgs).toEqual({})
   })
 })

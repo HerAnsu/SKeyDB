@@ -86,7 +86,10 @@ function renderWheelPreview(
       <img
         alt={`${wheelDisplayName} wheel`}
         className={`builder-picker-wheel-image h-full w-full object-cover ${!isOwned && !isNotSet ? 'builder-picker-art-unowned' : ''} ${isDimmed ? 'builder-picker-art-dimmed' : ''}`}
+        decoding='async'
         draggable={false}
+        fetchPriority='low'
+        loading='lazy'
         src={wheelAsset}
       />
     )

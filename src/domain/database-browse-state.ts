@@ -25,6 +25,44 @@ export const DATABASE_AVAILABILITY_FILTER_IDS = [
 ] as const
 export type AvailabilityFilterId = (typeof DATABASE_AVAILABILITY_FILTER_IDS)[number]
 
+export function getAvailabilityFilterLabel(id: AvailabilityFilterId): string {
+  switch (id) {
+    case 'ALL':
+      return 'All'
+    case 'PERMANENT':
+      return 'Permanent'
+    case 'WELFARE':
+      return 'Welfare'
+    case 'LIMITED':
+      return 'Limited'
+    case 'LIMITED_FADED_LEGACY':
+      return 'Faded Legacy'
+    case 'LIMITED_ASTRAL_REIGN':
+      return 'Astral Reign'
+  }
+}
+
+export function formatAwakenerAvailabilityLabel(value: string | undefined): string | undefined {
+  if (!value) {
+    return undefined
+  }
+  const normalized = value.trim().toUpperCase()
+  if (normalized === 'LIMITED_FADED_LEGACY') {
+    return getAvailabilityFilterLabel('LIMITED_FADED_LEGACY')
+  }
+  if (normalized === 'LIMITED_ASTRAL_REIGN') {
+    return getAvailabilityFilterLabel('LIMITED_ASTRAL_REIGN')
+  }
+  if (DATABASE_AVAILABILITY_FILTER_IDS.includes(normalized as AvailabilityFilterId)) {
+    return getAvailabilityFilterLabel(normalized as AvailabilityFilterId)
+  }
+  return value
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1).toLowerCase()}`)
+    .join(' ')
+}
+
 export function getTypeFilterLabel(id: TypeFilterId): string {
   if (id === 'ALL') {
     return 'All'
