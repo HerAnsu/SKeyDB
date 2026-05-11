@@ -1,7 +1,12 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 
+import {getAwakeners} from '@/domain/awakeners'
+import type {EntityRef} from '@/domain/entities/types'
 import {getTimelineStatus, sortBannersByRelevance, sortEventsByRelevance} from '@/domain/timeline'
 import {timelineBanners, timelineEvents} from '@/domain/timeline-data'
+import {getWheels} from '@/domain/wheels'
+import {DbDetailModalHost} from '@/features/database/detail/DbDetailModalHost'
+import {dbDetailStore} from '@/stores/dbDetailStore'
 
 import {BannerCard} from './timeline/BannerCard'
 import {EventList} from './timeline/EventList'
@@ -12,6 +17,8 @@ const TICK_INTERVAL_MS = 60_000
 export function TimelinePage() {
   const [now, setNow] = useState(() => new Date())
   const [showEndedBanners, setShowEndedBanners] = useState(false)
+  const awakeners = useMemo(() => getAwakeners(), [])
+  const wheels = useMemo(() => getWheels(), [])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,11 +42,15 @@ export function TimelinePage() {
     (b) => getTimelineStatus(b.startDate, b.endDate, now) === 'ended',
   )
 
+  function openTimelineDetail(ref: EntityRef) {
+    dbDetailStore.getState().openDetail(ref, 'timeline-overlay')
+  }
+
   return (
     <section className='space-y-4'>
       <div className='space-y-3'>
         <h3 className='ui-title text-xl text-amber-100'>Events</h3>
-        <EventList events={events} now={now} />
+        <EventList events={events} now={now} onOpenDetail={openTimelineDetail} />
       </div>
 
       <div className='space-y-3 border-t border-slate-500/30 pt-2'>
@@ -49,7 +60,12 @@ export function TimelinePage() {
           {activeBanners.length > 0 && (
             <div className='grid gap-3 sm:grid-cols-2'>
               {activeBanners.map((banner) => (
-                <BannerCard banner={banner} key={banner.id} now={now} />
+                <BannerCard
+                  banner={banner}
+                  key={banner.id}
+                  now={now}
+                  onOpenDetail={openTimelineDetail}
+                />
               ))}
             </div>
           )}
@@ -62,7 +78,12 @@ export function TimelinePage() {
               </div>
               <div className='grid gap-3 sm:grid-cols-2'>
                 {upcomingBanners.map((banner) => (
-                  <BannerCard banner={banner} key={banner.id} now={now} />
+                  <BannerCard
+                    banner={banner}
+                    key={banner.id}
+                    now={now}
+                    onOpenDetail={openTimelineDetail}
+                  />
                 ))}
               </div>
             </div>
@@ -80,12 +101,31 @@ export function TimelinePage() {
               title='Ended'
             >
               {endedBanners.map((banner) => (
-                <BannerCard banner={banner} key={banner.id} now={now} />
+                <BannerCard
+                  banner={banner}
+                  key={banner.id}
+                  now={now}
+                  onOpenDetail={openTimelineDetail}
+                />
               ))}
             </TimelineArchiveSection>
           ) : null}
         </div>
       </div>
+      <DbDetailModalHost
+        awakeners={awakeners}
+        callbacks={{
+          onClose: () => {
+            dbDetailStore.getState().popDetail()
+          },
+          onSelectAwakener: () => undefined,
+          onSelectCovenant: () => undefined,
+          onSelectWheel: () => undefined,
+          onTabChange: () => undefined,
+        }}
+        routeItem={null}
+        wheels={wheels}
+      />
     </section>
   )
 }

@@ -88,6 +88,155 @@ button {
   line-height: 1.1;
 }
 
+.timeline-event-chip {
+  --timeline-event-chip-border: transparent;
+  --timeline-event-chip-bg: rgb(2 6 23 / 0.4);
+  --timeline-event-chip-text: rgb(226 232 240 / 0.86);
+
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--timeline-event-chip-border);
+  border-radius: 2px;
+  background: var(--timeline-event-chip-bg);
+  padding: 2px 6px;
+  color: var(--timeline-event-chip-text);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.timeline-event-chip__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline-event-chip--interactive {
+  max-width: 70px;
+  appearance: none;
+  justify-content: flex-start;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.timeline-event-chip--interactive:hover {
+  border-color: rgb(253 230 138 / 0.7);
+  background: rgb(15 23 42 / 0.8);
+  color: rgb(254 243 199);
+}
+
+.timeline-event-chip--interactive:focus-visible {
+  outline: none;
+  border-color: rgb(253 230 138);
+  box-shadow: 0 0 0 2px rgb(253 230 138 / 0.25);
+}
+
+.timeline-event-chip--status-active {
+  --timeline-event-chip-border: rgb(16 185 129);
+  --timeline-event-chip-bg: rgb(2 6 23);
+  --timeline-event-chip-text: rgb(52 211 153);
+}
+
+.timeline-event-chip--status-upcoming {
+  --timeline-event-chip-border: rgb(14 165 233);
+  --timeline-event-chip-bg: rgb(2 6 23);
+  --timeline-event-chip-text: rgb(56 189 248);
+}
+
+.timeline-event-chip--status-ended {
+  --timeline-event-chip-border: rgb(100 116 139 / 0.4);
+  --timeline-event-chip-bg: rgb(15 23 42 / 0.6);
+  --timeline-event-chip-text: rgb(100 116 139);
+}
+
+.timeline-event-chip--amber {
+  --timeline-event-chip-border: rgb(245 158 11 / 0.3);
+  --timeline-event-chip-text: rgb(245 158 11 / 0.8);
+}
+
+.timeline-event-chip--red {
+  --timeline-event-chip-border: rgb(239 68 68 / 0.3);
+  --timeline-event-chip-text: rgb(239 68 68 / 0.8);
+}
+
+.timeline-event-chip--violet {
+  --timeline-event-chip-border: rgb(139 92 246 / 0.3);
+  --timeline-event-chip-text: rgb(139 92 246 / 0.8);
+}
+
+.timeline-event-chip--teal {
+  --timeline-event-chip-border: rgb(20 184 166 / 0.3);
+  --timeline-event-chip-text: rgb(20 184 166 / 0.8);
+}
+
+.timeline-event-chip--pink {
+  --timeline-event-chip-border: rgb(236 72 153 / 0.3);
+  --timeline-event-chip-text: rgb(236 72 153 / 0.8);
+}
+
+.timeline-event-chip--cyan {
+  --timeline-event-chip-border: rgb(6 182 212 / 0.3);
+  --timeline-event-chip-text: rgb(6 182 212 / 0.8);
+}
+
+.timeline-event-chip--orange {
+  --timeline-event-chip-border: rgb(249 115 22 / 0.3);
+  --timeline-event-chip-text: rgb(249 115 22 / 0.8);
+}
+
+.timeline-event-chip--slate {
+  --timeline-event-chip-border: rgb(100 116 139 / 0.3);
+  --timeline-event-chip-text: rgb(100 116 139 / 0.8);
+}
+
+.timeline-event-chip--emerald {
+  --timeline-event-chip-border: rgb(16 185 129 / 0.3);
+  --timeline-event-chip-text: rgb(16 185 129 / 0.8);
+}
+
+.timeline-event-chip--fuchsia {
+  --timeline-event-chip-border: rgb(217 70 239 / 0.3);
+  --timeline-event-chip-text: rgb(217 70 239 / 0.8);
+}
+
+.timeline-event-chip--rerun {
+  --timeline-event-chip-border: rgb(139 92 246 / 0.3);
+  --timeline-event-chip-text: rgb(167 139 250 / 0.9);
+}
+
+.timeline-event-chip--muted {
+  --timeline-event-chip-border: rgb(100 116 139 / 0.2);
+  --timeline-event-chip-bg: rgb(71 85 105 / 0.1);
+  --timeline-event-chip-text: rgb(148 163 184);
+}
+
+.timeline-event-chip--wheel {
+  --timeline-event-chip-border: rgb(6 182 212 / 0.45);
+  --timeline-event-chip-text: rgb(165 243 252);
+}
+
+.timeline-event-chip--awakener {
+  --timeline-event-chip-border: rgb(245 158 11 / 0.45);
+  --timeline-event-chip-text: rgb(254 243 199);
+}
+
+.timeline-event-chip--price {
+  --timeline-event-chip-border: rgb(235 220 220 / 0.45);
+  --timeline-event-chip-text: rgb(235 220 220 / 0.95);
+}
+
 p {
   text-wrap-style: balance;
 }

@@ -3,6 +3,11 @@ import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {TimelinePage} from './TimelinePage'
 
+const detailStoreMocks = vi.hoisted(() => ({
+  openDetail: vi.fn(),
+  popDetail: vi.fn(),
+}))
+
 vi.mock('@/domain/timeline-data', () => ({
   timelineBanners: [
     {
@@ -23,8 +28,33 @@ vi.mock('@/domain/timeline-data', () => ({
   timelineEvents: [],
 }))
 
+vi.mock('@/stores/dbDetailStore', () => ({
+  dbDetailStore: {
+    getState: () => detailStoreMocks,
+  },
+}))
+
+vi.mock('@/features/database/detail/DbDetailModalHost', () => ({
+  DbDetailModalHost: () => <div data-testid='timeline-detail-host' />,
+}))
+
 vi.mock('./timeline/BannerCard', () => ({
-  BannerCard: ({banner}: {banner: {title: string}}) => <div>{banner.title}</div>,
+  BannerCard: ({
+    banner,
+    onOpenDetail,
+  }: {
+    banner: {title: string}
+    onOpenDetail?: (ref: {kind: 'wheel'; id: string}) => void
+  }) => (
+    <button
+      onClick={() => {
+        onOpenDetail?.({kind: 'wheel', id: 'wheel-0128'})
+      }}
+      type='button'
+    >
+      {banner.title}
+    </button>
+  ),
 }))
 
 vi.mock('./timeline/EventList', () => ({
@@ -33,6 +63,8 @@ vi.mock('./timeline/EventList', () => ({
 
 afterEach(() => {
   vi.useRealTimers()
+  detailStoreMocks.openDetail.mockReset()
+  detailStoreMocks.popDetail.mockReset()
 })
 
 describe('TimelinePage', () => {
@@ -48,5 +80,20 @@ describe('TimelinePage', () => {
     fireEvent.click(screen.getByRole('button', {name: /ended/i}))
 
     expect(screen.getByText('Archived Banner')).toBeInTheDocument()
+  })
+
+  it('opens database detail overlays from timeline cards', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-03-10T00:00:00.000Z'))
+
+    render(<TimelinePage />)
+
+    fireEvent.click(screen.getByRole('button', {name: 'Active Banner'}))
+
+    expect(detailStoreMocks.openDetail).toHaveBeenCalledWith(
+      {kind: 'wheel', id: 'wheel-0128'},
+      'timeline-overlay',
+    )
+    expect(screen.getByTestId('timeline-detail-host')).toBeInTheDocument()
   })
 })

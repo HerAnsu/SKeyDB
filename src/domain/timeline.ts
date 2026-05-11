@@ -3,6 +3,7 @@ export interface BannerFeaturedUnit {
   kind: 'awakener' | 'wheel' | 'wheel-auto' | 'placeholder'
   customArt?: string
   realmId?: string
+  detailLink?: boolean
 }
 
 export interface BannerPoolSlot {

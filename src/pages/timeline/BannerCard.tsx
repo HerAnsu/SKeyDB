@@ -1,10 +1,8 @@
-import {useEffect, useMemo, useRef, useState} from 'react'
+import {useEffect, useMemo, useRef, useState, type MouseEvent} from 'react'
 
 import {Link} from 'react-router-dom'
 
-import {getAwakenerCardAsset} from '@/domain/awakener-assets'
-import {getAwakeners} from '@/domain/awakeners'
-import {buildDatabaseAwakenerPath, buildDatabaseWheelPath} from '@/domain/database-paths'
+import type {EntityRef} from '@/domain/entities/types'
 import {getRealmAccent, getRealmIcon} from '@/domain/realms'
 import {
   getTimelineCountdownDisplay,
@@ -14,8 +12,8 @@ import {
   type BannerPoolSlot,
   type TimelineStatus,
 } from '@/domain/timeline'
-import {getWheelAssetById} from '@/domain/wheel-assets'
-import {getWheels} from '@/domain/wheels'
+
+import {resolveTimelineFeaturedAsset, type TimelineFeaturedAsset} from './timelineDetailResolution'
 
 const BANNER_TYPE_LABEL: Record<BannerEntry['type'], string> = {
   awaken: 'New Awakener',
@@ -48,25 +46,6 @@ const BORDER_INSET = 1
 const CYCLE_INTERVAL_MS = 2500
 const TRANSITION_DURATION_MS = 800
 
-function findAwakener(name: string) {
-  const needle = name.toLowerCase()
-  return getAwakeners().find((a) => a.name.toLowerCase() === needle)
-}
-
-function findAwakenerRealm(name: string): string | undefined {
-  return findAwakener(name)?.realm
-}
-
-function findWheel(name: string) {
-  const needle = name.toLowerCase()
-  return getWheels().find((w) => w.name.toLowerCase() === needle)
-}
-
-function findSignatureWheel(awakenerName: string) {
-  const needle = awakenerName.toLowerCase()
-  return getWheels().find((w) => w.awakener.toLowerCase() === needle && w.rarity === 'SSR')
-}
-
 function buildClipPath(index: number, total: number): string {
   if (total <= 1) {
     return 'none'
@@ -86,78 +65,12 @@ function buildClipPath(index: number, total: number): string {
   return `polygon(calc(${s}px + ${b}px) 0, calc(100% - ${b}px) 0, calc(100% - ${s}px - ${b}px) 100%, calc(${b}px) 100%)`
 }
 
-interface SliceAsset {
-  url: string | undefined
-  label: string
-  linkTo: string | undefined
-  realmId: string | undefined
-  isWheel: boolean
-}
-
-function resolveSliceAsset(unit: BannerFeaturedUnit): SliceAsset {
-  if (unit.customArt) {
-    const awakener = unit.kind === 'awakener' ? findAwakener(unit.name) : undefined
-    const wheel =
-      unit.kind === 'wheel'
-        ? findWheel(unit.name)
-        : unit.kind === 'wheel-auto'
-          ? findSignatureWheel(unit.name)
-          : undefined
-    return {
-      url: unit.customArt,
-      label: unit.name,
-      linkTo: wheel
-        ? buildDatabaseWheelPath(wheel)
-        : awakener
-          ? buildDatabaseAwakenerPath(awakener)
-          : undefined,
-      realmId:
-        unit.realmId ??
-        (unit.kind === 'wheel' || unit.kind === 'wheel-auto' ? wheel?.realm : awakener?.realm),
-      isWheel: unit.kind === 'wheel' || unit.kind === 'wheel-auto',
-    }
-  }
-  if (unit.kind === 'awakener') {
-    return {
-      url: getAwakenerCardAsset(unit.name),
-      label: unit.name,
-      linkTo: findAwakener(unit.name) ? buildDatabaseAwakenerPath({name: unit.name}) : undefined,
-      realmId: unit.realmId ?? findAwakenerRealm(unit.name),
-      isWheel: false,
-    }
-  }
-  if (unit.kind === 'wheel') {
-    const wheel = findWheel(unit.name)
-    return {
-      url: wheel ? getWheelAssetById(wheel.id) : undefined,
-      label: unit.name,
-      linkTo: wheel ? buildDatabaseWheelPath(wheel) : undefined,
-      realmId: unit.realmId ?? wheel?.realm,
-      isWheel: true,
-    }
-  }
-  if (unit.kind === 'placeholder') {
-    return {
-      url: undefined,
-      label: unit.name,
-      linkTo: undefined,
-      realmId: undefined,
-      isWheel: false,
-    }
-  }
-  const wheel = findSignatureWheel(unit.name)
-  return {
-    url: wheel ? getWheelAssetById(wheel.id) : undefined,
-    label: wheel?.name ?? unit.name,
-    linkTo: wheel ? buildDatabaseWheelPath(wheel) : undefined,
-    realmId: unit.realmId ?? wheel?.realm ?? findAwakenerRealm(unit.name),
-    isWheel: true,
-  }
-}
+type SliceAsset = TimelineFeaturedAsset
 
 interface BannerSliceProps {
   unit: BannerFeaturedUnit
   index: number
+  onOpenDetail?: (ref: EntityRef) => void
   total: number
 }
 
@@ -215,8 +128,66 @@ function SliceLabelSlot({asset, index, total}: {asset: SliceAsset; index: number
   )
 }
 
-function BannerArtSlice({unit, index, total}: BannerSliceProps) {
-  const asset = resolveSliceAsset(unit)
+function isPlainPrimaryClick(event: MouseEvent<HTMLElement>): boolean {
+  return event.button === 0 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
+}
+
+function openDetailFromTarget(
+  event: MouseEvent<HTMLElement>,
+  detailRef: EntityRef | undefined,
+  onOpenDetail: ((ref: EntityRef) => void) | undefined,
+) {
+  if (!detailRef || !onOpenDetail || !isPlainPrimaryClick(event)) {
+    return
+  }
+
+  event.preventDefault()
+  event.stopPropagation()
+  onOpenDetail(detailRef)
+}
+
+function SliceDetailTarget({
+  asset,
+  className,
+  onOpenDetail,
+}: {
+  asset: SliceAsset
+  className: string
+  onOpenDetail?: (ref: EntityRef) => void
+}) {
+  if (asset.linkTo) {
+    return (
+      <Link
+        aria-label={asset.label}
+        className={className}
+        onClick={(event) => {
+          openDetailFromTarget(event, asset.detailRef, onOpenDetail)
+        }}
+        title={asset.label}
+        to={asset.linkTo}
+      />
+    )
+  }
+
+  if (!asset.detailRef || !onOpenDetail) {
+    return null
+  }
+
+  return (
+    <button
+      aria-label={asset.label}
+      className={className}
+      onClick={(event) => {
+        openDetailFromTarget(event, asset.detailRef, onOpenDetail)
+      }}
+      title={asset.label}
+      type='button'
+    />
+  )
+}
+
+function BannerArtSlice({unit, index, onOpenDetail, total}: BannerSliceProps) {
+  const asset = resolveTimelineFeaturedAsset(unit)
 
   const imgClass = asset.isWheel
     ? 'h-full w-full object-cover object-center scale-[1.15]'
@@ -237,14 +208,11 @@ function BannerArtSlice({unit, index, total}: BannerSliceProps) {
           </div>
         )}
       </div>
-      {asset.linkTo ? (
-        <Link
-          aria-label={asset.label}
-          className='absolute inset-0 z-30'
-          title={asset.label}
-          to={asset.linkTo}
-        />
-      ) : null}
+      <SliceDetailTarget
+        asset={asset}
+        className='absolute inset-0 z-30'
+        onOpenDetail={onOpenDetail}
+      />
     </div>
   )
 }
@@ -256,7 +224,9 @@ interface PoolCycleFrame {
 }
 
 function getPoolFingerprint(pool: BannerFeaturedUnit[]): string {
-  return pool.map((u) => `${u.kind}:${u.name}`).join('|')
+  return pool
+    .map((u) => `${u.kind}:${u.name}:${u.detailLink === false ? 'no-detail' : 'detail'}`)
+    .join('|')
 }
 
 function usePoolCycling(poolSlots: BannerPoolSlot[]): PoolCycleFrame[] {
@@ -374,12 +344,18 @@ function resolvePoolSlots(poolSlots: BannerPoolSlot[]): ResolvedVisualSlot[] {
   const visual: ResolvedVisualSlot[] = []
   poolSlots.forEach((slot, frameIdx) => {
     visual.push({
-      assets: slot.pool.map((unit) => resolveSliceAsset(unit)),
+      assets: slot.pool.map((unit) => resolveTimelineFeaturedAsset(unit)),
       cycleFrameIndex: frameIdx,
     })
     if (slot.linked) {
       visual.push({
-        assets: slot.pool.map((unit) => resolveSliceAsset({name: unit.name, kind: 'wheel-auto'})),
+        assets: slot.pool.map((unit) =>
+          resolveTimelineFeaturedAsset({
+            name: unit.name,
+            kind: 'wheel-auto',
+            detailLink: unit.detailLink,
+          }),
+        ),
         cycleFrameIndex: frameIdx,
       })
     }
@@ -391,6 +367,7 @@ interface PoolBannerSliceProps {
   assets: SliceAsset[]
   frame: PoolCycleFrame
   index: number
+  onOpenDetail?: (ref: EntityRef) => void
   total: number
 }
 
@@ -412,7 +389,7 @@ function PoolSliceLayer({asset}: {asset: SliceAsset}) {
   )
 }
 
-function PoolBannerSlice({assets, frame, index, total}: PoolBannerSliceProps) {
+function PoolBannerSlice({assets, frame, index, onOpenDetail, total}: PoolBannerSliceProps) {
   const [layers, setLayers] = useState<{a: number; b: number; front: 'a' | 'b'}>({
     a: frame.activeIdx,
     b: frame.activeIdx,
@@ -458,14 +435,11 @@ function PoolBannerSlice({assets, frame, index, total}: PoolBannerSliceProps) {
       >
         <PoolSliceLayer asset={assetB} />
       </div>
-      {frontAsset.linkTo ? (
-        <Link
-          aria-label={frontAsset.label}
-          className='absolute inset-0 z-20'
-          title={frontAsset.label}
-          to={frontAsset.linkTo}
-        />
-      ) : null}
+      <SliceDetailTarget
+        asset={frontAsset}
+        className='absolute inset-0 z-20'
+        onOpenDetail={onOpenDetail}
+      />
     </div>
   )
 }
@@ -485,20 +459,24 @@ function expandFeatured(featured: BannerFeaturedUnit[]): BannerFeaturedUnit[] {
   if (featured.length !== 1 || featured[0].kind !== 'awakener') {
     return featured
   }
-  return [featured[0], {name: featured[0].name, kind: 'wheel-auto'}]
+  return [
+    featured[0],
+    {name: featured[0].name, kind: 'wheel-auto', detailLink: featured[0].detailLink},
+  ]
 }
 
 interface BannerCardProps {
   banner: BannerEntry
   now?: Date
+  onOpenDetail?: (ref: EntityRef) => void
 }
 
-export function BannerCard({banner, now}: BannerCardProps) {
+export function BannerCard({banner, now, onOpenDetail}: BannerCardProps) {
   const status = getTimelineStatus(banner.startDate, banner.endDate, now)
   const countdownDisplay = getTimelineCountdownDisplay(banner.startDate, banner.endDate, now)
   const displaySlices = useMemo(() => expandFeatured(banner.featured ?? []), [banner.featured])
   const displayAssets = useMemo(
-    () => displaySlices.map((unit) => resolveSliceAsset(unit)),
+    () => displaySlices.map((unit) => resolveTimelineFeaturedAsset(unit)),
     [displaySlices],
   )
   const visualSlots = useMemo(
@@ -532,6 +510,7 @@ export function BannerCard({banner, now}: BannerCardProps) {
                 frame={cycleFrames[vs.cycleFrameIndex]}
                 index={i}
                 key={i}
+                onOpenDetail={onOpenDetail}
                 total={visualSlots.length}
               />
             ))
@@ -540,6 +519,7 @@ export function BannerCard({banner, now}: BannerCardProps) {
               <BannerArtSlice
                 index={index}
                 key={`${unit.kind}-${unit.name}`}
+                onOpenDetail={onOpenDetail}
                 total={displaySlices.length}
                 unit={unit}
               />

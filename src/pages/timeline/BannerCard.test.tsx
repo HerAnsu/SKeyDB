@@ -1,5 +1,6 @@
-import {render, screen} from '@testing-library/react'
+import {fireEvent, render, screen} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
+import {vi} from 'vitest'
 
 import {BannerCard} from './BannerCard'
 
@@ -108,6 +109,59 @@ describe('BannerCard', () => {
       'href',
       '/database/wheels/eternal-weave',
     )
+  })
+
+  it('opens database-backed featured units in timeline detail overlays on plain clicks', () => {
+    const onOpenDetail = vi.fn()
+
+    render(
+      <MemoryRouter>
+        <BannerCard
+          banner={{
+            id: 'arachne-banner',
+            title: 'Fata Texunt / Sempiternal Web',
+            type: 'awaken',
+            startDate: '2026-04-20T00:00:00.000Z',
+            endDate: '2026-05-18T00:00:00.000Z',
+            featured: [
+              {name: 'Arachne', kind: 'awakener'},
+              {name: 'Eternal Weave', kind: 'wheel'},
+            ],
+          }}
+          now={new Date('2026-04-25T00:00:00.000Z')}
+          onOpenDetail={onOpenDetail}
+        />
+      </MemoryRouter>,
+    )
+
+    const wheelLink = screen.getByRole('link', {name: 'Eternal Weave'})
+
+    expect(wheelLink).toHaveAttribute('href', '/database/wheels/eternal-weave')
+
+    fireEvent.click(wheelLink)
+
+    expect(onOpenDetail).toHaveBeenCalledWith({kind: 'wheel', id: 'wheel-0128'})
+  })
+
+  it('does not link featured units that opt out of detail links', () => {
+    render(
+      <MemoryRouter>
+        <BannerCard
+          banner={{
+            id: 'pre-release-banner',
+            title: 'Pre-release Banner',
+            type: 'awaken',
+            startDate: '2026-04-06T00:00:00.000Z',
+            endDate: '2026-04-20T00:00:00.000Z',
+            featured: [{name: 'Arachne', kind: 'awakener', detailLink: false}],
+          }}
+          now={new Date('2026-04-10T00:00:00.000Z')}
+          onOpenDetail={vi.fn()}
+        />
+      </MemoryRouter>,
+    )
+
+    expect(screen.queryByRole('link', {name: 'Arachne'})).not.toBeInTheDocument()
   })
 
   it('links auto-expanded signature wheel slices to wheel details', () => {

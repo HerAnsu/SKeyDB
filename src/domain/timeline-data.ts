@@ -18,6 +18,7 @@ type FeaturedInput =
       kind?: 'awakener' | 'wheel' | 'wheel-auto' | 'placeholder'
       customArt?: string
       realmId?: string
+      detailLink?: boolean
     }
 
 interface PoolSlotInput {
@@ -47,7 +48,7 @@ interface EventInput {
   startDate: string
   endDate: string
   pinned?: boolean
-  featured?: string
+  featured?: FeaturedInput | FeaturedInput[]
   customArt?: string
   pricing?: string
   rerun?: boolean
@@ -99,6 +100,7 @@ function resolveUnit(input: FeaturedInput): BannerFeaturedUnit {
       kind: input.kind ?? 'awakener',
       customArt: resolveCustomArt(input.customArt),
       realmId: input.realmId,
+      detailLink: input.detailLink,
     }
   }
   const lower = input.toLowerCase()
@@ -106,6 +108,10 @@ function resolveUnit(input: FeaturedInput): BannerFeaturedUnit {
     return {name: input, kind: 'wheel'}
   }
   return {name: input, kind: 'awakener'}
+}
+
+function resolveFeaturedList(input: FeaturedInput | FeaturedInput[]): BannerFeaturedUnit[] {
+  return (Array.isArray(input) ? input : [input]).map(resolveUnit)
 }
 
 function resolvePoolSlots(input: PoolSlotInput[]): BannerPoolSlot[] {
@@ -158,7 +164,7 @@ function loadEvent(raw: EventInput): EventEntry {
     artAlign: raw.artAlign,
   }
   if (raw.featured) {
-    entry.featured = [resolveUnit(raw.featured)]
+    entry.featured = resolveFeaturedList(raw.featured)
   }
   return entry
 }

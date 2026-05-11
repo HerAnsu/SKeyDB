@@ -3,7 +3,7 @@ import {createStore} from 'zustand/vanilla'
 import type {EntityRef} from '@/domain/entities/types'
 
 export type DbDetailRouteSource = 'database-route'
-export type DbDetailOverlaySource = 'builder-overlay' | 'collection-overlay'
+export type DbDetailOverlaySource = 'builder-overlay' | 'collection-overlay' | 'timeline-overlay'
 export type DbDetailReferenceSource = 'reference'
 export type DbDetailSource = DbDetailRouteSource | DbDetailOverlaySource | DbDetailReferenceSource
 
