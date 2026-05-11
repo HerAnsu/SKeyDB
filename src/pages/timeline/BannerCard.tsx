@@ -1,22 +1,22 @@
-import {useEffect, useMemo, useRef, useState, type MouseEvent} from 'react'
+import {Fragment, useEffect, useMemo, useRef, useState, type MouseEvent} from 'react'
 
-import {FaChevronRight} from 'react-icons/fa6'
+import {FaChevronLeft, FaChevronRight} from 'react-icons/fa6'
 import {Link} from 'react-router-dom'
 
 import type {EntityRef} from '@/domain/entities/types'
-import {getRealmAccent, getRealmIcon} from '@/domain/realms'
 import {
   getTimelineCountdownDisplay,
   getTimelineStatus,
   type BannerEntry,
   type BannerFeaturedUnit,
   type BannerPoolSlot,
-  type TimelineStatus,
+  type BannerTag,
 } from '@/domain/timeline'
 
 import {resolveTimelineFeaturedAsset, type TimelineFeaturedAsset} from './timelineDetailResolution'
+import {TimelineRichText} from './TimelineRichText'
 
-const BANNER_TYPE_LABEL: Record<BannerEntry['type'], string> = {
+const BANNER_TAG_LABEL: Record<BannerTag, string> = {
   awaken: 'New Awakener',
   limited: 'Limited',
   standard: 'Standard',
@@ -24,76 +24,26 @@ const BANNER_TYPE_LABEL: Record<BannerEntry['type'], string> = {
   selector: 'Selector',
   wheel: 'Wheel',
   combo: 'Combo',
+  collab: 'Collab',
+  preliminary: 'Preliminary',
 }
 
-const BANNER_TYPE_COLOR: Record<BannerEntry['type'], string> = {
-  awaken: 'text-amber-300/90',
+const BANNER_TAG_COLOR: Record<BannerTag, string> = {
+  awaken: 'text-amber-300/95',
   limited: 'text-sky-300/90',
   standard: 'text-slate-400/80',
   rerun: 'text-violet-300/90',
   selector: 'text-pink-300/90',
   wheel: 'text-cyan-300/90',
-  combo: 'text-emerald-300/90',
-}
-
-const STATUS_CLASS: Record<TimelineStatus, string> = {
-  active: 'timeline-event-chip--status-active',
-  upcoming: 'timeline-event-chip--status-upcoming',
-  ended: 'timeline-event-chip--status-ended',
+  combo: 'text-emerald-300/95',
+  collab: 'text-fuchsia-300/90',
+  preliminary: 'text-amber-200/76',
 }
 
 const CYCLE_INTERVAL_MS = 2500
 const TRANSITION_DURATION_MS = 800
 
 type SliceAsset = TimelineFeaturedAsset
-
-interface BannerSliceProps {
-  unit: BannerFeaturedUnit
-  onOpenDetail?: (ref: EntityRef) => void
-}
-
-function getSliceShellStyle(): {flex: string; minWidth: number} {
-  return {flex: '1 1 0', minWidth: 0}
-}
-
-function SliceLabel({asset, total}: {asset: SliceAsset; total: number}) {
-  const realmIcon = getRealmIcon(asset.realmId)
-  const realmAccent = getRealmAccent(asset.realmId)
-
-  const fontSize = total >= 4 ? 'text-[10px]' : total >= 3 ? 'text-xs' : 'text-sm'
-  const iconSize = total >= 4 ? 'h-5.5 w-5.5' : total >= 3 ? 'h-6 w-6' : 'h-7 w-7'
-  const gap = total >= 4 ? 'gap-0.5' : 'gap-1'
-  const pb = total <= 2 ? 'pb-2.5' : 'pb-1.5'
-
-  return (
-    <div className={`pointer-events-none absolute inset-x-0 bottom-0 z-20 px-1 pt-12 ${pb}`}>
-      <div className={`flex flex-col items-center ${gap}`}>
-        {realmIcon && !asset.isWheel ? (
-          <img
-            alt=''
-            className={`${iconSize} drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]`}
-            draggable={false}
-            src={realmIcon}
-          />
-        ) : null}
-        <p
-          className={`ui-title text-center ${fontSize} leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,1)]`}
-          style={{color: realmAccent}}
-        >
-          {asset.label}
-        </p>
-      </div>
-    </div>
-  )
-}
-
-function SliceLabelSlot({asset, total}: {asset: SliceAsset; total: number}) {
-  return (
-    <div className='relative block h-full shrink-0' style={getSliceShellStyle()}>
-      <SliceLabel asset={asset} total={total} />
-    </div>
-  )
-}
 
 function isPlainPrimaryClick(event: MouseEvent<HTMLElement>): boolean {
   return event.button === 0 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
@@ -153,33 +103,98 @@ function SliceDetailTarget({
   )
 }
 
-function BannerArtSlice({unit, onOpenDetail}: BannerSliceProps) {
-  const asset = resolveTimelineFeaturedAsset(unit)
+function getArtworkImageClass(asset: SliceAsset, emphasis: boolean): string {
+  if (asset.isWheel) {
+    return emphasis
+      ? 'h-full w-full scale-[1.18] object-cover object-center transition-transform duration-500 ease-out group-hover/art-panel:scale-[1.24] motion-reduce:transition-none'
+      : 'h-full w-full scale-[1.12] object-cover object-center transition-transform duration-500 ease-out group-hover/art-panel:scale-[1.18] motion-reduce:transition-none'
+  }
 
-  const imgClass = asset.isWheel
-    ? 'h-full w-full object-cover object-center scale-[1.15]'
-    : 'h-full w-full object-cover object-top'
+  return emphasis
+    ? 'h-full w-full scale-[1.035] object-cover object-top transition-transform duration-500 ease-out group-hover/art-panel:scale-[1.08] motion-reduce:transition-none'
+    : 'h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover/art-panel:scale-[1.045] motion-reduce:transition-none'
+}
+
+function ArtworkFallback({label}: {label?: string}) {
+  return (
+    <div className='relative flex h-full w-full items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_center,rgba(217,196,121,0.14),rgba(8,13,24,0.9)_58%,rgba(2,6,14,1))]'>
+      <span className='sigil-placeholder sigil-placeholder-card opacity-80' />
+      {label ? (
+        <p className='ui-title relative z-10 max-w-[82%] text-center text-xs leading-tight text-amber-50/80'>
+          {label}
+        </p>
+      ) : null}
+    </div>
+  )
+}
+
+function ArtworkPanel({
+  asset,
+  className = '',
+  emphasis = false,
+  onOpenDetail,
+}: {
+  asset: SliceAsset
+  className?: string
+  emphasis?: boolean
+  onOpenDetail?: (ref: EntityRef) => void
+}) {
+  return (
+    <div
+      className={`group/art-panel relative min-w-0 overflow-hidden bg-slate-950 ${className}`}
+      title={asset.label}
+    >
+      <div className='absolute inset-0'>
+        {asset.url ? (
+          <img
+            alt={asset.label}
+            className={getArtworkImageClass(asset, emphasis)}
+            draggable={false}
+            src={asset.url}
+          />
+        ) : (
+          <ArtworkFallback label={asset.label} />
+        )}
+      </div>
+      <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,14,0.02),rgba(2,6,14,0.04)_48%,rgba(2,6,14,0.74))]' />
+      <div className='pointer-events-none absolute inset-y-0 right-0 w-px bg-amber-100/10' />
+      <SliceDetailTarget
+        asset={asset}
+        className='absolute inset-0 z-30 focus-visible:ring-2 focus-visible:ring-amber-200/45 focus-visible:outline-none'
+        onOpenDetail={onOpenDetail}
+      />
+    </div>
+  )
+}
+
+function getFeaturedGridTemplate(assets: SliceAsset[]): string {
+  return `repeat(${String(Math.min(assets.length, 4))}, minmax(0, 1fr))`
+}
+
+function FeaturedArtwork({
+  assets,
+  onOpenDetail,
+}: {
+  assets: SliceAsset[]
+  onOpenDetail?: (ref: EntityRef) => void
+}) {
+  if (assets.length === 0) {
+    return <BannerPlaceholderArt />
+  }
 
   return (
     <div
-      className='group/slice relative block h-full shrink-0 overflow-hidden transition-[filter] duration-150 hover:brightness-110 focus-visible:brightness-110'
-      style={getSliceShellStyle()}
-      title={asset.label}
+      className='absolute inset-0 grid gap-px bg-amber-100/10'
+      style={{gridTemplateColumns: getFeaturedGridTemplate(assets)}}
     >
-      <div className='h-full w-full transition-transform duration-300 ease-out group-hover/slice:-translate-y-1 group-hover/slice:scale-[1.03]'>
-        {asset.url ? (
-          <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
-        ) : (
-          <div className='flex h-full w-full items-center justify-center bg-slate-800/80'>
-            <span className='sigil-placeholder sigil-placeholder-card' />
-          </div>
-        )}
-      </div>
-      <SliceDetailTarget
-        asset={asset}
-        className='absolute inset-0 z-30'
-        onOpenDetail={onOpenDetail}
-      />
+      {assets.slice(0, 4).map((asset, index) => (
+        <ArtworkPanel
+          asset={asset}
+          emphasis={index === 0}
+          key={`${asset.label}-${String(index)}`}
+          onOpenDetail={onOpenDetail}
+        />
+      ))}
     </div>
   )
 }
@@ -330,31 +345,19 @@ function resolvePoolSlots(poolSlots: BannerPoolSlot[]): ResolvedVisualSlot[] {
   return visual
 }
 
-interface PoolBannerSliceProps {
+function getPoolGridTemplate(total: number): string {
+  return `repeat(${String(Math.max(total, 1))}, minmax(0, 1fr))`
+}
+
+function PoolMontageSlot({
+  assets,
+  frame,
+  onOpenDetail,
+}: {
   assets: SliceAsset[]
   frame: PoolCycleFrame
   onOpenDetail?: (ref: EntityRef) => void
-}
-
-function PoolSliceLayer({asset}: {asset: SliceAsset}) {
-  const imgClass = asset.isWheel
-    ? 'absolute inset-0 h-full w-full object-cover object-center scale-[1.15]'
-    : 'absolute inset-0 h-full w-full object-cover object-top'
-
-  return (
-    <div className='absolute inset-0 transition-transform duration-300 ease-out group-hover/slice:-translate-y-1 group-hover/slice:scale-[1.03]'>
-      {asset.url ? (
-        <img alt={asset.label} className={imgClass} draggable={false} src={asset.url} />
-      ) : (
-        <div className='flex h-full w-full items-center justify-center bg-slate-800/80'>
-          <span className='sigil-placeholder sigil-placeholder-card' />
-        </div>
-      )}
-    </div>
-  )
-}
-
-function PoolBannerSlice({assets, frame, onOpenDetail}: PoolBannerSliceProps) {
+}) {
   const [layers, setLayers] = useState<{a: number; b: number; front: 'a' | 'b'}>({
     a: frame.activeIdx,
     b: frame.activeIdx,
@@ -375,12 +378,11 @@ function PoolBannerSlice({assets, frame, onOpenDetail}: PoolBannerSliceProps) {
   const assetA = assets[layers.a]
   const assetB = assets[layers.b]
   const frontAsset = layers.front === 'a' ? assetA : assetB
-  const hasLink = Boolean(frontAsset.linkTo)
 
   return (
     <div
-      className={`group/slice relative block h-full shrink-0 overflow-hidden ${hasLink ? 'transition-[filter] duration-150 hover:brightness-110' : ''}`}
-      style={getSliceShellStyle()}
+      className='group/slice relative min-w-0 overflow-hidden bg-slate-950'
+      title={frontAsset.label}
     >
       <div
         className='absolute inset-0 overflow-hidden transition-opacity ease-in-out'
@@ -389,33 +391,67 @@ function PoolBannerSlice({assets, frame, onOpenDetail}: PoolBannerSliceProps) {
           transitionDuration: `${String(TRANSITION_DURATION_MS)}ms`,
         }}
       >
-        <PoolSliceLayer asset={assetA} />
+        <ArtworkPanel asset={assetA} className='h-full w-full' onOpenDetail={onOpenDetail} />
       </div>
-      <div
-        className='absolute inset-0 overflow-hidden transition-opacity ease-in-out'
-        style={{
-          opacity: layers.front === 'b' ? 1 : 0,
-          transitionDuration: `${String(TRANSITION_DURATION_MS)}ms`,
-        }}
-      >
-        <PoolSliceLayer asset={assetB} />
-      </div>
-      <SliceDetailTarget
-        asset={frontAsset}
-        className='absolute inset-0 z-20'
-        onOpenDetail={onOpenDetail}
-      />
+      {layers.a !== layers.b ? (
+        <div
+          className='absolute inset-0 overflow-hidden transition-opacity ease-in-out'
+          style={{
+            opacity: layers.front === 'b' ? 1 : 0,
+            transitionDuration: `${String(TRANSITION_DURATION_MS)}ms`,
+          }}
+        >
+          <ArtworkPanel asset={assetB} className='h-full w-full' onOpenDetail={onOpenDetail} />
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+function PoolMontageArtwork({
+  cycleFrames,
+  onOpenDetail,
+  visualSlots,
+}: {
+  cycleFrames: PoolCycleFrame[]
+  onOpenDetail?: (ref: EntityRef) => void
+  visualSlots: ResolvedVisualSlot[]
+}) {
+  return (
+    <div
+      className='absolute inset-0 grid gap-px bg-amber-100/10'
+      style={{gridTemplateColumns: getPoolGridTemplate(visualSlots.length)}}
+    >
+      {visualSlots.map((vs, index) => (
+        <PoolMontageSlot
+          assets={vs.assets}
+          frame={cycleFrames[vs.cycleFrameIndex]}
+          key={index}
+          onOpenDetail={onOpenDetail}
+        />
+      ))}
     </div>
   )
 }
 
 function BannerPlaceholderArt() {
   return (
-    <div className='relative flex h-full w-full items-center justify-center bg-slate-800/60'>
-      <span className='sigil-placeholder sigil-placeholder-card' />
-      <div className='pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-slate-950/90 to-transparent px-3 pt-6 pb-3'>
-        <p className='text-center text-xs text-slate-400'>Select your own rate-up</p>
-      </div>
+    <div className='absolute inset-0'>
+      <ArtworkFallback label='Select your own rate-up' />
+    </div>
+  )
+}
+
+function FullCardArtwork({label, url}: {label: string; url: string}) {
+  return (
+    <div className='absolute inset-0 overflow-hidden bg-slate-950'>
+      <img
+        alt={label}
+        className='h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover/banner:scale-[1.035] motion-reduce:transition-none'
+        draggable={false}
+        src={url}
+      />
+      <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,14,0.04),rgba(2,6,14,0.08)_42%,rgba(2,6,14,0.48)),linear-gradient(180deg,rgba(2,6,14,0.02),rgba(2,6,14,0.08)_58%,rgba(2,6,14,0.68))]' />
     </div>
   )
 }
@@ -430,6 +466,102 @@ function expandFeatured(featured: BannerFeaturedUnit[]): BannerFeaturedUnit[] {
   ]
 }
 
+function hasArtworkToReveal(
+  assets: SliceAsset[],
+  visualSlots: ResolvedVisualSlot[] | null,
+  customArt: string | undefined,
+): boolean {
+  return Boolean(customArt) || assets.length > 0 || Boolean(visualSlots && visualSlots.length > 0)
+}
+
+interface BannerInfoDrawerProps {
+  banner: BannerEntry
+  canCollapse: boolean
+  countdownTitle: string | undefined
+  isEnded: boolean
+  open: boolean
+  onToggle: () => void
+}
+
+function BannerInfoDrawer({
+  banner,
+  canCollapse,
+  countdownTitle,
+  isEnded,
+  open,
+  onToggle,
+}: BannerInfoDrawerProps) {
+  const drawerTransform = open ? 'translate-x-0' : 'translate-x-[calc(100%_-_1.75rem)]'
+  const contentInset = canCollapse ? 'pr-4 pl-11' : 'px-5'
+  const displayTags =
+    banner.tags && banner.tags.length > 0
+      ? banner.tags
+      : banner.preliminary
+        ? ([banner.type, 'preliminary'] satisfies BannerTag[])
+        : [banner.type]
+
+  return (
+    <div
+      className={`absolute inset-y-0 right-0 z-30 w-[calc(50%+1.75rem)] min-w-[11.75rem] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${drawerTransform}`}
+    >
+      <div className='absolute inset-0 border-l border-amber-100/16 bg-[linear-gradient(180deg,rgba(9,16,29,0.42)_0%,rgba(9,16,29,0.88)_44%,rgba(4,8,16,0.98)_100%)] shadow-[-14px_0_26px_rgba(2,6,14,0.36)] backdrop-blur-[10px]' />
+
+      {canCollapse ? (
+        <button
+          aria-expanded={open}
+          aria-label={
+            open ? `Hide details for ${banner.title}` : `Show details for ${banner.title}`
+          }
+          className='absolute inset-y-0 left-0 z-30 grid w-7 place-items-center border-l border-amber-100/14 bg-slate-950/58 text-amber-100/78 shadow-[-6px_0_14px_rgba(2,6,14,0.32)] transition-[background-color,color] duration-150 hover:bg-slate-900/88 hover:text-amber-50 focus-visible:ring-2 focus-visible:ring-amber-200/45 focus-visible:outline-none'
+          onClick={onToggle}
+          title={open ? 'Hide details' : 'Show details'}
+          type='button'
+        >
+          {open ? <FaChevronRight aria-hidden /> : <FaChevronLeft aria-hidden />}
+          {!open ? (
+            <span
+              aria-hidden
+              className='absolute bottom-4 left-1/2 -translate-x-1/2 text-[0.46rem] leading-none font-bold tracking-[0.18em] uppercase [writing-mode:vertical-rl]'
+            >
+              Details
+            </span>
+          ) : null}
+        </button>
+      ) : null}
+
+      <div
+        className={`relative z-10 flex h-full min-w-0 flex-col justify-center py-6 ${contentInset} ${isEnded ? 'text-slate-500' : 'text-slate-100'}`}
+        title={countdownTitle}
+      >
+        <h3
+          className={`ui-title line-clamp-3 text-[1.02rem] leading-[1.16] tracking-tight sm:text-[1.08rem] ${isEnded ? 'text-slate-500' : 'text-amber-50'}`}
+        >
+          {banner.title}
+        </h3>
+        <div className='mt-2 flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-1 text-[0.58rem] leading-none font-bold tracking-[0.16em] uppercase'>
+          {displayTags.map((tag, index) => (
+            <Fragment key={tag}>
+              {index > 0 ? (
+                <span aria-hidden className={isEnded ? 'text-slate-700' : 'text-slate-600/75'}>
+                  &middot;
+                </span>
+              ) : null}
+              <span className={isEnded ? 'text-slate-600' : BANNER_TAG_COLOR[tag]}>
+                {BANNER_TAG_LABEL[tag]}
+              </span>
+            </Fragment>
+          ))}
+        </div>
+        {banner.description ? (
+          <p className='mt-3 line-clamp-3 text-xs leading-[1.5] text-slate-400 sm:line-clamp-4'>
+            <TimelineRichText text={banner.description} />
+          </p>
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
 interface BannerCardProps {
   banner: BannerEntry
   now?: Date
@@ -437,6 +569,7 @@ interface BannerCardProps {
 }
 
 export function BannerCard({banner, now, onOpenDetail}: BannerCardProps) {
+  const [drawerPinnedOpen, setDrawerPinnedOpen] = useState(false)
   const status = getTimelineStatus(banner.startDate, banner.endDate, now)
   const countdownDisplay = getTimelineCountdownDisplay(banner.startDate, banner.endDate, now)
   const displaySlices = useMemo(() => expandFeatured(banner.featured ?? []), [banner.featured])
@@ -450,118 +583,51 @@ export function BannerCard({banner, now, onOpenDetail}: BannerCardProps) {
   )
   const cycleFrames = usePoolCycling(banner.poolSlots ?? [])
   const isEnded = status === 'ended'
-  const hasSliceArt = (visualSlots?.length ?? 0) > 0 || displayAssets.length > 0
-  const visualLabelAssets = useMemo(() => {
-    if (!visualSlots) return null
-    return visualSlots.map((slot) => {
-      const frame = cycleFrames[slot.cycleFrameIndex]
-      const assetIndex =
-        frame.transitioning && frame.incomingIdx >= 0 ? frame.incomingIdx : frame.activeIdx
-      return slot.assets[assetIndex] ?? slot.assets[0]
-    })
-  }, [cycleFrames, visualSlots])
+  const artStateClass = isEnded ? 'opacity-[0.58] saturate-50' : ''
+  const drawerCanCollapse = hasArtworkToReveal(displayAssets, visualSlots, banner.customArt)
+  const drawerOpen = !drawerCanCollapse || drawerPinnedOpen
   const showPinned = banner.pinned === true && status === 'active'
 
   return (
     <article
-      className={`group/banner grid min-h-full grid-cols-[8.25rem_minmax(0,1fr)] overflow-hidden rounded-[2px] border shadow-[inset_0_1px_0_rgba(255,244,202,0.035)] transition-[border-color,filter,transform,box-shadow] duration-150 sm:grid-cols-[minmax(12rem,0.54fr)_minmax(0,0.46fr)] ${isEnded ? 'border-slate-700/25 opacity-60 saturate-40' : status === 'upcoming' ? 'border-slate-700/35 opacity-80' : 'border-slate-700/45 hover:border-amber-200/40 hover:brightness-105'} ${showPinned ? 'border-amber-300/45 bg-[linear-gradient(180deg,rgba(37,28,16,0.34),rgba(10,16,28,0.92))] ring-1 ring-amber-300/10 ring-inset' : 'bg-[linear-gradient(180deg,rgba(15,23,42,0.78),rgba(8,13,24,0.94))]'}`}
+      className={`group/banner relative aspect-[8/5] w-full max-w-[30rem] overflow-hidden rounded-[2px] border shadow-[0_12px_26px_rgba(2,6,23,0.28),inset_0_1px_0_rgba(255,244,202,0.05)] transition-[border-color,box-shadow] duration-150 ${isEnded ? 'border-slate-700/25' : 'border-slate-700/50 hover:border-amber-200/46 hover:shadow-[0_18px_34px_rgba(2,6,23,0.34),inset_0_1px_0_rgba(255,244,202,0.08)]'} ${showPinned ? 'border-amber-300/45 bg-[radial-gradient(circle_at_18%_0%,rgba(181,124,34,0.22),transparent_44%),linear-gradient(180deg,rgba(15,23,42,0.9),rgba(5,10,18,0.98))] ring-1 ring-amber-300/10 ring-inset' : 'bg-[radial-gradient(circle_at_14%_0%,rgba(76,96,128,0.2),transparent_44%),linear-gradient(180deg,rgba(9,16,29,0.96),rgba(4,9,17,0.98))]'}`}
     >
-      <div className='relative min-h-[9.25rem] overflow-hidden border-r border-slate-700/35 bg-slate-950/80 sm:min-h-[11.25rem]'>
-        <div className='absolute inset-0 flex'>
-          {visualSlots && visualSlots.length > 0 ? (
-            visualSlots.map((vs, i) => (
-              <PoolBannerSlice
-                assets={vs.assets}
-                frame={cycleFrames[vs.cycleFrameIndex]}
-                key={i}
-                onOpenDetail={onOpenDetail}
-              />
-            ))
-          ) : displayAssets.length > 0 ? (
-            displaySlices.map((unit) => (
-              <BannerArtSlice
-                key={`${unit.kind}-${unit.name}`}
-                onOpenDetail={onOpenDetail}
-                unit={unit}
-              />
-            ))
-          ) : (
-            <BannerPlaceholderArt />
-          )}
-        </div>
-        {hasSliceArt ? (
-          <div className='pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t from-slate-950 from-15% via-slate-950/60 to-transparent' />
-        ) : null}
-        {visualLabelAssets && visualLabelAssets.length > 0 ? (
-          <div className='pointer-events-none absolute inset-0 z-20 flex'>
-            {visualLabelAssets.map((asset, index) => (
-              <SliceLabelSlot
-                asset={asset}
-                key={`${asset.label}-${String(index)}`}
-                total={visualLabelAssets.length}
-              />
-            ))}
-          </div>
-        ) : displayAssets.length > 0 ? (
-          <div className='pointer-events-none absolute inset-0 z-20 flex'>
-            {displayAssets.map((asset, index) => (
-              <SliceLabelSlot
-                asset={asset}
-                key={`${asset.label}-${String(index)}`}
-                total={displayAssets.length}
-              />
-            ))}
-          </div>
-        ) : null}
+      <div className={`absolute inset-0 bg-slate-950 ${artStateClass}`}>
+        {banner.customArt ? (
+          <FullCardArtwork label={banner.title} url={banner.customArt} />
+        ) : visualSlots && visualSlots.length > 0 ? (
+          <PoolMontageArtwork
+            cycleFrames={cycleFrames}
+            onOpenDetail={onOpenDetail}
+            visualSlots={visualSlots}
+          />
+        ) : (
+          <FeaturedArtwork assets={displayAssets} onOpenDetail={onOpenDetail} />
+        )}
       </div>
 
-      <div
-        className={`relative flex min-w-0 flex-1 flex-col gap-2 px-3 py-3 sm:px-4 sm:py-3.5 ${isEnded ? 'text-slate-500' : 'text-slate-100'}`}
-      >
-        <div className='flex items-start justify-between gap-3' title={countdownDisplay?.title}>
-          <div className='flex min-w-0 flex-col gap-1'>
-            <h3
-              className={`ui-title line-clamp-3 min-w-0 text-base leading-tight tracking-tight ${isEnded ? 'text-slate-500' : 'text-amber-50'}`}
-            >
-              {banner.title}
-            </h3>
-            <span
-              className={`text-[10px] font-bold tracking-[0.12em] uppercase ${isEnded ? 'text-slate-600' : BANNER_TYPE_COLOR[banner.type]}`}
-            >
-              {BANNER_TYPE_LABEL[banner.type]}
-            </span>
-          </div>
-          <span
-            className={`timeline-event-chip timeline-event-chip--status shrink-0 ${STATUS_CLASS[status]}`}
-          >
-            {status === 'active' ? 'Live' : status === 'upcoming' ? 'Soon' : 'Ended'}
-          </span>
-        </div>
-        {banner.description ? (
-          <p
-            className='line-clamp-3 text-xs leading-relaxed text-slate-400'
-            dangerouslySetInnerHTML={{__html: banner.description}}
-          />
-        ) : null}
-        <div
-          className='mt-auto flex items-center justify-between gap-2 pt-1'
-          title={countdownDisplay?.title}
+      <div className='pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_24%_12%,rgba(255,244,202,0.06),transparent_34%),linear-gradient(180deg,rgba(2,6,14,0.02),rgba(2,6,14,0.08)_58%,rgba(2,6,14,0.68))]' />
+      <div className='pointer-events-none absolute inset-1 z-20 border border-amber-100/10' />
+
+      {countdownDisplay ? (
+        <span
+          className='absolute bottom-2.5 left-3 z-40 text-[0.68rem] leading-none font-medium text-slate-300/86 tabular-nums drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)]'
+          title={countdownDisplay.title}
         >
-          {countdownDisplay ? (
-            <span className='text-[11px] font-medium whitespace-nowrap text-slate-400 tabular-nums'>
-              {countdownDisplay.text}
-            </span>
-          ) : (
-            <span />
-          )}
-          <span
-            aria-hidden
-            className={`grid h-6 w-6 place-items-center border text-[10px] transition-colors ${isEnded ? 'border-slate-700/30 text-slate-600' : 'border-slate-600/50 text-slate-400 group-hover/banner:border-amber-200/40 group-hover/banner:text-amber-100'}`}
-          >
-            <FaChevronRight />
-          </span>
-        </div>
-      </div>
+          {countdownDisplay.text}
+        </span>
+      ) : null}
+
+      <BannerInfoDrawer
+        banner={banner}
+        canCollapse={drawerCanCollapse}
+        countdownTitle={countdownDisplay?.title}
+        isEnded={isEnded}
+        onToggle={() => {
+          setDrawerPinnedOpen((current) => !current)
+        }}
+        open={drawerOpen}
+      />
     </article>
   )
 }

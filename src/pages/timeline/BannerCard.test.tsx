@@ -23,15 +23,12 @@ describe('BannerCard', () => {
     )
 
     expect(screen.getByText('Ended 2d ago')).toBeInTheDocument()
-    expect(screen.getByText('Ended').parentElement).toHaveAttribute(
-      'title',
-      'Mar 1, 2026 - Mar 8, 2026',
-    )
+    expect(screen.getByText('Ended 2d ago')).toHaveAttribute('title', 'Mar 1, 2026 - Mar 8, 2026')
     expect(screen.queryByTitle('Pinned')).not.toBeInTheDocument()
   })
 
   it('shows a date instead of long-range countdown text and exposes it on hover', () => {
-    render(
+    const {container} = render(
       <MemoryRouter>
         <BannerCard
           banner={{
@@ -47,10 +44,13 @@ describe('BannerCard', () => {
     )
 
     expect(screen.getByText('Starts Mar 30')).toBeInTheDocument()
-    expect(screen.getByText('Soon').parentElement).toHaveAttribute(
+    expect(screen.getByText('Starts Mar 30')).toHaveAttribute(
       'title',
       'Mar 30, 2026 - Apr 10, 2026',
     )
+    expect(container.querySelector('article')?.className).not.toContain('opacity-')
+    expect(container.innerHTML).not.toContain('opacity-[0.86]')
+    expect(container.innerHTML).not.toContain('saturate-[0.78]')
   })
 
   it('renders scaffolded combo pool slots for banners waiting on final unit lists', () => {
@@ -164,6 +164,39 @@ describe('BannerCard', () => {
     expect(screen.queryByRole('link', {name: 'Arachne'})).not.toBeInTheDocument()
   })
 
+  it('collapses three-featured banners behind the details handle', () => {
+    render(
+      <MemoryRouter>
+        <BannerCard
+          banner={{
+            id: 'triple-banner',
+            title: 'Triple Banner',
+            type: 'rerun',
+            startDate: '2026-04-20T00:00:00.000Z',
+            endDate: '2026-05-18T00:00:00.000Z',
+            featured: [
+              {name: 'Tulu', kind: 'awakener'},
+              {name: 'Sorel', kind: 'awakener'},
+              {name: 'Doll: Inferno', kind: 'awakener'},
+            ],
+          }}
+          now={new Date('2026-04-25T00:00:00.000Z')}
+        />
+      </MemoryRouter>,
+    )
+
+    const handle = screen.getByRole('button', {name: 'Show details for Triple Banner'})
+
+    expect(handle).toHaveAttribute('aria-expanded', 'false')
+
+    fireEvent.click(handle)
+
+    expect(screen.getByRole('button', {name: 'Hide details for Triple Banner'})).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+  })
+
   it('links auto-expanded signature wheel slices to wheel details', () => {
     render(
       <MemoryRouter>
@@ -219,5 +252,60 @@ describe('BannerCard', () => {
 
     expect(screen.getByAltText('Mystery Awakener')).toBeInTheDocument()
     expect(screen.getByAltText('Mystery Wheel')).toBeInTheDocument()
+  })
+
+  it('uses banner custom art as full-card artwork', () => {
+    render(
+      <MemoryRouter>
+        <BannerCard
+          banner={{
+            id: 'collab-banner',
+            title: 'Morimens × Saya no Uta',
+            type: 'limited',
+            tags: ['limited', 'collab'],
+            startDate: '2026-05-30T00:00:00.000Z',
+            endDate: '2026-06-27T00:00:00.000Z',
+            customArt: '/banners/saya-collab-prelim.webp',
+          }}
+          now={new Date('2026-05-31T00:00:00.000Z')}
+        />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByAltText('Morimens × Saya no Uta')).toHaveAttribute(
+      'src',
+      '/banners/saya-collab-prelim.webp',
+    )
+    expect(screen.getByText('Limited')).toBeInTheDocument()
+    expect(screen.getByText('Collab')).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', {name: 'Show details for Morimens × Saya no Uta'}),
+    ).toBeInTheDocument()
+  })
+
+  it('renders shared timeline rich text in banner descriptions', () => {
+    const {container} = render(
+      <MemoryRouter>
+        <BannerCard
+          banner={{
+            id: 'rich-text-banner',
+            title: 'Rich Text Banner',
+            type: 'limited',
+            description: 'Featured *Saya* **limited** banner.\n[Announcement](https://example.com)',
+            startDate: '2026-05-30T00:00:00.000Z',
+            endDate: '2026-06-27T00:00:00.000Z',
+          }}
+          now={new Date('2026-05-31T00:00:00.000Z')}
+        />
+      </MemoryRouter>,
+    )
+
+    expect(container.querySelector('em')).toHaveTextContent('Saya')
+    expect(container.querySelector('strong')).toHaveTextContent('limited')
+    expect(container.querySelector('br')).toBeInTheDocument()
+    expect(screen.getByRole('link', {name: 'Announcement'})).toHaveAttribute(
+      'href',
+      'https://example.com',
+    )
   })
 })

@@ -11,10 +11,22 @@ export interface BannerPoolSlot {
   linked?: boolean
 }
 
+export type BannerType =
+  | 'awaken'
+  | 'limited'
+  | 'standard'
+  | 'rerun'
+  | 'selector'
+  | 'wheel'
+  | 'combo'
+export type BannerTag = BannerType | 'collab' | 'preliminary'
+
 export interface BannerEntry {
   id: string
   title: string
-  type: 'awaken' | 'limited' | 'standard' | 'rerun' | 'selector' | 'wheel' | 'combo'
+  type: BannerType
+  tags?: BannerTag[]
+  preliminary?: boolean
   description?: string
   featured?: BannerFeaturedUnit[]
   poolSlots?: BannerPoolSlot[]
@@ -70,6 +82,7 @@ export interface EventEntry {
   endDate: string
   category?: EventCategory
   pinned?: boolean
+  preliminary?: boolean
   customArt?: string
   featured?: BannerFeaturedUnit[]
   pricing?: string

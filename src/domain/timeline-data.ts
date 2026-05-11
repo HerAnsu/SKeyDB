@@ -31,6 +31,7 @@ interface BannerInput {
   id: string
   title: string
   type: BannerEntry['type']
+  tags?: BannerEntry['tags']
   description?: string
   startDate: string
   endDate: string
@@ -38,6 +39,7 @@ interface BannerInput {
   poolSlots?: PoolSlotInput[]
   customArt?: string
   pinned?: boolean
+  preliminary?: boolean
 }
 
 interface EventInput {
@@ -51,6 +53,7 @@ interface EventInput {
   featured?: FeaturedInput | FeaturedInput[]
   customArt?: string
   pricing?: string
+  preliminary?: boolean
   rerun?: boolean
   artAlign?: string
 }
@@ -134,9 +137,11 @@ function loadBanner(raw: BannerInput): BannerEntry {
     id: raw.id,
     title: raw.title,
     type: raw.type,
+    tags: raw.tags,
     description: cleanDescription(raw.description),
     customArt: resolveCustomArt(raw.customArt),
     pinned: raw.pinned,
+    preliminary: raw.preliminary,
     startDate: parseGameDate(raw.startDate),
     endDate: parseGameDate(raw.endDate),
   }
@@ -158,6 +163,7 @@ function loadEvent(raw: EventInput): EventEntry {
     endDate: parseGameDate(raw.endDate),
     category: normalizeEventCategory(raw.category),
     pinned: raw.pinned,
+    preliminary: raw.preliminary,
     customArt: resolveCustomArt(raw.customArt),
     pricing: raw.pricing,
     rerun: raw.rerun,

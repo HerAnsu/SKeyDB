@@ -24,6 +24,13 @@ vi.mock('@/domain/timeline-data', () => ({
       startDate: '2026-03-01T00:00:00.000Z',
       endDate: '2026-03-08T00:00:00.000Z',
     },
+    {
+      id: 'upcoming-banner',
+      title: 'Upcoming Banner',
+      type: 'limited',
+      startDate: '2026-03-13T00:00:00.000Z',
+      endDate: '2026-03-20T00:00:00.000Z',
+    },
   ],
   timelineEvents: [],
 }))
@@ -75,11 +82,13 @@ describe('TimelinePage', () => {
     render(<TimelinePage />)
 
     expect(screen.getByText('Active Banner')).toBeInTheDocument()
-    expect(screen.queryByText('Archived Banner')).not.toBeInTheDocument()
+    expect(screen.getByText('Upcoming banners')).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: 'Upcoming Banner'})).toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: 'Archived Banner'})).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', {name: /ended banners/i}))
 
-    expect(screen.getByText('Archived Banner')).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: 'Archived Banner'})).toBeInTheDocument()
   })
 
   it('opens database detail overlays from timeline cards', () => {
@@ -105,29 +114,30 @@ describe('TimelinePage', () => {
 
     expect(screen.getByText('No events to display.')).toBeInTheDocument()
     expect(screen.getByText('Active Banner')).toBeInTheDocument()
+    expect(screen.getByText('Upcoming Banner')).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', {name: 'Events'}))
 
     expect(screen.getByText('No events to display.')).toBeInTheDocument()
     expect(screen.queryByText('Active Banner')).not.toBeInTheDocument()
+    expect(screen.queryByText('Upcoming Banner')).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', {name: 'Banners'}))
 
     expect(screen.queryByText('No events to display.')).not.toBeInTheDocument()
     expect(screen.getByText('Active Banner')).toBeInTheDocument()
+    expect(screen.getByText('Upcoming Banner')).toBeInTheDocument()
   })
 
-  it('shows archived banners when the ended state filter is active', () => {
+  it('does not render redundant status filter controls', () => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date('2026-03-10T00:00:00.000Z'))
 
     render(<TimelinePage />)
 
-    expect(screen.queryByText('Archived Banner')).not.toBeInTheDocument()
-
-    fireEvent.click(screen.getByRole('button', {name: 'Ended'}))
-
-    expect(screen.queryByText('Active Banner')).not.toBeInTheDocument()
-    expect(screen.getByText('Archived Banner')).toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: 'Live'})).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: 'Upcoming'})).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: 'Ended'})).not.toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /ended banners/i})).toBeInTheDocument()
   })
 })
