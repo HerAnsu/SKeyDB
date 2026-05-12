@@ -1,8 +1,9 @@
-import {fireEvent, render, screen} from '@testing-library/react'
+import {act, fireEvent, render, screen} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
 import {vi} from 'vitest'
 
 import {BannerCard} from './BannerCard'
+import {CYCLE_INTERVAL_MS} from './usePoolCycling'
 
 describe('BannerCard', () => {
   it('shows ended relative text for ended banners', () => {
@@ -79,6 +80,108 @@ describe('BannerCard', () => {
     expect(screen.getAllByText('Awakener Pool B')).toHaveLength(1)
     expect(screen.getAllByText('Awakener Pool C')).toHaveLength(1)
     expect(screen.getAllByText('Wheel Pool')).toHaveLength(1)
+  })
+
+  it('keeps combo slot links stable while pool artwork transitions', () => {
+    vi.useFakeTimers()
+
+    const {unmount} = render(
+      <MemoryRouter>
+        <BannerCard
+          banner={{
+            id: 'combo-cycle',
+            title: 'Combo Cycle',
+            type: 'combo',
+            startDate: '2026-05-04T00:00:00.000Z',
+            endDate: '2026-05-18T00:00:00.000Z',
+            poolSlots: [
+              {
+                pool: [
+                  {name: 'Arachne', kind: 'awakener'},
+                  {name: 'Tulu', kind: 'awakener'},
+                ],
+              },
+            ],
+          }}
+          now={new Date('2026-05-06T00:00:00.000Z')}
+        />
+      </MemoryRouter>,
+    )
+
+    try {
+      expect(screen.getByRole('link', {name: 'Arachne'})).toHaveAttribute(
+        'href',
+        '/database/awakeners/arachne',
+      )
+      expect(screen.getAllByRole('link')).toHaveLength(1)
+
+      act(() => {
+        vi.advanceTimersByTime(2500)
+      })
+
+      expect(screen.getByRole('link', {name: 'Tulu'})).toHaveAttribute(
+        'href',
+        '/database/awakeners/tulu',
+      )
+      expect(screen.getAllByRole('link')).toHaveLength(1)
+      expect(screen.queryByRole('link', {name: 'Arachne'})).not.toBeInTheDocument()
+    } finally {
+      unmount()
+      vi.useRealTimers()
+    }
+  })
+
+  it('reconciles combo slot artwork when pool slots change after cycling', () => {
+    vi.useFakeTimers()
+
+    const initialBanner = {
+      id: 'combo-cycle-rerender',
+      title: 'Combo Cycle Rerender',
+      type: 'combo' as const,
+      startDate: '2026-05-04T00:00:00.000Z',
+      endDate: '2026-05-18T00:00:00.000Z',
+      poolSlots: [
+        {
+          pool: [
+            {name: 'Arachne', kind: 'awakener' as const},
+            {name: 'Tulu', kind: 'awakener' as const},
+          ],
+        },
+      ],
+    }
+
+    const {rerender, unmount} = render(
+      <MemoryRouter>
+        <BannerCard banner={initialBanner} now={new Date('2026-05-06T00:00:00.000Z')} />
+      </MemoryRouter>,
+    )
+
+    try {
+      act(() => {
+        vi.advanceTimersByTime(CYCLE_INTERVAL_MS)
+      })
+
+      rerender(
+        <MemoryRouter>
+          <BannerCard
+            banner={{
+              ...initialBanner,
+              poolSlots: [{pool: [{name: 'Arachne', kind: 'awakener'}]}],
+            }}
+            now={new Date('2026-05-06T00:00:00.000Z')}
+          />
+        </MemoryRouter>,
+      )
+
+      expect(screen.getByRole('link', {name: 'Arachne'})).toHaveAttribute(
+        'href',
+        '/database/awakeners/arachne',
+      )
+      expect(screen.getAllByRole('link')).toHaveLength(1)
+    } finally {
+      unmount()
+      vi.useRealTimers()
+    }
   })
 
   it('links database-backed wheel featured units to wheel details', () => {
@@ -303,7 +406,7 @@ describe('BannerCard', () => {
     expect(container.querySelector('em')).toHaveTextContent('Saya')
     expect(container.querySelector('strong')).toHaveTextContent('limited')
     expect(container.querySelector('br')).toBeInTheDocument()
-    expect(screen.getByRole('link', {name: 'Announcement'})).toHaveAttribute(
+    expect(screen.getByRole('link', {name: /Announcement.*opens in new tab/})).toHaveAttribute(
       'href',
       'https://example.com',
     )

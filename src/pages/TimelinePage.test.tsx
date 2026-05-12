@@ -32,7 +32,16 @@ vi.mock('@/domain/timeline-data', () => ({
       endDate: '2026-03-20T00:00:00.000Z',
     },
   ],
-  timelineEvents: [],
+  timelineEvents: [
+    {
+      id: 'event-dtide',
+      title: 'Regional D-Effect Zone',
+      category: 'd-tide',
+      description: 'Bi-weekly D-Tide raids.\nCurrent Realm relic: Caro Ring.',
+      startDate: '2026-03-09T00:00:00.000Z',
+      endDate: '2026-03-12T00:00:00.000Z',
+    },
+  ],
 }))
 
 vi.mock('@/stores/dbDetailStore', () => ({
@@ -112,6 +121,7 @@ describe('TimelinePage', () => {
 
     render(<TimelinePage />)
 
+    expect(screen.getByRole('group', {name: 'Timeline content'})).toBeInTheDocument()
     expect(screen.getByText('No events to display.')).toBeInTheDocument()
     expect(screen.getByText('Active Banner')).toBeInTheDocument()
     expect(screen.getByText('Upcoming Banner')).toBeInTheDocument()
@@ -139,5 +149,17 @@ describe('TimelinePage', () => {
     expect(screen.queryByRole('button', {name: 'Upcoming'})).not.toBeInTheDocument()
     expect(screen.queryByRole('button', {name: 'Ended'})).not.toBeInTheDocument()
     expect(screen.getByRole('button', {name: /ended banners/i})).toBeInTheDocument()
+  })
+
+  it('uses the D-Zone event data in the masthead', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-03-10T00:00:00.000Z'))
+
+    render(<TimelinePage />)
+
+    expect(screen.getByRole('complementary', {name: 'D-Zone season'})).toHaveTextContent(
+      'Caro Ring',
+    )
+    expect(screen.getByText('Ends in 2d 0h')).toBeInTheDocument()
   })
 })

@@ -169,7 +169,7 @@ describe('EventList', () => {
     expect(container.querySelector('em')).toHaveTextContent('italic')
     expect(container.querySelector('strong')).toHaveTextContent('bold')
     expect(container.querySelector('br')).toBeInTheDocument()
-    expect(screen.getByRole('link', {name: 'Announcement'})).toHaveAttribute(
+    expect(screen.getByRole('link', {name: /Announcement.*opens in new tab/})).toHaveAttribute(
       'href',
       'https://example.com',
     )
@@ -199,9 +199,15 @@ describe('EventList', () => {
         expect(screen.getByRole('button', {name: 'More'})).toHaveAttribute('aria-expanded', 'false')
       })
 
-      fireEvent.click(screen.getByRole('button', {name: 'More'}))
+      const moreButton = screen.getByRole('button', {name: 'More'})
 
-      expect(screen.getByText('Details')).toBeInTheDocument()
+      fireEvent.click(moreButton)
+
+      const shelf = screen.getByRole('region', {name: 'Details'})
+      const lessButton = screen.getByRole('button', {name: 'Less'})
+
+      expect(shelf).toBeInTheDocument()
+      expect(lessButton).toHaveFocus()
       expect(
         screen.getByText(description, {selector: '#event-description-long-description p'}),
       ).toBeInTheDocument()
@@ -210,9 +216,13 @@ describe('EventList', () => {
       ).toHaveClass('group/event-row')
       expect(document.getElementById('event-description-long-description')).toHaveClass('inset-0')
 
-      fireEvent.click(screen.getByRole('button', {name: 'Less'}))
+      fireEvent.keyDown(shelf, {key: 'Escape'})
 
       expect(screen.queryByText('Details')).not.toBeInTheDocument()
+
+      await waitFor(() => {
+        expect(moreButton).toHaveFocus()
+      })
     } finally {
       restoreOverflowMock()
     }

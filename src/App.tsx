@@ -1,4 +1,4 @@
-import {lazy, Suspense, useState} from 'react'
+import {lazy, Suspense, useEffect, useState} from 'react'
 
 import {Navigate, NavLink, Route, Routes, useLocation} from 'react-router-dom'
 
@@ -21,7 +21,10 @@ interface NavItem {
   label: string
   to: string
   isActive?: (pathname: string) => boolean
+  mobilePriority?: 'always' | 'compact' | 'wide'
 }
+
+type MobileNavItem = NavItem & {mobilePriority: NonNullable<NavItem['mobilePriority']>}
 
 const NAV_ITEMS: NavItem[] = [
   {label: 'Home', to: '/'},
@@ -29,49 +32,137 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Database',
     to: '/database',
     isActive: (pathname) => pathname === '/database' || pathname.startsWith('/database/'),
+    mobilePriority: 'always',
   },
-  {label: 'Events', to: '/timeline'},
-  {label: 'Builder', to: '/builder'},
-  {label: 'Collection', to: '/collection'},
+  {label: 'Events', to: '/timeline', mobilePriority: 'always'},
+  {label: 'Builder', to: '/builder', mobilePriority: 'compact'},
+  {label: 'Collection', to: '/collection', mobilePriority: 'wide'},
 ]
 
+function hasMobilePriority(item: NavItem): item is MobileNavItem {
+  return Boolean(item.mobilePriority)
+}
+
+const MOBILE_PRIORITY_ITEMS = NAV_ITEMS.filter(hasMobilePriority)
+const MOBILE_OVERFLOW_ITEMS = MOBILE_PRIORITY_ITEMS.filter(
+  (item) => item.mobilePriority !== 'always',
+)
+
 function App() {
-  const {pathname} = useLocation()
-  const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const {key: locationKey, pathname} = useLocation()
+  const [mobileNavOpenLocationKey, setMobileNavOpenLocationKey] = useState<string | null>(null)
+  const compactMobileNavVisible = useMediaQuery('(min-width: 30rem)')
+  const wideMobileNavVisible = useMediaQuery('(min-width: 40rem)')
+  const mobileNavOpen = mobileNavOpenLocationKey === locationKey && !wideMobileNavVisible
+
+  useEffect(() => {
+    if (!mobileNavOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileNavOpenLocationKey(null)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [mobileNavOpen])
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+
+    const mediaQuery = window.matchMedia('(min-width: 40rem)')
+    const closeWhenWide = () => {
+      if (mediaQuery.matches) {
+        setMobileNavOpenLocationKey(null)
+      }
+    }
+
+    mediaQuery.addEventListener('change', closeWhenWide)
+    return () => {
+      mediaQuery.removeEventListener('change', closeWhenWide)
+    }
+  }, [])
 
   function isNavActive(item: NavItem): boolean {
     if (item.isActive) return item.isActive(pathname)
     return pathname === item.to || (item.to !== '/' && pathname.startsWith(item.to))
   }
 
+  function isMobileOverflowItemHidden(item: MobileNavItem): boolean {
+    if (item.mobilePriority === 'compact') return !compactMobileNavVisible
+    if (item.mobilePriority === 'wide') return !wideMobileNavVisible
+    return false
+  }
+
+  const activeHiddenMobileOverflowItem = MOBILE_OVERFLOW_ITEMS.find(
+    (item) => isNavActive(item) && isMobileOverflowItemHidden(item),
+  )
+
   return (
     <div className='app-shell min-h-dvh text-slate-100'>
       <a className='skip-link' href='#main-content'>
         Skip to content
       </a>
-      <header className='site-header border-b border-amber-200/35 bg-slate-950/80 backdrop-blur-md'>
-        <div className='mx-auto w-full max-w-[1240px] px-4 sm:px-5 lg:px-8'>
-          <div className='flex min-h-16 items-center justify-between gap-4'>
+      <header className='site-header'>
+        <div className='site-header-inner'>
+          <div className='site-header-bar'>
             <NavLink
               aria-label='SKeyDB home'
-              className='group/brand grid w-fit gap-0.5 leading-none transition-colors focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none'
+              className='site-brand'
               onClick={() => {
-                setMobileNavOpen(false)
+                setMobileNavOpenLocationKey(null)
               }}
               to='/'
             >
-              <h1 className='ui-title text-[1.35rem] text-amber-100 transition-colors group-hover/brand:text-amber-50 sm:text-[1.55rem]'>
-                SKeyDB
-              </h1>
-              <span className='text-[11px] font-medium tracking-[0.08em] text-slate-400 uppercase transition-colors group-hover/brand:text-slate-300'>
-                Morimens Database
-              </span>
+              <h1 className='site-brand-title ui-title'>SKeyDB</h1>
+              <span className='site-brand-subtitle'>Morimens Database</span>
             </NavLink>
 
-            <nav
-              aria-label='Primary navigation desktop'
-              className='hidden min-w-0 items-center justify-end gap-1 md:flex'
-            >
+            <div className='site-mobile-actions'>
+              <nav
+                aria-label='Primary navigation mobile quick links'
+                className='site-mobile-quick-nav'
+              >
+                {MOBILE_PRIORITY_ITEMS.map((item) => (
+                  <NavLink
+                    className={() => mobileQuickNavClassName(item, isNavActive(item))}
+                    end={item.to === '/'}
+                    key={item.label}
+                    onClick={() => {
+                      setMobileNavOpenLocationKey(null)
+                    }}
+                    to={item.to}
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </nav>
+
+              <button
+                aria-controls='mobile-primary-navigation'
+                aria-expanded={mobileNavOpen}
+                className={mobileMenuButtonClassName(
+                  activeHiddenMobileOverflowItem?.mobilePriority,
+                )}
+                onClick={() => {
+                  setMobileNavOpenLocationKey((openKey) =>
+                    openKey === locationKey ? null : locationKey,
+                  )
+                }}
+                type='button'
+              >
+                <span>{mobileNavOpen ? 'Close' : 'More'}</span>
+                <span aria-hidden className='site-menu-mark'>
+                  <span />
+                  <span />
+                </span>
+              </button>
+            </div>
+
+            <nav aria-label='Primary navigation desktop' className='site-desktop-nav'>
               {NAV_ITEMS.map((item) => (
                 <NavLink
                   className={({isActive}) =>
@@ -85,36 +176,22 @@ function App() {
                 </NavLink>
               ))}
             </nav>
-
-            <button
-              aria-controls='mobile-primary-navigation'
-              aria-expanded={mobileNavOpen}
-              className='inline-flex min-h-11 items-center gap-2 rounded-[2px] border border-slate-700/80 bg-slate-950/45 px-3 text-[11px] font-bold tracking-[0.1em] text-slate-200 uppercase transition-[background-color,border-color,color] hover:border-amber-200/45 hover:bg-slate-900/75 hover:text-amber-100 focus-visible:ring-2 focus-visible:ring-amber-200/35 focus-visible:outline-none md:hidden'
-              onClick={() => {
-                setMobileNavOpen((open) => !open)
-              }}
-              type='button'
-            >
-              <span>{mobileNavOpen ? 'Close' : 'Menu'}</span>
-              <span aria-hidden className='site-menu-mark'>
-                <span />
-                <span />
-              </span>
-            </button>
           </div>
 
           <nav
+            aria-hidden={!mobileNavOpen}
             aria-label='Primary navigation mobile'
-            className={`mobile-site-nav md:hidden ${mobileNavOpen ? 'mobile-site-nav-open' : ''}`}
+            className={`mobile-site-nav ${mobileNavOpen ? 'mobile-site-nav-open' : ''}`}
             id='mobile-primary-navigation'
+            inert={!mobileNavOpen ? true : undefined}
           >
-            {NAV_ITEMS.map((item) => (
+            {MOBILE_OVERFLOW_ITEMS.map((item) => (
               <NavLink
-                className={() => mobileNavClassName(isNavActive(item))}
+                className={() => mobileOverflowNavClassName(item, isNavActive(item))}
                 end={item.to === '/'}
                 key={item.label}
                 onClick={() => {
-                  setMobileNavOpen(false)
+                  setMobileNavOpenLocationKey(null)
                 }}
                 to={item.to}
               >
@@ -146,21 +223,61 @@ function App() {
   )
 }
 
-function desktopNavClassName(active: boolean): string {
-  const base =
-    'relative inline-flex min-h-10 shrink-0 items-center border-b-2 px-3 text-sm font-semibold transition-[background-color,border-color,color] duration-150 focus-visible:ring-2 focus-visible:ring-amber-200/35 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none sm:min-h-9'
-  if (active) {
-    return `${base} border-amber-300/85 bg-amber-200/[0.07] text-amber-100`
-  }
-  return `${base} border-transparent text-slate-300 hover:border-slate-500/70 hover:bg-slate-800/35 hover:text-slate-100`
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(() =>
+    typeof window === 'undefined' || typeof window.matchMedia !== 'function'
+      ? false
+      : window.matchMedia(query).matches,
+  )
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return
+    }
+
+    const mediaQuery = window.matchMedia(query)
+    const updateMatches = () => {
+      setMatches(mediaQuery.matches)
+    }
+
+    updateMatches()
+    mediaQuery.addEventListener('change', updateMatches)
+    return () => {
+      mediaQuery.removeEventListener('change', updateMatches)
+    }
+  }, [query])
+
+  return matches
 }
 
-function mobileNavClassName(active: boolean): string {
-  const base =
-    'flex min-h-11 items-center border-b border-l-2 border-b-slate-700/45 px-3 text-sm font-semibold transition-[background-color,border-color,color] last:border-b-0 focus-visible:ring-2 focus-visible:ring-amber-200/35 focus-visible:outline-none'
-  return active
-    ? `${base} border-l-amber-300/80 bg-amber-200/[0.06] text-amber-100`
-    : `${base} border-l-transparent text-slate-300 hover:border-l-slate-500/70 hover:bg-slate-800/30 hover:text-slate-100`
+function desktopNavClassName(active: boolean): string {
+  return `site-nav-link ${active ? 'site-nav-link--active' : 'site-nav-link--inactive'}`
+}
+
+function mobileQuickNavClassName(item: MobileNavItem, active: boolean): string {
+  return [
+    'site-nav-link',
+    'site-mobile-quick-link',
+    `site-mobile-quick-link--${item.mobilePriority}`,
+    active ? 'site-nav-link--active' : 'site-nav-link--inactive',
+  ].join(' ')
+}
+
+function mobileOverflowNavClassName(item: MobileNavItem, active: boolean): string {
+  return [
+    'site-mobile-overflow-link',
+    `site-mobile-overflow-link--${item.mobilePriority}`,
+    active ? 'site-mobile-overflow-link--active' : 'site-mobile-overflow-link--inactive',
+  ].join(' ')
+}
+
+function mobileMenuButtonClassName(activePriority?: MobileNavItem['mobilePriority']): string {
+  return [
+    'site-mobile-menu-button',
+    activePriority ? `site-mobile-menu-button--active-${activePriority}` : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
 }
 
 export default App

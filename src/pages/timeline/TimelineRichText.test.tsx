@@ -15,7 +15,10 @@ describe('TimelineRichText', () => {
     expect(container.querySelector('em')).toHaveTextContent('italic')
     expect(container.querySelector('strong')).toHaveTextContent('bold')
     expect(container.querySelector('br')).toBeInTheDocument()
-    expect(screen.getByRole('link', {name: 'Link'})).toHaveAttribute('href', 'https://example.com')
+    expect(screen.getByRole('link', {name: /Link.*opens in new tab/})).toHaveAttribute(
+      'href',
+      'https://example.com',
+    )
     expect(screen.getByText(/<em>raw<\/em>/)).toBeInTheDocument()
   })
 })

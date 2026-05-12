@@ -28,6 +28,7 @@ describe('TimelineArchiveSection', () => {
     const toggle = screen.getByRole('button', {name: /ended banners/i})
     const content = document.getElementById(toggle.getAttribute('aria-controls') ?? '')
 
+    expect(screen.queryByRole('heading', {name: /ended banners/i})).not.toBeInTheDocument()
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
     expect(content).toHaveClass('timeline-archive-motion')
     expect(content).toHaveAttribute('aria-hidden', 'true')

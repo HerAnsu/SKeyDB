@@ -38,6 +38,7 @@ function parseInlineRichText(text: string, keyPrefix: string): ReactNode[] {
           nodes.push(
             <a className='text-link' href={href} key={key} rel='noreferrer' target='_blank'>
               {parseInlineRichText(label, key)}
+              <span className='sr-only'> (opens in new tab)</span>
             </a>,
           )
           index = hrefEnd + 1
