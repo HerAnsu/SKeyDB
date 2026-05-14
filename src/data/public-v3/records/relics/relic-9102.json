@@ -15,8 +15,8 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "fixed",
-      "value": "X",
-      "displayFormula": "20 * (1 + 0.01 * runtime value)"
+      "value": "20",
+      "suffix": "%"
     },
     "Arg2": {
       "kind": "computed",

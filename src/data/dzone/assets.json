@@ -3629,6 +3629,21 @@
         "candidates": ["src/assets/monster-preview/Portrait_Small_Monster_C0103_AT.webp", "src/assets/monster-preview/Portrait_Small_Monster_C0103_AT.png"]
       }
     },
+    "asset-dzone-monster-0312-preview": {
+      "id": "asset-dzone-monster-0312-preview",
+      "slot": "preview",
+      "kind": "dzoneMonster",
+      "ownerId": "dzone-monster-0312",
+      "assetName": "Portrait_Small_Monster_S0603_BOSSSIZE",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/monster-preview/Portrait_Small_Monster_S0603_BOSSSIZE.webp",
+        "candidates": [
+          "src/assets/monster-preview/Portrait_Small_Monster_S0603_BOSSSIZE.webp",
+          "src/assets/monster-preview/Portrait_Small_Monster_S0603_BOSSSIZE.png"
+        ]
+      }
+    },
     "asset-dzone-monster-0230-preview": {
       "id": "asset-dzone-monster-0230-preview",
       "slot": "preview",
@@ -4848,6 +4863,9 @@
     },
     "dzone-monster-0077": {
       "preview": "asset-dzone-monster-0077-preview"
+    },
+    "dzone-monster-0312": {
+      "preview": "asset-dzone-monster-0312-preview"
     },
     "dzone-monster-0230": {
       "preview": "asset-dzone-monster-0230-preview"

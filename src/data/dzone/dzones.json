@@ -330,7 +330,7 @@
       "start": "2025-04-28T01:00:00Z",
       "end": "2025-05-12T00:59:58Z",
       "stageEffect": "Astral Reign",
-      "realm": null,
+      "realm": "ULTRA",
       "seasonPath": "seasons/dzone0033.json"
     },
     {
@@ -410,7 +410,7 @@
       "start": "2025-08-18T01:00:00Z",
       "end": "2025-09-01T00:59:58Z",
       "stageEffect": "Astral Reign",
-      "realm": "ULTRA",
+      "realm": "CHAOS",
       "seasonPath": "seasons/dzone0041.json"
     },
     {
@@ -420,7 +420,7 @@
       "start": "2025-09-01T01:00:00Z",
       "end": "2025-09-15T00:59:58Z",
       "stageEffect": "Astral Reign",
-      "realm": "CHAOS",
+      "realm": "ULTRA",
       "seasonPath": "seasons/dzone0042.json"
     },
     {

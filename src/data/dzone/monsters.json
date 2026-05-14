@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "scope": "monsters",
-  "recordCount": 311,
+  "recordCount": 312,
   "records": [
     {
       "id": "dzone-monster-0264",
@@ -2114,6 +2114,14 @@
       "characteristicIds": ["enemy-characteristic-0011", "enemy-characteristic-0015"],
       "descriptionTemplate": "The doctor's blade was meant to cut away malady. Instead, it brings pain. An individual with very high ATK.",
       "assetName": "Portrait_Small_Monster_C0103_AT"
+    },
+    {
+      "id": "dzone-monster-0312",
+      "name": "Swordsmanship Instructor",
+      "characteristicIds": ["enemy-characteristic-0001", "enemy-characteristic-0015", "enemy-characteristic-0002"],
+      "descriptionTemplate": "The finest swordsmanship elites selected from all treaty nations. Handle with care.",
+      "assetName": "Portrait_Small_Monster_S0603_BOSSSIZE",
+      "badges": ["Boss"]
     },
     {
       "id": "dzone-monster-0230",

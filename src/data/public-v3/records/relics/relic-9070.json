@@ -12,6 +12,6 @@
   },
   "relicType": "D-Zone Initial Relic",
   "rarity": "SR",
-  "descriptionTemplate": "At the start of the first battle turn, add \"Echoes of Lost Shadows\" to your hand; on the second turn, add \"Silver Key {Resonance}\"; on the third turn, add {Echoes of the Past}.",
+  "descriptionTemplate": "At the start of the first battle turn, add {Echoes of Lost Shadows} to your hand; on the second turn, add {Silver Key Resonance}; on the third turn, add {Echoes of the Past}.",
   "descriptionArgs": {}
 }

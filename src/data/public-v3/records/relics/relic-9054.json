@@ -11,7 +11,7 @@
     "icon": "asset-relic-9054-icon"
   },
   "relicType": "D-Zone Initial Relic",
-  "descriptionTemplate": "Draw or discard a card to gain [Arg1] TemporarySTR, triggering a maximum of 15 times per turn.",
+  "descriptionTemplate": "Draw or discard a card to gain [Arg1] Temporary {STR}, triggering a maximum of 15 times per turn.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "computed",
