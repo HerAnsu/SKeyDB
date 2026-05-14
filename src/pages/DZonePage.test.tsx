@@ -1,6 +1,6 @@
 import {fireEvent, render, screen, waitFor, within} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
-import {afterEach, describe, expect, it, vi} from 'vitest'
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {DZonePage} from './DZonePage'
 
@@ -13,6 +13,10 @@ function renderDZonePage() {
 }
 
 describe('DZonePage', () => {
+  beforeEach(() => {
+    window.localStorage.clear()
+  })
+
   afterEach(() => {
     vi.useRealTimers()
   })
@@ -65,6 +69,38 @@ describe('DZonePage', () => {
       within(dialog).getByText('Immensely powerful foes that spawn anomalies.'),
     ).toBeInTheDocument()
     expect(within(dialog).queryByText('Badge')).not.toBeInTheDocument()
+  })
+
+  it('uses the database outside-click preference for D-zone popovers', async () => {
+    window.localStorage.setItem(
+      'database-detail-preferences',
+      JSON.stringify({
+        shared: {
+          showTagIcons: true,
+          clickOutsideClosesPopovers: true,
+          fontScale: 'small',
+          accountLevel: 50,
+        },
+      }),
+    )
+
+    renderDZonePage()
+
+    fireEvent.click(
+      screen.getByRole('button', {name: /View Wave 1 monster details for "Blesser"/i}),
+    )
+
+    expect(
+      await screen.findByRole('dialog', {name: /database reference details/i}),
+    ).toBeInTheDocument()
+
+    fireEvent.pointerDown(document.body)
+
+    await waitFor(() => {
+      expect(
+        screen.queryByRole('dialog', {name: /database reference details/i}),
+      ).not.toBeInTheDocument()
+    })
   })
 
   it('opens initial relic details through the database popover layer', async () => {

@@ -112,7 +112,9 @@ describe('D-zone domain boundary', () => {
   })
 
   it('resolves every initial relic to a public relic detail record', async () => {
-    const relicIds = new Set(getLatestDzoneWaveViewModels().flatMap((wave) => wave.initialRelicIds))
+    const relicIds = new Set(
+      getDzoneSeasons().flatMap((season) => season.waves.flatMap((wave) => wave.initialRelicIds)),
+    )
 
     for (const relicId of relicIds) {
       await expect(loadRelicRecordById(relicId), relicId).resolves.toMatchObject({

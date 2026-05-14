@@ -114,7 +114,21 @@ function DatabaseLoreRedaction({level}: {level: 1 | 2 | 3 | 4}) {
   )
 }
 
-function renderDatabaseLoreInlineText(text: string, keyPrefix: string): ReactNode[] {
+function appendLoreTextNode(
+  nodes: ReactNode[],
+  text: string,
+  keyPrefix: string,
+  partIndex: number,
+  wrapText: boolean,
+) {
+  nodes.push(wrapText ? <span key={buildLoreKey(keyPrefix, 'text', partIndex)}>{text}</span> : text)
+}
+
+function renderDatabaseLoreInlineText(
+  text: string,
+  keyPrefix: string,
+  wrapText = true,
+): ReactNode[] {
   const nodes: ReactNode[] = []
   let lastIndex = 0
   let partIndex = 0
@@ -122,7 +136,7 @@ function renderDatabaseLoreInlineText(text: string, keyPrefix: string): ReactNod
   for (const match of text.matchAll(LORE_MARKUP_RE)) {
     const index = match.index
     if (index > lastIndex) {
-      nodes.push(text.slice(lastIndex, index))
+      appendLoreTextNode(nodes, text.slice(lastIndex, index), keyPrefix, partIndex, wrapText)
     }
 
     const [, rawToken, wrappedTagName = '', wrappedTagContent = '', bareTagName = ''] = match
@@ -139,6 +153,7 @@ function renderDatabaseLoreInlineText(text: string, keyPrefix: string): ReactNod
       const content = renderDatabaseLoreInlineText(
         wrappedTagContent,
         buildLoreKey(keyPrefix, 'tag', partIndex, wrappedTagName),
+        false,
       )
 
       if (tagName === 'italic') {
@@ -169,15 +184,25 @@ function renderDatabaseLoreInlineText(text: string, keyPrefix: string): ReactNod
   }
 
   if (lastIndex < text.length) {
-    nodes.push(text.slice(lastIndex))
+    appendLoreTextNode(nodes, text.slice(lastIndex), keyPrefix, partIndex, wrapText)
   }
 
   return nodes
+}
+
+function renderDatabaseLoreTextWithBreaks(text: string, keyPrefix: string): ReactNode[] {
+  return text.split('\n').flatMap((line, lineIndex) => {
+    const lineNodes = renderDatabaseLoreInlineText(line, buildLoreKey(keyPrefix, 'line', lineIndex))
+    if (lineIndex === 0) {
+      return lineNodes
+    }
+    return [<br key={buildLoreKey(keyPrefix, 'break', lineIndex)} />, ...lineNodes]
+  })
 }
 
 export function DatabaseLoreMarkupText({
   text,
   keyPrefix = 'database-lore-markup',
 }: DatabaseLoreMarkupTextProps) {
-  return <>{renderDatabaseLoreInlineText(text, keyPrefix)}</>
+  return <>{renderDatabaseLoreTextWithBreaks(text, keyPrefix)}</>
 }

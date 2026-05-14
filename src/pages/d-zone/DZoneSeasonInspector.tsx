@@ -1,4 +1,4 @@
-import {useState, type MouseEvent} from 'react'
+import {useMemo, useState, type MouseEvent} from 'react'
 
 import {FaCalendarDays} from 'react-icons/fa6'
 
@@ -53,7 +53,7 @@ export function DZoneSeasonInspector({
   waveHeadingLevel = 2,
 }: DZoneSeasonInspectorProps) {
   const defaultOpenWaveId = season.waves[0]?.id
-  const waveCardViewModels = buildDZoneWaveCardViewModels(season)
+  const waveCardViewModels = useMemo(() => buildDZoneWaveCardViewModels(season), [season])
   const [waveDisclosureState, setWaveDisclosureState] = useState<WaveDisclosureState>(() => ({
     openWaveIds: buildDefaultOpenWaveIds(defaultOpenWaveId),
     seasonId: season.id,

@@ -1,8 +1,41 @@
-import {act, fireEvent, render, screen, within} from '@testing-library/react'
+import {act, fireEvent, render, screen, waitFor, within} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import {MemoryRouter} from 'react-router-dom'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {DZoneHistoryPage} from './DZoneHistoryPage'
+
+function renderHistoryPage() {
+  return render(
+    <MemoryRouter>
+      <DZoneHistoryPage />
+    </MemoryRouter>,
+  )
+}
+
+function getDrawerCloseButton() {
+  const closeButton = screen
+    .getAllByRole('button', {name: 'Close season browser'})
+    .find((button) => button.classList.contains('d-zone-history-drawer-close'))
+
+  if (!(closeButton instanceof HTMLButtonElement)) {
+    throw new Error('Expected drawer close button to render.')
+  }
+
+  return closeButton
+}
+
+function getDrawerBackdropButton() {
+  const backdropButton = screen
+    .getAllByRole('button', {name: 'Close season browser'})
+    .find((button) => button.classList.contains('d-zone-history-drawer-backdrop'))
+
+  if (!(backdropButton instanceof HTMLButtonElement)) {
+    throw new Error('Expected drawer backdrop button to render.')
+  }
+
+  return backdropButton
+}
 
 function installWaveCardLayoutMock() {
   const originalGetBoundingClientRect = Object.getOwnPropertyDescriptor(
@@ -84,16 +117,12 @@ describe('DZoneHistoryPage', () => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date('2026-05-12T00:00:00Z'))
 
-    render(
-      <MemoryRouter>
-        <DZoneHistoryPage />
-      </MemoryRouter>,
-    )
+    renderHistoryPage()
 
     expect(screen.getByRole('heading', {level: 1, name: 'D-Zone Archive'})).toBeInTheDocument()
     expect(
-      screen.getByText('Inspect past seasons, their stage lineups and relics.'),
-    ).toBeInTheDocument()
+      screen.getAllByText('Inspect past seasons, their stage lineups and relics.'),
+    ).toHaveLength(2)
 
     const currentSeasonButton = screen.getByRole('button', {name: /Select Season 60/i})
     expect(currentSeasonButton).toHaveAttribute('aria-current', 'true')
@@ -129,18 +158,17 @@ describe('DZoneHistoryPage', () => {
     expect(
       screen.getByRole('article', {name: 'Wave 3'}).querySelector('.d-zone-monster-grid'),
     ).not.toHaveClass('d-zone-monster-grid--overflowing')
-    expect(waveTwo).not.toHaveTextContent('Filigree Agate')
+    const waveTwoRelicButtons = within(waveTwo).getAllByRole('button', {
+      name: /View Wave 2 relic details/i,
+    })
+    expect(waveTwoRelicButtons[1]).toHaveClass('d-zone-relic-button--compact')
     fireEvent.click(waveTwoToggle)
     expect(waveTwoToggle).toHaveAttribute('aria-expanded', 'true')
-    expect(waveTwo).toHaveTextContent('Filigree Agate')
+    expect(waveTwoRelicButtons[1]).not.toHaveClass('d-zone-relic-button--compact')
   })
 
   it('filters and selects a legacy season', () => {
-    render(
-      <MemoryRouter>
-        <DZoneHistoryPage />
-      </MemoryRouter>,
-    )
+    renderHistoryPage()
 
     fireEvent.change(screen.getByRole('searchbox', {name: /Search D-zone seasons/i}), {
       target: {value: 'season 1'},
@@ -170,11 +198,7 @@ describe('DZoneHistoryPage', () => {
     const restoreMatchMediaMock = installMatchMediaMock()
 
     try {
-      render(
-        <MemoryRouter>
-          <DZoneHistoryPage />
-        </MemoryRouter>,
-      )
+      renderHistoryPage()
 
       const waveTwo = screen.getByRole('article', {name: 'Wave 2'})
       const waveTwoToggle = within(waveTwo).getByRole('button', {name: 'Expand Wave 2'})
@@ -202,5 +226,85 @@ describe('DZoneHistoryPage', () => {
       restoreMatchMediaMock()
       restoreLayoutMock()
     }
+  })
+
+  it('opens and closes the season browser drawer from the trigger, close button, backdrop, and Escape', async () => {
+    const user = userEvent.setup()
+    renderHistoryPage()
+
+    const trigger = screen.getByRole('button', {name: 'Open season browser drawer'})
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+
+    await user.click(trigger)
+    expect(trigger).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByRole('dialog', {name: 'D-zone season archive'})).toHaveAttribute(
+      'aria-modal',
+      'true',
+    )
+    expect(document.body.style.overflow).toBe('hidden')
+    await waitFor(() => {
+      expect(getDrawerCloseButton()).toHaveFocus()
+    })
+
+    await user.click(getDrawerCloseButton())
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+    expect(document.body.style.overflow).toBe('')
+    expect(trigger).toHaveFocus()
+
+    await user.click(trigger)
+    await user.click(getDrawerBackdropButton())
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+
+    await user.click(trigger)
+    fireEvent.keyDown(document, {key: 'Escape'})
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('closes the drawer when selecting a season', async () => {
+    const user = userEvent.setup()
+    renderHistoryPage()
+
+    const trigger = screen.getByRole('button', {name: 'Open season browser drawer'})
+    await user.click(trigger)
+
+    fireEvent.change(screen.getByRole('searchbox', {name: /Search D-zone seasons/i}), {
+      target: {value: 'season 1'},
+    })
+    await user.click(screen.getByRole('button', {name: /^Select Season 1/i}))
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByRole('heading', {level: 2, name: 'Season 1'})).toBeInTheDocument()
+  })
+
+  it('traps Tab inside the open drawer and restores focus to the opener', async () => {
+    const user = userEvent.setup()
+    renderHistoryPage()
+
+    const trigger = screen.getByRole('button', {name: 'Open season browser drawer'})
+    await user.click(trigger)
+
+    const drawerCloseButton = getDrawerCloseButton()
+
+    await waitFor(() => {
+      expect(drawerCloseButton).toHaveFocus()
+    })
+
+    await user.tab({shift: true})
+    expect(document.getElementById('d-zone-history-year-2024-button')).toHaveFocus()
+
+    await user.click(drawerCloseButton)
+    expect(trigger).toHaveFocus()
+  })
+
+  it('connects year disclosure buttons to deterministic panels', () => {
+    renderHistoryPage()
+
+    const yearButton = document.getElementById('d-zone-history-year-2026-button')
+    expect(yearButton).toBeInstanceOf(HTMLButtonElement)
+    expect(yearButton).toHaveAttribute('id', 'd-zone-history-year-2026-button')
+    expect(yearButton).toHaveAttribute('aria-controls', 'd-zone-history-year-2026-panel')
+
+    const panel = document.getElementById('d-zone-history-year-2026-panel')
+    expect(panel).toHaveAttribute('aria-labelledby', 'd-zone-history-year-2026-button')
   })
 })

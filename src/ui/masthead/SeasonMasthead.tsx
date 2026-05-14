@@ -14,7 +14,7 @@ export interface SeasonMastheadSummary {
   kicker: string
   name: ReactNode
   countdown?: SeasonMastheadCountdown | null
-  emblemSrc: string
+  emblemSrc?: string
   artSrc?: string
   linkAriaLabel?: string
   to?: string
@@ -56,15 +56,17 @@ export function SeasonMasthead({
           ) : null}
         </div>
       </div>
-      <div aria-hidden className='season-masthead__summary-emblem'>
-        <img
-          alt=''
-          className='season-masthead__summary-icon'
-          decoding='async'
-          draggable={false}
-          src={summary.emblemSrc}
-        />
-      </div>
+      {summary.emblemSrc ? (
+        <div aria-hidden className='season-masthead__summary-emblem'>
+          <img
+            alt=''
+            className='season-masthead__summary-icon'
+            decoding='async'
+            draggable={false}
+            src={summary.emblemSrc}
+          />
+        </div>
+      ) : null}
     </>
   )
 

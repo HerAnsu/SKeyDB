@@ -29,6 +29,7 @@ interface DatabasePopoverPortalProps {
   stats: ResolvedAwakenerDatabaseShellView['stats']
   entries: DatabasePopoverPortalEntry[]
   onCloseAll: () => void
+  closeOnOutsideClick?: boolean
   onToggleEnlightenSlot?: (slot: AwakenerEnlightenRecord['slot']) => void
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
   showTagIcons?: boolean
@@ -44,6 +45,7 @@ export function DatabasePopoverPortal({
   stats,
   entries,
   onCloseAll,
+  closeOnOutsideClick = false,
   onToggleEnlightenSlot,
   selectedEnlightenSlot = null,
   showTagIcons = true,
@@ -54,6 +56,7 @@ export function DatabasePopoverPortal({
     <PopoverTrailPanel
       anchorElement={anchorElement}
       anchorRect={anchorRect}
+      closeOnOutsideClick={closeOnOutsideClick}
       fontScale={fontScale}
       itemCount={entries.length}
       onCloseAll={onCloseAll}

@@ -22,8 +22,11 @@ const DZONE_REALM_ICONS: Record<DzoneRealm, string> = {
   ULTRA: realmIconUltra,
 }
 
-export function getDzoneRealmBadgeAsset(realm: DzoneRealm | null | undefined): string {
-  return realm ? DZONE_REALM_BADGES[realm] : realmBadgeAequor
+export function getDzoneRealmBadgeAsset(realm: DzoneRealm): string
+export function getDzoneRealmBadgeAsset(realm: null | undefined): undefined
+export function getDzoneRealmBadgeAsset(realm: DzoneRealm | null | undefined): string | undefined
+export function getDzoneRealmBadgeAsset(realm: DzoneRealm | null | undefined): string | undefined {
+  return realm ? DZONE_REALM_BADGES[realm] : undefined
 }
 
 export function getDzoneRealmIconAsset(realm: DzoneRealm | null | undefined): string | undefined {

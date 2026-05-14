@@ -20,6 +20,7 @@ interface PopoverTrailPanelProps {
   anchorElement?: HTMLElement | null
   itemCount: number
   onCloseAll: () => void
+  closeOnOutsideClick?: boolean
   fontScale?: FontScale
   children?: ReactNode
 }
@@ -29,6 +30,7 @@ export function PopoverTrailPanel({
   anchorElement,
   itemCount,
   onCloseAll,
+  closeOnOutsideClick = false,
   fontScale = 'small',
   children,
 }: PopoverTrailPanelProps) {
@@ -102,6 +104,32 @@ export function PopoverTrailPanel({
       window.removeEventListener('scroll', handleViewportChange, true)
     }
   }, [])
+
+  useEffect(() => {
+    if (!closeOnOutsideClick) {
+      return
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      const target = event.target
+      if (!(target instanceof Node)) {
+        return
+      }
+      if (ref.current?.contains(target)) {
+        return
+      }
+      if (anchorElement?.isConnected && anchorElement.contains(target)) {
+        return
+      }
+
+      onCloseAll()
+    }
+
+    window.addEventListener('pointerdown', handlePointerDown)
+    return () => {
+      window.removeEventListener('pointerdown', handlePointerDown)
+    }
+  }, [anchorElement, closeOnOutsideClick, onCloseAll])
 
   useEffect(() => {
     previouslyFocusedElementRef.current =

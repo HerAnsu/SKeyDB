@@ -1,11 +1,13 @@
-import {useLayoutEffect, useRef, type MouseEvent} from 'react'
+import {useRef, type MouseEvent} from 'react'
 
 import {FaChevronDown} from 'react-icons/fa6'
 
 import type {DzoneResolvedMonster, DzoneResolvedWave} from '@/domain/dzone'
 import {DatabaseLoreMarkupText} from '@/features/database/internal/DatabaseLoreMarkupText'
 
+import {toDZoneAccessibleText} from './d-zone-display-text'
 import type {DZoneRelicPreview} from './d-zone-view-model'
+import {useDZoneWaveCardMotion} from './useDZoneWaveCardMotion'
 
 interface DZoneWaveCardProps {
   relics: DZoneRelicPreview[]
@@ -19,18 +21,7 @@ interface DZoneWaveCardProps {
 }
 
 const COLLAPSED_MONSTER_LIMIT = 10
-const WAVE_MOTION_EASING = 'cubic-bezier(0.22, 1, 0.36, 1)'
-const WAVE_OPEN_DURATION_MS = 260
-const WAVE_CLOSE_DURATION_MS = 180
-
-function toAccessibleLabel(text: string): string {
-  return (
-    text
-      .replace(/@[1-4]\s*/g, '')
-      .replace(/\s+/g, ' ')
-      .trim() || text
-  )
-}
+const COLLAPSED_RELIC_ACCESSIBLE_LIMIT = 2
 
 export function DZoneWaveCard({
   relics,
@@ -43,8 +34,6 @@ export function DZoneWaveCard({
   onRelicOpen,
 }: DZoneWaveCardProps) {
   const cardRef = useRef<HTMLElement | null>(null)
-  const previousExpandedRef = useRef(expanded)
-  const previousNaturalHeightRef = useRef<number | null>(null)
   const detailsId = `${wave.id}-details`
   const HeadingTag = headingLevel === 3 ? 'h3' : 'h2'
   const waveNumber = /\d+/.exec(wave.name)?.[0] ?? wave.name
@@ -62,75 +51,7 @@ export function DZoneWaveCard({
       : ''
   }`
 
-  useLayoutEffect(() => {
-    const cardElement = cardRef.current
-    if (!cardElement) return
-
-    const expandedChanged = previousExpandedRef.current !== expanded
-    const renderedHeight = cardElement.getBoundingClientRect().height
-    const previousNaturalHeight = previousNaturalHeightRef.current
-
-    previousExpandedRef.current = expanded
-
-    if (!expandedChanged) {
-      previousNaturalHeightRef.current = renderedHeight
-      return
-    }
-
-    const startHeight = cardElement.style.height ? renderedHeight : previousNaturalHeight
-
-    cardElement.style.transition = 'none'
-    cardElement.style.height = ''
-    cardElement.style.overflow = ''
-    delete cardElement.dataset.waveMotion
-
-    const targetHeight = cardElement.getBoundingClientRect().height
-    previousNaturalHeightRef.current = targetHeight
-
-    const clearMotionStyles = () => {
-      cardElement.style.height = ''
-      cardElement.style.overflow = ''
-      cardElement.style.transition = ''
-      delete cardElement.dataset.waveMotion
-      previousNaturalHeightRef.current = cardElement.getBoundingClientRect().height
-    }
-
-    if (startHeight === null || Math.abs(startHeight - targetHeight) < 1) {
-      clearMotionStyles()
-      return
-    }
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) {
-      clearMotionStyles()
-      return
-    }
-
-    const duration = expanded ? WAVE_OPEN_DURATION_MS : WAVE_CLOSE_DURATION_MS
-    let cleanupTimer = 0
-
-    const handleTransitionEnd = (event: TransitionEvent) => {
-      if (event.target === cardElement && event.propertyName === 'height') {
-        window.clearTimeout(cleanupTimer)
-        clearMotionStyles()
-      }
-    }
-
-    cardElement.dataset.waveMotion = expanded ? 'opening' : 'closing'
-    cardElement.style.overflow = 'hidden'
-    cardElement.style.transition = 'none'
-    cardElement.style.height = `${startHeight.toString()}px`
-    void cardElement.offsetHeight
-    cardElement.style.transition = `height ${duration.toString()}ms ${WAVE_MOTION_EASING}`
-    cardElement.style.height = `${targetHeight.toString()}px`
-    cardElement.addEventListener('transitionend', handleTransitionEnd)
-    cleanupTimer = window.setTimeout(clearMotionStyles, duration + 90)
-
-    return () => {
-      window.clearTimeout(cleanupTimer)
-      cardElement.removeEventListener('transitionend', handleTransitionEnd)
-    }
-  }, [expanded])
+  useDZoneWaveCardMotion(cardRef, expanded)
 
   return (
     <article
@@ -170,27 +91,33 @@ export function DZoneWaveCard({
         <div className='d-zone-wave-body' id={detailsId}>
           <section aria-labelledby={`${wave.id}-relics`} className='d-zone-wave-section'>
             <div className='d-zone-relic-list'>
-              {relics.map((relic) => (
-                <button
-                  aria-label={`View ${wave.name} relic details for ${toAccessibleLabel(
-                    relic.name,
-                  )}`}
-                  className={relicButtonClassName}
-                  key={relic.id}
-                  onClick={(event) => {
-                    onRelicOpen(relic, event)
-                  }}
-                  title={toAccessibleLabel(relic.name)}
-                  type='button'
-                >
-                  <RelicIcon relic={relic} />
-                  {expanded ? (
-                    <span className='d-zone-relic-copy'>
-                      <span className='d-zone-relic-name'>{relic.name}</span>
-                    </span>
-                  ) : null}
-                </button>
-              ))}
+              {relics.map((relic, relicIndex) => {
+                const accessibleRelicName = toDZoneAccessibleText(relic.name)
+                const collapsedOverflow =
+                  !expanded && relicIndex >= COLLAPSED_RELIC_ACCESSIBLE_LIMIT
+
+                return (
+                  <button
+                    aria-hidden={collapsedOverflow ? true : undefined}
+                    aria-label={`View ${wave.name} relic details for ${accessibleRelicName}`}
+                    className={relicButtonClassName}
+                    key={relic.id}
+                    onClick={(event) => {
+                      onRelicOpen(relic, event)
+                    }}
+                    tabIndex={collapsedOverflow ? -1 : undefined}
+                    title={accessibleRelicName}
+                    type='button'
+                  >
+                    <RelicIcon relic={relic} />
+                    {expanded ? (
+                      <span className='d-zone-relic-copy'>
+                        <span className='d-zone-relic-name'>{relic.name}</span>
+                      </span>
+                    ) : null}
+                  </button>
+                )
+              })}
             </div>
           </section>
 
@@ -255,12 +182,12 @@ function MonsterButton({
 
   return (
     <button
-      aria-label={`View ${waveName} monster details for ${toAccessibleLabel(monster.name)}`}
+      aria-label={`View ${waveName} monster details for ${toDZoneAccessibleText(monster.name)}`}
       className={`d-zone-monster-tile ${compact ? 'd-zone-monster-tile--compact' : ''}`}
       onClick={(event) => {
         onMonsterOpen(monster, event)
       }}
-      title={toAccessibleLabel(monster.name)}
+      title={toDZoneAccessibleText(monster.name)}
       type='button'
     >
       {badge ? <span className='d-zone-monster-badge'>{badge}</span> : null}

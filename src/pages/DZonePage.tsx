@@ -20,6 +20,7 @@ import {
   buildDzoneMonsterPopoverEntry,
   loadDzoneRelicPopoverEntry,
 } from '@/features/database/internal/dzone-popover-entries'
+import {useDatabaseDetailPreferences} from '@/features/database/internal/useDatabaseDetailPreferences'
 import {useDatabasePopoverController} from '@/features/database/internal/useDatabasePopoverController'
 import {SeasonMasthead} from '@/ui/masthead/SeasonMasthead'
 
@@ -44,6 +45,7 @@ export function DZonePage() {
     referenceLayer,
     stats: null,
   })
+  const {preferences} = useDatabaseDetailPreferences()
   const season = getCurrentDzoneSeason(now) ?? getLatestDzoneSeason()
   const seasonSummary = getDzoneSeasonSummaryById(season.id) ?? getLatestDzoneSeasonSummary()
   const dateRange = formatDzoneSeasonDateRange(season)
@@ -115,7 +117,10 @@ export function DZonePage() {
         />
       </section>
 
-      <DatabasePopoverRoot {...popoverController.popoverRootProps} />
+      <DatabasePopoverRoot
+        {...popoverController.popoverRootProps}
+        closeOnOutsideClick={preferences.shared.clickOutsideClosesPopovers}
+      />
     </DatabasePopoverContext.Provider>
   )
 }
