@@ -1,5 +1,5 @@
 import type {RelicDatabaseDescriptionRecord} from '@/domain/description-records'
-import type {DzoneResolvedMonster} from '@/domain/dzone'
+import type {DzoneMonsterAlertStats, DzoneResolvedMonster} from '@/domain/dzone'
 import {loadRelicRecordById, type PublicRelicRecord} from '@/domain/relics'
 
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
@@ -22,6 +22,31 @@ function getMonsterDescriptionText(monster: DzoneResolvedMonster): string | unde
   return monster.descriptionTemplate.trim() ? monster.descriptionTemplate : undefined
 }
 
+function formatDzoneMonsterHp(hp: number): string {
+  return hp > 100000 ? `${Math.floor(hp / 1000).toString()}k` : hp.toString()
+}
+
+function buildDzoneMonsterAlertMetaText(stats: DzoneMonsterAlertStats): string {
+  return buildDzoneMonsterAlertMetaSegments(stats)
+    .map((segment) => segment.text)
+    .join('')
+}
+
+function buildDzoneMonsterAlertMetaSegments(stats: DzoneMonsterAlertStats) {
+  const segments = [
+    {text: 'Level '},
+    {text: stats.level.toString(), tone: 'value' as const},
+    {text: ' · HP '},
+    {text: formatDzoneMonsterHp(stats.hp), tone: 'value' as const},
+  ]
+
+  if (stats.hpBars && stats.hpBars > 1) {
+    segments.push({text: ' · '}, {text: `${stats.hpBars.toString()} HP bars`})
+  }
+
+  return segments
+}
+
 export function buildDzoneMonsterPopoverEntry({
   monster,
   thumbnailSrc,
@@ -34,7 +59,10 @@ export function buildDzoneMonsterPopoverEntry({
   return {
     key: `dzone-monster:${monster.id}`,
     name: monster.name,
-    label: '',
+    label: monster.alertStats ? buildDzoneMonsterAlertMetaText(monster.alertStats) : '',
+    labelSegments: monster.alertStats
+      ? buildDzoneMonsterAlertMetaSegments(monster.alertStats)
+      : undefined,
     description: '',
     thumbnail: thumbnailSrc ? {src: thumbnailSrc, alt: monster.name} : undefined,
     descriptionSections: [

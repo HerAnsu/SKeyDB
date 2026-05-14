@@ -1,3 +1,9 @@
+const ALERT_NAME_PREFIX_RE = /^Alert\s+/i
+
+export function getDzoneAlertShortName(alertName: string): string {
+  return alertName.replace(ALERT_NAME_PREFIX_RE, '').trim() || alertName
+}
+
 export function toDZoneAccessibleText(text: string): string {
   return (
     text

@@ -5,6 +5,7 @@ import {
   getDzoneEnemyCharacteristicById,
   getDzoneMonsterById,
   getDzoneMonsters,
+  getDzoneSeasonAlertOptions,
   getDzoneSeasonById,
   getDzoneSeasons,
   getDzoneSeasonSharedInitialRelicIds,
@@ -42,6 +43,42 @@ describe('D-zone domain boundary', () => {
     expect(getLatestDzoneWaveViewModels()).toHaveLength(5)
   })
 
+  it('preserves per-alert monster stats from season archives', () => {
+    const [waveOne] = getLatestDzoneSeason().waves
+
+    expect(waveOne.alerts.map((alert) => alert.name)).toEqual([
+      'Alert I',
+      'Alert II',
+      'Alert III',
+      'Alert IV',
+      'Alert V',
+    ])
+    expect(waveOne.alerts[0]?.monsters[0]).toMatchObject({
+      monsterId: 'dzone-monster-0034',
+      level: 38,
+      hp: 24474,
+      hpBars: 3,
+    })
+  })
+
+  it('resolves selected alert stats onto alert wave monsters', () => {
+    const [waveOne] = getLatestDzoneWaveViewModels()
+    const alertFourBlesser = waveOne.alerts
+      .find((alert) => alert.id === 'alert-4')
+      ?.monsters.find((monster) => monster.id === 'dzone-monster-0034')
+
+    expect(alertFourBlesser).toMatchObject({
+      id: 'dzone-monster-0034',
+      alertStats: {
+        alertId: 'alert-4',
+        alertName: 'Alert IV',
+        level: 73,
+        hp: 401964,
+        hpBars: 3,
+      },
+    })
+  })
+
   it('loads dzone-0060 as the current season during its active window', () => {
     expect(getCurrentDzoneSeason(new Date('2026-05-12T12:00:00Z'))?.id).toBe('dzone-0060')
   })
@@ -52,6 +89,34 @@ describe('D-zone domain boundary', () => {
         for (const monsterId of wave.monsterIds) {
           expect(getDzoneMonsterById(monsterId), `${wave.id} monster ${monsterId}`).toBeDefined()
         }
+        for (const alert of wave.alerts) {
+          expect(
+            alert.monsters.map((monster) => monster.monsterId),
+            `${season.id} ${wave.id} ${alert.id}`,
+          ).toEqual(wave.monsterIds)
+          for (const monster of alert.monsters) {
+            expect(
+              getDzoneMonsterById(monster.monsterId),
+              `${wave.id} ${alert.id} monster ${monster.monsterId}`,
+            ).toBeDefined()
+          }
+        }
+      }
+    }
+  })
+
+  it('keeps alert options consistent across every wave in a season', () => {
+    for (const season of getDzoneSeasons()) {
+      const seasonAlertOptions = getDzoneSeasonAlertOptions(season)
+      const alertIds = seasonAlertOptions.map((alert) => alert.id)
+
+      expect(new Set(alertIds).size, `${season.id} unique alert ids`).toBe(alertIds.length)
+
+      for (const wave of season.waves) {
+        expect(
+          wave.alerts.map((alert) => ({id: alert.id, name: alert.name})),
+          `${season.id} ${wave.id} alert set`,
+        ).toEqual(seasonAlertOptions)
       }
     }
   })

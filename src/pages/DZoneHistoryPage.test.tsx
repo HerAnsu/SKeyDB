@@ -120,9 +120,10 @@ describe('DZoneHistoryPage', () => {
     renderHistoryPage()
 
     expect(screen.getByRole('heading', {level: 1, name: 'D-Zone Archive'})).toBeInTheDocument()
+    expect(screen.getByRole('link', {name: 'Back to D-Zone'})).toHaveAttribute('href', '/d-zone')
     expect(
-      screen.getAllByText('Inspect past seasons, their stage lineups and relics.'),
-    ).toHaveLength(2)
+      screen.getByText('Browse past seasons, their stage lineups and relics.'),
+    ).toBeInTheDocument()
 
     const currentSeasonButton = screen.getByRole('button', {name: /Select Season 60/i})
     expect(currentSeasonButton).toHaveAttribute('aria-current', 'true')
@@ -140,6 +141,9 @@ describe('DZoneHistoryPage', () => {
     expect(
       screen.getByText('Astral Reign', {selector: '.d-zone-stage-chip-label'}),
     ).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: 'Select Alert V'}).closest('header')).toHaveClass(
+      'd-zone-season-inspector-header',
+    )
 
     const waveOneToggle = screen.getByRole('button', {name: 'Collapse Wave 1'})
     const waveTwoToggle = screen.getByRole('button', {name: 'Expand Wave 2'})
@@ -158,6 +162,11 @@ describe('DZoneHistoryPage', () => {
     expect(
       screen.getByRole('article', {name: 'Wave 3'}).querySelector('.d-zone-monster-grid'),
     ).not.toHaveClass('d-zone-monster-grid--overflowing')
+    const waveOne = screen.getByRole('article', {name: 'Wave 1'})
+    expect(within(waveOne).getByText('Lv 38')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', {name: 'Select Alert IV'}))
+    expect(within(waveOne).getByText('Lv 73')).toBeInTheDocument()
+    expect(within(waveOne).queryByText('Lv 38')).not.toBeInTheDocument()
     const waveTwoRelicButtons = within(waveTwo).getAllByRole('button', {
       name: /View Wave 2 relic details/i,
     })
@@ -190,6 +199,17 @@ describe('DZoneHistoryPage', () => {
     expect(screen.queryByText('Dissoluted Abyss', {selector: '.d-zone-stage-chip-label'})).toBe(
       null,
     )
+  })
+
+  it('shows an archive data accuracy note from the season browser panel', () => {
+    renderHistoryPage()
+
+    fireEvent.click(screen.getByRole('button', {name: 'Archive data note'}))
+
+    expect(screen.getByText(/Monster data, including levels and HP/i)).toBeVisible()
+    expect(
+      screen.getByText(/Relics may have had different effects when that season was live/i),
+    ).toBeVisible()
   })
 
   it('keeps wave card height in sync after an interrupted toggle animation', () => {

@@ -1,4 +1,4 @@
-import {useEffect, useRef, type KeyboardEvent} from 'react'
+import {useEffect, useRef, useState, type KeyboardEvent} from 'react'
 
 import {FaChevronRight, FaMagnifyingGlass, FaXmark} from 'react-icons/fa6'
 
@@ -21,6 +21,8 @@ const FOCUSABLE_SELECTOR = [
   'textarea:not([disabled])',
   '[tabindex]:not([tabindex="-1"])',
 ].join(',')
+
+const ARCHIVE_DATA_NOTE_ID = 'd-zone-history-archive-data-note'
 
 interface DZoneHistoryBrowserProps {
   browserOpen: boolean
@@ -61,6 +63,7 @@ export function DZoneHistoryBrowser({
   const drawerRef = useRef<HTMLElement>(null)
   const onCloseRef = useRef(onClose)
   const openerElementRef = useRef(openerElement)
+  const [archiveNoteOpen, setArchiveNoteOpen] = useState(false)
 
   useEffect(() => {
     onCloseRef.current = onClose
@@ -161,10 +164,6 @@ export function DZoneHistoryBrowser({
         tabIndex={browserOpen ? -1 : undefined}
       >
         <div className='d-zone-history-heading-row'>
-          <div className='d-zone-history-title-copy'>
-            <p className='d-zone-history-title ui-title'>D-Zone Archive</p>
-            <p>Inspect past seasons, their stage lineups and relics.</p>
-          </div>
           <button
             aria-label='Close season browser'
             className='d-zone-history-drawer-close'
@@ -173,6 +172,36 @@ export function DZoneHistoryBrowser({
           >
             <FaXmark aria-hidden />
           </button>
+        </div>
+
+        <div className='d-zone-history-archive-note'>
+          <button
+            aria-controls={ARCHIVE_DATA_NOTE_ID}
+            aria-expanded={archiveNoteOpen}
+            className='d-zone-history-archive-note-trigger'
+            onClick={() => {
+              setArchiveNoteOpen((open) => !open)
+            }}
+            type='button'
+          >
+            <span>Archive data note</span>
+            <FaChevronRight aria-hidden className='d-zone-history-archive-note-chevron' />
+          </button>
+
+          {archiveNoteOpen ? (
+            <div
+              className='d-zone-history-archive-note-panel'
+              id={ARCHIVE_DATA_NOTE_ID}
+              role='note'
+            >
+              <p>Historical D-Zone data is presented as a best-effort archive.</p>
+              <p>
+                Monster data, including levels and HP, comes from seasonal patch data when
+                available, but may still be slightly inaccurate.
+              </p>
+              <p>Relics may have had different effects when that season was live.</p>
+            </div>
+          ) : null}
         </div>
 
         <div className='d-zone-history-controls'>

@@ -10,6 +10,11 @@ export interface DatabaseReferenceAttributeRow {
   value: string
 }
 
+export interface DatabaseReferenceLabelSegment {
+  text: string
+  tone?: 'default' | 'value'
+}
+
 export interface DatabaseReferenceThumbnail {
   alt?: string
   src: string
@@ -23,6 +28,7 @@ export type DatabaseReferenceNavigationTarget =
 export interface DatabaseReferenceEntry {
   name: string
   label: string
+  labelSegments?: DatabaseReferenceLabelSegment[]
   description: string
   keywordFooterText?: string
   record?: DescribedRecord

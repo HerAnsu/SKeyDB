@@ -188,8 +188,17 @@ export function DatabaseReferencePopover({
             </p>
           )}
           {entry.label ? (
-            <p className='text-slate-500' style={scaledFontStyle(10)}>
-              {entry.label}
+            <p className='text-slate-400/86' style={scaledFontStyle(entry.labelSegments ? 11 : 10)}>
+              {entry.labelSegments
+                ? entry.labelSegments.map((segment, index) => (
+                    <span
+                      className={segment.tone === 'value' ? 'text-amber-100/72' : undefined}
+                      key={`${segment.text}:${index.toString()}`}
+                    >
+                      {segment.text}
+                    </span>
+                  ))
+                : entry.label}
             </p>
           ) : null}
           {onNavigate && entry.navigationLabel ? (

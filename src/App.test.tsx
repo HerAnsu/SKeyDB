@@ -224,7 +224,9 @@ describe('App shell', () => {
           {timeout: DZONE_ROUTE_FIND_TIMEOUT_MS},
         ),
       ).toBeInTheDocument()
-      expect(screen.getByText(/Season 60 · May 11, 2026 - May 25, 2026/)).toBeInTheDocument()
+      expect(
+        screen.getByText(/Current Season: 60 · May 11, 2026 - May 25, 2026/),
+      ).toBeInTheDocument()
     },
     DZONE_ROUTE_TEST_TIMEOUT_MS,
   )

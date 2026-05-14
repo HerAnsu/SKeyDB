@@ -2,13 +2,17 @@ import {useMemo, useState, type MouseEvent} from 'react'
 
 import {FaCalendarDays} from 'react-icons/fa6'
 
-import type {DzoneRealm, DzoneResolvedMonster, DzoneSeason} from '@/domain/dzone'
+import {
+  getDzoneSeasonAlertOptions,
+  type DzoneAlertOption,
+  type DzoneRealm,
+  type DzoneResolvedMonster,
+  type DzoneSeason,
+} from '@/domain/dzone'
 
+import {getDzoneAlertShortName} from './d-zone-display-text'
 import {buildDZoneWaveCardViewModels, type DZoneRelicPreview} from './d-zone-view-model'
 import {DZoneWaveCard} from './DZoneWaveCard'
-
-export const D_ZONE_DESCRIPTION =
-  'Defeat waves of monsters to earn relics. Each season features unique stage effects and realm-specific rewards.'
 
 interface DZoneSeasonInspectorProps {
   countdownDisplay?: string
@@ -30,12 +34,35 @@ interface WaveDisclosureState {
   seasonId: string
 }
 
+interface AlertSelectionState {
+  alertId: string | null
+  seasonId: string
+}
+
 function buildDefaultOpenWaveIds(defaultOpenWaveId: string | undefined): Set<string> {
   return new Set(defaultOpenWaveId ? [defaultOpenWaveId] : [])
 }
 
 function getRealmThemeClass(realm: DzoneRealm | null | undefined): string {
   return `d-zone-season-inspector--realm-${realm ? realm.toLowerCase() : 'legacy'}`
+}
+
+function getSelectedAlertId(
+  season: DzoneSeason,
+  alertOptions: DzoneAlertOption[],
+  alertSelectionState: AlertSelectionState,
+) {
+  if (alertOptions.length === 0) {
+    return null
+  }
+  if (
+    alertSelectionState.seasonId === season.id &&
+    alertSelectionState.alertId &&
+    alertOptions.some((alert) => alert.id === alertSelectionState.alertId)
+  ) {
+    return alertSelectionState.alertId
+  }
+  return alertOptions[0]?.id ?? null
 }
 
 export function DZoneSeasonInspector({
@@ -54,14 +81,24 @@ export function DZoneSeasonInspector({
 }: DZoneSeasonInspectorProps) {
   const defaultOpenWaveId = season.waves[0]?.id
   const waveCardViewModels = useMemo(() => buildDZoneWaveCardViewModels(season), [season])
+  const alertOptions = useMemo(() => getDzoneSeasonAlertOptions(season), [season])
   const [waveDisclosureState, setWaveDisclosureState] = useState<WaveDisclosureState>(() => ({
     openWaveIds: buildDefaultOpenWaveIds(defaultOpenWaveId),
     seasonId: season.id,
   }))
+  const [alertSelectionState, setAlertSelectionState] = useState<AlertSelectionState>(() => ({
+    alertId: alertOptions[0]?.id ?? null,
+    seasonId: season.id,
+  }))
+  const selectedAlertId = getSelectedAlertId(season, alertOptions, alertSelectionState)
   const openWaveIds =
     waveDisclosureState.seasonId === season.id
       ? waveDisclosureState.openWaveIds
       : buildDefaultOpenWaveIds(defaultOpenWaveId)
+
+  function selectAlert(alertId: string) {
+    setAlertSelectionState({alertId, seasonId: season.id})
+  }
 
   function toggleWave(waveId: string) {
     setWaveDisclosureState((currentDisclosureState) => {
@@ -94,6 +131,12 @@ export function DZoneSeasonInspector({
               <span className='d-zone-stage-chip-label'>{season.stageEffect}</span>
               {realmName ? <span className='d-zone-stage-chip-label'>{realmName}</span> : null}
             </div>
+            <DZoneAlertSwitcher
+              alertOptions={alertOptions}
+              selectedAlertId={selectedAlertId}
+              variant='header'
+              onAlertChange={selectAlert}
+            />
 
             <div className='d-zone-season-meta-row'>
               <span className='d-zone-season-date'>
@@ -119,6 +162,15 @@ export function DZoneSeasonInspector({
         </header>
       ) : null}
 
+      {!showHeader ? (
+        <DZoneAlertSwitcher
+          alertOptions={alertOptions}
+          selectedAlertId={selectedAlertId}
+          variant='toolbar'
+          onAlertChange={selectAlert}
+        />
+      ) : null}
+
       <div className='d-zone-season-wave-list'>
         {waveCardViewModels.map(({wave, relics}) => (
           <DZoneWaveCard
@@ -132,10 +184,49 @@ export function DZoneSeasonInspector({
             onMonsterOpen={onMonsterOpen}
             onRelicOpen={onRelicOpen}
             relics={relics}
+            selectedAlertId={selectedAlertId}
             wave={wave}
           />
         ))}
       </div>
     </section>
+  )
+}
+
+function DZoneAlertSwitcher({
+  alertOptions,
+  selectedAlertId,
+  variant,
+  onAlertChange,
+}: {
+  alertOptions: DzoneAlertOption[]
+  selectedAlertId: string | null
+  variant: 'header' | 'toolbar'
+  onAlertChange: (alertId: string) => void
+}) {
+  if (alertOptions.length <= 1) {
+    return null
+  }
+
+  return (
+    <div className={`d-zone-alert-switcher d-zone-alert-switcher--${variant}`}>
+      <span className='d-zone-alert-switcher-label'>Alert</span>
+      <div aria-label='D-zone alert' className='d-zone-alert-switcher-options' role='group'>
+        {alertOptions.map((alert) => (
+          <button
+            aria-label={`Select ${alert.name}`}
+            aria-pressed={alert.id === selectedAlertId}
+            className='d-zone-alert-switcher-button'
+            key={alert.id}
+            onClick={() => {
+              onAlertChange(alert.id)
+            }}
+            type='button'
+          >
+            {getDzoneAlertShortName(alert.name)}
+          </button>
+        ))}
+      </div>
+    </div>
   )
 }

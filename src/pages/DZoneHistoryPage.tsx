@@ -1,6 +1,6 @@
-import {useMemo, useState, type MouseEvent} from 'react'
+import {useState} from 'react'
 
-import {FaChevronRight} from 'react-icons/fa6'
+import {FaChevronLeft, FaChevronRight} from 'react-icons/fa6'
 import {Link} from 'react-router-dom'
 
 import {
@@ -9,20 +9,12 @@ import {
   getDzoneSeasonSummaries,
   getLatestDzoneSeason,
   getLatestDzoneSeasonSummary,
-  type DzoneResolvedMonster,
 } from '@/domain/dzone'
 import {getDzoneMonsterPreviewAsset} from '@/domain/dzone-assets'
 import {getDzoneSeasonSummaryDisplayName} from '@/domain/dzone-season-realm'
-import {buildGlobalDatabaseReferenceLayer} from '@/domain/global-database-reference-layer'
 import {getTimelineCountdownDisplay, getTimelineStatus} from '@/domain/timeline'
 import {DatabasePopoverContext} from '@/features/database/internal/database-popover-context'
 import {DatabasePopoverRoot} from '@/features/database/internal/DatabasePopoverRoot'
-import {
-  buildDzoneMonsterPopoverEntry,
-  loadDzoneRelicPopoverEntry,
-} from '@/features/database/internal/dzone-popover-entries'
-import {useDatabaseDetailPreferences} from '@/features/database/internal/useDatabaseDetailPreferences'
-import {useDatabasePopoverController} from '@/features/database/internal/useDatabasePopoverController'
 
 import {formatDzoneSeasonDateRange} from './d-zone/d-zone-date-format'
 import {
@@ -32,9 +24,9 @@ import {
   getDZoneHistoryVisibleSeasons,
 } from './d-zone/d-zone-history-view-model'
 import {getDzoneRealmBadgeAsset} from './d-zone/d-zone-realm-assets'
-import {type DZoneRelicPreview} from './d-zone/d-zone-view-model'
 import {DZoneHistoryBrowser} from './d-zone/DZoneHistoryBrowser'
 import {DZoneSeasonInspector} from './d-zone/DZoneSeasonInspector'
+import {useDZoneDatabasePopovers} from './d-zone/useDZoneDatabasePopovers'
 import {useTimelineNow} from './timeline/useTimelineNow'
 
 import './d-zone/d-zone.css'
@@ -50,12 +42,7 @@ export function DZoneHistoryPage() {
   const [expandedYears, setExpandedYears] = useState<Set<string>>(
     () => new Set([getDZoneHistorySeasonYear(defaultSummary)]),
   )
-  const referenceLayer = useMemo(() => buildGlobalDatabaseReferenceLayer(), [])
-  const popoverController = useDatabasePopoverController({
-    referenceLayer,
-    stats: null,
-  })
-  const {preferences} = useDatabaseDetailPreferences()
+  const dzonePopovers = useDZoneDatabasePopovers()
 
   const selectedSummary =
     summaries.find((season) => season.id === selectedSeasonId) ?? getLatestDzoneSeasonSummary()
@@ -88,46 +75,25 @@ export function DZoneHistoryPage() {
     })
   }
 
-  function openMonsterPopover(monster: DzoneResolvedMonster, event: MouseEvent<HTMLButtonElement>) {
-    const thumbnailSrc = getDzoneMonsterPreviewAsset(monster.assetName)
-    popoverController.contextValue.openRootInfo?.(
-      buildDzoneMonsterPopoverEntry({monster, thumbnailSrc}),
-      event,
-    )
-  }
-
-  async function openRelicPopover(relic: DZoneRelicPreview, event: MouseEvent<HTMLButtonElement>) {
-    event.stopPropagation()
-    const anchorElement = event.currentTarget
-    const entry = await loadDzoneRelicPopoverEntry({
-      relicId: relic.id,
-      thumbnailSrc: relic.iconSrc,
-    })
-
-    if (!entry || !anchorElement.isConnected) {
-      return
-    }
-
-    popoverController.contextValue.openRootInfo?.(entry, {
-      currentTarget: anchorElement,
-      stopPropagation: () => undefined,
-    })
-  }
-
   return (
-    <DatabasePopoverContext.Provider value={popoverController.contextValue}>
+    <DatabasePopoverContext.Provider value={dzonePopovers.contextValue}>
       <section
         className={`d-zone-page d-zone-history-page -mt-4 md:-mt-5 ${
           browserOpen ? 'd-zone-history-page--browser-open' : ''
         }`}
       >
-        <nav aria-label='Breadcrumb' className='d-zone-history-breadcrumbs'>
-          <Link to='/'>Home</Link>
-          <FaChevronRight aria-hidden />
-          <Link to='/d-zone'>D-Zone</Link>
-          <FaChevronRight aria-hidden />
-          <span>Archive</span>
-        </nav>
+        <div className='d-zone-history-page-heading' aria-labelledby='d-zone-history-page-title'>
+          <div className='d-zone-history-page-heading-copy'>
+            <h1 className='d-zone-history-title ui-title' id='d-zone-history-page-title'>
+              D-Zone Archive
+            </h1>
+            <p>Browse past seasons, their stage lineups and relics.</p>
+          </div>
+          <Link className='d-zone-history-cta d-zone-history-back-link' to='/d-zone'>
+            <FaChevronLeft aria-hidden />
+            Back to D-Zone
+          </Link>
+        </div>
 
         <button
           aria-controls='d-zone-history-browser'
@@ -148,13 +114,6 @@ export function DZoneHistoryPage() {
             <FaChevronRight aria-hidden />
           </span>
         </button>
-
-        <div className='d-zone-history-page-heading' aria-labelledby='d-zone-history-page-title'>
-          <h1 className='d-zone-history-title ui-title' id='d-zone-history-page-title'>
-            D-Zone Archive
-          </h1>
-          <p>Inspect past seasons, their stage lineups and relics.</p>
-        </div>
 
         <div className='d-zone-history-shell'>
           <DZoneHistoryBrowser
@@ -183,9 +142,9 @@ export function DZoneHistoryPage() {
             countdownDisplay={countdownDisplay}
             dateRange={selectedDateRange}
             getMonsterAsset={(monster) => getDzoneMonsterPreviewAsset(monster.assetName)}
-            onMonsterOpen={openMonsterPopover}
+            onMonsterOpen={dzonePopovers.openMonsterPopover}
             onRelicOpen={(relic, event) => {
-              void openRelicPopover(relic, event)
+              void dzonePopovers.openRelicPopover(relic, event)
             }}
             realm={selectedSummary.realm}
             season={selectedSeason}
@@ -199,8 +158,8 @@ export function DZoneHistoryPage() {
       </section>
 
       <DatabasePopoverRoot
-        {...popoverController.popoverRootProps}
-        closeOnOutsideClick={preferences.shared.clickOutsideClosesPopovers}
+        {...dzonePopovers.popoverRootProps}
+        closeOnOutsideClick={dzonePopovers.closeOnOutsideClick}
       />
     </DatabasePopoverContext.Provider>
   )

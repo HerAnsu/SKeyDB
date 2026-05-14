@@ -15,6 +15,7 @@ const waveIdSchema = z.string().regex(/^(d-effect-zone-wave|wave)-\d+$/)
 const monsterIdSchema = z.string().regex(/^dzone-monster-\d{4}$/)
 const characteristicIdSchema = z.string().regex(/^enemy-characteristic-\d{4}$/)
 const relicIdSchema = z.string().regex(/^relic-\d{4}$/)
+const alertIdSchema = z.string().regex(/^alert-\d+$/)
 const dzoneStageEffectSchema = z.enum(['Astral Reign', 'Faded Legacy'])
 const dzoneRealmSchema = z.enum(['AEQUOR', 'CARO', 'CHAOS', 'ULTRA'])
 
@@ -23,11 +24,25 @@ const catalogSchemaBase = {
   recordCount: z.number().int().nonnegative(),
 }
 
+const dzoneAlertMonsterSchema = z.object({
+  monsterId: monsterIdSchema,
+  level: z.number().int().nonnegative(),
+  hp: z.number().int().nonnegative(),
+  hpBars: z.number().int().positive().optional(),
+})
+
+const dzoneAlertSchema = z.object({
+  id: alertIdSchema,
+  name: nonEmptyStringSchema,
+  monsters: z.array(dzoneAlertMonsterSchema),
+})
+
 const dzoneWaveSchema = z.object({
   id: waveIdSchema,
   name: nonEmptyStringSchema,
   initialRelicIds: z.array(relicIdSchema),
   monsterIds: z.array(monsterIdSchema),
+  alerts: z.array(dzoneAlertSchema).min(1),
 })
 
 const dzoneSeasonSchema = z.object({
@@ -97,9 +112,31 @@ export type DzoneRealm = z.infer<typeof dzoneRealmSchema>
 export type DzoneStageEffect = z.infer<typeof dzoneStageEffectSchema>
 export type DzoneMonster = z.infer<typeof monsterSchema>
 export type DzoneEnemyCharacteristic = z.infer<typeof enemyCharacteristicSchema>
+export type DzoneAlert = z.infer<typeof dzoneAlertSchema>
+export type DzoneAlertMonster = z.infer<typeof dzoneAlertMonsterSchema>
+
+export interface DzoneAlertOption {
+  id: string
+  name: string
+}
+
+export interface DzoneMonsterAlertStats {
+  alertId: string
+  alertName: string
+  level: number
+  hp: number
+  hpBars?: number
+}
 
 export interface DzoneResolvedMonster extends DzoneMonster {
+  alertStats?: DzoneMonsterAlertStats
   characteristics: DzoneEnemyCharacteristic[]
+}
+
+export interface DzoneResolvedAlert {
+  id: string
+  name: string
+  monsters: DzoneResolvedMonster[]
 }
 
 export interface DzoneResolvedWave {
@@ -107,6 +144,7 @@ export interface DzoneResolvedWave {
   name: string
   initialRelicIds: string[]
   monsters: DzoneResolvedMonster[]
+  alerts: DzoneResolvedAlert[]
 }
 
 function parseCatalog<T extends {records: unknown[]; recordCount: number}>(
@@ -196,10 +234,48 @@ function assertDzoneSeasonCatalogsAlign() {
 
 function assertDzoneReferencesResolve() {
   for (const season of parsedSeasons) {
+    const seasonAlertOptions = getDzoneSeasonAlertOptions(season)
+
     for (const wave of season.waves) {
       for (const monsterId of wave.monsterIds) {
         if (!monsterById.has(monsterId)) {
           throw new Error(`D-zone wave "${wave.id}" references unknown monster id "${monsterId}".`)
+        }
+      }
+      if (wave.alerts.length !== seasonAlertOptions.length) {
+        throw new Error(`D-zone wave "${wave.id}" alert count does not match the season alert set.`)
+      }
+
+      const waveAlertIds = new Set<string>()
+      for (const [alertIndex, alert] of wave.alerts.entries()) {
+        if (waveAlertIds.has(alert.id)) {
+          throw new Error(`D-zone wave "${wave.id}" has duplicate alert id "${alert.id}".`)
+        }
+        waveAlertIds.add(alert.id)
+
+        const expectedSeasonAlert = seasonAlertOptions[alertIndex]
+        if (alert.id !== expectedSeasonAlert.id || alert.name !== expectedSeasonAlert.name) {
+          throw new Error(
+            `D-zone wave "${wave.id}" alert "${alert.id}" does not match season alert order.`,
+          )
+        }
+
+        const alertMonsterIds = alert.monsters.map((monster) => monster.monsterId)
+        if (
+          alertMonsterIds.length !== wave.monsterIds.length ||
+          alertMonsterIds.some((monsterId, index) => monsterId !== wave.monsterIds[index])
+        ) {
+          throw new Error(
+            `D-zone wave "${wave.id}" alert "${alert.id}" monster ids do not match wave monster order.`,
+          )
+        }
+
+        for (const monster of alert.monsters) {
+          if (!monsterById.has(monster.monsterId)) {
+            throw new Error(
+              `D-zone wave "${wave.id}" alert "${alert.id}" references unknown monster id "${monster.monsterId}".`,
+            )
+          }
         }
       }
     }
@@ -289,29 +365,49 @@ export function getDzoneSeasonSharedInitialRelicIds(season: DzoneSeason): string
   )
 }
 
+export function getDzoneSeasonAlertOptions(season: DzoneSeason): DzoneAlertOption[] {
+  return season.waves[0]?.alerts.map(({id, name}) => ({id, name})) ?? []
+}
+
+function resolveDzoneMonster(monsterId: string, alertStats?: DzoneMonsterAlertStats) {
+  const monster = monsterById.get(monsterId)
+  if (!monster) {
+    throw new Error(`D-zone wave references unknown monster id "${monsterId}".`)
+  }
+  return {
+    ...monster,
+    alertStats,
+    characteristics: monster.characteristicIds.map((characteristicId) => {
+      const characteristic = characteristicById.get(characteristicId)
+      if (!characteristic) {
+        throw new Error(
+          `D-zone monster "${monster.id}" references unknown characteristic id "${characteristicId}".`,
+        )
+      }
+      return characteristic
+    }),
+  }
+}
+
 export function resolveDzoneWaveViewModel(wave: DzoneWave): DzoneResolvedWave {
   return {
     id: wave.id,
     name: wave.name,
     initialRelicIds: wave.initialRelicIds,
-    monsters: wave.monsterIds.map((monsterId) => {
-      const monster = monsterById.get(monsterId)
-      if (!monster) {
-        throw new Error(`D-zone wave "${wave.id}" references unknown monster id "${monsterId}".`)
-      }
-      return {
-        ...monster,
-        characteristics: monster.characteristicIds.map((characteristicId) => {
-          const characteristic = characteristicById.get(characteristicId)
-          if (!characteristic) {
-            throw new Error(
-              `D-zone monster "${monster.id}" references unknown characteristic id "${characteristicId}".`,
-            )
-          }
-          return characteristic
+    monsters: wave.monsterIds.map((monsterId) => resolveDzoneMonster(monsterId)),
+    alerts: wave.alerts.map((alert) => ({
+      id: alert.id,
+      name: alert.name,
+      monsters: alert.monsters.map((alertMonster) =>
+        resolveDzoneMonster(alertMonster.monsterId, {
+          alertId: alert.id,
+          alertName: alert.name,
+          level: alertMonster.level,
+          hp: alertMonster.hp,
+          hpBars: alertMonster.hpBars,
         }),
-      }
-    }),
+      ),
+    })),
   }
 }
 

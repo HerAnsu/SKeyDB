@@ -18,6 +18,7 @@ interface DZoneWaveCardProps {
   onExpandedChange: () => void
   onMonsterOpen: (monster: DzoneResolvedMonster, event: MouseEvent<HTMLButtonElement>) => void
   onRelicOpen: (relic: DZoneRelicPreview, event: MouseEvent<HTMLButtonElement>) => void
+  selectedAlertId?: string | null
 }
 
 const COLLAPSED_MONSTER_LIMIT = 10
@@ -32,6 +33,7 @@ export function DZoneWaveCard({
   onExpandedChange,
   onMonsterOpen,
   onRelicOpen,
+  selectedAlertId = null,
 }: DZoneWaveCardProps) {
   const cardRef = useRef<HTMLElement | null>(null)
   const detailsId = `${wave.id}-details`
@@ -41,12 +43,14 @@ export function DZoneWaveCard({
   const relicButtonClassName = `d-zone-relic-button ${
     expanded ? '' : 'd-zone-relic-button--compact'
   }`
-  const visibleMonsters = wave.monsters.slice(
+  const selectedAlert = wave.alerts.find((alert) => alert.id === selectedAlertId) ?? wave.alerts[0]
+  const alertMonsters = selectedAlert.monsters
+  const visibleMonsters = alertMonsters.slice(
     0,
-    expanded ? wave.monsters.length : COLLAPSED_MONSTER_LIMIT,
+    expanded ? alertMonsters.length : COLLAPSED_MONSTER_LIMIT,
   )
   const monsterGridClassName = `d-zone-monster-grid ${
-    !expanded && wave.monsters.length > visibleMonsters.length
+    !expanded && alertMonsters.length > visibleMonsters.length
       ? 'd-zone-monster-grid--overflowing'
       : ''
   }`
@@ -171,6 +175,18 @@ interface MonsterButtonProps {
   waveName: string
 }
 
+function getMonsterButtonLabel(
+  waveName: string,
+  monster: DzoneResolvedMonster,
+  compact: boolean,
+): string {
+  const monsterName = toDZoneAccessibleText(monster.name)
+  const levelSuffix =
+    !compact && monster.alertStats ? `, level ${monster.alertStats.level.toString()}` : ''
+
+  return `View ${waveName} monster details for ${monsterName}${levelSuffix}`
+}
+
 function MonsterButton({
   assetSrc,
   compact = false,
@@ -182,7 +198,7 @@ function MonsterButton({
 
   return (
     <button
-      aria-label={`View ${waveName} monster details for ${toDZoneAccessibleText(monster.name)}`}
+      aria-label={getMonsterButtonLabel(waveName, monster, compact)}
       className={`d-zone-monster-tile ${compact ? 'd-zone-monster-tile--compact' : ''}`}
       onClick={(event) => {
         onMonsterOpen(monster, event)
@@ -191,6 +207,11 @@ function MonsterButton({
       type='button'
     >
       {badge ? <span className='d-zone-monster-badge'>{badge}</span> : null}
+      {!compact && monster.alertStats ? (
+        <span className='d-zone-monster-badge d-zone-monster-level-chip'>
+          Lv {monster.alertStats.level.toString()}
+        </span>
+      ) : null}
       <span className='d-zone-monster-art-frame'>
         {assetSrc ? (
           <img

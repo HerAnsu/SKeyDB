@@ -36,6 +36,61 @@ describe('D-zone database popover entries', () => {
     ])
   })
 
+  it('adds selected level, HP, and HP bar metadata as quiet monster label text', () => {
+    const monster = {
+      id: 'dzone-monster-9999',
+      name: '"Test Beast"',
+      assetName: 'Portrait_Test',
+      characteristicIds: [],
+      descriptionTemplate: 'A test creature from the deep.',
+      characteristics: [],
+      alertStats: {
+        alertId: 'alert-4',
+        alertName: 'Alert IV',
+        level: 73,
+        hp: 401964,
+        hpBars: 3,
+      },
+    } satisfies DzoneResolvedMonster
+
+    const entry = buildDzoneMonsterPopoverEntry({monster})
+
+    expect(entry.label).toBe('Level 73 · HP 401k · 3 HP bars')
+    expect(entry.labelSegments).toEqual([
+      {text: 'Level '},
+      {text: '73', tone: 'value'},
+      {text: ' · HP '},
+      {text: '401k', tone: 'value'},
+      {text: ' · '},
+      {text: '3 HP bars'},
+    ])
+    expect(entry.attributeRows).toBeUndefined()
+  })
+
+  it('leaves six-digit HP untruncated until it exceeds 100k', () => {
+    const monster = {
+      id: 'dzone-monster-9999',
+      name: '"Test Beast"',
+      assetName: 'Portrait_Test',
+      characteristicIds: [],
+      descriptionTemplate: 'A test creature from the deep.',
+      characteristics: [],
+      alertStats: {
+        alertId: 'alert-1',
+        alertName: 'Alert I',
+        level: 70,
+        hp: 100000,
+        hpBars: 1,
+      },
+    } satisfies DzoneResolvedMonster
+
+    const entry = buildDzoneMonsterPopoverEntry({monster})
+
+    expect(entry.label).toBe('Level 70 · HP 100000')
+    expect(entry.label).not.toContain('HP bars')
+    expect(entry.attributeRows).toBeUndefined()
+  })
+
   it('omits relic metadata from the label and marks lore as flavor text', () => {
     const relic: PublicRelicRecord = {
       id: 'relic-9004',
