@@ -162,5 +162,27 @@
     "featured": ["Agrippa", "Uvhash"],
     "customArt": "/events/uvhash-agrippa-event.webp",
     "rerun": true
+  },
+  {
+    "id": "event-campaign-half-anniversary",
+    "title": "2.5th Anniversary Celebration",
+    "category": "campaign",
+    "description": "Announced anniversary rewards include \"Ethereal Core\" x250 and SSR Limited Awakener \"Saya\".\nReward source, timing and exact distribution details are still pending confirmation.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/27 09:00",
+    "customArt": "/events/2-5-anniversary.webp",
+    "pinned": true,
+    "preliminary": true
+  },
+  {
+    "id": "event-collab-saya-no-uta",
+    "title": "Saya no Uta Collaboration",
+    "category": "collab",
+    "description": "A wandering seed, crossing the boundaries between worlds, taking root and blooming across the barren earth... multiplying.\n*\"This is... where a new world begins.\"*\nGameplay stages, drops and event structure are still pending confirmation.",
+    "startDate": "2026/05/30 09:00",
+    "endDate": "2026/06/27 09:00",
+    "customArt": "/events/saya-collab.webp",
+    "pinned": true,
+    "preliminary": true
   }
 ]

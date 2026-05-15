@@ -1,0 +1,206 @@
+import {useEffect, useMemo, useRef, useState} from 'react'
+
+import type {BannerFeaturedUnit, BannerPoolSlot} from '@/domain/timeline'
+
+export const CYCLE_INTERVAL_MS = 2500
+export const TRANSITION_DURATION_MS = 800
+
+export interface PoolCycleFrame {
+  activeIdx: number
+  incomingIdx: number
+  transitioning: boolean
+}
+
+interface PoolCycleState {
+  frames: PoolCycleFrame[]
+  signature: string
+}
+
+function getPoolFingerprint(pool: BannerFeaturedUnit[]): string {
+  return pool
+    .map((u) => `${u.kind}:${u.name}:${u.detailLink === false ? 'no-detail' : 'detail'}`)
+    .join('|')
+}
+
+function buildPoolSignature(poolSlots: BannerPoolSlot[]): string {
+  return poolSlots
+    .map((slot) => `${slot.linked ? 'linked' : 'slot'}:${getPoolFingerprint(slot.pool)}`)
+    .join('||')
+}
+
+function buildSharedGroups(fingerprints: string[]): Map<string, number[]> {
+  const groups = new Map<string, number[]>()
+  fingerprints.forEach((fp, i) => {
+    const existing = groups.get(fp)
+    if (existing) {
+      existing.push(i)
+    } else {
+      groups.set(fp, [i])
+    }
+  })
+  return groups
+}
+
+function buildInitialFrames(
+  poolSlots: BannerPoolSlot[],
+  sharedGroups: Map<string, number[]>,
+): PoolCycleFrame[] {
+  const initial: PoolCycleFrame[] = poolSlots.map(() => ({
+    activeIdx: 0,
+    incomingIdx: -1,
+    transitioning: false,
+  }))
+
+  for (const group of sharedGroups.values()) {
+    if (group.length <= 1) continue
+    const poolSize = poolSlots[group[0]].pool.length
+    group.forEach((slotIdx, i) => {
+      initial[slotIdx].activeIdx = i % poolSize
+    })
+  }
+
+  return initial
+}
+
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false
+
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+export function usePoolCycling(poolSlots: BannerPoolSlot[]): PoolCycleFrame[] {
+  const poolSignature = useMemo(() => buildPoolSignature(poolSlots), [poolSlots])
+  const fingerprints = useMemo(() => poolSlots.map((s) => getPoolFingerprint(s.pool)), [poolSlots])
+  const sharedGroups = useMemo(() => buildSharedGroups(fingerprints), [fingerprints])
+  const initialFrames = useMemo(
+    () => buildInitialFrames(poolSlots, sharedGroups),
+    [poolSlots, sharedGroups],
+  )
+  const [reducedMotion, setReducedMotion] = useState(() => prefersReducedMotion())
+
+  const [cycleState, setCycleState] = useState<PoolCycleState>(() => ({
+    frames: initialFrames,
+    signature: poolSignature,
+  }))
+
+  const pendingRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const frames =
+    reducedMotion || cycleState.signature !== poolSignature ? initialFrames : cycleState.frames
+
+  useEffect(() => {
+    if (cycleState.signature === poolSignature) return
+
+    const timer = setTimeout(() => {
+      setCycleState((prev) =>
+        prev.signature === poolSignature ? prev : {frames: initialFrames, signature: poolSignature},
+      )
+    }, 0)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [cycleState.signature, initialFrames, poolSignature])
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const handleChange = () => {
+      setReducedMotion(mediaQuery.matches)
+    }
+
+    handleChange()
+    mediaQuery.addEventListener('change', handleChange)
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (reducedMotion) return
+
+    const cyclableSlots = poolSlots
+      .map((s, i) => (s.pool.length > 1 ? i : -1))
+      .filter((i) => i >= 0)
+    if (cyclableSlots.length === 0) return
+
+    let deck: number[] = []
+    let lastSlot = -1
+
+    function shuffleDeck() {
+      deck = [...cyclableSlots]
+      for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[deck[i], deck[j]] = [deck[j], deck[i]]
+      }
+      if (deck.length > 1 && deck[0] === lastSlot) {
+        const swapIdx = 1 + Math.floor(Math.random() * (deck.length - 1))
+        ;[deck[0], deck[swapIdx]] = [deck[swapIdx], deck[0]]
+      }
+    }
+
+    const interval = setInterval(() => {
+      if (deck.length === 0) shuffleDeck()
+      const slotIdx = deck.shift()
+      if (slotIdx === undefined) return
+      lastSlot = slotIdx
+
+      setCycleState((prev) => {
+        const currentFrames = prev.signature === poolSignature ? prev.frames : initialFrames
+
+        if (currentFrames[slotIdx].transitioning) return prev
+
+        const poolSize = poolSlots[slotIdx].pool.length
+        const fp = fingerprints[slotIdx]
+        const group = sharedGroups.get(fp) ?? [slotIdx]
+
+        const usedIndices = new Set(
+          group
+            .filter((i) => i !== slotIdx)
+            .map((i) =>
+              currentFrames[i].transitioning
+                ? currentFrames[i].incomingIdx
+                : currentFrames[i].activeIdx,
+            ),
+        )
+
+        let nextIdx = (currentFrames[slotIdx].activeIdx + 1) % poolSize
+        let safety = 0
+        while (usedIndices.has(nextIdx) && safety < poolSize) {
+          nextIdx = (nextIdx + 1) % poolSize
+          safety++
+        }
+
+        const next = [...currentFrames]
+        next[slotIdx] = {...currentFrames[slotIdx], incomingIdx: nextIdx, transitioning: true}
+        return {frames: next, signature: poolSignature}
+      })
+
+      if (pendingRef.current) clearTimeout(pendingRef.current)
+      pendingRef.current = setTimeout(() => {
+        setCycleState((prev) => {
+          if (prev.signature !== poolSignature) return prev
+
+          return {
+            frames: prev.frames.map((f) =>
+              f.transitioning
+                ? {activeIdx: f.incomingIdx, incomingIdx: -1, transitioning: false}
+                : f,
+            ),
+            signature: prev.signature,
+          }
+        })
+        pendingRef.current = null
+      }, TRANSITION_DURATION_MS)
+    }, CYCLE_INTERVAL_MS)
+
+    return () => {
+      clearInterval(interval)
+      if (pendingRef.current) clearTimeout(pendingRef.current)
+    }
+  }, [fingerprints, initialFrames, poolSignature, poolSlots, reducedMotion, sharedGroups])
+
+  return frames
+}

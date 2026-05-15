@@ -25,7 +25,7 @@ import {
 import type {RichSegment, ScalingSegment} from '@/domain/rich-text'
 import {fmtNum} from '@/domain/scaling'
 
-import {renderTextWithBreaks} from './font-scale'
+import {DatabaseLoreMarkupText} from './DatabaseLoreMarkupText'
 import {
   DATABASE_ACCENT_TEXT_CLASS,
   DATABASE_INHERIT_FONT_SIZE_CLASS,
@@ -155,7 +155,7 @@ export function RichSegmentRenderer({
 }: RichSegmentRendererProps) {
   switch (segment.type) {
     case 'text':
-      return <>{renderTextWithBreaks(segment.value)}</>
+      return <DatabaseLoreMarkupText text={segment.value} />
 
     case 'skill':
       if (!onSkillClick) {

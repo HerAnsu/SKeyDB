@@ -26,10 +26,11 @@ Array of event objects. Each event appears as a card in the Events section.
 | `id` | string | **yes** | Unique identifier. Convention: `event-{category}-{short-name}` |
 | `title` | string | **yes** | Display title |
 | `category` | string | no | Determines the colored badge. See [Event Categories](#event-categories) below |
-| `description` | string | no | Short description text |
+| `description` | string | no | Short description text. Supports shared timeline rich text; see [Descriptions](#descriptions) |
 | `startDate` | string | **yes** | Start time in `YYYY/MM/DD HH:MM` UTC+8 |
 | `endDate` | string | **yes** | End time in `YYYY/MM/DD HH:MM` UTC+8 |
 | `pinned` | boolean | no | Pinned events sort to the top |
+| `preliminary` | boolean | no | Marks dates, rewards, or details as provisional and shows a `Preliminary` metadata label |
 | `featured` | string | no | Awakener or wheel name — shows their art as decoration on the right edge of the card. Auto-detected: if the name matches a wheel it renders as a wheel, otherwise as an awakener |
 | `customArt` | string | no | Custom art URL or path. Overrides `featured` art if both are set. Use for skins, special promo art, raid art, etc. Non-URL values like `"TBD"` are ignored. Paths starting with `/events/` are resolved against `src/assets/events/*` (bundled), e.g. `/events/arachne.png` |
 | `pricing` | string | no | Displays a silver pricing badge, e.g. `"960 Silver Prime"`, `"$24.99"` |
@@ -69,6 +70,13 @@ Descriptions support `\n` for line breaks:
 "description": "Line one.\nLine two.\nLine three."
 ```
 
+Descriptions also support a small, safe Markdown-style subset:
+- `*italic*` or `_italic_`
+- `**bold**`
+- `[link text](https://example.com)` for `http` and `https` links
+
+Raw HTML is displayed as text instead of being parsed.
+
 Note: double quotes inside strings must be escaped with `\"` — this is a JSON limitation.
 
 ### Example
@@ -78,7 +86,7 @@ Note: double quotes inside strings must be escaped with `\"` — this is a JSON 
   "id": "event-story-vortice",
   "title": "Call of the Moskstraumen",
   "category": "gameplay-event",
-  "description": "Gameplay and story event featuring Vortice.\nObtain SR-Wheel and more.",
+  "description": "Gameplay and story event featuring *Vortice*.\nObtain SR-Wheel and more.",
   "startDate": "2026/03/09 09:00",
   "endDate": "2026/03/23 09:00",
   "pinned": true,
@@ -99,13 +107,15 @@ Array of banner objects. Each banner appears as a card in the Banners section wi
 | `id` | string | **yes** | Unique identifier. Convention: `banner-{short-name}` |
 | `title` | string | **yes** | Display title |
 | `type` | string | **yes** | Determines the type badge. See [Banner Types](#banner-types) below |
-| `description` | string | no | Supports `\n` for line breaks and inline HTML (e.g. `<a href="...">link text</a>`) |
+| `tags` | array | no | Optional display tags when one label is not enough, e.g. `["limited", "collab", "preliminary"]`. Falls back to `type` when omitted. |
+| `description` | string | no | Short description text. Supports shared timeline rich text; see [Descriptions](#descriptions) |
 | `startDate` | string | **yes** | Start time in `YYYY/MM/DD HH:MM` UTC+8 |
 | `endDate` | string | **yes** | End time in `YYYY/MM/DD HH:MM` UTC+8 |
 | `pinned` | boolean | no | Pinned banners sort to the top |
 | `featured` | array | no | List of featured units. See [Featured Units](#featured-units) |
 | `poolSlots` | array | no | Rotating pool slots. See [Pool Slots](#pool-slots) |
-| `customArt` | string | no | URL to custom banner art (future use) |
+| `customArt` | string | no | Full-card banner art URL or path. Overrides featured/pool artwork when present. Paths starting with `/banners/` are resolved against `src/assets/banners/*`. |
+| `preliminary` | boolean | no | Marks dates, pools, or banner details as provisional. If `tags` is omitted, adds `Preliminary` beside the type label |
 
 ### Banner Types
 
@@ -118,6 +128,8 @@ Array of banner objects. Each banner appears as a card in the Banners section wi
 | `selector` | Pick-your-own-rate-up banners |
 | `wheel` | Wheel-only banners |
 | `combo` | Combo banners (mixed character + wheel pools) |
+
+Display-only tags also support `collab` for collaboration banners and `preliminary` for provisional information.
 
 ### Featured Units
 
@@ -228,7 +240,7 @@ When `linked` is true, the code auto-expands to show the awakener and their sign
   "id": "banner-arcane-tides",
   "title": "Awaken — Arcane Tides",
   "type": "awaken",
-  "description": "Featured rate-up. <a href=\"https://discord.gg/example\" target=\"_blank\">Review on Discord</a>",
+  "description": "Featured rate-up. [Review on Discord](https://discord.gg/example)",
   "startDate": "2026/03/05 18:00",
   "endDate": "2026/03/19 11:59",
   "featured": ["Tawil", "Miryam", "Caecus"]

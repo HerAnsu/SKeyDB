@@ -10,6 +10,16 @@ export interface DatabaseReferenceAttributeRow {
   value: string
 }
 
+export interface DatabaseReferenceLabelSegment {
+  text: string
+  tone?: 'default' | 'value'
+}
+
+export interface DatabaseReferenceThumbnail {
+  alt?: string
+  src: string
+}
+
 export type DatabaseReferenceNavigationTarget =
   | {kind: 'skills'}
   | {kind: 'wheel-page'; wheelName: string}
@@ -18,6 +28,7 @@ export type DatabaseReferenceNavigationTarget =
 export interface DatabaseReferenceEntry {
   name: string
   label: string
+  labelSegments?: DatabaseReferenceLabelSegment[]
   description: string
   keywordFooterText?: string
   record?: DescribedRecord
@@ -25,6 +36,7 @@ export interface DatabaseReferenceEntry {
   descriptionMaxRank?: number
   influenceBadges?: DatabaseInfluenceBadge[]
   attributeRows?: DatabaseReferenceAttributeRow[]
+  thumbnail?: DatabaseReferenceThumbnail
   detailLinks?: {
     label: string
     entry: KeyedDatabaseReferenceEntry
@@ -33,6 +45,7 @@ export interface DatabaseReferenceEntry {
     label: string
     description: string
     record?: DescribedRecord
+    tone?: 'default' | 'lore'
   }[]
   navigationLabel?: string
   navigationTarget?: DatabaseReferenceNavigationTarget

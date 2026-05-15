@@ -1,116 +1,119 @@
-import {useEffect, useMemo, useState} from 'react'
+import {useState, type ReactNode} from 'react'
 
+import realmBadgeAequor from '@/assets/ui/realm-badge-aequor.webp'
 import {getAwakeners} from '@/domain/awakeners'
+import {getCurrentDzoneSeason, getLatestDzoneSeason} from '@/domain/dzone'
+import {getDzoneSeasonRealmName} from '@/domain/dzone-season-realm'
 import type {EntityRef} from '@/domain/entities/types'
-import {getTimelineStatus, sortBannersByRelevance, sortEventsByRelevance} from '@/domain/timeline'
+import {
+  getTimelineCountdownDisplay,
+  getTimelineStatus,
+  sortEventsByRelevance,
+  type EventEntry,
+} from '@/domain/timeline'
 import {timelineBanners, timelineEvents} from '@/domain/timeline-data'
 import {getWheels} from '@/domain/wheels'
 import {DbDetailModalHost} from '@/features/database/detail/DbDetailModalHost'
 import {dbDetailStore} from '@/stores/dbDetailStore'
+import {SeasonMasthead} from '@/ui/masthead/SeasonMasthead'
 
-import {BannerCard} from './timeline/BannerCard'
 import {EventList} from './timeline/EventList'
-import {TimelineArchiveSection} from './timeline/TimelineArchiveSection'
+import {TimelineBannersSection} from './timeline/TimelineBannersSection'
 
-const TICK_INTERVAL_MS = 60_000
+import './timeline/timeline.css'
+
+import {useTimelineNow} from './timeline/useTimelineNow'
+
+type TimelineContentFilter = 'all' | 'events' | 'banners'
+
+const CONTENT_FILTERS: {id: TimelineContentFilter; label: string}[] = [
+  {id: 'all', label: 'Both'},
+  {id: 'events', label: 'Events'},
+  {id: 'banners', label: 'Banners'},
+]
+
+function selectDZoneEvent(events: EventEntry[], now: Date): EventEntry | undefined {
+  return (
+    events.find(
+      (event) =>
+        event.category === 'd-tide' &&
+        getTimelineStatus(event.startDate, event.endDate, now) !== 'ended',
+    ) ?? events.find((event) => event.category === 'd-tide')
+  )
+}
+
+function getDZoneRealmName(event: EventEntry | undefined, now: Date): string {
+  const match = event?.description?.match(/Current Realm relic:\s*([^.\n]+)/i)
+  const eventRealmName = match?.[1]?.trim()
+  if (eventRealmName) return eventRealmName
+
+  return getDzoneSeasonRealmName(getCurrentDzoneSeason(now) ?? getLatestDzoneSeason())
+}
 
 export function TimelinePage() {
-  const [now, setNow] = useState(() => new Date())
-  const [showEndedBanners, setShowEndedBanners] = useState(false)
-  const awakeners = useMemo(() => getAwakeners(), [])
-  const wheels = useMemo(() => getWheels(), [])
+  const now = useTimelineNow()
+  const [contentFilter, setContentFilter] = useState<TimelineContentFilter>('all')
+  const awakeners = getAwakeners()
+  const wheels = getWheels()
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNow(new Date())
-    }, TICK_INTERVAL_MS)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
-
-  const banners = sortBannersByRelevance(timelineBanners, now)
   const events = sortEventsByRelevance(timelineEvents, now)
-
-  const activeBanners = banners.filter(
-    (b) => getTimelineStatus(b.startDate, b.endDate, now) === 'active',
-  )
-  const upcomingBanners = banners.filter(
-    (b) => getTimelineStatus(b.startDate, b.endDate, now) === 'upcoming',
-  )
-  const endedBanners = banners.filter(
-    (b) => getTimelineStatus(b.startDate, b.endDate, now) === 'ended',
-  )
+  const dZoneEvent = selectDZoneEvent(events, now)
+  const dZoneCountdownDisplay = dZoneEvent
+    ? getTimelineCountdownDisplay(dZoneEvent.startDate, dZoneEvent.endDate, now)
+    : null
+  const showEvents = contentFilter !== 'banners'
+  const showBanners = contentFilter !== 'events'
 
   function openTimelineDetail(ref: EntityRef) {
     dbDetailStore.getState().openDetail(ref, 'timeline-overlay')
   }
 
   return (
-    <section className='space-y-4'>
-      <div className='space-y-3'>
-        <h3 className='ui-title text-xl text-amber-100'>Events</h3>
-        <EventList events={events} now={now} onOpenDetail={openTimelineDetail} />
-      </div>
-
-      <div className='space-y-3 border-t border-slate-500/30 pt-2'>
-        <h3 className='ui-title text-xl text-amber-100'>Banners</h3>
-
-        <div className='space-y-6'>
-          {activeBanners.length > 0 && (
-            <div className='grid gap-3 sm:grid-cols-2'>
-              {activeBanners.map((banner) => (
-                <BannerCard
-                  banner={banner}
-                  key={banner.id}
-                  now={now}
-                  onOpenDetail={openTimelineDetail}
-                />
-              ))}
-            </div>
-          )}
-
-          {upcomingBanners.length > 0 && (
-            <div className='space-y-3'>
-              <div className='flex items-center gap-3'>
-                <h4 className='ui-title text-sm text-slate-400'>Upcoming</h4>
-                <div className='h-px flex-1 bg-gradient-to-r from-slate-500/30 to-transparent' />
-              </div>
-              <div className='grid gap-3 sm:grid-cols-2'>
-                {upcomingBanners.map((banner) => (
-                  <BannerCard
-                    banner={banner}
-                    key={banner.id}
-                    now={now}
-                    onOpenDetail={openTimelineDetail}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {endedBanners.length > 0 ? (
-            <TimelineArchiveSection
-              contentClassName='grid gap-3 sm:grid-cols-2'
-              dividerClassName='bg-gradient-to-r from-slate-500/20 to-transparent'
-              expanded={showEndedBanners}
-              itemCount={endedBanners.length}
-              onToggle={() => {
-                setShowEndedBanners((current) => !current)
+    <section className='timeline-v2 -mt-4 md:-mt-5'>
+      <SeasonMasthead
+        layout='timeline'
+        summary={{
+          ariaLabel: 'D-Zone season',
+          artSrc: dZoneEvent?.customArt,
+          countdown: dZoneCountdownDisplay,
+          emblemSrc: realmBadgeAequor,
+          kicker: 'Current Season',
+          name: getDZoneRealmName(dZoneEvent, now),
+          to: '/d-zone',
+        }}
+      >
+        <h1 className='sr-only'>Events & Banners</h1>
+        <div aria-label='Timeline content' className='timeline-v2-filter-list' role='group'>
+          {CONTENT_FILTERS.map((filter) => (
+            <TimelineFilterButton
+              active={contentFilter === filter.id}
+              key={filter.id}
+              onClick={() => {
+                setContentFilter(filter.id)
               }}
-              title='Ended'
             >
-              {endedBanners.map((banner) => (
-                <BannerCard
-                  banner={banner}
-                  key={banner.id}
-                  now={now}
-                  onOpenDetail={openTimelineDetail}
-                />
-              ))}
-            </TimelineArchiveSection>
-          ) : null}
+              {filter.label}
+            </TimelineFilterButton>
+          ))}
         </div>
+      </SeasonMasthead>
+
+      <div className='-my-[0.6rem] space-y-7'>
+        {showEvents ? (
+          <TimelineSection title='Events'>
+            <EventList events={events} now={now} onOpenDetail={openTimelineDetail} />
+          </TimelineSection>
+        ) : null}
+
+        {showBanners ? (
+          <TimelineSection title='Banners'>
+            <TimelineBannersSection
+              banners={timelineBanners}
+              now={now}
+              onOpenDetail={openTimelineDetail}
+            />
+          </TimelineSection>
+        ) : null}
       </div>
       <DbDetailModalHost
         awakeners={awakeners}
@@ -126,6 +129,46 @@ export function TimelinePage() {
         routeItem={null}
         wheels={wheels}
       />
+    </section>
+  )
+}
+
+function TimelineFilterButton({
+  active,
+  children,
+  onClick,
+}: {
+  active: boolean
+  children: ReactNode
+  onClick: () => void
+}) {
+  const buttonClass = active
+    ? 'timeline-v2-filter-button--active'
+    : 'timeline-v2-filter-button--inactive'
+
+  return (
+    <button
+      aria-pressed={active}
+      className={`timeline-v2-filter-button ${buttonClass}`}
+      onClick={onClick}
+      type='button'
+    >
+      <span className='timeline-v2-filter-label'>{children}</span>
+    </button>
+  )
+}
+
+function TimelineSection({children, title}: {children: ReactNode; title: string}) {
+  return (
+    <section className='space-y-4'>
+      <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-2'>
+          <span aria-hidden className='block h-1.5 w-1.5 bg-amber-200/60' />
+          <h2 className='ui-title text-sm tracking-[0.16em] text-amber-100 uppercase'>{title}</h2>
+        </div>
+        <div className='h-px flex-1 bg-gradient-to-r from-amber-200/25 via-slate-600/30 to-transparent' />
+      </div>
+      {children}
     </section>
   )
 }

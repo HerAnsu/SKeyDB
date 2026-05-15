@@ -22,6 +22,7 @@ export interface DatabasePopoverRootProps {
   stats: ResolvedAwakenerDatabaseShellView['stats']
   entries: DatabasePopoverPortalEntry[]
   onCloseAll: () => void
+  closeOnOutsideClick?: boolean
   onToggleEnlightenSlot?: (slot: AwakenerEnlightenRecord['slot']) => void
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
   showTagIcons?: boolean
@@ -37,6 +38,7 @@ export function DatabasePopoverRoot({
   stats,
   entries,
   onCloseAll,
+  closeOnOutsideClick = false,
   onToggleEnlightenSlot,
   selectedEnlightenSlot = null,
   showTagIcons = true,
@@ -54,6 +56,7 @@ export function DatabasePopoverRoot({
         anchorRect={anchorRect}
         entries={entries}
         formulaContext={formulaContext}
+        closeOnOutsideClick={closeOnOutsideClick}
         onCloseAll={onCloseAll}
         onToggleEnlightenSlot={onToggleEnlightenSlot}
         referenceLayer={referenceLayer}

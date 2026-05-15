@@ -104,5 +104,16 @@
         ]
       }
     ]
+  },
+  {
+    "id": "banner-saya-no-uta-collab",
+    "title": "Saya no Uta Collab",
+    "type": "limited",
+    "tags": ["limited", "collab", "preliminary"],
+    "description": "Limited collaboration banner, likely featuring Saya and her SSR Wheel. Banner pool, wheel name and exact dates are still pending confirmation.",
+    "startDate": "2026/05/30 09:00",
+    "endDate": "2026/06/27 09:00",
+    "customArt": "/banners/saya-collab-prelim.webp",
+    "preliminary": true
   }
 ]

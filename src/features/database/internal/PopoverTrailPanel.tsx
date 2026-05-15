@@ -20,6 +20,7 @@ interface PopoverTrailPanelProps {
   anchorElement?: HTMLElement | null
   itemCount: number
   onCloseAll: () => void
+  closeOnOutsideClick?: boolean
   fontScale?: FontScale
   children?: ReactNode
 }
@@ -29,6 +30,7 @@ export function PopoverTrailPanel({
   anchorElement,
   itemCount,
   onCloseAll,
+  closeOnOutsideClick = false,
   fontScale = 'small',
   children,
 }: PopoverTrailPanelProps) {
@@ -102,6 +104,32 @@ export function PopoverTrailPanel({
       window.removeEventListener('scroll', handleViewportChange, true)
     }
   }, [])
+
+  useEffect(() => {
+    if (!closeOnOutsideClick) {
+      return
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      const target = event.target
+      if (!(target instanceof Node)) {
+        return
+      }
+      if (ref.current?.contains(target)) {
+        return
+      }
+      if (anchorElement?.isConnected && anchorElement.contains(target)) {
+        return
+      }
+
+      onCloseAll()
+    }
+
+    window.addEventListener('pointerdown', handlePointerDown)
+    return () => {
+      window.removeEventListener('pointerdown', handlePointerDown)
+    }
+  }, [anchorElement, closeOnOutsideClick, onCloseAll])
 
   useEffect(() => {
     previouslyFocusedElementRef.current =
@@ -203,6 +231,7 @@ export function PopoverTrailPanel({
   return (
     <div
       aria-label='Database reference details'
+      aria-modal='true'
       className={`database-scrollbar fixed z-[950] overflow-y-auto ${
         isMobile
           ? 'inset-x-3 bottom-3 max-h-[min(72vh,34rem)]'
@@ -232,7 +261,7 @@ export function PopoverTrailPanel({
           ref={desktopCloseAllRef}
         >
           <button
-            className='pointer-events-auto border border-slate-600/55 bg-slate-950/92 px-2 py-1 text-[10px] tracking-[0.14em] text-slate-300 uppercase transition-colors hover:border-amber-200/55 hover:text-amber-100'
+            className='pointer-events-auto border border-slate-600/55 bg-slate-950/92 px-2 py-1 text-[10px] tracking-[0.14em] text-slate-300 uppercase transition-colors hover:border-amber-200/55 hover:text-amber-100 focus-visible:border-amber-200/70 focus-visible:text-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200/30'
             onClick={onCloseAll}
             ref={closeButtonRef}
             type='button'
@@ -247,7 +276,7 @@ export function PopoverTrailPanel({
       {isMobile ? (
         <div className='sticky bottom-0 mt-2 border-t border-slate-700/60 bg-slate-950/96 px-3 py-2'>
           <button
-            className='w-full border border-slate-600/55 bg-slate-900/85 px-3 py-2 text-[11px] tracking-[0.14em] text-slate-200 uppercase transition-colors hover:border-amber-200/55 hover:text-amber-100'
+            className='w-full border border-slate-600/55 bg-slate-900/85 px-3 py-2 text-[11px] tracking-[0.14em] text-slate-200 uppercase transition-colors hover:border-amber-200/55 hover:text-amber-100 focus-visible:border-amber-200/70 focus-visible:text-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200/30'
             onClick={onCloseAll}
             ref={closeButtonRef}
             type='button'

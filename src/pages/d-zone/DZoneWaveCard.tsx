@@ -1,0 +1,239 @@
+import {useRef, type MouseEvent} from 'react'
+
+import {FaChevronDown} from 'react-icons/fa6'
+
+import type {DzoneResolvedMonster, DzoneResolvedWave} from '@/domain/dzone'
+import {DatabaseLoreMarkupText} from '@/features/database/internal/DatabaseLoreMarkupText'
+
+import {toDZoneAccessibleText} from './d-zone-display-text'
+import type {DZoneRelicPreview} from './d-zone-view-model'
+import {useDZoneWaveCardMotion} from './useDZoneWaveCardMotion'
+
+interface DZoneWaveCardProps {
+  relics: DZoneRelicPreview[]
+  wave: DzoneResolvedWave
+  expanded: boolean
+  getMonsterAsset: (monster: DzoneResolvedMonster) => string | undefined
+  headingLevel?: 2 | 3
+  onExpandedChange: () => void
+  onMonsterOpen: (monster: DzoneResolvedMonster, event: MouseEvent<HTMLButtonElement>) => void
+  onRelicOpen: (relic: DZoneRelicPreview, event: MouseEvent<HTMLButtonElement>) => void
+  selectedAlertId?: string | null
+}
+
+const COLLAPSED_MONSTER_LIMIT = 10
+const COLLAPSED_RELIC_ACCESSIBLE_LIMIT = 2
+
+export function DZoneWaveCard({
+  relics,
+  wave,
+  expanded,
+  getMonsterAsset,
+  headingLevel = 2,
+  onExpandedChange,
+  onMonsterOpen,
+  onRelicOpen,
+  selectedAlertId = null,
+}: DZoneWaveCardProps) {
+  const cardRef = useRef<HTMLElement | null>(null)
+  const detailsId = `${wave.id}-details`
+  const HeadingTag = headingLevel === 3 ? 'h3' : 'h2'
+  const waveNumber = /\d+/.exec(wave.name)?.[0] ?? wave.name
+  const toggleLabel = expanded ? `Collapse ${wave.name}` : `Expand ${wave.name}`
+  const relicButtonClassName = `d-zone-relic-button ${
+    expanded ? '' : 'd-zone-relic-button--compact'
+  }`
+  const selectedAlert = wave.alerts.find((alert) => alert.id === selectedAlertId) ?? wave.alerts[0]
+  const alertMonsters = selectedAlert.monsters
+  const visibleMonsters = alertMonsters.slice(
+    0,
+    expanded ? alertMonsters.length : COLLAPSED_MONSTER_LIMIT,
+  )
+  const monsterGridClassName = `d-zone-monster-grid ${
+    !expanded && alertMonsters.length > visibleMonsters.length
+      ? 'd-zone-monster-grid--overflowing'
+      : ''
+  }`
+
+  useDZoneWaveCardMotion(cardRef, expanded)
+
+  return (
+    <article
+      aria-label={wave.name}
+      className={`d-zone-wave-card ${
+        expanded ? 'd-zone-wave-card--expanded' : 'd-zone-wave-card--collapsed'
+      }`}
+      ref={cardRef}
+    >
+      <div className='d-zone-wave-index' aria-hidden='true'>
+        <span className='d-zone-wave-index-number'>{waveNumber}</span>
+      </div>
+
+      <div className='d-zone-wave-content'>
+        <div className='d-zone-section-heading d-zone-section-heading--relics'>
+          <h3 id={`${wave.id}-relics`}>Initial Relics</h3>
+        </div>
+
+        <div className='d-zone-section-heading d-zone-section-heading--monsters'>
+          <h3 id={`${wave.id}-monsters`}>Monsters</h3>
+        </div>
+
+        <HeadingTag className='d-zone-wave-heading'>
+          <button
+            aria-controls={detailsId}
+            aria-expanded={expanded}
+            aria-label={toggleLabel}
+            className='d-zone-wave-toggle'
+            onClick={onExpandedChange}
+            type='button'
+          >
+            <span className='d-zone-wave-toggle-title'>{wave.name}</span>
+            <FaChevronDown aria-hidden className='d-zone-wave-toggle-icon' />
+          </button>
+        </HeadingTag>
+
+        <div className='d-zone-wave-body' id={detailsId}>
+          <section aria-labelledby={`${wave.id}-relics`} className='d-zone-wave-section'>
+            <div className='d-zone-relic-list'>
+              {relics.map((relic, relicIndex) => {
+                const accessibleRelicName = toDZoneAccessibleText(relic.name)
+                const collapsedOverflow =
+                  !expanded && relicIndex >= COLLAPSED_RELIC_ACCESSIBLE_LIMIT
+
+                return (
+                  <button
+                    aria-hidden={collapsedOverflow ? true : undefined}
+                    aria-label={`View ${wave.name} relic details for ${accessibleRelicName}`}
+                    className={relicButtonClassName}
+                    key={relic.id}
+                    onClick={(event) => {
+                      onRelicOpen(relic, event)
+                    }}
+                    tabIndex={collapsedOverflow ? -1 : undefined}
+                    title={accessibleRelicName}
+                    type='button'
+                  >
+                    <RelicIcon relic={relic} />
+                    {expanded ? (
+                      <span className='d-zone-relic-copy'>
+                        <span className='d-zone-relic-name'>{relic.name}</span>
+                      </span>
+                    ) : null}
+                  </button>
+                )
+              })}
+            </div>
+          </section>
+
+          <section aria-labelledby={`${wave.id}-monsters`} className='d-zone-wave-section'>
+            <div className={monsterGridClassName}>
+              {visibleMonsters.map((monster) => (
+                <MonsterButton
+                  assetSrc={getMonsterAsset(monster)}
+                  compact={!expanded}
+                  key={monster.id}
+                  monster={monster}
+                  onMonsterOpen={onMonsterOpen}
+                  waveName={wave.name}
+                />
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function RelicIcon({relic}: {relic: DZoneRelicPreview}) {
+  return (
+    <span className='d-zone-relic-icon-frame'>
+      {relic.iconSrc ? (
+        <img
+          alt=''
+          aria-hidden
+          className='d-zone-relic-icon'
+          decoding='async'
+          draggable={false}
+          loading='lazy'
+          src={relic.iconSrc}
+        />
+      ) : (
+        <span aria-hidden className='d-zone-relic-icon-fallback'>
+          ?
+        </span>
+      )}
+    </span>
+  )
+}
+
+interface MonsterButtonProps {
+  assetSrc: string | undefined
+  compact?: boolean
+  monster: DzoneResolvedMonster
+  onMonsterOpen: (monster: DzoneResolvedMonster, event: MouseEvent<HTMLButtonElement>) => void
+  waveName: string
+}
+
+function getMonsterButtonLabel(
+  waveName: string,
+  monster: DzoneResolvedMonster,
+  compact: boolean,
+): string {
+  const monsterName = toDZoneAccessibleText(monster.name)
+  const levelSuffix =
+    !compact && monster.alertStats ? `, level ${monster.alertStats.level.toString()}` : ''
+
+  return `View ${waveName} monster details for ${monsterName}${levelSuffix}`
+}
+
+function MonsterButton({
+  assetSrc,
+  compact = false,
+  monster,
+  onMonsterOpen,
+  waveName,
+}: MonsterButtonProps) {
+  const badge = monster.badges?.[0]
+
+  return (
+    <button
+      aria-label={getMonsterButtonLabel(waveName, monster, compact)}
+      className={`d-zone-monster-tile ${compact ? 'd-zone-monster-tile--compact' : ''}`}
+      onClick={(event) => {
+        onMonsterOpen(monster, event)
+      }}
+      title={toDZoneAccessibleText(monster.name)}
+      type='button'
+    >
+      {badge ? <span className='d-zone-monster-badge'>{badge}</span> : null}
+      {!compact && monster.alertStats ? (
+        <span className='d-zone-monster-badge d-zone-monster-level-chip'>
+          Lv {monster.alertStats.level.toString()}
+        </span>
+      ) : null}
+      <span className='d-zone-monster-art-frame'>
+        {assetSrc ? (
+          <img
+            alt=''
+            aria-hidden
+            className='d-zone-monster-art'
+            decoding='async'
+            draggable={false}
+            loading='lazy'
+            src={assetSrc}
+          />
+        ) : (
+          <span aria-hidden className='d-zone-monster-art-fallback'>
+            ?
+          </span>
+        )}
+      </span>
+      {compact ? null : (
+        <span className='d-zone-monster-name' title={monster.name}>
+          <DatabaseLoreMarkupText keyPrefix={`d-zone-monster-${monster.id}`} text={monster.name} />
+        </span>
+      )}
+    </button>
+  )
+}

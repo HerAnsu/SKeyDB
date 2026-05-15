@@ -84,4 +84,21 @@ describe('DatabaseRichTextContent', () => {
     expect(screen.getByText('Footer text.')).toBeInTheDocument()
     expect(screen.queryByText('Fallback text.')).not.toBeInTheDocument()
   })
+
+  it('renders lore redaction markers inside rich text descriptions', () => {
+    render(
+      <DatabaseRichTextContent
+        referenceLayer={buildReferenceLayer()}
+        showTagIcons={false}
+        skillLevel={1}
+        stats={null}
+        text='A human in the early stages of the "@2 Ritual."'
+        variant='inline'
+      />,
+    )
+
+    expect(screen.queryByText(/@2/)).not.toBeInTheDocument()
+    expect(screen.getByRole('img', {name: 'Redacted lore text'})).toBeInTheDocument()
+    expect(screen.getByText(/Ritual/)).toBeInTheDocument()
+  })
 })

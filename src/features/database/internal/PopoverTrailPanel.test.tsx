@@ -136,6 +136,41 @@ describe('PopoverTrailPanel', () => {
     expect(onCloseAll).toHaveBeenCalledTimes(1)
   })
 
+  it('closes on outside pointer down when outside-click dismissal is enabled', () => {
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      value: 1200,
+    })
+    Object.defineProperty(window, 'innerHeight', {
+      configurable: true,
+      value: 900,
+    })
+
+    const anchorElement = document.createElement('button')
+    document.body.appendChild(anchorElement)
+
+    const onCloseAll = vi.fn()
+
+    render(
+      <PopoverTrailPanel
+        anchorElement={anchorElement}
+        anchorRect={makeRect({top: 100, bottom: 120, left: 150, right: 170})}
+        itemCount={1}
+        onCloseAll={onCloseAll}
+        closeOnOutsideClick
+      >
+        <button type='button'>Nested action</button>
+      </PopoverTrailPanel>,
+    )
+
+    fireEvent.pointerDown(screen.getByRole('button', {name: 'Nested action'}))
+    fireEvent.pointerDown(anchorElement)
+    expect(onCloseAll).not.toHaveBeenCalled()
+
+    fireEvent.pointerDown(document.body)
+    expect(onCloseAll).toHaveBeenCalledTimes(1)
+  })
+
   it('moves focus into the popover and restores it to the anchor when the panel closes', async () => {
     Object.defineProperty(window, 'innerWidth', {
       configurable: true,
@@ -166,6 +201,10 @@ describe('PopoverTrailPanel', () => {
     expect(
       await screen.findByRole('dialog', {name: 'Database reference details'}),
     ).toBeInTheDocument()
+    expect(screen.getByRole('dialog', {name: 'Database reference details'})).toHaveAttribute(
+      'aria-modal',
+      'true',
+    )
     await waitFor(() => {
       expect(screen.getByRole('button', {name: 'Close all'})).toHaveFocus()
     })
