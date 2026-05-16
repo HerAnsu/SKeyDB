@@ -368,27 +368,35 @@ function rebuildRecordFromMaps(
     }
     return next
   }
+  const requireSkillRecord = (id: string): AwakenerSkillRecord => {
+    const next = requireCardRecord(id)
+    if ('kind' in next) {
+      return next
+    }
+    throw new Error(`Resolved compiled record card "${id}" is not an awakener skill record.`)
+  }
+  const requireDerivedRecord = (id: string): DerivedSkillRecord => {
+    const next = requireCardRecord(id)
+    if ('childDerivedSkillIds' in next) {
+      return next
+    }
+    throw new Error(`Resolved compiled record card "${id}" is not a derived skill record.`)
+  }
 
   return {
     ...record,
     cards: {
-      C1: requireCardRecord(record.cards.C1.id) as AwakenerSkillRecord,
-      C2: requireCardRecord(record.cards.C2.id) as AwakenerSkillRecord,
-      C3: requireCardRecord(record.cards.C3.id) as AwakenerSkillRecord,
-      C4: requireCardRecord(record.cards.C4.id) as AwakenerSkillRecord,
-      C5: requireCardRecord(record.cards.C5.id) as AwakenerSkillRecord,
-      Exalt: requireCardRecord(record.cards.Exalt.id) as AwakenerSkillRecord,
-      OverExalt: record.cards.OverExalt
-        ? (requireCardRecord(record.cards.OverExalt.id) as AwakenerSkillRecord)
-        : undefined,
-      promotedExtras: record.cards.promotedExtras.map(
-        (entry) => requireCardRecord(entry.id) as DerivedSkillRecord,
-      ),
+      C1: requireSkillRecord(record.cards.C1.id),
+      C2: requireSkillRecord(record.cards.C2.id),
+      C3: requireSkillRecord(record.cards.C3.id),
+      C4: requireSkillRecord(record.cards.C4.id),
+      C5: requireSkillRecord(record.cards.C5.id),
+      Exalt: requireSkillRecord(record.cards.Exalt.id),
+      OverExalt: record.cards.OverExalt ? requireSkillRecord(record.cards.OverExalt.id) : undefined,
+      promotedExtras: record.cards.promotedExtras.map((entry) => requireDerivedRecord(entry.id)),
     },
     talents: resolvedTalents,
-    derivedSkills: record.derivedSkills.map(
-      (entry) => requireCardRecord(entry.id) as DerivedSkillRecord,
-    ),
+    derivedSkills: record.derivedSkills.map((entry) => requireDerivedRecord(entry.id)),
   }
 }
 

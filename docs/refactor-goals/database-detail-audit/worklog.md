@@ -63,4 +63,22 @@
 - Simplification: repeated slot/family `.find()` calls became one internal `OwnedAwakenerRecordIndex` built from loaded owned records.
 - Refactor review: pass. First-match semantics, missing-slot error text, optional OverExalt/AbsoluteAxiom, and passive talent ordering are preserved.
 - Validation: `npm test -- --run src/domain/public-detail-record-adapters.test.ts src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1` passed with 35 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; Prettier check passed after formatting `public-detail-record-adapters.ts`; `git diff --check` passed.
-- Next: run packet checker and commit W3 as the third product slice.
+- Commit: `f2c6d57 refactor: index public awakener child records`. Pre-commit ran lint, `test:bounded` (186 files / 1227 tests), script tests, and `build:quiet`.
+- Next: queue the resolver patched-record typing slice.
+
+### 2026-05-16 - W4 selected
+
+- Judge decision: selected C5 because `awakeners-full-resolver.ts` rebuilds patched skill and derived records through repeated terminal casts.
+- Active task: `W4` remove patched-card casts from awakeners full resolver.
+- Allowed files: `src/domain/awakeners-full-resolver.ts`, `src/domain/awakeners-full-resolver.test.ts`, and this packet.
+- Validation planned: `npm test -- --run src/domain/awakeners-full-resolver.test.ts src/domain/awakeners-database-view.test.ts src/domain/public-detail-record-adapters.test.ts --pool=forks --maxWorkers=1`, `npx tsc -p tsconfig.app.json --noEmit --pretty false`, `git diff --check`, packet checker.
+
+### 2026-05-16 - W4 implemented and reviewed
+
+- Slice: patched-card record narrowing in `awakeners-full-resolver.ts`.
+- Files changed: `src/domain/awakeners-full-resolver.ts`.
+- Characterization: no new test added; existing resolver tests cover skill, derived-skill, overlay, unsupported operation, malformed payload, and real public V3 upgrade behavior.
+- Simplification: `rebuildRecordFromMaps` now uses `requireSkillRecord` and `requireDerivedRecord` instead of terminal casts.
+- Refactor review: pass. Missing-card error text is preserved, new wrong-shape errors are explicit, no dependency or scope changes.
+- Validation: `npm test -- --run src/domain/awakeners-full-resolver.test.ts src/domain/awakeners-database-view.test.ts src/domain/public-detail-record-adapters.test.ts --pool=forks --maxWorkers=1` passed with 40 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; Prettier check passed; `git diff --check` passed.
+- Next: run packet checker and commit W4 as the fourth product slice.

@@ -164,20 +164,20 @@
         "src/domain/public-v3-awakener-record-adapters.test.ts"
       ],
       "evidence": ["getSlotRecord/requireSlotRecord/getTalentByFamily repeat child record selection inside the public detail adapter."],
-      "next": "Implemented by W3; commit pending."
+      "next": "Implemented by W3 in commit f2c6d57."
     },
     {
       "id": "C5",
       "title": "Awakeners full resolver patched-record casts",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/domain/awakeners-full-resolver.ts",
         "src/domain/awakeners-full-resolver.test.ts",
         "src/domain/awakeners-database-view.test.ts"
       ],
       "evidence": ["requireCardRecord returns PatchableCardRecord and callers cast to skill/derived records."],
-      "next": "Queue TypeScript root-fix slice with typed helpers."
+      "next": "Implemented by W4; commit pending."
     },
     {
       "id": "C6",
@@ -573,6 +573,98 @@
         ],
         "followups_not_done": [
           "C5 awakeners full resolver patched-record casts"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J4",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose resolver patched-record typing slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-typescript",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded TypeScript implementation slice.",
+      "receipt": {
+        "decision": "C5 selected as W4 because awakeners-full-resolver rebuilds detail records from patched maps with repeated terminal casts, and existing resolver tests cover skill, derived-skill, and overlay upgrade behavior.",
+        "root_fix": "Replace casted requireCardRecord call sites with typed helpers that validate the expected record shape/discriminant once.",
+        "validation": [
+          "src/domain/awakeners-full-resolver.test.ts",
+          "src/domain/awakeners-database-view.test.ts",
+          "src/domain/public-detail-record-adapters.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W4",
+      "role": "worker",
+      "status": "done",
+      "title": "Remove patched-card casts from awakeners full resolver",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-rootfix",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/domain/awakeners-full-resolver.ts",
+        "src/domain/awakeners-full-resolver.test.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Replace `as AwakenerSkillRecord` / `as DerivedSkillRecord` patched-record rebuild casts with typed helper functions, preserve current errors and resolver output, and run targeted tests.",
+      "receipt": {
+        "slice": "Remove patched-card casts from awakeners full resolver",
+        "files_changed": [
+          "src/domain/awakeners-full-resolver.ts"
+        ],
+        "what_got_simpler": [
+          "Patched card map rebuild now uses typed require helpers instead of terminal casts.",
+          "Wrong-shape patched records fail at one local narrowing boundary with explicit resolver errors."
+        ],
+        "behavior_preserved": [
+          "Missing patched card ids still throw the existing missing-card error text.",
+          "Valid skill, derived-skill, and overlay upgrade behavior is unchanged."
+        ],
+        "current_complexity": "Before: rebuildRecordFromMaps used repeated `as AwakenerSkillRecord` and `as DerivedSkillRecord` casts after loading from a union map.",
+        "expected_complexity_after": "After: helper functions narrow once and return typed records to the rebuild shape.",
+        "root_fix_patch_decision": "Root-fix slice selected because repeated casts had one local trust boundary and strong resolver tests.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; existing resolver tests cover the public behavior.",
+        "validation": [
+          "npm test -- --run src/domain/awakeners-full-resolver.test.ts src/domain/awakeners-database-view.test.ts src/domain/public-detail-record-adapters.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/awakeners-full-resolver.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/domain/awakeners-full-resolver.test.ts src/domain/awakeners-database-view.test.ts src/domain/public-detail-record-adapters.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/awakeners-full-resolver.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "No bespoke wrong-shape fixture was added; the helpers are private and valid-data behavior is covered by resolver tests."
+        ],
+        "followups_not_done": [
+          "C3 rich text parse context",
+          "C6 reference-layer accumulator"
         ],
         "learning_lint_candidates": [],
         "scope_expansion_requested": false
