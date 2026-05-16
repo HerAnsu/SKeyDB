@@ -68,6 +68,7 @@ export function DatabaseRichTextContent({
           key={index}
           onMechanicClick={onMechanicClick}
           onSkillClick={onSkillClick}
+          overlayByName={referenceLayer?.overlayByName}
           overlays={resolvedOverlays}
           segment={segment}
           showVisibleScaling={showVisibleScaling}

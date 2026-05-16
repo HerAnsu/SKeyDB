@@ -484,6 +484,25 @@ describe('RichSegmentRenderer', () => {
     expect(onMechanicClick).toHaveBeenCalledWith(TEST_OVERLAY, expect.any(Object))
   })
 
+  it('resolves overlay-backed mechanic tokens through the overlay lookup map', () => {
+    const onMechanicClick = vi.fn()
+
+    render(
+      <RichSegmentRenderer
+        onMechanicClick={onMechanicClick}
+        overlayByName={new Map([['temporary counter', TEST_OVERLAY]])}
+        overlays={[]}
+        segment={{type: 'mechanic', name: 'Temporary Counter'}}
+        skillLevel={1}
+        stats={null}
+        variant='inline'
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: 'Temporary Counter'}))
+    expect(onMechanicClick).toHaveBeenCalledWith(TEST_OVERLAY, expect.any(Object))
+  })
+
   it('activates interactive mechanic tokens from the keyboard', () => {
     const onMechanicClick = vi.fn()
 

@@ -8,6 +8,7 @@ import {
 } from 'react'
 
 import type {AwakenerOverlayRecord, FullStats} from '@/domain/awakener-source-schema'
+import {normalizeDatabaseReferenceName} from '@/domain/database-reference-layer'
 import {
   buildDescriptionArgHover,
   hasDescriptionArgInteractiveHover,
@@ -60,6 +61,7 @@ interface RichSegmentRendererProps {
   descriptionRank?: number
   descriptionMaxRank?: number
   overlays?: readonly AwakenerOverlayRecord[]
+  overlayByName?: ReadonlyMap<string, AwakenerOverlayRecord>
   onSkillClick?: (name: string, event: ActivationEvent) => void
   onMechanicClick?: (overlay: AwakenerOverlayRecord, event: ActivationEvent) => void
 }
@@ -110,6 +112,19 @@ function resolveOverlayFromList(
   return null
 }
 
+function resolveOverlay(
+  name: string,
+  overlayByName: ReadonlyMap<string, AwakenerOverlayRecord> | undefined,
+  overlays: readonly AwakenerOverlayRecord[] | undefined,
+): AwakenerOverlayRecord | null {
+  const overlay = overlayByName?.get(normalizeDatabaseReferenceName(name))
+  if (overlay) {
+    return overlay
+  }
+
+  return resolveOverlayFromList(name, overlays)
+}
+
 function InteractiveToken({
   ariaLabel,
   children,
@@ -150,6 +165,7 @@ export function RichSegmentRenderer({
   descriptionRank,
   descriptionMaxRank,
   overlays,
+  overlayByName,
   onSkillClick,
   onMechanicClick,
 }: RichSegmentRendererProps) {
@@ -188,7 +204,7 @@ export function RichSegmentRenderer({
       )
 
     case 'mechanic': {
-      const overlay = resolveOverlayFromList(segment.name, overlays)
+      const overlay = resolveOverlay(segment.name, overlayByName, overlays)
       const desc = overlay?.descriptionTemplate.trim()
       const tint = getDatabaseOverlayTint(overlay)
       const tintStyle = getDatabaseTintedTokenStyle(tint)
@@ -227,7 +243,7 @@ export function RichSegmentRenderer({
     }
 
     case 'realm': {
-      const overlay = resolveOverlayFromList(segment.name, overlays)
+      const overlay = resolveOverlay(segment.name, overlayByName, overlays)
       const tint = getDatabaseRealmTint(segment.name)
       const tintStyle = getDatabaseTintedTokenStyle(tint)
       if (overlay && onMechanicClick) {

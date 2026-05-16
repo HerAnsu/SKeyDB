@@ -122,13 +122,13 @@
         "DbDetailModalHost resolves overlay refs with repeated awakeners/wheels/posses/covenants scans",
         "DbDetailModalHost repeats non-awakener route record loading/render branches"
       ],
-      "next": "Implemented by W1; commit pending."
+      "next": "Implemented by W1 in commit 88aa9e5."
     },
     {
       "id": "C2",
       "title": "RichSegmentRenderer overlay lookup should use reference-layer map instead of per-token list scans",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/features/database/internal/RichSegmentRenderer.tsx",
         "src/features/database/internal/DatabaseRichTextContent.tsx",
@@ -136,7 +136,7 @@
         "src/features/database/internal/RichSegmentRenderer.test.tsx"
       ],
       "evidence": ["Renderer scans overlays and aliases per mechanic/realm segment while reference layer already exposes overlayByName."],
-      "next": "Queue after W1 or when rich/reference slice starts."
+      "next": "Implemented by W2; commit pending."
     },
     {
       "id": "C3",
@@ -380,6 +380,105 @@
         "followups_not_done": [
           "C2 RichSegmentRenderer overlay lookup",
           "C3 rich text parse context"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J2",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose second rich/reference lookup slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-characterization-tests",
+        "$refactor-complexity",
+        "$refactor-architecture"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded implementation slice after W1.",
+      "receipt": {
+        "decision": "C2 selected as W2 because it is a high-confidence, bounded rich/reference slice and uses the reference layer's existing overlayByName seam instead of introducing a new abstraction.",
+        "root_fix": "Thread overlayByName into RichSegmentRenderer resolution while keeping accessibleOverlays fallback for direct callers.",
+        "validation": [
+          "src/features/database/internal/RichSegmentRenderer.test.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.test.tsx",
+          "src/domain/database-rich-text.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W2",
+      "role": "worker",
+      "status": "done",
+      "title": "Use reference-layer overlay lookup in rich segment rendering",
+      "skills": [
+        "$refactor-complexity",
+        "$refactor-architecture",
+        "$refactor-characterization-tests",
+        "$refactor-react"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.test.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Pass overlayByName to rich segment rendering, preserve existing overlay fallback behavior, add focused characterization, and run targeted rich/reference tests.",
+      "receipt": {
+        "slice": "Use reference-layer overlay lookup in rich segment rendering",
+        "files_changed": [
+          "src/features/database/internal/RichSegmentRenderer.tsx",
+          "src/features/database/internal/RichSegmentRenderer.test.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.tsx"
+        ],
+        "what_got_simpler": [
+          "Rich segment mechanic/realm rendering can use the reference-layer overlayByName map instead of scanning the overlay list per segment.",
+          "Direct renderer callers still retain the legacy overlays-list fallback."
+        ],
+        "behavior_preserved": [
+          "Direct overlays-list rendering still works.",
+          "Mechanic and realm token interaction behavior remains the same for normal database reference layers.",
+          "No visual output or callback contracts changed."
+        ],
+        "current_complexity": "Before: each mechanic/realm segment scanned overlays and aliases with a loop.",
+        "expected_complexity_after": "After: database rich text rendering does O(1) normalized overlay lookup through referenceLayer.overlayByName, with list scan fallback only for direct callers without a lookup.",
+        "root_fix_patch_decision": "Root-fix slice selected because the reference layer already owned the normalized overlay lookup seam.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added local characterization test.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/domain/database-rich-text.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/domain/database-rich-text.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full suite not rerun after W2 yet; W1 commit already ran the full pre-commit suite."
+        ],
+        "followups_not_done": [
+          "C3 rich text parse context",
+          "C4 public adapter owned record index"
         ],
         "learning_lint_candidates": [],
         "scope_expansion_requested": false

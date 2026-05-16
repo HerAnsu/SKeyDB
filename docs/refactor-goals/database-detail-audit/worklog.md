@@ -27,4 +27,22 @@
 - Simplification: overlay ref resolution now uses one lookup object; wheel/posse/covenant route modal loading uses one generic non-awakener component; awakener canonical tab redirect remains separate.
 - Refactor review: pass. No behavior change, no dependency change, no builder/collection/app shell touch, no new casts.
 - Validation: `npm test -- --run src/features/database/detail/DbDetailModalHost.test.tsx src/features/database/DatabaseRoutes.test.tsx --pool=forks --maxWorkers=1` passed with 38 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; `git diff --check` passed.
-- Next: run packet checker, commit W1 as first product slice, then queue the next rich/reference lookup slice.
+- Commit: `88aa9e5 refactor: simplify database detail modal host`. Pre-commit ran lint, `test:bounded` (186 files / 1226 tests), script tests, and `build:quiet`.
+- Next: queue the rich/reference lookup slice.
+
+### 2026-05-16 - W2 selected
+
+- Judge decision: selected C2 because `RichSegmentRenderer` scans overlay arrays per mechanic/realm segment while `ResolvedDatabaseReferenceLayer` already exposes `overlayByName`.
+- Active task: `W2` use reference-layer overlay lookup in rich segment rendering.
+- Allowed files: `RichSegmentRenderer.tsx`, `RichSegmentRenderer.test.tsx`, `DatabaseRichTextContent.tsx`, `DatabaseRichTextContent.test.tsx`, and this packet.
+- Validation planned: `npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/domain/database-rich-text.test.ts --pool=forks --maxWorkers=1`, `npx tsc -p tsconfig.app.json --noEmit --pretty false`, `git diff --check`, packet checker.
+
+### 2026-05-16 - W2 implemented and reviewed
+
+- Slice: rich/reference overlay lookup in `RichSegmentRenderer`.
+- Files changed: `src/features/database/internal/RichSegmentRenderer.tsx`, `src/features/database/internal/RichSegmentRenderer.test.tsx`, `src/features/database/internal/DatabaseRichTextContent.tsx`.
+- Characterization: added a focused renderer test proving a mechanic token resolves through `overlayByName` even when the legacy overlay list is empty.
+- Simplification: database rich text now passes `referenceLayer.overlayByName`; mechanic/realm rendering performs normalized map lookup before falling back to the existing list scan.
+- Refactor review: pass. No dependency change, no builder/collection/app shell touch, no public prop behavior removed.
+- Validation: `npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/domain/database-rich-text.test.ts --pool=forks --maxWorkers=1` passed with 37 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; Prettier check passed after formatting `RichSegmentRenderer.tsx`; `git diff --check` passed.
+- Next: run packet checker and commit W2 as the second product slice.
