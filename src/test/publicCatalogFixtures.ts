@@ -9,6 +9,7 @@ export interface MockPublicCatalog {
     aliases: string[]
     faction: string
     id: string
+    lineupToken?: string
     name: string
     numericId: number
     rarity: string
@@ -27,6 +28,7 @@ export interface MockPublicCatalog {
     id: string
     index: number
     isFadedLegacy: boolean
+    awakenerName?: string
     lineupToken: string
     name: string
     realm: string
@@ -36,6 +38,7 @@ export interface MockPublicCatalog {
     assetId: string
     awakener: string
     id: string
+    lineupToken?: string
     mainstatKey: string
     name: string
     ownerAwakenerId?: string
@@ -53,14 +56,96 @@ const DEFAULT_PUBLIC_DETAIL_IDS = {
   wheels: ['wheel-0001', 'wheel-0040'],
 } as const
 
+type MockPublicAwakener = MockPublicCatalog['awakeners'][number]
+type MockPublicCovenant = MockPublicCatalog['covenants'][number]
+type MockPublicPosse = MockPublicCatalog['posses'][number]
+type MockPublicWheel = MockPublicCatalog['wheels'][number]
+
+type MockPublicAwakenerInput = Pick<MockPublicAwakener, 'id' | 'name' | 'numericId'> &
+  Partial<MockPublicAwakener>
+type MockPublicCovenantInput = Pick<MockPublicCovenant, 'assetId' | 'id' | 'name'> &
+  Partial<MockPublicCovenant>
+type MockPublicPosseInput = Pick<MockPublicPosse, 'id' | 'index' | 'name'> &
+  Partial<MockPublicPosse>
+type MockPublicWheelInput = Pick<MockPublicWheel, 'assetId' | 'id' | 'name'> &
+  Partial<MockPublicWheel>
+
 function recordsFromIds(ids: readonly string[]): MockPublicDetailRecord[] {
   return ids.map((id) => ({id}))
 }
 
-export function createMockPublicCatalog(): MockPublicCatalog {
+export function createMockPublicAwakener({
+  aliases,
+  faction = 'The Fools',
+  realm = 'CHAOS',
+  rarity = 'SSR',
+  stats,
+  tags = [],
+  type = 'ASSAULT',
+  ...awakener
+}: MockPublicAwakenerInput): MockPublicAwakener {
   return {
-    awakeners: [
-      {
+    aliases: aliases ?? [awakener.name],
+    faction,
+    realm,
+    rarity,
+    stats: stats ?? {CON: 100, ATK: 100, DEF: 100},
+    tags,
+    type,
+    ...awakener,
+  }
+}
+
+export function createMockPublicCovenant({
+  lineupToken,
+  ...covenant
+}: MockPublicCovenantInput): MockPublicCovenant {
+  return {
+    lineupToken: lineupToken ?? covenant.name,
+    ...covenant,
+  }
+}
+
+export function createMockPublicPosse({
+  isFadedLegacy = false,
+  lineupToken,
+  realm = 'CHAOS',
+  ...posse
+}: MockPublicPosseInput): MockPublicPosse {
+  return {
+    isFadedLegacy,
+    lineupToken: lineupToken ?? posse.name,
+    realm,
+    ...posse,
+  }
+}
+
+export function createMockPublicWheel({
+  aliases,
+  awakener = '',
+  mainstatKey = 'ATK',
+  rarity = 'SSR',
+  realm = 'NEUTRAL',
+  tags = [],
+  ...wheel
+}: MockPublicWheelInput): MockPublicWheel {
+  return {
+    aliases: aliases ?? [wheel.name],
+    awakener,
+    mainstatKey,
+    rarity,
+    realm,
+    tags,
+    ...wheel,
+  }
+}
+
+export function createMockPublicCatalog(
+  overrides: Partial<MockPublicCatalog> = {},
+): MockPublicCatalog {
+  return {
+    awakeners: overrides.awakeners ?? [
+      createMockPublicAwakener({
         id: 'awakener-0001',
         numericId: 1,
         name: 'alpha',
@@ -71,8 +156,8 @@ export function createMockPublicCatalog(): MockPublicCatalog {
         aliases: ['alpha'],
         stats: {CON: 100, ATK: 200, DEF: 80},
         tags: ['Bleed', 'Crit'],
-      },
-      {
+      }),
+      createMockPublicAwakener({
         id: 'awakener-0002',
         numericId: 2,
         name: 'beta',
@@ -83,8 +168,8 @@ export function createMockPublicCatalog(): MockPublicCatalog {
         aliases: ['beta'],
         stats: {CON: 150, ATK: 90, DEF: 180},
         tags: ['Draw', 'STR Up'],
-      },
-      {
+      }),
+      createMockPublicAwakener({
         id: 'awakener-0003',
         numericId: 3,
         name: 'gamma',
@@ -95,42 +180,40 @@ export function createMockPublicCatalog(): MockPublicCatalog {
         aliases: ['gamma'],
         stats: {CON: 120, ATK: 150, DEF: 130},
         tags: ['Heal', 'Bleed'],
-      },
+      }),
     ],
-    covenants: [
-      {
+    covenants: overrides.covenants ?? [
+      createMockPublicCovenant({
         id: 'covenant-0001',
         assetId: 'Icon_Covenant_01',
         name: 'Oath of Glass',
         lineupToken: 'oath-of-glass',
-      },
-      {
+      }),
+      createMockPublicCovenant({
         id: 'covenant-0002',
         assetId: 'Icon_Covenant_02',
         name: 'Iron Promise',
         lineupToken: 'iron-promise',
-      },
+      }),
     ],
-    posses: [
-      {
+    posses: overrides.posses ?? [
+      createMockPublicPosse({
         id: 'posse-0001',
         index: 1,
         name: 'Silent Sigil',
         realm: 'CHAOS',
-        isFadedLegacy: false,
         lineupToken: 'silent-sigil',
-      },
-      {
+      }),
+      createMockPublicPosse({
         id: 'posse-0002',
         index: 2,
         name: 'Aequor Banner',
         realm: 'AEQUOR',
-        isFadedLegacy: false,
         lineupToken: 'aequor-banner',
-      },
+      }),
     ],
-    wheels: [
-      {
+    wheels: overrides.wheels ?? [
+      createMockPublicWheel({
         id: 'wheel-0001',
         assetId: 'Weapon_Full_B01',
         name: 'Merciful Nurturing',
@@ -142,8 +225,8 @@ export function createMockPublicCatalog(): MockPublicCatalog {
         aliases: ['Merciful Nurturing'],
         tags: ['Caro', 'Embryo Fusion'],
         mainstatKey: 'KEYFLARE_REGEN',
-      },
-      {
+      }),
+      createMockPublicWheel({
         id: 'wheel-0040',
         assetId: 'Weapon_Full_D12',
         name: 'Shared Dream',
@@ -153,8 +236,8 @@ export function createMockPublicCatalog(): MockPublicCatalog {
         aliases: ['Shared Dream'],
         tags: ['Chaos'],
         mainstatKey: 'CRIT_RATE',
-      },
-      {
+      }),
+      createMockPublicWheel({
         id: 'wheel-9999',
         assetId: 'Weapon_Full_N07',
         name: 'Quiet Orbit',
@@ -164,7 +247,7 @@ export function createMockPublicCatalog(): MockPublicCatalog {
         aliases: ['Quiet Orbit'],
         tags: ['Neutral'],
         mainstatKey: 'HP',
-      },
+      }),
     ],
   }
 }

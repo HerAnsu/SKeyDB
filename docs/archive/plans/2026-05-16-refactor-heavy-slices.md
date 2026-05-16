@@ -107,6 +107,7 @@
 - Completed 2026-05-16.
 - Public V3 child record schemas and parse helpers now live beside the child adapters in `public-v3-awakener-record-adapters.ts`.
 - `public-detail-record-adapters.ts` now parses owned and lazily loaded skill, talent, enlighten, derived-skill, and overlay records before adapting them, instead of filtering generic `PublicRecord` values through type parameters.
+- Follow-up completed after review: synchronous child catalog loaders now parse skill, talent, enlighten, derived-skill, and overlay catalog records before sorting/adapting, while preserving lightweight catalog-backed defaults.
 - Characterization now pins current child adapter defaults for one skill, talent, enlighten, derived skill, and overlay, plus loose public-only field preservation.
 
 ## R2: Upgrade Patch Schema And Resolver Typing

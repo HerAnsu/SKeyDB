@@ -45,6 +45,23 @@ describe('awakener-skills', () => {
     )
   })
 
+  it('loads catalog-backed skills as lightweight adapter records', () => {
+    const skills = getAwakenerSkills()
+    const skill = getAwakenerSkillById('skill.24.mediating-personalities', skills)
+
+    expect(skill).toMatchObject({
+      id: 'skill.24.mediating-personalities',
+      displayName: 'Mediating Personalities',
+      ownerAwakenerId: 1,
+      kind: 'rouse',
+      cardKeywords: [],
+      descriptionArgs: {},
+      descriptionTemplate: '',
+      variants: [],
+    })
+    expect(skill).not.toHaveProperty('schemaVersion')
+  })
+
   it('matches every tracked kit card binding to a seeded record', () => {
     const skills = getAwakenerSkills()
     const derivedSkills = getDerivedSkills()

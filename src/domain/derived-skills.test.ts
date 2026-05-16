@@ -48,6 +48,25 @@ describe('derived-skills', () => {
     )
   })
 
+  it('loads catalog-backed derived skills as lightweight adapter records', () => {
+    const derivedSkills = getDerivedSkills()
+    const bloodOfFear = getDerivedSkillById('derived.thais.blood-of-fear', derivedSkills)
+
+    expect(bloodOfFear).toMatchObject({
+      id: 'derived.thais.blood-of-fear',
+      displayName: 'Blood of Fear',
+      ownerAwakenerId: 48,
+      derivedFromId: 'skill.thais.sacred-bloods-instinct',
+      rootSkillId: 'skill.thais.sacred-bloods-instinct',
+      cardKeywords: [],
+      childDerivedSkillIds: [],
+      descriptionArgs: {},
+      descriptionTemplate: '',
+      variants: [],
+    })
+    expect(bloodOfFear).not.toHaveProperty('schemaVersion')
+  })
+
   it('preserves nested parent-child chains for public derived cards', () => {
     const derivedSkills = getDerivedSkills()
 

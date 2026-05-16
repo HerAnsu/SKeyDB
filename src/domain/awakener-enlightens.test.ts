@@ -22,6 +22,21 @@ describe('awakener-enlightens', () => {
     )
   })
 
+  it('loads catalog-backed enlightens as lightweight adapter records', () => {
+    const enlightens = getAwakenerEnlightens()
+    const birthingDeep = getAwakenerEnlightenById('enlighten.thais.the-birthing-deep', enlightens)
+
+    expect(birthingDeep).toMatchObject({
+      id: 'enlighten.thais.the-birthing-deep',
+      displayName: 'The Birthing Deep',
+      ownerAwakenerId: 48,
+      slot: 'AbsoluteAxiom',
+      descriptionArgs: {},
+      descriptionTemplate: '',
+    })
+    expect(birthingDeep).not.toHaveProperty('schemaVersion')
+  })
+
   it('matches every tracked kit enlighten binding to a seeded record', () => {
     const enlightens = getAwakenerEnlightens()
     const kits = getAwakenerKits()

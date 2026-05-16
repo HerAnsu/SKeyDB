@@ -100,7 +100,7 @@ interface PublicFullDetailLoaderConfig<TRecord extends PublicRecord, TAdaptedRec
   parse: (value: unknown) => TRecord
   adapt: (record: TRecord) => TAdaptedRecord
 }
-interface PublicChildDetailLoaderConfig<TRecord extends PublicRecord, TAdaptedRecord> {
+interface PublicChildDetailLoaderConfig<TRecord, TAdaptedRecord> {
   scope: PublicDataScope
   parse: (value: unknown) => TRecord
   adapt: (record: TRecord) => TAdaptedRecord
@@ -364,7 +364,7 @@ function adaptPublicOverlayRecord(record: PublicV3OverlayRecord) {
   return adaptPublicV3OverlayRecord(record)
 }
 
-async function loadPublicRecordsByIds<TRecord extends PublicRecord>(
+async function loadPublicRecordsByIds<TRecord>(
   scope: PublicDataScope,
   ids: string[] | undefined,
   parse: (value: unknown) => TRecord,
@@ -609,7 +609,7 @@ async function loadPublicFullDetailById<TRecord extends PublicRecord, TAdaptedRe
   return recordPromise
 }
 
-async function loadPublicChildDetailById<TRecord extends PublicRecord, TAdaptedRecord>(
+async function loadPublicChildDetailById<TRecord, TAdaptedRecord>(
   id: string,
   config: PublicChildDetailLoaderConfig<TRecord, TAdaptedRecord>,
 ): Promise<TAdaptedRecord | undefined> {

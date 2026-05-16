@@ -4,6 +4,7 @@ import {awakenerSkillsDatasetSchema, type AwakenerSkillRecord} from './awakener-
 import {
   adaptPublicV3SkillRecord,
   numericAwakenerId,
+  parsePublicV3SkillCatalogRecord,
   type PublicV3SkillRecord,
 } from './public-v3-awakener-record-adapters'
 
@@ -42,7 +43,7 @@ export function getAwakenerSkills(): AwakenerSkillRecord[] {
 
   awakenerSkillsCache = awakenerSkillsDatasetSchema.parse(
     getPublicCatalogRecords('skills')
-      .map((record) => record as PublicV3SkillRecord)
+      .map(parsePublicV3SkillCatalogRecord)
       .sort(comparePublicSkillRecords)
       .map(adaptPublicV3SkillRecord),
   )

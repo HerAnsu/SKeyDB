@@ -155,6 +155,9 @@ describe('awakener-overlays', () => {
       descriptionTemplate: '',
       descriptionArgs: {},
     })
+    expect(overlays.find((entry) => entry.id === 'overlay.global.ultra-space')).not.toHaveProperty(
+      'schemaVersion',
+    )
   })
 
   it('does not hydrate full overlay copy from the catalog source', () => {
