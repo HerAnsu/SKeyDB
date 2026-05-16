@@ -155,5 +155,13 @@
 - Simplification: child parsers now use canonical `descriptionArgsSchema` and `cardKeywordsSchema` instead of accepting unknown payloads and relying only on later adaptation.
 - Refactor review: pass. Defaults, loose public-only metadata, and upgrade patch compatibility are preserved.
 - Validation: `npm test -- --run src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1` passed with 38 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; targeted ESLint passed; Prettier check passed; `git diff --check` passed.
-- Commit: pending this slice commit.
-- Next: C7 remains queued only behind a concrete controller smell; maintenance M1 remains queued for command hygiene.
+- Commit: `88f2f3a refactor: validate public v3 child fields`. Pre-commit ran lint, `test:bounded` (186 files / 1234 tests), script tests, and `build:quiet`.
+- Next: C7 is superseded for this tranche by the existing popover model seam unless a concrete controller smell appears; maintenance M1 remains queued for command hygiene.
+
+### 2026-05-16 - Final audit reconciliation
+
+- Outcome: completed the focused database/detail/domain tranche with C1, C2, C3, C4, C5, C6, C8, and C9 implemented in new slices; prior P1-P4 recorded as protected implemented work.
+- Refactor review: pass. All implementation work stayed inside the scoped database/detail/domain/reference/public-detail/rich-rendering surfaces; no builder, collection, package, app shell, or broad visual redesign changes were made.
+- Superseded with concrete reason: C7 is not an active implementation slice because the popover controller is complex but already has a model seam and no active bug/smell justifies a larger rewrite yet.
+- Maintenance queued: M1 remains command hygiene because complexity scanners included stale `.worktrees` paths.
+- Final validation state: every slice commit passed the pre-commit hook. Latest hook after W8 passed lint, `test:bounded` (186 files / 1234 tests), script tests, and `build:quiet`.

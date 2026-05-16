@@ -36,39 +36,39 @@
   "focus_areas": [
     {
       "name": "src/domain database/detail/reference layers",
-      "status": "mapped",
+      "status": "done",
       "evidence": ["S1 domain/detail scout", "S1 rich/reference scout"],
       "next": "Implemented C4, C5, C6, and C8."
     },
     {
       "name": "src/features/database/**",
-      "status": "mapped",
+      "status": "done",
       "evidence": ["S1 database React scout"],
-      "next": "Implemented C1, C2, C3, and C9; queued candidate C7."
+      "next": "Implemented C1, C2, C3, and C9; C7 superseded by the existing popover model seam unless a concrete controller defect appears."
     },
     {
       "name": "public detail record adapters/resolvers",
-      "status": "mapped",
+      "status": "done",
       "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R1/R2", "S1 domain/detail scout"],
       "next": "Prior slices implemented P1/P2; residual C4/C8 implemented."
     },
     {
       "name": "rich text/reference rendering",
-      "status": "mapped",
+      "status": "done",
       "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R3", "S1 rich/reference scout"],
       "next": "Implemented C2, C3, C6, and C9."
     },
     {
       "name": "popover/detail modal/tab controller flows",
-      "status": "mapped",
+      "status": "done",
       "evidence": ["S1 database React scout", "S1 prior ledger scout"],
-      "next": "Active worker slice W1 covers C1; C7 queued behind it."
+      "next": "Implemented C1; C7 superseded by the existing popover model seam unless a concrete nested-open/hydration/trail defect appears."
     },
     {
       "name": "direct database/detail collection scans",
-      "status": "mapped",
+      "status": "done",
       "evidence": ["S1 domain/detail scout", "S1 database React scout"],
-      "next": "Implemented modal-host and reference-layer lookup slices; C7 remains queued."
+      "next": "Implemented modal-host and reference-layer lookup slices."
     }
   ],
   "candidates": [
@@ -198,14 +198,14 @@
       "id": "C7",
       "title": "Popover controller hook split for hydration/trail actions",
       "source_task": "S1",
-      "status": "queued",
+      "status": "superseded",
       "concept_blast_radius": [
         "src/features/database/internal/useDatabasePopoverController.ts",
         "src/features/database/internal/useDatabasePopoverController.test.tsx",
         "src/features/database/internal/database-popover-controller-model.ts"
       ],
       "evidence": ["Hook still owns root/nested opening, async hydration, global trail ownership events, navigation, and root props construction."],
-      "next": "Queued. UI/detail scout found the hook is complex but already has a model seam; rewrite only if a concrete controller bug or repeated nested-open smell becomes the active slice."
+      "next": "Superseded for this tranche by the existing database-popover-controller-model seam and fresh scout review; reopen only for a concrete nested-open/hydration/trail bug or repeated callback smell."
     },
     {
       "id": "C8",
@@ -218,7 +218,7 @@
         "src/domain/public-detail-record-adapters.test.ts"
       ],
       "evidence": ["Child schemas keep descriptionArgs/cardKeywords as unknown before canonical adaptation."],
-      "next": "Implemented by W8 in commit pending."
+      "next": "Implemented by W8 in commit 88f2f3a."
     },
     {
       "id": "C9",
@@ -984,9 +984,7 @@
           "npx prettier --check src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/RichScalingSegment.tsx src/features/database/internal/RichDescriptionArgSegment.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
           "git diff --check"
         ],
-        "risks": [
-          "Full pre-commit suite is pending for this slice commit."
-        ],
+        "risks": [],
         "followups_not_done": [
           "C8 public V3 child schema unknown fields",
           "C7 popover controller hook split"
@@ -1096,8 +1094,23 @@
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "",
-    "validation": [],
-    "open_items": []
+    "summary": "Focused database/detail/domain audit completed with eight new implementation slices on this continuation: C1 modal/detail lookup, C2 overlay lookup rendering, C3 rich parse context, C4 owned public child index, C5 resolver narrowing, C6 shared reference-layer accumulator, C8 public V3 child parser validation, and C9 renderer component split. Prior P1-P4 slices were preserved and recorded. No builder, collection, broad visual redesign, package, or app shell work was included.",
+    "validation": [
+      "Each implementation slice passed targeted tests, typecheck, formatting, and diff checks before commit.",
+      "Each committed slice passed pre-commit verification: lint, test:bounded, test:scripts, and build:quiet.",
+      "Latest full pre-commit verification after W8 passed 186 test files / 1234 tests plus script tests and build:quiet."
+    ],
+    "open_items": [
+      {
+        "id": "C7",
+        "status": "superseded",
+        "reason": "Popover controller complexity is real, but fresh UI/detail scout found a model seam already exists and a larger rewrite would mostly reshuffle stateful hook callbacks without removing enough recurring complexity. Reopen only for a concrete nested-open/hydration/trail smell or bug."
+      },
+      {
+        "id": "M1",
+        "status": "queued",
+        "reason": "Complexity scanner output included stale .worktrees paths; this is command hygiene, not product behavior."
+      }
+    ]
   }
 }
