@@ -1,7 +1,13 @@
+import {z} from 'zod'
+
 import rawBanners from '@/data/timeline/banners.json'
 import rawEvents from '@/data/timeline/events.json'
 
+import {getAwakeners} from './awakeners'
 import {
+  BANNER_TAGS,
+  BANNER_TYPES,
+  EVENT_CATEGORIES,
   normalizeEventCategory,
   parseGameDate,
   type BannerEntry,
@@ -27,6 +33,16 @@ interface PoolSlotInput {
   count?: number
 }
 
+interface DerivedPoolInput {
+  availabilityTypes?: string[]
+  awakenerSlots?: number
+  excludeNames?: string[]
+  linkedPairs?: boolean
+  limitedAwakenerType?: string
+  slotCount?: number
+  wheelSlots?: number
+}
+
 interface BannerInput {
   id: string
   title: string
@@ -37,9 +53,99 @@ interface BannerInput {
   endDate: string
   featured?: FeaturedInput[]
   poolSlots?: PoolSlotInput[]
+  derivedPool?: DerivedPoolInput
   customArt?: string
+  customTags?: string[]
   pinned?: boolean
+  pricing?: string
   preliminary?: boolean
+}
+
+const nonEmptyStringSchema = z.string().trim().min(1)
+const gameDateSchema = z.string().regex(/^\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}$/)
+
+const featuredInputSchema: z.ZodType<FeaturedInput> = z.union([
+  nonEmptyStringSchema,
+  z.object({
+    name: nonEmptyStringSchema,
+    kind: z.enum(['awakener', 'wheel', 'wheel-auto', 'placeholder']).optional(),
+    customArt: nonEmptyStringSchema.optional(),
+    realmId: nonEmptyStringSchema.optional(),
+    detailLink: z.boolean().optional(),
+  }),
+])
+
+const poolSlotInputSchema: z.ZodType<PoolSlotInput> = z.object({
+  pool: z.array(featuredInputSchema).min(1),
+  linked: z.boolean().optional(),
+  count: z.number().int().positive().optional(),
+})
+
+const derivedPoolInputSchema: z.ZodType<DerivedPoolInput> = z.object({
+  availabilityTypes: z.array(nonEmptyStringSchema).optional(),
+  awakenerSlots: z.number().int().nonnegative().optional(),
+  excludeNames: z.array(nonEmptyStringSchema).optional(),
+  linkedPairs: z.boolean().optional(),
+  limitedAwakenerType: nonEmptyStringSchema.optional(),
+  slotCount: z.number().int().positive().optional(),
+  wheelSlots: z.number().int().nonnegative().optional(),
+})
+
+const bannerInputSchema: z.ZodType<BannerInput> = z
+  .object({
+    id: nonEmptyStringSchema,
+    title: nonEmptyStringSchema,
+    type: z.enum(BANNER_TYPES),
+    tags: z.array(z.enum(BANNER_TAGS)).optional(),
+    description: z.string().optional(),
+    startDate: gameDateSchema,
+    endDate: gameDateSchema,
+    featured: z.array(featuredInputSchema).optional(),
+    poolSlots: z.array(poolSlotInputSchema).optional(),
+    derivedPool: derivedPoolInputSchema.optional(),
+    customArt: nonEmptyStringSchema.optional(),
+    customTags: z.array(nonEmptyStringSchema).optional(),
+    pinned: z.boolean().optional(),
+    pricing: nonEmptyStringSchema.optional(),
+    preliminary: z.boolean().optional(),
+  })
+  .superRefine((banner, ctx) => {
+    if (banner.poolSlots && banner.derivedPool) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['derivedPool'],
+        message: 'Use either poolSlots or derivedPool, not both.',
+      })
+    }
+  })
+
+const eventInputSchema: z.ZodType<EventInput> = z.object({
+  id: nonEmptyStringSchema,
+  title: nonEmptyStringSchema,
+  category: z.enum(EVENT_CATEGORIES).optional(),
+  description: z.string().optional(),
+  startDate: gameDateSchema,
+  endDate: gameDateSchema,
+  pinned: z.boolean().optional(),
+  featured: z.union([featuredInputSchema, z.array(featuredInputSchema)]).optional(),
+  customArt: nonEmptyStringSchema.optional(),
+  pricing: nonEmptyStringSchema.optional(),
+  preliminary: z.boolean().optional(),
+  rerun: z.boolean().optional(),
+  artAlign: nonEmptyStringSchema.optional(),
+})
+
+const LIMITED_STARS_IN_FULL_BLOOM_AVAILABILITY = new Set([
+  'LIMITED_ASTRAL_REIGN',
+  'LIMITED_FADED_LEGACY',
+])
+
+function getAwakenerDisplayName(awakener: ReturnType<typeof getAwakeners>[number]): string {
+  return (
+    awakener.aliases.find(
+      (alias) => alias.toLowerCase() === awakener.name.toLowerCase() && alias !== awakener.name,
+    ) ?? awakener.name
+  )
 }
 
 interface EventInput {
@@ -132,6 +238,81 @@ function resolvePoolSlots(input: PoolSlotInput[]): BannerPoolSlot[] {
   return out
 }
 
+function normalizeDerivedAvailabilityTypes(input: DerivedPoolInput): Set<string> {
+  return new Set(
+    (input.availabilityTypes ?? [...LIMITED_STARS_IN_FULL_BLOOM_AVAILABILITY]).map((availability) =>
+      availability.trim().toUpperCase(),
+    ),
+  )
+}
+
+function resolveDerivedPool(input: DerivedPoolInput, bannerId: string): BannerPoolSlot[] {
+  const type = input.limitedAwakenerType?.trim().toUpperCase()
+  const availabilityTypes = normalizeDerivedAvailabilityTypes(input)
+  const excludedNames = new Set(input.excludeNames?.map((name) => name.trim().toLowerCase()) ?? [])
+  const awakeners = getAwakeners().filter(
+    (awakener) =>
+      awakener.rarity === 'SSR' &&
+      (!type || awakener.type === type) &&
+      Boolean(awakener.availabilityType && availabilityTypes.has(awakener.availabilityType)) &&
+      !excludedNames.has(awakener.name.toLowerCase()) &&
+      !awakener.aliases.some((alias) => excludedNames.has(alias.toLowerCase())),
+  )
+  const awakenerIds = new Set(awakeners.map((awakener) => awakener.id))
+  const wheels = getWheels().filter(
+    (wheel) =>
+      wheel.rarity === 'SSR' &&
+      Boolean(wheel.ownerAwakenerId && awakenerIds.has(wheel.ownerAwakenerId)),
+  )
+
+  const awakenerPool = awakeners.map((awakener) => ({
+    name: getAwakenerDisplayName(awakener),
+    kind: 'awakener' as const,
+  }))
+
+  if (input.linkedPairs) {
+    const wheelOwnerIds = new Set(wheels.map((wheel) => wheel.ownerAwakenerId).filter(Boolean))
+    const missingWheelAwakeners = awakeners.filter((awakener) => !wheelOwnerIds.has(awakener.id))
+    if (missingWheelAwakeners.length > 0) {
+      throw new Error(
+        `Timeline banner "${bannerId}" linkedPairs derivedPool includes awakeners without SSR wheels: ${missingWheelAwakeners
+          .map((awakener) => awakener.name)
+          .join(', ')}.`,
+      )
+    }
+    if (awakenerPool.length === 0) {
+      throw new Error(`Timeline banner "${bannerId}" derivedPool produced an empty linked pool.`)
+    }
+    return [{pool: awakenerPool, linked: true}]
+  }
+
+  const wheelPool = wheels.map((wheel) => ({name: wheel.name, kind: 'wheel' as const}))
+  const slotCount = Math.max(2, input.slotCount ?? 2)
+  const awakenerSlots = Math.min(
+    slotCount,
+    Math.max(0, input.awakenerSlots ?? Math.ceil(slotCount / 2)),
+  )
+  const wheelSlots = Math.min(
+    slotCount - awakenerSlots,
+    Math.max(0, input.wheelSlots ?? slotCount - awakenerSlots),
+  )
+
+  const slots = [
+    ...Array.from({length: awakenerSlots}, () => ({pool: awakenerPool})),
+    ...Array.from({length: wheelSlots}, () => ({pool: wheelPool})),
+  ]
+  const emptyPools: string[] = []
+  if (awakenerSlots > 0 && awakenerPool.length === 0) emptyPools.push('awakener')
+  if (wheelSlots > 0 && wheelPool.length === 0) emptyPools.push('wheel')
+  if (emptyPools.length > 0) {
+    throw new Error(
+      `Timeline banner "${bannerId}" derivedPool produced empty ${emptyPools.join('/')} pool(s).`,
+    )
+  }
+
+  return slots
+}
+
 function loadBanner(raw: BannerInput): BannerEntry {
   const entry: BannerEntry = {
     id: raw.id,
@@ -140,7 +321,9 @@ function loadBanner(raw: BannerInput): BannerEntry {
     tags: raw.tags,
     description: cleanDescription(raw.description),
     customArt: resolveCustomArt(raw.customArt),
+    customTags: raw.customTags,
     pinned: raw.pinned,
+    pricing: raw.pricing,
     preliminary: raw.preliminary,
     startDate: parseGameDate(raw.startDate),
     endDate: parseGameDate(raw.endDate),
@@ -150,6 +333,9 @@ function loadBanner(raw: BannerInput): BannerEntry {
   }
   if (raw.poolSlots) {
     entry.poolSlots = resolvePoolSlots(raw.poolSlots)
+  }
+  if (raw.derivedPool) {
+    entry.poolSlots = resolveDerivedPool(raw.derivedPool, raw.id)
   }
   return entry
 }
@@ -175,5 +361,13 @@ function loadEvent(raw: EventInput): EventEntry {
   return entry
 }
 
-export const timelineBanners: BannerEntry[] = (rawBanners as BannerInput[]).map(loadBanner)
-export const timelineEvents: EventEntry[] = (rawEvents as EventInput[]).map(loadEvent)
+export function loadTimelineBanners(input: unknown): BannerEntry[] {
+  return z.array(bannerInputSchema).parse(input).map(loadBanner)
+}
+
+export function loadTimelineEvents(input: unknown): EventEntry[] {
+  return z.array(eventInputSchema).parse(input).map(loadEvent)
+}
+
+export const timelineBanners: BannerEntry[] = loadTimelineBanners(rawBanners)
+export const timelineEvents: EventEntry[] = loadTimelineEvents(rawEvents)

@@ -1,5 +1,7 @@
 import {type ReactNode} from 'react'
 
+import {formatTimelinePrice, type TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
+
 function isSafeLinkTarget(value: string): boolean {
   try {
     const url = new URL(value)
@@ -14,7 +16,11 @@ function findClosingMarker(text: string, marker: string, from: number): number {
   return index > from ? index : -1
 }
 
-function parseInlineRichText(text: string, keyPrefix: string): ReactNode[] {
+function parseInlineRichText(
+  text: string,
+  keyPrefix: string,
+  priceMode: TimelinePriceDisplayMode,
+): ReactNode[] {
   const nodes: ReactNode[] = []
   let buffer = ''
   let index = 0
@@ -37,7 +43,7 @@ function parseInlineRichText(text: string, keyPrefix: string): ReactNode[] {
           const key = `${keyPrefix}-link-${String(index)}`
           nodes.push(
             <a className='text-link' href={href} key={key} rel='noreferrer' target='_blank'>
-              {parseInlineRichText(label, key)}
+              {parseInlineRichText(label, key, priceMode)}
               <span className='sr-only'> (opens in new tab)</span>
             </a>,
           )
@@ -53,7 +59,9 @@ function parseInlineRichText(text: string, keyPrefix: string): ReactNode[] {
         pushBuffer()
         const key = `${keyPrefix}-strong-${String(index)}`
         nodes.push(
-          <strong key={key}>{parseInlineRichText(text.slice(index + 2, end), key)}</strong>,
+          <strong key={key}>
+            {parseInlineRichText(text.slice(index + 2, end), key, priceMode)}
+          </strong>,
         )
         index = end + 2
         continue
@@ -66,7 +74,9 @@ function parseInlineRichText(text: string, keyPrefix: string): ReactNode[] {
       if (end >= 0) {
         pushBuffer()
         const key = `${keyPrefix}-em-${String(index)}`
-        nodes.push(<em key={key}>{parseInlineRichText(text.slice(index + 1, end), key)}</em>)
+        nodes.push(
+          <em key={key}>{parseInlineRichText(text.slice(index + 1, end), key, priceMode)}</em>,
+        )
         index = end + 1
         continue
       }
@@ -80,14 +90,24 @@ function parseInlineRichText(text: string, keyPrefix: string): ReactNode[] {
   return nodes
 }
 
-function renderTimelineRichText(text: string): ReactNode[] {
+function renderTimelineRichText(text: string, priceMode: TimelinePriceDisplayMode): ReactNode[] {
   return text.split('\n').flatMap((line, index) => {
-    const nodes = parseInlineRichText(line, `line-${String(index)}`)
+    const nodes = parseInlineRichText(
+      formatTimelinePrice(line, priceMode) ?? line,
+      `line-${String(index)}`,
+      priceMode,
+    )
     if (index === 0) return nodes
     return [<br key={`line-${String(index)}-break`} />, ...nodes]
   })
 }
 
-export function TimelineRichText({text}: {text: string}) {
-  return <>{renderTimelineRichText(text)}</>
+export function TimelineRichText({
+  priceMode = 'silver-prime',
+  text,
+}: {
+  priceMode?: TimelinePriceDisplayMode
+  text: string
+}) {
+  return <>{renderTimelineRichText(text, priceMode)}</>
 }

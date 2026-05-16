@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa6'
-import {Link} from 'react-router-dom'
+import {Link, useSearchParams} from 'react-router-dom'
 
 import {
   getCurrentDzoneSeasonSummary,
@@ -31,21 +31,42 @@ import {useTimelineNow} from './timeline/useTimelineNow'
 
 import './d-zone/d-zone.css'
 
+interface ExpandedYearsState {
+  selectedSeasonId: string
+  years: Set<string>
+}
+
+function getExpandedYearsForSelection(
+  state: ExpandedYearsState,
+  selectedSeasonId: string,
+  selectedYear: string,
+): Set<string> {
+  if (state.selectedSeasonId === selectedSeasonId || state.years.has(selectedYear)) {
+    return state.years
+  }
+
+  const nextYears = new Set(state.years)
+  nextYears.add(selectedYear)
+  return nextYears
+}
+
 export function DZoneHistoryPage() {
   const now = useTimelineNow()
+  const [searchParams, setSearchParams] = useSearchParams()
   const summaries = getDzoneSeasonSummaries()
   const defaultSummary = getCurrentDzoneSeasonSummary(now) ?? getLatestDzoneSeasonSummary()
-  const [selectedSeasonId, setSelectedSeasonId] = useState(defaultSummary.id)
+  const selectedSummary =
+    summaries.find((season) => season.id === searchParams.get('season')) ?? defaultSummary
+  const selectedYear = getDZoneHistorySeasonYear(selectedSummary)
   const [searchTerm, setSearchTerm] = useState('')
   const [browserOpen, setBrowserOpen] = useState(false)
   const [browserOpener, setBrowserOpener] = useState<HTMLElement | null>(null)
-  const [expandedYears, setExpandedYears] = useState<Set<string>>(
-    () => new Set([getDZoneHistorySeasonYear(defaultSummary)]),
-  )
+  const [expandedYearState, setExpandedYearState] = useState<ExpandedYearsState>(() => ({
+    selectedSeasonId: selectedSummary.id,
+    years: new Set([selectedYear]),
+  }))
   const dzonePopovers = useDZoneDatabasePopovers()
 
-  const selectedSummary =
-    summaries.find((season) => season.id === selectedSeasonId) ?? getLatestDzoneSeasonSummary()
   const selectedSeason = getDzoneSeasonById(selectedSummary.id) ?? getLatestDzoneSeason()
   const selectedRealmName = selectedSummary.realm
     ? getDzoneSeasonSummaryDisplayName(selectedSummary)
@@ -62,16 +83,26 @@ export function DZoneHistoryPage() {
   const normalizedSearchTerm = getDZoneHistoryNormalizedSearchTerm(searchTerm)
   const visibleSeasons = getDZoneHistoryVisibleSeasons(summaries, searchTerm)
   const yearGroups = buildDZoneHistoryYearGroups(visibleSeasons)
+  const expandedYears = getExpandedYearsForSelection(
+    expandedYearState,
+    selectedSummary.id,
+    selectedYear,
+  )
 
   function toggleYear(year: string) {
-    setExpandedYears((currentYears) => {
+    setExpandedYearState((currentState) => {
+      const currentYears = getExpandedYearsForSelection(
+        currentState,
+        selectedSummary.id,
+        selectedYear,
+      )
       const nextYears = new Set(currentYears)
       if (nextYears.has(year)) {
         nextYears.delete(year)
       } else {
         nextYears.add(year)
       }
-      return nextYears
+      return {selectedSeasonId: selectedSummary.id, years: nextYears}
     })
   }
 
@@ -132,7 +163,9 @@ export function DZoneHistoryPage() {
             }}
             onSearchChange={setSearchTerm}
             onSelectSeason={(seasonId) => {
-              setSelectedSeasonId(seasonId)
+              const nextParams = new URLSearchParams(searchParams)
+              nextParams.set('season', seasonId)
+              setSearchParams(nextParams, {replace: true})
               setBrowserOpen(false)
             }}
             onToggleYear={toggleYear}

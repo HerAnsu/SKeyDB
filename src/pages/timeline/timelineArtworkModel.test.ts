@@ -58,6 +58,18 @@ describe('timelineArtworkModel', () => {
     })
   })
 
+  it('skips empty pool slots before artwork rendering', () => {
+    const visualSlots = resolvePoolSlots([
+      {pool: []},
+      {
+        pool: [{name: 'Arachne', kind: 'awakener'}],
+      },
+    ])
+
+    expect(visualSlots).toHaveLength(1)
+    expect(visualSlots[0].assets[0].label).toBe('Arachne')
+  })
+
   it('deduplicates pool preload urls and skips placeholders', () => {
     const visualSlots = resolvePoolSlots([
       {

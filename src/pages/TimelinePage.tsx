@@ -1,4 +1,6 @@
-import {useState, type ReactNode} from 'react'
+import {useEffect, useState, type ReactNode} from 'react'
+
+import {useSearchParams} from 'react-router-dom'
 
 import realmBadgeAequor from '@/assets/ui/realm-badge-aequor.webp'
 import {getAwakeners} from '@/domain/awakeners'
@@ -12,6 +14,13 @@ import {
   type EventEntry,
 } from '@/domain/timeline'
 import {timelineBanners, timelineEvents} from '@/domain/timeline-data'
+import type {TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
+import {
+  getTimelineViewForSection,
+  parseTimelineContentFilter,
+  parseTimelineSectionId,
+  type TimelineContentFilter,
+} from '@/domain/timeline-routing'
 import {getWheels} from '@/domain/wheels'
 import {DbDetailModalHost} from '@/features/database/detail/DbDetailModalHost'
 import {dbDetailStore} from '@/stores/dbDetailStore'
@@ -24,12 +33,30 @@ import './timeline/timeline.css'
 
 import {useTimelineNow} from './timeline/useTimelineNow'
 
-type TimelineContentFilter = 'all' | 'events' | 'banners'
-
 const CONTENT_FILTERS: {id: TimelineContentFilter; label: string}[] = [
   {id: 'all', label: 'Both'},
   {id: 'events', label: 'Events'},
   {id: 'banners', label: 'Banners'},
+]
+
+const PRICE_DISPLAY_MODES: {
+  ariaLabel: string
+  id: TimelinePriceDisplayMode
+  label: string
+  title: string
+}[] = [
+  {
+    ariaLabel: 'Silver Prime',
+    id: 'silver-prime',
+    label: 'Prime',
+    title: 'Show game currency prices',
+  },
+  {
+    ariaLabel: 'Estimated USD',
+    id: 'usd-estimate',
+    label: 'USD',
+    title: 'Show rounded estimated USD prices',
+  },
 ]
 
 function selectDZoneEvent(events: EventEntry[], now: Date): EventEntry | undefined {
@@ -52,7 +79,12 @@ function getDZoneRealmName(event: EventEntry | undefined, now: Date): string {
 
 export function TimelinePage() {
   const now = useTimelineNow()
-  const [contentFilter, setContentFilter] = useState<TimelineContentFilter>('all')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const timelineSection = parseTimelineSectionId(searchParams.get('section'))
+  const contentFilter =
+    getTimelineViewForSection(timelineSection) ??
+    parseTimelineContentFilter(searchParams.get('view'))
+  const [priceMode, setPriceMode] = useState<TimelinePriceDisplayMode>('silver-prime')
   const awakeners = getAwakeners()
   const wheels = getWheels()
 
@@ -64,8 +96,37 @@ export function TimelinePage() {
   const showEvents = contentFilter !== 'banners'
   const showBanners = contentFilter !== 'events'
 
+  useEffect(() => {
+    if (!timelineSection) return
+
+    const prefersReducedMotion =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const frameId = window.requestAnimationFrame(() => {
+      document.getElementById(timelineSection)?.scrollIntoView({
+        block: 'start',
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      })
+    })
+
+    return () => {
+      window.cancelAnimationFrame(frameId)
+    }
+  }, [timelineSection])
+
   function openTimelineDetail(ref: EntityRef) {
     dbDetailStore.getState().openDetail(ref, 'timeline-overlay')
+  }
+
+  function setContentFilter(nextFilter: TimelineContentFilter) {
+    const nextParams = new URLSearchParams(searchParams)
+    nextParams.delete('section')
+    if (nextFilter === 'all') {
+      nextParams.delete('view')
+    } else {
+      nextParams.set('view', nextFilter)
+    }
+    setSearchParams(nextParams, {replace: true})
   }
 
   return (
@@ -83,25 +144,57 @@ export function TimelinePage() {
         }}
       >
         <h1 className='sr-only'>Events & Banners</h1>
-        <div aria-label='Timeline content' className='timeline-v2-filter-list' role='group'>
-          {CONTENT_FILTERS.map((filter) => (
-            <TimelineFilterButton
-              active={contentFilter === filter.id}
-              key={filter.id}
-              onClick={() => {
-                setContentFilter(filter.id)
-              }}
-            >
-              {filter.label}
-            </TimelineFilterButton>
-          ))}
+        <div className='timeline-v2-control-stack'>
+          <div aria-label='Timeline content' className='timeline-v2-filter-list' role='group'>
+            {CONTENT_FILTERS.map((filter) => (
+              <TimelineFilterButton
+                active={contentFilter === filter.id}
+                key={filter.id}
+                onClick={() => {
+                  setContentFilter(filter.id)
+                }}
+              >
+                {filter.label}
+              </TimelineFilterButton>
+            ))}
+          </div>
+          <div className='timeline-v2-price-toggle-shell'>
+            <span className='timeline-v2-price-toggle-label'>Display Prices</span>
+            <div aria-label='Display prices' className='timeline-v2-price-toggle' role='group'>
+              {PRICE_DISPLAY_MODES.map((mode) => (
+                <button
+                  aria-label={mode.ariaLabel}
+                  aria-pressed={priceMode === mode.id}
+                  className={`timeline-v2-price-toggle-button ${
+                    priceMode === mode.id
+                      ? 'timeline-v2-price-toggle-button--active'
+                      : 'timeline-v2-price-toggle-button--inactive'
+                  }`}
+                  key={mode.id}
+                  onClick={() => {
+                    setPriceMode(mode.id)
+                  }}
+                  title={mode.title}
+                  type='button'
+                >
+                  {mode.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </SeasonMasthead>
 
       <div className='-my-[0.6rem] space-y-7'>
         {showEvents ? (
           <TimelineSection title='Events'>
-            <EventList events={events} now={now} onOpenDetail={openTimelineDetail} />
+            <EventList
+              events={events}
+              now={now}
+              onOpenDetail={openTimelineDetail}
+              priceMode={priceMode}
+              targetSection={timelineSection}
+            />
           </TimelineSection>
         ) : null}
 
@@ -111,6 +204,8 @@ export function TimelinePage() {
               banners={timelineBanners}
               now={now}
               onOpenDetail={openTimelineDetail}
+              priceMode={priceMode}
+              targetSection={timelineSection}
             />
           </TimelineSection>
         ) : null}

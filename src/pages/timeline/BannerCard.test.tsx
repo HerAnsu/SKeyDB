@@ -54,6 +54,27 @@ describe('BannerCard', () => {
     expect(container.innerHTML).not.toContain('saturate-[0.78]')
   })
 
+  it('renders banner pricing in estimated dollars when requested', () => {
+    render(
+      <MemoryRouter>
+        <BannerCard
+          banner={{
+            id: 'paid-banner',
+            title: 'Paid Banner',
+            type: 'premium',
+            pricing: 'USD 29.99',
+            startDate: '2026-03-09T00:00:00.000Z',
+            endDate: '2026-03-12T00:00:00.000Z',
+          }}
+          now={new Date('2026-03-10T00:00:00.000Z')}
+          priceMode='usd-estimate'
+        />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getAllByText('$30')).toHaveLength(2)
+  })
+
   it('renders scaffolded combo pool slots for banners waiting on final unit lists', () => {
     render(
       <MemoryRouter>
@@ -268,7 +289,7 @@ describe('BannerCard', () => {
   })
 
   it('collapses three-featured banners behind the details handle', () => {
-    render(
+    const {container} = render(
       <MemoryRouter>
         <BannerCard
           banner={{
@@ -288,6 +309,10 @@ describe('BannerCard', () => {
       </MemoryRouter>,
     )
 
+    expect(container.querySelector('[data-banner-hero="summary"]')).toHaveTextContent(
+      'Triple Banner',
+    )
+
     const handle = screen.getByRole('button', {name: 'Show details for Triple Banner'})
 
     expect(handle).toHaveAttribute('aria-expanded', 'false')
@@ -298,6 +323,7 @@ describe('BannerCard', () => {
       'aria-expanded',
       'true',
     )
+    expect(container.querySelector('[data-banner-hero="summary"]')).toHaveClass('opacity-0')
   })
 
   it('links auto-expanded signature wheel slices to wheel details', () => {

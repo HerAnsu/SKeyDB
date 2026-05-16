@@ -1,5 +1,7 @@
 import {useEffect, useRef, type RefObject} from 'react'
 
+import type {TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
+
 import {TimelineRichText} from './TimelineRichText'
 
 interface EventDescriptionPreviewProps {
@@ -9,6 +11,7 @@ interface EventDescriptionPreviewProps {
   descriptionOpen: boolean
   descriptionRef: RefObject<HTMLParagraphElement | null>
   onOpenDescription: (opener: HTMLButtonElement) => void
+  priceMode?: TimelinePriceDisplayMode
 }
 
 export function EventDescriptionPreview({
@@ -18,6 +21,7 @@ export function EventDescriptionPreview({
   descriptionOpen,
   descriptionRef,
   onOpenDescription,
+  priceMode = 'silver-prime',
 }: EventDescriptionPreviewProps) {
   if (description.length === 0) return null
 
@@ -27,7 +31,7 @@ export function EventDescriptionPreview({
         className={`line-clamp-4 text-[0.8rem] leading-[1.55] text-balance text-slate-400 ${canExpandDescription ? 'pr-12' : ''}`}
         ref={descriptionRef}
       >
-        <TimelineRichText text={description} />
+        <TimelineRichText priceMode={priceMode} text={description} />
       </p>
       {canExpandDescription ? (
         <button
@@ -52,6 +56,7 @@ interface EventDescriptionShelfProps {
   descriptionId: string
   descriptionOpen: boolean
   onCloseDescription: () => void
+  priceMode?: TimelinePriceDisplayMode
 }
 
 export function EventDescriptionShelf({
@@ -60,6 +65,7 @@ export function EventDescriptionShelf({
   descriptionId,
   descriptionOpen,
   onCloseDescription,
+  priceMode = 'silver-prime',
 }: EventDescriptionShelfProps) {
   const closeButtonRef = useRef<HTMLButtonElement | null>(null)
   const titleId = `${descriptionId}-title`
@@ -102,7 +108,7 @@ export function EventDescriptionShelf({
         </button>
       </div>
       <p className='min-h-0 flex-1 overflow-y-auto px-3 py-2.5 text-[0.8rem] leading-[1.55] text-slate-300'>
-        <TimelineRichText text={description} />
+        <TimelineRichText priceMode={priceMode} text={description} />
       </p>
     </div>
   )

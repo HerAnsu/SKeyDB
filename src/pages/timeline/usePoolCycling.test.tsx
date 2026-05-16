@@ -145,6 +145,57 @@ describe('usePoolCycling', () => {
     }
   })
 
+  it('returns stable initial frames and skips timers until cycling is enabled', () => {
+    vi.useFakeTimers()
+    const setIntervalSpy = vi.spyOn(window, 'setInterval')
+    const slots = [poolSlot(['Arachne', 'Tulu', 'Kuma']), poolSlot(['Arachne', 'Tulu', 'Kuma'])]
+
+    const {result, rerender, unmount} = renderHook(
+      ({enabled}) => usePoolCycling(slots, {enabled}),
+      {
+        initialProps: {enabled: false},
+      },
+    )
+
+    try {
+      expect(result.current).toEqual([
+        {activeIdx: 0, incomingIdx: -1, transitioning: false},
+        {activeIdx: 1, incomingIdx: -1, transitioning: false},
+      ])
+
+      act(() => {
+        vi.advanceTimersByTime(CYCLE_INTERVAL_MS * 3)
+      })
+
+      expect(result.current).toEqual([
+        {activeIdx: 0, incomingIdx: -1, transitioning: false},
+        {activeIdx: 1, incomingIdx: -1, transitioning: false},
+      ])
+      expect(setIntervalSpy).not.toHaveBeenCalled()
+
+      act(() => {
+        rerender({enabled: true})
+      })
+
+      expect(setIntervalSpy).toHaveBeenCalled()
+    } finally {
+      unmount()
+      setIntervalSpy.mockRestore()
+      vi.useRealTimers()
+    }
+  })
+
+  it('keeps duplicated empty pools inert instead of producing invalid frame indices', () => {
+    const emptySlots: BannerPoolSlot[] = [{pool: []}, {pool: []}]
+
+    const {result} = renderHook(() => usePoolCycling(emptySlots))
+
+    expect(result.current).toEqual([
+      {activeIdx: 0, incomingIdx: -1, transitioning: false},
+      {activeIdx: 0, incomingIdx: -1, transitioning: false},
+    ])
+  })
+
   it('stops cycling when reduced motion becomes active', () => {
     const {setMatches} = installMatchMedia(false)
     vi.useFakeTimers()

@@ -1489,11 +1489,13 @@
 .d-zone-history-season-date {
   display: block;
   min-width: 0;
+  margin-bottom: -0.12em;
   overflow: hidden;
+  padding-bottom: 0.12em;
   color: oklch(77% 0.026 250 / 0.7);
   font-size: var(--d-zone-text-control);
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.12;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: right;

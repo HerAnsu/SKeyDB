@@ -1,10 +1,17 @@
-import {useState} from 'react'
+import {Fragment, useState} from 'react'
 
 import type {EntityRef} from '@/domain/entities/types'
-import {getTimelineCountdownDisplay, getTimelineStatus, type BannerEntry} from '@/domain/timeline'
+import {
+  getTimelineCountdownDisplay,
+  getTimelineStatus,
+  type BannerEntry,
+  type BannerTag,
+} from '@/domain/timeline'
+import {formatTimelinePrice, type TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 
 import {BannerArtwork} from './BannerArtwork'
 import {BannerInfoDrawer} from './BannerInfoDrawer'
+import {BANNER_TAG_COLOR, BANNER_TAG_LABEL, getBannerDisplayTags} from './bannerTagDisplay'
 
 const BANNER_CARD_BASE_CLASS =
   'group/banner relative aspect-[8/5] w-full max-w-[30rem] overflow-hidden rounded-[2px] border shadow-[0_12px_26px_rgba(2,6,23,0.28),inset_0_1px_0_rgba(255,244,202,0.05)] transition-[border-color,box-shadow] duration-150 motion-reduce:transition-none'
@@ -20,14 +27,32 @@ const BANNER_CARD_ENDED_CLASS =
 
 const BANNER_ART_CLASS = 'absolute inset-0 bg-slate-950'
 const BANNER_ART_ENDED_CLASS = `${BANNER_ART_CLASS} opacity-[0.58] saturate-50`
+const BANNER_HERO_BASE_CLASS =
+  'pointer-events-none absolute right-12 bottom-3 left-3 z-40 transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
+const BANNER_HERO_SURFACE_CLASS =
+  'relative inline-grid min-w-[8.75rem] grid-cols-[minmax(0,max-content)] border border-amber-100/12 bg-slate-950/28 px-3 py-2 shadow-[0_8px_22px_rgba(2,6,14,0.34),inset_0_1px_0_rgba(255,244,202,0.04)] backdrop-blur-[2px]'
+const BANNER_HERO_TITLE_CLASS =
+  'ui-title -mb-[0.14em] min-w-0 overflow-hidden pb-[0.14em] text-ellipsis whitespace-nowrap text-[0.92rem] leading-[1.12] tracking-tight text-amber-50 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] sm:text-[1rem]'
+const BANNER_HERO_META_CLASS =
+  'mt-1.5 flex min-w-0 items-center gap-x-1.5 overflow-hidden text-[0.56rem] leading-none font-bold tracking-[0.14em] whitespace-nowrap uppercase drop-shadow-[0_1px_2px_rgba(0,0,0,0.92)]'
+const BANNER_HERO_COUNTDOWN_CLASS =
+  'mt-1 min-w-0 overflow-hidden text-[0.56rem] leading-none font-bold tracking-[0.14em] text-ellipsis whitespace-nowrap uppercase drop-shadow-[0_1px_2px_rgba(0,0,0,0.92)]'
 
 interface BannerCardProps {
+  artworkLoading?: 'eager' | 'lazy'
   banner: BannerEntry
   now?: Date
   onOpenDetail?: (ref: EntityRef) => void
+  priceMode?: TimelinePriceDisplayMode
 }
 
-export function BannerCard({banner, now, onOpenDetail}: BannerCardProps) {
+export function BannerCard({
+  artworkLoading = 'lazy',
+  banner,
+  now,
+  onOpenDetail,
+  priceMode = 'silver-prime',
+}: BannerCardProps) {
   const [drawerPinnedOpen, setDrawerPinnedOpen] = useState(false)
   const status = getTimelineStatus(banner.startDate, banner.endDate, now)
   const countdownDisplay = getTimelineCountdownDisplay(banner.startDate, banner.endDate, now)
@@ -50,6 +75,7 @@ export function BannerCard({banner, now, onOpenDetail}: BannerCardProps) {
         <BannerArtwork
           customArt={banner.customArt}
           featured={banner.featured}
+          loading={artworkLoading}
           onOpenDetail={onOpenDetail}
           poolSlots={banner.poolSlots}
           title={banner.title}
@@ -59,14 +85,14 @@ export function BannerCard({banner, now, onOpenDetail}: BannerCardProps) {
       <div className='pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_24%_12%,rgba(255,244,202,0.06),transparent_34%),linear-gradient(180deg,rgba(2,6,14,0.02),rgba(2,6,14,0.08)_58%,rgba(2,6,14,0.68))]' />
       <div className='pointer-events-none absolute inset-1 z-20 border border-amber-100/10' />
 
-      {countdownDisplay ? (
-        <span
-          className='absolute bottom-2.5 left-3 z-40 text-[0.68rem] leading-none font-medium text-slate-300/86 tabular-nums drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)]'
-          title={countdownDisplay.title}
-        >
-          {countdownDisplay.text}
-        </span>
-      ) : null}
+      <BannerCardHero
+        banner={banner}
+        countdownText={countdownDisplay?.text}
+        countdownTitle={countdownDisplay?.title}
+        hidden={drawerOpen}
+        isEnded={isEnded}
+        priceMode={priceMode}
+      />
 
       <BannerInfoDrawer
         banner={banner}
@@ -77,7 +103,77 @@ export function BannerCard({banner, now, onOpenDetail}: BannerCardProps) {
           setDrawerPinnedOpen((current) => !current)
         }}
         open={drawerOpen}
+        priceMode={priceMode}
       />
     </article>
+  )
+}
+
+function BannerCardHero({
+  banner,
+  countdownText,
+  countdownTitle,
+  hidden,
+  isEnded,
+  priceMode,
+}: {
+  banner: BannerEntry
+  countdownText?: string
+  countdownTitle?: string
+  hidden: boolean
+  isEnded: boolean
+  priceMode: TimelinePriceDisplayMode
+}) {
+  const displayTags = getBannerDisplayTags(banner)
+  const displayPricing = formatTimelinePrice(banner.pricing, priceMode)
+  const tagItems = [...displayTags, ...(banner.customTags ?? []), displayPricing]
+    .filter((tag): tag is string => Boolean(tag))
+    .slice(0, 4)
+  const renderMetaItem = (tag: string, index: number) => (
+    <Fragment key={`${tag}-${String(index)}`}>
+      {index > 0 ? (
+        <span aria-hidden className={isEnded ? 'text-slate-700' : 'text-slate-500/85'}>
+          &middot;
+        </span>
+      ) : null}
+      <span
+        className={
+          isEnded
+            ? 'text-slate-500'
+            : tag in BANNER_TAG_COLOR
+              ? BANNER_TAG_COLOR[tag as BannerTag]
+              : 'text-slate-300/90'
+        }
+      >
+        {tag in BANNER_TAG_LABEL ? BANNER_TAG_LABEL[tag as BannerTag] : tag}
+      </span>
+    </Fragment>
+  )
+
+  return (
+    <div
+      aria-hidden={hidden}
+      className={`${BANNER_HERO_BASE_CLASS} ${
+        hidden ? 'translate-y-1 opacity-0' : 'translate-y-0 opacity-100'
+      }`}
+      data-banner-hero='summary'
+      title={countdownTitle}
+    >
+      <div className={BANNER_HERO_SURFACE_CLASS}>
+        <h3 className={`${BANNER_HERO_TITLE_CLASS} ${isEnded ? 'text-slate-400' : ''}`}>
+          {banner.title}
+        </h3>
+        {tagItems.length > 0 ? (
+          <div className={BANNER_HERO_META_CLASS}>
+            {tagItems.map((tag, index) => renderMetaItem(tag, index))}
+          </div>
+        ) : null}
+        {countdownText ? (
+          <div className={BANNER_HERO_COUNTDOWN_CLASS} title={countdownTitle}>
+            {countdownText}
+          </div>
+        ) : null}
+      </div>
+    </div>
   )
 }

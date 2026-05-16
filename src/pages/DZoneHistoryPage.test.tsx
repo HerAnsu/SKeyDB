@@ -1,14 +1,20 @@
 import {act, fireEvent, render, screen, waitFor, within} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {MemoryRouter} from 'react-router-dom'
+import {MemoryRouter, useLocation} from 'react-router-dom'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {DZoneHistoryPage} from './DZoneHistoryPage'
 
-function renderHistoryPage() {
+function LocationProbe() {
+  const location = useLocation()
+  return <output data-testid='location'>{`${location.pathname}${location.search}`}</output>
+}
+
+function renderHistoryPage(initialEntries = ['/d-zone/history']) {
   return render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={initialEntries}>
       <DZoneHistoryPage />
+      <LocationProbe />
     </MemoryRouter>,
   )
 }
@@ -127,6 +133,9 @@ describe('DZoneHistoryPage', () => {
 
     const currentSeasonButton = screen.getByRole('button', {name: /Select Season 60/i})
     expect(currentSeasonButton).toHaveAttribute('aria-current', 'true')
+    expect(currentSeasonButton).toHaveAccessibleName(
+      /Select Season 60, Aequor Ring, .*current selection/i,
+    )
     expect(within(currentSeasonButton).getByText('Season 60')).toBeInTheDocument()
     expect(
       within(currentSeasonButton).getByRole('img', {name: 'Aequor Ring realm'}),
@@ -199,6 +208,22 @@ describe('DZoneHistoryPage', () => {
     expect(screen.queryByText('Dissoluted Abyss', {selector: '.d-zone-stage-chip-label'})).toBe(
       null,
     )
+  })
+
+  it('uses the season search param as a deep link and updates it on selection', () => {
+    renderHistoryPage(['/d-zone/history?season=dzone-0001'])
+
+    expect(screen.getByTestId('location')).toHaveTextContent('/d-zone/history?season=dzone-0001')
+    expect(screen.getByRole('heading', {level: 2, name: 'Season 1'})).toBeInTheDocument()
+
+    fireEvent.change(screen.getByRole('searchbox', {name: /Search D-zone seasons/i}), {
+      target: {value: 'season 2'},
+    })
+    const archivePanel = screen.getByRole('region', {name: /D-zone season archive/i})
+    fireEvent.click(within(archivePanel).getByRole('button', {name: /^Select Season 2/i}))
+
+    expect(screen.getByRole('heading', {level: 2, name: 'Season 2'})).toBeInTheDocument()
+    expect(screen.getByTestId('location')).toHaveTextContent('/d-zone/history?season=dzone-0002')
   })
 
   it('shows an archive data accuracy note from the season browser panel', () => {

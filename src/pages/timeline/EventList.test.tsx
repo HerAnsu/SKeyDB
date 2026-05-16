@@ -79,7 +79,8 @@ describe('EventList', () => {
     render(<EventList events={events} now={now} />)
 
     expect(screen.getByText('Active Rerun Event')).toBeInTheDocument()
-    expect(screen.getByText('Upcoming events')).toBeInTheDocument()
+    const upcomingToggle = screen.getByRole('button', {name: /upcoming events/i})
+    expect(upcomingToggle).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getByText('Upcoming Story Event')).toBeInTheDocument()
     expect(
       screen.getByRole('heading', {name: 'Upcoming Story Event'}).closest('li'),
@@ -90,6 +91,11 @@ describe('EventList', () => {
     expect(screen.queryByTitle('Pinned')).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', {name: 'Archived Story Event'})).not.toBeInTheDocument()
     expect(screen.queryByText('Archived Login Event')).not.toBeInTheDocument()
+
+    fireEvent.click(upcomingToggle)
+
+    expect(upcomingToggle).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.queryByRole('heading', {name: 'Upcoming Story Event'})).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', {name: /ended/i}))
 
@@ -148,6 +154,26 @@ describe('EventList', () => {
     expect(screen.queryByText('Live')).not.toBeInTheDocument()
     expect(screen.getByText('Ends in 6d 0h')).toBeInTheDocument()
     expect(screen.getByText('980 Silver Prime')).toHaveClass('timeline-event-meta-segment')
+  })
+
+  it('renders event pricing and description prices in estimated dollars when requested', () => {
+    const now = new Date('2026-05-12T00:00:00.000Z')
+    const events = [
+      {
+        id: 'price-event',
+        title: 'Price Event',
+        startDate: '2026-05-01T00:00:00.000Z',
+        endDate: '2026-05-18T00:00:00.000Z',
+        category: 'bundle',
+        description: 'Each gift box costs 1980 Silver Prime.',
+        pricing: '1980 Silver Prime',
+      },
+    ] as unknown as EventEntry[]
+
+    render(<EventList events={events} now={now} priceMode='usd-estimate' />)
+
+    expect(screen.getByText('~$30')).toHaveClass('timeline-event-meta-segment')
+    expect(screen.getByText('Each gift box costs ~$30.')).toBeInTheDocument()
   })
 
   it('renders shared timeline rich text in event descriptions', () => {
@@ -254,7 +280,7 @@ describe('EventList', () => {
 
       expect(mainTag).toHaveClass('timeline-event-meta-segment')
       expect(mainTag?.className).toMatch(
-        /timeline-event-meta--(?:amber|blue|orange|red|slate|teal|violet)/,
+        /timeline-event-meta--(?:amber|blue|champagne|gold|orange|red|slate|teal|violet)/,
       )
       expect(mainTag).not.toHaveClass('timeline-event-meta--ended')
     })

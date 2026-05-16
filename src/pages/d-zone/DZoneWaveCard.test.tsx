@@ -120,13 +120,17 @@ describe('DZoneWaveCard', () => {
     )
   })
 
-  it('keeps the collapsed monster limit at ten', () => {
+  it('keeps clipped collapsed monster buttons out of keyboard and accessibility reach', () => {
     renderWaveCard(false)
 
     const card = screen.getByRole('article', {name: 'Wave 1'})
     expect(within(card).getAllByRole('button', {name: /View Wave 1 monster details/})).toHaveLength(
-      10,
+      6,
     )
+
+    const clippedMonster = within(card).getByTitle('Monster 7')
+    expect(clippedMonster).toHaveAttribute('aria-hidden', 'true')
+    expect(clippedMonster).toHaveAttribute('tabIndex', '-1')
   })
 
   it('shows selected alert levels only on expanded monster tiles', () => {

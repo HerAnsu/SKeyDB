@@ -257,13 +257,16 @@ export function DZoneHistoryBrowser({
                   >
                     {group.seasons.map((season: DzoneSeasonSummary) => {
                       const displayName = getDzoneSeasonSummaryDisplayName(season)
+                      const dateRange = formatDzoneSeasonBrowserDateRange(season)
                       const realmIconSrc = getDzoneRealmIconAsset(season.realm)
                       const selected = season.id === selectedSeasonId
 
                       return (
                         <button
                           aria-current={selected ? 'true' : undefined}
-                          aria-label={`Select Season ${season.period.toString()}`}
+                          aria-label={`Select Season ${season.period.toString()}, ${displayName}, ${dateRange}${
+                            selected ? ', current selection' : ''
+                          }`}
                           className={`d-zone-history-season-button ${
                             selected ? 'd-zone-history-season-button--selected' : ''
                           }`}
@@ -290,9 +293,7 @@ export function DZoneHistoryBrowser({
                             )}
                           </span>
 
-                          <span className='d-zone-history-season-date'>
-                            {formatDzoneSeasonBrowserDateRange(season)}
-                          </span>
+                          <span className='d-zone-history-season-date'>{dateRange}</span>
                         </button>
                       )
                     })}

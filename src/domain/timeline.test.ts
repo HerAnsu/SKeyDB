@@ -185,4 +185,34 @@ describe('sortEventsByRelevance', () => {
     const sortedIds = sortEventsByRelevance(events, now).map((event) => event.id)
     expect(sortedIds).toEqual(['recent-maintenance', 'older-story'])
   })
+
+  it('sorts upcoming events by start date before category priority', () => {
+    const now = new Date('2026-05-16T00:00:00.000Z')
+    const events: EventEntry[] = [
+      {
+        id: 'later-story',
+        title: 'Later Story',
+        startDate: '2026-06-15T01:00:00.000Z',
+        endDate: '2026-07-13T01:00:00.000Z',
+        category: 'gameplay-event',
+      },
+      {
+        id: 'earlier-anniversary',
+        title: 'Earlier Anniversary',
+        startDate: '2026-05-30T01:00:00.000Z',
+        endDate: '2026-06-29T01:00:00.000Z',
+        category: 'anniversary',
+      },
+      {
+        id: 'same-day-wheel',
+        title: 'Same Day Wheel',
+        startDate: '2026-05-30T01:00:00.000Z',
+        endDate: '2026-06-29T01:00:00.000Z',
+        category: 'wheel-event',
+      },
+    ]
+
+    const sortedIds = sortEventsByRelevance(events, now).map((event) => event.id)
+    expect(sortedIds).toEqual(['same-day-wheel', 'earlier-anniversary', 'later-story'])
+  })
 })
