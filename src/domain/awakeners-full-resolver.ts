@@ -2,7 +2,11 @@ import {z} from 'zod'
 
 import {getAwakenerOverlays} from './awakener-overlays'
 import {
+  cardKeywordsSchema,
+  descriptionArgsSchema,
+  descriptionArgSubstatBonusesSchema,
   ENLIGHTEN_SLOT_KEYS,
+  enlightenPatchSchema,
   type AwakenerEnlightenRecord,
   type AwakenerOverlayRecord,
   type AwakenerSkillRecord,
@@ -42,6 +46,15 @@ type PublicUpgradeableTarget =
   | PublicUpgradeableSkillRecord
   | PublicUpgradeableDerivedSkillRecord
   | PublicUpgradeableOverlayRecord
+const publicUpgradePatchPayloadSchema = z.looseObject({
+  descriptionTemplate: z.string().optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
+  argSubstatBonuses: descriptionArgSubstatBonusesSchema.optional(),
+  cardKeywords: cardKeywordsSchema.optional(),
+  removeCardKeywordIds: z.array(z.string().trim().min(1)).optional(),
+})
+type PublicUpgradePatchPayload = z.infer<typeof publicUpgradePatchPayloadSchema>
+type ResolverUpgradeOperation = UpgradePatch['operation']
 
 function cloneDescriptionArgs(
   descriptionArgs: Record<string, DescriptionArg>,
@@ -393,6 +406,64 @@ function cloneUpgradePatch(patch: UpgradePatch): UpgradePatch {
   }
 }
 
+function parsePublicUpgradePatchPayload(upgrade: PublicRecordUpgrade): PublicUpgradePatchPayload {
+  return publicUpgradePatchPayloadSchema.parse(upgrade.patch ?? {})
+}
+
+function isResolverUpgradeOperation(
+  operation: PublicRecordUpgrade['operation'],
+): operation is ResolverUpgradeOperation {
+  return (
+    operation === 'replace_description' ||
+    operation === 'override_args' ||
+    operation === 'arg_substat_bonuses' ||
+    operation === 'card_keywords' ||
+    operation === 'mixed'
+  )
+}
+
+function toResolverCardKeywordPatch(
+  target: PublicUpgradeableTarget,
+  targetType: PublicPatchTargetType,
+  payload: PublicUpgradePatchPayload,
+): UpgradePatch | null {
+  if (!payload.cardKeywords?.length && !payload.removeCardKeywordIds?.length) {
+    return null
+  }
+
+  return enlightenPatchSchema.parse({
+    targetId: target.id,
+    targetType,
+    operation: 'card_keywords',
+    ...(payload.cardKeywords ? {addCardKeywords: payload.cardKeywords} : {}),
+    ...(payload.removeCardKeywordIds ? {removeCardKeywordIds: payload.removeCardKeywordIds} : {}),
+  })
+}
+
+function toResolverPayloadPatch(
+  target: PublicUpgradeableTarget,
+  targetType: PublicPatchTargetType,
+  operation: ResolverUpgradeOperation,
+  payload: PublicUpgradePatchPayload,
+): UpgradePatch | null {
+  if (operation === 'card_keywords') {
+    return toResolverCardKeywordPatch(target, targetType, payload)
+  }
+
+  return enlightenPatchSchema.parse({
+    targetId: target.id,
+    targetType,
+    operation,
+    ...(payload.descriptionTemplate !== undefined
+      ? {descriptionTemplate: payload.descriptionTemplate}
+      : {}),
+    ...(payload.descriptionArgs ? {descriptionArgs: payload.descriptionArgs} : {}),
+    ...(payload.argSubstatBonuses ? {argSubstatBonuses: payload.argSubstatBonuses} : {}),
+    ...(payload.cardKeywords ? {addCardKeywords: payload.cardKeywords} : {}),
+    ...(payload.removeCardKeywordIds ? {removeCardKeywordIds: payload.removeCardKeywordIds} : {}),
+  })
+}
+
 function toResolverUpgradePatch(
   target: PublicUpgradeableTarget,
   targetType: PublicPatchTargetType,
@@ -402,23 +473,20 @@ function toResolverUpgradePatch(
     return null
   }
 
-  const patch = upgrade.patch ?? {}
   if (upgrade.operation === 'override_card_keywords') {
-    return {
-      targetId: target.id,
-      targetType,
-      operation: 'card_keywords',
-      addCardKeywords: patch.cardKeywords as CardKeyword[] | undefined,
-    }
+    return toResolverCardKeywordPatch(target, targetType, parsePublicUpgradePatchPayload(upgrade))
   }
 
-  return {
-    targetId: target.id,
+  if (!isResolverUpgradeOperation(upgrade.operation)) {
+    return null
+  }
+
+  return toResolverPayloadPatch(
+    target,
     targetType,
-    operation: upgrade.operation,
-    ...patch,
-    ...(Array.isArray(patch.cardKeywords) ? {addCardKeywords: patch.cardKeywords} : {}),
-  } as UpgradePatch
+    upgrade.operation,
+    parsePublicUpgradePatchPayload(upgrade),
+  )
 }
 
 function collectUpgradePatchesForUpgraders(

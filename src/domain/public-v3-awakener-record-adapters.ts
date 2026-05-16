@@ -36,6 +36,7 @@ const publicV3UpgradeEntrySchema = z.looseObject({
   operation: z.string().optional(),
   patch: z.record(z.string(), z.unknown()).optional(),
 })
+export type PublicV3UpgradeEntry = z.infer<typeof publicV3UpgradeEntrySchema>
 const publicV3OwnedRecordShape = {
   schemaVersion: z.literal(3),
   id: z.string(),
@@ -56,7 +57,7 @@ export type PublicV3SkillRecord = PublicV3OwnedRecord & {
   descriptionArgs?: unknown
   descriptionTemplate?: string
   slot?: string
-  upgrades?: unknown[]
+  upgrades?: PublicV3UpgradeEntry[]
 }
 
 export type PublicV3TalentRecord = PublicV3OwnedRecord & {
@@ -77,7 +78,7 @@ export type PublicV3DerivedSkillRecord = PublicV3OwnedRecord & {
   childDerivedSkillIds?: string[]
   descriptionArgs?: unknown
   descriptionTemplate?: string
-  upgrades?: unknown[]
+  upgrades?: PublicV3UpgradeEntry[]
 }
 
 export type PublicV3OverlayRecord = PublicV3OwnedRecord & {
@@ -86,7 +87,7 @@ export type PublicV3OverlayRecord = PublicV3OwnedRecord & {
   descriptionTemplate?: string
   iconId?: string
   overlayType?: string
-  upgrades?: unknown[]
+  upgrades?: PublicV3UpgradeEntry[]
 }
 
 const publicV3SkillRecordSchema: z.ZodType<PublicV3SkillRecord> = z.looseObject({

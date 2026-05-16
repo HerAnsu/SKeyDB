@@ -50,6 +50,7 @@
   - R8 shared jsdom layout/window helper slice completed: element rect, offsetHeight, and static matchMedia mock restoration now live in shared test infrastructure.
   - R9 database public catalog fixture slice completed: database route test catalog data and detail loader cache mocks moved into explicit shared fixture builders.
   - R1 public V3 adapter trust-boundary slice completed: owned child record parsing moved into the public V3 child adapter module and generic child record casts were removed from the detail facade.
+  - R2 upgrade patch typing slice completed: resolver public-upgrade conversion now parses payloads with typed schemas and removes terminal casts around card keywords and patch payloads.
 - In progress:
   - None.
 - Next:
@@ -62,7 +63,7 @@
 | ID | Slice | Status | Value | Scope | Recommended First Verification |
 |----|-------|--------|-------|-------|--------------------------------|
 | R1 | Public V3 detail adapter trust boundary | Done | High | Large domain/data-access | `npm run test:unit -- src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts src/data-access/public-data/repository.test.ts` |
-| R2 | Upgrade patch schema and resolver typing | Proposed | High | Medium-large domain | `npm run test:unit -- src/domain/awakeners-full-resolver.test.ts src/domain/public-detail-record-adapters.test.ts` |
+| R2 | Upgrade patch schema and resolver typing | Done | High | Medium-large domain | `npm run test:unit -- src/domain/awakeners-full-resolver.test.ts src/domain/public-detail-record-adapters.test.ts` |
 | R3 | Rich description token grammar dedupe | Done | Medium-high | Medium domain | `npm run test:unit -- src/domain/description-args.test.ts src/domain/database-rich-text.test.ts src/domain/public-description-args.test.ts` |
 | R4 | D-Zone history route/view-model boundary | Done | High | Medium React/page model | `npm test -- --run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts --pool=forks --maxWorkers=1` |
 | R5 | D-Zone season inspector state model | Done | Medium-high | Medium React/domain helper | `npm test -- --run src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx --pool=forks --maxWorkers=1` |
@@ -132,6 +133,12 @@
 
 **Stop condition:**
 - Stop if the slice requires changing generated public-v3 data format.
+
+**Completion notes:**
+- Completed 2026-05-16.
+- Public upgrade entries are now shared from the public V3 child adapter type surface instead of being re-declared as a separate loose resolver-facing interface.
+- `awakeners-full-resolver.ts` now parses public upgrade patch payloads through schemas, maps legacy `override_card_keywords` explicitly, returns typed `UpgradePatch` values through `enlightenPatchSchema`, and no-ops unsupported operations.
+- Characterization added for link-only no-op behavior, replace-description patches, card keyword removals, missing arg-substat targets, unsupported operations, and malformed override-card-keyword payloads.
 
 ## R3: Rich Description Token Grammar Dedupe
 

@@ -6,16 +6,9 @@ import type {
   AwakenerTalentRecord,
   DerivedSkillRecord,
 } from './awakener-source-schema'
+import type {PublicV3UpgradeEntry} from './public-v3-awakener-record-adapters'
 
-export interface PublicRecordUpgrade {
-  id?: string
-  upgraderId?: string
-  upgraderType?: string
-  upgraderSlot?: string
-  ownerAwakenerId?: string
-  operation?: string
-  patch?: Record<string, unknown>
-}
+export type PublicRecordUpgrade = PublicV3UpgradeEntry
 
 export interface AwakenerProfileStorySection {
   kind: 'introduction' | 'story'
