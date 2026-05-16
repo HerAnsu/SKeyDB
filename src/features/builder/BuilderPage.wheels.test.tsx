@@ -3,12 +3,9 @@ import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import './builder-page.integration-mocks'
 
-import {dbDetailStore} from '@/stores/dbDetailStore'
-
 import {BuilderPage} from './BuilderPage'
 
 afterEach(() => {
-  dbDetailStore.getState().closeAllDetails()
   vi.unstubAllGlobals()
 })
 
@@ -111,43 +108,82 @@ describe('BuilderPage wheels', () => {
         }
       })
 
-    render(<BuilderPage />)
+    try {
+      render(<BuilderPage />)
 
-    const pickerPanel = document.querySelector('[data-picker-zone="true"]')
-    expect(pickerPanel).not.toBeNull()
-    const layout = pickerPanel?.parentElement
-    expect(layout?.classList.contains('items-start')).toBe(true)
-    const pickerPanelClasses = Array.from(pickerPanel?.classList ?? [])
-    expect(pickerPanelClasses.includes('lg:h-[var(--builder-picker-shell-height)]')).toBe(true)
-    expect(pickerPanelClasses.includes('lg:min-h-[var(--builder-main-zone-height)]')).toBe(true)
-    expect(pickerPanelClasses.includes('lg:max-h-[var(--builder-picker-shell-height)]')).toBe(true)
-    expect(
-      (pickerPanel as HTMLElement | null)?.style.getPropertyValue('--builder-main-zone-height'),
-    ).toBe('604px')
-    expect(
-      (pickerPanel as HTMLElement | null)?.style.getPropertyValue('--builder-picker-shell-height'),
-    ).toBe('793px')
+      const pickerPanel = document.querySelector('[data-picker-zone="true"]')
+      expect(pickerPanel).not.toBeNull()
+      const layout = pickerPanel?.parentElement
+      expect(layout?.classList.contains('items-start')).toBe(true)
+      const pickerPanelClasses = Array.from(pickerPanel?.classList ?? [])
+      expect(pickerPanelClasses.includes('lg:h-[var(--builder-picker-shell-height)]')).toBe(true)
+      expect(pickerPanelClasses.includes('lg:min-h-[var(--builder-main-zone-height)]')).toBe(true)
+      expect(pickerPanelClasses.includes('lg:max-h-[var(--builder-picker-shell-height)]')).toBe(
+        true,
+      )
+      expect(
+        (pickerPanel as HTMLElement | null)?.style.getPropertyValue('--builder-main-zone-height'),
+      ).toBe('604px')
+      expect(
+        (pickerPanel as HTMLElement | null)?.style.getPropertyValue(
+          '--builder-picker-shell-height',
+        ),
+      ).toBe('793px')
 
-    const tabNames = [/^awakeners$/i, /^wheels$/i, /^covenants$/i, /^posses$/i] as const
-    for (const tabName of tabNames) {
-      fireEvent.click(screen.getByRole('tab', {name: tabName}))
-      const scrollContainer = document.querySelector('.builder-picker-scrollbar')
-      expect(scrollContainer).not.toBeNull()
-      expect(scrollContainer?.classList.contains('flex-1')).toBe(true)
-      expect(scrollContainer?.classList.contains('min-h-0')).toBe(true)
+      const tabNames = [/^awakeners$/i, /^wheels$/i, /^covenants$/i, /^posses$/i] as const
+      for (const tabName of tabNames) {
+        fireEvent.click(screen.getByRole('tab', {name: tabName}))
+        const scrollContainer = document.querySelector('.builder-picker-scrollbar')
+        expect(scrollContainer).not.toBeNull()
+        expect(scrollContainer?.classList.contains('flex-1')).toBe(true)
+        expect(scrollContainer?.classList.contains('min-h-0')).toBe(true)
+      }
+    } finally {
+      getBoundingClientRectSpy.mockRestore()
     }
-
-    getBoundingClientRectSpy.mockRestore()
   })
 
-  it('treats both active slot sockets as wheel slots', () => {
+  it('wires card wheel slot states and active tile controls', () => {
     render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
     fireEvent.load(screen.getByAltText(/goliath card/i))
+
+    const setWheelButtons = screen.getAllByRole('button', {name: /set wheel/i})
+    const firstUnsetWheel = setWheelButtons[0]?.closest('.wheel-tile')
+    expect(firstUnsetWheel).not.toBeNull()
+    expect(firstUnsetWheel?.querySelector('.sigil-placeholder-wheel')).not.toBeNull()
+    expect(firstUnsetWheel?.querySelector('.sigil-placeholder-remove')).toBeNull()
+    expect(firstUnsetWheel?.querySelector('.sigil-remove-x')).toBeNull()
+
     fireEvent.click(screen.getAllByRole('button', {name: /set wheel/i})[0])
     fireEvent.click(screen.getByRole('button', {name: /merciful nurturing/i}))
-    expect(screen.getAllByRole('button', {name: /edit wheel/i})[0]).toBeInTheDocument()
+
+    const editWheelButton = screen.getAllByRole('button', {name: /edit wheel/i})[0]
+    expect(editWheelButton).toBeInTheDocument()
+    const cardWheelTile = editWheelButton.closest('.wheel-tile')
+    const cardImage = cardWheelTile?.querySelector('img')
+    expect(cardImage).not.toBeNull()
+    expect(cardImage?.classList.contains('builder-card-wheel-image')).toBe(true)
+
+    const removeButton = screen.getByRole('button', {name: /remove active wheel/i})
+    expect(removeButton.closest('.wheel-tile')).toBe(cardWheelTile)
+
+    expect(cardWheelTile).toBeInstanceOf(HTMLElement)
+    if (!(cardWheelTile instanceof HTMLElement)) {
+      throw new Error('Expected populated active card wheel tile')
+    }
+    expect(
+      within(cardWheelTile).queryByTitle(/open merciful nurturing details overlay/i),
+    ).not.toBeInTheDocument()
+    expect(
+      within(cardWheelTile).queryByTitle(/open merciful nurturing database page/i),
+    ).not.toBeInTheDocument()
+
+    const wheelButton = screen.getByRole('button', {name: /merciful nurturing wheel/i})
+    const wheelTile = wheelButton.closest('.builder-picker-tile')
+    expect(wheelTile).not.toBeNull()
+    expect(wheelTile).toHaveTextContent(/in use/i)
 
     fireEvent.click(screen.getAllByRole('button', {name: /set wheel/i})[0])
     expect(screen.getByRole('searchbox')).toHaveAttribute(
@@ -156,21 +192,7 @@ describe('BuilderPage wheels', () => {
     )
   })
 
-  it('labels wheels already used in the active team inside picker', () => {
-    render(<BuilderPage />)
-
-    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
-    fireEvent.load(screen.getByAltText(/goliath card/i))
-    fireEvent.click(screen.getAllByRole('button', {name: /set wheel/i})[0])
-    fireEvent.click(screen.getByRole('button', {name: /merciful nurturing/i}))
-
-    const wheelButton = screen.getByRole('button', {name: /merciful nurturing wheel/i})
-    const wheelTile = wheelButton.closest('.builder-picker-tile')
-    expect(wheelTile).not.toBeNull()
-    expect(wheelTile).toHaveTextContent(/in use/i)
-  })
-
-  it('keeps dedicated image scale classes for picker and card wheel tiles', () => {
+  it('keeps dedicated image scale class for picker wheel tiles', () => {
     render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('tab', {name: /wheels/i}))
@@ -178,18 +200,6 @@ describe('BuilderPage wheels', () => {
     const pickerImage = pickerWheel.closest('.builder-picker-tile')?.querySelector('img')
     expect(pickerImage).not.toBeNull()
     expect(pickerImage?.classList.contains('builder-picker-wheel-image')).toBe(true)
-
-    fireEvent.click(screen.getAllByRole('tab', {name: /^awakeners$/i})[0])
-    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
-    fireEvent.load(screen.getByAltText(/goliath card/i))
-    fireEvent.click(screen.getAllByRole('button', {name: /set wheel/i})[0])
-    fireEvent.click(screen.getByRole('button', {name: /merciful nurturing/i}))
-
-    const editWheelButton = screen.getAllByRole('button', {name: /edit wheel/i})[0]
-    const cardWheelTile = editWheelButton.closest('.wheel-tile')
-    const cardImage = cardWheelTile?.querySelector('img')
-    expect(cardImage).not.toBeNull()
-    expect(cardImage?.classList.contains('builder-card-wheel-image')).toBe(true)
   })
 
   it('renders independent wheel rarity and mainstat filter controls', () => {
@@ -276,32 +286,6 @@ describe('BuilderPage wheels', () => {
     })
   })
 
-  it('uses standard plus sigil for unset wheel slots on cards', () => {
-    render(<BuilderPage />)
-
-    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
-    fireEvent.load(screen.getByAltText(/goliath card/i))
-
-    const setWheelButtons = screen.getAllByRole('button', {name: /set wheel/i})
-    const firstUnsetWheel = setWheelButtons[0]?.closest('.wheel-tile')
-    expect(firstUnsetWheel).not.toBeNull()
-    expect(firstUnsetWheel?.querySelector('.sigil-placeholder-wheel')).not.toBeNull()
-    expect(firstUnsetWheel?.querySelector('.sigil-placeholder-remove')).toBeNull()
-    expect(firstUnsetWheel?.querySelector('.sigil-remove-x')).toBeNull()
-  })
-
-  it('renders wheel remove action inside the active wheel tile', () => {
-    render(<BuilderPage />)
-
-    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
-    fireEvent.load(screen.getByAltText(/goliath card/i))
-    fireEvent.click(screen.getAllByRole('button', {name: /set wheel/i})[0])
-    fireEvent.click(screen.getByRole('button', {name: /merciful nurturing/i}))
-
-    const removeButton = screen.getByRole('button', {name: /remove active wheel/i})
-    expect(removeButton.closest('.wheel-tile')).not.toBeNull()
-  })
-
   it('assigns wheel to first empty slot when awakener card is active', () => {
     render(<BuilderPage />)
 
@@ -328,28 +312,5 @@ describe('BuilderPage wheels', () => {
     expect(screen.getByRole('button', {name: /remove active awakener/i})).toBeInTheDocument()
     expect(screen.getAllByRole('button', {name: /edit wheel/i})).toHaveLength(2)
     expect(screen.queryByRole('button', {name: /set wheel/i})).not.toBeInTheDocument()
-  })
-
-  it('does not render database detail shortcuts on active card wheel tiles', () => {
-    render(<BuilderPage />)
-
-    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
-    fireEvent.load(screen.getByAltText(/goliath card/i))
-    fireEvent.click(screen.getAllByRole('button', {name: /set wheel/i})[0])
-    fireEvent.click(screen.getByRole('button', {name: /merciful nurturing/i}))
-    const activeCardWheelTile = screen
-      .getByRole('button', {name: /edit wheel/i})
-      .closest('.wheel-tile')
-    expect(activeCardWheelTile).toBeInstanceOf(HTMLElement)
-    if (!(activeCardWheelTile instanceof HTMLElement)) {
-      throw new Error('Expected populated active card wheel tile')
-    }
-
-    expect(
-      within(activeCardWheelTile).queryByTitle(/open merciful nurturing details overlay/i),
-    ).not.toBeInTheDocument()
-    expect(
-      within(activeCardWheelTile).queryByTitle(/open merciful nurturing database page/i),
-    ).not.toBeInTheDocument()
   })
 })

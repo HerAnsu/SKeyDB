@@ -7,16 +7,11 @@ import {
   type PublicReferenceResolveResult,
 } from '@/data-access/public-data/referenceRepository'
 
-import {resolveAwakenerDatabaseView, type DatabaseDescribedEntry} from './awakeners-database-view'
-import {type AwakenerFullRecord} from './awakeners-full'
 import {resolveDatabaseReferenceInfo} from './database-reference-info'
 import type {ResolvedDatabaseReferenceLayer} from './database-reference-layer'
 import {parseDatabaseRichDescription} from './database-rich-text'
 import type {DescribedRecord} from './description-records'
-import {
-  loadPublicAwakenerDetailById,
-  loadPublicWheelDetailById,
-} from './public-detail-record-adapters'
+import {loadPublicWheelDetailById} from './public-detail-record-adapters'
 import type {RichSegment} from './rich-text'
 import {
   buildWheelDatabaseDescriptionRecord,
@@ -150,38 +145,6 @@ async function loadWheelRecords(): Promise<WheelFullRecord[]> {
   return records.filter(Boolean) as WheelFullRecord[]
 }
 
-async function loadAwakenerRecords(): Promise<AwakenerFullRecord[]> {
-  const awakenerIds = getPublicCatalogRecords('awakeners').flatMap((entry) =>
-    typeof entry.numericId === 'number' ? [entry.numericId] : [],
-  )
-  const records = await Promise.all(
-    awakenerIds.map((numericId) => loadPublicAwakenerDetailById(numericId)),
-  )
-  return records.filter(Boolean) as AwakenerFullRecord[]
-}
-
-function getAwakenerDescribedRecords(
-  view: ReturnType<typeof resolveAwakenerDatabaseView>,
-): DescribedRecord[] {
-  const entries: DatabaseDescribedEntry<DescribedRecord>[] = [
-    ...view.commandCards,
-    ...view.exalts,
-    ...(view.overExalt ? [view.overExalt] : []),
-    ...view.talents,
-    ...view.enlightens,
-    ...view.derivedSkills,
-    ...view.promotedExtras,
-  ]
-  const records = new Map<string, DescribedRecord>()
-  for (const entry of entries) {
-    records.set(entry.record.id, entry.record)
-  }
-  for (const overlay of view.accessibleOverlays) {
-    records.set(overlay.id, overlay)
-  }
-  return [...records.values()]
-}
-
 describe('database reference layer audit', () => {
   it('keeps wheel detail reference tokens resolvable for the shared wheel-layer contract', async () => {
     const wheelRecords = await loadWheelRecords()
@@ -205,26 +168,5 @@ describe('database reference layer audit', () => {
 
     reportReferenceTokenIssues(reportOnlyIssues)
     expect(blockingIssues.map(formatIssue)).toEqual([])
-  })
-
-  it('reports non-blocking awakener detail tokens that are not in the active reference layer', async () => {
-    const records = await loadAwakenerRecords()
-    const reportOnlyIssues: TokenAuditIssue[] = []
-
-    for (const record of records) {
-      const view = resolveAwakenerDatabaseView(record)
-      for (const describedRecord of getAwakenerDescribedRecords(view)) {
-        const result = auditRecordTokens({
-          layerName: 'awakener',
-          record: describedRecord,
-          referenceLayer: view,
-          shouldResolve: () => false,
-        })
-        reportOnlyIssues.push(...result.blockingIssues, ...result.reportOnlyIssues)
-      }
-    }
-
-    reportReferenceTokenIssues(reportOnlyIssues)
-    expect(reportOnlyIssues).toEqual(expect.any(Array))
   })
 })

@@ -6,43 +6,36 @@ import './builder-page.integration-mocks'
 import {BuilderPage} from './BuilderPage'
 
 describe('BuilderPage quick lineup', () => {
-  it('starts quick team lineup and moves between quick-lineup steps with next and back controls', () => {
+  it('wires quick-lineup navigation, picker tabs, and persistent focus through visible UI', () => {
     render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /quick team lineup/i}))
     expect(screen.getByText(/step 1 \/ 17: awakener 1/i)).toBeInTheDocument()
+
     fireEvent.click(screen.getByRole('button', {name: /next/i}))
 
     expect(screen.getByText(/step 5 \/ 17: awakener 2/i)).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', {name: /back/i}))
     expect(screen.getByText(/step 1 \/ 17: awakener 1/i)).toBeInTheDocument()
-  })
-
-  it('switches the picker to wheels and covenants as quick lineup advances after assigning an awakener', () => {
-    render(<BuilderPage />)
-
-    fireEvent.click(screen.getByRole('button', {name: /quick team lineup/i}))
 
     fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
     expect(screen.getByRole('button', {name: /change goliath/i})).toBeInTheDocument()
     expect(screen.queryByRole('button', {name: /remove active awakener/i})).not.toBeInTheDocument()
     expect(screen.getByRole('tab', {name: /^wheels$/i})).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByText(/goliath - wheel 1/i)).toBeInTheDocument()
+
+    fireEvent.pointerDown(document.body)
+
+    expect(screen.getByText(/goliath - wheel 1/i)).toBeInTheDocument()
+    expect(screen.getByRole('tab', {name: /^wheels$/i})).toHaveAttribute('aria-selected', 'true')
 
     fireEvent.click(screen.getByRole('button', {name: /next/i}))
     expect(screen.getByRole('tab', {name: /^wheels$/i})).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByText(/goliath - wheel 2/i)).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', {name: /next/i}))
     expect(screen.getByRole('tab', {name: /^covenants$/i})).toHaveAttribute('aria-selected', 'true')
     expect(screen.getByText(/goliath - covenant/i)).toBeInTheDocument()
-  })
-
-  it('returns to the previous wheel step when backing up from the covenant step during quick lineup', () => {
-    render(<BuilderPage />)
-
-    fireEvent.click(screen.getByRole('button', {name: /quick team lineup/i}))
-    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
-    fireEvent.click(screen.getByRole('button', {name: /next/i}))
-    fireEvent.click(screen.getByRole('button', {name: /next/i}))
 
     fireEvent.click(screen.getByRole('button', {name: /back/i}))
     expect(screen.getByRole('tab', {name: /^wheels$/i})).toHaveAttribute('aria-selected', 'true')
@@ -60,19 +53,6 @@ describe('BuilderPage quick lineup', () => {
 
     fireEvent.click(screen.getByRole('button', {name: /cancel quick team lineup/i}))
     expect(screen.getByRole('button', {name: /change goliath/i})).toBeInTheDocument()
-  })
-
-  it('keeps quick lineup focus when clicking outside the builder cards', () => {
-    render(<BuilderPage />)
-
-    fireEvent.click(screen.getByRole('button', {name: /quick team lineup/i}))
-    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
-    expect(screen.getByText(/goliath - wheel 1/i)).toBeInTheDocument()
-
-    fireEvent.pointerDown(document.body)
-
-    expect(screen.getByText(/goliath - wheel 1/i)).toBeInTheDocument()
-    expect(screen.getByRole('tab', {name: /^wheels$/i})).toHaveAttribute('aria-selected', 'true')
   })
 
   it('hides active wheel remove actions during quick lineup', () => {

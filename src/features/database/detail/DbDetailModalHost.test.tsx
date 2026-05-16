@@ -1,4 +1,4 @@
-import {fireEvent, render, screen, waitFor} from '@testing-library/react'
+import {act, cleanup, fireEvent, render, screen, waitFor} from '@testing-library/react'
 import {MemoryRouter, useLocation} from 'react-router-dom'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
@@ -160,12 +160,28 @@ const mockCovenantRecord: CovenantFullRecord = {
 }
 
 afterEach(() => {
-  dbDetailStore.getState().closeAllDetails()
+  cleanup()
+  closeAllDetailsInAct()
   vi.mocked(dbDetailRegistry.awakener.loadRecord).mockResolvedValue(mockAwakenerRecord)
   vi.mocked(dbDetailRegistry.wheel.loadRecord).mockResolvedValue(mockWheelRecord)
   vi.mocked(dbDetailRegistry.posse.loadRecord).mockResolvedValue(mockPosseRecord)
   vi.mocked(dbDetailRegistry.covenant.loadRecord).mockResolvedValue(mockCovenantRecord)
 })
+
+function openDetailInAct(
+  detail: Parameters<ReturnType<typeof dbDetailStore.getState>['openDetail']>[0],
+  source: Parameters<ReturnType<typeof dbDetailStore.getState>['openDetail']>[1],
+) {
+  act(() => {
+    dbDetailStore.getState().openDetail(detail, source)
+  })
+}
+
+function closeAllDetailsInAct() {
+  act(() => {
+    dbDetailStore.getState().closeAllDetails()
+  })
+}
 
 function LocationProbe() {
   const location = useLocation()
@@ -193,7 +209,7 @@ describe('DbDetailModalHost overlay entries', () => {
       </MemoryRouter>,
     )
 
-    dbDetailStore.getState().openDetail({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
+    openDetailInAct({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
 
     expect(await screen.findByRole('dialog', {name: /goliath details/i})).toBeInTheDocument()
     expect(screen.getByText('Active tab: overview')).toBeInTheDocument()
@@ -225,7 +241,7 @@ describe('DbDetailModalHost overlay entries', () => {
       </MemoryRouter>,
     )
 
-    dbDetailStore.getState().openDetail({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
+    openDetailInAct({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
     fireEvent.click(await screen.findByRole('button', {name: /refer wheel/i}))
 
     expect(
@@ -257,7 +273,7 @@ describe('DbDetailModalHost overlay entries', () => {
       </MemoryRouter>,
     )
 
-    dbDetailStore.getState().openDetail({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
+    openDetailInAct({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
 
     expect(await screen.findByText('Active tab: overview')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', {name: /show skills tab/i}))
@@ -287,7 +303,7 @@ describe('DbDetailModalHost overlay entries', () => {
       </MemoryRouter>,
     )
 
-    dbDetailStore.getState().openDetail({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
+    openDetailInAct({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
 
     await waitFor(() => {
       expect(dbDetailStore.getState().stack).toEqual([])
@@ -314,9 +330,7 @@ describe('DbDetailModalHost overlay entries', () => {
       </MemoryRouter>,
     )
 
-    dbDetailStore
-      .getState()
-      .openDetail({kind: 'relic', id: 'relic-0001'} as never, 'builder-overlay')
+    openDetailInAct({kind: 'relic', id: 'relic-0001'} as never, 'builder-overlay')
 
     await waitFor(() => {
       expect(dbDetailStore.getState().stack).toEqual([])

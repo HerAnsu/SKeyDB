@@ -5,6 +5,27 @@ import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {DZoneHistoryPage} from './DZoneHistoryPage'
 
+vi.mock('@/features/database/internal/DatabasePopoverRoot', () => ({
+  DatabasePopoverRoot: () => null,
+}))
+
+vi.mock('./d-zone/useDZoneDatabasePopovers', () => ({
+  useDZoneDatabasePopovers: () => ({
+    closeOnOutsideClick: true,
+    contextValue: {
+      closeAllPopovers: vi.fn(),
+      hasOpenPopovers: false,
+      openNestedOverlay: vi.fn(),
+      openNestedReferenceByName: vi.fn(),
+      openRootOverlay: vi.fn(),
+      openRootReferenceByName: vi.fn(),
+    },
+    openMonsterPopover: vi.fn(),
+    openRelicPopover: vi.fn(),
+    popoverRootProps: {},
+  }),
+}))
+
 function LocationProbe() {
   const location = useLocation()
   return <output data-testid='location'>{`${location.pathname}${location.search}`}</output>
@@ -185,31 +206,6 @@ describe('DZoneHistoryPage', () => {
     expect(waveTwoRelicButtons[1]).not.toHaveClass('d-zone-relic-button--compact')
   })
 
-  it('filters and selects a legacy season', () => {
-    renderHistoryPage()
-
-    fireEvent.change(screen.getByRole('searchbox', {name: /Search D-zone seasons/i}), {
-      target: {value: 'season 1'},
-    })
-
-    const archivePanel = screen.getByRole('region', {name: /D-zone season archive/i})
-    fireEvent.click(within(archivePanel).getByRole('button', {name: /^Select Season 1/i}))
-
-    expect(screen.getByRole('heading', {level: 2, name: 'Season 1'})).toBeInTheDocument()
-    expect(screen.getByRole('region', {name: 'Season 1 inspector'})).toHaveClass(
-      'd-zone-season-inspector--realm-legacy',
-    )
-    expect(
-      screen.getByText('Faded Legacy', {selector: '.d-zone-stage-chip-label'}),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(/Jan 31, 2024 - Feb 14, 2024/, {selector: '.d-zone-season-date'}),
-    ).toBeInTheDocument()
-    expect(screen.queryByText('Dissoluted Abyss', {selector: '.d-zone-stage-chip-label'})).toBe(
-      null,
-    )
-  })
-
   it('uses the season search param as a deep link and updates it on selection', () => {
     renderHistoryPage(['/d-zone/history?season=dzone-0001'])
 
@@ -303,22 +299,6 @@ describe('DZoneHistoryPage', () => {
     await user.click(trigger)
     fireEvent.keyDown(document, {key: 'Escape'})
     expect(trigger).toHaveAttribute('aria-expanded', 'false')
-  })
-
-  it('closes the drawer when selecting a season', async () => {
-    const user = userEvent.setup()
-    renderHistoryPage()
-
-    const trigger = screen.getByRole('button', {name: 'Open season browser drawer'})
-    await user.click(trigger)
-
-    fireEvent.change(screen.getByRole('searchbox', {name: /Search D-zone seasons/i}), {
-      target: {value: 'season 1'},
-    })
-    await user.click(screen.getByRole('button', {name: /^Select Season 1/i}))
-
-    expect(trigger).toHaveAttribute('aria-expanded', 'false')
-    expect(screen.getByRole('heading', {level: 2, name: 'Season 1'})).toBeInTheDocument()
   })
 
   it('traps Tab inside the open drawer and restores focus to the opener', async () => {

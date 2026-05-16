@@ -1,7 +1,9 @@
+import {act, cleanup} from '@testing-library/react'
 import {afterEach, beforeEach, vi} from 'vitest'
 
 import {createEmptyCollectionOwnershipState} from '@/domain/collection-ownership'
 import {collectionOwnershipStore} from '@/stores/collectionOwnershipStore'
+import {dbDetailStore} from '@/stores/dbDetailStore'
 
 import {BUILDER_PERSISTENCE_KEY} from './builder-persistence'
 
@@ -235,6 +237,10 @@ beforeEach(() => {
 })
 
 afterEach(() => {
+  cleanup()
+  act(() => {
+    dbDetailStore.getState().closeAllDetails()
+  })
   window.localStorage.removeItem(BUILDER_PERSISTENCE_KEY)
   collectionOwnershipStore.getState().replaceOwnership(createEmptyCollectionOwnershipState())
 })

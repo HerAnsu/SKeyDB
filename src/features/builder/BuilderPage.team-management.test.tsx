@@ -91,7 +91,7 @@ describe('BuilderPage team management', () => {
     expect(screen.queryByRole('dialog', {name: /move taverns opening/i})).not.toBeInTheDocument()
   })
 
-  it('deletes empty team without showing confirmation dialog', () => {
+  it('handles empty team delete and reset without showing confirmation dialogs', () => {
     const {container} = render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /\+ add team/i}))
@@ -102,23 +102,21 @@ describe('BuilderPage team management', () => {
     fireEvent.click(deleteButton)
     expect(screen.queryByRole('dialog', {name: /delete team 2/i})).not.toBeInTheDocument()
     expect(container.querySelector('[data-team-name="Team 2"]')).toBeNull()
-  })
-
-  it('resets empty team immediately without showing confirmation dialog', () => {
-    const {container} = render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /\+ add team/i}))
-    const team2Row = container.querySelector('[data-team-name="Team 2"]')
-    expect(team2Row).not.toBeNull()
+    const recreatedTeam2Row = container.querySelector('[data-team-name="Team 2"]')
+    expect(recreatedTeam2Row).not.toBeNull()
 
-    const resetButton = within(team2Row as HTMLElement).getByRole('button', {name: /reset/i})
+    const resetButton = within(recreatedTeam2Row as HTMLElement).getByRole('button', {
+      name: /reset/i,
+    })
     fireEvent.click(resetButton)
 
     expect(screen.queryByRole('dialog', {name: /reset team 2/i})).not.toBeInTheDocument()
     expect(container.querySelector('[data-team-name="Team 2"]')).not.toBeNull()
   })
 
-  it('requires centered confirm and cancel before deleting a non-empty team', () => {
+  it('requires confirmation before deleting or resetting a non-empty team', () => {
     const {container} = render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /\+ add team/i}))
@@ -147,19 +145,15 @@ describe('BuilderPage team management', () => {
 
     fireEvent.click(screen.getByRole('button', {name: /delete team/i}))
     expect(container.querySelector('[data-team-name="Team 2"]')).toBeNull()
-  })
-
-  it('requires confirmation before resetting a non-empty team', () => {
-    const {container} = render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /\+ add team/i}))
     fireEvent.click(screen.getByRole('tab', {name: /^team 2$/i}))
     fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
     expect(screen.getByRole('button', {name: /change goliath/i})).toBeInTheDocument()
 
-    const team2Row = container.querySelector('[data-team-name="Team 2"]')
-    expect(team2Row).not.toBeNull()
-    fireEvent.click(within(team2Row as HTMLElement).getByRole('button', {name: /reset/i}))
+    const recreatedTeam2Row = container.querySelector('[data-team-name="Team 2"]')
+    expect(recreatedTeam2Row).not.toBeNull()
+    fireEvent.click(within(recreatedTeam2Row as HTMLElement).getByRole('button', {name: /reset/i}))
 
     expect(screen.getByRole('dialog', {name: /reset team 2/i})).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', {name: /reset team/i}))
@@ -167,7 +161,7 @@ describe('BuilderPage team management', () => {
     expect(screen.queryByRole('button', {name: /change goliath/i})).not.toBeInTheDocument()
   })
 
-  it('renames team inline and confirms with Enter', () => {
+  it('handles inline team rename confirm, cancel, and blur flows', () => {
     const {container} = render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /\+ add team/i}))
@@ -180,36 +174,30 @@ describe('BuilderPage team management', () => {
     fireEvent.keyDown(renameInput, {key: 'Enter', code: 'Enter'})
 
     expect(container.querySelector('[data-team-name="Arena Team"]')).not.toBeNull()
-  })
-
-  it('cancels inline team rename on Escape', () => {
-    const {container} = render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /\+ add team/i}))
-    const team2Row = container.querySelector('[data-team-name="Team 2"]')
-    expect(team2Row).not.toBeNull()
+    const recreatedTeam2Row = container.querySelector('[data-team-name="Team 2"]')
+    expect(recreatedTeam2Row).not.toBeNull()
 
-    fireEvent.click(within(team2Row as HTMLElement).getByRole('button', {name: /rename team 2/i}))
-    const renameInput = screen.getByRole('textbox', {name: /team name/i})
-    fireEvent.change(renameInput, {target: {value: 'Temp Name'}})
-    fireEvent.keyDown(renameInput, {key: 'Escape', code: 'Escape'})
+    fireEvent.click(
+      within(recreatedTeam2Row as HTMLElement).getByRole('button', {name: /rename team 2/i}),
+    )
+    const cancelInput = screen.getByRole('textbox', {name: /team name/i})
+    fireEvent.change(cancelInput, {target: {value: 'Temp Name'}})
+    fireEvent.keyDown(cancelInput, {key: 'Escape', code: 'Escape'})
 
     expect(container.querySelector('[data-team-name="Team 2"]')).not.toBeNull()
     expect(container.querySelector('[data-team-name="Temp Name"]')).toBeNull()
-  })
-
-  it('confirms inline team rename when clicking outside the input', () => {
-    const {container} = render(<BuilderPage />)
 
     fireEvent.click(screen.getByRole('button', {name: /\+ add team/i}))
-    const team2Row = container.querySelector('[data-team-name="Team 2"]')
-    expect(team2Row).not.toBeNull()
+    const team3Row = container.querySelector('[data-team-name="Team 3"]')
+    expect(team3Row).not.toBeNull()
 
-    fireEvent.click(within(team2Row as HTMLElement).getByRole('button', {name: /rename team 2/i}))
-    const renameInput = screen.getByRole('textbox', {name: /team name/i})
-    fireEvent.change(renameInput, {target: {value: 'Click Away Team'}})
+    fireEvent.click(within(team3Row as HTMLElement).getByRole('button', {name: /rename team 3/i}))
+    const blurInput = screen.getByRole('textbox', {name: /team name/i})
+    fireEvent.change(blurInput, {target: {value: 'Click Away Team'}})
     fireEvent.pointerDown(document.body)
-    fireEvent.blur(renameInput)
+    fireEvent.blur(blurInput)
 
     expect(container.querySelector('[data-team-name="Click Away Team"]')).not.toBeNull()
   })
