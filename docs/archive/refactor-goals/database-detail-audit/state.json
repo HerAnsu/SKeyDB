@@ -1,7 +1,7 @@
 {
   "version": 1,
   "slug": "database-detail-audit",
-  "status": "active",
+  "status": "completed",
   "created": "2026-05-16",
   "updated": "2026-05-17",
   "intake": {
@@ -43,8 +43,8 @@
     {
       "name": "src/features/database/**",
       "status": "done",
-      "evidence": ["S1 database React scout"],
-      "next": "Implemented C1, C2, C3, and C9; C7 superseded by the existing popover model seam unless a concrete controller defect appears."
+      "evidence": ["S1 database React scout", "S3 earlier-commit root-fix audit"],
+      "next": "Implemented C1, C2, C3, C7, C9, C11, C12, and C13."
     },
     {
       "name": "public detail record adapters/resolvers",
@@ -56,13 +56,13 @@
       "name": "rich text/reference rendering",
       "status": "done",
       "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R3", "S1 rich/reference scout"],
-      "next": "Implemented C2, C3, C6, and C9."
+      "next": "Implemented C2, C3, C6, C9, C12, and C13."
     },
     {
       "name": "popover/detail modal/tab controller flows",
       "status": "done",
       "evidence": ["S1 database React scout", "S1 prior ledger scout"],
-      "next": "Implemented C1; C7 superseded by the existing popover model seam unless a concrete nested-open/hydration/trail defect appears."
+      "next": "Implemented C1 and C7; C10 remains out of scope by user."
     },
     {
       "name": "direct database/detail collection scans",
@@ -1535,7 +1535,7 @@
           "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/database-detail-audit"
         ],
         "risks": [
-          "Full pre-commit suite pending for this slice commit."
+          "Full pre-commit suite passed in commit ba74604."
         ],
         "followups_not_done": [],
         "learning_lint_candidates": [],
@@ -1544,18 +1544,19 @@
     }
   ],
   "final_audit": {
-    "full_outcome_complete": false,
-    "summary": "Completion-quality reconciliation reopened and implemented C7 because the prior superseded rationale did not cite an implemented change that fully removed the popover controller hook/action smell. C1, C2, C3, C4, C5, C6, C7, C8, and C9 are implemented; prior P1-P4 slices remain protected implemented work. The earlier-commit root-fix audit is still pending, including the named browse-controller recomputation and rich rendering fallback/popover branch findings. No builder, collection, broad visual redesign, package, or app shell work is included.",
+    "full_outcome_complete": true,
+    "summary": "Completion-quality pass is complete for the requested domain/database/detail scope. The earlier-commit root-fix audit reopened and implemented C7, added the omitted browse-controller recomputation as C11, added the omitted rich popover fallback branch as C12, and added the retained rich overlay list-scan fallback as C13. P1-P4 and C1-C9 were reconciled as implemented prior/root-fix work, C10 is out_of_scope_by_user, C11-C13 are implemented, and M1 is out_of_scope_by_user because scanner command hygiene is outside the requested product refactor and harness edits are protected. No builder, collection, broad visual redesign, package, or unrelated app shell work is included.",
     "validation": [
       "Each implementation slice passed targeted tests, typecheck, formatting, and diff checks before commit.",
       "Each committed slice passed pre-commit verification: lint, test:bounded, test:scripts, and build:quiet.",
-      "Latest full pre-commit verification after W8 passed 186 test files / 1234 tests plus script tests and build:quiet."
+      "Latest full pre-commit verification after W11 passed 186 test files / 1236 tests plus script tests and build:quiet.",
+      "Final reconciliation found no active tasks and no candidates in not_started, queued, or mapped status."
     ],
     "open_items": [
       {
-        "id": "C7",
-        "status": "implemented",
-        "reason": "Implemented by W9; the public controller hook now delegates trail state/action/hydration/projection work to a focused trail-actions seam with cross-controller ownership characterization."
+        "id": "C10",
+        "status": "out_of_scope_by_user",
+        "reason": "Database entity tabs are top-level database navigation rather than the requested detail/modal/popover/controller hardening, and prior scout found no actionable detail-flow smell."
       },
       {
         "id": "M1",

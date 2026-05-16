@@ -1,5 +1,7 @@
 # Refactor Goal: database-detail-audit
 
+Archived: completed on 2026-05-17. This packet is historical and is no longer a live refactor goal.
+
 ## Intake
 
 Status:
@@ -37,7 +39,7 @@ This local Refactor Discipline goal uses:
 Run:
 
 ```text
-node C:\Users\dansa\.codex\plugins\cache\refactor-discipline-local\refactor-discipline\0.4.3\skills\refactor-goal-prep\scripts\check-refactor-goal.mjs --goal docs/refactor-goals/database-detail-audit
+node C:\Users\dansa\.codex\plugins\cache\refactor-discipline-local\refactor-discipline\0.4.3\skills\refactor-goal-prep\scripts\check-refactor-goal.mjs --goal docs/archive/refactor-goals/database-detail-audit
 ```
 
 after editing packet files.
@@ -47,7 +49,7 @@ after editing packet files.
 | Focus area | Status | Evidence | Next task or terminal reason |
 |---|---|---|---|
 | `src/domain` database/detail/reference layers | done | S1/S2; commits `f2c6d57`, `d9a4da4`, `a76a6e9`, `88f2f3a` | Implemented C4, C5, C6, C8 |
-| `src/features/database/**` | active | S1/S2/S3; commits `88aa9e5`, `5e3ecae`, `1e97410`, `71cc332`, `b190fe6`, `cf7ef7c` | C11 implemented in W11; C12/C13 implemented |
+| `src/features/database/**` | done | S1/S2/S3; commits `88aa9e5`, `5e3ecae`, `1e97410`, `71cc332`, `b190fe6`, `cf7ef7c`, `ba74604` | C11/C12/C13 implemented |
 | Public detail record adapters/resolvers | done | Prior R1/R2 plus S1; commits `8197a13`, `d6b74af`, `223c6d1`, `f2c6d57`, `d9a4da4`, `88f2f3a` | Terminal implemented |
 | Rich text/reference rendering | done | Prior R3 plus S1/S2/S3; commits `0db9f80`, `5e3ecae`, `1e97410`, `a76a6e9`, `71cc332`, `cf7ef7c` | C12/C13 implemented |
 | Popover/detail modal/tab controller flows | done | S1/S2; commits `88aa9e5`, `b190fe6` | C7 implemented |

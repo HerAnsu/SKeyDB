@@ -1,5 +1,7 @@
 # Refactor Goal Worklog: database-detail-audit
 
+Archived: completed on 2026-05-17. This worklog is historical and is no longer a live refactor goal.
+
 ## Entries
 
 ### 2026-05-16 - Goal packet created
@@ -9,7 +11,7 @@
 - Active task: `S1` focused domain/database/detail audit, using four low-reasoning scout subagents.
 - Validation: packet checker queued after files are created.
 - Notes: complexity/performance scanners were run as hints; outputs included stale `.worktrees/awakener-builds-guide` paths and must be filtered to current source scope.
-- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/database-detail-audit/goal.md.`
+- Next prompt at the time: `$refactor-goal-prep Continue docs/refactor-goals/database-detail-audit/goal.md.`
 
 ### 2026-05-16 - Scout reconciliation and first slice selection
 
@@ -215,4 +217,12 @@
 - Behavior preserved: invalid query params are still sanitized, global search still targets only the active entity and disables while detail is open, and detail open/close/tab routes keep their search behavior.
 - Refactor review: pass. Hook calls now live in real active entity components; no builder, collection, package, app shell, broad visual redesign, or route-shell changes.
 - Validation: route/browse targeted tests passed with 38 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed.
-- Next: run targeted lint/format/diff/packet checks and commit W11.
+- Validation continued: targeted ESLint passed; Prettier check passed; `git add -N src/features/database/browse/EntityBrowseViews.tsx; git diff --check` passed; packet checker passed.
+- Commit: `ba74604 refactor: render active database browse only`. Pre-commit ran lint, `test:bounded` (186 files / 1236 tests), script tests, and `build:quiet`.
+
+### 2026-05-17 - Final refactor review
+
+- Candidate reconciliation: no candidates remain `not_started`, `queued`, or `mapped`. P1-P4, C1-C9, and C11-C13 are implemented; C10 is `out_of_scope_by_user`; M1 is `out_of_scope_by_user`.
+- Earlier-commit root-fix audit result: C7, C11, C12, and C13 are the corrected terminal outcomes from the stricter audit. C7 was reopened and implemented, C11 was implemented as the active entity browse split, and C12/C13 were implemented as the rich rendering fallback slice.
+- Refactor review: pass. The final branch stays inside domain/database/detail TypeScript + React scope, avoids builder/collection/package/app-shell churn, removes source-shape smells rather than hardening around them, and keeps characterization through targeted route/rich/controller tests plus full pre-commit validation.
+- Final validation evidence: W11 commit `ba74604` passed lint, `test:bounded` (186 files / 1236 tests), script tests, and `build:quiet`.
