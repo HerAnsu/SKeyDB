@@ -47,10 +47,10 @@ after editing packet files.
 | Focus area | Status | Evidence | Next task or terminal reason |
 |---|---|---|---|
 | `src/domain` database/detail/reference layers | done | S1/S2; commits `f2c6d57`, `d9a4da4`, `a76a6e9`, `88f2f3a` | Implemented C4, C5, C6, C8 |
-| `src/features/database/**` | active | S1/S2/S3; commits `88aa9e5`, `5e3ecae`, `1e97410`, `71cc332`, `b190fe6`; W10 pending commit | C11 queued; C12/C13 implemented |
+| `src/features/database/**` | active | S1/S2/S3; commits `88aa9e5`, `5e3ecae`, `1e97410`, `71cc332`, `b190fe6`, `cf7ef7c` | C11 implemented in W11; C12/C13 implemented |
 | Public detail record adapters/resolvers | done | Prior R1/R2 plus S1; commits `8197a13`, `d6b74af`, `223c6d1`, `f2c6d57`, `d9a4da4`, `88f2f3a` | Terminal implemented |
-| Rich text/reference rendering | done | Prior R3 plus S1/S2/S3; commits `0db9f80`, `5e3ecae`, `1e97410`, `a76a6e9`, `71cc332`; W10 pending commit | C12/C13 implemented |
-| Popover/detail modal/tab controller flows | done | S1/S2; commit `88aa9e5`; W9 pending commit | C7 implemented |
+| Rich text/reference rendering | done | Prior R3 plus S1/S2/S3; commits `0db9f80`, `5e3ecae`, `1e97410`, `a76a6e9`, `71cc332`, `cf7ef7c` | C12/C13 implemented |
+| Popover/detail modal/tab controller flows | done | S1/S2; commits `88aa9e5`, `b190fe6` | C7 implemented |
 | Direct database/detail collection scans | done | S1/S2; commits `88aa9e5`, `5e3ecae`, `1e97410`, `f2c6d57`, `a76a6e9` | Terminal implemented for scoped database/detail scans |
 
 Terminal statuses: `implemented`, `blocked`, `out_of_scope_by_user`, `superseded`.
@@ -70,11 +70,11 @@ Non-terminal statuses: `not_started`, `queued`, `mapped`.
 | C4 public owned child record index | S1 | implemented | public detail adapters/tests | commit `f2c6d57` | Terminal implemented |
 | C5 patched awakener resolver narrowing | S1 | implemented | full resolver/tests | commit `d9a4da4` | Terminal implemented |
 | C6 reference-layer accumulator/reuse | S1/S2 | implemented | database reference layers/tests | commit `a76a6e9` | Terminal implemented |
-| C7 popover controller hook split for hydration/trail actions | S1/S2 | implemented | `useDatabasePopoverController`, `useDatabasePopoverTrailActions`, controller tests | 2026-05-17 review rejected prior superseded rationale; W9 pending commit | Terminal implemented |
+| C7 popover controller hook split for hydration/trail actions | S1/S2 | implemented | `useDatabasePopoverController`, `useDatabasePopoverTrailActions`, controller tests | 2026-05-17 review rejected prior superseded rationale; commit `b190fe6` | Terminal implemented |
 | C8 public V3 child schema unknown fields | S1 | implemented | public V3 adapters/tests | commit `88f2f3a` | Terminal implemented |
 | C9 RichSegmentRenderer component split | S1 | implemented | renderer split files/tests | commit `71cc332` | Terminal implemented |
 | C10 Database entity tabs | S1/S2 | out_of_scope_by_user | `DatabaseEntityTabs` | Top-level database navigation, not detail/modal/popover/controller hardening; prior scout found no actionable detail-flow smell | Terminal outside requested scope |
-| C11 browse controller inactive entity recomputation | S3 | queued | `useEntityBrowseController`, browse registry/page/tests | Omitted React scout finding; initializes all entity states/view models regardless of active entity | Queue after W10 |
+| C11 browse controller inactive entity recomputation | S3 | implemented | `useEntityBrowseController`, `EntityBrowseViews`, browse registry/page/tests | Omitted React scout finding; controller initialized all entity states/view models regardless of active entity | Terminal implemented |
 | C12 popover description-section fallback duplication | S3 | implemented | `DatabaseReferencePopover`, tests | Omitted rich rendering scout finding; top-level and section fallback branches duplicate template/fallback construction | Terminal implemented |
 | C13 rich segment overlay list fallback | S3 | implemented | rich segment renderer/tokens/content/tests | Caller audit found production rendering comes through `DatabaseRichTextContent` with `overlayByName`; overlays-list fallback is a compatibility fossil | Terminal implemented |
 

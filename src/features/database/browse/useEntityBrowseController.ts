@@ -1,8 +1,7 @@
-import {useEffect, useMemo, useRef} from 'react'
+import {useEffect, useRef} from 'react'
 
 import type {NavigateFunction} from 'react-router-dom'
 
-import {searchCovenants} from '@/domain/covenants-search'
 import {buildDatabaseEntityBrowsePath, type DatabaseEntityId} from '@/domain/database-entity-paths'
 import {sanitizeDatabaseEntitySearch} from '@/domain/database-entity-search'
 import {
@@ -11,24 +10,8 @@ import {
   buildDatabasePossePath,
   buildDatabaseWheelPath,
 } from '@/domain/database-paths'
-import {searchPosses} from '@/domain/posses-search'
-import {
-  buildAwakenerActiveFilterChips,
-  buildCovenantActiveFilterChips,
-  buildPosseActiveFilterChips,
-  buildWheelActiveFilterChips,
-} from '@/features/database/internal/database-active-filter-chips'
-import {useDatabaseViewModel} from '@/features/database/internal/useDatabaseViewModel'
-import {useWheelsDatabaseViewModel} from '@/features/database/internal/useWheelsDatabaseViewModel'
-import {useGlobalSearchCapture} from '@/ui/search/useGlobalSearchCapture'
 
 import {databaseAwakeners, databaseCovenants, databasePosses, databaseWheels} from '../data'
-import {useDatabaseBrowseState} from './useDatabaseBrowseState'
-import {
-  useCovenantDatabaseBrowseState,
-  usePosseDatabaseBrowseState,
-} from './useSimpleArtifactDatabaseBrowseState'
-import {useWheelsDatabaseBrowseState} from './useWheelsDatabaseBrowseState'
 
 interface UseEntityBrowseControllerOptions {
   activeEntity: DatabaseEntityId
@@ -38,7 +21,9 @@ interface UseEntityBrowseControllerOptions {
   navigate: NavigateFunction
 }
 
-interface EntitySearchActions {
+type ActiveEntitySearchControlOptions = Omit<UseEntityBrowseControllerOptions, 'isDetailOpen'>
+
+export interface EntitySearchActions {
   appendSearchCharacter: (character: string) => void
   clearQuery: () => void
   removeSearchCharacter: () => void
@@ -65,14 +50,10 @@ function createOpenDetailHandler<TEntry extends {id: string}>(
 
 function useActiveEntitySearchControls({
   activeEntity,
-  isDetailOpen,
   locationPathname,
   locationSearch,
   navigate,
-  searchActionsByEntity,
-}: UseEntityBrowseControllerOptions & {
-  searchActionsByEntity: Record<DatabaseEntityId, EntitySearchActions>
-}) {
+}: ActiveEntitySearchControlOptions) {
   const searchInputRef = useRef<HTMLInputElement | null>(null)
   const activeSearch = sanitizeDatabaseEntitySearch(activeEntity, locationSearch)
   const browsePath = buildDatabaseEntityBrowsePath(activeEntity)
@@ -91,16 +72,6 @@ function useActiveEntitySearchControls({
     )
   }, [activeSearch, locationPathname, locationSearch, navigate])
 
-  const activeSearchActions = searchActionsByEntity[activeEntity]
-
-  useGlobalSearchCapture({
-    enabled: !isDetailOpen,
-    searchInputRef,
-    onAppendCharacter: activeSearchActions.appendSearchCharacter,
-    onRemoveCharacter: activeSearchActions.removeSearchCharacter,
-    onClearSearch: activeSearchActions.clearQuery,
-  })
-
   return {
     activeSearch,
     browsePath,
@@ -115,35 +86,11 @@ export function useEntityBrowseController({
   locationSearch,
   navigate,
 }: UseEntityBrowseControllerOptions) {
-  const awakeners = useDatabaseBrowseState()
-  const awakenerViewModel = useDatabaseViewModel(databaseAwakeners, awakeners)
-  const wheels = useWheelsDatabaseBrowseState()
-  const wheelViewModel = useWheelsDatabaseViewModel(databaseWheels, wheels)
-  const posses = usePosseDatabaseBrowseState()
-  const covenants = useCovenantDatabaseBrowseState()
-  const filteredPosses = useMemo(() => {
-    const searched = searchPosses(databasePosses, posses.query)
-    return posses.realmFilter === 'ALL'
-      ? searched
-      : searched.filter((posse) => posse.realm === posses.realmFilter)
-  }, [posses.query, posses.realmFilter])
-  const filteredCovenants = useMemo(
-    () => searchCovenants(databaseCovenants, covenants.query),
-    [covenants.query],
-  )
-  const searchActionsByEntity = {
-    awakeners: awakeners,
-    wheels,
-    posses,
-    covenants,
-  }
   const {activeSearch, browsePath, searchInputRef} = useActiveEntitySearchControls({
     activeEntity,
-    isDetailOpen,
     locationPathname,
     locationSearch,
     navigate,
-    searchActionsByEntity,
   })
 
   const openAwakenerDetail = createOpenDetailHandler(
@@ -179,43 +126,8 @@ export function useEntityBrowseController({
     activeEntity,
     activeSearch,
     browsePath,
+    isDetailOpen,
     searchInputRef,
-    awakeners: {
-      state: awakeners,
-      viewModel: awakenerViewModel,
-      activeFilterChips: buildAwakenerActiveFilterChips(awakeners, {
-        clearQuery: awakeners.clearQuery,
-        setRealmFilter: awakeners.setRealmFilter,
-        setRarityFilter: awakeners.setRarityFilter,
-        setTypeFilter: awakeners.setTypeFilter,
-        setAvailabilityFilter: awakeners.setAvailabilityFilter,
-      }),
-    },
-    wheels: {
-      state: wheels,
-      viewModel: wheelViewModel,
-      activeFilterChips: buildWheelActiveFilterChips(wheels, {
-        clearQuery: wheels.clearQuery,
-        setRealmFilter: wheels.setRealmFilter,
-        setRarityFilter: wheels.setRarityFilter,
-        setMainstatFilter: wheels.setMainstatFilter,
-      }),
-    },
-    posses: {
-      state: posses,
-      records: filteredPosses,
-      activeFilterChips: buildPosseActiveFilterChips(posses, {
-        clearQuery: posses.clearQuery,
-        setRealmFilter: posses.setRealmFilter,
-      }),
-    },
-    covenants: {
-      state: covenants,
-      records: filteredCovenants,
-      activeFilterChips: buildCovenantActiveFilterChips(covenants, {
-        clearQuery: covenants.clearQuery,
-      }),
-    },
     openAwakenerDetail,
     openWheelDetail,
     openPosseDetail,

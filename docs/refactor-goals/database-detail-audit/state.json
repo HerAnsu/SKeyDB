@@ -249,9 +249,10 @@
       "id": "C11",
       "title": "Browse controller recomputes inactive entity state and view models",
       "source_task": "S3",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/features/database/browse/useEntityBrowseController.ts",
+        "src/features/database/browse/EntityBrowseViews.tsx",
         "src/features/database/browse/entityBrowseRegistry.tsx",
         "src/features/database/DatabasePage.tsx",
         "src/features/database/DatabaseRoutes.test.tsx",
@@ -261,7 +262,7 @@
         "React scout finding was omitted from the prior register.",
         "useEntityBrowseController currently initializes awakener, wheel, posse, and covenant browse states/view models regardless of activeEntity and returns all entity sections/chips."
       ],
-      "next": "Queued for implementation after W10 rich rendering leftovers."
+      "next": "Implemented by W11 in the active-entity browse split."
     },
     {
       "id": "C12",
@@ -1278,7 +1279,7 @@
           "git diff --check"
         ],
         "risks": [
-          "Full pre-commit suite pending for this slice commit."
+          "Full pre-commit suite passed in commit cf7ef7c."
         ],
         "followups_not_done": [
           "Earlier-commit root-fix audit, including browse-controller entity-state recomputation and rich rendering fallback/popover section branch findings."
@@ -1429,11 +1430,114 @@
           "git diff --check"
         ],
         "risks": [
+          "Full pre-commit suite passed in commit cf7ef7c."
+        ],
+        "followups_not_done": [],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J11",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose active-entity browse controller root-fix slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Select the implementation shape for C11 after the earlier-commit audit.",
+      "receipt": {
+        "decision": "C11 selected as W11 because the current browse controller initializes all entity browse states and expensive view models before rendering only one active entity.",
+        "root_fix": "Keep the top-level controller responsible for URL/search/detail navigation only, and move entity-specific browse state, view-model derivation, filter chips, and global search capture into active entity browse components.",
+        "validation": [
+          "npm test -- --run src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "git diff --check"
+        ]
+      }
+    },
+    {
+      "id": "W11",
+      "role": "worker",
+      "status": "done",
+      "title": "Render only active entity browse state and view model",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/browse/useEntityBrowseController.ts",
+        "src/features/database/browse/EntityBrowseViews.tsx",
+        "src/features/database/browse/entityBrowseRegistry.tsx",
+        "src/features/database/DatabasePage.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/browse/useDatabaseBrowseState.test.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/goal.md",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Refactor the browse controller/registry so inactive entity browse state and view models are not initialized, preserve route search sanitization/global search/detail navigation behavior, run targeted route/browse tests/typecheck/diff checks, and record receipt.",
+      "receipt": {
+        "slice": "Render only active entity browse state and view model",
+        "files_changed": [
+          "src/features/database/browse/useEntityBrowseController.ts",
+          "src/features/database/browse/EntityBrowseViews.tsx",
+          "src/features/database/browse/entityBrowseRegistry.tsx"
+        ],
+        "what_got_simpler": [
+          "The top-level entity browse controller now coordinates only URL sanitization, shared search ref, browse path, detail navigation, and detail-open state.",
+          "Awakener, wheel, posse, and covenant browse state/view-model/filter-chip work now lives in the active entity browse component that actually renders.",
+          "Global search capture is bound to the mounted entity browse state instead of requiring a controller-wide search-actions map."
+        ],
+        "behavior_preserved": [
+          "Active entity search params are still sanitized and replaced on invalid routes.",
+          "Global search still updates the active entity search box and remains disabled while a detail modal is open.",
+          "Entity tab switching, detail open paths, detail close paths, and route fallback behavior are preserved."
+        ],
+        "current_complexity": "Before: useEntityBrowseController initialized all four entity browse states, awakener/wheel view models, simple-artifact filtered lists, filter chips, and a per-entity action map before rendering one active entity.",
+        "expected_complexity_after": "After: useEntityBrowseController no longer imports or calls any entity-specific browse-state or view-model hook; each active browse component owns its own state and derived records.",
+        "root_fix_patch_decision": "Root-fix slice selected because the recomputation smell came from the controller boundary itself. Moving the whole active entity concept into mounted components removes the source shape instead of memoizing or guarding inactive calculations.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; existing route and browse-state tests cover the behavior-preserving split.",
+        "validation": [
+          "npm test -- --run src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/browse/useEntityBrowseController.ts src/features/database/browse/EntityBrowseViews.tsx src/features/database/browse/entityBrowseRegistry.tsx",
+          "npx prettier --check src/features/database/browse/useEntityBrowseController.ts src/features/database/browse/EntityBrowseViews.tsx src/features/database/browse/entityBrowseRegistry.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/browse/useEntityBrowseController.ts src/features/database/browse/EntityBrowseViews.tsx src/features/database/browse/entityBrowseRegistry.tsx",
+          "npx prettier --check src/features/database/browse/useEntityBrowseController.ts src/features/database/browse/EntityBrowseViews.tsx src/features/database/browse/entityBrowseRegistry.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git add -N src/features/database/browse/EntityBrowseViews.tsx; git diff --check",
+          "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/database-detail-audit"
+        ],
+        "risks": [
           "Full pre-commit suite pending for this slice commit."
         ],
-        "followups_not_done": [
-          "C11 browse-controller inactive entity recomputation."
-        ],
+        "followups_not_done": [],
         "learning_lint_candidates": [],
         "scope_expansion_requested": false
       }

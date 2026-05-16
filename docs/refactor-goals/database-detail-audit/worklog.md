@@ -195,4 +195,24 @@
 - Simplification: popover entry/section fallback text now shares one builder; rich token overlay resolution is map-only; `DatabaseRichTextContent` no longer derives/passes an overlay array for renderer compatibility.
 - Refactor review: pass. This removes the old fallback/compatibility paths rather than hardening around them; no builder, collection, package, app shell, or broad visual redesign changes.
 - Validation: targeted rich rendering tests passed with 46 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; targeted ESLint passed; Prettier check passed; `git diff --check` passed.
+- Commit: `cf7ef7c refactor: resolve rich rendering fallbacks`. Pre-commit ran lint, `test:bounded` (186 files / 1236 tests), script tests, and `build:quiet`.
 - Next: implement C11 browse-controller inactive entity recomputation.
+
+### 2026-05-17 - W11 selected
+
+- Judge decision: selected C11 because `useEntityBrowseController` initializes awakeners, wheels, posses, and covenants browse states plus expensive awakener/wheel view models before `renderEntityBrowse` renders only the active entity branch.
+- Active task: W11 render only active entity browse state and view model.
+- Root-fix shape: keep the top-level controller responsible for URL/search/detail navigation only, and move entity-specific browse state, view-model derivation, filter chips, and global search capture into active entity browse components.
+- Characterization: existing route tests cover search sanitization, global-search capture, entity tab switching, detail open/close, and deep-link fallback behavior; add focused coverage only if the split exposes an unpinned behavior.
+- Validation planned: `npm test -- --run src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx --pool=forks --maxWorkers=1`, `npx tsc -p tsconfig.app.json --noEmit --pretty false`, targeted ESLint/Prettier, `git diff --check`, packet checker.
+
+### 2026-05-17 - W11 implemented and reviewed
+
+- Slice: active entity browse rendering.
+- Files changed: `useEntityBrowseController.ts`, `EntityBrowseViews.tsx`, `entityBrowseRegistry.tsx`.
+- Simplification: `useEntityBrowseController` now owns only URL/search sanitization, shared search input ref, browse path, detail-open state, and detail navigation callbacks. Entity-specific browse state, view-model derivation, filter chips, filtered records, and global search capture moved into the mounted active entity browse component.
+- Root-fix decision: root fix. This removes the controller-wide all-entity state/action map and inactive view-model work instead of adding memo guards around inactive branches.
+- Behavior preserved: invalid query params are still sanitized, global search still targets only the active entity and disables while detail is open, and detail open/close/tab routes keep their search behavior.
+- Refactor review: pass. Hook calls now live in real active entity components; no builder, collection, package, app shell, broad visual redesign, or route-shell changes.
+- Validation: route/browse targeted tests passed with 38 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed.
+- Next: run targeted lint/format/diff/packet checks and commit W11.
