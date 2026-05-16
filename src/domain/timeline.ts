@@ -11,15 +11,20 @@ export interface BannerPoolSlot {
   linked?: boolean
 }
 
-export type BannerType =
-  | 'awaken'
-  | 'limited'
-  | 'standard'
-  | 'rerun'
-  | 'selector'
-  | 'wheel'
-  | 'combo'
-export type BannerTag = BannerType | 'collab' | 'preliminary'
+export const BANNER_TYPES = [
+  'awaken',
+  'limited',
+  'standard',
+  'rerun',
+  'selector',
+  'wheel',
+  'combo',
+  'premium',
+] as const
+export type BannerType = (typeof BANNER_TYPES)[number]
+
+export const BANNER_TAGS = [...BANNER_TYPES, 'collab', 'preliminary'] as const
+export type BannerTag = (typeof BANNER_TAGS)[number]
 
 export interface BannerEntry {
   id: string
@@ -31,7 +36,9 @@ export interface BannerEntry {
   featured?: BannerFeaturedUnit[]
   poolSlots?: BannerPoolSlot[]
   customArt?: string
+  customTags?: string[]
   pinned?: boolean
+  pricing?: string
   startDate: string
   endDate: string
 }
@@ -46,10 +53,12 @@ export const EVENT_CATEGORIES = [
   'login',
   'skin',
   'wheel-event',
+  'anniversary',
+  'milestone',
   'preorder',
-  'maintenance',
-  'campaign',
+  'bundle',
   'collab',
+  'maintenance',
   'other',
 ] as const
 
@@ -63,12 +72,14 @@ export const EVENT_CATEGORY_PRIORITY: Record<EventCategory, number> = {
   skin: 50,
   curriculum: 60,
   'wheel-event': 70,
-  login: 80,
-  preorder: 90,
-  battlepass: 100,
-  campaign: 110,
-  collab: 120,
-  maintenance: 130,
+  anniversary: 80,
+  milestone: 90,
+  login: 100,
+  preorder: 110,
+  battlepass: 120,
+  bundle: 130,
+  collab: 140,
+  maintenance: 150,
   other: 999,
 }
 
@@ -298,6 +309,12 @@ export function sortEventsByRelevance(events: EventEntry[], now?: Date): EventEn
     }
     if (statusA === 'ended') {
       return new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
+    }
+    if (statusA === 'upcoming') {
+      const startDateDiff = new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+      if (startDateDiff !== 0) {
+        return startDateDiff
+      }
     }
     const catPriorityA = EVENT_CATEGORY_PRIORITY[a.category ?? 'other']
     const catPriorityB = EVENT_CATEGORY_PRIORITY[b.category ?? 'other']

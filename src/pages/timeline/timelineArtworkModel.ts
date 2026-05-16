@@ -29,6 +29,8 @@ export function resolveFeaturedAssets(featured: BannerFeaturedUnit[]): SliceAsse
 export function resolvePoolSlots(poolSlots: BannerPoolSlot[]): ResolvedVisualSlot[] {
   const visual: ResolvedVisualSlot[] = []
   poolSlots.forEach((slot, frameIdx) => {
+    if (slot.pool.length === 0) return
+
     visual.push({
       assets: slot.pool.map((unit) => resolveTimelineFeaturedAsset(unit)),
       cycleFrameIndex: frameIdx,

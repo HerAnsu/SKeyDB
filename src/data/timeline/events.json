@@ -145,7 +145,7 @@
     "id": "event-wheel-private-afternoon",
     "title": "WoD Archives: L'Heure du Thé",
     "category": "wheel-event",
-    "description": "Limited-time WoD wheel acquisition event featuring \"Private Afternoon\". \n Complete various tasks to obtain 4 copies & 25 Pure Cores. \n Premium track: Grants +12 copies & 25 Luminous Cores.",
+    "description": "Limited-time WoD wheel acquisition event featuring \"Private Afternoon\".\n Complete various tasks to obtain 4 copies & 25 Pure Cores. \n Premium track: Grants +12 copies & 25 Luminous Cores.",
     "startDate": "2026/04/20 09:00",
     "endDate": "2026/05/18 09:00",
     "featured": "Private Afternoon",
@@ -156,7 +156,7 @@
     "id": "event-story-rerun-great-conquering",
     "title": "The Great Conquering",
     "category": "gameplay-event",
-    "description": "Gameplay event featuring Agrippa and Uvhash. \n Earn Scrips, Aetheric Shards, Dreamshards, Mimetic Crystals and more.",
+    "description": "Gameplay event featuring Agrippa and Uvhash.\n Earn Scrips, Aetheric Shards, Dreamshards, Mimetic Crystals and more.",
     "startDate": "2026/05/04 09:00",
     "endDate": "2026/05/18 09:00",
     "featured": ["Agrippa", "Uvhash"],
@@ -165,24 +165,110 @@
   },
   {
     "id": "event-campaign-half-anniversary",
-    "title": "2.5th Anniversary Celebration",
-    "category": "campaign",
-    "description": "Announced anniversary rewards include \"Ethereal Core\" x250 and SSR Limited Awakener \"Saya\".\nReward source, timing and exact distribution details are still pending confirmation.",
+    "title": "To the Stars",
+    "category": "anniversary",
+    "description": "2.5th Anniversary commemorative login event.\n Log in daily to claim up to 16 copies of the limited SSR Wheel \"To the Star\".",
     "startDate": "2026/05/18 09:00",
-    "endDate": "2026/06/27 09:00",
-    "customArt": "/events/2-5-anniversary.webp",
-    "pinned": true,
-    "preliminary": true
+    "endDate": "2026/06/29 09:00",
+    "customArt": "/events/to-the-star.webp"
   },
   {
-    "id": "event-collab-saya-no-uta",
-    "title": "Saya no Uta Collaboration",
-    "category": "collab",
-    "description": "A wandering seed, crossing the boundaries between worlds, taking root and blooming across the barren earth... multiplying.\n*\"This is... where a new world begins.\"*\nGameplay stages, drops and event structure are still pending confirmation.",
-    "startDate": "2026/05/30 09:00",
-    "endDate": "2026/06/27 09:00",
+    "id": "event-dreamy-rendezvous",
+    "title": "Dreamy Rendezvous",
+    "category": "anniversary",
+    "description": "2.5th Anniversary mission event. \n Complete tasks to claim Awakener \"Saya\" and 250 Ethereal Cores.\n Premium Archives: Additional 250 Ethereal Cores, Gnosis Primers, 1 Rebirth Core and more.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/29 09:00",
+    "customArt": "/events/dreamy-rendezvous.webp",
+    "pricing": "3980 Silver Prime",
+    "pinned": true
+  },
+  {
+    "id": "event-meowch-obliged",
+    "title": "Meowch Obliged!",
+    "category": "anniversary",
+    "description": "Capture Dimension Black Cats, complete personal goals and contribute to the global campus goal. \n Rewards include 10k Silver, Formless Ones' Invitations and Gnosis materials.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/15 09:00",
+    "customArt": "/events/meowch-obliged.webp"
+  },
+  {
+    "id": "event-wheel-blossom-court",
+    "title": "WoD Archives: Blossom Court",
+    "category": "wheel-event",
+    "description": "Limited-time WoD wheel acquisition event featuring \"Sakura Reveries\". \n Complete various tasks to obtain 4 copies & 25 Pure Cores. \n Premium track: Grants +12 copies & 25 Luminous Cores.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/15 09:00",
+    "customArt": "/events/sakura-reveries.webp",
+    "pricing": "980 Silver Prime"
+  },
+  {
+    "id": "event-curated-gift-boxes",
+    "title": "Curated Gift Boxes",
+    "category": "bundle",
+    "description": "Limited avatar gift boxes: \"Ode in Embers\" and \"Celestial Accord\". \n Each box includes 10 Formless Ones' Invitations, 1 Prototype Horizon and 1 Timeloop Copy. \n Each gift box costs 1980 Silver Prime and can be purchased once.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/29 09:00",
+    "customArt": "/events/curated-gift-boxes.webp",
+    "pricing": "1980 Silver Prime"
+  },
+  {
+    "id": "event-dreamy-offering",
+    "title": "Dreamy Offering",
+    "category": "milestone",
+    "description": "Special Awakening mission event. \n Complete 1000 Awakens during the event to claim up to 1000 Dreamsparks.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/08/24 09:00",
+    "customArt": "/events/dreamy-offering.webp"
+  },
+  {
+    "id": "event-preorder-memories-eternal",
+    "title": "Pre-order \"Memories Eternal\"",
+    "category": "preorder",
+    "description": "Saya preorder mission track. \n30 Luminous Cores, 20k Silver, 1 Prototype Horizon, 1 Timeloop and more. \n Purchase before May 30th to obtain the \"Bon Appetite\" avatar and 10 Formless Ones' Invitations.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/29 09:00",
     "customArt": "/events/saya-collab.webp",
-    "pinned": true,
-    "preliminary": true
+    "pricing": "1980 Silver Prime"
+  },
+  {
+    "id": "event-stream-of-infatuation",
+    "title": "Stream of Infatuation",
+    "category": "milestone",
+    "description": "Limited-time Silver Prime reward event. \n Spend up to 30k Silver Prime to claim the \"Sprout of Love\" avatar frame, Astral Reign Awakener and WoD selectors.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/29 09:00",
+    "customArt": "/events/stream-of-infatuation.webp"
+  },
+  {
+    "id": "event-skin-hameln",
+    "title": "Ouverture Universell",
+    "category": "skin",
+    "description": "Complete tasks to unlock the \"Ouverture Universell\" skin for Hameln for free. \n After the event ends, \"Hameln: Ouverture Universell\" will be available in Garment Ordering for 680 Silver Prime.",
+    "startDate": "2026/06/15 09:00",
+    "endDate": "2026/06/29 09:00",
+    "featured": "Hameln",
+    "customArt": "/events/hameln-skin.webp",
+    "pricing": "Free"
+  },
+  {
+    "id": "event-story-rerun-invisible-symphony",
+    "title": "Invisible Symphony",
+    "category": "gameplay-event",
+    "description": "Gameplay and story event rerun featuring Hameln. \n Obtain SR-Wheel \"Never-Ending Performance\", limited avatar \"By the Silver Key: Hameln\", Rose Scrips and more.",
+    "startDate": "2026/06/15 09:00",
+    "endDate": "2026/07/13 09:00",
+    "featured": "Hameln",
+    "rerun": true
+  },
+  {
+    "id": "event-story-saya",
+    "title": "Inverted Rebirth",
+    "category": "gameplay-event",
+    "description": "Gameplay event featuring the limited collab awakener Saya. \n Obtain SR-Wheel \"Muddied Fairy Tale\", limited avatar \"By the Silver Key: Saya\", Scrips, Dreamsparks and more.",
+    "startDate": "2026/05/30 09:00",
+    "endDate": "2026/08/24 09:00",
+    "customArt": "/events/saya-event.webp",
+    "pinned": true
   }
 ]

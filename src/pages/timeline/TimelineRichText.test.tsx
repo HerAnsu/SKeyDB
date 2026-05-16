@@ -21,4 +21,17 @@ describe('TimelineRichText', () => {
     )
     expect(screen.getByText(/<em>raw<\/em>/)).toBeInTheDocument()
   })
+
+  it('can render embedded Silver Prime prices as estimated dollars', () => {
+    render(
+      <p>
+        <TimelineRichText
+          priceMode='usd-estimate'
+          text='Each gift box costs 1980 Silver Prime. Tiers: 680-1280 Silver Prime.'
+        />
+      </p>,
+    )
+
+    expect(screen.getByText('Each gift box costs ~$30. Tiers: ~$12-20.')).toBeInTheDocument()
+  })
 })

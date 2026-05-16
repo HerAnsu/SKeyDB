@@ -1,6 +1,8 @@
 import {describe, expect, it} from 'vitest'
 
-import {timelineBanners, timelineEvents} from './timeline-data'
+import rawBanners from '@/data/timeline/banners.json'
+
+import {loadTimelineBanners, timelineBanners, timelineEvents} from './timeline-data'
 
 describe('timeline data loading', () => {
   it('loads split event featured entries and opt-out detail links', () => {
@@ -14,39 +16,247 @@ describe('timeline data loading', () => {
   })
 
   it('loads anniversary and collab placeholder surfaces', () => {
-    const halfAnniversary = timelineEvents.find(
+    const anniversaryLogin = timelineEvents.find(
       (event) => event.id === 'event-campaign-half-anniversary',
     )
-    const collabEvent = timelineEvents.find((event) => event.id === 'event-collab-saya-no-uta')
+    const dreamyRendezvous = timelineEvents.find((event) => event.id === 'event-dreamy-rendezvous')
+    const collabEvent = timelineEvents.find((event) => event.id === 'event-story-saya')
     const collabBanner = timelineBanners.find((banner) => banner.id === 'banner-saya-no-uta-collab')
 
-    expect(halfAnniversary).toMatchObject({
-      category: 'campaign',
-      endDate: '2026-06-27T01:00:00.000Z',
+    expect(anniversaryLogin).toMatchObject({
+      category: 'anniversary',
+      endDate: '2026-06-29T01:00:00.000Z',
       startDate: '2026-05-18T01:00:00.000Z',
+      title: 'To the Stars',
+    })
+    expect(dreamyRendezvous).toMatchObject({
+      category: 'anniversary',
+      pricing: '3980 Silver Prime',
+      title: 'Dreamy Rendezvous',
     })
     expect(collabEvent).toMatchObject({
-      category: 'collab',
+      category: 'gameplay-event',
+      endDate: '2026-08-24T01:00:00.000Z',
       startDate: '2026-05-30T01:00:00.000Z',
-      title: 'Saya no Uta Collaboration',
+      title: 'Inverted Rebirth',
     })
     expect(collabBanner).toMatchObject({
       customArt: expect.stringContaining('saya-collab-prelim'),
-      preliminary: true,
+      endDate: '2026-08-24T01:00:00.000Z',
+      pinned: true,
       startDate: '2026-05-30T01:00:00.000Z',
-      tags: ['limited', 'collab', 'preliminary'],
-      title: 'Saya no Uta Collab',
-      type: 'limited',
+      tags: ['awaken', 'collab'],
+      title: 'Sprout of Liebestod / Alien Crypsela',
+      type: 'awaken',
     })
     expect(collabBanner?.featured).toBeUndefined()
-    expect(halfAnniversary?.customArt).toContain('2-5-anniversary')
-    expect(halfAnniversary?.preliminary).toBe(true)
-    expect(halfAnniversary?.description).toContain('Ethereal Core')
-    expect(halfAnniversary?.description).toContain('pending confirmation')
-    expect(collabEvent?.customArt).toContain('saya-collab')
-    expect(collabEvent?.preliminary).toBe(true)
-    expect(collabEvent?.description).toContain('*"This is... where a new world begins."*')
-    expect(collabEvent?.description).toContain('Gameplay stages')
-    expect(collabBanner?.description).toContain('likely featuring Saya')
+    expect(anniversaryLogin?.customArt).toContain('to-the-star')
+    expect(dreamyRendezvous?.customArt).toContain('dreamy-rendezvous')
+    expect(collabEvent?.customArt).toContain('saya-event')
+    expect(collabBanner?.preliminary).toBeUndefined()
+  })
+
+  it('derives Stars in Full Bloom premium pools by limited SSR awakener type', () => {
+    const assault = timelineBanners.find(
+      (banner) => banner.id === 'banner-stars-in-full-bloom-assault',
+    )
+    const warden = timelineBanners.find(
+      (banner) => banner.id === 'banner-stars-in-full-bloom-warden',
+    )
+    const chorus = timelineBanners.find(
+      (banner) => banner.id === 'banner-stars-in-full-bloom-chorus',
+    )
+
+    expect([assault, warden, chorus].map((banner) => banner?.title)).toEqual([
+      'Stars in Full Bloom',
+      'Stars in Full Bloom',
+      'Stars in Full Bloom',
+    ])
+    expect(assault).toMatchObject({
+      customTags: ['Assault'],
+      pricing: 'USD 29.99',
+      type: 'premium',
+    })
+    expect(warden).toMatchObject({
+      customTags: ['Warden'],
+      pricing: 'USD 29.99',
+      type: 'premium',
+    })
+    expect(chorus).toMatchObject({
+      customTags: ['Chorus'],
+      pricing: 'USD 29.99',
+      type: 'premium',
+    })
+
+    expect(assault?.poolSlots?.[0]?.pool.map((unit) => unit.name)).toEqual([
+      '24',
+      'Daffodil',
+      'Doresain',
+      'Kathigu-Ra',
+      'Mouchette',
+      'Pollux',
+      'Sorel',
+      'Tulu',
+      'Vortice',
+    ])
+    expect(assault?.poolSlots?.[2]?.pool.map((unit) => unit.name)).toEqual([
+      'By Rose Alone',
+      'Kiss of Repose',
+      'Aberrant Devour',
+      'Amber-Tinted Death',
+      'Doomsday Rampage',
+      'Treasured Rarity',
+      'Twisted Knight Ballad',
+      'Hymn of the Sovereign',
+      'The Faraway Eden',
+    ])
+    expect(warden?.poolSlots?.[0]?.pool).toHaveLength(6)
+    expect(warden?.poolSlots?.[2]?.pool).toHaveLength(6)
+    expect(chorus?.poolSlots?.[0]?.pool).toHaveLength(10)
+    expect(chorus?.poolSlots?.[2]?.pool).toHaveLength(10)
+    expect(assault?.poolSlots).toHaveLength(4)
+    expect(assault?.poolSlots?.[1]?.pool).toEqual(assault?.poolSlots?.[0]?.pool)
+    expect(assault?.poolSlots?.[3]?.pool).toEqual(assault?.poolSlots?.[2]?.pool)
+  })
+
+  it('derives Kaleido Recollections pools from limited availability groups', () => {
+    const faded = timelineBanners.find((banner) => banner.id === 'banner-moonless-guide')
+    const astral = timelineBanners.find(
+      (banner) => banner.id === 'banner-kaleido-recollections-astral-reign',
+    )
+
+    expect(faded?.poolSlots).toHaveLength(4)
+    expect(faded?.poolSlots?.slice(0, 3).map((slot) => slot.pool.length)).toEqual([14, 14, 14])
+    expect(faded?.poolSlots?.[3]?.pool).toHaveLength(14)
+    expect(faded?.poolSlots?.[0]?.pool.map((unit) => unit.name)).toContain('Tulu')
+    expect(faded?.poolSlots?.[3]?.pool.map((unit) => unit.name)).toContain('Hymn of the Sovereign')
+
+    expect(astral?.poolSlots).toHaveLength(4)
+    expect(astral?.poolSlots?.slice(0, 3).map((slot) => slot.pool.length)).toEqual([11, 11, 11])
+    expect(astral?.poolSlots?.[3]?.pool).toHaveLength(11)
+    expect(astral?.poolSlots?.[0]?.pool.map((unit) => unit.name)).toContain('Arachne')
+    expect(astral?.poolSlots?.[3]?.pool.map((unit) => unit.name)).toContain('Eternal Weave')
+  })
+
+  it('derives Echoing Wishes as linked limited awakener and wheel pairs', () => {
+    const echoingWishes = timelineBanners.find((banner) => banner.id === 'banner-echoing-wishes')
+    const rawEchoingWishes = rawBanners.find((banner) => banner.id === 'banner-echoing-wishes')
+
+    expect(echoingWishes?.poolSlots).toHaveLength(1)
+    expect(echoingWishes).toMatchObject({
+      customTags: ['Daily'],
+      tags: undefined,
+      type: 'combo',
+    })
+    expect(echoingWishes?.poolSlots?.[0]?.linked).toBe(true)
+    expect(rawEchoingWishes?.derivedPool).toMatchObject({excludeNames: ['Saya']})
+    expect(echoingWishes?.poolSlots?.[0]?.pool.map((unit) => unit.name)).toContain('Arachne')
+    expect(echoingWishes?.poolSlots?.[0]?.pool.map((unit) => unit.name)).toContain('Tulu')
+    expect(echoingWishes?.poolSlots?.[0]?.pool.map((unit) => unit.name)).not.toContain('Saya')
+    expect(echoingWishes?.poolSlots?.[0]?.pool.every((unit) => unit.kind === 'awakener')).toBe(true)
+  })
+
+  it('normalizes derived pool filters and applies exclusions to existing units', () => {
+    const [normalizedBanner, baselineBanner] = loadTimelineBanners([
+      {
+        id: 'test-derived-pool',
+        title: 'Test Derived Pool',
+        type: 'combo',
+        startDate: '2026/05/18 09:00',
+        endDate: '2026/06/15 09:00',
+        derivedPool: {
+          availabilityTypes: [' limited_astral_reign '],
+          excludeNames: ['Arachne'],
+          linkedPairs: true,
+        },
+      },
+      {
+        id: 'test-derived-pool-baseline',
+        title: 'Test Derived Pool Baseline',
+        type: 'combo',
+        startDate: '2026/05/18 09:00',
+        endDate: '2026/06/15 09:00',
+        derivedPool: {
+          availabilityTypes: ['LIMITED_ASTRAL_REIGN'],
+          linkedPairs: true,
+        },
+      },
+    ])
+
+    const normalizedNames = normalizedBanner.poolSlots?.[0]?.pool.map((unit) => unit.name)
+    const baselineNames = baselineBanner.poolSlots?.[0]?.pool.map((unit) => unit.name)
+
+    expect(normalizedNames).toEqual(baselineNames?.filter((name) => name !== 'Arachne'))
+    expect(normalizedNames).not.toContain('Arachne')
+    expect(normalizedNames?.length).toBeGreaterThan(0)
+  })
+
+  it('rejects ambiguous or empty derived banner pools', () => {
+    expect(() =>
+      loadTimelineBanners([
+        {
+          id: 'test-ambiguous-pool',
+          title: 'Test Ambiguous Pool',
+          type: 'combo',
+          startDate: '2026/05/18 09:00',
+          endDate: '2026/06/15 09:00',
+          poolSlots: [{pool: ['Arachne']}],
+          derivedPool: {
+            availabilityTypes: ['LIMITED_ASTRAL_REIGN'],
+            linkedPairs: true,
+          },
+        },
+      ]),
+    ).toThrow(/either poolSlots or derivedPool/i)
+
+    expect(() =>
+      loadTimelineBanners([
+        {
+          id: 'test-empty-derived-pool',
+          title: 'Test Empty Pool',
+          type: 'combo',
+          startDate: '2026/05/18 09:00',
+          endDate: '2026/06/15 09:00',
+          derivedPool: {
+            availabilityTypes: ['LIMITED_NOT_REAL'],
+            linkedPairs: true,
+          },
+        },
+      ]),
+    ).toThrow(/empty linked pool/i)
+  })
+
+  it('loads Song of Perennial Wandering Hameln rerun teasers', () => {
+    const skin = timelineEvents.find((event) => event.id === 'event-skin-hameln')
+    const rerunEvent = timelineEvents.find(
+      (event) => event.id === 'event-story-rerun-invisible-symphony',
+    )
+    const triune = timelineBanners.find((banner) => banner.id === 'banner-triune-verdant-jun')
+    const sylvan = timelineBanners.find((banner) => banner.id === 'banner-sylvan-omen-jun')
+
+    expect(skin).toMatchObject({
+      category: 'skin',
+      endDate: '2026-06-29T01:00:00.000Z',
+      pricing: 'Free',
+      startDate: '2026-06-15T01:00:00.000Z',
+      title: 'Ouverture Universell',
+    })
+    expect(skin?.featured?.map((unit) => unit.name)).toEqual(['Hameln'])
+    expect(skin?.customArt).toContain('hameln-skin')
+    expect(rerunEvent).toMatchObject({
+      category: 'gameplay-event',
+      endDate: '2026-07-13T01:00:00.000Z',
+      rerun: true,
+      startDate: '2026-06-15T01:00:00.000Z',
+      title: 'Invisible Symphony',
+    })
+    expect(rerunEvent?.featured?.map((unit) => unit.name)).toEqual(['Hameln'])
+    expect(triune?.featured?.map((unit) => unit.name)).toEqual(['Hameln', 'Murphy', 'Clementine'])
+    expect(sylvan?.featured?.map((unit) => unit.name)).toEqual([
+      'Eternal Requiem',
+      'Shrouded Birth',
+      'Veiled Anguish',
+    ])
+    expect([triune?.type, sylvan?.type]).toEqual(['rerun', 'rerun'])
   })
 })

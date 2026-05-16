@@ -8,6 +8,7 @@ import {
   type EventCategory,
   type EventEntry,
 } from '@/domain/timeline'
+import {formatTimelinePrice, type TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 
 import {EventDescriptionPreview, EventDescriptionShelf} from './EventDescription'
 import {resolveTimelineFeaturedAsset} from './timelineDetailResolution'
@@ -23,14 +24,26 @@ const CATEGORY_LABEL: Record<EventCategory, string> = {
   login: 'Login',
   skin: 'Skin',
   'wheel-event': 'Wheel',
+  anniversary: 'Anniversary',
+  milestone: 'Milestone',
   preorder: 'Preorder',
+  bundle: 'Bundle',
   maintenance: 'Maintenance',
-  campaign: 'Campaign',
   collab: 'Collab',
   other: 'Event',
 }
 
-type EventMetaTone = 'amber' | 'blue' | 'orange' | 'price' | 'red' | 'slate' | 'teal' | 'violet'
+type EventMetaTone =
+  | 'amber'
+  | 'blue'
+  | 'champagne'
+  | 'gold'
+  | 'orange'
+  | 'price'
+  | 'red'
+  | 'slate'
+  | 'teal'
+  | 'violet'
 type EventMetaRole = 'awakener' | 'price' | 'rerun' | 'wheel'
 
 const CATEGORY_TONE: Record<EventCategory, EventMetaTone> = {
@@ -43,9 +56,11 @@ const CATEGORY_TONE: Record<EventCategory, EventMetaTone> = {
   login: 'teal',
   skin: 'violet',
   'wheel-event': 'blue',
+  anniversary: 'teal',
+  milestone: 'gold',
   preorder: 'orange',
+  bundle: 'champagne',
   maintenance: 'slate',
-  campaign: 'teal',
   collab: 'violet',
   other: 'amber',
 }
@@ -84,6 +99,8 @@ function getEventMetaToneClass(tone: EventMetaTone, isEnded: boolean): string {
   const toneClass: Record<EventMetaTone, string> = {
     amber: 'timeline-event-meta--amber',
     blue: 'timeline-event-meta--blue',
+    champagne: 'timeline-event-meta--champagne',
+    gold: 'timeline-event-meta--gold',
     orange: 'timeline-event-meta--orange',
     price: 'timeline-event-meta--price',
     red: 'timeline-event-meta--red',
@@ -220,6 +237,7 @@ function EventTaxonomyLine({
   detailTargets,
   isEnded,
   onOpenDetail,
+  priceMode,
   pricing,
   preliminary,
   rerun,
@@ -228,10 +246,12 @@ function EventTaxonomyLine({
   detailTargets: EventDetailTarget[]
   isEnded: boolean
   onOpenDetail?: (ref: EntityRef) => void
+  priceMode: TimelinePriceDisplayMode
   pricing?: string
   preliminary?: boolean
   rerun?: boolean
 }) {
+  const displayPricing = formatTimelinePrice(pricing, priceMode)
   const meta: {key: string; element: ReactNode; primary?: boolean}[] = [
     {
       key: 'category',
@@ -279,12 +299,12 @@ function EventTaxonomyLine({
     })
   })
 
-  if (pricing) {
+  if (displayPricing) {
     meta.push({
       key: 'pricing',
       element: (
         <EventMetaText isEnded={isEnded} tone={ROLE_TONE.price}>
-          {pricing}
+          {displayPricing}
         </EventMetaText>
       ),
     })
@@ -309,9 +329,10 @@ interface EventCardProps {
   event: EventEntry
   now?: Date
   onOpenDetail?: (ref: EntityRef) => void
+  priceMode?: TimelinePriceDisplayMode
 }
 
-export function EventCard({event, now, onOpenDetail}: EventCardProps) {
+export function EventCard({event, now, onOpenDetail, priceMode = 'silver-prime'}: EventCardProps) {
   const [descriptionOpen, setDescriptionOpen] = useState(false)
   const descriptionOpenerRef = useRef<HTMLButtonElement | null>(null)
   const status = getTimelineStatus(event.startDate, event.endDate, now)
@@ -368,6 +389,7 @@ export function EventCard({event, now, onOpenDetail}: EventCardProps) {
               detailTargets={featuredArt?.detailTargets ?? []}
               isEnded={isEnded}
               onOpenDetail={onOpenDetail}
+              priceMode={priceMode}
               pricing={event.pricing}
               preliminary={event.preliminary}
               rerun={event.rerun}
@@ -383,6 +405,7 @@ export function EventCard({event, now, onOpenDetail}: EventCardProps) {
               descriptionOpenerRef.current = opener
               setDescriptionOpen(true)
             }}
+            priceMode={priceMode}
           />
         </div>
       </div>
@@ -397,6 +420,7 @@ export function EventCard({event, now, onOpenDetail}: EventCardProps) {
             descriptionOpenerRef.current?.focus()
           })
         }}
+        priceMode={priceMode}
       />
     </li>
   )

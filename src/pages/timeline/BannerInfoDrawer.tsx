@@ -3,32 +3,10 @@ import {Fragment} from 'react'
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa6'
 
 import type {BannerEntry, BannerTag} from '@/domain/timeline'
+import {formatTimelinePrice, type TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 
+import {BANNER_TAG_COLOR, BANNER_TAG_LABEL, getBannerDisplayTags} from './bannerTagDisplay'
 import {TimelineRichText} from './TimelineRichText'
-
-const BANNER_TAG_LABEL: Record<BannerTag, string> = {
-  awaken: 'New Awakener',
-  limited: 'Limited',
-  standard: 'Standard',
-  rerun: 'Rerun',
-  selector: 'Selector',
-  wheel: 'Wheel',
-  combo: 'Combo',
-  collab: 'Collab',
-  preliminary: 'Preliminary',
-}
-
-const BANNER_TAG_COLOR: Record<BannerTag, string> = {
-  awaken: 'text-amber-300/95',
-  limited: 'text-sky-300/90',
-  standard: 'text-slate-400/80',
-  rerun: 'text-violet-300/90',
-  selector: 'text-pink-300/90',
-  wheel: 'text-cyan-300/90',
-  combo: 'text-emerald-300/95',
-  collab: 'text-fuchsia-300/90',
-  preliminary: 'text-amber-200/76',
-}
 
 const DRAWER_BASE_CLASS =
   'absolute inset-y-0 right-0 z-30 w-[calc(50%_+_1.75rem)] min-w-[11.75rem] max-w-[calc(100%_-_1.75rem)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
@@ -52,10 +30,7 @@ const DRAWER_TAGS_CLASS =
   'mt-2 flex min-w-0 shrink-0 flex-wrap items-center gap-x-1.5 gap-y-1 text-[0.58rem] leading-none font-bold tracking-[0.16em] uppercase'
 
 const DRAWER_DESCRIPTION_CLASS =
-  'mt-3 min-h-0 max-h-[6.75rem] overflow-hidden text-xs leading-[1.5] text-slate-400'
-
-const DRAWER_BOTTOM_FADE_CLASS =
-  'pointer-events-none absolute inset-x-0 bottom-0 z-20 h-10 bg-gradient-to-b from-transparent via-slate-950/25 to-slate-950/75'
+  'mt-3 min-h-0 max-h-[6.75rem] overflow-y-auto pr-1 text-xs leading-[1.5] text-slate-400 focus-visible:ring-2 focus-visible:ring-amber-200/35 focus-visible:outline-none database-scrollbar'
 
 interface BannerInfoDrawerProps {
   banner: BannerEntry
@@ -64,6 +39,7 @@ interface BannerInfoDrawerProps {
   isEnded: boolean
   open: boolean
   onToggle: () => void
+  priceMode?: TimelinePriceDisplayMode
 }
 
 export function BannerInfoDrawer({
@@ -73,6 +49,7 @@ export function BannerInfoDrawer({
   isEnded,
   open,
   onToggle,
+  priceMode = 'silver-prime',
 }: BannerInfoDrawerProps) {
   const drawerTransform = open ? 'translate-x-0' : 'translate-x-[calc(100%_-_1.75rem)]'
   const contentInset = canCollapse ? 'pr-4 pl-11' : 'px-5'
@@ -104,19 +81,17 @@ export function BannerInfoDrawer({
         </button>
       ) : null}
 
-      <BannerDrawerBody
-        banner={banner}
-        contentInset={contentInset}
-        countdownTitle={countdownTitle}
-        isEnded={isEnded}
-      />
+      {open || !canCollapse ? (
+        <BannerDrawerBody
+          banner={banner}
+          contentInset={contentInset}
+          countdownTitle={countdownTitle}
+          isEnded={isEnded}
+          priceMode={priceMode}
+        />
+      ) : null}
     </div>
   )
-}
-
-function getBannerDisplayTags(banner: BannerEntry): BannerTag[] {
-  if (banner.tags && banner.tags.length > 0) return banner.tags
-  return banner.preliminary ? ([banner.type, 'preliminary'] satisfies BannerTag[]) : [banner.type]
 }
 
 function BannerDrawerBody({
@@ -124,13 +99,16 @@ function BannerDrawerBody({
   contentInset,
   countdownTitle,
   isEnded,
+  priceMode,
 }: {
   banner: BannerEntry
   contentInset: string
   countdownTitle: string | undefined
   isEnded: boolean
+  priceMode: TimelinePriceDisplayMode
 }) {
   const displayTags = getBannerDisplayTags(banner)
+  const displayPricing = formatTimelinePrice(banner.pricing, priceMode)
 
   return (
     <div
@@ -144,26 +122,39 @@ function BannerDrawerBody({
           {banner.title}
         </h3>
         <div className={DRAWER_TAGS_CLASS}>
-          {displayTags.map((tag, index) => (
-            <Fragment key={tag}>
-              {index > 0 ? (
-                <span aria-hidden className={isEnded ? 'text-slate-700' : 'text-slate-600/75'}>
-                  &middot;
+          {[...displayTags, ...(banner.customTags ?? []), displayPricing]
+            .filter((tag): tag is string => Boolean(tag))
+            .map((tag, index) => (
+              <Fragment key={`${tag}-${index.toString()}`}>
+                {index > 0 ? (
+                  <span aria-hidden className={isEnded ? 'text-slate-700' : 'text-slate-600/75'}>
+                    &middot;
+                  </span>
+                ) : null}
+                <span
+                  className={
+                    isEnded
+                      ? 'text-slate-600'
+                      : tag in BANNER_TAG_COLOR
+                        ? BANNER_TAG_COLOR[tag as BannerTag]
+                        : 'text-slate-300/88'
+                  }
+                >
+                  {tag in BANNER_TAG_LABEL ? BANNER_TAG_LABEL[tag as BannerTag] : tag}
                 </span>
-              ) : null}
-              <span className={isEnded ? 'text-slate-600' : BANNER_TAG_COLOR[tag]}>
-                {BANNER_TAG_LABEL[tag]}
-              </span>
-            </Fragment>
-          ))}
+              </Fragment>
+            ))}
         </div>
         {banner.description ? (
-          <p className={DRAWER_DESCRIPTION_CLASS}>
-            <TimelineRichText text={banner.description} />
-          </p>
+          <div
+            aria-label={`Description for ${banner.title}`}
+            className={DRAWER_DESCRIPTION_CLASS}
+            tabIndex={0}
+          >
+            <TimelineRichText priceMode={priceMode} text={banner.description} />
+          </div>
         ) : null}
       </div>
-      {banner.description ? <div aria-hidden className={DRAWER_BOTTOM_FADE_CLASS} /> : null}
     </div>
   )
 }

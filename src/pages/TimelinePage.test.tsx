@@ -1,5 +1,5 @@
-import {fireEvent, render, screen} from '@testing-library/react'
-import {MemoryRouter} from 'react-router-dom'
+import {act, fireEvent, render, screen} from '@testing-library/react'
+import {MemoryRouter, useLocation} from 'react-router-dom'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {TimelinePage} from './TimelinePage'
@@ -78,10 +78,16 @@ vi.mock('./timeline/EventList', () => ({
   EventList: () => <div>No events to display.</div>,
 }))
 
-function renderTimelinePage() {
+function LocationProbe() {
+  const location = useLocation()
+  return <output data-testid='location'>{`${location.pathname}${location.search}`}</output>
+}
+
+function renderTimelinePage(initialEntries = ['/timeline']) {
   return render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={initialEntries}>
       <TimelinePage />
+      <LocationProbe />
     </MemoryRouter>,
   )
 }
@@ -100,13 +106,166 @@ describe('TimelinePage', () => {
     renderTimelinePage()
 
     expect(screen.getByText('Active Banner')).toBeInTheDocument()
-    expect(screen.getByText('Upcoming banners')).toBeInTheDocument()
+    const upcomingToggle = screen.getByRole('button', {name: /upcoming banners/i})
+    expect(upcomingToggle).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getByRole('button', {name: 'Upcoming Banner'})).toBeInTheDocument()
     expect(screen.queryByRole('button', {name: 'Archived Banner'})).not.toBeInTheDocument()
+
+    fireEvent.click(upcomingToggle)
+
+    expect(upcomingToggle).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.queryByRole('button', {name: 'Upcoming Banner'})).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', {name: /ended banners/i}))
 
     expect(screen.getByRole('button', {name: 'Archived Banner'})).toBeInTheDocument()
+  })
+
+  it('renders the timeline price display toggle in the masthead', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-03-10T00:00:00.000Z'))
+
+    renderTimelinePage()
+
+    expect(screen.getByText('Display Prices')).toBeInTheDocument()
+
+    const silverPrime = screen.getByRole('button', {name: 'Silver Prime'})
+    const estimatedUsd = screen.getByRole('button', {name: 'Estimated USD'})
+
+    expect(silverPrime).toHaveAttribute('aria-pressed', 'true')
+    expect(estimatedUsd).toHaveAttribute('aria-pressed', 'false')
+
+    fireEvent.click(estimatedUsd)
+
+    expect(silverPrime).toHaveAttribute('aria-pressed', 'false')
+    expect(estimatedUsd).toHaveAttribute('aria-pressed', 'true')
+  })
+
+  it('uses the view search param for timeline content tabs', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-03-10T00:00:00.000Z'))
+
+    renderTimelinePage(['/timeline?view=banners'])
+
+    expect(screen.getByTestId('location')).toHaveTextContent('/timeline?view=banners')
+    expect(screen.getByRole('button', {name: 'Banners'})).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByText('Active Banner')).toBeInTheDocument()
+    expect(screen.queryByText('No events to display.')).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: 'Events'}))
+
+    expect(screen.getByTestId('location')).toHaveTextContent('/timeline?view=events')
+    expect(screen.getByRole('button', {name: 'Events'})).toHaveAttribute('aria-pressed', 'true')
+
+    fireEvent.click(screen.getByRole('button', {name: 'Both'}))
+
+    expect(screen.getByTestId('location')).toHaveTextContent('/timeline')
+    expect(screen.getByRole('button', {name: 'Both'})).toHaveAttribute('aria-pressed', 'true')
+  })
+
+  it('uses the section search param as a timeline scroll target and view hint', () => {
+    const scrollIntoView = vi.fn()
+    const originalScrollIntoView = Object.getOwnPropertyDescriptor(
+      Element.prototype,
+      'scrollIntoView',
+    )
+    Object.defineProperty(Element.prototype, 'scrollIntoView', {
+      configurable: true,
+      value: scrollIntoView,
+    })
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-03-10T00:00:00.000Z'))
+
+    try {
+      renderTimelinePage(['/timeline?section=upcoming-banners'])
+
+      expect(screen.getByRole('button', {name: 'Banners'})).toHaveAttribute('aria-pressed', 'true')
+      const upcomingBannersToggle = screen.getByRole('button', {name: /upcoming banners/i})
+      expect(upcomingBannersToggle).toHaveAttribute('aria-expanded', 'true')
+
+      act(() => {
+        vi.runOnlyPendingTimers()
+      })
+
+      expect(scrollIntoView).toHaveBeenCalledWith({block: 'start', behavior: 'smooth'})
+
+      fireEvent.click(upcomingBannersToggle)
+
+      expect(upcomingBannersToggle).toHaveAttribute('aria-expanded', 'false')
+
+      fireEvent.click(screen.getByRole('button', {name: 'Events'}))
+
+      expect(screen.getByTestId('location')).toHaveTextContent('/timeline?view=events')
+    } finally {
+      if (originalScrollIntoView) {
+        Object.defineProperty(Element.prototype, 'scrollIntoView', originalScrollIntoView)
+      }
+    }
+  })
+
+  it('uses instant section scrolling when reduced motion is preferred', () => {
+    const scrollIntoView = vi.fn()
+    const originalScrollIntoView = Object.getOwnPropertyDescriptor(
+      Element.prototype,
+      'scrollIntoView',
+    )
+    const originalMatchMedia = window.matchMedia
+    Object.defineProperty(Element.prototype, 'scrollIntoView', {
+      configurable: true,
+      value: scrollIntoView,
+    })
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      value: vi.fn().mockReturnValue({
+        addEventListener: vi.fn(),
+        addListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+        matches: true,
+        media: '(prefers-reduced-motion: reduce)',
+        onchange: null,
+        removeEventListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    })
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-03-10T00:00:00.000Z'))
+
+    try {
+      renderTimelinePage(['/timeline?section=upcoming-banners'])
+
+      act(() => {
+        vi.runOnlyPendingTimers()
+      })
+
+      expect(scrollIntoView).toHaveBeenCalledWith({block: 'start', behavior: 'auto'})
+    } finally {
+      if (originalScrollIntoView) {
+        Object.defineProperty(Element.prototype, 'scrollIntoView', originalScrollIntoView)
+      }
+      Object.defineProperty(window, 'matchMedia', {
+        configurable: true,
+        value: originalMatchMedia,
+      })
+    }
+  })
+
+  it('cancels a pending section scroll frame when the section param changes', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-03-10T00:00:00.000Z'))
+    const requestAnimationFrame = vi.spyOn(window, 'requestAnimationFrame')
+    const cancelAnimationFrame = vi.spyOn(window, 'cancelAnimationFrame')
+
+    try {
+      renderTimelinePage(['/timeline?section=upcoming-banners'])
+
+      fireEvent.click(screen.getByRole('button', {name: 'Events'}))
+
+      expect(requestAnimationFrame).toHaveBeenCalled()
+      expect(cancelAnimationFrame).toHaveBeenCalledWith(requestAnimationFrame.mock.results[0].value)
+    } finally {
+      requestAnimationFrame.mockRestore()
+      cancelAnimationFrame.mockRestore()
+    }
   })
 
   it('opens database detail overlays from timeline cards', () => {

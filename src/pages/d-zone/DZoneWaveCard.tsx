@@ -22,6 +22,7 @@ interface DZoneWaveCardProps {
 }
 
 const COLLAPSED_MONSTER_LIMIT = 10
+const COLLAPSED_MONSTER_ACCESSIBLE_LIMIT = 6
 const COLLAPSED_RELIC_ACCESSIBLE_LIMIT = 2
 
 export function DZoneWaveCard({
@@ -127,16 +128,22 @@ export function DZoneWaveCard({
 
           <section aria-labelledby={`${wave.id}-monsters`} className='d-zone-wave-section'>
             <div className={monsterGridClassName}>
-              {visibleMonsters.map((monster) => (
-                <MonsterButton
-                  assetSrc={getMonsterAsset(monster)}
-                  compact={!expanded}
-                  key={monster.id}
-                  monster={monster}
-                  onMonsterOpen={onMonsterOpen}
-                  waveName={wave.name}
-                />
-              ))}
+              {visibleMonsters.map((monster, monsterIndex) => {
+                const collapsedOverflow =
+                  !expanded && monsterIndex >= COLLAPSED_MONSTER_ACCESSIBLE_LIMIT
+
+                return (
+                  <MonsterButton
+                    assetSrc={getMonsterAsset(monster)}
+                    compact={!expanded}
+                    hiddenFromAccessibility={collapsedOverflow}
+                    key={monster.id}
+                    monster={monster}
+                    onMonsterOpen={onMonsterOpen}
+                    waveName={wave.name}
+                  />
+                )
+              })}
             </div>
           </section>
         </div>
@@ -170,6 +177,7 @@ function RelicIcon({relic}: {relic: DZoneRelicPreview}) {
 interface MonsterButtonProps {
   assetSrc: string | undefined
   compact?: boolean
+  hiddenFromAccessibility?: boolean
   monster: DzoneResolvedMonster
   onMonsterOpen: (monster: DzoneResolvedMonster, event: MouseEvent<HTMLButtonElement>) => void
   waveName: string
@@ -190,6 +198,7 @@ function getMonsterButtonLabel(
 function MonsterButton({
   assetSrc,
   compact = false,
+  hiddenFromAccessibility = false,
   monster,
   onMonsterOpen,
   waveName,
@@ -198,11 +207,13 @@ function MonsterButton({
 
   return (
     <button
+      aria-hidden={hiddenFromAccessibility ? true : undefined}
       aria-label={getMonsterButtonLabel(waveName, monster, compact)}
       className={`d-zone-monster-tile ${compact ? 'd-zone-monster-tile--compact' : ''}`}
       onClick={(event) => {
         onMonsterOpen(monster, event)
       }}
+      tabIndex={hiddenFromAccessibility ? -1 : undefined}
       title={toDZoneAccessibleText(monster.name)}
       type='button'
     >

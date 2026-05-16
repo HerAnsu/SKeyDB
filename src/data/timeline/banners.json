@@ -77,43 +77,105 @@
     "id": "banner-moonless-guide",
     "title": "Kaleido Recollections: Faded Legacy",
     "type": "combo",
-    "description": "Premium banner featuring all limited Awakeners and Wheels of Destiny from \"Faded Legacy\"",
+    "description": "Premium banner featuring all limited Awakeners and Wheels of Destiny from \"Faded Legacy\".",
     "startDate": "2026/05/05 09:00",
     "endDate": "2026/05/30 09:00",
-    "poolSlots": [
-      {"pool": ["Lily", "24", "Ryker", "Hameln", "Tawil"]},
-      {"pool": ["Tulu", "Miryam", "Murphy", "Sorel", "Salvador"]},
-      {"pool": ["Thais", "Helot: Catena", "Daffodil", "Wanda", "Horla"]},
-      {
-        "pool": [
-          "Grace Through Pain",
-          "Aberrant Devour",
-          "Hour of Fortune",
-          "Eternal Requiem",
-          "Wheel Unseen",
-          "Hymn of the Sovereign",
-          "Power of the Pious",
-          "Shrouded Birth",
-          "By Rose Alone",
-          "Tablet of Scriptures",
-          "Merciful Nurturing",
-          "Drowning in Crimson",
-          "Treasured Rarity",
-          "Queen's Edict",
-          "The Last Verse"
-        ]
-      }
-    ]
+    "derivedPool": {
+      "availabilityTypes": ["LIMITED_FADED_LEGACY"],
+      "slotCount": 4,
+      "awakenerSlots": 3,
+      "wheelSlots": 1
+    }
   },
   {
     "id": "banner-saya-no-uta-collab",
-    "title": "Saya no Uta Collab",
-    "type": "limited",
-    "tags": ["limited", "collab", "preliminary"],
-    "description": "Limited collaboration banner, likely featuring Saya and her SSR Wheel. Banner pool, wheel name and exact dates are still pending confirmation.",
+    "title": "Sprout of Liebestod / Alien Crypsela",
+    "type": "awaken",
+    "tags": ["awaken", "collab"],
+    "description": "Featured rate-up banners for Saya and her SSR Wheel 'Fragrant Morphogenesis'.",
     "startDate": "2026/05/30 09:00",
-    "endDate": "2026/06/27 09:00",
+    "endDate": "2026/08/24 09:00",
     "customArt": "/banners/saya-collab-prelim.webp",
-    "preliminary": true
+    "pinned": true
+  },
+  {
+    "id": "banner-echoing-wishes",
+    "title": "Echoing Wishes",
+    "type": "combo",
+    "customTags": ["Daily"],
+    "description": "Daily rotating special awakening banners. Each day features a different limited awakener and their recommended Wheel of Destiny.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/15 09:00",
+    "derivedPool": {
+      "availabilityTypes": ["LIMITED_ASTRAL_REIGN", "LIMITED_FADED_LEGACY"],
+      "excludeNames": ["Saya"],
+      "linkedPairs": true
+    }
+  },
+  {
+    "id": "banner-kaleido-recollections-astral-reign",
+    "title": "Kaleido Recollections: Astral Reign",
+    "type": "combo",
+    "description": "Premium banner featuring all Astral Reign limited Awakeners and Wheels of Destiny.",
+    "startDate": "2026/05/18 09:00",
+    "endDate": "2026/06/15 09:00",
+    "derivedPool": {
+      "availabilityTypes": ["LIMITED_ASTRAL_REIGN"],
+      "slotCount": 4,
+      "awakenerSlots": 3,
+      "wheelSlots": 1
+    }
+  },
+  {
+    "id": "banner-stars-in-full-bloom-assault",
+    "title": "Stars in Full Bloom",
+    "type": "premium",
+    "customTags": ["Assault"],
+    "pricing": "USD 29.99",
+    "description": "Guaranteed awakening featuring 2 limited SSR Awakeners and 3 limited SSR Wheels, with triple copies for each obtained item.",
+    "startDate": "2026/05/30 09:00",
+    "endDate": "2026/06/29 09:00",
+    "derivedPool": {"limitedAwakenerType": "ASSAULT", "slotCount": 4}
+  },
+  {
+    "id": "banner-stars-in-full-bloom-warden",
+    "title": "Stars in Full Bloom",
+    "type": "premium",
+    "customTags": ["Warden"],
+    "pricing": "USD 29.99",
+    "description": "Guaranteed awakening featuring 2 limited SSR Awakeners and 3 limited SSR Wheels, with triple copies for each obtained item.",
+    "startDate": "2026/05/30 09:00",
+    "endDate": "2026/06/29 09:00",
+    "derivedPool": {"limitedAwakenerType": "WARDEN", "slotCount": 4}
+  },
+  {
+    "id": "banner-stars-in-full-bloom-chorus",
+    "title": "Stars in Full Bloom",
+    "type": "premium",
+    "customTags": ["Chorus"],
+    "pricing": "USD 29.99",
+    "description": "Guaranteed awakening featuring 2 limited SSR Awakeners and 3 limited SSR Wheels, with triple copies for each obtained item.",
+    "startDate": "2026/05/30 09:00",
+    "endDate": "2026/06/29 09:00",
+    "derivedPool": {"limitedAwakenerType": "CHORUS", "slotCount": 4}
+  },
+  {
+    "id": "banner-triune-verdant-jun",
+    "title": "Triune Verdant",
+    "type": "rerun",
+    "description": "Three rerun banners, featuring the awakeners Hameln, Murphy and Clementine.",
+    "startDate": "2026/06/15 09:00",
+    "endDate": "2026/07/13 09:00",
+    "featured": ["Hameln", "Murphy", "Clementine"]
+  },
+  {
+    "id": "banner-sylvan-omen-jun",
+    "title": "Sylvan Omen",
+    "type": "rerun",
+    "tags": ["rerun", "wheel"],
+    "description": "Three rerun banners, featuring the Wheels Eternal Requiem, Shrouded Birth and Veiled Anguish.",
+    "startDate": "2026/06/15 09:00",
+    "endDate": "2026/07/13 09:00",
+    "featured": ["Eternal Requiem", "Shrouded Birth", "Veiled Anguish"]
   }
 ]

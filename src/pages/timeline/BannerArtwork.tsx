@@ -25,9 +25,34 @@ const SLICE_DETAIL_TARGET_CLASS =
   'absolute inset-0 z-30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-amber-100/95 focus-visible:shadow-[inset_0_0_0_1px_rgba(15,23,42,0.85)]'
 const POOL_MONTAGE_LAYER_CLASS =
   'absolute inset-0 overflow-hidden transition-opacity ease-in-out motion-reduce:transition-none'
+const EMPTY_POOL_SLOTS: BannerPoolSlot[] = []
 
 const imagePreloadCache = new Map<string, Promise<void>>()
-const noCleanup = () => undefined
+const noCleanup: () => void = () => undefined
+
+function scheduleAfterNextPaint(callback: () => void): () => void {
+  if (
+    import.meta.env.MODE === 'test' ||
+    typeof window === 'undefined' ||
+    typeof window.requestAnimationFrame !== 'function' ||
+    typeof window.cancelAnimationFrame !== 'function'
+  ) {
+    callback()
+    return noCleanup
+  }
+
+  let secondFrameId: number | undefined
+  const firstFrameId = window.requestAnimationFrame(() => {
+    secondFrameId = window.requestAnimationFrame(callback)
+  })
+
+  return () => {
+    window.cancelAnimationFrame(firstFrameId)
+    if (secondFrameId !== undefined) {
+      window.cancelAnimationFrame(secondFrameId)
+    }
+  }
+}
 
 function finishImageDecode(image: HTMLImageElement): Promise<void> {
   if (typeof image.decode !== 'function') {
@@ -51,9 +76,18 @@ function preloadTimelineImage(url: string | undefined): Promise<void> {
   const promise = new Promise<void>((resolve) => {
     const image = new window.Image()
     image.decoding = 'async'
+    let settled = false
 
     const finish = () => {
+      if (settled) return
+      settled = true
       void finishImageDecode(image).then(resolve)
+    }
+
+    const finishDecoded = () => {
+      if (settled) return
+      settled = true
+      resolve()
     }
 
     image.onload = finish
@@ -64,6 +98,8 @@ function preloadTimelineImage(url: string | undefined): Promise<void> {
 
     if (image.complete) {
       finish()
+    } else if (typeof image.decode === 'function') {
+      void finishImageDecode(image).then(finishDecoded)
     }
   })
 
@@ -71,24 +107,34 @@ function preloadTimelineImage(url: string | undefined): Promise<void> {
   return promise
 }
 
-function preloadTimelineImagesInBatches(urls: string[]): () => void {
-  if (typeof window === 'undefined' || urls.length === 0) return noCleanup
+function preloadTimelineImagesInBatches(urls: string[], onComplete?: () => void): () => void {
+  if (typeof window === 'undefined' || urls.length === 0) {
+    onComplete?.()
+    return noCleanup
+  }
 
   let cancelled = false
   let nextIndex = 0
   let timer: number | undefined
+  const promises: Promise<void>[] = []
 
   const preloadNextBatch = () => {
     if (cancelled) return
 
     const batch = urls.slice(nextIndex, nextIndex + COMBO_PRELOAD_BATCH_SIZE)
     batch.forEach((url) => {
-      void preloadTimelineImage(url)
+      promises.push(preloadTimelineImage(url))
     })
     nextIndex += COMBO_PRELOAD_BATCH_SIZE
 
     if (nextIndex < urls.length) {
       timer = window.setTimeout(preloadNextBatch, COMBO_PRELOAD_BATCH_DELAY_MS)
+    } else if (onComplete) {
+      void Promise.all(promises).then(() => {
+        if (!cancelled) {
+          onComplete()
+        }
+      })
     }
   }
 
@@ -188,18 +234,28 @@ function ArtworkFallback({label}: {label?: string}) {
   )
 }
 
-function ArtworkVisual({asset, emphasis = false}: {asset: SliceAsset; emphasis?: boolean}) {
+function ArtworkVisual({
+  asset,
+  emphasis = false,
+  showFallbackLabel = true,
+  loading = 'lazy',
+}: {
+  asset: SliceAsset
+  emphasis?: boolean
+  showFallbackLabel?: boolean
+  loading?: 'eager' | 'lazy'
+}) {
   return asset.url ? (
     <img
       alt={asset.label}
       className={getArtworkImageClass(asset, emphasis)}
       decoding='async'
       draggable={false}
-      loading='lazy'
+      loading={loading}
       src={asset.url}
     />
   ) : (
-    <ArtworkFallback label={asset.label} />
+    <ArtworkFallback label={showFallbackLabel ? asset.label : undefined} />
   )
 }
 
@@ -213,12 +269,14 @@ function ArtworkPanel({
   asset,
   className = '',
   emphasis = false,
+  loading = 'lazy',
   onOpenDetail,
   showSeparator = false,
 }: {
   asset: SliceAsset
   className?: string
   emphasis?: boolean
+  loading?: 'eager' | 'lazy'
   onOpenDetail?: (ref: EntityRef) => void
   showSeparator?: boolean
 }) {
@@ -228,7 +286,7 @@ function ArtworkPanel({
       title={asset.label}
     >
       <div className='absolute inset-0'>
-        <ArtworkVisual asset={asset} emphasis={emphasis} />
+        <ArtworkVisual asset={asset} emphasis={emphasis} loading={loading} />
       </div>
       <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,14,0.02),rgba(2,6,14,0.04)_48%,rgba(2,6,14,0.74))]' />
       {showSeparator ? <SplitPanelSeparator /> : null}
@@ -243,9 +301,11 @@ function ArtworkPanel({
 
 function FeaturedArtwork({
   assets,
+  loading,
   onOpenDetail,
 }: {
   assets: SliceAsset[]
+  loading: 'eager' | 'lazy'
   onOpenDetail?: (ref: EntityRef) => void
 }) {
   if (assets.length === 0) {
@@ -262,6 +322,7 @@ function FeaturedArtwork({
           asset={asset}
           emphasis={index === 0}
           key={`${asset.label}-${String(index)}`}
+          loading={loading}
           onOpenDetail={onOpenDetail}
           showSeparator={index < splitAssets.length - 1}
         />
@@ -273,11 +334,13 @@ function FeaturedArtwork({
 function PoolMontageSlot({
   assets,
   frame,
+  loading,
   onOpenDetail,
   showSeparator,
 }: {
   assets: SliceAsset[]
   frame: PoolCycleFrame
+  loading: 'eager' | 'lazy'
   onOpenDetail?: (ref: EntityRef) => void
   showSeparator: boolean
 }) {
@@ -287,16 +350,27 @@ function PoolMontageSlot({
     front: 'a',
   })
   const prevTransRef = useRef(false)
+  const promotionCleanupRef = useRef(noCleanup)
 
   useEffect(() => {
     if (frame.transitioning && !prevTransRef.current && frame.incomingIdx >= 0) {
-      setLayers((prev) => {
-        const back: 'a' | 'b' = prev.front === 'a' ? 'b' : 'a'
-        return {...prev, [back]: frame.incomingIdx, front: back}
+      promotionCleanupRef.current()
+      const back: 'a' | 'b' = layers.front === 'a' ? 'b' : 'a'
+      setLayers((prev) => ({...prev, [back]: frame.incomingIdx}))
+      promotionCleanupRef.current = scheduleAfterNextPaint(() => {
+        setLayers((prev) => ({...prev, front: back}))
+        promotionCleanupRef.current = noCleanup
       })
     }
     prevTransRef.current = frame.transitioning
-  }, [frame.transitioning, frame.incomingIdx])
+  }, [frame.transitioning, frame.incomingIdx, layers.front])
+
+  useEffect(
+    () => () => {
+      promotionCleanupRef.current()
+    },
+    [],
+  )
 
   const assetA = assets[layers.a]
   const assetB = assets[layers.b]
@@ -311,25 +385,25 @@ function PoolMontageSlot({
       title={frontAsset.label}
     >
       <div
+        aria-hidden={layers.front !== 'a'}
         className={POOL_MONTAGE_LAYER_CLASS}
         style={{
           opacity: layers.front === 'a' ? 1 : 0,
           ...transitionStyle,
         }}
       >
-        <ArtworkVisual asset={assetA} />
+        <ArtworkVisual asset={assetA} loading={loading} showFallbackLabel={layers.front === 'a'} />
       </div>
-      {layers.a !== layers.b ? (
-        <div
-          className={POOL_MONTAGE_LAYER_CLASS}
-          style={{
-            opacity: layers.front === 'b' ? 1 : 0,
-            ...transitionStyle,
-          }}
-        >
-          <ArtworkVisual asset={assetB} />
-        </div>
-      ) : null}
+      <div
+        aria-hidden={layers.front !== 'b'}
+        className={POOL_MONTAGE_LAYER_CLASS}
+        style={{
+          opacity: layers.front === 'b' ? 1 : 0,
+          ...transitionStyle,
+        }}
+      >
+        <ArtworkVisual asset={assetB} loading={loading} showFallbackLabel={layers.front === 'b'} />
+      </div>
       <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,14,0.02),rgba(2,6,14,0.04)_48%,rgba(2,6,14,0.74))]' />
       {showSeparator ? <SplitPanelSeparator /> : null}
       <SliceDetailTarget
@@ -341,19 +415,51 @@ function PoolMontageSlot({
   )
 }
 
+function PoolMontagePlaceholderSlot({
+  asset,
+  showSeparator,
+}: {
+  asset: SliceAsset
+  showSeparator: boolean
+}) {
+  return (
+    <div
+      className='group/art-panel relative min-w-0 overflow-hidden bg-slate-950 [contain:paint]'
+      title={asset.label}
+    >
+      <ArtworkFallback label={asset.label} />
+      {showSeparator ? <SplitPanelSeparator /> : null}
+    </div>
+  )
+}
+
 function PoolMontageArtwork({
   cycleFrames,
+  loading,
   onOpenDetail,
+  onReadyChange,
   visualSlots,
 }: {
   cycleFrames: PoolCycleFrame[]
+  loading: 'eager' | 'lazy'
   onOpenDetail?: (ref: EntityRef) => void
+  onReadyChange: (ready: boolean) => void
   visualSlots: ResolvedVisualSlot[]
 }) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [shouldPreload, setShouldPreload] = useState(
-    () => typeof IntersectionObserver === 'undefined',
+    () => typeof IntersectionObserver === 'undefined' || import.meta.env.MODE === 'test',
   )
+  const preloadUrls = useMemo(() => getPoolPreloadUrls(visualSlots), [visualSlots])
+  const preloadSignature = preloadUrls.join('\n')
+  const [readySignature, setReadySignature] = useState(() =>
+    import.meta.env.MODE === 'test' ? preloadSignature : '',
+  )
+  const assetsReady = import.meta.env.MODE === 'test' || readySignature === preloadSignature
+
+  useEffect(() => {
+    onReadyChange(assetsReady)
+  }, [assetsReady, onReadyChange])
 
   useEffect(() => {
     if (shouldPreload) return
@@ -378,9 +484,14 @@ function PoolMontageArtwork({
 
   useEffect(() => {
     if (!shouldPreload) return
+    if (import.meta.env.MODE === 'test') {
+      return
+    }
 
-    return preloadTimelineImagesInBatches(getPoolPreloadUrls(visualSlots))
-  }, [shouldPreload, visualSlots])
+    return preloadTimelineImagesInBatches(preloadUrls, () => {
+      setReadySignature(preloadSignature)
+    })
+  }, [preloadSignature, preloadUrls, shouldPreload])
 
   return (
     <div
@@ -388,15 +499,24 @@ function PoolMontageArtwork({
       ref={rootRef}
       style={{gridTemplateColumns: getPoolGridTemplate(visualSlots.length)}}
     >
-      {visualSlots.map((vs, index) => (
-        <PoolMontageSlot
-          assets={vs.assets}
-          frame={cycleFrames[vs.cycleFrameIndex]}
-          key={`${String(index)}:${getVisualSlotSignature(vs)}`}
-          onOpenDetail={onOpenDetail}
-          showSeparator={index < visualSlots.length - 1}
-        />
-      ))}
+      {assetsReady
+        ? visualSlots.map((vs, index) => (
+            <PoolMontageSlot
+              assets={vs.assets}
+              frame={cycleFrames[vs.cycleFrameIndex]}
+              key={`${String(index)}:${getVisualSlotSignature(vs)}`}
+              loading={loading}
+              onOpenDetail={onOpenDetail}
+              showSeparator={index < visualSlots.length - 1}
+            />
+          ))
+        : visualSlots.map((vs, index) => (
+            <PoolMontagePlaceholderSlot
+              asset={vs.assets[0]}
+              key={`${String(index)}:${getVisualSlotSignature(vs)}`}
+              showSeparator={index < visualSlots.length - 1}
+            />
+          ))}
     </div>
   )
 }
@@ -409,7 +529,15 @@ function BannerPlaceholderArt() {
   )
 }
 
-function FullCardArtwork({label, url}: {label: string; url: string}) {
+function FullCardArtwork({
+  label,
+  loading,
+  url,
+}: {
+  label: string
+  loading: 'eager' | 'lazy'
+  url: string
+}) {
   return (
     <div className='absolute inset-0 overflow-hidden bg-slate-950'>
       <img
@@ -417,7 +545,7 @@ function FullCardArtwork({label, url}: {label: string; url: string}) {
         className='h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover/banner:scale-[1.035] motion-reduce:transition-none'
         decoding='async'
         draggable={false}
-        loading='eager'
+        loading={loading}
         src={url}
       />
       <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,14,0.04),rgba(2,6,14,0.08)_42%,rgba(2,6,14,0.48)),linear-gradient(180deg,rgba(2,6,14,0.02),rgba(2,6,14,0.08)_58%,rgba(2,6,14,0.68))]' />
@@ -428,6 +556,7 @@ function FullCardArtwork({label, url}: {label: string; url: string}) {
 interface BannerArtworkProps {
   customArt?: string
   featured?: BannerFeaturedUnit[]
+  loading?: 'eager' | 'lazy'
   poolSlots?: BannerPoolSlot[]
   title: string
   onOpenDetail?: (ref: EntityRef) => void
@@ -436,28 +565,36 @@ interface BannerArtworkProps {
 export function BannerArtwork({
   customArt,
   featured,
+  loading = 'lazy',
   poolSlots,
   title,
   onOpenDetail,
 }: BannerArtworkProps) {
   const displaySlices = expandFeatured(featured ?? [])
   const displayAssets = resolveFeaturedAssets(displaySlices)
-  const visualSlots = useMemo(() => (poolSlots ? resolvePoolSlots(poolSlots) : null), [poolSlots])
-  const cycleFrames = usePoolCycling(poolSlots ?? [])
+  const effectivePoolSlots = poolSlots ?? EMPTY_POOL_SLOTS
+  const visualSlots = useMemo(
+    () => (effectivePoolSlots.length > 0 ? resolvePoolSlots(effectivePoolSlots) : null),
+    [effectivePoolSlots],
+  )
+  const [poolAssetsReady, setPoolAssetsReady] = useState(() => import.meta.env.MODE === 'test')
+  const cycleFrames = usePoolCycling(effectivePoolSlots, {enabled: poolAssetsReady})
 
   if (customArt) {
-    return <FullCardArtwork label={title} url={customArt} />
+    return <FullCardArtwork label={title} loading={loading} url={customArt} />
   }
 
   if (visualSlots && visualSlots.length > 0) {
     return (
       <PoolMontageArtwork
         cycleFrames={cycleFrames}
+        loading={loading}
         onOpenDetail={onOpenDetail}
+        onReadyChange={setPoolAssetsReady}
         visualSlots={visualSlots}
       />
     )
   }
 
-  return <FeaturedArtwork assets={displayAssets} onOpenDetail={onOpenDetail} />
+  return <FeaturedArtwork assets={displayAssets} loading={loading} onOpenDetail={onOpenDetail} />
 }
