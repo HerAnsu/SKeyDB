@@ -8,7 +8,7 @@
 
 ---
 
-**Status:** Draft
+**Status:** Completed / Archived
 
 **Last updated:** 2026-05-16
 
@@ -54,9 +54,9 @@
 - In progress:
   - None.
 - Next:
-  - Pick one slice below and run it as a bounded worker-slice with targeted verification.
+  - None. All selected slices are complete.
 - Blockers:
-  - Public V3 adapter and upgrade-patch slices need characterization before implementation.
+  - None.
 
 ## Slice Ledger
 
