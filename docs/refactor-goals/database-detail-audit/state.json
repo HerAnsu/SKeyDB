@@ -244,6 +244,56 @@
       "concept_blast_radius": ["src/features/database/DatabaseEntityTabs.tsx"],
       "evidence": ["Prior ledger scout found the file small and direct; route/tab behavior is not a current target beyond detail/modal flows."],
       "next": "Terminal unless a concrete tab/search route defect appears."
+    },
+    {
+      "id": "C11",
+      "title": "Browse controller recomputes inactive entity state and view models",
+      "source_task": "S3",
+      "status": "queued",
+      "concept_blast_radius": [
+        "src/features/database/browse/useEntityBrowseController.ts",
+        "src/features/database/browse/entityBrowseRegistry.tsx",
+        "src/features/database/DatabasePage.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/browse/useDatabaseBrowseState.test.tsx"
+      ],
+      "evidence": [
+        "React scout finding was omitted from the prior register.",
+        "useEntityBrowseController currently initializes awakener, wheel, posse, and covenant browse states/view models regardless of activeEntity and returns all entity sections/chips."
+      ],
+      "next": "Queued for implementation after W10 rich rendering leftovers."
+    },
+    {
+      "id": "C12",
+      "title": "DatabaseReferencePopover duplicates fallback description-section rendering",
+      "source_task": "S3",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/internal/DatabaseReferencePopover.tsx",
+        "src/features/database/internal/DatabaseReferencePopover.test.tsx"
+      ],
+      "evidence": [
+        "React/rich rendering scout finding was omitted from the prior register.",
+        "Top-level popover fallback builds rich fallback text one way, while descriptionSections repeat template resolution and render their fallback branch separately."
+      ],
+      "next": "Implemented by W10 in the rich rendering leftover slice."
+    },
+    {
+      "id": "C13",
+      "title": "RichSegmentRenderer overlay list-scan fallback compatibility fossil",
+      "source_task": "S3",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/RichSegmentTokens.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx"
+      ],
+      "evidence": [
+        "Earlier C2 root-fix retained a list-scan fallback for direct callers.",
+        "Caller audit found the only production RichSegmentRenderer caller is DatabaseRichTextContent, which already has referenceLayer.overlayByName."
+      ],
+      "next": "Implemented by W10 in the rich rendering leftover slice."
     }
   ],
   "maintenance": [
@@ -1232,6 +1282,157 @@
         ],
         "followups_not_done": [
           "Earlier-commit root-fix audit, including browse-controller entity-state recomputation and rich rendering fallback/popover section branch findings."
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "S3",
+      "role": "scout",
+      "status": "done",
+      "title": "Earlier commit root-fix audit",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-review",
+        "$refactor-scout",
+        "$refactor-react",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "src/domain/**",
+        "src/features/database/**",
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Audit earlier branch commits and omitted scout findings under the stricter root-fix discipline.",
+      "receipt": {
+        "evidence": [
+          "Read earlier branch commits from 0db9f80 through 598d520 plus post-C7 b190fe6.",
+          "C7 was confirmed as a prior root-fix miss and is now implemented by b190fe6.",
+          "Browse-controller entity-state recomputation was added as C11.",
+          "Rich popover description-section fallback duplication was added as C12.",
+          "C2 overlay list-scan fallback was added as C13 after caller audit found only DatabaseRichTextContent as a production RichSegmentRenderer caller.",
+          "C1-C6, C8, C9, and prior P1-P4 were reviewed as root-fix implementations rather than local patches."
+        ],
+        "validation": [
+          "git log --oneline -n 30",
+          "FFF multi_grep for RichSegmentRenderer production callers",
+          "read useEntityBrowseController.ts, DatabaseReferencePopover.tsx, RichSegmentRenderer.tsx, RichSegmentTokens.tsx"
+        ]
+      }
+    },
+    {
+      "id": "J10",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose rich rendering leftover root-fix slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Select the next implementation slice after the earlier-commit audit.",
+      "receipt": {
+        "decision": "C12 and C13 selected together as W10 because they are both rich/reference rendering leftovers from prior slices: one duplicated popover fallback branch and one compatibility fallback that kept per-token overlay list scans alive after overlayByName became the production contract.",
+        "root_fix": "Use one popover fallback-text builder for entry/section fallbacks, and make overlay token resolution map-only at the rich segment boundary now that production rendering comes through DatabaseRichTextContent/referenceLayer.overlayByName.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "git diff --check"
+        ]
+      }
+    },
+    {
+      "id": "W10",
+      "role": "worker",
+      "status": "done",
+      "title": "Resolve rich rendering fallback leftovers",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseReferencePopover.tsx",
+        "src/features/database/internal/DatabaseReferencePopover.test.tsx",
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx",
+        "src/features/database/internal/RichSegmentTokens.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.test.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/goal.md",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Characterize description-section fallback behavior, consolidate popover fallback text building, remove the overlays-list compatibility fallback from rich segment token resolution, run targeted rich rendering tests/typecheck/diff checks, and record receipt.",
+      "receipt": {
+        "slice": "Resolve rich rendering fallback leftovers",
+        "files_changed": [
+          "src/features/database/internal/DatabaseReferencePopover.tsx",
+          "src/features/database/internal/DatabaseReferencePopover.test.tsx",
+          "src/features/database/internal/RichSegmentRenderer.tsx",
+          "src/features/database/internal/RichSegmentRenderer.test.tsx",
+          "src/features/database/internal/RichSegmentTokens.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.test.tsx"
+        ],
+        "what_got_simpler": [
+          "Popover entry and section Suspense fallback text now share one fallback builder.",
+          "Rich segment overlay resolution is map-only; the test-only overlays-list compatibility path and per-token list scan are deleted.",
+          "DatabaseRichTextContent no longer derives or passes an overlay array solely for renderer compatibility."
+        ],
+        "behavior_preserved": [
+          "Popover top-level and section descriptions still resolve record templates and formula context.",
+          "Mechanic and realm tokens still open through the reference-layer overlay map, including aliases and keyword footer tokens.",
+          "Overlay icons, tinting, coming-soon title behavior, and catalog-backed empty-description clickability are preserved."
+        ],
+        "current_complexity": "Before: DatabaseReferencePopover duplicated fallback text construction between top-level and description-section branches, and RichSegmentRenderer kept a list-scan overlay fallback after production rendering had moved to overlayByName.",
+        "expected_complexity_after": "After: fallback text construction is centralized inside the popover and rich token resolution depends on the reference-layer map contract.",
+        "root_fix_patch_decision": "Root-fix slice selected because both leftovers were compatibility/fallback fossils from earlier rich rendering slices; the implementation removes the old fallback paths rather than hardening around them.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added focused description-section coverage and updated rich rendering tests to use the production overlay map contract.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/internal/DatabaseReferencePopover.tsx src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/DatabaseRichTextContent.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx",
+          "npx prettier --check src/features/database/internal/DatabaseReferencePopover.tsx src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/DatabaseRichTextContent.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/internal/DatabaseReferencePopover.tsx src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/DatabaseRichTextContent.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx",
+          "npx prettier --check src/features/database/internal/DatabaseReferencePopover.tsx src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/DatabaseRichTextContent.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full pre-commit suite pending for this slice commit."
+        ],
+        "followups_not_done": [
+          "C11 browse-controller inactive entity recomputation."
         ],
         "learning_lint_candidates": [],
         "scope_expansion_requested": false

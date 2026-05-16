@@ -44,34 +44,11 @@ interface InteractiveTokenProps {
   title?: string
 }
 
-function resolveOverlayFromList(
-  name: string,
-  overlays: readonly AwakenerOverlayRecord[] | undefined,
-): AwakenerOverlayRecord | null {
-  if (!overlays) {
-    return null
-  }
-
-  for (const overlay of overlays) {
-    if (overlay.displayName === name || overlay.aliases.includes(name)) {
-      return overlay
-    }
-  }
-
-  return null
-}
-
 function resolveOverlay(
   name: string,
   overlayByName: ReadonlyMap<string, AwakenerOverlayRecord> | undefined,
-  overlays: readonly AwakenerOverlayRecord[] | undefined,
 ): AwakenerOverlayRecord | null {
-  const overlay = overlayByName?.get(normalizeDatabaseReferenceName(name))
-  if (overlay) {
-    return overlay
-  }
-
-  return resolveOverlayFromList(name, overlays)
+  return overlayByName?.get(normalizeDatabaseReferenceName(name)) ?? null
 }
 
 export function InteractiveToken({
@@ -197,17 +174,15 @@ export function OverlayTokenLabel({
 export function MechanicToken({
   name,
   overlayByName,
-  overlays,
   showTagIcons,
   onMechanicClick,
 }: {
   name: string
   overlayByName?: ReadonlyMap<string, AwakenerOverlayRecord>
-  overlays?: readonly AwakenerOverlayRecord[]
   showTagIcons: boolean
   onMechanicClick?: (overlay: AwakenerOverlayRecord, event: ActivationEvent) => void
 }) {
-  const overlay = resolveOverlay(name, overlayByName, overlays)
+  const overlay = resolveOverlay(name, overlayByName)
   const desc = overlay?.descriptionTemplate.trim()
   const tint = getDatabaseOverlayTint(overlay)
   const tintStyle = getDatabaseTintedTokenStyle(tint)
@@ -250,15 +225,13 @@ export function MechanicToken({
 export function RealmToken({
   name,
   overlayByName,
-  overlays,
   onMechanicClick,
 }: {
   name: string
   overlayByName?: ReadonlyMap<string, AwakenerOverlayRecord>
-  overlays?: readonly AwakenerOverlayRecord[]
   onMechanicClick?: (overlay: AwakenerOverlayRecord, event: ActivationEvent) => void
 }) {
-  const overlay = resolveOverlay(name, overlayByName, overlays)
+  const overlay = resolveOverlay(name, overlayByName)
   const tint = getDatabaseRealmTint(name)
   const tintStyle = getDatabaseTintedTokenStyle(tint)
 

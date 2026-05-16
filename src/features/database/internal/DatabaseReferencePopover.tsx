@@ -92,6 +92,32 @@ function descriptionSectionClassName(tone: 'default' | 'lore' | undefined): stri
     .join(' ')
 }
 
+function buildReferenceDescriptionFallbackText({
+  description,
+  formulaContext,
+  keywordFooterText,
+  rank,
+  record,
+  stats,
+}: {
+  description: string
+  formulaContext?: PublicFormulaContext
+  keywordFooterText?: string
+  rank?: number
+  record?: DatabaseReferenceEntry['record']
+  stats: FullStats | null
+}): string {
+  const fallbackSourceText = record
+    ? resolveDescriptionTemplate(record.descriptionTemplate, record.descriptionArgs, {
+        rank,
+        stats,
+        formulaContext,
+      })
+    : description
+
+  return buildDatabaseRichDescriptionText(fallbackSourceText, keywordFooterText)
+}
+
 export function DatabaseReferencePopover({
   entry,
   selectedEnlightenSlot = null,
@@ -117,14 +143,14 @@ export function DatabaseReferencePopover({
   const detailLinks = entry.detailLinks ?? []
   const descriptionSections = entry.descriptionSections ?? []
   const attributeRows = entry.attributeRows ?? []
-  const fallbackSourceText = entry.record
-    ? resolveDescriptionTemplate(entry.record.descriptionTemplate, entry.record.descriptionArgs, {
-        rank: entry.descriptionRank,
-        stats,
-        formulaContext,
-      })
-    : entry.description
-  const fallbackText = buildDatabaseRichDescriptionText(fallbackSourceText, entry.keywordFooterText)
+  const fallbackText = buildReferenceDescriptionFallbackText({
+    description: entry.description,
+    formulaContext,
+    keywordFooterText: entry.keywordFooterText,
+    rank: entry.descriptionRank,
+    record: entry.record,
+    stats,
+  })
   const contentProps: DatabaseRichTextContentProps = {
     text: entry.description,
     record: entry.record,
@@ -265,17 +291,13 @@ export function DatabaseReferencePopover({
         {descriptionSections.length > 0 ? (
           <div className='space-y-3'>
             {descriptionSections.map((section) => {
-              const sectionFallbackSourceText = section.record
-                ? resolveDescriptionTemplate(
-                    section.record.descriptionTemplate,
-                    section.record.descriptionArgs,
-                    {
-                      rank: entry.descriptionRank,
-                      stats,
-                      formulaContext,
-                    },
-                  )
-                : section.description
+              const sectionFallbackText = buildReferenceDescriptionFallbackText({
+                description: section.description,
+                formulaContext,
+                rank: entry.descriptionRank,
+                record: section.record,
+                stats,
+              })
               return (
                 <div key={section.label}>
                   <p
@@ -290,8 +312,8 @@ export function DatabaseReferencePopover({
                   >
                     <Suspense
                       fallback={
-                        sectionFallbackSourceText ? (
-                          <span>{renderTextWithBreaks(sectionFallbackSourceText)}</span>
+                        sectionFallbackText ? (
+                          <span>{renderTextWithBreaks(sectionFallbackText)}</span>
                         ) : null
                       }
                     >

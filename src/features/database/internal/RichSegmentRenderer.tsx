@@ -30,7 +30,6 @@ interface RichSegmentRendererProps {
   formulaContext?: PublicFormulaContext
   descriptionRank?: number
   descriptionMaxRank?: number
-  overlays?: readonly AwakenerOverlayRecord[]
   overlayByName?: ReadonlyMap<string, AwakenerOverlayRecord>
   onSkillClick?: (name: string, event: ActivationEvent) => void
   onMechanicClick?: (overlay: AwakenerOverlayRecord, event: ActivationEvent) => void
@@ -47,7 +46,6 @@ export function RichSegmentRenderer({
   formulaContext,
   descriptionRank,
   descriptionMaxRank,
-  overlays,
   overlayByName,
   onSkillClick,
   onMechanicClick,
@@ -78,7 +76,6 @@ export function RichSegmentRenderer({
         <MechanicToken
           name={segment.name}
           overlayByName={overlayByName}
-          overlays={overlays}
           showTagIcons={showTagIcons}
           onMechanicClick={onMechanicClick}
         />
@@ -90,7 +87,6 @@ export function RichSegmentRenderer({
         <RealmToken
           name={segment.name}
           overlayByName={overlayByName}
-          overlays={overlays}
           onMechanicClick={onMechanicClick}
         />
       )

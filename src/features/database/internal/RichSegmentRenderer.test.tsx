@@ -34,6 +34,16 @@ const TEST_OVERLAY: AwakenerOverlayRecord = {
   descriptionArgs: {},
 }
 
+function buildOverlayLookup(
+  overlays: readonly AwakenerOverlayRecord[],
+): Map<string, AwakenerOverlayRecord> {
+  const entries = overlays.flatMap((overlay) => [
+    [overlay.displayName.toLowerCase(), overlay] as const,
+    ...overlay.aliases.map((alias) => [alias.toLowerCase(), overlay] as const),
+  ])
+  return new Map(entries)
+}
+
 describe('RichSegmentRenderer', () => {
   it('renders interactive skill tokens and forwards click callbacks', () => {
     const onSkillClick = vi.fn()
@@ -472,7 +482,7 @@ describe('RichSegmentRenderer', () => {
     render(
       <RichSegmentRenderer
         onMechanicClick={onMechanicClick}
-        overlays={[TEST_OVERLAY]}
+        overlayByName={buildOverlayLookup([TEST_OVERLAY])}
         segment={{type: 'mechanic', name: 'Temporary Counter'}}
         skillLevel={1}
         stats={null}
@@ -491,7 +501,6 @@ describe('RichSegmentRenderer', () => {
       <RichSegmentRenderer
         onMechanicClick={onMechanicClick}
         overlayByName={new Map([['temporary counter', TEST_OVERLAY]])}
-        overlays={[]}
         segment={{type: 'mechanic', name: 'Temporary Counter'}}
         skillLevel={1}
         stats={null}
@@ -509,7 +518,7 @@ describe('RichSegmentRenderer', () => {
     render(
       <RichSegmentRenderer
         onMechanicClick={onMechanicClick}
-        overlays={[TEST_OVERLAY]}
+        overlayByName={buildOverlayLookup([TEST_OVERLAY])}
         segment={{type: 'mechanic', name: 'Temporary Counter'}}
         skillLevel={1}
         stats={null}
@@ -529,12 +538,12 @@ describe('RichSegmentRenderer', () => {
   it('uses overlay text colors for mechanic tokens', () => {
     render(
       <RichSegmentRenderer
-        overlays={[
+        overlayByName={buildOverlayLookup([
           {
             ...TEST_OVERLAY,
             textColor: 'shield',
           },
-        ]}
+        ])}
         segment={{type: 'mechanic', name: 'Counter'}}
         skillLevel={1}
         stats={null}
@@ -552,7 +561,7 @@ describe('RichSegmentRenderer', () => {
   it('renders mechanic icons when the tag icon preference is enabled', async () => {
     const {container} = render(
       <RichSegmentRenderer
-        overlays={[TEST_OVERLAY]}
+        overlayByName={buildOverlayLookup([TEST_OVERLAY])}
         segment={{type: 'mechanic', name: 'Counter'}}
         showTagIcons
         skillLevel={1}
@@ -581,7 +590,7 @@ describe('RichSegmentRenderer', () => {
     const {container} = render(
       <RichSegmentRenderer
         onMechanicClick={vi.fn()}
-        overlays={[TEST_OVERLAY]}
+        overlayByName={buildOverlayLookup([TEST_OVERLAY])}
         segment={{type: 'mechanic', name: 'Counter'}}
         showTagIcons
         skillLevel={1}
@@ -602,7 +611,7 @@ describe('RichSegmentRenderer', () => {
   it('hides mechanic icons when the tag icon preference is disabled', () => {
     const {container} = render(
       <RichSegmentRenderer
-        overlays={[TEST_OVERLAY]}
+        overlayByName={buildOverlayLookup([TEST_OVERLAY])}
         segment={{type: 'mechanic', name: 'Counter'}}
         showTagIcons={false}
         skillLevel={1}
@@ -644,7 +653,7 @@ describe('RichSegmentRenderer', () => {
     render(
       <RichSegmentRenderer
         onMechanicClick={onMechanicClick}
-        overlays={[realmOverlay]}
+        overlayByName={buildOverlayLookup([realmOverlay])}
         segment={{type: 'realm', name: 'Chaos'}}
         skillLevel={1}
         stats={null}
@@ -670,7 +679,7 @@ describe('RichSegmentRenderer', () => {
     render(
       <RichSegmentRenderer
         onMechanicClick={onMechanicClick}
-        overlays={[realmOverlay]}
+        overlayByName={buildOverlayLookup([realmOverlay])}
         segment={{type: 'realm', name: 'Chaos'}}
         skillLevel={1}
         stats={null}
@@ -690,12 +699,12 @@ describe('RichSegmentRenderer', () => {
   it('renders mechanic tokens without overlay details as coming soon', () => {
     render(
       <RichSegmentRenderer
-        overlays={[
+        overlayByName={buildOverlayLookup([
           {
             ...TEST_OVERLAY,
             descriptionTemplate: '   ',
           },
-        ]}
+        ])}
         segment={{type: 'mechanic', name: 'Counter'}}
         skillLevel={1}
         stats={null}
@@ -720,7 +729,7 @@ describe('RichSegmentRenderer', () => {
     render(
       <RichSegmentRenderer
         onMechanicClick={onMechanicClick}
-        overlays={[catalogOverlay]}
+        overlayByName={buildOverlayLookup([catalogOverlay])}
         segment={{type: 'mechanic', name: 'Counter'}}
         skillLevel={1}
         stats={null}
@@ -737,7 +746,7 @@ describe('RichSegmentRenderer', () => {
   it('renders mechanic tokens as plain text when details exist but no popover callback is provided', () => {
     render(
       <RichSegmentRenderer
-        overlays={[TEST_OVERLAY]}
+        overlayByName={buildOverlayLookup([TEST_OVERLAY])}
         segment={{type: 'mechanic', name: 'Counter'}}
         skillLevel={1}
         stats={null}

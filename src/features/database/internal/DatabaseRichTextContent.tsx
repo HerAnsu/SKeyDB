@@ -50,7 +50,6 @@ export function DatabaseRichTextContent({
   onSkillClick,
   onMechanicClick,
 }: DatabaseRichTextContentProps) {
-  const resolvedOverlays = useMemo(() => referenceLayer?.accessibleOverlays ?? [], [referenceLayer])
   const parseContext = useMemo(
     () =>
       buildDatabaseRichTextParseContext(
@@ -83,7 +82,6 @@ export function DatabaseRichTextContent({
           onMechanicClick={onMechanicClick}
           onSkillClick={onSkillClick}
           overlayByName={referenceLayer?.overlayByName}
-          overlays={resolvedOverlays}
           segment={segment}
           showVisibleScaling={showVisibleScaling}
           showTagIcons={showTagIcons}

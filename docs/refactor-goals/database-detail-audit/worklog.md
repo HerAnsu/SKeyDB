@@ -177,3 +177,22 @@
 - Validation: targeted controller/model tests passed with 19 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; targeted ESLint passed; Prettier check passed; `git diff --check` passed.
 - Complexity signal: scanner maxFunctionLines for the popover controller family dropped from the prior 404-line hook body to 140 lines after the split.
 - User audit notes queued for post-C7 audit: browse-controller entity-state recomputation and rich rendering fallback/popover section branch work must be reconciled into the candidate register.
+
+### 2026-05-17 - Earlier-commit root-fix audit reconciled missing findings
+
+- Source: user requested `$refactor-rootfix` audit of earlier branch commits and supplied two missing audit notes.
+- Scout/review result: C7 was a prior root-fix miss but is now implemented by `b190fe6 refactor: split database popover trail actions`.
+- Candidate register additions: C11 browse-controller inactive entity recomputation, C12 `DatabaseReferencePopover` description-section fallback duplication, and C13 `RichSegmentRenderer` overlay list-scan fallback compatibility fossil.
+- Caller audit: FFF found the only production `RichSegmentRenderer` caller is `DatabaseRichTextContent`, which already has `referenceLayer.overlayByName`; direct overlays-only rendering remains test-only.
+- Root-fix decision: selected C12 and C13 together as W10 because both are rich/reference rendering leftovers and can be simplified without crossing product scope.
+- Active task: W10 resolve rich rendering fallback leftovers.
+
+### 2026-05-17 - W10 implemented and reviewed
+
+- Slice: rich rendering fallback leftovers.
+- Files changed: `DatabaseReferencePopover.tsx`, `DatabaseReferencePopover.test.tsx`, `RichSegmentRenderer.tsx`, `RichSegmentRenderer.test.tsx`, `RichSegmentTokens.tsx`, `DatabaseRichTextContent.tsx`, `DatabaseRichTextContent.test.tsx`.
+- Characterization: added popover description-section computed-arg coverage; updated rich segment tests to use the production overlay map contract.
+- Simplification: popover entry/section fallback text now shares one builder; rich token overlay resolution is map-only; `DatabaseRichTextContent` no longer derives/passes an overlay array for renderer compatibility.
+- Refactor review: pass. This removes the old fallback/compatibility paths rather than hardening around them; no builder, collection, package, app shell, or broad visual redesign changes.
+- Validation: targeted rich rendering tests passed with 46 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; targeted ESLint passed; Prettier check passed; `git diff --check` passed.
+- Next: implement C11 browse-controller inactive entity recomputation.
