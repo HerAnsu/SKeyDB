@@ -12,9 +12,10 @@ import {buildCardKeywordFooterText} from './card-keywords'
 import {getCovenants, type Covenant} from './covenants'
 import type {CovenantFullRecord} from './covenants-full'
 import {
-  addDatabaseReferenceInfoToLookups,
+  buildDatabaseDerivedSkillReferenceInfo,
   buildDatabaseOverlayLookup,
   buildDatabaseOverlayReferenceInfo,
+  DatabaseReferenceLookupAccumulator,
   type DatabaseReferenceInfo,
   type ResolvedDatabaseReferenceLayer,
 } from './database-reference-layer'
@@ -153,32 +154,6 @@ function buildCovenantSetEffectReferenceInfo(
   }
 }
 
-function buildDerivedSkillReferenceInfo(
-  record: DerivedSkillRecord,
-  formulaContext?: PublicFormulaContext,
-): DatabaseReferenceInfo<DerivedSkillRecord> {
-  const resolved = resolveDescribedRecord(
-    record,
-    {rank: 1, formulaContext},
-    {maxRank: 6, formulaContext},
-  )
-
-  return {
-    kind: 'derived-skill',
-    id: record.id,
-    name: record.displayName,
-    label: `Derived · ${record.displayName}`,
-    record,
-    description: resolved.description,
-    keywordFooterText: buildCardKeywordFooterText(record.cardKeywords),
-    descriptionRank: 1,
-    descriptionMaxRank: 6,
-    influencingEnlightenSlots: [],
-    influencingTalentIds: [],
-    influenceBadges: [],
-  }
-}
-
 function buildAwakenerSkillReferenceInfo(
   record: AwakenerSkillRecord,
   formulaContext?: PublicFormulaContext,
@@ -264,16 +239,6 @@ function buildOverlayNameSet(overlays: AwakenerOverlayRecord[]): Set<string> {
   return names
 }
 
-function addReferenceInfos(
-  referenceInfoByName: Map<string, DatabaseReferenceInfo>,
-  referenceInfoById: Map<string, DatabaseReferenceInfo>,
-  infos: DatabaseReferenceInfo[],
-): void {
-  for (const info of infos) {
-    addDatabaseReferenceInfoToLookups(referenceInfoByName, referenceInfoById, info)
-  }
-}
-
 function buildPosseReferenceEntries(
   records: Posse[],
 ): DatabaseReferenceInfo<ArtifactDescriptionRecord>[] {
@@ -346,8 +311,7 @@ export function buildGlobalDatabaseReferenceLayer({
   posses = getPosses(),
   wheels = getWheels(),
 }: BuildGlobalDatabaseReferenceLayerOptions = {}): ResolvedDatabaseReferenceLayer {
-  const referenceInfoByName = new Map<string, DatabaseReferenceInfo>()
-  const referenceInfoById = new Map<string, DatabaseReferenceInfo>()
+  const referenceInfos = new DatabaseReferenceLookupAccumulator()
   const overlayNameSet = buildOverlayNameSet(overlays)
   const referencedDerivedSkills = derivedSkills.filter(
     (entry) => !overlayNameSet.has(entry.displayName.toLowerCase()),
@@ -362,13 +326,13 @@ export function buildGlobalDatabaseReferenceLayer({
   const posseInfos = buildPosseReferenceEntries(posses)
   const covenantInfos = buildCovenantReferenceEntries(covenants)
 
-  addReferenceInfos(referenceInfoByName, referenceInfoById, [
+  referenceInfos.addMany([
     ...extraReferenceInfos,
     ...wheelInfos,
     ...posseInfos,
     ...covenantInfos,
     ...referencedDerivedSkills.map((record) =>
-      buildDerivedSkillReferenceInfo(record, formulaContext),
+      buildDatabaseDerivedSkillReferenceInfo(record, formulaContext),
     ),
     ...referencedAwakenerSkills.map((record) =>
       buildAwakenerSkillReferenceInfo(record, formulaContext),
@@ -376,9 +340,7 @@ export function buildGlobalDatabaseReferenceLayer({
   ])
 
   for (const overlay of overlays) {
-    addDatabaseReferenceInfoToLookups(
-      referenceInfoByName,
-      referenceInfoById,
+    referenceInfos.add(
       buildDatabaseOverlayReferenceInfo(overlay, null, [], formulaContext),
       overlay.aliases,
     )
@@ -394,8 +356,8 @@ export function buildGlobalDatabaseReferenceLayer({
       ...referencedAwakenerSkills.map((entry) => entry.displayName),
     ]),
     accessibleOverlays: overlays,
-    referenceInfoByName,
-    referenceInfoById,
+    referenceInfoByName: referenceInfos.referenceInfoByName,
+    referenceInfoById: referenceInfos.referenceInfoById,
     overlayByName: buildDatabaseOverlayLookup(overlays),
   }
 }
@@ -430,7 +392,7 @@ export async function hydrateGlobalDatabaseReferenceInfo(
   if (info.kind === 'derived-skill') {
     const {loadPublicDerivedSkillDetailById} = await import('./public-detail-record-adapters')
     const record = await loadPublicDerivedSkillDetailById(info.id)
-    return record ? buildDerivedSkillReferenceInfo(record, formulaContext) : info
+    return record ? buildDatabaseDerivedSkillReferenceInfo(record, formulaContext) : info
   }
 
   if (info.kind === 'overlay') {

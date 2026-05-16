@@ -99,5 +99,24 @@
 - Simplification: parser callers can build a `RichTextParseContext` once; database rich text memoizes that context for the current record/reference layer while preserving the existing `parseRichDescription` wrapper.
 - Refactor review: pass. Parser precedence and database rich-text behavior are preserved; no dependency, builder, collection, or app shell changes.
 - Validation: `npm test -- --run src/domain/rich-text.test.ts src/domain/database-rich-text.test.ts src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1` passed with 46 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; Prettier check passed; `git diff --check` passed.
-- Commit: pending this slice commit.
+- Commit: `1e97410 refactor: reuse rich text parse context`. Pre-commit ran lint, `test:bounded` (186 files / 1228 tests), script tests, and `build:quiet`.
 - Next: queue the reference-layer accumulator or popover-controller slice.
+
+### 2026-05-16 - W6 selected
+
+- Scout reconciliation: C6 is a real source-level boundary smell; C9 is also a strong bounded renderer split; C7 remains queued because the popover controller already has a model seam and no active bug.
+- Judge decision: selected C6 because reference lookup assembly and derived-skill info creation are duplicated across awakener, wheel, and global layers, while first-writer-wins precedence is subtle enough to pin before rewriting.
+- Active task: `W6` extract shared database reference-layer accumulator.
+- Root-fix shape: add a small shared accumulator and shared derived-skill reference-info builder, but keep each layer's ordering/accessibility decisions visible in the layer builders.
+- Validation planned: `npm test -- --run src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts --pool=forks --maxWorkers=1`, `npx tsc -p tsconfig.app.json --noEmit --pretty false`, Prettier, `git diff --check`, packet checker.
+
+### 2026-05-16 - W6 implemented and reviewed
+
+- Slice: shared database reference-layer accumulator.
+- Files changed: `src/domain/database-reference-layer.ts`, `src/domain/awakeners-database-reference-layer.ts`, `src/domain/wheels-database-reference-layer.ts`, `src/domain/global-database-reference-layer.ts`, `src/domain/wheels-database-reference-layer.test.ts`, `src/domain/global-database-reference-layer.test.ts`.
+- Characterization: added wheel duplicate name/id precedence, overlay alias first-writer-wins, and global same-named overlay-over-skill/derived coverage.
+- Simplification: shared lookup insertion policy now lives in `DatabaseReferenceLookupAccumulator`; shared derived-skill reference-info construction now lives in `buildDatabaseDerivedSkillReferenceInfo`.
+- Refactor review: pass after correcting a potential semantic drift where awakener-layer global derived references briefly received `formulaContext`; final behavior keeps prior rank/stats-only resolution there.
+- Validation: targeted reference-layer tests passed with 19 tests; broader `src/domain` sweep passed with 77 files / 520 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; Prettier check passed; `git diff --check` passed.
+- Commit: pending this slice commit.
+- Next: queue C9 rich segment renderer split as the next strong root-fix candidate; C8 needs characterization first; C7 remains queued.

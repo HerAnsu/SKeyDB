@@ -38,7 +38,7 @@
       "name": "src/domain database/detail/reference layers",
       "status": "mapped",
       "evidence": ["S1 domain/detail scout", "S1 rich/reference scout"],
-      "next": "Queued candidates C4, C5, C6, and C8."
+      "next": "Implemented C4, C5, and C6; queued candidate C8."
     },
     {
       "name": "src/features/database/**",
@@ -56,7 +56,7 @@
       "name": "rich text/reference rendering",
       "status": "mapped",
       "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R3", "S1 rich/reference scout"],
-      "next": "Implemented C2 and C3; queued candidates C6 and C9."
+      "next": "Implemented C2, C3, and C6; queued candidate C9."
     },
     {
       "name": "popover/detail modal/tab controller flows",
@@ -68,7 +68,7 @@
       "name": "direct database/detail collection scans",
       "status": "mapped",
       "evidence": ["S1 domain/detail scout", "S1 database React scout"],
-      "next": "Active worker slice W1 covers modal-host scans; C6/C7 lower priority."
+      "next": "Implemented modal-host and reference-layer lookup slices; C7 remains queued."
     }
   ],
   "candidates": [
@@ -151,7 +151,7 @@
         "src/domain/database-rich-text.test.ts"
       ],
       "evidence": ["parseRichDescription rebuilds normalized card-name lookup on every parse."],
-      "next": "Implemented by W5 in commit pending."
+      "next": "Implemented by W5 in commit 1e97410."
     },
     {
       "id": "C4",
@@ -183,7 +183,7 @@
       "id": "C6",
       "title": "Reference-layer builder accumulator and wheel-reference reuse",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/domain/database-reference-layer.ts",
         "src/domain/awakeners-database-reference-layer.ts",
@@ -192,7 +192,7 @@
         "src/domain/database-reference-layer-audit.test.ts"
       ],
       "evidence": ["Awakener, wheel, and global layers repeat lookup/card-name construction and rebuild wheel reference entries."],
-      "next": "Characterize duplicate-name and alias precedence before implementation."
+      "next": "Implemented by W6 in commit pending."
     },
     {
       "id": "C7",
@@ -205,7 +205,7 @@
         "src/features/database/internal/database-popover-controller-model.ts"
       ],
       "evidence": ["Hook still owns root/nested opening, async hydration, global trail ownership events, navigation, and root props construction."],
-      "next": "Queue after C1 because prior popover model extraction is already protected."
+      "next": "Queued. UI/detail scout found the hook is complex but already has a model seam; rewrite only if a concrete controller bug or repeated nested-open smell becomes the active slice."
     },
     {
       "id": "C8",
@@ -230,7 +230,7 @@
         "src/features/database/internal/RichSegmentRenderer.test.tsx"
       ],
       "evidence": ["Renderer branches across text, skill, reference, stat, mechanic, realm, scaling, description args, plural args, and overlay icon effects."],
-      "next": "Cautious follow-up after lookup/root-fix slices; tests are strong but behavior is user-visible."
+      "next": "Queued as a strong follow-up root-fix: bounded component split after C6."
     },
     {
       "id": "C10",
@@ -768,6 +768,127 @@
           "C7 popover controller hook split",
           "C8 public V3 child schema unknown fields",
           "C9 RichSegmentRenderer component split"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J6",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose reference-layer accumulator root-fix slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-architecture",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded source-level reference-layer rewrite slice.",
+      "receipt": {
+        "decision": "C6 selected as W6 because the repeated reference-layer assembly crosses awakener, wheel, and global builders and scatters first-writer-wins precedence policy across local loops.",
+        "root_fix": "Introduce a small shared reference accumulator and shared derived-skill reference-info builder while keeping each layer responsible for source ordering and accessibility.",
+        "characterization_required": [
+          "first-writer-wins alias collision behavior",
+          "wheel layer wheel-before-overlay-before-global-derived ordering",
+          "global overlay-vs-derived/skill precedence"
+        ],
+        "validation": [
+          "src/domain/wheels-database-reference-layer.test.ts",
+          "src/domain/global-database-reference-layer.test.ts",
+          "src/domain/awakeners-database-view.test.ts",
+          "src/domain/database-reference-layer-audit.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W6",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract shared database reference-layer accumulator",
+      "skills": [
+        "$refactor-architecture",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/domain/database-reference-layer.ts",
+        "src/domain/awakeners-database-reference-layer.ts",
+        "src/domain/wheels-database-reference-layer.ts",
+        "src/domain/global-database-reference-layer.ts",
+        "src/domain/wheels-database-reference-layer.test.ts",
+        "src/domain/global-database-reference-layer.test.ts",
+        "src/domain/awakeners-database-view.test.ts",
+        "src/domain/database-reference-layer-audit.test.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Add characterization for reference lookup precedence, replace repeated local lookup assembly with a shared accumulator and shared derived-skill reference-info builder, keep layer ordering explicit, run targeted reference-layer tests, and record receipt.",
+      "receipt": {
+        "slice": "Extract shared database reference-layer accumulator",
+        "files_changed": [
+          "src/domain/database-reference-layer.ts",
+          "src/domain/awakeners-database-reference-layer.ts",
+          "src/domain/wheels-database-reference-layer.ts",
+          "src/domain/global-database-reference-layer.ts",
+          "src/domain/wheels-database-reference-layer.test.ts",
+          "src/domain/global-database-reference-layer.test.ts"
+        ],
+        "what_got_simpler": [
+          "Awakener, wheel, and global reference layers now share one lookup accumulator for name/id insertion.",
+          "Wheel, global, and awakener global-derived reference entries now share one derived-skill reference-info helper.",
+          "Layer builders still show their own ordering and accessibility rules directly."
+        ],
+        "behavior_preserved": [
+          "Normalized name keys still use trim().toLowerCase().",
+          "Name, alias, id, and overlay lookup collisions remain first-writer-wins.",
+          "Canonical names are inserted before aliases.",
+          "Awakener, wheel, and global insertion orders are preserved.",
+          "Global same-named overlays still win over skills and derived records through the existing pre-filtering rule.",
+          "Global hydration and public-detail loading remain in the global layer."
+        ],
+        "current_complexity": "Before: each reference-layer builder allocated and populated lookup maps locally, and derived-skill reference-info construction was duplicated across wheel/global/awakener global-derived paths.",
+        "expected_complexity_after": "After: lookup population policy and derived-skill info construction live in the shared reference-layer boundary, while source ordering remains explicit in each layer.",
+        "root_fix_patch_decision": "Root-fix slice selected because the repeated lookup assembly crossed all three reference layers and the source-level accumulator removes the boundary smell rather than patching individual loops.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added local characterization for precedence-sensitive reference-layer behavior.",
+        "validation": [
+          "npm test -- --run src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts --pool=forks --maxWorkers=1",
+          "npm test -- --run src/domain --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/database-reference-layer.ts src/domain/awakeners-database-reference-layer.ts src/domain/wheels-database-reference-layer.ts src/domain/global-database-reference-layer.ts src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts --pool=forks --maxWorkers=1",
+          "npm test -- --run src/domain --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/database-reference-layer.ts src/domain/awakeners-database-reference-layer.ts src/domain/wheels-database-reference-layer.ts src/domain/global-database-reference-layer.ts src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full pre-commit suite is pending for this slice commit."
+        ],
+        "followups_not_done": [
+          "C8 public V3 child schema unknown fields",
+          "C9 RichSegmentRenderer component split",
+          "C7 popover controller hook split"
         ],
         "learning_lint_candidates": [],
         "scope_expansion_requested": false

@@ -1,11 +1,11 @@
 import {getAwakenerOverlays} from './awakener-overlays'
 import type {AwakenerOverlayRecord, DerivedSkillRecord} from './awakener-source-schema'
-import {buildCardKeywordFooterText} from './card-keywords'
 import {
-  addDatabaseReferenceInfoToLookups,
   buildAccessibleDatabaseOverlays,
+  buildDatabaseDerivedSkillReferenceInfo,
   buildDatabaseOverlayLookup,
   buildDatabaseOverlayReferenceInfo,
+  DatabaseReferenceLookupAccumulator,
   type DatabaseReferenceInfo,
   type ResolvedDatabaseReferenceLayer,
 } from './database-reference-layer'
@@ -63,32 +63,6 @@ interface BuildWheelReferenceInfoEntriesOptions {
   formulaContext?: PublicFormulaContext
 }
 
-function buildDerivedSkillReferenceInfo(
-  record: DerivedSkillRecord,
-  formulaContext?: PublicFormulaContext,
-): DatabaseReferenceInfo<DerivedSkillRecord> {
-  const resolved = resolveDescribedRecord(
-    record,
-    {rank: 1, formulaContext},
-    {maxRank: 6, formulaContext},
-  )
-
-  return {
-    kind: 'derived-skill',
-    id: record.id,
-    name: record.displayName,
-    label: `Derived · ${record.displayName}`,
-    record,
-    description: resolved.description,
-    keywordFooterText: buildCardKeywordFooterText(record.cardKeywords),
-    descriptionRank: 1,
-    descriptionMaxRank: 6,
-    influencingEnlightenSlots: [],
-    influencingTalentIds: [],
-    influenceBadges: [],
-  }
-}
-
 export function buildWheelReferenceInfoEntries({
   activeDescriptionRank = 1,
   activeWheelId,
@@ -117,8 +91,7 @@ export function buildWheelDatabaseReferenceLayer({
   overlays = getAwakenerOverlays(),
   wheelRecords = getWheelsFull(),
 }: BuildWheelDatabaseReferenceLayerOptions = {}): ResolvedDatabaseReferenceLayer {
-  const referenceInfoByName = new Map<string, DatabaseReferenceInfo>()
-  const referenceInfoById = new Map<string, DatabaseReferenceInfo>()
+  const referenceInfos = new DatabaseReferenceLookupAccumulator()
   const wheelInfos = buildWheelReferenceInfoEntries({
     activeDescriptionRank,
     activeWheelId,
@@ -130,30 +103,20 @@ export function buildWheelDatabaseReferenceLayer({
   const overlayByName = buildDatabaseOverlayLookup(accessibleOverlays)
   const globalDerivedSkillInfos = derivedSkills
     .filter((record) => record.ownerAwakenerId === undefined)
-    .map((record) => buildDerivedSkillReferenceInfo(record, formulaContext))
+    .map((record) => buildDatabaseDerivedSkillReferenceInfo(record, formulaContext))
 
   wheelInfos.forEach((info, index) => {
     const sourceRecord = wheelRecords[index]
-    addDatabaseReferenceInfoToLookups(
-      referenceInfoByName,
-      referenceInfoById,
-      info,
-      sourceRecord.aliases,
-    )
+    referenceInfos.add(info, sourceRecord.aliases)
   })
 
   for (const overlay of accessibleOverlays) {
     const overlayInfo = buildDatabaseOverlayReferenceInfo(overlay, null, [], formulaContext)
-    addDatabaseReferenceInfoToLookups(
-      referenceInfoByName,
-      referenceInfoById,
-      overlayInfo,
-      overlay.aliases,
-    )
+    referenceInfos.add(overlayInfo, overlay.aliases)
   }
 
   for (const info of globalDerivedSkillInfos) {
-    addDatabaseReferenceInfoToLookups(referenceInfoByName, referenceInfoById, info)
+    referenceInfos.add(info)
   }
 
   return {
@@ -162,8 +125,8 @@ export function buildWheelDatabaseReferenceLayer({
       ...globalDerivedSkillInfos.map((info) => info.name),
     ]),
     accessibleOverlays,
-    referenceInfoByName,
-    referenceInfoById,
+    referenceInfoByName: referenceInfos.referenceInfoByName,
+    referenceInfoById: referenceInfos.referenceInfoById,
     overlayByName,
   }
 }

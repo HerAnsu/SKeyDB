@@ -1,8 +1,10 @@
 import type {
   AwakenerEnlightenRecord,
   AwakenerOverlayRecord,
+  DerivedSkillRecord,
   FullStats,
 } from './awakener-source-schema'
+import {buildCardKeywordFooterText} from './card-keywords'
 import {resolveDescribedRecord, type DescribedRecord} from './description-records'
 import type {PublicFormulaContext} from './public-formula-context'
 
@@ -84,6 +86,42 @@ export function addDatabaseReferenceInfoToLookups<TRecord extends DescribedRecor
   }
 }
 
+export class DatabaseReferenceLookupAccumulator {
+  readonly referenceInfoByName = new Map<string, DatabaseReferenceInfo>()
+  readonly referenceInfoById = new Map<string, DatabaseReferenceInfo>()
+
+  add<TRecord extends DescribedRecord>(
+    info: DatabaseReferenceInfo<TRecord>,
+    aliases: readonly string[] = [],
+  ): void {
+    addDatabaseReferenceInfoToLookups(
+      this.referenceInfoByName,
+      this.referenceInfoById,
+      info,
+      aliases,
+    )
+  }
+
+  addMany(
+    infos: readonly DatabaseReferenceInfo[],
+    getAliases: (info: DatabaseReferenceInfo, index: number) => readonly string[] = () => [],
+  ): void {
+    infos.forEach((info, index) => {
+      this.add(info, getAliases(info, index))
+    })
+  }
+
+  toLookups(): {
+    byName: Map<string, DatabaseReferenceInfo>
+    byId: Map<string, DatabaseReferenceInfo>
+  } {
+    return {
+      byName: this.referenceInfoByName,
+      byId: this.referenceInfoById,
+    }
+  }
+}
+
 export function buildDatabaseOverlayLabel(overlay: AwakenerOverlayRecord): string {
   return `${overlay.overlayType.charAt(0).toUpperCase()}${overlay.overlayType.slice(1)}`
 }
@@ -147,5 +185,44 @@ export function buildDatabaseOverlayReferenceInfo(
     influencingEnlightenSlots,
     influencingTalentIds,
     influenceBadges,
+  }
+}
+
+export interface BuildDatabaseDerivedSkillReferenceInfoOptions {
+  label?: string
+  rank?: number
+  maxRank?: number
+  stats?: FullStats | null
+}
+
+export function buildDatabaseDerivedSkillReferenceInfo(
+  record: DerivedSkillRecord,
+  formulaContext?: PublicFormulaContext,
+  {
+    label = `Derived · ${record.displayName}`,
+    rank = 1,
+    maxRank = 6,
+    stats = null,
+  }: BuildDatabaseDerivedSkillReferenceInfoOptions = {},
+): DatabaseReferenceInfo<DerivedSkillRecord> {
+  const resolved = resolveDescribedRecord(
+    record,
+    {rank, stats, formulaContext},
+    {maxRank, stats, formulaContext},
+  )
+
+  return {
+    kind: 'derived-skill',
+    id: record.id,
+    name: record.displayName,
+    label,
+    record,
+    description: resolved.description,
+    keywordFooterText: buildCardKeywordFooterText(record.cardKeywords),
+    descriptionRank: rank,
+    descriptionMaxRank: maxRank,
+    influencingEnlightenSlots: [],
+    influencingTalentIds: [],
+    influenceBadges: [],
   }
 }

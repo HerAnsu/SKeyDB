@@ -1,5 +1,6 @@
 import {describe, expect, it, vi} from 'vitest'
 
+import {resolveDatabaseReferenceInfo} from './database-reference-info'
 import {
   buildDatabaseOverlayReferenceInfo,
   type DatabaseReferenceInfo,
@@ -8,6 +9,7 @@ import {parseDatabaseRichDescription} from './database-rich-text'
 import {resolveDescriptionTemplate} from './description-args'
 import {
   buildCovenantDatabaseDescriptionRecord,
+  buildGlobalDatabaseReferenceLayer,
   buildPosseDatabaseDescriptionRecord,
   hydrateGlobalDatabaseReferenceInfo,
 } from './global-database-reference-layer'
@@ -208,5 +210,57 @@ describe('hydrateGlobalDatabaseReferenceInfo', () => {
     expect(renderedText).toContain('3 Set')
     expect(renderedText).toContain('6 Set')
     expect(renderedText).toContain('Gain 1 Arithmetica')
+  })
+})
+
+describe('buildGlobalDatabaseReferenceLayer', () => {
+  it('keeps same-named overlays ahead of skills and derived records', () => {
+    const referenceLayer = buildGlobalDatabaseReferenceLayer({
+      awakenerSkills: [
+        {
+          id: 'skill.test.counter',
+          ownerAwakenerId: 999,
+          kind: 'strike',
+          displayName: 'Counter',
+          descriptionTemplate: 'Counter skill.',
+          descriptionArgs: {},
+          cardKeywords: [],
+          variants: [],
+        },
+      ],
+      covenants: [],
+      derivedSkills: [
+        {
+          id: 'derived.test.counter',
+          displayName: 'Counter',
+          descriptionTemplate: 'Counter derived.',
+          descriptionArgs: {},
+          cardKeywords: [],
+          childDerivedSkillIds: [],
+          variants: [],
+        },
+      ],
+      overlays: [
+        {
+          id: 'overlay.test.counter',
+          displayName: 'Counter',
+          overlayType: 'mechanic',
+          aliases: [],
+          descriptionTemplate: 'Counter overlay.',
+          descriptionArgs: {},
+        },
+      ],
+      posses: [],
+      wheels: [],
+    })
+
+    expect(resolveDatabaseReferenceInfo(referenceLayer, 'Counter')).toEqual(
+      expect.objectContaining({
+        kind: 'overlay',
+        id: 'overlay.test.counter',
+      }),
+    )
+    expect(referenceLayer.referenceInfoById.get('skill.test.counter')).toBeUndefined()
+    expect(referenceLayer.referenceInfoById.get('derived.test.counter')).toBeUndefined()
   })
 })
