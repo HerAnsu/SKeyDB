@@ -1,10 +1,16 @@
 import {describe, expect, it} from 'vitest'
 
-import {getDzoneSeasonSummaries} from '@/domain/dzone'
+import {getDzoneSeasonById, getDzoneSeasonSummaries} from '@/domain/dzone'
 
 import {
   buildDZoneHistoryYearGroups,
+  createDZoneHistoryExpandedYearsState,
+  getDZoneHistoryCountdownDisplay,
+  getDZoneHistoryExpandedYearsForSelection,
+  getDZoneHistoryNextSearchParams,
   getDZoneHistoryVisibleSeasons,
+  resolveDZoneHistorySelection,
+  toggleDZoneHistoryExpandedYear,
 } from './d-zone-history-view-model'
 
 describe('d-zone history view model', () => {
@@ -27,5 +33,67 @@ describe('d-zone history view model', () => {
 
     expect(groups[0]?.year).toBe('2026')
     expect(groups[0]?.seasons[0]?.period).toBeGreaterThan(groups[0]?.seasons.at(-1)?.period ?? 0)
+  })
+
+  it('resolves URL selection with current and latest fallbacks', () => {
+    const summaries = getDzoneSeasonSummaries()
+
+    expect(
+      resolveDZoneHistorySelection({
+        now: new Date('2026-05-12T00:00:00.000Z'),
+        seasonParam: 'dzone-0001',
+        summaries,
+      }).selectedSummary.period,
+    ).toBe(1)
+    expect(
+      resolveDZoneHistorySelection({
+        now: new Date('2026-05-12T00:00:00.000Z'),
+        seasonParam: 'dzone-not-real',
+        summaries,
+      }).selectedSummary.period,
+    ).toBe(60)
+    expect(
+      resolveDZoneHistorySelection({
+        now: new Date('2099-01-01T00:00:00.000Z'),
+        seasonParam: null,
+        summaries,
+      }).selectedSummary.period,
+    ).toBe(60)
+  })
+
+  it('repairs expanded years for changed selections without mutating search-forced expansion', () => {
+    const state = createDZoneHistoryExpandedYearsState('dzone-0001', '2024')
+    const expandedYears = getDZoneHistoryExpandedYearsForSelection(state, 'dzone-0060', '2026')
+
+    expect([...expandedYears]).toEqual(['2024', '2026'])
+    expect([...state.years]).toEqual(['2024'])
+
+    const nextState = toggleDZoneHistoryExpandedYear(state, 'dzone-0060', '2026', '2024')
+
+    expect(nextState.selectedSeasonId).toBe('dzone-0060')
+    expect([...nextState.years]).toEqual(['2026'])
+  })
+
+  it('builds season query params without dropping unrelated params', () => {
+    const currentParams = new URLSearchParams('foo=bar&season=dzone-0001')
+    const nextParams = getDZoneHistoryNextSearchParams(currentParams, 'dzone-0002')
+
+    expect(nextParams.toString()).toBe('foo=bar&season=dzone-0002')
+    expect(currentParams.toString()).toBe('foo=bar&season=dzone-0001')
+  })
+
+  it('only displays countdown text for active selected seasons', () => {
+    const activeSeason = getDzoneSeasonById('dzone-0060')
+    const endedSeason = getDzoneSeasonById('dzone-0001')
+
+    if (!activeSeason || !endedSeason) {
+      throw new Error('Expected fixture seasons to exist.')
+    }
+    expect(
+      getDZoneHistoryCountdownDisplay(activeSeason, new Date('2026-05-12T00:00:00.000Z')),
+    ).toMatch(/^Ends in/)
+    expect(getDZoneHistoryCountdownDisplay(endedSeason, new Date('2026-05-12T00:00:00.000Z'))).toBe(
+      '',
+    )
   })
 })

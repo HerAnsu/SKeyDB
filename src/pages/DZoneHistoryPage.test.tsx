@@ -1,6 +1,6 @@
 import {act, fireEvent, render, screen, waitFor, within} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {MemoryRouter, useLocation} from 'react-router-dom'
+import {MemoryRouter, useLocation, useNavigate} from 'react-router-dom'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {DZoneHistoryPage} from './DZoneHistoryPage'
@@ -31,11 +31,26 @@ function LocationProbe() {
   return <output data-testid='location'>{`${location.pathname}${location.search}`}</output>
 }
 
-function renderHistoryPage(initialEntries = ['/d-zone/history']) {
+function BackProbe() {
+  const navigate = useNavigate()
+  return (
+    <button
+      onClick={() => {
+        void navigate(-1)
+      }}
+      type='button'
+    >
+      Back one entry
+    </button>
+  )
+}
+
+function renderHistoryPage(initialEntries = ['/d-zone/history'], initialIndex?: number) {
   return render(
-    <MemoryRouter initialEntries={initialEntries}>
+    <MemoryRouter initialEntries={initialEntries} initialIndex={initialIndex}>
       <DZoneHistoryPage />
       <LocationProbe />
+      <BackProbe />
     </MemoryRouter>,
   )
 }
@@ -220,6 +235,56 @@ describe('DZoneHistoryPage', () => {
 
     expect(screen.getByRole('heading', {level: 2, name: 'Season 2'})).toBeInTheDocument()
     expect(screen.getByTestId('location')).toHaveTextContent('/d-zone/history?season=dzone-0002')
+  })
+
+  it('falls back for invalid season params without rewriting the URL', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-05-12T00:00:00Z'))
+
+    renderHistoryPage(['/d-zone/history?season=dzone-not-real&foo=bar'])
+
+    expect(screen.getByRole('heading', {level: 2, name: 'Season 60'})).toBeInTheDocument()
+    expect(screen.getByTestId('location')).toHaveTextContent(
+      '/d-zone/history?season=dzone-not-real&foo=bar',
+    )
+  })
+
+  it('preserves unrelated query params, replaces history, and keeps search text on selection', () => {
+    renderHistoryPage(['/origin', '/d-zone/history?foo=bar&season=dzone-0001'], 1)
+
+    const searchBox = screen.getByRole('searchbox', {name: /Search D-zone seasons/i})
+    fireEvent.change(searchBox, {target: {value: 'season 2'}})
+    const archivePanel = screen.getByRole('region', {name: /D-zone season archive/i})
+    fireEvent.click(within(archivePanel).getByRole('button', {name: /^Select Season 2/i}))
+
+    expect(screen.getByTestId('location')).toHaveTextContent(
+      '/d-zone/history?foo=bar&season=dzone-0002',
+    )
+    expect(searchBox).toHaveValue('season 2')
+
+    fireEvent.click(screen.getByRole('button', {name: 'Back one entry'}))
+
+    expect(screen.getByTestId('location')).toHaveTextContent('/origin')
+  })
+
+  it('auto-expands the selected season year after search-driven selection', () => {
+    renderHistoryPage(['/d-zone/history?season=dzone-0001'])
+
+    expect(document.getElementById('d-zone-history-year-2026-button')).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    )
+
+    const searchBox = screen.getByRole('searchbox', {name: /Search D-zone seasons/i})
+    fireEvent.change(searchBox, {target: {value: 'season 60'}})
+    const archivePanel = screen.getByRole('region', {name: /D-zone season archive/i})
+    fireEvent.click(within(archivePanel).getByRole('button', {name: /^Select Season 60/i}))
+    fireEvent.change(searchBox, {target: {value: ''}})
+
+    expect(document.getElementById('d-zone-history-year-2026-button')).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
   })
 
   it('shows an archive data accuracy note from the season browser panel', () => {

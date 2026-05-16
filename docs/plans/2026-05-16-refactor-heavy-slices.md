@@ -45,6 +45,7 @@
   - Initial scout pass completed across domain/data-access, timeline, D-Zone, tests, TypeScript, and harness/scripts.
   - Small safe cleanup pass completed for D-Zone drawer timer cleanup, timeline category/tag helpers, and script execution hardening.
   - R6/R7 timeline resolver and derived-pool slice completed: entity lookup is preindexed, derived banner pool logic is extracted, and linked-pair/missing-wheel behavior is characterized.
+  - R4/R5 D-Zone route and inspector state slice completed: history selection/year/query helpers and inspector disclosure/alert state helpers are extracted and characterized.
 - In progress:
   - None.
 - Next:
@@ -59,8 +60,8 @@
 | R1 | Public V3 detail adapter trust boundary | Proposed | High | Large domain/data-access | `npm run test:unit -- src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts src/data-access/public-data/repository.test.ts` |
 | R2 | Upgrade patch schema and resolver typing | Proposed | High | Medium-large domain | `npm run test:unit -- src/domain/awakeners-full-resolver.test.ts src/domain/public-detail-record-adapters.test.ts` |
 | R3 | Rich description token grammar dedupe | Proposed | Medium-high | Medium domain | `npm run test:unit -- src/domain/description-args.test.ts src/domain/database-rich-text.test.ts src/domain/public-description-args.test.ts` |
-| R4 | D-Zone history route/view-model boundary | Proposed | High | Medium React/page model | `npm test -- --run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts --pool=forks --maxWorkers=1` |
-| R5 | D-Zone season inspector state model | Proposed | Medium-high | Medium React/domain helper | `npm test -- --run src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx --pool=forks --maxWorkers=1` |
+| R4 | D-Zone history route/view-model boundary | Done | High | Medium React/page model | `npm test -- --run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts --pool=forks --maxWorkers=1` |
+| R5 | D-Zone season inspector state model | Done | Medium-high | Medium React/domain helper | `npm test -- --run src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx --pool=forks --maxWorkers=1` |
 | R6 | Timeline entity resolution preindex | Done | Medium-high | Medium timeline plumbing | `npm test -- --run src/pages/timeline/timelineArtworkModel.test.ts src/pages/timeline/BannerCard.test.tsx src/pages/timeline/EventList.test.tsx --pool=forks --maxWorkers=1` |
 | R7 | Timeline derived pool builder extraction | Done | Medium-high | Medium domain | `npm test -- --run src/domain/timeline-data.test.ts --pool=forks --maxWorkers=1` |
 | R8 | Shared jsdom layout/window test helpers | Proposed | Medium | Small-medium test infra | `npm test -- --run src/features/builder/BuilderPage.wheels.test.tsx src/pages/DZoneHistoryPage.test.tsx --pool=forks --maxWorkers=1` |
@@ -177,6 +178,12 @@
 **Stop condition:**
 - Do not redesign the drawer or season inspector in this slice.
 
+**Completion notes:**
+- Completed 2026-05-16.
+- `d-zone-history-view-model.ts` now owns history selection fallback, active-only countdown text, query-param construction, and selected-year expansion repair.
+- `DZoneHistoryPage.tsx` remains the router/UI coordinator without duplicating URL, countdown, and year-state rules inline.
+- Characterization added for invalid season fallback, unrelated query preservation, replace navigation, search retention, selected-year expansion repair, and active-only countdown text.
+
 ## R5: D-Zone Season Inspector State Model
 
 **Problem:** `DZoneSeasonInspector` repairs selected alert and open wave state during render with season-id bookkeeping and repeated Set repair logic.
@@ -203,6 +210,12 @@
 
 **Stop condition:**
 - Do not move visual wave card layout or CSS.
+
+**Completion notes:**
+- Completed 2026-05-16.
+- `d-zone-season-inspector-state.ts` now owns first-wave defaults, stale-season wave disclosure repair, toggle normalization, and alert selection fallback.
+- `DZoneSeasonInspector.tsx` keeps rendering/layout while delegating state repair to the helper.
+- Direct state tests cover stale wave state, toggling from stale state, valid/stale alert selection, and empty alert options.
 
 ## R6: Timeline Entity Resolution Preindex
 
