@@ -14,20 +14,17 @@ import {
   resolveDescriptionArgs,
   resolveDescriptionTemplate,
 } from './description-args'
+import {
+  createDescriptionArgTokenPattern,
+  createPluralMacroPattern,
+} from './description-token-grammar'
 import type {PublicDescriptionArg} from './public-description-args'
 import {loadPublicAwakenerDetailById} from './public-detail-record-adapters'
 import {adaptPublicV3TalentRecord} from './public-v3-awakener-record-adapters'
 
 const DETAIL_DESCRIPTION_SCOPES: PublicDataScope[] = [...PUBLIC_DATA_SCOPES]
-const DESCRIPTION_ARG_KEY_PATTERN = String.raw`(?:(?:StateArg|DescArg|Arg)\d+|[A-Za-z][A-Za-z0-9_]*)`
-const DESCRIPTION_ARG_TOKEN_PATTERN = new RegExp(
-  String.raw`\[(?:(?:[A-Za-z]+|\{[^}\]]+\}):)?(?<argKey>${DESCRIPTION_ARG_KEY_PATTERN})\]`,
-  'g',
-)
-const PLURAL_MACRO_PATTERN = new RegExp(
-  String.raw`\{plural:(?<argToken>\[(?:(?:[A-Za-z]+|\{[^}\]]+\}):)?${DESCRIPTION_ARG_KEY_PATTERN}\])\|(?<singular>[^|{}]+)\|(?<plural>[^{}]+)\}`,
-  'g',
-)
+const DESCRIPTION_ARG_TOKEN_PATTERN = createDescriptionArgTokenPattern('g')
+const PLURAL_MACRO_PATTERN = createPluralMacroPattern('g')
 
 async function loadResolvedSkill(
   awakenerId: number,
@@ -428,6 +425,62 @@ describe('description-args', () => {
     )
 
     expect(rendered).toBe('Inflict 2 stacks on the 3rd play.')
+  })
+
+  it('leaves unknown and malformed public V3 arg tokens unchanged', () => {
+    const rendered = resolveDescriptionTemplate(
+      'Gain [Missing] and [Bad-Key]. {plural:[Missing]|stack|stacks}',
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '2',
+        },
+      },
+    )
+
+    expect(rendered).toBe('Gain [Missing] and [Bad-Key]. {plural:[Missing]|stack|stacks}')
+  })
+
+  it('resolves adjacent description arg tokens without swallowing separators', () => {
+    const rendered = resolveDescriptionTemplate('[Arg1][Arg2] [Arg1]% [Arg3]%', {
+      Arg1: {
+        kind: 'fixed',
+        value: '5',
+        suffix: '%',
+      },
+      Arg2: {
+        kind: 'fixed',
+        value: 'X',
+      },
+      Arg3: {
+        kind: 'fixed',
+        value: '10',
+        suffix: '%',
+      },
+    })
+
+    expect(rendered).toBe('5%X 5% 10%')
+  })
+
+  it('chooses plural macros from absolute stat-scaled values', () => {
+    const rendered = resolveDescriptionTemplate(
+      'Inflict [Arg1] {plural:[Arg1]|stack|stacks}.',
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '1',
+          suffix: '%',
+          stat: 'ATK',
+        },
+      },
+      {
+        stats: {
+          ATK: '200',
+        },
+      },
+    )
+
+    expect(rendered).toBe('Inflict 1% {ATK} stacks.')
   })
 
   it('explains scaled computed formula hovers with player-facing math labels', () => {

@@ -555,6 +555,40 @@ describe('parseRichDescription', () => {
     ])
   })
 
+  it('parses adjacent public V3 arg and macro tokens in priority order', () => {
+    const result = parseRichDescription(
+      '[{Poison}:Arg1]{plural:[{Poison}:Arg1]|stack|stacks}{ordinal:2nd}',
+      EMPTY_CARDS,
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '2',
+        },
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'descriptionArg', argKey: 'Arg1', channel: 'Poison'},
+      {type: 'argPlural', argKey: 'Arg1', channel: 'Poison', singular: 'stack', plural: 'stacks'},
+      {type: 'text', value: '2nd'},
+    ])
+  })
+
+  it('keeps unknown public V3 arg tokens literal', () => {
+    const result = parseRichDescription('Gain [Missing] and [Bad-Key].', EMPTY_CARDS, {
+      Arg1: {
+        kind: 'fixed',
+        value: '2',
+      },
+    })
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Gain '},
+      {type: 'text', value: '[Missing]'},
+      {type: 'text', value: ' and [Bad-Key].'},
+    ])
+  })
+
   it('collapses public V3 ordinal macros to display text', () => {
     const result = parseRichDescription('On the {ordinal:3rd} play.', EMPTY_CARDS)
 
