@@ -46,12 +46,12 @@ after editing packet files.
 
 | Focus area | Status | Evidence | Next task or terminal reason |
 |---|---|---|---|
-| `src/domain` database/detail/reference layers | queued | Prior packets plus active Scout S1 | Reconcile domain/detail scout findings |
-| `src/features/database/**` | queued | Prior packets plus active Scout S1 | Reconcile React/detail flow scout findings |
-| Public detail record adapters/resolvers | mapped | `docs/archive/plans/2026-05-16-refactor-heavy-slices.md` R1/R2 completed | Verify residual candidates from S1 |
-| Rich text/reference rendering | queued | R3 completed token grammar extraction; active Scout S1 | Reconcile rich text/reference scout findings |
-| Popover/detail modal/tab controller flows | queued | Active Scout S1 | Reconcile database React scout findings |
-| Direct database/detail collection scans | queued | Active Scout S1 | Reconcile domain scan evidence |
+| `src/domain` database/detail/reference layers | done | S1/S2; commits `f2c6d57`, `d9a4da4`, `a76a6e9`, `88f2f3a` | Implemented C4, C5, C6, C8 |
+| `src/features/database/**` | active | S1/S2; commits `88aa9e5`, `5e3ecae`, `1e97410`, `71cc332`; W9 pending commit | C7 implemented; earlier-commit root-fix audit pending |
+| Public detail record adapters/resolvers | done | Prior R1/R2 plus S1; commits `8197a13`, `d6b74af`, `223c6d1`, `f2c6d57`, `d9a4da4`, `88f2f3a` | Terminal implemented |
+| Rich text/reference rendering | done | Prior R3 plus S1/S2; commits `0db9f80`, `5e3ecae`, `1e97410`, `a76a6e9`, `71cc332` | Terminal implemented |
+| Popover/detail modal/tab controller flows | done | S1/S2; commit `88aa9e5`; W9 pending commit | C7 implemented |
+| Direct database/detail collection scans | done | S1/S2; commits `88aa9e5`, `5e3ecae`, `1e97410`, `f2c6d57`, `a76a6e9` | Terminal implemented for scoped database/detail scans |
 
 Terminal statuses: `implemented`, `blocked`, `out_of_scope_by_user`, `superseded`.
 Non-terminal statuses: `not_started`, `queued`, `mapped`.
@@ -64,7 +64,16 @@ Non-terminal statuses: `not_started`, `queued`, `mapped`.
 | Public upgrade patch resolver typing | Prior heavy-slices R2 | implemented | public detail adapter upgrade entries, full resolver, tests | `docs/archive/plans/2026-05-16-refactor-heavy-slices.md` R2; commit `223c6d1` | Supplied as protected prior work |
 | Rich description token grammar dedupe | Prior heavy-slices R3 | implemented | `description-token-grammar`, `description-args`, `rich-text`, tests | `docs/archive/plans/2026-05-16-refactor-heavy-slices.md` R3; commit `0db9f80` | Supplied as protected prior work |
 | Database route public catalog fixture extraction | Prior heavy-slices R9 | implemented | database routes tests, public catalog fixtures | `docs/archive/plans/2026-05-16-refactor-heavy-slices.md` R9; commit `243894c` | Supplied as protected prior work |
-| Current domain/database/detail audit candidates | S1 | queued | Domain/detail/reference, database feature, rich text/reference flows | Active scout subagents | Reconcile after S1 |
+| C1 DbDetailModalHost lookup and route-loading cleanup | S1 | implemented | `DbDetailModalHost`, detail tests, database routes tests | commit `88aa9e5` | Terminal implemented |
+| C2 RichSegmentRenderer overlay lookup map | S1 | implemented | rich renderer, database rich content, reference layer | commit `5e3ecae` | Terminal implemented |
+| C3 rich text parse context reuse | S1 | implemented | `rich-text`, `database-rich-text`, `DatabaseRichTextContent` | commit `1e97410` | Terminal implemented |
+| C4 public owned child record index | S1 | implemented | public detail adapters/tests | commit `f2c6d57` | Terminal implemented |
+| C5 patched awakener resolver narrowing | S1 | implemented | full resolver/tests | commit `d9a4da4` | Terminal implemented |
+| C6 reference-layer accumulator/reuse | S1/S2 | implemented | database reference layers/tests | commit `a76a6e9` | Terminal implemented |
+| C7 popover controller hook split for hydration/trail actions | S1/S2 | implemented | `useDatabasePopoverController`, `useDatabasePopoverTrailActions`, controller tests | 2026-05-17 review rejected prior superseded rationale; W9 pending commit | Terminal implemented |
+| C8 public V3 child schema unknown fields | S1 | implemented | public V3 adapters/tests | commit `88f2f3a` | Terminal implemented |
+| C9 RichSegmentRenderer component split | S1 | implemented | renderer split files/tests | commit `71cc332` | Terminal implemented |
+| C10 Database entity tabs | S1/S2 | out_of_scope_by_user | `DatabaseEntityTabs` | Top-level database navigation, not detail/modal/popover/controller hardening; prior scout found no actionable detail-flow smell | Terminal outside requested scope |
 
 ## Scope Expansion Protocol
 
@@ -74,7 +83,7 @@ Worker slices remain bounded by `allowed_files`, but the allowed set should be l
 
 | Candidate | Trigger | Skill | Status | Next task or reason |
 |---|---|---|---|---|
-| Exclude `.worktrees` from future complexity scans or scanner invocation | Complexity script scanned old worktree files | `$refactor-learning-maintainer` / `$refactor-lint-law` | queued | Review after implementation slice; likely command hygiene note rather than product change |
+| Exclude `.worktrees` from future complexity scans or scanner invocation | Complexity script scanned old worktree files | `$refactor-learning-maintainer` / `$refactor-lint-law` | out_of_scope_by_user | Terminal for this product refactor: command hygiene is outside requested domain/database/detail TypeScript + React hardening, and harness edits remain protected unless explicitly approved |
 
 ## Non-goals / Protected Behavior
 

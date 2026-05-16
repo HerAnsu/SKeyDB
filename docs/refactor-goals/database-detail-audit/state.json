@@ -3,7 +3,7 @@
   "slug": "database-detail-audit",
   "status": "active",
   "created": "2026-05-16",
-  "updated": "2026-05-16",
+  "updated": "2026-05-17",
   "intake": {
     "status": "completed",
     "risk_posture": "Behavior-preserving broad continuation; do not treat size alone as a blocker.",
@@ -198,14 +198,18 @@
       "id": "C7",
       "title": "Popover controller hook split for hydration/trail actions",
       "source_task": "S1",
-      "status": "superseded",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/features/database/internal/useDatabasePopoverController.ts",
         "src/features/database/internal/useDatabasePopoverController.test.tsx",
-        "src/features/database/internal/database-popover-controller-model.ts"
+        "src/features/database/internal/database-popover-controller-model.ts",
+        "src/features/database/internal/useDatabasePopoverTrailActions.ts"
       ],
-      "evidence": ["Hook still owns root/nested opening, async hydration, global trail ownership events, navigation, and root props construction."],
-      "next": "Superseded for this tranche by the existing database-popover-controller-model seam and fresh scout review; reopen only for a concrete nested-open/hydration/trail bug or repeated callback smell."
+      "evidence": [
+        "Hook still owns root/nested opening, async hydration, global trail ownership events, navigation, and root props construction.",
+        "2026-05-17 review found the prior superseded reason was insufficient under the completion rule because an existing model seam did not fully remove the repeated callback/root-nested action smell."
+      ],
+      "next": "Implemented by W9 in the C7 popover controller trail-action split."
     },
     {
       "id": "C8",
@@ -248,8 +252,9 @@
       "title": "Complexity scan should exclude old worktree files or record filtered interpretation",
       "trigger": "audit-complexity and audit-performance-patterns scanned .worktrees/awakener-builds-guide",
       "skill": "$refactor-learning-maintainer | $refactor-lint-law",
-      "status": "queued",
-      "next": "Review after implementation slice; likely command hygiene note, not product change."
+      "status": "out_of_scope_by_user",
+      "reason": "Scanner command hygiene is outside the requested domain/database/detail TypeScript + React product refactor scope, and harness edits are protected unless explicitly approved.",
+      "next": "Terminal for this product refactor: this is scanner command hygiene outside the requested domain/database/detail TypeScript + React hardening scope, and harness edits remain protected unless explicitly approved."
     }
   ],
   "tasks": [
@@ -1090,11 +1095,152 @@
         "learning_lint_candidates": [],
         "scope_expansion_requested": false
       }
+    },
+    {
+      "id": "S2",
+      "role": "scout",
+      "status": "done",
+      "title": "Completion-quality branch reconciliation",
+      "skills": [
+        "$refactor-scout",
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-typescript",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/domain/**",
+        "src/features/database/**",
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Reconcile existing receipts and current branch state before claiming completion.",
+      "receipt": {
+        "evidence": [
+          "Read goal.md, state.json, worklog.md, git status/log, packet checker output, scoped complexity/performance scanner hints, and popover controller/model/test files.",
+          "C7 was reclassified from superseded to queued because the prior reason cited an existing seam, not an implemented change that fully removed the hook/action complexity.",
+          "M1 was made terminal as out_of_scope_by_user because scanner command hygiene is outside the requested product/domain database-detail scope and harness edits are protected."
+        ],
+        "validation": [
+          "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/database-detail-audit"
+        ]
+      }
+    },
+    {
+      "id": "J9",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose popover controller completion slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Select the remaining in-scope C7 implementation path.",
+      "receipt": {
+        "decision": "C7 selected as W9 because the hook still mixes trail state, root and nested open paths, lazy hydration gating, global owner events, navigation callbacks, and portal-entry construction.",
+        "root_fix": "Extract the root/nested trail action orchestration into a focused controller-action seam while preserving the existing popover model helpers and public hook return shape.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/useDatabasePopoverController.test.tsx src/features/database/internal/database-popover-controller-model.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "git diff --check"
+        ]
+      }
+    },
+    {
+      "id": "W9",
+      "role": "worker",
+      "status": "done",
+      "title": "Split database popover controller trail actions",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/useDatabasePopoverController.ts",
+        "src/features/database/internal/useDatabasePopoverController.test.tsx",
+        "src/features/database/internal/database-popover-controller-model.ts",
+        "src/features/database/internal/database-popover-controller-model.test.ts",
+        "src/features/database/internal/useDatabasePopoverTrailActions.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/goal.md",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Add or confirm focused characterization for popover trail behavior, extract trail action orchestration from the god hook into a focused action seam, preserve public hook props/return values and root/nested hydration/navigation behavior, run targeted tests/typecheck/diff checks, and record receipt.",
+      "receipt": {
+        "slice": "Split database popover controller trail actions",
+        "files_changed": [
+          "src/features/database/internal/useDatabasePopoverController.ts",
+          "src/features/database/internal/useDatabasePopoverTrailActions.ts",
+          "src/features/database/internal/useDatabasePopoverController.test.tsx"
+        ],
+        "what_got_simpler": [
+          "The public controller hook now owns only cross-controller trail ownership coordination and delegates trail behavior.",
+          "Trail state, root open actions, nested open actions, lazy hydration gates, navigation projection, and portal props are separated inside a focused trail-actions module.",
+          "The first extraction attempt was rejected as extraction without enough deletion; the final split reduced the largest popover-controller function from 404 lines before the slice to 140 lines in the extracted action module."
+        ],
+        "behavior_preserved": [
+          "Public hook options and return shape are unchanged.",
+          "Root and nested reference opening, overlay hydration, stale hydration cancellation, live reference updates, formula context threading, navigation close-then-route behavior, and cross-controller close behavior are preserved.",
+          "Only one controller trail remains open when another controller opens a root trail."
+        ],
+        "current_complexity": "Before: useDatabasePopoverController mixed trail state, root/nested open callbacks, lazy hydration gating, global owner events, navigation callbacks, and portal-entry construction in one 404-line hook body.",
+        "expected_complexity_after": "After: useDatabasePopoverController is a small ownership coordinator; useDatabasePopoverTrailActions owns the concept boundary with smaller root, nested, and portal-projection action seams. Complexity scanner maxFunctionLines for the popover controller family dropped to 140.",
+        "root_fix_patch_decision": "Root-fix slice selected because the prior superseded status was invalid and a simple helper extraction would have moved the smell. The final shape deletes responsibilities from the public hook and splits direct root/nested/portal consumers of the trail concept together.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added local characterization for cross-controller ownership behavior.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/useDatabasePopoverController.test.tsx src/features/database/internal/database-popover-controller-model.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/internal/useDatabasePopoverController.ts src/features/database/internal/useDatabasePopoverTrailActions.ts src/features/database/internal/useDatabasePopoverController.test.tsx",
+          "npx prettier --check src/features/database/internal/useDatabasePopoverController.ts src/features/database/internal/useDatabasePopoverTrailActions.ts src/features/database/internal/useDatabasePopoverController.test.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/internal/useDatabasePopoverController.test.tsx src/features/database/internal/database-popover-controller-model.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/internal/useDatabasePopoverController.ts src/features/database/internal/useDatabasePopoverTrailActions.ts src/features/database/internal/useDatabasePopoverController.test.tsx",
+          "npx prettier --check src/features/database/internal/useDatabasePopoverController.ts src/features/database/internal/useDatabasePopoverTrailActions.ts src/features/database/internal/useDatabasePopoverController.test.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full pre-commit suite pending for this slice commit."
+        ],
+        "followups_not_done": [
+          "Earlier-commit root-fix audit, including browse-controller entity-state recomputation and rich rendering fallback/popover section branch findings."
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "Focused database/detail/domain audit completed with eight new implementation slices on this continuation: C1 modal/detail lookup, C2 overlay lookup rendering, C3 rich parse context, C4 owned public child index, C5 resolver narrowing, C6 shared reference-layer accumulator, C8 public V3 child parser validation, and C9 renderer component split. Prior P1-P4 slices were preserved and recorded. No builder, collection, broad visual redesign, package, or app shell work was included.",
+    "summary": "Completion-quality reconciliation reopened and implemented C7 because the prior superseded rationale did not cite an implemented change that fully removed the popover controller hook/action smell. C1, C2, C3, C4, C5, C6, C7, C8, and C9 are implemented; prior P1-P4 slices remain protected implemented work. The earlier-commit root-fix audit is still pending, including the named browse-controller recomputation and rich rendering fallback/popover branch findings. No builder, collection, broad visual redesign, package, or app shell work is included.",
     "validation": [
       "Each implementation slice passed targeted tests, typecheck, formatting, and diff checks before commit.",
       "Each committed slice passed pre-commit verification: lint, test:bounded, test:scripts, and build:quiet.",
@@ -1103,13 +1249,13 @@
     "open_items": [
       {
         "id": "C7",
-        "status": "superseded",
-        "reason": "Popover controller complexity is real, but fresh UI/detail scout found a model seam already exists and a larger rewrite would mostly reshuffle stateful hook callbacks without removing enough recurring complexity. Reopen only for a concrete nested-open/hydration/trail smell or bug."
+        "status": "implemented",
+        "reason": "Implemented by W9; the public controller hook now delegates trail state/action/hydration/projection work to a focused trail-actions seam with cross-controller ownership characterization."
       },
       {
         "id": "M1",
-        "status": "queued",
-        "reason": "Complexity scanner output included stale .worktrees paths; this is command hygiene, not product behavior."
+        "status": "out_of_scope_by_user",
+        "reason": "Complexity scanner command hygiene is outside the requested domain/database/detail TypeScript + React product refactor scope, and harness edits are protected unless explicitly approved."
       }
     ]
   }

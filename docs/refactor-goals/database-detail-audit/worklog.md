@@ -165,3 +165,15 @@
 - Superseded with concrete reason: C7 is not an active implementation slice because the popover controller is complex but already has a model seam and no active bug/smell justifies a larger rewrite yet.
 - Maintenance queued: M1 remains command hygiene because complexity scanners included stale `.worktrees` paths.
 - Final validation state: every slice commit passed the pre-commit hook. Latest hook after W8 passed lint, `test:bounded` (186 files / 1234 tests), script tests, and `build:quiet`.
+
+### 2026-05-17 - Completion-quality reconciliation reopened C7
+
+- Source: user requested a completion-quality pass plus stricter `$refactor-rootfix` audit of earlier commits.
+- Reconciliation: C7 was changed from `superseded` to active because the prior rationale cited an existing model seam, not an implemented change or explicit design decision that fully removed the popover controller hook/action smell.
+- Maintenance: M1 was made terminal for this product refactor as `out_of_scope_by_user`; scanner command hygiene is outside the requested domain/database/detail TypeScript + React hardening scope, and harness edits remain protected unless explicitly approved.
+- Active task: W9 split database popover controller trail actions.
+- Characterization: added a test that opening a root trail in one controller closes another controller's trail, pinning the global ownership event behavior before the split.
+- Root-fix decision: rejected the first thin extraction because it moved the 380-line knot into a new hook; final split keeps `useDatabasePopoverController` as a small ownership coordinator and moves trail state/action/hydration/projection work into focused root, nested, and portal-prop action seams in `useDatabasePopoverTrailActions`.
+- Validation: targeted controller/model tests passed with 19 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; targeted ESLint passed; Prettier check passed; `git diff --check` passed.
+- Complexity signal: scanner maxFunctionLines for the popover controller family dropped from the prior 404-line hook body to 140 lines after the split.
+- User audit notes queued for post-C7 audit: browse-controller entity-state recomputation and rich rendering fallback/popover section branch work must be reconciled into the candidate register.
