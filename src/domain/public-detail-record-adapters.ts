@@ -30,6 +30,16 @@ import {
   adaptPublicV3OverlayRecord,
   adaptPublicV3SkillRecord,
   adaptPublicV3TalentRecord,
+  parsePublicV3DerivedSkillRecord,
+  parsePublicV3EnlightenRecord,
+  parsePublicV3OverlayRecord,
+  parsePublicV3SkillRecord,
+  parsePublicV3TalentRecord,
+  type PublicV3DerivedSkillRecord,
+  type PublicV3EnlightenRecord,
+  type PublicV3OverlayRecord,
+  type PublicV3SkillRecord,
+  type PublicV3TalentRecord,
 } from './public-v3-awakener-record-adapters'
 import {
   buildWheelMainstatSeriesKey,
@@ -54,40 +64,6 @@ type PublicV3AwakenerRecord = PublicRecord & {
   substatsLv1?: Partial<Record<string, number>>
   substatScaling?: Partial<Record<string, number>>
   type?: string
-}
-type PublicV3DerivedSkillRecord = PublicRecord & {
-  cardKeywords?: unknown[]
-  childDerivedSkillIds?: string[]
-  ownerAwakenerId?: string
-  upgrades?: PublicV3UpgradeEntry[]
-}
-type PublicV3EnlightenRecord = PublicRecord & {
-  ownerAwakenerId?: string
-  slot?: string
-}
-type PublicV3OverlayRecord = PublicRecord & {
-  aliases?: string[]
-  descriptionArgs?: unknown
-  descriptionTemplate?: string
-  iconId?: string
-  ownerAwakenerId?: string
-  overlayType?: string
-  upgrades?: PublicV3UpgradeEntry[]
-}
-type PublicV3SkillRecord = PublicRecord & {
-  cardKeywords?: unknown[]
-  descriptionArgs?: unknown
-  descriptionTemplate?: string
-  ownerAwakenerId?: string
-  slot?: string
-  upgrades?: PublicV3UpgradeEntry[]
-}
-type PublicV3TalentRecord = PublicRecord & {
-  descriptionArgs?: unknown
-  descriptionTemplate?: string
-  family?: string
-  maxLevel?: number
-  ownerAwakenerId?: string
 }
 type PublicV3WheelRecord = PublicRecord & {
   aliases?: string[]
@@ -124,18 +100,10 @@ interface PublicFullDetailLoaderConfig<TRecord extends PublicRecord, TAdaptedRec
   parse: (value: unknown) => TRecord
   adapt: (record: TRecord) => TAdaptedRecord
 }
-interface PublicChildDetailLoaderConfig<TAdaptedRecord> {
+interface PublicChildDetailLoaderConfig<TRecord extends PublicRecord, TAdaptedRecord> {
   scope: PublicDataScope
-  adapt: (record: PublicRecord) => TAdaptedRecord
-}
-interface PublicV3UpgradeEntry {
-  id?: string
-  upgraderId?: string
-  upgraderType?: string
-  upgraderSlot?: string
-  ownerAwakenerId?: string
-  operation?: string
-  patch?: Record<string, unknown>
+  parse: (value: unknown) => TRecord
+  adapt: (record: TRecord) => TAdaptedRecord
 }
 
 const publicRouteInfoSchema = z.looseObject({
@@ -399,9 +367,10 @@ function adaptPublicOverlayRecord(record: PublicV3OverlayRecord) {
 async function loadPublicRecordsByIds<TRecord extends PublicRecord>(
   scope: PublicDataScope,
   ids: string[] | undefined,
+  parse: (value: unknown) => TRecord,
 ): Promise<TRecord[]> {
   const records = await Promise.all((ids ?? []).map((id) => loadPublicRecord(scope, id)))
-  return records.filter((record): record is TRecord => Boolean(record))
+  return records.flatMap((record) => (record ? [parse(record)] : []))
 }
 
 async function loadPublicDetailRecordById(
@@ -453,14 +422,19 @@ async function loadAwakenerOwnedRecords(publicAwakenerId: string) {
   const relationships = getPublicRelationshipsIndex().forward[publicAwakenerId] ?? {}
   const [ownedSkills, ownedTalents, ownedEnlightens, ownedDerivedSkills, ownedOverlays] =
     await Promise.all([
-      loadPublicRecordsByIds<PublicV3SkillRecord>('skills', relationships.ownedSkills),
-      loadPublicRecordsByIds<PublicV3TalentRecord>('talents', relationships.ownedTalents),
-      loadPublicRecordsByIds<PublicV3EnlightenRecord>('enlightens', relationships.ownedEnlightens),
-      loadPublicRecordsByIds<PublicV3DerivedSkillRecord>(
+      loadPublicRecordsByIds('skills', relationships.ownedSkills, parsePublicV3SkillRecord),
+      loadPublicRecordsByIds('talents', relationships.ownedTalents, parsePublicV3TalentRecord),
+      loadPublicRecordsByIds(
+        'enlightens',
+        relationships.ownedEnlightens,
+        parsePublicV3EnlightenRecord,
+      ),
+      loadPublicRecordsByIds(
         'derived-skills',
         relationships.ownedDerivedSkills,
+        parsePublicV3DerivedSkillRecord,
       ),
-      loadPublicRecordsByIds<PublicV3OverlayRecord>('overlays', relationships.ownedOverlays),
+      loadPublicRecordsByIds('overlays', relationships.ownedOverlays, parsePublicV3OverlayRecord),
     ])
 
   return {
@@ -635,12 +609,12 @@ async function loadPublicFullDetailById<TRecord extends PublicRecord, TAdaptedRe
   return recordPromise
 }
 
-async function loadPublicChildDetailById<TAdaptedRecord>(
+async function loadPublicChildDetailById<TRecord extends PublicRecord, TAdaptedRecord>(
   id: string,
-  config: PublicChildDetailLoaderConfig<TAdaptedRecord>,
+  config: PublicChildDetailLoaderConfig<TRecord, TAdaptedRecord>,
 ): Promise<TAdaptedRecord | undefined> {
   const record = await loadPublicDetailRecordById(config.scope, id)
-  return record ? config.adapt(record) : undefined
+  return record ? config.adapt(config.parse(record)) : undefined
 }
 
 export async function loadPublicAwakenerDetailById(
@@ -704,6 +678,7 @@ export async function loadPublicSkillDetailById(
 ): Promise<AwakenerSkillRecord | undefined> {
   return loadPublicChildDetailById(skillId, {
     scope: 'skills',
+    parse: parsePublicV3SkillRecord,
     adapt: adaptPublicV3SkillRecord,
   })
 }
@@ -713,6 +688,7 @@ export async function loadPublicTalentDetailById(
 ): Promise<AwakenerTalentRecord | undefined> {
   return loadPublicChildDetailById(talentId, {
     scope: 'talents',
+    parse: parsePublicV3TalentRecord,
     adapt: adaptPublicV3TalentRecord,
   })
 }
@@ -722,6 +698,7 @@ export async function loadPublicEnlightenDetailById(
 ): Promise<AwakenerEnlightenRecord | undefined> {
   return loadPublicChildDetailById(enlightenId, {
     scope: 'enlightens',
+    parse: parsePublicV3EnlightenRecord,
     adapt: adaptPublicV3EnlightenRecord,
   })
 }
@@ -731,6 +708,7 @@ export async function loadPublicDerivedSkillDetailById(
 ): Promise<DerivedSkillRecord | undefined> {
   return loadPublicChildDetailById(derivedSkillId, {
     scope: 'derived-skills',
+    parse: parsePublicV3DerivedSkillRecord,
     adapt: adaptPublicV3DerivedSkillRecord,
   })
 }
@@ -740,6 +718,7 @@ export async function loadPublicOverlayDetailById(
 ): Promise<AwakenerOverlayRecord | undefined> {
   return loadPublicChildDetailById(overlayId, {
     scope: 'overlays',
+    parse: parsePublicV3OverlayRecord,
     adapt: adaptPublicV3OverlayRecord,
   })
 }

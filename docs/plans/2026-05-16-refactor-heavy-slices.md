@@ -49,6 +49,7 @@
   - R3 rich description token grammar slice completed: arg-token, plural macro, ordinal macro, and channel normalization grammar now live in one shared module with parser/resolver characterization.
   - R8 shared jsdom layout/window helper slice completed: element rect, offsetHeight, and static matchMedia mock restoration now live in shared test infrastructure.
   - R9 database public catalog fixture slice completed: database route test catalog data and detail loader cache mocks moved into explicit shared fixture builders.
+  - R1 public V3 adapter trust-boundary slice completed: owned child record parsing moved into the public V3 child adapter module and generic child record casts were removed from the detail facade.
 - In progress:
   - None.
 - Next:
@@ -60,7 +61,7 @@
 
 | ID | Slice | Status | Value | Scope | Recommended First Verification |
 |----|-------|--------|-------|-------|--------------------------------|
-| R1 | Public V3 detail adapter trust boundary | Proposed | High | Large domain/data-access | `npm run test:unit -- src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts src/data-access/public-data/repository.test.ts` |
+| R1 | Public V3 detail adapter trust boundary | Done | High | Large domain/data-access | `npm run test:unit -- src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts src/data-access/public-data/repository.test.ts` |
 | R2 | Upgrade patch schema and resolver typing | Proposed | High | Medium-large domain | `npm run test:unit -- src/domain/awakeners-full-resolver.test.ts src/domain/public-detail-record-adapters.test.ts` |
 | R3 | Rich description token grammar dedupe | Done | Medium-high | Medium domain | `npm run test:unit -- src/domain/description-args.test.ts src/domain/database-rich-text.test.ts src/domain/public-description-args.test.ts` |
 | R4 | D-Zone history route/view-model boundary | Done | High | Medium React/page model | `npm test -- --run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts --pool=forks --maxWorkers=1` |
@@ -100,6 +101,12 @@
 
 **Stop condition:**
 - Stop if narrowing the shared `PublicRecord` contract becomes necessary. That is a separate root-fix slice.
+
+**Completion notes:**
+- Completed 2026-05-16.
+- Public V3 child record schemas and parse helpers now live beside the child adapters in `public-v3-awakener-record-adapters.ts`.
+- `public-detail-record-adapters.ts` now parses owned and lazily loaded skill, talent, enlighten, derived-skill, and overlay records before adapting them, instead of filtering generic `PublicRecord` values through type parameters.
+- Characterization now pins current child adapter defaults for one skill, talent, enlighten, derived skill, and overlay, plus loose public-only field preservation.
 
 ## R2: Upgrade Patch Schema And Resolver Typing
 
