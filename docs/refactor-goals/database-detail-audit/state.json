@@ -38,7 +38,7 @@
       "name": "src/domain database/detail/reference layers",
       "status": "mapped",
       "evidence": ["S1 domain/detail scout", "S1 rich/reference scout"],
-      "next": "Implemented C4, C5, and C6; queued candidate C8."
+      "next": "Implemented C4, C5, C6, and C8."
     },
     {
       "name": "src/features/database/**",
@@ -50,7 +50,7 @@
       "name": "public detail record adapters/resolvers",
       "status": "mapped",
       "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R1/R2", "S1 domain/detail scout"],
-      "next": "Prior slices implemented P1/P2; residual C4/C8 queued."
+      "next": "Prior slices implemented P1/P2; residual C4/C8 implemented."
     },
     {
       "name": "rich text/reference rendering",
@@ -211,14 +211,14 @@
       "id": "C8",
       "title": "Public V3 child schema unknown fields",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/domain/public-v3-awakener-record-adapters.ts",
         "src/domain/public-v3-awakener-record-adapters.test.ts",
         "src/domain/public-detail-record-adapters.test.ts"
       ],
       "evidence": ["Child schemas keep descriptionArgs/cardKeywords as unknown before canonical adaptation."],
-      "next": "Scout/characterize first; may be intentionally loose for legacy data."
+      "next": "Implemented by W8 in commit pending."
     },
     {
       "id": "C9",
@@ -230,7 +230,7 @@
         "src/features/database/internal/RichSegmentRenderer.test.tsx"
       ],
       "evidence": ["Renderer branches across text, skill, reference, stat, mechanic, realm, scaling, description args, plural args, and overlay icon effects."],
-      "next": "Implemented by W7 in commit pending."
+      "next": "Implemented by W7 in commit 71cc332."
     },
     {
       "id": "C10",
@@ -880,9 +880,7 @@
           "npx prettier --check src/domain/database-reference-layer.ts src/domain/awakeners-database-reference-layer.ts src/domain/wheels-database-reference-layer.ts src/domain/global-database-reference-layer.ts src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
           "git diff --check"
         ],
-        "risks": [
-          "Full pre-commit suite is pending for this slice commit."
-        ],
+        "risks": [],
         "followups_not_done": [
           "C8 public V3 child schema unknown fields",
           "C9 RichSegmentRenderer component split",
@@ -991,6 +989,104 @@
         ],
         "followups_not_done": [
           "C8 public V3 child schema unknown fields",
+          "C7 popover controller hook split"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J8",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose public V3 child schema trust-boundary slice",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Decide whether C8 is real, queued, superseded, or blocked.",
+      "receipt": {
+        "decision": "C8 selected as W8 because public V3 child parsers currently accept descriptionArgs and cardKeywords as unknown even though canonical schemas already validate those fields during adaptation.",
+        "root_fix": "Move existing canonical validation up to the public V3 child parse boundary while keeping loose public-only metadata and upgrade patch compatibility.",
+        "validation": [
+          "src/domain/public-v3-awakener-record-adapters.test.ts",
+          "src/domain/public-detail-record-adapters.test.ts",
+          "src/domain/public-data-runtime-boundary.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W8",
+      "role": "worker",
+      "status": "done",
+      "title": "Validate public V3 child description fields at parse boundary",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/domain/public-v3-awakener-record-adapters.ts",
+        "src/domain/public-v3-awakener-record-adapters.test.ts",
+        "src/domain/public-detail-record-adapters.test.ts",
+        "src/domain/public-data-runtime-boundary.test.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Replace public V3 child descriptionArgs/cardKeywords unknown schemas with canonical schemas, add focused malformed-field characterization, preserve loose metadata and defaults, run targeted tests, and record receipt.",
+      "receipt": {
+        "slice": "Validate public V3 child description fields at parse boundary",
+        "files_changed": [
+          "src/domain/public-v3-awakener-record-adapters.ts",
+          "src/domain/public-v3-awakener-record-adapters.test.ts"
+        ],
+        "what_got_simpler": [
+          "Public V3 child parsers now validate descriptionArgs and cardKeywords with the canonical schemas already used during adaptation.",
+          "The public V3 record types no longer advertise those fields as unknown."
+        ],
+        "behavior_preserved": [
+          "Missing child descriptionArgs still default to {} during adaptation.",
+          "Missing skill/derived cardKeywords still default to [] during adaptation.",
+          "Loose public-only metadata remains accepted and preserved on parsed records.",
+          "Upgrade patch payload compatibility remains untouched."
+        ],
+        "current_complexity": "Before: public V3 child parsers accepted description fields as unknown and relied on later canonical adaptation to reject malformed values.",
+        "expected_complexity_after": "After: malformed descriptionArgs/cardKeywords fail at the public V3 child parse boundary, matching the canonical adapted contract earlier.",
+        "root_fix_patch_decision": "Narrow root-fix selected because the module already had the canonical schemas and the trust-boundary smell was local.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added focused parser characterization tests.",
+        "validation": [
+          "npm test -- --run src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/domain/public-v3-awakener-record-adapters.ts src/domain/public-v3-awakener-record-adapters.test.ts",
+          "npx prettier --check src/domain/public-v3-awakener-record-adapters.ts src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/domain/public-v3-awakener-record-adapters.ts src/domain/public-v3-awakener-record-adapters.test.ts",
+          "npx prettier --check src/domain/public-v3-awakener-record-adapters.ts src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full pre-commit suite is pending for this slice commit."
+        ],
+        "followups_not_done": [
           "C7 popover controller hook split"
         ],
         "learning_lint_candidates": [],

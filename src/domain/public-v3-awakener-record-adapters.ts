@@ -8,12 +8,16 @@ import {
   awakenersEnlightenSchema,
   awakenerSkillSchema,
   awakenerTalentSchema,
+  cardKeywordsSchema,
   derivedSkillSchema,
+  descriptionArgsSchema,
   type AwakenerEnlightenRecord,
   type AwakenerOverlayRecord,
   type AwakenerSkillRecord,
   type AwakenerTalentRecord,
+  type CardKeyword,
   type DerivedSkillRecord,
+  type DescriptionArg,
 } from './awakener-source-schema'
 
 const publicV3AwakenerSkillSchema = awakenerSkillSchema.loose()
@@ -68,37 +72,37 @@ export interface PublicV3OwnedRecord {
 }
 
 export type PublicV3SkillRecord = PublicV3OwnedRecord & {
-  cardKeywords?: unknown[]
-  descriptionArgs?: unknown
+  cardKeywords?: CardKeyword[]
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   slot?: string
   upgrades?: PublicV3UpgradeEntry[]
 }
 
 export type PublicV3TalentRecord = PublicV3OwnedRecord & {
-  descriptionArgs?: unknown
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   family?: string
   maxLevel?: number
 }
 
 export type PublicV3EnlightenRecord = PublicV3OwnedRecord & {
-  descriptionArgs?: unknown
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   slot?: string
 }
 
 export type PublicV3DerivedSkillRecord = PublicV3OwnedRecord & {
-  cardKeywords?: unknown[]
+  cardKeywords?: CardKeyword[]
   childDerivedSkillIds?: string[]
-  descriptionArgs?: unknown
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   upgrades?: PublicV3UpgradeEntry[]
 }
 
 export type PublicV3OverlayRecord = PublicV3OwnedRecord & {
   aliases?: string[]
-  descriptionArgs?: unknown
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   iconId?: string
   overlayType?: string
@@ -107,37 +111,37 @@ export type PublicV3OverlayRecord = PublicV3OwnedRecord & {
 
 const publicV3SkillRecordShape = {
   kind: z.literal('skill'),
-  cardKeywords: z.array(z.unknown()).optional(),
-  descriptionArgs: z.unknown().optional(),
+  cardKeywords: cardKeywordsSchema.optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
   descriptionTemplate: z.string().optional(),
   slot: z.string().optional(),
   upgrades: z.array(publicV3UpgradeEntrySchema).optional(),
 }
 const publicV3TalentRecordShape = {
   kind: z.literal('talent'),
-  descriptionArgs: z.unknown().optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
   descriptionTemplate: z.string().optional(),
   family: z.string().optional(),
   maxLevel: z.number().optional(),
 }
 const publicV3EnlightenRecordShape = {
   kind: z.literal('enlighten'),
-  descriptionArgs: z.unknown().optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
   descriptionTemplate: z.string().optional(),
   slot: z.string().optional(),
 }
 const publicV3DerivedSkillRecordShape = {
   kind: z.literal('derivedSkill'),
-  cardKeywords: z.array(z.unknown()).optional(),
+  cardKeywords: cardKeywordsSchema.optional(),
   childDerivedSkillIds: z.array(z.string()).optional(),
-  descriptionArgs: z.unknown().optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
   descriptionTemplate: z.string().optional(),
   upgrades: z.array(publicV3UpgradeEntrySchema).optional(),
 }
 const publicV3OverlayRecordShape = {
   kind: z.literal('overlay'),
   aliases: z.array(z.string()).optional(),
-  descriptionArgs: z.unknown().optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
   descriptionTemplate: z.string().optional(),
   iconId: z.string().optional(),
   overlayType: z.string().optional(),

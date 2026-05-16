@@ -136,5 +136,24 @@
 - Simplification: main renderer now handles segment dispatch while token interactivity, overlay label/icon behavior, scaling display, and description arg/plural rendering live in focused local modules.
 - Refactor review: pass. Public props, `ActivationEvent`, variant typing, callbacks, styling, and rendered behavior are preserved; no parser/domain/popover controller changes.
 - Validation: `npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1` passed with 33 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; Prettier check passed; `git diff --check` passed.
-- Commit: pending this slice commit.
+- Commit: `71cc332 refactor: split rich segment renderer`. Pre-commit ran lint, `test:bounded` (186 files / 1231 tests), script tests, and `build:quiet`.
 - Next: C8 needs characterization first; C7 remains queued behind a concrete controller smell.
+
+### 2026-05-16 - W8 selected
+
+- Scout reconciliation: C8 is real but already contained by canonical adaptation; it is a narrow trust-boundary/type-contract smell rather than a broad runtime safety issue.
+- Judge decision: selected C8 because public V3 child parsers accept `descriptionArgs` and `cardKeywords` as unknown even though this module already has the canonical schemas that adaptation later enforces.
+- Active task: `W8` validate public V3 child description fields at parse boundary.
+- Root-fix shape: replace `z.unknown()` child `descriptionArgs`/`cardKeywords` schemas with canonical schemas, keep `z.looseObject` for public-only metadata, and leave `upgrades.patch` compatibility untouched.
+- Validation planned: `npm test -- --run src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1`, `npx tsc -p tsconfig.app.json --noEmit --pretty false`, Prettier, `git diff --check`, packet checker.
+
+### 2026-05-16 - W8 implemented and reviewed
+
+- Slice: public V3 child parser trust-boundary validation.
+- Files changed: `src/domain/public-v3-awakener-record-adapters.ts`, `src/domain/public-v3-awakener-record-adapters.test.ts`.
+- Characterization: added malformed `descriptionArgs` and `cardKeywords` parser tests plus a default/preserved-loose-metadata test.
+- Simplification: child parsers now use canonical `descriptionArgsSchema` and `cardKeywordsSchema` instead of accepting unknown payloads and relying only on later adaptation.
+- Refactor review: pass. Defaults, loose public-only metadata, and upgrade patch compatibility are preserved.
+- Validation: `npm test -- --run src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1` passed with 38 tests; `npx tsc -p tsconfig.app.json --noEmit --pretty false` passed; targeted ESLint passed; Prettier check passed; `git diff --check` passed.
+- Commit: pending this slice commit.
+- Next: C7 remains queued only behind a concrete controller smell; maintenance M1 remains queued for command hygiene.
