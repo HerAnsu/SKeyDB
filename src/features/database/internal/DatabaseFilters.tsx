@@ -1,4 +1,4 @@
-import {useId, useState, type RefObject} from 'react'
+import {useState, type RefObject} from 'react'
 
 import {
   DATABASE_AVAILABILITY_FILTER_IDS,
@@ -15,11 +15,7 @@ import {
 import {ChipFilterRow} from '@/ui/filters/ChipFilterRow'
 import {SearchInput} from '@/ui/search/SearchInput'
 
-import {
-  CatalogMobileFilterPanel,
-  CatalogMobileFilterToggle,
-  CatalogRealmFilterRow,
-} from './DatabaseChipPrimitives'
+import {CatalogMobileFilterGroup, CatalogRealmFilterRow} from './DatabaseChipPrimitives'
 import {useMobileDatabaseFilters} from './useMobileDatabaseFilters'
 
 interface DatabaseFiltersProps {
@@ -73,10 +69,6 @@ export function DatabaseFilters({
     null,
   )
   const isMobileFilters = useMobileDatabaseFilters()
-  const filterPanelIdPrefix = useId()
-  const rarityPanelId = `${filterPanelIdPrefix}-rarity`
-  const typePanelId = `${filterPanelIdPrefix}-type`
-  const sourcePanelId = `${filterPanelIdPrefix}-source`
 
   return (
     <div className='space-y-3 sm:space-y-3.5'>
@@ -95,72 +87,43 @@ export function DatabaseFilters({
             realms={REALM_FILTERS}
           />
 
-          <div className='space-y-1.5'>
-            <div className='grid grid-cols-2 gap-1.5'>
-              <CatalogMobileFilterToggle
-                activeId={rarityFilter}
-                controlsId={rarityPanelId}
-                defaultId='ALL'
-                label='Rarity'
-                onOpenChange={(open) => {
-                  setOpenMobileFilter(open ? 'rarity' : null)
-                }}
-                open={openMobileFilter === 'rarity'}
-                options={rarityFilterTabs}
-              />
-              <CatalogMobileFilterToggle
-                activeId={typeFilter}
-                controlsId={typePanelId}
-                defaultId='ALL'
-                label='Type'
-                onOpenChange={(open) => {
-                  setOpenMobileFilter(open ? 'type' : null)
-                }}
-                open={openMobileFilter === 'type'}
-                options={typeFilterTabs}
-              />
-              <CatalogMobileFilterToggle
-                activeId={availabilityFilter}
-                className='col-span-2'
-                controlsId={sourcePanelId}
-                defaultId='ALL'
-                label='Source'
-                onOpenChange={(open) => {
-                  setOpenMobileFilter(open ? 'source' : null)
-                }}
-                open={openMobileFilter === 'source'}
-                options={availabilityFilterTabs}
-              />
-            </div>
-
-            {openMobileFilter === 'rarity' ? (
-              <CatalogMobileFilterPanel
-                activeId={rarityFilter}
-                id={rarityPanelId}
-                label='Rarity'
-                onChange={onRarityFilterChange}
-                options={rarityFilterTabs}
-              />
-            ) : null}
-            {openMobileFilter === 'type' ? (
-              <CatalogMobileFilterPanel
-                activeId={typeFilter}
-                id={typePanelId}
-                label='Type'
-                onChange={onTypeFilterChange}
-                options={typeFilterTabs}
-              />
-            ) : null}
-            {openMobileFilter === 'source' ? (
-              <CatalogMobileFilterPanel
-                activeId={availabilityFilter}
-                id={sourcePanelId}
-                label='Source'
-                onChange={onAvailabilityFilterChange}
-                options={availabilityFilterTabs}
-              />
-            ) : null}
-          </div>
+          <CatalogMobileFilterGroup
+            groups={[
+              {
+                activeId: rarityFilter,
+                defaultId: 'ALL',
+                key: 'rarity',
+                label: 'Rarity',
+                onChange: (next) => {
+                  onRarityFilterChange(next as RarityFilterId)
+                },
+                options: rarityFilterTabs,
+              },
+              {
+                activeId: typeFilter,
+                defaultId: 'ALL',
+                key: 'type',
+                label: 'Type',
+                onChange: (next) => {
+                  onTypeFilterChange(next as TypeFilterId)
+                },
+                options: typeFilterTabs,
+              },
+              {
+                activeId: availabilityFilter,
+                defaultId: 'ALL',
+                key: 'source',
+                label: 'Source',
+                onChange: (next) => {
+                  onAvailabilityFilterChange(next as AvailabilityFilterId)
+                },
+                options: availabilityFilterTabs,
+                toggleClassName: 'col-span-2',
+              },
+            ]}
+            onOpenKeyChange={setOpenMobileFilter}
+            openKey={openMobileFilter}
+          />
         </div>
       ) : (
         <div className='space-y-2.5 sm:space-y-3'>

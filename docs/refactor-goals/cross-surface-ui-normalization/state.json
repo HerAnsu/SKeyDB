@@ -241,10 +241,10 @@
       "id": "C19",
       "title": "Database mobile filter group extraction",
       "source_task": "database-scout",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/features/database/internal/DatabaseFilters.tsx; WheelDatabaseFilters.tsx; DatabaseChipPrimitives.tsx; tests",
-      "evidence": "Awakener and wheel filters duplicate mobile open state, ids, toggle, panel, and desktop rows.",
-      "next": "Queue with UI/a11y checks for disclosure semantics."
+      "evidence": "Implemented in W13. Added database-internal `CatalogMobileFilterGroup` to own mobile filter toggle/panel ids, single-open-key behavior, and panel rendering; migrated awakener and wheel filters to descriptor arrays while preserving desktop `ChipFilterRow` layout and URL/filter handlers.",
+      "next": "Implemented as database-internal mobile-filter root fix; detail modal internals untouched."
     },
     {
       "id": "C20",
@@ -2321,6 +2321,162 @@
           "M2"
         ]
       }
+    },
+    {
+      "id": "J13",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose database mobile filter group extraction slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-architecture",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseChipPrimitives.tsx",
+        "src/features/database/internal/DatabaseChipPrimitives.test.tsx",
+        "src/features/database/internal/DatabaseFilters.tsx",
+        "src/features/database/internal/WheelDatabaseFilters.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/browse/useDatabaseBrowseState.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Database-internal mobile filter group used by awakener and wheel filters, preserving one-open-panel behavior.",
+      "receipt": {
+        "evidence": [
+          "DatabaseFilters and WheelDatabaseFilters duplicated mobile open state ids, toggle grid, and conditional panel rendering.",
+          "CatalogMobileFilterToggle and CatalogMobileFilterPanel already existed as the primitive pieces."
+        ],
+        "selected_candidates": [
+          "C19"
+        ],
+        "why_root_fix": "Extract the duplicated mobile group orchestration around the existing toggle/panel pieces instead of changing route/filter state.",
+        "what_not_to_change": "No desktop filter rows, search inputs, URL/history behavior, filter ids, or detail modal internals.",
+        "verification": [
+          "npx vitest run src/features/database/internal/DatabaseChipPrimitives.test.tsx src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "mobile browser checks for /database and /database/wheels"
+        ]
+      }
+    },
+    {
+      "id": "W13",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract database mobile filter group",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseChipPrimitives.tsx",
+        "src/features/database/internal/DatabaseChipPrimitives.test.tsx",
+        "src/features/database/internal/DatabaseFilters.tsx",
+        "src/features/database/internal/WheelDatabaseFilters.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/browse/useDatabaseBrowseState.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Shared database-internal mobile group component for mobile filter toggles and panels.",
+      "receipt": {
+        "slice": "Database mobile filter group extraction for C19.",
+        "evidence": [
+          "Added `CatalogMobileFilterGroup` and descriptor type in `DatabaseChipPrimitives.tsx`.",
+          "Migrated awakener filters to Rarity/Type/Source group descriptors and wheel filters to Rarity/Main stat descriptors.",
+          "Added `DatabaseChipPrimitives.test.tsx` covering one-open-panel behavior, aria-controls wiring, and option callbacks."
+        ],
+        "files_changed": [
+          "src/features/database/internal/DatabaseChipPrimitives.tsx",
+          "src/features/database/internal/DatabaseChipPrimitives.test.tsx",
+          "src/features/database/internal/DatabaseFilters.tsx",
+          "src/features/database/internal/WheelDatabaseFilters.tsx"
+        ],
+        "what_got_simpler": "Awakener and wheel filters no longer duplicate mobile panel ids, toggle grids, and conditional panel branches.",
+        "behavior_preserved": "Only one mobile panel is open at a time; aria-controls/expanded remain paired; desktop filter rows, search fields, and filter change handlers are unchanged.",
+        "current_complexity": "Two filter components duplicated the same mobile toggle/panel orchestration.",
+        "expected_complexity_after": "One database-internal primitive owns mobile group orchestration; filter components provide descriptors.",
+        "data_access_render_invariants": "No filter ids, query params, sorting, search, or result data changed.",
+        "root_fix_patch_decision": "Root fix for duplicated database mobile filter orchestration.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "New primitive test pins mobile group behavior; DatabaseRoutes and browse state tests pin route/filter state.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/features/database/internal/DatabaseChipPrimitives.test.tsx src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx -> 39 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "mobile browser checks for /database and /database/wheels -> one-open-panel behavior and panel visibility passed"
+        ],
+        "risks": "Medium; mobile disclosure markup was centralized, but tests and browser checks cover ids, panels, and route behavior.",
+        "followups_not_done": [
+          "C8"
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R13",
+      "role": "review",
+      "status": "done",
+      "title": "Review database mobile filter group extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W13 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C19 register update.",
+      "receipt": {
+        "evidence": [
+          "W13 extracts only database mobile filter orchestration and leaves desktop rows/search/URL state alone.",
+          "Focused primitive test covers the behavior that previously lacked a direct rail.",
+          "Mobile browser check confirms awakeners and wheels use the shared group."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "DatabaseFilters and WheelDatabaseFilters duplicated mobile filter toggle/panel structure.",
+          "after": "CatalogMobileFilterGroup owns the repeated mobile shell; callers provide descriptors.",
+          "net": "Reduced duplicated React/a11y wiring with local database scope."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C19 database React/UI-a11y simplification",
+          "candidate_register": "C19 implemented",
+          "root_fix_patch": "database-internal root fix",
+          "dependency_review": "not needed",
+          "characterization": "new primitive test plus route tests and browser check",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused database tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "mobile browser checks passed"
+        ],
+        "followups": [
+          "C3-C5 terminal reconciliation",
+          "C7-C8",
+          "C12",
+          "C22",
+          "M1",
+          "M2"
+        ]
+      }
     }
   ],
   "final_audit": {
@@ -2340,7 +2496,6 @@
       "C7 Timeline banner artwork complexity cleanup",
       "C8 database browse render-derived work terminal decision",
       "C12 shared compact disclosure row terminal decision",
-      "C19 database mobile filter group extraction",
       "C22 Timeline page orchestration seam",
       "M1/M2 maintenance follow-ups"
     ]

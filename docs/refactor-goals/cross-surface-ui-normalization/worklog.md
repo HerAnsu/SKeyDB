@@ -301,3 +301,25 @@
   - Browser checks for `/database`, `/database/wheels`, and `/database/posses` passed with card grids rendered and no obvious overflow.
 - Review verdict: pass-with-followups.
 - State transition: W12 done. R12 done. C21 implemented.
+
+### 2026-05-17 - W12 checkpoint committed and W13 opened
+
+- Commit: `18c6c64 refactor: simplify database card names`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- Decision: J13 selected C19 because awakener and wheel filters duplicated mobile open state, generated ids, toggle grids, and conditional filter panels.
+- State transition: J13 done. W13 active for a database-internal mobile filter group extraction.
+
+### 2026-05-17 - W13 implemented and reviewed
+
+- Slice: Database mobile filter group extraction for C19.
+- Files changed: `src/features/database/internal/DatabaseChipPrimitives.tsx`, `DatabaseChipPrimitives.test.tsx`, `DatabaseFilters.tsx`, and `WheelDatabaseFilters.tsx`.
+- What changed: Added `CatalogMobileFilterGroup` to own mobile toggle/panel ids, one-open-panel behavior, and panel rendering; awakener and wheel filters now pass descriptor arrays.
+- Behavior preserved: Desktop filter rows stay local; search inputs, filter ids, URL/history state, and filter handlers are unchanged.
+- Validation:
+  - `npx vitest run src/features/database/internal/DatabaseChipPrimitives.test.tsx src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx` passed, 39 tests.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Mobile browser checks for `/database` and `/database/wheels` passed: one-open-panel behavior and panel visibility were correct.
+- Review verdict: pass-with-followups.
+- State transition: W13 done. R13 done. C19 implemented.

@@ -1,4 +1,4 @@
-import type {CSSProperties, ReactNode} from 'react'
+import {useId, type CSSProperties, type ReactNode} from 'react'
 
 import {getRealmAccent, getRealmIcon, getRealmLabel} from '@/domain/realms'
 import {ChipFilterRow} from '@/ui/filters/ChipFilterRow'
@@ -46,6 +46,70 @@ export interface CatalogMobileFilterOption<TValue extends string> {
   summaryLabel: string
   iconSrc?: string | null
   activeStyle?: CSSProperties
+}
+
+export interface CatalogMobileFilterGroupItem<TKey extends string> {
+  activeId: string
+  defaultId: string
+  key: TKey
+  label: string
+  onChange: (next: string) => void
+  options: readonly CatalogMobileFilterOption<string>[]
+  toggleClassName?: string
+}
+
+interface CatalogMobileFilterGroupProps<TKey extends string> {
+  groups: readonly CatalogMobileFilterGroupItem<TKey>[]
+  onOpenKeyChange: (next: TKey | null) => void
+  openKey: TKey | null
+}
+
+export function CatalogMobileFilterGroup<TKey extends string>({
+  groups,
+  onOpenKeyChange,
+  openKey,
+}: CatalogMobileFilterGroupProps<TKey>) {
+  const idPrefix = useId()
+
+  return (
+    <div className='space-y-1.5'>
+      <div className='grid grid-cols-2 gap-1.5'>
+        {groups.map((group) => {
+          const controlsId = `${idPrefix}-${group.key}`
+          const open = openKey === group.key
+
+          return (
+            <CatalogMobileFilterToggle
+              activeId={group.activeId}
+              className={group.toggleClassName}
+              controlsId={controlsId}
+              defaultId={group.defaultId}
+              key={group.key}
+              label={group.label}
+              onOpenChange={(nextOpen) => {
+                onOpenKeyChange(nextOpen ? group.key : null)
+              }}
+              open={open}
+              options={group.options}
+            />
+          )
+        })}
+      </div>
+
+      {groups.map((group) =>
+        openKey === group.key ? (
+          <CatalogMobileFilterPanel
+            activeId={group.activeId}
+            id={`${idPrefix}-${group.key}`}
+            key={group.key}
+            label={group.label}
+            onChange={group.onChange}
+            options={group.options}
+          />
+        ) : null,
+      )}
+    </div>
+  )
 }
 
 interface CatalogMobileFilterToggleProps<TValue extends string> {
