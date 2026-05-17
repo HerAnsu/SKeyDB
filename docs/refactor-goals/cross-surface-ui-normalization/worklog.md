@@ -209,3 +209,26 @@
   - Browser check for `/d-zone/history` passed with no overflow and expected year/search/season controls.
 - Review verdict: pass-with-followups.
 - State transition: W8 done. R8 done. C15 and C6 implemented.
+
+### 2026-05-17 - W8 checkpoint committed and W9 opened
+
+- Commit: `b786f24 refactor: split d-zone history browser`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- Decision: J9 selected C18 because database browse sort labels/directions live in `EntityBrowseViews.tsx`, which should remain closer to orchestration and rendering.
+- State transition: J9 done. W9 active for a database-browse sort-label config helper and focused tests.
+
+### 2026-05-17 - W9 implemented and reviewed
+
+- Slice: Database browse sort label config extraction for C18.
+- Files changed: `src/features/database/browse/EntityBrowseViews.tsx`, `databaseBrowseSortLabels.ts`, and `databaseBrowseSortLabels.test.ts`.
+- What changed: Moved awakener/database and wheel sort labels/direction labels into a pure helper with direct tests.
+- Behavior preserved: Exact labels, sort state, view-model sorting, and control behavior.
+- Validation:
+  - `npx vitest run src/features/database/browse/databaseBrowseSortLabels.test.ts src/features/database/DatabaseRoutes.test.tsx` passed, 36 tests.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Goal checker passed.
+  - Browser checks for `/database` and `/database/wheels` passed with expected sort labels and no overflow.
+- Review verdict: pass-with-followups.
+- State transition: W9 done. R9 done. C18 implemented.

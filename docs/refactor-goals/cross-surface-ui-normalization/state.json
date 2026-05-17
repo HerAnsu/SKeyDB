@@ -232,10 +232,10 @@
       "id": "C18",
       "title": "Database browse sort label config",
       "source_task": "database-scout",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/features/database/browse/EntityBrowseViews.tsx; domain/config helper; tests",
-      "evidence": "Awakener and wheel sort label/direction helpers live inside the browse orchestration file.",
-      "next": "Queue as a behavior-preserving config extraction."
+      "evidence": "Implemented in W9. Added `databaseBrowseSortLabels.ts` plus focused tests and migrated `EntityBrowseViews` to import pure label/direction helpers.",
+      "next": "Implemented as database browse orchestration cleanup."
     },
     {
       "id": "C19",
@@ -1693,6 +1693,159 @@
           "C10",
           "C12",
           "C18-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J9",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose database browse sort label config slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-typescript",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/browse/EntityBrowseViews.tsx",
+        "src/features/database/browse/databaseBrowseSortLabels.ts",
+        "src/features/database/browse/databaseBrowseSortLabels.test.ts",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Pure database browse sort label/direction helper used by `EntityBrowseViews`.",
+      "receipt": {
+        "evidence": [
+          "EntityBrowseViews owns four page renderers plus local sort label/direction functions for awakeners and wheels.",
+          "The label behavior is pure and can be characterized directly without changing sort state or controls."
+        ],
+        "selected_candidates": [
+          "C18"
+        ],
+        "why_root_fix": "Move sort label tables to a pure browse helper so the orchestration component no longer carries label branching.",
+        "what_not_to_change": "No sort state, view model sorting, route behavior, or control component behavior.",
+        "verification": [
+          "npx vitest run src/features/database/browse/databaseBrowseSortLabels.test.ts src/features/database/DatabaseRoutes.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser checks for /database and /database/wheels"
+        ]
+      }
+    },
+    {
+      "id": "W9",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract database browse sort label config",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-typescript"
+      ],
+      "allowed_files": [
+        "src/features/database/browse/EntityBrowseViews.tsx",
+        "src/features/database/browse/databaseBrowseSortLabels.ts",
+        "src/features/database/browse/databaseBrowseSortLabels.test.ts",
+        "src/features/database/DatabaseRoutes.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Pure helper with exact sort labels/direction labels and migrated `EntityBrowseViews` imports.",
+      "receipt": {
+        "slice": "Database browse sort label config extraction for C18.",
+        "evidence": [
+          "Added pure `databaseBrowseSortLabels.ts` for awakener/database and wheel sort labels/direction labels.",
+          "Added `databaseBrowseSortLabels.test.ts` pinning exact labels.",
+          "Migrated `EntityBrowseViews` to import helpers and removed local branching."
+        ],
+        "files_changed": [
+          "src/features/database/browse/EntityBrowseViews.tsx",
+          "src/features/database/browse/databaseBrowseSortLabels.ts",
+          "src/features/database/browse/databaseBrowseSortLabels.test.ts"
+        ],
+        "what_got_simpler": "The browse orchestration file no longer owns sort-label branching.",
+        "behavior_preserved": "Sort labels and direction labels are exact; sort state, view model sorting, and controls are unchanged.",
+        "current_complexity": "EntityBrowseViews mixed render orchestration with sort label lookup logic.",
+        "expected_complexity_after": "Pure helper owns labels; EntityBrowseViews composes controls/views.",
+        "data_access_render_invariants": "No filtering, sorting algorithm, route, or card behavior changed.",
+        "root_fix_patch_decision": "Root fix for the database browse sort-label concept.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Focused pure helper tests plus DatabaseRoutes and browser checks cover labels in rendered pages.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/features/database/browse/databaseBrowseSortLabels.test.ts src/features/database/DatabaseRoutes.test.tsx -> 36 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /database and /database/wheels -> no overflow; sort labels and direction labels rendered"
+        ],
+        "risks": "Low; pure lookup extraction with direct tests.",
+        "followups_not_done": [
+          "C8 broader render-derived work remains queued/under review."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R9",
+      "role": "review",
+      "status": "done",
+      "title": "Review database browse sort label config extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W9 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C18 register update.",
+      "receipt": {
+        "evidence": [
+          "W9 moved sort label branching to a pure helper with tests.",
+          "It did not change sort state, sorting behavior, route behavior, or view controls.",
+          "Focused tests, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "EntityBrowseViews owned view composition and sort label branching.",
+          "after": "Sort label lookup is a pure helper; EntityBrowseViews imports it.",
+          "net": "Reduced orchestration file responsibility."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C18 database browse simplification",
+          "candidate_register": "C18 implemented",
+          "root_fix_patch": "pure-helper root fix",
+          "dependency_review": "not needed",
+          "characterization": "focused helper tests plus rendered browser checks",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C5",
+          "C7-C8",
+          "C10",
+          "C12",
+          "C19-C22",
           "M1",
           "M2"
         ]
