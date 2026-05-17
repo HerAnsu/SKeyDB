@@ -169,10 +169,10 @@
       "id": "C11",
       "title": "Timeline banner tag/pricing composition helper",
       "source_task": "timeline-scout",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/pages/timeline/BannerCard.tsx; src/pages/timeline/BannerInfoDrawer.tsx; possible local helper",
-      "evidence": "Banner hero and drawer duplicate tag/pricing composition.",
-      "next": "Queue as a low-risk Timeline-local helper slice."
+      "evidence": "Implemented in W3. Added Timeline-local `BannerMetadataList` in `src/pages/timeline/bannerMetadata.tsx`; `BannerCardHero` uses it with `limit={4}` and `BannerInfoDrawer` uses it without a limit while preserving drawer empty-row spacing.",
+      "next": "Implemented as Timeline-local root fix; no global metadata primitive extracted."
     },
     {
       "id": "C12",
@@ -764,6 +764,161 @@
         "followups": [
           "C3-C8",
           "C10-C13",
+          "C15-C23",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J3",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose Timeline banner metadata composition slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/BannerCard.tsx",
+        "src/pages/timeline/BannerInfoDrawer.tsx",
+        "src/pages/timeline/banner*",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/features/database/detail/**",
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Timeline-local root fix for duplicated banner tag/custom-tag/pricing composition, with hero limit and drawer unlimited behavior preserved.",
+      "receipt": {
+        "evidence": [
+          "BannerCardHero and BannerInfoDrawer both compose display tags, custom tags, and formatted pricing.",
+          "The same tag labels/colors are used in two visual containers, but the hero limits to four items while the drawer remains unlimited.",
+          "A Timeline-local helper/component reduces duplication without creating a premature cross-surface metadata primitive."
+        ],
+        "selected_candidates": [
+          "C11"
+        ],
+        "why_root_fix": "The repeated composition is a single Timeline concept with two direct consumers; local extraction removes duplicate logic while preserving distinct hero/drawer styling.",
+        "what_not_to_change": "No banner artwork behavior, no drawer open/collapse behavior, no Timeline route/query behavior, no global metadata primitive.",
+        "verification": [
+          "npx vitest run src/pages/timeline/BannerCard.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser check for /timeline"
+        ]
+      }
+    },
+    {
+      "id": "W3",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement Timeline banner metadata helper",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/BannerCard.tsx",
+        "src/pages/timeline/BannerInfoDrawer.tsx",
+        "src/pages/timeline/banner*"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Shared Timeline-local helper/component for banner tag/custom-tag/pricing metadata used by hero and drawer.",
+      "receipt": {
+        "slice": "Timeline-local banner metadata composition helper for C11.",
+        "evidence": [
+          "Added `src/pages/timeline/bannerMetadata.tsx` with `BannerMetadataList` and local metadata item composition.",
+          "`BannerCardHero` delegates display/custom/pricing metadata to `BannerMetadataList` with `limit={4}`.",
+          "`BannerInfoDrawer` delegates the same metadata composition without a limit and keeps the empty metadata wrapper behavior with `renderWhenEmpty`."
+        ],
+        "files_changed": [
+          "src/pages/timeline/BannerCard.tsx",
+          "src/pages/timeline/BannerInfoDrawer.tsx",
+          "src/pages/timeline/bannerMetadata.tsx"
+        ],
+        "what_got_simpler": "The display tags + custom tags + formatted pricing composition now lives in one Timeline-local component rather than two render functions.",
+        "behavior_preserved": "Hero tag order and four-item cap preserved; drawer remains uncapped; ended/active colors and separator colors preserved; pricing mode still controls formatted pricing.",
+        "current_complexity": "Two direct consumers duplicated metadata item building and separator rendering.",
+        "expected_complexity_after": "One Timeline helper owns metadata composition; hero and drawer only supply visual classes and limits.",
+        "data_access_render_invariants": "No route, artwork, drawer open/collapse, detail-link, or pricing-domain semantics changed.",
+        "root_fix_patch_decision": "Root fix for the Timeline banner metadata concept; not a global primitive.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing BannerCard tests cover pricing text, countdown/status, and artwork/detail interactions; TimelinePage test and browser check cover rendered route.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/timeline/BannerCard.test.tsx -> passed in subagent, 14 tests",
+          "git diff --check -- ... -> passed in subagent",
+          "npx vitest run src/pages/timeline/BannerCard.test.tsx src/pages/TimelinePage.test.tsx -> 24 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser check for /timeline -> no horizontal overflow; banner hero metadata rendered and drawer toggle present"
+        ],
+        "risks": "Low; helper prop surface is local to Timeline and carries visual class differences explicitly.",
+        "followups_not_done": [
+          "C4 shared metadata token remains queued because Timeline banner metadata is richer than database card metadata."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R3",
+      "role": "review",
+      "status": "done",
+      "title": "Review Timeline banner metadata helper",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W3 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and candidate register update.",
+      "receipt": {
+        "evidence": [
+          "W3 stayed within Timeline banner files and a new Timeline-local helper.",
+          "The helper removes duplicated composition without forcing a shared cross-surface metadata component.",
+          "Controller corrected the drawer empty-wrapper behavior to preserve previous spacing on sparse banners."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Banner hero and drawer independently built display tags, custom tags, pricing, labels, separators, and ended/active colors.",
+          "after": "BannerMetadataList owns item composition and separator rendering; hero/drawer provide limit and visual classes.",
+          "net": "Reduced duplicate React rendering logic while preserving distinct visual surfaces."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C11 React/component simplification; broader shared metadata C4 remains queued",
+          "candidate_register": "C11 implemented",
+          "root_fix_patch": "Timeline-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing tests and browser check sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser check passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10",
+          "C12-C13",
           "C15-C23",
           "M1",
           "M2"

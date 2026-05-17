@@ -70,3 +70,27 @@
   - Browser checks passed for `/database`, `/database/wheels`, and `/d-zone`; no horizontal overflow, D-zone alert buttons visible with shared class, 2px radius, and sans font.
 - Review verdict: pass-with-followups.
 - State transition: W2 done. R2 done. C2 and C14 implemented.
+
+### 2026-05-17 - W2 checkpoint committed and W3 opened
+
+- Commit: `126294b refactor: share compact control styling`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- Decision: J3 selected C11 because Timeline banner hero and drawer duplicate tag/custom-tag/pricing composition while keeping different visual containers.
+- State transition: J3 done. W3 active for a Timeline-local banner metadata helper/component. No global primitive extraction is approved for this slice.
+
+### 2026-05-17 - W3 implemented and reviewed
+
+- Slice: Timeline-local banner metadata composition helper for C11.
+- Worker: Halley implemented the slice in `src/pages/timeline/BannerCard.tsx`, `src/pages/timeline/BannerInfoDrawer.tsx`, and new `src/pages/timeline/bannerMetadata.tsx`.
+- Controller review adjustment: Added `renderWhenEmpty` so the drawer preserves the previous empty metadata row wrapper behavior while the hero still omits an empty row.
+- Behavior preserved: Hero tag order and four-item cap; drawer unlimited tags; ended/active colors; separator colors; pricing-mode formatting.
+- Validation:
+  - Subagent ran `npx vitest run src/pages/timeline/BannerCard.test.tsx`, 14 tests passed.
+  - Controller ran `npx vitest run src/pages/timeline/BannerCard.test.tsx src/pages/TimelinePage.test.tsx`, 24 tests passed.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Goal checker passed.
+  - Browser check for `/timeline` passed with no horizontal overflow; banner hero metadata and drawer toggle present.
+- Review verdict: pass-with-followups.
+- State transition: W3 done. R3 done. C11 implemented.
