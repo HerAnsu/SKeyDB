@@ -160,10 +160,10 @@
       "id": "C10",
       "title": "Timeline active/upcoming/archive section renderer",
       "source_task": "timeline-scout",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/pages/timeline/EventList.tsx; src/pages/timeline/TimelineBannersSection.tsx; tests",
-      "evidence": "Event and banner sections both partition active/upcoming/ended and render archive sections.",
-      "next": "Queue for a later Timeline-local simplification slice."
+      "evidence": "Implemented in W11. Added Timeline-local `TimelineStatusSections` to render active/upcoming/ended sections for events and banners; `EventList` and `TimelineBannersSection` now share the archive-section pattern while preserving event `ul` active markup, banner eager/lazy artwork behavior, section ids, and expansion state.",
+      "next": "Implemented as a Timeline-local root fix; not promoted to global UI because Database/D-zone do not share this content partition contract."
     },
     {
       "id": "C11",
@@ -1996,11 +1996,175 @@
           "M2"
         ]
       }
+    },
+    {
+      "id": "J11",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose Timeline status section renderer slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/EventList.tsx",
+        "src/pages/timeline/TimelineBannersSection.tsx",
+        "src/pages/timeline/TimelineStatusSections.tsx",
+        "src/pages/timeline/EventList.test.tsx",
+        "src/pages/timeline/TimelineArchiveSection.test.tsx",
+        "src/pages/TimelinePage.test.tsx",
+        "src/pages/timeline/BannerCard.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "database detail modal internals"
+      ],
+      "expected_output": "Timeline-local active/upcoming/ended section renderer used by events and banners while preserving archive disclosure semantics.",
+      "receipt": {
+        "evidence": [
+          "Timeline EventList and TimelineBannersSection both partition active/upcoming/ended entries and render upcoming/ended through TimelineArchiveSection.",
+          "The repeated concept is Timeline-specific; event and banner cards keep different item renderers, containers, and artwork loading."
+        ],
+        "selected_candidates": [
+          "C10"
+        ],
+        "why_root_fix": "A local renderer removes duplicated archive-section orchestration without globalizing feature-specific layout or card behavior.",
+        "what_not_to_change": "No route/search-param semantics, archive expansion ids, event filtering, banner sorting, artwork loading policy, or archive disclosure a11y behavior.",
+        "verification": [
+          "npx vitest run src/pages/timeline/EventList.test.tsx src/pages/timeline/TimelineArchiveSection.test.tsx src/pages/TimelinePage.test.tsx src/pages/timeline/BannerCard.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser check for /timeline"
+        ]
+      }
+    },
+    {
+      "id": "W11",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract Timeline status section renderer",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/EventList.tsx",
+        "src/pages/timeline/TimelineBannersSection.tsx",
+        "src/pages/timeline/TimelineStatusSections.tsx",
+        "src/pages/timeline/EventList.test.tsx",
+        "src/pages/timeline/TimelineArchiveSection.test.tsx",
+        "src/pages/TimelinePage.test.tsx",
+        "src/pages/timeline/BannerCard.test.tsx"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "database detail modal internals"
+      ],
+      "expected_output": "Reusable Timeline-local renderer for active/upcoming/ended content sections.",
+      "receipt": {
+        "slice": "Timeline active/upcoming/archive section renderer for C10.",
+        "evidence": [
+          "Added `TimelineStatusSections.tsx` with active, upcoming, and ended section rendering around the existing TimelineArchiveSection.",
+          "`EventList` passes active `ul` container, event grid classes, and EventCard rendering.",
+          "`TimelineBannersSection` passes banner grid classes and preserves active eager artwork with lazy archived artwork."
+        ],
+        "files_changed": [
+          "src/pages/timeline/EventList.tsx",
+          "src/pages/timeline/TimelineBannersSection.tsx",
+          "src/pages/timeline/TimelineStatusSections.tsx"
+        ],
+        "what_got_simpler": "Timeline event and banner sections no longer duplicate the upcoming/ended TimelineArchiveSection blocks.",
+        "behavior_preserved": "Active items render immediately, upcoming sections default open through useTimelineArchiveExpansion, ended sections remain collapsed, section ids are unchanged, and archive aria/inert behavior stays in TimelineArchiveSection.",
+        "current_complexity": "Two Timeline section components each owned similar active/upcoming/ended archive rendering.",
+        "expected_complexity_after": "One Timeline-local section renderer owns the repeated shell; page-specific item renderers stay local.",
+        "data_access_render_invariants": "No event filtering, banner sorting, URL state, detail opening, or price-mode behavior changed.",
+        "root_fix_patch_decision": "Root fix for Timeline-local section orchestration duplication.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing EventList, TimelineArchiveSection, TimelinePage, and BannerCard tests pin expansion, routing, detail open, and artwork loading behavior.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/timeline/EventList.test.tsx src/pages/timeline/TimelineArchiveSection.test.tsx src/pages/TimelinePage.test.tsx src/pages/timeline/BannerCard.test.tsx -> 35 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /timeline desktop and mobile -> active/upcoming/ended event/banner sections rendered; no obvious overflow"
+        ],
+        "risks": "Medium-low; generic renderer changes JSX structure but keeps existing archive shell and tested ids/controls.",
+        "followups_not_done": [
+          "C7",
+          "C12",
+          "C22"
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R11",
+      "role": "review",
+      "status": "done",
+      "title": "Review Timeline status section renderer extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W11 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C10 register update.",
+      "receipt": {
+        "evidence": [
+          "W11 added a Timeline-local renderer rather than a global component.",
+          "Event active list remains a `ul`; archived event markup is unchanged relative to the existing TimelineArchiveSection wrapper.",
+          "Banner active cards remain eager-loaded and archive cards lazy-loaded.",
+          "Focused tests passed before packet recording."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "EventList and TimelineBannersSection duplicated active/upcoming/ended section rendering.",
+          "after": "TimelineStatusSections owns the repeated section shell while callers own item rendering.",
+          "net": "Reduced duplicated Timeline React structure without cross-surface abstraction bloat."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C10 Timeline React/architecture simplification",
+          "candidate_register": "C10 implemented",
+          "root_fix_patch": "Timeline-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "focused Timeline tests",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused Timeline tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks for /timeline desktop and mobile passed"
+        ],
+        "followups": [
+          "C3-C5 terminal reconciliation",
+          "C7",
+          "C8",
+          "C12",
+          "C19",
+          "C21-C22",
+          "M1",
+          "M2"
+        ]
+      }
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "First tranche implemented shared UI tokens and neutral scrollbar utility. Broad cross-surface normalization remains active because component, complexity, and a11y candidates are queued.",
+    "summary": "Shared tokens, compact controls, D-zone helpers, database helpers, and Timeline status-section renderer are implemented. Broad outcome remains active until remaining candidates and maintenance items are terminally reconciled.",
     "validation": [
       "focused tests passed",
       "npm run lint passed",
@@ -2009,12 +2173,15 @@
       "browser checks passed for touched routes"
     ],
     "open_items": [
-      "C2 compact chip/segmented control styling",
-      "C3 shared section divider/header",
-      "C4 metadata token/line",
-      "C5 compact media action tile",
-      "C6-C8 complexity/render-derived work",
-      "C10-C23 scout follow-ups",
+      "C3 shared section divider/header terminal reconciliation",
+      "C4 metadata token/line terminal reconciliation",
+      "C5 compact media action tile terminal reconciliation",
+      "C7 Timeline banner artwork complexity cleanup",
+      "C8 database browse render-derived work terminal decision",
+      "C12 shared compact disclosure row terminal decision",
+      "C19 database mobile filter group extraction",
+      "C21 database card accessible-name cleanup",
+      "C22 Timeline page orchestration seam",
       "M1/M2 maintenance follow-ups"
     ]
   }

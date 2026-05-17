@@ -255,3 +255,26 @@
   - Browser checks for `/database` and `/database/wheels` passed with hybrid grids rendered and no overflow.
 - Review verdict: pass-with-followups.
 - State transition: W10 done. R10 done. C20 implemented.
+
+### 2026-05-17 - W10 checkpoint committed and W11 opened
+
+- Commit: `d287b0f refactor: split database card measurement`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- Decision: J11 selected C10 because `EventList` and `TimelineBannersSection` repeat the same active/upcoming/ended archive-section shell while keeping different card renderers.
+- State transition: J11 done. W11 active for a Timeline-local status-section renderer. This is intentionally not a global primitive.
+
+### 2026-05-17 - W11 implemented and reviewed
+
+- Slice: Timeline active/upcoming/archive section renderer for C10.
+- Files changed: `src/pages/timeline/TimelineStatusSections.tsx`, `src/pages/timeline/EventList.tsx`, `src/pages/timeline/TimelineBannersSection.tsx`.
+- What changed: Added `TimelineStatusSections` to render the active content and upcoming/ended `TimelineArchiveSection` blocks; events and banners now pass their own grid classes and item renderers.
+- Behavior preserved: Active event rows still render inside a `ul`; banner active cards keep eager artwork loading while upcoming/ended cards stay lazy; section ids, expansion state, and archive aria/inert behavior remain owned by existing Timeline helpers.
+- Validation:
+  - `npx vitest run src/pages/timeline/EventList.test.tsx src/pages/timeline/TimelineArchiveSection.test.tsx src/pages/TimelinePage.test.tsx src/pages/timeline/BannerCard.test.tsx` passed, 35 tests.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Goal checker passed.
+  - Browser checks for `/timeline` passed at desktop and mobile widths with active/upcoming/ended event/banner sections rendered.
+- Review verdict: pass-with-followups.
+- State transition: W11 done. R11 done. C10 implemented.
