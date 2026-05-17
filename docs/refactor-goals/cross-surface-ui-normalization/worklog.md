@@ -186,3 +186,26 @@
   - Browser checks for `/d-zone` and `/d-zone/history` passed with countdown and waves rendered.
 - Review verdict: pass-with-followups.
 - State transition: W7 done. R7 done. C13 implemented.
+
+### 2026-05-17 - W7 checkpoint committed and W8 opened
+
+- Commit: `74fac40 refactor: share d-zone countdown helper`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- Decision: J8 selected C15/C6 because `DZoneHistoryBrowser` still mixes drawer focus behavior, archive note disclosure, search, year groups, and season buttons.
+- State transition: J8 done. W8 active for a D-zone-local subcomponent split inside `DZoneHistoryBrowser.tsx`. Modal/focus behavior must remain in the same file and unchanged.
+
+### 2026-05-17 - W8 implemented and reviewed
+
+- Slice: D-zone history browser subcomponent split for C15/C6.
+- Files changed: `src/pages/d-zone/DZoneHistoryBrowser.tsx`.
+- What changed: Added local `ArchiveDataNote`, `HistorySearch`, `HistoryYearGroup`, and `HistorySeasonButton` components; drawer modal/focus behavior remains in the parent.
+- Behavior preserved: Escape/backdrop/close, body overflow restore, focus return/trap, search, archive note, year expansion, selected labels, and URL selection behavior.
+- Validation:
+  - `npx vitest run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts` passed, 16 tests.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Goal checker passed.
+  - Browser check for `/d-zone/history` passed with no overflow and expected year/search/season controls.
+- Review verdict: pass-with-followups.
+- State transition: W8 done. R8 done. C15 and C6 implemented.

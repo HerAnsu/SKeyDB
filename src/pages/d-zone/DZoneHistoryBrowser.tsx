@@ -190,51 +190,14 @@ export function DZoneHistoryBrowser({
           </button>
         </div>
 
-        <div className='d-zone-history-archive-note'>
-          <button
-            aria-controls={ARCHIVE_DATA_NOTE_ID}
-            aria-expanded={archiveNoteOpen}
-            className='d-zone-history-archive-note-trigger'
-            onClick={() => {
-              setArchiveNoteOpen((open) => !open)
-            }}
-            type='button'
-          >
-            <span>Archive data note</span>
-            <FaChevronRight aria-hidden className='d-zone-history-archive-note-chevron' />
-          </button>
+        <ArchiveDataNote
+          open={archiveNoteOpen}
+          onOpenChange={(open) => {
+            setArchiveNoteOpen(open)
+          }}
+        />
 
-          {archiveNoteOpen ? (
-            <div
-              className='d-zone-history-archive-note-panel'
-              id={ARCHIVE_DATA_NOTE_ID}
-              role='note'
-            >
-              <p>Historical D-Zone data is presented as a best-effort archive.</p>
-              <p>
-                Monster data, including levels and HP, comes from seasonal patch data when
-                available, but may still be slightly inaccurate.
-              </p>
-              <p>Relics may have had different effects when that season was live.</p>
-            </div>
-          ) : null}
-        </div>
-
-        <div className='d-zone-history-controls'>
-          <label className='d-zone-history-search'>
-            <span className='sr-only'>Search D-zone seasons</span>
-            <FaMagnifyingGlass aria-hidden className='d-zone-history-search-icon' />
-            <input
-              aria-label='Search D-zone seasons'
-              onChange={(event) => {
-                onSearchChange(event.target.value)
-              }}
-              placeholder='Search seasons...'
-              type='search'
-              value={search}
-            />
-          </label>
-        </div>
+        <HistorySearch search={search} onSearchChange={onSearchChange} />
 
         <div
           className='d-zone-history-year-list ui-scrollbar'
@@ -243,83 +206,180 @@ export function DZoneHistoryBrowser({
         >
           {groups.map((group) => {
             const expanded = forceExpandedYears || expandedYears.has(group.year)
-            const panelId = getDZoneHistoryYearPanelId(group.year)
-            const buttonId = getDZoneHistoryYearButtonId(group.year)
 
             return (
-              <section className='d-zone-history-year-group' key={group.year}>
-                <button
-                  aria-controls={panelId}
-                  aria-expanded={expanded}
-                  className='d-zone-history-year-button'
-                  id={buttonId}
-                  onClick={() => {
-                    onToggleYear(group.year)
-                  }}
-                  type='button'
-                >
-                  <FaChevronRight aria-hidden className='d-zone-history-year-chevron' />
-                  <span>{group.year}</span>
-                  <span className='d-zone-history-year-count'>
-                    {group.seasons.length.toString()}
-                  </span>
-                </button>
-
-                {expanded ? (
-                  <div
-                    aria-labelledby={buttonId}
-                    className='d-zone-history-season-list'
-                    id={panelId}
-                  >
-                    {group.seasons.map((season: DzoneSeasonSummary) => {
-                      const displayName = getDzoneSeasonSummaryDisplayName(season)
-                      const dateRange = formatDzoneSeasonBrowserDateRange(season)
-                      const realmIconSrc = getDzoneRealmIconAsset(season.realm)
-                      const selected = season.id === selectedSeasonId
-
-                      return (
-                        <button
-                          aria-current={selected ? 'true' : undefined}
-                          aria-label={`Select Season ${season.period.toString()}, ${displayName}, ${dateRange}${
-                            selected ? ', current selection' : ''
-                          }`}
-                          className={`d-zone-history-season-button ${
-                            selected ? 'd-zone-history-season-button--selected' : ''
-                          }`}
-                          key={season.id}
-                          onClick={() => {
-                            onSelectSeason(season.id)
-                          }}
-                          title={`${displayName} · ${season.stageEffect}`}
-                          type='button'
-                        >
-                          <span className='d-zone-history-season-name'>
-                            Season {season.period.toString()}
-                            {realmIconSrc ? (
-                              <img
-                                alt={`${displayName} realm`}
-                                className='d-zone-history-season-realm-badge'
-                                decoding='async'
-                                draggable={false}
-                                loading='lazy'
-                                src={realmIconSrc}
-                              />
-                            ) : (
-                              <span aria-hidden className='d-zone-history-season-realm-empty' />
-                            )}
-                          </span>
-
-                          <span className='d-zone-history-season-date'>{dateRange}</span>
-                        </button>
-                      )
-                    })}
-                  </div>
-                ) : null}
-              </section>
+              <HistoryYearGroup
+                expanded={expanded}
+                group={group}
+                key={group.year}
+                selectedSeasonId={selectedSeasonId}
+                onSelectSeason={onSelectSeason}
+                onToggleYear={onToggleYear}
+              />
             )
           })}
         </div>
       </aside>
     </>
+  )
+}
+
+function ArchiveDataNote({
+  open,
+  onOpenChange,
+}: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}) {
+  return (
+    <div className='d-zone-history-archive-note'>
+      <button
+        aria-controls={ARCHIVE_DATA_NOTE_ID}
+        aria-expanded={open}
+        className='d-zone-history-archive-note-trigger'
+        onClick={() => {
+          onOpenChange(!open)
+        }}
+        type='button'
+      >
+        <span>Archive data note</span>
+        <FaChevronRight aria-hidden className='d-zone-history-archive-note-chevron' />
+      </button>
+
+      {open ? (
+        <div className='d-zone-history-archive-note-panel' id={ARCHIVE_DATA_NOTE_ID} role='note'>
+          <p>Historical D-Zone data is presented as a best-effort archive.</p>
+          <p>
+            Monster data, including levels and HP, comes from seasonal patch data when available,
+            but may still be slightly inaccurate.
+          </p>
+          <p>Relics may have had different effects when that season was live.</p>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+function HistorySearch({
+  search,
+  onSearchChange,
+}: {
+  search: string
+  onSearchChange: (search: string) => void
+}) {
+  return (
+    <div className='d-zone-history-controls'>
+      <label className='d-zone-history-search'>
+        <span className='sr-only'>Search D-zone seasons</span>
+        <FaMagnifyingGlass aria-hidden className='d-zone-history-search-icon' />
+        <input
+          aria-label='Search D-zone seasons'
+          onChange={(event) => {
+            onSearchChange(event.target.value)
+          }}
+          placeholder='Search seasons...'
+          type='search'
+          value={search}
+        />
+      </label>
+    </div>
+  )
+}
+
+function HistoryYearGroup({
+  expanded,
+  group,
+  selectedSeasonId,
+  onSelectSeason,
+  onToggleYear,
+}: {
+  expanded: boolean
+  group: DZoneHistoryYearGroup
+  selectedSeasonId: string
+  onSelectSeason: (seasonId: string) => void
+  onToggleYear: (year: string) => void
+}) {
+  const panelId = getDZoneHistoryYearPanelId(group.year)
+  const buttonId = getDZoneHistoryYearButtonId(group.year)
+
+  return (
+    <section className='d-zone-history-year-group'>
+      <button
+        aria-controls={panelId}
+        aria-expanded={expanded}
+        className='d-zone-history-year-button'
+        id={buttonId}
+        onClick={() => {
+          onToggleYear(group.year)
+        }}
+        type='button'
+      >
+        <FaChevronRight aria-hidden className='d-zone-history-year-chevron' />
+        <span>{group.year}</span>
+        <span className='d-zone-history-year-count'>{group.seasons.length.toString()}</span>
+      </button>
+
+      {expanded ? (
+        <div aria-labelledby={buttonId} className='d-zone-history-season-list' id={panelId}>
+          {group.seasons.map((season: DzoneSeasonSummary) => (
+            <HistorySeasonButton
+              key={season.id}
+              season={season}
+              selected={season.id === selectedSeasonId}
+              onSelectSeason={onSelectSeason}
+            />
+          ))}
+        </div>
+      ) : null}
+    </section>
+  )
+}
+
+function HistorySeasonButton({
+  season,
+  selected,
+  onSelectSeason,
+}: {
+  season: DzoneSeasonSummary
+  selected: boolean
+  onSelectSeason: (seasonId: string) => void
+}) {
+  const displayName = getDzoneSeasonSummaryDisplayName(season)
+  const dateRange = formatDzoneSeasonBrowserDateRange(season)
+  const realmIconSrc = getDzoneRealmIconAsset(season.realm)
+
+  return (
+    <button
+      aria-current={selected ? 'true' : undefined}
+      aria-label={`Select Season ${season.period.toString()}, ${displayName}, ${dateRange}${
+        selected ? ', current selection' : ''
+      }`}
+      className={`d-zone-history-season-button ${
+        selected ? 'd-zone-history-season-button--selected' : ''
+      }`}
+      onClick={() => {
+        onSelectSeason(season.id)
+      }}
+      title={`${displayName} · ${season.stageEffect}`}
+      type='button'
+    >
+      <span className='d-zone-history-season-name'>
+        Season {season.period.toString()}
+        {realmIconSrc ? (
+          <img
+            alt={`${displayName} realm`}
+            className='d-zone-history-season-realm-badge'
+            decoding='async'
+            draggable={false}
+            loading='lazy'
+            src={realmIconSrc}
+          />
+        ) : (
+          <span aria-hidden className='d-zone-history-season-realm-empty' />
+        )}
+      </span>
+
+      <span className='d-zone-history-season-date'>{dateRange}</span>
+    </button>
   )
 }

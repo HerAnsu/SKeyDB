@@ -124,10 +124,10 @@
       "id": "C6",
       "title": "D-zone history/browser complexity cleanup",
       "source_task": "complexity-scan",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/pages/d-zone/DZoneHistoryBrowser.tsx and tests",
-      "evidence": "Complexity scan flags long function, deep nesting, and repeated search in loop.",
-      "next": "Later characterization unless Scout shows easy root fix."
+      "evidence": "Implemented in W8 through the C15 history browser subcomponent split. The remaining search/grouping logic already lives in `d-zone-history-view-model.ts`; W8 reduced drawer JSX nesting without changing search or focus behavior.",
+      "next": "Implemented by C15/W8; no standalone hot-loop follow-up identified."
     },
     {
       "id": "C7",
@@ -205,10 +205,10 @@
       "id": "C15",
       "title": "D-zone history browser subcomponent split",
       "source_task": "dzone-scout",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/pages/d-zone/DZoneHistoryBrowser.tsx; tests",
-      "evidence": "History browser mixes modal behavior, focus, search, archive note, year groups, and season buttons.",
-      "next": "Queue archive note/year group split after characterization."
+      "evidence": "Implemented in W8. `DZoneHistoryBrowser.tsx` now has local `ArchiveDataNote`, `HistorySearch`, `HistoryYearGroup`, and `HistorySeasonButton` components while keeping drawer modal/focus behavior in place.",
+      "next": "Implemented as D-zone-local complexity cleanup."
     },
     {
       "id": "C16",
@@ -1545,6 +1545,153 @@
           "C10",
           "C12",
           "C15",
+          "C18-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J8",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose D-zone history browser component split",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/d-zone/DZoneHistoryBrowser.tsx",
+        "src/pages/DZoneHistoryPage.test.tsx",
+        "src/pages/d-zone/d-zone-history-view-model.test.ts",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "D-zone history browser subcomponents for archive note, search, year group, and season button with drawer focus behavior preserved.",
+      "receipt": {
+        "evidence": [
+          "DZoneHistoryBrowser mixes drawer modal behavior, focus trap, archive note disclosure, search control, year groups, and season buttons.",
+          "Existing DZoneHistoryPage tests cover drawer close/focus behavior, archive note, search, year expansion, URL replacement, and selection."
+        ],
+        "selected_candidates": [
+          "C15",
+          "C6"
+        ],
+        "why_root_fix": "A same-file local subcomponent split reduces JSX nesting and separates UI responsibilities without moving the focus trap or route logic.",
+        "what_not_to_change": "No search/view-model behavior, no drawer focus trap behavior, no URL behavior, no CSS changes.",
+        "verification": [
+          "npx vitest run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts",
+          "npm run lint",
+          "git diff --check",
+          "browser check for /d-zone/history"
+        ]
+      }
+    },
+    {
+      "id": "W8",
+      "role": "worker",
+      "status": "done",
+      "title": "Split D-zone history browser subcomponents",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/pages/d-zone/DZoneHistoryBrowser.tsx",
+        "src/pages/DZoneHistoryPage.test.tsx",
+        "src/pages/d-zone/d-zone-history-view-model.test.ts"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Same-file local components for archive note, search, year group, and season button; drawer focus and keyboard behavior preserved.",
+      "receipt": {
+        "slice": "D-zone history browser subcomponent split for C15/C6.",
+        "evidence": [
+          "Added local `ArchiveDataNote`, `HistorySearch`, `HistoryYearGroup`, and `HistorySeasonButton` components inside `DZoneHistoryBrowser.tsx`.",
+          "Kept `useDrawerModalBehavior` and `handleDrawerKeyDown` in the drawer component.",
+          "Moved year/season rendering decisions behind local component boundaries while preserving deterministic panel/button ids."
+        ],
+        "files_changed": [
+          "src/pages/d-zone/DZoneHistoryBrowser.tsx"
+        ],
+        "what_got_simpler": "The main drawer render now reads as shell, archive note, search, and year list rather than nesting every control inline.",
+        "behavior_preserved": "Escape/backdrop/close behavior, body overflow restore, focus return/trap, search, year expansion, selected season labels, and URL selection behavior are preserved.",
+        "current_complexity": "One component mixed modal behavior, archive note, search, year groups, and season buttons.",
+        "expected_complexity_after": "Drawer shell owns modal behavior; local components own archive note, search, year groups, and season buttons.",
+        "data_access_render_invariants": "No view-model search/grouping logic, CSS, route/query behavior, or popover behavior changed.",
+        "root_fix_patch_decision": "Root fix for the D-zone history browser component shape.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing DZoneHistoryPage tests cover drawer close/focus, archive note, search, year groups, URL replacement, and selection; browser check confirmed rendered controls.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts -> 16 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser check for /d-zone/history -> no overflow; year/search/season controls rendered with selected label intact"
+        ],
+        "risks": "Low to medium; same-file component extraction touches drawer markup but characterization is strong.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R8",
+      "role": "review",
+      "status": "done",
+      "title": "Review D-zone history browser split",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W8 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C15/C6 register update.",
+      "receipt": {
+        "evidence": [
+          "W8 stayed inside DZoneHistoryBrowser and did not touch CSS or view-model logic.",
+          "Drawer focus/key behavior stayed in the top-level component while repeated nested markup moved to local subcomponents.",
+          "Focused tests, lint, build, diff check, packet checker, and browser check passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "DZoneHistoryBrowser mixed modal behavior and all drawer content markup in one render.",
+          "after": "Top-level drawer composes local archive note, search, year group, and season button components.",
+          "net": "Reduced component complexity and nesting without changing behavior."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C15 and C6 D-zone complexity cleanup",
+          "candidate_register": "C15 and C6 implemented",
+          "root_fix_patch": "same-file local root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing tests and browser check sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser check passed"
+        ],
+        "followups": [
+          "C3-C5",
+          "C7-C8",
+          "C10",
+          "C12",
           "C18-C22",
           "M1",
           "M2"
