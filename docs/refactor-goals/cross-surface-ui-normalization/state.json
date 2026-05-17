@@ -88,10 +88,10 @@
       "id": "C2",
       "title": "Shared compact chip/segmented control styling",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/ui/filters/FilterChipButton.tsx; possible new shared primitive; Timeline price filter; D-zone alert switcher; database controls",
-      "evidence": "User named compact chip/segmented control; prior audit found similar controls in all three surfaces.",
-      "next": "Needs Judge to avoid mixing different interaction semantics."
+      "evidence": "Implemented in W2 for compact pressed/field control vocabulary. Added `.ui-compact-control` utilities in `src/index.css`; migrated FilterChipButton and database sort controls to shared classes; D-zone alert buttons now use shared pressed-control styling while keeping local alert behavior.",
+      "next": "Timeline price toggle still has page-specific markup and can migrate to the same utility in a later Timeline slice if it remains behavior-compatible."
     },
     {
       "id": "C3",
@@ -196,10 +196,10 @@
       "id": "C14",
       "title": "D-zone alert switcher component extraction",
       "source_task": "dzone-scout",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/pages/d-zone/DZoneSeasonInspector.tsx; d-zone.css; tests",
-      "evidence": "Alert switcher is a coherent local segmented control and may later normalize toward shared chip controls.",
-      "next": "Queue after shared control token/primitive direction is clearer."
+      "evidence": "Implemented the shared-control part in W2 without extracting D-zone alert behavior. The alert switcher remains local in `DZoneSeasonInspector.tsx`; its buttons use `.ui-compact-control`/pressed utilities and local CSS now only owns D-zone layout emphasis.",
+      "next": "No separate behavior extraction needed unless future D-zone inspectors reuse the same switcher outside this component."
     },
     {
       "id": "C15",
@@ -532,6 +532,239 @@
         "followups": [
           "C2-C8",
           "C10-C23",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "S2",
+      "role": "scout",
+      "status": "done",
+      "title": "Map next stack buckets for remaining cross-surface candidates",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-scout",
+        "$refactor-tailwind",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-architecture",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "src/features/database/**",
+        "src/pages/timeline/**",
+        "src/pages/d-zone/**",
+        "src/ui/**",
+        "src/index.css",
+        "DESIGN.md",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "database detail modal internals unless a selected shared primitive requires a tiny adapter"
+      ],
+      "expected_output": "Read-only evidence for grouping queued candidates into Worker-sized root-fix slices, including likely allowed files, characterization needs, and validation commands.",
+      "receipt": {
+        "evidence": [
+          "Shared vocabulary scout ranked C2+C14 compact pressed controls first, then C12/C19 disclosure rows, C4 metadata token, C3 section divider, and C21 database accessible-name cleanup.",
+          "D-zone scout ranked C16 local relic/monster button extraction, C23 popover provider duplication, C15/C6 history browser split, and C13 countdown helper; it advised keeping C5 queued until D-zone media tile behavior proves stable.",
+          "Timeline/database scout ranked C11 banner tag/pricing helper, C17 database card title/prioritized-image helper, C18 sort label config, C10 timeline section renderer, C20 card measurement hook, C7 BannerArtwork split, and C22 page orchestration seam.",
+          "All scouts agreed cross-surface extraction should stay vocabulary-sized unless repeated behavior semantics match."
+        ],
+        "recommended_order": [
+          "C2+C14",
+          "C11",
+          "C17",
+          "C16",
+          "C18",
+          "C23",
+          "C15/C6",
+          "C10",
+          "C13",
+          "C20",
+          "C12",
+          "C4",
+          "C3",
+          "C21",
+          "C7",
+          "C22",
+          "C5 terminal revisit"
+        ],
+        "characterization_notes": [
+          "C2+C14 can rely on existing database route and D-zone alert tests, with browser checks for visual/focus state.",
+          "C12 needs D-zone history year expansion coverage before broad migration.",
+          "C7 needs characterization before splitting preload/detail-target/montage concerns.",
+          "C21 needs card accessible-name assertions before changing aria naming."
+        ]
+      }
+    },
+    {
+      "id": "J2",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose compact pressed-control vocabulary slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-tailwind",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-architecture",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/index.css",
+        "src/ui/filters/FilterChipButton.tsx",
+        "src/features/database/internal/EntityViewControls.tsx",
+        "src/pages/d-zone/DZoneSeasonInspector.tsx",
+        "src/pages/d-zone/d-zone.css",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "database detail modal internals",
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "One root-fix Worker slice for compact pressed controls and adjacent compact fields, preserving local D-zone alert behavior.",
+      "receipt": {
+        "evidence": [
+          "Database FilterChipButton, EntityViewControls sort controls, and D-zone alert buttons repeat the same compact dark/amber/focus vocabulary.",
+          "The behavior contracts differ, so the Worker may extract styling classes/tokens but must keep D-zone alert selection and database filter APIs local.",
+          "This is the clearest remaining cross-surface reuse reason after C1/C9."
+        ],
+        "selected_candidates": [
+          "C2",
+          "C14"
+        ],
+        "why_root_fix": "A shared compact control vocabulary removes duplicated full class strings and D-zone alert button state CSS without creating a behavior-level segmented-control abstraction.",
+        "what_not_to_change": "No route/data semantics, no D-zone alert option model changes, no database filter state changes, no package files.",
+        "verification": [
+          "npx vitest run src/features/database/DatabaseRoutes.test.tsx src/pages/DZonePage.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser checks for /database, /database/wheels, /d-zone"
+        ]
+      }
+    },
+    {
+      "id": "W2",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement compact pressed-control vocabulary",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-worker-slice",
+        "$refactor-tailwind",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/index.css",
+        "src/ui/filters/FilterChipButton.tsx",
+        "src/features/database/internal/EntityViewControls.tsx",
+        "src/pages/d-zone/DZoneSeasonInspector.tsx",
+        "src/pages/d-zone/d-zone.css"
+      ],
+      "protected_files": [
+        "database detail modal internals",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Shared compact control CSS vocabulary, migrated FilterChipButton and database controls, D-zone alert switcher using shared pressed-control styling while preserving behavior.",
+      "receipt": {
+        "slice": "Compact pressed-control vocabulary for C2+C14.",
+        "evidence": [
+          "Added `.ui-compact-control`, `.ui-compact-control--field`, `.ui-compact-control--pressed`, and `.ui-compact-control--dense` in `src/index.css`.",
+          "`FilterChipButton` now consumes the shared pressed-control vocabulary instead of carrying a full local Tailwind state string.",
+          "`EntityViewControls` sort select and direction button now consume shared compact field styling.",
+          "D-zone alert buttons now compose shared compact pressed-control classes; `d-zone.css` keeps only switcher layout/emphasis and no longer owns control border/background/focus/pressed state values."
+        ],
+        "files_changed": [
+          "src/index.css",
+          "src/ui/filters/FilterChipButton.tsx",
+          "src/features/database/internal/EntityViewControls.tsx",
+          "src/pages/d-zone/DZoneSeasonInspector.tsx",
+          "src/pages/d-zone/d-zone.css"
+        ],
+        "what_got_simpler": "Compact dark/amber pressed controls now have one shared styling vocabulary; database filters/sort controls and D-zone alert buttons no longer duplicate full state styling.",
+        "behavior_preserved": "Filter chips still use `aria-pressed`; database sort controls keep the same select/toggle behavior; D-zone alert switcher remains local and still changes all waves to the selected alert.",
+        "current_complexity": "At least three separate compact-control style definitions/classes across database and D-zone.",
+        "expected_complexity_after": "One shared control utility family plus local layout classes.",
+        "data_access_render_invariants": "No data loading, route, search, filter, or alert-selection semantics changed.",
+        "root_fix_patch_decision": "Root fix for styling vocabulary; intentionally not a behavior-level segmented-control abstraction.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing focused route/component tests cover database pressed filters and D-zone alert switching; browser check covered rendered control sizing/font/radius.",
+        "harness_update_considered": "M1/M2 remain queued; no new harness rule yet.",
+        "validation_run": [
+          "npx vitest run src/features/database/DatabaseRoutes.test.tsx src/pages/DZonePage.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx -> 44 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /database, /database/wheels, /d-zone -> no horizontal overflow; D-zone alert buttons visible, sans, 2px radius, and using shared compact-control classes"
+        ],
+        "risks": "Small visual drift from shared control colors and D-zone alert buttons moving from Droid Serif to sans, which matches the design canon for controls.",
+        "followups_not_done": [
+          "Timeline price toggle can be migrated in a later Timeline-local slice if behavior remains compatible."
+        ],
+        "learning_lint_candidates": [
+          "M2 design documentation update should include compact-control utility names once more slices settle."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R2",
+      "role": "review",
+      "status": "done",
+      "title": "Review compact pressed-control vocabulary slice",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W2 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, candidate register coverage, and next queued slice.",
+      "receipt": {
+        "evidence": [
+          "W2 reduced duplicated control styling without changing D-zone alert or database filter behavior.",
+          "The new shared abstraction is CSS vocabulary, not a forced cross-feature interaction component.",
+          "Focused tests, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Filter chips, database sort controls, and D-zone alert buttons repeated compact dark/amber/focus styling.",
+          "after": "Shared `.ui-compact-control` utilities own compact control surface/pressed/focus states while features keep local layout and semantics.",
+          "net": "Reduced CSS/Tailwind duplication and aligned controls with the SKeyDB sans-control canon."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C2/C14 plus Tailwind/CSS/a11y surface normalization; React/component and deeper complexity slices remain queued",
+          "candidate_register": "C2 and C14 implemented; remaining in-scope candidates stay queued",
+          "root_fix_patch": "root fix for selected styling-vocabulary concept",
+          "dependency_review": "not needed",
+          "characterization": "existing tests plus browser checks sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10-C13",
+          "C15-C23",
           "M1",
           "M2"
         ]

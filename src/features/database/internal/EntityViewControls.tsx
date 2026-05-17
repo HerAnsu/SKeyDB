@@ -4,7 +4,7 @@ import type {CollectionSortDirection} from '@/domain/collection-sorting'
 import {FilterChipButton} from '@/ui/filters/FilterChipButton'
 
 const DATABASE_CONTROL_CLASS_NAME =
-  'h-10 min-w-0 rounded-[2px] border border-slate-700/70 bg-[linear-gradient(180deg,rgba(13,20,34,0.9),rgba(8,13,24,0.84))] px-2.5 text-[11px] leading-none text-slate-200 transition-colors hover:border-slate-500/70 focus:border-amber-300/60 focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none sm:h-8 [color-scheme:dark]'
+  'ui-compact-control ui-compact-control--field min-w-0 text-[11px] text-slate-200'
 
 interface EntityViewControlsProps<TSortKey extends string> {
   sortKey: TSortKey

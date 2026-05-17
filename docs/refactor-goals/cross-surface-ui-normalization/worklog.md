@@ -41,3 +41,32 @@
 - Governance check: Intake is complete, C1-C23 are reconciled in `state.json`, C1 and C9 are implemented, C2-C8 and C10-C23 remain queued. No package files, AGENTS.md, Builder, Collection, or database detail modal internals were edited.
 - Validation after final code changes: `npm run lint`, `npm run build:quiet`, `git diff --check`, and the goal checker passed. Earlier focused tests and browser checks passed for this slice.
 - State transition: R1 done. No active task remains; broad goal packet remains active with queued follow-ups.
+
+### 2026-05-17 - W1 checkpoint committed and S2 opened
+
+- Commit: `11de4a4 refactor: normalize database browse surfaces`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- State transition: S2 active as a read-only Scout bucket pass for the remaining candidates. The controller will choose the next Worker slice after reconciling these reports.
+
+### 2026-05-17 - S2 reconciled and W2 opened
+
+- Scout evidence: Three read-only scouts completed and were closed after completion. Shared vocabulary ranked C2+C14 first; D-zone ranked C16/C23/C15/C13; Timeline/database ranked C11/C17/C18/C10/C20/C7/C22.
+- Decision: J2 selected C2+C14 as the next Worker slice because it is the clearest cross-surface root fix after C1/C9: shared compact pressed-control styling without turning D-zone alert behavior or database filter behavior into a generic interaction API.
+- State transition: S2 done. J2 done. W2 active.
+- Validation target: focused database route and D-zone tests, lint, build, diff check, and browser checks for `/database`, `/database/wheels`, and `/d-zone`.
+
+### 2026-05-17 - W2 implemented and reviewed
+
+- Slice: Compact pressed-control vocabulary for C2+C14.
+- Files changed: `src/index.css`, `src/ui/filters/FilterChipButton.tsx`, `src/features/database/internal/EntityViewControls.tsx`, `src/pages/d-zone/DZoneSeasonInspector.tsx`, `src/pages/d-zone/d-zone.css`.
+- What changed: Added shared `.ui-compact-control` utility variants for field, pressed, and dense controls; migrated database filter chips and sort controls; migrated D-zone alert buttons to the shared pressed-control styling while keeping alert behavior local.
+- Design decision: D-zone alert buttons now use the product sans stack rather than Droid Serif, matching the Earned Serif rule for controls.
+- Validation:
+  - `npx vitest run src/features/database/DatabaseRoutes.test.tsx src/pages/DZonePage.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx` passed, 44 tests.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Goal checker passed.
+  - Browser checks passed for `/database`, `/database/wheels`, and `/d-zone`; no horizontal overflow, D-zone alert buttons visible with shared class, 2px radius, and sans font.
+- Review verdict: pass-with-followups.
+- State transition: W2 done. R2 done. C2 and C14 implemented.
