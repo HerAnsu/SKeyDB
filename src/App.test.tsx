@@ -180,6 +180,33 @@ describe('App shell', () => {
     })
   })
 
+  it('derives mobile quick links and overflow from the same nav order', () => {
+    mockMatchMedia({'(min-width: 30rem)': true, '(min-width: 40rem)': false})
+
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    )
+
+    const mobileQuickNav = screen.getByRole('navigation', {
+      name: /primary navigation mobile quick links/i,
+    })
+    expect(
+      within(mobileQuickNav)
+        .getAllByRole('link')
+        .map((link) => link.textContent),
+    ).toEqual(['Database', 'Events', 'D-Zone'])
+
+    fireEvent.click(screen.getByRole('button', {name: /more/i}))
+
+    expect(
+      within(getMobileOverflowNav())
+        .getAllByRole('link')
+        .map((link) => link.textContent),
+    ).toEqual(['Builder', 'Collection'])
+  })
+
   it('closes the mobile overflow menu when the wide mobile breakpoint is promoted', () => {
     const matchMedia = mockMatchMedia()
 
@@ -213,11 +240,11 @@ describe('App shell', () => {
     )
 
     expect(screen.getByRole('button', {name: /more/i})).toHaveClass(
-      'site-mobile-menu-button--active-compact',
+      'site-mobile-menu-button--active-overflow',
     )
   })
 
-  it('marks the mobile menu button when the active wide overflow link is hidden', () => {
+  it('does not mark the mobile menu button once the active route is visible', () => {
     mockMatchMedia({'(min-width: 30rem)': true, '(min-width: 40rem)': false})
 
     render(
@@ -226,8 +253,8 @@ describe('App shell', () => {
       </MemoryRouter>,
     )
 
-    expect(screen.getByRole('button', {name: /more/i})).toHaveClass(
-      'site-mobile-menu-button--active-wide',
+    expect(screen.getByRole('button', {name: /more/i})).not.toHaveClass(
+      'site-mobile-menu-button--active-overflow',
     )
   })
 })

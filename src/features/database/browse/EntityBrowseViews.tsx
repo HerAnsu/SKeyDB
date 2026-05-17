@@ -1,12 +1,9 @@
 import {useMemo, type ReactNode} from 'react'
 
 import {searchCovenants} from '@/domain/covenants-search'
-import {DATABASE_SORT_OPTIONS, type DatabaseSortKey} from '@/domain/database-browse-state'
+import {DATABASE_SORT_OPTIONS} from '@/domain/database-browse-state'
 import {searchPosses} from '@/domain/posses-search'
-import {
-  WHEELS_DATABASE_SORT_OPTIONS,
-  type WheelsDatabaseSortKey,
-} from '@/domain/wheels-database-browse-state'
+import {WHEELS_DATABASE_SORT_OPTIONS} from '@/domain/wheels-database-browse-state'
 import {
   buildAwakenerActiveFilterChips,
   buildCovenantActiveFilterChips,
@@ -30,6 +27,12 @@ import {useGlobalSearchCapture} from '@/ui/search/useGlobalSearchCapture'
 
 import {databaseAwakeners, databaseCovenants, databasePosses, databaseWheels} from '../data'
 import {DatabaseBrowseLayout} from '../DatabaseBrowseLayout'
+import {
+  getDatabaseSortDirectionLabel,
+  getDatabaseSortLabel,
+  getWheelSortDirectionLabel,
+  getWheelSortLabel,
+} from './databaseBrowseSortLabels'
 import {useDatabaseBrowseState} from './useDatabaseBrowseState'
 import type {EntityBrowseController, EntitySearchActions} from './useEntityBrowseController'
 import {
@@ -53,58 +56,6 @@ function useActiveGlobalSearchCapture(
     onRemoveCharacter: searchActions.removeSearchCharacter,
     onClearSearch: searchActions.clearQuery,
   })
-}
-
-function getDatabaseSortLabel(sortKey: DatabaseSortKey): string {
-  if (sortKey === 'RARITY') {
-    return 'Rarity'
-  }
-  if (sortKey === 'RELEASE_DATE') {
-    return 'Release date'
-  }
-  if (sortKey === 'ATK') {
-    return 'ATK'
-  }
-  if (sortKey === 'DEF') {
-    return 'DEF'
-  }
-  if (sortKey === 'CON') {
-    return 'CON'
-  }
-  return 'Alphabetical'
-}
-
-function getDatabaseSortDirectionLabel(
-  sortKey: DatabaseSortKey,
-  direction: 'ASC' | 'DESC',
-): string {
-  if (sortKey === 'ALPHABETICAL') {
-    return direction === 'ASC' ? 'A -> Z' : 'Z -> A'
-  }
-  if (sortKey === 'RELEASE_DATE') {
-    return direction === 'ASC' ? 'Old -> New' : 'New -> Old'
-  }
-  return direction === 'ASC' ? 'Low -> High' : 'High -> Low'
-}
-
-function getWheelSortLabel(sortKey: WheelsDatabaseSortKey): string {
-  if (sortKey === 'RARITY') {
-    return 'Rarity'
-  }
-  if (sortKey === 'MAINSTAT') {
-    return 'Main stat'
-  }
-  return 'Alphabetical'
-}
-
-function getWheelSortDirectionLabel(
-  sortKey: WheelsDatabaseSortKey,
-  direction: 'ASC' | 'DESC',
-): string {
-  if (sortKey === 'RARITY') {
-    return direction === 'ASC' ? 'Low -> High' : 'High -> Low'
-  }
-  return direction === 'ASC' ? 'A -> Z' : 'Z -> A'
 }
 
 interface SimpleArtifactBrowseLayoutOptions {

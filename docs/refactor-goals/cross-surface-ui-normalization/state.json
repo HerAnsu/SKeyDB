@@ -1,0 +1,2964 @@
+{
+  "version": 1,
+  "slug": "cross-surface-ui-normalization",
+  "status": "completed",
+  "created": "2026-05-17",
+  "updated": "2026-05-17",
+  "intake": {
+    "status": "completed",
+    "risk_posture": "medium; preserve behavior and route semantics, allow limited visual drift toward Timeline/D-zone/Database canon",
+    "harness_policy": "do not edit AGENTS.md or plugin skills in this tranche; queue learning/lint-law follow-ups if evidence appears",
+    "allowed_areas": [
+      "src/features/database/**",
+      "src/pages/timeline/**",
+      "src/pages/d-zone/**",
+      "src/ui/**",
+      "shared CSS/style files",
+      "focused tests/docs for the approved slice"
+    ],
+    "protected_areas": [
+      "database detail modal internals unless touched by a selected shared primitive",
+      "builder and collection redesign work",
+      "package/dependency files",
+      "unrelated data/domain behavior"
+    ],
+    "validation_commands": [
+      "npm run lint",
+      "focused npx vitest run commands for touched areas",
+      "git diff --check",
+      "browser checks for /database, /database/wheels, /database/posses or /database/covenants, /timeline, /d-zone"
+    ],
+    "stop_condition": "stop when tranche is validated, same-concept scope expansion appears, validation fails twice, or product/design decision is needed"
+  },
+  "focus_areas": [
+    {
+      "id": "F1",
+      "name": "Impeccable extract/design-system normalization",
+      "status": "done",
+      "evidence": "User requested @impeccable extract; PRODUCT/DESIGN define Timeline and D-zone as canon and Database browse conventions as settled.",
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
+    },
+    {
+      "id": "F2",
+      "name": "Tailwind/CSS normalization",
+      "status": "done",
+      "evidence": "Target surfaces use overlapping slate/amber/radius/motion values through CSS vars, Tailwind arbitrary values, RGB, and OKLCH.",
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
+    },
+    {
+      "id": "F3",
+      "name": "React/component composition",
+      "status": "done",
+      "evidence": "Timeline controls, D-zone alert switcher, and database controls repeat related product-control concepts with page-local markup.",
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
+    },
+    {
+      "id": "F4",
+      "name": "UI/a11y",
+      "status": "done",
+      "evidence": "Focus, reduced motion, custom controls, card overlays, and responsive overflow must be preserved during migration.",
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
+    },
+    {
+      "id": "F5",
+      "name": "Architecture/module boundaries",
+      "status": "done",
+      "evidence": "Shared UI vocabulary is desirable, but database card layout and Timeline/D-zone semantics should stay local.",
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
+    },
+    {
+      "id": "F6",
+      "name": "Complexity hotspots",
+      "status": "done",
+      "evidence": "Complexity scan flags D-zone history, Timeline banner artwork, and database browse render-derived work inside or adjacent to scope.",
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "C1",
+      "title": "Shared product-surface CSS tokens",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": "src/index.css or shared style entry; src/features/database/database.css; src/pages/timeline/timeline.css; src/pages/d-zone/d-zone.css",
+      "evidence": "Implemented in W1. Added `--ui-*` product-surface tokens in src/index.css; mapped D-zone local vars to them; migrated Timeline and Database motion/focus/control styling to token references.",
+      "next": "Implemented for the first tranche; future slices can migrate more component-level uses."
+    },
+    {
+      "id": "C2",
+      "title": "Shared compact chip/segmented control styling",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": "src/ui/filters/FilterChipButton.tsx; possible new shared primitive; Timeline price filter; D-zone alert switcher; database controls",
+      "evidence": "Implemented in W2 for compact pressed/field control vocabulary. Added `.ui-compact-control` utilities in `src/index.css`; migrated FilterChipButton and database sort controls to shared classes; D-zone alert buttons now use shared pressed-control styling while keeping local alert behavior.",
+      "next": "Timeline price toggle still has page-specific markup and can migrate to the same utility in a later Timeline slice if it remains behavior-compatible."
+    },
+    {
+      "id": "C3",
+      "title": "Shared section divider/header",
+      "source_task": "S1",
+      "status": "superseded",
+      "concept_blast_radius": "Timeline section headers; database browse row/header areas; possible src/ui primitive",
+      "evidence": "Terminal decision in W16. Shared section-header extraction is not justified: Timeline page/header and archive rows have Timeline-local semantics, D-zone headings are wave-grid/layout coupled, and database sectioning is detail/tab-specific. W14 added `TimelinePageSection` locally where reuse was real.",
+      "next": "No global section-header primitive in this goal; use local helpers until two surfaces share the same interaction and layout contract.",
+      "terminal_reason": "Superseded because section/header shapes are not the same contract across Timeline, D-zone, and Database; local TimelinePageSection covers the real reuse."
+    },
+    {
+      "id": "C4",
+      "title": "Shared metadata token/line",
+      "source_task": "S1",
+      "status": "superseded",
+      "concept_blast_radius": "Timeline event/banner metadata; database card meta/stat areas; possible src/ui primitive",
+      "evidence": "Terminal decision in W16. Timeline banner metadata duplication was solved by W3 `BannerMetadataList`; cross-surface metadata differs by domain, so shared tokens and local composition are a better fit than a generic metadata component.",
+      "next": "No global metadata token/line primitive; use `--ui-*` tokens and feature-local helpers.",
+      "terminal_reason": "Superseded because BannerMetadataList plus shared tokens solve the actual duplication while cross-surface metadata semantics differ."
+    },
+    {
+      "id": "C5",
+      "title": "Compact media action tile",
+      "source_task": "S1",
+      "status": "superseded",
+      "concept_blast_radius": "D-zone relic/monster buttons; database square-art/icon cards; src/ui/cards or feature adapters",
+      "evidence": "Terminal decision in W16. D-zone media actions were correctly extracted locally as `RelicButton`/`MonsterButton`; existing `CompactArtTile` serves separate database-detail/build surfaces and should not be forced onto D-zone or database browse cards.",
+      "next": "No global compact media action tile for browse/D-zone in this goal.",
+      "terminal_reason": "Superseded because D-zone media actions and existing CompactArtTile serve different interaction contracts."
+    },
+    {
+      "id": "C6",
+      "title": "D-zone history/browser complexity cleanup",
+      "source_task": "complexity-scan",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/d-zone/DZoneHistoryBrowser.tsx and tests",
+      "evidence": "Implemented in W8 through the C15 history browser subcomponent split. The remaining search/grouping logic already lives in `d-zone-history-view-model.ts`; W8 reduced drawer JSX nesting without changing search or focus behavior.",
+      "next": "Implemented by C15/W8; no standalone hot-loop follow-up identified."
+    },
+    {
+      "id": "C7",
+      "title": "Timeline banner artwork complexity cleanup",
+      "source_task": "complexity-scan",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/timeline/BannerArtwork.tsx and tests",
+      "evidence": "Implemented in W15. Extracted Timeline combo-pool artwork preload lifecycle from `BannerArtwork.tsx` into `usePoolMontagePreload.ts`; the component keeps visual slice rendering and detail targets while the hook owns IntersectionObserver gating, batched image preload, decode/cache, and ready-state reporting.",
+      "next": "Implemented as Timeline-local complexity cleanup; click/link behavior and montage rendering stayed in BannerArtwork."
+    },
+    {
+      "id": "C8",
+      "title": "Database browse render-derived work",
+      "source_task": "performance-scan",
+      "status": "superseded",
+      "concept_blast_radius": "src/features/database/browse/EntityBrowseViews.tsx and tests",
+      "evidence": "Terminal decision in W16. The scout found heavy database browse filtering/sorting already externalized to `useDatabaseViewModel`/`useWheelsDatabaseViewModel`; W9 extracted sort label branching and W10 split grid measurement. Remaining posses/covenants render-derived filtering is small, memoized, and not a root-fix target for this tranche.",
+      "next": "No further database render-derived code work in this goal unless a later perf trace shows a live hotspot.",
+      "terminal_reason": "Superseded because heavy database browse work already lives in view-model hooks and remaining memoized work lacks hotspot evidence."
+    },
+    {
+      "id": "C9",
+      "title": "Neutral shared scrollbar utility",
+      "source_task": "timeline-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/index.css; src/pages/timeline/BannerInfoDrawer.tsx; src/pages/d-zone/DZoneHistoryBrowser.tsx; src/ui/search/SearchCombobox.tsx",
+      "evidence": "Implemented in W1. `.database-scrollbar` was a global utility with a database-specific name and was used by Timeline and D-zone; W1 added `.ui-scrollbar`, preserved the legacy alias, and migrated non-database/shared consumers.",
+      "next": "Database detail internals keep the compatibility alias because they are protected in this goal."
+    },
+    {
+      "id": "C10",
+      "title": "Timeline active/upcoming/archive section renderer",
+      "source_task": "timeline-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/timeline/EventList.tsx; src/pages/timeline/TimelineBannersSection.tsx; tests",
+      "evidence": "Implemented in W11. Added Timeline-local `TimelineStatusSections` to render active/upcoming/ended sections for events and banners; `EventList` and `TimelineBannersSection` now share the archive-section pattern while preserving event `ul` active markup, banner eager/lazy artwork behavior, section ids, and expansion state.",
+      "next": "Implemented as a Timeline-local root fix; not promoted to global UI because Database/D-zone do not share this content partition contract."
+    },
+    {
+      "id": "C11",
+      "title": "Timeline banner tag/pricing composition helper",
+      "source_task": "timeline-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/timeline/BannerCard.tsx; src/pages/timeline/BannerInfoDrawer.tsx; possible local helper",
+      "evidence": "Implemented in W3. Added Timeline-local `BannerMetadataList` in `src/pages/timeline/bannerMetadata.tsx`; `BannerCardHero` uses it with `limit={4}` and `BannerInfoDrawer` uses it without a limit while preserving drawer empty-row spacing.",
+      "next": "Implemented as Timeline-local root fix; no global metadata primitive extracted."
+    },
+    {
+      "id": "C12",
+      "title": "Shared compact disclosure row",
+      "source_task": "timeline-scout,dzone-scout",
+      "status": "superseded",
+      "concept_blast_radius": "Timeline archive section; D-zone archive note/year toggles; possible src/ui primitive",
+      "evidence": "Terminal decision in W16. Timeline archive disclosures, Timeline event description shelves, and D-zone history/year disclosures have different focus, region, inert, and layout contracts. W8 and W11 reduced local disclosure complexity without forcing one primitive.",
+      "next": "No shared compact disclosure row in this goal; keep disclosure primitives local until semantics match.",
+      "terminal_reason": "Superseded because Timeline archive, Timeline description shelf, and D-zone disclosure rows differ in focus and region semantics."
+    },
+    {
+      "id": "C13",
+      "title": "D-zone countdown helper",
+      "source_task": "dzone-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/DZonePage.tsx; src/pages/d-zone/d-zone-history-view-model.ts; tests",
+      "evidence": "Implemented in W7. Added `getDZoneCountdownDisplay` in `d-zone-countdown.ts`, migrated current/history pages to it, and moved countdown tests to the helper boundary.",
+      "next": "Implemented as D-zone-local behavior helper."
+    },
+    {
+      "id": "C14",
+      "title": "D-zone alert switcher component extraction",
+      "source_task": "dzone-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/d-zone/DZoneSeasonInspector.tsx; d-zone.css; tests",
+      "evidence": "Implemented the shared-control part in W2 without extracting D-zone alert behavior. The alert switcher remains local in `DZoneSeasonInspector.tsx`; its buttons use `.ui-compact-control`/pressed utilities and local CSS now only owns D-zone layout emphasis.",
+      "next": "No separate behavior extraction needed unless future D-zone inspectors reuse the same switcher outside this component."
+    },
+    {
+      "id": "C15",
+      "title": "D-zone history browser subcomponent split",
+      "source_task": "dzone-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/d-zone/DZoneHistoryBrowser.tsx; tests",
+      "evidence": "Implemented in W8. `DZoneHistoryBrowser.tsx` now has local `ArchiveDataNote`, `HistorySearch`, `HistoryYearGroup`, and `HistorySeasonButton` components while keeping drawer modal/focus behavior in place.",
+      "next": "Implemented as D-zone-local complexity cleanup."
+    },
+    {
+      "id": "C16",
+      "title": "D-zone relic and monster button extraction",
+      "source_task": "dzone-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/d-zone/DZoneWaveCard.tsx; src/pages/d-zone/DZoneWaveCard.test.tsx",
+      "evidence": "Implemented in W5. `DZoneWaveCard` now has local `RelicButton`; the pre-existing local `MonsterButton` continues to own monster tile behavior. Collapsed accessibility, selected alert level chips, and lore text rendering remain covered by tests.",
+      "next": "Implemented as D-zone-local root fix; C5 global media tile remains queued for terminal revisit."
+    },
+    {
+      "id": "C17",
+      "title": "Database card title and prioritized image primitive",
+      "source_task": "database-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/features/database/internal/AwakenerGridCard.tsx; WheelGridCard.tsx; SimpleArtifactGridCard.tsx; possible internal primitive",
+      "evidence": "Implemented in W4. Added `DatabaseGridCardTitle` and `shouldPrioritizeDatabaseGridImage`; migrated awakener, wheel, and simple artifact grid cards while preserving card frame behavior and first-24 eager image priority.",
+      "next": "Implemented as database-internal root fix; no global card primitive extracted."
+    },
+    {
+      "id": "C18",
+      "title": "Database browse sort label config",
+      "source_task": "database-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/features/database/browse/EntityBrowseViews.tsx; domain/config helper; tests",
+      "evidence": "Implemented in W9. Added `databaseBrowseSortLabels.ts` plus focused tests and migrated `EntityBrowseViews` to import pure label/direction helpers.",
+      "next": "Implemented as database browse orchestration cleanup."
+    },
+    {
+      "id": "C19",
+      "title": "Database mobile filter group extraction",
+      "source_task": "database-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/features/database/internal/DatabaseFilters.tsx; WheelDatabaseFilters.tsx; DatabaseChipPrimitives.tsx; tests",
+      "evidence": "Implemented in W13. Added database-internal `CatalogMobileFilterGroup` to own mobile filter toggle/panel ids, single-open-key behavior, and panel rendering; migrated awakener and wheel filters to descriptor arrays while preserving desktop `ChipFilterRow` layout and URL/filter handlers.",
+      "next": "Implemented as database-internal mobile-filter root fix; detail modal internals untouched."
+    },
+    {
+      "id": "C20",
+      "title": "Split database hybrid card measurement hook",
+      "source_task": "database-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/features/database/internal/DatabaseCatalogGrid.tsx; hook test if added",
+      "evidence": "Implemented in W10. Moved `useMeasuredHybridCardMode` and threshold/ResizeObserver fallback logic to `useMeasuredHybridCardMode.ts`; `DatabaseCatalogGrid` now focuses on grid rendering and context wiring.",
+      "next": "Implemented as database-internal hook split."
+    },
+    {
+      "id": "C21",
+      "title": "Database card accessible-name cleanup",
+      "source_task": "database-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/features/database/internal/DatabaseGridCardFrame.tsx; card tests",
+      "evidence": "Implemented in W12. Removed redundant `ariaLabel` plumbing from `DatabaseGridCardFrame` and grid-card producers; card buttons now expose the same `View details for {name}` accessible name through one `aria-labelledby` path. Route tests assert sorted accessible names and absence of raw `aria-label`.",
+      "next": "Implemented as a database-internal a11y cleanup; no global card primitive or detail modal work."
+    },
+    {
+      "id": "C22",
+      "title": "Timeline page orchestration seam",
+      "source_task": "timeline-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/TimelinePage.tsx; timeline routing/data helpers; tests",
+      "evidence": "Implemented in W14. Split TimelinePage orchestration into Timeline-local controls, page section, D-zone summary helper, and section-scroll hook; TimelinePage now keeps URL state, data composition, and modal wiring while helpers own UI controls, masthead summary derivation, and scroll effect.",
+      "next": "Implemented as Timeline-local architecture seam; no route semantics, modal store behavior, or domain data changed."
+    },
+    {
+      "id": "C23",
+      "title": "D-zone popover provider duplication",
+      "source_task": "dzone-scout",
+      "status": "implemented",
+      "concept_blast_radius": "src/pages/DZonePage.tsx; src/pages/DZoneHistoryPage.tsx; D-zone local provider helper",
+      "evidence": "Implemented in W6. Added `DZonePopoverSurface` to own `useDZoneDatabasePopovers`, `DatabasePopoverContext.Provider`, and `DatabasePopoverRoot` wiring; current/history pages keep their markup and popover handlers.",
+      "next": "Implemented as D-zone-local architecture cleanup."
+    }
+  ],
+  "maintenance": [
+    {
+      "id": "M1",
+      "title": "Token usage guardrail",
+      "trigger": "repeated hard-coded product-surface values",
+      "skill": "$refactor-lint-law",
+      "status": "superseded",
+      "next": "Terminal decision in W16: a machine lint rule would be too noisy while Tailwind arbitrary values remain legitimate for complex art/layout overlays. DESIGN.md now carries the token usage guardrail for new facelift work.",
+      "terminal_reason": "Superseded by the DESIGN.md docs guardrail because a machine lint rule would be noisy while complex art/layout Tailwind values remain legitimate."
+    },
+    {
+      "id": "M2",
+      "title": "Design-system documentation update",
+      "trigger": "shared tokens or primitives extracted",
+      "skill": "@impeccable document",
+      "status": "implemented",
+      "next": "Implemented in W16 through DESIGN.md shared product surface vocabulary and PRODUCT.md database module map updates."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "S1",
+      "role": "scout",
+      "status": "done",
+      "title": "Map cross-surface UI normalization candidates",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-scout",
+        "$refactor-tailwind",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-architecture",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "src/features/database/**",
+        "src/pages/timeline/**",
+        "src/pages/d-zone/**",
+        "src/ui/**",
+        "src/index.css"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "database detail modal internals unless shared primitive touches them"
+      ],
+      "expected_output": "Evidence-ranked candidates with concept blast radius, validation ideas, root-fix/patch notes, and maintenance candidates.",
+      "receipt": {
+        "evidence": [
+          "Database scout mapped browse/card/filter candidates and a11y risks.",
+          "Timeline scout mapped section headers, segmented controls, meta rows, motion/focus tokens, and the misnamed global scrollbar utility.",
+          "D-zone scout mapped local CSS tokens, alert switcher, media buttons, disclosure rows, and history-browser complexity.",
+          "Complexity and performance scans added C6, C7, and C8."
+        ],
+        "candidates_recorded": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "C10",
+          "C11",
+          "C12",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "C20",
+          "C21",
+          "C22",
+          "C23"
+        ]
+      }
+    },
+    {
+      "id": "J1",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose first shared-token normalization slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-tailwind",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/index.css",
+        "src/pages/timeline/timeline.css",
+        "src/pages/timeline/BannerInfoDrawer.tsx",
+        "src/pages/d-zone/d-zone.css",
+        "src/pages/d-zone/DZoneHistoryBrowser.tsx",
+        "src/features/database/database.css",
+        "src/ui/search/SearchCombobox.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "database detail modal internals",
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "One root-fix Worker slice for C1 plus C9, with local feature semantics preserved.",
+      "receipt": {
+        "evidence": [
+          "C1 was present in all three scout reports as repeated surface/focus/motion/control tokens.",
+          "C9 was explicitly reported by Timeline scout as `.database-scrollbar` used by Timeline and D-zone.",
+          "The selected slice avoids package files and database detail modal internals."
+        ],
+        "selected_candidates": [
+          "C1",
+          "C9"
+        ],
+        "why_root_fix": "D-zone already had good local tokens, Timeline and Database repeated the same values, and `.database-scrollbar` was a shared utility with the wrong feature name. Shared `--ui-*` tokens plus a neutral `ui-scrollbar` class remove cross-page reinvention without inventing a large component API.",
+        "what_not_to_change": "No database detail modal internals, no Timeline banner drawer behavior, no D-zone wave layout, no dependency files.",
+        "verification": [
+          "focused tests",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser route checks"
+        ]
+      }
+    },
+    {
+      "id": "W1",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement shared UI tokens and neutral scrollbar utility",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-worker-slice",
+        "$refactor-tailwind",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/index.css",
+        "src/pages/timeline/timeline.css",
+        "src/pages/timeline/BannerInfoDrawer.tsx",
+        "src/pages/d-zone/d-zone.css",
+        "src/pages/d-zone/DZoneHistoryBrowser.tsx",
+        "src/features/database/database.css",
+        "src/ui/search/SearchCombobox.tsx"
+      ],
+      "protected_files": [
+        "database detail modal internals",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Shared `--ui-*` tokens, D-zone token mapping, Timeline/Database token use, neutral scrollbar migration with compatibility alias.",
+      "receipt": {
+        "evidence": [
+          "Added global `--ui-*` product-surface tokens in `src/index.css`.",
+          "Mapped `src/pages/d-zone/d-zone.css` local variables to shared tokens.",
+          "Migrated Timeline, Database, D-zone, and shared search scrollbar/motion/control styling to shared token or utility names."
+        ],
+        "files_changed": [
+          "src/index.css",
+          "src/pages/timeline/timeline.css",
+          "src/pages/timeline/BannerInfoDrawer.tsx",
+          "src/pages/d-zone/d-zone.css",
+          "src/pages/d-zone/DZoneHistoryBrowser.tsx",
+          "src/features/database/database.css",
+          "src/ui/search/SearchCombobox.tsx"
+        ],
+        "what_got_simpler": "One global SKeyDB product token vocabulary now supplies repeated panel, border, focus, label, radius, motion, and scrollbar values; D-zone keeps local semantic names as aliases; Timeline and Database use shared motion/control tokens instead of duplicating values.",
+        "behavior_preserved": "No route, data, modal, card, drawer, or control semantics changed; only styling vocabulary and neutral utility class names changed.",
+        "current_complexity": "Three surfaces had separate copies of the same product-surface constants and a global utility named for database.",
+        "expected_complexity_after": "Shared constants live in `:root`; feature CSS keeps local layout and semantics.",
+        "root_fix_patch_decision": "Root fix for the selected token/utility concept.",
+        "dependency_review": "Not needed; no package files changed.",
+        "harness_update_considered": "M1 and M2 remain queued after token names prove stable.",
+        "validation_run": [
+          "npx prettier --write --ignore-unknown ...",
+          "npx vitest run src/pages/TimelinePage.test.tsx src/pages/timeline/TimelineArchiveSection.test.tsx src/pages/timeline/usePoolCycling.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx src/features/database/DatabaseRoutes.test.tsx src/features/database/internal/DatabaseGrid.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser route checks for database, wheels, covenants, timeline, d-zone, and d-zone/history"
+        ],
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "browser route checks passed"
+        ],
+        "risks": "Small visual drift from shared label/control tokens; browser checks found no horizontal overflow.",
+        "followups_not_done": [
+          "C2-C8",
+          "C10-C23"
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R1",
+      "role": "review",
+      "status": "done",
+      "title": "Review W1 token/utility normalization slice",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W1 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, candidate register coverage, and next continuation prompt.",
+      "receipt": {
+        "evidence": [
+          "W1 preserved behavior and only changed styling token references plus utility class names.",
+          "Candidate register includes C1-C23; C1 and C9 are implemented, remaining in-scope candidates are queued rather than treated as complete.",
+          "No dependency files, AGENTS.md, Builder, Collection, or database detail modal internals were edited for this slice."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "D-zone, Timeline, and Database repeated product-surface values independently; `.database-scrollbar` was a global utility with a feature-specific name.",
+          "after": "Shared `--ui-*` tokens supply the first product-surface vocabulary; feature CSS keeps layout and semantic ownership; `.ui-scrollbar` is the neutral shared utility with compatibility alias.",
+          "net": "Reduced token duplication and naming drift without creating a large shared component abstraction."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "tranche covers extract/Tailwind token normalization; React/component, architecture, a11y, and complexity follow-ups remain queued",
+          "candidate_register": "C1-C23 reconciled",
+          "root_fix_patch": "root fix for selected token/utility concept",
+          "dependency_review": "not needed",
+          "characterization": "existing tests plus browser checks sufficient for styling-token migration",
+          "maintenance": "M1 and M2 queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed after final code changes",
+          "npm run build:quiet passed after final code changes",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C2-C8",
+          "C10-C23",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "S2",
+      "role": "scout",
+      "status": "done",
+      "title": "Map next stack buckets for remaining cross-surface candidates",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-scout",
+        "$refactor-tailwind",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-architecture",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "src/features/database/**",
+        "src/pages/timeline/**",
+        "src/pages/d-zone/**",
+        "src/ui/**",
+        "src/index.css",
+        "DESIGN.md",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "database detail modal internals unless a selected shared primitive requires a tiny adapter"
+      ],
+      "expected_output": "Read-only evidence for grouping queued candidates into Worker-sized root-fix slices, including likely allowed files, characterization needs, and validation commands.",
+      "receipt": {
+        "evidence": [
+          "Shared vocabulary scout ranked C2+C14 compact pressed controls first, then C12/C19 disclosure rows, C4 metadata token, C3 section divider, and C21 database accessible-name cleanup.",
+          "D-zone scout ranked C16 local relic/monster button extraction, C23 popover provider duplication, C15/C6 history browser split, and C13 countdown helper; it advised keeping C5 queued until D-zone media tile behavior proves stable.",
+          "Timeline/database scout ranked C11 banner tag/pricing helper, C17 database card title/prioritized-image helper, C18 sort label config, C10 timeline section renderer, C20 card measurement hook, C7 BannerArtwork split, and C22 page orchestration seam.",
+          "All scouts agreed cross-surface extraction should stay vocabulary-sized unless repeated behavior semantics match."
+        ],
+        "recommended_order": [
+          "C2+C14",
+          "C11",
+          "C17",
+          "C16",
+          "C18",
+          "C23",
+          "C15/C6",
+          "C10",
+          "C13",
+          "C20",
+          "C12",
+          "C4",
+          "C3",
+          "C21",
+          "C7",
+          "C22",
+          "C5 terminal revisit"
+        ],
+        "characterization_notes": [
+          "C2+C14 can rely on existing database route and D-zone alert tests, with browser checks for visual/focus state.",
+          "C12 needs D-zone history year expansion coverage before broad migration.",
+          "C7 needs characterization before splitting preload/detail-target/montage concerns.",
+          "C21 needs card accessible-name assertions before changing aria naming."
+        ]
+      }
+    },
+    {
+      "id": "J2",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose compact pressed-control vocabulary slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-tailwind",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-architecture",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/index.css",
+        "src/ui/filters/FilterChipButton.tsx",
+        "src/features/database/internal/EntityViewControls.tsx",
+        "src/pages/d-zone/DZoneSeasonInspector.tsx",
+        "src/pages/d-zone/d-zone.css",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "database detail modal internals",
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "One root-fix Worker slice for compact pressed controls and adjacent compact fields, preserving local D-zone alert behavior.",
+      "receipt": {
+        "evidence": [
+          "Database FilterChipButton, EntityViewControls sort controls, and D-zone alert buttons repeat the same compact dark/amber/focus vocabulary.",
+          "The behavior contracts differ, so the Worker may extract styling classes/tokens but must keep D-zone alert selection and database filter APIs local.",
+          "This is the clearest remaining cross-surface reuse reason after C1/C9."
+        ],
+        "selected_candidates": [
+          "C2",
+          "C14"
+        ],
+        "why_root_fix": "A shared compact control vocabulary removes duplicated full class strings and D-zone alert button state CSS without creating a behavior-level segmented-control abstraction.",
+        "what_not_to_change": "No route/data semantics, no D-zone alert option model changes, no database filter state changes, no package files.",
+        "verification": [
+          "npx vitest run src/features/database/DatabaseRoutes.test.tsx src/pages/DZonePage.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser checks for /database, /database/wheels, /d-zone"
+        ]
+      }
+    },
+    {
+      "id": "W2",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement compact pressed-control vocabulary",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-worker-slice",
+        "$refactor-tailwind",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/index.css",
+        "src/ui/filters/FilterChipButton.tsx",
+        "src/features/database/internal/EntityViewControls.tsx",
+        "src/pages/d-zone/DZoneSeasonInspector.tsx",
+        "src/pages/d-zone/d-zone.css"
+      ],
+      "protected_files": [
+        "database detail modal internals",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Shared compact control CSS vocabulary, migrated FilterChipButton and database controls, D-zone alert switcher using shared pressed-control styling while preserving behavior.",
+      "receipt": {
+        "slice": "Compact pressed-control vocabulary for C2+C14.",
+        "evidence": [
+          "Added `.ui-compact-control`, `.ui-compact-control--field`, `.ui-compact-control--pressed`, and `.ui-compact-control--dense` in `src/index.css`.",
+          "`FilterChipButton` now consumes the shared pressed-control vocabulary instead of carrying a full local Tailwind state string.",
+          "`EntityViewControls` sort select and direction button now consume shared compact field styling.",
+          "D-zone alert buttons now compose shared compact pressed-control classes; `d-zone.css` keeps only switcher layout/emphasis and no longer owns control border/background/focus/pressed state values."
+        ],
+        "files_changed": [
+          "src/index.css",
+          "src/ui/filters/FilterChipButton.tsx",
+          "src/features/database/internal/EntityViewControls.tsx",
+          "src/pages/d-zone/DZoneSeasonInspector.tsx",
+          "src/pages/d-zone/d-zone.css"
+        ],
+        "what_got_simpler": "Compact dark/amber pressed controls now have one shared styling vocabulary; database filters/sort controls and D-zone alert buttons no longer duplicate full state styling.",
+        "behavior_preserved": "Filter chips still use `aria-pressed`; database sort controls keep the same select/toggle behavior; D-zone alert switcher remains local and still changes all waves to the selected alert.",
+        "current_complexity": "At least three separate compact-control style definitions/classes across database and D-zone.",
+        "expected_complexity_after": "One shared control utility family plus local layout classes.",
+        "data_access_render_invariants": "No data loading, route, search, filter, or alert-selection semantics changed.",
+        "root_fix_patch_decision": "Root fix for styling vocabulary; intentionally not a behavior-level segmented-control abstraction.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing focused route/component tests cover database pressed filters and D-zone alert switching; browser check covered rendered control sizing/font/radius.",
+        "harness_update_considered": "M1/M2 remain queued; no new harness rule yet.",
+        "validation_run": [
+          "npx vitest run src/features/database/DatabaseRoutes.test.tsx src/pages/DZonePage.test.tsx src/pages/d-zone/DZoneWaveCard.test.tsx -> 44 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /database, /database/wheels, /d-zone -> no horizontal overflow; D-zone alert buttons visible, sans, 2px radius, and using shared compact-control classes"
+        ],
+        "risks": "Small visual drift from shared control colors and D-zone alert buttons moving from Droid Serif to sans, which matches the design canon for controls.",
+        "followups_not_done": [
+          "Timeline price toggle can be migrated in a later Timeline-local slice if behavior remains compatible."
+        ],
+        "learning_lint_candidates": [
+          "M2 design documentation update should include compact-control utility names once more slices settle."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R2",
+      "role": "review",
+      "status": "done",
+      "title": "Review compact pressed-control vocabulary slice",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W2 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, candidate register coverage, and next queued slice.",
+      "receipt": {
+        "evidence": [
+          "W2 reduced duplicated control styling without changing D-zone alert or database filter behavior.",
+          "The new shared abstraction is CSS vocabulary, not a forced cross-feature interaction component.",
+          "Focused tests, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Filter chips, database sort controls, and D-zone alert buttons repeated compact dark/amber/focus styling.",
+          "after": "Shared `.ui-compact-control` utilities own compact control surface/pressed/focus states while features keep local layout and semantics.",
+          "net": "Reduced CSS/Tailwind duplication and aligned controls with the SKeyDB sans-control canon."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C2/C14 plus Tailwind/CSS/a11y surface normalization; React/component and deeper complexity slices remain queued",
+          "candidate_register": "C2 and C14 implemented; remaining in-scope candidates stay queued",
+          "root_fix_patch": "root fix for selected styling-vocabulary concept",
+          "dependency_review": "not needed",
+          "characterization": "existing tests plus browser checks sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10-C13",
+          "C15-C23",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J3",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose Timeline banner metadata composition slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/BannerCard.tsx",
+        "src/pages/timeline/BannerInfoDrawer.tsx",
+        "src/pages/timeline/banner*",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/features/database/detail/**",
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Timeline-local root fix for duplicated banner tag/custom-tag/pricing composition, with hero limit and drawer unlimited behavior preserved.",
+      "receipt": {
+        "evidence": [
+          "BannerCardHero and BannerInfoDrawer both compose display tags, custom tags, and formatted pricing.",
+          "The same tag labels/colors are used in two visual containers, but the hero limits to four items while the drawer remains unlimited.",
+          "A Timeline-local helper/component reduces duplication without creating a premature cross-surface metadata primitive."
+        ],
+        "selected_candidates": [
+          "C11"
+        ],
+        "why_root_fix": "The repeated composition is a single Timeline concept with two direct consumers; local extraction removes duplicate logic while preserving distinct hero/drawer styling.",
+        "what_not_to_change": "No banner artwork behavior, no drawer open/collapse behavior, no Timeline route/query behavior, no global metadata primitive.",
+        "verification": [
+          "npx vitest run src/pages/timeline/BannerCard.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser check for /timeline"
+        ]
+      }
+    },
+    {
+      "id": "W3",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement Timeline banner metadata helper",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/BannerCard.tsx",
+        "src/pages/timeline/BannerInfoDrawer.tsx",
+        "src/pages/timeline/banner*"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Shared Timeline-local helper/component for banner tag/custom-tag/pricing metadata used by hero and drawer.",
+      "receipt": {
+        "slice": "Timeline-local banner metadata composition helper for C11.",
+        "evidence": [
+          "Added `src/pages/timeline/bannerMetadata.tsx` with `BannerMetadataList` and local metadata item composition.",
+          "`BannerCardHero` delegates display/custom/pricing metadata to `BannerMetadataList` with `limit={4}`.",
+          "`BannerInfoDrawer` delegates the same metadata composition without a limit and keeps the empty metadata wrapper behavior with `renderWhenEmpty`."
+        ],
+        "files_changed": [
+          "src/pages/timeline/BannerCard.tsx",
+          "src/pages/timeline/BannerInfoDrawer.tsx",
+          "src/pages/timeline/bannerMetadata.tsx"
+        ],
+        "what_got_simpler": "The display tags + custom tags + formatted pricing composition now lives in one Timeline-local component rather than two render functions.",
+        "behavior_preserved": "Hero tag order and four-item cap preserved; drawer remains uncapped; ended/active colors and separator colors preserved; pricing mode still controls formatted pricing.",
+        "current_complexity": "Two direct consumers duplicated metadata item building and separator rendering.",
+        "expected_complexity_after": "One Timeline helper owns metadata composition; hero and drawer only supply visual classes and limits.",
+        "data_access_render_invariants": "No route, artwork, drawer open/collapse, detail-link, or pricing-domain semantics changed.",
+        "root_fix_patch_decision": "Root fix for the Timeline banner metadata concept; not a global primitive.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing BannerCard tests cover pricing text, countdown/status, and artwork/detail interactions; TimelinePage test and browser check cover rendered route.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/timeline/BannerCard.test.tsx -> passed in subagent, 14 tests",
+          "git diff --check -- ... -> passed in subagent",
+          "npx vitest run src/pages/timeline/BannerCard.test.tsx src/pages/TimelinePage.test.tsx -> 24 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser check for /timeline -> no horizontal overflow; banner hero metadata rendered and drawer toggle present"
+        ],
+        "risks": "Low; helper prop surface is local to Timeline and carries visual class differences explicitly.",
+        "followups_not_done": [
+          "C4 shared metadata token remains queued because Timeline banner metadata is richer than database card metadata."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R3",
+      "role": "review",
+      "status": "done",
+      "title": "Review Timeline banner metadata helper",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W3 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and candidate register update.",
+      "receipt": {
+        "evidence": [
+          "W3 stayed within Timeline banner files and a new Timeline-local helper.",
+          "The helper removes duplicated composition without forcing a shared cross-surface metadata component.",
+          "Controller corrected the drawer empty-wrapper behavior to preserve previous spacing on sparse banners."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Banner hero and drawer independently built display tags, custom tags, pricing, labels, separators, and ended/active colors.",
+          "after": "BannerMetadataList owns item composition and separator rendering; hero/drawer provide limit and visual classes.",
+          "net": "Reduced duplicate React rendering logic while preserving distinct visual surfaces."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C11 React/component simplification; broader shared metadata C4 remains queued",
+          "candidate_register": "C11 implemented",
+          "root_fix_patch": "Timeline-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing tests and browser check sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser check passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10",
+          "C12-C13",
+          "C15-C23",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J4",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose database card title and priority helper slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/AwakenerGridCard.tsx",
+        "src/features/database/internal/WheelGridCard.tsx",
+        "src/features/database/internal/SimpleArtifactGridCard.tsx",
+        "src/features/database/internal/database-card-typography.ts",
+        "src/features/database/internal/database-card-*",
+        "src/features/database/internal/*GridCard.test.tsx",
+        "src/features/database/internal/DatabaseGrid.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Database-internal helper for repeated card title markup and prioritized image count across card types.",
+      "receipt": {
+        "evidence": [
+          "Awakener, wheel, and simple artifact grid cards repeat the same title `<p>` markup and `PRIORITIZED_GRID_IMAGE_COUNT = 24` logic.",
+          "The behavior is database-internal and should not become a global media-card primitive.",
+          "Existing grid/card tests pin image priority behavior and accessible open actions."
+        ],
+        "selected_candidates": [
+          "C17"
+        ],
+        "why_root_fix": "A small internal helper removes repeated title and image-priority decisions at the producer boundary while preserving card frame ownership.",
+        "what_not_to_change": "No card frame layout, modal/detail behavior, route behavior, or image asset selection semantics.",
+        "verification": [
+          "npx vitest run src/features/database/internal/DatabaseGrid.test.tsx src/features/database/internal/AwakenerGridCard.test.tsx src/features/database/internal/WheelGridCard.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser checks for /database, /database/wheels, /database/posses"
+        ]
+      }
+    },
+    {
+      "id": "W4",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement database card title and priority helper",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/AwakenerGridCard.tsx",
+        "src/features/database/internal/WheelGridCard.tsx",
+        "src/features/database/internal/SimpleArtifactGridCard.tsx",
+        "src/features/database/internal/database-card-typography.ts",
+        "src/features/database/internal/database-card-*",
+        "src/features/database/internal/DatabaseGrid.test.tsx",
+        "src/features/database/internal/AwakenerGridCard.test.tsx",
+        "src/features/database/internal/WheelGridCard.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Database-internal card title helper and shared prioritized-image predicate used by awakener, wheel, and simple artifact cards.",
+      "receipt": {
+        "slice": "Database-internal card title and image priority helper for C17.",
+        "evidence": [
+          "Added `DatabaseGridCardTitle` to preserve the repeated title class and `title` attribute pattern.",
+          "Added `shouldPrioritizeDatabaseGridImage` with the shared first-24 image priority rule.",
+          "Migrated `AwakenerGridCard`, `WheelGridCard`, and `SimpleArtifactGridCard` to use both helpers."
+        ],
+        "files_changed": [
+          "src/features/database/internal/AwakenerGridCard.tsx",
+          "src/features/database/internal/WheelGridCard.tsx",
+          "src/features/database/internal/SimpleArtifactGridCard.tsx",
+          "src/features/database/internal/DatabaseGridCardTitle.tsx",
+          "src/features/database/internal/database-grid-card-priority.ts"
+        ],
+        "what_got_simpler": "Repeated title JSX and repeated `index < 24` priority constants are now single database-internal helpers.",
+        "behavior_preserved": "Card titles, title attributes, accessible open actions, card layouts, and first-24 eager image behavior are preserved.",
+        "current_complexity": "Three card producers duplicated the same display title and priority rule.",
+        "expected_complexity_after": "One title component and one priority predicate used by all database browse card producers.",
+        "data_access_render_invariants": "No data filtering, sorting, route, asset lookup, or detail modal behavior changed.",
+        "root_fix_patch_decision": "Root fix inside database internals; not a global card abstraction.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing database card/grid tests pin stats, accessible action names, and first-24 eager image behavior; browser checks confirmed route card counts/title nodes/eager counts.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/features/database/internal/DatabaseGrid.test.tsx src/features/database/internal/AwakenerGridCard.test.tsx src/features/database/internal/WheelGridCard.test.tsx -> 4 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /database, /database/wheels, /database/posses -> no overflow; title nodes matched card counts; eager images remained 24 per grid"
+        ],
+        "risks": "Low; helper is local and preserves exact rendered title class.",
+        "followups_not_done": [
+          "C21 accessible-name cleanup remains queued because it changes card name plumbing rather than display title duplication."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R4",
+      "role": "review",
+      "status": "done",
+      "title": "Review database card title and priority helper",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W4 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and candidate register update.",
+      "receipt": {
+        "evidence": [
+          "W4 stayed inside database browse card producers and new database-internal helpers.",
+          "It removed repeated title JSX and priority constants without touching `DatabaseGridCardFrame` layout or detail modal behavior.",
+          "Focused tests, lint, build, diff check, packet checker, and browser route checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Awakener, wheel, and simple artifact cards repeated title markup and first-24 priority logic.",
+          "after": "One internal title component and one priority predicate are shared across those producers.",
+          "net": "Reduced duplication without globalizing database card behavior."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C17 React/component simplification; C21 a11y cleanup remains queued",
+          "candidate_register": "C17 implemented",
+          "root_fix_patch": "database-internal root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing tests and browser checks sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10",
+          "C12-C13",
+          "C15-C16",
+          "C18-C23",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J5",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose D-zone media button extraction slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-complexity",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/d-zone/DZoneWaveCard.tsx",
+        "src/pages/d-zone/DZoneWaveCard.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/features/database/detail/**",
+        "src/features/database/internal/DatabaseGridCardFrame.tsx"
+      ],
+      "expected_output": "D-zone-local relic and monster button components extracted from wave card without changing collapsed accessibility behavior.",
+      "receipt": {
+        "evidence": [
+          "DZoneWaveCard owns relic button markup, icon fallback, monster tile markup, badges, level chips, accessible labels, and collapsed overflow behavior.",
+          "Existing DZoneWaveCard tests characterize collapsed accessibility limits and selected alert level chips.",
+          "The behavior is D-zone-specific, so C5 global media action tile remains unapproved for this slice."
+        ],
+        "selected_candidates": [
+          "C16"
+        ],
+        "why_root_fix": "Extracting local button components removes nested duplicated media-action concerns while preserving wave-card ownership of layout and disclosure state.",
+        "what_not_to_change": "No D-zone CSS redesign, no global media-tile primitive, no database card behavior, no popover behavior changes.",
+        "verification": [
+          "npx vitest run src/pages/d-zone/DZoneWaveCard.test.tsx src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser check for /d-zone"
+        ]
+      }
+    },
+    {
+      "id": "W5",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract D-zone relic and monster media buttons",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "src/pages/d-zone/DZoneWaveCard.tsx",
+        "src/pages/d-zone/DZoneWaveCard.test.tsx"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "D-zone-local media button components with collapsed aria-hidden/tabIndex behavior and selected alert level display preserved.",
+      "receipt": {
+        "slice": "D-zone-local relic/monster media button extraction for C16.",
+        "evidence": [
+          "Extracted `RelicButton` from the relic mapping in `DZoneWaveCard`.",
+          "The existing local `MonsterButton` already owned monster tile rendering, accessible labels, badges, selected-alert levels, and lore-text name rendering.",
+          "Wave card still owns expansion, visible monster slicing, overflow decisions, and section layout."
+        ],
+        "files_changed": [
+          "src/pages/d-zone/DZoneWaveCard.tsx"
+        ],
+        "what_got_simpler": "Relic button markup and accessibility rules are now isolated like the monster button, reducing nested wave-card rendering logic.",
+        "behavior_preserved": "Collapsed relic overflow stays `aria-hidden` and `tabIndex=-1`; collapsed monster accessible limit stays 6; expanded state renders all relics/monsters; selected alert level chips only show while expanded; labels stay wave/entity-specific.",
+        "current_complexity": "Wave card owned relic button markup inline while monster button behavior was already local but separate.",
+        "expected_complexity_after": "Wave card maps data and delegates both relic and monster media-button rendering to local components.",
+        "data_access_render_invariants": "No data, popover, CSS, route, motion, or database-card behavior changed.",
+        "root_fix_patch_decision": "Root fix inside the D-zone wave card concept; C5 global media tile deliberately not selected.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing DZoneWaveCard tests pin collapsed/expanded accessibility and selected alert level behavior; D-zone route tests and browser checks cover page integration.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/d-zone/DZoneWaveCard.test.tsx -> passed in subagent, 6 tests",
+          "git diff --check -- src/pages/d-zone/DZoneWaveCard.tsx -> passed in subagent",
+          "npx vitest run src/pages/d-zone/DZoneWaveCard.test.tsx src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx -> 22 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /d-zone and /d-zone/history -> no overflow; waves/buttons rendered; hidden overflow states preserved"
+        ],
+        "risks": "Low; extraction only moved relic button markup into a local component.",
+        "followups_not_done": [
+          "C5 global media action tile remains queued for terminal revisit after more local slices."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R5",
+      "role": "review",
+      "status": "done",
+      "title": "Review D-zone media button extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W5 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C16/C5 register update.",
+      "receipt": {
+        "evidence": [
+          "W5 stayed inside `DZoneWaveCard.tsx`.",
+          "It extracted local relic button rendering and did not globalize media tile behavior.",
+          "Focused tests, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Relic button markup was nested inline inside the wave-card relic map.",
+          "after": "`RelicButton` mirrors the existing local `MonsterButton` boundary.",
+          "net": "Reduced wave-card JSX nesting and made local media actions clearer without changing behavior."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C16 D-zone local complexity/media-action simplification; C5 remains queued for terminal revisit",
+          "candidate_register": "C16 implemented",
+          "root_fix_patch": "D-zone-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing tests and browser checks sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10",
+          "C12-C13",
+          "C15",
+          "C18-C23",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J6",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose D-zone popover surface wrapper slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/DZonePage.tsx",
+        "src/pages/DZoneHistoryPage.tsx",
+        "src/pages/d-zone/DZonePopoverSurface.tsx",
+        "src/pages/DZonePage.test.tsx",
+        "src/pages/DZoneHistoryPage.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "src/features/database/internal/DatabasePopoverRoot.tsx",
+        "src/features/database/internal/useDatabasePopoverController.ts",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "D-zone-local wrapper for database popover provider/root wiring used by current and history pages.",
+      "receipt": {
+        "evidence": [
+          "DZonePage and DZoneHistoryPage both call `useDZoneDatabasePopovers`, provide `DatabasePopoverContext`, render page content, then render `DatabasePopoverRoot` with the same outside-click prop.",
+          "This is D-zone-local architecture cleanup around an existing database integration, not a shared database modal change."
+        ],
+        "selected_candidates": [
+          "C23"
+        ],
+        "why_root_fix": "A small D-zone-local render-prop surface removes repeated provider/root wiring at the page boundary while preserving page markup and popover handlers.",
+        "what_not_to_change": "No database popover internals, no D-zone wave behavior, no route/query behavior, no modal detail internals.",
+        "verification": [
+          "npx vitest run src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser checks for /d-zone and /d-zone/history"
+        ]
+      }
+    },
+    {
+      "id": "W6",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement D-zone popover surface wrapper",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-architecture"
+      ],
+      "allowed_files": [
+        "src/pages/DZonePage.tsx",
+        "src/pages/DZoneHistoryPage.tsx",
+        "src/pages/d-zone/DZonePopoverSurface.tsx",
+        "src/pages/DZonePage.test.tsx",
+        "src/pages/DZoneHistoryPage.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "src/features/database/internal/DatabasePopoverRoot.tsx",
+        "src/features/database/internal/useDatabasePopoverController.ts",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "D-zone current/history pages use one local wrapper for popover provider/root wiring while handlers and markup remain local.",
+      "receipt": {
+        "slice": "D-zone-local popover surface wrapper for C23.",
+        "evidence": [
+          "Added `DZonePopoverSurface` to own `useDZoneDatabasePopovers`, `DatabasePopoverContext.Provider`, and `DatabasePopoverRoot` wiring.",
+          "`DZonePage` and `DZoneHistoryPage` now render their page content through the local wrapper render prop.",
+          "Page-owned route markup, selection/query behavior, and inspector handlers remain in the pages."
+        ],
+        "files_changed": [
+          "src/pages/DZonePage.tsx",
+          "src/pages/DZoneHistoryPage.tsx",
+          "src/pages/d-zone/DZonePopoverSurface.tsx"
+        ],
+        "what_got_simpler": "Current/history D-zone pages no longer duplicate the database popover provider/root shell.",
+        "behavior_preserved": "Monster/relic popovers still use the same hook and outside-click preference; page routes, query params, history drawer behavior, and wave rendering are unchanged.",
+        "current_complexity": "Two page components repeated the same provider/root wiring.",
+        "expected_complexity_after": "One D-zone-local wrapper owns the integration shell.",
+        "data_access_render_invariants": "No database popover internals, detail modal internals, route/query semantics, or D-zone wave data changed.",
+        "root_fix_patch_decision": "Root fix at the D-zone page boundary; not a shared database primitive.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "DZonePage and DZoneHistoryPage tests cover popover behavior, route/query behavior, and drawer interactions; browser checks covered both routes.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx -> 16 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /d-zone and /d-zone/history -> no overflow; pages and waves rendered"
+        ],
+        "risks": "Low; wrapper uses existing hook and render prop to avoid moving page logic.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R6",
+      "role": "review",
+      "status": "done",
+      "title": "Review D-zone popover surface wrapper",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W6 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C23 register update.",
+      "receipt": {
+        "evidence": [
+          "W6 introduced a D-zone-local wrapper only.",
+          "It removed provider/root duplication without changing database popover internals or page route behavior.",
+          "Focused tests, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "DZonePage and DZoneHistoryPage each repeated popover hook/provider/root wiring.",
+          "after": "`DZonePopoverSurface` owns that integration shell.",
+          "net": "Reduced duplicated page-boundary architecture while keeping page-specific markup local."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C23 architecture cleanup",
+          "candidate_register": "C23 implemented",
+          "root_fix_patch": "D-zone-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing tests and browser checks sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10",
+          "C12-C13",
+          "C15",
+          "C18-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J7",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose D-zone countdown helper slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/DZonePage.tsx",
+        "src/pages/DZoneHistoryPage.tsx",
+        "src/pages/d-zone/d-zone-countdown.ts",
+        "src/pages/d-zone/d-zone-countdown.test.ts",
+        "src/pages/d-zone/d-zone-history-view-model.ts",
+        "src/pages/d-zone/d-zone-history-view-model.test.ts",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "One D-zone-local countdown helper used by current and history pages.",
+      "receipt": {
+        "evidence": [
+          "DZonePage has a local `getDzoneCountdownDisplay` and the history view model has equivalent active-only countdown logic.",
+          "The behavior is D-zone-specific but delegates to Timeline domain status/countdown helpers."
+        ],
+        "selected_candidates": [
+          "C13"
+        ],
+        "why_root_fix": "A small D-zone helper removes duplicate active-only countdown logic while preserving page-specific rendering.",
+        "what_not_to_change": "No route behavior, no date formatting behavior, no Timeline domain changes.",
+        "verification": [
+          "npx vitest run src/pages/d-zone/d-zone-history-view-model.test.ts src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx",
+          "npm run lint",
+          "git diff --check"
+        ]
+      }
+    },
+    {
+      "id": "W7",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement shared D-zone countdown helper",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react"
+      ],
+      "allowed_files": [
+        "src/pages/DZonePage.tsx",
+        "src/pages/DZoneHistoryPage.tsx",
+        "src/pages/d-zone/d-zone-countdown.ts",
+        "src/pages/d-zone/d-zone-countdown.test.ts",
+        "src/pages/d-zone/d-zone-history-view-model.ts",
+        "src/pages/d-zone/d-zone-history-view-model.test.ts"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "D-zone countdown helper plus migrated current/history callers and focused test coverage.",
+      "receipt": {
+        "slice": "Shared D-zone countdown helper for C13.",
+        "evidence": [
+          "Added `getDZoneCountdownDisplay` in `src/pages/d-zone/d-zone-countdown.ts`.",
+          "`DZonePage` and `DZoneHistoryPage` now use the same active-only countdown helper.",
+          "Moved countdown behavior coverage from the history view-model test to `d-zone-countdown.test.ts`."
+        ],
+        "files_changed": [
+          "src/pages/DZonePage.tsx",
+          "src/pages/DZoneHistoryPage.tsx",
+          "src/pages/d-zone/d-zone-countdown.ts",
+          "src/pages/d-zone/d-zone-countdown.test.ts",
+          "src/pages/d-zone/d-zone-history-view-model.ts",
+          "src/pages/d-zone/d-zone-history-view-model.test.ts"
+        ],
+        "what_got_simpler": "Active-only D-zone countdown behavior now lives in one helper instead of a page-local function and history view-model function.",
+        "behavior_preserved": "Only active seasons return countdown text; ended seasons return an empty string; page rendering and date formatting remain unchanged.",
+        "current_complexity": "Two separate functions implemented equivalent active-season checks.",
+        "expected_complexity_after": "One helper used by current and history pages.",
+        "data_access_render_invariants": "No route/query, season selection, or Timeline domain behavior changed.",
+        "root_fix_patch_decision": "Root fix for the D-zone countdown concept.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Focused helper test pins active/ended behavior; D-zone page tests and browser checks cover integration.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/d-zone/d-zone-countdown.test.ts src/pages/d-zone/d-zone-history-view-model.test.ts src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx -> 23 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /d-zone and /d-zone/history -> no overflow; countdown and waves rendered"
+        ],
+        "risks": "Low; helper delegates to the same Timeline domain status/countdown functions.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R7",
+      "role": "review",
+      "status": "done",
+      "title": "Review D-zone countdown helper",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W7 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C13 register update.",
+      "receipt": {
+        "evidence": [
+          "W7 moved duplicated countdown logic into one D-zone-local helper.",
+          "It did not change Timeline domain code, date formatting, routes, or season selection.",
+          "Focused tests, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Current page and history view model had equivalent active-only countdown logic.",
+          "after": "Both pages call `getDZoneCountdownDisplay`.",
+          "net": "Reduced duplicate behavior logic and moved characterization to the helper boundary."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C13 D-zone helper simplification",
+          "candidate_register": "C13 implemented",
+          "root_fix_patch": "D-zone-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "focused helper test plus page tests",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10",
+          "C12",
+          "C15",
+          "C18-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J8",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose D-zone history browser component split",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/d-zone/DZoneHistoryBrowser.tsx",
+        "src/pages/DZoneHistoryPage.test.tsx",
+        "src/pages/d-zone/d-zone-history-view-model.test.ts",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "D-zone history browser subcomponents for archive note, search, year group, and season button with drawer focus behavior preserved.",
+      "receipt": {
+        "evidence": [
+          "DZoneHistoryBrowser mixes drawer modal behavior, focus trap, archive note disclosure, search control, year groups, and season buttons.",
+          "Existing DZoneHistoryPage tests cover drawer close/focus behavior, archive note, search, year expansion, URL replacement, and selection."
+        ],
+        "selected_candidates": [
+          "C15",
+          "C6"
+        ],
+        "why_root_fix": "A same-file local subcomponent split reduces JSX nesting and separates UI responsibilities without moving the focus trap or route logic.",
+        "what_not_to_change": "No search/view-model behavior, no drawer focus trap behavior, no URL behavior, no CSS changes.",
+        "verification": [
+          "npx vitest run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts",
+          "npm run lint",
+          "git diff --check",
+          "browser check for /d-zone/history"
+        ]
+      }
+    },
+    {
+      "id": "W8",
+      "role": "worker",
+      "status": "done",
+      "title": "Split D-zone history browser subcomponents",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/pages/d-zone/DZoneHistoryBrowser.tsx",
+        "src/pages/DZoneHistoryPage.test.tsx",
+        "src/pages/d-zone/d-zone-history-view-model.test.ts"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Same-file local components for archive note, search, year group, and season button; drawer focus and keyboard behavior preserved.",
+      "receipt": {
+        "slice": "D-zone history browser subcomponent split for C15/C6.",
+        "evidence": [
+          "Added local `ArchiveDataNote`, `HistorySearch`, `HistoryYearGroup`, and `HistorySeasonButton` components inside `DZoneHistoryBrowser.tsx`.",
+          "Kept `useDrawerModalBehavior` and `handleDrawerKeyDown` in the drawer component.",
+          "Moved year/season rendering decisions behind local component boundaries while preserving deterministic panel/button ids."
+        ],
+        "files_changed": [
+          "src/pages/d-zone/DZoneHistoryBrowser.tsx"
+        ],
+        "what_got_simpler": "The main drawer render now reads as shell, archive note, search, and year list rather than nesting every control inline.",
+        "behavior_preserved": "Escape/backdrop/close behavior, body overflow restore, focus return/trap, search, year expansion, selected season labels, and URL selection behavior are preserved.",
+        "current_complexity": "One component mixed modal behavior, archive note, search, year groups, and season buttons.",
+        "expected_complexity_after": "Drawer shell owns modal behavior; local components own archive note, search, year groups, and season buttons.",
+        "data_access_render_invariants": "No view-model search/grouping logic, CSS, route/query behavior, or popover behavior changed.",
+        "root_fix_patch_decision": "Root fix for the D-zone history browser component shape.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing DZoneHistoryPage tests cover drawer close/focus, archive note, search, year groups, URL replacement, and selection; browser check confirmed rendered controls.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/DZoneHistoryPage.test.tsx src/pages/d-zone/d-zone-history-view-model.test.ts -> 16 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser check for /d-zone/history -> no overflow; year/search/season controls rendered with selected label intact"
+        ],
+        "risks": "Low to medium; same-file component extraction touches drawer markup but characterization is strong.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R8",
+      "role": "review",
+      "status": "done",
+      "title": "Review D-zone history browser split",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W8 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C15/C6 register update.",
+      "receipt": {
+        "evidence": [
+          "W8 stayed inside DZoneHistoryBrowser and did not touch CSS or view-model logic.",
+          "Drawer focus/key behavior stayed in the top-level component while repeated nested markup moved to local subcomponents.",
+          "Focused tests, lint, build, diff check, packet checker, and browser check passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "DZoneHistoryBrowser mixed modal behavior and all drawer content markup in one render.",
+          "after": "Top-level drawer composes local archive note, search, year group, and season button components.",
+          "net": "Reduced component complexity and nesting without changing behavior."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C15 and C6 D-zone complexity cleanup",
+          "candidate_register": "C15 and C6 implemented",
+          "root_fix_patch": "same-file local root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing tests and browser check sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser check passed"
+        ],
+        "followups": [
+          "C3-C5",
+          "C7-C8",
+          "C10",
+          "C12",
+          "C18-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J9",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose database browse sort label config slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-typescript",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/browse/EntityBrowseViews.tsx",
+        "src/features/database/browse/databaseBrowseSortLabels.ts",
+        "src/features/database/browse/databaseBrowseSortLabels.test.ts",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Pure database browse sort label/direction helper used by `EntityBrowseViews`.",
+      "receipt": {
+        "evidence": [
+          "EntityBrowseViews owns four page renderers plus local sort label/direction functions for awakeners and wheels.",
+          "The label behavior is pure and can be characterized directly without changing sort state or controls."
+        ],
+        "selected_candidates": [
+          "C18"
+        ],
+        "why_root_fix": "Move sort label tables to a pure browse helper so the orchestration component no longer carries label branching.",
+        "what_not_to_change": "No sort state, view model sorting, route behavior, or control component behavior.",
+        "verification": [
+          "npx vitest run src/features/database/browse/databaseBrowseSortLabels.test.ts src/features/database/DatabaseRoutes.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser checks for /database and /database/wheels"
+        ]
+      }
+    },
+    {
+      "id": "W9",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract database browse sort label config",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-typescript"
+      ],
+      "allowed_files": [
+        "src/features/database/browse/EntityBrowseViews.tsx",
+        "src/features/database/browse/databaseBrowseSortLabels.ts",
+        "src/features/database/browse/databaseBrowseSortLabels.test.ts",
+        "src/features/database/DatabaseRoutes.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Pure helper with exact sort labels/direction labels and migrated `EntityBrowseViews` imports.",
+      "receipt": {
+        "slice": "Database browse sort label config extraction for C18.",
+        "evidence": [
+          "Added pure `databaseBrowseSortLabels.ts` for awakener/database and wheel sort labels/direction labels.",
+          "Added `databaseBrowseSortLabels.test.ts` pinning exact labels.",
+          "Migrated `EntityBrowseViews` to import helpers and removed local branching."
+        ],
+        "files_changed": [
+          "src/features/database/browse/EntityBrowseViews.tsx",
+          "src/features/database/browse/databaseBrowseSortLabels.ts",
+          "src/features/database/browse/databaseBrowseSortLabels.test.ts"
+        ],
+        "what_got_simpler": "The browse orchestration file no longer owns sort-label branching.",
+        "behavior_preserved": "Sort labels and direction labels are exact; sort state, view model sorting, and controls are unchanged.",
+        "current_complexity": "EntityBrowseViews mixed render orchestration with sort label lookup logic.",
+        "expected_complexity_after": "Pure helper owns labels; EntityBrowseViews composes controls/views.",
+        "data_access_render_invariants": "No filtering, sorting algorithm, route, or card behavior changed.",
+        "root_fix_patch_decision": "Root fix for the database browse sort-label concept.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Focused pure helper tests plus DatabaseRoutes and browser checks cover labels in rendered pages.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/features/database/browse/databaseBrowseSortLabels.test.ts src/features/database/DatabaseRoutes.test.tsx -> 36 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /database and /database/wheels -> no overflow; sort labels and direction labels rendered"
+        ],
+        "risks": "Low; pure lookup extraction with direct tests.",
+        "followups_not_done": [
+          "C8 broader render-derived work remains queued/under review."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R9",
+      "role": "review",
+      "status": "done",
+      "title": "Review database browse sort label config extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W9 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C18 register update.",
+      "receipt": {
+        "evidence": [
+          "W9 moved sort label branching to a pure helper with tests.",
+          "It did not change sort state, sorting behavior, route behavior, or view controls.",
+          "Focused tests, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "EntityBrowseViews owned view composition and sort label branching.",
+          "after": "Sort label lookup is a pure helper; EntityBrowseViews imports it.",
+          "net": "Reduced orchestration file responsibility."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C18 database browse simplification",
+          "candidate_register": "C18 implemented",
+          "root_fix_patch": "pure-helper root fix",
+          "dependency_review": "not needed",
+          "characterization": "focused helper tests plus rendered browser checks",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C5",
+          "C7-C8",
+          "C10",
+          "C12",
+          "C19-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J10",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose database hybrid card measurement hook split",
+      "skills": [
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseCatalogGrid.tsx",
+        "src/features/database/internal/useMeasuredHybridCardMode.ts",
+        "src/features/database/internal/DatabaseGrid.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Internal hook extraction for hybrid card mode measurement with threshold/fallback behavior preserved.",
+      "receipt": {
+        "evidence": [
+          "DatabaseCatalogGrid owns measurement hook, resize fallback, provider, empty state, and grid rendering in one file.",
+          "The measurement concept is internal to database card grids and already characterized by rendered grid tests/browser checks."
+        ],
+        "selected_candidates": [
+          "C20"
+        ],
+        "why_root_fix": "Move measurement into a dedicated hook so the grid component only chooses layout classes and renders items.",
+        "what_not_to_change": "No card layout CSS, threshold, ResizeObserver fallback, empty state, or grid semantics.",
+        "verification": [
+          "npx vitest run src/features/database/internal/DatabaseGrid.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser checks for /database and /database/wheels"
+        ]
+      }
+    },
+    {
+      "id": "W10",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract database hybrid card measurement hook",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseCatalogGrid.tsx",
+        "src/features/database/internal/useMeasuredHybridCardMode.ts",
+        "src/features/database/internal/DatabaseGrid.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Dedicated hook file for hybrid grid measurement, used by DatabaseCatalogGrid.",
+      "receipt": {
+        "slice": "Database hybrid card measurement hook extraction for C20.",
+        "evidence": [
+          "Added `useMeasuredHybridCardMode.ts` with the 620px threshold, pending/poster/dossier logic, requestAnimationFrame measurement, resize fallback, and ResizeObserver path.",
+          "`DatabaseCatalogGrid` imports the hook and now owns only layout choice, empty state, context provider, and item rendering."
+        ],
+        "files_changed": [
+          "src/features/database/internal/DatabaseCatalogGrid.tsx",
+          "src/features/database/internal/useMeasuredHybridCardMode.ts"
+        ],
+        "what_got_simpler": "Measurement and resize behavior moved out of the grid render component.",
+        "behavior_preserved": "Hybrid threshold, pending mode, non-hybrid poster mode, ResizeObserver fallback, and empty-state behavior are preserved.",
+        "current_complexity": "One file combined measurement hook implementation and grid rendering.",
+        "expected_complexity_after": "Dedicated hook file plus simpler grid renderer.",
+        "data_access_render_invariants": "No data, card frame, CSS, or route behavior changed.",
+        "root_fix_patch_decision": "Root fix for database hybrid measurement responsibility.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "DatabaseGrid test covers image priority through the grid; browser checks confirmed hybrid grids render with poster mode and card counts.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/features/database/internal/DatabaseGrid.test.tsx -> 1 test passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /database and /database/wheels -> no overflow; hybrid grids rendered in poster mode"
+        ],
+        "risks": "Medium-low because layout measurement was moved, but implementation is a direct extraction and rendered checks passed.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R10",
+      "role": "review",
+      "status": "done",
+      "title": "Review database hybrid card measurement hook extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W10 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C20 register update.",
+      "receipt": {
+        "evidence": [
+          "W10 directly extracted the hook without changing threshold or fallback behavior.",
+          "DatabaseCatalogGrid now reads as rendering/context composition.",
+          "Focused test, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "DatabaseCatalogGrid carried measurement hook code and rendering code.",
+          "after": "useMeasuredHybridCardMode owns measurement; DatabaseCatalogGrid renders.",
+          "net": "Reduced mixed responsibility in the browse grid layer."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C20 database internal React simplification",
+          "candidate_register": "C20 implemented",
+          "root_fix_patch": "hook extraction root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing test plus browser checks",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused test passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C5",
+          "C7-C8",
+          "C10",
+          "C12",
+          "C19",
+          "C21-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J11",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose Timeline status section renderer slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/EventList.tsx",
+        "src/pages/timeline/TimelineBannersSection.tsx",
+        "src/pages/timeline/TimelineStatusSections.tsx",
+        "src/pages/timeline/EventList.test.tsx",
+        "src/pages/timeline/TimelineArchiveSection.test.tsx",
+        "src/pages/TimelinePage.test.tsx",
+        "src/pages/timeline/BannerCard.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "database detail modal internals"
+      ],
+      "expected_output": "Timeline-local active/upcoming/ended section renderer used by events and banners while preserving archive disclosure semantics.",
+      "receipt": {
+        "evidence": [
+          "Timeline EventList and TimelineBannersSection both partition active/upcoming/ended entries and render upcoming/ended through TimelineArchiveSection.",
+          "The repeated concept is Timeline-specific; event and banner cards keep different item renderers, containers, and artwork loading."
+        ],
+        "selected_candidates": [
+          "C10"
+        ],
+        "why_root_fix": "A local renderer removes duplicated archive-section orchestration without globalizing feature-specific layout or card behavior.",
+        "what_not_to_change": "No route/search-param semantics, archive expansion ids, event filtering, banner sorting, artwork loading policy, or archive disclosure a11y behavior.",
+        "verification": [
+          "npx vitest run src/pages/timeline/EventList.test.tsx src/pages/timeline/TimelineArchiveSection.test.tsx src/pages/TimelinePage.test.tsx src/pages/timeline/BannerCard.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser check for /timeline"
+        ]
+      }
+    },
+    {
+      "id": "W11",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract Timeline status section renderer",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/EventList.tsx",
+        "src/pages/timeline/TimelineBannersSection.tsx",
+        "src/pages/timeline/TimelineStatusSections.tsx",
+        "src/pages/timeline/EventList.test.tsx",
+        "src/pages/timeline/TimelineArchiveSection.test.tsx",
+        "src/pages/TimelinePage.test.tsx",
+        "src/pages/timeline/BannerCard.test.tsx"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "database detail modal internals"
+      ],
+      "expected_output": "Reusable Timeline-local renderer for active/upcoming/ended content sections.",
+      "receipt": {
+        "slice": "Timeline active/upcoming/archive section renderer for C10.",
+        "evidence": [
+          "Added `TimelineStatusSections.tsx` with active, upcoming, and ended section rendering around the existing TimelineArchiveSection.",
+          "`EventList` passes active `ul` container, event grid classes, and EventCard rendering.",
+          "`TimelineBannersSection` passes banner grid classes and preserves active eager artwork with lazy archived artwork."
+        ],
+        "files_changed": [
+          "src/pages/timeline/EventList.tsx",
+          "src/pages/timeline/TimelineBannersSection.tsx",
+          "src/pages/timeline/TimelineStatusSections.tsx"
+        ],
+        "what_got_simpler": "Timeline event and banner sections no longer duplicate the upcoming/ended TimelineArchiveSection blocks.",
+        "behavior_preserved": "Active items render immediately, upcoming sections default open through useTimelineArchiveExpansion, ended sections remain collapsed, section ids are unchanged, and archive aria/inert behavior stays in TimelineArchiveSection.",
+        "current_complexity": "Two Timeline section components each owned similar active/upcoming/ended archive rendering.",
+        "expected_complexity_after": "One Timeline-local section renderer owns the repeated shell; page-specific item renderers stay local.",
+        "data_access_render_invariants": "No event filtering, banner sorting, URL state, detail opening, or price-mode behavior changed.",
+        "root_fix_patch_decision": "Root fix for Timeline-local section orchestration duplication.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing EventList, TimelineArchiveSection, TimelinePage, and BannerCard tests pin expansion, routing, detail open, and artwork loading behavior.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/timeline/EventList.test.tsx src/pages/timeline/TimelineArchiveSection.test.tsx src/pages/TimelinePage.test.tsx src/pages/timeline/BannerCard.test.tsx -> 35 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /timeline desktop and mobile -> active/upcoming/ended event/banner sections rendered; no obvious overflow"
+        ],
+        "risks": "Medium-low; generic renderer changes JSX structure but keeps existing archive shell and tested ids/controls.",
+        "followups_not_done": [
+          "C7",
+          "C12",
+          "C22"
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R11",
+      "role": "review",
+      "status": "done",
+      "title": "Review Timeline status section renderer extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W11 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C10 register update.",
+      "receipt": {
+        "evidence": [
+          "W11 added a Timeline-local renderer rather than a global component.",
+          "Event active list remains a `ul`; archived event markup is unchanged relative to the existing TimelineArchiveSection wrapper.",
+          "Banner active cards remain eager-loaded and archive cards lazy-loaded.",
+          "Focused tests passed before packet recording."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "EventList and TimelineBannersSection duplicated active/upcoming/ended section rendering.",
+          "after": "TimelineStatusSections owns the repeated section shell while callers own item rendering.",
+          "net": "Reduced duplicated Timeline React structure without cross-surface abstraction bloat."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C10 Timeline React/architecture simplification",
+          "candidate_register": "C10 implemented",
+          "root_fix_patch": "Timeline-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "focused Timeline tests",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused Timeline tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks for /timeline desktop and mobile passed"
+        ],
+        "followups": [
+          "C3-C5 terminal reconciliation",
+          "C7",
+          "C8",
+          "C12",
+          "C19",
+          "C21-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J12",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose database card accessible-name cleanup slice",
+      "skills": [
+        "$refactor-ui-a11y",
+        "$refactor-react",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseGridCardFrame.tsx",
+        "src/features/database/internal/AwakenerGridCard.tsx",
+        "src/features/database/internal/WheelGridCard.tsx",
+        "src/features/database/internal/SimpleArtifactGridCard.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/internal/DatabaseGrid.test.tsx",
+        "src/features/database/internal/WheelGridCard.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "One accessible-name source for database grid card buttons with behavior and names preserved.",
+      "receipt": {
+        "evidence": [
+          "DatabaseGridCardFrame rendered both `aria-label` and `aria-labelledby`; `aria-labelledby` wins and made producer `ariaLabel` props redundant.",
+          "Awakener, wheel, posse, and covenant grid cards already provide visible titles used by the labelledby chain."
+        ],
+        "selected_candidates": [
+          "C21"
+        ],
+        "why_root_fix": "Remove the redundant prop path instead of keeping duplicate accessible-name APIs around every card producer.",
+        "what_not_to_change": "No card layout, title rendering, image alt text, click behavior, image priority, or detail modal internals.",
+        "verification": [
+          "npx vitest run src/features/database/internal/DatabaseGrid.test.tsx src/features/database/internal/WheelGridCard.test.tsx src/features/database/DatabaseRoutes.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser checks for /database, /database/wheels, /database/posses or /database/covenants"
+        ]
+      }
+    },
+    {
+      "id": "W12",
+      "role": "worker",
+      "status": "done",
+      "title": "Clean up database card accessible names",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-ui-a11y",
+        "$refactor-react"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseGridCardFrame.tsx",
+        "src/features/database/internal/AwakenerGridCard.tsx",
+        "src/features/database/internal/WheelGridCard.tsx",
+        "src/features/database/internal/SimpleArtifactGridCard.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/internal/DatabaseGrid.test.tsx",
+        "src/features/database/internal/WheelGridCard.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Remove duplicate ariaLabel prop path while preserving accessible names.",
+      "receipt": {
+        "slice": "Database card accessible-name cleanup for C21.",
+        "evidence": [
+          "Removed `ariaLabel` from `DatabaseGridCardFrameProps` and the button.",
+          "Removed `ariaLabel` arguments from awakener, wheel, and simple artifact grid card producers.",
+          "Updated the sort-order route test to assert `toHaveAccessibleName` and absence of raw `aria-label`."
+        ],
+        "files_changed": [
+          "src/features/database/internal/DatabaseGridCardFrame.tsx",
+          "src/features/database/internal/AwakenerGridCard.tsx",
+          "src/features/database/internal/WheelGridCard.tsx",
+          "src/features/database/internal/SimpleArtifactGridCard.tsx",
+          "src/features/database/DatabaseRoutes.test.tsx"
+        ],
+        "what_got_simpler": "Database grid buttons now have a single accessible-name construction path owned by the frame.",
+        "behavior_preserved": "Button accessible names remain `View details for {name}`; visible titles, image alt text, click targets, and priority behavior are unchanged.",
+        "current_complexity": "The frame accepted producer aria labels while also labelling the button from hidden action text plus visible title.",
+        "expected_complexity_after": "The frame derives the accessible name from one labelledby chain.",
+        "data_access_render_invariants": "No data, route, sorting, filtering, or modal behavior changed.",
+        "root_fix_patch_decision": "Root fix for redundant accessible-name API.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "DatabaseGrid, WheelGridCard, and DatabaseRoutes tests query card buttons by accessible name; route test now asserts no aria-label attribute remains.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/features/database/internal/DatabaseGrid.test.tsx src/features/database/internal/WheelGridCard.test.tsx src/features/database/DatabaseRoutes.test.tsx -> 34 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /database, /database/wheels, and /database/posses -> card grids rendered with no obvious overflow"
+        ],
+        "risks": "Low; a11y API simplification with focused name assertions.",
+        "followups_not_done": [
+          "C19",
+          "C8"
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R12",
+      "role": "review",
+      "status": "done",
+      "title": "Review database card accessible-name cleanup",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W12 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C21 register update.",
+      "receipt": {
+        "evidence": [
+          "W12 removes an unused prop path instead of changing visible or interactive card behavior.",
+          "Tests now assert accessible names through role/name and explicitly ensure `aria-label` is absent."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Database card buttons had two competing accessible-name attributes and redundant producer props.",
+          "after": "The frame owns one labelledby-based accessible-name path.",
+          "net": "Cleaner a11y API and better test coverage."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C21 UI/a11y cleanup",
+          "candidate_register": "C21 implemented",
+          "root_fix_patch": "database-internal root fix",
+          "dependency_review": "not needed",
+          "characterization": "focused database tests",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused database tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks for /database, /database/wheels, and /database/posses passed"
+        ],
+        "followups": [
+          "C3-C5 terminal reconciliation",
+          "C7-C8",
+          "C12",
+          "C19",
+          "C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J13",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose database mobile filter group extraction slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-architecture",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseChipPrimitives.tsx",
+        "src/features/database/internal/DatabaseChipPrimitives.test.tsx",
+        "src/features/database/internal/DatabaseFilters.tsx",
+        "src/features/database/internal/WheelDatabaseFilters.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/browse/useDatabaseBrowseState.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Database-internal mobile filter group used by awakener and wheel filters, preserving one-open-panel behavior.",
+      "receipt": {
+        "evidence": [
+          "DatabaseFilters and WheelDatabaseFilters duplicated mobile open state ids, toggle grid, and conditional panel rendering.",
+          "CatalogMobileFilterToggle and CatalogMobileFilterPanel already existed as the primitive pieces."
+        ],
+        "selected_candidates": [
+          "C19"
+        ],
+        "why_root_fix": "Extract the duplicated mobile group orchestration around the existing toggle/panel pieces instead of changing route/filter state.",
+        "what_not_to_change": "No desktop filter rows, search inputs, URL/history behavior, filter ids, or detail modal internals.",
+        "verification": [
+          "npx vitest run src/features/database/internal/DatabaseChipPrimitives.test.tsx src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "mobile browser checks for /database and /database/wheels"
+        ]
+      }
+    },
+    {
+      "id": "W13",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract database mobile filter group",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseChipPrimitives.tsx",
+        "src/features/database/internal/DatabaseChipPrimitives.test.tsx",
+        "src/features/database/internal/DatabaseFilters.tsx",
+        "src/features/database/internal/WheelDatabaseFilters.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/browse/useDatabaseBrowseState.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Shared database-internal mobile group component for mobile filter toggles and panels.",
+      "receipt": {
+        "slice": "Database mobile filter group extraction for C19.",
+        "evidence": [
+          "Added `CatalogMobileFilterGroup` and descriptor type in `DatabaseChipPrimitives.tsx`.",
+          "Migrated awakener filters to Rarity/Type/Source group descriptors and wheel filters to Rarity/Main stat descriptors.",
+          "Added `DatabaseChipPrimitives.test.tsx` covering one-open-panel behavior, aria-controls wiring, and option callbacks."
+        ],
+        "files_changed": [
+          "src/features/database/internal/DatabaseChipPrimitives.tsx",
+          "src/features/database/internal/DatabaseChipPrimitives.test.tsx",
+          "src/features/database/internal/DatabaseFilters.tsx",
+          "src/features/database/internal/WheelDatabaseFilters.tsx"
+        ],
+        "what_got_simpler": "Awakener and wheel filters no longer duplicate mobile panel ids, toggle grids, and conditional panel branches.",
+        "behavior_preserved": "Only one mobile panel is open at a time; aria-controls/expanded remain paired; desktop filter rows, search fields, and filter change handlers are unchanged.",
+        "current_complexity": "Two filter components duplicated the same mobile toggle/panel orchestration.",
+        "expected_complexity_after": "One database-internal primitive owns mobile group orchestration; filter components provide descriptors.",
+        "data_access_render_invariants": "No filter ids, query params, sorting, search, or result data changed.",
+        "root_fix_patch_decision": "Root fix for duplicated database mobile filter orchestration.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "New primitive test pins mobile group behavior; DatabaseRoutes and browse state tests pin route/filter state.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/features/database/internal/DatabaseChipPrimitives.test.tsx src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx -> 39 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "mobile browser checks for /database and /database/wheels -> one-open-panel behavior and panel visibility passed"
+        ],
+        "risks": "Medium; mobile disclosure markup was centralized, but tests and browser checks cover ids, panels, and route behavior.",
+        "followups_not_done": [
+          "C8"
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R13",
+      "role": "review",
+      "status": "done",
+      "title": "Review database mobile filter group extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W13 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C19 register update.",
+      "receipt": {
+        "evidence": [
+          "W13 extracts only database mobile filter orchestration and leaves desktop rows/search/URL state alone.",
+          "Focused primitive test covers the behavior that previously lacked a direct rail.",
+          "Mobile browser check confirms awakeners and wheels use the shared group."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "DatabaseFilters and WheelDatabaseFilters duplicated mobile filter toggle/panel structure.",
+          "after": "CatalogMobileFilterGroup owns the repeated mobile shell; callers provide descriptors.",
+          "net": "Reduced duplicated React/a11y wiring with local database scope."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C19 database React/UI-a11y simplification",
+          "candidate_register": "C19 implemented",
+          "root_fix_patch": "database-internal root fix",
+          "dependency_review": "not needed",
+          "characterization": "new primitive test plus route tests and browser check",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused database tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "mobile browser checks passed"
+        ],
+        "followups": [
+          "C3-C5 terminal reconciliation",
+          "C7-C8",
+          "C12",
+          "C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J14",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose Timeline page orchestration seam slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/TimelinePage.tsx",
+        "src/pages/timeline/TimelineContentControls.tsx",
+        "src/pages/timeline/TimelinePageSection.tsx",
+        "src/pages/timeline/timelineDZoneSummary.ts",
+        "src/pages/timeline/useTimelineSectionScroll.ts",
+        "src/pages/TimelinePage.test.tsx",
+        "src/pages/timeline/EventList.test.tsx",
+        "src/pages/timeline/TimelineArchiveSection.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Timeline-local page orchestration helpers with route and modal behavior preserved.",
+      "receipt": {
+        "evidence": [
+          "TimelinePage mixed URL state, section scroll effect, masthead D-zone derivation, control markup, section headers, data composition, and modal wiring.",
+          "C10 had already moved repeated active/upcoming/ended section rendering out of the page-adjacent children, making this page seam safe to cut."
+        ],
+        "selected_candidates": [
+          "C22"
+        ],
+        "why_root_fix": "Move cohesive Timeline-only UI/effect/model responsibilities into local helpers while leaving route state and modal wiring in the page.",
+        "what_not_to_change": "No search-param semantics, reduced-motion scroll behavior, `timeline-overlay` detail source, D-zone summary fallback, or filter button a11y semantics.",
+        "verification": [
+          "npx vitest run src/pages/TimelinePage.test.tsx src/pages/timeline/EventList.test.tsx src/pages/timeline/TimelineArchiveSection.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser check for /timeline"
+        ]
+      }
+    },
+    {
+      "id": "W14",
+      "role": "worker",
+      "status": "done",
+      "title": "Split Timeline page orchestration helpers",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-architecture"
+      ],
+      "allowed_files": [
+        "src/pages/TimelinePage.tsx",
+        "src/pages/timeline/TimelineContentControls.tsx",
+        "src/pages/timeline/TimelinePageSection.tsx",
+        "src/pages/timeline/timelineDZoneSummary.ts",
+        "src/pages/timeline/useTimelineSectionScroll.ts",
+        "src/pages/TimelinePage.test.tsx",
+        "src/pages/timeline/EventList.test.tsx",
+        "src/pages/timeline/TimelineArchiveSection.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "TimelinePage delegates controls, section header, D-zone summary, and section scroll to local helpers.",
+      "receipt": {
+        "slice": "Timeline page orchestration seam for C22.",
+        "evidence": [
+          "Added `TimelineContentControls` for content/price controls and `TimelinePageSection` for page section headers.",
+          "Added `timelineDZoneSummary.ts` for D-zone event selection, realm fallback, and countdown summary.",
+          "Added `useTimelineSectionScroll` for section scroll and reduced-motion behavior.",
+          "TimelinePage now composes helpers and keeps route state/detail modal wiring."
+        ],
+        "files_changed": [
+          "src/pages/TimelinePage.tsx",
+          "src/pages/timeline/TimelineContentControls.tsx",
+          "src/pages/timeline/TimelinePageSection.tsx",
+          "src/pages/timeline/timelineDZoneSummary.ts",
+          "src/pages/timeline/useTimelineSectionScroll.ts"
+        ],
+        "what_got_simpler": "TimelinePage no longer owns local button components, price-mode markup, section-header markup, D-zone summary parsing, or the scroll effect body.",
+        "behavior_preserved": "View and section search params, content/price controls, reduced-motion scroll behavior, D-zone masthead text/countdown, and detail overlay source are preserved.",
+        "current_complexity": "TimelinePage mixed page composition with UI controls, effects, and D-zone summary derivation.",
+        "expected_complexity_after": "Small Timeline-local helpers own controls, effects, and summary derivation; TimelinePage stays at route/data/modal composition level.",
+        "data_access_render_invariants": "No timeline data, sort order, routing, price-mode semantics, or modal store calls changed.",
+        "root_fix_patch_decision": "Root fix for Timeline page orchestration responsibility.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "TimelinePage tests pin filters, scroll behavior, masthead D-zone data, and detail overlay source; EventList/Archive tests cover child section behavior.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/TimelinePage.test.tsx src/pages/timeline/EventList.test.tsx src/pages/timeline/TimelineArchiveSection.test.tsx -> 21 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed after widening useTimelineSectionScroll to accept undefined from parseTimelineSectionId",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser check for /timeline -> controls, D-zone masthead summary, event/banner sections, and archive toggles rendered"
+        ],
+        "risks": "Medium; page responsibilities moved into helpers, but existing route/effect tests cover the critical semantics.",
+        "followups_not_done": [
+          "C7"
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R14",
+      "role": "review",
+      "status": "done",
+      "title": "Review Timeline page orchestration seam",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W14 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C22 register update.",
+      "receipt": {
+        "evidence": [
+          "W14 moved cohesive Timeline-local responsibilities out of TimelinePage without touching domain data or database detail internals.",
+          "Focused TimelinePage tests passed and still cover the search-param and scroll behavior that moved."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "TimelinePage owned route state, controls, masthead summary parsing, scroll effect, section header markup, and modal wiring.",
+          "after": "Page owns route/data/modal composition while helpers own controls, scroll effect, D-zone summary, and section header.",
+          "net": "Clearer page boundary with local helper seams."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C22 Timeline architecture seam",
+          "candidate_register": "C22 implemented",
+          "root_fix_patch": "Timeline-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "TimelinePage route/effect tests",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused Timeline tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser check for /timeline passed"
+        ],
+        "followups": [
+          "C3-C5 terminal reconciliation",
+          "C7-C8",
+          "C12",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J15",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose Timeline banner artwork preload hook slice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/BannerArtwork.tsx",
+        "src/pages/timeline/usePoolMontagePreload.ts",
+        "src/pages/timeline/BannerCard.test.tsx",
+        "src/pages/timeline/timelineArtworkModel.test.ts",
+        "src/pages/timeline/usePoolCycling.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Timeline-local hook extraction for combo pool preload lifecycle with banner artwork behavior preserved.",
+      "receipt": {
+        "evidence": [
+          "BannerArtwork mixed visual rendering, detail target behavior, cycling, and the browser preload lifecycle in one file.",
+          "The preload lifecycle is cohesive and can move behind a local hook without touching slice click/link rendering."
+        ],
+        "selected_candidates": [
+          "C7"
+        ],
+        "why_root_fix": "Extract the browser/preload effect cluster rather than moving CSS or changing visual branch behavior.",
+        "what_not_to_change": "No custom-art priority, featured/pool branch order, detail link/button behavior, modified-click behavior, cycling timing, or artwork model logic.",
+        "verification": [
+          "npx vitest run src/pages/timeline/BannerCard.test.tsx src/pages/timeline/timelineArtworkModel.test.ts src/pages/timeline/usePoolCycling.test.tsx",
+          "npm run lint",
+          "npm run build:quiet",
+          "git diff --check",
+          "browser check for /timeline"
+        ]
+      }
+    },
+    {
+      "id": "W15",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract Timeline pool montage preload hook",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "src/pages/timeline/BannerArtwork.tsx",
+        "src/pages/timeline/usePoolMontagePreload.ts",
+        "src/pages/timeline/BannerCard.test.tsx",
+        "src/pages/timeline/timelineArtworkModel.test.ts",
+        "src/pages/timeline/usePoolCycling.test.tsx"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Dedicated preload hook used by PoolMontageArtwork.",
+      "receipt": {
+        "slice": "Timeline banner artwork preload hook extraction for C7.",
+        "evidence": [
+          "Added `usePoolMontagePreload.ts` for image decode/cache, batched preloading, IntersectionObserver gating, and assetsReady reporting.",
+          "`PoolMontageArtwork` now consumes `{assetsReady, rootRef}` from the hook.",
+          "`BannerArtwork.tsx` retains visual slice components and detail target behavior."
+        ],
+        "files_changed": [
+          "src/pages/timeline/BannerArtwork.tsx",
+          "src/pages/timeline/usePoolMontagePreload.ts"
+        ],
+        "what_got_simpler": "BannerArtwork no longer carries the browser preload lifecycle alongside rendering and click-target code.",
+        "behavior_preserved": "Custom art still wins; pool montage and featured fallbacks render in the same order; link/button targets and pool cycling behavior are unchanged.",
+        "current_complexity": "One file owned preload/cache effects, visual rendering, click targets, and cycling integration.",
+        "expected_complexity_after": "Preload/cache effects live in one hook; BannerArtwork focuses on artwork rendering and interaction targets.",
+        "data_access_render_invariants": "No timeline artwork model, route links, detail refs, cycling interval, or price/banner metadata behavior changed.",
+        "root_fix_patch_decision": "Root fix for BannerArtwork preload responsibility.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "BannerCard tests cover custom art, pool links, overlay clicks, cycling reconciliation, opt-outs, and fallback rendering; artwork model and cycling tests cover supporting logic.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/timeline/BannerCard.test.tsx src/pages/timeline/timelineArtworkModel.test.ts src/pages/timeline/usePoolCycling.test.tsx -> 29 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser check for /timeline?view=banners -> active and upcoming banner cards rendered with details handles and archive controls"
+        ],
+        "risks": "Medium; browser preload lifecycle moved, but visual/interaction behavior stayed in place and tests cover key branches.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R15",
+      "role": "review",
+      "status": "done",
+      "title": "Review Timeline banner artwork preload hook extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W15 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C7 register update.",
+      "receipt": {
+        "evidence": [
+          "W15 extracted only the preload lifecycle and did not change artwork model or target rendering.",
+          "Focused tests for BannerCard, artwork model, and pool cycling passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "BannerArtwork carried browser preload lifecycle and rendering/interaction logic.",
+          "after": "usePoolMontagePreload owns preload lifecycle; BannerArtwork renders artwork.",
+          "net": "Reduced file responsibility without changing behavior."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C7 Timeline complexity cleanup",
+          "candidate_register": "C7 implemented",
+          "root_fix_patch": "Timeline-local hook root fix",
+          "dependency_review": "not needed",
+          "characterization": "focused banner/artwork/cycling tests",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused banner/artwork/cycling tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser check for /timeline?view=banners passed"
+        ],
+        "followups": [
+          "C3-C5 terminal reconciliation",
+          "C8",
+          "C12",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J16",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose final design documentation and terminal reconciliation slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-review",
+        "$refactor-lint-law"
+      ],
+      "allowed_files": [
+        ".gitignore",
+        "DESIGN.md",
+        "PRODUCT.md",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/** product code except already committed slices"
+      ],
+      "expected_output": "Document stable shared UI vocabulary and terminally reconcile non-justified shared extraction candidates.",
+      "receipt": {
+        "evidence": [
+          "Shared `--ui-*`, `.ui-compact-control`, and `.ui-scrollbar` vocabulary is now stable enough to document.",
+          "Scouts found C3/C4/C5/C12 global primitives would collapse different semantics into weak abstractions.",
+          "Database C8 render-derived work no longer has enough hotspot evidence after existing view-model and helper slices."
+        ],
+        "selected_candidates": [
+          "C3",
+          "C4",
+          "C5",
+          "C8",
+          "C12",
+          "M1",
+          "M2"
+        ],
+        "why_root_fix": "For remaining global-extraction ideas, the root fix is documentation and terminal register decisions rather than code that creates abstraction bloat.",
+        "what_not_to_change": "No new shared React primitive and no further product code changes in this slice.",
+        "verification": [
+          "docs diff review",
+          "goal checker",
+          "final lint/build/tests/browser sweep"
+        ]
+      }
+    },
+    {
+      "id": "W16",
+      "role": "worker",
+      "status": "done",
+      "title": "Document shared UI vocabulary and reconcile remaining candidates",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        ".gitignore",
+        "DESIGN.md",
+        "PRODUCT.md",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/** product code except already committed slices"
+      ],
+      "expected_output": "DESIGN/PRODUCT documentation plus terminal candidate and maintenance register statuses.",
+      "receipt": {
+        "slice": "Final documentation and register reconciliation for C3/C4/C5/C8/C12/M1/M2.",
+        "evidence": [
+          "DESIGN.md now documents `--ui-*`, `.ui-compact-control`, `.ui-scrollbar`, CSS/Tailwind boundaries, and extraction rules.",
+          "PRODUCT.md database module map now names the current mobile filter primitive.",
+          "C3/C4/C5/C8/C12 are terminally superseded with evidence instead of left queued.",
+          "M1 is superseded by a docs guardrail because no narrow low-noise lint rule exists yet; M2 is implemented."
+        ],
+        "files_changed": [
+          ".gitignore",
+          "DESIGN.md",
+          "PRODUCT.md",
+          "docs/refactor-goals/cross-surface-ui-normalization/state.json",
+          "docs/refactor-goals/cross-surface-ui-normalization/worklog.md",
+          "docs/refactor-goals/cross-surface-ui-normalization/goal.md"
+        ],
+        "what_got_simpler": "Future frontend work has a documented shared vocabulary and the packet no longer carries stale global-extraction work.",
+        "behavior_preserved": "Docs/packet-only slice; no product behavior changed.",
+        "current_complexity": "Open register mixed real reusable vocabulary with weak global primitive ideas.",
+        "expected_complexity_after": "Stable tokens/primitives are documented; weak abstractions are terminally rejected with evidence.",
+        "data_access_render_invariants": "No data or render behavior changed in W16.",
+        "root_fix_patch_decision": "Root fix for documentation and governance clarity.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Goal checker and final validation sweep.",
+        "harness_update_considered": "AGENTS/plugin harness unchanged per intake; docs guardrail handles token usage for now.",
+        "validation_run": [
+          "npm run test:bounded -> 189 files / 1241 tests passed",
+          "npm run test:scripts -> 4 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser sweep for /database, /database/wheels, /database/posses, /database/covenants, /timeline, /d-zone -> all rendered with no horizontal overflow; mobile /database and /database/wheels filter toggles visible"
+        ],
+        "risks": "Low; documentation and packet bookkeeping only.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R16",
+      "role": "review",
+      "status": "done",
+      "title": "Review final documentation and register reconciliation",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W16 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Final register verdict with no queued candidates.",
+      "receipt": {
+        "evidence": [
+          "All candidate and maintenance items now have terminal statuses.",
+          "DESIGN.md names the implementation vocabulary created by the normalization slices.",
+          "PRODUCT.md module map reflects the mobile filter primitive extraction."
+        ],
+        "verdict": "pass",
+        "simplification_check": {
+          "before": "Register still contained queued shared primitive ideas after implementation evidence showed several were not good abstractions.",
+          "after": "Register distinguishes implemented code from intentionally superseded global extractions.",
+          "net": "No stale queued scope remains."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "all focus areas completed",
+          "candidate_register": "all C1-C23 terminal",
+          "root_fix_patch": "docs/governance root fix for remaining items",
+          "dependency_review": "not needed",
+          "characterization": "final validation pending",
+          "maintenance": "M1 superseded by docs guardrail; M2 implemented"
+        },
+        "validation": [
+          "npm run test:bounded passed",
+          "npm run test:scripts passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser route sweep passed"
+        ],
+        "followups": []
+      }
+    }
+  ],
+  "final_audit": {
+    "full_outcome_complete": true,
+    "summary": "Cross-surface UI normalization goal completed. Shared product-surface tokens/utilities are documented, Database browse/Timeline/D-zone root-fix slices are implemented, and all C1-C23 plus M1-M2 have terminal statuses.",
+    "validation": [
+      "npm run test:bounded -> 189 files / 1241 tests passed",
+      "npm run test:scripts -> 4 tests passed",
+      "npm run lint -> passed",
+      "npm run build:quiet -> passed",
+      "git diff --check -> passed",
+      "goal checker -> passed",
+      "browser sweep for /database, /database/wheels, /database/posses, /database/covenants, /timeline, /d-zone -> no horizontal overflow and expected controls/cards rendered"
+    ],
+    "open_items": []
+  }
+}

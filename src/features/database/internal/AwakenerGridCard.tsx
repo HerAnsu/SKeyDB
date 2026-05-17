@@ -3,11 +3,12 @@ import {resolveAwakenerLiteStatsForLevel, type Awakener} from '@/domain/awakener
 import {formatAwakenerAvailabilityLabel} from '@/domain/database-browse-state'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getRealmAccent, getRealmBadge, getRealmIcon, getRealmLabel} from '@/domain/realms'
-import {databaseCardTitleClassName} from '@/ui/cards/database-card-typography'
-import {DatabaseGridCardFrame} from '@/ui/cards/DatabaseGridCardFrame'
-import {DatabaseStatTriad} from '@/ui/cards/DatabaseStatTriad'
 
-const PRIORITIZED_GRID_IMAGE_COUNT = 24
+import {shouldPrioritizeDatabaseGridImage} from './database-grid-card-priority'
+import {DatabaseGridCardFrame} from './DatabaseGridCardFrame'
+import {DatabaseGridCardTitle} from './DatabaseGridCardTitle'
+import {DatabaseStatTriad} from './DatabaseStatTriad'
+
 const DATABASE_GRID_AWAKENER_STAT_LEVEL = 60
 
 interface AwakenerGridCardProps {
@@ -40,7 +41,7 @@ export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardPr
   const realmIcon = getRealmIcon(awakener.realm)
   const realmLabel = getRealmLabel(awakener.realm)
   const stats = resolveAwakenerLiteStatsForLevel(awakener, DATABASE_GRID_AWAKENER_STAT_LEVEL)
-  const prioritizeImage = index < PRIORITIZED_GRID_IMAGE_COUNT
+  const prioritizeImage = shouldPrioritizeDatabaseGridImage(index)
   const detailItems = [
     formatAwakenerAvailabilityLabel(awakener.availabilityType),
     formatReleaseDate(awakener.releaseDate),
@@ -48,7 +49,6 @@ export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardPr
 
   return (
     <DatabaseGridCardFrame
-      ariaLabel={`View details for ${displayName}`}
       content={{
         detail:
           detailItems.length > 0 ? (
@@ -65,14 +65,7 @@ export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardPr
           <img alt='' className='h-5 w-5 object-contain' draggable={false} src={realmIcon} />
         ) : null,
         meta: stats ? <DatabaseStatTriad stats={stats} /> : null,
-        title: (
-          <p
-            className={`${databaseCardTitleClassName} database-grid-card__title-text`}
-            title={displayName}
-          >
-            {displayName}
-          </p>
-        ),
+        title: <DatabaseGridCardTitle title={displayName}>{displayName}</DatabaseGridCardTitle>,
       }}
       media={{
         alt: displayName,

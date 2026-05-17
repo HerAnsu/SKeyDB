@@ -1,27 +1,14 @@
-import {useCallback, useLayoutEffect, useState, type ReactNode} from 'react'
+import {useCallback, useLayoutEffect, useState} from 'react'
 
-import {
-  HybridDatabaseCardModeContext,
-  type HybridDatabaseCardMode,
-} from './hybrid-database-card-mode'
+import type {HybridDatabaseCardMode} from './hybrid-database-card-mode'
 
-interface CatalogGridProps<TItem> {
-  items: TItem[]
-  emptyMessage: string
-  renderItem: (item: TItem, index: number) => ReactNode
-  className?: string
-}
-
-export const HYBRID_DATABASE_GRID_CLASS_NAME = 'database-card-grid database-card-grid--hybrid'
-
-const DEFAULT_GRID_CLASS_NAME = 'database-card-grid'
 const HYBRID_DOSSIER_CONTAINER_WIDTH = 620
 
 function resolveHybridDatabaseCardMode(inlineSize: number): HybridDatabaseCardMode {
   return inlineSize <= HYBRID_DOSSIER_CONTAINER_WIDTH ? 'dossier' : 'poster'
 }
 
-function useMeasuredHybridCardMode(isHybridGrid: boolean, hasItems: boolean) {
+export function useMeasuredHybridCardMode(isHybridGrid: boolean, hasItems: boolean) {
   const [element, setElement] = useState<HTMLDivElement | null>(null)
   const [mode, setMode] = useState<HybridDatabaseCardMode | null>(isHybridGrid ? null : 'poster')
   const ref = useCallback(
@@ -87,30 +74,4 @@ function useMeasuredHybridCardMode(isHybridGrid: boolean, hasItems: boolean) {
   }, [element, hasItems, isHybridGrid])
 
   return {mode, ref}
-}
-
-export function CatalogGrid<TItem>({
-  className = DEFAULT_GRID_CLASS_NAME,
-  emptyMessage,
-  items,
-  renderItem,
-}: CatalogGridProps<TItem>) {
-  const isHybridGrid = className.split(/\s+/).includes('database-card-grid--hybrid')
-  const {mode, ref} = useMeasuredHybridCardMode(isHybridGrid, items.length > 0)
-
-  if (items.length === 0) {
-    return (
-      <div className='border border-slate-700/55 bg-[linear-gradient(180deg,rgba(15,23,42,0.4),rgba(9,15,27,0.28))] px-4 py-12 text-center text-sm text-slate-400'>
-        {emptyMessage}
-      </div>
-    )
-  }
-
-  return (
-    <HybridDatabaseCardModeContext.Provider value={mode}>
-      <div className='database-card-roster' data-hybrid-mode={mode ?? 'pending'} ref={ref}>
-        <div className={className}>{items.map((item, index) => renderItem(item, index))}</div>
-      </div>
-    </HybridDatabaseCardModeContext.Provider>
-  )
 }

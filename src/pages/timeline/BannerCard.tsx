@@ -1,12 +1,12 @@
-import {Fragment, useState} from 'react'
+import {useState} from 'react'
 
 import type {EntityRef} from '@/domain/entities/types'
 import {getTimelineCountdownDisplay, getTimelineStatus, type BannerEntry} from '@/domain/timeline'
-import {formatTimelinePrice, type TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
+import type {TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 
 import {BannerArtwork} from './BannerArtwork'
 import {BannerInfoDrawer} from './BannerInfoDrawer'
-import {getBannerDisplayTags, getBannerTagColor, getBannerTagLabel} from './bannerTagDisplay'
+import {BannerMetadataList} from './bannerMetadata'
 
 const BANNER_CARD_BASE_CLASS =
   'group/banner relative aspect-[8/5] w-full max-w-[30rem] overflow-hidden rounded-[2px] border shadow-[0_12px_26px_rgba(2,6,23,0.28),inset_0_1px_0_rgba(255,244,202,0.05)] transition-[border-color,box-shadow] duration-150 motion-reduce:transition-none'
@@ -119,24 +119,6 @@ function BannerCardHero({
   isEnded: boolean
   priceMode: TimelinePriceDisplayMode
 }) {
-  const displayTags = getBannerDisplayTags(banner)
-  const displayPricing = formatTimelinePrice(banner.pricing, priceMode)
-  const tagItems = [...displayTags, ...(banner.customTags ?? []), displayPricing]
-    .filter((tag): tag is string => Boolean(tag))
-    .slice(0, 4)
-  const renderMetaItem = (tag: string, index: number) => (
-    <Fragment key={`${tag}-${String(index)}`}>
-      {index > 0 ? (
-        <span aria-hidden className={isEnded ? 'text-slate-700' : 'text-slate-500/85'}>
-          &middot;
-        </span>
-      ) : null}
-      <span className={isEnded ? 'text-slate-500' : getBannerTagColor(tag, 'text-slate-300/90')}>
-        {getBannerTagLabel(tag)}
-      </span>
-    </Fragment>
-  )
-
   return (
     <div
       aria-hidden={hidden}
@@ -150,11 +132,17 @@ function BannerCardHero({
         <h3 className={`${BANNER_HERO_TITLE_CLASS} ${isEnded ? 'text-slate-400' : ''}`}>
           {banner.title}
         </h3>
-        {tagItems.length > 0 ? (
-          <div className={BANNER_HERO_META_CLASS}>
-            {tagItems.map((tag, index) => renderMetaItem(tag, index))}
-          </div>
-        ) : null}
+        <BannerMetadataList
+          banner={banner}
+          className={BANNER_HERO_META_CLASS}
+          endedSeparatorClass='text-slate-700'
+          endedTextClass='text-slate-500'
+          fallbackClass='text-slate-300/90'
+          isEnded={isEnded}
+          limit={4}
+          priceMode={priceMode}
+          separatorClass='text-slate-500/85'
+        />
         {countdownText ? (
           <div className={BANNER_HERO_COUNTDOWN_CLASS} title={countdownTitle}>
             {countdownText}

@@ -192,7 +192,7 @@ function DZoneAlertSwitcher({
           <button
             aria-label={`Select ${alert.name}`}
             aria-pressed={alert.id === selectedAlertId}
-            className='d-zone-alert-switcher-button'
+            className='ui-compact-control ui-compact-control--pressed ui-compact-control--dense d-zone-alert-switcher-button'
             key={alert.id}
             onClick={() => {
               onAlertChange(alert.id)

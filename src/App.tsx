@@ -27,10 +27,10 @@ interface NavItem {
   label: string
   to: string
   isActive?: (pathname: string) => boolean
-  mobilePriority?: 'always' | 'compact' | 'wide'
+  showInMobileNav?: boolean
 }
 
-type MobileNavItem = NavItem & {mobilePriority: NonNullable<NavItem['mobilePriority']>}
+type MobileNavItem = NavItem & {showInMobileNav: true}
 
 const NAV_ITEMS: NavItem[] = [
   {label: 'Home', to: '/'},
@@ -38,29 +38,35 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Database',
     to: '/database',
     isActive: (pathname) => pathname === '/database' || pathname.startsWith('/database/'),
-    mobilePriority: 'always',
+    showInMobileNav: true,
   },
-  {label: 'Events', to: '/timeline', mobilePriority: 'always'},
-  {label: 'D-Zone', to: '/d-zone', mobilePriority: 'wide'},
-  {label: 'Builder', to: '/builder', mobilePriority: 'compact'},
-  {label: 'Collection', to: '/collection', mobilePriority: 'wide'},
+  {label: 'Events', to: '/timeline', showInMobileNav: true},
+  {label: 'D-Zone', to: '/d-zone', showInMobileNav: true},
+  {label: 'Builder', to: '/builder', showInMobileNav: true},
+  {label: 'Collection', to: '/collection', showInMobileNav: true},
 ]
 
-function hasMobilePriority(item: NavItem): item is MobileNavItem {
-  return Boolean(item.mobilePriority)
+function isMobileNavItem(item: NavItem): item is MobileNavItem {
+  return item.showInMobileNav === true
 }
 
-const MOBILE_PRIORITY_ITEMS = NAV_ITEMS.filter(hasMobilePriority)
-const MOBILE_OVERFLOW_ITEMS = MOBILE_PRIORITY_ITEMS.filter(
-  (item) => item.mobilePriority !== 'always',
-)
+const MOBILE_NAV_ITEMS = NAV_ITEMS.filter(isMobileNavItem)
+const BASE_MOBILE_VISIBLE_ITEM_COUNT = 2
+const COMPACT_MOBILE_VISIBLE_ITEM_COUNT = 3
 
 function App() {
   const {key: locationKey, pathname} = useLocation()
   const [mobileNavOpenLocationKey, setMobileNavOpenLocationKey] = useState<string | null>(null)
   const compactMobileNavVisible = useMediaQuery('(min-width: 30rem)')
   const wideMobileNavVisible = useMediaQuery('(min-width: 40rem)')
-  const mobileNavOpen = mobileNavOpenLocationKey === locationKey && !wideMobileNavVisible
+  const mobileVisibleItemCount = getMobileVisibleItemCount({
+    compact: compactMobileNavVisible,
+    wide: wideMobileNavVisible,
+  })
+  const mobileQuickNavItems = MOBILE_NAV_ITEMS.slice(0, mobileVisibleItemCount)
+  const mobileOverflowItems = MOBILE_NAV_ITEMS.slice(mobileVisibleItemCount)
+  const hasMobileOverflow = mobileOverflowItems.length > 0
+  const mobileNavOpen = mobileNavOpenLocationKey === locationKey && hasMobileOverflow
 
   useEffect(() => {
     if (!mobileNavOpen) return
@@ -98,15 +104,7 @@ function App() {
     return pathname === item.to || (item.to !== '/' && pathname.startsWith(item.to))
   }
 
-  function isMobileOverflowItemHidden(item: MobileNavItem): boolean {
-    if (item.mobilePriority === 'compact') return !compactMobileNavVisible
-    if (item.mobilePriority === 'wide') return !wideMobileNavVisible
-    return false
-  }
-
-  const activeHiddenMobileOverflowItem = MOBILE_OVERFLOW_ITEMS.find(
-    (item) => isNavActive(item) && isMobileOverflowItemHidden(item),
-  )
+  const activeHiddenMobileOverflowItem = mobileOverflowItems.find((item) => isNavActive(item))
 
   return (
     <div className='app-shell min-h-dvh text-slate-100'>
@@ -133,9 +131,9 @@ function App() {
                 aria-label='Primary navigation mobile quick links'
                 className='site-mobile-quick-nav'
               >
-                {MOBILE_PRIORITY_ITEMS.map((item) => (
+                {mobileQuickNavItems.map((item) => (
                   <NavLink
-                    className={() => mobileQuickNavClassName(item, isNavActive(item))}
+                    className={() => mobileQuickNavClassName(isNavActive(item))}
                     end={item.to === '/'}
                     key={item.label}
                     onClick={() => {
@@ -151,9 +149,7 @@ function App() {
               <button
                 aria-controls='mobile-primary-navigation'
                 aria-expanded={mobileNavOpen}
-                className={mobileMenuButtonClassName(
-                  activeHiddenMobileOverflowItem?.mobilePriority,
-                )}
+                className={mobileMenuButtonClassName(Boolean(activeHiddenMobileOverflowItem))}
                 onClick={() => {
                   setMobileNavOpenLocationKey((openKey) =>
                     openKey === locationKey ? null : locationKey,
@@ -192,9 +188,9 @@ function App() {
             id='mobile-primary-navigation'
             inert={!mobileNavOpen ? true : undefined}
           >
-            {MOBILE_OVERFLOW_ITEMS.map((item) => (
+            {mobileOverflowItems.map((item) => (
               <NavLink
-                className={() => mobileOverflowNavClassName(item, isNavActive(item))}
+                className={() => mobileOverflowNavClassName(isNavActive(item))}
                 end={item.to === '/'}
                 key={item.label}
                 onClick={() => {
@@ -259,31 +255,35 @@ function useMediaQuery(query: string): boolean {
   return matches
 }
 
+function getMobileVisibleItemCount({compact, wide}: {compact: boolean; wide: boolean}): number {
+  if (wide) return MOBILE_NAV_ITEMS.length
+  if (compact) return Math.min(COMPACT_MOBILE_VISIBLE_ITEM_COUNT, MOBILE_NAV_ITEMS.length)
+  return Math.min(BASE_MOBILE_VISIBLE_ITEM_COUNT, MOBILE_NAV_ITEMS.length)
+}
+
 function desktopNavClassName(active: boolean): string {
   return `site-nav-link ${active ? 'site-nav-link--active' : 'site-nav-link--inactive'}`
 }
 
-function mobileQuickNavClassName(item: MobileNavItem, active: boolean): string {
+function mobileQuickNavClassName(active: boolean): string {
   return [
     'site-nav-link',
     'site-mobile-quick-link',
-    `site-mobile-quick-link--${item.mobilePriority}`,
     active ? 'site-nav-link--active' : 'site-nav-link--inactive',
   ].join(' ')
 }
 
-function mobileOverflowNavClassName(item: MobileNavItem, active: boolean): string {
+function mobileOverflowNavClassName(active: boolean): string {
   return [
     'site-mobile-overflow-link',
-    `site-mobile-overflow-link--${item.mobilePriority}`,
     active ? 'site-mobile-overflow-link--active' : 'site-mobile-overflow-link--inactive',
   ].join(' ')
 }
 
-function mobileMenuButtonClassName(activePriority?: MobileNavItem['mobilePriority']): string {
+function mobileMenuButtonClassName(activeOverflowItem: boolean): string {
   return [
     'site-mobile-menu-button',
-    activePriority ? `site-mobile-menu-button--active-${activePriority}` : '',
+    activeOverflowItem ? 'site-mobile-menu-button--active-overflow' : '',
   ]
     .filter(Boolean)
     .join(' ')

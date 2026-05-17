@@ -4,8 +4,8 @@ import type {TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 import type {TimelineSectionId} from '@/domain/timeline-routing'
 
 import {EventCard} from './EventCard'
-import {TimelineArchiveSection} from './TimelineArchiveSection'
 import {partitionTimelineEntriesByStatus} from './timelineStatusPartition'
+import {TimelineStatusSections} from './TimelineStatusSections'
 import {useTimelineArchiveExpansion} from './useTimelineArchiveExpansion'
 
 const EVENT_GRID_CLASS = 'grid gap-3 md:grid-cols-2'
@@ -46,62 +46,34 @@ export function EventList({
   }
 
   return (
-    <div className='space-y-5'>
-      {active.length > 0 && (
-        <ul className={EVENT_GRID_CLASS}>
-          {active.map((event) => (
-            <EventCard
-              event={event}
-              key={event.id}
-              now={now}
-              onOpenDetail={onOpenDetail}
-              priceMode={priceMode}
-            />
-          ))}
-        </ul>
+    <TimelineStatusSections
+      activeContainer='ul'
+      activeItems={active}
+      ended={{
+        expanded: endedExpanded,
+        onToggle: toggleEnded,
+        sectionId: 'ended-events',
+        title: 'Ended events',
+      }}
+      endedItems={ended}
+      gridClassName={EVENT_GRID_CLASS}
+      renderItem={(event) => (
+        <EventCard
+          event={event}
+          key={event.id}
+          now={now}
+          onOpenDetail={onOpenDetail}
+          priceMode={priceMode}
+        />
       )}
-
-      {upcoming.length > 0 ? (
-        <TimelineArchiveSection
-          contentClassName={EVENT_GRID_CLASS}
-          expanded={upcomingExpanded}
-          itemCount={upcoming.length}
-          onToggle={toggleUpcoming}
-          sectionId='upcoming-events'
-          title='Upcoming events'
-        >
-          {upcoming.map((event) => (
-            <EventCard
-              event={event}
-              key={event.id}
-              now={now}
-              onOpenDetail={onOpenDetail}
-              priceMode={priceMode}
-            />
-          ))}
-        </TimelineArchiveSection>
-      ) : null}
-
-      {ended.length > 0 ? (
-        <TimelineArchiveSection
-          contentClassName={EVENT_GRID_CLASS}
-          expanded={endedExpanded}
-          itemCount={ended.length}
-          onToggle={toggleEnded}
-          sectionId='ended-events'
-          title='Ended events'
-        >
-          {ended.map((event) => (
-            <EventCard
-              event={event}
-              key={event.id}
-              now={now}
-              onOpenDetail={onOpenDetail}
-              priceMode={priceMode}
-            />
-          ))}
-        </TimelineArchiveSection>
-      ) : null}
-    </div>
+      upcoming={{
+        expanded: upcomingExpanded,
+        onToggle: toggleUpcoming,
+        sectionId: 'upcoming-events',
+        title: 'Upcoming events',
+      }}
+      upcomingItems={upcoming}
+      wrapperClassName='space-y-5'
+    />
   )
 }

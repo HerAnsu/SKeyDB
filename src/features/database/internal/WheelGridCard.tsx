@@ -2,10 +2,10 @@ import {getMainstatIcon} from '@/domain/mainstats'
 import {getRealmAccent} from '@/domain/realms'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelMainstatLabel, type Wheel} from '@/domain/wheels'
-import {databaseCardTitleClassName} from '@/ui/cards/database-card-typography'
-import {DatabaseGridCardFrame} from '@/ui/cards/DatabaseGridCardFrame'
 
-const PRIORITIZED_GRID_IMAGE_COUNT = 24
+import {shouldPrioritizeDatabaseGridImage} from './database-grid-card-priority'
+import {DatabaseGridCardFrame} from './DatabaseGridCardFrame'
+import {DatabaseGridCardTitle} from './DatabaseGridCardTitle'
 
 interface WheelGridCardProps {
   wheel: Wheel
@@ -30,11 +30,10 @@ export function WheelGridCard({wheel, index, onSelect}: WheelGridCardProps) {
   const realmAccent = getRealmAccent(wheel.realm)
   const mainstatIcon = getMainstatIcon(wheel.mainstatKey)
   const mainstatLabel = getWheelMainstatLabel(wheel)
-  const prioritizeImage = index < PRIORITIZED_GRID_IMAGE_COUNT
+  const prioritizeImage = shouldPrioritizeDatabaseGridImage(index)
 
   return (
     <DatabaseGridCardFrame
-      ariaLabel={`View details for ${wheel.name}`}
       content={{
         detail: wheel.ownerAwakenerName ? (
           <>
@@ -43,14 +42,7 @@ export function WheelGridCard({wheel, index, onSelect}: WheelGridCardProps) {
           </>
         ) : null,
         meta: <WheelMainstatRow icon={mainstatIcon} label={mainstatLabel} />,
-        title: (
-          <p
-            className={`${databaseCardTitleClassName} database-grid-card__title-text`}
-            title={wheel.name}
-          >
-            {wheel.name}
-          </p>
-        ),
+        title: <DatabaseGridCardTitle title={wheel.name}>{wheel.name}</DatabaseGridCardTitle>,
       }}
       media={{
         alt: wheel.name,

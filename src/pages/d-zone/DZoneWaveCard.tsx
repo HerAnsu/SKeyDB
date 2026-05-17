@@ -41,9 +41,6 @@ export function DZoneWaveCard({
   const HeadingTag = headingLevel === 3 ? 'h3' : 'h2'
   const waveNumber = /\d+/.exec(wave.name)?.[0] ?? wave.name
   const toggleLabel = expanded ? `Collapse ${wave.name}` : `Expand ${wave.name}`
-  const relicButtonClassName = `d-zone-relic-button ${
-    expanded ? '' : 'd-zone-relic-button--compact'
-  }`
   const selectedAlert = wave.alerts.find((alert) => alert.id === selectedAlertId) ?? wave.alerts[0]
   const alertMonsters = selectedAlert.monsters
   const visibleMonsters = alertMonsters.slice(
@@ -97,30 +94,18 @@ export function DZoneWaveCard({
           <section aria-labelledby={`${wave.id}-relics`} className='d-zone-wave-section'>
             <div className='d-zone-relic-list'>
               {relics.map((relic, relicIndex) => {
-                const accessibleRelicName = toDZoneAccessibleText(relic.name)
                 const collapsedOverflow =
                   !expanded && relicIndex >= COLLAPSED_RELIC_ACCESSIBLE_LIMIT
 
                 return (
-                  <button
-                    aria-hidden={collapsedOverflow ? true : undefined}
-                    aria-label={`View ${wave.name} relic details for ${accessibleRelicName}`}
-                    className={relicButtonClassName}
+                  <RelicButton
+                    compact={!expanded}
+                    hiddenFromAccessibility={collapsedOverflow}
                     key={relic.id}
-                    onClick={(event) => {
-                      onRelicOpen(relic, event)
-                    }}
-                    tabIndex={collapsedOverflow ? -1 : undefined}
-                    title={accessibleRelicName}
-                    type='button'
-                  >
-                    <RelicIcon relic={relic} />
-                    {expanded ? (
-                      <span className='d-zone-relic-copy'>
-                        <span className='d-zone-relic-name'>{relic.name}</span>
-                      </span>
-                    ) : null}
-                  </button>
+                    onRelicOpen={onRelicOpen}
+                    relic={relic}
+                    waveName={wave.name}
+                  />
                 )
               })}
             </div>
@@ -149,6 +134,45 @@ export function DZoneWaveCard({
         </div>
       </div>
     </article>
+  )
+}
+
+interface RelicButtonProps {
+  compact: boolean
+  hiddenFromAccessibility: boolean
+  onRelicOpen: (relic: DZoneRelicPreview, event: MouseEvent<HTMLButtonElement>) => void
+  relic: DZoneRelicPreview
+  waveName: string
+}
+
+function RelicButton({
+  compact,
+  hiddenFromAccessibility,
+  onRelicOpen,
+  relic,
+  waveName,
+}: RelicButtonProps) {
+  const accessibleRelicName = toDZoneAccessibleText(relic.name)
+
+  return (
+    <button
+      aria-hidden={hiddenFromAccessibility ? true : undefined}
+      aria-label={`View ${waveName} relic details for ${accessibleRelicName}`}
+      className={`d-zone-relic-button ${compact ? 'd-zone-relic-button--compact' : ''}`}
+      onClick={(event) => {
+        onRelicOpen(relic, event)
+      }}
+      tabIndex={hiddenFromAccessibility ? -1 : undefined}
+      title={accessibleRelicName}
+      type='button'
+    >
+      <RelicIcon relic={relic} />
+      {compact ? null : (
+        <span className='d-zone-relic-copy'>
+          <span className='d-zone-relic-name'>{relic.name}</span>
+        </span>
+      )}
+    </button>
   )
 }
 

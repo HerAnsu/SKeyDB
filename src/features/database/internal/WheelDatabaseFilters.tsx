@@ -1,4 +1,4 @@
-import {useId, useState, type RefObject} from 'react'
+import {useState, type RefObject} from 'react'
 
 import {wheelMainstatFilterOptions, type WheelMainstatFilter} from '@/domain/wheel-mainstat-filters'
 import {
@@ -10,11 +10,7 @@ import {
 import {ChipFilterRow} from '@/ui/filters/ChipFilterRow'
 import {SearchInput} from '@/ui/search/SearchInput'
 
-import {
-  CatalogMobileFilterPanel,
-  CatalogMobileFilterToggle,
-  CatalogRealmFilterRow,
-} from './DatabaseChipPrimitives'
+import {CatalogMobileFilterGroup, CatalogRealmFilterRow} from './DatabaseChipPrimitives'
 import {useMobileDatabaseFilters} from './useMobileDatabaseFilters'
 
 interface WheelDatabaseFiltersProps {
@@ -50,9 +46,6 @@ export function WheelDatabaseFilters({
 }: WheelDatabaseFiltersProps) {
   const [openMobileFilter, setOpenMobileFilter] = useState<'rarity' | 'mainstat' | null>(null)
   const isMobileFilters = useMobileDatabaseFilters()
-  const filterPanelIdPrefix = useId()
-  const rarityPanelId = `${filterPanelIdPrefix}-rarity`
-  const mainstatPanelId = `${filterPanelIdPrefix}-mainstat`
   const mainstatFilterTabs = wheelMainstatFilterOptions.map((entry) => ({
     id: entry.id,
     iconSrc: entry.iconAsset,
@@ -77,51 +70,32 @@ export function WheelDatabaseFilters({
             realms={REALM_FILTERS}
           />
 
-          <div className='space-y-1.5'>
-            <div className='grid grid-cols-2 gap-1.5'>
-              <CatalogMobileFilterToggle
-                activeId={rarityFilter}
-                controlsId={rarityPanelId}
-                defaultId='ALL'
-                label='Rarity'
-                onOpenChange={(open) => {
-                  setOpenMobileFilter(open ? 'rarity' : null)
-                }}
-                open={openMobileFilter === 'rarity'}
-                options={rarityFilterTabs}
-              />
-              <CatalogMobileFilterToggle
-                activeId={mainstatFilter}
-                controlsId={mainstatPanelId}
-                defaultId='ALL'
-                label='Main stat'
-                onOpenChange={(open) => {
-                  setOpenMobileFilter(open ? 'mainstat' : null)
-                }}
-                open={openMobileFilter === 'mainstat'}
-                options={mainstatFilterTabs}
-              />
-            </div>
-
-            {openMobileFilter === 'rarity' ? (
-              <CatalogMobileFilterPanel
-                activeId={rarityFilter}
-                id={rarityPanelId}
-                label='Rarity'
-                onChange={onRarityFilterChange}
-                options={rarityFilterTabs}
-              />
-            ) : null}
-            {openMobileFilter === 'mainstat' ? (
-              <CatalogMobileFilterPanel
-                activeId={mainstatFilter}
-                id={mainstatPanelId}
-                label='Main stat'
-                onChange={onMainstatFilterChange}
-                options={mainstatFilterTabs}
-              />
-            ) : null}
-          </div>
+          <CatalogMobileFilterGroup
+            groups={[
+              {
+                activeId: rarityFilter,
+                defaultId: 'ALL',
+                key: 'rarity',
+                label: 'Rarity',
+                onChange: (next) => {
+                  onRarityFilterChange(next as WheelsDatabaseRarityFilterId)
+                },
+                options: rarityFilterTabs,
+              },
+              {
+                activeId: mainstatFilter,
+                defaultId: 'ALL',
+                key: 'mainstat',
+                label: 'Main stat',
+                onChange: (next) => {
+                  onMainstatFilterChange(next as WheelMainstatFilter)
+                },
+                options: mainstatFilterTabs,
+              },
+            ]}
+            onOpenKeyChange={setOpenMobileFilter}
+            openKey={openMobileFilter}
+          />
         </div>
       ) : (
         <div className='space-y-2.5 sm:space-y-3'>

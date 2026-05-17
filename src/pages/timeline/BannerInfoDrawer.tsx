@@ -1,11 +1,9 @@
-import {Fragment} from 'react'
-
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa6'
 
 import type {BannerEntry} from '@/domain/timeline'
-import {formatTimelinePrice, type TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
+import type {TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 
-import {getBannerDisplayTags, getBannerTagColor, getBannerTagLabel} from './bannerTagDisplay'
+import {BannerMetadataList} from './bannerMetadata'
 import {TimelineRichText} from './TimelineRichText'
 
 const DRAWER_BASE_CLASS =
@@ -30,7 +28,7 @@ const DRAWER_TAGS_CLASS =
   'mt-2 flex min-w-0 shrink-0 flex-wrap items-center gap-x-1.5 gap-y-1 text-[0.58rem] leading-none font-bold tracking-[0.16em] uppercase'
 
 const DRAWER_DESCRIPTION_CLASS =
-  'mt-3 min-h-0 max-h-[6.75rem] overflow-y-auto pr-1 text-xs leading-[1.5] text-slate-400 focus-visible:ring-2 focus-visible:ring-amber-200/35 focus-visible:outline-none database-scrollbar'
+  'ui-scrollbar mt-3 min-h-0 max-h-[6.75rem] overflow-y-auto pr-1 text-xs leading-[1.5] text-slate-400 focus-visible:ring-2 focus-visible:ring-amber-200/35 focus-visible:outline-none'
 
 interface BannerInfoDrawerProps {
   banner: BannerEntry
@@ -107,9 +105,6 @@ function BannerDrawerBody({
   isEnded: boolean
   priceMode: TimelinePriceDisplayMode
 }) {
-  const displayTags = getBannerDisplayTags(banner)
-  const displayPricing = formatTimelinePrice(banner.pricing, priceMode)
-
   return (
     <div
       className={`${DRAWER_BODY_BASE_CLASS} ${contentInset} ${isEnded ? 'text-slate-500' : 'text-slate-100'}`}
@@ -121,26 +116,17 @@ function BannerDrawerBody({
         >
           {banner.title}
         </h3>
-        <div className={DRAWER_TAGS_CLASS}>
-          {[...displayTags, ...(banner.customTags ?? []), displayPricing]
-            .filter((tag): tag is string => Boolean(tag))
-            .map((tag, index) => (
-              <Fragment key={`${tag}-${index.toString()}`}>
-                {index > 0 ? (
-                  <span aria-hidden className={isEnded ? 'text-slate-700' : 'text-slate-600/75'}>
-                    &middot;
-                  </span>
-                ) : null}
-                <span
-                  className={
-                    isEnded ? 'text-slate-600' : getBannerTagColor(tag, 'text-slate-300/88')
-                  }
-                >
-                  {getBannerTagLabel(tag)}
-                </span>
-              </Fragment>
-            ))}
-        </div>
+        <BannerMetadataList
+          banner={banner}
+          className={DRAWER_TAGS_CLASS}
+          endedSeparatorClass='text-slate-700'
+          endedTextClass='text-slate-600'
+          fallbackClass='text-slate-300/88'
+          isEnded={isEnded}
+          priceMode={priceMode}
+          renderWhenEmpty
+          separatorClass='text-slate-600/75'
+        />
         {banner.description ? (
           <div
             aria-label={`Description for ${banner.title}`}
