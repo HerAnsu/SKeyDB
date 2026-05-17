@@ -60,13 +60,13 @@ The expanded S1 register is tracked in `state.json` as C1-C23. This charter tabl
 | Candidate | Source task | Status | Concept blast radius | Evidence | Next task or terminal reason |
 |---|---|---|---|---|---|
 | C1 Shared product-surface CSS tokens | S1 | implemented | `src/index.css` or shared style entry, `src/features/database/database.css`, `src/pages/timeline/timeline.css`, `src/pages/d-zone/d-zone.css` | Repeated panel, border, focus, radius, label, and motion values across all target surfaces. | Implemented in W1. |
-| C2 Shared compact chip/segmented control styling | S1 | queued | `src/ui/filters/FilterChipButton.tsx`, possible new shared primitive, Timeline price filter, D-zone alert switcher, database controls | User named compact chip/segmented control; prior audit found similar controls in all three surfaces. | Needs Judge to avoid mixing different interaction semantics. |
-| C3 Shared section divider/header | S1 | queued | Timeline section headers, database browse row/header areas, possible `src/ui` primitive | Timeline already has duplicate section heading shapes. | Queue unless first slice is smaller and safer. |
-| C4 Shared metadata token/line | S1 | queued | Timeline event/banner metadata, database card meta/stat areas, possible `src/ui` primitive | Repeated uppercase micro-label and compact metadata rows. | Needs Scout on intent differences before extraction. |
-| C5 Compact media action tile | S1 | queued | D-zone relic/monster buttons, database square-art/icon cards, `src/ui/cards` or feature adapters | Similar image well plus action target, but database hybrid cards are feature-owned. | Only implement if it does not globalize database card behavior. |
-| C6 D-zone history/browser complexity cleanup | complexity scan | queued | `src/pages/d-zone/DZoneHistoryBrowser.tsx`, tests | Complexity scan flags long function, deep nesting, and repeated search in loop. | Not first token slice unless Scout shows easy root fix. |
-| C7 Timeline banner artwork complexity cleanup | complexity scan | queued | `src/pages/timeline/BannerArtwork.tsx`, tests | Complexity scan flags large file, branch-heavy, effects, inline style, arbitrary classes, outline-none. | Queue for later characterization. |
-| C8 Database browse render-derived work | performance scan | queued | `src/features/database/browse/EntityBrowseViews.tsx`, tests | Performance scan flags render-derived collection work. | Queue unless directly relevant to selected UI primitive. |
+| C2 Shared compact chip/segmented control styling | S1 | implemented | `src/index.css`, `src/ui/filters/FilterChipButton.tsx`, database controls, D-zone alert buttons | W2 added `.ui-compact-control` utilities and migrated real compact-control users without extracting different behaviors. | Implemented. |
+| C3 Shared section divider/header | S1 | superseded | Timeline section headers, database browse row/header areas, possible `src/ui` primitive | W16 found Timeline, D-zone, and database section headers have different layout/semantic contracts. W14 added a Timeline-local page section helper where reuse was real. | No global primitive in this goal. |
+| C4 Shared metadata token/line | S1 | superseded | Timeline event/banner metadata, database card meta/stat areas, possible `src/ui` primitive | W3 solved Timeline banner metadata locally; cross-surface metadata differs enough that tokens plus local composition are clearer. | No global metadata component in this goal. |
+| C5 Compact media action tile | S1 | superseded | D-zone relic/monster buttons, database square-art/icon cards, `src/ui/cards` or feature adapters | W5 made D-zone media buttons local; existing `CompactArtTile` serves separate database-detail/build surfaces and should not be forced onto D-zone. | No global media tile in this goal. |
+| C6 D-zone history/browser complexity cleanup | complexity scan | implemented | `src/pages/d-zone/DZoneHistoryBrowser.tsx`, tests | W8 split archive note, search, year group, and season button subcomponents while preserving drawer behavior. | Implemented with C15. |
+| C7 Timeline banner artwork complexity cleanup | complexity scan | implemented | `src/pages/timeline/BannerArtwork.tsx`, tests | W15 extracted the combo pool preload lifecycle into `usePoolMontagePreload`. | Implemented. |
+| C8 Database browse render-derived work | performance scan | superseded | `src/features/database/browse/EntityBrowseViews.tsx`, tests | W16 found heavy browse work already lives in view-model hooks; W9/W10 removed adjacent orchestration pressure. Remaining posses/covenants work is small and memoized. | No further work in this goal without a future perf trace. |
 | C9 Neutral shared scrollbar utility | Timeline scout | implemented | `src/index.css`, Timeline drawer, D-zone history browser, shared search combobox | `.database-scrollbar` was global and consumed outside database. | Implemented in W1 with `.ui-scrollbar` and compatibility alias. |
 
 ## Scope Expansion Protocol
@@ -88,8 +88,8 @@ Judge should then widen the allowed file set or record a concrete blocker.
 
 | Candidate | Trigger | Skill | Status | Next task or reason |
 |---|---|---|---|---|
-| M1 Token usage guardrail | repeated hard-coded product-surface values | `$refactor-lint-law` | queued | Consider after first token slice proves the naming. |
-| M2 Design-system documentation update | shared tokens or primitives extracted | `@impeccable document` or repo docs | queued | Update DESIGN.md or local docs if the implementation creates stable names. |
+| M1 Token usage guardrail | repeated hard-coded product-surface values | `$refactor-lint-law` | superseded | W16 documented the token guardrail in `DESIGN.md`; a machine lint rule would be too noisy while complex art/layout CSS still needs local values. |
+| M2 Design-system documentation update | shared tokens or primitives extracted | `@impeccable document` or repo docs | implemented | W16 updated `DESIGN.md` and `PRODUCT.md` with the stable shared vocabulary. |
 
 ## Non-goals / Protected Behavior
 

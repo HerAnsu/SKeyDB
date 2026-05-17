@@ -237,6 +237,18 @@ SKeyDB is mostly flat at rest. Depth comes from tonal layering, hairline borders
 
 The shared `SeasonMasthead` is the current page-introduction primitive. It is full-bleed, shallow, context-heavy, and supports current season art, realm emblems, countdowns, and page controls. Use it for season, event, timeline, or D-zone contexts. Do not turn it into a marketing hero.
 
+### Shared Product Surface Vocabulary
+
+The reusable implementation vocabulary is intentionally small. Global CSS owns cross-surface constants and tiny chrome utilities; feature files own layout, artwork semantics, and data-specific composition.
+
+- `--ui-*` custom properties in `src/index.css` are the stable source for product-surface colors, low radius, amber focus, compact label sizing, and motion timing/easing.
+- `.ui-compact-control` and its field/pressed/dense modifiers are the shared compact control chrome for small filters, segmented controls, and toggles that are truly product-generic.
+- `.ui-scrollbar` is the neutral shared dark scrollbar utility. `.database-scrollbar` remains only as a compatibility alias for protected older detail surfaces.
+- Feature CSS still owns complex art overlays, container-specific layout rules, grid/card sizing, and page-specific animation structure.
+- If a value exists as a `--ui-*` token, new Timeline, D-zone, Database browse, Builder, or Collection facelift work should use the token unless a local state or art treatment needs a one-off value.
+
+Do not extract a shared React primitive just because two pages contain a heading, chip, media tile, or disclosure. Extract only when the interaction contract and migration evidence match. Section headers, metadata rows, and media action tiles may remain local when their semantics differ.
+
 ### Timeline Cards
 
 Timeline event cards are compact rows with optional art slices, amber serif titles, taxonomy metadata, countdowns, and expandable descriptions. Banner cards are larger artwork cards with a quiet drawer and summary overlay. They are references for dense game data with art, not generic card grids.

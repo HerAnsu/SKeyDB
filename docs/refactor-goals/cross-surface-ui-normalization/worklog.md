@@ -369,3 +369,34 @@
   - Browser check for `/timeline?view=banners` passed with active/upcoming banner cards, details handles, and archive controls rendered.
 - Review verdict: pass-with-followups.
 - State transition: W15 done. R15 done. C7 implemented.
+
+### 2026-05-17 - W15 checkpoint committed and W16 opened
+
+- Commit: `69b34ec refactor: split timeline artwork preload`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- Decision: J16 selected a final documentation and register-reconciliation slice. Remaining queued ideas were either documentation work or weak global abstractions contradicted by scout evidence.
+- State transition: J16 done. W16 active for `DESIGN.md`/`PRODUCT.md` updates and terminal candidate decisions.
+
+### 2026-05-17 - W16 implemented and reviewed
+
+- Slice: Final documentation and register reconciliation for C3/C4/C5/C8/C12/M1/M2.
+- Files changed: `.gitignore`, `DESIGN.md`, `PRODUCT.md`, `goal.md`, `state.json`, and `worklog.md`.
+- What changed: Documented the stable shared product-surface vocabulary (`--ui-*`, `.ui-compact-control`, `.ui-scrollbar`) and CSS/React extraction boundaries; updated the database module map; terminally superseded weak global primitives with evidence.
+- Behavior preserved: Docs/packet-only slice; no product code changed.
+- Validation:
+  - `npm run test:bounded` passed, 189 files / 1241 tests.
+  - `npm run test:scripts` passed, 4 tests.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Goal checker passed.
+  - Browser sweep for `/database`, `/database/wheels`, `/database/posses`, `/database/covenants`, `/timeline`, and `/d-zone` passed with no horizontal overflow and expected controls/cards rendered. Mobile `/database` and `/database/wheels` filter toggles were visible.
+- Review verdict: pass.
+- State transition: W16 done. R16 done. C3, C4, C5, C8, and C12 superseded; M1 superseded by docs guardrail; M2 implemented.
+
+### 2026-05-17 - Final audit complete
+
+- Final outcome: complete.
+- Candidate register: C1-C23 terminal.
+- Maintenance register: M1-M2 terminal.
+- Final validation: full bounded tests, script tests, lint, build, diff check, goal checker, and browser route sweep all passed.

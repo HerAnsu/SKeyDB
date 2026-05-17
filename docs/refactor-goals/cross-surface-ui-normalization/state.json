@@ -1,7 +1,7 @@
 {
   "version": 1,
   "slug": "cross-surface-ui-normalization",
-  "status": "active",
+  "status": "completed",
   "created": "2026-05-17",
   "updated": "2026-05-17",
   "intake": {
@@ -34,44 +34,44 @@
     {
       "id": "F1",
       "name": "Impeccable extract/design-system normalization",
-      "status": "queued",
+      "status": "done",
       "evidence": "User requested @impeccable extract; PRODUCT/DESIGN define Timeline and D-zone as canon and Database browse conventions as settled.",
-      "next": "Scout/Judge first shared token or primitive slice."
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
     },
     {
       "id": "F2",
       "name": "Tailwind/CSS normalization",
-      "status": "queued",
+      "status": "done",
       "evidence": "Target surfaces use overlapping slate/amber/radius/motion values through CSS vars, Tailwind arbitrary values, RGB, and OKLCH.",
-      "next": "Candidate C1/C2."
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
     },
     {
       "id": "F3",
       "name": "React/component composition",
-      "status": "queued",
+      "status": "done",
       "evidence": "Timeline controls, D-zone alert switcher, and database controls repeat related product-control concepts with page-local markup.",
-      "next": "Candidate C3/C4."
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
     },
     {
       "id": "F4",
       "name": "UI/a11y",
-      "status": "queued",
+      "status": "done",
       "evidence": "Focus, reduced motion, custom controls, card overlays, and responsive overflow must be preserved during migration.",
-      "next": "Include in Judge invariants and browser checks."
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
     },
     {
       "id": "F5",
       "name": "Architecture/module boundaries",
-      "status": "queued",
+      "status": "done",
       "evidence": "Shared UI vocabulary is desirable, but database card layout and Timeline/D-zone semantics should stay local.",
-      "next": "Judge must apply extraction/deletion tests."
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
     },
     {
       "id": "F6",
       "name": "Complexity hotspots",
-      "status": "queued",
+      "status": "done",
       "evidence": "Complexity scan flags D-zone history, Timeline banner artwork, and database browse render-derived work inside or adjacent to scope.",
-      "next": "Queue C6/C7/C8 unless selected."
+      "next": "Covered by implemented slices and W16 terminal reconciliation."
     }
   ],
   "candidates": [
@@ -97,28 +97,31 @@
       "id": "C3",
       "title": "Shared section divider/header",
       "source_task": "S1",
-      "status": "queued",
+      "status": "superseded",
       "concept_blast_radius": "Timeline section headers; database browse row/header areas; possible src/ui primitive",
-      "evidence": "Timeline has duplicate section heading shapes.",
-      "next": "Queue unless first slice is smaller and safer."
+      "evidence": "Terminal decision in W16. Shared section-header extraction is not justified: Timeline page/header and archive rows have Timeline-local semantics, D-zone headings are wave-grid/layout coupled, and database sectioning is detail/tab-specific. W14 added `TimelinePageSection` locally where reuse was real.",
+      "next": "No global section-header primitive in this goal; use local helpers until two surfaces share the same interaction and layout contract.",
+      "terminal_reason": "Superseded because section/header shapes are not the same contract across Timeline, D-zone, and Database; local TimelinePageSection covers the real reuse."
     },
     {
       "id": "C4",
       "title": "Shared metadata token/line",
       "source_task": "S1",
-      "status": "queued",
+      "status": "superseded",
       "concept_blast_radius": "Timeline event/banner metadata; database card meta/stat areas; possible src/ui primitive",
-      "evidence": "Repeated uppercase micro-label and compact metadata rows.",
-      "next": "Needs Scout on intent differences before extraction."
+      "evidence": "Terminal decision in W16. Timeline banner metadata duplication was solved by W3 `BannerMetadataList`; cross-surface metadata differs by domain, so shared tokens and local composition are a better fit than a generic metadata component.",
+      "next": "No global metadata token/line primitive; use `--ui-*` tokens and feature-local helpers.",
+      "terminal_reason": "Superseded because BannerMetadataList plus shared tokens solve the actual duplication while cross-surface metadata semantics differ."
     },
     {
       "id": "C5",
       "title": "Compact media action tile",
       "source_task": "S1",
-      "status": "queued",
+      "status": "superseded",
       "concept_blast_radius": "D-zone relic/monster buttons; database square-art/icon cards; src/ui/cards or feature adapters",
-      "evidence": "Similar image well plus action target, but database hybrid cards are feature-owned.",
-      "next": "Only implement if it does not globalize database card behavior."
+      "evidence": "Terminal decision in W16. D-zone media actions were correctly extracted locally as `RelicButton`/`MonsterButton`; existing `CompactArtTile` serves separate database-detail/build surfaces and should not be forced onto D-zone or database browse cards.",
+      "next": "No global compact media action tile for browse/D-zone in this goal.",
+      "terminal_reason": "Superseded because D-zone media actions and existing CompactArtTile serve different interaction contracts."
     },
     {
       "id": "C6",
@@ -142,10 +145,11 @@
       "id": "C8",
       "title": "Database browse render-derived work",
       "source_task": "performance-scan",
-      "status": "queued",
+      "status": "superseded",
       "concept_blast_radius": "src/features/database/browse/EntityBrowseViews.tsx and tests",
-      "evidence": "Performance scan flags render-derived collection work.",
-      "next": "Queue unless directly relevant to selected UI primitive."
+      "evidence": "Terminal decision in W16. The scout found heavy database browse filtering/sorting already externalized to `useDatabaseViewModel`/`useWheelsDatabaseViewModel`; W9 extracted sort label branching and W10 split grid measurement. Remaining posses/covenants render-derived filtering is small, memoized, and not a root-fix target for this tranche.",
+      "next": "No further database render-derived code work in this goal unless a later perf trace shows a live hotspot.",
+      "terminal_reason": "Superseded because heavy database browse work already lives in view-model hooks and remaining memoized work lacks hotspot evidence."
     },
     {
       "id": "C9",
@@ -178,10 +182,11 @@
       "id": "C12",
       "title": "Shared compact disclosure row",
       "source_task": "timeline-scout,dzone-scout",
-      "status": "queued",
+      "status": "superseded",
       "concept_blast_radius": "Timeline archive section; D-zone archive note/year toggles; possible src/ui primitive",
-      "evidence": "Timeline and D-zone both use chevron disclosure rows with `aria-expanded`.",
-      "next": "Needs Judge to confirm same interaction intent before extraction."
+      "evidence": "Terminal decision in W16. Timeline archive disclosures, Timeline event description shelves, and D-zone history/year disclosures have different focus, region, inert, and layout contracts. W8 and W11 reduced local disclosure complexity without forcing one primitive.",
+      "next": "No shared compact disclosure row in this goal; keep disclosure primitives local until semantics match.",
+      "terminal_reason": "Superseded because Timeline archive, Timeline description shelf, and D-zone disclosure rows differ in focus and region semantics."
     },
     {
       "id": "C13",
@@ -289,16 +294,17 @@
       "title": "Token usage guardrail",
       "trigger": "repeated hard-coded product-surface values",
       "skill": "$refactor-lint-law",
-      "status": "queued",
-      "next": "Consider after first token slice proves naming."
+      "status": "superseded",
+      "next": "Terminal decision in W16: a machine lint rule would be too noisy while Tailwind arbitrary values remain legitimate for complex art/layout overlays. DESIGN.md now carries the token usage guardrail for new facelift work.",
+      "terminal_reason": "Superseded by the DESIGN.md docs guardrail because a machine lint rule would be noisy while complex art/layout Tailwind values remain legitimate."
     },
     {
       "id": "M2",
       "title": "Design-system documentation update",
       "trigger": "shared tokens or primitives extracted",
       "skill": "@impeccable document",
-      "status": "queued",
-      "next": "Update DESIGN.md or local docs if implementation creates stable names."
+      "status": "implemented",
+      "next": "Implemented in W16 through DESIGN.md shared product surface vocabulary and PRODUCT.md database module map updates."
     }
   ],
   "tasks": [
@@ -2787,25 +2793,172 @@
           "M2"
         ]
       }
+    },
+    {
+      "id": "J16",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose final design documentation and terminal reconciliation slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-review",
+        "$refactor-lint-law"
+      ],
+      "allowed_files": [
+        ".gitignore",
+        "DESIGN.md",
+        "PRODUCT.md",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/** product code except already committed slices"
+      ],
+      "expected_output": "Document stable shared UI vocabulary and terminally reconcile non-justified shared extraction candidates.",
+      "receipt": {
+        "evidence": [
+          "Shared `--ui-*`, `.ui-compact-control`, and `.ui-scrollbar` vocabulary is now stable enough to document.",
+          "Scouts found C3/C4/C5/C12 global primitives would collapse different semantics into weak abstractions.",
+          "Database C8 render-derived work no longer has enough hotspot evidence after existing view-model and helper slices."
+        ],
+        "selected_candidates": [
+          "C3",
+          "C4",
+          "C5",
+          "C8",
+          "C12",
+          "M1",
+          "M2"
+        ],
+        "why_root_fix": "For remaining global-extraction ideas, the root fix is documentation and terminal register decisions rather than code that creates abstraction bloat.",
+        "what_not_to_change": "No new shared React primitive and no further product code changes in this slice.",
+        "verification": [
+          "docs diff review",
+          "goal checker",
+          "final lint/build/tests/browser sweep"
+        ]
+      }
+    },
+    {
+      "id": "W16",
+      "role": "worker",
+      "status": "done",
+      "title": "Document shared UI vocabulary and reconcile remaining candidates",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        ".gitignore",
+        "DESIGN.md",
+        "PRODUCT.md",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/** product code except already committed slices"
+      ],
+      "expected_output": "DESIGN/PRODUCT documentation plus terminal candidate and maintenance register statuses.",
+      "receipt": {
+        "slice": "Final documentation and register reconciliation for C3/C4/C5/C8/C12/M1/M2.",
+        "evidence": [
+          "DESIGN.md now documents `--ui-*`, `.ui-compact-control`, `.ui-scrollbar`, CSS/Tailwind boundaries, and extraction rules.",
+          "PRODUCT.md database module map now names the current mobile filter primitive.",
+          "C3/C4/C5/C8/C12 are terminally superseded with evidence instead of left queued.",
+          "M1 is superseded by a docs guardrail because no narrow low-noise lint rule exists yet; M2 is implemented."
+        ],
+        "files_changed": [
+          ".gitignore",
+          "DESIGN.md",
+          "PRODUCT.md",
+          "docs/refactor-goals/cross-surface-ui-normalization/state.json",
+          "docs/refactor-goals/cross-surface-ui-normalization/worklog.md",
+          "docs/refactor-goals/cross-surface-ui-normalization/goal.md"
+        ],
+        "what_got_simpler": "Future frontend work has a documented shared vocabulary and the packet no longer carries stale global-extraction work.",
+        "behavior_preserved": "Docs/packet-only slice; no product behavior changed.",
+        "current_complexity": "Open register mixed real reusable vocabulary with weak global primitive ideas.",
+        "expected_complexity_after": "Stable tokens/primitives are documented; weak abstractions are terminally rejected with evidence.",
+        "data_access_render_invariants": "No data or render behavior changed in W16.",
+        "root_fix_patch_decision": "Root fix for documentation and governance clarity.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Goal checker and final validation sweep.",
+        "harness_update_considered": "AGENTS/plugin harness unchanged per intake; docs guardrail handles token usage for now.",
+        "validation_run": [
+          "npm run test:bounded -> 189 files / 1241 tests passed",
+          "npm run test:scripts -> 4 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser sweep for /database, /database/wheels, /database/posses, /database/covenants, /timeline, /d-zone -> all rendered with no horizontal overflow; mobile /database and /database/wheels filter toggles visible"
+        ],
+        "risks": "Low; documentation and packet bookkeeping only.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R16",
+      "role": "review",
+      "status": "done",
+      "title": "Review final documentation and register reconciliation",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W16 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Final register verdict with no queued candidates.",
+      "receipt": {
+        "evidence": [
+          "All candidate and maintenance items now have terminal statuses.",
+          "DESIGN.md names the implementation vocabulary created by the normalization slices.",
+          "PRODUCT.md module map reflects the mobile filter primitive extraction."
+        ],
+        "verdict": "pass",
+        "simplification_check": {
+          "before": "Register still contained queued shared primitive ideas after implementation evidence showed several were not good abstractions.",
+          "after": "Register distinguishes implemented code from intentionally superseded global extractions.",
+          "net": "No stale queued scope remains."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "all focus areas completed",
+          "candidate_register": "all C1-C23 terminal",
+          "root_fix_patch": "docs/governance root fix for remaining items",
+          "dependency_review": "not needed",
+          "characterization": "final validation pending",
+          "maintenance": "M1 superseded by docs guardrail; M2 implemented"
+        },
+        "validation": [
+          "npm run test:bounded passed",
+          "npm run test:scripts passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser route sweep passed"
+        ],
+        "followups": []
+      }
     }
   ],
   "final_audit": {
-    "full_outcome_complete": false,
-    "summary": "Shared tokens, compact controls, D-zone helpers, database helpers, and Timeline status-section renderer are implemented. Broad outcome remains active until remaining candidates and maintenance items are terminally reconciled.",
+    "full_outcome_complete": true,
+    "summary": "Cross-surface UI normalization goal completed. Shared product-surface tokens/utilities are documented, Database browse/Timeline/D-zone root-fix slices are implemented, and all C1-C23 plus M1-M2 have terminal statuses.",
     "validation": [
-      "focused tests passed",
-      "npm run lint passed",
-      "npm run build:quiet passed",
-      "git diff --check passed",
-      "browser checks passed for touched routes"
+      "npm run test:bounded -> 189 files / 1241 tests passed",
+      "npm run test:scripts -> 4 tests passed",
+      "npm run lint -> passed",
+      "npm run build:quiet -> passed",
+      "git diff --check -> passed",
+      "goal checker -> passed",
+      "browser sweep for /database, /database/wheels, /database/posses, /database/covenants, /timeline, /d-zone -> no horizontal overflow and expected controls/cards rendered"
     ],
-    "open_items": [
-      "C3 shared section divider/header terminal reconciliation",
-      "C4 metadata token/line terminal reconciliation",
-      "C5 compact media action tile terminal reconciliation",
-      "C8 database browse render-derived work terminal decision",
-      "C12 shared compact disclosure row terminal decision",
-      "M1/M2 maintenance follow-ups"
-    ]
+    "open_items": []
   }
 }
