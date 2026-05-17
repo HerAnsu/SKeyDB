@@ -117,3 +117,26 @@
   - Browser checks for `/database`, `/database/wheels`, and `/database/posses` passed; no overflow, title nodes matched card counts, and eager images stayed at 24 per grid.
 - Review verdict: pass-with-followups.
 - State transition: W4 done. R4 done. C17 implemented.
+
+### 2026-05-17 - W4 checkpoint committed and W5 opened
+
+- Commit: `8ef7bb3 refactor: share database card helpers`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- Decision: J5 selected C16 as the next D-zone-local root fix. D-zone media buttons have repeated tile behavior, but the global C5 media-tile primitive is not justified until this local behavior is simpler and proven stable.
+- State transition: J5 done. W5 active for local `DZoneRelicButton` and `DZoneMonsterButton` extraction inside the D-zone wave card concept.
+
+### 2026-05-17 - W5 implemented and reviewed
+
+- Slice: D-zone local relic/monster media-button extraction for C16.
+- Worker: Curie extracted `RelicButton` in `DZoneWaveCard.tsx`; `MonsterButton` was already local and remains unchanged.
+- Behavior preserved: Collapsed relic overflow stays `aria-hidden`/`tabIndex=-1`; collapsed monster accessibility limit remains 6; expanded waves render all relics/monsters; selected alert level chips only show while expanded; labels remain wave/entity-specific.
+- Validation:
+  - Subagent ran `npx vitest run src/pages/d-zone/DZoneWaveCard.test.tsx`, 6 tests passed.
+  - Controller ran `npx vitest run src/pages/d-zone/DZoneWaveCard.test.tsx src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx`, 22 tests passed.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Goal checker passed.
+  - Browser checks for `/d-zone` and `/d-zone/history` passed with no overflow and expected wave/button states.
+- Review verdict: pass-with-followups.
+- State transition: W5 done. R5 done. C16 implemented. C5 global media tile remains queued for terminal revisit.

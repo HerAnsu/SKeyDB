@@ -214,10 +214,10 @@
       "id": "C16",
       "title": "D-zone relic and monster button extraction",
       "source_task": "dzone-scout",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/pages/d-zone/DZoneWaveCard.tsx; src/pages/d-zone/DZoneWaveCard.test.tsx",
-      "evidence": "Relic and monster buttons are coherent media-action tile concepts with existing collapsed-accessibility tests.",
-      "next": "Queue locally before considering global media tile extraction C5."
+      "evidence": "Implemented in W5. `DZoneWaveCard` now has local `RelicButton`; the pre-existing local `MonsterButton` continues to own monster tile behavior. Collapsed accessibility, selected alert level chips, and lore text rendering remain covered by tests.",
+      "next": "Implemented as D-zone-local root fix; C5 global media tile remains queued for terminal revisit."
     },
     {
       "id": "C17",
@@ -1083,6 +1083,158 @@
           "C10",
           "C12-C13",
           "C15-C16",
+          "C18-C23",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J5",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose D-zone media button extraction slice",
+      "skills": [
+        "@impeccable extract",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-complexity",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/pages/d-zone/DZoneWaveCard.tsx",
+        "src/pages/d-zone/DZoneWaveCard.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json",
+        "src/features/database/detail/**",
+        "src/features/database/internal/DatabaseGridCardFrame.tsx"
+      ],
+      "expected_output": "D-zone-local relic and monster button components extracted from wave card without changing collapsed accessibility behavior.",
+      "receipt": {
+        "evidence": [
+          "DZoneWaveCard owns relic button markup, icon fallback, monster tile markup, badges, level chips, accessible labels, and collapsed overflow behavior.",
+          "Existing DZoneWaveCard tests characterize collapsed accessibility limits and selected alert level chips.",
+          "The behavior is D-zone-specific, so C5 global media action tile remains unapproved for this slice."
+        ],
+        "selected_candidates": [
+          "C16"
+        ],
+        "why_root_fix": "Extracting local button components removes nested duplicated media-action concerns while preserving wave-card ownership of layout and disclosure state.",
+        "what_not_to_change": "No D-zone CSS redesign, no global media-tile primitive, no database card behavior, no popover behavior changes.",
+        "verification": [
+          "npx vitest run src/pages/d-zone/DZoneWaveCard.test.tsx src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser check for /d-zone"
+        ]
+      }
+    },
+    {
+      "id": "W5",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract D-zone relic and monster media buttons",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "src/pages/d-zone/DZoneWaveCard.tsx",
+        "src/pages/d-zone/DZoneWaveCard.test.tsx"
+      ],
+      "protected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "D-zone-local media button components with collapsed aria-hidden/tabIndex behavior and selected alert level display preserved.",
+      "receipt": {
+        "slice": "D-zone-local relic/monster media button extraction for C16.",
+        "evidence": [
+          "Extracted `RelicButton` from the relic mapping in `DZoneWaveCard`.",
+          "The existing local `MonsterButton` already owned monster tile rendering, accessible labels, badges, selected-alert levels, and lore-text name rendering.",
+          "Wave card still owns expansion, visible monster slicing, overflow decisions, and section layout."
+        ],
+        "files_changed": [
+          "src/pages/d-zone/DZoneWaveCard.tsx"
+        ],
+        "what_got_simpler": "Relic button markup and accessibility rules are now isolated like the monster button, reducing nested wave-card rendering logic.",
+        "behavior_preserved": "Collapsed relic overflow stays `aria-hidden` and `tabIndex=-1`; collapsed monster accessible limit stays 6; expanded state renders all relics/monsters; selected alert level chips only show while expanded; labels stay wave/entity-specific.",
+        "current_complexity": "Wave card owned relic button markup inline while monster button behavior was already local but separate.",
+        "expected_complexity_after": "Wave card maps data and delegates both relic and monster media-button rendering to local components.",
+        "data_access_render_invariants": "No data, popover, CSS, route, motion, or database-card behavior changed.",
+        "root_fix_patch_decision": "Root fix inside the D-zone wave card concept; C5 global media tile deliberately not selected.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "Existing DZoneWaveCard tests pin collapsed/expanded accessibility and selected alert level behavior; D-zone route tests and browser checks cover page integration.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/pages/d-zone/DZoneWaveCard.test.tsx -> passed in subagent, 6 tests",
+          "git diff --check -- src/pages/d-zone/DZoneWaveCard.tsx -> passed in subagent",
+          "npx vitest run src/pages/d-zone/DZoneWaveCard.test.tsx src/pages/DZonePage.test.tsx src/pages/DZoneHistoryPage.test.tsx -> 22 tests passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /d-zone and /d-zone/history -> no overflow; waves/buttons rendered; hidden overflow states preserved"
+        ],
+        "risks": "Low; extraction only moved relic button markup into a local component.",
+        "followups_not_done": [
+          "C5 global media action tile remains queued for terminal revisit after more local slices."
+        ],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R5",
+      "role": "review",
+      "status": "done",
+      "title": "Review D-zone media button extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W5 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C16/C5 register update.",
+      "receipt": {
+        "evidence": [
+          "W5 stayed inside `DZoneWaveCard.tsx`.",
+          "It extracted local relic button rendering and did not globalize media tile behavior.",
+          "Focused tests, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "Relic button markup was nested inline inside the wave-card relic map.",
+          "after": "`RelicButton` mirrors the existing local `MonsterButton` boundary.",
+          "net": "Reduced wave-card JSX nesting and made local media actions clearer without changing behavior."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C16 D-zone local complexity/media-action simplification; C5 remains queued for terminal revisit",
+          "candidate_register": "C16 implemented",
+          "root_fix_patch": "D-zone-local root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing tests and browser checks sufficient",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused tests passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C8",
+          "C10",
+          "C12-C13",
+          "C15",
           "C18-C23",
           "M1",
           "M2"
