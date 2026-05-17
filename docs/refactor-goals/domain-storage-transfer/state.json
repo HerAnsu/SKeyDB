@@ -1,0 +1,500 @@
+{
+  "version": 1,
+  "slug": "domain-storage-transfer",
+  "status": "active",
+  "created": "2026-05-17",
+  "updated": "2026-05-17",
+  "intake": {
+    "status": "completed",
+    "risk_posture": "Conservative contained implementation; no CF Pages, D1, Better Auth, dependency, DNS, or unrelated UI refactor changes.",
+    "harness_policy": "No harness updates unless a repeated workflow issue is evidenced and logged.",
+    "allowed_areas": [
+      "src/domain/storage-migration/",
+      "src/features/migration/",
+      "src/App.tsx",
+      "focused tests",
+      "docs/plans/2026-05-17-domain-storage-migration.md",
+      "docs/refactor-goals/domain-storage-transfer/"
+    ],
+    "protected_areas": [
+      "Cloudflare Pages migration",
+      "D1",
+      "Better Auth",
+      "Workers/Pages Functions",
+      "dependencies",
+      "DNS/deploy config",
+      "unrelated UI refactor work"
+    ],
+    "validation_commands": [
+      "npx vitest run src/domain/storage-migration/storageMigrationSnapshot.test.ts src/domain/storage-migration/migrationImportPolicy.test.ts src/domain/storage-migration/migrationBridgeProtocol.test.ts",
+      "npx vitest run src/features/migration/MigrationReceivePage.test.tsx src/features/migration/MigrationExportPage.test.tsx",
+      "npx vitest run src/features/migration/DomainMigrationNotice.test.tsx",
+      "npm run lint",
+      "npm run build",
+      "two-origin browser verification"
+    ],
+    "stop_condition": "Stop when verified, validation fails twice on same issue, scope must expand outside allowed areas, or product/security decision is needed."
+  },
+  "focus_areas": [
+    {
+      "name": "Domain transfer only",
+      "status": "implemented",
+      "evidence": "User explicitly narrowed scope to domain transfer and excluded CF Pages/D1/Better Auth.",
+      "next": "Implemented by W1 and W2; final review complete."
+    },
+    {
+      "name": "Storage snapshot allowlist",
+      "status": "implemented",
+      "evidence": "Known storage keys documented in docs/plans/2026-05-17-domain-storage-migration.md; S1 added skeydb.builder.awakenerSortExpanded.v1.",
+      "next": "Implemented by W1."
+    },
+    {
+      "name": "Cross-origin bridge protocol",
+      "status": "implemented",
+      "evidence": "Same-origin policy requires user-mediated postMessage transfer.",
+      "next": "Implemented by W1."
+    },
+    {
+      "name": "Import conflict safety",
+      "status": "implemented",
+      "evidence": "Target origin may already contain user data.",
+      "next": "Implemented by W1 and route tests."
+    },
+    {
+      "name": "Local two-origin verification",
+      "status": "implemented",
+      "evidence": "User asked to figure out localhost testing.",
+      "next": "Playwright verification passed between 127.0.0.1:5173 and 127.0.0.1:5174."
+    },
+    {
+      "name": "Migration discovery UX",
+      "status": "implemented",
+      "evidence": "User asked for a non-annoying notice across pages and no transfer CTA unless persisted builder/collection data exists.",
+      "next": "Implemented by W3 and verified in tests plus two-origin browser smoke check."
+    },
+    {
+      "name": "Production readiness audit",
+      "status": "implemented",
+      "evidence": "User requested a TypeScript/React production-readiness pass before landing the migration.",
+      "next": "Implemented by W4 with reused-popup, source-origin, empty-snapshot, and popup-blocked fallback hardening."
+    },
+    {
+      "name": "CF Pages/D1/Better Auth",
+      "status": "out_of_scope_by_user",
+      "evidence": "User said CF Pages migration, D1, and Better Auth are bigger future roadmap and super not in scope.",
+      "reason": "User explicitly excluded this from the current goal.",
+      "next": "Terminal by user scope."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "C1",
+      "title": "Build storage snapshot domain module",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/domain/storage-migration/*",
+        "tests beside new module"
+      ],
+      "evidence": "Existing builder and collection persistence modules expose validators/loaders; S1 found one additional boolean builder UI preference.",
+      "next": "Implemented by W1."
+    },
+    {
+      "id": "C2",
+      "title": "Build import planning/apply module",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/domain/storage-migration/*",
+        "tests beside new module"
+      ],
+      "evidence": "Conflict and backup policy should be pure domain logic before UI.",
+      "next": "Implemented by W1."
+    },
+    {
+      "id": "C3",
+      "title": "Build bridge protocol helpers",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/domain/storage-migration/*",
+        "tests beside new module"
+      ],
+      "evidence": "Need nonce and origin allowlists for cross-origin messages.",
+      "next": "Implemented by W1."
+    },
+    {
+      "id": "C4",
+      "title": "Add hidden migration routes",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/migration/*",
+        "src/App.tsx",
+        "tests beside new components"
+      ],
+      "evidence": "Routes must stay out of primary nav.",
+      "next": "Implemented by W2."
+    },
+    {
+      "id": "C5",
+      "title": "Verify two-origin localhost flow",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "local dev servers",
+        "browser automation/manual verification"
+      ],
+      "evidence": "jsdom cannot fully prove opener/origin browser behavior.",
+      "next": "Playwright verification passed; final review complete."
+    },
+    {
+      "id": "C7",
+      "title": "Add quiet migration discovery notice",
+      "source_task": "user-follow-up",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/migration/DomainMigrationNotice.tsx",
+        "src/features/migration/DomainMigrationNotice.test.tsx",
+        "src/App.tsx",
+        "migration route copy"
+      ],
+      "evidence": "Users should not need to manually know /migrate; notice must be obvious but dismissible and only show transfer CTA when data heuristics justify it.",
+      "next": "Implemented by W3."
+    },
+    {
+      "id": "C8",
+      "title": "Harden production migration workflow edge cases",
+      "source_task": "user-production-readiness-audit",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/migration/MigrationExportPage.tsx",
+        "src/features/migration/MigrationExportPage.test.tsx",
+        "src/features/migration/MigrationReceivePage.tsx",
+        "src/features/migration/MigrationReceivePage.test.tsx"
+      ],
+      "evidence": "Production audit found reused named export windows, wrong-origin export route access, empty snapshots, and popup-blocked starts needed explicit coverage.",
+      "next": "Implemented by W4."
+    },
+    {
+      "id": "C6",
+      "title": "Server-backed encrypted transfer",
+      "source_task": "S1",
+      "status": "out_of_scope_by_user",
+      "concept_blast_radius": [
+        "Cloudflare Pages Functions",
+        "D1/KV",
+        "API endpoints"
+      ],
+      "evidence": "User explicitly excluded CF Pages/D1/Better Auth.",
+      "reason": "This requires Cloudflare Pages Functions, D1/KV, or other server infrastructure, which the user excluded from this goal.",
+      "next": "Terminal by user scope."
+    }
+  ],
+  "maintenance": [],
+  "tasks": [
+    {
+      "id": "S1",
+      "role": "scout",
+      "status": "done",
+      "title": "Confirm contained implementation boundary",
+      "skills": [
+        "$refactor-scout",
+        "$refactor-architecture",
+        "$refactor-typescript"
+      ],
+      "allowed_files": [
+        "src/App.tsx",
+        "src/domain/storage.ts",
+        "src/features/builder/builder-persistence.ts",
+        "src/features/collection/collectionMigrations.ts",
+        "src/domain/database-detail-preferences.ts",
+        "src/features/builder/useBuilderPreferences.ts",
+        "src/features/collection/useCollectionViewModel.ts",
+        "src/features/collection/export-config.ts"
+      ],
+      "protected_files": [
+        "package.json",
+        ".github/",
+        "functions/",
+        "wrangler.toml"
+      ],
+      "expected_output": "Bounded implementation map with any missing storage keys, route risks, test commands, and scope expansion warnings.",
+      "receipt": {
+        "summary": "Scout found no persistence outside scope and one missed builder UI preference key.",
+        "evidence": [
+          "src/features/builder/BuilderSelectionControls.tsx uses skeydb.builder.awakenerSortExpanded.v1",
+          "src/App.tsx catch-all means hidden migration routes must be added before '*'",
+          "App route tests use MemoryRouter plain paths"
+        ],
+        "validation": [
+          "read-only scout completed"
+        ]
+      }
+    },
+    {
+      "id": "W1",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement domain storage migration modules",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-typescript",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/domain/storage-migration/storageMigrationSnapshot.ts",
+        "src/domain/storage-migration/storageMigrationSnapshot.test.ts",
+        "src/domain/storage-migration/migrationImportPolicy.ts",
+        "src/domain/storage-migration/migrationImportPolicy.test.ts",
+        "src/domain/storage-migration/migrationBridgeProtocol.ts",
+        "src/domain/storage-migration/migrationBridgeProtocol.test.ts",
+        "docs/refactor-goals/domain-storage-transfer/state.json",
+        "docs/refactor-goals/domain-storage-transfer/worklog.md",
+        "docs/plans/2026-05-17-domain-storage-migration.md"
+      ],
+      "protected_files": [
+        "package.json",
+        ".github/",
+        "functions/",
+        "wrangler.toml",
+        "src/features/builder/",
+        "src/features/collection/"
+      ],
+      "expected_output": "Typed storage snapshot, import planning/apply, bridge protocol helpers, and focused tests.",
+      "receipt": {
+        "summary": "Implemented typed storage snapshot collector, import plan/apply policy, and bridge protocol helpers.",
+        "evidence": [
+          "src/domain/storage-migration/storageMigrationSnapshot.ts",
+          "src/domain/storage-migration/migrationImportPolicy.ts",
+          "src/domain/storage-migration/migrationBridgeProtocol.ts"
+        ],
+        "validation": [
+          "npx vitest run src/domain/storage-migration/storageMigrationSnapshot.test.ts src/domain/storage-migration/migrationImportPolicy.test.ts src/domain/storage-migration/migrationBridgeProtocol.test.ts passed, 15 tests"
+        ],
+        "risks": [
+          "Browser opener/origin behavior still needs route tests and two-origin verification."
+        ]
+      }
+    },
+    {
+      "id": "W2",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement hidden migration routes",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/features/migration/MigrationExportPage.tsx",
+        "src/features/migration/MigrationExportPage.test.tsx",
+        "src/features/migration/MigrationReceivePage.tsx",
+        "src/features/migration/MigrationReceivePage.test.tsx",
+        "src/App.tsx",
+        "docs/refactor-goals/domain-storage-transfer/state.json",
+        "docs/refactor-goals/domain-storage-transfer/worklog.md"
+      ],
+      "protected_files": [
+        "package.json",
+        ".github/",
+        "functions/",
+        "wrangler.toml",
+        "src/features/builder/",
+        "src/features/collection/"
+      ],
+      "expected_output": "Hidden /migrate and /migrate/export routes wired to the migration domain helpers with focused route tests.",
+      "receipt": {
+        "summary": "Implemented hidden migration receive/export routes and wired them into App before the catch-all route.",
+        "evidence": [
+          "src/features/migration/MigrationReceivePage.tsx",
+          "src/features/migration/MigrationExportPage.tsx",
+          "src/App.tsx"
+        ],
+        "validation": [
+          "focused Vitest suite passed, 24 tests",
+          "npm run format:check passed",
+          "npm run lint passed",
+          "npm run build passed with existing Vite chunk-size warnings",
+          "two-origin Playwright verification passed from 5173 to 5174"
+        ],
+        "risks": [
+          "Mobile popup behavior should still be smoke-tested manually before launch communications."
+        ]
+      }
+    },
+    {
+      "id": "R1",
+      "role": "review",
+      "status": "done",
+      "title": "Audit migration diff and receipts",
+      "skills": [
+        "$refactor-review",
+        "$refactor-typescript",
+        "$refactor-react"
+      ],
+      "allowed_files": [
+        "src/domain/storage-migration/",
+        "src/features/migration/",
+        "src/App.tsx",
+        "docs/plans/2026-05-17-domain-storage-migration.md",
+        "docs/refactor-goals/domain-storage-transfer/"
+      ],
+      "protected_files": [
+        "package.json",
+        ".github/",
+        "functions/",
+        "wrangler.toml"
+      ],
+      "expected_output": "Review findings, final audit, and any required fixes before completion.",
+      "receipt": {
+        "summary": "Reviewed migration domain modules, hidden routes, tests, and docs; tightened snapshot import validation during review.",
+        "evidence": [
+          "src/domain/storage-migration/storageMigrationSnapshot.ts validates known keys, matching categories, and per-key values on import",
+          "src/features/migration/MigrationReceivePage.tsx keeps conflict replacement opt-in and writes backups before replacement",
+          "src/App.tsx wires hidden migration routes before the catch-all"
+        ],
+        "validation": [
+          "npx vitest run src/domain/storage-migration/storageMigrationSnapshot.test.ts src/domain/storage-migration/migrationImportPolicy.test.ts src/domain/storage-migration/migrationBridgeProtocol.test.ts src/features/migration/MigrationExportPage.test.tsx src/features/migration/MigrationReceivePage.test.tsx passed, 24 tests",
+          "npm run format:check passed",
+          "npm run lint passed",
+          "npm run build passed with existing Vite chunk-size and plugin timing warnings",
+          "two-origin Playwright verification passed between 127.0.0.1:5173 and 127.0.0.1:5174"
+        ],
+        "risks": [
+          "Mobile popup/manual paste behavior should still be smoke-tested on real devices before launch communications."
+        ]
+      }
+    },
+    {
+      "id": "W3",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement quiet migration discovery notice",
+      "skills": [
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/features/migration/DomainMigrationNotice.tsx",
+        "src/features/migration/DomainMigrationNotice.test.tsx",
+        "src/features/migration/MigrationReceivePage.tsx",
+        "src/features/migration/MigrationReceivePage.test.tsx",
+        "src/features/migration/MigrationExportPage.tsx",
+        "src/features/migration/MigrationExportPage.test.tsx",
+        "src/App.tsx",
+        "docs/plans/2026-05-17-domain-storage-migration.md",
+        "docs/refactor-goals/domain-storage-transfer/state.json",
+        "docs/refactor-goals/domain-storage-transfer/worklog.md"
+      ],
+      "protected_files": [
+        "package.json",
+        ".github/",
+        "functions/",
+        "wrangler.toml",
+        "src/features/builder/",
+        "src/features/collection/"
+      ],
+      "expected_output": "Dismissible app-level domain move notice and friendlier migration copy.",
+      "receipt": {
+        "summary": "Added app-level domain move notice, old/new origin data heuristics, dismissal storage, migration-route suppression, and friendlier transfer-code wording.",
+        "evidence": [
+          "src/features/migration/DomainMigrationNotice.tsx",
+          "src/features/migration/DomainMigrationNotice.test.tsx",
+          "src/App.tsx",
+          "src/features/migration/MigrationReceivePage.tsx",
+          "src/features/migration/MigrationExportPage.tsx"
+        ],
+        "validation": [
+          "npx vitest run src/App.test.tsx src/features/migration/DomainMigrationNotice.test.tsx src/features/migration/MigrationReceivePage.test.tsx src/features/migration/MigrationExportPage.test.tsx src/domain/storage-migration/storageMigrationSnapshot.test.ts src/domain/storage-migration/migrationImportPolicy.test.ts src/domain/storage-migration/migrationBridgeProtocol.test.ts passed, 39 tests",
+          "npm run format:check passed",
+          "npm run lint passed",
+          "npm run build passed with existing Vite chunk-size and plugin timing warnings",
+          "two-origin Playwright notice smoke check passed on 390px viewport using 127.0.0.1:5173 as old origin and 127.0.0.1:5174 as new origin",
+          "performance follow-up removed the full bridge/snapshot validator chain from DomainMigrationNotice; dev home dropped from about 9.4 MB/116 resources to about 4.4 MB/44 resources and preview home from about 338 KB/39 resources to about 210 KB/22 resources"
+        ],
+        "risks": [
+          "Real mobile browsers should still be smoke-tested before launch communications."
+        ]
+      }
+    },
+    {
+      "id": "W4",
+      "role": "review",
+      "status": "done",
+      "title": "Production readiness audit and hardening",
+      "skills": [
+        "$refactor-goal-prep",
+        "$refactor-review",
+        "$refactor-typescript",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/features/migration/MigrationExportPage.tsx",
+        "src/features/migration/MigrationExportPage.test.tsx",
+        "src/features/migration/MigrationReceivePage.tsx",
+        "src/features/migration/MigrationReceivePage.test.tsx",
+        "docs/plans/2026-05-17-domain-storage-migration.md",
+        "docs/refactor-goals/domain-storage-transfer/state.json",
+        "docs/refactor-goals/domain-storage-transfer/worklog.md"
+      ],
+      "protected_files": [
+        "package.json",
+        ".github/",
+        "functions/",
+        "wrangler.toml",
+        "src/features/builder/",
+        "src/features/collection/"
+      ],
+      "expected_output": "Production-readiness review, focused edge-case hardening, and validation receipts.",
+      "receipt": {
+        "summary": "Hardened the migration export/receive workflow for reused named export windows, wrong-origin export route access, empty source snapshots, and popup-blocked starts.",
+        "evidence": [
+          "src/features/migration/MigrationExportPage.tsx sends once per nonce/target request and rejects non-source origins",
+          "src/features/migration/MigrationExportPage.tsx sends snapshot_empty for empty snapshots",
+          "src/features/migration/MigrationReceivePage.tsx provides a manual transfer-page fallback link when window.open is blocked",
+          "src/features/migration/MigrationExportPage.test.tsx and MigrationReceivePage.test.tsx cover the new edge cases"
+        ],
+        "validation": [
+          "npx vitest run src/features/migration/MigrationExportPage.test.tsx src/features/migration/MigrationReceivePage.test.tsx passed, 13 tests",
+          "npx vitest run src/App.test.tsx src/features/migration/DomainMigrationNotice.test.tsx src/features/migration/MigrationReceivePage.test.tsx src/features/migration/MigrationExportPage.test.tsx src/domain/storage-migration/storageMigrationSnapshot.test.ts src/domain/storage-migration/migrationImportPolicy.test.ts src/domain/storage-migration/migrationBridgeProtocol.test.ts passed, 44 tests",
+          "npm run format:check passed",
+          "npm run lint passed",
+          "npm run test:bounded passed, 195 files and 1277 tests",
+          "npm run test:scripts passed, 4 tests",
+          "npm run build:quiet passed",
+          "two-origin Playwright smoke passed on 390px viewport using 127.0.0.1:5173 as old origin and 127.0.0.1:5174 as new origin, including first import plus reused-popup conflict flow"
+        ],
+        "risks": [
+          "Real production origins still need a final launch smoke after DNS/build routing is pointed at the target host."
+        ]
+      }
+    }
+  ],
+  "final_audit": {
+    "full_outcome_complete": true,
+    "summary": "Contained client-side domain storage transfer bridge, quiet discovery notice, performance cleanup, and production-readiness hardening implemented and reviewed; CF Pages, D1, Better Auth, DNS, deploy config, dependencies, and unrelated UI refactor work remained out of scope.",
+    "validation": [
+      "npx vitest run src/App.test.tsx src/features/migration/DomainMigrationNotice.test.tsx src/features/migration/MigrationReceivePage.test.tsx src/features/migration/MigrationExportPage.test.tsx src/domain/storage-migration/storageMigrationSnapshot.test.ts src/domain/storage-migration/migrationImportPolicy.test.ts src/domain/storage-migration/migrationBridgeProtocol.test.ts passed, 44 tests",
+      "npm run format:check passed",
+      "npm run lint passed",
+      "npm run test:bounded passed, 195 files and 1277 tests",
+      "npm run test:scripts passed, 4 tests",
+      "npm run build:quiet passed",
+      "two-origin Playwright notice smoke check passed on 390px viewport using 127.0.0.1:5173 as old origin and 127.0.0.1:5174 as new origin",
+      "two-origin Playwright verification passed between 127.0.0.1:5173 and 127.0.0.1:5174 after final validation hardening",
+      "two-origin Playwright production-readiness smoke passed with first import plus reused-popup conflict flow",
+      "performance follow-up kept the notice lightweight; dev home measured about 4.4 MB/44 resources and preview home about 210 KB/22 resources after the fix",
+      "refactor goal checker passed"
+    ],
+    "open_items": [
+      "Smoke-test real mobile browsers before launch communications.",
+      "Smoke-test the live https://skeydb.com/#/migrate to https://dansa.github.io/SKeyDB/#/migrate/export flow after DNS/build routing is final."
+    ]
+  }
+}
