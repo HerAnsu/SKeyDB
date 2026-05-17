@@ -232,3 +232,26 @@
   - Browser checks for `/database` and `/database/wheels` passed with expected sort labels and no overflow.
 - Review verdict: pass-with-followups.
 - State transition: W9 done. R9 done. C18 implemented.
+
+### 2026-05-17 - W9 checkpoint committed and W10 opened
+
+- Commit: `51f4581 refactor: extract database sort labels`.
+- Commit validation: The repo pre-commit hook ran `npm run lint`, `npm run test:bounded`, `npm run test:scripts`, and `npm run build:quiet`; all passed.
+- Decision: J10 selected C20 because `DatabaseCatalogGrid` still mixes grid rendering, empty state, context provider, and hybrid-card measurement.
+- State transition: J10 done. W10 active for an internal `useMeasuredHybridCardMode` extraction with layout behavior preserved.
+
+### 2026-05-17 - W10 implemented and reviewed
+
+- Slice: Database hybrid-card measurement hook extraction for C20.
+- Files changed: `src/features/database/internal/DatabaseCatalogGrid.tsx`, new `useMeasuredHybridCardMode.ts`.
+- What changed: Moved the 620px threshold, pending/poster/dossier mode resolution, requestAnimationFrame measure, window resize fallback, and ResizeObserver logic into a dedicated internal hook.
+- Behavior preserved: Hybrid grid classes, poster/dossier mode semantics, non-hybrid poster mode, empty state, and rendered card counts.
+- Validation:
+  - `npx vitest run src/features/database/internal/DatabaseGrid.test.tsx` passed.
+  - `npm run lint` passed.
+  - `npm run build:quiet` passed.
+  - `git diff --check` passed.
+  - Goal checker passed.
+  - Browser checks for `/database` and `/database/wheels` passed with hybrid grids rendered and no overflow.
+- Review verdict: pass-with-followups.
+- State transition: W10 done. R10 done. C20 implemented.

@@ -1,89 +1,13 @@
-import {useCallback, useLayoutEffect, useState, type ReactNode} from 'react'
+import type {ReactNode} from 'react'
 
-import {
-  HybridDatabaseCardModeContext,
-  type HybridDatabaseCardMode,
-} from './hybrid-database-card-mode'
+import {HybridDatabaseCardModeContext} from './hybrid-database-card-mode'
+import {useMeasuredHybridCardMode} from './useMeasuredHybridCardMode'
 
 interface CatalogGridProps<TItem> {
   items: TItem[]
   emptyMessage: string
   renderItem: (item: TItem, index: number) => ReactNode
   layout?: 'hybrid' | 'portrait' | 'square-art'
-}
-
-const HYBRID_DOSSIER_CONTAINER_WIDTH = 620
-
-function resolveHybridDatabaseCardMode(inlineSize: number): HybridDatabaseCardMode {
-  return inlineSize <= HYBRID_DOSSIER_CONTAINER_WIDTH ? 'dossier' : 'poster'
-}
-
-function useMeasuredHybridCardMode(isHybridGrid: boolean, hasItems: boolean) {
-  const [element, setElement] = useState<HTMLDivElement | null>(null)
-  const [mode, setMode] = useState<HybridDatabaseCardMode | null>(isHybridGrid ? null : 'poster')
-  const ref = useCallback(
-    (node: HTMLDivElement | null) => {
-      setElement(node)
-      if (!isHybridGrid || !hasItems || !node) {
-        return
-      }
-      const inlineSize = node.getBoundingClientRect().width
-      if (inlineSize > 0) {
-        setMode(resolveHybridDatabaseCardMode(inlineSize))
-      }
-    },
-    [hasItems, isHybridGrid],
-  )
-
-  useLayoutEffect(() => {
-    if (!isHybridGrid) {
-      return undefined
-    }
-
-    if (!hasItems) {
-      return undefined
-    }
-
-    if (!element) {
-      return undefined
-    }
-
-    const updateMode = (inlineSize: number) => {
-      if (inlineSize <= 0) {
-        setMode('poster')
-        return
-      }
-      setMode(resolveHybridDatabaseCardMode(inlineSize))
-    }
-
-    const measureElement = () => {
-      updateMode(element.getBoundingClientRect().width)
-    }
-    const frame = requestAnimationFrame(measureElement)
-    if (typeof ResizeObserver === 'undefined') {
-      window.addEventListener('resize', measureElement)
-      return () => {
-        cancelAnimationFrame(frame)
-        window.removeEventListener('resize', measureElement)
-      }
-    }
-    window.addEventListener('resize', measureElement)
-
-    const observer = new ResizeObserver((entries) => {
-      const entry = entries[0]
-      const inlineSize = entry.contentBoxSize[0]?.inlineSize ?? entry.contentRect.width
-      updateMode(inlineSize)
-    })
-    observer.observe(element)
-
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('resize', measureElement)
-      observer.disconnect()
-    }
-  }, [element, hasItems, isHybridGrid])
-
-  return {mode, ref}
 }
 
 export function DatabaseCatalogGrid<TItem>({

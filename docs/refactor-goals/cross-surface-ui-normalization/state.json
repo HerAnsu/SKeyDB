@@ -250,10 +250,10 @@
       "id": "C20",
       "title": "Split database hybrid card measurement hook",
       "source_task": "database-scout",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": "src/features/database/internal/DatabaseCatalogGrid.tsx; hook test if added",
-      "evidence": "`useMeasuredHybridCardMode` owns measurement, resize fallback, context value, and grid rendering in one file.",
-      "next": "Queue as internal readability slice."
+      "evidence": "Implemented in W10. Moved `useMeasuredHybridCardMode` and threshold/ResizeObserver fallback logic to `useMeasuredHybridCardMode.ts`; `DatabaseCatalogGrid` now focuses on grid rendering and context wiring.",
+      "next": "Implemented as database-internal hook split."
     },
     {
       "id": "C21",
@@ -1846,6 +1846,152 @@
           "C10",
           "C12",
           "C19-C22",
+          "M1",
+          "M2"
+        ]
+      }
+    },
+    {
+      "id": "J10",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose database hybrid card measurement hook split",
+      "skills": [
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseCatalogGrid.tsx",
+        "src/features/database/internal/useMeasuredHybridCardMode.ts",
+        "src/features/database/internal/DatabaseGrid.test.tsx",
+        "docs/refactor-goals/cross-surface-ui-normalization/**"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Internal hook extraction for hybrid card mode measurement with threshold/fallback behavior preserved.",
+      "receipt": {
+        "evidence": [
+          "DatabaseCatalogGrid owns measurement hook, resize fallback, provider, empty state, and grid rendering in one file.",
+          "The measurement concept is internal to database card grids and already characterized by rendered grid tests/browser checks."
+        ],
+        "selected_candidates": [
+          "C20"
+        ],
+        "why_root_fix": "Move measurement into a dedicated hook so the grid component only chooses layout classes and renders items.",
+        "what_not_to_change": "No card layout CSS, threshold, ResizeObserver fallback, empty state, or grid semantics.",
+        "verification": [
+          "npx vitest run src/features/database/internal/DatabaseGrid.test.tsx",
+          "npm run lint",
+          "git diff --check",
+          "browser checks for /database and /database/wheels"
+        ]
+      }
+    },
+    {
+      "id": "W10",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract database hybrid card measurement hook",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseCatalogGrid.tsx",
+        "src/features/database/internal/useMeasuredHybridCardMode.ts",
+        "src/features/database/internal/DatabaseGrid.test.tsx"
+      ],
+      "protected_files": [
+        "src/features/database/detail/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Dedicated hook file for hybrid grid measurement, used by DatabaseCatalogGrid.",
+      "receipt": {
+        "slice": "Database hybrid card measurement hook extraction for C20.",
+        "evidence": [
+          "Added `useMeasuredHybridCardMode.ts` with the 620px threshold, pending/poster/dossier logic, requestAnimationFrame measurement, resize fallback, and ResizeObserver path.",
+          "`DatabaseCatalogGrid` imports the hook and now owns only layout choice, empty state, context provider, and item rendering."
+        ],
+        "files_changed": [
+          "src/features/database/internal/DatabaseCatalogGrid.tsx",
+          "src/features/database/internal/useMeasuredHybridCardMode.ts"
+        ],
+        "what_got_simpler": "Measurement and resize behavior moved out of the grid render component.",
+        "behavior_preserved": "Hybrid threshold, pending mode, non-hybrid poster mode, ResizeObserver fallback, and empty-state behavior are preserved.",
+        "current_complexity": "One file combined measurement hook implementation and grid rendering.",
+        "expected_complexity_after": "Dedicated hook file plus simpler grid renderer.",
+        "data_access_render_invariants": "No data, card frame, CSS, or route behavior changed.",
+        "root_fix_patch_decision": "Root fix for database hybrid measurement responsibility.",
+        "dependency_review": "Not needed; no package files changed.",
+        "characterization": "DatabaseGrid test covers image priority through the grid; browser checks confirmed hybrid grids render with poster mode and card counts.",
+        "harness_update_considered": "No harness update needed.",
+        "validation_run": [
+          "npx vitest run src/features/database/internal/DatabaseGrid.test.tsx -> 1 test passed",
+          "npm run lint -> passed",
+          "npm run build:quiet -> passed",
+          "git diff --check -> passed",
+          "goal checker -> passed",
+          "browser checks for /database and /database/wheels -> no overflow; hybrid grids rendered in poster mode"
+        ],
+        "risks": "Medium-low because layout measurement was moved, but implementation is a direct extraction and rendered checks passed.",
+        "followups_not_done": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "R10",
+      "role": "review",
+      "status": "done",
+      "title": "Review database hybrid card measurement hook extraction",
+      "skills": [
+        "$refactor-review"
+      ],
+      "allowed_files": [
+        "W10 diff and goal packet"
+      ],
+      "protected_files": [],
+      "expected_output": "Verdict, validation evidence, and C20 register update.",
+      "receipt": {
+        "evidence": [
+          "W10 directly extracted the hook without changing threshold or fallback behavior.",
+          "DatabaseCatalogGrid now reads as rendering/context composition.",
+          "Focused test, lint, build, diff check, packet checker, and browser checks passed."
+        ],
+        "verdict": "pass-with-followups",
+        "simplification_check": {
+          "before": "DatabaseCatalogGrid carried measurement hook code and rendering code.",
+          "after": "useMeasuredHybridCardMode owns measurement; DatabaseCatalogGrid renders.",
+          "net": "Reduced mixed responsibility in the browse grid layer."
+        },
+        "governance_check": {
+          "intake": "completed from user prompt",
+          "focus_area_coverage": "covers C20 database internal React simplification",
+          "candidate_register": "C20 implemented",
+          "root_fix_patch": "hook extraction root fix",
+          "dependency_review": "not needed",
+          "characterization": "existing test plus browser checks",
+          "maintenance": "M1/M2 remain queued"
+        },
+        "validation": [
+          "focused test passed",
+          "npm run lint passed",
+          "npm run build:quiet passed",
+          "git diff --check passed",
+          "goal checker passed",
+          "browser checks passed"
+        ],
+        "followups": [
+          "C3-C5",
+          "C7-C8",
+          "C10",
+          "C12",
+          "C19",
+          "C21-C22",
           "M1",
           "M2"
         ]
