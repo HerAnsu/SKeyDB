@@ -3,6 +3,7 @@ import {lazy, Suspense, useEffect, useState} from 'react'
 import {Navigate, NavLink, Route, Routes, useLocation} from 'react-router-dom'
 
 import {DatabaseRouteElements} from './features/database/routes'
+import {DomainMigrationNotice} from './features/migration/DomainMigrationNotice'
 import {HomePage} from './pages/HomePage'
 
 const BuilderPage = lazy(() =>
@@ -21,6 +22,16 @@ const DZonePage = lazy(() =>
 )
 const DZoneHistoryPage = lazy(() =>
   import('./pages/DZoneHistoryPage').then((module) => ({default: module.DZoneHistoryPage})),
+)
+const MigrationReceivePage = lazy(() =>
+  import('./features/migration/MigrationReceivePage').then((module) => ({
+    default: module.MigrationReceivePage,
+  })),
+)
+const MigrationExportPage = lazy(() =>
+  import('./features/migration/MigrationExportPage').then((module) => ({
+    default: module.MigrationExportPage,
+  })),
 )
 
 interface NavItem {
@@ -205,6 +216,8 @@ function App() {
         </div>
       </header>
 
+      <DomainMigrationNotice routePathname={pathname} />
+
       <main
         className='mx-auto w-full max-w-[1240px] px-4 py-4 sm:px-5 md:py-5 lg:px-8'
         id='main-content'
@@ -220,6 +233,8 @@ function App() {
             <Route element={<DZoneHistoryPage />} path='/d-zone/history' />
             <Route element={<BuilderPage />} path='/builder' />
             <Route element={<CollectionPage />} path='/collection' />
+            <Route element={<MigrationReceivePage />} path='/migrate' />
+            <Route element={<MigrationExportPage />} path='/migrate/export' />
             <Route element={<Navigate replace to='/' />} path='*' />
           </Routes>
         </Suspense>
