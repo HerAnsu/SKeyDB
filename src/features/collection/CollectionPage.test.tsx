@@ -1,4 +1,4 @@
-import {act, fireEvent, render, screen, within} from '@testing-library/react'
+import {act, cleanup, fireEvent, render, screen, within} from '@testing-library/react'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {createEmptyCollectionOwnershipState} from '@/domain/collection-ownership'
@@ -116,6 +116,7 @@ vi.mock('@/features/database/detail/DbDetailModalHost', async () => {
 })
 
 afterEach(() => {
+  cleanup()
   vi.restoreAllMocks()
   window.localStorage.removeItem(COLLECTION_OWNERSHIP_KEY)
   collectionOwnershipStore.getState().replaceOwnership(createEmptyCollectionOwnershipState())
@@ -398,7 +399,9 @@ describe('CollectionPage global search capture', () => {
       source: 'collection-overlay',
     })
 
-    dbDetailStore.getState().closeAllDetails()
+    act(() => {
+      dbDetailStore.getState().closeAllDetails()
+    })
     fireEvent.click(screen.getByRole('tab', {name: 'Posses'}))
     fireEvent.click(screen.getByRole('button', {name: /open details for manor echoes/i}))
 

@@ -3,7 +3,7 @@ import {getPublicCatalogRecords} from '@/data-access/public-data/catalogReposito
 import {awakenerTalentsDatasetSchema, type AwakenerTalentRecord} from './awakener-source-schema'
 import {
   adaptPublicV3TalentRecord,
-  type PublicV3TalentRecord,
+  parsePublicV3TalentCatalogRecord,
 } from './public-v3-awakener-record-adapters'
 
 let awakenerTalentsCache: AwakenerTalentRecord[] | null = null
@@ -14,9 +14,9 @@ export function getAwakenerTalents(): AwakenerTalentRecord[] {
   }
 
   awakenerTalentsCache = awakenerTalentsDatasetSchema.parse(
-    getPublicCatalogRecords('talents').map((record) =>
-      adaptPublicV3TalentRecord(record as PublicV3TalentRecord),
-    ),
+    getPublicCatalogRecords('talents')
+      .map(parsePublicV3TalentCatalogRecord)
+      .map(adaptPublicV3TalentRecord),
   )
   return awakenerTalentsCache
 }

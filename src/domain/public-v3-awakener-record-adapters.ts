@@ -1,3 +1,5 @@
+import {z} from 'zod'
+
 import {resolvePublicAsset} from '@/data-access/public-data/assetRepository'
 import type {PublicRecord} from '@/data-access/public-data/contract'
 
@@ -6,12 +8,16 @@ import {
   awakenersEnlightenSchema,
   awakenerSkillSchema,
   awakenerTalentSchema,
+  cardKeywordsSchema,
   derivedSkillSchema,
+  descriptionArgsSchema,
   type AwakenerEnlightenRecord,
   type AwakenerOverlayRecord,
   type AwakenerSkillRecord,
   type AwakenerTalentRecord,
+  type CardKeyword,
   type DerivedSkillRecord,
+  type DescriptionArg,
 } from './awakener-source-schema'
 
 const publicV3AwakenerSkillSchema = awakenerSkillSchema.loose()
@@ -19,46 +25,170 @@ const publicV3AwakenerTalentSchema = awakenerTalentSchema.loose()
 const publicV3AwakenerEnlightenSchema = awakenersEnlightenSchema.loose()
 const publicV3DerivedSkillSchema = derivedSkillSchema.loose()
 const publicV3AwakenerOverlaySchema = awakenerOverlaySchema.loose()
+const publicRouteInfoSchema = z.looseObject({
+  slug: z.string(),
+  canonicalPath: z.string(),
+})
+const publicAssetsSchema = z.record(z.string(), z.string())
+const publicV3UpgradeEntrySchema = z.looseObject({
+  id: z.string().optional(),
+  upgraderId: z.string().optional(),
+  upgraderType: z.string().optional(),
+  upgraderSlot: z.string().optional(),
+  ownerAwakenerId: z.string().optional(),
+  ownerAwakenerName: z.string().optional(),
+  operation: z.string().optional(),
+  patch: z.record(z.string(), z.unknown()).optional(),
+})
+export type PublicV3UpgradeEntry = z.infer<typeof publicV3UpgradeEntrySchema>
+const publicV3OwnedRecordBaseShape = {
+  id: z.string(),
+  name: z.string(),
+  route: publicRouteInfoSchema.optional(),
+  assets: publicAssetsSchema.optional(),
+  ownerAwakenerId: z.string().optional(),
+  ownerAwakenerName: z.string().optional(),
+}
 
-export type PublicV3OwnedRecord = PublicRecord & {
+const publicV3OwnedRecordShape = {
+  ...publicV3OwnedRecordBaseShape,
+  schemaVersion: z.literal(3),
+}
+const publicV3OwnedCatalogRecordShape = {
+  ...publicV3OwnedRecordBaseShape,
+  schemaVersion: z.literal(3).optional(),
+}
+
+export interface PublicV3OwnedRecord {
+  schemaVersion?: 3
+  kind: PublicRecord['kind']
+  id: string
+  name: string
+  route?: PublicRecord['route']
+  assets?: PublicRecord['assets']
   ownerAwakenerId?: string
   ownerAwakenerName?: string
+  [key: string]: unknown
 }
 
 export type PublicV3SkillRecord = PublicV3OwnedRecord & {
-  cardKeywords?: unknown[]
-  descriptionArgs?: unknown
+  cardKeywords?: CardKeyword[]
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   slot?: string
+  upgrades?: PublicV3UpgradeEntry[]
 }
 
 export type PublicV3TalentRecord = PublicV3OwnedRecord & {
-  descriptionArgs?: unknown
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   family?: string
   maxLevel?: number
 }
 
 export type PublicV3EnlightenRecord = PublicV3OwnedRecord & {
-  descriptionArgs?: unknown
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   slot?: string
 }
 
 export type PublicV3DerivedSkillRecord = PublicV3OwnedRecord & {
-  cardKeywords?: unknown[]
+  cardKeywords?: CardKeyword[]
   childDerivedSkillIds?: string[]
-  descriptionArgs?: unknown
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
+  upgrades?: PublicV3UpgradeEntry[]
 }
 
 export type PublicV3OverlayRecord = PublicV3OwnedRecord & {
   aliases?: string[]
-  descriptionArgs?: unknown
+  descriptionArgs?: Record<string, DescriptionArg>
   descriptionTemplate?: string
   iconId?: string
   overlayType?: string
+  upgrades?: PublicV3UpgradeEntry[]
 }
+
+const publicV3SkillRecordShape = {
+  kind: z.literal('skill'),
+  cardKeywords: cardKeywordsSchema.optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
+  descriptionTemplate: z.string().optional(),
+  slot: z.string().optional(),
+  upgrades: z.array(publicV3UpgradeEntrySchema).optional(),
+}
+const publicV3TalentRecordShape = {
+  kind: z.literal('talent'),
+  descriptionArgs: descriptionArgsSchema.optional(),
+  descriptionTemplate: z.string().optional(),
+  family: z.string().optional(),
+  maxLevel: z.number().optional(),
+}
+const publicV3EnlightenRecordShape = {
+  kind: z.literal('enlighten'),
+  descriptionArgs: descriptionArgsSchema.optional(),
+  descriptionTemplate: z.string().optional(),
+  slot: z.string().optional(),
+}
+const publicV3DerivedSkillRecordShape = {
+  kind: z.literal('derivedSkill'),
+  cardKeywords: cardKeywordsSchema.optional(),
+  childDerivedSkillIds: z.array(z.string()).optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
+  descriptionTemplate: z.string().optional(),
+  upgrades: z.array(publicV3UpgradeEntrySchema).optional(),
+}
+const publicV3OverlayRecordShape = {
+  kind: z.literal('overlay'),
+  aliases: z.array(z.string()).optional(),
+  descriptionArgs: descriptionArgsSchema.optional(),
+  descriptionTemplate: z.string().optional(),
+  iconId: z.string().optional(),
+  overlayType: z.string().optional(),
+  upgrades: z.array(publicV3UpgradeEntrySchema).optional(),
+}
+
+const publicV3SkillRecordSchema: z.ZodType<PublicV3SkillRecord> = z.looseObject({
+  ...publicV3OwnedRecordShape,
+  ...publicV3SkillRecordShape,
+})
+const publicV3SkillCatalogRecordSchema: z.ZodType<PublicV3SkillRecord> = z.looseObject({
+  ...publicV3OwnedCatalogRecordShape,
+  ...publicV3SkillRecordShape,
+})
+const publicV3TalentRecordSchema: z.ZodType<PublicV3TalentRecord> = z.looseObject({
+  ...publicV3OwnedRecordShape,
+  ...publicV3TalentRecordShape,
+})
+const publicV3TalentCatalogRecordSchema: z.ZodType<PublicV3TalentRecord> = z.looseObject({
+  ...publicV3OwnedCatalogRecordShape,
+  ...publicV3TalentRecordShape,
+})
+const publicV3EnlightenRecordSchema: z.ZodType<PublicV3EnlightenRecord> = z.looseObject({
+  ...publicV3OwnedRecordShape,
+  ...publicV3EnlightenRecordShape,
+})
+const publicV3EnlightenCatalogRecordSchema: z.ZodType<PublicV3EnlightenRecord> = z.looseObject({
+  ...publicV3OwnedCatalogRecordShape,
+  ...publicV3EnlightenRecordShape,
+})
+const publicV3DerivedSkillRecordSchema: z.ZodType<PublicV3DerivedSkillRecord> = z.looseObject({
+  ...publicV3OwnedRecordShape,
+  ...publicV3DerivedSkillRecordShape,
+})
+const publicV3DerivedSkillCatalogRecordSchema: z.ZodType<PublicV3DerivedSkillRecord> =
+  z.looseObject({
+    ...publicV3OwnedCatalogRecordShape,
+    ...publicV3DerivedSkillRecordShape,
+  })
+const publicV3OverlayRecordSchema: z.ZodType<PublicV3OverlayRecord> = z.looseObject({
+  ...publicV3OwnedRecordShape,
+  ...publicV3OverlayRecordShape,
+})
+const publicV3OverlayCatalogRecordSchema: z.ZodType<PublicV3OverlayRecord> = z.looseObject({
+  ...publicV3OwnedCatalogRecordShape,
+  ...publicV3OverlayRecordShape,
+})
 
 export function numericAwakenerId(publicAwakenerId: string): number {
   return Number(/^awakener-(\d{4})$/.exec(publicAwakenerId)?.[1] ?? 0)
@@ -88,6 +218,46 @@ export function skillKindFromPublicSlot(slot: string | undefined): AwakenerSkill
     default:
       return 'other'
   }
+}
+
+export function parsePublicV3SkillRecord(value: unknown): PublicV3SkillRecord {
+  return publicV3SkillRecordSchema.parse(value)
+}
+
+export function parsePublicV3SkillCatalogRecord(value: unknown): PublicV3SkillRecord {
+  return publicV3SkillCatalogRecordSchema.parse(value)
+}
+
+export function parsePublicV3TalentRecord(value: unknown): PublicV3TalentRecord {
+  return publicV3TalentRecordSchema.parse(value)
+}
+
+export function parsePublicV3TalentCatalogRecord(value: unknown): PublicV3TalentRecord {
+  return publicV3TalentCatalogRecordSchema.parse(value)
+}
+
+export function parsePublicV3EnlightenRecord(value: unknown): PublicV3EnlightenRecord {
+  return publicV3EnlightenRecordSchema.parse(value)
+}
+
+export function parsePublicV3EnlightenCatalogRecord(value: unknown): PublicV3EnlightenRecord {
+  return publicV3EnlightenCatalogRecordSchema.parse(value)
+}
+
+export function parsePublicV3DerivedSkillRecord(value: unknown): PublicV3DerivedSkillRecord {
+  return publicV3DerivedSkillRecordSchema.parse(value)
+}
+
+export function parsePublicV3DerivedSkillCatalogRecord(value: unknown): PublicV3DerivedSkillRecord {
+  return publicV3DerivedSkillCatalogRecordSchema.parse(value)
+}
+
+export function parsePublicV3OverlayRecord(value: unknown): PublicV3OverlayRecord {
+  return publicV3OverlayRecordSchema.parse(value)
+}
+
+export function parsePublicV3OverlayCatalogRecord(value: unknown): PublicV3OverlayRecord {
+  return publicV3OverlayCatalogRecordSchema.parse(value)
 }
 
 export function adaptPublicV3SkillRecord(record: PublicV3SkillRecord): AwakenerSkillRecord {

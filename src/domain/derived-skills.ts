@@ -3,7 +3,7 @@ import {getPublicCatalogRecords} from '@/data-access/public-data/catalogReposito
 import {derivedSkillsDatasetSchema, type DerivedSkillRecord} from './awakener-source-schema'
 import {
   adaptPublicV3DerivedSkillRecord,
-  type PublicV3DerivedSkillRecord,
+  parsePublicV3DerivedSkillCatalogRecord,
 } from './public-v3-awakener-record-adapters'
 
 let derivedSkillsCache: DerivedSkillRecord[] | null = null
@@ -14,9 +14,9 @@ export function getDerivedSkills(): DerivedSkillRecord[] {
   }
 
   derivedSkillsCache = derivedSkillsDatasetSchema.parse(
-    getPublicCatalogRecords('derived-skills').map((record) =>
-      adaptPublicV3DerivedSkillRecord(record as PublicV3DerivedSkillRecord),
-    ),
+    getPublicCatalogRecords('derived-skills')
+      .map(parsePublicV3DerivedSkillCatalogRecord)
+      .map(adaptPublicV3DerivedSkillRecord),
   )
   return derivedSkillsCache
 }

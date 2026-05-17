@@ -52,7 +52,7 @@ describe('BuilderPage import-export', () => {
     window.localStorage.clear()
   })
 
-  it('exports and imports a single team using t1 code', () => {
+  it('imports a single team using t1 code and exports active team in in-game @@ format', () => {
     render(<BuilderPage />)
 
     const t1Code = encodeSingleTeamCode(makeImportTeam('Imported Team', 'goliath'))
@@ -69,6 +69,17 @@ describe('BuilderPage import-export', () => {
 
     expect(screen.getByRole('button', {name: /change goliath/i})).toBeInTheDocument()
     expect(screen.getByText(/team imported/i)).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /export in-game/i}))
+    const exportDialog = screen.getByRole('dialog', {name: /export in-game/i})
+    expect(
+      within(exportDialog).getByText(/in-game export is work in progress/i),
+    ).toBeInTheDocument()
+    const codeArea = getRequiredTextArea(
+      within(exportDialog).getByRole('textbox', {name: /export code/i}),
+    )
+    expect(codeArea.value.startsWith('@@')).toBe(true)
+    expect(codeArea.value.endsWith('@@')).toBe(true)
   })
 
   it('submits import dialog on Enter key', () => {
@@ -128,29 +139,6 @@ describe('BuilderPage import-export', () => {
     expect(container.querySelector('[data-team-name="Team 3"]')).toBeNull()
     expect(screen.getByRole('button', {name: /change goliath/i})).toBeInTheDocument()
     expect(screen.getByRole('button', {name: /rename team 2/i})).toBeInTheDocument()
-  })
-
-  it('exports active team in in-game @@ format', () => {
-    render(<BuilderPage />)
-
-    const goliathCode = encodeSingleTeamCode(makeImportTeam('Imported Team', 'goliath'))
-    fireEvent.click(screen.getByRole('button', {name: /import/i}))
-    const importDialog = screen.getByRole('dialog', {name: /import teams/i})
-    fireEvent.change(within(importDialog).getByRole('textbox', {name: /import code/i}), {
-      target: {value: goliathCode},
-    })
-    fireEvent.click(within(importDialog).getByRole('button', {name: /^import$/i}))
-
-    fireEvent.click(screen.getByRole('button', {name: /export in-game/i}))
-    const exportDialog = screen.getByRole('dialog', {name: /export in-game/i})
-    expect(
-      within(exportDialog).getByText(/in-game export is work in progress/i),
-    ).toBeInTheDocument()
-    const codeArea = getRequiredTextArea(
-      within(exportDialog).getByRole('textbox', {name: /export code/i}),
-    )
-    expect(codeArea.value.startsWith('@@')).toBe(true)
-    expect(codeArea.value.endsWith('@@')).toBe(true)
   })
 
   it('shows unsupported token warning toast for in-game awakener/wheel imports', () => {
@@ -222,7 +210,7 @@ describe('BuilderPage import-export', () => {
     expect(screen.getByText(/team imported/i)).toBeInTheDocument()
   })
 
-  it('requires confirmation before importing duplicate-illegal teams and enables allow dupes on confirm', () => {
+  it('confirms duplicate-illegal imports and warns on export all while allow dupes is enabled', () => {
     const teamA = makeImportTeam('Alpha', 'goliath')
     const teamB = makeImportTeam('Beta', 'goliath')
     const mtCode = encodeMultiTeamCode([teamA, teamB], teamA.id)
@@ -244,22 +232,6 @@ describe('BuilderPage import-export', () => {
     expect(container.querySelector('[data-team-name="Team 2"]')).not.toBeNull()
     expect(screen.getByText(/allow dupes/i)).toBeInTheDocument()
     expect(window.localStorage.getItem('skeydb.builder.allowDupes.v1')).toBe('1')
-  })
-
-  it('shows duplicate warning on export all when teams are only legal with allow dupes', () => {
-    const teamA = makeImportTeam('Alpha', 'goliath')
-    const teamB = makeImportTeam('Beta', 'goliath')
-    const mtCode = encodeMultiTeamCode([teamA, teamB], teamA.id)
-    render(<BuilderPage />)
-
-    fireEvent.click(screen.getByRole('button', {name: /import/i}))
-    const importDialog = screen.getByRole('dialog', {name: /import teams/i})
-    fireEvent.change(within(importDialog).getByRole('textbox', {name: /import code/i}), {
-      target: {value: mtCode},
-    })
-    fireEvent.click(within(importDialog).getByRole('button', {name: /^import$/i}))
-    fireEvent.click(screen.getByRole('button', {name: /enable and import/i}))
-    fireEvent.click(screen.getByRole('button', {name: /^replace$/i}))
 
     fireEvent.click(screen.getByRole('button', {name: /export all/i}))
     const exportDialog = screen.getByRole('dialog', {name: /export all teams/i})

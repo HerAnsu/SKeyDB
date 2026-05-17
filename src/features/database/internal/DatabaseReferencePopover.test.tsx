@@ -26,6 +26,7 @@ type TestPopoverProps = Omit<ComponentProps<typeof DatabaseReferencePopover>, 'e
   attributeRows?: DatabaseReferencePopoverEntry['attributeRows']
   thumbnail?: DatabaseReferencePopoverEntry['thumbnail']
   detailLinks?: DatabaseReferencePopoverEntry['detailLinks']
+  descriptionSections?: DatabaseReferencePopoverEntry['descriptionSections']
   navigationLabel?: DatabaseReferencePopoverEntry['navigationLabel']
   descriptionRecord?: DatabaseReferencePopoverEntry['record']
   descriptionRank?: number
@@ -48,6 +49,7 @@ function TestDatabaseReferencePopover({
   attributeRows,
   thumbnail,
   detailLinks,
+  descriptionSections,
   navigationLabel,
   descriptionRecord,
   descriptionRank,
@@ -64,6 +66,7 @@ function TestDatabaseReferencePopover({
     attributeRows,
     thumbnail,
     detailLinks,
+    descriptionSections,
     navigationLabel,
     record: descriptionRecord,
     descriptionRank,
@@ -78,13 +81,23 @@ describe('DatabaseReferencePopover', () => {
   function buildReferenceLayer(
     overrides: Partial<ResolvedDatabaseReferenceLayer> = {},
   ): ResolvedDatabaseReferenceLayer {
+    const accessibleOverlays = overrides.accessibleOverlays ?? []
+    const overlayByName =
+      overrides.overlayByName ??
+      new Map(
+        accessibleOverlays.flatMap((overlay) => [
+          [overlay.displayName.toLowerCase(), overlay] as const,
+          ...overlay.aliases.map((alias) => [alias.toLowerCase(), overlay] as const),
+        ]),
+      )
+
     return {
-      accessibleOverlays: [],
       cardNames: new Set<string>(),
-      overlayByName: new Map(),
       referenceInfoById: new Map(),
       referenceInfoByName: new Map(),
       ...overrides,
+      accessibleOverlays,
+      overlayByName,
     }
   }
 
@@ -315,6 +328,50 @@ describe('DatabaseReferencePopover', () => {
         '0 + (4 × 3) = 12',
       ].join('\n'),
     )
+    expect(screen.queryByText('—')).not.toBeInTheDocument()
+  })
+
+  it('resolves computed description args in popover description sections', async () => {
+    vi.mocked(useDatabasePopoverControllerContext).mockReturnValue(null)
+
+    render(
+      <TestDatabaseReferencePopover
+        description='Summary text.'
+        descriptionSections={[
+          {
+            label: 'Triggered Effect',
+            description: 'Fallback section text.',
+            record: {
+              id: 'overlay.test.section-computed',
+              displayName: 'Section Effect',
+              overlayType: 'mechanic',
+              aliases: [],
+              descriptionTemplate: 'Gain [Arg1] charge.',
+              descriptionArgs: {
+                Arg1: {
+                  kind: 'computed',
+                  formulaKey: 'wheelRefinementLinear',
+                  baseValue: 0,
+                  perLevel: 3,
+                  inputs: ['wheelRefinementLevel'],
+                } satisfies PublicDescriptionArg,
+              } as unknown as AwakenerOverlayRecord['descriptionArgs'],
+            },
+          },
+        ]}
+        formulaContext={{wheelRefinementLevel: 4}}
+        label='Mechanic'
+        name='Sectioned Lore'
+        onClose={vi.fn()}
+        onMechanicTokenClick={vi.fn()}
+        onSkillTokenClick={vi.fn()}
+        referenceLayer={buildReferenceLayer()}
+        stats={null}
+      />,
+    )
+
+    expect(await screen.findByText('Triggered Effect')).toBeInTheDocument()
+    expect(await screen.findByTitle(/Wheel Enlighten Bonus/)).toHaveTextContent('12')
     expect(screen.queryByText('—')).not.toBeInTheDocument()
   })
 

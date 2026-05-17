@@ -25,6 +25,21 @@ describe('awakener-talents', () => {
     )
   })
 
+  it('loads catalog-backed talents as lightweight adapter records', () => {
+    const talents = getAwakenerTalents()
+    const madnessOmen = getAwakenerTalentById('talent.24.madness-omen', talents)
+
+    expect(madnessOmen).toMatchObject({
+      id: 'talent.24.madness-omen',
+      displayName: 'Madness Omen',
+      ownerAwakenerId: 1,
+      descriptionArgs: {},
+      descriptionTemplate: '',
+      hasLevelScaledDescription: true,
+    })
+    expect(madnessOmen).not.toHaveProperty('schemaVersion')
+  })
+
   it('matches every tracked kit talent binding to a seeded record', () => {
     const talents = getAwakenerTalents()
     const kits = getAwakenerKits()

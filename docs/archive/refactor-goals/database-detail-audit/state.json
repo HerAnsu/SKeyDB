@@ -1,0 +1,1568 @@
+{
+  "version": 1,
+  "slug": "database-detail-audit",
+  "status": "completed",
+  "created": "2026-05-16",
+  "updated": "2026-05-17",
+  "intake": {
+    "status": "completed",
+    "risk_posture": "Behavior-preserving broad continuation; do not treat size alone as a blocker.",
+    "harness_policy": "Use existing validation; record learning/lint/harness candidates, but do not edit harness or AGENTS.md without explicit later approval.",
+    "allowed_areas": [
+      "src/domain database/detail/reference layers",
+      "src/features/database/**",
+      "public detail record adapters/resolvers",
+      "rich text/reference rendering",
+      "popover/detail modal/tab controller flows",
+      "domain collection scans only when directly feeding database/detail behavior"
+    ],
+    "protected_areas": [
+      "builder feature work",
+      "collection feature work except direct type/test fallout",
+      "broad visual redesign",
+      "unrelated route/app shell changes",
+      "dependency and lockfile changes without review"
+    ],
+    "validation_commands": [
+      "targeted vitest run --run commands per slice",
+      "git diff --check",
+      "npm run format:check",
+      "npm run lint",
+      "npm run test:bounded",
+      "npm run build:quiet"
+    ],
+    "stop_condition": "Concrete product ambiguity, unsafe scope expansion, dependency/harness decision, repeated verification failure, or a blocker that cannot be characterized safely inside allowed scope."
+  },
+  "focus_areas": [
+    {
+      "name": "src/domain database/detail/reference layers",
+      "status": "done",
+      "evidence": ["S1 domain/detail scout", "S1 rich/reference scout"],
+      "next": "Implemented C4, C5, C6, and C8."
+    },
+    {
+      "name": "src/features/database/**",
+      "status": "done",
+      "evidence": ["S1 database React scout", "S3 earlier-commit root-fix audit"],
+      "next": "Implemented C1, C2, C3, C7, C9, C11, C12, and C13."
+    },
+    {
+      "name": "public detail record adapters/resolvers",
+      "status": "done",
+      "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R1/R2", "S1 domain/detail scout"],
+      "next": "Prior slices implemented P1/P2; residual C4/C8 implemented."
+    },
+    {
+      "name": "rich text/reference rendering",
+      "status": "done",
+      "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R3", "S1 rich/reference scout"],
+      "next": "Implemented C2, C3, C6, C9, C12, and C13."
+    },
+    {
+      "name": "popover/detail modal/tab controller flows",
+      "status": "done",
+      "evidence": ["S1 database React scout", "S1 prior ledger scout"],
+      "next": "Implemented C1 and C7; C10 remains out of scope by user."
+    },
+    {
+      "name": "direct database/detail collection scans",
+      "status": "done",
+      "evidence": ["S1 domain/detail scout", "S1 database React scout"],
+      "next": "Implemented modal-host and reference-layer lookup slices."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "P1",
+      "title": "Public V3 child adapter trust boundary",
+      "source_task": "prior-heavy-slices-r1",
+      "status": "implemented",
+      "concept_blast_radius": ["src/domain/public-detail-record-adapters.ts", "src/domain/public-v3-awakener-record-adapters.ts", "src/domain/public-detail-record-adapters.test.ts"],
+      "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R1", "commit 8197a13", "commit d6b74af"],
+      "next": "Protected prior work."
+    },
+    {
+      "id": "P2",
+      "title": "Public upgrade patch resolver typing",
+      "source_task": "prior-heavy-slices-r2",
+      "status": "implemented",
+      "concept_blast_radius": ["src/domain/public-detail-record-adapters.ts", "src/domain/awakeners-full-resolver.ts", "src/domain/awakeners-full-resolver.test.ts"],
+      "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R2", "commit 223c6d1"],
+      "next": "Protected prior work."
+    },
+    {
+      "id": "P3",
+      "title": "Rich description token grammar dedupe",
+      "source_task": "prior-heavy-slices-r3",
+      "status": "implemented",
+      "concept_blast_radius": ["src/domain/description-token-grammar.ts", "src/domain/description-args.ts", "src/domain/rich-text.ts"],
+      "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R3", "commit 0db9f80"],
+      "next": "Protected prior work."
+    },
+    {
+      "id": "P4",
+      "title": "Database route public catalog fixture extraction",
+      "source_task": "prior-heavy-slices-r9",
+      "status": "implemented",
+      "concept_blast_radius": ["src/features/database/DatabaseRoutes.test.tsx", "src/test/publicCatalogFixtures.ts"],
+      "evidence": ["docs/archive/plans/2026-05-16-refactor-heavy-slices.md R9", "commit 243894c"],
+      "next": "Protected prior work."
+    },
+    {
+      "id": "C1",
+      "title": "DbDetailModalHost detail lookup and repeated route-loading cleanup",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/detail/DbDetailModalHost.tsx",
+        "src/features/database/detail/DbDetailModalHost.test.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx"
+      ],
+      "evidence": [
+        "DbDetailModalHost resolves overlay refs with repeated awakeners/wheels/posses/covenants scans",
+        "DbDetailModalHost repeats non-awakener route record loading/render branches"
+      ],
+      "next": "Implemented by W1 in commit 88aa9e5."
+    },
+    {
+      "id": "C2",
+      "title": "RichSegmentRenderer overlay lookup should use reference-layer map instead of per-token list scans",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/domain/database-reference-layer.ts",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx"
+      ],
+      "evidence": ["Renderer scans overlays and aliases per mechanic/realm segment while reference layer already exposes overlayByName."],
+      "next": "Implemented by W2 in commit 5e3ecae."
+    },
+    {
+      "id": "C3",
+      "title": "Rich text parse context should avoid rebuilding token lookup per render",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/domain/rich-text.ts",
+        "src/domain/database-rich-text.ts",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/domain/rich-text.test.ts",
+        "src/domain/database-rich-text.test.ts"
+      ],
+      "evidence": ["parseRichDescription rebuilds normalized card-name lookup on every parse."],
+      "next": "Implemented by W5 in commit 1e97410."
+    },
+    {
+      "id": "C4",
+      "title": "OwnedAwakenerRecordIndex for public detail child record slot/family selection",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/domain/public-detail-record-adapters.ts",
+        "src/domain/public-detail-record-adapters.test.ts",
+        "src/domain/public-v3-awakener-record-adapters.test.ts"
+      ],
+      "evidence": ["getSlotRecord/requireSlotRecord/getTalentByFamily repeat child record selection inside the public detail adapter."],
+      "next": "Implemented by W3 in commit f2c6d57."
+    },
+    {
+      "id": "C5",
+      "title": "Awakeners full resolver patched-record casts",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/domain/awakeners-full-resolver.ts",
+        "src/domain/awakeners-full-resolver.test.ts",
+        "src/domain/awakeners-database-view.test.ts"
+      ],
+      "evidence": ["requireCardRecord returns PatchableCardRecord and callers cast to skill/derived records."],
+      "next": "Implemented by W4 in commit d9a4da4."
+    },
+    {
+      "id": "C6",
+      "title": "Reference-layer builder accumulator and wheel-reference reuse",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/domain/database-reference-layer.ts",
+        "src/domain/awakeners-database-reference-layer.ts",
+        "src/domain/wheels-database-reference-layer.ts",
+        "src/domain/global-database-reference-layer.ts",
+        "src/domain/database-reference-layer-audit.test.ts"
+      ],
+      "evidence": ["Awakener, wheel, and global layers repeat lookup/card-name construction and rebuild wheel reference entries."],
+      "next": "Implemented by W6 in commit a76a6e9."
+    },
+    {
+      "id": "C7",
+      "title": "Popover controller hook split for hydration/trail actions",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/internal/useDatabasePopoverController.ts",
+        "src/features/database/internal/useDatabasePopoverController.test.tsx",
+        "src/features/database/internal/database-popover-controller-model.ts",
+        "src/features/database/internal/useDatabasePopoverTrailActions.ts"
+      ],
+      "evidence": [
+        "Hook still owns root/nested opening, async hydration, global trail ownership events, navigation, and root props construction.",
+        "2026-05-17 review found the prior superseded reason was insufficient under the completion rule because an existing model seam did not fully remove the repeated callback/root-nested action smell."
+      ],
+      "next": "Implemented by W9 in the C7 popover controller trail-action split."
+    },
+    {
+      "id": "C8",
+      "title": "Public V3 child schema unknown fields",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/domain/public-v3-awakener-record-adapters.ts",
+        "src/domain/public-v3-awakener-record-adapters.test.ts",
+        "src/domain/public-detail-record-adapters.test.ts"
+      ],
+      "evidence": ["Child schemas keep descriptionArgs/cardKeywords as unknown before canonical adaptation."],
+      "next": "Implemented by W8 in commit 88f2f3a."
+    },
+    {
+      "id": "C9",
+      "title": "RichSegmentRenderer component split",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx"
+      ],
+      "evidence": ["Renderer branches across text, skill, reference, stat, mechanic, realm, scaling, description args, plural args, and overlay icon effects."],
+      "next": "Implemented by W7 in commit 71cc332."
+    },
+    {
+      "id": "C10",
+      "title": "Database entity tabs",
+      "source_task": "S1",
+      "status": "out_of_scope_by_user",
+      "concept_blast_radius": ["src/features/database/DatabaseEntityTabs.tsx"],
+      "evidence": ["Prior ledger scout found the file small and direct; route/tab behavior is not a current target beyond detail/modal flows."],
+      "next": "Terminal unless a concrete tab/search route defect appears."
+    },
+    {
+      "id": "C11",
+      "title": "Browse controller recomputes inactive entity state and view models",
+      "source_task": "S3",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/browse/useEntityBrowseController.ts",
+        "src/features/database/browse/EntityBrowseViews.tsx",
+        "src/features/database/browse/entityBrowseRegistry.tsx",
+        "src/features/database/DatabasePage.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/browse/useDatabaseBrowseState.test.tsx"
+      ],
+      "evidence": [
+        "React scout finding was omitted from the prior register.",
+        "useEntityBrowseController currently initializes awakener, wheel, posse, and covenant browse states/view models regardless of activeEntity and returns all entity sections/chips."
+      ],
+      "next": "Implemented by W11 in the active-entity browse split."
+    },
+    {
+      "id": "C12",
+      "title": "DatabaseReferencePopover duplicates fallback description-section rendering",
+      "source_task": "S3",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/internal/DatabaseReferencePopover.tsx",
+        "src/features/database/internal/DatabaseReferencePopover.test.tsx"
+      ],
+      "evidence": [
+        "React/rich rendering scout finding was omitted from the prior register.",
+        "Top-level popover fallback builds rich fallback text one way, while descriptionSections repeat template resolution and render their fallback branch separately."
+      ],
+      "next": "Implemented by W10 in the rich rendering leftover slice."
+    },
+    {
+      "id": "C13",
+      "title": "RichSegmentRenderer overlay list-scan fallback compatibility fossil",
+      "source_task": "S3",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/RichSegmentTokens.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx"
+      ],
+      "evidence": [
+        "Earlier C2 root-fix retained a list-scan fallback for direct callers.",
+        "Caller audit found the only production RichSegmentRenderer caller is DatabaseRichTextContent, which already has referenceLayer.overlayByName."
+      ],
+      "next": "Implemented by W10 in the rich rendering leftover slice."
+    }
+  ],
+  "maintenance": [
+    {
+      "id": "M1",
+      "title": "Complexity scan should exclude old worktree files or record filtered interpretation",
+      "trigger": "audit-complexity and audit-performance-patterns scanned .worktrees/awakener-builds-guide",
+      "skill": "$refactor-learning-maintainer | $refactor-lint-law",
+      "status": "out_of_scope_by_user",
+      "reason": "Scanner command hygiene is outside the requested domain/database/detail TypeScript + React product refactor scope, and harness edits are protected unless explicitly approved.",
+      "next": "Terminal for this product refactor: this is scanner command hygiene outside the requested domain/database/detail TypeScript + React hardening scope, and harness edits remain protected unless explicitly approved."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "S1",
+      "role": "scout",
+      "status": "done",
+      "title": "Focused domain/database/detail audit",
+      "skills": [
+        "$refactor-scout",
+        "$refactor-architecture",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-react",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/domain/**",
+        "src/features/database/**",
+        "docs/goals/**",
+        "docs/archive/plans/2026-05-16-refactor-heavy-slices.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Ranked candidates with evidence, concept blast radius, validation ideas, statuses, and maintenance candidates.",
+      "receipt": {
+        "evidence": [
+          "domain/detail scout completed",
+          "database React/detail scout completed",
+          "rich/reference scout completed",
+          "prior-ledger scout completed"
+        ],
+        "validation": ["refactor goal checker passed before reconciliation"]
+      }
+    },
+    {
+      "id": "J1",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose first concept-complete implementation slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-characterization-tests",
+        "$refactor-react",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select one bounded implementation slice with allowed files, invariants, validation, and rollback.",
+      "receipt": {
+        "decision": "C1 selected as W1 because two scouts independently found repeated modal-host lookup scans, the slice is inside user scope, behavior is covered by existing tests, and name-fallback characterization can be added locally.",
+        "root_fix": "Build one detail lookup and reuse one non-awakener route-record loader instead of patching individual find calls.",
+        "validation": [
+          "src/features/database/detail/DbDetailModalHost.test.tsx",
+          "src/features/database/DatabaseRoutes.test.tsx",
+          "git diff --check"
+        ]
+      }
+    },
+    {
+      "id": "W1",
+      "role": "worker",
+      "status": "done",
+      "title": "Simplify DbDetailModalHost detail lookup and route loading",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-architecture",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/features/database/detail/DbDetailModalHost.tsx",
+        "src/features/database/detail/DbDetailModalHost.test.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Characterize name fallback, replace repeated overlay detail scans with one lookup, collapse non-awakener route modal loading branches, run targeted tests, and record receipt.",
+      "receipt": {
+        "slice": "DbDetailModalHost detail lookup and route-loading simplification",
+        "files_changed": [
+          "src/features/database/detail/DbDetailModalHost.tsx",
+          "src/features/database/detail/DbDetailModalHost.test.tsx"
+        ],
+        "what_got_simpler": [
+          "Overlay detail resolution now uses one lookup object rather than repeated array/getter scans.",
+          "Wheel, posse, and covenant route modal loading/render logic now share one generic non-awakener route component."
+        ],
+        "behavior_preserved": [
+          "ID-first overlay selection",
+          "first normalized name fallback",
+          "awakener route canonical tab redirect remains separate",
+          "missing overlay records still pop without route navigation"
+        ],
+        "current_complexity": "Before: repeated find/getCovenants/getPosses scans in overlay route/callback helpers and three duplicated non-awakener route modal components.",
+        "expected_complexity_after": "After: one lookup build per overlay modal data set, O(1) id/name lookup for overlay refs, and one non-awakener route modal loader.",
+        "root_fix_patch_decision": "Root-fix slice selected because the repeated scan/copy-paste branch smell had one local concept boundary and existing tests.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added local characterization test.",
+        "validation": [
+          "npm test -- --run src/features/database/detail/DbDetailModalHost.test.tsx src/features/database/DatabaseRoutes.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/detail/DbDetailModalHost.test.tsx src/features/database/DatabaseRoutes.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full suite not yet run for this slice."
+        ],
+        "followups_not_done": [
+          "C2 RichSegmentRenderer overlay lookup",
+          "C3 rich text parse context"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J2",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose second rich/reference lookup slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-characterization-tests",
+        "$refactor-complexity",
+        "$refactor-architecture"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded implementation slice after W1.",
+      "receipt": {
+        "decision": "C2 selected as W2 because it is a high-confidence, bounded rich/reference slice and uses the reference layer's existing overlayByName seam instead of introducing a new abstraction.",
+        "root_fix": "Thread overlayByName into RichSegmentRenderer resolution while keeping accessibleOverlays fallback for direct callers.",
+        "validation": [
+          "src/features/database/internal/RichSegmentRenderer.test.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.test.tsx",
+          "src/domain/database-rich-text.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W2",
+      "role": "worker",
+      "status": "done",
+      "title": "Use reference-layer overlay lookup in rich segment rendering",
+      "skills": [
+        "$refactor-complexity",
+        "$refactor-architecture",
+        "$refactor-characterization-tests",
+        "$refactor-react"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.test.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Pass overlayByName to rich segment rendering, preserve existing overlay fallback behavior, add focused characterization, and run targeted rich/reference tests.",
+      "receipt": {
+        "slice": "Use reference-layer overlay lookup in rich segment rendering",
+        "files_changed": [
+          "src/features/database/internal/RichSegmentRenderer.tsx",
+          "src/features/database/internal/RichSegmentRenderer.test.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.tsx"
+        ],
+        "what_got_simpler": [
+          "Rich segment mechanic/realm rendering can use the reference-layer overlayByName map instead of scanning the overlay list per segment.",
+          "Direct renderer callers still retain the legacy overlays-list fallback."
+        ],
+        "behavior_preserved": [
+          "Direct overlays-list rendering still works.",
+          "Mechanic and realm token interaction behavior remains the same for normal database reference layers.",
+          "No visual output or callback contracts changed."
+        ],
+        "current_complexity": "Before: each mechanic/realm segment scanned overlays and aliases with a loop.",
+        "expected_complexity_after": "After: database rich text rendering does O(1) normalized overlay lookup through referenceLayer.overlayByName, with list scan fallback only for direct callers without a lookup.",
+        "root_fix_patch_decision": "Root-fix slice selected because the reference layer already owned the normalized overlay lookup seam.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added local characterization test.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/domain/database-rich-text.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/domain/database-rich-text.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full suite not rerun after W2 yet; W1 commit already ran the full pre-commit suite."
+        ],
+        "followups_not_done": [
+          "C3 rich text parse context",
+          "C4 public adapter owned record index"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J3",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose public detail adapter owned-record index slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded domain/public-detail implementation slice.",
+      "receipt": {
+        "decision": "C4 selected as W3 because public-detail child slot/family selection is in the user's adapter/resolver scope, repeatedly scans the same owned records, and can be refactored inside one adapter boundary with existing public-detail characterization.",
+        "root_fix": "Create an internal owned-record index and adapt cards/talents/enlightens from it instead of patching individual find calls.",
+        "validation": [
+          "src/domain/public-detail-record-adapters.test.ts",
+          "src/domain/public-v3-awakener-record-adapters.test.ts",
+          "src/domain/public-data-runtime-boundary.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W3",
+      "role": "worker",
+      "status": "done",
+      "title": "Index owned public awakener records before adaptation",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-architecture"
+      ],
+      "allowed_files": [
+        "src/domain/public-detail-record-adapters.ts",
+        "src/domain/public-detail-record-adapters.test.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Replace repeated owned skill/enlighten/talent slot/family scans with an internal index while preserving current optional/missing behavior and adapter output.",
+      "receipt": {
+        "slice": "Index owned public awakener records before adaptation",
+        "files_changed": [
+          "src/domain/public-detail-record-adapters.ts"
+        ],
+        "what_got_simpler": [
+          "Owned public skill slots, enlighten slots, and talent families are indexed once before adaptation.",
+          "Cards, talents, and enlightens read from the index instead of repeating find scans."
+        ],
+        "behavior_preserved": [
+          "First matching slot/family wins.",
+          "Required missing slots throw the same error text.",
+          "OverExalt and AbsoluteAxiom remain optional.",
+          "Passive talent and extraTalents ordering remains based on the owned talent array."
+        ],
+        "current_complexity": "Before: each card/enlighten slot and named talent lookup scanned the owned child arrays independently.",
+        "expected_complexity_after": "After: one pass builds slot/family maps; adaptation uses direct lookups.",
+        "root_fix_patch_decision": "Root-fix slice selected because the repeated scans shared one adapter-owned concept boundary.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; existing public adapter boundary tests cover the behavior.",
+        "validation": [
+          "npm test -- --run src/domain/public-detail-record-adapters.test.ts src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/public-detail-record-adapters.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/domain/public-detail-record-adapters.test.ts src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/public-detail-record-adapters.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "No bespoke missing-slot fixture was added because the helper remains internal and existing public-detail adapter tests exercise composed cards/talents/enlightens and optional records at the public boundary."
+        ],
+        "followups_not_done": [
+          "C5 awakeners full resolver patched-record casts"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J4",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose resolver patched-record typing slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-typescript",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded TypeScript implementation slice.",
+      "receipt": {
+        "decision": "C5 selected as W4 because awakeners-full-resolver rebuilds detail records from patched maps with repeated terminal casts, and existing resolver tests cover skill, derived-skill, and overlay upgrade behavior.",
+        "root_fix": "Replace casted requireCardRecord call sites with typed helpers that validate the expected record shape/discriminant once.",
+        "validation": [
+          "src/domain/awakeners-full-resolver.test.ts",
+          "src/domain/awakeners-database-view.test.ts",
+          "src/domain/public-detail-record-adapters.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W4",
+      "role": "worker",
+      "status": "done",
+      "title": "Remove patched-card casts from awakeners full resolver",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-rootfix",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/domain/awakeners-full-resolver.ts",
+        "src/domain/awakeners-full-resolver.test.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Replace `as AwakenerSkillRecord` / `as DerivedSkillRecord` patched-record rebuild casts with typed helper functions, preserve current errors and resolver output, and run targeted tests.",
+      "receipt": {
+        "slice": "Remove patched-card casts from awakeners full resolver",
+        "files_changed": [
+          "src/domain/awakeners-full-resolver.ts"
+        ],
+        "what_got_simpler": [
+          "Patched card map rebuild now uses typed require helpers instead of terminal casts.",
+          "Wrong-shape patched records fail at one local narrowing boundary with explicit resolver errors."
+        ],
+        "behavior_preserved": [
+          "Missing patched card ids still throw the existing missing-card error text.",
+          "Valid skill, derived-skill, and overlay upgrade behavior is unchanged."
+        ],
+        "current_complexity": "Before: rebuildRecordFromMaps used repeated `as AwakenerSkillRecord` and `as DerivedSkillRecord` casts after loading from a union map.",
+        "expected_complexity_after": "After: helper functions narrow once and return typed records to the rebuild shape.",
+        "root_fix_patch_decision": "Root-fix slice selected because repeated casts had one local trust boundary and strong resolver tests.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; existing resolver tests cover the public behavior.",
+        "validation": [
+          "npm test -- --run src/domain/awakeners-full-resolver.test.ts src/domain/awakeners-database-view.test.ts src/domain/public-detail-record-adapters.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/awakeners-full-resolver.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/domain/awakeners-full-resolver.test.ts src/domain/awakeners-database-view.test.ts src/domain/public-detail-record-adapters.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/awakeners-full-resolver.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "No bespoke wrong-shape fixture was added; the helpers are private and valid-data behavior is covered by resolver tests."
+        ],
+        "followups_not_done": [
+          "C3 rich text parse context",
+          "C6 reference-layer accumulator"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J5",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose rich text parse-context slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-architecture"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded rich-text parser implementation slice.",
+      "receipt": {
+        "decision": "C3 selected as W5 because rich text parsing rebuilds normalized card-name and parse-option lookup state on every parse, and the direct parser/database-rich-text tests are strong enough for a behavior-preserving context extraction.",
+        "root_fix": "Introduce a reusable parse context while keeping the existing parseRichDescription API as a wrapper.",
+        "validation": [
+          "src/domain/rich-text.test.ts",
+          "src/domain/database-rich-text.test.ts",
+          "src/features/database/internal/DatabaseRichTextContent.test.tsx"
+        ]
+      }
+    },
+    {
+      "id": "W5",
+      "role": "worker",
+      "status": "done",
+      "title": "Reuse rich text parse context",
+      "skills": [
+        "$refactor-complexity",
+        "$refactor-architecture",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/domain/rich-text.ts",
+        "src/domain/rich-text.test.ts",
+        "src/domain/database-rich-text.ts",
+        "src/domain/database-rich-text.test.ts",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.test.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Extract/reuse a rich text parse context so database rendering can avoid rebuilding normalized card-name/options lookup on every parse while preserving parse precedence and current public parser API.",
+      "receipt": {
+        "slice": "Reuse rich text parse context",
+        "files_changed": [
+          "src/domain/rich-text.ts",
+          "src/domain/rich-text.test.ts",
+          "src/domain/database-rich-text.ts",
+          "src/features/database/internal/DatabaseRichTextContent.tsx"
+        ],
+        "what_got_simpler": [
+          "Rich text parsing can reuse a normalized card-name and parse-option context.",
+          "Database rich text rendering memoizes that parse context for the current reference layer and record while keeping text/description args parse-specific."
+        ],
+        "behavior_preserved": [
+          "parseRichDescription remains the public wrapper API.",
+          "Parser precedence for card names, excluded skills, overlay mechanics, stats, realms, scaling, and description args is unchanged.",
+          "Keyword footer text and descriptionArgs still belong to each parse call rather than the reusable context."
+        ],
+        "current_complexity": "Before: parseRichDescription rebuilt the normalized card-name lookup and normalized parse options on every parse.",
+        "expected_complexity_after": "After: callers that parse repeatedly for a stable record/reference layer can build a RichTextParseContext once and reuse it.",
+        "root_fix_patch_decision": "Root-fix slice selected because the repeated lookup construction shared one parser boundary and the existing wrapper API could stay stable.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added a focused parser characterization test for context reuse with per-parse args.",
+        "validation": [
+          "npm test -- --run src/domain/rich-text.test.ts src/domain/database-rich-text.test.ts src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/rich-text.ts src/domain/rich-text.test.ts src/domain/database-rich-text.ts src/features/database/internal/DatabaseRichTextContent.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/domain/rich-text.test.ts src/domain/database-rich-text.test.ts src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/rich-text.ts src/domain/rich-text.test.ts src/domain/database-rich-text.ts src/features/database/internal/DatabaseRichTextContent.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [],
+        "followups_not_done": [
+          "C6 reference-layer accumulator",
+          "C7 popover controller hook split",
+          "C8 public V3 child schema unknown fields",
+          "C9 RichSegmentRenderer component split"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J6",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose reference-layer accumulator root-fix slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-architecture",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded source-level reference-layer rewrite slice.",
+      "receipt": {
+        "decision": "C6 selected as W6 because the repeated reference-layer assembly crosses awakener, wheel, and global builders and scatters first-writer-wins precedence policy across local loops.",
+        "root_fix": "Introduce a small shared reference accumulator and shared derived-skill reference-info builder while keeping each layer responsible for source ordering and accessibility.",
+        "characterization_required": [
+          "first-writer-wins alias collision behavior",
+          "wheel layer wheel-before-overlay-before-global-derived ordering",
+          "global overlay-vs-derived/skill precedence"
+        ],
+        "validation": [
+          "src/domain/wheels-database-reference-layer.test.ts",
+          "src/domain/global-database-reference-layer.test.ts",
+          "src/domain/awakeners-database-view.test.ts",
+          "src/domain/database-reference-layer-audit.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W6",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract shared database reference-layer accumulator",
+      "skills": [
+        "$refactor-architecture",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/domain/database-reference-layer.ts",
+        "src/domain/awakeners-database-reference-layer.ts",
+        "src/domain/wheels-database-reference-layer.ts",
+        "src/domain/global-database-reference-layer.ts",
+        "src/domain/wheels-database-reference-layer.test.ts",
+        "src/domain/global-database-reference-layer.test.ts",
+        "src/domain/awakeners-database-view.test.ts",
+        "src/domain/database-reference-layer-audit.test.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Add characterization for reference lookup precedence, replace repeated local lookup assembly with a shared accumulator and shared derived-skill reference-info builder, keep layer ordering explicit, run targeted reference-layer tests, and record receipt.",
+      "receipt": {
+        "slice": "Extract shared database reference-layer accumulator",
+        "files_changed": [
+          "src/domain/database-reference-layer.ts",
+          "src/domain/awakeners-database-reference-layer.ts",
+          "src/domain/wheels-database-reference-layer.ts",
+          "src/domain/global-database-reference-layer.ts",
+          "src/domain/wheels-database-reference-layer.test.ts",
+          "src/domain/global-database-reference-layer.test.ts"
+        ],
+        "what_got_simpler": [
+          "Awakener, wheel, and global reference layers now share one lookup accumulator for name/id insertion.",
+          "Wheel, global, and awakener global-derived reference entries now share one derived-skill reference-info helper.",
+          "Layer builders still show their own ordering and accessibility rules directly."
+        ],
+        "behavior_preserved": [
+          "Normalized name keys still use trim().toLowerCase().",
+          "Name, alias, id, and overlay lookup collisions remain first-writer-wins.",
+          "Canonical names are inserted before aliases.",
+          "Awakener, wheel, and global insertion orders are preserved.",
+          "Global same-named overlays still win over skills and derived records through the existing pre-filtering rule.",
+          "Global hydration and public-detail loading remain in the global layer."
+        ],
+        "current_complexity": "Before: each reference-layer builder allocated and populated lookup maps locally, and derived-skill reference-info construction was duplicated across wheel/global/awakener global-derived paths.",
+        "expected_complexity_after": "After: lookup population policy and derived-skill info construction live in the shared reference-layer boundary, while source ordering remains explicit in each layer.",
+        "root_fix_patch_decision": "Root-fix slice selected because the repeated lookup assembly crossed all three reference layers and the source-level accumulator removes the boundary smell rather than patching individual loops.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added local characterization for precedence-sensitive reference-layer behavior.",
+        "validation": [
+          "npm test -- --run src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts --pool=forks --maxWorkers=1",
+          "npm test -- --run src/domain --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/database-reference-layer.ts src/domain/awakeners-database-reference-layer.ts src/domain/wheels-database-reference-layer.ts src/domain/global-database-reference-layer.ts src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts --pool=forks --maxWorkers=1",
+          "npm test -- --run src/domain --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/domain/database-reference-layer.ts src/domain/awakeners-database-reference-layer.ts src/domain/wheels-database-reference-layer.ts src/domain/global-database-reference-layer.ts src/domain/wheels-database-reference-layer.test.ts src/domain/global-database-reference-layer.test.ts src/domain/awakeners-database-view.test.ts src/domain/database-reference-layer-audit.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [],
+        "followups_not_done": [
+          "C8 public V3 child schema unknown fields",
+          "C9 RichSegmentRenderer component split",
+          "C7 popover controller hook split"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J7",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose rich segment renderer split",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Select the next bounded database/detail UI root-fix slice.",
+      "receipt": {
+        "decision": "C9 selected as W7 because RichSegmentRenderer mixes segment dispatch, interactivity, overlay lookup/icon loading, scaling display, description-arg formula display, plural resolution, and variant styling in one component while existing characterization coverage is strong.",
+        "root_fix": "Split renderer responsibilities into local components/helpers with stable public props and unchanged visual/interaction contracts.",
+        "validation": [
+          "src/features/database/internal/RichSegmentRenderer.test.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.test.tsx"
+        ]
+      }
+    },
+    {
+      "id": "W7",
+      "role": "worker",
+      "status": "done",
+      "title": "Split rich segment renderer responsibilities",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.test.tsx",
+        "src/features/database/internal/RichSegmentTokens.tsx",
+        "src/features/database/internal/RichScalingSegment.tsx",
+        "src/features/database/internal/RichDescriptionArgSegment.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Split RichSegmentRenderer into local responsibility-focused components/helpers, preserve public props, styling, callbacks, keyboard behavior, icon loading, and formula/scaling behavior, run targeted rich-renderer tests, and record receipt.",
+      "receipt": {
+        "slice": "Split rich segment renderer responsibilities",
+        "files_changed": [
+          "src/features/database/internal/RichSegmentRenderer.tsx",
+          "src/features/database/internal/RichSegmentTokens.tsx",
+          "src/features/database/internal/RichScalingSegment.tsx",
+          "src/features/database/internal/RichDescriptionArgSegment.tsx"
+        ],
+        "what_got_simpler": [
+          "RichSegmentRenderer now focuses on segment dispatch.",
+          "Token interactivity, overlay lookup/icon rendering, scaling rendering, and description arg/plural resolution live in local focused modules.",
+          "Existing ActivationEvent and renderer variant type seams remain available from RichSegmentRenderer."
+        ],
+        "behavior_preserved": [
+          "Skill, mechanic, and realm callbacks plus keyboard activation are unchanged.",
+          "Overlay lookup still uses overlayByName first and falls back to the overlay list.",
+          "Overlay icon cache/load behavior is unchanged.",
+          "Inline and popover scaling output is unchanged.",
+          "Description arg formula, hover, tint, visible scaling, and plural behavior are unchanged.",
+          "DatabaseRichTextContent parse-to-render seam remains unchanged."
+        ],
+        "current_complexity": "Before: one component mixed segment dispatch, token interactivity, overlay lookup, icon loading, scaling display, description arg formula display, plural resolution, and variant styling.",
+        "expected_complexity_after": "After: the dispatch component delegates independent token/scaling/description-arg responsibilities to local focused components.",
+        "root_fix_patch_decision": "Root-fix slice selected because the repeated renderer complexity was local, strongly covered, and better solved by reshaping the component boundary than by adding smaller guards.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; existing renderer and rich text content tests covered the behavior.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/RichScalingSegment.tsx src/features/database/internal/RichDescriptionArgSegment.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx prettier --check src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/RichScalingSegment.tsx src/features/database/internal/RichDescriptionArgSegment.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [],
+        "followups_not_done": [
+          "C8 public V3 child schema unknown fields",
+          "C7 popover controller hook split"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J8",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose public V3 child schema trust-boundary slice",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**"
+      ],
+      "expected_output": "Decide whether C8 is real, queued, superseded, or blocked.",
+      "receipt": {
+        "decision": "C8 selected as W8 because public V3 child parsers currently accept descriptionArgs and cardKeywords as unknown even though canonical schemas already validate those fields during adaptation.",
+        "root_fix": "Move existing canonical validation up to the public V3 child parse boundary while keeping loose public-only metadata and upgrade patch compatibility.",
+        "validation": [
+          "src/domain/public-v3-awakener-record-adapters.test.ts",
+          "src/domain/public-detail-record-adapters.test.ts",
+          "src/domain/public-data-runtime-boundary.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "W8",
+      "role": "worker",
+      "status": "done",
+      "title": "Validate public V3 child description fields at parse boundary",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/domain/public-v3-awakener-record-adapters.ts",
+        "src/domain/public-v3-awakener-record-adapters.test.ts",
+        "src/domain/public-detail-record-adapters.test.ts",
+        "src/domain/public-data-runtime-boundary.test.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Replace public V3 child descriptionArgs/cardKeywords unknown schemas with canonical schemas, add focused malformed-field characterization, preserve loose metadata and defaults, run targeted tests, and record receipt.",
+      "receipt": {
+        "slice": "Validate public V3 child description fields at parse boundary",
+        "files_changed": [
+          "src/domain/public-v3-awakener-record-adapters.ts",
+          "src/domain/public-v3-awakener-record-adapters.test.ts"
+        ],
+        "what_got_simpler": [
+          "Public V3 child parsers now validate descriptionArgs and cardKeywords with the canonical schemas already used during adaptation.",
+          "The public V3 record types no longer advertise those fields as unknown."
+        ],
+        "behavior_preserved": [
+          "Missing child descriptionArgs still default to {} during adaptation.",
+          "Missing skill/derived cardKeywords still default to [] during adaptation.",
+          "Loose public-only metadata remains accepted and preserved on parsed records.",
+          "Upgrade patch payload compatibility remains untouched."
+        ],
+        "current_complexity": "Before: public V3 child parsers accepted description fields as unknown and relied on later canonical adaptation to reject malformed values.",
+        "expected_complexity_after": "After: malformed descriptionArgs/cardKeywords fail at the public V3 child parse boundary, matching the canonical adapted contract earlier.",
+        "root_fix_patch_decision": "Narrow root-fix selected because the module already had the canonical schemas and the trust-boundary smell was local.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added focused parser characterization tests.",
+        "validation": [
+          "npm test -- --run src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/domain/public-v3-awakener-record-adapters.ts src/domain/public-v3-awakener-record-adapters.test.ts",
+          "npx prettier --check src/domain/public-v3-awakener-record-adapters.ts src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/domain/public-v3-awakener-record-adapters.ts src/domain/public-v3-awakener-record-adapters.test.ts",
+          "npx prettier --check src/domain/public-v3-awakener-record-adapters.ts src/domain/public-v3-awakener-record-adapters.test.ts src/domain/public-detail-record-adapters.test.ts src/domain/public-data-runtime-boundary.test.ts docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full pre-commit suite is pending for this slice commit."
+        ],
+        "followups_not_done": [
+          "C7 popover controller hook split"
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "S2",
+      "role": "scout",
+      "status": "done",
+      "title": "Completion-quality branch reconciliation",
+      "skills": [
+        "$refactor-scout",
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-typescript",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/domain/**",
+        "src/features/database/**",
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Reconcile existing receipts and current branch state before claiming completion.",
+      "receipt": {
+        "evidence": [
+          "Read goal.md, state.json, worklog.md, git status/log, packet checker output, scoped complexity/performance scanner hints, and popover controller/model/test files.",
+          "C7 was reclassified from superseded to queued because the prior reason cited an existing seam, not an implemented change that fully removed the hook/action complexity.",
+          "M1 was made terminal as out_of_scope_by_user because scanner command hygiene is outside the requested product/domain database-detail scope and harness edits are protected."
+        ],
+        "validation": [
+          "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/database-detail-audit"
+        ]
+      }
+    },
+    {
+      "id": "J9",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose popover controller completion slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Select the remaining in-scope C7 implementation path.",
+      "receipt": {
+        "decision": "C7 selected as W9 because the hook still mixes trail state, root and nested open paths, lazy hydration gating, global owner events, navigation callbacks, and portal-entry construction.",
+        "root_fix": "Extract the root/nested trail action orchestration into a focused controller-action seam while preserving the existing popover model helpers and public hook return shape.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/useDatabasePopoverController.test.tsx src/features/database/internal/database-popover-controller-model.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "git diff --check"
+        ]
+      }
+    },
+    {
+      "id": "W9",
+      "role": "worker",
+      "status": "done",
+      "title": "Split database popover controller trail actions",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/useDatabasePopoverController.ts",
+        "src/features/database/internal/useDatabasePopoverController.test.tsx",
+        "src/features/database/internal/database-popover-controller-model.ts",
+        "src/features/database/internal/database-popover-controller-model.test.ts",
+        "src/features/database/internal/useDatabasePopoverTrailActions.ts",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/goal.md",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Add or confirm focused characterization for popover trail behavior, extract trail action orchestration from the god hook into a focused action seam, preserve public hook props/return values and root/nested hydration/navigation behavior, run targeted tests/typecheck/diff checks, and record receipt.",
+      "receipt": {
+        "slice": "Split database popover controller trail actions",
+        "files_changed": [
+          "src/features/database/internal/useDatabasePopoverController.ts",
+          "src/features/database/internal/useDatabasePopoverTrailActions.ts",
+          "src/features/database/internal/useDatabasePopoverController.test.tsx"
+        ],
+        "what_got_simpler": [
+          "The public controller hook now owns only cross-controller trail ownership coordination and delegates trail behavior.",
+          "Trail state, root open actions, nested open actions, lazy hydration gates, navigation projection, and portal props are separated inside a focused trail-actions module.",
+          "The first extraction attempt was rejected as extraction without enough deletion; the final split reduced the largest popover-controller function from 404 lines before the slice to 140 lines in the extracted action module."
+        ],
+        "behavior_preserved": [
+          "Public hook options and return shape are unchanged.",
+          "Root and nested reference opening, overlay hydration, stale hydration cancellation, live reference updates, formula context threading, navigation close-then-route behavior, and cross-controller close behavior are preserved.",
+          "Only one controller trail remains open when another controller opens a root trail."
+        ],
+        "current_complexity": "Before: useDatabasePopoverController mixed trail state, root/nested open callbacks, lazy hydration gating, global owner events, navigation callbacks, and portal-entry construction in one 404-line hook body.",
+        "expected_complexity_after": "After: useDatabasePopoverController is a small ownership coordinator; useDatabasePopoverTrailActions owns the concept boundary with smaller root, nested, and portal-projection action seams. Complexity scanner maxFunctionLines for the popover controller family dropped to 140.",
+        "root_fix_patch_decision": "Root-fix slice selected because the prior superseded status was invalid and a simple helper extraction would have moved the smell. The final shape deletes responsibilities from the public hook and splits direct root/nested/portal consumers of the trail concept together.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added local characterization for cross-controller ownership behavior.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/useDatabasePopoverController.test.tsx src/features/database/internal/database-popover-controller-model.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/internal/useDatabasePopoverController.ts src/features/database/internal/useDatabasePopoverTrailActions.ts src/features/database/internal/useDatabasePopoverController.test.tsx",
+          "npx prettier --check src/features/database/internal/useDatabasePopoverController.ts src/features/database/internal/useDatabasePopoverTrailActions.ts src/features/database/internal/useDatabasePopoverController.test.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/internal/useDatabasePopoverController.test.tsx src/features/database/internal/database-popover-controller-model.test.ts --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/internal/useDatabasePopoverController.ts src/features/database/internal/useDatabasePopoverTrailActions.ts src/features/database/internal/useDatabasePopoverController.test.tsx",
+          "npx prettier --check src/features/database/internal/useDatabasePopoverController.ts src/features/database/internal/useDatabasePopoverTrailActions.ts src/features/database/internal/useDatabasePopoverController.test.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full pre-commit suite passed in commit cf7ef7c."
+        ],
+        "followups_not_done": [
+          "Earlier-commit root-fix audit, including browse-controller entity-state recomputation and rich rendering fallback/popover section branch findings."
+        ],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "S3",
+      "role": "scout",
+      "status": "done",
+      "title": "Earlier commit root-fix audit",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-review",
+        "$refactor-scout",
+        "$refactor-react",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "src/domain/**",
+        "src/features/database/**",
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Audit earlier branch commits and omitted scout findings under the stricter root-fix discipline.",
+      "receipt": {
+        "evidence": [
+          "Read earlier branch commits from 0db9f80 through 598d520 plus post-C7 b190fe6.",
+          "C7 was confirmed as a prior root-fix miss and is now implemented by b190fe6.",
+          "Browse-controller entity-state recomputation was added as C11.",
+          "Rich popover description-section fallback duplication was added as C12.",
+          "C2 overlay list-scan fallback was added as C13 after caller audit found only DatabaseRichTextContent as a production RichSegmentRenderer caller.",
+          "C1-C6, C8, C9, and prior P1-P4 were reviewed as root-fix implementations rather than local patches."
+        ],
+        "validation": [
+          "git log --oneline -n 30",
+          "FFF multi_grep for RichSegmentRenderer production callers",
+          "read useEntityBrowseController.ts, DatabaseReferencePopover.tsx, RichSegmentRenderer.tsx, RichSegmentTokens.tsx"
+        ]
+      }
+    },
+    {
+      "id": "J10",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose rich rendering leftover root-fix slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Select the next implementation slice after the earlier-commit audit.",
+      "receipt": {
+        "decision": "C12 and C13 selected together as W10 because they are both rich/reference rendering leftovers from prior slices: one duplicated popover fallback branch and one compatibility fallback that kept per-token overlay list scans alive after overlayByName became the production contract.",
+        "root_fix": "Use one popover fallback-text builder for entry/section fallbacks, and make overlay token resolution map-only at the rich segment boundary now that production rendering comes through DatabaseRichTextContent/referenceLayer.overlayByName.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "git diff --check"
+        ]
+      }
+    },
+    {
+      "id": "W10",
+      "role": "worker",
+      "status": "done",
+      "title": "Resolve rich rendering fallback leftovers",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/internal/DatabaseReferencePopover.tsx",
+        "src/features/database/internal/DatabaseReferencePopover.test.tsx",
+        "src/features/database/internal/RichSegmentRenderer.tsx",
+        "src/features/database/internal/RichSegmentRenderer.test.tsx",
+        "src/features/database/internal/RichSegmentTokens.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.tsx",
+        "src/features/database/internal/DatabaseRichTextContent.test.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/goal.md",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Characterize description-section fallback behavior, consolidate popover fallback text building, remove the overlays-list compatibility fallback from rich segment token resolution, run targeted rich rendering tests/typecheck/diff checks, and record receipt.",
+      "receipt": {
+        "slice": "Resolve rich rendering fallback leftovers",
+        "files_changed": [
+          "src/features/database/internal/DatabaseReferencePopover.tsx",
+          "src/features/database/internal/DatabaseReferencePopover.test.tsx",
+          "src/features/database/internal/RichSegmentRenderer.tsx",
+          "src/features/database/internal/RichSegmentRenderer.test.tsx",
+          "src/features/database/internal/RichSegmentTokens.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.tsx",
+          "src/features/database/internal/DatabaseRichTextContent.test.tsx"
+        ],
+        "what_got_simpler": [
+          "Popover entry and section Suspense fallback text now share one fallback builder.",
+          "Rich segment overlay resolution is map-only; the test-only overlays-list compatibility path and per-token list scan are deleted.",
+          "DatabaseRichTextContent no longer derives or passes an overlay array solely for renderer compatibility."
+        ],
+        "behavior_preserved": [
+          "Popover top-level and section descriptions still resolve record templates and formula context.",
+          "Mechanic and realm tokens still open through the reference-layer overlay map, including aliases and keyword footer tokens.",
+          "Overlay icons, tinting, coming-soon title behavior, and catalog-backed empty-description clickability are preserved."
+        ],
+        "current_complexity": "Before: DatabaseReferencePopover duplicated fallback text construction between top-level and description-section branches, and RichSegmentRenderer kept a list-scan overlay fallback after production rendering had moved to overlayByName.",
+        "expected_complexity_after": "After: fallback text construction is centralized inside the popover and rich token resolution depends on the reference-layer map contract.",
+        "root_fix_patch_decision": "Root-fix slice selected because both leftovers were compatibility/fallback fossils from earlier rich rendering slices; the implementation removes the old fallback paths rather than hardening around them.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; added focused description-section coverage and updated rich rendering tests to use the production overlay map contract.",
+        "validation": [
+          "npm test -- --run src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/internal/DatabaseReferencePopover.tsx src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/DatabaseRichTextContent.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx",
+          "npx prettier --check src/features/database/internal/DatabaseReferencePopover.tsx src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/DatabaseRichTextContent.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/internal/DatabaseReferencePopover.tsx src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/DatabaseRichTextContent.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx",
+          "npx prettier --check src/features/database/internal/DatabaseReferencePopover.tsx src/features/database/internal/DatabaseReferencePopover.test.tsx src/features/database/internal/RichSegmentRenderer.tsx src/features/database/internal/RichSegmentRenderer.test.tsx src/features/database/internal/RichSegmentTokens.tsx src/features/database/internal/DatabaseRichTextContent.tsx src/features/database/internal/DatabaseRichTextContent.test.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "risks": [
+          "Full pre-commit suite passed in commit cf7ef7c."
+        ],
+        "followups_not_done": [],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    },
+    {
+      "id": "J11",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose active-entity browse controller root-fix slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/database-detail-audit/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Select the implementation shape for C11 after the earlier-commit audit.",
+      "receipt": {
+        "decision": "C11 selected as W11 because the current browse controller initializes all entity browse states and expensive view models before rendering only one active entity.",
+        "root_fix": "Keep the top-level controller responsible for URL/search/detail navigation only, and move entity-specific browse state, view-model derivation, filter chips, and global search capture into active entity browse components.",
+        "validation": [
+          "npm test -- --run src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "git diff --check"
+        ]
+      }
+    },
+    {
+      "id": "W11",
+      "role": "worker",
+      "status": "done",
+      "title": "Render only active entity browse state and view model",
+      "skills": [
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-characterization-tests",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/database/browse/useEntityBrowseController.ts",
+        "src/features/database/browse/EntityBrowseViews.tsx",
+        "src/features/database/browse/entityBrowseRegistry.tsx",
+        "src/features/database/DatabasePage.tsx",
+        "src/features/database/DatabaseRoutes.test.tsx",
+        "src/features/database/browse/useDatabaseBrowseState.test.tsx",
+        "docs/refactor-goals/database-detail-audit/state.json",
+        "docs/refactor-goals/database-detail-audit/goal.md",
+        "docs/refactor-goals/database-detail-audit/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/features/collection/**",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "Refactor the browse controller/registry so inactive entity browse state and view models are not initialized, preserve route search sanitization/global search/detail navigation behavior, run targeted route/browse tests/typecheck/diff checks, and record receipt.",
+      "receipt": {
+        "slice": "Render only active entity browse state and view model",
+        "files_changed": [
+          "src/features/database/browse/useEntityBrowseController.ts",
+          "src/features/database/browse/EntityBrowseViews.tsx",
+          "src/features/database/browse/entityBrowseRegistry.tsx"
+        ],
+        "what_got_simpler": [
+          "The top-level entity browse controller now coordinates only URL sanitization, shared search ref, browse path, detail navigation, and detail-open state.",
+          "Awakener, wheel, posse, and covenant browse state/view-model/filter-chip work now lives in the active entity browse component that actually renders.",
+          "Global search capture is bound to the mounted entity browse state instead of requiring a controller-wide search-actions map."
+        ],
+        "behavior_preserved": [
+          "Active entity search params are still sanitized and replaced on invalid routes.",
+          "Global search still updates the active entity search box and remains disabled while a detail modal is open.",
+          "Entity tab switching, detail open paths, detail close paths, and route fallback behavior are preserved."
+        ],
+        "current_complexity": "Before: useEntityBrowseController initialized all four entity browse states, awakener/wheel view models, simple-artifact filtered lists, filter chips, and a per-entity action map before rendering one active entity.",
+        "expected_complexity_after": "After: useEntityBrowseController no longer imports or calls any entity-specific browse-state or view-model hook; each active browse component owns its own state and derived records.",
+        "root_fix_patch_decision": "Root-fix slice selected because the recomputation smell came from the controller boundary itself. Moving the whole active entity concept into mounted components removes the source shape instead of memoizing or guarding inactive calculations.",
+        "dependency_review": "Not needed; no package or lockfile changes.",
+        "harness_update_considered": "No durable harness update needed; existing route and browse-state tests cover the behavior-preserving split.",
+        "validation": [
+          "npm test -- --run src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/browse/useEntityBrowseController.ts src/features/database/browse/EntityBrowseViews.tsx src/features/database/browse/entityBrowseRegistry.tsx",
+          "npx prettier --check src/features/database/browse/useEntityBrowseController.ts src/features/database/browse/EntityBrowseViews.tsx src/features/database/browse/entityBrowseRegistry.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git diff --check"
+        ],
+        "validation_run": [
+          "npm test -- --run src/features/database/DatabaseRoutes.test.tsx src/features/database/browse/useDatabaseBrowseState.test.tsx --pool=forks --maxWorkers=1",
+          "npx tsc -p tsconfig.app.json --noEmit --pretty false",
+          "npx eslint src/features/database/browse/useEntityBrowseController.ts src/features/database/browse/EntityBrowseViews.tsx src/features/database/browse/entityBrowseRegistry.tsx",
+          "npx prettier --check src/features/database/browse/useEntityBrowseController.ts src/features/database/browse/EntityBrowseViews.tsx src/features/database/browse/entityBrowseRegistry.tsx docs/refactor-goals/database-detail-audit/state.json docs/refactor-goals/database-detail-audit/goal.md docs/refactor-goals/database-detail-audit/worklog.md",
+          "git add -N src/features/database/browse/EntityBrowseViews.tsx; git diff --check",
+          "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/database-detail-audit"
+        ],
+        "risks": [
+          "Full pre-commit suite passed in commit ba74604."
+        ],
+        "followups_not_done": [],
+        "learning_lint_candidates": [],
+        "scope_expansion_requested": false
+      }
+    }
+  ],
+  "final_audit": {
+    "full_outcome_complete": true,
+    "summary": "Completion-quality pass is complete for the requested domain/database/detail scope. The earlier-commit root-fix audit reopened and implemented C7, added the omitted browse-controller recomputation as C11, added the omitted rich popover fallback branch as C12, and added the retained rich overlay list-scan fallback as C13. P1-P4 and C1-C9 were reconciled as implemented prior/root-fix work, C10 is out_of_scope_by_user, C11-C13 are implemented, and M1 is out_of_scope_by_user because scanner command hygiene is outside the requested product refactor and harness edits are protected. No builder, collection, broad visual redesign, package, or unrelated app shell work is included.",
+    "validation": [
+      "Each implementation slice passed targeted tests, typecheck, formatting, and diff checks before commit.",
+      "Each committed slice passed pre-commit verification: lint, test:bounded, test:scripts, and build:quiet.",
+      "Latest full pre-commit verification after W11 passed 186 test files / 1236 tests plus script tests and build:quiet.",
+      "Final reconciliation found no active tasks and no candidates in not_started, queued, or mapped status."
+    ],
+    "open_items": [
+      {
+        "id": "C10",
+        "status": "out_of_scope_by_user",
+        "reason": "Database entity tabs are top-level database navigation rather than the requested detail/modal/popover/controller hardening, and prior scout found no actionable detail-flow smell."
+      },
+      {
+        "id": "M1",
+        "status": "out_of_scope_by_user",
+        "reason": "Complexity scanner command hygiene is outside the requested domain/database/detail TypeScript + React product refactor scope, and harness edits are protected unless explicitly approved."
+      }
+    ]
+  }
+}

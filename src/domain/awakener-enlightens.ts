@@ -6,7 +6,7 @@ import {
 } from './awakener-source-schema'
 import {
   adaptPublicV3EnlightenRecord,
-  type PublicV3EnlightenRecord,
+  parsePublicV3EnlightenCatalogRecord,
 } from './public-v3-awakener-record-adapters'
 
 let awakenerEnlightensCache: AwakenerEnlightenRecord[] | null = null
@@ -17,9 +17,9 @@ export function getAwakenerEnlightens(): AwakenerEnlightenRecord[] {
   }
 
   awakenerEnlightensCache = awakenerEnlightensDatasetSchema.parse(
-    getPublicCatalogRecords('enlightens').map((record) =>
-      adaptPublicV3EnlightenRecord(record as PublicV3EnlightenRecord),
-    ),
+    getPublicCatalogRecords('enlightens')
+      .map(parsePublicV3EnlightenCatalogRecord)
+      .map(adaptPublicV3EnlightenRecord),
   )
   return awakenerEnlightensCache
 }

@@ -11,6 +11,14 @@ import {
 } from '@/domain/dzone'
 
 import {getDzoneAlertShortName} from './d-zone-display-text'
+import {
+  buildDefaultOpenWaveIds,
+  getResolvedOpenWaveIds,
+  getSelectedAlertId,
+  toggleResolvedOpenWaveId,
+  type AlertSelectionState,
+  type WaveDisclosureState,
+} from './d-zone-season-inspector-state'
 import {buildDZoneWaveCardViewModels, type DZoneRelicPreview} from './d-zone-view-model'
 import {DZoneWaveCard} from './DZoneWaveCard'
 
@@ -29,40 +37,8 @@ interface DZoneSeasonInspectorProps {
   waveHeadingLevel?: 2 | 3
 }
 
-interface WaveDisclosureState {
-  openWaveIds: Set<string>
-  seasonId: string
-}
-
-interface AlertSelectionState {
-  alertId: string | null
-  seasonId: string
-}
-
-function buildDefaultOpenWaveIds(defaultOpenWaveId: string | undefined): Set<string> {
-  return new Set(defaultOpenWaveId ? [defaultOpenWaveId] : [])
-}
-
 function getRealmThemeClass(realm: DzoneRealm | null | undefined): string {
   return `d-zone-season-inspector--realm-${realm ? realm.toLowerCase() : 'legacy'}`
-}
-
-function getSelectedAlertId(
-  season: DzoneSeason,
-  alertOptions: DzoneAlertOption[],
-  alertSelectionState: AlertSelectionState,
-) {
-  if (alertOptions.length === 0) {
-    return null
-  }
-  if (
-    alertSelectionState.seasonId === season.id &&
-    alertSelectionState.alertId &&
-    alertOptions.some((alert) => alert.id === alertSelectionState.alertId)
-  ) {
-    return alertSelectionState.alertId
-  }
-  return alertOptions[0]?.id ?? null
 }
 
 export function DZoneSeasonInspector({
@@ -90,11 +66,16 @@ export function DZoneSeasonInspector({
     alertId: alertOptions[0]?.id ?? null,
     seasonId: season.id,
   }))
-  const selectedAlertId = getSelectedAlertId(season, alertOptions, alertSelectionState)
-  const openWaveIds =
-    waveDisclosureState.seasonId === season.id
-      ? waveDisclosureState.openWaveIds
-      : buildDefaultOpenWaveIds(defaultOpenWaveId)
+  const selectedAlertId = getSelectedAlertId({
+    alertOptions,
+    alertSelectionState,
+    seasonId: season.id,
+  })
+  const openWaveIds = getResolvedOpenWaveIds({
+    defaultOpenWaveId,
+    seasonId: season.id,
+    waveDisclosureState,
+  })
 
   function selectAlert(alertId: string) {
     setAlertSelectionState({alertId, seasonId: season.id})
@@ -102,17 +83,12 @@ export function DZoneSeasonInspector({
 
   function toggleWave(waveId: string) {
     setWaveDisclosureState((currentDisclosureState) => {
-      const currentOpenWaveIds =
-        currentDisclosureState.seasonId === season.id
-          ? currentDisclosureState.openWaveIds
-          : buildDefaultOpenWaveIds(defaultOpenWaveId)
-      const nextOpenWaveIds = new Set(currentOpenWaveIds)
-      if (nextOpenWaveIds.has(waveId)) {
-        nextOpenWaveIds.delete(waveId)
-      } else {
-        nextOpenWaveIds.add(waveId)
-      }
-      return {openWaveIds: nextOpenWaveIds, seasonId: season.id}
+      return toggleResolvedOpenWaveId({
+        defaultOpenWaveId,
+        seasonId: season.id,
+        waveDisclosureState: currentDisclosureState,
+        waveId,
+      })
     })
   }
 

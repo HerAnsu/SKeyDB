@@ -3,7 +3,7 @@ import {getPublicCatalogRecords} from '@/data-access/public-data/catalogReposito
 import {awakenerOverlaysDatasetSchema, type AwakenerOverlayRecord} from './awakener-source-schema'
 import {
   adaptPublicV3OverlayRecord,
-  type PublicV3OverlayRecord,
+  parsePublicV3OverlayCatalogRecord,
 } from './public-v3-awakener-record-adapters'
 
 let awakenerOverlaysCache: AwakenerOverlayRecord[] | null = null
@@ -28,9 +28,9 @@ export function getAwakenerOverlays(): AwakenerOverlayRecord[] {
   }
 
   awakenerOverlaysCache = awakenerOverlaysDatasetSchema.parse(
-    getPublicCatalogRecords('overlays').map((record) =>
-      adaptPublicV3OverlayRecord(record as PublicV3OverlayRecord),
-    ),
+    getPublicCatalogRecords('overlays')
+      .map(parsePublicV3OverlayCatalogRecord)
+      .map(adaptPublicV3OverlayRecord),
   )
   overlayByNameCache = buildOverlayLookup(awakenerOverlaysCache)
   return awakenerOverlaysCache

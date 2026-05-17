@@ -351,6 +351,26 @@ describe('useDatabasePopoverController', () => {
     expect(onOuterClick).not.toHaveBeenCalled()
   })
 
+  it('closes another controller trail when a new root opens', async () => {
+    render(
+      <>
+        <ControllerHarness referenceLayer={buildReferenceLayer('First text.')} />
+        <ControllerHarness referenceLayer={buildReferenceLayer('Second text.')} />
+      </>,
+    )
+
+    const [firstOpenStrike, secondOpenStrike] = screen.getAllByRole('button', {
+      name: 'Open Strike',
+    })
+    fireEvent.click(firstOpenStrike)
+    expect(await screen.findByText('First text.')).toBeInTheDocument()
+
+    fireEvent.click(secondOpenStrike)
+
+    expect(await screen.findByText('Second text.')).toBeInTheDocument()
+    expect(screen.queryByText('First text.')).not.toBeInTheDocument()
+  })
+
   it('opens generic info entries through the shared root popover path', async () => {
     render(<ControllerHarness referenceLayer={buildReferenceLayer('Base text.')} />)
 

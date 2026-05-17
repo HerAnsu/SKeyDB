@@ -118,11 +118,14 @@ function freezeItemsByAppliedOrder<T>(
   return mergedOrder.map((id) => itemById.get(id)).flatMap((item) => (item ? [item] : []))
 }
 
-function useFrozenSortOrder<T>(items: T[], getItemId: (item: T) => string) {
-  const [appliedOrder, setAppliedOrder] = useState<string[]>([])
-  const [hasPendingChanges, setHasPendingChanges] = useState(false)
+function areStringArraysEqual(left: string[], right: string[]) {
+  return left.length === right.length && left.every((value, index) => value === right[index])
+}
 
+function useFrozenSortOrder<T>(items: T[], getItemId: (item: T) => string) {
   const liveOrder = useMemo(() => items.map(getItemId), [items, getItemId])
+  const [appliedOrder, setAppliedOrder] = useState<string[]>(() => liveOrder)
+  const [hasPendingChanges, setHasPendingChanges] = useState(false)
   const liveOrderRef = useLatestRef(liveOrder)
 
   const frozenItems = useMemo(
@@ -131,7 +134,11 @@ function useFrozenSortOrder<T>(items: T[], getItemId: (item: T) => string) {
   )
 
   const applyChanges = useCallback(() => {
-    setAppliedOrder(liveOrderRef.current)
+    setAppliedOrder((currentOrder) =>
+      areStringArraysEqual(currentOrder, liveOrderRef.current)
+        ? currentOrder
+        : liveOrderRef.current,
+    )
     setHasPendingChanges(false)
   }, [liveOrderRef])
 

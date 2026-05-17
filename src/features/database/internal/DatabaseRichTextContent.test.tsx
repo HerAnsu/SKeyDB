@@ -19,7 +19,10 @@ function buildReferenceLayer(): ResolvedDatabaseReferenceLayer {
   return {
     accessibleOverlays: [TEST_OVERLAY],
     cardNames: new Set(['Strike']),
-    overlayByName: new Map(),
+    overlayByName: new Map([
+      ['counter', TEST_OVERLAY],
+      ['counter buff', TEST_OVERLAY],
+    ]),
     referenceInfoById: new Map(),
     referenceInfoByName: new Map(),
   }

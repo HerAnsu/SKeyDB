@@ -1,3 +1,9 @@
+import {
+  createDescriptionArgTokenPattern,
+  createOrdinalMacroPattern,
+  createPluralMacroPattern,
+  extractDescriptionArgToken,
+} from './description-token-grammar'
 import {getMainstatLabels} from './mainstats-catalog'
 import type {PublicDescriptionArg} from './public-description-args'
 import {COMPUTABLE_STATS} from './scaling'
@@ -52,6 +58,11 @@ export interface RichTextParseOptions {
   enableFollowupLineBreaks?: boolean
 }
 
+export interface RichTextParseContext {
+  cardNameByLower: ReadonlyMap<string, string>
+  options: NormalizedRichTextParseOptions
+}
+
 export type RichSegment =
   | TextSegment
   | SkillSegment
@@ -92,13 +103,9 @@ const KNOWN_REALMS = new Set(['Chaos', 'Aequor', 'Caro', 'Ultra'])
 
 const SCALING_RE = /\((\d[\d./]*(?:\/\d[\d./]*)+)(%)?\s*(?:\{([^}]+)\})?\)/
 const PROSE_SCALING_RE = /(\d+(?:\.\d+)?)(%)\s+of\s+\{([^}]+)\}/
-const DESCRIPTION_ARG_KEY_PATTERN = String.raw`(?:StateArg|DescArg|Arg)\d+|[A-Za-z][A-Za-z0-9_]*`
-const DESCRIPTION_ARG_RE = new RegExp(
-  String.raw`\[(?:(?<channel>[A-Za-z]+|\{[^}\]]+\}):)?(?<argKey>${DESCRIPTION_ARG_KEY_PATTERN})\]`,
-)
-const PLURAL_MACRO_RE =
-  /\{plural:(?<argToken>\[(?:(?:[A-Za-z]+|\{[^}\]]+\}):)?(?:(?:StateArg|DescArg|Arg)\d+|[A-Za-z][A-Za-z0-9_]*)\])\|(?<singular>[^|{}]+)\|(?<plural>[^{}]+)\}/
-const ORDINAL_MACRO_RE = /\{ordinal:(?<value>[^{}]+)\}/
+const DESCRIPTION_ARG_RE = createDescriptionArgTokenPattern()
+const PLURAL_MACRO_RE = createPluralMacroPattern()
+const ORDINAL_MACRO_RE = createOrdinalMacroPattern()
 
 type NextRichMatch =
   | {kind: 'none'}
@@ -108,14 +115,6 @@ type NextRichMatch =
   | {kind: 'scaling'; index: number; match: RegExpExecArray}
   | {kind: 'prose'; index: number; match: RegExpExecArray}
   | {kind: 'bracket'; index: number}
-
-function normalizeDescriptionArgChannel(channel: string | undefined): string | null {
-  if (!channel) {
-    return null
-  }
-
-  return channel.startsWith('{') && channel.endsWith('}') ? channel.slice(1, -1).trim() : channel
-}
 
 function parseScaling(raw: string): ScalingSegment | null {
   const m = SCALING_RE.exec(raw)
@@ -198,7 +197,8 @@ function consumeDescriptionArgMatch(
     segments.push({type: 'text', value: remaining.slice(0, nextMatch.index)})
   }
 
-  const argKey = nextMatch.match.groups?.argKey
+  const argToken = extractDescriptionArgToken(nextMatch.match[0])
+  const argKey = argToken?.argKey
   if (!argKey || (descriptionArgs && !Object.hasOwn(descriptionArgs, argKey))) {
     segments.push({type: 'text', value: nextMatch.match[0]})
     return remaining.slice(nextMatch.index + nextMatch.match[0].length)
@@ -208,7 +208,7 @@ function consumeDescriptionArgMatch(
   segments.push({
     type: 'descriptionArg',
     argKey,
-    channel: normalizeDescriptionArgChannel(nextMatch.match.groups?.channel),
+    channel: argToken.channel,
   })
 
   let consumedLength = nextMatch.match[0].length
@@ -234,8 +234,8 @@ function consumePluralMatch(
   }
 
   const argToken = nextMatch.match.groups?.argToken
-  const argMatch = argToken ? DESCRIPTION_ARG_RE.exec(argToken) : null
-  const argKey = argMatch?.groups?.argKey
+  const parsedArgToken = argToken ? extractDescriptionArgToken(argToken) : null
+  const argKey = parsedArgToken?.argKey
   if (!argKey || (descriptionArgs && !Object.hasOwn(descriptionArgs, argKey))) {
     segments.push({type: 'text', value: nextMatch.match[0]})
     return remaining.slice(nextMatch.index + nextMatch.match[0].length)
@@ -244,7 +244,7 @@ function consumePluralMatch(
   segments.push({
     type: 'argPlural',
     argKey,
-    channel: normalizeDescriptionArgChannel(argMatch.groups?.channel),
+    channel: parsedArgToken.channel,
     singular: nextMatch.match.groups?.singular ?? '',
     plural: nextMatch.match.groups?.plural ?? '',
   })
@@ -294,7 +294,7 @@ function consumeScalingMatch(
 
 function toTokenSegment(
   token: string,
-  cardNameByLower: Map<string, string>,
+  cardNameByLower: ReadonlyMap<string, string>,
   options: NormalizedRichTextParseOptions,
 ): RichSegment {
   const normalizedToken = token.toLowerCase()
@@ -329,7 +329,7 @@ function consumeBracketToken(
   remaining: string,
   segments: RichSegment[],
   index: number,
-  cardNameByLower: Map<string, string>,
+  cardNameByLower: ReadonlyMap<string, string>,
   options: NormalizedRichTextParseOptions,
 ): string {
   if (index > 0) {
@@ -486,18 +486,27 @@ function normalizeBareOverlayMechanicSegments(
   return nextSegments
 }
 
-export function parseRichDescription(
-  text: string,
+export function buildRichTextParseContext(
   cardNames: ReadonlySet<string>,
-  descriptionArgs?: Record<string, PublicDescriptionArg>,
   options?: RichTextParseOptions,
-): RichSegment[] {
-  const segments: RichSegment[] = []
+): RichTextParseContext {
   const cardNameByLower = new Map<string, string>()
-  const normalizedOptions = normalizeParseOptions(options)
   for (const cardName of cardNames) {
     cardNameByLower.set(cardName.toLowerCase(), cardName)
   }
+
+  return {
+    cardNameByLower,
+    options: normalizeParseOptions(options),
+  }
+}
+
+export function parseRichDescriptionWithContext(
+  text: string,
+  context: RichTextParseContext,
+  descriptionArgs?: Record<string, PublicDescriptionArg>,
+): RichSegment[] {
+  const segments: RichSegment[] = []
 
   let remaining = text
   while (remaining.length > 0) {
@@ -513,8 +522,8 @@ export function parseRichDescription(
             remaining,
             segments,
             nextMatch.index,
-            cardNameByLower,
-            normalizedOptions,
+            context.cardNameByLower,
+            context.options,
           )
         : nextMatch.kind === 'descriptionArg'
           ? consumeDescriptionArgMatch(remaining, segments, nextMatch, descriptionArgs)
@@ -525,13 +534,26 @@ export function parseRichDescription(
               : consumeScalingMatch(remaining, segments, nextMatch)
   }
 
-  const normalizedSegments = normalizeBareOverlayMechanicSegments(segments, normalizedOptions)
+  const normalizedSegments = normalizeBareOverlayMechanicSegments(segments, context.options)
 
-  if (!normalizedOptions.enableFollowupLineBreaks) {
+  if (!context.options.enableFollowupLineBreaks) {
     return normalizedSegments
   }
 
   return insertLineBreakBeforeMechanicFollowups(
     insertLineBreakAfterBracketedHeadings(normalizedSegments),
+  )
+}
+
+export function parseRichDescription(
+  text: string,
+  cardNames: ReadonlySet<string>,
+  descriptionArgs?: Record<string, PublicDescriptionArg>,
+  options?: RichTextParseOptions,
+): RichSegment[] {
+  return parseRichDescriptionWithContext(
+    text,
+    buildRichTextParseContext(cardNames, options),
+    descriptionArgs,
   )
 }

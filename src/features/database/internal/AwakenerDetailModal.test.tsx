@@ -444,6 +444,7 @@ describe('AwakenerDetailModal', () => {
 
     fireEvent.click(screen.getByRole('tab', {name: 'Skills'}))
     expect(screen.getByRole('tab', {name: 'Skills'})).toHaveAttribute('aria-selected', 'true')
+    expect(await screen.findByText('Skills Tab')).toBeInTheDocument()
 
     rerender(createAwakenerDetailModalElement(second, {key: second.id, onClose}))
 
@@ -491,7 +492,7 @@ describe('AwakenerDetailModal', () => {
     )
   })
 
-  it('supports keyboard navigation across the semantic tablist', () => {
+  it('supports keyboard navigation across the semantic tablist', async () => {
     const awakener = makeAwakener(1, 'thais')
 
     renderAwakenerDetailModal(awakener)
@@ -502,6 +503,7 @@ describe('AwakenerDetailModal', () => {
     fireEvent.keyDown(overviewTab, {key: 'ArrowRight'})
     expect(screen.getByRole('tab', {name: 'Upgrades'})).toHaveFocus()
     expect(screen.getByRole('tab', {name: 'Upgrades'})).toHaveAttribute('aria-selected', 'true')
+    expect(await screen.findByText('Upgrades Tab')).toBeInTheDocument()
     expect(screen.getByRole('tabpanel')).toHaveAttribute(
       'aria-labelledby',
       screen.getByRole('tab', {name: 'Upgrades'}).getAttribute('id'),
@@ -510,6 +512,7 @@ describe('AwakenerDetailModal', () => {
     fireEvent.keyDown(screen.getByRole('tab', {name: 'Upgrades'}), {key: 'End'})
     expect(screen.getByRole('tab', {name: 'Teams'})).toHaveFocus()
     expect(screen.getByRole('tab', {name: 'Teams'})).toHaveAttribute('aria-selected', 'true')
+    expect(await screen.findByText('Teams Tab')).toBeInTheDocument()
 
     fireEvent.keyDown(screen.getByRole('tab', {name: 'Teams'}), {key: 'Home'})
     expect(screen.getByRole('tab', {name: 'Overview'})).toHaveFocus()
@@ -809,6 +812,7 @@ describe('AwakenerDetailModal', () => {
     renderAwakenerDetailModal(awakener, {onClose, onSelectAwakener})
 
     fireEvent.click(screen.getByRole('tab', {name: 'Skills'}))
+    expect(await screen.findByText('Skills Tab')).toBeInTheDocument()
     const searchInput = screen.getByRole('combobox', {name: /jump to awakener/i})
     fireEvent.change(searchInput, {target: {value: 'be'}})
     fireEvent.keyDown(searchInput, {key: 'Enter'})

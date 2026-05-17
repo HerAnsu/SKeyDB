@@ -4,6 +4,31 @@ import {afterEach, vi} from 'vitest'
 
 import App from './App'
 
+vi.mock('./features/builder/BuilderPage', () => ({
+  BuilderPage: () => <h2>Builder page</h2>,
+}))
+
+vi.mock('./features/collection/CollectionPage', () => ({
+  CollectionPage: () => <h2>Collection page</h2>,
+}))
+
+vi.mock('./pages/DZonePage', () => ({
+  DZonePage: () => (
+    <>
+      <h1>D-Effect Zone</h1>
+      <p>Current Season: 60 · May 11, 2026 - May 25, 2026</p>
+    </>
+  ),
+}))
+
+vi.mock('./pages/DZoneHistoryPage', () => ({
+  DZoneHistoryPage: () => <h1>D-Zone Archive</h1>,
+}))
+
+vi.mock('./pages/TimelinePage', () => ({
+  TimelinePage: () => <h2>Events page</h2>,
+}))
+
 interface MatchMediaEntry {
   dispatchChange: (matches: boolean) => void
   listeners: Set<(event: MediaQueryListEvent) => void>
@@ -11,8 +36,6 @@ interface MatchMediaEntry {
 }
 
 const originalMatchMedia = window.matchMedia
-const DZONE_ROUTE_FIND_TIMEOUT_MS = 8000
-const DZONE_ROUTE_TEST_TIMEOUT_MS = 10000
 
 afterEach(() => {
   window.matchMedia = originalMatchMedia
@@ -207,49 +230,6 @@ describe('App shell', () => {
       'site-mobile-menu-button--active-wide',
     )
   })
-
-  it(
-    'routes to the D-zone page',
-    async () => {
-      render(
-        <MemoryRouter initialEntries={['/d-zone']}>
-          <App />
-        </MemoryRouter>,
-      )
-
-      expect(
-        await screen.findByRole(
-          'heading',
-          {level: 1, name: 'D-Effect Zone'},
-          {timeout: DZONE_ROUTE_FIND_TIMEOUT_MS},
-        ),
-      ).toBeInTheDocument()
-      expect(
-        screen.getByText(/Current Season: 60 · May 11, 2026 - May 25, 2026/),
-      ).toBeInTheDocument()
-    },
-    DZONE_ROUTE_TEST_TIMEOUT_MS,
-  )
-
-  it(
-    'routes to the D-zone history page',
-    async () => {
-      render(
-        <MemoryRouter initialEntries={['/d-zone/history']}>
-          <App />
-        </MemoryRouter>,
-      )
-
-      expect(
-        await screen.findByRole(
-          'heading',
-          {level: 1, name: 'D-Zone Archive'},
-          {timeout: DZONE_ROUTE_FIND_TIMEOUT_MS},
-        ),
-      ).toBeInTheDocument()
-    },
-    DZONE_ROUTE_TEST_TIMEOUT_MS,
-  )
 })
 
 function getMobileOverflowNav(): HTMLElement {

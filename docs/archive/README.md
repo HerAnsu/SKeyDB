@@ -10,6 +10,8 @@ Historical docs live here once they stop being the current source of truth.
   - Retired roadmap snapshots.
 - `docs/archive/backlogs/`
   - Old backlog/request dumps preserved for history.
+- `docs/archive/refactor-goals/`
+  - Completed refactor goal packets and their receipts.
 
 Current docs live in:
 
@@ -17,6 +19,7 @@ Current docs live in:
 - `docs/backlog.md`
 - `docs/plans/`
 - `docs/notes/`
+- `docs/refactor-goals/`
 
 Archive maintenance:
 

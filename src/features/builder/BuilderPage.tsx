@@ -211,12 +211,21 @@ export function BuilderPage() {
     }
     const pageMain = pickerZone.closest('main')
 
-    const syncMetric = (setMetric: Dispatch<SetStateAction<number | null>>, nextMetric: number) => {
+    const syncMetric = (
+      setMetric: Dispatch<SetStateAction<number | null>>,
+      nextMetric: number | null,
+    ) => {
       setMetric((previousMetric) => (previousMetric === nextMetric ? previousMetric : nextMetric))
     }
 
     const measureLayout = () => {
       const nextMainBuilderZoneHeight = Math.round(mainBuilderZone.getBoundingClientRect().height)
+      if (nextMainBuilderZoneHeight <= 0) {
+        syncMetric(setMainBuilderZoneHeight, null)
+        syncMetric(setPickerShellHeight, null)
+        return
+      }
+
       const mainPaddingBottom =
         pageMain instanceof HTMLElement
           ? Number.parseFloat(window.getComputedStyle(pageMain).paddingBottom) || 0

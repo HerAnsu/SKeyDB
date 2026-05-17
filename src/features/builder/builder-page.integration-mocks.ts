@@ -1,158 +1,161 @@
+import {act, cleanup} from '@testing-library/react'
 import {afterEach, beforeEach, vi} from 'vitest'
 
-import {createEmptyCollectionOwnershipState} from '@/domain/collection-ownership'
-import {collectionOwnershipStore} from '@/stores/collectionOwnershipStore'
+import {
+  createMockPublicAwakener,
+  createMockPublicCatalog,
+  createMockPublicCovenant,
+  createMockPublicPosse,
+  createMockPublicWheel,
+} from '@/test/publicCatalogFixtures'
 
 import {BUILDER_PERSISTENCE_KEY} from './builder-persistence'
 
+function createBuilderMockPublicCatalog() {
+  return createMockPublicCatalog({
+    awakeners: [
+      createMockPublicAwakener({
+        id: 'awakener-0021',
+        numericId: 21,
+        name: 'goliath',
+        faction: 'Among the Stars',
+        realm: 'CHAOS',
+        aliases: ['goliath'],
+        lineupToken: 'f',
+      }),
+      createMockPublicAwakener({
+        id: 'awakener-0042',
+        numericId: 42,
+        name: 'ramona',
+        realm: 'CHAOS',
+        aliases: ['ramona'],
+        lineupToken: 'N',
+      }),
+      createMockPublicAwakener({
+        id: 'awakener-0020',
+        numericId: 20,
+        name: 'ramona: timeworn',
+        realm: 'CHAOS',
+        aliases: ['timeworn ramona'],
+        lineupToken: 'j',
+      }),
+      createMockPublicAwakener({
+        id: 'awakener-0002',
+        numericId: 2,
+        name: 'agrippa',
+        faction: 'Outlanders',
+        realm: 'AEQUOR',
+        aliases: ['agrippa'],
+        lineupToken: 'S',
+      }),
+      createMockPublicAwakener({
+        id: 'awakener-0007',
+        numericId: 7,
+        name: 'casiah',
+        realm: 'CARO',
+        aliases: ['casiah'],
+        lineupToken: 'n',
+      }),
+    ],
+    wheels: [
+      createMockPublicWheel({
+        id: 'wheel-0050',
+        assetId: 'Weapon_Full_O01',
+        name: 'Merciful Nurturing',
+        realm: 'AEQUOR',
+        awakener: 'goliath',
+        mainstatKey: 'CRIT_RATE',
+        aliases: ['Merciful Nurturing'],
+        lineupToken: 'm',
+      }),
+      createMockPublicWheel({
+        id: 'wheel-0051',
+        assetId: 'Weapon_Full_O02',
+        name: 'Tablet of Scriptures',
+        realm: 'AEQUOR',
+        awakener: 'goliath',
+        mainstatKey: 'CRIT_DMG',
+        aliases: ['Tablet of Scriptures'],
+        lineupToken: 'v',
+      }),
+      createMockPublicWheel({
+        id: 'wheel-0077',
+        assetId: 'Weapon_Full_SR01',
+        name: 'Training Relic',
+        rarity: 'SR',
+        aliases: ['Training Relic'],
+        lineupToken: '5',
+      }),
+      createMockPublicWheel({
+        id: 'wheel-0052',
+        assetId: 'Weapon_Full_O03',
+        name: 'Signal Through Silence',
+        realm: 'AEQUOR',
+        awakener: 'goliath',
+        mainstatKey: 'KEYFLARE_REGEN',
+        aliases: ['Signal Through Silence'],
+        lineupToken: 'e',
+      }),
+      createMockPublicWheel({
+        id: 'wheel-0053',
+        assetId: 'Weapon_Full_O04',
+        name: 'Mute Witness',
+        realm: 'AEQUOR',
+        awakener: 'goliath',
+        mainstatKey: 'ALIEMUS_REGEN',
+        aliases: ['Mute Witness'],
+        lineupToken: '9',
+      }),
+    ],
+    posses: [
+      createMockPublicPosse({
+        id: 'posse-0033',
+        index: 33,
+        name: 'Taverns Opening',
+        realm: 'CHAOS',
+        awakenerName: 'goliath',
+        lineupToken: 'L',
+      }),
+      createMockPublicPosse({
+        id: 'posse-0003',
+        index: 1,
+        name: 'Warded Injection',
+        realm: 'AEQUOR',
+        lineupToken: 'b',
+      }),
+    ],
+    covenants: [
+      createMockPublicCovenant({
+        id: 'c01',
+        assetId: 'Covenant_01',
+        name: 'Deus Ex Machina',
+        lineupToken: 'k',
+      }),
+      createMockPublicCovenant({
+        id: 'c02',
+        assetId: 'Covenant_02',
+        name: 'Signal Pulse',
+        lineupToken: 'm',
+      }),
+    ],
+  })
+}
+
 vi.mock('../../domain/awakeners', () => ({
-  getAwakeners: () => [
-    {
-      id: 'awakener-0021',
-      numericId: 21,
-      name: 'goliath',
-      faction: 'Among the Stars',
-      realm: 'CHAOS',
-      aliases: ['goliath'],
-      tags: [],
-      lineupToken: 'f',
-    },
-    {
-      id: 'awakener-0042',
-      numericId: 42,
-      name: 'ramona',
-      faction: 'The Fools',
-      realm: 'CHAOS',
-      aliases: ['ramona'],
-      tags: [],
-      lineupToken: 'N',
-    },
-    {
-      id: 'awakener-0020',
-      numericId: 20,
-      name: 'ramona: timeworn',
-      faction: 'The Fools',
-      realm: 'CHAOS',
-      aliases: ['timeworn ramona'],
-      tags: [],
-      lineupToken: 'j',
-    },
-    {
-      id: 'awakener-0002',
-      numericId: 2,
-      name: 'agrippa',
-      faction: 'Outlanders',
-      realm: 'AEQUOR',
-      aliases: ['agrippa'],
-      tags: [],
-      lineupToken: 'S',
-    },
-    {
-      id: 'awakener-0007',
-      numericId: 7,
-      name: 'casiah',
-      faction: 'The Fools',
-      realm: 'CARO',
-      aliases: ['casiah'],
-      tags: [],
-      lineupToken: 'n',
-    },
-  ],
+  getAwakeners: () => createBuilderMockPublicCatalog().awakeners,
 }))
 
 vi.mock('../../domain/wheels', () => ({
-  getWheels: () => [
-    {
-      id: 'wheel-0050',
-      assetId: 'Weapon_Full_O01',
-      name: 'Merciful Nurturing',
-      rarity: 'SSR',
-      realm: 'AEQUOR',
-      awakener: 'goliath',
-      mainstatKey: 'CRIT_RATE',
-      aliases: ['Merciful Nurturing'],
-      tags: [],
-      lineupToken: 'm',
-    },
-    {
-      id: 'wheel-0051',
-      assetId: 'Weapon_Full_O02',
-      name: 'Tablet of Scriptures',
-      rarity: 'SSR',
-      realm: 'AEQUOR',
-      awakener: 'goliath',
-      mainstatKey: 'CRIT_DMG',
-      aliases: ['Tablet of Scriptures'],
-      tags: [],
-      lineupToken: 'v',
-    },
-    {
-      id: 'wheel-0077',
-      assetId: 'Weapon_Full_SR01',
-      name: 'Training Relic',
-      rarity: 'SR',
-      realm: 'NEUTRAL',
-      awakener: '',
-      mainstatKey: 'ATK',
-      aliases: ['Training Relic'],
-      tags: [],
-      lineupToken: '5',
-    },
-    {
-      id: 'wheel-0052',
-      assetId: 'Weapon_Full_O03',
-      name: 'Signal Through Silence',
-      rarity: 'SSR',
-      realm: 'AEQUOR',
-      awakener: 'goliath',
-      mainstatKey: 'KEYFLARE_REGEN',
-      aliases: ['Signal Through Silence'],
-      tags: [],
-      lineupToken: 'e',
-    },
-    {
-      id: 'wheel-0053',
-      assetId: 'Weapon_Full_O04',
-      name: 'Mute Witness',
-      rarity: 'SSR',
-      realm: 'AEQUOR',
-      awakener: 'goliath',
-      mainstatKey: 'ALIEMUS_REGEN',
-      aliases: ['Mute Witness'],
-      tags: [],
-      lineupToken: '9',
-    },
-  ],
+  getWheels: () => createBuilderMockPublicCatalog().wheels,
   getWheelMainstatLabel: () => '',
 }))
 
 vi.mock('../../domain/posses', () => ({
-  getPosses: () => [
-    {
-      id: 'posse-0033',
-      index: 33,
-      name: 'Taverns Opening',
-      realm: 'CHAOS',
-      isFadedLegacy: false,
-      awakenerName: 'goliath',
-      lineupToken: 'L',
-    },
-    {
-      id: 'posse-0003',
-      index: 1,
-      name: 'Warded Injection',
-      realm: 'AEQUOR',
-      isFadedLegacy: false,
-      lineupToken: 'b',
-    },
-  ],
+  getPosses: () => createBuilderMockPublicCatalog().posses,
 }))
 
 vi.mock('../../domain/covenants', () => ({
-  getCovenants: () => [
-    {id: 'c01', assetId: 'Covenant_01', name: 'Deus Ex Machina', lineupToken: 'k'},
-    {id: 'c02', assetId: 'Covenant_02', name: 'Signal Pulse', lineupToken: 'm'},
-  ],
+  getCovenants: () => createBuilderMockPublicCatalog().covenants,
 }))
 
 vi.mock('@/domain/public-detail-record-adapters', () => ({
@@ -229,12 +232,23 @@ vi.mock('../../domain/posse-assets', () => ({
   getPosseAssetById: (posseId: string) => `/mock/posses/${posseId}.webp`,
 }))
 
-beforeEach(() => {
+beforeEach(async () => {
+  const {createEmptyCollectionOwnershipState} = await import('@/domain/collection-ownership')
+  const {collectionOwnershipStore} = await import('@/stores/collectionOwnershipStore')
+
   window.localStorage.removeItem(BUILDER_PERSISTENCE_KEY)
   collectionOwnershipStore.getState().replaceOwnership(createEmptyCollectionOwnershipState())
 })
 
-afterEach(() => {
+afterEach(async () => {
+  const {createEmptyCollectionOwnershipState} = await import('@/domain/collection-ownership')
+  const {collectionOwnershipStore} = await import('@/stores/collectionOwnershipStore')
+  const {dbDetailStore} = await import('@/stores/dbDetailStore')
+
+  cleanup()
+  act(() => {
+    dbDetailStore.getState().closeAllDetails()
+  })
   window.localStorage.removeItem(BUILDER_PERSISTENCE_KEY)
   collectionOwnershipStore.getState().replaceOwnership(createEmptyCollectionOwnershipState())
 })

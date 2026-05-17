@@ -1,15 +1,11 @@
 import {fireEvent, render, screen, waitFor, within} from '@testing-library/react'
-import {afterEach, describe, expect, it} from 'vitest'
+import {describe, expect, it} from 'vitest'
 
 import {dbDetailStore} from '@/stores/dbDetailStore'
 
 import './builder-page.integration-mocks'
 
 import {BuilderPage} from './BuilderPage'
-
-afterEach(() => {
-  dbDetailStore.getState().closeAllDetails()
-})
 
 describe('BuilderPage covenants', () => {
   it('shows covenant picker tab and covenant search placeholder', () => {

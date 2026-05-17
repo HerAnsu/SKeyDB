@@ -2,6 +2,7 @@ import {describe, expect, it} from 'vitest'
 
 import rawBanners from '@/data/timeline/banners.json'
 
+import {resolveTimelineBannerDerivedPool} from './timeline-banner-pools'
 import {loadTimelineBanners, timelineBanners, timelineEvents} from './timeline-data'
 
 describe('timeline data loading', () => {
@@ -20,6 +21,13 @@ describe('timeline data loading', () => {
       (event) => event.id === 'event-campaign-half-anniversary',
     )
     const dreamyRendezvous = timelineEvents.find((event) => event.id === 'event-dreamy-rendezvous')
+    const meowch = timelineEvents.find((event) => event.id === 'event-meowch-obliged')
+    const giftBoxes = timelineEvents.find((event) => event.id === 'event-curated-gift-boxes')
+    const preorder = timelineEvents.find((event) => event.id === 'event-preorder-unfading-memories')
+    const season33Login = timelineEvents.find((event) => event.id === 'event-login-season-33')
+    const season34Curriculum = timelineEvents.find(
+      (event) => event.id === 'event-curriculum-season-34',
+    )
     const collabEvent = timelineEvents.find((event) => event.id === 'event-story-saya')
     const collabBanner = timelineBanners.find((banner) => banner.id === 'banner-saya-no-uta-collab')
 
@@ -34,6 +42,36 @@ describe('timeline data loading', () => {
       pricing: '3980 Silver Prime',
       title: 'Dreamy Rendezvous',
     })
+    expect(meowch).toMatchObject({
+      category: 'anniversary',
+      endDate: '2026-06-29T01:00:00.000Z',
+      startDate: '2026-05-18T01:00:00.000Z',
+    })
+    expect(meowch?.description).toContain('Entry closes June 15')
+    expect(giftBoxes).toMatchObject({
+      category: 'bundle',
+      pricing: '688-2688 Silver Prime',
+      title: 'New Arrivals Gift Boxes',
+    })
+    expect(giftBoxes?.description).toContain('1280 Silver Prime')
+    expect(preorder).toMatchObject({
+      category: 'preorder',
+      pricing: '1980 Silver Prime',
+      title: 'Pre-order "Unfading Memories"',
+    })
+    expect(season33Login).toMatchObject({
+      category: 'login',
+      endDate: '2026-06-15T01:00:00.000Z',
+      startDate: '2026-05-18T01:00:00.000Z',
+      title: 'Gifts from Mythag',
+    })
+    expect(season34Curriculum).toMatchObject({
+      category: 'curriculum',
+      endDate: '2026-06-29T01:00:00.000Z',
+      startDate: '2026-06-15T01:00:00.000Z',
+      title: 'Curriculum Honor',
+    })
+    expect(season34Curriculum?.description).toContain('doubled EXP')
     expect(collabEvent).toMatchObject({
       category: 'gameplay-event',
       endDate: '2026-08-24T01:00:00.000Z',
@@ -226,6 +264,61 @@ describe('timeline data loading', () => {
     ).toThrow(/empty linked pool/i)
   })
 
+  it('rejects linkedPairs derived pools when a derived SSR awakener lacks an SSR wheel', () => {
+    expect(() =>
+      resolveTimelineBannerDerivedPool(
+        {
+          availabilityTypes: ['LIMITED_TEST_POOL'],
+          linkedPairs: true,
+        },
+        'test-linked-missing-wheel',
+        {
+          awakeners: [
+            {
+              aliases: ['Wheel Owner'],
+              availabilityType: 'LIMITED_TEST_POOL',
+              faction: 'test',
+              id: 'awakener-9001',
+              lineupToken: 'wheel-owner',
+              name: 'Wheel Owner',
+              rarity: 'SSR',
+              realm: 'test',
+              tags: [],
+            },
+            {
+              aliases: ['Missing Wheel'],
+              availabilityType: 'LIMITED_TEST_POOL',
+              faction: 'test',
+              id: 'awakener-9002',
+              lineupToken: 'missing-wheel',
+              name: 'Missing Wheel',
+              rarity: 'SSR',
+              realm: 'test',
+              tags: [],
+            },
+          ],
+          wheels: [
+            {
+              aliases: ['Owned SSR Wheel'],
+              assetId: 'test-wheel',
+              awakener: 'wheel owner',
+              id: 'wheel-9001',
+              lineupToken: 'owned-ssr-wheel',
+              mainstatKey: 'CRIT_RATE',
+              name: 'Owned SSR Wheel',
+              ownerAwakenerId: 'awakener-9001',
+              rarity: 'SSR',
+              realm: 'NEUTRAL',
+              tags: [],
+            },
+          ],
+        },
+      ),
+    ).toThrow(
+      /Timeline banner "test-linked-missing-wheel" linkedPairs derivedPool includes awakeners without SSR wheels: Missing Wheel\./,
+    )
+  })
+
   it('loads Song of Perennial Wandering Hameln rerun teasers', () => {
     const skin = timelineEvents.find((event) => event.id === 'event-skin-hameln')
     const rerunEvent = timelineEvents.find(
@@ -239,7 +332,7 @@ describe('timeline data loading', () => {
       endDate: '2026-06-29T01:00:00.000Z',
       pricing: 'Free',
       startDate: '2026-06-15T01:00:00.000Z',
-      title: 'Ouverture Universell',
+      title: 'Ouvertüre Universell',
     })
     expect(skin?.featured?.map((unit) => unit.name)).toEqual(['Hameln'])
     expect(skin?.customArt).toContain('hameln-skin')

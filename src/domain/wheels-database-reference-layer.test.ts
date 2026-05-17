@@ -1,7 +1,11 @@
 import {describe, expect, it} from 'vitest'
 
 import type {AwakenerOverlayRecord, DerivedSkillRecord} from './awakener-source-schema'
-import {resolveDatabaseOverlay, resolveDatabaseReferenceInfo} from './database-reference-info'
+import {
+  resolveDatabaseOverlay,
+  resolveDatabaseReferenceInfo,
+  resolveDatabaseReferenceInfoById,
+} from './database-reference-info'
 import {buildWheelDatabaseReferenceLayer} from './wheels-database-reference-layer'
 import type {WheelFullRecord} from './wheels-full'
 
@@ -125,5 +129,72 @@ describe('wheels-database-reference-layer', () => {
     })
 
     expect(resolveDatabaseReferenceInfo(referenceLayer, 'Orisons')).toBeNull()
+  })
+
+  it('keeps wheel references ahead of later overlays and derived records for duplicate names and ids', () => {
+    const referenceLayer = buildWheelDatabaseReferenceLayer({
+      activeWheelId: 'wheel-0001',
+      derivedSkills: [
+        {
+          ...buildDerivedSkillRecords()[0],
+          id: 'wheel-0001',
+          displayName: 'Merciful Nurturing',
+        },
+      ],
+      overlays: [
+        {
+          ...buildOverlayRecords()[0],
+          displayName: 'Merciful Nurturing',
+          aliases: ['Status Alias'],
+        },
+      ],
+      wheelRecords: [buildWheelRecord()],
+    })
+
+    expect(resolveDatabaseReferenceInfo(referenceLayer, 'Merciful Nurturing')).toEqual(
+      expect.objectContaining({
+        kind: 'wheel',
+        id: 'wheel-0001',
+      }),
+    )
+    expect(resolveDatabaseReferenceInfoById(referenceLayer, 'wheel-0001')).toEqual(
+      expect.objectContaining({
+        kind: 'wheel',
+        name: 'Merciful Nurturing',
+      }),
+    )
+  })
+
+  it('keeps overlay display names and aliases first-writer-wins', () => {
+    const referenceLayer = buildWheelDatabaseReferenceLayer({
+      activeWheelId: 'wheel-0001',
+      derivedSkills: [],
+      overlays: [
+        ...buildOverlayRecords(),
+        {
+          id: 'overlay.global.status-later',
+          displayName: 'Status Alias',
+          ownerAwakenerId: 999,
+          overlayType: 'mechanic',
+          aliases: ['Status'],
+          descriptionTemplate: 'Later status text.',
+          descriptionArgs: {},
+        },
+      ],
+      wheelRecords: [buildWheelRecord()],
+    })
+
+    expect(resolveDatabaseOverlay(referenceLayer, 'Status Alias')).toEqual(
+      expect.objectContaining({
+        id: 'overlay.global.status',
+        displayName: 'Status',
+      }),
+    )
+    expect(resolveDatabaseReferenceInfo(referenceLayer, 'Status Alias')).toEqual(
+      expect.objectContaining({
+        id: 'overlay.global.status',
+        name: 'Status',
+      }),
+    )
   })
 })

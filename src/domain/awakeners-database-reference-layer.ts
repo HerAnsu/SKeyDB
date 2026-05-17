@@ -1,25 +1,21 @@
 import {getAwakenerOverlays} from './awakener-overlays'
-import {
-  type AwakenerOverlayRecord,
-  type DerivedSkillRecord,
-  type FullStats,
-} from './awakener-source-schema'
+import {type AwakenerOverlayRecord, type DerivedSkillRecord} from './awakener-source-schema'
 import type {
   DatabaseDescribedEntry,
   ResolvedAwakenerDatabaseReferenceLayer,
   ResolvedAwakenerDatabaseShellView,
 } from './awakeners-database-view'
 import {type AwakenerFullRecord} from './awakeners-full'
-import {buildCardKeywordFooterText} from './card-keywords'
 import {
-  addDatabaseReferenceInfoToLookups,
   buildAccessibleDatabaseOverlays,
+  buildDatabaseDerivedSkillReferenceInfo,
   buildDatabaseOverlayLookup,
   buildDatabaseOverlayReferenceInfo,
+  DatabaseReferenceLookupAccumulator,
   type DatabaseReferenceInfo,
 } from './database-reference-layer'
 import {getDerivedSkills} from './derived-skills'
-import {resolveDescribedRecord, type DescribedRecord} from './description-records'
+import {type DescribedRecord} from './description-records'
 import {buildWheelReferenceInfoEntries} from './wheels-database-reference-layer'
 
 type DatabaseReferenceKind = DatabaseReferenceInfo['kind']
@@ -107,49 +103,18 @@ function buildReferenceInfoFromEntry<TRecord extends DescribedRecord>(
   }
 }
 
-function addReferenceInfoToLookups<TRecord extends DescribedRecord>(
-  byName: Map<string, DatabaseReferenceInfo>,
-  byId: Map<string, DatabaseReferenceInfo>,
-  info: DatabaseReferenceInfo<TRecord>,
-  aliases: readonly string[] = [],
-): void {
-  addDatabaseReferenceInfoToLookups(byName, byId, info, aliases)
-}
-
 function addDescribedReferenceInfos<TRecord extends DescribedRecord>(
-  byName: Map<string, DatabaseReferenceInfo>,
-  byId: Map<string, DatabaseReferenceInfo>,
+  accumulator: DatabaseReferenceLookupAccumulator,
   entries: DatabaseDescribedEntry<TRecord>[],
   buildInfo: (entry: DatabaseDescribedEntry<TRecord>) => DatabaseReferenceInfo<TRecord>,
 ): void {
   for (const entry of entries) {
-    addReferenceInfoToLookups(byName, byId, buildInfo(entry))
+    accumulator.add(buildInfo(entry))
   }
 }
 
 function getDerivedSkillLabel(record: DerivedSkillRecord): string {
   return `Derived · ${record.displayName}`
-}
-
-function buildGlobalDerivedReferenceInfo(
-  record: DerivedSkillRecord,
-  skillLevel: number,
-  stats: FullStats | null,
-): DatabaseReferenceInfo<DerivedSkillRecord> {
-  const resolved = resolveDescribedRecord(record, {rank: skillLevel, stats}, {maxRank: 6, stats})
-  return {
-    kind: 'derived-skill',
-    id: record.id,
-    name: record.displayName,
-    label: getDerivedSkillLabel(record),
-    record,
-    description: resolved.description,
-    keywordFooterText: buildCardKeywordFooterText(record.cardKeywords),
-    descriptionRank: skillLevel,
-    descriptionMaxRank: 6,
-    influencingEnlightenSlots: [],
-    influencingTalentIds: [],
-  }
 }
 
 export {buildDatabaseOverlayLabel as buildAwakenerDatabaseOverlayLabel} from './database-reference-layer'
@@ -159,16 +124,15 @@ function buildReferenceLookups(
   accessibleOverlays: AwakenerOverlayRecord[],
   globalDerivedSkills: DerivedSkillRecord[],
 ): {byId: Map<string, DatabaseReferenceInfo>; byName: Map<string, DatabaseReferenceInfo>} {
-  const byName = new Map<string, DatabaseReferenceInfo>()
-  const byId = new Map<string, DatabaseReferenceInfo>()
+  const accumulator = new DatabaseReferenceLookupAccumulator()
 
-  addDescribedReferenceInfos(byName, byId, shellView.commandCards, (entry) =>
+  addDescribedReferenceInfos(accumulator, shellView.commandCards, (entry) =>
     buildReferenceInfoFromEntry('skill', entry),
   )
-  addDescribedReferenceInfos(byName, byId, shellView.exalts, (entry) =>
+  addDescribedReferenceInfos(accumulator, shellView.exalts, (entry) =>
     buildReferenceInfoFromEntry('skill', entry),
   )
-  addDescribedReferenceInfos(byName, byId, shellView.talents, (entry) =>
+  addDescribedReferenceInfos(accumulator, shellView.talents, (entry) =>
     buildReferenceInfoFromEntry('talent', entry, {
       keywordFooterText: undefined,
       influencingEnlightenSlots: [],
@@ -176,7 +140,7 @@ function buildReferenceLookups(
       influenceBadges: [],
     }),
   )
-  addDescribedReferenceInfos(byName, byId, shellView.enlightens, (entry) =>
+  addDescribedReferenceInfos(accumulator, shellView.enlightens, (entry) =>
     buildReferenceInfoFromEntry('enlighten', entry, {
       keywordFooterText: undefined,
       influencingEnlightenSlots: [],
@@ -184,25 +148,25 @@ function buildReferenceLookups(
       influenceBadges: [],
     }),
   )
-  addDescribedReferenceInfos(byName, byId, shellView.derivedSkills, (entry) =>
+  addDescribedReferenceInfos(accumulator, shellView.derivedSkills, (entry) =>
     buildReferenceInfoFromEntry('derived-skill', entry),
   )
-  addDescribedReferenceInfos(byName, byId, shellView.promotedExtras, (entry) =>
+  addDescribedReferenceInfos(accumulator, shellView.promotedExtras, (entry) =>
     buildReferenceInfoFromEntry('derived-skill', entry),
   )
 
   for (const record of globalDerivedSkills) {
-    addReferenceInfoToLookups(
-      byName,
-      byId,
-      buildGlobalDerivedReferenceInfo(record, shellView.skillLevel, shellView.stats),
+    accumulator.add(
+      buildDatabaseDerivedSkillReferenceInfo(record, undefined, {
+        label: getDerivedSkillLabel(record),
+        rank: shellView.skillLevel,
+        stats: shellView.stats,
+      }),
     )
   }
 
   for (const overlay of accessibleOverlays) {
-    addReferenceInfoToLookups(
-      byName,
-      byId,
+    accumulator.add(
       buildDatabaseOverlayReferenceInfo(
         overlay,
         shellView.stats,
@@ -214,10 +178,10 @@ function buildReferenceLookups(
   }
 
   for (const wheelInfo of buildWheelReferenceInfoEntries()) {
-    addReferenceInfoToLookups(byName, byId, wheelInfo, [])
+    accumulator.add(wheelInfo)
   }
 
-  return {byId, byName}
+  return accumulator.toLookups()
 }
 
 export interface BuildAwakenerDatabaseReferenceLayerOptions {

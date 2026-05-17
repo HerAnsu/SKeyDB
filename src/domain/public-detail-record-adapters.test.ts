@@ -308,41 +308,111 @@ describe('public-detail-record-adapters', () => {
   })
 
   it('loads public child detail records with current adapter defaults', async () => {
-    await expect(loadPublicSkillDetailById('skill.thais.ancient-caress')).resolves.toMatchObject({
+    const skill = await loadPublicSkillDetailById('skill.thais.ancient-caress')
+    expect(skill).toMatchObject({
       id: 'skill.thais.ancient-caress',
       displayName: 'Ancient Caress',
       kind: 'command',
       ownerAwakenerId: 48,
-      cardKeywords: expect.any(Array),
-      variants: [],
     })
-    await expect(loadPublicTalentDetailById('talent.thais.madness-omen')).resolves.toMatchObject({
+    expect(skill?.cardKeywords).toEqual([])
+    expect(skill?.variants).toEqual([])
+    expect(skill?.descriptionArgs).toEqual({
+      Arg1: {
+        kind: 'scaling',
+        values: ['15', '16', '17', '18', '19', '20'],
+      },
+      Arg2: {
+        kind: 'scaling',
+        stat: 'ATK',
+        suffix: '%',
+        values: ['2.5', '3', '3.5', '4', '4.5', '5'],
+      },
+    })
+
+    const talent = await loadPublicTalentDetailById('talent.thais.madness-omen')
+    expect(talent).toMatchObject({
       id: 'talent.thais.madness-omen',
       displayName: 'Madness Omen',
       ownerAwakenerId: 48,
+      hasLevelScaledDescription: true,
     })
-    await expect(
-      loadPublicEnlightenDetailById('enlighten.thais.the-birthing-deep'),
-    ).resolves.toMatchObject({
+    expect(talent?.descriptionArgs).toEqual({
+      Arg1: {
+        base: '5',
+        gainPerLevel: '5',
+        kind: 'linear',
+      },
+    })
+
+    const enlighten = await loadPublicEnlightenDetailById('enlighten.thais.the-birthing-deep')
+    expect(enlighten).toMatchObject({
       id: 'enlighten.thais.the-birthing-deep',
       displayName: 'The Birthing Deep',
       ownerAwakenerId: 48,
+      slot: 'AbsoluteAxiom',
     })
-    await expect(
-      loadPublicDerivedSkillDetailById('derived.thais.blood-of-fear'),
-    ).resolves.toMatchObject({
+    expect(enlighten?.descriptionArgs).toEqual({})
+
+    const derived = await loadPublicDerivedSkillDetailById('derived.thais.blood-of-fear')
+    expect(derived).toMatchObject({
       id: 'derived.thais.blood-of-fear',
       displayName: 'Blood of Fear',
       ownerAwakenerId: 48,
-      childDerivedSkillIds: [],
-      variants: [],
     })
-    await expect(loadPublicOverlayDetailById('overlay.xu.spellbound')).resolves.toMatchObject({
+    expect(derived?.cardKeywords).toEqual([])
+    expect(derived?.childDerivedSkillIds).toEqual([])
+    expect(derived?.variants).toEqual([])
+
+    const overlay = await loadPublicOverlayDetailById('overlay.xu.spellbound')
+    expect(overlay).toMatchObject({
       id: 'overlay.xu.spellbound',
       displayName: 'Spellbound',
       ownerAwakenerId: 54,
-      aliases: expect.any(Array),
+      iconId: 'IconS_Buff_080',
+      overlayType: 'mechanic',
     })
+    expect(overlay?.aliases).toEqual([])
+    expect(overlay?.descriptionArgs).toEqual({
+      DescArg1: {
+        kind: 'fixed',
+        suffix: '%',
+        value: '1',
+      },
+      DescArg2: {
+        kind: 'fixed',
+        value: '5',
+      },
+    })
+  })
+
+  it('preserves loose public-only child fields while adapting defaults', async () => {
+    const loadPublicRecordMock = vi.fn(() =>
+      Promise.resolve({
+        schemaVersion: 3,
+        kind: 'skill',
+        id: 'skill.cached.rouse',
+        name: 'Cached Skill',
+        ownerAwakenerId: 'awakener-0001',
+        publicOnlyMarker: 'kept',
+        slot: 'Rouse',
+      } satisfies PublicRecord),
+    )
+    const adapters = await importAdaptersWithPublicRecordMock(loadPublicRecordMock)
+
+    const skill = await adapters.loadPublicSkillDetailById('skill.cached.rouse')
+
+    expect(skill).toMatchObject({
+      id: 'skill.cached.rouse',
+      displayName: 'Cached Skill',
+      ownerAwakenerId: 1,
+      kind: 'rouse',
+      cardKeywords: [],
+      descriptionArgs: {},
+      descriptionTemplate: '',
+      variants: [],
+    })
+    expect((skill as {publicOnlyMarker?: string} | undefined)?.publicOnlyMarker).toBe('kept')
   })
 
   it('returns undefined for missing or malformed public child detail ids', async () => {

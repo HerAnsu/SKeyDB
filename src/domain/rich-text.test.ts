@@ -5,7 +5,11 @@ import {type AwakenerFullRecord} from './awakeners-full'
 import {getAwakenersLite} from './awakeners-lite'
 import {resolveDescribedRecord} from './description-records'
 import {loadPublicAwakenerDetailById} from './public-detail-record-adapters'
-import {parseRichDescription} from './rich-text'
+import {
+  buildRichTextParseContext,
+  parseRichDescription,
+  parseRichDescriptionWithContext,
+} from './rich-text'
 
 const EMPTY_CARDS = new Set<string>()
 
@@ -67,6 +71,42 @@ describe('parseRichDescription', () => {
     expect(result).toEqual([
       {type: 'skill', name: 'Vortex! Shell!'},
       {type: 'text', value: ' triggers.'},
+    ])
+  })
+
+  it('reuses parse context while keeping description args per parse', () => {
+    const context = buildRichTextParseContext(new Set(['Strike']), {
+      overlayMechanicNames: ['Counter Buff'],
+    })
+
+    expect(
+      parseRichDescriptionWithContext('Use {strike} for [Arg1] Counter Buff.', context, {
+        Arg1: {
+          kind: 'fixed',
+          value: '2',
+        },
+      }),
+    ).toEqual([
+      {type: 'text', value: 'Use '},
+      {type: 'skill', name: 'Strike'},
+      {type: 'text', value: ' for '},
+      {type: 'descriptionArg', argKey: 'Arg1', channel: null},
+      {type: 'text', value: ' '},
+      {type: 'mechanic', name: 'Counter Buff'},
+      {type: 'text', value: '.'},
+    ])
+
+    expect(
+      parseRichDescriptionWithContext('Use [Arg2].', context, {
+        Arg1: {
+          kind: 'fixed',
+          value: '2',
+        },
+      }),
+    ).toEqual([
+      {type: 'text', value: 'Use '},
+      {type: 'text', value: '[Arg2]'},
+      {type: 'text', value: '.'},
     ])
   })
 
@@ -552,6 +592,40 @@ describe('parseRichDescription', () => {
       {type: 'text', value: ' '},
       {type: 'argPlural', argKey: 'Arg2', channel: 'Poison', singular: 'stack', plural: 'stacks'},
       {type: 'text', value: '.'},
+    ])
+  })
+
+  it('parses adjacent public V3 arg and macro tokens in priority order', () => {
+    const result = parseRichDescription(
+      '[{Poison}:Arg1]{plural:[{Poison}:Arg1]|stack|stacks}{ordinal:2nd}',
+      EMPTY_CARDS,
+      {
+        Arg1: {
+          kind: 'fixed',
+          value: '2',
+        },
+      },
+    )
+
+    expect(result).toEqual([
+      {type: 'descriptionArg', argKey: 'Arg1', channel: 'Poison'},
+      {type: 'argPlural', argKey: 'Arg1', channel: 'Poison', singular: 'stack', plural: 'stacks'},
+      {type: 'text', value: '2nd'},
+    ])
+  })
+
+  it('keeps unknown public V3 arg tokens literal', () => {
+    const result = parseRichDescription('Gain [Missing] and [Bad-Key].', EMPTY_CARDS, {
+      Arg1: {
+        kind: 'fixed',
+        value: '2',
+      },
+    })
+
+    expect(result).toEqual([
+      {type: 'text', value: 'Gain '},
+      {type: 'text', value: '[Missing]'},
+      {type: 'text', value: ' and [Bad-Key].'},
     ])
   })
 

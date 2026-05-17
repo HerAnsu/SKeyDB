@@ -10,7 +10,7 @@ import type {
   DerivedSkillRecord,
   UpgradePatch,
 } from './awakener-source-schema'
-import {type AwakenerFullRecord} from './awakeners-full'
+import type {AwakenerFullRecord, PublicRecordUpgrade} from './awakeners-full'
 import {resolveAwakenerFullRecord} from './awakeners-full-resolver'
 import {loadPublicAwakenerDetailById} from './public-detail-record-adapters'
 
@@ -392,6 +392,158 @@ describe('awakeners-full-resolver', () => {
         },
       }),
     })
+  })
+
+  it('keeps link-only public upgrades as resolver no-ops', () => {
+    const record = buildRecord()
+    record.cards.C1 = {
+      ...record.cards.C1,
+      upgrades: [
+        {
+          id: 'upgrade.link-only',
+          operation: 'link_only',
+          upgraderId: 'talent.test.base',
+          upgraderType: 'talent',
+          patch: {
+            descriptionTemplate: 'Link-only should not apply payloads',
+          },
+        },
+      ],
+    }
+
+    const resolved = resolveAwakenerFullRecord(record)
+
+    expect(resolved.record.cards.C1.descriptionTemplate).toBe('Strike base')
+    expect(resolved.record.cards.C1.descriptionArgs).toEqual({
+      Arg1: {
+        kind: 'fixed',
+        value: '1',
+      },
+    })
+  })
+
+  it('applies replace-description public upgrades through the generic resolver patch path', () => {
+    const record = buildRecord()
+    record.cards.C1 = {
+      ...record.cards.C1,
+      upgrades: [
+        {
+          id: 'upgrade.replace-description',
+          operation: 'replace_description',
+          upgraderId: 'talent.test.base',
+          upgraderType: 'talent',
+          patch: {
+            descriptionTemplate: 'Strike replaced by talent',
+          },
+        },
+      ],
+    }
+
+    const resolved = resolveAwakenerFullRecord(record)
+
+    expect(resolved.record.cards.C1.descriptionTemplate).toBe('Strike replaced by talent')
+    expect(resolved.record.cards.C1.descriptionArgs).toEqual({
+      Arg1: {
+        kind: 'fixed',
+        value: '1',
+      },
+    })
+  })
+
+  it('applies public card keyword removal payloads', () => {
+    const record = buildRecord()
+    record.cards.C1 = {
+      ...record.cards.C1,
+      cardKeywords: [{id: 'mechanic.retain'}, {id: 'mechanic.prepare', value: 1}],
+      upgrades: [
+        {
+          id: 'upgrade.remove-keyword',
+          operation: 'card_keywords',
+          upgraderId: 'talent.test.base',
+          upgraderType: 'talent',
+          patch: {
+            removeCardKeywordIds: ['mechanic.retain'],
+          },
+        },
+      ],
+    }
+
+    const resolved = resolveAwakenerFullRecord(record)
+
+    expect(resolved.record.cards.C1.cardKeywords).toEqual([{id: 'mechanic.prepare', value: 1}])
+  })
+
+  it('throws when an arg substat patch targets a missing description arg', () => {
+    const record = buildRecord()
+    record.cards.C1 = {
+      ...record.cards.C1,
+      upgrades: [
+        {
+          id: 'upgrade.missing-arg',
+          operation: 'mixed',
+          upgraderId: 'talent.test.base',
+          upgraderType: 'talent',
+          patch: {
+            argSubstatBonuses: {
+              MissingArg: {
+                substat: 'CritRate',
+                multiplier: '1',
+                suffix: '%',
+              },
+            },
+          },
+        },
+      ],
+    }
+
+    expect(() => resolveAwakenerFullRecord(record)).toThrow(
+      'Cannot apply substat bonus patch to missing arg "MissingArg".',
+    )
+  })
+
+  it('keeps unsupported public upgrade operations as no-ops', () => {
+    const record = buildRecord()
+    record.cards.C1 = {
+      ...record.cards.C1,
+      upgrades: [
+        {
+          id: 'upgrade.unsupported',
+          operation: 'unsupported_operation',
+          upgraderId: 'talent.test.base',
+          upgraderType: 'talent',
+          patch: {},
+        },
+      ],
+    }
+
+    const resolved = resolveAwakenerFullRecord(record)
+
+    expect(resolved.record.cards.C1.descriptionTemplate).toBe('Strike base')
+    expect(resolved.record.cards.C1.descriptionArgs).toEqual({
+      Arg1: {
+        kind: 'fixed',
+        value: '1',
+      },
+    })
+  })
+
+  it('throws for malformed override-card-keywords public upgrade payloads', () => {
+    const malformedUpgrade = {
+      id: 'upgrade.bad-keywords',
+      operation: 'override_card_keywords',
+      upgraderId: 'talent.test.base',
+      upgraderType: 'talent',
+      patch: {
+        cardKeywords: 'not-an-array',
+      },
+    } satisfies PublicRecordUpgrade
+    const record = buildRecord()
+    record.cards.C1 = {
+      ...record.cards.C1,
+      upgrades: [malformedUpgrade],
+    }
+
+    expect(() => resolveAwakenerFullRecord(record)).toThrow()
   })
 
   it('keeps soulforge aptitude visible even when its effects are disabled', () => {
