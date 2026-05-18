@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0028",
   "slot": "Skill1",
-  "descriptionTemplate": "Lose [Arg1]% Current HP. {Embryo Fusion}+[Blood:Arg3]%. Obtain [Power:Arg2] Temporary {STR}.",
+  "descriptionTemplate": "Lose [Arg1]% of current HP. {Embryo Fusion}+[Blood:Arg3]. Gain [Power:Arg2] Temporary {STR}.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "fixed",
@@ -18,14 +18,13 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["15", "18", "21", "24", "27", "30"],
+      "values": ["25", "30", "35", "40", "45", "50"],
       "stat": "ATK",
       "suffix": "%"
     },
     "Arg3": {
       "kind": "scaling",
-      "values": ["20", "22", "24", "26", "28", "30"],
-      "suffix": "%"
+      "values": ["20", "22", "24", "26", "28", "30"]
     }
   },
   "cardKeywords": [],
@@ -40,7 +39,7 @@
       "ownerAwakenerId": "awakener-0028",
       "ownerAwakenerName": "Leigh",
       "patch": {
-        "descriptionTemplate": "Lose [Arg1]% Current HP. {Embryo Fusion}+[Blood:Arg3]%. Obtain [Power:Arg2] Temporary {STR}. Gain [Energy:Arg5] Aliemus.",
+        "descriptionTemplate": "Lose [Arg1]% of current HP. {Embryo Fusion}+[Blood:Arg3]. Gain [Power:Arg2] Temporary {STR}. Gain [Energy:Arg5] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "fixed",
@@ -49,14 +48,13 @@
           },
           "Arg2": {
             "kind": "scaling",
-            "values": ["15", "18", "21", "24", "27", "30"],
+            "values": ["25", "30", "35", "40", "45", "50"],
             "stat": "ATK",
             "suffix": "%"
           },
           "Arg3": {
             "kind": "scaling",
-            "values": ["20", "22", "24", "26", "28", "30"],
-            "suffix": "%"
+            "values": ["20", "22", "24", "26", "28", "30"]
           },
           "Arg5": {
             "kind": "fixed",

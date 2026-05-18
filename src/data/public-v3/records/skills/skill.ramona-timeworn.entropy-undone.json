@@ -36,7 +36,7 @@
       "ownerAwakenerId": "awakener-0020",
       "ownerAwakenerName": "Ramona: Timeworn",
       "patch": {
-        "descriptionTemplate": "Ramona: Timeworn gains [Energy:Arg1] Aliemus. {Rouse}: When Ramona: Timeworn plays a card without triggering {Loop}, she gains 1 stack of {Negentropy} and gains [Arg2] Keyflare."
+        "descriptionTemplate": "Ramona: Timeworn gains [Energy:Arg1] Aliemus. {Rouse}: After Ramona: Timeworn plays a card that does not trigger {Loop}, gain 1 stack of {Negentropy} and gain [Arg2] Keyflare. After playing a card that triggers {Loop}, gain 50 Keyflare."
       }
     }
   ],

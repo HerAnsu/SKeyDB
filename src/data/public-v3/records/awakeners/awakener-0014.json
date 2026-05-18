@@ -21,11 +21,11 @@
   "faction": "Out of the Aeons",
   "aliases": ["doresain"],
   "searchTags": ["Vulnerable", "STR Up", "Pierce DMG", "Fixed DMG", "Self-Harm"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 52,
-    "ATK": 55,
-    "DEF": 45
+    "CON": 35,
+    "ATK": 37,
+    "DEF": 31
   },
   "substatsLv1": {
     "CritRate": 5,

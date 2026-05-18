@@ -34,13 +34,13 @@
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
-            "values": ["30", "36", "42", "48", "54", "60"],
+            "values": ["33.75", "40.5", "47.25", "54", "60.75", "67.5"],
             "stat": "ATK",
             "suffix": "%"
           },
           "Arg2": {
             "kind": "fixed",
-            "value": "10",
+            "value": "20",
             "stat": "ATK",
             "suffix": "%"
           }

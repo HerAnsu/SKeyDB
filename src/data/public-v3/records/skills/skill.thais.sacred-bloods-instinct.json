@@ -9,12 +9,11 @@
   },
   "ownerAwakenerId": "awakener-0048",
   "slot": "Skill2",
-  "descriptionTemplate": "{Embryo Fusion} +[Blood:Arg1]%, obtain Keyflare equivalent to 2× Thais's Keyflare Regen. Choose:{Blood of Fear}, {Blood of Decay}, {Blood of Coition}.",
+  "descriptionTemplate": "{Embryo Fusion} +[Blood:Arg1], gain Keyflare equal to 2x Thais's Keyflare Regen. Choose: {Blood of Fear}, {Blood of Decay}, {Blood of Coition}.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": ["30", "32", "34", "36", "38", "40"],
-      "suffix": "%"
+      "values": ["30", "32", "34", "36", "38", "40"]
     }
   },
   "cardKeywords": [],
@@ -29,7 +28,7 @@
       "ownerAwakenerId": "awakener-0048",
       "ownerAwakenerName": "Thais",
       "patch": {
-        "descriptionTemplate": "{Embryo Fusion} +[Blood:Arg1]%, obtain Keyflare equivalent to 2× Thais's Keyflare Regen. Choose:{Blood of Fear}, {Blood of Decay}, {Blood of Coition}."
+        "descriptionTemplate": "{Embryo Fusion} +[Blood:Arg1], gain Keyflare equal to 2x Thais's Keyflare Regen. Choose: {Blood of Fear}, {Blood of Decay}, {Blood of Coition}."
       }
     }
   ],

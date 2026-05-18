@@ -2220,6 +2220,38 @@
         "rarity": "SR",
         "mainstatKey": "KEYFLARE_REGEN"
       }
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0165",
+      "name": "Sakura Reveries",
+      "aliases": [],
+      "tokens": ["mastery", "neutral", "realm", "realm mastery", "reveries", "sakura", "sakura reveries", "ssr"],
+      "fields": {
+        "name": ["Sakura Reveries", "sakura-reveries"],
+        "facet": ["NEUTRAL", "SSR", "REALM_MASTERY", "Realm Mastery"]
+      },
+      "facets": {
+        "realm": "NEUTRAL",
+        "rarity": "SSR",
+        "mainstatKey": "REALM_MASTERY"
+      }
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0166",
+      "name": "To the Stars",
+      "aliases": [],
+      "tokens": ["neutral", "sigil", "sigil yield", "ssr", "stars", "the", "to", "to the stars", "yield"],
+      "fields": {
+        "name": ["To the Stars", "to-the-stars"],
+        "facet": ["NEUTRAL", "SSR", "SIGIL_YIELD", "Sigil Yield"]
+      },
+      "facets": {
+        "realm": "NEUTRAL",
+        "rarity": "SSR",
+        "mainstatKey": "SIGIL_YIELD"
+      }
     }
   ]
 }

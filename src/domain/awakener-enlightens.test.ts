@@ -92,7 +92,7 @@ describe('awakener-enlightens', () => {
     expect(
       (await loadPublicRecord('enlightens', 'enlighten.karen.creamy-frosting'))
         ?.descriptionTemplate,
-    ).toBe("The {Toad Stew}'s {Poison} and HP Recovery effects +25%.")
+    ).toBe('"The {Toad Stew}"\'s {Poison} and HP Recovery effects +50%.')
   })
 
   it('does not synthesize overlay upgrade patches onto aggregate enlightens', () => {

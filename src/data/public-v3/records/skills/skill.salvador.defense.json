@@ -34,7 +34,7 @@
       "ownerAwakenerId": "awakener-0044",
       "ownerAwakenerName": "Salvador",
       "patch": {
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Salvador obtains [Energy:Arg2] Aliemus. Accumulate [Heal:Arg3] {Crimson Furnace} Healing.",
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Salvador obtains [Energy:Arg2] Aliemus. Accumulate [Heal:Arg3] {Crimson Furnace}.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",

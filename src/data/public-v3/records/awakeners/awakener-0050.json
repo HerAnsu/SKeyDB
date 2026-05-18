@@ -21,11 +21,11 @@
   "faction": "Out of the Aeons",
   "aliases": ["tulu"],
   "searchTags": ["STR Up", "STR Down", "Tentacle DMG", "Pierce DMG", "Aftershock", "Dispel", "Divine Realm", "Tentacles"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 53,
-    "ATK": 59,
-    "DEF": 47
+    "CON": 36,
+    "ATK": 40,
+    "DEF": 32
   },
   "substatsLv1": {
     "CritRate": 5,

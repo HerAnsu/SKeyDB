@@ -21,11 +21,11 @@
   "faction": "Among the Stars",
   "aliases": ["doll: inferno", "g-doll"],
   "searchTags": ["Weakness", "Vulnerable", "Poison", "Fixed DMG", "Arithmetica", "Draw", "Heal", "Max HP DMG", "Self-Harm"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 35,
-    "ATK": 28,
-    "DEF": 38
+    "CON": 24,
+    "ATK": 19,
+    "DEF": 26
   },
   "substatsLv1": {
     "CritRate": 5,
@@ -70,7 +70,7 @@
         "kind": "story",
         "title": "Story: I",
         "unlockCondition": "Awakener Level 3",
-        "content": "Before all the truths were revealed, no one suspected that Doll was the true mastermind behind those shocking events.\nAfter all, her presence in Mythag and the Dissolution Front had always been like a pillar and a beacon, an unwavering support for everyone.\nWhen countless stars in the human night sky were dissolved and scattered, this unshakable beacon of humanity was cruelly extinguished, becoming a force in the shadows aligned with darkness.\nTornadoes, floods, earthquakes... These inefficient killings clearly did not align with a genius's plan; she used her undiminished intellect to transform the Silver chip technology she once took pride in into a deadly weapon to \"reshape the world,\" delivering waves of destruction to unseen corners of Mythag.\nWhen she was finally captured, the doll's body could no longer be precisely controlled by her corroded brain. Her once calm face was now filled with a twisted and eerie expression, as if meeting her gaze would drag you into the abyss of madness.\nEveryone unanimously chose to ignore her occasional vague mutterings, even though they might reveal the truth about the world.\nBecause her story once again proved that humans ultimately need meaning to survive."
+        "content": "Before the full truth came to light, no one had ever suspected that Doll could be the true culprit behind that string of sensational incidents.\nAfter all, her presence on the Mythag and Dissolution front lines had always stood like a pillar of strength, a beacon atop a tower—a rock-solid source of reassurance in everyone's hearts.\nWhen countless shining stars of humanity's night sky were shattered and scattered by Dissolution, this once-unwavering beacon of humanity was finally, cruelly, extinguished—transformed into a shadowy agent born of the same Darkness she once opposed.\nTornadoes, floods, earthquakes… inefficient murder clearly didn't suit a genius's plans. With intellect undiminished by even a fraction, she retrofitted the very Silver Technology she had once taken such pride in into lethal weapons for \"moving the world,\" delivering gift after gift of Destruction to places beyond Mythag's sight.\nWhen she was finally captured, her puppet body could no longer be precisely controlled by her corroded mind. That face, once calm as still water, was now rife with twisted, eerie Emotes—as though merely meeting her gaze would plunge one into the abyss of Madness.\nEveryone unanimously chose to ignore her occasionally muddled murmurings, even though they may have truly revealed the truth of the world.\nFor her fate had proven once again that humanity is, in the end, a species that needs meaning to survive."
       },
       {
         "kind": "story",

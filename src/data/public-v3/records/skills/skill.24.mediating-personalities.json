@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0001",
   "slot": "Rouse",
-  "descriptionTemplate": "\"24\" gains [Energy:Arg1] Aliemus. {Rouse}:\n{Chaos}: The Crit. Rate and Crit. DMG of \"24\" +[StateArg4]%. Each time a Posse is used, the Exalt DMG of \"24\" +[StateArg1].\n{Aequor}: The DMG \"24\" deals enjoys a [StateArg2]% {Tentacle DMG} bonus and inflicts {Poison} equal to 10% of DMG dealt. \"24\"'s Exalt can trigger 50% {Poison} on enemies.\n{Caro}: For every 1 Arithmetica \"24\" consumes, {Embryo Fusion} +5%, \"24\" gains [StateArg3] {STR}.\n{Ultra}: The DMG \"24\" deals enjoys a [StateArg5]% {Counter} DMG Bonus. Shuffle 1 \"Insight\" into the Discard Pile at turn end, Hand Limit +2.",
+  "descriptionTemplate": "\"24\" gains [Energy:Arg1] Aliemus. {Rouse}:\n{Chaos}: The Crit. Rate and Crit. DMG of \"24\" +[StateArg4]%. Each time a Posse is used, the Exalt Base DMG of \"24\" +[StateArg1]%.\n{Aequor}: The DMG \"24\" deals enjoys a [StateArg2]% {Tentacle DMG} bonus and inflicts {Poison} equal to 10% of DMG dealt. \"24\"'s Exalt can trigger 50% {Poison} on enemies.\n{Caro}: For every 1 Arithmetica \"24\" consumes, {Embryo Fusion} +5, \"24\" gains [StateArg3] {STR}. Her Exalt enjoys an additional 300% {STR} bonus.\n{Ultra}: The DMG \"24\" deals enjoys a [StateArg5]% {Counter} DMG Bonus. Shuffle 1 \"Insight\" into the Discard Pile at turn end, Hand Limit +2.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
@@ -17,8 +17,7 @@
     },
     "StateArg1": {
       "kind": "scaling",
-      "values": ["50", "60", "70", "80", "90", "100"],
-      "stat": "ATK",
+      "values": ["25", "30", "35", "40", "45", "50"],
       "suffix": "%"
     },
     "StateArg2": {
@@ -28,7 +27,7 @@
     },
     "StateArg3": {
       "kind": "scaling",
-      "values": ["1", "1.2", "1.4", "1.6", "1.8", "2"],
+      "values": ["2", "2.4", "2.8", "3.2", "3.6", "4"],
       "stat": "ATK",
       "suffix": "%"
     },

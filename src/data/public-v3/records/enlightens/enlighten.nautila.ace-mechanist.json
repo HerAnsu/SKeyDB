@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0036",
   "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Maintenance Expert} is enhanced: All Awakeners' Fixed {Counter} +25%.",
+  "descriptionTemplate": "{Rouse} {Maintenance Expert} is enhanced: All Awakeners' Fixed {Counter} +30%.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Nautila"
 }

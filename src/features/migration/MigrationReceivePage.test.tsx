@@ -31,14 +31,16 @@ const TARGET_LOCATION = {
   hostname: 'skeydb.com',
   protocol: 'https:',
   port: '',
-} satisfies Pick<Location, 'origin' | 'hostname' | 'protocol' | 'port'>
+  pathname: '/',
+} satisfies Pick<Location, 'origin' | 'hostname' | 'protocol' | 'port' | 'pathname'>
 
 const OLD_LOCATION = {
   origin: 'https://dansa.github.io',
   hostname: 'dansa.github.io',
   protocol: 'https:',
   port: '',
-} satisfies Pick<Location, 'origin' | 'hostname' | 'protocol' | 'port'>
+  pathname: '/SKeyDB/',
+} satisfies Pick<Location, 'origin' | 'hostname' | 'protocol' | 'port' | 'pathname'>
 
 function makeSnapshot(): DomainStorageMigrationSnapshot {
   return {
@@ -66,7 +68,7 @@ function renderReceivePage({
 }: {
   storage?: StorageLike | null
   openWindow?: (url: string, target: string) => unknown
-  locationLike?: Pick<Location, 'origin' | 'hostname' | 'protocol' | 'port'>
+  locationLike?: Pick<Location, 'origin' | 'hostname' | 'protocol' | 'port' | 'pathname'>
 } = {}) {
   render(
     <MigrationReceivePage
@@ -85,13 +87,25 @@ describe('MigrationReceivePage', () => {
   it('sends users to the new domain when opened from GitHub Pages', () => {
     const {openWindow} = renderReceivePage({locationLike: OLD_LOCATION})
 
-    expect(screen.getByText(/start from skeydb\.com/i)).toBeInTheDocument()
+    expect(screen.getByText(/manual transfer from github pages/i)).toBeInTheDocument()
     expect(screen.getByRole('link', {name: /open skeydb.com/i})).toHaveAttribute(
       'href',
       'https://skeydb.com/#/migrate',
     )
     expect(screen.queryByRole('button', {name: /start transfer/i})).not.toBeInTheDocument()
     expect(openWindow).not.toHaveBeenCalled()
+  })
+
+  it('shows a manual transfer code when GitHub Pages is opened directly', () => {
+    const storage = new MemoryStorage()
+    storage.setItem('skeydb.builder.allowDupes.v1', '1')
+
+    renderReceivePage({locationLike: OLD_LOCATION, storage})
+
+    expect(screen.getByText(/copy this transfer code/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/transfer code/i)).toHaveDisplayValue(
+      /skeydb.builder.allowDupes.v1/,
+    )
   })
 
   it('explains the transfer before asking users to start', () => {
@@ -103,6 +117,10 @@ describe('MigrationReceivePage', () => {
     expect(screen.getByText(/nothing is deleted from github pages/i)).toBeInTheDocument()
     expect(screen.getByText(/skeydb opens your old github pages save/i)).toBeInTheDocument()
     expect(screen.getByText(/review what will be moved/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', {name: /open github pages manual transfer/i})).toHaveAttribute(
+      'href',
+      'https://dansa.github.io/SKeyDB/#/migrate/export',
+    )
   })
 
   it('opens the legacy export route with nonce and target origin', () => {
@@ -207,7 +225,6 @@ describe('MigrationReceivePage', () => {
   it('can review a pasted fallback transfer code', async () => {
     renderReceivePage()
 
-    fireEvent.click(screen.getByText(/paste a transfer code/i))
     fireEvent.change(screen.getByLabelText(/paste transfer code/i), {
       target: {value: JSON.stringify(makeSnapshot())},
     })
@@ -220,7 +237,6 @@ describe('MigrationReceivePage', () => {
   it('rejects pasted transfer codes from unsupported source origins', () => {
     renderReceivePage()
 
-    fireEvent.click(screen.getByText(/paste a transfer code/i))
     fireEvent.change(screen.getByLabelText(/paste transfer code/i), {
       target: {value: JSON.stringify(makeSnapshotFrom('https://evil.example'))},
     })

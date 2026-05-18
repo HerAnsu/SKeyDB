@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "kind": "talent",
-  "id": "talent.arachne.threads-of-fate",
-  "name": "Threads of Fate",
+  "id": "talent.arachne.destined-threads",
+  "name": "Destined Threads",
   "route": {
-    "slug": "threads-of-fate",
-    "canonicalPath": "/database/awakeners/arachne/talents/threads-of-fate"
+    "slug": "destined-threads",
+    "canonicalPath": "/database/awakeners/arachne/talents/destined-threads"
   },
   "ownerAwakenerId": "awakener-0056",
   "family": "passive",

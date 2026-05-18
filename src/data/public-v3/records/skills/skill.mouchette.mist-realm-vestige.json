@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0033",
   "slot": "Rouse",
-  "descriptionTemplate": "Mouchette gains [Energy:Arg1] Aliemus. {Rouse}: {Dramatic Encounter} DMG count +2. Each time {Dramatic Encounter} triggers, Mouchette's \"Strike\" Temporary Final DMG +25%.",
+  "descriptionTemplate": "Mouchette gains [Energy:Arg1] Aliemus. {Rouse}: {Dramatic Encounter} DMG instances +2. Each time {Dramatic Encounter} is triggered, Mouchette's \"Strike\" Temporary Final DMG +25%. Immediately generate 1 Temporary {Mortal Blast}.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",

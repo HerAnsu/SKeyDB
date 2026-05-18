@@ -34,7 +34,7 @@
       "ownerAwakenerId": "awakener-0030",
       "ownerAwakenerName": "Liz",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Liz obtains [Energy:Arg2] Aliemus. {Leap}: Apply [Arg3]% DMG {Poison}.",
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Liz gains [Energy:Arg2] Aliemus, inflict {Poison} equal to [Arg3]% of the DMG dealt.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",

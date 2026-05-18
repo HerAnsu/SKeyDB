@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0049",
   "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Voices from Beyond} is enhanced: The first time Tinct plays a \"Skill\" each turn, generate 1 Temporary \"Strike\" with 0 Arithmetica Cost.",
+  "descriptionTemplate": "{Rouse} {Voices from Beyond} is enhanced: The first time Tinct plays a \"Skill\" each turn, generate 1 Temporary \"Strike\" with 0 Arithmetica Cost, the random effects of this \"Strike\" is doubled.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Tinct"
 }

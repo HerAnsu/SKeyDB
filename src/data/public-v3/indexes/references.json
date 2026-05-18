@@ -1597,6 +1597,12 @@
         "id": "derived.hameln.descending-scale"
       }
     ],
+    "destined threads": [
+      {
+        "kind": "talent",
+        "id": "talent.arachne.destined-threads"
+      }
+    ],
     "destiny as i arrange": [
       {
         "kind": "enlighten",
@@ -3145,6 +3151,12 @@
         "id": "awakener-build-0022"
       }
     ],
+    "hanafubuki": [
+      {
+        "kind": "derivedSkill",
+        "id": "derived.global.hanafubuki"
+      }
+    ],
     "hand of oblivion": [
       {
         "kind": "wheel",
@@ -3431,6 +3443,12 @@
       {
         "kind": "enlighten",
         "id": "enlighten.24.hysteria"
+      }
+    ],
+    "ichigo ichie": [
+      {
+        "kind": "derivedSkill",
+        "id": "derived.global.ichigo-ichie"
       }
     ],
     "illusions end": [
@@ -5611,6 +5629,18 @@
         "id": "wheel-0058"
       }
     ],
+    "sakura blossoms": [
+      {
+        "kind": "derivedSkill",
+        "id": "derived.global.sakura-blossoms"
+      }
+    ],
+    "sakura reveries": [
+      {
+        "kind": "wheel",
+        "id": "wheel-0165"
+      }
+    ],
     "salvador": [
       {
         "kind": "awakener",
@@ -6637,12 +6667,6 @@
         "id": "derived.daffodil.thousand-mirage-poison"
       }
     ],
-    "threads of fate": [
-      {
-        "kind": "talent",
-        "id": "talent.arachne.threads-of-fate"
-      }
-    ],
     "thus spoke the outcast": [
       {
         "kind": "enlighten",
@@ -6725,6 +6749,12 @@
       {
         "kind": "enlighten",
         "id": "enlighten.faros.to-the-radiant-shore"
+      }
+    ],
+    "to the stars": [
+      {
+        "kind": "wheel",
+        "id": "wheel-0166"
       }
     ],
     "toad stew": [
@@ -7199,6 +7229,12 @@
       {
         "kind": "skill",
         "id": "skill.uvhash.vermilion-rite"
+      }
+    ],
+    "vernal message": [
+      {
+        "kind": "derivedSkill",
+        "id": "derived.global.vernal-message"
       }
     ],
     "victory of roses": [
@@ -8053,6 +8089,232 @@
       {
         "kind": "skill",
         "id": "skill.uvhash.gift-of-surging-blood"
+      }
+    ],
+    "gnostic potential": [
+      {
+        "kind": "talent",
+        "id": "talent.24.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.agrippa.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.aigis.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.alva.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.arachne.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.aurita.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.caecus.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.casiah.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.castor.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.celeste.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.clementine.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.corposant.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.daffodil.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.doll-inferno.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.doll.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.doresain.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.erica.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.faint.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.faros.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.goliath.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.hameln.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.helot-catena.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.helot.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.horla.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.jenkins.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.karen.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.kathigu-ra.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.leigh.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.lily.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.liz.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.lotan.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.miryam.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.mouchette.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.murphy-fauxborn.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.murphy.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.nautila.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.nymphaea.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.ogier.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.pandia.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.pickman.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.pollux.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.ramona-timeworn.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.ramona.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.ryker.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.salvador.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.sanga.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.sorel.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.tawil.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.thais.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.tinct.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.tulu.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.uvhash.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.vortice.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.wanda.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.winkle.gnostic-potential"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.xu.gnostic-potential"
       }
     ],
     "gotcha": [

@@ -21,11 +21,11 @@
   "faction": "The Unknowable",
   "aliases": ["hameln"],
   "searchTags": ["Weakness", "Vulnerable", "Poison", "Bleed", "STR Up", "STR Down", "Steal STR", "Pierce DMG", "Arithmetica"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 47,
-    "ATK": 49,
-    "DEF": 45
+    "CON": 32,
+    "ATK": 33,
+    "DEF": 31
   },
   "substatsLv1": {
     "CritRate": 5.8,

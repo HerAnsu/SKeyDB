@@ -22,7 +22,7 @@
         "skill.24.symbiotic-aberration",
         "skill.24.twisted-carrion-revel"
       ],
-      "ownedTalents": ["talent.24.madness-omen", "talent.24.soulforge-aptitude"],
+      "ownedTalents": ["talent.24.gnostic-potential", "talent.24.madness-omen", "talent.24.soulforge-aptitude"],
       "ownedWheels": ["wheel-0020"]
     },
     "awakener-0002": {
@@ -45,7 +45,12 @@
         "skill.agrippa.reluctant-alms",
         "skill.agrippa.strike"
       ],
-      "ownedTalents": ["talent.agrippa.madness-omen", "talent.agrippa.seal-of-the-pact", "talent.agrippa.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.agrippa.gnostic-potential",
+        "talent.agrippa.madness-omen",
+        "talent.agrippa.seal-of-the-pact",
+        "talent.agrippa.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0007"]
     },
     "awakener-0003": {
@@ -68,7 +73,7 @@
         "skill.aigis.stagnant-curse",
         "skill.aigis.strike"
       ],
-      "ownedTalents": ["talent.aigis.madness-omen", "talent.aigis.soulforge-aptitude"],
+      "ownedTalents": ["talent.aigis.gnostic-potential", "talent.aigis.madness-omen", "talent.aigis.soulforge-aptitude"],
       "ownedWheels": ["wheel-0003"]
     },
     "awakener-0004": {
@@ -90,7 +95,7 @@
         "skill.alva.precision-slash",
         "skill.alva.strike"
       ],
-      "ownedTalents": ["talent.alva.dynamic-vision", "talent.alva.madness-omen", "talent.alva.soulforge-aptitude"],
+      "ownedTalents": ["talent.alva.dynamic-vision", "talent.alva.gnostic-potential", "talent.alva.madness-omen", "talent.alva.soulforge-aptitude"],
       "ownedWheels": ["wheel-0025"]
     },
     "awakener-0005": {
@@ -113,7 +118,7 @@
         "skill.aurita.self-proliferation",
         "skill.aurita.strike"
       ],
-      "ownedTalents": ["talent.aurita.happy-little-fairy", "talent.aurita.madness-omen", "talent.aurita.soulforge-aptitude"],
+      "ownedTalents": ["talent.aurita.gnostic-potential", "talent.aurita.happy-little-fairy", "talent.aurita.madness-omen", "talent.aurita.soulforge-aptitude"],
       "ownedWheels": ["wheel-0054"]
     },
     "awakener-0006": {
@@ -135,7 +140,7 @@
         "skill.caecus.strike",
         "skill.caecus.unbending-resolve"
       ],
-      "ownedTalents": ["talent.caecus.madness-omen", "talent.caecus.rebellious-spikes", "talent.caecus.soulforge-aptitude"],
+      "ownedTalents": ["talent.caecus.gnostic-potential", "talent.caecus.madness-omen", "talent.caecus.rebellious-spikes", "talent.caecus.soulforge-aptitude"],
       "ownedWheels": ["wheel-0053"]
     },
     "awakener-0007": {
@@ -157,7 +162,7 @@
         "skill.casiah.telekinesis",
         "skill.casiah.unfettered-mirth"
       ],
-      "ownedTalents": ["talent.casiah.madness-omen", "talent.casiah.master-of-magic", "talent.casiah.soulforge-aptitude"],
+      "ownedTalents": ["talent.casiah.gnostic-potential", "talent.casiah.madness-omen", "talent.casiah.master-of-magic", "talent.casiah.soulforge-aptitude"],
       "ownedWheels": ["wheel-0038"]
     },
     "awakener-0008": {
@@ -182,7 +187,7 @@
         "skill.castor.stygian-wings",
         "skill.castor.umbral-flight"
       ],
-      "ownedTalents": ["talent.castor.cleansing-feathers", "talent.castor.madness-omen", "talent.castor.soulforge-aptitude"],
+      "ownedTalents": ["talent.castor.cleansing-feathers", "talent.castor.gnostic-potential", "talent.castor.madness-omen", "talent.castor.soulforge-aptitude"],
       "ownedWheels": ["wheel-0039"]
     },
     "awakener-0009": {
@@ -205,7 +210,7 @@
         "skill.celeste.tintless-dream",
         "skill.celeste.undying-bird-of-paradise"
       ],
-      "ownedTalents": ["talent.celeste.madness-omen", "talent.celeste.soulforge-aptitude", "talent.celeste.voyage-horn"],
+      "ownedTalents": ["talent.celeste.gnostic-potential", "talent.celeste.madness-omen", "talent.celeste.soulforge-aptitude", "talent.celeste.voyage-horn"],
       "ownedWheels": ["wheel-0058"]
     },
     "awakener-0010": {
@@ -229,7 +234,12 @@
         "skill.clementine.strike",
         "skill.clementine.subconscious-corrosion"
       ],
-      "ownedTalents": ["talent.clementine.hive-resonance", "talent.clementine.madness-omen", "talent.clementine.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.clementine.gnostic-potential",
+        "talent.clementine.hive-resonance",
+        "talent.clementine.madness-omen",
+        "talent.clementine.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0041"]
     },
     "awakener-0011": {
@@ -253,7 +263,12 @@
         "skill.corposant.sunken-in-the-profound",
         "skill.corposant.to-sail-the-sundered-tides"
       ],
-      "ownedTalents": ["talent.corposant.cinders", "talent.corposant.madness-omen", "talent.corposant.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.corposant.cinders",
+        "talent.corposant.gnostic-potential",
+        "talent.corposant.madness-omen",
+        "talent.corposant.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0059"]
     },
     "awakener-0012": {
@@ -312,7 +327,7 @@
         "skill.daffodil.skull-reaver",
         "skill.daffodil.strike"
       ],
-      "ownedTalents": ["talent.daffodil.madness-omen", "talent.daffodil.soulforge-aptitude"],
+      "ownedTalents": ["talent.daffodil.gnostic-potential", "talent.daffodil.madness-omen", "talent.daffodil.soulforge-aptitude"],
       "ownedWheels": ["wheel-0031"]
     },
     "awakener-0013": {
@@ -334,7 +349,7 @@
         "skill.doll.rationality-truth-and-reality",
         "skill.doll.strike"
       ],
-      "ownedTalents": ["talent.doll.gnosis-deconstruction", "talent.doll.madness-omen", "talent.doll.soulforge-aptitude"],
+      "ownedTalents": ["talent.doll.gnosis-deconstruction", "talent.doll.gnostic-potential", "talent.doll.madness-omen", "talent.doll.soulforge-aptitude"],
       "ownedWheels": ["wheel-0015"]
     },
     "awakener-0014": {
@@ -361,6 +376,7 @@
       "ownedTalents": [
         "talent.doresain.casket-harvest",
         "talent.doresain.festering-grace",
+        "talent.doresain.gnostic-potential",
         "talent.doresain.madness-omen",
         "talent.doresain.soulforge-aptitude"
       ],
@@ -387,7 +403,7 @@
         "skill.erica.strike",
         "skill.erica.unleash-mecha"
       ],
-      "ownedTalents": ["talent.erica.external-power-source", "talent.erica.madness-omen", "talent.erica.soulforge-aptitude"],
+      "ownedTalents": ["talent.erica.external-power-source", "talent.erica.gnostic-potential", "talent.erica.madness-omen", "talent.erica.soulforge-aptitude"],
       "ownedWheels": ["wheel-0037"]
     },
     "awakener-0016": {
@@ -409,7 +425,7 @@
         "skill.faint.sprouting-bud",
         "skill.faint.strike"
       ],
-      "ownedTalents": ["talent.faint.madness-omen", "talent.faint.secondary-swaddle", "talent.faint.soulforge-aptitude"],
+      "ownedTalents": ["talent.faint.gnostic-potential", "talent.faint.madness-omen", "talent.faint.secondary-swaddle", "talent.faint.soulforge-aptitude"],
       "ownedWheels": ["wheel-0010"]
     },
     "awakener-0017": {
@@ -431,7 +447,7 @@
         "skill.faros.ocean-of-elation",
         "skill.faros.strike"
       ],
-      "ownedTalents": ["talent.faros.homesick", "talent.faros.madness-omen", "talent.faros.soulforge-aptitude"],
+      "ownedTalents": ["talent.faros.gnostic-potential", "talent.faros.homesick", "talent.faros.madness-omen", "talent.faros.soulforge-aptitude"],
       "ownedWheels": ["wheel-0052"]
     },
     "awakener-0018": {
@@ -461,7 +477,12 @@
         "skill.doll-inferno.strike",
         "skill.doll-inferno.terminal-of-truth-and-abyss"
       ],
-      "ownedTalents": ["talent.doll-inferno.madness-omen", "talent.doll-inferno.path-of-annihilation", "talent.doll-inferno.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.doll-inferno.gnostic-potential",
+        "talent.doll-inferno.madness-omen",
+        "talent.doll-inferno.path-of-annihilation",
+        "talent.doll-inferno.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0016"]
     },
     "awakener-0019": {
@@ -485,7 +506,7 @@
         "skill.helot-catena.sanguine-fetters",
         "skill.helot-catena.strike"
       ],
-      "ownedTalents": ["talent.helot-catena.madness-omen", "talent.helot-catena.soulforge-aptitude"],
+      "ownedTalents": ["talent.helot-catena.gnostic-potential", "talent.helot-catena.madness-omen", "talent.helot-catena.soulforge-aptitude"],
       "ownedWheels": ["wheel-0006"]
     },
     "awakener-0020": {
@@ -510,7 +531,12 @@
         "skill.ramona-timeworn.sight-unbound",
         "skill.ramona-timeworn.strike"
       ],
-      "ownedTalents": ["talent.ramona-timeworn.madness-omen", "talent.ramona-timeworn.silverheart-resonance", "talent.ramona-timeworn.soulforge-aptitude"]
+      "ownedTalents": [
+        "talent.ramona-timeworn.gnostic-potential",
+        "talent.ramona-timeworn.madness-omen",
+        "talent.ramona-timeworn.silverheart-resonance",
+        "talent.ramona-timeworn.soulforge-aptitude"
+      ]
     },
     "awakener-0021": {
       "awakenerBuilds": ["awakener-build-0021"],
@@ -533,7 +559,7 @@
         "skill.goliath.preemptive-revenge",
         "skill.goliath.strike"
       ],
-      "ownedTalents": ["talent.goliath.madness-omen", "talent.goliath.soulforge-aptitude"],
+      "ownedTalents": ["talent.goliath.gnostic-potential", "talent.goliath.madness-omen", "talent.goliath.soulforge-aptitude"],
       "ownedWheels": ["wheel-0055"]
     },
     "awakener-0022": {
@@ -557,7 +583,7 @@
         "skill.hameln.strike",
         "skill.hameln.the-final-sonata"
       ],
-      "ownedTalents": ["talent.hameln.madness-omen", "talent.hameln.soulforge-aptitude"],
+      "ownedTalents": ["talent.hameln.gnostic-potential", "talent.hameln.madness-omen", "talent.hameln.soulforge-aptitude"],
       "ownedWheels": ["wheel-0040"]
     },
     "awakener-0023": {
@@ -580,7 +606,7 @@
         "skill.helot.surviving-impasse",
         "skill.helot.vengeance-upon-thee"
       ],
-      "ownedTalents": ["talent.helot.madness-omen", "talent.helot.pain-sigil", "talent.helot.soulforge-aptitude"],
+      "ownedTalents": ["talent.helot.gnostic-potential", "talent.helot.madness-omen", "talent.helot.pain-sigil", "talent.helot.soulforge-aptitude"],
       "ownedWheels": ["wheel-0005"]
     },
     "awakener-0024": {
@@ -611,7 +637,7 @@
         "skill.horla.resplendent-chapters",
         "skill.horla.snarl-psalm"
       ],
-      "ownedTalents": ["talent.horla.madness-omen", "talent.horla.soulforge-aptitude", "talent.horla.writing-with-feeling"],
+      "ownedTalents": ["talent.horla.gnostic-potential", "talent.horla.madness-omen", "talent.horla.soulforge-aptitude", "talent.horla.writing-with-feeling"],
       "ownedWheels": ["wheel-0035"]
     },
     "awakener-0025": {
@@ -634,7 +660,7 @@
         "skill.jenkins.spatial-fold",
         "skill.jenkins.strike"
       ],
-      "ownedTalents": ["talent.jenkins.a-common-enemy", "talent.jenkins.madness-omen", "talent.jenkins.soulforge-aptitude"],
+      "ownedTalents": ["talent.jenkins.a-common-enemy", "talent.jenkins.gnostic-potential", "talent.jenkins.madness-omen", "talent.jenkins.soulforge-aptitude"],
       "ownedWheels": ["wheel-0036"]
     },
     "awakener-0026": {
@@ -657,7 +683,7 @@
         "skill.karen.strike",
         "skill.karen.toad-stew"
       ],
-      "ownedTalents": ["talent.karen.madness-omen", "talent.karen.soulforge-aptitude"],
+      "ownedTalents": ["talent.karen.gnostic-potential", "talent.karen.madness-omen", "talent.karen.soulforge-aptitude"],
       "ownedWheels": ["wheel-0026"]
     },
     "awakener-0027": {
@@ -682,7 +708,12 @@
         "skill.kathigu-ra.strike",
         "skill.kathigu-ra.world-ending-inferno"
       ],
-      "ownedTalents": ["talent.kathigu-ra.madness-omen", "talent.kathigu-ra.soulforge-aptitude", "talent.kathigu-ra.the-living-flame"],
+      "ownedTalents": [
+        "talent.kathigu-ra.gnostic-potential",
+        "talent.kathigu-ra.madness-omen",
+        "talent.kathigu-ra.soulforge-aptitude",
+        "talent.kathigu-ra.the-living-flame"
+      ],
       "ownedWheels": ["wheel-0028"]
     },
     "awakener-0028": {
@@ -704,7 +735,7 @@
         "skill.leigh.sanguivore",
         "skill.leigh.strike"
       ],
-      "ownedTalents": ["talent.leigh.madness-omen", "talent.leigh.soulforge-aptitude"],
+      "ownedTalents": ["talent.leigh.gnostic-potential", "talent.leigh.madness-omen", "talent.leigh.soulforge-aptitude"],
       "ownedWheels": ["wheel-0009"]
     },
     "awakener-0029": {
@@ -728,7 +759,7 @@
         "skill.lily.strike-to-protect",
         "skill.lily.undying-flower-upon-slime"
       ],
-      "ownedTalents": ["talent.lily.madness-omen", "talent.lily.soulforge-aptitude", "talent.lily.surging-darkness"],
+      "ownedTalents": ["talent.lily.gnostic-potential", "talent.lily.madness-omen", "talent.lily.soulforge-aptitude", "talent.lily.surging-darkness"],
       "ownedWheels": ["wheel-0024"]
     },
     "awakener-0030": {
@@ -752,7 +783,7 @@
         "skill.liz.omens-descent",
         "skill.liz.strike"
       ],
-      "ownedTalents": ["talent.liz.madness-omen", "talent.liz.soulforge-aptitude"],
+      "ownedTalents": ["talent.liz.gnostic-potential", "talent.liz.madness-omen", "talent.liz.soulforge-aptitude"],
       "ownedWheels": ["wheel-0030"]
     },
     "awakener-0031": {
@@ -774,7 +805,7 @@
         "skill.lotan.tides-of-hubris",
         "skill.lotan.until-the-planets-end"
       ],
-      "ownedTalents": ["talent.lotan.madness-omen", "talent.lotan.soulforge-aptitude"],
+      "ownedTalents": ["talent.lotan.gnostic-potential", "talent.lotan.madness-omen", "talent.lotan.soulforge-aptitude"],
       "ownedWheels": ["wheel-0018"]
     },
     "awakener-0032": {
@@ -810,7 +841,7 @@
         "skill.miryam.the-chosen-one",
         "skill.miryam.unacquainted-pain"
       ],
-      "ownedTalents": ["talent.miryam.madness-omen", "talent.miryam.soulforge-aptitude", "talent.miryam.undying-piety"],
+      "ownedTalents": ["talent.miryam.gnostic-potential", "talent.miryam.madness-omen", "talent.miryam.soulforge-aptitude", "talent.miryam.undying-piety"],
       "ownedWheels": ["wheel-0056"]
     },
     "awakener-0033": {
@@ -834,7 +865,12 @@
         "skill.mouchette.strike",
         "skill.mouchette.tornado-of-annihilation"
       ],
-      "ownedTalents": ["talent.mouchette.dramatic-encounter", "talent.mouchette.madness-omen", "talent.mouchette.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.mouchette.dramatic-encounter",
+        "talent.mouchette.gnostic-potential",
+        "talent.mouchette.madness-omen",
+        "talent.mouchette.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0029"]
     },
     "awakener-0034": {
@@ -856,7 +892,7 @@
         "skill.murphy.strike",
         "skill.murphy.vortex-reversed"
       ],
-      "ownedTalents": ["talent.murphy.madness-omen", "talent.murphy.soulforge-aptitude"],
+      "ownedTalents": ["talent.murphy.gnostic-potential", "talent.murphy.madness-omen", "talent.murphy.soulforge-aptitude"],
       "ownedWheels": ["wheel-0051"]
     },
     "awakener-0035": {
@@ -879,7 +915,12 @@
         "skill.murphy-fauxborn.tidal-sacrament",
         "skill.murphy-fauxborn.waltz-of-lemuria"
       ],
-      "ownedTalents": ["talent.murphy-fauxborn.divine-realms-order", "talent.murphy-fauxborn.madness-omen", "talent.murphy-fauxborn.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.murphy-fauxborn.divine-realms-order",
+        "talent.murphy-fauxborn.gnostic-potential",
+        "talent.murphy-fauxborn.madness-omen",
+        "talent.murphy-fauxborn.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0131"]
     },
     "awakener-0036": {
@@ -901,7 +942,12 @@
         "skill.nautila.strike",
         "skill.nautila.vroom-vroom"
       ],
-      "ownedTalents": ["talent.nautila.daily-maintenance", "talent.nautila.madness-omen", "talent.nautila.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.nautila.daily-maintenance",
+        "talent.nautila.gnostic-potential",
+        "talent.nautila.madness-omen",
+        "talent.nautila.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0021"]
     },
     "awakener-0037": {
@@ -923,7 +969,7 @@
         "skill.nymphaea.passage-of-the-ego",
         "skill.nymphaea.strike"
       ],
-      "ownedTalents": ["talent.nymphaea.immerse", "talent.nymphaea.madness-omen", "talent.nymphaea.soulforge-aptitude"],
+      "ownedTalents": ["talent.nymphaea.gnostic-potential", "talent.nymphaea.immerse", "talent.nymphaea.madness-omen", "talent.nymphaea.soulforge-aptitude"],
       "ownedWheels": ["wheel-0022"]
     },
     "awakener-0038": {
@@ -946,7 +992,7 @@
         "skill.ogier.strike",
         "skill.ogier.unstable-barrier"
       ],
-      "ownedTalents": ["talent.ogier.formless-refinement", "talent.ogier.madness-omen", "talent.ogier.soulforge-aptitude"],
+      "ownedTalents": ["talent.ogier.formless-refinement", "talent.ogier.gnostic-potential", "talent.ogier.madness-omen", "talent.ogier.soulforge-aptitude"],
       "ownedWheels": ["wheel-0017"]
     },
     "awakener-0039": {
@@ -968,7 +1014,7 @@
         "skill.pandia.wax-hot-desire",
         "skill.pandia.whip-of-madness"
       ],
-      "ownedTalents": ["talent.pandia.madness-omen", "talent.pandia.punishment-time", "talent.pandia.soulforge-aptitude"],
+      "ownedTalents": ["talent.pandia.gnostic-potential", "talent.pandia.madness-omen", "talent.pandia.punishment-time", "talent.pandia.soulforge-aptitude"],
       "ownedWheels": ["wheel-0023"]
     },
     "awakener-0040": {
@@ -993,7 +1039,7 @@
         "skill.pickman.strike",
         "skill.pickman.truth-in-delusion"
       ],
-      "ownedTalents": ["talent.pickman.madness-omen", "talent.pickman.painters-eye", "talent.pickman.soulforge-aptitude"],
+      "ownedTalents": ["talent.pickman.gnostic-potential", "talent.pickman.madness-omen", "talent.pickman.painters-eye", "talent.pickman.soulforge-aptitude"],
       "ownedWheels": ["wheel-0012"]
     },
     "awakener-0041": {
@@ -1018,7 +1064,7 @@
         "skill.pollux.strike",
         "skill.pollux.the-nightbreaker"
       ],
-      "ownedTalents": ["talent.pollux.atonement-by-pain", "talent.pollux.madness-omen", "talent.pollux.soulforge-aptitude"],
+      "ownedTalents": ["talent.pollux.atonement-by-pain", "talent.pollux.gnostic-potential", "talent.pollux.madness-omen", "talent.pollux.soulforge-aptitude"],
       "ownedWheels": ["wheel-0042"]
     },
     "awakener-0042": {
@@ -1041,7 +1087,12 @@
         "skill.ramona.queens-sword",
         "skill.ramona.strike"
       ],
-      "ownedTalents": ["talent.ramona.madness-omen", "talent.ramona.silverheart-resonance", "talent.ramona.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.ramona.gnostic-potential",
+        "talent.ramona.madness-omen",
+        "talent.ramona.silverheart-resonance",
+        "talent.ramona.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0014"]
     },
     "awakener-0043": {
@@ -1066,7 +1117,7 @@
         "skill.ryker.strike",
         "skill.ryker.unexpected-gain"
       ],
-      "ownedTalents": ["talent.ryker.madness-omen", "talent.ryker.soulforge-aptitude", "talent.ryker.winner-takes-all"],
+      "ownedTalents": ["talent.ryker.gnostic-potential", "talent.ryker.madness-omen", "talent.ryker.soulforge-aptitude", "talent.ryker.winner-takes-all"],
       "ownedWheels": ["wheel-0019"]
     },
     "awakener-0044": {
@@ -1096,6 +1147,7 @@
         "skill.salvador.strike"
       ],
       "ownedTalents": [
+        "talent.salvador.gnostic-potential",
         "talent.salvador.madness-omen",
         "talent.salvador.origin-of-all-life",
         "talent.salvador.shepard-of-the-souls",
@@ -1123,7 +1175,7 @@
         "skill.sanga.the-lost-art",
         "skill.sanga.the-sea-of-corals"
       ],
-      "ownedTalents": ["talent.sanga.enlightenment-of-death", "talent.sanga.madness-omen", "talent.sanga.soulforge-aptitude"],
+      "ownedTalents": ["talent.sanga.enlightenment-of-death", "talent.sanga.gnostic-potential", "talent.sanga.madness-omen", "talent.sanga.soulforge-aptitude"],
       "ownedWheels": ["wheel-0057"]
     },
     "awakener-0046": {
@@ -1146,7 +1198,7 @@
         "skill.sorel.roses-infinite-desire",
         "skill.sorel.strike"
       ],
-      "ownedTalents": ["talent.sorel.guardian-of-vanity", "talent.sorel.madness-omen", "talent.sorel.soulforge-aptitude"],
+      "ownedTalents": ["talent.sorel.gnostic-potential", "talent.sorel.guardian-of-vanity", "talent.sorel.madness-omen", "talent.sorel.soulforge-aptitude"],
       "ownedWheels": ["wheel-0004"]
     },
     "awakener-0047": {
@@ -1182,7 +1234,7 @@
         "skill.tawil.strike",
         "skill.tawil.the-silver-key-gate"
       ],
-      "ownedTalents": ["talent.tawil.madness-omen", "talent.tawil.soulforge-aptitude"],
+      "ownedTalents": ["talent.tawil.gnostic-potential", "talent.tawil.madness-omen", "talent.tawil.soulforge-aptitude"],
       "ownedWheels": ["wheel-0027"]
     },
     "awakener-0048": {
@@ -1205,7 +1257,7 @@
         "skill.thais.sacred-relics-perpetuity",
         "skill.thais.strike"
       ],
-      "ownedTalents": ["talent.thais.madness-omen", "talent.thais.soulforge-aptitude"],
+      "ownedTalents": ["talent.thais.gnostic-potential", "talent.thais.madness-omen", "talent.thais.soulforge-aptitude"],
       "ownedWheels": ["wheel-0001"]
     },
     "awakener-0049": {
@@ -1227,7 +1279,7 @@
         "skill.tinct.strike",
         "skill.tinct.voices-from-beyond"
       ],
-      "ownedTalents": ["talent.tinct.madness-omen", "talent.tinct.planetary-traveler", "talent.tinct.soulforge-aptitude"],
+      "ownedTalents": ["talent.tinct.gnostic-potential", "talent.tinct.madness-omen", "talent.tinct.planetary-traveler", "talent.tinct.soulforge-aptitude"],
       "ownedWheels": ["wheel-0032"]
     },
     "awakener-0050": {
@@ -1250,7 +1302,7 @@
         "skill.tulu.when-lemuria-returns",
         "skill.tulu.when-the-stars-are-right"
       ],
-      "ownedTalents": ["talent.tulu.divine-kings-power", "talent.tulu.madness-omen", "talent.tulu.soulforge-aptitude"],
+      "ownedTalents": ["talent.tulu.divine-kings-power", "talent.tulu.gnostic-potential", "talent.tulu.madness-omen", "talent.tulu.soulforge-aptitude"],
       "ownedWheels": ["wheel-0050"]
     },
     "awakener-0051": {
@@ -1273,7 +1325,7 @@
         "skill.uvhash.strike",
         "skill.uvhash.vermilion-rite"
       ],
-      "ownedTalents": ["talent.uvhash.madness-omen", "talent.uvhash.soulforge-aptitude"],
+      "ownedTalents": ["talent.uvhash.gnostic-potential", "talent.uvhash.madness-omen", "talent.uvhash.soulforge-aptitude"],
       "ownedWheels": ["wheel-0008"]
     },
     "awakener-0052": {
@@ -1298,7 +1350,7 @@
         "skill.wanda.spine-needle-chains",
         "skill.wanda.strike"
       ],
-      "ownedTalents": ["talent.wanda.madness-omen", "talent.wanda.revelation", "talent.wanda.soulforge-aptitude"],
+      "ownedTalents": ["talent.wanda.gnostic-potential", "talent.wanda.madness-omen", "talent.wanda.revelation", "talent.wanda.soulforge-aptitude"],
       "ownedWheels": ["wheel-0033"]
     },
     "awakener-0053": {
@@ -1320,7 +1372,7 @@
         "skill.winkle.space-time-fold",
         "skill.winkle.strike"
       ],
-      "ownedTalents": ["talent.winkle.madness-omen", "talent.winkle.soulforge-aptitude"],
+      "ownedTalents": ["talent.winkle.gnostic-potential", "talent.winkle.madness-omen", "talent.winkle.soulforge-aptitude"],
       "ownedWheels": ["wheel-0034"]
     },
     "awakener-0054": {
@@ -1345,7 +1397,7 @@
         "skill.xu.mist-bound-vow",
         "skill.xu.strike"
       ],
-      "ownedTalents": ["talent.xu.madness-omen", "talent.xu.soulforge-aptitude"],
+      "ownedTalents": ["talent.xu.gnostic-potential", "talent.xu.madness-omen", "talent.xu.soulforge-aptitude"],
       "ownedWheels": ["wheel-0013"]
     },
     "awakener-0055": {
@@ -1370,7 +1422,12 @@
         "skill.vortice.reload",
         "skill.vortice.strike"
       ],
-      "ownedTalents": ["talent.vortice.lightless-bottom", "talent.vortice.madness-omen", "talent.vortice.soulforge-aptitude"],
+      "ownedTalents": [
+        "talent.vortice.gnostic-potential",
+        "talent.vortice.lightless-bottom",
+        "talent.vortice.madness-omen",
+        "talent.vortice.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0060"]
     },
     "awakener-0056": {
@@ -1403,7 +1460,12 @@
         "skill.arachne.puppet-stage-unveiled",
         "skill.arachne.strike"
       ],
-      "ownedTalents": ["talent.arachne.madness-omen", "talent.arachne.soulforge-aptitude", "talent.arachne.threads-of-fate"],
+      "ownedTalents": [
+        "talent.arachne.destined-threads",
+        "talent.arachne.gnostic-potential",
+        "talent.arachne.madness-omen",
+        "talent.arachne.soulforge-aptitude"
+      ],
       "ownedWheels": ["wheel-0128"]
     },
     "awakener-build-0001": {},
@@ -1533,11 +1595,15 @@
     "derived.global.arouse": {},
     "derived.global.embryo": {},
     "derived.global.fleeting-beauty": {},
+    "derived.global.hanafubuki": {},
+    "derived.global.ichigo-ichie": {},
     "derived.global.insight": {},
     "derived.global.leahs-coin": {},
     "derived.global.light-cone-boundary": {},
+    "derived.global.sakura-blossoms": {},
     "derived.global.silver-key-gleam": {},
     "derived.global.slumber": {},
+    "derived.global.vernal-message": {},
     "derived.goliath.blades-dominion": {},
     "derived.goliath.dormancy": {},
     "derived.goliath.usurp": {},
@@ -2610,158 +2676,214 @@
     "skill.xu.lady-of-dreamless-land": {},
     "skill.xu.mist-bound-vow": {},
     "skill.xu.strike": {},
+    "talent.24.gnostic-potential": {},
     "talent.24.madness-omen": {},
     "talent.24.soulforge-aptitude": {},
+    "talent.agrippa.gnostic-potential": {},
     "talent.agrippa.madness-omen": {},
     "talent.agrippa.seal-of-the-pact": {},
     "talent.agrippa.soulforge-aptitude": {},
+    "talent.aigis.gnostic-potential": {},
     "talent.aigis.madness-omen": {},
     "talent.aigis.soulforge-aptitude": {},
     "talent.alva.dynamic-vision": {},
+    "talent.alva.gnostic-potential": {},
     "talent.alva.madness-omen": {},
     "talent.alva.soulforge-aptitude": {},
+    "talent.arachne.destined-threads": {},
+    "talent.arachne.gnostic-potential": {},
     "talent.arachne.madness-omen": {},
     "talent.arachne.soulforge-aptitude": {},
-    "talent.arachne.threads-of-fate": {},
+    "talent.aurita.gnostic-potential": {},
     "talent.aurita.happy-little-fairy": {},
     "talent.aurita.madness-omen": {},
     "talent.aurita.soulforge-aptitude": {},
+    "talent.caecus.gnostic-potential": {},
     "talent.caecus.madness-omen": {},
     "talent.caecus.rebellious-spikes": {},
     "talent.caecus.soulforge-aptitude": {},
+    "talent.casiah.gnostic-potential": {},
     "talent.casiah.madness-omen": {},
     "talent.casiah.master-of-magic": {},
     "talent.casiah.soulforge-aptitude": {},
     "talent.castor.cleansing-feathers": {},
+    "talent.castor.gnostic-potential": {},
     "talent.castor.madness-omen": {},
     "talent.castor.soulforge-aptitude": {},
+    "talent.celeste.gnostic-potential": {},
     "talent.celeste.madness-omen": {},
     "talent.celeste.soulforge-aptitude": {},
     "talent.celeste.voyage-horn": {},
+    "talent.clementine.gnostic-potential": {},
     "talent.clementine.hive-resonance": {},
     "talent.clementine.madness-omen": {},
     "talent.clementine.soulforge-aptitude": {},
     "talent.corposant.cinders": {},
+    "talent.corposant.gnostic-potential": {},
     "talent.corposant.madness-omen": {},
     "talent.corposant.soulforge-aptitude": {},
+    "talent.daffodil.gnostic-potential": {},
     "talent.daffodil.madness-omen": {},
     "talent.daffodil.soulforge-aptitude": {},
+    "talent.doll-inferno.gnostic-potential": {},
     "talent.doll-inferno.madness-omen": {},
     "talent.doll-inferno.path-of-annihilation": {},
     "talent.doll-inferno.soulforge-aptitude": {},
     "talent.doll.gnosis-deconstruction": {},
+    "talent.doll.gnostic-potential": {},
     "talent.doll.madness-omen": {},
     "talent.doll.soulforge-aptitude": {},
     "talent.doresain.casket-harvest": {},
     "talent.doresain.festering-grace": {},
+    "talent.doresain.gnostic-potential": {},
     "talent.doresain.madness-omen": {},
     "talent.doresain.soulforge-aptitude": {},
     "talent.erica.external-power-source": {},
+    "talent.erica.gnostic-potential": {},
     "talent.erica.madness-omen": {},
     "talent.erica.soulforge-aptitude": {},
+    "talent.faint.gnostic-potential": {},
     "talent.faint.madness-omen": {},
     "talent.faint.secondary-swaddle": {},
     "talent.faint.soulforge-aptitude": {},
+    "talent.faros.gnostic-potential": {},
     "talent.faros.homesick": {},
     "talent.faros.madness-omen": {},
     "talent.faros.soulforge-aptitude": {},
+    "talent.goliath.gnostic-potential": {},
     "talent.goliath.madness-omen": {},
     "talent.goliath.soulforge-aptitude": {},
+    "talent.hameln.gnostic-potential": {},
     "talent.hameln.madness-omen": {},
     "talent.hameln.soulforge-aptitude": {},
+    "talent.helot-catena.gnostic-potential": {},
     "talent.helot-catena.madness-omen": {},
     "talent.helot-catena.soulforge-aptitude": {},
+    "talent.helot.gnostic-potential": {},
     "talent.helot.madness-omen": {},
     "talent.helot.pain-sigil": {},
     "talent.helot.soulforge-aptitude": {},
+    "talent.horla.gnostic-potential": {},
     "talent.horla.madness-omen": {},
     "talent.horla.soulforge-aptitude": {},
     "talent.horla.writing-with-feeling": {},
     "talent.jenkins.a-common-enemy": {},
+    "talent.jenkins.gnostic-potential": {},
     "talent.jenkins.madness-omen": {},
     "talent.jenkins.soulforge-aptitude": {},
+    "talent.karen.gnostic-potential": {},
     "talent.karen.madness-omen": {},
     "talent.karen.soulforge-aptitude": {},
+    "talent.kathigu-ra.gnostic-potential": {},
     "talent.kathigu-ra.madness-omen": {},
     "talent.kathigu-ra.soulforge-aptitude": {},
     "talent.kathigu-ra.the-living-flame": {},
+    "talent.leigh.gnostic-potential": {},
     "talent.leigh.madness-omen": {},
     "talent.leigh.soulforge-aptitude": {},
+    "talent.lily.gnostic-potential": {},
     "talent.lily.madness-omen": {},
     "talent.lily.soulforge-aptitude": {},
     "talent.lily.surging-darkness": {},
+    "talent.liz.gnostic-potential": {},
     "talent.liz.madness-omen": {},
     "talent.liz.soulforge-aptitude": {},
+    "talent.lotan.gnostic-potential": {},
     "talent.lotan.madness-omen": {},
     "talent.lotan.soulforge-aptitude": {},
+    "talent.miryam.gnostic-potential": {},
     "talent.miryam.madness-omen": {},
     "talent.miryam.soulforge-aptitude": {},
     "talent.miryam.undying-piety": {},
     "talent.mouchette.dramatic-encounter": {},
+    "talent.mouchette.gnostic-potential": {},
     "talent.mouchette.madness-omen": {},
     "talent.mouchette.soulforge-aptitude": {},
     "talent.murphy-fauxborn.divine-realms-order": {},
+    "talent.murphy-fauxborn.gnostic-potential": {},
     "talent.murphy-fauxborn.madness-omen": {},
     "talent.murphy-fauxborn.soulforge-aptitude": {},
+    "talent.murphy.gnostic-potential": {},
     "talent.murphy.madness-omen": {},
     "talent.murphy.soulforge-aptitude": {},
     "talent.nautila.daily-maintenance": {},
+    "talent.nautila.gnostic-potential": {},
     "talent.nautila.madness-omen": {},
     "talent.nautila.soulforge-aptitude": {},
+    "talent.nymphaea.gnostic-potential": {},
     "talent.nymphaea.immerse": {},
     "talent.nymphaea.madness-omen": {},
     "talent.nymphaea.soulforge-aptitude": {},
     "talent.ogier.formless-refinement": {},
+    "talent.ogier.gnostic-potential": {},
     "talent.ogier.madness-omen": {},
     "talent.ogier.soulforge-aptitude": {},
+    "talent.pandia.gnostic-potential": {},
     "talent.pandia.madness-omen": {},
     "talent.pandia.punishment-time": {},
     "talent.pandia.soulforge-aptitude": {},
+    "talent.pickman.gnostic-potential": {},
     "talent.pickman.madness-omen": {},
     "talent.pickman.painters-eye": {},
     "talent.pickman.soulforge-aptitude": {},
     "talent.pollux.atonement-by-pain": {},
+    "talent.pollux.gnostic-potential": {},
     "talent.pollux.madness-omen": {},
     "talent.pollux.soulforge-aptitude": {},
+    "talent.ramona-timeworn.gnostic-potential": {},
     "talent.ramona-timeworn.madness-omen": {},
     "talent.ramona-timeworn.silverheart-resonance": {},
     "talent.ramona-timeworn.soulforge-aptitude": {},
+    "talent.ramona.gnostic-potential": {},
     "talent.ramona.madness-omen": {},
     "talent.ramona.silverheart-resonance": {},
     "talent.ramona.soulforge-aptitude": {},
+    "talent.ryker.gnostic-potential": {},
     "talent.ryker.madness-omen": {},
     "talent.ryker.soulforge-aptitude": {},
     "talent.ryker.winner-takes-all": {},
+    "talent.salvador.gnostic-potential": {},
     "talent.salvador.madness-omen": {},
     "talent.salvador.origin-of-all-life": {},
     "talent.salvador.shepard-of-the-souls": {},
     "talent.salvador.soulforge-aptitude": {},
     "talent.sanga.enlightenment-of-death": {},
+    "talent.sanga.gnostic-potential": {},
     "talent.sanga.madness-omen": {},
     "talent.sanga.soulforge-aptitude": {},
+    "talent.sorel.gnostic-potential": {},
     "talent.sorel.guardian-of-vanity": {},
     "talent.sorel.madness-omen": {},
     "talent.sorel.soulforge-aptitude": {},
+    "talent.tawil.gnostic-potential": {},
     "talent.tawil.madness-omen": {},
     "talent.tawil.soulforge-aptitude": {},
+    "talent.thais.gnostic-potential": {},
     "talent.thais.madness-omen": {},
     "talent.thais.soulforge-aptitude": {},
+    "talent.tinct.gnostic-potential": {},
     "talent.tinct.madness-omen": {},
     "talent.tinct.planetary-traveler": {},
     "talent.tinct.soulforge-aptitude": {},
     "talent.tulu.divine-kings-power": {},
+    "talent.tulu.gnostic-potential": {},
     "talent.tulu.madness-omen": {},
     "talent.tulu.soulforge-aptitude": {},
+    "talent.uvhash.gnostic-potential": {},
     "talent.uvhash.madness-omen": {},
     "talent.uvhash.soulforge-aptitude": {},
+    "talent.vortice.gnostic-potential": {},
     "talent.vortice.lightless-bottom": {},
     "talent.vortice.madness-omen": {},
     "talent.vortice.soulforge-aptitude": {},
+    "talent.wanda.gnostic-potential": {},
     "talent.wanda.madness-omen": {},
     "talent.wanda.revelation": {},
     "talent.wanda.soulforge-aptitude": {},
+    "talent.winkle.gnostic-potential": {},
     "talent.winkle.madness-omen": {},
     "talent.winkle.soulforge-aptitude": {},
+    "talent.xu.gnostic-potential": {},
     "talent.xu.madness-omen": {},
     "talent.xu.soulforge-aptitude": {},
     "wheel-0001": {},
@@ -2893,7 +3015,9 @@
     "wheel-0131": {},
     "wheel-0132": {},
     "wheel-0136": {},
-    "wheel-0137": {}
+    "wheel-0137": {},
+    "wheel-0165": {},
+    "wheel-0166": {}
   },
   "reverse": {
     "awakener-0001": {},
@@ -3285,11 +3409,15 @@
     "derived.global.arouse": {},
     "derived.global.embryo": {},
     "derived.global.fleeting-beauty": {},
+    "derived.global.hanafubuki": {},
+    "derived.global.ichigo-ichie": {},
     "derived.global.insight": {},
     "derived.global.leahs-coin": {},
     "derived.global.light-cone-boundary": {},
+    "derived.global.sakura-blossoms": {},
     "derived.global.silver-key-gleam": {},
     "derived.global.slumber": {},
+    "derived.global.vernal-message": {},
     "derived.goliath.blades-dominion": {
       "ownerAwakenerId": "awakener-0021"
     },
@@ -6088,11 +6216,17 @@
     "skill.xu.strike": {
       "ownerAwakenerId": "awakener-0054"
     },
+    "talent.24.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0001"
+    },
     "talent.24.madness-omen": {
       "ownerAwakenerId": "awakener-0001"
     },
     "talent.24.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0001"
+    },
+    "talent.agrippa.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0002"
     },
     "talent.agrippa.madness-omen": {
       "ownerAwakenerId": "awakener-0002"
@@ -6103,6 +6237,9 @@
     "talent.agrippa.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0002"
     },
+    "talent.aigis.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0003"
+    },
     "talent.aigis.madness-omen": {
       "ownerAwakenerId": "awakener-0003"
     },
@@ -6112,11 +6249,20 @@
     "talent.alva.dynamic-vision": {
       "ownerAwakenerId": "awakener-0004"
     },
+    "talent.alva.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0004"
+    },
     "talent.alva.madness-omen": {
       "ownerAwakenerId": "awakener-0004"
     },
     "talent.alva.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0004"
+    },
+    "talent.arachne.destined-threads": {
+      "ownerAwakenerId": "awakener-0056"
+    },
+    "talent.arachne.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0056"
     },
     "talent.arachne.madness-omen": {
       "ownerAwakenerId": "awakener-0056"
@@ -6124,8 +6270,8 @@
     "talent.arachne.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0056"
     },
-    "talent.arachne.threads-of-fate": {
-      "ownerAwakenerId": "awakener-0056"
+    "talent.aurita.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0005"
     },
     "talent.aurita.happy-little-fairy": {
       "ownerAwakenerId": "awakener-0005"
@@ -6136,6 +6282,9 @@
     "talent.aurita.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0005"
     },
+    "talent.caecus.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0006"
+    },
     "talent.caecus.madness-omen": {
       "ownerAwakenerId": "awakener-0006"
     },
@@ -6144,6 +6293,9 @@
     },
     "talent.caecus.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0006"
+    },
+    "talent.casiah.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0007"
     },
     "talent.casiah.madness-omen": {
       "ownerAwakenerId": "awakener-0007"
@@ -6157,11 +6309,17 @@
     "talent.castor.cleansing-feathers": {
       "ownerAwakenerId": "awakener-0008"
     },
+    "talent.castor.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0008"
+    },
     "talent.castor.madness-omen": {
       "ownerAwakenerId": "awakener-0008"
     },
     "talent.castor.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0008"
+    },
+    "talent.celeste.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0009"
     },
     "talent.celeste.madness-omen": {
       "ownerAwakenerId": "awakener-0009"
@@ -6171,6 +6329,9 @@
     },
     "talent.celeste.voyage-horn": {
       "ownerAwakenerId": "awakener-0009"
+    },
+    "talent.clementine.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0010"
     },
     "talent.clementine.hive-resonance": {
       "ownerAwakenerId": "awakener-0010"
@@ -6184,17 +6345,26 @@
     "talent.corposant.cinders": {
       "ownerAwakenerId": "awakener-0011"
     },
+    "talent.corposant.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0011"
+    },
     "talent.corposant.madness-omen": {
       "ownerAwakenerId": "awakener-0011"
     },
     "talent.corposant.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0011"
     },
+    "talent.daffodil.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0012"
+    },
     "talent.daffodil.madness-omen": {
       "ownerAwakenerId": "awakener-0012"
     },
     "talent.daffodil.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0012"
+    },
+    "talent.doll-inferno.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0018"
     },
     "talent.doll-inferno.madness-omen": {
       "ownerAwakenerId": "awakener-0018"
@@ -6206,6 +6376,9 @@
       "ownerAwakenerId": "awakener-0018"
     },
     "talent.doll.gnosis-deconstruction": {
+      "ownerAwakenerId": "awakener-0013"
+    },
+    "talent.doll.gnostic-potential": {
       "ownerAwakenerId": "awakener-0013"
     },
     "talent.doll.madness-omen": {
@@ -6220,6 +6393,9 @@
     "talent.doresain.festering-grace": {
       "ownerAwakenerId": "awakener-0014"
     },
+    "talent.doresain.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0014"
+    },
     "talent.doresain.madness-omen": {
       "ownerAwakenerId": "awakener-0014"
     },
@@ -6229,11 +6405,17 @@
     "talent.erica.external-power-source": {
       "ownerAwakenerId": "awakener-0015"
     },
+    "talent.erica.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0015"
+    },
     "talent.erica.madness-omen": {
       "ownerAwakenerId": "awakener-0015"
     },
     "talent.erica.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0015"
+    },
+    "talent.faint.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0016"
     },
     "talent.faint.madness-omen": {
       "ownerAwakenerId": "awakener-0016"
@@ -6244,6 +6426,9 @@
     "talent.faint.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0016"
     },
+    "talent.faros.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0017"
+    },
     "talent.faros.homesick": {
       "ownerAwakenerId": "awakener-0017"
     },
@@ -6253,11 +6438,17 @@
     "talent.faros.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0017"
     },
+    "talent.goliath.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0021"
+    },
     "talent.goliath.madness-omen": {
       "ownerAwakenerId": "awakener-0021"
     },
     "talent.goliath.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0021"
+    },
+    "talent.hameln.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0022"
     },
     "talent.hameln.madness-omen": {
       "ownerAwakenerId": "awakener-0022"
@@ -6265,11 +6456,17 @@
     "talent.hameln.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0022"
     },
+    "talent.helot-catena.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0019"
+    },
     "talent.helot-catena.madness-omen": {
       "ownerAwakenerId": "awakener-0019"
     },
     "talent.helot-catena.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0019"
+    },
+    "talent.helot.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0023"
     },
     "talent.helot.madness-omen": {
       "ownerAwakenerId": "awakener-0023"
@@ -6279,6 +6476,9 @@
     },
     "talent.helot.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0023"
+    },
+    "talent.horla.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0024"
     },
     "talent.horla.madness-omen": {
       "ownerAwakenerId": "awakener-0024"
@@ -6292,17 +6492,26 @@
     "talent.jenkins.a-common-enemy": {
       "ownerAwakenerId": "awakener-0025"
     },
+    "talent.jenkins.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0025"
+    },
     "talent.jenkins.madness-omen": {
       "ownerAwakenerId": "awakener-0025"
     },
     "talent.jenkins.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0025"
     },
+    "talent.karen.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0026"
+    },
     "talent.karen.madness-omen": {
       "ownerAwakenerId": "awakener-0026"
     },
     "talent.karen.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0026"
+    },
+    "talent.kathigu-ra.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0027"
     },
     "talent.kathigu-ra.madness-omen": {
       "ownerAwakenerId": "awakener-0027"
@@ -6313,11 +6522,17 @@
     "talent.kathigu-ra.the-living-flame": {
       "ownerAwakenerId": "awakener-0027"
     },
+    "talent.leigh.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0028"
+    },
     "talent.leigh.madness-omen": {
       "ownerAwakenerId": "awakener-0028"
     },
     "talent.leigh.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0028"
+    },
+    "talent.lily.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0029"
     },
     "talent.lily.madness-omen": {
       "ownerAwakenerId": "awakener-0029"
@@ -6328,17 +6543,26 @@
     "talent.lily.surging-darkness": {
       "ownerAwakenerId": "awakener-0029"
     },
+    "talent.liz.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0030"
+    },
     "talent.liz.madness-omen": {
       "ownerAwakenerId": "awakener-0030"
     },
     "talent.liz.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0030"
     },
+    "talent.lotan.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0031"
+    },
     "talent.lotan.madness-omen": {
       "ownerAwakenerId": "awakener-0031"
     },
     "talent.lotan.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0031"
+    },
+    "talent.miryam.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0032"
     },
     "talent.miryam.madness-omen": {
       "ownerAwakenerId": "awakener-0032"
@@ -6352,6 +6576,9 @@
     "talent.mouchette.dramatic-encounter": {
       "ownerAwakenerId": "awakener-0033"
     },
+    "talent.mouchette.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0033"
+    },
     "talent.mouchette.madness-omen": {
       "ownerAwakenerId": "awakener-0033"
     },
@@ -6361,11 +6588,17 @@
     "talent.murphy-fauxborn.divine-realms-order": {
       "ownerAwakenerId": "awakener-0035"
     },
+    "talent.murphy-fauxborn.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0035"
+    },
     "talent.murphy-fauxborn.madness-omen": {
       "ownerAwakenerId": "awakener-0035"
     },
     "talent.murphy-fauxborn.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0035"
+    },
+    "talent.murphy.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0034"
     },
     "talent.murphy.madness-omen": {
       "ownerAwakenerId": "awakener-0034"
@@ -6376,11 +6609,17 @@
     "talent.nautila.daily-maintenance": {
       "ownerAwakenerId": "awakener-0036"
     },
+    "talent.nautila.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0036"
+    },
     "talent.nautila.madness-omen": {
       "ownerAwakenerId": "awakener-0036"
     },
     "talent.nautila.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0036"
+    },
+    "talent.nymphaea.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0037"
     },
     "talent.nymphaea.immerse": {
       "ownerAwakenerId": "awakener-0037"
@@ -6394,11 +6633,17 @@
     "talent.ogier.formless-refinement": {
       "ownerAwakenerId": "awakener-0038"
     },
+    "talent.ogier.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0038"
+    },
     "talent.ogier.madness-omen": {
       "ownerAwakenerId": "awakener-0038"
     },
     "talent.ogier.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0038"
+    },
+    "talent.pandia.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0039"
     },
     "talent.pandia.madness-omen": {
       "ownerAwakenerId": "awakener-0039"
@@ -6408,6 +6653,9 @@
     },
     "talent.pandia.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0039"
+    },
+    "talent.pickman.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0040"
     },
     "talent.pickman.madness-omen": {
       "ownerAwakenerId": "awakener-0040"
@@ -6421,11 +6669,17 @@
     "talent.pollux.atonement-by-pain": {
       "ownerAwakenerId": "awakener-0041"
     },
+    "talent.pollux.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0041"
+    },
     "talent.pollux.madness-omen": {
       "ownerAwakenerId": "awakener-0041"
     },
     "talent.pollux.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0041"
+    },
+    "talent.ramona-timeworn.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0020"
     },
     "talent.ramona-timeworn.madness-omen": {
       "ownerAwakenerId": "awakener-0020"
@@ -6436,6 +6690,9 @@
     "talent.ramona-timeworn.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0020"
     },
+    "talent.ramona.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0042"
+    },
     "talent.ramona.madness-omen": {
       "ownerAwakenerId": "awakener-0042"
     },
@@ -6445,6 +6702,9 @@
     "talent.ramona.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0042"
     },
+    "talent.ryker.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0043"
+    },
     "talent.ryker.madness-omen": {
       "ownerAwakenerId": "awakener-0043"
     },
@@ -6453,6 +6713,9 @@
     },
     "talent.ryker.winner-takes-all": {
       "ownerAwakenerId": "awakener-0043"
+    },
+    "talent.salvador.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0044"
     },
     "talent.salvador.madness-omen": {
       "ownerAwakenerId": "awakener-0044"
@@ -6469,11 +6732,17 @@
     "talent.sanga.enlightenment-of-death": {
       "ownerAwakenerId": "awakener-0045"
     },
+    "talent.sanga.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0045"
+    },
     "talent.sanga.madness-omen": {
       "ownerAwakenerId": "awakener-0045"
     },
     "talent.sanga.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0045"
+    },
+    "talent.sorel.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0046"
     },
     "talent.sorel.guardian-of-vanity": {
       "ownerAwakenerId": "awakener-0046"
@@ -6484,17 +6753,26 @@
     "talent.sorel.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0046"
     },
+    "talent.tawil.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0047"
+    },
     "talent.tawil.madness-omen": {
       "ownerAwakenerId": "awakener-0047"
     },
     "talent.tawil.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0047"
     },
+    "talent.thais.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0048"
+    },
     "talent.thais.madness-omen": {
       "ownerAwakenerId": "awakener-0048"
     },
     "talent.thais.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0048"
+    },
+    "talent.tinct.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0049"
     },
     "talent.tinct.madness-omen": {
       "ownerAwakenerId": "awakener-0049"
@@ -6508,17 +6786,26 @@
     "talent.tulu.divine-kings-power": {
       "ownerAwakenerId": "awakener-0050"
     },
+    "talent.tulu.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0050"
+    },
     "talent.tulu.madness-omen": {
       "ownerAwakenerId": "awakener-0050"
     },
     "talent.tulu.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0050"
     },
+    "talent.uvhash.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0051"
+    },
     "talent.uvhash.madness-omen": {
       "ownerAwakenerId": "awakener-0051"
     },
     "talent.uvhash.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0051"
+    },
+    "talent.vortice.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0055"
     },
     "talent.vortice.lightless-bottom": {
       "ownerAwakenerId": "awakener-0055"
@@ -6529,6 +6816,9 @@
     "talent.vortice.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0055"
     },
+    "talent.wanda.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0052"
+    },
     "talent.wanda.madness-omen": {
       "ownerAwakenerId": "awakener-0052"
     },
@@ -6538,11 +6828,17 @@
     "talent.wanda.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0052"
     },
+    "talent.winkle.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0053"
+    },
     "talent.winkle.madness-omen": {
       "ownerAwakenerId": "awakener-0053"
     },
     "talent.winkle.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0053"
+    },
+    "talent.xu.gnostic-potential": {
+      "ownerAwakenerId": "awakener-0054"
     },
     "talent.xu.madness-omen": {
       "ownerAwakenerId": "awakener-0054"
@@ -6789,6 +7085,8 @@
     },
     "wheel-0132": {},
     "wheel-0136": {},
-    "wheel-0137": {}
+    "wheel-0137": {},
+    "wheel-0165": {},
+    "wheel-0166": {}
   }
 }

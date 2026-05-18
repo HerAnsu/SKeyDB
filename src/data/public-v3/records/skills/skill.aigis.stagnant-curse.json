@@ -36,7 +36,7 @@
       "ownerAwakenerId": "awakener-0003",
       "ownerAwakenerName": "Aigis",
       "patch": {
-        "descriptionTemplate": "Aigis gains [Energy:Arg1] Aliemus. {Rouse}: After Aigis plays a card, inflict [Arg2] {plural:[Arg2]|turn|turns} of {Vulnerable} on all enemies. After Aigis unleashes her Exalt, her next \"Defense\" takes effect 3 times."
+        "descriptionTemplate": "Aigis gains [Energy:Arg1] Aliemus. {Rouse}: After Aigis plays a card, inflict [Arg2] {plural:[Arg2]|turn|turns} of {Vulnerable} on all enemies. After Aigis releases her Exalt, her next \"Defense\" takes effect 3 times, and her Exalt Base DMG additionally +50%."
       }
     }
   ],

@@ -34,7 +34,7 @@
       "ownerAwakenerId": "awakener-0023",
       "ownerAwakenerName": "Helot",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Helot obtains [Energy:Arg2] Aliemus and 5% Crit. DMG."
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. Helot gains [Energy:Arg2] Aliemus and 10% Crit. DMG."
       }
     }
   ],

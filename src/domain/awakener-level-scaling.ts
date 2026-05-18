@@ -15,6 +15,7 @@ const SUBSTAT_SCALING_CAP_LEVEL = 60
 const SUBSTAT_SCALING_STEP_LEVEL = 10
 const SUBSTAT_SCALING_MAX_STEPS = SUBSTAT_SCALING_CAP_LEVEL / SUBSTAT_SCALING_STEP_LEVEL
 const PRIMARY_STAT_KEYS = ['CON', 'ATK', 'DEF'] as const
+type PrimaryStatKey = (typeof PRIMARY_STAT_KEYS)[number]
 const PRIMARY_STAT_FORMULA_EPSILON = 1e-9
 
 interface ParsedStatValue {
@@ -57,6 +58,7 @@ export function resolveAwakenerStatsForLevel(
   level: number,
   psycheSurgeOffset = 0,
   soulforgePrimaryStatBonusPercent = 0,
+  gnosticPrimaryStatBonuses: Partial<Record<PrimaryStatKey, number>> = {},
 ): FullStats {
   const clampedLevel = clampAwakenerDatabaseLevel(level)
   const clampedPsycheSurgeOffset = clampAwakenerDatabasePsycheSurgeOffset(psycheSurgeOffset)
@@ -69,7 +71,11 @@ export function resolveAwakenerStatsForLevel(
       awakener.statScaling[key],
       clampedLevel,
     )
-    nextStats[key] = applyPrimaryStatBonus(scaledPrimaryStat, soulforgePrimaryStatBonusPercent)
+    const gnosticPrimaryStat = applyPrimaryStatAdditiveBonus(
+      scaledPrimaryStat,
+      gnosticPrimaryStatBonuses[key] ?? 0,
+    )
+    nextStats[key] = applyPrimaryStatBonus(gnosticPrimaryStat, soulforgePrimaryStatBonusPercent)
   }
 
   for (const [key, growth] of Object.entries(awakener.substatScaling)) {
@@ -86,6 +92,19 @@ export function resolveAwakenerStatsForLevel(
   }
 
   return nextStats
+}
+
+function applyPrimaryStatAdditiveBonus(baseValue: string, bonusValue: number): string {
+  if (!bonusValue) {
+    return baseValue
+  }
+
+  const parsedBase = parseStatValue(baseValue)
+  if (!parsedBase) {
+    return baseValue
+  }
+
+  return formatStatValue(parsedBase.value + bonusValue, parsedBase.suffix)
 }
 
 function applyPrimaryStatBonus(baseValue: string, bonusPercent: number): string {

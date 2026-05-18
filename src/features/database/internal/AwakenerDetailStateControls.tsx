@@ -82,6 +82,21 @@ export function AwakenerDetailStateControls({
             }}
           />
         ) : null}
+        {controls.canAdjustGnosticPotential &&
+        controls.gnosticPotentialLevelMin !== null &&
+        controls.gnosticPotentialLevelMax !== null ? (
+          <DetailLevelSlider
+            compact={compact}
+            formatValueLabel={(level) => (level === 0 ? 'Off' : `Lv. ${String(level)}`)}
+            label='Gnostic Potential'
+            level={selection.gnosticPotentialLevel}
+            max={controls.gnosticPotentialLevelMax}
+            min={controls.gnosticPotentialLevelMin}
+            onChange={(gnosticPotentialLevel) => {
+              onPatchSelection({gnosticPotentialLevel})
+            }}
+          />
+        ) : null}
         <DetailLevelSlider
           compact={compact}
           label='Skill Level'

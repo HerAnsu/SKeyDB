@@ -21,11 +21,11 @@
   "faction": "Hybrid",
   "aliases": ["lily"],
   "searchTags": ["Poison", "Death Resistance", "Heal", "Strike"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 56,
-    "ATK": 41,
-    "DEF": 56
+    "CON": 38,
+    "ATK": 28,
+    "DEF": 38
   },
   "substatsLv1": {
     "CritRate": 5,
@@ -64,7 +64,7 @@
         "kind": "introduction",
         "title": "Basic Information",
         "unlockCondition": "Awakener Level 1",
-        "content": "Yearning for an entity she calls \"Mommy,\" this girl obediently follows her \"Master\"'s commands.\nHer true name lost to the world, she is known only by the form she now inhabits: a delicate white filament, reminiscent of a lily, blooming at the center of a giant eyeball made of black sludge. Hence, they named her Lily."
+        "content": "Yearning for an entity she calls \"Mommy\", this girl obediently follows the commands of her \"Master\".\nHer true name lost to the world, she is now known only by the form she inhabits: a delicate white filament, reminiscent of a lily, blooming at the center of a giant black eyeball made of sludge. Hence, they named her Lily."
       },
       {
         "kind": "story",

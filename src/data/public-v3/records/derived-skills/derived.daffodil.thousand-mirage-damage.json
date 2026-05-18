@@ -14,13 +14,13 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": ["150", "180", "210", "240", "270", "300"],
+      "values": ["200", "240", "280", "320", "360", "400"],
       "stat": "ATK",
       "suffix": "%"
     },
     "Arg2": {
       "kind": "fixed",
-      "value": "5"
+      "value": "6"
     }
   },
   "cardKeywords": [

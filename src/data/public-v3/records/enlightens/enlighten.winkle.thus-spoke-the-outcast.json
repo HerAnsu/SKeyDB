@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0053",
   "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Self-Imprisonment} is enhanced: When played, another Awakener with the lowest Aliemus gains 50 Aliemus.",
+  "descriptionTemplate": "{Rouse} {Self-Imprisonment} is enhanced: When played, another Awakener with the lowest Aliemus gains 80 Aliemus.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Winkle"
 }

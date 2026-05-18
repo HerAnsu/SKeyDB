@@ -189,7 +189,9 @@
       "wheel-0131",
       "wheel-0132",
       "wheel-0136",
-      "wheel-0137"
+      "wheel-0137",
+      "wheel-0165",
+      "wheel-0166"
     ],
     "covenants": [
       "covenant-0001",
@@ -582,7 +584,9 @@
     "wheel-0131": "yp",
     "wheel-0132": "yu",
     "wheel-0136": "xB",
-    "wheel-0137": "x0"
+    "wheel-0137": "x0",
+    "wheel-0165": "y0",
+    "wheel-0166": "za"
   },
   "groups": {
     "wheelsByAwakener": {

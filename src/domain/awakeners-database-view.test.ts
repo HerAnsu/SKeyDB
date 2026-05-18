@@ -448,6 +448,56 @@ describe('awakeners-database-view', () => {
     expect(soulforge?.resolved.description).toBe('Soulforge 20.')
   })
 
+  it('uses the selected Gnostic Potential level instead of maxing generic scaled talents', () => {
+    const record = buildRecord()
+    record.talents.T4 = {
+      id: 'talent.test.gnostic-potential',
+      ownerAwakenerId: 999,
+      displayName: 'Gnostic Potential',
+      descriptionTemplate: 'Gnostic [Arg1].',
+      descriptionArgs: {
+        Arg1: {
+          kind: 'linear',
+          base: '2',
+          gainPerLevel: '2',
+        },
+      },
+      family: 'gnostic_potential',
+      hasLevelScaledDescription: true,
+      maxLevel: 5,
+    }
+
+    const defaultView = resolveAwakenerDatabaseView(
+      record,
+      {
+        stats: TEST_STATS,
+      },
+      buildOverlayRecords(),
+      buildGlobalDerivedSkills(),
+    )
+    const maxedView = resolveAwakenerDatabaseView(
+      record,
+      {
+        gnosticPotentialLevel: 5,
+        stats: TEST_STATS,
+      },
+      buildOverlayRecords(),
+      buildGlobalDerivedSkills(),
+    )
+
+    const defaultGnostic = defaultView.talents.find(
+      (entry) => entry.record.id === 'talent.test.gnostic-potential',
+    )
+    const maxedGnostic = maxedView.talents.find(
+      (entry) => entry.record.id === 'talent.test.gnostic-potential',
+    )
+
+    expect(defaultGnostic?.resolved.description).toBe('Gnostic 0.')
+    expect(defaultGnostic?.descriptionRank).toBe(0)
+    expect(maxedGnostic?.resolved.description).toBe('Gnostic 10.')
+    expect(maxedGnostic?.descriptionRank).toBe(5)
+  })
+
   it('uses formula context when resolving shell and reference descriptions', () => {
     const record = buildRecord()
     record.cards.C4 = {

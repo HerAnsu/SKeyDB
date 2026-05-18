@@ -898,6 +898,12 @@
         "canonicalSlug": "sail-of-providence",
         "canonicalPath": "/database/wheels/sail-of-providence"
       },
+      "sakura-reveries": {
+        "kind": "wheel",
+        "id": "wheel-0165",
+        "canonicalSlug": "sakura-reveries",
+        "canonicalPath": "/database/wheels/sakura-reveries"
+      },
       "school-day": {
         "kind": "wheel",
         "id": "wheel-0044",
@@ -1035,6 +1041,12 @@
         "id": "wheel-0084",
         "canonicalSlug": "to-my-dearest-friend",
         "canonicalPath": "/database/wheels/to-my-dearest-friend"
+      },
+      "to-the-stars": {
+        "kind": "wheel",
+        "id": "wheel-0166",
+        "canonicalSlug": "to-the-stars",
+        "canonicalPath": "/database/wheels/to-the-stars"
       },
       "treasured-rarity": {
         "kind": "wheel",
@@ -5246,6 +5258,12 @@
         "canonicalSlug": "symphony-of-harmony",
         "canonicalPath": "/database/awakeners/hameln/derived-skills/symphony-of-harmony"
       },
+      "hanafubuki": {
+        "kind": "derivedSkill",
+        "id": "derived.global.hanafubuki",
+        "canonicalSlug": "hanafubuki",
+        "canonicalPath": "/database/derived-skills/hanafubuki"
+      },
       "helot-catena/bloodthirsty-flail": {
         "kind": "derivedSkill",
         "id": "derived.helot-catena.bloodthirsty-flail",
@@ -5263,6 +5281,12 @@
         "id": "derived.helot.irregular-form",
         "canonicalSlug": "irregular-form",
         "canonicalPath": "/database/awakeners/helot/derived-skills/irregular-form"
+      },
+      "ichigo-ichie": {
+        "kind": "derivedSkill",
+        "id": "derived.global.ichigo-ichie",
+        "canonicalSlug": "ichigo-ichie",
+        "canonicalPath": "/database/derived-skills/ichigo-ichie"
       },
       "insight": {
         "kind": "derivedSkill",
@@ -5420,6 +5444,12 @@
         "canonicalSlug": "shining-octahedron-dice",
         "canonicalPath": "/database/awakeners/ryker/derived-skills/shining-octahedron-dice"
       },
+      "sakura-blossoms": {
+        "kind": "derivedSkill",
+        "id": "derived.global.sakura-blossoms",
+        "canonicalSlug": "sakura-blossoms",
+        "canonicalPath": "/database/derived-skills/sakura-blossoms"
+      },
       "salvador/dedication": {
         "kind": "derivedSkill",
         "id": "derived.salvador.dedication",
@@ -5552,6 +5582,12 @@
         "canonicalSlug": "scion-of-purity",
         "canonicalPath": "/database/awakeners/thais/derived-skills/scion-of-purity"
       },
+      "vernal-message": {
+        "kind": "derivedSkill",
+        "id": "derived.global.vernal-message",
+        "canonicalSlug": "vernal-message",
+        "canonicalPath": "/database/derived-skills/vernal-message"
+      },
       "vortice/vortex-shell": {
         "kind": "derivedSkill",
         "id": "derived.vortice.vortex-shell",
@@ -5590,6 +5626,12 @@
       }
     },
     "talents": {
+      "24/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.24.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/24/talents/gnostic-potential"
+      },
       "24/madness-omen": {
         "kind": "talent",
         "id": "talent.24.madness-omen",
@@ -5601,6 +5643,12 @@
         "id": "talent.24.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/24/talents/soulforge-aptitude"
+      },
+      "agrippa/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.agrippa.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/agrippa/talents/gnostic-potential"
       },
       "agrippa/madness-omen": {
         "kind": "talent",
@@ -5620,6 +5668,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/agrippa/talents/soulforge-aptitude"
       },
+      "aigis/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.aigis.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/aigis/talents/gnostic-potential"
+      },
       "aigis/madness-omen": {
         "kind": "talent",
         "id": "talent.aigis.madness-omen",
@@ -5638,6 +5692,12 @@
         "canonicalSlug": "dynamic-vision",
         "canonicalPath": "/database/awakeners/alva/talents/dynamic-vision"
       },
+      "alva/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.alva.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/alva/talents/gnostic-potential"
+      },
       "alva/madness-omen": {
         "kind": "talent",
         "id": "talent.alva.madness-omen",
@@ -5649,6 +5709,18 @@
         "id": "talent.alva.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/alva/talents/soulforge-aptitude"
+      },
+      "arachne/destined-threads": {
+        "kind": "talent",
+        "id": "talent.arachne.destined-threads",
+        "canonicalSlug": "destined-threads",
+        "canonicalPath": "/database/awakeners/arachne/talents/destined-threads"
+      },
+      "arachne/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.arachne.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/arachne/talents/gnostic-potential"
       },
       "arachne/madness-omen": {
         "kind": "talent",
@@ -5662,11 +5734,11 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/arachne/talents/soulforge-aptitude"
       },
-      "arachne/threads-of-fate": {
+      "aurita/gnostic-potential": {
         "kind": "talent",
-        "id": "talent.arachne.threads-of-fate",
-        "canonicalSlug": "threads-of-fate",
-        "canonicalPath": "/database/awakeners/arachne/talents/threads-of-fate"
+        "id": "talent.aurita.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/aurita/talents/gnostic-potential"
       },
       "aurita/happy-little-fairy": {
         "kind": "talent",
@@ -5686,6 +5758,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/aurita/talents/soulforge-aptitude"
       },
+      "caecus/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.caecus.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/caecus/talents/gnostic-potential"
+      },
       "caecus/madness-omen": {
         "kind": "talent",
         "id": "talent.caecus.madness-omen",
@@ -5703,6 +5781,12 @@
         "id": "talent.caecus.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/caecus/talents/soulforge-aptitude"
+      },
+      "casiah/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.casiah.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/casiah/talents/gnostic-potential"
       },
       "casiah/madness-omen": {
         "kind": "talent",
@@ -5728,6 +5812,12 @@
         "canonicalSlug": "cleansing-feathers",
         "canonicalPath": "/database/awakeners/castor/talents/cleansing-feathers"
       },
+      "castor/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.castor.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/castor/talents/gnostic-potential"
+      },
       "castor/madness-omen": {
         "kind": "talent",
         "id": "talent.castor.madness-omen",
@@ -5739,6 +5829,12 @@
         "id": "talent.castor.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/castor/talents/soulforge-aptitude"
+      },
+      "celeste/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.celeste.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/celeste/talents/gnostic-potential"
       },
       "celeste/madness-omen": {
         "kind": "talent",
@@ -5757,6 +5853,12 @@
         "id": "talent.celeste.voyage-horn",
         "canonicalSlug": "voyage-horn",
         "canonicalPath": "/database/awakeners/celeste/talents/voyage-horn"
+      },
+      "clementine/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.clementine.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/clementine/talents/gnostic-potential"
       },
       "clementine/hive-resonance": {
         "kind": "talent",
@@ -5782,6 +5884,12 @@
         "canonicalSlug": "cinders",
         "canonicalPath": "/database/awakeners/corposant/talents/cinders"
       },
+      "corposant/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.corposant.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/corposant/talents/gnostic-potential"
+      },
       "corposant/madness-omen": {
         "kind": "talent",
         "id": "talent.corposant.madness-omen",
@@ -5794,6 +5902,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/corposant/talents/soulforge-aptitude"
       },
+      "daffodil/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.daffodil.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/daffodil/talents/gnostic-potential"
+      },
       "daffodil/madness-omen": {
         "kind": "talent",
         "id": "talent.daffodil.madness-omen",
@@ -5805,6 +5919,12 @@
         "id": "talent.daffodil.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/daffodil/talents/soulforge-aptitude"
+      },
+      "doll-inferno/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.doll-inferno.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/doll-inferno/talents/gnostic-potential"
       },
       "doll-inferno/madness-omen": {
         "kind": "talent",
@@ -5830,6 +5950,12 @@
         "canonicalSlug": "gnosis-deconstruction",
         "canonicalPath": "/database/awakeners/doll/talents/gnosis-deconstruction"
       },
+      "doll/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.doll.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/doll/talents/gnostic-potential"
+      },
       "doll/madness-omen": {
         "kind": "talent",
         "id": "talent.doll.madness-omen",
@@ -5854,6 +5980,12 @@
         "canonicalSlug": "festering-grace",
         "canonicalPath": "/database/awakeners/doresain/talents/festering-grace"
       },
+      "doresain/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.doresain.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/doresain/talents/gnostic-potential"
+      },
       "doresain/madness-omen": {
         "kind": "talent",
         "id": "talent.doresain.madness-omen",
@@ -5872,6 +6004,12 @@
         "canonicalSlug": "external-power-source",
         "canonicalPath": "/database/awakeners/erica/talents/external-power-source"
       },
+      "erica/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.erica.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/erica/talents/gnostic-potential"
+      },
       "erica/madness-omen": {
         "kind": "talent",
         "id": "talent.erica.madness-omen",
@@ -5883,6 +6021,12 @@
         "id": "talent.erica.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/erica/talents/soulforge-aptitude"
+      },
+      "faint/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.faint.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/faint/talents/gnostic-potential"
       },
       "faint/madness-omen": {
         "kind": "talent",
@@ -5902,6 +6046,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/faint/talents/soulforge-aptitude"
       },
+      "faros/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.faros.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/faros/talents/gnostic-potential"
+      },
       "faros/homesick": {
         "kind": "talent",
         "id": "talent.faros.homesick",
@@ -5920,6 +6070,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/faros/talents/soulforge-aptitude"
       },
+      "goliath/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.goliath.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/goliath/talents/gnostic-potential"
+      },
       "goliath/madness-omen": {
         "kind": "talent",
         "id": "talent.goliath.madness-omen",
@@ -5931,6 +6087,12 @@
         "id": "talent.goliath.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/goliath/talents/soulforge-aptitude"
+      },
+      "hameln/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.hameln.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/hameln/talents/gnostic-potential"
       },
       "hameln/madness-omen": {
         "kind": "talent",
@@ -5944,6 +6106,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/hameln/talents/soulforge-aptitude"
       },
+      "helot-catena/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.helot-catena.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/helot-catena/talents/gnostic-potential"
+      },
       "helot-catena/madness-omen": {
         "kind": "talent",
         "id": "talent.helot-catena.madness-omen",
@@ -5955,6 +6123,12 @@
         "id": "talent.helot-catena.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/helot-catena/talents/soulforge-aptitude"
+      },
+      "helot/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.helot.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/helot/talents/gnostic-potential"
       },
       "helot/madness-omen": {
         "kind": "talent",
@@ -5973,6 +6147,12 @@
         "id": "talent.helot.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/helot/talents/soulforge-aptitude"
+      },
+      "horla/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.horla.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/horla/talents/gnostic-potential"
       },
       "horla/madness-omen": {
         "kind": "talent",
@@ -5998,6 +6178,12 @@
         "canonicalSlug": "a-common-enemy",
         "canonicalPath": "/database/awakeners/jenkin/talents/a-common-enemy"
       },
+      "jenkin/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.jenkins.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/jenkin/talents/gnostic-potential"
+      },
       "jenkin/madness-omen": {
         "kind": "talent",
         "id": "talent.jenkins.madness-omen",
@@ -6010,6 +6196,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/jenkin/talents/soulforge-aptitude"
       },
+      "karen/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.karen.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/karen/talents/gnostic-potential"
+      },
       "karen/madness-omen": {
         "kind": "talent",
         "id": "talent.karen.madness-omen",
@@ -6021,6 +6213,12 @@
         "id": "talent.karen.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/karen/talents/soulforge-aptitude"
+      },
+      "kathigu-ra/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.kathigu-ra.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/kathigu-ra/talents/gnostic-potential"
       },
       "kathigu-ra/madness-omen": {
         "kind": "talent",
@@ -6040,6 +6238,12 @@
         "canonicalSlug": "the-living-flame",
         "canonicalPath": "/database/awakeners/kathigu-ra/talents/the-living-flame"
       },
+      "leigh/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.leigh.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/leigh/talents/gnostic-potential"
+      },
       "leigh/madness-omen": {
         "kind": "talent",
         "id": "talent.leigh.madness-omen",
@@ -6051,6 +6255,12 @@
         "id": "talent.leigh.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/leigh/talents/soulforge-aptitude"
+      },
+      "lily/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.lily.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/lily/talents/gnostic-potential"
       },
       "lily/madness-omen": {
         "kind": "talent",
@@ -6070,6 +6280,12 @@
         "canonicalSlug": "surging-darkness",
         "canonicalPath": "/database/awakeners/lily/talents/surging-darkness"
       },
+      "liz/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.liz.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/liz/talents/gnostic-potential"
+      },
       "liz/madness-omen": {
         "kind": "talent",
         "id": "talent.liz.madness-omen",
@@ -6082,6 +6298,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/liz/talents/soulforge-aptitude"
       },
+      "lotan/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.lotan.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/lotan/talents/gnostic-potential"
+      },
       "lotan/madness-omen": {
         "kind": "talent",
         "id": "talent.lotan.madness-omen",
@@ -6093,6 +6315,12 @@
         "id": "talent.lotan.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/lotan/talents/soulforge-aptitude"
+      },
+      "miryam/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.miryam.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/miryam/talents/gnostic-potential"
       },
       "miryam/madness-omen": {
         "kind": "talent",
@@ -6118,6 +6346,12 @@
         "canonicalSlug": "dramatic-encounter",
         "canonicalPath": "/database/awakeners/mouchette/talents/dramatic-encounter"
       },
+      "mouchette/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.mouchette.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/mouchette/talents/gnostic-potential"
+      },
       "mouchette/madness-omen": {
         "kind": "talent",
         "id": "talent.mouchette.madness-omen",
@@ -6136,6 +6370,12 @@
         "canonicalSlug": "divine-realms-order",
         "canonicalPath": "/database/awakeners/murphy-fauxborn/talents/divine-realms-order"
       },
+      "murphy-fauxborn/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.murphy-fauxborn.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/murphy-fauxborn/talents/gnostic-potential"
+      },
       "murphy-fauxborn/madness-omen": {
         "kind": "talent",
         "id": "talent.murphy-fauxborn.madness-omen",
@@ -6147,6 +6387,12 @@
         "id": "talent.murphy-fauxborn.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/murphy-fauxborn/talents/soulforge-aptitude"
+      },
+      "murphy/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.murphy.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/murphy/talents/gnostic-potential"
       },
       "murphy/madness-omen": {
         "kind": "talent",
@@ -6166,6 +6412,12 @@
         "canonicalSlug": "daily-maintenance",
         "canonicalPath": "/database/awakeners/nautila/talents/daily-maintenance"
       },
+      "nautila/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.nautila.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/nautila/talents/gnostic-potential"
+      },
       "nautila/madness-omen": {
         "kind": "talent",
         "id": "talent.nautila.madness-omen",
@@ -6177,6 +6429,12 @@
         "id": "talent.nautila.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/nautila/talents/soulforge-aptitude"
+      },
+      "nymphaea/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.nymphaea.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/nymphaea/talents/gnostic-potential"
       },
       "nymphaea/immerse": {
         "kind": "talent",
@@ -6202,6 +6460,12 @@
         "canonicalSlug": "formless-refinement",
         "canonicalPath": "/database/awakeners/ogier/talents/formless-refinement"
       },
+      "ogier/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.ogier.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/ogier/talents/gnostic-potential"
+      },
       "ogier/madness-omen": {
         "kind": "talent",
         "id": "talent.ogier.madness-omen",
@@ -6213,6 +6477,12 @@
         "id": "talent.ogier.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/ogier/talents/soulforge-aptitude"
+      },
+      "pandia/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.pandia.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/pandia/talents/gnostic-potential"
       },
       "pandia/madness-omen": {
         "kind": "talent",
@@ -6231,6 +6501,12 @@
         "id": "talent.pandia.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/pandia/talents/soulforge-aptitude"
+      },
+      "pickman/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.pickman.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/pickman/talents/gnostic-potential"
       },
       "pickman/madness-omen": {
         "kind": "talent",
@@ -6256,6 +6532,12 @@
         "canonicalSlug": "atonement-by-pain",
         "canonicalPath": "/database/awakeners/pollux/talents/atonement-by-pain"
       },
+      "pollux/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.pollux.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/pollux/talents/gnostic-potential"
+      },
       "pollux/madness-omen": {
         "kind": "talent",
         "id": "talent.pollux.madness-omen",
@@ -6267,6 +6549,12 @@
         "id": "talent.pollux.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/pollux/talents/soulforge-aptitude"
+      },
+      "ramona-timeworn/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.ramona-timeworn.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/ramona-timeworn/talents/gnostic-potential"
       },
       "ramona-timeworn/madness-omen": {
         "kind": "talent",
@@ -6286,6 +6574,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/ramona-timeworn/talents/soulforge-aptitude"
       },
+      "ramona/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.ramona.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/ramona/talents/gnostic-potential"
+      },
       "ramona/madness-omen": {
         "kind": "talent",
         "id": "talent.ramona.madness-omen",
@@ -6304,6 +6598,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/ramona/talents/soulforge-aptitude"
       },
+      "ryker/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.ryker.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/ryker/talents/gnostic-potential"
+      },
       "ryker/madness-omen": {
         "kind": "talent",
         "id": "talent.ryker.madness-omen",
@@ -6321,6 +6621,12 @@
         "id": "talent.ryker.winner-takes-all",
         "canonicalSlug": "winner-takes-all",
         "canonicalPath": "/database/awakeners/ryker/talents/winner-takes-all"
+      },
+      "salvador/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.salvador.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/salvador/talents/gnostic-potential"
       },
       "salvador/madness-omen": {
         "kind": "talent",
@@ -6352,6 +6658,12 @@
         "canonicalSlug": "enlightenment-of-death",
         "canonicalPath": "/database/awakeners/sanga/talents/enlightenment-of-death"
       },
+      "sanga/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.sanga.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/sanga/talents/gnostic-potential"
+      },
       "sanga/madness-omen": {
         "kind": "talent",
         "id": "talent.sanga.madness-omen",
@@ -6363,6 +6675,12 @@
         "id": "talent.sanga.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/sanga/talents/soulforge-aptitude"
+      },
+      "sorel/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.sorel.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/sorel/talents/gnostic-potential"
       },
       "sorel/guardian-of-vanity": {
         "kind": "talent",
@@ -6382,6 +6700,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/sorel/talents/soulforge-aptitude"
       },
+      "tawil/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.tawil.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/tawil/talents/gnostic-potential"
+      },
       "tawil/madness-omen": {
         "kind": "talent",
         "id": "talent.tawil.madness-omen",
@@ -6394,6 +6718,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/tawil/talents/soulforge-aptitude"
       },
+      "thais/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.thais.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/thais/talents/gnostic-potential"
+      },
       "thais/madness-omen": {
         "kind": "talent",
         "id": "talent.thais.madness-omen",
@@ -6405,6 +6735,12 @@
         "id": "talent.thais.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/thais/talents/soulforge-aptitude"
+      },
+      "tinct/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.tinct.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/tinct/talents/gnostic-potential"
       },
       "tinct/madness-omen": {
         "kind": "talent",
@@ -6430,6 +6766,12 @@
         "canonicalSlug": "divine-kings-power",
         "canonicalPath": "/database/awakeners/tulu/talents/divine-kings-power"
       },
+      "tulu/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.tulu.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/tulu/talents/gnostic-potential"
+      },
       "tulu/madness-omen": {
         "kind": "talent",
         "id": "talent.tulu.madness-omen",
@@ -6442,6 +6784,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/tulu/talents/soulforge-aptitude"
       },
+      "uvhash/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.uvhash.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/uvhash/talents/gnostic-potential"
+      },
       "uvhash/madness-omen": {
         "kind": "talent",
         "id": "talent.uvhash.madness-omen",
@@ -6453,6 +6801,12 @@
         "id": "talent.uvhash.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/uvhash/talents/soulforge-aptitude"
+      },
+      "vortice/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.vortice.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/vortice/talents/gnostic-potential"
       },
       "vortice/lightless-bottom": {
         "kind": "talent",
@@ -6472,6 +6826,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/vortice/talents/soulforge-aptitude"
       },
+      "wanda/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.wanda.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/wanda/talents/gnostic-potential"
+      },
       "wanda/madness-omen": {
         "kind": "talent",
         "id": "talent.wanda.madness-omen",
@@ -6490,6 +6850,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/wanda/talents/soulforge-aptitude"
       },
+      "winkle/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.winkle.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/winkle/talents/gnostic-potential"
+      },
       "winkle/madness-omen": {
         "kind": "talent",
         "id": "talent.winkle.madness-omen",
@@ -6501,6 +6867,12 @@
         "id": "talent.winkle.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/winkle/talents/soulforge-aptitude"
+      },
+      "xu/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.xu.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/xu/talents/gnostic-potential"
       },
       "xu/madness-omen": {
         "kind": "talent",

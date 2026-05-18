@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0054",
   "slot": "Skill1",
-  "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies (guaranteed Crit) and trigger [Arg2]% {Poison}. {Resonance 3}: {Embryo Fusion} +[Arg4]%.",
+  "descriptionTemplate": "Deal [Damage:Arg1] guaranteed Critical Hit DMG to all enemies and inflict [Arg2]% {Poison}. {Resonance 3}: {Embryo Fusion} +[Arg4].",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
@@ -24,8 +24,7 @@
     },
     "Arg4": {
       "kind": "fixed",
-      "value": "50",
-      "suffix": "%"
+      "value": "50"
     }
   },
   "cardKeywords": [
@@ -44,7 +43,7 @@
       "ownerAwakenerId": "awakener-0054",
       "ownerAwakenerName": "Xu",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG to all enemies (guaranteed Crit) and trigger [Arg2]% {Poison}. {Embryo Fusion} +[Arg6]%. {Resonance 3}: {Embryo Fusion} +[Arg4]%.",
+        "descriptionTemplate": "Deal [Damage:Arg1] guaranteed Critical Hit DMG to all enemies and inflict [Arg2]% {Poison}, {Embryo Fusion}+ [Arg6]. {Resonance 3}: {Embryo Fusion} +[Arg4].",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -59,13 +58,11 @@
           },
           "Arg4": {
             "kind": "fixed",
-            "value": "50",
-            "suffix": "%"
+            "value": "50"
           },
           "Arg6": {
             "kind": "fixed",
             "value": "15",
-            "suffix": "%",
             "substatBonus": {
               "substat": "DamageAmplification",
               "multiplier": "0.2",

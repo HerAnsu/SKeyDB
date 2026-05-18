@@ -13,9 +13,9 @@
     "Arg1": {
       "kind": "computed",
       "formulaKey": "scaled",
-      "baseFormula": "accountStageGrowth",
+      "baseFormula": "esotericResearchDepth",
       "multiplier": 0.0065,
-      "inputs": ["accountLevel"]
+      "inputs": ["accountLevel", "ownedPosseCount"]
     },
     "Arg2": {
       "kind": "fixed",

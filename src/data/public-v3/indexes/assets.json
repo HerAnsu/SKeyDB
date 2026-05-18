@@ -2511,6 +2511,30 @@
         "candidates": ["src/assets/wheels/Weapon_Full_SR32.webp", "src/assets/wheels/Weapon_Full_SR32.png"]
       }
     },
+    "asset-wheel-0165-icon": {
+      "id": "asset-wheel-0165-icon",
+      "slot": "icon",
+      "kind": "wheel",
+      "ownerId": "wheel-0165",
+      "assetId": "Weapon_Full_JP07",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/wheels/Weapon_Full_JP07.webp",
+        "candidates": ["src/assets/wheels/Weapon_Full_JP07.webp", "src/assets/wheels/Weapon_Full_JP07.png"]
+      }
+    },
+    "asset-wheel-0166-icon": {
+      "id": "asset-wheel-0166-icon",
+      "slot": "icon",
+      "kind": "wheel",
+      "ownerId": "wheel-0166",
+      "assetId": "Weapon_Full_ZL08",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/wheels/Weapon_Full_ZL08.webp",
+        "candidates": ["src/assets/wheels/Weapon_Full_ZL08.webp", "src/assets/wheels/Weapon_Full_ZL08.png"]
+      }
+    },
     "asset-relic-0001-icon": {
       "id": "asset-relic-0001-icon",
       "slot": "icon",
@@ -7503,11 +7527,11 @@
       "slot": "icon",
       "kind": "overlay",
       "ownerId": "overlay.clementine.phobic-fixation",
-      "assetId": "IconS_Buff_049",
+      "assetId": "IconS_Buff_053",
       "availability": {
         "status": "available",
-        "path": "src/assets/icons/IconS_Buff_049.webp",
-        "candidates": ["src/assets/icons/IconS_Buff_049.webp", "src/assets/icons/IconS_Buff_049.png"]
+        "path": "src/assets/icons/IconS_Buff_053.webp",
+        "candidates": ["src/assets/icons/IconS_Buff_053.webp", "src/assets/icons/IconS_Buff_053.png"]
       }
     },
     "asset-overlay.clementine.psychic-trauma-icon": {
@@ -7515,11 +7539,11 @@
       "slot": "icon",
       "kind": "overlay",
       "ownerId": "overlay.clementine.psychic-trauma",
-      "assetId": "IconS_Buff_049",
+      "assetId": "IconS_Buff_053",
       "availability": {
         "status": "available",
-        "path": "src/assets/icons/IconS_Buff_049.webp",
-        "candidates": ["src/assets/icons/IconS_Buff_049.webp", "src/assets/icons/IconS_Buff_049.png"]
+        "path": "src/assets/icons/IconS_Buff_053.webp",
+        "candidates": ["src/assets/icons/IconS_Buff_053.webp", "src/assets/icons/IconS_Buff_053.png"]
       }
     },
     "asset-overlay.clementine.symbiosis-icon": {
@@ -7527,11 +7551,11 @@
       "slot": "icon",
       "kind": "overlay",
       "ownerId": "overlay.clementine.symbiosis",
-      "assetId": "IconS_Buff_049",
+      "assetId": "IconS_Buff_053",
       "availability": {
         "status": "available",
-        "path": "src/assets/icons/IconS_Buff_049.webp",
-        "candidates": ["src/assets/icons/IconS_Buff_049.webp", "src/assets/icons/IconS_Buff_049.png"]
+        "path": "src/assets/icons/IconS_Buff_053.webp",
+        "candidates": ["src/assets/icons/IconS_Buff_053.webp", "src/assets/icons/IconS_Buff_053.png"]
       }
     },
     "asset-overlay.doll-inferno.finale-icon": {
@@ -8633,6 +8657,12 @@
     },
     "wheel-0137": {
       "icon": "asset-wheel-0137-icon"
+    },
+    "wheel-0165": {
+      "icon": "asset-wheel-0165-icon"
+    },
+    "wheel-0166": {
+      "icon": "asset-wheel-0166-icon"
     },
     "relic-0001": {
       "icon": "asset-relic-0001-icon"

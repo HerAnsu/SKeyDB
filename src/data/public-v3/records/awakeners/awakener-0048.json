@@ -21,11 +21,11 @@
   "faction": "Out of the Aeons",
   "aliases": ["thais"],
   "searchTags": ["Weakness", "Vulnerable", "Poison", "Bleed", "Counter", "STR Up", "Arithmetica", "Keyflare"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 49,
-    "ATK": 47,
-    "DEF": 44
+    "CON": 33,
+    "ATK": 32,
+    "DEF": 30
   },
   "substatsLv1": {
     "CritRate": 5,

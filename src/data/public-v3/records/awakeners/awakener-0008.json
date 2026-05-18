@@ -21,11 +21,11 @@
   "faction": "The Fools",
   "aliases": ["castor"],
   "searchTags": ["Weakness", "Draw"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 52,
-    "ATK": 47,
-    "DEF": 55
+    "CON": 35,
+    "ATK": 32,
+    "DEF": 37
   },
   "substatsLv1": {
     "CritRate": 5,
@@ -70,7 +70,7 @@
         "kind": "story",
         "title": "Story: I",
         "unlockCondition": "Affinity Level 3",
-        "content": "While I was on a mission far away from Londinium, on that barren plateau known for its poverty, I happened to discover an astonishing account in a mountain village that had only a few remaining residents.\nOn the night the monster appeared, it seemed as if the sky was shrouded by some strange shadow, fog rolling on the ground, while a dim green hue emerged from deep within the clouds, a phenomenon not just of nature, but a projection of a living, breathing entity.\nDeep in the desolate mountains where tall trees stood, a roar, like a wave of fury, suddenly resonated—a howl from something that did not belong to any creature, stirring the deepest fears of instinct within people.\nA massive shadow sped past, shaking the entire mountain along with its obscuring presence, and all the branches and leaves of the trees trembled, creating a synchronized whisper-like rustle.\n\"I saw it! Those long, dense tendrils, those eyes glowing green, that must be the source of that terrifying shadow above. It noticed me, even locked onto me! I truly thought my life would end at that moment, but perhaps it had just had its fill, and before I blacked out from suffocation, it mercifully turned away.\" \nThis is the only interview with an official witness, and the villagers, still entrenched in nightmares, refuse to recall more details. However, from existing signs, this massive dark green monster, besides having demolished part of the mountains and leaving a few remnants of beast corpses with only strands of blood, did not show greater aggression, like a normal beast feeding. Perhaps its approach to the village stemmed solely from a curious peek.\nBut in the face of any unknown horror, we evidently need to prepare for the worst; I will continue my investigation on the @3 plateau for half a month, and if there are any other notable danger signals, I will include them in the mission report at any time.\n\n——Excerpt from the Mythag Field Investigation Notes 19@2 Annual Record"
+        "content": "While carrying out a mission on a remote, barren, and little-known plateau far from Londinium, I happened upon an astonishing account in a mountain village with only a handful of Residents remaining.\nOn the night the Monster appeared, the sky itself seemed shrouded by some eerie shadow. Fog rolled across the ground, and deep within the clouds, a dim green hue emerged—this was by no means a mere natural phenomenon, but the projection of something alive, something breathing.\nFrom deep within the desolate Mountains bristling with tall trees, a sudden roar—a howling shockwave—erupted. That shriek, belonging to no known creature, stirred Fear from the deepest recesses of human instinct.\nA massive shadow swept swiftly overhead. The entire mountain shuddered along with that sky-blotting shadow, and every branch and leaf on every tree trembled in unison, producing a synchronized, Whisper-like rustling.\n\"I saw it! Those long, densely packed tentacles, those eyes glowing green—that was absolutely the source of that Horror in the sky. It Discovered me, even locked its gaze firmly on me! I truly thought my life would End at that very moment, but perhaps it had just finished a full meal. Before I blacked out from Suffocation, it mercifully turned and left.\"\nThis is the only interview with a confirmed eyewitness. The villager, still deeply mired in nightmares to this day, refused to recall further details. However, from the available evidence, this massive dark-green Monster, aside from destroying part of the mountain forest like a passing hurricane and leaving behind a few Beast skeletons with nothing but traces of Blood remaining, showed no greater aggression—much like a predator feeding normally. Perhaps its approach toward the village was merely driven by some curious gaze.\nBut in the face of any Unknown Horror, we must clearly prepare for the worst. I will continue my investigation on the @3 Plateau for a period of half a month. Should any other noteworthy signs of danger arise, I will append them to the mission report at once.\n\n— Excerpt from \"Mythag Overseas Investigation Notes, A.F.3@2 Annual Compendium\""
       },
       {
         "kind": "story",

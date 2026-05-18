@@ -81,11 +81,11 @@ describe('description-records', () => {
     )
 
     expect(resolved.description).toContain(
-      'Gain 30% {DEF} Shield and 41.4% {ATK} stacks of {Counter}.',
+      'Gain 30% {DEF} Shield and 62.1% {ATK} stacks of {Counter}.',
     )
-    expect(resolved.resolvedArgs.Arg2.formattedTotalValue).toBe('41.4% {ATK}')
+    expect(resolved.resolvedArgs.Arg2.formattedTotalValue).toBe('62.1% {ATK}')
     expect(resolved.orderedArgEntries.map((entry) => entry.key)).toEqual(['Arg1', 'Arg2'])
-    expect(resolved.orderedArgEntries[1].hover).toContain('Lv2: 41.4% ATK = 58')
+    expect(resolved.orderedArgEntries[1].hover).toContain('Lv2: 62.1% ATK = 87')
   })
 
   it('preserves template appearance order even when arg keys are not stored numerically', async () => {

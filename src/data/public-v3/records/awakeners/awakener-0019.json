@@ -21,11 +21,11 @@
   "faction": "The Fools",
   "aliases": ["helot: catena", "g-helot"],
   "searchTags": ["Bleed", "STR Up", "Draw", "Hand Limit", "Heal", "Self-Harm", "Strike"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 55,
-    "ATK": 53,
-    "DEF": 39
+    "CON": 37,
+    "ATK": 36,
+    "DEF": 27
   },
   "substatsLv1": {
     "CritRate": 5.8,
@@ -82,7 +82,7 @@
         "kind": "story",
         "title": "Story: III",
         "unlockCondition": "Affinity Level 7",
-        "content": "She grew up into a kind and gentle individual under the care and guidance of that lady, resembling a true noblewoman. However, due to an act of kindness towards a slave, she was ruthlessly abandoned by her \"parents.\" \nThe Spartans never accepted her, and all her kin harbored deep-seated hatred toward her. \nIn an instant, she became a betrayer in everyone's eyes, losing her sense of self. \nIn the prison, a strong malice emanated from everyone, as if it were a contagious disease, even though they had never met. \nThe torment in the dark seemed eternal, and she became neurotically fearful of anyone approaching, unable to sleep each day, finding solace only when fainting, allowing her to close her eyes in peace; yet upon waking, she plunged back into endless nightmares. \nWhat exactly did she do wrong? How did things come to this? \nHer resentment found no outlet, unable to comprehend the logic of fate. \nWas it because she was guilty? \nBut if she were guilty, then the guilt of everyone else would be tenfold. \nThe accumulated hatred transformed into bitterness, endless anger burning through her veins day and night, until one day it finally burned down the cage that trapped her. \nThe chains that had entwined her for years now wrapped around the necks of those who shouted, and the chains had long since melded with her body; they were truly a handy weapon. She gripped the blood-stained chains to pursue each filthy soul. \nRed, red, warm red, stinking red. \nLook, she knew it all along; no one's soul is pure white."
+        "content": "Under the care and tutelage of that lady, she grew into someone kind and gentle, like a true noblewoman. Yet a single act of unwitting kindness toward a Slave was all it took for her \"parents\" to cast her aside without mercy.\nThe Spartans had never accepted her, and all her own kin despised her to the bone.\nIn an instant, she became a traitor in Everyone's eyes, stripped of any place where she could belong.\nIn that prison, every person radiated a thick malice, like some contagious plague—even though none of them had ever met before.\nThe endless torment in that sunless hell felt like eternity. She grew neurotically terrified of anyone approaching, unable to sleep each night. Only when she occasionally Fainted could she close her eyes in peace—yet upon opening them, she would plunge once more into an endless nightmare.\nWhat had she done wrong? How had everything come to this?\nHer Resentment drifted aimlessly with nowhere to settle, unable to untangle the logic of Fate.\nWas it because she was guilty?\nBut if she was guilty, then the guilt of Everyone else was tenfold.\nThat hatred accumulated day by day into bitter fury, and the endless Anger Burning through her Blood night after night finally, one day, incinerated the cage that held her.\nThe chains that had been Entwined around her for years now coiled around one screaming throat after another. Over the years, the chains had long since merged with her body—they fit her hands perfectly. Gripping those blood-soaked chains, she hunted down one filthy soul after another.\nRed, red, warm red, reeking red.\nSee? She knew it all along—not a single soul among them was pure."
       },
       {
         "kind": "story",

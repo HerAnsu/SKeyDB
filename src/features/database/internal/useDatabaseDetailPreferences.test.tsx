@@ -147,6 +147,7 @@ describe('useDatabaseDetailPreferences', () => {
           selectedEnlightenSlot: null,
           skillLevel: 1,
           soulforgeLevel: 0,
+          gnosticPotentialLevel: 0,
         },
       },
       wheel: {

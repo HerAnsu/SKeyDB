@@ -21,11 +21,11 @@
   "faction": "Outlanders",
   "aliases": ["mouchette"],
   "searchTags": ["Stun", "Pursuit", "Death Resistance", "Strike"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 44,
-    "ATK": 52,
-    "DEF": 44
+    "CON": 30,
+    "ATK": 35,
+    "DEF": 30
   },
   "substatsLv1": {
     "CritRate": 5,

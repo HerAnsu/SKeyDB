@@ -21,11 +21,11 @@
   "faction": "Among the Stars",
   "aliases": ["wanda"],
   "searchTags": ["Counter", "STR Down"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 55,
-    "ATK": 35,
-    "DEF": 64
+    "CON": 37,
+    "ATK": 24,
+    "DEF": 44
   },
   "substatsLv1": {
     "CritRate": 5,

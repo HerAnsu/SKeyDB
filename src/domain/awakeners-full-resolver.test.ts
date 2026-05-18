@@ -597,7 +597,7 @@ describe('awakeners-full-resolver', () => {
     )
     expect(strike?.descriptionArgs.Arg3).toEqual({
       kind: 'fixed',
-      value: '1',
+      value: '3',
       suffix: '%',
       stat: 'ATK',
     })

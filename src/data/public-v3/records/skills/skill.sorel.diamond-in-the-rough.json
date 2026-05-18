@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0046",
   "slot": "Skill2",
-  "descriptionTemplate": "Lose [Arg1]% Current HP.{Embryo Fusion} +[Blood:Arg2]%. During this turn, recover [Arg3] HP at turn end for each instance of DMG dealt.",
+  "descriptionTemplate": "Lose [Arg1]% of current HP. {Embryo Fusion} +[Blood:Arg2]. For the remaining duration of this turn, each time you deal 1 instance of DMG, restore [Arg3] HP at the end of the turn.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "fixed",
@@ -18,8 +18,7 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["30", "32", "34", "36", "38", "40"],
-      "suffix": "%"
+      "values": ["30", "32", "34", "36", "38", "40"]
     },
     "Arg3": {
       "kind": "scaling",

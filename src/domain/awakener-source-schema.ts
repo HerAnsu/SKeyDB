@@ -299,7 +299,9 @@ export const awakenerTalentSchema = describedRecordSchema.extend({
   id: nonEmptyStringSchema,
   ownerAwakenerId: z.number().int().positive(),
   displayName: nonEmptyStringSchema,
+  family: nonEmptyStringSchema.optional(),
   maxLevel: z.number().int().positive().optional(),
+  defaultMaxed: z.boolean().optional(),
   hasLevelScaledDescription: z.boolean().optional(),
 })
 

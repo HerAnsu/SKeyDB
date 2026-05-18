@@ -87,6 +87,7 @@ const databaseDetailAwakenerPreferencesSchema = z.object({
       skillLevel: z.number().optional(),
       selectedEnlightenSlot: selectedEnlightenSlotSchema.optional(),
       soulforgeLevel: z.number().optional(),
+      gnosticPotentialLevel: z.number().optional(),
     })
     .default(DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES.defaultSelection),
 })

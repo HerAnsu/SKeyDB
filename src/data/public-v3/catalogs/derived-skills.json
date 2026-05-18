@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "derived-skills",
   "kind": "derivedSkill",
-  "recordCount": 113,
+  "recordCount": 117,
   "records": [
     {
       "kind": "derivedSkill",
@@ -679,6 +679,24 @@
     },
     {
       "kind": "derivedSkill",
+      "id": "derived.global.hanafubuki",
+      "name": "Hanafubuki",
+      "route": {
+        "slug": "hanafubuki",
+        "canonicalPath": "/database/derived-skills/hanafubuki"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.ichigo-ichie",
+      "name": "Ichigo Ichie",
+      "route": {
+        "slug": "ichigo-ichie",
+        "canonicalPath": "/database/derived-skills/ichigo-ichie"
+      }
+    },
+    {
+      "kind": "derivedSkill",
       "id": "derived.global.insight",
       "name": "Insight",
       "route": {
@@ -706,6 +724,15 @@
     },
     {
       "kind": "derivedSkill",
+      "id": "derived.global.sakura-blossoms",
+      "name": "Sakura Blossoms",
+      "route": {
+        "slug": "sakura-blossoms",
+        "canonicalPath": "/database/derived-skills/sakura-blossoms"
+      }
+    },
+    {
+      "kind": "derivedSkill",
       "id": "derived.global.silver-key-gleam",
       "name": "Silver Key Gleam",
       "route": {
@@ -720,6 +747,15 @@
       "route": {
         "slug": "slumber",
         "canonicalPath": "/database/derived-skills/slumber"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.vernal-message",
+      "name": "Vernal Message",
+      "route": {
+        "slug": "vernal-message",
+        "canonicalPath": "/database/derived-skills/vernal-message"
       }
     },
     {

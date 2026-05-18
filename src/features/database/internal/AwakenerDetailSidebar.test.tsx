@@ -75,10 +75,14 @@ const TEST_CONTROLS: AwakenerDatabaseControls = {
   psycheSurgeOffsetMin: 0,
   psycheSurgeOffsetMax: 12,
   hasSoulforgeTalent: false,
+  hasGnosticPotentialTalent: false,
+  canAdjustGnosticPotential: false,
   skillLevelMin: 1,
   skillLevelMax: 6,
   soulforgeLevelMin: null,
   soulforgeLevelMax: null,
+  gnosticPotentialLevelMin: null,
+  gnosticPotentialLevelMax: null,
 }
 
 const TEST_SELECTION: AwakenerDatabaseSelection = {
@@ -87,6 +91,7 @@ const TEST_SELECTION: AwakenerDatabaseSelection = {
   skillLevel: 1,
   selectedEnlightenSlot: null,
   soulforgeLevel: 0,
+  gnosticPotentialLevel: 0,
 }
 
 describe('AwakenerDetailSidebar', () => {

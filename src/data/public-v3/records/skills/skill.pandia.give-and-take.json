@@ -17,7 +17,7 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
+      "values": ["10", "12", "14", "16", "18", "20"],
       "stat": "ATK",
       "suffix": "%",
       "substatBonus": {
@@ -28,7 +28,7 @@
     },
     "Arg3": {
       "kind": "scaling",
-      "values": ["30", "36", "42", "48", "54", "60"],
+      "values": ["40", "48", "56", "64", "72", "80"],
       "stat": "ATK",
       "suffix": "%",
       "substatBonus": {
@@ -62,7 +62,7 @@
           },
           "Arg2": {
             "kind": "scaling",
-            "values": ["7.5", "9", "10.5", "12", "13.5", "15"],
+            "values": ["10", "12", "14", "16", "18", "20"],
             "stat": "ATK",
             "suffix": "%",
             "substatBonus": {
@@ -73,7 +73,7 @@
           },
           "Arg3": {
             "kind": "scaling",
-            "values": ["30", "36", "42", "48", "54", "60"],
+            "values": ["40", "48", "56", "64", "72", "80"],
             "stat": "ATK",
             "suffix": "%",
             "substatBonus": {

@@ -21,11 +21,11 @@
   "faction": "Gateway",
   "aliases": ["tawil"],
   "searchTags": ["Barrier", "STR Up", "Pierce DMG", "Fixed DMG", "Arithmetica", "Discard", "Draw", "Keyflare", "Max HP DMG"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 47,
-    "ATK": 47,
-    "DEF": 47
+    "CON": 32,
+    "ATK": 32,
+    "DEF": 32
   },
   "substatsLv1": {
     "CritRate": 5,

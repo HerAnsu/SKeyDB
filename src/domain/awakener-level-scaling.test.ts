@@ -339,46 +339,46 @@ describe('awakeners full current public data', () => {
 
     expect(clementine ? resolveAwakenerStatsForLevel(clementine, 1) : null).toEqual(
       expect.objectContaining({
-        CON: '44',
-        ATK: '52',
-        DEF: '42',
+        CON: '30',
+        ATK: '35',
+        DEF: '29',
       }),
     )
     expect(clementine ? resolveAwakenerStatsForLevel(clementine, 60) : null).toEqual(
       expect.objectContaining({
-        CON: '126',
-        ATK: '149',
-        DEF: '122',
+        CON: '112',
+        ATK: '132',
+        DEF: '108',
       }),
     )
 
     expect(pollux ? resolveAwakenerStatsForLevel(pollux, 1) : null).toEqual(
       expect.objectContaining({
-        CON: '49',
-        ATK: '55',
-        DEF: '47',
+        CON: '33',
+        ATK: '37',
+        DEF: '32',
       }),
     )
     expect(pollux ? resolveAwakenerStatsForLevel(pollux, 60) : null).toEqual(
       expect.objectContaining({
-        CON: '140',
-        ATK: '158',
-        DEF: '135',
+        CON: '124',
+        ATK: '140',
+        DEF: '120',
       }),
     )
 
     expect(wanda ? resolveAwakenerStatsForLevel(wanda, 1) : null).toEqual(
       expect.objectContaining({
-        CON: '55',
-        ATK: '35',
-        DEF: '64',
+        CON: '37',
+        ATK: '24',
+        DEF: '44',
       }),
     )
     expect(wanda ? resolveAwakenerStatsForLevel(wanda, 60) : null).toEqual(
       expect.objectContaining({
-        CON: '158',
-        ATK: '99',
-        DEF: '185',
+        CON: '140',
+        ATK: '88',
+        DEF: '164',
       }),
     )
   })
@@ -396,14 +396,14 @@ describe('awakeners full current public data', () => {
       [1, 10, 20, 30, 40, 50, 60, 70, 80, 90].map(
         (level) => resolveAwakenerStatsForLevel(pollux, level).ATK,
       ),
-    ).toEqual(['55', '70', '88', '105', '123', '140', '158', '175', '193', '210'])
+    ).toEqual(['37', '53', '70', '88', '105', '123', '140', '158', '175', '193'])
 
     expect(wanda.statScaling.ATK).toBe(1.1)
     expect(
       [1, 10, 20, 30, 40, 50, 60, 70, 80, 90].map(
         (level) => resolveAwakenerStatsForLevel(wanda, level).ATK,
       ),
-    ).toEqual(['35', '44', '55', '66', '77', '88', '99', '110', '121', '132'])
+    ).toEqual(['24', '33', '44', '55', '66', '77', '88', '99', '110', '121'])
   })
 
   it('rewinds every secondary stat back to the canonical Lv. 1 defaults', async () => {

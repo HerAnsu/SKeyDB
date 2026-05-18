@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0030",
   "slot": "E2",
-  "descriptionTemplate": "\"Basic Strike\" gains {Leap}: Applies 50% DMG as {Poison}; \"Basic Defense\" gains {Leap}: Triggers 25% {Poison} on all enemies.",
+  "descriptionTemplate": "\"Basic Strike\" applies 50% DMG as {Poison}; \"Basic Defense\" triggers 25% {Poison} on all enemies.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Liz"
 }

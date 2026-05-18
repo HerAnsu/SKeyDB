@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0013",
   "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Flesh Detached} is enhanced: Doll's \"Strike\" and \"Defense\" now also generate Shield.",
+  "descriptionTemplate": "{Rouse} {Flesh Detached} is enhanced: Shield generated +50%; Doll's \"Strike\" and \"Defense\" now also generate Shield.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Doll"
 }

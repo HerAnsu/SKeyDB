@@ -37,7 +37,7 @@
       "ownerAwakenerId": "awakener-0049",
       "ownerAwakenerName": "Tinct",
       "patch": {
-        "descriptionTemplate": "Tinct gains [Energy:Arg1] Aliemus, {Rouse}: Tinct's \"Strike\" Base DMG +[Arg2]%, all of Tinct's cards gain 1 random effect, which will be removed at battle end. The first time Tinct plays a \"Skill\" each turn, generate 1 Temporary \"Strike\" with 0 Arithmetica Cost."
+        "descriptionTemplate": "Tinct gains [Energy:Arg1] Aliemus, {Rouse}: Tinct's \"Strike\" Base DMG +[Arg2]%, all of Tinct's cards gain 1 random effect, which will be removed at battle end. The first time Tinct plays a \"Skill\" each turn, generate 1 Temporary \"Strike\" with 0 Arithmetica Cost, the random effects of this \"Strike\" x2."
       }
     }
   ],

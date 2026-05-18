@@ -140,6 +140,7 @@ export function makeDatabaseShellView(
   return {
     selection: {
       soulforgeLevel: 0,
+      gnosticPotentialLevel: 0,
       selectedEnlightenSlot: null,
     },
     skillLevel: 1,

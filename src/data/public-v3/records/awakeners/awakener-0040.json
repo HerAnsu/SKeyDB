@@ -21,11 +21,11 @@
   "faction": "The Fools",
   "aliases": ["pickman"],
   "searchTags": ["STR Up", "Steal STR", "Discover", "Arithmetica", "Draw"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 50,
-    "ATK": 45,
-    "DEF": 50
+    "CON": 34,
+    "ATK": 31,
+    "DEF": 34
   },
   "substatsLv1": {
     "CritRate": 5,

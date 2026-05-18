@@ -20,6 +20,7 @@ describe('awakener-database-state', () => {
         psycheSurgeOffset: -2,
         skillLevel: 99,
         soulforgeLevel: 4,
+        gnosticPotentialLevel: -3,
       }),
     ).toEqual({
       awakenerLevel: 90,
@@ -27,6 +28,7 @@ describe('awakener-database-state', () => {
       skillLevel: 6,
       selectedEnlightenSlot: null,
       soulforgeLevel: 4,
+      gnosticPotentialLevel: 0,
     })
   })
 
@@ -56,6 +58,7 @@ describe('awakener-database-state', () => {
       skillLevel: 6,
       selectedEnlightenSlot: 'E3',
       soulforgeLevel: 0,
+      gnosticPotentialLevel: 5,
     })
     expect(resolved.controls.enlightenOptions).toEqual([
       {value: null, label: 'E0'},
@@ -112,6 +115,67 @@ describe('awakener-database-state', () => {
     expect(soulforgeState.stats.DEF).toBe('96')
   })
 
+  it('layers adjustable Gnostic Potential additive stats on top of normal level scaling', () => {
+    const fakeRecord = buildGnosticFixture({defaultMaxed: false})
+
+    const offState = resolveAwakenerDatabaseState(fakeRecord, {
+      awakenerLevel: 60,
+      gnosticPotentialLevel: 0,
+    })
+    const defaultState = resolveAwakenerDatabaseState(fakeRecord, {
+      awakenerLevel: 60,
+    })
+    const levelThreeState = resolveAwakenerDatabaseState(fakeRecord, {
+      awakenerLevel: 60,
+      gnosticPotentialLevel: 3,
+    })
+
+    expect(offState.stats).toMatchObject({
+      CON: '80',
+      ATK: '80',
+      DEF: '80',
+    })
+    expect(defaultState.selection.gnosticPotentialLevel).toBe(0)
+    expect(defaultState.stats).toMatchObject({
+      CON: '80',
+      ATK: '80',
+      DEF: '80',
+    })
+    expect(levelThreeState.stats).toMatchObject({
+      CON: '89',
+      ATK: '93',
+      DEF: '87',
+    })
+    expect(levelThreeState.controls).toMatchObject({
+      hasGnosticPotentialTalent: true,
+      canAdjustGnosticPotential: true,
+      gnosticPotentialLevelMin: 0,
+      gnosticPotentialLevelMax: 5,
+    })
+  })
+
+  it('keeps default-maxed Gnostic Potential at max without exposing an adjustable control', () => {
+    const fakeRecord = buildGnosticFixture({defaultMaxed: true})
+
+    const resolved = resolveAwakenerDatabaseState(fakeRecord, {
+      awakenerLevel: 60,
+      gnosticPotentialLevel: 0,
+    })
+
+    expect(resolved.selection.gnosticPotentialLevel).toBe(5)
+    expect(resolved.stats).toMatchObject({
+      CON: '95',
+      ATK: '101',
+      DEF: '91',
+    })
+    expect(resolved.controls).toMatchObject({
+      hasGnosticPotentialTalent: true,
+      canAdjustGnosticPotential: false,
+      gnosticPotentialLevelMin: null,
+      gnosticPotentialLevelMax: 5,
+    })
+  })
+
   it('describes the available database controls from canonical current data', () => {
     const fakeRecord = buildSoulforgeFixture()
 
@@ -126,10 +190,14 @@ describe('awakener-database-state', () => {
       psycheSurgeOffsetMin: 0,
       psycheSurgeOffsetMax: 12,
       hasSoulforgeTalent: true,
+      hasGnosticPotentialTalent: false,
+      canAdjustGnosticPotential: false,
       skillLevelMin: 1,
       skillLevelMax: 6,
       soulforgeLevelMin: 0,
       soulforgeLevelMax: 3,
+      gnosticPotentialLevelMin: null,
+      gnosticPotentialLevelMax: null,
     })
   })
 
@@ -204,6 +272,7 @@ describe('awakener-database-state', () => {
       skillLevel: 1,
       selectedEnlightenSlot: null,
       soulforgeLevel: 0,
+      gnosticPotentialLevel: 0,
     })
   })
 
@@ -221,6 +290,7 @@ describe('awakener-database-state', () => {
       skillLevel: 1,
       selectedEnlightenSlot: 'E3',
       soulforgeLevel: 3,
+      gnosticPotentialLevel: 0,
     })
   })
 
@@ -245,9 +315,55 @@ describe('awakener-database-state', () => {
       skillLevel: 1,
       selectedEnlightenSlot: 'E3',
       soulforgeLevel: 3,
+      gnosticPotentialLevel: 0,
     })
   })
 })
+
+function buildGnosticFixture({defaultMaxed}: {defaultMaxed: boolean}): AwakenerFullRecord {
+  const record = buildSoulforgeFixture()
+
+  return {
+    ...record,
+    talents: {
+      ...record.talents,
+      T3: undefined,
+      T4: {
+        id: 'talent.test.gnostic-potential',
+        ownerAwakenerId: 999,
+        displayName: 'Gnostic Potential',
+        descriptionTemplate:
+          'This Awakener gains [Arg1] Levels of Base Attributes. CON +[Talent_Attr_Lv_physique], ATK +[Talent_Attr_Lv_atk], DEF +[Talent_Attr_Lv_def].',
+        descriptionArgs: {
+          Arg1: {
+            kind: 'linear',
+            base: '2',
+            gainPerLevel: '2',
+          },
+          Talent_Attr_Lv_physique: {
+            kind: 'linear',
+            base: '3',
+            gainPerLevel: '3',
+          },
+          Talent_Attr_Lv_atk: {
+            kind: 'linear',
+            base: '5',
+            gainPerLevel: '4',
+          },
+          Talent_Attr_Lv_def: {
+            kind: 'linear',
+            base: '3',
+            gainPerLevel: '2',
+          },
+        },
+        family: 'gnostic_potential',
+        hasLevelScaledDescription: true,
+        maxLevel: 5,
+        ...(defaultMaxed ? {defaultMaxed: true} : {}),
+      },
+    },
+  }
+}
 
 function buildSoulforgeFixture(): AwakenerFullRecord {
   return {

@@ -2068,6 +2068,11 @@
   "talents": {
     "family": [
       {
+        "value": "gnostic_potential",
+        "label": "Gnostic Potential",
+        "order": 1000
+      },
+      {
         "value": "madness_omen",
         "label": "Madness Omen",
         "order": 1000

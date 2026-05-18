@@ -34,7 +34,7 @@
       "ownerAwakenerId": "awakener-0046",
       "ownerAwakenerName": "Sorel",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. If current HP is below 50%, deal an additional 1 instance of DMG, {Embryo Fusion} +[Blood:Arg3]%. Sorel obtains [Energy:Arg2] Aliemus.",
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. If current HP is below 50%, deal 1 additional hit of DMG. {Embryo Fusion} +[Blood:Arg3]. Sorel gains [Energy:Arg2] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -48,8 +48,7 @@
           },
           "Arg3": {
             "kind": "fixed",
-            "value": "10",
-            "suffix": "%"
+            "value": "10"
           }
         }
       }

@@ -37,7 +37,7 @@
       "ownerAwakenerId": "awakener-0019",
       "ownerAwakenerName": "Helot: Catena",
       "patch": {
-        "descriptionTemplate": "Helot: Catena gains [Energy:Arg1] Aliemus. {Rouse}: Place a {Crimson Shackles} into hand, and Helot: Catena's Command Cards gain {Retain}. At turn start, Helot: Catena's Base DMG +[Arg2]% for this battle. After unleashing Exalt {Sanguine Fetters}, grant each unique \"Helot: Catena\" Command Card in hand 35 stacks of {Temporary Enhance}."
+        "descriptionTemplate": "Helot: Catena gains [Energy:Arg1] Aliemus. {Rouse}: Place a {Crimson Shackles} into hand, and Helot: Catena's Command Cards gain {Retain}. At turn start, Helot: Catena's Base DMG +[Arg2]% for this battle. After unleashing Exalt {Sanguine Fetters}, grant each unique \"Helot: Catena\" Command Card in hand 50 stacks of {Temporary Enhance}."
       }
     }
   ],
