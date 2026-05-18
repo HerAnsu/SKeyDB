@@ -6,6 +6,7 @@ import {getBrowserLocalStorage, type StorageLike} from '@/domain/storage'
 import {
   createLegacyMigrationExportUrl,
   createMigrationNonce,
+  DEFAULT_LEGACY_MIGRATION_EXPORT_URL,
   DEFAULT_LEGACY_MIGRATION_SOURCE_ORIGINS,
   isAllowedMigrationSourceOrigin,
   isAllowedMigrationTargetOrigin,
@@ -20,10 +21,13 @@ import {
   type DomainStorageMigrationPlan,
   type DomainStorageMigrationPlanItem,
 } from '@/domain/storage-migration/migrationImportPolicy'
+import {createDomainStorageMigrationSnapshot} from '@/domain/storage-migration/storageMigrationSnapshot'
+
+import {ManualTransferCodePanel} from './ManualTransferCodePanel'
 
 interface MigrationReceivePageProps {
   storage?: StorageLike | null
-  locationLike?: Pick<Location, 'origin' | 'hostname' | 'protocol' | 'port'>
+  locationLike?: Pick<Location, 'origin' | 'hostname' | 'protocol' | 'port' | 'pathname'>
   openWindow?: (url: string, target: string) => unknown
   createNonce?: () => string
   allowLocalOrigins?: boolean
@@ -67,6 +71,17 @@ export function MigrationReceivePage({
   const targetOriginAllowed = isAllowedMigrationTargetOrigin(locationLike.origin, {
     allowLocalOrigins,
   })
+  const sourceOriginAllowed = isAllowedMigrationSourceOrigin(locationLike.origin, {
+    allowLocalOrigins,
+  })
+  const sourceSnapshot = useMemo(() => {
+    if (!sourceOriginAllowed || !storage) {
+      return null
+    }
+    return createDomainStorageMigrationSnapshot(storage, locationLike)
+  }, [locationLike, sourceOriginAllowed, storage])
+  const sourceTransferCode = sourceSnapshot?.entries.length ? JSON.stringify(sourceSnapshot) : ''
+  const manualExportUrl = configuredLegacyExportUrl ?? DEFAULT_LEGACY_MIGRATION_EXPORT_URL
 
   const reviewSnapshot = useCallback(
     (snapshot: unknown) => {
@@ -204,10 +219,10 @@ export function MigrationReceivePage({
     return (
       <section className='mx-auto max-w-3xl space-y-5 px-2 py-8 text-slate-100'>
         <div className='space-y-2'>
-          <h2 className='text-xl font-semibold'>Start from skeydb.com</h2>
+          <h2 className='text-xl font-semibold'>Manual transfer from GitHub Pages</h2>
           <p className='text-sm text-slate-300'>
-            You are on the old GitHub Pages site. Open the new SKeyDB home first, then start the
-            transfer there so your saved data knows where to go.
+            You are on the old GitHub Pages site. Copy the code below, open skeydb.com, and paste it
+            into the transfer box.
           </p>
         </div>
 
@@ -215,6 +230,20 @@ export function MigrationReceivePage({
           <FaHouse aria-hidden='true' />
           Open skeydb.com
         </a>
+
+        {sourceTransferCode ? <ManualTransferCodePanel transferCode={sourceTransferCode} /> : null}
+
+        {storage && sourceSnapshot?.entries.length === 0 ? (
+          <p className='rounded border border-amber-300/45 bg-amber-950/25 px-3 py-2 text-sm text-amber-100'>
+            No saved SKeyDB data was found in this browser on GitHub Pages.
+          </p>
+        ) : null}
+
+        {!storage ? (
+          <p className='rounded border border-rose-400/50 bg-rose-950/40 px-3 py-2 text-sm text-rose-100'>
+            Saved data is unavailable in this browser.
+          </p>
+        ) : null}
       </section>
     )
   }
@@ -245,37 +274,47 @@ export function MigrationReceivePage({
         Start transfer
       </button>
 
-      <details className='rounded border border-slate-700 bg-slate-950/25 px-3 py-2 text-sm text-slate-200'>
-        <summary className='cursor-pointer font-semibold text-slate-100'>
-          Paste a transfer code
-        </summary>
-        <div className='mt-3 space-y-2'>
+      <div className='space-y-3 rounded border border-slate-700 bg-slate-950/25 p-3 text-sm text-slate-200'>
+        <div className='space-y-1'>
+          <h3 className='text-base font-semibold text-slate-100'>Paste a transfer code</h3>
           <p className='text-slate-300'>
-            Use this only if the GitHub Pages tab shows a code instead of returning here
-            automatically.
+            If the automatic transfer does not work, open GitHub Pages on the same browser, copy the
+            code it shows, and paste it here.
           </p>
-          <label className='block text-sm font-medium text-slate-200' htmlFor='manual-payload'>
-            Paste transfer code
-          </label>
-          <textarea
-            className='min-h-28 w-full rounded border border-slate-600 bg-slate-950 p-3 font-mono text-xs text-slate-100'
-            id='manual-payload'
-            onChange={(event) => {
-              setManualPayload(event.target.value)
-            }}
-            value={manualPayload}
-          />
-          <button
-            className={SECONDARY_ACTION_CLASS}
-            disabled={!manualPayload.trim()}
-            onClick={reviewManualPayload}
-            type='button'
-          >
-            <FaClipboard aria-hidden='true' />
-            Review transfer code
-          </button>
+          <p className='text-slate-300'>
+            Need the code?{' '}
+            <a
+              className='font-semibold text-cyan-100 underline decoration-cyan-200/60 underline-offset-4 hover:text-cyan-50'
+              href={manualExportUrl}
+              rel='noreferrer'
+              target='_blank'
+            >
+              Open GitHub Pages manual transfer
+            </a>
+            .
+          </p>
         </div>
-      </details>
+        <label className='block text-sm font-medium text-slate-200' htmlFor='manual-payload'>
+          Paste transfer code
+        </label>
+        <textarea
+          className='min-h-28 w-full rounded border border-slate-600 bg-slate-950 p-3 font-mono text-xs text-slate-100'
+          id='manual-payload'
+          onChange={(event) => {
+            setManualPayload(event.target.value)
+          }}
+          value={manualPayload}
+        />
+        <button
+          className={SECONDARY_ACTION_CLASS}
+          disabled={!manualPayload.trim()}
+          onClick={reviewManualPayload}
+          type='button'
+        >
+          <FaClipboard aria-hidden='true' />
+          Review transfer code
+        </button>
+      </div>
 
       {status === 'waiting' ? (
         <p className='rounded border border-cyan-300/40 bg-cyan-950/25 px-3 py-2 text-sm text-cyan-100'>

@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useRef} from 'react'
 
-import {FaArrowRight, FaClipboard} from 'react-icons/fa6'
+import {FaArrowRight} from 'react-icons/fa6'
 import {useSearchParams} from 'react-router-dom'
 
 import {getBrowserLocalStorage, type StorageLike} from '@/domain/storage'
@@ -15,6 +15,8 @@ import {
   type DomainStorageMigrationSnapshot,
 } from '@/domain/storage-migration/storageMigrationSnapshot'
 
+import {ManualTransferCodePanel} from './ManualTransferCodePanel'
+
 type MigrationMessageTarget = {
   postMessage: (message: MigrationBridgeMessage, targetOrigin: string) => void
 } | null
@@ -27,12 +29,7 @@ interface MigrationExportPageProps {
 }
 
 type ExportStatus = 'sent' | 'manual' | 'error'
-type ExportErrorCode =
-  | 'missing_details'
-  | 'source_not_allowed'
-  | 'target_not_allowed'
-  | 'storage_unavailable'
-  | 'snapshot_empty'
+type ExportErrorCode = 'source_not_allowed' | 'storage_unavailable' | 'snapshot_empty'
 
 interface ExportError {
   code: ExportErrorCode
@@ -62,17 +59,19 @@ export function MigrationExportPage({
     return createDomainStorageMigrationSnapshot(storage, locationLike)
   }, [storage, locationLike])
   const serializedSnapshot = snapshot ? JSON.stringify(snapshot) : ''
-  const error = resolveExportError({nonce, snapshot, sourceAllowed, targetAllowed, targetOrigin})
-  const status = resolveExportStatus(error, resolvedMessageTarget)
-  const showStartOnNewDomainLink =
-    error?.code === 'missing_details' || error?.code === 'target_not_allowed'
+  const error = resolveExportError({snapshot, sourceAllowed})
+  const canPostAutomatically = Boolean(
+    nonce && targetOrigin && targetAllowed && sourceAllowed && resolvedMessageTarget,
+  )
+  const status = resolveExportStatus(error, canPostAutomatically)
+  const showNewDomainLink = status === 'manual'
 
   useEffect(() => {
     const requestKey = `${nonce}:${targetOrigin}`
     if (sentRequestKeyRef.current === requestKey) {
       return
     }
-    if (!nonce || !targetOrigin || !targetAllowed || !sourceAllowed || !resolvedMessageTarget) {
+    if (!canPostAutomatically || !resolvedMessageTarget) {
       return
     }
 
@@ -103,18 +102,18 @@ export function MigrationExportPage({
       snapshot,
     }
     resolvedMessageTarget.postMessage(message, targetOrigin)
-  }, [nonce, resolvedMessageTarget, snapshot, sourceAllowed, targetAllowed, targetOrigin])
+  }, [canPostAutomatically, nonce, resolvedMessageTarget, snapshot, targetOrigin])
 
   return (
     <section className='mx-auto max-w-2xl space-y-4 px-2 py-8 text-slate-100'>
       <div className='space-y-2'>
         <h2 className='text-xl font-semibold'>
-          {showStartOnNewDomainLink ? 'Start from skeydb.com' : 'SKeyDB domain transfer'}
+          {status === 'manual' ? 'Copy your transfer code' : 'SKeyDB domain transfer'}
         </h2>
         <p className='text-sm text-slate-300'>
           {status === 'sent'
             ? 'Transfer sent. Return to the skeydb.com tab to review it.'
-            : resolveExportIntro(status, showStartOnNewDomainLink)}
+            : resolveExportIntro(status)}
         </p>
       </div>
 
@@ -124,7 +123,7 @@ export function MigrationExportPage({
         </p>
       ) : null}
 
-      {showStartOnNewDomainLink ? (
+      {showNewDomainLink ? (
         <a className={PRIMARY_ACTION_CLASS} href={PRIMARY_MIGRATION_TARGET_URL}>
           <FaArrowRight aria-hidden='true' />
           Open skeydb.com
@@ -132,25 +131,7 @@ export function MigrationExportPage({
       ) : null}
 
       {status === 'manual' && serializedSnapshot ? (
-        <div className='space-y-2'>
-          <p className='text-sm text-slate-300'>
-            Copy this transfer code, return to skeydb.com, and paste it under "Paste a transfer
-            code."
-          </p>
-          <label className='block text-sm font-medium text-slate-200' htmlFor='migration-snapshot'>
-            Transfer code
-          </label>
-          <textarea
-            className='min-h-40 w-full rounded border border-slate-600 bg-slate-950 p-3 font-mono text-xs text-slate-100'
-            id='migration-snapshot'
-            readOnly
-            value={serializedSnapshot}
-          />
-          <p className='inline-flex items-center gap-2 text-xs text-slate-400'>
-            <FaClipboard aria-hidden='true' />
-            This code only contains SKeyDB data saved in this browser.
-          </p>
-        </div>
+        <ManualTransferCodePanel transferCode={serializedSnapshot} />
       ) : null}
     </section>
   )
@@ -171,36 +152,16 @@ function isMigrationMessageTarget(value: unknown): value is Exclude<MigrationMes
 }
 
 function resolveExportError({
-  nonce,
   snapshot,
   sourceAllowed,
-  targetAllowed,
-  targetOrigin,
 }: {
-  nonce: string
   snapshot: DomainStorageMigrationSnapshot | null
   sourceAllowed: boolean
-  targetAllowed: boolean
-  targetOrigin: string
 }): ExportError | null {
-  if (!nonce || !targetOrigin) {
-    return {
-      code: 'missing_details',
-      message:
-        'Start from skeydb.com to move saved data. GitHub Pages prepares the transfer after the new site asks for it.',
-    }
-  }
   if (!sourceAllowed) {
     return {
       code: 'source_not_allowed',
       message: 'This transfer page only works from the old GitHub Pages site.',
-    }
-  }
-  if (!targetAllowed) {
-    return {
-      code: 'target_not_allowed',
-      message:
-        'Start from skeydb.com to move saved data. This old-site tab does not know where to send the transfer.',
     }
   }
   if (!snapshot) {
@@ -220,20 +181,17 @@ function resolveExportError({
 
 function resolveExportStatus(
   error: ExportError | null,
-  messageTarget: MigrationMessageTarget,
+  canPostAutomatically: boolean,
 ): ExportStatus {
   if (error) {
     return 'error'
   }
-  return messageTarget ? 'sent' : 'manual'
+  return canPostAutomatically ? 'sent' : 'manual'
 }
 
-function resolveExportIntro(status: ExportStatus, showStartOnNewDomainLink: boolean): string {
-  if (showStartOnNewDomainLink) {
-    return 'This page is the old-site handoff step. The transfer starts from the new SKeyDB home.'
-  }
+function resolveExportIntro(status: ExportStatus): string {
   if (status === 'manual') {
-    return 'Your browser blocked the automatic handoff, so use the code below.'
+    return 'This is the old-site handoff page. Copy the code below and paste it on skeydb.com.'
   }
   return 'Preparing saved data for transfer.'
 }

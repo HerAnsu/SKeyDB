@@ -77,33 +77,44 @@ describe('MigrationExportPage', () => {
     expect(screen.getByText(/transfer sent/i)).toBeInTheDocument()
   })
 
-  it('rejects disallowed target origins', async () => {
+  it('shows a manual transfer code for disallowed target origins', async () => {
+    const storage = new MemoryStorage()
+    storage.setItem('skeydb.builder.allowDupes.v1', '1')
     const postMessage = vi.fn()
     renderExportPage({
       route: '/migrate/export?nonce=abc&targetOrigin=https%3A%2F%2Fevil.example',
+      storage,
       postMessage,
     })
 
     expect(
-      await screen.findByRole('heading', {name: /start from skeydb\.com/i}),
+      await screen.findByRole('heading', {name: /copy your transfer code/i}),
     ).toBeInTheDocument()
     expect(screen.getByRole('link', {name: /open skeydb.com/i})).toHaveAttribute(
       'href',
       'https://skeydb.com/#/migrate',
     )
+    expect(screen.getByLabelText(/transfer code/i)).toHaveDisplayValue(
+      /skeydb.builder.allowDupes.v1/,
+    )
     expect(postMessage).not.toHaveBeenCalled()
   })
 
-  it('points direct export-route visits back to the new domain', async () => {
+  it('shows a manual transfer code for direct export-route visits', async () => {
+    const storage = new MemoryStorage()
+    storage.setItem('skeydb.builder.allowDupes.v1', '1')
     const postMessage = vi.fn()
-    renderExportPage({route: '/migrate/export', postMessage})
+    renderExportPage({route: '/migrate/export', storage, postMessage})
 
     expect(
-      await screen.findByRole('heading', {name: /start from skeydb\.com/i}),
+      await screen.findByRole('heading', {name: /copy your transfer code/i}),
     ).toBeInTheDocument()
     expect(screen.getByRole('link', {name: /open skeydb.com/i})).toHaveAttribute(
       'href',
       'https://skeydb.com/#/migrate',
+    )
+    expect(screen.getByLabelText(/transfer code/i)).toHaveDisplayValue(
+      /skeydb.builder.allowDupes.v1/,
     )
     expect(postMessage).not.toHaveBeenCalled()
   })
