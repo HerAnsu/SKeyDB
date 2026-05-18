@@ -19,7 +19,7 @@
             "dzone-monster-0034",
             "dzone-monster-0029",
             "dzone-monster-0033",
-            "dzone-monster-0028",
+            "dzone-monster-0314",
             "dzone-monster-0035",
             "dzone-monster-0031",
             "dzone-monster-0025",
@@ -50,7 +50,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0028",
+                  "monsterId": "dzone-monster-0314",
                   "level": 35,
                   "hp": 571,
                   "hpBars": 1
@@ -110,7 +110,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0028",
+                  "monsterId": "dzone-monster-0314",
                   "level": 50,
                   "hp": 1335,
                   "hpBars": 1
@@ -170,7 +170,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0028",
+                  "monsterId": "dzone-monster-0314",
                   "level": 60,
                   "hp": 3788,
                   "hpBars": 1
@@ -230,7 +230,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0028",
+                  "monsterId": "dzone-monster-0314",
                   "level": 70,
                   "hp": 11575,
                   "hpBars": 1
@@ -290,7 +290,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0028",
+                  "monsterId": "dzone-monster-0314",
                   "level": 75,
                   "hp": 40180,
                   "hpBars": 1
@@ -345,7 +345,7 @@
             "dzone-monster-0016",
             "dzone-monster-0012",
             "dzone-monster-0010",
-            "dzone-monster-0027"
+            "dzone-monster-0313"
           ],
           "alerts": [
             {
@@ -419,7 +419,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0027",
+                  "monsterId": "dzone-monster-0313",
                   "level": 39,
                   "hp": 6541,
                   "hpBars": 1
@@ -497,7 +497,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0027",
+                  "monsterId": "dzone-monster-0313",
                   "level": 53,
                   "hp": 14262,
                   "hpBars": 1
@@ -575,7 +575,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0027",
+                  "monsterId": "dzone-monster-0313",
                   "level": 63,
                   "hp": 35650,
                   "hpBars": 1
@@ -653,7 +653,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0027",
+                  "monsterId": "dzone-monster-0313",
                   "level": 72,
                   "hp": 94116,
                   "hpBars": 1
@@ -731,7 +731,7 @@
                   "hpBars": 1
                 },
                 {
-                  "monsterId": "dzone-monster-0027",
+                  "monsterId": "dzone-monster-0313",
                   "level": 77,
                   "hp": 256037,
                   "hpBars": 1

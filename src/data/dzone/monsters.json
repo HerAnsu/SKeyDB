@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "scope": "monsters",
-  "recordCount": 312,
+  "recordCount": 314,
   "records": [
     {
       "id": "dzone-monster-0264",
@@ -2231,6 +2231,20 @@
       "characteristicIds": ["enemy-characteristic-0011", "enemy-characteristic-0003", "enemy-characteristic-0006"],
       "descriptionTemplate": "A product of the Sculptors' Association's modifications. Brainwashed and filled with conviction, it grows stronger with every battle.",
       "assetName": "Portrait_Small_Monster_S0302_BT"
+    },
+    {
+      "id": "dzone-monster-0313",
+      "name": "The poet",
+      "characteristicIds": ["enemy-characteristic-0011", "enemy-characteristic-0007"],
+      "descriptionTemplate": "Steadfast supporter, this is all the imagery she could create.",
+      "assetName": "Portrait_Small_Monster_DCD06_03"
+    },
+    {
+      "id": "dzone-monster-0314",
+      "name": "Thirster",
+      "characteristicIds": ["enemy-characteristic-0010", "enemy-characteristic-0015"],
+      "descriptionTemplate": "In the poem's Cité, they yearn for Colette's grace.",
+      "assetName": "Portrait_Small_Monster_DCD06_02"
     },
     {
       "id": "dzone-monster-0243",
