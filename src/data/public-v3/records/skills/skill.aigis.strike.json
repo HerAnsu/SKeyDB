@@ -34,7 +34,7 @@
       "ownerAwakenerId": "awakener-0003",
       "ownerAwakenerName": "Aigis",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG. For each stack of {Vulnerable}, {Embryo Fusion} +[Arg3]%, up to [Arg4]%. Aigis obtains [Energy:Arg2] Aliemus.",
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG. For each stack of {Vulnerable} on the target, {Embryo Fusion} +[Arg3], up to [Arg4]. Aigis gains [Energy:Arg2] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -48,13 +48,11 @@
           },
           "Arg3": {
             "kind": "fixed",
-            "value": "5",
-            "suffix": "%"
+            "value": "5"
           },
           "Arg4": {
             "kind": "fixed",
-            "value": "30",
-            "suffix": "%"
+            "value": "30"
           }
         }
       }

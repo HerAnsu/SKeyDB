@@ -40,7 +40,7 @@
           },
           "Arg2": {
             "kind": "fixed",
-            "value": "25",
+            "value": "35",
             "suffix": "%"
           }
         }

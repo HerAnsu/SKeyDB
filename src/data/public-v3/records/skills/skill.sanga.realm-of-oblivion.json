@@ -17,13 +17,13 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["2.5", "3", "3.5", "4", "4.5", "5"],
+      "values": ["4", "4.8", "5.6", "6.4", "7.2", "8"],
       "stat": "ATK",
       "suffix": "%"
     },
     "Arg3": {
       "kind": "fixed",
-      "value": "10",
+      "value": "15",
       "suffix": "%"
     }
   },

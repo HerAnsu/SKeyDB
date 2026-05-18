@@ -9,12 +9,8 @@
   },
   "ownerAwakenerId": "awakener-0055",
   "slot": "Rouse",
-  "descriptionTemplate": "Vortice gains [Energy:Arg1] Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice uses a {Pursuit}, Vortice's next Exalt gains an additional [Arg2]% {Tentacle DMG} Bonus, stacking up to [Arg3] {plural:[Arg3]|time|times}.",
+  "descriptionTemplate": "Vortice gains [Arg5]% Base Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice Unleashes a {Pursuit}, the next Vortice Aliemus Exalt additionally gains [Arg2]% {Tentacle DMG} Bonus, stacking up to [Arg3] times.",
   "descriptionArgs": {
-    "Arg1": {
-      "kind": "scaling",
-      "values": ["25", "30", "35", "40", "45", "50"]
-    },
     "Arg2": {
       "kind": "scaling",
       "values": ["100", "110", "120", "130", "140", "150"],
@@ -23,6 +19,11 @@
     "Arg3": {
       "kind": "fixed",
       "value": "5"
+    },
+    "Arg5": {
+      "kind": "scaling",
+      "values": ["25", "30", "35", "40", "45", "50"],
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -41,12 +42,8 @@
       "ownerAwakenerId": "awakener-0055",
       "ownerAwakenerName": "Vortice",
       "patch": {
-        "descriptionTemplate": "Vortice gains [Energy:Arg1] Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice unleashes {Pursuit}, her next Exalt gains an extra [Arg2]% {Tentacle DMG} Bonus, and the next Exalt deals {Fixed DMG} equal to 1% of Max HP to the enemy with the highest HP, stacking up to [Arg3] {plural:[Arg3]|time|times}.",
+        "descriptionTemplate": "Vortice gains Aliemus equal to [Arg5]% of her Base Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice unleashes {Pursuit}, her next Exalt gains an extra [Arg2]% {Tentacle DMG} Bonus, and the next Exalt deals {Fixed DMG} equal to [Arg4]% of Max HP to the enemy with the highest HP, stacking up to [Arg3] {plural:[Arg3]|time|times}.",
         "descriptionArgs": {
-          "Arg1": {
-            "kind": "scaling",
-            "values": ["25", "30", "35", "40", "45", "50"]
-          },
           "Arg2": {
             "kind": "scaling",
             "values": ["150", "160", "170", "180", "190", "200"],
@@ -55,6 +52,16 @@
           "Arg3": {
             "kind": "fixed",
             "value": "5"
+          },
+          "Arg4": {
+            "kind": "fixed",
+            "value": "1",
+            "suffix": "%"
+          },
+          "Arg5": {
+            "kind": "scaling",
+            "values": ["25", "30", "35", "40", "45", "50"],
+            "suffix": "%"
           }
         }
       }

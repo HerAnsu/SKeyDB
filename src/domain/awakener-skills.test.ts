@@ -290,9 +290,14 @@ describe('awakener-skills', () => {
     ).toEqual(
       expect.objectContaining({
         kind: 'scaling',
-        values: ['32.5', '39', '45.5', '52', '58.5', '65'],
+        values: ['40', '48', '56', '64', '72', '80'],
         suffix: '%',
         stat: 'DEF',
+        substatBonus: {
+          substat: 'SigilYield',
+          multiplier: '0.5',
+          mode: 'scale_base',
+        },
       }),
     )
     expect(
@@ -300,16 +305,21 @@ describe('awakener-skills', () => {
     ).toEqual(
       expect.objectContaining({
         kind: 'scaling',
-        values: ['50', '60', '70', '80', '90', '100'],
+        values: ['75', '90', '105', '120', '135', '150'],
         suffix: '%',
         stat: 'ATK',
+        substatBonus: {
+          substat: 'SigilYield',
+          multiplier: '1',
+          mode: 'scale_base',
+        },
       }),
     )
     expect(
       getAwakenerSkillById('skill.caecus.metamorphosed-body', skills)?.descriptionArgs.Arg3,
     ).toEqual({
       kind: 'scaling',
-      values: ['7', '8.4', '9.8', '11.2', '12.6', '14'],
+      values: ['10', '12', '14', '16', '18', '20'],
       suffix: '%',
       stat: 'ATK',
     })
@@ -318,7 +328,7 @@ describe('awakener-skills', () => {
     expect(getAwakenerSkillById('skill.miryam.exalted-pyre', skills)?.descriptionArgs.Arg4).toEqual(
       {
         kind: 'scaling',
-        values: ['2.5', '3', '3.5', '4', '4.5', '5'],
+        values: ['3.75', '4.5', '5.25', '6', '6.75', '7.5'],
         suffix: '%',
         stat: 'ATK',
       },
@@ -359,7 +369,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.miryam.pray-to-the-abyss', skills)?.descriptionArgs.Arg1,
     ).toEqual({
       kind: 'scaling',
-      values: ['5', '6', '7', '8', '9', '10'],
+      values: ['7.5', '9', '10.5', '12', '13.5', '15'],
       suffix: '%',
       stat: 'ATK',
       substatBonus: {
@@ -417,7 +427,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.erica.electromagnetic-blast', skills)?.descriptionArgs.Arg1,
     ).toEqual({
       kind: 'scaling',
-      values: ['35', '42', '49', '56', '63', '70'],
+      values: ['50', '60', '70', '80', '90', '100'],
       suffix: '%',
       stat: 'ATK',
     })
@@ -529,7 +539,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.nautila.ready-and-set', skills)?.descriptionArgs.Arg2,
     ).toEqual({
       kind: 'scaling',
-      values: ['20', '24', '28', '32', '36', '40'],
+      values: ['25', '30', '35', '40', '45', '50'],
       suffix: '%',
       stat: 'ATK',
       substatBonus: {
@@ -553,7 +563,7 @@ describe('awakener-skills', () => {
     ).toEqual(
       expect.objectContaining({
         kind: 'scaling',
-        values: ['30', '36', '42', '48', '54', '60'],
+        values: ['50', '60', '70', '80', '90', '100'],
         suffix: '%',
         stat: 'DEF',
       }),
@@ -632,7 +642,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.thais.ancient-caress', skills)?.descriptionArgs.Arg2,
     ).toEqual({
       kind: 'scaling',
-      values: ['2.5', '3', '3.5', '4', '4.5', '5'],
+      values: ['3', '3.6', '4.2', '4.8', '5.4', '6'],
       suffix: '%',
       stat: 'ATK',
     })
@@ -666,10 +676,10 @@ describe('awakener-skills', () => {
     )
     expect(
       getAwakenerSkillById('skill.uvhash.hymn-of-blood-and-sand', skills)?.descriptionTemplate,
-    ).toContain('{STR} multiplier +[Arg3] during this battle.')
+    ).toContain('[Arg3]x {STR} multiplier.')
     expect(
       getAwakenerSkillById('skill.uvhash.hymn-of-blood-and-sand', skills)?.descriptionTemplate,
-    ).toContain('Subsequent {Hymn of Blood and Sand} DMG +[Arg4]')
+    ).toContain('Subsequent {Hymn of Blood and Sand} released in this battle deals +[Arg4] DMG')
     expect(
       getAwakenerSkillById('skill.uvhash.hymn-of-blood-and-sand', skills)?.descriptionArgs.Arg3,
     ).toEqual({
@@ -680,7 +690,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.wanda.keeper-of-the-lost', skills)?.descriptionArgs.Arg3,
     ).toEqual({
       kind: 'scaling',
-      values: ['30', '36', '42', '48', '54', '60'],
+      values: ['40', '48', '56', '64', '72', '80'],
       suffix: '%',
       stat: 'ATK',
     })
@@ -689,7 +699,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.wanda.spine-needle-chains', skills)?.descriptionArgs.Arg1,
     ).toEqual({
       kind: 'scaling',
-      values: ['25', '30', '35', '40', '45', '50'],
+      values: ['35', '42', '49', '56', '63', '70'],
       suffix: '%',
       stat: 'ATK',
     })
@@ -711,7 +721,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.wanda.necropolis-of-dreams', skills)?.descriptionArgs.Arg2,
     ).toEqual({
       kind: 'scaling',
-      values: ['30', '36', '42', '48', '54', '60'],
+      values: ['45', '54', '63', '72', '81', '90'],
       suffix: '%',
       stat: 'ATK',
       substatBonus: {
@@ -752,7 +762,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.goliath.preemptive-revenge', skills)?.descriptionArgs.Arg2,
     ).toEqual({
       kind: 'scaling',
-      values: ['2', '2.4', '2.8', '3.2', '3.6', '4'],
+      values: ['2.5', '3', '3.5', '4', '4.5', '5'],
       suffix: '%',
       stat: 'ATK',
     })
@@ -765,7 +775,7 @@ describe('awakener-skills', () => {
     expect(getAwakenerSkillById('skill.hameln.primal-chord', skills)?.descriptionArgs.Arg2).toEqual(
       {
         kind: 'scaling',
-        values: ['5', '6', '7', '8', '9', '10'],
+        values: ['6', '7.2', '8.4', '9.6', '10.8', '12'],
         suffix: '%',
         stat: 'ATK',
       },
@@ -789,7 +799,18 @@ describe('awakener-skills', () => {
     })
     expect(
       getAwakenerSkillById('skill.helot.surviving-impasse', skills)?.descriptionArgs.Arg4,
-    ).toEqual(expect.objectContaining({kind: 'fixed', value: '0'}))
+    ).toEqual(
+      expect.objectContaining({
+        kind: 'fixed',
+        value: '0',
+        suffix: '%',
+        substatBonus: {
+          substat: 'DamageAmplification',
+          multiplier: '0.3',
+          mode: 'additive',
+        },
+      }),
+    )
     expect(
       getAwakenerSkillById('skill.helot-catena.crimson-shackles', skills)?.cardKeywords,
     ).toEqual([{id: 'mechanic.echo'}])
@@ -813,7 +834,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.liz.dance-to-destruction', skills)?.descriptionArgs.Arg1,
     ).toEqual({
       kind: 'scaling',
-      values: ['10', '12', '14', '16', '18', '20'],
+      values: ['20', '24', '28', '32', '36', '40'],
       suffix: '%',
       stat: 'ATK',
     })
@@ -868,7 +889,7 @@ describe('awakener-skills', () => {
       getAwakenerSkillById('skill.pandia.honey-colored-tragedy', skills)?.descriptionArgs.Arg3,
     ).toEqual({
       kind: 'scaling',
-      values: ['2', '2.4', '2.8', '3.2', '3.6', '4'],
+      values: ['4', '4.8', '5.6', '6.4', '7.2', '8'],
       suffix: '%',
       stat: 'ATK',
     })

@@ -21,11 +21,11 @@
   "faction": "Out of the Aeons",
   "aliases": ["murphy: fauxborn", "g-murphy"],
   "searchTags": ["Tentacle DMG", "Aftershock", "Arithmetica", "Divine Realm", "Draw", "Keyflare", "Tentacles", "Sacrifice"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 35,
-    "ATK": 42,
-    "DEF": 41
+    "CON": 24,
+    "ATK": 29,
+    "DEF": 28
   },
   "substatsLv1": {
     "CritRate": 5,

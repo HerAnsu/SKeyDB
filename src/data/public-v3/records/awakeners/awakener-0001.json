@@ -35,11 +35,11 @@
     "Keyflare",
     "Tentacles"
   ],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 52,
-    "ATK": 66,
-    "DEF": 30
+    "CON": 35,
+    "ATK": 45,
+    "DEF": 20
   },
   "substatsLv1": {
     "CritRate": 6.6,

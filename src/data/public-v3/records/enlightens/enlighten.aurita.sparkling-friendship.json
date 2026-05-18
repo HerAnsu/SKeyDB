@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0005",
   "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Self-Proliferation} is enhanced: Aurita's \"Strike\" deals {Pierce DMG} and triggers 2 additional instances of DMG.",
+  "descriptionTemplate": "{Rouse} {Self-Proliferation} is enhanced: Aurita's \"Strike\" deals {Pierce DMG} and triggers 3 additional instances of DMG.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Aurita"
 }

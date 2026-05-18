@@ -174,13 +174,13 @@ describe('description-args', () => {
       },
     })
 
-    expect(resolvedArg.baseValue).toBe(36)
-    expect(resolvedArg.substatBonusValue).toBeCloseTo(5.4, 6)
-    expect(resolvedArg.totalValue).toBeCloseTo(41.4, 6)
-    expect(resolvedArg.formattedTotalValue).toBe('41.4% {ATK}')
-    expect(resolvedArg.absoluteValue).toBe(58)
+    expect(resolvedArg.baseValue).toBe(54)
+    expect(resolvedArg.substatBonusValue).toBeCloseTo(8.1, 6)
+    expect(resolvedArg.totalValue).toBeCloseTo(62.1, 6)
+    expect(resolvedArg.formattedTotalValue).toBe('62.1% {ATK}')
+    expect(resolvedArg.absoluteValue).toBe(87)
     expect(formatDescriptionArgProgression(skill.descriptionArgs.Arg2, {maxRank: 6})).toBe(
-      '30% (+6%/Lv) {ATK}',
+      '45% (+9%/Lv) {ATK}',
     )
     expect(
       buildDescriptionArgHover(skill.descriptionArgs.Arg2, {
@@ -191,7 +191,7 @@ describe('description-args', () => {
         },
       }),
     ).toBe(
-      'Lv1: 34.5% ATK = 49 (30% ATK × 115% from Damage Amplification)\nLv2: 41.4% ATK = 58 (36% ATK × 115% from Damage Amplification)',
+      'Lv1: 51.8% ATK = 73 (45% ATK × 115% from Damage Amplification)\nLv2: 62.1% ATK = 87 (54% ATK × 115% from Damage Amplification)',
     )
   })
 
@@ -326,8 +326,8 @@ describe('description-args', () => {
       },
     })
 
-    expect(rendered).toContain('Gain 33.1% {DEF} Shield.')
-    expect(rendered).toContain('Inflict 51.8% {ATK} stacks of {Poison} on all enemies.')
+    expect(rendered).toContain('Gain 40.7% {DEF} Shield.')
+    expect(rendered).toContain('Inflict 77.7% {ATK} stacks of {Poison} on all enemies.')
   })
 
   it('renders public detail upgrade patch templates with resolved arg totals', async () => {
@@ -362,7 +362,7 @@ describe('description-args', () => {
       },
     )
 
-    expect(rendered).toContain('{Embryo Fusion} +20%.')
+    expect(rendered).toContain('{Embryo Fusion}+ 20.')
   })
 
   it('preserves symbolic placeholder args instead of crashing the resolver', () => {

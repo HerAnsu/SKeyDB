@@ -27,9 +27,8 @@
       "value": "10"
     },
     "Arg4": {
-      "kind": "linear",
-      "base": "3",
-      "gainPerLevel": "3"
+      "kind": "scaling",
+      "values": ["10", "14", "18", "22", "26", "30", "34", "38", "42", "50"]
     }
   },
   "ownerAwakenerName": "Uvhash"

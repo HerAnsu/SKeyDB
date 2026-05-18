@@ -21,11 +21,11 @@
   "faction": "The Unknowable",
   "aliases": ["arachne"],
   "searchTags": ["Final Verdict", "Tentacle DMG", "Pursuit", "Fixed DMG", "Divine Realm", "Spider"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 50,
-    "ATK": 36,
-    "DEF": 49
+    "CON": 34,
+    "ATK": 25,
+    "DEF": 33
   },
   "substatsLv1": {
     "CritRate": 5,

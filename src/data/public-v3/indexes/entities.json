@@ -2424,6 +2424,24 @@
         "canonicalPath": "/database/derived-skills/fleeting-beauty"
       }
     },
+    "derived.global.hanafubuki": {
+      "kind": "derivedSkill",
+      "id": "derived.global.hanafubuki",
+      "name": "Hanafubuki",
+      "route": {
+        "slug": "hanafubuki",
+        "canonicalPath": "/database/derived-skills/hanafubuki"
+      }
+    },
+    "derived.global.ichigo-ichie": {
+      "kind": "derivedSkill",
+      "id": "derived.global.ichigo-ichie",
+      "name": "Ichigo Ichie",
+      "route": {
+        "slug": "ichigo-ichie",
+        "canonicalPath": "/database/derived-skills/ichigo-ichie"
+      }
+    },
     "derived.global.insight": {
       "kind": "derivedSkill",
       "id": "derived.global.insight",
@@ -2451,6 +2469,15 @@
         "canonicalPath": "/database/derived-skills/light-cone-boundary"
       }
     },
+    "derived.global.sakura-blossoms": {
+      "kind": "derivedSkill",
+      "id": "derived.global.sakura-blossoms",
+      "name": "Sakura Blossoms",
+      "route": {
+        "slug": "sakura-blossoms",
+        "canonicalPath": "/database/derived-skills/sakura-blossoms"
+      }
+    },
     "derived.global.silver-key-gleam": {
       "kind": "derivedSkill",
       "id": "derived.global.silver-key-gleam",
@@ -2467,6 +2494,15 @@
       "route": {
         "slug": "slumber",
         "canonicalPath": "/database/derived-skills/slumber"
+      }
+    },
+    "derived.global.vernal-message": {
+      "kind": "derivedSkill",
+      "id": "derived.global.vernal-message",
+      "name": "Vernal Message",
+      "route": {
+        "slug": "vernal-message",
+        "canonicalPath": "/database/derived-skills/vernal-message"
       }
     },
     "derived.goliath.blades-dominion": {
@@ -15768,6 +15804,20 @@
       "ownerAwakenerName": "Xu",
       "slot": "Strike"
     },
+    "talent.24.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.24.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/24/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0001",
+      "ownerAwakenerName": "24",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.24.madness-omen": {
       "kind": "talent",
       "id": "talent.24.madness-omen",
@@ -15793,6 +15843,19 @@
       "ownerAwakenerName": "24",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.agrippa.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.agrippa.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/agrippa/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0002",
+      "ownerAwakenerName": "Agrippa",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.agrippa.madness-omen": {
       "kind": "talent",
@@ -15832,6 +15895,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.aigis.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.aigis.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/aigis/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0003",
+      "ownerAwakenerName": "Aigis",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.aigis.madness-omen": {
       "kind": "talent",
       "id": "talent.aigis.madness-omen",
@@ -15870,6 +15946,19 @@
       "ownerAwakenerName": "Alva",
       "family": "passive"
     },
+    "talent.alva.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.alva.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/alva/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0004",
+      "ownerAwakenerName": "Alva",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.alva.madness-omen": {
       "kind": "talent",
       "id": "talent.alva.madness-omen",
@@ -15895,6 +15984,32 @@
       "ownerAwakenerName": "Alva",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.arachne.destined-threads": {
+      "kind": "talent",
+      "id": "talent.arachne.destined-threads",
+      "name": "Destined Threads",
+      "route": {
+        "slug": "destined-threads",
+        "canonicalPath": "/database/awakeners/arachne/talents/destined-threads"
+      },
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne",
+      "family": "passive"
+    },
+    "talent.arachne.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.arachne.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/arachne/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.arachne.madness-omen": {
       "kind": "talent",
@@ -15922,17 +16037,18 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
-    "talent.arachne.threads-of-fate": {
+    "talent.aurita.gnostic-potential": {
       "kind": "talent",
-      "id": "talent.arachne.threads-of-fate",
-      "name": "Threads of Fate",
+      "id": "talent.aurita.gnostic-potential",
+      "name": "Gnostic Potential",
       "route": {
-        "slug": "threads-of-fate",
-        "canonicalPath": "/database/awakeners/arachne/talents/threads-of-fate"
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/aurita/talents/gnostic-potential"
       },
-      "ownerAwakenerId": "awakener-0056",
-      "ownerAwakenerName": "Arachne",
-      "family": "passive"
+      "ownerAwakenerId": "awakener-0005",
+      "ownerAwakenerName": "Aurita",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.aurita.happy-little-fairy": {
       "kind": "talent",
@@ -15972,6 +16088,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.caecus.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.caecus.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/caecus/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0006",
+      "ownerAwakenerName": "Caecus",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.caecus.madness-omen": {
       "kind": "talent",
       "id": "talent.caecus.madness-omen",
@@ -16009,6 +16138,19 @@
       "ownerAwakenerName": "Caecus",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.casiah.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.casiah.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/casiah/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0007",
+      "ownerAwakenerName": "Casiah",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.casiah.madness-omen": {
       "kind": "talent",
@@ -16060,6 +16202,20 @@
       "ownerAwakenerName": "Castor",
       "family": "passive"
     },
+    "talent.castor.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.castor.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/castor/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0008",
+      "ownerAwakenerName": "Castor",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.castor.madness-omen": {
       "kind": "talent",
       "id": "talent.castor.madness-omen",
@@ -16085,6 +16241,19 @@
       "ownerAwakenerName": "Castor",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.celeste.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.celeste.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/celeste/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0009",
+      "ownerAwakenerName": "Celeste",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.celeste.madness-omen": {
       "kind": "talent",
@@ -16123,6 +16292,20 @@
       "ownerAwakenerId": "awakener-0009",
       "ownerAwakenerName": "Celeste",
       "family": "passive"
+    },
+    "talent.clementine.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.clementine.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/clementine/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.clementine.hive-resonance": {
       "kind": "talent",
@@ -16174,6 +16357,20 @@
       "ownerAwakenerName": "Corposant",
       "family": "passive"
     },
+    "talent.corposant.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.corposant.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/corposant/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.corposant.madness-omen": {
       "kind": "talent",
       "id": "talent.corposant.madness-omen",
@@ -16200,6 +16397,20 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.daffodil.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.daffodil.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/daffodil/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.daffodil.madness-omen": {
       "kind": "talent",
       "id": "talent.daffodil.madness-omen",
@@ -16225,6 +16436,20 @@
       "ownerAwakenerName": "Daffodil",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.doll-inferno.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.doll-inferno.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/doll-inferno/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.doll-inferno.madness-omen": {
       "kind": "talent",
@@ -16276,6 +16501,19 @@
       "ownerAwakenerName": "Doll",
       "family": "passive"
     },
+    "talent.doll.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.doll.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/doll/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0013",
+      "ownerAwakenerName": "Doll",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.doll.madness-omen": {
       "kind": "talent",
       "id": "talent.doll.madness-omen",
@@ -16326,6 +16564,20 @@
       "ownerAwakenerName": "Doresain",
       "family": "passive"
     },
+    "talent.doresain.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.doresain.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/doresain/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0014",
+      "ownerAwakenerName": "Doresain",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.doresain.madness-omen": {
       "kind": "talent",
       "id": "talent.doresain.madness-omen",
@@ -16364,6 +16616,19 @@
       "ownerAwakenerName": "Erica",
       "family": "passive"
     },
+    "talent.erica.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.erica.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/erica/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0015",
+      "ownerAwakenerName": "Erica",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.erica.madness-omen": {
       "kind": "talent",
       "id": "talent.erica.madness-omen",
@@ -16389,6 +16654,19 @@
       "ownerAwakenerName": "Erica",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.faint.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.faint.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/faint/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0016",
+      "ownerAwakenerName": "Faint",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.faint.madness-omen": {
       "kind": "talent",
@@ -16428,6 +16706,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.faros.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.faros.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/faros/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0017",
+      "ownerAwakenerName": "Faros",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.faros.homesick": {
       "kind": "talent",
       "id": "talent.faros.homesick",
@@ -16466,6 +16757,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.goliath.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.goliath.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/goliath/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0021",
+      "ownerAwakenerName": "Goliath",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.goliath.madness-omen": {
       "kind": "talent",
       "id": "talent.goliath.madness-omen",
@@ -16491,6 +16795,20 @@
       "ownerAwakenerName": "Goliath",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.hameln.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.hameln.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/hameln/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.hameln.madness-omen": {
       "kind": "talent",
@@ -16518,6 +16836,20 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.helot-catena.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.helot-catena.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/helot-catena/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.helot-catena.madness-omen": {
       "kind": "talent",
       "id": "talent.helot-catena.madness-omen",
@@ -16543,6 +16875,19 @@
       "ownerAwakenerName": "Helot: Catena",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.helot.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.helot.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/helot/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0023",
+      "ownerAwakenerName": "Helot",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.helot.madness-omen": {
       "kind": "talent",
@@ -16581,6 +16926,20 @@
       "ownerAwakenerName": "Helot",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.horla.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.horla.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/horla/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.horla.madness-omen": {
       "kind": "talent",
@@ -16632,6 +16991,19 @@
       "ownerAwakenerName": "Jenkin",
       "family": "passive"
     },
+    "talent.jenkins.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.jenkins.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/jenkin/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0025",
+      "ownerAwakenerName": "Jenkin",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.jenkins.madness-omen": {
       "kind": "talent",
       "id": "talent.jenkins.madness-omen",
@@ -16658,6 +17030,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.karen.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.karen.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/karen/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0026",
+      "ownerAwakenerName": "Karen",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.karen.madness-omen": {
       "kind": "talent",
       "id": "talent.karen.madness-omen",
@@ -16683,6 +17068,20 @@
       "ownerAwakenerName": "Karen",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.kathigu-ra.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.kathigu-ra.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/kathigu-ra/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.kathigu-ra.madness-omen": {
       "kind": "talent",
@@ -16722,6 +17121,19 @@
       "ownerAwakenerName": "Kathigu-Ra",
       "family": "passive"
     },
+    "talent.leigh.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.leigh.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/leigh/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0028",
+      "ownerAwakenerName": "Leigh",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.leigh.madness-omen": {
       "kind": "talent",
       "id": "talent.leigh.madness-omen",
@@ -16747,6 +17159,20 @@
       "ownerAwakenerName": "Leigh",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.lily.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.lily.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/lily/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.lily.madness-omen": {
       "kind": "talent",
@@ -16786,6 +17212,19 @@
       "ownerAwakenerName": "Lily",
       "family": "passive"
     },
+    "talent.liz.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.liz.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/liz/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0030",
+      "ownerAwakenerName": "Liz",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.liz.madness-omen": {
       "kind": "talent",
       "id": "talent.liz.madness-omen",
@@ -16812,6 +17251,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.lotan.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.lotan.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/lotan/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0031",
+      "ownerAwakenerName": "Lotan",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.lotan.madness-omen": {
       "kind": "talent",
       "id": "talent.lotan.madness-omen",
@@ -16837,6 +17289,20 @@
       "ownerAwakenerName": "Lotan",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.miryam.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.miryam.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/miryam/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.miryam.madness-omen": {
       "kind": "talent",
@@ -16888,6 +17354,20 @@
       "ownerAwakenerName": "Mouchette",
       "family": "passive"
     },
+    "talent.mouchette.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.mouchette.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/mouchette/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0033",
+      "ownerAwakenerName": "Mouchette",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.mouchette.madness-omen": {
       "kind": "talent",
       "id": "talent.mouchette.madness-omen",
@@ -16926,6 +17406,20 @@
       "ownerAwakenerName": "Murphy: Fauxborn",
       "family": "passive"
     },
+    "talent.murphy-fauxborn.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.murphy-fauxborn.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/murphy-fauxborn/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0035",
+      "ownerAwakenerName": "Murphy: Fauxborn",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.murphy-fauxborn.madness-omen": {
       "kind": "talent",
       "id": "talent.murphy-fauxborn.madness-omen",
@@ -16951,6 +17445,20 @@
       "ownerAwakenerName": "Murphy: Fauxborn",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.murphy.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.murphy.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/murphy/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0034",
+      "ownerAwakenerName": "Murphy",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.murphy.madness-omen": {
       "kind": "talent",
@@ -16990,6 +17498,19 @@
       "ownerAwakenerName": "Nautila",
       "family": "passive"
     },
+    "talent.nautila.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.nautila.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/nautila/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0036",
+      "ownerAwakenerName": "Nautila",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.nautila.madness-omen": {
       "kind": "talent",
       "id": "talent.nautila.madness-omen",
@@ -17015,6 +17536,19 @@
       "ownerAwakenerName": "Nautila",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.nymphaea.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.nymphaea.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/nymphaea/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0037",
+      "ownerAwakenerName": "Nymphaea",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.nymphaea.immerse": {
       "kind": "talent",
@@ -17066,6 +17600,19 @@
       "ownerAwakenerName": "Ogier",
       "family": "passive"
     },
+    "talent.ogier.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.ogier.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/ogier/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0038",
+      "ownerAwakenerName": "Ogier",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.ogier.madness-omen": {
       "kind": "talent",
       "id": "talent.ogier.madness-omen",
@@ -17091,6 +17638,19 @@
       "ownerAwakenerName": "Ogier",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.pandia.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.pandia.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/pandia/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0039",
+      "ownerAwakenerName": "Pandia",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.pandia.madness-omen": {
       "kind": "talent",
@@ -17129,6 +17689,20 @@
       "ownerAwakenerName": "Pandia",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.pickman.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.pickman.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/pickman/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.pickman.madness-omen": {
       "kind": "talent",
@@ -17180,6 +17754,20 @@
       "ownerAwakenerName": "Pollux",
       "family": "passive"
     },
+    "talent.pollux.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.pollux.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/pollux/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.pollux.madness-omen": {
       "kind": "talent",
       "id": "talent.pollux.madness-omen",
@@ -17205,6 +17793,19 @@
       "ownerAwakenerName": "Pollux",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.ramona-timeworn.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.ramona-timeworn.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/ramona-timeworn/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0020",
+      "ownerAwakenerName": "Ramona: Timeworn",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.ramona-timeworn.madness-omen": {
       "kind": "talent",
@@ -17244,6 +17845,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.ramona.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.ramona.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/ramona/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0042",
+      "ownerAwakenerName": "Ramona",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.ramona.madness-omen": {
       "kind": "talent",
       "id": "talent.ramona.madness-omen",
@@ -17282,6 +17896,20 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.ryker.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.ryker.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/ryker/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.ryker.madness-omen": {
       "kind": "talent",
       "id": "talent.ryker.madness-omen",
@@ -17319,6 +17947,20 @@
       "ownerAwakenerId": "awakener-0043",
       "ownerAwakenerName": "Ryker",
       "family": "passive"
+    },
+    "talent.salvador.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.salvador.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/salvador/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.salvador.madness-omen": {
       "kind": "talent",
@@ -17382,6 +18024,19 @@
       "ownerAwakenerName": "Sanga",
       "family": "passive"
     },
+    "talent.sanga.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.sanga.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/sanga/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0045",
+      "ownerAwakenerName": "Sanga",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.sanga.madness-omen": {
       "kind": "talent",
       "id": "talent.sanga.madness-omen",
@@ -17407,6 +18062,20 @@
       "ownerAwakenerName": "Sanga",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.sorel.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.sorel.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/sorel/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.sorel.guardian-of-vanity": {
       "kind": "talent",
@@ -17446,6 +18115,20 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.tawil.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.tawil.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/tawil/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.tawil.madness-omen": {
       "kind": "talent",
       "id": "talent.tawil.madness-omen",
@@ -17472,6 +18155,20 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.thais.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.thais.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/thais/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.thais.madness-omen": {
       "kind": "talent",
       "id": "talent.thais.madness-omen",
@@ -17497,6 +18194,19 @@
       "ownerAwakenerName": "Thais",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.tinct.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.tinct.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/tinct/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0049",
+      "ownerAwakenerName": "Tinct",
+      "family": "gnostic_potential",
+      "maxLevel": 5
     },
     "talent.tinct.madness-omen": {
       "kind": "talent",
@@ -17548,6 +18258,20 @@
       "ownerAwakenerName": "Tulu",
       "family": "passive"
     },
+    "talent.tulu.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.tulu.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/tulu/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0050",
+      "ownerAwakenerName": "Tulu",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.tulu.madness-omen": {
       "kind": "talent",
       "id": "talent.tulu.madness-omen",
@@ -17574,6 +18298,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.uvhash.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.uvhash.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/uvhash/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0051",
+      "ownerAwakenerName": "Uvhash",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.uvhash.madness-omen": {
       "kind": "talent",
       "id": "talent.uvhash.madness-omen",
@@ -17599,6 +18336,20 @@
       "ownerAwakenerName": "Uvhash",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.vortice.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.vortice.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/vortice/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.vortice.lightless-bottom": {
       "kind": "talent",
@@ -17638,6 +18389,20 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.wanda.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.wanda.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/wanda/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
     "talent.wanda.madness-omen": {
       "kind": "talent",
       "id": "talent.wanda.madness-omen",
@@ -17676,6 +18441,19 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.winkle.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.winkle.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/winkle/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0053",
+      "ownerAwakenerName": "Winkle",
+      "family": "gnostic_potential",
+      "maxLevel": 5
+    },
     "talent.winkle.madness-omen": {
       "kind": "talent",
       "id": "talent.winkle.madness-omen",
@@ -17701,6 +18479,20 @@
       "ownerAwakenerName": "Winkle",
       "family": "soulforge_aptitude",
       "maxLevel": 10
+    },
+    "talent.xu.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.xu.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/xu/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
     },
     "talent.xu.madness-omen": {
       "kind": "talent",
@@ -19787,6 +20579,36 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN"
+    },
+    "wheel-0165": {
+      "kind": "wheel",
+      "id": "wheel-0165",
+      "name": "Sakura Reveries",
+      "route": {
+        "slug": "sakura-reveries",
+        "canonicalPath": "/database/wheels/sakura-reveries"
+      },
+      "assets": {
+        "icon": "asset-wheel-0165-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY"
+    },
+    "wheel-0166": {
+      "kind": "wheel",
+      "id": "wheel-0166",
+      "name": "To the Stars",
+      "route": {
+        "slug": "to-the-stars",
+        "canonicalPath": "/database/wheels/to-the-stars"
+      },
+      "assets": {
+        "icon": "asset-wheel-0166-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD"
     }
   },
   "scopes": {
@@ -19980,11 +20802,15 @@
       "derived.global.arouse",
       "derived.global.embryo",
       "derived.global.fleeting-beauty",
+      "derived.global.hanafubuki",
+      "derived.global.ichigo-ichie",
       "derived.global.insight",
       "derived.global.leahs-coin",
       "derived.global.light-cone-boundary",
+      "derived.global.sakura-blossoms",
       "derived.global.silver-key-gleam",
       "derived.global.slumber",
+      "derived.global.vernal-message",
       "derived.goliath.blades-dominion",
       "derived.goliath.dormancy",
       "derived.goliath.usurp",
@@ -21069,158 +21895,214 @@
       "skill.xu.strike"
     ],
     "talents": [
+      "talent.24.gnostic-potential",
       "talent.24.madness-omen",
       "talent.24.soulforge-aptitude",
+      "talent.agrippa.gnostic-potential",
       "talent.agrippa.madness-omen",
       "talent.agrippa.seal-of-the-pact",
       "talent.agrippa.soulforge-aptitude",
+      "talent.aigis.gnostic-potential",
       "talent.aigis.madness-omen",
       "talent.aigis.soulforge-aptitude",
       "talent.alva.dynamic-vision",
+      "talent.alva.gnostic-potential",
       "talent.alva.madness-omen",
       "talent.alva.soulforge-aptitude",
+      "talent.arachne.destined-threads",
+      "talent.arachne.gnostic-potential",
       "talent.arachne.madness-omen",
       "talent.arachne.soulforge-aptitude",
-      "talent.arachne.threads-of-fate",
+      "talent.aurita.gnostic-potential",
       "talent.aurita.happy-little-fairy",
       "talent.aurita.madness-omen",
       "talent.aurita.soulforge-aptitude",
+      "talent.caecus.gnostic-potential",
       "talent.caecus.madness-omen",
       "talent.caecus.rebellious-spikes",
       "talent.caecus.soulforge-aptitude",
+      "talent.casiah.gnostic-potential",
       "talent.casiah.madness-omen",
       "talent.casiah.master-of-magic",
       "talent.casiah.soulforge-aptitude",
       "talent.castor.cleansing-feathers",
+      "talent.castor.gnostic-potential",
       "talent.castor.madness-omen",
       "talent.castor.soulforge-aptitude",
+      "talent.celeste.gnostic-potential",
       "talent.celeste.madness-omen",
       "talent.celeste.soulforge-aptitude",
       "talent.celeste.voyage-horn",
+      "talent.clementine.gnostic-potential",
       "talent.clementine.hive-resonance",
       "talent.clementine.madness-omen",
       "talent.clementine.soulforge-aptitude",
       "talent.corposant.cinders",
+      "talent.corposant.gnostic-potential",
       "talent.corposant.madness-omen",
       "talent.corposant.soulforge-aptitude",
+      "talent.daffodil.gnostic-potential",
       "talent.daffodil.madness-omen",
       "talent.daffodil.soulforge-aptitude",
+      "talent.doll-inferno.gnostic-potential",
       "talent.doll-inferno.madness-omen",
       "talent.doll-inferno.path-of-annihilation",
       "talent.doll-inferno.soulforge-aptitude",
       "talent.doll.gnosis-deconstruction",
+      "talent.doll.gnostic-potential",
       "talent.doll.madness-omen",
       "talent.doll.soulforge-aptitude",
       "talent.doresain.casket-harvest",
       "talent.doresain.festering-grace",
+      "talent.doresain.gnostic-potential",
       "talent.doresain.madness-omen",
       "talent.doresain.soulforge-aptitude",
       "talent.erica.external-power-source",
+      "talent.erica.gnostic-potential",
       "talent.erica.madness-omen",
       "talent.erica.soulforge-aptitude",
+      "talent.faint.gnostic-potential",
       "talent.faint.madness-omen",
       "talent.faint.secondary-swaddle",
       "talent.faint.soulforge-aptitude",
+      "talent.faros.gnostic-potential",
       "talent.faros.homesick",
       "talent.faros.madness-omen",
       "talent.faros.soulforge-aptitude",
+      "talent.goliath.gnostic-potential",
       "talent.goliath.madness-omen",
       "talent.goliath.soulforge-aptitude",
+      "talent.hameln.gnostic-potential",
       "talent.hameln.madness-omen",
       "talent.hameln.soulforge-aptitude",
+      "talent.helot-catena.gnostic-potential",
       "talent.helot-catena.madness-omen",
       "talent.helot-catena.soulforge-aptitude",
+      "talent.helot.gnostic-potential",
       "talent.helot.madness-omen",
       "talent.helot.pain-sigil",
       "talent.helot.soulforge-aptitude",
+      "talent.horla.gnostic-potential",
       "talent.horla.madness-omen",
       "talent.horla.soulforge-aptitude",
       "talent.horla.writing-with-feeling",
       "talent.jenkins.a-common-enemy",
+      "talent.jenkins.gnostic-potential",
       "talent.jenkins.madness-omen",
       "talent.jenkins.soulforge-aptitude",
+      "talent.karen.gnostic-potential",
       "talent.karen.madness-omen",
       "talent.karen.soulforge-aptitude",
+      "talent.kathigu-ra.gnostic-potential",
       "talent.kathigu-ra.madness-omen",
       "talent.kathigu-ra.soulforge-aptitude",
       "talent.kathigu-ra.the-living-flame",
+      "talent.leigh.gnostic-potential",
       "talent.leigh.madness-omen",
       "talent.leigh.soulforge-aptitude",
+      "talent.lily.gnostic-potential",
       "talent.lily.madness-omen",
       "talent.lily.soulforge-aptitude",
       "talent.lily.surging-darkness",
+      "talent.liz.gnostic-potential",
       "talent.liz.madness-omen",
       "talent.liz.soulforge-aptitude",
+      "talent.lotan.gnostic-potential",
       "talent.lotan.madness-omen",
       "talent.lotan.soulforge-aptitude",
+      "talent.miryam.gnostic-potential",
       "talent.miryam.madness-omen",
       "talent.miryam.soulforge-aptitude",
       "talent.miryam.undying-piety",
       "talent.mouchette.dramatic-encounter",
+      "talent.mouchette.gnostic-potential",
       "talent.mouchette.madness-omen",
       "talent.mouchette.soulforge-aptitude",
       "talent.murphy-fauxborn.divine-realms-order",
+      "talent.murphy-fauxborn.gnostic-potential",
       "talent.murphy-fauxborn.madness-omen",
       "talent.murphy-fauxborn.soulforge-aptitude",
+      "talent.murphy.gnostic-potential",
       "talent.murphy.madness-omen",
       "talent.murphy.soulforge-aptitude",
       "talent.nautila.daily-maintenance",
+      "talent.nautila.gnostic-potential",
       "talent.nautila.madness-omen",
       "talent.nautila.soulforge-aptitude",
+      "talent.nymphaea.gnostic-potential",
       "talent.nymphaea.immerse",
       "talent.nymphaea.madness-omen",
       "talent.nymphaea.soulforge-aptitude",
       "talent.ogier.formless-refinement",
+      "talent.ogier.gnostic-potential",
       "talent.ogier.madness-omen",
       "talent.ogier.soulforge-aptitude",
+      "talent.pandia.gnostic-potential",
       "talent.pandia.madness-omen",
       "talent.pandia.punishment-time",
       "talent.pandia.soulforge-aptitude",
+      "talent.pickman.gnostic-potential",
       "talent.pickman.madness-omen",
       "talent.pickman.painters-eye",
       "talent.pickman.soulforge-aptitude",
       "talent.pollux.atonement-by-pain",
+      "talent.pollux.gnostic-potential",
       "talent.pollux.madness-omen",
       "talent.pollux.soulforge-aptitude",
+      "talent.ramona-timeworn.gnostic-potential",
       "talent.ramona-timeworn.madness-omen",
       "talent.ramona-timeworn.silverheart-resonance",
       "talent.ramona-timeworn.soulforge-aptitude",
+      "talent.ramona.gnostic-potential",
       "talent.ramona.madness-omen",
       "talent.ramona.silverheart-resonance",
       "talent.ramona.soulforge-aptitude",
+      "talent.ryker.gnostic-potential",
       "talent.ryker.madness-omen",
       "talent.ryker.soulforge-aptitude",
       "talent.ryker.winner-takes-all",
+      "talent.salvador.gnostic-potential",
       "talent.salvador.madness-omen",
       "talent.salvador.origin-of-all-life",
       "talent.salvador.shepard-of-the-souls",
       "talent.salvador.soulforge-aptitude",
       "talent.sanga.enlightenment-of-death",
+      "talent.sanga.gnostic-potential",
       "talent.sanga.madness-omen",
       "talent.sanga.soulforge-aptitude",
+      "talent.sorel.gnostic-potential",
       "talent.sorel.guardian-of-vanity",
       "talent.sorel.madness-omen",
       "talent.sorel.soulforge-aptitude",
+      "talent.tawil.gnostic-potential",
       "talent.tawil.madness-omen",
       "talent.tawil.soulforge-aptitude",
+      "talent.thais.gnostic-potential",
       "talent.thais.madness-omen",
       "talent.thais.soulforge-aptitude",
+      "talent.tinct.gnostic-potential",
       "talent.tinct.madness-omen",
       "talent.tinct.planetary-traveler",
       "talent.tinct.soulforge-aptitude",
       "talent.tulu.divine-kings-power",
+      "talent.tulu.gnostic-potential",
       "talent.tulu.madness-omen",
       "talent.tulu.soulforge-aptitude",
+      "talent.uvhash.gnostic-potential",
       "talent.uvhash.madness-omen",
       "talent.uvhash.soulforge-aptitude",
+      "talent.vortice.gnostic-potential",
       "talent.vortice.lightless-bottom",
       "talent.vortice.madness-omen",
       "talent.vortice.soulforge-aptitude",
+      "talent.wanda.gnostic-potential",
       "talent.wanda.madness-omen",
       "talent.wanda.revelation",
       "talent.wanda.soulforge-aptitude",
+      "talent.winkle.gnostic-potential",
       "talent.winkle.madness-omen",
       "talent.winkle.soulforge-aptitude",
+      "talent.xu.gnostic-potential",
       "talent.xu.madness-omen",
       "talent.xu.soulforge-aptitude"
     ],
@@ -21354,7 +22236,9 @@
       "wheel-0131",
       "wheel-0132",
       "wheel-0136",
-      "wheel-0137"
+      "wheel-0137",
+      "wheel-0165",
+      "wheel-0166"
     ]
   }
 }

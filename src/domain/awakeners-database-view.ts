@@ -10,7 +10,7 @@ import {
 } from './awakener-source-schema'
 import {buildAwakenerDatabaseReferenceLayer} from './awakeners-database-reference-layer'
 import {type AwakenerFullRecord} from './awakeners-full'
-import {isSoulforgeTalent} from './awakeners-full-contract'
+import {isGnosticPotentialTalent, isSoulforgeTalent} from './awakeners-full-contract'
 import {
   resolveAwakenerFullRecord,
   type AwakenerFullResolveOptions,
@@ -38,7 +38,10 @@ export type {
 } from './database-reference-layer'
 
 export interface AwakenerDatabaseViewOptions extends Partial<
-  Pick<AwakenerFullResolveOptions, 'selectedEnlightenSlot' | 'soulforgeLevel'>
+  Pick<
+    AwakenerFullResolveOptions,
+    'selectedEnlightenSlot' | 'soulforgeLevel' | 'gnosticPotentialLevel'
+  >
 > {
   skillLevel?: number
   stats?: FullStats | null
@@ -146,20 +149,23 @@ function resolveTalentEntry(
   stats: FullStats | null,
   formulaContext: PublicFormulaContext | undefined,
   soulforgeLevel: number | undefined,
+  gnosticPotentialLevel: number | undefined,
 ): DatabaseDescribedEntry<AwakenerTalentRecord> {
-  const rank = resolveTalentRank(record, soulforgeLevel)
+  const rank = resolveTalentRank(record, soulforgeLevel, gnosticPotentialLevel)
+  const displayRecord =
+    rank <= 0 && isGnosticPotentialTalent(record) ? zeroTalentRecord(record) : record
   return {
     key,
     label,
-    record,
+    record: displayRecord,
     resolved: resolveDescribedRecord(
-      record,
+      displayRecord,
       {rank, stats, formulaContext},
-      {maxRank: record.maxLevel, stats, formulaContext},
+      {maxRank: displayRecord.maxLevel, stats, formulaContext},
     ),
     keywordFooterText: undefined,
     descriptionRank: rank,
-    descriptionMaxRank: record.maxLevel,
+    descriptionMaxRank: displayRecord.maxLevel,
     influencingEnlightenSlots: [],
     influencingTalentIds: [],
     influenceBadges: [],
@@ -200,6 +206,7 @@ function getDerivedSkillLabel(skill: DerivedSkillRecord): string {
 function resolveTalentRank(
   record: AwakenerTalentRecord,
   soulforgeLevel: number | undefined,
+  gnosticPotentialLevel: number | undefined,
 ): number {
   const hasScaledDescription = record.hasLevelScaledDescription ?? (record.maxLevel ?? 1) > 1
   if (!hasScaledDescription) {
@@ -208,7 +215,19 @@ function resolveTalentRank(
 
   const maxLevel = record.maxLevel ?? 1
   if (!isSoulforgeTalent(record)) {
-    return maxLevel
+    if (!isGnosticPotentialTalent(record)) {
+      return maxLevel
+    }
+
+    if (record.defaultMaxed) {
+      return maxLevel
+    }
+
+    if (gnosticPotentialLevel === undefined) {
+      return 0
+    }
+
+    return Math.max(0, Math.min(maxLevel, Math.floor(gnosticPotentialLevel)))
   }
 
   if (soulforgeLevel === undefined) {
@@ -216,6 +235,24 @@ function resolveTalentRank(
   }
 
   return Math.max(1, Math.min(maxLevel, Math.floor(soulforgeLevel)))
+}
+
+function zeroTalentRecord(record: AwakenerTalentRecord): AwakenerTalentRecord {
+  return {
+    ...record,
+    descriptionArgs: Object.fromEntries(
+      Object.entries(record.descriptionArgs).map(([key, arg]) => [
+        key,
+        {
+          kind: 'fixed',
+          value: '0',
+          ...('channel' in arg && arg.channel ? {channel: arg.channel} : {}),
+          ...('suffix' in arg && arg.suffix ? {suffix: arg.suffix} : {}),
+          ...('stat' in arg && arg.stat ? {stat: arg.stat} : {}),
+        },
+      ]),
+    ),
+  }
 }
 
 interface DatabaseEntryInfluenceLookups {
@@ -458,6 +495,7 @@ function buildTalentEntries(
   stats: FullStats | null,
   formulaContext: PublicFormulaContext | undefined,
   soulforgeLevel: number | undefined,
+  gnosticPotentialLevel: number | undefined,
 ): DatabaseDescribedEntry<AwakenerTalentRecord>[] {
   const entries: DatabaseDescribedEntry<AwakenerTalentRecord>[] = []
 
@@ -468,7 +506,15 @@ function buildTalentEntries(
     }
 
     entries.push(
-      resolveTalentEntry(key, `Talent · ${key}`, record, stats, formulaContext, soulforgeLevel),
+      resolveTalentEntry(
+        key,
+        `Talent · ${key}`,
+        record,
+        stats,
+        formulaContext,
+        soulforgeLevel,
+        gnosticPotentialLevel,
+      ),
     )
   }
 
@@ -481,6 +527,7 @@ function buildTalentEntries(
         stats,
         formulaContext,
         soulforgeLevel,
+        gnosticPotentialLevel,
       ),
     )
   }
@@ -656,6 +703,7 @@ export function resolveAwakenerDatabaseShellView(
     {
       selectedEnlightenSlot: options.selectedEnlightenSlot,
       soulforgeLevel: options.soulforgeLevel,
+      gnosticPotentialLevel: options.gnosticPotentialLevel,
     },
     overlays,
   )
@@ -669,6 +717,7 @@ export function resolveAwakenerDatabaseShellView(
     stats,
     formulaContext,
     resolvedRecord.selection.soulforgeLevel,
+    resolvedRecord.selection.gnosticPotentialLevel,
   )
   const enlightens = buildEnlightenEntries(resolvedAwakenerRecord.enlightens, stats, formulaContext)
   const influenceBadgeLookups = buildDatabaseInfluenceBadgeLookups(talents, enlightens)

@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0038",
   "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Knight's Zeal} is enhanced: If {Death Resistance} has been triggered this battle, Ogier's Exalt generates 3 times the Temporary {STR} instead.",
+  "descriptionTemplate": "{Rouse} {Knight's Zeal} is enhanced: When Ogier plays {Knight's Zeal}, the {STR} gained +50%. If {Death Resistance} has been triggered this battle, Ogier's Exalt generates 3 times the Temporary {STR} instead.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Ogier"
 }

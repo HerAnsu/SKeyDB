@@ -21,11 +21,11 @@
   "faction": "The Fools",
   "aliases": ["ryker"],
   "searchTags": ["Weakness", "Vulnerable", "STR Up", "Arithmetica", "Draw", "Keyflare"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 62,
-    "ATK": 52,
-    "DEF": 50
+    "CON": 42,
+    "ATK": 35,
+    "DEF": 34
   },
   "substatsLv1": {
     "CritRate": 5.8,
@@ -64,7 +64,7 @@
         "kind": "introduction",
         "title": "Basic Information",
         "unlockCondition": "Awakener Level 1",
-        "content": "Ryker is known as the \"Lucky Detective\" by his detective friends.\nAs the name suggests, he is a lucky person: whenever he places a bet, he wins ten times the stake; and whenever he guesses, he chooses the right answer.\nThe \"Lucky Detective\" doesn't have to be an actual detective; he stumbled upon solving many cases just by chance, and so he was embraced on this path.\nHe doesn't solve cases by deduction, but relies on luck. Just a tour around the crime scene and he stumbles upon the culprit; just walking along the road, he picks up the key evidence.\nWith such good fortune, he has spent twenty-five smooth years.\nHe never worries about yesterday, nor frets about tomorrow."
+        "content": "Ryker is known as the \"Lucky Detective\" by his detective friends.\nAs the name suggests, he is a lucky person: whenever he places a bet, he wins ten times the stake; whenever he guesses, he chooses the right answer.\nThe \"Lucky Detective\" doesn't have to be an actual detective; he‘s solved many cases by chance alone, so he was embraced on this path.\nHe doesn't solve cases by deduction, relying on luck instead. Just a tour around the crime scene and he stumbles upon the culprit; just walking along the road, he picks up key evidence.\nWith such good fortune, he's lived out a smooth twenty-five years.\nHe never worries about yesterday, nor frets about tomorrow."
       },
       {
         "kind": "story",

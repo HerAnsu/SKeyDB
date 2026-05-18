@@ -21,11 +21,11 @@
   "faction": "Among the Stars",
   "aliases": ["kathigu-ra", "kathigura"],
   "searchTags": ["STR Up", "Pierce DMG", "Dispel", "Discard", "Draw"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 49,
-    "ATK": 58,
-    "DEF": 44
+    "CON": 33,
+    "ATK": 39,
+    "DEF": 30
   },
   "substatsLv1": {
     "CritRate": 5.8,

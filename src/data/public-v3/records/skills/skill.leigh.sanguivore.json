@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0028",
   "slot": "Rouse",
-  "descriptionTemplate": "Leigh gains [Energy:Arg1] Aliemus. {Rouse}: After Leigh plays a card, {Embryo Fusion} +[Blood:Arg2]%.",
+  "descriptionTemplate": "Leigh gains [Energy:Arg1] Aliemus. {Rouse}: After Leigh plays a Card, {Embryo Fusion} +[Blood:Arg2].",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
@@ -17,8 +17,7 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["15", "16", "17", "18", "19", "20"],
-      "suffix": "%"
+      "values": ["20", "21", "22", "23", "24", "25"]
     }
   },
   "cardKeywords": [
@@ -37,7 +36,7 @@
       "ownerAwakenerId": "awakener-0028",
       "ownerAwakenerName": "Leigh",
       "patch": {
-        "descriptionTemplate": "Leigh gains [Energy:Arg1] Aliemus. {Rouse}: After Leigh plays a card, {Embryo Fusion} +[Blood:Arg2]%, and the next Exalt is Enhanced: gain Temporary {STR} equal to [Arg3]% of Permanent {STR}, stacking up to [Arg4] times.",
+        "descriptionTemplate": "Leigh gains [Energy:Arg1] Aliemus. {Rouse}: After Leigh plays a card, {Embryo Fusion} +[Blood:Arg2], and the next Exalt is Enhanced: gain Temporary {STR} equal to [Arg3]% of Permanent {STR}, stacking up to [Arg4] times.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -45,8 +44,7 @@
           },
           "Arg2": {
             "kind": "scaling",
-            "values": ["15", "16", "17", "18", "19", "20"],
-            "suffix": "%"
+            "values": ["20", "21", "22", "23", "24", "25"]
           },
           "Arg3": {
             "kind": "fixed",

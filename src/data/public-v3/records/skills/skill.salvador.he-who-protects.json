@@ -9,11 +9,11 @@
   },
   "ownerAwakenerId": "awakener-0044",
   "slot": "Exalt",
-  "descriptionTemplate": "[{Devour}: Gain [Power:Arg1] Temporary {STR}, +[Arg4]% Temporary Crit. Rate.] Gain [Block:Arg2] Shield. {Vulnerable} all enemies for 1 turn. Until the start of the next turn, [Arg3]% of the DMG taken will be converted to {Crimson Furnace} Healing.",
+  "descriptionTemplate": "[{Devour}: Gain [Power:Arg1] Temporary {STR}, +[Arg4]% Temporary Crit. Rate.] Gain [Block:Arg2] Shield. {Vulnerable} all enemies for 1 turn. Until the start of the next turn, [Arg3]% of the DMG taken will be converted to {Crimson Furnace}.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": ["20", "24", "28", "32", "36", "40"],
+      "values": ["25", "30", "35", "40", "45", "50"],
       "stat": "ATK",
       "suffix": "%"
     },
@@ -46,11 +46,11 @@
       "ownerAwakenerId": "awakener-0044",
       "ownerAwakenerName": "Salvador",
       "patch": {
-        "descriptionTemplate": "[{Devour}: Obtain [Power:Arg1] Temporary {STR}, Temporary Crit. Rate +[Arg4]%.] Gain [Block:Arg2] Shield. Apply {Vulnerable} to all enemies for 1 turn. Until the start of next turn, when attacked, [Arg3]% of the DMG taken will be converted to {Crimson Furnace} Healing. Salvador obtains [Arg5]% Temporary Crit. DMG.",
+        "descriptionTemplate": "[{Devour}: Obtain [Power:Arg1] Temporary {STR}, Temporary Crit. Rate +[Arg4]%.] Gain [Block:Arg2] Shield. Apply {Vulnerable} to all enemies for 1 turn. Until the start of next turn, when attacked, [Arg3]% of the DMG taken will be converted to {Crimson Furnace}. Salvador obtains [Arg5]% Temporary Crit. DMG.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
-            "values": ["20", "24", "28", "32", "36", "40"],
+            "values": ["25", "30", "35", "40", "45", "50"],
             "stat": "ATK",
             "suffix": "%"
           },

@@ -9,11 +9,11 @@
   },
   "ownerAwakenerId": "awakener-0050",
   "slot": "Skill1",
-  "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies, which enjoys an additional [Arg3]% {Tentacle DMG} and {STR} bonus. Make all Tentacles attack [Arg2] {plural:[Arg2]|time|times}, dealing {Pierce DMG}. {Aftershock}: Command 1 Tentacle to attack.",
+  "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies, additionally gaining [Arg3]% {Tentacle DMG} and {STR} bonus. Cause all Tentacles to Attack [Arg2] time(s), dealing [Arg4]% {Pierce DMG}. {Aftershock}: Command 1 Tentacle to attack.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": ["30", "36", "42", "48", "54", "60"],
+      "values": ["60", "72", "84", "96", "108", "120"],
       "stat": "ATK",
       "suffix": "%"
     },
@@ -29,6 +29,11 @@
         "substat": "AliemusRegen",
         "multiplier": "15"
       }
+    },
+    "Arg4": {
+      "kind": "scaling",
+      "values": ["100", "110", "120", "130", "140", "150"],
+      "suffix": "%"
     }
   },
   "cardKeywords": [],
@@ -43,7 +48,7 @@
       "ownerAwakenerId": "awakener-0050",
       "ownerAwakenerName": "Tulu",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies, which enjoys an additional [Arg3]% {Tentacle DMG} and {STR} bonus. Make all Tentacles attack [Arg2] {plural:[Arg2]|time|times}, dealing {Pierce DMG}. If the current Stance is {Tranquil Sea}, reduce Arithmetica Cost by 2. {Aftershock}: Command 1 Tentacle to attack."
+        "descriptionTemplate": "Deal [Damage:Arg1] {Pierce DMG} to all enemies, additionally gaining [Arg3]% {Tentacle DMG} and {STR} bonus. Cause all Tentacles to attack all enemies [Arg2] times, dealing [Arg4]% {Pierce DMG}. If the current stance is {Tranquil Sea}, Arithmetica Cost -2. {Aftershock}: Command 1 Tentacle to attack."
       }
     },
     {

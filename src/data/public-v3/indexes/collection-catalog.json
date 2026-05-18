@@ -433,7 +433,9 @@
       "wheel-0131",
       "wheel-0132",
       "wheel-0136",
-      "wheel-0137"
+      "wheel-0137",
+      "wheel-0165",
+      "wheel-0166"
     ]
   },
   "content": {
@@ -920,7 +922,9 @@
         "wheel-0130",
         "wheel-0132",
         "wheel-0136",
-        "wheel-0137"
+        "wheel-0137",
+        "wheel-0165",
+        "wheel-0166"
       ],
       "ULTRA": [
         "wheel-0030",
@@ -1072,7 +1076,9 @@
         "wheel-0126",
         "wheel-0128",
         "wheel-0130",
-        "wheel-0131"
+        "wheel-0131",
+        "wheel-0165",
+        "wheel-0166"
       ]
     }
   }

@@ -37,14 +37,32 @@
   "upgrades": [
     {
       "id": "upgrade.enlighten.ogier.deathless-loyalty.skill.ogier.knights-zeal",
-      "operation": "replace_description",
+      "operation": "mixed",
       "upgraderId": "enlighten.ogier.deathless-loyalty",
       "upgraderType": "enlighten",
       "upgraderSlot": "AbsoluteAxiom",
       "ownerAwakenerId": "awakener-0038",
       "ownerAwakenerName": "Ogier",
       "patch": {
-        "descriptionTemplate": "Ogier gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg3] {STR}; every time Ogier plays a card, gain [Power:Arg2] {STR}. If {Death Resistance} has been triggered this battle, Ogier's Exalt generates 3x the Temporary {STR}."
+        "descriptionTemplate": "Ogier gains [Energy:Arg1] Aliemus. {Rouse}: Gain [Power:Arg3] {STR}; every time Ogier plays a card, gain [Power:Arg2] {STR}. If {Death Resistance} has been triggered this battle, Ogier's Exalt generates 3x the Temporary {STR}.",
+        "descriptionArgs": {
+          "Arg1": {
+            "kind": "scaling",
+            "values": ["25", "30", "35", "40", "45", "50"]
+          },
+          "Arg2": {
+            "kind": "scaling",
+            "values": ["1.5", "1.8", "2.1", "2.4", "2.7", "3"],
+            "stat": "ATK",
+            "suffix": "%"
+          },
+          "Arg3": {
+            "kind": "scaling",
+            "values": ["5.625", "6.75", "7.875", "9", "10.125", "11.25"],
+            "stat": "ATK",
+            "suffix": "%"
+          }
+        }
       }
     }
   ],

@@ -101,6 +101,7 @@ describe('awakener-kits', () => {
         talents: expect.objectContaining({
           T2: 'talent.24.madness-omen',
           T3: 'talent.24.soulforge-aptitude',
+          T4: 'talent.24.gnostic-potential',
         }),
       }),
     )

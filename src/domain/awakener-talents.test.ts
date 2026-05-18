@@ -40,6 +40,29 @@ describe('awakener-talents', () => {
     expect(madnessOmen).not.toHaveProperty('schemaVersion')
   })
 
+  it('preserves public Gnostic Potential metadata for level defaults', () => {
+    const talents = getAwakenerTalents()
+    const limitedGnostic = getAwakenerTalentById('talent.24.gnostic-potential', talents)
+    const permanentGnostic = getAwakenerTalentById('talent.agrippa.gnostic-potential', talents)
+
+    expect(limitedGnostic).toMatchObject({
+      id: 'talent.24.gnostic-potential',
+      displayName: 'Gnostic Potential',
+      ownerAwakenerId: 1,
+      family: 'gnostic_potential',
+      maxLevel: 5,
+      defaultMaxed: true,
+      hasLevelScaledDescription: true,
+    })
+    expect(permanentGnostic).toMatchObject({
+      id: 'talent.agrippa.gnostic-potential',
+      family: 'gnostic_potential',
+      maxLevel: 5,
+      hasLevelScaledDescription: true,
+    })
+    expect(permanentGnostic).not.toHaveProperty('defaultMaxed')
+  })
+
   it('matches every tracked kit talent binding to a seeded record', () => {
     const talents = getAwakenerTalents()
     const kits = getAwakenerKits()

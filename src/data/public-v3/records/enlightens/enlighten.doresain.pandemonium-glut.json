@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0014",
   "slot": "OverExalt",
-  "descriptionTemplate": "The Crit. Rate of this Exalt further +25%, the Final DMG of this Exalt +100%.",
+  "descriptionTemplate": "In this Exalt: Crit. Rate +25%, Base DMG +50%, Final DMG +100%.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Doresain"
 }

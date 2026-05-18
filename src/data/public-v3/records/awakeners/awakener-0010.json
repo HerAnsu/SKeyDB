@@ -21,11 +21,11 @@
   "faction": "The Unknowable",
   "aliases": ["clementine"],
   "searchTags": ["Bleed", "STR Up", "Dispel", "Keyflare"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 44,
-    "ATK": 52,
-    "DEF": 42
+    "CON": 30,
+    "ATK": 35,
+    "DEF": 29
   },
   "substatsLv1": {
     "CritRate": 5,

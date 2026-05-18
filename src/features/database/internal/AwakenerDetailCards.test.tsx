@@ -34,6 +34,7 @@ describe('AwakenerDetailCards', () => {
     const shellView = makeDatabaseShellView({
       selection: {
         soulforgeLevel: 0,
+        gnosticPotentialLevel: 0,
         selectedEnlightenSlot: 'E2',
       },
       stats: null,

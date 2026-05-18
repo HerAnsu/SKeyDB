@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0002",
   "slot": "E3",
-  "descriptionTemplate": "{Colorless Spiral} increases Base DMG by 50%, and playing it grants {Embryo Fusion} +20%.",
+  "descriptionTemplate": "{Colorless Spiral} increases Base DMG by 50%, and playing it grants {Embryo Fusion} +20.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Agrippa"
 }

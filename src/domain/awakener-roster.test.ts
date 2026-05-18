@@ -80,7 +80,7 @@ describe('awakener-roster', () => {
 
     expect(arachne).toEqual(
       expect.objectContaining({
-        primaryScalingBase: 30,
+        primaryScalingBase: 20,
         statScaling: {
           CON: 1.6,
           ATK: 1.15,
@@ -95,14 +95,14 @@ describe('awakener-roster', () => {
 
     expect(
       [1, 10, 20, 30, 40, 50, 60].map((level) => resolveAwakenerStatsForLevel(arachne, level).CON),
-    ).toEqual(['50', '64', '80', '96', '112', '128', '144'])
+    ).toEqual(['34', '48', '64', '80', '96', '112', '128'])
 
     expect(
       [1, 10, 20, 30, 40, 50, 60].map((level) => resolveAwakenerStatsForLevel(arachne, level).ATK),
-    ).toEqual(['36', '46', '58', '69', '81', '92', '104'])
+    ).toEqual(['25', '35', '46', '58', '69', '81', '92'])
 
     expect(
       [1, 10, 20, 30, 40, 50, 60].map((level) => resolveAwakenerStatsForLevel(arachne, level).DEF),
-    ).toEqual(['49', '62', '78', '93', '109', '124', '140'])
+    ).toEqual(['33', '47', '62', '78', '93', '109', '124'])
   })
 })

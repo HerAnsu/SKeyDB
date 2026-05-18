@@ -281,7 +281,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {
             kind: 'scaling',
-            values: ['25', '30', '35', '40', '45', '50'],
+            values: ['30', '36', '42', '48', '54', '60'],
             suffix: '%',
             stat: 'ATK',
           },
@@ -297,7 +297,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg2: {
             kind: 'scaling',
-            values: ['25', '30', '35', '40', '45', '50'],
+            values: ['30', '36', '42', '48', '54', '60'],
             suffix: '%',
             stat: 'ATK',
           },
@@ -332,7 +332,7 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {
             kind: 'scaling',
-            values: ['50', '60', '70', '80', '90', '100'],
+            values: ['62.5', '75', '87.5', '100', '112.5', '125'],
             suffix: '%',
             stat: 'ATK',
           },
@@ -369,11 +369,11 @@ describe('derived-skills', () => {
         descriptionArgs: {
           Arg1: {
             kind: 'scaling',
-            values: ['150', '180', '210', '240', '270', '300'],
+            values: ['200', '240', '280', '320', '360', '400'],
             suffix: '%',
             stat: 'ATK',
           },
-          Arg2: {kind: 'fixed', value: '5'},
+          Arg2: {kind: 'fixed', value: '6'},
         },
         cardKeywords: retainExhaustKeywords,
       }),
@@ -408,7 +408,7 @@ describe('derived-skills', () => {
           }),
           Arg2: {
             kind: 'fixed',
-            value: '3',
+            value: '4',
             suffix: '%',
             stat: 'ATK',
           },
@@ -421,7 +421,7 @@ describe('derived-skills', () => {
         cost: '0',
         descriptionArgs: {
           Arg1: {kind: 'fixed', value: '1'},
-          Arg2: {kind: 'fixed', value: '100', suffix: '%'},
+          Arg2: {kind: 'fixed', value: '100'},
         },
         cardKeywords: retainExhaustKeywords,
       }),
@@ -580,7 +580,7 @@ describe('derived-skills', () => {
     expect(getDerivedSkillById('derived.thais.blood-of-coition', derivedSkills)).toEqual(
       expect.objectContaining({
         descriptionArgs: {
-          Arg1: {kind: 'fixed', value: '20', suffix: '%'},
+          Arg1: {kind: 'fixed', value: '20'},
         },
       }),
     )

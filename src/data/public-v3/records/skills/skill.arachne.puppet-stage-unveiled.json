@@ -9,11 +9,12 @@
   },
   "ownerAwakenerId": "awakener-0056",
   "slot": "Rouse",
-  "descriptionTemplate": "Arachne gains [Energy:Arg1] Aliemus. {Rouse}: {Annihilation} is changed to: choose 1 Command Card from {Ultra Space}, take it out and make it trigger twice the next time it is played, and make the next played Command Card trigger {Dimension Shuttle}.",
+  "descriptionTemplate": "Arachne gains Aliemus equal to [Arg2]% of her Base Aliemus. {Rouse}: {Annihilation} is changed to: choose 1 Command Card from {Ultra Space}, take it out and make it trigger twice the next time it is played, and make the next played Command Card trigger {Dimension Shuttle}.",
   "descriptionArgs": {
-    "Arg1": {
+    "Arg2": {
       "kind": "scaling",
-      "values": ["25", "30", "35", "40", "45", "50"]
+      "values": ["25", "30", "35", "40", "45", "50"],
+      "suffix": "%"
     }
   },
   "cardKeywords": [
@@ -32,7 +33,7 @@
       "ownerAwakenerId": "awakener-0056",
       "ownerAwakenerName": "Arachne",
       "patch": {
-        "descriptionTemplate": "Arachne gains [Energy:Arg1] Aliemus. {Rouse}: {Annihilation} is changed to: choose 1 Command Card from {Ultra Space}, take it out and make it trigger twice the next time it is played, and make the next played Command Card trigger {Dimension Shuttle}. After using {Annihilation}, immediately deal {Fixed DMG} equal to 50% {Final Verdict} to all enemies, and the DMG Amplification and Shield gained from the next Exalt +50%."
+        "descriptionTemplate": "Arachne gains Aliemus equal to [Arg2]% of her Base Aliemus. {Rouse}: {Annihilation} is changed to: choose 1 Command Card from {Ultra Space}, take it out and make it trigger twice the next time it is played, and make the next played Command Card trigger {Dimension Shuttle}. After using {Annihilation}, immediately deal {Fixed DMG} equal to 50% {Final Verdict} to all enemies, and the DMG Amplification and Shield gained from the next Exalt +50%."
       }
     }
   ],

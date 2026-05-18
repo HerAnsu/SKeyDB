@@ -19,7 +19,7 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["30", "36", "42", "48", "54", "60"],
+      "values": ["45", "54", "63", "72", "81", "90"],
       "stat": "ATK",
       "suffix": "%",
       "substatBonus": {

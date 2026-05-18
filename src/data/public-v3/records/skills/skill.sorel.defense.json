@@ -39,7 +39,7 @@
       "ownerAwakenerId": "awakener-0046",
       "ownerAwakenerName": "Sorel",
       "patch": {
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. If current HP is below 50%, obtain an additional Shield, {Embryo Fusion} +[Blood:Arg4]%. Sorel obtains [Energy:Arg3] Aliemus.",
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. If current HP is below 50%, additionally gain 1 Shield, {Embryo Fusion} +[Blood:Arg4]. Sorel gains [Energy:Arg3] Aliemus.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
@@ -58,8 +58,7 @@
           },
           "Arg4": {
             "kind": "fixed",
-            "value": "10",
-            "suffix": "%"
+            "value": "10"
           }
         }
       }

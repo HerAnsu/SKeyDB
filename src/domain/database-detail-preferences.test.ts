@@ -64,6 +64,7 @@ describe('database-detail-preferences', () => {
           skillLevel: 6,
           selectedEnlightenSlot: 'AbsoluteAxiom',
           soulforgeLevel: 0,
+          gnosticPotentialLevel: 0,
         },
       },
       wheel: {
@@ -114,6 +115,7 @@ describe('database-detail-preferences', () => {
           skillLevel: 4,
           selectedEnlightenSlot: 'E2',
           soulforgeLevel: 3,
+          gnosticPotentialLevel: 0,
         },
       },
       wheel: {
@@ -150,6 +152,7 @@ describe('database-detail-preferences', () => {
               skillLevel: 3,
               selectedEnlightenSlot: 'E1',
               soulforgeLevel: 2,
+              gnosticPotentialLevel: 1,
             },
           },
           wheel: {
@@ -176,6 +179,7 @@ describe('database-detail-preferences', () => {
           skillLevel: 3,
           selectedEnlightenSlot: 'E1',
           soulforgeLevel: 2,
+          gnosticPotentialLevel: 1,
         },
       },
       wheel: {
@@ -220,6 +224,7 @@ describe('database-detail-preferences', () => {
           skillLevel: 4,
           selectedEnlightenSlot: 'E2',
           soulforgeLevel: 3,
+          gnosticPotentialLevel: 0,
         },
       },
       wheel: {
@@ -243,6 +248,7 @@ describe('database-detail-preferences', () => {
             skillLevel: 5,
             selectedEnlightenSlot: 'AbsoluteAxiom',
             soulforgeLevel: 8,
+            gnosticPotentialLevel: 2,
           },
         },
       }),
@@ -252,6 +258,7 @@ describe('database-detail-preferences', () => {
       skillLevel: 5,
       selectedEnlightenSlot: 'E3',
       soulforgeLevel: 3,
+      gnosticPotentialLevel: 0,
     })
   })
 })

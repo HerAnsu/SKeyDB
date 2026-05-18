@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0040",
   "slot": "Rouse",
-  "descriptionTemplate": "Pickman gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 stack of {Fantasia}. For each stack of {Creativity} Pickman gains, {Embryo Fusion} +[Arg2]%.",
+  "descriptionTemplate": "Pickman gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 stack of {Aliemus Fantasy}. For each stack of {Creativity} Pickman gains, {Embryo Fusion}+ [Arg2].",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
@@ -17,8 +17,7 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["20", "22", "24", "26", "28", "30"],
-      "suffix": "%"
+      "values": ["20", "22", "24", "26", "28", "30"]
     }
   },
   "cardKeywords": [
@@ -37,7 +36,7 @@
       "ownerAwakenerId": "awakener-0040",
       "ownerAwakenerName": "Pickman",
       "patch": {
-        "descriptionTemplate": "Pickman gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 stack of {Fantasia}. For each stack of {Creativity} Pickman gains, {Embryo Fusion}+ [Arg2]%. The duration of the Painted Golden Relic created by {Lifelike Rendition} is increased from 1 turn to 2 turns."
+        "descriptionTemplate": "Pickman gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 stack of {Fantasia}. For each stack of {Creativity} Pickman gains, {Embryo Fusion}+ [Arg2]. The duration of the Painted Golden Relic created by {Lifelike Rendition} is increased from 1 turn to 2 turns."
       }
     }
   ],

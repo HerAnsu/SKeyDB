@@ -15,7 +15,7 @@
       "idPrefix": "wheel",
       "capabilities": ["catalog", "detailRecord", "search", "snapshot"],
       "searchable": true,
-      "recordCount": 130
+      "recordCount": 132
     },
     {
       "scope": "relics",
@@ -55,7 +55,7 @@
       "idPrefix": "derived",
       "capabilities": ["catalog", "detailRecord", "snapshot"],
       "searchable": false,
-      "recordCount": 113
+      "recordCount": 117
     },
     {
       "scope": "talents",
@@ -63,7 +63,7 @@
       "idPrefix": "talent",
       "capabilities": ["catalog", "detailRecord", "snapshot"],
       "searchable": false,
-      "recordCount": 154
+      "recordCount": 210
     },
     {
       "scope": "enlightens",
@@ -105,7 +105,7 @@
       "idPrefix": "wheel",
       "capabilities": ["catalog", "detailRecord", "search", "snapshot"],
       "searchable": true,
-      "recordCount": 130
+      "recordCount": 132
     },
     "relics": {
       "scope": "relics",
@@ -145,7 +145,7 @@
       "idPrefix": "derived",
       "capabilities": ["catalog", "detailRecord", "snapshot"],
       "searchable": false,
-      "recordCount": 113
+      "recordCount": 117
     },
     "talents": {
       "scope": "talents",
@@ -153,7 +153,7 @@
       "idPrefix": "talent",
       "capabilities": ["catalog", "detailRecord", "snapshot"],
       "searchable": false,
-      "recordCount": 154
+      "recordCount": 210
     },
     "enlightens": {
       "scope": "enlightens",

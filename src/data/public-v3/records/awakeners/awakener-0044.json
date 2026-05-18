@@ -21,11 +21,11 @@
   "faction": "Out of the Aeons",
   "aliases": ["salvador"],
   "searchTags": ["Weakness", "Vulnerable", "Barrier", "STR Up", "Heal", "Self-Harm"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 66,
-    "ATK": 42,
-    "DEF": 66
+    "CON": 45,
+    "ATK": 29,
+    "DEF": 45
   },
   "substatsLv1": {
     "CritRate": 5,

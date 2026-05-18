@@ -25,7 +25,7 @@
     },
     "Arg2": {
       "kind": "fixed",
-      "value": "3",
+      "value": "4",
       "stat": "ATK",
       "suffix": "%"
     }
@@ -60,7 +60,7 @@
           },
           "Arg2": {
             "kind": "fixed",
-            "value": "3",
+            "value": "4",
             "stat": "ATK",
             "suffix": "%"
           }

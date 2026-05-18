@@ -35,6 +35,18 @@
       "ownerAwakenerName": "Leigh",
       "patch": {
         "descriptionTemplate": "Randomly deal [Damage:Arg1] {Pierce DMG} [Arg2] {plural:[Arg2]|time|times}. Until the start of next turn, gain 1 Shield for every 2 HP lost at the start of next turn.",
+        "descriptionArgs": {
+          "Arg1": {
+            "kind": "scaling",
+            "values": ["60", "72", "84", "96", "108", "120"],
+            "stat": "ATK",
+            "suffix": "%"
+          },
+          "Arg2": {
+            "kind": "fixed",
+            "value": "3"
+          }
+        },
         "cardKeywords": [
           {
             "id": "mechanic.retain"

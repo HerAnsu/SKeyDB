@@ -17,7 +17,7 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["10", "12", "14", "16", "18", "20"],
+      "values": ["12.5", "15", "17.5", "20", "22.5", "25"],
       "stat": "DEF",
       "suffix": "%"
     }
@@ -38,7 +38,7 @@
       "ownerAwakenerId": "awakener-0002",
       "ownerAwakenerName": "Agrippa",
       "patch": {
-        "descriptionTemplate": "Agrippa gains [Energy:Arg1] Aliemus. {Rouse}: {Poison} applied by Agrippa +50%. At turn end, gain [Block:Arg2] Shield. Each time Agrippa inflicts or triggers {Poison} in the turn, this Shield +50%, up to 5 stacks."
+        "descriptionTemplate": "Agrippa gains [Energy:Arg1] Aliemus. {Rouse}: {Poison} applied by Agrippa +100%. At turn end, gain [Block:Arg2] Shield. Each time Agrippa inflicts or triggers {Poison} in the turn, this Shield +50%, up to 5 stacks."
       }
     }
   ],

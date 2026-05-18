@@ -29,7 +29,7 @@
     },
     "Arg3": {
       "kind": "fixed",
-      "value": "50",
+      "value": "100",
       "suffix": "%"
     }
   },

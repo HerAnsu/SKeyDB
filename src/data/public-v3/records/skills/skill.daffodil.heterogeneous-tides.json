@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0012",
   "slot": "Skill2",
-  "descriptionTemplate": "Obtain [Power:Arg1] {STR} and {Vulnerable} the front-row enemies. {Leap}: Change to: Obtain [Power:Arg2] {Temporary STR} and {Vulnerable} the front-row enemies.",
+  "descriptionTemplate": "Obtain [Power:Arg1] {STR} and {Vulnerable} all enemies. {Leap}: Change to: Obtain [Power:Arg2] {Temporary STR} and {Vulnerable} all enemies.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",

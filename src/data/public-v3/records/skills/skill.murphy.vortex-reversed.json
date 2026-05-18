@@ -13,7 +13,7 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": ["15", "18", "21", "24", "27", "30"],
+      "values": ["25", "30", "35", "40", "45", "50"],
       "stat": "ATK",
       "suffix": "%"
     },

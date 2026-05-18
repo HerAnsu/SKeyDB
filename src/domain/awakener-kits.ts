@@ -47,7 +47,14 @@ function adaptPublicAwakenerToKit(record: {id: string; numericId: number}): Awak
   const firstPassiveTalentId = passiveTalents[0]?.id
   const madnessOmenTalentId = ownerTalents.find((entry) => entry.family === 'madness_omen')?.id
   const soulforgeTalentId = ownerTalents.find((entry) => entry.family === 'soulforge_aptitude')?.id
+  const gnosticPotentialTalentId = ownerTalents.find(
+    (entry) => entry.family === 'gnostic_potential',
+  )?.id
   const secondPassiveTalentId = passiveTalents[1]?.id
+  const fourthTalentId = gnosticPotentialTalentId ?? secondPassiveTalentId
+  const extraPassiveTalentIds = passiveTalents
+    .slice(gnosticPotentialTalentId ? 1 : 2)
+    .map((entry) => entry.id)
 
   return {
     awakenerId: record.numericId,
@@ -65,8 +72,8 @@ function adaptPublicAwakenerToKit(record: {id: string; numericId: number}): Awak
       ...(firstPassiveTalentId ? {T1: firstPassiveTalentId} : {}),
       ...(madnessOmenTalentId ? {T2: madnessOmenTalentId} : {}),
       ...(soulforgeTalentId ? {T3: soulforgeTalentId} : {}),
-      ...(secondPassiveTalentId ? {T4: secondPassiveTalentId} : {}),
-      extraTalentIds: passiveTalents.slice(2).map((entry) => entry.id),
+      ...(fourthTalentId ? {T4: fourthTalentId} : {}),
+      extraTalentIds: extraPassiveTalentIds,
     },
     enlightens: {
       E1: requireOwnedRecord(enlightens, 'E1', record.id),

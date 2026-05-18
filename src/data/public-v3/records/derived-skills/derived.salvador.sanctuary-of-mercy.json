@@ -10,7 +10,7 @@
   "ownerAwakenerId": "awakener-0044",
   "derivedFromId": "skill.salvador.benediction",
   "rootSkillId": "skill.salvador.benediction",
-  "descriptionTemplate": "Gain [Arg1] {plural:[Arg1]|stack|stacks} of Temporary {Barrier}, {Embryo Fusion} +[Arg2]%.",
+  "descriptionTemplate": "Gain [Arg1] {plural:[Arg1]|stack|stacks} of Temporary {Barrier}, {Embryo Fusion} +[Arg2].",
   "descriptionArgs": {
     "Arg1": {
       "kind": "fixed",
@@ -18,8 +18,7 @@
     },
     "Arg2": {
       "kind": "fixed",
-      "value": "100",
-      "suffix": "%"
+      "value": "100"
     }
   },
   "cardKeywords": [

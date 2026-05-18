@@ -21,11 +21,11 @@
   "faction": "The Fools",
   "aliases": ["corposant"],
   "searchTags": ["Weakness", "STR Up", "Tentacle DMG", "Aftershock", "Death Resistance", "Discard", "Draw", "Tentacles"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 50,
-    "ATK": 44,
-    "DEF": 52
+    "CON": 34,
+    "ATK": 30,
+    "DEF": 35
   },
   "substatsLv1": {
     "CritRate": 5.8,

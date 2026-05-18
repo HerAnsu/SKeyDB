@@ -21,11 +21,11 @@
   "faction": "Outlanders",
   "aliases": ["horla"],
   "searchTags": ["Weakness", "Vulnerable", "Counter", "STR Up", "STR Down", "Death Resistance", "Heal"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 36,
-    "ATK": 38,
-    "DEF": 33
+    "CON": 25,
+    "ATK": 26,
+    "DEF": 23
   },
   "substatsLv1": {
     "CritRate": 5,
@@ -56,7 +56,7 @@
     "title": "Horla",
     "birthday": "14-Feb",
     "gender": "Female",
-    "height": "5'4.2''",
+    "height": "5'42''",
     "weight": "89lbs",
     "gnosticIndex": "21.12",
     "storySections": [

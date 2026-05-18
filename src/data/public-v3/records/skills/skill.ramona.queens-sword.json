@@ -98,7 +98,7 @@
       "ownerAwakenerId": "awakener-0042",
       "ownerAwakenerName": "Ramona",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg5] {plural:[Arg5]|time|times}, gaining [Power:Arg4] Temporary {STR} each time DMG is dealt. After playing, increase the number of DMG instances for {Queen's Sword} by 1, up to [Arg6] {plural:[Arg6]|time|times}. Gain [Arg7] Temporary Realm Mastery. {Aftershock}: Obtain Keyflare equal to the amount gained from playing this card.",
+        "descriptionTemplate": "Deal [Damage:Arg1] DMG [Arg5] {plural:[Arg5]|time|times}, gaining [Power:Arg4] Temporary {STR} each time DMG is dealt. After playing, increase the number of DMG instances for {Queen's Sword} by 1, up to [Arg6] {plural:[Arg6]|time|times}. Gain [Arg7] Temporary Realm Mastery. {Aftershock}: Obtain Keyflare equal to the amount gained from playing This card.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",

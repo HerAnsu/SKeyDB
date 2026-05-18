@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "wheels",
   "kind": "wheel",
-  "recordCount": 130,
+  "recordCount": 132,
   "records": [
     {
       "kind": "wheel",
@@ -2193,6 +2193,38 @@
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
       "lineupToken": "x0"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0165",
+      "name": "Sakura Reveries",
+      "route": {
+        "slug": "sakura-reveries",
+        "canonicalPath": "/database/wheels/sakura-reveries"
+      },
+      "assets": {
+        "icon": "asset-wheel-0165-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "REALM_MASTERY",
+      "lineupToken": "y0"
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0166",
+      "name": "To the Stars",
+      "route": {
+        "slug": "to-the-stars",
+        "canonicalPath": "/database/wheels/to-the-stars"
+      },
+      "assets": {
+        "icon": "asset-wheel-0166-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "lineupToken": "za"
     }
   ]
 }

@@ -17,7 +17,7 @@
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["30", "36", "42", "48", "54", "60"],
+      "values": ["50", "60", "70", "80", "90", "100"],
       "stat": "DEF",
       "suffix": "%",
       "substatBonus": {

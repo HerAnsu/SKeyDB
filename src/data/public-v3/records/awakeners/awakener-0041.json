@@ -21,11 +21,11 @@
   "faction": "Hybrid",
   "aliases": ["pollux"],
   "searchTags": ["Bleed", "Discard", "Draw"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 49,
-    "ATK": 55,
-    "DEF": 47
+    "CON": 33,
+    "ATK": 37,
+    "DEF": 32
   },
   "substatsLv1": {
     "CritRate": 6.6,

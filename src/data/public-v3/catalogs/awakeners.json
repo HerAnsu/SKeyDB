@@ -23,11 +23,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-04-27",
       "faction": "Hybrid",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 52,
-        "ATK": 66,
-        "DEF": 30
+        "CON": 35,
+        "ATK": 45,
+        "DEF": 20
       },
       "substatsLv1": {
         "CritRate": 6.6,
@@ -415,11 +415,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-06-02",
       "faction": "The Fools",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 52,
-        "ATK": 47,
-        "DEF": 55
+        "CON": 35,
+        "ATK": 32,
+        "DEF": 37
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -523,11 +523,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-04-07",
       "faction": "The Unknowable",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 44,
-        "ATK": 52,
-        "DEF": 42
+        "CON": 30,
+        "ATK": 35,
+        "DEF": 29
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -577,11 +577,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-05-05",
       "faction": "The Fools",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 50,
-        "ATK": 44,
-        "DEF": 52
+        "CON": 34,
+        "ATK": 30,
+        "DEF": 35
       },
       "substatsLv1": {
         "CritRate": 5.8,
@@ -631,11 +631,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2023-12-20",
       "faction": "The Unknowable",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 49,
-        "ATK": 61,
-        "DEF": 45
+        "CON": 33,
+        "ATK": 41,
+        "DEF": 31
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -739,11 +739,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-07-21",
       "faction": "Out of the Aeons",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 52,
-        "ATK": 55,
-        "DEF": 45
+        "CON": 35,
+        "ATK": 37,
+        "DEF": 31
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -955,11 +955,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-02-10",
       "faction": "Among the Stars",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 35,
-        "ATK": 28,
-        "DEF": 38
+        "CON": 24,
+        "ATK": 19,
+        "DEF": 26
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -1009,11 +1009,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-10-07",
       "faction": "The Fools",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 55,
-        "ATK": 53,
-        "DEF": 39
+        "CON": 37,
+        "ATK": 36,
+        "DEF": 27
       },
       "substatsLv1": {
         "CritRate": 5.8,
@@ -1171,11 +1171,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-09-09",
       "faction": "The Unknowable",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 47,
-        "ATK": 49,
-        "DEF": 45
+        "CON": 32,
+        "ATK": 33,
+        "DEF": 31
       },
       "substatsLv1": {
         "CritRate": 5.8,
@@ -1279,11 +1279,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-07-15",
       "faction": "Outlanders",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 36,
-        "ATK": 38,
-        "DEF": 33
+        "CON": 25,
+        "ATK": 26,
+        "DEF": 23
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -1441,11 +1441,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-08-18",
       "faction": "Among the Stars",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 49,
-        "ATK": 58,
-        "DEF": 44
+        "CON": 33,
+        "ATK": 39,
+        "DEF": 30
       },
       "substatsLv1": {
         "CritRate": 5.8,
@@ -1549,11 +1549,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-01-31",
       "faction": "Hybrid",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 56,
-        "ATK": 41,
-        "DEF": 56
+        "CON": 38,
+        "ATK": 28,
+        "DEF": 38
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -1711,11 +1711,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-06-17",
       "faction": "Out of the Aeons",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 33,
-        "ATK": 52,
-        "DEF": 28
+        "CON": 23,
+        "ATK": 35,
+        "DEF": 19
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -1765,11 +1765,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-12-29",
       "faction": "Outlanders",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 44,
-        "ATK": 52,
-        "DEF": 44
+        "CON": 30,
+        "ATK": 35,
+        "DEF": 30
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -1819,11 +1819,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-02-21",
       "faction": "Hybrid",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 45,
-        "ATK": 49,
-        "DEF": 55
+        "CON": 31,
+        "ATK": 33,
+        "DEF": 37
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -1873,11 +1873,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-11-24",
       "faction": "Out of the Aeons",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 35,
-        "ATK": 42,
-        "DEF": 41
+        "CON": 24,
+        "ATK": 29,
+        "DEF": 28
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -2143,11 +2143,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-09-08",
       "faction": "The Fools",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 50,
-        "ATK": 45,
-        "DEF": 50
+        "CON": 34,
+        "ATK": 31,
+        "DEF": 34
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -2197,11 +2197,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2025-10-20",
       "faction": "Hybrid",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 49,
-        "ATK": 55,
-        "DEF": 47
+        "CON": 33,
+        "ATK": 37,
+        "DEF": 32
       },
       "substatsLv1": {
         "CritRate": 6.6,
@@ -2305,11 +2305,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-08-12",
       "faction": "The Fools",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 62,
-        "ATK": 52,
-        "DEF": 50
+        "CON": 42,
+        "ATK": 35,
+        "DEF": 34
       },
       "substatsLv1": {
         "CritRate": 5.8,
@@ -2359,11 +2359,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-04-04",
       "faction": "Out of the Aeons",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 66,
-        "ATK": 42,
-        "DEF": 66
+        "CON": 45,
+        "ATK": 29,
+        "DEF": 45
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -2467,11 +2467,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-01-10",
       "faction": "Outlanders",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 45,
-        "ATK": 64,
-        "DEF": 33
+        "CON": 31,
+        "ATK": 44,
+        "DEF": 23
       },
       "substatsLv1": {
         "CritRate": 6.6,
@@ -2521,11 +2521,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-11-18",
       "faction": "Gateway",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 47,
-        "ATK": 47,
-        "DEF": 47
+        "CON": 32,
+        "ATK": 32,
+        "DEF": 32
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -2575,11 +2575,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-05-18",
       "faction": "Out of the Aeons",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 49,
-        "ATK": 47,
-        "DEF": 44
+        "CON": 33,
+        "ATK": 32,
+        "DEF": 30
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -2683,11 +2683,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2023-11-29",
       "faction": "Out of the Aeons",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 53,
-        "ATK": 59,
-        "DEF": 47
+        "CON": 36,
+        "ATK": 40,
+        "DEF": 32
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -2791,11 +2791,11 @@
       "availabilityType": "LIMITED_FADED_LEGACY",
       "releaseDate": "2024-03-14",
       "faction": "Among the Stars",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 55,
-        "ATK": 35,
-        "DEF": 64
+        "CON": 37,
+        "ATK": 24,
+        "DEF": 44
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -2899,11 +2899,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2026-01-26",
       "faction": "The Unknowable",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 70,
-        "ATK": 42,
-        "DEF": 39
+        "CON": 48,
+        "ATK": 29,
+        "DEF": 27
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -2953,11 +2953,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2026-03-09",
       "faction": "The Fools",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 52,
-        "ATK": 62,
-        "DEF": 42
+        "CON": 35,
+        "ATK": 42,
+        "DEF": 29
       },
       "substatsLv1": {
         "CritRate": 5,
@@ -3007,11 +3007,11 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2026-04-20",
       "faction": "The Unknowable",
-      "primaryScalingBase": 30,
+      "primaryScalingBase": 20,
       "baseStatsLv1": {
-        "CON": 50,
-        "ATK": 36,
-        "DEF": 49
+        "CON": 34,
+        "ATK": 25,
+        "DEF": 33
       },
       "substatsLv1": {
         "CritRate": 5,

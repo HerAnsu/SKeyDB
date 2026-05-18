@@ -84,6 +84,7 @@ export type PublicV3TalentRecord = PublicV3OwnedRecord & {
   descriptionTemplate?: string
   family?: string
   maxLevel?: number
+  defaultMaxed?: boolean
 }
 
 export type PublicV3EnlightenRecord = PublicV3OwnedRecord & {
@@ -123,6 +124,7 @@ const publicV3TalentRecordShape = {
   descriptionTemplate: z.string().optional(),
   family: z.string().optional(),
   maxLevel: z.number().optional(),
+  defaultMaxed: z.boolean().optional(),
 }
 const publicV3EnlightenRecordShape = {
   kind: z.literal('enlighten'),

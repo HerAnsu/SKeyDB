@@ -21,7 +21,7 @@
     },
     "Arg3": {
       "kind": "fixed",
-      "value": "5",
+      "value": "10",
       "suffix": "%"
     }
   },
@@ -41,7 +41,7 @@
       "ownerAwakenerId": "awakener-0017",
       "ownerAwakenerName": "Faros",
       "patch": {
-        "descriptionTemplate": "Faros gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 Tentacle. For each card Faros plays, draw [Arg2] {plural:[Arg2]|card|cards}, trigger [Arg3]% {Poison} on all enemies, and when Tentacles deal DMG this turn, additionally inflict {Poison} equal to 3% of DMG dealt, up to 3 times per turn."
+        "descriptionTemplate": "Faros gains [Energy:Arg1] Aliemus. {Rouse}: Gain 1 Tentacle. For each card Faros plays, draw [Arg2] {plural:[Arg2]|card|cards}, trigger [Arg3]% {Poison} on all enemies, and when Tentacles deal DMG this turn, additionally inflict {Poison} equal to 5% of DMG dealt, up to 3 times per turn."
       }
     }
   ],

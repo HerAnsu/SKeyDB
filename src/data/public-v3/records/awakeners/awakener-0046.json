@@ -21,11 +21,11 @@
   "faction": "Outlanders",
   "aliases": ["sorel"],
   "searchTags": ["STR Up", "Death Resistance", "Heal", "Self-Harm"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 45,
-    "ATK": 64,
-    "DEF": 33
+    "CON": 31,
+    "ATK": 44,
+    "DEF": 23
   },
   "substatsLv1": {
     "CritRate": 6.6,

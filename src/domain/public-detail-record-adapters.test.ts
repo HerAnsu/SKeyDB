@@ -41,9 +41,9 @@ describe('public-detail-record-adapters', () => {
       id: publicRecord?.numericId,
       displayName: publicRecord?.name,
       stats: expect.objectContaining({
-        CON: '52',
-        ATK: '66',
-        DEF: '30',
+        CON: '35',
+        ATK: '45',
+        DEF: '20',
       }),
     })
   })
@@ -53,9 +53,9 @@ describe('public-detail-record-adapters', () => {
 
     expect(thais?.cards.C4.id).toBe('skill.thais.ancient-caress')
     expect(thais?.stats).toMatchObject({
-      CON: '49',
-      ATK: '47',
-      DEF: '44',
+      CON: '33',
+      ATK: '32',
+      DEF: '30',
       CritRate: '5%',
       CritDamage: '50%',
       AliemusRegen: '2.4',
@@ -68,6 +68,12 @@ describe('public-detail-record-adapters', () => {
     expect(thais?.cards.OverExalt?.id).toBe('skill.thais.sacred-relics-perpetuity')
     expect(thais?.talents.T2?.id).toBe('talent.thais.madness-omen')
     expect(thais?.talents.T3?.id).toBe('talent.thais.soulforge-aptitude')
+    expect(thais?.talents.T4?.id).toBe('talent.thais.gnostic-potential')
+    expect(thais?.talents.T4).toMatchObject({
+      family: 'gnostic_potential',
+      defaultMaxed: true,
+      maxLevel: 5,
+    })
     expect(thais?.enlightens.AbsoluteAxiom?.id).toBe('enlighten.thais.the-birthing-deep')
     expect(thais?.cards.C4.upgrades).toEqual(
       expect.arrayContaining([
@@ -326,7 +332,7 @@ describe('public-detail-record-adapters', () => {
         kind: 'scaling',
         stat: 'ATK',
         suffix: '%',
-        values: ['2.5', '3', '3.5', '4', '4.5', '5'],
+        values: ['3', '3.6', '4.2', '4.8', '5.4', '6'],
       },
     })
 

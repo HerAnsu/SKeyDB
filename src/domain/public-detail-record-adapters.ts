@@ -513,11 +513,16 @@ function adaptPublicAwakenerTalents(
   const passiveTalents = ownedRecords.records.talents.filter(
     (talent) => talent.family === 'passive',
   )
+  const gnosticPotential = ownedRecords.getTalentByFamily('gnostic_potential')
+  const firstPassiveTalent = passiveTalents.at(0)
+  const secondPassiveTalent = passiveTalents.at(1)
   const talents: AwakenerFullRecord['talents'] = {
-    extraTalents: passiveTalents.slice(1).map((talent) => adaptPublicTalentRecord(talent)),
+    extraTalents: passiveTalents
+      .slice(gnosticPotential ? 1 : 2)
+      .map((talent) => adaptPublicTalentRecord(talent)),
   }
-  if (passiveTalents[0]) {
-    talents.T1 = adaptPublicTalentRecord(passiveTalents[0])
+  if (firstPassiveTalent) {
+    talents.T1 = adaptPublicTalentRecord(firstPassiveTalent)
   }
 
   const madnessOmen = ownedRecords.getTalentByFamily('madness_omen')
@@ -527,6 +532,11 @@ function adaptPublicAwakenerTalents(
   }
   if (soulforgeAptitude) {
     talents.T3 = adaptPublicTalentRecord(soulforgeAptitude)
+  }
+  if (gnosticPotential) {
+    talents.T4 = adaptPublicTalentRecord(gnosticPotential)
+  } else if (secondPassiveTalent) {
+    talents.T4 = adaptPublicTalentRecord(secondPassiveTalent)
   }
 
   return talents

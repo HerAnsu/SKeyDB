@@ -21,11 +21,11 @@
   "faction": "The Unknowable",
   "aliases": ["daffodil"],
   "searchTags": ["Weakness", "Vulnerable", "Poison", "Counter", "STR Up", "Pierce DMG", "Arithmetica", "Draw", "Keyflare"],
-  "primaryScalingBase": 30,
+  "primaryScalingBase": 20,
   "baseStatsLv1": {
-    "CON": 49,
-    "ATK": 61,
-    "DEF": 45
+    "CON": 33,
+    "ATK": 41,
+    "DEF": 31
   },
   "substatsLv1": {
     "CritRate": 5,

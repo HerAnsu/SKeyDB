@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0051",
   "slot": "AbsoluteAxiom",
-  "descriptionTemplate": "{Rouse} {Vermilion Rite} is enhanced: Uvhash's Exalt Final DMG +25%. This effect doubles when HP is below 25%.",
+  "descriptionTemplate": "{Rouse} {Vermilion Rite} is enhanced: Uvhash's Exalt Final DMG +35%. This effect doubles when HP is below 25%.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Uvhash"
 }

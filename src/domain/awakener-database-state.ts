@@ -18,7 +18,11 @@ import {
   type ResolvedAwakenerDatabaseShellView,
 } from './awakeners-database-view'
 import {type AwakenerFullRecord} from './awakeners-full'
-import {getSoulforgeTalents, selectedEnlightenSlotSchema} from './awakeners-full-contract'
+import {
+  getGnosticPotentialTalents,
+  getSoulforgeTalents,
+  selectedEnlightenSlotSchema,
+} from './awakeners-full-contract'
 import type {ResolvedDatabaseReferenceLayer} from './database-reference-layer'
 import {resolveDescriptionArg} from './description-args'
 import {buildPublicFormulaContext} from './public-formula-context'
@@ -31,6 +35,7 @@ export const awakenerDatabaseSelectionSchema = z.object({
   skillLevel: z.number().default(1),
   selectedEnlightenSlot: selectedEnlightenSlotSchema.default(null),
   soulforgeLevel: z.number().default(0),
+  gnosticPotentialLevel: z.number().default(0),
 })
 
 export type AwakenerDatabaseSelection = z.infer<typeof awakenerDatabaseSelectionSchema>
@@ -54,10 +59,14 @@ export interface AwakenerDatabaseControls {
   psycheSurgeOffsetMin: number
   psycheSurgeOffsetMax: number
   hasSoulforgeTalent: boolean
+  hasGnosticPotentialTalent: boolean
+  canAdjustGnosticPotential: boolean
   skillLevelMin: number
   skillLevelMax: number
   soulforgeLevelMin: number | null
   soulforgeLevelMax: number | null
+  gnosticPotentialLevelMin: number | null
+  gnosticPotentialLevelMax: number | null
 }
 
 function getAvailableEnlightenSlots(
@@ -85,7 +94,7 @@ function clampDatabaseSkillLevel(level: number): number {
   return normalized
 }
 
-function normalizeSoulforgeLevel(level: number | null): number {
+function normalizeNonNegativeLevel(level: number | null): number {
   if (level === null || !Number.isFinite(level)) {
     return 0
   }
@@ -131,15 +140,34 @@ function normalizeSoulforgeLevelForRecord(
     return 0
   }
 
-  const normalizedLevel = normalizeSoulforgeLevel(level)
+  const normalizedLevel = normalizeNonNegativeLevel(level)
   return Math.max(
     controls.soulforgeLevelMin ?? 0,
     Math.min(controls.soulforgeLevelMax, normalizedLevel),
   )
 }
 
+function normalizeGnosticPotentialLevelForRecord(
+  record: AwakenerFullRecord,
+  level: AwakenerDatabaseSelection['gnosticPotentialLevel'],
+): AwakenerDatabaseSelection['gnosticPotentialLevel'] {
+  const gnosticTalent = getGnosticPotentialTalents(record.talents).at(0)
+  if (!gnosticTalent) {
+    return 0
+  }
+
+  const maxLevel = gnosticTalent.maxLevel ?? 1
+  if (gnosticTalent.defaultMaxed) {
+    return maxLevel
+  }
+
+  return Math.max(0, Math.min(maxLevel, normalizeNonNegativeLevel(level)))
+}
+
 export function getAwakenerDatabaseControls(record: AwakenerFullRecord): AwakenerDatabaseControls {
   const soulforgeTalents = getSoulforgeTalents(record.talents)
+  const gnosticTalents = getGnosticPotentialTalents(record.talents)
+  const gnosticTalent = gnosticTalents.at(0)
   const canAdjustPsycheSurge = Object.values(record.substatScaling).some((value) => Boolean(value))
   const soulforgeLevelMax = soulforgeTalents.reduce<number | null>((max, entry) => {
     const entryMax = entry.maxLevel ?? 1
@@ -148,6 +176,14 @@ export function getAwakenerDatabaseControls(record: AwakenerFullRecord): Awakene
     }
     return Math.max(max, entryMax)
   }, null)
+  const gnosticPotentialLevelMax = gnosticTalents.reduce<number | null>((max, entry) => {
+    const entryMax = entry.maxLevel ?? 1
+    if (max === null) {
+      return entryMax
+    }
+    return Math.max(max, entryMax)
+  }, null)
+  const canAdjustGnosticPotential = Boolean(gnosticTalent && !gnosticTalent.defaultMaxed)
 
   return {
     enlightenOptions: buildEnlightenOptions(record),
@@ -155,10 +191,14 @@ export function getAwakenerDatabaseControls(record: AwakenerFullRecord): Awakene
     psycheSurgeOffsetMin: 0,
     psycheSurgeOffsetMax: 12,
     hasSoulforgeTalent: soulforgeTalents.length > 0,
+    hasGnosticPotentialTalent: gnosticTalents.length > 0,
+    canAdjustGnosticPotential,
     skillLevelMin: 1,
     skillLevelMax: 6,
     soulforgeLevelMin: soulforgeLevelMax === null ? null : 0,
     soulforgeLevelMax,
+    gnosticPotentialLevelMin: canAdjustGnosticPotential ? 0 : null,
+    gnosticPotentialLevelMax,
   }
 }
 
@@ -172,7 +212,8 @@ export function normalizeAwakenerDatabaseSelection(
     psycheSurgeOffset: clampAwakenerDatabasePsycheSurgeOffset(parsed.psycheSurgeOffset),
     skillLevel: clampDatabaseSkillLevel(parsed.skillLevel),
     selectedEnlightenSlot: parsed.selectedEnlightenSlot,
-    soulforgeLevel: normalizeSoulforgeLevel(parsed.soulforgeLevel),
+    soulforgeLevel: normalizeNonNegativeLevel(parsed.soulforgeLevel),
+    gnosticPotentialLevel: normalizeNonNegativeLevel(parsed.gnosticPotentialLevel),
   }
 }
 
@@ -196,6 +237,10 @@ export function normalizeAwakenerDatabaseSelectionForRecord(
       normalized.selectedEnlightenSlot,
     ),
     soulforgeLevel: normalizeSoulforgeLevelForRecord(record, normalized.soulforgeLevel),
+    gnosticPotentialLevel: normalizeGnosticPotentialLevelForRecord(
+      record,
+      normalized.gnosticPotentialLevel,
+    ),
   }
 }
 
@@ -227,11 +272,16 @@ export function resolveAwakenerDatabaseState(
     record,
     normalizedSelection.soulforgeLevel,
   )
+  const gnosticPrimaryStatBonuses = resolveGnosticPotentialPrimaryStatBonuses(
+    record,
+    normalizedSelection.gnosticPotentialLevel,
+  )
   const stats = resolveAwakenerStatsForLevel(
     record,
     normalizedSelection.awakenerLevel,
     normalizedSelection.psycheSurgeOffset,
     soulforgePrimaryStatBonusPercent,
+    gnosticPrimaryStatBonuses,
   )
 
   const shellView = resolveAwakenerDatabaseShellView(
@@ -243,6 +293,7 @@ export function resolveAwakenerDatabaseState(
       formulaContext: extraViewOptions.formulaContext ?? buildPublicFormulaContext(),
       selectedEnlightenSlot: normalizedSelection.selectedEnlightenSlot,
       soulforgeLevel: normalizedSelection.soulforgeLevel,
+      gnosticPotentialLevel: normalizedSelection.gnosticPotentialLevel,
     },
     overlays,
   )
@@ -277,4 +328,35 @@ function resolveSoulforgePrimaryStatBonusPercent(
   }
 
   return resolveDescriptionArg(statArg, {rank: soulforgeLevel}).totalValue ?? 0
+}
+
+const GNOSTIC_PRIMARY_STAT_ARG_KEYS = {
+  CON: 'Talent_Attr_Lv_physique',
+  ATK: 'Talent_Attr_Lv_atk',
+  DEF: 'Talent_Attr_Lv_def',
+} as const
+
+function resolveGnosticPotentialPrimaryStatBonuses(
+  record: AwakenerFullRecord,
+  gnosticPotentialLevel: number,
+): Partial<Record<'CON' | 'ATK' | 'DEF', number>> {
+  if (gnosticPotentialLevel <= 0) {
+    return {}
+  }
+
+  const gnosticTalent = getGnosticPotentialTalents(record.talents).at(0)
+  if (!gnosticTalent) {
+    return {}
+  }
+
+  return Object.fromEntries(
+    Object.entries(GNOSTIC_PRIMARY_STAT_ARG_KEYS).map(([statKey, argKey]) => {
+      const resolvedValue = Object.hasOwn(gnosticTalent.descriptionArgs, argKey)
+        ? resolveDescriptionArg(gnosticTalent.descriptionArgs[argKey], {
+            rank: gnosticPotentialLevel,
+          }).totalValue
+        : undefined
+      return [statKey, resolvedValue ?? 0]
+    }),
+  )
 }

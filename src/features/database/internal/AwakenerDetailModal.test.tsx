@@ -85,18 +85,21 @@ vi.mock('@/domain/awakener-database-state', () => ({
     skillLevel = 1,
     selectedEnlightenSlot = null,
     soulforgeLevel = 0,
+    gnosticPotentialLevel = 0,
   }: {
     awakenerLevel?: number
     psycheSurgeOffset?: number
     skillLevel?: number
     selectedEnlightenSlot?: 'E1' | 'E2' | 'E3' | 'AbsoluteAxiom' | null
     soulforgeLevel?: number
+    gnosticPotentialLevel?: number
   } = {}) => ({
     awakenerLevel: Math.min(90, Math.max(1, awakenerLevel)),
     psycheSurgeOffset: Math.min(12, Math.max(0, psycheSurgeOffset)),
     skillLevel: Math.min(6, Math.max(1, skillLevel)),
     selectedEnlightenSlot,
     soulforgeLevel: Math.max(0, soulforgeLevel),
+    gnosticPotentialLevel: Math.max(0, gnosticPotentialLevel),
   }),
   normalizeAwakenerDatabaseSelectionForRecord: (
     _fullData: Parameters<typeof resolveAwakenerStatsForLevel>[0],
@@ -106,6 +109,7 @@ vi.mock('@/domain/awakener-database-state', () => ({
       skillLevel?: number
       selectedEnlightenSlot?: 'E1' | 'E2' | 'E3' | 'AbsoluteAxiom' | null
       soulforgeLevel?: number
+      gnosticPotentialLevel?: number
     } = {},
   ) => ({
     awakenerLevel: Math.min(90, Math.max(1, selection.awakenerLevel ?? 60)),
@@ -116,6 +120,7 @@ vi.mock('@/domain/awakener-database-state', () => ({
         ? 'E3'
         : (selection.selectedEnlightenSlot ?? null),
     soulforgeLevel: Math.min(3, Math.max(0, selection.soulforgeLevel ?? 0)),
+    gnosticPotentialLevel: Math.min(5, Math.max(0, selection.gnosticPotentialLevel ?? 0)),
   }),
   getDefaultAwakenerDatabaseSelection: () => ({
     awakenerLevel: 60,
@@ -123,6 +128,7 @@ vi.mock('@/domain/awakener-database-state', () => ({
     skillLevel: 1,
     selectedEnlightenSlot: null,
     soulforgeLevel: 0,
+    gnosticPotentialLevel: 0,
   }),
   patchAwakenerDatabaseSelection: (
     _fullData: Parameters<typeof resolveAwakenerStatsForLevel>[0],
@@ -132,6 +138,7 @@ vi.mock('@/domain/awakener-database-state', () => ({
       skillLevel?: number
       selectedEnlightenSlot?: 'E1' | 'E2' | 'E3' | 'AbsoluteAxiom' | null
       soulforgeLevel?: number
+      gnosticPotentialLevel?: number
     },
     nextPartial: {
       awakenerLevel?: number
@@ -139,6 +146,7 @@ vi.mock('@/domain/awakener-database-state', () => ({
       skillLevel?: number
       selectedEnlightenSlot?: 'E1' | 'E2' | 'E3' | 'AbsoluteAxiom' | null
       soulforgeLevel?: number
+      gnosticPotentialLevel?: number
     },
   ) => ({
     awakenerLevel: 60,
@@ -146,6 +154,7 @@ vi.mock('@/domain/awakener-database-state', () => ({
     skillLevel: 1,
     selectedEnlightenSlot: null,
     soulforgeLevel: 0,
+    gnosticPotentialLevel: 0,
     ...previousSelection,
     ...nextPartial,
   }),
@@ -157,12 +166,14 @@ vi.mock('@/domain/awakener-database-state', () => ({
       skillLevel = 1,
       selectedEnlightenSlot = null,
       soulforgeLevel = 0,
+      gnosticPotentialLevel = 0,
     }: {
       awakenerLevel?: number
       psycheSurgeOffset?: number
       skillLevel?: number
       selectedEnlightenSlot?: 'E1' | 'E2' | 'E3' | 'AbsoluteAxiom' | null
       soulforgeLevel?: number
+      gnosticPotentialLevel?: number
     },
   ) => ({
     selection: {
@@ -171,6 +182,7 @@ vi.mock('@/domain/awakener-database-state', () => ({
       skillLevel,
       selectedEnlightenSlot,
       soulforgeLevel,
+      gnosticPotentialLevel,
     },
     controls: {
       enlightenOptions: [
@@ -183,10 +195,14 @@ vi.mock('@/domain/awakener-database-state', () => ({
       psycheSurgeOffsetMin: 0,
       psycheSurgeOffsetMax: 12,
       hasSoulforgeTalent: true,
+      hasGnosticPotentialTalent: false,
+      canAdjustGnosticPotential: false,
       skillLevelMin: 1,
       skillLevelMax: 6,
       soulforgeLevelMin: 0,
       soulforgeLevelMax: 3,
+      gnosticPotentialLevelMin: null,
+      gnosticPotentialLevelMax: null,
     },
     stats: resolveAwakenerStatsForLevel(fullData, awakenerLevel, psycheSurgeOffset),
     shellView: makeDatabaseShellView({
@@ -194,6 +210,7 @@ vi.mock('@/domain/awakener-database-state', () => ({
       selection: {
         selectedEnlightenSlot,
         soulforgeLevel,
+        gnosticPotentialLevel,
       },
       skillLevel,
     }),

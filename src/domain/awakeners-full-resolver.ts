@@ -23,10 +23,15 @@ import {
   type PublicUpgradeableOverlayRecord,
   type PublicUpgradeableSkillRecord,
 } from './awakeners-full'
-import {isSoulforgeTalent, selectedEnlightenSlotSchema} from './awakeners-full-contract'
+import {
+  isGnosticPotentialTalent,
+  isSoulforgeTalent,
+  selectedEnlightenSlotSchema,
+} from './awakeners-full-contract'
 
 export const awakenerFullResolveOptionsSchema = z.object({
   soulforgeLevel: z.number().int().min(0).default(0),
+  gnosticPotentialLevel: z.number().int().min(0).default(0),
   selectedEnlightenSlot: selectedEnlightenSlotSchema.default(null),
 })
 
@@ -303,6 +308,7 @@ function getActiveEnlightens(
 function getActiveTalentEntries(
   record: AwakenerFullRecord,
   soulforgeLevel: number,
+  gnosticPotentialLevel: number,
 ): AwakenerTalentRecord[] {
   const active: AwakenerTalentRecord[] = []
 
@@ -316,12 +322,18 @@ function getActiveTalentEntries(
       if (isSoulforgeTalent(talent) && soulforgeLevel <= 0) {
         continue
       }
+      if (isGnosticPotentialTalent(talent) && !talent.defaultMaxed && gnosticPotentialLevel <= 0) {
+        continue
+      }
       active.push(talent)
     }
   }
 
   for (const talent of record.talents.extraTalents) {
     if (isSoulforgeTalent(talent) && soulforgeLevel <= 0) {
+      continue
+    }
+    if (isGnosticPotentialTalent(talent) && !talent.defaultMaxed && gnosticPotentialLevel <= 0) {
       continue
     }
     active.push(talent)
@@ -568,7 +580,11 @@ export function resolveAwakenerFullRecord(
   const cardsById = buildCardsById(record)
   const accessibleOverlaysById = buildAccessibleOverlaysById(record, overlays)
   const overlayOverridesById = new Map<string, AwakenerOverlayRecord>()
-  const activeTalents = getActiveTalentEntries(record, selection.soulforgeLevel)
+  const activeTalents = getActiveTalentEntries(
+    record,
+    selection.soulforgeLevel,
+    selection.gnosticPotentialLevel,
+  )
   const activeEnlightens = getActiveEnlightens(record, selection.selectedEnlightenSlot)
 
   for (const patch of collectRecordUpgradePatches(

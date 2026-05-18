@@ -13,13 +13,13 @@
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
-      "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"],
+      "values": ["10", "12", "14", "16", "18", "20"],
       "stat": "ATK",
       "suffix": "%"
     },
     "Arg2": {
       "kind": "scaling",
-      "values": ["6", "7.2", "8.4", "9.6", "10.8", "12"],
+      "values": ["10", "12", "14", "16", "18", "20"],
       "stat": "ATK",
       "suffix": "%",
       "substatBonus": {
@@ -49,13 +49,13 @@
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
-            "values": ["8", "9.6", "11.2", "12.8", "14.4", "16"],
+            "values": ["10", "12", "14", "16", "18", "20"],
             "stat": "ATK",
             "suffix": "%"
           },
           "Arg2": {
             "kind": "scaling",
-            "values": ["6", "7.2", "8.4", "9.6", "10.8", "12"],
+            "values": ["10", "12", "14", "16", "18", "20"],
             "stat": "ATK",
             "suffix": "%",
             "substatBonus": {

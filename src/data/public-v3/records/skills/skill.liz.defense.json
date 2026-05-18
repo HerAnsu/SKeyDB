@@ -34,7 +34,7 @@
       "ownerAwakenerId": "awakener-0030",
       "ownerAwakenerName": "Liz",
       "patch": {
-        "descriptionTemplate": "Gain [Block:Arg1] Shield. Liz obtains [Energy:Arg2] Aliemus. {Leap}: Trigger [Arg3]% {Poison} for all enemies.",
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Liz gains [Energy:Arg2] Aliemus, triggering [Arg3]% {Poison} on all enemies.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",
