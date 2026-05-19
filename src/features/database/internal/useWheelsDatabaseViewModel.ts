@@ -9,7 +9,7 @@ import {matchesWheelMainstat} from '@/domain/wheel-mainstat-filters'
 import {compareWheelsForUi} from '@/domain/wheel-sort'
 import type {Wheel} from '@/domain/wheels'
 import type {WheelsDatabaseBrowseState} from '@/domain/wheels-database-browse-state'
-import {searchWheels} from '@/domain/wheels-search'
+import {searchWheelResults} from '@/domain/wheels-search'
 
 function applyFilters(
   wheels: Wheel[],
@@ -45,6 +45,21 @@ function toSortableWheelEntry(
   }
 }
 
+function compareSearchRelevance(
+  left: Wheel,
+  right: Wheel,
+  relevanceByWheelId: ReadonlyMap<string, number> | undefined,
+): number {
+  if (!relevanceByWheelId) {
+    return 0
+  }
+
+  return (
+    (relevanceByWheelId.get(left.id) ?? Number.MAX_SAFE_INTEGER) -
+    (relevanceByWheelId.get(right.id) ?? Number.MAX_SAFE_INTEGER)
+  )
+}
+
 export function useWheelsDatabaseViewModel(
   allWheels: Wheel[],
   browseState: WheelsDatabaseBrowseState,
@@ -56,9 +71,21 @@ export function useWheelsDatabaseViewModel(
   )
 
   const filteredWheels = useMemo(() => {
-    const searched = searchWheels(allWheels, query)
-    const filtered = applyFilters(searched, {mainstatFilter, rarityFilter, realmFilter})
+    const searchResults = searchWheelResults(allWheels, query)
+    const relevanceByWheelId =
+      query.trim().length > 0
+        ? new Map(searchResults.map((result) => [result.entity.id, result.relevance]))
+        : undefined
+    const filtered = applyFilters(
+      searchResults.map((result) => result.entity),
+      {mainstatFilter, rarityFilter, realmFilter},
+    )
     return [...filtered].sort((left, right) => {
+      const relevanceResult = compareSearchRelevance(left, right, relevanceByWheelId)
+      if (relevanceResult !== 0) {
+        return relevanceResult
+      }
+
       const leftEntry = toSortableWheelEntry(left, wheelIndexById)
       const rightEntry = toSortableWheelEntry(right, wheelIndexById)
 

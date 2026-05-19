@@ -1,8 +1,10 @@
+import {renderHook} from '@testing-library/react'
 import {describe, expect, it} from 'vitest'
 
 import type {Awakener} from '@/domain/awakeners'
+import type {DatabaseBrowseState} from '@/domain/database-browse-state'
 
-import {filterAwakenersForDatabase} from './useDatabaseViewModel'
+import {filterAwakenersForDatabase, useDatabaseViewModel} from './useDatabaseViewModel'
 
 function makeAwakener(overrides: Partial<Awakener>): Awakener {
   return {
@@ -23,6 +25,20 @@ function makeAwakener(overrides: Partial<Awakener>): Awakener {
       ATK: 100,
       DEF: 100,
     },
+    ...overrides,
+  }
+}
+
+function makeBrowseState(overrides: Partial<DatabaseBrowseState> = {}): DatabaseBrowseState {
+  return {
+    query: '',
+    realmFilter: 'ALL',
+    rarityFilter: 'ALL',
+    typeFilter: 'ALL',
+    availabilityFilter: 'ALL',
+    sortKey: 'ALPHABETICAL',
+    sortDirection: 'ASC',
+    groupByRealm: false,
     ...overrides,
   }
 }
@@ -87,5 +103,66 @@ describe('filterAwakenersForDatabase', () => {
         (awakener) => awakener.name,
       ),
     ).toEqual(['Astral'])
+  })
+})
+
+describe('useDatabaseViewModel', () => {
+  it('keeps active search relevance ahead of the selected sort', () => {
+    const awakeners = [
+      makeAwakener({
+        id: 'awakener-0001',
+        name: 'Alpha',
+        aliases: ['Alpha'],
+        tags: ['vuln'],
+        stats: {CON: 100, ATK: 200, DEF: 100},
+      }),
+      makeAwakener({
+        id: 'awakener-0002',
+        name: 'Vulcan',
+        aliases: ['Vulcan'],
+        tags: [],
+        stats: {CON: 100, ATK: 50, DEF: 100},
+      }),
+    ]
+
+    const {result} = renderHook(() =>
+      useDatabaseViewModel(
+        awakeners,
+        makeBrowseState({query: 'vul', sortKey: 'ATK', sortDirection: 'DESC'}),
+      ),
+    )
+
+    expect(result.current.awakeners.map((awakener) => awakener.name)).toEqual(['Vulcan', 'Alpha'])
+  })
+
+  it('uses the selected sort inside equal relevance buckets', () => {
+    const awakeners = [
+      makeAwakener({
+        id: 'awakener-0001',
+        name: 'Lower ATK',
+        aliases: ['Lower ATK'],
+        tags: ['Draw'],
+        stats: {CON: 100, ATK: 50, DEF: 100},
+      }),
+      makeAwakener({
+        id: 'awakener-0002',
+        name: 'Higher ATK',
+        aliases: ['Higher ATK'],
+        tags: ['Draw'],
+        stats: {CON: 100, ATK: 200, DEF: 100},
+      }),
+    ]
+
+    const {result} = renderHook(() =>
+      useDatabaseViewModel(
+        awakeners,
+        makeBrowseState({query: 'draw', sortKey: 'ATK', sortDirection: 'DESC'}),
+      ),
+    )
+
+    expect(result.current.awakeners.map((awakener) => awakener.name)).toEqual([
+      'Higher ATK',
+      'Lower ATK',
+    ])
   })
 })

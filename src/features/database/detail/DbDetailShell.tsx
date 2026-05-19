@@ -1,5 +1,6 @@
 import {Suspense, useRef, useState, type ReactNode} from 'react'
 
+import {createPortal} from 'react-dom'
 import {FaGear, FaXmark} from 'react-icons/fa6'
 
 import type {
@@ -35,6 +36,10 @@ interface DbDetailShellProps {
 
 const noop = () => {
   return undefined
+}
+
+function getDetailPortalRoot(): Element {
+  return document.querySelector('.app-shell') ?? document.body
 }
 
 export function DbDetailShell({
@@ -87,15 +92,16 @@ export function DbDetailShell({
     searchQuery: '',
   })
 
-  return (
+  return createPortal(
     <div
-      className='fixed inset-0 z-[900] flex items-center justify-center bg-slate-950/78 p-4 md:p-6'
+      className='fixed inset-x-0 top-[var(--site-header-height)] bottom-0 z-[900] flex items-center justify-center bg-slate-950/78 p-4 md:p-6'
+      data-detail-modal-overlay=''
       onClick={handleOverlayClick}
     >
       <div
         aria-label={`${itemName} details`}
         aria-modal='true'
-        className='relative z-[901] flex max-h-[calc(100dvh-3rem)] min-h-[340px] w-full max-w-5xl overflow-hidden border border-amber-200/55 bg-slate-950/[.985] shadow-[0_24px_70px_rgba(2,6,23,0.8)]'
+        className='relative z-[901] flex max-h-[calc(100dvh-var(--site-header-height)-3rem)] min-h-[340px] w-full max-w-5xl overflow-hidden border border-amber-200/55 bg-slate-950/[.985] shadow-[0_24px_70px_rgba(2,6,23,0.8)]'
         data-detail-modal-shell=''
         onKeyDown={handlePanelKeyDown}
         ref={panelRef}
@@ -195,6 +201,7 @@ export function DbDetailShell({
           />
         ) : null}
       </div>
-    </div>
+    </div>,
+    getDetailPortalRoot(),
   )
 }

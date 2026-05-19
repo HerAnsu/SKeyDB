@@ -31,6 +31,55 @@ describe('searchPublicEntities', () => {
     expect(searchPublicEntities('awakeners', entities, 'car')).toEqual([])
   })
 
+  it('allows short tag prefixes without ranking them above name matches', () => {
+    documentsById.clear()
+    documentsById.set('awakener-vulnerable', {
+      kind: 'awakener',
+      id: 'awakener-vulnerable',
+      name: 'Machine Oath',
+      aliases: [],
+      tokens: ['machine', 'oath', 'vuln', 'vulnerable'],
+      fields: {name: ['Machine Oath'], tag: ['vuln', 'vulnerable']},
+    })
+    documentsById.set('awakener-vu-name', {
+      kind: 'awakener',
+      id: 'awakener-vu-name',
+      name: 'Vulcan',
+      aliases: [],
+      tokens: ['vulcan'],
+      fields: {name: ['Vulcan']},
+    })
+    const entities = [
+      {id: 'awakener-vulnerable', name: 'Machine Oath'},
+      {id: 'awakener-vu-name', name: 'Vulcan'},
+    ]
+
+    expect(searchPublicEntities('awakeners', entities, 'vu').map((entity) => entity.id)).toEqual([
+      'awakener-vu-name',
+    ])
+    expect(searchPublicEntities('awakeners', entities, 'vul').map((entity) => entity.id)).toEqual([
+      'awakener-vu-name',
+      'awakener-vulnerable',
+    ])
+  })
+
+  it('allows short tag prefixes when there is no name match', () => {
+    documentsById.clear()
+    documentsById.set('awakener-vulnerable', {
+      kind: 'awakener',
+      id: 'awakener-vulnerable',
+      name: 'Machine Oath',
+      aliases: [],
+      tokens: ['machine', 'oath', 'vuln', 'vulnerable'],
+      fields: {name: ['Machine Oath'], tag: ['vuln', 'vulnerable']},
+    })
+    const entities = [{id: 'awakener-vulnerable', name: 'Machine Oath'}]
+
+    expect(searchPublicEntities('awakeners', entities, 'vu').map((entity) => entity.id)).toEqual([
+      'awakener-vulnerable',
+    ])
+  })
+
   it('keeps generated facet values to exact and prefix lookup matches', () => {
     documentsById.clear()
     documentsById.set('awakener-test', {
@@ -115,5 +164,36 @@ describe('searchPublicEntities', () => {
         (entity) => entity.id,
       ),
     ).toEqual(['awakener-token'])
+  })
+
+  it('keeps fuzzy typo tolerance scoped to names and aliases', () => {
+    documentsById.clear()
+    documentsById.set('awakener-clementine', {
+      kind: 'awakener',
+      id: 'awakener-clementine',
+      name: 'Clementine',
+      aliases: ['clementine'],
+      tokens: ['clementine'],
+      fields: {name: ['Clementine'], alias: ['clementine']},
+    })
+    documentsById.set('awakener-cleanse', {
+      kind: 'awakener',
+      id: 'awakener-cleanse',
+      name: 'Caecus',
+      aliases: ['caecus'],
+      tokens: ['caecus', 'cleanse', 'clear'],
+      fields: {name: ['Caecus'], alias: ['caecus'], tag: ['cleanse', 'clear']},
+    })
+    const entities = [
+      {id: 'awakener-clementine', name: 'Clementine'},
+      {id: 'awakener-cleanse', name: 'Caecus'},
+    ]
+
+    expect(searchPublicEntities('awakeners', entities, 'clem').map((entity) => entity.id)).toEqual([
+      'awakener-clementine',
+    ])
+    expect(
+      searchPublicEntities('awakeners', entities, 'clemntine').map((entity) => entity.id),
+    ).toEqual(['awakener-clementine'])
   })
 })

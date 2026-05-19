@@ -1,7 +1,7 @@
 import {useMemo} from 'react'
 
 import {type Awakener} from '@/domain/awakeners'
-import {searchAwakeners} from '@/domain/awakeners-search'
+import {searchAwakenerResults} from '@/domain/awakeners-search'
 import type {CollectionSortDirection} from '@/domain/collection-sorting'
 import {
   type AvailabilityFilterId,
@@ -53,13 +53,31 @@ function applySorting(
   sortKey: DatabaseSortKey,
   sortDirection: CollectionSortDirection,
   groupByRealm: boolean,
+  relevanceByAwakenerId?: ReadonlyMap<string, number>,
 ): Awakener[] {
-  return [...awakeners].sort((left, right) =>
-    compareAwakenersForDatabaseSort(left, right, {
-      key: sortKey,
-      direction: sortDirection,
-      groupByRealm,
-    }),
+  return [...awakeners].sort(
+    (left, right) =>
+      compareSearchRelevance(left, right, relevanceByAwakenerId) ||
+      compareAwakenersForDatabaseSort(left, right, {
+        key: sortKey,
+        direction: sortDirection,
+        groupByRealm,
+      }),
+  )
+}
+
+function compareSearchRelevance(
+  left: Awakener,
+  right: Awakener,
+  relevanceByAwakenerId: ReadonlyMap<string, number> | undefined,
+): number {
+  if (!relevanceByAwakenerId) {
+    return 0
+  }
+
+  return (
+    (relevanceByAwakenerId.get(left.id) ?? Number.MAX_SAFE_INTEGER) -
+    (relevanceByAwakenerId.get(right.id) ?? Number.MAX_SAFE_INTEGER)
   )
 }
 
@@ -76,15 +94,19 @@ export function useDatabaseViewModel(allAwakeners: Awakener[], browseState: Data
   } = browseState
 
   const filteredAwakeners = useMemo(() => {
-    const searched = searchAwakeners(allAwakeners, query)
+    const searchResults = searchAwakenerResults(allAwakeners, query)
+    const relevanceByAwakenerId =
+      query.trim().length > 0
+        ? new Map(searchResults.map((result) => [result.entity.id, result.relevance]))
+        : undefined
     const filtered = filterAwakenersForDatabase(
-      searched,
+      searchResults.map((result) => result.entity),
       realmFilter,
       rarityFilter,
       typeFilter,
       availabilityFilter,
     )
-    return applySorting(filtered, sortKey, sortDirection, groupByRealm)
+    return applySorting(filtered, sortKey, sortDirection, groupByRealm, relevanceByAwakenerId)
   }, [
     allAwakeners,
     availabilityFilter,

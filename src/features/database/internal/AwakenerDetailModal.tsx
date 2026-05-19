@@ -8,6 +8,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react'
 
+import {createPortal} from 'react-dom'
 import {FaGear, FaXmark} from 'react-icons/fa6'
 
 import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-assets'
@@ -64,6 +65,10 @@ const AwakenerBuildsTab = lazy(() =>
 const AwakenerTeamsTab = lazy(() =>
   import('./AwakenerTeamsTab').then((module) => ({default: module.AwakenerTeamsTab})),
 )
+
+function getDetailPortalRoot(): Element {
+  return document.querySelector('.app-shell') ?? document.body
+}
 
 export function AwakenerDetailModal({
   activeTab: routeActiveTab,
@@ -181,13 +186,14 @@ export function AwakenerDetailModal({
     focusTab(nextTab)
   }
 
-  return (
+  return createPortal(
     <div
-      className='fixed inset-0 z-[900] flex items-center justify-center bg-slate-950/65 p-4 md:p-6 lg:p-10'
+      className='fixed inset-x-0 top-[var(--site-header-height)] bottom-0 z-[900] flex items-center justify-center bg-slate-950/65 p-4 md:p-6 lg:p-10'
+      data-detail-modal-overlay=''
       onClick={handleOverlayClick}
     >
       <div
-        className='relative z-[901] flex h-full max-h-[calc(100dvh-2rem)] w-full max-w-6xl flex-col gap-2.5 md:max-h-[calc(100dvh-3rem)] md:gap-3 lg:max-h-[calc(100dvh-5rem)]'
+        className='relative z-[901] flex h-full max-h-[calc(100dvh-var(--site-header-height)-2rem)] w-full max-w-6xl flex-col gap-2.5 md:max-h-[calc(100dvh-var(--site-header-height)-3rem)] md:gap-3 lg:max-h-[calc(100dvh-var(--site-header-height)-5rem)]'
         data-detail-modal-shell=''
         onKeyDown={handlePanelKeyDown}
       >
@@ -523,6 +529,7 @@ export function AwakenerDetailModal({
           />
         ) : null}
       </div>
-    </div>
+    </div>,
+    getDetailPortalRoot(),
   )
 }

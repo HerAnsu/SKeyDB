@@ -1,10 +1,10 @@
 {
   "schemaVersion": 3,
-  "gameDataVersion": "compiled-sha256-94b31a8287e15342",
-  "generatedAt": "2026-05-18T23:15:01Z",
-  "buildId": "2026-05-18T23:15:01Z",
+  "gameDataVersion": "compiled-sha256-7a09396d23ba83b4",
+  "generatedAt": "2026-05-19T16:55:36Z",
+  "buildId": "2026-05-19T16:55:36Z",
   "build": {
-    "gameDataVersion": "compiled-sha256-94b31a8287e15342",
+    "gameDataVersion": "compiled-sha256-7a09396d23ba83b4",
     "recordCount": 1606,
     "scopes": ["awakeners", "wheels", "relics", "covenants", "posses", "skills", "derived-skills", "talents", "enlightens", "overlays", "awakener-builds"]
   },
@@ -102,8 +102,8 @@
       "sha256": "15ca74042e19a5ed8770e01edb8ebe3e3de1bb943d0954c8f0d839f2cfe526ba"
     },
     "catalogs/awakeners.json": {
-      "bytes": 77041,
-      "sha256": "203a4543b8b3c0398ecb58b16cca18ab1e794774662f6b4990a74582a5458fbb"
+      "bytes": 77360,
+      "sha256": "6d27489dc82b34e4319c7413d149fbdd2c528238c92b171152a2872708179425"
     },
     "catalogs/covenants.json": {
       "bytes": 7413,
@@ -158,8 +158,8 @@
       "sha256": "e3c73985cc553f553ec2ebdb32e0fd9ba45a2ff1b77651b5a3ec861ed35a32a9"
     },
     "indexes/facets.json": {
-      "bytes": 53295,
-      "sha256": "50b4c44e402290eea5028f298c6e55abbf48270c7ce0ce88cce5fc5908ef6876"
+      "bytes": 53435,
+      "sha256": "ccb4830b7175def414d4581d29ac48c338f6c8cfd2bd83063361e5bc80cb620b"
     },
     "indexes/references.json": {
       "bytes": 190522,
@@ -178,8 +178,8 @@
       "sha256": "8a25fefec981497d163c6e72eb3d8806626fb5f73f8cdd2aadb889d2e213ccee"
     },
     "indexes/search-awakeners.json": {
-      "bytes": 72654,
-      "sha256": "ae23cfb2a88f22177e2d7c911b4dcd3323b2e8c5d8a0e7b60cda1ac7c8df27ed"
+      "bytes": 76642,
+      "sha256": "30abf32815b429b2e6a4a02cffdfde93dc2d05070ff97b8debca7b6fe5499374"
     },
     "indexes/search-covenants.json": {
       "bytes": 5517,
@@ -194,8 +194,8 @@
       "sha256": "3fa5ac152dd1b522d36835cda25a0ce160f553ff9f78b2b7550a7cc8d7d6fe71"
     },
     "indexes/search-tags.json": {
-      "bytes": 5273,
-      "sha256": "19bf42adc50484c08c16b6980083ef8eca846e1fc1993aa70cc26f85f58dddb5"
+      "bytes": 5492,
+      "sha256": "294ab53fb4b1bb5d76163060e2e411438e3a5f2a672214d9e44e19bc0849bedd"
     },
     "indexes/search-wheels.json": {
       "bytes": 68892,
@@ -430,12 +430,12 @@
       "sha256": "b17e588ef95ba82ba49877ce7599e7761bebb3f0a596f3fe9eefcdb277335387"
     },
     "records/awakeners/awakener-0001.json": {
-      "bytes": 6567,
-      "sha256": "0d577f0243c5b2e75a07e18f678fb249598471f86c0d760f957e8ac71c8afbe3"
+      "bytes": 6550,
+      "sha256": "3f73bfe43ada8d810220429837df24de208c02b64b6b4be22686a149e412da91"
     },
     "records/awakeners/awakener-0002.json": {
-      "bytes": 5977,
-      "sha256": "581555a45690a433f30bc24b84e6238a3ed69f7d1f18c6def7b5fb961477cc5e"
+      "bytes": 5987,
+      "sha256": "a174843ce953fcc805fe703775f6ccee38e077edc2b73480aff834230f317675"
     },
     "records/awakeners/awakener-0003.json": {
       "bytes": 5241,
@@ -446,12 +446,12 @@
       "sha256": "124f67620a4dfb204144ec915806fcfae232f04901b605700c07111a0354aae1"
     },
     "records/awakeners/awakener-0005.json": {
-      "bytes": 5547,
-      "sha256": "60ef18266efbd1b05117e5cff5082f0ff77e91a783fbfa1e2458b0eb5f4deea2"
+      "bytes": 5570,
+      "sha256": "697afa760974d3ce4ae51161086e831dfa30ebbdd024c790506eb13008eb13cb"
     },
     "records/awakeners/awakener-0006.json": {
-      "bytes": 5768,
-      "sha256": "0a67701d9221ca6f4bcfef6d616aee4f0a9249f62209c772da0f096f922db4b1"
+      "bytes": 5778,
+      "sha256": "7a467b98afff774dba3520dee1f143059cc359c0d0122a8f010fabd53a696243"
     },
     "records/awakeners/awakener-0007.json": {
       "bytes": 7795,
@@ -462,16 +462,16 @@
       "sha256": "201eaa53e0886487be00ea1512f0446bea068b78bac555ca583dc7ead32252ad"
     },
     "records/awakeners/awakener-0009.json": {
-      "bytes": 6476,
-      "sha256": "c13d9786fdb81591753f116b5a15424af38d5853ee82d69a537f2dff921471cf"
+      "bytes": 6486,
+      "sha256": "fb03127da0fe870da47b1c3da03b8596683883f9083b019abca0d17abe223a97"
     },
     "records/awakeners/awakener-0010.json": {
       "bytes": 7538,
       "sha256": "6d968863f977d3d3c9934ffe60849bdd684fc979341467dc585a4a044735b084"
     },
     "records/awakeners/awakener-0011.json": {
-      "bytes": 7918,
-      "sha256": "57e3d525cf21c8b5ff313a290439d87e7ed8376e01f69d995073613b19957f8e"
+      "bytes": 7928,
+      "sha256": "269d8685aed359659ddfa8e5710210bff752f12409bfe18126f62d3711fd7441"
     },
     "records/awakeners/awakener-0012.json": {
       "bytes": 6009,
@@ -482,8 +482,8 @@
       "sha256": "9782b9e5449f31031d18dfb5c44927e7cef2019bd56248374f8c16ab96ad92f0"
     },
     "records/awakeners/awakener-0014.json": {
-      "bytes": 10513,
-      "sha256": "d5e02f0c8d962d4c2e3b531924564731a998a8c8461c9788de16ca37dabe1371"
+      "bytes": 10515,
+      "sha256": "8522b77c950a5b392b594bd4086492c0e080832502455518d2de4fd98f2fcc7e"
     },
     "records/awakeners/awakener-0015.json": {
       "bytes": 8313,
@@ -494,32 +494,32 @@
       "sha256": "c5626e1de9e957182ca800614dc8f838ea6a2181b7f22beaf6e4cf25181fe3b7"
     },
     "records/awakeners/awakener-0017.json": {
-      "bytes": 5888,
-      "sha256": "8fca168d93149d8cf3b67501a30511cdf4b212e371a93610efeafd28912bdf40"
+      "bytes": 5910,
+      "sha256": "7647e702d933095f277dbeecdafc401fd80b332a43982c4d1b758fe83bf802b9"
     },
     "records/awakeners/awakener-0018.json": {
-      "bytes": 7389,
-      "sha256": "1a2cd946199a7c38b6c8383cb3f51f98f56f2e54eb66dbd5611f3ce95adfbf40"
+      "bytes": 7391,
+      "sha256": "12eadccb44f94bf9f2f9818972d58bb0c91ef248cf87b620c439687d61fb5510"
     },
     "records/awakeners/awakener-0019.json": {
-      "bytes": 8202,
-      "sha256": "ed3be01f1437d5ea24f3ea1922afbc7d42cbc0156164645ed21f78e12ab2b94d"
+      "bytes": 8204,
+      "sha256": "096033f099f4c9dc6cca9394917b1cb2384962a0945e1e39f7084ac865188681"
     },
     "records/awakeners/awakener-0020.json": {
       "bytes": 4510,
       "sha256": "9875ed551116e8db909186ae754488603932364a64eef770620bd87cf820814b"
     },
     "records/awakeners/awakener-0021.json": {
-      "bytes": 5853,
-      "sha256": "f186163f27601fb305800def961eafedd13749d6dbf23a9fe819395b08ea7d6e"
+      "bytes": 5888,
+      "sha256": "836ef347c78d3319d6599abc894a01c5079d01ed983fbf70b510b512738033c8"
     },
     "records/awakeners/awakener-0022.json": {
       "bytes": 8318,
       "sha256": "2506d7df4e4d5a8759c0d3e6d5fbf1574cae48d804c773a598b9747476458e61"
     },
     "records/awakeners/awakener-0023.json": {
-      "bytes": 6409,
-      "sha256": "8fe04989b15aaeacecf88de1706fddf49409a01cd3fc9fb0d99f62d707340c62"
+      "bytes": 6411,
+      "sha256": "396c950fff9cfb531529a8badcaf2017580a600c51297152b63565f07ab16e3d"
     },
     "records/awakeners/awakener-0024.json": {
       "bytes": 6691,
@@ -538,8 +538,8 @@
       "sha256": "758ecfa81857e2a46d44f5cf755b3266c677af9766c7db5dcad7f339e6836022"
     },
     "records/awakeners/awakener-0028.json": {
-      "bytes": 6183,
-      "sha256": "91ce963c9ef83363a97462d350cc46163737d7824f716d46e88790d5f04bb53f"
+      "bytes": 6185,
+      "sha256": "236c9b4c1ccca993e60508d8e7066c5ce4d8b02ef0e877c83bc8c928d4d0323c"
     },
     "records/awakeners/awakener-0029.json": {
       "bytes": 5958,
@@ -554,20 +554,20 @@
       "sha256": "2cff4f2328bae01f6a2e789eac94882ba145349b07130a25ba2b8a5d138796b2"
     },
     "records/awakeners/awakener-0032.json": {
-      "bytes": 6688,
-      "sha256": "b5092cde5d9b121df4d304551852b10afb84dcdff71179df42d709ea026465e6"
+      "bytes": 6762,
+      "sha256": "d1cf97657bea8e3d74ed2a75d17a635157a06971decbbde864946b3e17028e50"
     },
     "records/awakeners/awakener-0033.json": {
       "bytes": 6347,
       "sha256": "f1e167ee25fda341be802e74a13d036ad724d88c07f13e6015ab36a9596af848"
     },
     "records/awakeners/awakener-0034.json": {
-      "bytes": 6560,
-      "sha256": "e03235629ed7858536d4fb90c5e64b9e83bf6d5c8fc3fcaea7dc54cccd5fb9f6"
+      "bytes": 6570,
+      "sha256": "ca1385cc75799f9a9a05c6c42f304b99ad838a4460a6f062d4ba1a9d0986d861"
     },
     "records/awakeners/awakener-0035.json": {
-      "bytes": 8014,
-      "sha256": "4128420fd5d9bf3783bf50d373bcb579ec6f79966b92815688e91cfce64982c6"
+      "bytes": 8036,
+      "sha256": "797b39674e227d9755efec7d8580d1baaf9f2efc32e5157d1c605325a4724e4b"
     },
     "records/awakeners/awakener-0036.json": {
       "bytes": 6344,
@@ -602,16 +602,16 @@
       "sha256": "4c45ec6b29cb62bae0dbb14c576be74b9ed99be6088ced6c008070ebefb6c7d2"
     },
     "records/awakeners/awakener-0044.json": {
-      "bytes": 6942,
-      "sha256": "15fed77804b6ca7cee4297ed1b28b2144e6040a015cc9335b7350927dc027bbd"
+      "bytes": 6944,
+      "sha256": "9b9a6d9704327bee109aa24d06f5f8910d91d63088538e0da6275809af2d07ae"
     },
     "records/awakeners/awakener-0045.json": {
-      "bytes": 6545,
-      "sha256": "57532336569d76aa8cbebcefb81b545babc8fe2c56337e33fc1a61a2afd18e1e"
+      "bytes": 6555,
+      "sha256": "687246580cf9bbb05660d99656df48d1090fd5d468540776481c2c363b991754"
     },
     "records/awakeners/awakener-0046.json": {
-      "bytes": 5538,
-      "sha256": "74b386c4e8b78c1240af9029e16e5bd92914d0d825f5188b6d1b55104b608be2"
+      "bytes": 5540,
+      "sha256": "54f9eb35ce23f5c6c582fb2ed367bbb3d1fb3b39e7783a75c7626b4c01338aed"
     },
     "records/awakeners/awakener-0047.json": {
       "bytes": 5281,
@@ -626,12 +626,12 @@
       "sha256": "42676648fd7dddd6c640fd84280ef8084b5d8ba7c384cd970cb4c94052f594f2"
     },
     "records/awakeners/awakener-0050.json": {
-      "bytes": 7207,
-      "sha256": "93b5b638cf288c32fdf9fdd6aeccebe65d7088a8f85410cfd521381e6de86392"
+      "bytes": 7213,
+      "sha256": "ee867d63da929d7d49ba57d807656095969623948c9d8fa70f8799da75d0165e"
     },
     "records/awakeners/awakener-0051.json": {
-      "bytes": 5133,
-      "sha256": "e299e5a0a8a1096c214f69792abb01d69c3db455d6a7386c875ed6481a429867"
+      "bytes": 5135,
+      "sha256": "50f21d08b09e4a09d6d6de6ec1a02044255fc2553f49f931b84cb71e0f164e6a"
     },
     "records/awakeners/awakener-0052.json": {
       "bytes": 6113,
@@ -646,12 +646,12 @@
       "sha256": "a643ad90abf232c03c26777355018ce159231b0c79b522c219d7122e4b5ca38e"
     },
     "records/awakeners/awakener-0055.json": {
-      "bytes": 6566,
-      "sha256": "8d706f52e339da6c0855c0ea67feebeced157d6c6251c88d4b2b13a8e7b5617c"
+      "bytes": 6553,
+      "sha256": "4f3b10d90bd9cd547b8a79b60be314d9297e6f2e93db23f5957863751be7d4c8"
     },
     "records/awakeners/awakener-0056.json": {
-      "bytes": 12278,
-      "sha256": "29ac083e9713f906883a59bc664d74b3acee9a184897dc86528d79d19bb2cd89"
+      "bytes": 12321,
+      "sha256": "f1c36cd821707e81969a4b14952a64d0118f2f42eff7710ce86572b7146ca642"
     },
     "records/covenants/covenant-0001.json": {
       "bytes": 926,

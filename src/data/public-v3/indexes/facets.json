@@ -608,9 +608,15 @@
       },
       {
         "value": "self-harm",
-        "label": "Self-Harm",
+        "label": "Self-Damage",
         "section": "archetype",
         "order": 990
+      },
+      {
+        "value": "lemurian",
+        "label": "Lemurian",
+        "section": "archetype",
+        "order": 995
       },
       {
         "value": "spider",
@@ -626,7 +632,7 @@
       },
       {
         "value": "tentacles",
-        "label": "Tentacles",
+        "label": "Tentacle Generation",
         "section": "archetype",
         "order": 1020
       },
