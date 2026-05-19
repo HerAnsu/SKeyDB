@@ -20,7 +20,8 @@
       "mainstatKey": "KEYFLARE_REGEN",
       "ownerAwakenerId": "awakener-0048",
       "ownerAwakenerName": "Thais",
-      "lineupToken": "xb"
+      "lineupToken": "xb",
+      "searchTags": ["Hand Limit", "Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -38,7 +39,8 @@
       "mainstatKey": "SIGIL_YIELD",
       "ownerAwakenerId": "awakener-0044",
       "ownerAwakenerName": "Salvador",
-      "lineupToken": "xC"
+      "lineupToken": "xC",
+      "searchTags": ["Shield", "Heal", "Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -56,7 +58,8 @@
       "mainstatKey": "KEYFLARE_REGEN",
       "ownerAwakenerId": "awakener-0003",
       "ownerAwakenerName": "Aigis",
-      "lineupToken": "W"
+      "lineupToken": "W",
+      "searchTags": ["Vulnerable"]
     },
     {
       "kind": "wheel",
@@ -110,7 +113,8 @@
       "mainstatKey": "DMG_AMP",
       "ownerAwakenerId": "awakener-0019",
       "ownerAwakenerName": "Helot: Catena",
-      "lineupToken": "xY"
+      "lineupToken": "xY",
+      "searchTags": ["Draw", "Hand Limit"]
     },
     {
       "kind": "wheel",
@@ -128,7 +132,8 @@
       "mainstatKey": "SIGIL_YIELD",
       "ownerAwakenerId": "awakener-0002",
       "ownerAwakenerName": "Agrippa",
-      "lineupToken": "xA"
+      "lineupToken": "xA",
+      "searchTags": ["Poison", "Shield"]
     },
     {
       "kind": "wheel",
@@ -164,7 +169,8 @@
       "mainstatKey": "REALM_MASTERY",
       "ownerAwakenerId": "awakener-0028",
       "ownerAwakenerName": "Leigh",
-      "lineupToken": "xk"
+      "lineupToken": "xk",
+      "searchTags": ["Shield", "Heal"]
     },
     {
       "kind": "wheel",
@@ -182,7 +188,8 @@
       "mainstatKey": "DEATH_RESISTANCE",
       "ownerAwakenerId": "awakener-0016",
       "ownerAwakenerName": "Faint",
-      "lineupToken": "C"
+      "lineupToken": "C",
+      "searchTags": ["Counter", "Death Resistance", "Shield", "Heal"]
     },
     {
       "kind": "wheel",
@@ -200,7 +207,8 @@
       "mainstatKey": "CRIT_DMG",
       "ownerAwakenerId": "awakener-0014",
       "ownerAwakenerName": "Doresain",
-      "lineupToken": "yP"
+      "lineupToken": "yP",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -218,7 +226,8 @@
       "mainstatKey": "ALIEMUS_REGEN",
       "ownerAwakenerId": "awakener-0040",
       "ownerAwakenerName": "Pickman",
-      "lineupToken": "yd"
+      "lineupToken": "yd",
+      "searchTags": ["Shield", "Heal", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -236,7 +245,8 @@
       "mainstatKey": "DMG_AMP",
       "ownerAwakenerId": "awakener-0054",
       "ownerAwakenerName": "Xu",
-      "lineupToken": "yX"
+      "lineupToken": "yX",
+      "searchTags": ["Poison", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -272,7 +282,8 @@
       "mainstatKey": "ALIEMUS_REGEN",
       "ownerAwakenerId": "awakener-0013",
       "ownerAwakenerName": "Doll",
-      "lineupToken": "4"
+      "lineupToken": "4",
+      "searchTags": ["Heal", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -290,7 +301,8 @@
       "mainstatKey": "ALIEMUS_REGEN",
       "ownerAwakenerId": "awakener-0018",
       "ownerAwakenerName": "Doll: Inferno",
-      "lineupToken": "xW"
+      "lineupToken": "xW",
+      "searchTags": ["Poison", "Heal", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -308,7 +320,8 @@
       "mainstatKey": "SIGIL_YIELD",
       "ownerAwakenerId": "awakener-0038",
       "ownerAwakenerName": "Ogier",
-      "lineupToken": "8"
+      "lineupToken": "8",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -344,7 +357,8 @@
       "mainstatKey": "SIGIL_YIELD",
       "ownerAwakenerId": "awakener-0043",
       "ownerAwakenerName": "Ryker",
-      "lineupToken": "xJ"
+      "lineupToken": "xJ",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -362,7 +376,8 @@
       "mainstatKey": "ALIEMUS_REGEN",
       "ownerAwakenerId": "awakener-0001",
       "ownerAwakenerName": "24",
-      "lineupToken": "n"
+      "lineupToken": "n",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -380,7 +395,8 @@
       "mainstatKey": "REALM_MASTERY",
       "ownerAwakenerId": "awakener-0036",
       "ownerAwakenerName": "Nautila",
-      "lineupToken": "7"
+      "lineupToken": "7",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -398,7 +414,8 @@
       "mainstatKey": "DMG_AMP",
       "ownerAwakenerId": "awakener-0037",
       "ownerAwakenerName": "Nymphaea",
-      "lineupToken": "o"
+      "lineupToken": "o",
+      "searchTags": ["Poison", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -416,7 +433,8 @@
       "mainstatKey": "CRIT_RATE",
       "ownerAwakenerId": "awakener-0039",
       "ownerAwakenerName": "Pandia",
-      "lineupToken": "xd"
+      "lineupToken": "xd",
+      "searchTags": ["Counter"]
     },
     {
       "kind": "wheel",
@@ -434,7 +452,8 @@
       "mainstatKey": "DEATH_RESISTANCE",
       "ownerAwakenerId": "awakener-0029",
       "ownerAwakenerName": "Lily",
-      "lineupToken": "R"
+      "lineupToken": "R",
+      "searchTags": ["Poison", "Shield"]
     },
     {
       "kind": "wheel",
@@ -452,7 +471,8 @@
       "mainstatKey": "DEATH_RESISTANCE",
       "ownerAwakenerId": "awakener-0004",
       "ownerAwakenerName": "Alva",
-      "lineupToken": "G"
+      "lineupToken": "G",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -470,7 +490,8 @@
       "mainstatKey": "ALIEMUS_REGEN",
       "ownerAwakenerId": "awakener-0026",
       "ownerAwakenerName": "Karen",
-      "lineupToken": "xh"
+      "lineupToken": "xh",
+      "searchTags": ["Poison", "Heal"]
     },
     {
       "kind": "wheel",
@@ -488,7 +509,8 @@
       "mainstatKey": "KEYFLARE_REGEN",
       "ownerAwakenerId": "awakener-0047",
       "ownerAwakenerName": "Tawil",
-      "lineupToken": "xV"
+      "lineupToken": "xV",
+      "searchTags": ["Shield", "Hand Limit", "Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -542,7 +564,8 @@
       "mainstatKey": "CRIT_RATE",
       "ownerAwakenerId": "awakener-0030",
       "ownerAwakenerName": "Liz",
-      "lineupToken": "t"
+      "lineupToken": "t",
+      "searchTags": ["Poison", "Discard"]
     },
     {
       "kind": "wheel",
@@ -578,7 +601,8 @@
       "mainstatKey": "SIGIL_YIELD",
       "ownerAwakenerId": "awakener-0049",
       "ownerAwakenerName": "Tinct",
-      "lineupToken": "X"
+      "lineupToken": "X",
+      "searchTags": ["Draw"]
     },
     {
       "kind": "wheel",
@@ -596,7 +620,8 @@
       "mainstatKey": "DMG_AMP",
       "ownerAwakenerId": "awakener-0052",
       "ownerAwakenerName": "Wanda",
-      "lineupToken": "D"
+      "lineupToken": "D",
+      "searchTags": ["Counter", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -614,7 +639,8 @@
       "mainstatKey": "ALIEMUS_REGEN",
       "ownerAwakenerId": "awakener-0053",
       "ownerAwakenerName": "Winkle",
-      "lineupToken": "xf"
+      "lineupToken": "xf",
+      "searchTags": ["Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -632,7 +658,8 @@
       "mainstatKey": "DEATH_RESISTANCE",
       "ownerAwakenerId": "awakener-0024",
       "ownerAwakenerName": "Horla",
-      "lineupToken": "k"
+      "lineupToken": "k",
+      "searchTags": ["Shield", "Heal", "Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -650,7 +677,8 @@
       "mainstatKey": "CRIT_RATE",
       "ownerAwakenerId": "awakener-0025",
       "ownerAwakenerName": "Jenkin",
-      "lineupToken": "2"
+      "lineupToken": "2",
+      "searchTags": ["Arithmetica", "Draw"]
     },
     {
       "kind": "wheel",
@@ -668,7 +696,8 @@
       "mainstatKey": "KEYFLARE_REGEN",
       "ownerAwakenerId": "awakener-0015",
       "ownerAwakenerName": "Erica",
-      "lineupToken": "s"
+      "lineupToken": "s",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -686,7 +715,8 @@
       "mainstatKey": "REALM_MASTERY",
       "ownerAwakenerId": "awakener-0007",
       "ownerAwakenerName": "Casiah",
-      "lineupToken": "S"
+      "lineupToken": "S",
+      "searchTags": ["Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -704,7 +734,8 @@
       "mainstatKey": "DMG_AMP",
       "ownerAwakenerId": "awakener-0008",
       "ownerAwakenerName": "Castor",
-      "lineupToken": "yb"
+      "lineupToken": "yb",
+      "searchTags": ["Shield", "Hand Limit", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -722,7 +753,8 @@
       "mainstatKey": "KEYFLARE_REGEN",
       "ownerAwakenerId": "awakener-0022",
       "ownerAwakenerName": "Hameln",
-      "lineupToken": "xX"
+      "lineupToken": "xX",
+      "searchTags": ["Keyflare"]
     },
     {
       "kind": "wheel",
@@ -740,7 +772,8 @@
       "mainstatKey": "KEYFLARE_REGEN",
       "ownerAwakenerId": "awakener-0010",
       "ownerAwakenerName": "Clementine",
-      "lineupToken": "yf"
+      "lineupToken": "yf",
+      "searchTags": ["Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -758,7 +791,8 @@
       "mainstatKey": "CRIT_RATE",
       "ownerAwakenerId": "awakener-0041",
       "ownerAwakenerName": "Pollux",
-      "lineupToken": "yg"
+      "lineupToken": "yg",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -790,7 +824,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "SIGIL_YIELD",
-      "lineupToken": "yI"
+      "lineupToken": "yI",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -822,7 +857,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "yT"
+      "lineupToken": "yT",
+      "searchTags": ["Arithmetica", "Draw"]
     },
     {
       "kind": "wheel",
@@ -838,7 +874,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "CRIT_DMG",
-      "lineupToken": "y8"
+      "lineupToken": "y8",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -888,7 +925,8 @@
       "mainstatKey": "ALIEMUS_REGEN",
       "ownerAwakenerId": "awakener-0050",
       "ownerAwakenerName": "Tulu",
-      "lineupToken": "B"
+      "lineupToken": "B",
+      "searchTags": ["Tentacle DMG", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -906,7 +944,8 @@
       "mainstatKey": "KEYFLARE_REGEN",
       "ownerAwakenerId": "awakener-0034",
       "ownerAwakenerName": "Murphy",
-      "lineupToken": "m"
+      "lineupToken": "m",
+      "searchTags": ["Shield", "Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -924,7 +963,8 @@
       "mainstatKey": "DMG_AMP",
       "ownerAwakenerId": "awakener-0017",
       "ownerAwakenerName": "Faros",
-      "lineupToken": "v"
+      "lineupToken": "v",
+      "searchTags": ["Poison", "Arithmetica"]
     },
     {
       "kind": "wheel",
@@ -942,7 +982,8 @@
       "mainstatKey": "SIGIL_YIELD",
       "ownerAwakenerId": "awakener-0006",
       "ownerAwakenerName": "Caecus",
-      "lineupToken": "e"
+      "lineupToken": "e",
+      "searchTags": ["Counter", "Tentacle DMG", "Shield", "Heal"]
     },
     {
       "kind": "wheel",
@@ -960,7 +1001,8 @@
       "mainstatKey": "CRIT_RATE",
       "ownerAwakenerId": "awakener-0005",
       "ownerAwakenerName": "Aurita",
-      "lineupToken": "9"
+      "lineupToken": "9",
+      "searchTags": ["Tentacle DMG", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -978,7 +1020,8 @@
       "mainstatKey": "CRIT_RATE",
       "ownerAwakenerId": "awakener-0021",
       "ownerAwakenerName": "Goliath",
-      "lineupToken": "1"
+      "lineupToken": "1",
+      "searchTags": ["Arithmetica"]
     },
     {
       "kind": "wheel",
@@ -996,7 +1039,8 @@
       "mainstatKey": "CRIT_DMG",
       "ownerAwakenerId": "awakener-0032",
       "ownerAwakenerName": "Miryam",
-      "lineupToken": "xK"
+      "lineupToken": "xK",
+      "searchTags": ["Poison", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1014,7 +1058,8 @@
       "mainstatKey": "DEATH_RESISTANCE",
       "ownerAwakenerId": "awakener-0045",
       "ownerAwakenerName": "Sanga",
-      "lineupToken": "A"
+      "lineupToken": "A",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -1032,7 +1077,8 @@
       "mainstatKey": "REALM_MASTERY",
       "ownerAwakenerId": "awakener-0009",
       "ownerAwakenerName": "Celeste",
-      "lineupToken": "f"
+      "lineupToken": "f",
+      "searchTags": ["Heal"]
     },
     {
       "kind": "wheel",
@@ -1050,7 +1096,8 @@
       "mainstatKey": "DEATH_RESISTANCE",
       "ownerAwakenerId": "awakener-0011",
       "ownerAwakenerName": "Corposant",
-      "lineupToken": "ye"
+      "lineupToken": "ye",
+      "searchTags": ["Death Resistance", "Shield"]
     },
     {
       "kind": "wheel",
@@ -1068,7 +1115,8 @@
       "mainstatKey": "REALM_MASTERY",
       "ownerAwakenerId": "awakener-0055",
       "ownerAwakenerName": "Vortice",
-      "lineupToken": "y6"
+      "lineupToken": "y6",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1116,7 +1164,8 @@
       "realm": "NEUTRAL",
       "rarity": "R",
       "mainstatKey": "CRIT_RATE",
-      "lineupToken": "xq"
+      "lineupToken": "xq",
+      "searchTags": ["Draw", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1164,7 +1213,8 @@
       "realm": "NEUTRAL",
       "rarity": "R",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "xn"
+      "lineupToken": "xn",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1180,7 +1230,8 @@
       "realm": "NEUTRAL",
       "rarity": "R",
       "mainstatKey": "CRIT_RATE",
-      "lineupToken": "xm"
+      "lineupToken": "xm",
+      "searchTags": ["Heal"]
     },
     {
       "kind": "wheel",
@@ -1196,7 +1247,8 @@
       "realm": "NEUTRAL",
       "rarity": "R",
       "mainstatKey": "REALM_MASTERY",
-      "lineupToken": "xu"
+      "lineupToken": "xu",
+      "searchTags": ["Arithmetica", "Keyflare"]
     },
     {
       "kind": "wheel",
@@ -1212,7 +1264,8 @@
       "realm": "NEUTRAL",
       "rarity": "R",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "xt"
+      "lineupToken": "xt",
+      "searchTags": ["Death Resistance"]
     },
     {
       "kind": "wheel",
@@ -1276,7 +1329,8 @@
       "realm": "NEUTRAL",
       "rarity": "R",
       "mainstatKey": "CRIT_DMG",
-      "lineupToken": "g"
+      "lineupToken": "g",
+      "searchTags": ["Heal"]
     },
     {
       "kind": "wheel",
@@ -1292,7 +1346,8 @@
       "realm": "NEUTRAL",
       "rarity": "R",
       "mainstatKey": "CRIT_DMG",
-      "lineupToken": "i"
+      "lineupToken": "i",
+      "searchTags": ["Keyflare"]
     },
     {
       "kind": "wheel",
@@ -1308,7 +1363,8 @@
       "realm": "NEUTRAL",
       "rarity": "R",
       "mainstatKey": "SIGIL_YIELD",
-      "lineupToken": "xv"
+      "lineupToken": "xv",
+      "searchTags": ["Weakness", "Vulnerable"]
     },
     {
       "kind": "wheel",
@@ -1324,7 +1380,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "REALM_MASTERY",
-      "lineupToken": "5"
+      "lineupToken": "5",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1340,7 +1397,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "xD"
+      "lineupToken": "xD",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1356,7 +1414,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
-      "lineupToken": "6"
+      "lineupToken": "6",
+      "searchTags": ["Poison"]
     },
     {
       "kind": "wheel",
@@ -1388,7 +1447,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "V"
+      "lineupToken": "V",
+      "searchTags": ["Counter", "Death Resistance"]
     },
     {
       "kind": "wheel",
@@ -1420,7 +1480,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_RATE",
-      "lineupToken": "xG"
+      "lineupToken": "xG",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1452,7 +1513,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "xI"
+      "lineupToken": "xI",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1468,7 +1530,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
-      "lineupToken": "J"
+      "lineupToken": "J",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -1500,7 +1563,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
-      "lineupToken": "H"
+      "lineupToken": "H",
+      "searchTags": ["Shield", "Heal"]
     },
     {
       "kind": "wheel",
@@ -1516,7 +1580,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "REALM_MASTERY",
-      "lineupToken": "I"
+      "lineupToken": "I",
+      "searchTags": ["Shield", "Heal"]
     },
     {
       "kind": "wheel",
@@ -1532,7 +1597,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "r"
+      "lineupToken": "r",
+      "searchTags": ["Keyflare"]
     },
     {
       "kind": "wheel",
@@ -1548,7 +1614,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "SIGIL_YIELD",
-      "lineupToken": "M"
+      "lineupToken": "M",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -1580,7 +1647,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "xM"
+      "lineupToken": "xM",
+      "searchTags": ["Poison", "Death Resistance", "Shield"]
     },
     {
       "kind": "wheel",
@@ -1596,7 +1664,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
-      "lineupToken": "xN"
+      "lineupToken": "xN",
+      "searchTags": ["Counter", "Shield", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1612,7 +1681,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "SIGIL_YIELD",
-      "lineupToken": "xO"
+      "lineupToken": "xO",
+      "searchTags": ["Shield", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1628,7 +1698,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_RATE",
-      "lineupToken": "xP"
+      "lineupToken": "xP",
+      "searchTags": ["Keyflare"]
     },
     {
       "kind": "wheel",
@@ -1644,7 +1715,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
-      "lineupToken": "xZ"
+      "lineupToken": "xZ",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1660,7 +1732,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_DMG",
-      "lineupToken": "xQ"
+      "lineupToken": "xQ",
+      "searchTags": ["Tentacle DMG"]
     },
     {
       "kind": "wheel",
@@ -1692,7 +1765,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "xR"
+      "lineupToken": "xR",
+      "searchTags": ["Arithmetica", "Death Resistance", "Draw"]
     },
     {
       "kind": "wheel",
@@ -1724,7 +1798,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "x4"
+      "lineupToken": "x4",
+      "searchTags": ["Tentacle DMG", "Shield"]
     },
     {
       "kind": "wheel",
@@ -1756,7 +1831,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "x5"
+      "lineupToken": "x5",
+      "searchTags": ["Keyflare"]
     },
     {
       "kind": "wheel",
@@ -1772,7 +1848,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_RATE",
-      "lineupToken": "x2"
+      "lineupToken": "x2",
+      "searchTags": ["Shield", "Heal", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1788,7 +1865,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
-      "lineupToken": "x1"
+      "lineupToken": "x1",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1804,7 +1882,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
-      "lineupToken": "x7"
+      "lineupToken": "x7",
+      "searchTags": ["Arithmetica"]
     },
     {
       "kind": "wheel",
@@ -1836,7 +1915,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
-      "lineupToken": "x8"
+      "lineupToken": "x8",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1852,7 +1932,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "yQ"
+      "lineupToken": "yQ",
+      "searchTags": ["Shield", "Keyflare"]
     },
     {
       "kind": "wheel",
@@ -1868,7 +1949,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
-      "lineupToken": "yq"
+      "lineupToken": "yq",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -1884,7 +1966,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_RATE",
-      "lineupToken": "yD"
+      "lineupToken": "yD",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -1900,7 +1983,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "yv"
+      "lineupToken": "yv",
+      "searchTags": ["Death Resistance", "Shield"]
     },
     {
       "kind": "wheel",
@@ -1916,7 +2000,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
-      "lineupToken": "yt"
+      "lineupToken": "yt",
+      "searchTags": ["Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1948,7 +2033,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "yK"
+      "lineupToken": "yK",
+      "searchTags": ["Draw"]
     },
     {
       "kind": "wheel",
@@ -1964,7 +2050,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
-      "lineupToken": "yW"
+      "lineupToken": "yW",
+      "searchTags": ["Poison", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -1996,7 +2083,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "u"
+      "lineupToken": "u",
+      "searchTags": ["Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -2012,7 +2100,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "DMG_AMP",
-      "lineupToken": "N"
+      "lineupToken": "N",
+      "searchTags": ["Poison", "Counter"]
     },
     {
       "kind": "wheel",
@@ -2028,7 +2117,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "REALM_MASTERY",
-      "lineupToken": "O"
+      "lineupToken": "O",
+      "searchTags": ["Shield", "Heal"]
     },
     {
       "kind": "wheel",
@@ -2044,7 +2134,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "DEATH_RESISTANCE",
-      "lineupToken": "xT"
+      "lineupToken": "xT",
+      "searchTags": ["Arithmetica", "Death Resistance", "Draw", "Keyflare"]
     },
     {
       "kind": "wheel",
@@ -2060,7 +2151,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "x6"
+      "lineupToken": "x6",
+      "searchTags": ["Shield", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -2076,7 +2168,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "ALIEMUS_REGEN",
-      "lineupToken": "yH"
+      "lineupToken": "yH",
+      "searchTags": ["Shield", "Heal"]
     },
     {
       "kind": "wheel",
@@ -2092,7 +2185,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "REALM_MASTERY",
-      "lineupToken": "yR"
+      "lineupToken": "yR",
+      "searchTags": ["Draw"]
     },
     {
       "kind": "wheel",
@@ -2110,7 +2204,8 @@
       "mainstatKey": "REALM_MASTERY",
       "ownerAwakenerId": "awakener-0056",
       "ownerAwakenerName": "Arachne",
-      "lineupToken": "yi"
+      "lineupToken": "yi",
+      "searchTags": ["Shield", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -2144,7 +2239,8 @@
       "mainstatKey": "KEYFLARE_REGEN",
       "ownerAwakenerId": "awakener-0035",
       "ownerAwakenerName": "Murphy: Fauxborn",
-      "lineupToken": "yp"
+      "lineupToken": "yp",
+      "searchTags": ["Shield", "Hand Limit", "Keyflare", "Aliemus"]
     },
     {
       "kind": "wheel",
@@ -2160,7 +2256,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "REALM_MASTERY",
-      "lineupToken": "yu"
+      "lineupToken": "yu",
+      "searchTags": ["Shield"]
     },
     {
       "kind": "wheel",
@@ -2192,7 +2289,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
-      "lineupToken": "x0"
+      "lineupToken": "x0",
+      "searchTags": ["Weakness", "Vulnerable", "Keyflare"]
     },
     {
       "kind": "wheel",
@@ -2208,7 +2306,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "REALM_MASTERY",
-      "lineupToken": "y0"
+      "lineupToken": "y0",
+      "searchTags": ["Keyflare"]
     },
     {
       "kind": "wheel",
@@ -2224,7 +2323,8 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "SIGIL_YIELD",
-      "lineupToken": "za"
+      "lineupToken": "za",
+      "searchTags": ["Arithmetica", "Heal"]
     }
   ]
 }

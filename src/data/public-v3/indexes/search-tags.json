@@ -7,7 +7,7 @@
       "section": "affix",
       "aliases": ["weak"],
       "order": 100,
-      "count": 19
+      "count": 21
     },
     {
       "id": "vulnerable",
@@ -15,7 +15,7 @@
       "section": "affix",
       "aliases": ["vulnerability", "vuln"],
       "order": 110,
-      "count": 18
+      "count": 21
     },
     {
       "id": "poison",
@@ -23,7 +23,7 @@
       "section": "affix",
       "aliases": [],
       "order": 120,
-      "count": 14
+      "count": 27
     },
     {
       "id": "bleed",
@@ -47,7 +47,7 @@
       "section": "affix",
       "aliases": [],
       "order": 190,
-      "count": 11
+      "count": 18
     },
     {
       "id": "final-verdict",
@@ -87,7 +87,7 @@
       "section": "archetype",
       "aliases": ["tentacle damage"],
       "order": 225,
-      "count": 14
+      "count": 19
     },
     {
       "id": "stun",
@@ -159,15 +159,15 @@
       "section": "archetype",
       "aliases": [],
       "order": 900,
-      "count": 19
+      "count": 28
     },
     {
       "id": "death-resistance",
       "label": "Death Resistance",
       "section": "archetype",
-      "aliases": [],
+      "aliases": ["resistance"],
       "order": 910,
-      "count": 8
+      "count": 16
     },
     {
       "id": "discard",
@@ -175,7 +175,7 @@
       "section": "archetype",
       "aliases": [],
       "order": 920,
-      "count": 12
+      "count": 13
     },
     {
       "id": "divine-realm",
@@ -191,7 +191,15 @@
       "section": "archetype",
       "aliases": [],
       "order": 940,
-      "count": 26
+      "count": 35
+    },
+    {
+      "id": "shield",
+      "label": "Shield",
+      "section": "archetype",
+      "aliases": ["shield generation"],
+      "order": 945,
+      "count": 37
     },
     {
       "id": "hand-limit",
@@ -199,15 +207,15 @@
       "section": "archetype",
       "aliases": [],
       "order": 950,
-      "count": 4
+      "count": 9
     },
     {
       "id": "heal",
       "label": "Heal",
       "section": "archetype",
-      "aliases": [],
+      "aliases": ["healing", "hp recovery"],
       "order": 960,
-      "count": 13
+      "count": 31
     },
     {
       "id": "keyflare",
@@ -215,7 +223,15 @@
       "section": "archetype",
       "aliases": [],
       "order": 970,
-      "count": 14
+      "count": 34
+    },
+    {
+      "id": "aliemus",
+      "label": "Aliemus",
+      "section": "archetype",
+      "aliases": ["aliemus generation"],
+      "order": 975,
+      "count": 42
     },
     {
       "id": "max-hp-dmg",

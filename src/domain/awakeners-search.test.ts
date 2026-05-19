@@ -38,7 +38,7 @@ describe('searchAwakeners', () => {
     expect(results.every((a) => a.tags.includes('Draw'))).toBe(true)
   })
 
-  it('matches awakeners by promoted scaling substats from lite catalog data', () => {
+  it('leaves promoted scaling substats to advanced filters instead of text search', () => {
     const awakeners: Awakener[] = [
       {
         id: 'awakener-0001',
@@ -64,8 +64,8 @@ describe('searchAwakeners', () => {
       },
     ]
 
-    expect(searchAwakeners(awakeners, 'realm mastery').map((x) => x.name)).toEqual(['caecus'])
-    expect(searchAwakeners(awakeners, 'sigil').map((x) => x.name)).toEqual(['caecus'])
+    expect(searchAwakeners(awakeners, 'realm mastery')).toEqual([])
+    expect(searchAwakeners(awakeners, 'sigil')).toEqual([])
   })
 
   it('does not cross-match distinct public tags', () => {

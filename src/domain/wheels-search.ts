@@ -1,4 +1,3 @@
-import {getMainstatByKey} from './mainstats'
 import {
   searchPublicEntities,
   searchPublicEntityResults,
@@ -23,16 +22,7 @@ function getWheelSearchOptions(): PublicSearchOptions<Wheel> {
         (value): value is string => typeof value === 'string' && value.length > 0,
       ),
       tag: wheel.tags,
-      facet: [
-        wheel.realm,
-        wheel.rarity,
-        wheel.mainstatKey,
-        getWheelSearchMainstatLabel(wheel),
-      ].filter((value): value is string => typeof value === 'string' && value.length > 0),
+      facet: [wheel.realm, wheel.rarity],
     }),
   }
-}
-
-function getWheelSearchMainstatLabel(wheel: Wheel): string {
-  return getMainstatByKey(wheel.mainstatKey)?.label ?? wheel.mainstatKey
 }

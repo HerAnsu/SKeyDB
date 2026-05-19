@@ -2745,6 +2745,92 @@
         "label": "Arachne",
         "order": 55
       }
+    ],
+    "tags": [
+      {
+        "value": "weakness",
+        "label": "Weakness",
+        "section": "affix",
+        "order": 100
+      },
+      {
+        "value": "vulnerable",
+        "label": "Vulnerable",
+        "section": "affix",
+        "order": 110
+      },
+      {
+        "value": "poison",
+        "label": "Poison",
+        "section": "affix",
+        "order": 120
+      },
+      {
+        "value": "counter",
+        "label": "Counter",
+        "section": "affix",
+        "order": 190
+      },
+      {
+        "value": "tentacle-dmg",
+        "label": "Tentacle DMG",
+        "section": "archetype",
+        "order": 225
+      },
+      {
+        "value": "arithmetica",
+        "label": "Arithmetica",
+        "section": "archetype",
+        "order": 900
+      },
+      {
+        "value": "death-resistance",
+        "label": "Death Resistance",
+        "section": "archetype",
+        "order": 910
+      },
+      {
+        "value": "discard",
+        "label": "Discard",
+        "section": "archetype",
+        "order": 920
+      },
+      {
+        "value": "draw",
+        "label": "Draw",
+        "section": "archetype",
+        "order": 940
+      },
+      {
+        "value": "shield",
+        "label": "Shield",
+        "section": "archetype",
+        "order": 945
+      },
+      {
+        "value": "hand-limit",
+        "label": "Hand Limit",
+        "section": "archetype",
+        "order": 950
+      },
+      {
+        "value": "heal",
+        "label": "Heal",
+        "section": "archetype",
+        "order": 960
+      },
+      {
+        "value": "keyflare",
+        "label": "Keyflare",
+        "section": "archetype",
+        "order": 970
+      },
+      {
+        "value": "aliemus",
+        "label": "Aliemus",
+        "section": "archetype",
+        "order": 975
+      }
     ]
   }
 }
