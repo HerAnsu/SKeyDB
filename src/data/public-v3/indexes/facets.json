@@ -2772,10 +2772,28 @@
         "order": 190
       },
       {
+        "value": "str-up",
+        "label": "STR Up",
+        "section": "affix",
+        "order": 210
+      },
+      {
+        "value": "str-down",
+        "label": "STR Down",
+        "section": "affix",
+        "order": 220
+      },
+      {
         "value": "tentacle-dmg",
         "label": "Tentacle DMG",
         "section": "archetype",
         "order": 225
+      },
+      {
+        "value": "pursuit",
+        "label": "Pursuit",
+        "section": "mechanic",
+        "order": 240
       },
       {
         "value": "arithmetica",
@@ -2830,6 +2848,54 @@
         "label": "Aliemus",
         "section": "archetype",
         "order": 975
+      },
+      {
+        "value": "strike",
+        "label": "Strike",
+        "section": "archetype",
+        "order": 1010
+      },
+      {
+        "value": "defense",
+        "label": "Defense",
+        "section": "archetype",
+        "order": 1015
+      },
+      {
+        "value": "crit-rate",
+        "label": "Crit Rate",
+        "section": "archetype",
+        "order": 1040
+      },
+      {
+        "value": "crit-dmg",
+        "label": "Crit DMG",
+        "section": "archetype",
+        "order": 1050
+      },
+      {
+        "value": "temporary-realm-mastery",
+        "label": "Temporary Realm Mastery",
+        "section": "archetype",
+        "order": 1060
+      },
+      {
+        "value": "embryo-fusion",
+        "label": "Embryo Fusion",
+        "section": "archetype",
+        "order": 1070
+      },
+      {
+        "value": "sigil-gain",
+        "label": "Sigil Gain",
+        "section": "archetype",
+        "order": 1080
+      },
+      {
+        "value": "sigil-yield",
+        "label": "Sigil Yield",
+        "section": "archetype",
+        "order": 1090
       }
     ]
   }

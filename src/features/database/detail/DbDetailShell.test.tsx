@@ -57,6 +57,9 @@ describe('DbDetailShell', () => {
 
     render(<TestShell onClose={onClose} />)
 
+    expect(getDetailOverlay()).toHaveClass('inset-0')
+    expect(getDetailOverlay()).toHaveClass('z-[960]')
+
     fireEvent.click(screen.getByRole('button', {name: 'Open detail settings'}))
     expect(screen.getByRole('spinbutton', {name: 'Account level'})).toBeInTheDocument()
 

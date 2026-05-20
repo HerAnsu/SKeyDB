@@ -71,7 +71,7 @@
       "section": "affix",
       "aliases": ["strength up"],
       "order": 210,
-      "count": 35
+      "count": 48
     },
     {
       "id": "str-down",
@@ -79,7 +79,7 @@
       "section": "affix",
       "aliases": ["strength down", "str down"],
       "order": 220,
-      "count": 10
+      "count": 13
     },
     {
       "id": "tentacle-dmg",
@@ -103,7 +103,7 @@
       "section": "mechanic",
       "aliases": [],
       "order": 240,
-      "count": 3
+      "count": 6
     },
     {
       "id": "steal-str",
@@ -271,7 +271,15 @@
       "section": "archetype",
       "aliases": [],
       "order": 1010,
-      "count": 7
+      "count": 20
+    },
+    {
+      "id": "defense",
+      "label": "Defense",
+      "section": "archetype",
+      "aliases": ["defence", "defend"],
+      "order": 1015,
+      "count": 8
     },
     {
       "id": "tentacles",
@@ -288,6 +296,54 @@
       "aliases": [],
       "order": 1030,
       "count": 2
+    },
+    {
+      "id": "crit-rate",
+      "label": "Crit Rate",
+      "section": "archetype",
+      "aliases": ["crit. rate", "critical rate"],
+      "order": 1040,
+      "count": 24
+    },
+    {
+      "id": "crit-dmg",
+      "label": "Crit DMG",
+      "section": "archetype",
+      "aliases": ["crit. dmg", "crit damage", "critical damage"],
+      "order": 1050,
+      "count": 25
+    },
+    {
+      "id": "temporary-realm-mastery",
+      "label": "Temporary Realm Mastery",
+      "section": "archetype",
+      "aliases": ["temp realm mastery"],
+      "order": 1060,
+      "count": 2
+    },
+    {
+      "id": "embryo-fusion",
+      "label": "Embryo Fusion",
+      "section": "archetype",
+      "aliases": [],
+      "order": 1070,
+      "count": 7
+    },
+    {
+      "id": "sigil-gain",
+      "label": "Sigil Gain",
+      "section": "archetype",
+      "aliases": ["sigil generation"],
+      "order": 1080,
+      "count": 7
+    },
+    {
+      "id": "sigil-yield",
+      "label": "Sigil Yield",
+      "section": "archetype",
+      "aliases": [],
+      "order": 1090,
+      "count": 1
     }
   ]
 }

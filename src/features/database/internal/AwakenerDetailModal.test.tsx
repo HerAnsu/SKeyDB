@@ -478,16 +478,19 @@ describe('AwakenerDetailModal', () => {
     })
   })
 
-  it('exposes semantic tabs and tabpanel linkage', () => {
+  it('exposes the search, result area, and tabs as one semantic dialog', () => {
     const awakener = makeAwakener(1, 'thais')
 
     renderAwakenerDetailModal(awakener)
 
     const dialog = screen.getByRole('dialog', {name: /thais details/i})
     const searchInput = screen.getByRole('combobox', {name: /jump to awakener/i})
+    const overlay = getDetailOverlay()
 
     expect(searchInput).toBeInTheDocument()
-    expect(dialog).not.toContainElement(searchInput)
+    expect(dialog).toContainElement(searchInput)
+    expect(overlay).toHaveClass('inset-0')
+    expect(overlay).toHaveClass('z-[960]')
     expect(
       within(dialog).getByRole('tablist', {name: 'Awakener detail sections'}),
     ).toBeInTheDocument()
