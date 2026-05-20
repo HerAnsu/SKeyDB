@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 3,
+  "kind": "derivedSkill",
+  "id": "derived.global.propagule-embryo",
+  "name": "Propagule Embryo",
+  "route": {
+    "slug": "propagule-embryo",
+    "canonicalPath": "/database/derived-skills/propagule-embryo"
+  },
+  "descriptionTemplate": "When a {Caro} Realm Awakener releases an Exalt, it can be consumed to trigger {Devour} Effect once. After playing, choose an Awakener to gain [Energy:Arg1] Aliemus. The first time an Awakener consumes {Embryo} or {Scion of Purity} each round, gain [Arg3] {plural:[Arg3]|stack|stacks} of {Propagation Frenzy}.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "fixed",
+      "value": "30"
+    },
+    "Arg3": {
+      "kind": "fixed",
+      "value": "50"
+    }
+  },
+  "cardKeywords": [
+    {
+      "id": "mechanic.retain"
+    },
+    {
+      "id": "mechanic.exhaust"
+    }
+  ],
+  "cost": "0"
+}

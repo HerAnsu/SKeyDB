@@ -13,6 +13,8 @@
   "rarity": "SR",
   "realm": "NEUTRAL",
   "mainstatKey": "ALIEMUS_REGEN",
+  "ownerAwakenerId": "awakener-0018",
+  "ownerAwakenerName": "Doll: Inferno",
   "lineupToken": "x1",
   "descriptionTemplate": "Team Unique: At the start of the battle, the equipped gains Aliemus equal to [StateArg1]% of the wielder Aliemus Regen. After the equipped releases Exalt for the first time in each battle, this effect repeats once.",
   "descriptionArgs": {

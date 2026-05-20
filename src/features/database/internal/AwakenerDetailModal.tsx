@@ -16,11 +16,13 @@ import {type AwakenerFullRecord} from '@/domain/awakeners-full'
 import type {Covenant} from '@/domain/covenants'
 import {DATABASE_AWAKENER_TABS, type DatabaseAwakenerTab} from '@/domain/database-paths'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
+import {isPreReleaseAwakener} from '@/domain/pre-release'
 import {getRealmAccent, getRealmIcon, getRealmLabel} from '@/domain/realms'
 import type {Wheel} from '@/domain/wheels'
 import type {DatabaseDetailResultNavigation} from '@/features/database/detail/database-detail-result-navigation'
 import {DatabaseDetailResultNavigator} from '@/features/database/detail/DatabaseDetailResultNavigator'
 import {DbDetailModalFrame} from '@/features/database/detail/DbDetailModalFrame'
+import {PreReleaseDataNotice} from '@/features/database/detail/PreReleaseDataNotice'
 import {ArtViewerOverlay} from '@/ui/modal/ArtViewerOverlay'
 
 import {AwakenerDetailOverview} from './AwakenerDetailOverview'
@@ -273,14 +275,8 @@ export function AwakenerDetailModal({
 
             <div className='flex min-h-0 min-w-0 flex-1 flex-col'>
               <div className='shrink-0 px-5 pt-4 pb-0 md:pt-5'>
-                {awakener.unreleased ? (
-                  <div className='mb-3 max-w-2xl border border-amber-500/30 bg-amber-950/20 px-3 py-2.5'>
-                    <p className='text-[11px] leading-relaxed text-amber-100/75'>
-                      <strong className='font-semibold text-amber-200/90'>Pre-release data:</strong>{' '}
-                      Values and content are based on pre-release information and may change before
-                      or after release.
-                    </p>
-                  </div>
+                {awakener.unreleased || isPreReleaseAwakener(awakener) ? (
+                  <PreReleaseDataNotice />
                 ) : null}
                 <div className='flex items-center gap-2.5 pr-20'>
                   {cardAsset ? (

@@ -3317,6 +3317,25 @@
         "faction": "The Unknowable",
         "tags": ["counter", "divine-realm", "final-verdict", "fixed-dmg", "poison", "pursuit", "spider", "str-down", "str-up", "tentacle-dmg"]
       }
+    },
+    {
+      "kind": "awakener",
+      "id": "awakener-0057",
+      "name": "Saya",
+      "aliases": ["saya"],
+      "tokens": ["astral", "caro", "chorus", "limited", "limited astral reign", "reign", "saya", "ssr", "tbd"],
+      "fields": {
+        "name": ["Saya"],
+        "alias": ["saya"],
+        "facet": ["CARO", "SSR", "CHORUS", "LIMITED_ASTRAL_REIGN", "Limited: Astral Reign", "TBD"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "type": "CHORUS",
+        "availabilityType": "LIMITED_ASTRAL_REIGN",
+        "faction": "TBD"
+      }
     }
   ]
 }

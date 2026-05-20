@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "enlightens",
   "kind": "enlighten",
-  "recordCount": 280,
+  "recordCount": 285,
   "records": [
     {
       "kind": "enlighten",
@@ -2763,6 +2763,66 @@
       "ownerAwakenerId": "awakener-0045",
       "ownerAwakenerName": "Sanga",
       "slot": "OverExalt"
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.saya.here-my-one-last-gift",
+      "name": "Here, My One Last Gift...",
+      "route": {
+        "slug": "here-my-one-last-gift",
+        "canonicalPath": "/database/awakeners/saya/enlightens/here-my-one-last-gift"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "AbsoluteAxiom"
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.saya.ill-be-your-very-own-monster",
+      "name": "I'll be Your Very Own Monster",
+      "route": {
+        "slug": "ill-be-your-very-own-monster",
+        "canonicalPath": "/database/awakeners/saya/enlightens/ill-be-your-very-own-monster"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "E1"
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.saya.must-be-what-they-call-love",
+      "name": "Must be What They Call Love",
+      "route": {
+        "slug": "must-be-what-they-call-love",
+        "canonicalPath": "/database/awakeners/saya/enlightens/must-be-what-they-call-love"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "E3"
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.saya.paradise-just-for-you",
+      "name": "Paradise Just For You",
+      "route": {
+        "slug": "paradise-just-for-you",
+        "canonicalPath": "/database/awakeners/saya/enlightens/paradise-just-for-you"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "OverExalt"
+    },
+    {
+      "kind": "enlighten",
+      "id": "enlighten.saya.will-you-stay-with-me-always",
+      "name": "Will You Stay with Me, Always?",
+      "route": {
+        "slug": "will-you-stay-with-me-always",
+        "canonicalPath": "/database/awakeners/saya/enlightens/will-you-stay-with-me-always"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "E2"
     },
     {
       "kind": "enlighten",

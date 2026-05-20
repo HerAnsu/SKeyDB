@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 3,
+  "kind": "wheel",
+  "id": "wheel-0168",
+  "name": "Muddied Fairy Tale",
+  "route": {
+    "slug": "muddied-fairy-tale",
+    "canonicalPath": "/database/wheels/muddied-fairy-tale"
+  },
+  "assets": {
+    "icon": "asset-wheel-0168-icon"
+  },
+  "rarity": "SR",
+  "realm": "NEUTRAL",
+  "mainstatKey": "SIGIL_YIELD",
+  "ownerAwakenerId": "awakener-0057",
+  "ownerAwakenerName": "Saya",
+  "lineupToken": "yZ",
+  "descriptionTemplate": "After using {Crimson Furnace}, the wielder gains Aliemus equal to [StateArg1]% of Base Aliemus.",
+  "descriptionArgs": {
+    "StateArg1": {
+      "kind": "scaling",
+      "values": ["4", "6", "8", "10"],
+      "suffix": "%"
+    }
+  },
+  "lore": "Coming Soon",
+  "searchTags": ["Aliemus"]
+}

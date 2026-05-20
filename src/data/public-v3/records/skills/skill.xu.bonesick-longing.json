@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0054",
   "slot": "Skill1",
-  "descriptionTemplate": "Deal [Damage:Arg1] guaranteed Critical Hit DMG to all enemies and inflict [Arg2]% {Poison}. {Resonance 3}: {Embryo Fusion} +[Arg4].",
+  "descriptionTemplate": "Deal [Damage:Arg1] guaranteed Critical Hit DMG to all enemies and trigger [Arg2]% {Poison}. {Resonance 3}: {Embryo Fusion} +[Arg4].",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
@@ -43,7 +43,7 @@
       "ownerAwakenerId": "awakener-0054",
       "ownerAwakenerName": "Xu",
       "patch": {
-        "descriptionTemplate": "Deal [Damage:Arg1] guaranteed Critical Hit DMG to all enemies and inflict [Arg2]% {Poison}, {Embryo Fusion}+ [Arg6]. {Resonance 3}: {Embryo Fusion} +[Arg4].",
+        "descriptionTemplate": "Deal [Damage:Arg1] guaranteed Critical Hit DMG to all enemies and trigger [Arg2]% {Poison}, {Embryo Fusion}+ [Arg6]. {Resonance 3}: {Embryo Fusion} +[Arg4].",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",

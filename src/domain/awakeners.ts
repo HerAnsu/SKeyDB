@@ -151,7 +151,12 @@ const parsedAwakeners = getPublicCatalogRecords('awakeners')
     }
   })
 assertUniqueIngameIds(parsedAwakeners)
+const awakenerById = new Map(parsedAwakeners.map((awakener) => [awakener.id, awakener]))
 
 export function getAwakeners(): Awakener[] {
   return parsedAwakeners
+}
+
+export function getAwakenerById(awakenerId: string): Awakener | undefined {
+  return awakenerById.get(awakenerId)
 }

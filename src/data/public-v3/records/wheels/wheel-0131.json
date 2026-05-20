@@ -16,7 +16,7 @@
   "ownerAwakenerId": "awakener-0035",
   "ownerAwakenerName": "Murphy: Fauxborn",
   "lineupToken": "yp",
-  "descriptionTemplate": "Team Unique: Hand Limit +2. Effects of the same type cannot stack. The wielder's Keyflare Regen and Exalt's Final DMG & Shield Generation +[StateArg1]%.\nSwitching to {Tranquil Sea} stance increases the wielder's Aliemus by [StateArg2], 3 turns cooldown.\nSwitching to {Raging Waves} stance inflicts [StateArg3] stacks of {Birth Ritual} on all enemies, 3 turns cooldown.",
+  "descriptionTemplate": "Hand Limit +2. {(Does not stack with other Wheels.)}\nThe Final DMG dealt by and Shield gained from the wielder's Exalt, as well as the wielder's Keyflare Regen, each +[StateArg1]%.\nWhen you switch to the {Tranquil Sea} stance, the wielder gains [StateArg2] Aliemus. This effect has a 3-turn cooldown.\nWhen you switch to the {Raging Waves} stance, inflict [StateArg3] stacks of {Birth Ritual} on all enemies. This effect has a 3-turn cooldown.",
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",

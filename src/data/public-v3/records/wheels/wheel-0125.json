@@ -17,18 +17,14 @@
   "descriptionTemplate": "Team Unique: After the wielder releases Exalt, Exalt Base DMG +[StateArg1]%, Shield and HP Recovery +[StateArg2]%, stacking up to 5 times. After completing exploration, the Affinity gained by the wielder +[StateArg3]%.",
   "descriptionArgs": {
     "StateArg1": {
-      "kind": "computed",
-      "formulaKey": "wheelRefinementLinear",
-      "baseValue": 7.0,
-      "perLevel": 1.0,
-      "inputs": ["wheelRefinementLevel"]
+      "kind": "scaling",
+      "values": ["7", "8", "9", "10"],
+      "suffix": "%"
     },
     "StateArg2": {
-      "kind": "computed",
-      "formulaKey": "wheelRefinementLinear",
-      "baseValue": 2.0,
-      "perLevel": 1.0,
-      "inputs": ["wheelRefinementLevel"]
+      "kind": "scaling",
+      "values": ["2", "3", "4", "5"],
+      "suffix": "%"
     },
     "StateArg3": {
       "kind": "scaling",

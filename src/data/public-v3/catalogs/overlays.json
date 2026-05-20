@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "overlays",
   "kind": "overlay",
-  "recordCount": 128,
+  "recordCount": 133,
   "records": [
     {
       "kind": "overlay",
@@ -158,23 +158,6 @@
       },
       "ownerAwakenerId": "awakener-0056",
       "ownerAwakenerName": "Arachne",
-      "overlayType": "mechanic",
-      "textColor": "affliction",
-      "aliases": []
-    },
-    {
-      "kind": "overlay",
-      "id": "overlay.castor.corrosion",
-      "name": "Corrosion",
-      "route": {
-        "slug": "corrosion",
-        "canonicalPath": "/database/awakeners/castor/overlays/corrosion"
-      },
-      "assets": {
-        "icon": "asset-overlay.castor.corrosion-icon"
-      },
-      "ownerAwakenerId": "awakener-0008",
-      "ownerAwakenerName": "Castor",
       "overlayType": "mechanic",
       "textColor": "affliction",
       "aliases": []
@@ -470,6 +453,21 @@
         "canonicalPath": "/database/overlays/chaos"
       },
       "overlayType": "realm",
+      "aliases": []
+    },
+    {
+      "kind": "overlay",
+      "id": "overlay.global.corrosion",
+      "name": "Corrosion",
+      "route": {
+        "slug": "corrosion",
+        "canonicalPath": "/database/overlays/corrosion"
+      },
+      "assets": {
+        "icon": "asset-overlay.global.corrosion-icon"
+      },
+      "overlayType": "mechanic",
+      "textColor": "affliction",
       "aliases": []
     },
     {
@@ -860,6 +858,18 @@
     },
     {
       "kind": "overlay",
+      "id": "overlay.global.perception-warp",
+      "name": "Perception Warp",
+      "route": {
+        "slug": "perception-warp",
+        "canonicalPath": "/database/overlays/perception-warp"
+      },
+      "overlayType": "mechanic",
+      "textColor": "misc",
+      "aliases": []
+    },
+    {
+      "kind": "overlay",
       "id": "overlay.global.pierce-dmg",
       "name": "Pierce DMG",
       "route": {
@@ -896,6 +906,28 @@
       "overlayType": "mechanic",
       "textColor": "damage",
       "aliases": ["Prepare 1", "Prepare 2", "Prepare 3", "Prepare 4", "Prepare 5"]
+    },
+    {
+      "kind": "overlay",
+      "id": "overlay.global.propagation-caro",
+      "name": "Propagation: Caro",
+      "route": {
+        "slug": "propagation-caro",
+        "canonicalPath": "/database/overlays/propagation-caro"
+      },
+      "overlayType": "realm",
+      "aliases": ["Propagation Caro", "Divine Caro", "Propagation: Caro Mastery"]
+    },
+    {
+      "kind": "overlay",
+      "id": "overlay.global.propagation-frenzy",
+      "name": "Propagation Frenzy",
+      "route": {
+        "slug": "propagation-frenzy",
+        "canonicalPath": "/database/overlays/propagation-frenzy"
+      },
+      "overlayType": "mechanic",
+      "aliases": ["Breeding Frenzy"]
     },
     {
       "kind": "overlay",
@@ -1431,6 +1463,19 @@
     },
     {
       "kind": "overlay",
+      "id": "overlay.horla.poetry-page",
+      "name": "Poetry Page",
+      "route": {
+        "slug": "poetry-page",
+        "canonicalPath": "/database/awakeners/horla/overlays/poetry-page"
+      },
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
+      "overlayType": "tag",
+      "aliases": ["Poetry Pages", "Poems"]
+    },
+    {
+      "kind": "overlay",
       "id": "overlay.kathigu-ra.combust",
       "name": "Combust",
       "route": {
@@ -1690,6 +1735,23 @@
       "overlayType": "mechanic",
       "textColor": "misc",
       "aliases": []
+    },
+    {
+      "kind": "overlay",
+      "id": "overlay.saya.gynoecium",
+      "name": "Gynoecium",
+      "route": {
+        "slug": "gynoecium",
+        "canonicalPath": "/database/awakeners/saya/overlays/gynoecium"
+      },
+      "assets": {
+        "icon": "asset-overlay.saya.gynoecium-icon"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "overlayType": "mechanic",
+      "textColor": "misc",
+      "aliases": ["Gynoecium stacks"]
     },
     {
       "kind": "overlay",

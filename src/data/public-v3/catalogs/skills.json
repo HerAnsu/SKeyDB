@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "skills",
   "kind": "skill",
-  "recordCount": 392,
+  "recordCount": 399,
   "records": [
     {
       "kind": "skill",
@@ -3867,6 +3867,90 @@
       "ownerAwakenerId": "awakener-0045",
       "ownerAwakenerName": "Sanga",
       "slot": "OverExalt"
+    },
+    {
+      "kind": "skill",
+      "id": "skill.saya.cognitive-alteration",
+      "name": "Cognitive Alteration",
+      "route": {
+        "slug": "cognitive-alteration",
+        "canonicalPath": "/database/awakeners/saya/skills/cognitive-alteration"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Rouse"
+    },
+    {
+      "kind": "skill",
+      "id": "skill.saya.defense",
+      "name": "Defense",
+      "route": {
+        "slug": "defense",
+        "canonicalPath": "/database/awakeners/saya/skills/defense"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Defense"
+    },
+    {
+      "kind": "skill",
+      "id": "skill.saya.genetics-copy",
+      "name": "Genetics Copy",
+      "route": {
+        "slug": "genetics-copy",
+        "canonicalPath": "/database/awakeners/saya/skills/genetics-copy"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Skill1"
+    },
+    {
+      "kind": "skill",
+      "id": "skill.saya.paradise-just-for-you",
+      "name": "Paradise Just For You",
+      "route": {
+        "slug": "paradise-just-for-you",
+        "canonicalPath": "/database/awakeners/saya/skills/paradise-just-for-you"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "OverExalt"
+    },
+    {
+      "kind": "skill",
+      "id": "skill.saya.song-of-saya",
+      "name": "Song of Saya",
+      "route": {
+        "slug": "song-of-saya",
+        "canonicalPath": "/database/awakeners/saya/skills/song-of-saya"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Exalt"
+    },
+    {
+      "kind": "skill",
+      "id": "skill.saya.strike",
+      "name": "Strike",
+      "route": {
+        "slug": "strike",
+        "canonicalPath": "/database/awakeners/saya/skills/strike"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Strike"
+    },
+    {
+      "kind": "skill",
+      "id": "skill.saya.viscera-blossoms",
+      "name": "Viscera Blossoms",
+      "route": {
+        "slug": "viscera-blossoms",
+        "canonicalPath": "/database/awakeners/saya/skills/viscera-blossoms"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Skill2"
     },
     {
       "kind": "skill",

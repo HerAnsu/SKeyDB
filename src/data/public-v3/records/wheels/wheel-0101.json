@@ -13,6 +13,8 @@
   "rarity": "SR",
   "realm": "NEUTRAL",
   "mainstatKey": "CRIT_RATE",
+  "ownerAwakenerId": "awakener-0046",
+  "ownerAwakenerName": "Sorel",
   "lineupToken": "xU",
   "descriptionTemplate": "Team Unique: Increases the DMG dealt by the wielder by [StateArg1]% of their Attack. If the current Realm is {Caro}, each time the {Devouring} Effect is triggered, it further increases the DMG dealt by the wielder by 3% of their Attack.",
   "descriptionArgs": {

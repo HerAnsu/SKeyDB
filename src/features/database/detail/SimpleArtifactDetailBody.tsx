@@ -5,6 +5,7 @@ import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-l
 import type {DescribedRecord} from '@/domain/description-records'
 import type {Posse} from '@/domain/posses'
 import type {PosseFullRecord} from '@/domain/posses-full'
+import {isPreReleaseAwakenerId} from '@/domain/pre-release'
 import type {PublicFormulaContext} from '@/domain/public-formula-context'
 import {getRealmAccent, getRealmLabel} from '@/domain/realms'
 import {
@@ -26,6 +27,7 @@ import {
 import {WheelLoreText} from '@/features/database/internal/WheelLoreText'
 
 import {OwnerAwakenerMetaLink} from './OwnerAwakenerMetaLink'
+import {PreReleaseDataNotice} from './PreReleaseDataNotice'
 
 interface SimpleArtifactDescriptionEntry {
   heading: string
@@ -44,6 +46,7 @@ interface SimpleArtifactDetailBodyProps {
   referenceLayer: ResolvedDatabaseReferenceLayer
   showTagIcons: boolean
   meta?: ReactNode
+  ownerAwakenerId?: string
 }
 
 export function SimpleArtifactDetailBody({
@@ -56,6 +59,7 @@ export function SimpleArtifactDetailBody({
   meta,
   acquisitionSource,
   onOpenArtViewer,
+  ownerAwakenerId,
   referenceLayer,
   showTagIcons,
 }: SimpleArtifactDetailBodyProps) {
@@ -87,6 +91,7 @@ export function SimpleArtifactDetailBody({
       </div>
 
       <div className='database-scrollbar min-h-0 flex-1 overflow-y-auto pr-1 pb-6 pl-2'>
+        {isPreReleaseAwakenerId(ownerAwakenerId) ? <PreReleaseDataNotice /> : null}
         {descriptions.map((entry) => (
           <section className='mt-5' key={entry.record.id}>
             <h4

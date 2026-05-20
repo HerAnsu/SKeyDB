@@ -427,6 +427,11 @@
         "order": 1000
       },
       {
+        "value": "TBD",
+        "label": "Tbd",
+        "order": 1000
+      },
+      {
         "value": "The Fools",
         "label": "The Fools",
         "order": 1000
@@ -1117,6 +1122,11 @@
         "value": "awakener-0056",
         "label": "Arachne",
         "order": 55
+      },
+      {
+        "value": "awakener-0057",
+        "label": "Saya",
+        "order": 56
       }
     ]
   },
@@ -1153,11 +1163,6 @@
         "value": "awakener-0003",
         "label": "Aigis",
         "order": 2
-      },
-      {
-        "value": "awakener-0008",
-        "label": "Castor",
-        "order": 7
       },
       {
         "value": "awakener-0009",
@@ -1248,6 +1253,11 @@
         "value": "awakener-0056",
         "label": "Arachne",
         "order": 55
+      },
+      {
+        "value": "awakener-0057",
+        "label": "Saya",
+        "order": 56
       }
     ]
   },
@@ -1429,6 +1439,11 @@
         "value": "awakener-0055",
         "label": "Vortice",
         "order": 54
+      },
+      {
+        "value": "awakener-0057",
+        "label": "Saya",
+        "order": 56
       }
     ]
   },
@@ -2068,6 +2083,11 @@
         "value": "awakener-0056",
         "label": "Arachne",
         "order": 55
+      },
+      {
+        "value": "awakener-0057",
+        "label": "Saya",
+        "order": 56
       }
     ]
   },
@@ -2374,6 +2394,11 @@
         "value": "awakener-0056",
         "label": "Arachne",
         "order": 55
+      },
+      {
+        "value": "awakener-0057",
+        "label": "Saya",
+        "order": 56
       }
     ]
   },
@@ -2744,6 +2769,11 @@
         "value": "awakener-0056",
         "label": "Arachne",
         "order": 55
+      },
+      {
+        "value": "awakener-0057",
+        "label": "Saya",
+        "order": 56
       }
     ],
     "tags": [
