@@ -2,12 +2,14 @@ import type {DatabaseAwakenerTab} from '@/domain/database-paths'
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 import type {WheelDatabaseDescriptionRecord} from '@/domain/description-records'
 import {getMainstatByKey, getMainstatIcon} from '@/domain/mainstats'
+import {isPreReleaseAwakenerId} from '@/domain/pre-release'
 import type {PublicFormulaContext} from '@/domain/public-formula-context'
 import {getRealmAccent, getRealmLabel} from '@/domain/realms'
 import {buildWheelMainstatHover} from '@/domain/wheel-mainstat-scaling'
 import type {Wheel} from '@/domain/wheels'
 import type {WheelFullRecord} from '@/domain/wheels-full'
 import {OwnerAwakenerMetaLink} from '@/features/database/detail/OwnerAwakenerMetaLink'
+import {PreReleaseDataNotice} from '@/features/database/detail/PreReleaseDataNotice'
 
 import {
   DATABASE_DETAIL_BODY_CLASS,
@@ -108,6 +110,7 @@ export function WheelDetailContent({
         className='database-scrollbar mt-0 min-h-0 flex-1 overflow-y-auto pr-1 pb-6 pl-2'
         data-wheel-detail-scroll=''
       >
+        {isPreReleaseAwakenerId(ownerAwakenerId) ? <PreReleaseDataNotice /> : null}
         <section className='space-y-4 border-b border-slate-800/75 py-4'>
           <div className='flex flex-wrap items-center gap-3'>
             {mainstatIcon ? (

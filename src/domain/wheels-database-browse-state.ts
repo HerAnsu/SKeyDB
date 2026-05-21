@@ -93,6 +93,7 @@ export function parseWheelsDatabaseBrowseState(
 export function patchWheelsDatabaseBrowseState(
   searchParams: URLSearchParams,
   patch: Partial<WheelsDatabaseBrowseState>,
+  {includeSortParams = true}: {includeSortParams?: boolean} = {},
 ): URLSearchParams {
   return patchSearchParams(
     searchParams,
@@ -121,20 +122,25 @@ export function patchWheelsDatabaseBrowseState(
           ? undefined
           : patchedState.mainstatFilter,
       )
-      setSearchParam(
-        nextParams,
-        'sort',
-        patchedState.sortKey === WHEELS_DATABASE_BROWSE_DEFAULTS.sortKey
-          ? undefined
-          : patchedState.sortKey,
-      )
-      setSearchParam(
-        nextParams,
-        'dir',
-        patchedState.sortDirection === getDefaultWheelsDatabaseSortDirection(patchedState.sortKey)
-          ? undefined
-          : patchedState.sortDirection,
-      )
+      if (includeSortParams) {
+        setSearchParam(
+          nextParams,
+          'sort',
+          patchedState.sortKey === WHEELS_DATABASE_BROWSE_DEFAULTS.sortKey
+            ? undefined
+            : patchedState.sortKey,
+        )
+        setSearchParam(
+          nextParams,
+          'dir',
+          patchedState.sortDirection === getDefaultWheelsDatabaseSortDirection(patchedState.sortKey)
+            ? undefined
+            : patchedState.sortDirection,
+        )
+      } else {
+        nextParams.delete('sort')
+        nextParams.delete('dir')
+      }
     },
     (currentState, nextPatch) => {
       const nextState = {

@@ -63,13 +63,25 @@ interface BuildWheelReferenceInfoEntriesOptions {
   formulaContext?: PublicFormulaContext
 }
 
+let defaultWheelReferenceInfoEntriesCache:
+  | DatabaseReferenceInfo<WheelDatabaseDescriptionRecord>[]
+  | null = null
+
 export function buildWheelReferenceInfoEntries({
   activeDescriptionRank = 1,
   activeWheelId,
   formulaContext,
-  wheelRecords = getWheelsFull(),
+  wheelRecords,
 }: BuildWheelReferenceInfoEntriesOptions = {}): DatabaseReferenceInfo<WheelDatabaseDescriptionRecord>[] {
-  return wheelRecords.map((record) =>
+  if (!activeWheelId && !formulaContext && activeDescriptionRank === 1 && !wheelRecords) {
+    defaultWheelReferenceInfoEntriesCache ??= getWheelsFull().map((record) =>
+      buildWheelReferenceInfo(record, 1),
+    )
+    return defaultWheelReferenceInfoEntriesCache
+  }
+
+  const resolvedWheelRecords = wheelRecords ?? getWheelsFull()
+  return resolvedWheelRecords.map((record) =>
     buildWheelReferenceInfo(
       record,
       activeWheelId && record.id === activeWheelId ? activeDescriptionRank : 1,

@@ -16,7 +16,7 @@
   "ownerAwakenerId": "awakener-0023",
   "ownerAwakenerName": "Helot",
   "lineupToken": "3",
-  "descriptionTemplate": "Team Unique: The Base DMG dealt by the wielder's cards +[StateArg1]%. At turn start, there is a [StateArg2]% chance to generate a random card of the wielder into the hand with added {Exhaust}. If the current realm is {Caro}, using {Embryo} on the wielder increases the Crit. Rate of the wielder's next \"Strike\" card's DMG this turn by +[StateArg3]%.",
+  "descriptionTemplate": "The Base DMG of the wielder's cards +[StateArg1]%.\nAt the start of each turn, there is a [StateArg2]% chance to create a Basic Copy of a random one of the wielder's non-Derived Command Cards; the copy has {Exhaust}.\nWhenever an {Embryo} is played targeting the wielder, the Crit. Rate of their next Strike Command +[StateArg3]%.",
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",

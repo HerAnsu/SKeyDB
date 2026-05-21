@@ -7,7 +7,15 @@ import {DatabaseGrid} from './DatabaseGrid'
 
 describe('DatabaseGrid', () => {
   it('defers lower-priority grid portraits while keeping the first twenty-four cards eager', async () => {
-    render(<DatabaseGrid awakeners={getAwakeners().slice(0, 30)} onSelectAwakener={vi.fn()} />)
+    render(
+      <DatabaseGrid
+        availabilityFilter='ALL'
+        awakeners={getAwakeners().slice(0, 30)}
+        onSelectAwakener={vi.fn()}
+        rarityFilter='ALL'
+        sortKey='BEST_MATCH'
+      />,
+    )
 
     expect(screen.getAllByRole('button', {name: /View details for/})).toHaveLength(30)
 

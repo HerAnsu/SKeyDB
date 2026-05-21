@@ -16,7 +16,7 @@
   "ownerAwakenerId": "awakener-0029",
   "ownerAwakenerName": "Lily",
   "lineupToken": "R",
-  "descriptionTemplate": "Team Unique: The wielder's {Poison} and Shield Generation +[StateArg3]%. the wielder's \"Strike\" Crit. Rate and Crit. DMG increase by [StateArg1]%, and gain a Shield equal to [StateArg2]% of Max HP. The Shield Effect can only activate once per turn.",
+  "descriptionTemplate": "{Poison} inflicted by and Shield gained from the wielder each +[StateArg3]%, and the Crit. Rate & Crit. DMG of the wielder's Strike Commands +[StateArg1]%.\nThe first time one of their Strike Commands is played each turn, gain Shield equal to [StateArg2]% of Max HP.",
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
@@ -24,11 +24,9 @@
       "suffix": "%"
     },
     "StateArg2": {
-      "kind": "computed",
-      "formulaKey": "wheelRefinementLinear",
-      "baseValue": 4.0,
-      "perLevel": 1.0,
-      "inputs": ["wheelRefinementLevel"]
+      "kind": "scaling",
+      "values": ["4", "5", "6", "7"],
+      "suffix": "%"
     },
     "StateArg3": {
       "kind": "scaling",

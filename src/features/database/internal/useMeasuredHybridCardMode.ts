@@ -1,39 +1,57 @@
 import {useCallback, useLayoutEffect, useState} from 'react'
 
-import type {HybridDatabaseCardMode} from './hybrid-database-card-mode'
+import type {HybridDatabaseCardMode} from './DatabaseGridCardFrame'
 
-const HYBRID_DOSSIER_CONTAINER_WIDTH = 620
+const PORTRAIT_CARD_MAX_WIDTH = 148 // Mirrors --database-card-max: 9.25rem.
+const PORTRAIT_CARD_SWITCH_GAP = 12 // Matches the grid gap before the dossier switch.
+const THREE_COLUMN_PORTRAIT_WIDTH = PORTRAIT_CARD_MAX_WIDTH * 3 + PORTRAIT_CARD_SWITCH_GAP * 2
 
 function resolveHybridDatabaseCardMode(inlineSize: number): HybridDatabaseCardMode {
-  return inlineSize <= HYBRID_DOSSIER_CONTAINER_WIDTH ? 'dossier' : 'poster'
+  return inlineSize < THREE_COLUMN_PORTRAIT_WIDTH ? 'dossier' : 'poster'
 }
 
-export function useMeasuredHybridCardMode(isHybridGrid: boolean, hasItems: boolean) {
+function isReadonlyArray(value: unknown): value is readonly unknown[] {
+  return Array.isArray(value)
+}
+
+function hasInlineSize(value: unknown): value is {readonly inlineSize: unknown} {
+  return value !== null && typeof value === 'object' && 'inlineSize' in value
+}
+
+function getInlineSizeFromBox(boxSize: unknown): number | null {
+  if (!hasInlineSize(boxSize)) {
+    return null
+  }
+
+  const {inlineSize} = boxSize
+  return typeof inlineSize === 'number' ? inlineSize : null
+}
+
+function getResizeObserverInlineSize(entry: ResizeObserverEntry): number {
+  const boxSize: unknown = entry.contentBoxSize
+
+  if (isReadonlyArray(boxSize)) {
+    return getInlineSizeFromBox(boxSize[0]) ?? entry.contentRect.width
+  }
+
+  return getInlineSizeFromBox(boxSize) ?? entry.contentRect.width
+}
+
+export function useMeasuredHybridCardMode() {
   const [element, setElement] = useState<HTMLDivElement | null>(null)
-  const [mode, setMode] = useState<HybridDatabaseCardMode | null>(isHybridGrid ? null : 'poster')
-  const ref = useCallback(
-    (node: HTMLDivElement | null) => {
-      setElement(node)
-      if (!isHybridGrid || !hasItems || !node) {
-        return
-      }
-      const inlineSize = node.getBoundingClientRect().width
-      if (inlineSize > 0) {
-        setMode(resolveHybridDatabaseCardMode(inlineSize))
-      }
-    },
-    [hasItems, isHybridGrid],
-  )
+  const [mode, setMode] = useState<HybridDatabaseCardMode>('poster')
+  const ref = useCallback((node: HTMLDivElement | null) => {
+    setElement(node)
+    if (!node) {
+      return
+    }
+    const inlineSize = node.getBoundingClientRect().width
+    if (inlineSize > 0) {
+      setMode(resolveHybridDatabaseCardMode(inlineSize))
+    }
+  }, [])
 
   useLayoutEffect(() => {
-    if (!isHybridGrid) {
-      return undefined
-    }
-
-    if (!hasItems) {
-      return undefined
-    }
-
     if (!element) {
       return undefined
     }
@@ -57,21 +75,17 @@ export function useMeasuredHybridCardMode(isHybridGrid: boolean, hasItems: boole
         window.removeEventListener('resize', measureElement)
       }
     }
-    window.addEventListener('resize', measureElement)
-
     const observer = new ResizeObserver((entries) => {
       const entry = entries[0]
-      const inlineSize = entry.contentBoxSize[0]?.inlineSize ?? entry.contentRect.width
-      updateMode(inlineSize)
+      updateMode(getResizeObserverInlineSize(entry))
     })
     observer.observe(element)
 
     return () => {
       cancelAnimationFrame(frame)
-      window.removeEventListener('resize', measureElement)
       observer.disconnect()
     }
-  }, [element, hasItems, isHybridGrid])
+  }, [element])
 
   return {mode, ref}
 }

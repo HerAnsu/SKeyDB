@@ -34,6 +34,7 @@ export function EntityViewControls<TSortKey extends string>({
   sortSelectAriaLabel,
 }: EntityViewControlsProps<TSortKey>) {
   const directionLabel = getSortDirectionLabel(sortKey, sortDirection)
+  const showSortDirection = directionLabel.length > 0
 
   return (
     <div
@@ -56,19 +57,21 @@ export function EntityViewControls<TSortKey extends string>({
           </option>
         ))}
       </select>
-      <button
-        aria-label={sortDirectionAriaLabel}
-        className={`inline-flex items-center justify-center gap-1 ${DATABASE_CONTROL_CLASS_NAME}`}
-        onClick={onSortDirectionToggle}
-        type='button'
-      >
-        {sortDirection === 'DESC' ? (
-          <FaCaretDown aria-hidden className='text-[11px]' />
-        ) : (
-          <FaCaretUp aria-hidden className='text-[11px]' />
-        )}
-        <span>{directionLabel}</span>
-      </button>
+      {showSortDirection ? (
+        <button
+          aria-label={sortDirectionAriaLabel}
+          className={`inline-flex items-center justify-center gap-1 ${DATABASE_CONTROL_CLASS_NAME}`}
+          onClick={onSortDirectionToggle}
+          type='button'
+        >
+          {sortDirection === 'DESC' ? (
+            <FaCaretDown aria-hidden className='text-[11px]' />
+          ) : (
+            <FaCaretUp aria-hidden className='text-[11px]' />
+          )}
+          <span>{directionLabel}</span>
+        </button>
+      ) : null}
       {groupByRealm !== undefined && onGroupByRealmChange ? (
         <FilterChipButton
           active={groupByRealm}

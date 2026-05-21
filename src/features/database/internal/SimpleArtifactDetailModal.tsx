@@ -104,6 +104,8 @@ function SimpleArtifactDetailModalInner({
   const headerIconAsset =
     kind === 'posse' ? getPosseAssetById(item.id) : getCovenantAssetById(item.id)
   const fullArtAlt = `${item.name} full art`
+  const preReleaseOwnerAwakenerId =
+    kind === 'posse' ? (fullData.ownerAwakenerId ?? item.ownerAwakenerId) : undefined
 
   return (
     <DbDetailShell
@@ -133,6 +135,7 @@ function SimpleArtifactDetailModalInner({
             ) : null
           }
           onOpenArtViewer={openArtViewer}
+          ownerAwakenerId={preReleaseOwnerAwakenerId}
           referenceLayer={referenceLayer}
           showTagIcons={preferences.shared.showTagIcons}
           acquisitionSource={fullData.acquisitionSource}

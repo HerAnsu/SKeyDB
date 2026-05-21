@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 3,
+  "kind": "awakener",
+  "id": "awakener-0057",
+  "name": "Saya",
+  "route": {
+    "slug": "saya",
+    "canonicalPath": "/database/awakeners/saya"
+  },
+  "assets": {
+    "icon": "asset-awakener-0057-icon"
+  },
+  "numericId": 57,
+  "ingameId": "B15",
+  "lineupToken": "xl",
+  "realm": "CARO",
+  "rarity": "SSR",
+  "type": "CHORUS",
+  "availabilityType": "LIMITED_ASTRAL_REIGN",
+  "releaseDate": "2026-05-30",
+  "faction": "TBD",
+  "aliases": ["saya"],
+  "searchTags": ["Discard", "Corrosion", "Divine Realm", "Self-Damage"],
+  "primaryScalingBase": 20,
+  "baseStatsLv1": {
+    "CON": 25,
+    "ATK": 25,
+    "DEF": 24
+  },
+  "substatsLv1": {
+    "CritRate": 5,
+    "CritDamage": 50,
+    "AliemusRegen": 0,
+    "KeyflareRegen": 15,
+    "RealmMastery": 2,
+    "SigilYield": 1.2,
+    "DamageAmplification": 0,
+    "DeathResistance": 0
+  },
+  "statScaling": {
+    "CON": 1.15,
+    "ATK": 1.15,
+    "DEF": 1.1
+  },
+  "substatScaling": {
+    "CritRate": 0,
+    "CritDamage": 0,
+    "AliemusRegen": 0,
+    "KeyflareRegen": 0,
+    "RealmMastery": 2,
+    "SigilYield": 1.2,
+    "DamageAmplification": 0,
+    "DeathResistance": 0
+  },
+  "profile": {
+    "title": "Saya",
+    "birthday": "TBD",
+    "gender": "TBD",
+    "height": "TBD",
+    "weight": "TBD",
+    "gnosticIndex": "TBD",
+    "faction": "TBD",
+    "storySections": [
+      {
+        "kind": "introduction",
+        "title": "Basic Information",
+        "content": "Coming Soon"
+      }
+    ],
+    "characteristic": "TBD",
+    "introduction": "Coming Soon",
+    "awakerIntroduction": "Coming Soon"
+  }
+}

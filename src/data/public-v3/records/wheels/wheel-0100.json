@@ -13,6 +13,8 @@
   "rarity": "SR",
   "realm": "NEUTRAL",
   "mainstatKey": "DEATH_RESISTANCE",
+  "ownerAwakenerId": "awakener-0024",
+  "ownerAwakenerName": "Horla",
   "lineupToken": "xR",
   "descriptionTemplate": "Team Unique: At the start of battle, draw 1 Command Card of the wielder and have a [StateArg1]% chance to reduce its Arithmetica Cost by 1. Each time {Death Resistance} is triggered, this effect is repeated once.",
   "descriptionArgs": {

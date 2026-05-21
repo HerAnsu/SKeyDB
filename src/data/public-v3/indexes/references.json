@@ -739,6 +739,12 @@
         "id": "derived.daffodil.thousand-mirage-effect-brawn"
       }
     ],
+    "breeding frenzy": [
+      {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-frenzy"
+      }
+    ],
     "bubbling journey": [
       {
         "kind": "enlighten",
@@ -1231,6 +1237,12 @@
         "id": "covenant-0021"
       }
     ],
+    "cognitive alteration": [
+      {
+        "kind": "skill",
+        "id": "skill.saya.cognitive-alteration"
+      }
+    ],
     "collaboration": [
       {
         "kind": "overlay",
@@ -1312,7 +1324,7 @@
     "corrosion": [
       {
         "kind": "overlay",
-        "id": "overlay.castor.corrosion"
+        "id": "overlay.global.corrosion"
       }
     ],
     "corrupted flames": [
@@ -2051,6 +2063,12 @@
       {
         "kind": "skill",
         "id": "skill.tinct.distant-melody"
+      }
+    ],
+    "divine caro": [
+      {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-caro"
       }
     ],
     "divine kings power": [
@@ -2839,6 +2857,12 @@
         "id": "enlighten.sorel.flowing-rill"
       }
     ],
+    "for the new world": [
+      {
+        "kind": "posse",
+        "id": "posse-0051"
+      }
+    ],
     "forbidden lore": [
       {
         "kind": "overlay",
@@ -2953,6 +2977,12 @@
         "id": "overlay.global.fragile"
       }
     ],
+    "fragrant morphogenesis": [
+      {
+        "kind": "wheel",
+        "id": "wheel-0167"
+      }
+    ],
     "frenzied slash": [
       {
         "kind": "skill",
@@ -3047,6 +3077,12 @@
       {
         "kind": "awakenerBuild",
         "id": "awakener-build-0008"
+      }
+    ],
+    "genetics copy": [
+      {
+        "kind": "skill",
+        "id": "skill.saya.genetics-copy"
       }
     ],
     "get em brown": [
@@ -3163,6 +3199,18 @@
         "id": "derived.arachne.guiding-strings"
       }
     ],
+    "gynoecium": [
+      {
+        "kind": "overlay",
+        "id": "overlay.saya.gynoecium"
+      }
+    ],
+    "gynoecium stacks": [
+      {
+        "kind": "overlay",
+        "id": "overlay.saya.gynoecium"
+      }
+    ],
     "hameln": [
       {
         "kind": "awakener",
@@ -3263,6 +3311,12 @@
       {
         "kind": "skill",
         "id": "skill.vortice.here-it-goes"
+      }
+    ],
+    "here my one last gift": [
+      {
+        "kind": "enlighten",
+        "id": "enlighten.saya.here-my-one-last-gift"
       }
     ],
     "heres your meal": [
@@ -3473,6 +3527,12 @@
       {
         "kind": "derivedSkill",
         "id": "derived.global.ichigo-ichie"
+      }
+    ],
+    "ill be your very own monster": [
+      {
+        "kind": "enlighten",
+        "id": "enlighten.saya.ill-be-your-very-own-monster"
       }
     ],
     "illusions end": [
@@ -4351,6 +4411,12 @@
         "id": "awakener-build-0033"
       }
     ],
+    "muddied fairy tale": [
+      {
+        "kind": "wheel",
+        "id": "wheel-0168"
+      }
+    ],
     "mundus decree": [
       {
         "kind": "skill",
@@ -4391,6 +4457,12 @@
       {
         "kind": "awakenerBuild",
         "id": "awakener-build-0035"
+      }
+    ],
+    "must be what they call love": [
+      {
+        "kind": "enlighten",
+        "id": "enlighten.saya.must-be-what-they-call-love"
       }
     ],
     "mutated heart": [
@@ -4891,6 +4963,12 @@
         "id": "overlay.global.perception"
       }
     ],
+    "perception warp": [
+      {
+        "kind": "overlay",
+        "id": "overlay.global.perception-warp"
+      }
+    ],
     "petrify": [
       {
         "kind": "overlay",
@@ -4969,10 +5047,28 @@
         "id": "talent.tinct.planetary-traveler"
       }
     ],
+    "poems": [
+      {
+        "kind": "overlay",
+        "id": "overlay.horla.poetry-page"
+      }
+    ],
     "poetic bygone days": [
       {
         "kind": "wheel",
         "id": "wheel-0100"
+      }
+    ],
+    "poetry page": [
+      {
+        "kind": "overlay",
+        "id": "overlay.horla.poetry-page"
+      }
+    ],
+    "poetry pages": [
+      {
+        "kind": "overlay",
+        "id": "overlay.horla.poetry-page"
       }
     ],
     "poison": [
@@ -5135,6 +5231,24 @@
       {
         "kind": "enlighten",
         "id": "enlighten.murphy-fauxborn.profane-apocalypse"
+      }
+    ],
+    "propagation caro mastery": [
+      {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-caro"
+      }
+    ],
+    "propagation frenzy": [
+      {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-frenzy"
+      }
+    ],
+    "propagule embryo": [
+      {
+        "kind": "derivedSkill",
+        "id": "derived.global.propagule-embryo"
       }
     ],
     "prophets lamp": [
@@ -5719,6 +5833,12 @@
         "id": "skill.leigh.sanguivore"
       }
     ],
+    "saya": [
+      {
+        "kind": "awakener",
+        "id": "awakener-0057"
+      }
+    ],
     "scarlet embrace": [
       {
         "kind": "covenant",
@@ -6095,6 +6215,12 @@
       {
         "kind": "overlay",
         "id": "overlay.global.forbidden-lore"
+      }
+    ],
+    "song of saya": [
+      {
+        "kind": "skill",
+        "id": "skill.saya.song-of-saya"
       }
     ],
     "song of the bound": [
@@ -7273,6 +7399,12 @@
         "id": "enlighten.sorel.vintage-nectar"
       }
     ],
+    "viscera blossoms": [
+      {
+        "kind": "skill",
+        "id": "skill.saya.viscera-blossoms"
+      }
+    ],
     "viscous devour": [
       {
         "kind": "enlighten",
@@ -7475,6 +7607,12 @@
       {
         "kind": "wheel",
         "id": "wheel-0025"
+      }
+    ],
+    "will you stay with me always": [
+      {
+        "kind": "enlighten",
+        "id": "enlighten.saya.will-you-stay-with-me-always"
       }
     ],
     "willing sacrifice": [
@@ -7934,6 +8072,10 @@
       },
       {
         "kind": "skill",
+        "id": "skill.saya.defense"
+      },
+      {
+        "kind": "skill",
         "id": "skill.sorel.defense"
       },
       {
@@ -8302,6 +8444,10 @@
       },
       {
         "kind": "talent",
+        "id": "talent.saya.gnostic-potential"
+      },
+      {
+        "kind": "talent",
         "id": "talent.sorel.gnostic-potential"
       },
       {
@@ -8662,6 +8808,10 @@
       },
       {
         "kind": "talent",
+        "id": "talent.saya.madness-omen"
+      },
+      {
+        "kind": "talent",
         "id": "talent.sorel.madness-omen"
       },
       {
@@ -8771,6 +8921,16 @@
         "id": "skill.doresain.pandemonium-glut"
       }
     ],
+    "paradise just for you": [
+      {
+        "kind": "enlighten",
+        "id": "enlighten.saya.paradise-just-for-you"
+      },
+      {
+        "kind": "skill",
+        "id": "skill.saya.paradise-just-for-you"
+      }
+    ],
     "phantasmal haze": [
       {
         "kind": "enlighten",
@@ -8779,6 +8939,16 @@
       {
         "kind": "skill",
         "id": "skill.daffodil.phantasmal-haze"
+      }
+    ],
+    "propagation caro": [
+      {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-caro"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.saya.propagation-caro"
       }
     ],
     "psyche dissection": [
@@ -9035,6 +9205,10 @@
       {
         "kind": "talent",
         "id": "talent.sanga.soulforge-aptitude"
+      },
+      {
+        "kind": "talent",
+        "id": "talent.saya.soulforge-aptitude"
       },
       {
         "kind": "talent",
@@ -9451,6 +9625,10 @@
       {
         "kind": "skill",
         "id": "skill.sanga.strike"
+      },
+      {
+        "kind": "skill",
+        "id": "skill.saya.strike"
       },
       {
         "kind": "skill",

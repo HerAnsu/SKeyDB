@@ -15,6 +15,7 @@ import type {PublicFormulaContext} from '@/domain/public-formula-context'
 import type {
   DatabasePopoverAnchorEvent,
   DatabasePopoverContextValue,
+  DatabasePopoverDescriptionRankContext,
 } from './database-popover-context'
 import {
   buildOverlayEntry,
@@ -24,6 +25,7 @@ import {
   resolveNavigationHandler,
   resolveOverlayReference,
   resolveReferenceByName,
+  withDescriptionRankContext,
   withInheritedReferenceLayerOverride,
 } from './database-popover-controller-model'
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
@@ -45,6 +47,7 @@ interface DatabasePopoverTrailActionsOptions {
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   formulaContext?: PublicFormulaContext
   selectedEnlightenSlot: AwakenerEnlightenRecord['slot'] | null
+  currentDescriptionRankContext?: DatabasePopoverDescriptionRankContext
   stats: FullStats | null
   onNavigateToSkills?: () => void
   onNavigateToWheelPage?: (wheel: {id: string; name: string}) => void
@@ -59,6 +62,7 @@ export function useDatabasePopoverTrailActions({
   referenceLayer,
   formulaContext,
   selectedEnlightenSlot,
+  currentDescriptionRankContext,
   stats,
   onNavigateToSkills,
   onNavigateToWheelPage,
@@ -154,6 +158,7 @@ export function useDatabasePopoverTrailActions({
     onToggleEnlightenSlot,
     referenceLayer,
     selectedEnlightenSlot,
+    currentDescriptionRankContext,
     showTagIcons,
     showVisibleScaling,
     stats,
@@ -245,14 +250,19 @@ function useDatabasePopoverRootActions({
   )
 
   const openHydratedRootReferenceAtAnchor = useCallback(
-    (reference: DatabaseReferenceInfo, anchorElement: HTMLElement, anchorRect: DOMRect) => {
+    (
+      reference: DatabaseReferenceInfo,
+      anchorElement: HTMLElement,
+      anchorRect: DOMRect,
+      rankContext?: DatabasePopoverDescriptionRankContext,
+    ) => {
       const hydrationRequest = invalidateRootHydration()
       void hydrateReference(reference).then((hydratedReference) => {
         if (hydrationRequest !== rootHydrationRequestRef.current) {
           return
         }
         openRootTrailEntryAtAnchor(
-          buildSelectedTrailEntry(hydratedReference),
+          withDescriptionRankContext(buildSelectedTrailEntry(hydratedReference), rankContext),
           anchorElement,
           anchorRect,
         )
@@ -299,9 +309,13 @@ function useDatabasePopoverRootActions({
   )
 
   const openRootOverlay = useCallback(
-    (overlay: AwakenerOverlayRecord, event: DatabasePopoverAnchorEvent) => {
+    (
+      overlay: AwakenerOverlayRecord,
+      event: DatabasePopoverAnchorEvent,
+      rankContext?: DatabasePopoverDescriptionRankContext,
+    ) => {
       event.stopPropagation()
-      const entry = buildOverlayEntry({overlay, referenceLayer, selectedEnlightenSlot})
+      const entry = buildOverlayEntry({overlay, rankContext, referenceLayer, selectedEnlightenSlot})
       const reference = resolveOverlayReference(referenceLayer, overlay)
       if (!reference || !needsLazyReferenceHydration(reference)) {
         openRootTrailEntry(entry, event)
@@ -313,6 +327,7 @@ function useDatabasePopoverRootActions({
         reference,
         anchorElement,
         anchorElement.getBoundingClientRect(),
+        rankContext,
       )
     },
     [openHydratedRootReferenceAtAnchor, openRootTrailEntry, referenceLayer, selectedEnlightenSlot],
@@ -342,7 +357,12 @@ function useDatabasePopoverNestedActions({
   setTrail,
 }: NestedActionOptions) {
   const queueHydratedNestedReference = useCallback(
-    (sourceIndex: number, sourceKey: string | undefined, reference: DatabaseReferenceInfo) => {
+    (
+      sourceIndex: number,
+      sourceKey: string | undefined,
+      reference: DatabaseReferenceInfo,
+      rankContext?: DatabasePopoverDescriptionRankContext,
+    ) => {
       void hydrateReference(reference).then((hydratedReference) => {
         setTrail((current) => {
           const currentSourceEntry = current.at(sourceIndex)
@@ -354,7 +374,11 @@ function useDatabasePopoverNestedActions({
             currentSourceEntry.selectedEnlightenSlot ?? selectedEnlightenSlot,
             currentSourceEntry.referenceLayerOverride ?? null,
           )
-          return insertTrailEntryAfterIndex(current, sourceIndex, entry)
+          return insertTrailEntryAfterIndex(
+            current,
+            sourceIndex,
+            withDescriptionRankContext(entry, rankContext),
+          )
         })
       })
     },
@@ -409,12 +433,17 @@ function useDatabasePopoverNestedActions({
   )
 
   const openNestedOverlayFrom = useCallback(
-    (sourceIndex: number, overlay: AwakenerOverlayRecord) => {
+    (
+      sourceIndex: number,
+      overlay: AwakenerOverlayRecord,
+      rankContext?: DatabasePopoverDescriptionRankContext,
+    ) => {
       setTrail((prev) =>
         openNestedOverlayFromTrail({
           overlay,
           prev,
           queueHydratedNestedReference,
+          rankContext,
           referenceLayer,
           selectedEnlightenSlot,
           sourceIndex,
@@ -425,12 +454,13 @@ function useDatabasePopoverNestedActions({
   )
 
   const openNestedOverlay = useCallback(
-    (overlay: AwakenerOverlayRecord) => {
+    (overlay: AwakenerOverlayRecord, rankContext?: DatabasePopoverDescriptionRankContext) => {
       setTrail((prev) =>
         openNestedOverlayFromTrail({
           overlay,
           prev,
           queueHydratedNestedReference,
+          rankContext,
           referenceLayer,
           selectedEnlightenSlot,
           sourceIndex: prev.length - 1,
@@ -462,6 +492,7 @@ function openNestedOverlayFromTrail({
   overlay,
   prev,
   queueHydratedNestedReference,
+  rankContext,
   referenceLayer,
   selectedEnlightenSlot,
   sourceIndex,
@@ -472,7 +503,9 @@ function openNestedOverlayFromTrail({
     sourceIndex: number,
     sourceKey: string | undefined,
     reference: DatabaseReferenceInfo,
+    rankContext?: DatabasePopoverDescriptionRankContext,
   ) => void
+  rankContext?: DatabasePopoverDescriptionRankContext
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot: AwakenerEnlightenRecord['slot'] | null
   sourceIndex: number
@@ -481,11 +514,12 @@ function openNestedOverlayFromTrail({
   const sourceLayer = sourceEntry?.referenceLayerOverride ?? referenceLayer
   const reference = resolveOverlayReference(sourceLayer, overlay)
   if (reference && needsLazyReferenceHydration(reference)) {
-    queueHydratedNestedReference(sourceIndex, sourceEntry?.key, reference)
+    queueHydratedNestedReference(sourceIndex, sourceEntry?.key, reference, rankContext)
     return prev
   }
   const entry = buildOverlayEntry({
     overlay,
+    rankContext,
     referenceLayer,
     referenceLayerOverride: sourceEntry?.referenceLayerOverride ?? null,
     selectedEnlightenSlot,
@@ -504,6 +538,7 @@ interface RootPropsOptions {
   onToggleEnlightenSlot?: (slot: AwakenerEnlightenRecord['slot']) => void
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot: AwakenerEnlightenRecord['slot'] | null
+  currentDescriptionRankContext?: DatabasePopoverDescriptionRankContext
   showTagIcons: boolean
   showVisibleScaling: boolean
   stats: FullStats | null
@@ -523,6 +558,7 @@ function useDatabasePopoverRootProps({
   onToggleEnlightenSlot,
   referenceLayer,
   selectedEnlightenSlot,
+  currentDescriptionRankContext,
   showTagIcons,
   showVisibleScaling,
   stats,
@@ -549,6 +585,7 @@ function useDatabasePopoverRootProps({
           onNavigateToWheelPage,
           referenceLayer,
           selectedEnlightenSlot,
+          currentDescriptionRankContext,
         }),
       ),
       onCloseAll: clearTrail,
@@ -568,6 +605,7 @@ function useDatabasePopoverRootProps({
       onToggleEnlightenSlot,
       referenceLayer,
       selectedEnlightenSlot,
+      currentDescriptionRankContext,
       showTagIcons,
       showVisibleScaling,
       stats,
@@ -589,6 +627,7 @@ function buildPopoverPortalEntry({
   onNavigateToWheelPage,
   referenceLayer,
   selectedEnlightenSlot,
+  currentDescriptionRankContext,
 }: {
   clearTrail: () => void
   closeTrailFrom: (index: number) => void
@@ -600,9 +639,11 @@ function buildPopoverPortalEntry({
   onNavigateToCovenantPage?: (covenant: {id: string; name: string}) => void
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot: AwakenerEnlightenRecord['slot'] | null
+  currentDescriptionRankContext?: DatabasePopoverDescriptionRankContext
 }): DatabasePopoverRootProps['entries'][number] {
   const activeEntry = resolveLiveTrailEntry({
     entry,
+    currentRankContext: currentDescriptionRankContext,
     referenceLayer,
     selectedEnlightenSlot,
   })
@@ -632,8 +673,11 @@ function buildPopoverPortalEntry({
     onInfoEntryClick: (nextEntry: KeyedDatabaseReferenceEntry) => {
       nestedActions.openNestedInfoFrom(index, nextEntry)
     },
-    onMechanicTokenClick: (overlay: AwakenerOverlayRecord) => {
-      nestedActions.openNestedOverlayFrom(index, overlay)
+    onMechanicTokenClick: (
+      overlay: AwakenerOverlayRecord,
+      rankContext?: DatabasePopoverDescriptionRankContext,
+    ) => {
+      nestedActions.openNestedOverlayFrom(index, overlay, rankContext)
     },
     onNavigate,
     onSkillTokenClick: (name: string) => {

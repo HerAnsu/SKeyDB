@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0055",
   "slot": "Rouse",
-  "descriptionTemplate": "Vortice gains [Arg5]% Base Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice Unleashes a {Pursuit}, the next Vortice Aliemus Exalt additionally gains [Arg2]% {Tentacle DMG} Bonus, stacking up to [Arg3] times.",
+  "descriptionTemplate": "Vortice gains [Arg5]% Base Aliemus. {Rouse}: Draw 1 {Reload!}. After Vortice Unleashes a {Pursuit}, the next Vortice Exalt additionally gains [Arg2]% {Tentacle DMG} Bonus, stacking up to [Arg3] times.",
   "descriptionArgs": {
     "Arg2": {
       "kind": "scaling",

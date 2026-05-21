@@ -953,6 +953,23 @@
       "availabilityType": "LIMITED_ASTRAL_REIGN",
       "releaseDate": "2026-04-20"
     },
+    "awakener-0057": {
+      "kind": "awakener",
+      "id": "awakener-0057",
+      "name": "Saya",
+      "route": {
+        "slug": "saya",
+        "canonicalPath": "/database/awakeners/saya"
+      },
+      "assets": {
+        "icon": "asset-awakener-0057-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "type": "CHORUS",
+      "availabilityType": "LIMITED_ASTRAL_REIGN",
+      "releaseDate": "2026-05-30"
+    },
     "awakener-build-0001": {
       "kind": "awakenerBuild",
       "id": "awakener-build-0001",
@@ -2467,6 +2484,15 @@
       "route": {
         "slug": "light-cone-boundary",
         "canonicalPath": "/database/derived-skills/light-cone-boundary"
+      }
+    },
+    "derived.global.propagule-embryo": {
+      "kind": "derivedSkill",
+      "id": "derived.global.propagule-embryo",
+      "name": "Propagule Embryo",
+      "route": {
+        "slug": "propagule-embryo",
+        "canonicalPath": "/database/derived-skills/propagule-embryo"
       }
     },
     "derived.global.sakura-blossoms": {
@@ -5906,6 +5932,66 @@
       "ownerAwakenerName": "Sanga",
       "slot": "OverExalt"
     },
+    "enlighten.saya.here-my-one-last-gift": {
+      "kind": "enlighten",
+      "id": "enlighten.saya.here-my-one-last-gift",
+      "name": "Here, My One Last Gift...",
+      "route": {
+        "slug": "here-my-one-last-gift",
+        "canonicalPath": "/database/awakeners/saya/enlightens/here-my-one-last-gift"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "AbsoluteAxiom"
+    },
+    "enlighten.saya.ill-be-your-very-own-monster": {
+      "kind": "enlighten",
+      "id": "enlighten.saya.ill-be-your-very-own-monster",
+      "name": "I'll be Your Very Own Monster",
+      "route": {
+        "slug": "ill-be-your-very-own-monster",
+        "canonicalPath": "/database/awakeners/saya/enlightens/ill-be-your-very-own-monster"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "E1"
+    },
+    "enlighten.saya.must-be-what-they-call-love": {
+      "kind": "enlighten",
+      "id": "enlighten.saya.must-be-what-they-call-love",
+      "name": "Must be What They Call Love",
+      "route": {
+        "slug": "must-be-what-they-call-love",
+        "canonicalPath": "/database/awakeners/saya/enlightens/must-be-what-they-call-love"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "E3"
+    },
+    "enlighten.saya.paradise-just-for-you": {
+      "kind": "enlighten",
+      "id": "enlighten.saya.paradise-just-for-you",
+      "name": "Paradise Just For You",
+      "route": {
+        "slug": "paradise-just-for-you",
+        "canonicalPath": "/database/awakeners/saya/enlightens/paradise-just-for-you"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "OverExalt"
+    },
+    "enlighten.saya.will-you-stay-with-me-always": {
+      "kind": "enlighten",
+      "id": "enlighten.saya.will-you-stay-with-me-always",
+      "name": "Will You Stay with Me, Always?",
+      "route": {
+        "slug": "will-you-stay-with-me-always",
+        "canonicalPath": "/database/awakeners/saya/enlightens/will-you-stay-with-me-always"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "E2"
+    },
     "enlighten.sorel.carlate-profond": {
       "kind": "enlighten",
       "id": "enlighten.sorel.carlate-profond",
@@ -6647,21 +6733,6 @@
       "ownerAwakenerName": "Arachne",
       "overlayType": "mechanic"
     },
-    "overlay.castor.corrosion": {
-      "kind": "overlay",
-      "id": "overlay.castor.corrosion",
-      "name": "Corrosion",
-      "route": {
-        "slug": "corrosion",
-        "canonicalPath": "/database/awakeners/castor/overlays/corrosion"
-      },
-      "assets": {
-        "icon": "asset-overlay.castor.corrosion-icon"
-      },
-      "ownerAwakenerId": "awakener-0008",
-      "ownerAwakenerName": "Castor",
-      "overlayType": "mechanic"
-    },
     "overlay.celeste.revival": {
       "kind": "overlay",
       "id": "overlay.celeste.revival",
@@ -6921,6 +6992,19 @@
         "canonicalPath": "/database/overlays/chaos"
       },
       "overlayType": "realm"
+    },
+    "overlay.global.corrosion": {
+      "kind": "overlay",
+      "id": "overlay.global.corrosion",
+      "name": "Corrosion",
+      "route": {
+        "slug": "corrosion",
+        "canonicalPath": "/database/overlays/corrosion"
+      },
+      "assets": {
+        "icon": "asset-overlay.global.corrosion-icon"
+      },
+      "overlayType": "mechanic"
     },
     "overlay.global.counter": {
       "kind": "overlay",
@@ -7256,6 +7340,16 @@
       },
       "overlayType": "mechanic"
     },
+    "overlay.global.perception-warp": {
+      "kind": "overlay",
+      "id": "overlay.global.perception-warp",
+      "name": "Perception Warp",
+      "route": {
+        "slug": "perception-warp",
+        "canonicalPath": "/database/overlays/perception-warp"
+      },
+      "overlayType": "mechanic"
+    },
     "overlay.global.pierce-dmg": {
       "kind": "overlay",
       "id": "overlay.global.pierce-dmg",
@@ -7286,6 +7380,26 @@
       "route": {
         "slug": "prepare",
         "canonicalPath": "/database/overlays/prepare"
+      },
+      "overlayType": "mechanic"
+    },
+    "overlay.global.propagation-caro": {
+      "kind": "overlay",
+      "id": "overlay.global.propagation-caro",
+      "name": "Propagation: Caro",
+      "route": {
+        "slug": "propagation-caro",
+        "canonicalPath": "/database/overlays/propagation-caro"
+      },
+      "overlayType": "realm"
+    },
+    "overlay.global.propagation-frenzy": {
+      "kind": "overlay",
+      "id": "overlay.global.propagation-frenzy",
+      "name": "Propagation Frenzy",
+      "route": {
+        "slug": "propagation-frenzy",
+        "canonicalPath": "/database/overlays/propagation-frenzy"
       },
       "overlayType": "mechanic"
     },
@@ -7736,6 +7850,18 @@
       "ownerAwakenerName": "Horla",
       "overlayType": "mechanic"
     },
+    "overlay.horla.poetry-page": {
+      "kind": "overlay",
+      "id": "overlay.horla.poetry-page",
+      "name": "Poetry Page",
+      "route": {
+        "slug": "poetry-page",
+        "canonicalPath": "/database/awakeners/horla/overlays/poetry-page"
+      },
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
+      "overlayType": "tag"
+    },
     "overlay.kathigu-ra.combust": {
       "kind": "overlay",
       "id": "overlay.kathigu-ra.combust",
@@ -7965,6 +8091,21 @@
       },
       "ownerAwakenerId": "awakener-0043",
       "ownerAwakenerName": "Ryker",
+      "overlayType": "mechanic"
+    },
+    "overlay.saya.gynoecium": {
+      "kind": "overlay",
+      "id": "overlay.saya.gynoecium",
+      "name": "Gynoecium",
+      "route": {
+        "slug": "gynoecium",
+        "canonicalPath": "/database/awakeners/saya/overlays/gynoecium"
+      },
+      "assets": {
+        "icon": "asset-overlay.saya.gynoecium-icon"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
       "overlayType": "mechanic"
     },
     "overlay.vortice.vortex-reload": {
@@ -8864,6 +9005,23 @@
         "badge": "asset-posse-0050-badge"
       },
       "realm": "ULTRA"
+    },
+    "posse-0051": {
+      "kind": "posse",
+      "id": "posse-0051",
+      "name": "For the New World",
+      "route": {
+        "slug": "for-the-new-world",
+        "canonicalPath": "/database/posses/for-the-new-world"
+      },
+      "assets": {
+        "icon": "asset-posse-0051-icon",
+        "crystal": "asset-posse-0051-crystal",
+        "badge": "asset-posse-0051-badge"
+      },
+      "realm": "CARO",
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya"
     },
     "relic-0001": {
       "kind": "relic",
@@ -15000,6 +15158,90 @@
       "ownerAwakenerName": "Sanga",
       "slot": "OverExalt"
     },
+    "skill.saya.cognitive-alteration": {
+      "kind": "skill",
+      "id": "skill.saya.cognitive-alteration",
+      "name": "Cognitive Alteration",
+      "route": {
+        "slug": "cognitive-alteration",
+        "canonicalPath": "/database/awakeners/saya/skills/cognitive-alteration"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Rouse"
+    },
+    "skill.saya.defense": {
+      "kind": "skill",
+      "id": "skill.saya.defense",
+      "name": "Defense",
+      "route": {
+        "slug": "defense",
+        "canonicalPath": "/database/awakeners/saya/skills/defense"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Defense"
+    },
+    "skill.saya.genetics-copy": {
+      "kind": "skill",
+      "id": "skill.saya.genetics-copy",
+      "name": "Genetics Copy",
+      "route": {
+        "slug": "genetics-copy",
+        "canonicalPath": "/database/awakeners/saya/skills/genetics-copy"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Skill1"
+    },
+    "skill.saya.paradise-just-for-you": {
+      "kind": "skill",
+      "id": "skill.saya.paradise-just-for-you",
+      "name": "Paradise Just For You",
+      "route": {
+        "slug": "paradise-just-for-you",
+        "canonicalPath": "/database/awakeners/saya/skills/paradise-just-for-you"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "OverExalt"
+    },
+    "skill.saya.song-of-saya": {
+      "kind": "skill",
+      "id": "skill.saya.song-of-saya",
+      "name": "Song of Saya",
+      "route": {
+        "slug": "song-of-saya",
+        "canonicalPath": "/database/awakeners/saya/skills/song-of-saya"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Exalt"
+    },
+    "skill.saya.strike": {
+      "kind": "skill",
+      "id": "skill.saya.strike",
+      "name": "Strike",
+      "route": {
+        "slug": "strike",
+        "canonicalPath": "/database/awakeners/saya/skills/strike"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Strike"
+    },
+    "skill.saya.viscera-blossoms": {
+      "kind": "skill",
+      "id": "skill.saya.viscera-blossoms",
+      "name": "Viscera Blossoms",
+      "route": {
+        "slug": "viscera-blossoms",
+        "canonicalPath": "/database/awakeners/saya/skills/viscera-blossoms"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Skill2"
+    },
     "skill.sorel.carousel-of-ambition": {
       "kind": "skill",
       "id": "skill.sorel.carousel-of-ambition",
@@ -18099,6 +18341,58 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.saya.gnostic-potential": {
+      "kind": "talent",
+      "id": "talent.saya.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/saya/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
+    "talent.saya.madness-omen": {
+      "kind": "talent",
+      "id": "talent.saya.madness-omen",
+      "name": "Madness Omen",
+      "route": {
+        "slug": "madness-omen",
+        "canonicalPath": "/database/awakeners/saya/talents/madness-omen"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "madness_omen",
+      "maxLevel": 12
+    },
+    "talent.saya.propagation-caro": {
+      "kind": "talent",
+      "id": "talent.saya.propagation-caro",
+      "name": "Propagation: Caro",
+      "route": {
+        "slug": "propagation-caro",
+        "canonicalPath": "/database/awakeners/saya/talents/propagation-caro"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "passive"
+    },
+    "talent.saya.soulforge-aptitude": {
+      "kind": "talent",
+      "id": "talent.saya.soulforge-aptitude",
+      "name": "Soulforge Aptitude",
+      "route": {
+        "slug": "soulforge-aptitude",
+        "canonicalPath": "/database/awakeners/saya/talents/soulforge-aptitude"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "soulforge_aptitude",
+      "maxLevel": 10
+    },
     "talent.sorel.gnostic-potential": {
       "kind": "talent",
       "id": "talent.sorel.gnostic-potential",
@@ -20040,7 +20334,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DEATH_RESISTANCE"
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily"
     },
     "wheel-0094": {
       "kind": "wheel",
@@ -20055,7 +20351,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DMG_AMP"
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda"
     },
     "wheel-0095": {
       "kind": "wheel",
@@ -20070,7 +20368,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "SIGIL_YIELD"
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador"
     },
     "wheel-0096": {
       "kind": "wheel",
@@ -20085,7 +20385,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "CRIT_RATE"
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0001",
+      "ownerAwakenerName": "24"
     },
     "wheel-0097": {
       "kind": "wheel",
@@ -20100,7 +20402,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DMG_AMP"
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena"
     },
     "wheel-0098": {
       "kind": "wheel",
@@ -20115,7 +20419,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "CRIT_DMG"
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam"
     },
     "wheel-0099": {
       "kind": "wheel",
@@ -20130,7 +20436,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "ALIEMUS_REGEN"
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais"
     },
     "wheel-0100": {
       "kind": "wheel",
@@ -20145,7 +20453,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DEATH_RESISTANCE"
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla"
     },
     "wheel-0101": {
       "kind": "wheel",
@@ -20160,7 +20470,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "CRIT_RATE"
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel"
     },
     "wheel-0102": {
       "kind": "wheel",
@@ -20175,7 +20487,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "KEYFLARE_REGEN"
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0034",
+      "ownerAwakenerName": "Murphy"
     },
     "wheel-0103": {
       "kind": "wheel",
@@ -20190,7 +20504,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "SIGIL_YIELD"
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker"
     },
     "wheel-0104": {
       "kind": "wheel",
@@ -20205,7 +20521,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "KEYFLARE_REGEN"
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil"
     },
     "wheel-0105": {
       "kind": "wheel",
@@ -20220,7 +20538,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "CRIT_RATE"
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln"
     },
     "wheel-0106": {
       "kind": "wheel",
@@ -20235,7 +20555,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "ALIEMUS_REGEN"
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno"
     },
     "wheel-0107": {
       "kind": "wheel",
@@ -20250,7 +20572,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "ALIEMUS_REGEN"
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0050",
+      "ownerAwakenerName": "Tulu"
     },
     "wheel-0109": {
       "kind": "wheel",
@@ -20265,7 +20589,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "CRIT_DMG"
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0014",
+      "ownerAwakenerName": "Doresain"
     },
     "wheel-0110": {
       "kind": "wheel",
@@ -20280,7 +20606,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DMG_AMP"
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil"
     },
     "wheel-0111": {
       "kind": "wheel",
@@ -20295,7 +20623,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "KEYFLARE_REGEN"
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0035",
+      "ownerAwakenerName": "Murphy: Fauxborn"
     },
     "wheel-0112": {
       "kind": "wheel",
@@ -20310,7 +20640,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DMG_AMP"
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0008",
+      "ownerAwakenerName": "Castor"
     },
     "wheel-0113": {
       "kind": "wheel",
@@ -20325,7 +20657,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "CRIT_RATE"
+      "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux"
     },
     "wheel-0114": {
       "kind": "wheel",
@@ -20340,7 +20674,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DEATH_RESISTANCE"
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant"
     },
     "wheel-0115": {
       "kind": "wheel",
@@ -20355,7 +20691,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "ALIEMUS_REGEN"
+      "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman"
     },
     "wheel-0116": {
       "kind": "wheel",
@@ -20370,7 +20708,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "CRIT_DMG"
+      "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra"
     },
     "wheel-0117": {
       "kind": "wheel",
@@ -20385,7 +20725,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DEATH_RESISTANCE"
+      "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0033",
+      "ownerAwakenerName": "Mouchette"
     },
     "wheel-0118": {
       "kind": "wheel",
@@ -20400,7 +20742,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "DMG_AMP"
+      "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu"
     },
     "wheel-0119": {
       "kind": "wheel",
@@ -20415,7 +20759,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "REALM_MASTERY"
+      "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice"
     },
     "wheel-0120": {
       "kind": "wheel",
@@ -20584,7 +20930,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "REALM_MASTERY"
+      "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne"
     },
     "wheel-0136": {
       "kind": "wheel",
@@ -20614,7 +20962,9 @@
       },
       "realm": "NEUTRAL",
       "rarity": "SR",
-      "mainstatKey": "KEYFLARE_REGEN"
+      "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine"
     },
     "wheel-0165": {
       "kind": "wheel",
@@ -20645,6 +20995,40 @@
       "realm": "NEUTRAL",
       "rarity": "SSR",
       "mainstatKey": "SIGIL_YIELD"
+    },
+    "wheel-0167": {
+      "kind": "wheel",
+      "id": "wheel-0167",
+      "name": "Fragrant Morphogenesis",
+      "route": {
+        "slug": "fragrant-morphogenesis",
+        "canonicalPath": "/database/wheels/fragrant-morphogenesis"
+      },
+      "assets": {
+        "icon": "asset-wheel-0167-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya"
+    },
+    "wheel-0168": {
+      "kind": "wheel",
+      "id": "wheel-0168",
+      "name": "Muddied Fairy Tale",
+      "route": {
+        "slug": "muddied-fairy-tale",
+        "canonicalPath": "/database/wheels/muddied-fairy-tale"
+      },
+      "assets": {
+        "icon": "asset-wheel-0168-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya"
     }
   },
   "scopes": {
@@ -20762,7 +21146,8 @@
       "awakener-0053",
       "awakener-0054",
       "awakener-0055",
-      "awakener-0056"
+      "awakener-0056",
+      "awakener-0057"
     ],
     "covenants": [
       "covenant-0001",
@@ -20843,6 +21228,7 @@
       "derived.global.insight",
       "derived.global.leahs-coin",
       "derived.global.light-cone-boundary",
+      "derived.global.propagule-embryo",
       "derived.global.sakura-blossoms",
       "derived.global.silver-key-gleam",
       "derived.global.slumber",
@@ -21137,6 +21523,11 @@
       "enlighten.sanga.melodic-sculpting",
       "enlighten.sanga.oblivion-takes-all",
       "enlighten.sanga.the-sea-of-corals",
+      "enlighten.saya.here-my-one-last-gift",
+      "enlighten.saya.ill-be-your-very-own-monster",
+      "enlighten.saya.must-be-what-they-call-love",
+      "enlighten.saya.paradise-just-for-you",
+      "enlighten.saya.will-you-stay-with-me-always",
       "enlighten.sorel.carlate-profond",
       "enlighten.sorel.flowing-rill",
       "enlighten.sorel.lustrous-pearl",
@@ -21199,7 +21590,6 @@
       "overlay.arachne.singularity-ultra",
       "overlay.arachne.singularity-warp",
       "overlay.arachne.weaver",
-      "overlay.castor.corrosion",
       "overlay.celeste.revival",
       "overlay.clementine.phobic-fixation",
       "overlay.clementine.psychic-trauma",
@@ -21221,6 +21611,7 @@
       "overlay.global.burn",
       "overlay.global.caro",
       "overlay.global.chaos",
+      "overlay.global.corrosion",
       "overlay.global.counter",
       "overlay.global.crimson-furnace",
       "overlay.global.death-resistance",
@@ -21252,9 +21643,12 @@
       "overlay.global.madness",
       "overlay.global.over-exalt",
       "overlay.global.perception",
+      "overlay.global.perception-warp",
       "overlay.global.pierce-dmg",
       "overlay.global.poison",
       "overlay.global.prepare",
+      "overlay.global.propagation-caro",
+      "overlay.global.propagation-frenzy",
       "overlay.global.pure-ultra",
       "overlay.global.pursuit",
       "overlay.global.quasar",
@@ -21294,6 +21688,7 @@
       "overlay.horla.grief",
       "overlay.horla.happiness",
       "overlay.horla.metaphor",
+      "overlay.horla.poetry-page",
       "overlay.kathigu-ra.combust",
       "overlay.kathigu-ra.fiamma",
       "overlay.lily.endure",
@@ -21311,6 +21706,7 @@
       "overlay.ramona-timeworn.loop",
       "overlay.ramona-timeworn.negentropy",
       "overlay.ryker.chaotic-legacy",
+      "overlay.saya.gynoecium",
       "overlay.vortice.vortex-reload",
       "overlay.wanda.dreamlure",
       "overlay.wanda.murmurs",
@@ -21368,7 +21764,8 @@
       "posse-0047",
       "posse-0048",
       "posse-0049",
-      "posse-0050"
+      "posse-0050",
+      "posse-0051"
     ],
     "relics": [
       "relic-0001",
@@ -21862,6 +22259,13 @@
       "skill.sanga.strike",
       "skill.sanga.the-lost-art",
       "skill.sanga.the-sea-of-corals",
+      "skill.saya.cognitive-alteration",
+      "skill.saya.defense",
+      "skill.saya.genetics-copy",
+      "skill.saya.paradise-just-for-you",
+      "skill.saya.song-of-saya",
+      "skill.saya.strike",
+      "skill.saya.viscera-blossoms",
       "skill.sorel.carousel-of-ambition",
       "skill.sorel.defense",
       "skill.sorel.diamond-in-the-rough",
@@ -22109,6 +22513,10 @@
       "talent.sanga.gnostic-potential",
       "talent.sanga.madness-omen",
       "talent.sanga.soulforge-aptitude",
+      "talent.saya.gnostic-potential",
+      "talent.saya.madness-omen",
+      "talent.saya.propagation-caro",
+      "talent.saya.soulforge-aptitude",
       "talent.sorel.gnostic-potential",
       "talent.sorel.guardian-of-vanity",
       "talent.sorel.madness-omen",
@@ -22277,7 +22685,9 @@
       "wheel-0136",
       "wheel-0137",
       "wheel-0165",
-      "wheel-0166"
+      "wheel-0166",
+      "wheel-0167",
+      "wheel-0168"
     ]
   }
 }

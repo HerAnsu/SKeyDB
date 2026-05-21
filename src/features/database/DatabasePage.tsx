@@ -7,6 +7,7 @@ import './database.css'
 import {resolvePublicRoute} from '@/data-access/public-data/routeResolver'
 import type {Awakener} from '@/domain/awakeners'
 import type {Covenant} from '@/domain/covenants'
+import {resolveDatabaseDetailDefaultAwakenerTab} from '@/domain/database-detail-preferences'
 import {buildDatabaseEntityBrowsePath, type DatabaseEntityId} from '@/domain/database-entity-paths'
 import {sanitizeDatabaseEntitySearch} from '@/domain/database-entity-search'
 import {
@@ -17,13 +18,16 @@ import {
   buildDatabasePossePath,
   buildDatabaseWheelBrowsePath,
   buildDatabaseWheelPath,
+  DEFAULT_DATABASE_AWAKENER_TAB,
   findAwakenerByDatabaseSlug,
   findCovenantByDatabaseSlug,
   findPosseByDatabaseSlug,
   findWheelByDatabaseSlug,
   resolveDatabaseAwakenerTab,
+  resolveDatabaseAwakenerVisibleTab,
   type DatabaseAwakenerTab,
 } from '@/domain/database-paths'
+import {getBrowserLocalStorage} from '@/domain/storage'
 import type {Wheel} from '@/domain/wheels'
 
 import {renderEntityBrowse} from './browse/entityBrowseRegistry'
@@ -58,7 +62,8 @@ function buildCanonicalAwakenerRoutePath(
       ? routeResolution.canonicalPath
       : buildDatabaseAwakenerPath(awakener)
 
-  return tab === 'overview' ? basePath : `${basePath}/${tab}`
+  const visibleTab = resolveDatabaseAwakenerVisibleTab(tab)
+  return visibleTab === DEFAULT_DATABASE_AWAKENER_TAB ? basePath : `${basePath}/${visibleTab}`
 }
 
 interface DetailRouteCorrectionParams {
@@ -121,7 +126,10 @@ export function DatabasePage({routeEntity}: DatabasePageProps = {}) {
   const selectedWheel = findWheelByDatabaseSlug(databaseWheels, wheelSlug)
   const selectedPosse = findPosseByDatabaseSlug(databasePosses, posseSlug)
   const selectedCovenant = findCovenantByDatabaseSlug(databaseCovenants, covenantSlug)
-  const selectedTab = resolveDatabaseAwakenerTab(tabSlug) ?? 'overview'
+  const detailPreferenceStorage = useMemo(() => getBrowserLocalStorage(), [])
+  const selectedTab = tabSlug
+    ? resolveDatabaseAwakenerVisibleTab(resolveDatabaseAwakenerTab(tabSlug))
+    : resolveDatabaseDetailDefaultAwakenerTab(undefined, detailPreferenceStorage)
   const activeEntity = routeEntity ?? getActiveDatabaseEntity(location.pathname)
   const browseController = useEntityBrowseController({
     activeEntity,
@@ -132,7 +140,7 @@ export function DatabasePage({routeEntity}: DatabasePageProps = {}) {
   })
   const activeSearch = browseController.activeSearch
   const canonicalAwakenerPath =
-    awakenerSlug && selectedAwakener && !tabSlug
+    awakenerSlug && selectedAwakener
       ? buildCanonicalAwakenerRoutePath(selectedAwakener, awakenerSlug, selectedTab)
       : null
   const canonicalWheelPath =
@@ -211,7 +219,10 @@ export function DatabasePage({routeEntity}: DatabasePageProps = {}) {
   )
 
   const handleModalAwakenerSelect = useCallback(
-    (nextAwakener: Pick<Awakener, 'id' | 'name'>, nextTab: DatabaseAwakenerTab = 'overview') => {
+    (
+      nextAwakener: Pick<Awakener, 'id' | 'name'>,
+      nextTab: DatabaseAwakenerTab = DEFAULT_DATABASE_AWAKENER_TAB,
+    ) => {
       void navigate({
         pathname: buildDatabaseAwakenerPath(nextAwakener, nextTab),
         search: sanitizeDatabaseEntitySearch('awakeners', activeSearch),

@@ -84,25 +84,25 @@ vi.mock('@/features/database/internal/AwakenerDetailModal', () => ({
     onSelectAwakener,
     onTabChange,
   }: {
-    activeTab?: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams'
+    activeTab?: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams' | 'lore'
     awakener: {id: string; name: string}
     onClose: () => void
     onSelectAwakener: (
       awakener: {id: string; name: string},
-      tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams',
+      tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams' | 'lore',
     ) => void
-    onTabChange: (tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams') => void
+    onTabChange: (tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams' | 'lore') => void
   }) => (
     <div aria-label={`${awakener.name} details`} role='dialog'>
       <div>{`Active tab ${activeTab}`}</div>
       <button
-        aria-label='Switch to builds tab'
+        aria-label='Switch to lore tab'
         onClick={() => {
-          onTabChange('builds')
+          onTabChange('lore')
         }}
         type='button'
       >
-        Builds
+        Lore
       </button>
       <button
         aria-label='Switch to beta detail'
@@ -131,7 +131,7 @@ vi.mock('@/features/database/internal/WheelDetailModal', () => ({
     onClose: () => void
     onSelectAwakener?: (
       awakener: {id: string; name: string},
-      tab?: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams',
+      tab?: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams' | 'lore',
     ) => void
     onSelectWheel?: (wheel: {name: string}) => void
   }) => (
@@ -185,6 +185,7 @@ beforeAll(async () => {
 
 afterEach(() => {
   vi.restoreAllMocks()
+  window.localStorage.clear()
   clearDatabaseDetailRecordCacheForTests()
   mockPublicDetailLoaders.reset()
 })
@@ -200,7 +201,7 @@ async function expectAwakenerDetailRouteEndState({
 }: {
   dialogName: RegExp
   path: string
-  tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams'
+  tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams' | 'lore'
 }) {
   await waitFor(() => {
     expect(screen.getByRole('dialog', {name: dialogName})).toBeInTheDocument()
@@ -312,7 +313,7 @@ describe('DatabasePage', () => {
     )
   })
 
-  it('writes browse control changes back into query params', async () => {
+  it('writes filter changes to query params and sort changes to preferences', async () => {
     await renderDatabasePage()
 
     fireEvent.change(screen.getByRole('searchbox'), {target: {value: 'beta'}})
@@ -320,8 +321,15 @@ describe('DatabasePage', () => {
     fireEvent.change(screen.getByLabelText('Database sort key'), {target: {value: 'ATK'}})
     fireEvent.click(screen.getByLabelText('Toggle database sort direction'))
 
-    expect(screen.getByTestId('location-search')).toHaveTextContent(
-      '?q=beta&realm=AEQUOR&sort=ATK&dir=DESC',
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=beta&realm=AEQUOR')
+    expect(JSON.parse(window.localStorage.getItem('database-browse-preferences') ?? '{}')).toEqual(
+      expect.objectContaining({
+        awakeners: {
+          groupByRealm: false,
+          sortDirection: 'DESC',
+          sortKey: 'ATK',
+        },
+      }),
     )
   })
 
@@ -369,11 +377,19 @@ describe('DatabasePage', () => {
     expect(await screen.findByRole('dialog', {name: /beta details/})).toBeInTheDocument()
   })
 
-  it('opens detail modal from deep-linked awakener tab route', async () => {
-    await renderDatabasePage('/database/awk/beta/builds')
+  it('falls back from disabled teams tab routes to upgrades', async () => {
+    await renderDatabasePage('/database/awk/beta/teams')
 
     expect(await screen.findByRole('dialog', {name: /beta details/})).toBeInTheDocument()
-    expect(screen.getByText('Active tab builds')).toBeInTheDocument()
+    expect(screen.getByText('Active tab upgrades')).toBeInTheDocument()
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/beta')
+  })
+
+  it('opens detail modal from deep-linked lore tab route', async () => {
+    await renderDatabasePage('/database/awk/beta/lore')
+
+    expect(await screen.findByRole('dialog', {name: /beta details/})).toBeInTheDocument()
+    expect(screen.getByText('Active tab lore')).toBeInTheDocument()
   })
 
   it('opens the skills tab from the renamed awakener detail route slug', async () => {
@@ -388,12 +404,10 @@ describe('DatabasePage', () => {
 
     expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
     await act(async () => {
-      fireEvent.click(screen.getByLabelText('Switch to builds tab'))
+      fireEvent.click(screen.getByLabelText('Switch to lore tab'))
     })
 
-    expect(screen.getByTestId('location-path')).toHaveTextContent(
-      '/database/awakeners/alpha/builds',
-    )
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha/lore')
   })
 
   it('pushes detail tab changes into browser history', async () => {
@@ -402,12 +416,10 @@ describe('DatabasePage', () => {
     expect(await screen.findByRole('dialog', {name: /alpha details/})).toBeInTheDocument()
 
     await act(async () => {
-      fireEvent.click(screen.getByLabelText('Switch to builds tab'))
+      fireEvent.click(screen.getByLabelText('Switch to lore tab'))
     })
 
-    expect(screen.getByTestId('location-path')).toHaveTextContent(
-      '/database/awakeners/alpha/builds',
-    )
+    expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha/lore')
 
     await act(async () => {
       fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
@@ -416,7 +428,7 @@ describe('DatabasePage', () => {
     await waitFor(() =>
       expect(screen.getByTestId('location-path')).toHaveTextContent('/database/awakeners/alpha'),
     )
-    expect(screen.getByText('Active tab overview')).toBeInTheDocument()
+    expect(screen.getByText('Active tab upgrades')).toBeInTheDocument()
   })
 
   it('pushes modal awakener switches into browser history', async () => {
@@ -465,7 +477,7 @@ describe('DatabasePage', () => {
     await expectAwakenerDetailRouteEndState({
       dialogName: /alpha details/,
       path: '/database/awakeners/alpha',
-      tab: 'overview',
+      tab: 'upgrades',
     })
     expect(screen.getByTestId('location-search')).toHaveTextContent('?q=alpha&realm=CHAOS')
   })

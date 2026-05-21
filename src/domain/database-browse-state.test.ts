@@ -10,7 +10,7 @@ describe('database-browse-state', () => {
   it('parses known browse params and falls back safely for invalid values', () => {
     const state = parseDatabaseBrowseState(
       new URLSearchParams(
-        'q=beta&realm=AEQUOR&rarity=SR&type=WARDEN&availability=LIMITED&faction=Lemurian&scaling=KeyflareRegen,DamageAmplification&sort=RELEASE_DATE&dir=DESC&group=1',
+        'q=beta&realm=AEQUOR&rarity=SR&type=WARDEN&availability=LIMITED&faction=Lemurian&scaling=CritRate,KeyflareRegen:PRIMARY,DamageAmplification:SECONDARY&sort=RELEASE_DATE&dir=DESC&group=1',
       ),
     )
 
@@ -21,7 +21,11 @@ describe('database-browse-state', () => {
       typeFilter: 'WARDEN',
       availabilityFilter: 'LIMITED',
       gameplayFactionFilters: ['Lemurian'],
-      scalingSubstatFilters: ['KeyflareRegen', 'DamageAmplification'],
+      scalingSubstatFilters: [
+        {key: 'CritRate', role: 'ANY'},
+        {key: 'KeyflareRegen', role: 'PRIMARY'},
+        {key: 'DamageAmplification', role: 'SECONDARY'},
+      ],
       sortKey: 'RELEASE_DATE',
       sortDirection: 'DESC',
       groupByRealm: true,
@@ -42,20 +46,58 @@ describe('database-browse-state', () => {
       realmFilter: 'CHAOS',
       availabilityFilter: 'LIMITED_ASTRAL_REIGN',
       gameplayFactionFilters: ['Lemurian'],
-      scalingSubstatFilters: ['KeyflareRegen', 'DamageAmplification'],
+      scalingSubstatFilters: [
+        {key: 'CritDamage', role: 'ANY'},
+        {key: 'KeyflareRegen', role: 'PRIMARY'},
+        {key: 'DamageAmplification', role: 'SECONDARY'},
+      ],
       sortKey: 'ATK',
       sortDirection: 'DESC',
     })
 
     expect(nextParams.toString()).toBe(
-      'foo=bar&q=alpha&realm=CHAOS&availability=LIMITED_ASTRAL_REIGN&faction=Lemurian&scaling=KeyflareRegen%2CDamageAmplification&sort=ATK&dir=DESC',
+      'foo=bar&q=alpha&realm=CHAOS&availability=LIMITED_ASTRAL_REIGN&faction=Lemurian&scaling=CritDamage%2CKeyflareRegen%3APRIMARY%2CDamageAmplification%3ASECONDARY&sort=ATK&dir=DESC',
     )
+  })
+
+  it('consumes only the shipped broad scaling URL shape and drops unshipped role params on write', () => {
+    expect(
+      parseDatabaseBrowseState(
+        new URLSearchParams('scaling=KeyflareRegen,DamageAmplification&scalingRole=MAIN'),
+      ),
+    ).toMatchObject({
+      scalingSubstatFilters: [
+        {key: 'KeyflareRegen', role: 'ANY'},
+        {key: 'DamageAmplification', role: 'ANY'},
+      ],
+    })
+
+    const nextParams = patchDatabaseBrowseState(
+      new URLSearchParams('scaling=CritRate&scalingRole=SUB&mainScaling=KeyflareRegen'),
+      {},
+    )
+
+    expect(nextParams.toString()).toBe('scaling=CritRate')
   })
 
   it('writes the query param back in canonical trimmed form', () => {
     const nextParams = patchDatabaseBrowseState(new URLSearchParams('q=%20alpha%20'), {})
 
     expect(nextParams.toString()).toBe('q=alpha')
+  })
+
+  it('canonicalizes duplicate scaling filters on write', () => {
+    const nextParams = patchDatabaseBrowseState(new URLSearchParams(), {
+      scalingSubstatFilters: [
+        {key: 'DamageAmplification', role: 'ANY'},
+        {key: 'CritRate', role: 'SECONDARY'},
+        {key: 'DamageAmplification', role: 'PRIMARY'},
+      ],
+    })
+
+    expect(nextParams.toString()).toBe(
+      'scaling=CritRate%3ASECONDARY%2CDamageAmplification%3APRIMARY',
+    )
   })
 
   it('elides default values when patching browse params', () => {

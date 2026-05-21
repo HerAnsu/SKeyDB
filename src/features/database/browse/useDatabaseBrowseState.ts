@@ -1,12 +1,19 @@
-import {useCallback} from 'react'
+import {useCallback, useMemo, useState} from 'react'
 
 import {useSearchParams} from 'react-router-dom'
 
+import {
+  hasAwakenerSortSearchParams,
+  readDatabaseBrowsePreferences,
+  writeAwakenerDatabaseBrowseSortPreferences,
+} from '@/domain/database-browse-preferences'
 import {
   DATABASE_BROWSE_DEFAULTS,
   parseDatabaseBrowseState,
   patchDatabaseBrowseState,
   type AvailabilityFilterId,
+  type AwakenerScalingSubstatFilter,
+  type AwakenerScalingSubstatFilterRole,
   type DatabaseBrowseState,
   type GameplayFactionFilterId,
   type RarityFilterId,
@@ -15,26 +22,34 @@ import {
   type TypeFilterId,
 } from '@/domain/database-browse-state'
 import type {DatabaseSortKey} from '@/domain/database-sorting'
+import {getBrowserLocalStorage} from '@/domain/storage'
 
 import {useBrowseQueryActions} from './useBrowseQueryActions'
 
 type BrowseHistoryMode = 'push' | 'replace'
-
-interface UseUrlBackedBrowseStateOptions<TState> {
-  parseState: (searchParams: URLSearchParams) => TState
-  patchState: (searchParams: URLSearchParams, patch: Partial<TState>) => URLSearchParams
+interface IncludeSortParamsPatchOptions {
+  includeSortParams?: boolean
 }
 
-export function useUrlBackedBrowseState<TState>({
+interface UseUrlBackedBrowseStateOptions<TState, TPatchOptions = never> {
+  parseState: (searchParams: URLSearchParams) => TState
+  patchState: (
+    searchParams: URLSearchParams,
+    patch: Partial<TState>,
+    options?: TPatchOptions,
+  ) => URLSearchParams
+}
+
+export function useUrlBackedBrowseState<TState, TPatchOptions = never>({
   parseState,
   patchState,
-}: UseUrlBackedBrowseStateOptions<TState>) {
+}: UseUrlBackedBrowseStateOptions<TState, TPatchOptions>) {
   const [searchParams, setSearchParams] = useSearchParams()
   const browseState = parseState(searchParams)
 
   const commitBrowseState = useCallback(
-    (patch: Partial<TState>, historyMode: BrowseHistoryMode) => {
-      const nextParams = patchState(searchParams, patch)
+    (patch: Partial<TState>, historyMode: BrowseHistoryMode, options?: TPatchOptions) => {
+      const nextParams = patchState(searchParams, patch, options)
       if (nextParams.toString() === searchParams.toString()) {
         return
       }
@@ -48,9 +63,27 @@ export function useUrlBackedBrowseState<TState>({
 }
 
 export function useDatabaseBrowseState() {
-  const {browseState, commitBrowseState} = useUrlBackedBrowseState<DatabaseBrowseState>({
-    parseState: parseDatabaseBrowseState,
-    patchState: patchDatabaseBrowseState,
+  const storage = useMemo(() => getBrowserLocalStorage(), [])
+  const [, setStoredSortRevision] = useState(0)
+  const {browseState, commitBrowseState} = useUrlBackedBrowseState<
+    DatabaseBrowseState,
+    IncludeSortParamsPatchOptions
+  >({
+    parseState: (searchParams) => {
+      const parsed = parseDatabaseBrowseState(searchParams)
+      if (hasAwakenerSortSearchParams(searchParams)) {
+        return parsed
+      }
+      const preferences = readDatabaseBrowsePreferences(storage)
+      return {
+        ...parsed,
+        ...preferences.awakeners,
+      }
+    },
+    patchState: (searchParams, patch, options) =>
+      patchDatabaseBrowseState(searchParams, patch, {
+        includeSortParams: options?.includeSortParams ?? hasAwakenerSortSearchParams(searchParams),
+      }),
   })
   const {
     availabilityFilter,
@@ -111,7 +144,7 @@ export function useDatabaseBrowseState() {
   )
 
   const setScalingSubstatFilters = useCallback(
-    (next: SubstatScalingKey[]) => {
+    (next: AwakenerScalingSubstatFilter[]) => {
       commitBrowseState({scalingSubstatFilters: next}, 'push')
     },
     [commitBrowseState],
@@ -119,35 +152,70 @@ export function useDatabaseBrowseState() {
 
   const toggleScalingSubstatFilter = useCallback(
     (filter: SubstatScalingKey) => {
-      const next = scalingSubstatFilters.includes(filter)
-        ? scalingSubstatFilters.filter((value) => value !== filter)
-        : [...scalingSubstatFilters, filter]
+      const exists = scalingSubstatFilters.some((value) => value.key === filter)
+      const next = exists
+        ? scalingSubstatFilters.filter((value) => value.key !== filter)
+        : [...scalingSubstatFilters, {key: filter, role: 'ANY' as const}]
       setScalingSubstatFilters(next)
+    },
+    [scalingSubstatFilters, setScalingSubstatFilters],
+  )
+
+  const setScalingSubstatFilterRole = useCallback(
+    (filter: SubstatScalingKey, role: AwakenerScalingSubstatFilterRole) => {
+      setScalingSubstatFilters(
+        scalingSubstatFilters.map((value) => (value.key === filter ? {...value, role} : value)),
+      )
+    },
+    [scalingSubstatFilters, setScalingSubstatFilters],
+  )
+
+  const removeScalingSubstatFilter = useCallback(
+    (filter: SubstatScalingKey) => {
+      setScalingSubstatFilters(scalingSubstatFilters.filter((value) => value.key !== filter))
     },
     [scalingSubstatFilters, setScalingSubstatFilters],
   )
 
   const setSortKey = useCallback(
     (next: DatabaseSortKey) => {
-      commitBrowseState({sortKey: next}, 'push')
+      writeAwakenerDatabaseBrowseSortPreferences(
+        {sortKey: next, sortDirection, groupByRealm},
+        storage,
+      )
+      setStoredSortRevision((current) => current + 1)
+      commitBrowseState({sortKey: next}, 'replace', {includeSortParams: false})
     },
-    [commitBrowseState],
+    [commitBrowseState, groupByRealm, sortDirection, storage],
   )
 
   const toggleSortDirection = useCallback(() => {
+    const nextSortDirection =
+      sortDirection === 'ASC' ? 'DESC' : DATABASE_BROWSE_DEFAULTS.sortDirection
+    writeAwakenerDatabaseBrowseSortPreferences(
+      {sortKey, sortDirection: nextSortDirection, groupByRealm},
+      storage,
+    )
+    setStoredSortRevision((current) => current + 1)
     commitBrowseState(
       {
-        sortDirection: sortDirection === 'ASC' ? 'DESC' : DATABASE_BROWSE_DEFAULTS.sortDirection,
+        sortDirection: nextSortDirection,
       },
-      'push',
+      'replace',
+      {includeSortParams: false},
     )
-  }, [commitBrowseState, sortDirection])
+  }, [commitBrowseState, groupByRealm, sortDirection, sortKey, storage])
 
   const setGroupByRealm = useCallback(
     (next: boolean) => {
-      commitBrowseState({groupByRealm: next}, 'push')
+      writeAwakenerDatabaseBrowseSortPreferences(
+        {sortKey, sortDirection, groupByRealm: next},
+        storage,
+      )
+      setStoredSortRevision((current) => current + 1)
+      commitBrowseState({groupByRealm: next}, 'replace', {includeSortParams: false})
     },
-    [commitBrowseState],
+    [commitBrowseState, sortDirection, sortKey, storage],
   )
 
   const resetFilters = useCallback(() => {
@@ -188,6 +256,8 @@ export function useDatabaseBrowseState() {
     setScalingSubstatFilters,
     toggleGameplayFactionFilter,
     toggleScalingSubstatFilter,
+    setScalingSubstatFilterRole,
+    removeScalingSubstatFilter,
     setSortKey,
     toggleSortDirection,
     setGroupByRealm,

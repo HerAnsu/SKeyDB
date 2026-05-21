@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 3,
+  "kind": "overlay",
+  "id": "overlay.global.propagation-frenzy",
+  "name": "Propagation Frenzy",
+  "route": {
+    "slug": "propagation-frenzy",
+    "canonicalPath": "/database/overlays/propagation-frenzy"
+  },
+  "overlayType": "mechanic",
+  "aliases": ["Breeding Frenzy"],
+  "descriptionTemplate": "For each stack, the final effect of DMG, Shield, HP Recovery, {STR}, {STR⯆}, {Tentacle DMG}, Fixed {Poison}, and Fixed {Counter} from this Awakener's Exalt is increased by 1%.",
+  "descriptionArgs": {}
+}

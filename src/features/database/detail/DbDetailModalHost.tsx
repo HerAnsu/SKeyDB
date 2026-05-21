@@ -7,7 +7,9 @@ import type {Awakener} from '@/domain/awakeners'
 import {getCovenants, type Covenant} from '@/domain/covenants'
 import {
   buildDatabaseAwakenerPath,
+  DEFAULT_DATABASE_AWAKENER_TAB,
   resolveDatabaseAwakenerTab,
+  resolveDatabaseAwakenerVisibleTab,
   type DatabaseAwakenerTab,
 } from '@/domain/database-paths'
 import type {EntityRef} from '@/domain/entities/types'
@@ -18,7 +20,7 @@ import {
   useDatabaseDetailRecord,
   useDatabaseDetailRouteRecord,
 } from '@/features/database/internal/useDatabaseDetailRouteRecord'
-import {dbDetailStore} from '@/stores/dbDetailStore'
+import {dbDetailStore, type DbDetailStackEntry} from '@/stores/dbDetailStore'
 
 import {
   createDatabaseDetailResultNavigation,
@@ -57,7 +59,7 @@ interface DbDetailModalHostProps {
   wheels: Wheel[]
 }
 
-function useDbDetailStackTop(): EntityRef | null {
+function useDbDetailStackTop(): DbDetailStackEntry | null {
   return useSyncExternalStore(
     dbDetailStore.subscribe,
     () => dbDetailStore.getState().stack.at(-1) ?? null,
@@ -122,7 +124,7 @@ function buildDetailRefLookup(awakeners: Awakener[], wheels: Wheel[]): DetailRef
 function resolveOverlayRouteItem(
   ref: EntityRef,
   lookup: DetailRefLookup,
-  activeAwakenerTab: DatabaseAwakenerTab = 'overview',
+  activeAwakenerTab: DatabaseAwakenerTab = DEFAULT_DATABASE_AWAKENER_TAB,
 ): DatabaseDetailRouteItem | null {
   if (ref.kind === 'awakener') {
     const item = lookup.awakenersById.get(ref.id)
@@ -194,8 +196,8 @@ function resolveAwakenerTabCanonicalPath(
     return null
   }
 
-  const resolvedTab = resolveDatabaseAwakenerTab(tabSlug)
-  return buildDatabaseAwakenerPath(awakener, resolvedTab ?? 'overview')
+  const resolvedTab = resolveDatabaseAwakenerVisibleTab(resolveDatabaseAwakenerTab(tabSlug))
+  return buildDatabaseAwakenerPath(awakener, resolvedTab)
 }
 
 function selectDatabaseDetailResult(
@@ -239,6 +241,69 @@ function preloadDatabaseDetailResult(ref: DatabaseDetailResultSelectRef) {
   }
 
   void preload.catch(() => undefined)
+}
+
+type IdlePreloadWindow = Window & {
+  cancelIdleCallback?: (handle: number) => void
+  requestIdleCallback?: (
+    callback: (deadline: {didTimeout: boolean; timeRemaining: () => number}) => void,
+    options?: {timeout?: number},
+  ) => number
+}
+
+const NEIGHBOR_PRELOAD_IDLE_TIMEOUT_MS = 1200
+const NEIGHBOR_PRELOAD_FALLBACK_DELAY_MS = 150
+
+function scheduleDatabaseDetailResultPreload(ref: DatabaseDetailResultSelectRef): () => void {
+  if (typeof window === 'undefined') {
+    return () => undefined
+  }
+
+  const idleWindow = window as Partial<IdlePreloadWindow>
+  if (idleWindow.requestIdleCallback) {
+    const handle = idleWindow.requestIdleCallback(
+      () => {
+        preloadDatabaseDetailResult(ref)
+      },
+      {timeout: NEIGHBOR_PRELOAD_IDLE_TIMEOUT_MS},
+    )
+    return () => {
+      idleWindow.cancelIdleCallback?.(handle)
+    }
+  }
+
+  const timeout = window.setTimeout(() => {
+    preloadDatabaseDetailResult(ref)
+  }, NEIGHBOR_PRELOAD_FALLBACK_DELAY_MS)
+
+  return () => {
+    window.clearTimeout(timeout)
+  }
+}
+
+function useDeferredDatabaseDetailNeighborPreload(
+  navigation: DatabaseDetailResultNavigation | null,
+  enabled: boolean,
+) {
+  useEffect(() => {
+    if (!enabled || !navigation) {
+      return
+    }
+
+    const cancelPreloads: (() => void)[] = []
+    if (navigation.previous) {
+      cancelPreloads.push(scheduleDatabaseDetailResultPreload(navigation.previous.ref))
+    }
+    if (navigation.next) {
+      cancelPreloads.push(scheduleDatabaseDetailResultPreload(navigation.next.ref))
+    }
+
+    return () => {
+      for (const cancelPreload of cancelPreloads) {
+        cancelPreload()
+      }
+    }
+  }, [enabled, navigation])
 }
 
 function getLoadingShellMaxWidth(kind: DatabaseDetailKind): 'standard' | 'wide' {
@@ -330,10 +395,11 @@ export function DbDetailModalHost({
   const stackTop = useDbDetailStackTop()
   const activeRef: DatabaseDetailRef | null = routeItem
     ? {kind: routeItem.kind, id: routeItem.item.id}
-    : stackTop?.kind && isDatabaseDetailKind(stackTop.kind)
+    : stackTop?.source !== 'database-route' && stackTop?.kind && isDatabaseDetailKind(stackTop.kind)
       ? {kind: stackTop.kind, id: stackTop.id}
       : null
-  const activeAwakenerTab = routeItem?.kind === 'awakener' ? routeItem.activeTab : 'overview'
+  const activeAwakenerTab =
+    routeItem?.kind === 'awakener' ? routeItem.activeTab : DEFAULT_DATABASE_AWAKENER_TAB
   const routeNavigation = useMemo(
     () =>
       createDatabaseDetailResultNavigation({
@@ -345,19 +411,6 @@ export function DbDetailModalHost({
       }),
     [activeAwakenerTab, callbacks, resultSet, routeItem],
   )
-
-  useEffect(() => {
-    if (!routeItem || !routeNavigation) {
-      return
-    }
-
-    if (routeNavigation.previous) {
-      preloadDatabaseDetailResult(routeNavigation.previous.ref)
-    }
-    if (routeNavigation.next) {
-      preloadDatabaseDetailResult(routeNavigation.next.ref)
-    }
-  }, [routeItem, routeNavigation])
 
   useEffect(() => {
     dbDetailStore
@@ -430,9 +483,11 @@ function DbDetailOverlayModal({
   const [overlayAwakenerTabState, setOverlayAwakenerTabState] = useState<{
     activeTab: DatabaseAwakenerTab
     refKey: string
-  }>(() => ({activeTab: 'overview', refKey: activeRefKey}))
+  }>(() => ({activeTab: DEFAULT_DATABASE_AWAKENER_TAB, refKey: activeRefKey}))
   const overlayAwakenerTab =
-    overlayAwakenerTabState.refKey === activeRefKey ? overlayAwakenerTabState.activeTab : 'overview'
+    overlayAwakenerTabState.refKey === activeRefKey
+      ? overlayAwakenerTabState.activeTab
+      : DEFAULT_DATABASE_AWAKENER_TAB
   const detailRefLookup = useMemo(
     () => buildDetailRefLookup(awakeners, wheels),
     [awakeners, wheels],
@@ -697,6 +752,7 @@ function DbDetailAwakenerRouteModal({
     missingPathname: registryEntry.missingBrowsePath,
   })
   const canonicalTabPath = resolveAwakenerTabCanonicalPath(routeItem.item, tabSlug)
+  useDeferredDatabaseDetailNeighborPreload(navigation, Boolean(record))
 
   useEffect(() => {
     if (!record || !canonicalTabPath || location.pathname === canonicalTabPath) {
@@ -752,6 +808,7 @@ function DbDetailNonAwakenerRouteModal<Kind extends Exclude<DatabaseDetailKind, 
     loadRecord: registryEntry.loadRecord,
     missingPathname: registryEntry.missingBrowsePath,
   })
+  useDeferredDatabaseDetailNeighborPreload(navigation, Boolean(record))
 
   if (isLoading) {
     return (

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 3,
+  "kind": "talent",
+  "id": "talent.saya.soulforge-aptitude",
+  "name": "Soulforge Aptitude",
+  "route": {
+    "slug": "soulforge-aptitude",
+    "canonicalPath": "/database/awakeners/saya/talents/soulforge-aptitude"
+  },
+  "ownerAwakenerId": "awakener-0057",
+  "family": "soulforge_aptitude",
+  "maxLevel": 10,
+  "descriptionTemplate": "This talent is only effective in the {Astral Reign} stages.\nThis Awakener's CON, ATK, and DEF +[Arg1]%, and they gain [Arg2] Keyflare upon their first {Rouse}.\nAll Awakeners gain [Arg3] stacks of {Propagation Frenzy} at turn start, and the Awakener selected by {Song of Saya} gains another [Arg3] stacks and makes the next Posse take effect twice.\nSaya inflicts +[Arg4]% {Corrosion} stacks on {Caro} enemies.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "linear",
+      "base": "3",
+      "gainPerLevel": "3"
+    },
+    "Arg2": {
+      "kind": "linear",
+      "base": "50",
+      "gainPerLevel": "50"
+    },
+    "Arg3": {
+      "kind": "scaling",
+      "values": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]
+    },
+    "Arg4": {
+      "kind": "scaling",
+      "values": ["50", "55", "60", "65", "70", "75", "80", "85", "90", "100"]
+    }
+  },
+  "ownerAwakenerName": "Saya"
+}

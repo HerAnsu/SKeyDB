@@ -180,7 +180,7 @@ describe('public-detail-record-adapters', () => {
       name: 'Slumber Beneath the Glacier',
       assetId: 'Weapon_Full_SR26',
       aliases: ['Slumber Beneath the Glacier'],
-      awakener: undefined,
+      awakener: 'Murphy',
       mainstatKey: 'KEYFLARE_REGEN',
       mainstatSeriesKey: 'SR:KEYFLARE_REGEN',
       rarity: 'SR',

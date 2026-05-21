@@ -16,7 +16,7 @@
   "ownerAwakenerId": "awakener-0039",
   "ownerAwakenerName": "Pandia",
   "lineupToken": "xd",
-  "descriptionTemplate": "Team Unique: The wielder's {Counter} +[StateArg3]%. For each attack received, gain Temporary {STR} equal to [StateArg1]% of the wielder's ATK. After the wielder uses Exalt, gain {Counter} equal to [StateArg2]% of the wielder's ATK.",
+  "descriptionTemplate": "{Counter} gained from the wielder +[StateArg3]%.\nWhenever an enemy attacks you, gain Temporary {STR} equal to [StateArg1]% of the wielder's ATK for each hit.\nAfter the wielder Exalts, gain {Counter} equal to [StateArg2]% of the wielder's ATK.",
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",

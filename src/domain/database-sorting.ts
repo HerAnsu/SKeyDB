@@ -1,10 +1,9 @@
-import type {Awakener} from './awakeners'
+import {resolveAwakenerLiteStatsForLevel, type Awakener} from './awakeners'
 import type {AwakenerSortKey, CollectionSortDirection} from './collection-sorting'
 
-export type DatabaseSortKey = Extract<
-  AwakenerSortKey,
-  'ALPHABETICAL' | 'RARITY' | 'RELEASE_DATE' | 'ATK' | 'DEF' | 'CON'
->
+export type DatabaseSortKey =
+  | Extract<AwakenerSortKey, 'ALPHABETICAL' | 'RARITY' | 'RELEASE_DATE' | 'ATK' | 'DEF' | 'CON'>
+  | 'BEST_MATCH'
 
 export interface DatabaseSortConfig {
   key: DatabaseSortKey
@@ -19,11 +18,16 @@ const REALM_PRIORITY_BY_ID: Record<string, number> = {
   ULTRA: 3,
 }
 
-const RARITY_PRIORITY_BY_ID: Record<string, number> = {
-  GENESIS: 0,
-  SSR: 1,
-  SR: 2,
-}
+const RARITY_PRIORITY_BY_ID = new Map<string, number>([
+  ['GENESIS', 0],
+  ['SSR_LIMITED', 1],
+  ['SSR_PERMANENT', 2],
+  ['SSR_WELFARE', 2],
+  ['SSR', 2],
+  ['SR_WELFARE', 3],
+  ['SR', 3],
+])
+const DATABASE_SORT_AWAKENER_STAT_LEVEL = 60
 
 function compareNumber(left: number, right: number, direction: CollectionSortDirection): number {
   if (left === right) {
@@ -48,11 +52,39 @@ function compareRarity(
   right: Awakener,
   direction: CollectionSortDirection,
 ): number {
-  const leftRank =
-    RARITY_PRIORITY_BY_ID[left.rarity?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
-  const rightRank =
-    RARITY_PRIORITY_BY_ID[right.rarity?.trim().toUpperCase() ?? ''] ?? Number.MAX_SAFE_INTEGER
+  const leftRank = getRaritySourceSortRank(left)
+  const rightRank = getRaritySourceSortRank(right)
   return direction === 'DESC' ? leftRank - rightRank : rightRank - leftRank
+}
+
+function getAvailabilitySourceSortId(value: string | undefined): string | null {
+  const normalized = value?.trim().toUpperCase()
+  if (!normalized) {
+    return null
+  }
+  if (normalized === 'PERMANENT') {
+    return 'PERMANENT'
+  }
+  if (normalized === 'WELFARE') {
+    return 'WELFARE'
+  }
+  if (normalized.startsWith('LIMITED')) {
+    return 'LIMITED'
+  }
+  return normalized
+}
+
+function getRaritySourceSortRank(awakener: Awakener): number {
+  const rarity = awakener.rarity?.trim().toUpperCase()
+  if (!rarity) {
+    return Number.MAX_SAFE_INTEGER
+  }
+  if (rarity === 'GENESIS') {
+    return RARITY_PRIORITY_BY_ID.get('GENESIS') ?? Number.MAX_SAFE_INTEGER
+  }
+  const source = getAvailabilitySourceSortId(awakener.availabilityType)
+  const raritySourceRank = source ? RARITY_PRIORITY_BY_ID.get(`${rarity}_${source}`) : undefined
+  return raritySourceRank ?? RARITY_PRIORITY_BY_ID.get(rarity) ?? Number.MAX_SAFE_INTEGER
 }
 
 function compareStat(
@@ -61,7 +93,9 @@ function compareStat(
   statKey: 'ATK' | 'DEF' | 'CON',
   direction: CollectionSortDirection,
 ): number {
-  return compareNumber(left.stats?.[statKey] ?? 0, right.stats?.[statKey] ?? 0, direction)
+  const leftStats = resolveAwakenerLiteStatsForLevel(left, DATABASE_SORT_AWAKENER_STAT_LEVEL)
+  const rightStats = resolveAwakenerLiteStatsForLevel(right, DATABASE_SORT_AWAKENER_STAT_LEVEL)
+  return compareNumber(leftStats?.[statKey] ?? 0, rightStats?.[statKey] ?? 0, direction)
 }
 
 function compareReleaseDate(
@@ -97,7 +131,9 @@ export function compareAwakenersForDatabaseSort(
     comparators.push(compareRealm)
   }
 
-  if (config.key === 'RARITY') {
+  if (config.key === 'BEST_MATCH') {
+    comparators.push((innerLeft, innerRight) => compareText(innerLeft.name, innerRight.name, 'ASC'))
+  } else if (config.key === 'RARITY') {
     comparators.push((innerLeft, innerRight) =>
       compareRarity(innerLeft, innerRight, config.direction),
     )

@@ -1,16 +1,16 @@
 import {DEFAULT_REALM_ACCENT, getRealmAccent} from '@/domain/realms'
 
 import {shouldPrioritizeDatabaseGridImage} from './database-grid-card-priority'
-import {DatabaseGridCardFrame} from './DatabaseGridCardFrame'
-import {DatabaseGridCardTitle} from './DatabaseGridCardTitle'
+import {DatabaseGridCardFrame, type DatabaseGridCardImageTreatment} from './DatabaseGridCardFrame'
 
 interface SimpleArtifactGridCardProps {
   id: string
   name: string
   imageSrc: string | undefined
-  imageTreatment?: 'badge' | 'emblem'
+  imageTreatment?: Extract<DatabaseGridCardImageTreatment, 'badge' | 'emblem'>
   realm?: string
   index: number
+  onPreload?: (id: string) => void
   onSelect: (id: string) => void
 }
 
@@ -20,33 +20,32 @@ export function SimpleArtifactGridCard({
   imageTreatment = 'badge',
   index,
   name,
+  onPreload,
   onSelect,
   realm = 'NEUTRAL',
 }: SimpleArtifactGridCardProps) {
   const isNeutral = realm === 'NEUTRAL'
   const realmAccent = isNeutral ? DEFAULT_REALM_ACCENT : getRealmAccent(realm)
-  const posterImageClassName =
-    imageTreatment === 'emblem'
-      ? 'database-grid-card__image--emblem object-contain object-center'
-      : 'database-grid-card__image--badge object-contain object-center'
 
   return (
     <DatabaseGridCardFrame
       content={{
-        title: <DatabaseGridCardTitle title={name}>{name}</DatabaseGridCardTitle>,
+        title: name,
       }}
-      layout='square-art'
       media={{
         alt: name,
-        posterAspectClassName: 'aspect-square',
-        posterClassName: posterImageClassName,
         posterSrc: imageSrc,
+        posterTreatment: imageTreatment,
         prioritize: shouldPrioritizeDatabaseGridImage(index),
+      }}
+      onPreload={() => {
+        onPreload?.(id)
       }}
       onSelect={() => {
         onSelect(id)
       }}
       realmAccent={realmAccent}
+      variant='square-art'
     />
   )
 }

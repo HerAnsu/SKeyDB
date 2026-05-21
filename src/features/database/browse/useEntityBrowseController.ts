@@ -10,6 +10,12 @@ import {
   buildDatabasePossePath,
   buildDatabaseWheelPath,
 } from '@/domain/database-paths'
+import {
+  dbDetailRegistry,
+  preloadDatabaseDetailShell,
+  type DatabaseDetailKind,
+} from '@/features/database/detail/dbDetailRegistry'
+import {preloadDatabaseDetailRecord} from '@/features/database/internal/useDatabaseDetailRouteRecord'
 
 import {databaseAwakeners, databaseCovenants, databasePosses, databaseWheels} from '../data'
 
@@ -45,6 +51,35 @@ function createOpenDetailHandler<TEntry extends {id: string}>(
       pathname: buildPath(entry),
       search: activeSearch,
     })
+  }
+}
+
+function getDetailKindForEntity(activeEntity: DatabaseEntityId): DatabaseDetailKind {
+  if (activeEntity === 'awakeners') {
+    return 'awakener'
+  }
+  if (activeEntity === 'wheels') {
+    return 'wheel'
+  }
+  if (activeEntity === 'posses') {
+    return 'posse'
+  }
+  return 'covenant'
+}
+
+function createPreloadDetailHandler(kind: DatabaseDetailKind) {
+  return (id: string) => {
+    preloadDatabaseDetailShell(kind)
+    const preload =
+      kind === 'awakener'
+        ? preloadDatabaseDetailRecord({id, loadRecord: dbDetailRegistry.awakener.loadRecord})
+        : kind === 'wheel'
+          ? preloadDatabaseDetailRecord({id, loadRecord: dbDetailRegistry.wheel.loadRecord})
+          : kind === 'posse'
+            ? preloadDatabaseDetailRecord({id, loadRecord: dbDetailRegistry.posse.loadRecord})
+            : preloadDatabaseDetailRecord({id, loadRecord: dbDetailRegistry.covenant.loadRecord})
+
+    void preload.catch(() => undefined)
   }
 }
 
@@ -92,6 +127,18 @@ export function useEntityBrowseController({
     locationSearch,
     navigate,
   })
+  const activeDetailKind = getDetailKindForEntity(activeEntity)
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      preloadDatabaseDetailShell(activeDetailKind)
+    }, 350)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [activeDetailKind])
+
   const openAwakenerDetail = useMemo(
     () =>
       createOpenDetailHandler(databaseAwakeners, buildDatabaseAwakenerPath, navigate, activeSearch),
@@ -110,6 +157,10 @@ export function useEntityBrowseController({
       createOpenDetailHandler(databaseCovenants, buildDatabaseCovenantPath, navigate, activeSearch),
     [activeSearch, navigate],
   )
+  const preloadAwakenerDetail = useMemo(() => createPreloadDetailHandler('awakener'), [])
+  const preloadWheelDetail = useMemo(() => createPreloadDetailHandler('wheel'), [])
+  const preloadPosseDetail = useMemo(() => createPreloadDetailHandler('posse'), [])
+  const preloadCovenantDetail = useMemo(() => createPreloadDetailHandler('covenant'), [])
 
   const closeDetail = useCallback(() => {
     void navigate({pathname: browsePath, search: activeSearch})
@@ -125,6 +176,10 @@ export function useEntityBrowseController({
     openWheelDetail,
     openPosseDetail,
     openCovenantDetail,
+    preloadAwakenerDetail,
+    preloadWheelDetail,
+    preloadPosseDetail,
+    preloadCovenantDetail,
     closeDetail,
   }
 }

@@ -7,6 +7,11 @@ import {
   type AwakenerDatabaseSelection,
 } from './awakener-database-state'
 import {type AwakenerFullRecord} from './awakeners-full'
+import {
+  DATABASE_AWAKENER_VISIBLE_TABS,
+  DEFAULT_DATABASE_AWAKENER_TAB,
+  type DatabaseAwakenerVisibleTab,
+} from './database-paths'
 import {clampAccountLevel} from './gameplay-math-metadata'
 import {
   getBrowserLocalStorage,
@@ -19,6 +24,7 @@ import {clampWheelEnhanceLevel} from './wheel-enhance'
 const STORAGE_KEY = 'database-detail-preferences'
 
 const fontScaleSchema = z.enum(['small', 'medium', 'large'])
+const defaultAwakenerDetailTabSchema = z.enum(DATABASE_AWAKENER_VISIBLE_TABS).nullable().catch(null)
 export type DatabaseDetailFontScale = z.infer<typeof fontScaleSchema>
 
 export interface DatabaseDetailSharedPreferences {
@@ -30,6 +36,7 @@ export interface DatabaseDetailSharedPreferences {
 
 export interface DatabaseAwakenerDetailPreferences {
   showVisibleScaling: boolean
+  defaultTab: DatabaseAwakenerVisibleTab | null
   defaultSelection: AwakenerDatabaseSelection
 }
 
@@ -59,6 +66,7 @@ const DEFAULT_DATABASE_DETAIL_SHARED_PREFERENCES: DatabaseDetailSharedPreference
 
 const DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES: DatabaseAwakenerDetailPreferences = {
   showVisibleScaling: true,
+  defaultTab: null,
   defaultSelection: normalizeAwakenerDatabaseSelection(),
 }
 
@@ -80,6 +88,9 @@ const databaseDetailAwakenerPreferencesSchema = z.object({
   showVisibleScaling: z
     .boolean()
     .default(DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES.showVisibleScaling),
+  defaultTab: defaultAwakenerDetailTabSchema.default(
+    DEFAULT_DATABASE_DETAIL_AWAKENER_PREFERENCES.defaultTab,
+  ),
   defaultSelection: z
     .object({
       awakenerLevel: z.number().optional(),
@@ -125,6 +136,7 @@ function extractLegacyPreferences(input: Record<string, unknown>) {
     },
     awakener: {
       showVisibleScaling: input.showVisibleScaling,
+      defaultTab: input.defaultAwakenerDetailTab,
       defaultSelection: input.defaultSelection,
     },
     wheel: {
@@ -151,6 +163,7 @@ export function normalizeDatabaseDetailPreferences(input: unknown = {}): Databas
     },
     awakener: {
       showVisibleScaling: parsed.awakener.showVisibleScaling,
+      defaultTab: parsed.awakener.defaultTab,
       defaultSelection: normalizeAwakenerDatabaseSelection(parsed.awakener.defaultSelection),
     },
     wheel: {
@@ -216,4 +229,15 @@ export function resolveDatabaseDetailDefaultSelection(
     record,
     normalizedPreferences.awakener.defaultSelection,
   )
+}
+
+export function resolveDatabaseDetailDefaultAwakenerTab(
+  preferences?: DatabaseDetailPreferencesPatch | DatabaseDetailPreferences,
+  storage?: StorageLike | null,
+): DatabaseAwakenerVisibleTab {
+  const normalizedPreferences =
+    preferences === undefined
+      ? readDatabaseDetailPreferences(storage)
+      : normalizeDatabaseDetailPreferences(preferences)
+  return normalizedPreferences.awakener.defaultTab ?? DEFAULT_DATABASE_AWAKENER_TAB
 }

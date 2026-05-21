@@ -12,6 +12,7 @@ import {
 import {formatTimelinePrice, type TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 
 import {EventDescriptionPreview, EventDescriptionShelf} from './EventDescription'
+import {TimelineDateDisplay} from './TimelineDateDisplay'
 import {resolveTimelineFeaturedAsset} from './timelineDetailResolution'
 import {useEventDescriptionOverflow} from './useEventDescriptionOverflow'
 
@@ -334,7 +335,7 @@ export function EventCard({event, now, onOpenDetail, priceMode = 'silver-prime'}
 
   return (
     <li
-      className={`${EVENT_ROW_CLASS} ${isEnded ? EVENT_ROW_ENDED_CLASS : EVENT_ROW_ACTIVE_CLASS}`}
+      className={`timeline-date-container ${EVENT_ROW_CLASS} ${isEnded ? EVENT_ROW_ENDED_CLASS : EVENT_ROW_ACTIVE_CLASS}`}
     >
       <div
         className={`grid h-full ${featuredArt ? 'grid-cols-[5.75rem_minmax(0,1fr)] sm:grid-cols-[6rem_minmax(0,1fr)]' : 'grid-cols-1'}`}
@@ -358,12 +359,11 @@ export function EventCard({event, now, onOpenDetail, priceMode = 'silver-prime'}
                 </h3>
               </div>
               {countdownDisplay ? (
-                <span
-                  className='max-w-[4.75rem] shrink-0 pt-0.5 text-right text-[11px] leading-tight font-medium text-slate-500 tabular-nums sm:max-w-none sm:whitespace-nowrap'
+                <TimelineDateDisplay
+                  className='max-w-[7.25rem] shrink-0 pt-0.5 text-right text-[11px] leading-tight font-medium whitespace-normal text-slate-500 tabular-nums sm:max-w-[11rem]'
+                  text={countdownDisplay.text}
                   title={countdownDisplay.title}
-                >
-                  {countdownDisplay.text}
-                </span>
+                />
               ) : null}
             </div>
             <EventTaxonomyLine

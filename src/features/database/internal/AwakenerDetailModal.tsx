@@ -14,16 +14,23 @@ import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-
 import {type Awakener} from '@/domain/awakeners'
 import {type AwakenerFullRecord} from '@/domain/awakeners-full'
 import type {Covenant} from '@/domain/covenants'
-import {DATABASE_AWAKENER_TABS, type DatabaseAwakenerTab} from '@/domain/database-paths'
+import {
+  DATABASE_AWAKENER_VISIBLE_TABS,
+  resolveDatabaseAwakenerVisibleTab,
+  type DatabaseAwakenerTab,
+  type DatabaseAwakenerVisibleTab,
+} from '@/domain/database-paths'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
+import {isPreReleaseAwakener} from '@/domain/pre-release'
 import {getRealmAccent, getRealmIcon, getRealmLabel} from '@/domain/realms'
 import type {Wheel} from '@/domain/wheels'
 import type {DatabaseDetailResultNavigation} from '@/features/database/detail/database-detail-result-navigation'
 import {DatabaseDetailResultNavigator} from '@/features/database/detail/DatabaseDetailResultNavigator'
 import {DbDetailModalFrame} from '@/features/database/detail/DbDetailModalFrame'
+import {PreReleaseDataNotice} from '@/features/database/detail/PreReleaseDataNotice'
 import {ArtViewerOverlay} from '@/ui/modal/ArtViewerOverlay'
 
-import {AwakenerDetailOverview} from './AwakenerDetailOverview'
+import {AwakenerDetailLore, AwakenerDetailOverview} from './AwakenerDetailOverview'
 import {AwakenerDetailSearchBar} from './AwakenerDetailSearchBar'
 import {AwakenerDetailSettingsPanel} from './AwakenerDetailSettingsPanel'
 import {AwakenerDetailSidebar} from './AwakenerDetailSidebar'
@@ -48,12 +55,11 @@ interface AwakenerDetailModalProps {
   onSelectCovenant?: (covenant: Pick<Covenant, 'id' | 'name'>) => void
 }
 
-const DATABASE_AWAKENER_TAB_LABELS: Record<DatabaseAwakenerTab, string> = {
-  overview: 'Overview',
+const DATABASE_AWAKENER_TAB_LABELS: Record<DatabaseAwakenerVisibleTab, string> = {
   upgrades: 'Upgrades',
   skills: 'Skills',
   builds: 'Builds',
-  teams: 'Teams',
+  lore: 'Lore',
 }
 
 const TAB_CONTENT_LOADING_FALLBACK = (
@@ -65,9 +71,6 @@ const AwakenerDetailCards = lazy(() =>
 )
 const AwakenerBuildsTab = lazy(() =>
   import('./AwakenerBuildsTab').then((module) => ({default: module.AwakenerBuildsTab})),
-)
-const AwakenerTeamsTab = lazy(() =>
-  import('./AwakenerTeamsTab').then((module) => ({default: module.AwakenerTeamsTab})),
 )
 
 export function AwakenerDetailModal({
@@ -110,7 +113,7 @@ export function AwakenerDetailModal({
     session,
     settingsRef,
   } = useAwakenerDetailModalState({
-    activeTab: routeActiveTab,
+    activeTab: resolveDatabaseAwakenerVisibleTab(routeActiveTab),
     awakeners,
     fullData,
     onClose,
@@ -146,31 +149,33 @@ export function AwakenerDetailModal({
     awakener.faction ? {key: 'faction', label: awakener.faction} : null,
   ].filter((item): item is {key: string; label: string; color?: string} => item !== null)
 
-  function focusTab(tab: DatabaseAwakenerTab) {
+  function focusTab(tab: DatabaseAwakenerVisibleTab) {
     tabButtonRefs.current[tab]?.focus()
   }
 
   function handleTabKeyDown(
     event: ReactKeyboardEvent<HTMLButtonElement>,
-    currentTab: DatabaseAwakenerTab,
+    currentTab: DatabaseAwakenerVisibleTab,
   ) {
-    const currentIndex = DATABASE_AWAKENER_TABS.indexOf(currentTab)
+    const currentIndex = DATABASE_AWAKENER_VISIBLE_TABS.indexOf(currentTab)
     if (currentIndex === -1) {
       return
     }
 
-    let nextTab: DatabaseAwakenerTab | null = null
+    let nextTab: DatabaseAwakenerVisibleTab | null = null
     if (event.key === 'ArrowRight') {
-      nextTab = DATABASE_AWAKENER_TABS[(currentIndex + 1) % DATABASE_AWAKENER_TABS.length]
+      nextTab =
+        DATABASE_AWAKENER_VISIBLE_TABS[(currentIndex + 1) % DATABASE_AWAKENER_VISIBLE_TABS.length]
     } else if (event.key === 'ArrowLeft') {
       nextTab =
-        DATABASE_AWAKENER_TABS[
-          (currentIndex - 1 + DATABASE_AWAKENER_TABS.length) % DATABASE_AWAKENER_TABS.length
+        DATABASE_AWAKENER_VISIBLE_TABS[
+          (currentIndex - 1 + DATABASE_AWAKENER_VISIBLE_TABS.length) %
+            DATABASE_AWAKENER_VISIBLE_TABS.length
         ]
     } else if (event.key === 'Home') {
-      nextTab = DATABASE_AWAKENER_TABS[0]
+      nextTab = DATABASE_AWAKENER_VISIBLE_TABS[0]
     } else if (event.key === 'End') {
-      nextTab = DATABASE_AWAKENER_TABS[DATABASE_AWAKENER_TABS.length - 1]
+      nextTab = DATABASE_AWAKENER_VISIBLE_TABS[DATABASE_AWAKENER_VISIBLE_TABS.length - 1]
     }
 
     if (!nextTab) {
@@ -273,14 +278,8 @@ export function AwakenerDetailModal({
 
             <div className='flex min-h-0 min-w-0 flex-1 flex-col'>
               <div className='shrink-0 px-5 pt-4 pb-0 md:pt-5'>
-                {awakener.unreleased ? (
-                  <div className='mb-3 max-w-2xl border border-amber-500/30 bg-amber-950/20 px-3 py-2.5'>
-                    <p className='text-[11px] leading-relaxed text-amber-100/75'>
-                      <strong className='font-semibold text-amber-200/90'>Pre-release data:</strong>{' '}
-                      Values and content are based on pre-release information and may change before
-                      or after release.
-                    </p>
-                  </div>
+                {awakener.unreleased || isPreReleaseAwakener(awakener) ? (
+                  <PreReleaseDataNotice />
                 ) : null}
                 <div className='flex items-center gap-2.5 pr-20'>
                   {cardAsset ? (
@@ -361,7 +360,7 @@ export function AwakenerDetailModal({
                     className='database-scrollbar flex min-w-0 flex-nowrap gap-0.5 overflow-x-auto'
                     role='tablist'
                   >
-                    {DATABASE_AWAKENER_TABS.map((tab) => (
+                    {DATABASE_AWAKENER_VISIBLE_TABS.map((tab) => (
                       <button
                         aria-controls={tabPanelId}
                         aria-selected={activeTab === tab}
@@ -462,10 +461,8 @@ export function AwakenerDetailModal({
                       <AwakenerBuildsTab awakenerId={awakener.id} />
                     </Suspense>
                   )}
-                  {activeTab === 'teams' && (
-                    <Suspense fallback={TAB_CONTENT_LOADING_FALLBACK}>
-                      <AwakenerTeamsTab />
-                    </Suspense>
+                  {activeTab === 'lore' && (
+                    <AwakenerDetailLore awakener={awakener} fullData={fullData} />
                   )}
                 </div>
                 <DatabasePopoverRoot {...popoverRootProps} fontScale={fontScale} />

@@ -34,6 +34,7 @@ export interface DatabaseReferenceEntry {
   record?: DescribedRecord
   descriptionRank?: number
   descriptionMaxRank?: number
+  descriptionRankMode?: 'static' | 'current'
   influenceBadges?: DatabaseInfluenceBadge[]
   attributeRows?: DatabaseReferenceAttributeRow[]
   thumbnail?: DatabaseReferenceThumbnail

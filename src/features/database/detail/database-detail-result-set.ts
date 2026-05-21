@@ -5,7 +5,7 @@ import type {Covenant} from '@/domain/covenants'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getPosseAssetById} from '@/domain/posse-assets'
 import type {Posse} from '@/domain/posses'
-import {getWheelAssetById} from '@/domain/wheel-assets'
+import {getWheelMiniAssetById} from '@/domain/wheel-assets'
 import type {Wheel} from '@/domain/wheels'
 
 import type {DatabaseDetailResultSet} from './database-detail-result-navigation'
@@ -28,7 +28,8 @@ export function createWheelDetailResultSet(wheels: readonly Wheel[]): DatabaseDe
     kind: 'wheel',
     items: wheels.map((wheel) => ({
       id: wheel.id,
-      imageSrc: getWheelAssetById(wheel.id),
+      imageSrc: getWheelMiniAssetById(wheel.id),
+      imageTreatment: 'icon',
       name: wheel.name,
     })),
   }

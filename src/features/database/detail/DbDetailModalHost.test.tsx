@@ -16,7 +16,7 @@ import {dbDetailRegistry} from './dbDetailRegistry'
 interface MockDetailRenderOptions {
   callbacks: {
     onClose: () => void
-    onTabChange: (tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams') => void
+    onTabChange: (tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams' | 'lore') => void
     onSelectWheel: (wheel: {id?: string; name: string}) => void
   }
   item: {
@@ -222,8 +222,10 @@ describe('DbDetailModalHost overlay entries', () => {
 
     openDetailInAct({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
 
-    expect(await screen.findByRole('dialog', {name: /goliath details/i})).toBeInTheDocument()
-    expect(screen.getByText('Active tab: overview')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByRole('dialog', {name: /goliath details/i})).toBeInTheDocument()
+    })
+    expect(screen.getByText('Active tab: upgrades')).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', {name: /close overlay/i}))
 
@@ -319,7 +321,7 @@ describe('DbDetailModalHost overlay entries', () => {
 
     openDetailInAct({kind: 'awakener', id: 'awakener-0021'}, 'builder-overlay')
 
-    expect(await screen.findByText('Active tab: overview')).toBeInTheDocument()
+    expect(await screen.findByText('Active tab: upgrades')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', {name: /show skills tab/i}))
 
     expect(await screen.findByText('Active tab: skills')).toBeInTheDocument()
@@ -386,6 +388,51 @@ describe('DbDetailModalHost overlay entries', () => {
 })
 
 describe('DbDetailModalHost route entries', () => {
+  it('does not render a stale route-sourced stack entry as an overlay after the route closes', async () => {
+    vi.mocked(dbDetailRegistry.awakener.loadRecord).mockResolvedValue(mockAwakenerRecord)
+    const callbacks = {
+      onClose: vi.fn(),
+      onSelectAwakener: vi.fn(),
+      onSelectCovenant: vi.fn(),
+      onSelectPosse: vi.fn(),
+      onSelectWheel: vi.fn(),
+      onTabChange: vi.fn(),
+    }
+    const {rerender} = render(
+      <MemoryRouter initialEntries={['/database/awakeners/goliath']}>
+        <DbDetailModalHost
+          awakeners={awakeners}
+          callbacks={callbacks}
+          routeItem={{kind: 'awakener', item: awakeners[0], activeTab: 'upgrades'}}
+          wheels={wheels}
+        />
+      </MemoryRouter>,
+    )
+
+    await waitFor(() => {
+      expect(screen.getByRole('dialog', {name: /goliath details/i})).toBeInTheDocument()
+    })
+    expect(dbDetailStore.getState().stack).toEqual([
+      {kind: 'awakener', id: 'awakener-0021', source: 'database-route'},
+    ])
+
+    rerender(
+      <MemoryRouter initialEntries={['/database']}>
+        <DbDetailModalHost
+          awakeners={awakeners}
+          callbacks={callbacks}
+          routeItem={null}
+          wheels={wheels}
+        />
+      </MemoryRouter>,
+    )
+
+    expect(screen.queryByRole('dialog', {name: /goliath details/i})).not.toBeInTheDocument()
+    await waitFor(() => {
+      expect(dbDetailStore.getState().stack).toEqual([])
+    })
+  })
+
   it('keeps database modal chrome visible while a route record is still loading', async () => {
     let resolveRecord!: (record: WheelFullRecord) => void
     const pendingRecord = new Promise<WheelFullRecord>((resolve) => {
@@ -429,5 +476,63 @@ describe('DbDetailModalHost route entries', () => {
       expect(dbDetailRegistry.wheel.render).toHaveBeenCalled()
     })
     expect(screen.getByRole('dialog', {name: /merciful nurturing details/i})).toBeInTheDocument()
+  })
+
+  it('waits for the selected route record before preloading neighboring result records', async () => {
+    let resolveRecord!: (record: WheelFullRecord) => void
+    const pendingRecord = new Promise<WheelFullRecord>((resolve) => {
+      resolveRecord = resolve
+    })
+    const wheelLoadRecord = vi.mocked(dbDetailRegistry.wheel.loadRecord)
+    wheelLoadRecord.mockImplementation((id) => {
+      if (id === 'wheel-0050') {
+        return pendingRecord
+      }
+      return Promise.resolve({
+        ...mockWheelRecord,
+        id,
+        name: 'Shared Dream',
+      })
+    })
+    const callbacks = {
+      onClose: vi.fn(),
+      onSelectAwakener: vi.fn(),
+      onSelectCovenant: vi.fn(),
+      onSelectPosse: vi.fn(),
+      onSelectWheel: vi.fn(),
+      onTabChange: vi.fn(),
+    }
+
+    render(
+      <MemoryRouter initialEntries={['/database/wheels/merciful-nurturing']}>
+        <DbDetailModalHost
+          awakeners={awakeners}
+          callbacks={callbacks}
+          resultSet={{
+            kind: 'wheel',
+            items: [
+              {id: 'wheel-0050', name: 'Merciful Nurturing'},
+              {id: 'wheel-0099', name: 'Shared Dream'},
+            ],
+          }}
+          routeItem={{kind: 'wheel', item: wheels[0]}}
+          wheels={wheels}
+        />
+      </MemoryRouter>,
+    )
+
+    await waitFor(() => {
+      expect(wheelLoadRecord).toHaveBeenCalledWith('wheel-0050')
+    })
+    expect(wheelLoadRecord).not.toHaveBeenCalledWith('wheel-0099')
+
+    resolveRecord(mockWheelRecord)
+
+    await waitFor(() => {
+      expect(screen.getByRole('dialog', {name: /merciful nurturing details/i})).toBeInTheDocument()
+    })
+    await waitFor(() => {
+      expect(wheelLoadRecord).toHaveBeenCalledWith('wheel-0099')
+    })
   })
 })

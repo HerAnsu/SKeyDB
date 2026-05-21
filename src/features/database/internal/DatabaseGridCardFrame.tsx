@@ -1,75 +1,95 @@
 import {useId, type CSSProperties, type ReactNode} from 'react'
 
-import {useHybridDatabaseCardMode} from './hybrid-database-card-mode'
+export type DatabaseGridCardImageTreatment = 'badge' | 'cover-top' | 'emblem' | 'wheel'
+export type DatabaseCardVariant = 'poster' | 'dossier' | 'square-art'
+export type HybridDatabaseCardMode = Extract<DatabaseCardVariant, 'poster' | 'dossier'>
 
-interface DatabaseGridCardFrameProps {
+type DatabaseGridCardDetailVisibility = 'all' | 'dossier' | 'poster'
+
+type RealmAccentStyle = CSSProperties & {'--realm-accent': string}
+
+interface DatabaseGridCardDetail {
+  body: ReactNode
+  visibility: DatabaseGridCardDetailVisibility
+}
+
+interface DatabaseGridCardBaseProps {
   actionLabel?: string
-  content: {
-    detail?: ReactNode
-    dossierTitleAddon?: ReactNode
-    meta?: ReactNode
-    title: ReactNode
-  }
-  layout?: 'hybrid' | 'portrait' | 'square-art'
-  media: {
-    alt: string
-    dossierClassName?: string
-    dossierSrc?: string | undefined
-    posterAspectClassName?: string
-    posterBadge?: {
-      label?: string | undefined
-      src?: string | undefined
-    }
-    posterClassName?: string
-    posterSrc: string | undefined
-    prioritize: boolean
-  }
+  onPreload?: () => void
   onSelect: () => void
   realmAccent: string
 }
 
-function NoImage({className}: {className?: string}) {
-  return (
-    <div
-      className={`flex h-full w-full items-center justify-center text-[10px] tracking-wide text-slate-500 uppercase ${className ?? ''}`}
-    >
-      No Image
-    </div>
-  )
+interface DatabaseGridCardBaseMedia {
+  alt: string
+  posterSrc: string | undefined
+  prioritize: boolean
 }
 
-function PendingImage({className}: {className?: string}) {
-  return (
-    <div
-      aria-hidden='true'
-      className={`h-full w-full bg-[color-mix(in_oklab,var(--realm-accent)_5%,rgb(8_15_27))] ${className ?? ''}`}
-    />
-  )
+interface HybridDatabaseGridCardFrameProps extends DatabaseGridCardBaseProps {
+  content: {
+    detail?: DatabaseGridCardDetail
+    dossierTitleAddon?: ReactNode
+    meta?: ReactNode
+    title: string
+  }
+  media: DatabaseGridCardBaseMedia & {
+    dossierSrc?: string | undefined
+    posterBadge?: {
+      label?: string | undefined
+      src?: string | undefined
+    }
+    dossierTreatment?: DatabaseGridCardImageTreatment
+    posterTreatment?: DatabaseGridCardImageTreatment
+  }
+  variant: HybridDatabaseCardMode
+}
+
+interface SquareArtDatabaseGridCardFrameProps extends DatabaseGridCardBaseProps {
+  content: {
+    detail?: never
+    dossierTitleAddon?: never
+    meta?: never
+    title: string
+  }
+  media: DatabaseGridCardBaseMedia & {
+    dossierSrc?: never
+    dossierTreatment?: never
+    posterBadge?: never
+    posterTreatment: Extract<DatabaseGridCardImageTreatment, 'badge' | 'emblem'>
+  }
+  variant: 'square-art'
+}
+
+type DatabaseGridCardFrameProps =
+  | HybridDatabaseGridCardFrameProps
+  | SquareArtDatabaseGridCardFrameProps
+
+function NoImage() {
+  return <div className='database-grid-card__no-image'>No Image</div>
 }
 
 function CardImage({
   alt,
-  className,
-  decorative = false,
   prioritize,
   src,
+  treatment,
 }: {
   alt: string
-  className: string
-  decorative?: boolean
   prioritize: boolean
   src: string | undefined
+  treatment: DatabaseGridCardImageTreatment
 }) {
   if (!src) {
-    return <NoImage className={className} />
+    return <NoImage />
   }
 
   return (
-    <div className='database-grid-card__image-plane absolute inset-0'>
+    <div className='database-grid-card__image-plane'>
       <img
-        alt={decorative ? '' : alt}
-        aria-hidden={decorative ? 'true' : undefined}
-        className={className}
+        alt={alt}
+        className='database-grid-card__image'
+        data-treatment={treatment}
         decoding='async'
         draggable={false}
         fetchPriority={prioritize ? 'high' : 'low'}
@@ -89,7 +109,7 @@ function PosterBadge({label, src}: {label: string | undefined; src: string | und
     <img
       alt=''
       aria-hidden='true'
-      className='database-grid-card__poster-badge absolute top-0 left-0 z-10 h-12 w-12 object-contain'
+      className='database-grid-card__poster-badge'
       draggable={false}
       src={src}
       title={label}
@@ -97,37 +117,47 @@ function PosterBadge({label, src}: {label: string | undefined; src: string | und
   )
 }
 
+function shouldShowDetail(
+  variant: HybridDatabaseCardMode,
+  visibility: DatabaseGridCardDetailVisibility,
+) {
+  return visibility === 'all' || visibility === variant
+}
+
 export function DatabaseGridCardFrame({
   actionLabel = 'View details for',
   content,
-  layout = 'hybrid',
   media,
+  onPreload,
   onSelect,
   realmAccent,
+  variant,
 }: DatabaseGridCardFrameProps) {
   const titleId = useId()
-  const accentStyle = {'--realm-accent': realmAccent} as CSSProperties
+  const accentStyle: RealmAccentStyle = {'--realm-accent': realmAccent}
   const resolvedDossierSrc = media.dossierSrc ?? media.posterSrc
-  const hybridMode = useHybridDatabaseCardMode()
-  const imageMode =
-    layout === 'hybrid' ? (hybridMode === undefined ? 'poster' : hybridMode) : 'poster'
-  const isDossierMode = imageMode === 'dossier'
+  const isDossierMode = variant === 'dossier'
+  const renderedDetail =
+    variant !== 'square-art' &&
+    content.detail &&
+    shouldShowDetail(variant, content.detail.visibility)
+      ? content.detail.body
+      : null
   const activeImageSrc = isDossierMode ? resolvedDossierSrc : media.posterSrc
-  const activeImageClassName = isDossierMode
-    ? (media.dossierClassName ?? 'object-cover object-top')
-    : (media.posterClassName ?? 'object-cover object-top')
+  const activeImageTreatment = isDossierMode
+    ? (media.dossierTreatment ?? media.posterTreatment ?? 'cover-top')
+    : (media.posterTreatment ?? 'cover-top')
 
   return (
-    <article
-      className={`database-grid-card-frame database-grid-card-frame--${layout} group/card`}
-      data-image-mode={imageMode ?? 'pending'}
-      style={accentStyle}
-    >
-      <div className='database-grid-card__surface relative isolate grid min-w-0 overflow-hidden border border-[color-mix(in_srgb,var(--realm-accent)_48%,rgb(51_65_85)_52%)] bg-[rgb(7_15_27)] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.025),0_8px_18px_rgba(2,6,23,0.22)] transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.25,1,0.5,1)] group-focus-within/card:border-[color-mix(in_srgb,var(--realm-accent)_66%,rgb(51_65_85)_34%)] group-focus-within/card:bg-[rgb(10_18_32)] group-focus-within/card:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_12px_24px_rgba(2,6,23,0.28)] group-hover/card:border-[color-mix(in_srgb,var(--realm-accent)_66%,rgb(51_65_85)_34%)] group-hover/card:bg-[rgb(10_18_32)] group-hover/card:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_12px_24px_rgba(2,6,23,0.28)] motion-reduce:transition-none'>
+    <article className='database-grid-card-frame' data-card-variant={variant} style={accentStyle}>
+      <div className='database-grid-card__surface'>
         <button
           aria-labelledby={`${titleId}-action ${titleId}`}
-          className='absolute inset-0 z-30 cursor-pointer focus-visible:ring-2 focus-visible:ring-amber-200/70 focus-visible:outline-none focus-visible:ring-inset'
+          className='database-grid-card__button'
+          onFocus={onPreload}
           onClick={onSelect}
+          onPointerDown={onPreload}
+          onPointerEnter={onPreload}
           type='button'
         >
           <span className='sr-only' id={`${titleId}-action`}>
@@ -135,43 +165,39 @@ export function DatabaseGridCardFrame({
           </span>
         </button>
 
-        <div
-          className={`database-grid-card__art relative min-w-0 overflow-hidden border-b border-[color-mix(in_srgb,var(--realm-accent)_32%,rgb(30_41_59)_68%)] bg-[color-mix(in_oklab,var(--realm-accent)_8%,rgb(8_15_27))] ${media.posterAspectClassName ?? 'aspect-[4/5]'}`}
-        >
-          {imageMode ? (
-            <>
-              <CardImage
-                alt={media.alt}
-                className={`database-grid-card__image h-full w-full ${activeImageClassName}`}
-                prioritize={media.prioritize}
-                src={activeImageSrc}
-              />
-              {!isDossierMode ? (
-                <PosterBadge label={media.posterBadge?.label} src={media.posterBadge?.src} />
-              ) : null}
-            </>
-          ) : (
-            <PendingImage className='database-grid-card__image h-full w-full' />
-          )}
+        <div className='database-grid-card__art'>
+          <CardImage
+            alt={media.alt}
+            prioritize={media.prioritize}
+            src={activeImageSrc}
+            treatment={activeImageTreatment}
+          />
+          {!isDossierMode ? (
+            <PosterBadge label={media.posterBadge?.label} src={media.posterBadge?.src} />
+          ) : null}
         </div>
 
-        <div className='database-grid-card__body grid min-w-0 content-center gap-1.5 bg-[linear-gradient(180deg,rgba(9,19,33,0.98),rgba(5,12,23,0.96))] px-2.5 py-2'>
-          <div className='database-grid-card__title flex min-w-0 items-center gap-1.5' id={titleId}>
-            {content.title}
+        <div className='database-grid-card__body'>
+          <div className='database-grid-card__title' id={titleId}>
+            <p className='database-grid-card__title-text' title={content.title}>
+              {content.title}
+            </p>
             {isDossierMode && content.dossierTitleAddon ? (
-              <span className='database-grid-card__dossier-title-addon hidden shrink-0'>
+              <span className='database-grid-card__dossier-title-addon'>
                 {content.dossierTitleAddon}
               </span>
             ) : null}
           </div>
-          {content.detail ? (
-            <div className='database-grid-card__detail hidden min-w-0 text-[10.5px] leading-[1.25] font-medium tracking-[0.035em] text-slate-400'>
-              {content.detail}
+          {renderedDetail !== null ? (
+            <div
+              className={
+                isDossierMode ? 'database-grid-card__detail' : 'database-grid-card__poster-detail'
+              }
+            >
+              {renderedDetail}
             </div>
           ) : null}
-          {content.meta ? (
-            <div className='database-grid-card__meta min-w-0'>{content.meta}</div>
-          ) : null}
+          {content.meta ? <div className='database-grid-card__meta'>{content.meta}</div> : null}
         </div>
       </div>
     </article>

@@ -9,6 +9,7 @@ import {
 
 describe('database browse sort labels', () => {
   it('returns exact awakener database sort labels', () => {
+    expect(getDatabaseSortLabel('BEST_MATCH')).toBe('Best match')
     expect(getDatabaseSortLabel('ALPHABETICAL')).toBe('Alphabetical')
     expect(getDatabaseSortLabel('RARITY')).toBe('Rarity')
     expect(getDatabaseSortLabel('RELEASE_DATE')).toBe('Release date')
@@ -18,6 +19,7 @@ describe('database browse sort labels', () => {
   })
 
   it('returns exact awakener database direction labels', () => {
+    expect(getDatabaseSortDirectionLabel('BEST_MATCH', 'ASC')).toBe('')
     expect(getDatabaseSortDirectionLabel('ALPHABETICAL', 'ASC')).toBe('A → Z')
     expect(getDatabaseSortDirectionLabel('ALPHABETICAL', 'DESC')).toBe('Z → A')
     expect(getDatabaseSortDirectionLabel('RELEASE_DATE', 'ASC')).toBe('Old → New')

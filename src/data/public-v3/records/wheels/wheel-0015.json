@@ -16,7 +16,7 @@
   "ownerAwakenerId": "awakener-0013",
   "ownerAwakenerName": "Doll",
   "lineupToken": "4",
-  "descriptionTemplate": "Team Unique: The healing caused by the wielder's Command Card +[StateArg2]%. Before the wielder releases \"Exalt, \" other Awakeners gain [StateArg1] Aliemus. If your team is in a {Vulnerable} state, the effect is doubled.",
+  "descriptionTemplate": "HP recovered by the wielder's Command Cards +[StateArg2]%.\nAfter the wielder Exalts, grant all other Awakeners [StateArg1] Aliemus. If Awakeners were {Vulnerable} before the Exalt was released, Aliemus granted this way is doubled.",
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",

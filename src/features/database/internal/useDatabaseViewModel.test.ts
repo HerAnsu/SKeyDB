@@ -38,7 +38,7 @@ function makeBrowseState(overrides: Partial<DatabaseBrowseState> = {}): Database
     availabilityFilter: 'ALL',
     gameplayFactionFilters: [],
     scalingSubstatFilters: [],
-    sortKey: 'ALPHABETICAL',
+    sortKey: 'BEST_MATCH',
     sortDirection: 'ASC',
     groupByRealm: false,
     ...overrides,
@@ -137,13 +137,144 @@ describe('filterAwakenersForDatabase', () => {
         'ALL',
         'ALL',
         ['Lemurian'],
-        ['KeyflareRegen', 'DamageAmplification'],
+        [
+          {key: 'KeyflareRegen', role: 'ANY'},
+          {key: 'DamageAmplification', role: 'ANY'},
+        ],
       ).map((awakener) => awakener.name),
     ).toEqual(['Full Match'])
+  })
+
+  it('distinguishes main and sub scaling substat filters', () => {
+    const awakeners = [
+      makeAwakener({
+        id: 'awakener-0001',
+        name: 'Main Scaling',
+        substatScaling: {DamageAmplification: 1.6},
+      }),
+      makeAwakener({
+        id: 'awakener-0002',
+        name: 'Sub Scaling',
+        substatScaling: {DamageAmplification: 0.8},
+      }),
+      makeAwakener({
+        id: 'awakener-0003',
+        name: 'No Scaling',
+        substatScaling: {DamageAmplification: 0},
+      }),
+    ]
+
+    expect(
+      filterAwakenersForDatabase(
+        awakeners,
+        'ALL',
+        'ALL',
+        'ALL',
+        'ALL',
+        [],
+        [{key: 'DamageAmplification', role: 'ANY'}],
+      ).map((awakener) => awakener.name),
+    ).toEqual(['Main Scaling', 'Sub Scaling'])
+    expect(
+      filterAwakenersForDatabase(
+        awakeners,
+        'ALL',
+        'ALL',
+        'ALL',
+        'ALL',
+        [],
+        [{key: 'DamageAmplification', role: 'PRIMARY'}],
+      ).map((awakener) => awakener.name),
+    ).toEqual(['Main Scaling'])
+    expect(
+      filterAwakenersForDatabase(
+        awakeners,
+        'ALL',
+        'ALL',
+        'ALL',
+        'ALL',
+        [],
+        [{key: 'DamageAmplification', role: 'SECONDARY'}],
+      ).map((awakener) => awakener.name),
+    ).toEqual(['Sub Scaling'])
+  })
+
+  it('filters independent main and sub scaling selections together', () => {
+    const awakeners = [
+      makeAwakener({
+        id: 'awakener-0001',
+        name: 'Main Amp Sub Keyflare',
+        substatScaling: {DamageAmplification: 1.6, KeyflareRegen: 1.2},
+      }),
+      makeAwakener({
+        id: 'awakener-0002',
+        name: 'Main Amp Only',
+        substatScaling: {DamageAmplification: 1.6, KeyflareRegen: 2.4},
+      }),
+      makeAwakener({
+        id: 'awakener-0003',
+        name: 'Sub Keyflare Only',
+        substatScaling: {DamageAmplification: 0.8, KeyflareRegen: 1.2},
+      }),
+    ]
+
+    expect(
+      filterAwakenersForDatabase(
+        awakeners,
+        'ALL',
+        'ALL',
+        'ALL',
+        'ALL',
+        [],
+        [
+          {key: 'DamageAmplification', role: 'PRIMARY'},
+          {key: 'KeyflareRegen', role: 'SECONDARY'},
+        ],
+      ).map((awakener) => awakener.name),
+    ).toEqual(['Main Amp Sub Keyflare'])
   })
 })
 
 describe('useDatabaseViewModel', () => {
+  it('promotes primary scaling matches only for best match sorting', () => {
+    const awakeners = [
+      makeAwakener({
+        id: 'awakener-0001',
+        name: 'Aigis',
+        substatScaling: {DamageAmplification: 0.8},
+      }),
+      makeAwakener({
+        id: 'awakener-0002',
+        name: 'Castor',
+        substatScaling: {DamageAmplification: 1.6},
+      }),
+    ]
+
+    expect(
+      renderHook(() =>
+        useDatabaseViewModel(
+          awakeners,
+          makeBrowseState({
+            scalingSubstatFilters: [{key: 'DamageAmplification', role: 'ANY'}],
+            sortKey: 'BEST_MATCH',
+          }),
+        ),
+      ).result.current.awakeners.map((awakener) => awakener.name),
+    ).toEqual(['Castor', 'Aigis'])
+
+    expect(
+      renderHook(() =>
+        useDatabaseViewModel(
+          awakeners,
+          makeBrowseState({
+            scalingSubstatFilters: [{key: 'DamageAmplification', role: 'ANY'}],
+            sortKey: 'ALPHABETICAL',
+          }),
+        ),
+      ).result.current.awakeners.map((awakener) => awakener.name),
+    ).toEqual(['Aigis', 'Castor'])
+  })
+
   it('keeps active search relevance ahead of the selected sort', () => {
     const awakeners = [
       makeAwakener({

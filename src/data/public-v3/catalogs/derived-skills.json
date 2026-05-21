@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "derived-skills",
   "kind": "derivedSkill",
-  "recordCount": 117,
+  "recordCount": 118,
   "records": [
     {
       "kind": "derivedSkill",
@@ -720,6 +720,15 @@
       "route": {
         "slug": "light-cone-boundary",
         "canonicalPath": "/database/derived-skills/light-cone-boundary"
+      }
+    },
+    {
+      "kind": "derivedSkill",
+      "id": "derived.global.propagule-embryo",
+      "name": "Propagule Embryo",
+      "route": {
+        "slug": "propagule-embryo",
+        "canonicalPath": "/database/derived-skills/propagule-embryo"
       }
     },
     {

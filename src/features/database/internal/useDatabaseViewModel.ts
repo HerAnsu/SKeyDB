@@ -1,15 +1,20 @@
 import {useMemo} from 'react'
 
+import {
+  hasAwakenerScalingSubstat,
+  inferAwakenerScalingSubstatRole,
+  matchesAwakenerScalingSubstatRole,
+} from '@/domain/awakener-scaling-substats'
 import {type Awakener} from '@/domain/awakeners'
 import {searchAwakenerResults} from '@/domain/awakeners-search'
 import type {CollectionSortDirection} from '@/domain/collection-sorting'
 import {
   type AvailabilityFilterId,
+  type AwakenerScalingSubstatFilter,
   type DatabaseBrowseState,
   type GameplayFactionFilterId,
   type RarityFilterId,
   type RealmFilterId,
-  type SubstatScalingKey,
   type TypeFilterId,
 } from '@/domain/database-browse-state'
 import {compareAwakenersForDatabaseSort, type DatabaseSortKey} from '@/domain/database-sorting'
@@ -35,7 +40,7 @@ export function filterAwakenersForDatabase(
   typeFilter: TypeFilterId,
   availabilityFilter: AvailabilityFilterId,
   gameplayFactionFilters: readonly GameplayFactionFilterId[] = [],
-  scalingSubstatFilters: readonly SubstatScalingKey[] = [],
+  scalingSubstatFilters: readonly AwakenerScalingSubstatFilter[] = [],
 ): Awakener[] {
   let result = awakeners
   if (realmFilter !== 'ALL') {
@@ -55,10 +60,37 @@ export function filterAwakenersForDatabase(
   }
   if (scalingSubstatFilters.length > 0) {
     result = result.filter((a) =>
-      scalingSubstatFilters.every((filter) => (a.substatScaling?.[filter] ?? 0) > 0),
+      scalingSubstatFilters.every((filter) => {
+        if (filter.role === 'PRIMARY') {
+          return matchesAwakenerScalingSubstatRole(a.substatScaling, filter.key, 'MAIN')
+        }
+        if (filter.role === 'SECONDARY') {
+          return matchesAwakenerScalingSubstatRole(a.substatScaling, filter.key, 'SUB')
+        }
+        return hasAwakenerScalingSubstat(a.substatScaling, filter.key)
+      }),
     )
   }
   return result
+}
+
+function getScalingBestMatchScore(
+  awakener: Awakener,
+  scalingSubstatFilters: readonly AwakenerScalingSubstatFilter[],
+): number {
+  return scalingSubstatFilters.reduce((score, filter) => {
+    if (filter.role !== 'ANY') {
+      return score
+    }
+    const role = inferAwakenerScalingSubstatRole(awakener.substatScaling, filter.key)
+    if (role === 'MAIN') {
+      return score + 2
+    }
+    if (role === 'SUB') {
+      return score + 1
+    }
+    return score
+  }, 0)
 }
 
 function applySorting(
@@ -66,17 +98,36 @@ function applySorting(
   sortKey: DatabaseSortKey,
   sortDirection: CollectionSortDirection,
   groupByRealm: boolean,
+  scalingSubstatFilters: readonly AwakenerScalingSubstatFilter[],
   relevanceByAwakenerId?: ReadonlyMap<string, number>,
 ): Awakener[] {
-  return [...awakeners].sort(
-    (left, right) =>
+  const scalingBestMatchScoreById =
+    sortKey === 'BEST_MATCH' && scalingSubstatFilters.length > 0
+      ? new Map(
+          awakeners.map((awakener) => [
+            awakener.id,
+            getScalingBestMatchScore(awakener, scalingSubstatFilters),
+          ]),
+        )
+      : null
+
+  return [...awakeners].sort((left, right) => {
+    const bestMatchComparison =
+      scalingBestMatchScoreById !== null
+        ? (scalingBestMatchScoreById.get(right.id) ?? 0) -
+          (scalingBestMatchScoreById.get(left.id) ?? 0)
+        : 0
+
+    return (
       compareSearchRelevance(left, right, relevanceByAwakenerId) ||
+      bestMatchComparison ||
       compareAwakenersForDatabaseSort(left, right, {
         key: sortKey,
         direction: sortDirection,
         groupByRealm,
-      }),
-  )
+      })
+    )
+  })
 }
 
 export function useDatabaseViewModel(allAwakeners: Awakener[], browseState: DatabaseBrowseState) {
@@ -105,7 +156,14 @@ export function useDatabaseViewModel(allAwakeners: Awakener[], browseState: Data
       gameplayFactionFilters,
       scalingSubstatFilters,
     )
-    return applySorting(filtered, sortKey, sortDirection, groupByRealm, relevanceByAwakenerId)
+    return applySorting(
+      filtered,
+      sortKey,
+      sortDirection,
+      groupByRealm,
+      scalingSubstatFilters,
+      relevanceByAwakenerId,
+    )
   }, [
     allAwakeners,
     availabilityFilter,

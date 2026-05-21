@@ -13,6 +13,8 @@
   "rarity": "SR",
   "realm": "NEUTRAL",
   "mainstatKey": "CRIT_RATE",
+  "ownerAwakenerId": "awakener-0001",
+  "ownerAwakenerName": "24",
   "lineupToken": "xP",
   "descriptionTemplate": "Team Unique: The wielder enters the Silver Cod persona after exploration begins. Switch between the Silver Cod and Cat personas after using Exalt.\nSilver Cod: Gain [StateArg1] Keyflare after dealing Damage. Cat: Gain a Temporary Crit. DMG increase of +[StateArg2]% after dealing Damage. These effects share a maximum of 5 triggers per turn.",
   "descriptionArgs": {

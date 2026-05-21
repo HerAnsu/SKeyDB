@@ -13,6 +13,8 @@
   "rarity": "SR",
   "realm": "NEUTRAL",
   "mainstatKey": "ALIEMUS_REGEN",
+  "ownerAwakenerId": "awakener-0048",
+  "ownerAwakenerName": "Thais",
   "lineupToken": "xS",
   "descriptionTemplate": "Team Unique: After the wielder releases Exalt, they gain {STR} equal to [StateArg1]% of the wielder's ATK. If the current Realm is {Caro}, after releasing Exalt, {Embryo Fusion} ++[StateArg2].",
   "descriptionArgs": {

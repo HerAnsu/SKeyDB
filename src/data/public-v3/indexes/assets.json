@@ -951,6 +951,23 @@
         ]
       }
     },
+    "asset-awakener-0057-icon": {
+      "id": "asset-awakener-0057-icon",
+      "slot": "icon",
+      "kind": "awakener",
+      "ownerId": "awakener-0057",
+      "assetId": "saya",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/awk-cards/saya.webp",
+        "candidates": [
+          "src/assets/awk-cards/saya.webp",
+          "src/assets/awk-cards/saya.png",
+          "src/assets/awk-portraits/saya.webp",
+          "src/assets/awk-portraits/saya.png"
+        ]
+      }
+    },
     "asset-wheel-0001-icon": {
       "id": "asset-wheel-0001-icon",
       "slot": "icon",
@@ -2533,6 +2550,30 @@
         "status": "available",
         "path": "src/assets/wheels/Weapon_Full_ZL08.webp",
         "candidates": ["src/assets/wheels/Weapon_Full_ZL08.webp", "src/assets/wheels/Weapon_Full_ZL08.png"]
+      }
+    },
+    "asset-wheel-0167-icon": {
+      "id": "asset-wheel-0167-icon",
+      "slot": "icon",
+      "kind": "wheel",
+      "ownerId": "wheel-0167",
+      "assetId": "Weapon_Full_B15",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/wheels/Weapon_Full_B15.webp",
+        "candidates": ["src/assets/wheels/Weapon_Full_B15.webp", "src/assets/wheels/Weapon_Full_B15.png"]
+      }
+    },
+    "asset-wheel-0168-icon": {
+      "id": "asset-wheel-0168-icon",
+      "slot": "icon",
+      "kind": "wheel",
+      "ownerId": "wheel-0168",
+      "assetId": "Weapon_Full_SR49",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/wheels/Weapon_Full_SR49.webp",
+        "candidates": ["src/assets/wheels/Weapon_Full_SR49.webp", "src/assets/wheels/Weapon_Full_SR49.png"]
       }
     },
     "asset-relic-0001-icon": {
@@ -7426,6 +7467,42 @@
         "candidates": ["src/assets/posse/Icon/KeyToken_Skill_52.webp", "src/assets/posse/Icon/KeyToken_Skill_52.png"]
       }
     },
+    "asset-posse-0051-badge": {
+      "id": "asset-posse-0051-badge",
+      "slot": "badge",
+      "kind": "posse",
+      "ownerId": "posse-0051",
+      "assetId": "KeyToken_Props_53",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/posse/Badge/KeyToken_Props_53.webp",
+        "candidates": ["src/assets/posse/Badge/KeyToken_Props_53.webp", "src/assets/posse/Badge/KeyToken_Props_53.png"]
+      }
+    },
+    "asset-posse-0051-crystal": {
+      "id": "asset-posse-0051-crystal",
+      "slot": "crystal",
+      "kind": "posse",
+      "ownerId": "posse-0051",
+      "assetId": "KeyToken_Crystal_53",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/posse/FullArt/KeyToken_Crystal_53.webp",
+        "candidates": ["src/assets/posse/FullArt/KeyToken_Crystal_53.webp", "src/assets/posse/FullArt/KeyToken_Crystal_53.png"]
+      }
+    },
+    "asset-posse-0051-icon": {
+      "id": "asset-posse-0051-icon",
+      "slot": "icon",
+      "kind": "posse",
+      "ownerId": "posse-0051",
+      "assetId": "KeyToken_Skill_53",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/posse/Icon/KeyToken_Skill_53.webp",
+        "candidates": ["src/assets/posse/Icon/KeyToken_Skill_53.webp", "src/assets/posse/Icon/KeyToken_Skill_53.png"]
+      }
+    },
     "asset-overlay.aigis.petrify-icon": {
       "id": "asset-overlay.aigis.petrify-icon",
       "slot": "icon",
@@ -7508,18 +7585,6 @@
         "status": "available",
         "path": "src/assets/icons/IconS_Buff_084.webp",
         "candidates": ["src/assets/icons/IconS_Buff_084.webp", "src/assets/icons/IconS_Buff_084.png"]
-      }
-    },
-    "asset-overlay.castor.corrosion-icon": {
-      "id": "asset-overlay.castor.corrosion-icon",
-      "slot": "icon",
-      "kind": "overlay",
-      "ownerId": "overlay.castor.corrosion",
-      "assetId": "IconS_Buff_070",
-      "availability": {
-        "status": "available",
-        "path": "src/assets/icons/IconS_Buff_070.webp",
-        "candidates": ["src/assets/icons/IconS_Buff_070.webp", "src/assets/icons/IconS_Buff_070.png"]
       }
     },
     "asset-overlay.clementine.phobic-fixation-icon": {
@@ -7664,6 +7729,18 @@
         "status": "available",
         "path": "src/assets/icons/IconS_Buff_057.webp",
         "candidates": ["src/assets/icons/IconS_Buff_057.webp", "src/assets/icons/IconS_Buff_057.png"]
+      }
+    },
+    "asset-overlay.global.corrosion-icon": {
+      "id": "asset-overlay.global.corrosion-icon",
+      "slot": "icon",
+      "kind": "overlay",
+      "ownerId": "overlay.global.corrosion",
+      "assetId": "IconS_Buff_070",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/icons/IconS_Buff_070.webp",
+        "candidates": ["src/assets/icons/IconS_Buff_070.webp", "src/assets/icons/IconS_Buff_070.png"]
       }
     },
     "asset-overlay.global.counter-icon": {
@@ -8026,6 +8103,18 @@
         "candidates": ["src/assets/icons/IconS_Buff_039.webp", "src/assets/icons/IconS_Buff_039.png"]
       }
     },
+    "asset-overlay.saya.gynoecium-icon": {
+      "id": "asset-overlay.saya.gynoecium-icon",
+      "slot": "icon",
+      "kind": "overlay",
+      "ownerId": "overlay.saya.gynoecium",
+      "assetId": "IconS_Buff_087",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/icons/IconS_Buff_087.webp",
+        "candidates": ["src/assets/icons/IconS_Buff_087.webp", "src/assets/icons/IconS_Buff_087.png"]
+      }
+    },
     "asset-overlay.vortice.vortex-reload-icon": {
       "id": "asset-overlay.vortice.vortex-reload-icon",
       "slot": "icon",
@@ -8267,6 +8356,9 @@
     },
     "awakener-0056": {
       "icon": "asset-awakener-0056-icon"
+    },
+    "awakener-0057": {
+      "icon": "asset-awakener-0057-icon"
     },
     "wheel-0001": {
       "icon": "asset-wheel-0001-icon"
@@ -8663,6 +8755,12 @@
     },
     "wheel-0166": {
       "icon": "asset-wheel-0166-icon"
+    },
+    "wheel-0167": {
+      "icon": "asset-wheel-0167-icon"
+    },
+    "wheel-0168": {
+      "icon": "asset-wheel-0168-icon"
     },
     "relic-0001": {
       "icon": "asset-relic-0001-icon"
@@ -9478,6 +9576,11 @@
       "crystal": "asset-posse-0050-crystal",
       "badge": "asset-posse-0050-badge"
     },
+    "posse-0051": {
+      "icon": "asset-posse-0051-icon",
+      "crystal": "asset-posse-0051-crystal",
+      "badge": "asset-posse-0051-badge"
+    },
     "overlay.aigis.petrify": {
       "icon": "asset-overlay.aigis.petrify-icon"
     },
@@ -9498,9 +9601,6 @@
     },
     "overlay.arachne.weaver": {
       "icon": "asset-overlay.arachne.weaver-icon"
-    },
-    "overlay.castor.corrosion": {
-      "icon": "asset-overlay.castor.corrosion-icon"
     },
     "overlay.clementine.phobic-fixation": {
       "icon": "asset-overlay.clementine.phobic-fixation-icon"
@@ -9537,6 +9637,9 @@
     },
     "overlay.global.burn": {
       "icon": "asset-overlay.global.burn-icon"
+    },
+    "overlay.global.corrosion": {
+      "icon": "asset-overlay.global.corrosion-icon"
     },
     "overlay.global.counter": {
       "icon": "asset-overlay.global.counter-icon"
@@ -9627,6 +9730,9 @@
     },
     "overlay.ramona-timeworn.negentropy": {
       "icon": "asset-overlay.ramona-timeworn.negentropy-icon"
+    },
+    "overlay.saya.gynoecium": {
+      "icon": "asset-overlay.saya.gynoecium-icon"
     },
     "overlay.vortice.vortex-reload": {
       "icon": "asset-overlay.vortice.vortex-reload-icon"

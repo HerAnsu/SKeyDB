@@ -55,7 +55,7 @@ export function AwakenerDetailStateControls({
   onPatchSelection,
 }: AwakenerDetailStateControlsProps) {
   return (
-    <div className='space-y-2.5'>
+    <div className='space-y-2.5' data-detail-modal-popover-preserve=''>
       <div className='space-y-1.5'>
         <DetailLevelSlider
           compact={compact}

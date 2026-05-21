@@ -16,21 +16,17 @@
   "ownerAwakenerId": "awakener-0005",
   "ownerAwakenerName": "Aurita",
   "lineupToken": "9",
-  "descriptionTemplate": "Team Unique: After the wielder plays a card, the wielder gains 1 point of Aliemus. At the start of combat, gain [StateArg1]% of the wielder's Attack as {STR}, and if the current Realm is {Aequor}, additionally gain [StateArg2]% of {Tentacle DMG}. Subsequently, at the start of each following turn, gain [StateArg3]% of the wielder's Attack as {STR}, and if the current Realm is {Aequor}, additionally gain [StateArg4]% of {Tentacle DMG}.",
+  "descriptionTemplate": "Whenever one of the wielder's cards is played, they gain 1 Aliemus.\nAt the start of battle, gain {STR} equal to [StateArg1]% of the wielder's ATK and {Tentacle DMG} equal to [StateArg2]% of their ATK.\nAt the start of each following turn, gain {STR} equal to [StateArg3]% of the wielder's ATK and {Tentacle DMG} equal to [StateArg4]% of their ATK.",
   "descriptionArgs": {
     "StateArg1": {
-      "kind": "computed",
-      "formulaKey": "wheelRefinementLinear",
-      "baseValue": 6.0,
-      "perLevel": 1.0,
-      "inputs": ["wheelRefinementLevel"]
+      "kind": "scaling",
+      "values": ["6", "7", "8", "9"],
+      "suffix": "%"
     },
     "StateArg2": {
-      "kind": "computed",
-      "formulaKey": "wheelRefinementLinear",
-      "baseValue": 3.0,
-      "perLevel": 1.0,
-      "inputs": ["wheelRefinementLevel"]
+      "kind": "scaling",
+      "values": ["3", "4", "5", "6"],
+      "suffix": "%"
     },
     "StateArg3": {
       "kind": "scaling",

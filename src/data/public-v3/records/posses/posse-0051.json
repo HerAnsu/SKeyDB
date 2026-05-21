@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 3,
+  "kind": "posse",
+  "id": "posse-0051",
+  "name": "For the New World",
+  "route": {
+    "slug": "for-the-new-world",
+    "canonicalPath": "/database/posses/for-the-new-world"
+  },
+  "assets": {
+    "icon": "asset-posse-0051-icon",
+    "crystal": "asset-posse-0051-crystal",
+    "badge": "asset-posse-0051-badge"
+  },
+  "ownerAwakenerId": "awakener-0057",
+  "ownerAwakenerName": "Saya",
+  "realm": "CARO",
+  "lineupToken": "4",
+  "descriptionTemplate": "Gain 48 Shield. Draw 2 \"Skill\" cards and grant them {Perception Warp}. Saya: gains 1 stack of {Gynoecium}.",
+  "descriptionArgs": {},
+  "lore": "Bloom, bloom, dyeing the entire world in colors of joy.\nThat is an ancient healing, an eternal bliss—Saya's final gift to the new world about to be unveiled."
+}

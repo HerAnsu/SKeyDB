@@ -8,10 +8,22 @@ import type {
   DatabaseAwakenerDetailPreferences,
   DatabaseDetailSharedPreferences,
 } from '@/domain/database-detail-preferences'
+import {
+  DATABASE_AWAKENER_VISIBLE_TABS,
+  DEFAULT_DATABASE_AWAKENER_TAB,
+  type DatabaseAwakenerVisibleTab,
+} from '@/domain/database-paths'
 import {clampAccountLevel} from '@/domain/gameplay-math-metadata'
 import {DetailSettingsPanel} from '@/ui/modal/DetailSettingsPanel'
 
 import {AwakenerDetailStateControls} from './AwakenerDetailStateControls'
+
+const DEFAULT_TAB_LABELS: Record<DatabaseAwakenerVisibleTab, string> = {
+  upgrades: 'Upgrades',
+  skills: 'Skills',
+  builds: 'Builds',
+  lore: 'Lore',
+}
 
 interface AwakenerDetailSettingsPanelProps {
   controls: AwakenerDatabaseControls
@@ -53,6 +65,30 @@ export function AwakenerDetailSettingsPanel({
     >
       <div className='space-y-3'>
         <div className='space-y-2'>
+          <label className='block text-left'>
+            <span className='block text-[11px] text-slate-200'>Default tab</span>
+            <select
+              className='mt-1 w-full border border-slate-700/55 bg-slate-950 px-2 py-1.5 text-[11px] text-slate-200 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none'
+              onChange={(event) => {
+                const nextTab =
+                  event.target.value === ''
+                    ? null
+                    : (event.target.value as DatabaseAwakenerVisibleTab)
+                onUpdateAwakenerPreferences({defaultTab: nextTab})
+              }}
+              value={preferences.defaultTab ?? ''}
+            >
+              <option value=''>Upgrades (standard)</option>
+              {DATABASE_AWAKENER_VISIBLE_TABS.filter(
+                (tab) => tab !== DEFAULT_DATABASE_AWAKENER_TAB,
+              ).map((tab) => (
+                <option key={tab} value={tab}>
+                  {DEFAULT_TAB_LABELS[tab]}
+                </option>
+              ))}
+            </select>
+          </label>
+
           <label className='flex items-start gap-2 text-left'>
             <input
               checked={preferences.showVisibleScaling}

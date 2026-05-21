@@ -13,6 +13,8 @@
   "rarity": "SR",
   "realm": "NEUTRAL",
   "mainstatKey": "DMG_AMP",
+  "ownerAwakenerId": "awakener-0052",
+  "ownerAwakenerName": "Wanda",
   "lineupToken": "xN",
   "descriptionTemplate": "Team Unique: Increases the wielder's Shield and {Counter} by [StateArg1]%. When attacked, there is a [StateArg2]% chance for all Awakeners to gain 1 Aliemus.",
   "descriptionArgs": {

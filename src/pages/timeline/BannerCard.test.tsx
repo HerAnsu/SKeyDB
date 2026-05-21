@@ -23,8 +23,8 @@ describe('BannerCard', () => {
       </MemoryRouter>,
     )
 
-    expect(screen.getByText('Ended 2d ago')).toBeInTheDocument()
     expect(screen.getByText('Ended 2d ago')).toHaveAttribute('title', 'Mar 1, 2026 - Mar 8, 2026')
+    expect(screen.getByText('Mar 1 → Mar 8')).toHaveAttribute('title', 'Mar 1, 2026 - Mar 8, 2026')
     expect(screen.queryByTitle('Pinned')).not.toBeInTheDocument()
   })
 
@@ -44,11 +44,16 @@ describe('BannerCard', () => {
       </MemoryRouter>,
     )
 
-    expect(screen.getByText('Starts Mar 30')).toBeInTheDocument()
-    expect(screen.getByText('Starts Mar 30')).toHaveAttribute(
+    expect(screen.getByText('Starts Mar 30 · Ends Apr 10')).toHaveAttribute(
       'title',
       'Mar 30, 2026 - Apr 10, 2026',
     )
+    expect(screen.getByText('Mar 30 → Apr 10')).toHaveAttribute(
+      'title',
+      'Mar 30, 2026 - Apr 10, 2026',
+    )
+    expect(container.querySelector('[data-banner-hero="summary"]')).not.toHaveAttribute('title')
+    expect(container.querySelector('[data-banner-drawer-body]')).not.toHaveAttribute('title')
     expect(container.querySelector('article')?.className).not.toContain('opacity-')
     expect(container.innerHTML).not.toContain('opacity-[0.86]')
     expect(container.innerHTML).not.toContain('saturate-[0.78]')
@@ -233,6 +238,52 @@ describe('BannerCard', () => {
       'href',
       '/database/wheels/eternal-weave',
     )
+  })
+
+  it('renders the active day for daily banners', () => {
+    render(
+      <MemoryRouter>
+        <BannerCard
+          banner={{
+            id: 'echoing-wishes',
+            title: 'Echoing Wishes',
+            type: 'daily',
+            startDate: '2026-05-18T01:00:00.000Z',
+            endDate: '2026-06-15T01:00:00.000Z',
+            dailySchedule: [
+              {
+                day: 1,
+                featured: [
+                  {name: 'Tulu', kind: 'awakener'},
+                  {name: 'Hymn of the Sovereign', kind: 'wheel'},
+                ],
+              },
+              {
+                day: 4,
+                featured: [
+                  {name: 'Lily', kind: 'awakener'},
+                  {name: 'Grace Through Pain', kind: 'wheel'},
+                ],
+              },
+            ],
+          }}
+          now={new Date('2026-05-21T01:00:00.000Z')}
+        />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByText('Day 4')).toBeInTheDocument()
+    expect(screen.getByText('Lily')).toBeInTheDocument()
+    expect(screen.queryByText('Grace Through Pain')).not.toBeInTheDocument()
+    expect(screen.getByRole('link', {name: 'Lily'})).toHaveAttribute(
+      'href',
+      '/database/awakeners/lily',
+    )
+    expect(screen.getByRole('link', {name: 'Grace Through Pain'})).toHaveAttribute(
+      'href',
+      '/database/wheels/grace-through-pain',
+    )
+    expect(screen.queryByRole('link', {name: 'Tulu'})).not.toBeInTheDocument()
   })
 
   it('opens database-backed featured units in timeline detail overlays on plain clicks', () => {

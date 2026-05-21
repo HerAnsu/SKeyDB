@@ -1,5 +1,5 @@
 import {fireEvent, render, screen, waitFor} from '@testing-library/react'
-import {describe, expect, it, vi} from 'vitest'
+import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import type {
   AwakenerEnlightenRecord,
@@ -14,6 +14,7 @@ import * as globalDatabaseReferenceLayer from '@/domain/global-database-referenc
 import type {PublicDescriptionArg} from '@/domain/public-description-args'
 import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
+import type {DatabasePopoverDescriptionRankContext} from './database-popover-context'
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
 import {DatabasePopoverRoot} from './DatabasePopoverRoot'
 import {useDatabasePopoverController} from './useDatabasePopoverController'
@@ -208,6 +209,10 @@ const TEST_WHEEL_PREVIEW_ENTRY: KeyedDatabaseReferenceEntry = {
   },
 }
 
+afterEach(() => {
+  vi.restoreAllMocks()
+})
+
 function ControllerHarness({
   referenceLayer,
   selectedEnlightenSlot = null,
@@ -215,6 +220,7 @@ function ControllerHarness({
   onNavigateToWheelPage,
   onOuterClick,
   formulaContext,
+  currentDescriptionRankContext,
 }: {
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
@@ -222,8 +228,10 @@ function ControllerHarness({
   onNavigateToWheelPage?: (wheel: {id: string; name: string}) => void
   onOuterClick?: () => void
   formulaContext?: PublicFormulaContext
+  currentDescriptionRankContext?: DatabasePopoverDescriptionRankContext
 }) {
   const popoverController = useDatabasePopoverController({
+    currentDescriptionRankContext,
     formulaContext,
     onNavigateToSkills,
     onNavigateToWheelPage,
@@ -277,6 +285,37 @@ function ControllerHarness({
           type='button'
         >
           Open Counter
+        </button>
+        <button
+          onClick={(event) => {
+            const overlay = referenceLayer?.overlayByName.get('counter')
+            if (!overlay) {
+              throw new Error('Expected Counter overlay')
+            }
+            popoverController.contextValue.openRootOverlay(overlay, event, {
+              descriptionRank: 6,
+              descriptionMaxRank: 6,
+            })
+          }}
+          type='button'
+        >
+          Open Counter Rank 6
+        </button>
+        <button
+          onClick={(event) => {
+            const overlay = referenceLayer?.overlayByName.get('counter')
+            if (!overlay) {
+              throw new Error('Expected Counter overlay')
+            }
+            popoverController.contextValue.openRootOverlay(overlay, event, {
+              descriptionRank: currentDescriptionRankContext?.descriptionRank,
+              descriptionMaxRank: currentDescriptionRankContext?.descriptionMaxRank,
+              descriptionRankMode: 'current',
+            })
+          }}
+          type='button'
+        >
+          Open Counter Current Rank
         </button>
         <button
           onClick={(event) => {
@@ -511,6 +550,76 @@ describe('useDatabasePopoverController', () => {
     })
     expect(await screen.findByText(/When attacked/)).toBeInTheDocument()
     expect(screen.queryByText('Details coming soon')).not.toBeInTheDocument()
+  })
+
+  it('applies root overlay rank context without changing generic overlay opens', async () => {
+    const referenceLayer = buildReferenceLayer('Base text.')
+    const counterReference = referenceLayer.referenceInfoByName.get('counter')
+    if (counterReference?.kind !== 'overlay') {
+      throw new Error('Expected Counter overlay reference')
+    }
+    counterReference.description = 'Gain 1 stack.'
+    counterReference.record.descriptionTemplate = 'Gain [Arg1] stack.'
+    counterReference.record.descriptionArgs = {
+      Arg1: {
+        kind: 'scaling',
+        values: ['1', '2', '3', '4', '5', '6'],
+      },
+    }
+
+    render(<ControllerHarness referenceLayer={referenceLayer} />)
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Counter'}))
+    expect(await screen.findByTitle(/Lv6: 6/)).toHaveTextContent('1')
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Guard'}))
+    expect(await screen.findByText('Guard text.')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Counter Rank 6'}))
+    expect(await screen.findByTitle(/Lv6: 6/)).toHaveTextContent('6')
+  })
+
+  it('live updates current-rank overlay popovers when the rank context changes', async () => {
+    const referenceLayer = buildReferenceLayer('Base text.')
+    const counterReference = referenceLayer.referenceInfoByName.get('counter')
+    if (counterReference?.kind !== 'overlay') {
+      throw new Error('Expected Counter overlay reference')
+    }
+    counterReference.description = 'Gain 1 stack.'
+    counterReference.record.descriptionTemplate = 'Gain [Arg1] stack.'
+    counterReference.record.descriptionArgs = {
+      Arg1: {
+        kind: 'scaling',
+        values: ['1', '2', '3', '4', '5', '6'],
+      },
+    }
+
+    const {rerender} = render(
+      <ControllerHarness
+        currentDescriptionRankContext={{
+          descriptionRank: 1,
+          descriptionMaxRank: 6,
+          descriptionRankMode: 'current',
+        }}
+        referenceLayer={referenceLayer}
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Counter Current Rank'}))
+    expect(await screen.findByTitle(/Lv6: 6/)).toHaveTextContent('1')
+
+    rerender(
+      <ControllerHarness
+        currentDescriptionRankContext={{
+          descriptionRank: 6,
+          descriptionMaxRank: 6,
+          descriptionRankMode: 'current',
+        }}
+        referenceLayer={referenceLayer}
+      />,
+    )
+
+    expect(await screen.findByTitle(/Lv6: 6/)).toHaveTextContent('6')
   })
 
   it('threads formula context from controller options into popover content', async () => {

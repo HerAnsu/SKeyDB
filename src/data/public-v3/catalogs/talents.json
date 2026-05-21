@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "talents",
   "kind": "talent",
-  "recordCount": 210,
+  "recordCount": 214,
   "records": [
     {
       "kind": "talent",
@@ -2260,6 +2260,58 @@
       },
       "ownerAwakenerId": "awakener-0045",
       "ownerAwakenerName": "Sanga",
+      "family": "soulforge_aptitude",
+      "maxLevel": 10
+    },
+    {
+      "kind": "talent",
+      "id": "talent.saya.gnostic-potential",
+      "name": "Gnostic Potential",
+      "route": {
+        "slug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/saya/talents/gnostic-potential"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "gnostic_potential",
+      "maxLevel": 5,
+      "defaultMaxed": true
+    },
+    {
+      "kind": "talent",
+      "id": "talent.saya.madness-omen",
+      "name": "Madness Omen",
+      "route": {
+        "slug": "madness-omen",
+        "canonicalPath": "/database/awakeners/saya/talents/madness-omen"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "madness_omen",
+      "maxLevel": 12
+    },
+    {
+      "kind": "talent",
+      "id": "talent.saya.propagation-caro",
+      "name": "Propagation: Caro",
+      "route": {
+        "slug": "propagation-caro",
+        "canonicalPath": "/database/awakeners/saya/talents/propagation-caro"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "passive"
+    },
+    {
+      "kind": "talent",
+      "id": "talent.saya.soulforge-aptitude",
+      "name": "Soulforge Aptitude",
+      "route": {
+        "slug": "soulforge-aptitude",
+        "canonicalPath": "/database/awakeners/saya/talents/soulforge-aptitude"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },

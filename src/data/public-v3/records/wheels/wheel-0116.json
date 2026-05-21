@@ -13,6 +13,8 @@
   "rarity": "SR",
   "realm": "NEUTRAL",
   "mainstatKey": "CRIT_DMG",
+  "ownerAwakenerId": "awakener-0027",
+  "ownerAwakenerName": "Kathigu-Ra",
   "lineupToken": "yE",
   "descriptionTemplate": "Team Unique: The wielder's Base DMG is boosted by [StateArg1]%. After playing 5 Command Cards from the wielder, the wielder gains [StateArg2]% Temporary Crit. Rate. This effect can only trigger once per turn.",
   "descriptionArgs": {

@@ -278,6 +278,12 @@
         "canonicalSlug": "sanga",
         "canonicalPath": "/database/awakeners/sanga"
       },
+      "saya": {
+        "kind": "awakener",
+        "id": "awakener-0057",
+        "canonicalSlug": "saya",
+        "canonicalPath": "/database/awakeners/saya"
+      },
       "sorel": {
         "kind": "awakener",
         "id": "awakener-0046",
@@ -610,6 +616,12 @@
         "canonicalSlug": "fouette",
         "canonicalPath": "/database/wheels/fouette"
       },
+      "fragrant-morphogenesis": {
+        "kind": "wheel",
+        "id": "wheel-0167",
+        "canonicalSlug": "fragrant-morphogenesis",
+        "canonicalPath": "/database/wheels/fragrant-morphogenesis"
+      },
       "frenzy": {
         "kind": "wheel",
         "id": "wheel-0062",
@@ -807,6 +819,12 @@
         "id": "wheel-0090",
         "canonicalSlug": "moment-of-reunion",
         "canonicalPath": "/database/wheels/moment-of-reunion"
+      },
+      "muddied-fairy-tale": {
+        "kind": "wheel",
+        "id": "wheel-0168",
+        "canonicalSlug": "muddied-fairy-tale",
+        "canonicalPath": "/database/wheels/muddied-fairy-tale"
       },
       "navigator-at-sea": {
         "kind": "wheel",
@@ -2367,6 +2385,12 @@
         "id": "posse-0025",
         "canonicalSlug": "festival-of-tides",
         "canonicalPath": "/database/posses/festival-of-tides"
+      },
+      "for-the-new-world": {
+        "kind": "posse",
+        "id": "posse-0051",
+        "canonicalSlug": "for-the-new-world",
+        "canonicalPath": "/database/posses/for-the-new-world"
       },
       "from-the-mist-realm": {
         "kind": "posse",
@@ -4500,6 +4524,48 @@
         "canonicalSlug": "the-sea-of-corals",
         "canonicalPath": "/database/awakeners/sanga/skills/the-sea-of-corals"
       },
+      "saya/cognitive-alteration": {
+        "kind": "skill",
+        "id": "skill.saya.cognitive-alteration",
+        "canonicalSlug": "cognitive-alteration",
+        "canonicalPath": "/database/awakeners/saya/skills/cognitive-alteration"
+      },
+      "saya/defense": {
+        "kind": "skill",
+        "id": "skill.saya.defense",
+        "canonicalSlug": "defense",
+        "canonicalPath": "/database/awakeners/saya/skills/defense"
+      },
+      "saya/genetics-copy": {
+        "kind": "skill",
+        "id": "skill.saya.genetics-copy",
+        "canonicalSlug": "genetics-copy",
+        "canonicalPath": "/database/awakeners/saya/skills/genetics-copy"
+      },
+      "saya/paradise-just-for-you": {
+        "kind": "skill",
+        "id": "skill.saya.paradise-just-for-you",
+        "canonicalSlug": "paradise-just-for-you",
+        "canonicalPath": "/database/awakeners/saya/skills/paradise-just-for-you"
+      },
+      "saya/song-of-saya": {
+        "kind": "skill",
+        "id": "skill.saya.song-of-saya",
+        "canonicalSlug": "song-of-saya",
+        "canonicalPath": "/database/awakeners/saya/skills/song-of-saya"
+      },
+      "saya/strike": {
+        "kind": "skill",
+        "id": "skill.saya.strike",
+        "canonicalSlug": "strike",
+        "canonicalPath": "/database/awakeners/saya/skills/strike"
+      },
+      "saya/viscera-blossoms": {
+        "kind": "skill",
+        "id": "skill.saya.viscera-blossoms",
+        "canonicalSlug": "viscera-blossoms",
+        "canonicalPath": "/database/awakeners/saya/skills/viscera-blossoms"
+      },
       "sorel/carousel-of-ambition": {
         "kind": "skill",
         "id": "skill.sorel.carousel-of-ambition",
@@ -5419,6 +5485,12 @@
         "id": "derived.pollux.sacred-heart",
         "canonicalSlug": "sacred-heart",
         "canonicalPath": "/database/awakeners/pollux/derived-skills/sacred-heart"
+      },
+      "propagule-embryo": {
+        "kind": "derivedSkill",
+        "id": "derived.global.propagule-embryo",
+        "canonicalSlug": "propagule-embryo",
+        "canonicalPath": "/database/derived-skills/propagule-embryo"
       },
       "ramona-timeworn/ode-to-tomorrow": {
         "kind": "derivedSkill",
@@ -6675,6 +6747,30 @@
         "id": "talent.sanga.soulforge-aptitude",
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/sanga/talents/soulforge-aptitude"
+      },
+      "saya/gnostic-potential": {
+        "kind": "talent",
+        "id": "talent.saya.gnostic-potential",
+        "canonicalSlug": "gnostic-potential",
+        "canonicalPath": "/database/awakeners/saya/talents/gnostic-potential"
+      },
+      "saya/madness-omen": {
+        "kind": "talent",
+        "id": "talent.saya.madness-omen",
+        "canonicalSlug": "madness-omen",
+        "canonicalPath": "/database/awakeners/saya/talents/madness-omen"
+      },
+      "saya/propagation-caro": {
+        "kind": "talent",
+        "id": "talent.saya.propagation-caro",
+        "canonicalSlug": "propagation-caro",
+        "canonicalPath": "/database/awakeners/saya/talents/propagation-caro"
+      },
+      "saya/soulforge-aptitude": {
+        "kind": "talent",
+        "id": "talent.saya.soulforge-aptitude",
+        "canonicalSlug": "soulforge-aptitude",
+        "canonicalPath": "/database/awakeners/saya/talents/soulforge-aptitude"
       },
       "sorel/gnostic-potential": {
         "kind": "talent",
@@ -8268,6 +8364,36 @@
         "canonicalSlug": "the-sea-of-corals",
         "canonicalPath": "/database/awakeners/sanga/enlightens/the-sea-of-corals"
       },
+      "saya/here-my-one-last-gift": {
+        "kind": "enlighten",
+        "id": "enlighten.saya.here-my-one-last-gift",
+        "canonicalSlug": "here-my-one-last-gift",
+        "canonicalPath": "/database/awakeners/saya/enlightens/here-my-one-last-gift"
+      },
+      "saya/ill-be-your-very-own-monster": {
+        "kind": "enlighten",
+        "id": "enlighten.saya.ill-be-your-very-own-monster",
+        "canonicalSlug": "ill-be-your-very-own-monster",
+        "canonicalPath": "/database/awakeners/saya/enlightens/ill-be-your-very-own-monster"
+      },
+      "saya/must-be-what-they-call-love": {
+        "kind": "enlighten",
+        "id": "enlighten.saya.must-be-what-they-call-love",
+        "canonicalSlug": "must-be-what-they-call-love",
+        "canonicalPath": "/database/awakeners/saya/enlightens/must-be-what-they-call-love"
+      },
+      "saya/paradise-just-for-you": {
+        "kind": "enlighten",
+        "id": "enlighten.saya.paradise-just-for-you",
+        "canonicalSlug": "paradise-just-for-you",
+        "canonicalPath": "/database/awakeners/saya/enlightens/paradise-just-for-you"
+      },
+      "saya/will-you-stay-with-me-always": {
+        "kind": "enlighten",
+        "id": "enlighten.saya.will-you-stay-with-me-always",
+        "canonicalSlug": "will-you-stay-with-me-always",
+        "canonicalPath": "/database/awakeners/saya/enlightens/will-you-stay-with-me-always"
+      },
       "sorel/ecarlate-profond": {
         "kind": "enlighten",
         "id": "enlighten.sorel.carlate-profond",
@@ -8708,12 +8834,6 @@
         "canonicalSlug": "caro",
         "canonicalPath": "/database/overlays/caro"
       },
-      "castor/corrosion": {
-        "kind": "overlay",
-        "id": "overlay.castor.corrosion",
-        "canonicalSlug": "corrosion",
-        "canonicalPath": "/database/awakeners/castor/overlays/corrosion"
-      },
       "celeste/revival": {
         "kind": "overlay",
         "id": "overlay.celeste.revival",
@@ -8743,6 +8863,12 @@
         "id": "overlay.clementine.symbiosis",
         "canonicalSlug": "symbiosis",
         "canonicalPath": "/database/awakeners/clementine/overlays/symbiosis"
+      },
+      "corrosion": {
+        "kind": "overlay",
+        "id": "overlay.global.corrosion",
+        "canonicalSlug": "corrosion",
+        "canonicalPath": "/database/overlays/corrosion"
       },
       "counter": {
         "kind": "overlay",
@@ -8966,6 +9092,12 @@
         "canonicalSlug": "metaphor",
         "canonicalPath": "/database/awakeners/horla/overlays/metaphor"
       },
+      "horla/poetry-page": {
+        "kind": "overlay",
+        "id": "overlay.horla.poetry-page",
+        "canonicalSlug": "poetry-page",
+        "canonicalPath": "/database/awakeners/horla/overlays/poetry-page"
+      },
       "infinite-devour": {
         "kind": "overlay",
         "id": "overlay.global.infinite-devour",
@@ -9044,6 +9176,12 @@
         "canonicalSlug": "perception",
         "canonicalPath": "/database/overlays/perception"
       },
+      "perception-warp": {
+        "kind": "overlay",
+        "id": "overlay.global.perception-warp",
+        "canonicalSlug": "perception-warp",
+        "canonicalPath": "/database/overlays/perception-warp"
+      },
       "pickman/collaboration": {
         "kind": "overlay",
         "id": "overlay.pickman.collaboration",
@@ -9110,6 +9248,18 @@
         "canonicalSlug": "prepare",
         "canonicalPath": "/database/overlays/prepare"
       },
+      "propagation-caro": {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-caro",
+        "canonicalSlug": "propagation-caro",
+        "canonicalPath": "/database/overlays/propagation-caro"
+      },
+      "propagation-frenzy": {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-frenzy",
+        "canonicalSlug": "propagation-frenzy",
+        "canonicalPath": "/database/overlays/propagation-frenzy"
+      },
       "pure-ultra": {
         "kind": "overlay",
         "id": "overlay.global.pure-ultra",
@@ -9175,6 +9325,12 @@
         "id": "overlay.global.sacrifice",
         "canonicalSlug": "sacrifice",
         "canonicalPath": "/database/overlays/sacrifice"
+      },
+      "saya/gynoecium": {
+        "kind": "overlay",
+        "id": "overlay.saya.gynoecium",
+        "canonicalSlug": "gynoecium",
+        "canonicalPath": "/database/awakeners/saya/overlays/gynoecium"
       },
       "sealed": {
         "kind": "overlay",

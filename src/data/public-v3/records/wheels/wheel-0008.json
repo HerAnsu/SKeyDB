@@ -16,7 +16,7 @@
   "ownerAwakenerId": "awakener-0051",
   "ownerAwakenerName": "Uvhash",
   "lineupToken": "0",
-  "descriptionTemplate": "Team Unique: The Crit. Rate and Crit. DMG of the wielder's \"Exalt\" +[StateArg2]%. After the wielder releases \"Exalt,\" they gain {STR} equal to their CON [StateArg1]%. If this Exalt triggers the {Devour} effect, they gain additional 1 instance of {STR}.",
+  "descriptionTemplate": "The Crit. Rate & Crit. DMG of the wielder's Exalt each +[StateArg2]%.\nWhenever the wielder's Exalt triggers {Devour}, gain {STR} equal to [StateArg1]% of their CON.\nAfter the wielder Exalts, gain {STR} equal to [StateArg1]% of their CON.",
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",

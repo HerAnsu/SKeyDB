@@ -759,6 +759,22 @@
       "facets": {
         "realm": "ULTRA"
       }
+    },
+    {
+      "kind": "posse",
+      "id": "posse-0051",
+      "name": "For the New World",
+      "aliases": [],
+      "tokens": ["caro", "for", "for the new world", "new", "saya", "the", "world"],
+      "fields": {
+        "name": ["For the New World", "for-the-new-world"],
+        "owner": ["Saya"],
+        "facet": ["CARO"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "owner": "awakener-0057"
+      }
     }
   ]
 }

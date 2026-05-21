@@ -10,6 +10,7 @@ import {
   type ResolvedDatabaseReferenceLayer,
 } from '@/domain/database-reference-layer'
 
+import type {DatabasePopoverDescriptionRankContext} from './database-popover-context'
 import type {
   DatabaseReferenceNavigationTarget,
   KeyedDatabaseReferenceEntry,
@@ -52,6 +53,7 @@ export function buildTrailEntry(
     record: reference.record,
     descriptionRank: reference.descriptionRank,
     descriptionMaxRank: reference.descriptionMaxRank,
+    descriptionRankMode: 'static',
     influenceBadges: reference.influenceBadges,
     navigationTarget:
       reference.kind === 'skill'
@@ -67,6 +69,7 @@ export function buildTrailEntry(
 export function buildOverlayFallbackEntry(
   overlay: AwakenerOverlayRecord,
   referenceLayerOverride: ResolvedDatabaseReferenceLayer | null = null,
+  rankContext: DatabasePopoverDescriptionRankContext = {},
 ): TrailEntry {
   return {
     key: `overlay:${overlay.id}`,
@@ -75,8 +78,9 @@ export function buildOverlayFallbackEntry(
     label: buildDatabaseOverlayLabel(overlay),
     description: overlay.descriptionTemplate,
     record: overlay,
-    descriptionRank: undefined,
-    descriptionMaxRank: undefined,
+    descriptionRank: rankContext.descriptionRank,
+    descriptionMaxRank: rankContext.descriptionMaxRank,
+    descriptionRankMode: rankContext.descriptionRankMode ?? 'static',
     referenceLayerOverride,
   }
 }
@@ -102,40 +106,82 @@ export function buildOverlayEntry({
   overlay,
   referenceLayer,
   referenceLayerOverride = null,
+  rankContext = {},
   selectedEnlightenSlot,
 }: {
   overlay: AwakenerOverlayRecord
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   referenceLayerOverride?: ResolvedDatabaseReferenceLayer | null
+  rankContext?: DatabasePopoverDescriptionRankContext
   selectedEnlightenSlot: AwakenerEnlightenRecord['slot'] | null
 }): TrailEntry {
   const info = resolveReferenceByName(referenceLayerOverride ?? referenceLayer, overlay.displayName)
   if (!info) {
-    return buildOverlayFallbackEntry(overlay, referenceLayerOverride)
+    return buildOverlayFallbackEntry(overlay, referenceLayerOverride, rankContext)
   }
-  return buildTrailEntry(info, selectedEnlightenSlot, referenceLayerOverride)
+  return withDescriptionRankContext(
+    buildTrailEntry(info, selectedEnlightenSlot, referenceLayerOverride),
+    rankContext,
+  )
+}
+
+export function withDescriptionRankContext<T extends TrailEntry>(
+  entry: T,
+  rankContext: DatabasePopoverDescriptionRankContext = {},
+): T {
+  if (rankContext.descriptionRank === undefined && rankContext.descriptionMaxRank === undefined) {
+    return entry
+  }
+
+  return {
+    ...entry,
+    descriptionRank: rankContext.descriptionRank,
+    descriptionMaxRank: rankContext.descriptionMaxRank,
+    descriptionRankMode: rankContext.descriptionRankMode ?? entry.descriptionRankMode ?? 'static',
+  }
 }
 
 export function resolveLiveTrailEntry({
   entry,
+  currentRankContext,
   referenceLayer,
   selectedEnlightenSlot,
 }: {
   entry: TrailEntry
+  currentRankContext?: DatabasePopoverDescriptionRankContext
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot: AwakenerEnlightenRecord['slot'] | null
 }): TrailEntry {
+  const rankContext: DatabasePopoverDescriptionRankContext =
+    entry.descriptionRankMode === 'current'
+      ? {
+          descriptionRank: currentRankContext?.descriptionRank ?? entry.descriptionRank,
+          descriptionMaxRank: currentRankContext?.descriptionMaxRank ?? entry.descriptionMaxRank,
+          descriptionRankMode: 'current',
+        }
+      : {
+          descriptionRank: entry.descriptionRank,
+          descriptionMaxRank: entry.descriptionMaxRank,
+          descriptionRankMode: entry.descriptionRankMode ?? 'static',
+        }
   const liveReferenceLayer = entry.referenceLayerOverride ?? referenceLayer
   if (!liveReferenceLayer || !entry.referenceId) {
-    return entry
+    return withDescriptionRankContext(entry, rankContext)
   }
 
   const liveReference = resolveDatabaseReferenceInfoById(liveReferenceLayer, entry.referenceId)
   if (!liveReference || !entry.description || !liveReference.description) {
-    return entry
+    return withDescriptionRankContext(entry, rankContext)
   }
 
-  return buildTrailEntry(liveReference, selectedEnlightenSlot, entry.referenceLayerOverride ?? null)
+  const liveEntry = buildTrailEntry(
+    liveReference,
+    selectedEnlightenSlot,
+    entry.referenceLayerOverride ?? null,
+  )
+  return liveReference.kind === 'overlay'
+    ? withDescriptionRankContext(liveEntry, rankContext)
+    : liveEntry
 }
 
 export function resolveNavigationHandler({

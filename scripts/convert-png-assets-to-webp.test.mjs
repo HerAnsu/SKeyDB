@@ -88,7 +88,7 @@ test('rewriteConvertedPngReferences updates exact imports and folder globs', asy
     sourcePath,
     [
       "import icon from '@/assets/icons/Battle_Card_Buff_001.png'",
-      "const icons = import.meta.glob<string>('../assets/icons/*.png')",
+      "const icons = import.meta.glob<string>('../assets/icons/*.webp')",
       '',
     ].join('\n'),
     'utf8',

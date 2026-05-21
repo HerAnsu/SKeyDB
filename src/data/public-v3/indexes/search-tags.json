@@ -159,7 +159,7 @@
       "section": "archetype",
       "aliases": [],
       "order": 900,
-      "count": 28
+      "count": 29
     },
     {
       "id": "death-resistance",
@@ -175,15 +175,23 @@
       "section": "archetype",
       "aliases": [],
       "order": 920,
-      "count": 13
+      "count": 14
+    },
+    {
+      "id": "corrosion",
+      "label": "Corrosion",
+      "section": "affix",
+      "aliases": [],
+      "order": 925,
+      "count": 2
     },
     {
       "id": "divine-realm",
       "label": "Divine Realm",
       "section": "archetype",
-      "aliases": [],
+      "aliases": ["alt realm"],
       "order": 930,
-      "count": 3
+      "count": 4
     },
     {
       "id": "draw",
@@ -215,7 +223,7 @@
       "section": "archetype",
       "aliases": ["healing", "hp recovery"],
       "order": 960,
-      "count": 31
+      "count": 32
     },
     {
       "id": "keyflare",
@@ -231,7 +239,7 @@
       "section": "archetype",
       "aliases": ["aliemus generation"],
       "order": 975,
-      "count": 42
+      "count": 43
     },
     {
       "id": "max-hp-dmg",
@@ -247,7 +255,7 @@
       "section": "archetype",
       "aliases": [],
       "order": 990,
-      "count": 8
+      "count": 10
     },
     {
       "id": "lemurian",
@@ -303,7 +311,7 @@
       "section": "archetype",
       "aliases": ["crit. rate", "critical rate"],
       "order": 1040,
-      "count": 24
+      "count": 25
     },
     {
       "id": "crit-dmg",
@@ -327,7 +335,7 @@
       "section": "archetype",
       "aliases": [],
       "order": 1070,
-      "count": 7
+      "count": 8
     },
     {
       "id": "sigil-gain",

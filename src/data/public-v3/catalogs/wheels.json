@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "wheels",
   "kind": "wheel",
-  "recordCount": 132,
+  "recordCount": 134,
   "records": [
     {
       "kind": "wheel",
@@ -761,7 +761,7 @@
       "ownerAwakenerId": "awakener-0022",
       "ownerAwakenerName": "Hameln",
       "lineupToken": "xX",
-      "searchTags": ["Keyflare", "Crit DMG"]
+      "searchTags": ["Keyflare", "Crit Rate", "Crit DMG"]
     },
     {
       "kind": "wheel",
@@ -1105,7 +1105,7 @@
       "ownerAwakenerId": "awakener-0011",
       "ownerAwakenerName": "Corposant",
       "lineupToken": "ye",
-      "searchTags": ["Death Resistance", "Shield", "Crit DMG"]
+      "searchTags": ["Death Resistance", "Shield", "Heal", "Crit DMG"]
     },
     {
       "kind": "wheel",
@@ -1663,6 +1663,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0029",
+      "ownerAwakenerName": "Lily",
       "lineupToken": "xM",
       "searchTags": ["Poison", "Death Resistance", "Shield", "Crit Rate", "Crit DMG"]
     },
@@ -1680,6 +1682,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0052",
+      "ownerAwakenerName": "Wanda",
       "lineupToken": "xN",
       "searchTags": ["Counter", "Shield", "Aliemus"]
     },
@@ -1697,6 +1701,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0044",
+      "ownerAwakenerName": "Salvador",
       "lineupToken": "xO",
       "searchTags": ["Shield", "Aliemus"]
     },
@@ -1714,6 +1720,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0001",
+      "ownerAwakenerName": "24",
       "lineupToken": "xP",
       "searchTags": ["Keyflare", "Crit DMG"]
     },
@@ -1731,6 +1739,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0019",
+      "ownerAwakenerName": "Helot: Catena",
       "lineupToken": "xZ",
       "searchTags": ["Aliemus", "Crit Rate"]
     },
@@ -1748,6 +1758,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0032",
+      "ownerAwakenerName": "Miryam",
       "lineupToken": "xQ",
       "searchTags": ["STR Up", "Tentacle DMG"]
     },
@@ -1765,6 +1777,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0048",
+      "ownerAwakenerName": "Thais",
       "lineupToken": "xS",
       "searchTags": ["STR Up", "Embryo Fusion"]
     },
@@ -1782,6 +1796,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0024",
+      "ownerAwakenerName": "Horla",
       "lineupToken": "xR",
       "searchTags": ["Arithmetica", "Death Resistance", "Draw"]
     },
@@ -1799,6 +1815,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0046",
+      "ownerAwakenerName": "Sorel",
       "lineupToken": "xU"
     },
     {
@@ -1815,6 +1833,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0034",
+      "ownerAwakenerName": "Murphy",
       "lineupToken": "x4",
       "searchTags": ["Tentacle DMG", "Shield", "Crit Rate", "Crit DMG"]
     },
@@ -1832,6 +1852,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0043",
+      "ownerAwakenerName": "Ryker",
       "lineupToken": "x3",
       "searchTags": ["Crit Rate", "Sigil Gain"]
     },
@@ -1849,6 +1871,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0047",
+      "ownerAwakenerName": "Tawil",
       "lineupToken": "x5",
       "searchTags": ["Keyflare"]
     },
@@ -1866,6 +1890,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0022",
+      "ownerAwakenerName": "Hameln",
       "lineupToken": "x2",
       "searchTags": ["Shield", "Heal", "Aliemus", "Crit Rate", "Crit DMG"]
     },
@@ -1883,6 +1909,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0018",
+      "ownerAwakenerName": "Doll: Inferno",
       "lineupToken": "x1",
       "searchTags": ["Aliemus"]
     },
@@ -1900,6 +1928,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0050",
+      "ownerAwakenerName": "Tulu",
       "lineupToken": "x7",
       "searchTags": ["Arithmetica", "Crit Rate"]
     },
@@ -1917,6 +1947,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0014",
+      "ownerAwakenerName": "Doresain",
       "lineupToken": "yO"
     },
     {
@@ -1933,6 +1965,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0012",
+      "ownerAwakenerName": "Daffodil",
       "lineupToken": "x8",
       "searchTags": ["Aliemus"]
     },
@@ -1950,6 +1984,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0035",
+      "ownerAwakenerName": "Murphy: Fauxborn",
       "lineupToken": "yQ",
       "searchTags": ["Shield", "Keyflare"]
     },
@@ -1967,6 +2003,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0008",
+      "ownerAwakenerName": "Castor",
       "lineupToken": "yq",
       "searchTags": ["Shield"]
     },
@@ -1984,6 +2022,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_RATE",
+      "ownerAwakenerId": "awakener-0041",
+      "ownerAwakenerName": "Pollux",
       "lineupToken": "yD",
       "searchTags": ["Shield"]
     },
@@ -2001,6 +2041,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0011",
+      "ownerAwakenerName": "Corposant",
       "lineupToken": "yv",
       "searchTags": ["Death Resistance", "Shield"]
     },
@@ -2018,6 +2060,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "ALIEMUS_REGEN",
+      "ownerAwakenerId": "awakener-0040",
+      "ownerAwakenerName": "Pickman",
       "lineupToken": "yt",
       "searchTags": ["Aliemus", "Crit Rate"]
     },
@@ -2035,6 +2079,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "CRIT_DMG",
+      "ownerAwakenerId": "awakener-0027",
+      "ownerAwakenerName": "Kathigu-Ra",
       "lineupToken": "yE",
       "searchTags": ["Crit Rate"]
     },
@@ -2052,6 +2098,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DEATH_RESISTANCE",
+      "ownerAwakenerId": "awakener-0033",
+      "ownerAwakenerName": "Mouchette",
       "lineupToken": "yK",
       "searchTags": ["Draw", "Strike"]
     },
@@ -2069,6 +2117,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "DMG_AMP",
+      "ownerAwakenerId": "awakener-0054",
+      "ownerAwakenerName": "Xu",
       "lineupToken": "yW",
       "searchTags": ["Poison", "Aliemus"]
     },
@@ -2086,6 +2136,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0055",
+      "ownerAwakenerName": "Vortice",
       "lineupToken": "y7",
       "searchTags": ["Temporary Realm Mastery"]
     },
@@ -2277,6 +2329,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "REALM_MASTERY",
+      "ownerAwakenerId": "awakener-0056",
+      "ownerAwakenerName": "Arachne",
       "lineupToken": "yu",
       "searchTags": ["Pursuit", "Shield"]
     },
@@ -2311,6 +2365,8 @@
       "realm": "NEUTRAL",
       "rarity": "SR",
       "mainstatKey": "KEYFLARE_REGEN",
+      "ownerAwakenerId": "awakener-0010",
+      "ownerAwakenerName": "Clementine",
       "lineupToken": "x0",
       "searchTags": ["Weakness", "Vulnerable", "Keyflare"]
     },
@@ -2347,6 +2403,44 @@
       "mainstatKey": "SIGIL_YIELD",
       "lineupToken": "za",
       "searchTags": ["Arithmetica", "Heal", "Sigil Yield"]
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0167",
+      "name": "Fragrant Morphogenesis",
+      "route": {
+        "slug": "fragrant-morphogenesis",
+        "canonicalPath": "/database/wheels/fragrant-morphogenesis"
+      },
+      "assets": {
+        "icon": "asset-wheel-0167-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "lineupToken": "y1",
+      "searchTags": ["Arithmetica", "Embryo Fusion"]
+    },
+    {
+      "kind": "wheel",
+      "id": "wheel-0168",
+      "name": "Muddied Fairy Tale",
+      "route": {
+        "slug": "muddied-fairy-tale",
+        "canonicalPath": "/database/wheels/muddied-fairy-tale"
+      },
+      "assets": {
+        "icon": "asset-wheel-0168-icon"
+      },
+      "realm": "NEUTRAL",
+      "rarity": "SR",
+      "mainstatKey": "SIGIL_YIELD",
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "lineupToken": "yZ",
+      "searchTags": ["Aliemus"]
     }
   ]
 }
