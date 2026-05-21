@@ -1,0 +1,509 @@
+{
+  "version": 1,
+  "slug": "builder-v2-rebuild",
+  "status": "active",
+  "created": "2026-05-22",
+  "updated": "2026-05-22",
+  "intake": {
+    "status": "completed",
+    "risk_posture": "Preserve existing /builder behavior strictly; allow new visible UX only on isolated /builder-v2 with explicit product/design stop points.",
+    "harness_policy": "Product docs and goal packet updates allowed; no AGENTS.md, lint, dependency, or plugin changes without a routed maintenance task and explicit approval.",
+    "allowed_areas": [
+      "src/features/builder-v2/**",
+      "focused Builder V2 tests",
+      "src/App.tsx route wiring",
+      "read-only references to src/features/builder/**",
+      "read-only references to src/stores/builderDraftStore.ts",
+      "docs/design/**",
+      "builder/mobile-ux branch"
+    ],
+    "protected_areas": [
+      "current /builder route behavior",
+      "src/features/builder/BuilderPage.tsx as the V1 shell",
+      "builder persistence key/version",
+      "builder migrations unless explicitly approved",
+      "domain/generated data",
+      "dependency files",
+      "remote state",
+      "unrelated pages"
+    ],
+    "validation_commands": [
+      "npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx",
+      "npm run test:integration",
+      "npx vitest run src/features/builder/useBuilderViewModel.test.ts src/features/builder/builder-persistence.test.ts src/features/builder/builder-ownership-projection.test.ts",
+      "npm run lint",
+      "npm run build"
+    ],
+    "stop_condition": "Stop when the active tranche lands and is verified, a product/design decision is needed, verification fails twice on the same blocker, same-concept expansion crosses protected scope, or the work starts drifting into rushed public-shipping increments rather than healthy local groundwork."
+  },
+  "focus_areas": [
+    {
+      "name": "New route and feature boundary",
+      "status": "implemented",
+      "evidence": "W1 added a lazy BuilderV2Page route in src/App.tsx and kept Builder V2 absent from NAV_ITEMS.",
+      "next": "Keep /builder-v2 unpromoted until a later product/design decision."
+    },
+    {
+      "name": "Current builder contract reuse",
+      "status": "implemented",
+      "evidence": "W1 added useBuilderV2Model as a thin facade over builderDraftStore, current persistence loading/saving, ownership hydration, search helpers, and team-state assign/clear helpers for awakener slots.",
+      "next": "C4/C8 remain queued for gear, posse, import/export, and transfer parity."
+    },
+    {
+      "name": "Old UX branch flow salvage",
+      "status": "mapped",
+      "evidence": "Scout identified mobile overview/focused/picker/quick-lineup and tablet/desktop flow as reference only.",
+      "next": "Use in responsive layout tranches, not first draft loop slice."
+    },
+    {
+      "name": "Test and characterization harness",
+      "status": "implemented",
+      "evidence": "W1 added V2 model and page outcome tests while keeping current builder helper and integration tests green.",
+      "next": "Add focused characterization tests with each later workflow slice."
+    },
+    {
+      "name": "Visual baseline",
+      "status": "implemented",
+      "evidence": "W1 added local builder-v2 CSS using sharp panels, compact controls, restrained blue, amber selection state, and D-Zone-style UI tokens.",
+      "next": "Run deeper visual review/polish in later design tranches."
+    },
+    {
+      "name": "Concept image alignment",
+      "status": "implemented",
+      "evidence": "W1 shell follows the Desktop.png anatomy: left team rail, center active builder, lower team overview, and right picker/armory; browser smoke also checked the mobile single-column collapse.",
+      "next": "Mobile drawer and quick-lineup concepts remain queued as C5/C6."
+    },
+    {
+      "name": "Teams section polish",
+      "status": "queued",
+      "evidence": "User said core builder first and teams shape is undecided.",
+      "next": "Keep minimal team switching; defer list/cards decision."
+    },
+    {
+      "name": "DnD/import/export/quick-lineup polish",
+      "status": "queued",
+      "evidence": "Current helpers exist but raise larger interaction blast radius.",
+      "next": "Defer until base draft loop works."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "C1",
+      "title": "Builder V2 route and bare draft loop shell",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/App.tsx",
+        "src/features/builder-v2/**",
+        "focused V2 tests",
+        "read-only current builder helpers"
+      ],
+      "evidence": "W1 added src/features/builder-v2 and a lazy /builder-v2 route without nav promotion.",
+      "next": "Review W1 diff and receipts."
+    },
+    {
+      "id": "C2",
+      "title": "Thin Builder V2 model facade over current store/helpers",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "current helper imports",
+        "focused tests"
+      ],
+      "evidence": "W1 implemented useBuilderV2Model with current builderDraftStore hydration/autosave and team-state assignment/removal helpers.",
+      "next": "Extend the facade in later gear/posse/import tranches."
+    },
+    {
+      "id": "C3",
+      "title": "Minimal V2 picker surface",
+      "source_task": "S1",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "src/features/builder-v2/*Picker*",
+        "search/filter preferences",
+        "current domain search/sort helpers"
+      ],
+      "evidence": "W1 added BuilderV2AwakenerPicker with current search/sort helpers and disabled future category tabs.",
+      "next": "C4 broadens picker behavior to wheels, covenants, and posses."
+    },
+    {
+      "id": "C3a",
+      "title": "Concept-image-informed V2 shell anatomy",
+      "source_task": "User follow-up",
+      "status": "implemented",
+      "concept_blast_radius": [
+        "V2 shell/layout CSS",
+        "desktop team rail/stage/armory zones",
+        "mobile and quick-lineup boundary notes"
+      ],
+      "evidence": "W1 implemented the desktop rail/stage/armory/overview shell and mobile single-column collapse, with quick-lineup/drawer polish explicitly kept for later.",
+      "next": "Use the concept images again when C5/C6 are active."
+    },
+    {
+      "id": "C4",
+      "title": "Gear and posse assignment",
+      "source_task": "S1",
+      "status": "queued",
+      "concept_blast_radius": [
+        "V2 slot loadout UI",
+        "wheel/covenant/posse action helpers",
+        "transfer dialogs"
+      ],
+      "evidence": "Core must support wheels, covenants, posse, ownership, recommendations.",
+      "next": "Follow base awakeners slice."
+    },
+    {
+      "id": "C5",
+      "title": "Mobile overview/focused/picker drawer flow",
+      "source_task": "UX branch scout",
+      "status": "queued",
+      "concept_blast_radius": [
+        "V2 mobile layout files",
+        "drawer and focus management",
+        "focused slot UI tests"
+      ],
+      "evidence": "builder/mobile-ux mobile flow is the strongest salvageable part.",
+      "next": "Defer until desktop/tablet shell has working core actions."
+    },
+    {
+      "id": "C6",
+      "title": "Quick Lineup V2 mode",
+      "source_task": "UX/tests scouts",
+      "status": "queued",
+      "concept_blast_radius": [
+        "V2 quick-lineup UI",
+        "current quick-lineup.ts",
+        "store quick-lineup state",
+        "tests"
+      ],
+      "evidence": "Current helpers and old branch flow both support guided stepper.",
+      "next": "Defer until picker/gear assignment works."
+    },
+    {
+      "id": "C7",
+      "title": "Teams overview redesign",
+      "source_task": "User prompt",
+      "status": "queued",
+      "concept_blast_radius": [
+        "V2 teams surface",
+        "team-management helpers",
+        "screenshot/share needs"
+      ],
+      "evidence": "User is undecided between list/cards; core builder first.",
+      "next": "Keep minimal in early tranches; require product decision later."
+    },
+    {
+      "id": "C8",
+      "title": "Import/export and transfer parity",
+      "source_task": "Contract/test scouts",
+      "status": "queued",
+      "concept_blast_radius": [
+        "V2 dialogs",
+        "import/export hooks",
+        "transfer confirm hooks",
+        "tests"
+      ],
+      "evidence": "Current page tests pin these workflows; helpers exist but UI blast radius is larger.",
+      "next": "Defer after core draft loop and gear/posse interactions."
+    }
+  ],
+  "maintenance": [
+    {
+      "id": "M1",
+      "title": "Builder V2 contract docs",
+      "trigger": "successful first tranche",
+      "skill": "$refactor-learning-maintainer",
+      "status": "not_started",
+      "next": "Consider after first Worker proves a stable boundary."
+    },
+    {
+      "id": "M2",
+      "title": "Builder visual vocabulary drift guard",
+      "trigger": "repeated old-builder CSS/class reuse",
+      "skill": "$refactor-lint-law or $refactor-learning-maintainer",
+      "status": "not_started",
+      "next": "Only if repeated drift appears during Worker/Review."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "S1",
+      "role": "scout",
+      "status": "done",
+      "title": "Map Builder V2 rebuild scope",
+      "skills": [
+        "$refactor-scout",
+        "$refactor-intake",
+        "$refactor-rootfix",
+        "$refactor-architecture",
+        "$refactor-react",
+        "$refactor-tailwind",
+        "$refactor-ui-a11y",
+        "$refactor-typescript"
+      ],
+      "allowed_files": [
+        "src/features/builder/**",
+        "src/stores/builderDraftStore.ts",
+        "src/App.tsx",
+        "src/index.css",
+        "DESIGN.md",
+        "PRODUCT.md",
+        "docs/design/**",
+        "builder/mobile-ux branch"
+      ],
+      "protected_files": [
+        "product code edits",
+        "remote state"
+      ],
+      "expected_output": "Evidence map for contracts, UX flow, tests, visual anchors, route integration, and interaction risks.",
+      "receipt": {
+        "summary": "Six read-only scouts mapped Builder V2 contracts, old branch UX flow, test coverage, visual anchors, route integration, and core interaction risks.",
+        "evidence": [
+          "Current contracts: reuse builderDraftStore, public-id migrations/persistence, team-state helpers, ownership projection, action factories, import/export helpers, DnD ids, and detail modal store.",
+          "Old branch: keep mobile overview/focused/picker/quick-lineup and tablet/desktop flow as reference only; drop old v2 store/persistence/action integration.",
+          "Tests: pure helper/store tests carry; current page tests are DOM-coupled and should be translated into V2 outcome tests.",
+          "Design: anchor to DESIGN/PRODUCT tokens, D-Zone/Timeline/database patterns, and docs/design screenshots; avoid old builder blue vocabulary.",
+          "Routing: add lazy /builder-v2 route in src/App.tsx, avoid nav entry in first slice.",
+          "Interaction risks: avoid direct slot mutation; keep helper paths for realm caps, duplicate identity, support transfer, quick-lineup focus, and overlay details."
+        ]
+      }
+    },
+    {
+      "id": "J1",
+      "role": "judge",
+      "status": "done",
+      "title": "Approve first Builder V2 Worker slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-architecture",
+        "$refactor-characterization-tests",
+        "$refactor-react",
+        "$refactor-tailwind"
+      ],
+      "allowed_files": [
+        "src/App.tsx",
+        "src/features/builder-v2/BuilderV2Page.tsx",
+        "src/features/builder-v2/BuilderV2Page.test.tsx",
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/*.tsx",
+        "src/features/builder-v2/*.css"
+      ],
+      "protected_files": [
+        "src/features/builder/BuilderPage.tsx",
+        "src/features/builder/BuilderPage*.test.tsx",
+        "src/features/builder/builder-persistence.ts",
+        "src/features/builder/builderMigrations.ts",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json"
+      ],
+      "expected_output": "One bounded Worker concept scope for C1/C2/C3 with invariants, validation, rollback, and stop conditions.",
+      "receipt": {
+        "summary": "Approved first Worker as C1 plus smallest viable C2/C3: an isolated /builder-v2 route and bare awakener draft loop shell.",
+        "concept": "Builder V2 route and bare awakener draft loop shell",
+        "allowed_files": [
+          "src/App.tsx",
+          "src/features/builder-v2/BuilderV2Page.tsx",
+          "src/features/builder-v2/BuilderV2Page.test.tsx",
+          "src/features/builder-v2/useBuilderV2Model.ts",
+          "src/features/builder-v2/useBuilderV2Model.test.ts",
+          "src/features/builder-v2/BuilderV2TeamSlots.tsx",
+          "src/features/builder-v2/BuilderV2AwakenerPicker.tsx",
+          "src/features/builder-v2/builder-v2-test-mocks.ts if local mocks are needed",
+          "src/features/builder-v2/*.css only if Tailwind classes become unreadable"
+        ],
+        "invariants": [
+          "/builder remains protected and behaviorally untouched.",
+          "/builder-v2 is lazy-routed but absent from navigation.",
+          "V2 uses public ids and existing builderDraftStore; no new persistence/store/migration contract.",
+          "Slot assignment/removal goes through current helper/model paths.",
+          "Concept images guide layout density and responsive shape without being imported into runtime UI."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx",
+          "npm run test:integration",
+          "npx vitest run src/features/builder/useBuilderViewModel.test.ts src/features/builder/builder-persistence.test.ts src/features/builder/builder-ownership-projection.test.ts",
+          "npm run lint",
+          "npm run build"
+        ]
+      }
+    },
+    {
+      "id": "S2",
+      "role": "scout",
+      "status": "done",
+      "title": "Map concept image cues for first Builder V2 shell",
+      "skills": [
+        "$refactor-scout",
+        "$refactor-tailwind",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "docs/design/Desktop.png",
+        "docs/design/Mobile.png",
+        "docs/design/Mobile-QuickLineup.png",
+        "docs/design/oracle-sendoff.md",
+        "DESIGN.md",
+        "PRODUCT.md"
+      ],
+      "protected_files": [
+        "product code edits"
+      ],
+      "expected_output": "First-slice visual/layout cues and deferrals from concept images.",
+      "receipt": {
+        "summary": "Visual scout mapped non-negotiable first-slice cues from the concept images.",
+        "evidence": [
+          "Desktop shell should read as left team rail, center active builder, right picker/armory, with team overview below.",
+          "Active team area should expose shallow team/posse header, quick lineup placeholder, four slot cards, and selected/editing state.",
+          "Mobile concepts should guide future app-like flow, not force full mobile drawer and quick-lineup implementation into the first slice.",
+          "Amber should remain state/current selection rather than decorative glow."
+        ]
+      }
+    },
+    {
+      "id": "W1",
+      "role": "worker",
+      "status": "done",
+      "title": "Build isolated Builder V2 awakener draft loop shell",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-tailwind",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/App.tsx",
+        "src/features/builder-v2/BuilderV2Page.tsx",
+        "src/features/builder-v2/BuilderV2Page.test.tsx",
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/useBuilderV2Model.test.ts",
+        "src/features/builder-v2/BuilderV2TeamSlots.tsx",
+        "src/features/builder-v2/BuilderV2AwakenerPicker.tsx",
+        "src/features/builder-v2/builder-v2-test-mocks.ts",
+        "src/features/builder-v2/*.css"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/stores/builderDraftStore.ts",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "remote state"
+      ],
+      "expected_output": "Lazy /builder-v2 route, Builder V2 feature folder, thin model facade, concept-informed shell anatomy, four-slot active team UI, minimal awakener picker, assign/remove behavior, and focused tests.",
+      "receipt": {
+        "slice": "Builder V2 route and bare awakener draft loop shell",
+        "files_changed": [
+          "src/App.tsx",
+          "src/features/builder-v2/BuilderV2Page.tsx",
+          "src/features/builder-v2/BuilderV2Page.test.tsx",
+          "src/features/builder-v2/useBuilderV2Model.ts",
+          "src/features/builder-v2/useBuilderV2Model.test.ts",
+          "src/features/builder-v2/BuilderV2TeamSlots.tsx",
+          "src/features/builder-v2/BuilderV2AwakenerPicker.tsx",
+          "src/features/builder-v2/builder-v2-test-mocks.ts",
+          "src/features/builder-v2/builder-v2.css"
+        ],
+        "what_got_simpler": "Builder V2 now has an isolated route, feature folder, and typed model facade so the shell can render and mutate draft slot state without importing the current BuilderPage UI.",
+        "behavior_preserved": "/builder remained untouched; V2 assignment/removal goes through current team-state helpers, current draft store, current persistence loader/saver, current search helpers, and current identity duplicate handling.",
+        "current_complexity": "Current production builder remains unchanged and debt-heavy; V2 first slice is one route component, one model hook, two presentational surfaces, local CSS, and focused tests.",
+        "expected_complexity_after": "Later slices can add gear, posse, mobile drawer, teams, and import/export by extending the facade/components instead of editing the current monolith.",
+        "root_fix_patch_decision": "Root-fix slice: create a new Builder V2 boundary instead of patching the current BuilderPage.",
+        "dependency_review": "No dependency changes made or needed.",
+        "harness_update": "No AGENTS.md, lint, or plugin harness changes made; goal packet updated only.",
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (2 files, 10 tests passed)",
+          "npx vitest run src/features/builder/useBuilderViewModel.test.ts src/features/builder/builder-persistence.test.ts src/features/builder/builder-ownership-projection.test.ts (3 files, 50 tests passed)",
+          "npm run test:integration (7 files, 57 tests passed)",
+          "npm run lint (passed)",
+          "npm run build (passed)",
+          "Playwright smoke: http://127.0.0.1:5173/#/builder-v2 desktop 1440x1000 and mobile 390x844 rendered; console output was only React DevTools info"
+        ],
+        "risks": [
+          "V2 currently shares the existing builder persistence key by design, so visiting /builder-v2 can hydrate/save the same local draft as /builder.",
+          "Mobile is a responsive stack only; drawer, app-like focused flows, and quick-lineup are still queued.",
+          "Teams overview remains intentionally minimal pending list-vs-cards product direction."
+        ],
+        "follow_ups_not_done": [
+          "C4 gear and posse assignment",
+          "C5 mobile overview/focused/picker drawer flow",
+          "C6 quick-lineup mode",
+          "C7 teams overview redesign",
+          "C8 import/export and transfer parity"
+        ],
+        "learning_lint_candidates": [
+          "Consider a Builder V2 contract note after review if the facade boundary holds through the next tranche."
+        ],
+        "scope_expansion_requested": "None"
+      }
+    },
+    {
+      "id": "R1",
+      "role": "review",
+      "status": "done",
+      "title": "Review W1 Builder V2 route and draft loop shell",
+      "skills": [
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/App.tsx",
+        "src/features/builder-v2/**",
+        "docs/refactor-goals/builder-v2-rebuild/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/stores/builderDraftStore.ts",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "remote state"
+      ],
+      "expected_output": "Review the W1 diff, receipts, validation, and residual risk; decide whether the tranche needs fixes or can queue the next Builder V2 slice.",
+      "receipt": {
+        "summary": "Review found one blocking data-integrity issue, fixed in W1 before tranche close.",
+        "findings": [
+          "V2 initially assigned awakeners through active-team helpers only, so an awakener already used by another non-support team could be duplicated across teams and autosaved into shared builder persistence."
+        ],
+        "fix": [
+          "useBuilderV2Model now builds a non-support usedAwakenerByIdentityKey map like V1, respects the current allow-duplicates preference key, and blocks cross-team assignments when V2 has no transfer dialog available.",
+          "useBuilderV2Model.test.ts added a regression test proving an awakener already assigned to Team 2 cannot be assigned into Team 1 from V2."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (2 files, 10 tests passed)",
+          "npx vitest run src/features/builder/useBuilderViewModel.test.ts src/features/builder/builder-persistence.test.ts src/features/builder/builder-ownership-projection.test.ts (3 files, 50 tests passed)",
+          "npm run test:integration (7 files, 57 tests passed)",
+          "npm run lint (passed)",
+          "npm run build (passed)"
+        ],
+        "residual_risk": [
+          "Full transfer dialog parity remains queued for a later V2 slice.",
+          "Untracked screenshot/mockup artifacts remain intentionally outside the product commit unless selected later."
+        ]
+      }
+    }
+  ],
+  "final_audit": {
+    "full_outcome_complete": false,
+    "summary": "W1 landed the first local Builder V2 route, model facade, shell, minimal picker, assign/remove loop, tests, and visual smoke. Broad Builder V2 rebuild remains active with queued follow-up tranches.",
+    "validation": [
+      "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx",
+      "npx vitest run src/features/builder/useBuilderViewModel.test.ts src/features/builder/builder-persistence.test.ts src/features/builder/builder-ownership-projection.test.ts",
+      "npm run test:integration",
+      "npm run lint",
+      "npm run build",
+      "Playwright desktop/mobile smoke for #/builder-v2"
+    ],
+    "open_items": [
+      "Implement remaining queued candidates across later tranches."
+    ]
+  }
+}
