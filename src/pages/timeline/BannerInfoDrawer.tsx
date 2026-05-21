@@ -28,7 +28,7 @@ const DRAWER_TAGS_CLASS =
   'mt-2 flex min-w-0 shrink-0 flex-wrap items-center gap-x-1.5 gap-y-1 text-[0.58rem] leading-none font-bold tracking-[0.16em] uppercase'
 
 const DRAWER_DATE_CLASS =
-  'mt-2 min-w-0 shrink-0 overflow-hidden text-[0.56rem] leading-none font-bold tracking-[0.14em] text-ellipsis whitespace-nowrap uppercase text-amber-100/82'
+  'mt-2 min-w-0 shrink-0 overflow-visible text-[0.56rem] leading-tight font-bold tracking-[0.14em] whitespace-normal uppercase text-amber-100/82'
 
 const DRAWER_DESCRIPTION_CLASS =
   'ui-scrollbar mt-3 min-h-0 max-h-[6.75rem] overflow-y-auto pr-1 text-xs leading-[1.5] text-slate-400 focus-visible:ring-2 focus-visible:ring-amber-200/35 focus-visible:outline-none'

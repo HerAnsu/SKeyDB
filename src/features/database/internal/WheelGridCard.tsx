@@ -4,58 +4,76 @@ import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelMainstatLabel, type Wheel} from '@/domain/wheels'
 
 import {shouldPrioritizeDatabaseGridImage} from './database-grid-card-priority'
-import {DatabaseGridCardFrame} from './DatabaseGridCardFrame'
-import {DatabaseGridCardTitle} from './DatabaseGridCardTitle'
+import {DatabaseGridCardFrame, type HybridDatabaseCardMode} from './DatabaseGridCardFrame'
 
 interface WheelGridCardProps {
   wheel: Wheel
   index: number
+  onPreload?: (wheelId: string) => void
   onSelect: (wheelId: string) => void
+  variant?: HybridDatabaseCardMode
 }
 
 function WheelMainstatRow({icon, label}: {icon: string | undefined; label: string}) {
-  if (!label) {
-    return null
-  }
   return (
-    <div className='flex min-w-0 items-center gap-1.5 text-[11px] leading-[1.25] text-slate-300'>
-      {icon ? <img alt='' className='h-3 w-3 object-contain opacity-90' src={icon} /> : null}
-      <span className='truncate'>{label}</span>
+    <div className='database-wheel-mainstat-row'>
+      {icon ? <img alt='' className='database-wheel-mainstat-row__icon' src={icon} /> : null}
+      <span className='database-wheel-mainstat-row__label'>{label}</span>
     </div>
   )
 }
 
-export function WheelGridCard({wheel, index, onSelect}: WheelGridCardProps) {
+function WheelOwnerDetail({ownerName}: {ownerName: string}) {
+  return (
+    <span className='database-wheel-owner-detail'>
+      <span className='database-wheel-owner-detail__label'>Owner:</span>{' '}
+      <span className='database-wheel-owner-detail__value'>{ownerName}</span>
+    </span>
+  )
+}
+
+export function WheelGridCard({
+  wheel,
+  index,
+  onPreload,
+  onSelect,
+  variant = 'poster',
+}: WheelGridCardProps) {
   const asset = getWheelAssetById(wheel.id)
   const realmAccent = getRealmAccent(wheel.realm)
   const mainstatIcon = getMainstatIcon(wheel.mainstatKey)
   const mainstatLabel = getWheelMainstatLabel(wheel)
   const prioritizeImage = shouldPrioritizeDatabaseGridImage(index)
+  const ownerDetail = wheel.ownerAwakenerName ? (
+    <WheelOwnerDetail ownerName={wheel.ownerAwakenerName} />
+  ) : null
+  const mainstatDetail = mainstatLabel ? (
+    <WheelMainstatRow icon={mainstatIcon} label={mainstatLabel} />
+  ) : null
 
   return (
     <DatabaseGridCardFrame
       content={{
-        detail: wheel.ownerAwakenerName ? (
-          <>
-            <span className='text-slate-500'>Owner:</span>{' '}
-            <span className='text-slate-300'>{wheel.ownerAwakenerName}</span>
-          </>
-        ) : null,
-        meta: <WheelMainstatRow icon={mainstatIcon} label={mainstatLabel} />,
-        title: <DatabaseGridCardTitle title={wheel.name}>{wheel.name}</DatabaseGridCardTitle>,
+        detail: ownerDetail ? {body: ownerDetail, visibility: 'dossier'} : undefined,
+        meta: mainstatDetail,
+        title: wheel.name,
       }}
       media={{
         alt: wheel.name,
-        dossierClassName: '[transform:scale(1.15)] object-cover object-center',
+        dossierTreatment: 'wheel',
         dossierSrc: asset,
-        posterClassName: '[transform:scale(1.15)] object-cover object-center',
         posterSrc: asset,
+        posterTreatment: 'wheel',
         prioritize: prioritizeImage,
+      }}
+      onPreload={() => {
+        onPreload?.(wheel.id)
       }}
       onSelect={() => {
         onSelect(wheel.id)
       }}
       realmAccent={realmAccent}
+      variant={variant}
     />
   )
 }

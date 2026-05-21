@@ -306,5 +306,15 @@
     "endDate": "2026/08/24 09:00",
     "customArt": "/events/saya-event.webp",
     "pinned": true
+  },
+  {
+    "id": "event-story-forgotten-seed-of-love",
+    "title": "Forgotten Seed of Love",
+    "category": "story",
+    "description": "Permanent Multiverse Link side story added during the Saya collab.\n Unlocks in two parts: Part 1 after May 30 and Part 2 after June 6.\n Free to unlock during the collab event period.",
+    "startDate": "2026/05/30 09:00",
+    "endDate": "2026/08/24 09:00",
+    "customArt": "/events/forgotten-seed.webp",
+    "pricing": "Free"
   }
 ]

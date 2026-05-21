@@ -55,6 +55,34 @@ describe('database-browse-preferences', () => {
     })
   })
 
+  it('migrates partial stored sort preferences with new defaults', () => {
+    const storage = createStorage({
+      'database-browse-preferences': JSON.stringify({
+        awakeners: {sortKey: 'ATK', sortDirection: 'DESC'},
+        wheels: {sortKey: 'ALPHABETICAL', sortDirection: 'ASC'},
+      }),
+    })
+
+    expect(readDatabaseBrowsePreferences(storage)).toEqual({
+      awakeners: {sortKey: 'ATK', sortDirection: 'DESC', groupByRealm: false},
+      wheels: {sortKey: 'ALPHABETICAL', sortDirection: 'ASC'},
+    })
+  })
+
+  it('keeps valid stored sections when another section has invalid values', () => {
+    const storage = createStorage({
+      'database-browse-preferences': JSON.stringify({
+        awakeners: {sortKey: 'NOT_REAL', sortDirection: 'SIDEWAYS', groupByRealm: 'yes'},
+        wheels: {sortKey: 'RARITY', sortDirection: 'DESC'},
+      }),
+    })
+
+    expect(readDatabaseBrowsePreferences(storage)).toEqual({
+      awakeners: DEFAULT_DATABASE_BROWSE_PREFERENCES.awakeners,
+      wheels: {sortKey: 'RARITY', sortDirection: 'DESC'},
+    })
+  })
+
   it('detects URL sort params that should override storage', () => {
     expect(hasAwakenerSortSearchParams(new URLSearchParams('q=alpha'))).toBe(false)
     expect(hasAwakenerSortSearchParams(new URLSearchParams('group=1'))).toBe(true)

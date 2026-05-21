@@ -123,6 +123,7 @@ function buildReferenceLookups(
   shellView: ResolvedAwakenerDatabaseShellView,
   accessibleOverlays: AwakenerOverlayRecord[],
   globalDerivedSkills: DerivedSkillRecord[],
+  wheelReferenceInfos: DatabaseReferenceInfo[],
 ): {byId: Map<string, DatabaseReferenceInfo>; byName: Map<string, DatabaseReferenceInfo>} {
   const accumulator = new DatabaseReferenceLookupAccumulator()
 
@@ -177,7 +178,7 @@ function buildReferenceLookups(
     )
   }
 
-  for (const wheelInfo of buildWheelReferenceInfoEntries()) {
+  for (const wheelInfo of wheelReferenceInfos) {
     accumulator.add(wheelInfo)
   }
 
@@ -201,12 +202,18 @@ export function buildAwakenerDatabaseReferenceLayer({
     overlays,
     shellView.overlayOverridesById,
   )
-  const referenceLookups = buildReferenceLookups(shellView, accessibleOverlays, globalDerivedSkills)
+  const wheelReferenceInfos = buildWheelReferenceInfoEntries()
+  const referenceLookups = buildReferenceLookups(
+    shellView,
+    accessibleOverlays,
+    globalDerivedSkills,
+    wheelReferenceInfos,
+  )
 
   return {
     cardNames: new Set([
       ...collectAwakenerDatabaseCardNames(shellView.resolvedRecord, globalDerivedSkills),
-      ...buildWheelReferenceInfoEntries().map((info) => info.name),
+      ...wheelReferenceInfos.map((info) => info.name),
     ]),
     accessibleOverlays,
     referenceInfoByName: referenceLookups.byName,

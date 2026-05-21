@@ -29,6 +29,7 @@ interface BannerInput {
   type: BannerEntry['type']
   tags?: BannerEntry['tags']
   description?: string
+  dailySchedule?: DailyScheduleInput[]
   startDate: string
   endDate: string
   featured?: FeaturedInput[]
@@ -41,8 +42,14 @@ interface BannerInput {
   preliminary?: boolean
 }
 
+interface DailyScheduleInput {
+  day: number
+  featured: FeaturedInput[]
+}
+
 const nonEmptyStringSchema = z.string().trim().min(1)
 const gameDateSchema = z.string().regex(/^\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}$/)
+const TIMELINE_DAY_MS = 24 * 60 * 60 * 1000
 
 const featuredInputSchema: z.ZodType<FeaturedInput> = z.union([
   nonEmptyStringSchema,
@@ -59,6 +66,11 @@ const poolSlotInputSchema: z.ZodType<PoolSlotInput> = z.object({
   pool: z.array(featuredInputSchema).min(1),
   linked: z.boolean().optional(),
   count: z.number().int().positive().optional(),
+})
+
+const dailyScheduleInputSchema: z.ZodType<DailyScheduleInput> = z.object({
+  day: z.number().int().positive(),
+  featured: z.array(featuredInputSchema).min(1),
 })
 
 const derivedPoolInputSchema: z.ZodType<DerivedPoolInput> = z.object({
@@ -78,6 +90,7 @@ const bannerInputSchema: z.ZodType<BannerInput> = z
     type: z.enum(BANNER_TYPES),
     tags: z.array(z.enum(BANNER_TAGS)).optional(),
     description: z.string().optional(),
+    dailySchedule: z.array(dailyScheduleInputSchema).optional(),
     startDate: gameDateSchema,
     endDate: gameDateSchema,
     featured: z.array(featuredInputSchema).optional(),
@@ -95,6 +108,51 @@ const bannerInputSchema: z.ZodType<BannerInput> = z
         code: 'custom',
         path: ['derivedPool'],
         message: 'Use either poolSlots or derivedPool, not both.',
+      })
+    }
+    if (banner.type === 'daily' && !banner.dailySchedule) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['dailySchedule'],
+        message: 'Daily banners must include a dailySchedule.',
+      })
+    }
+    if (banner.dailySchedule && banner.type !== 'daily') {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['dailySchedule'],
+        message: 'dailySchedule is only supported on daily banners.',
+      })
+    }
+    if (banner.dailySchedule) {
+      const startMs = new Date(parseGameDate(banner.startDate)).getTime()
+      const endMs = new Date(parseGameDate(banner.endDate)).getTime()
+      const exactDaySpan = (endMs - startMs) / TIMELINE_DAY_MS
+      const expectedLength = Math.round(exactDaySpan)
+
+      if (!Number.isInteger(exactDaySpan) || exactDaySpan <= 0) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['dailySchedule'],
+          message: 'Daily banner date span must be a positive whole number of days.',
+        })
+      } else if (banner.dailySchedule.length !== expectedLength) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['dailySchedule'],
+          message: `Daily banner schedule must contain ${expectedLength.toString()} entries for its date span.`,
+        })
+      }
+
+      banner.dailySchedule.forEach((scheduleEntry, index) => {
+        const expectedDay = index + 1
+        if (scheduleEntry.day !== expectedDay) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['dailySchedule', index, 'day'],
+            message: `Daily schedule day must be ${expectedDay.toString()}.`,
+          })
+        }
       })
     }
   })
@@ -208,6 +266,12 @@ function loadBanner(raw: BannerInput): BannerEntry {
   }
   if (raw.featured) {
     entry.featured = raw.featured.map(resolveUnit)
+  }
+  if (raw.dailySchedule) {
+    entry.dailySchedule = raw.dailySchedule.map((scheduleEntry) => ({
+      day: scheduleEntry.day,
+      featured: scheduleEntry.featured.map(resolveUnit),
+    }))
   }
   if (raw.poolSlots) {
     entry.poolSlots = resolvePoolSlots(raw.poolSlots)

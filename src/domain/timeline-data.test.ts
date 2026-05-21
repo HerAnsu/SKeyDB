@@ -2,6 +2,7 @@ import {describe, expect, it} from 'vitest'
 
 import rawBanners from '@/data/timeline/banners.json'
 
+import {getBannerDailyScheduleEntry} from './timeline'
 import {resolveTimelineBannerDerivedPool} from './timeline-banner-pools'
 import {loadTimelineBanners, timelineBanners, timelineEvents} from './timeline-data'
 
@@ -29,6 +30,9 @@ describe('timeline data loading', () => {
       (event) => event.id === 'event-curriculum-season-34',
     )
     const collabEvent = timelineEvents.find((event) => event.id === 'event-story-saya')
+    const collabSideStory = timelineEvents.find(
+      (event) => event.id === 'event-story-forgotten-seed-of-love',
+    )
     const collabBanner = timelineBanners.find((banner) => banner.id === 'banner-saya-no-uta-collab')
 
     expect(anniversaryLogin).toMatchObject({
@@ -91,6 +95,15 @@ describe('timeline data loading', () => {
     expect(anniversaryLogin?.customArt).toContain('to-the-star')
     expect(dreamyRendezvous?.customArt).toContain('dreamy-rendezvous')
     expect(collabEvent?.customArt).toContain('saya-event')
+    expect(collabSideStory).toMatchObject({
+      category: 'story',
+      endDate: '2026-08-24T01:00:00.000Z',
+      pricing: 'Free',
+      startDate: '2026-05-30T01:00:00.000Z',
+      title: 'Forgotten Seed of Love',
+    })
+    expect(collabSideStory?.customArt).toContain('forgotten-seed')
+    expect(collabSideStory?.description).toContain('Permanent Multiverse Link side story')
     expect(collabBanner?.preliminary).toBeUndefined()
   })
 
@@ -176,22 +189,77 @@ describe('timeline data loading', () => {
     expect(astral?.poolSlots?.[3]?.pool.map((unit) => unit.name)).toContain('Eternal Weave')
   })
 
-  it('derives Echoing Wishes as linked limited awakener and wheel pairs', () => {
+  it('loads Echoing Wishes as a daily limited awakener and wheel schedule', () => {
     const echoingWishes = timelineBanners.find((banner) => banner.id === 'banner-echoing-wishes')
     const rawEchoingWishes = rawBanners.find((banner) => banner.id === 'banner-echoing-wishes')
 
-    expect(echoingWishes?.poolSlots).toHaveLength(1)
     expect(echoingWishes).toMatchObject({
-      customTags: ['Daily'],
       tags: undefined,
-      type: 'combo',
+      type: 'daily',
     })
-    expect(echoingWishes?.poolSlots?.[0]?.linked).toBe(true)
-    expect(rawEchoingWishes?.derivedPool).toMatchObject({excludeNames: ['Saya']})
-    expect(echoingWishes?.poolSlots?.[0]?.pool.map((unit) => unit.name)).toContain('Arachne')
-    expect(echoingWishes?.poolSlots?.[0]?.pool.map((unit) => unit.name)).toContain('Tulu')
-    expect(echoingWishes?.poolSlots?.[0]?.pool.map((unit) => unit.name)).not.toContain('Saya')
-    expect(echoingWishes?.poolSlots?.[0]?.pool.every((unit) => unit.kind === 'awakener')).toBe(true)
+    expect(rawEchoingWishes?.derivedPool).toBeUndefined()
+    expect(echoingWishes?.poolSlots).toBeUndefined()
+    expect(echoingWishes?.dailySchedule).toHaveLength(28)
+    expect(echoingWishes?.dailySchedule?.[0]?.featured.map((unit) => unit.name)).toEqual([
+      'Tulu',
+      'Hymn of the Sovereign',
+    ])
+    expect(echoingWishes?.dailySchedule?.[13]?.featured.map((unit) => unit.name)).toEqual([
+      'Helot: Catena',
+      'Drowning in Crimson',
+    ])
+    expect(echoingWishes?.dailySchedule?.[27]?.featured.map((unit) => unit.name)).toEqual([
+      'Arachne',
+      'Eternal Weave',
+    ])
+    expect(echoingWishes).toBeDefined()
+    if (!echoingWishes) {
+      return
+    }
+
+    expect(
+      getBannerDailyScheduleEntry(echoingWishes, new Date('2026-05-21T01:00:00.000Z')),
+    ).toMatchObject({
+      day: 4,
+      featured: [
+        {kind: 'awakener', name: 'Lily'},
+        {kind: 'wheel', name: 'Grace Through Pain'},
+      ],
+    })
+  })
+
+  it('rejects daily banner schedules that do not match the date span', () => {
+    expect(() =>
+      loadTimelineBanners([
+        {
+          id: 'test-daily-gap',
+          title: 'Test Daily Gap',
+          type: 'daily',
+          startDate: '2026/05/18 09:00',
+          endDate: '2026/05/20 09:00',
+          dailySchedule: [
+            {day: 1, featured: ['Tulu']},
+            {day: 3, featured: ['Arachne']},
+          ],
+        },
+      ]),
+    ).toThrow(/day must be 2/i)
+
+    expect(() =>
+      loadTimelineBanners([
+        {
+          id: 'test-daily-short',
+          title: 'Test Daily Short',
+          type: 'daily',
+          startDate: '2026/05/18 09:00',
+          endDate: '2026/05/21 09:00',
+          dailySchedule: [
+            {day: 1, featured: ['Tulu']},
+            {day: 2, featured: ['Arachne']},
+          ],
+        },
+      ]),
+    ).toThrow(/3 entries/i)
   })
 
   it('normalizes derived pool filters and applies exclusions to existing units', () => {

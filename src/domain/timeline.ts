@@ -11,6 +11,11 @@ export interface BannerPoolSlot {
   linked?: boolean
 }
 
+export interface BannerDailyScheduleEntry {
+  day: number
+  featured: BannerFeaturedUnit[]
+}
+
 export const BANNER_TYPES = [
   'awaken',
   'limited',
@@ -19,6 +24,7 @@ export const BANNER_TYPES = [
   'selector',
   'wheel',
   'combo',
+  'daily',
   'premium',
 ] as const
 export type BannerType = (typeof BANNER_TYPES)[number]
@@ -33,6 +39,7 @@ export interface BannerEntry {
   tags?: BannerTag[]
   preliminary?: boolean
   description?: string
+  dailySchedule?: BannerDailyScheduleEntry[]
   featured?: BannerFeaturedUnit[]
   poolSlots?: BannerPoolSlot[]
   customArt?: string
@@ -187,30 +194,15 @@ function formatTimelineDisplayDate(dateStr: string, now?: Date): string {
   return formatTimelineDate(dateStr)
 }
 
-function formatTimelineDisplayDateRange(startDate: string, endDate: string, now?: Date): string {
-  const start = new Date(startDate)
-  const end = new Date(endDate)
-  const reference = now ?? new Date()
-  const startYear = start.getUTCFullYear()
-  const endYear = end.getUTCFullYear()
-
-  if (startYear === endYear) {
-    const startText = new Intl.DateTimeFormat('en-US', {
-      day: 'numeric',
-      month: 'short',
-    }).format(start)
-    const endText =
-      endYear === reference.getUTCFullYear()
-        ? new Intl.DateTimeFormat('en-US', {
-            day: 'numeric',
-            month: 'short',
-          }).format(end)
-        : formatTimelineDate(endDate)
-
-    return `${startText} - ${endText}`
-  }
-
-  return `${formatTimelineDate(startDate)} - ${formatTimelineDate(endDate)}`
+function formatUpcomingTimelineDisplayDateRange(
+  startDate: string,
+  endDate: string,
+  now?: Date,
+): string {
+  return `Starts ${formatTimelineDisplayDate(startDate, now)} · Ends ${formatTimelineDisplayDate(
+    endDate,
+    now,
+  )}`
 }
 
 function formatTimelineDateRange(startDate: string, endDate: string): string {
@@ -294,7 +286,7 @@ export function getTimelineCountdownDisplay(
 
   if (Math.abs(countdown.totalMs) > TIMELINE_DATE_DISPLAY_THRESHOLD_MS) {
     if (status === 'upcoming') {
-      return {text: `Starts ${formatTimelineDisplayDateRange(startDate, endDate, now)}`, title}
+      return {text: formatUpcomingTimelineDisplayDateRange(startDate, endDate, now), title}
     }
     if (status === 'active') {
       return {text: `Ends ${formatTimelineDisplayDate(endDate, now)}`, title}
@@ -302,7 +294,56 @@ export function getTimelineCountdownDisplay(
     return {text: `Ended ${formatTimelineDisplayDate(endDate, now)}`, title}
   }
 
+  if (status === 'upcoming') {
+    return {
+      text: `${formatCountdown(countdown)} · Ends ${formatTimelineDisplayDate(endDate, now)}`,
+      title,
+    }
+  }
+
   return {text: formatCountdown(countdown), title}
+}
+
+export function getTimelineDateRangeDisplay(
+  startDate: string,
+  endDate: string,
+  now?: Date,
+): TimelineCountdownDisplay {
+  return {
+    text: `${formatTimelineDisplayDate(startDate, now)} → ${formatTimelineDisplayDate(endDate, now)}`,
+    title: formatTimelineDateRange(startDate, endDate),
+  }
+}
+
+const TIMELINE_DAY_MS = 24 * 60 * 60 * 1000
+
+export function getBannerDailyScheduleEntry(
+  banner: Pick<BannerEntry, 'dailySchedule' | 'endDate' | 'startDate'>,
+  now?: Date,
+): BannerDailyScheduleEntry | null {
+  if (!banner.dailySchedule || banner.dailySchedule.length === 0) {
+    return null
+  }
+
+  const reference = now ?? new Date()
+  const start = new Date(banner.startDate)
+  const end = new Date(banner.endDate)
+  const lastIndex = banner.dailySchedule.length - 1
+
+  if (reference < start) {
+    return banner.dailySchedule[0]
+  }
+
+  if (reference > end) {
+    return banner.dailySchedule[lastIndex]
+  }
+
+  const elapsedMs = reference.getTime() - start.getTime()
+  const day = Math.min(
+    banner.dailySchedule[lastIndex].day,
+    Math.max(1, Math.floor(elapsedMs / TIMELINE_DAY_MS) + 1),
+  )
+  return banner.dailySchedule.find((scheduleEntry) => scheduleEntry.day === day) ?? null
 }
 
 function getActivePinnedPriority(pinned: boolean | undefined, status: TimelineStatus): number {

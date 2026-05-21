@@ -185,6 +185,7 @@ beforeAll(async () => {
 
 afterEach(() => {
   vi.restoreAllMocks()
+  window.localStorage.clear()
   clearDatabaseDetailRecordCacheForTests()
   mockPublicDetailLoaders.reset()
 })
@@ -312,7 +313,7 @@ describe('DatabasePage', () => {
     )
   })
 
-  it('writes browse control changes back into query params', async () => {
+  it('writes filter changes to query params and sort changes to preferences', async () => {
     await renderDatabasePage()
 
     fireEvent.change(screen.getByRole('searchbox'), {target: {value: 'beta'}})
@@ -320,8 +321,15 @@ describe('DatabasePage', () => {
     fireEvent.change(screen.getByLabelText('Database sort key'), {target: {value: 'ATK'}})
     fireEvent.click(screen.getByLabelText('Toggle database sort direction'))
 
-    expect(screen.getByTestId('location-search')).toHaveTextContent(
-      '?q=beta&realm=AEQUOR&sort=ATK&dir=DESC',
+    expect(screen.getByTestId('location-search')).toHaveTextContent('?q=beta&realm=AEQUOR')
+    expect(JSON.parse(window.localStorage.getItem('database-browse-preferences') ?? '{}')).toEqual(
+      expect.objectContaining({
+        awakeners: {
+          groupByRealm: false,
+          sortDirection: 'DESC',
+          sortKey: 'ATK',
+        },
+      }),
     )
   })
 
@@ -369,8 +377,8 @@ describe('DatabasePage', () => {
     expect(await screen.findByRole('dialog', {name: /beta details/})).toBeInTheDocument()
   })
 
-  it('falls back from disabled builds tab routes to upgrades', async () => {
-    await renderDatabasePage('/database/awk/beta/builds')
+  it('falls back from disabled teams tab routes to upgrades', async () => {
+    await renderDatabasePage('/database/awk/beta/teams')
 
     expect(await screen.findByRole('dialog', {name: /beta details/})).toBeInTheDocument()
     expect(screen.getByText('Active tab upgrades')).toBeInTheDocument()

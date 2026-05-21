@@ -27,10 +27,16 @@ const FALLBACK_SCALING_SUBSTAT_LABELS = {
 
 export const AWAKENER_SCALING_SUBSTAT_FILTER_IDS = SUBSTAT_SCALING_KEYS
 
-export const AWAKENER_SCALING_SUBSTAT_ROLE_FILTER_IDS = ['ANY', 'MAIN', 'SUB'] as const
-export type AwakenerScalingSubstatRoleFilter =
-  (typeof AWAKENER_SCALING_SUBSTAT_ROLE_FILTER_IDS)[number]
+export const AWAKENER_SCALING_SUBSTAT_FILTER_ROLE_IDS = ['ANY', 'PRIMARY', 'SECONDARY'] as const
+export type AwakenerScalingSubstatFilterRole =
+  (typeof AWAKENER_SCALING_SUBSTAT_FILTER_ROLE_IDS)[number]
+export type AwakenerScalingSubstatRole = 'MAIN' | 'SUB'
 export type AwakenerScalingSubstatValues = Partial<Record<SubstatScalingKey, number | string>>
+
+export interface AwakenerScalingSubstatFilter {
+  key: SubstatScalingKey
+  role: AwakenerScalingSubstatFilterRole
+}
 
 const MAIN_SUBSTAT_SCALING_VALUES = {
   CritRate: 1.6,
@@ -66,10 +72,14 @@ export function getAwakenerScalingSubstatSearchLabels(key: SubstatScalingKey): s
   return [mainstat.label, ...mainstat.aliases]
 }
 
+export function getAwakenerScalingSubstatIcon(key: SubstatScalingKey): string | undefined {
+  return getMainstatIcon(MAINSTAT_KEY_BY_SCALING_SUBSTAT[key])
+}
+
 export function inferAwakenerScalingSubstatRole(
   substatScaling: AwakenerScalingSubstatValues | null | undefined,
   key: SubstatScalingKey,
-): Exclude<AwakenerScalingSubstatRoleFilter, 'ANY'> | null {
+): AwakenerScalingSubstatRole | null {
   const value = Number(substatScaling?.[key] ?? 0)
   if (value <= 0) {
     return null
@@ -77,19 +87,62 @@ export function inferAwakenerScalingSubstatRole(
   return value >= MAIN_SUBSTAT_SCALING_VALUES[key] ? 'MAIN' : 'SUB'
 }
 
+export function hasAwakenerScalingSubstat(
+  substatScaling: AwakenerScalingSubstatValues | null | undefined,
+  key: SubstatScalingKey,
+): boolean {
+  return inferAwakenerScalingSubstatRole(substatScaling, key) !== null
+}
+
+export function matchesAwakenerScalingSubstatRole(
+  substatScaling: AwakenerScalingSubstatValues | null | undefined,
+  key: SubstatScalingKey,
+  role: AwakenerScalingSubstatRole,
+): boolean {
+  return inferAwakenerScalingSubstatRole(substatScaling, key) === role
+}
+
 export function matchesAwakenerScalingSubstatRoleFilter(
   substatScaling: AwakenerScalingSubstatValues | null | undefined,
   key: SubstatScalingKey,
-  roleFilter: AwakenerScalingSubstatRoleFilter,
+  roleFilter: AwakenerScalingSubstatFilterRole,
 ): boolean {
   const role = inferAwakenerScalingSubstatRole(substatScaling, key)
-  return roleFilter === 'ANY' ? role !== null : role === roleFilter
+  if (roleFilter === 'ANY') {
+    return role !== null
+  }
+  return roleFilter === 'PRIMARY' ? role === 'MAIN' : role === 'SUB'
+}
+
+export function getAwakenerScalingSubstatFilterRoleLabel(
+  role: AwakenerScalingSubstatFilterRole,
+): string {
+  if (role === 'PRIMARY') {
+    return 'Primary scaling'
+  }
+  if (role === 'SECONDARY') {
+    return 'Secondary scaling'
+  }
+  return 'Any role'
+}
+
+export function getAwakenerScalingSubstatFilterChipLabel(
+  filter: AwakenerScalingSubstatFilter,
+): string {
+  const label = getAwakenerScalingSubstatLabel(filter.key)
+  if (filter.role === 'PRIMARY') {
+    return `Primary scaling: ${label}`
+  }
+  if (filter.role === 'SECONDARY') {
+    return `Secondary scaling: ${label}`
+  }
+  return `Scaling: ${label}`
 }
 
 export function getAwakenerScalingSubstatFilterOptions(): AwakenerScalingSubstatFilterOption[] {
   return AWAKENER_SCALING_SUBSTAT_FILTER_IDS.map((id) => ({
     id,
     label: getAwakenerScalingSubstatLabel(id),
-    iconAsset: getMainstatIcon(MAINSTAT_KEY_BY_SCALING_SUBSTAT[id]),
+    iconAsset: getAwakenerScalingSubstatIcon(id),
   }))
 }

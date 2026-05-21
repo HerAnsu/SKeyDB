@@ -119,10 +119,10 @@ describe('database paths', () => {
       'teams',
       'lore',
     ])
-    expect(DATABASE_AWAKENER_VISIBLE_TABS).toEqual(['upgrades', 'skills', 'teams', 'lore'])
+    expect(DATABASE_AWAKENER_VISIBLE_TABS).toEqual(['upgrades', 'skills', 'builds', 'lore'])
   })
 
-  it('uses upgrades as the visible fallback for hidden or disabled awakener tabs', () => {
+  it('uses upgrades as the visible fallback for hidden awakener tabs', () => {
     expect(buildDatabaseAwakenerPath(makeAwakener({name: 'thais'}))).toBe(
       '/database/awakeners/thais',
     )
@@ -130,10 +130,14 @@ describe('database paths', () => {
       '/database/awakeners/thais',
     )
     expect(buildDatabaseAwakenerPath(makeAwakener({name: 'thais'}), 'builds')).toBe(
+      '/database/awakeners/thais/builds',
+    )
+    expect(buildDatabaseAwakenerPath(makeAwakener({name: 'thais'}), 'teams')).toBe(
       '/database/awakeners/thais',
     )
     expect(resolveDatabaseAwakenerVisibleTab('overview')).toBe('upgrades')
-    expect(resolveDatabaseAwakenerVisibleTab('builds')).toBe('upgrades')
+    expect(resolveDatabaseAwakenerVisibleTab('builds')).toBe('builds')
+    expect(resolveDatabaseAwakenerVisibleTab('teams')).toBe('upgrades')
     expect(resolveDatabaseAwakenerVisibleTab(null)).toBe('upgrades')
   })
 })

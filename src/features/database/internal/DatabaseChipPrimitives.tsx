@@ -36,7 +36,13 @@ export function CatalogRealmFilterRow<TValue extends string>({
   ]
 
   return (
-    <ChipFilterRow activeId={activeRealm} label={label} onChange={onChange} options={options} />
+    <ChipFilterRow
+      activeId={activeRealm}
+      defaultId={'ALL' as TValue}
+      label={label}
+      onChange={onChange}
+      options={options}
+    />
   )
 }
 
@@ -196,7 +202,11 @@ export function CatalogMobileFilterPanel<TValue extends string>({
           }`}
           key={option.id}
           onClick={() => {
-            onChange(option.id)
+            onChange(activeId === option.id ? (options[0]?.id ?? option.id) : option.id)
+          }}
+          onContextMenu={(event) => {
+            event.preventDefault()
+            onChange(activeId === option.id ? (options[0]?.id ?? option.id) : option.id)
           }}
           style={activeId === option.id ? option.activeStyle : undefined}
         >

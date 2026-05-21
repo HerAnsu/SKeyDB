@@ -5,6 +5,7 @@ import {
   DEFAULT_DATABASE_DETAIL_PREFERENCES,
   normalizeDatabaseDetailPreferences,
   readDatabaseDetailPreferences,
+  resolveDatabaseDetailDefaultAwakenerTab,
   resolveDatabaseDetailDefaultSelection,
   writeDatabaseDetailPreferences,
 } from './database-detail-preferences'
@@ -36,6 +37,7 @@ describe('database-detail-preferences', () => {
         },
         awakener: {
           showVisibleScaling: false,
+          defaultTab: 'builds',
           defaultSelection: {
             awakenerLevel: 999,
             psycheSurgeOffset: -5,
@@ -58,6 +60,7 @@ describe('database-detail-preferences', () => {
       },
       awakener: {
         showVisibleScaling: false,
+        defaultTab: 'builds',
         defaultSelection: {
           awakenerLevel: 90,
           psycheSurgeOffset: 0,
@@ -85,6 +88,7 @@ describe('database-detail-preferences', () => {
         },
         awakener: {
           showVisibleScaling: false,
+          defaultTab: 'lore',
           defaultSelection: {
             awakenerLevel: 90,
             psycheSurgeOffset: 2,
@@ -109,6 +113,7 @@ describe('database-detail-preferences', () => {
       },
       awakener: {
         showVisibleScaling: false,
+        defaultTab: 'lore',
         defaultSelection: {
           awakenerLevel: 90,
           psycheSurgeOffset: 2,
@@ -146,6 +151,7 @@ describe('database-detail-preferences', () => {
           },
           awakener: {
             showVisibleScaling: false,
+            defaultTab: 'skills',
             defaultSelection: {
               awakenerLevel: 70,
               psycheSurgeOffset: 1,
@@ -173,6 +179,7 @@ describe('database-detail-preferences', () => {
       },
       awakener: {
         showVisibleScaling: false,
+        defaultTab: 'skills',
         defaultSelection: {
           awakenerLevel: 70,
           psycheSurgeOffset: 1,
@@ -193,6 +200,7 @@ describe('database-detail-preferences', () => {
     const legacyStorage = createStorage({
       'database-detail-preferences': JSON.stringify({
         showVisibleScaling: false,
+        defaultAwakenerDetailTab: 'builds',
         showTagIcons: false,
         clickOutsideClosesPopovers: false,
         fontScale: 'medium',
@@ -218,6 +226,7 @@ describe('database-detail-preferences', () => {
       },
       awakener: {
         showVisibleScaling: false,
+        defaultTab: 'builds',
         defaultSelection: {
           awakenerLevel: 90,
           psycheSurgeOffset: 2,
@@ -260,6 +269,40 @@ describe('database-detail-preferences', () => {
       soulforgeLevel: 3,
       gnosticPotentialLevel: 0,
     })
+  })
+
+  it('falls back to upgrades for unset or invalid default tab preferences', () => {
+    expect(resolveDatabaseDetailDefaultAwakenerTab()).toBe('upgrades')
+    expect(
+      resolveDatabaseDetailDefaultAwakenerTab(
+        undefined,
+        createStorage({
+          'database-detail-preferences': JSON.stringify({
+            awakener: {
+              defaultTab: 'builds',
+            },
+          }),
+        }),
+      ),
+    ).toBe('builds')
+    expect(
+      resolveDatabaseDetailDefaultAwakenerTab({
+        awakener: {
+          defaultTab: 'lore',
+        },
+      }),
+    ).toBe('lore')
+    expect(
+      readDatabaseDetailPreferences(
+        createStorage({
+          'database-detail-preferences': JSON.stringify({
+            awakener: {
+              defaultTab: 'teams',
+            },
+          }),
+        }),
+      ).awakener.defaultTab,
+    ).toBeNull()
   })
 })
 

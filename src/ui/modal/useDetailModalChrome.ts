@@ -102,10 +102,14 @@ export function useDetailModalChrome({
       }
 
       const clickedInsidePopover = Boolean(target.closest('[data-skill-popover]'))
+      const clickedInsidePopoverPreservingControl = Boolean(
+        target.closest('[data-detail-modal-popover-preserve]'),
+      )
       if (
         hasOpenPopovers &&
         clickOutsideClosesPopovers &&
         !clickedInsidePopover &&
+        !clickedInsidePopoverPreservingControl &&
         !target.closest('[data-detail-modal-external]')
       ) {
         closeAllPopovers()

@@ -188,25 +188,13 @@ describe('useDatabaseBrowseState', () => {
     expect(screen.getByTestId('location-search')).toHaveTextContent('')
   })
 
-  it('pushes discrete browse refinements into history', async () => {
+  it('keeps sort preference changes local while filter refinements use history', async () => {
     renderBrowseStateHarness()
 
     fireEvent.click(screen.getByRole('button', {name: 'Set realm AEQUOR'}))
     fireEvent.click(screen.getByRole('button', {name: 'Set sort ATK'}))
     fireEvent.click(screen.getByRole('button', {name: 'Toggle sort direction'}))
 
-    expect(screen.getByTestId('location-search')).toHaveTextContent(
-      '?realm=AEQUOR&sort=ATK&dir=DESC',
-    )
-
-    await act(async () => {
-      fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
-    })
-    expect(screen.getByTestId('location-search')).toHaveTextContent('?realm=AEQUOR&sort=ATK')
-
-    await act(async () => {
-      fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
-    })
     expect(screen.getByTestId('location-search')).toHaveTextContent('?realm=AEQUOR')
 
     await act(async () => {
@@ -276,15 +264,20 @@ describe('useWheelsDatabaseBrowseState', () => {
     expect(screen.getByTestId('location-search')).toHaveTextContent('')
   })
 
-  it('resets the wheel sort direction to the new key default', () => {
+  it('resets the wheel sort direction to the new key default without keeping sort in the URL', () => {
     renderWheelsBrowseStateHarness(['/database/wheels?sort=RARITY&dir=DESC'])
 
     fireEvent.click(screen.getByRole('button', {name: 'Set sort ALPHABETICAL'}))
 
-    expect(screen.getByTestId('location-search')).toHaveTextContent('?sort=ALPHABETICAL')
+    expect(screen.getByTestId('location-search')).toHaveTextContent('')
+    expect(
+      JSON.parse(window.localStorage.getItem('database-browse-preferences') ?? 'null'),
+    ).toMatchObject({
+      wheels: {sortKey: 'ALPHABETICAL', sortDirection: 'ASC'},
+    })
   })
 
-  it('pushes wheel filter and sort changes into history', async () => {
+  it('keeps wheel sort preference changes local while filter refinements use history', async () => {
     renderWheelsBrowseStateHarness()
 
     fireEvent.click(screen.getByRole('button', {name: 'Set realm CARO'}))
@@ -293,13 +286,6 @@ describe('useWheelsDatabaseBrowseState', () => {
     fireEvent.click(screen.getByRole('button', {name: 'Set sort RARITY'}))
     fireEvent.click(screen.getByRole('button', {name: 'Toggle wheel sort direction'}))
 
-    expect(screen.getByTestId('location-search')).toHaveTextContent(
-      '?realm=CARO&rarity=SSR&mainstat=KEYFLARE_REGEN&dir=ASC',
-    )
-
-    await act(async () => {
-      fireEvent.click(screen.getByRole('button', {name: 'Go back in history'}))
-    })
     expect(screen.getByTestId('location-search')).toHaveTextContent(
       '?realm=CARO&rarity=SSR&mainstat=KEYFLARE_REGEN',
     )
@@ -320,7 +306,7 @@ describe('useWheelsDatabaseBrowseState', () => {
     expect(
       JSON.parse(window.localStorage.getItem('database-browse-preferences') ?? 'null'),
     ).toEqual({
-      awakeners: {sortKey: 'ALPHABETICAL', sortDirection: 'ASC', groupByRealm: false},
+      awakeners: {sortKey: 'BEST_MATCH', sortDirection: 'ASC', groupByRealm: false},
       wheels: {sortKey: 'ALPHABETICAL', sortDirection: 'ASC'},
     })
   })
@@ -329,7 +315,7 @@ describe('useWheelsDatabaseBrowseState', () => {
     window.localStorage.setItem(
       'database-browse-preferences',
       JSON.stringify({
-        awakeners: {sortKey: 'ALPHABETICAL', sortDirection: 'ASC', groupByRealm: false},
+        awakeners: {sortKey: 'BEST_MATCH', sortDirection: 'ASC', groupByRealm: false},
         wheels: {sortKey: 'ALPHABETICAL', sortDirection: 'ASC'},
       }),
     )

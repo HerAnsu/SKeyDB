@@ -101,16 +101,40 @@
   {
     "id": "banner-echoing-wishes",
     "title": "Echoing Wishes",
-    "type": "combo",
-    "customTags": ["Daily"],
+    "type": "daily",
     "description": "Daily rotating special awakening banners. Each day features a different limited awakener and their recommended Wheel of Destiny.",
     "startDate": "2026/05/18 09:00",
     "endDate": "2026/06/15 09:00",
-    "derivedPool": {
-      "availabilityTypes": ["LIMITED_ASTRAL_REIGN", "LIMITED_FADED_LEGACY"],
-      "excludeNames": ["Saya"],
-      "linkedPairs": true
-    }
+    "dailySchedule": [
+      {"day": 1, "featured": ["Tulu", "Hymn of the Sovereign"]},
+      {"day": 2, "featured": ["Daffodil", "Treasured Rarity"]},
+      {"day": 3, "featured": ["Sorel", "By Rose Alone"]},
+      {"day": 4, "featured": ["Lily", "Grace Through Pain"]},
+      {"day": 5, "featured": ["Murphy", "Shrouded Birth"]},
+      {"day": 6, "featured": ["Wanda", "Queen's Edict"]},
+      {"day": 7, "featured": ["Salvador", "Tablet of Scriptures"]},
+      {"day": 8, "featured": ["24", "Aberrant Devour"]},
+      {"day": 9, "featured": ["Thais", "Merciful Nurturing"]},
+      {"day": 10, "featured": ["Miryam", "Power of the Pious"]},
+      {"day": 11, "featured": ["Horla", "The Last Verse"]},
+      {"day": 12, "featured": ["Ryker", "Hour of Fortune"]},
+      {"day": 13, "featured": ["Hameln", "Eternal Requiem"]},
+      {"day": 14, "featured": ["Helot: Catena", "Drowning in Crimson"]},
+      {"day": 15, "featured": ["Tawil", "Wheel Unseen"]},
+      {"day": 16, "featured": ["Doll: Inferno", "Manikin of Oblivion"]},
+      {"day": 17, "featured": ["Clementine", "Veiled Anguish"]},
+      {"day": 18, "featured": ["Corposant", "Flamebound Navigator"]},
+      {"day": 19, "featured": ["Castor", "Unbearable Freedom"]},
+      {"day": 20, "featured": ["Doresain", "Kiss of Repose"]},
+      {"day": 21, "featured": ["Kathigu-Ra", "Amber-Tinted Death"]},
+      {"day": 22, "featured": ["Pickman", "Paradoxical Realism"]},
+      {"day": 23, "featured": ["Pollux", "Twisted Knight Ballad"]},
+      {"day": 24, "featured": ["Murphy: Fauxborn", "Uteri Somnia"]},
+      {"day": 25, "featured": ["Mouchette", "Doomsday Rampage"]},
+      {"day": 26, "featured": ["Xu", "Vain Regrets"]},
+      {"day": 27, "featured": ["Vortice", "The Faraway Eden"]},
+      {"day": 28, "featured": ["Arachne", "Eternal Weave"]}
+    ]
   },
   {
     "id": "banner-kaleido-recollections-astral-reign",

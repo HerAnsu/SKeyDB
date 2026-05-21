@@ -4,12 +4,14 @@ import type {AwakenerEnlightenRecord, FullStats} from '@/domain/awakener-source-
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
+import type {DatabasePopoverDescriptionRankContext} from './database-popover-context'
 import {useDatabasePopoverTrailActions} from './useDatabasePopoverTrailActions'
 
 interface DatabasePopoverControllerOptions {
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   formulaContext?: PublicFormulaContext
   selectedEnlightenSlot?: AwakenerEnlightenRecord['slot'] | null
+  currentDescriptionRankContext?: DatabasePopoverDescriptionRankContext
   stats?: FullStats | null
   onNavigateToSkills?: () => void
   onNavigateToWheelPage?: (wheel: {id: string; name: string}) => void
@@ -25,6 +27,7 @@ export function useDatabasePopoverController({
   referenceLayer,
   formulaContext,
   selectedEnlightenSlot = null,
+  currentDescriptionRankContext,
   stats = null,
   onNavigateToSkills,
   onNavigateToWheelPage,
@@ -48,6 +51,7 @@ export function useDatabasePopoverController({
     onToggleEnlightenSlot,
     referenceLayer,
     selectedEnlightenSlot,
+    currentDescriptionRankContext,
     showTagIcons,
     showVisibleScaling,
     stats,

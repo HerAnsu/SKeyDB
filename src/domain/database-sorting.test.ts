@@ -69,12 +69,33 @@ describe('compareAwakenersForDatabaseSort', () => {
     ])
   })
 
-  it('sorts rarity buckets with alphabetical fallback inside the same rarity', () => {
+  it('sorts rarity and source buckets with alphabetical fallback inside the same bucket', () => {
     const awakeners = [
-      makeAwakener({id: 'awakener-0001', name: 'Gamma SSR', rarity: 'SSR'}),
+      makeAwakener({
+        availabilityType: 'WELFARE',
+        id: 'awakener-0001',
+        name: 'Zeta SSR Welfare',
+        rarity: 'SSR',
+      }),
       makeAwakener({id: 'awakener-0002', name: 'Beta Genesis', rarity: 'Genesis'}),
-      makeAwakener({id: 'awakener-0003', name: 'Alpha Genesis', rarity: 'Genesis'}),
-      makeAwakener({id: 'awakener-0004', name: 'Omega SR', rarity: 'SR'}),
+      makeAwakener({
+        availabilityType: 'LIMITED_FADED_LEGACY',
+        id: 'awakener-0003',
+        name: 'Gamma SSR Limited',
+        rarity: 'SSR',
+      }),
+      makeAwakener({
+        availabilityType: 'WELFARE',
+        id: 'awakener-0004',
+        name: 'Omega SR Welfare',
+        rarity: 'SR',
+      }),
+      makeAwakener({
+        availabilityType: 'PERMANENT',
+        id: 'awakener-0005',
+        name: 'Alpha SSR Permanent',
+        rarity: 'SSR',
+      }),
     ]
 
     const sorted = [...awakeners].sort((left, right) =>
@@ -86,10 +107,11 @@ describe('compareAwakenersForDatabaseSort', () => {
     )
 
     expect(sorted.map((awakener) => awakener.name)).toEqual([
-      'Alpha Genesis',
       'Beta Genesis',
-      'Gamma SSR',
-      'Omega SR',
+      'Gamma SSR Limited',
+      'Alpha SSR Permanent',
+      'Zeta SSR Welfare',
+      'Omega SR Welfare',
     ])
   })
 

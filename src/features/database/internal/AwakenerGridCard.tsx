@@ -1,38 +1,37 @@
 import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import {resolveAwakenerLiteStatsForLevel, type Awakener} from '@/domain/awakeners'
-import {formatAwakenerAvailabilityLabel} from '@/domain/database-browse-state'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getRealmAccent, getRealmBadge, getRealmIcon, getRealmLabel} from '@/domain/realms'
 
+import {
+  DEFAULT_AWAKENER_CARD_META_CONTEXT,
+  getAwakenerCardMetaData,
+  type AwakenerCardMetaContext,
+} from './awakener-card-meta-model'
+import {AwakenerCardMeta} from './AwakenerCardMeta'
 import {shouldPrioritizeDatabaseGridImage} from './database-grid-card-priority'
-import {DatabaseGridCardFrame} from './DatabaseGridCardFrame'
-import {DatabaseGridCardTitle} from './DatabaseGridCardTitle'
+import {DatabaseGridCardFrame, type HybridDatabaseCardMode} from './DatabaseGridCardFrame'
 import {DatabaseStatTriad} from './DatabaseStatTriad'
 
 const DATABASE_GRID_AWAKENER_STAT_LEVEL = 60
 
 interface AwakenerGridCardProps {
   awakener: Awakener
+  cardMetaContext?: AwakenerCardMetaContext
   index: number
+  onPreload?: (id: string) => void
   onSelect: (id: string) => void
+  variant?: HybridDatabaseCardMode
 }
 
-function formatReleaseDate(value: string | undefined): string | undefined {
-  if (!value) {
-    return undefined
-  }
-  const parsedDate = new Date(`${value}T00:00:00Z`)
-  if (Number.isNaN(parsedDate.getTime())) {
-    return value
-  }
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(parsedDate)
-}
-
-export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardProps) {
+export function AwakenerGridCard({
+  awakener,
+  cardMetaContext = DEFAULT_AWAKENER_CARD_META_CONTEXT,
+  index,
+  onPreload,
+  onSelect,
+  variant = 'poster',
+}: AwakenerGridCardProps) {
   const cardAsset = getAwakenerCardAsset(awakener.name)
   const portraitAsset = getAwakenerPortraitAsset(awakener.name)
   const displayName = formatAwakenerNameForUi(awakener.name)
@@ -42,44 +41,34 @@ export function AwakenerGridCard({awakener, index, onSelect}: AwakenerGridCardPr
   const realmLabel = getRealmLabel(awakener.realm)
   const stats = resolveAwakenerLiteStatsForLevel(awakener, DATABASE_GRID_AWAKENER_STAT_LEVEL)
   const prioritizeImage = shouldPrioritizeDatabaseGridImage(index)
-  const detailItems = [
-    formatAwakenerAvailabilityLabel(awakener.availabilityType),
-    formatReleaseDate(awakener.releaseDate),
-  ].filter(Boolean)
+  const cardMeta = getAwakenerCardMetaData(awakener, cardMetaContext)
+  const metaDetail = cardMeta ? <AwakenerCardMeta meta={cardMeta} /> : null
 
   return (
     <DatabaseGridCardFrame
       content={{
-        detail:
-          detailItems.length > 0 ? (
-            <>
-              {detailItems.map((item, itemIndex) => (
-                <span key={item}>
-                  {itemIndex > 0 ? <span className='mx-1.5 text-slate-600'>|</span> : null}
-                  {item}
-                </span>
-              ))}
-            </>
-          ) : null,
+        detail: metaDetail ? {body: metaDetail, visibility: 'all'} : undefined,
         dossierTitleAddon: realmIcon ? (
-          <img alt='' className='h-5 w-5 object-contain' draggable={false} src={realmIcon} />
+          <img alt='' className='database-awakener-realm-icon' draggable={false} src={realmIcon} />
         ) : null,
         meta: stats ? <DatabaseStatTriad stats={stats} /> : null,
-        title: <DatabaseGridCardTitle title={displayName}>{displayName}</DatabaseGridCardTitle>,
+        title: displayName,
       }}
       media={{
         alt: displayName,
-        dossierClassName: 'object-cover object-top',
         dossierSrc: portraitAsset ?? cardAsset,
         posterBadge: {label: realmLabel, src: realmBadge},
-        posterClassName: 'object-cover object-top',
         posterSrc: cardAsset,
         prioritize: prioritizeImage,
+      }}
+      onPreload={() => {
+        onPreload?.(awakener.id)
       }}
       onSelect={() => {
         onSelect(awakener.id)
       }}
       realmAccent={realmAccent}
+      variant={variant}
     />
   )
 }

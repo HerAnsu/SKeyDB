@@ -20,7 +20,7 @@ export const DATABASE_AWAKENER_TABS = [
   'lore',
 ] as const
 export const DEFAULT_DATABASE_AWAKENER_TAB = 'upgrades' satisfies DatabaseAwakenerTab
-export const DATABASE_AWAKENER_VISIBLE_TABS = ['upgrades', 'skills', 'teams', 'lore'] as const
+export const DATABASE_AWAKENER_VISIBLE_TABS = ['upgrades', 'skills', 'builds', 'lore'] as const
 
 export type DatabaseAwakenerTab = (typeof DATABASE_AWAKENER_TABS)[number]
 export type DatabaseAwakenerVisibleTab = (typeof DATABASE_AWAKENER_VISIBLE_TABS)[number]

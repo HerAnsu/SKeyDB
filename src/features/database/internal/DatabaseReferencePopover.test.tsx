@@ -491,6 +491,7 @@ describe('DatabaseReferencePopover', () => {
       expect.objectContaining({
         id: 'overlay.global.rouse',
       }),
+      expect.any(Object),
     )
   })
 
@@ -540,10 +541,12 @@ describe('DatabaseReferencePopover', () => {
     expect(onMechanicTokenClick).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({id: 'overlay.global.retain'}),
+      expect.any(Object),
     )
     expect(onMechanicTokenClick).toHaveBeenNthCalledWith(
       2,
       expect.objectContaining({id: 'overlay.global.prepare'}),
+      expect.any(Object),
     )
   })
 
@@ -580,6 +583,7 @@ describe('DatabaseReferencePopover', () => {
 
     expect(onMechanicTokenClick).toHaveBeenCalledWith(
       expect.objectContaining({id: 'overlay.global.tentacle-dmg'}),
+      expect.any(Object),
     )
   })
 

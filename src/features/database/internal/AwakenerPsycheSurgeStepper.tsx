@@ -47,6 +47,7 @@ export function AwakenerPsycheSurgeStepper({
     <div
       aria-label='Psyche Surge'
       className='flex items-center gap-1.5'
+      data-detail-modal-popover-preserve=''
       title='Psyche Surge substat bonus'
     >
       <StepButton ariaLabel='Decrease Psyche Surge' disabled={offset <= 0} onStep={onDecrease}>

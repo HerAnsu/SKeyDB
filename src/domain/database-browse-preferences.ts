@@ -38,29 +38,6 @@ export interface DatabaseBrowsePreferences {
   wheels: WheelsDatabaseBrowseSortPreferences
 }
 
-const databaseBrowsePreferencesSchema = z.object({
-  awakeners: z
-    .object({
-      sortKey: z.enum(DATABASE_SORT_OPTIONS),
-      sortDirection: sortDirectionSchema,
-      groupByRealm: z.boolean(),
-    })
-    .default({
-      sortKey: DATABASE_BROWSE_DEFAULTS.sortKey,
-      sortDirection: DATABASE_BROWSE_DEFAULTS.sortDirection,
-      groupByRealm: DATABASE_BROWSE_DEFAULTS.groupByRealm,
-    }),
-  wheels: z
-    .object({
-      sortKey: z.enum(WHEELS_DATABASE_SORT_OPTIONS),
-      sortDirection: sortDirectionSchema,
-    })
-    .default({
-      sortKey: WHEELS_DATABASE_BROWSE_DEFAULTS.sortKey,
-      sortDirection: WHEELS_DATABASE_BROWSE_DEFAULTS.sortDirection,
-    }),
-})
-
 export const DEFAULT_DATABASE_BROWSE_PREFERENCES: DatabaseBrowsePreferences = {
   awakeners: {
     sortKey: DATABASE_BROWSE_DEFAULTS.sortKey,
@@ -73,13 +50,48 @@ export const DEFAULT_DATABASE_BROWSE_PREFERENCES: DatabaseBrowsePreferences = {
   },
 }
 
+const awakenerSortPreferencesSchema = z
+  .object({
+    sortKey: z
+      .enum(DATABASE_SORT_OPTIONS)
+      .catch(DEFAULT_DATABASE_BROWSE_PREFERENCES.awakeners.sortKey),
+    sortDirection: sortDirectionSchema.catch(
+      DEFAULT_DATABASE_BROWSE_PREFERENCES.awakeners.sortDirection,
+    ),
+    groupByRealm: z.boolean().catch(DEFAULT_DATABASE_BROWSE_PREFERENCES.awakeners.groupByRealm),
+  })
+  .partial()
+  .catch({})
+
+const wheelsSortPreferencesSchema = z
+  .object({
+    sortKey: z
+      .enum(WHEELS_DATABASE_SORT_OPTIONS)
+      .catch(DEFAULT_DATABASE_BROWSE_PREFERENCES.wheels.sortKey),
+    sortDirection: sortDirectionSchema.catch(
+      DEFAULT_DATABASE_BROWSE_PREFERENCES.wheels.sortDirection,
+    ),
+  })
+  .partial()
+  .catch({})
+
+const databaseBrowsePreferencesSchema = z
+  .object({
+    awakeners: awakenerSortPreferencesSchema.optional(),
+    wheels: wheelsSortPreferencesSchema.optional(),
+  })
+  .catch({})
+
 export function normalizeDatabaseBrowsePreferences(input: unknown = {}): DatabaseBrowsePreferences {
   const parsed = databaseBrowsePreferencesSchema.parse(input)
   return {
-    awakeners: parsed.awakeners,
+    awakeners: {
+      ...DEFAULT_DATABASE_BROWSE_PREFERENCES.awakeners,
+      ...parsed.awakeners,
+    },
     wheels: {
-      sortKey: parsed.wheels.sortKey,
-      sortDirection: parsed.wheels.sortDirection,
+      ...DEFAULT_DATABASE_BROWSE_PREFERENCES.wheels,
+      ...parsed.wheels,
     },
   }
 }

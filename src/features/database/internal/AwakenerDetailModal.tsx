@@ -58,7 +58,7 @@ interface AwakenerDetailModalProps {
 const DATABASE_AWAKENER_TAB_LABELS: Record<DatabaseAwakenerVisibleTab, string> = {
   upgrades: 'Upgrades',
   skills: 'Skills',
-  teams: 'Teams',
+  builds: 'Builds',
   lore: 'Lore',
 }
 
@@ -69,8 +69,8 @@ const TAB_CONTENT_LOADING_FALLBACK = (
 const AwakenerDetailCards = lazy(() =>
   import('./AwakenerDetailCards').then((module) => ({default: module.AwakenerDetailCards})),
 )
-const AwakenerTeamsTab = lazy(() =>
-  import('./AwakenerTeamsTab').then((module) => ({default: module.AwakenerTeamsTab})),
+const AwakenerBuildsTab = lazy(() =>
+  import('./AwakenerBuildsTab').then((module) => ({default: module.AwakenerBuildsTab})),
 )
 
 export function AwakenerDetailModal({
@@ -456,9 +456,9 @@ export function AwakenerDetailModal({
                       />
                     </Suspense>
                   )}
-                  {activeTab === 'teams' && (
+                  {activeTab === 'builds' && (
                     <Suspense fallback={TAB_CONTENT_LOADING_FALLBACK}>
-                      <AwakenerTeamsTab />
+                      <AwakenerBuildsTab awakenerId={awakener.id} />
                     </Suspense>
                   )}
                   {activeTab === 'lore' && (

@@ -496,7 +496,8 @@ describe('AwakenerDetailModal', () => {
       within(dialog).getByRole('tablist', {name: 'Awakener detail sections'}),
     ).toBeInTheDocument()
     expect(within(dialog).queryByRole('tab', {name: 'Overview'})).not.toBeInTheDocument()
-    expect(within(dialog).queryByRole('tab', {name: 'Builds'})).not.toBeInTheDocument()
+    expect(within(dialog).queryByRole('tab', {name: 'Teams'})).not.toBeInTheDocument()
+    expect(within(dialog).getByRole('tab', {name: 'Builds'})).toBeInTheDocument()
     expect(within(dialog).getByRole('tab', {name: 'Upgrades'})).toHaveAttribute(
       'aria-selected',
       'true',
@@ -818,14 +819,29 @@ describe('AwakenerDetailModal', () => {
     }
   })
 
-  it('does not expose the disabled builds tab', async () => {
+  it('exposes the builds tab and renders builds content', async () => {
     const onClose = vi.fn()
     const awakener = makeAwakener(1, 'thais')
 
     renderAwakenerDetailModal(awakener, {onClose})
 
-    expect(screen.queryByRole('tab', {name: 'Builds'})).not.toBeInTheDocument()
-    expect(screen.queryByText(/Builds Tab/)).not.toBeInTheDocument()
+    fireEvent.click(screen.getByRole('tab', {name: 'Builds'}))
+
+    expect(await screen.findByText('Builds Tab awakener-0001')).toBeInTheDocument()
+  })
+
+  it('persists a default detail tab preference from settings', () => {
+    const onClose = vi.fn()
+    const awakener = makeAwakener(1, 'thais')
+
+    renderAwakenerDetailModal(awakener, {onClose})
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open detail settings'}))
+    fireEvent.change(screen.getByLabelText('Default tab'), {target: {value: 'builds'}})
+
+    expect(window.localStorage.getItem('database-detail-preferences')).toContain(
+      '"defaultTab":"builds"',
+    )
   })
 
   it('opens a searched awakener from the modal search and preserves the active tab', async () => {

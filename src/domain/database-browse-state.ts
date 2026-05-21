@@ -1,6 +1,7 @@
 import {
-  AWAKENER_SCALING_SUBSTAT_ROLE_FILTER_IDS,
-  type AwakenerScalingSubstatRoleFilter,
+  AWAKENER_SCALING_SUBSTAT_FILTER_ROLE_IDS,
+  type AwakenerScalingSubstatFilter,
+  type AwakenerScalingSubstatFilterRole,
 } from '@/domain/awakener-scaling-substats'
 import {SUBSTAT_SCALING_KEYS, type SubstatScalingKey} from '@/domain/awakener-source-schema'
 import {
@@ -15,8 +16,7 @@ import type {DatabaseSortKey} from '@/domain/database-sorting'
 
 export type {DatabaseSortKey} from '@/domain/database-sorting'
 export type {SubstatScalingKey} from '@/domain/awakener-source-schema'
-export type {AwakenerScalingSubstatRoleFilter} from '@/domain/awakener-scaling-substats'
-
+export type {AwakenerScalingSubstatFilter, AwakenerScalingSubstatFilterRole}
 export const DATABASE_REALM_FILTER_IDS = ['ALL', 'AEQUOR', 'CARO', 'CHAOS', 'ULTRA'] as const
 export type RealmFilterId = (typeof DATABASE_REALM_FILTER_IDS)[number]
 export const DATABASE_RARITY_FILTER_IDS = ['ALL', 'Genesis', 'SSR', 'SR'] as const
@@ -87,6 +87,7 @@ export function getTypeFilterLabel(id: TypeFilterId): string {
 }
 
 export const DATABASE_SORT_OPTIONS: readonly DatabaseSortKey[] = [
+  'BEST_MATCH',
   'ALPHABETICAL',
   'RARITY',
   'RELEASE_DATE',
@@ -102,8 +103,7 @@ export interface DatabaseBrowseState {
   typeFilter: TypeFilterId
   availabilityFilter: AvailabilityFilterId
   gameplayFactionFilters: GameplayFactionFilterId[]
-  scalingSubstatFilters: SubstatScalingKey[]
-  scalingSubstatRoleFilter: AwakenerScalingSubstatRoleFilter
+  scalingSubstatFilters: AwakenerScalingSubstatFilter[]
   sortKey: DatabaseSortKey
   sortDirection: CollectionSortDirection
   groupByRealm: boolean
@@ -117,8 +117,7 @@ export const DATABASE_BROWSE_DEFAULTS: DatabaseBrowseState = {
   availabilityFilter: 'ALL',
   gameplayFactionFilters: [],
   scalingSubstatFilters: [],
-  scalingSubstatRoleFilter: 'ANY',
-  sortKey: 'ALPHABETICAL',
+  sortKey: 'BEST_MATCH',
   sortDirection: 'ASC',
   groupByRealm: false,
 }
@@ -129,6 +128,60 @@ function parseSortDirection(rawValue: string | null): CollectionSortDirection {
 
 function parseGroupByRealm(rawValue: string | null): boolean {
   return rawValue === '1'
+}
+
+function parseScalingSubstatFilterToken(rawToken: string): AwakenerScalingSubstatFilter | null {
+  const [rawKey, rawRole] = rawToken.split(':')
+  if (!SUBSTAT_SCALING_KEYS.includes(rawKey as SubstatScalingKey)) {
+    return null
+  }
+  const key = rawKey as SubstatScalingKey
+  const role = rawRole
+    ? parseEnumSearchParam(
+        rawRole,
+        AWAKENER_SCALING_SUBSTAT_FILTER_ROLE_IDS,
+        'ANY' satisfies AwakenerScalingSubstatFilterRole,
+      )
+    : 'ANY'
+  return {key, role}
+}
+
+function canonicalizeScalingSubstatFilters(
+  filters: readonly AwakenerScalingSubstatFilter[],
+): AwakenerScalingSubstatFilter[] {
+  const filtersByKey = new Map<SubstatScalingKey, AwakenerScalingSubstatFilterRole>()
+  filters.forEach((filter) => {
+    filtersByKey.set(filter.key, filter.role)
+  })
+
+  return SUBSTAT_SCALING_KEYS.flatMap((key) => {
+    const role = filtersByKey.get(key)
+    return role ? [{key, role}] : []
+  })
+}
+
+function parseScalingSubstatFilters(rawValue: string | null): AwakenerScalingSubstatFilter[] {
+  if (!rawValue) {
+    return []
+  }
+
+  return canonicalizeScalingSubstatFilters(
+    rawValue
+      .split(',')
+      .map((token) => parseScalingSubstatFilterToken(token.trim()))
+      .filter((filter): filter is AwakenerScalingSubstatFilter => filter !== null),
+  )
+}
+
+function formatScalingSubstatFilterParam(
+  filters: readonly AwakenerScalingSubstatFilter[],
+): string | undefined {
+  if (filters.length === 0) {
+    return undefined
+  }
+  return canonicalizeScalingSubstatFilters(filters)
+    .map((filter) => (filter.role === 'ANY' ? filter.key : `${filter.key}:${filter.role}`))
+    .join(',')
 }
 
 export function parseDatabaseBrowseState(searchParams: URLSearchParams): DatabaseBrowseState {
@@ -158,15 +211,7 @@ export function parseDatabaseBrowseState(searchParams: URLSearchParams): Databas
       searchParams.get('faction'),
       DATABASE_GAMEPLAY_FACTION_FILTER_IDS,
     ),
-    scalingSubstatFilters: parseEnumListSearchParam(
-      searchParams.get('scaling'),
-      SUBSTAT_SCALING_KEYS,
-    ),
-    scalingSubstatRoleFilter: parseEnumSearchParam(
-      searchParams.get('scalingRole'),
-      AWAKENER_SCALING_SUBSTAT_ROLE_FILTER_IDS,
-      DATABASE_BROWSE_DEFAULTS.scalingSubstatRoleFilter,
-    ),
+    scalingSubstatFilters: parseScalingSubstatFilters(searchParams.get('scaling')),
     sortKey: parseEnumSearchParam(
       searchParams.get('sort'),
       DATABASE_SORT_OPTIONS,
@@ -177,9 +222,14 @@ export function parseDatabaseBrowseState(searchParams: URLSearchParams): Databas
   }
 }
 
+interface PatchDatabaseBrowseStateOptions {
+  includeSortParams?: boolean
+}
+
 export function patchDatabaseBrowseState(
   searchParams: URLSearchParams,
   patch: Partial<DatabaseBrowseState>,
+  {includeSortParams = true}: PatchDatabaseBrowseStateOptions = {},
 ): URLSearchParams {
   return patchSearchParams(
     searchParams,
@@ -225,34 +275,34 @@ export function patchDatabaseBrowseState(
       setSearchParam(
         nextParams,
         'scaling',
-        nextState.scalingSubstatFilters.length > 0
-          ? nextState.scalingSubstatFilters.join(',')
-          : undefined,
+        formatScalingSubstatFilterParam(nextState.scalingSubstatFilters),
       )
-      setSearchParam(
-        nextParams,
-        'scalingRole',
-        nextState.scalingSubstatRoleFilter === DATABASE_BROWSE_DEFAULTS.scalingSubstatRoleFilter
-          ? undefined
-          : nextState.scalingSubstatRoleFilter,
-      )
-      setSearchParam(
-        nextParams,
-        'sort',
-        nextState.sortKey === DATABASE_BROWSE_DEFAULTS.sortKey ? undefined : nextState.sortKey,
-      )
-      setSearchParam(
-        nextParams,
-        'dir',
-        nextState.sortDirection === DATABASE_BROWSE_DEFAULTS.sortDirection
-          ? undefined
-          : nextState.sortDirection,
-      )
-      setSearchParam(
-        nextParams,
-        'group',
-        nextState.groupByRealm === DATABASE_BROWSE_DEFAULTS.groupByRealm ? undefined : '1',
-      )
+      nextParams.delete('scalingRole')
+      nextParams.delete('mainScaling')
+      nextParams.delete('subScaling')
+      if (includeSortParams) {
+        setSearchParam(
+          nextParams,
+          'sort',
+          nextState.sortKey === DATABASE_BROWSE_DEFAULTS.sortKey ? undefined : nextState.sortKey,
+        )
+        setSearchParam(
+          nextParams,
+          'dir',
+          nextState.sortDirection === DATABASE_BROWSE_DEFAULTS.sortDirection
+            ? undefined
+            : nextState.sortDirection,
+        )
+        setSearchParam(
+          nextParams,
+          'group',
+          nextState.groupByRealm === DATABASE_BROWSE_DEFAULTS.groupByRealm ? undefined : '1',
+        )
+      } else {
+        nextParams.delete('sort')
+        nextParams.delete('dir')
+        nextParams.delete('group')
+      }
     },
   )
 }

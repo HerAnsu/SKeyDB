@@ -20,7 +20,7 @@ import {
   useDatabaseDetailRecord,
   useDatabaseDetailRouteRecord,
 } from '@/features/database/internal/useDatabaseDetailRouteRecord'
-import {dbDetailStore} from '@/stores/dbDetailStore'
+import {dbDetailStore, type DbDetailStackEntry} from '@/stores/dbDetailStore'
 
 import {
   createDatabaseDetailResultNavigation,
@@ -59,7 +59,7 @@ interface DbDetailModalHostProps {
   wheels: Wheel[]
 }
 
-function useDbDetailStackTop(): EntityRef | null {
+function useDbDetailStackTop(): DbDetailStackEntry | null {
   return useSyncExternalStore(
     dbDetailStore.subscribe,
     () => dbDetailStore.getState().stack.at(-1) ?? null,
@@ -243,6 +243,69 @@ function preloadDatabaseDetailResult(ref: DatabaseDetailResultSelectRef) {
   void preload.catch(() => undefined)
 }
 
+type IdlePreloadWindow = Window & {
+  cancelIdleCallback?: (handle: number) => void
+  requestIdleCallback?: (
+    callback: (deadline: {didTimeout: boolean; timeRemaining: () => number}) => void,
+    options?: {timeout?: number},
+  ) => number
+}
+
+const NEIGHBOR_PRELOAD_IDLE_TIMEOUT_MS = 1200
+const NEIGHBOR_PRELOAD_FALLBACK_DELAY_MS = 150
+
+function scheduleDatabaseDetailResultPreload(ref: DatabaseDetailResultSelectRef): () => void {
+  if (typeof window === 'undefined') {
+    return () => undefined
+  }
+
+  const idleWindow = window as Partial<IdlePreloadWindow>
+  if (idleWindow.requestIdleCallback) {
+    const handle = idleWindow.requestIdleCallback(
+      () => {
+        preloadDatabaseDetailResult(ref)
+      },
+      {timeout: NEIGHBOR_PRELOAD_IDLE_TIMEOUT_MS},
+    )
+    return () => {
+      idleWindow.cancelIdleCallback?.(handle)
+    }
+  }
+
+  const timeout = window.setTimeout(() => {
+    preloadDatabaseDetailResult(ref)
+  }, NEIGHBOR_PRELOAD_FALLBACK_DELAY_MS)
+
+  return () => {
+    window.clearTimeout(timeout)
+  }
+}
+
+function useDeferredDatabaseDetailNeighborPreload(
+  navigation: DatabaseDetailResultNavigation | null,
+  enabled: boolean,
+) {
+  useEffect(() => {
+    if (!enabled || !navigation) {
+      return
+    }
+
+    const cancelPreloads: (() => void)[] = []
+    if (navigation.previous) {
+      cancelPreloads.push(scheduleDatabaseDetailResultPreload(navigation.previous.ref))
+    }
+    if (navigation.next) {
+      cancelPreloads.push(scheduleDatabaseDetailResultPreload(navigation.next.ref))
+    }
+
+    return () => {
+      for (const cancelPreload of cancelPreloads) {
+        cancelPreload()
+      }
+    }
+  }, [enabled, navigation])
+}
+
 function getLoadingShellMaxWidth(kind: DatabaseDetailKind): 'standard' | 'wide' {
   return kind === 'posse' || kind === 'covenant' ? 'standard' : 'wide'
 }
@@ -332,7 +395,7 @@ export function DbDetailModalHost({
   const stackTop = useDbDetailStackTop()
   const activeRef: DatabaseDetailRef | null = routeItem
     ? {kind: routeItem.kind, id: routeItem.item.id}
-    : stackTop?.kind && isDatabaseDetailKind(stackTop.kind)
+    : stackTop?.source !== 'database-route' && stackTop?.kind && isDatabaseDetailKind(stackTop.kind)
       ? {kind: stackTop.kind, id: stackTop.id}
       : null
   const activeAwakenerTab =
@@ -348,19 +411,6 @@ export function DbDetailModalHost({
       }),
     [activeAwakenerTab, callbacks, resultSet, routeItem],
   )
-
-  useEffect(() => {
-    if (!routeItem || !routeNavigation) {
-      return
-    }
-
-    if (routeNavigation.previous) {
-      preloadDatabaseDetailResult(routeNavigation.previous.ref)
-    }
-    if (routeNavigation.next) {
-      preloadDatabaseDetailResult(routeNavigation.next.ref)
-    }
-  }, [routeItem, routeNavigation])
 
   useEffect(() => {
     dbDetailStore
@@ -702,6 +752,7 @@ function DbDetailAwakenerRouteModal({
     missingPathname: registryEntry.missingBrowsePath,
   })
   const canonicalTabPath = resolveAwakenerTabCanonicalPath(routeItem.item, tabSlug)
+  useDeferredDatabaseDetailNeighborPreload(navigation, Boolean(record))
 
   useEffect(() => {
     if (!record || !canonicalTabPath || location.pathname === canonicalTabPath) {
@@ -757,6 +808,7 @@ function DbDetailNonAwakenerRouteModal<Kind extends Exclude<DatabaseDetailKind, 
     loadRecord: registryEntry.loadRecord,
     missingPathname: registryEntry.missingBrowsePath,
   })
+  useDeferredDatabaseDetailNeighborPreload(navigation, Boolean(record))
 
   if (isLoading) {
     return (

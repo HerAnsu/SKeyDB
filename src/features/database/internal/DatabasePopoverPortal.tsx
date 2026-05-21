@@ -3,6 +3,7 @@ import type {ResolvedAwakenerDatabaseShellView} from '@/domain/awakeners-databas
 import type {ResolvedDatabaseReferenceLayer} from '@/domain/database-reference-layer'
 import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
+import type {DatabasePopoverDescriptionRankContext} from './database-popover-context'
 import type {KeyedDatabaseReferenceEntry} from './database-reference-entry'
 import {DatabaseReferencePopover} from './DatabaseReferencePopover'
 import type {FontScale} from './font-scale'
@@ -15,7 +16,10 @@ export interface DatabasePopoverPortalEntry {
   layerIndex: number
   onClose: () => void
   onInfoEntryClick?: (entry: KeyedDatabaseReferenceEntry) => void
-  onMechanicTokenClick: (overlay: AwakenerOverlayRecord) => void
+  onMechanicTokenClick: (
+    overlay: AwakenerOverlayRecord,
+    rankContext?: DatabasePopoverDescriptionRankContext,
+  ) => void
   onNavigate?: () => void
   onSkillTokenClick: (name: string) => void
   referenceLayer?: ResolvedDatabaseReferenceLayer | null

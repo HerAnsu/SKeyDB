@@ -18,6 +18,7 @@ import {resolveDescriptionTemplate} from '@/domain/description-args'
 import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import {AwakenerEnlightenInfluenceBadges} from './AwakenerEnlightenInfluenceBadges'
+import type {DatabasePopoverDescriptionRankContext} from './database-popover-context'
 import type {DatabaseReferenceEntry, KeyedDatabaseReferenceEntry} from './database-reference-entry'
 import {DatabaseLoreMarkupText} from './DatabaseLoreMarkupText'
 import type {DatabaseRichTextContentProps} from './DatabaseRichTextContent'
@@ -40,7 +41,10 @@ interface DatabaseReferencePopoverProps {
   onClose: () => void
   onInfoEntryClick?: (entry: KeyedDatabaseReferenceEntry) => void
   onSkillTokenClick: (name: string) => void
-  onMechanicTokenClick: (overlay: AwakenerOverlayRecord) => void
+  onMechanicTokenClick: (
+    overlay: AwakenerOverlayRecord,
+    rankContext?: DatabasePopoverDescriptionRankContext,
+  ) => void
   onNavigate?: () => void
   layerIndex?: number
   layerCount?: number
@@ -165,7 +169,11 @@ export function DatabaseReferencePopover({
     stats,
     variant: 'popover',
     onMechanicClick: (overlay) => {
-      onMechanicTokenClick(overlay)
+      onMechanicTokenClick(overlay, {
+        descriptionRank: entry.descriptionRank,
+        descriptionMaxRank: entry.descriptionMaxRank,
+        descriptionRankMode: entry.descriptionRankMode,
+      })
     },
     onSkillClick: (skillName) => {
       onSkillTokenClick(skillName)

@@ -5,8 +5,10 @@ import {
   EVENT_CATEGORY_METADATA,
   EVENT_CATEGORY_PRIORITY,
   formatCountdown,
+  getBannerDailyScheduleEntry,
   getTimelineCountdown,
   getTimelineCountdownDisplay,
+  getTimelineDateRangeDisplay,
   getTimelineStatus,
   normalizeEventCategory,
   parseGameDate,
@@ -86,7 +88,23 @@ describe('timeline date and status helpers', () => {
         '2026-04-10T01:00:00.000Z',
         new Date('2026-03-10T01:00:00.000Z'),
       ),
-    ).toEqual({text: 'Starts Mar 30 - Apr 10', title: 'Mar 30, 2026 - Apr 10, 2026'})
+    ).toEqual({
+      text: 'Starts Mar 30 · Ends Apr 10',
+      title: 'Mar 30, 2026 - Apr 10, 2026',
+    })
+  })
+
+  it('includes the end date for nearby upcoming countdown text', () => {
+    expect(
+      getTimelineCountdownDisplay(
+        '2026-06-15T01:00:00.000Z',
+        '2026-07-13T01:00:00.000Z',
+        new Date('2026-06-05T23:00:00.000Z'),
+      ),
+    ).toEqual({
+      text: 'Starts in 9d 2h · Ends Jul 13',
+      title: 'Jun 15, 2026 - Jul 13, 2026',
+    })
   })
 
   it('keeps the year in long-range visible dates outside the current year', () => {
@@ -97,9 +115,45 @@ describe('timeline date and status helpers', () => {
         new Date('2026-12-20T01:00:00.000Z'),
       ),
     ).toEqual({
-      text: 'Starts Jan 15 - Jan 30, 2027',
+      text: 'Starts Jan 15, 2027 · Ends Jan 30, 2027',
       title: 'Jan 15, 2027 - Jan 30, 2027',
     })
+  })
+
+  it('returns compact absolute date ranges for constrained detail surfaces', () => {
+    expect(
+      getTimelineDateRangeDisplay(
+        '2026-06-15T01:00:00.000Z',
+        '2026-07-13T01:00:00.000Z',
+        new Date('2026-06-05T23:00:00.000Z'),
+      ),
+    ).toEqual({
+      text: 'Jun 15 → Jul 13',
+      title: 'Jun 15, 2026 - Jul 13, 2026',
+    })
+  })
+})
+
+describe('daily banner schedules', () => {
+  const banner: BannerEntry = {
+    id: 'daily-banner',
+    title: 'Daily Banner',
+    type: 'daily',
+    startDate: '2026-05-18T01:00:00.000Z',
+    endDate: '2026-05-21T01:00:00.000Z',
+    dailySchedule: [
+      {day: 1, featured: [{name: 'Day One', kind: 'awakener'}]},
+      {day: 2, featured: [{name: 'Day Two', kind: 'awakener'}]},
+      {day: 3, featured: [{name: 'Day Three', kind: 'awakener'}]},
+    ],
+  }
+
+  it('selects daily banner entries by reset day boundaries', () => {
+    expect(getBannerDailyScheduleEntry(banner, new Date('2026-05-17T23:00:00.000Z'))?.day).toBe(1)
+    expect(getBannerDailyScheduleEntry(banner, new Date('2026-05-18T01:00:00.000Z'))?.day).toBe(1)
+    expect(getBannerDailyScheduleEntry(banner, new Date('2026-05-20T01:00:00.000Z'))?.day).toBe(3)
+    expect(getBannerDailyScheduleEntry(banner, new Date('2026-05-21T01:00:00.000Z'))?.day).toBe(3)
+    expect(getBannerDailyScheduleEntry(banner, new Date('2026-05-22T01:00:00.000Z'))?.day).toBe(3)
   })
 })
 

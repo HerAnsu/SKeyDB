@@ -56,6 +56,11 @@ export function useAwakenerDetailModalState({
 
   const popoverController = useDatabasePopoverController({
     formulaContext: shellView.formulaContext,
+    currentDescriptionRankContext: {
+      descriptionRank: resolvedSelection.skillLevel,
+      descriptionMaxRank: resolvedControls.skillLevelMax,
+      descriptionRankMode: 'current',
+    },
     onNavigateToSkills: navigateToSkills,
     onNavigateToCovenantPage: onSelectCovenant,
     onNavigateToWheelPage: onSelectWheel,

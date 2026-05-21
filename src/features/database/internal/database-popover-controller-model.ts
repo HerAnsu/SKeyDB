@@ -53,6 +53,7 @@ export function buildTrailEntry(
     record: reference.record,
     descriptionRank: reference.descriptionRank,
     descriptionMaxRank: reference.descriptionMaxRank,
+    descriptionRankMode: 'static',
     influenceBadges: reference.influenceBadges,
     navigationTarget:
       reference.kind === 'skill'
@@ -79,6 +80,7 @@ export function buildOverlayFallbackEntry(
     record: overlay,
     descriptionRank: rankContext.descriptionRank,
     descriptionMaxRank: rankContext.descriptionMaxRank,
+    descriptionRankMode: rankContext.descriptionRankMode ?? 'static',
     referenceLayerOverride,
   }
 }
@@ -135,26 +137,41 @@ export function withDescriptionRankContext<T extends TrailEntry>(
     ...entry,
     descriptionRank: rankContext.descriptionRank,
     descriptionMaxRank: rankContext.descriptionMaxRank,
+    descriptionRankMode: rankContext.descriptionRankMode ?? entry.descriptionRankMode ?? 'static',
   }
 }
 
 export function resolveLiveTrailEntry({
   entry,
+  currentRankContext,
   referenceLayer,
   selectedEnlightenSlot,
 }: {
   entry: TrailEntry
+  currentRankContext?: DatabasePopoverDescriptionRankContext
   referenceLayer: ResolvedDatabaseReferenceLayer | null
   selectedEnlightenSlot: AwakenerEnlightenRecord['slot'] | null
 }): TrailEntry {
+  const rankContext: DatabasePopoverDescriptionRankContext =
+    entry.descriptionRankMode === 'current'
+      ? {
+          descriptionRank: currentRankContext?.descriptionRank ?? entry.descriptionRank,
+          descriptionMaxRank: currentRankContext?.descriptionMaxRank ?? entry.descriptionMaxRank,
+          descriptionRankMode: 'current',
+        }
+      : {
+          descriptionRank: entry.descriptionRank,
+          descriptionMaxRank: entry.descriptionMaxRank,
+          descriptionRankMode: entry.descriptionRankMode ?? 'static',
+        }
   const liveReferenceLayer = entry.referenceLayerOverride ?? referenceLayer
   if (!liveReferenceLayer || !entry.referenceId) {
-    return entry
+    return withDescriptionRankContext(entry, rankContext)
   }
 
   const liveReference = resolveDatabaseReferenceInfoById(liveReferenceLayer, entry.referenceId)
   if (!liveReference || !entry.description || !liveReference.description) {
-    return entry
+    return withDescriptionRankContext(entry, rankContext)
   }
 
   const liveEntry = buildTrailEntry(
@@ -163,10 +180,7 @@ export function resolveLiveTrailEntry({
     entry.referenceLayerOverride ?? null,
   )
   return liveReference.kind === 'overlay'
-    ? withDescriptionRankContext(liveEntry, {
-        descriptionRank: entry.descriptionRank,
-        descriptionMaxRank: entry.descriptionMaxRank,
-      })
+    ? withDescriptionRankContext(liveEntry, rankContext)
     : liveEntry
 }
 

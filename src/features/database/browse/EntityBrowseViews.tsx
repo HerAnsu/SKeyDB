@@ -119,7 +119,6 @@ export function AwakenersBrowse({controller, renderDetailModalHost}: EntityBrows
     setAvailabilityFilter: browseState.setAvailabilityFilter,
     setGameplayFactionFilters: browseState.setGameplayFactionFilters,
     setScalingSubstatFilters: browseState.setScalingSubstatFilters,
-    setScalingSubstatRoleFilter: browseState.setScalingSubstatRoleFilter,
   })
   const detailResultSet = useMemo(
     () => createAwakenerDetailResultSet(viewModel.awakeners),
@@ -142,15 +141,15 @@ export function AwakenersBrowse({controller, renderDetailModalHost}: EntityBrows
             onRealmFilterChange={browseState.setRealmFilter}
             onTypeFilterChange={browseState.setTypeFilter}
             onGameplayFactionFilterToggle={browseState.toggleGameplayFactionFilter}
+            onScalingSubstatFilterRemove={browseState.removeScalingSubstatFilter}
+            onScalingSubstatFilterRoleChange={browseState.setScalingSubstatFilterRole}
             onScalingSubstatFilterToggle={browseState.toggleScalingSubstatFilter}
-            onScalingSubstatRoleFilterChange={browseState.setScalingSubstatRoleFilter}
             query={browseState.query}
             availabilityFilter={browseState.availabilityFilter}
             gameplayFactionFilters={browseState.gameplayFactionFilters}
             rarityFilter={browseState.rarityFilter}
             realmFilter={browseState.realmFilter}
             scalingSubstatFilters={browseState.scalingSubstatFilters}
-            scalingSubstatRoleFilter={browseState.scalingSubstatRoleFilter}
             searchInputRef={controller.searchInputRef}
             typeFilter={browseState.typeFilter}
           />
@@ -158,8 +157,13 @@ export function AwakenersBrowse({controller, renderDetailModalHost}: EntityBrows
         onResetFilters={browseState.resetFilters}
         results={
           <DatabaseGrid
+            availabilityFilter={browseState.availabilityFilter}
             awakeners={viewModel.awakeners}
+            onPreloadAwakener={controller.preloadAwakenerDetail}
             onSelectAwakener={controller.openAwakenerDetail}
+            rarityFilter={browseState.rarityFilter}
+            scalingSubstatFilters={browseState.scalingSubstatFilters}
+            sortKey={browseState.sortKey}
           />
         }
         search={controller.activeSearch}
@@ -223,7 +227,13 @@ export function WheelsBrowse({controller, renderDetailModalHost}: EntityBrowsePr
           />
         }
         onResetFilters={browseState.resetFilters}
-        results={<WheelGrid onSelectWheel={controller.openWheelDetail} wheels={viewModel.wheels} />}
+        results={
+          <WheelGrid
+            onPreloadWheel={controller.preloadWheelDetail}
+            onSelectWheel={controller.openWheelDetail}
+            wheels={viewModel.wheels}
+          />
+        }
         search={controller.activeSearch}
         title='Wheels'
         totalCount={viewModel.totalCount}
@@ -279,7 +289,13 @@ export function PossesBrowse({controller, renderDetailModalHost}: EntityBrowsePr
           />
         ),
         onResetFilters: browseState.resetFilters,
-        results: <PosseGrid onSelectPosse={controller.openPosseDetail} posses={records} />,
+        results: (
+          <PosseGrid
+            onPreloadPosse={controller.preloadPosseDetail}
+            onSelectPosse={controller.openPosseDetail}
+            posses={records}
+          />
+        ),
         search: controller.activeSearch,
         title: 'Posses',
         totalCount: databasePosses.length,
@@ -318,7 +334,11 @@ export function CovenantsBrowse({controller, renderDetailModalHost}: EntityBrows
         ),
         onResetFilters: browseState.resetFilters,
         results: (
-          <CovenantGrid covenants={records} onSelectCovenant={controller.openCovenantDetail} />
+          <CovenantGrid
+            covenants={records}
+            onPreloadCovenant={controller.preloadCovenantDetail}
+            onSelectCovenant={controller.openCovenantDetail}
+          />
         ),
         search: controller.activeSearch,
         title: 'Covenants',

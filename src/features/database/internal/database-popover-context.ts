@@ -12,6 +12,7 @@ export interface DatabasePopoverAnchorEvent {
 export interface DatabasePopoverDescriptionRankContext {
   descriptionRank?: number
   descriptionMaxRank?: number
+  descriptionRankMode?: 'static' | 'current'
 }
 
 export interface DatabasePopoverContextValue {
@@ -23,7 +24,10 @@ export interface DatabasePopoverContextValue {
     rankContext?: DatabasePopoverDescriptionRankContext,
   ) => void
   openNestedReferenceByName: (name: string) => void
-  openNestedOverlay: (overlay: AwakenerOverlayRecord) => void
+  openNestedOverlay: (
+    overlay: AwakenerOverlayRecord,
+    rankContext?: DatabasePopoverDescriptionRankContext,
+  ) => void
   hasOpenPopovers: boolean
   closeAllPopovers: () => void
 }

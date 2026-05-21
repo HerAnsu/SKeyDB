@@ -20,18 +20,30 @@ import type {WheelFullRecord} from '@/domain/wheels-full'
 
 import type {DatabaseDetailResultNavigation} from './database-detail-result-navigation'
 
+function loadAwakenerDetailModalModule() {
+  return import('@/features/database/internal/AwakenerDetailModal')
+}
+
+function loadWheelDetailModalModule() {
+  return import('@/features/database/internal/WheelDetailModal')
+}
+
+function loadSimpleArtifactDetailModalModule() {
+  return import('@/features/database/internal/SimpleArtifactDetailModal')
+}
+
 const AwakenerDetailModal = lazy(() =>
-  import('@/features/database/internal/AwakenerDetailModal').then((module) => ({
+  loadAwakenerDetailModalModule().then((module) => ({
     default: module.AwakenerDetailModal,
   })),
 )
 const WheelDetailModal = lazy(() =>
-  import('@/features/database/internal/WheelDetailModal').then((module) => ({
+  loadWheelDetailModalModule().then((module) => ({
     default: module.WheelDetailModal,
   })),
 )
 const SimpleArtifactDetailModal = lazy(() =>
-  import('@/features/database/internal/SimpleArtifactDetailModal').then((module) => ({
+  loadSimpleArtifactDetailModalModule().then((module) => ({
     default: module.SimpleArtifactDetailModal,
   })),
 )
@@ -82,6 +94,19 @@ interface DatabaseDetailRegistryEntry<Kind extends DatabaseDetailKind> {
 
 export type DatabaseDetailRegistry = {
   [Kind in DatabaseDetailKind]: DatabaseDetailRegistryEntry<Kind>
+}
+
+export function preloadDatabaseDetailShell(kind: DatabaseDetailKind): void {
+  let preload: Promise<unknown>
+  if (kind === 'awakener') {
+    preload = loadAwakenerDetailModalModule()
+  } else if (kind === 'wheel') {
+    preload = loadWheelDetailModalModule()
+  } else {
+    preload = loadSimpleArtifactDetailModalModule()
+  }
+
+  void preload.catch(() => undefined)
 }
 
 async function loadAwakenerDetailRecord(id: string) {

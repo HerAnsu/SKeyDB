@@ -23,7 +23,10 @@ import {useUrlBackedBrowseState} from './useDatabaseBrowseState'
 export function useWheelsDatabaseBrowseState() {
   const storage = useMemo(() => getBrowserLocalStorage(), [])
   const [, setStoredSortRevision] = useState(0)
-  const {browseState, commitBrowseState} = useUrlBackedBrowseState<WheelsDatabaseBrowseState>({
+  const {browseState, commitBrowseState} = useUrlBackedBrowseState<
+    WheelsDatabaseBrowseState,
+    {includeSortParams?: boolean}
+  >({
     parseState: (searchParams) => {
       const parsed = parseWheelsDatabaseBrowseState(searchParams)
       if (hasWheelsSortSearchParams(searchParams)) {
@@ -35,7 +38,10 @@ export function useWheelsDatabaseBrowseState() {
         ...preferences.wheels,
       }
     },
-    patchState: patchWheelsDatabaseBrowseState,
+    patchState: (searchParams, patch, options) =>
+      patchWheelsDatabaseBrowseState(searchParams, patch, {
+        includeSortParams: options?.includeSortParams ?? hasWheelsSortSearchParams(searchParams),
+      }),
   })
   const {mainstatFilter, query, rarityFilter, realmFilter, sortDirection, sortKey} = browseState
   const {setQuery, appendSearchCharacter, removeSearchCharacter, clearQuery} =
@@ -78,7 +84,8 @@ export function useWheelsDatabaseBrowseState() {
           sortKey: next,
           sortDirection: nextSortDirection,
         },
-        'push',
+        'replace',
+        {includeSortParams: false},
       )
     },
     [commitBrowseState, storage],
@@ -92,7 +99,8 @@ export function useWheelsDatabaseBrowseState() {
       {
         sortDirection: nextSortDirection,
       },
-      'push',
+      'replace',
+      {includeSortParams: false},
     )
   }, [commitBrowseState, sortDirection, sortKey, storage])
 

@@ -1,7 +1,13 @@
 import {useState} from 'react'
 
 import type {EntityRef} from '@/domain/entities/types'
-import {getTimelineCountdownDisplay, getTimelineStatus, type BannerEntry} from '@/domain/timeline'
+import {
+  getBannerDailyScheduleEntry,
+  getTimelineCountdownDisplay,
+  getTimelineDateRangeDisplay,
+  getTimelineStatus,
+  type BannerEntry,
+} from '@/domain/timeline'
 import type {TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 
 import {BannerArtwork} from './BannerArtwork'
@@ -31,7 +37,7 @@ const BANNER_HERO_TITLE_CLASS =
 const BANNER_HERO_META_CLASS =
   'mt-1.5 flex min-w-0 items-center gap-x-1.5 overflow-hidden text-[0.56rem] leading-none font-bold tracking-[0.14em] whitespace-nowrap uppercase drop-shadow-[0_1px_2px_rgba(0,0,0,0.92)]'
 const BANNER_HERO_COUNTDOWN_CLASS =
-  'mt-1 min-w-0 overflow-hidden text-[0.56rem] leading-none font-bold tracking-[0.14em] text-ellipsis whitespace-nowrap uppercase drop-shadow-[0_1px_2px_rgba(0,0,0,0.92)]'
+  'mt-1 min-w-0 overflow-visible text-[0.56rem] leading-tight font-bold tracking-[0.14em] whitespace-normal uppercase drop-shadow-[0_1px_2px_rgba(0,0,0,0.92)]'
 
 interface BannerCardProps {
   artworkLoading?: 'eager' | 'lazy'
@@ -51,11 +57,25 @@ export function BannerCard({
   const [drawerPinnedOpen, setDrawerPinnedOpen] = useState(false)
   const status = getTimelineStatus(banner.startDate, banner.endDate, now)
   const countdownDisplay = getTimelineCountdownDisplay(banner.startDate, banner.endDate, now)
+  const drawerDateDisplay = getTimelineDateRangeDisplay(banner.startDate, banner.endDate, now)
+  const dailyScheduleEntry = getBannerDailyScheduleEntry(banner, now)
+  const displayBanner = dailyScheduleEntry
+    ? {
+        ...banner,
+        customTags: [
+          ...(banner.customTags ?? []),
+          `Day ${dailyScheduleEntry.day.toString()}`,
+          ...(dailyScheduleEntry.featured[0] ? [dailyScheduleEntry.featured[0].name] : []),
+        ],
+        featured: dailyScheduleEntry.featured,
+        poolSlots: undefined,
+      }
+    : banner
   const isEnded = status === 'ended'
   const drawerCanCollapse =
-    Boolean(banner.customArt) ||
-    (banner.featured?.length ?? 0) > 0 ||
-    (banner.poolSlots?.length ?? 0) > 0
+    Boolean(displayBanner.customArt) ||
+    (displayBanner.featured?.length ?? 0) > 0 ||
+    (displayBanner.poolSlots?.length ?? 0) > 0
   const drawerOpen = !drawerCanCollapse || drawerPinnedOpen
   const showPinned = banner.pinned === true && status === 'active'
   const cardStateClass = isEnded
@@ -68,12 +88,12 @@ export function BannerCard({
     <article className={`${BANNER_CARD_BASE_CLASS} ${cardStateClass}`}>
       <div className={isEnded ? BANNER_ART_ENDED_CLASS : BANNER_ART_CLASS}>
         <BannerArtwork
-          customArt={banner.customArt}
-          featured={banner.featured}
+          customArt={displayBanner.customArt}
+          featured={displayBanner.featured}
           loading={artworkLoading}
           onOpenDetail={onOpenDetail}
-          poolSlots={banner.poolSlots}
-          title={banner.title}
+          poolSlots={displayBanner.poolSlots}
+          title={displayBanner.title}
         />
       </div>
 
@@ -81,7 +101,7 @@ export function BannerCard({
       <div className='pointer-events-none absolute inset-1 z-20 border border-amber-100/10' />
 
       <BannerCardHero
-        banner={banner}
+        banner={displayBanner}
         countdownText={countdownDisplay?.text}
         countdownTitle={countdownDisplay?.title}
         hidden={drawerOpen}
@@ -90,10 +110,10 @@ export function BannerCard({
       />
 
       <BannerInfoDrawer
-        banner={banner}
+        banner={displayBanner}
         canCollapse={drawerCanCollapse}
-        countdownText={countdownDisplay?.text}
-        countdownTitle={countdownDisplay?.title}
+        countdownText={drawerDateDisplay.text}
+        countdownTitle={drawerDateDisplay.title}
         isEnded={isEnded}
         onToggle={() => {
           setDrawerPinnedOpen((current) => !current)

@@ -140,6 +140,7 @@ describe('useDatabaseDetailPreferences', () => {
         accountLevel: 50,
       },
       awakener: {
+        defaultTab: null,
         showVisibleScaling: true,
         defaultSelection: {
           awakenerLevel: 60,

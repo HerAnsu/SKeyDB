@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "slug": "saya-qa-followups",
+  "status": "completed",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "intake": {
+    "status": "completed",
+    "risk_posture": "Moderate UI/product behavior change with bounded root-fix slices and Browser checks for transient behavior.",
+    "harness_policy": "Goal docs and focused tests are allowed; no dependency, remote, AGENTS, deploy, or PR changes without explicit approval.",
+    "allowed_areas": [
+      "src/domain/**",
+      "src/features/database/**",
+      "src/pages/timeline/**",
+      "src/ui/modal/**",
+      "focused tests",
+      "docs/refactor-goals/saya-qa-followups/**"
+    ],
+    "protected_areas": [
+      "remote publishing",
+      "dependency files",
+      "unrelated generated public-v3 data",
+      "unrelated Builder/Collection behavior except shared sort/filter state",
+      "spritesheet/atlas work"
+    ],
+    "validation_commands": [
+      "focused npx vitest run commands per slice",
+      "npm run lint",
+      "Browser spot checks through the in-app Browser plugin"
+    ],
+    "stop_condition": "Stop when all follow-up issues are terminal, a product/design decision is required, verification fails twice for the same slice, or scope expands beyond the follow-up list."
+  },
+  "focus_areas": [
+    {
+      "name": "Timeline preview date copy and wrapping",
+      "status": "done",
+      "evidence": "User clarified banners and events need clearer visible end-date language; D-Zones are effectively unaffected because they are not previewed before active."
+    },
+    {
+      "name": "Sidebar-safe live popovers",
+      "status": "done",
+      "evidence": "Scout found modal overlay click handling closes popovers on sidebar clicks because only popover containment is considered."
+    },
+    {
+      "name": "Independent main/sub scaling filters",
+      "status": "done",
+      "evidence": "Current global role filter cannot express Main: Amp plus Sub: Keyflare."
+    },
+    {
+      "name": "Awakener tabs and default tab preference",
+      "status": "done",
+      "evidence": "User corrected desired visible tabs: hide Overview and Teams, keep Builds, Lore last, Upgrades default; optional persisted default tab is acceptable if clean."
+    },
+    {
+      "name": "Route modal close teardown",
+      "status": "done",
+      "evidence": "Scout found a route close can fall through to rendering a stale route-sourced stack entry as overlay detail."
+    },
+    {
+      "name": "Sort persistence without URL churn",
+      "status": "done",
+      "evidence": "Persisted sorting makes routine URL writes noisy; URL params still matter for legacy/share overrides."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "C1",
+      "title": "Banner/event preview date display",
+      "source_task": "S1",
+      "status": "done",
+      "concept_blast_radius": [
+        "src/domain/timeline.ts",
+        "src/pages/timeline/BannerCard.tsx",
+        "src/pages/timeline/EventCard.tsx",
+        "focused timeline/card tests"
+      ],
+      "evidence": "Existing countdown helper hides end date for soon-upcoming items and uses unclear start-only date range for long-range upcoming previews.",
+      "next": "Implemented preview-specific display text for banners/events; event rows stack in cramped cards, banner hero stays contextual, and banner drawer uses compact date ranges."
+    },
+    {
+      "id": "C2",
+      "title": "Sidebar-safe live popovers",
+      "source_task": "S1",
+      "status": "done",
+      "concept_blast_radius": [
+        "src/ui/modal/useDetailModalChrome.ts",
+        "database popover controller consumers",
+        "focused modal/popover tests"
+      ],
+      "evidence": "Sidebar controls are inside the panel but outside the popover, so they are currently treated as outside-popover clicks.",
+      "next": "Implemented narrow preserve zones for sidebar controls and live current-rank popover context."
+    },
+    {
+      "id": "C3",
+      "title": "Independent main/sub scaling filters",
+      "source_task": "S1",
+      "status": "done",
+      "concept_blast_radius": [
+        "src/domain/awakener-scaling-substats.ts",
+        "src/domain/database-browse-state.ts",
+        "src/features/database/browse/useDatabaseBrowseState.ts",
+        "src/features/database/internal/DatabaseFilters.tsx",
+        "src/features/database/internal/database-active-filter-chips.ts",
+        "focused browse/view-model tests"
+      ],
+      "evidence": "User intent is role-specific selected stat buckets, not a global role mode.",
+      "next": "Implemented independent Any/Main/Sub scaling buckets, active chips, view-model filtering, and legacy URL migration."
+    },
+    {
+      "id": "C4",
+      "title": "Detail tabs and default preference",
+      "source_task": "S1",
+      "status": "done",
+      "concept_blast_radius": [
+        "src/domain/database-paths.ts",
+        "src/domain/database-detail-preferences.ts",
+        "src/features/database/internal/AwakenerDetailSettingsPanel.tsx",
+        "src/features/database/internal/AwakenerDetailModal.tsx",
+        "src/features/database/browse/DbDetailModalHost.tsx",
+        "focused route/modal tests"
+      ],
+      "evidence": "First pass hid Builds, but user intended Teams to be hidden instead; persisted default tab can make Upgrades default customizable.",
+      "next": "Implemented visible Upgrades/Skills/Builds/Lore tabs and persisted default tab handling for route-less awakener opens."
+    },
+    {
+      "id": "C5",
+      "title": "Route-modal close teardown root fix",
+      "source_task": "S1",
+      "status": "done",
+      "concept_blast_radius": [
+        "src/features/database/browse/DbDetailModalHost.tsx",
+        "focused modal host tests"
+      ],
+      "evidence": "When route item disappears, stale route stack entry may be used as overlay fallback for one render.",
+      "next": "Implemented route-stack filtering so route-sourced entries are not reused as overlay fallback after route close."
+    },
+    {
+      "id": "C6",
+      "title": "Sort persistence without URL churn",
+      "source_task": "S1",
+      "status": "done",
+      "concept_blast_radius": [
+        "src/features/database/browse/useDatabaseBrowseState.ts",
+        "src/features/database/browse/useWheelsDatabaseBrowseState.ts",
+        "src/features/database/internal/database-browse-preferences.ts",
+        "focused route/state tests"
+      ],
+      "evidence": "Sort should persist locally; writing every sort change into the URL makes the URL a preference store.",
+      "next": "Implemented local sort persistence with URL sort params retained as explicit read overrides only."
+    }
+  ],
+  "maintenance": [
+    {
+      "id": "M1",
+      "title": "Atlas/spritesheet for tiny assets",
+      "trigger": "Cloudflare Pages file limit concern",
+      "skill": "$refactor-rootfix",
+      "status": "out_of_scope_by_user",
+      "reason": "User explicitly deferred the atlas/spritesheet idea to another day.",
+      "next": "No action in this goal."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "S1",
+      "role": "scout",
+      "status": "done",
+      "title": "Map follow-up QA issues after first Saya QA pass",
+      "skills": [
+        "$refactor-scout",
+        "$refactor-react",
+        "$refactor-tailwind",
+        "$refactor-typescript",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "read-only repo inspection"
+      ],
+      "protected_files": [
+        "all files from scout edits"
+      ],
+      "expected_output": "Evidence-backed candidates for date copy, popovers, scaling filters, tabs, modal close, and sort URL ownership.",
+      "receipt": {
+        "summary": "Read-only scouts mapped the follow-up QA issues and root-fix boundaries.",
+        "evidence": [
+          "Timeline date copy should be fixed for banners and events, while avoiding unintended D-Zone UX changes.",
+          "Sidebar clicks close popovers because the overlay click handler ignores panel containment.",
+          "Independent main/sub scaling selections require state shape changes rather than a global role filter.",
+          "Visible awakening tabs should be Upgrades, Skills, Builds, Lore, with Overview and Teams hidden/compatible.",
+          "Route modal close can temporarily render stale route stack data as overlay detail.",
+          "Persisted sort preferences make URL sort writes optional noise; URL params should remain overrides."
+        ]
+      }
+    },
+    {
+      "id": "W1",
+      "role": "worker",
+      "status": "done",
+      "title": "Implement follow-up Saya QA fixes",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-tailwind",
+        "$refactor-typescript",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "candidate C1-C6 files listed above",
+        "focused tests",
+        "docs/refactor-goals/saya-qa-followups/**"
+      ],
+      "protected_files": [
+        "dependency files",
+        "remote state",
+        "unrelated generated public-v3 data",
+        "spritesheet/atlas work"
+      ],
+      "expected_output": "Integrated implementation for all queued candidates, with focused tests and Browser receipts.",
+      "receipt": {
+        "summary": "Implemented all C1-C6 follow-up slices and folded user corrections into the final banner/event date surface behavior.",
+        "files_changed": [
+          "src/domain/awakener-scaling-substats.ts",
+          "src/domain/database-browse-state.ts",
+          "src/domain/database-detail-preferences.ts",
+          "src/domain/database-paths.ts",
+          "src/domain/timeline.ts",
+          "src/domain/wheels-database-browse-state.ts",
+          "src/features/database/**",
+          "src/pages/timeline/**",
+          "src/ui/modal/useDetailModalChrome.ts",
+          "focused tests"
+        ],
+        "evidence": [
+          "Timeline hero/drawer/event surfaces now use separate date formats: hero contextual, drawer compact date range, event rows stack on cramped cards.",
+          "24 popover controller now supports live current-rank contexts while sidebar controls are marked as popover-preserving zones.",
+          "Scaling filters model Any/Main/Sub selected stat buckets independently.",
+          "Awakener visible tabs are Upgrades, Skills, Builds, Lore; Overview/Teams remain compatible hidden routes.",
+          "Route modal host no longer renders route-sourced stack entries as overlay fallback during close.",
+          "Database sort changes persist locally and remove/avoid normal sort params in shared URLs."
+        ]
+      }
+    }
+  ],
+  "final_audit": {
+    "full_outcome_complete": true,
+    "summary": "Saya QA follow-up goal completed without committing. User-facing refinements remain available for manual review in the dirty tree.",
+    "validation": [
+      "npm run test -- --run src\\domain\\timeline.test.ts src\\pages\\timeline\\BannerCard.test.tsx src\\pages\\timeline\\EventCard.test.tsx",
+      "npx tsc --noEmit --pretty false",
+      "npm run lint",
+      "Focused combined Vitest suite for modal/popover, scaling filters, tabs/defaults, modal host, and timeline surfaces",
+      "Browser checks: event rows stack start/end dates; banner hero stays contextual; banner drawer shows compact date range; visible tabs omit Overview/Teams; scaling buckets exist; sort changes clean URL"
+    ],
+    "open_items": []
+  }
+}

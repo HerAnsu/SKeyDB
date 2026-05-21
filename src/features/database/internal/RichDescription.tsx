@@ -66,8 +66,9 @@ export function RichDescription({
     variant: 'inline',
     onMechanicClick: (overlay, event) => {
       popoverController?.openRootOverlay(overlay, event, {
-        descriptionRank,
+        descriptionRank: descriptionRank ?? skillLevel,
         descriptionMaxRank,
+        descriptionRankMode: 'current',
       })
     },
     onSkillClick: (name, event) => {

@@ -5,6 +5,7 @@ import type {WheelsDatabaseSortKey} from '@/domain/wheels-database-browse-state'
 const DATABASE_SORT_LABELS: Record<DatabaseSortKey, string> = {
   ALPHABETICAL: 'Alphabetical',
   ATK: 'ATK',
+  BEST_MATCH: 'Best match',
   CON: 'CON',
   DEF: 'DEF',
   RARITY: 'Rarity',
@@ -25,6 +26,9 @@ export function getDatabaseSortDirectionLabel(
   sortKey: DatabaseSortKey,
   direction: CollectionSortDirection,
 ): string {
+  if (sortKey === 'BEST_MATCH') {
+    return ''
+  }
   if (sortKey === 'ALPHABETICAL') {
     return direction === 'ASC' ? 'A → Z' : 'Z → A'
   }

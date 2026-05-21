@@ -8,15 +8,16 @@ import {SimpleArtifactGridCard} from './SimpleArtifactGridCard'
 
 interface PosseGridProps {
   posses: Posse[]
+  onPreloadPosse?: (posseId: string) => void
   onSelectPosse: (posseId: string) => void
 }
 
-export function PosseGrid({onSelectPosse, posses}: PosseGridProps) {
+export function PosseGrid({onPreloadPosse, onSelectPosse, posses}: PosseGridProps) {
   return (
     <DatabaseCatalogGrid
       emptyMessage='No posses match the current filters.'
+      gridLayout='square-art'
       items={posses}
-      layout='square-art'
       renderItem={(posse, index) => (
         <SimpleArtifactGridCard
           id={posse.id}
@@ -25,6 +26,7 @@ export function PosseGrid({onSelectPosse, posses}: PosseGridProps) {
           imageTreatment='badge'
           key={posse.id}
           name={posse.name}
+          onPreload={onPreloadPosse}
           onSelect={onSelectPosse}
           realm={posse.realm}
         />
@@ -35,15 +37,16 @@ export function PosseGrid({onSelectPosse, posses}: PosseGridProps) {
 
 interface CovenantGridProps {
   covenants: Covenant[]
+  onPreloadCovenant?: (covenantId: string) => void
   onSelectCovenant: (covenantId: string) => void
 }
 
-export function CovenantGrid({covenants, onSelectCovenant}: CovenantGridProps) {
+export function CovenantGrid({covenants, onPreloadCovenant, onSelectCovenant}: CovenantGridProps) {
   return (
     <DatabaseCatalogGrid
       emptyMessage='No covenants match the current search.'
+      gridLayout='square-art'
       items={covenants}
-      layout='square-art'
       renderItem={(covenant, index) => (
         <SimpleArtifactGridCard
           id={covenant.id}
@@ -52,6 +55,7 @@ export function CovenantGrid({covenants, onSelectCovenant}: CovenantGridProps) {
           imageTreatment='emblem'
           key={covenant.id}
           name={covenant.name}
+          onPreload={onPreloadCovenant}
           onSelect={onSelectCovenant}
         />
       )}

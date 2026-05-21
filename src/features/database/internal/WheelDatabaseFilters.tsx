@@ -108,6 +108,7 @@ export function WheelDatabaseFilters({
 
             <ChipFilterRow
               activeId={rarityFilter}
+              defaultId='ALL'
               label='Rarity'
               onChange={onRarityFilterChange}
               options={rarityFilterTabs}
@@ -117,6 +118,7 @@ export function WheelDatabaseFilters({
           <ChipFilterRow
             activeId={mainstatFilter}
             controlsClassName='flex min-w-0 flex-1 flex-wrap items-center gap-1.5 sm:grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+            defaultId='ALL'
             label='Main stat'
             onChange={onMainstatFilterChange}
             options={mainstatFilterTabs}
