@@ -60,10 +60,12 @@ import type {
   QuickLineupStep,
   Team,
   TeamSlot,
+  WheelSlotIndex,
 } from '../builder/types'
 import {useAwakenerBuildRecommendations} from '../builder/useAwakenerBuildRecommendations'
 import {useBuilderImportExport} from '../builder/useBuilderImportExport'
 import {useTransferConfirm, type PendingTransfer} from '../builder/useTransferConfirm'
+import {getWheelSlotIndex} from '../builder/wheel-slot-index'
 import {
   createBuilderV2EditingState,
   getToggledBuilderV2EditingTarget,
@@ -980,7 +982,7 @@ export function useBuilderV2Model({
   )
 
   const selectWheelSlot = useCallback(
-    (slotId: string, wheelIndex: 0 | 1) => {
+    (slotId: string, wheelIndex: WheelSlotIndex) => {
       setViolationMessage(null)
       if (quickLineupState) {
         jumpToQuickLineupStep({kind: 'wheel', slotId, wheelIndex})
@@ -1232,7 +1234,7 @@ export function useBuilderV2Model({
   )
 
   const clearWheel = useCallback(
-    (slotId: string, wheelIndex: 0 | 1) => {
+    (slotId: string, wheelIndex: WheelSlotIndex) => {
       const result = clearWheelAssignment(activeTeamSlots, slotId, wheelIndex)
       if (result.nextSlots === activeTeamSlots) {
         return
@@ -1344,10 +1346,15 @@ export function useBuilderV2Model({
           applyEditingTarget({kind: 'awakener', slotId: targetSlotId})
         }
       } else if (transfer.kind === 'wheel') {
+        const targetWheelIndex = getWheelSlotIndex(transfer.targetWheelIndex)
+        if (targetWheelIndex === null) {
+          return
+        }
+
         applyEditingTarget({
           kind: 'wheel',
           slotId: transfer.targetSlotId,
-          wheelIndex: transfer.targetWheelIndex === 0 ? 0 : 1,
+          wheelIndex: targetWheelIndex,
         })
       } else {
         applyEditingTarget({kind: 'posse'}, {syncPickerTab: true})
@@ -1612,7 +1619,7 @@ function createSlotAwakenerView(
 function createWheelSlotView(
   slot: TeamSlot,
   slotLabel: string,
-  wheelIndex: 0 | 1,
+  wheelIndex: WheelSlotIndex,
   wheelById: Map<string, Wheel>,
   activeSelection: ActiveSelection,
   ownedWheelLevelById: Map<string, number | null>,

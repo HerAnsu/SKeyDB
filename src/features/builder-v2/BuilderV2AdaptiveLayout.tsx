@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from 'react'
 
+import type {WheelSlotIndex} from '../builder/types'
 import {BuilderV2ActiveFooter, BuilderV2ActiveHeader} from './BuilderV2ActiveTeamChrome'
 import {BuilderV2PickerContent} from './BuilderV2AwakenerPicker'
 import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
@@ -87,11 +88,13 @@ export function BuilderV2AdaptiveLayout({model}: BuilderV2AdaptiveLayoutProps) {
     openPicker(restoreTarget, {ensureTarget: false})
   })
 
-  const selectWheelSlotAndOpenPicker = useStableEvent((slotId: string, wheelIndex: 0 | 1) => {
-    const restoreTarget = getCurrentFocusRestoreTarget()
-    model.selectWheelSlot(slotId, wheelIndex)
-    openPicker(restoreTarget, {ensureTarget: false})
-  })
+  const selectWheelSlotAndOpenPicker = useStableEvent(
+    (slotId: string, wheelIndex: WheelSlotIndex) => {
+      const restoreTarget = getCurrentFocusRestoreTarget()
+      model.selectWheelSlot(slotId, wheelIndex)
+      openPicker(restoreTarget, {ensureTarget: false})
+    },
+  )
 
   const selectCovenantSlotAndOpenPicker = useStableEvent((slotId: string) => {
     const restoreTarget = getCurrentFocusRestoreTarget()

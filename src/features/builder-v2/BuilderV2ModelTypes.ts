@@ -1,21 +1,19 @@
 import type {Awakener} from '@/domain/awakeners'
-import type {AwakenerSortKey, CollectionSortDirection, WheelCollectionSortKey} from '@/domain/collection-sorting'
+import type {
+  AwakenerSortKey,
+  CollectionSortDirection,
+  WheelCollectionSortKey,
+} from '@/domain/collection-sorting'
 import type {WheelMainstatFilter} from '@/domain/wheel-mainstat-filters'
 import type {Wheel} from '@/domain/wheels'
 
 import type {BuilderImportExportDialogsProps} from '../builder/BuilderImportExportDialogs'
-import type {ActiveSelection, QuickLineupSession} from '../builder/types'
 import type {TeamTemplateId} from '../builder/team-collection'
+import type {ActiveSelection, QuickLineupSession, WheelSlotIndex} from '../builder/types'
 
 export type BuilderV2PickerTab = 'awakeners' | 'wheels' | 'covenants' | 'posses'
 export type BuilderV2AwakenerFilter = 'ALL' | 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA'
-export type BuilderV2PosseFilter =
-  | 'ALL'
-  | 'FADED_LEGACY'
-  | 'AEQUOR'
-  | 'CARO'
-  | 'CHAOS'
-  | 'ULTRA'
+export type BuilderV2PosseFilter = 'ALL' | 'FADED_LEGACY' | 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA'
 export type BuilderV2WheelRarityFilter = 'ALL' | 'SSR' | 'SR' | 'R'
 export type BuilderV2TeamTarget = {kind: 'posse'} | null
 
@@ -90,7 +88,7 @@ export interface BuilderV2AwakenerOption {
 }
 
 export interface BuilderV2WheelSlotView {
-  wheelIndex: 0 | 1
+  wheelIndex: WheelSlotIndex
   label: string
   wheelId: string | null
   wheelName: string | null
@@ -247,7 +245,7 @@ export interface BuilderV2Model {
   finishQuickLineup: () => void
   cancelQuickLineup: () => void
   selectAwakenerSlot: (slotId: string) => void
-  selectWheelSlot: (slotId: string, wheelIndex: 0 | 1) => void
+  selectWheelSlot: (slotId: string, wheelIndex: WheelSlotIndex) => void
   selectCovenantSlot: (slotId: string) => void
   selectPosse: () => void
   assignAwakener: (awakenerId: string) => void
@@ -255,7 +253,7 @@ export interface BuilderV2Model {
   assignCovenant: (covenantId: string) => void
   assignPosse: (posseId: string) => void
   removeAwakener: (slotId: string) => void
-  clearWheel: (slotId: string, wheelIndex: 0 | 1) => void
+  clearWheel: (slotId: string, wheelIndex: WheelSlotIndex) => void
   clearCovenant: (slotId: string) => void
   clearPosse: () => void
   openImportDialog: () => void

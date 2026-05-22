@@ -1,6 +1,7 @@
 import {getAwakenerIdentityKeyById} from '@/domain/awakener-identity'
 
 import type {Team, WheelUsageLocation} from '../builder/types'
+import {toWheelSlotIndex} from '../builder/wheel-slot-index'
 
 export interface BuilderV2AwakenerUsage {
   teamId: string
@@ -40,7 +41,12 @@ export function buildBuilderV2UsageIndex(teams: readonly Team[]): BuilderV2Usage
           continue
         }
 
-        wheelById.set(wheelId, {teamOrder, teamId: team.id, slotId: slot.slotId, wheelIndex})
+        wheelById.set(wheelId, {
+          teamOrder,
+          teamId: team.id,
+          slotId: slot.slotId,
+          wheelIndex: toWheelSlotIndex(wheelIndex),
+        })
       }
     }
   }

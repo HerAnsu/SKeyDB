@@ -208,3 +208,40 @@
 - R6 complete: W7 review recorded.
 - J8 active: choose the next Builder V2 hardening slice only if continuing this goal.
 - Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-23 - J8 selected shared WheelSlotIndex boundary
+
+- User requested the same multi-tranche loop continue.
+- Native Codex goal created for another larger Builder V2 architecture-hardening run.
+- Scouts:
+  - CSS scout `019e51de-6ca1-7b80-9eec-823d64b03216` recommended combining C11/C14 as a CSS picker focus/motion/grid tranche and keeping C12 separate.
+  - Wheel-index scout `019e51de-9929-71e2-a1f6-7053942c949e` confirmed C4 is contained if V1 protection tests and raw-number guards stay in scope.
+  - Team-state scout `019e51de-c5f8-7751-9915-75308617159f` confirmed C5 is viable only as additive shared metadata and should not replace existing no-op identity checks in the same pass.
+  - DnD-boundary scout `019e51de-f604-7f72-89f5-4d65a447d4c9` recommended keeping C8/C13 queued until a concrete DnD overlay/ghost contract exists.
+- J8 selected `C4` Shared `WheelSlotIndex` type as W8.
+- Root-fix reasoning: C4 hardens a trusted input boundary ahead of future DnD while preserving current V1/V2 behavior. C11/C14 is the next likely tranche; C5 remains queued for shared-runtime metadata; C8/C13 remain queued until real DnD work.
+- W8 active: `Introduce shared WheelSlotIndex boundary`.
+- W8 allowed files: shared builder wheel types/helpers and direct V1/V2 wheel-selection, card, usage-index, loadout, and model consumers plus this goal packet.
+- W8 protected scope: do not change `team-state.ts` runtime semantics, mobile redesign, teams-list shape, DnD implementation, dependencies, remote state, or `docs/design/**`.
+
+### 2026-05-23 - W8 WheelSlotIndex boundary landed
+
+- W8 implementation:
+  - Added shared `src/features/builder/wheel-slot-index.ts` helpers.
+  - Introduced `WheelSlotIndex` in shared builder types for wheel usage, quick-lineup steps, active selection, predicted drop hover, and team-wheel drag payloads.
+  - Updated V1 wheel card/drop/selection paths to normalize raw `number` inputs before constructing typed wheel selections or drag payloads.
+  - Updated V1 wheel-action test fixtures so build-time test typechecking also uses `WheelUsageLocation`.
+  - Updated Builder V2 model/types/loadout/usage/slot surfaces to use the shared `WheelSlotIndex` boundary instead of local `0 | 1` annotations or fallback clamping.
+  - Kept `team-state.ts` runtime guards untouched and did not implement DnD.
+- Review:
+  - Reviewer `019e51e6-c12d-7501-8ee7-ae427c6cdbb3` found one packaging issue: new `wheel-slot-index.ts` was untracked while tracked files imported it.
+  - Controller will explicitly stage the helper with the W8 commit and keep `docs/design/` untracked.
+  - Reviewer found no behavior-regression issues in V1/V2 wheel selection, assignment, or DnD ingress normalization.
+- Validation:
+  - `npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/builder-v2-usage-index.test.ts src/features/builder/useBuilderViewModel.test.ts src/features/builder/BuilderPage.quick-lineup.test.tsx --run` passed with 78 tests.
+  - `npx tsc -p tsconfig.app.json --noEmit` passed.
+  - Targeted `npx eslint` over touched C4 files passed.
+  - Full pre-commit build initially exposed widened numeric wheel-index fixtures in `createBuilderWheelActions.test.ts`; fixtures were corrected and validation rerun.
+- R7 complete: W8 review recorded.
+- J9 active: choose the next post-WheelSlotIndex hardening tranche. Current recommendation is C11/C14 CSS focus/motion/picker-grid contract.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`

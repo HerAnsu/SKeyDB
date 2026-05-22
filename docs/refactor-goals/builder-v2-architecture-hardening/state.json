@@ -3,7 +3,7 @@
   "slug": "builder-v2-architecture-hardening",
   "status": "active",
   "created": "2026-05-22",
-  "updated": "2026-05-22",
+  "updated": "2026-05-23",
   "intake": {
     "status": "completed",
     "risk_posture": "Preserve current /builder-v2 behavior and all /builder behavior; prefer characterized root-fix slices; stop before product/design/DnD feature decisions.",
@@ -127,7 +127,7 @@
       "id": "C4",
       "title": "Shared WheelSlotIndex type",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/features/builder/types.ts",
         "V2 model/types",
@@ -135,7 +135,7 @@
         "focused V1/V2 tests"
       ],
       "evidence": "Shared QuickLineupStep, ActiveSelection, and WheelUsageLocation use number; V2 clamps malformed values to 1.",
-      "next": "Root-fix candidate before DnD; touches shared builder types, so Judge must protect V1 behavior."
+      "next": "Implemented by W8: introduced shared WheelSlotIndex plus narrow parse/normalize helpers and routed V1/V2 trusted wheel-selection, usage-index, and transfer/drag data surfaces through the typed boundary while preserving team-state runtime guards."
     },
     {
       "id": "C5",
@@ -1204,7 +1204,7 @@
     {
       "id": "J8",
       "role": "judge",
-      "status": "active",
+      "status": "done",
       "title": "Choose next Builder V2 hardening slice",
       "skills": [
         "$refactor-rootfix",
@@ -1226,12 +1226,150 @@
         "docs/design/**"
       ],
       "expected_output": "Select the next tranche after W7 only if continuing this goal. Remaining candidates include C5 additive team-state result, C4 type-only WheelSlotIndex, C11/C12 CSS contracts, C13 clipping boundary, C14 picker grid contract, C15 persistence parser, and C16 state strategy review.",
+      "receipt": {
+        "evidence": [
+          "Selected C4 Shared WheelSlotIndex type as W8 after scouts compared CSS, shared team-state, wheel-index, and pre-DnD boundary candidates.",
+          "C4 scout confirmed the slice is contained if V1 protection tests are in scope and team-state runtime guards keep accepting raw UI numbers.",
+          "Rejected C8/C13 for this tranche because the scout found no concrete DnD overlay/ghost contract exists yet; they remain queued until real DnD work.",
+          "Rejected C5 for this tranche because it is viable only as additive shared team-state metadata and deserves its own shared-runtime tranche after C4."
+        ],
+        "validation": [
+          "Approved W8 allowed files, invariants, validation, and rollback."
+        ]
+      }
+    },
+    {
+      "id": "W8",
+      "role": "worker",
+      "status": "done",
+      "title": "Introduce shared WheelSlotIndex boundary",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-react",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/builder/types.ts",
+        "src/features/builder/wheel-slot-index.ts",
+        "src/features/builder/selection-state.ts",
+        "src/features/builder/useBuilderViewModel.ts",
+        "src/features/builder/createBuilderWheelActions.ts",
+        "src/features/builder/createBuilderWheelActions.test.ts",
+        "src/features/builder/CardWheelTile.tsx",
+        "src/features/builder/CardWheelZone.tsx",
+        "src/features/builder/predicted-drop-hover.ts",
+        "src/features/builder-v2/BuilderV2ModelTypes.ts",
+        "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+        "src/features/builder-v2/BuilderV2TeamSlots.tsx",
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/builder-v2-loadout-commands.ts",
+        "src/features/builder-v2/builder-v2-usage-index.ts",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "src/features/builder/team-state.ts runtime semantics",
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Add a shared WheelSlotIndex type and narrow trusted wheel-index contracts while preserving raw-number guards at V1/DnD ingress points and current V1/V2 behavior.",
+      "invariants": [
+        "Do not remove team-state runtime invalid-index guards.",
+        "Do not change V1 visible wheel selection, DnD, quick-lineup, or transfer behavior.",
+        "Do not implement DnD or reshape drag/drop contracts beyond typing existing wheel-index payloads.",
+        "Do not change Builder V2 mobile layout, teams-list shape, CSS, dependencies, or docs/design."
+      ],
+      "validation": [
+        "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/builder-v2-usage-index.test.ts src/features/builder/useBuilderViewModel.test.ts src/features/builder/BuilderPage.quick-lineup.test.tsx --run",
+        "npx tsc -p tsconfig.app.json --noEmit",
+        "targeted npx eslint over touched Builder V1/V2 files",
+        "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening"
+      ],
+      "rollback": [
+        "Revert WheelSlotIndex type/helper changes, restore broad number contracts, and revert W8 packet updates."
+      ],
+      "receipt": {
+        "evidence": [
+          "Added shared src/features/builder/wheel-slot-index.ts with getWheelSlotIndex and toWheelSlotIndex helpers.",
+          "Introduced WheelSlotIndex in shared builder types for WheelUsageLocation, QuickLineupStep, ActiveSelection, PredictedDropHover, and wheel DragData.",
+          "Updated V1 wheel selection/drop/card surfaces to normalize raw number inputs before constructing typed wheel selection or drag payloads.",
+          "Updated Builder V2 model/types/loadout/usage/slot surfaces to use the shared WheelSlotIndex boundary instead of local 0 | 1 annotations or fallback clamping.",
+          "Kept team-state runtime guards untouched and did not implement DnD, mobile redesign, teams-list decisions, dependencies, or docs/design changes.",
+          "Updated V1 wheel-action test fixtures to type their used-wheel maps as WheelUsageLocation so build-time test typechecking preserves the narrowed wheel-index contract."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/builder-v2-usage-index.test.ts src/features/builder/useBuilderViewModel.test.ts src/features/builder/BuilderPage.quick-lineup.test.tsx --run passed with 78 tests.",
+          "npx tsc -p tsconfig.app.json --noEmit passed.",
+          "npx eslint over touched C4 files passed.",
+          "Full pre-commit build initially exposed widened numeric wheel-index test fixtures in createBuilderWheelActions.test.ts; fixtures were corrected and validation rerun."
+        ]
+      }
+    },
+    {
+      "id": "R7",
+      "role": "review",
+      "status": "done",
+      "title": "Review W8 WheelSlotIndex boundary",
+      "skills": [
+        "$refactor-review",
+        "$refactor-typescript",
+        "$refactor-react",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "read-only current W8 diff",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "product source edits during review",
+        "remote state"
+      ],
+      "expected_output": "Audit W8 for shared type regressions, V1 behavior drift, DnD accidental scope, validation gaps, and packaging risk.",
+      "receipt": {
+        "evidence": [
+          "Reviewer subagent 019e51e6-c12d-7501-8ee7-ae427c6cdbb3 found one packaging issue: new wheel-slot-index.ts was untracked while tracked files imported it.",
+          "Controller will explicitly stage src/features/builder/wheel-slot-index.ts with the W8 commit and keep docs/design untracked.",
+          "Reviewer found no behavior-regression issues; DnD paths normalize invalid indices before mutation and V1/V2 visible two-slot behavior is preserved."
+        ],
+        "validation": [
+          "Reviewer ran npx tsc --noEmit and git diff --check; controller also ran focused tests, app typecheck, and targeted eslint."
+        ]
+      }
+    },
+    {
+      "id": "J9",
+      "role": "judge",
+      "status": "active",
+      "title": "Choose next post-WheelSlotIndex hardening tranche",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-tailwind",
+        "$refactor-ui-a11y",
+        "$refactor-react"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/builder-v2-architecture-hardening/**",
+        "read-only W8 diff",
+        "read-only remaining queued candidate evidence"
+      ],
+      "protected_files": [
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Select the next contained tranche after W8. Current recommendation is combined C11/C14 CSS focus/motion/picker-grid contract; keep C12 separate, C5 queued for shared-runtime metadata, and C8/C13 queued until real DnD work.",
       "receipt": null
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1/W2 landed command-boundary hardening, W3 landed the C3 editing-target boundary, and W4 landed C6 picker query extraction. Broad hardening outcome is not complete; J5 is active to choose the next contained slice.",
+    "summary": "W1/W2 landed command-boundary hardening, W3 landed the C3 editing-target boundary, W4 landed C6 picker query extraction, W5 landed picker a11y, W6/W7 landed adaptive focus/callback hardening, and W8 landed the C4 WheelSlotIndex boundary. Broad hardening outcome is not complete; J9 is active to choose the next contained slice.",
     "validation": [
       "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 68 tests.",
       "npx vitest run src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 76 tests after W3.",
@@ -1241,8 +1379,8 @@
       "W4 focused picker/model/page tests passed with 80 tests; app typecheck, targeted eslint, and packet checker passed."
     ],
     "open_items": [
-      "J5 choose next contained post-picker-extraction slice.",
-      "C4-C16 queued candidates remain open until implemented, superseded, blocked, or out of scope.",
+      "J9 choose next contained post-WheelSlotIndex slice.",
+      "C5 and C8-C16 queued candidates remain open until implemented, superseded, blocked, or out of scope.",
       "M1-M2 maintenance candidates remain open."
     ]
   }

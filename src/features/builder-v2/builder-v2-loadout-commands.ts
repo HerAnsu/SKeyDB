@@ -11,7 +11,13 @@ import {
   swapWheelAssignments,
   type TeamStateViolationCode,
 } from '../builder/team-state'
-import type {ActiveSelection, Team, TeamSlot, WheelUsageLocation} from '../builder/types'
+import type {
+  ActiveSelection,
+  Team,
+  TeamSlot,
+  WheelSlotIndex,
+  WheelUsageLocation,
+} from '../builder/types'
 import type {BuilderV2AwakenerUsage} from './builder-v2-usage-index'
 import type {BuilderV2PickerTab, BuilderV2TeamTarget} from './BuilderV2ModelTypes'
 
@@ -89,10 +95,10 @@ interface BuilderV2LoadoutWheelTransferCommand {
   wheelId: string
   fromTeamId: string
   fromSlotId: string
-  fromWheelIndex: number
+  fromWheelIndex: WheelSlotIndex
   toTeamId: string
   targetSlotId: string
-  targetWheelIndex: 0 | 1
+  targetWheelIndex: WheelSlotIndex
   pickerTab: 'wheels'
 }
 
@@ -336,7 +342,7 @@ export function resolveAssignPosseCommand({
   }
 }
 
-function getFirstEmptyWheelIndex(slot: TeamSlot | undefined): 0 | 1 | null {
+function getFirstEmptyWheelIndex(slot: TeamSlot | undefined): WheelSlotIndex | null {
   if (!slot?.awakenerId) {
     return null
   }
@@ -348,11 +354,11 @@ function getFirstEmptyWheelIndex(slot: TeamSlot | undefined): 0 | 1 | null {
 function getWheelAssignmentTarget(
   activeSelection: ActiveSelection,
   slots: TeamSlot[],
-): {slotId: string; wheelIndex: 0 | 1} | null {
+): {slotId: string; wheelIndex: WheelSlotIndex} | null {
   if (activeSelection?.kind === 'wheel') {
     return {
       slotId: activeSelection.slotId,
-      wheelIndex: activeSelection.wheelIndex === 0 ? 0 : 1,
+      wheelIndex: activeSelection.wheelIndex,
     }
   }
 

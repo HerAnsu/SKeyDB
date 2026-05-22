@@ -2,6 +2,7 @@ import {memo} from 'react'
 
 import {getRealmBadge, getRealmLabel} from '@/domain/realms'
 
+import type {WheelSlotIndex} from '../builder/types'
 import type {BuilderV2SlotView, BuilderV2WheelSlotView} from './BuilderV2ModelTypes'
 
 type BuilderV2AwakenerRealm = NonNullable<BuilderV2SlotView['awakener']>['realm']
@@ -10,11 +11,11 @@ interface BuilderV2TeamSlotsProps {
   slots: BuilderV2SlotView[]
   quickLineupActive?: boolean
   onClearCovenant: (slotId: string) => void
-  onClearWheel: (slotId: string, wheelIndex: 0 | 1) => void
+  onClearWheel: (slotId: string, wheelIndex: WheelSlotIndex) => void
   onRemoveAwakener: (slotId: string) => void
   onSelectCovenantSlot: (slotId: string) => void
   onSelectSlot: (slotId: string) => void
-  onSelectWheelSlot: (slotId: string, wheelIndex: 0 | 1) => void
+  onSelectWheelSlot: (slotId: string, wheelIndex: WheelSlotIndex) => void
 }
 
 export function BuilderV2TeamSlots({
@@ -50,11 +51,11 @@ interface BuilderV2SlotCardProps {
   slot: BuilderV2SlotView
   quickLineupActive: boolean
   onClearCovenant: (slotId: string) => void
-  onClearWheel: (slotId: string, wheelIndex: 0 | 1) => void
+  onClearWheel: (slotId: string, wheelIndex: WheelSlotIndex) => void
   onRemoveAwakener: (slotId: string) => void
   onSelectCovenantSlot: (slotId: string) => void
   onSelectSlot: (slotId: string) => void
-  onSelectWheelSlot: (slotId: string, wheelIndex: 0 | 1) => void
+  onSelectWheelSlot: (slotId: string, wheelIndex: WheelSlotIndex) => void
 }
 
 const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
@@ -85,7 +86,7 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
           type='button'
         >
           <span className='builder-v2-awakener-art'>
-            {slot.awakener?.cardSrc ?? slot.awakener?.portraitSrc ? (
+            {(slot.awakener?.cardSrc ?? slot.awakener?.portraitSrc) ? (
               <img
                 alt=''
                 className='builder-v2-awakener-art-image'
