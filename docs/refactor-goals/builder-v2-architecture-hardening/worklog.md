@@ -312,3 +312,29 @@
 - R10 complete: W11 review recorded.
 - J12 active: choose the next post-CSS-dedupe hardening tranche if continuing.
 - Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-23 - W12 team-state result metadata landed
+
+- User requested C5 and C16 now, with a reassessment of whether C8 and C13 are DnD-prep.
+- J12 selected `C5` Explicit team-state operation result as W12.
+- Root-fix reasoning: after the V2 command-boundary extraction, callers still used `result.nextSlots === activeTeamSlots` as control flow. An explicit additive `changed` flag makes no-op handling part of the shared team-state contract rather than an identity side effect.
+- W12 implementation:
+  - Added `changed` to `TeamStateUpdateResult`.
+  - Routed shared team-state no-op, violation, and mutation returns through explicit unchanged/changed helpers.
+  - Kept `nextSlots` available for all existing callers.
+  - Classified empty-slot clear and same-wheel swap as unchanged, with focused tests.
+  - Updated Builder V2 loadout command resolution and clear/remove handlers to use `result.changed` instead of slot-array identity checks.
+- C16 review:
+  - Reviewed `builderDraftStore`, `useBuilderV2Model`, command boundaries, and dependency policy.
+  - Zustand already owns durable builder draft state; picker preferences, dialog chrome, and ephemeral UI state remain local React state.
+  - No evidence showed that Immer or a store rewrite is the root fix right now. Continue command/projection/input-boundary slices instead; revisit only with explicit dependency/state-architecture approval if DnD proves the current boundary insufficient.
+- C8/C13 reassessment:
+  - Both remain real DnD-prep, not generic leftovers.
+  - C8 should wait until the drag payload and drag-ghost contract are selected so slot descriptors are shaped by actual input needs.
+  - C13 should wait until a concrete drag overlay root or ghost surface exists so clipping/art-mask CSS can be validated instead of guessed.
+- Validation:
+  - `npx vitest run src/features/builder/team-state.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx --run` passed with 93 tests.
+  - `npx tsc -p tsconfig.app.json --noEmit` passed.
+  - `npx eslint src/features/builder/team-state.ts src/features/builder/team-state.test.ts src/features/builder-v2/builder-v2-loadout-commands.ts src/features/builder-v2/useBuilderV2Model.ts` passed.
+- R11 complete: controller review recorded the C5 semantics, C16 state-strategy decision, and C8/C13 first-DnD-tranche gates.
+- J13 active: choose the next concrete DnD-prep tranche or pause the architecture-hardening packet until DnD work starts.

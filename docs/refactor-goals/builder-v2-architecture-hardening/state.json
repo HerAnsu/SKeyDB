@@ -71,14 +71,14 @@
     {
       "name": "DnD future-readiness",
       "status": "mapped",
-      "evidence": "Scouts agree current assignment handlers and slot DTO shape would multiply future dnd-kit/drop/drag-ghost handler paths.",
-      "next": "Keep DnD implementation out until command/target boundaries are ready."
+      "evidence": "J12 reassessed C8/C13 after C4/C5. Wheel-slot typing and explicit team-state changed metadata are now in place; slot descriptors and overlay CSS still need the actual DnD payload/ghost contract to avoid premature abstractions.",
+      "next": "Treat C8 and C13 as first-DnD-tranche prep, not standalone architecture cleanup."
     },
     {
       "name": "Zustand/Immer state strategy",
-      "status": "mapped",
-      "evidence": "User asked whether there is a point; current evidence says state is complex, but no scout proved a dependency/state-library shift is the root fix.",
-      "next": "Queue as review-only candidate; dependency/state-library changes require $refactor-dependencies and explicit approval."
+      "status": "reviewed",
+      "evidence": "J12/R11 reviewed builderDraftStore, useBuilderV2Model, command modules, and dependency policy. Zustand already owns durable draft state; local React state still owns picker preferences/dialog chrome. No evidence showed Immer or a store rewrite is the root fix versus continuing command/projection/input-boundary slices.",
+      "next": "No state-library shift in this goal. Revisit with $refactor-dependencies only if future DnD/store evidence proves command boundaries are insufficient."
     }
   ],
   "candidates": [
@@ -141,7 +141,7 @@
       "id": "C5",
       "title": "Explicit team-state operation result",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/features/builder/team-state.ts",
         "V1/V2 callers",
@@ -149,7 +149,7 @@
         "V2 model tests"
       ],
       "evidence": "Callers use result.nextSlots === activeTeamSlots as noop control flow.",
-      "next": "Good root-fix candidate after command-boundary characterization; may need adapter to avoid V1 churn."
+      "next": "Implemented by W12: TeamStateUpdateResult now exposes additive changed metadata, shared helper tests pin changed/no-op semantics, and V2 no-op handling reads changed instead of nextSlots identity."
     },
     {
       "id": "C6",
@@ -191,7 +191,7 @@
         "focused page tests"
       ],
       "evidence": "BuilderV2SlotView is a render DTO containing labels/assets/selection, not stable interaction descriptors.",
-      "next": "Queue as DnD-prep after C2/C3. Do not implement DnD here."
+      "next": "Keep queued as DnD-prep for the first real DnD tranche: add stable slot interaction descriptors once the drag payload and drag-ghost contract are selected. Do not implement standalone before that contract exists."
     },
     {
       "id": "C9",
@@ -254,7 +254,7 @@
         "maybe future drag overlay root"
       ],
       "evidence": ".builder-v2-panel and cards use clipping for both panel containment and art masks, which can clip future drag ghosts/focus halos.",
-      "next": "Queue before DnD implementation; do not add DnD here."
+      "next": "Keep queued as DnD-prep for the first real DnD tranche: split clipping/art-mask/overlay CSS only when a concrete drag overlay root or ghost surface exists to validate against. Do not add DnD here."
     },
     {
       "id": "C14",
@@ -285,15 +285,15 @@
       "id": "C16",
       "title": "Zustand/Immer state strategy review",
       "source_task": "User prompt",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "read-only review of builderDraftStore",
         "useBuilderV2Model",
         "command candidates",
         "dependency policy"
       ],
-      "evidence": "Current evidence does not prove a state-library/dependency shift is needed.",
-      "next": "Judge/review-only candidate after C2/C3; dependency changes require approval."
+      "evidence": "Review found Zustand is already used for the shared draft store and Immer is installed, but current Builder V2 pain is better addressed by command/projection/input-boundary slices than by a state-library redesign.",
+      "next": "Implemented by J12/R11 as a review-only decision: no Zustand/Immer strategy shift for this goal; revisit only with DnD evidence and explicit dependency/state-architecture approval."
     }
   ],
   "maintenance": [
@@ -1694,7 +1694,7 @@
     {
       "id": "J12",
       "role": "judge",
-      "status": "active",
+      "status": "done",
       "title": "Choose next post-CSS-dedupe hardening tranche",
       "skills": [
         "$refactor-rootfix",
@@ -1716,23 +1716,156 @@
         "docs/design/**"
       ],
       "expected_output": "Select the next contained tranche after W11 if continuing. Remaining candidates are C5 additive team-state result, C16 state strategy review, and C8/C13 only with real DnD work.",
+      "receipt": {
+        "evidence": [
+          "Selected C5 Explicit team-state operation result as W12 because callers still inferred no-op behavior from nextSlots identity after command-boundary extraction.",
+          "Bundled C16 as a review-only decision because Zustand is already the durable draft store and no evidence supported a state-library or Immer migration as the current root fix.",
+          "Reassessed C8/C13: both are legitimate DnD-prep, but they should wait for the actual drag payload, ghost, and overlay contract rather than landing speculative descriptors/CSS roots now."
+        ],
+        "validation": [
+          "Approved W12 allowed files, invariants, validation, and rollback for the C5 shared team-state result slice plus packet-only C16/C8/C13 decisions."
+        ]
+      }
+    },
+    {
+      "id": "W12",
+      "role": "worker",
+      "status": "done",
+      "title": "Expose explicit team-state operation change results",
+      "skills": [
+        "$refactor-typescript",
+        "$refactor-react",
+        "$refactor-complexity",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/builder/team-state.ts",
+        "src/features/builder/team-state.test.ts",
+        "src/features/builder-v2/builder-v2-loadout-commands.ts",
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "current /builder visible behavior changes",
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Additive changed metadata on shared team-state results and direct V2 caller use of that metadata, preserving existing slot payload behavior and no-op semantics.",
+      "invariants": [
+        "Do not remove nextSlots or change public team-state operation names.",
+        "Do not change /builder visible behavior or quick-lineup product semantics.",
+        "No mobile, teams-list, DnD, dependency, or docs/design changes."
+      ],
+      "validation": [
+        "npx vitest run src/features/builder/team-state.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx --run",
+        "npx tsc -p tsconfig.app.json --noEmit",
+        "npx eslint src/features/builder/team-state.ts src/features/builder/team-state.test.ts src/features/builder-v2/builder-v2-loadout-commands.ts src/features/builder-v2/useBuilderV2Model.ts",
+        "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening"
+      ],
+      "rollback": [
+        "Revert TeamStateUpdateResult.changed, V2 caller changed checks, tests, and W12 packet updates."
+      ],
+      "receipt": {
+        "evidence": [
+          "TeamStateUpdateResult now includes changed alongside nextSlots and violation.",
+          "Shared team-state helpers return changed false for invalid/no-op/violation cases and changed true for actual assignment/swap/clear mutations.",
+          "clearSlotAssignment now reports changed false when clearing an already empty slot even if it still remaps the slot array.",
+          "swapWheelAssignments reports changed false for same source/target wheel swaps.",
+          "Builder V2 loadout command resolution and clear/remove handlers now read result.changed instead of comparing nextSlots identity."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder/team-state.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx --run passed with 93 tests.",
+          "npx tsc -p tsconfig.app.json --noEmit passed.",
+          "npx eslint over touched C5 files passed."
+        ]
+      }
+    },
+    {
+      "id": "R11",
+      "role": "review",
+      "status": "done",
+      "title": "Review W12 team-state result and state-strategy decisions",
+      "skills": [
+        "$refactor-review",
+        "$refactor-typescript",
+        "$refactor-react",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "read-only current W12 diff",
+        "read-only builderDraftStore/useBuilderV2Model state boundaries",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "product source edits during review",
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Audit W12 for behavior drift, explicit changed semantics, V1/V2 caller safety, C16 state-strategy conclusion, and C8/C13 DnD-prep status.",
+      "receipt": {
+        "evidence": [
+          "Controller review found C5 is additive: nextSlots remains available and current V2 callers now use the explicit changed flag for no-op control flow.",
+          "The only intentional helper-semantic tightening is same-wheel swap changed false and empty-slot clear changed false; both are no-op classifications and are covered by team-state tests.",
+          "C16 review concluded no Zustand/Immer migration should be made now. Existing builderDraftStore already centralizes durable draft state; remaining complexity is better handled by command/projection/input-boundary slices.",
+          "C8 and C13 remain queued, but their next steps now explicitly attach to the first DnD tranche instead of generic “later”."
+        ],
+        "validation": [
+          "Focused C5 tests, app typecheck, targeted eslint, and packet checker are required before staging."
+        ]
+      }
+    },
+    {
+      "id": "J13",
+      "role": "judge",
+      "status": "active",
+      "title": "Choose next DnD-prep architecture tranche",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-tailwind",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/builder-v2-architecture-hardening/**",
+        "read-only W12 diff",
+        "read-only C8/C13 evidence",
+        "read-only future DnD entry points if selected by user"
+      ],
+      "protected_files": [
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation without explicit selection",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "If continuing this goal, decide whether C8/C13 should be selected as the first DnD-prep tranche with a concrete drag payload/ghost/overlay contract, or close the architecture-hardening goal until DnD work starts.",
       "receipt": null
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1/W2 landed command-boundary hardening, W3 landed C3, W4 landed C6, W5 landed C9, W6/W7 landed C10/C7, W8 landed C4, W9 landed C11/C14, W10 landed C15, and W11 landed C12 CSS dedupe. Broad hardening outcome is not complete; J12 is active to choose the next contained slice.",
+    "summary": "W1/W2 landed command-boundary hardening, W3 landed C3, W4 landed C6, W5 landed C9, W6/W7 landed C10/C7, W8 landed C4, W9 landed C11/C14, W10 landed C15, W11 landed C12, and W12 landed C5 plus the C16 state-strategy review. Broad hardening outcome is not complete; J13 is active to decide whether C8/C13 should start with concrete DnD-prep work.",
     "validation": [
       "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 68 tests.",
       "npx vitest run src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 76 tests after W3.",
       "npx tsc -p tsconfig.app.json --noEmit passed.",
       "targeted eslint passed for W2 and W3 touched files.",
       "Goal checker OK after W3/R2/J4 packet transition.",
-      "W4 focused picker/model/page tests passed with 80 tests; app typecheck, targeted eslint, and packet checker passed."
+      "W4 focused picker/model/page tests passed with 80 tests; app typecheck, targeted eslint, and packet checker passed.",
+      "W12 focused team-state/model/page tests passed with 93 tests; app typecheck and targeted eslint passed."
     ],
     "open_items": [
-      "J12 choose next contained post-CSS-dedupe slice.",
-      "C5 and C16 remain queued; C8/C13 remain queued until real DnD work provides a concrete overlay/ghost contract.",
+      "J13 choose next tranche or pause this packet until real DnD work starts.",
+      "C8 and C13 remain queued as first-DnD-tranche prep, pending a concrete drag payload/ghost/overlay contract.",
       "M1-M2 maintenance candidates remain open."
     ]
   }

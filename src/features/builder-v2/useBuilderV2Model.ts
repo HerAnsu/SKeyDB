@@ -1222,7 +1222,7 @@ export function useBuilderV2Model({
   const removeAwakener = useCallback(
     (slotId: string) => {
       const result = clearSlotAssignment(activeTeamSlots, slotId)
-      if (result.nextSlots === activeTeamSlots) {
+      if (!result.changed) {
         return
       }
 
@@ -1236,7 +1236,7 @@ export function useBuilderV2Model({
   const clearWheel = useCallback(
     (slotId: string, wheelIndex: WheelSlotIndex) => {
       const result = clearWheelAssignment(activeTeamSlots, slotId, wheelIndex)
-      if (result.nextSlots === activeTeamSlots) {
+      if (!result.changed) {
         return
       }
 
@@ -1250,7 +1250,7 @@ export function useBuilderV2Model({
   const clearCovenant = useCallback(
     (slotId: string) => {
       const result = clearCovenantAssignment(activeTeamSlots, slotId)
-      if (result.nextSlots === activeTeamSlots) {
+      if (!result.changed) {
         return
       }
 

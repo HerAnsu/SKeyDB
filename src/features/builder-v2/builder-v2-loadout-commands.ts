@@ -146,7 +146,7 @@ export function resolveAssignAwakenerCommand({
     }
   }
 
-  if (result.nextSlots === activeTeamSlots) {
+  if (!result.changed) {
     return {
       kind: 'violation',
       message: 'No available slot can accept that awakener.',
@@ -178,7 +178,7 @@ export function resolveAssignAwakenerCommand({
   return {
     kind: 'slots',
     nextSlots: result.nextSlots,
-    changed: true,
+    changed: result.changed,
     clearTransfer: true,
     activeSelection: selectedSlotId ? {kind: 'awakener', slotId: selectedSlotId} : null,
     activeTeamTarget: null,
@@ -257,11 +257,11 @@ export function resolveAssignWheelCommand({
   return {
     kind: 'slots',
     nextSlots: result.nextSlots,
-    changed: result.nextSlots !== activeTeamSlots,
-    clearTransfer: result.nextSlots !== activeTeamSlots,
+    changed: result.changed,
+    clearTransfer: result.changed,
     activeSelection: targetSelection,
     activeTeamTarget: null,
-    pickerTab: result.nextSlots === activeTeamSlots ? 'wheels' : undefined,
+    pickerTab: result.changed ? undefined : 'wheels',
   }
 }
 
@@ -297,14 +297,14 @@ export function resolveAssignCovenantCommand({
   return {
     kind: 'slots',
     nextSlots: result.nextSlots,
-    changed: result.nextSlots !== activeTeamSlots,
+    changed: result.changed,
     clearTransfer: false,
     activeSelection:
       activeSelection?.kind === 'covenant'
         ? {kind: 'covenant', slotId: targetSlotId}
         : activeSelection,
     activeTeamTarget: null,
-    pickerTab: result.nextSlots === activeTeamSlots ? 'covenants' : undefined,
+    pickerTab: result.changed ? undefined : 'covenants',
   }
 }
 
