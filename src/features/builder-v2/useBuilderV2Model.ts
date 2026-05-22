@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useMemo, useState} from 'react'
+import {useCallback, useEffect, useMemo, useState, type SetStateAction} from 'react'
 
 import {useStore} from 'zustand'
 
@@ -13,9 +13,9 @@ import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getPosseAssetById} from '@/domain/posse-assets'
 import {getPosses, type Posse} from '@/domain/posses'
 import {searchPosses} from '@/domain/posses-search'
-import {getBrowserLocalStorage, safeStorageRead} from '@/domain/storage'
-import {compareWheelsForUi} from '@/domain/wheel-sort'
+import {getBrowserLocalStorage, safeStorageRead, safeStorageWrite} from '@/domain/storage'
 import {getWheelAssetById} from '@/domain/wheel-assets'
+import {compareWheelsForUi} from '@/domain/wheel-sort'
 import {getWheelMainstatLabel, getWheels, type Wheel} from '@/domain/wheels'
 import {searchWheels} from '@/domain/wheels-search'
 import {
@@ -26,6 +26,7 @@ import {
 import {collectionOwnershipStore} from '@/stores/collectionOwnershipStore'
 
 import {loadBuilderDraft, saveBuilderDraft} from '../builder/builder-persistence'
+import type {BuilderImportExportDialogsProps} from '../builder/BuilderImportExportDialogs'
 import {allAwakeners, awakenerById} from '../builder/constants'
 import {getPublicQuickLineupSession} from '../builder/quick-lineup'
 import {
@@ -48,6 +49,7 @@ import type {
   TeamSlot,
   WheelUsageLocation,
 } from '../builder/types'
+import {useBuilderImportExport} from '../builder/useBuilderImportExport'
 
 const BUILDER_V2_AUTOSAVE_DEBOUNCE_MS = 300
 const BUILDER_ALLOW_DUPES_KEY = 'skeydb.builder.allowDupes.v1'
@@ -177,12 +179,23 @@ export interface BuilderV2Model {
   clearWheel: (slotId: string, wheelIndex: 0 | 1) => void
   clearCovenant: (slotId: string) => void
   clearPosse: () => void
+  openImportDialog: () => void
+  openExportAllDialog: () => void
+  openActiveTeamExportDialog: () => void
+  openActiveTeamIngameExportDialog: () => void
+  importExportDialogProps: BuilderImportExportDialogsProps
   violationMessage: string | null
 }
 
-export function useBuilderV2Model(): BuilderV2Model {
+interface UseBuilderV2ModelOptions {
+  showToast?: (message: string) => void
+}
+
+export function useBuilderV2Model({
+  showToast = () => undefined,
+}: UseBuilderV2ModelOptions = {}): BuilderV2Model {
   const storage = useMemo(() => getBrowserLocalStorage(), [])
-  const [allowDuplicateAwakenerIdentities] = useState(
+  const [allowDuplicateAwakenerIdentities, setAllowDuplicateAwakenerIdentities] = useState(
     () => safeStorageRead(storage, BUILDER_ALLOW_DUPES_KEY) === '1',
   )
   const [canAutosaveBuilderDraft] = useState(() => {
@@ -229,6 +242,10 @@ export function useBuilderV2Model(): BuilderV2Model {
     (state) => state.jumpToQuickLineupStep,
   )
 
+  useEffect(() => {
+    safeStorageWrite(storage, BUILDER_ALLOW_DUPES_KEY, allowDuplicateAwakenerIdentities ? '1' : '0')
+  }, [allowDuplicateAwakenerIdentities, storage])
+
   const effectiveActiveTeamId = useMemo(
     () => (teams.some((team) => team.id === activeTeamId) ? activeTeamId : (teams[0]?.id ?? '')),
     [activeTeamId, teams],
@@ -252,10 +269,7 @@ export function useBuilderV2Model(): BuilderV2Model {
     () => [...getPosses()].sort((left, right) => left.name.localeCompare(right.name)),
     [],
   )
-  const posseById = useMemo(
-    () => new Map(allPosses.map((posse) => [posse.id, posse])),
-    [allPosses],
-  )
+  const posseById = useMemo(() => new Map(allPosses.map((posse) => [posse.id, posse])), [allPosses])
   const searchQuery = searchQueryByTab[pickerTab]
 
   useEffect(() => {
@@ -351,9 +365,7 @@ export function useBuilderV2Model(): BuilderV2Model {
           ],
           covenantId: slot.covenantId,
           covenantName: covenant?.name ?? null,
-          covenantAssetSrc: slot.covenantId
-            ? getCovenantAssetById(slot.covenantId)
-            : undefined,
+          covenantAssetSrc: slot.covenantId ? getCovenantAssetById(slot.covenantId) : undefined,
           isCovenantSelected:
             activeSelection?.kind === 'covenant' && activeSelection.slotId === slot.slotId,
         }
@@ -539,9 +551,7 @@ export function useBuilderV2Model(): BuilderV2Model {
       setActiveTeamTarget(null)
       setPickerTab('wheels')
       setActiveSelection((current) =>
-        current?.kind === 'wheel' &&
-        current.slotId === slotId &&
-        current.wheelIndex === wheelIndex
+        current?.kind === 'wheel' && current.slotId === slotId && current.wheelIndex === wheelIndex
           ? null
           : {kind: 'wheel', slotId, wheelIndex},
       )
@@ -582,8 +592,7 @@ export function useBuilderV2Model(): BuilderV2Model {
 
   const assignAwakener = useCallback(
     (awakenerId: string) => {
-      const targetSlotId =
-        activeSelection?.kind === 'awakener' ? activeSelection.slotId : undefined
+      const targetSlotId = activeSelection?.kind === 'awakener' ? activeSelection.slotId : undefined
       const firstEmptySlotId = activeTeamSlots.find((slot) => !slot.awakenerId)?.slotId
       const result = targetSlotId
         ? assignAwakenerToSlot(activeTeamSlots, awakenerId, targetSlotId, awakenerById, {
@@ -788,8 +797,7 @@ export function useBuilderV2Model(): BuilderV2Model {
       const owningTeamOrder = allowDuplicateAwakenerIdentities
         ? undefined
         : usedPosseByTeamOrder.get(posseId)
-      const owningTeam =
-        owningTeamOrder === undefined ? undefined : teams.at(owningTeamOrder)
+      const owningTeam = owningTeamOrder === undefined ? undefined : teams.at(owningTeamOrder)
 
       if (owningTeam && owningTeam.id !== effectiveActiveTeamId) {
         setViolationMessage(getPosseInUseMessage(posseId, owningTeam.id, teams, posseById))
@@ -886,6 +894,52 @@ export function useBuilderV2Model(): BuilderV2Model {
     updateActiveTeam,
   ])
 
+  const setTeamsForImportExport = useCallback((nextTeams: SetStateAction<Team[]>) => {
+    builderDraftStore
+      .getState()
+      .setTeams((currentTeams) =>
+        typeof nextTeams === 'function' ? nextTeams(currentTeams) : nextTeams,
+      )
+  }, [])
+
+  const clearImportExportTransientState = useCallback(() => {
+    storeFinishQuickLineup()
+    setActiveSelection(null)
+    setActiveTeamTarget(null)
+    setViolationMessage(null)
+  }, [setActiveSelection, storeFinishQuickLineup])
+
+  const {
+    openImportDialog,
+    openExportAllDialog,
+    openTeamExportDialog,
+    openTeamIngameExportDialog,
+    importExportDialogProps,
+  } = useBuilderImportExport({
+    teams,
+    setTeams: setTeamsForImportExport,
+    effectiveActiveTeamId,
+    activeTeam,
+    teamSlots: activeTeamSlots,
+    allowDupes: allowDuplicateAwakenerIdentities,
+    setAllowDupes: setAllowDuplicateAwakenerIdentities,
+    setActiveTeamId,
+    setActiveSelection: () => {
+      clearImportExportTransientState()
+    },
+    clearTransfer: clearImportExportTransientState,
+    clearPendingDelete: clearImportExportTransientState,
+    showToast,
+  })
+
+  const openActiveTeamExportDialog = useCallback(() => {
+    openTeamExportDialog(effectiveActiveTeamId)
+  }, [effectiveActiveTeamId, openTeamExportDialog])
+
+  const openActiveTeamIngameExportDialog = useCallback(() => {
+    openTeamIngameExportDialog(effectiveActiveTeamId)
+  }, [effectiveActiveTeamId, openTeamIngameExportDialog])
+
   const editingLabel = useMemo(
     () =>
       getEditingLabel({
@@ -935,6 +989,11 @@ export function useBuilderV2Model(): BuilderV2Model {
     clearWheel,
     clearCovenant,
     clearPosse,
+    openImportDialog,
+    openExportAllDialog,
+    openActiveTeamExportDialog,
+    openActiveTeamIngameExportDialog,
+    importExportDialogProps,
     violationMessage,
   }
 }
@@ -1179,7 +1238,9 @@ function getAwakenerInUseMessage(
   owningTeamId: string,
   teams: {id: string; name: string}[],
 ) {
-  const awakenerName = formatAwakenerNameForUi(awakenerById.get(awakenerId)?.name ?? 'That awakener')
+  const awakenerName = formatAwakenerNameForUi(
+    awakenerById.get(awakenerId)?.name ?? 'That awakener',
+  )
   const teamName = teams.find((team) => team.id === owningTeamId)?.name ?? 'another team'
   return `${awakenerName} is already assigned to ${teamName}. Remove them there before assigning them here.`
 }

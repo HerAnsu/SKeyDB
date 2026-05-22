@@ -5,9 +5,12 @@ import {afterEach, describe, expect, it} from 'vitest'
 import './builder-v2-test-mocks'
 
 import App from '@/App'
+import {decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode} from '@/domain/import-export'
 import {builderDraftStore} from '@/stores/builderDraftStore'
 
+import {saveBuilderDraft} from '../builder/builder-persistence'
 import {createEmptyTeamSlots} from '../builder/constants'
+import type {Team} from '../builder/types'
 import {BuilderV2Page} from './BuilderV2Page'
 
 function resizeBuilderV2Viewport(width: number, dispatchResize = true) {
@@ -19,6 +22,36 @@ function resizeBuilderV2Viewport(width: number, dispatchResize = true) {
   if (dispatchResize) {
     window.dispatchEvent(new Event('resize'))
   }
+}
+
+const awakenerIdByName = new Map([
+  ['goliath', 'awakener-0021'],
+  ['ramona', 'awakener-0042'],
+])
+
+function makeImportTeam(name: string, awakenerName: string, posseId?: string): Team {
+  const awakenerId = awakenerIdByName.get(awakenerName)
+  if (!awakenerId) {
+    throw new Error(`Unknown test awakener ${awakenerName}`)
+  }
+  return {
+    id: `${name}-id`,
+    name,
+    posseId,
+    slots: [
+      {slotId: 'slot-1', awakenerId, realm: 'CHAOS', level: 60, wheels: [null, null]},
+      {slotId: 'slot-2', wheels: [null, null]},
+      {slotId: 'slot-3', wheels: [null, null]},
+      {slotId: 'slot-4', wheels: [null, null]},
+    ],
+  }
+}
+
+function getRequiredTextArea(element: HTMLElement): HTMLTextAreaElement {
+  if (!(element instanceof HTMLTextAreaElement)) {
+    throw new Error('Expected textarea')
+  }
+  return element
 }
 
 afterEach(() => {
@@ -169,6 +202,187 @@ describe('BuilderV2Page', () => {
     expect(within(drawer).getByRole('alert')).toHaveTextContent(
       /select a wheel slot or an awakened slot/i,
     )
+  })
+
+  it('imports a single t1 code into an empty active V2 team', () => {
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    const importDialog = screen.getByRole('dialog', {name: /import teams/i})
+    fireEvent.change(within(importDialog).getByRole('textbox', {name: /import code/i}), {
+      target: {value: encodeSingleTeamCode(makeImportTeam('Imported Team', 'goliath'))},
+    })
+    fireEvent.click(within(importDialog).getByRole('button', {name: /^import$/i}))
+
+    expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
+    expect(screen.getByText(/team imported/i)).toBeInTheDocument()
+  })
+
+  it('exposes import and export actions from adaptive and mobile shells', () => {
+    resizeBuilderV2Viewport(900)
+    const {unmount} = render(<BuilderV2Page />)
+
+    expect(
+      screen.getByRole('group', {name: /builder v2 import and export actions/i}),
+    ).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    expect(screen.getByRole('dialog', {name: /import teams/i})).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', {name: /^cancel$/i}))
+
+    unmount()
+    resizeBuilderV2Viewport(390)
+    render(<BuilderV2Page />)
+
+    expect(
+      screen.getByRole('group', {name: /builder v2 import and export actions/i}),
+    ).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', {name: /^export all$/i}))
+    expect(screen.getByRole('dialog', {name: /export all teams/i})).toBeInTheDocument()
+  })
+
+  it('imports mt1 codes after replace confirmation and activates the encoded active team', () => {
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    const teamA = makeImportTeam('Alpha', 'goliath')
+    const teamB = makeImportTeam('Beta', 'ramona')
+    const multiTeamCode = encodeMultiTeamCode([teamA, teamB], teamB.id)
+
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    const importDialog = screen.getByRole('dialog', {name: /import teams/i})
+    fireEvent.change(within(importDialog).getByRole('textbox', {name: /import code/i}), {
+      target: {value: multiTeamCode},
+    })
+    fireEvent.click(within(importDialog).getByRole('button', {name: /^import$/i}))
+
+    expect(screen.getByRole('dialog', {name: /replace current teams/i})).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', {name: /^replace$/i}))
+
+    expect(screen.getByRole('button', {name: /02 team 2 1 \/ 4 deployed/i})).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /remove ramona/i})).toBeInTheDocument()
+  })
+
+  it('confirms duplicate-illegal imports before replacing V2 teams', () => {
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    const teamA = makeImportTeam('Alpha', 'goliath')
+    const teamB = makeImportTeam('Beta', 'goliath')
+    const duplicateCode = encodeMultiTeamCode([teamA, teamB], teamA.id)
+
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    const importDialog = screen.getByRole('dialog', {name: /import teams/i})
+    fireEvent.change(within(importDialog).getByRole('textbox', {name: /import code/i}), {
+      target: {value: duplicateCode},
+    })
+    fireEvent.click(within(importDialog).getByRole('button', {name: /^import$/i}))
+
+    expect(screen.getByRole('dialog', {name: /import uses duplicates/i})).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', {name: /enable and import/i}))
+
+    expect(window.localStorage.getItem('skeydb.builder.allowDupes.v1')).toBe('1')
+    expect(screen.getByRole('dialog', {name: /replace current teams/i})).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', {name: /^replace$/i}))
+
+    expect(screen.getByRole('button', {name: /01 team 1 1 \/ 4 deployed/i})).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /02 team 2 1 \/ 4 deployed/i})).toBeInTheDocument()
+  })
+
+  it('exports the active V2 team, all teams, and the active team in in-game format', () => {
+    const alphaSlots = createEmptyTeamSlots()
+    alphaSlots[0] = {
+      ...alphaSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 90,
+      isSupport: true,
+    }
+    const betaSlots = createEmptyTeamSlots()
+    betaSlots[0] = {
+      ...betaSlots[0],
+      awakenerId: 'awakener-0042',
+      realm: 'CHAOS',
+      level: 60,
+    }
+    saveBuilderDraft(window.localStorage, {
+      activeTeamId: 'team-alpha',
+      teams: [
+        {id: 'team-alpha', name: 'Alpha', slots: alphaSlots},
+        {id: 'team-beta', name: 'Beta', slots: betaSlots},
+      ],
+    })
+
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /export active/i}))
+    let exportDialog = screen.getByRole('dialog', {name: /export alpha/i})
+    let exportCode = getRequiredTextArea(
+      within(exportDialog).getByRole('textbox', {name: /export code/i}),
+    )
+    let parsed = decodeImportCode(exportCode.value)
+    expect(parsed.kind).toBe('single')
+    fireEvent.click(within(exportDialog).getByRole('button', {name: /^close$/i}))
+
+    fireEvent.click(screen.getByRole('button', {name: /export all/i}))
+    exportDialog = screen.getByRole('dialog', {name: /export all teams/i})
+    exportCode = getRequiredTextArea(
+      within(exportDialog).getByRole('textbox', {name: /export code/i}),
+    )
+    parsed = decodeImportCode(exportCode.value)
+    expect(parsed.kind).toBe('multi')
+    if (parsed.kind === 'multi') {
+      expect(parsed.teams[0]?.slots[0]?.isSupport).toBe(true)
+    }
+    fireEvent.click(within(exportDialog).getByRole('button', {name: /^close$/i}))
+
+    fireEvent.click(screen.getByRole('button', {name: /export in-game/i}))
+    exportDialog = screen.getByRole('dialog', {name: /export in-game alpha/i})
+    exportCode = getRequiredTextArea(
+      within(exportDialog).getByRole('textbox', {name: /export code/i}),
+    )
+    expect(exportCode.value.startsWith('@@')).toBe(true)
+    expect(exportCode.value.endsWith('@@')).toBe(true)
+  })
+
+  it('resolves single-team import conflicts through the strategy dialog', () => {
+    const teamOneSlots = createEmptyTeamSlots()
+    teamOneSlots[0] = {
+      ...teamOneSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+    saveBuilderDraft(window.localStorage, {
+      activeTeamId: 'team-2',
+      teams: [
+        {id: 'team-1', name: 'Team 1', slots: teamOneSlots},
+        {id: 'team-2', name: 'Team 2', slots: createEmptyTeamSlots()},
+      ],
+    })
+
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    const importDialog = screen.getByRole('dialog', {name: /import teams/i})
+    fireEvent.change(within(importDialog).getByRole('textbox', {name: /import code/i}), {
+      target: {value: encodeSingleTeamCode(makeImportTeam('Incoming', 'goliath'))},
+    })
+    fireEvent.click(within(importDialog).getByRole('button', {name: /^import$/i}))
+
+    const strategyDialog = screen.getByRole('dialog', {name: /resolve import conflicts/i})
+    expect(within(strategyDialog).getByText(/conflicts with team 1/i)).toBeInTheDocument()
+
+    fireEvent.click(within(strategyDialog).getByRole('button', {name: /skip duplicates/i}))
+
+    expect(screen.getByText(/team imported/i)).toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: /remove goliath/i})).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /01 team 1 1 \/ 4 deployed/i}))
+
+    expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
   })
 
   it('renders the mobile overview and enters the focused slot builder', () => {

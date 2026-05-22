@@ -80,6 +80,7 @@
 }
 
 .builder-v2-lineup-button,
+.builder-v2-io-button,
 .builder-v2-posse-target,
 .builder-v2-posse-clear,
 .builder-v2-adaptive-picker-trigger,
@@ -129,6 +130,29 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.builder-v2-io-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.builder-v2-io-button {
+  min-height: 2.15rem;
+  border: 1px solid var(--ui-border-subtle);
+  background: var(--ui-panel-strong);
+  padding: 0.45rem 0.58rem;
+  color: var(--ui-text-muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.builder-v2-io-button:hover {
+  border-color: oklch(74% 0.11 84 / 0.44);
+  color: var(--ui-accent-gold-soft);
 }
 
 .builder-v2-lineup-controls {
@@ -423,6 +447,7 @@
 .builder-v2-tab:focus-visible,
 .builder-v2-adaptive-picker-trigger:focus-visible,
 .builder-v2-adaptive-team-button:focus-visible,
+.builder-v2-io-button:focus-visible,
 .builder-v2-team-row:focus-visible,
 .builder-v2-overview-card:focus-visible,
 .builder-v2-picker-row:focus-visible,
@@ -673,6 +698,7 @@
 }
 
 .builder-v2-page--mobile {
+  align-content: start;
   min-height: 100dvh;
   margin: -1rem;
   background:
@@ -689,6 +715,21 @@
   gap: 0.75rem;
   border-bottom: 1px solid var(--ui-border-subtle);
   padding: 0.9rem 1rem;
+}
+
+.builder-v2-mobile-topbar-actions {
+  display: grid;
+  justify-items: end;
+  gap: 0.45rem;
+}
+
+.builder-v2-mobile-topbar-actions .builder-v2-io-actions {
+  justify-content: flex-end;
+}
+
+.builder-v2-mobile-topbar-actions .builder-v2-io-button {
+  padding: 0.38rem 0.45rem;
+  font-size: 0.6rem;
 }
 
 .builder-v2-mobile-view {

@@ -9,6 +9,7 @@ import {
 } from 'react'
 
 import {BuilderV2PickerContent} from './BuilderV2AwakenerPicker'
+import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
 import type {BuilderV2Model, BuilderV2PickerTab, BuilderV2SlotView} from './useBuilderV2Model'
 
 interface BuilderV2MobileLayoutProps {
@@ -158,7 +159,10 @@ export function BuilderV2MobileLayout({model}: BuilderV2MobileLayoutProps) {
             {model.activeTeamName}
           </h1>
         </div>
-        <span className='builder-v2-status-pill'>Mobile</span>
+        <div className='builder-v2-mobile-topbar-actions'>
+          <span className='builder-v2-status-pill'>Mobile</span>
+          <BuilderV2ImportExportActions model={model} />
+        </div>
       </header>
 
       {focusedSlot ? (

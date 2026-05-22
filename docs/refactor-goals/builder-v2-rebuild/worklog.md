@@ -343,3 +343,65 @@
 - Packaging:
   - Untracked concept/sendoff files under `docs/design/` and prior smoke screenshots remain intentionally excluded.
 - Active task: none. C6a is implemented and reviewed; broader Builder V2 goal remains active with C7a, C7, C8a, C8b, and C9 queued.
+
+### 2026-05-22 - C8a import/export slice scoped
+
+- Judge: `019e4db4-a09a-7b03-b3ae-f632a3639150`.
+- Decision: Approve `C8a`, Builder V2 import/export parity, as the next bounded Worker slice.
+- Reason:
+  - `C8a` advances core builder usefulness more than team overview polish.
+  - V1 import/export is already factored through reusable codecs, planner flow, validation, and shared dialogs.
+  - The slice avoids C8b transfer-confirmation parity, which crosses into whole-team transfer mutation semantics.
+- In scope:
+  - Standard `t1` single-team import into an empty active team.
+  - `mt1` multi-team import with replace confirmation.
+  - Active-team standard export, all-teams standard export, and active-team in-game export.
+  - Duplicate override import flow.
+  - Single-team import conflict strategy flow if imported units, wheels, or posse already exist elsewhere.
+  - Desktop, adaptive, and mobile V2 surfaces expose a usable import/export path.
+- Provisional design note:
+  - Import/export action placement is not a final team-overview design decision. Worker may choose the smallest clear local placement and record it as provisional.
+  - Worker may reuse V1 `BuilderImportExportDialogs` directly or wrap shared dialog primitives locally, but protected V1 files must not be edited.
+- Deferred:
+  - C7a team overview readiness, full C7 teams overview, C8b transfer dialogs, DnD, recommendations, nav promotion, persistence/migration changes, dependencies, `/builder` edits, and final C9 handoff.
+- Active task: W6, build C8a Builder V2 import/export parity.
+
+### 2026-05-22 - W6 implemented and R6 review passed
+
+- W6 result: implemented C8a Builder V2 import/export parity inside the isolated Builder V2 boundary.
+- Product files changed:
+  - `src/features/builder-v2/BuilderV2ImportExportActions.tsx`
+  - `src/features/builder-v2/useBuilderV2Model.ts`
+  - `src/features/builder-v2/BuilderV2Page.tsx`
+  - `src/features/builder-v2/BuilderV2AdaptiveLayout.tsx`
+  - `src/features/builder-v2/BuilderV2MobileLayout.tsx`
+  - `src/features/builder-v2/BuilderV2Page.test.tsx`
+  - `src/features/builder-v2/builder-v2.css`
+- Behavior:
+  - Builder V2 now reuses the existing import/export codecs, planner, validation, and shared dialogs through the V2 model facade.
+  - Desktop, adaptive, and mobile shells expose provisional import/export actions.
+  - V2 can import a `t1` code into an empty active team, import `mt1` with replace confirmation, handle duplicate override, and handle single-team conflict strategy dialogs.
+  - V2 can export the active team, all teams, and the active team in in-game format.
+  - Import completion clears quick-lineup/transient selection state so replacement imports do not leave stale active targets behind.
+  - Page-level toasts now render through Builder V2.
+- Characterization:
+  - Initial red tests failed because V2 had no import/export actions or dialog entry points.
+  - Added page coverage for `t1` import, adaptive/mobile action exposure, `mt1` replace, duplicate override and `skeydb.builder.allowDupes.v1` persistence, standard active/all exports, active in-game export, and conflict strategy skip.
+  - Existing V1 import/export and import-planner tests stayed green as reference behavior.
+- Validation:
+  - `npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx` passed, 2 files / 44 tests.
+  - `npx vitest run src/features/builder/BuilderPage.import-export.test.tsx src/features/builder/import-planner.test.ts` passed, 2 files / 18 tests.
+  - `npm run test:integration` passed, 7 files / 57 tests.
+  - `npm run lint` passed.
+  - `npm run build` passed; existing Vite chunk-size and plugin timing warnings only.
+  - `git diff --check` passed.
+  - Browser smoke at `http://127.0.0.1:5173/#/builder-v2` passed for desktop Export All, adaptive Import, and mobile Export All dialogs.
+  - Browser smoke also caught a mobile topbar stretch regression; fixed locally with `.builder-v2-page--mobile { align-content: start; }` and rechecked.
+- Review:
+  - Reviewer: `019e4dc1-d637-7373-b010-0602ccfa660a`.
+  - Initial findings: no blocking issues. Low finding for missing V2 duplicate override coverage.
+  - Fix: added duplicate-illegal import coverage for the Import Uses Duplicates dialog, Enable and Import, allow-dupes persistence, and replace continuation.
+  - Final reviewer verdict: no blocking findings.
+- Packaging:
+  - Untracked concept/sendoff files under `docs/design/` and prior smoke screenshots remain intentionally excluded.
+- Active task: none. C8a is implemented and reviewed; broader Builder V2 goal remains active with C7a, C7, C8b, and C9 queued.

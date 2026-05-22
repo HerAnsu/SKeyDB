@@ -7,6 +7,7 @@ import {
 } from 'react'
 
 import {BuilderV2PickerContent} from './BuilderV2AwakenerPicker'
+import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
 import {BuilderV2TeamSlots} from './BuilderV2TeamSlots'
 import type {BuilderV2Model} from './useBuilderV2Model'
 
@@ -208,6 +209,7 @@ export function BuilderV2AdaptiveLayout({model}: BuilderV2AdaptiveLayoutProps) {
                 ) : null}
               </div>
               <AdaptiveQuickLineupControls model={model} />
+              <BuilderV2ImportExportActions model={model} />
               <button
                 className='builder-v2-adaptive-picker-trigger'
                 onClick={(event) => {

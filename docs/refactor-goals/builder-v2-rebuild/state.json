@@ -82,8 +82,8 @@
     {
       "name": "DnD/import/export/quick-lineup polish",
       "status": "queued",
-      "evidence": "W3/W4 implemented quick-lineup and mobile drawer flow; S6 split remaining parity into C8a import/export and C8b transfer confirmation, with DnD still out of scope.",
-      "next": "Judge can choose tablet/adaptive first or C8a import/export; transfer dialog parity and DnD remain later."
+      "evidence": "W3/W4 implemented quick-lineup and mobile drawer flow; W6/R6 implemented and reviewed C8a import/export parity; S6 split remaining parity so C8b transfer confirmation and DnD stay out of scope.",
+      "next": "Transfer dialog parity, DnD, and recommendations remain later slices; keep import/export action placement provisional for future design polish."
     },
     {
       "name": "Designer handoff readiness",
@@ -219,15 +219,15 @@
       "id": "C8a",
       "title": "Builder V2 import/export parity",
       "source_task": "S6",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "V2 import/export actions",
         "V2 import/export dialogs or wrappers",
         "existing import/export codecs and planner reuse",
         "focused V2 import/export tests"
       ],
-      "evidence": "S6 found import/export parity is viable now if split from transfer dialogs, because V1 import/export is already factored through reusable helpers/codecs and V2 has stable model/store seams.",
-      "next": "Queue as a later Worker slice; transfer dialog parity should be split into C8b."
+      "evidence": "W6/R6 reused the existing import/export codecs, planner, validation, and shared dialogs from V2: desktop/adaptive/mobile now expose provisional import/export actions, t1 import into empty active team, mt1 replace, duplicate override, conflict strategy, active/all standard export, and active in-game export are covered by focused V2 tests.",
+      "next": "Complete for this tranche. Keep transfer dialog parity split into C8b."
     },
     {
       "id": "C8b",
@@ -1571,23 +1571,269 @@
           "Adaptive picker close behavior is based on conservative UI heuristics because the model assignment API does not return an explicit success/failure result."
         ]
       }
+    },
+    {
+      "id": "J6",
+      "role": "judge",
+      "status": "done",
+      "title": "Approve C8a Builder V2 import/export Worker slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-architecture",
+        "$refactor-characterization-tests",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-typescript"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/BuilderV2Page.tsx",
+        "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+        "src/features/builder-v2/BuilderV2MobileLayout.tsx",
+        "src/features/builder-v2/BuilderV2Page.test.tsx",
+        "src/features/builder-v2/useBuilderV2Model.test.ts",
+        "new src/features/builder-v2/*.tsx files for local import/export action/dialog wrappers",
+        "docs/refactor-goals/builder-v2-rebuild/state.json",
+        "docs/refactor-goals/builder-v2-rebuild/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/stores/builderDraftStore.ts",
+        "src/App.tsx",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain import/export codecs",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "nav/shared app chrome",
+        "remote state",
+        "unrelated untracked docs/design/** and smoke screenshots"
+      ],
+      "expected_output": "One bounded Worker scope for C8a import/export parity with invariants, red tests, validation, rollback, and acceptance criteria.",
+      "receipt": {
+        "summary": "Approved C8a as the next Worker slice after W5/R5.",
+        "decision": "Implement C8a only: Builder V2 import/export parity.",
+        "candidate_ids": [
+          "C8a"
+        ],
+        "why_now": "C8a advances core builder usefulness more than team overview polish, reuses already-factored V1 codecs/planner/dialog primitives, and avoids the broader whole-team transfer semantics of C8b.",
+        "rejected_or_deferred": [
+          "C7a deferred because it is team-section screenshot/readiness polish while core parity still has gaps.",
+          "C7 deferred because full teams overview remains blocked on list-vs-cards and compact-vs-expanded product/design choices.",
+          "C8b deferred because transfer dialog parity changes cross-team ownership and whole-team mutation semantics.",
+          "C8 parent remains an umbrella only; activate C8a/C8b child slices instead.",
+          "C9 deferred because final designer handoff is premature before core parity gaps are resolved."
+        ],
+        "in_scope": [
+          "Standard t1 single-team import into an empty active team.",
+          "mt1 multi-team import with replace confirmation.",
+          "Active-team standard export, all-teams standard export, and active-team in-game export.",
+          "Duplicate override flow when an import requires enabling Allow Dupes.",
+          "Single-team import conflict strategy flow when incoming awakeners, wheels, or posse are already used.",
+          "Desktop, adaptive, and mobile V2 layouts expose a usable import/export path."
+        ],
+        "deferred": [
+          "Transfer-confirmation parity and whole-team transfer resolution.",
+          "DnD, recommendations, full teams overview redesign, nav promotion, dependencies, persistence/migration changes, and /builder edits."
+        ],
+        "invariants": [
+          "/builder behavior remains untouched.",
+          "/builder-v2 remains unpromoted from nav.",
+          "Use existing import/export codecs, planner, validation, and dialog primitives; do not invent a second import format.",
+          "Do not combine import/export with transfer-confirmation parity.",
+          "Imported teams flow through builderDraftStore public-id draft state and preserve autosave behavior.",
+          "Duplicate override may use the existing skeydb.builder.allowDupes.v1 preference; do not change its key/version.",
+          "Desktop, adaptive, and mobile V2 layouts must keep existing picker/drawer focus behavior intact."
+        ],
+        "ambiguity_recorded": [
+          "Import/export action placement is provisional for this Worker; compact header/action placement is acceptable and does not settle final team overview design.",
+          "Worker may either reuse V1 BuilderImportExportDialogs directly or wrap shared dialogs locally, but protected V1 files must not be edited."
+        ],
+        "tdd_characterization": [
+          "Add failing V2 tests for importing a t1 code into an empty active team.",
+          "Add failing V2 tests for mt1 replace confirmation.",
+          "Add failing V2 tests for active-team export and all-teams export.",
+          "Add at least one failing duplicate/strategy import test if the slice wires those dialogs.",
+          "Existing V1 import/export tests remain the reference behavior and must not be edited."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx",
+          "npx vitest run src/features/builder/BuilderPage.import-export.test.tsx src/features/builder/import-planner.test.ts",
+          "npm run test:integration",
+          "npm run lint",
+          "npm run build",
+          "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-rebuild"
+        ],
+        "acceptance": [
+          "New red tests fail before implementation and pass after.",
+          "V2 can import/export through existing codecs and planner flows.",
+          "Desktop, adaptive, and mobile paths expose the parity actions without breaking existing picker/drawer behavior.",
+          "No protected files changed.",
+          "C8a can be marked implemented; C7a, C7, C8b, and C9 remain queued."
+        ]
+      }
+    },
+    {
+      "id": "W6",
+      "role": "worker",
+      "status": "done",
+      "title": "Build C8a Builder V2 import/export parity",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-typescript",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/BuilderV2Page.tsx",
+        "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+        "src/features/builder-v2/BuilderV2MobileLayout.tsx",
+        "src/features/builder-v2/BuilderV2Page.test.tsx",
+        "src/features/builder-v2/useBuilderV2Model.test.ts",
+        "src/features/builder-v2/*.tsx",
+        "docs/refactor-goals/builder-v2-rebuild/state.json",
+        "docs/refactor-goals/builder-v2-rebuild/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/stores/builderDraftStore.ts",
+        "src/App.tsx",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain import/export codecs",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "nav/shared app chrome",
+        "remote state",
+        "unrelated untracked docs/design/** and smoke screenshots"
+      ],
+      "expected_output": "Builder V2 import/export parity for standard import/export, multi-team replace, in-game active-team export, duplicate override and conflict strategy flows, all through existing codecs/planner/dialog contracts, with focused tests and validation.",
+      "receipt": {
+        "slice": "C8a Builder V2 import/export parity",
+        "files_changed": [
+          "src/features/builder-v2/BuilderV2ImportExportActions.tsx",
+          "src/features/builder-v2/useBuilderV2Model.ts",
+          "src/features/builder-v2/BuilderV2Page.tsx",
+          "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+          "src/features/builder-v2/BuilderV2MobileLayout.tsx",
+          "src/features/builder-v2/BuilderV2Page.test.tsx",
+          "src/features/builder-v2/builder-v2.css",
+          "docs/refactor-goals/builder-v2-rebuild/state.json",
+          "docs/refactor-goals/builder-v2-rebuild/worklog.md"
+        ],
+        "behavior_added": [
+          "Builder V2 model now adapts builderDraftStore to existing useBuilderImportExport/useBuilderImportFlow without new import formats.",
+          "Desktop, adaptive, and mobile shells expose provisional import/export action groups.",
+          "V2 can import t1 into an empty active team, handle mt1 replace, duplicate override, and conflict strategy dialogs.",
+          "V2 can export active standard team, all standard teams, and active in-game team codes.",
+          "Toast feedback now renders in Builder V2 through page-level useTimedToast."
+        ],
+        "behavior_preserved": [
+          "/builder files, App route/nav, builderDraftStore, persistence keys/versions, migrations, domain codecs, generated data, dependencies, and global CSS outside builder-v2 were not edited.",
+          "Existing desktop/adaptive/mobile picker and quick-lineup flows remain available.",
+          "C8b transfer dialogs remain out of scope; V2 cross-team direct assignment still blocks with messages."
+        ],
+        "root_fix_patch_decision": "Bounded root-fix inside Builder V2 facade: reuse current import/export contracts through V2 model/store adapters instead of cloning codecs or migrating V1 page shell.",
+        "dependency_review": "No dependency changes made or needed.",
+        "characterization": [
+          "Initial red run failed the new V2 import/export page tests because import/export actions and dialogs were absent.",
+          "Added focused V2 coverage for t1 import into empty active team, adaptive/mobile action exposure, mt1 replace, duplicate override, active/all/in-game exports, and conflict strategy skip.",
+          "Existing V1 import/export and import planner tests remained green as reference behavior."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (2 files, 44 tests passed)",
+          "npx vitest run src/features/builder/BuilderPage.import-export.test.tsx src/features/builder/import-planner.test.ts (2 files, 18 tests passed)",
+          "npm run test:integration (7 files, 57 tests passed)",
+          "npm run lint (passed)",
+          "npm run build (passed; existing Vite chunk-size/plugin timing warnings only)",
+          "git diff --check (passed)",
+          "Browser smoke: desktop Export All dialog, adaptive Import dialog with Import code focus, mobile Export All dialog with Export code focus; mobile topbar stretch fixed and rechecked."
+        ],
+        "review": "R6 reviewer found no blocking issues. Low missing duplicate override V2 test coverage was fixed; final focused tests passed with 44 tests.",
+        "risks": [
+          "Import/export action placement is provisional and should be revisited during design polish/team overview decisions.",
+          "Import/export actions remain available during Quick Team Lineup; exports encode current provisional store state.",
+          "C8b transfer confirmation parity, DnD, recommendations, teams overview readiness, and designer handoff remain queued."
+        ],
+        "scope_expansion_requested": "None"
+      }
+    },
+    {
+      "id": "R6",
+      "role": "review",
+      "status": "done",
+      "title": "Review W6 C8a Builder V2 import/export parity",
+      "skills": [
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/**",
+        "docs/refactor-goals/builder-v2-rebuild/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/stores/builderDraftStore.ts",
+        "src/App.tsx",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain import/export codecs",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "nav/shared app chrome",
+        "remote state",
+        "unrelated untracked docs/design/** and smoke screenshots"
+      ],
+      "expected_output": "Review W6 diff, tests, packet receipts, invariants, and browser smoke for Builder V2 import/export parity.",
+      "receipt": {
+        "summary": "Review passed after adding V2 duplicate override coverage.",
+        "reviewer": "019e4dc1-d637-7373-b010-0602ccfa660a",
+        "findings": [
+          "Low: V2 had no direct duplicate override test coverage after wiring shared import/export dialogs and allow-dupes persistence."
+        ],
+        "fixes_reviewed": [
+          "Added BuilderV2Page duplicate-illegal import test covering Import Uses Duplicates, Enable and Import, skeydb.builder.allowDupes.v1 persistence, and replace continuation."
+        ],
+        "final_findings": [],
+        "final_verdict": "complete",
+        "validation_reviewed": [
+          "src/features/builder-v2 focused tests passed with 44 tests.",
+          "Changed-file eslint passed.",
+          "V1 import/export and import-planner tests passed.",
+          "Integration suite passed.",
+          "npm run lint passed.",
+          "npm run build passed.",
+          "Browser smoke passed for desktop/adaptive/mobile import/export dialogs."
+        ],
+        "residual_risk": [
+          "Import/export actions remain available during Quick Team Lineup and export current provisional store state."
+        ]
+      }
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1 landed the isolated Builder V2 route/model/shell, W2 added gear and posse assignment, W3/R3 implemented and reviewed Quick Lineup V2 mode, W4/R4 implemented and reviewed the C5 mobile overview/focused/full-screen picker drawer flow, S6 mapped next viable chunks, and W5/R5 implemented and reviewed the C6a tablet/adaptive workbench shell. Broad Builder V2 rebuild remains active with C7a/C7/C8a/C8b/C9 queued.",
+    "summary": "W1 landed the isolated Builder V2 route/model/shell, W2 added gear and posse assignment, W3/R3 implemented and reviewed Quick Lineup V2 mode, W4/R4 implemented and reviewed the C5 mobile overview/focused/full-screen picker drawer flow, S6 mapped next viable chunks, W5/R5 implemented and reviewed the C6a tablet/adaptive workbench shell, and W6/R6 implemented and reviewed C8a import/export parity. Broad Builder V2 rebuild remains active with C7a/C7/C8b/C9 queued.",
     "validation": [
-      "npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx (20 tests passed)",
-      "npx eslint src/features/builder-v2/BuilderV2Page.tsx src/features/builder-v2/BuilderV2AdaptiveLayout.tsx src/features/builder-v2/BuilderV2Page.test.tsx (passed)",
-      "npx vitest run src/features/builder-v2 (38 tests passed)",
+      "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (44 tests passed)",
+      "npx vitest run src/features/builder/BuilderPage.import-export.test.tsx src/features/builder/import-planner.test.ts (18 tests passed)",
+      "npm run test:integration (57 tests passed)",
+      "npm run lint (passed)",
       "npm run build (passed; existing Vite chunk-size/plugin timing warnings only)",
       "git diff --check (passed)",
-      "Browser smoke for #/builder-v2 desktop 1440, adaptive 900/1024, and mobile 390 flows"
+      "Browser smoke for #/builder-v2 desktop Export All, adaptive Import, and mobile Export All import/export dialogs"
     ],
     "open_items": [
       "C7a team overview readiness component",
       "C7 full teams overview redesign after product/design decision",
-      "C8a import/export parity",
       "C8b transfer dialog parity",
       "C9 designer handoff bundle"
     ]
