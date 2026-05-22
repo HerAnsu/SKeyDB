@@ -179,3 +179,32 @@
 - R5 complete: W6 review recorded.
 - J7 active: choose the next post-focus-hardening tranche. Current recommendation is C7 adaptive callback/action churn if it can stay Builder V2-only; C5 remains queued for a later shared `/builder` tranche with extra characterization.
 - Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-23 - J7 selected adaptive callback stabilization
+
+- J7 selected `C7` Stable action groups / adaptive callback churn as W7.
+- Root-fix reasoning: desktop already had a local `useStableEvent` workaround for picker assignment handlers, while adaptive picker open/assignment callbacks still close over the whole `model`. W7 can share the stable-event helper and stabilize adaptive callbacks without changing the Builder V2 model shape.
+- Rejected C5 for this tranche: scout found the additive `changed` result is valuable but touches shared `/builder` runtime, V1 quick-lineup semantics, and transfer no-op behavior. It remains queued for a later shared tranche with extra characterization.
+- W7 active: `Stabilize Builder V2 adaptive picker action callbacks`.
+- W7 allowed files: `BuilderV2Page.tsx`, `BuilderV2AdaptiveLayout.tsx`, new `useStableEvent.ts`, focused Builder V2 page/model tests if needed, and this goal packet.
+- W7 protected scope: no mobile layout, no model shape/type changes, no CSS, no teams-list, no DnD, no dependencies, no `docs/design/**`.
+- W7 validation target: focused Builder V2 page/model tests, app typecheck, targeted eslint, and packet checker.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-23 - W7 adaptive callback stabilization landed
+
+- W7 implementation:
+  - Added shared `src/features/builder-v2/useStableEvent.ts`.
+  - Removed the desktop-only local stable-event helper from `BuilderV2Page.tsx`.
+  - Updated `BuilderV2AdaptiveLayout.tsx` picker open, slot/covenant/wheel/posse selection, and assignment wrappers to use stable callbacks while reading the latest model at invocation time.
+- Review:
+  - Reviewer `019e51d6-85d5-7480-9dbd-04c670bcc151` found one stale-window issue: the first helper version updated its ref in passive `useEffect`, allowing a fast event between commit and effect flush to call the previous handler.
+  - Fixed by using `useLayoutEffect` inside `useStableEvent`.
+  - Reviewer also noted untracked `docs/design/` images as a possible package risk; they remain pre-existing untracked references and were not changed or staged.
+- Validation:
+  - `npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/useBuilderV2Model.test.ts --run` passed with 73 tests.
+  - `npx tsc -p tsconfig.app.json --noEmit` passed.
+  - `npx eslint src/features/builder-v2/BuilderV2Page.tsx src/features/builder-v2/BuilderV2AdaptiveLayout.tsx src/features/builder-v2/useStableEvent.ts` passed.
+- R6 complete: W7 review recorded.
+- J8 active: choose the next Builder V2 hardening slice only if continuing this goal.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`

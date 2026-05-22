@@ -1073,7 +1073,7 @@
     {
       "id": "J7",
       "role": "judge",
-      "status": "active",
+      "status": "done",
       "title": "Choose next post-focus-hardening tranche",
       "skills": [
         "$refactor-rootfix",
@@ -1096,6 +1096,136 @@
         "docs/design/**"
       ],
       "expected_output": "Select the next contained tranche after W6. Current recommendation is C7 adaptive callback/action churn if it can stay Builder V2-only; C5 remains queued for a later shared /builder tranche with extra characterization.",
+      "receipt": {
+        "evidence": [
+          "Selected C7 Stable action groups / adaptive callback churn as W7.",
+          "C7 scout confirmed the remaining smell is Builder V2-only: desktop has a local stable-event workaround while adaptive callbacks still close over the whole model for slot/picker/assignment flows.",
+          "Rejected C5 for this tranche because the scout found it touches shared /builder runtime, V1 quick-lineup semantics, and transfer no-op behavior; it remains queued for a later additive shared tranche."
+        ],
+        "validation": [
+          "Approved W7 allowed files, invariants, validation, and rollback."
+        ]
+      }
+    },
+    {
+      "id": "W7",
+      "role": "worker",
+      "status": "done",
+      "title": "Stabilize Builder V2 adaptive picker action callbacks",
+      "skills": [
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/BuilderV2Page.tsx",
+        "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+        "src/features/builder-v2/useStableEvent.ts",
+        "src/features/builder-v2/BuilderV2Page.test.tsx",
+        "src/features/builder-v2/useBuilderV2Model.test.ts",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "src/features/builder-v2/BuilderV2MobileLayout.tsx",
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/BuilderV2ModelTypes.ts",
+        "src/features/builder-v2/builder-v2.css",
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Move the desktop-only stable-event helper into a shared Builder V2 hook and use it in adaptive picker open/assignment flows so memoized slot/picker children receive stable callbacks without changing behavior.",
+      "invariants": [
+        "Do not change Builder V2 model shape or option DTOs in W7.",
+        "Do not change adaptive/mobile layout, drawer shape, CSS, teams-list behavior, DnD behavior, or dependencies.",
+        "Adaptive close-after-assignment decisions must still evaluate against the latest model state.",
+        "Assignment behavior, violation messages, transfer dialog behavior, quick-lineup advancement, picker close/open semantics, search focus, and Escape focus restore remain unchanged.",
+        "Keep desktop assignment handler behavior equivalent while removing the page-local stable-event helper."
+      ],
+      "validation": [
+        "npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/useBuilderV2Model.test.ts --run",
+        "npx tsc -p tsconfig.app.json --noEmit",
+        "targeted npx eslint over touched Builder V2 files",
+        "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening"
+      ],
+      "rollback": [
+        "Remove useStableEvent.ts, restore the local helper in BuilderV2Page.tsx, revert adaptive callbacks to their prior useCallback forms, and revert W7 packet updates."
+      ],
+      "receipt": {
+        "evidence": [
+          "Added src/features/builder-v2/useStableEvent.ts as a shared Builder V2 stable callback hook.",
+          "Removed the desktop-only local stable-event helper from BuilderV2Page.tsx and imported the shared hook instead.",
+          "Updated BuilderV2AdaptiveLayout.tsx picker open, slot selection, posse selection, and assignment wrappers to use stable callbacks while reading the latest model when invoked.",
+          "Reviewer subagent 019e51d6-85d5-7480-9dbd-04c670bcc151 found the initial hook updated refs in passive useEffect; W7 fixed it by using useLayoutEffect to avoid the commit-before-effect stale handler window.",
+          "No Builder V2 model shape, mobile layout, CSS, teams-list, DnD, dependency, or docs/design files were changed."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/useBuilderV2Model.test.ts --run passed with 73 tests.",
+          "npx tsc -p tsconfig.app.json --noEmit passed.",
+          "npx eslint src/features/builder-v2/BuilderV2Page.tsx src/features/builder-v2/BuilderV2AdaptiveLayout.tsx src/features/builder-v2/useStableEvent.ts passed."
+        ]
+      }
+    },
+    {
+      "id": "R6",
+      "role": "review",
+      "status": "done",
+      "title": "Review W7 stable callback helper",
+      "skills": [
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "read-only current W7 diff",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "product source edits during review",
+        "remote state"
+      ],
+      "expected_output": "Audit W7 for stale closures, hook misuse, behavior drift, test gaps, and protected-scope drift.",
+      "receipt": {
+        "evidence": [
+          "Reviewer subagent 019e51d6-85d5-7480-9dbd-04c670bcc151 found one real stale-window issue: useStableEvent updated handler refs in passive useEffect.",
+          "Controller changed the helper to useLayoutEffect and reran validation.",
+          "Reviewer also noted untracked docs/design mockups as a possible package risk; controller kept them untracked and outside W7 staging."
+        ],
+        "validation": [
+          "Controller reran focused Builder V2 page/model tests, app typecheck, and targeted eslint successfully after reviewer fixes."
+        ]
+      }
+    },
+    {
+      "id": "J8",
+      "role": "judge",
+      "status": "active",
+      "title": "Choose next Builder V2 hardening slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/builder-v2-architecture-hardening/**",
+        "read-only current tranche diffs",
+        "read-only remaining queued candidate evidence"
+      ],
+      "protected_files": [
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Select the next tranche after W7 only if continuing this goal. Remaining candidates include C5 additive team-state result, C4 type-only WheelSlotIndex, C11/C12 CSS contracts, C13 clipping boundary, C14 picker grid contract, C15 persistence parser, and C16 state strategy review.",
       "receipt": null
     }
   ],

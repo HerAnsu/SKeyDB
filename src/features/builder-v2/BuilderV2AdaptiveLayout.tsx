@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 
 import {BuilderV2ActiveFooter, BuilderV2ActiveHeader} from './BuilderV2ActiveTeamChrome'
 import {BuilderV2PickerContent} from './BuilderV2AwakenerPicker'
@@ -6,6 +6,7 @@ import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
 import type {BuilderV2Model} from './BuilderV2ModelTypes'
 import {BuilderV2TeamManagement} from './BuilderV2TeamManagement'
 import {BuilderV2TeamSlots} from './BuilderV2TeamSlots'
+import {useStableEvent} from './useStableEvent'
 
 interface BuilderV2AdaptiveLayoutProps {
   model: BuilderV2Model
@@ -25,12 +26,12 @@ export function BuilderV2AdaptiveLayout({model}: BuilderV2AdaptiveLayoutProps) {
     searchInputRef.current?.focus()
   }, [isPickerOpen, model.pickerTab])
 
-  const closePicker = useCallback((restoreFocus = true) => {
+  const closePicker = useStableEvent((restoreFocus = true) => {
     setIsPickerOpen(false)
     if (restoreFocus) {
       pickerTriggerRef.current?.focus()
     }
-  }, [])
+  })
 
   useEffect(() => {
     if (!isPickerOpen) {
@@ -69,94 +70,72 @@ export function BuilderV2AdaptiveLayout({model}: BuilderV2AdaptiveLayoutProps) {
     }
   }, [isPickerOpen])
 
-  const openPicker = useCallback(
-    (restoreTarget?: HTMLElement | null, options: {ensureTarget?: boolean} = {}) => {
+  const openPicker = useStableEvent(
+    (restoreTarget?: HTMLElement | null, options?: {ensureTarget?: boolean}) => {
       pickerTriggerRef.current = restoreTarget ?? getCurrentFocusRestoreTarget()
 
-      if (options.ensureTarget !== false && !model.activeSelection && !model.activeTeamTarget) {
+      if (options?.ensureTarget !== false && !model.activeSelection && !model.activeTeamTarget) {
         model.selectAwakenerSlot(model.selectedSlotId ?? 'slot-1')
       }
       setIsPickerOpen(true)
     },
-    [model],
   )
 
-  const selectAwakenerSlotAndOpenPicker = useCallback(
-    (slotId: string) => {
-      const restoreTarget = getCurrentFocusRestoreTarget()
-      model.selectAwakenerSlot(slotId)
-      openPicker(restoreTarget, {ensureTarget: false})
-    },
-    [model, openPicker],
-  )
+  const selectAwakenerSlotAndOpenPicker = useStableEvent((slotId: string) => {
+    const restoreTarget = getCurrentFocusRestoreTarget()
+    model.selectAwakenerSlot(slotId)
+    openPicker(restoreTarget, {ensureTarget: false})
+  })
 
-  const selectWheelSlotAndOpenPicker = useCallback(
-    (slotId: string, wheelIndex: 0 | 1) => {
-      const restoreTarget = getCurrentFocusRestoreTarget()
-      model.selectWheelSlot(slotId, wheelIndex)
-      openPicker(restoreTarget, {ensureTarget: false})
-    },
-    [model, openPicker],
-  )
+  const selectWheelSlotAndOpenPicker = useStableEvent((slotId: string, wheelIndex: 0 | 1) => {
+    const restoreTarget = getCurrentFocusRestoreTarget()
+    model.selectWheelSlot(slotId, wheelIndex)
+    openPicker(restoreTarget, {ensureTarget: false})
+  })
 
-  const selectCovenantSlotAndOpenPicker = useCallback(
-    (slotId: string) => {
-      const restoreTarget = getCurrentFocusRestoreTarget()
-      model.selectCovenantSlot(slotId)
-      openPicker(restoreTarget, {ensureTarget: false})
-    },
-    [model, openPicker],
-  )
+  const selectCovenantSlotAndOpenPicker = useStableEvent((slotId: string) => {
+    const restoreTarget = getCurrentFocusRestoreTarget()
+    model.selectCovenantSlot(slotId)
+    openPicker(restoreTarget, {ensureTarget: false})
+  })
 
-  const selectPosseAndOpenPicker = useCallback(() => {
+  const selectPosseAndOpenPicker = useStableEvent(() => {
     const restoreTarget = getCurrentFocusRestoreTarget()
     model.selectPosse()
     openPicker(restoreTarget, {ensureTarget: false})
-  }, [model, openPicker])
+  })
 
-  const assignAwakener = useCallback(
-    (awakenerId: string) => {
-      const shouldClosePicker = canCloseAfterAwakenerAssignment(model, awakenerId)
-      model.assignAwakener(awakenerId)
-      if (shouldClosePicker) {
-        closePicker(false)
-      }
-    },
-    [closePicker, model],
-  )
+  const assignAwakener = useStableEvent((awakenerId: string) => {
+    const shouldClosePicker = canCloseAfterAwakenerAssignment(model, awakenerId)
+    model.assignAwakener(awakenerId)
+    if (shouldClosePicker) {
+      closePicker(false)
+    }
+  })
 
-  const assignWheel = useCallback(
-    (wheelId: string) => {
-      const shouldClosePicker = canCloseAfterWheelAssignment(model, wheelId)
-      model.assignWheel(wheelId)
-      if (shouldClosePicker) {
-        closePicker(false)
-      }
-    },
-    [closePicker, model],
-  )
+  const assignWheel = useStableEvent((wheelId: string) => {
+    const shouldClosePicker = canCloseAfterWheelAssignment(model, wheelId)
+    model.assignWheel(wheelId)
+    if (shouldClosePicker) {
+      closePicker(false)
+    }
+  })
 
-  const assignCovenant = useCallback(
-    (covenantId: string) => {
-      const shouldClosePicker = canCloseAfterCovenantAssignment(model, covenantId)
-      model.assignCovenant(covenantId)
-      if (shouldClosePicker) {
-        closePicker(false)
-      }
-    },
-    [closePicker, model],
-  )
+  const assignCovenant = useStableEvent((covenantId: string) => {
+    const shouldClosePicker = canCloseAfterCovenantAssignment(model, covenantId)
+    model.assignCovenant(covenantId)
+    if (shouldClosePicker) {
+      closePicker(false)
+    }
+  })
 
-  const assignPosse = useCallback(
-    (posseId: string) => {
-      const shouldClosePicker = canCloseAfterPosseAssignment(model, posseId)
-      model.assignPosse(posseId)
-      if (shouldClosePicker) {
-        closePicker(false)
-      }
-    },
-    [closePicker, model],
-  )
+  const assignPosse = useStableEvent((posseId: string) => {
+    const shouldClosePicker = canCloseAfterPosseAssignment(model, posseId)
+    model.assignPosse(posseId)
+    if (shouldClosePicker) {
+      closePicker(false)
+    }
+  })
 
   return (
     <section

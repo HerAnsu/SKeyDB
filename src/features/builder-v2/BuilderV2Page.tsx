@@ -1,6 +1,6 @@
 import './builder-v2.css'
 
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
 
 import {ConfirmDialog} from '@/components/ui/ConfirmDialog'
 import {Toast} from '@/components/ui/Toast'
@@ -16,6 +16,7 @@ import {BuilderV2MobileLayout} from './BuilderV2MobileLayout'
 import {BuilderV2TeamManagement} from './BuilderV2TeamManagement'
 import {BuilderV2TeamSlots} from './BuilderV2TeamSlots'
 import {useBuilderV2Model} from './useBuilderV2Model'
+import {useStableEvent} from './useStableEvent'
 
 const BUILDER_V2_MOBILE_BREAKPOINT_PX = 640
 const BUILDER_V2_ADAPTIVE_BREAKPOINT_PX = 1056
@@ -38,7 +39,10 @@ export function BuilderV2Page() {
     content = <BuilderV2AdaptiveLayout model={model} />
   } else {
     content = (
-      <section className='builder-v2-page builder-v2-page--desktop' aria-labelledby='builder-v2-title'>
+      <section
+        className='builder-v2-page builder-v2-page--desktop'
+        aria-labelledby='builder-v2-title'
+      >
         <header className='builder-v2-mast'>
           <div className='builder-v2-mast-identity'>
             <span aria-hidden className='builder-v2-mast-glyph' />
@@ -176,18 +180,6 @@ export function BuilderV2Page() {
       <Toast entries={toastEntries} />
     </>
   )
-}
-
-function useStableEvent<TArgs extends unknown[], TResult>(
-  handler: (...args: TArgs) => TResult,
-): (...args: TArgs) => TResult {
-  const handlerRef = useRef(handler)
-
-  useEffect(() => {
-    handlerRef.current = handler
-  }, [handler])
-
-  return useCallback((...args: TArgs) => handlerRef.current(...args), [])
 }
 
 function useBuilderV2ViewportMode() {
