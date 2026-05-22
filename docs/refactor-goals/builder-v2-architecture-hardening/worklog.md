@@ -61,3 +61,25 @@
 - J3 active: choose next post-command-boundary Worker slice. Current recommendation is C3 selection/editing-mode boundary before C6 picker query modules.
 - Packet validation: `node C:\Users\dansa\.codex\plugins\cache\refactor-discipline-local\refactor-discipline\0.4.3\skills\refactor-goal-prep\scripts\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening` returned OK.
 - Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-22 - W3 editing-target boundary
+
+- J3 selected C3 V2 selection/editing-mode boundary as the next Worker slice.
+- C3 scout `019e51a3-9af8-7d40-9ae1-d1a14a87e4d8` confirmed scope: local V2 helper only; no shared `ActiveSelection`/`WheelSlotIndex`, no mobile/adaptive redesign, no DnD, no CSS.
+- C6 scout `019e51a3-c94c-70e3-b9d6-007bdc67b028` mapped the next picker-query extraction after C3 and recommended `builder-v2-picker-options.ts` with pure helper tests.
+- Both scouts completed and were closed after their results were recorded.
+- W3 implementation:
+  - Added `src/features/builder-v2/builder-v2-editing-mode.ts`.
+  - Added `src/features/builder-v2/builder-v2-editing-mode.test.ts`.
+  - Routed quick-lineup focus sync, team/import clearing, slot/posse selection, loadout command application, transfer-confirm focus, and clear actions through the editing-target boundary or its toggle helper.
+  - Added model tests for coupled slot/posse selection, same-batch toggle semantics, and explicit loadout picker-tab preservation while an awakener slot remains active.
+- Review:
+  - Reviewer `019e51a7-f48e-73b1-9357-4d02f5e00231` found explicit picker-tab override drift, same-batch toggle drift, and packet allowed-file drift.
+  - Fixed explicit `pickerTabOverride` handling, restored functional toggle semantics, and added the helper test file to W3 allowed files.
+- Validation:
+  - `npx vitest run src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run` passed with 76 tests.
+  - `npx tsc -p tsconfig.app.json --noEmit` passed after reviewer fixes.
+  - `npx eslint src/features/builder-v2/useBuilderV2Model.ts src/features/builder-v2/builder-v2-editing-mode.ts src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts` passed after reviewer fixes.
+  - `node C:\Users\dansa\.codex\plugins\cache\refactor-discipline-local\refactor-discipline\0.4.3\skills\refactor-goal-prep\scripts\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening` returned OK.
+- J4 active: choose C6 pure picker option query module slice.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`

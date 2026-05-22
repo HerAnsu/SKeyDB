@@ -318,6 +318,59 @@ describe('useBuilderV2Model', () => {
     expect(result.current.selectedSlotId).toBe('slot-3')
   })
 
+  it('keeps slot and posse selection changes coupled to the matching picker tab', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.selectPosse()
+    })
+
+    expect(result.current.activeSelection).toBeNull()
+    expect(result.current.activeTeamTarget).toEqual({kind: 'posse'})
+    expect(result.current.pickerTab).toBe('posses')
+
+    act(() => {
+      result.current.selectWheelSlot('slot-1', 0)
+    })
+
+    expect(result.current.activeSelection).toEqual({kind: 'wheel', slotId: 'slot-1', wheelIndex: 0})
+    expect(result.current.activeTeamTarget).toBeNull()
+    expect(result.current.pickerTab).toBe('wheels')
+
+    act(() => {
+      result.current.setPickerTab('awakeners')
+    })
+    act(() => {
+      result.current.selectWheelSlot('slot-1', 0)
+    })
+
+    expect(result.current.activeSelection).toBeNull()
+    expect(result.current.activeTeamTarget).toBeNull()
+    expect(result.current.pickerTab).toBe('wheels')
+  })
+
+  it('preserves same-batch toggle semantics for slot and posse targets', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.selectAwakenerSlot('slot-1')
+      result.current.selectAwakenerSlot('slot-1')
+    })
+
+    expect(result.current.activeSelection).toBeNull()
+    expect(result.current.activeTeamTarget).toBeNull()
+    expect(result.current.pickerTab).toBe('awakeners')
+
+    act(() => {
+      result.current.selectPosse()
+      result.current.selectPosse()
+    })
+
+    expect(result.current.activeSelection).toBeNull()
+    expect(result.current.activeTeamTarget).toBeNull()
+    expect(result.current.pickerTab).toBe('posses')
+  })
+
   it('removes an awakener and clears that slot loadout', () => {
     const {result} = renderHook(() => useBuilderV2Model())
 
@@ -746,6 +799,24 @@ describe('useBuilderV2Model', () => {
     })
 
     expect(result.current.slots[0]?.covenantId).toBe('c01')
+    expect(result.current.violationMessage).toBeNull()
+  })
+
+  it('preserves explicit loadout picker tabs when an awakener slot remains active', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.assignAwakener('awakener-0021')
+    })
+    act(() => {
+      result.current.assignCovenant('c01')
+    })
+    act(() => {
+      result.current.assignCovenant('c01')
+    })
+
+    expect(result.current.activeSelection).toEqual({kind: 'awakener', slotId: 'slot-1'})
+    expect(result.current.pickerTab).toBe('covenants')
     expect(result.current.violationMessage).toBeNull()
   })
 

@@ -82,6 +82,11 @@ import {useAwakenerBuildRecommendations} from '../builder/useAwakenerBuildRecomm
 import {useBuilderImportExport} from '../builder/useBuilderImportExport'
 import {useTransferConfirm, type PendingTransfer} from '../builder/useTransferConfirm'
 import {
+  createBuilderV2EditingState,
+  getToggledBuilderV2EditingTarget,
+  type BuilderV2EditingTarget,
+} from './builder-v2-editing-mode'
+import {
   resolveAssignAwakenerCommand,
   resolveAssignCovenantCommand,
   resolveAssignPosseCommand,
@@ -770,6 +775,29 @@ export function useBuilderV2Model({
     setViolationMessage(null)
   }, [])
 
+  const applyEditingTarget = useCallback(
+    (
+      target: BuilderV2EditingTarget,
+      options: {
+        fallbackPickerTab?: BuilderV2PickerTab
+        pickerTabOverride?: BuilderV2PickerTab
+        syncPickerTab?: boolean
+      } = {},
+    ) => {
+      const nextState = createBuilderV2EditingState(target)
+      setActiveSelection(nextState.activeSelection)
+      setActiveTeamTarget(nextState.activeTeamTarget)
+      const nextPickerTab =
+        options.pickerTabOverride ?? nextState.pickerTab ?? options.fallbackPickerTab
+      if (options.syncPickerTab && nextPickerTab) {
+        startTransition(() => {
+          setPickerTab(nextPickerTab)
+        })
+      }
+    },
+    [setActiveSelection],
+  )
+
   const toggleAwakenerSortDirection = useCallback(() => {
     setAwakenerSortDirection((current) => (current === 'DESC' ? 'ASC' : 'DESC'))
   }, [])
@@ -863,11 +891,12 @@ export function useBuilderV2Model({
       if (focus.pickerTab) {
         setPickerTab(focus.pickerTab)
       }
-      setActiveSelection(focus.selection)
-      setActiveTeamTarget(focus.pickerTab === 'posses' && !focus.selection ? {kind: 'posse'} : null)
+      applyEditingTarget(
+        focus.pickerTab === 'posses' && !focus.selection ? {kind: 'posse'} : focus.selection,
+      )
       setViolationMessage(null)
     },
-    [setActiveSelection],
+    [applyEditingTarget],
   )
 
   const startQuickLineup = useCallback(() => {
@@ -913,14 +942,13 @@ export function useBuilderV2Model({
       storeCancelTeamRename()
       clearTransfer()
       setViolationMessage(null)
-      setActiveTeamTarget(null)
+      applyEditingTarget(null)
       setActiveTeamId(teamId)
-      setActiveSelection(null)
     },
     [
+      applyEditingTarget,
       clearTransfer,
       quickLineupState,
-      setActiveSelection,
       setActiveTeamId,
       storeCancelTeamRename,
       storeCancelQuickLineup,
@@ -936,11 +964,10 @@ export function useBuilderV2Model({
     setPendingTeamAction(null)
     storeCancelTeamRename()
     setViolationMessage(null)
-    setActiveTeamTarget(null)
-    setActiveSelection(null)
+    applyEditingTarget(null)
   }, [
+    applyEditingTarget,
     clearTransfer,
-    setActiveSelection,
     storeCancelQuickLineup,
     storeCancelTeamRename,
     syncQuickLineupFocus,
@@ -1094,10 +1121,11 @@ export function useBuilderV2Model({
       startTransition(() => {
         setPickerTab('awakeners')
       })
-      setActiveSelection((current) =>
-        current?.kind === 'awakener' && current.slotId === slotId
-          ? null
-          : {kind: 'awakener', slotId},
+      setActiveSelection(
+        (current) =>
+          createBuilderV2EditingState(
+            getToggledBuilderV2EditingTarget(current, {kind: 'awakener', slotId}),
+          ).activeSelection,
       )
     },
     [jumpToQuickLineupStep, quickLineupState, setActiveSelection],
@@ -1115,10 +1143,11 @@ export function useBuilderV2Model({
       startTransition(() => {
         setPickerTab('wheels')
       })
-      setActiveSelection((current) =>
-        current?.kind === 'wheel' && current.slotId === slotId && current.wheelIndex === wheelIndex
-          ? null
-          : {kind: 'wheel', slotId, wheelIndex},
+      setActiveSelection(
+        (current) =>
+          createBuilderV2EditingState(
+            getToggledBuilderV2EditingTarget(current, {kind: 'wheel', slotId, wheelIndex}),
+          ).activeSelection,
       )
     },
     [jumpToQuickLineupStep, quickLineupState, setActiveSelection],
@@ -1136,10 +1165,11 @@ export function useBuilderV2Model({
       startTransition(() => {
         setPickerTab('covenants')
       })
-      setActiveSelection((current) =>
-        current?.kind === 'covenant' && current.slotId === slotId
-          ? null
-          : {kind: 'covenant', slotId},
+      setActiveSelection(
+        (current) =>
+          createBuilderV2EditingState(
+            getToggledBuilderV2EditingTarget(current, {kind: 'covenant', slotId}),
+          ).activeSelection,
       )
     },
     [jumpToQuickLineupStep, quickLineupState, setActiveSelection],
@@ -1156,7 +1186,11 @@ export function useBuilderV2Model({
       setPickerTab('posses')
     })
     setActiveSelection(null)
-    setActiveTeamTarget((current) => (current?.kind === 'posse' ? null : {kind: 'posse'}))
+    setActiveTeamTarget(
+      (current) =>
+        createBuilderV2EditingState(current?.kind === 'posse' ? null : {kind: 'posse'})
+          .activeTeamTarget,
+    )
   }, [jumpToQuickLineupStep, quickLineupState, setActiveSelection])
 
   const applyResolvedLoadoutCommand = useCallback(
@@ -1215,9 +1249,7 @@ export function useBuilderV2Model({
         const isQuickLineupPosseStep = quickLineupSession?.currentStep.kind === 'posse'
         updateActiveTeam((team) => ({...team, posseId: command.posseId}))
         setViolationMessage(null)
-        setActiveSelection(command.activeSelection)
-        setActiveTeamTarget(command.activeTeamTarget)
-        setPickerTab(command.pickerTab)
+        applyEditingTarget({kind: 'posse'}, {syncPickerTab: true})
         if (isQuickLineupPosseStep) {
           advanceQuickLineupStep()
         }
@@ -1231,25 +1263,24 @@ export function useBuilderV2Model({
         setActiveTeamSlotsInStore(command.nextSlots)
       }
       setViolationMessage(null)
-      setActiveTeamTarget(command.activeTeamTarget)
       if (quickLineupState && command.changed) {
         advanceQuickLineupStep(command.nextSlots)
         return
       }
-      setActiveSelection(command.activeSelection)
-      if (command.pickerTab) {
-        setPickerTab(command.pickerTab)
-      }
+      applyEditingTarget(command.activeSelection, {
+        pickerTabOverride: command.pickerTab,
+        syncPickerTab: Boolean(command.pickerTab),
+      })
     },
     [
       advanceQuickLineupStep,
+      applyEditingTarget,
       clearTransfer,
       quickLineupSession,
       quickLineupState,
       requestAwakenerTransfer,
       requestPosseTransfer,
       requestWheelTransfer,
-      setActiveSelection,
       setActiveTeamSlotsInStore,
       updateActiveTeam,
     ],
@@ -1347,10 +1378,9 @@ export function useBuilderV2Model({
 
       setActiveTeamSlotsInStore(result.nextSlots)
       setViolationMessage(null)
-      setActiveTeamTarget(null)
-      setActiveSelection({kind: 'awakener', slotId})
+      applyEditingTarget({kind: 'awakener', slotId})
     },
-    [activeTeamSlots, setActiveSelection, setActiveTeamSlotsInStore],
+    [activeTeamSlots, applyEditingTarget, setActiveTeamSlotsInStore],
   )
 
   const clearWheel = useCallback(
@@ -1362,10 +1392,9 @@ export function useBuilderV2Model({
 
       setActiveTeamSlotsInStore(result.nextSlots)
       setViolationMessage(null)
-      setActiveTeamTarget(null)
-      setActiveSelection({kind: 'wheel', slotId, wheelIndex})
+      applyEditingTarget({kind: 'wheel', slotId, wheelIndex})
     },
-    [activeTeamSlots, setActiveSelection, setActiveTeamSlotsInStore],
+    [activeTeamSlots, applyEditingTarget, setActiveTeamSlotsInStore],
   )
 
   const clearCovenant = useCallback(
@@ -1377,10 +1406,9 @@ export function useBuilderV2Model({
 
       setActiveTeamSlotsInStore(result.nextSlots)
       setViolationMessage(null)
-      setActiveTeamTarget(null)
-      setActiveSelection({kind: 'covenant', slotId})
+      applyEditingTarget({kind: 'covenant', slotId})
     },
-    [activeTeamSlots, setActiveSelection, setActiveTeamSlotsInStore],
+    [activeTeamSlots, applyEditingTarget, setActiveTeamSlotsInStore],
   )
 
   const clearPosse = useCallback(() => {
@@ -1390,17 +1418,15 @@ export function useBuilderV2Model({
 
     updateActiveTeam((team) => ({...team, posseId: undefined}))
     setViolationMessage(null)
-    setActiveSelection(null)
-    setActiveTeamTarget({kind: 'posse'})
-    setPickerTab('posses')
+    applyEditingTarget({kind: 'posse'}, {syncPickerTab: true})
     if (quickLineupSession?.currentStep.kind === 'posse') {
       advanceQuickLineupStep()
     }
   }, [
     activeTeam.posseId,
     advanceQuickLineupStep,
+    applyEditingTarget,
     quickLineupSession,
-    setActiveSelection,
     updateActiveTeam,
   ])
 
@@ -1414,11 +1440,10 @@ export function useBuilderV2Model({
 
   const clearImportExportTransientState = useCallback(() => {
     storeFinishQuickLineup()
-    setActiveSelection(null)
-    setActiveTeamTarget(null)
+    applyEditingTarget(null)
     setViolationMessage(null)
     clearTransfer()
-  }, [clearTransfer, setActiveSelection, storeFinishQuickLineup])
+  }, [applyEditingTarget, clearTransfer, storeFinishQuickLineup])
 
   const {
     openImportDialog,
@@ -1467,21 +1492,17 @@ export function useBuilderV2Model({
         const targetSlotId =
           transfer.targetSlotId ??
           nextActiveTeam.slots.find((slot) => slot.awakenerId === transfer.awakenerId)?.slotId
-        setActiveTeamTarget(null)
         if (targetSlotId) {
-          setActiveSelection({kind: 'awakener', slotId: targetSlotId})
+          applyEditingTarget({kind: 'awakener', slotId: targetSlotId})
         }
       } else if (transfer.kind === 'wheel') {
-        setActiveTeamTarget(null)
-        setActiveSelection({
+        applyEditingTarget({
           kind: 'wheel',
           slotId: transfer.targetSlotId,
           wheelIndex: transfer.targetWheelIndex === 0 ? 0 : 1,
         })
       } else {
-        setActiveSelection(null)
-        setActiveTeamTarget({kind: 'posse'})
-        setPickerTab('posses')
+        applyEditingTarget({kind: 'posse'}, {syncPickerTab: true})
       }
 
       if (quickLineupState) {
@@ -1490,9 +1511,9 @@ export function useBuilderV2Model({
     },
     [
       activeTeam,
+      applyEditingTarget,
       effectiveActiveTeamId,
       quickLineupState,
-      setActiveSelection,
       storeAdvanceQuickLineupStep,
       syncQuickLineupFocus,
     ],

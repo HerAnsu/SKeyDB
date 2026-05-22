@@ -113,7 +113,7 @@
       "id": "C3",
       "title": "V2 selection/editing-mode boundary",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/features/builder-v2/BuilderV2ModelTypes.ts",
         "src/features/builder-v2/useBuilderV2Model.ts",
@@ -121,7 +121,7 @@
         "focused model/page tests"
       ],
       "evidence": "activeSelection, activeTeamTarget, and pickerTab are independent fields for one editing mode and can drift into impossible states; selection can reference non-existent slots.",
-      "next": "Recommended next by J3/scout after W2; keep separate from shared WheelSlotIndex and mobile/adaptive redesign scope."
+      "next": "Implemented by W3: added a local editing-target helper and routed common V2 selection/focus/apply paths through it while preserving same-batch toggle and explicit picker-tab behavior."
     },
     {
       "id": "C4",
@@ -163,7 +163,7 @@
         "focused model tests"
       ],
       "evidence": "Four picker option pipelines are large useMemo blocks coupled to hook state and hard to test directly.",
-      "next": "Queue after command boundary unless picker work becomes the next pain point."
+      "next": "Recommended next by C6 scout after W3; extract pure picker option query modules without picker redesign."
     },
     {
       "id": "C7",
@@ -558,7 +558,7 @@
     {
       "id": "J3",
       "role": "judge",
-      "status": "active",
+      "status": "done",
       "title": "Choose next post-command-boundary Worker slice",
       "skills": [
         "$refactor-rootfix",
@@ -579,21 +579,149 @@
         "remote state"
       ],
       "expected_output": "Decide whether the next tranche should start with C3 selection/editing-mode boundary or C6 pure picker query modules. Scout recommendation is C3 first, then C6.",
+      "receipt": {
+        "evidence": [
+          "Selected C3 V2 selection/editing-mode boundary as W3.",
+          "C3 is the natural follow-up to W2 because the loadout resolver now returns coupled activeSelection/activeTeamTarget/pickerTab outcomes, but selection calls and transfer/import paths still set those fields independently.",
+          "Kept C6 picker query modules queued as the likely next architecture slice after W3 validation."
+        ],
+        "validation": [
+          "Approved W3 allowed files, invariants, validation, and rollback."
+        ]
+      }
+    },
+    {
+      "id": "W3",
+      "role": "worker",
+      "status": "done",
+      "title": "Introduce Builder V2 editing-target boundary",
+      "skills": [
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/BuilderV2ModelTypes.ts",
+        "src/features/builder-v2/builder-v2-editing-mode.ts",
+        "src/features/builder-v2/builder-v2-editing-mode.test.ts",
+        "src/features/builder-v2/useBuilderV2Model.test.ts",
+        "src/features/builder-v2/BuilderV2Page.test.tsx",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "src/features/builder/types.ts",
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Add a local Builder V2 editing-target helper/boundary that keeps activeSelection, activeTeamTarget, and pickerTab updates together for common selection/apply paths while preserving current behavior.",
+      "invariants": [
+        "Do not change shared /builder ActiveSelection or QuickLineup types in W3.",
+        "Do not add DnD, mobile layout changes, teams-list decisions, or CSS polish.",
+        "Preserve current picker tab behavior, including no forced tab change when the pre-existing behavior did not set one.",
+        "If a state combination is ambiguous, add characterization or stop for Judge instead of inventing product behavior."
+      ],
+      "validation": [
+        "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run",
+        "npx tsc -p tsconfig.app.json --noEmit",
+        "targeted npx eslint over touched files"
+      ],
+      "rollback": [
+        "Remove builder-v2-editing-mode.ts and revert W3 changes in useBuilderV2Model.ts/tests/packet."
+      ],
+      "receipt": {
+        "evidence": [
+          "Added src/features/builder-v2/builder-v2-editing-mode.ts as a local boundary for converting a V2 editing target into activeSelection, activeTeamTarget, and pickerTab state.",
+          "Added src/features/builder-v2/builder-v2-editing-mode.test.ts.",
+          "useBuilderV2Model.ts now routes quick-lineup focus sync, team/import clearing, slot/posse selection, loadout command application, transfer confirmation focus, and clear actions through the editing-target boundary or its toggle helper.",
+          "Reviewer subagent 019e51a7-f48e-73b1-9357-4d02f5e00231 found two behavior drift risks; W3 fixed both by adding explicit picker-tab override support and restoring functional same-batch toggle semantics.",
+          "No shared /builder types, mobile layout, teams-list shape, DnD, CSS, dependency, or docs/design files were changed."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 76 tests.",
+          "npx tsc -p tsconfig.app.json --noEmit passed after reviewer fixes.",
+          "npx eslint src/features/builder-v2/useBuilderV2Model.ts src/features/builder-v2/builder-v2-editing-mode.ts src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts passed after reviewer fixes."
+        ]
+      }
+    },
+    {
+      "id": "R2",
+      "role": "review",
+      "status": "done",
+      "title": "Review W3 editing-target boundary",
+      "skills": [
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "read-only current W3 diff",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "product source edits during review",
+        "remote state"
+      ],
+      "expected_output": "Audit W3 for behavior drift, missing tests, root-fix quality, and packet issues.",
+      "receipt": {
+        "evidence": [
+          "Reviewer subagent 019e51a7-f48e-73b1-9357-4d02f5e00231 found three issues: explicit resolver picker tabs, same-batch toggle semantics, and missing helper test file in packet allowed files.",
+          "Controller fixed explicit picker tab preservation with pickerTabOverride, restored functional toggle semantics for slot/posse selectors, added tests for both behaviors, and added the helper test file to W3 allowed files."
+        ],
+        "validation": [
+          "Focused Builder V2 tests passed after fixes."
+        ]
+      }
+    },
+    {
+      "id": "J4",
+      "role": "judge",
+      "status": "active",
+      "title": "Choose picker query extraction Worker slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/builder-v2-architecture-hardening/**",
+        "read-only W3 diff",
+        "read-only C6 scout result",
+        "read-only current picker query code"
+      ],
+      "protected_files": [
+        "picker redesign",
+        "mobile/tablet layout",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Decide the C6 Worker slice for pure picker option query modules. C6 scout recommends a pure builder-v2-picker-options.ts module and direct helper tests.",
       "receipt": null
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1 assignment characterization and W2 loadout command resolver extraction landed and passed focused verification/review. Broad hardening outcome is not complete; J3 is active for the next post-command-boundary slice.",
+    "summary": "W1/W2 landed command-boundary hardening and W3 landed the C3 editing-target boundary. Broad hardening outcome is not complete; J4 is active for C6 picker query extraction.",
     "validation": [
       "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 68 tests.",
+      "npx vitest run src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 76 tests after W3.",
       "npx tsc -p tsconfig.app.json --noEmit passed.",
-      "npx eslint src/features/builder-v2/useBuilderV2Model.ts src/features/builder-v2/builder-v2-loadout-commands.ts src/features/builder-v2/useBuilderV2Model.test.ts passed.",
-      "Goal checker OK after W1/W2/R1/J3 packet transition."
+      "targeted eslint passed for W2 and W3 touched files.",
+      "Goal checker OK after W3/R2/J4 packet transition."
     ],
     "open_items": [
-      "J3 choose next post-command-boundary Worker slice; scout recommends C3 before C6.",
-      "C3-C16 queued candidates remain open until implemented, superseded, blocked, or out of scope.",
+      "J4 choose C6 picker query extraction Worker slice.",
+      "C4-C16 queued candidates remain open until implemented, superseded, blocked, or out of scope.",
       "M1-M2 maintenance candidates remain open."
     ]
   }
