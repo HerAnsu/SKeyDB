@@ -222,14 +222,14 @@
       "id": "C11",
       "title": "Builder V2 motion/focus CSS contract",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/features/builder-v2/builder-v2.css",
         "Browser visual checks",
         "focused a11y/manual checks"
       ],
       "evidence": "Reduced motion only covers drawer animations; focus styles are partly global and partly bespoke.",
-      "next": "Queue as CSS/a11y slice."
+      "next": "Implemented by W9: centralized Builder V2 focus ring tokens and added a scoped reduced-motion contract for picker/backdrop/card-art motion."
     },
     {
       "id": "C12",
@@ -260,14 +260,14 @@
       "id": "C14",
       "title": "Picker grid sizing contract",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "src/features/builder-v2/builder-v2.css",
         "Browser checks",
         "page tests if needed"
       ],
       "evidence": "Desktop picker uses fixed 4-column tracks while adaptive/mobile override via ancestor selectors.",
-      "next": "Queue as CSS slice if overflow recurs or before drawer polish."
+      "next": "Implemented by W9: replaced fixed desktop picker result columns and duplicated adaptive/mobile overrides with a shared picker grid sizing contract."
     },
     {
       "id": "C15",
@@ -1342,7 +1342,7 @@
     {
       "id": "J9",
       "role": "judge",
-      "status": "active",
+      "status": "done",
       "title": "Choose next post-WheelSlotIndex hardening tranche",
       "skills": [
         "$refactor-rootfix",
@@ -1364,12 +1364,130 @@
         "docs/design/**"
       ],
       "expected_output": "Select the next contained tranche after W8. Current recommendation is combined C11/C14 CSS focus/motion/picker-grid contract; keep C12 separate, C5 queued for shared-runtime metadata, and C8/C13 queued until real DnD work.",
+      "receipt": {
+        "evidence": [
+          "Selected combined C11/C14 CSS focus/motion/picker-grid contract as W9 after W8 landed cleanly.",
+          "CSS scout recommended combining C11 and C14 because they touch the same picker interaction surface in builder-v2.css.",
+          "Kept C12 separate because rail/button dedupe may require component class-name changes and should not be mixed with picker CSS contracts."
+        ],
+        "validation": [
+          "Approved W9 as a CSS-only slice with builder-v2.css and packet updates only."
+        ]
+      }
+    },
+    {
+      "id": "W9",
+      "role": "worker",
+      "status": "done",
+      "title": "Harden Builder V2 picker focus motion and grid CSS contract",
+      "skills": [
+        "$refactor-tailwind",
+        "$refactor-ui-a11y",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/builder-v2.css",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "Builder V2 component markup",
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Centralize Builder V2 picker focus/motion/grid CSS contracts without changing picker content, drawer shape, mobile layout structure, teams rail behavior, or DnD.",
+      "invariants": [
+        "Do not change JSX/component markup in W9.",
+        "Do not change picker option ordering, item sizes, drawer shape, mobile layout structure, teams-list shape, DnD behavior, dependencies, or docs/design.",
+        "Reduced motion should be scoped to Builder V2 and should preserve static hover/focus affordances."
+      ],
+      "validation": [
+        "npx tsc -p tsconfig.app.json --noEmit",
+        "npm run build:quiet",
+        "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening"
+      ],
+      "rollback": [
+        "Revert builder-v2.css focus token, picker grid, and reduced-motion changes plus W9 packet updates."
+      ],
+      "receipt": {
+        "evidence": [
+          "Added Builder V2-local focus ring and picker grid sizing custom properties on .builder-v2-page.",
+          "Updated shared desktop/adaptive/mobile picker results to use one auto-fill grid column contract instead of a fixed desktop grid plus duplicated adaptive/mobile grid overrides.",
+          "Reused focus-ring tokens for search, picker tile, shared controls, and mobile controls.",
+          "Expanded reduced-motion handling within Builder V2 to remove transition delay/duration and suppress card-art scale while keeping static hover/focus affordances.",
+          "No component markup, mobile structure, teams-list behavior, DnD behavior, dependencies, or docs/design files were changed."
+        ],
+        "validation": [
+          "npx tsc -p tsconfig.app.json --noEmit passed.",
+          "Reviewer subagent 019e51f0-69d4-77c3-a37e-5988af81d850 ran npm run build:quiet and reported it passed.",
+          "Targeted eslint over builder-v2.css is ignored by repo config with no matching CSS lint configuration."
+        ]
+      }
+    },
+    {
+      "id": "R8",
+      "role": "review",
+      "status": "done",
+      "title": "Review W9 Builder V2 CSS contract",
+      "skills": [
+        "$refactor-review",
+        "$refactor-tailwind",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "read-only current W9 diff",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "product source edits during review",
+        "remote state"
+      ],
+      "expected_output": "Audit W9 for CSS regressions, grid density drift, focus visibility, reduced-motion scope, and protected-scope drift.",
+      "receipt": {
+        "evidence": [
+          "Reviewer subagent 019e51f0-69d4-77c3-a37e-5988af81d850 reported no findings in the CSS-only diff.",
+          "Reviewer specifically checked picker grid density, focus visibility, reduced-motion scope, protected teams/DnD/dependency areas, and CSS parse/browser compatibility.",
+          "Reviewer noted residual visual risk because browser screenshots were not run."
+        ],
+        "validation": [
+          "Reviewer ran npm run build:quiet successfully."
+        ]
+      }
+    },
+    {
+      "id": "J10",
+      "role": "judge",
+      "status": "active",
+      "title": "Choose next post-CSS-contract hardening tranche",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/builder-v2-architecture-hardening/**",
+        "read-only W9 diff",
+        "read-only remaining queued candidate evidence"
+      ],
+      "protected_files": [
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Select the next contained tranche after W9 if continuing. Remaining likely candidates include C5 additive team-state result, C12 rail/button CSS dedupe, C15 persistence parser, C16 state strategy review, and C8/C13 only with real DnD work.",
       "receipt": null
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1/W2 landed command-boundary hardening, W3 landed the C3 editing-target boundary, W4 landed C6 picker query extraction, W5 landed picker a11y, W6/W7 landed adaptive focus/callback hardening, and W8 landed the C4 WheelSlotIndex boundary. Broad hardening outcome is not complete; J9 is active to choose the next contained slice.",
+    "summary": "W1/W2 landed command-boundary hardening, W3 landed the C3 editing-target boundary, W4 landed C6 picker query extraction, W5 landed picker a11y, W6/W7 landed adaptive focus/callback hardening, W8 landed the C4 WheelSlotIndex boundary, and W9 landed C11/C14 CSS focus/motion/picker-grid contracts. Broad hardening outcome is not complete; J10 is active to choose the next contained slice.",
     "validation": [
       "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 68 tests.",
       "npx vitest run src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 76 tests after W3.",
@@ -1379,8 +1497,8 @@
       "W4 focused picker/model/page tests passed with 80 tests; app typecheck, targeted eslint, and packet checker passed."
     ],
     "open_items": [
-      "J9 choose next contained post-WheelSlotIndex slice.",
-      "C5 and C8-C16 queued candidates remain open until implemented, superseded, blocked, or out of scope.",
+      "J10 choose next contained post-CSS-contract slice.",
+      "C5, C8, C12, C13, C15, and C16 remain queued until implemented, superseded, blocked, or out of scope.",
       "M1-M2 maintenance candidates remain open."
     ]
   }

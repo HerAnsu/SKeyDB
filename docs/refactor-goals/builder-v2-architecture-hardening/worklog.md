@@ -245,3 +245,32 @@
 - R7 complete: W8 review recorded.
 - J9 active: choose the next post-WheelSlotIndex hardening tranche. Current recommendation is C11/C14 CSS focus/motion/picker-grid contract.
 - Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-23 - J9 selected CSS picker contract hardening
+
+- J9 selected combined `C11` Builder V2 motion/focus CSS contract and `C14` Picker grid sizing contract as W9.
+- Root-fix reasoning: the CSS scout recommended combining C11/C14 because both touch the same picker interaction surface in `builder-v2.css`: focus rings, reduced-motion behavior, and picker results grid sizing.
+- Kept C12 separate because rail/button dedupe may require component class-name changes and should not be mixed with picker CSS contracts.
+- W9 active: `Harden Builder V2 picker focus motion and grid CSS contract`.
+- W9 allowed files: `src/features/builder-v2/builder-v2.css` and this goal packet.
+- W9 protected scope: no component markup, mobile redesign, teams-list shape, DnD implementation, dependencies, remote state, or `docs/design/**`.
+
+### 2026-05-23 - W9 CSS picker contract hardening landed
+
+- W9 implementation:
+  - Added Builder V2-local focus ring and picker grid sizing custom properties on `.builder-v2-page`.
+  - Updated desktop/adaptive/mobile picker results to use one `auto-fill` grid column contract instead of a fixed desktop grid plus duplicated adaptive/mobile grid overrides.
+  - Reused focus-ring tokens for search, picker tile, shared controls, and mobile controls.
+  - Expanded reduced-motion handling inside Builder V2 to remove transition delay/duration and suppress card-art scale while preserving static hover/focus affordances.
+  - Did not change component markup, mobile structure, teams-list behavior, DnD behavior, dependencies, or `docs/design/**`.
+- Review:
+  - Reviewer `019e51f0-69d4-77c3-a37e-5988af81d850` reported no findings.
+  - Reviewer checked picker grid density, focus visibility, reduced-motion scope, protected teams/DnD/dependency areas, and CSS parse/browser compatibility.
+  - Reviewer noted residual visual risk because browser screenshots were not run.
+- Validation:
+  - `npx tsc -p tsconfig.app.json --noEmit` passed.
+  - Reviewer ran `npm run build:quiet` successfully.
+  - Targeted `npx eslint src/features/builder-v2/builder-v2.css` is ignored by repo config because CSS is not covered by the current ESLint configuration.
+- R8 complete: W9 review recorded.
+- J10 active: choose the next post-CSS-contract hardening tranche only if continuing.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
