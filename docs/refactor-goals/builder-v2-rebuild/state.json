@@ -82,14 +82,14 @@
     {
       "name": "DnD/import/export/quick-lineup polish",
       "status": "queued",
-      "evidence": "W3/W4 implemented quick-lineup and mobile drawer flow; W6/R6 implemented and reviewed C8a import/export parity; S6 split remaining parity so C8b transfer confirmation and DnD stay out of scope.",
-      "next": "Transfer dialog parity, DnD, and recommendations remain later slices; keep import/export action placement provisional for future design polish."
+      "evidence": "W3/R3 implemented quick-lineup, W4/R4 implemented mobile drawer flow, W6/R6 implemented import/export parity, and W7/R7 implemented transfer dialog parity across desktop/adaptive/mobile/quick-lineup flows.",
+      "next": "DnD and recommendations remain later polish slices; keep import/export action placement and transfer dialog presentation provisional for future design polish."
     },
     {
       "name": "Designer handoff readiness",
       "status": "queued",
       "evidence": "User affirmed the entire goal packet should lead into handoff to the designer/design model after the V2 core is healthy.",
-      "next": "Add a final handoff bundle once core V2 interaction slices are implemented and reviewed."
+      "next": "Add the final handoff bundle after team overview readiness/product decisions and any selected DnD/recommendation polish are resolved or explicitly left for the designer."
     }
   ],
   "candidates": [
@@ -233,14 +233,14 @@
       "id": "C8b",
       "title": "Builder V2 transfer dialog parity",
       "source_task": "S6",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "cross-team awakener/wheel/posse transfer confirmations",
         "whole-team transfer resolution semantics",
         "quick-lineup and selection interaction tests"
       ],
-      "evidence": "S6 found V2 currently blocks cross-team conflicts with messages, while V1 transfer parity crosses into pending-transfer dialogs and whole-team mutation helpers, making it too broad to bundle with import/export parity.",
-      "next": "Queue after C8a or another judge-approved slice; preserve current V2 in-use block behavior until this is active."
+      "evidence": "W7/R7 reused existing transfer request, dialog, and resolution semantics in Builder V2: cross-team awakeners, wheels, and posses now open confirmation dialogs; cancel is non-mutating; confirm moves clear the source owner/socket; Use as Support keeps source ownership, marks the target support, sets level 90; adaptive/mobile drawer handoff and quick-lineup wait-for-confirm behavior are covered.",
+      "next": "Complete for this tranche. DnD transfer parity, team overview readiness, and final designer handoff remain outside W7."
     },
     {
       "id": "C7",
@@ -259,15 +259,15 @@
       "id": "C8",
       "title": "Import/export and transfer parity",
       "source_task": "Contract/test scouts",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "V2 dialogs",
         "import/export hooks",
         "transfer confirm hooks",
         "tests"
       ],
-      "evidence": "S6 split C8 into C8a import/export parity and C8b transfer dialog parity to avoid mixing reusable dialog/codecs work with whole-team transfer mutation semantics.",
-      "next": "Use C8a/C8b as the actionable candidates; keep parent C8 as the umbrella parity area."
+      "evidence": "W6/R6 implemented Builder V2 import/export parity and W7/R7 implemented Builder V2 transfer dialog parity, closing the actionable C8 split without editing protected V1 builder code.",
+      "next": "Complete as the import/export plus transfer parity umbrella. DnD/recommendations remain separate polish concerns rather than C8 blockers."
     },
     {
       "id": "C9",
@@ -281,8 +281,8 @@
         "concept-image traceability",
         "unresolved product decisions"
       ],
-      "evidence": "S6 found C9 final designer handoff is more useful after W4 but still premature while C7/C8 sub-slices and product decisions remain open.",
-      "next": "Keep queued until core V2 flow and parity decisions are sufficiently implemented or explicitly out of scope; optionally add handoff-readiness notes after each tranche."
+      "evidence": "S6 found C9 final designer handoff is more useful after W4; W6/R6 and W7/R7 now close import/export and transfer parity, leaving team overview/readiness decisions as the main handoff blockers.",
+      "next": "Keep queued until C7a/C7 are implemented, blocked by user decision, or explicitly handed to the designer with open questions."
     }
   ],
   "maintenance": [
@@ -1817,24 +1817,249 @@
           "Import/export actions remain available during Quick Team Lineup and export current provisional store state."
         ]
       }
+    },
+    {
+      "id": "J7",
+      "role": "judge",
+      "status": "done",
+      "title": "Choose next slice after C8a import/export parity",
+      "skills": [
+        "$refactor-goal-prep",
+        "$refactor-rootfix",
+        "$refactor-architecture",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/builder-v2-rebuild/state.json",
+        "docs/refactor-goals/builder-v2-rebuild/worklog.md"
+      ],
+      "protected_files": [
+        "product implementation files",
+        "dependency files",
+        "remote state",
+        "untracked docs/design/** and smoke screenshots"
+      ],
+      "expected_output": "Select exactly one next bounded Worker slice with allowed files, invariants, characterization, validation, rollback, and acceptance criteria.",
+      "receipt": {
+        "summary": "Selected C8b Builder V2 transfer dialog parity as the next Worker slice.",
+        "judge": "019e4dcb-875b-7fc1-a8fb-23d62ca72633",
+        "selected_candidate": "C8b",
+        "why_now": "After W6/R6, import/export parity is implemented and the largest remaining core behavior gap is V2 cross-team conflict handling. V2 currently blocks in-use awakeners, wheels, and posses with messages while V1 has transfer helpers, pending-confirm dialog state, move resolution, and support-transfer semantics.",
+        "evidence": [
+          "HEAD is f2902ac3 Add Builder V2 import export parity.",
+          "final_audit.full_outcome_complete remains false with C7a, C7, C8b, and C9 open.",
+          "C8a is terminally implemented and reviewed.",
+          "Existing V1 transfer contracts are factored in useTransferConfirm, usePendingTransferDialog, BuilderTransferConfirmDialog, and transfer-resolution.",
+          "Existing transfer-resolution tests cover awakener move, wheel move, posse move, support transfer, invalid target no-op, and cross-team slot swap guards."
+        ],
+        "deferred": [
+          "C7a team overview readiness is screenshot/readiness polish and does not close cross-team behavior parity.",
+          "C7 full teams overview remains blocked until product/design chooses list vs cards, compact vs expanded behavior, and team CRUD/share expectations.",
+          "C9 designer handoff is premature while C8b is still queued and core cross-team behavior is not handoff-ready."
+        ],
+        "acceptance_summary": "W7 should add red tests first, then make V2 open transfer confirmations for cross-team awakener, wheel, and posse conflicts; confirm/cancel/support must preserve V1 semantics, quick-lineup/import/export behavior, and desktop/adaptive/mobile accessibility without competing active modals."
+      }
+    },
+    {
+      "id": "W7",
+      "role": "worker",
+      "status": "done",
+      "title": "Build C8b Builder V2 transfer dialog parity",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-typescript",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/useBuilderV2Model.test.ts",
+        "src/features/builder-v2/BuilderV2Page.tsx",
+        "src/features/builder-v2/BuilderV2Page.test.tsx",
+        "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+        "src/features/builder-v2/BuilderV2MobileLayout.tsx",
+        "src/features/builder-v2/BuilderV2AwakenerPicker.tsx",
+        "src/features/builder-v2/BuilderV2TeamSlots.tsx",
+        "src/features/builder-v2/*.tsx",
+        "src/features/builder-v2/builder-v2.css",
+        "docs/refactor-goals/builder-v2-rebuild/state.json",
+        "docs/refactor-goals/builder-v2-rebuild/worklog.md"
+      ],
+      "protected_files": [
+        "src/features/builder/** except read-only imports/references to existing transfer helpers/components",
+        "src/stores/builderDraftStore.ts",
+        "src/App.tsx",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain import/export codecs",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "nav/shared app chrome",
+        "remote state",
+        "untracked docs/design/** and smoke screenshots"
+      ],
+      "invariants": [
+        "/builder behavior remains untouched.",
+        "/builder-v2 remains unpromoted from navigation.",
+        "Use existing transfer request/dialog/resolution semantics where practical; do not invent a second transfer model.",
+        "Cross-team conflicts must not mutate teams before explicit confirmation.",
+        "Cancel leaves source and target teams unchanged and preserves the current V2 target/focus state.",
+        "Confirm move clears the source owner and assigns the target through current public-id Team state.",
+        "Use-as-support, when offered for awakeners, keeps the source owner, marks the target as support, sets level 90, and respects realm/support constraints.",
+        "Wheel transfer clears only the source wheel socket and fills the target wheel socket.",
+        "Posse transfer clears the source team posse and assigns the active team posse.",
+        "Desktop, adaptive, and mobile flows must avoid stacked competing modals; picker drawer/background must not remain interactable behind transfer confirmation.",
+        "Quick Lineup advances only after a confirmed successful transfer/support action; cancel stays on the same step."
+      ],
+      "characterization_first": [
+        "Model/page red test: assigning an awakener already used by Team 2 from Team 1 opens a Move dialog and does not mutate either team before confirmation.",
+        "Page red test: confirming the awakener transfer moves it to the active target slot and clears the source slot.",
+        "Page or model red test: Use as Support is available when no support is present, keeps source ownership, assigns target as support, and sets level 90.",
+        "Page/model red test: assigning a wheel already used by another team opens a Move dialog; confirm clears source wheel and assigns target wheel.",
+        "Page/model red test: assigning a posse already used by another team opens a Move dialog; confirm clears source posse and assigns active team posse.",
+        "Adaptive/mobile red test: transfer triggered from picker drawer produces one accessible confirmation modal, no interactable hidden picker/background, and predictable focus after cancel/confirm.",
+        "Quick Lineup red test: cross-team transfer during a guided step waits for confirmation before advancing; cancel does not advance."
+      ],
+      "validation_commands": [
+        "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx",
+        "npx vitest run src/features/builder/useTransferConfirm.test.ts src/features/builder/usePendingTransferDialog.test.ts src/features/builder/transfer-resolution.test.ts",
+        "npm run test:integration",
+        "npm run lint",
+        "npm run build",
+        "git diff --check",
+        "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-rebuild"
+      ],
+      "rollback": "Delete/revert C8b-local V2 edits and return to W6 behavior where cross-team conflicts are blocked with messages.",
+      "scope_expansion_rules": [
+        "If Worker needs edits to src/features/builder/** transfer helpers, builderDraftStore, migrations, persistence, import/export codecs, or dependency files, stop with needs_scope_expansion.",
+        "Do not include DnD transfer parity, team CRUD/reorder, C7/C7a overview redesign, recommendations, nav promotion, or visual handoff polish in this slice.",
+        "Do not stage untracked docs/design files or smoke screenshots."
+      ],
+      "expected_output": "Builder V2 transfer dialog parity for cross-team awakener, wheel, and posse conflicts, preserving V1 move/support semantics and V2 desktop/adaptive/mobile/quick-lineup accessibility with focused tests and validation.",
+      "receipt": {
+        "slice": "C8b Builder V2 transfer dialog parity",
+        "files_changed": [
+          "src/features/builder-v2/useBuilderV2Model.ts",
+          "src/features/builder-v2/useBuilderV2Model.test.ts",
+          "src/features/builder-v2/BuilderV2Page.tsx",
+          "src/features/builder-v2/BuilderV2Page.test.tsx",
+          "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+          "docs/refactor-goals/builder-v2-rebuild/state.json",
+          "docs/refactor-goals/builder-v2-rebuild/worklog.md"
+        ],
+        "behavior_added": [
+          "Builder V2 now uses the existing transfer confirmation request model and shared transfer resolution helpers for cross-team awakener, wheel, and posse conflicts.",
+          "Cross-team awakener assignment opens a Move dialog before mutation; confirm moves the awakener and clears the source slot, while cancel leaves teams unchanged.",
+          "Use as Support is offered when the target can use support; it keeps source ownership, assigns the active target as support, and sets level 90.",
+          "Cross-team wheel assignment opens a Move dialog; confirm clears only the source wheel socket and fills the target wheel socket.",
+          "Cross-team posse assignment opens a Move dialog; confirm clears source team posse and assigns active team posse.",
+          "Desktop, adaptive, and mobile flows render one accessible transfer dialog and avoid keeping the picker/drawer interactable behind it.",
+          "Quick Lineup waits on transfer confirmation and advances only after a successful confirm/support action."
+        ],
+        "behavior_preserved": [
+          "/builder files, builderDraftStore, persistence keys/versions, migrations, import/export codecs, generated data, dependencies, App route/nav, and global CSS outside builder-v2 were not edited.",
+          "Canceling a transfer preserves the source/target teams and the current V2 target/focus state.",
+          "Existing import/export dialogs and quick-lineup paths remain available after W7."
+        ],
+        "root_fix_patch_decision": "Bounded root-fix inside the Builder V2 facade: reuse current transfer request and resolution contracts rather than cloning V1 page state or keeping V2 as message-only conflict handling.",
+        "dependency_review": "No dependency changes made or needed.",
+        "characterization": [
+          "Initial red run failed the new V2 transfer tests because transferDialog/cancelTransfer did not exist and cross-team conflicts still blocked with messages.",
+          "Added focused model tests for awakener cancel/confirm, Use as Support, wheel confirm, posse confirm, and quick-lineup wait-before-advance behavior.",
+          "Added page tests for desktop transfer dialog cancel/confirm and adaptive drawer-to-transfer handoff without hidden background interaction.",
+          "Existing V1 transfer-confirm and transfer-resolution tests remained green as reference behavior."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (2 files, 49 tests passed)",
+          "npx vitest run src/features/builder/useTransferConfirm.test.ts src/features/builder/usePendingTransferDialog.test.ts src/features/builder/transfer-resolution.test.ts (3 files, 18 tests passed)",
+          "npm run test:integration (7 files, 57 tests passed)",
+          "npm run lint (passed)",
+          "npm run build (passed; existing Vite chunk-size/plugin timing warnings only)",
+          "git diff --check (passed)",
+          "Browser smoke: desktop transfer cancel/confirm, adaptive drawer handoff, mobile focused-picker handoff, and quick-lineup wait-before-confirm/advance all passed."
+        ],
+        "review": "R7 reviewer 019e4dd8-162d-7583-8762-91859ace71a9 found no findings and passed the W7 diff against invariants; reviewer did not rerun validation locally.",
+        "risks": [
+          "Transfer dialog visual presentation is parity-focused and should be polished during the later design handoff pass.",
+          "DnD transfer parity and recommendations remain outside W7.",
+          "Full team overview/list-vs-cards decisions remain unresolved and queued."
+        ],
+        "scope_expansion_requested": "None"
+      }
+    },
+    {
+      "id": "R7",
+      "role": "review",
+      "status": "done",
+      "title": "Review W7 C8b Builder V2 transfer dialog parity",
+      "skills": [
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/**",
+        "docs/refactor-goals/builder-v2-rebuild/**"
+      ],
+      "protected_files": [
+        "src/features/builder/** except read-only imports/references to existing transfer helpers/components",
+        "src/stores/builderDraftStore.ts",
+        "src/App.tsx",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain import/export codecs",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "nav/shared app chrome",
+        "remote state",
+        "untracked docs/design/** and smoke screenshots"
+      ],
+      "expected_output": "Review W7 diff, tests, packet receipts, invariants, and browser smoke for Builder V2 transfer dialog parity.",
+      "receipt": {
+        "summary": "Review passed with no findings.",
+        "reviewer": "019e4dd8-162d-7583-8762-91859ace71a9",
+        "findings": [],
+        "final_findings": [],
+        "final_verdict": "complete",
+        "validation_reviewed": [
+          "W7 reported focused V2 tests passed with 49 tests.",
+          "W7 reported V1 transfer helper tests passed with 18 tests.",
+          "W7 reported integration suite, lint, build, git diff --check, and desktop/adaptive/mobile/quick-lineup browser transfer smoke passed."
+        ],
+        "reviewer_notes": [
+          "Changes stay inside allowed V2 and packet files.",
+          "Protected /builder behavior, builderDraftStore, persistence/migrations, generated data, dependency files, and untracked design/smoke artifacts are untouched.",
+          "Transfer implementation reuses existing useTransferConfirm, BuilderTransferConfirmDialog, and transfer-resolution semantics.",
+          "No pre-confirm mutation, cancel clears only pending transfer state, confirm/support route through public Team state, and quick-lineup advances only after successful confirm/support."
+        ],
+        "residual_risk": [
+          "Reviewer did not rerun validation locally; controller validation receipts cover the passed commands."
+        ]
+      }
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1 landed the isolated Builder V2 route/model/shell, W2 added gear and posse assignment, W3/R3 implemented and reviewed Quick Lineup V2 mode, W4/R4 implemented and reviewed the C5 mobile overview/focused/full-screen picker drawer flow, S6 mapped next viable chunks, W5/R5 implemented and reviewed the C6a tablet/adaptive workbench shell, and W6/R6 implemented and reviewed C8a import/export parity. Broad Builder V2 rebuild remains active with C7a/C7/C8b/C9 queued.",
+    "summary": "W1 landed the isolated Builder V2 route/model/shell, W2 added gear and posse assignment, W3/R3 implemented and reviewed Quick Lineup V2 mode, W4/R4 implemented and reviewed the C5 mobile overview/focused/full-screen picker drawer flow, S6 mapped next viable chunks, W5/R5 implemented and reviewed the C6a tablet/adaptive workbench shell, W6/R6 implemented and reviewed C8a import/export parity, and W7/R7 implemented and reviewed C8b transfer dialog parity. Broad Builder V2 rebuild remains active with C7a/C7/C9 queued.",
     "validation": [
-      "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (44 tests passed)",
-      "npx vitest run src/features/builder/BuilderPage.import-export.test.tsx src/features/builder/import-planner.test.ts (18 tests passed)",
+      "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (49 tests passed)",
+      "npx vitest run src/features/builder/useTransferConfirm.test.ts src/features/builder/usePendingTransferDialog.test.ts src/features/builder/transfer-resolution.test.ts (18 tests passed)",
       "npm run test:integration (57 tests passed)",
       "npm run lint (passed)",
       "npm run build (passed; existing Vite chunk-size/plugin timing warnings only)",
       "git diff --check (passed)",
-      "Browser smoke for #/builder-v2 desktop Export All, adaptive Import, and mobile Export All import/export dialogs"
+      "Browser smoke for #/builder-v2 desktop transfer cancel/confirm, adaptive drawer handoff, mobile focused-picker handoff, and quick-lineup wait-before-confirm/advance"
     ],
     "open_items": [
       "C7a team overview readiness component",
       "C7 full teams overview redesign after product/design decision",
-      "C8b transfer dialog parity",
       "C9 designer handoff bundle"
     ]
   }

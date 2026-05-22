@@ -309,13 +309,16 @@ export function BuilderV2AdaptiveLayout({model}: BuilderV2AdaptiveLayoutProps) {
 
 function canCloseAfterAwakenerAssignment(model: BuilderV2Model, awakenerId: string) {
   const awakener = model.awakeners.find((option) => option.id === awakenerId)
-  return !awakener?.inUse
+  if (!awakener?.inUse) {
+    return true
+  }
+
+  return model.activeSelection?.kind === 'awakener' || model.slots.some((slot) => !slot.awakener)
 }
 
-function canCloseAfterWheelAssignment(model: BuilderV2Model, wheelId: string) {
-  const wheel = model.wheels.find((option) => option.id === wheelId)
+function canCloseAfterWheelAssignment(model: BuilderV2Model, _wheelId: string) {
   const selectedSlot = getSelectedLoadoutSlot(model)
-  if (!selectedSlot?.awakener || wheel?.inUse) {
+  if (!selectedSlot?.awakener) {
     return false
   }
 
@@ -335,9 +338,8 @@ function canCloseAfterCovenantAssignment(model: BuilderV2Model, covenantId: stri
   return Boolean(selectedSlot?.awakener) && !covenant?.inUse
 }
 
-function canCloseAfterPosseAssignment(model: BuilderV2Model, posseId: string) {
-  const posse = model.posses.find((option) => option.id === posseId)
-  return !posse || !posse.inUse || posse.isActive
+function canCloseAfterPosseAssignment(_model: BuilderV2Model, _posseId: string) {
+  return true
 }
 
 function getSelectedLoadoutSlot(model: BuilderV2Model) {

@@ -41,6 +41,7 @@ import {
   swapWheelAssignments,
   type TeamStateViolationCode,
 } from '../builder/team-state'
+import {applyPendingTransfer, applySupportTransfer} from '../builder/transfer-resolution'
 import type {
   ActiveSelection,
   QuickLineupSession,
@@ -50,6 +51,7 @@ import type {
   WheelUsageLocation,
 } from '../builder/types'
 import {useBuilderImportExport} from '../builder/useBuilderImportExport'
+import {useTransferConfirm, type PendingTransfer} from '../builder/useTransferConfirm'
 
 const BUILDER_V2_AUTOSAVE_DEBOUNCE_MS = 300
 const BUILDER_ALLOW_DUPES_KEY = 'skeydb.builder.allowDupes.v1'
@@ -141,6 +143,14 @@ export interface BuilderV2ActivePosseView {
   assetSrc: string | undefined
 }
 
+export interface BuilderV2TransferDialog {
+  title: string
+  message: string
+  supportLabel?: string
+  onSupport?: () => void
+  onConfirm: () => void
+}
+
 export interface BuilderV2Model {
   activeTeamId: string
   activeTeamName: string
@@ -184,6 +194,8 @@ export interface BuilderV2Model {
   openActiveTeamExportDialog: () => void
   openActiveTeamIngameExportDialog: () => void
   importExportDialogProps: BuilderImportExportDialogsProps
+  transferDialog: BuilderV2TransferDialog | null
+  cancelTransfer: () => void
   violationMessage: string | null
 }
 
@@ -226,6 +238,13 @@ export function useBuilderV2Model({
   const updateActiveTeam = useStore(builderDraftStore, (state) => state.updateActiveTeam)
   const setActiveTeamSlotsInStore = useStore(builderDraftStore, (state) => state.setActiveTeamSlots)
   const quickLineupState = useStore(builderDraftStore, (state) => state.quickLineupState)
+  const {
+    pendingTransfer,
+    requestAwakenerTransfer,
+    requestPosseTransfer,
+    requestWheelTransfer,
+    clearTransfer,
+  } = useTransferConfirm()
   const storeStartQuickLineup = useStore(builderDraftStore, (state) => state.startQuickLineup)
   const storeAdvanceQuickLineupStep = useStore(
     builderDraftStore,
@@ -621,10 +640,20 @@ export function useBuilderV2Model({
         usedAwakenerByIdentityKey,
       })
       if (owningTeamId) {
-        setViolationMessage(getAwakenerInUseMessage(awakenerId, owningTeamId, teams))
+        requestAwakenerTransfer({
+          awakenerName: awakenerById.get(awakenerId)?.name ?? 'Awakener',
+          awakenerId,
+          canUseSupport: !activeTeamSlots.some((slot) => slot.isSupport),
+          fromTeamId: owningTeamId,
+          toTeamId: effectiveActiveTeamId,
+          targetSlotId: targetSlotId ?? firstEmptySlotId,
+        })
+        setViolationMessage(null)
+        setPickerTab('awakeners')
         return
       }
 
+      clearTransfer()
       setActiveTeamSlotsInStore(result.nextSlots)
       setViolationMessage(null)
       setActiveTeamTarget(null)
@@ -643,11 +672,12 @@ export function useBuilderV2Model({
       activeTeamSlots,
       allowDuplicateAwakenerIdentities,
       advanceQuickLineupStep,
+      clearTransfer,
       effectiveActiveTeamId,
       quickLineupState,
+      requestAwakenerTransfer,
       setActiveSelection,
       setActiveTeamSlotsInStore,
-      teams,
       usedAwakenerByIdentityKey,
     ],
   )
@@ -696,7 +726,16 @@ export function useBuilderV2Model({
       }
 
       if (wheelOwner && wheelOwner.teamId !== effectiveActiveTeamId && !targetSlot.isSupport) {
-        setViolationMessage(getWheelInUseMessage(wheelId, wheelOwner.teamId, teams, wheelById))
+        requestWheelTransfer({
+          wheelId,
+          fromTeamId: wheelOwner.teamId,
+          fromSlotId: wheelOwner.slotId,
+          fromWheelIndex: wheelOwner.wheelIndex,
+          toTeamId: effectiveActiveTeamId,
+          targetSlotId: target.slotId,
+          targetWheelIndex: target.wheelIndex,
+        })
+        setViolationMessage(null)
         setPickerTab('wheels')
         return
       }
@@ -712,6 +751,7 @@ export function useBuilderV2Model({
         return
       }
 
+      clearTransfer()
       setActiveTeamSlotsInStore(result.nextSlots)
       setViolationMessage(null)
       setActiveTeamTarget(null)
@@ -728,13 +768,13 @@ export function useBuilderV2Model({
       activeTeamSlots,
       allowDuplicateAwakenerIdentities,
       advanceQuickLineupStep,
+      clearTransfer,
       effectiveActiveTeamId,
       quickLineupState,
+      requestWheelTransfer,
       setActiveSelection,
       setActiveTeamSlotsInStore,
-      teams,
       usedWheelByTeamOrder,
-      wheelById,
     ],
   )
 
@@ -800,11 +840,18 @@ export function useBuilderV2Model({
       const owningTeam = owningTeamOrder === undefined ? undefined : teams.at(owningTeamOrder)
 
       if (owningTeam && owningTeam.id !== effectiveActiveTeamId) {
-        setViolationMessage(getPosseInUseMessage(posseId, owningTeam.id, teams, posseById))
+        requestPosseTransfer({
+          posseId,
+          posseName: posseById.get(posseId)?.name ?? 'Posse',
+          fromTeamId: owningTeam.id,
+          toTeamId: effectiveActiveTeamId,
+        })
+        setViolationMessage(null)
         setPickerTab('posses')
         return
       }
 
+      clearTransfer()
       const isQuickLineupPosseStep = quickLineupSession?.currentStep.kind === 'posse'
       updateActiveTeam((team) => ({...team, posseId}))
       setViolationMessage(null)
@@ -818,9 +865,11 @@ export function useBuilderV2Model({
     [
       allowDuplicateAwakenerIdentities,
       advanceQuickLineupStep,
+      clearTransfer,
       effectiveActiveTeamId,
       posseById,
       quickLineupSession,
+      requestPosseTransfer,
       setActiveSelection,
       teams,
       updateActiveTeam,
@@ -907,7 +956,8 @@ export function useBuilderV2Model({
     setActiveSelection(null)
     setActiveTeamTarget(null)
     setViolationMessage(null)
-  }, [setActiveSelection, storeFinishQuickLineup])
+    clearTransfer()
+  }, [clearTransfer, setActiveSelection, storeFinishQuickLineup])
 
   const {
     openImportDialog,
@@ -939,6 +989,108 @@ export function useBuilderV2Model({
   const openActiveTeamIngameExportDialog = useCallback(() => {
     openTeamIngameExportDialog(effectiveActiveTeamId)
   }, [effectiveActiveTeamId, openTeamIngameExportDialog])
+
+  const applyTransferTeams = useCallback(
+    (nextTeams: Team[], transfer: PendingTransfer) => {
+      const currentTeams = builderDraftStore.getState().teams
+      if (nextTeams === currentTeams) {
+        return
+      }
+
+      builderDraftStore.getState().setTeams(nextTeams)
+      const nextActiveTeam =
+        nextTeams.find((team) => team.id === effectiveActiveTeamId) ?? activeTeam
+
+      setViolationMessage(null)
+      if (transfer.kind === 'awakener') {
+        const targetSlotId =
+          transfer.targetSlotId ??
+          nextActiveTeam.slots.find((slot) => slot.awakenerId === transfer.awakenerId)?.slotId
+        setActiveTeamTarget(null)
+        if (targetSlotId) {
+          setActiveSelection({kind: 'awakener', slotId: targetSlotId})
+        }
+      } else if (transfer.kind === 'wheel') {
+        setActiveTeamTarget(null)
+        setActiveSelection({
+          kind: 'wheel',
+          slotId: transfer.targetSlotId,
+          wheelIndex: transfer.targetWheelIndex === 0 ? 0 : 1,
+        })
+      } else {
+        setActiveSelection(null)
+        setActiveTeamTarget({kind: 'posse'})
+        setPickerTab('posses')
+      }
+
+      if (quickLineupState) {
+        syncQuickLineupFocus(storeAdvanceQuickLineupStep(nextActiveTeam.slots))
+      }
+    },
+    [
+      activeTeam,
+      effectiveActiveTeamId,
+      quickLineupState,
+      setActiveSelection,
+      storeAdvanceQuickLineupStep,
+      syncQuickLineupFocus,
+    ],
+  )
+
+  const confirmTransfer = useCallback(() => {
+    if (!pendingTransfer) {
+      return
+    }
+
+    applyTransferTeams(
+      applyPendingTransfer(builderDraftStore.getState().teams, pendingTransfer),
+      pendingTransfer,
+    )
+    clearTransfer()
+  }, [applyTransferTeams, clearTransfer, pendingTransfer])
+
+  const useSupportTransfer = useCallback(() => {
+    if (pendingTransfer?.kind !== 'awakener' || !pendingTransfer.canUseSupport) {
+      return
+    }
+
+    applyTransferTeams(
+      applySupportTransfer(builderDraftStore.getState().teams, pendingTransfer),
+      pendingTransfer,
+    )
+    clearTransfer()
+  }, [applyTransferTeams, clearTransfer, pendingTransfer])
+
+  const transferDialog = useMemo<BuilderV2TransferDialog | null>(() => {
+    if (!pendingTransfer) {
+      return null
+    }
+
+    const displayName = getTransferDisplayName(pendingTransfer, wheelById)
+    const fromTeamName =
+      teams.find((team) => team.id === pendingTransfer.fromTeamId)?.name ?? 'another team'
+    const toTeamName =
+      teams.find((team) => team.id === pendingTransfer.toTeamId)?.name ?? 'active team'
+
+    return {
+      title: `Move ${displayName}`,
+      message: `${displayName} is already used in ${fromTeamName}. Move to ${toTeamName}?`,
+      supportLabel:
+        pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport
+          ? 'Use as Support'
+          : undefined,
+      onSupport:
+        pendingTransfer.kind === 'awakener' && pendingTransfer.canUseSupport
+          ? useSupportTransfer
+          : undefined,
+      onConfirm: confirmTransfer,
+    }
+  }, [confirmTransfer, pendingTransfer, teams, useSupportTransfer, wheelById])
+
+  const cancelTransfer = useCallback(() => {
+    clearTransfer()
+    setViolationMessage(null)
+  }, [clearTransfer])
 
   const editingLabel = useMemo(
     () =>
@@ -994,6 +1146,8 @@ export function useBuilderV2Model({
     openActiveTeamExportDialog,
     openActiveTeamIngameExportDialog,
     importExportDialogProps,
+    transferDialog,
+    cancelTransfer,
     violationMessage,
   }
 }
@@ -1146,6 +1300,19 @@ function getQuickLineupStepLabel(
   return `${slotLabel} - Awakener`
 }
 
+function getTransferDisplayName(
+  pendingTransfer: PendingTransfer,
+  wheelById: Map<string, Wheel>,
+): string {
+  if (pendingTransfer.kind === 'awakener') {
+    return formatAwakenerNameForUi(pendingTransfer.itemName)
+  }
+  if (pendingTransfer.kind === 'wheel') {
+    return wheelById.get(pendingTransfer.wheelId)?.name ?? pendingTransfer.itemName
+  }
+  return pendingTransfer.itemName
+}
+
 function getEditingLabel({
   activeSelection,
   activeTeamTarget,
@@ -1175,28 +1342,6 @@ function getEditingLabel({
   }
 
   return `Editing ${slotLabel} - Awakener`
-}
-
-function getWheelInUseMessage(
-  wheelId: string,
-  owningTeamId: string,
-  teams: {id: string; name: string}[],
-  wheelById: Map<string, Wheel>,
-) {
-  const wheelName = wheelById.get(wheelId)?.name ?? 'That wheel'
-  const teamName = teams.find((team) => team.id === owningTeamId)?.name ?? 'another team'
-  return `${wheelName} is already assigned to ${teamName}. Remove it there before assigning it here.`
-}
-
-function getPosseInUseMessage(
-  posseId: string,
-  owningTeamId: string,
-  teams: {id: string; name: string}[],
-  posseById: Map<string, Posse>,
-) {
-  const posseName = posseById.get(posseId)?.name ?? 'That posse'
-  const teamName = teams.find((team) => team.id === owningTeamId)?.name ?? 'another team'
-  return `${posseName} is already assigned to ${teamName}. Remove it there before assigning it here.`
 }
 
 interface CrossTeamAwakenerOwnerOptions {
@@ -1231,18 +1376,6 @@ function getCrossTeamAwakenerOwner({
   }
 
   return owningTeamId
-}
-
-function getAwakenerInUseMessage(
-  awakenerId: string,
-  owningTeamId: string,
-  teams: {id: string; name: string}[],
-) {
-  const awakenerName = formatAwakenerNameForUi(
-    awakenerById.get(awakenerId)?.name ?? 'That awakener',
-  )
-  const teamName = teams.find((team) => team.id === owningTeamId)?.name ?? 'another team'
-  return `${awakenerName} is already assigned to ${teamName}. Remove them there before assigning them here.`
 }
 
 function getViolationMessage(violation: TeamStateViolationCode): string {

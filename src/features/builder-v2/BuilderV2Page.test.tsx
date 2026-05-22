@@ -385,6 +385,80 @@ describe('BuilderV2Page', () => {
     expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
   })
 
+  it('opens an accessible transfer dialog before moving an in-use V2 awakener', () => {
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+    saveBuilderDraft(window.localStorage, {
+      activeTeamId: 'team-1',
+      teams: [
+        {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+        {id: 'team-2', name: 'Team 2', slots: teamTwoSlots},
+      ],
+    })
+
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 2$/i}))
+    fireEvent.click(screen.getByRole('button', {name: /goliath.*in use/i}))
+
+    const transferDialog = screen.getByRole('dialog', {name: /move goliath/i})
+    expect(within(transferDialog).getByText(/already used in team 2/i)).toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: /remove goliath/i})).not.toBeInTheDocument()
+
+    fireEvent.click(within(transferDialog).getByRole('button', {name: /^cancel$/i}))
+
+    expect(screen.queryByRole('dialog', {name: /move goliath/i})).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: /remove goliath/i})).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /goliath.*in use/i}))
+    fireEvent.click(screen.getByRole('button', {name: /^move instead$/i}))
+
+    expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /02 team 2 0 \/ 4 deployed/i}))
+
+    expect(screen.queryByRole('button', {name: /remove goliath/i})).not.toBeInTheDocument()
+  })
+
+  it('hands adaptive drawer assignment to one transfer confirmation dialog', () => {
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+    saveBuilderDraft(window.localStorage, {
+      activeTeamId: 'team-1',
+      teams: [
+        {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+        {id: 'team-2', name: 'Team 2', slots: teamTwoSlots},
+      ],
+    })
+
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 1$/i}))
+    fireEvent.click(screen.getByRole('button', {name: /open adaptive picker/i}))
+
+    const drawer = screen.getByRole('dialog', {name: /adaptive picker/i})
+    fireEvent.click(within(drawer).getByRole('button', {name: /goliath.*in use/i}))
+
+    expect(screen.queryByRole('dialog', {name: /adaptive picker/i})).not.toBeInTheDocument()
+    expect(screen.getByRole('dialog', {name: /move goliath/i})).toBeInTheDocument()
+    expect(document.querySelector('.builder-v2-adaptive-workbench')).not.toHaveAttribute(
+      'aria-hidden',
+      'true',
+    )
+  })
+
   it('renders the mobile overview and enters the focused slot builder', () => {
     resizeBuilderV2Viewport(390)
     render(<BuilderV2Page />)

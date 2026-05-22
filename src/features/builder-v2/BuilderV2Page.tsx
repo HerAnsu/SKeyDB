@@ -6,6 +6,7 @@ import {Toast} from '@/components/ui/Toast'
 import {useTimedToast} from '@/components/ui/useTimedToast'
 
 import {BuilderImportExportDialogs} from '../builder/BuilderImportExportDialogs'
+import {BuilderTransferConfirmDialog} from '../builder/BuilderTransferConfirmDialog'
 import {BuilderV2AdaptiveLayout} from './BuilderV2AdaptiveLayout'
 import {BuilderV2AwakenerPicker} from './BuilderV2AwakenerPicker'
 import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
@@ -192,6 +193,7 @@ export function BuilderV2Page() {
   return (
     <>
       {content}
+      <BuilderTransferConfirmDialog dialog={model.transferDialog} onCancel={model.cancelTransfer} />
       <BuilderImportExportDialogs {...model.importExportDialogProps} />
       <Toast entries={toastEntries} />
     </>

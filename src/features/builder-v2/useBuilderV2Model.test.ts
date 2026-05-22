@@ -7,7 +7,6 @@ import {getAwakenerIdentityKeyById} from '@/domain/awakener-identity'
 import {builderDraftStore} from '@/stores/builderDraftStore'
 
 import {createEmptyTeamSlots} from '../builder/constants'
-
 import {useBuilderV2Model} from './useBuilderV2Model'
 
 function getAssignedIdentityCount(awakenerIds: (string | undefined)[], targetId: string) {
@@ -104,7 +103,7 @@ describe('useBuilderV2Model', () => {
     expect(result.current.slots[1]?.awakener?.id).toBe('awakener-0020')
   })
 
-  it('blocks assigning an awakener already used by another team', () => {
+  it('opens a transfer dialog before moving an awakener from another team', () => {
     const {result} = renderHook(() => useBuilderV2Model())
     const teamOneSlots = createEmptyTeamSlots()
     const teamTwoSlots = createEmptyTeamSlots()
@@ -129,10 +128,90 @@ describe('useBuilderV2Model', () => {
       result.current.assignAwakener('awakener-0021')
     })
 
-    expect(result.current.violationMessage).toBe(
-      'Goliath is already assigned to Team 2. Remove them there before assigning them here.',
-    )
+    expect(result.current.transferDialog?.title).toBe('Move Goliath')
     expect(result.current.slots.every((slot) => slot.awakener === null)).toBe(true)
+    expect(builderDraftStore.getState().teams[1]?.slots[0]?.awakenerId).toBe('awakener-0021')
+
+    act(() => {
+      result.current.cancelTransfer()
+    })
+
+    expect(result.current.transferDialog).toBeNull()
+    expect(result.current.slots.every((slot) => slot.awakener === null)).toBe(true)
+    expect(builderDraftStore.getState().teams[1]?.slots[0]?.awakenerId).toBe('awakener-0021')
+  })
+
+  it('confirms an awakener transfer and clears the source team slot', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+    const teamOneSlots = createEmptyTeamSlots()
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: teamOneSlots},
+          {id: 'team-2', name: 'Team 2', slots: teamTwoSlots},
+        ],
+      })
+    })
+
+    act(() => {
+      result.current.selectAwakenerSlot('slot-2')
+    })
+    act(() => {
+      result.current.assignAwakener('awakener-0021')
+    })
+    act(() => {
+      result.current.transferDialog?.onConfirm()
+    })
+
+    expect(result.current.transferDialog).toBeNull()
+    expect(result.current.slots[1]?.awakener?.id).toBe('awakener-0021')
+    expect(result.current.activeSelection).toEqual({kind: 'awakener', slotId: 'slot-2'})
+    expect(builderDraftStore.getState().teams[1]?.slots[0]?.awakenerId).toBeUndefined()
+  })
+
+  it('can use a transferred awakener as support without clearing the source team', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+    const teamOneSlots = createEmptyTeamSlots()
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: teamOneSlots},
+          {id: 'team-2', name: 'Team 2', slots: teamTwoSlots},
+        ],
+      })
+    })
+
+    act(() => {
+      result.current.assignAwakener('awakener-0021')
+    })
+
+    expect(result.current.transferDialog?.supportLabel).toBe('Use as Support')
+
+    act(() => {
+      result.current.transferDialog?.onSupport?.()
+    })
+
+    expect(result.current.slots[0]?.awakener?.id).toBe('awakener-0021')
+    expect(result.current.slots[0]?.awakener?.isSupport).toBe(true)
+    expect(result.current.slots[0]?.awakener?.level).toBe(90)
     expect(builderDraftStore.getState().teams[1]?.slots[0]?.awakenerId).toBe('awakener-0021')
   })
 
@@ -206,7 +285,7 @@ describe('useBuilderV2Model', () => {
     expect(result.current.slots[1]?.wheels).toEqual([null, 'wheel-0050'])
   })
 
-  it('blocks assigning a wheel already used by another team', () => {
+  it('confirms a wheel transfer and clears the source wheel socket', () => {
     const {result} = renderHook(() => useBuilderV2Model())
     const teamOneSlots = createEmptyTeamSlots()
     const teamTwoSlots = createEmptyTeamSlots()
@@ -240,11 +319,18 @@ describe('useBuilderV2Model', () => {
       result.current.assignWheel('wheel-0050')
     })
 
-    expect(result.current.violationMessage).toBe(
-      'Merciful Nurturing is already assigned to Team 2. Remove it there before assigning it here.',
-    )
+    expect(result.current.transferDialog?.title).toBe('Move Merciful Nurturing')
     expect(result.current.slots[0]?.wheels).toEqual([null, null])
     expect(builderDraftStore.getState().teams[1]?.slots[0]?.wheels).toEqual(['wheel-0050', null])
+
+    act(() => {
+      result.current.transferDialog?.onConfirm()
+    })
+
+    expect(result.current.transferDialog).toBeNull()
+    expect(result.current.slots[0]?.wheels).toEqual(['wheel-0050', null])
+    expect(result.current.activeSelection).toEqual({kind: 'wheel', slotId: 'slot-1', wheelIndex: 0})
+    expect(builderDraftStore.getState().teams[1]?.slots[0]?.wheels).toEqual([null, null])
   })
 
   it('assigns and clears a covenant on a selected slot', () => {
@@ -325,7 +411,7 @@ describe('useBuilderV2Model', () => {
     expect(builderDraftStore.getState().teams[0]?.posseId).toBeUndefined()
   })
 
-  it('blocks assigning a posse already used by another team', () => {
+  it('confirms a posse transfer and clears the source team posse', () => {
     const {result} = renderHook(() => useBuilderV2Model())
 
     act(() => {
@@ -344,11 +430,64 @@ describe('useBuilderV2Model', () => {
       result.current.assignPosse('posse-0033')
     })
 
-    expect(result.current.violationMessage).toBe(
-      'Taverns Opening is already assigned to Team 2. Remove it there before assigning it here.',
-    )
+    expect(result.current.transferDialog?.title).toBe('Move Taverns Opening')
     expect(builderDraftStore.getState().teams[0]?.posseId).toBeUndefined()
     expect(builderDraftStore.getState().teams[1]?.posseId).toBe('posse-0033')
+
+    act(() => {
+      result.current.transferDialog?.onConfirm()
+    })
+
+    expect(result.current.transferDialog).toBeNull()
+    expect(builderDraftStore.getState().teams[0]?.posseId).toBe('posse-0033')
+    expect(builderDraftStore.getState().teams[1]?.posseId).toBeUndefined()
+    expect(result.current.activeTeamTarget).toEqual({kind: 'posse'})
+  })
+
+  it('waits to advance quick lineup until a cross-team transfer is confirmed', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+          {id: 'team-2', name: 'Team 2', slots: teamTwoSlots},
+        ],
+      })
+    })
+    act(() => {
+      result.current.startQuickLineup()
+    })
+    act(() => {
+      result.current.assignAwakener('awakener-0021')
+    })
+
+    expect(result.current.transferDialog?.title).toBe('Move Goliath')
+    expect(result.current.quickLineupSession?.currentStep).toEqual({
+      kind: 'awakener',
+      slotId: 'slot-1',
+    })
+    expect(result.current.slots[0]?.awakener).toBeNull()
+
+    act(() => {
+      result.current.transferDialog?.onConfirm()
+    })
+
+    expect(result.current.slots[0]?.awakener?.id).toBe('awakener-0021')
+    expect(result.current.quickLineupSession?.currentStep).toEqual({
+      kind: 'wheel',
+      slotId: 'slot-1',
+      wheelIndex: 0,
+    })
+    expect(builderDraftStore.getState().teams[1]?.slots[0]?.awakenerId).toBeUndefined()
   })
 
   it('runs quick lineup through awakener and loadout assignment steps', () => {

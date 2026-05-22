@@ -405,3 +405,62 @@
 - Packaging:
   - Untracked concept/sendoff files under `docs/design/` and prior smoke screenshots remain intentionally excluded.
 - Active task: none. C8a is implemented and reviewed; broader Builder V2 goal remains active with C7a, C7, C8b, and C9 queued.
+
+### 2026-05-22 - C8b transfer parity slice scoped
+
+- Judge: `019e4dcb-875b-7fc1-a8fb-23d62ca72633`.
+- Decision: Approve `C8b`, Builder V2 transfer dialog parity, as the next bounded Worker slice.
+- Reason:
+  - `C8a` import/export parity is implemented and reviewed in `f2902ac3`.
+  - The largest remaining core behavior gap is cross-team conflict handling: V2 currently blocks in-use awakeners, wheels, and posses with messages.
+  - V1 already has transfer helper/dialog/resolution contracts that can be reused or adapted without changing `/builder`.
+  - This closes more core builder behavior than C7a screenshot/readiness polish and is less product-blocked than full C7.
+- In scope:
+  - Cross-team awakener conflict opens a transfer confirmation before mutation.
+  - Confirmed awakener move clears the source owner and assigns the active target slot.
+  - Use-as-support, when available, keeps source ownership, marks target support, and sets level 90.
+  - Cross-team wheel conflict opens a transfer confirmation; confirm clears the source wheel socket and assigns the target wheel.
+  - Cross-team posse conflict opens a transfer confirmation; confirm clears source team posse and assigns active team posse.
+  - Desktop, adaptive, mobile, and Quick Lineup flows avoid competing active modals and preserve focus/step behavior.
+- Deferred:
+  - DnD transfer parity, team CRUD/reorder, C7a/C7 overview redesign, recommendations, nav promotion, visual handoff polish, dependency changes, persistence/migration changes, `/builder` edits, and remote state.
+- Active task: W7, build C8b Builder V2 transfer dialog parity.
+
+### 2026-05-22 - W7 implemented and R7 review passed
+
+- W7 result: implemented C8b Builder V2 transfer dialog parity inside the isolated Builder V2 boundary.
+- Product files changed:
+  - `src/features/builder-v2/useBuilderV2Model.ts`
+  - `src/features/builder-v2/useBuilderV2Model.test.ts`
+  - `src/features/builder-v2/BuilderV2Page.tsx`
+  - `src/features/builder-v2/BuilderV2Page.test.tsx`
+  - `src/features/builder-v2/BuilderV2AdaptiveLayout.tsx`
+- Behavior:
+  - Builder V2 now reuses the existing transfer request and transfer-resolution contracts for cross-team awakeners, wheels, and posses.
+  - Cross-team conflicts open a Move confirmation before mutation.
+  - Cancel leaves source and target teams unchanged.
+  - Confirm moves the chosen awakener, wheel, or posse and clears the previous owner/socket through public `Team` state.
+  - Use as Support keeps the source owner, assigns the active target as support, and sets level 90 when support is available.
+  - Adaptive and mobile picker drawers hand off to one accessible transfer dialog instead of leaving the picker/background interactable behind it.
+  - Quick Lineup waits on transfer confirmation and advances only after a successful confirm/support action.
+- Characterization:
+  - Initial red run failed because V2 had no `transferDialog`/`cancelTransfer` API and still blocked cross-team conflicts with messages.
+  - Added model coverage for awakener cancel/confirm, Use as Support, wheel confirm, posse confirm, and quick-lineup wait-before-advance behavior.
+  - Added page coverage for desktop transfer cancel/confirm and adaptive drawer-to-transfer handoff.
+  - Existing V1 transfer-confirm and transfer-resolution tests stayed green as reference behavior.
+- Validation:
+  - `npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx` passed, 2 files / 49 tests.
+  - `npx vitest run src/features/builder/useTransferConfirm.test.ts src/features/builder/usePendingTransferDialog.test.ts src/features/builder/transfer-resolution.test.ts` passed, 3 files / 18 tests.
+  - `npm run test:integration` passed, 7 files / 57 tests.
+  - `npm run lint` passed.
+  - `npm run build` passed; existing Vite chunk-size and plugin timing warnings only.
+  - `git diff --check` passed.
+  - Browser smoke passed for desktop transfer cancel/confirm, adaptive drawer handoff, mobile focused-picker handoff, and quick-lineup wait-before-confirm/advance.
+- Review:
+  - Reviewer: `019e4dd8-162d-7583-8762-91859ace71a9`.
+  - Findings: none.
+  - Final reviewer verdict: pass.
+  - Reviewer did not rerun validation locally; controller validation receipts cover the passed commands.
+- Packaging:
+  - Untracked concept/sendoff files under `docs/design/` and prior smoke screenshots remain intentionally excluded.
+- Active task: none. C8b is implemented and reviewed; broader Builder V2 goal remains active with C7a, C7, and C9 queued.
