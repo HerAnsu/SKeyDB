@@ -682,7 +682,7 @@
     {
       "id": "J4",
       "role": "judge",
-      "status": "active",
+      "status": "done",
       "title": "Choose picker query extraction Worker slice",
       "skills": [
         "$refactor-rootfix",
@@ -706,21 +706,155 @@
         "docs/design/**"
       ],
       "expected_output": "Decide the C6 Worker slice for pure picker option query modules. C6 scout recommends a pure builder-v2-picker-options.ts module and direct helper tests.",
+      "receipt": {
+        "evidence": [
+          "Selected C6 Pure picker option query modules as W4.",
+          "C6 is the next root-fix slice because W1-W3 moved loadout/editing semantics out of the hook, while useBuilderV2Model.ts still owns four large picker option pipelines plus sorting/recommendation helpers.",
+          "Kept picker redesign, adaptive drawer shape, teams-list, DnD, CSS polish, dependency/state-library changes, and shared /builder behavior out of W4."
+        ],
+        "validation": [
+          "Approved W4 allowed files, invariants, validation, and rollback."
+        ]
+      }
+    },
+    {
+      "id": "W4",
+      "role": "worker",
+      "status": "done",
+      "title": "Extract pure Builder V2 picker option queries",
+      "skills": [
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "src/features/builder-v2/builder-v2-picker-options.ts",
+        "src/features/builder-v2/builder-v2-picker-options.test.ts",
+        "src/features/builder-v2/useBuilderV2Model.test.ts",
+        "src/features/builder-v2/BuilderV2ModelTypes.ts",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "src/features/builder-v2/BuilderV2AwakenerPicker.tsx",
+        "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+        "src/features/builder-v2/BuilderV2MobileLayout.tsx",
+        "src/features/builder-v2/builder-v2.css",
+        "src/features/builder/** shared runtime code",
+        "picker redesign",
+        "mobile/tablet layout",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Move Builder V2 picker option construction, sorting, recommendation, ownership-sinking, and status-label helpers into a pure local module while preserving the hook's inactive-tab empty-array behavior and visible picker ordering/statuses.",
+      "invariants": [
+        "Do not change picker layout, chrome, filters, CSS, mobile/adaptive drawer behavior, or teams-list shape.",
+        "Do not touch shared /builder runtime code or persistence behavior in W4.",
+        "The hook should still return empty option arrays for inactive picker tabs.",
+        "Picker option labels, blocked/in-use/owned/recommended flags, recommendation labels, and sorting/filtering behavior must remain stable.",
+        "If extraction requires changing public model types, keep the change local to Builder V2 and add focused tests."
+      ],
+      "validation": [
+        "npx vitest run src/features/builder-v2/builder-v2-picker-options.test.ts src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run",
+        "npx tsc -p tsconfig.app.json --noEmit",
+        "targeted npx eslint over touched Builder V2 files",
+        "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening"
+      ],
+      "rollback": [
+        "Remove builder-v2-picker-options.ts and its tests, then inline the original picker useMemo logic/helpers back into useBuilderV2Model.ts and revert W4 packet receipt updates."
+      ],
+      "receipt": {
+        "evidence": [
+          "Added src/features/builder-v2/builder-v2-picker-options.ts as a pure local module for awakener, wheel, covenant, and posse picker option construction.",
+          "useBuilderV2Model.ts now keeps the React memo gates and inactive-tab empty-array behavior, but delegates picker sorting, filtering, recommendation metadata, ownership sinking, and status-label projection to the pure module.",
+          "Added src/features/builder-v2/builder-v2-picker-options.test.ts with focused coverage for awakener ownership/duplicate labels, wheel recommendation labels and mainstat metadata, covenant recommendation labels, and posse status priority.",
+          "Scout subagent 019e51b3-1755-7e32-8959-b8480fec56b9 identified extraction invariants; W4 preserved search relevance order, entity-specific ownership filter/sink order, status labels, and recommendation labels.",
+          "Reviewer subagent 019e51b9-b735-77b2-8b8c-f85f8339af43 found no scoped code regressions. It noted untracked docs/design mockups as a possible scope issue; those files are pre-existing untracked reference images and were not staged or changed by W4."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/builder-v2-picker-options.test.ts src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 80 tests.",
+          "npx tsc -p tsconfig.app.json --noEmit passed.",
+          "npx eslint src/features/builder-v2/useBuilderV2Model.ts src/features/builder-v2/builder-v2-picker-options.ts src/features/builder-v2/builder-v2-picker-options.test.ts passed.",
+          "Goal checker returned OK after W4 packet updates."
+        ]
+      }
+    },
+    {
+      "id": "R3",
+      "role": "review",
+      "status": "done",
+      "title": "Review W4 picker query extraction",
+      "skills": [
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "read-only current W4 diff",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "product source edits during review",
+        "remote state"
+      ],
+      "expected_output": "Audit W4 for behavior drift, React dependency issues, type drift, stale packet issues, and protected-scope drift.",
+      "receipt": {
+        "evidence": [
+          "Reviewer subagent 019e51b9-b735-77b2-8b8c-f85f8339af43 found no sorting/search relevance, ownership sinking, status-label, recommendation-label, inactive-tab, React dependency, or TypeScript drift in the scoped code.",
+          "The reviewer noted untracked docs/design mockups as a possible protected-scope issue. Controller treated this as non-blocking because those files were pre-existing untracked references and were not changed or staged."
+        ],
+        "validation": [
+          "Controller ran the full W4 validation suite, app typecheck, targeted eslint, and packet checker successfully."
+        ]
+      }
+    },
+    {
+      "id": "J5",
+      "role": "judge",
+      "status": "active",
+      "title": "Choose next contained post-picker-extraction slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-ui-a11y",
+        "$refactor-complexity"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/builder-v2-architecture-hardening/**",
+        "read-only W4 diff",
+        "read-only C7/C9/C10/C11/C12 candidate evidence"
+      ],
+      "protected_files": [
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Select the next bounded tranche after C6. Prefer a contained root-fix or high-leverage a11y/code-health slice that does not drift into mobile layout, teams-list, DnD, CSS redesign, or dependencies.",
       "receipt": null
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1/W2 landed command-boundary hardening and W3 landed the C3 editing-target boundary. Broad hardening outcome is not complete; J4 is active for C6 picker query extraction.",
+    "summary": "W1/W2 landed command-boundary hardening, W3 landed the C3 editing-target boundary, and W4 landed C6 picker query extraction. Broad hardening outcome is not complete; J5 is active to choose the next contained slice.",
     "validation": [
       "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 68 tests.",
       "npx vitest run src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 76 tests after W3.",
       "npx tsc -p tsconfig.app.json --noEmit passed.",
       "targeted eslint passed for W2 and W3 touched files.",
-      "Goal checker OK after W3/R2/J4 packet transition."
+      "Goal checker OK after W3/R2/J4 packet transition.",
+      "W4 focused picker/model/page tests passed with 80 tests; app typecheck, targeted eslint, and packet checker passed."
     ],
     "open_items": [
-      "J4 choose C6 picker query extraction Worker slice.",
+      "J5 choose next contained post-picker-extraction slice.",
       "C4-C16 queued candidates remain open until implemented, superseded, blocked, or out of scope.",
       "M1-M2 maintenance candidates remain open."
     ]

@@ -12,37 +12,21 @@ import {useStore} from 'zustand'
 
 import {getAwakenerCardAsset, getAwakenerPortraitAsset} from '@/domain/awakener-assets'
 import {
-  AWAKENER_BUILD_WHEEL_TIERS,
-  compareCovenantsForBuildRecommendation,
-  getCovenantRecommendationIndex,
-  type AwakenerBuild,
-  type AwakenerBuildWheelTier,
-} from '@/domain/awakener-builds'
-import {getAwakenerIdentityKeyById} from '@/domain/awakener-identity'
-import type {Awakener} from '@/domain/awakeners'
-import {searchAwakenerResults} from '@/domain/awakeners-search'
-import {
-  compareAwakenersForCollectionSort,
-  compareWheelsForCollectionSort,
   resolveAwakenerSortKey,
   type AwakenerSortKey,
   type CollectionSortDirection,
   type WheelCollectionSortKey,
 } from '@/domain/collection-sorting'
 import {getCovenantAssetById} from '@/domain/covenant-assets'
-import {getCovenants, type Covenant} from '@/domain/covenants'
-import {searchCovenants} from '@/domain/covenants-search'
+import {getCovenants} from '@/domain/covenants'
 import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getPosseAssetById} from '@/domain/posse-assets'
 import {getPosses, type Posse} from '@/domain/posses'
-import {searchPosses} from '@/domain/posses-search'
-import {compareSearchRelevance, getSearchRelevanceByEntityId} from '@/domain/search-relevance'
 import {getBrowserLocalStorage, safeStorageRead, safeStorageWrite} from '@/domain/storage'
 import {getWheelAssetById} from '@/domain/wheel-assets'
-import {matchesWheelMainstat, type WheelMainstatFilter} from '@/domain/wheel-mainstat-filters'
+import type {WheelMainstatFilter} from '@/domain/wheel-mainstat-filters'
 import {compareWheelsForUi} from '@/domain/wheel-sort'
-import {getWheelMainstatLabel, getWheels, type Wheel} from '@/domain/wheels'
-import {searchWheels} from '@/domain/wheels-search'
+import {getWheels, type Wheel} from '@/domain/wheels'
 import {
   builderDraftStore,
   createDefaultBuilderDraft,
@@ -68,7 +52,6 @@ import {
   clearCovenantAssignment,
   clearSlotAssignment,
   clearWheelAssignment,
-  getTeamRealmSet,
 } from '../builder/team-state'
 import {applyPendingTransfer, applySupportTransfer} from '../builder/transfer-resolution'
 import type {
@@ -93,6 +76,13 @@ import {
   resolveAssignWheelCommand,
   type BuilderV2ResolvedLoadoutCommand,
 } from './builder-v2-loadout-commands'
+import {
+  createBuilderV2AwakenerOptions,
+  createBuilderV2CovenantOptions,
+  createBuilderV2PosseOptions,
+  createBuilderV2WheelOptions,
+  createWheelRecommendationMetaById,
+} from './builder-v2-picker-options'
 import {buildBuilderV2UsageIndex} from './builder-v2-usage-index'
 import type {
   BuilderV2ActivePosseView,
@@ -300,10 +290,6 @@ export function useBuilderV2Model({
   const activeTeamSlots = activeTeam.slots
   const allWheels = useMemo(() => [...getWheels()].sort(compareWheelsForUi), [])
   const wheelById = useMemo(() => new Map(allWheels.map((wheel) => [wheel.id, wheel])), [allWheels])
-  const wheelAssetById = useMemo(
-    () => new Map(allWheels.map((wheel) => [wheel.id, getWheelAssetById(wheel.id)])),
-    [allWheels],
-  )
   const allCovenants = useMemo(
     () => [...getCovenants()].sort((left, right) => left.name.localeCompare(right.name)),
     [],
@@ -492,64 +478,22 @@ export function useBuilderV2Model({
       return []
     }
 
-    const searchResults = searchAwakenerResults(allAwakeners, searchQueryByTab.awakeners)
-    const searched = searchResults.map((result) => result.entity)
-    const relevanceById = getSearchRelevanceByEntityId(searchResults, searchQueryByTab.awakeners)
-    const byRealm =
-      awakenerFilter === 'ALL'
-        ? searched
-        : searched.filter((awakener) => awakener.realm.trim().toUpperCase() === awakenerFilter)
-    const byOwnership = displayUnowned
-      ? byRealm
-      : byRealm.filter((awakener) => isAwakenerOwnedByName(awakener.name))
-    const sortableAwakenerById = new Map(
-      byOwnership.map((awakener) => [
-        awakener.id,
-        createSortableAwakenerEntry(awakener, ownedAwakenerLevelByName, awakenerLevelByName),
-      ]),
-    )
-    const sorted = [...byOwnership].sort((left, right) => {
-      const relevanceCompare = compareSearchRelevance(left, right, relevanceById)
-      if (relevanceCompare !== 0) {
-        return relevanceCompare
-      }
-      const leftSortable = sortableAwakenerById.get(left.id)
-      const rightSortable = sortableAwakenerById.get(right.id)
-      if (!leftSortable || !rightSortable) {
-        return 0
-      }
-      return compareAwakenersForCollectionSort(leftSortable, rightSortable, {
-        key: awakenerSortKey,
-        direction: awakenerSortDirection,
-        groupByRealm: awakenerSortGroupByRealm,
-      })
-    })
-    const visible = sinkUnownedToBottom
-      ? sinkUnownedToEnd(sorted, (awakener) => isAwakenerOwnedByName(awakener.name))
-      : sorted
-    const teamRealmSet = getTeamRealmSet(activeTeamSlots)
-
-    return visible.map((awakener) => {
-      const identityKey = getAwakenerIdentityKeyById(awakener.id)
-      const inUse = usedAwakenerIdentityKeys.has(identityKey)
-      const usedTeamOrder = usageIndex.awakenerByIdentityKey.get(identityKey)?.teamOrder
-      const blockedByDupes = !allowDuplicateAwakenerIdentities && inUse
-      const blockedByRealm =
-        teamRealmSet.size >= 2 && !teamRealmSet.has(awakener.realm.trim().toUpperCase())
-      return {
-        id: awakener.id,
-        name: awakener.name,
-        displayName: formatAwakenerNameForUi(awakener.name),
-        realm: awakener.realm,
-        portraitSrc: getAwakenerPortraitAsset(awakener.name),
-        inUse,
-        inUseLabel: usedTeamOrder === undefined ? null : `Team ${String(usedTeamOrder + 1)}`,
-        owned: isAwakenerOwnedByName(awakener.name),
-        level: awakenerLevelByName.get(awakener.name) ?? 60,
-        enlightenLevel: ownedAwakenerLevelByName.get(awakener.name) ?? null,
-        blocked: blockedByDupes || blockedByRealm,
-        blockReason: blockedByDupes ? 'In use' : blockedByRealm ? 'Realm limit' : null,
-      }
+    return createBuilderV2AwakenerOptions({
+      allAwakeners,
+      searchQuery: searchQueryByTab.awakeners,
+      filter: awakenerFilter,
+      displayUnowned,
+      sinkUnownedToBottom,
+      allowDuplicateAwakenerIdentities,
+      sortKey: awakenerSortKey,
+      sortDirection: awakenerSortDirection,
+      sortGroupByRealm: awakenerSortGroupByRealm,
+      activeTeamSlots,
+      usedAwakenerIdentityKeys,
+      usageAwakenerByIdentityKey: usageIndex.awakenerByIdentityKey,
+      ownedAwakenerLevelByName,
+      awakenerLevelByName,
+      isAwakenerOwnedByName,
     })
   }, [
     activeTeamSlots,
@@ -574,63 +518,22 @@ export function useBuilderV2Model({
       return []
     }
 
-    const byRarity =
-      wheelRarityFilter === 'ALL'
-        ? allWheels
-        : allWheels.filter((wheel) => wheel.rarity === wheelRarityFilter)
-    const byMainstat =
-      wheelMainstatFilter === 'ALL'
-        ? byRarity
-        : byRarity.filter((wheel) => matchesWheelMainstat(wheel.mainstatKey, wheelMainstatFilter))
-    const visible = displayUnowned
-      ? byMainstat
-      : byMainstat.filter((wheel) => isWheelOwnedById(wheel.id))
-    const searched = searchWheels(visible, searchQueryByTab.wheels)
-    const sortableWheelById = new Map(
-      searched.map((wheel) => [wheel.id, createSortableWheelEntry(wheel, ownedWheelLevelById)]),
-    )
-    const wheelFallbackCompare = (left: Wheel, right: Wheel) =>
-      compareSortableWheels(left, right, sortableWheelById, {
-        key: wheelSortKey,
-        direction: wheelSortDirection,
-      })
-    const sorted = [...searched].sort((left, right) =>
-      promoteRecommendedGear
-        ? compareWheelsForCachedBuildRecommendation(left, right, {
-            fallbackCompare: wheelFallbackCompare,
-            promoteMainstats: promoteMatchingWheelMainstats,
-            recommendationById: wheelRecommendationById,
-          })
-        : wheelFallbackCompare(left, right),
-    )
-    const ordered = sinkUnownedToBottom
-      ? sinkUnownedToEnd(sorted, (wheel) => isWheelOwnedById(wheel.id))
-      : sorted
-
-    return ordered.map((wheel) => {
-      const usedByTeam = usedWheelByTeamOrder.get(wheel.id)
-      const recommendationMeta = wheelRecommendationById.get(wheel.id)
-      const recommendationTier = recommendationMeta?.tier ?? null
-      const recommendedMainstatKey =
-        promoteMatchingWheelMainstats && recommendationMeta?.mainstatIndex !== undefined
-          ? wheel.mainstatKey
-          : null
-      return {
-        id: wheel.id,
-        name: wheel.name,
-        rarity: wheel.rarity,
-        realm: wheel.realm,
-        mainstat: getWheelMainstatLabel(wheel),
-        mainstatKey: wheel.mainstatKey,
-        assetSrc: wheelAssetById.get(wheel.id),
-        inUse: usedWheelIds.has(wheel.id),
-        inUseLabel: usedByTeam ? `Team ${String(usedByTeam.teamOrder + 1)}` : null,
-        owned: isWheelOwnedById(wheel.id),
-        enlightenLevel: ownedWheelLevelById.get(wheel.id) ?? null,
-        recommended: Boolean(recommendationTier ?? recommendedMainstatKey),
-        recommendationLabel: getWheelRecommendationChipLabel(recommendationTier),
-        recommendedMainstatKey,
-      }
+    return createBuilderV2WheelOptions({
+      allWheels,
+      searchQuery: searchQueryByTab.wheels,
+      rarityFilter: wheelRarityFilter,
+      mainstatFilter: wheelMainstatFilter,
+      displayUnowned,
+      sinkUnownedToBottom,
+      promoteRecommendedGear,
+      promoteMatchingWheelMainstats,
+      sortKey: wheelSortKey,
+      sortDirection: wheelSortDirection,
+      recommendationById: wheelRecommendationById,
+      usedWheelIds,
+      usedWheelByTeamOrder,
+      ownedWheelLevelById,
+      isWheelOwnedById,
     })
   }, [
     allWheels,
@@ -644,7 +547,6 @@ export function useBuilderV2Model({
     sinkUnownedToBottom,
     usedWheelIds,
     usedWheelByTeamOrder,
-    wheelAssetById,
     wheelMainstatFilter,
     wheelRecommendationById,
     wheelRarityFilter,
@@ -657,26 +559,12 @@ export function useBuilderV2Model({
       return []
     }
 
-    const searched = searchCovenants(allCovenants, searchQueryByTab.covenants)
-    const sorted = [...searched].sort((left, right) =>
-      promoteRecommendedGear
-        ? compareCovenantsForBuildRecommendation(left, right, activeBuild, {
-            fallbackCompare: compareCovenantsById,
-          })
-        : compareCovenantsById(left, right),
-    )
-
-    return sorted.map((covenant) => {
-      const recommendationIndex = getCovenantRecommendationIndex(activeBuild, covenant.id)
-      return {
-        id: covenant.id,
-        name: covenant.name,
-        assetSrc: getCovenantAssetById(covenant.id),
-        inUse: activeTeamSlots.some((slot) => slot.covenantId === covenant.id),
-        recommended: recommendationIndex >= 0,
-        recommendationLabel:
-          recommendationIndex >= 0 ? `#${String(recommendationIndex + 1)}` : null,
-      }
+    return createBuilderV2CovenantOptions({
+      allCovenants,
+      searchQuery: searchQueryByTab.covenants,
+      activeBuild,
+      activeTeamSlots,
+      promoteRecommendedGear,
     })
   }, [
     activeBuild,
@@ -692,61 +580,21 @@ export function useBuilderV2Model({
       return []
     }
 
-    const searched = searchPosses(allPosses, searchQueryByTab.posses)
-    const byFilter = searched.filter((posse) => {
-      if (posseFilter === 'ALL') {
-        return true
-      }
-      if (posseFilter === 'FADED_LEGACY') {
-        return posse.isFadedLegacy
-      }
-      return !posse.isFadedLegacy && posse.realm.trim().toUpperCase() === posseFilter
-    })
-    const byOwnership = displayUnowned
-      ? byFilter
-      : byFilter.filter((posse) => isPosseOwnedById(posse.id))
-    const sorted = promoteRecommendedGear
-      ? [...byOwnership].sort((left, right) => {
-          const leftRecommended = teamRecommendedPosseIds.has(left.id)
-          const rightRecommended = teamRecommendedPosseIds.has(right.id)
-          if (leftRecommended === rightRecommended) {
-            return left.name.localeCompare(right.name)
-          }
-          return leftRecommended ? -1 : 1
-        })
-      : byOwnership
-    const ordered = sinkUnownedToBottom
-      ? sinkUnownedToEnd(sorted, (posse) => isPosseOwnedById(posse.id))
-      : sorted
-
-    return ordered.map((posse) => {
-      const usedTeamOrder = usedPosseByTeamOrder.get(posse.id)
-      const inUse = usedTeamOrder !== undefined
-      const isActive = activeTeam.posseId === posse.id
-      const blocked = !allowDuplicateAwakenerIdentities && inUse && !isActive
-      return {
-        id: posse.id,
-        name: posse.name,
-        realm: posse.realm,
-        assetSrc: getPosseAssetById(posse.id),
-        inUse,
-        isActive,
-        owned: isPosseOwnedById(posse.id),
-        recommended: teamRecommendedPosseIds.has(posse.id),
-        blocked,
-        statusLabel: isActive
-          ? 'Active'
-          : blocked
-            ? `Team ${String(usedTeamOrder + 1)}`
-            : !isPosseOwnedById(posse.id)
-              ? 'Unowned'
-              : teamRecommendedPosseIds.has(posse.id)
-                ? 'Rec'
-                : null,
-      }
+    return createBuilderV2PosseOptions({
+      allPosses,
+      searchQuery: searchQueryByTab.posses,
+      filter: posseFilter,
+      activeTeam,
+      allowDuplicateAwakenerIdentities,
+      displayUnowned,
+      sinkUnownedToBottom,
+      promoteRecommendedGear,
+      recommendedPosseIds: teamRecommendedPosseIds,
+      usedPosseByTeamOrder,
+      isPosseOwnedById,
     })
   }, [
-    activeTeam.posseId,
+    activeTeam,
     allowDuplicateAwakenerIdentities,
     allPosses,
     displayUnowned,
@@ -1725,133 +1573,6 @@ export function useBuilderV2Model({
   }
 }
 
-function createSortableAwakenerEntry(
-  awakener: Awakener,
-  ownedAwakenerLevelByName: Map<string, number | null>,
-  awakenerLevelByName: Map<string, number>,
-) {
-  return {
-    label: formatAwakenerNameForUi(awakener.name),
-    index: awakener.numericId ?? Number.MAX_SAFE_INTEGER,
-    owned: (ownedAwakenerLevelByName.get(awakener.name) ?? null) !== null,
-    enlighten: ownedAwakenerLevelByName.get(awakener.name) ?? 0,
-    level: awakenerLevelByName.get(awakener.name) ?? 60,
-    rarity: awakener.rarity,
-    realm: awakener.realm,
-    releaseDate: awakener.releaseDate,
-  }
-}
-
-function createSortableWheelEntry(wheel: Wheel, ownedWheelLevelById: Map<string, number | null>) {
-  return {
-    label: wheel.name,
-    index: Number.parseInt(wheel.id.replace(/\D+/g, ''), 10) || Number.MAX_SAFE_INTEGER,
-    owned: (ownedWheelLevelById.get(wheel.id) ?? null) !== null,
-    enlighten: ownedWheelLevelById.get(wheel.id) ?? 0,
-    rarity: wheel.rarity,
-    realm: wheel.realm,
-    mainstatLabel: getWheelMainstatLabel(wheel),
-  }
-}
-
-function compareSortableWheels(
-  left: Wheel,
-  right: Wheel,
-  sortableWheelById: Map<string, ReturnType<typeof createSortableWheelEntry>>,
-  sort: {key: WheelCollectionSortKey; direction: CollectionSortDirection},
-): number {
-  const leftSortable = sortableWheelById.get(left.id)
-  const rightSortable = sortableWheelById.get(right.id)
-  if (!leftSortable || !rightSortable) {
-    return 0
-  }
-  return compareWheelsForCollectionSort(leftSortable, rightSortable, sort)
-}
-
-interface CachedWheelRecommendation {
-  bucket: number
-  tier: AwakenerBuildWheelTier | null
-  mainstatIndex: number | undefined
-}
-
-function createWheelRecommendationMetaById(
-  build: AwakenerBuild | null | undefined,
-  wheels: readonly Wheel[],
-): Map<string, CachedWheelRecommendation> {
-  const metaById = new Map<string, CachedWheelRecommendation>()
-  const defaultBucket =
-    AWAKENER_BUILD_WHEEL_TIERS.length + (build?.recommendedWheelMainstats?.length ?? 0) + 1
-
-  if (!build) {
-    metaById.set('__default__', {
-      bucket: defaultBucket,
-      tier: null,
-      mainstatIndex: undefined,
-    })
-    return metaById
-  }
-
-  build.recommendedWheels.forEach((group, groupIndex) => {
-    for (const wheelId of group.wheelIds) {
-      metaById.set(wheelId, {
-        bucket: groupIndex,
-        tier: group.tier,
-        mainstatIndex: undefined,
-      })
-    }
-  })
-
-  build.recommendedWheelMainstats?.forEach((mainstatKey, mainstatIndex) => {
-    for (const wheel of wheels) {
-      if (wheel.mainstatKey !== mainstatKey || metaById.has(wheel.id)) {
-        continue
-      }
-      metaById.set(wheel.id, {
-        bucket: AWAKENER_BUILD_WHEEL_TIERS.length + mainstatIndex,
-        tier: null,
-        mainstatIndex,
-      })
-    }
-  })
-
-  metaById.set('__default__', {
-    bucket: defaultBucket,
-    tier: null,
-    mainstatIndex: undefined,
-  })
-
-  return metaById
-}
-
-function compareWheelsForCachedBuildRecommendation(
-  left: Wheel,
-  right: Wheel,
-  options: {
-    fallbackCompare: (left: Wheel, right: Wheel) => number
-    promoteMainstats: boolean
-    recommendationById: Map<string, CachedWheelRecommendation>
-  },
-): number {
-  const defaultBucket =
-    options.recommendationById.get('__default__')?.bucket ?? AWAKENER_BUILD_WHEEL_TIERS.length + 1
-  const leftMeta = options.recommendationById.get(left.id)
-  const rightMeta = options.recommendationById.get(right.id)
-  const leftBucket =
-    leftMeta && (leftMeta.tier || options.promoteMainstats) ? leftMeta.bucket : defaultBucket
-  const rightBucket =
-    rightMeta && (rightMeta.tier || options.promoteMainstats) ? rightMeta.bucket : defaultBucket
-
-  if (leftBucket !== rightBucket) {
-    return leftBucket - rightBucket
-  }
-
-  return options.fallbackCompare(left, right)
-}
-
-function compareCovenantsById(left: Covenant, right: Covenant): number {
-  return left.id.localeCompare(right.id, undefined, {numeric: true, sensitivity: 'base'})
-}
-
 function resolveWheelSortKey(value: unknown): WheelCollectionSortKey {
   return value === 'ALPHABETICAL' ||
     value === 'RARITY' ||
@@ -1860,35 +1581,6 @@ function resolveWheelSortKey(value: unknown): WheelCollectionSortKey {
     value === 'ENLIGHTEN'
     ? value
     : 'RARITY'
-}
-
-function getWheelRecommendationChipLabel(tier: AwakenerBuildWheelTier | null): string | null {
-  switch (tier) {
-    case 'BIS_SSR':
-      return 'BiS'
-    case 'ALT_SSR':
-      return 'Alt'
-    case 'BIS_SR':
-      return 'BiS SR'
-    case 'GOOD':
-      return 'Good'
-    default:
-      return null
-  }
-}
-
-function sinkUnownedToEnd<TEntity>(
-  entries: readonly TEntity[],
-  isOwned: (entry: TEntity) => boolean,
-): TEntity[] {
-  return [...entries].sort((left, right) => {
-    const leftOwned = isOwned(left)
-    const rightOwned = isOwned(right)
-    if (leftOwned === rightOwned) {
-      return 0
-    }
-    return leftOwned ? -1 : 1
-  })
 }
 
 function createSlotAwakenerView(

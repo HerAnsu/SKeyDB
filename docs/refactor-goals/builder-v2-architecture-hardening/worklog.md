@@ -83,3 +83,35 @@
   - `node C:\Users\dansa\.codex\plugins\cache\refactor-discipline-local\refactor-discipline\0.4.3\skills\refactor-goal-prep\scripts\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening` returned OK.
 - J4 active: choose C6 pure picker option query module slice.
 - Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-22 - J4 selected picker-query extraction
+
+- User requested the same loop continue with a bigger multi-tranche chunk.
+- J4 selected `C6` Pure picker option query modules as W4.
+- Root-fix reasoning: W1-W3 moved loadout/editing semantics out of `useBuilderV2Model.ts`, but the hook still owns the four picker option pipelines plus sorting, recommendation, ownership-sinking, and status-label helpers. Extracting those into a pure module is a direct architecture slice that supports future picker/drag work without changing the picker UI.
+- W4 active: `Extract pure Builder V2 picker option queries`.
+- W4 allowed files: `src/features/builder-v2/useBuilderV2Model.ts`, new `src/features/builder-v2/builder-v2-picker-options.ts`, new focused picker option tests, `BuilderV2ModelTypes.ts` only if needed, `useBuilderV2Model.test.ts` only for behavior coverage, and this goal packet.
+- W4 protected scope: no picker redesign/chrome, no mobile/tablet layout changes, no teams-list shape work, no DnD implementation, no CSS polish, no dependency/state-library change, no shared `/builder` runtime changes, and no `docs/design/**`.
+- W4 validation target: focused picker/model/page tests, app typecheck, targeted eslint, and the packet checker.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-22 - W4 picker-query extraction landed
+
+- W4 implementation:
+  - Added `src/features/builder-v2/builder-v2-picker-options.ts`.
+  - Moved Builder V2 awakener, wheel, covenant, and posse picker option construction into pure local functions.
+  - Kept the React `useMemo` gates in `useBuilderV2Model.ts` so inactive picker tabs still return empty arrays.
+  - Removed picker sorting/recommendation/status-label helper logic from `useBuilderV2Model.ts`.
+  - Added `src/features/builder-v2/builder-v2-picker-options.test.ts` for direct pure option coverage.
+- Subagents:
+  - Scout `019e51b3-1755-7e32-8959-b8480fec56b9` mapped extraction invariants: inactive-tab empties, awakeners search relevance before collection sort, entity-specific ownership filtering/sinking, exact status labels, and wheel/covenant recommendation labels.
+  - Reviewer `019e51b9-b735-77b2-8b8c-f85f8339af43` found no scoped code regressions. It noted untracked `docs/design/` images as a possible scope concern; controller kept those pre-existing untracked reference images out of W4 staging.
+  - Both completed subagents were closed after their results were recorded.
+- Validation:
+  - `npx vitest run src/features/builder-v2/builder-v2-picker-options.test.ts src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run` passed with 80 tests.
+  - `npx tsc -p tsconfig.app.json --noEmit` passed.
+  - `npx eslint src/features/builder-v2/useBuilderV2Model.ts src/features/builder-v2/builder-v2-picker-options.ts src/features/builder-v2/builder-v2-picker-options.test.ts` passed.
+  - `node C:\Users\dansa\.codex\plugins\cache\refactor-discipline-local\refactor-discipline\0.4.3\skills\refactor-goal-prep\scripts\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening` returned OK.
+- R3 complete: W4 review recorded.
+- J5 active: choose the next contained post-picker-extraction slice. Candidate options are likely C9 shared picker a11y hardening, C10 adaptive focus, C7 callback churn, or a small CSS contract slice if Judge can keep it contained.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
