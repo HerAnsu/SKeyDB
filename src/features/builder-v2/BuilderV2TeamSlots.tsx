@@ -2,6 +2,7 @@ import type {BuilderV2SlotView} from './useBuilderV2Model'
 
 interface BuilderV2TeamSlotsProps {
   slots: BuilderV2SlotView[]
+  quickLineupActive?: boolean
   onClearCovenant: (slotId: string) => void
   onClearWheel: (slotId: string, wheelIndex: 0 | 1) => void
   onRemoveAwakener: (slotId: string) => void
@@ -13,6 +14,7 @@ interface BuilderV2TeamSlotsProps {
 export function BuilderV2TeamSlots({
   onClearCovenant,
   onClearWheel,
+  quickLineupActive = false,
   slots,
   onRemoveAwakener,
   onSelectCovenantSlot,
@@ -84,7 +86,7 @@ export function BuilderV2TeamSlots({
                     {wheelSlot.wheelName ?? '+'}
                   </span>
                 </button>
-                {wheelSlot.wheelId ? (
+                {wheelSlot.wheelId && !quickLineupActive ? (
                   <button
                     aria-label={`Clear ${wheelSlot.label}`}
                     className='builder-v2-equipment-clear'
@@ -113,7 +115,7 @@ export function BuilderV2TeamSlots({
                 <span className='builder-v2-label'>Covenant</span>
                 <span className='builder-v2-equipment-value'>{slot.covenantName ?? '+'}</span>
               </button>
-              {slot.covenantId ? (
+              {slot.covenantId && !quickLineupActive ? (
                 <button
                   aria-label={`Clear ${slot.slotLabel} Covenant`}
                   className='builder-v2-equipment-clear'
@@ -128,7 +130,7 @@ export function BuilderV2TeamSlots({
             </div>
           </div>
 
-          {slot.awakener ? (
+          {slot.awakener && !quickLineupActive ? (
             <button
               className='builder-v2-remove-button'
               onClick={() => {

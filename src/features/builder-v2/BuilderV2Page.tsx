@@ -81,9 +81,7 @@ export function BuilderV2Page() {
                   </button>
                 ) : null}
               </div>
-              <button className='builder-v2-lineup-button' disabled type='button'>
-                Quick Team Lineup
-              </button>
+              <QuickLineupControls model={model} />
             </div>
 
             <BuilderV2TeamSlots
@@ -93,6 +91,7 @@ export function BuilderV2Page() {
               onSelectCovenantSlot={model.selectCovenantSlot}
               onSelectSlot={model.selectAwakenerSlot}
               onSelectWheelSlot={model.selectWheelSlot}
+              quickLineupActive={Boolean(model.quickLineupSession)}
               slots={model.slots}
             />
 
@@ -148,5 +147,61 @@ export function BuilderV2Page() {
         />
       </div>
     </section>
+  )
+}
+
+type BuilderV2PageModel = ReturnType<typeof useBuilderV2Model>
+
+function QuickLineupControls({model}: {model: BuilderV2PageModel}) {
+  const session = model.quickLineupSession
+
+  if (!session) {
+    return (
+      <button className='builder-v2-lineup-button' onClick={model.startQuickLineup} type='button'>
+        Quick Team Lineup
+      </button>
+    )
+  }
+
+  return (
+    <div className='builder-v2-lineup-controls' aria-label='Quick lineup controls'>
+      <p className='builder-v2-lineup-step'>
+        Step {String(session.currentStepIndex + 1)} / {String(session.totalSteps)}:{' '}
+        {model.quickLineupStepLabel ?? 'Current step'}
+      </p>
+      <div className='builder-v2-lineup-actions'>
+        <button
+          className='builder-v2-lineup-action'
+          disabled={!session.canGoBack}
+          onClick={model.goBackQuickLineupStep}
+          type='button'
+        >
+          Back
+        </button>
+        <button
+          className='builder-v2-lineup-action'
+          onClick={model.skipQuickLineupStep}
+          type='button'
+        >
+          Next
+        </button>
+        <button
+          aria-label='Cancel quick team lineup'
+          className='builder-v2-lineup-action builder-v2-lineup-action--danger'
+          onClick={model.cancelQuickLineup}
+          type='button'
+        >
+          Cancel
+        </button>
+        <button
+          aria-label='Finish quick team lineup'
+          className='builder-v2-lineup-action builder-v2-lineup-action--success'
+          onClick={model.finishQuickLineup}
+          type='button'
+        >
+          Finish
+        </button>
+      </div>
+    </div>
   )
 }

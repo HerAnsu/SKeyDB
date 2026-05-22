@@ -81,6 +81,46 @@ describe('BuilderV2Page', () => {
     expect(screen.queryByRole('button', {name: /clear posse/i})).not.toBeInTheDocument()
   })
 
+  it('drives quick lineup through visible V2 controls and picker tabs', () => {
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /quick team lineup/i}))
+
+    expect(screen.getByText(/step 1 \/ 17: slot 1 - awakener/i)).toBeInTheDocument()
+    expect(screen.getByRole('tab', {name: /^awakeners$/i})).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
+
+    expect(screen.getByText(/step 2 \/ 17: slot 1 - wheel 1/i)).toBeInTheDocument()
+    expect(screen.getByRole('tab', {name: /^wheels$/i})).toHaveAttribute('aria-selected', 'true')
+
+    fireEvent.click(screen.getByRole('button', {name: /^next$/i}))
+
+    expect(screen.getByText(/step 3 \/ 17: slot 1 - wheel 2/i)).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /^back$/i}))
+
+    expect(screen.getByText(/step 2 \/ 17: slot 1 - wheel 1/i)).toBeInTheDocument()
+  })
+
+  it('cancels quick lineup and restores the original V2 team', () => {
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
+    expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /quick team lineup/i}))
+    expect(screen.queryByRole('button', {name: /remove goliath/i})).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /cancel quick team lineup/i}))
+
+    expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
+    expect(screen.queryByText(/step 1 \/ 17/i)).not.toBeInTheDocument()
+  })
+
   it('is reachable through /builder-v2 without adding a nav link', async () => {
     render(
       <MemoryRouter initialEntries={['/builder-v2']}>

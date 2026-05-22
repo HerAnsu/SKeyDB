@@ -350,4 +350,152 @@ describe('useBuilderV2Model', () => {
     expect(builderDraftStore.getState().teams[0]?.posseId).toBeUndefined()
     expect(builderDraftStore.getState().teams[1]?.posseId).toBe('posse-0033')
   })
+
+  it('runs quick lineup through awakener and loadout assignment steps', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.startQuickLineup()
+    })
+
+    expect(result.current.quickLineupSession?.currentStepIndex).toBe(0)
+    expect(result.current.quickLineupSession?.totalSteps).toBe(17)
+    expect(result.current.pickerTab).toBe('awakeners')
+    expect(result.current.activeSelection).toEqual({kind: 'awakener', slotId: 'slot-1'})
+    expect(result.current.slots.every((slot) => slot.awakener === null)).toBe(true)
+
+    act(() => {
+      result.current.assignAwakener('awakener-0021')
+    })
+
+    expect(result.current.quickLineupSession?.currentStep).toEqual({
+      kind: 'wheel',
+      slotId: 'slot-1',
+      wheelIndex: 0,
+    })
+    expect(result.current.pickerTab).toBe('wheels')
+    expect(result.current.activeSelection).toEqual({kind: 'wheel', slotId: 'slot-1', wheelIndex: 0})
+
+    act(() => {
+      result.current.assignWheel('wheel-0050')
+    })
+
+    expect(result.current.quickLineupSession?.currentStep).toEqual({
+      kind: 'wheel',
+      slotId: 'slot-1',
+      wheelIndex: 1,
+    })
+
+    act(() => {
+      result.current.assignWheel('wheel-0051')
+    })
+
+    expect(result.current.quickLineupSession?.currentStep).toEqual({
+      kind: 'covenant',
+      slotId: 'slot-1',
+    })
+    expect(result.current.pickerTab).toBe('covenants')
+
+    act(() => {
+      result.current.assignCovenant('c01')
+    })
+
+    expect(result.current.quickLineupSession?.currentStep).toEqual({
+      kind: 'awakener',
+      slotId: 'slot-2',
+    })
+    expect(result.current.pickerTab).toBe('awakeners')
+  })
+
+  it('restores the original active team when quick lineup is canceled', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.assignAwakener('awakener-0021')
+    })
+    act(() => {
+      result.current.selectPosse()
+    })
+    act(() => {
+      result.current.assignPosse('posse-0033')
+    })
+
+    expect(result.current.slots[0]?.awakener?.id).toBe('awakener-0021')
+    expect(result.current.activePosse?.id).toBe('posse-0033')
+
+    act(() => {
+      result.current.startQuickLineup()
+    })
+
+    expect(result.current.slots.every((slot) => slot.awakener === null)).toBe(true)
+    expect(result.current.activePosse).toBeNull()
+
+    act(() => {
+      result.current.cancelQuickLineup()
+    })
+
+    expect(result.current.quickLineupSession).toBeNull()
+    expect(result.current.slots[0]?.awakener?.id).toBe('awakener-0021')
+    expect(result.current.activePosse?.id).toBe('posse-0033')
+  })
+
+  it('jumps quick-lineup focus when selecting a different target manually', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.startQuickLineup()
+    })
+    act(() => {
+      result.current.skipQuickLineupStep()
+    })
+
+    expect(result.current.quickLineupSession?.currentStep).toEqual({
+      kind: 'awakener',
+      slotId: 'slot-2',
+    })
+
+    act(() => {
+      result.current.selectWheelSlot('slot-1', 1)
+    })
+
+    expect(result.current.quickLineupSession?.currentStep).toEqual({
+      kind: 'wheel',
+      slotId: 'slot-1',
+      wheelIndex: 1,
+    })
+    expect(result.current.pickerTab).toBe('wheels')
+    expect(result.current.activeSelection).toEqual({kind: 'wheel', slotId: 'slot-1', wheelIndex: 1})
+  })
+
+  it('completes quick lineup after assigning the final posse step', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.startQuickLineup()
+    })
+    act(() => {
+      result.current.skipQuickLineupStep()
+    })
+    act(() => {
+      result.current.skipQuickLineupStep()
+    })
+    act(() => {
+      result.current.skipQuickLineupStep()
+    })
+    act(() => {
+      result.current.skipQuickLineupStep()
+    })
+
+    expect(result.current.quickLineupSession?.currentStep).toEqual({kind: 'posse'})
+    expect(result.current.pickerTab).toBe('posses')
+    expect(result.current.activeTeamTarget).toEqual({kind: 'posse'})
+
+    act(() => {
+      result.current.assignPosse('posse-0033')
+    })
+
+    expect(result.current.quickLineupSession).toBeNull()
+    expect(result.current.activePosse?.id).toBe('posse-0033')
+    expect(result.current.activeTeamTarget).toBeNull()
+  })
 })

@@ -18,11 +18,16 @@ import {compareWheelsForUi} from '@/domain/wheel-sort'
 import {getWheelAssetById} from '@/domain/wheel-assets'
 import {getWheelMainstatLabel, getWheels, type Wheel} from '@/domain/wheels'
 import {searchWheels} from '@/domain/wheels-search'
-import {builderDraftStore, createDefaultBuilderDraft} from '@/stores/builderDraftStore'
+import {
+  builderDraftStore,
+  createDefaultBuilderDraft,
+  type BuilderDraftFocus,
+} from '@/stores/builderDraftStore'
 import {collectionOwnershipStore} from '@/stores/collectionOwnershipStore'
 
 import {loadBuilderDraft, saveBuilderDraft} from '../builder/builder-persistence'
 import {allAwakeners, awakenerById} from '../builder/constants'
+import {getPublicQuickLineupSession} from '../builder/quick-lineup'
 import {
   assignAwakenerToFirstEmptySlot,
   assignAwakenerToSlot,
@@ -35,7 +40,14 @@ import {
   swapWheelAssignments,
   type TeamStateViolationCode,
 } from '../builder/team-state'
-import type {ActiveSelection, Team, TeamSlot, WheelUsageLocation} from '../builder/types'
+import type {
+  ActiveSelection,
+  QuickLineupSession,
+  QuickLineupStep,
+  Team,
+  TeamSlot,
+  WheelUsageLocation,
+} from '../builder/types'
 
 const BUILDER_V2_AUTOSAVE_DEBOUNCE_MS = 300
 const BUILDER_ALLOW_DUPES_KEY = 'skeydb.builder.allowDupes.v1'
@@ -136,6 +148,8 @@ export interface BuilderV2Model {
   pickerTab: BuilderV2PickerTab
   selectedSlotId: string | null
   editingLabel: string
+  quickLineupSession: QuickLineupSession | null
+  quickLineupStepLabel: string | null
   teams: BuilderV2TeamSummary[]
   slots: BuilderV2SlotView[]
   awakeners: BuilderV2AwakenerOption[]
@@ -146,6 +160,11 @@ export interface BuilderV2Model {
   setSearchQuery: (nextQuery: string) => void
   setPickerTab: (nextTab: BuilderV2PickerTab) => void
   setActiveTeam: (teamId: string) => void
+  startQuickLineup: () => void
+  skipQuickLineupStep: () => void
+  goBackQuickLineupStep: () => void
+  finishQuickLineup: () => void
+  cancelQuickLineup: () => void
   selectAwakenerSlot: (slotId: string) => void
   selectWheelSlot: (slotId: string, wheelIndex: 0 | 1) => void
   selectCovenantSlot: (slotId: string) => void
@@ -193,6 +212,22 @@ export function useBuilderV2Model(): BuilderV2Model {
   const setActiveSelection = useStore(builderDraftStore, (state) => state.setActiveSelection)
   const updateActiveTeam = useStore(builderDraftStore, (state) => state.updateActiveTeam)
   const setActiveTeamSlotsInStore = useStore(builderDraftStore, (state) => state.setActiveTeamSlots)
+  const quickLineupState = useStore(builderDraftStore, (state) => state.quickLineupState)
+  const storeStartQuickLineup = useStore(builderDraftStore, (state) => state.startQuickLineup)
+  const storeAdvanceQuickLineupStep = useStore(
+    builderDraftStore,
+    (state) => state.advanceQuickLineupStep,
+  )
+  const storeGoBackQuickLineupStep = useStore(
+    builderDraftStore,
+    (state) => state.goBackQuickLineupStep,
+  )
+  const storeFinishQuickLineup = useStore(builderDraftStore, (state) => state.finishQuickLineup)
+  const storeCancelQuickLineup = useStore(builderDraftStore, (state) => state.cancelQuickLineup)
+  const storeJumpToQuickLineupStep = useStore(
+    builderDraftStore,
+    (state) => state.jumpToQuickLineupStep,
+  )
 
   const effectiveActiveTeamId = useMemo(
     () => (teams.some((team) => team.id === activeTeamId) ? activeTeamId : (teams[0]?.id ?? '')),
@@ -326,6 +361,15 @@ export function useBuilderV2Model(): BuilderV2Model {
     [activeSelection, activeTeamSlots, covenantById, selectedSlotId, wheelById],
   )
 
+  const quickLineupSession: QuickLineupSession | null = useMemo(
+    () => (quickLineupState ? getPublicQuickLineupSession(quickLineupState) : null),
+    [quickLineupState],
+  )
+  const quickLineupStepLabel = useMemo(
+    () => getQuickLineupStepLabel(quickLineupSession, slots),
+    [quickLineupSession, slots],
+  )
+
   const awakeners = useMemo<BuilderV2AwakenerOption[]>(
     () =>
       searchAwakeners(allAwakeners, searchQueryByTab.awakeners)
@@ -396,19 +440,83 @@ export function useBuilderV2Model(): BuilderV2Model {
     setViolationMessage(null)
   }, [])
 
+  const syncQuickLineupFocus = useCallback(
+    (focus: BuilderDraftFocus | null) => {
+      if (!focus) {
+        return
+      }
+
+      if (focus.pickerTab) {
+        setPickerTab(focus.pickerTab)
+      }
+      setActiveSelection(focus.selection)
+      setActiveTeamTarget(focus.pickerTab === 'posses' && !focus.selection ? {kind: 'posse'} : null)
+      setViolationMessage(null)
+    },
+    [setActiveSelection],
+  )
+
+  const startQuickLineup = useCallback(() => {
+    syncQuickLineupFocus(storeStartQuickLineup())
+  }, [storeStartQuickLineup, syncQuickLineupFocus])
+
+  const advanceQuickLineupStep = useCallback(
+    (nextSlotsOverride?: TeamSlot[]) => {
+      syncQuickLineupFocus(storeAdvanceQuickLineupStep(nextSlotsOverride))
+    },
+    [storeAdvanceQuickLineupStep, syncQuickLineupFocus],
+  )
+
+  const skipQuickLineupStep = useCallback(() => {
+    advanceQuickLineupStep()
+  }, [advanceQuickLineupStep])
+
+  const goBackQuickLineupStep = useCallback(() => {
+    syncQuickLineupFocus(storeGoBackQuickLineupStep())
+  }, [storeGoBackQuickLineupStep, syncQuickLineupFocus])
+
+  const finishQuickLineup = useCallback(() => {
+    syncQuickLineupFocus(storeFinishQuickLineup())
+  }, [storeFinishQuickLineup, syncQuickLineupFocus])
+
+  const cancelQuickLineup = useCallback(() => {
+    syncQuickLineupFocus(storeCancelQuickLineup())
+  }, [storeCancelQuickLineup, syncQuickLineupFocus])
+
+  const jumpToQuickLineupStep = useCallback(
+    (step: QuickLineupStep) => {
+      syncQuickLineupFocus(storeJumpToQuickLineupStep(step))
+    },
+    [storeJumpToQuickLineupStep, syncQuickLineupFocus],
+  )
+
   const setActiveTeam = useCallback(
     (teamId: string) => {
+      if (quickLineupState) {
+        syncQuickLineupFocus(storeCancelQuickLineup())
+      }
       setViolationMessage(null)
       setActiveTeamTarget(null)
       setActiveTeamId(teamId)
       setActiveSelection(null)
     },
-    [setActiveSelection, setActiveTeamId],
+    [
+      quickLineupState,
+      setActiveSelection,
+      setActiveTeamId,
+      storeCancelQuickLineup,
+      syncQuickLineupFocus,
+    ],
   )
 
   const selectAwakenerSlot = useCallback(
     (slotId: string) => {
       setViolationMessage(null)
+      if (quickLineupState) {
+        jumpToQuickLineupStep({kind: 'awakener', slotId})
+        return
+      }
+
       setActiveTeamTarget(null)
       setPickerTab('awakeners')
       setActiveSelection((current) =>
@@ -417,12 +525,17 @@ export function useBuilderV2Model(): BuilderV2Model {
           : {kind: 'awakener', slotId},
       )
     },
-    [setActiveSelection],
+    [jumpToQuickLineupStep, quickLineupState, setActiveSelection],
   )
 
   const selectWheelSlot = useCallback(
     (slotId: string, wheelIndex: 0 | 1) => {
       setViolationMessage(null)
+      if (quickLineupState) {
+        jumpToQuickLineupStep({kind: 'wheel', slotId, wheelIndex})
+        return
+      }
+
       setActiveTeamTarget(null)
       setPickerTab('wheels')
       setActiveSelection((current) =>
@@ -433,12 +546,17 @@ export function useBuilderV2Model(): BuilderV2Model {
           : {kind: 'wheel', slotId, wheelIndex},
       )
     },
-    [setActiveSelection],
+    [jumpToQuickLineupStep, quickLineupState, setActiveSelection],
   )
 
   const selectCovenantSlot = useCallback(
     (slotId: string) => {
       setViolationMessage(null)
+      if (quickLineupState) {
+        jumpToQuickLineupStep({kind: 'covenant', slotId})
+        return
+      }
+
       setActiveTeamTarget(null)
       setPickerTab('covenants')
       setActiveSelection((current) =>
@@ -447,15 +565,20 @@ export function useBuilderV2Model(): BuilderV2Model {
           : {kind: 'covenant', slotId},
       )
     },
-    [setActiveSelection],
+    [jumpToQuickLineupStep, quickLineupState, setActiveSelection],
   )
 
   const selectPosse = useCallback(() => {
     setViolationMessage(null)
+    if (quickLineupState) {
+      jumpToQuickLineupStep({kind: 'posse'})
+      return
+    }
+
     setPickerTab('posses')
     setActiveSelection(null)
     setActiveTeamTarget((current) => (current?.kind === 'posse' ? null : {kind: 'posse'}))
-  }, [setActiveSelection])
+  }, [jumpToQuickLineupStep, quickLineupState, setActiveSelection])
 
   const assignAwakener = useCallback(
     (awakenerId: string) => {
@@ -496,6 +619,10 @@ export function useBuilderV2Model(): BuilderV2Model {
       setActiveTeamSlotsInStore(result.nextSlots)
       setViolationMessage(null)
       setActiveTeamTarget(null)
+      if (quickLineupState) {
+        advanceQuickLineupStep(result.nextSlots)
+        return
+      }
 
       const nextSelectedSlotId = targetSlotId ?? firstEmptySlotId
       if (nextSelectedSlotId) {
@@ -506,7 +633,9 @@ export function useBuilderV2Model(): BuilderV2Model {
       activeSelection,
       activeTeamSlots,
       allowDuplicateAwakenerIdentities,
+      advanceQuickLineupStep,
       effectiveActiveTeamId,
+      quickLineupState,
       setActiveSelection,
       setActiveTeamSlotsInStore,
       teams,
@@ -547,6 +676,10 @@ export function useBuilderV2Model(): BuilderV2Model {
         setActiveTeamSlotsInStore(result.nextSlots)
         setViolationMessage(null)
         setActiveTeamTarget(null)
+        if (quickLineupState) {
+          advanceQuickLineupStep(result.nextSlots)
+          return
+        }
         if (activeSelection?.kind === 'wheel') {
           setActiveSelection({kind: 'wheel', slotId: target.slotId, wheelIndex: target.wheelIndex})
         }
@@ -573,6 +706,10 @@ export function useBuilderV2Model(): BuilderV2Model {
       setActiveTeamSlotsInStore(result.nextSlots)
       setViolationMessage(null)
       setActiveTeamTarget(null)
+      if (quickLineupState) {
+        advanceQuickLineupStep(result.nextSlots)
+        return
+      }
       if (activeSelection?.kind === 'wheel') {
         setActiveSelection({kind: 'wheel', slotId: target.slotId, wheelIndex: target.wheelIndex})
       }
@@ -581,7 +718,9 @@ export function useBuilderV2Model(): BuilderV2Model {
       activeSelection,
       activeTeamSlots,
       allowDuplicateAwakenerIdentities,
+      advanceQuickLineupStep,
       effectiveActiveTeamId,
+      quickLineupState,
       setActiveSelection,
       setActiveTeamSlotsInStore,
       teams,
@@ -626,11 +765,22 @@ export function useBuilderV2Model(): BuilderV2Model {
       setActiveTeamSlotsInStore(result.nextSlots)
       setViolationMessage(null)
       setActiveTeamTarget(null)
+      if (quickLineupState) {
+        advanceQuickLineupStep(result.nextSlots)
+        return
+      }
       if (activeSelection?.kind === 'covenant') {
         setActiveSelection({kind: 'covenant', slotId: targetSlotId})
       }
     },
-    [activeSelection, activeTeamSlots, setActiveSelection, setActiveTeamSlotsInStore],
+    [
+      activeSelection,
+      activeTeamSlots,
+      advanceQuickLineupStep,
+      quickLineupState,
+      setActiveSelection,
+      setActiveTeamSlotsInStore,
+    ],
   )
 
   const assignPosse = useCallback(
@@ -647,16 +797,22 @@ export function useBuilderV2Model(): BuilderV2Model {
         return
       }
 
+      const isQuickLineupPosseStep = quickLineupSession?.currentStep.kind === 'posse'
       updateActiveTeam((team) => ({...team, posseId}))
       setViolationMessage(null)
       setActiveSelection(null)
       setActiveTeamTarget({kind: 'posse'})
       setPickerTab('posses')
+      if (isQuickLineupPosseStep) {
+        advanceQuickLineupStep()
+      }
     },
     [
       allowDuplicateAwakenerIdentities,
+      advanceQuickLineupStep,
       effectiveActiveTeamId,
       posseById,
+      quickLineupSession,
       setActiveSelection,
       teams,
       updateActiveTeam,
@@ -719,7 +875,16 @@ export function useBuilderV2Model(): BuilderV2Model {
     setActiveSelection(null)
     setActiveTeamTarget({kind: 'posse'})
     setPickerTab('posses')
-  }, [activeTeam.posseId, setActiveSelection, updateActiveTeam])
+    if (quickLineupSession?.currentStep.kind === 'posse') {
+      advanceQuickLineupStep()
+    }
+  }, [
+    activeTeam.posseId,
+    advanceQuickLineupStep,
+    quickLineupSession,
+    setActiveSelection,
+    updateActiveTeam,
+  ])
 
   const editingLabel = useMemo(
     () =>
@@ -741,6 +906,8 @@ export function useBuilderV2Model(): BuilderV2Model {
     pickerTab,
     selectedSlotId,
     editingLabel,
+    quickLineupSession,
+    quickLineupStepLabel,
     teams: v2Teams,
     slots,
     awakeners,
@@ -751,6 +918,11 @@ export function useBuilderV2Model(): BuilderV2Model {
     setSearchQuery,
     setPickerTab: switchPickerTab,
     setActiveTeam,
+    startQuickLineup,
+    skipQuickLineupStep,
+    goBackQuickLineupStep,
+    finishQuickLineup,
+    cancelQuickLineup,
     selectAwakenerSlot,
     selectWheelSlot,
     selectCovenantSlot,
@@ -889,6 +1061,30 @@ function getSlotTargetFromSelection(activeSelection: ActiveSelection): string | 
   }
 
   return null
+}
+
+function getQuickLineupStepLabel(
+  quickLineupSession: QuickLineupSession | null,
+  slots: BuilderV2SlotView[],
+): string | null {
+  const step = quickLineupSession?.currentStep
+  if (!step) {
+    return null
+  }
+
+  if (step.kind === 'posse') {
+    return 'Team - Posse'
+  }
+
+  const slot = slots.find((entry) => entry.slotId === step.slotId)
+  const slotLabel = slot?.slotLabel ?? step.slotId.replace('slot-', 'Slot ')
+  if (step.kind === 'wheel') {
+    return `${slotLabel} - Wheel ${String(step.wheelIndex + 1)}`
+  }
+  if (step.kind === 'covenant') {
+    return `${slotLabel} - Covenant`
+  }
+  return `${slotLabel} - Awakener`
 }
 
 function getEditingLabel({

@@ -132,3 +132,67 @@
   - `npm run build` passed; existing Vite chunk-size/plugin timing warnings only.
   - Browser smoke rendered `http://127.0.0.1:5173/#/builder-v2` at 1440x1000 and 390x844, assigned an awakener, switched Armory to Wheels, and assigned a wheel.
 - Active task: none. C4 is implemented; broader Builder V2 goal remains active with queued C5-C8 follow-ups.
+
+### 2026-05-22 - C6 quick-lineup slice scoped
+
+- Source: User continued the Builder V2 refactor goal.
+- Scout task: Three read-only scouts completed:
+  - C5 mobile scout mapped `docs/design/Mobile.png` as overview, focused builder, and full-screen picker drawer states. It recommended keeping the desktop shell unchanged and deferring drawer/focus-trap work until the guided focus contract is stronger.
+  - C6 quick-lineup scout confirmed `quick-lineup.ts` and `builderDraftStore` already expose the session, focus, start, advance, back, jump, finish, and cancel mechanics needed by Builder V2.
+  - Candidate-order scout recommended C6 before C5 because W2 unlocked all assignment targets and quick-lineup is the least risky structural slice after gear/posse.
+- Judge task: J3 approved C6 as the next Worker slice.
+- Decision: Activate W3, "Build Builder V2 Quick Lineup mode."
+- Allowed files: `src/features/builder-v2/**` plus this goal packet's `state.json` and `worklog.md`.
+- Protected: current `/builder` files, `src/stores/builderDraftStore.ts`, route glue, persistence/migrations, generated data, dependency files, global CSS outside Builder V2, and remote state.
+- In scope:
+  - Enable the existing Builder V2 Quick Team Lineup button.
+  - Expose quick-lineup session/actions through `useBuilderV2Model` using existing store actions.
+  - Synchronize quick-lineup focus with V2 picker tab, active selection, and team posse target.
+  - Add compact visible quick-lineup controls and focused V2 tests.
+  - Advance steps after successful assignments and support back, skip, finish, and cancel restore.
+- Deferred: C5 mobile drawer/focused flow, transfer dialogs, DnD, recommendations/smart sorting, teams overview redesign, import/export parity, and shared store/helper behavior changes.
+- Active task: W3, build Builder V2 Quick Lineup mode.
+
+### 2026-05-22 - W3 implemented and review started
+
+- W3 result: implemented Builder V2 Quick Lineup mode inside the approved V2 boundary.
+- Product files changed:
+  - `src/features/builder-v2/useBuilderV2Model.ts`
+  - `src/features/builder-v2/useBuilderV2Model.test.ts`
+  - `src/features/builder-v2/BuilderV2Page.tsx`
+  - `src/features/builder-v2/BuilderV2Page.test.tsx`
+  - `src/features/builder-v2/BuilderV2TeamSlots.tsx`
+  - `src/features/builder-v2/builder-v2.css`
+- Behavior:
+  - The V2 Quick Team Lineup button is now active.
+  - `useBuilderV2Model` exposes quick-lineup session state and start, next, back, finish, and cancel actions by consuming existing `builderDraftStore` quick-lineup actions.
+  - Quick-lineup focus synchronizes V2 `pickerTab`, `activeSelection`, and team-level posse target state.
+  - Successful V2 awakener, wheel, covenant, and final posse assignments advance or complete the guided session.
+  - Manual slot/loadout/posse target selection during quick-lineup jumps the current step instead of toggling normal selection.
+  - V2 hides destructive slot remove/clear controls during quick-lineup to avoid conflicting with guided focus.
+  - Existing `/builder`, shared store/helper behavior, persistence, dependencies, and global CSS stayed untouched.
+- Characterization:
+  - Red run before implementation: targeted V2 tests failed on missing quick-lineup model API, disabled UI, and visible remove controls.
+  - Added model tests for start/focus, assignment advance, cancel restore, manual focus jump, and final posse completion.
+  - Added page tests for visible controls, picker tab progression, back/next, and cancel restore.
+- Validation:
+  - `npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx` passed, 2 files / 26 tests.
+  - `npm test -- --run src/features/builder` passed, 33 files / 257 tests.
+  - `npm run lint` passed.
+  - `npm run build` passed; existing Vite chunk-size/plugin timing warnings only.
+  - Browser smoke rendered `http://127.0.0.1:5173/#/builder-v2` at desktop 1440x1000 and mobile 390x844, then exercised quick-lineup start, assignment advance, next/back, and cancel.
+- Active task: R3, review W3 Builder V2 Quick Lineup mode.
+
+### 2026-05-22 - R3 review passed
+
+- Reviewer: `019e4d1d-96c1-7af2-9f30-9891f5c54a10`.
+- Findings: none.
+- Reviewer notes:
+  - W3 stays inside the approved product scope.
+  - W3 uses existing `builderDraftStore` quick-lineup actions and preserves protected files.
+  - Focused model/page coverage exists for start, assignment advance, back/next, cancel restore, manual focus jump, and final posse completion.
+- Residual risk:
+  - C5 mobile drawer/focus-trap flow remains queued.
+  - Transfer dialogs, DnD, recommendations, and import/export parity remain queued.
+  - Quick-lineup inherits the existing shared-store behavior where starting a session clears the active team and keeps a transient restore snapshot until finish/cancel.
+- Active task: none. C6 is implemented and reviewed; broader Builder V2 goal remains active with C5, C7, and C8 queued.

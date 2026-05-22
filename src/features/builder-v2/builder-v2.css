@@ -86,6 +86,7 @@
 .builder-v2-search,
 .builder-v2-team-row,
 .builder-v2-overview-card,
+.builder-v2-lineup-action,
 .builder-v2-remove-button,
 .builder-v2-equipment-target,
 .builder-v2-equipment-clear {
@@ -126,6 +127,49 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.builder-v2-lineup-controls {
+  display: grid;
+  min-width: min(18rem, 100%);
+  gap: 0.45rem;
+}
+
+.builder-v2-lineup-step {
+  margin: 0;
+  color: var(--ui-text-main);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.builder-v2-lineup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.builder-v2-lineup-action {
+  border: 1px solid var(--ui-border-subtle);
+  background: var(--ui-panel-strong);
+  padding: 0.42rem 0.55rem;
+  color: var(--ui-text-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.builder-v2-lineup-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.builder-v2-lineup-action--danger {
+  border-color: oklch(60% 0.12 24 / 0.44);
+  color: oklch(82% 0.08 32 / 0.92);
+}
+
+.builder-v2-lineup-action--success {
+  border-color: oklch(72% 0.1 142 / 0.44);
+  color: oklch(82% 0.1 142 / 0.92);
 }
 
 .builder-v2-team-list {
@@ -380,6 +424,8 @@
 .builder-v2-equipment-clear:focus-visible,
 .builder-v2-posse-target:focus-visible,
 .builder-v2-posse-clear:focus-visible,
+.builder-v2-lineup-action:focus-visible,
+.builder-v2-lineup-button:focus-visible,
 .builder-v2-remove-button:focus-visible {
   outline: 2px solid oklch(78% 0.1 84 / 0.66);
   outline-offset: 2px;
