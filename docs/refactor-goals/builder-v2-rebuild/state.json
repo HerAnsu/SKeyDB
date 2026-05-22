@@ -144,14 +144,14 @@
       "id": "C4",
       "title": "Gear and posse assignment",
       "source_task": "S1",
-      "status": "queued",
+      "status": "implemented",
       "concept_blast_radius": [
         "V2 slot loadout UI",
         "wheel/covenant/posse action helpers",
         "transfer dialogs"
       ],
-      "evidence": "Core must support wheels, covenants, posse, ownership, recommendations.",
-      "next": "Follow base awakeners slice."
+      "evidence": "W2 added Builder V2 Armory category tabs, actionable W1/W2/Covenant and team Posse targets, click-to-assign/clear flows, same-active-team gear movement, duplicate guards, and focused tests.",
+      "next": "Full transfer dialogs, DnD, recommendations, and mobile drawer remain queued in C5/C6/C8 or future polish slices."
     },
     {
       "id": "C5",
@@ -489,15 +489,228 @@
           "Untracked screenshot/mockup artifacts remain intentionally outside the product commit unless selected later."
         ]
       }
+    },
+    {
+      "id": "S3",
+      "role": "scout",
+      "status": "done",
+      "title": "Map Builder V2 gear and posse contracts",
+      "skills": [
+        "$refactor-scout",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/features/builder/**",
+        "src/features/builder-v2/**",
+        "src/stores/builderDraftStore.ts",
+        "src/domain/**",
+        "docs/design/**"
+      ],
+      "protected_files": [
+        "product code edits",
+        "remote state"
+      ],
+      "expected_output": "Evidence map for C4 wheel, covenant, and posse contracts, tests, and least-polished usable V2 UI shape.",
+      "receipt": {
+        "summary": "Three read-only scouts mapped C4 contracts, pinned tests, and concept-image-aligned UI shape.",
+        "evidence": [
+          "TeamSlot already carries wheels and covenantId, while Team carries posseId.",
+          "Existing pure helpers cover wheel and covenant assign, clear, and swap behavior in team-state.ts.",
+          "Posse is team-level state handled through active team updates; V1 transfer behavior remains a larger deferred parity concern.",
+          "V1 tests pin same-team wheel movement, cross-team transfer requests, covenant assignment/swap, and posse transfer behavior.",
+          "C4 UI should make W1/W2/Covenant strip targets real buttons, make the header Posse target actionable, and activate Armory tabs for Awakeners, Wheels, Covenants, and Posses.",
+          "Mobile drawer, DnD, and full transfer dialogs should remain deferred for this slice."
+        ]
+      }
+    },
+    {
+      "id": "J2",
+      "role": "judge",
+      "status": "done",
+      "title": "Approve Builder V2 gear and posse Worker slice",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-architecture",
+        "$refactor-characterization-tests",
+        "$refactor-react",
+        "$refactor-ui-a11y",
+        "$refactor-tailwind"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/**",
+        "docs/refactor-goals/builder-v2-rebuild/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/App.tsx",
+        "package.json",
+        "package-lock.json",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain/generated data",
+        "global CSS outside builder-v2 scope",
+        "remote state"
+      ],
+      "expected_output": "One bounded Worker concept scope for C4 with in-scope behavior, deferrals, validation, rollback, and stop conditions.",
+      "receipt": {
+        "summary": "Approved C4 as a bounded Builder V2 patch slice.",
+        "concept": "Gear and posse assignment in Builder V2",
+        "candidate_ids": [
+          "C4"
+        ],
+        "in_scope": [
+          "Add Armory tabs for Awakeners, Wheels, Covenants, and Posses.",
+          "Reuse the existing Armory row-list pattern for all categories.",
+          "Make W1, W2, Covenant, and team Posse targets actionable controls.",
+          "Support visible assign and clear flows for wheels, covenants, and posse.",
+          "Use existing pure wheel/covenant helpers where practical.",
+          "Add focused V2 model/page tests for gear and posse assignment and clearing."
+        ],
+        "deferred": [
+          "Full V1 transfer dialogs.",
+          "Drag-and-drop.",
+          "Mobile drawer.",
+          "Old BuilderPage edits.",
+          "Persistence, migration, dependency, or global design-system changes."
+        ],
+        "validation": [
+          "npm test -- --run src/features/builder-v2",
+          "npm test -- --run src/features/builder",
+          "npm run lint",
+          "npm run build"
+        ]
+      }
+    },
+    {
+      "id": "W2",
+      "role": "worker",
+      "status": "done",
+      "title": "Build Builder V2 gear and posse assignment flow",
+      "skills": [
+        "$refactor-worker-slice",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y",
+        "$refactor-tailwind",
+        "$refactor-characterization-tests"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/**",
+        "docs/refactor-goals/builder-v2-rebuild/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/App.tsx",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "remote state"
+      ],
+      "expected_output": "Extend the Builder V2 model, armory picker, slot loadout controls, header posse target, local CSS, and focused tests for click-to-assign/clear wheel, covenant, and posse behavior without full transfer dialogs or DnD.",
+      "receipt": {
+        "slice": "Builder V2 gear and posse assignment flow",
+        "files_changed": [
+          "src/features/builder-v2/useBuilderV2Model.ts",
+          "src/features/builder-v2/useBuilderV2Model.test.ts",
+          "src/features/builder-v2/BuilderV2AwakenerPicker.tsx",
+          "src/features/builder-v2/BuilderV2TeamSlots.tsx",
+          "src/features/builder-v2/BuilderV2Page.tsx",
+          "src/features/builder-v2/BuilderV2Page.test.tsx",
+          "src/features/builder-v2/builder-v2.css",
+          "docs/refactor-goals/builder-v2-rebuild/state.json",
+          "docs/refactor-goals/builder-v2-rebuild/worklog.md"
+        ],
+        "what_got_simpler": "The V2 model facade now owns one coherent click-to-assign path for awakeners, wheels, covenants, and posses instead of leaving gear as inert labels or relying on the old BuilderPage shell.",
+        "behavior_preserved": "/builder and shared builder contracts remained untouched; wheel and covenant updates use existing team-state helpers, active-team wheel reuse swaps/moves, cross-team duplicate wheel/posse assignment is blocked until transfer parity exists, and V2 still shares current draft persistence by design.",
+        "current_complexity": "Builder V2 now has one model hook, one armory surface with four tabs, one slot card surface with actionable loadout targets, and focused tests for the assignment loop.",
+        "expected_complexity_after": "Later slices can add transfer dialogs, DnD, recommendations, quick-lineup, and mobile drawer behavior without first inventing core gear/posse state flow.",
+        "root_fix_patch_decision": "Bounded patch on the new Builder V2 boundary; no old BuilderPage edits.",
+        "dependency_review": "No dependency changes made or needed.",
+        "harness_update": "No AGENTS.md, lint, or plugin harness changes made; goal packet updated only.",
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (2 files, 20 tests passed)",
+          "npm test -- --run src/features/builder (33 files, 251 tests passed)",
+          "npm run lint (passed)",
+          "npm run build (passed; existing Vite chunk-size and plugin timing warnings only)",
+          "Browser smoke: http://127.0.0.1:5173/#/builder-v2 desktop 1440x1000 and mobile 390x844 rendered; assigned an awakener and a wheel through the Armory"
+        ],
+        "risks": [
+          "Full transfer dialog parity is intentionally not implemented; V2 blocks cross-team duplicate wheel/posse assignment for now.",
+          "Mobile remains stacked responsive UI rather than the future app-like drawer flow.",
+          "Armory uses plain row lists for gear and posses; recommendation sorting and detailed filter controls remain future work."
+        ],
+        "follow_ups_not_done": [
+          "C5 mobile overview/focused/picker drawer flow",
+          "C6 quick-lineup mode",
+          "C7 teams overview redesign",
+          "C8 import/export and transfer parity",
+          "Recommended gear and posse promotion in V2"
+        ],
+        "learning_lint_candidates": [
+          "Consider a Builder V2 contract note once transfer/import parity establishes the facade boundary."
+        ],
+        "scope_expansion_requested": "None"
+      }
+    },
+    {
+      "id": "R2",
+      "role": "review",
+      "status": "done",
+      "title": "Review W2 Builder V2 gear and posse assignment flow",
+      "skills": [
+        "$refactor-review",
+        "$refactor-react",
+        "$refactor-architecture",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/**",
+        "docs/refactor-goals/builder-v2-rebuild/**"
+      ],
+      "protected_files": [
+        "src/features/builder/**",
+        "src/App.tsx",
+        "builder persistence key/version",
+        "builder migrations",
+        "domain/generated data",
+        "package.json",
+        "package-lock.json",
+        "remote state"
+      ],
+      "expected_output": "Review W2 diff, receipts, validation, residual risk, and scope boundaries.",
+      "receipt": {
+        "summary": "Review found two low-severity no-op repeat-click issues, both fixed before tranche close.",
+        "findings": [
+          "Repeatedly clicking an already assigned wheel on its selected socket showed a false failure message.",
+          "Repeatedly clicking an already assigned covenant on its selected slot showed a false failure message."
+        ],
+        "fix": [
+          "useBuilderV2Model now treats no-op same-wheel and same-covenant assignment as quiet state preservation.",
+          "useBuilderV2Model.test.ts added a regression test for repeated wheel and covenant assignments."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx (2 files, 20 tests passed)",
+          "npm test -- --run src/features/builder (33 files, 251 tests passed)",
+          "npm run lint (passed)",
+          "npm run build (passed; existing Vite chunk-size and plugin timing warnings only)"
+        ],
+        "residual_risk": [
+          "Full transfer dialog parity remains queued.",
+          "Browser smoke screenshots and docs/design mockups remain intentionally untracked."
+        ]
+      }
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1 landed the first local Builder V2 route, model facade, shell, minimal picker, assign/remove loop, tests, and visual smoke. Broad Builder V2 rebuild remains active with queued follow-up tranches.",
+    "summary": "W1 landed the first local Builder V2 route, model facade, shell, minimal picker, assign/remove loop, tests, and visual smoke. W2 added gear and posse assignment flows with focused tests and review fixes. Broad Builder V2 rebuild remains active with queued follow-up tranches.",
     "validation": [
       "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx",
-      "npx vitest run src/features/builder/useBuilderViewModel.test.ts src/features/builder/builder-persistence.test.ts src/features/builder/builder-ownership-projection.test.ts",
-      "npm run test:integration",
+      "npm test -- --run src/features/builder",
       "npm run lint",
       "npm run build",
       "Playwright desktop/mobile smoke for #/builder-v2"

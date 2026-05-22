@@ -59,8 +59,27 @@ export function BuilderV2Page() {
                 <h2 className='ui-title'>{model.activeTeamName}</h2>
               </div>
               <div className='builder-v2-posse-summary'>
-                <span className='builder-v2-label'>Posse</span>
-                <span>Not selected</span>
+                <button
+                  aria-label='Select team posse'
+                  aria-pressed={model.activeTeamTarget?.kind === 'posse'}
+                  className={`builder-v2-posse-target ${
+                    model.activeTeamTarget?.kind === 'posse' ? 'builder-v2-posse-target--active' : ''
+                  }`}
+                  onClick={model.selectPosse}
+                  type='button'
+                >
+                  <span className='builder-v2-label'>Posse</span>
+                  <span>{model.activePosse?.name ?? 'Not selected'}</span>
+                </button>
+                {model.activePosse ? (
+                  <button
+                    className='builder-v2-posse-clear'
+                    onClick={model.clearPosse}
+                    type='button'
+                  >
+                    Clear Posse
+                  </button>
+                ) : null}
               </div>
               <button className='builder-v2-lineup-button' disabled type='button'>
                 Quick Team Lineup
@@ -68,16 +87,17 @@ export function BuilderV2Page() {
             </div>
 
             <BuilderV2TeamSlots
+              onClearCovenant={model.clearCovenant}
+              onClearWheel={model.clearWheel}
               onRemoveAwakener={model.removeAwakener}
+              onSelectCovenantSlot={model.selectCovenantSlot}
               onSelectSlot={model.selectAwakenerSlot}
+              onSelectWheelSlot={model.selectWheelSlot}
               slots={model.slots}
             />
 
             <p className='builder-v2-editing-line' role={model.violationMessage ? 'alert' : undefined}>
-              {model.violationMessage ??
-                (model.selectedSlotId
-                  ? `Editing ${model.selectedSlotId.replace('slot-', 'Slot ')} - Awakener`
-                  : 'Select a slot or choose an awakener to begin.')}
+              {model.violationMessage ?? model.editingLabel}
             </p>
           </section>
 
@@ -114,9 +134,17 @@ export function BuilderV2Page() {
 
         <BuilderV2AwakenerPicker
           awakeners={model.awakeners}
+          covenants={model.covenants}
+          onAssignCovenant={model.assignCovenant}
           onAssignAwakener={model.assignAwakener}
+          onAssignPosse={model.assignPosse}
+          onAssignWheel={model.assignWheel}
+          onPickerTabChange={model.setPickerTab}
           onSearchChange={model.setSearchQuery}
+          pickerTab={model.pickerTab}
+          posses={model.posses}
           searchQuery={model.searchQuery}
+          wheels={model.wheels}
         />
       </div>
     </section>

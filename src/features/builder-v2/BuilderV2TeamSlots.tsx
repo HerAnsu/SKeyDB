@@ -2,14 +2,22 @@ import type {BuilderV2SlotView} from './useBuilderV2Model'
 
 interface BuilderV2TeamSlotsProps {
   slots: BuilderV2SlotView[]
+  onClearCovenant: (slotId: string) => void
+  onClearWheel: (slotId: string, wheelIndex: 0 | 1) => void
   onRemoveAwakener: (slotId: string) => void
+  onSelectCovenantSlot: (slotId: string) => void
   onSelectSlot: (slotId: string) => void
+  onSelectWheelSlot: (slotId: string, wheelIndex: 0 | 1) => void
 }
 
 export function BuilderV2TeamSlots({
+  onClearCovenant,
+  onClearWheel,
   slots,
   onRemoveAwakener,
+  onSelectCovenantSlot,
   onSelectSlot,
+  onSelectWheelSlot,
 }: BuilderV2TeamSlotsProps) {
   return (
     <div className='builder-v2-slot-grid' aria-label='Builder V2 active team slots'>
@@ -57,19 +65,67 @@ export function BuilderV2TeamSlots({
           </button>
 
           <div className='builder-v2-equipment-strip' aria-label={`${slot.slotLabel} loadout`}>
-            {slot.wheels.map((wheelId, index) => (
-              <span
-                className='builder-v2-equipment-slot'
-                key={`${slot.slotId}-wheel-${String(index)}`}
+            {slot.wheelSlots.map((wheelSlot) => (
+              <div
+                className={`builder-v2-equipment-slot ${wheelSlot.isSelected ? 'builder-v2-equipment-slot--active' : ''}`}
+                key={`${slot.slotId}-wheel-${String(wheelSlot.wheelIndex)}`}
               >
-                <span className='builder-v2-label'>W{String(index + 1)}</span>
-                <span>{wheelId ? 'Set' : '+'}</span>
-              </span>
+                <button
+                  aria-label={`Select ${wheelSlot.label}`}
+                  aria-pressed={wheelSlot.isSelected}
+                  className='builder-v2-equipment-target'
+                  onClick={() => {
+                    onSelectWheelSlot(slot.slotId, wheelSlot.wheelIndex)
+                  }}
+                  type='button'
+                >
+                  <span className='builder-v2-label'>W{String(wheelSlot.wheelIndex + 1)}</span>
+                  <span className='builder-v2-equipment-value'>
+                    {wheelSlot.wheelName ?? '+'}
+                  </span>
+                </button>
+                {wheelSlot.wheelId ? (
+                  <button
+                    aria-label={`Clear ${wheelSlot.label}`}
+                    className='builder-v2-equipment-clear'
+                    onClick={() => {
+                      onClearWheel(slot.slotId, wheelSlot.wheelIndex)
+                    }}
+                    type='button'
+                  >
+                    Clear
+                  </button>
+                ) : null}
+              </div>
             ))}
-            <span className='builder-v2-equipment-slot'>
-              <span className='builder-v2-label'>Covenant</span>
-              <span>{slot.covenantId ? 'Set' : '+'}</span>
-            </span>
+            <div
+              className={`builder-v2-equipment-slot ${slot.isCovenantSelected ? 'builder-v2-equipment-slot--active' : ''}`}
+            >
+              <button
+                aria-label={`Select ${slot.slotLabel} Covenant`}
+                aria-pressed={slot.isCovenantSelected}
+                className='builder-v2-equipment-target'
+                onClick={() => {
+                  onSelectCovenantSlot(slot.slotId)
+                }}
+                type='button'
+              >
+                <span className='builder-v2-label'>Covenant</span>
+                <span className='builder-v2-equipment-value'>{slot.covenantName ?? '+'}</span>
+              </button>
+              {slot.covenantId ? (
+                <button
+                  aria-label={`Clear ${slot.slotLabel} Covenant`}
+                  className='builder-v2-equipment-clear'
+                  onClick={() => {
+                    onClearCovenant(slot.slotId)
+                  }}
+                  type='button'
+                >
+                  Clear
+                </button>
+              ) : null}
+            </div>
           </div>
 
           {slot.awakener ? (

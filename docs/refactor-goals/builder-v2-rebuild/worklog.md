@@ -89,3 +89,46 @@
   - `npm run lint` passed.
   - `npm run build` passed.
 - Active task: none. First major local Builder V2 tranche is complete; broader Builder V2 goal remains active with queued candidates C4-C8.
+
+### 2026-05-22 - C4 gear and posse slice scoped
+
+- Source: User continued the Builder V2 refactor goal and requested the same subagentic assign/review workflow.
+- Scout task: Three read-only scouts completed and were closed after completion.
+- Scout evidence:
+  - `TeamSlot` already carries wheel and covenant loadout state; `Team` carries `posseId`.
+  - Existing pure helpers in `team-state.ts` cover wheel/covenant assign, clear, and swap behavior.
+  - Posse assignment is team-level state; full V1 transfer-dialog parity remains larger than this slice.
+  - V1 tests pin same-team wheel movement, cross-team transfer requests, covenant assignment/swap, and posse transfer behavior.
+  - C4 UI should activate the existing Armory tabs and make W1/W2/Covenant plus header Posse targets real controls.
+- Judge task: J2 approved C4 as a bounded Builder V2 patch slice under `src/features/builder-v2/**` plus this goal packet.
+- Deferred by Judge: old BuilderPage edits, full transfer dialogs, DnD, mobile drawer, persistence/migration changes, dependencies, and global CSS/design-system work.
+- Active task: W2, build Builder V2 gear and posse assignment flow.
+
+### 2026-05-22 - W2 landed and reviewed
+
+- W2 result: implemented bounded Builder V2 gear and posse assignment.
+- Product files changed:
+  - `src/features/builder-v2/useBuilderV2Model.ts`
+  - `src/features/builder-v2/useBuilderV2Model.test.ts`
+  - `src/features/builder-v2/BuilderV2AwakenerPicker.tsx`
+  - `src/features/builder-v2/BuilderV2TeamSlots.tsx`
+  - `src/features/builder-v2/BuilderV2Page.tsx`
+  - `src/features/builder-v2/BuilderV2Page.test.tsx`
+  - `src/features/builder-v2/builder-v2.css`
+- Behavior:
+  - Armory tabs now switch between awakeners, wheels, covenants, and posses.
+  - W1/W2/Covenant slot targets are real controls with assign and clear behavior.
+  - The team-level Posse target can select, assign, and clear active team `posseId`.
+  - Wheel assignment uses existing helper semantics for slot assignment and same-team movement; cross-team duplicate wheel/posse assignment is blocked until transfer UI parity lands.
+  - Existing BuilderPage, persistence, migrations, dependencies, and generated data stayed untouched.
+- Review:
+  - Reviewer found two low-severity false-error paths for repeat-clicking the already assigned wheel or covenant.
+  - Fix landed in `useBuilderV2Model`, and `useBuilderV2Model.test.ts` now covers quiet repeated wheel/covenant assignment.
+  - Reviewer completed and was closed after the finding and fix were recorded.
+- Validation:
+  - `npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx` passed, 2 files / 20 tests.
+  - `npm test -- --run src/features/builder` passed, 33 files / 251 tests.
+  - `npm run lint` passed.
+  - `npm run build` passed; existing Vite chunk-size/plugin timing warnings only.
+  - Browser smoke rendered `http://127.0.0.1:5173/#/builder-v2` at 1440x1000 and 390x844, assigned an awakener, switched Armory to Wheels, and assigned a wheel.
+- Active task: none. C4 is implemented; broader Builder V2 goal remains active with queued C5-C8 follow-ups.

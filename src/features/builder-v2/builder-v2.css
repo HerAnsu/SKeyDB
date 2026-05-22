@@ -75,18 +75,46 @@
 
 .builder-v2-posse-summary {
   display: grid;
-  gap: 0.22rem;
-  color: var(--ui-text-muted);
-  font-size: 0.8rem;
+  min-width: min(12rem, 100%);
+  gap: 0.35rem;
 }
 
 .builder-v2-lineup-button,
+.builder-v2-posse-target,
+.builder-v2-posse-clear,
 .builder-v2-tab,
 .builder-v2-search,
 .builder-v2-team-row,
 .builder-v2-overview-card,
-.builder-v2-remove-button {
+.builder-v2-remove-button,
+.builder-v2-equipment-target,
+.builder-v2-equipment-clear {
   border-radius: var(--ui-radius-xs);
+}
+
+.builder-v2-posse-target {
+  display: grid;
+  min-height: 2.75rem;
+  gap: 0.2rem;
+  border: 1px solid var(--ui-border-subtle);
+  background: var(--ui-panel-strong);
+  padding: 0.45rem 0.62rem;
+  color: var(--ui-text-muted);
+  text-align: left;
+}
+
+.builder-v2-posse-target--active {
+  border-color: oklch(78% 0.1 84 / 0.72);
+  color: var(--ui-text-main);
+}
+
+.builder-v2-posse-clear {
+  border: 1px solid var(--ui-border-subtle);
+  background: transparent;
+  padding: 0.3rem 0.5rem;
+  color: var(--ui-text-faint);
+  font-size: 0.68rem;
+  font-weight: 800;
 }
 
 .builder-v2-lineup-button {
@@ -240,13 +268,47 @@
 .builder-v2-equipment-slot {
   display: grid;
   min-height: 2.9rem;
-  place-items: center;
-  gap: 0.18rem;
+  gap: 0.24rem;
   border: 1px solid var(--ui-border-subtle);
   border-radius: var(--ui-radius-xs);
   background: var(--ui-panel-strong);
   color: var(--ui-text-muted);
   font-size: 0.72rem;
+}
+
+.builder-v2-equipment-slot--active {
+  border-color: oklch(78% 0.1 84 / 0.72);
+  box-shadow: inset 0 0 0 1px oklch(78% 0.1 84 / 0.16);
+}
+
+.builder-v2-equipment-target {
+  display: grid;
+  width: 100%;
+  min-height: 2.75rem;
+  place-items: center;
+  gap: 0.18rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0.35rem 0.32rem;
+}
+
+.builder-v2-equipment-value {
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.builder-v2-equipment-clear {
+  border: 0;
+  border-top: 1px solid var(--ui-border-subtle);
+  background: transparent;
+  padding: 0.24rem 0.3rem 0.32rem;
+  color: var(--ui-text-faint);
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .builder-v2-remove-button {
@@ -305,7 +367,22 @@
 
 .builder-v2-search:focus {
   border-color: var(--ui-accent-gold);
-  outline: none;
+  outline: 2px solid oklch(78% 0.1 84 / 0.34);
+  outline-offset: 2px;
+}
+
+.builder-v2-tab:focus-visible,
+.builder-v2-team-row:focus-visible,
+.builder-v2-overview-card:focus-visible,
+.builder-v2-picker-row:focus-visible,
+.builder-v2-slot-button:focus-visible,
+.builder-v2-equipment-target:focus-visible,
+.builder-v2-equipment-clear:focus-visible,
+.builder-v2-posse-target:focus-visible,
+.builder-v2-posse-clear:focus-visible,
+.builder-v2-remove-button:focus-visible {
+  outline: 2px solid oklch(78% 0.1 84 / 0.66);
+  outline-offset: 2px;
 }
 
 .builder-v2-picker-results {
@@ -334,7 +411,9 @@
 }
 
 .builder-v2-picker-portrait {
+  display: grid;
   aspect-ratio: 1;
+  place-items: center;
   overflow: hidden;
   border: 1px solid var(--ui-border-subtle);
   border-radius: var(--ui-radius-xs);
@@ -399,7 +478,7 @@
   }
 
   .builder-v2-rail {
-    order: 2;
+    order: 3;
   }
 
   .builder-v2-workbench {
@@ -407,7 +486,7 @@
   }
 
   .builder-v2-armory {
-    order: 3;
+    order: 2;
   }
 }
 
