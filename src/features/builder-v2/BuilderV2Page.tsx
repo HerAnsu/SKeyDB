@@ -2,19 +2,26 @@ import './builder-v2.css'
 
 import {useEffect, useState} from 'react'
 
+import {BuilderV2AdaptiveLayout} from './BuilderV2AdaptiveLayout'
 import {BuilderV2AwakenerPicker} from './BuilderV2AwakenerPicker'
 import {BuilderV2MobileLayout} from './BuilderV2MobileLayout'
 import {BuilderV2TeamSlots} from './BuilderV2TeamSlots'
 import {useBuilderV2Model} from './useBuilderV2Model'
 
 const BUILDER_V2_MOBILE_BREAKPOINT_PX = 768
+const BUILDER_V2_ADAPTIVE_BREAKPOINT_PX = 1056
+type BuilderV2ViewportMode = 'mobile' | 'adaptive' | 'desktop'
 
 export function BuilderV2Page() {
   const model = useBuilderV2Model()
-  const isMobile = useBuilderV2IsMobile()
+  const viewportMode = useBuilderV2ViewportMode()
 
-  if (isMobile) {
+  if (viewportMode === 'mobile') {
     return <BuilderV2MobileLayout model={model} />
+  }
+
+  if (viewportMode === 'adaptive') {
+    return <BuilderV2AdaptiveLayout model={model} />
   }
 
   return (
@@ -167,12 +174,12 @@ export function BuilderV2Page() {
   )
 }
 
-function useBuilderV2IsMobile() {
-  const [isMobile, setIsMobile] = useState(() => getBuilderV2IsMobile())
+function useBuilderV2ViewportMode() {
+  const [viewportMode, setViewportMode] = useState(() => getBuilderV2ViewportMode())
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(getBuilderV2IsMobile())
+      setViewportMode(getBuilderV2ViewportMode())
     }
 
     window.addEventListener('resize', handleResize)
@@ -181,11 +188,19 @@ function useBuilderV2IsMobile() {
     }
   }, [])
 
-  return isMobile
+  return viewportMode
 }
 
-function getBuilderV2IsMobile() {
-  return window.innerWidth <= BUILDER_V2_MOBILE_BREAKPOINT_PX
+function getBuilderV2ViewportMode(): BuilderV2ViewportMode {
+  if (window.innerWidth <= BUILDER_V2_MOBILE_BREAKPOINT_PX) {
+    return 'mobile'
+  }
+
+  if (window.innerWidth <= BUILDER_V2_ADAPTIVE_BREAKPOINT_PX) {
+    return 'adaptive'
+  }
+
+  return 'desktop'
 }
 
 type BuilderV2PageModel = ReturnType<typeof useBuilderV2Model>

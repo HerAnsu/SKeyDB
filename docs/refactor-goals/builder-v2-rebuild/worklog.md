@@ -270,3 +270,76 @@
 - Packaging:
   - Untracked concept/sendoff files under `docs/design/` and smoke screenshots remain intentionally excluded from W4 staging/commit.
 - Active task: none. C5 is implemented and reviewed; broader Builder V2 goal remains active with C7, C8, and C9 queued.
+
+### 2026-05-22 - S6 next-chunk scout recorded
+
+- Source: User continued the Builder V2 refactor goal for the next major chunk.
+- Scouts:
+  - `019e4d96-1e2e-7381-b0fc-692b748379ef`
+  - `019e4d96-5597-7731-a4a4-f2e4daf49857`
+  - `019e4d96-89a6-7631-8ff0-1af62064d388`
+- Scout evidence:
+  - Tablet/adaptive workbench is viable as a standalone slice because Builder V2 currently switches to mobile at `<= 768px`, while CSS collapses the desktop shell at `<= 66rem`, leaving tablet widths as an undesigned stacked desktop fallback.
+  - C8 should split: `C8a` import/export parity can reuse existing codecs/import planner/dialog contracts through V2 seams, while `C8b` transfer dialog parity crosses into whole-team transfer mutation semantics and should be separate.
+  - Full C7 teams redesign remains queued behind a product/design decision on list-vs-cards and compact/expanded behavior, but `C7a` team overview readiness is viable as a neutral read-only summary/switching surface.
+  - C9 final designer handoff is still premature, though the packet can keep accumulating handoff-readiness notes.
+- Candidate reconciliation:
+  - Added `C6a`, Tablet/adaptive workbench shell.
+  - Added `C7a`, Team overview readiness component.
+  - Split C8 into `C8a`, Builder V2 import/export parity, and `C8b`, Builder V2 transfer dialog parity.
+  - Kept full C7 and C9 queued.
+- Active task: none. Next step is Judge approval for one bounded Worker slice.
+
+### 2026-05-22 - C6a tablet/adaptive slice scoped
+
+- Judge: `019e4d99-75d4-7830-a952-205592c7c8c5`.
+- Decision: Approve `C6a`, Tablet/adaptive workbench shell, as the next bounded Worker slice.
+- Reason:
+  - `C6a` fixes a verified breakpoint gap between W1 desktop and W4 mobile.
+  - React switches to mobile only at `<= 768px`, while CSS collapses the desktop shell at `<= 66rem`, leaving tablet widths as a stacked fallback instead of a designed pseudo-desktop workbench.
+  - It does not require the C7 list-vs-cards decision or the C8 import/export/transfer parity contracts.
+- In scope:
+  - Explicit adaptive/tablet behavior for `769px..66rem`.
+  - Active builder remains the primary surface.
+  - Compact teams rail/sidebar for active-team switching only.
+  - Adaptive picker drawer/overlay using shared `BuilderV2PickerContent`.
+  - Preserve mobile `<= 768px` and desktop `> 66rem`.
+  - Focused V2 tests and local Builder V2 CSS.
+- Deferred:
+  - Full teams overview redesign, list-vs-cards, import/export, transfer confirmations, DnD, recommendations, nav promotion, shared store changes, `/builder` changes, dependencies, persistence, and migrations.
+- Active task: W5, build C6a tablet/adaptive workbench shell.
+
+### 2026-05-22 - W5 implemented and R5 review passed
+
+- W5 result: implemented the C6a tablet/adaptive workbench shell inside the isolated Builder V2 boundary.
+- Product files changed:
+  - `src/features/builder-v2/BuilderV2AdaptiveLayout.tsx`
+  - `src/features/builder-v2/BuilderV2Page.tsx`
+  - `src/features/builder-v2/BuilderV2Page.test.tsx`
+  - `src/features/builder-v2/builder-v2.css`
+- Behavior:
+  - `/builder-v2` now has explicit viewport shells: mobile at `<= 768px`, adaptive at `769px..1056px`, and desktop above `1056px`.
+  - Adaptive widths render a distinct pseudo-desktop workbench instead of the prior stacked desktop fallback.
+  - The adaptive shell keeps active team slots primary, compacts team switching into a narrow rail, and moves the picker into a modal drawer.
+  - The adaptive drawer reuses shared picker content, focuses search on open/tab change, closes with Escape, and returns focus to the invoking control.
+  - The drawer now blocks background interaction with a full-screen backdrop, body scroll lock, and hidden header/workbench semantics while open.
+  - Invalid adaptive assignments stay inside the drawer and surface the model violation as an alert.
+  - Existing desktop armory and W4 mobile overview/focused/full-screen picker flows are preserved.
+- Characterization:
+  - Initial adaptive tests failed red because there was no adaptive workbench, compact adaptive team group, or adaptive picker trigger/drawer.
+  - Added page coverage for adaptive shell routing, compact team switching, picker focus/Escape return, wheel-tab drawer opening, invalid no-awakener wheel assignment, and full-wheel-slot no-target behavior.
+- Validation:
+  - `npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx` passed, 1 file / 20 tests.
+  - `npx eslint src/features/builder-v2/BuilderV2Page.tsx src/features/builder-v2/BuilderV2AdaptiveLayout.tsx src/features/builder-v2/BuilderV2Page.test.tsx` passed.
+  - `npx vitest run src/features/builder-v2` passed, 2 files / 38 tests.
+  - `npm run build` passed; existing Vite chunk-size and plugin timing warnings only.
+  - `git diff --check` passed.
+  - Browser smoke at `http://127.0.0.1:5173/#/builder-v2` passed at desktop 1440x1000, adaptive 900x1000, adaptive 1024x768 invalid assignment, and mobile 390x844.
+- Review:
+  - Reviewer: `019e4da3-2094-70b2-b7f4-00f7b21e301f`.
+  - Initial findings: untracked adaptive component packaging, modal drawer background operability, invalid assignment focus/message loss, and full-wheel-slot no-target close heuristic.
+  - Fixes: staged the new adaptive component, added backdrop/body-lock/background hiding, kept invalid assignments in-drawer with alerts, and tightened wheel close behavior with regression coverage.
+  - Final reviewer verdict: no blocking findings.
+- Packaging:
+  - Untracked concept/sendoff files under `docs/design/` and prior smoke screenshots remain intentionally excluded.
+- Active task: none. C6a is implemented and reviewed; broader Builder V2 goal remains active with C7a, C7, C8a, C8b, and C9 queued.

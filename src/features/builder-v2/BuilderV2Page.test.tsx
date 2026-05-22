@@ -1,11 +1,13 @@
-import {fireEvent, render, screen, within} from '@testing-library/react'
+import {act, fireEvent, render, screen, within} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
 import {afterEach, describe, expect, it} from 'vitest'
 
 import './builder-v2-test-mocks'
 
 import App from '@/App'
+import {builderDraftStore} from '@/stores/builderDraftStore'
 
+import {createEmptyTeamSlots} from '../builder/constants'
 import {BuilderV2Page} from './BuilderV2Page'
 
 function resizeBuilderV2Viewport(width: number, dispatchResize = true) {
@@ -20,11 +22,12 @@ function resizeBuilderV2Viewport(width: number, dispatchResize = true) {
 }
 
 afterEach(() => {
-  resizeBuilderV2Viewport(1024, false)
+  resizeBuilderV2Viewport(1200, false)
 })
 
 describe('BuilderV2Page', () => {
   it('renders a concept-informed shell with four slots and an awakener picker', () => {
+    resizeBuilderV2Viewport(1200)
     render(<BuilderV2Page />)
 
     expect(screen.getByRole('heading', {level: 1, name: /builder v2/i})).toBeInTheDocument()
@@ -33,6 +36,139 @@ describe('BuilderV2Page', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     expect(screen.getAllByText(/empty slot/i)).toHaveLength(4)
     expect(screen.getByRole('searchbox', {name: /search awakeners/i})).toBeInTheDocument()
+  })
+
+  it('renders an adaptive workbench instead of the mobile app or desktop armory at tablet widths', () => {
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    expect(screen.getByRole('region', {name: /adaptive workbench/i})).toBeInTheDocument()
+    expect(screen.queryByRole('region', {name: /mobile team overview/i})).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('complementary', {name: /builder v2 armory/i}),
+    ).not.toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /open adaptive picker/i})).toBeInTheDocument()
+    expect(screen.getByRole('group', {name: /adaptive teams/i})).toBeInTheDocument()
+  })
+
+  it('switches teams through the adaptive compact team rail', () => {
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+          {id: 'team-2', name: 'Team 2', slots: teamTwoSlots},
+        ],
+      })
+    })
+
+    const adaptiveTeams = screen.getByRole('group', {name: /adaptive teams/i})
+    fireEvent.click(within(adaptiveTeams).getByRole('button', {name: /02 team 2 1 \/ 4 deployed/i}))
+
+    expect(screen.getByRole('heading', {level: 2, name: /team 2/i})).toBeInTheDocument()
+    expect(screen.getByText(/editing slot 1 - awakener/i)).toBeInTheDocument()
+  })
+
+  it('opens an adaptive picker drawer with search focus and Escape focus return', () => {
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    const pickerTrigger = screen.getByRole('button', {name: /open adaptive picker/i})
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 2$/i}))
+    fireEvent.click(pickerTrigger)
+
+    const drawer = screen.getByRole('dialog', {name: /adaptive picker/i})
+    expect(drawer).toBeInTheDocument()
+    expect(drawer.parentElement).toHaveClass('builder-v2-adaptive-picker-backdrop')
+    expect(document.querySelector('.builder-v2-adaptive-workbench')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    )
+    expect(within(drawer).getByRole('tab', {name: /^awakeners$/i})).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+    expect(within(drawer).getByRole('searchbox', {name: /search awakeners/i})).toHaveFocus()
+
+    fireEvent.keyDown(document, {key: 'Escape'})
+
+    expect(screen.queryByRole('dialog', {name: /adaptive picker/i})).not.toBeInTheDocument()
+    expect(pickerTrigger).toHaveFocus()
+  })
+
+  it('opens the adaptive picker drawer on a wheel target with the wheels tab active', () => {
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 1$/i}))
+    fireEvent.click(screen.getByRole('button', {name: /open adaptive picker/i}))
+    fireEvent.click(screen.getByRole('button', {name: /goliath/i}))
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 1 wheel 2$/i}))
+    fireEvent.click(screen.getByRole('button', {name: /open adaptive picker/i}))
+
+    const drawer = screen.getByRole('dialog', {name: /adaptive picker/i})
+    expect(within(drawer).getByRole('tab', {name: /^wheels$/i})).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+    expect(within(drawer).getByRole('searchbox', {name: /search wheels/i})).toHaveFocus()
+  })
+
+  it('keeps the adaptive picker open and surfaces violations when an assignment target is invalid', () => {
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 1 wheel 1$/i}))
+    fireEvent.click(screen.getByRole('button', {name: /open adaptive picker/i}))
+    fireEvent.click(screen.getByRole('button', {name: /merciful nurturing/i}))
+
+    const drawer = screen.getByRole('dialog', {name: /adaptive picker/i})
+    expect(drawer).toBeInTheDocument()
+    expect(within(drawer).getByRole('alert')).toHaveTextContent(/wheels require an awakener/i)
+  })
+
+  it('keeps the adaptive picker open when an awakened slot has no empty wheel target', () => {
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    const fullWheelSlots = createEmptyTeamSlots()
+    fullWheelSlots[0] = {
+      ...fullWheelSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+      wheels: ['wheel-0050', 'wheel-0051'],
+    }
+
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [{id: 'team-1', name: 'Team 1', slots: fullWheelSlots}],
+      })
+    })
+
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 1$/i}))
+    fireEvent.click(screen.getByRole('button', {name: /open adaptive picker/i}))
+
+    const drawer = screen.getByRole('dialog', {name: /adaptive picker/i})
+    fireEvent.click(within(drawer).getByRole('tab', {name: /^wheels$/i}))
+    fireEvent.click(within(drawer).getByRole('button', {name: /signal through silence/i}))
+
+    expect(screen.getByRole('dialog', {name: /adaptive picker/i})).toBeInTheDocument()
+    expect(within(drawer).getByRole('alert')).toHaveTextContent(
+      /select a wheel slot or an awakened slot/i,
+    )
   })
 
   it('renders the mobile overview and enters the focused slot builder', () => {
