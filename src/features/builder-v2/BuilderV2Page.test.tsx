@@ -71,6 +71,44 @@ describe('BuilderV2Page', () => {
     expect(screen.getByRole('searchbox', {name: /search awakeners/i})).toBeInTheDocument()
   })
 
+  it('keeps picker tab ids instance-safe and exposes tile status in accessible names', () => {
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    const awakenerTab = screen.getByRole('tab', {name: /^awakeners$/i})
+    const awakenerPanelId = awakenerTab.getAttribute('aria-controls')
+    expect(awakenerPanelId).toBeTruthy()
+    expect(document.getElementById(awakenerPanelId ?? '')).toHaveAttribute(
+      'aria-labelledby',
+      awakenerTab.id,
+    )
+
+    fireEvent.keyDown(awakenerTab, {key: 'ArrowRight'})
+
+    const wheelTab = screen.getByRole('tab', {name: /^wheels$/i})
+    expect(wheelTab).toHaveFocus()
+    expect(document.getElementById(wheelTab.getAttribute('aria-controls') ?? '')).toHaveAttribute(
+      'aria-labelledby',
+      wheelTab.id,
+    )
+
+    const pickerIds = Array.from(
+      document.querySelectorAll<HTMLElement>('.builder-v2-armory [id]'),
+    ).map((element) => element.id)
+    expect(pickerIds).toEqual([
+      expect.stringMatching(/^builder-v2-picker-.+-tab-awakeners$/),
+      expect.stringMatching(/^builder-v2-picker-.+-tab-wheels$/),
+      expect.stringMatching(/^builder-v2-picker-.+-tab-covenants$/),
+      expect.stringMatching(/^builder-v2-picker-.+-tab-posses$/),
+      expect.stringMatching(/^builder-v2-picker-.+-panel$/),
+    ])
+    expect(new Set(pickerIds).size).toBe(pickerIds.length)
+
+    fireEvent.click(screen.getByRole('tab', {name: /^awakeners$/i}))
+
+    expect(screen.getByRole('button', {name: /goliath, level \d+/i})).toBeInTheDocument()
+  })
+
   it('renders a functional desktop team management overview and switches teams from it', () => {
     const teamOneSlots = createEmptyTeamSlots()
     const teamTwoSlots = createEmptyTeamSlots()
@@ -718,9 +756,7 @@ describe('BuilderV2Page', () => {
     if (!slot1) {
       throw new Error('Expected slot 1 article to render')
     }
-    expect(
-      within(slot1).getByRole('button', {name: /clear slot 1 wheel 1/i}),
-    ).toBeInTheDocument()
+    expect(within(slot1).getByRole('button', {name: /clear slot 1 wheel 1/i})).toBeInTheDocument()
 
     fireEvent.click(within(slot1).getByRole('button', {name: /clear slot 1 wheel 1/i}))
     expect(

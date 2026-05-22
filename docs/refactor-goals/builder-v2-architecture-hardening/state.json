@@ -816,7 +816,7 @@
     {
       "id": "J5",
       "role": "judge",
-      "status": "active",
+      "status": "done",
       "title": "Choose next contained post-picker-extraction slice",
       "skills": [
         "$refactor-rootfix",
@@ -839,6 +839,134 @@
         "docs/design/**"
       ],
       "expected_output": "Select the next bounded tranche after C6. Prefer a contained root-fix or high-leverage a11y/code-health slice that does not drift into mobile layout, teams-list, DnD, CSS redesign, or dependencies.",
+      "receipt": {
+        "evidence": [
+          "Selected C9 Shared picker a11y hardening as W5.",
+          "C9 is contained after W4 because the picker option DTOs are now stable and the shared picker content still owns fixed tab/panel IDs plus incomplete tile accessible names.",
+          "Rejected C10/C11/C12 for this tranche because adaptive focus/CSS slices are more likely to drift into layout or visual polish, while C9 is shared semantic hardening without chrome changes."
+        ],
+        "validation": [
+          "Approved W5 allowed files, invariants, validation, and rollback."
+        ]
+      }
+    },
+    {
+      "id": "W5",
+      "role": "worker",
+      "status": "done",
+      "title": "Harden shared picker ids and tile accessible names",
+      "skills": [
+        "$refactor-ui-a11y",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-rootfix"
+      ],
+      "allowed_files": [
+        "src/features/builder-v2/BuilderV2AwakenerPicker.tsx",
+        "src/features/builder-v2/BuilderV2Page.test.tsx",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "src/features/builder-v2/builder-v2.css",
+        "src/features/builder-v2/BuilderV2AdaptiveLayout.tsx",
+        "src/features/builder-v2/BuilderV2MobileLayout.tsx",
+        "src/features/builder-v2/useBuilderV2Model.ts",
+        "picker redesign",
+        "mobile/tablet layout",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Replace fixed shared picker tab/panel IDs with instance-safe IDs and enrich picker tile accessible names with the existing blocked/unowned/used/recommended/active status metadata, without changing visual layout or picker behavior.",
+      "invariants": [
+        "Do not change picker visual chrome, CSS, filters, sorting, layout, mobile/adaptive drawer shape, or option ordering.",
+        "Do not change picker option DTOs or model behavior in W5.",
+        "Tab aria-controls and tabpanel aria-labelledby must point to IDs in the same picker instance.",
+        "Keyboard tab roving focus must still focus the matching tab in the same picker instance.",
+        "Tile accessible names should expose status metadata already visible as chips; do not add new product states."
+      ],
+      "validation": [
+        "npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-picker-options.test.ts src/features/builder-v2/useBuilderV2Model.test.ts --run",
+        "npx tsc -p tsconfig.app.json --noEmit",
+        "targeted npx eslint over touched Builder V2 files",
+        "node C:\\Users\\dansa\\.codex\\plugins\\cache\\refactor-discipline-local\\refactor-discipline\\0.4.3\\skills\\refactor-goal-prep\\scripts\\check-refactor-goal.mjs --goal docs/refactor-goals/builder-v2-architecture-hardening"
+      ],
+      "rollback": [
+        "Revert BuilderV2AwakenerPicker.tsx accessible-name/id changes, remove W5 page test assertions, and revert W5 packet updates."
+      ],
+      "receipt": {
+        "evidence": [
+          "Updated BuilderV2PickerContent to generate instance-safe picker tab and panel IDs with React useId.",
+          "Tab aria-controls and tabpanel aria-labelledby now point to IDs in the same picker instance, and keyboard roving focus targets the same instance instead of querying fixed global IDs.",
+          "Expanded picker tile accessible names to include already-visible status metadata: level/enlighten, unowned, in-use team, blocked reason, recommendation tier/mainstat, active posse, and posse ownership status.",
+          "Added BuilderV2Page test coverage for picker-owned instance IDs, tab/panel wiring, roving focus, and richer tile accessible names.",
+          "Reviewer subagent 019e51c3-9a6c-7bb2-a200-05aac9b2dd6a found ambiguous in-use labels, duplicate unowned posse status, and an overbroad page-wide ID assertion; W5 fixed all three before completion."
+        ],
+        "validation": [
+          "npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-picker-options.test.ts src/features/builder-v2/useBuilderV2Model.test.ts --run passed with 75 tests.",
+          "npx tsc -p tsconfig.app.json --noEmit passed.",
+          "npx eslint src/features/builder-v2/BuilderV2AwakenerPicker.tsx src/features/builder-v2/BuilderV2Page.test.tsx passed."
+        ]
+      }
+    },
+    {
+      "id": "R4",
+      "role": "review",
+      "status": "done",
+      "title": "Review W5 shared picker a11y hardening",
+      "skills": [
+        "$refactor-review",
+        "$refactor-ui-a11y",
+        "$refactor-react",
+        "$refactor-typescript"
+      ],
+      "allowed_files": [
+        "read-only current W5 diff",
+        "docs/refactor-goals/builder-v2-architecture-hardening/**"
+      ],
+      "protected_files": [
+        "product source edits during review",
+        "remote state"
+      ],
+      "expected_output": "Audit W5 for a11y, React, ID wiring, accessible-name, test, and scope issues.",
+      "receipt": {
+        "evidence": [
+          "Reviewer subagent 019e51c3-9a6c-7bb2-a200-05aac9b2dd6a found three issues: ambiguous raw Team N labels, duplicated Unowned posse labels, and an overbroad page-wide ID uniqueness test.",
+          "Controller fixed in-use labels to read 'In use by Team N', deduplicated posse accessible statuses, and narrowed the ID assertion to picker-owned IDs."
+        ],
+        "validation": [
+          "Controller reran focused W5 tests, app typecheck, and targeted eslint successfully after reviewer fixes."
+        ]
+      }
+    },
+    {
+      "id": "J6",
+      "role": "judge",
+      "status": "active",
+      "title": "Choose next architecture-hardening tranche",
+      "skills": [
+        "$refactor-rootfix",
+        "$refactor-react",
+        "$refactor-typescript",
+        "$refactor-complexity",
+        "$refactor-ui-a11y"
+      ],
+      "allowed_files": [
+        "docs/refactor-goals/builder-v2-architecture-hardening/**",
+        "read-only W4/W5 diffs",
+        "read-only queued candidate evidence"
+      ],
+      "protected_files": [
+        "mobile redesign",
+        "teams-list shape decisions",
+        "DnD implementation",
+        "dependencies",
+        "remote state",
+        "docs/design/**"
+      ],
+      "expected_output": "Select the next bounded tranche only after W5 is committed. Remaining likely candidates include C7 adaptive callback churn, C10 adaptive drawer focus containment/restore, C11/C12 CSS contracts, C4/C5 shared type/team-state boundaries, or C16 state strategy review.",
       "receipt": null
     }
   ],

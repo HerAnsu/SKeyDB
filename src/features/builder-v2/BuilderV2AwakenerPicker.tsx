@@ -1,4 +1,5 @@
-import {memo, useEffect, useRef, type CSSProperties, type ReactNode, type Ref} from 'react'
+import {memo, useEffect, useId, useRef, type CSSProperties, type ReactNode, type Ref} from 'react'
+
 import {FaCaretDown, FaCaretUp} from 'react-icons/fa6'
 
 import type {
@@ -16,8 +17,8 @@ import type {
   BuilderV2CovenantOption,
   BuilderV2PickerModel,
   BuilderV2PickerTab,
-  BuilderV2PosseOption,
   BuilderV2PosseFilter,
+  BuilderV2PosseOption,
   BuilderV2WheelOption,
   BuilderV2WheelRarityFilter,
 } from './BuilderV2ModelTypes'
@@ -121,6 +122,9 @@ export function BuilderV2PickerContent({
   onAssignWheel,
 }: BuilderV2PickerContentProps) {
   const activeCopy = pickerCopy[picker.tab]
+  const pickerInstanceId = `builder-v2-picker-${useId().replaceAll(':', '')}`
+  const pickerPanelId = `${pickerInstanceId}-panel`
+  const getPickerTabId = (tab: BuilderV2PickerTab) => `${pickerInstanceId}-tab-${tab}`
 
   return (
     <>
@@ -129,10 +133,10 @@ export function BuilderV2PickerContent({
           const isActive = tab.id === picker.tab
           return (
             <button
-              aria-controls='builder-v2-picker-panel'
+              aria-controls={pickerPanelId}
               aria-selected={isActive}
               className={`builder-v2-tab ${isActive ? 'builder-v2-tab--active' : ''}`}
-              id={`builder-v2-tab-${tab.id}`}
+              id={getPickerTabId(tab.id)}
               key={tab.id}
               onKeyDown={(event) => {
                 const nextTab = getKeyboardPickerTab(event.key, tabIndex)
@@ -141,7 +145,7 @@ export function BuilderV2PickerContent({
                 }
                 event.preventDefault()
                 picker.setTab(nextTab)
-                document.getElementById(`builder-v2-tab-${nextTab}`)?.focus()
+                document.getElementById(getPickerTabId(nextTab))?.focus()
               }}
               onClick={() => {
                 picker.setTab(tab.id)
@@ -179,9 +183,9 @@ export function BuilderV2PickerContent({
       <BuilderV2PickerFilters picker={picker} />
 
       <div
-        aria-labelledby={`builder-v2-tab-${picker.tab}`}
+        aria-labelledby={getPickerTabId(picker.tab)}
         className='builder-v2-picker-results'
-        id='builder-v2-picker-panel'
+        id={pickerPanelId}
         role='tabpanel'
       >
         {picker.tab === 'awakeners'
@@ -429,9 +433,7 @@ function BuilderV2AwakenerPickerTile({
 
   return (
     <button
-      aria-label={`${awakener.displayName}${awakener.inUse ? ' in use' : ''}${
-        awakener.inUseLabel ? ` ${awakener.inUseLabel}` : ''
-      }`}
+      aria-label={getAwakenerPickerTileLabel(awakener)}
       className='builder-v2-picker-tile builder-v2-picker-tile--awakener'
       data-blocked={awakener.blocked}
       data-in-use={awakener.inUse}
@@ -469,9 +471,7 @@ const BuilderV2WheelPickerTile = memo(function BuilderV2WheelPickerTile({
 
   return (
     <button
-      aria-label={`${wheel.name}${wheel.inUse ? ' in use' : ''}${
-        wheel.inUseLabel ? ` ${wheel.inUseLabel}` : ''
-      }`}
+      aria-label={getWheelPickerTileLabel(wheel)}
       className='builder-v2-picker-tile builder-v2-picker-tile--wheel'
       data-in-use={wheel.inUse}
       data-owned={wheel.owned}
@@ -528,7 +528,7 @@ function BuilderV2CovenantPickerTile({
 }) {
   return (
     <button
-      aria-label={`${covenant.name}${covenant.inUse ? ' in use' : ''}`}
+      aria-label={getCovenantPickerTileLabel(covenant)}
       className='builder-v2-picker-tile builder-v2-picker-tile--covenant'
       data-in-use={covenant.inUse}
       data-recommended={covenant.recommended}
@@ -542,7 +542,9 @@ function BuilderV2CovenantPickerTile({
         chips={
           <>
             {covenant.recommendationLabel ? (
-              <PickerStateChip tone='recommendation'>{covenant.recommendationLabel}</PickerStateChip>
+              <PickerStateChip tone='recommendation'>
+                {covenant.recommendationLabel}
+              </PickerStateChip>
             ) : null}
             {covenant.inUse ? <PickerStateChip tone='status'>Used</PickerStateChip> : null}
           </>
@@ -564,9 +566,7 @@ function BuilderV2PossePickerTile({
 }) {
   return (
     <button
-      aria-label={`${posse.name}${posse.inUse ? ' in use' : ''}${
-        posse.statusLabel ? ` ${posse.statusLabel}` : ''
-      }`}
+      aria-label={getPossePickerTileLabel(posse)}
       className='builder-v2-picker-tile builder-v2-picker-tile--posse'
       data-active={posse.isActive}
       data-blocked={posse.blocked}
@@ -581,7 +581,9 @@ function BuilderV2PossePickerTile({
         alt={`${posse.name} posse`}
         chips={
           <>
-            {posse.isActive ? <PickerStateChip tone='recommendation'>Active</PickerStateChip> : null}
+            {posse.isActive ? (
+              <PickerStateChip tone='recommendation'>Active</PickerStateChip>
+            ) : null}
             {posse.recommended && !posse.isActive ? (
               <PickerStateChip tone='recommendation'>Rec</PickerStateChip>
             ) : null}
@@ -628,7 +630,11 @@ function PickerTileArt({
       {src ? (
         <img
           alt={alt}
-          className={isDimmed ? 'builder-v2-picker-tile-image builder-v2-picker-tile-image--dimmed' : 'builder-v2-picker-tile-image'}
+          className={
+            isDimmed
+              ? 'builder-v2-picker-tile-image builder-v2-picker-tile-image--dimmed'
+              : 'builder-v2-picker-tile-image'
+          }
           decoding='async'
           draggable={false}
           fetchPriority='low'
@@ -684,10 +690,73 @@ function isPresent<TValue>(value: TValue | null | undefined): value is TValue {
   return value !== null && value !== undefined
 }
 
-function areWheelOptionsEqual(
-  previous: BuilderV2WheelOption,
-  next: BuilderV2WheelOption,
-): boolean {
+function getAwakenerPickerTileLabel(awakener: BuilderV2AwakenerOption): string {
+  return joinAccessibleParts([
+    awakener.displayName,
+    `Level ${String(awakener.level)}`,
+    formatEnlightenLabel(awakener.enlightenLevel),
+    awakener.owned ? null : 'Unowned',
+    formatInUseLabel(awakener.inUseLabel),
+    awakener.blockReason ? `Blocked: ${awakener.blockReason}` : null,
+  ])
+}
+
+function getWheelPickerTileLabel(wheel: BuilderV2WheelOption): string {
+  const recommendedMainstatLabel = wheel.recommendedMainstatKey
+    ? getMainstatByKey(wheel.recommendedMainstatKey)?.label
+    : null
+
+  return joinAccessibleParts([
+    wheel.name,
+    wheel.rarity,
+    wheel.mainstat,
+    formatEnlightenLabel(wheel.enlightenLevel),
+    wheel.owned ? null : 'Unowned',
+    formatInUseLabel(wheel.inUseLabel),
+    wheel.recommendationLabel ? `Recommended ${wheel.recommendationLabel}` : null,
+    recommendedMainstatLabel ? `Recommended mainstat ${recommendedMainstatLabel}` : null,
+  ])
+}
+
+function getCovenantPickerTileLabel(covenant: BuilderV2CovenantOption): string {
+  return joinAccessibleParts([
+    covenant.name,
+    covenant.inUse ? 'In use' : null,
+    covenant.recommendationLabel ? `Recommended ${covenant.recommendationLabel}` : null,
+  ])
+}
+
+function getPossePickerTileLabel(posse: BuilderV2PosseOption): string {
+  return joinAccessibleParts([
+    posse.name,
+    posse.realm,
+    getPosseAccessibleStatus(posse),
+    posse.recommended && !posse.statusLabel ? 'Recommended' : null,
+  ])
+}
+
+function formatInUseLabel(label: string | null): string | null {
+  return label ? `In use by ${label}` : null
+}
+
+function getPosseAccessibleStatus(posse: BuilderV2PosseOption): string | null {
+  if (posse.isActive) {
+    return 'Active'
+  }
+  if (posse.blocked && posse.statusLabel) {
+    return `In use by ${posse.statusLabel}`
+  }
+  if (!posse.owned) {
+    return 'Unowned'
+  }
+  return posse.statusLabel
+}
+
+function joinAccessibleParts(parts: (string | null | undefined)[]): string {
+  return parts.filter(isPresent).join(', ')
+}
+
+function areWheelOptionsEqual(previous: BuilderV2WheelOption, next: BuilderV2WheelOption): boolean {
   return (
     previous.id === next.id &&
     previous.name === next.name &&

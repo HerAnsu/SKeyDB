@@ -115,3 +115,32 @@
 - R3 complete: W4 review recorded.
 - J5 active: choose the next contained post-picker-extraction slice. Candidate options are likely C9 shared picker a11y hardening, C10 adaptive focus, C7 callback churn, or a small CSS contract slice if Judge can keep it contained.
 - Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-22 - J5 selected shared picker a11y hardening
+
+- J5 selected `C9` Shared picker a11y hardening as W5.
+- Root-fix reasoning: after W4, picker option DTOs and status metadata are stable in one pure module. The shared picker content still uses fixed tab/panel IDs and tile accessible names omit several existing chip/status states, which is a semantic defect across picker shells.
+- Rejected C10/C11/C12 for this tranche: adaptive focus and CSS contracts are valid queued candidates but more likely to drift into layout or visual polish. W5 should be semantic-only and shared.
+- W5 active: `Harden shared picker ids and tile accessible names`.
+- W5 allowed files: `src/features/builder-v2/BuilderV2AwakenerPicker.tsx`, `src/features/builder-v2/BuilderV2Page.test.tsx`, and this goal packet.
+- W5 protected scope: no CSS, no adaptive/mobile layout files, no model/option DTO behavior, no picker redesign, no teams-list, no DnD, no dependency changes, no `docs/design/**`.
+- W5 validation target: focused page/model picker tests, app typecheck, targeted eslint, and packet checker.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
+
+### 2026-05-22 - W5 shared picker a11y hardening landed
+
+- W5 implementation:
+  - Updated `BuilderV2PickerContent` to use instance-safe picker tab/panel IDs.
+  - Kept tab `aria-controls`, tabpanel `aria-labelledby`, and keyboard roving focus scoped to the same picker instance.
+  - Expanded picker tile accessible names with existing visible status metadata: level/enlighten, unowned, in-use team, blocked reason, recommendation tier/mainstat, active posse, and posse ownership state.
+  - Added `BuilderV2Page.test.tsx` coverage for picker-owned IDs, tab/panel wiring, roving focus, and richer tile accessible names.
+- Review:
+  - Reviewer `019e51c3-9a6c-7bb2-a200-05aac9b2dd6a` found three issues: ambiguous raw `Team N` accessible labels, duplicated `Unowned` for posses, and an overbroad page-wide ID uniqueness assertion.
+  - Fixed labels to say `In use by Team N`, deduplicated posse accessible status text, and narrowed the ID assertion to picker-owned IDs.
+  - Reviewer completed and was closed after its result was recorded.
+- Validation:
+  - `npx vitest run src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-picker-options.test.ts src/features/builder-v2/useBuilderV2Model.test.ts --run` passed with 75 tests.
+  - `npx tsc -p tsconfig.app.json --noEmit` passed.
+  - `npx eslint src/features/builder-v2/BuilderV2AwakenerPicker.tsx src/features/builder-v2/BuilderV2Page.test.tsx` passed.
+- J6 active: choose the next architecture-hardening tranche after W5 is committed.
+- Next prompt: `$refactor-goal-prep Continue docs/refactor-goals/builder-v2-architecture-hardening/goal.md.`
