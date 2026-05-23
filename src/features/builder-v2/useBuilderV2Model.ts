@@ -48,11 +48,7 @@ import {
   resetTeam,
   type TeamTemplateId,
 } from '../builder/team-collection'
-import {
-  clearCovenantAssignment,
-  clearSlotAssignment,
-  clearWheelAssignment,
-} from '../builder/team-state'
+import {clearSlotAssignment} from '../builder/team-state'
 import {applyPendingTransfer, applySupportTransfer} from '../builder/transfer-resolution'
 import type {
   ActiveSelection,
@@ -73,9 +69,18 @@ import {
 } from './builder-v2-editing-mode'
 import {
   resolveAssignAwakenerCommand,
+  resolveAssignAwakenerToTargetCommand,
   resolveAssignCovenantCommand,
+  resolveAssignCovenantToTargetCommand,
   resolveAssignPosseCommand,
   resolveAssignWheelCommand,
+  resolveAssignWheelToTargetCommand,
+  resolveMoveAwakenerCommand,
+  resolveMoveCovenantCommand,
+  resolveMoveWheelCommand,
+  resolveMoveWheelToSlotCommand,
+  resolveRemoveCovenantCommand,
+  resolveRemoveWheelCommand,
   type BuilderV2ResolvedLoadoutCommand,
 } from './builder-v2-loadout-commands'
 import {
@@ -1160,6 +1165,29 @@ export function useBuilderV2Model({
     ],
   )
 
+  const assignAwakenerToSlot = useCallback(
+    (awakenerId: string, slotId: string) => {
+      applyResolvedLoadoutCommand(
+        resolveAssignAwakenerToTargetCommand({
+          activeTeamId: effectiveActiveTeamId,
+          activeTeamSlots,
+          allowDuplicateAwakenerIdentities,
+          awakenerById,
+          awakenerId,
+          targetSlotId: slotId,
+          usedAwakenerByIdentityKey: usageIndex.awakenerByIdentityKey,
+        }),
+      )
+    },
+    [
+      activeTeamSlots,
+      allowDuplicateAwakenerIdentities,
+      applyResolvedLoadoutCommand,
+      effectiveActiveTeamId,
+      usageIndex,
+    ],
+  )
+
   const assignWheel = useCallback(
     (wheelId: string) => {
       applyResolvedLoadoutCommand(
@@ -1183,6 +1211,29 @@ export function useBuilderV2Model({
     ],
   )
 
+  const assignWheelToSlot = useCallback(
+    (wheelId: string, slotId: string, wheelIndex?: WheelSlotIndex) => {
+      applyResolvedLoadoutCommand(
+        resolveAssignWheelToTargetCommand({
+          activeTeamId: effectiveActiveTeamId,
+          activeTeamSlots,
+          allowDuplicateAwakenerIdentities,
+          targetSlotId: slotId,
+          targetWheelIndex: wheelIndex,
+          usedWheelByTeamOrder,
+          wheelId,
+        }),
+      )
+    },
+    [
+      activeTeamSlots,
+      allowDuplicateAwakenerIdentities,
+      applyResolvedLoadoutCommand,
+      effectiveActiveTeamId,
+      usedWheelByTeamOrder,
+    ],
+  )
+
   const assignCovenant = useCallback(
     (covenantId: string) => {
       applyResolvedLoadoutCommand(
@@ -1194,6 +1245,19 @@ export function useBuilderV2Model({
       )
     },
     [activeSelection, activeTeamSlots, applyResolvedLoadoutCommand],
+  )
+
+  const assignCovenantToSlot = useCallback(
+    (covenantId: string, slotId: string) => {
+      applyResolvedLoadoutCommand(
+        resolveAssignCovenantToTargetCommand({
+          activeTeamSlots,
+          covenantId,
+          targetSlotId: slotId,
+        }),
+      )
+    },
+    [activeTeamSlots, applyResolvedLoadoutCommand],
   )
 
   const assignPosse = useCallback(
@@ -1235,30 +1299,87 @@ export function useBuilderV2Model({
 
   const clearWheel = useCallback(
     (slotId: string, wheelIndex: WheelSlotIndex) => {
-      const result = clearWheelAssignment(activeTeamSlots, slotId, wheelIndex)
-      if (!result.changed) {
-        return
-      }
-
-      setActiveTeamSlotsInStore(result.nextSlots)
-      setViolationMessage(null)
-      applyEditingTarget({kind: 'wheel', slotId, wheelIndex})
+      applyResolvedLoadoutCommand(
+        resolveRemoveWheelCommand({
+          activeTeamSlots,
+          slotId,
+          wheelIndex,
+        }),
+      )
     },
-    [activeTeamSlots, applyEditingTarget, setActiveTeamSlotsInStore],
+    [activeTeamSlots, applyResolvedLoadoutCommand],
+  )
+
+  const moveAwakener = useCallback(
+    (fromSlotId: string, toSlotId: string) => {
+      applyResolvedLoadoutCommand(
+        resolveMoveAwakenerCommand({
+          activeTeamSlots,
+          fromSlotId,
+          toSlotId,
+        }),
+      )
+    },
+    [activeTeamSlots, applyResolvedLoadoutCommand],
+  )
+
+  const moveWheel = useCallback(
+    (
+      fromSlotId: string,
+      fromWheelIndex: WheelSlotIndex,
+      toSlotId: string,
+      toWheelIndex: WheelSlotIndex,
+    ) => {
+      applyResolvedLoadoutCommand(
+        resolveMoveWheelCommand({
+          activeTeamSlots,
+          fromSlotId,
+          fromWheelIndex,
+          toSlotId,
+          toWheelIndex,
+        }),
+      )
+    },
+    [activeTeamSlots, applyResolvedLoadoutCommand],
+  )
+
+  const moveWheelToSlot = useCallback(
+    (fromSlotId: string, fromWheelIndex: WheelSlotIndex, toSlotId: string) => {
+      applyResolvedLoadoutCommand(
+        resolveMoveWheelToSlotCommand({
+          activeTeamSlots,
+          fromSlotId,
+          fromWheelIndex,
+          toSlotId,
+        }),
+      )
+    },
+    [activeTeamSlots, applyResolvedLoadoutCommand],
   )
 
   const clearCovenant = useCallback(
     (slotId: string) => {
-      const result = clearCovenantAssignment(activeTeamSlots, slotId)
-      if (!result.changed) {
-        return
-      }
-
-      setActiveTeamSlotsInStore(result.nextSlots)
-      setViolationMessage(null)
-      applyEditingTarget({kind: 'covenant', slotId})
+      applyResolvedLoadoutCommand(
+        resolveRemoveCovenantCommand({
+          activeTeamSlots,
+          slotId,
+        }),
+      )
     },
-    [activeTeamSlots, applyEditingTarget, setActiveTeamSlotsInStore],
+    [activeTeamSlots, applyResolvedLoadoutCommand],
+  )
+
+  const moveCovenant = useCallback(
+    (fromSlotId: string, toSlotId: string) => {
+      applyResolvedLoadoutCommand(
+        resolveMoveCovenantCommand({
+          activeTeamSlots,
+          fromSlotId,
+          toSlotId,
+        }),
+      )
+    },
+    [activeTeamSlots, applyResolvedLoadoutCommand],
   )
 
   const clearPosse = useCallback(() => {
@@ -1561,12 +1682,19 @@ export function useBuilderV2Model({
     selectCovenantSlot,
     selectPosse,
     assignAwakener,
+    assignAwakenerToSlot,
     assignWheel,
+    assignWheelToSlot,
     assignCovenant,
+    assignCovenantToSlot,
     assignPosse,
     removeAwakener,
+    moveAwakener,
     clearWheel,
+    moveWheel,
+    moveWheelToSlot,
     clearCovenant,
+    moveCovenant,
     clearPosse,
     openImportDialog,
     openExportAllDialog,

@@ -249,12 +249,24 @@ export interface BuilderV2Model {
   selectCovenantSlot: (slotId: string) => void
   selectPosse: () => void
   assignAwakener: (awakenerId: string) => void
+  assignAwakenerToSlot: (awakenerId: string, slotId: string) => void
   assignWheel: (wheelId: string) => void
+  assignWheelToSlot: (wheelId: string, slotId: string, wheelIndex?: WheelSlotIndex) => void
   assignCovenant: (covenantId: string) => void
+  assignCovenantToSlot: (covenantId: string, slotId: string) => void
   assignPosse: (posseId: string) => void
   removeAwakener: (slotId: string) => void
+  moveAwakener: (fromSlotId: string, toSlotId: string) => void
   clearWheel: (slotId: string, wheelIndex: WheelSlotIndex) => void
+  moveWheel: (
+    fromSlotId: string,
+    fromWheelIndex: WheelSlotIndex,
+    toSlotId: string,
+    toWheelIndex: WheelSlotIndex,
+  ) => void
+  moveWheelToSlot: (fromSlotId: string, fromWheelIndex: WheelSlotIndex, toSlotId: string) => void
   clearCovenant: (slotId: string) => void
+  moveCovenant: (fromSlotId: string, toSlotId: string) => void
   clearPosse: () => void
   openImportDialog: () => void
   openExportAllDialog: () => void

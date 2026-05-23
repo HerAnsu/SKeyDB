@@ -63,8 +63,6 @@ export function assignAwakenerToSlot(
         realm: awakener.realm,
         level: slot.level ?? 60,
         isSupport: slot.isSupport,
-        wheels: [null, null] as [null, null],
-        covenantId: undefined,
       }
     }
 

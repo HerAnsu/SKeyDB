@@ -338,3 +338,10 @@
   - `npx eslint src/features/builder/team-state.ts src/features/builder/team-state.test.ts src/features/builder-v2/builder-v2-loadout-commands.ts src/features/builder-v2/useBuilderV2Model.ts` passed.
 - R11 complete: controller review recorded the C5 semantics, C16 state-strategy decision, and C8/C13 first-DnD-tranche gates.
 - J13 active: choose the next concrete DnD-prep tranche or pause the architecture-hardening packet until DnD work starts.
+
+### 2026-05-23 - J13 transferred DnD work to a dedicated packet
+
+- User approved starting Builder V2 DnD as a new goal rather than continuing the architecture-hardening packet.
+- J13 decision: transfer `C8` Slot interaction descriptors for drag ghosts and `C13` Clipping/drag overlay CSS boundary into `docs/refactor-goals/builder-v2-dnd/goal.md`.
+- Reasoning: architecture-hardening completed the non-DnD prep through W12. Actual DnD needs its own packet because the work includes V1 behavior parity, V2 drag payload/drop target contracts, dnd-kit wiring, ghost/overlay design, desktop/tablet validation, and a11y decisions.
+- Architecture packet status: no active DnD implementation task remains here; this packet now points to the new DnD packet for drag/drop work.

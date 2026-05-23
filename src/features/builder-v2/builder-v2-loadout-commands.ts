@@ -7,7 +7,10 @@ import {
   assignAwakenerToSlot,
   assignCovenantToSlot,
   assignWheelToSlot,
+  clearCovenantAssignment,
+  clearWheelAssignment,
   swapCovenantAssignments,
+  swapSlotAssignments,
   swapWheelAssignments,
   type TeamStateViolationCode,
 } from '../builder/team-state'
@@ -31,6 +34,13 @@ interface AssignAwakenerCommandOptions {
   usedAwakenerByIdentityKey: Map<string, BuilderV2AwakenerUsage>
 }
 
+type AssignAwakenerToTargetCommandOptions = Omit<
+  AssignAwakenerCommandOptions,
+  'activeSelection'
+> & {
+  targetSlotId: string
+}
+
 interface AssignWheelCommandOptions {
   activeSelection: ActiveSelection
   activeTeamId: string
@@ -40,10 +50,22 @@ interface AssignWheelCommandOptions {
   wheelId: string
 }
 
+type AssignWheelToTargetCommandOptions = Omit<AssignWheelCommandOptions, 'activeSelection'> & {
+  targetSlotId: string
+  targetWheelIndex?: WheelSlotIndex
+}
+
 interface AssignCovenantCommandOptions {
   activeSelection: ActiveSelection
   activeTeamSlots: TeamSlot[]
   covenantId: string
+}
+
+type AssignCovenantToTargetCommandOptions = Omit<
+  AssignCovenantCommandOptions,
+  'activeSelection'
+> & {
+  targetSlotId: string
 }
 
 interface AssignPosseCommandOptions {
@@ -53,6 +75,44 @@ interface AssignPosseCommandOptions {
   posseId: string
   teams: Team[]
   usedPosseByTeamOrder: Map<string, number>
+}
+
+interface RemoveWheelCommandOptions {
+  activeTeamSlots: TeamSlot[]
+  slotId: string
+  wheelIndex: WheelSlotIndex
+}
+
+interface MoveAwakenerCommandOptions {
+  activeTeamSlots: TeamSlot[]
+  fromSlotId: string
+  toSlotId: string
+}
+
+interface MoveWheelCommandOptions {
+  activeTeamSlots: TeamSlot[]
+  fromSlotId: string
+  fromWheelIndex: WheelSlotIndex
+  toSlotId: string
+  toWheelIndex: WheelSlotIndex
+}
+
+interface MoveWheelToSlotCommandOptions {
+  activeTeamSlots: TeamSlot[]
+  fromSlotId: string
+  fromWheelIndex: WheelSlotIndex
+  toSlotId: string
+}
+
+interface RemoveCovenantCommandOptions {
+  activeTeamSlots: TeamSlot[]
+  slotId: string
+}
+
+interface MoveCovenantCommandOptions {
+  activeTeamSlots: TeamSlot[]
+  fromSlotId: string
+  toSlotId: string
 }
 
 export type BuilderV2ResolvedLoadoutCommand =
@@ -185,6 +245,16 @@ export function resolveAssignAwakenerCommand({
   }
 }
 
+export function resolveAssignAwakenerToTargetCommand({
+  targetSlotId,
+  ...options
+}: AssignAwakenerToTargetCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  return resolveAssignAwakenerCommand({
+    ...options,
+    activeSelection: {kind: 'awakener', slotId: targetSlotId},
+  })
+}
+
 export function resolveAssignWheelCommand({
   activeSelection,
   activeTeamId,
@@ -265,6 +335,20 @@ export function resolveAssignWheelCommand({
   }
 }
 
+export function resolveAssignWheelToTargetCommand({
+  targetSlotId,
+  targetWheelIndex,
+  ...options
+}: AssignWheelToTargetCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  return resolveAssignWheelCommand({
+    ...options,
+    activeSelection:
+      targetWheelIndex === undefined
+        ? {kind: 'awakener', slotId: targetSlotId}
+        : {kind: 'wheel', slotId: targetSlotId, wheelIndex: targetWheelIndex},
+  })
+}
+
 export function resolveAssignCovenantCommand({
   activeSelection,
   activeTeamSlots,
@@ -308,6 +392,16 @@ export function resolveAssignCovenantCommand({
   }
 }
 
+export function resolveAssignCovenantToTargetCommand({
+  targetSlotId,
+  ...options
+}: AssignCovenantToTargetCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  return resolveAssignCovenantCommand({
+    ...options,
+    activeSelection: {kind: 'covenant', slotId: targetSlotId},
+  })
+}
+
 export function resolveAssignPosseCommand({
   activeTeamId,
   allowDuplicateAwakenerIdentities,
@@ -339,6 +433,127 @@ export function resolveAssignPosseCommand({
     activeSelection: null,
     activeTeamTarget: {kind: 'posse'},
     pickerTab: 'posses',
+  }
+}
+
+export function resolveRemoveWheelCommand({
+  activeTeamSlots,
+  slotId,
+  wheelIndex,
+}: RemoveWheelCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  const result = clearWheelAssignment(activeTeamSlots, slotId, wheelIndex)
+  return {
+    kind: 'slots',
+    nextSlots: result.nextSlots,
+    changed: result.changed,
+    clearTransfer: true,
+    activeSelection: {kind: 'wheel', slotId, wheelIndex},
+    activeTeamTarget: null,
+    pickerTab: 'wheels',
+  }
+}
+
+export function resolveMoveAwakenerCommand({
+  activeTeamSlots,
+  fromSlotId,
+  toSlotId,
+}: MoveAwakenerCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  const result = swapSlotAssignments(activeTeamSlots, fromSlotId, toSlotId)
+  return {
+    kind: 'slots',
+    nextSlots: result.nextSlots,
+    changed: result.changed,
+    clearTransfer: false,
+    activeSelection: {kind: 'awakener', slotId: toSlotId},
+    activeTeamTarget: null,
+    pickerTab: 'awakeners',
+  }
+}
+
+export function resolveMoveWheelCommand({
+  activeTeamSlots,
+  fromSlotId,
+  fromWheelIndex,
+  toSlotId,
+  toWheelIndex,
+}: MoveWheelCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  const result = swapWheelAssignments(
+    activeTeamSlots,
+    fromSlotId,
+    fromWheelIndex,
+    toSlotId,
+    toWheelIndex,
+  )
+  return {
+    kind: 'slots',
+    nextSlots: result.nextSlots,
+    changed: result.changed,
+    clearTransfer: false,
+    activeSelection: {kind: 'wheel', slotId: toSlotId, wheelIndex: toWheelIndex},
+    activeTeamTarget: null,
+    pickerTab: 'wheels',
+  }
+}
+
+export function resolveMoveWheelToSlotCommand({
+  activeTeamSlots,
+  fromSlotId,
+  fromWheelIndex,
+  toSlotId,
+}: MoveWheelToSlotCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  const targetSlot = activeTeamSlots.find((slot) => slot.slotId === toSlotId)
+  const toWheelIndex = getFirstEmptyWheelIndex(targetSlot)
+  if (toWheelIndex === null) {
+    return {
+      kind: 'slots',
+      nextSlots: activeTeamSlots,
+      changed: false,
+      clearTransfer: false,
+      activeSelection: {kind: 'wheel', slotId: toSlotId, wheelIndex: 0},
+      activeTeamTarget: null,
+      pickerTab: 'wheels',
+    }
+  }
+
+  return resolveMoveWheelCommand({
+    activeTeamSlots,
+    fromSlotId,
+    fromWheelIndex,
+    toSlotId,
+    toWheelIndex,
+  })
+}
+
+export function resolveRemoveCovenantCommand({
+  activeTeamSlots,
+  slotId,
+}: RemoveCovenantCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  const result = clearCovenantAssignment(activeTeamSlots, slotId)
+  return {
+    kind: 'slots',
+    nextSlots: result.nextSlots,
+    changed: result.changed,
+    clearTransfer: true,
+    activeSelection: {kind: 'covenant', slotId},
+    activeTeamTarget: null,
+    pickerTab: 'covenants',
+  }
+}
+
+export function resolveMoveCovenantCommand({
+  activeTeamSlots,
+  fromSlotId,
+  toSlotId,
+}: MoveCovenantCommandOptions): BuilderV2ResolvedLoadoutCommand {
+  const result = swapCovenantAssignments(activeTeamSlots, fromSlotId, toSlotId)
+  return {
+    kind: 'slots',
+    nextSlots: result.nextSlots,
+    changed: result.changed,
+    clearTransfer: false,
+    activeSelection: {kind: 'covenant', slotId: toSlotId},
+    activeTeamTarget: null,
+    pickerTab: 'covenants',
   }
 }
 

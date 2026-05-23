@@ -569,6 +569,69 @@ describe('useBuilderV2Model', () => {
     expect(result.current.activeSelection).toEqual({kind: 'awakener', slotId: 'slot-1'})
   })
 
+  it('assigns picker actions to explicit DnD targets without relying on selected state', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.selectAwakenerSlot('slot-4')
+      result.current.assignAwakenerToSlot('awakener-0021', 'slot-2')
+    })
+    act(() => {
+      result.current.assignWheelToSlot('wheel-0050', 'slot-2', 1)
+    })
+    act(() => {
+      result.current.assignCovenantToSlot('c01', 'slot-2')
+    })
+    expect(result.current.selectedSlotId).toBe('slot-2')
+
+    act(() => {
+      result.current.assignPosse('posse-0033')
+    })
+
+    expect(result.current.slots[1]?.awakener?.id).toBe('awakener-0021')
+    expect(result.current.slots[1]?.wheels).toEqual([null, 'wheel-0050'])
+    expect(result.current.slots[1]?.covenantId).toBe('c01')
+    expect(result.current.activePosse?.id).toBe('posse-0033')
+  })
+
+  it('keeps slot loadout when replacing an awakener from the picker', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.assignAwakenerToSlot('awakener-0021', 'slot-2')
+    })
+    act(() => {
+      result.current.assignWheelToSlot('wheel-0050', 'slot-2', 0)
+    })
+    act(() => {
+      result.current.assignCovenantToSlot('c01', 'slot-2')
+    })
+    act(() => {
+      result.current.assignAwakenerToSlot('awakener-0042', 'slot-2')
+    })
+
+    expect(result.current.slots[1]?.awakener?.id).toBe('awakener-0042')
+    expect(result.current.slots[1]?.wheels).toEqual(['wheel-0050', null])
+    expect(result.current.slots[1]?.covenantId).toBe('c01')
+  })
+
+  it('assigns slot-level DnD wheels to the first empty wheel target', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.assignAwakenerToSlot('awakener-0021', 'slot-2')
+    })
+    act(() => {
+      result.current.assignWheelToSlot('wheel-0050', 'slot-2')
+    })
+    act(() => {
+      result.current.assignWheelToSlot('wheel-0051', 'slot-2')
+    })
+
+    expect(result.current.slots[1]?.wheels).toEqual(['wheel-0050', 'wheel-0051'])
+    expect(result.current.activeSelection).toEqual({kind: 'awakener', slotId: 'slot-2'})
+  })
+
   it('moves a wheel within the active team instead of duplicating it', () => {
     const {result} = renderHook(() => useBuilderV2Model())
     const slots = createEmptyTeamSlots()
@@ -631,6 +694,90 @@ describe('useBuilderV2Model', () => {
     expect(result.current.activeTeamTarget).toBeNull()
     expect(result.current.pickerTab).toBe('wheels')
     expect(result.current.violationMessage).toBeNull()
+  })
+
+  it('moves active-team wheels between sockets through the explicit DnD command path', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+    const slots = createEmptyTeamSlots()
+    slots[0] = createAssignedSlot('slot-1', {wheels: ['wheel-0050', null]})
+    slots[1] = createAssignedSlot('slot-2', {
+      awakenerId: 'awakener-0007',
+      realm: 'CARO',
+      wheels: [null, 'wheel-0051'],
+    })
+
+    act(() => {
+      builderDraftStore.getState().setActiveTeamSlots(slots)
+    })
+    act(() => {
+      result.current.moveWheel('slot-1', 0, 'slot-2', 0)
+    })
+
+    expect(result.current.slots[0]?.wheels).toEqual([null, null])
+    expect(result.current.slots[1]?.wheels).toEqual(['wheel-0050', 'wheel-0051'])
+    expect(result.current.activeSelection).toEqual({kind: 'wheel', slotId: 'slot-2', wheelIndex: 0})
+    expect(result.current.pickerTab).toBe('wheels')
+
+    act(() => {
+      result.current.moveWheel('slot-2', 0, 'slot-2', 1)
+    })
+
+    expect(result.current.slots[1]?.wheels).toEqual(['wheel-0051', 'wheel-0050'])
+    expect(result.current.activeSelection).toEqual({kind: 'wheel', slotId: 'slot-2', wheelIndex: 1})
+  })
+
+  it('moves active-team wheels to the first empty wheel socket on a slot-level drop', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+    const slots = createEmptyTeamSlots()
+    slots[0] = createAssignedSlot('slot-1', {wheels: ['wheel-0050', null]})
+    slots[1] = createAssignedSlot('slot-2', {
+      awakenerId: 'awakener-0007',
+      realm: 'CARO',
+      wheels: [null, 'wheel-0051'],
+    })
+
+    act(() => {
+      builderDraftStore.getState().setActiveTeamSlots(slots)
+    })
+    act(() => {
+      result.current.moveWheelToSlot('slot-1', 0, 'slot-2')
+    })
+
+    expect(result.current.slots[0]?.wheels).toEqual([null, null])
+    expect(result.current.slots[1]?.wheels).toEqual(['wheel-0050', 'wheel-0051'])
+    expect(result.current.activeSelection).toEqual({kind: 'wheel', slotId: 'slot-2', wheelIndex: 0})
+    expect(result.current.pickerTab).toBe('wheels')
+  })
+
+  it('moves an active-team awakener with its loadout through the explicit DnD command path', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+    const slots = createEmptyTeamSlots()
+    slots[0] = createAssignedSlot('slot-1', {
+      wheels: ['wheel-0050', 'wheel-0051'],
+      covenantId: 'c01',
+    })
+    slots[1] = createAssignedSlot('slot-2', {
+      awakenerId: 'awakener-0007',
+      realm: 'CARO',
+      wheels: ['wheel-0060', null],
+      covenantId: 'c02',
+    })
+
+    act(() => {
+      builderDraftStore.getState().setActiveTeamSlots(slots)
+    })
+    act(() => {
+      result.current.moveAwakener('slot-1', 'slot-2')
+    })
+
+    expect(result.current.slots[0]?.awakener?.id).toBe('awakener-0007')
+    expect(result.current.slots[0]?.wheels).toEqual(['wheel-0060', null])
+    expect(result.current.slots[0]?.covenantId).toBe('c02')
+    expect(result.current.slots[1]?.awakener?.id).toBe('awakener-0021')
+    expect(result.current.slots[1]?.wheels).toEqual(['wheel-0050', 'wheel-0051'])
+    expect(result.current.slots[1]?.covenantId).toBe('c01')
+    expect(result.current.activeSelection).toEqual({kind: 'awakener', slotId: 'slot-2'})
+    expect(result.current.pickerTab).toBe('awakeners')
   })
 
   it('keeps support slots from opening cross-team wheel transfers', () => {
@@ -765,6 +912,29 @@ describe('useBuilderV2Model', () => {
     expect(result.current.slots[1]?.covenantId).toBe('c01')
     expect(result.current.activeSelection).toEqual({kind: 'covenant', slotId: 'slot-2'})
     expect(result.current.activeTeamTarget).toBeNull()
+    expect(result.current.pickerTab).toBe('covenants')
+    expect(result.current.violationMessage).toBeNull()
+  })
+
+  it('moves active-team covenants through the explicit DnD command path', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+    const slots = createEmptyTeamSlots()
+    slots[0] = createAssignedSlot('slot-1', {covenantId: 'c01'})
+    slots[1] = createAssignedSlot('slot-2', {
+      awakenerId: 'awakener-0007',
+      realm: 'CARO',
+    })
+
+    act(() => {
+      builderDraftStore.getState().setActiveTeamSlots(slots)
+    })
+    act(() => {
+      result.current.moveCovenant('slot-1', 'slot-2')
+    })
+
+    expect(result.current.slots[0]?.covenantId).toBeUndefined()
+    expect(result.current.slots[1]?.covenantId).toBe('c01')
+    expect(result.current.activeSelection).toEqual({kind: 'covenant', slotId: 'slot-2'})
     expect(result.current.pickerTab).toBe('covenants')
     expect(result.current.violationMessage).toBeNull()
   })

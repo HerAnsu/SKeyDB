@@ -1,14 +1,30 @@
-import {memo} from 'react'
+import {memo, useCallback} from 'react'
+
+import {useDraggable, useDroppable} from '@dnd-kit/core'
 
 import {getRealmBadge, getRealmLabel} from '@/domain/realms'
 
 import type {WheelSlotIndex} from '../builder/types'
+import {
+  createBuilderV2TeamAwakenerDragPayload,
+  createBuilderV2TeamCovenantDragPayload,
+  createBuilderV2TeamWheelDragPayload,
+  makeBuilderV2CovenantDndId,
+  makeBuilderV2SlotDndId,
+  makeBuilderV2TeamAwakenerDragId,
+  makeBuilderV2TeamCovenantDragId,
+  makeBuilderV2TeamWheelDragId,
+  makeBuilderV2WheelDndId,
+  type BuilderV2DropTargetDescriptor,
+} from './builder-v2-dnd'
 import type {BuilderV2SlotView, BuilderV2WheelSlotView} from './BuilderV2ModelTypes'
 
 type BuilderV2AwakenerRealm = NonNullable<BuilderV2SlotView['awakener']>['realm']
 
 interface BuilderV2TeamSlotsProps {
   slots: BuilderV2SlotView[]
+  isDragActive?: boolean
+  predictedDropTarget?: BuilderV2DropTargetDescriptor | null
   quickLineupActive?: boolean
   onClearCovenant: (slotId: string) => void
   onClearWheel: (slotId: string, wheelIndex: WheelSlotIndex) => void
@@ -21,7 +37,9 @@ interface BuilderV2TeamSlotsProps {
 export function BuilderV2TeamSlots({
   onClearCovenant,
   onClearWheel,
+  isDragActive = false,
   quickLineupActive = false,
+  predictedDropTarget = null,
   slots,
   onRemoveAwakener,
   onSelectCovenantSlot,
@@ -39,6 +57,8 @@ export function BuilderV2TeamSlots({
           onSelectCovenantSlot={onSelectCovenantSlot}
           onSelectSlot={onSelectSlot}
           onSelectWheelSlot={onSelectWheelSlot}
+          isDragActive={isDragActive}
+          predictedDropTarget={predictedDropTarget}
           quickLineupActive={quickLineupActive}
           slot={slot}
         />
@@ -49,6 +69,8 @@ export function BuilderV2TeamSlots({
 
 interface BuilderV2SlotCardProps {
   slot: BuilderV2SlotView
+  isDragActive: boolean
+  predictedDropTarget: BuilderV2DropTargetDescriptor | null
   quickLineupActive: boolean
   onClearCovenant: (slotId: string) => void
   onClearWheel: (slotId: string, wheelIndex: WheelSlotIndex) => void
@@ -65,24 +87,67 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
   onSelectCovenantSlot,
   onSelectSlot,
   onSelectWheelSlot,
+  isDragActive,
+  predictedDropTarget,
   quickLineupActive,
   slot,
 }: BuilderV2SlotCardProps) {
+  const awakenerDragPayload = createBuilderV2TeamAwakenerDragPayload(slot)
+  const covenantDragPayload = createBuilderV2TeamCovenantDragPayload(slot)
+  const {isOver: isSlotOver, setNodeRef: setSlotDropRef} = useDroppable({
+    id: makeBuilderV2SlotDndId(slot.slotId),
+  })
+  const {isOver: isCovenantOver, setNodeRef: setCovenantDropRef} = useDroppable({
+    id: makeBuilderV2CovenantDndId(slot.slotId),
+  })
+  const {
+    attributes: awakenerDragAttributes,
+    listeners: awakenerDragListeners,
+    setNodeRef: setAwakenerDragRef,
+  } = useDraggable({
+    id: makeBuilderV2TeamAwakenerDragId(slot.slotId),
+    data: awakenerDragPayload ?? undefined,
+    disabled: !awakenerDragPayload,
+  })
+  const {
+    attributes: covenantDragAttributes,
+    listeners: covenantDragListeners,
+    setNodeRef: setCovenantDragRef,
+  } = useDraggable({
+    id: makeBuilderV2TeamCovenantDragId(slot.slotId),
+    data: covenantDragPayload ?? undefined,
+    disabled: !covenantDragPayload,
+  })
+  const setCovenantDragDropRef = useMergedRefs(setCovenantDropRef, setCovenantDragRef)
+  const setCovenantNodeRef = covenantDragPayload ? setCovenantDragDropRef : setCovenantDropRef
+  const isSlotDropTarget = isDragActive
+    ? isPredictedSlotDropTarget(predictedDropTarget, slot.slotId)
+    : isSlotOver
+  const isCovenantDropTarget = isDragActive
+    ? isPredictedCovenantDropTarget(predictedDropTarget, slot.slotId)
+    : isCovenantOver
+
   return (
     <article
-      className={`builder-v2-slot-card ${slot.isSelected ? 'builder-v2-slot-card--active' : ''}`}
+      className={`builder-v2-slot-card ${slot.isSelected ? 'builder-v2-slot-card--active' : ''} ${
+        isSlotDropTarget ? 'builder-v2-slot-card--drop-target' : ''
+      }`}
       data-slot-id={slot.slotId}
+      ref={setSlotDropRef}
     >
       <span className='sr-only'>{slot.slotLabel}</span>
 
       <div className='builder-v2-awakener-frame'>
         <button
+          {...(awakenerDragPayload ? awakenerDragAttributes : {})}
+          {...(awakenerDragPayload ? awakenerDragListeners : {})}
           aria-label={`Select ${slot.slotLabel}`}
           aria-pressed={slot.isSelected}
           className='builder-v2-awakener-art-target'
           onClick={() => {
             onSelectSlot(slot.slotId)
           }}
+          ref={awakenerDragPayload ? setAwakenerDragRef : undefined}
           type='button'
         >
           <span className='builder-v2-awakener-art'>
@@ -149,14 +214,17 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
 
           <div className='builder-v2-covenant-slot'>
             <button
+              {...(covenantDragPayload ? covenantDragAttributes : {})}
+              {...(covenantDragPayload ? covenantDragListeners : {})}
               aria-label={`Select ${slot.slotLabel} Covenant`}
               aria-pressed={slot.isCovenantSelected}
               className={`builder-v2-covenant-inline ${
                 slot.isCovenantSelected ? 'builder-v2-covenant-inline--active' : ''
-              }`}
+              } ${isCovenantDropTarget ? 'builder-v2-covenant-inline--drop-target' : ''}`}
               onClick={() => {
                 onSelectCovenantSlot(slot.slotId)
               }}
+              ref={setCovenantNodeRef}
               title={slot.covenantName ?? 'Covenant'}
               type='button'
             >
@@ -200,6 +268,9 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
               onSelectWheelSlot(slot.slotId, wheelSlot.wheelIndex)
             }}
             quickLineupActive={quickLineupActive}
+            isDragActive={isDragActive}
+            predictedDropTarget={predictedDropTarget}
+            slot={slot}
             wheelSlot={wheelSlot}
           />
         ))}
@@ -214,6 +285,8 @@ function areSlotCardPropsEqual(
 ): boolean {
   return (
     previous.quickLineupActive === next.quickLineupActive &&
+    previous.isDragActive === next.isDragActive &&
+    isSameDropTarget(previous.predictedDropTarget, next.predictedDropTarget) &&
     previous.onClearCovenant === next.onClearCovenant &&
     previous.onClearWheel === next.onClearWheel &&
     previous.onRemoveAwakener === next.onRemoveAwakener &&
@@ -281,6 +354,68 @@ function areWheelSlotViewsEqual(
   )
 }
 
+function isPredictedSlotDropTarget(
+  target: BuilderV2DropTargetDescriptor | null,
+  slotId: string,
+): boolean {
+  return target?.kind === 'slot' && target.slotId === slotId
+}
+
+function isPredictedCovenantDropTarget(
+  target: BuilderV2DropTargetDescriptor | null,
+  slotId: string,
+): boolean {
+  return target?.kind === 'covenant' && target.slotId === slotId
+}
+
+function isPredictedWheelDropTarget(
+  target: BuilderV2DropTargetDescriptor | null,
+  slotId: string,
+  wheelIndex: WheelSlotIndex,
+): boolean {
+  return target?.kind === 'wheel' && target.slotId === slotId && target.wheelIndex === wheelIndex
+}
+
+function isSameDropTarget(
+  previous: BuilderV2DropTargetDescriptor | null,
+  next: BuilderV2DropTargetDescriptor | null,
+): boolean {
+  if (previous === next) {
+    return true
+  }
+  if (!previous || previous.kind !== next?.kind) {
+    return false
+  }
+
+  switch (previous.kind) {
+    case 'slot':
+    case 'covenant':
+      return next.kind === previous.kind && previous.slotId === next.slotId
+    case 'wheel':
+      return (
+        next.kind === 'wheel' &&
+        previous.slotId === next.slotId &&
+        previous.wheelIndex === next.wheelIndex
+      )
+    case 'picker':
+    case 'posse':
+      return true
+  }
+}
+
+function useMergedRefs<T extends HTMLElement>(
+  firstRef: (element: T | null) => void,
+  secondRef: (element: T | null) => void,
+) {
+  return useCallback(
+    (element: T | null) => {
+      firstRef(element)
+      secondRef(element)
+    },
+    [firstRef, secondRef],
+  )
+}
+
 function AwakenerRealmBadge({realm}: {realm: BuilderV2AwakenerRealm}) {
   const realmBadge = getRealmBadge(realm)
   const realmLabel = getRealmLabel(realm)
@@ -344,24 +479,52 @@ function SlotWheelChip({
   onClear,
   onSelect,
   quickLineupActive,
+  isDragActive,
+  predictedDropTarget,
+  slot,
   wheelSlot,
 }: {
   onClear: () => void
   onSelect: () => void
   quickLineupActive: boolean
+  isDragActive: boolean
+  predictedDropTarget: BuilderV2DropTargetDescriptor | null
+  slot: BuilderV2SlotView
   wheelSlot: BuilderV2WheelSlotView
 }) {
+  const wheelDragPayload = createBuilderV2TeamWheelDragPayload(slot, wheelSlot.wheelIndex)
+  const {isOver: isWheelOver, setNodeRef: setWheelDropRef} = useDroppable({
+    id: makeBuilderV2WheelDndId(slot.slotId, wheelSlot.wheelIndex),
+  })
+  const {
+    attributes: wheelDragAttributes,
+    listeners: wheelDragListeners,
+    setNodeRef: setWheelDragRef,
+  } = useDraggable({
+    id: makeBuilderV2TeamWheelDragId(slot.slotId, wheelSlot.wheelIndex),
+    data: wheelDragPayload ?? undefined,
+    disabled: !wheelDragPayload,
+  })
+  const setWheelDragDropRef = useMergedRefs(setWheelDropRef, setWheelDragRef)
+  const setWheelNodeRef = wheelDragPayload ? setWheelDragDropRef : setWheelDropRef
+  const isWheelDropTarget = isDragActive
+    ? isPredictedWheelDropTarget(predictedDropTarget, slot.slotId, wheelSlot.wheelIndex)
+    : isWheelOver
+
   return (
     <div
       className={`builder-v2-wheel-chip ${
         wheelSlot.isSelected ? 'builder-v2-wheel-chip--active' : ''
-      }`}
+      } ${isWheelDropTarget ? 'builder-v2-wheel-chip--drop-target' : ''}`}
     >
       <button
+        {...(wheelDragPayload ? wheelDragAttributes : {})}
+        {...(wheelDragPayload ? wheelDragListeners : {})}
         aria-label={`Select ${wheelSlot.label}`}
         aria-pressed={wheelSlot.isSelected}
         className='builder-v2-wheel-target'
         onClick={onSelect}
+        ref={setWheelNodeRef}
         type='button'
       >
         <span className='builder-v2-wheel-art' aria-hidden>

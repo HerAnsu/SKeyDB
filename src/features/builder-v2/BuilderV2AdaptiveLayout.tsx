@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 
 import type {WheelSlotIndex} from '../builder/types'
+import type {BuilderV2DropTargetDescriptor} from './builder-v2-dnd'
 import {BuilderV2ActiveFooter, BuilderV2ActiveHeader} from './BuilderV2ActiveTeamChrome'
 import {BuilderV2PickerContent} from './BuilderV2AwakenerPicker'
 import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
@@ -10,10 +11,16 @@ import {BuilderV2TeamSlots} from './BuilderV2TeamSlots'
 import {useStableEvent} from './useStableEvent'
 
 interface BuilderV2AdaptiveLayoutProps {
+  activeDropTarget: BuilderV2DropTargetDescriptor | null
+  isDragActive: boolean
   model: BuilderV2Model
 }
 
-export function BuilderV2AdaptiveLayout({model}: BuilderV2AdaptiveLayoutProps) {
+export function BuilderV2AdaptiveLayout({
+  activeDropTarget,
+  isDragActive,
+  model,
+}: BuilderV2AdaptiveLayoutProps) {
   const [isPickerOpen, setIsPickerOpen] = useState(false)
   const pickerTriggerRef = useRef<HTMLElement | null>(null)
   const searchInputRef = useRef<HTMLInputElement | null>(null)
@@ -206,17 +213,21 @@ export function BuilderV2AdaptiveLayout({model}: BuilderV2AdaptiveLayoutProps) {
               activePosse={model.activePosse}
               activeTeamName={model.activeTeamName}
               activeTeamTarget={model.activeTeamTarget}
+              isDragActive={isDragActive}
               onClearPosse={model.clearPosse}
               onSelectPosse={selectPosseAndOpenPicker}
+              predictedDropTarget={activeDropTarget}
             />
 
             <BuilderV2TeamSlots
+              isDragActive={isDragActive}
               onClearCovenant={model.clearCovenant}
               onClearWheel={model.clearWheel}
               onRemoveAwakener={model.removeAwakener}
               onSelectCovenantSlot={selectCovenantSlotAndOpenPicker}
               onSelectSlot={selectAwakenerSlotAndOpenPicker}
               onSelectWheelSlot={selectWheelSlotAndOpenPicker}
+              predictedDropTarget={activeDropTarget}
               quickLineupActive={Boolean(model.quickLineupSession)}
               slots={model.slots}
             />
@@ -308,11 +319,13 @@ export function BuilderV2AdaptiveLayout({model}: BuilderV2AdaptiveLayoutProps) {
               </p>
             ) : null}
             <BuilderV2PickerContent
+              isDragActive={isDragActive}
               onAssignAwakener={assignAwakener}
               onAssignCovenant={assignCovenant}
               onAssignPosse={assignPosse}
               onAssignWheel={assignWheel}
               picker={model.picker}
+              predictedDropTarget={activeDropTarget}
               searchInputRef={searchInputRef}
             />
           </div>

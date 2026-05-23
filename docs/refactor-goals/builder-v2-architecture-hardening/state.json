@@ -183,7 +183,8 @@
       "id": "C8",
       "title": "Slot interaction descriptors for drag ghosts",
       "source_task": "S1",
-      "status": "queued",
+      "status": "superseded",
+      "superseded_by": "docs/refactor-goals/builder-v2-dnd/goal.md D1/D5",
       "concept_blast_radius": [
         "src/features/builder-v2/BuilderV2ModelTypes.ts",
         "src/features/builder-v2/useBuilderV2Model.ts",
@@ -191,7 +192,7 @@
         "focused page tests"
       ],
       "evidence": "BuilderV2SlotView is a render DTO containing labels/assets/selection, not stable interaction descriptors.",
-      "next": "Keep queued as DnD-prep for the first real DnD tranche: add stable slot interaction descriptors once the drag payload and drag-ghost contract are selected. Do not implement standalone before that contract exists."
+      "next": "Transferred into docs/refactor-goals/builder-v2-dnd/goal.md as a first-DnD-tranche candidate."
     },
     {
       "id": "C9",
@@ -248,13 +249,14 @@
       "id": "C13",
       "title": "Clipping and drag overlay CSS boundary",
       "source_task": "S1",
-      "status": "queued",
+      "status": "superseded",
+      "superseded_by": "docs/refactor-goals/builder-v2-dnd/goal.md D8",
       "concept_blast_radius": [
         "src/features/builder-v2/builder-v2.css",
         "maybe future drag overlay root"
       ],
       "evidence": ".builder-v2-panel and cards use clipping for both panel containment and art masks, which can clip future drag ghosts/focus halos.",
-      "next": "Keep queued as DnD-prep for the first real DnD tranche: split clipping/art-mask/overlay CSS only when a concrete drag overlay root or ghost surface exists to validate against. Do not add DnD here."
+      "next": "Transferred into docs/refactor-goals/builder-v2-dnd/goal.md as a first-DnD-tranche candidate."
     },
     {
       "id": "C14",
@@ -1825,7 +1827,7 @@
     {
       "id": "J13",
       "role": "judge",
-      "status": "active",
+      "status": "done",
       "title": "Choose next DnD-prep architecture tranche",
       "skills": [
         "$refactor-rootfix",
@@ -1848,12 +1850,20 @@
         "docs/design/**"
       ],
       "expected_output": "If continuing this goal, decide whether C8/C13 should be selected as the first DnD-prep tranche with a concrete drag payload/ghost/overlay contract, or close the architecture-hardening goal until DnD work starts.",
-      "receipt": null
+      "receipt": {
+        "evidence": [
+          "User approved starting actual Builder V2 DnD work as a new goal rather than continuing architecture-hardening.",
+          "C8 slot interaction descriptors and C13 clipping/overlay boundary were transferred into docs/refactor-goals/builder-v2-dnd/goal.md so the architecture packet no longer owns DnD implementation decisions."
+        ],
+        "validation": [
+          "No product code changed; architecture packet now points to the new DnD packet for remaining drag/drop work."
+        ]
+      }
     }
   ],
   "final_audit": {
     "full_outcome_complete": false,
-    "summary": "W1/W2 landed command-boundary hardening, W3 landed C3, W4 landed C6, W5 landed C9, W6/W7 landed C10/C7, W8 landed C4, W9 landed C11/C14, W10 landed C15, W11 landed C12, and W12 landed C5 plus the C16 state-strategy review. Broad hardening outcome is not complete; J13 is active to decide whether C8/C13 should start with concrete DnD-prep work.",
+    "summary": "Architecture-hardening completed its non-DnD tranches through W12. Remaining DnD-prep candidates C8/C13 were transferred to the dedicated builder-v2-dnd goal packet.",
     "validation": [
       "npx vitest run src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 68 tests.",
       "npx vitest run src/features/builder-v2/builder-v2-editing-mode.test.ts src/features/builder-v2/useBuilderV2Model.test.ts src/features/builder-v2/BuilderV2Page.test.tsx src/features/builder-v2/builder-v2-usage-index.test.ts --run passed with 76 tests after W3.",
@@ -1864,9 +1874,8 @@
       "W12 focused team-state/model/page tests passed with 93 tests; app typecheck and targeted eslint passed."
     ],
     "open_items": [
-      "J13 choose next tranche or pause this packet until real DnD work starts.",
-      "C8 and C13 remain queued as first-DnD-tranche prep, pending a concrete drag payload/ghost/overlay contract.",
-      "M1-M2 maintenance candidates remain open."
+      "Builder V2 DnD work continues in docs/refactor-goals/builder-v2-dnd/goal.md.",
+      "M1-M2 maintenance candidates remain open for a future maintenance pass."
     ]
   }
 }

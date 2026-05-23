@@ -158,6 +158,23 @@ describe('builder team state', () => {
     )
   })
 
+  it('preserves wheels and covenant when replacing an awakener in place', () => {
+    const slots = teamSlotsForTests()
+    const gearedSlots = assignWheelToSlot(slots, 'slot-2', 0, 'wheel-0050').nextSlots
+    const covenantedSlots = assignCovenantToSlot(gearedSlots, 'slot-2', 'c01').nextSlots
+    const result = assignAwakenerToSlot(
+      covenantedSlots,
+      'awakener-0042',
+      'slot-2',
+      awakenersByIdForTests,
+    )
+
+    const targetSlot = result.nextSlots.find((slot) => slot.slotId === 'slot-2')
+    expect(targetSlot?.awakenerId).toBe('awakener-0042')
+    expect(targetSlot?.wheels).toEqual(['wheel-0050', null])
+    expect(targetSlot?.covenantId).toBe('c01')
+  })
+
   it('does not move an already slotted awakener when adding to first empty slot', () => {
     const slots = [
       {

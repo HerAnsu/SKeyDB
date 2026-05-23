@@ -1,5 +1,8 @@
 import {memo, type ReactNode} from 'react'
 
+import {useDroppable} from '@dnd-kit/core'
+
+import {makeBuilderV2PosseDndId, type BuilderV2DropTargetDescriptor} from './builder-v2-dnd'
 import type {
   BuilderV2ActivePosseView,
   BuilderV2Model,
@@ -10,8 +13,10 @@ interface BuilderV2ActiveHeaderProps {
   activePosse: BuilderV2ActivePosseView | null
   activeTeamName: string
   activeTeamTarget: BuilderV2TeamTarget
+  isDragActive?: boolean
   onClearPosse: () => void
   onSelectPosse: () => void
+  predictedDropTarget?: BuilderV2DropTargetDescriptor | null
 }
 
 interface BuilderV2ActiveFooterProps {
@@ -31,9 +36,16 @@ export const BuilderV2ActiveHeader = memo(function BuilderV2ActiveHeader({
   activePosse,
   activeTeamName,
   activeTeamTarget,
+  isDragActive = false,
   onClearPosse,
   onSelectPosse,
+  predictedDropTarget = null,
 }: BuilderV2ActiveHeaderProps) {
+  const {isOver: isPosseOver, setNodeRef: setPosseDropRef} = useDroppable({
+    id: makeBuilderV2PosseDndId(),
+  })
+  const isPosseDropTarget = isDragActive ? predictedDropTarget?.kind === 'posse' : isPosseOver
+
   return (
     <div className='builder-v2-active-header'>
       <div className='builder-v2-active-identity'>
@@ -41,21 +53,19 @@ export const BuilderV2ActiveHeader = memo(function BuilderV2ActiveHeader({
         <h2 className='ui-title'>{activeTeamName}</h2>
       </div>
 
-      <div className='builder-v2-posse-summary'>
+      <div className='builder-v2-posse-summary' ref={setPosseDropRef}>
         <button
           aria-label='Select team posse'
           aria-pressed={activeTeamTarget?.kind === 'posse'}
           className={`builder-v2-posse-target ${
             activeTeamTarget?.kind === 'posse' ? 'builder-v2-posse-target--active' : ''
-          }`}
+          } ${isPosseDropTarget ? 'builder-v2-posse-target--drop-target' : ''}`}
           onClick={onSelectPosse}
           type='button'
         >
           <span className='builder-v2-posse-copy'>
             <span className='builder-v2-label'>Posse</span>
-            <span className='builder-v2-posse-name'>
-              {activePosse?.name ?? 'Not selected'}
-            </span>
+            <span className='builder-v2-posse-name'>{activePosse?.name ?? 'Not selected'}</span>
           </span>
           <span aria-hidden className='builder-v2-posse-icon'>
             {activePosse?.assetSrc ? (
@@ -98,10 +108,7 @@ export const BuilderV2ActiveFooter = memo(function BuilderV2ActiveFooter({
     return (
       <footer className='builder-v2-active-footer'>
         <div className='builder-v2-footer-cell builder-v2-footer-cell--start'>{leadingAction}</div>
-        <p
-          className='builder-v2-editing-line'
-          role={violationMessage ? 'alert' : undefined}
-        >
+        <p className='builder-v2-editing-line' role={violationMessage ? 'alert' : undefined}>
           {violationMessage ?? editingLabel}
         </p>
         <div className='builder-v2-footer-cell builder-v2-footer-cell--end'>
@@ -127,11 +134,7 @@ export const BuilderV2ActiveFooter = memo(function BuilderV2ActiveFooter({
         >
           Back
         </button>
-        <button
-          className='builder-v2-lineup-action'
-          onClick={onSkipQuickLineupStep}
-          type='button'
-        >
+        <button className='builder-v2-lineup-action' onClick={onSkipQuickLineupStep} type='button'>
           Next
         </button>
       </div>
