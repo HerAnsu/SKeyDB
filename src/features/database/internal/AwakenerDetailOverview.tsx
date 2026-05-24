@@ -1,8 +1,8 @@
 import {useMemo, useState} from 'react'
 
+import type {AwakenerDatabaseSelection} from '@/domain/awakener-database-state'
 import type {FullStats, SubstatScaling} from '@/domain/awakener-source-schema'
 import type {Awakener} from '@/domain/awakeners'
-import type {AwakenerDatabaseSelection} from '@/domain/awakener-database-state'
 import type {AwakenerFullRecord, AwakenerProfileStorySection} from '@/domain/awakeners-full'
 import type {ScalingInfoRecord} from '@/domain/database-scaling-info'
 

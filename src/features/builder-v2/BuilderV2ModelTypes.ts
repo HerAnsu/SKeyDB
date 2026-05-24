@@ -9,7 +9,12 @@ import type {Wheel} from '@/domain/wheels'
 
 import type {BuilderImportExportDialogsProps} from '../builder/BuilderImportExportDialogs'
 import type {TeamTemplateId} from '../builder/team-collection'
-import type {ActiveSelection, QuickLineupSession, WheelSlotIndex} from '../builder/types'
+import type {
+  ActiveSelection,
+  QuickLineupSession,
+  TeamPreviewMode,
+  WheelSlotIndex,
+} from '../builder/types'
 
 export type BuilderV2PickerTab = 'awakeners' | 'wheels' | 'covenants' | 'posses'
 export type BuilderV2AwakenerFilter = 'ALL' | 'AEQUOR' | 'CARO' | 'CHAOS' | 'ULTRA'
@@ -30,19 +35,54 @@ export interface BuilderV2TeamSummary {
   slotNames: string[]
   slots: BuilderV2TeamSummarySlot[]
   posseName: string | null
+  posseRealm: string | null
   posseAssetSrc: string | undefined
+  isPosseOwned: boolean
   isEmpty: boolean
+}
+
+export interface BuilderV2TeamSummaryAwakener {
+  id: string
+  name: string
+  displayName: string
+  realm: Awakener['realm']
+  level: number
+  enlightenLevel: number | null
+  cardSrc: string | undefined
+  portraitSrc: string | undefined
+  isOwned: boolean
+  isSupport: boolean
+}
+
+export interface BuilderV2TeamSummaryWheel {
+  id: string
+  name: string
+  miniAssetSrc: string | undefined
+  assetSrc: string | undefined
+  enlightenLevel: number | null
+  isOwned: boolean
+}
+
+export interface BuilderV2TeamSummaryCovenant {
+  id: string
+  name: string
+  assetSrc: string | undefined
 }
 
 export interface BuilderV2TeamSummarySlot {
   slotId: string
   label: string
+  slotNumber: number
   name: string
+  awakener: BuilderV2TeamSummaryAwakener | null
   portraitSrc: string | undefined
+  cardSrc: string | undefined
   isEmpty: boolean
   isSupport: boolean
   wheelCount: number
+  wheels: [BuilderV2TeamSummaryWheel | null, BuilderV2TeamSummaryWheel | null]
   hasCovenant: boolean
+  covenant: BuilderV2TeamSummaryCovenant | null
 }
 
 export interface BuilderV2SlotView {
@@ -214,6 +254,7 @@ export interface BuilderV2Model {
   quickLineupSession: QuickLineupSession | null
   quickLineupStepLabel: string | null
   teams: BuilderV2TeamSummary[]
+  teamPreviewMode: TeamPreviewMode
   maxTeams: number
   canAddTeam: boolean
   editingTeamId: string | null
@@ -228,6 +269,7 @@ export interface BuilderV2Model {
   setSearchQuery: (nextQuery: string) => void
   setPickerTab: (nextTab: BuilderV2PickerTab) => void
   setActiveTeam: (teamId: string) => void
+  setTeamPreviewMode: (nextMode: TeamPreviewMode) => void
   addTeam: () => void
   beginTeamRename: (teamId: string) => void
   setEditingTeamName: (nextName: string) => void
@@ -270,6 +312,7 @@ export interface BuilderV2Model {
   clearPosse: () => void
   openImportDialog: () => void
   openExportAllDialog: () => void
+  openTeamExportDialog: (teamId: string) => void
   openActiveTeamExportDialog: () => void
   openActiveTeamIngameExportDialog: () => void
   importExportDialogProps: BuilderImportExportDialogsProps

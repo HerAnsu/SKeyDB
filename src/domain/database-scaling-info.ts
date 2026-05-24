@@ -82,7 +82,7 @@ export function buildScalingInfoEntry(
   const primaryStatLines = PRIMARY_STAT_KEYS.map((statKey) =>
     buildPrimaryStatLine(awakener, statKey, bonusContext),
   )
-  const primaryFormula = `Primary formula: Lv + ${awakener.primaryScalingBase}${
+  const primaryFormula = `Primary formula: Lv + ${String(awakener.primaryScalingBase)}${
     bonusContext.label ? ` + ${bonusContext.label}` : ''
   }, then × growth`
   const detailDescription = [
@@ -100,8 +100,7 @@ export function buildScalingInfoEntry(
     key: 'database:scaling-info',
     name: 'Scaling Information',
     label: 'Database Guide',
-    description:
-      `Primary stats: every level to Lv. 90${bonusContext.label ? `, including ${bonusContext.label} stat levels` : ''}.\nSecondary stats: every 10 levels to Lv. 60.\nPsyche Surge adds extra secondary-stat steps after E3.`,
+    description: `Primary stats: every level to Lv. 90${bonusContext.label ? `, including ${bonusContext.label} stat levels` : ''}.\nSecondary stats: every 10 levels to Lv. 60.\nPsyche Surge adds extra secondary-stat steps after E3.`,
     detailLinks: [
       {
         label: 'Show exact breakpoints',
@@ -142,14 +141,12 @@ function getPrimaryStatBonusContext(
       rank,
     }).totalValue ?? 0
   const label = gnosticTalent.defaultMaxed
-    ? `default Gnostic +${level}`
-    : `Gnostic +${level}`
+    ? `default Gnostic +${String(level)}`
+    : `Gnostic +${String(level)}`
   return {label, level}
 }
 
-function getGnosticPotentialTalents(
-  talents: ScalingInfoRecord['talents'],
-): AwakenerTalentRecord[] {
+function getGnosticPotentialTalents(talents: ScalingInfoRecord['talents']): AwakenerTalentRecord[] {
   if (!talents) {
     return []
   }

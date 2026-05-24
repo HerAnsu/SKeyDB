@@ -165,11 +165,22 @@ describe('BuilderV2Page', () => {
     const management = screen.getByRole('region', {name: /builder v2 team management/i})
     expect(within(management).getByRole('button', {name: /add team/i})).toBeInTheDocument()
     expect(within(management).getByRole('button', {name: /apply d-tide 5/i})).toBeInTheDocument()
+    expect(within(management).getByRole('button', {name: /compact/i})).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+    fireEvent.click(within(management).getByRole('button', {name: /expanded/i}))
+    expect(within(management).getByRole('button', {name: /expanded/i})).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
     expect(within(management).getByText(/taverns opening/i)).toBeInTheDocument()
     expect(within(management).getByText(/support/i)).toBeInTheDocument()
-    expect(within(management).getByText(/goliath/i)).toBeInTheDocument()
-    expect(within(management).getByText(/1 wheel/i)).toBeInTheDocument()
-    expect(within(management).getByText(/covenant/i)).toBeInTheDocument()
+    expect(
+      within(management).getByRole('group', {
+        name: /goliath, chaos, level 90, support, covenant equipped: .+, 1 wheel equipped: .+/i,
+      }),
+    ).toBeInTheDocument()
 
     fireEvent.click(within(management).getByRole('button', {name: /select team 2/i}))
 

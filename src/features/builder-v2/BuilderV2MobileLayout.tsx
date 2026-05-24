@@ -10,8 +10,8 @@ import {
 
 import {BuilderV2PickerContent} from './BuilderV2AwakenerPicker'
 import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
-import {BuilderV2TeamManagement} from './BuilderV2TeamManagement'
 import type {BuilderV2Model, BuilderV2PickerTab, BuilderV2SlotView} from './BuilderV2ModelTypes'
+import {BuilderV2TeamManagement} from './BuilderV2TeamManagement'
 
 interface BuilderV2MobileLayoutProps {
   model: BuilderV2Model
@@ -324,9 +324,7 @@ function MobileTeamOverview({
         <button
           aria-label='Pick posse'
           className={`builder-v2-mobile-posse-target ${
-            model.activeTeamTarget?.kind === 'posse'
-              ? 'builder-v2-mobile-posse-target--active'
-              : ''
+            model.activeTeamTarget?.kind === 'posse' ? 'builder-v2-mobile-posse-target--active' : ''
           }`}
           onClick={(event) => {
             onOpenPicker({
@@ -396,12 +394,15 @@ function MobileTeamOverview({
         onCommitTeamRename={model.commitTeamRename}
         onMoveTeamDown={model.moveTeamDown}
         onMoveTeamUp={model.moveTeamUp}
+        onRequestExportTeam={model.openTeamExportDialog}
         onRequestApplyTeamTemplate={model.requestApplyTeamTemplate}
         onRequestDeleteTeam={model.requestDeleteTeam}
         onRequestResetTeam={model.requestResetTeam}
         onSetActiveTeam={model.setActiveTeam}
         onSetEditingTeamName={model.setEditingTeamName}
         onTeamActivated={onTeamActivated}
+        onTeamPreviewModeChange={model.setTeamPreviewMode}
+        teamPreviewMode={model.teamPreviewMode}
         teams={model.teams}
         variant='mobile'
       />

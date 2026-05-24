@@ -20,12 +20,7 @@ export interface SortableCollectionEntry {
   releaseDate?: string
 }
 
-export type WheelCollectionSortKey =
-  | 'ALPHABETICAL'
-  | 'RARITY'
-  | 'REALM'
-  | 'MAINSTAT'
-  | 'ENLIGHTEN'
+export type WheelCollectionSortKey = 'ALPHABETICAL' | 'RARITY' | 'REALM' | 'MAINSTAT' | 'ENLIGHTEN'
 
 export interface SortableWheelCollectionEntry extends SortableCollectionEntry {
   mainstatLabel?: string

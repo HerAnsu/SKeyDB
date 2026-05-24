@@ -1,16 +1,25 @@
-import {memo} from 'react'
+import {memo, type CSSProperties} from 'react'
 
+import {FaChevronDown, FaChevronUp} from 'react-icons/fa6'
+
+import {getRealmAccent, getRealmBadge, getRealmLabel} from '@/domain/realms'
+
+import type {TeamTemplateId} from '../builder/team-collection'
+import type {TeamPreviewMode} from '../builder/types'
+import {formatBuilderV2EnlightenLabel} from './BuilderV2EnlightenLabel'
+import {BuilderV2EnlightenMeter} from './BuilderV2EnlightenMeter'
 import type {
   BuilderV2TeamSummary,
   BuilderV2TeamSummarySlot,
+  BuilderV2TeamSummaryWheel,
 } from './BuilderV2ModelTypes'
-import type {TeamTemplateId} from '../builder/team-collection'
 
 interface BuilderV2TeamManagementProps {
   canAddTeam: boolean
   editingTeamId: string | null
   editingTeamName: string
   maxTeams: number
+  teamPreviewMode: TeamPreviewMode
   teams: BuilderV2TeamSummary[]
   variant?: 'desktop' | 'adaptive' | 'mobile'
   onTeamActivated?: () => void
@@ -22,16 +31,24 @@ interface BuilderV2TeamManagementProps {
   onMoveTeamUp: (teamId: string) => void
   onRequestApplyTeamTemplate: (templateId: TeamTemplateId) => void
   onRequestDeleteTeam: (teamId: string) => void
+  onRequestExportTeam: (teamId: string) => void
   onRequestResetTeam: (teamId: string) => void
   onSetActiveTeam: (teamId: string) => void
   onSetEditingTeamName: (nextName: string) => void
+  onTeamPreviewModeChange: (nextMode: TeamPreviewMode) => void
 }
+
+const teamPreviewModeOptions = [
+  {value: 'compact', label: 'Compact'},
+  {value: 'expanded', label: 'Expanded'},
+] as const
 
 export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
   canAddTeam,
   editingTeamId,
   editingTeamName,
   maxTeams,
+  teamPreviewMode,
   teams,
   variant = 'desktop',
   onTeamActivated,
@@ -43,54 +60,87 @@ export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
   onMoveTeamUp,
   onRequestApplyTeamTemplate,
   onRequestDeleteTeam,
+  onRequestExportTeam,
   onRequestResetTeam,
   onSetActiveTeam,
   onSetEditingTeamName,
+  onTeamPreviewModeChange,
 }: BuilderV2TeamManagementProps) {
   return (
     <section
       aria-label='Builder V2 team management'
-      className={`builder-v2-panel builder-v2-team-management builder-v2-team-management--${variant}`}
+      className={`builder-v2-panel builder-v2-team-management builder-v2-team-management--${variant} builder-v2-team-management--preview-${teamPreviewMode}`}
     >
       <div className='builder-v2-team-management-header'>
         <div className='builder-v2-team-management-identity'>
-          <p className='builder-v2-label'>
-            {variant === 'mobile' ? 'Other Teams' : 'Your Teams'}
-          </p>
+          <p className='builder-v2-label'>{variant === 'mobile' ? 'Other Teams' : 'Your Teams'}</p>
           <h2 className='ui-title'>
             {teams.length} / {maxTeams}
           </h2>
         </div>
-        <div className='builder-v2-team-management-actions' aria-label='Team template actions'>
-          <button
-            className='builder-v2-team-management-button builder-v2-team-management-button--primary'
-            disabled={!canAddTeam}
-            onClick={() => {
-              onAddTeam()
-              onTeamActivated?.()
-            }}
-            type='button'
+
+        <div className='builder-v2-team-management-toolbar'>
+          <div
+            className='builder-v2-team-management-mode'
+            aria-label='Team preview mode'
+            role='group'
           >
-            + Add Team
-          </button>
-          <button
-            className='builder-v2-team-management-button'
-            onClick={() => {
-              onRequestApplyTeamTemplate('DTIDE_5')
-            }}
-            type='button'
+            {teamPreviewModeOptions.map((option) => (
+              <button
+                aria-pressed={teamPreviewMode === option.value}
+                className={`builder-v2-team-management-mode-button ${
+                  teamPreviewMode === option.value
+                    ? 'builder-v2-team-management-mode-button--active'
+                    : ''
+                }`}
+                key={option.value}
+                onClick={() => {
+                  onTeamPreviewModeChange(option.value)
+                }}
+                type='button'
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+
+          <div
+            className='builder-v2-team-management-actions'
+            aria-label='Team template actions'
+            role='group'
           >
-            Apply D-Tide 5
-          </button>
-          <button
-            className='builder-v2-team-management-button'
-            onClick={() => {
-              onRequestApplyTeamTemplate('DTIDE_10')
-            }}
-            type='button'
-          >
-            Apply D-Tide 10
-          </button>
+            <button
+              className='builder-v2-team-management-button builder-v2-team-management-button--primary'
+              disabled={!canAddTeam}
+              onClick={() => {
+                onAddTeam()
+                onTeamActivated?.()
+              }}
+              type='button'
+            >
+              + Add Team
+            </button>
+            <button
+              aria-label='Apply D-Tide 5'
+              className='builder-v2-team-management-button'
+              onClick={() => {
+                onRequestApplyTeamTemplate('DTIDE_5')
+              }}
+              type='button'
+            >
+              D-Tide 5
+            </button>
+            <button
+              aria-label='Apply D-Tide 10'
+              className='builder-v2-team-management-button'
+              onClick={() => {
+                onRequestApplyTeamTemplate('DTIDE_10')
+              }}
+              type='button'
+            >
+              D-Tide 10
+            </button>
+          </div>
         </div>
       </div>
 
@@ -109,9 +159,11 @@ export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
             onMoveTeamDown={onMoveTeamDown}
             onMoveTeamUp={onMoveTeamUp}
             onRequestDeleteTeam={onRequestDeleteTeam}
+            onRequestExportTeam={onRequestExportTeam}
             onRequestResetTeam={onRequestResetTeam}
             onSetActiveTeam={onSetActiveTeam}
             onSetEditingTeamName={onSetEditingTeamName}
+            previewMode={teamPreviewMode}
             teamsCount={teams.length}
             team={team}
           />
@@ -133,9 +185,11 @@ const TeamManagementRow = memo(function TeamManagementRow({
   onMoveTeamDown,
   onMoveTeamUp,
   onRequestDeleteTeam,
+  onRequestExportTeam,
   onRequestResetTeam,
   onSetActiveTeam,
   onSetEditingTeamName,
+  previewMode,
   teamsCount,
   team,
 }: {
@@ -150,9 +204,11 @@ const TeamManagementRow = memo(function TeamManagementRow({
   onMoveTeamDown: (teamId: string) => void
   onMoveTeamUp: (teamId: string) => void
   onRequestDeleteTeam: (teamId: string) => void
+  onRequestExportTeam: (teamId: string) => void
   onRequestResetTeam: (teamId: string) => void
   onSetActiveTeam: (teamId: string) => void
   onSetEditingTeamName: (nextName: string) => void
+  previewMode: TeamPreviewMode
   teamsCount: number
   team: BuilderV2TeamSummary
 }) {
@@ -166,146 +222,320 @@ const TeamManagementRow = memo(function TeamManagementRow({
       }`}
       data-team-name={team.name}
     >
-      {isEditing ? (
-        <div className='builder-v2-team-management-select builder-v2-team-management-editing'>
-          <span className='builder-v2-team-index'>{teamIndex}</span>
-          <span className='builder-v2-team-management-copy'>
-            <input
-              aria-label='Team name'
-              className='builder-v2-team-name-input'
-              onBlur={() => {
-                onCommitTeamRename(team.id)
-              }}
-              onChange={(event) => {
-                onSetEditingTeamName(event.target.value)
-              }}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  event.preventDefault()
-                  onCommitTeamRename(team.id)
-                }
-                if (event.key === 'Escape') {
-                  event.preventDefault()
-                  onCancelTeamRename()
-                }
-              }}
-              value={editingTeamName}
-            />
-          </span>
-        </div>
-      ) : (
-        <button
-          aria-label={`Select ${team.name}`}
-          aria-pressed={team.isActive}
-          className='builder-v2-team-management-select'
-          onClick={() => {
-            onSetActiveTeam(team.id)
-            onTeamActivated?.()
-          }}
-          type='button'
-        >
-          <span className='builder-v2-team-index'>{teamIndex}</span>
-          <span className='builder-v2-team-management-copy'>
-            <span className='builder-v2-team-management-name'>{team.name}</span>
-            <span className='builder-v2-team-management-meta'>
-              {team.deployedCount} / 4 deployed
-              {team.posseName ? ` - ${team.posseName}` : ' - No posse'}
-            </span>
-          </span>
-        </button>
-      )}
-
-      <div className='builder-v2-team-management-slots'>
-        {team.slots.map((slot) => (
-          <TeamSlotSummary key={slot.slotId} slot={slot} />
-        ))}
-      </div>
-
-      <div className='builder-v2-team-management-controls' aria-label={`${team.name} actions`}>
-        <button
-          aria-label={`Rename ${team.name}`}
-          className='builder-v2-team-management-button'
-          onClick={() => {
-            onBeginTeamRename(team.id)
-          }}
-          type='button'
-        >
-          Rename
-        </button>
+      <div className='builder-v2-team-management-reorder' aria-label={`${team.name} order`}>
+        <span aria-hidden className='builder-v2-team-management-grip'>
+          <span />
+          <span />
+          <span />
+        </span>
         <button
           aria-label={`Move ${team.name} up`}
-          className='builder-v2-team-management-button'
+          className='builder-v2-team-management-order-button'
           disabled={index === 0}
           onClick={() => {
             onMoveTeamUp(team.id)
           }}
           type='button'
         >
-          Move Up
+          <FaChevronUp aria-hidden />
         </button>
         <button
           aria-label={`Move ${team.name} down`}
-          className='builder-v2-team-management-button'
+          className='builder-v2-team-management-order-button'
           disabled={isLast}
           onClick={() => {
             onMoveTeamDown(team.id)
           }}
           type='button'
         >
-          Move Down
+          <FaChevronDown aria-hidden />
         </button>
-        <button
-          aria-label={`Reset ${team.name}`}
-          className='builder-v2-team-management-button'
-          onClick={() => {
-            onRequestResetTeam(team.id)
-          }}
-          type='button'
-        >
-          Reset
-        </button>
-        <button
-          aria-label={`Delete ${team.name}`}
-          className='builder-v2-team-management-button builder-v2-team-management-button--danger'
-          disabled={teamsCount <= 1}
-          onClick={() => {
-            onRequestDeleteTeam(team.id)
-          }}
-          type='button'
-        >
-          Delete
-        </button>
+      </div>
+
+      <div className='builder-v2-team-management-main'>
+        <div className='builder-v2-team-management-row-header'>
+          {isEditing ? (
+            <div className='builder-v2-team-management-select builder-v2-team-management-editing'>
+              <span className='builder-v2-team-index'>{teamIndex}</span>
+              <span className='builder-v2-team-management-copy'>
+                <input
+                  aria-label='Team name'
+                  className='builder-v2-team-name-input'
+                  onBlur={() => {
+                    onCommitTeamRename(team.id)
+                  }}
+                  onChange={(event) => {
+                    onSetEditingTeamName(event.target.value)
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      event.preventDefault()
+                      onCommitTeamRename(team.id)
+                    }
+                    if (event.key === 'Escape') {
+                      event.preventDefault()
+                      onCancelTeamRename()
+                    }
+                  }}
+                  value={editingTeamName}
+                />
+              </span>
+            </div>
+          ) : (
+            <button
+              aria-label={`Select ${team.name}`}
+              aria-pressed={team.isActive}
+              className='builder-v2-team-management-select'
+              onClick={() => {
+                onSetActiveTeam(team.id)
+                onTeamActivated?.()
+              }}
+              type='button'
+            >
+              <span className='builder-v2-team-index'>{teamIndex}</span>
+              <span className='builder-v2-team-management-copy'>
+                <span className='builder-v2-team-management-name ui-title'>{team.name}</span>
+              </span>
+            </button>
+          )}
+
+          <TeamPosseSummary team={team} />
+
+          <div
+            className='builder-v2-team-management-controls'
+            aria-label={`${team.name} actions`}
+            role='group'
+          >
+            <button
+              aria-label={`Rename ${team.name}`}
+              className='builder-v2-team-management-button'
+              onClick={() => {
+                onBeginTeamRename(team.id)
+              }}
+              type='button'
+            >
+              Rename
+            </button>
+            <button
+              aria-label={`Export ${team.name}`}
+              className='builder-v2-team-management-button'
+              onClick={() => {
+                onRequestExportTeam(team.id)
+              }}
+              type='button'
+            >
+              Export
+            </button>
+            <button
+              aria-label={`Reset ${team.name}`}
+              className='builder-v2-team-management-button'
+              onClick={() => {
+                onRequestResetTeam(team.id)
+              }}
+              type='button'
+            >
+              Reset
+            </button>
+            <button
+              aria-label={`Delete ${team.name}`}
+              className='builder-v2-team-management-button builder-v2-team-management-button--danger'
+              disabled={teamsCount <= 1}
+              onClick={() => {
+                onRequestDeleteTeam(team.id)
+              }}
+              type='button'
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <div className='builder-v2-team-management-slots'>
+          {team.slots.map((slot) => (
+            <TeamSlotSummary key={slot.slotId} previewMode={previewMode} slot={slot} />
+          ))}
+        </div>
       </div>
     </article>
   )
 })
 
-function TeamSlotSummary({slot}: {slot: BuilderV2TeamSummarySlot}) {
-  const compactLabel = slot.label.replace('Slot ', 'S')
-  const wheelLabel =
-    slot.wheelCount === 0
-      ? null
-      : `${String(slot.wheelCount)} ${slot.wheelCount === 1 ? 'wheel' : 'wheels'}`
-
+function TeamPosseSummary({team}: {team: BuilderV2TeamSummary}) {
+  const hasPosse = Boolean(team.posseName)
   return (
-    <div aria-label={slot.label} className='builder-v2-team-management-slot'>
-      <span aria-hidden className='builder-v2-team-management-slot-art'>
-        {slot.portraitSrc ? (
-          <img alt='' draggable={false} src={slot.portraitSrc} />
-        ) : (
-          <span className='builder-v2-empty-mark'>+</span>
-        )}
+    <div
+      className={`builder-v2-team-management-posse ${
+        hasPosse ? 'builder-v2-team-management-posse--equipped' : ''
+      } ${!team.isPosseOwned ? 'builder-v2-team-management-posse--unowned' : ''}`}
+    >
+      <span className='builder-v2-team-management-posse-icon' aria-hidden>
+        {team.posseAssetSrc ? <img alt='' draggable={false} src={team.posseAssetSrc} /> : null}
       </span>
-      <span className='builder-v2-team-management-slot-copy'>
-        <span className='builder-v2-label'>{compactLabel}</span>
-        <span className='builder-v2-team-management-slot-name'>{slot.name}</span>
-        <span className='builder-v2-team-management-tags'>
-          {slot.isSupport ? <span>Support</span> : null}
-          {wheelLabel ? <span>{wheelLabel}</span> : null}
-          {slot.hasCovenant ? <span>Covenant</span> : null}
-          {slot.isEmpty ? <span>Empty</span> : null}
+      <span className='builder-v2-team-management-posse-copy'>
+        <span className='builder-v2-label'>Posse</span>
+        <span className='builder-v2-team-management-posse-name'>
+          {team.posseName ?? 'Not selected'}
         </span>
       </span>
     </div>
   )
+}
+
+function TeamSlotSummary({
+  previewMode,
+  slot,
+}: {
+  previewMode: TeamPreviewMode
+  slot: BuilderV2TeamSummarySlot
+}) {
+  const compactEnlightenLabel = formatBuilderV2EnlightenLabel(slot.awakener?.enlightenLevel ?? null)
+  const realmAccent = slot.awakener?.realm ? getRealmAccent(slot.awakener.realm) : undefined
+  const style = realmAccent ? ({'--team-summary-realm': realmAccent} as CSSProperties) : undefined
+
+  return (
+    <div
+      aria-label={getTeamSlotSummaryLabel(slot)}
+      className={`builder-v2-team-management-slot ${
+        slot.isEmpty ? 'builder-v2-team-management-slot--empty' : ''
+      }`}
+      role='group'
+      style={style}
+    >
+      <span aria-hidden className='builder-v2-team-management-slot-art'>
+        {slot.awakener ? (
+          <>
+            <img
+              alt=''
+              draggable={false}
+              src={
+                previewMode === 'expanded'
+                  ? (slot.awakener.cardSrc ?? slot.awakener.portraitSrc)
+                  : slot.awakener.portraitSrc
+              }
+            />
+            <RealmBadge realm={slot.awakener.realm} />
+            <span className='builder-v2-team-management-slot-shade' />
+            <span className='builder-v2-team-management-slot-level'>
+              Lv. {String(slot.awakener.level)}
+            </span>
+            <span className='builder-v2-team-management-slot-state'>
+              {slot.awakener.isSupport ? (
+                <span className='builder-v2-team-management-state-chip'>Support</span>
+              ) : null}
+              {!slot.awakener.isOwned ? (
+                <span className='builder-v2-team-management-state-chip builder-v2-team-management-state-chip--danger'>
+                  Unowned
+                </span>
+              ) : null}
+              {previewMode === 'compact' && compactEnlightenLabel ? (
+                <span className='builder-v2-team-management-state-chip'>
+                  {compactEnlightenLabel}
+                </span>
+              ) : null}
+            </span>
+          </>
+        ) : (
+          <span className='builder-v2-team-management-empty-slot'>
+            <span className='builder-v2-empty-mark'>+</span>
+            <span>Empty</span>
+          </span>
+        )}
+      </span>
+
+      {previewMode === 'expanded' ? (
+        <span className='builder-v2-team-management-slot-build' aria-hidden>
+          <span className='builder-v2-team-management-slot-enlighten'>
+            {slot.awakener ? (
+              <BuilderV2EnlightenMeter level={slot.awakener.enlightenLevel} variant='compact' />
+            ) : null}
+          </span>
+          <span className='builder-v2-team-management-loadout-row'>
+            <span className='builder-v2-team-management-loadout-cell builder-v2-team-management-loadout-cell--covenant'>
+              {slot.covenant?.assetSrc ? (
+                <img alt='' draggable={false} src={slot.covenant.assetSrc} />
+              ) : (
+                <span>+</span>
+              )}
+            </span>
+            {slot.wheels.map((wheel, index) => (
+              <WheelMiniSummary
+                key={`${slot.slotId}-wheel-${String(index)}`}
+                wheel={wheel}
+                wheelNumber={index + 1}
+              />
+            ))}
+          </span>
+        </span>
+      ) : null}
+    </div>
+  )
+}
+
+function RealmBadge({realm}: {realm: NonNullable<BuilderV2TeamSummarySlot['awakener']>['realm']}) {
+  const realmBadge = getRealmBadge(realm)
+  const realmLabel = getRealmLabel(realm)
+
+  if (!realmBadge) {
+    return <span className='builder-v2-team-management-realm-text'>{realmLabel}</span>
+  }
+
+  return (
+    <span className='builder-v2-team-management-realm'>
+      <img alt='' draggable={false} src={realmBadge} />
+    </span>
+  )
+}
+
+function WheelMiniSummary({
+  wheel,
+  wheelNumber,
+}: {
+  wheel: BuilderV2TeamSummaryWheel | null
+  wheelNumber: number
+}) {
+  const enlightenLabel = formatBuilderV2EnlightenLabel(wheel?.enlightenLevel ?? null)
+
+  return (
+    <span
+      className={`builder-v2-team-management-loadout-cell builder-v2-team-management-loadout-cell--wheel ${
+        wheel && !wheel.isOwned ? 'builder-v2-team-management-loadout-cell--unowned' : ''
+      }`}
+    >
+      {(wheel?.miniAssetSrc ?? wheel?.assetSrc) ? (
+        <img alt='' draggable={false} src={wheel.miniAssetSrc ?? wheel.assetSrc} />
+      ) : (
+        <span>{wheel ? `W${String(wheelNumber)}` : '+'}</span>
+      )}
+      {enlightenLabel ? (
+        <span className='builder-v2-team-management-wheel-enlighten'>{enlightenLabel}</span>
+      ) : null}
+    </span>
+  )
+}
+
+function getTeamSlotSummaryLabel(slot: BuilderV2TeamSummarySlot): string {
+  if (!slot.awakener) {
+    return `${slot.label}, empty`
+  }
+
+  const wheelCount = slot.wheels.filter(Boolean).length
+  const wheelNames = slot.wheels
+    .filter((wheel): wheel is BuilderV2TeamSummaryWheel => Boolean(wheel))
+    .map((wheel) => wheel.name)
+    .join(', ')
+  const parts = [
+    slot.label,
+    slot.awakener.displayName,
+    getRealmLabel(slot.awakener.realm),
+    `level ${String(slot.awakener.level)}`,
+    formatBuilderV2EnlightenLabel(slot.awakener.enlightenLevel),
+    slot.awakener.isSupport ? 'support' : null,
+    !slot.awakener.isOwned ? 'unowned' : null,
+    slot.covenant ? `covenant equipped: ${slot.covenant.name}` : null,
+    wheelCount > 0
+      ? `${String(wheelCount)} ${wheelCount === 1 ? 'wheel' : 'wheels'} equipped: ${wheelNames}`
+      : null,
+  ]
+
+  return parts.filter(Boolean).join(', ')
 }

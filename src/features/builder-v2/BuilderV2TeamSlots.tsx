@@ -18,6 +18,7 @@ import {
   type BuilderV2DropTargetDescriptor,
 } from './builder-v2-dnd'
 import {useBuilderV2DndEnabled} from './BuilderV2DndCapability'
+import {BuilderV2EnlightenMeter} from './BuilderV2EnlightenMeter'
 import type {BuilderV2SlotView, BuilderV2WheelSlotView} from './BuilderV2ModelTypes'
 
 type BuilderV2AwakenerRealm = NonNullable<BuilderV2SlotView['awakener']>['realm']
@@ -436,49 +437,6 @@ function AwakenerRealmBadge({realm}: {realm: BuilderV2AwakenerRealm}) {
       <span className='sr-only'>{realmLabel}</span>
     </span>
   )
-}
-
-function BuilderV2EnlightenMeter({
-  level,
-  variant = 'default',
-}: {
-  level: number | null
-  variant?: 'default' | 'compact'
-}) {
-  const visibleLevel = Math.max(0, Math.min(level ?? 0, 3))
-  const overflowLevel = level !== null ? Math.max(0, level - visibleLevel) : 0
-  const label = formatBuilderV2EnlightenLabel(level)
-  const diamonds = Array.from({length: 3}, (_, index) => index < visibleLevel)
-
-  return (
-    <span
-      className={`builder-v2-enlighten-meter builder-v2-enlighten-meter--${variant}`}
-      aria-label={label ? `Enlighten ${label}` : 'Enlighten 0'}
-    >
-      <span aria-hidden className='builder-v2-enlighten-diamonds'>
-        {diamonds.map((isFilled, index) => (
-          <span
-            className={`builder-v2-enlighten-diamond ${
-              isFilled ? 'builder-v2-enlighten-diamond--filled' : ''
-            }`}
-            key={index}
-          />
-        ))}
-      </span>
-      {overflowLevel > 0 ? (
-        <span className='builder-v2-enlighten-overflow'>+{String(overflowLevel)}</span>
-      ) : null}
-    </span>
-  )
-}
-
-function formatBuilderV2EnlightenLabel(level: number | null): string | null {
-  if (!level || level <= 0) {
-    return null
-  }
-  const baseLevel = Math.min(level, 3)
-  const overflow = level - baseLevel
-  return overflow > 0 ? `E${String(baseLevel)}+${String(overflow)}` : `E${String(baseLevel)}`
 }
 
 function SlotWheelChip({

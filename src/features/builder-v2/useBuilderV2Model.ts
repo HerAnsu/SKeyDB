@@ -23,7 +23,7 @@ import {formatAwakenerNameForUi} from '@/domain/name-format'
 import {getPosseAssetById} from '@/domain/posse-assets'
 import {getPosses, type Posse} from '@/domain/posses'
 import {getBrowserLocalStorage, safeStorageRead, safeStorageWrite} from '@/domain/storage'
-import {getWheelAssetById} from '@/domain/wheel-assets'
+import {getWheelAssetById, getWheelMiniAssetById} from '@/domain/wheel-assets'
 import type {WheelMainstatFilter} from '@/domain/wheel-mainstat-filters'
 import {compareWheelsForUi} from '@/domain/wheel-sort'
 import {getWheels, type Wheel} from '@/domain/wheels'
@@ -55,6 +55,7 @@ import type {
   QuickLineupSession,
   QuickLineupStep,
   Team,
+  TeamPreviewMode,
   TeamSlot,
   WheelSlotIndex,
 } from '../builder/types'
@@ -126,6 +127,7 @@ const BUILDER_PROMOTE_MATCHING_WHEEL_MAINSTATS_KEY =
 const BUILDER_SINK_UNOWNED_TO_BOTTOM_KEY = 'skeydb.builder.sinkUnownedToBottom.v1'
 const BUILDER_V2_WHEEL_SORT_KEY_KEY = 'skeydb.builderV2.wheelSortKey.v1'
 const BUILDER_V2_WHEEL_SORT_DIRECTION_KEY = 'skeydb.builderV2.wheelSortDirection.v1'
+const BUILDER_V2_TEAM_PREVIEW_MODE_KEY = 'skeydb.builderV2.teamPreviewMode.v1'
 
 interface UseBuilderV2ModelOptions {
   showToast?: (message: string) => void
@@ -171,6 +173,11 @@ export function useBuilderV2Model({
   )
   const [wheelSortDirection, setWheelSortDirection] = useState<CollectionSortDirection>(() =>
     safeStorageRead(storage, BUILDER_V2_WHEEL_SORT_DIRECTION_KEY) === 'ASC' ? 'ASC' : 'DESC',
+  )
+  const [teamPreviewMode, setTeamPreviewModeState] = useState<TeamPreviewMode>(() =>
+    safeStorageRead(storage, BUILDER_V2_TEAM_PREVIEW_MODE_KEY) === 'expanded'
+      ? 'expanded'
+      : 'compact',
   )
   const [canAutosaveBuilderDraft] = useState(() => {
     const persisted = loadBuilderDraft(storage)
@@ -286,6 +293,10 @@ export function useBuilderV2Model({
     safeStorageWrite(storage, BUILDER_V2_WHEEL_SORT_DIRECTION_KEY, wheelSortDirection)
   }, [storage, wheelSortDirection])
 
+  useEffect(() => {
+    safeStorageWrite(storage, BUILDER_V2_TEAM_PREVIEW_MODE_KEY, teamPreviewMode)
+  }, [storage, teamPreviewMode])
+
   const effectiveActiveTeamId = useMemo(
     () => (teams.some((team) => team.id === activeTeamId) ? activeTeamId : (teams[0]?.id ?? '')),
     [activeTeamId, teams],
@@ -383,28 +394,90 @@ export function useBuilderV2Model({
             : 'Empty',
         ),
         slots: team.slots.map((slot, index) => {
+          const slotLabel = `Slot ${String(index + 1)}`
           const awakenerEntity = slot.awakenerId ? awakenerById.get(slot.awakenerId) : undefined
-          const awakenerName = awakenerEntity
+          const awakenerDisplayName = awakenerEntity
             ? formatAwakenerNameForUi(awakenerEntity.name)
             : slot.awakenerId
               ? 'Unknown'
               : 'Empty'
+          const covenant = slot.covenantId ? covenantById.get(slot.covenantId) : undefined
+          const createSummaryWheel = (
+            wheelId: string | null,
+          ): BuilderV2TeamSummary['slots'][number]['wheels'][number] => {
+            if (!wheelId) {
+              return null
+            }
+
+            const wheel = wheelById.get(wheelId)
+            return {
+              id: wheelId,
+              name: wheel?.name ?? 'Unknown Wheel',
+              miniAssetSrc: getWheelMiniAssetById(wheelId),
+              assetSrc: getWheelAssetById(wheelId),
+              enlightenLevel: ownedWheelLevelById.get(wheelId) ?? null,
+              isOwned: isWheelOwnedById(wheelId),
+            }
+          }
+          const wheels: BuilderV2TeamSummary['slots'][number]['wheels'] = [
+            createSummaryWheel(slot.wheels[0] ?? null),
+            createSummaryWheel(slot.wheels[1] ?? null),
+          ]
+
           return {
             slotId: slot.slotId,
-            label: `Slot ${String(index + 1)}`,
-            name: awakenerName,
+            label: slotLabel,
+            slotNumber: index + 1,
+            name: awakenerDisplayName,
+            awakener: awakenerEntity
+              ? {
+                  id: awakenerEntity.id,
+                  name: awakenerEntity.name,
+                  displayName: awakenerDisplayName,
+                  realm: awakenerEntity.realm,
+                  level: slot.isSupport ? 90 : (slot.level ?? 60),
+                  enlightenLevel: ownedAwakenerLevelByName.get(awakenerEntity.name) ?? null,
+                  cardSrc: getAwakenerCardAsset(awakenerEntity.name),
+                  portraitSrc: getAwakenerPortraitAsset(awakenerEntity.name),
+                  isOwned: isAwakenerOwnedByName(awakenerEntity.name),
+                  isSupport: Boolean(slot.isSupport),
+                }
+              : null,
             portraitSrc: awakenerEntity ? getAwakenerPortraitAsset(awakenerEntity.name) : undefined,
+            cardSrc: awakenerEntity ? getAwakenerCardAsset(awakenerEntity.name) : undefined,
             isEmpty: !slot.awakenerId,
             isSupport: Boolean(slot.isSupport),
-            wheelCount: slot.wheels.filter(Boolean).length,
+            wheelCount: wheels.filter(Boolean).length,
+            wheels,
             hasCovenant: Boolean(slot.covenantId),
+            covenant:
+              slot.covenantId && covenant
+                ? {
+                    id: slot.covenantId,
+                    name: covenant.name,
+                    assetSrc: getCovenantAssetById(slot.covenantId),
+                  }
+                : null,
           }
         }),
         posseName: team.posseId ? (posseById.get(team.posseId)?.name ?? 'Unknown Posse') : null,
+        posseRealm: team.posseId ? (posseById.get(team.posseId)?.realm ?? null) : null,
         posseAssetSrc: team.posseId ? getPosseAssetById(team.posseId) : undefined,
+        isPosseOwned: team.posseId ? isPosseOwnedById(team.posseId) : true,
         isEmpty: isTeamEmpty(team),
       })),
-    [effectiveActiveTeamId, posseById, teams],
+    [
+      covenantById,
+      effectiveActiveTeamId,
+      isAwakenerOwnedByName,
+      isPosseOwnedById,
+      isWheelOwnedById,
+      ownedAwakenerLevelByName,
+      ownedWheelLevelById,
+      posseById,
+      teams,
+      wheelById,
+    ],
   )
 
   const slots = useMemo<BuilderV2SlotView[]>(
@@ -1647,6 +1720,7 @@ export function useBuilderV2Model({
     quickLineupSession,
     quickLineupStepLabel,
     teams: v2Teams,
+    teamPreviewMode,
     maxTeams: MAX_TEAMS,
     canAddTeam: teams.length < MAX_TEAMS,
     editingTeamId,
@@ -1661,6 +1735,7 @@ export function useBuilderV2Model({
     setSearchQuery,
     setPickerTab: switchPickerTab,
     setActiveTeam,
+    setTeamPreviewMode: setTeamPreviewModeState,
     addTeam,
     beginTeamRename,
     setEditingTeamName,
@@ -1698,6 +1773,7 @@ export function useBuilderV2Model({
     clearPosse,
     openImportDialog,
     openExportAllDialog,
+    openTeamExportDialog,
     openActiveTeamExportDialog,
     openActiveTeamIngameExportDialog,
     importExportDialogProps,

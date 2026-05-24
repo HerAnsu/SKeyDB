@@ -262,11 +262,14 @@ export function BuilderV2AdaptiveLayout({
             onCommitTeamRename={model.commitTeamRename}
             onMoveTeamDown={model.moveTeamDown}
             onMoveTeamUp={model.moveTeamUp}
+            onRequestExportTeam={model.openTeamExportDialog}
             onRequestApplyTeamTemplate={model.requestApplyTeamTemplate}
             onRequestDeleteTeam={model.requestDeleteTeam}
             onRequestResetTeam={model.requestResetTeam}
             onSetActiveTeam={model.setActiveTeam}
             onSetEditingTeamName={model.setEditingTeamName}
+            onTeamPreviewModeChange={model.setTeamPreviewMode}
+            teamPreviewMode={model.teamPreviewMode}
             teams={model.teams}
             variant='adaptive'
           />
