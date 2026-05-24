@@ -419,7 +419,9 @@ export function isBuilderV2DragPayload(value: unknown): value is BuilderV2DragPa
     (value.source !== 'picker' && value.source !== 'team') ||
     typeof value.id !== 'string' ||
     value.id.length === 0 ||
-    !isDragPreviewDescriptor(value.preview)
+    !isDragPreviewDescriptor(value.preview) ||
+    value.preview.kind !== value.kind ||
+    value.preview.id !== value.id
   ) {
     return false
   }

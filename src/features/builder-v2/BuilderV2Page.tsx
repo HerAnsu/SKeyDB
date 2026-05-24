@@ -2,7 +2,7 @@ import {DndContext} from '@dnd-kit/core'
 
 import './builder-v2.css'
 
-import {useEffect, useState} from 'react'
+import {useEffect, useState, type ReactNode} from 'react'
 
 import {ConfirmDialog} from '@/components/ui/ConfirmDialog'
 import {Toast} from '@/components/ui/Toast'
@@ -13,6 +13,7 @@ import {BuilderTransferConfirmDialog} from '../builder/BuilderTransferConfirmDia
 import {BuilderV2ActiveFooter, BuilderV2ActiveHeader} from './BuilderV2ActiveTeamChrome'
 import {BuilderV2AdaptiveLayout} from './BuilderV2AdaptiveLayout'
 import {BuilderV2AwakenerPicker} from './BuilderV2AwakenerPicker'
+import {BuilderV2DndEnabledContext, useBuilderV2DndEnabledForDevice} from './BuilderV2DndCapability'
 import {BuilderV2DragOverlay} from './BuilderV2DragOverlay'
 import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
 import {BuilderV2MobileLayout} from './BuilderV2MobileLayout'
@@ -31,11 +32,15 @@ export function BuilderV2Page() {
   const {toastEntries, showToast} = useTimedToast({defaultDurationMs: 3200})
   const model = useBuilderV2Model({showToast})
   const viewportMode = useBuilderV2ViewportMode()
+  const isDndEnabledForDevice = useBuilderV2DndEnabledForDevice()
+  const isDndEnabled = viewportMode !== 'mobile' && isDndEnabledForDevice
   const assignAwakener = useStableEvent(model.assignAwakener)
   const assignWheel = useStableEvent(model.assignWheel)
   const assignCovenant = useStableEvent(model.assignCovenant)
   const assignPosse = useStableEvent(model.assignPosse)
   const dnd = useBuilderV2Dnd({model})
+  const activeDropTarget = isDndEnabled ? dnd.activeDropTarget : null
+  const isDragActive = isDndEnabled && dnd.isDragging
 
   let content
 
@@ -43,35 +48,17 @@ export function BuilderV2Page() {
     content = <BuilderV2MobileLayout model={model} />
   } else if (viewportMode === 'adaptive') {
     content = (
-      <DndContext
-        collisionDetection={dnd.collisionDetection}
-        sensors={dnd.sensors}
-        onDragCancel={dnd.handleDragCancel}
-        onDragEnd={dnd.handleDragEnd}
-        onDragOver={dnd.handleDragOver}
-        onDragStart={dnd.handleDragStart}
-      >
+      <BuilderV2DndBoundary dnd={dnd} enabled={isDndEnabled}>
         <BuilderV2AdaptiveLayout
-          activeDropTarget={dnd.activeDropTarget}
-          isDragActive={dnd.isDragging}
+          activeDropTarget={activeDropTarget}
+          isDragActive={isDragActive}
           model={model}
         />
-        <BuilderV2DragOverlay
-          isRemoveIntent={dnd.activeDropTarget?.kind === 'picker'}
-          preview={dnd.activePreview}
-        />
-      </DndContext>
+      </BuilderV2DndBoundary>
     )
   } else {
     content = (
-      <DndContext
-        collisionDetection={dnd.collisionDetection}
-        sensors={dnd.sensors}
-        onDragCancel={dnd.handleDragCancel}
-        onDragEnd={dnd.handleDragEnd}
-        onDragOver={dnd.handleDragOver}
-        onDragStart={dnd.handleDragStart}
-      >
+      <BuilderV2DndBoundary dnd={dnd} enabled={isDndEnabled}>
         <section
           className='builder-v2-page builder-v2-page--desktop'
           aria-labelledby='builder-v2-title'
@@ -106,21 +93,21 @@ export function BuilderV2Page() {
                     activePosse={model.activePosse}
                     activeTeamName={model.activeTeamName}
                     activeTeamTarget={model.activeTeamTarget}
-                    isDragActive={dnd.isDragging}
+                    isDragActive={isDragActive}
                     onClearPosse={model.clearPosse}
                     onSelectPosse={model.selectPosse}
-                    predictedDropTarget={dnd.activeDropTarget}
+                    predictedDropTarget={activeDropTarget}
                   />
 
                   <BuilderV2TeamSlots
-                    isDragActive={dnd.isDragging}
+                    isDragActive={isDragActive}
                     onClearCovenant={model.clearCovenant}
                     onClearWheel={model.clearWheel}
                     onRemoveAwakener={model.removeAwakener}
                     onSelectCovenantSlot={model.selectCovenantSlot}
                     onSelectSlot={model.selectAwakenerSlot}
                     onSelectWheelSlot={model.selectWheelSlot}
-                    predictedDropTarget={dnd.activeDropTarget}
+                    predictedDropTarget={activeDropTarget}
                     quickLineupActive={Boolean(model.quickLineupSession)}
                     slots={model.slots}
                   />
@@ -161,26 +148,22 @@ export function BuilderV2Page() {
             </main>
 
             <BuilderV2AwakenerPicker
-              isDragActive={dnd.isDragging}
+              isDragActive={isDragActive}
               onAssignCovenant={assignCovenant}
               onAssignAwakener={assignAwakener}
               onAssignPosse={assignPosse}
               onAssignWheel={assignWheel}
               picker={model.picker}
-              predictedDropTarget={dnd.activeDropTarget}
+              predictedDropTarget={activeDropTarget}
             />
           </div>
         </section>
-        <BuilderV2DragOverlay
-          isRemoveIntent={dnd.activeDropTarget?.kind === 'picker'}
-          preview={dnd.activePreview}
-        />
-      </DndContext>
+      </BuilderV2DndBoundary>
     )
   }
 
   return (
-    <>
+    <BuilderV2DndEnabledContext.Provider value={isDndEnabled}>
       {content}
       <BuilderTransferConfirmDialog dialog={model.transferDialog} onCancel={model.cancelTransfer} />
       {model.teamActionDialog ? (
@@ -196,7 +179,40 @@ export function BuilderV2Page() {
       ) : null}
       <BuilderImportExportDialogs {...model.importExportDialogProps} />
       <Toast entries={toastEntries} />
-    </>
+    </BuilderV2DndEnabledContext.Provider>
+  )
+}
+
+type BuilderV2DndController = ReturnType<typeof useBuilderV2Dnd>
+
+function BuilderV2DndBoundary({
+  children,
+  dnd,
+  enabled,
+}: {
+  children: ReactNode
+  dnd: BuilderV2DndController
+  enabled: boolean
+}) {
+  if (!enabled) {
+    return <>{children}</>
+  }
+
+  return (
+    <DndContext
+      collisionDetection={dnd.collisionDetection}
+      sensors={dnd.sensors}
+      onDragCancel={dnd.handleDragCancel}
+      onDragEnd={dnd.handleDragEnd}
+      onDragOver={dnd.handleDragOver}
+      onDragStart={dnd.handleDragStart}
+    >
+      {children}
+      <BuilderV2DragOverlay
+        isRemoveIntent={dnd.activeDropTarget?.kind === 'picker'}
+        preview={dnd.activePreview}
+      />
+    </DndContext>
   )
 }
 

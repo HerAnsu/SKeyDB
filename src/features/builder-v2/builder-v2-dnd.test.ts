@@ -158,6 +158,18 @@ describe('builder-v2 DnD payload creators', () => {
     expect(isBuilderV2DragPayload({...teamPayload, slotId: ''})).toBe(false)
     expect(isBuilderV2DragPayload({...teamPayload, wheelIndex: 2})).toBe(false)
     expect(isBuilderV2DragPayload({...pickerPayload, preview: {title: 'Aster'}})).toBe(false)
+    expect(
+      isBuilderV2DragPayload({
+        ...pickerPayload,
+        preview: {...pickerPayload.preview, kind: 'wheel'},
+      }),
+    ).toBe(false)
+    expect(
+      isBuilderV2DragPayload({
+        ...pickerPayload,
+        preview: {...pickerPayload.preview, id: 'awakener-2'},
+      }),
+    ).toBe(false)
     expect(isBuilderV2DragPayload(null)).toBe(false)
   })
 })

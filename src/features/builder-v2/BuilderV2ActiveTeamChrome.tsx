@@ -3,6 +3,7 @@ import {memo, type ReactNode} from 'react'
 import {useDroppable} from '@dnd-kit/core'
 
 import {makeBuilderV2PosseDndId, type BuilderV2DropTargetDescriptor} from './builder-v2-dnd'
+import {useBuilderV2DndEnabled} from './BuilderV2DndCapability'
 import type {
   BuilderV2ActivePosseView,
   BuilderV2Model,
@@ -22,6 +23,7 @@ interface BuilderV2ActiveHeaderProps {
 interface BuilderV2ActiveFooterProps {
   leadingAction?: ReactNode
   editingLabel: string
+  editingMessageId?: string
   onCancelQuickLineup: () => void
   onFinishQuickLineup: () => void
   onGoBackQuickLineupStep: () => void
@@ -41,10 +43,13 @@ export const BuilderV2ActiveHeader = memo(function BuilderV2ActiveHeader({
   onSelectPosse,
   predictedDropTarget = null,
 }: BuilderV2ActiveHeaderProps) {
+  const isDndEnabled = useBuilderV2DndEnabled()
   const {isOver: isPosseOver, setNodeRef: setPosseDropRef} = useDroppable({
     id: makeBuilderV2PosseDndId(),
+    disabled: !isDndEnabled,
   })
-  const isPosseDropTarget = isDragActive ? predictedDropTarget?.kind === 'posse' : isPosseOver
+  const isPosseDropTarget =
+    isDndEnabled && (isDragActive ? predictedDropTarget?.kind === 'posse' : isPosseOver)
 
   return (
     <div className='builder-v2-active-header'>
@@ -53,7 +58,7 @@ export const BuilderV2ActiveHeader = memo(function BuilderV2ActiveHeader({
         <h2 className='ui-title'>{activeTeamName}</h2>
       </div>
 
-      <div className='builder-v2-posse-summary' ref={setPosseDropRef}>
+      <div className='builder-v2-posse-summary' ref={isDndEnabled ? setPosseDropRef : undefined}>
         <button
           aria-label='Select team posse'
           aria-pressed={activeTeamTarget?.kind === 'posse'}
@@ -92,6 +97,7 @@ export const BuilderV2ActiveHeader = memo(function BuilderV2ActiveHeader({
 
 export const BuilderV2ActiveFooter = memo(function BuilderV2ActiveFooter({
   editingLabel,
+  editingMessageId,
   leadingAction,
   onCancelQuickLineup,
   onFinishQuickLineup,
@@ -106,9 +112,13 @@ export const BuilderV2ActiveFooter = memo(function BuilderV2ActiveFooter({
 
   if (!session) {
     return (
-      <footer className='builder-v2-active-footer'>
+      <footer className='builder-v2-active-footer builder-v2-active-footer--default'>
         <div className='builder-v2-footer-cell builder-v2-footer-cell--start'>{leadingAction}</div>
-        <p className='builder-v2-editing-line' role={violationMessage ? 'alert' : undefined}>
+        <p
+          className='builder-v2-editing-line'
+          id={editingMessageId}
+          role={violationMessage ? 'alert' : undefined}
+        >
           {violationMessage ?? editingLabel}
         </p>
         <div className='builder-v2-footer-cell builder-v2-footer-cell--end'>

@@ -54,8 +54,37 @@ function getRequiredTextArea(element: HTMLElement): HTMLTextAreaElement {
   return element
 }
 
+const originalMatchMedia = window.matchMedia
+
+function mockBuilderV2TouchDevice(isTouchType: boolean) {
+  Object.defineProperty(window, 'matchMedia', {
+    configurable: true,
+    writable: true,
+    value: (query: string): MediaQueryList =>
+      ({
+        matches:
+          isTouchType &&
+          (query.includes('any-pointer: coarse') ||
+            query.includes('pointer: coarse') ||
+            query.includes('hover: none')),
+        media: query,
+        onchange: null,
+        addEventListener: () => undefined,
+        removeEventListener: () => undefined,
+        addListener: () => undefined,
+        removeListener: () => undefined,
+        dispatchEvent: () => true,
+      }) as MediaQueryList,
+  })
+}
+
 afterEach(() => {
   resizeBuilderV2Viewport(1200, false)
+  Object.defineProperty(window, 'matchMedia', {
+    configurable: true,
+    writable: true,
+    value: originalMatchMedia,
+  })
 })
 
 describe('BuilderV2Page', () => {
@@ -239,6 +268,35 @@ describe('BuilderV2Page', () => {
     expect(screen.getByRole('complementary', {name: /my teams/i})).toBeInTheDocument()
   })
 
+  it('disables builder drag affordances on touch-type devices while keeping click assignment', () => {
+    mockBuilderV2TouchDevice(true)
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 1$/i}))
+
+    const dock = screen.getByRole('region', {name: /adaptive picker/i})
+    const goliathTile = within(dock).getByRole('button', {name: /goliath, level \d+/i})
+    expect(goliathTile).not.toHaveAttribute('aria-roledescription', 'draggable')
+
+    fireEvent.click(goliathTile)
+
+    const slotTrigger = screen.getByRole('button', {name: /^select slot 1$/i})
+    expect(slotTrigger).not.toHaveAttribute('aria-roledescription', 'draggable')
+    expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
+  })
+
+  it('does not advertise pointer-only drag affordances as keyboard-draggable', () => {
+    mockBuilderV2TouchDevice(false)
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    expect(screen.getByRole('button', {name: /goliath, level \d+/i})).not.toHaveAttribute(
+      'aria-roledescription',
+      'draggable',
+    )
+  })
+
   it('switches teams through the adaptive compact team rail', () => {
     resizeBuilderV2Viewport(900)
     render(<BuilderV2Page />)
@@ -327,6 +385,21 @@ describe('BuilderV2Page', () => {
     expect(secondSlotTrigger).toHaveFocus()
   })
 
+  it('restores adaptive picker focus after direct expand control opening', () => {
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+
+    const expandButton = screen.getByRole('button', {name: /expand adaptive picker/i})
+    fireEvent.click(expandButton)
+
+    const collapseButton = screen.getByRole('button', {name: /collapse adaptive picker/i})
+    expect(collapseButton).toBeInTheDocument()
+
+    fireEvent.keyDown(document, {key: 'Escape'})
+
+    expect(screen.getByRole('button', {name: /expand adaptive picker/i})).toHaveFocus()
+  })
+
   it('renders the adaptive picker dock inline without modal scroll locking', () => {
     resizeBuilderV2Viewport(900)
     render(<BuilderV2Page />)
@@ -334,7 +407,7 @@ describe('BuilderV2Page', () => {
     fireEvent.click(screen.getByRole('button', {name: /^select slot 1$/i}))
 
     const dock = screen.getByRole('region', {name: /adaptive picker/i})
-    expect(dock.parentElement).toHaveClass('builder-v2-adaptive-main')
+    expect(dock.parentElement).toHaveClass('builder-v2-adaptive-primary-stack')
     expect(document.body.style.overflow).toBe('')
     expect(document.querySelector('.builder-v2-adaptive-workbench')).not.toHaveAttribute(
       'aria-hidden',
@@ -366,7 +439,9 @@ describe('BuilderV2Page', () => {
 
     const dock = screen.getByRole('region', {name: /adaptive picker/i})
     expect(dock).toBeInTheDocument()
-    expect(within(dock).getByRole('alert')).toHaveTextContent(/wheels require an awakener/i)
+    const alert = screen.getByRole('alert')
+    expect(alert).toHaveTextContent(/wheels require an awakener/i)
+    expect(dock).toHaveAttribute('aria-describedby', alert.id)
   })
 
   it('keeps the adaptive picker open when an awakened slot has no empty wheel target', () => {
@@ -396,9 +471,9 @@ describe('BuilderV2Page', () => {
     fireEvent.click(within(dock).getByRole('button', {name: /signal through silence/i}))
 
     expect(screen.getByRole('region', {name: /adaptive picker/i})).toBeInTheDocument()
-    expect(within(dock).getByRole('alert')).toHaveTextContent(
-      /select a wheel slot or an awakened slot/i,
-    )
+    const alert = screen.getByRole('alert')
+    expect(alert).toHaveTextContent(/select a wheel slot or an awakened slot/i)
+    expect(dock).toHaveAttribute('aria-describedby', alert.id)
   })
 
   it('imports a single t1 code into an empty active V2 team', () => {

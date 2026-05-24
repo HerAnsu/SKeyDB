@@ -76,7 +76,7 @@ describe('buildScalingInfoEntry', () => {
           descriptionTemplate: 'This Awakener gains [Arg1] Levels of Base Attributes.',
           descriptionArgs: {
             Arg1: {
-              kind: 'linear',
+              kind: 'linear' as const,
               base: '2',
               gainPerLevel: '2',
             },
@@ -127,7 +127,7 @@ describe('buildScalingInfoEntry', () => {
           descriptionTemplate: 'This Awakener gains [Arg1] Levels of Base Attributes.',
           descriptionArgs: {
             Arg1: {
-              kind: 'linear',
+              kind: 'linear' as const,
               base: '2',
               gainPerLevel: '2',
             },

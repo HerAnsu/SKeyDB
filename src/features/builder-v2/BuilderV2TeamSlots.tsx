@@ -17,6 +17,7 @@ import {
   makeBuilderV2WheelDndId,
   type BuilderV2DropTargetDescriptor,
 } from './builder-v2-dnd'
+import {useBuilderV2DndEnabled} from './BuilderV2DndCapability'
 import type {BuilderV2SlotView, BuilderV2WheelSlotView} from './BuilderV2ModelTypes'
 
 type BuilderV2AwakenerRealm = NonNullable<BuilderV2SlotView['awakener']>['realm']
@@ -100,40 +101,39 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
   quickLineupActive,
   slot,
 }: BuilderV2SlotCardProps) {
+  const isDndEnabled = useBuilderV2DndEnabled()
   const awakenerDragPayload = createBuilderV2TeamAwakenerDragPayload(slot)
   const covenantDragPayload = createBuilderV2TeamCovenantDragPayload(slot)
   const {isOver: isSlotOver, setNodeRef: setSlotDropRef} = useDroppable({
     id: makeBuilderV2SlotDndId(slot.slotId),
+    disabled: !isDndEnabled,
   })
   const {isOver: isCovenantOver, setNodeRef: setCovenantDropRef} = useDroppable({
     id: makeBuilderV2CovenantDndId(slot.slotId),
+    disabled: !isDndEnabled,
   })
-  const {
-    attributes: awakenerDragAttributes,
-    listeners: awakenerDragListeners,
-    setNodeRef: setAwakenerDragRef,
-  } = useDraggable({
+  const {listeners: awakenerDragListeners, setNodeRef: setAwakenerDragRef} = useDraggable({
     id: makeBuilderV2TeamAwakenerDragId(slot.slotId),
     data: awakenerDragPayload ?? undefined,
-    disabled: !awakenerDragPayload,
+    disabled: !isDndEnabled || !awakenerDragPayload,
   })
-  const {
-    attributes: covenantDragAttributes,
-    listeners: covenantDragListeners,
-    setNodeRef: setCovenantDragRef,
-  } = useDraggable({
+  const {listeners: covenantDragListeners, setNodeRef: setCovenantDragRef} = useDraggable({
     id: makeBuilderV2TeamCovenantDragId(slot.slotId),
     data: covenantDragPayload ?? undefined,
-    disabled: !covenantDragPayload,
+    disabled: !isDndEnabled || !covenantDragPayload,
   })
   const setCovenantDragDropRef = useMergedRefs(setCovenantDropRef, setCovenantDragRef)
-  const setCovenantNodeRef = covenantDragPayload ? setCovenantDragDropRef : setCovenantDropRef
-  const isSlotDropTarget = isDragActive
-    ? isPredictedSlotDropTarget(predictedDropTarget, slot.slotId)
-    : isSlotOver
-  const isCovenantDropTarget = isDragActive
-    ? isPredictedCovenantDropTarget(predictedDropTarget, slot.slotId)
-    : isCovenantOver
+  const canDragAwakener = isDndEnabled && Boolean(awakenerDragPayload)
+  const canDragCovenant = isDndEnabled && Boolean(covenantDragPayload)
+  const setCovenantNodeRef = canDragCovenant ? setCovenantDragDropRef : setCovenantDropRef
+  const isSlotDropTarget =
+    isDndEnabled &&
+    (isDragActive ? isPredictedSlotDropTarget(predictedDropTarget, slot.slotId) : isSlotOver)
+  const isCovenantDropTarget =
+    isDndEnabled &&
+    (isDragActive
+      ? isPredictedCovenantDropTarget(predictedDropTarget, slot.slotId)
+      : isCovenantOver)
 
   return (
     <article
@@ -141,21 +141,20 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
         isSlotDropTarget ? 'builder-v2-slot-card--drop-target' : ''
       }`}
       data-slot-id={slot.slotId}
-      ref={setSlotDropRef}
+      ref={isDndEnabled ? setSlotDropRef : undefined}
     >
       <span className='sr-only'>{slot.slotLabel}</span>
 
       <div className='builder-v2-awakener-frame'>
         <button
-          {...(awakenerDragPayload ? awakenerDragAttributes : {})}
-          {...(awakenerDragPayload ? awakenerDragListeners : {})}
+          {...(canDragAwakener && awakenerDragListeners ? awakenerDragListeners : {})}
           aria-label={`Select ${slot.slotLabel}`}
           aria-pressed={slot.isSelected}
           className='builder-v2-awakener-art-target'
           onClick={(event) => {
             onSelectSlot(slot.slotId, event.currentTarget)
           }}
-          ref={awakenerDragPayload ? setAwakenerDragRef : undefined}
+          ref={canDragAwakener ? setAwakenerDragRef : undefined}
           type='button'
         >
           <span className='builder-v2-awakener-art'>
@@ -222,8 +221,7 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
 
           <div className='builder-v2-covenant-slot'>
             <button
-              {...(covenantDragPayload ? covenantDragAttributes : {})}
-              {...(covenantDragPayload ? covenantDragListeners : {})}
+              {...(canDragCovenant && covenantDragListeners ? covenantDragListeners : {})}
               aria-label={`Select ${slot.slotLabel} Covenant`}
               aria-pressed={slot.isCovenantSelected}
               className={`builder-v2-covenant-inline ${
@@ -232,7 +230,7 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
               onClick={(event) => {
                 onSelectCovenantSlot(slot.slotId, event.currentTarget)
               }}
-              ref={setCovenantNodeRef}
+              ref={isDndEnabled ? setCovenantNodeRef : undefined}
               title={slot.covenantName ?? 'Covenant'}
               type='button'
             >
@@ -500,24 +498,25 @@ function SlotWheelChip({
   slot: BuilderV2SlotView
   wheelSlot: BuilderV2WheelSlotView
 }) {
+  const isDndEnabled = useBuilderV2DndEnabled()
   const wheelDragPayload = createBuilderV2TeamWheelDragPayload(slot, wheelSlot.wheelIndex)
   const {isOver: isWheelOver, setNodeRef: setWheelDropRef} = useDroppable({
     id: makeBuilderV2WheelDndId(slot.slotId, wheelSlot.wheelIndex),
+    disabled: !isDndEnabled,
   })
-  const {
-    attributes: wheelDragAttributes,
-    listeners: wheelDragListeners,
-    setNodeRef: setWheelDragRef,
-  } = useDraggable({
+  const {listeners: wheelDragListeners, setNodeRef: setWheelDragRef} = useDraggable({
     id: makeBuilderV2TeamWheelDragId(slot.slotId, wheelSlot.wheelIndex),
     data: wheelDragPayload ?? undefined,
-    disabled: !wheelDragPayload,
+    disabled: !isDndEnabled || !wheelDragPayload,
   })
   const setWheelDragDropRef = useMergedRefs(setWheelDropRef, setWheelDragRef)
-  const setWheelNodeRef = wheelDragPayload ? setWheelDragDropRef : setWheelDropRef
-  const isWheelDropTarget = isDragActive
-    ? isPredictedWheelDropTarget(predictedDropTarget, slot.slotId, wheelSlot.wheelIndex)
-    : isWheelOver
+  const canDragWheel = isDndEnabled && Boolean(wheelDragPayload)
+  const setWheelNodeRef = canDragWheel ? setWheelDragDropRef : setWheelDropRef
+  const isWheelDropTarget =
+    isDndEnabled &&
+    (isDragActive
+      ? isPredictedWheelDropTarget(predictedDropTarget, slot.slotId, wheelSlot.wheelIndex)
+      : isWheelOver)
 
   return (
     <div
@@ -526,15 +525,14 @@ function SlotWheelChip({
       } ${isWheelDropTarget ? 'builder-v2-wheel-chip--drop-target' : ''}`}
     >
       <button
-        {...(wheelDragPayload ? wheelDragAttributes : {})}
-        {...(wheelDragPayload ? wheelDragListeners : {})}
+        {...(canDragWheel && wheelDragListeners ? wheelDragListeners : {})}
         aria-label={`Select ${wheelSlot.label}`}
         aria-pressed={wheelSlot.isSelected}
         className='builder-v2-wheel-target'
         onClick={(event) => {
           onSelect(event.currentTarget)
         }}
-        ref={setWheelNodeRef}
+        ref={isDndEnabled ? setWheelNodeRef : undefined}
         type='button'
       >
         <span className='builder-v2-wheel-art' aria-hidden>
