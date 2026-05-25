@@ -55,19 +55,19 @@ describe('D-zone database popover entries', () => {
 
     const entry = buildDzoneMonsterPopoverEntry({monster})
 
-    expect(entry.label).toBe('Level 73 · HP 401k · 3 HP bars')
+    expect(entry.label).toBe('Level 73 · HP 402K · 3 bars')
     expect(entry.labelSegments).toEqual([
       {text: 'Level '},
       {text: '73', tone: 'value'},
       {text: ' · HP '},
-      {text: '401k', tone: 'value'},
+      {text: '402K', tone: 'value'},
       {text: ' · '},
-      {text: '3 HP bars'},
+      {text: '3 bars'},
     ])
     expect(entry.attributeRows).toBeUndefined()
   })
 
-  it('leaves six-digit HP untruncated until it exceeds 100k', () => {
+  it('formats large selected HP compactly', () => {
     const monster = {
       id: 'dzone-monster-9999',
       name: '"Test Beast"',
@@ -86,9 +86,56 @@ describe('D-zone database popover entries', () => {
 
     const entry = buildDzoneMonsterPopoverEntry({monster})
 
-    expect(entry.label).toBe('Level 70 · HP 100000')
-    expect(entry.label).not.toContain('HP bars')
+    expect(entry.label).toBe('Level 70 · HP 100K')
+    expect(entry.label).not.toContain('bars')
     expect(entry.attributeRows).toBeUndefined()
+  })
+
+  it('adds variable HP bar values and rouse semantics as compact attribute rows', () => {
+    const monster = {
+      id: 'dzone-monster-9999',
+      name: '"Test Beast"',
+      assetName: 'Portrait_Test',
+      characteristicIds: [],
+      descriptionTemplate: 'A test creature from the deep.',
+      characteristics: [],
+      alertStats: {
+        alertId: 'alert-4',
+        alertName: 'Alert IV',
+        level: 75,
+        hp: 51307,
+        hpBars: 3,
+        hpBarValues: [51307, 102614, 27706],
+        effectiveHp: 181627,
+        hpBarSource: 'beforeDeathCommandHp',
+        hpBarPhases: [
+          {bar: 1, hp: 51307, maxHp: 51307, kind: 'base'},
+          {
+            bar: 2,
+            hp: 102614,
+            maxHp: 102614,
+            kind: 'maxHpMultiplier',
+            maxHpMultiplier: 2,
+          },
+          {
+            bar: 3,
+            hp: 27706,
+            maxHp: 102614,
+            kind: 'maxHpMultiplierPartialRevive',
+            maxHpMultiplier: 2,
+            healPercent: 0.27,
+          },
+        ],
+      },
+    } satisfies DzoneResolvedMonster
+
+    const entry = buildDzoneMonsterPopoverEntry({monster})
+
+    expect(entry.label).toBe('Level 75 · HP 181.6K total · 3 bars')
+    expect(entry.attributeRows).toEqual([
+      {label: 'HP bars', value: '51.3K › 102.6K › 27.7K'},
+      {label: 'Rouse', value: 'Bar 2 max HP ×2; Bar 3 revives at 27%'},
+    ])
   })
 
   it('omits relic metadata from the label and marks lore as flavor text', () => {

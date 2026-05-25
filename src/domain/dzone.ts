@@ -17,6 +17,14 @@ const relicIdSchema = z.string().regex(/^relic-\d{4}$/)
 const alertIdSchema = z.string().regex(/^alert-\d+$/)
 const dzoneStageEffectSchema = z.enum(['Astral Reign', 'Faded Legacy'])
 const dzoneRealmSchema = z.enum(['AEQUOR', 'CARO', 'CHAOS', 'ULTRA'])
+const hpBarPhaseKindSchema = z.enum([
+  'base',
+  'flatRepeat',
+  'maxHpMultiplier',
+  'partialRevive',
+  'maxHpMultiplierPartialRevive',
+  'custom',
+])
 
 const catalogSchemaBase = {
   schemaVersion: z.literal(3),
@@ -28,6 +36,21 @@ const dzoneAlertMonsterSchema = z.object({
   level: z.number().int().nonnegative(),
   hp: z.number().int().nonnegative(),
   hpBars: z.number().int().positive().optional(),
+  hpBarValues: z.array(z.number().int().positive()).optional(),
+  hpBarPhases: z
+    .array(
+      z.object({
+        bar: z.number().int().positive(),
+        hp: z.number().int().positive(),
+        maxHp: z.number().int().positive().optional(),
+        kind: hpBarPhaseKindSchema,
+        maxHpMultiplier: z.number().positive().optional(),
+        healPercent: z.number().positive().optional(),
+      }),
+    )
+    .optional(),
+  effectiveHp: z.number().int().positive().optional(),
+  hpBarSource: nonEmptyStringSchema.optional(),
 })
 
 const dzoneAlertSchema = z.object({
@@ -125,6 +148,10 @@ export interface DzoneMonsterAlertStats {
   level: number
   hp: number
   hpBars?: number
+  hpBarValues?: number[]
+  hpBarPhases?: DzoneAlertMonster['hpBarPhases']
+  effectiveHp?: number
+  hpBarSource?: string
 }
 
 export interface DzoneResolvedMonster extends DzoneMonster {
@@ -409,6 +436,10 @@ export function resolveDzoneWaveViewModel(wave: DzoneWave): DzoneResolvedWave {
           level: alertMonster.level,
           hp: alertMonster.hp,
           hpBars: alertMonster.hpBars,
+          hpBarValues: alertMonster.hpBarValues,
+          hpBarPhases: alertMonster.hpBarPhases,
+          effectiveHp: alertMonster.effectiveHp,
+          hpBarSource: alertMonster.hpBarSource,
         }),
       ),
     })),

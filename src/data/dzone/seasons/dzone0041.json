@@ -34,7 +34,25 @@
                   "monsterId": "dzone-monster-0174",
                   "level": 38,
                   "hp": 3275,
-                  "hpBars": 2
+                  "hpBars": 2,
+                  "hpBarValues": [3275, 4913],
+                  "effectiveHp": 8188,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 3275,
+                      "kind": "base",
+                      "maxHp": 3275
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 4913,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 4913,
+                      "maxHpMultiplier": 1.5
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 },
                 {
                   "monsterId": "dzone-monster-0156",
@@ -88,7 +106,25 @@
                   "monsterId": "dzone-monster-0174",
                   "level": 53,
                   "hp": 8930,
-                  "hpBars": 2
+                  "hpBars": 2,
+                  "hpBarValues": [8930, 13395],
+                  "effectiveHp": 22325,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 8930,
+                      "kind": "base",
+                      "maxHp": 8930
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 13395,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 13395,
+                      "maxHpMultiplier": 1.5
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 },
                 {
                   "monsterId": "dzone-monster-0156",
@@ -142,7 +178,25 @@
                   "monsterId": "dzone-monster-0174",
                   "level": 63,
                   "hp": 24071,
-                  "hpBars": 2
+                  "hpBars": 2,
+                  "hpBarValues": [24071, 36107],
+                  "effectiveHp": 60178,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 24071,
+                      "kind": "base",
+                      "maxHp": 24071
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 36107,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 36107,
+                      "maxHpMultiplier": 1.5
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 },
                 {
                   "monsterId": "dzone-monster-0156",
@@ -196,7 +250,25 @@
                   "monsterId": "dzone-monster-0174",
                   "level": 73,
                   "hp": 77425,
-                  "hpBars": 2
+                  "hpBars": 2,
+                  "hpBarValues": [77425, 116138],
+                  "effectiveHp": 193563,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 77425,
+                      "kind": "base",
+                      "maxHp": 77425
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 116138,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 116138,
+                      "maxHpMultiplier": 1.5
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 },
                 {
                   "monsterId": "dzone-monster-0156",
@@ -250,7 +322,25 @@
                   "monsterId": "dzone-monster-0174",
                   "level": 78,
                   "hp": 193580,
-                  "hpBars": 2
+                  "hpBars": 2,
+                  "hpBarValues": [193580, 290370],
+                  "effectiveHp": 483950,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 193580,
+                      "kind": "base",
+                      "maxHp": 193580
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 290370,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 290370,
+                      "maxHpMultiplier": 1.5
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 },
                 {
                   "monsterId": "dzone-monster-0156",
@@ -785,7 +875,33 @@
                   "monsterId": "dzone-monster-0209",
                   "level": 44,
                   "hp": 1387,
-                  "hpBars": 3
+                  "hpBars": 3,
+                  "hpBarValues": [1387, 2774, 749],
+                  "effectiveHp": 4910,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 1387,
+                      "kind": "base",
+                      "maxHp": 1387
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 2774,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 2774,
+                      "maxHpMultiplier": 2
+                    },
+                    {
+                      "bar": 3,
+                      "hp": 749,
+                      "kind": "maxHpMultiplierPartialRevive",
+                      "maxHp": 2774,
+                      "maxHpMultiplier": 2,
+                      "healPercent": 0.27
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 }
               ]
             },
@@ -797,7 +913,33 @@
                   "monsterId": "dzone-monster-0209",
                   "level": 57,
                   "hp": 3556,
-                  "hpBars": 3
+                  "hpBars": 3,
+                  "hpBarValues": [3556, 7112, 1921],
+                  "effectiveHp": 12589,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 3556,
+                      "kind": "base",
+                      "maxHp": 3556
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 7112,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 7112,
+                      "maxHpMultiplier": 2
+                    },
+                    {
+                      "bar": 3,
+                      "hp": 1921,
+                      "kind": "maxHpMultiplierPartialRevive",
+                      "maxHp": 7112,
+                      "maxHpMultiplier": 2,
+                      "healPercent": 0.27
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 }
               ]
             },
@@ -809,7 +951,33 @@
                   "monsterId": "dzone-monster-0209",
                   "level": 67,
                   "hp": 11218,
-                  "hpBars": 3
+                  "hpBars": 3,
+                  "hpBarValues": [11218, 22436, 6058],
+                  "effectiveHp": 39712,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 11218,
+                      "kind": "base",
+                      "maxHp": 11218
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 22436,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 22436,
+                      "maxHpMultiplier": 2
+                    },
+                    {
+                      "bar": 3,
+                      "hp": 6058,
+                      "kind": "maxHpMultiplierPartialRevive",
+                      "maxHp": 22436,
+                      "maxHpMultiplier": 2,
+                      "healPercent": 0.27
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 }
               ]
             },
@@ -821,7 +989,33 @@
                   "monsterId": "dzone-monster-0209",
                   "level": 75,
                   "hp": 30724,
-                  "hpBars": 3
+                  "hpBars": 3,
+                  "hpBarValues": [30724, 61448, 16591],
+                  "effectiveHp": 108763,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 30724,
+                      "kind": "base",
+                      "maxHp": 30724
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 61448,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 61448,
+                      "maxHpMultiplier": 2
+                    },
+                    {
+                      "bar": 3,
+                      "hp": 16591,
+                      "kind": "maxHpMultiplierPartialRevive",
+                      "maxHp": 61448,
+                      "maxHpMultiplier": 2,
+                      "healPercent": 0.27
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 }
               ]
             },
@@ -833,7 +1027,33 @@
                   "monsterId": "dzone-monster-0209",
                   "level": 80,
                   "hp": 76778,
-                  "hpBars": 3
+                  "hpBars": 3,
+                  "hpBarValues": [76778, 153556, 41461],
+                  "effectiveHp": 271795,
+                  "hpBarPhases": [
+                    {
+                      "bar": 1,
+                      "hp": 76778,
+                      "kind": "base",
+                      "maxHp": 76778
+                    },
+                    {
+                      "bar": 2,
+                      "hp": 153556,
+                      "kind": "maxHpMultiplier",
+                      "maxHp": 153556,
+                      "maxHpMultiplier": 2
+                    },
+                    {
+                      "bar": 3,
+                      "hp": 41461,
+                      "kind": "maxHpMultiplierPartialRevive",
+                      "maxHp": 153556,
+                      "maxHpMultiplier": 2,
+                      "healPercent": 0.27
+                    }
+                  ],
+                  "hpBarSource": "beforeDeathCommandHp"
                 }
               ]
             }

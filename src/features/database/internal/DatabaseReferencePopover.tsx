@@ -273,10 +273,10 @@ export function DatabaseReferencePopover({
       </div>
       <div className='px-3 pb-3'>
         {attributeRows.length > 0 ? (
-          <div className='mb-3 flex flex-wrap gap-2 border-b border-slate-700/45 pb-3'>
+          <div className='mb-3 space-y-0.5 border-b border-slate-700/35 pb-2.5 text-[11px] leading-relaxed text-slate-400/86'>
             {attributeRows.map((row) => (
               <div
-                className='flex min-w-0 items-center gap-2 border border-slate-700/45 bg-slate-900/45 px-2.5 py-2'
+                className='flex min-w-0 flex-wrap items-baseline gap-x-2'
                 key={`${row.label}:${row.value}`}
               >
                 {row.iconSrc ? (
@@ -288,10 +288,8 @@ export function DatabaseReferencePopover({
                     src={row.iconSrc}
                   />
                 ) : null}
-                <span className='text-[10px] tracking-[0.16em] text-slate-500 uppercase'>
-                  {row.label}
-                </span>
-                <span className='font-["Droid_Serif"] text-[13px] text-amber-100'>{row.value}</span>
+                <span className='text-slate-500/95'>{row.label}</span>
+                <span className='text-amber-100/72'>{row.value}</span>
               </div>
             ))}
           </div>
