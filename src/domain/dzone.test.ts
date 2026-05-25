@@ -81,10 +81,10 @@ describe('D-zone domain boundary', () => {
     })
   })
 
-  it('uses season-scoped monster display snapshots when source ids are reused', async () => {
+  it('keeps season 60 on the archived monster display snapshot', async () => {
     const season = await loadDzoneSeasonById('dzone-0060')
     const waveModels = season?.waves.map(resolveDzoneWaveViewModel)
-    const countess = waveModels?.[1]?.alerts[0]?.monsters.find(
+    const archivedPoet = waveModels?.[1]?.alerts[0]?.monsters.find(
       (monster) => monster.id === 'dzone-monster-0313',
     )
     const globalMonster = getDzoneMonsterById('dzone-monster-0313')
@@ -94,15 +94,13 @@ describe('D-zone domain boundary', () => {
       name: 'The poet',
       characteristicIds: ['enemy-characteristic-0011', 'enemy-characteristic-0007'],
     })
-    expect(countess).toMatchObject({
+    expect(archivedPoet).toMatchObject({
       id: 'dzone-monster-0313',
-      name: 'Countess',
-      badges: ['Elite'],
+      name: 'The poet',
       characteristicIds: ['enemy-characteristic-0011', 'enemy-characteristic-0007'],
-      descriptionTemplate:
-        '"Dearest Countess, my once desire. Now, you have become my loyal guard. Offer her a poem on my behalf."',
     })
-    expect(countess?.characteristics.map((characteristic) => characteristic.id)).toEqual([
+    expect(archivedPoet?.badges ?? []).not.toContain('Elite')
+    expect(archivedPoet?.characteristics.map((characteristic) => characteristic.id)).toEqual([
       'enemy-characteristic-0011',
       'enemy-characteristic-0007',
     ])

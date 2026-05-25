@@ -77,12 +77,7 @@
                   "monsterId": "dzone-monster-0314",
                   "level": 35,
                   "hp": 571,
-                  "hpBars": 1,
-                  "name": "Follower",
-                  "descriptionTemplate": "In Cité's poetry, they follow Colette's path.",
-                  "assetName": "Portrait_Small_Monster_DCD06_02",
-                  "badges": [],
-                  "characteristicIds": ["enemy-characteristic-0010", "enemy-characteristic-0015"]
+                  "hpBars": 1
                 },
                 {
                   "monsterId": "dzone-monster-0035",
@@ -166,12 +161,7 @@
                   "monsterId": "dzone-monster-0314",
                   "level": 50,
                   "hp": 1335,
-                  "hpBars": 1,
-                  "name": "Follower",
-                  "descriptionTemplate": "In Cité's poetry, they follow Colette's path.",
-                  "assetName": "Portrait_Small_Monster_DCD06_02",
-                  "badges": [],
-                  "characteristicIds": ["enemy-characteristic-0010", "enemy-characteristic-0015"]
+                  "hpBars": 1
                 },
                 {
                   "monsterId": "dzone-monster-0035",
@@ -255,12 +245,7 @@
                   "monsterId": "dzone-monster-0314",
                   "level": 60,
                   "hp": 3788,
-                  "hpBars": 1,
-                  "name": "Follower",
-                  "descriptionTemplate": "In Cité's poetry, they follow Colette's path.",
-                  "assetName": "Portrait_Small_Monster_DCD06_02",
-                  "badges": [],
-                  "characteristicIds": ["enemy-characteristic-0010", "enemy-characteristic-0015"]
+                  "hpBars": 1
                 },
                 {
                   "monsterId": "dzone-monster-0035",
@@ -344,12 +329,7 @@
                   "monsterId": "dzone-monster-0314",
                   "level": 70,
                   "hp": 11575,
-                  "hpBars": 1,
-                  "name": "Follower",
-                  "descriptionTemplate": "In Cité's poetry, they follow Colette's path.",
-                  "assetName": "Portrait_Small_Monster_DCD06_02",
-                  "badges": [],
-                  "characteristicIds": ["enemy-characteristic-0010", "enemy-characteristic-0015"]
+                  "hpBars": 1
                 },
                 {
                   "monsterId": "dzone-monster-0035",
@@ -433,12 +413,7 @@
                   "monsterId": "dzone-monster-0314",
                   "level": 75,
                   "hp": 40180,
-                  "hpBars": 1,
-                  "name": "Follower",
-                  "descriptionTemplate": "In Cité's poetry, they follow Colette's path.",
-                  "assetName": "Portrait_Small_Monster_DCD06_02",
-                  "badges": [],
-                  "characteristicIds": ["enemy-characteristic-0010", "enemy-characteristic-0015"]
+                  "hpBars": 1
                 },
                 {
                   "monsterId": "dzone-monster-0035",
@@ -567,12 +542,7 @@
                   "monsterId": "dzone-monster-0313",
                   "level": 39,
                   "hp": 6541,
-                  "hpBars": 1,
-                  "name": "Countess",
-                  "descriptionTemplate": "\"Dearest Countess, my once desire. Now, you have become my loyal guard. Offer her a poem on my behalf.\"",
-                  "assetName": "Portrait_Small_Monster_DCD06_03",
-                  "badges": ["Elite"],
-                  "characteristicIds": ["enemy-characteristic-0011", "enemy-characteristic-0007"]
+                  "hpBars": 1
                 }
               ]
             },
@@ -650,12 +620,7 @@
                   "monsterId": "dzone-monster-0313",
                   "level": 53,
                   "hp": 14262,
-                  "hpBars": 1,
-                  "name": "Countess",
-                  "descriptionTemplate": "\"Dearest Countess, my once desire. Now, you have become my loyal guard. Offer her a poem on my behalf.\"",
-                  "assetName": "Portrait_Small_Monster_DCD06_03",
-                  "badges": ["Elite"],
-                  "characteristicIds": ["enemy-characteristic-0011", "enemy-characteristic-0007"]
+                  "hpBars": 1
                 }
               ]
             },
@@ -733,12 +698,7 @@
                   "monsterId": "dzone-monster-0313",
                   "level": 63,
                   "hp": 35650,
-                  "hpBars": 1,
-                  "name": "Countess",
-                  "descriptionTemplate": "\"Dearest Countess, my once desire. Now, you have become my loyal guard. Offer her a poem on my behalf.\"",
-                  "assetName": "Portrait_Small_Monster_DCD06_03",
-                  "badges": ["Elite"],
-                  "characteristicIds": ["enemy-characteristic-0011", "enemy-characteristic-0007"]
+                  "hpBars": 1
                 }
               ]
             },
@@ -816,12 +776,7 @@
                   "monsterId": "dzone-monster-0313",
                   "level": 72,
                   "hp": 94116,
-                  "hpBars": 1,
-                  "name": "Countess",
-                  "descriptionTemplate": "\"Dearest Countess, my once desire. Now, you have become my loyal guard. Offer her a poem on my behalf.\"",
-                  "assetName": "Portrait_Small_Monster_DCD06_03",
-                  "badges": ["Elite"],
-                  "characteristicIds": ["enemy-characteristic-0011", "enemy-characteristic-0007"]
+                  "hpBars": 1
                 }
               ]
             },
@@ -899,12 +854,7 @@
                   "monsterId": "dzone-monster-0313",
                   "level": 77,
                   "hp": 256037,
-                  "hpBars": 1,
-                  "name": "Countess",
-                  "descriptionTemplate": "\"Dearest Countess, my once desire. Now, you have become my loyal guard. Offer her a poem on my behalf.\"",
-                  "assetName": "Portrait_Small_Monster_DCD06_03",
-                  "badges": ["Elite"],
-                  "characteristicIds": ["enemy-characteristic-0011", "enemy-characteristic-0007"]
+                  "hpBars": 1
                 }
               ]
             }
