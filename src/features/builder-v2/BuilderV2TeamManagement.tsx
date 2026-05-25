@@ -1,8 +1,9 @@
 import {memo, type CSSProperties} from 'react'
 
 import {FaChevronDown, FaChevronUp} from 'react-icons/fa6'
+import {FiEdit2, FiRotateCcw, FiTrash2} from 'react-icons/fi'
 
-import {getRealmAccent, getRealmBadge, getRealmLabel} from '@/domain/realms'
+import {getRealmAccent, getRealmLabel} from '@/domain/realms'
 
 import type {TeamTemplateId} from '../builder/team-collection'
 import type {TeamPreviewMode} from '../builder/types'
@@ -282,24 +283,44 @@ const TeamManagementRow = memo(function TeamManagementRow({
               </span>
             </div>
           ) : (
-            <button
-              aria-label={`Select ${team.name}`}
-              aria-pressed={team.isActive}
-              className='builder-v2-team-management-select'
-              onClick={() => {
-                onSetActiveTeam(team.id)
-                onTeamActivated?.()
-              }}
-              type='button'
-            >
-              <span className='builder-v2-team-index'>{teamIndex}</span>
-              <span className='builder-v2-team-management-copy'>
-                <span className='builder-v2-team-management-name ui-title'>{team.name}</span>
-              </span>
-            </button>
+            <div className='builder-v2-team-management-titlebar'>
+              <button
+                aria-label={`Select ${team.name}`}
+                aria-pressed={team.isActive}
+                className='builder-v2-team-management-select'
+                onClick={() => {
+                  onSetActiveTeam(team.id)
+                  onTeamActivated?.()
+                }}
+                type='button'
+              >
+                <span className='builder-v2-team-index'>{teamIndex}</span>
+                <span className='builder-v2-team-management-copy'>
+                  <span className='builder-v2-team-management-name ui-title'>{team.name}</span>
+                </span>
+              </button>
+              <button
+                aria-label={`Rename ${team.name}`}
+                className='builder-v2-team-management-rename-button'
+                onClick={() => {
+                  onBeginTeamRename(team.id)
+                }}
+                type='button'
+              >
+                <FiEdit2 aria-hidden />
+              </button>
+            </div>
           )}
 
           <TeamPosseSummary team={team} />
+        </div>
+
+        <div className='builder-v2-team-management-row-body'>
+          <div className='builder-v2-team-management-slots'>
+            {team.slots.map((slot) => (
+              <TeamSlotSummary key={slot.slotId} previewMode={previewMode} slot={slot} />
+            ))}
+          </div>
 
           <div
             className='builder-v2-team-management-controls'
@@ -307,53 +328,42 @@ const TeamManagementRow = memo(function TeamManagementRow({
             role='group'
           >
             <button
-              aria-label={`Rename ${team.name}`}
-              className='builder-v2-team-management-button'
-              onClick={() => {
-                onBeginTeamRename(team.id)
-              }}
-              type='button'
-            >
-              Rename
-            </button>
-            <button
               aria-label={`Export ${team.name}`}
-              className='builder-v2-team-management-button'
+              className='builder-v2-team-management-button builder-v2-team-management-button--export'
               onClick={() => {
                 onRequestExportTeam(team.id)
               }}
+              title={`Export ${team.name}`}
               type='button'
             >
               Export
             </button>
             <button
               aria-label={`Reset ${team.name}`}
-              className='builder-v2-team-management-button'
+              className='builder-v2-team-management-button builder-v2-team-management-button--reset'
               onClick={() => {
                 onRequestResetTeam(team.id)
               }}
+              title={`Reset ${team.name}`}
               type='button'
             >
-              Reset
+              <FiRotateCcw aria-hidden />
+              <span>Reset</span>
             </button>
             <button
               aria-label={`Delete ${team.name}`}
-              className='builder-v2-team-management-button builder-v2-team-management-button--danger'
+              className='builder-v2-team-management-button builder-v2-team-management-button--danger builder-v2-team-management-button--delete'
               disabled={teamsCount <= 1}
               onClick={() => {
                 onRequestDeleteTeam(team.id)
               }}
+              title={`Delete ${team.name}`}
               type='button'
             >
-              Delete
+              <FiTrash2 aria-hidden />
+              <span>Delete</span>
             </button>
           </div>
-        </div>
-
-        <div className='builder-v2-team-management-slots'>
-          {team.slots.map((slot) => (
-            <TeamSlotSummary key={slot.slotId} previewMode={previewMode} slot={slot} />
-          ))}
         </div>
       </div>
     </article>
@@ -390,7 +400,10 @@ function TeamSlotSummary({
 }) {
   const compactEnlightenLabel = formatBuilderV2EnlightenLabel(slot.awakener?.enlightenLevel ?? null)
   const realmAccent = slot.awakener?.realm ? getRealmAccent(slot.awakener.realm) : undefined
-  const style = realmAccent ? ({'--team-summary-realm': realmAccent} as CSSProperties) : undefined
+  const style =
+    realmAccent && !slot.isEmpty
+      ? ({'--team-summary-realm': realmAccent} as CSSProperties)
+      : undefined
 
   return (
     <div
@@ -413,11 +426,20 @@ function TeamSlotSummary({
                   : slot.awakener.portraitSrc
               }
             />
-            <RealmBadge realm={slot.awakener.realm} />
             <span className='builder-v2-team-management-slot-shade' />
-            <span className='builder-v2-team-management-slot-level'>
-              Lv. {String(slot.awakener.level)}
-            </span>
+            {previewMode === 'expanded' ? (
+              <span className='builder-v2-team-management-slot-art-meta'>
+                <span className='builder-v2-team-management-slot-art-level'>
+                  Lv. {String(slot.awakener.level)}
+                </span>
+                <BuilderV2EnlightenMeter level={slot.awakener.enlightenLevel} variant='compact' />
+              </span>
+            ) : null}
+            {previewMode === 'expanded' && slot.covenant?.assetSrc ? (
+              <span className='builder-v2-team-management-slot-covenant'>
+                <img alt='' draggable={false} src={slot.covenant.assetSrc} />
+              </span>
+            ) : null}
             <span className='builder-v2-team-management-slot-state'>
               {slot.awakener.isSupport ? (
                 <span className='builder-v2-team-management-state-chip'>Support</span>
@@ -427,12 +449,14 @@ function TeamSlotSummary({
                   Unowned
                 </span>
               ) : null}
-              {previewMode === 'compact' && compactEnlightenLabel ? (
+            </span>
+            {previewMode === 'compact' && compactEnlightenLabel ? (
+              <span className='builder-v2-team-management-slot-compact-enlighten'>
                 <span className='builder-v2-team-management-state-chip'>
                   {compactEnlightenLabel}
                 </span>
-              ) : null}
-            </span>
+              </span>
+            ) : null}
           </>
         ) : (
           <span className='builder-v2-team-management-empty-slot'>
@@ -444,19 +468,7 @@ function TeamSlotSummary({
 
       {previewMode === 'expanded' ? (
         <span className='builder-v2-team-management-slot-build' aria-hidden>
-          <span className='builder-v2-team-management-slot-enlighten'>
-            {slot.awakener ? (
-              <BuilderV2EnlightenMeter level={slot.awakener.enlightenLevel} variant='compact' />
-            ) : null}
-          </span>
           <span className='builder-v2-team-management-loadout-row'>
-            <span className='builder-v2-team-management-loadout-cell builder-v2-team-management-loadout-cell--covenant'>
-              {slot.covenant?.assetSrc ? (
-                <img alt='' draggable={false} src={slot.covenant.assetSrc} />
-              ) : (
-                <span>+</span>
-              )}
-            </span>
             {slot.wheels.map((wheel, index) => (
               <WheelMiniSummary
                 key={`${slot.slotId}-wheel-${String(index)}`}
@@ -468,21 +480,6 @@ function TeamSlotSummary({
         </span>
       ) : null}
     </div>
-  )
-}
-
-function RealmBadge({realm}: {realm: NonNullable<BuilderV2TeamSummarySlot['awakener']>['realm']}) {
-  const realmBadge = getRealmBadge(realm)
-  const realmLabel = getRealmLabel(realm)
-
-  if (!realmBadge) {
-    return <span className='builder-v2-team-management-realm-text'>{realmLabel}</span>
-  }
-
-  return (
-    <span className='builder-v2-team-management-realm'>
-      <img alt='' draggable={false} src={realmBadge} />
-    </span>
   )
 }
 

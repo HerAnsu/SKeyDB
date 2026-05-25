@@ -54,7 +54,6 @@
   }
 }
 
-.builder-v2-page-header,
 .builder-v2-mast,
 .builder-v2-panel {
   border: 1px solid var(--ui-border-muted);
@@ -65,7 +64,6 @@
   box-shadow: inset 0 1px 0 oklch(88% 0.04 84 / 0.05);
 }
 
-.builder-v2-page-header,
 .builder-v2-mast {
   display: flex;
   align-items: center;
@@ -93,13 +91,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.builder-v2-mast-tagline {
-  margin: 0;
-  color: var(--ui-text-muted);
-  font-size: 0.76rem;
-  font-weight: 700;
 }
 
 .builder-v2-mast-end {
@@ -145,20 +136,22 @@
 .builder-v2-search-icon,
 .builder-v2-picker-chip,
 .builder-v2-picker-tile,
-.builder-v2-picker-tile * {
+.builder-v2-picker-tile *,
+.builder-v2-team-management,
+.builder-v2-team-management * {
   -webkit-user-select: none;
   user-select: none;
 }
 
-.builder-v2-status-pill {
-  border: 1px solid var(--ui-border-muted);
-  border-radius: var(--ui-radius-xs);
-  padding: 0.34rem 0.55rem;
-  color: var(--ui-accent-gold-soft);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.builder-v2-team-management input,
+.builder-v2-team-management textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.builder-v2-team-management img,
+.builder-v2-team-management svg {
+  -webkit-user-drag: none;
 }
 
 .builder-v2-shell {
@@ -1659,6 +1652,7 @@
 .builder-v2-team-management-button:focus-visible,
 .builder-v2-team-management-mode-button:focus-visible,
 .builder-v2-team-management-order-button:focus-visible,
+.builder-v2-team-management-rename-button:focus-visible,
 .builder-v2-team-management-select:focus-visible,
 .builder-v2-team-name-input:focus-visible,
 .builder-v2-team-row:focus-visible,
@@ -2076,7 +2070,6 @@
 
 .builder-v2-team-management-toolbar,
 .builder-v2-team-management-actions,
-.builder-v2-team-management-controls,
 .builder-v2-team-management-mode {
   display: flex;
   flex-wrap: wrap;
@@ -2133,8 +2126,17 @@
 }
 
 .builder-v2-team-management-button {
+  display: inline-flex;
   min-height: 1.9rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.32rem;
   padding: 0.42rem 0.55rem;
+}
+
+.builder-v2-team-management-button svg {
+  width: 0.78rem;
+  height: 0.78rem;
 }
 
 .builder-v2-team-management-button:not(:disabled):hover,
@@ -2244,16 +2246,26 @@
 .builder-v2-team-management-main {
   display: grid;
   min-width: 0;
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .builder-v2-team-management-row-header {
   display: grid;
-  grid-template-columns: minmax(10rem, 1fr) minmax(10rem, auto) auto;
+  grid-template-columns: minmax(10rem, 1fr) minmax(8rem, auto);
   min-width: 0;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.75rem;
   border-bottom: 1px solid var(--ui-border-subtle);
-  padding: 0.62rem 0.72rem;
+  padding: 0.58rem 0.72rem;
+}
+
+.builder-v2-team-management-row-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5.35rem;
+  min-width: 0;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.68rem 0.72rem;
 }
 
 .builder-v2-team-management-select {
@@ -2268,6 +2280,46 @@
   color: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+.builder-v2-team-management-titlebar {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.36rem;
+}
+
+.builder-v2-team-management-titlebar .builder-v2-team-management-select {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.builder-v2-team-management-rename-button {
+  display: grid;
+  width: 1.55rem;
+  height: 1.55rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius-xs);
+  background: transparent;
+  color: var(--ui-text-faint);
+  cursor: pointer;
+  transition:
+    border-color 150ms var(--ui-motion-ease),
+    background-color 150ms var(--ui-motion-ease),
+    color 150ms var(--ui-motion-ease);
+}
+
+.builder-v2-team-management-rename-button:hover {
+  border-color: var(--ui-border-subtle);
+  background: oklch(10% 0.025 252 / 0.58);
+  color: var(--ui-text-main);
+}
+
+.builder-v2-team-management-rename-button svg {
+  width: 0.78rem;
+  height: 0.78rem;
 }
 
 .builder-v2-team-management-copy {
@@ -2369,32 +2421,40 @@
 
 .builder-v2-team-management-slots {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.55rem;
-  padding: 0.72rem;
+  min-width: 0;
+  gap: 0.48rem;
+  align-items: center;
+  justify-content: start;
 }
 
 .builder-v2-team-management-slot {
-  --team-summary-realm: var(--ui-border-subtle);
+  --team-summary-realm: oklch(56% 0.04 232);
   position: relative;
   display: grid;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid color-mix(in oklch, var(--team-summary-realm) 58%, var(--ui-border-subtle));
+  border: 1px solid color-mix(in oklch, var(--team-summary-realm) 58%, transparent);
   border-radius: var(--ui-radius-xs);
   background: var(--ui-panel-strong);
 }
 
+.builder-v2-team-management-slot--empty {
+  --team-summary-realm: oklch(46% 0.03 232);
+}
+
+.builder-v2-team-management--preview-expanded .builder-v2-team-management-slots {
+  grid-template-columns: repeat(4, minmax(5.45rem, 6.25rem));
+}
+
 .builder-v2-team-management--preview-expanded .builder-v2-team-management-slot {
-  min-height: 10.5rem;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: 5.5rem auto;
+  min-height: 0;
 }
 
 .builder-v2-team-management--preview-compact .builder-v2-team-management-slots {
-  grid-template-columns: repeat(4, minmax(2.6rem, 3.2rem));
+  grid-template-columns: repeat(4, minmax(2.75rem, 3.35rem));
   justify-content: start;
-  gap: 0.45rem;
-  padding-top: 0;
+  gap: 0.42rem;
 }
 
 .builder-v2-team-management--preview-compact .builder-v2-team-management-slot {
@@ -2410,14 +2470,14 @@
   background:
     radial-gradient(
       circle at 50% 28%,
-      color-mix(in oklch, var(--team-summary-realm) 24%, transparent),
+      color-mix(in oklch, var(--team-summary-realm) 7%, transparent),
       transparent 58%
     ),
     var(--ui-art-well);
 }
 
 .builder-v2-team-management--preview-expanded .builder-v2-team-management-slot-art {
-  min-height: 6.4rem;
+  min-height: 0;
 }
 
 .builder-v2-team-management-slot-art > img {
@@ -2425,6 +2485,7 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
+  border: 1px solid color-mix(in oklch, var(--team-summary-realm) 46%, transparent);
 }
 
 .builder-v2-team-management--preview-compact .builder-v2-team-management-slot-art > img {
@@ -2440,50 +2501,40 @@
   pointer-events: none;
 }
 
-.builder-v2-team-management-realm {
+.builder-v2-team-management-slot-art-meta {
   position: absolute;
-  top: 0.28rem;
-  left: 0.28rem;
+  bottom: 0.32rem;
+  left: 0.34rem;
   z-index: 2;
   display: grid;
-  width: 1.65rem;
-  height: 1.65rem;
-  place-items: center;
+  justify-items: start;
+  gap: 0.12rem;
+  filter: drop-shadow(0 1px 2px oklch(0% 0 0 / 0.72));
+}
+
+.builder-v2-team-management-slot-art-level {
+  color: var(--ui-text-main);
+  font-size: 0.64rem;
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 1px 2px oklch(0% 0 0 / 0.75);
+}
+
+.builder-v2-team-management-slot-covenant {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 2.5rem;
+  height: 2.5rem;
   pointer-events: none;
 }
 
-.builder-v2-team-management-realm img {
+.builder-v2-team-management-slot-covenant img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 0.25rem 0.45rem oklch(0% 0 0 / 0.55));
-}
-
-.builder-v2-team-management-realm-text {
-  position: absolute;
-  top: 0.32rem;
-  left: 0.32rem;
-  z-index: 2;
-  border: 1px solid color-mix(in oklch, var(--team-summary-realm) 66%, transparent);
-  background: oklch(5% 0.018 252 / 0.72);
-  padding: 0.14rem 0.22rem;
-  color: var(--ui-text-main);
-  font-size: 0.5rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  line-height: 1;
-}
-
-.builder-v2-team-management-slot-level {
-  position: absolute;
-  right: 0.34rem;
-  bottom: 0.36rem;
-  z-index: 2;
-  color: var(--ui-text-main);
-  font-size: 0.64rem;
-  font-weight: 850;
-  line-height: 1;
-  text-shadow: 0 1px 2px oklch(0% 0 0 / 0.75);
+  filter: drop-shadow(0 0.18rem 0.38rem oklch(0% 0 0 / 0.72));
 }
 
 .builder-v2-team-management-state-chip {
@@ -2495,7 +2546,7 @@
   padding: 0.12rem 0.2rem;
   color: oklch(86% 0.05 220);
   font-size: 0.52rem;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.04em;
   line-height: 1;
   text-transform: uppercase;
@@ -2511,12 +2562,22 @@
   z-index: 3;
   top: 0.3rem;
   right: 0.3rem;
-  left: 2rem;
+  left: 0.3rem;
   display: flex;
   min-width: 0;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.16rem;
+}
+
+.builder-v2-team-management-slot-compact-enlighten {
+  position: absolute;
+  bottom: 0.16rem;
+  left: 0.16rem;
+  z-index: 3;
+  display: flex;
+  max-width: calc(100% - 0.32rem);
+  pointer-events: none;
 }
 
 .builder-v2-team-management-empty-slot {
@@ -2532,22 +2593,14 @@
 
 .builder-v2-team-management-slot-build {
   display: grid;
-  gap: 0.35rem;
   border-top: 1px solid var(--ui-border-subtle);
   background: oklch(4.5% 0.018 252 / 0.7);
-  padding: 0.42rem;
-}
-
-.builder-v2-team-management-slot-enlighten {
-  display: flex;
-  min-height: 0.75rem;
-  align-items: center;
-  justify-content: center;
+  padding: 0.32rem;
 }
 
 .builder-v2-team-management-loadout-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.28rem;
 }
 
@@ -2557,12 +2610,58 @@
   aspect-ratio: 1;
   place-items: center;
   overflow: hidden;
-  border: 1px solid oklch(58% 0.05 84 / 0.32);
+  border: 1px solid var(--ui-border-subtle);
   border-radius: var(--ui-radius-xs);
   background: oklch(3.8% 0.014 252 / 0.82);
   color: var(--ui-text-faint);
   font-size: 0.62rem;
   font-weight: 900;
+}
+
+.builder-v2-team-management-controls {
+  display: grid;
+  min-width: 0;
+  align-content: center;
+  gap: 0.36rem;
+  border-left: 1px solid var(--ui-border-subtle);
+  padding-left: 0.7rem;
+}
+
+.builder-v2-team-management-controls .builder-v2-team-management-button {
+  width: 100%;
+  min-height: 1.65rem;
+  padding: 0.36rem 0.42rem;
+}
+
+.builder-v2-team-management--preview-compact .builder-v2-team-management-row-body {
+  grid-template-columns: minmax(0, 1fr) 4.3rem;
+}
+
+.builder-v2-team-management--preview-compact .builder-v2-team-management-controls {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.28rem;
+  padding-left: 0.56rem;
+}
+
+.builder-v2-team-management--preview-compact .builder-v2-team-management-button--export {
+  grid-column: 1 / -1;
+  min-height: 1.55rem;
+}
+
+.builder-v2-team-management--preview-compact .builder-v2-team-management-button--reset,
+.builder-v2-team-management--preview-compact .builder-v2-team-management-button--delete {
+  min-height: 1.55rem;
+  padding: 0;
+}
+
+.builder-v2-team-management--preview-compact .builder-v2-team-management-button--reset span,
+.builder-v2-team-management--preview-compact .builder-v2-team-management-button--delete span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .builder-v2-team-management-loadout-cell img {
@@ -2593,30 +2692,18 @@
   background: oklch(3% 0.014 252 / 0.82);
   padding: 0.08rem 0.1rem;
   color: var(--ui-text-main);
-  font-size: 0.5rem;
-  font-weight: 850;
+  font-size: 0.6rem;
+  font-weight: 600;
   line-height: 1;
   text-align: center;
 }
 
-.builder-v2-team-management--preview-compact .builder-v2-team-management-slot-level,
-.builder-v2-team-management--preview-compact .builder-v2-team-management-realm {
-  transform: scale(0.82);
-  transform-origin: top left;
-}
-
-.builder-v2-team-management--preview-compact .builder-v2-team-management-slot-level {
-  right: 0.22rem;
-  bottom: 0.24rem;
-  font-size: 0.56rem;
-}
-
 .builder-v2-team-management--preview-compact .builder-v2-team-management-slot-state {
-  top: auto;
+  top: 0.16rem;
   right: 0.16rem;
-  bottom: 0.16rem;
+  bottom: auto;
   left: 0.16rem;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .builder-v2-team-management--preview-compact .builder-v2-team-management-state-chip {
@@ -2640,7 +2727,6 @@
   justify-self: end;
 }
 
-.builder-v2-team-management--adaptive .builder-v2-team-management-controls,
 .builder-v2-team-management--mobile .builder-v2-team-management-controls {
   grid-column: 1 / -1;
   justify-content: flex-end;
@@ -2648,7 +2734,7 @@
 
 .builder-v2-team-management--adaptive.builder-v2-team-management--preview-expanded
   .builder-v2-team-management-slots {
-  grid-template-columns: repeat(4, minmax(5rem, 1fr));
+  grid-template-columns: repeat(4, minmax(5.5rem, 7rem));
   overflow-x: auto;
   scrollbar-width: thin;
 }
@@ -3075,7 +3161,6 @@
     margin-left: -1rem;
   }
 
-  .builder-v2-page-header,
   .builder-v2-mast,
   .builder-v2-panel {
     border-right: 0;

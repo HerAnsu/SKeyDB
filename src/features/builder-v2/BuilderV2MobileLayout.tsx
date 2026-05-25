@@ -167,7 +167,7 @@ export function BuilderV2MobileLayout({model}: BuilderV2MobileLayoutProps) {
     <section className='builder-v2-page builder-v2-page--mobile' aria-labelledby='builder-v2-title'>
       <header className='builder-v2-mobile-topbar'>
         <div className='builder-v2-mobile-topbar-identity'>
-          <p className='builder-v2-label'>Builder V2 / Beta</p>
+          <p className='builder-v2-label'>Builder V2</p>
           <h1 className='ui-title' id='builder-v2-title'>
             {model.activeTeamName}
           </h1>

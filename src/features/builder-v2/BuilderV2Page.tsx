@@ -69,10 +69,8 @@ export function BuilderV2Page() {
               <h1 className='builder-v2-mast-title' id='builder-v2-title'>
                 Builder V2
               </h1>
-              <span className='builder-v2-status-pill'>Beta</span>
             </div>
             <div className='builder-v2-mast-end'>
-              <p className='builder-v2-mast-tagline'>Local team builder - dark archive workflow.</p>
               <BuilderV2ImportExportActions model={model} />
             </div>
           </header>
