@@ -7,6 +7,7 @@ export interface PublicFormulaContext {
   accountLevel?: number
   ownedPosseCount?: number
   wheelRefinementLevel?: number
+  realmMasteryFinal?: number
 }
 
 export interface PublicFormulaContextInput {
@@ -15,6 +16,7 @@ export interface PublicFormulaContextInput {
   accountLevel?: number | null
   ownedPosseCount?: number | null
   wheelRefinementLevel?: number | null
+  realmMasteryFinal?: number | null
 }
 
 const CURRENT_PUBLIC_POSSE_IDS = new Set(getPosses().map((posse) => posse.id))
@@ -22,6 +24,7 @@ const DEFAULT_PUBLIC_ACCOUNT_LEVEL = 50
 const MIN_OWNED_POSSE_COUNT = 0
 const MIN_WHEEL_REFINEMENT_LEVEL = 0
 const MAX_WHEEL_REFINEMENT_LEVEL = 3
+const MIN_REALM_MASTERY_FINAL = 0
 
 function countOwnedCurrentPublicPosses(collectionOwnership: CollectionOwnershipState): number {
   let count = 0
@@ -50,6 +53,13 @@ function normalizeWheelRefinementLevel(value: number | null | undefined): number
   )
 }
 
+function normalizeRealmMasteryFinal(value: number | null | undefined): number {
+  if (typeof value !== 'number' || !Number.isFinite(value)) {
+    return MIN_REALM_MASTERY_FINAL
+  }
+  return Math.max(MIN_REALM_MASTERY_FINAL, value)
+}
+
 export function buildPublicFormulaContext(
   input: PublicFormulaContextInput = {},
 ): PublicFormulaContext {
@@ -58,6 +68,7 @@ export function buildPublicFormulaContext(
     ownedPosseCount: input.collectionOwnership
       ? countOwnedCurrentPublicPosses(input.collectionOwnership)
       : normalizeOwnedPosseCount(input.ownedPosseCount),
+    realmMasteryFinal: normalizeRealmMasteryFinal(input.realmMasteryFinal),
   }
 
   if (typeof input.wheelEnhanceLevel === 'number') {

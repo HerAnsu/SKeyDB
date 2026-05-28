@@ -3870,6 +3870,18 @@
     },
     {
       "kind": "skill",
+      "id": "skill.saya.biomimicry",
+      "name": "Biomimicry",
+      "route": {
+        "slug": "biomimicry",
+        "canonicalPath": "/database/awakeners/saya/skills/biomimicry"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Skill2"
+    },
+    {
+      "kind": "skill",
       "id": "skill.saya.cognitive-alteration",
       "name": "Cognitive Alteration",
       "route": {
@@ -3891,18 +3903,6 @@
       "ownerAwakenerId": "awakener-0057",
       "ownerAwakenerName": "Saya",
       "slot": "Defense"
-    },
-    {
-      "kind": "skill",
-      "id": "skill.saya.genetics-copy",
-      "name": "Genetics Copy",
-      "route": {
-        "slug": "genetics-copy",
-        "canonicalPath": "/database/awakeners/saya/skills/genetics-copy"
-      },
-      "ownerAwakenerId": "awakener-0057",
-      "ownerAwakenerName": "Saya",
-      "slot": "Skill1"
     },
     {
       "kind": "skill",
@@ -3950,7 +3950,7 @@
       },
       "ownerAwakenerId": "awakener-0057",
       "ownerAwakenerName": "Saya",
-      "slot": "Skill2"
+      "slot": "Skill1"
     },
     {
       "kind": "skill",

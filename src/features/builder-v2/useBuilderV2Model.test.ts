@@ -888,7 +888,7 @@ describe('useBuilderV2Model', () => {
     expect(result.current.activeSelection).toEqual({kind: 'covenant', slotId: 'slot-1'})
   })
 
-  it('swaps covenants inside the active team and keeps the covenant target active', () => {
+  it('allows duplicate covenants inside the active team and keeps the covenant target active', () => {
     const {result} = renderHook(() => useBuilderV2Model())
     const slots = createEmptyTeamSlots()
     slots[0] = createAssignedSlot('slot-1', {covenantId: 'c01'})
@@ -908,7 +908,7 @@ describe('useBuilderV2Model', () => {
       result.current.assignCovenant('c01')
     })
 
-    expect(result.current.slots[0]?.covenantId).toBe('c02')
+    expect(result.current.slots[0]?.covenantId).toBe('c01')
     expect(result.current.slots[1]?.covenantId).toBe('c01')
     expect(result.current.activeSelection).toEqual({kind: 'covenant', slotId: 'slot-2'})
     expect(result.current.activeTeamTarget).toBeNull()

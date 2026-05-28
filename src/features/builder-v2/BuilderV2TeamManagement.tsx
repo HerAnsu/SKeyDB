@@ -1,7 +1,7 @@
-import {memo, type CSSProperties} from 'react'
+import {memo, useEffect, useRef, useState, type CSSProperties, type MouseEvent} from 'react'
 
 import {FaChevronDown, FaChevronUp} from 'react-icons/fa6'
-import {FiEdit2, FiRotateCcw, FiTrash2} from 'react-icons/fi'
+import {FiEdit2, FiRotateCcw, FiTrash2, FiUpload} from 'react-icons/fi'
 
 import {getRealmAccent, getRealmLabel} from '@/domain/realms'
 
@@ -43,6 +43,13 @@ const teamPreviewModeOptions = [
   {value: 'compact', label: 'Compact'},
   {value: 'expanded', label: 'Expanded'},
 ] as const
+
+function isInteractiveTeamRowTarget(target: EventTarget | null): boolean {
+  return (
+    target instanceof Element &&
+    Boolean(target.closest('button, input, select, textarea, a, [role="button"]'))
+  )
+}
 
 export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
   canAddTeam,
@@ -167,6 +174,7 @@ export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
             previewMode={teamPreviewMode}
             teamsCount={teams.length}
             team={team}
+            variant={variant}
           />
         ))}
       </div>
@@ -193,6 +201,7 @@ const TeamManagementRow = memo(function TeamManagementRow({
   previewMode,
   teamsCount,
   team,
+  variant,
 }: {
   editingTeamId: string | null
   editingTeamName: string
@@ -212,9 +221,12 @@ const TeamManagementRow = memo(function TeamManagementRow({
   previewMode: TeamPreviewMode
   teamsCount: number
   team: BuilderV2TeamSummary
+  variant: 'desktop' | 'adaptive' | 'mobile'
 }) {
   const isEditing = editingTeamId === team.id
+  const isMobile = variant === 'mobile'
   const teamIndex = String(index + 1).padStart(2, '0')
+  const [slotsRef, hasSlotsOverflow] = useHorizontalOverflow<HTMLDivElement>()
 
   return (
     <article
@@ -222,6 +234,13 @@ const TeamManagementRow = memo(function TeamManagementRow({
         team.isActive ? 'builder-v2-team-management-row--active' : ''
       }`}
       data-team-name={team.name}
+      onClick={(event: MouseEvent<HTMLElement>) => {
+        if (isEditing || isInteractiveTeamRowTarget(event.target)) {
+          return
+        }
+        onSetActiveTeam(team.id)
+        onTeamActivated?.()
+      }}
     >
       <div className='builder-v2-team-management-reorder' aria-label={`${team.name} order`}>
         <span aria-hidden className='builder-v2-team-management-grip'>
@@ -302,7 +321,8 @@ const TeamManagementRow = memo(function TeamManagementRow({
               <button
                 aria-label={`Rename ${team.name}`}
                 className='builder-v2-team-management-rename-button'
-                onClick={() => {
+                onClick={(event) => {
+                  event.stopPropagation()
                   onBeginTeamRename(team.id)
                 }}
                 type='button'
@@ -316,7 +336,11 @@ const TeamManagementRow = memo(function TeamManagementRow({
         </div>
 
         <div className='builder-v2-team-management-row-body'>
-          <div className='builder-v2-team-management-slots'>
+          <div
+            className='builder-v2-team-management-slots'
+            data-overflow-x={hasSlotsOverflow ? 'true' : undefined}
+            ref={slotsRef}
+          >
             {team.slots.map((slot) => (
               <TeamSlotSummary key={slot.slotId} previewMode={previewMode} slot={slot} />
             ))}
@@ -327,48 +351,115 @@ const TeamManagementRow = memo(function TeamManagementRow({
             aria-label={`${team.name} actions`}
             role='group'
           >
-            <button
-              aria-label={`Export ${team.name}`}
-              className='builder-v2-team-management-button builder-v2-team-management-button--export'
-              onClick={() => {
-                onRequestExportTeam(team.id)
-              }}
-              title={`Export ${team.name}`}
-              type='button'
-            >
-              Export
-            </button>
-            <button
-              aria-label={`Reset ${team.name}`}
-              className='builder-v2-team-management-button builder-v2-team-management-button--reset'
-              onClick={() => {
-                onRequestResetTeam(team.id)
-              }}
-              title={`Reset ${team.name}`}
-              type='button'
-            >
-              <FiRotateCcw aria-hidden />
-              <span>Reset</span>
-            </button>
-            <button
-              aria-label={`Delete ${team.name}`}
-              className='builder-v2-team-management-button builder-v2-team-management-button--danger builder-v2-team-management-button--delete'
-              disabled={teamsCount <= 1}
-              onClick={() => {
-                onRequestDeleteTeam(team.id)
-              }}
-              title={`Delete ${team.name}`}
-              type='button'
-            >
-              <FiTrash2 aria-hidden />
-              <span>Delete</span>
-            </button>
+            {isMobile ? (
+              <span className='builder-v2-team-management-control-cluster builder-v2-team-management-control-cluster--move'>
+                <button
+                  aria-label={`Move ${team.name} up`}
+                  className='builder-v2-team-management-order-button'
+                  disabled={index === 0}
+                  onClick={() => {
+                    onMoveTeamUp(team.id)
+                  }}
+                  type='button'
+                >
+                  <FaChevronUp aria-hidden />
+                </button>
+                <button
+                  aria-label={`Move ${team.name} down`}
+                  className='builder-v2-team-management-order-button'
+                  disabled={isLast}
+                  onClick={() => {
+                    onMoveTeamDown(team.id)
+                  }}
+                  type='button'
+                >
+                  <FaChevronDown aria-hidden />
+                </button>
+              </span>
+            ) : null}
+            <span className='builder-v2-team-management-control-cluster builder-v2-team-management-control-cluster--actions'>
+              <button
+                aria-label={`Export ${team.name}`}
+                className='builder-v2-team-management-button builder-v2-team-management-button--export'
+                onClick={() => {
+                  onRequestExportTeam(team.id)
+                }}
+                title={`Export ${team.name}`}
+                type='button'
+              >
+                <FiUpload aria-hidden />
+                <span>Export</span>
+              </button>
+              <button
+                aria-label={`Reset ${team.name}`}
+                className='builder-v2-team-management-button builder-v2-team-management-button--reset'
+                onClick={() => {
+                  onRequestResetTeam(team.id)
+                }}
+                title={`Reset ${team.name}`}
+                type='button'
+              >
+                <FiRotateCcw aria-hidden />
+                <span>Reset</span>
+              </button>
+              <button
+                aria-label={`Delete ${team.name}`}
+                className='builder-v2-team-management-button builder-v2-team-management-button--danger builder-v2-team-management-button--delete'
+                disabled={teamsCount <= 1}
+                onClick={() => {
+                  onRequestDeleteTeam(team.id)
+                }}
+                title={`Delete ${team.name}`}
+                type='button'
+              >
+                <FiTrash2 aria-hidden />
+                <span>Delete</span>
+              </button>
+            </span>
           </div>
         </div>
       </div>
     </article>
   )
 })
+
+function useHorizontalOverflow<TElement extends HTMLElement>() {
+  const ref = useRef<TElement | null>(null)
+  const [hasOverflow, setHasOverflow] = useState(false)
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element) {
+      return undefined
+    }
+
+    const updateOverflow = () => {
+      setHasOverflow(element.scrollWidth > element.clientWidth + 1)
+    }
+
+    updateOverflow()
+    window.addEventListener('resize', updateOverflow)
+
+    if (typeof ResizeObserver === 'undefined') {
+      return () => {
+        window.removeEventListener('resize', updateOverflow)
+      }
+    }
+
+    const resizeObserver = new ResizeObserver(updateOverflow)
+    resizeObserver.observe(element)
+    for (const child of Array.from(element.children)) {
+      resizeObserver.observe(child)
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateOverflow)
+      resizeObserver.disconnect()
+    }
+  }, [])
+
+  return [ref, hasOverflow] as const
+}
 
 function TeamPosseSummary({team}: {team: BuilderV2TeamSummary}) {
   const hasPosse = Boolean(team.posseName)
@@ -399,6 +490,9 @@ function TeamSlotSummary({
   slot: BuilderV2TeamSummarySlot
 }) {
   const compactEnlightenLabel = formatBuilderV2EnlightenLabel(slot.awakener?.enlightenLevel ?? null)
+  const hasEnlightenOverflow = Boolean(
+    slot.awakener?.enlightenLevel && slot.awakener.enlightenLevel > 3,
+  )
   const realmAccent = slot.awakener?.realm ? getRealmAccent(slot.awakener.realm) : undefined
   const style =
     realmAccent && !slot.isEmpty
@@ -410,7 +504,7 @@ function TeamSlotSummary({
       aria-label={getTeamSlotSummaryLabel(slot)}
       className={`builder-v2-team-management-slot ${
         slot.isEmpty ? 'builder-v2-team-management-slot--empty' : ''
-      }`}
+      } ${hasEnlightenOverflow ? 'builder-v2-team-management-slot--enlighten-overflow' : ''}`}
       role='group'
       style={style}
     >

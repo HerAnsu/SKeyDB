@@ -204,6 +204,41 @@ describe('public-description-args', () => {
     )
   })
 
+  it('resolves realm mastery linear computed args from final realm mastery', () => {
+    const arg: PublicDescriptionArg = {
+      kind: 'computed',
+      formulaKey: 'realmMasteryLinear',
+      baseValue: 40,
+      perPoint: 0.02,
+      rounding: 'ceil',
+      inputs: ['realmMasteryFinal'],
+    }
+
+    expect(evaluatePublicFormulaExpression(arg, {realmMasteryFinal: 100})).toStrictEqual({
+      resolved: true,
+      value: 42,
+    })
+    expect(
+      resolveDescriptionTemplate(
+        'Gain [Arg3] stacks.',
+        {Arg3: arg},
+        {
+          formulaContext: {realmMasteryFinal: 100},
+        },
+      ),
+    ).toBe('Gain 42 stacks.')
+    expect(buildDescriptionArgHover(arg, {formulaContext: {realmMasteryFinal: 100}})).toBe(
+      [
+        'Realm Mastery Scaling',
+        'Final Realm Mastery: 100',
+        'Base value: 40',
+        'Per Realm Mastery: +0.02',
+        '',
+        '40 + (100 × 0.02) = 42',
+      ].join('\n'),
+    )
+  })
+
   it('falls back gracefully when computed arg context is missing', () => {
     const arg: PublicDescriptionArg = {
       kind: 'computed',

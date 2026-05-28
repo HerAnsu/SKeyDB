@@ -7851,6 +7851,18 @@
         "candidates": ["src/assets/icons/IconS_Buff_006.webp", "src/assets/icons/IconS_Buff_006.png"]
       }
     },
+    "asset-overlay.global.propagation-frenzy-icon": {
+      "id": "asset-overlay.global.propagation-frenzy-icon",
+      "slot": "icon",
+      "kind": "overlay",
+      "ownerId": "overlay.global.propagation-frenzy",
+      "assetId": "IconS_Buff_088",
+      "availability": {
+        "status": "available",
+        "path": "src/assets/icons/IconS_Buff_088.webp",
+        "candidates": ["src/assets/icons/IconS_Buff_088.webp", "src/assets/icons/IconS_Buff_088.png"]
+      }
+    },
     "asset-overlay.global.sacrifice-icon": {
       "id": "asset-overlay.global.sacrifice-icon",
       "slot": "icon",
@@ -8053,18 +8065,6 @@
         "status": "available",
         "path": "src/assets/icons/IconS_Buff_077.webp",
         "candidates": ["src/assets/icons/IconS_Buff_077.webp", "src/assets/icons/IconS_Buff_077.png"]
-      }
-    },
-    "asset-overlay.pickman.fantasia-icon": {
-      "id": "asset-overlay.pickman.fantasia-icon",
-      "slot": "icon",
-      "kind": "overlay",
-      "ownerId": "overlay.pickman.fantasia",
-      "assetId": "IconS_Buff_066",
-      "availability": {
-        "status": "available",
-        "path": "src/assets/icons/IconS_Buff_066.webp",
-        "candidates": ["src/assets/icons/IconS_Buff_066.webp", "src/assets/icons/IconS_Buff_066.png"]
       }
     },
     "asset-overlay.pollux.sin-mark-icon": {
@@ -9668,6 +9668,9 @@
     "overlay.global.poison": {
       "icon": "asset-overlay.global.poison-icon"
     },
+    "overlay.global.propagation-frenzy": {
+      "icon": "asset-overlay.global.propagation-frenzy-icon"
+    },
     "overlay.global.sacrifice": {
       "icon": "asset-overlay.global.sacrifice-icon"
     },
@@ -9718,9 +9721,6 @@
     },
     "overlay.pickman.creativity": {
       "icon": "asset-overlay.pickman.creativity-icon"
-    },
-    "overlay.pickman.fantasia": {
-      "icon": "asset-overlay.pickman.fantasia-icon"
     },
     "overlay.pollux.sin-mark": {
       "icon": "asset-overlay.pollux.sin-mark-icon"

@@ -18,8 +18,8 @@
     },
     "Arg3": {
       "kind": "fixed",
-      "value": "50",
-      "suffix": "%"
+      "value": "X",
+      "displayFormula": "Base trigger is 50% of Tentacle DMG. For every 50 final Realm Mastery, add 1%, after applying Raging Waves wheel bonuses to that Realm Mastery contribution."
     }
   }
 }

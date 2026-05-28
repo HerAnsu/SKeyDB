@@ -166,7 +166,7 @@ describe('builder-v2 picker option queries', () => {
     })
   })
 
-  it('keeps covenant recommendation labels and active-team usage stable', () => {
+  it('keeps covenant recommendation labels without treating team copies as exclusive', () => {
     const covenants = [
       createCovenant({id: 'covenant-9002', name: 'Second'}),
       createCovenant({id: 'covenant-9001', name: 'First'}),
@@ -189,7 +189,7 @@ describe('builder-v2 picker option queries', () => {
 
     expect(options.map((option) => option.id)).toEqual(['covenant-9001', 'covenant-9002'])
     expect(options[0]).toMatchObject({recommended: true, recommendationLabel: '#1'})
-    expect(options[1]).toMatchObject({inUse: true, recommendationLabel: '#2'})
+    expect(options[1]).toMatchObject({inUse: false, recommendationLabel: '#2'})
   })
 
   it('keeps posse status priority as active, blocked team, unowned, then recommended', () => {

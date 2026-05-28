@@ -4524,6 +4524,12 @@
         "canonicalSlug": "the-sea-of-corals",
         "canonicalPath": "/database/awakeners/sanga/skills/the-sea-of-corals"
       },
+      "saya/biomimicry": {
+        "kind": "skill",
+        "id": "skill.saya.biomimicry",
+        "canonicalSlug": "biomimicry",
+        "canonicalPath": "/database/awakeners/saya/skills/biomimicry"
+      },
       "saya/cognitive-alteration": {
         "kind": "skill",
         "id": "skill.saya.cognitive-alteration",
@@ -4535,12 +4541,6 @@
         "id": "skill.saya.defense",
         "canonicalSlug": "defense",
         "canonicalPath": "/database/awakeners/saya/skills/defense"
-      },
-      "saya/genetics-copy": {
-        "kind": "skill",
-        "id": "skill.saya.genetics-copy",
-        "canonicalSlug": "genetics-copy",
-        "canonicalPath": "/database/awakeners/saya/skills/genetics-copy"
       },
       "saya/paradise-just-for-you": {
         "kind": "skill",
@@ -6748,6 +6748,12 @@
         "canonicalSlug": "soulforge-aptitude",
         "canonicalPath": "/database/awakeners/sanga/talents/soulforge-aptitude"
       },
+      "saya/eden-of-propagation": {
+        "kind": "talent",
+        "id": "talent.saya.eden-of-propagation",
+        "canonicalSlug": "eden-of-propagation",
+        "canonicalPath": "/database/awakeners/saya/talents/eden-of-propagation"
+      },
       "saya/gnostic-potential": {
         "kind": "talent",
         "id": "talent.saya.gnostic-potential",
@@ -6759,12 +6765,6 @@
         "id": "talent.saya.madness-omen",
         "canonicalSlug": "madness-omen",
         "canonicalPath": "/database/awakeners/saya/talents/madness-omen"
-      },
-      "saya/propagation-caro": {
-        "kind": "talent",
-        "id": "talent.saya.propagation-caro",
-        "canonicalSlug": "propagation-caro",
-        "canonicalPath": "/database/awakeners/saya/talents/propagation-caro"
       },
       "saya/soulforge-aptitude": {
         "kind": "talent",

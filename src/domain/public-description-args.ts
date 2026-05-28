@@ -15,6 +15,7 @@ export type {
   PublicFixedDescriptionArg,
   PublicFormulaKey,
   PublicLinearDescriptionArg,
+  PublicRealmMasteryLinearComputedDescriptionArg,
   PublicScaledBaseFormula,
   PublicScaledComputedDescriptionArg,
   PublicScalingDescriptionArg,
@@ -63,7 +64,9 @@ function isPublicComputedDescriptionArg(value: unknown): value is PublicComputed
   const candidate = value as {kind?: unknown; formulaKey?: unknown}
   return (
     candidate.kind === 'computed' &&
-    (candidate.formulaKey === 'scaled' || candidate.formulaKey === 'wheelRefinementLinear')
+    (candidate.formulaKey === 'scaled' ||
+      candidate.formulaKey === 'wheelRefinementLinear' ||
+      candidate.formulaKey === 'realmMasteryLinear')
   )
 }
 
@@ -166,6 +169,17 @@ export function evaluatePublicFormulaExpression(
         ? base.value * arg.multiplier
         : base.value
     return resolved(arg.rounding === 'ceil' ? Math.ceil(scaledValue) : scaledValue)
+  }
+
+  if (arg.formulaKey === 'realmMasteryLinear') {
+    const resolvedContext = {...buildPublicFormulaContext(), ...context}
+    const realmMasteryFinal = resolvedContext.realmMasteryFinal
+    if (typeof realmMasteryFinal !== 'number' || !Number.isFinite(realmMasteryFinal)) {
+      return unresolved()
+    }
+
+    const value = arg.baseValue + realmMasteryFinal * arg.perPoint
+    return resolved(arg.rounding === 'ceil' ? Math.ceil(value) : value)
   }
 
   const wheelRefinementLevel = context.wheelRefinementLevel

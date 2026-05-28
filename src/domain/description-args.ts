@@ -411,6 +411,31 @@ function buildWheelEnlightenFormulaHover(
   )
 }
 
+function buildRealmMasteryFormulaHover(
+  arg: Extract<PublicDescriptionArg, {kind: 'computed'; formulaKey: 'realmMasteryLinear'}>,
+  resolved: ResolvedDescriptionArg,
+  formulaContext: PublicFormulaContext = {},
+): string {
+  const resolvedContext = buildPublicFormulaContext(formulaContext)
+  const realmMasteryFinal =
+    typeof resolvedContext.realmMasteryFinal === 'number' ? resolvedContext.realmMasteryFinal : 0
+  const suffix = inferSuffix(arg)
+  const baseValue = formatHoverComputedValue(arg.baseValue, suffix)
+  const perPointValue = `${formatHoverFormulaFactor(arg.perPoint)}${suffix}`
+  const realmMasteryText = formatHoverFormulaNumber(realmMasteryFinal)
+
+  return formatHoverDisplayText(
+    [
+      'Realm Mastery Scaling',
+      `Final Realm Mastery: ${realmMasteryText}`,
+      `Base value: ${baseValue}`,
+      `Per Realm Mastery: +${perPointValue}`,
+      '',
+      `${baseValue} + (${realmMasteryText} × ${perPointValue}) = ${resolved.formattedTotalValue}`,
+    ].join('\n'),
+  )
+}
+
 function shouldCeilDisplayedTotalValue(
   arg: PublicDescriptionArg,
   _baseValue: number | null,
@@ -647,6 +672,10 @@ function buildDescriptionArgFormula(
     return buildScaledComputedFormulaHover(arg, resolved, buildPublicFormulaContext(formulaContext))
   }
 
+  if (arg.kind === 'computed' && arg.formulaKey === 'realmMasteryLinear') {
+    return buildRealmMasteryFormulaHover(arg, resolved, formulaContext)
+  }
+
   if (!('substatBonus' in arg) || !arg.substatBonus) {
     return formatHoverDisplayText(resolved.formattedTotalValue)
   }
@@ -717,13 +746,22 @@ export function buildDescriptionArgHover(
     return buildDescriptionArgFormula(arg, resolved, context.formulaContext)
   }
 
-  if (arg.kind === 'computed') {
+  if (arg.kind === 'computed' && arg.formulaKey === 'wheelRefinementLinear') {
     const resolved = resolveDescriptionArg(arg, {
       rank: context.rank,
       stats: context.stats,
       formulaContext: context.formulaContext,
     })
     return buildWheelEnlightenFormulaHover(arg, resolved, context.formulaContext)
+  }
+
+  if (arg.kind === 'computed') {
+    const resolved = resolveDescriptionArg(arg, {
+      rank: context.rank,
+      stats: context.stats,
+      formulaContext: context.formulaContext,
+    })
+    return buildRealmMasteryFormulaHover(arg, resolved, context.formulaContext)
   }
 
   const progression = getDescriptionArgProgression(arg, context)

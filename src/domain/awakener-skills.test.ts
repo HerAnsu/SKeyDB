@@ -141,7 +141,7 @@ describe('awakener-skills', () => {
     expect(getAwakenerSkillById('skill.agrippa.pale-blessing', skills)?.cost).toBe('100')
     expect(getAwakenerSkillById('skill.erica.electromagnetic-blast', skills)?.cost).toBe('100')
     expect(getAwakenerSkillById('skill.miryam.pray-to-the-abyss', skills)?.cost).toBe('100')
-    expect(getAwakenerSkillById('skill.vortice.abyssal-vortex-cannon', skills)?.cost).toBe('100')
+    expect(getAwakenerSkillById('skill.vortice.abyssal-vortex-cannon', skills)?.cost).toBe('200')
     expect(
       getAwakenerSkillById('skill.vortice.abyssal-vortex-cannon', skills)?.descriptionTemplate,
     ).toContain('Sacrifice up to 3 additional Permanent Tentacles')
