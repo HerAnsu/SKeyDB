@@ -78,6 +78,10 @@ describe('getAwakeners', () => {
       expect(awakener).toBeDefined()
       expect(awakener?.aliases).toContain(alias)
     }
+
+    const jenkin = awakeners.find((a) => a.id === 'awakener-0025')
+    expect(jenkin?.name).toBe('jenkin')
+    expect(jenkin?.aliases).toEqual(expect.arrayContaining(['Jenkin', 'jenkins']))
   })
 
   it('assigns valid type to every awakener', () => {

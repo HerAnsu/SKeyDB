@@ -7396,10 +7396,13 @@
     "overlay.global.propagation-frenzy": {
       "kind": "overlay",
       "id": "overlay.global.propagation-frenzy",
-      "name": "Propagation Frenzy",
+      "name": "Propagation Fiesta",
       "route": {
         "slug": "propagation-frenzy",
         "canonicalPath": "/database/overlays/propagation-frenzy"
+      },
+      "assets": {
+        "icon": "asset-overlay.global.propagation-frenzy-icon"
       },
       "overlayType": "mechanic"
     },
@@ -7980,9 +7983,6 @@
       "route": {
         "slug": "fantasia",
         "canonicalPath": "/database/awakeners/pickman/overlays/fantasia"
-      },
-      "assets": {
-        "icon": "asset-overlay.pickman.fantasia-icon"
       },
       "ownerAwakenerId": "awakener-0040",
       "ownerAwakenerName": "Pickman",
@@ -15158,6 +15158,18 @@
       "ownerAwakenerName": "Sanga",
       "slot": "OverExalt"
     },
+    "skill.saya.biomimicry": {
+      "kind": "skill",
+      "id": "skill.saya.biomimicry",
+      "name": "Biomimicry",
+      "route": {
+        "slug": "biomimicry",
+        "canonicalPath": "/database/awakeners/saya/skills/biomimicry"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "slot": "Skill2"
+    },
     "skill.saya.cognitive-alteration": {
       "kind": "skill",
       "id": "skill.saya.cognitive-alteration",
@@ -15181,18 +15193,6 @@
       "ownerAwakenerId": "awakener-0057",
       "ownerAwakenerName": "Saya",
       "slot": "Defense"
-    },
-    "skill.saya.genetics-copy": {
-      "kind": "skill",
-      "id": "skill.saya.genetics-copy",
-      "name": "Genetics Copy",
-      "route": {
-        "slug": "genetics-copy",
-        "canonicalPath": "/database/awakeners/saya/skills/genetics-copy"
-      },
-      "ownerAwakenerId": "awakener-0057",
-      "ownerAwakenerName": "Saya",
-      "slot": "Skill1"
     },
     "skill.saya.paradise-just-for-you": {
       "kind": "skill",
@@ -15240,7 +15240,7 @@
       },
       "ownerAwakenerId": "awakener-0057",
       "ownerAwakenerName": "Saya",
-      "slot": "Skill2"
+      "slot": "Skill1"
     },
     "skill.sorel.carousel-of-ambition": {
       "kind": "skill",
@@ -18341,6 +18341,18 @@
       "family": "soulforge_aptitude",
       "maxLevel": 10
     },
+    "talent.saya.eden-of-propagation": {
+      "kind": "talent",
+      "id": "talent.saya.eden-of-propagation",
+      "name": "Eden of Propagation",
+      "route": {
+        "slug": "eden-of-propagation",
+        "canonicalPath": "/database/awakeners/saya/talents/eden-of-propagation"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "passive"
+    },
     "talent.saya.gnostic-potential": {
       "kind": "talent",
       "id": "talent.saya.gnostic-potential",
@@ -18367,18 +18379,6 @@
       "ownerAwakenerName": "Saya",
       "family": "madness_omen",
       "maxLevel": 12
-    },
-    "talent.saya.propagation-caro": {
-      "kind": "talent",
-      "id": "talent.saya.propagation-caro",
-      "name": "Propagation: Caro",
-      "route": {
-        "slug": "propagation-caro",
-        "canonicalPath": "/database/awakeners/saya/talents/propagation-caro"
-      },
-      "ownerAwakenerId": "awakener-0057",
-      "ownerAwakenerName": "Saya",
-      "family": "passive"
     },
     "talent.saya.soulforge-aptitude": {
       "kind": "talent",
@@ -22259,9 +22259,9 @@
       "skill.sanga.strike",
       "skill.sanga.the-lost-art",
       "skill.sanga.the-sea-of-corals",
+      "skill.saya.biomimicry",
       "skill.saya.cognitive-alteration",
       "skill.saya.defense",
-      "skill.saya.genetics-copy",
       "skill.saya.paradise-just-for-you",
       "skill.saya.song-of-saya",
       "skill.saya.strike",
@@ -22513,9 +22513,9 @@
       "talent.sanga.gnostic-potential",
       "talent.sanga.madness-omen",
       "talent.sanga.soulforge-aptitude",
+      "talent.saya.eden-of-propagation",
       "talent.saya.gnostic-potential",
       "talent.saya.madness-omen",
-      "talent.saya.propagation-caro",
       "talent.saya.soulforge-aptitude",
       "talent.sorel.gnostic-potential",
       "talent.sorel.guardian-of-vanity",

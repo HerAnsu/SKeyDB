@@ -1485,15 +1485,15 @@
       "ownedOverlays": ["overlay.saya.gynoecium"],
       "ownedPosses": ["posse-0051"],
       "ownedSkills": [
+        "skill.saya.biomimicry",
         "skill.saya.cognitive-alteration",
         "skill.saya.defense",
-        "skill.saya.genetics-copy",
         "skill.saya.paradise-just-for-you",
         "skill.saya.song-of-saya",
         "skill.saya.strike",
         "skill.saya.viscera-blossoms"
       ],
-      "ownedTalents": ["talent.saya.gnostic-potential", "talent.saya.madness-omen", "talent.saya.propagation-caro", "talent.saya.soulforge-aptitude"],
+      "ownedTalents": ["talent.saya.eden-of-propagation", "talent.saya.gnostic-potential", "talent.saya.madness-omen", "talent.saya.soulforge-aptitude"],
       "ownedWheels": ["wheel-0167", "wheel-0168"]
     },
     "awakener-build-0001": {},
@@ -2649,9 +2649,9 @@
     "skill.sanga.strike": {},
     "skill.sanga.the-lost-art": {},
     "skill.sanga.the-sea-of-corals": {},
+    "skill.saya.biomimicry": {},
     "skill.saya.cognitive-alteration": {},
     "skill.saya.defense": {},
-    "skill.saya.genetics-copy": {},
     "skill.saya.paradise-just-for-you": {},
     "skill.saya.song-of-saya": {},
     "skill.saya.strike": {},
@@ -2901,9 +2901,9 @@
     "talent.sanga.gnostic-potential": {},
     "talent.sanga.madness-omen": {},
     "talent.sanga.soulforge-aptitude": {},
+    "talent.saya.eden-of-propagation": {},
     "talent.saya.gnostic-potential": {},
     "talent.saya.madness-omen": {},
-    "talent.saya.propagation-caro": {},
     "talent.saya.soulforge-aptitude": {},
     "talent.sorel.gnostic-potential": {},
     "talent.sorel.guardian-of-vanity": {},
@@ -6098,13 +6098,13 @@
     "skill.sanga.the-sea-of-corals": {
       "ownerAwakenerId": "awakener-0045"
     },
+    "skill.saya.biomimicry": {
+      "ownerAwakenerId": "awakener-0057"
+    },
     "skill.saya.cognitive-alteration": {
       "ownerAwakenerId": "awakener-0057"
     },
     "skill.saya.defense": {
-      "ownerAwakenerId": "awakener-0057"
-    },
-    "skill.saya.genetics-copy": {
       "ownerAwakenerId": "awakener-0057"
     },
     "skill.saya.paradise-just-for-you": {
@@ -6854,13 +6854,13 @@
     "talent.sanga.soulforge-aptitude": {
       "ownerAwakenerId": "awakener-0045"
     },
+    "talent.saya.eden-of-propagation": {
+      "ownerAwakenerId": "awakener-0057"
+    },
     "talent.saya.gnostic-potential": {
       "ownerAwakenerId": "awakener-0057"
     },
     "talent.saya.madness-omen": {
-      "ownerAwakenerId": "awakener-0057"
-    },
-    "talent.saya.propagation-caro": {
       "ownerAwakenerId": "awakener-0057"
     },
     "talent.saya.soulforge-aptitude": {

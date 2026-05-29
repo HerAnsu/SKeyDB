@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0057",
   "slot": "Defense",
-  "descriptionTemplate": "Gain [Block:Arg1] Shield. Gain [Energy:Arg2] Aliemus.",
+  "descriptionTemplate": "Gain [Block:Arg1] Shield. Saya gains [Energy:Arg2] Aliemus.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
@@ -34,7 +34,7 @@
       "ownerAwakenerId": "awakener-0057",
       "ownerAwakenerName": "Saya",
       "patch": {
-        "descriptionTemplate": "Obtain [Block:Arg1] Shield. Obtain [Energy:Arg2] Aliemus. {Embryo Fusion} +[Blood:Arg4], the lower the current HP, the higher the effect, up to 100% more.",
+        "descriptionTemplate": "Gain [Block:Arg1] Shield. Saya gains [Energy:Arg2] Aliemus. {Embryo Fusion} +[Blood:Arg4], which scales with the amount of {Crimson Furnace} consumed, up to +100%.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",

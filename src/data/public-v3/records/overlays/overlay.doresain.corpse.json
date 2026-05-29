@@ -15,7 +15,7 @@
   "aliases": [],
   "iconId": "IconS_Buff_076",
   "textColor": "misc",
-  "descriptionTemplate": "Corpses can be eaten by certain {Caro} Awakeners to trigger special effects. You can keep up to 3 Corpses, which is carried over to the next battle.",
+  "descriptionTemplate": "Up to 3 Corpses can be stored. When all 3 are present, the next {Necrotic Gala} consumes them for an enhanced effect. Corpses persist between battles.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Doresain"
 }

@@ -25,11 +25,13 @@ describe('public-formula-context', () => {
     expect(Object.keys(context).sort()).toEqual([
       'accountLevel',
       'ownedPosseCount',
+      'realmMasteryFinal',
       'wheelRefinementLevel',
     ])
     expect(context).toEqual({
       accountLevel: 33,
       ownedPosseCount: 1,
+      realmMasteryFinal: 0,
       wheelRefinementLevel: 3,
     })
   })
@@ -74,11 +76,13 @@ describe('public-formula-context', () => {
       buildPublicFormulaContext({
         accountLevel: 70,
         ownedPosseCount: 7,
+        realmMasteryFinal: 4,
         wheelRefinementLevel: 2,
       }),
     ).toEqual({
       accountLevel: 70,
       ownedPosseCount: 7,
+      realmMasteryFinal: 4,
       wheelRefinementLevel: 2,
     })
   })
@@ -87,6 +91,7 @@ describe('public-formula-context', () => {
     const context = {
       accountLevel: 100,
       ownedPosseCount: 2,
+      realmMasteryFinal: 5,
       wheelRefinementLevel: 3,
     } satisfies PublicFormulaContext
 

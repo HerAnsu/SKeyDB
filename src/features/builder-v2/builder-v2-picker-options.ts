@@ -254,7 +254,7 @@ export function createBuilderV2CovenantOptions(
       id: covenant.id,
       name: covenant.name,
       assetSrc: getCovenantAssetById(covenant.id),
-      inUse: input.activeTeamSlots.some((slot) => slot.covenantId === covenant.id),
+      inUse: false,
       recommended: recommendationIndex >= 0,
       recommendationLabel: recommendationIndex >= 0 ? `#${String(recommendationIndex + 1)}` : null,
     }

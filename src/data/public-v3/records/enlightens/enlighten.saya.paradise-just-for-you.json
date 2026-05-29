@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0057",
   "slot": "OverExalt",
-  "descriptionTemplate": "Make all copied \"Skill Cards\" take effect 1 additional time.",
+  "descriptionTemplate": "All copied \"Skill\" cards take effect 1 additional time.",
   "descriptionArgs": {},
   "ownerAwakenerName": "Saya"
 }

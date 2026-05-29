@@ -61,16 +61,15 @@ function getPublicAwakenerCatalogLiteRecords(): PublicAwakenerCatalogLiteRecord[
   return publicAwakenerCatalogLiteRecordsSchema.parse(getPublicCatalogRecords('awakeners'))
 }
 
+function normalizeCanonicalAwakenerName(name: string): string {
+  return name
+    .trim()
+    .replace(/^"(.+)"$/, '$1')
+    .toLowerCase()
+}
+
 function resolveCanonicalAwakenerName(record: PublicAwakenerCatalogLiteRecord) {
-  const alias = record.aliases?.find((entry) => !entry.trim().startsWith('g-'))?.trim()
-  if (alias) {
-    return alias
-  }
-  const portraitKey = record.route?.slug?.trim()
-  if (portraitKey) {
-    return portraitKey.replace(/-/g, ': ')
-  }
-  return record.name.trim().toLowerCase()
+  return normalizeCanonicalAwakenerName(record.name)
 }
 
 function adaptPublicAwakenerCatalogLite(

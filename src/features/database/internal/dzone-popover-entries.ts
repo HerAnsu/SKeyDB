@@ -23,7 +23,21 @@ function getMonsterDescriptionText(monster: DzoneResolvedMonster): string | unde
 }
 
 function formatDzoneMonsterHp(hp: number): string {
-  return hp > 100000 ? `${Math.floor(hp / 1000).toString()}k` : hp.toString()
+  if (hp >= 1000000) return `${formatCompactNumber(hp / 1000000)}M`
+  if (hp > 100000) return `${formatCompactNumber(hp / 1000)}K`
+  if (hp >= 10000) return `${formatCompactNumber(hp / 1000)}K`
+  return hp.toString()
+}
+
+function formatCompactNumber(value: number): string {
+  const rounded = Math.round(value * 10) / 10
+  return Number.isInteger(rounded) ? rounded.toString() : rounded.toFixed(1)
+}
+
+function formatPercent(value: number): string {
+  const percent = value * 100
+  const rounded = Math.round(percent * 10) / 10
+  return Number.isInteger(rounded) ? `${rounded.toString()}%` : `${rounded.toFixed(1)}%`
 }
 
 function buildDzoneMonsterAlertMetaText(stats: DzoneMonsterAlertStats): string {
@@ -33,18 +47,80 @@ function buildDzoneMonsterAlertMetaText(stats: DzoneMonsterAlertStats): string {
 }
 
 function buildDzoneMonsterAlertMetaSegments(stats: DzoneMonsterAlertStats) {
+  const displayHp = stats.effectiveHp ?? stats.hp
   const segments = [
     {text: 'Level '},
     {text: stats.level.toString(), tone: 'value' as const},
     {text: ' · HP '},
-    {text: formatDzoneMonsterHp(stats.hp), tone: 'value' as const},
+    {text: formatDzoneMonsterHp(displayHp), tone: 'value' as const},
   ]
 
+  if (stats.effectiveHp && stats.effectiveHp !== stats.hp) {
+    segments.push({text: ' total'})
+  }
+
   if (stats.hpBars && stats.hpBars > 1) {
-    segments.push({text: ' · '}, {text: `${stats.hpBars.toString()} HP bars`})
+    segments.push({text: ' · '}, {text: `${stats.hpBars.toString()} bars`})
   }
 
   return segments
+}
+
+function buildDzoneMonsterHpAttributeRows(stats: DzoneMonsterAlertStats) {
+  const hpBarValues = stats.hpBarValues
+  if (!hpBarValues || hpBarValues.length <= 1) {
+    return undefined
+  }
+  const rows = [
+    {
+      label: 'HP bars',
+      value: hpBarValues.map(formatDzoneMonsterHp).join(' › '),
+    },
+  ]
+  const rouseText = buildDzoneMonsterRouseText(stats)
+  if (rouseText) {
+    rows.push({label: 'Rouse', value: rouseText})
+  }
+  return rows
+}
+
+function buildDzoneMonsterRouseText(stats: DzoneMonsterAlertStats): string | undefined {
+  const phases = stats.hpBarPhases?.filter((phase) => phase.bar > 1) ?? []
+  let previousMultiplier = 1
+  const segments = phases
+    .map((phase) => {
+      const details = []
+      const maxHpMultiplier =
+        phase.maxHpMultiplier !== undefined && phase.maxHpMultiplier !== 1
+          ? phase.maxHpMultiplier
+          : undefined
+      const repeatsPreviousMultiplier =
+        maxHpMultiplier !== undefined && maxHpMultiplier === previousMultiplier
+      if (
+        maxHpMultiplier !== undefined &&
+        !repeatsPreviousMultiplier &&
+        (phase.kind === 'maxHpMultiplier' || phase.kind === 'maxHpMultiplierPartialRevive')
+      ) {
+        details.push(`max HP ×${formatCompactNumber(maxHpMultiplier)}`)
+      }
+      if (
+        phase.healPercent !== undefined &&
+        phase.healPercent !== 1 &&
+        (phase.kind === 'partialRevive' || phase.kind === 'maxHpMultiplierPartialRevive')
+      ) {
+        details.push(
+          `${phase.healPercent < 1 ? 'revives at' : 'heals to'} ${formatPercent(
+            phase.healPercent,
+          )}`,
+        )
+      }
+      if (maxHpMultiplier !== undefined) {
+        previousMultiplier = maxHpMultiplier
+      }
+      return details.length > 0 ? `Bar ${phase.bar.toString()} ${details.join(', ')}` : ''
+    })
+    .filter(Boolean)
+  return segments.length > 0 ? segments.join('; ') : undefined
 }
 
 export function buildDzoneMonsterPopoverEntry({
@@ -64,6 +140,9 @@ export function buildDzoneMonsterPopoverEntry({
       ? buildDzoneMonsterAlertMetaSegments(monster.alertStats)
       : undefined,
     description: '',
+    attributeRows: monster.alertStats
+      ? buildDzoneMonsterHpAttributeRows(monster.alertStats)
+      : undefined,
     thumbnail: thumbnailSrc ? {src: thumbnailSrc, alt: monster.name} : undefined,
     descriptionSections: [
       descriptionText

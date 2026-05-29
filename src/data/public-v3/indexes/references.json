@@ -511,6 +511,12 @@
         "id": "enlighten.faint.binary-stars"
       }
     ],
+    "biomimicry": [
+      {
+        "kind": "skill",
+        "id": "skill.saya.biomimicry"
+      }
+    ],
     "birth of a soul": [
       {
         "kind": "wheel",
@@ -2299,6 +2305,12 @@
         "id": "derived.wanda.echoes-of-whispers"
       }
     ],
+    "eden of propagation": [
+      {
+        "kind": "talent",
+        "id": "talent.saya.eden-of-propagation"
+      }
+    ],
     "eerie hook": [
       {
         "kind": "relic",
@@ -3077,12 +3089,6 @@
       {
         "kind": "awakenerBuild",
         "id": "awakener-build-0008"
-      }
-    ],
-    "genetics copy": [
-      {
-        "kind": "skill",
-        "id": "skill.saya.genetics-copy"
       }
     ],
     "get em brown": [
@@ -5233,10 +5239,22 @@
         "id": "enlighten.murphy-fauxborn.profane-apocalypse"
       }
     ],
+    "propagation caro": [
+      {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-caro"
+      }
+    ],
     "propagation caro mastery": [
       {
         "kind": "overlay",
         "id": "overlay.global.propagation-caro"
+      }
+    ],
+    "propagation fiesta": [
+      {
+        "kind": "overlay",
+        "id": "overlay.global.propagation-frenzy"
       }
     ],
     "propagation frenzy": [
@@ -8939,16 +8957,6 @@
       {
         "kind": "skill",
         "id": "skill.daffodil.phantasmal-haze"
-      }
-    ],
-    "propagation caro": [
-      {
-        "kind": "overlay",
-        "id": "overlay.global.propagation-caro"
-      },
-      {
-        "kind": "talent",
-        "id": "talent.saya.propagation-caro"
       }
     ],
     "psyche dissection": [

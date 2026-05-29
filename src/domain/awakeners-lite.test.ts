@@ -50,6 +50,14 @@ describe('awakeners-lite', () => {
     })
   })
 
+  it('uses the public V3 name rather than the first alias as the runtime name', () => {
+    const records = getAwakenersLite()
+    const jenkin = records.find((entry) => entry.id === 25)
+
+    expect(jenkin?.name).toBe('jenkin')
+    expect(jenkin?.aliases).toEqual(expect.arrayContaining(['Jenkin', 'jenkins']))
+  })
+
   it('filters out low-signal overlay references like Retain and Exhaust', () => {
     const tags = new Set(getAwakenersLite().flatMap((entry) => entry.tags))
 

@@ -84,12 +84,15 @@ function assertUniqueIngameIds(awakeners: Awakener[]) {
   }
 }
 
+function normalizeCanonicalAwakenerName(name: string): string {
+  return name
+    .trim()
+    .replace(/^"(.+)"$/, '$1')
+    .toLowerCase()
+}
+
 function resolveCanonicalAwakenerName(awakener: {name: string; aliases?: string[]}): string {
-  const alias = awakener.aliases?.find((entry) => !entry.trim().startsWith('g-'))?.trim()
-  if (alias) {
-    return alias
-  }
-  return awakener.name.trim().toLowerCase()
+  return normalizeCanonicalAwakenerName(awakener.name)
 }
 
 function normalizeAwakenerLiteStatLevel(level: number): number {

@@ -10,6 +10,6 @@
   "overlayType": "mechanic",
   "aliases": [],
   "textColor": "misc",
-  "descriptionTemplate": "The card text is obscured by Dissolution. Arithmetica Cost has a 10% chance of -2, 25% chance of -1, 30% chance of no change, 25% chance of +1, and 10% chance of +2. This state is removed upon playing or discarding.",
+  "descriptionTemplate": "This card is displayed in Dissolution text and has a 10% chance of -2, 25% chance of -1, 30% chance of no change, 25% chance of +1, and 10% chance of +2 to its Arithmetica Cost. Removed when played or discarded.",
   "descriptionArgs": {}
 }

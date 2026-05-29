@@ -8,8 +8,8 @@
     "canonicalPath": "/database/awakeners/saya/skills/viscera-blossoms"
   },
   "ownerAwakenerId": "awakener-0057",
-  "slot": "Skill2",
-  "descriptionTemplate": "Lose 10% current HP, inflict [Arg1] {Corrosion} on all enemies. Discard all Command Cards, then draw the same number of Cards.",
+  "slot": "Skill1",
+  "descriptionTemplate": "Lose 10% of current HP, inflict [Corrosion:Arg1] {Corrosion} on all enemies. Discard all Command Cards and draw the same number of cards.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",
@@ -58,7 +58,7 @@
       "ownerAwakenerId": "awakener-0057",
       "ownerAwakenerName": "Saya",
       "patch": {
-        "descriptionTemplate": "Lose 10% of current HP, inflict [Arg1] {Corrosion} on all enemies. Additionally inflict {Corrosion} equal to 0.5% of the target's Max HP. Discard all Command Cards and draw the same number of cards.",
+        "descriptionTemplate": "Lose 10% of current HP, inflict [Corrosion:Arg1] {Corrosion} on all enemies. Additionally inflict {Corrosion} equal to 0.5% of the target's Max HP. Discard all Command Cards and draw the same number of cards.",
         "descriptionArgs": {
           "Arg1": {
             "kind": "scaling",

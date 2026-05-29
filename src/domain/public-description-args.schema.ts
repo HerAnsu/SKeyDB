@@ -2,7 +2,12 @@ import {z} from 'zod'
 
 const nonEmptyStringSchema = z.string().trim().min(1)
 
-const publicFormulaKeySchema = z.enum(['accountLevel', 'ownedPosseCount', 'wheelRefinementLevel'])
+const publicFormulaKeySchema = z.enum([
+  'accountLevel',
+  'ownedPosseCount',
+  'wheelRefinementLevel',
+  'realmMasteryFinal',
+])
 
 const publicScaledBaseFormulaSchema = z.enum([
   'accountStageGrowth',
@@ -94,6 +99,20 @@ export const publicDescriptionArgSchema = z.discriminatedUnion('kind', [
         substatBonus: publicDescriptionArgSubstatBonusSchema.optional(),
       })
       .strict(),
+    z
+      .object({
+        kind: z.literal('computed'),
+        formulaKey: z.literal('realmMasteryLinear'),
+        baseValue: z.number(),
+        perPoint: z.number(),
+        rounding: z.literal('ceil').optional(),
+        inputs: z.tuple([z.literal('realmMasteryFinal')]),
+        channel: nonEmptyStringSchema.optional(),
+        suffix: nonEmptyStringSchema.optional(),
+        stat: publicDescriptionArgStatSchema.optional(),
+        substatBonus: publicDescriptionArgSubstatBonusSchema.optional(),
+      })
+      .strict(),
   ]),
 ])
 
@@ -120,4 +139,8 @@ export type PublicScaledComputedDescriptionArg = Extract<
 export type PublicWheelRefinementLinearComputedDescriptionArg = Extract<
   PublicComputedDescriptionArg,
   {formulaKey: 'wheelRefinementLinear'}
+>
+export type PublicRealmMasteryLinearComputedDescriptionArg = Extract<
+  PublicComputedDescriptionArg,
+  {formulaKey: 'realmMasteryLinear'}
 >

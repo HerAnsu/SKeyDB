@@ -2265,6 +2265,18 @@
     },
     {
       "kind": "talent",
+      "id": "talent.saya.eden-of-propagation",
+      "name": "Eden of Propagation",
+      "route": {
+        "slug": "eden-of-propagation",
+        "canonicalPath": "/database/awakeners/saya/talents/eden-of-propagation"
+      },
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
+      "family": "passive"
+    },
+    {
+      "kind": "talent",
       "id": "talent.saya.gnostic-potential",
       "name": "Gnostic Potential",
       "route": {
@@ -2289,18 +2301,6 @@
       "ownerAwakenerName": "Saya",
       "family": "madness_omen",
       "maxLevel": 12
-    },
-    {
-      "kind": "talent",
-      "id": "talent.saya.propagation-caro",
-      "name": "Propagation: Caro",
-      "route": {
-        "slug": "propagation-caro",
-        "canonicalPath": "/database/awakeners/saya/talents/propagation-caro"
-      },
-      "ownerAwakenerId": "awakener-0057",
-      "ownerAwakenerName": "Saya",
-      "family": "passive"
     },
     {
       "kind": "talent",

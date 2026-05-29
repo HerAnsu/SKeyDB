@@ -16,7 +16,7 @@
   "ownerAwakenerId": "awakener-0057",
   "ownerAwakenerName": "Saya",
   "lineupToken": "yZ",
-  "descriptionTemplate": "After using {Crimson Furnace}, the wielder gains Aliemus equal to [StateArg1]% of Base Aliemus.",
+  "descriptionTemplate": "After using {Crimson Furnace}, the wielder gains Aliemus equal to [StateArg1]% of Base Aliemus. 3 turns cooldown.",
   "descriptionArgs": {
     "StateArg1": {
       "kind": "scaling",
@@ -24,6 +24,6 @@
       "suffix": "%"
     }
   },
-  "lore": "Coming Soon",
+  "lore": "Besides dry research papers, the bookshelf held a few children's books that looked rather charming. <Italic:Cinderella. Snow White. The Little Mermaid. Rapunzel...> Why their owner had kept these here—there was no longer any way of knowing.\n\nThose stories wove a world nothing like reality. \"Prince.\" \"Princess.\" \"Love.\" These words set the young girl's heart aflutter.\n\nCountless lights glimmered across the night sky, spilling down to earth as though gathering into a river of flowing radiance.\n\nIn the falling moonlight, the girl quietly rose onto her tiptoes, pretending to step into a pair of glass slippers, transparent as air. As though she had always been waiting—for this deep, lonely, endless night to finally break into dawn...\"",
   "searchTags": ["Aliemus"]
 }

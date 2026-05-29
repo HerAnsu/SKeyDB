@@ -19,7 +19,7 @@
     "Arg2": {
       "kind": "fixed",
       "value": "X",
-      "displayFormula": "(Max HP * 5% * 5 + additional Crimson Furnace storage) * (1 + Crimson Furnace storage bonus / 100)"
+      "displayFormula": "Base cap is 25% Max HP, plus flat Crimson Furnace cap bonuses, then multiplied by Crimson Furnace cap %. If Propagation: Caro is active, the base Max HP cap is doubled to 50% before those bonuses."
     }
   }
 }

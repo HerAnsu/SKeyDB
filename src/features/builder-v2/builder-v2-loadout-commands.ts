@@ -372,12 +372,7 @@ export function resolveAssignCovenantCommand({
     }
   }
 
-  const sourceSlot = activeTeamSlots.find(
-    (slot) => slot.slotId !== targetSlotId && slot.covenantId === covenantId,
-  )
-  const result = sourceSlot
-    ? swapCovenantAssignments(activeTeamSlots, sourceSlot.slotId, targetSlotId)
-    : assignCovenantToSlot(activeTeamSlots, targetSlotId, covenantId)
+  const result = assignCovenantToSlot(activeTeamSlots, targetSlotId, covenantId)
   return {
     kind: 'slots',
     nextSlots: result.nextSlots,

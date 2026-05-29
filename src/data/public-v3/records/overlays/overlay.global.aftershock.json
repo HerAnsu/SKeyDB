@@ -9,7 +9,7 @@
   },
   "overlayType": "mechanic",
   "aliases": [],
-  "textColor": "shield",
+  "textColor": "misc",
   "descriptionTemplate": "Triggers the {Aftershock} effect when discarded.",
   "descriptionArgs": {}
 }

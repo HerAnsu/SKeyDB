@@ -9,7 +9,7 @@
   },
   "ownerAwakenerId": "awakener-0044",
   "slot": "Exalt",
-  "descriptionTemplate": "[{Devour}: Gain [Power:Arg1] Temporary {STR}, +[Arg4]% Temporary Crit. Rate.] Gain [Block:Arg2] Shield. {Vulnerable} all enemies for 1 turn. Until the start of the next turn, [Arg3]% of the DMG taken will be converted to {Crimson Furnace}.",
+  "descriptionTemplate": "[{Devour}: Gain [Power:Arg1] Temporary {STR}, +[Arg4]% Temporary Crit. Rate.] Gain [Block:Arg2] Shield. Apply {Vulnerable} to all enemies for 1 turn. Until the start of the next turn, [Arg3]% of the DMG taken will be converted to {Crimson Furnace}.",
   "descriptionArgs": {
     "Arg1": {
       "kind": "scaling",

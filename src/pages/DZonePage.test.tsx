@@ -106,9 +106,11 @@ describe('DZonePage', () => {
         (_, element) =>
           element !== null &&
           element.tagName === 'P' &&
-          element.textContent === 'Level 38 · HP 24474 · 3 HP bars',
+          element.textContent === 'Level 38 · HP 75.9K total · 3 bars',
       ),
     ).toBeInTheDocument()
+    expect(within(dialog).getByText('24.5K › 24.5K › 26.9K')).toBeInTheDocument()
+    expect(within(dialog).getByText('Bar 3 heals to 110%')).toBeInTheDocument()
     expect(within(dialog).queryByText('Alert')).not.toBeInTheDocument()
     expect(
       within(dialog).getByText('Immensely powerful foes that spawn anomalies.'),

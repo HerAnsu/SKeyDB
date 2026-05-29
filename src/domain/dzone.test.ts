@@ -14,6 +14,7 @@ import {
   loadDzoneSeasons,
   loadLatestDzoneSeason,
   loadLatestDzoneWaveViewModels,
+  resolveDzoneWaveViewModel,
 } from './dzone'
 import {getDzoneSeasonRealmName} from './dzone-season-realm'
 import {loadRelicRecordById} from './relics'
@@ -78,6 +79,31 @@ describe('D-zone domain boundary', () => {
         hpBars: 2,
       },
     })
+  })
+
+  it('keeps season 60 on the archived monster display snapshot', async () => {
+    const season = await loadDzoneSeasonById('dzone-0060')
+    const waveModels = season?.waves.map(resolveDzoneWaveViewModel)
+    const archivedPoet = waveModels?.[1]?.alerts[0]?.monsters.find(
+      (monster) => monster.id === 'dzone-monster-0313',
+    )
+    const globalMonster = getDzoneMonsterById('dzone-monster-0313')
+
+    expect(globalMonster).toMatchObject({
+      id: 'dzone-monster-0313',
+      name: 'The poet',
+      characteristicIds: ['enemy-characteristic-0011', 'enemy-characteristic-0007'],
+    })
+    expect(archivedPoet).toMatchObject({
+      id: 'dzone-monster-0313',
+      name: 'The poet',
+      characteristicIds: ['enemy-characteristic-0011', 'enemy-characteristic-0007'],
+    })
+    expect(archivedPoet?.badges ?? []).not.toContain('Elite')
+    expect(archivedPoet?.characteristics.map((characteristic) => characteristic.id)).toEqual([
+      'enemy-characteristic-0011',
+      'enemy-characteristic-0007',
+    ])
   })
 
   it('loads dzone-0060 as the current season during its active window', () => {
