@@ -1,15 +1,9 @@
-import {
-  useCallback,
-  useEffect,
-  useEffectEvent,
-  useRef,
-  useState,
-  type KeyboardEvent as ReactKeyboardEvent,
-} from 'react'
+import {useCallback, useRef, useState} from 'react'
 
 import {FaCaretDown, FaChevronLeft, FaChevronRight, FaXmark} from 'react-icons/fa6'
 
 import {getRealmBadge, getRealmLabel} from '@/domain/realms'
+import {useNativeModalDialog} from '@/ui/modal/useNativeModalDialog'
 
 import type {QuickLineupStep} from '../builder/types'
 import {BuilderV2ActiveFooter, BuilderV2ActiveHeader} from './BuilderV2ActiveTeamChrome'
@@ -56,7 +50,6 @@ export function BuilderV2MobileLayout({
   const [mobilePicker, setMobilePicker] = useState<MobilePickerState | null>(null)
   const pickerTriggerRef = useRef<HTMLElement | null>(null)
   const searchInputRef = useRef<HTMLInputElement | null>(null)
-  const dialogRef = useRef<HTMLDivElement | null>(null)
   const setPickerTab = useStableEvent(model.setPickerTab)
   const startQuickLineupCommand = useStableEvent(model.startQuickLineup)
   const assignAwakenerCommand = useStableEvent(model.assignAwakener)
@@ -64,53 +57,12 @@ export function BuilderV2MobileLayout({
   const assignCovenantCommand = useStableEvent(model.assignCovenant)
   const assignPosseCommand = useStableEvent(model.assignPosse)
 
-  useEffect(() => {
-    if (!mobilePicker) {
-      return
-    }
-
-    dialogRef.current?.focus()
-  }, [mobilePicker, model.pickerTab])
-
   const closePicker = useCallback((restoreFocus = true) => {
     setMobilePicker(null)
     if (restoreFocus) {
       pickerTriggerRef.current?.focus()
     }
   }, [])
-  const closePickerEvent = useEffectEvent(closePicker)
-
-  useEffect(() => {
-    if (!mobilePicker) {
-      return
-    }
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') {
-        return
-      }
-
-      event.preventDefault()
-      closePickerEvent()
-    }
-
-    document.addEventListener('keydown', handleEscape)
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-    }
-  }, [mobilePicker])
-
-  useEffect(() => {
-    if (!mobilePicker) {
-      return
-    }
-
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = previousOverflow
-    }
-  }, [mobilePicker])
 
   const openPicker = useCallback(
     ({
@@ -233,62 +185,121 @@ export function BuilderV2MobileLayout({
       )}
 
       {activeMobilePicker ? (
-        <div
-          className='builder-v2-mobile-picker-backdrop'
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              closePicker()
-            }
-          }}
-        >
-          <div
-            aria-labelledby='builder-v2-mobile-picker-title'
-            aria-modal={isDetailOverlayOpen ? undefined : true}
-            className='builder-v2-mobile-picker'
-            inert={isDetailOverlayOpen ? true : undefined}
-            onKeyDown={(event) => {
-              trapDialogFocus(event, dialogRef.current)
-            }}
-            ref={dialogRef}
-            role='dialog'
-            tabIndex={-1}
-          >
-            <header className='builder-v2-mobile-picker-header'>
-              <div>
-                <p className='builder-v2-label'>Pick</p>
-                <h2 className='ui-title' id='builder-v2-mobile-picker-title'>
-                  {activeMobilePicker.title}
-                </h2>
-              </div>
-              <button
-                aria-label='Close mobile picker'
-                className='builder-v2-mobile-icon-button'
-                onClick={() => {
-                  closePicker()
-                }}
-                type='button'
-              >
-                <FaXmark aria-hidden />
-              </button>
-            </header>
-            <BuilderV2PickerContent
-              onAssignAwakener={assignAwakener}
-              onAssignCovenant={assignCovenant}
-              onAssignPosse={assignPosse}
-              onAssignWheel={assignWheel}
-              onClearPickerTarget={model.clearPickerTarget}
-              onOpenAwakenerDetail={openAwakenerDetail}
-              onOpenCovenantDetail={openCovenantDetail}
-              onOpenPosseDetail={openPosseDetail}
-              onOpenWheelDetail={openWheelDetail}
-              picker={model.picker}
-              pickerClearTarget={model.pickerClearTarget}
-              searchInputRef={searchInputRef}
-            />
-          </div>
-        </div>
+        <MobilePickerDialog
+          isDetailOverlayOpen={isDetailOverlayOpen}
+          mobilePicker={activeMobilePicker}
+          model={model}
+          onAssignAwakener={assignAwakener}
+          onAssignCovenant={assignCovenant}
+          onAssignPosse={assignPosse}
+          onAssignWheel={assignWheel}
+          onClosePicker={closePicker}
+          onOpenAwakenerDetail={openAwakenerDetail}
+          onOpenCovenantDetail={openCovenantDetail}
+          onOpenPosseDetail={openPosseDetail}
+          onOpenWheelDetail={openWheelDetail}
+          searchInputRef={searchInputRef}
+        />
       ) : null}
     </section>
+  )
+}
+
+function MobilePickerDialog({
+  isDetailOverlayOpen,
+  mobilePicker,
+  model,
+  onAssignAwakener,
+  onAssignCovenant,
+  onAssignPosse,
+  onAssignWheel,
+  onClosePicker,
+  onOpenAwakenerDetail,
+  onOpenCovenantDetail,
+  onOpenPosseDetail,
+  onOpenWheelDetail,
+  searchInputRef,
+}: {
+  isDetailOverlayOpen: boolean
+  mobilePicker: MobilePickerState
+  model: BuilderV2Model
+  onAssignAwakener: (awakenerId: string) => void
+  onAssignCovenant: (covenantId: string) => void
+  onAssignPosse: (posseId: string) => void
+  onAssignWheel: (wheelId: string) => void
+  onClosePicker: (restoreFocus?: boolean) => void
+  onOpenAwakenerDetail: (awakenerId: string) => void
+  onOpenCovenantDetail: (covenantId: string) => void
+  onOpenPosseDetail: (posseId: string) => void
+  onOpenWheelDetail: (wheelId: string) => void
+  searchInputRef: React.RefObject<HTMLInputElement | null>
+}) {
+  const dialogRef = useRef<HTMLDialogElement | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
+
+  useNativeModalDialog({
+    dialogRef,
+    initialFocusRef: closeButtonRef,
+    lockBodyScroll: true,
+    onCancel: (event) => {
+      event.preventDefault()
+      onClosePicker()
+    },
+    onClick: (event) => {
+      if (event.target === event.currentTarget) {
+        onClosePicker()
+      }
+    },
+    onKeyDown: (event) => {
+      trapDialogFocus(event, dialogRef.current)
+    },
+    restoreFocus: false,
+  })
+
+  return (
+    <dialog
+      aria-labelledby='builder-v2-mobile-picker-title'
+      aria-modal={isDetailOverlayOpen ? undefined : true}
+      className='builder-v2-mobile-picker-backdrop'
+      inert={isDetailOverlayOpen ? true : undefined}
+      ref={dialogRef}
+    >
+      <div className='builder-v2-mobile-picker'>
+        <header className='builder-v2-mobile-picker-header'>
+          <div>
+            <p className='builder-v2-label'>Pick</p>
+            <h2 className='ui-title' id='builder-v2-mobile-picker-title'>
+              {mobilePicker.title}
+            </h2>
+          </div>
+          <button
+            aria-label='Close mobile picker'
+            className='builder-v2-mobile-icon-button'
+            onClick={() => {
+              onClosePicker()
+            }}
+            ref={closeButtonRef}
+            type='button'
+          >
+            <FaXmark aria-hidden />
+          </button>
+        </header>
+        <BuilderV2PickerContent
+          onAssignAwakener={onAssignAwakener}
+          onAssignCovenant={onAssignCovenant}
+          onAssignPosse={onAssignPosse}
+          onAssignWheel={onAssignWheel}
+          onClearPickerTarget={model.clearPickerTarget}
+          onOpenAwakenerDetail={onOpenAwakenerDetail}
+          onOpenCovenantDetail={onOpenCovenantDetail}
+          onOpenPosseDetail={onOpenPosseDetail}
+          onOpenWheelDetail={onOpenWheelDetail}
+          picker={model.picker}
+          pickerClearTarget={model.pickerClearTarget}
+          searchInputRef={searchInputRef}
+        />
+      </div>
+    </dialog>
   )
 }
 
@@ -1084,7 +1095,7 @@ function getCurrentFocusRestoreTarget(): HTMLElement | null {
   return document.activeElement instanceof HTMLElement ? document.activeElement : null
 }
 
-function trapDialogFocus(event: ReactKeyboardEvent, dialog: HTMLDivElement | null) {
+function trapDialogFocus(event: KeyboardEvent, dialog: HTMLElement | null) {
   if (event.key !== 'Tab' || !dialog) {
     return
   }

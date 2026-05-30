@@ -843,12 +843,15 @@ describe('BuilderV2Page', () => {
 
     const drawer = screen.getByRole('dialog', {name: /team 1 · slot 2 · awakener/i})
     expect(drawer).toBeInTheDocument()
+    expect(drawer.tagName).toBe('DIALOG')
+    expect(drawer).toHaveAttribute('open')
     expect(within(drawer).getByRole('tab', {name: /^awakeners$/i})).toHaveAttribute(
       'aria-selected',
       'true',
     )
     expect(within(drawer).getByRole('searchbox', {name: /search awakeners/i})).toBeInTheDocument()
-    expect(drawer).toHaveFocus()
+    expect(within(drawer).getByRole('button', {name: /close mobile picker/i})).toHaveFocus()
+    expect(within(drawer).getByRole('searchbox', {name: /search awakeners/i})).not.toHaveFocus()
     expect(screen.getByText(/editing slot 2 - awakener/i)).toBeInTheDocument()
   })
 
@@ -867,9 +870,9 @@ describe('BuilderV2Page', () => {
       source: 'builder-overlay',
     })
 
-    expect(document.querySelector('.builder-v2-mobile-picker')).toBeInTheDocument()
+    expect(document.querySelector('.builder-v2-mobile-picker-backdrop')).toBeInTheDocument()
     await waitFor(() => {
-      expect(document.querySelector('.builder-v2-mobile-picker')).toHaveAttribute('inert')
+      expect(document.querySelector('.builder-v2-mobile-picker-backdrop')).toHaveAttribute('inert')
     })
   })
 
@@ -905,6 +908,28 @@ describe('BuilderV2Page', () => {
     expect(screen.getByRole('dialog', {name: /team 1 · slot 3 · awakener/i})).toBeInTheDocument()
 
     fireEvent.keyDown(document, {key: 'Escape'})
+
+    expect(
+      screen.queryByRole('dialog', {name: /team 1 · slot 3 · awakener/i}),
+    ).not.toBeInTheDocument()
+    expect(pickerTrigger).toHaveFocus()
+  })
+
+  it('closes the mobile picker drawer from the native backdrop but keeps panel clicks inside', () => {
+    resizeBuilderV2Viewport(390)
+    render(<BuilderV2Page />)
+
+    const pickerTrigger = screen.getByRole('button', {name: /^select slot 3$/i})
+    fireEvent.click(pickerTrigger)
+
+    const drawer = screen.getByRole('dialog', {name: /team 1 · slot 3 · awakener/i})
+    const panel = drawer.querySelector('.builder-v2-mobile-picker')
+    expect(panel).toBeInTheDocument()
+
+    fireEvent.click(panel as HTMLElement)
+    expect(screen.getByRole('dialog', {name: /team 1 · slot 3 · awakener/i})).toBeInTheDocument()
+
+    fireEvent.click(drawer)
 
     expect(
       screen.queryByRole('dialog', {name: /team 1 · slot 3 · awakener/i}),

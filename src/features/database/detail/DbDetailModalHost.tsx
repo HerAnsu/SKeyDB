@@ -50,6 +50,11 @@ interface DetailRefLookup {
   wheelsByName: Map<string, Wheel>
 }
 
+interface OverlayAwakenerTabState {
+  activeTab: DatabaseAwakenerTab
+  refKey: string
+}
+
 interface DbDetailModalHostProps {
   awakeners: Awakener[]
   callbacks: DatabaseDetailRenderCallbacks
@@ -86,6 +91,13 @@ function setFirstIdMatch<T extends {id: string}>(lookup: Map<string, T>, item: T
   if (!lookup.has(item.id)) {
     lookup.set(item.id, item)
   }
+}
+
+function resolveOverlayAwakenerTab(
+  activeRefKey: string,
+  state: OverlayAwakenerTabState,
+): DatabaseAwakenerTab {
+  return state.refKey === activeRefKey ? state.activeTab : DEFAULT_DATABASE_AWAKENER_TAB
 }
 
 function buildDetailRefLookup(awakeners: Awakener[], wheels: Wheel[]): DetailRefLookup {
@@ -375,9 +387,7 @@ function DbDetailRouteLoadingModal({
         </button>
         <div>
           <div className='ui-title text-lg text-amber-100'>{itemName}</div>
-          <div className='mt-3 text-sm text-slate-400' role='status'>
-            {loadingLabel}
-          </div>
+          <output className='mt-3 block text-sm text-slate-400'>{loadingLabel}</output>
         </div>
       </div>
     </DbDetailModalFrame>
@@ -417,12 +427,6 @@ export function DbDetailModalHost({
       .getState()
       .syncFromRoute(routeItem ? {kind: routeItem.kind, id: routeItem.item.id} : null)
   }, [routeItem])
-
-  useEffect(() => {
-    if (!routeItem && stackTop && !(stackTop.kind in dbDetailRegistry)) {
-      dbDetailStore.getState().popDetail()
-    }
-  }, [routeItem, stackTop])
 
   if (!routeItem || activeRef?.kind !== routeItem.kind) {
     if (!routeItem && activeRef) {
@@ -480,21 +484,25 @@ function DbDetailOverlayModal({
   wheels,
 }: DbDetailOverlayModalProps) {
   const activeRefKey = `${activeRef.kind}:${activeRef.id}`
-  const [overlayAwakenerTabState, setOverlayAwakenerTabState] = useState<{
-    activeTab: DatabaseAwakenerTab
-    refKey: string
-  }>(() => ({activeTab: DEFAULT_DATABASE_AWAKENER_TAB, refKey: activeRefKey}))
-  const overlayAwakenerTab =
-    overlayAwakenerTabState.refKey === activeRefKey
-      ? overlayAwakenerTabState.activeTab
-      : DEFAULT_DATABASE_AWAKENER_TAB
+  const [overlayAwakenerTabState, setOverlayAwakenerTabState] = useState<OverlayAwakenerTabState>(
+    () => ({
+      activeTab: DEFAULT_DATABASE_AWAKENER_TAB,
+      refKey: activeRefKey,
+    }),
+  )
+  // Overlay refs can outlive the current public catalog; stale refs are pruned below.
+  // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
+  const overlayAwakenerTab = resolveOverlayAwakenerTab(activeRefKey, overlayAwakenerTabState)
   const detailRefLookup = useMemo(
+    // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
     () => buildDetailRefLookup(awakeners, wheels),
     [awakeners, wheels],
   )
+  // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
   const routeItem = resolveOverlayRouteItem(activeRef, detailRefLookup, overlayAwakenerTab)
 
   useEffect(() => {
+    // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
     if (!routeItem) {
       dbDetailStore.getState().popDetail()
     }
@@ -617,13 +625,14 @@ function DbDetailOverlayModalContent<Kind extends DatabaseDetailKind>({
   routeItem,
   wheels,
 }: DbDetailOverlayModalContentProps<Kind>) {
+  // Public detail records can disappear between overlay open and async load completion.
+  // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
   const registryEntry = dbDetailRegistry[kind]
-  const {isLoading, record} = useDatabaseDetailRecord({
-    id,
-    loadRecord: registryEntry.loadRecord,
-  })
+  // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
+  const {isLoading, record} = useDatabaseDetailRecord({id, loadRecord: registryEntry.loadRecord})
 
   useEffect(() => {
+    // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
     if (!isLoading && !record) {
       dbDetailStore.getState().popDetail()
     }

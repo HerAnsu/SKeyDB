@@ -2,12 +2,22 @@ import {createStore} from 'zustand/vanilla'
 
 import type {EntityRef} from '@/domain/entities/types'
 
+const DB_DETAIL_ENTITY_KINDS = ['awakener', 'covenant', 'posse', 'wheel'] as const
+
+export type DbDetailEntityKind = (typeof DB_DETAIL_ENTITY_KINDS)[number]
+export type DbDetailEntityRef = EntityRef & {kind: DbDetailEntityKind}
 export type DbDetailRouteSource = 'database-route'
 export type DbDetailOverlaySource = 'builder-overlay' | 'collection-overlay' | 'timeline-overlay'
 export type DbDetailReferenceSource = 'reference'
 export type DbDetailSource = DbDetailRouteSource | DbDetailOverlaySource | DbDetailReferenceSource
 
-export interface DbDetailStackEntry extends EntityRef {
+const dbDetailEntityKindSet = new Set<EntityRef['kind']>(DB_DETAIL_ENTITY_KINDS)
+
+export function isDbDetailEntityRef(ref: EntityRef): ref is DbDetailEntityRef {
+  return dbDetailEntityKindSet.has(ref.kind)
+}
+
+export interface DbDetailStackEntry extends DbDetailEntityRef {
   source: DbDetailSource
 }
 
@@ -21,8 +31,8 @@ export interface DbDetailState {
   syncFromRoute: (ref: EntityRef | null) => void
 }
 
-function routeEntry(ref: EntityRef): DbDetailStackEntry {
-  return {...ref, source: 'database-route'}
+function stackEntry(ref: EntityRef, source: DbDetailSource): DbDetailStackEntry | null {
+  return isDbDetailEntityRef(ref) ? {...ref, source} : null
 }
 
 function withoutRouteEntries(stack: DbDetailStackEntry[]): DbDetailStackEntry[] {
@@ -33,18 +43,30 @@ export function createDbDetailStore() {
   return createStore<DbDetailState>()((set) => ({
     stack: [],
     openDetail: (ref, source) => {
+      const entry = stackEntry(ref, source)
+      if (!entry) {
+        return
+      }
       set((state) => ({
-        stack: [...state.stack, {...ref, source}],
+        stack: [...state.stack, entry],
       }))
     },
     replaceRouteDetail: (ref) => {
+      const entry = stackEntry(ref, 'database-route')
+      if (!entry) {
+        return
+      }
       set((state) => ({
-        stack: [routeEntry(ref), ...withoutRouteEntries(state.stack)],
+        stack: [entry, ...withoutRouteEntries(state.stack)],
       }))
     },
     pushReferenceDetail: (ref) => {
+      const entry = stackEntry(ref, 'reference')
+      if (!entry) {
+        return
+      }
       set((state) => ({
-        stack: [...state.stack, {...ref, source: 'reference'}],
+        stack: [...state.stack, entry],
       }))
     },
     popDetail: () => {
@@ -56,9 +78,10 @@ export function createDbDetailStore() {
       set({stack: []})
     },
     syncFromRoute: (ref) => {
+      const entry = ref ? stackEntry(ref, 'database-route') : null
       set((state) => ({
-        stack: ref
-          ? [routeEntry(ref), ...withoutRouteEntries(state.stack)]
+        stack: entry
+          ? [entry, ...withoutRouteEntries(state.stack)]
           : withoutRouteEntries(state.stack),
       }))
     },

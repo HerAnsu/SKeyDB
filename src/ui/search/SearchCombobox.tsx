@@ -126,6 +126,8 @@ export function SearchCombobox<TResult>({
           onKeyDown={onInputKeyDown}
           placeholder={placeholder}
           ref={inputRef}
+          /* APG editable combobox keeps DOM focus on the text input. */
+          /* react-doctor-disable-next-line no-redundant-roles, react-doctor/no-redundant-roles */
           role='combobox'
           spellCheck={false}
           type='text'
@@ -134,7 +136,13 @@ export function SearchCombobox<TResult>({
       </div>
       {isExpanded ? (
         <div className='absolute top-[calc(100%+0.35rem)] right-0 left-0 z-[905] border border-amber-200/35 bg-slate-950/[.985] shadow-[0_16px_36px_rgba(2,6,23,0.62)]'>
-          <div className='ui-scrollbar max-h-72 overflow-y-auto py-1' id={resultsId} role='listbox'>
+          <div
+            className='ui-scrollbar max-h-72 overflow-y-auto py-1'
+            id={resultsId}
+            /* Custom rich options need ARIA listbox behavior that datalist cannot provide. */
+            /* react-doctor-disable-next-line prefer-tag-over-role, react-doctor/prefer-tag-over-role */
+            role='listbox'
+          >
             {results.map((result, index) => {
               const active = index === clampedActiveIndex
               const optionId = `${searchId}-option-${String(getResultId(result))}`

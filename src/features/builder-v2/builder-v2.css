@@ -4939,8 +4939,24 @@
   inset: 4rem 0 0;
   display: grid;
   align-items: end;
+  width: auto;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
   background: oklch(0% 0 0 / 0.42);
+  color: inherit;
   animation: builder-v2-backdrop-fade 170ms var(--ui-motion-ease) both;
+}
+
+.builder-v2-mobile-picker-backdrop:not([open]) {
+  display: none;
+}
+
+.builder-v2-mobile-picker-backdrop::backdrop {
+  background: transparent;
 }
 
 .builder-v2-mobile-picker {

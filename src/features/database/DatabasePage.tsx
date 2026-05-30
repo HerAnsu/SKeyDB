@@ -103,6 +103,8 @@ function useDetailRouteCorrection({
   slug,
 }: DetailRouteCorrectionParams) {
   useEffect(() => {
+    // React Router owns URL state; this reconciles invalid deep links after route data resolves.
+    // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
     if (slug && !hasSelectedDetail) {
       void navigate(
         {
