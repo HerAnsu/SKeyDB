@@ -1,4 +1,4 @@
-import {Suspense, useState} from 'react'
+import {Suspense, useMemo, useState} from 'react'
 
 import {FaGear, FaXmark} from 'react-icons/fa6'
 
@@ -96,11 +96,27 @@ function WheelDetailModalInner({
   } = chrome
   const wheelAsset = getWheelAssetById(wheel.id)
   const fullArtAlt = `${wheel.name} full art`
+  const mobileArtwork = useMemo(
+    () => (
+      <WheelDetailArtwork
+        onOpenFullArt={
+          wheelAsset
+            ? () => {
+                setIsArtViewerOpen(true)
+              }
+            : undefined
+        }
+        variant='compact'
+        wheel={wheel}
+      />
+    ),
+    [wheel, wheelAsset],
+  )
 
   return (
     <DbDetailModalFrame
       ariaLabel={`${wheel.name} details`}
-      beforeBody={
+      header={
         <>
           <div className='shrink-0'>
             <WheelDetailSearchBar
@@ -183,19 +199,7 @@ function WheelDetailModalInner({
                   fullData={fullData}
                   formulaContext={formulaContext}
                   mainstatValue={resolvedMainstatValue}
-                  mobileArtwork={
-                    <WheelDetailArtwork
-                      onOpenFullArt={
-                        wheelAsset
-                          ? () => {
-                              setIsArtViewerOpen(true)
-                            }
-                          : undefined
-                      }
-                      variant='compact'
-                      wheel={wheel}
-                    />
-                  }
+                  mobileArtwork={mobileArtwork}
                   onEnhanceLevelChange={setEnhanceLevel}
                   onSelectAwakener={onSelectAwakener}
                   referenceLayer={referenceLayer}

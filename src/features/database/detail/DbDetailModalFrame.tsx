@@ -6,8 +6,8 @@ type DbDetailModalMaxWidth = 'standard' | 'wide'
 
 interface DbDetailModalFrameProps {
   ariaLabel: string
-  beforeBody?: ReactNode
   children: ReactNode
+  header?: ReactNode
   maxWidth?: DbDetailModalMaxWidth
   onOverlayClick?: MouseEventHandler<HTMLDivElement>
   onPanelKeyDown?: KeyboardEventHandler<HTMLDivElement>
@@ -27,8 +27,8 @@ function getDetailPortalRoot(): Element {
 
 export function DbDetailModalFrame({
   ariaLabel,
-  beforeBody = null,
   children,
+  header = null,
   maxWidth = 'wide',
   onOverlayClick,
   onPanelKeyDown,
@@ -52,7 +52,7 @@ export function DbDetailModalFrame({
         style={shellStyle}
         onKeyDown={onPanelKeyDown}
       >
-        {beforeBody}
+        {header}
         {children}
       </div>
     </div>,

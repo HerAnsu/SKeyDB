@@ -1,4 +1,4 @@
-import {useEffect, useEffectEvent, useRef, useState} from 'react'
+import {useCallback, useEffect, useEffectEvent, useRef, useState} from 'react'
 
 import {CollectionLevelStepButton} from './CollectionLevelStepButton'
 
@@ -20,10 +20,6 @@ function parseNumericLevel(rawValue: string): number | null {
   return Number.parseInt(rawValue, 10)
 }
 
-function noopCommitOutsideClick(_event: MouseEvent | PointerEvent) {
-  return undefined
-}
-
 export function AwakenerLevelControl({
   name,
   level,
@@ -39,27 +35,25 @@ export function AwakenerLevelControl({
   const draftLevelRef = useRef('')
   const isDraftDirtyRef = useRef(false)
   const levelRef = useRef(level)
-  const onLevelChangeEvent = useEffectEvent(onLevelChange)
-  const onCommitOutsideClickEvent = useEffectEvent(onCommitOutsideClick ?? noopCommitOutsideClick)
-
-  useEffect(() => {
-    if (isEditing) {
-      inputRef.current?.focus()
-      inputRef.current?.select()
+  const commitOutsidePointerLikeDown = useEffectEvent((event: MouseEvent | PointerEvent) => {
+    // Outside click commits current draft. Ownership-hitbox suppression is handled
+    // by the parent card, scoped to this awakener only.
+    const rawDraft = isDraftDirtyRef.current ? draftLevelRef.current : String(levelRef.current)
+    const parsed = parseNumericLevel(rawDraft)
+    if (parsed !== null) {
+      onLevelChange(parsed)
     }
-  }, [isEditing])
+    setIsEditing(false)
+    onCommitOutsideClick?.(event)
+  })
 
-  useEffect(() => {
-    draftLevelRef.current = draftLevel
-  }, [draftLevel])
-
-  useEffect(() => {
-    isDraftDirtyRef.current = isDraftDirty
-  }, [isDraftDirty])
-
-  useEffect(() => {
-    levelRef.current = level
-  }, [level])
+  const setInputRef = useCallback((element: HTMLInputElement | null) => {
+    inputRef.current = element
+    if (element) {
+      element.focus()
+      element.select()
+    }
+  }, [])
 
   useEffect(() => {
     if (!isEditing) {
@@ -82,15 +76,7 @@ export function AwakenerLevelControl({
         return
       }
 
-      // Outside click commits current draft. Ownership-hitbox suppression is handled
-      // by the parent card, scoped to this awakener only.
-      const rawDraft = isDraftDirtyRef.current ? draftLevelRef.current : String(levelRef.current)
-      const parsed = parseNumericLevel(rawDraft)
-      if (parsed !== null) {
-        onLevelChangeEvent(parsed)
-      }
-      setIsEditing(false)
-      onCommitOutsideClickEvent(event)
+      commitOutsidePointerLikeDown(event)
     }
 
     document.addEventListener('pointerdown', handleOutsidePointerLikeDown, true)
@@ -102,21 +88,24 @@ export function AwakenerLevelControl({
   }, [isEditing])
 
   function commitDraft() {
-    const rawDraft = isDraftDirty ? draftLevel : String(level)
+    const rawDraft = isDraftDirtyRef.current ? draftLevelRef.current : String(levelRef.current)
     const parsed = parseNumericLevel(rawDraft)
     if (parsed !== null) {
       onLevelChange(parsed)
     }
     setIsEditing(false)
+    isDraftDirtyRef.current = false
     setIsDraftDirty(false)
   }
 
   function handleStep(delta: -1 | 1) {
-    const parsedDraft = parseNumericLevel(draftLevelRef.current)
+    const parsedDraft = parseNumericLevel(isDraftDirtyRef.current ? draftLevelRef.current : '')
     const baseLevel = parsedDraft ?? levelRef.current
     const nextLevel = Math.min(90, Math.max(1, baseLevel + delta))
     const nextText = String(nextLevel)
     draftLevelRef.current = nextText
+    isDraftDirtyRef.current = true
+    levelRef.current = nextLevel
     setDraftLevel(nextText)
     setIsDraftDirty(true)
     onLevelChange(nextLevel)
@@ -129,7 +118,11 @@ export function AwakenerLevelControl({
         className='collection-awakener-level-trigger'
         disabled={disabled}
         onClick={() => {
-          setDraftLevel(String(level))
+          const nextDraftLevel = String(level)
+          draftLevelRef.current = nextDraftLevel
+          isDraftDirtyRef.current = false
+          levelRef.current = level
+          setDraftLevel(nextDraftLevel)
           setIsDraftDirty(false)
           setIsEditing(true)
         }}
@@ -150,7 +143,10 @@ export function AwakenerLevelControl({
           className='collection-awakener-level-input'
           inputMode='numeric'
           onChange={(event) => {
-            setDraftLevel(event.target.value.replace(/[^\d]/g, ''))
+            const nextDraftLevel = event.target.value.replace(/[^\d]/g, '')
+            draftLevelRef.current = nextDraftLevel
+            isDraftDirtyRef.current = true
+            setDraftLevel(nextDraftLevel)
             setIsDraftDirty(true)
           }}
           onKeyDown={(event) => {
@@ -159,9 +155,10 @@ export function AwakenerLevelControl({
             }
             if (event.key === 'Escape') {
               setIsEditing(false)
+              isDraftDirtyRef.current = false
             }
           }}
-          ref={inputRef}
+          ref={setInputRef}
           type='text'
           value={isDraftDirty ? draftLevel : String(level)}
         />

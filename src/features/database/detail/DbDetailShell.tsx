@@ -96,7 +96,7 @@ export function DbDetailShell({
   return (
     <DbDetailModalFrame
       ariaLabel={`${itemName} details`}
-      beforeBody={<DatabaseDetailResultNavigator navigation={navigation} />}
+      header={<DatabaseDetailResultNavigator navigation={navigation} />}
       maxWidth='standard'
       onOverlayClick={handleOverlayClick}
       onPanelKeyDown={handlePanelKeyDown}

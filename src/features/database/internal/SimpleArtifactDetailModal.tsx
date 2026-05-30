@@ -106,6 +106,13 @@ function SimpleArtifactDetailModalInner({
   const fullArtAlt = `${item.name} full art`
   const preReleaseOwnerAwakenerId =
     kind === 'posse' ? (fullData.ownerAwakenerId ?? item.ownerAwakenerId) : undefined
+  const meta = useMemo(
+    () =>
+      kind === 'posse' ? (
+        <PosseMeta fullData={fullData} onSelectAwakener={onSelectAwakener} posse={item} />
+      ) : null,
+    [fullData, item, kind, onSelectAwakener],
+  )
 
   return (
     <DbDetailShell
@@ -129,11 +136,7 @@ function SimpleArtifactDetailModalInner({
           headerIconClassName={`object-contain ${kind === 'covenant' ? 'scale-150' : ''}`}
           itemName={item.name}
           lore={fullData.lore}
-          meta={
-            kind === 'posse' ? (
-              <PosseMeta fullData={fullData} onSelectAwakener={onSelectAwakener} posse={item} />
-            ) : null
-          }
+          meta={meta}
           onOpenArtViewer={openArtViewer}
           ownerAwakenerId={preReleaseOwnerAwakenerId}
           referenceLayer={referenceLayer}

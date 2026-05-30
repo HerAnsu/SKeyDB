@@ -1,4 +1,4 @@
-import {useEffect, useRef, type MouseEvent} from 'react'
+import {useCallback, type MouseEvent} from 'react'
 
 interface TeamNameInlineEditorProps {
   teamName: string
@@ -28,13 +28,11 @@ export function TeamNameInlineEditor({
   onCancel,
 }: TeamNameInlineEditorProps) {
   const isHeader = variant === 'header'
-  const inputRef = useRef<HTMLInputElement | null>(null)
-
-  useEffect(() => {
-    if (isEditing) {
-      inputRef.current?.focus()
+  const focusInputOnMount = useCallback((element: HTMLInputElement | null) => {
+    if (element) {
+      element.focus()
     }
-  }, [isEditing])
+  }, [])
 
   if (!isEditing) {
     return (
@@ -89,7 +87,7 @@ export function TeamNameInlineEditor({
           onCancel()
         }
       }}
-      ref={inputRef}
+      ref={focusInputOnMount}
       type='text'
       value={draftName}
     />

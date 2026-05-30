@@ -339,7 +339,7 @@ function DbDetailRouteLoadingModal({
   return (
     <DbDetailModalFrame
       ariaLabel={`${itemName} details`}
-      beforeBody={
+      header={
         <>
           {searchPlaceholderLabel ? (
             <div

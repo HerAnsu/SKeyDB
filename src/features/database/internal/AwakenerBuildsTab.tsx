@@ -80,27 +80,14 @@ function RecommendationTile({
   onClick?: MouseEventHandler<HTMLButtonElement>
 }) {
   const tile = (
-    <CompactArtTile
-      chips={<span className='builder-picker-recommendation-chip text-amber-100/95'>{chip}</span>}
-      containerClassName={tileClassName}
-      name={label}
-      nameClassName='compact-art-tile-name-multiline mt-1.5 text-slate-200'
-      preview={
-        asset ? (
-          <img
-            alt={altText}
-            className={`h-full w-full object-cover ${imageClassName}`.trim()}
-            decoding='async'
-            draggable={false}
-            fetchPriority='low'
-            loading='lazy'
-            src={asset}
-          />
-        ) : (
-          <div className='h-full w-full bg-[radial-gradient(circle_at_50%_30%,rgba(148,163,184,0.18),rgba(2,8,23,0.94)_72%)]' />
-        )
-      }
-      previewClassName={`${aspectClassName} border border-slate-600/35 bg-slate-900/75`}
+    <RecommendationTileArt
+      altText={altText}
+      aspectClassName={aspectClassName}
+      asset={asset}
+      chip={chip}
+      imageClassName={imageClassName}
+      label={label}
+      tileClassName={tileClassName}
     />
   )
 
@@ -117,6 +104,58 @@ function RecommendationTile({
       {tile}
     </button>
   )
+}
+
+function RecommendationTileArt({
+  asset,
+  altText,
+  aspectClassName,
+  chip,
+  imageClassName,
+  label,
+  tileClassName,
+}: {
+  asset?: string
+  altText: string
+  aspectClassName: string
+  chip: string
+  imageClassName: string
+  label: string
+  tileClassName: string
+}) {
+  const chips = useMemo(
+    () => <span className='builder-picker-recommendation-chip text-amber-100/95'>{chip}</span>,
+    [chip],
+  )
+  const preview = useMemo(
+    () =>
+      asset ? (
+        <img
+          alt={altText}
+          className={`h-full w-full object-cover ${imageClassName}`.trim()}
+          decoding='async'
+          draggable={false}
+          fetchPriority='low'
+          loading='lazy'
+          src={asset}
+        />
+      ) : (
+        <div className='h-full w-full bg-[radial-gradient(circle_at_50%_30%,rgba(148,163,184,0.18),rgba(2,8,23,0.94)_72%)]' />
+      ),
+    [altText, asset, imageClassName],
+  )
+  const tile = (
+    <CompactArtTile
+      chips={chips}
+      containerClassName={tileClassName}
+      name={label}
+      nameClassName='compact-art-tile-name-multiline mt-1.5 text-slate-200'
+      preview={preview}
+      previewClassName={`${aspectClassName} border border-slate-600/35 bg-slate-900/75`}
+    />
+  )
+
+  return tile
 }
 
 function SubstatPriorityInline({build}: {build: AwakenerBuild}) {

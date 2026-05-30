@@ -188,7 +188,7 @@ export function AwakenerDetailModal({
   return (
     <DbDetailModalFrame
       ariaLabel={`${displayName} details`}
-      beforeBody={
+      header={
         <>
           <div className='shrink-0'>
             <AwakenerDetailSearchBar

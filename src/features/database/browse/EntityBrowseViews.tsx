@@ -147,52 +147,94 @@ export function AwakenersBrowse({
 
   useActiveGlobalSearchCapture(controller, browseState)
 
-  const filters = (
-    <DatabaseFilters
-      onQueryChange={browseState.setQuery}
-      onAvailabilityFilterChange={browseState.setAvailabilityFilter}
-      onRarityFilterChange={browseState.setRarityFilter}
-      onRealmFilterChange={browseState.setRealmFilter}
-      onTypeFilterChange={browseState.setTypeFilter}
-      onGameplayFactionFilterToggle={browseState.toggleGameplayFactionFilter}
-      onScalingSubstatFilterRemove={browseState.removeScalingSubstatFilter}
-      onScalingSubstatFilterRoleChange={browseState.setScalingSubstatFilterRole}
-      onScalingSubstatFilterToggle={browseState.toggleScalingSubstatFilter}
-      query={browseState.query}
-      availabilityFilter={browseState.availabilityFilter}
-      gameplayFactionFilters={browseState.gameplayFactionFilters}
-      rarityFilter={browseState.rarityFilter}
-      realmFilter={browseState.realmFilter}
-      scalingSubstatFilters={browseState.scalingSubstatFilters}
-      searchInputRef={controller.searchInputRef}
-      typeFilter={browseState.typeFilter}
-    />
+  const filters = useMemo(
+    () => (
+      <DatabaseFilters
+        onQueryChange={browseState.setQuery}
+        onAvailabilityFilterChange={browseState.setAvailabilityFilter}
+        onRarityFilterChange={browseState.setRarityFilter}
+        onRealmFilterChange={browseState.setRealmFilter}
+        onTypeFilterChange={browseState.setTypeFilter}
+        onGameplayFactionFilterToggle={browseState.toggleGameplayFactionFilter}
+        onScalingSubstatFilterRemove={browseState.removeScalingSubstatFilter}
+        onScalingSubstatFilterRoleChange={browseState.setScalingSubstatFilterRole}
+        onScalingSubstatFilterToggle={browseState.toggleScalingSubstatFilter}
+        query={browseState.query}
+        availabilityFilter={browseState.availabilityFilter}
+        gameplayFactionFilters={browseState.gameplayFactionFilters}
+        rarityFilter={browseState.rarityFilter}
+        realmFilter={browseState.realmFilter}
+        scalingSubstatFilters={browseState.scalingSubstatFilters}
+        searchInputRef={controller.searchInputRef}
+        typeFilter={browseState.typeFilter}
+      />
+    ),
+    [
+      browseState.availabilityFilter,
+      browseState.gameplayFactionFilters,
+      browseState.query,
+      browseState.rarityFilter,
+      browseState.realmFilter,
+      browseState.removeScalingSubstatFilter,
+      browseState.scalingSubstatFilters,
+      browseState.setAvailabilityFilter,
+      browseState.setQuery,
+      browseState.setRarityFilter,
+      browseState.setRealmFilter,
+      browseState.setScalingSubstatFilterRole,
+      browseState.setTypeFilter,
+      browseState.toggleGameplayFactionFilter,
+      browseState.toggleScalingSubstatFilter,
+      browseState.typeFilter,
+      controller.searchInputRef,
+    ],
   )
-  const results = (
-    <DatabaseGrid
-      availabilityFilter={browseState.availabilityFilter}
-      awakeners={viewModel.awakeners}
-      onPreloadAwakener={controller.preloadAwakenerDetail}
-      onSelectAwakener={controller.openAwakenerDetail}
-      rarityFilter={browseState.rarityFilter}
-      scalingSubstatFilters={browseState.scalingSubstatFilters}
-      sortKey={browseState.sortKey}
-    />
+  const results = useMemo(
+    () => (
+      <DatabaseGrid
+        availabilityFilter={browseState.availabilityFilter}
+        awakeners={viewModel.awakeners}
+        onPreloadAwakener={controller.preloadAwakenerDetail}
+        onSelectAwakener={controller.openAwakenerDetail}
+        rarityFilter={browseState.rarityFilter}
+        scalingSubstatFilters={browseState.scalingSubstatFilters}
+        sortKey={browseState.sortKey}
+      />
+    ),
+    [
+      browseState.availabilityFilter,
+      browseState.rarityFilter,
+      browseState.scalingSubstatFilters,
+      browseState.sortKey,
+      controller.openAwakenerDetail,
+      controller.preloadAwakenerDetail,
+      viewModel.awakeners,
+    ],
   )
-  const viewControls = (
-    <EntityViewControls
-      getSortDirectionLabel={getDatabaseSortDirectionLabel}
-      getSortLabel={getDatabaseSortLabel}
-      groupByRealm={browseState.groupByRealm}
-      onGroupByRealmChange={browseState.setGroupByRealm}
-      onSortDirectionToggle={browseState.toggleSortDirection}
-      onSortKeyChange={browseState.setSortKey}
-      sortDirection={browseState.sortDirection}
-      sortDirectionAriaLabel='Toggle database sort direction'
-      sortKey={browseState.sortKey}
-      sortOptions={DATABASE_SORT_OPTIONS}
-      sortSelectAriaLabel='Database sort key'
-    />
+  const viewControls = useMemo(
+    () => (
+      <EntityViewControls
+        getSortDirectionLabel={getDatabaseSortDirectionLabel}
+        getSortLabel={getDatabaseSortLabel}
+        groupByRealm={browseState.groupByRealm}
+        onGroupByRealmChange={browseState.setGroupByRealm}
+        onSortDirectionToggle={browseState.toggleSortDirection}
+        onSortKeyChange={browseState.setSortKey}
+        sortDirection={browseState.sortDirection}
+        sortDirectionAriaLabel='Toggle database sort direction'
+        sortKey={browseState.sortKey}
+        sortOptions={DATABASE_SORT_OPTIONS}
+        sortSelectAriaLabel='Database sort key'
+      />
+    ),
+    [
+      browseState.groupByRealm,
+      browseState.setGroupByRealm,
+      browseState.setSortKey,
+      browseState.sortDirection,
+      browseState.sortKey,
+      browseState.toggleSortDirection,
+    ],
   )
 
   return (
@@ -239,38 +281,62 @@ export function WheelsBrowse({
 
   useActiveGlobalSearchCapture(controller, browseState)
 
-  const filters = (
-    <WheelDatabaseFilters
-      mainstatFilter={browseState.mainstatFilter}
-      onMainstatFilterChange={browseState.setMainstatFilter}
-      onQueryChange={browseState.setQuery}
-      onRarityFilterChange={browseState.setRarityFilter}
-      onRealmFilterChange={browseState.setRealmFilter}
-      query={browseState.query}
-      rarityFilter={browseState.rarityFilter}
-      realmFilter={browseState.realmFilter}
-      searchInputRef={controller.searchInputRef}
-    />
+  const filters = useMemo(
+    () => (
+      <WheelDatabaseFilters
+        mainstatFilter={browseState.mainstatFilter}
+        onMainstatFilterChange={browseState.setMainstatFilter}
+        onQueryChange={browseState.setQuery}
+        onRarityFilterChange={browseState.setRarityFilter}
+        onRealmFilterChange={browseState.setRealmFilter}
+        query={browseState.query}
+        rarityFilter={browseState.rarityFilter}
+        realmFilter={browseState.realmFilter}
+        searchInputRef={controller.searchInputRef}
+      />
+    ),
+    [
+      browseState.mainstatFilter,
+      browseState.query,
+      browseState.rarityFilter,
+      browseState.realmFilter,
+      browseState.setMainstatFilter,
+      browseState.setQuery,
+      browseState.setRarityFilter,
+      browseState.setRealmFilter,
+      controller.searchInputRef,
+    ],
   )
-  const results = (
-    <WheelGrid
-      onPreloadWheel={controller.preloadWheelDetail}
-      onSelectWheel={controller.openWheelDetail}
-      wheels={viewModel.wheels}
-    />
+  const results = useMemo(
+    () => (
+      <WheelGrid
+        onPreloadWheel={controller.preloadWheelDetail}
+        onSelectWheel={controller.openWheelDetail}
+        wheels={viewModel.wheels}
+      />
+    ),
+    [controller.openWheelDetail, controller.preloadWheelDetail, viewModel.wheels],
   )
-  const viewControls = (
-    <EntityViewControls
-      getSortDirectionLabel={getWheelSortDirectionLabel}
-      getSortLabel={getWheelSortLabel}
-      onSortDirectionToggle={browseState.toggleSortDirection}
-      onSortKeyChange={browseState.setSortKey}
-      sortDirection={browseState.sortDirection}
-      sortDirectionAriaLabel='Toggle wheel sort direction'
-      sortKey={browseState.sortKey}
-      sortOptions={WHEELS_DATABASE_SORT_OPTIONS}
-      sortSelectAriaLabel='Wheel database sort key'
-    />
+  const viewControls = useMemo(
+    () => (
+      <EntityViewControls
+        getSortDirectionLabel={getWheelSortDirectionLabel}
+        getSortLabel={getWheelSortLabel}
+        onSortDirectionToggle={browseState.toggleSortDirection}
+        onSortKeyChange={browseState.setSortKey}
+        sortDirection={browseState.sortDirection}
+        sortDirectionAriaLabel='Toggle wheel sort direction'
+        sortKey={browseState.sortKey}
+        sortOptions={WHEELS_DATABASE_SORT_OPTIONS}
+        sortSelectAriaLabel='Wheel database sort key'
+      />
+    ),
+    [
+      browseState.setSortKey,
+      browseState.sortDirection,
+      browseState.sortKey,
+      browseState.toggleSortDirection,
+    ],
   )
 
   return (
@@ -317,21 +383,33 @@ export function PossesBrowse({
 
   useActiveGlobalSearchCapture(controller, browseState)
 
-  const filters = (
-    <PosseDatabaseFilters
-      onQueryChange={browseState.setQuery}
-      onRealmFilterChange={browseState.setRealmFilter}
-      query={browseState.query}
-      realmFilter={browseState.realmFilter}
-      searchInputRef={controller.searchInputRef}
-    />
+  const filters = useMemo(
+    () => (
+      <PosseDatabaseFilters
+        onQueryChange={browseState.setQuery}
+        onRealmFilterChange={browseState.setRealmFilter}
+        query={browseState.query}
+        realmFilter={browseState.realmFilter}
+        searchInputRef={controller.searchInputRef}
+      />
+    ),
+    [
+      browseState.query,
+      browseState.realmFilter,
+      browseState.setQuery,
+      browseState.setRealmFilter,
+      controller.searchInputRef,
+    ],
   )
-  const results = (
-    <PosseGrid
-      onPreloadPosse={controller.preloadPosseDetail}
-      onSelectPosse={controller.openPosseDetail}
-      posses={records}
-    />
+  const results = useMemo(
+    () => (
+      <PosseGrid
+        onPreloadPosse={controller.preloadPosseDetail}
+        onSelectPosse={controller.openPosseDetail}
+        posses={records}
+      />
+    ),
+    [controller.openPosseDetail, controller.preloadPosseDetail, records],
   )
 
   return (
@@ -374,19 +452,25 @@ export function CovenantsBrowse({
 
   useActiveGlobalSearchCapture(controller, browseState)
 
-  const filters = (
-    <CovenantDatabaseFilters
-      onQueryChange={browseState.setQuery}
-      query={browseState.query}
-      searchInputRef={controller.searchInputRef}
-    />
+  const filters = useMemo(
+    () => (
+      <CovenantDatabaseFilters
+        onQueryChange={browseState.setQuery}
+        query={browseState.query}
+        searchInputRef={controller.searchInputRef}
+      />
+    ),
+    [browseState.query, browseState.setQuery, controller.searchInputRef],
   )
-  const results = (
-    <CovenantGrid
-      covenants={records}
-      onPreloadCovenant={controller.preloadCovenantDetail}
-      onSelectCovenant={controller.openCovenantDetail}
-    />
+  const results = useMemo(
+    () => (
+      <CovenantGrid
+        covenants={records}
+        onPreloadCovenant={controller.preloadCovenantDetail}
+        onSelectCovenant={controller.openCovenantDetail}
+      />
+    ),
+    [controller.openCovenantDetail, controller.preloadCovenantDetail, records],
   )
 
   return (
