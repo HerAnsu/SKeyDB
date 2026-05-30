@@ -121,7 +121,21 @@ function appendLoreTextNode(
   partIndex: number,
   wrapText: boolean,
 ) {
-  nodes.push(wrapText ? <span key={buildLoreKey(keyPrefix, 'text', partIndex)}>{text}</span> : text)
+  text.split('\n').forEach((line, lineIndex, lines) => {
+    if (line.length > 0) {
+      nodes.push(
+        wrapText ? (
+          <span key={buildLoreKey(keyPrefix, 'text', partIndex, lineIndex)}>{line}</span>
+        ) : (
+          line
+        ),
+      )
+    }
+
+    if (lineIndex < lines.length - 1) {
+      nodes.push(<br key={buildLoreKey(keyPrefix, 'break', partIndex, lineIndex)} />)
+    }
+  })
 }
 
 function renderDatabaseLoreInlineText(
@@ -191,13 +205,7 @@ function renderDatabaseLoreInlineText(
 }
 
 function renderDatabaseLoreTextWithBreaks(text: string, keyPrefix: string): ReactNode[] {
-  return text.split('\n').flatMap((line, lineIndex) => {
-    const lineNodes = renderDatabaseLoreInlineText(line, buildLoreKey(keyPrefix, 'line', lineIndex))
-    if (lineIndex === 0) {
-      return lineNodes
-    }
-    return [<br key={buildLoreKey(keyPrefix, 'break', lineIndex)} />, ...lineNodes]
-  })
+  return renderDatabaseLoreInlineText(text, keyPrefix)
 }
 
 export function DatabaseLoreMarkupText({

@@ -1768,6 +1768,11 @@
         "value": "awakener-0056",
         "label": "Arachne",
         "order": 55
+      },
+      {
+        "value": "awakener-0057",
+        "label": "Saya",
+        "order": 56
       }
     ]
   },

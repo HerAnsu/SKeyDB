@@ -477,11 +477,9 @@ describe('WheelDetailModal', () => {
 
     expect(screen.getByText(/Pain, intense pain filled her every sense\./)).toBeInTheDocument()
     expect(screen.getByText(/Still she kept diving\./)).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        (_, element) => element?.textContent === 'In her first year as an Awakener.',
-      ),
-    ).toBeInTheDocument()
+    expect(document.querySelector('[data-wheel-lore-content]')).toHaveTextContent(
+      'In her first year as an Awakener.',
+    )
     expect(screen.queryByText(/<Italic:/)).not.toBeInTheDocument()
     expect(screen.queryByText(/@3/)).not.toBeInTheDocument()
     expect(screen.getByLabelText('Redacted lore text')).toBeInTheDocument()

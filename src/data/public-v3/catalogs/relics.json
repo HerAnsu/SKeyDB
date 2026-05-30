@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "scope": "relics",
   "kind": "relic",
-  "recordCount": 167,
+  "recordCount": 168,
   "records": [
     {
       "kind": "relic",
@@ -954,6 +954,23 @@
       "rarity": "SSR",
       "ownerAwakenerId": "awakener-0056",
       "ownerAwakenerName": "Arachne",
+      "relicType": "DIMENSIONAL_IMAGE"
+    },
+    {
+      "kind": "relic",
+      "id": "relic-0057",
+      "name": "Dimensional Image: Saya",
+      "route": {
+        "slug": "dimensional-image-saya",
+        "canonicalPath": "/database/relics/dimensional-image-saya"
+      },
+      "assets": {
+        "icon": "asset-relic-0057-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya",
       "relicType": "DIMENSIONAL_IMAGE"
     },
     {

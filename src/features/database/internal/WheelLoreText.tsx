@@ -72,15 +72,10 @@ function trimLoreParagraphs(
 function renderLoreParagraphs(paragraphs: LoreParagraph[]) {
   return paragraphs.map((paragraph, paragraphIndex) => (
     <p key={buildLoreKey('wheel-lore-paragraph', paragraphIndex)}>
-      {paragraph.lines.map((line, lineIndex) => (
-        <span key={buildLoreKey('wheel-lore-line', paragraphIndex, lineIndex)}>
-          {lineIndex > 0 ? <br /> : null}
-          <DatabaseLoreMarkupText
-            keyPrefix={buildLoreKey('wheel-lore', paragraphIndex, lineIndex)}
-            text={line}
-          />
-        </span>
-      ))}
+      <DatabaseLoreMarkupText
+        keyPrefix={buildLoreKey('wheel-lore', paragraphIndex)}
+        text={paragraph.lines.join('\n')}
+      />
     </p>
   ))
 }

@@ -1060,6 +1060,24 @@
     },
     {
       "kind": "relic",
+      "id": "relic-0057",
+      "name": "Dimensional Image: Saya",
+      "aliases": [],
+      "tokens": ["caro", "dimensional", "dimensional image", "dimensional image saya", "image", "saya", "ssr"],
+      "fields": {
+        "name": ["Dimensional Image: Saya", "dimensional-image-saya"],
+        "owner": ["Saya"],
+        "facet": ["CARO", "SSR", "DIMENSIONAL_IMAGE", "Dimensional Image"]
+      },
+      "facets": {
+        "realm": "CARO",
+        "rarity": "SSR",
+        "relicType": "DIMENSIONAL_IMAGE",
+        "owner": "awakener-0057"
+      }
+    },
+    {
+      "kind": "relic",
       "id": "relic-9001",
       "name": "Preserved Butterfly+",
       "aliases": [],
