@@ -1,13 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useSyncExternalStore,
-  type KeyboardEvent as ReactKeyboardEvent,
-  type MouseEvent as ReactMouseEvent,
-  type RefObject,
-} from 'react'
+import {useCallback, useEffect, useRef, useState, useSyncExternalStore, type RefObject} from 'react'
 
 import {getFocusableElements} from './focus-scope'
 
@@ -20,6 +11,17 @@ interface UseDetailModalChromeOptions {
   closeAllPopovers: () => void
   clickOutsideClosesPopovers: boolean
   onClose: () => void
+}
+
+interface ModalKeyDownEvent {
+  currentTarget: EventTarget | null
+  key: string
+  preventDefault: () => void
+  shiftKey: boolean
+}
+
+interface ModalOverlayClickEvent {
+  target: EventTarget | null
 }
 
 export function useDetailModalChrome({
@@ -84,8 +86,12 @@ export function useDetailModalChrome({
   }, [isSettingsOpen])
 
   const handleOverlayClick = useCallback(
-    (event: ReactMouseEvent) => {
-      const target = event.target as HTMLElement
+    (event: ModalOverlayClickEvent) => {
+      if (!(event.target instanceof HTMLElement)) {
+        return
+      }
+
+      const target = event.target
       const clickedOutsideSearch = !searchContainerRef?.current?.contains(target)
       if (isSearchOpen && clickedOutsideSearch && closeSearch) {
         closeSearch(true)
@@ -127,8 +133,12 @@ export function useDetailModalChrome({
     ],
   )
 
-  const handlePanelKeyDown = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
+  const handlePanelKeyDown = useCallback((event: ModalKeyDownEvent) => {
     if (event.key !== 'Tab') {
+      return
+    }
+
+    if (!(event.currentTarget instanceof HTMLElement)) {
       return
     }
 

@@ -255,6 +255,14 @@ body,
   background: var(--database-detail-backdrop-solid);
 }
 
+.app-shell > dialog[data-detail-modal-overlay]::backdrop {
+  background: transparent;
+}
+
+dialog[data-modal-frame-dialog]::backdrop {
+  background: transparent;
+}
+
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .app-shell > [data-detail-modal-overlay] {
     background: var(--database-detail-backdrop);

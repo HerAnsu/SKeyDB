@@ -69,6 +69,7 @@ function WheelDetailModalInner({
     descriptionRank,
     enhanceLevel,
     formulaContext,
+    handleModalCancel,
     preferences,
     popoverContextValue,
     popoverRootProps,
@@ -141,6 +142,7 @@ function WheelDetailModalInner({
       }
       onOverlayClick={handleOverlayClick}
       onPanelKeyDown={handlePanelKeyDown}
+      onCancel={handleModalCancel}
       panelRef={panelRef}
       shellStyle={getDescriptionFontScaleStyle(preferences.shared.fontScale)}
     >

@@ -56,9 +56,7 @@ function clickTarget(
   target: HTMLElement,
 ) {
   act(() => {
-    chrome.handleOverlayClick({target} as unknown as Parameters<
-      typeof chrome.handleOverlayClick
-    >[0])
+    chrome.handleOverlayClick({target})
   })
 }
 

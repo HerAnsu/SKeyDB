@@ -91,7 +91,7 @@ export function useAwakenerDetailModalState({
   const {clearSearch, closeSearch, searchInputRef, searchQuery} = search
   const {isSettingsOpen, setIsSettingsOpen} = chrome
 
-  useDetailModalLifecycle({
+  const handleModalCancel = useDetailModalLifecycle({
     clearSearch,
     closeAllPopovers,
     closeSearch,
@@ -108,6 +108,7 @@ export function useAwakenerDetailModalState({
   return {
     activeSearchIndex: search.activeSearchIndex,
     activeTab,
+    handleModalCancel,
     fontScale: sessionPreferences.shared.fontScale,
     handleOverlayClick: chrome.handleOverlayClick,
     handlePanelKeyDown: chrome.handlePanelKeyDown,

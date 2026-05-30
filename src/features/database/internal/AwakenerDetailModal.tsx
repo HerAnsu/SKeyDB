@@ -89,6 +89,7 @@ export function AwakenerDetailModal({
   const {
     activeSearchIndex,
     activeTab,
+    handleModalCancel,
     handleOverlayClick,
     handlePanelKeyDown,
     handleSearchInputKeyDown,
@@ -213,6 +214,7 @@ export function AwakenerDetailModal({
       }
       onOverlayClick={handleOverlayClick}
       onPanelKeyDown={handlePanelKeyDown}
+      onCancel={handleModalCancel}
       panelRef={panelRef}
       shellStyle={getDescriptionFontScaleStyle(fontScale)}
     >

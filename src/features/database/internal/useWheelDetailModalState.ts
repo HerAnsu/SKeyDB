@@ -95,7 +95,7 @@ export function useWheelDetailModalState({
     [enhanceLevel, fullData.mainstatSeriesKey],
   )
 
-  useDetailModalLifecycle({
+  const handleModalCancel = useDetailModalLifecycle({
     clearSearch: search.clearSearch,
     closeAllPopovers,
     closeSearch: search.closeSearch,
@@ -113,6 +113,7 @@ export function useWheelDetailModalState({
     enhanceLevel,
     descriptionRank,
     formulaContext,
+    handleModalCancel,
     preferences,
     popoverContextValue: contextValue,
     popoverRootProps,

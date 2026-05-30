@@ -1,5 +1,7 @@
 import {useEffect, useRef} from 'react'
 
+import {useNativeModalDialog} from './useNativeModalDialog'
+
 interface ArtViewerOverlayProps {
   alt: string
   src: string
@@ -8,46 +10,36 @@ interface ArtViewerOverlayProps {
 }
 
 export function ArtViewerOverlay({alt, onClose, onMount, src}: ArtViewerOverlayProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
     return onMount?.()
   }, [onMount])
 
-  useEffect(() => {
-    const previousFocusedElement =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null
-
-    containerRef.current?.focus()
-
-    function handleEscape(event: KeyboardEvent) {
-      if (event.key !== 'Escape') {
-        return
-      }
-
+  useNativeModalDialog({
+    dialogRef,
+    initialFocusRef: dialogRef,
+    lockBodyScroll: true,
+    onCancel: (event) => {
       event.preventDefault()
       event.stopPropagation()
       onClose()
-    }
+    },
+    onClick: (event) => {
+      if (event.target !== event.currentTarget) {
+        return
+      }
 
-    window.addEventListener('keydown', handleEscape, true)
-    return () => {
-      window.removeEventListener('keydown', handleEscape, true)
-      previousFocusedElement?.focus()
-    }
-  }, [onClose])
+      event.stopPropagation()
+      onClose()
+    },
+  })
 
   return (
-    <div
+    <dialog
       aria-label={alt}
-      aria-modal='true'
-      className='fixed inset-0 z-[920] flex items-center justify-center bg-slate-950/88 p-4 backdrop-blur-[2px] md:p-6'
-      onClick={(event) => {
-        event.stopPropagation()
-        onClose()
-      }}
-      ref={containerRef}
-      role='dialog'
+      className='fixed inset-0 z-[920] m-0 h-dvh max-h-none w-screen max-w-none items-center justify-center border-0 bg-slate-950/88 p-4 backdrop-blur-[2px] open:flex md:p-6'
+      ref={dialogRef}
       tabIndex={-1}
     >
       <div
@@ -63,6 +55,6 @@ export function ArtViewerOverlay({alt, onClose, onMount, src}: ArtViewerOverlayP
           src={src}
         />
       </div>
-    </div>
+    </dialog>
   )
 }

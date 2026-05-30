@@ -516,7 +516,8 @@ describe('WheelDetailModal', () => {
       />,
     )
 
-    expect(screen.getByRole('dialog', {name: /merciful nurturing details/i})).toHaveStyle({
+    expect(screen.getByRole('dialog', {name: /merciful nurturing details/i})).toBeInTheDocument()
+    expect(document.querySelector('[data-detail-modal-shell]')).toHaveStyle({
       '--desc-font-scale': '1.67',
     })
     expect(screen.getByRole('heading', {name: 'Merciful Nurturing'})).toHaveClass('text-xl')

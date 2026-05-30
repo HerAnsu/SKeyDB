@@ -4,9 +4,7 @@ import {
   useEffectEvent,
   useLayoutEffect,
   useRef,
-  type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
-  type PointerEvent as ReactPointerEvent,
 } from 'react'
 
 import {getFocusableElements} from '@/ui/modal/focus-scope'
@@ -34,7 +32,7 @@ export function PopoverTrailPanel({
   fontScale = 'small',
   children,
 }: PopoverTrailPanelProps) {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDialogElement>(null)
   const desktopCloseAllRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const previouslyFocusedElementRef = useRef<HTMLElement | null>(null)
@@ -148,7 +146,7 @@ export function PopoverTrailPanel({
   }, [anchorElement])
 
   const handlePointerDown = useCallback(
-    (event: ReactPointerEvent<HTMLDivElement>) => {
+    (event: PointerEvent) => {
       if (isMobile || !ref.current) {
         return
       }
@@ -167,7 +165,7 @@ export function PopoverTrailPanel({
       const previousUserSelect = document.body.style.userSelect
 
       document.body.style.userSelect = 'none'
-      const nextTarget = event.currentTarget
+      const nextTarget = ref.current
       nextTarget.setPointerCapture(event.pointerId)
 
       const handlePointerMove = (moveEvent: PointerEvent) => {
@@ -191,7 +189,7 @@ export function PopoverTrailPanel({
   )
 
   const handleKeyDown = useCallback(
-    (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault()
         event.stopPropagation()
@@ -230,27 +228,46 @@ export function PopoverTrailPanel({
     },
     [onCloseAll],
   )
+  const handleDialogPointerDownEvent = useEffectEvent((event: PointerEvent) => {
+    handlePointerDown(event)
+  })
+  const handleDialogKeyDownEvent = useEffectEvent((event: KeyboardEvent) => {
+    handleKeyDown(event)
+  })
+
+  useEffect(() => {
+    const panel = ref.current
+    if (!panel) {
+      return undefined
+    }
+
+    function handlePointerDownEvent(event: PointerEvent) {
+      handleDialogPointerDownEvent(event)
+    }
+
+    function handleKeyDownEvent(event: KeyboardEvent) {
+      handleDialogKeyDownEvent(event)
+    }
+
+    panel.addEventListener('pointerdown', handlePointerDownEvent)
+    panel.addEventListener('keydown', handleKeyDownEvent)
+    return () => {
+      panel.removeEventListener('pointerdown', handlePointerDownEvent)
+      panel.removeEventListener('keydown', handleKeyDownEvent)
+    }
+  }, [])
 
   return (
-    <div
+    <dialog
       aria-label='Database reference details'
-      aria-modal='true'
-      className={`database-scrollbar fixed z-[950] overflow-y-auto ${
+      className={`database-scrollbar fixed z-[950] m-0 overflow-y-auto border-0 bg-transparent p-0 text-inherit ${
         isMobile
           ? 'inset-x-3 bottom-3 max-h-[min(72vh,34rem)]'
           : 'max-h-[calc(100vh-24px)] w-[min(22rem,calc(100vw-24px))]'
       }`}
       data-skill-popover=''
-      onClick={(e) => {
-        e.stopPropagation()
-      }}
-      onKeyDown={handleKeyDown}
-      onMouseDown={(e) => {
-        e.stopPropagation()
-      }}
-      onPointerDown={handlePointerDown}
+      open
       ref={ref}
-      role='dialog'
       style={
         isMobile
           ? getDescriptionFontScaleStyle(fontScale)
@@ -288,6 +305,6 @@ export function PopoverTrailPanel({
           </button>
         </div>
       ) : null}
-    </div>
+    </dialog>
   )
 }

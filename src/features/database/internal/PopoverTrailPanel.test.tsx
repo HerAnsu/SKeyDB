@@ -198,13 +198,10 @@ describe('PopoverTrailPanel', () => {
       </PopoverTrailPanel>,
     )
 
-    expect(
-      await screen.findByRole('dialog', {name: 'Database reference details'}),
-    ).toBeInTheDocument()
-    expect(screen.getByRole('dialog', {name: 'Database reference details'})).toHaveAttribute(
-      'aria-modal',
-      'true',
-    )
+    const panel = await screen.findByRole('dialog', {name: 'Database reference details'})
+    expect(panel).toBeInTheDocument()
+    expect(panel).toHaveAttribute('open')
+    expect(panel).not.toHaveAttribute('aria-modal')
     await waitFor(() => {
       expect(screen.getByRole('button', {name: 'Close all'})).toHaveFocus()
     })

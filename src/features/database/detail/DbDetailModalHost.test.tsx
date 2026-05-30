@@ -38,7 +38,7 @@ vi.mock('./dbDetailRegistry', async () => {
         loadingLabel: 'Loading awakener details...',
         missingBrowsePath: '/database',
         render: vi.fn(({callbacks, item}: MockDetailRenderOptions) => (
-          <div role='dialog' aria-label={`${item.item.name} details`}>
+          <dialog aria-label={`${item.item.name} details`} open>
             <button onClick={callbacks.onClose} type='button'>
               Close overlay
             </button>
@@ -67,7 +67,7 @@ vi.mock('./dbDetailRegistry', async () => {
             >
               Show skills tab
             </button>
-          </div>
+          </dialog>
         )),
       },
       wheel: {
@@ -75,11 +75,11 @@ vi.mock('./dbDetailRegistry', async () => {
         loadingLabel: 'Loading wheel details...',
         missingBrowsePath: '/database/wheels',
         render: vi.fn(({callbacks, item}: MockDetailRenderOptions) => (
-          <div role='dialog' aria-label={`${item.item.name} details`}>
+          <dialog aria-label={`${item.item.name} details`} open>
             <button onClick={callbacks.onClose} type='button'>
               Close overlay
             </button>
-          </div>
+          </dialog>
         )),
       },
       posse: {
@@ -87,11 +87,11 @@ vi.mock('./dbDetailRegistry', async () => {
         loadingLabel: 'Loading posse details...',
         missingBrowsePath: '/database/posses',
         render: vi.fn(({callbacks, item}: MockDetailRenderOptions) => (
-          <div role='dialog' aria-label={`${item.item.name} details`}>
+          <dialog aria-label={`${item.item.name} details`} open>
             <button onClick={callbacks.onClose} type='button'>
               Close overlay
             </button>
-          </div>
+          </dialog>
         )),
       },
       covenant: {
@@ -99,11 +99,11 @@ vi.mock('./dbDetailRegistry', async () => {
         loadingLabel: 'Loading covenant details...',
         missingBrowsePath: '/database/covenants',
         render: vi.fn(({callbacks, item}: MockDetailRenderOptions) => (
-          <div role='dialog' aria-label={`${item.item.name} details`}>
+          <dialog aria-label={`${item.item.name} details`} open>
             <button onClick={callbacks.onClose} type='button'>
               Close overlay
             </button>
-          </div>
+          </dialog>
         )),
       },
     },

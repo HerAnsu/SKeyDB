@@ -79,7 +79,7 @@ export function DbDetailShell({
   }
   const renderedChildren = typeof children === 'function' ? children({openArtViewer}) : children
 
-  useDetailModalLifecycle({
+  const handleModalCancel = useDetailModalLifecycle({
     clearSearch: noop,
     closeAllPopovers: popoverController.closeAllPopovers,
     closeSearch: noop,
@@ -100,6 +100,7 @@ export function DbDetailShell({
       maxWidth='standard'
       onOverlayClick={handleOverlayClick}
       onPanelKeyDown={handlePanelKeyDown}
+      onCancel={handleModalCancel}
       panelRef={panelRef}
       shellStyle={getDescriptionFontScaleStyle(preferences.shared.fontScale)}
     >
