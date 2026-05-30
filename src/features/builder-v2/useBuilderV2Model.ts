@@ -119,6 +119,7 @@ import type {
   BuilderV2WheelRarityFilter,
   BuilderV2WheelSlotView,
 } from './BuilderV2ModelTypes'
+import {useStableEvent} from './useStableEvent'
 
 const BUILDER_V2_AUTOSAVE_DEBOUNCE_MS = 300
 const BUILDER_ALLOW_DUPES_KEY = 'skeydb.builder.allowDupes.v1'
@@ -141,6 +142,7 @@ interface UseBuilderV2ModelOptions {
 export function useBuilderV2Model({
   showToast = () => undefined,
 }: UseBuilderV2ModelOptions = {}): BuilderV2Model {
+  const stableShowToast = useStableEvent(showToast)
   const storage = useMemo(() => getBrowserLocalStorage(), [])
   const [allowDuplicateAwakenerIdentities, setAllowDuplicateAwakenerIdentities] = useState(
     () => safeStorageRead(storage, BUILDER_ALLOW_DUPES_KEY) === '1',
@@ -1626,7 +1628,7 @@ export function useBuilderV2Model({
     },
     clearTransfer: clearImportExportTransientState,
     clearPendingDelete: clearImportExportTransientState,
-    showToast,
+    showToast: stableShowToast,
   })
 
   const openActiveTeamExportDialog = useCallback(() => {
@@ -1768,7 +1770,7 @@ export function useBuilderV2Model({
       pendingTeamAction.templateId,
     )
     setTeamsInStore(result.nextTeams)
-    showToast(
+    stableShowToast(
       `Applied ${pendingTeamAction.templateLabel}: renamed ${String(result.renamedCount)}, created ${String(result.createdCount)}, removed ${String(result.removedCount)}.`,
     )
     setPendingTeamAction(null)
@@ -1778,7 +1780,7 @@ export function useBuilderV2Model({
     clearTeamTransientState,
     pendingTeamAction,
     setTeamsInStore,
-    showToast,
+    stableShowToast,
   ])
 
   const teamActionDialog = useMemo<BuilderV2TeamActionDialog | null>(() => {

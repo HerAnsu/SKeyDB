@@ -43,6 +43,7 @@ describe('TimelineArchiveSection', () => {
 
     expect(screen.queryByRole('heading', {name: /ended banners/i})).not.toBeInTheDocument()
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    expect(content?.tagName).toBe('SECTION')
     expect(content).toHaveClass('timeline-archive-motion')
     expect(content).toHaveAttribute('aria-hidden', 'true')
     expect(content).toHaveAttribute('inert')
@@ -53,6 +54,7 @@ describe('TimelineArchiveSection', () => {
     fireEvent.click(toggle)
 
     expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByRole('region', {name: 'Ended banners'}).tagName).toBe('SECTION')
     expect(content).toHaveAttribute('aria-hidden', 'false')
     expect(content).not.toHaveAttribute('inert')
     expect(content).toHaveAttribute('data-expanded', 'true')

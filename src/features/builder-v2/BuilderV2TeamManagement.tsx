@@ -1,4 +1,4 @@
-import {memo, useEffect, useRef, useState, type CSSProperties} from 'react'
+import {memo, useCallback, useEffect, useRef, useState, type CSSProperties} from 'react'
 
 import {FaChevronDown, FaChevronUp} from 'react-icons/fa6'
 import {FiEdit2, FiRotateCcw, FiTrash2, FiUpload} from 'react-icons/fi'
@@ -219,7 +219,7 @@ const TeamManagementRow = memo(function TeamManagementRow({
   const isEditing = editingTeamId === team.id
   const isMobile = variant === 'mobile'
   const teamIndex = String(index + 1).padStart(2, '0')
-  const [slotsRef, hasSlotsOverflow] = useHorizontalOverflow<HTMLDivElement>()
+  const [slotsRef, hasSlotsOverflow] = useHorizontalOverflow()
 
   return (
     <article
@@ -409,9 +409,21 @@ const TeamManagementRow = memo(function TeamManagementRow({
   )
 })
 
-function useHorizontalOverflow<TElement extends HTMLElement>() {
-  const ref = useRef<TElement | null>(null)
+function useHorizontalOverflow() {
+  const ref = useRef<HTMLDivElement | null>(null)
   const [hasOverflow, setHasOverflow] = useState(false)
+
+  const updateOverflow = useCallback((element: HTMLDivElement | null = ref.current) => {
+    setHasOverflow(element ? element.scrollWidth > element.clientWidth + 1 : false)
+  }, [])
+
+  const setRef = useCallback(
+    (element: HTMLDivElement | null) => {
+      ref.current = element
+      updateOverflow(element)
+    },
+    [updateOverflow],
+  )
 
   useEffect(() => {
     const element = ref.current
@@ -419,32 +431,31 @@ function useHorizontalOverflow<TElement extends HTMLElement>() {
       return undefined
     }
 
-    const updateOverflow = () => {
-      setHasOverflow(element.scrollWidth > element.clientWidth + 1)
+    const updateCurrentOverflow = () => {
+      updateOverflow(element)
     }
 
-    updateOverflow()
-    window.addEventListener('resize', updateOverflow)
+    window.addEventListener('resize', updateCurrentOverflow)
 
     if (typeof ResizeObserver === 'undefined') {
       return () => {
-        window.removeEventListener('resize', updateOverflow)
+        window.removeEventListener('resize', updateCurrentOverflow)
       }
     }
 
-    const resizeObserver = new ResizeObserver(updateOverflow)
+    const resizeObserver = new ResizeObserver(updateCurrentOverflow)
     resizeObserver.observe(element)
     for (const child of Array.from(element.children)) {
       resizeObserver.observe(child)
     }
 
     return () => {
-      window.removeEventListener('resize', updateOverflow)
+      window.removeEventListener('resize', updateCurrentOverflow)
       resizeObserver.disconnect()
     }
-  }, [])
+  }, [updateOverflow])
 
-  return [ref, hasOverflow] as const
+  return [setRef, hasOverflow] as const
 }
 
 function TeamPosseSummary({team}: {team: BuilderV2TeamSummary}) {

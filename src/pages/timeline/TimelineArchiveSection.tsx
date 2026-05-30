@@ -29,7 +29,7 @@ export function TimelineArchiveSection({
   titleClassName = 'text-slate-400',
 }: TimelineArchiveSectionProps) {
   const contentId = useId()
-  const [hasOpened, setHasOpened] = useState(expanded)
+  const [hasOpened, setHasOpened] = useState(() => expanded)
   const shouldRenderChildren = expanded || hasOpened
 
   return (
@@ -56,21 +56,20 @@ export function TimelineArchiveSection({
         </span>
         <div className={`h-px flex-1 ${dividerClassName}`} />
       </button>
-      <div
+      <section
         aria-hidden={!expanded}
         aria-label={title}
         className='timeline-archive-motion'
         data-expanded={expanded}
         id={contentId}
         inert={!expanded}
-        role='region'
       >
         <div className='timeline-archive-motion__clip'>
           <div className='timeline-archive-motion__content'>
             <div className={contentClassName}>{shouldRenderChildren ? children : null}</div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }

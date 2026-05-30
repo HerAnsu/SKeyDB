@@ -1,4 +1,4 @@
-import {useEffect, useRef, type RefObject} from 'react'
+import {useEffect, useEffectEvent, useRef, type RefObject} from 'react'
 
 import type {TimelinePriceDisplayMode} from '@/domain/timeline-pricing'
 
@@ -68,6 +68,8 @@ export function EventDescriptionShelf({
   priceMode = 'silver-prime',
 }: EventDescriptionShelfProps) {
   const closeButtonRef = useRef<HTMLButtonElement | null>(null)
+  const shelfRef = useRef<HTMLElement | null>(null)
+  const closeDescriptionEvent = useEffectEvent(onCloseDescription)
   const titleId = `${descriptionId}-title`
 
   useEffect(() => {
@@ -76,20 +78,33 @@ export function EventDescriptionShelf({
     closeButtonRef.current?.focus()
   }, [canExpandDescription, descriptionOpen])
 
+  useEffect(() => {
+    if (!canExpandDescription || !descriptionOpen) return undefined
+
+    const shelfElement = shelfRef.current
+    if (!shelfElement) return undefined
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+
+      event.stopPropagation()
+      closeDescriptionEvent()
+    }
+
+    shelfElement.addEventListener('keydown', handleKeyDown)
+    return () => {
+      shelfElement.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [canExpandDescription, descriptionOpen])
+
   if (!canExpandDescription || !descriptionOpen) return null
 
   return (
-    <div
+    <section
       aria-labelledby={titleId}
       className='absolute inset-0 z-20 flex min-h-0 flex-col overflow-hidden bg-slate-950/95 shadow-[0_12px_24px_rgba(2,6,14,0.46)] backdrop-blur-sm'
       id={descriptionId}
-      onKeyDown={(event) => {
-        if (event.key !== 'Escape') return
-
-        event.stopPropagation()
-        onCloseDescription()
-      }}
-      role='region'
+      ref={shelfRef}
     >
       <div className='flex shrink-0 items-center justify-between gap-3 border-b border-slate-700/55 px-3 py-2.5'>
         <span
@@ -110,6 +125,6 @@ export function EventDescriptionShelf({
       <p className='min-h-0 flex-1 overflow-y-auto px-3 py-2.5 text-[0.8rem] leading-[1.55] text-slate-300'>
         <TimelineRichText priceMode={priceMode} text={description} />
       </p>
-    </div>
+    </section>
   )
 }
