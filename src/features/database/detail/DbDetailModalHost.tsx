@@ -743,7 +743,7 @@ function DbDetailAwakenerRouteModal({
   tabSlug,
   wheels,
 }: DbDetailKindRouteModalProps<'awakener'>) {
-  const location = useLocation()
+  const routerLocation = useLocation()
   const navigate = useNavigate()
   const registryEntry = dbDetailRegistry.awakener
   const {isLoading, record} = useDatabaseDetailRouteRecord({
@@ -755,18 +755,18 @@ function DbDetailAwakenerRouteModal({
   useDeferredDatabaseDetailNeighborPreload(navigation, Boolean(record))
 
   useEffect(() => {
-    if (!record || !canonicalTabPath || location.pathname === canonicalTabPath) {
+    if (!record || !canonicalTabPath || routerLocation.pathname === canonicalTabPath) {
       return
     }
 
     void navigate(
       {
         pathname: canonicalTabPath,
-        search: location.search,
+        search: routerLocation.search,
       },
       {replace: true},
     )
-  }, [canonicalTabPath, location.pathname, location.search, navigate, record])
+  }, [canonicalTabPath, navigate, record, routerLocation.pathname, routerLocation.search])
 
   if (isLoading) {
     return (
