@@ -88,6 +88,8 @@ function App() {
   const hasMobileOverflow = mobileOverflowItems.length > 0
   const mobileNavOpen = mobileNavOpenLocationKey === locationKey && hasMobileOverflow
 
+  // Mobile overflow state is keyed by the router location; this effect only wires Escape while open.
+  // react-doctor-disable-next-line no-reset-all-state-on-prop-change, react-doctor/no-reset-all-state-on-prop-change
   useEffect(() => {
     if (!mobileNavOpen) return
 

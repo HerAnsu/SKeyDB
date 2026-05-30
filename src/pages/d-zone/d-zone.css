@@ -236,9 +236,13 @@
 .d-zone-alert-switcher {
   display: flex;
   min-width: 0;
+  min-inline-size: 0;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--d-zone-gap-sm);
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 .d-zone-alert-switcher--toolbar {

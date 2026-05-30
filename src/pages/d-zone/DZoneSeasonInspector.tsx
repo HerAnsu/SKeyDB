@@ -185,9 +185,9 @@ function DZoneAlertSwitcher({
   }
 
   return (
-    <div className={`d-zone-alert-switcher d-zone-alert-switcher--${variant}`}>
-      <span className='d-zone-alert-switcher-label'>Alert</span>
-      <div aria-label='D-zone alert' className='d-zone-alert-switcher-options' role='group'>
+    <fieldset className={`d-zone-alert-switcher d-zone-alert-switcher--${variant}`}>
+      <legend className='d-zone-alert-switcher-label'>Alert</legend>
+      <div className='d-zone-alert-switcher-options'>
         {alertOptions.map((alert) => (
           <button
             aria-label={`Select ${alert.name}`}
@@ -203,6 +203,6 @@ function DZoneAlertSwitcher({
           </button>
         ))}
       </div>
-    </div>
+    </fieldset>
   )
 }

@@ -188,12 +188,11 @@ export function CatalogMobileFilterPanel<TValue extends string>({
   options,
 }: CatalogMobileFilterPanelProps<TValue>) {
   return (
-    <div
-      aria-label={`${label} filter options`}
-      className='grid grid-cols-2 gap-1.5 min-[430px]:grid-cols-3'
+    <fieldset
+      className='m-0 grid min-w-0 grid-cols-2 gap-1.5 border-0 p-0 min-[430px]:grid-cols-3'
       id={id}
-      role='group'
     >
+      <legend className='sr-only'>{label} filter options</legend>
       {options.map((option) => (
         <FilterChipButton
           active={activeId === option.id}
@@ -221,6 +220,6 @@ export function CatalogMobileFilterPanel<TValue extends string>({
           <span className='truncate'>{option.label}</span>
         </FilterChipButton>
       ))}
-    </div>
+    </fieldset>
   )
 }

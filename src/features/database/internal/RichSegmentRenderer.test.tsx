@@ -1,4 +1,5 @@
 import {fireEvent, render, screen, waitFor} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import {describe, expect, it, vi} from 'vitest'
 
 import type {AwakenerOverlayRecord, FullStats} from '@/domain/awakener-source-schema'
@@ -62,8 +63,9 @@ describe('RichSegmentRenderer', () => {
     expect(onSkillClick).toHaveBeenCalledWith('Strike', expect.any(Object))
   })
 
-  it('activates interactive skill tokens from the keyboard', () => {
+  it('activates interactive skill tokens from the keyboard', async () => {
     const onSkillClick = vi.fn()
+    const user = userEvent.setup()
 
     render(
       <RichSegmentRenderer
@@ -76,8 +78,9 @@ describe('RichSegmentRenderer', () => {
     )
 
     const button = screen.getByRole('button', {name: 'Strike'})
-    fireEvent.keyDown(button, {key: 'Enter'})
-    fireEvent.keyDown(button, {key: ' '})
+    button.focus()
+    await user.keyboard('{Enter}')
+    await user.keyboard(' ')
 
     expect(onSkillClick).toHaveBeenCalledTimes(2)
     expect(onSkillClick).toHaveBeenNthCalledWith(1, 'Strike', expect.any(Object))
@@ -512,8 +515,9 @@ describe('RichSegmentRenderer', () => {
     expect(onMechanicClick).toHaveBeenCalledWith(TEST_OVERLAY, expect.any(Object))
   })
 
-  it('activates interactive mechanic tokens from the keyboard', () => {
+  it('activates interactive mechanic tokens from the keyboard', async () => {
     const onMechanicClick = vi.fn()
+    const user = userEvent.setup()
 
     render(
       <RichSegmentRenderer
@@ -527,8 +531,9 @@ describe('RichSegmentRenderer', () => {
     )
 
     const button = screen.getByRole('button', {name: 'Temporary Counter'})
-    fireEvent.keyDown(button, {key: 'Enter'})
-    fireEvent.keyDown(button, {key: ' '})
+    button.focus()
+    await user.keyboard('{Enter}')
+    await user.keyboard(' ')
 
     expect(onMechanicClick).toHaveBeenCalledTimes(2)
     expect(onMechanicClick).toHaveBeenNthCalledWith(1, TEST_OVERLAY, expect.any(Object))
@@ -665,8 +670,9 @@ describe('RichSegmentRenderer', () => {
     expect(onMechanicClick).toHaveBeenCalledWith(realmOverlay, expect.any(Object))
   })
 
-  it('activates interactive realm tokens from the keyboard', () => {
+  it('activates interactive realm tokens from the keyboard', async () => {
     const onMechanicClick = vi.fn()
+    const user = userEvent.setup()
     const realmOverlay: AwakenerOverlayRecord = {
       id: 'overlay.global.chaos',
       displayName: 'Chaos',
@@ -688,8 +694,9 @@ describe('RichSegmentRenderer', () => {
     )
 
     const button = screen.getByRole('button', {name: 'Chaos'})
-    fireEvent.keyDown(button, {key: 'Enter'})
-    fireEvent.keyDown(button, {key: ' '})
+    button.focus()
+    await user.keyboard('{Enter}')
+    await user.keyboard(' ')
 
     expect(onMechanicClick).toHaveBeenCalledTimes(2)
     expect(onMechanicClick).toHaveBeenNthCalledWith(1, realmOverlay, expect.any(Object))

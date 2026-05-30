@@ -27,12 +27,12 @@ export function Toast({
   }
 
   return (
-    <div aria-live='polite' className={containerClassName}>
+    <output aria-live='polite' className={containerClassName}>
       {resolvedEntries.map((entry) => (
-        <div className={className} key={entry.id} role='status'>
+        <span className={`block ${className}`} key={entry.id}>
           {entry.message}
-        </div>
+        </span>
       ))}
-    </div>
+    </output>
   )
 }

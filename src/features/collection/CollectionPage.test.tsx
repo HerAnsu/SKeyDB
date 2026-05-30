@@ -110,7 +110,11 @@ vi.mock('@/features/database/detail/DbDetailModalHost', async () => {
         () => mockedDbDetailStore.getState().stack,
       )
       const active = stack.at(-1)
-      return active ? <div role='dialog'>Detail host: {`${active.kind}:${active.id}`}</div> : null
+      return active ? (
+        <dialog aria-label='Collection detail overlay' open>
+          Detail host: {`${active.kind}:${active.id}`}
+        </dialog>
+      ) : null
     },
   }
 })

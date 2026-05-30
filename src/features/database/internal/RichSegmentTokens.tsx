@@ -1,11 +1,4 @@
-import {
-  useEffect,
-  useState,
-  type CSSProperties,
-  type KeyboardEvent,
-  type MouseEvent,
-  type ReactNode,
-} from 'react'
+import {useEffect, useState, type CSSProperties, type MouseEvent, type ReactNode} from 'react'
 
 import type {AwakenerOverlayRecord} from '@/domain/awakener-source-schema'
 import {normalizeDatabaseReferenceName} from '@/domain/database-reference-layer'
@@ -23,7 +16,7 @@ import {
   getDatabaseTintedTokenStyle,
 } from './text-styles'
 
-export type ActivationEvent = MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>
+export type ActivationEvent = MouseEvent<HTMLButtonElement>
 
 const OVERLAY_TOKEN_ICON_STYLE: CSSProperties = {
   display: 'inline',
@@ -60,22 +53,18 @@ export function InteractiveToken({
   title,
 }: InteractiveTokenProps) {
   return (
-    <span
+    <button
       aria-label={ariaLabel}
-      className={className}
+      className={`inline border-0 bg-transparent p-0 [font:inherit] ${className}`}
       onClick={(event) => {
         onActivate(event)
       }}
-      onKeyDown={createTokenKeyDownHandler((event) => {
-        onActivate(event)
-      })}
-      role='button'
       style={style}
-      tabIndex={0}
       title={title}
+      type='button'
     >
       {children}
-    </span>
+    </button>
   )
 }
 
@@ -255,17 +244,4 @@ export function RealmToken({
       {name}
     </span>
   )
-}
-
-function createTokenKeyDownHandler(
-  onActivate: (event: ActivationEvent) => void,
-): (event: KeyboardEvent<HTMLElement>) => void {
-  return (event) => {
-    if (event.key !== 'Enter' && event.key !== ' ') {
-      return
-    }
-
-    event.preventDefault()
-    onActivate(event)
-  }
 }

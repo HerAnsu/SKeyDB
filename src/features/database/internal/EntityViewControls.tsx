@@ -37,11 +37,8 @@ export function EntityViewControls<TSortKey extends string>({
   const showSortDirection = directionLabel.length > 0
 
   return (
-    <div
-      aria-label='Database view controls'
-      className='flex flex-wrap items-center gap-1.5'
-      role='group'
-    >
+    <fieldset className='m-0 flex min-w-0 flex-wrap items-center gap-1.5 border-0 p-0'>
+      <legend className='sr-only'>Database view controls</legend>
       <span className='text-[10px] tracking-[0.16em] text-slate-500 uppercase'>Sort</span>
       <select
         aria-label={sortSelectAriaLabel}
@@ -83,6 +80,6 @@ export function EntityViewControls<TSortKey extends string>({
           Group by realm
         </FilterChipButton>
       ) : null}
-    </div>
+    </fieldset>
   )
 }
