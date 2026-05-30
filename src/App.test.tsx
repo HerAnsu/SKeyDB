@@ -1,5 +1,5 @@
 import {act, fireEvent, render, screen, waitFor, within} from '@testing-library/react'
-import {MemoryRouter} from 'react-router-dom'
+import {MemoryRouter, useNavigate} from 'react-router-dom'
 import {afterEach, vi} from 'vitest'
 
 import App from './App'
@@ -180,6 +180,22 @@ describe('App shell', () => {
     })
   })
 
+  it('closes the mobile overflow menu after a router location change', async () => {
+    render(
+      <MemoryRouter>
+        <App />
+        <ProgrammaticRouteButton to='/collection' />
+      </MemoryRouter>,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: /more/i}))
+    fireEvent.click(screen.getByRole('button', {name: /programmatic route/i}))
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', {name: /more/i})).toHaveAttribute('aria-expanded', 'false')
+    })
+  })
+
   it('derives mobile quick links and overflow from the same nav order', () => {
     mockMatchMedia({'(min-width: 30rem)': true, '(min-width: 40rem)': false})
 
@@ -265,4 +281,19 @@ function getMobileOverflowNav(): HTMLElement {
     throw new Error('Expected mobile overflow nav to exist')
   }
   return mobileOverflowNav
+}
+
+function ProgrammaticRouteButton({to}: {to: string}) {
+  const navigate = useNavigate()
+
+  return (
+    <button
+      onClick={() => {
+        void navigate(to)
+      }}
+      type='button'
+    >
+      Programmatic route
+    </button>
+  )
 }

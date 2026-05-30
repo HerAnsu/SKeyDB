@@ -43,4 +43,44 @@ describe('OwnedWheelBoxExport', () => {
     expect(screen.queryByText('Level Text Scale')).not.toBeInTheDocument()
     expect(screen.queryByLabelText(/sort by/i)).not.toBeInTheDocument()
   })
+
+  it('resets rarity filters to their defaults', () => {
+    render(
+      <OwnedWheelBoxExport
+        entries={[
+          {
+            id: 'B01',
+            name: 'SSR Wheel',
+            rarity: 'SSR',
+            realm: 'CARO',
+            index: 0,
+            level: 0,
+            wheelAsset: null,
+          },
+          {
+            id: 'SR01',
+            name: 'SR Wheel',
+            rarity: 'SR',
+            realm: 'NEUTRAL',
+            index: 1,
+            level: 0,
+            wheelAsset: null,
+          },
+        ]}
+        onStatusMessage={vi.fn()}
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: /export wheels as png/i}))
+    fireEvent.click(screen.getByLabelText('Include SR wheels'))
+
+    expect(screen.getByLabelText('Include SR wheels')).toHaveAttribute('data-checked', 'true')
+    expect(screen.getByText('SR Wheel')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /reset/i}))
+
+    expect(screen.getByLabelText('Include SSR wheels')).toHaveAttribute('data-checked', 'true')
+    expect(screen.getByLabelText('Include SR wheels')).toHaveAttribute('data-checked', 'false')
+    expect(screen.queryByText('SR Wheel')).not.toBeInTheDocument()
+  })
 })

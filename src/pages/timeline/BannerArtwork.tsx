@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState, type MouseEvent} from 'react'
+import {useEffect, useMemo, useReducer, useRef, type MouseEvent} from 'react'
 
 import {Link} from 'react-router-dom'
 
@@ -237,6 +237,71 @@ function FeaturedArtwork({
   )
 }
 
+type PoolMontageLayer = 'a' | 'b'
+
+interface PoolMontageLayerState {
+  aIdx: number
+  bIdx: number
+  front: PoolMontageLayer
+  pendingFront: PoolMontageLayer | null
+}
+
+type PoolMontageLayerAction =
+  | {
+      type: 'beginTransition'
+      activeIdx: number
+      incomingIdx: number
+    }
+  | {type: 'promotePendingLayer'}
+
+function createPoolMontageLayerState(activeIdx: number): PoolMontageLayerState {
+  return {
+    aIdx: activeIdx,
+    bIdx: activeIdx,
+    front: 'a',
+    pendingFront: null,
+  }
+}
+
+function poolMontageLayerReducer(
+  state: PoolMontageLayerState,
+  action: PoolMontageLayerAction,
+): PoolMontageLayerState {
+  switch (action.type) {
+    case 'beginTransition': {
+      if (action.incomingIdx < 0) return state
+
+      if (state.front === 'a') {
+        return {
+          aIdx: action.activeIdx,
+          bIdx: action.incomingIdx,
+          front: state.front,
+          pendingFront: 'b',
+        }
+      }
+
+      return {
+        aIdx: action.incomingIdx,
+        bIdx: action.activeIdx,
+        front: state.front,
+        pendingFront: 'a',
+      }
+    }
+
+    case 'promotePendingLayer':
+      return state.pendingFront ? {...state, front: state.pendingFront, pendingFront: null} : state
+  }
+}
+
+function getPoolMontageRenderLayers(
+  state: PoolMontageLayerState,
+  frame: PoolCycleFrame,
+): PoolMontageLayerState {
+  if (state.pendingFront || frame.transitioning) return state
+
+  return state.front === 'a' ? {...state, aIdx: frame.activeIdx} : {...state, bIdx: frame.activeIdx}
+}
+
 function PoolMontageSlot({
   assets,
   frame,
@@ -250,26 +315,29 @@ function PoolMontageSlot({
   onOpenDetail?: (ref: EntityRef) => void
   showSeparator: boolean
 }) {
-  const [layers, setLayers] = useState<{a: number; b: number; front: 'a' | 'b'}>({
-    a: frame.activeIdx,
-    b: frame.activeIdx,
-    front: 'a',
-  })
+  const [layerState, dispatchLayerState] = useReducer(
+    poolMontageLayerReducer,
+    frame.activeIdx,
+    createPoolMontageLayerState,
+  )
   const prevTransRef = useRef(false)
   const promotionCleanupRef = useRef(noCleanup)
 
   useEffect(() => {
     if (frame.transitioning && !prevTransRef.current && frame.incomingIdx >= 0) {
       promotionCleanupRef.current()
-      const back: 'a' | 'b' = layers.front === 'a' ? 'b' : 'a'
-      setLayers((prev) => ({...prev, [back]: frame.incomingIdx}))
+      dispatchLayerState({
+        type: 'beginTransition',
+        activeIdx: frame.activeIdx,
+        incomingIdx: frame.incomingIdx,
+      })
       promotionCleanupRef.current = scheduleAfterNextPaint(() => {
-        setLayers((prev) => ({...prev, front: back}))
+        dispatchLayerState({type: 'promotePendingLayer'})
         promotionCleanupRef.current = noCleanup
       })
     }
     prevTransRef.current = frame.transitioning
-  }, [frame.transitioning, frame.incomingIdx, layers.front])
+  }, [frame.activeIdx, frame.incomingIdx, frame.transitioning])
 
   useEffect(
     () => () => {
@@ -278,8 +346,9 @@ function PoolMontageSlot({
     [],
   )
 
-  const assetA = assets[layers.a]
-  const assetB = assets[layers.b]
+  const layers = getPoolMontageRenderLayers(layerState, frame)
+  const assetA = assets[layers.aIdx]
+  const assetB = assets[layers.bIdx]
   const frontAsset = layers.front === 'a' ? assetA : assetB
 
   return (
