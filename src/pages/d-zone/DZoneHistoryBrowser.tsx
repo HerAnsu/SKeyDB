@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState, type KeyboardEvent, type RefObject} from 'react'
+import {useEffect, useRef, useState, type RefObject} from 'react'
 
 import {FaChevronRight, FaMagnifyingGlass, FaXmark} from 'react-icons/fa6'
 
@@ -92,10 +92,49 @@ function useDrawerModalBehavior({
       drawer.focus()
     }, 0)
 
+    function trapDrawerFocus(event: globalThis.KeyboardEvent) {
+      const drawer = drawerRef.current
+      if (!drawer) {
+        return
+      }
+
+      const focusableElements = getFocusableElements(drawer)
+      if (focusableElements.length === 0) {
+        event.preventDefault()
+        drawer.focus()
+        return
+      }
+
+      const firstFocusable = focusableElements[0]
+      const lastFocusable = focusableElements[focusableElements.length - 1]
+
+      if (!drawer.contains(document.activeElement)) {
+        event.preventDefault()
+        firstFocusable.focus()
+        return
+      }
+
+      if (event.shiftKey && document.activeElement === firstFocusable) {
+        event.preventDefault()
+        lastFocusable.focus()
+        return
+      }
+
+      if (!event.shiftKey && document.activeElement === lastFocusable) {
+        event.preventDefault()
+        firstFocusable.focus()
+      }
+    }
+
     function handleDocumentKeyDown(event: globalThis.KeyboardEvent) {
       if (event.key === 'Escape') {
         event.preventDefault()
         onCloseRef.current()
+        return
+      }
+
+      if (event.key === 'Tab') {
+        trapDrawerFocus(event)
       }
     }
 
@@ -129,38 +168,6 @@ export function DZoneHistoryBrowser({
 
   useDrawerModalBehavior({browserOpen, drawerRef, openerElement, onClose})
 
-  function handleDrawerKeyDown(event: KeyboardEvent<HTMLElement>) {
-    if (!browserOpen || event.key !== 'Tab') {
-      return
-    }
-
-    const drawer = drawerRef.current
-    if (!drawer) {
-      return
-    }
-
-    const focusableElements = getFocusableElements(drawer)
-    if (focusableElements.length === 0) {
-      event.preventDefault()
-      drawer.focus()
-      return
-    }
-
-    const firstFocusable = focusableElements[0]
-    const lastFocusable = focusableElements[focusableElements.length - 1]
-
-    if (event.shiftKey && document.activeElement === firstFocusable) {
-      event.preventDefault()
-      lastFocusable.focus()
-      return
-    }
-
-    if (!event.shiftKey && document.activeElement === lastFocusable) {
-      event.preventDefault()
-      firstFocusable.focus()
-    }
-  }
-
   return (
     <>
       <button
@@ -175,7 +182,6 @@ export function DZoneHistoryBrowser({
         aria-label='D-zone season archive'
         className='d-zone-history-sidebar'
         id='d-zone-history-browser'
-        onKeyDown={handleDrawerKeyDown}
         ref={drawerRef}
         role={browserOpen ? 'dialog' : undefined}
         tabIndex={browserOpen ? -1 : undefined}
@@ -200,9 +206,8 @@ export function DZoneHistoryBrowser({
 
         <HistorySearch search={search} onSearchChange={onSearchChange} />
 
-        <div
+        <section
           className='d-zone-history-year-list ui-scrollbar'
-          role='region'
           aria-label='D-zone season archive'
         >
           {groups.map((group) => {
@@ -219,7 +224,7 @@ export function DZoneHistoryBrowser({
               />
             )
           })}
-        </div>
+        </section>
       </aside>
     </>
   )

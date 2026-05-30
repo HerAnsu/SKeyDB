@@ -1,4 +1,4 @@
-import {memo, useEffect, useRef, useState, type CSSProperties, type MouseEvent} from 'react'
+import {memo, useEffect, useRef, useState, type CSSProperties} from 'react'
 
 import {FaChevronDown, FaChevronUp} from 'react-icons/fa6'
 import {FiEdit2, FiRotateCcw, FiTrash2, FiUpload} from 'react-icons/fi'
@@ -43,13 +43,6 @@ const teamPreviewModeOptions = [
   {value: 'compact', label: 'Compact'},
   {value: 'expanded', label: 'Expanded'},
 ] as const
-
-function isInteractiveTeamRowTarget(target: EventTarget | null): boolean {
-  return (
-    target instanceof Element &&
-    Boolean(target.closest('button, input, select, textarea, a, [role="button"]'))
-  )
-}
 
 export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
   canAddTeam,
@@ -234,13 +227,6 @@ const TeamManagementRow = memo(function TeamManagementRow({
         team.isActive ? 'builder-v2-team-management-row--active' : ''
       }`}
       data-team-name={team.name}
-      onClick={(event: MouseEvent<HTMLElement>) => {
-        if (isEditing || isInteractiveTeamRowTarget(event.target)) {
-          return
-        }
-        onSetActiveTeam(team.id)
-        onTeamActivated?.()
-      }}
     >
       <div className='builder-v2-team-management-reorder' aria-label={`${team.name} order`}>
         <span aria-hidden className='builder-v2-team-management-grip'>

@@ -4,7 +4,6 @@ import {
   useEffectEvent,
   useLayoutEffect,
   useRef,
-  useState,
   type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
   type PointerEvent as ReactPointerEvent,
@@ -39,8 +38,7 @@ export function PopoverTrailPanel({
   const desktopCloseAllRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const previouslyFocusedElementRef = useRef<HTMLElement | null>(null)
-  const [viewportVersion, setViewportVersion] = useState(0)
-  const [manualPosition, setManualPosition] = useState<{left: number; top: number} | null>(null)
+  const manualPositionRef = useRef<{left: number; top: number} | null>(null)
   const isMobile = isTrailMobileLayout(window.innerWidth)
   const currentAnchorRect = anchorElement?.isConnected
     ? anchorElement.getBoundingClientRect()
@@ -63,6 +61,7 @@ export function PopoverTrailPanel({
     const activeAnchorRect = anchorElement?.isConnected
       ? anchorElement.getBoundingClientRect()
       : anchorRect
+    const manualPosition = manualPositionRef.current
     const desktopCloseAllHeight =
       direction === 'down' ? (desktopCloseAllRef.current?.getBoundingClientRect().height ?? 0) : 0
 
@@ -89,15 +88,16 @@ export function PopoverTrailPanel({
 
     el.style.top = `${String(top)}px`
     el.style.left = `${String(left)}px`
-  }, [anchorElement, anchorRect, direction, isMobile, manualPosition])
+  }, [anchorElement, anchorRect, direction, isMobile])
+  const positionPanelEvent = useEffectEvent(positionPanel)
 
   useLayoutEffect(() => {
     positionPanel()
-  }, [itemCount, positionPanel, viewportVersion])
+  }, [itemCount, positionPanel])
 
   useEffect(() => {
     function handleViewportChange() {
-      setViewportVersion((v) => v + 1)
+      positionPanelEvent()
     }
     window.addEventListener('resize', handleViewportChange)
     window.addEventListener('scroll', handleViewportChange, true)
@@ -171,10 +171,11 @@ export function PopoverTrailPanel({
       nextTarget.setPointerCapture(event.pointerId)
 
       const handlePointerMove = (moveEvent: PointerEvent) => {
-        setManualPosition({
+        manualPositionRef.current = {
           left: moveEvent.clientX - pointerOffsetX,
           top: moveEvent.clientY - pointerOffsetY,
-        })
+        }
+        positionPanel()
       }
 
       const handlePointerUp = () => {
@@ -186,7 +187,7 @@ export function PopoverTrailPanel({
       window.addEventListener('pointermove', handlePointerMove)
       window.addEventListener('pointerup', handlePointerUp)
     },
-    [isMobile],
+    [isMobile, positionPanel],
   )
 
   const handleKeyDown = useCallback(

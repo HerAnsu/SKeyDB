@@ -71,14 +71,12 @@ function expectElement(element: Element | null): asserts element is Element {
 }
 
 describe('BuilderV2TeamManagement', () => {
-  it('activates a team when clicking the row surface', () => {
+  it('activates a team from the explicit select button', () => {
     const onSetActiveTeam = vi.fn()
 
     renderTeamManagement({onSetActiveTeam})
 
-    const teamRow = screen.getByText('Wave 2').closest('article')
-    expectElement(teamRow)
-    fireEvent.click(teamRow)
+    fireEvent.click(screen.getByRole('button', {name: 'Select Wave 2'}))
 
     expect(onSetActiveTeam).toHaveBeenCalledWith('team-2')
   })

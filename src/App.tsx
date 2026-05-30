@@ -1,4 +1,4 @@
-import {lazy, Suspense, useEffect, useState} from 'react'
+import {lazy, Suspense, useCallback, useEffect, useState, useSyncExternalStore} from 'react'
 
 import {Navigate, NavLink, Route, Routes, useLocation} from 'react-router-dom'
 
@@ -263,30 +263,33 @@ function App() {
 }
 
 function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(() =>
-    typeof window === 'undefined' || typeof window.matchMedia !== 'function'
-      ? false
-      : window.matchMedia(query).matches,
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+        return () => undefined
+      }
+
+      const mediaQuery = window.matchMedia(query)
+      mediaQuery.addEventListener('change', onStoreChange)
+      return () => {
+        mediaQuery.removeEventListener('change', onStoreChange)
+      }
+    },
+    [query],
+  )
+  const getSnapshot = useCallback(
+    () =>
+      typeof window === 'undefined' || typeof window.matchMedia !== 'function'
+        ? false
+        : window.matchMedia(query).matches,
+    [query],
   )
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-      return
-    }
+  return useSyncExternalStore(subscribe, getSnapshot, getServerMediaQuerySnapshot)
+}
 
-    const mediaQuery = window.matchMedia(query)
-    const updateMatches = () => {
-      setMatches(mediaQuery.matches)
-    }
-
-    updateMatches()
-    mediaQuery.addEventListener('change', updateMatches)
-    return () => {
-      mediaQuery.removeEventListener('change', updateMatches)
-    }
-  }, [query])
-
-  return matches
+function getServerMediaQuerySnapshot(): boolean {
+  return false
 }
 
 function getMobileVisibleItemCount({compact, wide}: {compact: boolean; wide: boolean}): number {
