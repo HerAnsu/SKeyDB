@@ -309,7 +309,7 @@ export function createDefaultCollectionOwnershipCatalog(): CollectionOwnershipCa
   const linkedAwakenerGroups: string[][] = []
   for (const group of linkedAwakenerIdsByIdentity.values()) {
     if (group.length > 1) {
-      linkedAwakenerGroups.push([...group].sort((left, right) => left.localeCompare(right)))
+      linkedAwakenerGroups.push(group.toSorted((left, right) => left.localeCompare(right)))
     }
   }
 

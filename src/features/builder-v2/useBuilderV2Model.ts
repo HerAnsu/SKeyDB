@@ -313,10 +313,10 @@ export function useBuilderV2Model({
     [effectiveActiveTeamId, teams],
   )
   const activeTeamSlots = activeTeam.slots
-  const allWheels = useMemo(() => [...getWheels()].sort(compareWheelsForUi), [])
+  const allWheels = useMemo(() => getWheels().toSorted(compareWheelsForUi), [])
   const wheelById = useMemo(() => new Map(allWheels.map((wheel) => [wheel.id, wheel])), [allWheels])
   const allCovenants = useMemo(
-    () => [...getCovenants()].sort((left, right) => left.name.localeCompare(right.name)),
+    () => getCovenants().toSorted((left, right) => left.name.localeCompare(right.name)),
     [],
   )
   const covenantById = useMemo(
@@ -324,7 +324,7 @@ export function useBuilderV2Model({
     [allCovenants],
   )
   const allPosses = useMemo(
-    () => [...getPosses()].sort((left, right) => left.name.localeCompare(right.name)),
+    () => getPosses().toSorted((left, right) => left.name.localeCompare(right.name)),
     [],
   )
   const posseById = useMemo(() => new Map(allPosses.map((posse) => [posse.id, posse])), [allPosses])

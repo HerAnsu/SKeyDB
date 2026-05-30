@@ -354,7 +354,7 @@ function getActivePinnedPriority(pinned: boolean | undefined, status: TimelineSt
 
 export function sortBannersByRelevance(banners: BannerEntry[], now?: Date): BannerEntry[] {
   const reference = now ?? new Date()
-  return [...banners].sort((a, b) => {
+  return banners.toSorted((a, b) => {
     const statusA = getTimelineStatus(a.startDate, a.endDate, reference)
     const statusB = getTimelineStatus(b.startDate, b.endDate, reference)
     const order: Record<TimelineStatus, number> = {active: 0, upcoming: 1, ended: 2}
@@ -378,7 +378,7 @@ export function sortBannersByRelevance(banners: BannerEntry[], now?: Date): Bann
 
 export function sortEventsByRelevance(events: EventEntry[], now?: Date): EventEntry[] {
   const reference = now ?? new Date()
-  return [...events].sort((a, b) => {
+  return events.toSorted((a, b) => {
     const statusA = getTimelineStatus(a.startDate, a.endDate, reference)
     const statusB = getTimelineStatus(b.startDate, b.endDate, reference)
     const order: Record<TimelineStatus, number> = {active: 0, upcoming: 1, ended: 2}

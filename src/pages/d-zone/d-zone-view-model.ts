@@ -33,7 +33,7 @@ function getSharedInitialRelicRank(relicId: string, sharedRelicIds: string[]): n
 }
 
 export function sortInitialRelicIds(relicIds: string[], sharedRelicIds: string[]): string[] {
-  return [...relicIds].sort((left, right) => {
+  return relicIds.toSorted((left, right) => {
     const rankDiff =
       getSharedInitialRelicRank(left, sharedRelicIds) -
       getSharedInitialRelicRank(right, sharedRelicIds)

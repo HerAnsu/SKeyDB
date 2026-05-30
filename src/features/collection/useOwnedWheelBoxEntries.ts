@@ -7,21 +7,23 @@ import type {OwnedWheelBoxEntry} from './OwnedWheelBoxExport'
 export function createOwnedWheelBoxEntries(
   getWheelOwnedLevel: (wheelId: string) => number | null,
 ): OwnedWheelBoxEntry[] {
-  return [...getWheels()].sort(compareWheelsForUi).flatMap((wheel, index) => {
-    const level = getWheelOwnedLevel(wheel.id)
-    if (level === null) {
-      return []
-    }
-    return [
-      {
-        id: wheel.id,
-        name: wheel.name,
-        rarity: wheel.rarity,
-        realm: wheel.realm,
-        index,
-        level,
-        wheelAsset: getWheelAssetById(wheel.id) ?? null,
-      },
-    ]
-  })
+  return getWheels()
+    .toSorted(compareWheelsForUi)
+    .flatMap((wheel, index) => {
+      const level = getWheelOwnedLevel(wheel.id)
+      if (level === null) {
+        return []
+      }
+      return [
+        {
+          id: wheel.id,
+          name: wheel.name,
+          rarity: wheel.rarity,
+          realm: wheel.realm,
+          index,
+          level,
+          wheelAsset: getWheelAssetById(wheel.id) ?? null,
+        },
+      ]
+    })
 }

@@ -784,7 +784,7 @@ export function OwnedAssetBoxExport<R extends string>({
   }, [entries, includedRarities])
   const activeSortKey = resolveActiveSortKey(sortOptions, sortConfig.key)
   const sortedEntries = useMemo(() => {
-    return [...filteredEntries].sort((left, right) => {
+    return filteredEntries.toSorted((left, right) => {
       const leftSortable = toSortableCollectionEntry(left)
       const rightSortable = toSortableCollectionEntry(right)
 

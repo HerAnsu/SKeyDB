@@ -256,7 +256,7 @@ export function useCollectionViewModel() {
 
   const awakeners = useMemo(
     () =>
-      [...getAwakeners()].sort((a, b) =>
+      getAwakeners().toSorted((a, b) =>
         formatAwakenerNameForUi(a.name).localeCompare(formatAwakenerNameForUi(b.name)),
       ),
     [],
@@ -265,7 +265,7 @@ export function useCollectionViewModel() {
     () => createLinkedAwakenerIdLookup(ownershipCatalog.linkedAwakenerGroups),
     [ownershipCatalog],
   )
-  const wheels = useMemo(() => [...getWheels()].sort(compareWheelsForUi), [])
+  const wheels = useMemo(() => getWheels().toSorted(compareWheelsForUi), [])
   const wheelIndexById = useMemo(
     () => new Map(wheels.map((wheel, index) => [wheel.id, index])),
     [wheels],
@@ -298,7 +298,7 @@ export function useCollectionViewModel() {
           return getOwnedLevel(ownership, 'awakeners', awakenerId) !== null
         })
 
-    return [...byOwnership].sort((left, right) => {
+    return byOwnership.toSorted((left, right) => {
       const leftId = awakenerIdByName.get(left.name)
       const rightId = awakenerIdByName.get(right.name)
       const leftOwnedLevel = leftId ? getOwnedLevel(ownership, 'awakeners', leftId) : 0
@@ -374,7 +374,7 @@ export function useCollectionViewModel() {
       ? filteredByCategory
       : filteredByCategory.filter((posse) => getOwnedLevel(ownership, 'posses', posse.id) !== null)
 
-    return [...filteredByOwnership].sort((left, right) =>
+    return filteredByOwnership.toSorted((left, right) =>
       comparePossesForCollectionDefaultSort(
         {
           label: left.name,
@@ -410,7 +410,7 @@ export function useCollectionViewModel() {
       ? matchingSearch
       : matchingSearch.filter((wheel) => getOwnedLevel(ownership, 'wheels', wheel.id) !== null)
 
-    return [...byOwnership].sort((left, right) =>
+    return byOwnership.toSorted((left, right) =>
       compareWheelsForCollectionDefaultSort(
         {
           label: left.name,

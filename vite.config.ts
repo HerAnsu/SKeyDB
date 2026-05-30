@@ -55,6 +55,10 @@ const appVersion = createAppVersionSnapshot()
 export default defineConfig({
   base: getBasePath(),
 
+  build: {
+    target: ['chrome110', 'edge110', 'firefox115', 'safari16'],
+  },
+
   define: {
     'import.meta.env.VITE_SKEYDB_BUILD_ID': JSON.stringify(appVersion.buildId),
   },
