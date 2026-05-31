@@ -119,4 +119,27 @@ describe('BuilderV2TeamManagement', () => {
     expect(onBeginTeamRename).toHaveBeenCalledWith('team-2')
     expect(onSetActiveTeam).not.toHaveBeenCalled()
   })
+
+  it('requests editing from slot and posse previews without activating the whole row', () => {
+    const onRequestEditTeamPosse = vi.fn()
+    const onRequestEditTeamSlot = vi.fn()
+    const onSetActiveTeam = vi.fn()
+
+    renderTeamManagement({
+      onRequestEditTeamPosse,
+      onRequestEditTeamSlot,
+      onSetActiveTeam,
+    })
+
+    const waveTwoSlots = screen.getByRole('list', {name: 'Wave 2 slots'})
+    fireEvent.click(within(waveTwoSlots).getByRole('button', {name: /edit wave 2 slot 3/i}))
+    fireEvent.click(screen.getByRole('button', {name: /edit wave 2 posse/i}))
+
+    expect(onRequestEditTeamSlot.mock.calls[0][0]).toMatchObject({id: 'team-2'})
+    expect(onRequestEditTeamSlot.mock.calls[0][1]).toMatchObject({slotId: 'team-2-slot-3'})
+    expect(onRequestEditTeamSlot.mock.calls[0][2]).toBeInstanceOf(HTMLButtonElement)
+    expect(onRequestEditTeamPosse.mock.calls[0][0]).toMatchObject({id: 'team-2'})
+    expect(onRequestEditTeamPosse.mock.calls[0][1]).toBeInstanceOf(HTMLButtonElement)
+    expect(onSetActiveTeam).not.toHaveBeenCalled()
+  })
 })

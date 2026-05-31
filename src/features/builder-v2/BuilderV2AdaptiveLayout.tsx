@@ -7,7 +7,11 @@ import type {BuilderV2DropTargetDescriptor} from './builder-v2-dnd'
 import {BuilderV2ActiveFooter, BuilderV2ActiveHeader} from './BuilderV2ActiveTeamChrome'
 import {BuilderV2PickerContent} from './BuilderV2AwakenerPicker'
 import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
-import type {BuilderV2Model} from './BuilderV2ModelTypes'
+import type {
+  BuilderV2Model,
+  BuilderV2TeamSummary,
+  BuilderV2TeamSummarySlot,
+} from './BuilderV2ModelTypes'
 import {BuilderV2TeamManagement} from './BuilderV2TeamManagement'
 import {BuilderV2TeamRail} from './BuilderV2TeamRail'
 import {BuilderV2TeamSlots} from './BuilderV2TeamSlots'
@@ -22,6 +26,11 @@ interface BuilderV2AdaptiveLayoutProps {
   onOpenPosseDetail: (posseId: string) => void
   onOpenWheelDetail: (wheelId: string) => void
 }
+
+type AdaptiveOpenPicker = (
+  restoreTarget?: HTMLElement | null,
+  options?: {ensureTarget?: boolean},
+) => void
 
 export function BuilderV2AdaptiveLayout({
   activeDropTarget,
@@ -120,6 +129,9 @@ export function BuilderV2AdaptiveLayout({
     model.selectPosse()
     openPicker(restoreTarget, {ensureTarget: false})
   })
+
+  const {selectTeamListPosseAndOpenPicker, selectTeamListSlotAndOpenPicker} =
+    useAdaptiveTeamManagementShortcuts(model, openPicker)
 
   const assignAwakener = useStableEvent((awakenerId: string) => {
     model.assignAwakener(awakenerId)
@@ -279,6 +291,8 @@ export function BuilderV2AdaptiveLayout({
             onRequestExportTeam={model.openTeamExportDialog}
             onRequestApplyTeamTemplate={model.requestApplyTeamTemplate}
             onRequestDeleteTeam={model.requestDeleteTeam}
+            onRequestEditTeamPosse={selectTeamListPosseAndOpenPicker}
+            onRequestEditTeamSlot={selectTeamListSlotAndOpenPicker}
             onRequestResetTeam={model.requestResetTeam}
             onSetActiveTeam={model.setActiveTeam}
             onSetEditingTeamName={model.setEditingTeamName}
@@ -295,4 +309,44 @@ export function BuilderV2AdaptiveLayout({
 
 function getCurrentFocusRestoreTarget(): HTMLElement | null {
   return document.activeElement instanceof HTMLElement ? document.activeElement : null
+}
+
+function useAdaptiveTeamManagementShortcuts(model: BuilderV2Model, openPicker: AdaptiveOpenPicker) {
+  const selectTeamListSlotAndOpenPicker = useStableEvent(
+    (
+      team: BuilderV2TeamSummary,
+      slot: BuilderV2TeamSummarySlot,
+      restoreTarget: HTMLElement | null,
+    ) => {
+      const isCurrentTarget =
+        model.activeTeamId === team.id &&
+        model.activeSelection?.kind === 'awakener' &&
+        model.activeSelection.slotId === slot.slotId
+
+      if (model.activeTeamId !== team.id) {
+        model.setActiveTeam(team.id)
+      }
+      if (!isCurrentTarget) {
+        model.selectAwakenerSlot(slot.slotId)
+      }
+      openPicker(restoreTarget, {ensureTarget: false})
+    },
+  )
+
+  const selectTeamListPosseAndOpenPicker = useStableEvent(
+    (team: BuilderV2TeamSummary, restoreTarget: HTMLElement | null) => {
+      const isCurrentTarget =
+        model.activeTeamId === team.id && model.activeTeamTarget?.kind === 'posse'
+
+      if (model.activeTeamId !== team.id) {
+        model.setActiveTeam(team.id)
+      }
+      if (!isCurrentTarget) {
+        model.selectPosse()
+      }
+      openPicker(restoreTarget, {ensureTarget: false})
+    },
+  )
+
+  return {selectTeamListPosseAndOpenPicker, selectTeamListSlotAndOpenPicker}
 }

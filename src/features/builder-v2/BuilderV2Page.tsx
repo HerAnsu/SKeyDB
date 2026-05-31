@@ -21,6 +21,7 @@ import {BuilderV2DndEnabledContext, useBuilderV2DndEnabledForDevice} from './Bui
 import {BuilderV2DragOverlay} from './BuilderV2DragOverlay'
 import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
 import {BuilderV2MobileLayout} from './BuilderV2MobileLayout'
+import type {BuilderV2TeamSummary, BuilderV2TeamSummarySlot} from './BuilderV2ModelTypes'
 import {BuilderV2TeamManagement} from './BuilderV2TeamManagement'
 import {BuilderV2TeamRail} from './BuilderV2TeamRail'
 import {BuilderV2TeamSlots} from './BuilderV2TeamSlots'
@@ -78,6 +79,32 @@ export function BuilderV2Page() {
   const dnd = useBuilderV2Dnd({model})
   const activeDropTarget = isDndEnabled ? dnd.activeDropTarget : null
   const isDragActive = isDndEnabled && dnd.isDragging
+  const selectTeamListSlot = useStableEvent(
+    (team: BuilderV2TeamSummary, slot: BuilderV2TeamSummarySlot) => {
+      const isCurrentTarget =
+        model.activeTeamId === team.id &&
+        model.activeSelection?.kind === 'awakener' &&
+        model.activeSelection.slotId === slot.slotId
+
+      if (model.activeTeamId !== team.id) {
+        model.setActiveTeam(team.id)
+      }
+      if (!isCurrentTarget) {
+        model.selectAwakenerSlot(slot.slotId)
+      }
+    },
+  )
+  const selectTeamListPosse = useStableEvent((team: BuilderV2TeamSummary) => {
+    const isCurrentTarget =
+      model.activeTeamId === team.id && model.activeTeamTarget?.kind === 'posse'
+
+    if (model.activeTeamId !== team.id) {
+      model.setActiveTeam(team.id)
+    }
+    if (!isCurrentTarget) {
+      model.selectPosse()
+    }
+  })
 
   let content
 
@@ -188,6 +215,8 @@ export function BuilderV2Page() {
                 onRequestExportTeam={model.openTeamExportDialog}
                 onRequestApplyTeamTemplate={model.requestApplyTeamTemplate}
                 onRequestDeleteTeam={model.requestDeleteTeam}
+                onRequestEditTeamPosse={selectTeamListPosse}
+                onRequestEditTeamSlot={selectTeamListSlot}
                 onRequestResetTeam={model.requestResetTeam}
                 onSetActiveTeam={model.setActiveTeam}
                 onSetEditingTeamName={model.setEditingTeamName}

@@ -34,6 +34,12 @@ interface BuilderV2TeamManagementProps {
   onRequestDeleteTeam: (teamId: string) => void
   onRequestExportTeam: (teamId: string) => void
   onRequestResetTeam: (teamId: string) => void
+  onRequestEditTeamPosse?: (team: BuilderV2TeamSummary, restoreTarget: HTMLElement | null) => void
+  onRequestEditTeamSlot?: (
+    team: BuilderV2TeamSummary,
+    slot: BuilderV2TeamSummarySlot,
+    restoreTarget: HTMLElement | null,
+  ) => void
   onSetActiveTeam: (teamId: string) => void
   onSetEditingTeamName: (nextName: string) => void
   onTeamPreviewModeChange: (nextMode: TeamPreviewMode) => void
@@ -61,6 +67,8 @@ export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
   onMoveTeamUp,
   onRequestApplyTeamTemplate,
   onRequestDeleteTeam,
+  onRequestEditTeamPosse,
+  onRequestEditTeamSlot,
   onRequestExportTeam,
   onRequestResetTeam,
   onSetActiveTeam,
@@ -74,10 +82,21 @@ export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
     >
       <div className='builder-v2-team-management-header'>
         <div className='builder-v2-team-management-identity'>
-          <p className='builder-v2-label'>{variant === 'mobile' ? 'Other Teams' : 'Your Teams'}</p>
-          <h2 className='ui-title'>
-            {teams.length} / {maxTeams}
-          </h2>
+          {variant === 'mobile' ? (
+            <div className='builder-v2-team-management-title-row'>
+              <h2 className='ui-title'>Teams</h2>
+              <span className='builder-v2-team-management-count'>
+                {teams.length} / {maxTeams}
+              </span>
+            </div>
+          ) : (
+            <>
+              <p className='builder-v2-label'>Your Teams</p>
+              <h2 className='ui-title'>
+                {teams.length} / {maxTeams}
+              </h2>
+            </>
+          )}
         </div>
 
         <div className='builder-v2-team-management-toolbar'>
@@ -154,6 +173,8 @@ export const BuilderV2TeamManagement = memo(function BuilderV2TeamManagement({
             onMoveTeamDown={onMoveTeamDown}
             onMoveTeamUp={onMoveTeamUp}
             onRequestDeleteTeam={onRequestDeleteTeam}
+            onRequestEditTeamPosse={onRequestEditTeamPosse}
+            onRequestEditTeamSlot={onRequestEditTeamSlot}
             onRequestExportTeam={onRequestExportTeam}
             onRequestResetTeam={onRequestResetTeam}
             onSetActiveTeam={onSetActiveTeam}
@@ -181,6 +202,8 @@ const TeamManagementRow = memo(function TeamManagementRow({
   onMoveTeamDown,
   onMoveTeamUp,
   onRequestDeleteTeam,
+  onRequestEditTeamPosse,
+  onRequestEditTeamSlot,
   onRequestExportTeam,
   onRequestResetTeam,
   onSetActiveTeam,
@@ -201,6 +224,12 @@ const TeamManagementRow = memo(function TeamManagementRow({
   onMoveTeamDown: (teamId: string) => void
   onMoveTeamUp: (teamId: string) => void
   onRequestDeleteTeam: (teamId: string) => void
+  onRequestEditTeamPosse?: (team: BuilderV2TeamSummary, restoreTarget: HTMLElement | null) => void
+  onRequestEditTeamSlot?: (
+    team: BuilderV2TeamSummary,
+    slot: BuilderV2TeamSummarySlot,
+    restoreTarget: HTMLElement | null,
+  ) => void
   onRequestExportTeam: (teamId: string) => void
   onRequestResetTeam: (teamId: string) => void
   onSetActiveTeam: (teamId: string) => void
@@ -312,7 +341,7 @@ const TeamManagementRow = memo(function TeamManagementRow({
             </div>
           )}
 
-          <TeamPosseSummary team={team} />
+          <TeamPosseSummary onSelect={onRequestEditTeamPosse} team={team} />
         </div>
 
         <div className='builder-v2-team-management-row-body'>
@@ -323,7 +352,13 @@ const TeamManagementRow = memo(function TeamManagementRow({
             ref={slotsRef}
           >
             {team.slots.map((slot) => (
-              <TeamSlotSummary key={slot.slotId} previewMode={previewMode} slot={slot} />
+              <TeamSlotSummary
+                key={slot.slotId}
+                onSelect={onRequestEditTeamSlot}
+                previewMode={previewMode}
+                slot={slot}
+                team={team}
+              />
             ))}
           </ul>
 
@@ -450,14 +485,21 @@ function useHorizontalOverflow() {
   return [setRef, hasOverflow] as const
 }
 
-function TeamPosseSummary({team}: {team: BuilderV2TeamSummary}) {
+function TeamPosseSummary({
+  onSelect,
+  team,
+}: {
+  onSelect?: (team: BuilderV2TeamSummary, restoreTarget: HTMLElement | null) => void
+  team: BuilderV2TeamSummary
+}) {
   const hasPosse = Boolean(team.posseName)
-  return (
-    <div
-      className={`builder-v2-team-management-posse ${
-        hasPosse ? 'builder-v2-team-management-posse--equipped' : ''
-      } ${!team.isPosseOwned ? 'builder-v2-team-management-posse--unowned' : ''}`}
-    >
+  const className = `builder-v2-team-management-posse ${
+    hasPosse ? 'builder-v2-team-management-posse--equipped' : ''
+  } ${!team.isPosseOwned ? 'builder-v2-team-management-posse--unowned' : ''} ${
+    onSelect ? 'builder-v2-team-management-posse-button' : ''
+  }`
+  const content = (
+    <>
       <span className='builder-v2-team-management-posse-icon' aria-hidden>
         {team.posseAssetSrc ? <img alt='' draggable={false} src={team.posseAssetSrc} /> : null}
       </span>
@@ -467,16 +509,41 @@ function TeamPosseSummary({team}: {team: BuilderV2TeamSummary}) {
           {team.posseName ?? 'Not selected'}
         </span>
       </span>
-    </div>
+    </>
+  )
+
+  if (!onSelect) {
+    return <div className={className}>{content}</div>
+  }
+
+  return (
+    <button
+      aria-label={`Edit ${team.name} posse`}
+      className={className}
+      onClick={(event) => {
+        onSelect(team, event.currentTarget)
+      }}
+      type='button'
+    >
+      {content}
+    </button>
   )
 }
 
 function TeamSlotSummary({
+  onSelect,
   previewMode,
   slot,
+  team,
 }: {
+  onSelect?: (
+    team: BuilderV2TeamSummary,
+    slot: BuilderV2TeamSummarySlot,
+    restoreTarget: HTMLElement | null,
+  ) => void
   previewMode: TeamPreviewMode
   slot: BuilderV2TeamSummarySlot
+  team: BuilderV2TeamSummary
 }) {
   const compactEnlightenLabel = formatBuilderV2EnlightenLabel(slot.awakener?.enlightenLevel ?? null)
   const hasEnlightenOverflow = Boolean(
@@ -496,6 +563,43 @@ function TeamSlotSummary({
       } ${hasEnlightenOverflow ? 'builder-v2-team-management-slot--enlighten-overflow' : ''}`}
       style={style}
     >
+      {onSelect ? (
+        <button
+          aria-label={`Edit ${team.name} ${slot.label}`}
+          className='builder-v2-team-management-slot-button'
+          onClick={(event) => {
+            onSelect(team, slot, event.currentTarget)
+          }}
+          type='button'
+        >
+          <TeamSlotSummaryContent
+            compactEnlightenLabel={compactEnlightenLabel}
+            previewMode={previewMode}
+            slot={slot}
+          />
+        </button>
+      ) : (
+        <TeamSlotSummaryContent
+          compactEnlightenLabel={compactEnlightenLabel}
+          previewMode={previewMode}
+          slot={slot}
+        />
+      )}
+    </li>
+  )
+}
+
+function TeamSlotSummaryContent({
+  compactEnlightenLabel,
+  previewMode,
+  slot,
+}: {
+  compactEnlightenLabel: string | null
+  previewMode: TeamPreviewMode
+  slot: BuilderV2TeamSummarySlot
+}) {
+  return (
+    <>
       <span aria-hidden className='builder-v2-team-management-slot-art'>
         {slot.awakener ? (
           <>
@@ -561,7 +665,7 @@ function TeamSlotSummary({
           </span>
         </span>
       ) : null}
-    </li>
+    </>
   )
 }
 

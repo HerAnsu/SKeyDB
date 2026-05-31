@@ -25,6 +25,7 @@ type BuilderV2AwakenerRealm = NonNullable<BuilderV2SlotView['awakener']>['realm'
 
 interface BuilderV2TeamSlotsProps {
   slots: BuilderV2SlotView[]
+  covenantPlacement?: 'meta' | 'rail'
   isDragActive?: boolean
   predictedDropTarget?: BuilderV2DropTargetDescriptor | null
   quickLineupActive?: boolean
@@ -41,6 +42,7 @@ interface BuilderV2TeamSlotsProps {
 }
 
 export function BuilderV2TeamSlots({
+  covenantPlacement = 'meta',
   onClearCovenant,
   onClearWheel,
   isDragActive = false,
@@ -63,6 +65,7 @@ export function BuilderV2TeamSlots({
           onSelectCovenantSlot={onSelectCovenantSlot}
           onSelectSlot={onSelectSlot}
           onSelectWheelSlot={onSelectWheelSlot}
+          covenantPlacement={covenantPlacement}
           isDragActive={isDragActive}
           predictedDropTarget={predictedDropTarget}
           quickLineupActive={quickLineupActive}
@@ -75,6 +78,7 @@ export function BuilderV2TeamSlots({
 
 interface BuilderV2SlotCardProps {
   slot: BuilderV2SlotView
+  covenantPlacement: 'meta' | 'rail'
   isDragActive: boolean
   predictedDropTarget: BuilderV2DropTargetDescriptor | null
   quickLineupActive: boolean
@@ -98,6 +102,7 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
   onSelectSlot,
   onSelectWheelSlot,
   isDragActive,
+  covenantPlacement,
   predictedDropTarget,
   quickLineupActive,
   slot,
@@ -135,6 +140,51 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
     (isDragActive
       ? isPredictedCovenantDropTarget(predictedDropTarget, slot.slotId)
       : isCovenantOver)
+  const renderCovenantSlot = (variant: 'meta' | 'rail') => {
+    return (
+      <div className={`builder-v2-covenant-slot builder-v2-covenant-slot--${variant}`}>
+        <button
+          {...(canDragCovenant && covenantDragListeners ? covenantDragListeners : {})}
+          aria-label={`Select ${slot.slotLabel} Covenant`}
+          aria-pressed={slot.isCovenantSelected}
+          className={`builder-v2-covenant-inline ${
+            slot.isCovenantSelected ? 'builder-v2-covenant-inline--active' : ''
+          } ${isCovenantDropTarget ? 'builder-v2-covenant-inline--drop-target' : ''}`}
+          onClick={(event) => {
+            onSelectCovenantSlot(slot.slotId, event.currentTarget)
+          }}
+          ref={isDndEnabled ? setCovenantNodeRef : undefined}
+          title={slot.covenantName ?? 'Covenant'}
+          type='button'
+        >
+          {slot.covenantAssetSrc ? (
+            <img
+              alt=''
+              decoding='async'
+              draggable={false}
+              fetchPriority='low'
+              src={slot.covenantAssetSrc}
+            />
+          ) : (
+            <span aria-hidden>+</span>
+          )}
+          <span className='sr-only'>{slot.covenantName ?? 'Covenant'}</span>
+        </button>
+        {variant === 'meta' && slot.covenantId && !quickLineupActive ? (
+          <button
+            aria-label={`Clear ${slot.slotLabel} Covenant`}
+            className='builder-v2-covenant-inline-clear'
+            onClick={() => {
+              onClearCovenant(slot.slotId)
+            }}
+            type='button'
+          >
+            ×
+          </button>
+        ) : null}
+      </div>
+    )
+  }
 
   return (
     <article
@@ -220,47 +270,7 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
             )}
           </div>
 
-          <div className='builder-v2-covenant-slot'>
-            <button
-              {...(canDragCovenant && covenantDragListeners ? covenantDragListeners : {})}
-              aria-label={`Select ${slot.slotLabel} Covenant`}
-              aria-pressed={slot.isCovenantSelected}
-              className={`builder-v2-covenant-inline ${
-                slot.isCovenantSelected ? 'builder-v2-covenant-inline--active' : ''
-              } ${isCovenantDropTarget ? 'builder-v2-covenant-inline--drop-target' : ''}`}
-              onClick={(event) => {
-                onSelectCovenantSlot(slot.slotId, event.currentTarget)
-              }}
-              ref={isDndEnabled ? setCovenantNodeRef : undefined}
-              title={slot.covenantName ?? 'Covenant'}
-              type='button'
-            >
-              {slot.covenantAssetSrc ? (
-                <img
-                  alt=''
-                  decoding='async'
-                  draggable={false}
-                  fetchPriority='low'
-                  src={slot.covenantAssetSrc}
-                />
-              ) : (
-                <span aria-hidden>+</span>
-              )}
-              <span className='sr-only'>{slot.covenantName ?? 'Covenant'}</span>
-            </button>
-            {slot.covenantId && !quickLineupActive ? (
-              <button
-                aria-label={`Clear ${slot.slotLabel} Covenant`}
-                className='builder-v2-covenant-inline-clear'
-                onClick={() => {
-                  onClearCovenant(slot.slotId)
-                }}
-                type='button'
-              >
-                ×
-              </button>
-            ) : null}
-          </div>
+          {covenantPlacement === 'meta' ? renderCovenantSlot('meta') : null}
         </div>
       </div>
 
@@ -281,6 +291,7 @@ const BuilderV2SlotCard = memo(function BuilderV2SlotCard({
             wheelSlot={wheelSlot}
           />
         ))}
+        {covenantPlacement === 'rail' ? renderCovenantSlot('rail') : null}
       </div>
     </article>
   )
@@ -292,6 +303,7 @@ function areSlotCardPropsEqual(
 ): boolean {
   return (
     previous.quickLineupActive === next.quickLineupActive &&
+    previous.covenantPlacement === next.covenantPlacement &&
     previous.isDragActive === next.isDragActive &&
     isSameDropTarget(previous.predictedDropTarget, next.predictedDropTarget) &&
     previous.onClearCovenant === next.onClearCovenant &&
