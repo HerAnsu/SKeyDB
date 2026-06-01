@@ -49,6 +49,9 @@ describe('DZonePage', () => {
     expect(screen.getAllByRole('heading', {level: 3, name: /Initial Relic/i})).toHaveLength(5)
     expect(screen.getAllByRole('heading', {level: 3, name: /Monsters/i})).toHaveLength(5)
     expect(screen.getByRole('button', {name: 'Select Alert V'})).toBeInTheDocument()
+    const alertSwitcher = screen.getByRole('group', {name: 'Alert'})
+    expect(alertSwitcher).toHaveTextContent('Alert')
+    expect(alertSwitcher.querySelector('legend')).not.toBeInTheDocument()
   })
 
   it('falls back to the latest known season when no current season is recorded', async () => {

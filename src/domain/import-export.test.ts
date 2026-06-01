@@ -2,8 +2,12 @@ import {describe, expect, it, vi} from 'vitest'
 
 import type {Team} from '@/features/builder/types'
 
+import {getAwakeners} from './awakeners'
+import {getCovenants} from './covenants'
 import {decodeImportCode, encodeMultiTeamCode, encodeSingleTeamCode} from './import-export'
+import {getPosses} from './posses'
 import standardCodeContract from './standard-code-contract.v1.json'
+import {getWheels} from './wheels'
 
 function makeTeam(name: string): Team {
   return {
@@ -41,6 +45,45 @@ function trimTrailingPadding(value: string): string {
 }
 
 describe('import-export codec', () => {
+  it('keeps every current builder catalog id representable in the standard byte contract', () => {
+    const contractScopes = [
+      {
+        name: 'awakeners',
+        currentIds: getAwakeners().map((awakener) => awakener.id),
+        contractIds: standardCodeContract.awakeners.map((entry) => entry.id),
+      },
+      {
+        name: 'wheels',
+        currentIds: getWheels().map((wheel) => wheel.id),
+        contractIds: standardCodeContract.wheels.map((entry) => entry.id),
+      },
+      {
+        name: 'covenants',
+        currentIds: getCovenants().map((covenant) => covenant.id),
+        contractIds: standardCodeContract.covenants.map((entry) => entry.id),
+      },
+      {
+        name: 'posses',
+        currentIds: getPosses().map((posse) => posse.id),
+        contractIds: standardCodeContract.posses.map((entry) => entry.id),
+      },
+    ]
+
+    const missingByScope = Object.fromEntries(
+      contractScopes.map(({name, currentIds, contractIds}) => {
+        const contractIdSet = new Set(contractIds)
+        return [name, currentIds.filter((id) => !contractIdSet.has(id))]
+      }),
+    )
+
+    expect(missingByScope).toEqual({
+      awakeners: [],
+      wheels: [],
+      covenants: [],
+      posses: [],
+    })
+  })
+
   it('encodes single-team with t1 prefix and round-trips', () => {
     const team = makeTeam('Team 1')
     const code = encodeSingleTeamCode(team)
@@ -77,12 +120,12 @@ describe('import-export codec', () => {
     expect('awakenerName' in parsed.team.slots[0]).toBe(false)
   })
 
-  it('throws when a selected posse is not representable in the frozen standard-code byte contract', () => {
+  it('throws when a selected unknown posse is not representable in the standard-code byte contract', () => {
     const team = makeTeam('Orbis Fatum Team')
-    team.posseId = 'posse-0050'
+    team.posseId = 'posse-9999'
 
     expect(() => encodeSingleTeamCode(team)).toThrow(
-      /posse "posse-0050" is not representable in the frozen standard export format/i,
+      /posse "posse-9999" is not representable in the frozen standard export format/i,
     )
   })
 
@@ -139,6 +182,28 @@ describe('import-export codec', () => {
     expect('awakenerName' in parsed.team.slots[0]).toBe(false)
     expect(parsed.team.slots[0].realm).toBe('AEQUOR')
     expect(parsed.team.slots[0].wheels).toEqual([null, null])
+  })
+
+  it('round-trips Saya and her current collab equipment in standard mt1 export codes', () => {
+    const team = makeTeam('Saya Team')
+    team.posseId = 'posse-0051'
+    team.slots[0] = {
+      slotId: 'slot-1',
+      awakenerId: 'awakener-0057',
+      realm: 'CARO',
+      level: 60,
+      wheels: ['wheel-0167', 'wheel-0168'],
+    }
+
+    const code = encodeMultiTeamCode([team], team.id)
+    const parsed = decodeImportCode(code)
+
+    expect(parsed.kind).toBe('multi')
+    if (parsed.kind !== 'multi') return
+    expect(parsed.teams[0].posseId).toBe('posse-0051')
+    expect(parsed.teams[0].slots[0].awakenerId).toBe('awakener-0057')
+    expect(parsed.teams[0].slots[0].wheels).toEqual(['wheel-0167', 'wheel-0168'])
+    expect(parsed.teams[0].slots[0].realm).toBe('CARO')
   })
 
   it('encodes multi-team with mt1 prefix and round-trips', () => {

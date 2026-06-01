@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState} from 'react'
+import {useEffect, useMemo, useReducer, useRef, useState} from 'react'
 
 import {FaImage} from 'react-icons/fa6'
 
@@ -117,6 +117,97 @@ function getExportUnavailableReason(
   }
 
   return null
+}
+
+interface ExportSettingsInitializer<R extends string> {
+  storage: StorageLike | null
+  storageKeyPrefix: string
+  rarityOptions?: readonly RarityOption<R>[]
+  defaultIncludedRarities?: Record<R, boolean>
+}
+
+interface ExportSettingsState<R extends string> {
+  draftConfig: ExportBoxConfig
+  visuals: ExportVisualConfig
+  sortConfig: ExportSortConfig
+  includedRarities: Record<R, boolean> | null
+  emojiAsset: string | null
+}
+
+type ExportSettingsAction<R extends string> =
+  | {type: 'updateDraftConfig'; updater: (current: ExportBoxConfig) => ExportBoxConfig}
+  | {type: 'updateVisuals'; updater: (current: ExportVisualConfig) => ExportVisualConfig}
+  | {type: 'updateSortConfig'; updater: (current: ExportSortConfig) => ExportSortConfig}
+  | {type: 'toggleRarity'; rarity: R; checked: boolean}
+  | {type: 'reset'; defaultIncludedRarities?: Record<R, boolean>}
+
+function createExportSettingsState<R extends string>({
+  storage,
+  storageKeyPrefix,
+  rarityOptions,
+  defaultIncludedRarities,
+}: ExportSettingsInitializer<R>): ExportSettingsState<R> {
+  return {
+    draftConfig: loadStoredLayoutConfig(storage, storageKeyPrefix),
+    visuals: loadStoredVisualConfig(storage, storageKeyPrefix),
+    sortConfig: loadStoredSortConfig(storage, storageKeyPrefix),
+    includedRarities: getInitialIncludedRarities(
+      storage,
+      storageKeyPrefix,
+      rarityOptions,
+      defaultIncludedRarities,
+    ),
+    emojiAsset: pickRandomEmojiAsset(),
+  }
+}
+
+function exportSettingsReducer<R extends string>(
+  state: ExportSettingsState<R>,
+  action: ExportSettingsAction<R>,
+): ExportSettingsState<R> {
+  switch (action.type) {
+    case 'updateDraftConfig':
+      return {
+        ...state,
+        draftConfig: action.updater(state.draftConfig),
+      }
+
+    case 'updateVisuals':
+      return {
+        ...state,
+        visuals: action.updater(state.visuals),
+        emojiAsset: pickRandomEmojiAsset(),
+      }
+
+    case 'updateSortConfig':
+      return {
+        ...state,
+        sortConfig: action.updater(state.sortConfig),
+      }
+
+    case 'toggleRarity':
+      return state.includedRarities
+        ? {
+            ...state,
+            includedRarities: {
+              ...state.includedRarities,
+              [action.rarity]: action.checked,
+            },
+          }
+        : state
+
+    case 'reset':
+      return {
+        ...state,
+        draftConfig: DEFAULT_EXPORT_BOX_CONFIG,
+        visuals: DEFAULT_EXPORT_VISUAL_CONFIG,
+        sortConfig: DEFAULT_EXPORT_SORT_CONFIG,
+        includedRarities: action.defaultIncludedRarities
+          ? {...action.defaultIncludedRarities}
+          : state.includedRarities,
+        emojiAsset: pickRandomEmojiAsset(),
+      }
+  }
 }
 
 const emojiAssets = Object.values(
@@ -260,7 +351,7 @@ function ExportPreview<R extends string>({
               {!visuals.disableNames && visuals.nameOnTop ? (
                 <p
                   data-testid='export-preview-card-label'
-                  className='absolute top-1 right-1 left-1 z-11 truncate bg-slate-950/75 px-1 py-1 text-center leading-none text-slate-100'
+                  className='absolute top-1 right-1 left-1 z-11 truncate bg-slate-950/75 p-1 text-center leading-none text-slate-100'
                   style={{
                     fontSize: `${String(nameSizePx)}px`,
                     textShadow: '0 1px 2px rgba(2, 6, 12, 0.9)',
@@ -305,7 +396,7 @@ function ExportPreview<R extends string>({
                     {hasBottomName ? (
                       <p
                         data-testid='export-preview-card-label'
-                        className='w-full truncate bg-slate-950/75 px-1 py-1 text-center leading-none text-slate-100'
+                        className='w-full truncate bg-slate-950/75 p-1 text-center leading-none text-slate-100'
                         style={{
                           fontSize: `${String(nameSizePx)}px`,
                           textShadow: '0 1px 2px rgba(2, 6, 12, 0.9)',
@@ -755,19 +846,17 @@ export function OwnedAssetBoxExport<R extends string>({
   const storage = useMemo(() => getBrowserLocalStorage(), [])
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [isExporting, setIsExporting] = useState(false)
-  const [draftConfig, setDraftConfig] = useState<ExportBoxConfig>(() =>
-    loadStoredLayoutConfig(storage, storageKeyPrefix),
+  const [settings, dispatchSettings] = useReducer(
+    exportSettingsReducer<R>,
+    {
+      storage,
+      storageKeyPrefix,
+      rarityOptions,
+      defaultIncludedRarities,
+    },
+    createExportSettingsState,
   )
-  const [visuals, setVisuals] = useState<ExportVisualConfig>(() =>
-    loadStoredVisualConfig(storage, storageKeyPrefix),
-  )
-  const [sortConfig, setSortConfig] = useState<ExportSortConfig>(() =>
-    loadStoredSortConfig(storage, storageKeyPrefix),
-  )
-  const [includedRarities, setIncludedRarities] = useState<Record<R, boolean> | null>(() =>
-    getInitialIncludedRarities(storage, storageKeyPrefix, rarityOptions, defaultIncludedRarities),
-  )
-  const [emojiAsset, setEmojiAsset] = useState<string | null>(() => pickRandomEmojiAsset())
+  const {draftConfig, visuals, sortConfig, includedRarities, emojiAsset} = settings
   const previewRef = useRef<HTMLDivElement | null>(null)
 
   const sanitizedDraftConfig = useMemo(() => sanitizeConfig(draftConfig), [draftConfig])
@@ -784,7 +873,7 @@ export function OwnedAssetBoxExport<R extends string>({
   }, [entries, includedRarities])
   const activeSortKey = resolveActiveSortKey(sortOptions, sortConfig.key)
   const sortedEntries = useMemo(() => {
-    return [...filteredEntries].sort((left, right) => {
+    return filteredEntries.toSorted((left, right) => {
       const leftSortable = toSortableCollectionEntry(left)
       const rightSortable = toSortableCollectionEntry(right)
 
@@ -812,14 +901,13 @@ export function OwnedAssetBoxExport<R extends string>({
     sortedEntries.length,
   )
   const updateDraftConfig = (updater: (current: ExportBoxConfig) => ExportBoxConfig) => {
-    setDraftConfig(updater)
+    dispatchSettings({type: 'updateDraftConfig', updater})
   }
   const updateVisuals = (updater: (current: ExportVisualConfig) => ExportVisualConfig) => {
-    setVisuals(updater)
-    setEmojiAsset(pickRandomEmojiAsset())
+    dispatchSettings({type: 'updateVisuals', updater})
   }
   const updateSortConfig = (updater: (current: ExportSortConfig) => ExportSortConfig) => {
-    setSortConfig(updater)
+    dispatchSettings({type: 'updateSortConfig', updater})
   }
 
   useEffect(() => {
@@ -839,10 +927,6 @@ export function OwnedAssetBoxExport<R extends string>({
     safeStorageWrite(storage, `${storageKeyPrefix}.rarities.v1`, JSON.stringify(includedRarities))
   }, [storage, storageKeyPrefix, includedRarities])
 
-  function rerollEmoji() {
-    setEmojiAsset(pickRandomEmojiAsset())
-  }
-
   async function handleExport() {
     await exportOwnedAssetBoxPreview({
       previewElement: previewRef.current,
@@ -855,15 +939,7 @@ export function OwnedAssetBoxExport<R extends string>({
   }
 
   function handleRarityToggle(rarity: R, checked: boolean) {
-    setIncludedRarities((current) => {
-      if (!current) {
-        return current
-      }
-      return {
-        ...current,
-        [rarity]: checked,
-      }
-    })
+    dispatchSettings({type: 'toggleRarity', rarity, checked})
   }
 
   return (
@@ -909,13 +985,7 @@ export function OwnedAssetBoxExport<R extends string>({
             void handleExport()
           }}
           onReset={() => {
-            setDraftConfig(DEFAULT_EXPORT_BOX_CONFIG)
-            setVisuals(DEFAULT_EXPORT_VISUAL_CONFIG)
-            setSortConfig(DEFAULT_EXPORT_SORT_CONFIG)
-            if (defaultIncludedRarities) {
-              setIncludedRarities({...defaultIncludedRarities})
-            }
-            rerollEmoji()
+            dispatchSettings({type: 'reset', defaultIncludedRarities})
           }}
           onSortConfigChange={updateSortConfig}
           onVisualsChange={updateVisuals}

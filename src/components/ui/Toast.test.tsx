@@ -7,10 +7,9 @@ describe('Toast', () => {
   it('renders a stack when messages are provided', () => {
     render(<Toast messages={['one', 'two']} />)
 
-    const items = screen.getAllByRole('status')
-    expect(items).toHaveLength(2)
-    expect(items[0]).toHaveTextContent('one')
-    expect(items[1]).toHaveTextContent('two')
+    const status = screen.getByRole('status')
+    expect(status).toHaveTextContent('one')
+    expect(status).toHaveTextContent('two')
   })
 
   it('prefers stable entry ids when provided', () => {
@@ -23,9 +22,8 @@ describe('Toast', () => {
       />,
     )
 
-    const items = screen.getAllByRole('status')
-    expect(items).toHaveLength(2)
-    expect(items[0]).toHaveTextContent('one')
-    expect(items[1]).toHaveTextContent('two')
+    const status = screen.getByRole('status')
+    expect(status).toHaveTextContent('one')
+    expect(status).toHaveTextContent('two')
   })
 })

@@ -79,20 +79,22 @@ export function AwakenerDetailSettingsPanel({
               value={preferences.defaultTab ?? ''}
             >
               <option value=''>Upgrades (standard)</option>
-              {DATABASE_AWAKENER_VISIBLE_TABS.filter(
-                (tab) => tab !== DEFAULT_DATABASE_AWAKENER_TAB,
-              ).map((tab) => (
-                <option key={tab} value={tab}>
-                  {DEFAULT_TAB_LABELS[tab]}
-                </option>
-              ))}
+              {DATABASE_AWAKENER_VISIBLE_TABS.flatMap((tab) =>
+                tab === DEFAULT_DATABASE_AWAKENER_TAB
+                  ? []
+                  : [
+                      <option key={tab} value={tab}>
+                        {DEFAULT_TAB_LABELS[tab]}
+                      </option>,
+                    ],
+              )}
             </select>
           </label>
 
           <label className='flex items-start gap-2 text-left'>
             <input
               checked={preferences.showVisibleScaling}
-              className='mt-0.5 h-3.5 w-3.5 accent-amber-200'
+              className='mt-0.5 size-3.5 accent-amber-200'
               onChange={(event) => {
                 onUpdateAwakenerPreferences({showVisibleScaling: event.target.checked})
               }}
@@ -128,7 +130,7 @@ export function AwakenerDetailSettingsPanel({
             </span>
           </button>
           {showDefaultProgression ? (
-            <div className='border-t border-slate-700/45 px-3 py-3'>
+            <div className='border-t border-slate-700/45 p-3'>
               <AwakenerDetailStateControls
                 compact
                 controls={controls}

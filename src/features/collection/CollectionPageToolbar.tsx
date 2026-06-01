@@ -20,7 +20,7 @@ interface CollectionPageToolbarProps {
   ownedWheelsForBoxExport: ComponentProps<typeof OwnedWheelBoxExport>['entries']
 }
 
-function renderTabExportAction({
+function TabExportAction({
   model,
   onStatusMessage,
   ownedAwakenersForBoxExport,
@@ -61,6 +61,7 @@ export function CollectionPageToolbar({
     <>
       <input
         accept='application/json,.json'
+        aria-label='Load collection from JSON file'
         className='hidden'
         onChange={(event) => {
           void onLoadFromFile(event)
@@ -70,12 +71,12 @@ export function CollectionPageToolbar({
       />
 
       <PageToolkitBar className='collection-toolkit-drawer'>
-        {renderTabExportAction({
-          model,
-          onStatusMessage,
-          ownedAwakenersForBoxExport,
-          ownedWheelsForBoxExport,
-        })}
+        <TabExportAction
+          model={model}
+          onStatusMessage={onStatusMessage}
+          ownedAwakenersForBoxExport={ownedAwakenersForBoxExport}
+          ownedWheelsForBoxExport={ownedWheelsForBoxExport}
+        />
         <Button
           className='px-2 py-1 text-[10px] tracking-wide uppercase'
           onClick={onSaveToFile}

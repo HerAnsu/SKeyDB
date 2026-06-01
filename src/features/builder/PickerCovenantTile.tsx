@@ -1,3 +1,5 @@
+import {useMemo} from 'react'
+
 import {useDraggable} from '@dnd-kit/core'
 import {FaCircleInfo} from 'react-icons/fa6'
 
@@ -32,11 +34,15 @@ function getCovenantDragData(draggableEnabled: boolean, covenantId?: string): Dr
   return {kind: 'picker-covenant', covenantId}
 }
 
-function renderCovenantPreview(
-  covenantAsset: string | undefined,
-  isNotSet: boolean,
-  altText: string,
-) {
+function CovenantPreview({
+  covenantAsset,
+  isNotSet,
+  altText,
+}: {
+  covenantAsset: string | undefined
+  isNotSet: boolean
+  altText: string
+}) {
   if (covenantAsset) {
     return (
       <img
@@ -86,6 +92,38 @@ export function PickerCovenantTile({
   })
   const dragAttributes = {...attributes} as Record<string, unknown>
   delete dragAttributes['aria-disabled']
+  const actions = useMemo(() => {
+    if (isNotSet) {
+      return undefined
+    }
+
+    return (
+      <button
+        aria-label='Open details overlay'
+        className='builder-picker-detail-action inline-flex items-center justify-center text-slate-400 hover:text-amber-100 focus-visible:text-amber-100 focus-visible:outline-none'
+        onClick={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          onOpenDetail?.()
+        }}
+        title={`Open ${covenantDisplayName} details overlay`}
+        type='button'
+      >
+        <FaCircleInfo aria-hidden className='size-3' />
+      </button>
+    )
+  }, [covenantDisplayName, isNotSet, onOpenDetail])
+  const chips = useMemo(() => {
+    if (isNotSet || !recommendationLabel) {
+      return undefined
+    }
+
+    return <span className={PICKER_RECOMMENDATION_CLASS}>{recommendationLabel}</span>
+  }, [isNotSet, recommendationLabel])
+  const preview = useMemo(
+    () => <CovenantPreview covenantAsset={covenantAsset} isNotSet={isNotSet} altText={altText} />,
+    [altText, covenantAsset, isNotSet],
+  )
 
   return (
     <div className='group relative min-w-0'>
@@ -105,33 +143,13 @@ export function PickerCovenantTile({
         />
         <CompactArtTile
           actionPlacement='caption'
-          actions={
-            !isNotSet ? (
-              <button
-                aria-label='Open details overlay'
-                className='builder-picker-detail-action inline-flex items-center justify-center text-slate-400 hover:text-amber-100 focus-visible:text-amber-100 focus-visible:outline-none'
-                onClick={(event) => {
-                  event.preventDefault()
-                  event.stopPropagation()
-                  onOpenDetail?.()
-                }}
-                title={`Open ${covenantDisplayName} details overlay`}
-                type='button'
-              >
-                <FaCircleInfo aria-hidden className='h-3 w-3' />
-              </button>
-            ) : undefined
-          }
-          chips={
-            !isNotSet && recommendationLabel ? (
-              <span className={PICKER_RECOMMENDATION_CLASS}>{recommendationLabel}</span>
-            ) : undefined
-          }
+          actions={actions}
+          chips={chips}
           chipPlacement='overlay-stack'
           name={covenantDisplayName}
           nameClassName='truncate'
           nameTitle={covenantDisplayName}
-          preview={renderCovenantPreview(covenantAsset, isNotSet, altText)}
+          preview={preview}
           previewClassName='aspect-square border border-slate-400/35 bg-slate-900/70'
         />
       </div>

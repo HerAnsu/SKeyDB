@@ -205,17 +205,17 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
 
   const pickerAwakeners = useMemo(
     () =>
-      [...allAwakeners].sort((left, right) =>
+      allAwakeners.toSorted((left, right) =>
         formatAwakenerNameForUi(left.name).localeCompare(formatAwakenerNameForUi(right.name)),
       ),
     [],
   )
   const pickerPosses = useMemo(
-    () => [...getPosses()].sort((left, right) => left.name.localeCompare(right.name)),
+    () => getPosses().toSorted((left, right) => left.name.localeCompare(right.name)),
     [],
   )
   const pickerCovenants = useMemo(
-    () => [...getCovenants()].sort((left, right) => left.id.localeCompare(right.id)),
+    () => getCovenants().toSorted((left, right) => left.id.localeCompare(right.id)),
     [],
   )
   const pickerWheels = useMemo(() => [...getWheels()], [])
@@ -268,7 +268,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
       ? byRealm
       : byRealm.filter((awakener) => isAwakenerOwnedByName(awakener.name))
 
-    const sorted = [...byOwnership].sort((left, right) =>
+    const sorted = byOwnership.toSorted((left, right) =>
       compareAwakenersForCollectionSort(
         {
           label: formatAwakenerNameForUi(left.name),
@@ -337,7 +337,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
     }
 
     const promoted = promoteRecommendedGear
-      ? [...result].sort((left, right) => {
+      ? result.toSorted((left, right) => {
           const leftRecommended = teamRecommendedPosseIds.has(left.id)
           const rightRecommended = teamRecommendedPosseIds.has(right.id)
           if (leftRecommended === rightRecommended) {
@@ -375,7 +375,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
       ? wheelsByMainstat
       : wheelsByMainstat.filter((wheel) => isWheelOwnedById(wheel.id))
     const queryFiltered = searchWheels(visibleWheels, pickerSearchByTab.wheels)
-    const sorted = [...queryFiltered].sort((left, right) =>
+    const sorted = queryFiltered.toSorted((left, right) =>
       promoteRecommendedGear
         ? compareWheelsForBuildRecommendation(left, right, {
             build: activeBuild,
@@ -401,7 +401,7 @@ export function useBuilderViewModel({searchInputRef}: UseBuilderViewModelOptions
   ])
   const filteredCovenants = useMemo(() => {
     const queryFiltered = searchCovenants(pickerCovenants, pickerSearchByTab.covenants)
-    return [...queryFiltered].sort((left, right) =>
+    return queryFiltered.toSorted((left, right) =>
       promoteRecommendedGear
         ? compareCovenantsForBuildRecommendation(left, right, activeBuild, {
             fallbackCompare: (leftCovenant, rightCovenant) =>

@@ -69,18 +69,13 @@ function trimLoreParagraphs(
   }
 }
 
-function renderLoreParagraphs(paragraphs: LoreParagraph[]) {
+function LoreParagraphs({paragraphs}: {paragraphs: LoreParagraph[]}) {
   return paragraphs.map((paragraph, paragraphIndex) => (
     <p key={buildLoreKey('wheel-lore-paragraph', paragraphIndex)}>
-      {paragraph.lines.map((line, lineIndex) => (
-        <span key={buildLoreKey('wheel-lore-line', paragraphIndex, lineIndex)}>
-          {lineIndex > 0 ? <br /> : null}
-          <DatabaseLoreMarkupText
-            keyPrefix={buildLoreKey('wheel-lore', paragraphIndex, lineIndex)}
-            text={line}
-          />
-        </span>
-      ))}
+      <DatabaseLoreMarkupText
+        keyPrefix={buildLoreKey('wheel-lore', paragraphIndex)}
+        text={paragraph.lines.join('\n')}
+      />
     </p>
   ))
 }
@@ -105,7 +100,7 @@ export function WheelLoreText({
             data-wheel-lore-content=''
             style={getDatabaseDetailLoreStyle()}
           >
-            {renderLoreParagraphs(paragraphs)}
+            <LoreParagraphs paragraphs={paragraphs} />
           </div>
 
           <button
@@ -127,7 +122,7 @@ export function WheelLoreText({
           data-wheel-lore-content=''
           style={getDatabaseDetailLoreStyle()}
         >
-          {renderLoreParagraphs(paragraphs)}
+          <LoreParagraphs paragraphs={paragraphs} />
         </div>
       ) : null}
     </div>

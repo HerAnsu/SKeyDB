@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState, type MouseEvent} from 'react'
+import {useEffect, useMemo, useReducer, useRef, type MouseEvent} from 'react'
 
 import {Link} from 'react-router-dom'
 
@@ -22,6 +22,9 @@ const SLICE_DETAIL_TARGET_CLASS =
   'absolute inset-0 z-30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-amber-100/95 focus-visible:shadow-[inset_0_0_0_1px_rgba(15,23,42,0.85)]'
 const POOL_MONTAGE_LAYER_CLASS =
   'absolute inset-0 overflow-hidden transition-opacity ease-in-out motion-reduce:transition-none'
+const POOL_MONTAGE_TRANSITION_STYLE = {
+  transitionDuration: `${String(TRANSITION_DURATION_MS)}ms`,
+}
 const EMPTY_FEATURED: BannerFeaturedUnit[] = []
 const EMPTY_POOL_SLOTS: BannerPoolSlot[] = []
 
@@ -234,6 +237,71 @@ function FeaturedArtwork({
   )
 }
 
+type PoolMontageLayer = 'a' | 'b'
+
+interface PoolMontageLayerState {
+  aIdx: number
+  bIdx: number
+  front: PoolMontageLayer
+  pendingFront: PoolMontageLayer | null
+}
+
+type PoolMontageLayerAction =
+  | {
+      type: 'beginTransition'
+      activeIdx: number
+      incomingIdx: number
+    }
+  | {type: 'promotePendingLayer'}
+
+function createPoolMontageLayerState(activeIdx: number): PoolMontageLayerState {
+  return {
+    aIdx: activeIdx,
+    bIdx: activeIdx,
+    front: 'a',
+    pendingFront: null,
+  }
+}
+
+function poolMontageLayerReducer(
+  state: PoolMontageLayerState,
+  action: PoolMontageLayerAction,
+): PoolMontageLayerState {
+  switch (action.type) {
+    case 'beginTransition': {
+      if (action.incomingIdx < 0) return state
+
+      if (state.front === 'a') {
+        return {
+          aIdx: action.activeIdx,
+          bIdx: action.incomingIdx,
+          front: state.front,
+          pendingFront: 'b',
+        }
+      }
+
+      return {
+        aIdx: action.incomingIdx,
+        bIdx: action.activeIdx,
+        front: state.front,
+        pendingFront: 'a',
+      }
+    }
+
+    case 'promotePendingLayer':
+      return state.pendingFront ? {...state, front: state.pendingFront, pendingFront: null} : state
+  }
+}
+
+function getPoolMontageRenderLayers(
+  state: PoolMontageLayerState,
+  frame: PoolCycleFrame,
+): PoolMontageLayerState {
+  if (state.pendingFront || frame.transitioning) return state
+
+  return state.front === 'a' ? {...state, aIdx: frame.activeIdx} : {...state, bIdx: frame.activeIdx}
+}
+
 function PoolMontageSlot({
   assets,
   frame,
@@ -247,26 +315,29 @@ function PoolMontageSlot({
   onOpenDetail?: (ref: EntityRef) => void
   showSeparator: boolean
 }) {
-  const [layers, setLayers] = useState<{a: number; b: number; front: 'a' | 'b'}>({
-    a: frame.activeIdx,
-    b: frame.activeIdx,
-    front: 'a',
-  })
+  const [layerState, dispatchLayerState] = useReducer(
+    poolMontageLayerReducer,
+    frame.activeIdx,
+    createPoolMontageLayerState,
+  )
   const prevTransRef = useRef(false)
   const promotionCleanupRef = useRef(noCleanup)
 
   useEffect(() => {
     if (frame.transitioning && !prevTransRef.current && frame.incomingIdx >= 0) {
       promotionCleanupRef.current()
-      const back: 'a' | 'b' = layers.front === 'a' ? 'b' : 'a'
-      setLayers((prev) => ({...prev, [back]: frame.incomingIdx}))
+      dispatchLayerState({
+        type: 'beginTransition',
+        activeIdx: frame.activeIdx,
+        incomingIdx: frame.incomingIdx,
+      })
       promotionCleanupRef.current = scheduleAfterNextPaint(() => {
-        setLayers((prev) => ({...prev, front: back}))
+        dispatchLayerState({type: 'promotePendingLayer'})
         promotionCleanupRef.current = noCleanup
       })
     }
     prevTransRef.current = frame.transitioning
-  }, [frame.transitioning, frame.incomingIdx, layers.front])
+  }, [frame.activeIdx, frame.incomingIdx, frame.transitioning])
 
   useEffect(
     () => () => {
@@ -275,12 +346,10 @@ function PoolMontageSlot({
     [],
   )
 
-  const assetA = assets[layers.a]
-  const assetB = assets[layers.b]
+  const layers = getPoolMontageRenderLayers(layerState, frame)
+  const assetA = assets[layers.aIdx]
+  const assetB = assets[layers.bIdx]
   const frontAsset = layers.front === 'a' ? assetA : assetB
-  const transitionStyle = {
-    transitionDuration: `${String(TRANSITION_DURATION_MS)}ms`,
-  }
 
   return (
     <div
@@ -292,7 +361,7 @@ function PoolMontageSlot({
         className={POOL_MONTAGE_LAYER_CLASS}
         style={{
           opacity: layers.front === 'a' ? 1 : 0,
-          ...transitionStyle,
+          ...POOL_MONTAGE_TRANSITION_STYLE,
         }}
       >
         <ArtworkVisual asset={assetA} loading={loading} showFallbackLabel={layers.front === 'a'} />
@@ -302,7 +371,7 @@ function PoolMontageSlot({
         className={POOL_MONTAGE_LAYER_CLASS}
         style={{
           opacity: layers.front === 'b' ? 1 : 0,
-          ...transitionStyle,
+          ...POOL_MONTAGE_TRANSITION_STYLE,
         }}
       >
         <ArtworkVisual asset={assetB} loading={loading} showFallbackLabel={layers.front === 'b'} />
@@ -337,19 +406,18 @@ function PoolMontagePlaceholderSlot({
 }
 
 function PoolMontageArtwork({
-  cycleFrames,
   loading,
   onOpenDetail,
-  onReadyChange,
+  poolSlots,
   visualSlots,
 }: {
-  cycleFrames: PoolCycleFrame[]
   loading: 'eager' | 'lazy'
   onOpenDetail?: (ref: EntityRef) => void
-  onReadyChange: (ready: boolean) => void
+  poolSlots: BannerPoolSlot[]
   visualSlots: ResolvedVisualSlot[]
 }) {
-  const {assetsReady, rootRef} = usePoolMontagePreload(visualSlots, onReadyChange)
+  const {assetsReady, rootRef} = usePoolMontagePreload(visualSlots)
+  const cycleFrames = usePoolCycling(poolSlots, {enabled: assetsReady})
 
   return (
     <div
@@ -436,8 +504,6 @@ export function BannerArtwork({
     () => (effectivePoolSlots.length > 0 ? resolvePoolSlots(effectivePoolSlots) : null),
     [effectivePoolSlots],
   )
-  const [poolAssetsReady, setPoolAssetsReady] = useState(() => import.meta.env.MODE === 'test')
-  const cycleFrames = usePoolCycling(effectivePoolSlots, {enabled: poolAssetsReady})
 
   if (customArt) {
     return <FullCardArtwork label={title} loading={loading} url={customArt} />
@@ -446,10 +512,9 @@ export function BannerArtwork({
   if (visualSlots && visualSlots.length > 0) {
     return (
       <PoolMontageArtwork
-        cycleFrames={cycleFrames}
         loading={loading}
         onOpenDetail={onOpenDetail}
-        onReadyChange={setPoolAssetsReady}
+        poolSlots={effectivePoolSlots}
         visualSlots={visualSlots}
       />
     )

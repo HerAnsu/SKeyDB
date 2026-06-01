@@ -173,23 +173,25 @@ export interface TimelineCountdownDisplay {
 }
 
 const TIMELINE_DATE_DISPLAY_THRESHOLD_MS = 14 * 24 * 60 * 60 * 1000
+const TIMELINE_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+})
+const TIMELINE_DISPLAY_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
+  day: 'numeric',
+  month: 'short',
+})
 
 function formatTimelineDate(dateStr: string): string {
-  return new Intl.DateTimeFormat('en-US', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(dateStr))
+  return TIMELINE_DATE_FORMATTER.format(new Date(dateStr))
 }
 
 function formatTimelineDisplayDate(dateStr: string, now?: Date): string {
   const date = new Date(dateStr)
   const reference = now ?? new Date()
   if (date.getUTCFullYear() === reference.getUTCFullYear()) {
-    return new Intl.DateTimeFormat('en-US', {
-      day: 'numeric',
-      month: 'short',
-    }).format(date)
+    return TIMELINE_DISPLAY_DATE_FORMATTER.format(date)
   }
   return formatTimelineDate(dateStr)
 }
@@ -352,7 +354,7 @@ function getActivePinnedPriority(pinned: boolean | undefined, status: TimelineSt
 
 export function sortBannersByRelevance(banners: BannerEntry[], now?: Date): BannerEntry[] {
   const reference = now ?? new Date()
-  return [...banners].sort((a, b) => {
+  return banners.toSorted((a, b) => {
     const statusA = getTimelineStatus(a.startDate, a.endDate, reference)
     const statusB = getTimelineStatus(b.startDate, b.endDate, reference)
     const order: Record<TimelineStatus, number> = {active: 0, upcoming: 1, ended: 2}
@@ -376,7 +378,7 @@ export function sortBannersByRelevance(banners: BannerEntry[], now?: Date): Bann
 
 export function sortEventsByRelevance(events: EventEntry[], now?: Date): EventEntry[] {
   const reference = now ?? new Date()
-  return [...events].sort((a, b) => {
+  return events.toSorted((a, b) => {
     const statusA = getTimelineStatus(a.startDate, a.endDate, reference)
     const statusB = getTimelineStatus(b.startDate, b.endDate, reference)
     const order: Record<TimelineStatus, number> = {active: 0, upcoming: 1, ended: 2}

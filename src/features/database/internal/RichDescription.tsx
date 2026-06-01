@@ -9,7 +9,6 @@ import type {PublicFormulaContext} from '@/domain/public-formula-context'
 
 import {useDatabasePopoverControllerContext} from './database-popover-context'
 import type {DatabaseRichTextContentProps} from './DatabaseRichTextContent'
-import {renderTextWithBreaks} from './font-scale'
 
 const DatabaseRichTextContent = lazy(() =>
   import('./DatabaseRichTextContent').then((module) => ({default: module.DatabaseRichTextContent})),
@@ -27,6 +26,29 @@ interface RichDescriptionProps {
   stats?: FullStats | null
   showVisibleScaling?: boolean
   showTagIcons?: boolean
+}
+
+function TextWithBreaksFallback({text}: {text: string}) {
+  const [firstPart, ...remainingParts] = getTextPartsWithKeys(text)
+
+  return (
+    <span>
+      <span key={firstPart.key}>{firstPart.text}</span>
+      {remainingParts.flatMap((part) => [
+        <br key={`br:${part.key}`} />,
+        <span key={part.key}>{part.text}</span>,
+      ])}
+    </span>
+  )
+}
+
+function getTextPartsWithKeys(text: string): {key: string; text: string}[] {
+  const occurrencesByText = new Map<string, number>()
+  return text.split('\n').map((part) => {
+    const occurrence = occurrencesByText.get(part) ?? 0
+    occurrencesByText.set(part, occurrence + 1)
+    return {key: `${part}:${String(occurrence)}`, text: part}
+  })
 }
 
 export function RichDescription({
@@ -77,7 +99,7 @@ export function RichDescription({
   }
 
   return (
-    <Suspense fallback={fallbackText ? <span>{renderTextWithBreaks(fallbackText)}</span> : null}>
+    <Suspense fallback={fallbackText ? <TextWithBreaksFallback text={fallbackText} /> : null}>
       <DatabaseRichTextContent {...contentProps} />
     </Suspense>
   )

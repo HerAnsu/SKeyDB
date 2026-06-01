@@ -93,7 +93,7 @@ vi.mock('@/features/database/internal/AwakenerDetailModal', () => ({
     ) => void
     onTabChange: (tab: 'overview' | 'upgrades' | 'skills' | 'builds' | 'teams' | 'lore') => void
   }) => (
-    <div aria-label={`${awakener.name} details`} role='dialog'>
+    <dialog aria-label={`${awakener.name} details`} open>
       <div>{`Active tab ${activeTab}`}</div>
       <button
         aria-label='Switch to lore tab'
@@ -116,7 +116,7 @@ vi.mock('@/features/database/internal/AwakenerDetailModal', () => ({
       <button aria-label='Close detail' onClick={onClose} type='button'>
         Close
       </button>
-    </div>
+    </dialog>
   ),
 }))
 
@@ -135,7 +135,7 @@ vi.mock('@/features/database/internal/WheelDetailModal', () => ({
     ) => void
     onSelectWheel?: (wheel: {name: string}) => void
   }) => (
-    <div aria-label={`${wheel.name} details`} role='dialog'>
+    <dialog aria-label={`${wheel.name} details`} open>
       <button
         aria-label='Switch to alpha awakener detail'
         onClick={() => {
@@ -157,7 +157,7 @@ vi.mock('@/features/database/internal/WheelDetailModal', () => ({
       <button aria-label='Close wheel detail' onClick={onClose} type='button'>
         Close wheel
       </button>
-    </div>
+    </dialog>
   ),
 }))
 
@@ -171,11 +171,11 @@ vi.mock('@/features/database/internal/SimpleArtifactDetailModal', () => ({
     kind: 'posse' | 'covenant'
     onClose: () => void
   }) => (
-    <div aria-label={`${item.name} ${kind} details`} role='dialog'>
+    <dialog aria-label={`${item.name} ${kind} details`} open>
       <button aria-label={`Close ${kind} detail`} onClick={onClose} type='button'>
         Close {kind}
       </button>
-    </div>
+    </dialog>
   ),
 }))
 

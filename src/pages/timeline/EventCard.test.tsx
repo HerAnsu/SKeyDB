@@ -1,8 +1,23 @@
 import {render, screen} from '@testing-library/react'
 
 import {EventCard} from './EventCard'
+import {EventDescriptionShelf} from './EventDescription'
 
 describe('EventCard', () => {
+  it('renders expanded event details as a labeled section region', () => {
+    render(
+      <EventDescriptionShelf
+        canExpandDescription
+        description='Expanded event detail text.'
+        descriptionId='event-description-test'
+        descriptionOpen
+        onCloseDescription={() => undefined}
+      />,
+    )
+
+    expect(screen.getByRole('region', {name: 'Details'}).tagName).toBe('SECTION')
+  })
+
   it('shows nearby upcoming text with the end date', () => {
     render(
       <EventCard

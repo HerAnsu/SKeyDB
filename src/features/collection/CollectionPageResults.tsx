@@ -36,7 +36,7 @@ interface CollectionPageResultsProps {
   ) => void
 }
 
-function renderCollectionRightActions(model: CollectionViewModel): ReactNode {
+function CollectionRightActions({model}: {model: CollectionViewModel}): ReactNode {
   if (model.tab === 'awakeners') {
     return (
       <div>
@@ -90,7 +90,7 @@ function CollectionCardDetailButton({label, onClick}: {label: string; onClick: (
   return (
     <button
       aria-label={label}
-      className='collection-card-detail-button absolute top-1 right-1 z-[16] inline-flex h-6 w-6 items-center justify-center border border-slate-300/50 bg-slate-950/82 text-slate-100 shadow-sm transition-colors hover:border-amber-200/80 hover:text-amber-100 focus-visible:border-amber-200/80 focus-visible:ring-2 focus-visible:ring-amber-200/25 focus-visible:outline-none'
+      className='collection-card-detail-button absolute top-1 right-1 z-[16] inline-flex size-6 items-center justify-center border border-slate-300/50 bg-slate-950/82 text-slate-100 shadow-sm transition-colors hover:border-amber-200/80 hover:text-amber-100 focus-visible:border-amber-200/80 focus-visible:ring-2 focus-visible:ring-amber-200/25 focus-visible:outline-none'
       onClick={(event) => {
         event.preventDefault()
         event.stopPropagation()
@@ -99,7 +99,7 @@ function CollectionCardDetailButton({label, onClick}: {label: string; onClick: (
       title={label}
       type='button'
     >
-      <FaCircleInfo aria-hidden className='h-3 w-3' />
+      <FaCircleInfo aria-hidden className='size-3' />
     </button>
   )
 }
@@ -343,7 +343,7 @@ function PosseCollectionCard({
   )
 }
 
-function renderCollectionTabContent({
+function CollectionTabContent({
   model,
   onSwallowOutsideLevelClickIfCardInteraction,
   onCollectionCardWheel,
@@ -417,11 +417,11 @@ export function CollectionPageResults(props: CollectionPageResultsProps) {
       onTabChange={(tabId) => {
         model.setTab(tabId as (typeof collectionTabs)[number]['id'])
       }}
-      rightActions={renderCollectionRightActions(model)}
+      rightActions={<CollectionRightActions model={model} />}
       tabs={collectionTabs.map((tab) => ({id: tab.id, label: tab.label}))}
     >
       <div className='collection-scrollbar min-h-0 flex-1 overflow-auto pr-1'>
-        {renderCollectionTabContent(props)}
+        <CollectionTabContent {...props} />
       </div>
     </TabbedContainer>
   )

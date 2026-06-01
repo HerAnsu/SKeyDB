@@ -207,7 +207,7 @@ function buildUniqueIdMap<T extends {id: string}>(records: T[], label: string): 
 }
 
 function sortDzoneSeasonsByPeriod<T extends {period: number}>(seasons: T[]): T[] {
-  return [...seasons].sort((left, right) => left.period - right.period)
+  return seasons.toSorted((left, right) => left.period - right.period)
 }
 
 const parsedSeasonSummaries = sortDzoneSeasonsByPeriod(

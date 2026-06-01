@@ -119,6 +119,7 @@ import type {
   BuilderV2WheelRarityFilter,
   BuilderV2WheelSlotView,
 } from './BuilderV2ModelTypes'
+import {useStableEvent} from './useStableEvent'
 
 const BUILDER_V2_AUTOSAVE_DEBOUNCE_MS = 300
 const BUILDER_ALLOW_DUPES_KEY = 'skeydb.builder.allowDupes.v1'
@@ -141,6 +142,7 @@ interface UseBuilderV2ModelOptions {
 export function useBuilderV2Model({
   showToast = () => undefined,
 }: UseBuilderV2ModelOptions = {}): BuilderV2Model {
+  const stableShowToast = useStableEvent(showToast)
   const storage = useMemo(() => getBrowserLocalStorage(), [])
   const [allowDuplicateAwakenerIdentities, setAllowDuplicateAwakenerIdentities] = useState(
     () => safeStorageRead(storage, BUILDER_ALLOW_DUPES_KEY) === '1',
@@ -311,10 +313,10 @@ export function useBuilderV2Model({
     [effectiveActiveTeamId, teams],
   )
   const activeTeamSlots = activeTeam.slots
-  const allWheels = useMemo(() => [...getWheels()].sort(compareWheelsForUi), [])
+  const allWheels = useMemo(() => getWheels().toSorted(compareWheelsForUi), [])
   const wheelById = useMemo(() => new Map(allWheels.map((wheel) => [wheel.id, wheel])), [allWheels])
   const allCovenants = useMemo(
-    () => [...getCovenants()].sort((left, right) => left.name.localeCompare(right.name)),
+    () => getCovenants().toSorted((left, right) => left.name.localeCompare(right.name)),
     [],
   )
   const covenantById = useMemo(
@@ -322,7 +324,7 @@ export function useBuilderV2Model({
     [allCovenants],
   )
   const allPosses = useMemo(
-    () => [...getPosses()].sort((left, right) => left.name.localeCompare(right.name)),
+    () => getPosses().toSorted((left, right) => left.name.localeCompare(right.name)),
     [],
   )
   const posseById = useMemo(() => new Map(allPosses.map((posse) => [posse.id, posse])), [allPosses])
@@ -1048,6 +1050,27 @@ export function useBuilderV2Model({
     [clearTransfer, setActiveTeamId, setTeamsInStore, storeCancelTeamRename],
   )
 
+  const moveTeamToIndex = useCallback(
+    (teamId: string, nextIndex: number) => {
+      clearTransfer()
+      storeCancelTeamRename()
+      setPendingTeamAction(null)
+      setViolationMessage(null)
+
+      const state = builderDraftStore.getState()
+      const sourceIndex = state.teams.findIndex((team) => team.id === teamId)
+      const boundedNextIndex = Math.max(0, Math.min(nextIndex, state.teams.length - 1))
+      const targetTeam = state.teams[boundedNextIndex]
+      if (sourceIndex === -1 || sourceIndex === boundedNextIndex) {
+        return
+      }
+
+      setTeamsInStore(reorderTeams(state.teams, teamId, targetTeam.id))
+      setActiveTeamId(state.activeTeamId)
+    },
+    [clearTransfer, setActiveTeamId, setTeamsInStore, storeCancelTeamRename],
+  )
+
   const moveTeamUp = useCallback(
     (teamId: string) => {
       moveTeam(teamId, -1)
@@ -1626,7 +1649,7 @@ export function useBuilderV2Model({
     },
     clearTransfer: clearImportExportTransientState,
     clearPendingDelete: clearImportExportTransientState,
-    showToast,
+    showToast: stableShowToast,
   })
 
   const openActiveTeamExportDialog = useCallback(() => {
@@ -1768,7 +1791,7 @@ export function useBuilderV2Model({
       pendingTeamAction.templateId,
     )
     setTeamsInStore(result.nextTeams)
-    showToast(
+    stableShowToast(
       `Applied ${pendingTeamAction.templateLabel}: renamed ${String(result.renamedCount)}, created ${String(result.createdCount)}, removed ${String(result.removedCount)}.`,
     )
     setPendingTeamAction(null)
@@ -1778,7 +1801,7 @@ export function useBuilderV2Model({
     clearTeamTransientState,
     pendingTeamAction,
     setTeamsInStore,
-    showToast,
+    stableShowToast,
   ])
 
   const teamActionDialog = useMemo<BuilderV2TeamActionDialog | null>(() => {
@@ -1865,6 +1888,7 @@ export function useBuilderV2Model({
     cancelTeamAction,
     moveTeamUp,
     moveTeamDown,
+    moveTeamToIndex,
     startQuickLineup,
     skipQuickLineupStep,
     goBackQuickLineupStep,

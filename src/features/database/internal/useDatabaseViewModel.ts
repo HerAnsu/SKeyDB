@@ -111,7 +111,7 @@ function applySorting(
         )
       : null
 
-  return [...awakeners].sort((left, right) => {
+  return awakeners.toSorted((left, right) => {
     const bestMatchComparison =
       scalingBestMatchScoreById !== null
         ? (scalingBestMatchScoreById.get(right.id) ?? 0) -

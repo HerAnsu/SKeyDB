@@ -66,4 +66,22 @@ describe('WheelLoreText', () => {
     expect(screen.getByText('Still she kept diving.').tagName).toBe('EM')
     expect(screen.getByText('Never stop.').tagName).toBe('STRONG')
   })
+
+  it('renders multiline emphasis blocks as a single emphasized passage', () => {
+    const {container} = render(
+      <WheelLoreText
+        lore={
+          'Before.\n<Italic:"There is someone we want to see again."\n"We will stop at nothing."\n>\nAfter.'
+        }
+      />,
+    )
+
+    const emphasized = container.querySelector('em')
+
+    expect(emphasized).toHaveTextContent(
+      '"There is someone we want to see again.""We will stop at nothing."',
+    )
+    expect(screen.queryByText(/<Italic:/)).not.toBeInTheDocument()
+    expect(screen.queryByText('>')).not.toBeInTheDocument()
+  })
 })

@@ -95,14 +95,6 @@ function createLinkedAwakenerIdLookup(linkedAwakenerGroups: string[][] | undefin
   return linkedIdsById
 }
 
-function useLatestRef<T>(value: T) {
-  const ref = useRef(value)
-  useEffect(() => {
-    ref.current = value
-  }, [value])
-  return ref
-}
-
 function freezeItemsByAppliedOrder<T>(
   items: T[],
   liveOrder: string[],
@@ -115,37 +107,66 @@ function freezeItemsByAppliedOrder<T>(
   const keptIdSet = new Set(kept)
   const appended = liveOrder.filter((id) => !keptIdSet.has(id))
   const mergedOrder = [...kept, ...appended]
-  return mergedOrder.map((id) => itemById.get(id)).flatMap((item) => (item ? [item] : []))
+  const frozenItems: T[] = []
+  for (const id of mergedOrder) {
+    const item = itemById.get(id)
+    if (item) {
+      frozenItems.push(item)
+    }
+  }
+
+  return frozenItems
 }
 
 function areStringArraysEqual(left: string[], right: string[]) {
   return left.length === right.length && left.every((value, index) => value === right[index])
 }
 
-function useFrozenSortOrder<T>(items: T[], getItemId: (item: T) => string) {
+function useFrozenSortOrder<T>(items: T[], getItemId: (item: T) => string, refreshKey: string) {
   const liveOrder = useMemo(() => items.map(getItemId), [items, getItemId])
-  const [appliedOrder, setAppliedOrder] = useState<string[]>(() => liveOrder)
-  const [hasPendingChanges, setHasPendingChanges] = useState(false)
-  const liveOrderRef = useLatestRef(liveOrder)
+  const [freezeState, setFreezeState] = useState(() => ({
+    appliedOrder: liveOrder,
+    hasPendingChanges: false,
+    refreshKey,
+  }))
+  const effectiveAppliedOrder =
+    freezeState.refreshKey === refreshKey ? freezeState.appliedOrder : liveOrder
 
   const frozenItems = useMemo(
-    () => freezeItemsByAppliedOrder(items, liveOrder, appliedOrder, getItemId),
-    [items, liveOrder, appliedOrder, getItemId],
+    () => freezeItemsByAppliedOrder(items, liveOrder, effectiveAppliedOrder, getItemId),
+    [items, liveOrder, effectiveAppliedOrder, getItemId],
   )
 
   const applyChanges = useCallback(() => {
-    setAppliedOrder((currentOrder) =>
-      areStringArraysEqual(currentOrder, liveOrderRef.current)
-        ? currentOrder
-        : liveOrderRef.current,
-    )
-    setHasPendingChanges(false)
-  }, [liveOrderRef])
+    setFreezeState((currentState) => {
+      if (
+        currentState.refreshKey === refreshKey &&
+        !currentState.hasPendingChanges &&
+        areStringArraysEqual(currentState.appliedOrder, liveOrder)
+      ) {
+        return currentState
+      }
+
+      return {
+        appliedOrder: liveOrder,
+        hasPendingChanges: false,
+        refreshKey,
+      }
+    })
+  }, [liveOrder, refreshKey])
+
+  const markPendingChanges = useCallback(() => {
+    setFreezeState((currentState) => ({
+      appliedOrder: currentState.refreshKey === refreshKey ? currentState.appliedOrder : liveOrder,
+      hasPendingChanges: true,
+      refreshKey,
+    }))
+  }, [liveOrder, refreshKey])
 
   return {
     frozenItems,
-    hasPendingChanges,
-    setHasPendingChanges,
+    hasPendingChanges: freezeState.refreshKey === refreshKey && freezeState.hasPendingChanges,
+    markPendingChanges,
     applyChanges,
   }
 }
@@ -229,11 +250,13 @@ export function useCollectionViewModel() {
   const [awakenerSortGroupByRealm, setAwakenerSortGroupByRealm] = useState(
     persistedAwakenerSortConfig.groupByRealm,
   )
-  const rememberedLevelsRef = useRef(createInitialRememberedLevels())
+  const rememberedLevelsRef = useRef<ReturnType<typeof createInitialRememberedLevels> | null>(null)
+  rememberedLevelsRef.current ??= createInitialRememberedLevels()
+  const rememberedLevels = rememberedLevelsRef.current
 
   const awakeners = useMemo(
     () =>
-      [...getAwakeners()].sort((a, b) =>
+      getAwakeners().toSorted((a, b) =>
         formatAwakenerNameForUi(a.name).localeCompare(formatAwakenerNameForUi(b.name)),
       ),
     [],
@@ -242,7 +265,7 @@ export function useCollectionViewModel() {
     () => createLinkedAwakenerIdLookup(ownershipCatalog.linkedAwakenerGroups),
     [ownershipCatalog],
   )
-  const wheels = useMemo(() => [...getWheels()].sort(compareWheelsForUi), [])
+  const wheels = useMemo(() => getWheels().toSorted(compareWheelsForUi), [])
   const wheelIndexById = useMemo(
     () => new Map(wheels.map((wheel, index) => [wheel.id, index])),
     [wheels],
@@ -275,7 +298,7 @@ export function useCollectionViewModel() {
           return getOwnedLevel(ownership, 'awakeners', awakenerId) !== null
         })
 
-    return [...byOwnership].sort((left, right) => {
+    return byOwnership.toSorted((left, right) => {
       const leftId = awakenerIdByName.get(left.name)
       const rightId = awakenerIdByName.get(right.name)
       const leftOwnedLevel = leftId ? getOwnedLevel(ownership, 'awakeners', leftId) : 0
@@ -326,9 +349,20 @@ export function useCollectionViewModel() {
   const {
     frozenItems: frozenFilteredAwakeners,
     hasPendingChanges: awakenerSortHasPendingChanges,
-    setHasPendingChanges: setAwakenerSortHasPendingChanges,
+    markPendingChanges: markAwakenerSortPending,
     applyChanges: applyAwakenerSortFreeze,
-  } = useFrozenSortOrder(filteredAwakeners, (awakener) => awakener.name)
+  } = useFrozenSortOrder(
+    filteredAwakeners,
+    (awakener) => awakener.name,
+    JSON.stringify({
+      awakenerFilter,
+      query: queryByTab.awakeners,
+      displayUnowned,
+      awakenerSortKey,
+      awakenerSortDirection,
+      awakenerSortGroupByRealm,
+    }),
+  )
 
   const searchedPosses = useMemo(
     () => searchPosses(posses, queryByTab.posses),
@@ -340,7 +374,7 @@ export function useCollectionViewModel() {
       ? filteredByCategory
       : filteredByCategory.filter((posse) => getOwnedLevel(ownership, 'posses', posse.id) !== null)
 
-    return [...filteredByOwnership].sort((left, right) =>
+    return filteredByOwnership.toSorted((left, right) =>
       comparePossesForCollectionDefaultSort(
         {
           label: left.name,
@@ -376,7 +410,7 @@ export function useCollectionViewModel() {
       ? matchingSearch
       : matchingSearch.filter((wheel) => getOwnedLevel(ownership, 'wheels', wheel.id) !== null)
 
-    return [...byOwnership].sort((left, right) =>
+    return byOwnership.toSorted((left, right) =>
       compareWheelsForCollectionDefaultSort(
         {
           label: left.name,
@@ -408,30 +442,39 @@ export function useCollectionViewModel() {
   const {
     frozenItems: frozenFilteredWheels,
     hasPendingChanges: wheelSortHasPendingChanges,
-    setHasPendingChanges: setWheelSortHasPendingChanges,
+    markPendingChanges: markWheelSortPending,
     applyChanges: applyWheelSortFreeze,
-  } = useFrozenSortOrder(filteredWheels, (wheel) => wheel.id)
+  } = useFrozenSortOrder(
+    filteredWheels,
+    (wheel) => wheel.id,
+    JSON.stringify({
+      query: queryByTab.wheels,
+      displayUnowned,
+      wheelRarityFilter,
+      wheelMainstatFilter,
+    }),
+  )
 
-  useEffect(() => {
-    applyAwakenerSortFreeze()
-  }, [
-    awakenerFilter,
-    queryByTab.awakeners,
-    displayUnowned,
-    awakenerSortKey,
-    awakenerSortDirection,
-    awakenerSortGroupByRealm,
-    applyAwakenerSortFreeze,
-  ])
-  useEffect(() => {
-    applyWheelSortFreeze()
-  }, [
-    queryByTab.wheels,
-    displayUnowned,
-    wheelRarityFilter,
-    wheelMainstatFilter,
-    applyWheelSortFreeze,
-  ])
+  const setAwakenerSortHasPendingChanges = useCallback(
+    (next: boolean) => {
+      if (next) {
+        markAwakenerSortPending()
+      } else {
+        applyAwakenerSortFreeze()
+      }
+    },
+    [applyAwakenerSortFreeze, markAwakenerSortPending],
+  )
+  const setWheelSortHasPendingChanges = useCallback(
+    (next: boolean) => {
+      if (next) {
+        markWheelSortPending()
+      } else {
+        applyWheelSortFreeze()
+      }
+    },
+    [applyWheelSortFreeze, markWheelSortPending],
+  )
 
   function setQuery(value: string) {
     setQueryByTab((prev) => ({...prev, [tab]: value}))
@@ -463,10 +506,10 @@ export function useCollectionViewModel() {
     updateOwnership((prev) => {
       const currentLevel = getOwnedLevel(prev, kind, id)
       if (currentLevel === null) {
-        const rememberedLevel = rememberedLevelsRef.current[kind][id]
+        const rememberedLevel = rememberedLevels[kind][id]
         return setOwnedLevel(prev, kind, id, rememberedLevel ?? 0, ownershipCatalog)
       }
-      rememberedLevelsRef.current[kind][id] = currentLevel
+      rememberedLevels[kind][id] = currentLevel
       return clearOwnedEntry(prev, kind, id, ownershipCatalog)
     })
     if (kind === 'awakeners') {
@@ -515,7 +558,7 @@ export function useCollectionViewModel() {
           prev,
           filteredAwakeners,
           awakenerIdByName,
-          rememberedLevelsRef.current.awakeners,
+          rememberedLevels.awakeners,
           ownershipCatalog,
         )
       }
@@ -524,7 +567,7 @@ export function useCollectionViewModel() {
         return markFilteredWheelOwnership(
           prev,
           filteredWheels,
-          rememberedLevelsRef.current.wheels,
+          rememberedLevels.wheels,
           ownershipCatalog,
         )
       }
@@ -532,7 +575,7 @@ export function useCollectionViewModel() {
       return markFilteredPosseOwnership(
         prev,
         filteredPosses,
-        rememberedLevelsRef.current.posses,
+        rememberedLevels.posses,
         ownershipCatalog,
       )
     })
@@ -546,7 +589,7 @@ export function useCollectionViewModel() {
           prev,
           filteredAwakeners,
           awakenerIdByName,
-          rememberedLevelsRef.current.awakeners,
+          rememberedLevels.awakeners,
           ownershipCatalog,
         )
       }
@@ -555,7 +598,7 @@ export function useCollectionViewModel() {
         return clearFilteredWheelOwnership(
           prev,
           filteredWheels,
-          rememberedLevelsRef.current.wheels,
+          rememberedLevels.wheels,
           ownershipCatalog,
         )
       }
@@ -563,7 +606,7 @@ export function useCollectionViewModel() {
       return clearFilteredPosseOwnership(
         prev,
         filteredPosses,
-        rememberedLevelsRef.current.posses,
+        rememberedLevels.posses,
         ownershipCatalog,
       )
     })

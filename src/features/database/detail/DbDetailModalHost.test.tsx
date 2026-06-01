@@ -38,7 +38,7 @@ vi.mock('./dbDetailRegistry', async () => {
         loadingLabel: 'Loading awakener details...',
         missingBrowsePath: '/database',
         render: vi.fn(({callbacks, item}: MockDetailRenderOptions) => (
-          <div role='dialog' aria-label={`${item.item.name} details`}>
+          <dialog aria-label={`${item.item.name} details`} open>
             <button onClick={callbacks.onClose} type='button'>
               Close overlay
             </button>
@@ -67,7 +67,7 @@ vi.mock('./dbDetailRegistry', async () => {
             >
               Show skills tab
             </button>
-          </div>
+          </dialog>
         )),
       },
       wheel: {
@@ -75,11 +75,11 @@ vi.mock('./dbDetailRegistry', async () => {
         loadingLabel: 'Loading wheel details...',
         missingBrowsePath: '/database/wheels',
         render: vi.fn(({callbacks, item}: MockDetailRenderOptions) => (
-          <div role='dialog' aria-label={`${item.item.name} details`}>
+          <dialog aria-label={`${item.item.name} details`} open>
             <button onClick={callbacks.onClose} type='button'>
               Close overlay
             </button>
-          </div>
+          </dialog>
         )),
       },
       posse: {
@@ -87,11 +87,11 @@ vi.mock('./dbDetailRegistry', async () => {
         loadingLabel: 'Loading posse details...',
         missingBrowsePath: '/database/posses',
         render: vi.fn(({callbacks, item}: MockDetailRenderOptions) => (
-          <div role='dialog' aria-label={`${item.item.name} details`}>
+          <dialog aria-label={`${item.item.name} details`} open>
             <button onClick={callbacks.onClose} type='button'>
               Close overlay
             </button>
-          </div>
+          </dialog>
         )),
       },
       covenant: {
@@ -99,11 +99,11 @@ vi.mock('./dbDetailRegistry', async () => {
         loadingLabel: 'Loading covenant details...',
         missingBrowsePath: '/database/covenants',
         render: vi.fn(({callbacks, item}: MockDetailRenderOptions) => (
-          <div role='dialog' aria-label={`${item.item.name} details`}>
+          <dialog aria-label={`${item.item.name} details`} open>
             <button onClick={callbacks.onClose} type='button'>
               Close overlay
             </button>
-          </div>
+          </dialog>
         )),
       },
     },
@@ -358,7 +358,7 @@ describe('DbDetailModalHost overlay entries', () => {
     expect(screen.getByTestId('location-pathname')).toHaveTextContent('/builder')
   })
 
-  it('pops unsupported overlay refs without navigating away from the current page', async () => {
+  it('rejects unsupported overlay refs before they enter the detail stack', () => {
     render(
       <MemoryRouter initialEntries={['/builder']}>
         <LocationProbe />
@@ -380,9 +380,7 @@ describe('DbDetailModalHost overlay entries', () => {
 
     openDetailInAct({kind: 'relic', id: 'relic-0001'} as never, 'builder-overlay')
 
-    await waitFor(() => {
-      expect(dbDetailStore.getState().stack).toEqual([])
-    })
+    expect(dbDetailStore.getState().stack).toEqual([])
     expect(screen.getByTestId('location-pathname')).toHaveTextContent('/builder')
   })
 })

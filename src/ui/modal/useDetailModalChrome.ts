@@ -1,12 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type KeyboardEvent as ReactKeyboardEvent,
-  type MouseEvent as ReactMouseEvent,
-  type RefObject,
-} from 'react'
+import {useCallback, useEffect, useRef, useState, useSyncExternalStore, type RefObject} from 'react'
 
 import {getFocusableElements} from './focus-scope'
 
@@ -21,6 +13,17 @@ interface UseDetailModalChromeOptions {
   onClose: () => void
 }
 
+interface ModalKeyDownEvent {
+  currentTarget: EventTarget | null
+  key: string
+  preventDefault: () => void
+  shiftKey: boolean
+}
+
+interface ModalOverlayClickEvent {
+  target: EventTarget | null
+}
+
 export function useDetailModalChrome({
   clickOutsideClosesPopovers,
   closeAllPopovers,
@@ -32,8 +35,10 @@ export function useDetailModalChrome({
   searchInputRef,
 }: UseDetailModalChromeOptions) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
-  const [isMobileHeader, setIsMobileHeader] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth < 768 : false,
+  const isMobileHeader = useSyncExternalStore(
+    subscribeToModalHeaderViewport,
+    getModalHeaderViewportSnapshot,
+    getServerModalHeaderViewportSnapshot,
   )
   const panelRef = useRef<HTMLDivElement>(null)
   const settingsRef = useRef<HTMLDivElement>(null)
@@ -59,18 +64,6 @@ export function useDetailModalChrome({
   }, [searchInputRef])
 
   useEffect(() => {
-    function updateHeaderLayout() {
-      setIsMobileHeader(window.innerWidth < 768)
-    }
-
-    updateHeaderLayout()
-    window.addEventListener('resize', updateHeaderLayout)
-    return () => {
-      window.removeEventListener('resize', updateHeaderLayout)
-    }
-  }, [])
-
-  useEffect(() => {
     if (!isSettingsOpen) {
       return
     }
@@ -93,8 +86,12 @@ export function useDetailModalChrome({
   }, [isSettingsOpen])
 
   const handleOverlayClick = useCallback(
-    (event: ReactMouseEvent) => {
-      const target = event.target as HTMLElement
+    (event: ModalOverlayClickEvent) => {
+      if (!(event.target instanceof HTMLElement)) {
+        return
+      }
+
+      const target = event.target
       const clickedOutsideSearch = !searchContainerRef?.current?.contains(target)
       if (isSearchOpen && clickedOutsideSearch && closeSearch) {
         closeSearch(true)
@@ -136,8 +133,12 @@ export function useDetailModalChrome({
     ],
   )
 
-  const handlePanelKeyDown = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
+  const handlePanelKeyDown = useCallback((event: ModalKeyDownEvent) => {
     if (event.key !== 'Tab') {
+      return
+    }
+
+    if (!(event.currentTarget instanceof HTMLElement)) {
       return
     }
 
@@ -175,4 +176,27 @@ export function useDetailModalChrome({
     setIsSettingsOpen,
     settingsRef,
   }
+}
+
+function subscribeToModalHeaderViewport(onStoreChange: () => void): () => void {
+  if (typeof window === 'undefined') {
+    return () => undefined
+  }
+
+  window.addEventListener('resize', onStoreChange)
+  return () => {
+    window.removeEventListener('resize', onStoreChange)
+  }
+}
+
+function getModalHeaderViewportSnapshot(): boolean {
+  if (typeof window === 'undefined') {
+    return getServerModalHeaderViewportSnapshot()
+  }
+
+  return window.innerWidth < 768
+}
+
+function getServerModalHeaderViewportSnapshot(): boolean {
+  return false
 }

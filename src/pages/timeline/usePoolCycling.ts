@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState} from 'react'
+import {useEffect, useMemo, useReducer, useRef, useSyncExternalStore, type RefObject} from 'react'
 
 import type {BannerFeaturedUnit, BannerPoolSlot} from '@/domain/timeline'
 
@@ -19,6 +19,21 @@ interface PoolCycleState {
   frames: PoolCycleFrame[]
   signature: string
 }
+
+type PoolCycleAction =
+  | {
+      type: 'startTransition'
+      slotIdx: number
+      poolSize: number
+      group: number[]
+      initialFrames: PoolCycleFrame[]
+      signature: string
+    }
+  | {
+      type: 'completeTransition'
+      slotIdx: number
+      signature: string
+    }
 
 type PendingTransitionMap = Map<number, ReturnType<typeof setTimeout>>
 
@@ -76,6 +91,19 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+function subscribeToReducedMotion(onStoreChange: () => void): () => void {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return () => undefined
+  }
+
+  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+  mediaQuery.addEventListener('change', onStoreChange)
+
+  return () => {
+    mediaQuery.removeEventListener('change', onStoreChange)
+  }
+}
+
 function clearPendingTransition(pendingBySlot: PendingTransitionMap, slotIdx: number) {
   const pending = pendingBySlot.get(slotIdx)
   if (!pending) return
@@ -91,6 +119,63 @@ function clearAllPendingTransitions(pendingBySlot: PendingTransitionMap) {
   pendingBySlot.clear()
 }
 
+function getPendingTransitionMap(ref: RefObject<PendingTransitionMap | null>) {
+  ref.current ??= new Map()
+  return ref.current
+}
+
+function poolCycleReducer(state: PoolCycleState, action: PoolCycleAction): PoolCycleState {
+  switch (action.type) {
+    case 'startTransition': {
+      const currentFrames =
+        state.signature === action.signature ? state.frames : action.initialFrames
+
+      if (currentFrames[action.slotIdx].transitioning) return state
+
+      const usedIndices = new Set<number>()
+      for (const index of action.group) {
+        if (index === action.slotIdx) {
+          continue
+        }
+
+        usedIndices.add(
+          currentFrames[index].transitioning
+            ? currentFrames[index].incomingIdx
+            : currentFrames[index].activeIdx,
+        )
+      }
+
+      let nextIdx = (currentFrames[action.slotIdx].activeIdx + 1) % action.poolSize
+      let safety = 0
+      while (usedIndices.has(nextIdx) && safety < action.poolSize) {
+        nextIdx = (nextIdx + 1) % action.poolSize
+        safety++
+      }
+
+      const frames = [...currentFrames]
+      frames[action.slotIdx] = {
+        ...currentFrames[action.slotIdx],
+        incomingIdx: nextIdx,
+        transitioning: true,
+      }
+      return {frames, signature: action.signature}
+    }
+
+    case 'completeTransition': {
+      if (state.signature !== action.signature) return state
+
+      return {
+        frames: state.frames.map((frame, frameIdx) =>
+          frameIdx === action.slotIdx && frame.transitioning
+            ? {activeIdx: frame.incomingIdx, incomingIdx: -1, transitioning: false}
+            : frame,
+        ),
+        signature: state.signature,
+      }
+    }
+  }
+}
+
 export function usePoolCycling(
   poolSlots: BannerPoolSlot[],
   {enabled = true}: UsePoolCyclingOptions = {},
@@ -102,55 +187,32 @@ export function usePoolCycling(
     () => buildInitialFrames(poolSlots, sharedGroups),
     [poolSlots, sharedGroups],
   )
-  const [reducedMotion, setReducedMotion] = useState(() => prefersReducedMotion())
+  const reducedMotion = useSyncExternalStore(
+    subscribeToReducedMotion,
+    prefersReducedMotion,
+    () => false,
+  )
 
-  const [cycleState, setCycleState] = useState<PoolCycleState>(() => ({
+  const [cycleState, dispatch] = useReducer(poolCycleReducer, {
     frames: initialFrames,
     signature: poolSignature,
-  }))
+  })
 
-  const pendingBySlotRef = useRef<PendingTransitionMap>(new Map())
+  const pendingBySlotRef = useRef<PendingTransitionMap | null>(null)
 
   const frames =
     reducedMotion || cycleState.signature !== poolSignature ? initialFrames : cycleState.frames
 
   useEffect(() => {
-    if (cycleState.signature === poolSignature) return
-
-    const timer = setTimeout(() => {
-      setCycleState((prev) =>
-        prev.signature === poolSignature ? prev : {frames: initialFrames, signature: poolSignature},
-      )
-    }, 0)
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [cycleState.signature, initialFrames, poolSignature])
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
-
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const handleChange = () => {
-      setReducedMotion(mediaQuery.matches)
-    }
-
-    handleChange()
-    mediaQuery.addEventListener('change', handleChange)
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange)
-    }
-  }, [])
-
-  useEffect(() => {
     if (!enabled || reducedMotion) return
 
-    const pendingBySlot = pendingBySlotRef.current
-    const cyclableSlots = poolSlots
-      .map((s, i) => (s.pool.length > 1 ? i : -1))
-      .filter((i) => i >= 0)
+    const pendingTransitions = getPendingTransitionMap(pendingBySlotRef)
+    const cyclableSlots: number[] = []
+    for (const [index, slot] of poolSlots.entries()) {
+      if (slot.pool.length > 1) {
+        cyclableSlots.push(index)
+      }
+    }
     if (cyclableSlots.length === 0) return
 
     let deck: number[] = []
@@ -174,59 +236,26 @@ export function usePoolCycling(
       if (slotIdx === undefined) return
       lastSlot = slotIdx
 
-      setCycleState((prev) => {
-        const currentFrames = prev.signature === poolSignature ? prev.frames : initialFrames
-
-        if (currentFrames[slotIdx].transitioning) return prev
-
-        const poolSize = poolSlots[slotIdx].pool.length
-        const fp = fingerprints[slotIdx]
-        const group = sharedGroups.get(fp) ?? [slotIdx]
-
-        const usedIndices = new Set(
-          group
-            .filter((i) => i !== slotIdx)
-            .map((i) =>
-              currentFrames[i].transitioning
-                ? currentFrames[i].incomingIdx
-                : currentFrames[i].activeIdx,
-            ),
-        )
-
-        let nextIdx = (currentFrames[slotIdx].activeIdx + 1) % poolSize
-        let safety = 0
-        while (usedIndices.has(nextIdx) && safety < poolSize) {
-          nextIdx = (nextIdx + 1) % poolSize
-          safety++
-        }
-
-        const next = [...currentFrames]
-        next[slotIdx] = {...currentFrames[slotIdx], incomingIdx: nextIdx, transitioning: true}
-        return {frames: next, signature: poolSignature}
+      dispatch({
+        type: 'startTransition',
+        slotIdx,
+        poolSize: poolSlots[slotIdx].pool.length,
+        group: sharedGroups.get(fingerprints[slotIdx]) ?? [slotIdx],
+        initialFrames,
+        signature: poolSignature,
       })
 
-      clearPendingTransition(pendingBySlot, slotIdx)
+      clearPendingTransition(pendingTransitions, slotIdx)
       const pending = setTimeout(() => {
-        setCycleState((prev) => {
-          if (prev.signature !== poolSignature) return prev
-
-          return {
-            frames: prev.frames.map((f, frameIdx) =>
-              frameIdx === slotIdx && f.transitioning
-                ? {activeIdx: f.incomingIdx, incomingIdx: -1, transitioning: false}
-                : f,
-            ),
-            signature: prev.signature,
-          }
-        })
-        pendingBySlot.delete(slotIdx)
+        dispatch({type: 'completeTransition', slotIdx, signature: poolSignature})
+        pendingTransitions.delete(slotIdx)
       }, TRANSITION_DURATION_MS)
-      pendingBySlot.set(slotIdx, pending)
+      pendingTransitions.set(slotIdx, pending)
     }, CYCLE_INTERVAL_MS)
 
     return () => {
       clearInterval(interval)
-      clearAllPendingTransitions(pendingBySlot)
+      clearAllPendingTransitions(pendingTransitions)
     }
   }, [enabled, fingerprints, initialFrames, poolSignature, poolSlots, reducedMotion, sharedGroups])
 

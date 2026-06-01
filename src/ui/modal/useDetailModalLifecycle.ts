@@ -1,4 +1,4 @@
-import {useEffect, type RefObject} from 'react'
+import {useCallback, useEffect, type RefObject} from 'react'
 
 interface UseDetailModalLifecycleOptions {
   clearSearch: () => void
@@ -12,6 +12,11 @@ interface UseDetailModalLifecycleOptions {
   isSettingsOpen?: boolean
 }
 
+interface ModalDismissEvent {
+  preventDefault: () => void
+  stopPropagation: () => void
+}
+
 export function useDetailModalLifecycle({
   clearSearch,
   closeAllPopovers,
@@ -23,17 +28,17 @@ export function useDetailModalLifecycle({
   searchInputRef,
   searchQuery,
 }: UseDetailModalLifecycleOptions) {
-  useEffect(() => {
-    function handleEscape(event: KeyboardEvent) {
-      if (event.key !== 'Escape') {
-        return
+  const handleEscapeDismissal = useCallback(
+    (event?: ModalDismissEvent) => {
+      const consumeEvent = () => {
+        event?.preventDefault()
+        event?.stopPropagation()
       }
 
       const searchIsFocused = document.activeElement === searchInputRef.current
       const hasSearchQuery = searchQuery.trim().length > 0
       if (searchIsFocused || hasSearchQuery) {
-        event.preventDefault()
-        event.stopPropagation()
+        consumeEvent()
 
         if (hasSearchQuery) {
           clearSearch()
@@ -45,35 +50,47 @@ export function useDetailModalLifecycle({
       }
 
       if (isSettingsOpen && dismissSettings) {
-        event.preventDefault()
-        event.stopPropagation()
+        consumeEvent()
         dismissSettings()
         return
       }
 
       if (hasOpenPopovers) {
-        event.preventDefault()
-        event.stopPropagation()
+        consumeEvent()
         closeAllPopovers()
         return
       }
 
+      consumeEvent()
       onClose()
+    },
+    [
+      clearSearch,
+      closeAllPopovers,
+      closeSearch,
+      dismissSettings,
+      hasOpenPopovers,
+      isSettingsOpen,
+      onClose,
+      searchInputRef,
+      searchQuery,
+    ],
+  )
+
+  useEffect(() => {
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key !== 'Escape') {
+        return
+      }
+
+      handleEscapeDismissal(event)
     }
 
     window.addEventListener('keydown', handleEscape)
     return () => {
       window.removeEventListener('keydown', handleEscape)
     }
-  }, [
-    clearSearch,
-    closeAllPopovers,
-    closeSearch,
-    dismissSettings,
-    hasOpenPopovers,
-    isSettingsOpen,
-    onClose,
-    searchInputRef,
-    searchQuery,
-  ])
+  }, [handleEscapeDismissal])
+
+  return handleEscapeDismissal
 }

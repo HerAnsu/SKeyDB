@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 3,
+  "kind": "relic",
+  "id": "relic-0057",
+  "name": "Dimensional Image: Saya",
+  "route": {
+    "slug": "dimensional-image-saya",
+    "canonicalPath": "/database/relics/dimensional-image-saya"
+  },
+  "assets": {
+    "icon": "asset-relic-0057-icon"
+  },
+  "relicType": "DIMENSIONAL_IMAGE",
+  "ownerAwakenerId": "awakener-0057",
+  "ownerAwakenerName": "Saya",
+  "rarity": "SSR",
+  "realm": "CARO",
+  "descriptionTemplate": "At turn start, Saya gains [Arg1] Aliemus. For every 100 Aliemus consumed by Saya's Exalt, a randomly generated \"Skill\" takes effect 1 additional time.",
+  "descriptionArgs": {
+    "Arg1": {
+      "kind": "fixed",
+      "value": "15"
+    }
+  }
+}

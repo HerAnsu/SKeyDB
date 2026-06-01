@@ -44,7 +44,8 @@ export function TimelineContentControls({
 }: TimelineContentControlsProps) {
   return (
     <div className='timeline-v2-control-stack'>
-      <div aria-label='Timeline content' className='timeline-v2-filter-list' role='group'>
+      <fieldset className='timeline-v2-filter-list'>
+        <legend className='sr-only'>Timeline content</legend>
         {CONTENT_FILTERS.map((filter) => (
           <TimelineFilterButton
             active={contentFilter === filter.id}
@@ -56,10 +57,10 @@ export function TimelineContentControls({
             {filter.label}
           </TimelineFilterButton>
         ))}
-      </div>
-      <div className='timeline-v2-price-toggle-shell'>
-        <span className='timeline-v2-price-toggle-label'>Display Prices</span>
-        <div aria-label='Display prices' className='timeline-v2-price-toggle' role='group'>
+      </fieldset>
+      <fieldset className='timeline-v2-price-toggle-shell'>
+        <legend className='timeline-v2-price-toggle-label'>Display Prices</legend>
+        <div className='timeline-v2-price-toggle'>
           {PRICE_DISPLAY_MODES.map((mode) => (
             <button
               aria-label={mode.ariaLabel}
@@ -80,7 +81,7 @@ export function TimelineContentControls({
             </button>
           ))}
         </div>
-      </div>
+      </fieldset>
     </div>
   )
 }

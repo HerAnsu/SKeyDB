@@ -1,11 +1,20 @@
-import {lazy, Suspense, useEffect, useState} from 'react'
+import {lazy, Suspense, useCallback, useEffect, useState, useSyncExternalStore} from 'react'
 
-import {Navigate, NavLink, Route, Routes, useLocation} from 'react-router-dom'
+import {Link, Navigate, NavLink, Route, Routes, useLocation} from 'react-router-dom'
+
+import {getBrowserLocalStorage} from '@/domain/storage'
 
 import {AppUpdateNotice} from './features/app-update/AppUpdateNotice'
 import {StaleChunkErrorBoundary} from './features/app-update/StaleChunkErrorBoundary'
 import {useAppUpdateNotice} from './features/app-update/useAppUpdateNotice'
+import {
+  dismissBuilderV2BetaBanner,
+  isBuilderV2BetaBannerDismissed,
+  isBuilderV2Default,
+  setBuilderV2Default,
+} from './features/builder-v2/builder-v2-beta-preferences'
 import {DatabaseRouteElements} from './features/database/routes'
+import {FeedbackControl} from './features/feedback/FeedbackMenu'
 import {DomainMigrationNotice} from './features/migration/DomainMigrationNotice'
 import {HomePage} from './pages/HomePage'
 
@@ -61,7 +70,12 @@ const NAV_ITEMS: NavItem[] = [
   },
   {label: 'Events', to: '/timeline', showInMobileNav: true},
   {label: 'D-Zone', to: '/d-zone', showInMobileNav: true},
-  {label: 'Builder', to: '/builder', showInMobileNav: true},
+  {
+    label: 'Builder',
+    to: '/builder',
+    isActive: (pathname) => pathname === '/builder',
+    showInMobileNav: true,
+  },
   {label: 'Collection', to: '/collection', showInMobileNav: true},
 ]
 
@@ -69,13 +83,43 @@ function isMobileNavItem(item: NavItem): item is MobileNavItem {
   return item.showInMobileNav === true
 }
 
-const MOBILE_NAV_ITEMS = NAV_ITEMS.filter(isMobileNavItem)
+const BUILDER_V2_MOBILE_NAV_ITEM: MobileNavItem = {
+  label: 'Builder V2',
+  to: '/builder-v2',
+  showInMobileNav: true,
+}
+
+const MOBILE_NAV_ITEMS = NAV_ITEMS.reduce<MobileNavItem[]>((items, item) => {
+  if (!isMobileNavItem(item)) {
+    return items
+  }
+
+  items.push(item)
+  if (item.to === '/builder') {
+    items.push(BUILDER_V2_MOBILE_NAV_ITEM)
+  }
+  return items
+}, [])
 const BASE_MOBILE_VISIBLE_ITEM_COUNT = 2
 const COMPACT_MOBILE_VISIBLE_ITEM_COUNT = 3
 
 function App() {
-  const {key: locationKey, pathname} = useLocation()
+  const {key: locationKey, pathname, search} = useLocation()
   const appUpdateNotice = useAppUpdateNotice()
+  const [storage] = useState(() => getBrowserLocalStorage())
+  const [builderV2Default, setBuilderV2DefaultState] = useState(() => isBuilderV2Default(storage))
+  const [dismissedBuilderV2Surfaces, setDismissedBuilderV2Surfaces] = useState(() => ({
+    classic: isBuilderV2BetaBannerDismissed({
+      buildId: CURRENT_BUILD_ID,
+      storage,
+      surface: 'classic',
+    }),
+    v2: isBuilderV2BetaBannerDismissed({
+      buildId: CURRENT_BUILD_ID,
+      storage,
+      surface: 'v2',
+    }),
+  }))
   const [mobileNavOpenLocationKey, setMobileNavOpenLocationKey] = useState<string | null>(null)
   const compactMobileNavVisible = useMediaQuery('(min-width: 30rem)')
   const wideMobileNavVisible = useMediaQuery('(min-width: 40rem)')
@@ -88,6 +132,8 @@ function App() {
   const hasMobileOverflow = mobileOverflowItems.length > 0
   const mobileNavOpen = mobileNavOpenLocationKey === locationKey && hasMobileOverflow
 
+  // Mobile overflow state is keyed by the router location; this effect only wires Escape while open.
+  // react-doctor-disable-next-line no-reset-all-state-on-prop-change, react-doctor/no-reset-all-state-on-prop-change
   useEffect(() => {
     if (!mobileNavOpen) return
 
@@ -125,6 +171,38 @@ function App() {
   }
 
   const activeHiddenMobileOverflowItem = mobileOverflowItems.find((item) => isNavActive(item))
+  const builderV2BannerSurface = getBuilderV2BannerSurface({
+    builderV2Default,
+    dismissedBuilderV2Surfaces,
+    pathname,
+    search,
+  })
+
+  const optIntoBuilderV2 = () => {
+    setBuilderV2Default(storage, true)
+    setBuilderV2DefaultState(true)
+  }
+
+  const optOutOfBuilderV2 = () => {
+    setBuilderV2Default(storage, false)
+    setBuilderV2DefaultState(false)
+  }
+
+  const dismissBuilderV2Banner = () => {
+    if (!builderV2BannerSurface) {
+      return
+    }
+
+    dismissBuilderV2BetaBanner({
+      buildId: CURRENT_BUILD_ID,
+      storage,
+      surface: builderV2BannerSurface,
+    })
+    setDismissedBuilderV2Surfaces((current) => ({
+      ...current,
+      [builderV2BannerSurface]: true,
+    }))
+  }
 
   return (
     <div className='app-shell min-h-dvh text-slate-100'>
@@ -186,18 +264,38 @@ function App() {
             </div>
 
             <nav aria-label='Primary navigation desktop' className='site-desktop-nav'>
-              {NAV_ITEMS.map((item) => (
-                <NavLink
-                  className={({isActive}) =>
-                    desktopNavClassName(item.isActive ? isNavActive(item) : isActive)
-                  }
-                  end={item.to === '/'}
-                  key={item.label}
-                  to={item.to}
-                >
-                  {item.label}
-                </NavLink>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const navLink = (
+                  <NavLink
+                    className={({isActive}) =>
+                      desktopNavClassName(item.isActive ? isNavActive(item) : isActive)
+                    }
+                    end={item.to === '/'}
+                    key={item.label}
+                    to={item.to}
+                  >
+                    {item.label}
+                  </NavLink>
+                )
+
+                if (item.to !== '/builder') {
+                  return navLink
+                }
+
+                return (
+                  <span className='site-builder-nav-cluster' key={item.label}>
+                    {navLink}
+                    <NavLink
+                      aria-label='Builder V2 beta'
+                      className={({isActive}) => builderV2NavMarkClassName(isActive)}
+                      to='/builder-v2'
+                    >
+                      V2
+                    </NavLink>
+                  </span>
+                )
+              })}
+              <FeedbackControl locationKey={locationKey} variant='desktop' />
             </nav>
           </div>
 
@@ -221,6 +319,7 @@ function App() {
                 {item.label}
               </NavLink>
             ))}
+            <FeedbackControl locationKey={locationKey} variant='mobile' />
           </nav>
         </div>
       </header>
@@ -233,6 +332,15 @@ function App() {
           reason={appUpdateNotice.reason}
         />
       )}
+      {builderV2BannerSurface ? (
+        <BuilderV2BetaNotice
+          builderV2Default={builderV2Default}
+          onDismiss={dismissBuilderV2Banner}
+          onOptIn={optIntoBuilderV2}
+          onOptOut={optOutOfBuilderV2}
+          surface={builderV2BannerSurface}
+        />
+      ) : null}
 
       <main
         className='mx-auto w-full max-w-[1240px] px-4 py-4 sm:px-5 md:py-5 lg:px-8'
@@ -240,7 +348,7 @@ function App() {
       >
         <StaleChunkErrorBoundary>
           <Suspense
-            fallback={<div className='px-2 py-6 text-sm text-slate-300'>Loading page...</div>}
+            fallback={<div className='px-2 py-6 text-sm text-slate-300'>Loading page…</div>}
           >
             <Routes>
               <Route element={<HomePage />} path='/' />
@@ -248,7 +356,16 @@ function App() {
               <Route element={<TimelinePage />} path='/timeline' />
               <Route element={<DZonePage />} path='/d-zone' />
               <Route element={<DZoneHistoryPage />} path='/d-zone/history' />
-              <Route element={<BuilderPage />} path='/builder' />
+              <Route
+                element={
+                  builderV2Default && !isClassicBuilderRequest(search) ? (
+                    <Navigate replace to='/builder-v2' />
+                  ) : (
+                    <BuilderPage />
+                  )
+                }
+                path='/builder'
+              />
               <Route element={<BuilderV2Page />} path='/builder-v2' />
               <Route element={<CollectionPage />} path='/collection' />
               <Route element={<MigrationReceivePage />} path='/migrate' />
@@ -262,31 +379,149 @@ function App() {
   )
 }
 
+const CURRENT_BUILD_ID = getCurrentBuildId()
+const BUILDER_V2_NOTICE_BASE_CONTROL_CLASS =
+  'ui-compact-control ui-compact-control--dense inline-flex min-h-8 items-center justify-center px-3 text-center text-xs font-semibold'
+const BUILDER_V2_NOTICE_PRIMARY_CONTROL_CLASS = `${BUILDER_V2_NOTICE_BASE_CONTROL_CLASS} border-[var(--ui-state-amber-border-emphasis)] bg-[var(--ui-state-amber-surface-strong)] text-[var(--ui-accent-gold-soft)]`
+const BUILDER_V2_NOTICE_SECONDARY_CONTROL_CLASS = `${BUILDER_V2_NOTICE_BASE_CONTROL_CLASS} text-[var(--ui-text-muted)]`
+
+function getBuilderV2BannerSurface({
+  builderV2Default,
+  dismissedBuilderV2Surfaces,
+  pathname,
+  search,
+}: {
+  builderV2Default: boolean
+  dismissedBuilderV2Surfaces: Record<'classic' | 'v2', boolean>
+  pathname: string
+  search: string
+}): 'classic' | 'v2' | null {
+  if (
+    pathname === '/builder' &&
+    !builderV2Default &&
+    !dismissedBuilderV2Surfaces.classic &&
+    !isClassicBuilderRequest(search)
+  ) {
+    return 'classic'
+  }
+
+  if (
+    pathname === '/builder-v2' &&
+    !dismissedBuilderV2Surfaces.v2 &&
+    !isClassicBuilderRequest(search)
+  ) {
+    return 'v2'
+  }
+
+  return null
+}
+
+function BuilderV2BetaNotice({
+  builderV2Default,
+  onDismiss,
+  onOptIn,
+  onOptOut,
+  surface,
+}: {
+  builderV2Default: boolean
+  onDismiss: () => void
+  onOptIn: () => void
+  onOptOut: () => void
+  surface: 'classic' | 'v2'
+}) {
+  const isDefaultNotice = surface === 'v2' && builderV2Default
+
+  return (
+    <section aria-label='Builder V2 beta' className='builder-v2-beta-notice'>
+      <p className='builder-v2-beta-notice__copy'>
+        <strong className='text-[var(--ui-accent-gold-soft)]'>Builder V2 is in beta.</strong>{' '}
+        {surface === 'classic'
+          ? 'Try the new builder flow when you have a minute.'
+          : isDefaultNotice
+            ? 'Builder V2 is your default builder route. You can switch back to the classic route here.'
+            : 'Make it your default builder route if this beta already fits your workflow.'}
+      </p>
+      <div className='builder-v2-beta-notice__actions'>
+        {surface === 'classic' ? (
+          <Link className={BUILDER_V2_NOTICE_PRIMARY_CONTROL_CLASS} to='/builder-v2'>
+            Try Builder V2
+          </Link>
+        ) : isDefaultNotice ? (
+          <button
+            className={BUILDER_V2_NOTICE_PRIMARY_CONTROL_CLASS}
+            onClick={onOptOut}
+            type='button'
+          >
+            Use classic by default
+          </button>
+        ) : (
+          <>
+            <button
+              className={BUILDER_V2_NOTICE_PRIMARY_CONTROL_CLASS}
+              onClick={onOptIn}
+              type='button'
+            >
+              Make Builder V2 default
+            </button>
+          </>
+        )}
+        {surface === 'v2' ? (
+          <Link className={BUILDER_V2_NOTICE_SECONDARY_CONTROL_CLASS} to='/builder?classic=1'>
+            Classic builder
+          </Link>
+        ) : null}
+        <button
+          aria-label='Dismiss Builder V2 beta prompt'
+          className={BUILDER_V2_NOTICE_SECONDARY_CONTROL_CLASS}
+          onClick={onDismiss}
+          type='button'
+        >
+          Not now
+        </button>
+      </div>
+    </section>
+  )
+}
+
+function isClassicBuilderRequest(search: string): boolean {
+  return new URLSearchParams(search).get('classic') === '1'
+}
+
+function getCurrentBuildId(): string {
+  const configuredBuildId: unknown = import.meta.env.VITE_SKEYDB_BUILD_ID
+  return typeof configuredBuildId === 'string' && configuredBuildId.trim() !== ''
+    ? configuredBuildId
+    : 'dev'
+}
+
 function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(() =>
-    typeof window === 'undefined' || typeof window.matchMedia !== 'function'
-      ? false
-      : window.matchMedia(query).matches,
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+        return () => undefined
+      }
+
+      const mediaQuery = window.matchMedia(query)
+      mediaQuery.addEventListener('change', onStoreChange)
+      return () => {
+        mediaQuery.removeEventListener('change', onStoreChange)
+      }
+    },
+    [query],
+  )
+  const getSnapshot = useCallback(
+    () =>
+      typeof window === 'undefined' || typeof window.matchMedia !== 'function'
+        ? false
+        : window.matchMedia(query).matches,
+    [query],
   )
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-      return
-    }
+  return useSyncExternalStore(subscribe, getSnapshot, getServerMediaQuerySnapshot)
+}
 
-    const mediaQuery = window.matchMedia(query)
-    const updateMatches = () => {
-      setMatches(mediaQuery.matches)
-    }
-
-    updateMatches()
-    mediaQuery.addEventListener('change', updateMatches)
-    return () => {
-      mediaQuery.removeEventListener('change', updateMatches)
-    }
-  }, [query])
-
-  return matches
+function getServerMediaQuerySnapshot(): boolean {
+  return false
 }
 
 function getMobileVisibleItemCount({compact, wide}: {compact: boolean; wide: boolean}): number {
@@ -297,6 +532,12 @@ function getMobileVisibleItemCount({compact, wide}: {compact: boolean; wide: boo
 
 function desktopNavClassName(active: boolean): string {
   return `site-nav-link ${active ? 'site-nav-link--active' : 'site-nav-link--inactive'}`
+}
+
+function builderV2NavMarkClassName(active: boolean): string {
+  return `site-builder-v2-mark ${
+    active ? 'site-builder-v2-mark--active' : 'site-builder-v2-mark--inactive'
+  }`
 }
 
 function mobileQuickNavClassName(active: boolean): string {

@@ -1,12 +1,15 @@
 import {
   memo,
+  useCallback,
   useEffect,
   useId,
+  useMemo,
   useRef,
   type ButtonHTMLAttributes,
   type CSSProperties,
   type ReactNode,
   type Ref,
+  type RefObject,
 } from 'react'
 
 import {useDraggable, useDroppable} from '@dnd-kit/core'
@@ -20,6 +23,7 @@ import type {
 import {getMainstatByKey, getMainstatIcon} from '@/domain/mainstats'
 import {getRealmAccent} from '@/domain/realms'
 import {wheelMainstatFilterOptions} from '@/domain/wheel-mainstat-filters'
+import {getSearchCaptureAction} from '@/ui/search/search-capture'
 
 import {
   createBuilderV2PickerAwakenerDragPayload,
@@ -163,6 +167,7 @@ interface BuilderV2PickerContentProps extends BuilderV2AwakenerPickerProps {
   controlsPlacement?: 'top' | 'bottom'
   isCollapsed?: boolean
   onRequestExpand?: (restoreTarget?: HTMLElement | null) => void
+  searchPlaceholder?: string
   searchInputRef?: Ref<HTMLInputElement>
 }
 
@@ -213,6 +218,7 @@ function BuilderV2PickerContentFrame({
   isDndEnabled,
   isRemoveTarget,
   pickerDropRef,
+  searchPlaceholder,
   searchInputRef,
   onAssignAwakener,
   onAssignCovenant,
@@ -243,6 +249,20 @@ function BuilderV2PickerContentFrame({
   const openCovenantDetail = useStableEvent(onOpenCovenantDetail)
   const openPosseDetail = useStableEvent(onOpenPosseDetail)
   const placesControlsAfterResults = controlsPlacement === 'bottom' && !isCollapsed
+  const internalSearchInputRef = useRef<HTMLInputElement | null>(null)
+  const setSearchInputRef = useCallback(
+    (element: HTMLInputElement | null) => {
+      internalSearchInputRef.current = element
+      assignRef(searchInputRef, element)
+    },
+    [searchInputRef],
+  )
+
+  useGlobalBuilderV2PickerSearchCapture({
+    disabled: isCollapsed,
+    picker,
+    searchInputRef: internalSearchInputRef,
+  })
 
   const tabs = (
     <div className='builder-v2-picker-tabs' role='tablist' aria-label='Picker categories'>
@@ -296,8 +316,8 @@ function BuilderV2PickerContentFrame({
           onChange={(event) => {
             picker.setSearchQuery(event.target.value)
           }}
-          placeholder={activeCopy.searchLabel}
-          ref={searchInputRef}
+          placeholder={searchPlaceholder ?? activeCopy.searchLabel}
+          ref={setSearchInputRef}
           type='search'
           value={picker.searchQuery}
         />
@@ -415,6 +435,73 @@ function BuilderV2PickerContentFrame({
   )
 }
 
+function assignRef<TElement>(ref: Ref<TElement> | undefined, element: TElement | null) {
+  if (!ref) {
+    return
+  }
+
+  if (typeof ref === 'function') {
+    ref(element)
+    return
+  }
+
+  ref.current = element
+}
+
+function useGlobalBuilderV2PickerSearchCapture({
+  disabled,
+  picker,
+  searchInputRef,
+}: {
+  disabled: boolean
+  picker: BuilderV2PickerModel
+  searchInputRef: RefObject<HTMLInputElement | null>
+}) {
+  useEffect(() => {
+    if (disabled) {
+      return
+    }
+
+    function handleGlobalKeyDown(event: KeyboardEvent) {
+      if (isModalSearchCaptureBlocked(event.target)) {
+        return
+      }
+
+      const currentSearchValue = searchInputRef.current?.value ?? picker.searchQuery
+      const action = getSearchCaptureAction({currentSearchValue, event})
+      if (!action) {
+        return
+      }
+
+      event.preventDefault()
+
+      if (action.kind === 'delete') {
+        picker.setSearchQuery(currentSearchValue.slice(0, -1))
+        searchInputRef.current?.focus()
+        return
+      }
+
+      if (action.kind === 'character') {
+        picker.setSearchQuery(`${currentSearchValue}${action.key}`)
+        searchInputRef.current?.focus()
+      }
+    }
+
+    window.addEventListener('keydown', handleGlobalKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown)
+    }
+  }, [disabled, picker, searchInputRef])
+}
+
+function isModalSearchCaptureBlocked(target: EventTarget | null): boolean {
+  if (target instanceof Element && target.closest('dialog, [role="dialog"], [aria-modal="true"]')) {
+    return true
+  }
+
+  return document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]') !== null
+}
+
 function BuilderV2PickerFilters({picker}: {picker: BuilderV2PickerModel}) {
   if (picker.tab === 'awakeners') {
     return (
@@ -437,7 +524,7 @@ function BuilderV2PickerFilters({picker}: {picker: BuilderV2PickerModel}) {
 
   if (picker.tab === 'wheels') {
     return (
-      <div className='builder-v2-picker-filter-stack'>
+      <div className='builder-v2-picker-filter-stack builder-v2-picker-filter-stack--grouped'>
         <PickerChipRow label='Wheel rarity filters'>
           {wheelRarityFilterTabs.map((filter) => (
             <PickerChip
@@ -623,10 +710,12 @@ const BuilderV2PickerClearTile = memo(function BuilderV2PickerClearTile({
   onClear: () => void
   target: BuilderV2PickerClearTarget
 }) {
+  const clearKind = getPickerClearTileKind(target)
+
   return (
     <button
       aria-label={target.ariaLabel}
-      className='builder-v2-picker-tile builder-v2-picker-clear-tile'
+      className={`builder-v2-picker-tile builder-v2-picker-clear-tile builder-v2-picker-clear-tile--${clearKind}`}
       onClick={onClear}
       title={target.ariaLabel}
       type='button'
@@ -635,12 +724,26 @@ const BuilderV2PickerClearTile = memo(function BuilderV2PickerClearTile({
         <FaEraser />
       </span>
       <span className='builder-v2-picker-clear-tile-copy'>
-        <span className='builder-v2-picker-clear-tile-title'>{target.label}</span>
-        <span className='builder-v2-picker-clear-tile-description'>{target.description}</span>
+        <span className='builder-v2-picker-clear-tile-title'>Clear</span>
       </span>
     </button>
   )
 })
+
+function getPickerClearTileKind(
+  target: BuilderV2PickerClearTarget,
+): 'covenant' | 'posse' | 'slot' | 'wheel' {
+  if (target.id === 'posse') {
+    return 'posse'
+  }
+  if (target.id.includes(':wheel:')) {
+    return 'wheel'
+  }
+  if (target.id.includes(':covenant')) {
+    return 'covenant'
+  }
+  return 'slot'
+}
 
 const BuilderV2AwakenerPickerTile = memo(function BuilderV2AwakenerPickerTile({
   awakener,
@@ -653,6 +756,30 @@ const BuilderV2AwakenerPickerTile = memo(function BuilderV2AwakenerPickerTile({
   onAssign: (awakenerId: string) => void
   onOpenDetail: (awakenerId: string) => void
 }) {
+  const dndData = useMemo(
+    () =>
+      isDndEnabled
+        ? createBuilderV2PickerAwakenerDragPayload({
+            blockReason: awakener.blockReason,
+            displayName: awakener.displayName,
+            id: awakener.id,
+            inUseLabel: awakener.inUseLabel,
+            owned: awakener.owned,
+            portraitSrc: awakener.portraitSrc,
+            realm: awakener.realm,
+          })
+        : undefined,
+    [
+      awakener.blockReason,
+      awakener.displayName,
+      awakener.id,
+      awakener.inUseLabel,
+      awakener.owned,
+      awakener.portraitSrc,
+      awakener.realm,
+      isDndEnabled,
+    ],
+  )
   const stateChips = [
     !awakener.owned ? 'Unowned' : null,
     awakener.blockReason === 'Realm limit' ? 'Realm' : null,
@@ -671,9 +798,7 @@ const BuilderV2AwakenerPickerTile = memo(function BuilderV2AwakenerPickerTile({
         className='builder-v2-picker-tile builder-v2-picker-tile--awakener'
         data-blocked={awakener.blocked}
         dndId={`builder-v2-picker-awakener-${awakener.id}`}
-        getDndData={
-          isDndEnabled ? () => createBuilderV2PickerAwakenerDragPayload(awakener) : undefined
-        }
+        dndData={dndData}
         isDndEnabled={isDndEnabled}
         data-in-use={awakener.inUse}
         data-owned={awakener.owned}
@@ -688,7 +813,7 @@ const BuilderV2AwakenerPickerTile = memo(function BuilderV2AwakenerPickerTile({
               {chip}
             </PickerStateChip>
           ))}
-          footer={renderEnlightenChip(awakener.enlightenLevel)}
+          footer={<EnlightenFooterChip enlightenLevel={awakener.enlightenLevel} />}
           fallback={awakener.displayName}
           realm={awakener.realm}
           src={awakener.portraitSrc}
@@ -732,6 +857,32 @@ const BuilderV2WheelPickerTile = memo(function BuilderV2WheelPickerTile({
   onOpenDetail: (wheelId: string) => void
   wheel: BuilderV2WheelOption
 }) {
+  const dndData = useMemo(
+    () =>
+      isDndEnabled
+        ? createBuilderV2PickerWheelDragPayload({
+            assetSrc: wheel.assetSrc,
+            id: wheel.id,
+            inUseLabel: wheel.inUseLabel,
+            mainstat: wheel.mainstat,
+            name: wheel.name,
+            owned: wheel.owned,
+            rarity: wheel.rarity,
+            recommendationLabel: wheel.recommendationLabel,
+          })
+        : undefined,
+    [
+      isDndEnabled,
+      wheel.assetSrc,
+      wheel.id,
+      wheel.inUseLabel,
+      wheel.mainstat,
+      wheel.name,
+      wheel.owned,
+      wheel.rarity,
+      wheel.recommendationLabel,
+    ],
+  )
   const isDimmed = wheel.inUse || !wheel.owned
 
   return (
@@ -740,12 +891,13 @@ const BuilderV2WheelPickerTile = memo(function BuilderV2WheelPickerTile({
       onOpenDetail={() => {
         onOpenDetail(wheel.id)
       }}
+      tileKind='wheel'
     >
       <PickerTileButton
         aria-label={getWheelPickerTileLabel(wheel)}
         className='builder-v2-picker-tile builder-v2-picker-tile--wheel'
         dndId={`builder-v2-picker-wheel-${wheel.id}`}
-        getDndData={isDndEnabled ? () => createBuilderV2PickerWheelDragPayload(wheel) : undefined}
+        dndData={dndData}
         isDndEnabled={isDndEnabled}
         data-in-use={wheel.inUse}
         data-owned={wheel.owned}
@@ -770,7 +922,7 @@ const BuilderV2WheelPickerTile = memo(function BuilderV2WheelPickerTile({
             </>
           }
           fallback={wheel.name}
-          footer={renderEnlightenChip(wheel.enlightenLevel)}
+          footer={<EnlightenFooterChip enlightenLevel={wheel.enlightenLevel} />}
           isDimmed={isDimmed}
           src={wheel.assetSrc}
         />
@@ -813,6 +965,27 @@ const BuilderV2CovenantPickerTile = memo(function BuilderV2CovenantPickerTile({
   onAssign: (covenantId: string) => void
   onOpenDetail: (covenantId: string) => void
 }) {
+  const dndData = useMemo(
+    () =>
+      isDndEnabled
+        ? createBuilderV2PickerCovenantDragPayload({
+            assetSrc: covenant.assetSrc,
+            id: covenant.id,
+            inUse: covenant.inUse,
+            name: covenant.name,
+            recommendationLabel: covenant.recommendationLabel,
+          })
+        : undefined,
+    [
+      covenant.assetSrc,
+      covenant.id,
+      covenant.inUse,
+      covenant.name,
+      covenant.recommendationLabel,
+      isDndEnabled,
+    ],
+  )
+
   return (
     <PickerTileFrame
       detailLabel={`View ${covenant.name} details`}
@@ -824,9 +997,7 @@ const BuilderV2CovenantPickerTile = memo(function BuilderV2CovenantPickerTile({
         aria-label={getCovenantPickerTileLabel(covenant)}
         className='builder-v2-picker-tile builder-v2-picker-tile--covenant'
         dndId={`builder-v2-picker-covenant-${covenant.id}`}
-        getDndData={
-          isDndEnabled ? () => createBuilderV2PickerCovenantDragPayload(covenant) : undefined
-        }
+        dndData={dndData}
         isDndEnabled={isDndEnabled}
         data-in-use={covenant.inUse}
         data-recommended={covenant.recommended}
@@ -888,6 +1059,33 @@ const BuilderV2PossePickerTile = memo(function BuilderV2PossePickerTile({
   onOpenDetail: (posseId: string) => void
   posse: BuilderV2PosseOption
 }) {
+  const dndData = useMemo(
+    () =>
+      isDndEnabled
+        ? createBuilderV2PickerPosseDragPayload({
+            assetSrc: posse.assetSrc,
+            blocked: posse.blocked,
+            id: posse.id,
+            name: posse.name,
+            owned: posse.owned,
+            realm: posse.realm,
+            recommended: posse.recommended,
+            statusLabel: posse.statusLabel,
+          })
+        : undefined,
+    [
+      isDndEnabled,
+      posse.assetSrc,
+      posse.blocked,
+      posse.id,
+      posse.name,
+      posse.owned,
+      posse.realm,
+      posse.recommended,
+      posse.statusLabel,
+    ],
+  )
+
   return (
     <PickerTileFrame
       detailLabel={`View ${posse.name} details`}
@@ -901,7 +1099,7 @@ const BuilderV2PossePickerTile = memo(function BuilderV2PossePickerTile({
         data-active={posse.isActive}
         data-blocked={posse.blocked}
         dndId={`builder-v2-picker-posse-${posse.id}`}
-        getDndData={isDndEnabled ? () => createBuilderV2PickerPosseDragPayload(posse) : undefined}
+        dndData={dndData}
         isDndEnabled={isDndEnabled}
         data-owned={posse.owned}
         data-recommended={posse.recommended}
@@ -961,7 +1159,7 @@ function arePossePickerTilePropsEqual(
 
 interface PickerTileButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   dndId: string
-  getDndData?: () => BuilderV2DragPayload
+  dndData?: BuilderV2DragPayload
   isDndEnabled: boolean
 }
 
@@ -969,13 +1167,19 @@ function PickerTileFrame({
   children,
   detailLabel,
   onOpenDetail,
+  tileKind,
 }: {
   children: ReactNode
   detailLabel: string
   onOpenDetail: () => void
+  tileKind?: 'wheel'
 }) {
   return (
-    <div className='builder-v2-picker-tile-frame'>
+    <div
+      className={`builder-v2-picker-tile-frame ${
+        tileKind === 'wheel' ? 'builder-v2-picker-tile-frame--wheel' : ''
+      }`}
+    >
       {children}
       <button
         aria-label={detailLabel}
@@ -997,13 +1201,13 @@ function PickerTileFrame({
 function PickerTileButton({
   children,
   dndId,
-  getDndData,
+  dndData,
   isDndEnabled,
   ...buttonProps
 }: PickerTileButtonProps) {
-  if (isDndEnabled && getDndData) {
+  if (isDndEnabled && dndData) {
     return (
-      <DraggablePickerTileButton dndId={dndId} getDndData={getDndData} {...buttonProps}>
+      <DraggablePickerTileButton dndData={dndData} dndId={dndId} {...buttonProps}>
         {children}
       </DraggablePickerTileButton>
     )
@@ -1018,15 +1222,13 @@ function PickerTileButton({
 
 function DraggablePickerTileButton({
   children,
+  dndData,
   dndId,
-  getDndData,
   ...buttonProps
-}: Omit<PickerTileButtonProps, 'getDndData' | 'isDndEnabled'> & {
-  getDndData: () => BuilderV2DragPayload
-}) {
+}: Omit<PickerTileButtonProps, 'isDndEnabled'> & {dndData: BuilderV2DragPayload}) {
   const {listeners, setNodeRef} = useDraggable({
     id: dndId,
-    data: getDndData(),
+    data: dndData,
   })
 
   return (
@@ -1110,7 +1312,7 @@ function PickerStateChip({
   )
 }
 
-function renderEnlightenChip(enlightenLevel: number | null): ReactNode {
+function EnlightenFooterChip({enlightenLevel}: {enlightenLevel: number | null}) {
   const label = formatEnlightenLabel(enlightenLevel)
   if (!label) {
     return null

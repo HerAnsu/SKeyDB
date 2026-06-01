@@ -25,14 +25,14 @@ export function ImportCodeDialog({
   }, [])
 
   return (
-    <ModalFrame ariaLabel='Import teams' title='Import Teams'>
-      <p className='mt-2 text-sm text-slate-200'>
+    <ModalFrame ariaLabel='Import teams' onClose={onCancel} title='Import Teams'>
+      <p className='text-sm text-[var(--ui-text-main)]'>
         Paste a `t1.`, `mt1.` or `@@...@@` code to import.
       </p>
       {warning ? <div className='mt-2'>{warning}</div> : null}
       <textarea
         aria-label='Import code'
-        className='mt-3 h-32 w-full resize-y border border-slate-500/55 bg-slate-900/75 p-2 text-xs text-slate-100 outline-none focus:border-amber-200/70'
+        className='ui-scrollbar mt-3 h-36 w-full resize-y border border-[var(--ui-control-border)] bg-[var(--ui-control-surface-strong)] p-2.5 text-xs text-[var(--ui-text-main)] transition-colors outline-none placeholder:text-[var(--ui-text-faint)] focus:border-[var(--ui-control-border-hover)] focus:ring-2 focus:ring-[var(--ui-focus-ring-support)] motion-reduce:transition-none'
         onChange={(event) => {
           setValue(event.target.value)
         }}
@@ -53,7 +53,7 @@ export function ImportCodeDialog({
         ref={inputRef}
         value={value}
       />
-      <div className='mt-4 flex justify-end gap-2'>
+      <div className='mt-4 flex justify-end gap-2 border-t border-[var(--ui-border-subtle)] pt-3'>
         <Button onClick={onCancel} variant='secondary'>
           Cancel
         </Button>

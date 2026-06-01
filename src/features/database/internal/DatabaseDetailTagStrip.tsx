@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react'
+import {useLayoutEffect, useRef, useState} from 'react'
 
 const MOBILE_TAG_ROWS_HEIGHT = 46
 
@@ -18,18 +18,20 @@ export function DatabaseDetailTagStrip({
   const tagsRef = useRef<HTMLDivElement>(null)
   const showAllTags = expandedItemKey === itemKey
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const element = tagsRef.current
 
     function refreshTagsOverflow() {
-      if (!element) {
-        setCanExpandTags(false)
-        return
-      }
-      setCanExpandTags(element.scrollHeight > MOBILE_TAG_ROWS_HEIGHT + 1)
+      const nextCanExpandTags = element ? element.scrollHeight > MOBILE_TAG_ROWS_HEIGHT + 1 : false
+      setCanExpandTags((currentCanExpandTags) =>
+        currentCanExpandTags === nextCanExpandTags ? currentCanExpandTags : nextCanExpandTags,
+      )
     }
 
     refreshTagsOverflow()
+    if (!element) {
+      return
+    }
 
     if (typeof ResizeObserver === 'undefined') {
       window.addEventListener('resize', refreshTagsOverflow)
@@ -39,14 +41,12 @@ export function DatabaseDetailTagStrip({
     }
 
     const observer = new ResizeObserver(refreshTagsOverflow)
-    if (element) {
-      observer.observe(element)
-    }
+    observer.observe(element)
 
     return () => {
       observer.disconnect()
     }
-  }, [itemKey, tags])
+  }, [tags])
 
   if (tags.length === 0) {
     return null

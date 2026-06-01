@@ -79,6 +79,13 @@ function expectUniqueCodecIndices(records: StandardCodeEntry[]): void {
   expect(new Set(records.map((entry) => entry.codecIndex)).size).toBe(records.length)
 }
 
+function standardRowsForFrozenV1(
+  standardRows: StandardCodeEntry[],
+  frozenCount: number,
+): StandardCodeEntry[] {
+  return standardRows.slice(0, frozenCount)
+}
+
 describe('persistence contract', () => {
   it('keeps current runtime identifiers aligned with the current persistence contract', () => {
     const current = buildCurrentContract()
@@ -143,17 +150,38 @@ describe('persistence contract', () => {
     ])
 
     expect(
-      standardCode.awakeners.map(({codecIndex, legacyId}) => ({codecIndex, legacyId})),
+      standardRowsForFrozenV1(standardCode.awakeners, v1.awakeners.length).map(
+        ({codecIndex, legacyId}) => ({codecIndex, legacyId}),
+      ),
     ).toEqual(v1.awakeners.map(({id}) => ({codecIndex: id, legacyId: id})))
-    expect(standardCode.wheels.map(({codecIndex, legacyId}) => ({codecIndex, legacyId}))).toEqual(
-      v1.wheels.map((id, index) => ({codecIndex: index + 1, legacyId: id})),
-    )
     expect(
-      standardCode.covenants.map(({codecIndex, legacyId}) => ({codecIndex, legacyId})),
+      standardRowsForFrozenV1(standardCode.wheels, v1.wheels.length).map(
+        ({codecIndex, legacyId}) => ({codecIndex, legacyId}),
+      ),
+    ).toEqual(v1.wheels.map((id, index) => ({codecIndex: index + 1, legacyId: id})))
+    expect(
+      standardRowsForFrozenV1(standardCode.covenants, v1.covenants.length).map(
+        ({codecIndex, legacyId}) => ({codecIndex, legacyId}),
+      ),
     ).toEqual(v1.covenants.map((id, index) => ({codecIndex: index + 1, legacyId: id})))
-    expect(standardCode.posses.map(({codecIndex, legacyId}) => ({codecIndex, legacyId}))).toEqual(
-      v1.posses.map(({id, index}) => ({codecIndex: index, legacyId: id})),
-    )
+    expect(
+      standardRowsForFrozenV1(standardCode.posses, v1.posses.length).map(
+        ({codecIndex, legacyId}) => ({codecIndex, legacyId}),
+      ),
+    ).toEqual(v1.posses.map(({id, index}) => ({codecIndex: index, legacyId: id})))
+
+    expect(
+      standardCode.awakeners.map((entry) => entry.id).filter((id) => !currentIds.has(id)),
+    ).toEqual([])
+    expect(
+      standardCode.wheels.map((entry) => entry.id).filter((id) => !currentIds.has(id)),
+    ).toEqual([])
+    expect(
+      standardCode.covenants.map((entry) => entry.id).filter((id) => !currentIds.has(id)),
+    ).toEqual([])
+    expect(
+      standardCode.posses.map((entry) => entry.id).filter((id) => !currentIds.has(id)),
+    ).toEqual([])
 
     for (const entry of standardCode.awakeners) {
       expect(entry.id).toBe(migrateAwakenerIdV1ToCurrent(entry.legacyId))

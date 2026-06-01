@@ -9919,6 +9919,22 @@
       "ownerAwakenerId": "awakener-0056",
       "ownerAwakenerName": "Arachne"
     },
+    "relic-0057": {
+      "kind": "relic",
+      "id": "relic-0057",
+      "name": "Dimensional Image: Saya",
+      "route": {
+        "slug": "dimensional-image-saya",
+        "canonicalPath": "/database/relics/dimensional-image-saya"
+      },
+      "assets": {
+        "icon": "asset-relic-0057-icon"
+      },
+      "realm": "CARO",
+      "rarity": "SSR",
+      "ownerAwakenerId": "awakener-0057",
+      "ownerAwakenerName": "Saya"
+    },
     "relic-9001": {
       "kind": "relic",
       "id": "relic-9001",
@@ -21824,6 +21840,7 @@
       "relic-0054",
       "relic-0055",
       "relic-0056",
+      "relic-0057",
       "relic-9001",
       "relic-9002",
       "relic-9003",

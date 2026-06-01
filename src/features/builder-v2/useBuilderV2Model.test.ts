@@ -1,5 +1,5 @@
 import {act, renderHook} from '@testing-library/react'
-import {describe, expect, it} from 'vitest'
+import {describe, expect, it, vi} from 'vitest'
 
 import './builder-v2-test-mocks'
 
@@ -230,6 +230,33 @@ describe('useBuilderV2Model', () => {
     expect(result.current.teams.at(-1)?.name).toBe('Wave 5 Extra')
   })
 
+  it('uses the latest toast handler from stable team action callbacks', () => {
+    const firstShowToast = vi.fn()
+    const secondShowToast = vi.fn()
+    const {result, rerender} = renderHook(
+      ({showToast}: {showToast: (message: string) => void}) => useBuilderV2Model({showToast}),
+      {initialProps: {showToast: firstShowToast}},
+    )
+
+    act(() => {
+      result.current.requestApplyTeamTemplate('DTIDE_5')
+    })
+
+    const confirmTemplate = result.current.teamActionDialog?.onConfirm
+    expect(confirmTemplate).toBeTypeOf('function')
+
+    rerender({showToast: secondShowToast})
+
+    act(() => {
+      confirmTemplate?.()
+    })
+
+    expect(firstShowToast).not.toHaveBeenCalled()
+    expect(secondShowToast).toHaveBeenCalledWith(
+      'Applied D-Tide 5: renamed 1, created 4, removed 0.',
+    )
+  })
+
   it('reorders teams with accessible up/down semantics while preserving the active team', () => {
     const {result} = renderHook(() => useBuilderV2Model())
 
@@ -251,6 +278,41 @@ describe('useBuilderV2Model', () => {
     })
 
     expect(result.current.teams.map((team) => team.name)).toEqual(['Team 1', 'Team 2', 'Team 3'])
+    expect(result.current.activeTeamId).toBe(activeTeamId)
+  })
+
+  it('reorders teams to an explicit index for drag sorting while preserving the active team', () => {
+    const {result} = renderHook(() => useBuilderV2Model())
+
+    act(() => {
+      result.current.addTeam()
+      result.current.addTeam()
+      result.current.addTeam()
+    })
+    const activeTeamId = result.current.activeTeamId
+
+    act(() => {
+      result.current.moveTeamToIndex(activeTeamId, 1)
+    })
+
+    expect(result.current.teams.map((team) => team.name)).toEqual([
+      'Team 1',
+      'Team 4',
+      'Team 2',
+      'Team 3',
+    ])
+    expect(result.current.activeTeamId).toBe(activeTeamId)
+
+    act(() => {
+      result.current.moveTeamToIndex(activeTeamId, 99)
+    })
+
+    expect(result.current.teams.map((team) => team.name)).toEqual([
+      'Team 1',
+      'Team 2',
+      'Team 3',
+      'Team 4',
+    ])
     expect(result.current.activeTeamId).toBe(activeTeamId)
   })
 

@@ -337,6 +337,12 @@
       "legacyId": 54,
       "legacyName": "xu",
       "id": "awakener-0054"
+    },
+    {
+      "codecIndex": 57,
+      "legacyId": 57,
+      "legacyName": "saya",
+      "id": "awakener-0057"
     }
   ],
   "wheels": [
@@ -989,6 +995,26 @@
       "codecIndex": 130,
       "legacyId": "ZL07",
       "id": "wheel-0126"
+    },
+    {
+      "codecIndex": 131,
+      "legacyId": "y0",
+      "id": "wheel-0165"
+    },
+    {
+      "codecIndex": 132,
+      "legacyId": "za",
+      "id": "wheel-0166"
+    },
+    {
+      "codecIndex": 133,
+      "legacyId": "y1",
+      "id": "wheel-0167"
+    },
+    {
+      "codecIndex": 134,
+      "legacyId": "yZ",
+      "id": "wheel-0168"
     }
   ],
   "covenants": [
@@ -1343,6 +1369,16 @@
       "codecIndex": 46,
       "legacyId": "wayward-ship",
       "id": "posse-0044"
+    },
+    {
+      "codecIndex": 52,
+      "legacyId": "orbis-fatum",
+      "id": "posse-0050"
+    },
+    {
+      "codecIndex": 53,
+      "legacyId": "for-the-new-world",
+      "id": "posse-0051"
     }
   ]
 }

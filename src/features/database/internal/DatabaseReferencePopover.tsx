@@ -22,7 +22,7 @@ import type {DatabasePopoverDescriptionRankContext} from './database-popover-con
 import type {DatabaseReferenceEntry, KeyedDatabaseReferenceEntry} from './database-reference-entry'
 import {DatabaseLoreMarkupText} from './DatabaseLoreMarkupText'
 import type {DatabaseRichTextContentProps} from './DatabaseRichTextContent'
-import {renderTextWithBreaks, scaledFontStyle} from './font-scale'
+import {scaledFontStyle} from './font-scale'
 import {DATABASE_ENTRY_TITLE_CLASS} from './text-styles'
 
 const DatabaseRichTextContent = lazy(() =>
@@ -94,6 +94,29 @@ function descriptionSectionClassName(tone: 'default' | 'lore' | undefined): stri
   ]
     .filter(Boolean)
     .join(' ')
+}
+
+function TextWithBreaksFallback({text}: {text: string}) {
+  const [firstPart, ...remainingParts] = getTextPartsWithKeys(text)
+
+  return (
+    <span>
+      <span key={firstPart.key}>{firstPart.text}</span>
+      {remainingParts.flatMap((part) => [
+        <br key={`br:${part.key}`} />,
+        <span key={part.key}>{part.text}</span>,
+      ])}
+    </span>
+  )
+}
+
+function getTextPartsWithKeys(text: string): {key: string; text: string}[] {
+  const occurrencesByText = new Map<string, number>()
+  return text.split('\n').map((part) => {
+    const occurrence = occurrencesByText.get(part) ?? 0
+    occurrencesByText.set(part, occurrence + 1)
+    return {key: `${part}:${String(occurrence)}`, text: part}
+  })
 }
 
 function buildReferenceDescriptionFallbackText({
@@ -195,7 +218,7 @@ export function DatabaseReferencePopover({
           <img
             alt={entry.thumbnail.alt ?? ''}
             aria-hidden={entry.thumbnail.alt ? undefined : true}
-            className='mr-2 h-10 w-10 shrink-0 border border-slate-700/55 bg-slate-900/70 object-contain'
+            className='mr-2 size-10 shrink-0 border border-slate-700/55 bg-slate-900/70 object-contain'
             draggable={false}
             src={entry.thumbnail.src}
           />
@@ -262,13 +285,13 @@ export function DatabaseReferencePopover({
         </div>
         <button
           aria-label='Close database popover'
-          className='-mt-1 -mr-1 ml-1 inline-flex h-8 w-8 shrink-0 items-center justify-center text-slate-500 transition-colors hover:text-amber-100 focus-visible:text-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200/30'
+          className='-mt-1 -mr-1 ml-1 inline-flex size-8 shrink-0 items-center justify-center text-slate-500 transition-colors hover:text-amber-100 focus-visible:text-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-200/30'
           onClick={() => {
             onClose()
           }}
           type='button'
         >
-          <FaXmark className='h-3 w-3' />
+          <FaXmark className='size-3' />
         </button>
       </div>
       <div className='px-3 pb-3'>
@@ -283,7 +306,7 @@ export function DatabaseReferencePopover({
                   <img
                     alt=''
                     aria-hidden
-                    className='h-4 w-4 shrink-0 object-contain opacity-90'
+                    className='size-4 shrink-0 object-contain opacity-90'
                     draggable={false}
                     src={row.iconSrc}
                   />
@@ -319,7 +342,7 @@ export function DatabaseReferencePopover({
                     <Suspense
                       fallback={
                         sectionFallbackText ? (
-                          <span>{renderTextWithBreaks(sectionFallbackText)}</span>
+                          <TextWithBreaksFallback text={sectionFallbackText} />
                         ) : null
                       }
                     >
@@ -337,7 +360,7 @@ export function DatabaseReferencePopover({
         ) : (
           <p className='leading-relaxed text-slate-400' style={scaledFontStyle(11)}>
             <Suspense
-              fallback={fallbackText ? <span>{renderTextWithBreaks(fallbackText)}</span> : null}
+              fallback={fallbackText ? <TextWithBreaksFallback text={fallbackText} /> : null}
             >
               <DatabaseRichTextContent {...contentProps} />
             </Suspense>

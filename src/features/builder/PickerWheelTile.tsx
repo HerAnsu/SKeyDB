@@ -1,3 +1,5 @@
+import {useMemo} from 'react'
+
 import {useDraggable} from '@dnd-kit/core'
 import {FaCircleInfo} from 'react-icons/fa6'
 
@@ -74,13 +76,19 @@ function getWheelDragData(draggableEnabled: boolean, wheelId?: string): DragData
   return {kind: 'picker-wheel', wheelId}
 }
 
-function renderWheelPreview(
-  wheelAsset: string | undefined,
-  wheelDisplayName: string,
-  isOwned: boolean,
-  isNotSet: boolean,
-  isDimmed: boolean,
-) {
+function WheelPreview({
+  wheelAsset,
+  wheelDisplayName,
+  isOwned,
+  isNotSet,
+  isDimmed,
+}: {
+  wheelAsset: string | undefined
+  wheelDisplayName: string
+  isOwned: boolean
+  isNotSet: boolean
+  isDimmed: boolean
+}) {
   if (wheelAsset) {
     return (
       <img
@@ -130,6 +138,66 @@ export function PickerWheelTile({
   })
   const dragAttributes = {...attributes} as Record<string, unknown>
   delete dragAttributes['aria-disabled']
+  const actions = useMemo(() => {
+    if (isNotSet) {
+      return undefined
+    }
+
+    return (
+      <button
+        aria-label='Open details overlay'
+        className='builder-picker-detail-action inline-flex items-center justify-center text-slate-400 hover:text-amber-100 focus-visible:text-amber-100 focus-visible:outline-none'
+        onClick={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          onOpenDetail?.()
+        }}
+        title={`Open ${wheelDisplayName} details overlay`}
+        type='button'
+      >
+        <FaCircleInfo aria-hidden className='size-3' />
+      </button>
+    )
+  }, [isNotSet, onOpenDetail, wheelDisplayName])
+  const chips = useMemo(() => {
+    if (isNotSet || (!recommendationLabel && !recommendedMainstatKey)) {
+      return undefined
+    }
+
+    return (
+      <>
+        {recommendationLabel ? (
+          <span className={PICKER_RECOMMENDATION_CLASS}>{recommendationLabel}</span>
+        ) : null}
+        {recommendedMainstatKey && !recommendationLabel ? (
+          <RecommendedMainstatChip mainstatKey={recommendedMainstatKey} />
+        ) : null}
+      </>
+    )
+  }, [isNotSet, recommendationLabel, recommendedMainstatKey])
+  const preview = useMemo(
+    () => (
+      <WheelPreview
+        wheelAsset={wheelAsset}
+        wheelDisplayName={wheelDisplayName}
+        isOwned={isOwned}
+        isNotSet={isNotSet}
+        isDimmed={isDimmed}
+      />
+    ),
+    [isDimmed, isNotSet, isOwned, wheelAsset, wheelDisplayName],
+  )
+  const statusBar = useMemo(() => {
+    if (!topLabel) {
+      return undefined
+    }
+
+    return (
+      <span className={topLabel.className} title={topLabel.text}>
+        {topLabel.text}
+      </span>
+    )
+  }, [topLabel])
 
   return (
     <div className='group relative min-w-0'>
@@ -150,48 +218,15 @@ export function PickerWheelTile({
         />
         <CompactArtTile
           actionPlacement='caption'
-          actions={
-            !isNotSet ? (
-              <button
-                aria-label='Open details overlay'
-                className='builder-picker-detail-action inline-flex items-center justify-center text-slate-400 hover:text-amber-100 focus-visible:text-amber-100 focus-visible:outline-none'
-                onClick={(event) => {
-                  event.preventDefault()
-                  event.stopPropagation()
-                  onOpenDetail?.()
-                }}
-                title={`Open ${wheelDisplayName} details overlay`}
-                type='button'
-              >
-                <FaCircleInfo aria-hidden className='h-3 w-3' />
-              </button>
-            ) : undefined
-          }
-          chips={
-            !isNotSet && (recommendationLabel || recommendedMainstatKey) ? (
-              <>
-                {recommendationLabel ? (
-                  <span className={PICKER_RECOMMENDATION_CLASS}>{recommendationLabel}</span>
-                ) : null}
-                {recommendedMainstatKey && !recommendationLabel ? (
-                  <RecommendedMainstatChip mainstatKey={recommendedMainstatKey} />
-                ) : null}
-              </>
-            ) : undefined
-          }
+          actions={actions}
+          chips={chips}
           chipPlacement='overlay-stack'
           name={wheelDisplayName}
           nameClassName='truncate'
           nameTitle={wheelDisplayName}
-          preview={renderWheelPreview(wheelAsset, wheelDisplayName, isOwned, isNotSet, isDimmed)}
+          preview={preview}
           previewClassName='aspect-[75/113] border border-slate-400/35 bg-slate-900/70'
-          statusBar={
-            topLabel ? (
-              <span className={topLabel.className} title={topLabel.text}>
-                {topLabel.text}
-              </span>
-            ) : undefined
-          }
+          statusBar={statusBar}
         />
       </div>
     </div>
@@ -211,7 +246,7 @@ function RecommendedMainstatChip({mainstatKey}: {mainstatKey: WheelMainstatKey})
       className={`${PICKER_RECOMMENDATION_CLASS} builder-picker-recommendation-chip-icon`}
       title={`Recommended mainstat ${label}`}
     >
-      <img alt={`Recommended mainstat ${label}`} className='h-3 w-3 object-contain' src={icon} />
+      <img alt={`Recommended mainstat ${label}`} className='size-3 object-contain' src={icon} />
     </span>
   )
 }

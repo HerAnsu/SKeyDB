@@ -1740,6 +1740,12 @@
         "canonicalSlug": "dimensional-image-sanga",
         "canonicalPath": "/database/relics/dimensional-image-sanga"
       },
+      "dimensional-image-saya": {
+        "kind": "relic",
+        "id": "relic-0057",
+        "canonicalSlug": "dimensional-image-saya",
+        "canonicalPath": "/database/relics/dimensional-image-saya"
+      },
       "dimensional-image-sorel": {
         "kind": "relic",
         "id": "relic-0046",

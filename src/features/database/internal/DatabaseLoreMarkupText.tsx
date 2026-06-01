@@ -85,6 +85,8 @@ function DatabaseLoreRedaction({level}: {level: 1 | 2 | 3 | 4}) {
     <span
       aria-label='Redacted lore text'
       className='mx-[0.08em] inline-flex translate-y-[0.08em] items-end gap-px align-baseline'
+      /* This wraps several aria-hidden inline SVG glyphs into one labelled image token. */
+      /* react-doctor-disable-next-line prefer-tag-over-role, react-doctor/prefer-tag-over-role */
       role='img'
     >
       {glyphs.map((glyphKey, glyphIndex) => {
@@ -121,10 +123,24 @@ function appendLoreTextNode(
   partIndex: number,
   wrapText: boolean,
 ) {
-  nodes.push(wrapText ? <span key={buildLoreKey(keyPrefix, 'text', partIndex)}>{text}</span> : text)
+  text.split('\n').forEach((line, lineIndex, lines) => {
+    if (line.length > 0) {
+      nodes.push(
+        wrapText ? (
+          <span key={buildLoreKey(keyPrefix, 'text', partIndex, lineIndex)}>{line}</span>
+        ) : (
+          line
+        ),
+      )
+    }
+
+    if (lineIndex < lines.length - 1) {
+      nodes.push(<br key={buildLoreKey(keyPrefix, 'break', partIndex, lineIndex)} />)
+    }
+  })
 }
 
-function renderDatabaseLoreInlineText(
+function buildDatabaseLoreInlineNodes(
   text: string,
   keyPrefix: string,
   wrapText = true,
@@ -150,7 +166,7 @@ function renderDatabaseLoreInlineText(
       )
     } else if (wrappedTagName.length > 0) {
       const tagName = wrappedTagName.toLowerCase()
-      const content = renderDatabaseLoreInlineText(
+      const content = buildDatabaseLoreInlineNodes(
         wrappedTagContent,
         buildLoreKey(keyPrefix, 'tag', partIndex, wrappedTagName),
         false,
@@ -190,19 +206,9 @@ function renderDatabaseLoreInlineText(
   return nodes
 }
 
-function renderDatabaseLoreTextWithBreaks(text: string, keyPrefix: string): ReactNode[] {
-  return text.split('\n').flatMap((line, lineIndex) => {
-    const lineNodes = renderDatabaseLoreInlineText(line, buildLoreKey(keyPrefix, 'line', lineIndex))
-    if (lineIndex === 0) {
-      return lineNodes
-    }
-    return [<br key={buildLoreKey(keyPrefix, 'break', lineIndex)} />, ...lineNodes]
-  })
-}
-
 export function DatabaseLoreMarkupText({
   text,
   keyPrefix = 'database-lore-markup',
 }: DatabaseLoreMarkupTextProps) {
-  return <>{renderDatabaseLoreTextWithBreaks(text, keyPrefix)}</>
+  return <>{buildDatabaseLoreInlineNodes(text, keyPrefix)}</>
 }

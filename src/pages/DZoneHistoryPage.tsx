@@ -159,11 +159,11 @@ export function DZoneHistoryPage() {
                 waveHeadingLevel={3}
               />
             ) : (
-              <div className='d-zone-history-loading' role='status'>
+              <output className='d-zone-history-loading'>
                 {selectedSeasonLoadState.status === 'error'
                   ? selectedSeasonLoadState.message
                   : 'Loading season archive...'}
-              </div>
+              </output>
             )}
           </div>
         </section>

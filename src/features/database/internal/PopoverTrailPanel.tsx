@@ -1,12 +1,10 @@
 import {
   useCallback,
   useEffect,
+  useEffectEvent,
   useLayoutEffect,
   useRef,
-  useState,
-  type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
-  type PointerEvent as ReactPointerEvent,
 } from 'react'
 
 import {getFocusableElements} from '@/ui/modal/focus-scope'
@@ -34,17 +32,17 @@ export function PopoverTrailPanel({
   fontScale = 'small',
   children,
 }: PopoverTrailPanelProps) {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDialogElement>(null)
   const desktopCloseAllRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const previouslyFocusedElementRef = useRef<HTMLElement | null>(null)
-  const [viewportVersion, setViewportVersion] = useState(0)
-  const [manualPosition, setManualPosition] = useState<{left: number; top: number} | null>(null)
+  const manualPositionRef = useRef<{left: number; top: number} | null>(null)
   const isMobile = isTrailMobileLayout(window.innerWidth)
   const currentAnchorRect = anchorElement?.isConnected
     ? anchorElement.getBoundingClientRect()
     : anchorRect
   const direction = isMobile ? 'down' : decideTrailDirection(currentAnchorRect, window.innerHeight)
+  const onCloseAllEvent = useEffectEvent(onCloseAll)
   useSuppressDetailEntitySearchCapture()
 
   const positionPanel = useCallback(() => {
@@ -61,6 +59,7 @@ export function PopoverTrailPanel({
     const activeAnchorRect = anchorElement?.isConnected
       ? anchorElement.getBoundingClientRect()
       : anchorRect
+    const manualPosition = manualPositionRef.current
     const desktopCloseAllHeight =
       direction === 'down' ? (desktopCloseAllRef.current?.getBoundingClientRect().height ?? 0) : 0
 
@@ -87,15 +86,16 @@ export function PopoverTrailPanel({
 
     el.style.top = `${String(top)}px`
     el.style.left = `${String(left)}px`
-  }, [anchorElement, anchorRect, direction, isMobile, manualPosition])
+  }, [anchorElement, anchorRect, direction, isMobile])
+  const positionPanelEvent = useEffectEvent(positionPanel)
 
   useLayoutEffect(() => {
     positionPanel()
-  }, [itemCount, positionPanel, viewportVersion])
+  }, [itemCount, positionPanel])
 
   useEffect(() => {
     function handleViewportChange() {
-      setViewportVersion((v) => v + 1)
+      positionPanelEvent()
     }
     window.addEventListener('resize', handleViewportChange)
     window.addEventListener('scroll', handleViewportChange, true)
@@ -122,14 +122,14 @@ export function PopoverTrailPanel({
         return
       }
 
-      onCloseAll()
+      onCloseAllEvent()
     }
 
     window.addEventListener('pointerdown', handlePointerDown)
     return () => {
       window.removeEventListener('pointerdown', handlePointerDown)
     }
-  }, [anchorElement, closeOnOutsideClick, onCloseAll])
+  }, [anchorElement, closeOnOutsideClick])
 
   useEffect(() => {
     previouslyFocusedElementRef.current =
@@ -146,7 +146,7 @@ export function PopoverTrailPanel({
   }, [anchorElement])
 
   const handlePointerDown = useCallback(
-    (event: ReactPointerEvent<HTMLDivElement>) => {
+    (event: PointerEvent) => {
       if (isMobile || !ref.current) {
         return
       }
@@ -165,14 +165,15 @@ export function PopoverTrailPanel({
       const previousUserSelect = document.body.style.userSelect
 
       document.body.style.userSelect = 'none'
-      const nextTarget = event.currentTarget
+      const nextTarget = ref.current
       nextTarget.setPointerCapture(event.pointerId)
 
       const handlePointerMove = (moveEvent: PointerEvent) => {
-        setManualPosition({
+        manualPositionRef.current = {
           left: moveEvent.clientX - pointerOffsetX,
           top: moveEvent.clientY - pointerOffsetY,
-        })
+        }
+        positionPanel()
       }
 
       const handlePointerUp = () => {
@@ -184,11 +185,11 @@ export function PopoverTrailPanel({
       window.addEventListener('pointermove', handlePointerMove)
       window.addEventListener('pointerup', handlePointerUp)
     },
-    [isMobile],
+    [isMobile, positionPanel],
   )
 
   const handleKeyDown = useCallback(
-    (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault()
         event.stopPropagation()
@@ -227,27 +228,46 @@ export function PopoverTrailPanel({
     },
     [onCloseAll],
   )
+  const handleDialogPointerDownEvent = useEffectEvent((event: PointerEvent) => {
+    handlePointerDown(event)
+  })
+  const handleDialogKeyDownEvent = useEffectEvent((event: KeyboardEvent) => {
+    handleKeyDown(event)
+  })
+
+  useEffect(() => {
+    const panel = ref.current
+    if (!panel) {
+      return undefined
+    }
+
+    function handlePointerDownEvent(event: PointerEvent) {
+      handleDialogPointerDownEvent(event)
+    }
+
+    function handleKeyDownEvent(event: KeyboardEvent) {
+      handleDialogKeyDownEvent(event)
+    }
+
+    panel.addEventListener('pointerdown', handlePointerDownEvent)
+    panel.addEventListener('keydown', handleKeyDownEvent)
+    return () => {
+      panel.removeEventListener('pointerdown', handlePointerDownEvent)
+      panel.removeEventListener('keydown', handleKeyDownEvent)
+    }
+  }, [])
 
   return (
-    <div
+    <dialog
       aria-label='Database reference details'
-      aria-modal='true'
-      className={`database-scrollbar fixed z-[950] overflow-y-auto ${
+      className={`database-scrollbar fixed z-[950] m-0 overflow-y-auto border-0 bg-transparent p-0 text-inherit ${
         isMobile
           ? 'inset-x-3 bottom-3 max-h-[min(72vh,34rem)]'
           : 'max-h-[calc(100vh-24px)] w-[min(22rem,calc(100vw-24px))]'
       }`}
       data-skill-popover=''
-      onClick={(e) => {
-        e.stopPropagation()
-      }}
-      onKeyDown={handleKeyDown}
-      onMouseDown={(e) => {
-        e.stopPropagation()
-      }}
-      onPointerDown={handlePointerDown}
+      open
       ref={ref}
-      role='dialog'
       style={
         isMobile
           ? getDescriptionFontScaleStyle(fontScale)
@@ -285,6 +305,6 @@ export function PopoverTrailPanel({
           </button>
         </div>
       ) : null}
-    </div>
+    </dialog>
   )
 }

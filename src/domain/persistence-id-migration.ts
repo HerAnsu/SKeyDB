@@ -55,6 +55,7 @@ export const AWAKENER_ID_V1_TO_CURRENT = {
   '52': 'awakener-0052',
   '53': 'awakener-0053',
   '54': 'awakener-0054',
+  '57': 'awakener-0057',
 } as const
 
 export const AWAKENER_NAME_V1_TO_CURRENT = {
@@ -117,6 +118,7 @@ export const AWAKENER_NAME_V1_TO_CURRENT = {
   wanda: 'awakener-0052',
   winkle: 'awakener-0053',
   xu: 'awakener-0054',
+  saya: 'awakener-0057',
 } as const
 
 export const WHEEL_ID_V1_TO_CURRENT = {
@@ -250,6 +252,10 @@ export const WHEEL_ID_V1_TO_CURRENT = {
   ZL05: 'wheel-0124',
   ZL06: 'wheel-0125',
   ZL07: 'wheel-0126',
+  y0: 'wheel-0165',
+  za: 'wheel-0166',
+  y1: 'wheel-0167',
+  yZ: 'wheel-0168',
 } as const
 
 export const COVENANT_ID_V1_TO_CURRENT = {
@@ -293,6 +299,7 @@ export const POSSE_ID_V1_TO_CURRENT = {
   'ephemeral-eternity': 'posse-0012',
   'feast-of-decay': 'posse-0013',
   'festival-of-tides': 'posse-0025',
+  'for-the-new-world': 'posse-0051',
   'from-the-mist-realm': 'posse-0046',
   'funus-aeternum': 'posse-0008',
   'gateway-of-retrospection': 'posse-0016',

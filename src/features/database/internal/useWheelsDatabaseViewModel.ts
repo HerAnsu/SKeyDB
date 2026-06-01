@@ -52,7 +52,7 @@ export function useWheelsDatabaseViewModel(
 ) {
   const {mainstatFilter, query, rarityFilter, realmFilter, sortDirection, sortKey} = browseState
   const wheelIndexById = useMemo(
-    () => new Map([...allWheels].sort(compareWheelsForUi).map((wheel, index) => [wheel.id, index])),
+    () => new Map(allWheels.toSorted(compareWheelsForUi).map((wheel, index) => [wheel.id, index])),
     [allWheels],
   )
 
@@ -63,7 +63,7 @@ export function useWheelsDatabaseViewModel(
       searchResults.map((result) => result.entity),
       {mainstatFilter, rarityFilter, realmFilter},
     )
-    return [...filtered].sort((left, right) => {
+    return filtered.toSorted((left, right) => {
       const relevanceResult = compareSearchRelevance(left, right, relevanceByWheelId)
       if (relevanceResult !== 0) {
         return relevanceResult

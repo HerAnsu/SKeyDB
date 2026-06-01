@@ -128,7 +128,7 @@ export function createBuilderV2AwakenerOptions(
       ),
     ]),
   )
-  const sorted = [...byOwnership].sort((left, right) => {
+  const sorted = byOwnership.toSorted((left, right) => {
     const relevanceCompare = compareSearchRelevance(left, right, relevanceById)
     if (relevanceCompare !== 0) {
       return relevanceCompare
@@ -196,7 +196,7 @@ export function createBuilderV2WheelOptions(
       key: input.sortKey,
       direction: input.sortDirection,
     })
-  const sorted = [...searched].sort((left, right) =>
+  const sorted = searched.toSorted((left, right) =>
     input.promoteRecommendedGear
       ? compareWheelsForCachedBuildRecommendation(left, right, {
           fallbackCompare: wheelFallbackCompare,
@@ -240,7 +240,7 @@ export function createBuilderV2CovenantOptions(
   input: CreateBuilderV2CovenantOptionsInput,
 ): BuilderV2CovenantOption[] {
   const searched = searchCovenants([...input.allCovenants], input.searchQuery)
-  const sorted = [...searched].sort((left, right) =>
+  const sorted = searched.toSorted((left, right) =>
     input.promoteRecommendedGear
       ? compareCovenantsForBuildRecommendation(left, right, input.activeBuild, {
           fallbackCompare: compareCovenantsById,
@@ -278,7 +278,7 @@ export function createBuilderV2PosseOptions(
     ? byFilter
     : byFilter.filter((posse) => input.isPosseOwnedById(posse.id))
   const sorted = input.promoteRecommendedGear
-    ? [...byOwnership].sort((left, right) => {
+    ? byOwnership.toSorted((left, right) => {
         const leftRecommended = input.recommendedPosseIds.has(left.id)
         const rightRecommended = input.recommendedPosseIds.has(right.id)
         if (leftRecommended === rightRecommended) {
@@ -312,9 +312,7 @@ export function createBuilderV2PosseOptions(
           ? `Team ${String(usedTeamOrder + 1)}`
           : !input.isPosseOwnedById(posse.id)
             ? 'Unowned'
-            : input.recommendedPosseIds.has(posse.id)
-              ? 'Rec'
-              : null,
+            : null,
     }
   })
 }
@@ -462,7 +460,7 @@ function sinkUnownedToEnd<TEntity>(
   entries: readonly TEntity[],
   isOwned: (entry: TEntity) => boolean,
 ): TEntity[] {
-  return [...entries].sort((left, right) => {
+  return entries.toSorted((left, right) => {
     const leftOwned = isOwned(left)
     const rightOwned = isOwned(right)
     if (leftOwned === rightOwned) {

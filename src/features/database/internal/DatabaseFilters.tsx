@@ -440,7 +440,7 @@ function ScalingSubstatFilterRow({
               {option.iconAsset ? (
                 <img
                   alt=''
-                  className='h-3.5 w-3.5 shrink-0 object-contain'
+                  className='size-3.5 shrink-0 object-contain'
                   draggable={false}
                   src={option.iconAsset}
                 />
@@ -461,7 +461,17 @@ function ScalingSubstatFilterRow({
                     setOpenFilterKey(null)
                   })
                 }}
+                ref={(element) => {
+                  if (
+                    element &&
+                    document.activeElement !== element &&
+                    !element.contains(document.activeElement)
+                  ) {
+                    element.focus()
+                  }
+                }}
                 role='menu'
+                tabIndex={-1}
               >
                 {SCALING_ROLE_OPTIONS.map((role) => (
                   <button

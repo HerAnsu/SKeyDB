@@ -79,7 +79,7 @@ export function DbDetailShell({
   }
   const renderedChildren = typeof children === 'function' ? children({openArtViewer}) : children
 
-  useDetailModalLifecycle({
+  const handleModalCancel = useDetailModalLifecycle({
     clearSearch: noop,
     closeAllPopovers: popoverController.closeAllPopovers,
     closeSearch: noop,
@@ -96,10 +96,11 @@ export function DbDetailShell({
   return (
     <DbDetailModalFrame
       ariaLabel={`${itemName} details`}
-      beforeBody={<DatabaseDetailResultNavigator navigation={navigation} />}
+      header={<DatabaseDetailResultNavigator navigation={navigation} />}
       maxWidth='standard'
       onOverlayClick={handleOverlayClick}
       onPanelKeyDown={handlePanelKeyDown}
+      onCancel={handleModalCancel}
       panelRef={panelRef}
       shellStyle={getDescriptionFontScaleStyle(preferences.shared.fontScale)}
     >
@@ -108,22 +109,22 @@ export function DbDetailShell({
           <button
             aria-expanded={isSettingsOpen}
             aria-label='Open detail settings'
-            className='inline-flex h-8 w-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100 focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none motion-reduce:transition-none'
+            className='inline-flex size-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100 focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none motion-reduce:transition-none'
             data-detail-settings-trigger=''
             onClick={() => {
               setIsSettingsOpen((previous) => !previous)
             }}
             type='button'
           >
-            <FaGear className='h-3.5 w-3.5' />
+            <FaGear className='size-3.5' />
           </button>
           <button
             aria-label={`Close ${kindLabel} detail`}
-            className='inline-flex h-8 w-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100 focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none motion-reduce:transition-none'
+            className='inline-flex size-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100 focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none motion-reduce:transition-none'
             onClick={onClose}
             type='button'
           >
-            <FaXmark className='h-4 w-4' />
+            <FaXmark className='size-4' />
           </button>
           {isSettingsOpen ? (
             <DetailSettingsPanel

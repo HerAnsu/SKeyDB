@@ -50,6 +50,11 @@ interface DetailRefLookup {
   wheelsByName: Map<string, Wheel>
 }
 
+interface OverlayAwakenerTabState {
+  activeTab: DatabaseAwakenerTab
+  refKey: string
+}
+
 interface DbDetailModalHostProps {
   awakeners: Awakener[]
   callbacks: DatabaseDetailRenderCallbacks
@@ -86,6 +91,13 @@ function setFirstIdMatch<T extends {id: string}>(lookup: Map<string, T>, item: T
   if (!lookup.has(item.id)) {
     lookup.set(item.id, item)
   }
+}
+
+function resolveOverlayAwakenerTab(
+  activeRefKey: string,
+  state: OverlayAwakenerTabState,
+): DatabaseAwakenerTab {
+  return state.refKey === activeRefKey ? state.activeTab : DEFAULT_DATABASE_AWAKENER_TAB
 }
 
 function buildDetailRefLookup(awakeners: Awakener[], wheels: Wheel[]): DetailRefLookup {
@@ -312,10 +324,10 @@ function getLoadingShellMaxWidth(kind: DatabaseDetailKind): 'standard' | 'wide' 
 
 function getLoadingPlaceholderLabel(kind: DatabaseDetailKind): string | null {
   if (kind === 'awakener') {
-    return 'Jump to awakener...'
+    return 'Jump to awakener…'
   }
   if (kind === 'wheel') {
-    return 'Jump to wheel...'
+    return 'Jump to wheel…'
   }
   return null
 }
@@ -339,7 +351,7 @@ function DbDetailRouteLoadingModal({
   return (
     <DbDetailModalFrame
       ariaLabel={`${itemName} details`}
-      beforeBody={
+      header={
         <>
           {searchPlaceholderLabel ? (
             <div
@@ -347,7 +359,7 @@ function DbDetailRouteLoadingModal({
               className='flex shrink-0 items-center gap-2 border border-amber-200/18 bg-slate-950/[.96] px-3 py-2 text-sm text-slate-500 shadow-[0_12px_26px_rgba(2,6,23,0.45)]'
               data-detail-modal-external=''
             >
-              <FaMagnifyingGlass className='h-3.5 w-3.5 shrink-0' />
+              <FaMagnifyingGlass className='size-3.5 shrink-0' />
               <span>{searchPlaceholderLabel}</span>
             </div>
           ) : null}
@@ -367,17 +379,15 @@ function DbDetailRouteLoadingModal({
       >
         <button
           aria-label={`Close ${routeItem.kind} detail`}
-          className='absolute top-3 right-3 inline-flex h-8 w-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100 focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none motion-reduce:transition-none'
+          className='absolute top-3 right-3 inline-flex size-8 items-center justify-center border border-amber-200/12 bg-slate-950/78 text-slate-400 transition-colors hover:border-amber-200/28 hover:text-amber-100 focus-visible:border-amber-200/70 focus-visible:ring-2 focus-visible:ring-amber-200/30 focus-visible:outline-none motion-reduce:transition-none'
           onClick={onClose}
           type='button'
         >
-          <FaXmark className='h-4 w-4' />
+          <FaXmark className='size-4' />
         </button>
         <div>
           <div className='ui-title text-lg text-amber-100'>{itemName}</div>
-          <div className='mt-3 text-sm text-slate-400' role='status'>
-            {loadingLabel}
-          </div>
+          <output className='mt-3 block text-sm text-slate-400'>{loadingLabel}</output>
         </div>
       </div>
     </DbDetailModalFrame>
@@ -418,17 +428,11 @@ export function DbDetailModalHost({
       .syncFromRoute(routeItem ? {kind: routeItem.kind, id: routeItem.item.id} : null)
   }, [routeItem])
 
-  useEffect(() => {
-    if (!routeItem && stackTop && !(stackTop.kind in dbDetailRegistry)) {
-      dbDetailStore.getState().popDetail()
-    }
-  }, [routeItem, stackTop])
-
   if (!routeItem || activeRef?.kind !== routeItem.kind) {
     if (!routeItem && activeRef) {
       return (
         <Suspense
-          fallback={<div className='px-2 py-3 text-sm text-slate-300'>Loading details...</div>}
+          fallback={<div className='px-2 py-3 text-sm text-slate-300'>Loading details…</div>}
         >
           <DbDetailOverlayModal
             activeRef={activeRef}
@@ -480,21 +484,25 @@ function DbDetailOverlayModal({
   wheels,
 }: DbDetailOverlayModalProps) {
   const activeRefKey = `${activeRef.kind}:${activeRef.id}`
-  const [overlayAwakenerTabState, setOverlayAwakenerTabState] = useState<{
-    activeTab: DatabaseAwakenerTab
-    refKey: string
-  }>(() => ({activeTab: DEFAULT_DATABASE_AWAKENER_TAB, refKey: activeRefKey}))
-  const overlayAwakenerTab =
-    overlayAwakenerTabState.refKey === activeRefKey
-      ? overlayAwakenerTabState.activeTab
-      : DEFAULT_DATABASE_AWAKENER_TAB
+  const [overlayAwakenerTabState, setOverlayAwakenerTabState] = useState<OverlayAwakenerTabState>(
+    () => ({
+      activeTab: DEFAULT_DATABASE_AWAKENER_TAB,
+      refKey: activeRefKey,
+    }),
+  )
+  // Overlay refs can outlive the current public catalog; stale refs are pruned below.
+  // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
+  const overlayAwakenerTab = resolveOverlayAwakenerTab(activeRefKey, overlayAwakenerTabState)
   const detailRefLookup = useMemo(
+    // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
     () => buildDetailRefLookup(awakeners, wheels),
     [awakeners, wheels],
   )
+  // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
   const routeItem = resolveOverlayRouteItem(activeRef, detailRefLookup, overlayAwakenerTab)
 
   useEffect(() => {
+    // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
     if (!routeItem) {
       dbDetailStore.getState().popDetail()
     }
@@ -617,13 +625,14 @@ function DbDetailOverlayModalContent<Kind extends DatabaseDetailKind>({
   routeItem,
   wheels,
 }: DbDetailOverlayModalContentProps<Kind>) {
+  // Public detail records can disappear between overlay open and async load completion.
+  // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
   const registryEntry = dbDetailRegistry[kind]
-  const {isLoading, record} = useDatabaseDetailRecord({
-    id,
-    loadRecord: registryEntry.loadRecord,
-  })
+  // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
+  const {isLoading, record} = useDatabaseDetailRecord({id, loadRecord: registryEntry.loadRecord})
 
   useEffect(() => {
+    // react-doctor-disable-next-line no-event-handler, react-doctor/no-event-handler
     if (!isLoading && !record) {
       dbDetailStore.getState().popDetail()
     }
@@ -743,7 +752,7 @@ function DbDetailAwakenerRouteModal({
   tabSlug,
   wheels,
 }: DbDetailKindRouteModalProps<'awakener'>) {
-  const location = useLocation()
+  const routerLocation = useLocation()
   const navigate = useNavigate()
   const registryEntry = dbDetailRegistry.awakener
   const {isLoading, record} = useDatabaseDetailRouteRecord({
@@ -755,18 +764,18 @@ function DbDetailAwakenerRouteModal({
   useDeferredDatabaseDetailNeighborPreload(navigation, Boolean(record))
 
   useEffect(() => {
-    if (!record || !canonicalTabPath || location.pathname === canonicalTabPath) {
+    if (!record || !canonicalTabPath || routerLocation.pathname === canonicalTabPath) {
       return
     }
 
     void navigate(
       {
         pathname: canonicalTabPath,
-        search: location.search,
+        search: routerLocation.search,
       },
       {replace: true},
     )
-  }, [canonicalTabPath, location.pathname, location.search, navigate, record])
+  }, [canonicalTabPath, navigate, record, routerLocation.pathname, routerLocation.search])
 
   if (isLoading) {
     return (

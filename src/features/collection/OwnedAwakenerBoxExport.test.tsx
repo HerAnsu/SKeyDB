@@ -34,6 +34,9 @@ describe('OwnedAwakenerBoxExport', () => {
     expect(
       screen.queryByText((_, element) => element?.textContent === 'Lv.72'),
     ).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /reset/i}))
+    expect(screen.getByText((_, element) => element?.textContent === 'Lv.72')).toBeInTheDocument()
   })
 
   it('supports level sorting with faction grouping and enlighten/index tie-breakers', () => {

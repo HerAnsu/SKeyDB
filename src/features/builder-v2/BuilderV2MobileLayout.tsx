@@ -1,21 +1,22 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type KeyboardEvent as ReactKeyboardEvent,
-} from 'react'
+import {useCallback, useRef, useState} from 'react'
 
 import {FaCaretDown, FaChevronLeft, FaChevronRight, FaXmark} from 'react-icons/fa6'
 
 import {getRealmBadge, getRealmLabel} from '@/domain/realms'
+import {useNativeModalDialog} from '@/ui/modal/useNativeModalDialog'
 
-import type {QuickLineupStep} from '../builder/types'
+import type {QuickLineupStep, WheelSlotIndex} from '../builder/types'
 import {BuilderV2ActiveFooter, BuilderV2ActiveHeader} from './BuilderV2ActiveTeamChrome'
 import {BuilderV2PickerContent} from './BuilderV2AwakenerPicker'
 import {BuilderV2EnlightenMeter} from './BuilderV2EnlightenMeter'
 import {BuilderV2ImportExportActions} from './BuilderV2ImportExportActions'
-import type {BuilderV2Model, BuilderV2PickerTab, BuilderV2SlotView} from './BuilderV2ModelTypes'
+import type {
+  BuilderV2Model,
+  BuilderV2PickerTab,
+  BuilderV2SlotView,
+  BuilderV2TeamSummary,
+  BuilderV2TeamSummarySlot,
+} from './BuilderV2ModelTypes'
 import {BuilderV2TeamManagement} from './BuilderV2TeamManagement'
 import {BuilderV2TeamSlots} from './BuilderV2TeamSlots'
 import {useStableEvent} from './useStableEvent'
@@ -55,21 +56,12 @@ export function BuilderV2MobileLayout({
   const [mobilePicker, setMobilePicker] = useState<MobilePickerState | null>(null)
   const pickerTriggerRef = useRef<HTMLElement | null>(null)
   const searchInputRef = useRef<HTMLInputElement | null>(null)
-  const dialogRef = useRef<HTMLDivElement | null>(null)
   const setPickerTab = useStableEvent(model.setPickerTab)
   const startQuickLineupCommand = useStableEvent(model.startQuickLineup)
   const assignAwakenerCommand = useStableEvent(model.assignAwakener)
   const assignWheelCommand = useStableEvent(model.assignWheel)
   const assignCovenantCommand = useStableEvent(model.assignCovenant)
   const assignPosseCommand = useStableEvent(model.assignPosse)
-
-  useEffect(() => {
-    if (!mobilePicker) {
-      return
-    }
-
-    dialogRef.current?.focus()
-  }, [mobilePicker, model.pickerTab])
 
   const closePicker = useCallback((restoreFocus = true) => {
     setMobilePicker(null)
@@ -78,37 +70,18 @@ export function BuilderV2MobileLayout({
     }
   }, [])
 
-  useEffect(() => {
-    if (!mobilePicker) {
-      return
-    }
+  const updateMobilePickerTarget = useCallback(
+    (slotId: string, tab: BuilderV2PickerTab, title: string) => {
+      setMobilePicker((current) => {
+        if (current?.slotId !== slotId) {
+          return current
+        }
 
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') {
-        return
-      }
-
-      event.preventDefault()
-      closePicker()
-    }
-
-    document.addEventListener('keydown', handleEscape)
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-    }
-  }, [closePicker, mobilePicker])
-
-  useEffect(() => {
-    if (!mobilePicker) {
-      return
-    }
-
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = previousOverflow
-    }
-  }, [mobilePicker])
+        return {...current, tab, title}
+      })
+    },
+    [],
+  )
 
   const openPicker = useCallback(
     ({
@@ -144,25 +117,31 @@ export function BuilderV2MobileLayout({
   const assignAwakener = useCallback(
     (awakenerId: string) => {
       assignAwakenerCommand(awakenerId)
-      closePicker(false)
+      if (!mobilePicker?.slotId) {
+        closePicker(false)
+      }
     },
-    [assignAwakenerCommand, closePicker],
+    [assignAwakenerCommand, closePicker, mobilePicker?.slotId],
   )
 
   const assignWheel = useCallback(
     (wheelId: string) => {
       assignWheelCommand(wheelId)
-      closePicker(false)
+      if (!mobilePicker?.slotId) {
+        closePicker(false)
+      }
     },
-    [assignWheelCommand, closePicker],
+    [assignWheelCommand, closePicker, mobilePicker?.slotId],
   )
 
   const assignCovenant = useCallback(
     (covenantId: string) => {
       assignCovenantCommand(covenantId)
-      closePicker(false)
+      if (!mobilePicker?.slotId) {
+        closePicker(false)
+      }
     },
-    [assignCovenantCommand, closePicker],
+    [assignCovenantCommand, closePicker, mobilePicker?.slotId],
   )
 
   const assignPosse = useCallback(
@@ -231,62 +210,217 @@ export function BuilderV2MobileLayout({
       )}
 
       {activeMobilePicker ? (
-        <div
-          className='builder-v2-mobile-picker-backdrop'
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              closePicker()
-            }
-          }}
-        >
-          <div
-            aria-labelledby='builder-v2-mobile-picker-title'
-            aria-modal={isDetailOverlayOpen ? undefined : true}
-            className='builder-v2-mobile-picker'
-            inert={isDetailOverlayOpen ? true : undefined}
-            onKeyDown={(event) => {
-              trapDialogFocus(event, dialogRef.current)
-            }}
-            ref={dialogRef}
-            role='dialog'
-            tabIndex={-1}
-          >
-            <header className='builder-v2-mobile-picker-header'>
-              <div>
-                <p className='builder-v2-label'>Pick</p>
-                <h2 className='ui-title' id='builder-v2-mobile-picker-title'>
-                  {activeMobilePicker.title}
-                </h2>
-              </div>
-              <button
-                aria-label='Close mobile picker'
-                className='builder-v2-mobile-icon-button'
-                onClick={() => {
-                  closePicker()
-                }}
-                type='button'
-              >
-                <FaXmark aria-hidden />
-              </button>
-            </header>
-            <BuilderV2PickerContent
-              onAssignAwakener={assignAwakener}
-              onAssignCovenant={assignCovenant}
-              onAssignPosse={assignPosse}
-              onAssignWheel={assignWheel}
-              onClearPickerTarget={model.clearPickerTarget}
-              onOpenAwakenerDetail={openAwakenerDetail}
-              onOpenCovenantDetail={openCovenantDetail}
-              onOpenPosseDetail={openPosseDetail}
-              onOpenWheelDetail={openWheelDetail}
-              picker={model.picker}
-              pickerClearTarget={model.pickerClearTarget}
-              searchInputRef={searchInputRef}
-            />
-          </div>
-        </div>
+        <MobilePickerDialog
+          isDetailOverlayOpen={isDetailOverlayOpen}
+          mobilePicker={activeMobilePicker}
+          model={model}
+          onAssignAwakener={assignAwakener}
+          onAssignCovenant={assignCovenant}
+          onAssignPosse={assignPosse}
+          onAssignWheel={assignWheel}
+          onClosePicker={closePicker}
+          onOpenAwakenerDetail={openAwakenerDetail}
+          onOpenCovenantDetail={openCovenantDetail}
+          onOpenPosseDetail={openPosseDetail}
+          onOpenWheelDetail={openWheelDetail}
+          onUpdateMobilePickerTarget={updateMobilePickerTarget}
+          searchInputRef={searchInputRef}
+        />
       ) : null}
     </section>
+  )
+}
+
+function MobilePickerDialog({
+  isDetailOverlayOpen,
+  mobilePicker,
+  model,
+  onAssignAwakener,
+  onAssignCovenant,
+  onAssignPosse,
+  onAssignWheel,
+  onClosePicker,
+  onOpenAwakenerDetail,
+  onOpenCovenantDetail,
+  onOpenPosseDetail,
+  onOpenWheelDetail,
+  onUpdateMobilePickerTarget,
+  searchInputRef,
+}: {
+  isDetailOverlayOpen: boolean
+  mobilePicker: MobilePickerState
+  model: BuilderV2Model
+  onAssignAwakener: (awakenerId: string) => void
+  onAssignCovenant: (covenantId: string) => void
+  onAssignPosse: (posseId: string) => void
+  onAssignWheel: (wheelId: string) => void
+  onClosePicker: (restoreFocus?: boolean) => void
+  onOpenAwakenerDetail: (awakenerId: string) => void
+  onOpenCovenantDetail: (covenantId: string) => void
+  onOpenPosseDetail: (posseId: string) => void
+  onOpenWheelDetail: (wheelId: string) => void
+  onUpdateMobilePickerTarget: (slotId: string, tab: BuilderV2PickerTab, title: string) => void
+  searchInputRef: React.RefObject<HTMLInputElement | null>
+}) {
+  const dialogRef = useRef<HTMLDialogElement | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
+  const activeSlot = mobilePicker.slotId
+    ? (model.slots.find((slot) => slot.slotId === mobilePicker.slotId) ?? null)
+    : null
+  const updateSlotPickerTarget = useCallback(
+    (slot: BuilderV2SlotView, tab: BuilderV2PickerTab, targetLabel: string) => {
+      model.setPickerTab(tab)
+      onUpdateMobilePickerTarget(
+        slot.slotId,
+        tab,
+        getMobileSlotPickerTitle(model.activeTeamName, slot.slotLabel, targetLabel),
+      )
+    },
+    [model, onUpdateMobilePickerTarget],
+  )
+  const selectSlotAwakenerTarget = useCallback(
+    (slotId: string) => {
+      const slot = model.slots.find((candidate) => candidate.slotId === slotId)
+      if (!slot) {
+        return
+      }
+
+      const isAwakenerTargetSelected =
+        model.activeSelection?.kind === 'awakener' && model.activeSelection.slotId === slotId
+      if (!isAwakenerTargetSelected) {
+        model.selectAwakenerSlot(slotId)
+      }
+      updateSlotPickerTarget(slot, 'awakeners', 'Awakener')
+    },
+    [model, updateSlotPickerTarget],
+  )
+  const selectSlotWheelTarget = useCallback(
+    (slotId: string, wheelIndex: WheelSlotIndex) => {
+      const slot = model.slots.find((candidate) => candidate.slotId === slotId)
+      if (!slot) {
+        return
+      }
+
+      if (slot.isEmpty) {
+        const isAwakenerTargetSelected =
+          model.activeSelection?.kind === 'awakener' && model.activeSelection.slotId === slotId
+        if (!isAwakenerTargetSelected) {
+          model.selectAwakenerSlot(slotId)
+        }
+        updateSlotPickerTarget(slot, 'awakeners', 'Awakener')
+        return
+      }
+
+      if (!slot.wheelSlots[wheelIndex].isSelected) {
+        model.selectWheelSlot(slotId, wheelIndex)
+      }
+      updateSlotPickerTarget(slot, 'wheels', `Wheel ${String(wheelIndex + 1)}`)
+    },
+    [model, updateSlotPickerTarget],
+  )
+  const selectSlotCovenantTarget = useCallback(
+    (slotId: string) => {
+      const slot = model.slots.find((candidate) => candidate.slotId === slotId)
+      if (!slot) {
+        return
+      }
+
+      if (slot.isEmpty) {
+        const isAwakenerTargetSelected =
+          model.activeSelection?.kind === 'awakener' && model.activeSelection.slotId === slotId
+        if (!isAwakenerTargetSelected) {
+          model.selectAwakenerSlot(slotId)
+        }
+        updateSlotPickerTarget(slot, 'awakeners', 'Awakener')
+        return
+      }
+
+      if (!slot.isCovenantSelected) {
+        model.selectCovenantSlot(slotId)
+      }
+      updateSlotPickerTarget(slot, 'covenants', 'Covenant')
+    },
+    [model, updateSlotPickerTarget],
+  )
+
+  useNativeModalDialog({
+    dialogRef,
+    initialFocusRef: closeButtonRef,
+    lockBodyScroll: true,
+    onCancel: (event) => {
+      event.preventDefault()
+      onClosePicker()
+    },
+    onClick: (event) => {
+      if (event.target === event.currentTarget) {
+        onClosePicker()
+      }
+    },
+    onKeyDown: (event) => {
+      trapDialogFocus(event, dialogRef.current)
+    },
+    restoreFocus: false,
+  })
+
+  return (
+    <dialog
+      aria-labelledby='builder-v2-mobile-picker-title'
+      aria-modal={isDetailOverlayOpen ? undefined : true}
+      className='builder-v2-mobile-picker-backdrop'
+      inert={isDetailOverlayOpen ? true : undefined}
+      ref={dialogRef}
+    >
+      <div className='builder-v2-mobile-picker'>
+        <header className='builder-v2-mobile-picker-header'>
+          <div>
+            <p className='builder-v2-label'>Pick</p>
+            <h2 className='ui-title' id='builder-v2-mobile-picker-title'>
+              {mobilePicker.title}
+            </h2>
+          </div>
+          <button
+            aria-label='Close mobile picker'
+            className='builder-v2-mobile-icon-button'
+            onClick={() => {
+              onClosePicker()
+            }}
+            ref={closeButtonRef}
+            type='button'
+          >
+            <FaXmark aria-hidden />
+          </button>
+        </header>
+        <BuilderV2PickerContent
+          controlsPlacement='bottom'
+          onAssignAwakener={onAssignAwakener}
+          onAssignCovenant={onAssignCovenant}
+          onAssignPosse={onAssignPosse}
+          onAssignWheel={onAssignWheel}
+          onClearPickerTarget={model.clearPickerTarget}
+          onOpenAwakenerDetail={onOpenAwakenerDetail}
+          onOpenCovenantDetail={onOpenCovenantDetail}
+          onOpenPosseDetail={onOpenPosseDetail}
+          onOpenWheelDetail={onOpenWheelDetail}
+          picker={model.picker}
+          pickerClearTarget={model.pickerClearTarget}
+          searchInputRef={searchInputRef}
+        />
+        {activeSlot ? (
+          <BuilderV2MobileSlotTargetPanel
+            activeSlot={activeSlot}
+            currentStep={model.activeSelection ?? undefined}
+            mode='picker'
+            onDone={() => {
+              onClosePicker()
+            }}
+            onSelectCovenantSlot={selectSlotCovenantTarget}
+            onSelectSlot={selectSlotAwakenerTarget}
+            onSelectWheelSlot={selectSlotWheelTarget}
+            pickerTargetLabel={getMobileSlotPickerPanelLabel(activeSlot)}
+          />
+        ) : null}
+      </div>
+    </dialog>
   )
 }
 
@@ -423,9 +557,10 @@ function MobileQuickLineupBuilder({
         />
       </section>
 
-      <BuilderV2MobileLineupSlotControls
+      <BuilderV2MobileSlotTargetPanel
         activeSlot={activeSlot}
         currentStep={session.currentStep}
+        mode='lineup'
         onNextSlot={() => {
           selectSlotByIndex(activeSlotIndex + 1)
         }}
@@ -456,11 +591,7 @@ function BuilderV2MobileQuickLineupOverview({
   slots: BuilderV2SlotView[]
 }) {
   return (
-    <div
-      aria-label='Quick lineup team overview'
-      className='builder-v2-mobile-lineup-overview'
-      role='group'
-    >
+    <ul aria-label='Quick lineup team overview' className='builder-v2-mobile-lineup-overview'>
       {slots.map((slot) => {
         const isCardActive =
           slot.isSelected ||
@@ -468,13 +599,12 @@ function BuilderV2MobileQuickLineupOverview({
           slot.wheelSlots.some((wheel) => wheel.isSelected)
 
         return (
-          <article
+          <li
             aria-label={`${slot.slotLabel} quick overview`}
             className={`builder-v2-mobile-lineup-overview-card ${
               isCardActive ? 'builder-v2-mobile-lineup-overview-card--active' : ''
             }`}
             key={slot.slotId}
-            role='group'
           >
             <button
               aria-label={`Select ${slot.slotLabel}`}
@@ -594,37 +724,43 @@ function BuilderV2MobileQuickLineupOverview({
                 )}
               </button>
             </div>
-          </article>
+          </li>
         )
       })}
-    </div>
+    </ul>
   )
 }
 
-function BuilderV2MobileLineupSlotControls({
+function BuilderV2MobileSlotTargetPanel({
   activeSlot,
   canGoNextSlot,
   canGoPreviousSlot,
   currentStep,
+  mode,
+  onDone,
   onNextSlot,
   onPreviousSlot,
   onSelectCovenantSlot,
   onSelectSlot,
   onSelectWheelSlot,
+  pickerTargetLabel,
   quickLineupStepLabel,
   session,
 }: {
   activeSlot: BuilderV2SlotView | null
-  canGoNextSlot: boolean
-  canGoPreviousSlot: boolean
-  currentStep: QuickLineupStep
-  onNextSlot: () => void
-  onPreviousSlot: () => void
+  canGoNextSlot?: boolean
+  canGoPreviousSlot?: boolean
+  currentStep?: QuickLineupStep
+  mode: 'lineup' | 'picker'
+  onDone?: () => void
+  onNextSlot?: () => void
+  onPreviousSlot?: () => void
   onSelectCovenantSlot: (slotId: string) => void
   onSelectSlot: (slotId: string) => void
   onSelectWheelSlot: BuilderV2TeamSlotsProps['onSelectWheelSlot']
-  quickLineupStepLabel: string | null
-  session: NonNullable<BuilderV2Model['quickLineupSession']>
+  pickerTargetLabel?: string
+  quickLineupStepLabel?: string | null
+  session?: NonNullable<BuilderV2Model['quickLineupSession']>
 }) {
   if (!activeSlot) {
     return null
@@ -633,41 +769,53 @@ function BuilderV2MobileLineupSlotControls({
   const currentTargetLabel = (quickLineupStepLabel ?? 'Current step').replace(' - ', ' · ')
   const avatarSrc = activeSlot.awakener?.portraitSrc ?? activeSlot.awakener?.cardSrc
   const isAwakenerActive =
-    currentStep.kind === 'awakener' && currentStep.slotId === activeSlot.slotId
+    currentStep?.kind === 'awakener' && currentStep.slotId === activeSlot.slotId
   const isCovenantActive =
-    currentStep.kind === 'covenant' && currentStep.slotId === activeSlot.slotId
+    currentStep?.kind === 'covenant' && currentStep.slotId === activeSlot.slotId
 
   return (
     <section
-      aria-label='Quick lineup slot controls'
-      className='builder-v2-mobile-lineup-slot-panel'
+      aria-label={mode === 'lineup' ? 'Quick lineup slot controls' : 'Mobile slot picker controls'}
+      className={`builder-v2-mobile-lineup-slot-panel builder-v2-mobile-lineup-slot-panel--${mode}`}
     >
-      <div className='builder-v2-mobile-lineup-slot-meta'>
-        <button
-          aria-label='Previous slot'
-          className='builder-v2-mobile-lineup-slot-nav'
-          disabled={!canGoPreviousSlot}
-          onClick={onPreviousSlot}
-          type='button'
-        >
-          <FaChevronLeft aria-hidden />
-        </button>
+      {mode === 'lineup' && session ? (
+        <div className='builder-v2-mobile-lineup-slot-meta'>
+          <button
+            aria-label='Previous slot'
+            className='builder-v2-mobile-lineup-slot-nav'
+            disabled={!canGoPreviousSlot}
+            onClick={onPreviousSlot}
+            type='button'
+          >
+            <FaChevronLeft aria-hidden />
+          </button>
 
-        <p className='builder-v2-mobile-lineup-slot-step'>
-          Step {String(session.currentStepIndex + 1)} / {String(session.totalSteps)}{' '}
-          <span>{currentTargetLabel}</span>
-        </p>
+          <p className='builder-v2-mobile-lineup-slot-step'>
+            Step {String(session.currentStepIndex + 1)} / {String(session.totalSteps)}{' '}
+            <span>{currentTargetLabel}</span>
+          </p>
 
-        <button
-          aria-label='Next slot'
-          className='builder-v2-mobile-lineup-slot-nav'
-          disabled={!canGoNextSlot}
-          onClick={onNextSlot}
-          type='button'
-        >
-          <FaChevronRight aria-hidden />
-        </button>
-      </div>
+          <button
+            aria-label='Next slot'
+            className='builder-v2-mobile-lineup-slot-nav'
+            disabled={!canGoNextSlot}
+            onClick={onNextSlot}
+            type='button'
+          >
+            <FaChevronRight aria-hidden />
+          </button>
+        </div>
+      ) : (
+        <div className='builder-v2-mobile-lineup-slot-meta builder-v2-mobile-lineup-slot-meta--picker'>
+          <p className='builder-v2-mobile-lineup-slot-step builder-v2-mobile-lineup-slot-step--picker'>
+            <span className='builder-v2-mobile-lineup-slot-kicker'>Editing</span>
+            <span>{pickerTargetLabel ?? activeSlot.slotLabel}</span>
+          </p>
+          <button className='builder-v2-mobile-lineup-done-button' onClick={onDone} type='button'>
+            Close
+          </button>
+        </div>
+      )}
 
       {activeSlot.isEmpty ? (
         <button
@@ -689,7 +837,7 @@ function BuilderV2MobileLineupSlotControls({
           <button
             aria-current={isAwakenerActive ? 'step' : undefined}
             aria-label={`Select ${activeSlot.slotLabel} Awakener`}
-            aria-pressed={activeSlot.isSelected}
+            aria-pressed={isAwakenerActive}
             className={`builder-v2-mobile-lineup-target-button builder-v2-mobile-lineup-target-button--avatar ${
               isAwakenerActive ? 'builder-v2-mobile-lineup-target-button--active' : ''
             }`}
@@ -709,7 +857,7 @@ function BuilderV2MobileLineupSlotControls({
 
           {activeSlot.wheelSlots.map((wheelSlot) => {
             const isWheelActive =
-              currentStep.kind === 'wheel' &&
+              currentStep?.kind === 'wheel' &&
               currentStep.slotId === activeSlot.slotId &&
               currentStep.wheelIndex === wheelSlot.wheelIndex
             const wheelNumber = String(wheelSlot.wheelIndex + 1)
@@ -718,7 +866,7 @@ function BuilderV2MobileLineupSlotControls({
               <button
                 aria-current={isWheelActive ? 'step' : undefined}
                 aria-label={`Select ${activeSlot.slotLabel} Wheel ${wheelNumber}`}
-                aria-pressed={wheelSlot.isSelected}
+                aria-pressed={isWheelActive}
                 className={`builder-v2-mobile-lineup-target-button ${
                   isWheelActive ? 'builder-v2-mobile-lineup-target-button--active' : ''
                 }`}
@@ -748,7 +896,7 @@ function BuilderV2MobileLineupSlotControls({
           <button
             aria-current={isCovenantActive ? 'step' : undefined}
             aria-label={`Select ${activeSlot.slotLabel} Covenant`}
-            aria-pressed={activeSlot.isCovenantSelected}
+            aria-pressed={isCovenantActive}
             className={`builder-v2-mobile-lineup-target-button ${
               isCovenantActive ? 'builder-v2-mobile-lineup-target-button--active' : ''
             }`}
@@ -814,6 +962,48 @@ function MobileTeamBuilder({
 
   const getSlotView = (slotId: string) =>
     model.slots.find((candidate) => candidate.slotId === slotId)
+
+  const openTeamListSlotPicker = (
+    team: BuilderV2TeamSummary,
+    slot: BuilderV2TeamSummarySlot,
+    restoreTarget: HTMLElement | null,
+  ) => {
+    onOpenPicker({
+      isTargetSelected:
+        model.activeTeamId === team.id &&
+        model.activeSelection?.kind === 'awakener' &&
+        model.activeSelection.slotId === slot.slotId,
+      restoreTarget,
+      selectTarget: () => {
+        if (model.activeTeamId !== team.id) {
+          model.setActiveTeam(team.id)
+        }
+        model.selectAwakenerSlot(slot.slotId)
+      },
+      slotId: slot.slotId,
+      tab: 'awakeners',
+      title: getMobileSlotPickerTitle(team.name, slot.label, 'Awakener'),
+    })
+  }
+
+  const openTeamListPossePicker = (
+    team: BuilderV2TeamSummary,
+    restoreTarget: HTMLElement | null,
+  ) => {
+    onOpenPicker({
+      isTargetSelected: model.activeTeamId === team.id && model.activeTeamTarget?.kind === 'posse',
+      restoreTarget,
+      selectTarget: () => {
+        if (model.activeTeamId !== team.id) {
+          model.setActiveTeam(team.id)
+        }
+        model.selectPosse()
+      },
+      slotId: null,
+      tab: 'posses',
+      title: `${team.name} · Posse`,
+    })
+  }
 
   return (
     <section className='builder-v2-mobile-view' aria-label='Mobile team builder'>
@@ -903,6 +1093,7 @@ function MobileTeamBuilder({
         />
 
         <BuilderV2TeamSlots
+          covenantPlacement='rail'
           onClearCovenant={model.clearCovenant}
           onClearWheel={model.clearWheel}
           onRemoveAwakener={model.removeAwakener}
@@ -993,10 +1184,6 @@ function MobileTeamBuilder({
         />
       </section>
 
-      <div className='builder-v2-mobile-utility-row'>
-        <BuilderV2ImportExportActions model={model} />
-      </div>
-
       <BuilderV2TeamManagement
         canAddTeam={model.canAddTeam}
         editingTeamId={model.editingTeamId}
@@ -1011,6 +1198,8 @@ function MobileTeamBuilder({
         onRequestExportTeam={model.openTeamExportDialog}
         onRequestApplyTeamTemplate={model.requestApplyTeamTemplate}
         onRequestDeleteTeam={model.requestDeleteTeam}
+        onRequestEditTeamPosse={openTeamListPossePicker}
+        onRequestEditTeamSlot={openTeamListSlotPicker}
         onRequestResetTeam={model.requestResetTeam}
         onSetActiveTeam={model.setActiveTeam}
         onSetEditingTeamName={model.setEditingTeamName}
@@ -1018,6 +1207,7 @@ function MobileTeamBuilder({
         onTeamPreviewModeChange={model.setTeamPreviewMode}
         teamPreviewMode={model.teamPreviewMode}
         teams={model.teams}
+        utilityActions={<BuilderV2ImportExportActions model={model} />}
         variant='mobile'
       />
     </section>
@@ -1038,6 +1228,18 @@ function getQuickLineupPickingTitle(step: QuickLineupStep, slots: BuilderV2SlotV
     return `${slotLabel} · Covenant`
   }
   return `${slotLabel} · Wheel ${String(step.wheelIndex + 1)}`
+}
+
+function getMobileSlotPickerTitle(
+  activeTeamName: string,
+  slotLabel: string,
+  targetLabel: string,
+): string {
+  return `${activeTeamName} · ${slotLabel} · ${targetLabel}`
+}
+
+function getMobileSlotPickerPanelLabel(slot: BuilderV2SlotView): string {
+  return `${slot.slotLabel} · ${slot.awakener?.displayName ?? 'Empty Slot'}`
 }
 
 function getQuickLineupActiveSlot(
@@ -1087,7 +1289,7 @@ function getCurrentFocusRestoreTarget(): HTMLElement | null {
   return document.activeElement instanceof HTMLElement ? document.activeElement : null
 }
 
-function trapDialogFocus(event: ReactKeyboardEvent, dialog: HTMLDivElement | null) {
+function trapDialogFocus(event: KeyboardEvent, dialog: HTMLElement | null) {
   if (event.key !== 'Tab' || !dialog) {
     return
   }

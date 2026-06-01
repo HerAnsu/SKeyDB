@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react'
+import {useLayoutEffect, useRef, useState} from 'react'
 
 interface UseEventDescriptionOverflowOptions {
   description: string
@@ -9,16 +9,23 @@ export function useEventDescriptionOverflow({description}: UseEventDescriptionOv
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const hasDescription = description.length > 0
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = descriptionRef.current
 
     if (!node || !hasDescription) {
-      setDescriptionOverflow(false)
+      setDescriptionOverflow((currentDescriptionOverflow) =>
+        currentDescriptionOverflow ? false : currentDescriptionOverflow,
+      )
       return
     }
 
     const measureOverflow = () => {
-      setDescriptionOverflow(node.scrollHeight > node.clientHeight + 1)
+      const nextDescriptionOverflow = node.scrollHeight > node.clientHeight + 1
+      setDescriptionOverflow((currentDescriptionOverflow) =>
+        currentDescriptionOverflow === nextDescriptionOverflow
+          ? currentDescriptionOverflow
+          : nextDescriptionOverflow,
+      )
     }
 
     measureOverflow()

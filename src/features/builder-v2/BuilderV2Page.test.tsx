@@ -111,6 +111,44 @@ describe('BuilderV2Page', () => {
     expect(screen.getByRole('searchbox', {name: /search awakeners/i})).toBeInTheDocument()
   })
 
+  it('captures global typing into the active V2 picker search', () => {
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    const searchInput = screen.getByRole('searchbox', {name: /search awakeners/i})
+    expect(searchInput).not.toHaveFocus()
+
+    fireEvent.keyDown(window, {key: 'r'})
+    fireEvent.keyDown(window, {key: 'a'})
+    fireEvent.keyDown(window, {key: 'm'})
+
+    expect(searchInput).toHaveValue('ram')
+    expect(searchInput).toHaveFocus()
+
+    searchInput.blur()
+    fireEvent.keyDown(window, {key: 'Backspace'})
+
+    expect(searchInput).toHaveValue('ra')
+    expect(searchInput).toHaveFocus()
+  })
+
+  it('does not capture global picker typing while a dialog is open', () => {
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+
+    const searchInput = screen.getByRole('searchbox', {name: /search awakeners/i})
+    const dialog = document.createElement('dialog')
+    dialog.setAttribute('open', '')
+    document.body.append(dialog)
+
+    fireEvent.keyDown(window, {key: 'r'})
+
+    expect(searchInput).toHaveValue('')
+    expect(searchInput).not.toHaveFocus()
+
+    dialog.remove()
+  })
+
   it('keeps picker tab ids instance-safe and exposes tile status in accessible names', () => {
     resizeBuilderV2Viewport(1200)
     render(<BuilderV2Page />)
@@ -204,7 +242,7 @@ describe('BuilderV2Page', () => {
     fireEvent.click(screen.getByRole('tab', {name: /^posses$/i}))
 
     const clearSlot = screen.getByRole('button', {name: /^clear slot 1$/i})
-    expect(clearSlot).toHaveTextContent(/clear slot/i)
+    expect(clearSlot).toHaveTextContent(/^clear$/i)
 
     fireEvent.click(clearSlot)
 
@@ -251,7 +289,7 @@ describe('BuilderV2Page', () => {
     expect(within(management).getByText(/taverns opening/i)).toBeInTheDocument()
     expect(within(management).getByText(/support/i)).toBeInTheDocument()
     expect(
-      within(management).getByRole('group', {
+      within(management).getByRole('listitem', {
         name: /goliath, chaos, level 90, support, covenant equipped: .+, 1 wheel equipped: .+/i,
       }),
     ).toBeInTheDocument()
@@ -262,6 +300,107 @@ describe('BuilderV2Page', () => {
     expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
   })
 
+  it('uses desktop team management previews as edit shortcuts', () => {
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+    resizeBuilderV2Viewport(1200)
+    render(<BuilderV2Page />)
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+          {id: 'team-2', name: 'Team 2', slots: teamTwoSlots, posseId: 'posse-0033'},
+        ],
+      })
+    })
+
+    const management = screen.getByRole('region', {name: /builder v2 team management/i})
+    fireEvent.click(within(management).getByRole('button', {name: /edit team 2 slot 1/i}))
+
+    expect(screen.getByRole('heading', {level: 2, name: /^team 2$/i})).toBeInTheDocument()
+    expect(screen.getByText(/editing slot 1 - awakener/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
+
+    fireEvent.click(within(management).getByRole('button', {name: /edit team 2 posse/i}))
+
+    expect(screen.getByText(/editing team 2 - posse/i)).toBeInTheDocument()
+    expect(screen.getByRole('tab', {name: /^posses$/i})).toHaveAttribute('aria-selected', 'true')
+  })
+
+  it('opens the adaptive picker from team management previews', () => {
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+          {id: 'team-2', name: 'Team 2', slots: teamTwoSlots},
+        ],
+      })
+    })
+
+    const management = screen.getByRole('region', {name: /builder v2 team management/i})
+    fireEvent.click(within(management).getByRole('button', {name: /edit team 2 slot 1/i}))
+
+    const dock = screen.getByRole('region', {name: /adaptive picker/i})
+    expect(screen.getByRole('heading', {level: 2, name: /^team 2$/i})).toBeInTheDocument()
+    expect(screen.getByText(/editing slot 1 - awakener/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', {name: /collapse adaptive picker/i})).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+    expect(within(dock).getByRole('searchbox', {name: /search awakeners/i})).toBeInTheDocument()
+  })
+
+  it('opens the mobile picker from team management previews for any team', () => {
+    const teamTwoSlots = createEmptyTeamSlots()
+    teamTwoSlots[0] = {
+      ...teamTwoSlots[0],
+      awakenerId: 'awakener-0021',
+      realm: 'CHAOS',
+      level: 60,
+    }
+    resizeBuilderV2Viewport(390)
+    render(<BuilderV2Page />)
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+          {id: 'team-2', name: 'Team 2', slots: teamTwoSlots},
+        ],
+      })
+    })
+
+    const management = screen.getByRole('region', {name: /builder v2 team management/i})
+    fireEvent.click(within(management).getByRole('button', {name: /edit team 2 slot 1/i}))
+
+    const drawer = screen.getByRole('dialog', {name: /team 2 · slot 1 · awakener/i})
+    expect(screen.getByRole('heading', {level: 2, name: /^team 2$/i})).toBeInTheDocument()
+    expect(within(drawer).getByRole('tab', {name: /^awakeners$/i})).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+    expect(within(drawer).getByRole('button', {name: /^select slot 1 awakener$/i})).toHaveAttribute(
+      'aria-current',
+      'step',
+    )
+  })
+
   it('renames teams from the V2 management surface with Enter, Escape, blur, and blank no-op', () => {
     resizeBuilderV2Viewport(1200)
     render(<BuilderV2Page />)
@@ -269,6 +408,7 @@ describe('BuilderV2Page', () => {
     const management = screen.getByRole('region', {name: /builder v2 team management/i})
     fireEvent.click(within(management).getByRole('button', {name: /rename team 1/i}))
     const renameInput = within(management).getByRole('textbox', {name: /team name/i})
+    expect(renameInput).toHaveFocus()
     fireEvent.change(renameInput, {target: {value: 'Arena Team'}})
     fireEvent.keyDown(renameInput, {key: 'Enter', code: 'Enter'})
 
@@ -382,6 +522,39 @@ describe('BuilderV2Page', () => {
     )
   })
 
+  it('shows team drag handles only when desktop-style DnD is available', () => {
+    mockBuilderV2TouchDevice(false)
+    resizeBuilderV2Viewport(1200)
+    const {unmount} = render(<BuilderV2Page />)
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+          {id: 'team-2', name: 'Team 2', slots: createEmptyTeamSlots()},
+        ],
+      })
+    })
+
+    expect(screen.getByRole('button', {name: /drag team 1 to reorder/i})).toBeInTheDocument()
+
+    unmount()
+    mockBuilderV2TouchDevice(true)
+    resizeBuilderV2Viewport(900)
+    render(<BuilderV2Page />)
+    act(() => {
+      builderDraftStore.getState().hydrateBuilderDraft({
+        activeTeamId: 'team-1',
+        teams: [
+          {id: 'team-1', name: 'Team 1', slots: createEmptyTeamSlots()},
+          {id: 'team-2', name: 'Team 2', slots: createEmptyTeamSlots()},
+        ],
+      })
+    })
+
+    expect(screen.queryByRole('button', {name: /drag team 1 to reorder/i})).not.toBeInTheDocument()
+  })
+
   it('switches teams through the adaptive compact team rail', () => {
     resizeBuilderV2Viewport(900)
     render(<BuilderV2Page />)
@@ -411,7 +584,7 @@ describe('BuilderV2Page', () => {
     expect(screen.getByText(/editing slot 1 - awakener/i)).toBeInTheDocument()
   })
 
-  it('opens an adaptive picker dock from slot selection with search focus and Escape focus return', () => {
+  it('opens an adaptive picker dock from slot selection without search autofocus', () => {
     resizeBuilderV2Viewport(900)
     render(<BuilderV2Page />)
 
@@ -428,7 +601,7 @@ describe('BuilderV2Page', () => {
       'aria-selected',
       'true',
     )
-    expect(within(dock).getByRole('searchbox', {name: /search awakeners/i})).toHaveFocus()
+    expect(within(dock).getByRole('searchbox', {name: /search awakeners/i})).not.toHaveFocus()
 
     fireEvent.keyDown(document, {key: 'Escape'})
 
@@ -458,11 +631,12 @@ describe('BuilderV2Page', () => {
     const secondSlotTrigger = screen.getByRole('button', {name: /^select slot 2$/i})
     secondSlotTrigger.focus()
     fireEvent.click(secondSlotTrigger)
+    expect(secondSlotTrigger).toHaveFocus()
     expect(
       within(screen.getByRole('region', {name: /adaptive picker/i})).getByRole('searchbox', {
         name: /search awakeners/i,
       }),
-    ).toHaveFocus()
+    ).not.toHaveFocus()
 
     fireEvent.keyDown(document, {key: 'Escape'})
 
@@ -512,7 +686,7 @@ describe('BuilderV2Page', () => {
       'aria-selected',
       'true',
     )
-    expect(within(dock).getByRole('searchbox', {name: /search wheels/i})).toHaveFocus()
+    expect(within(dock).getByRole('searchbox', {name: /search wheels/i})).not.toHaveFocus()
   })
 
   it('opens the adaptive picker on awakeners when an empty gear target is tapped', () => {
@@ -527,7 +701,7 @@ describe('BuilderV2Page', () => {
       'aria-selected',
       'true',
     )
-    expect(within(dock).getByRole('searchbox', {name: /search awakeners/i})).toHaveFocus()
+    expect(within(dock).getByRole('searchbox', {name: /search awakeners/i})).not.toHaveFocus()
   })
 
   it('keeps the adaptive picker open when an awakened slot has no empty wheel target', () => {
@@ -585,8 +759,20 @@ describe('BuilderV2Page', () => {
       screen.getByRole('group', {name: /builder v2 import and export actions/i}),
     ).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
-    expect(screen.getByRole('dialog', {name: /import teams/i})).toBeInTheDocument()
+    let importDialog = screen.getByRole('dialog', {name: /import teams/i})
+    expect(importDialog).toBeInTheDocument()
+    fireEvent(importDialog, new Event('cancel', {bubbles: false, cancelable: true}))
+    expect(screen.queryByRole('dialog', {name: /import teams/i})).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    importDialog = screen.getByRole('dialog', {name: /import teams/i})
+    fireEvent.click(importDialog)
+    expect(screen.queryByRole('dialog', {name: /import teams/i})).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    importDialog = screen.getByRole('dialog', {name: /import teams/i})
     fireEvent.click(screen.getByRole('button', {name: /^cancel$/i}))
+    expect(importDialog).not.toBeInTheDocument()
 
     unmount()
     resizeBuilderV2Viewport(390)
@@ -596,7 +782,10 @@ describe('BuilderV2Page', () => {
       screen.getByRole('group', {name: /builder v2 import and export actions/i}),
     ).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', {name: /^export all$/i}))
-    expect(screen.getByRole('dialog', {name: /export all teams/i})).toBeInTheDocument()
+    const exportDialog = screen.getByRole('dialog', {name: /export all teams/i})
+    expect(exportDialog).toBeInTheDocument()
+    fireEvent(exportDialog, new Event('cancel', {bubbles: false, cancelable: true}))
+    expect(screen.queryByRole('dialog', {name: /export all teams/i})).not.toBeInTheDocument()
   })
 
   it('imports mt1 codes after replace confirmation and activates the encoded active team', () => {
@@ -843,12 +1032,15 @@ describe('BuilderV2Page', () => {
 
     const drawer = screen.getByRole('dialog', {name: /team 1 · slot 2 · awakener/i})
     expect(drawer).toBeInTheDocument()
+    expect(drawer.tagName).toBe('DIALOG')
+    expect(drawer).toHaveAttribute('open')
     expect(within(drawer).getByRole('tab', {name: /^awakeners$/i})).toHaveAttribute(
       'aria-selected',
       'true',
     )
     expect(within(drawer).getByRole('searchbox', {name: /search awakeners/i})).toBeInTheDocument()
-    expect(drawer).toHaveFocus()
+    expect(within(drawer).getByRole('button', {name: /close mobile picker/i})).toHaveFocus()
+    expect(within(drawer).getByRole('searchbox', {name: /search awakeners/i})).not.toHaveFocus()
     expect(screen.getByText(/editing slot 2 - awakener/i)).toBeInTheDocument()
   })
 
@@ -867,9 +1059,9 @@ describe('BuilderV2Page', () => {
       source: 'builder-overlay',
     })
 
-    expect(document.querySelector('.builder-v2-mobile-picker')).toBeInTheDocument()
+    expect(document.querySelector('.builder-v2-mobile-picker-backdrop')).toBeInTheDocument()
     await waitFor(() => {
-      expect(document.querySelector('.builder-v2-mobile-picker')).toHaveAttribute('inert')
+      expect(document.querySelector('.builder-v2-mobile-picker-backdrop')).toHaveAttribute('inert')
     })
   })
 
@@ -881,10 +1073,13 @@ describe('BuilderV2Page', () => {
     let drawer = screen.getByRole('dialog', {name: /team 1 · slot 1 · awakener/i})
     fireEvent.click(within(drawer).getByRole('button', {name: /goliath, level \d+/i}))
 
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    drawer = screen.getByRole('dialog', {name: /team 1 · slot 1 · awakener/i})
     expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
+    expect(
+      within(drawer).getByRole('region', {name: /mobile slot picker controls/i}),
+    ).toBeInTheDocument()
 
-    fireEvent.click(screen.getByRole('button', {name: /^select slot 1 wheel 2$/i}))
+    fireEvent.click(within(drawer).getByRole('button', {name: /^select slot 1 wheel 2$/i}))
 
     drawer = screen.getByRole('dialog', {name: /team 1 · slot 1 · wheel 2/i})
     expect(within(drawer).getByRole('tab', {name: /^wheels$/i})).toHaveAttribute(
@@ -893,6 +1088,9 @@ describe('BuilderV2Page', () => {
     )
     expect(within(drawer).getByRole('searchbox', {name: /search wheels/i})).toBeInTheDocument()
     expect(screen.getByText(/editing slot 1 - wheel 2/i)).toBeInTheDocument()
+
+    fireEvent.click(within(drawer).getByRole('button', {name: /^close$/i}))
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
   it('closes the mobile picker drawer with Escape and returns focus to the invoking target', () => {
@@ -912,6 +1110,28 @@ describe('BuilderV2Page', () => {
     expect(pickerTrigger).toHaveFocus()
   })
 
+  it('closes the mobile picker drawer from the native backdrop but keeps panel clicks inside', () => {
+    resizeBuilderV2Viewport(390)
+    render(<BuilderV2Page />)
+
+    const pickerTrigger = screen.getByRole('button', {name: /^select slot 3$/i})
+    fireEvent.click(pickerTrigger)
+
+    const drawer = screen.getByRole('dialog', {name: /team 1 · slot 3 · awakener/i})
+    const panel = drawer.querySelector('.builder-v2-mobile-picker')
+    expect(panel).toBeInTheDocument()
+
+    fireEvent.click(panel as HTMLElement)
+    expect(screen.getByRole('dialog', {name: /team 1 · slot 3 · awakener/i})).toBeInTheDocument()
+
+    fireEvent.click(drawer)
+
+    expect(
+      screen.queryByRole('dialog', {name: /team 1 · slot 3 · awakener/i}),
+    ).not.toBeInTheDocument()
+    expect(pickerTrigger).toHaveFocus()
+  })
+
   it('keeps the same mobile target when reopening a picker after closing it', () => {
     resizeBuilderV2Viewport(390)
     render(<BuilderV2Page />)
@@ -924,7 +1144,34 @@ describe('BuilderV2Page', () => {
     fireEvent.click(within(drawer).getByRole('button', {name: /goliath, level \d+/i}))
 
     expect(screen.getByRole('button', {name: /remove goliath/i})).toBeInTheDocument()
-    expect(screen.getByRole('button', {name: /^select slot 2 wheel 1$/i})).toBeInTheDocument()
+    expect(
+      within(screen.getByRole('dialog', {name: /team 1 · slot 2 · awakener/i})).getByRole(
+        'button',
+        {name: /^select slot 2 wheel 1$/i},
+      ),
+    ).toBeInTheDocument()
+  })
+
+  it('retargets mobile slot picker back to the awakener before replacing from a wheel target', () => {
+    resizeBuilderV2Viewport(390)
+    render(<BuilderV2Page />)
+
+    fireEvent.click(screen.getByRole('button', {name: /^select slot 1$/i}))
+    let drawer = screen.getByRole('dialog', {name: /team 1 · slot 1 · awakener/i})
+    fireEvent.click(within(drawer).getByRole('button', {name: /goliath, level \d+/i}))
+
+    drawer = screen.getByRole('dialog', {name: /team 1 · slot 1 · awakener/i})
+    fireEvent.click(within(drawer).getByRole('button', {name: /^select slot 1 wheel 1$/i}))
+
+    drawer = screen.getByRole('dialog', {name: /team 1 · slot 1 · wheel 1/i})
+    fireEvent.click(within(drawer).getByRole('button', {name: /^merciful nurturing,/i}))
+    fireEvent.click(within(drawer).getByRole('button', {name: /^select slot 1 awakener$/i}))
+
+    drawer = screen.getByRole('dialog', {name: /team 1 · slot 1 · awakener/i})
+    fireEvent.click(within(drawer).getByRole('button', {name: /ramona, level \d+/i}))
+
+    expect(screen.getByRole('button', {name: /remove ramona/i})).toBeInTheDocument()
+    expect(screen.queryByRole('button', {name: /remove goliath/i})).not.toBeInTheDocument()
   })
 
   it('runs mobile quick lineup as a full-team surface with inline picker and bottom slot controls', () => {
@@ -943,7 +1190,7 @@ describe('BuilderV2Page', () => {
       within(lineup).getByRole('button', {name: /finish quick team lineup/i}),
     ).toBeInTheDocument()
     expect(
-      within(lineup).getByRole('group', {name: /quick lineup team overview/i}),
+      within(lineup).getByRole('list', {name: /quick lineup team overview/i}),
     ).toBeInTheDocument()
     expect(screen.queryByRole('region', {name: /mobile focused builder/i})).not.toBeInTheDocument()
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
@@ -951,7 +1198,7 @@ describe('BuilderV2Page', () => {
       within(lineup).queryByRole('navigation', {name: /quick lineup steps/i}),
     ).not.toBeInTheDocument()
 
-    const overview = within(lineup).getByRole('group', {
+    const overview = within(lineup).getByRole('list', {
       name: /quick lineup team overview/i,
     })
     expect(within(overview).getAllByRole('button', {name: /^select slot \d$/i})).toHaveLength(4)
@@ -1046,10 +1293,10 @@ describe('BuilderV2Page', () => {
     fireEvent.click(screen.getByRole('button', {name: /quick team lineup/i}))
 
     const lineup = screen.getByRole('region', {name: /mobile quick team lineup/i})
-    const overview = within(lineup).getByRole('group', {
+    const overview = within(lineup).getByRole('list', {
       name: /quick lineup team overview/i,
     })
-    const overviewSlots = within(overview).getAllByRole('group', {
+    const overviewSlots = within(overview).getAllByRole('listitem', {
       name: /slot \d quick overview/i,
     })
 
@@ -1083,10 +1330,10 @@ describe('BuilderV2Page', () => {
     fireEvent.click(screen.getByRole('button', {name: /quick team lineup/i}))
 
     const lineup = screen.getByRole('region', {name: /mobile quick team lineup/i})
-    const overview = within(lineup).getByRole('group', {
+    const overview = within(lineup).getByRole('list', {
       name: /quick lineup team overview/i,
     })
-    const overviewSlots = within(overview).getAllByRole('group', {
+    const overviewSlots = within(overview).getAllByRole('listitem', {
       name: /slot \d quick overview/i,
     })
 
@@ -1265,7 +1512,7 @@ describe('BuilderV2Page', () => {
     expect(screen.queryByText(/step 1 \/ 17/i)).not.toBeInTheDocument()
   })
 
-  it('is reachable through /builder-v2 without adding a nav link', async () => {
+  it('is reachable through /builder-v2 from the compact nav chip', async () => {
     render(
       <MemoryRouter initialEntries={['/builder-v2']}>
         <App />
@@ -1274,7 +1521,13 @@ describe('BuilderV2Page', () => {
 
     expect(await screen.findByRole('heading', {level: 1, name: /builder v2/i})).toBeInTheDocument()
     const desktopNav = screen.getByRole('navigation', {name: /primary navigation desktop/i})
-    expect(within(desktopNav).queryByRole('link', {name: /builder v2/i})).not.toBeInTheDocument()
-    expect(within(desktopNav).getByRole('link', {name: /^builder$/i})).toBeInTheDocument()
+    expect(within(desktopNav).getByRole('link', {name: /^builder$/i})).toHaveAttribute(
+      'href',
+      '/builder',
+    )
+    expect(within(desktopNav).getByRole('link', {name: /builder v2 beta/i})).toHaveAttribute(
+      'href',
+      '/builder-v2',
+    )
   })
 })
