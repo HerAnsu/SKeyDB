@@ -14,6 +14,14 @@ const DatabasePopoverPortal = lazy(() =>
   import('./DatabasePopoverPortal').then((module) => ({default: module.DatabasePopoverPortal})),
 )
 
+function getPopoverPortalRoot(anchorElement?: HTMLElement | null): Element {
+  return (
+    anchorElement?.closest(
+      '[data-detail-modal-shell], [data-detail-modal-overlay], [data-modal-frame-dialog]',
+    ) ?? document.body
+  )
+}
+
 export interface DatabasePopoverRootProps {
   anchorElement?: HTMLElement | null
   anchorRect: DOMRect | null
@@ -67,6 +75,6 @@ export function DatabasePopoverRoot({
         fontScale={fontScale}
       />
     </Suspense>,
-    document.body,
+    getPopoverPortalRoot(anchorElement),
   )
 }

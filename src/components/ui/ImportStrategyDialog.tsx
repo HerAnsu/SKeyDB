@@ -16,13 +16,17 @@ export function ImportStrategyDialog({
   onSkip,
 }: ImportStrategyDialogProps) {
   return (
-    <ModalFrame ariaLabel='Resolve import conflicts' title='Resolve Import Conflicts'>
-      <p className='mt-2 text-sm text-slate-200'>{conflictSummary}</p>
-      <p className='mt-2 text-xs text-slate-300'>
+    <ModalFrame
+      ariaLabel='Resolve import conflicts'
+      onClose={onCancel}
+      title='Resolve Import Conflicts'
+    >
+      <p className='text-sm text-[var(--ui-text-main)]'>{conflictSummary}</p>
+      <p className='mt-2 text-xs text-[var(--ui-text-muted)]'>
         Move: remove duplicates from existing teams. Skip: keep existing teams and drop duplicates
         from import.
       </p>
-      <div className='mt-4 flex flex-wrap justify-end gap-2'>
+      <div className='mt-4 flex flex-wrap justify-end gap-2 border-t border-[var(--ui-border-subtle)] pt-3'>
         <Button onClick={onCancel} variant='secondary'>
           Cancel
         </Button>

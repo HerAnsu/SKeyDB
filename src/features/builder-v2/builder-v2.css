@@ -208,6 +208,7 @@
 .builder-v2-armory {
   position: sticky;
   top: 0.85rem;
+  overflow: visible;
 }
 
 .builder-v2-page--desktop .builder-v2-armory {
@@ -222,6 +223,7 @@
   width: 100%;
   max-height: inherit;
   flex-direction: column;
+  overflow: visible;
 }
 
 .builder-v2-page--desktop .builder-v2-picker-results {
@@ -4300,7 +4302,7 @@
   display: grid;
   min-height: 0;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
   grid-template-rows: auto minmax(0, 1fr);
   background: var(--builder-v2-panel-bg);
 }
@@ -6153,6 +6155,11 @@
 
 .builder-v2-mobile-picker-backdrop:not([open]) {
   display: none;
+}
+
+.builder-v2-mobile-picker-backdrop[inert] {
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .builder-v2-mobile-picker-backdrop::backdrop {

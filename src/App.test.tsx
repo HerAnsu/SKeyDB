@@ -418,7 +418,36 @@ describe('App shell', () => {
     fireEvent.click(screen.getByRole('button', {name: /make builder v2 default/i}))
 
     expect(window.localStorage.getItem('skeydb.builderV2Beta.default.v1')).toBe('1')
-    expect(screen.queryByRole('region', {name: /builder v2 beta/i})).not.toBeInTheDocument()
+    const banner = screen.getByRole('region', {name: /builder v2 beta/i})
+    expect(
+      within(banner).getByRole('button', {name: /use classic by default/i}),
+    ).toBeInTheDocument()
+    expect(within(banner).getByRole('link', {name: /classic builder/i})).toHaveAttribute(
+      'href',
+      '/builder?classic=1',
+    )
+  })
+
+  it('lets users opt back out of Builder V2 as the default from the V2 banner', async () => {
+    window.localStorage.setItem('skeydb.builderV2Beta.default.v1', '1')
+
+    render(
+      <MemoryRouter initialEntries={['/builder-v2']}>
+        <App />
+      </MemoryRouter>,
+    )
+
+    expect(
+      await screen.findByRole('heading', {level: 2, name: /builder v2 page/i}),
+    ).toBeInTheDocument()
+    const banner = screen.getByRole('region', {name: /builder v2 beta/i})
+
+    fireEvent.click(within(banner).getByRole('button', {name: /use classic by default/i}))
+
+    expect(window.localStorage.getItem('skeydb.builderV2Beta.default.v1')).toBe('0')
+    expect(
+      within(banner).getByRole('button', {name: /make builder v2 default/i}),
+    ).toBeInTheDocument()
   })
 
   it('redirects the builder route to Builder V2 after opt-in while preserving a classic escape hatch', async () => {

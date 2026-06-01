@@ -183,6 +183,11 @@ function App() {
     setBuilderV2DefaultState(true)
   }
 
+  const optOutOfBuilderV2 = () => {
+    setBuilderV2Default(storage, false)
+    setBuilderV2DefaultState(false)
+  }
+
   const dismissBuilderV2Banner = () => {
     if (!builderV2BannerSurface) {
       return
@@ -329,8 +334,10 @@ function App() {
       )}
       {builderV2BannerSurface ? (
         <BuilderV2BetaNotice
+          builderV2Default={builderV2Default}
           onDismiss={dismissBuilderV2Banner}
           onOptIn={optIntoBuilderV2}
+          onOptOut={optOutOfBuilderV2}
           surface={builderV2BannerSurface}
         />
       ) : null}
@@ -373,6 +380,10 @@ function App() {
 }
 
 const CURRENT_BUILD_ID = getCurrentBuildId()
+const BUILDER_V2_NOTICE_BASE_CONTROL_CLASS =
+  'ui-compact-control ui-compact-control--dense inline-flex min-h-8 items-center justify-center px-3 text-center text-xs font-semibold'
+const BUILDER_V2_NOTICE_PRIMARY_CONTROL_CLASS = `${BUILDER_V2_NOTICE_BASE_CONTROL_CLASS} border-[var(--ui-state-amber-border-emphasis)] bg-[var(--ui-state-amber-surface-strong)] text-[var(--ui-accent-gold-soft)]`
+const BUILDER_V2_NOTICE_SECONDARY_CONTROL_CLASS = `${BUILDER_V2_NOTICE_BASE_CONTROL_CLASS} text-[var(--ui-text-muted)]`
 
 function getBuilderV2BannerSurface({
   builderV2Default,
@@ -396,7 +407,6 @@ function getBuilderV2BannerSurface({
 
   if (
     pathname === '/builder-v2' &&
-    !builderV2Default &&
     !dismissedBuilderV2Surfaces.v2 &&
     !isClassicBuilderRequest(search)
   ) {
@@ -407,53 +417,62 @@ function getBuilderV2BannerSurface({
 }
 
 function BuilderV2BetaNotice({
+  builderV2Default,
   onDismiss,
   onOptIn,
+  onOptOut,
   surface,
 }: {
+  builderV2Default: boolean
   onDismiss: () => void
   onOptIn: () => void
+  onOptOut: () => void
   surface: 'classic' | 'v2'
 }) {
+  const isDefaultNotice = surface === 'v2' && builderV2Default
+
   return (
-    <section
-      aria-label='Builder V2 beta'
-      className='mx-auto mt-3 flex w-[calc(100%-2rem)] max-w-[1240px] flex-col gap-3 border border-amber-300/25 bg-slate-950/80 px-3 py-3 text-sm text-slate-200 shadow-lg shadow-slate-950/30 sm:flex-row sm:items-center sm:justify-between sm:px-4'
-    >
-      <p className='m-0 max-w-3xl text-left leading-5'>
-        <strong className='text-amber-100'>Builder V2 is in beta.</strong>{' '}
+    <section aria-label='Builder V2 beta' className='builder-v2-beta-notice'>
+      <p className='builder-v2-beta-notice__copy'>
+        <strong className='text-[var(--ui-accent-gold-soft)]'>Builder V2 is in beta.</strong>{' '}
         {surface === 'classic'
           ? 'Try the new builder flow when you have a minute.'
-          : 'Make it your default builder route if this beta already fits your workflow.'}
+          : isDefaultNotice
+            ? 'Builder V2 is your default builder route. You can switch back to the classic route here.'
+            : 'Make it your default builder route if this beta already fits your workflow.'}
       </p>
-      <div className='flex flex-wrap items-center gap-2'>
+      <div className='builder-v2-beta-notice__actions'>
         {surface === 'classic' ? (
-          <Link
-            className='rounded border border-amber-300/45 bg-amber-300/15 px-3 py-1.5 text-xs font-semibold text-amber-50 hover:bg-amber-300/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-200'
-            to='/builder-v2'
-          >
+          <Link className={BUILDER_V2_NOTICE_PRIMARY_CONTROL_CLASS} to='/builder-v2'>
             Try Builder V2
           </Link>
+        ) : isDefaultNotice ? (
+          <button
+            className={BUILDER_V2_NOTICE_PRIMARY_CONTROL_CLASS}
+            onClick={onOptOut}
+            type='button'
+          >
+            Use classic by default
+          </button>
         ) : (
           <>
             <button
-              className='rounded border border-amber-300/45 bg-amber-300/15 px-3 py-1.5 text-xs font-semibold text-amber-50 hover:bg-amber-300/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-200'
+              className={BUILDER_V2_NOTICE_PRIMARY_CONTROL_CLASS}
               onClick={onOptIn}
               type='button'
             >
               Make Builder V2 default
             </button>
-            <Link
-              className='rounded border border-slate-600 bg-slate-900/70 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:border-slate-400 hover:text-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-200'
-              to='/builder?classic=1'
-            >
-              Classic builder
-            </Link>
           </>
         )}
+        {surface === 'v2' ? (
+          <Link className={BUILDER_V2_NOTICE_SECONDARY_CONTROL_CLASS} to='/builder?classic=1'>
+            Classic builder
+          </Link>
+        ) : null}
         <button
           aria-label='Dismiss Builder V2 beta prompt'
-          className='rounded border border-slate-600 bg-slate-900/70 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:border-slate-400 hover:text-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-200'
+          className={BUILDER_V2_NOTICE_SECONDARY_CONTROL_CLASS}
           onClick={onDismiss}
           type='button'
         >

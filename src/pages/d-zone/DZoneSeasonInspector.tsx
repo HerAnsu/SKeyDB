@@ -185,8 +185,11 @@ function DZoneAlertSwitcher({
   }
 
   return (
-    <fieldset className={`d-zone-alert-switcher d-zone-alert-switcher--${variant}`}>
-      <legend className='d-zone-alert-switcher-label'>Alert</legend>
+    <fieldset
+      aria-label='Alert'
+      className={`d-zone-alert-switcher d-zone-alert-switcher--${variant}`}
+    >
+      <span className='d-zone-alert-switcher-label'>Alert</span>
       <div className='d-zone-alert-switcher-options'>
         {alertOptions.map((alert) => (
           <button

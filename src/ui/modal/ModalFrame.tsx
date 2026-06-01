@@ -1,4 +1,6 @@
-import {useRef, type ReactNode} from 'react'
+import {useCallback, useRef, type ReactNode} from 'react'
+
+import {FaXmark} from 'react-icons/fa6'
 
 import {useNativeModalDialog} from './useNativeModalDialog'
 
@@ -7,6 +9,7 @@ interface ModalFrameProps {
   children: ReactNode
   footer?: ReactNode
   ariaLabel?: string
+  onClose?: () => void
   overlayClassName?: string
   panelClassName?: string
 }
@@ -16,12 +19,36 @@ export function ModalFrame({
   children,
   footer,
   ariaLabel,
-  overlayClassName = 'fixed inset-0 z-[900] flex items-center justify-center bg-slate-950/55 px-4 pointer-events-auto',
-  panelClassName = 'relative z-[901] w-full max-w-lg border border-amber-200/55 bg-slate-950/96 p-4 shadow-[0_18px_50px_rgba(2,6,23,0.72)]',
+  onClose,
+  overlayClassName = 'ui-modal-overlay',
+  panelClassName = 'ui-modal-panel max-w-xl',
 }: ModalFrameProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const handleCancel = useCallback(
+    (event: Event) => {
+      if (!onClose) {
+        event.preventDefault()
+        return
+      }
 
-  useNativeModalDialog({dialogRef})
+      event.preventDefault()
+      onClose()
+    },
+    [onClose],
+  )
+  const handleDialogClick = useCallback(
+    (event: MouseEvent) => {
+      if (event.target === event.currentTarget) {
+        onClose?.()
+      }
+    },
+    [onClose],
+  )
+  useNativeModalDialog({
+    dialogRef,
+    onCancel: handleCancel,
+    onClick: handleDialogClick,
+  })
 
   return (
     <dialog
@@ -32,7 +59,21 @@ export function ModalFrame({
     >
       <div className={overlayClassName}>
         <div className={panelClassName}>
-          <h4 className='ui-title text-xl text-amber-100'>{title}</h4>
+          <div className='mb-3 flex items-start justify-between gap-3 border-b border-[var(--ui-border-subtle)] pb-3'>
+            <h4 className='ui-title text-lg text-[var(--ui-accent-gold-soft)] sm:text-xl'>
+              {title}
+            </h4>
+            {onClose ? (
+              <button
+                aria-label='Close dialog'
+                className='inline-flex size-8 shrink-0 items-center justify-center border border-[var(--ui-control-border-subtle)] bg-[var(--ui-control-surface)] text-[var(--ui-control-text)] transition-colors hover:border-[var(--ui-control-border-hover)] hover:text-[var(--ui-accent-gold-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-focus-ring)] motion-reduce:transition-none'
+                onClick={onClose}
+                type='button'
+              >
+                <FaXmark aria-hidden className='size-3.5' />
+              </button>
+            ) : null}
+          </div>
           {children}
           {footer}
         </div>

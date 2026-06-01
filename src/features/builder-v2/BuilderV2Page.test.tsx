@@ -759,8 +759,20 @@ describe('BuilderV2Page', () => {
       screen.getByRole('group', {name: /builder v2 import and export actions/i}),
     ).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
-    expect(screen.getByRole('dialog', {name: /import teams/i})).toBeInTheDocument()
+    let importDialog = screen.getByRole('dialog', {name: /import teams/i})
+    expect(importDialog).toBeInTheDocument()
+    fireEvent(importDialog, new Event('cancel', {bubbles: false, cancelable: true}))
+    expect(screen.queryByRole('dialog', {name: /import teams/i})).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    importDialog = screen.getByRole('dialog', {name: /import teams/i})
+    fireEvent.click(importDialog)
+    expect(screen.queryByRole('dialog', {name: /import teams/i})).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', {name: /^import$/i}))
+    importDialog = screen.getByRole('dialog', {name: /import teams/i})
     fireEvent.click(screen.getByRole('button', {name: /^cancel$/i}))
+    expect(importDialog).not.toBeInTheDocument()
 
     unmount()
     resizeBuilderV2Viewport(390)
@@ -770,7 +782,10 @@ describe('BuilderV2Page', () => {
       screen.getByRole('group', {name: /builder v2 import and export actions/i}),
     ).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', {name: /^export all$/i}))
-    expect(screen.getByRole('dialog', {name: /export all teams/i})).toBeInTheDocument()
+    const exportDialog = screen.getByRole('dialog', {name: /export all teams/i})
+    expect(exportDialog).toBeInTheDocument()
+    fireEvent(exportDialog, new Event('cancel', {bubbles: false, cancelable: true}))
+    expect(screen.queryByRole('dialog', {name: /export all teams/i})).not.toBeInTheDocument()
   })
 
   it('imports mt1 codes after replace confirmation and activates the encoded active team', () => {

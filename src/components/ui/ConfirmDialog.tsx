@@ -25,14 +25,19 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
   onSecondary,
-  overlayClassName = 'fixed inset-0 z-70 flex items-center justify-center bg-slate-950/55 px-4',
-  dialogClassName = 'w-full max-w-md border border-amber-200/55 bg-slate-950/96 p-4 shadow-[0_18px_50px_rgba(2,6,23,0.72)]',
+  overlayClassName = 'ui-modal-overlay',
+  dialogClassName = 'ui-modal-panel max-w-md',
   confirmVariant = 'primary',
 }: ConfirmDialogProps) {
   return (
-    <ModalFrame overlayClassName={overlayClassName} panelClassName={dialogClassName} title={title}>
-      <p className='mt-2 text-sm text-slate-200'>{message}</p>
-      <div className='mt-4 flex justify-end gap-2'>
+    <ModalFrame
+      onClose={onCancel}
+      overlayClassName={overlayClassName}
+      panelClassName={dialogClassName}
+      title={title}
+    >
+      <p className='text-sm text-[var(--ui-text-main)]'>{message}</p>
+      <div className='mt-4 flex justify-end gap-2 border-t border-[var(--ui-border-subtle)] pt-3'>
         <Button onClick={onCancel} variant='secondary'>
           {cancelLabel}
         </Button>

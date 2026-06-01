@@ -27,19 +27,19 @@ export function ExportCodeDialog({
   }, [])
 
   return (
-    <ModalFrame title={title}>
-      <p className='mt-2 text-sm text-slate-200'>
+    <ModalFrame onClose={onClose} title={title}>
+      <p className='text-sm text-[var(--ui-text-main)]'>
         {helperText ?? 'Copy this code to share/import later.'}
       </p>
       {warning ? <div className='mt-2'>{warning}</div> : null}
       <textarea
         aria-label='Export code'
-        className='mt-3 h-24 w-full resize-none border border-slate-500/55 bg-slate-900/75 p-2 text-xs text-slate-100 outline-none focus:border-amber-200/70'
+        className='ui-scrollbar mt-3 h-28 w-full resize-none border border-[var(--ui-control-border)] bg-[var(--ui-control-surface-strong)] p-2.5 text-xs text-[var(--ui-text-main)] transition-colors outline-none focus:border-[var(--ui-control-border-hover)] focus:ring-2 focus:ring-[var(--ui-focus-ring-support)] motion-reduce:transition-none'
         readOnly
         ref={inputRef}
         value={code}
       />
-      <div className='mt-4 flex justify-end gap-2'>
+      <div className='mt-4 flex justify-end gap-2 border-t border-[var(--ui-border-subtle)] pt-3'>
         <Button onClick={onClose} variant='primary'>
           Close
         </Button>
