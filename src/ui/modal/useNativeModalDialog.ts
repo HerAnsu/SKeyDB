@@ -10,6 +10,21 @@ interface UseNativeModalDialogOptions {
   restoreFocus?: boolean
 }
 
+interface PageScrollLockSnapshot {
+  bodyLeft: string
+  bodyOverflow: string
+  bodyPosition: string
+  bodyRight: string
+  bodyTop: string
+  bodyWidth: string
+  documentOverflow: string
+  scrollX: number
+  scrollY: number
+}
+
+const activePageScrollLocks = new Set<symbol>()
+let pageScrollLockSnapshot: PageScrollLockSnapshot | null = null
+
 function openDialog(dialog: HTMLDialogElement) {
   if (dialog.open) {
     return
@@ -39,6 +54,62 @@ function closeDialog(dialog: HTMLDialogElement) {
 function getTopmostOpenDialog(): HTMLDialogElement | null {
   const openDialogs = document.querySelectorAll<HTMLDialogElement>('dialog[open]')
   return openDialogs[openDialogs.length - 1] ?? null
+}
+
+function acquirePageScrollLock(): symbol {
+  const lockToken = Symbol('page-scroll-lock')
+
+  if (activePageScrollLocks.size === 0) {
+    const scrollX = window.scrollX
+    const scrollY = window.scrollY
+
+    pageScrollLockSnapshot = {
+      bodyLeft: document.body.style.left,
+      bodyOverflow: document.body.style.overflow,
+      bodyPosition: document.body.style.position,
+      bodyRight: document.body.style.right,
+      bodyTop: document.body.style.top,
+      bodyWidth: document.body.style.width,
+      documentOverflow: document.documentElement.style.overflow,
+      scrollX,
+      scrollY,
+    }
+
+    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${String(scrollY)}px`
+    document.body.style.left = `-${String(scrollX)}px`
+    document.body.style.right = '0'
+    document.body.style.width = '100%'
+    document.documentElement.style.overflow = 'hidden'
+  }
+
+  activePageScrollLocks.add(lockToken)
+  return lockToken
+}
+
+function releasePageScrollLock(lockToken: symbol) {
+  activePageScrollLocks.delete(lockToken)
+  if (activePageScrollLocks.size > 0 || !pageScrollLockSnapshot) {
+    return
+  }
+
+  const snapshot = pageScrollLockSnapshot
+  pageScrollLockSnapshot = null
+  document.body.style.overflow = snapshot.bodyOverflow
+  document.body.style.position = snapshot.bodyPosition
+  document.body.style.top = snapshot.bodyTop
+  document.body.style.left = snapshot.bodyLeft
+  document.body.style.right = snapshot.bodyRight
+  document.body.style.width = snapshot.bodyWidth
+  document.documentElement.style.overflow = snapshot.documentOverflow
+  if (snapshot.scrollX !== 0 || snapshot.scrollY !== 0) {
+    try {
+      window.scrollTo(snapshot.scrollX, snapshot.scrollY)
+    } catch {
+      // Some test environments expose scrollTo without implementing it.
+    }
+  }
 }
 
 export function useNativeModalDialog({
@@ -92,39 +163,10 @@ export function useNativeModalDialog({
       return undefined
     }
 
-    const previousBodyOverflow = document.body.style.overflow
-    const previousBodyPosition = document.body.style.position
-    const previousBodyTop = document.body.style.top
-    const previousBodyLeft = document.body.style.left
-    const previousBodyRight = document.body.style.right
-    const previousBodyWidth = document.body.style.width
-    const previousDocumentOverflow = document.documentElement.style.overflow
-    const scrollX = window.scrollX
-    const scrollY = window.scrollY
-
-    document.body.style.overflow = 'hidden'
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${String(scrollY)}px`
-    document.body.style.left = `-${String(scrollX)}px`
-    document.body.style.right = '0'
-    document.body.style.width = '100%'
-    document.documentElement.style.overflow = 'hidden'
+    const lockToken = acquirePageScrollLock()
 
     return () => {
-      document.body.style.overflow = previousBodyOverflow
-      document.body.style.position = previousBodyPosition
-      document.body.style.top = previousBodyTop
-      document.body.style.left = previousBodyLeft
-      document.body.style.right = previousBodyRight
-      document.body.style.width = previousBodyWidth
-      document.documentElement.style.overflow = previousDocumentOverflow
-      if (scrollX !== 0 || scrollY !== 0) {
-        try {
-          window.scrollTo(scrollX, scrollY)
-        } catch {
-          // Some test environments expose scrollTo without implementing it.
-        }
-      }
+      releasePageScrollLock(lockToken)
     }
   }, [lockBodyScroll])
 
