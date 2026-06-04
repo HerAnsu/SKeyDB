@@ -1,5 +1,7 @@
 import {useEffect, useEffectEvent, useLayoutEffect, type RefObject} from 'react'
 
+import {acquirePageScrollLock, releasePageScrollLock} from './pageScrollLock'
+
 interface UseNativeModalDialogOptions {
   dialogRef: RefObject<HTMLDialogElement | null>
   initialFocusRef?: RefObject<HTMLElement | null>
@@ -9,21 +11,6 @@ interface UseNativeModalDialogOptions {
   onKeyDown?: (event: KeyboardEvent) => void
   restoreFocus?: boolean
 }
-
-interface PageScrollLockSnapshot {
-  bodyLeft: string
-  bodyOverflow: string
-  bodyPosition: string
-  bodyRight: string
-  bodyTop: string
-  bodyWidth: string
-  documentOverflow: string
-  scrollX: number
-  scrollY: number
-}
-
-const activePageScrollLocks = new Set<symbol>()
-let pageScrollLockSnapshot: PageScrollLockSnapshot | null = null
 
 function openDialog(dialog: HTMLDialogElement) {
   if (dialog.open) {
@@ -54,62 +41,6 @@ function closeDialog(dialog: HTMLDialogElement) {
 function getTopmostOpenDialog(): HTMLDialogElement | null {
   const openDialogs = document.querySelectorAll<HTMLDialogElement>('dialog[open]')
   return openDialogs[openDialogs.length - 1] ?? null
-}
-
-function acquirePageScrollLock(): symbol {
-  const lockToken = Symbol('page-scroll-lock')
-
-  if (activePageScrollLocks.size === 0) {
-    const scrollX = window.scrollX
-    const scrollY = window.scrollY
-
-    pageScrollLockSnapshot = {
-      bodyLeft: document.body.style.left,
-      bodyOverflow: document.body.style.overflow,
-      bodyPosition: document.body.style.position,
-      bodyRight: document.body.style.right,
-      bodyTop: document.body.style.top,
-      bodyWidth: document.body.style.width,
-      documentOverflow: document.documentElement.style.overflow,
-      scrollX,
-      scrollY,
-    }
-
-    document.body.style.overflow = 'hidden'
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${String(scrollY)}px`
-    document.body.style.left = `-${String(scrollX)}px`
-    document.body.style.right = '0'
-    document.body.style.width = '100%'
-    document.documentElement.style.overflow = 'hidden'
-  }
-
-  activePageScrollLocks.add(lockToken)
-  return lockToken
-}
-
-function releasePageScrollLock(lockToken: symbol) {
-  activePageScrollLocks.delete(lockToken)
-  if (activePageScrollLocks.size > 0 || !pageScrollLockSnapshot) {
-    return
-  }
-
-  const snapshot = pageScrollLockSnapshot
-  pageScrollLockSnapshot = null
-  document.body.style.overflow = snapshot.bodyOverflow
-  document.body.style.position = snapshot.bodyPosition
-  document.body.style.top = snapshot.bodyTop
-  document.body.style.left = snapshot.bodyLeft
-  document.body.style.right = snapshot.bodyRight
-  document.body.style.width = snapshot.bodyWidth
-  document.documentElement.style.overflow = snapshot.documentOverflow
-  if (snapshot.scrollX !== 0 || snapshot.scrollY !== 0) {
-    try {
-      window.scrollTo(snapshot.scrollX, snapshot.scrollY)
-    } catch {
-      // Some test environments expose scrollTo without implementing it.
-    }
-  }
 }
 
 export function useNativeModalDialog({

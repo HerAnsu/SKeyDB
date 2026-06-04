@@ -6,12 +6,12 @@ import {DbDetailModalFrame} from './DbDetailModalFrame'
 describe('DbDetailModalFrame', () => {
   afterEach(() => {
     document.body.style.overflow = ''
+    document.body.style.position = ''
     document.documentElement.style.overflow = ''
   })
 
-  it('locks page and root scroll while database detail dialogs are open', () => {
-    document.body.style.overflow = 'auto'
-    document.documentElement.style.overflow = 'scroll'
+  it('does not apply a second page scroll lock over database detail chrome', () => {
+    document.body.style.overflow = 'hidden'
 
     const {unmount} = render(
       <DbDetailModalFrame ariaLabel='Database detail'>
@@ -20,11 +20,13 @@ describe('DbDetailModalFrame', () => {
     )
 
     expect(document.body.style.overflow).toBe('hidden')
-    expect(document.documentElement.style.overflow).toBe('hidden')
+    expect(document.body.style.position).toBe('')
+    expect(document.documentElement.style.overflow).toBe('')
 
     unmount()
 
-    expect(document.body.style.overflow).toBe('auto')
-    expect(document.documentElement.style.overflow).toBe('scroll')
+    expect(document.body.style.overflow).toBe('hidden')
+    expect(document.body.style.position).toBe('')
+    expect(document.documentElement.style.overflow).toBe('')
   })
 })

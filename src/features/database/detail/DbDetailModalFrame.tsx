@@ -44,7 +44,6 @@ export function DbDetailModalFrame({
 
   useNativeModalDialog({
     dialogRef,
-    lockBodyScroll: true,
     onCancel,
     onClick: onOverlayClick,
     onKeyDown: onPanelKeyDown,
